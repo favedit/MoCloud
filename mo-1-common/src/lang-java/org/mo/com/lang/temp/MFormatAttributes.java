@@ -3,7 +3,6 @@ package org.mo.com.lang.temp;
 import org.mo.com.lang.IDisplayFormator;
 import org.mo.com.lang.generic.MAttributes;
 
-@SuppressWarnings("unchecked")
 public class MFormatAttributes
       extends MAttributes
 {

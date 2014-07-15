@@ -10,3 +10,5 @@
 /mt-server/tomcat-cloud.service-windows-8.0.9-x64/work
 /mp-cloud-service/webroot/WEB-INF/classes
 /mp-cloud-manage/webroot/WEB-INF/classes
+/mt-temp/mp-cloud-manage
+/mt-temp/mp-cloud-service

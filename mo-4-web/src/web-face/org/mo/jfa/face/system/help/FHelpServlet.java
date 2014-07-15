@@ -49,5 +49,6 @@ public class FHelpServlet
       file.loadFile(fileName);
       _logger.debug(this, "build", "Translate bytes. (size={0})", file.length());
       response.write(file.toArray());
+      file.close();
    }
 }

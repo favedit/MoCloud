@@ -249,10 +249,15 @@ public class FServiceConsole
          return;
       }
       // 找到服务对象实例对应的默认处理函数
-      String action = input.get("action");
-      action = RString.nvl(action, "process");
+      String action = context.parameter("action");
+      if(RString.isEmpty(action)){
+         action = input.get("action");
+      }
+      if(RString.isEmpty(action)){
+         action = "process";
+      }
       FServiceMethodDescriptor methodDsp = findMethod(service.faceClass(), action);
-      if(null == methodDsp){
+      if(methodDsp == null){
          _logger.warn(this, "execute", "Can't find method in service. (instance={1}, action={2})", instance, action);
          return;
       }

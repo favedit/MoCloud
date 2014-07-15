@@ -1,0 +1,15 @@
+修改服务器： /MySQL/my.ini
+============================================================
+default-character-set=utf8
+character-set-server=utf8
+
+查看编码：
+SHOW VARIABLES LIKE 'character%';
+
+创建用户：
+============================================================
+CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
+
+用户授权：
+============================================================
+GRANT ALL PRIVILEGES ON *.* TO 'cloud'@'%';

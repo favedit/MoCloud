@@ -5,7 +5,6 @@ import org.mo.com.lang.generic.MAttributes;
 //============================================================
 // <T>属性表。</T>
 //============================================================
-@SuppressWarnings("unchecked")
 public class FAttributes
       extends MAttributes
 {

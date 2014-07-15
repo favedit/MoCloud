@@ -79,7 +79,11 @@ public abstract class MLoggerListener
          result.append("<MA>");
       }else if(threadName.startsWith("Thread-")){
          result.append("T" + RString.leftPad(threadName.substring(7), 3, "0"));
-      }else if(threadName.startsWith("http-")){
+      }else if(threadName.startsWith("localhost-startStop-")){
+         result.append("L" + RString.leftPad(threadName.substring(20), 3, "0"));
+      }else if(threadName.startsWith("http-nio-") && threadName.contains("-exec-")){
+         result.append("H" + RString.leftPad(threadName.substring(threadName.indexOf("-exec-") + 6), 3, "0"));
+      }else if(threadName.startsWith("http-") && threadName.contains("Processor")){
          result.append("H" + RString.leftPad(threadName.substring(threadName.indexOf("Processor") + 9), 3, "0"));
       }else if(threadName.startsWith("TP-Processor")){
          result.append("P" + RString.leftPad(threadName.substring(12), 3, "0"));
@@ -153,6 +157,7 @@ public abstract class MLoggerListener
    // @param level 级别
    // @param info 信息
    //============================================================
+   @Override
    public boolean processLogger(Object sender,
                                 int level,
                                 SLoggerInfo info){
@@ -169,6 +174,7 @@ public abstract class MLoggerListener
    // @param level 级别
    // @param params 参数
    //============================================================
+   @Override
    public boolean process(Object sender,
                           int command,
                           Object params){

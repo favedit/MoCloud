@@ -9,7 +9,6 @@ import org.mo.com.lang.generic.MAttributes;
 //============================================================
 // <T>行对象。</T>
 //============================================================
-@SuppressWarnings("unchecked")
 public class FRow
       extends MAttributes
 {
