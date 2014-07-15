@@ -4,3 +4,8 @@
 /mo-4-web/bin
 
 /.metadata
+/mt-server/tomcat-cloud.manage-windows-8.0.9-x64/logs
+/mt-server/tomcat-cloud.manage-windows-8.0.9-x64/work
+/mt-server/tomcat-cloud.service-windows-8.0.9-x64/logs
+/mt-server/tomcat-cloud.service-windows-8.0.9-x64/work
+/mp-cloud-service/webroot/WEB-INF/classes

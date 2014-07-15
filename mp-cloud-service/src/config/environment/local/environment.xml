@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <Component
+         face  = 'org.mo.eng.environment.IEnvironmentConsole'
+         class = 'org.mo.eng.environment.FEnvironmentConsole'
+         scope = 'global' >
+      <Property name='persistence'>eng-environment</Property>
+      <Property name='extension'>xml</Property>
+      <Property name='interval'>1000</Property>
+      <Property name='workpath'>${home.web.config}/system.environment</Property>
+      <Initialize name='initializeMonitor'/>
+      <Initialize name='initializeConfig'/>
+   </Component>
+   
+   <Component
+         face  = 'org.mo.eng.data.IDatabaseConsole'
+         class = 'org.mo.eng.data.FDatabaseConsole'
+         scope = 'global'>
+      <Property name='default'>CDDT</Property>
+      <!-- ============================================================ -->
+      <!-- 数据链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>CDDT</Property>
+               <Property name='driver_class'>org.mo.data.driver.FSqlMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/data</Property>
+               <Property name='passport'>data</Property>
+               <Property name='password'>data</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSql'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>30000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 日志链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>CDDT</Property>
+               <Property name='driver_class'>org.mo.data.driver.FSqlMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/logger</Property>
+               <Property name='passport'>data</Property>
+               <Property name='password'>data</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSql'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>30000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <Release name='releaseAll'/>
+   </Component>
+
+</Config>

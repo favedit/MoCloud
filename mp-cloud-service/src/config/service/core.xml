@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <!-- ============================================================ -->
+   <!-- UserConsole:用户控制台                                       -->
+   <!--  P:workpath - 工作路径                                       -->
+   <!--  I:initializeConfig - 增加配置信息                           -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.cyou.gccloud.service.core.person.IUserConsole'
+         class = 'com.cyou.gccloud.service.core.person.FUserConsole'
+         scope = 'global'>
+   </Component>
+   
+</Config>
