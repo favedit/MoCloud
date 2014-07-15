@@ -2,15 +2,6 @@
 
 <Config>
 
-   <!-- ==================================================== -->
-   <!-- WebSession                                           -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'com.cyou.gccloud.service.system.session.IUserSessionConsole'
-         class = 'com.cyou.gccloud.service.system.session.FUserSessionConsole'
-         scope = 'global' >
-   </Component>
-
    <!-- ============================================================ -->
    <!-- 命令：系统的命令映射和组件定义                               -->
    <!--    Action = system/*                                         -->

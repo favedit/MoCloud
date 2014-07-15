@@ -188,7 +188,10 @@ public class FHttpRequest
          value.append(_text);
       }
       byte[] valueData = value.toBytes();
-      int valueLength = valueData.length;
+      int valueLength = 0;
+      if(valueData != null){
+         valueLength = valueData.length;
+      }
       if(valueLength > 0){
          _heads.set("Content-Length", Integer.toString(valueLength));
       }

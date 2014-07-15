@@ -29,7 +29,16 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicD
    //============================================================
    // <T>构造<jt:item source='$dataset.label'/>逻辑单元。</T>
    //
-   // @param connection 链接
+   // @param connect 数据链接
+   //============================================================
+   public <jt:item source='$dataset.source_class_name'/>Logic(ISqlConnect connect){
+      _connection = connect.activeConnection();
+   }
+
+   //============================================================
+   // <T>构造<jt:item source='$dataset.label'/>逻辑单元。</T>
+   //
+   // @param connection 数据链接
    //============================================================
    public <jt:item source='$dataset.source_class_name'/>Logic(ISqlConnection connection){
       _connection = connection;

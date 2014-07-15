@@ -11,6 +11,7 @@ import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
+import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.RAop;
 import org.mo.core.bind.IBindConsole;
 import org.mo.web.core.service.IServiceConsole;
@@ -154,8 +155,11 @@ public abstract class FAbstractServiceServlet
                uri = uri.substring(find + 1);
             }
             // 执行逻辑过程
-            FWebXmlInput input = new FWebXmlInput(inputDoc.root());
-            FWebXmlOutput output = new FWebXmlOutput(outputDoc.root());
+            FXmlNode inputNode = inputDoc.root();
+            FWebXmlInput input = new FWebXmlInput(inputNode);
+            FXmlNode outputNode = outputDoc.root();
+            outputNode.setName(inputNode.name());
+            FWebXmlOutput output = new FWebXmlOutput(outputNode);
             _serviceConsole.execute(uri, context, input, output);
          }
       }catch(Exception e){

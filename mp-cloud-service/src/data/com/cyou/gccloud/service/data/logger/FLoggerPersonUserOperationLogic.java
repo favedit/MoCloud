@@ -46,7 +46,16 @@ public class FLoggerPersonUserOperationLogic extends FLogicDataset
    //============================================================
    // <T>构造用户操作日志逻辑单元。</T>
    //
-   // @param connection 链接
+   // @param connect 数据链接
+   //============================================================
+   public FLoggerPersonUserOperationLogic(ISqlConnect connect){
+      _connection = connect.activeConnection();
+   }
+
+   //============================================================
+   // <T>构造用户操作日志逻辑单元。</T>
+   //
+   // @param connection 数据链接
    //============================================================
    public FLoggerPersonUserOperationLogic(ISqlConnection connection){
       _connection = connection;

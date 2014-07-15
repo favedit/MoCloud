@@ -49,7 +49,16 @@ public class FDataResourceApplicationLogic extends FLogicDataset
    //============================================================
    // <T>构造应用信息表逻辑单元。</T>
    //
-   // @param connection 链接
+   // @param connect 数据链接
+   //============================================================
+   public FDataResourceApplicationLogic(ISqlConnect connect){
+      _connection = connect.activeConnection();
+   }
+
+   //============================================================
+   // <T>构造应用信息表逻辑单元。</T>
+   //
+   // @param connection 数据链接
    //============================================================
    public FDataResourceApplicationLogic(ISqlConnection connection){
       _connection = connection;

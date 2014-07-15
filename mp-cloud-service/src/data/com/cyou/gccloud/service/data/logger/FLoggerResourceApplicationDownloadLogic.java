@@ -46,7 +46,16 @@ public class FLoggerResourceApplicationDownloadLogic extends FLogicDataset
    //============================================================
    // <T>构造应用下载日志表逻辑单元。</T>
    //
-   // @param connection 链接
+   // @param connect 数据链接
+   //============================================================
+   public FLoggerResourceApplicationDownloadLogic(ISqlConnect connect){
+      _connection = connect.activeConnection();
+   }
+
+   //============================================================
+   // <T>构造应用下载日志表逻辑单元。</T>
+   //
+   // @param connection 数据链接
    //============================================================
    public FLoggerResourceApplicationDownloadLogic(ISqlConnection connection){
       _connection = connection;

@@ -26,6 +26,7 @@ public class FUserConsole
 
    @Override
    public void register(){
+      _logger.debug(this, "register", "register");
       // TODO Auto-generated method stub
 
    }

@@ -46,7 +46,16 @@ public class FCacheSystemSessionLogic extends FLogicDataset
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
    //
-   // @param connection 链接
+   // @param connect 数据链接
+   //============================================================
+   public FCacheSystemSessionLogic(ISqlConnect connect){
+      _connection = connect.activeConnection();
+   }
+
+   //============================================================
+   // <T>构造系统会话表逻辑单元。</T>
+   //
+   // @param connection 数据链接
    //============================================================
    public FCacheSystemSessionLogic(ISqlConnection connection){
       _connection = connection;

@@ -443,6 +443,12 @@ public class MString
    // @return 字节集合
    //============================================================
    public byte[] toBytes(){
+      if(_memory == null){
+         return null;
+      }
+      if(_length == 0){
+         return null;
+      }
       return new String(_memory, 0, _length).getBytes();
    }
 
@@ -453,6 +459,12 @@ public class MString
    // @return 字节集合
    //============================================================
    public byte[] toBytes(String charset){
+      if(_memory == null){
+         return null;
+      }
+      if(_length == 0){
+         return null;
+      }
       // 默认编码
       if(RString.isEmpty(charset)){
          return new String(_memory, 0, _length).getBytes();

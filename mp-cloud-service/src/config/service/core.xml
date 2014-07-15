@@ -2,6 +2,15 @@
 
 <Config>
    
+   <!-- ==================================================== -->
+   <!-- WebSession                                           -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'com.cyou.gccloud.service.system.session.ISessionConsole'
+         class = 'com.cyou.gccloud.service.system.session.FSessionConsole'
+         scope = 'global' >
+   </Component>
+   
    <!-- ============================================================ -->
    <!-- UserConsole:用户控制台                                       -->
    <!--  P:workpath - 工作路径                                       -->

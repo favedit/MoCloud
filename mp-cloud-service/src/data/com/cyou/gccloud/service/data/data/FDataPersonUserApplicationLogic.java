@@ -49,7 +49,16 @@ public class FDataPersonUserApplicationLogic extends FLogicDataset
    //============================================================
    // <T>构造用户应用表逻辑单元。</T>
    //
-   // @param connection 链接
+   // @param connect 数据链接
+   //============================================================
+   public FDataPersonUserApplicationLogic(ISqlConnect connect){
+      _connection = connect.activeConnection();
+   }
+
+   //============================================================
+   // <T>构造用户应用表逻辑单元。</T>
+   //
+   // @param connection 数据链接
    //============================================================
    public FDataPersonUserApplicationLogic(ISqlConnection connection){
       _connection = connection;
