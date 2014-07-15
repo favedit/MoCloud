@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="AUmnuoRacOM4K8VZLjVWrw" name="data.person.user" label="M#12cn14帐号信息" is_valid="Y" note="M#" data_engine="MyISAM" data_group="DtPsn" data_factory="Data.Person.User" data_name="DT_PSN_USER" data_alias="DT_PSN_USR" data_logic="GM_ACCOUNT_DI" data_size="8" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="Uk]QJSzKf191dU0QKGyRiA" name="passport" label="M#12cn12帐号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+  <FieldString _uuid="8EPvUm5pdgcFcbmQCpdRhg" name="password" label="M#12cn12密码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="40" />
+  <FieldString _uuid="aEtTccg[RqXJsD99eapJhg" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldDate _uuid="0e8368df-6f6b-4aad-8576-4822b9db4d3a" name="birthday" label="M#12cn12生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BIRTHDAY" />
+  <FieldString _uuid="205cb4ad-755d-4c5a-ba50-aa0f49193c60" name="contact_phone" label="M#12cn16联系电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_PHONE" data_size="16" />
+  <FieldString _uuid="68c9d3a6-e40a-44ec-9731-d97acdbddc5f" name="contact_email" label="M#12cn16联系邮箱地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_EMAIL" data_size="40" />
+  <FieldString _uuid="mEKoW3qEh1sOWr85zeoLqw" name="contact_qq" label="M#12cn16联系QQ号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_QQ" data_size="16" />
+  <FieldString _uuid="A0[M8KqFPw4jGni4vbYfuw" name="contact_msn" label="M#12cn17联系MSN号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_MSN" data_size="40" />
+  <FieldTemplate _uuid="kUdX3x]y5vd97oVscY9Xpw" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="AUmnuoRacOM4K8VZLjVWrw" name="logger.resource.application.download" label="M#12cn17应用下载日志表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="Gsr" data_factory="Game.MoGameStorage" data_name="LG_RES_APPLICATION_DOWNLOAD" data_alias="LG_RES_APP_DWN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="a4bc66e0-8ee7-46da-8617-475324d3a02a" name="application_id" label="M#12cn14应用编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="APPLICATION_ID" />
+  <FieldRecordId _uuid="df552f49-44ef-43bd-87be-78975909a7a2" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldTemplate _uuid="kUdX3x]y5vd97oVscY9Xpw" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
+
