@@ -37,6 +37,19 @@ public interface IUserService
               IWebOutput output);
 
    //============================================================
+   // <T>用户查询处理。</T>
+   //
+   // @param context 页面环境
+   // @param sqlContext 数据环境
+   // @param input 输入配置
+   // @param output 输出配置
+   //============================================================
+   void query(IWebContext context,
+              ISqlContext sqlContext,
+              IWebInput input,
+              IWebOutput output);
+
+   //============================================================
    // <T>用户登出处理。</T>
    //
    // @param context 页面环境

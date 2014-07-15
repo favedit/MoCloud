@@ -12,7 +12,7 @@ package org.mo.com.message;
  * @author ALEX
  */
 public class FWarnMessage
-      extends MMessage
+      extends FAbstractMessage
 {
    private static String NAME = "Warn";
 

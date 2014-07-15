@@ -161,6 +161,7 @@ public abstract class FAbstractServiceServlet
             outputNode.setName(inputNode.name());
             FWebXmlOutput output = new FWebXmlOutput(outputNode);
             _serviceConsole.execute(uri, context, input, output);
+            context.messages()
          }
       }catch(Exception e){
          _logger.error(this, "process", e);

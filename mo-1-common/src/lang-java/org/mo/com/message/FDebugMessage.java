@@ -1,47 +1,38 @@
 package org.mo.com.message;
 
 //============================================================
-// <T>构造例外消息。</T>
+// <T>调试消息。</T>
 //============================================================
-public class FFatalMessage
+public class FDebugMessage
       extends FAbstractMessage
 {
    // 名称
-   protected static String NAME = "Fatal";
+   protected static String NAME = "Info";
 
    //============================================================
-   // <T>构造例外消息。</T>
+   // <T>构造调试消息。</T>
    //============================================================
-   public FFatalMessage(){
+   public FDebugMessage(){
    }
 
    //============================================================
-   // <T>构造例外消息。</T>
+   // <T>构造调试消息。</T>
    //
    // @param message 消息
    //============================================================
-   public FFatalMessage(String message){
+   public FDebugMessage(String message){
       super(message);
    }
 
    //============================================================
-   // <T>构造例外消息。</T>
+   // <T>构造调试消息。</T>
    //
    // @param message 消息
    // @param params 参数集合
    //============================================================
-   public FFatalMessage(String message,
+   public FDebugMessage(String message,
                         String... params){
       super(message, params);
-   }
-
-   //============================================================
-   // <T>构造例外消息。</T>
-   //
-   // @param throwable 例外消息
-   //============================================================
-   public FFatalMessage(Throwable throwable){
-      super(throwable);
    }
 
    //============================================================

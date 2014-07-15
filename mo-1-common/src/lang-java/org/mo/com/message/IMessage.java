@@ -2,6 +2,9 @@ package org.mo.com.message;
 
 import org.mo.com.xml.FXmlNode;
 
+//============================================================
+// <T>消息接口。</T>
+//============================================================
 public interface IMessage
 {
    FXmlNode convertToNode();

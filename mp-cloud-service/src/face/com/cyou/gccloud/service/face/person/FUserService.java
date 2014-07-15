@@ -42,8 +42,22 @@ public class FUserService
                         ISqlContext sqlContext,
                         IWebInput input,
                         IWebOutput output){
-      //FDataPersonUserLogic userLogic = new FDataPersonUserLogic(sqlContext);
-      //userLogic.fetch("USER_NAME=")
+      // 获得参数
+      FXmlNode inputNode = input.config();
+      String passport = inputNode.nodeText("Passport");
+      String password = inputNode.nodeText("Password");
+      String label = inputNode.nodeText("Label");
+      String email = inputNode.nodeText("Email");
+      // 设置数据
+      FDataPersonUserUnit userUnit = new FDataPersonUserUnit();
+      userUnit.setPassport(passport);
+      userUnit.setPassword(password);
+      userUnit.setLabel(label);
+      userUnit.setContactEmail(email);
+      // 新建记录
+      FDataPersonUserLogic userLogic = new FDataPersonUserLogic(sqlContext);
+      userLogic.doInsert(userUnit);
+      output.set("result_cd", "success");
    }
 
    //============================================================
@@ -92,6 +106,37 @@ public class FUserService
       sessionNode.set("code", sessionCode);
       FXmlNode userNode = output.config().createNode("User");
       userNode.set("label", userLabel);
+   }
+
+   //============================================================
+   // <T>用户查询处理。</T>
+   //
+   // @param context 页面环境
+   // @param sqlContext 数据环境
+   // @param input 输入配置
+   // @param output 输出配置
+   //============================================================
+   @Override
+   public void query(IWebContext context,
+                     ISqlContext sqlContext,
+                     IWebInput input,
+                     IWebOutput output){
+      // 获得参数
+      FXmlNode inputNode = input.config();
+      String passport = inputNode.nodeText("Passport");
+      String password = inputNode.nodeText("Password");
+      String label = inputNode.nodeText("Label");
+      String email = inputNode.nodeText("Email");
+      // 设置数据
+      FDataPersonUserUnit userUnit = new FDataPersonUserUnit();
+      userUnit.setPassport(passport);
+      userUnit.setPassword(password);
+      userUnit.setLabel(label);
+      userUnit.setContactEmail(email);
+      // 新建记录
+      FDataPersonUserLogic userLogic = new FDataPersonUserLogic(sqlContext);
+      userLogic.doInsert(userUnit);
+      output.set("result_cd", "success");
    }
 
    //============================================================
