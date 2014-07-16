@@ -109,6 +109,16 @@ public abstract class FAbstractMessage
    public abstract String name();
 
    //============================================================
+   // <T>获得类型。</T>
+   //
+   // @return 类型
+   //============================================================
+   @Override
+   public String type(){
+      return _type;
+   }
+
+   //============================================================
    // <T>获得代码。</T>
    //
    // @return 代码
@@ -141,7 +151,6 @@ public abstract class FAbstractMessage
    //
    // @param description 描述
    //============================================================
-   @Override
    public void setDescription(String description){
       _description = description;
    }
@@ -173,16 +182,6 @@ public abstract class FAbstractMessage
    @Override
    public Object[] params(){
       return _params;
-   }
-
-   //============================================================
-   // <T>获得类型。</T>
-   //
-   // @return 类型
-   //============================================================
-   @Override
-   public String type(){
-      return _type;
    }
 
    //============================================================

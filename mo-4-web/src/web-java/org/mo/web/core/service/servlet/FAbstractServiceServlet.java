@@ -10,6 +10,7 @@ import org.mo.com.lang.cultrue.FCulture;
 import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.message.EMessageLevel;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.RAop;
@@ -160,8 +161,14 @@ public abstract class FAbstractServiceServlet
             FXmlNode outputNode = outputDoc.root();
             outputNode.setName(inputNode.name());
             FWebXmlOutput output = new FWebXmlOutput(outputNode);
-            _serviceConsole.execute(uri, context, input, output);
-            context.messages()
+            Object resultCd = _serviceConsole.execute(uri, context, input, output);
+            if(resultCd != null){
+               outputNode.set("result_cd", resultCd.toString().toLowerCase());
+            }
+            EMessageLevel levelCd = context.messages().calculateMaxLevel();
+            if((levelCd != EMessageLevel.Debug) && (levelCd != EMessageLevel.Success)){
+               outputNode.set("message_cd", levelCd.toString().toLowerCase());
+            }
          }
       }catch(Exception e){
          _logger.error(this, "process", e);

@@ -232,21 +232,21 @@ public class FServiceConsole
    // @param output 输出信息
    //============================================================
    @Override
-   public void execute(String name,
-                       IWebContext context,
-                       IWebInput input,
-                       IWebOutput output){
+   public Object execute(String name,
+                         IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
       // 找到服务对象的定义
       FWebService service = findService(name);
-      if(null == service){
+      if(service == null){
          _logger.warn(this, "execute", "not find service. (name={1}, service={1})", name, service);
-         return;
+         return null;
       }
       // 找到服务对象的实例
       Object instance = findInstance(name);
-      if(null == instance){
+      if(instance == null){
          _logger.warn(this, "execute", "not find service method (name={1}, instance={2})", name, instance);
-         return;
+         return null;
       }
       // 找到服务对象实例对应的默认处理函数
       String action = context.parameter("action");
@@ -259,7 +259,7 @@ public class FServiceConsole
       FServiceMethodDescriptor methodDsp = findMethod(service.faceClass(), action);
       if(methodDsp == null){
          _logger.warn(this, "execute", "Can't find method in service. (instance={1}, action={2})", instance, action);
-         return;
+         return null;
       }
       _logger.debug(this, "execute", "Process service. (name={1}, instance={2}, action={3})", name, instance, action);
       // 检查当前函数是否需要登录认证
@@ -271,10 +271,11 @@ public class FServiceConsole
             FXmlNode fatalNode = msgsNode.createNode("Fatal");
             fatalNode.set("type", "session.timeout");
             fatalNode.set("redirect", _messageConsole.loginWithout());
-            return;
+            return null;
          }
       }
       // 调用函数对象
+      Object result = null;
       Class<?>[] types = methodDsp.types();
       AContainer[] aforms = methodDsp.forms();
       FWebContainerItem[] forms = new FWebContainerItem[types.length];
@@ -337,7 +338,7 @@ public class FServiceConsole
             sqlSessionContext.link(context.session().connectId());
          }
          // 动态调用方法
-         methodDsp.invoke(instance, params);
+         result = methodDsp.invoke(instance, params);
       }catch(Throwable throwable){
          exception = throwable;
          // 产生例外时，处理例外内容
@@ -402,6 +403,7 @@ public class FServiceConsole
          // 建立所有例外消息
          buildMessages(context, output);
       }
+      return result;
    }
 
    //============================================================

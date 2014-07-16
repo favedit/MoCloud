@@ -32,9 +32,10 @@ public interface IServiceConsole
    // @param context 页面环境
    // @param input 输入信息
    // @param output 输出信息
+   // @return 处理结果
    //============================================================
-   void execute(String name,
-                IWebContext context,
-                IWebInput input,
-                IWebOutput output);
+   Object execute(String name,
+                  IWebContext context,
+                  IWebInput input,
+                  IWebOutput output);
 }

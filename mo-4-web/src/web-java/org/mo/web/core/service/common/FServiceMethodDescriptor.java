@@ -1,12 +1,11 @@
 package org.mo.web.core.service.common;
 
-import org.mo.web.core.container.AContainer;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.web.core.action.AWebLogin;
+import org.mo.web.core.container.AContainer;
 
 //============================================================
 // <T>服务函数描述器。</T>
@@ -120,12 +119,12 @@ public class FServiceMethodDescriptor
    //
    // @param action 命令对象
    // @param params 参数集合
-   // @return 表单集合
+   // @return 处理结果
    //============================================================
-   public String invoke(Object action,
+   public Object invoke(Object action,
                         Object[] params){
       try{
-         return (String)_method.invoke(action, params);
+         return _method.invoke(action, params);
       }catch(Exception e){
          throw new FFatalError(e);
       }

@@ -1,48 +1,45 @@
-/*
- * @(#)FValidMessage.java
- *
- * Copyright 2008 microbject, All Rights Reserved.
- *
- */
 package org.mo.com.message;
 
-/**
- * <p>应用程序检查消息类</p>
- * 
- * @author ALEX
- */
+//============================================================
+// <T>检查消息。</T>
+//============================================================
 public class FValidMessage
       extends FAbstractMessage
 {
-   private static String NAME = "Valid";
+   // 名称
+   protected static String NAME = "Valid";
 
-   /**
-    * <p>创建应用程序检查消息的实例</p>
-    *
-    */
+   //============================================================
+   // <T>构造检查消息。</T>
+   //============================================================
    public FValidMessage(){
    }
 
-   /**
-    * <p>创建应用程序检查消息的实例</p>
-    *
-    * @param message 消息内容
-    */
+   //============================================================
+   // <T>构造检查消息。</T>
+   //
+   // @param message 消息
+   //============================================================
    public FValidMessage(String message){
       super(message);
    }
 
-   /**
-    * <p>创建应用程序检查消息的实例</p>
-    *
-    * @param message 消息内容
-    * @param params 消息的参数
-    */
+   //============================================================
+   // <T>构造检查消息。</T>
+   //
+   // @param message 消息
+   // @param params 参数集合
+   //============================================================
    public FValidMessage(String message,
                         String... params){
       super(message, params);
    }
 
+   //============================================================
+   // <T>获得名称。</T>
+   //
+   // @return 名称
+   //============================================================
    @Override
    public String name(){
       return NAME;

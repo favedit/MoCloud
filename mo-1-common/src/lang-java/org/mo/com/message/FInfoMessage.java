@@ -6,23 +6,40 @@ package org.mo.com.message;
 public class FInfoMessage
       extends FAbstractMessage
 {
-   private static String NAME = "Info";
+   // 名称
+   protected static String NAME = "Info";
 
    //============================================================
-   // <T>信息消息。</T>
+   // <T>构造信息消息。</T>
    //============================================================
    public FInfoMessage(){
    }
 
+   //============================================================
+   // <T>构造信息消息。</T>
+   //
+   // @param message 消息
+   //============================================================
    public FInfoMessage(String message){
       super(message);
    }
 
+   //============================================================
+   // <T>构造信息消息。</T>
+   //
+   // @param message 消息
+   // @param params 参数集合
+   //============================================================
    public FInfoMessage(String message,
                        String... params){
       super(message, params);
    }
 
+   //============================================================
+   // <T>获得名称。</T>
+   //
+   // @return 名称
+   //============================================================
    @Override
    public String name(){
       return NAME;
