@@ -1,9 +1,12 @@
 package com.cyou.gccloud.service.face.person;
 
+import com.cyou.gccloud.service.core.person.FUserInfo;
+import com.cyou.gccloud.service.core.person.IUserConsole;
 import com.cyou.gccloud.service.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.service.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.service.system.session.FSessionInfo;
 import com.cyou.gccloud.service.system.session.ISessionConsole;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -12,7 +15,6 @@ import org.mo.com.message.FErrorMessage;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.eng.data.common.ISqlContext;
-import org.mo.web.core.service.EServiceResult;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -28,8 +30,13 @@ public class FUserService
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FUserService.class);
 
+   // 会话控制台
    @ALink
    protected ISessionConsole _sessionConsole;
+
+   // 用户控制台
+   @ALink
+   protected IUserConsole _userConsole;
 
    //============================================================
    // <T>注册用户处理。</T>
@@ -41,10 +48,10 @@ public class FUserService
    // @return 处理结果
    //============================================================
    @Override
-   public EServiceResult register(IWebContext context,
-                                  ISqlContext sqlContext,
-                                  IWebInput input,
-                                  IWebOutput output){
+   public EResult register(IWebContext context,
+                           ISqlContext sqlContext,
+                           IWebInput input,
+                           IWebOutput output){
       // 获得参数
       FXmlNode inputNode = input.config();
       String passport = inputNode.nodeText("Passport");
@@ -52,15 +59,14 @@ public class FUserService
       String label = inputNode.nodeText("Label");
       String email = inputNode.nodeText("Email");
       // 设置数据
-      FDataPersonUserUnit userUnit = new FDataPersonUserUnit();
-      userUnit.setPassport(passport);
-      userUnit.setPassword(password);
-      userUnit.setLabel(label);
-      userUnit.setContactEmail(email);
-      // 新建记录
-      FDataPersonUserLogic userLogic = new FDataPersonUserLogic(sqlContext);
-      userLogic.doInsert(userUnit);
-      return EServiceResult.Success;
+      FUserInfo info = new FUserInfo();
+      info.setPassport(passport);
+      info.setPassword(password);
+      info.setLabel(label);
+      info.setContactEmail(email);
+      // 注册用户
+      EResult resultCd = _userConsole.register(sqlContext, info);
+      return resultCd;
    }
 
    //============================================================
@@ -73,10 +79,10 @@ public class FUserService
    // @return 处理结果
    //============================================================
    @Override
-   public EServiceResult login(IWebContext context,
-                               ISqlContext sqlContext,
-                               IWebInput input,
-                               IWebOutput output){
+   public EResult login(IWebContext context,
+                        ISqlContext sqlContext,
+                        IWebInput input,
+                        IWebOutput output){
       // 获得参数
       String passport = input.config().nodeText("Passport");
       String password = input.config().nodeText("Password");
@@ -85,16 +91,16 @@ public class FUserService
       FDataPersonUserUnit userUnit = userLogic.serach("PASSPORT='" + passport + "'");
       if(userUnit == null){
          context.messages().push(new FErrorMessage("Can't find user by passport. (passport={1})", passport));
-         return EServiceResult.Failure;
+         return EResult.Failure;
       }
       if(RString.isEmpty(password)){
          context.messages().push(new FErrorMessage("Password is empty. (passowrd={1})", password));
-         return EServiceResult.Failure;
+         return EResult.Failure;
       }
       String userPassword = userUnit.password();
       if(!password.equals(userPassword)){
          context.messages().push(new FErrorMessage("Password is not equals. (passowrd={1}, user_password={2})", password, userPassword));
-         return EServiceResult.Failure;
+         return EResult.Failure;
       }
       long userId = userUnit.ouid();
       String userLabel = userUnit.label();
@@ -107,7 +113,7 @@ public class FUserService
       sessionNode.set("code", sessionCode);
       FXmlNode userNode = output.config().createNode("User");
       userNode.set("label", userLabel);
-      return EServiceResult.Success;
+      return EResult.Success;
    }
 
    //============================================================
@@ -120,10 +126,10 @@ public class FUserService
    // @return 处理结果
    //============================================================
    @Override
-   public EServiceResult query(IWebContext context,
-                               ISqlContext sqlContext,
-                               IWebInput input,
-                               IWebOutput output){
+   public EResult query(IWebContext context,
+                        ISqlContext sqlContext,
+                        IWebInput input,
+                        IWebOutput output){
       // 获得参数
       FXmlNode inputNode = input.config();
       String passport = inputNode.nodeText("Passport");
@@ -137,9 +143,9 @@ public class FUserService
       userUnit.setLabel(label);
       userUnit.setContactEmail(email);
       // 新建记录
-      FDataPersonUserLogic userLogic = new FDataPersonUserLogic(sqlContext);
-      userLogic.doInsert(userUnit);
-      return EServiceResult.Success;
+      //FDataPersonUserLogic userLogic = new FDataPersonUserLogic(sqlContext);
+      //userLogic.
+      return EResult.Success;
    }
 
    //============================================================
@@ -152,10 +158,10 @@ public class FUserService
    // @return 处理结果
    //============================================================
    @Override
-   public EServiceResult logout(IWebContext context,
-                                ISqlContext sqlContext,
-                                IWebInput input,
-                                IWebOutput output){
-      return EServiceResult.Success;
+   public EResult logout(IWebContext context,
+                         ISqlContext sqlContext,
+                         IWebInput input,
+                         IWebOutput output){
+      return EResult.Success;
    }
 }

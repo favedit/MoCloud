@@ -211,13 +211,13 @@ public class FEntityConsole
       // 获得组
       for(IXmlObject xgroup : list()){
          if(RBoolean.parse(xgroup.innerGet(XEntityGroup.PTY_IS_VALID))){
-            if(RBoolean.parse(xgroup.innerGet(XEntityGroup.PTY_IS_CLIENT_AS))){
+            if(RBoolean.parse(xgroup.innerGet(XEntityGroup.PTY_IS_CLIENT_JAVA))){
                // 获得实体
                FXmlNode xgroupNode = buildConfig(xgroup, EXmlConfig.Simple);
                for(FXmlNode xentityNode : xgroupNode.nodes()){
                   if(XEntity.isName(xentityNode.name()) || XStruct.isName(xentityNode.name())){
                      if(RBoolean.parse(xentityNode.get(XEntity.PTY_IS_VALID, null))){
-                        if(RBoolean.parse(xentityNode.get(XEntity.PTY_IS_CLIENT_AS, null))){
+                        if(RBoolean.parse(xentityNode.get(XEntity.PTY_IS_CLIENT_JAVA, null))){
                            // 保存头文件
                            String sourceFile = buildPath("java-entity", "S" + xentityNode.get("name"));
                            FString source = buildSource(xentityNode, "java-entity");

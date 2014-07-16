@@ -6,28 +6,27 @@
 //
 // @version 1.0.1
 //============================================================
-package mo.ms.enum
-{
-   //============================================================
-   // <T><jt:item source='$group.label'/>枚举定义。</T>
-   //
-   // @enum
-   //============================================================
-   public class E<jt:item source='$group.code_name'/>{
+package com.cyou.gccloud.service.define.enums;
+
+//============================================================
+// <T><jt:item source='$group.label'/>枚举定义。</T>
+//
+// @enum
+//============================================================
+public class E<jt:item source='$group.code_name'/>{
 <jt:loop source='$group' alias='enum' filter='$enum.is_client_as=Y'>
 
-      //------------------------------------------------------------
+   //------------------------------------------------------------
 <jt:loop source='$enum' alias='member'>
-      // <jt:item source='$enum.label'/> - <jt:item source='$member.label'/>。
+   // <jt:item source='$enum.label'/> - <jt:item source='$member.label'/>。
 <jt:equals source='$member.value' value=''>
-      public static var E<jt:item source='$enum.name'/>_<jt:item source='$member.name'/>:int = <jt:item source='$member-position'/>;
+   public final static int E<jt:item source='$enum.name'/>_<jt:item source='$member.name'/> = <jt:item source='$member-position'/>;
 </jt:equals>
 <jt:notEmpty source='$member.value'>
-      public static var E<jt:item source='$enum.name'/>_<jt:item source='$member.name'/>:int = <jt:notEmpty source='$enum.refer_value'><jt:item source='$enum.refer_value'/> + </jt:notEmpty><jt:item source='$member.value'/>;
+   public final static int E<jt:item source='$enum.name'/>_<jt:item source='$member.name'/> = <jt:notEmpty source='$enum.refer_value'><jt:item source='$enum.refer_value'/> + </jt:notEmpty><jt:item source='$member.value'/>;
 </jt:notEmpty>
 </jt:loop>
 </jt:loop>
-   }
 }
 ]]></Source>
 </Template>

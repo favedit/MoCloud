@@ -6,35 +6,34 @@
 //
 // @enum
 //============================================================
-package mo.ms
-{
-   import mo.cm.stream.*;
-   import mo.cr.message.*;
-   import mo.ms.common.*;
+package com.cyou.gccloud.service.define.message;
+
+import org.mo.com.xml.*;
+import com.cyou.gccloud.service.common.message.*;
+
 <jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
    import mo.ms.<jt:item source='$group.full_code' format='lower'/>.FNet<jt:item source='$group.full_code'/>Message;
 </jt:loop>
 
+//============================================================
+public class FNetMessageProvider implements INetMessageProvider
+{
    //============================================================
-   public class FNetMessageProvider implements INetMessageProvider
-   {
-      //============================================================
-      // <T>根据消息代码号，获得消息对象。</T>
-      //
-      // @param code 消息代码
-      // @return 消息对象
-      //============================================================
-      public function message(code:int):FNetMessage{
-         var group:int = code & 0xFF00;
-         switch(group){
+   // <T>根据消息代码号，获得消息对象。</T>
+   //
+   // @param code 消息代码
+   // @return 消息对象
+   //============================================================
+   public FNetMessage message(int code){
+      int group = code & 0xFF00;
+      switch(group){
 <jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
-            // <jt:item source='$group.label'/>
-            case ENetMessageGroup.<jt:item source='$group.full_code'/>:
-               return RNetMessage.<jt:item source='$group.full_code' format='lower.first'/>.message(code);
+         // <jt:item source='$group.label'/>
+         case ENetMessageGroup.<jt:item source='$group.full_code'/>:
+            return RNetMessage.<jt:item source='$group.full_code' format='lower.first'/>.message(code);
 </jt:loop>
-         }
-         return null;
       }
+      return null;
    }
 }
 ]]></Source>

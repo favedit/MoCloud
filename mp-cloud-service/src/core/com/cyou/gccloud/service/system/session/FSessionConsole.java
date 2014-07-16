@@ -1,7 +1,6 @@
 package com.cyou.gccloud.service.system.session;
 
 import com.cyou.gccloud.service.data.cache.FCacheSystemSessionLogic;
-import com.cyou.gccloud.service.data.cache.FCacheSystemSessionUnit;
 import org.mo.com.console.FConsole;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
@@ -32,15 +31,14 @@ public class FSessionConsole
       String sessionCode = RUuid.makeUuid();
       sessionCode = RString.removeChars(sessionCode, '-').toUpperCase();
       // 设置数据单元
-      FCacheSystemSessionUnit sessionUnit = new FCacheSystemSessionUnit();
-      sessionUnit.setCode(sessionCode);
-      sessionUnit.setUserId(userId);
+      FSessionInfo sessionInfo = new FSessionInfo();
+      sessionInfo.setCode(sessionCode);
+      sessionInfo.setUserId(userId);
       // 新建记录
       FCacheSystemSessionLogic sessionLogic = new FCacheSystemSessionLogic(sqlContext.activeConnection("CD_CACHE"));
-      sessionLogic.doInsert(sessionUnit);
-      _logger.debug(this, "open", "Open session. (code={1})", sessionUnit.code());
+      sessionLogic.doInsert(sessionInfo);
+      _logger.debug(this, "open", "Open session. (code={1})", sessionInfo.code());
       // 返回结果
-      FSessionInfo sessionInfo = new FSessionInfo(sessionUnit);
       return sessionInfo;
    }
 
@@ -53,12 +51,13 @@ public class FSessionConsole
    @Override
    public FSessionInfo find(ISqlContext sqlContext,
                             String code){
-      // 新建记录
-      FCacheSystemSessionLogic sessionLogic = new FCacheSystemSessionLogic(sqlContext);
-      FCacheSystemSessionUnit sessionUnit = sessionLogic.serach("CODE='" + code + "'");
-      // 返回结果
-      FSessionInfo sessionInfo = new FSessionInfo(sessionUnit);
-      return sessionInfo;
+      //      // 新建记录
+      //      FCacheSystemSessionLogic sessionLogic = new FCacheSystemSessionLogic(sqlContext);
+      //      FCacheSystemSessionUnit sessionUnit = sessionLogic.serach("CODE='" + code + "'");
+      //      // 返回结果
+      //      FSessionInfo sessionInfo = new FSessionInfo(sessionUnit);
+      //      return sessionInfo;
+      return null;
    }
 
    //============================================================
@@ -67,7 +66,8 @@ public class FSessionConsole
    // @param session 会话信息
    //============================================================
    @Override
-   public void close(FSessionInfo session){
+   public void close(ISqlContext sqlContext,
+                     String code){
       // TODO Auto-generated method stub
    }
 

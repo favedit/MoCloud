@@ -2,7 +2,7 @@
 
 <Configuration>
    <!-- 应用定义 -->
-   <Define name='application'>E:/ZW-MoCloud</Define>
+   <Define name='application'>${application}</Define>
    <Define name='application.name'>mp-cloud-manage</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application.root}/deploy</Define>
@@ -18,7 +18,7 @@
    <Define name='game.export.server'>D:/WP-SNS-Work/Server</Define>
    <Define name='game.export.client'>D:/WP-SNS-Work/Temp/Client</Define>
    <Define name='game.export.tools'>D:/WP-SNS-Work/Temp/Tools</Define>
-   <Define name='game.export.platform'>D:/WP-SNS-Work/Temp/Platform</Define>
+   <Define name='game.export.platform'>${application}/mp-cloud-service/src/define</Define>
 
    <!-- 包含：系统设定 -->
    <Include>${application.config}/common/define.xml</Include>

@@ -6,38 +6,37 @@
 //
 // @enum
 //============================================================
-package mo.ms
-{
-   import mo.cm.stream.*;
-   import mo.cr.message.*;
+package com.cyou.gccloud.service.define.message;
+
+import org.mo.com.xml.*;
+import com.cyou.gccloud.service.common.message.*;
 <jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
    import mo.ms.<jt:item source='$group.full_code' format='lower'/>.FNet<jt:item source='$group.full_code'/>Message;
 </jt:loop>
 
+//============================================================
+public class RNetMessage
+{
+<jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
+   // <jt:item source='$group.label'/>
+   protected static var _<jt:item source='$group.full_code' format='lower.first'/>:FNet<jt:item source='$group.full_code'/>Message;
+
+</jt:loop>
+
+<jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
    //============================================================
-   public class RNetMessage
-   {
-<jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
-      // <jt:item source='$group.label'/>
-      protected static var _<jt:item source='$group.full_code' format='lower.first'/>:FNet<jt:item source='$group.full_code'/>Message;
-
-</jt:loop>
-
-<jt:loop source='$config' alias='group' filter='$group.is_client_as=Y'>
-      //============================================================
-      // <T>获得<jt:item source='$group.label'/>对象。</T>
-      //
-      // @return <jt:item source='$group.label'/>对象
-      //============================================================
-      public static function get <jt:item source='$group.full_code' format='lower.first'/>():FNet<jt:item source='$group.full_code'/>Message{
-         if(null == _<jt:item source='$group.full_code' format='lower.first'/>){
-            _<jt:item source='$group.full_code' format='lower.first'/> = new FNet<jt:item source='$group.full_code'/>Message();
-         }
-         return _<jt:item source='$group.full_code' format='lower.first'/>;
+   // <T>获得<jt:item source='$group.label'/>对象。</T>
+   //
+   // @return <jt:item source='$group.label'/>对象
+   //============================================================
+   public static function get <jt:item source='$group.full_code' format='lower.first'/>():FNet<jt:item source='$group.full_code'/>Message{
+      if(null == _<jt:item source='$group.full_code' format='lower.first'/>){
+         _<jt:item source='$group.full_code' format='lower.first'/> = new FNet<jt:item source='$group.full_code'/>Message();
       }
+      return _<jt:item source='$group.full_code' format='lower.first'/>;
+   }
 
 </jt:loop>
-   }
 }
 ]]></Source>
 </Template>

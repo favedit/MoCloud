@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group _uuid="nUR0nSjhzD4J0yYgjuP7kQ" name="logic.user" label="共通定义" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="MoMgStructCommon" code="Gcm" full_code="StructCommon" display_index="21" project_name="/Common/MoMessage" project_code="Mg">
+  <Entity _uuid="ZUdv1dBQ]mCbAB6Sra5diw" name="GmObject" label="对象" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_class="Y" is_final="N" parent_name="MemoryPoolObject">
+    <Item _uuid="r03rRTBGwpEdgrnfeMVvgQ" name="objectCd" label="对象类型" is_valid="Y" note="M#" type="String" is_collection="N" property_id="1" is_persistence="Y" is_system="N" is_lock="N" is_get="N" is_set="N" />
+  </Entity>
+</Group>
+

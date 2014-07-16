@@ -1,7 +1,8 @@
 package com.cyou.gccloud.service.face.person;
 
+import org.mo.com.lang.EResult;
+
 import org.mo.eng.data.common.ISqlContext;
-import org.mo.web.core.service.EServiceResult;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -20,7 +21,7 @@ public interface IUserService
    // @param output 输出配置
    // @return 处理结果
    //============================================================
-   EServiceResult register(IWebContext context,
+   EResult register(IWebContext context,
                            ISqlContext sqlContext,
                            IWebInput input,
                            IWebOutput output);
@@ -34,7 +35,7 @@ public interface IUserService
    // @param output 输出配置
    // @return 处理结果
    //============================================================
-   EServiceResult login(IWebContext context,
+   EResult login(IWebContext context,
                         ISqlContext sqlContext,
                         IWebInput input,
                         IWebOutput output);
@@ -48,7 +49,7 @@ public interface IUserService
    // @param output 输出配置
    // @return 处理结果
    //============================================================
-   EServiceResult query(IWebContext context,
+   EResult query(IWebContext context,
                         ISqlContext sqlContext,
                         IWebInput input,
                         IWebOutput output);
@@ -62,7 +63,7 @@ public interface IUserService
    // @param output 输出配置
    // @return 处理结果
    //============================================================
-   EServiceResult logout(IWebContext context,
+   EResult logout(IWebContext context,
                          ISqlContext sqlContext,
                          IWebInput input,
                          IWebOutput output);

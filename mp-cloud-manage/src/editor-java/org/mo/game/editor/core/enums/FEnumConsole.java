@@ -184,14 +184,14 @@ public class FEnumConsole
          if(!RBoolean.parse(xgroup.innerGet(XEnumGroup.PTY_IS_VALID))){
             continue;
          }
-         if(!RBoolean.parse(xgroup.innerGet(XEnumGroup.PTY_IS_CLIENT_AS))){
+         if(!RBoolean.parse(xgroup.innerGet(XEnumGroup.PTY_IS_CLIENT_JAVA))){
             continue;
          }
          FXmlNode config = buildConfig(xgroup, EXmlConfig.Simple);
          // 生成枚举代码
          String codeName = xgroup.innerGet("code_name");
          String asPath = RFile.makeFilename(sourcePlatformPath(), "E" + codeName + ".java");
-         FString asSource = sourceBuilder.makeAsSource(config);
+         FString asSource = sourceBuilder.makeJavaSource(config);
          RFile.saveToFile(asPath, asSource, REncoding.UTF8);
          _logger.debug(this, "buildAllJava", "Build java head source. (file={1})", asPath);
          // 生成集合代码
@@ -200,7 +200,7 @@ public class FEnumConsole
                if(RBoolean.parse(xenum.get(XEnum.PTY_IS_SET, null))){
                   String name = xenum.get("name");
                   String path = RFile.makeFilename(sourcePlatformPath(), "T" + name + "Set.java");
-                  FString source = sourceBuilder.makeAsSetSource(xenum);
+                  FString source = sourceBuilder.makeJavaSetSource(xenum);
                   RFile.saveToFile(path, source, REncoding.UTF8);
                   _logger.debug(this, "buildAllJava", "Build java head source. (file={1})", path);
                }

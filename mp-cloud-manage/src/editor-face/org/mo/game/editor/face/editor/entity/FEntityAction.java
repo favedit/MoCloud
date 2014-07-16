@@ -20,7 +20,8 @@ import org.mo.web.protocol.context.IWebContext;
 public class FEntityAction
       extends FAbsXmlObjectAction<XEntityGroup>
       implements
-         IEntityAction{
+         IEntityAction
+{
 
    private static ILogger _logger = RLogger.find(FEntityAction.class);
 
@@ -44,7 +45,7 @@ public class FEntityAction
    public String buildAllSource(IWebContext context,
                                 FEntityPage page){
       String type = context.parameter("type");
-      _logger.debug(this, "buildAllSource", "Build type source. (type={0})", type);
+      _logger.debug(this, "buildAllSource", "Build type source. (type={1})", type);
       // 生成代码
       if("all".equals(type)){
          _entityConsole.buildAll(EEntitySource.All);

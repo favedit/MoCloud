@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.mo.com.io.RFile;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.system.RSystem;
 import org.mo.core.aop.RAop;
@@ -24,7 +25,10 @@ public class FHttpContextListener
    //
    // @param event 事件对象
    //============================================================
+   @Override
    public void contextInitialized(ServletContextEvent event){
+      // 获得应用目录
+      String application = RSystem.property("user.mobj.application");
       // 获得启动设置文件名称
       String mode = RSystem.property("user.mobj.config");
       ServletContext context = event.getServletContext();
@@ -33,6 +37,9 @@ public class FHttpContextListener
       // 设置类加载器
       ClassLoader loader = getClass().getClassLoader();
       RClass.setupClassLoader(loader);
+      // 设置属性集合
+      FAttributes attributes = RAop.configConsole().defineCollection().attributes();
+      attributes.set("application", application);
       // 加载启动信息
       RAop.initialize(configFileName);
    }
@@ -42,6 +49,7 @@ public class FHttpContextListener
    //
    // @param event 事件对象
    //============================================================
+   @Override
    public void contextDestroyed(ServletContextEvent event){
       RAop.release();
    }

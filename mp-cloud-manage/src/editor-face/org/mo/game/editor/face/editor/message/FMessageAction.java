@@ -14,7 +14,8 @@ import org.mo.web.protocol.context.IWebContext;
 public class FMessageAction
       extends FAbsXmlObjectAction<XMessageGroup>
       implements
-         IMessageAction{
+         IMessageAction
+{
 
    private static ILogger _logger = RLogger.find(FMessageAction.class);
 
@@ -37,7 +38,7 @@ public class FMessageAction
    public String buildAllSource(IWebContext context,
                                 FMessagePage page){
       String type = context.parameter("type");
-      _logger.debug(this, "buildAllSource", "Build type source. (type={0})", type);
+      _logger.debug(this, "buildAllSource", "Build type source. (type={1})", type);
       // 生成全部代码
       if("all".equals(type)){
          _messageConsole.buildAll(EMessageSource.All);

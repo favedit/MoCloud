@@ -6,56 +6,55 @@
 //
 // @enum
 //============================================================
-package mo.ms.<jt:item source='$group.full_code' format='lower'/>
+package com.cyou.gccloud.service.define.message.<jt:item source='$group.full_code' format='lower'/>;
+
+import org.mo.com.xml.*;
+import com.cyou.gccloud.service.common.message.*;
+
+//============================================================
+// <T><jt:item source='$group.label'/>消息列表。</T>
+//============================================================
+public class FNet<jt:item source='$group.full_code'/>Message
 {
-   import mo.cr.message.*;
-   import mo.ms.common.*;
+<jt:loop source='$group' alias='message' filter='$message:name=Message'>
+<jt:true source='$message.is_client_as'>
+   // <jt:item source='$message.label'/>消息
+   protected var _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>:F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>;
 
+</jt:true>
+</jt:loop>
+<jt:loop source='$group' alias='message' filter='$message:name=Message'>
+<jt:true source='$message.is_client_as'>
    //============================================================
-   // <T><jt:item source='$group.label'/>消息列表。</T>
+   // <T>获得<jt:item source='$message.label'/>消息对象。</T>
+   //
+   // @return 消息对象
    //============================================================
-   public class FNet<jt:item source='$group.full_code'/>Message
-   {
-<jt:loop source='$group' alias='message' filter='$message:name=Message'>
-<jt:true source='$message.is_client_as'>
-      // <jt:item source='$message.label'/>消息
-      protected var _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>:F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>;
+   public function get <jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>():F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>{
+      if(null == _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>){
+         _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/> = new F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>();
+      }
+      return _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>;
+   }
 
 </jt:true>
 </jt:loop>
+   //============================================================
+   // <T>根据消息代码号，获得消息对象。</T>
+   //
+   // @param code 消息代码
+   // @return 消息对象
+   //============================================================
+   public FNetMessage message(int code){
+      switch(code){
 <jt:loop source='$group' alias='message' filter='$message:name=Message'>
 <jt:true source='$message.is_client_as'>
-      //============================================================
-      // <T>获得<jt:item source='$message.label'/>消息对象。</T>
-      //
-      // @return 消息对象
-      //============================================================
-      public function get <jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>():F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>{
-         if(null == _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>){
-            _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/> = new F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>();
-         }
-         return _<jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>;
-      }
-
+         case ENetMessageGroup.<jt:item source='$group.full_code'/> + <jt:item source='$message.code_value'/>:
+            return <jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>;
 </jt:true>
 </jt:loop>
-      //============================================================
-      // <T>根据消息代码号，获得消息对象。</T>
-      //
-      // @param code 消息代码
-      // @return 消息对象
-      //============================================================
-      public function message(code:int):FNetMessage{
-         switch(code){
-<jt:loop source='$group' alias='message' filter='$message:name=Message'>
-<jt:true source='$message.is_client_as'>
-            case ENetMessageGroup.<jt:item source='$group.full_code'/> + <jt:item source='$message.code_value'/>:
-               return <jt:item source='$message.code' format='lower.first'/><jt:item source='$message.message_type'/>;
-</jt:true>
-</jt:loop>
-         }
-         return null;
       }
+      return null;
    }
 }
 ]]></Source>

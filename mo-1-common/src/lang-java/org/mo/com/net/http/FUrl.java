@@ -1,5 +1,6 @@
 package org.mo.com.net.http;
 
+import org.mo.com.lang.FObject;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
@@ -8,6 +9,7 @@ import org.mo.com.lang.RString;
 // <T>网络地址。</T>
 //============================================================
 public class FUrl
+      extends FObject
 {
    // 协议
    protected String _protocol;
@@ -27,8 +29,13 @@ public class FUrl
    //============================================================
    // <T>构造网络地址。</T>
    //============================================================
+   public FUrl(){
+   }
+
+   //============================================================
+   // <T>构造网络地址。</T>
+   //============================================================
    public FUrl(String url){
-      _url = url;
       parse(url);
    }
 
@@ -94,6 +101,25 @@ public class FUrl
       if(RString.equalsIgnoreCase(_host, "localhost")){
          _host = "127.0.0.1";
       }
+      _url = url;
+   }
+
+   //============================================================
+   // <T>获得网络地址。</T>
+   //
+   // @return 网络地址
+   //============================================================
+   public String get(){
+      return _url;
+   }
+
+   //============================================================
+   // <T>设置网络地址。</T>
+   //
+   // @param url 网络地址
+   //============================================================
+   public void set(String url){
+      parse(url);
    }
 
    //============================================================
@@ -101,6 +127,7 @@ public class FUrl
    //
    // @param 字符串
    //============================================================
+   @Override
    public String toString(){
       return _url;
    }
@@ -110,7 +137,8 @@ public class FUrl
    //
    // @return 运行信息
    //============================================================
-   public FString dump(){
+   @Override
+   public String dump(){
       FString dump = new FString();
       dump.append("Protocol[");
       dump.append(_protocol);
@@ -121,6 +149,6 @@ public class FUrl
       dump.append("] Path[");
       dump.append(_path);
       dump.append("]");
-      return dump;
+      return dump.toString();
    }
 }

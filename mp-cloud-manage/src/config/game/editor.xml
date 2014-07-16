@@ -22,7 +22,7 @@
       <Property name='pathServer'>${game.export.server}</Property>
       <Property name='pathClient'>${game.export.client}/mo-4-message/2-enum/mo/ms/enum</Property>
       <Property name='pathTool'>${game.export.tools}/2 - Core/MoMessage/Enum</Property>
-      <Property name='pathPlatform'>${game.export.platform}/mp-app-qkb-1-common/src/client-message-java/org/mo/qkb/msg/enums</Property>
+      <Property name='pathPlatform'>${game.export.platform}//com/cyou/gccloud/service/define/enums</Property>
       <Property name='templatePath'>${game.export.template}</Property>
       <Property name='cacheTimeout'>60000</Property>
       <Initialize name='initializeMonitor'/>
@@ -74,7 +74,7 @@
       <Property name='pathServer'>${game.export.server}</Property>
       <Property name='pathClient'>${game.export.client}/mo-4-message/3-entity/mo/ms/entity</Property>
       <Property name='pathTool'>${game.export.tools}/2 - Core/MoMessage/Entity</Property>
-      <Property name='pathPlatform'>${game.export.platform}/mp-app-qkb-1-common/src/client-message-java/org/mo/qkb/msg/entity</Property>
+      <Property name='pathPlatform'>${game.export.platform}/com/cyou/gccloud/service/define/entity</Property>
       <Property name='cacheTimeout'>60000</Property>
       <Initialize name='initializeMonitor'/>
       <Initialize name='initializeConfig'/>
@@ -123,7 +123,7 @@
       <Property name='pathServer'>${game.export.server}/Common/MoMessage</Property>
       <Property name='pathClient'>${game.export.client}/mo-4-message/4-message/mo/ms</Property>
       <Property name='pathTools'>${game.export.tools}/2 - Core/MoMessage/Message</Property>
-      <Property name='pathPlatform'>${game.export.platform}/mp-app-qkb-1-common/src/client-message-java/org/mo/qkb/msg/message</Property>
+      <Property name='pathPlatform'>${game.export.platform}/com/cyou/gccloud/service/define/message</Property>
       <Property name='cacheTimeout'>60000</Property>
       <Initialize name='initializeMonitor'/>
       <Initialize name='initializeConfig'/>

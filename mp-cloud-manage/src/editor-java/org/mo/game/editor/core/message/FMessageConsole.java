@@ -203,31 +203,34 @@ public class FMessageConsole
       for(IXmlObject xgroup : list()){
          if(RBoolean.parse(xgroup.innerGet(XMessageGroup.PTY_IS_VALID))){
             String groupFilePath = makeJavaGroupFilePath(xgroup);
-            if(null != groupFilePath){
+            if(groupFilePath != null){
                for(IXmlObject xmessage : xgroup.children()){
                   if("Message".equalsIgnoreCase(xmessage.name())){
                      if(RBoolean.parse(xmessage.innerGet(XMessage.PTY_IS_VALID))){
                         String messageName = xmessage.innerGet(XMessage.PTY_NAME);
                         String messageFilePath = makeJavaMessageFilePath(xgroup, messageName);
-                        if(null != messageFilePath){
+                        if(messageFilePath != null){
                            for(IXmlObject xstruct : xmessage.children()){
                               if("Struct".equalsIgnoreCase(xstruct.name())){
                                  // 生成结构体
                                  String structName = xstruct.innerGet(XMessageStruct.PTY_NAME);
                                  String structFilePath = makeJavaStructFilePath(xgroup, messageName, structName.substring(1));
-                                 if(null != messageFilePath){
+                                 if(messageFilePath != null){
                                     FString source = buildJavaStructSource(xgroup, messageName, structName);
+                                    _logger.debug(this, "buildAllJava", "Save message struct source. (path={1})", structFilePath);
                                     RFile.saveToFile(structFilePath, source, REncoding.UTF8);
                                  }
                               }
                            }
                            FString source = buildJavaMessageSource(xgroup, messageName);
+                           _logger.debug(this, "buildAllJava", "Save message source. (path={1})", messageFilePath);
                            RFile.saveToFile(messageFilePath, source, REncoding.UTF8);
                         }
                      }
                   }
                }
                FString source = buildJavaGroupSource(xgroup);
+               _logger.debug(this, "buildAllJava", "Save group source. (path={1})", groupFilePath);
                RFile.saveToFile(groupFilePath, source, REncoding.UTF8);
             }
          }
@@ -527,7 +530,7 @@ public class FMessageConsole
 
    //============================================================
    protected String makeJavaGroupFilePath(IXmlObject xmessageGroup){
-      boolean isScript = RBoolean.parse(xmessageGroup.innerGet(XMessageGroup.PTY_IS_CLIENT_AS));
+      boolean isScript = RBoolean.parse(xmessageGroup.innerGet(XMessageGroup.PTY_IS_CLIENT_JAVA));
       if(!isScript){
          return null;
       }
@@ -541,7 +544,7 @@ public class FMessageConsole
    //============================================================
    protected String makeJavaMessageFilePath(IXmlObject xmessageGroup,
                                             String messageName){
-      boolean isScript = RBoolean.parse(xmessageGroup.innerGet(XMessageGroup.PTY_IS_CLIENT_AS));
+      boolean isScript = RBoolean.parse(xmessageGroup.innerGet(XMessageGroup.PTY_IS_CLIENT_JAVA));
       if(!isScript){
          return null;
       }
@@ -552,7 +555,7 @@ public class FMessageConsole
       if(!"Message".equals(xmessage.name())){
          return null;
       }
-      boolean isAs = RBoolean.parse(xmessage.innerGet(XMessage.PTY_IS_CLIENT_AS));
+      boolean isAs = RBoolean.parse(xmessage.innerGet(XMessage.PTY_IS_CLIENT_JAVA));
       if(!isAs){
          return null;
       }
@@ -567,7 +570,7 @@ public class FMessageConsole
    protected String makeJavaStructFilePath(IXmlObject xmessageGroup,
                                            String messageName,
                                            String structName){
-      boolean isScript = RBoolean.parse(xmessageGroup.innerGet(XMessageGroup.PTY_IS_CLIENT_AS));
+      boolean isScript = RBoolean.parse(xmessageGroup.innerGet(XMessageGroup.PTY_IS_CLIENT_JAVA));
       if(!isScript){
          return null;
       }
@@ -578,7 +581,7 @@ public class FMessageConsole
       if(!"Message".equals(xmessage.name())){
          return null;
       }
-      boolean isAs = RBoolean.parse(xmessage.innerGet(XMessage.PTY_IS_CLIENT_AS));
+      boolean isAs = RBoolean.parse(xmessage.innerGet(XMessage.PTY_IS_CLIENT_JAVA));
       if(!isAs){
          return null;
       }

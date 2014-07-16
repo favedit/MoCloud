@@ -2,7 +2,7 @@
 
 <Configuration>
    <!-- 应用定义 -->
-   <Define name='application'>E:/ZW-MoCloud</Define>
+   <Define name='application'>${application}</Define>
    <Define name='application.name'>mp-cloud-service</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application.root}/deploy</Define>

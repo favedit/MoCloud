@@ -32,5 +32,6 @@ public interface ISessionConsole
    //
    // @param session 会话信息
    //============================================================
-   void close(FSessionInfo session);
+   void close(ISqlContext sqlContext,
+              String code);
 }
