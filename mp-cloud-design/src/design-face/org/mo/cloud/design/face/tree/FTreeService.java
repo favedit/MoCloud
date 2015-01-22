@@ -1,9 +1,9 @@
 package org.mo.cloud.design.face.tree;
 
 
-public class FContentTreeService
+public class FTreeService
       implements
-         IContentTreeService
+         ITreeService
 {
 
 }

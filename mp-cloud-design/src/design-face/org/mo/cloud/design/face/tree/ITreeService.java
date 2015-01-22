@@ -1,6 +1,6 @@
 package org.mo.cloud.design.face.tree;
 
-public interface IContentTreeService
+public interface ITreeService
 {
 
 }

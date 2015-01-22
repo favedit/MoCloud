@@ -13,10 +13,10 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>内容持久化处理。</T>
 //============================================================
-public class FContentPersistenceAction
+public class FPersistenceAction
       extends FAbstractConfigurationAction
       implements
-         IContentPersistenceAction
+         IPersistenceAction
 {
    // 目录页面
    public final static String PAGE_CATALOG = "Catalog";
@@ -31,7 +31,7 @@ public class FContentPersistenceAction
    //============================================================
    // <T>构造内容持久化处理。</T>
    //============================================================
-   public FContentPersistenceAction(){
+   public FPersistenceAction(){
       _storageName = "cloud";
       _spaceName = "design.persistence";
    }
@@ -45,7 +45,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String catalog(IWebContext context,
-                         FContentPersistencePage page){
+                         FPersistencePage page){
       return catalog(context, page, PAGE_CATALOG);
    }
 
@@ -58,7 +58,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String list(IWebContext context,
-                      FContentPersistencePage page){
+                      FPersistencePage page){
       return list(context, page, IPublicPage.XOBJECT_FORM);
    }
 
@@ -71,7 +71,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String insert(IWebContext context,
-                        FContentPersistencePage page){
+                        FPersistencePage page){
       return insert(context, page, IPublicPage.XOBJECT_FORM);
    }
 
@@ -84,7 +84,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String update(IWebContext context,
-                        FContentPersistencePage page){
+                        FPersistencePage page){
       return update(context, page, IPublicPage.XOBJECT_FORM);
    }
 
@@ -97,7 +97,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String delete(IWebContext context,
-                        FContentPersistencePage page){
+                        FPersistencePage page){
       return delete(context, page, IPublicPage.PROCESS_END_DELETE);
    }
 
@@ -110,7 +110,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String sort(IWebContext context,
-                      FContentPersistencePage page){
+                      FPersistencePage page){
       return sort(context, page, IPublicPage.XOBJECT_SORT);
    }
 
@@ -123,7 +123,7 @@ public class FContentPersistenceAction
    //============================================================
    @Override
    public String buildAll(IWebContext context,
-                          FContentPersistencePage page){
+                          FPersistencePage page){
       // 设置代码生成参数
       SPersistenceBuildArgs args = new SPersistenceBuildArgs();
       args.setActionCd(EPersistenceAction.All);

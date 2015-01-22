@@ -1,6 +1,7 @@
 package org.mo.cloud.design.core.persistence;
 
 import org.mo.cloud.design.core.configuration.FContentNode;
+import org.mo.cloud.design.core.persistence.common.XPersistence;
 import org.mo.com.lang.EResult;
 
 //============================================================
@@ -8,6 +9,24 @@ import org.mo.com.lang.EResult;
 //============================================================
 public interface IPersistenceConsole
 {
+   //============================================================
+   // <T>获得列表集合。</T>
+   //
+   // @param storgeName 存储名称
+   // @return 列表集合
+   //============================================================
+   XPersistence[] list(String storgeName);
+
+   //============================================================
+   // <T>根据名称获得列表。</T>
+   //
+   // @param storgeName 存储名称
+   // @param listName 列表名称
+   // @return 列表
+   //============================================================
+   XPersistence find(String storgeName,
+                     String listName);
+
    //============================================================
    // <T>查找持久对象。</T>
    //
@@ -24,7 +43,7 @@ public interface IPersistenceConsole
    // @param nodeName 节点名称
    // @return 内容节点
    //============================================================
-   FContentNode find(String name);
+   FContentNode findNode(String name);
 
    //============================================================
    // <T>构建处理。</T>

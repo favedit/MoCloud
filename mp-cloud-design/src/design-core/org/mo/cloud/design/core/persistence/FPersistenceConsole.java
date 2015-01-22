@@ -5,11 +5,13 @@ import org.mo.cloud.design.core.configuration.FContentObject;
 import org.mo.cloud.design.core.configuration.FContentObjects;
 import org.mo.cloud.design.core.configuration.FContentSpace;
 import org.mo.cloud.design.core.configuration.IConfigurationConsole;
+import org.mo.cloud.design.core.persistence.common.XPersistence;
 import org.mo.com.io.FStringFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
@@ -50,6 +52,49 @@ public class FPersistenceConsole
    // 持久化字典
    protected FDictionary<FPersistence> _persistences = new FDictionary<FPersistence>(FPersistence.class);
 
+   // 列表
+   protected FDictionary<XPersistence> _contents = new FDictionary<XPersistence>(XPersistence.class);
+
+   //============================================================
+   // <T>获得列表集合。</T>
+   //
+   // @param storgeName 存储名称
+   // @return 列表集合
+   //============================================================
+   @Override
+   public XPersistence[] list(String storgeName){
+      FObjects<XPersistence> results = new FObjects<XPersistence>(XPersistence.class);
+      FContentSpace space = _configurationConsole.getSpace(storgeName, _spaceName);
+      for(INamePair<FContentNode> pair : space.contents()){
+         FContentNode node = pair.value();
+         String listName = node.name();
+         XPersistence xlist = find(storgeName, listName);
+         results.push(xlist);
+      }
+      return results.toObjects();
+   }
+
+   //============================================================
+   // <T>根据名称获得列表。</T>
+   //
+   // @param storgeName 存储名称
+   // @param listName 列表名称
+   // @return 列表
+   //============================================================
+   @Override
+   public XPersistence find(String storgeName,
+                            String listName){
+      String code = storgeName + "|" + listName;
+      XPersistence xpersistence = _contents.find(code);
+      if(xpersistence == null){
+         FPersistence persistence = findPersistence(storgeName, _spaceName);
+         FContentNode node = _configurationConsole.getNode(storgeName, _spaceName, listName);
+         xpersistence = persistence.convertInstance(node.config());
+         _contents.set(code, xpersistence);
+      }
+      return xpersistence;
+   }
+
    //============================================================
    // <T>查找持久对象。</T>
    //
@@ -80,7 +125,7 @@ public class FPersistenceConsole
    // @return 内容节点
    //============================================================
    @Override
-   public FContentNode find(String name){
+   public FContentNode findNode(String name){
       return _configurationConsole.getNode(_storageName, _spaceName, name);
    }
 

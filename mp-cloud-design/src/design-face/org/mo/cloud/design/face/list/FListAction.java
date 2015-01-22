@@ -1,4 +1,4 @@
-package org.mo.cloud.design.face.frame;
+package org.mo.cloud.design.face.list;
 
 import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationAction;
 
@@ -6,12 +6,12 @@ import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>内容表单处理。</T>
+// <T>内容列表处理。</T>
 //============================================================
-public class FContentFrameAction
+public class FListAction
       extends FAbstractConfigurationAction
       implements
-         IContentFrameAction
+         IListAction
 {
    // 目录页面
    public final static String PAGE_CATALOG = "Catalog";
@@ -22,9 +22,9 @@ public class FContentFrameAction
    //============================================================
    // <T>构造内容列表处理。</T>
    //============================================================
-   public FContentFrameAction(){
+   public FListAction(){
       _storageName = "cloud";
-      _spaceName = "design.frame";
+      _spaceName = "design.list";
    }
 
    //============================================================
@@ -36,7 +36,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String catalog(IWebContext context,
-                         FContentFramePage page){
+                         FListPage page){
       return catalog(context, page, PAGE_CATALOG);
    }
 
@@ -49,7 +49,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String list(IWebContext context,
-                      FContentFramePage page){
+                      FListPage page){
       return list(context, page, IPublicPage.XOBJECT_FORM);
    }
 
@@ -62,7 +62,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String insert(IWebContext context,
-                        FContentFramePage page){
+                        FListPage page){
       return insert(context, page, IPublicPage.XOBJECT_FORM);
    }
 
@@ -75,7 +75,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String update(IWebContext context,
-                        FContentFramePage page){
+                        FListPage page){
       return update(context, page, IPublicPage.XOBJECT_FORM);
    }
 
@@ -88,7 +88,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String delete(IWebContext context,
-                        FContentFramePage page){
+                        FListPage page){
       return delete(context, page, IPublicPage.PROCESS_END_DELETE);
    }
 
@@ -101,7 +101,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String sort(IWebContext context,
-                      FContentFramePage page){
+                      FListPage page){
       return sort(context, page, IPublicPage.XOBJECT_SORT);
    }
 
@@ -114,7 +114,7 @@ public class FContentFrameAction
    //============================================================
    @Override
    public String buildAll(IWebContext context,
-                          FContentFramePage page){
+                          FListPage page){
       //      // 设置代码生成参数
       //      SContentPersistenceBuildArgs args = new SContentPersistenceBuildArgs();
       //      args.setActionCd(EContentPersistenceAction.All);

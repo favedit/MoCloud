@@ -5,6 +5,7 @@ import org.mo.cloud.design.core.configuration.FContentObject;
 import org.mo.cloud.design.core.configuration.FContentObjects;
 import org.mo.cloud.design.core.configuration.FContentSpace;
 import org.mo.cloud.design.core.configuration.IConfigurationConsole;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.INamePair;
@@ -27,7 +28,7 @@ import org.mo.web.protocol.context.IWebOutput;
 public class FAbstractConfigurationService
       extends FAbstractConfigurationBase
       implements
-         IContentConfigurationService
+         IConfigurationService
 {
    // 存储名称
    protected String _storageName;
@@ -160,9 +161,9 @@ public class FAbstractConfigurationService
    // @param output 网络输出
    //============================================================
    @Override
-   public void catalog(IWebContext context,
-                       IWebInput input,
-                       IWebOutput output){
+   public EResult catalog(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
       // 获得内容空间
       FContentSpace space = _configurationConsole.findSpace(_storageName, _spaceName);
       // 建立目录节点
@@ -190,6 +191,7 @@ public class FAbstractConfigurationService
       }
       // 控制排序
       outputNodes.sortByAttribute("label");
+      return EResult.Success;
    }
 
    //============================================================
@@ -200,9 +202,9 @@ public class FAbstractConfigurationService
    // @param output 网络输出
    //============================================================
    @Override
-   public void list(IWebContext context,
-                    IWebInput input,
-                    IWebOutput output){
+   public EResult list(IWebContext context,
+                       IWebInput input,
+                       IWebOutput output){
       // 获得选中的内容
       FXmlNode selectNode = getSelectNode(input);
       FAttributes nodeAttrs = new FAttributes();
@@ -251,6 +253,7 @@ public class FAbstractConfigurationService
          node.set("is_valid", xcomponent.get("is_valid"));
          outputNodes.push(node);
       }
+      return EResult.Success;
    }
 
    //============================================================
@@ -261,9 +264,9 @@ public class FAbstractConfigurationService
    // @param output 网络输出
    //============================================================
    @Override
-   public void insert(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult insert(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
       // 获得上传数据
       FXmlNode envNode = getEnvironmentNode(input);
       FXmlNode dataNode = getDataNode(input);
@@ -325,6 +328,7 @@ public class FAbstractConfigurationService
       }
       // 设置页面转向
       RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
+      return EResult.Success;
    }
 
    //============================================================
@@ -335,9 +339,9 @@ public class FAbstractConfigurationService
    // @param output 网络输出
    //============================================================
    @Override
-   public void update(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult update(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
       // 获得上传数据
       FXmlNode envNode = getEnvironmentNode(input);
       // 判断操作类型
@@ -349,6 +353,7 @@ public class FAbstractConfigurationService
       }else{
          throw new FFatalError("Unknown select type. (type={1})", type);
       }
+      return EResult.Success;
    }
 
    //============================================================
@@ -359,9 +364,9 @@ public class FAbstractConfigurationService
    // @param output 网络输出
    //============================================================
    @Override
-   public void delete(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult delete(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
       // 获得上传数据
       FXmlNode envNode = getEnvironmentNode(input);
       // 判断操作类型
@@ -393,6 +398,7 @@ public class FAbstractConfigurationService
       // 刷新树目录
       RServiceResult.setTreeParentRefresh(output);
       RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
+      return EResult.Success;
    }
 
    //============================================================
@@ -403,9 +409,9 @@ public class FAbstractConfigurationService
    // @param output 网络输出
    //============================================================
    @Override
-   public void sort(IWebContext context,
-                    IWebInput input,
-                    IWebOutput output){
+   public EResult sort(IWebContext context,
+                       IWebInput input,
+                       IWebOutput output){
       // 获得环境对象
       FXmlNode envNode = input.config().findNode("Environment");
       if(envNode == null){
@@ -441,7 +447,9 @@ public class FAbstractConfigurationService
       // 刷新树目录节点
       RServiceResult.setTreeRefresh(output);
       RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_SUCCESS);
+      return EResult.Success;
    }
+
    //   //============================================================
    //   @SuppressWarnings("unchecked")
    //   protected void insertCollection(IXmlConfigConsole<X> console,

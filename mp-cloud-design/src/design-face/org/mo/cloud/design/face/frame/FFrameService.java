@@ -5,15 +5,15 @@ import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationServi
 //============================================================
 // <T>内容表单服务。</T>
 //============================================================
-public class FContentFrameService
+public class FFrameService
       extends FAbstractConfigurationService
       implements
-         IContentFrameService
+         IFrameService
 {
    //============================================================
    // <T>构造内容表单服务。</T>
    //============================================================
-   public FContentFrameService(){
+   public FFrameService(){
       _storageName = "cloud";
       _spaceName = "design.frame";
    }

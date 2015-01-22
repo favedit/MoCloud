@@ -5,7 +5,7 @@ import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationPage;
 //============================================================
 // <T>内容持久化页面。</T>
 //============================================================
-public class FContentPersistencePage
+public class FPersistencePage
       extends FAbstractConfigurationPage
 {
 }

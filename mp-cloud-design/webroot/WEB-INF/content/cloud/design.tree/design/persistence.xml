@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="system.culture.Language" update_date="20141209154356">
-   <TreeView _uuid="546ec2d1-4117-405e-a36c-e960a9ecdd71" name="content.design.persistence" label="M#12cn19内容-设计-持久化" is_valid="Y" note="M#" is_config="N" disp_checked="N" service="catalog@content.design.persistence">
-     <TreeNodeType _uuid="06e04a4e-3872-4975-9d24-e7f30a3e503c" name="persistence" label="M#12cn14组件集合" is_valid="Y" note="M#" type="collection" type_name="persistence" icon="#design.persistence.persistence" action="list" attributes="form_name=content.persistence.PersistenceForm" />
-     <TreeNodeType _uuid="400a321a-546e-4977-b45a-0fb84e0069ac" name="component" label="M#12cn12组件" is_valid="Y" note="M#" type="component" type_name="component" icon="#design.persistence.component" action="list" attributes="form_name=content.persistence.ComponentForm" />
-     <TreeNodeType _uuid="3c61bf39-9865-446f-9c7c-6d30b4b0fe15" name="interface" label="M#12cn13虚组件" is_valid="Y" note="M#" type="component" type_name="interface" icon="#design.persistence.interface" action="list" attributes="form_name=content.persistence.InterfaceForm" />
-     <TreeNodeType _uuid="d3fdcfc0-d8fb-437e-a9a7-8543f8dddb57" name="attribute" label="M#12cn12属性" is_valid="Y" note="M#" type="component" type_name="attribute" icon="#design.persistence.attribute" attributes="form_name=content.persistence.AttributeForm" />
+   <TreeView name="design.persistence" label="设计-持久化-定义" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@cloud.design.persistence">
+     <TreeNodeType name="persistence" label="持久化" is_valid="Y" note="" icon="design.persistence.persistence" action="list" attributes="type=collection;form_name=content.persistence.PersistenceForm" />
+     <TreeNodeType name="component" label="组件" is_valid="Y" note="" icon="design.persistence.component" action="list" attributes="type=component;form_name=content.persistence.ComponentForm" />
+     <TreeNodeType name="interface" label="接口" is_valid="Y" note="" icon="design.persistence.interface" action="list" attributes="type=component;form_name=content.persistence.InterfaceForm" />
+     <TreeNodeType name="attribute" label="属性" is_valid="Y" note="" icon="design.persistence.attribute" attributes="type=component;form_name=content.persistence.AttributeForm" />
    </TreeView>
 </Content>

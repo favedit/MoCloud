@@ -1,12 +1,12 @@
 package org.mo.cloud.design.face.list;
 
-import org.mo.cloud.design.core.configuration.common.IContentConfigurationService;
+import org.mo.cloud.design.core.configuration.common.IConfigurationService;
 
 //============================================================
 // <T>内容列表服务接口。</T>
 //============================================================
-public interface IContentListService
+public interface IListService
       extends
-         IContentConfigurationService
+         IConfigurationService
 {
 }

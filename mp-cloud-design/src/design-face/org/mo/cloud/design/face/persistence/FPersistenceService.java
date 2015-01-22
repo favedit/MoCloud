@@ -5,15 +5,15 @@ import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationServi
 //============================================================
 // <T>内容持久化服务。</T>
 //============================================================
-public class FContentPersistenceService
+public class FPersistenceService
       extends FAbstractConfigurationService
       implements
-         IContentPersistenceService
+         IPersistenceService
 {
    //============================================================
    // <T>构造内容持久化服务。</T>
    //============================================================
-   public FContentPersistenceService(){
+   public FPersistenceService(){
       _storageName = "cloud";
       _spaceName = "design.persistence";
    }

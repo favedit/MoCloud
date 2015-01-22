@@ -7,11 +7,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.persistence'
-         face  = 'org.mo.cloud.design.face.persistence.IContentPersistenceService'/>
+         face  = 'org.mo.cloud.design.face.persistence.IPersistenceService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.persistence.IContentPersistenceService'
-         class = 'org.mo.cloud.design.face.persistence.FContentPersistenceService'
+         face  = 'org.mo.cloud.design.face.persistence.IPersistenceService'
+         class = 'org.mo.cloud.design.face.persistence.FPersistenceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -19,11 +19,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.list'
-         face  = 'org.mo.cloud.design.face.list.IContentListService'/>
+         face  = 'org.mo.cloud.design.face.list.IListService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.list.IContentListService'
-         class = 'org.mo.cloud.design.face.list.FContentListService'
+         face  = 'org.mo.cloud.design.face.list.IListService'
+         class = 'org.mo.cloud.design.face.list.FListService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -31,11 +31,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.dataset'
-         face  = 'org.mo.cloud.design.face.dataset.IContentDatasetService'/>
+         face  = 'org.mo.cloud.design.face.dataset.IDatasetService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.dataset.IContentDatasetService'
-         class = 'org.mo.cloud.design.face.dataset.FContentDatasetService'
+         face  = 'org.mo.cloud.design.face.dataset.IDatasetService'
+         class = 'org.mo.cloud.design.face.dataset.FDatasetService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -43,11 +43,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.tree'
-         face  = 'org.mo.cloud.design.face.tree.IContentTreeService'/>
+         face  = 'org.mo.cloud.design.face.tree.ITreeService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.tree.IContentTreeService'
-         class = 'org.mo.cloud.design.face.tree.FContentTreeService'
+         face  = 'org.mo.cloud.design.face.tree.ITreeService'
+         class = 'org.mo.cloud.design.face.tree.FTreeService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -55,11 +55,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.frame'
-         face  = 'org.mo.cloud.design.face.frame.IContentFrameService'/>
+         face  = 'org.mo.cloud.design.face.frame.IFrameService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.frame.IContentFrameService'
-         class = 'org.mo.cloud.design.face.frame.FContentFrameService'
+         face  = 'org.mo.cloud.design.face.frame.IFrameService'
+         class = 'org.mo.cloud.design.face.frame.FFrameService'
          scope = 'global'/>
 
 </Config>
