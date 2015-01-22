@@ -1,6 +1,6 @@
 @CLS
 
-@SET HOME=E:\Git\MoCloud
+@SET HOME=%cd%
 @SET HOME_SOURCE=%HOME%\library
 
 @SET HOME_TARGET=%HOME%\mp-cloud-develop\webroot\WEB-INF\lib\

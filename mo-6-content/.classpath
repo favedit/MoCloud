@@ -6,7 +6,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-3-logic"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-4-web"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/mo-3-externals"/>
 	<classpathentry kind="lib" path="lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-5-cloud"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

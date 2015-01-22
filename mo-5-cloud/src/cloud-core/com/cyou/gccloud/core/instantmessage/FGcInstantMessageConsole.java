@@ -11,7 +11,6 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.eng.instantmessag.IImConnection;
 import org.mo.eng.instantmessag.SImConnectParams;
 import org.mo.eng.instantmessag.SImLoginParams;
-import org.mo.external.network.xmpp.smack.FXmppConnection;
 
 //============================================================
 // <T>即时消息控制台。</T>
@@ -102,10 +101,10 @@ public class FGcInstantMessageConsole
       _connectParams.setPort(_port);
       _connectParams.setDomain(_domain);
       // 创建账号管理链接
-      _accountConnection = new FXmppConnection();
+      //_accountConnection = new FXmppConnection();
       _accountConnection.connect(_connectParams);
       // 创建聊天管理链接
-      _chatConnection = new FXmppConnection();
+      //_chatConnection = new FXmppConnection();
       // _chatConnection.connect(_connectParams);
       // 登录聊天管理连接
       _loginParams = new SImLoginParams();

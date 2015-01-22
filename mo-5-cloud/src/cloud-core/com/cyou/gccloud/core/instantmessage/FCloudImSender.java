@@ -10,7 +10,6 @@ import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.monitor.common.FAbstractMonitor;
 import org.mo.eng.instantmessag.SImConnectParams;
-import org.mo.external.network.gamecollege.internal.FCyouImSender;
 
 public class FCloudImSender
       extends FAbstractMonitor
@@ -21,8 +20,10 @@ public class FCloudImSender
    {
    }
 
+   @SuppressWarnings("unused")
    private static final int DefaultConnect = 10000;
 
+   @SuppressWarnings("unused")
    private static final int DefaultInterval = 200;
 
    // 日志输出接口
@@ -40,7 +41,7 @@ public class FCloudImSender
 
    private int _delayCount = 6000;
 
-   private FCyouImSender _sender = null;
+   //private FCyouImSender _sender = null;
 
    private SImConnectParams _connectParams = null;
 
@@ -49,12 +50,12 @@ public class FCloudImSender
       _valid = true;
       _interval = 10;
       _sendCache = new SendCache();
-      _sender = new FCyouImSender();
+      //_sender = new FCyouImSender();
    }
 
    private void setup(){
-      _sender.setAddress(_localAddress);
-      _sender.setUrl(_connUrl, _sendUrl);
+      //_sender.setAddress(_localAddress);
+      //_sender.setUrl(_connUrl, _sendUrl);
       //connect();
    }
 
@@ -85,14 +86,14 @@ public class FCloudImSender
 
    public void setLocalAddress(InetAddress addr){
       _localAddress = addr;
-      _sender.setAddress(_localAddress);
+      //_sender.setAddress(_localAddress);
    }
 
    public void setUrl(String connUrl,
                       String sendUrl){
       _connUrl = connUrl;
       _sendUrl = sendUrl;
-      _sender.setUrl(_connUrl, _sendUrl);
+      //_sender.setUrl(_connUrl, _sendUrl);
    }
 
    public void setDelayCount(int count){
@@ -152,25 +153,26 @@ public class FCloudImSender
    }
 
    private void doWork(SGcImMessage im){
-      _sender.setSendInfo(im.sourceId(), im.targetId(), im.targetPassport(), im.pack());
-      _sender.send();
+      //_sender.setSendInfo(im.sourceId(), im.targetId(), im.targetPassport(), im.pack());
+      //_sender.send();
    }
 
    private void connect(){
-      String param = String.format("local address={%s}, connect url={%s}, send url={%s}", ((null == _localAddress) ? "default" : _localAddress.getHostAddress()), _connUrl, _sendUrl);
-      String code = _sender.connect();
+      @SuppressWarnings("unused") String param = String.format("local address={%s}, connect url={%s}, send url={%s}", ((null == _localAddress) ? "default" : _localAddress.getHostAddress()), _connUrl, _sendUrl);
+      //String code = _sender.connect();
 
-      if(code != null){
-         if(parse(code)){
-            setInterval(DefaultInterval);
-            _logger.print(this, "connect", "cloud im service connect.({1})", param);
-         }
-      }else{
-         setInterval(DefaultConnect);
-         _logger.warn(this, "connect", "cloud im service connect false.({1})", param);
-      }
+      //if(code != null){
+      //   if(parse(code)){
+      //      setInterval(DefaultInterval);
+      //      _logger.print(this, "connect", "cloud im service connect.({1})", param);
+      //   }
+      //}else{
+      //   setInterval(DefaultConnect);
+      //   _logger.warn(this, "connect", "cloud im service connect false.({1})", param);
+      //}
    }
 
+   @SuppressWarnings("unused")
    private boolean parse(String code){
 
       try{

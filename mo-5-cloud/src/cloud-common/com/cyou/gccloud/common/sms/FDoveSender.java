@@ -4,7 +4,6 @@ import com.cyou.gccloud.common.TAsynBlock;
 import java.net.InetAddress;
 import org.mo.core.monitor.common.FAbstractMonitor;
 import org.mo.eng.sms.FSms;
-import org.mo.external.network.cyou.dove.FDoveSmsSender;
 
 class FDoveSender
       extends FAbstractMonitor
@@ -13,30 +12,30 @@ class FDoveSender
 
    private InetAddress _localAddress = null;
 
-   private FDoveSmsSender _sender = null;
+   //private FDoveSmsSender _sender = null;
 
    public FDoveSender(){
       _name = "dove.sender";
       _valid = true;
       _interval = 10;
       _sendCache = new SendCache();
-      _sender = new FDoveSmsSender();
+      //_sender = new FDoveSmsSender();
    }
 
    @Override
    public void initialize(){
 
       if(_localAddress != null){
-         _sender.setup(_localAddress);
+         //_sender.setup(_localAddress);
       }
       super.initialize();
    }
 
    public void setLocalAddress(InetAddress addr){
       _localAddress = addr;
-      if(_sender != null){
-         _sender.setup(_localAddress);
-      }
+      //if(_sender != null){
+      //_sender.setup(_localAddress);
+      //}
    }
 
    public void send(FSms sms){
@@ -56,8 +55,8 @@ class FDoveSender
    }
 
    private void doWork(FSms sms){
-      _sender.setSendInfo(sms.note(), sms.code());
-      _sender.send();
+      //_sender.setSendInfo(sms.note(), sms.code());
+      //_sender.send();
    }
 
    private class SendCache
