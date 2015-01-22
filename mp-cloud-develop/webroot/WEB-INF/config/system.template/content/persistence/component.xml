@@ -4,8 +4,8 @@
   <Source _uuid="fUbHjVep9[tdB6xKnW30rA" is_valid="Y" note="M#"><![CDATA[package <jt:item source='$component.class' format='class.package'/>;
 
 import org.mo.com.lang.face.AName;
-import org.mo.content.core.configuration.FContentField;
-import org.mo.content.core.configuration.XContentObject;
+import org.mo.cloud.design.core.configuration.FContentField;
+import org.mo.cloud.design.core.configuration.XContentObject;
 
 //============================================================
 // <T><jt:item source='$component.label'/>对象的内容基类。</T>
@@ -17,6 +17,11 @@ public abstract class <jt:item source='$component.class' format='class.name'/> e
    // 组件名称
    public static final String NAME = "<jt:item source='$component.name'/>";
 
+<jt:loop source='$attributes' order='asc' alias='attribute'>
+   // <jt:item source="$attribute.label"/>的定义
+   public final static FContentField Field<jt:item source='$attribute.name' format='class'/> = new FContentField("<jt:item source='$attribute.name'/>");
+
+</jt:loop>
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -35,11 +40,6 @@ public abstract class <jt:item source='$component.class' format='class.name'/> e
       return NAME.equals(xinstance.contentClass().name());
    }
 
-<jt:loop source='$attributes' order='asc' alias='attribute'>
-   // <jt:item source="$attribute.label"/>的定义
-   public final static FContentField Field<jt:item source='$attribute.name' format='class'/> = new FContentField("<jt:item source='$attribute.name'/>");
-
-</jt:loop>
 <jt:loop source='$attributes' order='asc' alias='attribute'>
 <jt:false source='$attribute.is_abstract'>
    // <jt:item source="$attribute.label"/>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design.persistence" update_date="20150122124152">
+  <Persistence _type="Persistence" is_valid="Y" name="content.persistence" label="持久定义" template="" source="${output.design}/src/design-core" note="" _status="I">
+    <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.design.core.persistence.common.XObject" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Interface>
+    <Component is_valid="Y" name="Package" label="持久化分组" class_name="org.mo.cloud.design.core.persistence.common.XPackage" base_name="org.mo.cloud.design.core.persistence.base.XBasePackage" inherits="IObject" note="" />
+    <Component is_valid="Y" name="Persistence" label="持久化对象" class_name="org.mo.cloud.design.core.persistence.common.XPersistence" base_name="org.mo.cloud.design.core.persistence.base.XBasePersistence" inherits="IObject" note="" />
+    <Component is_valid="Y" name="Component" label="组件" class_name="org.mo.cloud.design.core.persistence.common.XComponent" base_name="org.mo.cloud.design.core.persistence.base.XBaseComponent" inherits="IObject" note="" />
+    <Component is_valid="Y" name="Interface" label="接口" class_name="org.mo.cloud.design.core.persistence.common.XInterface" base_name="org.mo.cloud.design.core.persistence.base.XBaseInterface" inherits="IObject" note="" />
+  </Persistence>
+</Content>
