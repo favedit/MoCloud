@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="4fcef184-e3b9-4410-a1a9-a818b73f4f2e" name="data.system.version.resource" label="M#12cn17系统版本资源表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.System.Version.Resource" data_name="DT_SYS_VERSION_RESOURCE" data_alias="DT_SYS_VER_RES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="c351f32f-679f-479a-8bf4-17293ba6b8e5" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.system.project" />
+  <FieldRecordId _uuid="85da0bca-0b08-4723-8295-7ec06e26f1cc" name="version_id" label="M#12cn14版本编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VERSION_ID" data_alias="VER" data_refer="data.system.version" />
+  <FieldString _uuid="faf3da7b-fb0f-414d-ad54-adf72377a5d7" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="054313b8-5269-416d-ab1c-282d2b8b47ff" name="download_url" label="M#12cn14下载地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_URL" data_size="800" />
+  <FieldInteger _uuid="2f1a91e1-864e-414c-adc6-28b8f1c542fb" name="download_size" label="M#12cn14下载大小" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_SIZE" />
+  <FieldString _uuid="e1a17c9f-30b7-4b25-9532-470d59f58cb2" name="download_custom_url" label="M#12cn16指定下载地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_CUSTOM_URL" data_size="800" />
+  <FieldString _uuid="05f04fbb-7834-49b6-b5ec-28cc2a4387b3" name="note" label="M#12cn14备注信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="19ad3f0b-9f16-4add-90da-83192f07872e" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

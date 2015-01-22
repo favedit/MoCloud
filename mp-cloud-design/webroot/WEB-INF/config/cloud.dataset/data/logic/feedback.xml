@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="eef78110-162d-4977-a544-48d6a1f6e4ac" name="data.logic.feedback" label="M#12cn15业务反馈表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.Feedback" data_name="DT_LGC_FEEDBACK" data_alias="TASK" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="38b3d1a7-0b7e-42be-8263-73cda7f660cb" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
+  <FieldRecordId _uuid="bbef644c-8bd8-418f-85b1-e2dc488508be" name="version_id" label="M#12cn14版本编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VERSION_ID" />
+  <FieldRecordId _uuid="75d5c766-603c-406b-882e-b710e541e228" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldContent _uuid="bc091a7a-d08b-4226-a8b6-4efa73d0bd82" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldString _uuid="3007111e-20a9-44ab-a488-bdac2a52c07e" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="f3f22c48-8f2a-46b1-b9d7-14df57820306" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

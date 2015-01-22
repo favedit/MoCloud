@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="31dc08b0-cb15-4dd7-8931-0d2dba8ba9f5" name="logger.resource.operation" label="M#12cn17资源操作日志表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="logger" data_factory="Game.MoGameStorage" data_name="LG_RES_OPERATION" data_alias="LG_RES_OPT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="ba2502a1-02bb-427c-b1e3-216b3689a605" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" />
+  <FieldRecordId _uuid="9a6c788c-faa6-4e17-8295-d717dbedd540" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldInteger _uuid="528129f2-d02e-4874-b281-2745837d3289" name="operation_cd" label="M#12cn14操作代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OPERATION_CD" />
+  <FieldString _uuid="9cdba955-d1d6-4b86-873b-bc3a49ad7a2f" name="parameters" label="M#12cn14参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS" data_size="800" />
+  <FieldTemplate _uuid="7dcf3f2b-806c-42f7-b20d-8596e4a3c332" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

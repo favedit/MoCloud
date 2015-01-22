@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="060d0602-c701-409c-beb0-d660a3a277e1" name="statistics.logger.activity" label="M#12cn17业务活动统计表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Logic.Activity" data_name="ST_LGC_ACTIVITY" data_alias="ST_LGC_ACT" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics">
+  <FieldRecordId _uuid="d61787ee-1a25-4cc3-97f1-af52515488cc" name="activity_id" label="M#12cn14活动编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="ACTIVITY_ID" data_alias="ACT" data_uniques="DATE" />
+  <FieldInteger _uuid="95fbc707-a0c6-4332-8da6-25b05bc86889" name="join_total" label="M#12cn14参加总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="JOIN_TOTAL" />
+  <FieldInteger _uuid="9d8fd83e-80a5-416c-b587-e4154c4b518d" name="join_count" label="M#12cn14参加人数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="JOIN_COUNT" />
+  <FieldInteger _uuid="53542015-90cb-4c4c-933f-6bdd6952614c" name="submit_total" label="M#12cn16提交作品总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SUBMIT_TOTAL" />
+  <FieldInteger _uuid="785b0595-7b02-4af2-b18b-31560959ff83" name="submit_count" label="M#12cn16提交作品个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SUBMIT_COUNT" />
+  <FieldTemplate _uuid="de9f4649-4bc7-4a77-8054-8c77946557de" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

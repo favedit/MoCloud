@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="c9fcfc75-391e-4483-97ec-955afec559c2" name="data.system.version" label="M#12cn15系统版本表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.System.Version" data_name="DT_SYS_VERSION" data_alias="DT_SYS_VER" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="923a3a8f-5a23-4ef4-8f59-023e6ec48e87" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.system.project" />
+  <FieldString _uuid="4db14903-1502-442d-a324-667375cfd1f9" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="b9fb262b-66cc-40b5-9230-975e7a413a0f" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldInteger _uuid="2536a0ba-cb99-47e9-8f7a-c0c51b645964" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldInteger _uuid="71b2bdea-6dad-48fd-85d6-e0e4ac8e0005" name="force_cd" label="M#12cn14强制类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FORCE_CD" />
+  <FieldDateTime _uuid="8e6c4343-6359-4814-ad48-46a2e8408166" name="begin_date" label="M#12cn14开始时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BEGIN_DATE" />
+  <FieldDateTime _uuid="c5603cbf-93fb-42e2-be5a-66b2968dc7a4" name="end_date" label="M#12cn14结束时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="END_DATE" />
+  <FieldContent _uuid="81af4f77-46a8-4f22-af2a-d393fd4f923b" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldString _uuid="658cfc4d-75b1-422b-a889-fb46a547c407" name="note" label="M#12cn14备注信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="800" />
+  <FieldTemplate _uuid="ec91bf15-346e-4e82-800f-a3de26e1eba4" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

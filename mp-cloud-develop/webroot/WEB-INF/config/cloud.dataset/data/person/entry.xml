@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="11951ab5-0138-4167-abda-64c8a90f9778" name="data.person.entry" label="M#12cn15用户入口表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.Entry" data_name="DT_PSN_ENTRY" data_alias="DT_PSN_ENT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldInteger _uuid="e0937c04-2f20-4a32-b99f-6d7652302f0f" name="from_cd" label="M#12cn14来源类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FROM_CD" />
+  <FieldString _uuid="a034fae0-3c95-4b8c-88cd-4bb325df4b37" name="passport" label="M#12cn13通行证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="80" />
+  <FieldString _uuid="87ab883d-1923-4b5e-9dba-672b9e9fefe9" name="password" label="M#12cn12密码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="80" />
+  <FieldInteger _uuid="c370864b-5675-47b7-beb1-f29d1c6556a3" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldRecordId _uuid="3e861885-73f5-4123-8e77-80b5876b0dec" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldTemplate _uuid="786dd279-b690-4d4e-b0e8-d9c7042528bd" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="715f8ce2-9ed3-47e4-89c4-4b29e1113548" name="data.person.user.star" label="M#12cn15用户明星表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_PSN_USER_STAR" data_alias="DT_PSN_USER_ST" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="4c4f6159-4aac-47e3-ba2e-82b4963c68f4" name="user_id" label="M#12cn14用户编码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldString _uuid="c1145eef-4981-4ddb-9604-175a4c430958" name="star_img_url" label="M#12cn16明星头像地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STAR_IMG_URL" data_alias="STAR_IMG" data_size="200" />
+  <FieldContent _uuid="aa559376-2a9d-490b-a89d-dcdf874eebf4" name="star_introduce" label="M#12cn14明星简介" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STAR_INTRODUCE" data_alias="STAR_INTRO" />
+  <FieldString _uuid="20bcef09-e008-440a-b176-716211c087e6" name="job_design" label="M#12cn14职位描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="JOB_DESIGN" data_alias="JOB_DES" data_size="200" />
+  <FieldInteger _uuid="a2243d3a-2b15-4572-935f-f2802fcd3619" name="score" label="M#12cn12得分" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE" data_alias="SCO" />
+  <FieldInteger _uuid="b9001a79-2372-4d82-8c7f-7caa6017f9f9" name="role_cd" label="M#12cn12角色" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_CD" data_alias="ROLE" />
+  <FieldTemplate _uuid="0a076fa6-3055-4bcc-9f34-22fe486cc217" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

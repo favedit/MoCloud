@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="98a13fe1-e6a6-416c-8cf9-54b7209abca3" name="data.external.weixin.menu" label="M#12cn14微信菜单" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_ENL_WX_MENU" data_alias="DT_ENL_WX_MEN" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="c6e8cb4a-ebbb-4cc7-adad-88a43eef5f6a" name="parent_id" label="M#12cn15父菜单编码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARENT_ID" data_alias="PRT" data_refer="data.external.weixin.menu" />
+  <FieldString _uuid="9954fa16-0a97-4cc2-9e49-9c9497e116b0" name="label" label="M#12cn14菜单名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldRecordId _uuid="411fcf8f-98d7-4854-813f-ec332356cd24" name="keyword_id" label="M#12cn15关键字编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORD_ID" data_alias="KEY" data_refer="data.external.weixin.keyword" />
+  <FieldInteger _uuid="24bbc192-4eae-4897-8504-183844820586" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
+  <FieldString _uuid="53867257-2e06-4473-bdff-a84ad46a6eed" name="link_url" label="M#12cn14连接地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_URL" data_size="1000" />
+  <FieldInteger _uuid="5cb7eaac-8bf6-4855-99e5-8c15d372cb31" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldInteger _uuid="e294718c-e05e-4841-a2a1-790d2aee7bda" name="view_count" label="M#12cn14查看次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
+  <FieldTemplate _uuid="fb4e6527-2cb6-4259-9b96-427761a14dbf" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="9022eeef-2963-4db0-b0cd-ff3d20690468" name="data.person.user.guide" label="M#12cn15用户引导表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Guide" data_name="DT_PSN_USER_GUIDE" data_alias="DT_PSN_USR_GUD" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="c14e1e84-660e-4468-91ef-99de4080b73d" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="50e7677e-4d49-427a-9ee7-b3de35f7b1fd" name="guide_id" label="M#12cn14引导编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GUIDE_ID" data_alias="GUD" data_refer="data.logic.guide" />
+  <FieldInteger _uuid="44bc0d2c-7d84-41a5-8360-52aa08187c71" name="status_cd" label="M#12cn14状态类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldTemplate _uuid="d6b00480-0f80-4b07-af10-05c71ed0ca08" name="track" label="M#12cn14追踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

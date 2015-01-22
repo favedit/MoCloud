@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="39e6cbc8-dfa4-41c9-9dd0-d0a4b70a45ba" name="data.external.weixin.reply" label="M#12cn15微信回复表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_ENL_WX_REPLY" data_alias="DT_ENL_WX_RPY" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldString _uuid="b12e9617-046b-44ff-8135-c6a8f45848bd" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="82ef1f0e-741c-449d-8f5e-2c4670c1511c" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldInteger _uuid="44443762-ad40-4286-bec3-81489c28dbf7" name="replay_cd" label="M#12cn14回复类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REPLAY_CD" />
+  <FieldRecordId _uuid="fb1ff98f-7278-4a27-ba23-9b97e2fb9252" name="news_id" label="M#12cn14资讯编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NEWS_ID" />
+  <FieldInteger _uuid="662e236d-c565-4de7-b539-d54654028e68" name="view_count" label="M#12cn14查看次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
+  <FieldString _uuid="c71c6157-46a9-4318-b47d-5247508da380" name="note" label="M#12cn14回复内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="d31c4d8a-da0e-455f-b05c-eced17900413" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

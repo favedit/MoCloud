@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="deb2505d-d824-425d-9b9f-77d518089bf6" name="data.external.weixin.user" label="M#12cn15微信用户表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_ENL_WX_USER" data_alias="DT_ENL_WX_USR" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="7ed86a85-75b7-453a-95e5-99a3008d3f53" name="user_id" label="M#12cn14用户编码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldString _uuid="6618192b-e511-486a-876e-c7b342771720" name="open_code" label="M#12cn15微信公开码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OPEN_CODE" data_alias="WX_CODE" data_size="200" />
+  <FieldString _uuid="01821034-6d96-45a6-a883-3c500907e257" name="nick_name" label="M#12cn14用户昵称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NICK_NAME" data_alias="NICK" data_size="200" />
+  <FieldInteger _uuid="871d5c8c-364c-420b-a068-93c3d7567841" name="gender_cd" label="M#12cn14性别代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CD" />
+  <FieldString _uuid="86b5d472-e154-4326-8d21-afadd2e3f104" name="icon_url" label="M#12cn12头像" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldTemplate _uuid="ef5f443c-9e05-4351-bbc0-a5328b13c73f" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

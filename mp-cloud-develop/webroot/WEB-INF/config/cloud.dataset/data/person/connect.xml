@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="1684efc3-8b79-4da6-996c-a2027b64d348" name="data.person.connect" label="M#12cn15用户连接表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.Connect" data_name="DT_PSN_CONNECT" data_alias="DT_PSN_CNT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="37609d68-20e3-4cfe-80a8-c87a0593b326" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.system.project" data_uniques="TOK" />
+  <FieldString _uuid="5c152467-e1ca-419f-b2c7-f0b0b228bfeb" name="token_code" label="M#12cn14鉴定代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="TOKEN_CODE" data_size="80" data_uniques="TOK" />
+  <FieldRecordId _uuid="1c6b2247-e589-4187-ba1a-032b9dc5a66f" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldInteger _uuid="791da573-6c32-4b1d-8c05-0f6ea17dbfab" name="active_cd" label="M#12cn14激活类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
+  <FieldRecordId _uuid="933663c9-fef0-4405-8753-b4d0e729bd00" name="device_id" label="M#12cn14设备编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEVICE_ID" data_alias="DEV" data_refer="data.common.device" />
+  <FieldDouble _uuid="24cde3e2-7384-4181-8b90-1ba8c98404d4" name="gps_latitude" label="M#12cn15GPS纬度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GPS_LATITUDE" />
+  <FieldDouble _uuid="7624fff3-fe42-413d-b95b-eae4c1a1a2c0" name="gps_longitude" label="M#12cn15GPS经度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GPS_LONGITUDE" />
+  <FieldString _uuid="c31f57df-945b-4331-bc8b-60a2bc62bfa0" name="info_pack" label="M#12cn14打包信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INFO_PACK" data_size="200" />
+  <FieldTemplate _uuid="8d7caaf7-b63d-4f49-8233-d8c3919f9fe8" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

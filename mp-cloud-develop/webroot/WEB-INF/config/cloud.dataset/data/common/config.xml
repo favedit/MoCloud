@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="6cc9f957-5540-4e50-88f9-b7f3600856ef" name="data.common.config" label="M#12cn15共通配置表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="data" data_factory="Data.Common.Config" data_name="DT_COM_CONFIG" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" logic_timeout="3600" parent_name="define.store">
+  <FieldString _uuid="f022528b-fd12-4bf5-8a10-4a23a9294b9b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="8b1e7ca3-bee6-4e4c-a346-2e0e06fcc51f" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="012412a2-2e0d-4d08-b22b-1ec8ba79d94e" name="parameter" label="M#12cn12参数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETER" data_size="800" />
+  <FieldString _uuid="0fd8d59c-85dc-4cc4-b900-e153f6d8e42e" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="3faf49ef-0590-4168-a50e-b171f99e2b2f" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

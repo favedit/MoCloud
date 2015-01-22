@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+   <!-- 应用定义 -->
+   <Define name='application'>${application}</Define>
+   <Define name='application.name'>mp-cloud-develop</Define>
+   <Define name='application.root'>${application}/${application.name}</Define>
+   <Define name='application.deploy'>${application}/deploy</Define>
+   <Define name='application.web'>${application}/webroot</Define>
+   <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
+   <Define name='application.space'>${application.web}/WEB-INF/config</Define>
+   <Define name='application.content'>${application.web}/WEB-INF/content</Define>
+   <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
+
+   <!-- 导出路径 -->
+   <Define name='cloud.space'>${application.space}</Define>
+   <Define name='cloud.export.template'>D:/WP-SNS-Work/Temp/Cloud/Configuration/template</Define>
+   <Define name='cloud.export.resource'>D:/WP-SNS-Work/Temp/Export</Define>
+   <Define name='cloud.export.server'>D:/WP-SNS-Work/Server</Define>
+   <Define name='cloud.export.client'>D:/WP-SNS-Work/Temp/Client</Define>
+   <Define name='cloud.export.tools'>D:/WP-SNS-Work/Temp/Tools</Define>
+   <Define name='cloud.export.platform'>${application}/mo-5-cloud/src</Define>
+   <Define name='cloud.export.platform.editor'>${application.root}/src/cloud-core</Define>
+   <Define name='cloud.export.platform.android'>E:/GameCollege/mobile_android/GameCollege/src</Define>
+   <Define name='cloud.export.platform.ios'>E:/GameCollege/mobile_ios/GameCollege/GameCollege/Model</Define>
+   
+   <Define name='export.cloud.develop.editor'>E:/GameCollege/platform/mp-cloud-content/src/cloud-core</Define>
+   <Define name='export.cloud.develop.android'>E:/GameCollege/mobile/GcMobile-Android/GameCollege/src</Define>
+   
+   <!-- 包含：系统设定 -->
+   <Include>${application.config}/common/define.xml</Include>
+   <Include>${application.config}/common/core.xml</Include>
+   <Include>${application.config}/common/engine.xml</Include>
+   <Include>${application.config}/common/data.xml</Include>
+   <Include>${application.config}/common/web.xml</Include>
+   <Include>${application.config}/common/web-face.xml</Include>
+
+   <!-- 包含：核心设定 -->
+   <Include>${application.config}/core/editor.xml</Include>
+   <Include>${application.config}/core/service.xml</Include>
+   <Include>${application.config}/core/face.xml</Include>
+
+   <!-- 包含：内容设定 -->
+   <Include>${application.config}/content/core.xml</Include>
+   <Include>${application.config}/content/data.xml</Include>
+   <Include>${application.config}/content/service.xml</Include>
+
+   <!-- 包含：环境设定 -->
+   <Include>${application.config}/environment/environment-develop.xml</Include>
+</Configuration>

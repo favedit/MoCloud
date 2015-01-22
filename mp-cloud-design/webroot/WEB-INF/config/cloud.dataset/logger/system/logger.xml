@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="18811ad5-0e1a-4b01-9ee6-588a01910341" name="logger.system.logger" label="M#12cn211系统跟踪日志表    " is_valid="Y" note="M#" data_engine="InnoDB" data_group="logger" data_factory="Logger.System.Logger" data_name="LG_SYS_LOGGER" data_alias="LG_SYS_LOG" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldDateTime _uuid="cdc56e4d-010b-4f4a-8eca-953ba58dc10c" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_DATE" />
+  <FieldString _uuid="8dacb8f9-02fa-4b58-bd22-d06deb96fafa" name="server_code" label="M#12cn14服务代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SERVER_CODE" data_size="40" />
+  <FieldRecordId _uuid="5f655ab6-5969-4eb7-9b1f-b19c15d2e599" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldInteger _uuid="154c45cb-afeb-48ed-a160-57eea0e0c79b" name="level_cd" label="M#12cn12级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEVEL_CD" />
+  <FieldString _uuid="e3619681-997c-4fb0-9951-da34d6bb6590" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="CODE" data_size="200" />
+  <FieldString _uuid="4f44b38b-61b5-4ce3-9776-c356bb2d7c5e" name="parameters" label="M#12cn14参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS" data_size="800" />
+  <FieldContent _uuid="ac0facc9-6891-47c2-b624-340efcae6588" name="description" label="M#12cn14描述信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldTemplate _uuid="ac27140e-f6c8-4cc2-9456-0a730247ac2a" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

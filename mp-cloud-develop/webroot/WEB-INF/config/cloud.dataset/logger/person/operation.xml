@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="415cab4c-95ce-44d9-a5aa-c161677eca8c" name="logger.person.operation" label="M#12cn16用户操作日志" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Operation" data_name="LG_PSN_OPERATION" data_alias="LG_PSN_OPT" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="390bf43c-606a-4fa7-9129-3e7f48297674" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldInteger _uuid="ed714023-edf5-4778-b638-bb408579999b" name="operation_cd" label="M#12cn14操作代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OPERATION_CD" />
+  <FieldString _uuid="4eeb9093-46a7-41cb-b918-063ec379edd7" name="parameters" label="M#12cn14参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS" data_size="800" />
+  <FieldTemplate _uuid="8635b61d-2606-4ce0-baac-2dd07397b1e1" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

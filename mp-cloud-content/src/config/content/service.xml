@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 设计：内容设计持久服务                                       -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'content.design.persistence'
+         face  = 'org.mo.content.face.design.persistence.IContentPersistenceService'/>
+
+   <Component
+         face  = 'org.mo.content.face.design.persistence.IContentPersistenceService'
+         class = 'org.mo.content.face.design.persistence.FContentPersistenceService'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：内容列表服务                                           -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'content.design.list'
+         face  = 'org.mo.content.face.design.list.IContentListService'/>
+
+   <Component
+         face  = 'org.mo.content.face.design.list.IContentListService'
+         class = 'org.mo.content.face.design.list.FContentListService'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：内容数据服务                                           -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'content.design.dataset'
+         face  = 'org.mo.content.face.design.dataset.IContentDatasetService'/>
+
+   <Component
+         face  = 'org.mo.content.face.design.dataset.IContentDatasetService'
+         class = 'org.mo.content.face.design.dataset.FContentDatasetService'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：内容目录服务                                           -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'content.design.tree'
+         face  = 'org.mo.content.face.design.tree.IContentTreeService'/>
+
+   <Component
+         face  = 'org.mo.content.face.design.tree.IContentTreeService'
+         class = 'org.mo.content.face.design.tree.FContentTreeService'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：内容表单服务                                           -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'content.design.frame'
+         face  = 'org.mo.content.face.design.frame.IContentFrameService'/>
+
+   <Component
+         face  = 'org.mo.content.face.design.frame.IContentFrameService'
+         class = 'org.mo.content.face.design.frame.FContentFrameService'
+         scope = 'global'/>
+
+</Config>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="073e96b1-ec54-4070-b341-b6a9f1b9f559" name="data.person.user.module" label="M#12cn15用户模块表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Module" data_name="DT_PSN_USER_MODULE" data_alias="PSN_USER_MOD" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="740fa857-ddd1-4302-ab59-aff4cf375c6d" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="48eee098-909b-4698-9bfb-51d48b420e47" name="module_id" label="M#12cn14模块编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_ID" data_alias="MOD" data_refer="data.system.module" />
+  <FieldInteger _uuid="7e6a383c-7a88-41a9-967e-acd270d15fc2" name="view_security_cd" label="M#12cn16查看权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_SECURITY_CD" />
+  <FieldInteger _uuid="97b5fc28-6424-4503-824f-70e1b9889c36" name="insert_security_cd" label="M#12cn16新建权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INSERT_SECURITY_CD" />
+  <FieldInteger _uuid="b920577b-585b-45c9-be87-40ea55cdf877" name="update_security_cd" label="M#12cn16修改权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="UPDATE_SECURITY_CD" />
+  <FieldInteger _uuid="74d4e34d-430e-42b1-ba45-3192e22752d0" name="delete_security_cd" label="M#12cn16删除权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DELETE_SECURITY_CD" />
+  <FieldString _uuid="7de5e054-8f8d-4396-beca-693ad9e9e829" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="21e3ea51-7f9f-42ad-9590-e6b140f70967" name="track" label="M#12cn14追踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

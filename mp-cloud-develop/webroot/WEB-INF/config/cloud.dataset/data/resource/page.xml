@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="e21a7ef9-9de4-4b78-9b8a-77fc1e420506" name="data.resource.page" label="M#12cn15资源分页表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource.Page" data_name="DT_RES_PAGE" data_alias="DT_RES_PAG" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="3630d2fd-d0ae-4d72-9387-8999b8b3b59e" name="module_id" label="M#12cn14模块编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_ID" data_alias="MOD" data_refer="data.resource.module" />
+  <FieldRecordId _uuid="637d77ac-7607-4efd-9e69-3213069eecea" name="channel_id" label="M#12cn14频道编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CHANNEL_ID" data_alias="CHN" data_refer="data.resource.channel" />
+  <FieldString _uuid="e739bde2-38bb-4f47-a000-567a2448a0bd" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="93c64d44-160e-458a-b4c4-eb9152f1df27" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldInteger _uuid="9d852688-5c94-49b5-9a8b-a1da8418e0d6" name="display_cd" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid="12d4ce74-7e46-4a3a-8507-3feef270bef5" name="display_order" label="M#12cn14显示顺序" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldString _uuid="6a896851-1574-4d47-8c2a-85425e21b8b0" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldString _uuid="972f1341-67c8-436d-8ff9-8065e31bad1b" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="200" />
+  <FieldTemplate _uuid="2bf6c69e-0452-41d3-8f82-51a6981211bc" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

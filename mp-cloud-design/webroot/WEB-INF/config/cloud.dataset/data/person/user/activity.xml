@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="57951fdb-8729-4125-8d98-f154e16cf5fa" name="data.person.user.activity" label="M#12cn15用户活动表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Activity" data_name="DT_PSN_USER_ACTIVITY" data_alias="DT_PSN_USER_ACT" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="54f940a8-3bf5-4157-a581-c797901450a6" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" data_uniques="ACT" />
+  <FieldRecordId _uuid="73a96bba-0873-4286-ac83-af2bd8fe3ae9" name="activity_id" label="M#12cn14活动编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="ACTIVITY_ID" data_alias="ACT" data_refer="data.logic.activity" data_uniques="ACT" />
+  <FieldInteger _uuid="353db47c-1d0b-4e05-ab59-4456c77632f0" name="sign_cd" label="M#12cn14是否签到" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SIGN_CD" data_alias="SIGN" />
+  <FieldRecordId _uuid="7e94abd8-049f-4d43-a60a-574d57796783" name="teacher_id" label="M#12cn14导师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TEACHER_ID" data_alias="TCH" data_refer="data.person.user" />
+  <FieldRecordId _uuid="46750bcc-60f6-4891-b5f4-7588ff754c27" name="team_id" label="M#12cn14团队编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TEAM_ID" />
+  <FieldString _uuid="a2248f5f-7940-442c-ac6b-9e33573a2f07" name="team_description" label="M#12cn14团队描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TEAM_DESCRIPTION" data_size="2000" />
+  <FieldString _uuid="365f888d-ffd6-4a36-833e-697c07dafcad" name="product_description" label="M#12cn14产品描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PRODUCT_DESCRIPTION" data_size="2000" />
+  <FieldTemplate _uuid="a882c39d-cb53-4c13-9078-eee753dcc7e4" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

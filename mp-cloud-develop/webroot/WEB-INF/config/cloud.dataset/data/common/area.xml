@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="a7175fe7-e0f9-41fe-92d0-f361b3a024ce" name="data.common.area" label="M#12cn15共通地区表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Area" data_name="DT_COM_AREA" data_alias="DT_COM_ARE" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" logic_timeout="3600" parent_name="define.store">
+  <FieldRecordId _uuid="d954ab47-cf6f-472d-b93a-83bae2121732" name="country_id" label="M#12cn14国家编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_refer="data.common.country" />
+  <FieldString _uuid="0bcf2312-ca89-40d0-a189-d8f3abce7d96" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
+  <FieldString _uuid="611da572-5ac5-4e62-9b5b-ebf4d88e59be" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldInteger _uuid="8113e5aa-d341-4113-a163-62f7d3d12be7" name="display_cd" label="M#12cn14显示类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid="ad84550f-2f36-486d-b7a9-452d4261514d" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" data_alias="DIS_ORDER" />
+  <FieldString _uuid="d54a1754-3d65-4e75-9c00-014a2474e2ab" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="256" />
+  <FieldString _uuid="756ce0e6-640b-4685-8dd1-00e8617bb4eb" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="bdbf146a-c845-472e-8382-3a1fa6029474" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

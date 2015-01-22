@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="67d7da6d-d6e8-4276-ba49-adbd66468b05" name="data.resource.channel" label="M#12cn15资源频道表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource.Channel" data_name="DT_RES_CHANNEL" data_alias="DT_RES_CHN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="ca8a23b8-ae21-4d7e-8bd8-c43e3b4d0f41" name="module_id" label="M#12cn14模块编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MODULE_ID" data_alias="MOD" data_refer="data.resource.module" />
+  <FieldString _uuid="afac5966-38c4-47cb-a21f-c07556bd5776" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="1206578e-a555-4bd8-983f-7a9e5775b950" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldInteger _uuid="f93f01b0-537d-46b3-922f-85ad1bd3f7b5" name="display_cd" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid="a38b581e-74e0-4de0-99b5-d26e271fac7b" name="display_order" label="M#12cn14显示顺序" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldString _uuid="e47f134e-0cc4-4b65-92e3-53657170e6c0" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldString _uuid="c1afe28d-4bd8-4949-8158-c678ce93ca54" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="200" />
+  <FieldTemplate _uuid="da4c2a65-cff3-4141-b39d-40a8d9675522" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="content.frame" update_date="20141218165309">
+  <Persistence _type="Persistence" is_valid="Y" name="content.form" label="内容表单" template="" source="${application.root}/src/content-core" note="" _status="I">
+    <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.content.core.frame.common.XObject" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Interface>
+    <Interface is_valid="Y" name="IComponent" label="组件接口" class_name="org.mo.content.core.frame.common.XComponent" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Interface>
+    <Interface is_valid="Y" name="IControl" label="控件接口" class_name="org.mo.content.core.frame.common.XControl" inherits="IComponent" note="">
+      <Attribute is_valid="Y" type="String" name="left" label="左位置" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="top" label="上位置" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="width" label="宽度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="height" label="高度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Interface>
+    <Component is_valid="Y" name="Label" label="标签" class_name="org.mo.content.core.frame.common.XLabel" base_name="org.mo.content.core.frame.base.XBaseLabel" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Radio" label="单选框" class_name="org.mo.content.core.frame.common.XRadio" base_name="org.mo.content.core.frame.base.XBaseRadio" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Check" label="复选框" class_name="org.mo.content.core.frame.common.XCheck" base_name="org.mo.content.core.frame.base.XBaseCheck" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Edit" label="文本编辑框" class_name="org.mo.content.core.frame.common.XEdit" base_name="org.mo.content.core.frame.base.XBaseEdit" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Select" label="下拉选择框" class_name="org.mo.content.core.frame.common.XSelect" base_name="org.mo.content.core.frame.base.XBaseSelect" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Memo" label="多行文本编辑器" class_name="org.mo.content.core.frame.common.XMemo" base_name="org.mo.content.core.frame.base.XBaseMemo" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Form" label="表单" class_name="org.mo.content.core.frame.common.XForm" base_name="org.mo.content.core.frame.base.XBaseForm" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Table" label="表格" class_name="org.mo.content.core.frame.common.XTable" base_name="org.mo.content.core.frame.base.XBaseTable" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Window" label="窗口" class_name="org.mo.content.core.frame.common.XWindow" base_name="org.mo.content.core.frame.base.XBaseWindow" inherits="IControl" note="" />
+    <Component is_valid="Y" name="FormFrame" label="表单页面" class_name="org.mo.content.core.frame.common.XFormFrame" base_name="org.mo.content.core.frame.base.XBaseFormFrame" inherits="IControl" note="" />
+    <Component is_valid="Y" name="TableFrame" label="表格页面" class_name="org.mo.content.core.frame.common.XTableFrame" base_name="org.mo.content.core.frame.base.XBaseTableFrame" inherits="IControl" note="" />
+    <Component is_valid="Y" name="PickerFrame" label="拾取页面" class_name="org.mo.content.core.frame.common.XPickerFrame" base_name="org.mo.content.core.frame.base.XBasePickerFrame" inherits="IControl" note="" />
+    <Component is_valid="Y" name="DialogFrame" label="对话页面" class_name="org.mo.content.core.frame.common.XDialogFrame" base_name="org.mo.content.core.frame.base.XBaseDialogFrame" inherits="IControl" note="" />
+  </Persistence>
+</Content>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="db7feec9-2473-4689-9e6b-d4b5e6feca4d" name="data.batch.process.result" label="M#12cn17后台处理结果表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Batch.Process.Result" data_name="DT_BAT_PROCESS_RESULT" data_alias="DT_BAT_PRO_RES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="11fe7f12-d920-4e91-82e7-7275c5b456d3" name="process_id" label="M#12cn14处理编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_ID" />
+  <FieldInteger _uuid="5f95f52d-30da-4f58-be68-782ace5f2eba" name="status_cd" label="M#12cn14状态类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldString _uuid="67711cef-555c-4490-a01f-934069093c1e" name="input_parameters" label="M#12cn16输入参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INPUT_PARAMETERS" data_size="2000" />
+  <FieldString _uuid="8195b398-51bb-4ab0-89e4-20193d336f38" name="output_parameters" label="M#12cn16输出参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OUTPUT_PARAMETERS" data_size="2000" />
+  <FieldDateTime _uuid="fc7b9e00-ae41-40bd-a938-2dcab0b9e878" name="begin_date" label="M#12cn14开始时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BEGIN_DATE" />
+  <FieldDateTime _uuid="17bfa611-3c03-45c2-824d-0a75d04522e7" name="end_date" label="M#12cn14结束时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="END_DATE" />
+  <FieldInteger _uuid="3c9de72a-d0fd-4d5a-b6a7-dd039c838175" name="result_cd" label="M#12cn14结果类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESULT_CD" />
+  <FieldString _uuid="e6ca3264-b56a-4427-9cf2-d8490c013060" name="result_note" label="M#12cn14结果描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESULT_NOTE" data_size="2000" />
+  <FieldString _uuid="82380615-4b0f-4a91-b30e-03dbb829b619" name="note" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="fdb3705a-e5bc-4684-8453-62593f1c7f25" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

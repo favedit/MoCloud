@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="26238a9a-0533-44a0-ab15-eacd874126f0" name="data.system.message" label="M#12cn15系统消息表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.Message" data_name="DT_SYS_MESSAGE" data_alias="DT_SYS_MSG" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldInteger _uuid="b51d5c64-7d7e-408b-a8f7-0bba333820ec" name="level_cd" label="M#12cn14级别类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEVEL_CD" />
+  <FieldString _uuid="f4a55b69-2989-47a9-bacf-22f860d89764" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="b7a85938-04a8-444e-88e4-f29ee8f68358" name="label" label="M#12cn14任务标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="0f83cda2-36ec-4e35-bee5-41c64ccdf113" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldString _uuid="3aa4e1cb-23bb-4cac-a901-f8edf629fe6a" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="f8d666f2-03ca-414a-9de4-e039c7575073" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

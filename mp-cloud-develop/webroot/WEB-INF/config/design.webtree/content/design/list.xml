@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TreeView _uuid="60a5be39-d052-4de4-ba49-79f8cc7a3639" name="content.design.list" label="M#12cn18内容-设计-列表" is_valid="Y" note="M#" is_config="N" disp_checked="N" service="catalog@content.design.list">
+  <TreeNodeType _uuid="8c926fe1-e24b-4141-987e-1ded9e5ef1e7" name="list" label="M#12cn12列表" is_valid="Y" note="M#" type="collection" type_name="list" icon="ctl.list" action="list" attributes="form_name=content.list.ListForm" />
+  <TreeNodeType _uuid="70be50dd-5602-4c5a-ac46-71600911947d" name="item" label="M#12cn12项目" is_valid="Y" note="M#" type="component" type_name="item" icon="ctl.item" action="list" attributes="form_name=content.list.ItemForm" />
+  <TreeNodeType _uuid="a74bf151-3a1c-49f2-aa45-a9a40873b03a" name="itemSql" label="M#12cn14数据查询" is_valid="Y" note="M#" type="component" type_name="item.sql" icon="ctl.items" action="list" attributes="form_name=content.list.ItemForm" />
+</TreeView>

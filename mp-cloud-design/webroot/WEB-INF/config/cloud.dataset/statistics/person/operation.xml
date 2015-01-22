@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="c17bfac1-dc2f-4c73-ad3c-aa83d07fb99e" name="statistics.person.operation" label="M#12cn17用户操作统计表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Person.Operation" data_name="ST_PSN_OPERATION" data_alias="ST_PSN_OPT" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics">
+  <FieldRecordId _uuid="58fa53ab-4e92-4e36-bcb3-8d5f0b2e8e77" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_uniques="DATE" />
+  <FieldInteger _uuid="bd71785c-a01a-477d-a87c-48cb22cb352a" name="active_count" label="M#12cn14激活总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_COUNT" />
+  <FieldInteger _uuid="b7e661b4-a7a0-43b2-bbb7-039a3f3b1e92" name="register_total" label="M#12cn14注册总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_TOTAL" />
+  <FieldInteger _uuid="f33d7a2c-535c-4f01-b246-45fbdd60c575" name="register_count" label="M#12cn14注册次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_COUNT" />
+  <FieldInteger _uuid="8fd59ec6-c19a-4d54-9145-ba7eb968e73c" name="logn_total" label="M#12cn14登录总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGN_TOTAL" />
+  <FieldInteger _uuid="9f0336b6-1bf1-408c-a9e5-e92a3ade2a0b" name="login_count" label="M#12cn14登录次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIN_COUNT" />
+  <FieldInteger _uuid="254df3f2-8353-417e-a7a1-ca7592714378" name="logout_total" label="M#12cn14登出总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGOUT_TOTAL" />
+  <FieldInteger _uuid="7876f89e-15ff-4176-a0f1-e9207c28d025" name="logout_count" label="M#12cn14登出次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGOUT_COUNT" />
+  <FieldTemplate _uuid="29b7ab34-2190-4025-970c-14a202f29277" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

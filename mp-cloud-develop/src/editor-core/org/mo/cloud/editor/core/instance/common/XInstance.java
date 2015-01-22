@@ -1,0 +1,11 @@
+package org.mo.cloud.editor.core.instance.common;
+
+import org.mo.cloud.editor.core.instance.base.XBaseInstance;
+
+//============================================================
+// <T>实例。</T>
+//============================================================
+public class XInstance
+      extends XBaseInstance
+{
+}

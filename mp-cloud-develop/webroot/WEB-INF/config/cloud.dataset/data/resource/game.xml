@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="7e357fa3-a20a-403e-a375-de1a6081a840" name="data.resource.game" label="M#12cn15资源游戏表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource.Game" data_name="DT_RES_GAME" data_alias="DT_RES_GAM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="88670c26-4943-4c0e-b654-dc1231818e03" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_alias="RES" data_refer="data.resource.resource" />
+  <FieldString _uuid="6bbddcbf-52bf-4dfd-a02c-054becc9eadc" name="snapshoot1_url" label="M#12cn15游戏截图1" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SNAPSHOOT1_URL" data_size="200" />
+  <FieldString _uuid="5400975d-4e88-4cc3-83f3-d088171844c1" name="snapshoot2_url" label="M#12cn15游戏截图2" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SNAPSHOOT2_URL" data_size="200" />
+  <FieldString _uuid="38091c7e-a7a8-48f3-8965-a0cb013c942f" name="snapshoot3_url" label="M#12cn15游戏截图3" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SNAPSHOOT3_URL" data_size="200" />
+  <FieldString _uuid="abd4aecd-8a8e-4ce4-ad9f-4fd08b7cb041" name="snapshoot4_url" label="M#12cn15游戏截图4" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SNAPSHOOT4_URL" data_size="200" />
+  <FieldString _uuid="41aac366-49a0-4b0d-bb3a-3d926d932931" name="snapshoot5_url" label="M#12cn15游戏截图5" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SNAPSHOOT5_URL" data_size="200" />
+  <FieldInteger _uuid="84a9e49d-80c3-46e1-9b0c-e2a9f699e066" name="adapter_cd" label="M#12cn14适配机型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ADAPTER_CD" data_alias="ADAPTER" />
+  <FieldInteger _uuid="918a7699-67d5-4c21-82e2-92bacd7addef" name="orientation_cd" label="M#12cn14游戏方向" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ORIENTATION_CD" data_alias="ORIENTATION" />
+  <FieldInteger _uuid="3e9a8226-f2e3-436f-aa05-bed132272cda" name="download_size" label="M#12cn14下载大小" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="DOWNLOAD_SIZE" data_default="0" />
+  <FieldInteger _uuid="215167d1-fc34-400e-bfd5-489555e3995f" name="download_count" label="M#12cn14下载次数" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="DOWNLOAD_COUNT" data_default="0" />
+  <FieldTemplate _uuid="7dce10f9-cb58-4bbc-a6bf-8c3f7ff0484d" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

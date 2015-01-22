@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="89320e9e-1a1f-49bc-a637-82e7063a5df8" name="statistics.resource.operation" label="M#12cn17资源操作统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Resource.Operation" data_name="ST_RES_OPERATION" data_alias="ST_RES_OPT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics" data_type="D">
+  <FieldRecordId _uuid="63fe1112-32e0-4f40-bb8e-e1cb6145414b" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_uniques="DATE" />
+  <FieldInteger _uuid="244f29ce-4b2e-4f58-ba1c-6e6b3e296b13" name="view_total" label="M#12cn14查看总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_TOTAL" />
+  <FieldInteger _uuid="b8081ab4-d09f-49da-a466-eba0391ea80e" name="view_count" label="M#12cn14查看次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
+  <FieldInteger _uuid="420966e9-8d9f-441e-bb77-dbf633aabcd0" name="play_total" label="M#12cn14播放总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PLAY_TOTAL" />
+  <FieldInteger _uuid="5a7abe44-e512-4fd7-9f76-456514185702" name="play_count" label="M#12cn14播放次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PLAY_COUNT" />
+  <FieldInteger _uuid="944954b0-5e38-421a-94fa-b05c51731893" name="parise_total" label="M#12cn14点攒总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARISE_TOTAL" />
+  <FieldInteger _uuid="8ccd66e2-e3d9-4cd1-860e-4d2dafbed4ed" name="parise_count" label="M#12cn14点攒次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARISE_COUNT" />
+  <FieldInteger _uuid="8e24b2cc-0cec-4827-a2ef-b789ff7f2ea7" name="download_total" label="M#12cn14下载总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_TOTAL" />
+  <FieldInteger _uuid="cec9bd15-3806-4605-878d-5fc65891858f" name="download_count" label="M#12cn14下载次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_COUNT" />
+  <FieldTemplate _uuid="b10dc81a-70fd-4fb6-814e-dcf655c114ae" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

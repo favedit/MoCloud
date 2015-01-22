@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<List _uuid="c4f8ba1f-8564-4633-abfe-20daae171f84" name="cloud.common.Validation" label="校验类型" is_valid="Y" note="M#">
+  <Item _uuid="2837db7d-f362-466e-b8ed-bce669c2ef6f" name="email" label="邮件类型" is_valid="Y" note="M#" type="I" value="email" />
+  <Item _uuid="c247f493-4c78-4a89-a50b-37d4e1071fff" name="phone" label="电话号码" is_valid="Y" note="M#" type="I" value="phone" />
+  <Item _uuid="f5324af3-8a6d-475c-ab40-9585345ea85c" name="character" label="汉字" is_valid="Y" note="M#" type="I" value="character" />
+</List>
+

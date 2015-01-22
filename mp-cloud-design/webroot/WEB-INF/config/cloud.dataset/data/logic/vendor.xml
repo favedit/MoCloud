@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="94db8277-9c2c-410b-af16-f84d7dcd83bd" name="data.logic.vendor" label="M#12cn16业务提供商表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.Vendor" data_name="DT_LGC_VENDOR" data_alias="DT_LGC_VND" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" logic_timeout="3600" parent_name="define.store">
+  <FieldString _uuid="2cd00a83-fe9b-4093-98a9-20275cd083b0" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="6adeda1c-055a-4f20-9486-820ad6c80eb4" name="label" label="M#12cn15发布商名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldInteger _uuid="4b8df310-b089-4f8c-a1af-70dc0b2a7e6b" name="display_cd" label="M#12cn14可见类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid="6a7b5486-f241-44a3-bf24-6007fb244774" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldString _uuid="d2ed653e-5b2f-408a-ab3f-7699c730bd9f" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldString _uuid="2a4fae6e-1595-4255-9735-7f4998cce455" name="home_url" label="M#12cn14主页地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOME_URL" data_size="200" />
+  <FieldString _uuid="5b4c085a-29ec-4c94-8596-e3e3f79c5cb0" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="146a1311-fc2d-410a-937b-32be6116e486" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

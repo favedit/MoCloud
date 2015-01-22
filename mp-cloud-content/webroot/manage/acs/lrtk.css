@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+.accordion,
+.accordion ul,
+.accordion li,
+.accordion a,
+.accordion span {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+}
+
+body {
+	font: 12px/1.4 Microsoft YaHei, Verdana, Arial, Helvetica, sans-serif;
+}
+.accordion li {
+	list-style: none;
+}
+
+.accordion li a {
+	display: block;
+	position: relative;
+	padding:6px 0px 0px 40px ;
+	height:20px;
+	font-weight:bold;
+	color: #055586;
+	text-decoration: none;
+	border-bottom:1px #afcfdc solid;
+	background: url(../images/slider_handlebg188.png) no-repeat;
+}
+
+.accordion li a.active {
+	color: #fff;
+	padding:6px 0px 0px 40px ;
+	height:20px;
+	font-weight:bold;
+	border-bottom:1px #afcfdc solid;
+	background: url(../images/slider_handlebg188.png) no-repeat  -217px 0px;
+}
+
+.menuscoll {
+	height:500px;overflow-y:scroll; overflow-x:hidden
+}
+
+.sub-menu li {
+	width:207px;
+}
+
+.sub-menu li a {
+	color: #055586;
+	height:22px;
+	background:url(../images/wj_ico.gif) #fff no-repeat 30px 7px;
+	border-bottom: 1px dashed #c9c9c9;
+	font-weight:normal;
+	padding:6px 0px 0px 50px ;
+}
+
+.sub-menu li:hover a {
+	background:url(../images/wj_ico2.gif) #e0f5fe no-repeat 30px 7px;
+	
+	 }
+
+a.ls_act:link {
+	background:url(../images/wj_ico2.gif) #e0f5fe no-repeat 30px 7px;
+	
+	 }
+
+a.ls_act:visited {
+	background:url(../images/wj_ico2.gif) #e0f5fe no-repeat 30px 7px;
+	
+	 }
+
+a.ls_act:hover {
+	background:url(../images/wj_ico2.gif) #e0f5fe no-repeat 30px 7px;
+	
+	 }
+
+.sub-menu li:last-child a { border: none; }
+
+/* Functionality */
+
+.accordion li .sub-menu {
+	display: none;
+}
+
+.accordion li:target .sub-menu {
+	display: block;
+}

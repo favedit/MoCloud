@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="9f89e84c-2955-4de3-bef1-7bb3acc0f7ec" name="data.common.city" label="M#12cn15共通城市表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="InnoDB" data_group="data" data_factory="Data.Common.City" data_name="DT_COM_CITY" data_alias="DT_COM_CTY" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" logic_timeout="3600" parent_name="define.store">
+  <FieldRecordId _uuid="ed2ded87-3378-41be-a07c-98b0993d736b" name="country_id" label="M#12cn14国家编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_refer="data.common.country" />
+  <FieldRecordId _uuid="0e2250ad-9f03-4ddd-b8c9-ae40f6c12225" name="area_id" label="M#12cn14地区编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREA_ID" data_alias="ARA" data_refer="data.common.area" />
+  <FieldRecordId _uuid="fb4c8bca-0633-4f2f-8381-3f370ed3accf" name="province_id" label="M#12cn14省份编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_ID" data_alias="PVN" data_refer="data.common.province" />
+  <FieldString _uuid="b1dc9e79-f808-43ff-ba2f-118d6292b0eb" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
+  <FieldString _uuid="0fcd59bd-a9eb-441a-b448-8e39dbb952a0" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldInteger _uuid="d3d44ad3-fcd6-43a1-9260-a8b770d22b64" name="display_cd" label="M#12cn14显示类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid="c15ff618-381c-43cf-b805-c86cfd69f6ab" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" data_alias="DIS_ORDER" />
+  <FieldString _uuid="1edb33e6-f28c-4ed8-aed2-ac082c5596a1" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldString _uuid="0a14e005-0f28-41c6-8bdc-1db67afa18ca" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="c4be8479-a893-4c7e-8e67-5820996de891" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

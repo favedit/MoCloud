@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Persistence _uuid="43bb228f-9519-44ff-a217-563b6c6766a6" name="cloud.editor.message" label="M#12cn14消息信息" is_valid="Y" note="M#12jp13リスト" template="xmlobject" source="${cloud.export.platform.editor}">
+  <Interface _uuid="459cf065-9253-44ec-aa35-3b26ea27150c" name="IObject" label="M#12cn14对象功能" is_valid="Y" note="M#12jp16オブジェクト" class_name="org.mo.cloud.editor.core.message.common.XObjectFace">
+    <Attribute _uuid="b91869d6-56d3-4020-ae13-57287efc0f79" name="name" label="M#12cn12名称" is_valid="Y" note="M#12jp12名称" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="144d88f9-a50e-451c-abaf-ee0c81a32e38" name="label" label="M#12cn12标签" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="acfbff6c-7e12-49a5-a391-54f8c53579f4" name="is_valid" label="M#12cn13有效性" is_valid="Y" note="M#" type="Boolean" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="b91f9e86-4cbe-478e-a45b-f8a344f0b43d" name="note" label="M#12cn12注释" is_valid="Y" note="M#12jp12注釈" type="MultiString" is_store="Y" is_config="Y" is_default="N" />
+  </Interface>
+  <Interface _uuid="e3ad2042-e79d-429d-aa60-af33943f4143" name="IValidation" label="M#12cn14校验功能" is_valid="Y" note="M#12jp16オブジェクト" class_name="org.mo.cloud.editor.core.message.common.XValidationFace">
+    <Attribute _uuid="27f9e4b7-465e-406a-9843-cda6f8673b6a" name="valid_empty" label="M#12cn14非空检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="28dc4088-7d9d-477d-ae1e-2e4fd0b6b68a" name="valid_length_min" label="M#12cn16最小长度检查" is_valid="Y" note="M#" type="Boolean" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="cffaaa48-8897-4695-a0de-5199d3ee8393" name="valid_length_max" label="M#12cn16最大长度检查" is_valid="Y" note="M#12jp12注釈" type="MultiString" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="07a62889-ac48-4aba-abb0-7f9d587f59c5" name="valid_value_min" label="M#12cn15最小值检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="058f99cd-053b-4e5d-96db-20cab059f72b" name="valid_value_max" label="M#12cn15最大值检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="d6bb1b85-4f14-4b4e-9b17-3183f5068af7" name="valid_length_min_eq" label="M#12cn18最小长度包含检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="ae22c2df-97c4-4d74-9c69-61dedd795152" name="valid_length_max_eq" label="M#12cn18最大长度包含检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="e525eae7-051b-4bc4-8784-32d53458618c" name="valid_format_valid" label="M#12cn16有效格式检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="17341374-6af4-4fef-8cc8-1dea61041011" name="valid_format_invalid" label="M#12cn16无效格式检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="ffd4cdce-292a-4d4a-bc5a-2b99511ce760" name="valid_datetime" label="M#12cn16时间日期检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="c3832809-63fb-4dc8-8445-e74d5c200349" name="valid_date" label="M#12cn14日期检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="1a47cd84-62a4-47e4-9073-11b6182e6296" name="valid_time" label="M#12cn14时间检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="3b45cc94-c66d-49e0-b1f1-4e362fe4ac86" name="valid_special" label="M#12cn14特殊检查" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Interface>
+  <Component _uuid="cb272405-cb77-47bf-9e85-fa92fdea1889" name="Item" label="M#12cn13数据项" is_valid="Y" note="M#12jp12項目" class_name="org.mo.cloud.editor.core.message.common.XMessageItem" base_name="org.mo.cloud.editor.core.message.base.XBaseMessageItem" inherits="IObject,IValidation,ISource">
+    <Attribute _uuid="eaed9576-225d-4e4f-abcc-c6e9d1443582" name="type" label="M#12cn12类型" is_valid="Y" note="M#12jp13タイプ" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="3c97866a-c958-4c9b-87f6-24d20069d81d" name="value" label="M#12cn12内容" is_valid="Y" note="M#12jp11値" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="65b11904-6317-45d8-a594-f1a69901dbbb" name="hotkey" label="M#12cn12热键" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="5f0e0e3a-58aa-45ad-95d0-49934ced46de" name="type_cd" label="M#12cn12类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="176ed8b7-2d2f-48db-9f49-27e7cf4f6305" name="type_name" label="M#12cn14类型名称" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="641bd4c4-58f6-4920-923e-b0252f550f70" name="type_cs" label="M#12cn14CS类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="dc92afcf-eac8-48cc-873c-f16f1e3aaf0b" name="type_as" label="M#12cn14AS类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="cf9c93ea-e1fd-4215-a694-aabaf3b9dcfe" name="is_collection" label="M#12cn12集合" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="b406d7a9-466c-472f-be7f-1ba101bd11f2" name="is_node" label="M#12cn12节点" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="539a9383-64a6-489d-adaf-5974b1af678c" name="data_size" label="M#12cn14数据大小" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="02cdc9db-65c1-48fe-8bd4-3f6006cd0305" name="data_default" label="M#12cn15数据默认值" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Component>
+  <Component _uuid="2f6ecbfd-bb63-4944-be7e-2e7bfa61295f" name="Message" label="M#12cn12消息" is_valid="Y" note="M#12jp13リスト" class_name="org.mo.cloud.editor.core.message.common.XMessage" base_name="org.mo.cloud.editor.core.message.base.XBaseMessage" inherits="IObject,ISource">
+    <Attribute _uuid="021c639e-315b-43a0-9588-4646cb922a0d" name="cache" label="M#12cn13可缓冲" is_valid="Y" note="M#12cn13缓存可" type="Boolean" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="c4c34787-9e67-4d0e-8043-2172485f4095" name="code" label="M#12cn13代码号" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="3392f4a8-d097-4d8c-bde7-099d8c4f438f" name="source_name" label="M#12cn13源名称" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="982510e2-6339-4787-809f-8e299a1b50c9" name="is_udp" label="M#12cn19是否使用UDP协议" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="N" />
+    <Attribute _uuid="42007d70-9ba8-4be3-99de-49241c1d8ea6" name="message_type" label="M#12cn14消息类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="622415d8-4c7c-4562-9fb9-ce23e278599c" name="is_asynchronous" label="M#12cn14异步标志" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="b8c7ad0e-dd95-4fa3-9349-c6bcd61ea34f" name="is_session" label="M#12cn14会话标志" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="f433c1d2-25ce-468a-bea5-18de82a7c0c6" name="is_login" label="M#12cn14账号登录" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="e967714a-792e-43be-876c-bd4a7984b32f" name="is_login_role" label="M#12cn14角色登录" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="05bb3a18-e441-496d-82af-d4ceaa779243" name="is_manage" label="M#12cn14管理标志" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="0b6a46c2-cb67-462b-8b42-e34cf22a3f3e" name="source_type" label="M#12cn14来源类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="9589384a-38c9-49b9-bc5e-7fe5afe3f243" name="target_type" label="M#12cn14目标类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="4a1e39c7-a118-4300-be7f-6949e4f9bc81" name="service_type" label="M#12cn14服务类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="03f5af77-33fe-40c7-af58-d4911b566eaa" name="code_value" label="M#12cn13代码值" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="ff84eaf1-10b8-4316-b0e9-b37d5be48631" name="code_fix" label="M#12cn14固定号码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Component>
+  <Component _uuid="b9347305-bdd2-4fcf-ad53-783308407679" name="Group" label="M#12cn14消息分组" is_valid="Y" note="M#" class_name="org.mo.cloud.editor.core.message.common.XMessageGroup" base_name="org.mo.cloud.editor.core.message.base.XBaseMessageGroup" inherits="IObject,ISource">
+    <Attribute _uuid="5d5ef04f-1135-41b4-8a7e-7557c58c1c22" name="source_name" label="M#12cn14代码名称" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="1bd7ef7c-126c-4904-8264-a90e68334438" name="code" label="M#12cn12代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="fe5fe510-1180-49f3-8690-af47c19b6067" name="full_code" label="M#12cn14代码全称" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="fe078fda-f74e-495f-ab7e-f46f1255d7f6" name="display_index" label="M#12cn14显示顺序" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Component>
+  <Component _uuid="b09c8341-a4ab-4abe-8c43-ddb36f3ea710" name="Struct" label="M#12cn13结构体" is_valid="Y" note="M#" class_name="org.mo.cloud.editor.core.message.common.XMessageStruct" base_name="org.mo.cloud.editor.core.message.base.XBaseMessageStruct" inherits="IObject,ISource">
+    <Attribute _uuid="09995b5a-cae4-41e7-9b8d-0fb2e5d24a43" name="code" label="M#12cn12代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Component>
+  <Component _uuid="3ff4d408-aeb8-447d-a0f1-074637f9148c" name="Enum" label="M#12cn12枚举" is_valid="Y" note="M#" class_name="org.mo.cloud.editor.core.message.common.XMessageEnum" base_name="org.mo.cloud.editor.core.message.base.XBaseMessageEnum" inherits="IObject,ISource" />
+  <Component _uuid="53e6951e-dad5-4bcb-b7b2-2d40a4eb9208" name="Type" label="M#12cn12类型" is_valid="Y" note="M#" class_name="org.mo.cloud.editor.core.message.common.XMessageType" base_name="org.mo.cloud.editor.core.message.base.XBaseMessageType" inherits="IObject,ISource">
+    <Attribute _uuid="b4139639-35e1-45d0-bbc2-2c42f4df8bcd" name="type" label="M#12cn12类型" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Component>
+  <Component _uuid="b7ba0fff-a844-4fd1-8932-eb466a70de7f" name="Member" label="M#12cn14枚举成员" is_valid="Y" note="M#" class_name="org.mo.cloud.editor.core.message.common.XEnumMember" base_name="org.mo.cloud.editor.core.message.base.XBaseEnumMember" inherits="IObject,IValidation,ISource">
+    <Attribute _uuid="4a452bf2-f0e9-4213-9d11-50f6d12d3558" name="data_value" label="M#12cn14数据内容" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Component>
+  <Interface _uuid="b37c4f71-4423-4d83-9e1d-7d687700209b" name="ISource" label="M#12cn14代码功能" is_valid="Y" note="M#" class_name="org.mo.cloud.editor.core.message.common.XObjectSource">
+    <Attribute _uuid="373b5617-41ef-437d-b168-5eac0e1a8875" name="is_server" label="M#12cn13服务器" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="27838f00-2936-4fd2-a249-94a612c57099" name="is_server_cpp" label="M#12cn18服务器CPP代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="82ff1feb-08df-4749-a1df-5c0a6260ba62" name="is_server_java" label="M#12cn19服务器JAVA代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="5a09cce2-a3bc-4f09-b336-95cc0c1ed9c4" name="is_client" label="M#12cn13客户端" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="835d90ca-7154-4982-97dd-3727bce04a79" name="is_client_cpp" label="M#12cn18客户端CPP代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="d4041bb7-5e97-4fba-8d3f-1d2bc4e26875" name="is_client_as" label="M#12cn17客户端AS代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="0f032f55-68e4-457b-9b28-d444adb6bf7a" name="is_client_cs" label="M#12cn17客户端CS代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    <Attribute _uuid="15e704aa-634f-427e-ae66-f82fcc75e575" name="is_client_java" label="M#12cn19客户端JAVA代码" is_valid="Y" note="M#" type="String" is_store="Y" is_config="Y" is_default="Y" />
+  </Interface>
+</Persistence>
+

@@ -1,0 +1,18 @@
+.body{
+	margin:0px;
+	padding:0px;
+}
+.disabled{
+	background:#EFEFEF;border:1px solid #999;
+}
+.cy_edit_panel{
+   padding:8px;
+}
+
+.noborder td{
+	border-width:0px;
+}
+
+.border_change{
+	border:1px solid #95B8E7;
+}

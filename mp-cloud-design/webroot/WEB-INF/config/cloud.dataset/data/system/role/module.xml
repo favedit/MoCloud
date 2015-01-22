@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="201fa076-09a6-4890-a3d5-e9a7810efc08" name="data.system.role.module" label="M#12cn17系统角色模块表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="InnoDB" data_group="data" data_factory="Data.System.Role.Module" data_name="DT_SYS_ROLE_MODULE" data_alias="DT_SYS_ROL_MOD" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="23f378f6-23b0-4a44-873a-c5f69aeb7746" name="role_id" label="M#12cn14角色编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_ID" data_alias="ROL" data_refer="data.system.role" />
+  <FieldRecordId _uuid="927f9d7b-73ed-4696-af8f-f441b101ff35" name="module_id" label="M#12cn14模块编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_ID" data_alias="MOD" data_refer="data.system.module" />
+  <FieldInteger _uuid="9260cec0-49e8-4a32-a43b-45ee9151988f" name="view_security_cd" label="M#12cn16查看权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_SECURITY_CD" />
+  <FieldInteger _uuid="d3e79cda-2cdd-4b70-88f7-3f0e7320a2dd" name="insert_security_cd" label="M#12cn16新建权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INSERT_SECURITY_CD" />
+  <FieldInteger _uuid="b2ab15ff-7642-4e8f-82b1-4cc6e7b2a64d" name="update_security_cd" label="M#12cn16修改权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="UPDATE_SECURITY_CD" />
+  <FieldInteger _uuid="56971b5c-4f9b-41b7-8a82-fd0ad549f8e3" name="delete_security_cd" label="M#12cn16删除权限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DELETE_SECURITY_CD" />
+  <FieldTemplate _uuid="80e67af6-81d5-469b-9dc4-c63c48e17322" name="track" label="M#12cn14追踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

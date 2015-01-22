@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="c197a259-db73-4806-ae80-f6e1623516ae" name="data.person.user.task" label="M#12cn15用户任务表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Task" data_name="DT_PSN_USER_TASK" data_alias="PSN_USER_TASK" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="3d2ebf98-ae1b-451f-a326-f5824d70e890" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="bb932cda-1f32-4ae7-8ea5-14d9a34b071d" name="task_id" label="M#12cn14任务编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TASK_ID" data_alias="TSK" data_refer="data.logic.task" />
+  <FieldInteger _uuid="60ac7121-4c73-47ac-bb2c-7e615f2090bb" name="task_status_cd" label="M#12cn16任务完成状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TASK_STATUS_CD" />
+  <FieldInteger _uuid="889d9b2a-ebb5-4bd0-98d2-1ac2c1b81c2e" name="task_finish_count" label="M#12cn16任务完成次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TASK_FINISH_COUNT" />
+  <FieldString _uuid="efcca886-e384-497a-b75d-faaf7e6a1b6a" name="task_data" label="M#12cn14任务数据" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TASK_DATA" data_size="2000" />
+  <FieldRecordId _uuid="2dd57d44-c21d-432f-a48e-32bb45b3734b" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldInteger _uuid="265ad220-57fa-4cdf-a7f2-5f4aba80c079" name="score_bean" label="M#12cn16点数(豆豆)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_BEAN" />
+  <FieldInteger _uuid="a36e106f-5b5c-477d-9ff5-edf781e69567" name="score_point" label="M#12cn12点数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_POINT" />
+  <FieldFloat _uuid="84415fd4-8df9-429e-9b4c-ca8e01bee4a6" name="score_gold" label="M#12cn16点数(金币)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_GOLD" />
+  <FieldTemplate _uuid="2be48949-8605-482c-96a8-ac6a531fc521" name="track" label="M#12cn14追踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

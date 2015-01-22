@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="ffa8db9b-2cab-452e-8b08-75b66d6164a5" name="data.person.user.resource.daily" label="M#12cn17用户资源日常表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Resource.Daily" data_name="DT_PSN_USER_RESOURCE_DAILY" data_alias="DT_PSN_USR_RES_DAY" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="26d69248-f221-469c-be2b-3cea2a82d36d" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldInteger _uuid="ae45e236-2a81-4cd9-977f-e525a0233e31" name="resource_cd" label="M#12cn14资源类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_CD" />
+  <FieldRecordId _uuid="b95d9b8b-54aa-4524-949e-5c33c2055c72" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_alias="RES" data_refer="data.resource.resource" />
+  <FieldDate _uuid="428f94c1-a17a-482f-a32e-c7cff5944554" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECORD_DATE" />
+  <FieldInteger _uuid="c84d1d98-f11d-4d35-a0a0-3a10f573c649" name="parise_cd" label="M#12cn14是否点赞" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARISE_CD" />
+  <FieldInteger _uuid="98940679-4ab7-46d9-9866-1fb19b65f9f1" name="vote_cd" label="M#12cn14是否投票" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VOTE_CD" />
+  <FieldInteger _uuid="02e97fa5-8850-46ac-abc6-8c99d6dfde75" name="score_bean" label="M#12cn16点数(豆豆)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_BEAN" />
+  <FieldInteger _uuid="b59e58c2-70f8-42a3-bff6-f1b842674925" name="score_point" label="M#12cn16点数(豆币)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_POINT" />
+  <FieldFloat _uuid="c59d2ffc-1c97-42e6-84c6-5829b50dd907" name="score_gold" label="M#12cn16点数(金币)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_GOLD" />
+  <FieldTemplate _uuid="fa5ccc52-017f-44c6-9609-0f02842d8b91" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="8b639481-6d92-4d0f-a9cc-ae09ea3d7388" name="data.resource.lesson" label="M#12cn15资源教程表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource.Lesson" data_name="DT_RES_LESSON" data_alias="DT_RES_LES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="261707f5-b234-40f4-b04f-c7e04e6bd689" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_alias="RES" data_refer="data.resource.resource" />
+  <FieldRecordId _uuid="b568d607-a515-4a62-a5b6-f4d2675f226b" name="game_id" label="M#12cn14游戏编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GAME_ID" data_alias="GAM" data_refer="data.resource.game" />
+  <FieldInteger _uuid="754c6d65-22dc-4769-a0f2-2ad81703f3ed" name="chapter_count" label="M#12cn14章节总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CHAPTER_COUNT" />
+  <FieldInteger _uuid="35d407f9-13ae-4a6f-9ffb-f5a320142e8f" name="chapter_duration" label="M#12cn15章节总时长" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CHAPTER_DURATION" />
+  <FieldInteger _uuid="829e3440-6943-4444-af8e-e7741e4af7a8" name="lesson_duration" label="M#12cn14课程时长" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LESSON_DURATION" />
+  <FieldTemplate _uuid="c737266d-68a3-46c3-af4e-d5832bad3d22" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
