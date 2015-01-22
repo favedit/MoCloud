@@ -26,6 +26,9 @@ public abstract class XBaseTreeNodeType extends XContentObject
    // 备注的定义
    public final static FContentField FieldNote = new FContentField("note");
 
+   // 关联的定义
+   public final static FContentField FieldLinker = new FContentField("linker");
+
    // 图标的定义
    public final static FContentField FieldIcon = new FContentField("icon");
 
@@ -71,6 +74,10 @@ public abstract class XBaseTreeNodeType extends XContentObject
    // 备注
    @AName("note")
    protected String _note;
+
+   // 关联
+   @AName("linker")
+   protected String _linker;
 
    // 图标
    @AName("icon")
@@ -158,6 +165,24 @@ public abstract class XBaseTreeNodeType extends XContentObject
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得关联的内容。</T>
+   //
+   // @return 关联
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联的内容。</T>
+   //
+   // @param value 关联
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
    }
 
    //============================================================

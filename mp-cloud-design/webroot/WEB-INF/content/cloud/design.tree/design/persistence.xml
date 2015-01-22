@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="system.culture.Language" update_date="20141209154356">
    <TreeView name="design.persistence" label="设计-持久化-定义" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@cloud.design.persistence">
-     <TreeNodeType name="persistence" label="持久化" is_valid="Y" note="" icon="design.persistence.persistence" action="list" attributes="type=collection;form_name=content.persistence.PersistenceForm" />
-     <TreeNodeType name="component" label="组件" is_valid="Y" note="" icon="design.persistence.component" action="list" attributes="type=component;form_name=content.persistence.ComponentForm" />
-     <TreeNodeType name="interface" label="接口" is_valid="Y" note="" icon="design.persistence.interface" action="list" attributes="type=component;form_name=content.persistence.InterfaceForm" />
-     <TreeNodeType name="attribute" label="属性" is_valid="Y" note="" icon="design.persistence.attribute" attributes="type=component;form_name=content.persistence.AttributeForm" />
+     <TreeNodeType name="persistence" linker="Persistence" label="持久化" is_valid="Y" note="" icon="design.persistence.persistence" service="list@cloud.design.persistence" attributes="type=collection;form_name=content.persistence.PersistenceForm" />
+     <TreeNodeType name="component" linker="Component" label="组件" is_valid="Y" note="" icon="design.persistence.component" service="list@cloud.design.persistence" attributes="type=component;form_name=content.persistence.ComponentForm" />
+     <TreeNodeType name="interface" linker="Interface" label="接口" is_valid="Y" note="" icon="design.persistence.interface" service="list@cloud.design.persistence" attributes="type=component;form_name=content.persistence.InterfaceForm" />
+     <TreeNodeType name="attribute" linker="Attribute" label="属性" is_valid="Y" note="" icon="design.persistence.attribute" attributes="type=component;form_name=content.persistence.AttributeForm" />
    </TreeView>
 </Content>

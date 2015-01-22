@@ -77,11 +77,11 @@ public class FAbstractConfigurationBase
    // @return 选择设置
    //============================================================
    public FXmlNode getSelectNode(IWebInput input){
-      FXmlNode config = input.config().node("Node");
-      if(config == null){
+      FXmlNode xconfig = input.config().findNode("TreeNode");
+      if(xconfig == null){
          throw new FFatalError("Can't find select node.");
       }
-      return config;
+      return xconfig;
    }
 
    //============================================================

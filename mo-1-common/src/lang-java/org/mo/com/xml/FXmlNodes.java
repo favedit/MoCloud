@@ -64,10 +64,9 @@ public class FXmlNodes
    // @return XML节点
    //============================================================
    public FXmlNode findNode(String name){
-      int n = -1;
-      while(++n < _count){
-         if(name.equalsIgnoreCase(_items[n].name())){
-            return _items[n];
+      for(int i = 0; i < _count; i++){
+         if(name.equalsIgnoreCase(_items[i].name())){
+            return _items[i];
          }
       }
       return null;
@@ -82,10 +81,41 @@ public class FXmlNodes
    //============================================================
    public FXmlNode findNode(String name,
                             String... attributes){
-      int n = -1;
-      while(++n < _count){
-         if(_items[n].equals(name, attributes)){
-            return _items[n];
+      for(int i = 0; i < _count; i++){
+         if(_items[i].equals(name, attributes)){
+            return _items[i];
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>在当前列表下查找最后一个指定信息的节点。</T>
+   //
+   // @param name 节点名称
+   // @return XML节点
+   //============================================================
+   public FXmlNode findLastNode(String name){
+      for(int i = _count - 1; i >= 0; i--){
+         if(name.equalsIgnoreCase(_items[i].name())){
+            return _items[i];
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>在当前列表下查找最后一个指定信息的节点。</T>
+   //
+   // @param name 节点名称
+   // @param attributes 属性集合
+   // @return XML节点
+   //============================================================
+   public FXmlNode findLastNode(String name,
+                                String... attributes){
+      for(int i = _count - 1; i >= 0; i--){
+         if(_items[i].equals(name, attributes)){
+            return _items[i];
          }
       }
       return null;

@@ -564,6 +564,40 @@ public class FXmlNode
    }
 
    //============================================================
+   // <T>在当前节点下查找最后一个指定信息的节点。</T>
+   //
+   // @param name 节点名称
+   // @return 节点
+   //============================================================
+   public FXmlNode findLastNode(String name){
+      return (_nodes != null) ? _nodes.findLastNode(name) : null;
+   }
+
+   //============================================================
+   // <T>在当前节点下查找最后一个指定信息的节点。</T>
+   //
+   // @param attrName 属性名称
+   // @param attrValue 属性内容
+   // @return 节点
+   //============================================================
+   public FXmlNode findLastNode(String attrName,
+                                String attrValue){
+      return hasNode() ? nodes().findLastNode(null, attrName, attrValue) : null;
+   }
+
+   //============================================================
+   // <T>在当前节点下查找最后一个指定信息的节点。</T>
+   //
+   // @param name 名称
+   // @param attributes 属性集合
+   // @return 节点
+   //============================================================
+   public FXmlNode findLastNode(String name,
+                                String... attributes){
+      return hasNode() ? nodes().findLastNode(name, attributes) : null;
+   }
+
+   //============================================================
    // <T>在当前节点下的所有节点中查找一个指定信息的节点。</T>
    //
    // @param attrName 属性名称

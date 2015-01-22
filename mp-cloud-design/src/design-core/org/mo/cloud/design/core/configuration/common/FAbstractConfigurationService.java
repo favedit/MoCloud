@@ -6,7 +6,6 @@ import org.mo.cloud.design.core.configuration.FContentObjects;
 import org.mo.cloud.design.core.configuration.FContentSpace;
 import org.mo.cloud.design.core.configuration.IConfigurationConsole;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
@@ -206,41 +205,25 @@ public class FAbstractConfigurationService
                        IWebInput input,
                        IWebOutput output){
       // 获得选中的内容
-      FXmlNode selectNode = getSelectNode(input);
-      FAttributes nodeAttrs = new FAttributes();
-      // 获得容器节点
-      String nodeName = null;
-      String typeType = selectNode.get("type_type");
-      if(TYPE_COLLECTION.equals(typeType)){
-         nodeName = selectNode.get("label");
-      }else if(TYPE_COMPONENT.equals(typeType)){
-         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
-         nodeAttrs.unpack(topNode.get("attributes"));
-         if(nodeAttrs.contains("linker_name")){
-            nodeName = nodeAttrs.get("linker_name");
-         }else{
-            nodeName = topNode.get("label");
-         }
+      FXmlNode xfirst = input.config().findNode("TreeNode");
+      FXmlNode xlast = input.config().findLastNode("TreeNode");
+      if((xfirst == null) || (xlast == null)){
+         throw new FFatalError("Can't find select node.");
       }
       // 获得内容空间
-      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, nodeName);
-      // 获得控件对象
-      FContentObjects xcontrols = null;
-      if(TYPE_COLLECTION.equals(typeType)){
-         xcontrols = contentNode.config().nodes();
-      }else{
-         String objectId = selectNode.get("uuid");
-         FContentObject xcontrol = contentNode.search(objectId);
-         if(xcontrol != null){
-            xcontrols = xcontrol.nodes();
-         }
+      String code = xlast.get("label");
+      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, code);
+      // 查找控件集合
+      String objectId = xfirst.get("uuid");
+      FContentObject xcontrol = contentNode.search(objectId);
+      if(xcontrol == null){
+         throw new FFatalError("Find control node is null. (object_id={1})", objectId);
       }
-      if(xcontrols == null){
-         throw new FFatalError("Find control node is null. (node_name={1})", nodeName);
-      }
+      FContentObjects xcontrols = xcontrol.nodes();
       // 新建所有子节点
       FXmlNodes outputNodes = output.config().nodes();
-      for(int n = 0; n < xcontrols.count(); n++){
+      int count = xcontrols.count();
+      for(int n = 0; n < count; n++){
          FContentObject xcomponent = xcontrols.get(n);
          // 建立树节点
          XTreeNode xnode = new XTreeNode();
@@ -253,6 +236,35 @@ public class FAbstractConfigurationService
          node.set("is_valid", xcomponent.get("is_valid"));
          outputNodes.push(node);
       }
+
+      //      FAttributes nodeAttrs = new FAttributes();
+      //      // 获得容器节点
+      //      String nodeName = null;
+      //      String typeType = xselect.get("type_type");
+      //      if(TYPE_COLLECTION.equals(typeType)){
+      //         nodeName = xselect.get("label");
+      //      }else if(TYPE_COMPONENT.equals(typeType)){
+      //         FXmlNode topNode = xselect.search("Node", "type_type", TYPE_COLLECTION);
+      //         nodeAttrs.unpack(topNode.get("attributes"));
+      //         if(nodeAttrs.contains("linker_name")){
+      //            nodeName = nodeAttrs.get("linker_name");
+      //         }else{
+      //            nodeName = topNode.get("label");
+      //         }
+      //      }
+      //      // 获得控件对象
+      //      if(TYPE_COLLECTION.equals(typeType)){
+      //         xcontrols = contentNode.config().nodes();
+      //      }else{
+      //         String objectId = xselect.get("uuid");
+      //         FContentObject xcontrol = contentNode.search(objectId);
+      //         if(xcontrol != null){
+      //            xcontrols = xcontrol.nodes();
+      //         }
+      //      }
+      //      if(xcontrols == null){
+      //         throw new FFatalError("Find control node is null. (node_name={1})", nodeName);
+      //      }
       return EResult.Success;
    }
 
