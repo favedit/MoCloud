@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+   <Resource name='valid.format' code='V00101'>
+      <Cn>{1}中包含非法字符。</Cn>
+   </Resource>
+
+</Config>

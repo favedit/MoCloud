@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+   <Resource name='valid.string.empty' code='V00601'>
+      <En>Item {1} is empty.</En>
+      <Jp>項目({1})がヌルです．</Jp>
+      <Cn>{1}的内容为空。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.min' code='V00602'>
+      <Cn>{1}小于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.min.eq' code='V00603'>
+      <Cn>{1}小于等于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.max' code='V00604'>
+      <Cn>{1}大于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.max.eq' code='V00605'>
+      <Cn>{1}大于等于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.format' code='V00606'>
+      <Cn>{1}中包含非法字符。</Cn>
+   </Resource>
+  
+
+   <Resource name='valid.string.format.email' code='V00607'>
+      <Cn>{1}不是有效的电子邮箱格式。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.format.phone' code='V00608' min='8' max='14'>
+      <Cn>{1}不是有效的电话号码格式。</Cn>
+   </Resource>
+   
+   <Resource name='valid.string.format.mobile' code='V00609' min='8' max='14'>
+      <Cn>{1}不是有效的手机号码格式。</Cn>
+   </Resource>
+   
+    <Resource name='valid.string.format.passport' code='V00610' min='8' max='14'>
+      <Cn>{1}不是有效的帐号格式。</Cn>
+   </Resource> 
+
+</Config>

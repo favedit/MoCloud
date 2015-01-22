@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+   <Resource name='valid.string.empty' code='V00501'>
+      <En>Item {1} is empty.</En>
+      <Jp>項目({1})がヌルです．</Jp>
+      <Cn>{1}的内容为空。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.min' code='V00502'>
+      <Cn>{1}小于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.min.eq' code='V00503'>
+      <Cn>{1}小于等于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.max' code='V00504'>
+      <Cn>{1}大于{2}个字符。</Cn>
+   </Resource>
+
+   <Resource name='valid.string.length.max.eq' code='V00505'>
+      <Cn>{1}大于等于{2}个字符。</Cn>
+   </Resource>
+   
+
+</Config>

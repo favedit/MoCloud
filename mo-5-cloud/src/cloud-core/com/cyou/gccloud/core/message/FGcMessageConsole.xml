@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <Resource name='E00101' code='MethodNotExists' text='处理不存在。(method={1})'/>
+   
+   <Resource name='E00103' code='SessionNotExists' text='当前会话不存在，请重新登录。'/> 
+   
+   <Resource name='E00104' code='SessionDirty' text='当前会话已过期，请重新登录。)'/> 
+   
+   <Resource name='E00105' code='UserNotLogin' text='亲，只有注册后才能操作哦！'/> 
+
+   <Resource name='E00201' code='SchoolNotExists' text='学校不存在。(school_id={1})'/>
+   
+   <Resource name='E00202' code='ResourceNotExists' text='资源不存在。(resource_code={1})'/>
+   
+   <Resource name='E00203' code='ApplicationNotExists' text='应用不存在。(application_code={1})'/>
+   
+   <Resource name='E00204' code='OccupationNotExists' text='找不到用户职业。(userId={1}, occupationCd={2})'/>
+   
+   <Resource name='E00205' code='TaskNotExists' text='没有这个任务。(info={1})'/> 
+
+   <Resource name='E00301' code='PassportNotExists' text='用户帐号不存在。(passport={1})'/>
+
+   <Resource name='E00302' code='PassportDuplicate' text='用户帐号重复。(passport={1})'/>
+
+   <Resource name='E00303' code='PasswordInvalid' text='用户密码错误。'/>
+   
+   <Resource name='E00304' code='MobileBounded' text='手机号已绑定。(mobile={1})'/>
+   
+   <Resource name='E00305' code='VerifyCodeLimited' text='校验码受限。'/>  
+   
+   <Resource name='E00306' code='AccountLocked' text='用户已锁定，请联系客服。'/>  
+   
+   <Resource name='E00307' code='VerifyCodeNotFound' text='校验码不存在。'/>  
+   
+   <Resource name='E00308' code='VerifyCodeInvalid' text='校验码已失效。'/> 
+   
+   <Resource name='E00309' code='UserAliasDuplicate' text='用户昵称重复。(alias={1})'/> 
+   
+   <Resource name='E00310' code='NoCodeOfMobile' text='找不到属于这个手机号的验证码，或是验证码已超时失效。(mobile={1})'/> 
+   
+   <Resource name='E00311' code='InviteCodeNotExists' text='邀请码不存在。(code={1})'/>   
+   
+   <Resource name='E00312' code='UserAliasIsEmpty' text='用户昵称不能为空。'/>  
+      
+   <Resource name='E00313' code='UserAliasTooLong' text='用户昵称过长。(alias={1})'/> 
+   
+   <Resource name='E00314' code='UserHomeAddressTooLong' text='用户地址过长。'/> 
+   
+   <Resource name='E00315' code='UserContractEmailTooLong' text='邮箱地址过长。'/> 
+   
+   <Resource name='E00316' code='UserContractEmailIsEmpty' text='邮箱地址不能为空。'/> 
+   <Resource name='E00317' code='UserHomeAddressIsEmpty' text='用户地址过长。'/> 
+   
+         
+   
+   <Resource name='E00401' code='PraisedError' text='今天已经打赏过了。'/>   
+   
+   <Resource name='E00402' code='DouBiLacked' text='豆币不足，不能打赏。'/>   
+   
+   <Resource name='E00403' code='PraisePlayerLimit' text='只有玩家可以打赏，请把职业切换为玩家。'/>   
+   
+   
+   
+   <Resource name='E00501' code='LackOfBean' text='豆豆不足。'/> 
+   
+   <Resource name='E00502' code='LackOfPoint' text='豆币不足。'/> 
+   
+   <Resource name='E00503' code='LackOfGold' text='余额不足。'/> 
+   
+   
+   <Resource name='E00504' code='NotSellTime' text='商品还没开售。'/> 
+   
+   <Resource name='E00505' code='SellTimeEnd' text='商品销售时间结束。'/> 
+   
+   <Resource name='E00506' code='GoodsDataError' text='商品数据错误。'/> 
+   
+</Config>

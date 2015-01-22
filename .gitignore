@@ -2,12 +2,11 @@
 /.recommenders
 /mo-1-common/bin
 /mo-2-core/bin
-/mo-3-externals/bin
 /mo-3-logic/bin
 /mo-4-web/bin
 /mo-5-cloud/bin
 /mo-6-content/bin
-/mo-6-utility/bin
+/mo-7-utility/bin
 /mp-cloud-develop/webroot/WEB-INF/classes
 /mp-cloud-develop/webroot/WEB-INF/lib
 /mp-cloud-content/webroot/WEB-INF/classes

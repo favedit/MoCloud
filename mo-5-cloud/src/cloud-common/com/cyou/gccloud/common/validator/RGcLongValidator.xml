@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+   <Resource name='valid.value.min' code='V00301'>
+      <Cn>{1}小于{2}。</Cn>
+   </Resource>
+
+   <Resource name='valid.value.min.eq' code='V00302'>
+      <Cn>{1}小于等于{2}。</Cn>
+   </Resource>
+
+   <Resource name='valid.value.max' code='V00303'>
+      <Cn>{1}大于{2}。</Cn>
+   </Resource>
+
+   <Resource name='valid.value.max.eq' code='V00304'>
+      <Cn>{1}大于等于{2}。</Cn>
+   </Resource>
+
+   <Resource name='valid.format' code='V00305'>
+      <Cn>{1}中包含非法字符。</Cn>
+   </Resource>
+
+</Config>
