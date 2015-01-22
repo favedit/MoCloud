@@ -9,6 +9,7 @@ import org.mo.com.data.FSqlField;
 import org.mo.com.data.FSqlFields;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.data.ISqlDatasetReader;
+import org.mo.com.data.RSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RDateTime;
@@ -16,10 +17,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.data.face.FDomainSynchronizerHistoryLogic;
-import org.mo.data.face.FDomainSynchronizerHistoryUnit;
-import org.mo.data.face.FDomainSynchronizerUnitLogic;
-import org.mo.data.face.FDomainSynchronizerUnitUnit;
 
 //============================================================
 // <T>数据同步器。</T>
@@ -51,7 +48,7 @@ public class FSynchronizerUnit
    protected FSqlDatasetMeta _targetMeta;
 
    // 同步数据集单元
-   protected FDomainSynchronizerUnitUnit _synchronizerUnit;
+   //protected FDomainSynchronizerUnitUnit _synchronizerUnit;
 
    // 记录数据时间
    protected TDateTime _recordDateTime = new TDateTime();
@@ -143,23 +140,23 @@ public class FSynchronizerUnit
       _targetDataName = value;
    }
 
-   //============================================================
-   // <T>获得同步数据单元。</T>
+   //   //============================================================
+   //   // <T>获得同步数据单元。</T>
+   //   //
+   //   // @return 同步数据单元
+   //   //============================================================ 
+   //   public FDomainSynchronizerUnitUnit synchronizerUnit(){
+   //      return _synchronizerUnit;
+   //   }
    //
-   // @return 同步数据单元
-   //============================================================ 
-   public FDomainSynchronizerUnitUnit synchronizerUnit(){
-      return _synchronizerUnit;
-   }
-
-   //============================================================
-   // <T>设置同步数据单元。</T>
-   //
-   // @param synchronizerDataUnit 同步数据单元
-   //============================================================ 
-   public void setSynchronizerUnit(FDomainSynchronizerUnitUnit synchronizerUnit){
-      _synchronizerUnit = synchronizerUnit;
-   }
+   //   //============================================================
+   //   // <T>设置同步数据单元。</T>
+   //   //
+   //   // @param synchronizerDataUnit 同步数据单元
+   //   //============================================================ 
+   //   public void setSynchronizerUnit(FDomainSynchronizerUnitUnit synchronizerUnit){
+   //      _synchronizerUnit = synchronizerUnit;
+   //   }
 
    //============================================================
    // <T>转换数据。</T>
@@ -176,7 +173,7 @@ public class FSynchronizerUnit
             return "STR_TO_DATE('" + value + "','%Y%c%d%H%i%s')";
          case String:
          case Memo:
-            return "'" + connection.formatValue(value) + "'";
+            return "'" + RSql.formatValue(value) + "'";
          default:
             throw new FFatalError("Unknown type.");
       }
@@ -296,25 +293,25 @@ public class FSynchronizerUnit
    //============================================================
    public void load(){
       // 加载行对象
-      _sourceDataName = _synchronizerUnit.sourceDataName();
-      _targetDataName = _synchronizerUnit.targetDataName();
-      _recordDateTime.assign(_synchronizerUnit.recordDate());
-      // 获得来源描述
-      ISqlConnection sourceConnection = _synchronizer.allocSourceConnection();
-      try{
-         _sourceMeta = sourceConnection.fetchTableMeta(_sourceDataName);
-      }finally{
-         _synchronizer.free(sourceConnection);
-      }
-      // 获得目标描述
-      ISqlConnection targetConnection = _synchronizer.allocTargetConnection();
-      try{
-         _targetMeta = targetConnection.fetchTableMeta(_targetDataName);
-      }finally{
-         _synchronizer.free(targetConnection);
-      }
-      // 输出日志
-      _logger.debug(this, "load", "Load synchrornizer. (source_data_name={1}, target_data_name={2}, record_date={3})", _sourceDataName, _targetDataName, _recordDateTime.format());
+      //      _sourceDataName = _synchronizerUnit.sourceDataName();
+      //      _targetDataName = _synchronizerUnit.targetDataName();
+      //      _recordDateTime.assign(_synchronizerUnit.recordDate());
+      //      // 获得来源描述
+      //      ISqlConnection sourceConnection = _synchronizer.allocSourceConnection();
+      //      try{
+      //         _sourceMeta = sourceConnection.fetchTableMeta(_sourceDataName);
+      //      }finally{
+      //         _synchronizer.free(sourceConnection);
+      //      }
+      //      // 获得目标描述
+      //      ISqlConnection targetConnection = _synchronizer.allocTargetConnection();
+      //      try{
+      //         _targetMeta = targetConnection.fetchTableMeta(_targetDataName);
+      //      }finally{
+      //         _synchronizer.free(targetConnection);
+      //      }
+      //      // 输出日志
+      //      _logger.debug(this, "load", "Load synchrornizer. (source_data_name={1}, target_data_name={2}, record_date={3})", _sourceDataName, _targetDataName, _recordDateTime.format());
    }
 
    //============================================================
@@ -325,24 +322,24 @@ public class FSynchronizerUnit
    //============================================================
    public void updateDomain(TDateTime recordDate,
                             int recordCount){
-      // 更新开始时间
-      ISqlConnection connection = _synchronizer.allocDomainConnection();
-      try{
-         // 更新同步记录
-         FDomainSynchronizerUnitLogic synchronizerDatasetLogic = new FDomainSynchronizerUnitLogic(connection);
-         _synchronizerUnit.recordDate().assign(recordDate);
-         _synchronizerUnit.setRecordTotal(_synchronizerUnit.recordTotal() + recordCount);
-         synchronizerDatasetLogic.doUpdate(_synchronizerUnit, _synchronizerUnit.ouid());
-         // 插入历史记录
-         FDomainSynchronizerHistoryLogic synchronizerHistoryLogic = new FDomainSynchronizerHistoryLogic(connection);
-         FDomainSynchronizerHistoryUnit historyUnit = new FDomainSynchronizerHistoryUnit();
-         historyUnit.setUnitId(_synchronizerUnit.ouid());
-         historyUnit.recordDate().assign(recordDate);
-         historyUnit.setRecordCount(recordCount);
-         synchronizerHistoryLogic.doInsert(historyUnit);
-      }finally{
-         _synchronizer.free(connection);
-      }
+      //      // 更新开始时间
+      //      ISqlConnection connection = _synchronizer.allocDomainConnection();
+      //      try{
+      //         // 更新同步记录
+      //         FDomainSynchronizerUnitLogic synchronizerDatasetLogic = new FDomainSynchronizerUnitLogic(connection);
+      //         _synchronizerUnit.recordDate().assign(recordDate);
+      //         _synchronizerUnit.setRecordTotal(_synchronizerUnit.recordTotal() + recordCount);
+      //         synchronizerDatasetLogic.doUpdate(_synchronizerUnit, _synchronizerUnit.ouid());
+      //         // 插入历史记录
+      //         FDomainSynchronizerHistoryLogic synchronizerHistoryLogic = new FDomainSynchronizerHistoryLogic(connection);
+      //         FDomainSynchronizerHistoryUnit historyUnit = new FDomainSynchronizerHistoryUnit();
+      //         historyUnit.setUnitId(_synchronizerUnit.ouid());
+      //         historyUnit.recordDate().assign(recordDate);
+      //         historyUnit.setRecordCount(recordCount);
+      //         synchronizerHistoryLogic.doInsert(historyUnit);
+      //      }finally{
+      //         _synchronizer.free(connection);
+      //      }
    }
 
    //============================================================

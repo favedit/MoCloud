@@ -1,7 +1,6 @@
 package org.mo.com.lang;
 
 import java.text.DecimalFormat;
-
 import org.mo.com.lang.type.RBaseDouble;
 
 //============================================================
@@ -109,6 +108,26 @@ public class RDouble
       }
       return defaultValue;
    }
+
+   //============================================================
+   // <T>将一个字符串数组变换为双精度数组。</T>
+   // <P>如果变换失败，将得到双精度类型的默认值，不会产生错误。</P>
+   //
+   // @param values 字符串数组
+   // @return 双精度数组
+   //============================================================
+   public static double[] toDoubles(String[] values){
+      double[] result = null;
+      if(values != null){
+         int count = values.length;
+         result = new double[count];
+         for(int n = 0; n < count; n++){
+            result[n] = parse(values[n]);
+         }
+      }
+      return result;
+   }
+
    //============================================================
    // <T>计算百分比</T>
    //
@@ -118,81 +137,73 @@ public class RDouble
    //============================================================
    public static double calculatePercent(long used,
                                          long total){
-	  double per = ((total - used)*1.0)/(total*1.0)*100;
-	  DecimalFormat df = new DecimalFormat("#####0.00");
-	  double percent =RDouble.parse(df.format(per).toString());
+      double per = ((total - used) * 1.0) / (total * 1.0) * 100;
+      DecimalFormat df = new DecimalFormat("#####0.00");
+      double percent = RDouble.parse(df.format(per).toString());
       return percent;
    }
-   //   /**
-   //    * <p>将一个双精度数值格式化为字符串</p>
-   //    * <p>create date:2005/02/14</p>
-   //    *
-   //    * @param fValue 双精度数
-   //    * @param nLength 格式化长度
-   //    * @return 字符串
-   //    */
-   //   public static String format(double fValue,
-   //                               int nLength){
-   //      return RString.leftPad(double.toString(fValue), nLength, "0");
-   //   }
+
+   //============================================================
+   // <T>获得长整数的字符串。</T>
    //
-   //   /**
-   //    * <p>将一个双精度数值格式化为字符串</p>
-   //    * <p>create date:2005/02/14</p>
-   //    *
-   //    * @param fValue 双精度数
-   //    * @param nLength 格式化长度
-   //    * @param sChar 补足长度用的字符串
-   //    * @return 字符串
-   //    */
-   //   public static String format(double fValue,
-   //                               int nLength,
-   //                               String sChar){
-   //      return RString.leftPad(double.toString(fValue), nLength, sChar);
-   //   }
+   // @param value 内容
+   // @return 字符串
+   //============================================================
+   public final static String toString(double value){
+      return Double.toString(value);
+   }
+
+   //============================================================
+   // <T>将一个双精度数值格式化为字符串。</T>
    //
-   //   /**
-   //    * <p>将一个双精度字符串格式化为字符串</p>
-   //    * <p>create date:2005/02/14</p>
-   //    *
-   //    * @param sValue 双精度字符串
-   //    * @param nLength 格式化长度
-   //    * @return 字符串
-   //    */
-   //   public static String format(String sValue,
-   //                               int nLength){
-   //      return RString.leftPad(sValue, nLength, "0");
-   //   }
+   // @param value 双精度数
+   // @param length 格式化长度
+   // @return 字符串
+   //============================================================
+   public static String format(double value,
+                               int length){
+      String valueString = Double.toString(value);
+      return RString.leftPad(valueString, length, "0");
+   }
+
+   //============================================================
+   // <T>将一个双精度数值格式化为字符串。</T>
    //
-   //   /**
-   //    * <p>将一个双精度字符串格式化为字符串</p>
-   //    * <p>create date:2005/02/14</p>
-   //    *
-   //    * @param sValue 双精度字符串
-   //    * @param nLength 格式化长度
-   //    * @param sChar 补足长度用的字符串
-   //    * @return 字符串
-   //    */
-   //   public static String format(String sValue,
-   //                               int nLength,
-   //                               String sChar){
-   //      return RString.leftPad(sValue, nLength, sChar);
-   //   }
+   // @param value 双精度数
+   // @param length 格式化长度
+   // @param pad 补足长度用的字符串
+   // @return 字符串
+   //============================================================
+   public static String format(String value,
+                               int length){
+      return RString.leftPad(value, length, "0");
+   }
+
+   //============================================================
+   // <T>将一个双精度数值格式化为字符串。</T>
    //
-   //   /**
-   //    * <p>将一个字符串数组变换为双精度数组</p>
-   //    * <p>如果变换失败，将得到双精度类型的默认值，不会产生错误</p>
-   //    * <p>create date:2005/02/14</p>
-   //    *
-   //    * @param arValue 字符串数组
-   //    * @return 双精度数组
-   //    */
-   //   public static double[] todouble(String[] arValue){
-   //      int nSize = arValue.length;
-   //      double[] arResult = new double[nSize];
-   //      for(int n = 0; n < nSize; n++){
-   //         arResult[n] = todouble(arValue[n]);
-   //      }
-   //      return arResult;
-   //   }
+   // @param value 双精度数
+   // @param length 格式化长度
+   // @param pad 补足长度用的字符串
+   // @return 字符串
+   //============================================================
+   public static String format(double value,
+                               int length,
+                               String pad){
+      return RString.leftPad(Double.toString(value), length, pad);
+   }
+
+   //============================================================
+   // <T>将一个双精度数值格式化为字符串。</T>
+   //
+   // @param value 双精度数
+   // @param length 格式化长度
+   // @param pad 补足长度用的字符串
+   // @return 字符串
+   //============================================================
+   public static String format(String value,
+                               int length,
+                               String pad){
+      return RString.leftPad(value, length, pad);
+   }
 }

@@ -3,6 +3,7 @@ package org.mo.com.xml;
 import java.util.Iterator;
 import org.mo.com.lang.EDumpLevel;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjectId;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.IComparable;
@@ -41,6 +42,9 @@ public class FXmlNode
    // 节点类型
    protected EXmlNode _typeCd = EXmlNode.Node;
 
+   // 是否集合
+   protected boolean _isCollection;
+
    // 节点名称
    protected String _name;
 
@@ -67,6 +71,18 @@ public class FXmlNode
    //============================================================
    public FXmlNode(String name){
       _name = name;
+   }
+
+   //============================================================
+   // <T>构造XML节点。</T>
+   //
+   // @param name 节点名称
+   // @param text 节点内容
+   //============================================================
+   public FXmlNode(String name,
+                   String text){
+      _name = name;
+      _text = text;
    }
 
    //============================================================
@@ -117,6 +133,24 @@ public class FXmlNode
    }
 
    //============================================================
+   // <T>判断是否为集合。</T>
+   //
+   // @return 是否为集合
+   //============================================================
+   public boolean isCollection(){
+      return _isCollection;
+   }
+
+   //============================================================
+   // <T>设置是否为集合。</T>
+   //
+   // @param isCollection 是否为集合
+   //============================================================
+   public void setIsCollection(boolean isCollection){
+      _isCollection = isCollection;
+   }
+
+   //============================================================
    // <T>判断是否为指定名称。</T>
    //
    // @param name 节点名称
@@ -157,7 +191,24 @@ public class FXmlNode
    // <T>设置节点文本。</T>
    //
    // @param text 节点文本
-   // @return TRUE：成功<br>FALSE：失败
+   //============================================================
+   public void setText(int value){
+      _text = Integer.toString(value);
+   }
+
+   //============================================================
+   // <T>设置节点文本。</T>
+   //
+   // @param text 节点文本
+   //============================================================
+   public void setText(long value){
+      _text = Long.toString(value);
+   }
+
+   //============================================================
+   // <T>设置节点文本。</T>
+   //
+   // @param text 节点文本
    //============================================================
    public void setText(String text){
       _text = text;
@@ -210,6 +261,51 @@ public class FXmlNode
    }
 
    //============================================================
+   // <T>是否含有属性。</T>
+   //
+   // @param attrName 属性名称
+   // @param attrValue 属性内容
+   // @return TRUE：是<br>FALSE：否
+   //============================================================
+   public boolean equalsAttribute(String attrName,
+                                  String attrValue){
+      if(!hasAttribute()){
+         return false;
+      }
+      String value = _attributes.get(attrName);
+      if(!RString.equals(value, attrValue)){
+         return false;
+      }
+      return true;
+   }
+
+   //============================================================
+   // <T>是否含有属性。</T>
+   //
+   // @param name 名称
+   // @param attrName 属性名称
+   // @param attrValue 属性内容
+   // @return TRUE：是<br>FALSE：否
+   //============================================================
+   public boolean equalsAttribute(String name,
+                                  String attrName,
+                                  String attrValue){
+      // 比较名称
+      if(!_name.equals(name)){
+         return false;
+      }
+      // 比较属性
+      if(!hasAttribute()){
+         return false;
+      }
+      String value = _attributes.get(attrName);
+      if(!RString.equals(value, attrValue)){
+         return false;
+      }
+      return true;
+   }
+
+   //============================================================
    // <T>是否含有指定名称。</T>
    //
    // @param name 指定名称
@@ -250,7 +346,7 @@ public class FXmlNode
    // @return TRUE：是<br>FALSE：否
    //============================================================
    public boolean hasAttribute(){
-      if(null != _attributes){
+      if(_attributes != null){
          return !_attributes.isEmpty();
       }
       return false;
@@ -263,7 +359,7 @@ public class FXmlNode
    // @return TRUE：是<br>FALSE：否
    //============================================================
    public boolean hasAttribute(String name){
-      if(null != _attributes){
+      if(_attributes != null){
          return _attributes.contains(name);
       }
       return false;
@@ -275,7 +371,7 @@ public class FXmlNode
    // @return 属性列表
    //============================================================
    public FAttributes attributes(){
-      if(null == _attributes){
+      if(_attributes == null){
          _attributes = new FAttributes();
       }
       return _attributes;
@@ -287,7 +383,7 @@ public class FXmlNode
    // @return TRUE：是<br>FALSE：否
    //============================================================
    public boolean hasNode(){
-      return (null != _nodes) ? !_nodes.isEmpty() : false;
+      return (_nodes != null) ? !_nodes.isEmpty() : false;
    }
 
    //============================================================
@@ -297,7 +393,7 @@ public class FXmlNode
    // @return TRUE：存在<br>FALSE：不存在
    //============================================================
    public boolean hasNode(String name){
-      return (null != findNode(name));
+      return (findNode(name) != null);
    }
 
    //============================================================
@@ -309,7 +405,7 @@ public class FXmlNode
    //============================================================
    public boolean hasNode(String attrName,
                           String attrValue){
-      return (null != findNode(attrName, attrValue));
+      return (findNode(attrName, attrValue) != null);
    }
 
    //============================================================
@@ -322,7 +418,7 @@ public class FXmlNode
    public boolean hasNode(String name,
                           String attrName,
                           String attrValue){
-      return (null != findNode(name, attrName, attrValue));
+      return (findNode(name, attrName, attrValue) != null);
    }
 
    //============================================================
@@ -340,7 +436,7 @@ public class FXmlNode
                           String attrValue1,
                           String attrName,
                           String attrValue2){
-      return (null != findNode(name, attrName1, attrName1, attrName, attrName));
+      return (findNode(name, attrName1, attrName1, attrName, attrName) != null);
    }
 
    //============================================================
@@ -349,7 +445,7 @@ public class FXmlNode
    // @return 节点总数
    //============================================================
    public int nodeCount(){
-      return (null == _nodes) ? 0 : _nodes.count();
+      return (_nodes != null) ? _nodes.count() : 0;
    }
 
    //============================================================
@@ -499,7 +595,7 @@ public class FXmlNode
    // @param attrValue 属性内容
    // @return 节点
    //============================================================
-   public FXmlNode findDeep(){
+   public FXmlNode search(){
       FXmlNode find = this;
       while(find.hasNode()){
          find = find.node(0);
@@ -510,23 +606,53 @@ public class FXmlNode
    //============================================================
    // <T>递归查询当前所有子节点满足条件的节点。</T>
    //
+   // @param attrName 属性名称
+   // @param attrValue 属性内容
+   // @return 节点
+   //============================================================
+   public FXmlNode search(String attrName,
+                          String attrValue){
+      if(equalsAttribute(attrName, attrValue)){
+         return this;
+      }
+      if(_nodes != null){
+         int count = _nodes.count();
+         for(int n = 0; n < count; n++){
+            FXmlNode node = _nodes.get(n);
+            FXmlNode find = node.search(attrName, attrValue);
+            if(find != null){
+               return find;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>递归查询当前所有子节点满足条件的节点。</T>
+   //
    // @param name 名称
    // @param attrName 属性名称
    // @param attrValue 属性内容
    // @return 节点
    //============================================================
-   public FXmlNode findDeep(String name,
-                            String attrName,
-                            String attrValue){
-      FXmlNode node = this;
-      while(node.hasNode()){
-         FXmlNode find = node.findNode(name, attrName, attrValue);
-         if(null != find){
-            return find;
-         }
-         node = node.node(0);
+   public FXmlNode search(String name,
+                          String attrName,
+                          String attrValue){
+      if(equalsAttribute(name, attrName, attrValue)){
+         return this;
       }
-      return node;
+      if(_nodes != null){
+         int count = _nodes.count();
+         for(int n = 0; n < count; n++){
+            FXmlNode node = _nodes.get(n);
+            FXmlNode find = node.search(attrName, attrValue);
+            if(find != null){
+               return find;
+            }
+         }
+      }
+      return null;
    }
 
    //============================================================
@@ -709,6 +835,35 @@ public class FXmlNode
          throw new NullPointerException("name");
       }
       return nodes().create(name);
+   }
+
+   //============================================================
+   // <T>创建一个子节点。</T>
+   //
+   // @param name 节点名称
+   // @param text 节点文本
+   // @return 子节点
+   //============================================================
+   public FXmlNode createNode(String name,
+                              int text){
+      return createNode(name, Integer.toString(text));
+   }
+
+   //============================================================
+   // <T>创建一个子节点。</T>
+   //
+   // @param name 节点名称
+   // @param text 节点文本
+   // @return 子节点
+   //============================================================
+   public FXmlNode createNode(String name,
+                              String text){
+      if(RString.isEmpty(name)){
+         throw new NullPointerException("name");
+      }
+      FXmlNode node = new FXmlNode(name, text);
+      nodes().push(node);
+      return node;
    }
 
    //============================================================
@@ -951,9 +1106,35 @@ public class FXmlNode
    // @param name 属性名称
    // @param value 属性内容
    //============================================================
+   public void setNvl(String name,
+                      boolean value){
+      if(value){
+         attributes().set(name, RBoolean.toString(value));
+      }
+   }
+
+   //============================================================
+   // <p>设置属性名称和整数属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
    public void set(String name,
                    int value){
       attributes().set(name, Integer.toString(value));
+   }
+
+   //============================================================
+   // <p>设置属性名称和整数属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
+   public void setNvl(String name,
+                      int value){
+      if(value != 0){
+         attributes().set(name, Integer.toString(value));
+      }
    }
 
    //============================================================
@@ -965,6 +1146,19 @@ public class FXmlNode
    public void set(String name,
                    long value){
       attributes().set(name, Long.toString(value));
+   }
+
+   //============================================================
+   // <p>设置属性名称和长整数属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
+   public void setNvl(String name,
+                      long value){
+      if(value != 0){
+         attributes().set(name, Long.toString(value));
+      }
    }
 
    //============================================================
@@ -984,9 +1178,35 @@ public class FXmlNode
    // @param name 属性名称
    // @param value 属性内容
    //============================================================
+   public void setNvl(String name,
+                      float value){
+      if(value != 0){
+         attributes().set(name, Float.toString(value));
+      }
+   }
+
+   //============================================================
+   // <p>设置属性名称和整数属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
    public void set(String name,
                    double value){
       attributes().set(name, Double.toString(value));
+   }
+
+   //============================================================
+   // <p>设置属性名称和整数属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
+   public void setNvl(String name,
+                      double value){
+      if(value != 0){
+         attributes().set(name, Double.toString(value));
+      }
    }
 
    //============================================================
@@ -998,7 +1218,46 @@ public class FXmlNode
    @Override
    public void set(String name,
                    String value){
-      attributes().set(name, value);
+      attributes().set(name, RString.nvl(value));
+   }
+
+   //============================================================
+   // <p>设置属性名称和字符串属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
+   public void setNvl(String name,
+                      String value){
+      if(!RString.isEmpty(value)){
+         attributes().set(name, value);
+      }
+   }
+
+   //============================================================
+   // <p>设置属性名称和字符串属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
+   public void set(String name,
+                   Object value){
+      String valueString = RString.toString(value);
+      attributes().set(name, valueString);
+   }
+
+   //============================================================
+   // <p>设置属性名称和字符串属性内容。</p>
+   //
+   // @param name 属性名称
+   // @param value 属性内容
+   //============================================================
+   public void setNvl(String name,
+                      Object value){
+      String valueString = RString.toString(value);
+      if(!RString.isEmpty(valueString)){
+         attributes().set(name, valueString);
+      }
    }
 
    //============================================================
@@ -1026,7 +1285,7 @@ public class FXmlNode
    // @return 节点集合
    //============================================================
    public FXmlNodes nodes(){
-      if(null == _nodes){
+      if(_nodes == null){
          _nodes = new FXmlNodes(this);
       }
       return _nodes;
@@ -1040,7 +1299,7 @@ public class FXmlNode
    //============================================================
    public FXmlNodes nodes(String name){
       FXmlNodes nodes = new FXmlNodes();
-      if(null != _nodes){
+      if(_nodes != null){
          int n = -1;
          int count = _nodes.count();
          while(++n < count){
@@ -1079,8 +1338,14 @@ public class FXmlNode
    // @return 节点文本
    //============================================================
    public String nodeText(String name){
-      FXmlNode node = nodes().findNode(name);
-      return (null != node) ? node.text() : null;
+      String text = null;
+      if(hasNode()){
+         FXmlNode node = _nodes.findNode(name);
+         if(node != null){
+            text = node.text();
+         }
+      }
+      return text;
    }
 
    //============================================================
@@ -1092,8 +1357,74 @@ public class FXmlNode
    //============================================================
    public String nodeText(String name,
                           String... attributes){
-      FXmlNode node = nodes().findNode(name, attributes);
-      return (null != node) ? node.text() : null;
+      String text = null;
+      if(hasNode()){
+         FXmlNode node = _nodes.findNode(name, attributes);
+         if(node != null){
+            text = node.text();
+         }
+      }
+      return text;
+   }
+
+   //============================================================
+   // <T>获得节点列表中指定节点的整数。</T>
+   //
+   // @param name 节点名称
+   // @return 整数
+   //============================================================
+   public int nodeTextAsInt(String name){
+      int result = 0;
+      String text = nodeText(name);
+      if(text != null){
+         result = RInteger.parse(text);
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>获得节点列表中指定节点的长整数。</T>
+   //
+   // @param name 节点名称
+   // @return 长整数
+   //============================================================
+   public long nodeTextAsLong(String name){
+      long result = 0;
+      String text = nodeText(name);
+      if(text != null){
+         result = RLong.parse(text);
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>获得节点列表中指定节点的浮点数整数。</T>
+   //
+   // @param name 节点名称
+   // @return 浮点数整数
+   //============================================================
+   public float nodeTextAsFloat(String name){
+      float result = 0;
+      String text = nodeText(name);
+      if(text != null){
+         result = RFloat.parse(text);
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>获得节点列表中指定节点的双精度浮点数整数。</T>
+   //
+   // @param name 节点名称
+   // @return 双精度浮点数整数
+   //============================================================
+   public double nodeTextAsDouble(String name){
+      double result = 0;
+      String text = nodeText(name);
+      if(text != null){
+         result = RDouble.parse(text);
+      }
+      return result;
    }
 
    //============================================================
@@ -1214,10 +1545,16 @@ public class FXmlNode
    //
    // @param xml XML字符串
    // @param level 级别
+   // @param optionDeep 深度设置
+   // @param optionText 文本设置
    //============================================================
    protected void buildXml(FString xml,
-                           int level){
-      xml.appendRepeat("   ", level);
+                           int level,
+                           boolean optionDeep,
+                           boolean optionText){
+      if(optionDeep){
+         xml.appendRepeat("   ", level);
+      }
       // 建立属性列表
       xml.append('<');
       xml.append(_name);
@@ -1235,16 +1572,16 @@ public class FXmlNode
       // 建立文本和节点对象
       boolean hasText = !RString.isEmpty(_text);
       boolean hasNode = (null != _nodes) ? !_nodes.isEmpty() : false;
-      if(hasText | hasNode){
+      if(optionText && (hasText | hasNode)){
          xml.append(">");
          if(hasText){
             xml.append(RXml.formatNote(_text));
          }
-         if(hasNode){
+         if(optionDeep && hasNode){
             xml.append("\n");
             int count = _nodes.count();
             for(int n = 0; n < count; n++){
-               _nodes.get(n).buildXml(xml, level + 1);
+               _nodes.get(n).buildXml(xml, level + 1, optionDeep, optionText);
                xml.append("\n");
             }
             xml.appendRepeat("   ", level);
@@ -1262,8 +1599,19 @@ public class FXmlNode
    //============================================================
    public FString xml(){
       FString xml = new FString();
-      buildXml(xml, 0);
+      buildXml(xml, 0, true, true);
       return xml;
+   }
+
+   //============================================================
+   // <T>获得简单字符串。</T>
+   //
+   // @return 简单字符串
+   //============================================================
+   public String simpleXml(){
+      FString xml = new FString();
+      buildXml(xml, 0, false, false);
+      return xml.toString();
    }
 
    //============================================================
@@ -1276,16 +1624,18 @@ public class FXmlNode
    public FXmlNode copy(){
       // 复制节点
       FXmlNode node = new FXmlNode();
+      node._document = _document;
+      node._isCollection = _isCollection;
       node._name = _name;
       node._text = _text;
       // 复制属性
-      if(null != _attributes){
+      if(_attributes != null){
          FAttributes attributes = new FAttributes();
          attributes.assign(_attributes);
          node._attributes = attributes;
       }
       // 复制子节点集合
-      if(null != _nodes){
+      if(_nodes != null){
          node._nodes = _nodes.copy();
       }
       return node;
@@ -1327,6 +1677,113 @@ public class FXmlNode
    @Override
    public String toString(){
       return dump().toString();
+   }
+
+   //============================================================
+   // <T>获得JSON字符串。</T>
+   //
+   // @param source 来源代码
+   // @param level 层级
+   // @return JSON字符串
+   //============================================================
+   public FDictionary<FXmlNodes> makeJsonCollection(FXmlNode xconfig){
+      FDictionary<FXmlNodes> result = null;
+      if(xconfig.hasNode()){
+         result = new FDictionary<FXmlNodes>();
+         int count = xconfig.nodeCount();
+         for(int n = 0; n < count; n++){
+            FXmlNode xchild = xconfig.node(n);
+            String name = xchild.name();
+            // 增加对象
+            FXmlNodes nodes = result.get(name);
+            if(nodes == null){
+               nodes = new FXmlNodes();
+               result.set(name, nodes);
+            }
+            nodes.push(xchild);
+         }
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>获得JSON字符串。</T>
+   //
+   // @return JSON字符串
+   //============================================================
+   public String toJson(){
+      FString source = new FString();
+      toJson(source, true, 0);
+      return source.toString();
+   }
+
+   //============================================================
+   // <T>获得JSON字符串。</T>
+   //
+   // @param source 来源代码
+   // @param level 层级
+   // @return JSON字符串
+   //============================================================
+   public void toJson(FString source,
+                      boolean top,
+                      int level){
+      boolean hasAttributes = hasAttribute();
+      boolean hasNode = hasNode();
+      FDictionary<FXmlNodes> map = makeJsonCollection(this);
+      if(map == null){
+         attributes().toJson(source, true);
+      }
+
+      if(_isCollection){
+         // 集合处理
+         int count = _nodes.count();
+         for(int n = 0; n < count; n++){
+            FXmlNode xchild = _nodes.get(n);
+            source.appendRepeat(RDump.LEVEL_SPACE, level + 1);
+            xchild.attributes().toJson(source, true);
+            if(n < count - 1){
+               source.append(',');
+            }
+            source.append('\n');
+         }
+      }else{
+         // 开始节点
+         if(!top && hasNode){
+            source.appendRepeat(RDump.LEVEL_SPACE, level);
+            source.append('"');
+            source.append(_name);
+            source.append("\":");
+         }
+         // 输出属性开始
+         if(hasAttributes){
+            source.append('{');
+            if(hasNode){
+               source.appendRepeat(RDump.LEVEL_SPACE, level + 1);
+            }
+            _attributes.toJson(source, false);
+         }
+         // 输出节点集合
+         if(hasNode){
+            if(hasAttributes){
+               source.append(",");
+            }
+            source.append("[\n");
+            int count = _nodes.count();
+            for(int n = 0; n < count; n++){
+               FXmlNode xchild = _nodes.get(n);
+               xchild.toJson(source, false, level + 1);
+               if(n < count - 1){
+                  source.append(',');
+               }
+            }
+            source.append(']');
+         }
+         source.append('\n');
+         // 输出属性结束
+         if(hasAttributes){
+            source.append('}');
+         }
+      }
    }
 
    //============================================================
@@ -1385,22 +1842,4 @@ public class FXmlNode
    public TDumpInfo dump(TDumpInfo info){
       return dump(info, this, EDumpLevel.Normal, info.level());
    }
-   //   public void compress(){
-   //      if(_attributes != null){
-   //         _attributes.compress();
-   //      }
-   //      if(_nodes != null){
-   //         int count = _nodes.count();
-   //         if(count > 0){
-   //            int n = -1;
-   //            while(++n < count){
-   //               _nodes.get(n).compress();
-   //            }
-   //         }
-   //      }
-   //   }
-   //
-   //   public String nvl(String name){
-   //      return RString.nvl(attributes().get(name));
-   //   }
 }

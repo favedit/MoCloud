@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>选取控件对象的XML节点基类。</T>
 //============================================================
 public interface XListViewFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MListView";

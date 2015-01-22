@@ -9,7 +9,8 @@
 	<classpathentry kind="src" path="src/platform-java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.24-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.31-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

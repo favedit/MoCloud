@@ -31,6 +31,9 @@ public class FHttpRequest
    // 文本内容
    protected String _text;
 
+   // 字节内容
+   protected byte _data[];
+
    // 网路输出
    protected FSocketOutput _output;
 
@@ -120,6 +123,24 @@ public class FHttpRequest
    }
 
    //============================================================
+   // <T>获得字节内容。</T>
+   //
+   // @return 字节内容
+   //============================================================
+   public byte[] data(){
+      return _data;
+   }
+
+   //============================================================
+   // <T>设置字节内容。</T>
+   //
+   // @param text 字节内容
+   //============================================================
+   public void setData(byte[] data){
+      _data = data;
+   }
+
+   //============================================================
    // <T>设置默认头信息集合。</T>
    //============================================================
    protected void setDefaultHead(){
@@ -192,6 +213,9 @@ public class FHttpRequest
       if(valueData != null){
          valueLength = valueData.length;
       }
+      if(_data != null){
+         valueLength += _data.length;
+      }
       if(valueLength > 0){
          _heads.set("Content-Length", Integer.toString(valueLength));
       }
@@ -220,8 +244,11 @@ public class FHttpRequest
       line.clear();
       line.append("\r\n");
       bytes.append(line.toBytes());
-      if(valueLength > 0){
+      if(valueData != null){
          bytes.append(valueData);
+      }
+      if(_data != null){
+         bytes.append(_data);
       }
       return bytes;
    }

@@ -107,6 +107,17 @@ public class RFloat
       }
       return defaultValue;
    }
+
+   //============================================================
+   // <T>获得浮点数的字符串。</T>
+   //
+   // @param value 内容
+   // @return 字符串
+   //============================================================
+   public final static String toString(float value){
+      return Float.toString(value);
+   }
+
    //   /**
    //    * <p>将一个浮点数值格式化为字符串</p>
    //    * <p>create date:2005/02/14</p>

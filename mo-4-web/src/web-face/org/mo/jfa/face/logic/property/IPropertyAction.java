@@ -6,11 +6,10 @@
  */
 package org.mo.jfa.face.logic.property;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.logic.data.ISyPropertyDi;
 import org.mo.logic.data.ISyPropertyGroupDi;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 /**

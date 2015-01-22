@@ -1,9 +1,3 @@
-/*
- * @(#)FWebServletConsole.java
- *
- * Copyright 2008 microbject, All Rights Reserved.
- *
- */
 package org.mo.web.core.servlet;
 
 import org.mo.com.lang.FFatalError;
@@ -29,131 +23,64 @@ import org.mo.web.core.servlet.common.FServletDescriptor;
 import org.mo.web.core.servlet.common.FServletMethodDescriptor;
 import org.mo.web.core.servlet.common.FWebServlet;
 import org.mo.web.core.servlet.common.FWebServletMap;
+import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.core.servlet.common.XAopServlet;
 import org.mo.web.protocol.context.IWebContext;
 
-/**
- * <p>网络解析控制台</p>
- * 
- * @author ALEX
- */
+//============================================================
+// <T>网络处理控制台。</T>
+// <P>根据访问的地址，对页面处理执行分发处理。</P>
+//============================================================
 public class FWebServletConsole
       implements
          IWebServletConsole
 {
-
+   // 日志输出接口
    private static ILogger _logger = RLogger.find(FWebServletConsole.class);
 
+   // 绑定控制台
    @ALink
    protected IBindConsole _bindConsole;
 
+   // 数据控制台
    @ALink
    protected IDatabaseConsole _databaseConsole;
 
-   @SuppressWarnings("rawtypes")
-   protected FMap<Class, FServletDescriptor> _descriptors = new FMap<Class, FServletDescriptor>(Class.class, FServletDescriptor.class);
+   // 表单控制台
+   @ALink
+   protected IWebContainerConsole _formConsole;
 
    // 传送数据时使用编码方式
    @AProperty
    protected String _encoding;
 
-   @ALink
-   protected IWebContainerConsole _formConsole;
+   // 描述器集合
+   @SuppressWarnings("rawtypes")
+   protected FMap<Class, FServletDescriptor> _descriptors = new FMap<Class, FServletDescriptor>(Class.class, FServletDescriptor.class);
 
+   // 处理集合
    protected FWebServletMap _servlets = new FWebServletMap();
 
+   //============================================================
+   // <T>获得编码。</T>
+   //
+   // @return 编码
+   //============================================================
    public String encoding(){
       return _encoding;
    }
 
-   @Override
-   public void execute(String name,
-                       IWebContext context,
-                       IWebServletResponse response){
-      FWebServlet servlet = findServlet(name);
-      if(null == servlet){
-         _logger.warn(this, "execute", "Can't find servlet config [{0} -> {1}]", name, servlet);
-         return;
-      }
-      Object instance = findInstance(name);
-      if(null == instance){
-         _logger.warn(this, "execute", "Can't find servlet instance [{0} -> {1}]", name, instance);
-         return;
-      }
-      // find invoke method
-      String action = RString.nvl(context.parameter("do"), "process");
-      FServletMethodDescriptor methodDsp = findMethod(servlet.faceClass(), action);
-      if(null == methodDsp){
-         _logger.warn(this, "execute", "Can't find method in servlet. [{0}.{1}]", instance, action);
-         return;
-      }
-      _logger.debug(this, "execute", "Process servlet. {0}:{1}->{2}", name, instance, action);
-      // Invoke method
-      Class<?>[] types = methodDsp.types();
-      AContainer[] aforms = methodDsp.forms();
-      FWebContainerItem[] forms = new FWebContainerItem[types.length];
-      Object[] params = new Object[types.length];
-      try{
-         for(int n = 0; n < types.length; n++){
-            Class<?> type = types[n];
-            Object value = null;
-            if(type == IWebContext.class){
-               value = context;
-            }else if(type == ISqlContext.class){
-               value = new FSqlContext(_databaseConsole);
-            }else if(type == IWebServletResponse.class){
-               value = response;
-            }else if(type.isInterface()){
-               value = RAop.find(type);
-            }else if(aforms[n] != null){
-               forms[n] = _formConsole.findContainer(context, aforms[n], type);
-               value = forms[n].container();
-               context.define(aforms[n].name(), value);
-            }else{
-               throw new FFatalError("Build param error. {0}", type);
-            }
-            params[n] = value;
-         }
-         methodDsp.invoke(instance, params);
-      }catch(Exception e){
-         context.messages().push(new FFatalMessage(e));
-      }finally{
-         // Release params
-         for(Object param : params){
-            if(param instanceof IRelease){
-               try{
-                  ((IRelease)param).release();
-               }catch(Exception e){
-                  _logger.error(this, "execute", e);
-               }
-            }
-         }
-      }
-   }
-
-   @Override
-   public Object findInstance(String name){
-      Object instance = null;
-      FWebServlet servlet = findServlet(name);
-      if(null != servlet){
-         String face = servlet.face();
-         if(!RString.isBlank(face)){
-            instance = RAop.find(face);
-            if(instance == null){
-               _logger.debug(this, "execute", "Can't find servlet [face:{0}]", face);
-            }
-         }
-      }
-      if(_logger.debugAble()){
-         _logger.debug(this, "execute", "Find servlet [{0}]->{1}]", name, instance);
-      }
-      return instance;
-   }
-
+   //============================================================
+   // <T>根据名称查找函数。</T>
+   //
+   // @param clazz 类名称
+   // @param name 函数名称
+   // @return 函数
+   //============================================================
    public FServletMethodDescriptor findMethod(FClass<?> clazz,
                                               String name){
-      FServletDescriptor descriptor = _descriptors.get(clazz.nativeObject());
+      FServletDescriptor descriptor = _descriptors.get(clazz.nativeObject(), null);
       if(descriptor == null){
          descriptor = new FServletDescriptor();
          _descriptors.set(clazz.nativeObject(), descriptor);
@@ -175,19 +102,150 @@ public class FWebServletConsole
       return methodDsp;
    }
 
+   //============================================================
+   // <T>根据名称查找处理。</T>
+   //
+   // @param name 名称
+   // @return 处理
+   //============================================================
    public FWebServlet findServlet(String name){
       name = RString.nvl(name).toLowerCase();
-      FWebServlet servlet = _servlets.get(name);
-      if(null == servlet){
+      FWebServlet servlet = _servlets.get(name, null);
+      if(servlet == null){
          XAopServlet xservlet = RAop.configConsole().findNode(XAopServlet.NAME, name);
          if(xservlet != null){
             servlet = new FWebServlet();
-            if(servlet.construct(xservlet)){
-               _servlets.set(name, servlet);
-            }
+            servlet.construct(xservlet);
+            _servlets.set(name, servlet);
          }
       }
       return servlet;
    }
 
+   //============================================================
+   // <T>根据名称查找实例。</T>
+   //
+   // @param name 名称
+   // @return 实例
+   //============================================================
+   @Override
+   public Object findInstance(String name){
+      Object instance = null;
+      FWebServlet servlet = findServlet(name);
+      if(null != servlet){
+         String face = servlet.face();
+         if(!RString.isBlank(face)){
+            instance = RAop.find(face);
+            if(instance == null){
+               _logger.debug(this, "execute", "Can't find servlet [face:{1}]", face);
+            }
+         }
+      }
+      if(_logger.debugAble()){
+         _logger.debug(this, "execute", "Find servlet [{1}]->{2}]", name, instance);
+      }
+      return instance;
+   }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param name 名称
+   // @param context 环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public void execute(String name,
+                       IWebContext context,
+                       IWebServletRequest request,
+                       IWebServletResponse response){
+      FWebServlet servlet = findServlet(name);
+      if(servlet == null){
+         _logger.warn(this, "execute", "Can't find servlet config [{1} -> {2}]", name, servlet);
+         return;
+      }
+      Object instance = findInstance(name);
+      if(instance == null){
+         _logger.warn(this, "execute", "Can't find servlet instance [{1} -> {2}]", name, instance);
+         return;
+      }
+      // find invoke method
+      String action = RString.nvl(context.parameter("do"), "process");
+      FServletMethodDescriptor methodDsp = findMethod(servlet.faceClass(), action);
+      if(methodDsp == null){
+         _logger.warn(this, "execute", "Can't find method in servlet. [{1}.{2}]", instance, action);
+         return;
+      }
+      _logger.debug(this, "execute", "Process servlet. {1}:{2}->{3}", name, instance, action);
+      // Invoke method
+      Class<?>[] types = methodDsp.types();
+      AContainer[] aforms = methodDsp.forms();
+      int count = types.length;
+      FWebContainerItem[] forms = new FWebContainerItem[count];
+      Object[] params = new Object[count];
+      try{
+         for(int n = 0; n < count; n++){
+            Class<?> type = types[n];
+            Object value = null;
+            if(type == IWebContext.class){
+               value = context;
+            }else if(type == ISqlContext.class){
+               value = new FSqlContext(_databaseConsole);
+            }else if(type == IWebServletRequest.class){
+               value = request;
+            }else if(type == IWebServletResponse.class){
+               value = response;
+            }else if(type.isInterface()){
+               value = RAop.find(type);
+            }else if(aforms[n] != null){
+               forms[n] = _formConsole.findContainer(context, aforms[n], type);
+               value = forms[n].container();
+               context.define(aforms[n].name(), value);
+            }else{
+               throw new FFatalError("Build param error. {1}", type);
+            }
+            params[n] = value;
+         }
+         methodDsp.invoke(instance, params);
+      }catch(Exception e){
+         context.messages().push(new FFatalMessage(e));
+      }finally{
+         // Release params
+         for(Object param : params){
+            if(param instanceof IRelease){
+               try{
+                  ((IRelease)param).release();
+               }catch(Exception e){
+                  _logger.error(this, "execute", e);
+               }
+            }
+         }
+      }
+   }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param uri 地址
+   // @param context 环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public void executeUri(String uri,
+                          IWebContext context,
+                          IWebServletRequest request,
+                          IWebServletResponse response){
+      // 分解地址
+      int index = uri.indexOf('/', 1);
+      if(index == -1){
+         return;
+      }
+      String name = uri.substring(0, index);
+      String parameter = uri.substring(index);
+      context.parameters().set(IWebServletConstant.PARAMETER_URI, parameter);
+      // 执行处理
+      execute(name, context, request, response);
+   }
 }

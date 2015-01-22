@@ -2,7 +2,8 @@ package org.mu.com.lang.system;
 
 import org.mo.com.system.FProcess;
 
-public class RProcessTest{
+public class RProcessTest
+{
 
    public static void main(String[] args){
       FProcess process = new FProcess();

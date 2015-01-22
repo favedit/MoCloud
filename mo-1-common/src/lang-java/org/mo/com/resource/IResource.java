@@ -1,9 +1,3 @@
-/*
- * @(#)IResource.java
- *
- * Copyright 2008 microbject, All Rights Reserved.
- *
- */
 package org.mo.com.resource;
 
 import org.mo.com.lang.FMultiString;
@@ -14,29 +8,111 @@ import org.mo.com.xml.FXmlNode;
 //============================================================
 public interface IResource
 {
+   //============================================================
+   // <T>获得引用对象。</T>
+   //
+   // @return 引用对象
+   //============================================================
+   Class<?> reference();
+
+   //============================================================
+   // <T>获得设置信息。</T>
+   //
+   // @return 设置信息
+   //============================================================
    FXmlNode config();
 
-   Boolean findBoolean(String name);
+   //============================================================
+   // <T>根据名称查找布尔值。</T>
+   //
+   // @param name 名称
+   // @return 布尔值
+   //============================================================
+   boolean findBoolean(String name);
 
-   Class<?> findClass(String name);
+   //============================================================
+   // <T>根据名称查找整数。</T>
+   //
+   // @param name 名称
+   // @return 整数
+   //============================================================
+   int findInteger(String name);
 
-   FXmlNode findConfig(String name);
+   //============================================================
+   // <T>根据名称查找长整数。</T>
+   //
+   // @param name 名称
+   // @return 长整数
+   //============================================================
+   long findLong(String name);
 
-   Integer findInteger(String name);
-
-   String findDisplay(String name);
-
-   Long findLong(String name);
-
-   FMultiString findMultiString(String name);
-
-   String findMultiString(String name,
-                          String language);
-
+   //============================================================
+   // <T>根据名称查找字符串。</T>
+   //
+   // @param name 名称
+   // @return 字符串
+   //============================================================
    String findString(String name);
 
+   //============================================================
+   // <T>根据名称查找字符串。</T>
+   //
+   // @param name 名称
+   // @param language 语言
+   // @return 字符串
+   //============================================================
    String findString(String name,
                      String language);
 
-   Class<?> reference();
+   //============================================================
+   // <T>根据名称查找显示内容。</T>
+   //
+   // @param name 名称
+   // @return 显示内容
+   //============================================================
+   String findDisplay(String name);
+
+   //============================================================
+   // <T>根据名称查找多语言字符串。</T>
+   //
+   // @param name 名称
+   // @return 多语言字符串
+   //============================================================
+   FMultiString findMultiString(String name);
+
+   //============================================================
+   // <T>根据名称查找多语言字符串。</T>
+   //
+   // @param name 名称
+   // @param language 语言
+   // @return 多语言字符串
+   //============================================================
+   String findMultiString(String name,
+                          String language);
+
+   //============================================================
+   // <T>根据名称查找类对象。</T>
+   //
+   // @param name 名称
+   // @return 类对象
+   //============================================================
+   Class<?> findClass(String name);
+
+   //============================================================
+   // <T>根据名称查找配置节点。</T>
+   //
+   // @param name 名称
+   // @return 配置节点
+   //============================================================
+   FXmlNode findConfig(String name);
+
+   //============================================================
+   // <T>根据名称查找配置节点属性。</T>
+   //
+   // @param name 名称
+   // @param attributeName 属性名称
+   // @return 节点属性
+   //============================================================
+   String findConfigAttribute(String name,
+                              String attributeName);
 }

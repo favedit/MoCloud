@@ -48,17 +48,78 @@ public class RSql
    //============================================================
    public final static String formatValue(String value){
       if(!RString.isEmpty(value)){
-         StringBuffer sql = new StringBuffer();
+         StringBuffer buffer = new StringBuffer();
          for(char ch : value.toCharArray()){
             if('\'' == ch){
-               sql.append("''");
+               buffer.append("\\'");
+            }else if('"' == ch){
+               buffer.append("\\\"");
+            }else if('\\' == ch){
+               buffer.append("\\\\");
+            }else if('\t' == ch){
+               buffer.append("\\t");
+            }else if('\r' == ch){
+               // buffer.append("\\r");
+            }else if('\n' == ch){
+               buffer.append("\\n");
             }else{
-               sql.append(ch);
+               buffer.append(ch);
             }
          }
-         return sql.toString();
+         return buffer.toString();
       }
-      return RString.EMPTY;
+      return value;
+   }
+
+   //============================================================
+   // <T>格式化字符串为显示内容。</T>
+   //
+   // @param value 内容
+   // @return 显示内容
+   //============================================================
+   public final static String formatDisplay(String value){
+      //      if(!RString.isEmpty(value)){
+      //         StringBuffer buffer = new StringBuffer();
+      //         char[] chars = value.toCharArray();
+      //         int count = chars.length;
+      //         for(int n = 0; n < count; n++){
+      //            char char1 = chars[n];
+      //            if(n == count - 1){
+      //               buffer.append(char1);
+      //               break;
+      //            }
+      //            if(char1 == '\\'){
+      //               char char2 = chars[n + 1];
+      //               if(char2 == '\\'){
+      //                  n++;
+      //                  buffer.append('\\');
+      //                  continue;
+      //               }else if(char2 == '"'){
+      //                  n++;
+      //                  buffer.append('"');
+      //                  continue;
+      //               }else if(char2 == 't'){
+      //                  n++;
+      //                  buffer.append('\t');
+      //                  continue;
+      //               }else if(char2 == 'r'){
+      //                  n++;
+      //                  buffer.append('\r');
+      //                  continue;
+      //               }else if(char2 == 'n'){
+      //                  n++;
+      //                  buffer.append('\n');
+      //                  continue;
+      //               }else{
+      //                  buffer.append(char1);
+      //               }
+      //            }else{
+      //               buffer.append(char1);
+      //            }
+      //         }
+      //         return buffer.toString();
+      //      }
+      return value;
    }
 
    //============================================================

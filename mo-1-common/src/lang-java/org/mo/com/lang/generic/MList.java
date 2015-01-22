@@ -1,9 +1,13 @@
 package org.mo.com.lang.generic;
 
+import java.util.Iterator;
+
 //============================================================
 // <T>双向链表。</T>
 //============================================================
 public class MList<T>
+      implements
+         Iterable<T>
 {
    // 链表中元素的数量
    protected int _count;
@@ -254,6 +258,16 @@ public class MList<T>
    }
 
    //============================================================
+   // <T>获得迭代器。</T>
+   //
+   // @return 迭代器
+   //============================================================
+   @Override
+   public Iterator<T> iterator(){
+      return new FListIterator<T>(this, _first, _last);
+   }
+
+   //============================================================
    // <T>将数据压入首位置。</T>
    //
    // @param value 数据内容
@@ -304,6 +318,28 @@ public class MList<T>
    }
 
    //============================================================
+   // <T>从链表上删除首个查找到的数据。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void removeFirst(T value){
+      if(_count > 0){
+         SListEntry<T> entry = _first;
+         while(entry != null){
+            SListEntry<T> next = entry.next;
+            if(entry.value == value){
+               // 移除节点
+               entryRemove(entry);
+               // 释放节点
+               entryFree(entry);
+               break;
+            }
+            entry = next;
+         }
+      }
+   }
+
+   //============================================================
    // <T>从链表上删除数据。</T>
    //
    // @param value 数据内容
@@ -337,6 +373,23 @@ public class MList<T>
       _count = 0;
       _first = null;
       _last = null;
+   }
+
+   //============================================================
+   // <T>复制数据内容到指定内存位置。</T>
+   //
+   // @param items 对象数组
+   // @param offset 索引位置
+   // @param length 数据长度
+   //============================================================
+   public void copy(T[] items,
+                    int offset,
+                    int length){
+      SListEntry<T> entry = _first;
+      for(int n = 0; n < length; n++){
+         items[offset + n] = entry.value;
+         entry = entry.next;
+      }
    }
 
    //============================================================

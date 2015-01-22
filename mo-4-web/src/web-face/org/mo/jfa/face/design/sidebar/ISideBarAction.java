@@ -1,8 +1,7 @@
 package org.mo.jfa.face.design.sidebar;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.jfa.face.inc.form.IFormAble;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 public interface ISideBarAction

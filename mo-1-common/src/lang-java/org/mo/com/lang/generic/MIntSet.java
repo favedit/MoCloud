@@ -48,7 +48,7 @@ public abstract class MIntSet<V>
    // @param capacity 容量
    //============================================================
    public MIntSet(Class<V> clazz,
-                          int capacity){
+                  int capacity){
       _class = clazz;
       ensureSize(Math.max(capacity, CAPACITY));
    }
@@ -197,7 +197,7 @@ public abstract class MIntSet<V>
       _values = RArray.copy(values._values, 0, values._count);
       _table = values._table.clone();
    }
-   
+
    //============================================================
    // <T>尾部追加一个数据内容。</T>
    //

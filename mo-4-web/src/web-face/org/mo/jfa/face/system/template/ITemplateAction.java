@@ -7,7 +7,6 @@
 package org.mo.jfa.face.system.template;
 
 import org.mo.web.core.container.AContainer;
-
 import org.mo.web.protocol.context.IWebContext;
 
 /**

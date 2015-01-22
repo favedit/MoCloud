@@ -101,7 +101,9 @@ public class FByteFile
          }
          File file = new File(fileName);
          outputStream = new BufferedOutputStream(new FileOutputStream(file));
-         outputStream.write(_memory, 0, _length);
+         if(_memory != null){
+            outputStream.write(_memory, 0, _length);
+         }
       }catch(Exception e){
          throw new FFatalError(e, "Save file failure. (file_name={1})", fileName);
       }finally{

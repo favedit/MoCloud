@@ -4,7 +4,6 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.data.face.FDomainStatisticsLogicUnit;
 
 //============================================================
 // <T>逻辑统计基类。</T>
@@ -27,7 +26,7 @@ public abstract class FStatisticsLogic
    protected FStatistics _statistics;
 
    // 单元单元
-   protected FDomainStatisticsLogicUnit _unit;
+   //protected FDomainStatisticsLogicUnit _unit;
 
    // 数据链接
    protected ISqlConnection _dataConnection;
@@ -60,6 +59,7 @@ public abstract class FStatisticsLogic
    //
    // @param name 名称
    //============================================================
+   @Override
    public void setName(String name){
       _name = name;
    }
@@ -69,6 +69,7 @@ public abstract class FStatisticsLogic
    //
    // @return 回调名称
    //============================================================
+   @Override
    public String invokeName(){
       return _invokeName;
    }
@@ -78,6 +79,7 @@ public abstract class FStatisticsLogic
    //
    // @param invokeName 回调名称
    //============================================================
+   @Override
    public void setInvokeName(String invokeName){
       _invokeName = invokeName;
    }
@@ -97,27 +99,28 @@ public abstract class FStatisticsLogic
    //
    // @param statistics 数据统计组
    //============================================================
+   @Override
    public void setStatistics(FStatistics statistics){
       _statistics = statistics;
    }
 
-   //============================================================
-   // <T>获得数据单元。</T>
+   //   //============================================================
+   //   // <T>获得数据单元。</T>
+   //   //
+   //   // @return 数据单元
+   //   //============================================================
+   //   public FDomainStatisticsLogicUnit unit(){
+   //      return _unit;
+   //   }
    //
-   // @return 数据单元
-   //============================================================
-   public FDomainStatisticsLogicUnit unit(){
-      return _unit;
-   }
-
-   //============================================================
-   // <T>设置数据单元。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void setUnit(FDomainStatisticsLogicUnit unit){
-      _unit = unit;
-   }
+   //   //============================================================
+   //   // <T>设置数据单元。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void setUnit(FDomainStatisticsLogicUnit unit){
+   //      _unit = unit;
+   //   }
 
    //============================================================
    // <T>获得处理条数。</T>
@@ -143,6 +146,7 @@ public abstract class FStatisticsLogic
    //
    // @return 线程
    //============================================================
+   @Override
    public FStatisticsLogicThread thread(){
       return _thread;
    }

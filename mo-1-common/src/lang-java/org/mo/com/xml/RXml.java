@@ -1,9 +1,9 @@
 package org.mo.com.xml;
 
 import java.util.List;
-import org.jdom.Attribute;
-import org.jdom.Content;
-import org.jdom.Element;
+import org.jdom2.Attribute;
+import org.jdom2.Content;
+import org.jdom2.Element;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FStrings;
 import org.mo.com.lang.IInitialize;
@@ -524,21 +524,4 @@ public class RXml
       }
       return oNode;
    }
-   //   /**
-   //    * <p>从一个数据集转换为XML节点结构</p>
-   //    * <p>create date:2005/02/18</p>
-   //    *
-   //    * @param oDataset 数据集
-   //    * @return 节点
-   //    */
-   //   public static FXmlNodes buildNodes(FDataset oDataset)
-   //         throws FException{
-   //      FXmlNode oNode = null;
-   //      FXmlNodes oNodes = new FXmlNodes();
-   //      for(FUnit oUnit : oDataset){
-   //         oNode = oNodes.create("Unit");
-   //         oNode.attributes().append(oUnit);
-   //      }
-   //      return oNodes;
-   //   }
 }

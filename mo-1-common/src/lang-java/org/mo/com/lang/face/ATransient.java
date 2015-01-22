@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 //============================================================
 // <T>持久化对象描述。</T>
 //============================================================
-
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

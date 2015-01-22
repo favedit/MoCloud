@@ -1,6 +1,7 @@
 package org.mo.core.aop.descriptor;
 
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.lang.reflect.FAnnotation;
 import org.mo.com.lang.reflect.FClass;
 import org.mo.com.lang.reflect.FField;
@@ -48,14 +49,20 @@ public class FAopComponentDescriptor
    //============================================================
    protected void buildProperty(FClass<?> clazz,
                                 FField field,
+                                String name,
                                 boolean convert){
-      String fieldName = field.name();
-      String propertyName = RField.format(fieldName);
-      // Check duplicate
+      // 获得属性名称
+      String propertyName = null;
+      if(RString.isEmpty(name)){
+         propertyName = RField.format(field.name());
+      }else{
+         propertyName = name;
+      }
+      // 检查属性重复
       if(_propertys.contains(propertyName)){
          throw new FFatalError("Property is duplicate. ({1}).{2}", clazz.name(), propertyName);
       }
-      // Create property
+      // 创建属性描述
       FAopProperty property = new FAopProperty();
       property.setName(propertyName);
       property.link(field.nativeObject());
@@ -63,6 +70,7 @@ public class FAopComponentDescriptor
       if(_logger.debugAble()){
          _logger.debug(this, "buildProperty", "Build property (class={1}, name={2}", clazz.name(), propertyName);
       }
+      // 存储属性描述
       _propertys.set(propertyName, property);
    }
 
@@ -73,21 +81,28 @@ public class FAopComponentDescriptor
    // @param field 字段对象
    //============================================================
    protected void buildLinker(FClass<?> clazz,
-                              FField field){
-      String fieldName = field.name();
-      String name = RField.format(fieldName);
-      // Check duplicate
-      if(_links.contains(name)){
-         throw new FFatalError("Linker is duplicate. ({1}).{2}", clazz.name(), name);
+                              FField field,
+                              String name){
+      // 获得关联名称
+      String linkerName = null;
+      if(RString.isEmpty(linkerName)){
+         linkerName = RField.format(field.name());
+      }else{
+         linkerName = name;
       }
-      // Add method
+      // 检查关联重复
+      if(_links.contains(linkerName)){
+         throw new FFatalError("Linker is duplicate. ({1}).{2}", clazz.name(), linkerName);
+      }
+      // 创建关联描述
       FAopLinker linker = new FAopLinker();
-      linker.setName(name);
+      linker.setName(linkerName);
       linker.link(field.nativeObject());
       if(_logger.debugAble()){
-         _logger.debug(this, "buildLink", "Build linker. (class={1}, name={2})", clazz.name(), name);
+         _logger.debug(this, "buildLinker", "Build linker. (class={1}, name={2})", clazz.name(), linkerName);
       }
-      _links.set(name, linker);
+      // 存储关联描述
+      _links.set(linkerName, linker);
    }
 
    //============================================================
@@ -150,16 +165,17 @@ public class FAopComponentDescriptor
             FAnnotation annotationProperty = field.findAnnotation(AProperty.class);
             if(annotationProperty != null){
                AProperty aproperty = (AProperty)annotationProperty.annotation();
-               buildProperty(_class, field, aproperty.convert());
+               buildProperty(_class, field, aproperty.name(), aproperty.convert());
             }
             // 创建引用
             FAnnotation annotationLink = field.findAnnotation(ALink.class);
             if(annotationLink != null){
-               buildLinker(_class, field);
+               ALink alink = (ALink)annotationLink.annotation();
+               buildLinker(_class, field, alink.name());
             }
          }
       }catch(Exception e){
-         throw new FFatalError(e, "Load class error (class={0})", className);
+         throw new FFatalError(e, "Load class error (class={1})", className);
       }
    }
 }

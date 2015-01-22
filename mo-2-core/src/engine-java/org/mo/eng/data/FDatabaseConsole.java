@@ -1,9 +1,3 @@
-/*
- * @(#)FDatabaseConsole.java
- *
- * Copyright 2008 microbject, All Rights Reserved.
- *
- */
 package org.mo.eng.data;
 
 import org.mo.com.data.ISqlConnection;
@@ -22,7 +16,7 @@ import org.mo.core.aop.face.AProperty;
 //    负责收集未使用的数据库链接。
 // </P>
 //
-// @return 链接控制台集合
+// @history 080101 MAOCY 创建
 //============================================================
 public class FDatabaseConsole
       implements
@@ -102,13 +96,13 @@ public class FDatabaseConsole
    public ISqlConnection alloc(String name){
       // 获得数据库链接管理器
       IConnectionConsole connectionConsole = _connectionConsoles.find(name);
-      if(null == connectionConsole){
+      if(connectionConsole == null){
          throw new FFatalError("Connection console is not exists. (name={1})", name);
       }
       // 获得数据库链接
       ISqlConnection connection = connectionConsole.alloc();
       if(_logger.debugAble()){
-         _logger.debug(this, "alloc", "Alloc connection. (connection={1})", connection);
+         _logger.debug(this, "alloc", "Alloc connection. (name={1}, connection={2})", name, connection);
       }
       connection.attributes().set(FLAG_CONNECTION_CONSOLE, connectionConsole);
       // 开始事务

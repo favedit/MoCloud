@@ -306,28 +306,6 @@ public abstract class MSqlConnection
    }
 
    //============================================================
-   // <T>格式化字符串为命令内容。</T>
-   //
-   // @param value 内容
-   // @return 命令内容
-   //============================================================
-   @Override
-   public String formatValue(String value){
-      if(!RString.isEmpty(value)){
-         StringBuffer sql = new StringBuffer();
-         for(char ch : value.toCharArray()){
-            if('\'' == ch){
-               sql.append("''");
-            }else{
-               sql.append(ch);
-            }
-         }
-         return sql.toString();
-      }
-      return RString.EMPTY;
-   }
-
-   //============================================================
    // <T>填充数据库描述。</T>
    //
    // @param meta 数据库描述
@@ -648,7 +626,12 @@ public abstract class MSqlConnection
          if(type == Types.VARCHAR){
             // 变长字符类型
             String stringValue = resultSet.getString(n);
-            row.set(name, stringValue != null ? stringValue : "");
+            if(stringValue != null){
+               stringValue = RSql.formatDisplay(stringValue);
+            }else{
+               stringValue = RString.EMPTY;
+            }
+            row.set(name, stringValue);
          }else if(type == Types.LONGVARCHAR){
             // 变长字符串类型
             if(_encodingProvider != null){
@@ -656,7 +639,12 @@ public abstract class MSqlConnection
                row.set(name, (arBytes != null) ? RBase64.encode(arBytes).toString().replaceAll("\n", "") : "");
             }else{
                String stringValue = resultSet.getString(n);
-               row.set(name, stringValue != null ? stringValue : "");
+               if(stringValue != null){
+                  stringValue = RSql.formatDisplay(stringValue);
+               }else{
+                  stringValue = RString.EMPTY;
+               }
+               row.set(name, stringValue);
             }
          }else if(type == Types.NUMERIC){
             // 数字类型
@@ -672,8 +660,15 @@ public abstract class MSqlConnection
             row.set(name, stringValue);
          }else if(type == Types.CHAR){
             // 字符类型
+            String stringValue = null;
             Object objectValue = resultSet.getObject(n);
-            String stringValue = (objectValue != null) ? RString.trimRight(objectValue.toString()) : RString.EMPTY;
+            if(objectValue != null){
+               stringValue = objectValue.toString();
+               stringValue = RSql.formatDisplay(stringValue);
+               stringValue = RString.trimRight(stringValue);
+            }else{
+               stringValue = RString.EMPTY;
+            }
             row.set(name, stringValue);
          }else if(type == Types.TIME){
             // 时间类型
@@ -1245,6 +1240,13 @@ public abstract class MSqlConnection
    }
 
    //============================================================
+   // <T>释放处理。</T>
+   //============================================================ 
+   @Override
+   public void free(){
+   }
+
+   //============================================================
    // <T>重置链接内容。</T>
    //============================================================ 
    @Override
@@ -1261,7 +1263,7 @@ public abstract class MSqlConnection
          // 关闭所有数据读取器
          closeReaders();
          // 关闭数据库链接
-         if(null != _sqlConnection){
+         if(_sqlConnection != null){
             if(_sqlConnection.getMetaData().supportsTransactions()){
                if(!_sqlConnection.getAutoCommit()){
                   _sqlConnection.setAutoCommit(true);

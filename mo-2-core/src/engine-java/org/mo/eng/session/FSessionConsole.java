@@ -34,6 +34,10 @@ public class FSessionConsole
    @AProperty
    protected String _sessionClassName;
 
+   // 有效
+   @AProperty
+   protected boolean _valid = true;
+
    // 检查间隔
    @AProperty
    protected long _interval;
@@ -69,6 +73,26 @@ public class FSessionConsole
 
    // 要移除的线程集合
    protected FObjects<FSessionWorker> _removes = new FObjects<FSessionWorker>(FSessionWorker.class);
+
+   //============================================================
+   // <T>是否有效。</T>
+   //
+   // @return 是否有效
+   //============================================================
+   @Override
+   public boolean isValid(){
+      return _valid;
+   }
+
+   //============================================================
+   // <T>获得会话超时。</T>
+   //
+   // @return 会话超时
+   //============================================================
+   @Override
+   public long timeout(){
+      return _timeout;
+   }
 
    //============================================================
    // <T>根据代码获得一个会话文件名称。</T>

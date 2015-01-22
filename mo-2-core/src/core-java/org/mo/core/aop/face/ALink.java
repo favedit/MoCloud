@@ -8,8 +8,9 @@ import java.lang.annotation.Target;
 //============================================================
 // <T>关联描述器。</T>
 //============================================================
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ALink{
+   // 名称
+   String name() default "";
 }

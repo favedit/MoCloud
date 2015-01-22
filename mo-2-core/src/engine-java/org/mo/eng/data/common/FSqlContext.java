@@ -2,6 +2,7 @@ package org.mo.eng.data.common;
 
 import org.mo.com.data.FSqlConnections;
 import org.mo.com.data.ISqlConnection;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.eng.data.IDatabaseConsole;
@@ -28,10 +29,37 @@ public class FSqlContext
 
    //============================================================
    // <T>构造数据环境。</T>
+   //============================================================
+   public FSqlContext(){
+   }
+
+   //============================================================
+   // <T>构造数据环境。</T>
    //
    // @param databaseConsole 数据库控制台
    //============================================================
    public FSqlContext(IDatabaseConsole databaseConsole){
+      _databaseConsole = databaseConsole;
+   }
+
+   //============================================================
+   // <T>获得数据控制台。</T>
+   //
+   // @return 数据控制台
+   //============================================================
+   public IDatabaseConsole databaseConsole(){
+      return _databaseConsole;
+   }
+
+   //============================================================
+   // <T>关联数据控制台。</T>
+   //
+   // @param databaseConsole 数据控制台
+   //============================================================
+   public void linkDatabaseConsole(IDatabaseConsole databaseConsole){
+      if(_databaseConsole != null){
+         throw new FFatalError("Database console is already linked.");
+      }
       _databaseConsole = databaseConsole;
    }
 
@@ -94,14 +122,14 @@ public class FSqlContext
       if(_connections == null){
          _connections = new FSqlConnections();
       }
-      ISqlConnection cnn = _connections.find(name);
-      if(cnn == null){
-         cnn = _databaseConsole.alloc(name);
-         if(cnn != null){
-            _connections.set(name, cnn);
+      ISqlConnection connection = _connections.find(name);
+      if(connection == null){
+         connection = _databaseConsole.alloc(name);
+         if(connection != null){
+            _connections.set(name, connection);
          }
       }
-      return cnn;
+      return connection;
    }
 
    //============================================================
@@ -125,7 +153,10 @@ public class FSqlContext
       if(_connections != null){
          int count = _connections.count();
          for(int n = 0; n < count; n++){
-            rollback(_connections.value(n));
+            ISqlConnection connection = _connections.value(n);
+            if(connection != null){
+               rollback(connection);
+            }
          }
       }
    }
@@ -137,7 +168,7 @@ public class FSqlContext
    //============================================================
    public void release(ISqlConnection connection){
       if(connection != null){
-         connection.commit();
+         connection.free();
          _databaseConsole.free(connection);
       }
    }
@@ -155,12 +186,17 @@ public class FSqlContext
       if(_connections != null){
          int count = _connections.count();
          for(int n = 0; n < count; n++){
-            ISqlConnection connection = _connections.value(n);
-            if(connection != null){
-               release(connection);
-            }
+            release(_connections.value(n));
          }
          _connections.clear();
       }
+   }
+
+   //============================================================
+   // <T>关闭处理。</T>
+   //============================================================
+   @Override
+   public void close() throws Exception{
+      release();
    }
 }

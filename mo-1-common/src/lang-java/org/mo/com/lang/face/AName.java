@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 //============================================================
 // <T>可获得名称描述。</T>
 //============================================================
-
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.PARAMETER})

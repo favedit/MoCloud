@@ -1,10 +1,13 @@
 package org.mo.web.protocol.listener;
 
+import java.io.File;
+import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.system.RSystem;
 import org.mo.core.aop.RAop;
@@ -29,6 +32,17 @@ public class FHttpContextListener
    public void contextInitialized(ServletContextEvent event){
       // 获得应用目录
       String application = RSystem.property("user.mobj.application");
+      File applicationFile = new File(application);
+      String applicationDirectory = null;
+      if(applicationFile.isDirectory()){
+         try{
+            applicationDirectory = applicationFile.getCanonicalPath();
+         }catch(IOException e){
+            throw new FFatalError("Application directory is invalid. (application={1})", application);
+         }
+      }else{
+         throw new FFatalError("Application directory is invalid. (application={1})", application);
+      }
       // 获得启动设置文件名称
       String mode = RSystem.property("user.mobj.config");
       ServletContext context = event.getServletContext();
@@ -39,7 +53,7 @@ public class FHttpContextListener
       RClass.setupClassLoader(loader);
       // 设置属性集合
       FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-      attributes.set("application", application);
+      attributes.set("application", applicationDirectory);
       // 加载启动信息
       RAop.initialize(configFileName);
    }

@@ -2056,7 +2056,8 @@ public abstract class XBaseColumnProcessStatus
    // @param name 名称
    // @param value 内容
    //============================================================
-   public void innerSet(String name, String value){
+   public void innerSet(String name,
+                        String value){
       if(RString.isEmpty(name)){
          return;
       }else if(PTY_NAME.equalsIgnoreCase(name)){
@@ -2218,7 +2219,8 @@ public abstract class XBaseColumnProcessStatus
    // @param config 设置信息
    // @param type 类型
    //============================================================
-   public void loadConfig(FXmlNode config, EXmlConfig type){
+   public void loadConfig(FXmlNode config,
+                          EXmlConfig type){
       super.loadConfig(config, type);
       if(EXmlConfig.Full == type){
          if(config.contains("name")){
@@ -2962,7 +2964,8 @@ public abstract class XBaseColumnProcessStatus
    // @param config 设置信息
    // @param type 类型
    //============================================================
-   public void saveConfig(FXmlNode config, EXmlConfig type){
+   public void saveConfig(FXmlNode config,
+                          EXmlConfig type){
       config.setName(NAME);
       super.saveConfig(config, type);
       if(EXmlConfig.Full == type){

@@ -17,6 +17,7 @@ public class RLogger
 
    // 日志字典
    private static FLoggerDictionary _loggers = new FLoggerDictionary();
+
    //============================================================
    // <T>静态初始化。</T>
    //============================================================

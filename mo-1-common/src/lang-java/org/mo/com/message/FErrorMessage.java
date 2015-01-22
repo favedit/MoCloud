@@ -31,7 +31,7 @@ public class FErrorMessage
    // @param params 参数集合
    //============================================================
    public FErrorMessage(String message,
-                        String... params){
+                        Object... params){
       super(message, params);
    }
 

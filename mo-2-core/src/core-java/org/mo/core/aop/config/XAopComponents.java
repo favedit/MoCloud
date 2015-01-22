@@ -3,7 +3,7 @@ package org.mo.core.aop.config;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.com.regex.FPattern;
+import org.mo.com.text.FPattern;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================

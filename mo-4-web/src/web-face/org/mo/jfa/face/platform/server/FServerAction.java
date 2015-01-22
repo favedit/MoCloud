@@ -34,6 +34,7 @@ public class FServerAction
                          FServerContainer page){
       return PAGE_CATALOG;
    }
+
    //============================================================
    // <T>列出项目处理。</T>
    //
@@ -72,6 +73,7 @@ public class FServerAction
                         FServerContainer page){
       return update(_listConsole, context, page, IPublicPage.XOBJECT_FORM);
    }
+
    //============================================================
    // <T>删除处理。</T>
    //

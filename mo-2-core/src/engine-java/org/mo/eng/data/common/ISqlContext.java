@@ -9,7 +9,8 @@ import org.mo.core.context.IContext;
 public interface ISqlContext
       extends
          IContext,
-         ISqlConnect
+         ISqlConnect,
+         AutoCloseable
 {
    //============================================================
    // <T>获得默认名称。</T>

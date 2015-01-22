@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>样式控件对象的XML节点基类。</T>
 //============================================================
 public interface XStyleFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "IStyle";

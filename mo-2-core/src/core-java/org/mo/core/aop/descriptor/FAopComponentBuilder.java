@@ -122,45 +122,49 @@ public class FAopComponentBuilder
    //
    // @param context 环境
    //============================================================
-   protected void buildProperties(FAopComponentBuildContext context){
+   protected boolean buildProperties(FAopComponentBuildContext context){
+      // 检查配置
       XAopComponent config = context.config();
-      if(config.hasProperties()){
-         XAopPropertyCollection propertiesConfig = config.properties();
-         String className = config.className();
-         Object instance = context.instance();
-         FAopComponentDescriptor descriptor = RAop.descriptorConsole().find(FAopComponentDescriptor.class, className);
-         FAopProperties properties = descriptor.properties();
-         for(INamePair<FAopProperty> pair : properties){
-            // 获得属性
-            FAopProperty property = pair.value();
-            String propertyName = property.name();
-            // 获得设置
-            XAopProperty propertyConfig = propertiesConfig.matchByKey(propertyName);
-            if(null != propertyConfig){
-               // 设置内容
-               Object value = propertyConfig.value();
-               if(value instanceof XAopComponent){
-                  // 设置对象
-                  XAopComponent xcomponent = (XAopComponent)value;
-                  Object component = createComponent(xcomponent);
-                  property.set(instance, component);
-                  _logger.warn(this, "buildProperties", "Set property. ({1}.{2} = {3}))", RClass.shortName(instance.getClass()), propertyName, RClass.shortName(component));
-               }else if(value instanceof String){
-                  // 设置属性
-                  String stringValue = (String)value;
-                  if(_logger.debugAble()){
-                     _logger.debug(this, "buildProperties", "Set property ({1}.{2} = {3})", RClass.shortName(instance.getClass()), propertyName, stringValue);
-                  }
-                  if(property.convert()){
-                     stringValue = RAop.configConsole().parseDefine(stringValue);
-                  }
-                  property.set(instance, stringValue);
-               }else{
-                  _logger.warn(this, "buildProperties", "Invalid property config. {1}", value);
+      if(!config.hasProperties()){
+         return false;
+      }
+      // 设置属性集合
+      XAopPropertyCollection propertiesConfig = config.properties();
+      String className = config.className();
+      Object instance = context.instance();
+      FAopComponentDescriptor descriptor = RAop.descriptorConsole().find(FAopComponentDescriptor.class, className);
+      FAopProperties properties = descriptor.properties();
+      for(INamePair<FAopProperty> pair : properties){
+         // 获得属性
+         FAopProperty property = pair.value();
+         String propertyName = property.name();
+         // 获得设置
+         XAopProperty propertyConfig = propertiesConfig.matchByKey(propertyName);
+         if(null != propertyConfig){
+            // 设置内容
+            Object value = propertyConfig.value();
+            if(value instanceof XAopComponent){
+               // 设置对象
+               XAopComponent xcomponent = (XAopComponent)value;
+               Object component = createComponent(xcomponent);
+               property.set(instance, component);
+               _logger.warn(this, "buildProperties", "Set property. ({1}.{2} = {3}))", RClass.shortName(instance.getClass()), propertyName, RClass.shortName(component));
+            }else if(value instanceof String){
+               // 设置属性
+               String stringValue = (String)value;
+               if(_logger.debugAble()){
+                  _logger.debug(this, "buildProperties", "Set property ({1}.{2} = {3})", RClass.shortName(instance.getClass()), propertyName, stringValue);
                }
+               if(property.convert()){
+                  stringValue = RAop.configConsole().parseDefine(stringValue);
+               }
+               property.set(instance, stringValue);
+            }else{
+               _logger.warn(this, "buildProperties", "Invalid property config. {1}", value);
             }
          }
       }
+      return true;
    }
 
    //============================================================
@@ -182,11 +186,11 @@ public class FAopComponentBuilder
             // 获得关联器
             Class<?> typeClass = linker.type();
             Object link = context.findLinker(typeClass);
-            if(null == link){
+            if(link == null){
                link = RAop.find(typeClass);
             }
             // 设置关联器
-            if(null == link){
+            if(link == null){
                _logger.warn(this, "buildLinker", "Link method failed. (name={1})", linker.name());
             }else{
                if(_logger.debugAble()){
@@ -209,9 +213,11 @@ public class FAopComponentBuilder
    protected void buildInitializes(FAopComponentBuildContext context){
       if(context.hasInstance()){
          Object instance = context.instance();
+         // 初始化处理
          if(instance instanceof IInitialize){
             ((IInitialize)instance).initialize();
          }
+         // 配置初始化处理
          XAopComponent config = context.config();
          if(config.hasInitializes()){
             FDictionary<Method> methodMap = RClass.makeMethodMap(instance);

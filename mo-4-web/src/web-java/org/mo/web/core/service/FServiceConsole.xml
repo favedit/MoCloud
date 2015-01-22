@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+   <Resource name='error.service.notexists' code='E00101'>
+      <Cn>服务不存在。(service={1})</Cn>
+   </Resource>
+
+   <Resource name='error.method.notexists' code='E00102'>
+      <Cn>处理不存在。(method={1})</Cn>
+   </Resource>
+
+   <Resource name='error.session.notexists' code='E00103'>
+      <Cn>会话不存在。(session={1})</Cn>
+   </Resource>
+
+</Config>

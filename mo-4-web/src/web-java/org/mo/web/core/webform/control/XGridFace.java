@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>网格接口对象的XML节点基类。</T>
 //============================================================
 public interface XGridFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MGrid";
@@ -60,7 +61,6 @@ public interface XGridFace
    // @param value 面板权限
    //============================================================
    void setPanelAccess(String value);
-
 
    //============================================================
    // <T>获得行工具栏的内容。</T>

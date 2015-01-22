@@ -1,7 +1,6 @@
 package org.mo.jfa.face.database.logicunit;
 
 import org.mo.web.core.container.AContainer;
-
 import org.mo.web.core.webform.IFormPage;
 import org.mo.web.protocol.context.IWebContext;
 

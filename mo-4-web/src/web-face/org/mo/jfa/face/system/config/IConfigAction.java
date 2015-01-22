@@ -1,7 +1,6 @@
 package org.mo.jfa.face.system.config;
 
 import org.mo.web.core.container.AContainer;
-
 import org.mo.web.protocol.context.IWebContext;
 
 public interface IConfigAction

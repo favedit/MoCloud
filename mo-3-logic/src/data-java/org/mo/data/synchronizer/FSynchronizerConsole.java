@@ -8,8 +8,6 @@ import org.mo.com.xml.IXmlObject;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.connector.IConnectorConsole;
-import org.mo.data.face.FDomainSynchronizerUnitLogic;
-import org.mo.data.face.FDomainSynchronizerUnitUnit;
 import org.mo.data.synchronizer.common.XSynchronizer;
 import org.mo.data.synchronizer.common.XUnit;
 import org.mo.eng.store.FXmlConfigConsole;
@@ -59,30 +57,30 @@ public class FSynchronizerConsole
       ISqlConnection connection = synchronizer.allocDomainConnection();
       try{
          // 获得信息
-         String synchronizerName = synchronizer.name();
+         //String synchronizerName = synchronizer.name();
          String unitName = xunit.getName();
-         String unitLabel = xunit.getLabel();
-         String sourceDataName = xunit.getSourceDataName();
-         String targetDataName = xunit.getTargetDataName();
-         String code = synchronizerName + "." + unitName;
+         //String unitLabel = xunit.getLabel();
+         //String sourceDataName = xunit.getSourceDataName();
+         //String targetDataName = xunit.getTargetDataName();
+         //String code = synchronizerName + "." + unitName;
          // 创建数据库记录
-         FDomainSynchronizerUnitLogic unitLogic = new FDomainSynchronizerUnitLogic(connection);
-         FDomainSynchronizerUnitUnit unitUnit = unitLogic.serach("CODE='" + code + "'");
-         if(unitUnit == null){
-            unitUnit = new FDomainSynchronizerUnitUnit();
-            unitUnit.setCode(code);
-            unitUnit.setSynchronizerName(synchronizerName);
-            unitUnit.setName(unitName);
-            unitUnit.setLabel(unitLabel);
-            unitUnit.setSourceDataName(sourceDataName);
-            unitUnit.setTargetDataName(targetDataName);
-            unitLogic.doInsert(unitUnit);
-         }
+         //         FDomainSynchronizerUnitLogic unitLogic = new FDomainSynchronizerUnitLogic(connection);
+         //         FDomainSynchronizerUnitUnit unitUnit = unitLogic.serach("CODE='" + code + "'");
+         //         if(unitUnit == null){
+         //            unitUnit = new FDomainSynchronizerUnitUnit();
+         //            unitUnit.setCode(code);
+         //            unitUnit.setSynchronizerName(synchronizerName);
+         //            unitUnit.setName(unitName);
+         //            unitUnit.setLabel(unitLabel);
+         //            unitUnit.setSourceDataName(sourceDataName);
+         //            unitUnit.setTargetDataName(targetDataName);
+         //            unitLogic.doInsert(unitUnit);
+         //         }
          // 创建同步单元
          unit = new FSynchronizerUnit();
          unit.setSynchronizer(synchronizer);
          unit.setName(unitName);
-         unit.setSynchronizerUnit(unitUnit);
+         //unit.setSynchronizerUnit(unitUnit);
          // 加载数据
          unit.load();
       }finally{

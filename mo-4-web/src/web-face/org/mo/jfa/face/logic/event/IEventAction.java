@@ -6,13 +6,12 @@
  */
 package org.mo.jfa.face.logic.event;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.logic.data.ILgEventGroupConfigDi;
 import org.mo.logic.data.ILgEventGroupDi;
 import org.mo.logic.data.ILgEventTypeConfigDi;
 import org.mo.logic.data.ILgEventTypeDi;
 import org.mo.logic.data.ISyPropertyDi;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 /**

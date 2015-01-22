@@ -72,7 +72,7 @@ public class FWebFormService
             // 统计节点包
             FXmlNodes outputNodes = output.config().nodes();
             for(FXmlConfigMeta meta : _formConsole.listMetas()){
-               if(RFile.removeExtension(meta.name()).equals(uuid)){
+               if(RFile.extensionPath(meta.name()).equals(uuid)){
                   String name = meta.name();
                   IXmlObject xcollection = _formConsole.find(name);
                   String type = xcollection.name();
@@ -108,7 +108,7 @@ public class FWebFormService
       FXmlNodes outputNodes = output.config().nodes();
       for(FXmlConfigMeta meta : _formConsole.listMetas()){
          String metaName = meta.name();
-         String name = RFile.removeExtension(metaName);
+         String name = RFile.extensionPath(metaName);
          // 过滤节点
          if(!RString.isEmpty(nodeType) && !metaName.endsWith(nodeType)){
             continue;
@@ -205,7 +205,7 @@ public class FWebFormService
          nodeAttrs.unpack(selectNode.get("attributes"));
          collection = nodeAttrs.get("form_name");
       }else if(TYPE_COMPONENT.equals(typeType)){
-         FXmlNode topNode = selectNode.findDeep("Node", "type_type", TYPE_COLLECTION);
+         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
          nodeAttrs.unpack(topNode.get("attributes"));
          collection = nodeAttrs.get("form_name");
       }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="AUmnuoRacOM4K8VZLjVWrw" name="data.person.user.application" label="M#12cn15用户应用表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="Gsr" data_factory="Game.MoGameStorage" data_name="DT_PSN_USER_APPLICATION" data_alias="DT_PSN_USR_APP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="8167d0ba-52f6-47a7-aded-a9b6a37dde80" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldRecordId _uuid="2caf6840-639e-478a-8349-7a9d1dc8a93c" name="application_id" label="M#12cn14应用编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="APPLICATION_ID" data_alias="APP" data_refer="data.resource.application" />
-  <FieldInteger _uuid="gklQlgl7K3L678wmpBtagw" name="estimate_cd" label="M#12cn14评价代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ESTIMATE_CD" />
-  <FieldTemplate _uuid="kUdX3x]y5vd97oVscY9Xpw" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>
-

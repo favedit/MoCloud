@@ -1,7 +1,6 @@
 package org.mo.jfa.face.system.help;
 
 import org.mo.web.core.container.AContainer;
-
 import org.mo.web.protocol.context.IWebContext;
 
 public interface IHelpAction

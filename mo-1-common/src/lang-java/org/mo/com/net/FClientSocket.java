@@ -47,6 +47,21 @@ public class FClientSocket
    //============================================================
    // <T>构造客户端网络链接。</T>
    //
+   // @param host 目标主机
+   // @param port 目标端口
+   // @param localHost 本地主机
+   // @param localPort 本地端口
+   //============================================================
+   public FClientSocket(String host,
+                        int port,
+                        String localHost,
+                        int localPort){
+      connect(host, port, localHost, localPort);
+   }
+
+   //============================================================
+   // <T>构造客户端网络链接。</T>
+   //
    // @param address 目标地址
    // @param port 目标端口
    // @param localAddress 本地地址
@@ -73,6 +88,7 @@ public class FClientSocket
    //
    // @return 输入流
    //============================================================
+   @Override
    public InputStream nativeInputStream(){
       try{
          return _socket.getInputStream();
@@ -86,6 +102,7 @@ public class FClientSocket
    //
    // @return 输出流
    //============================================================
+   @Override
    public OutputStream nativeOutputStream(){
       try{
          return _socket.getOutputStream();
@@ -140,6 +157,28 @@ public class FClientSocket
                        int port){
       try{
          _socket = new Socket(host, port);
+      }catch(Exception e){
+         throw new FFatalError(e);
+      }
+   }
+
+   //============================================================
+   // <T>链接网络地址。</T>
+   //
+   // @param host 主机
+   // @param port 目标端口
+   // @param localHost 本地主机
+   // @param localPort 本地端口
+   //============================================================
+   public boolean connect(String host,
+                          int port,
+                          String localHost,
+                          int localPort){
+      try{
+         InetAddress address = InetAddress.getByName(host);
+         InetAddress localAddress = InetAddress.getByName(localHost);
+         _socket = new Socket(address, port, localAddress, localPort);
+         return true;
       }catch(Exception e){
          throw new FFatalError(e);
       }

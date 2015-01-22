@@ -9,6 +9,8 @@ import org.mo.com.net.FSocket;
 //============================================================
 public class FHttpConnection
       extends FObject
+      implements
+         AutoCloseable
 {
    // 网络端口
    protected FSocket _socket;
@@ -21,6 +23,12 @@ public class FHttpConnection
 
    // 网络地址
    protected FUrl _url;
+
+   // 本地主机
+   protected String _localHost;
+
+   // 本地端口
+   protected int _localPort;
 
    // 是否使用代理
    protected boolean _useProxy = false;
@@ -57,6 +65,42 @@ public class FHttpConnection
    //============================================================
    public FUrl url(){
       return _url;
+   }
+
+   //============================================================
+   // <T>获得本地主机。</T>
+   //
+   // @return 主机
+   //============================================================
+   public String localHost(){
+      return _localHost;
+   }
+
+   //============================================================
+   // <T>设置本地主机。</T>
+   //
+   // @param host 主机
+   //============================================================
+   public void setLocalHost(String host){
+      _localHost = host;
+   }
+
+   //============================================================
+   // <T>获得本地端口。</T>
+   //
+   // @return 端口
+   //============================================================
+   public int localPort(){
+      return _localPort;
+   }
+
+   //============================================================
+   // <T>设置本地端口。</T>
+   //
+   // @param port 端口
+   //============================================================
+   public void setLocalPort(int port){
+      _localPort = port;
    }
 
    //============================================================
@@ -105,9 +149,15 @@ public class FHttpConnection
    // <T>链接主机。</T>
    //============================================================
    public void connect(){
-      String host = _url.host();
-      int port = _url.port();
-      _socket = new FClientSocket(host, port);
+      if(_socket == null){
+         String host = _url.host();
+         int port = _url.port();
+         if(_localHost == null){
+            _socket = new FClientSocket(host, port);
+         }else{
+            _socket = new FClientSocket(host, port, _localHost, _localPort);
+         }
+      }
    }
 
    //============================================================
@@ -126,14 +176,40 @@ public class FHttpConnection
    // <T>获取数据。</T>
    //============================================================
    public void fetch(){
+      connect();
       request().send();
       response().receive();
+      disconnect();
+   }
+
+   //============================================================
+   // <T>获取数据。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public void fetch(byte[] data){
+      connect();
+      request().setData(data);
+      request().send();
+      response().receive();
+      disconnect();
    }
 
    //============================================================
    // <T>断开链接。</T>
    //============================================================
    public void disconnect(){
-      _socket.close();
+      if(_socket != null){
+         _socket.close();
+         _socket = null;
+      }
+   }
+
+   //============================================================
+   // <T>关闭处理。</T>
+   //============================================================
+   @Override
+   public void close(){
+      disconnect();
    }
 }

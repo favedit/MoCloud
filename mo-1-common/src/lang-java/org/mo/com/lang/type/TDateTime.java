@@ -392,7 +392,18 @@ public class TDateTime
    // @param value 时间段
    //============================================================
    public void add(TTimeSpan span){
-      _value = _value + span.get();
+      add(span.get());
+   }
+
+   //============================================================
+   // <T>给当前时间加上指定月数。</T>
+   //
+   // @param value 月数
+   //============================================================
+   public void addMonth(int value){
+      parse();
+      _month += value;
+      merge();
    }
 
    //============================================================
@@ -453,6 +464,20 @@ public class TDateTime
    // <T>设置数据内容。</T>
    //
    // @param value 数据内容
+   // @param autoParse 是否解析
+   //============================================================
+   public void set(long value,
+                   boolean autoParse){
+      _value = value;
+      if(autoParse){
+         parse();
+      }
+   }
+
+   //============================================================
+   // <T>设置数据内容。</T>
+   //
+   // @param value 数据内容
    //============================================================
    public void set(Date date){
       _value = date.getTime();
@@ -462,9 +487,37 @@ public class TDateTime
    // <T>设置数据内容。</T>
    //
    // @param value 数据内容
+   // @param autoParse 是否解析
+   //============================================================
+   public void set(Date date,
+                   boolean autoParse){
+      _value = date.getTime();
+      if(autoParse){
+         parse();
+      }
+   }
+
+   //============================================================
+   // <T>设置数据内容。</T>
+   //
+   // @param value 数据内容
    //============================================================
    public void set(TDateTime dateTime){
       _value = dateTime.get();
+   }
+
+   //============================================================
+   // <T>设置数据内容。</T>
+   //
+   // @param value 数据内容
+   // @param autoParse 是否解析
+   //============================================================
+   public void set(TDateTime dateTime,
+                   boolean autoParse){
+      _value = dateTime.get();
+      if(autoParse){
+         parse();
+      }
    }
 
    //============================================================
@@ -486,12 +539,30 @@ public class TDateTime
    }
 
    //============================================================
+   // <T>给当前时间减去一个毫秒内容。</T>
+   //
+   // @param value 毫秒数
+   //============================================================
+   public void sub(long value){
+      _value -= value;
+   }
+
+   //============================================================
    // <T>获得当前时间和指定时间之间的时间段。</T>
    //
    // @return 时间段
    //============================================================
    public TTimeSpan sub(TDateTime value){
       return new TTimeSpan(_value - value.get());
+   }
+
+   //============================================================
+   // <T>当前时间减去指定时间。</T>
+   //
+   // @return 时间段
+   //============================================================
+   public void sub(TTimeSpan span){
+      sub(span.get());
    }
 
    //============================================================
@@ -560,16 +631,6 @@ public class TDateTime
    // @param week 周
    //============================================================
    public void truncateMonth(){
-      //      // 创建日期内容
-      //      Calendar calendar = Calendar.getInstance();
-      //      calendar.setTimeZone(RDateTime.DEFAULT_TIMEZONE);
-      //      calendar.setTimeInMillis(_value);
-      //      int monthDay = calendar.get(Calendar.DAY_OF_MONTH) - 1;
-      //      _value -= RDateTime.TicksPerDay * monthDay;
-      //      if((_value % RDateTime.TicksPerDay) != 0){
-      //         _value -= _value % RDateTime.TicksPerDay;
-      //         _value -= RDateTime.DEFAULT_TIMEZONE_VALUE;
-      //      }
       Calendar calendar = Calendar.getInstance();
       calendar.setTimeZone(RDateTime.DEFAULT_TIMEZONE);
       calendar.setTimeInMillis(_value);

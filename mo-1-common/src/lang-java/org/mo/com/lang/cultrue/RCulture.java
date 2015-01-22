@@ -99,14 +99,12 @@ public class RCulture
    // @return 文化定义
    //============================================================
    public static FCulture unlink(){
-      // 检查存在性
       long threadId = Thread.currentThread().getId();
       FCulture culture = findThreadCulture(threadId);
-      if(null == culture){
-         throw new FFatalError("Culture is not exists. (thread_id={1})", threadId);
+      if(culture != null){
+         culture.setThreadId(0);
+         _cultures.remove(culture);
       }
-      culture.setThreadId(0);
-      _cultures.remove(culture);
       return culture;
    }
 

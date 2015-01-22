@@ -33,7 +33,6 @@ public class FActionServlet
       if(uri.endsWith(IActionConstant.WEB_ACTION)){
          redirect = _actionConsole.execute(context, uri);
       }
-      System.out.println(redirect);
       return redirect;
    }
 }

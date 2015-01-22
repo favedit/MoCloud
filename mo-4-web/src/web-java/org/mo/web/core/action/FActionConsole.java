@@ -7,6 +7,7 @@ import org.mo.com.data.ASqlConnect;
 import org.mo.com.data.MSqlConnect;
 import org.mo.com.data.RSql;
 import org.mo.com.io.RFile;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FError;
 import org.mo.com.lang.FFatalError;
@@ -23,15 +24,17 @@ import org.mo.com.xml.FXmlDocument;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.container.FAopComponent;
 import org.mo.core.aop.face.ALink;
+import org.mo.core.aop.face.AProperty;
 import org.mo.core.bind.IBindConsole;
+import org.mo.data.logic.FLogicContext;
+import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
-import org.mo.eng.data.common.FSqlContext;
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.logic.session.FSqlSessionContext;
 import org.mo.logic.session.ISqlSessionContext;
 import org.mo.web.core.action.common.FActionDescriptor;
 import org.mo.web.core.action.common.FActionDescriptorClassMap;
-import org.mo.web.core.action.common.FMethodDescriptor;
+import org.mo.web.core.action.common.FActionMethodDescriptor;
 import org.mo.web.core.action.common.FPageConfigClassMap;
 import org.mo.web.core.action.common.FWebAction;
 import org.mo.web.core.action.common.FWebActions;
@@ -61,8 +64,12 @@ public class FActionConsole
    // 日志接口
    private static ILogger _logger = RLogger.find(FActionConsole.class);
 
-   // 命令设置集合
-   protected FWebActions _actionConfigs = new FWebActions();
+   // 数据环境类名称
+   @AProperty(name = "logic_context")
+   protected String _logicContextClassName;
+
+   // 逻辑环境类对象
+   protected Class<FLogicContext> _logicContextClass;
 
    // 参数绑定控制台
    @ALink
@@ -72,9 +79,6 @@ public class FActionConsole
    @ALink
    protected IDatabaseConsole _databaseConsole;
 
-   // 类描述器集合
-   protected FActionDescriptorClassMap _descriptors = new FActionDescriptorClassMap();
-
    // 表单存储对象控制台
    @ALink
    protected IWebContainerConsole _formConsole;
@@ -82,6 +86,12 @@ public class FActionConsole
    // 结果消息控制台
    @ALink
    protected IWebMessageConsole _messageConsole;
+
+   // 类描述器集合
+   protected FActionDescriptorClassMap _descriptors = new FActionDescriptorClassMap();
+
+   // 命令设置集合
+   protected FWebActions _actionConfigs = new FWebActions();
 
    // 略过地址集合
    protected FAttributes _noMap = new FAttributes();
@@ -111,8 +121,8 @@ public class FActionConsole
    // @param name 名称
    // @return 函数信息对象
    //============================================================
-   protected FMethodDescriptor findMethod(Class<?> clazz,
-                                          String name){
+   protected FActionMethodDescriptor findMethod(Class<?> clazz,
+                                                String name){
       // 获得类描述器
       FActionDescriptor descriptor = _descriptors.find(clazz);
       if(null == descriptor){
@@ -120,7 +130,7 @@ public class FActionConsole
          _descriptors.set(clazz, descriptor);
       }
       // 查找函数描述对象 
-      FMethodDescriptor methodDescriptor = null;
+      FActionMethodDescriptor methodDescriptor = null;
       try{
          if(name == null){
             name = "construct";
@@ -130,7 +140,9 @@ public class FActionConsole
          }else{
             for(Method method : clazz.getMethods()){
                if(name.equals(method.getName())){
-                  methodDescriptor = new FMethodDescriptor(method);
+                  methodDescriptor = new FActionMethodDescriptor();
+                  methodDescriptor.setActionDescriptor(descriptor);
+                  methodDescriptor.build(method);
                   break;
                }
             }
@@ -236,6 +248,38 @@ public class FActionConsole
    }
 
    //============================================================
+   // <T>检查会话是否有效。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param input 输入信息
+   // @param output 输出信息
+   // @return 处理结果
+   //============================================================
+   public EResult checkSession(IWebContext context,
+                               ILogicContext logicContext){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>检查会话是否登录。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param input 输入信息
+   // @param output 输出信息
+   // @return 处理结果
+   //============================================================
+   public EResult checkLogin(IWebContext context,
+                             ILogicContext logicContext){
+      IWebSession session = context.session();
+      if(!session.user().isLogin()){
+         return EResult.Failure;
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>根据转向信息转向新的页面。</T>
    // <P>
    //    如果转向页面中为.wa结尾，则执行新的处理过程。
@@ -325,7 +369,7 @@ public class FActionConsole
                          String uri,
                          String method){
       Throwable throwable = null;
-      ISqlContext sqlContext = null;
+      ILogicContext logicContext = null;
       ISqlSessionContext sqlSessionContext = null;
       Object[] params = null;
       Object redirect = null;
@@ -348,6 +392,7 @@ public class FActionConsole
          if(uri.endsWith(IActionConstant.WEB_ACTION)){
             uri = uri.substring(0, uri.length() - 3);
          }
+         //............................................................
          // 查找地址对应的页面命令设置
          FWebAction config = findConfig(uri);
          if(null == config){
@@ -362,18 +407,10 @@ public class FActionConsole
          }
          // 找到当前地址对应的函数描述器
          String doAction = RString.nvl(method, context.parameter("do"), IActionConstant.DEFAULT_METHOD);
-         FMethodDescriptor methodDsp = findMethod(config.faceClass(), doAction);
-         if(null == methodDsp){
+         FActionMethodDescriptor methodDescriptor = findMethod(config.faceClass(), doAction);
+         if(methodDescriptor == null){
             _logger.warn(this, "execute", "Can't find method in action. (action={1}, method={2})", action, doAction);
             return null;
-         }
-         // 检查当前函数是否需要登录认证
-         if(methodDsp.testRequireLogin()){
-            IWebSession session = context.session();
-            if(!session.user().isLogin()){
-               // 返回用户未登录画面
-               return redirect(context, _messageConsole.loginWithout());
-            }
          }
          // 加载当前页面的配置信息
          FPageConfig pageConfig = findPageConfig(config.faceClass());
@@ -382,10 +419,40 @@ public class FActionConsole
          }
          context.pageStatus().setStatus(doAction);
          _logger.debug(this, "execute", "Process action. (url={1}, action={2}, method={3})", uri, action, doAction);
+         //............................................................
+         // 建立数据环境
+         if(_logicContextClass != null){
+            try{
+               FLogicContext newLogicContext = _logicContextClass.newInstance();
+               newLogicContext.linkDatabaseConsole(_databaseConsole);
+               logicContext = newLogicContext;
+            }catch(Exception e){
+               throw new FFatalError(e);
+            }
+         }else{
+            logicContext = new FLogicContext(_databaseConsole);
+         }
+         // 检查当前处理是否需要会话
+         if(methodDescriptor.sessionRequire()){
+            EResult resultCd = checkSession(context, logicContext);
+            if(resultCd != EResult.Success){
+               // 返回用户未登录画面
+               return redirect(context, _messageConsole.loginWithout());
+            }
+         }
+         // 检查当前处理是否需要登录
+         if(methodDescriptor.loginRequire()){
+            EResult resultCd = checkLogin(context, logicContext);
+            if(resultCd != EResult.Success){
+               // 返回用户未登录画面
+               return redirect(context, _messageConsole.loginWithout());
+            }
+         }
+         //............................................................
          // Invoke method
-         Class[] types = methodDsp.types();
-         AContainer[] acontainers = methodDsp.forms();
-         ASqlConnect[] aconnects = methodDsp.sqlConnects();
+         Class[] types = methodDescriptor.types();
+         AContainer[] acontainers = methodDescriptor.forms();
+         ASqlConnect[] aconnects = methodDescriptor.sqlConnects();
          FWebContainerItem[] containers = new FWebContainerItem[types.length];
          params = new Object[types.length];
          // 创建调用的参数列表
@@ -399,22 +466,19 @@ public class FActionConsole
             }else if(type == IWebSession.class){
                // 参数为网络线程对象时
                value = context.session();
+            }else if((type == ISqlContext.class) || (type == ILogicContext.class)){
+               // 参数对象为数据环境对象
+               value = logicContext;
+               ASqlConnect aconnect = aconnects[n];
+               if(null != aconnect){
+                  logicContext.setDefaultName(aconnect.name());
+               }
             }else if(type == ISqlSessionContext.class){
                // 参数为网络线程数据环境对象时
-               if(null == sqlSessionContext){
+               if(sqlSessionContext == null){
                   sqlSessionContext = new FSqlSessionContext(_databaseConsole);
                }
                value = sqlSessionContext;
-            }else if(type == ISqlContext.class){
-               // 参数为数据环境对象时
-               if(null == sqlContext){
-                  sqlContext = new FSqlContext(_databaseConsole);
-               }
-               ASqlConnect aconnect = aconnects[n];
-               if(null != aconnect){
-                  sqlContext.setDefaultName(aconnect.name());
-               }
-               value = sqlContext;
             }else if(type.isInterface()){
                String name = RClass.shortName(type);
                if(name.startsWith("I") && name.endsWith("Di")){
@@ -448,7 +512,7 @@ public class FActionConsole
          }
          // 动态函数调用
          ((FWebContext)context).setSqlContext(sqlSessionContext);
-         redirect = methodDsp.invoke(action, params);
+         redirect = methodDescriptor.invoke(action, params);
       }catch(Throwable t){
          // 产生例外时，处理例外内容
          boolean isSqlException = false;
@@ -467,7 +531,7 @@ public class FActionConsole
          // 释放参数
          if(null != params){
             for(Object param : params){
-               if((param != sqlContext) && (param != sqlSessionContext) && (param instanceof IRelease)){
+               if((param != logicContext) && (param != sqlSessionContext) && (param instanceof IRelease)){
                   try{
                      ((IRelease)param).release();
                   }catch(Exception e){
@@ -477,7 +541,15 @@ public class FActionConsole
             }
          }
          // 释放数据库链接
-         if(null != sqlSessionContext){
+         if(logicContext != null){
+            if(throwable == null){
+               logicContext.release();
+            }else{
+               logicContext.rollback();
+            }
+            logicContext = null;
+         }
+         if(sqlSessionContext != null){
             if(null == throwable){
                sqlSessionContext.unlink();
                FMessages messages = sqlSessionContext.messages();
@@ -489,14 +561,6 @@ public class FActionConsole
                sqlSessionContext.rollback();
             }
             sqlSessionContext = null;
-         }
-         if(null != sqlContext){
-            if(null == throwable){
-               sqlContext.release();
-            }else{
-               sqlContext.rollback();
-            }
-            sqlContext = null;
          }
       }
       // 如果上次处理有错误，本次处理依旧产生错误，则只输出日志，不做页面错误转向处理
@@ -518,5 +582,14 @@ public class FActionConsole
          }
       }
       return redirect(context, redirect);
+   }
+
+   //============================================================
+   // <T>初始化配置信息。</T>
+   //============================================================
+   public void initializeConfig(){
+      if(!RString.isEmpty(_logicContextClassName)){
+         _logicContextClass = RClass.findClass(_logicContextClassName);
+      }
    }
 }

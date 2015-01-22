@@ -9,14 +9,14 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
 import javax.swing.text.AbstractDocument.Content;
-import org.jdom.Attribute;
-import org.jdom.CDATA;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Text;
-import org.jdom.input.SAXBuilder;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
+import org.jdom2.Attribute;
+import org.jdom2.CDATA;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.Text;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
@@ -51,6 +51,9 @@ public class FXmlDocument
 
    // 配置属性区分大小写
    protected boolean _optionAttributeCareCase = true;
+
+   // 是否替换属性回车
+   protected boolean _optionAttributeReturn = true;
 
    // 是否建立文本节点
    protected boolean _textFlag = false;
@@ -176,6 +179,24 @@ public class FXmlDocument
    }
 
    //============================================================
+   // <T>获得是否替换属性回车。</T>
+   //
+   // @return 是否替换属性回车
+   //============================================================
+   public boolean optionAttributeReturn(){
+      return _optionAttributeReturn;
+   }
+
+   //============================================================
+   // <T>设置是否替换属性回车。</T>
+   //
+   // @param optionAttributeReturn 是否替换属性回车
+   //============================================================
+   public void setOptionAttributeReturn(boolean optionAttributeReturn){
+      _optionAttributeReturn = optionAttributeReturn;
+   }
+
+   //============================================================
    // <T>获得是否建立文本节点标志。</T>
    //
    // @return 节点标志
@@ -230,15 +251,24 @@ public class FXmlDocument
    }
 
    //============================================================
-   // <T>获得XML根节点。</T>
+   // <T>获得配置根节点。</T>
    //
    // @return 根节点
    //============================================================
    public FXmlNode root(){
-      if(null == _rootNode){
+      if(_rootNode == null){
          _rootNode = createNode(RXml.DEFAULT_ROOT_NAME);
       }
       return _rootNode;
+   }
+
+   //============================================================
+   // <T>设置配置根节点。</T>
+   //
+   // @param xroot 根节点
+   //============================================================
+   public void setRoot(FXmlNode xroot){
+      _rootNode = xroot;
    }
 
    //============================================================
@@ -565,7 +595,6 @@ public class FXmlDocument
    // @param element 元素
    // @param node 节点
    //============================================================
-   @SuppressWarnings("unchecked")
    protected void syncElementFromNode(Element element,
                                       FXmlNode node){
       if(node == null || element == null){
@@ -587,9 +616,11 @@ public class FXmlDocument
                attrValue = nodeAttrs.value(n);
                // 修正属性内容
                if(attrValue != null){
-                  if(attrValue.indexOf("\n") != -1){
-                     attrValue = attrValue.replaceAll("\r", "");
-                     attrValue = attrValue.replaceAll("\n", "\\\\n");
+                  if(_optionAttributeReturn){
+                     if(attrValue.indexOf("\n") != -1){
+                        attrValue = attrValue.replaceAll("\r", "");
+                        attrValue = attrValue.replaceAll("\n", "\\\\n");
+                     }
                   }
                   element.setAttribute(attrName, attrValue);
                }

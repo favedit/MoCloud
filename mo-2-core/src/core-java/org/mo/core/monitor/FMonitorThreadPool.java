@@ -55,7 +55,7 @@ public class FMonitorThreadPool
    //============================================================
    public FMonitorThread syncThread(String groupName){
       FMonitorThread thread = _threads.find(groupName);
-      if(null == thread){
+      if(thread == null){
          thread = new FMonitorThread(_console);
          thread.start();
          _threads.set(groupName, thread);

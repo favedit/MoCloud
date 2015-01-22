@@ -31,6 +31,7 @@ public class FChartService
    /* (non-Javadoc)
     * @see org.mo.jfa.face.design.webtools.IWebToolsService#catalog(org.mo.web.protocol.context.IWebContext, org.mo.web.protocol.context.IWebInput, org.mo.web.protocol.context.IWebOutput)
     */
+   @Override
    public void catalog(IWebContext context,
                        IWebInput input,
                        IWebOutput output){
@@ -51,7 +52,7 @@ public class FChartService
             // 统计节点包
             FXmlNodes outputNodes = output.config().nodes();
             for(FXmlConfigMeta meta : _chartConsole.listMetas()){
-               if(RFile.removeExtension(meta.name()).equals(uuid)){
+               if(RFile.extensionPath(meta.name()).equals(uuid)){
                   String name = meta.name();
                   IXmlObject xcollection = _chartConsole.find(name);
                   String type = xcollection.name();
@@ -87,7 +88,7 @@ public class FChartService
       FXmlNodes outputNodes = output.config().nodes();
       for(FXmlConfigMeta meta : _chartConsole.listMetas()){
          String metaName = meta.name();
-         String name = RFile.removeExtension(metaName);
+         String name = RFile.extensionPath(metaName);
          // 过滤节点
          if(!RString.isEmpty(nodeType) && !metaName.endsWith(nodeType)){
             continue;
@@ -152,7 +153,7 @@ public class FChartService
          nodeAttrs.unpack(selectNode.get("attributes"));
          collection = nodeAttrs.get("form_name");
       }else if(TYPE_COMPONENT.equals(typeType)){
-         FXmlNode topNode = selectNode.findDeep("Node", "type_type", TYPE_COLLECTION);
+         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
          nodeAttrs.unpack(topNode.get("attributes"));
          collection = nodeAttrs.get("form_name");
       }

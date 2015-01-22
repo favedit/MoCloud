@@ -11,8 +11,6 @@ import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.connector.IConnectorConsole;
-import org.mo.data.face.FDomainStatisticsLogicLogic;
-import org.mo.data.face.FDomainStatisticsLogicUnit;
 import org.mo.data.statistics.common.XLogic;
 import org.mo.data.statistics.common.XStatistics;
 import org.mo.eng.store.FXmlConfigConsole;
@@ -123,11 +121,11 @@ public class FStatisticsConsole
       ISqlConnection connection = _connectorConsole.alloc(domainConnectionName);
       //............................................................
       // 获得属性
-      String statisticsName = statistics.name();
+      //String statisticsName = statistics.name();
       String logicName = xlogic.getName();
-      String logicLabel = xlogic.getLabel();
+      //String logicLabel = xlogic.getLabel();
       String invokeName = xlogic.getInvokeName();
-      String code = statisticsName + "." + logicName;
+      //String code = statisticsName + "." + logicName;
       try{
          // 创建统计器
          logic = RAop.find(invokeName);
@@ -135,18 +133,18 @@ public class FStatisticsConsole
          logic.setInvokeName(invokeName);
          logic.setStatistics(statistics);
          // 创建数据库记录
-         FDomainStatisticsLogicLogic statisticsLogic = new FDomainStatisticsLogicLogic(connection);
-         FDomainStatisticsLogicUnit statisticsUnit = statisticsLogic.serach("CODE='" + code + "'");
-         if(statisticsUnit == null){
-            statisticsUnit = new FDomainStatisticsLogicUnit();
-            statisticsUnit.setCode(code);
-            statisticsUnit.setStatisticsName(statisticsName);
-            statisticsUnit.setName(logicName);
-            statisticsUnit.setLabel(logicLabel);
-            statisticsUnit.setInvokeName(invokeName);
-            statisticsLogic.doInsert(statisticsUnit);
-         }
-         logic.setUnit(statisticsUnit);
+         //         FDomainStatisticsLogicLogic statisticsLogic = new FDomainStatisticsLogicLogic(connection);
+         //         FDomainStatisticsLogicUnit statisticsUnit = statisticsLogic.serach("CODE='" + code + "'");
+         //         if(statisticsUnit == null){
+         //            statisticsUnit = new FDomainStatisticsLogicUnit();
+         //            statisticsUnit.setCode(code);
+         //            statisticsUnit.setStatisticsName(statisticsName);
+         //            statisticsUnit.setName(logicName);
+         //            statisticsUnit.setLabel(logicLabel);
+         //            statisticsUnit.setInvokeName(invokeName);
+         //            statisticsLogic.doInsert(statisticsUnit);
+         //         }
+         //logic.setUnit(statisticsUnit);
          // 存储内容
          statistics.push(logic);
          _logger.info(this, "load", "Add statistics logic. (name={1}, invoke_name={2})", logicName, invokeName);

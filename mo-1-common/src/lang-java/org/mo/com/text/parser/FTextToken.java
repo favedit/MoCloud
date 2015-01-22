@@ -103,7 +103,7 @@ public class FTextToken
    // @return 是否含有
    //============================================================
    public boolean hasToken(){
-      return (null != _tokens) ? !_tokens.isEmpty() : false;
+      return (_tokens != null) ? !_tokens.isEmpty() : false;
    }
 
    //============================================================
@@ -112,7 +112,7 @@ public class FTextToken
    // @return 文本段集合
    //============================================================
    public FTextTokens tokens(){
-      if(null == _tokens){
+      if(_tokens == null){
          _tokens = new FTextTokens();
       }
       return _tokens;
@@ -151,10 +151,12 @@ public class FTextToken
 
    //============================================================
    // <T>解析文本内容。</T>
+   //
+   // @param source 文本内容
    //============================================================
    public void parse(String source){
+      _source = source;
       // 格式化代码，分隔成行
-      //boolean inComment = false;
       boolean inString = false;
       char[] chars = source.toCharArray();
       int n = -1;
@@ -217,63 +219,23 @@ public class FTextToken
       }
    }
 
-   //   //============================================================
-   //   // <T>解析文本内容。</T>
-   //   //============================================================
-   //   public void parseSelf(){
-   //      if(null != _tokens){
-   //         for(FTextToken token : _tokens){
-   //            token.setContext(_context);
-   //            token.parseSelf();
-   //         }
-   //      }
-   //      if(!RString.isEmpty(_text)){
-   //         // 格式化代码，分隔成行
-   //         char[] chars = _text.toCharArray();
-   //         int n = -1;
-   //         int end = chars.length;
-   //         FString code = new FString();
-   //         int deepCount = 0;
-   //         FTextToken tokenOpen = null;
-   //         while(++n < end){
-   //            char value = chars[n];
-   //            if(_context.isTokenBegin(value)){
-   //               // 开启块操作
-   //               if(0 == deepCount){
-   //                  if(!code.isBlank()){
-   //                     tokenOpen = new FTextToken();
-   //                     tokenOpen.setContext(_context);
-   //                     tokenOpen.load(code.flushString());
-   //                     push(tokenOpen);
-   //                  }
-   //               }else{
-   //                  code.append(value);
-   //               }
-   //               deepCount++;
-   //            }else if(_context.isTokenEnd(value)){
-   //               // 关闭块操作
-   //               deepCount--;
-   //               if(0 == deepCount){
-   //                  if(!code.isBlank()){
-   //                     tokenOpen.parse(code.flushString());
-   //                  }
-   //                  tokenOpen = null;
-   //               }else{
-   //                  code.append(value);
-   //               }
-   //            }else{
-   //               code.append(value);
-   //            }
-   //         }
-   //         // 处理尾节点
-   //         if(!code.isBlank()){
-   //            FTextToken token = new FTextToken();
-   //            token.setContext(_context);
-   //            token.load(code.flushString());
-   //            push(token);
-   //         }
-   //      }
-   //   }
+   //============================================================
+   // <T>根据字符分隔内容。</T>
+   //
+   // @param value 分割字符
+   //============================================================
+   public void splite(char value){
+      if(!RString.isEmpty(_source)){
+         String[] lines = RString.split(_source, value);
+         for(String line : lines){
+            FTextToken token = new FTextToken();
+            token.setContext(_context);
+            token.load(line);
+            push(token);
+         }
+      }
+   }
+
    //============================================================
    // <T>生成运行信息。</T>
    //

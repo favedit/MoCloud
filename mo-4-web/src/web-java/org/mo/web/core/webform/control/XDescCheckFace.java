@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>复选框接口对象的XML节点基类。</T>
 //============================================================
 public interface XDescCheckFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MDescCheck";

@@ -2,7 +2,6 @@ package org.mo.jfa.face.inc.form;
 
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.EContainerScope;
-
 import org.mo.web.protocol.context.IWebContext;
 
 public interface IFormAction

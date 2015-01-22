@@ -6,6 +6,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.RThrowable;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.system.MListener;
+import org.mo.com.system.RThread;
 
 //============================================================
 // <T>日志监听器基础类。</T>
@@ -46,54 +47,12 @@ public abstract class MLoggerListener
    protected void buildMessage(FString result,
                                SLoggerInfo info){
       // 建立显示信息
-      switch(info.levelCd){
-         case NONE:
-            result.append('P');
-            break;
-         case PRINT:
-            result.append('P');
-            break;
-         case DEBUG:
-            result.append('D');
-            break;
-         case INFO:
-            result.append('I');
-            break;
-         case WARN:
-            result.append('W');
-            break;
-         case ERROR:
-            result.append('E');
-            break;
-         case FATAL:
-            result.append('F');
-            break;
-         case NO_DEBUG:
-            result.append('F');
-            break;
-      }
+      char levelChar = ELoggerLevel.toChar(info.levelCd);
+      result.append(levelChar);
       result.append('.');
       // 建立线程信息
-      String threadName = Thread.currentThread().getName();
-      if(threadName.equalsIgnoreCase("main")){
-         result.append("<MA>");
-      }else if(threadName.startsWith("Thread-")){
-         result.append("T" + RString.leftPad(threadName.substring(7), 3, "0"));
-      }else if(threadName.startsWith("localhost-startStop-")){
-         result.append("L" + RString.leftPad(threadName.substring(20), 3, "0"));
-      }else if(threadName.startsWith("http-nio-") && threadName.contains("-exec-")){
-         result.append("H" + RString.leftPad(threadName.substring(threadName.indexOf("-exec-") + 6), 3, "0"));
-      }else if(threadName.startsWith("http-") && threadName.contains("Processor")){
-         result.append("H" + RString.leftPad(threadName.substring(threadName.indexOf("Processor") + 9), 3, "0"));
-      }else if(threadName.startsWith("TP-Processor")){
-         result.append("P" + RString.leftPad(threadName.substring(12), 3, "0"));
-      }else if(threadName.equals("JavaFX Application Thread")){
-         result.append("<JF>");
-      }else if(threadName.equals("ContainerBackgroundProcessor[StandardEngine[Catalina]]")){
-         result.append("<CL>");
-      }else{
-         result.append(threadName);
-      }
+      String threadName = RThread.makeThreadCode();
+      result.append(threadName);
       // 获得引用对象信息
       String referInfo = null;
       Object reference = info.reference;
@@ -108,6 +67,7 @@ public abstract class MLoggerListener
       if(null != info.method){
          referInfo += "." + info.method;
       }
+      info.referInfo = referInfo;
       result.append(" [ ");
       if(info.timeSpan > 0){
          String timeSpan = Long.toString(info.timeSpan);
@@ -131,7 +91,7 @@ public abstract class MLoggerListener
          result.append(message);
          //}
       }
-      if(null != info.throwable){
+      if(info.throwable != null){
          // 建立例外堆栈
          FThrowables stack = RThrowable.buildStack(info.throwable);
          // 建立例外消息

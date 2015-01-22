@@ -1,11 +1,14 @@
 package org.mo.web.core.service.common;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import org.mo.com.lang.FError;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.web.core.action.AWebLogin;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.core.face.AWebLogin;
+import org.mo.web.core.face.AWebSession;
 
 //============================================================
 // <T>服务函数描述器。</T>
@@ -13,41 +16,55 @@ import org.mo.web.core.container.AContainer;
 public class FServiceMethodDescriptor
       extends FObject
 {
+   // 服务描述器
+   protected FServiceDescriptor _serviceDescriptor;
+
    // 调用函数对象
-   private final Method _method;
+   protected Method _method;
 
    // 表单描述器数组
-   private AContainer[] _forms;
+   protected AContainer[] _forms;
 
    // 类描述对象
-   private Class<?>[] _types;
+   protected Class<?>[] _types;
 
-   // 用户登录的描述器
-   private AWebLogin _loginDescriptor;
+   // 会话的描述器
+   protected AWebSession _sessionDescriptor;
 
-   // 页面命令的描述器
-   private FServiceDescriptor _serviceDescriptor;
+   // 是否需要会话
+   protected boolean _sessionRequire;
+
+   // 登录的描述器
+   protected AWebLogin _loginDescriptor;
+
+   // 是否需要登录
+   protected boolean _loginRequire;
 
    //============================================================
    // <T>构造服务函数描述器。</T>
-   //
-   // @param method 函数
    //============================================================
-   public FServiceMethodDescriptor(Method method){
-      _method = method;
-      build();
+   public FServiceMethodDescriptor(){
    }
 
    //============================================================
    // <T>建立内部信息。</T>
+   //
+   // @param method 函数
    //============================================================
-   protected void build(){
+   public void build(Method method){
+      _method = method;
+      _sessionRequire = _serviceDescriptor.sessionRequire();
+      _loginRequire = _serviceDescriptor.loginRequire();
       // 获得函数的描述器
       Annotation[] methodAnnotations = _method.getAnnotations();
       if(methodAnnotations != null){
          for(Annotation annotation : methodAnnotations){
-            if(annotation instanceof AWebLogin){
+            if(annotation instanceof AWebSession){
+               _sessionDescriptor = (AWebSession)annotation;
+               _sessionRequire = _sessionDescriptor.require();
+            }else if(annotation instanceof AWebLogin){
                _loginDescriptor = (AWebLogin)annotation;
+               _loginRequire = _loginDescriptor.require();
             }
          }
       }
@@ -67,30 +84,12 @@ public class FServiceMethodDescriptor
    }
 
    //============================================================
-   // <T>获得类型集合。</T>
+   // <T>获得服务描述器。</T>
    //
-   // @return 类型集合
+   // @return 服务描述器
    //============================================================
-   public Class<?>[] types(){
-      return _types;
-   }
-
-   //============================================================
-   // <T>获得表单集合。</T>
-   //
-   // @return 表单集合
-   //============================================================
-   public AContainer[] forms(){
-      return _forms;
-   }
-
-   //============================================================
-   // <T>获得用户登录描述器。</T>
-   //
-   // @return 用户登录描述器
-   //============================================================
-   public AWebLogin loginDescriptor(){
-      return _loginDescriptor;
+   public FServiceDescriptor serviceDescriptor(){
+      return _serviceDescriptor;
    }
 
    //============================================================
@@ -103,30 +102,86 @@ public class FServiceMethodDescriptor
    }
 
    //============================================================
-   // <T>测试是否需要用户登录。</T>
+   // <T>获得类型描述器集合。</T>
+   //
+   // @return 类型描述器集合
+   //============================================================
+   public Class<?>[] types(){
+      return _types;
+   }
+
+   //============================================================
+   // <T>获得表单描述器集合。</T>
+   //
+   // @return 表单描述器集合
+   //============================================================
+   public AContainer[] forms(){
+      return _forms;
+   }
+
+   //============================================================
+   // <T>获得会话描述器。</T>
+   //
+   // @return 会话描述器
+   //============================================================
+   public AWebSession sessionDescriptor(){
+      return _sessionDescriptor;
+   }
+
+   //============================================================
+   // <T>获得是否需要会话。</T>
    //
    // @return 是否需要
    //============================================================
-   public boolean testRequireLogin(){
-      if(_loginDescriptor != null){
-         return _loginDescriptor.require();
-      }
-      return _serviceDescriptor.testRequireLogin();
+   public boolean sessionRequire(){
+      return _sessionRequire;
+   }
+
+   //============================================================
+   // <T>获得登录描述器。</T>
+   //
+   // @return 登录描述器
+   //============================================================
+   public AWebLogin loginDescriptor(){
+      return _loginDescriptor;
+   }
+
+   //============================================================
+   // <T>获得是否需要登录。</T>
+   //
+   // @return 是否需要
+   //============================================================
+   public boolean loginRequire(){
+      return _loginRequire;
    }
 
    //============================================================
    // <T>函数调用处理。</T>
    //
-   // @param action 命令对象
+   // @param instance 实例
    // @param params 参数集合
    // @return 处理结果
    //============================================================
-   public Object invoke(Object action,
+   public Object invoke(Object instance,
                         Object[] params){
       try{
-         return _method.invoke(action, params);
+         return _method.invoke(instance, params);
       }catch(Exception e){
-         throw new FFatalError(e);
+         // 获得原始例外
+         Throwable throwable = null;
+         if(e instanceof InvocationTargetException){
+            throwable = ((InvocationTargetException)e).getTargetException();
+         }else{
+            throwable = e;
+         }
+         // 产生新例外
+         FError error = null;
+         if(throwable instanceof FError){
+            error = (FError)throwable;
+         }else{
+            error = new FFatalError(e);
+         }
+         throw error;
       }
    }
 }

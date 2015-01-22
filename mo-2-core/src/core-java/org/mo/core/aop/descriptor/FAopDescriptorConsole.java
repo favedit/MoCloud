@@ -18,7 +18,7 @@ public class FAopDescriptorConsole
    public <V extends IAopDescriptor> V find(Class<V> clazz,
                                             String className){
       IAopDescriptor descriptor = _descriptors.find(className);
-      if(null == descriptor){
+      if(descriptor == null){
          // 设置组件描述器
          synchronized(clazz){
             if(!_descriptors.contains(className)){

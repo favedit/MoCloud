@@ -1,19 +1,17 @@
 package org.mo.com.text.parser;
 
-import org.mo.com.lang.FObjects;
+import org.mo.com.lang.generic.MObjects;
 
+//============================================================
+// <T>文本行集合。</T>
+//============================================================
 public class FTextLines
-      extends FObjects<FTextLine>
+      extends MObjects<FTextLine>
 {
+   //============================================================
+   // <T>构造文本行集合。</T>
+   //============================================================
    public FTextLines(){
       super(FTextLine.class);
-   }
-
-   public String toString(){
-      // 格式化代码，分隔成行
-      //      for(FTextLine line : lines){
-      //         System.out.println(line);
-      //      }
-      return null;
    }
 }

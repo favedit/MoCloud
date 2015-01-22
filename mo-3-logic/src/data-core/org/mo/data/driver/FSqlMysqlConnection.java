@@ -19,7 +19,6 @@ import org.mo.com.data.MSqlConnection;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RInteger;
-import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -84,38 +83,6 @@ public class FSqlMysqlConnection
    @Override
    public void selectStorage(String name){
       executeSql("USE " + name);
-   }
-
-   //============================================================
-   // <T>格式化字符串为命令内容。</T>
-   //
-   // @param value 内容
-   // @return 命令内容
-   //============================================================
-   @Override
-   public String formatValue(String value){
-      if(!RString.isEmpty(value)){
-         StringBuffer sql = new StringBuffer();
-         for(char ch : value.toCharArray()){
-            if('\'' == ch){
-               sql.append("\\'");
-            }else if('"' == ch){
-               sql.append("\\\"");
-            }else if('\\' == ch){
-               sql.append("\\\\");
-            }else if('\t' == ch){
-               sql.append("\\t");
-            }else if('\r' == ch){
-               sql.append("\\r");
-            }else if('\n' == ch){
-               sql.append("\\n");
-            }else{
-               sql.append(ch);
-            }
-         }
-         return sql.toString();
-      }
-      return RString.EMPTY;
    }
 
    //============================================================
@@ -246,7 +213,7 @@ public class FSqlMysqlConnection
             }
          }
          if(exception != null){
-            throw new FFatalError(exception, "SqlCmd[{0}],PageSize[{1}],Page[{2}]", formatSql, pageSize, page);
+            throw new FFatalError(exception, "Fetch dataset failure. (sql={1}, page_size={2}, page={3})", formatSql, pageSize, page);
          }
       }
       return dataset;

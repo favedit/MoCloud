@@ -60,7 +60,7 @@ public class FAopConfigConsole
    // @return 设置集合
    //============================================================
    public XAopConfigCollection configCollection(){
-      if(null == _configs){
+      if(_configs == null){
          _configs = (XAopConfigCollection)_nodesMap.find(XAopConfig.TAG_NAME);
       }
       return _configs;
@@ -72,7 +72,7 @@ public class FAopConfigConsole
    // @return 定义集合
    //============================================================
    public XAopDefineCollection defineCollection(){
-      if(null == _defines){
+      if(_defines == null){
          _defines = (XAopDefineCollection)_nodesMap.find(XAopDefine.TAG_NAME);
       }
       return _defines;
@@ -84,7 +84,7 @@ public class FAopConfigConsole
    // @return 控件配置集合
    //============================================================
    public XAopComponentCollection componentCollection(){
-      if(null == _component){
+      if(_component == null){
          _component = (XAopComponentCollection)_nodesMap.find(XAopComponent.TAG_NAME);
       }
       return _component;
@@ -96,7 +96,7 @@ public class FAopConfigConsole
    // @return 控件集合配置集合
    //============================================================
    public XAopComponentsCollection componentsCollection(){
-      if(null == _components){
+      if(_components == null){
          _components = (XAopComponentsCollection)_nodesMap.find(XAopComponents.TAG_NAME);
       }
       return _components;

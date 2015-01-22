@@ -6,8 +6,6 @@
  */
 package org.mo.jfa.face.logic.process;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.logic.data.ILgProcessCdtConfigDi;
 import org.mo.logic.data.ILgProcessCdtDi;
 import org.mo.logic.data.ILgProcessEventConfigDi;
@@ -21,6 +19,7 @@ import org.mo.logic.data.ILgTaskEventConfigDi;
 import org.mo.logic.data.ILgTaskEventDi;
 import org.mo.logic.data.ILgTaskTypeConfigDi;
 import org.mo.logic.data.ILgTaskTypeDi;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 /**

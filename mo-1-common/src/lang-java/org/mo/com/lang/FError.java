@@ -14,6 +14,9 @@ public abstract class FError
    // 序列化标识
    private final static long serialVersionUID = 1L;
 
+   // 捕捉
+   protected boolean _catch = true;
+
    // 消息
    protected String _message;
 
@@ -86,8 +89,13 @@ public abstract class FError
       _params = params;
    }
 
-   public String description(){
-      return RString.format(_message, _params);
+   //============================================================
+   // <T>获得是否捕捉。</T>
+   //
+   // @return 是否捕捉
+   //============================================================
+   public boolean isCatch(){
+      return _catch;
    }
 
    //============================================================
@@ -109,12 +117,21 @@ public abstract class FError
    }
 
    //============================================================
+   // <T>获得描述。</T>
+   //
+   // @return 描述
+   //============================================================
+   public String description(){
+      return RString.format(_message, _params);
+   }
+
+   //============================================================
    // <T>获得例外。</T>
    //
    // @return 例外
    //============================================================
    public Throwable throwable(){
-      if(null != _throwable){
+      if(_throwable != null){
          return _throwable;
       }
       return this;

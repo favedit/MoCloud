@@ -1,7 +1,7 @@
 package org.mo.web.core.action.common;
 
 import org.mo.com.lang.RString;
-import org.mo.com.regex.FPattern;
+import org.mo.com.text.FPattern;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.config.XAbsAopNode;
 

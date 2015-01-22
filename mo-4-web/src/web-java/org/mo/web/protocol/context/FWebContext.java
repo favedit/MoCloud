@@ -10,6 +10,11 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.IObjectId;
+import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RFloat;
+import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.mo.com.lang.reflect.RProperty;
@@ -70,6 +75,9 @@ public class FWebContext
 
    // 请求全地址
    protected String _requestUrl;
+
+   // 请求主机
+   protected String _requestHost;
 
    // 请求字符串
    protected String _queryString;
@@ -136,9 +144,19 @@ public class FWebContext
       _heads = RWebRequest.makeHeads(request);
       _parameters = RWebRequest.makeParameters(request);
       _requestUri = request.getRequestURI().substring(_contextPath.length());
+      _requestUrl = request.getRequestURL().toString();
+      // 生成主机
+      _requestHost = _requestUrl;
+      int hostFind = _requestUrl.indexOf("://");
+      if(hostFind != -1){
+         int hostFindEnd = _requestUrl.indexOf("/", hostFind + 3);
+         if(hostFindEnd != -1){
+            _requestHost = _requestUrl.substring(0, hostFindEnd);
+         }
+      }
       // 读取Cookie
       Cookie[] cookies = request.getCookies();
-      if(null != cookies){
+      if(cookies != null){
          for(Cookie cookie : cookies){
             if("MOCK".equalsIgnoreCase(cookie.getName())){
                cookies().unpack(cookie.getValue());
@@ -151,8 +169,9 @@ public class FWebContext
       define("#head", _heads);
       define("#cookies", _cookies);
       define("#parameter", _parameters);
-      define("#history", session().history());
-      _requestUrl = request.getRequestURL().toString();
+      if(_session != null){
+         define("#history", _session.history());
+      }
       _remoteAddress = request.getRemoteAddr();
       _remoteHost = request.getRemoteHost();
       _remotePort = request.getRemotePort();
@@ -165,9 +184,6 @@ public class FWebContext
          }
       }
       _queryString = request.getQueryString();
-      // if(m_sRequestUri.startsWith(_contextPath)){
-      //    m_sRequestUri = m_sRequestUri.substring(_contextPath.length());
-      // }
       // 建立上传文件信息信息
       if(FWebUpdateParser.isMultipart(request)){
          IWebUploadConsole uploadConsole = RAop.find(IWebUploadConsole.class);
@@ -363,6 +379,16 @@ public class FWebContext
    }
 
    //============================================================
+   // <T>获得请求主机。</T>
+   //
+   // @return 请求主机
+   //============================================================
+   @Override
+   public String requestHost(){
+      return _requestHost;
+   }
+
+   //============================================================
    // <T>获得请求字符串。</T>
    //
    // @return 请求字符串
@@ -389,8 +415,8 @@ public class FWebContext
    // @return 头信息
    //============================================================
    @Override
-   public String head(String sName){
-      return _heads.get(sName);
+   public String head(String name){
+      return _heads.find(name);
    }
 
    //============================================================
@@ -412,6 +438,81 @@ public class FWebContext
    @Override
    public String parameter(String name){
       return _parameters.find(name);
+   }
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   @Override
+   public boolean parameterAsBoolean(String name){
+      String value = _parameters.find(name);
+      if(value != null){
+         return RBoolean.parse(value);
+      }
+      return false;
+   }
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   @Override
+   public int parameterAsInteger(String name){
+      String value = _parameters.find(name);
+      if(value != null){
+         return RInteger.parse(value);
+      }
+      return 0;
+   }
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   @Override
+   public long parameterAsLong(String name){
+      String value = _parameters.find(name);
+      if(value != null){
+         return RLong.parse(value);
+      }
+      return 0;
+   }
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   @Override
+   public float parameterAsFloat(String name){
+      String value = _parameters.find(name);
+      if(value != null){
+         return RFloat.parse(value);
+      }
+      return 0;
+   }
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   @Override
+   public double parameterAsDouble(String name){
+      String value = _parameters.find(name);
+      if(value != null){
+         return RDouble.parse(value);
+      }
+      return 0;
    }
 
    //============================================================
@@ -545,7 +646,11 @@ public class FWebContext
    //============================================================
    @Override
    public boolean hasMessages(){
-      return (null != _messages) ? !_messages.isEmpty() : false;
+      boolean result = false;
+      if(_messages != null){
+         result = !_messages.isEmpty();
+      }
+      return result;
    }
 
    //============================================================

@@ -35,7 +35,7 @@ public class FSlots<V>
    //============================================================
    public void pushSlot(V value){
       for(int n = 0; n < _count; n++){
-         if(null == _items[n]){
+         if(_items[n] == null){
             _items[n] = value;
             return;
          }

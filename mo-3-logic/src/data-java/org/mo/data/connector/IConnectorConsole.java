@@ -1,8 +1,7 @@
 package org.mo.data.connector;
 
-import org.mo.data.connector.common.XDatabase;
-
 import org.mo.com.data.ISqlConnection;
+import org.mo.data.connector.common.XDatabase;
 import org.mo.eng.data.IConnectionConsole;
 import org.mo.eng.store.IXmlConfigConsole;
 

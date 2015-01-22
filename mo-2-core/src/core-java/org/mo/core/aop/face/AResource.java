@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 //============================================================
 // <T>资源描述器。</T>
 //============================================================
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface AResource{

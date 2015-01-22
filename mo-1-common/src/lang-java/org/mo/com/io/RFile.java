@@ -20,6 +20,98 @@ import org.mo.com.lang.cultrue.FEncoding;
 public class RFile
 {
    //============================================================
+   // <T>获得短文件名称。</T>
+   //
+   // @param fileName 文件名称
+   // @return 短文件名称
+   //============================================================
+   public static String shortName(String fileName){
+      File file = new File(fileName);
+      String name = file.getName();
+      if(name != null){
+         int sp = name.lastIndexOf('.');
+         if(sp != -1){
+            return name.substring(0, sp);
+         }
+      }
+      return name;
+   }
+
+   //============================================================
+   // <T>获得文件名称。</T>
+   //
+   // @param fileName 文件名称
+   // @return 文件名称
+   //============================================================
+   public static String name(String fileName){
+      File file = new File(fileName);
+      return file.getName();
+   }
+
+   //============================================================
+   // <T>获得文件的后缀。</T>
+   //
+   // @param file 文件
+   // @return 后缀
+   //============================================================
+   public static String extension(File file){
+      return extension(file.getName());
+   }
+
+   //============================================================
+   // <T>获得文件的后缀。</T>
+   //
+   // @param fileName 文件名称
+   // @return 后缀
+   //============================================================
+   public static String extension(String fileName){
+      if(!RString.isEmpty(fileName)){
+         int index = fileName.lastIndexOf('.');
+         if(index > 0){
+            return fileName.substring(index + 1);
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得无后缀的文件名称。</T>
+   //
+   // @param fileName 文件名称
+   // @return 文件名称
+   //============================================================
+   public static String extensionPath(String fileName){
+      if(fileName != null){
+         int index = fileName.lastIndexOf('.');
+         if(index != -1){
+            String formatName = formatFileName(fileName);
+            int indexSeparator = formatName.lastIndexOf(File.pathSeparatorChar);
+            if(index > indexSeparator){
+               return formatName.substring(0, index);
+            }
+         }
+      }
+      return fileName;
+   }
+
+   //============================================================
+   // <T>获得文件路径。</T>
+   //
+   // @param fileName 文件名称
+   // @return 文件路径
+   //============================================================
+   public static String path(String fileName){
+      if(fileName != null){
+         String name = format(fileName);
+         int index = name.lastIndexOf(File.separatorChar);
+         if(index != -1){
+            return name.substring(0, index);
+         }
+      }
+      return fileName;
+   }
+
+   //============================================================
    // <T>格式化文件名称。</T>
    //
    // @param fileName 文件名称
@@ -45,6 +137,87 @@ public class RFile
    }
 
    //============================================================
+   // <T>格式化文件名为标准格式。</T>
+   //
+   // @param params 参数集合
+   // @return 格式化后的文件名
+   //============================================================
+   public static String format(String fileName){
+      return RString.replaceChars(fileName, '\\', File.separatorChar, '/', File.separatorChar);
+   }
+
+   //============================================================
+   // <T>生成文件名称。</T>
+   //
+   // @param params 参数集合
+   // @return 文件名称
+   //============================================================
+   public static String makeFilename(String... params){
+      FString result = new FString();
+      if(params != null){
+         int count = params.length;
+         for(int n = 0; n < count; n++){
+            String param = params[n];
+            if(param != null){
+               // 格式化内容
+               param = RString.replaceChars(param, '/', File.separatorChar, '\\', File.separatorChar);
+               // 去掉前缀
+               if(param.startsWith("." + File.separatorChar)){
+                  param = param.substring(2);
+               }
+               // 写入内容
+               if(n < count - 1){
+                  if(param.endsWith(File.separator)){
+                     result.append(param);
+                  }else{
+                     result.append(param);
+                     result.append(File.separatorChar);
+                  }
+               }else{
+                  result.append(param);
+               }
+            }
+         }
+      }
+      // 返回文件
+      String file = result.toString();
+      while(file.indexOf(File.separator + File.separator) != -1){
+         file = RString.replace(file, File.separator + File.separator, File.separator);
+      }
+      return file;
+   }
+
+   //============================================================
+   // <T>生成路径名称。</T>
+   //
+   // @param params 参数集合
+   // @return 路径名称
+   //============================================================
+   public static String makePathname(String... params){
+      FString filename = new FString();
+      if(params != null){
+         String param;
+         int count = params.length;
+         for(int n = 0; n < count; n++){
+            if(params[n] != null){
+               param = RString.replaceChars(params[n], '/', File.separatorChar, '\\', File.separatorChar);
+               if(n < count - 1){
+                  if(param.endsWith(File.separator)){
+                     filename.append(param);
+                  }else{
+                     filename.append(param);
+                     filename.append(File.separatorChar);
+                  }
+               }else{
+                  filename.append(param);
+               }
+            }
+         }
+      }
+      return filename.toString();
+   }
+
+   //============================================================
    // <T>更改文件的名称。</T>
    //
    // @param sourceName 源名称
@@ -60,6 +233,134 @@ public class RFile
       return targetFile.getAbsolutePath();
    }
 
+   //============================================================
+   // <T>创建指定的名称的全路径。</T>
+   //
+   // @param fileName 文件名称
+   //============================================================
+   public static void makeFileDirectory(String fileName){
+      fileName = formatFileName(fileName);
+      String filepath = fileName.substring(0, fileName.lastIndexOf(File.separatorChar));
+      File dir = new File(filepath);
+      if(!dir.isDirectory()){
+         dir.mkdirs();
+      }
+   }
+
+   //============================================================
+   // <T>复制来源文件到目标文件。</T>
+   //
+   // @param fromFile 来源文件
+   // @param destName 目标文件
+   // @return 处理结果
+   //============================================================
+   public static boolean copyFile(String fromFile,
+                                  String destName){
+      return copyFile(fromFile, destName, true);
+   }
+
+   //============================================================
+   // <T>复制来源文件到目标文件。</T>
+   //
+   // @param fromFile 来源文件
+   // @param destName 目标文件
+   // @param overwrite 是否覆盖
+   // @return 处理结果
+   //============================================================
+   public static boolean copyFile(String fromName,
+                                  String destName,
+                                  boolean overwrite){
+      // 检查参数
+      if(RString.isEmpty(fromName)){
+         return false;
+      }
+      if(RString.isEmpty(destName)){
+         return false;
+      }
+      if(fromName.equals(destName)){
+         return true;
+      }
+      // 建立目标目录
+      destName = formatFileName(destName);
+      int separatorIndex = destName.lastIndexOf(File.separator);
+      if(separatorIndex > 0){
+         String filePath = destName.substring(0, separatorIndex);
+         File fileDir = new File(filePath);
+         if(!fileDir.exists()){
+            fileDir.mkdirs();
+         }
+      }
+      // 复制数据
+      File srcFile = new File(fromName);
+      File destFile = new File(destName);
+      try{
+         FileInputStream fileIS = new FileInputStream(srcFile);
+         FileOutputStream fileOS = new FileOutputStream(destFile, !overwrite);
+         byte[] arBuffer = new byte[1024 * 1024 * 16];
+         int nSize = fileIS.read(arBuffer);
+         while(nSize != -1){
+            fileOS.write(arBuffer, 0, nSize);
+            nSize = fileIS.read(arBuffer);
+         }
+         fileIS.close();
+         fileOS.close();
+      }catch(FileNotFoundException fileNotFoundException){
+         if(srcFile.isDirectory()){
+            File[] files = srcFile.listFiles();
+            for(int i = 0; i < files.length; i++){
+               destFile.mkdirs();
+               copyFile(srcFile + File.separator + files[i].getName(), destName + File.separator + files[i].getName(), overwrite);
+            }
+         }else{
+            throw new FFatalError(fileNotFoundException);
+         }
+      }catch(IOException e){
+         throw new FFatalError(e);
+      }
+      return true;
+   }
+
+   private static void listFile__(FStrings files,
+                                  File directory,
+                                  boolean deep,
+                                  String startsWith,
+                                  String endWith){
+      if(directory.isDirectory()){
+         for(File file : directory.listFiles()){
+            if(deep && file.isDirectory()){
+               listFile__(files, file, deep, startsWith, endWith);
+            }else{
+               String filename = file.getAbsolutePath();
+               boolean finded = false;
+               if(startsWith == null && endWith == null){
+                  finded = true;
+               }else if(startsWith != null && endWith == null){
+                  if(filename.startsWith(startsWith)){
+                     finded = true;
+                  }
+               }else if(startsWith == null && endWith != null){
+                  if(filename.startsWith(endWith)){
+                     finded = true;
+                  }
+               }else if(startsWith != null && endWith != null){
+                  if(filename.startsWith(startsWith) && filename.startsWith(endWith)){
+                     finded = true;
+                  }
+               }
+               if(finded){
+                  files.push(filename);
+               }
+            }
+         }
+      }
+   }
+
+   public static FStrings listFiles(String directory){
+      FStrings files = new FStrings();
+      listFile__(files, new File(directory), false, null, null);
+      return files;
+   }
+
    /**
     * <p>检查指定的文件名的物理文件是否存在，如果不存在则会发生例外</p>
     * 
@@ -72,54 +373,6 @@ public class RFile
          }
       }
       throw new FFatalError("File is not exists (fileName=)", fileName);
-   }
-
-   public static boolean copyFile(String sFromFile,
-                                  String sDestName){
-      return copyFile(sFromFile, sDestName, true);
-   }
-
-   public static boolean copyFile(String fromFile,
-                                  String destName,
-                                  boolean overwrite){
-      destName = formatFileName(destName);
-      int nSeparatorIndex = destName.lastIndexOf(File.separator);
-      if(nSeparatorIndex > 0){
-         String sFilePath = destName.substring(0, nSeparatorIndex);
-         File oFileDir = new File(sFilePath);
-         if(!oFileDir.exists()){
-            oFileDir.mkdirs();
-         }
-      }
-      File oSrcFile = new File(fromFile);
-      File oDestFile = new File(destName);
-      try{
-         FileInputStream oFileIS = new FileInputStream(oSrcFile);
-         FileOutputStream oFileOS = new FileOutputStream(oDestFile, !overwrite);
-         byte[] arBuffer = new byte[1024 * 1024 * 16];
-         int nSize = oFileIS.read(arBuffer);
-         while(nSize != -1){
-            oFileOS.write(arBuffer, 0, nSize);
-            nSize = oFileIS.read(arBuffer);
-         }
-         oFileIS.close();
-         oFileOS.close();
-      }catch(FileNotFoundException oFileNotFoundException){
-         if(oSrcFile.isDirectory()){
-            File[] files = oSrcFile.listFiles();
-            for(int i = 0; i < files.length; i++){
-               oDestFile.mkdirs();
-               copyFile(oSrcFile + File.separator + files[i].getName(), destName + File.separator + files[i].getName(), overwrite);
-            }
-         }else{
-            //FLogger.error(FFileUtil.class, "FFile.copyFile", oFileNotFoundException);
-            throw new FFatalError(oFileNotFoundException);
-         }
-      }catch(IOException e){
-         //FLogger.error(FFileUtil.class, "FFile.copyFile", oIOException);
-         throw new FFatalError(e);
-      }
-      return true;
    }
 
    /**
@@ -143,43 +396,6 @@ public class RFile
     */
    public static boolean exists(String name){
       return RString.isEmpty(name) ? false : new File(name).exists();
-   }
-
-   /**
-    * <p>获得文件的后缀</p>
-    * <p>create date:2005/02/14</p>
-    * 
-    * @param oFile 文件
-    * @return 后缀
-    */
-   public static String extension(File oFile){
-      return extension(oFile.getName());
-   }
-
-   /**
-    * <p>获得文件的后缀</p>
-    * <p>create date:2005/02/14</p>
-    * 
-    * @param sFileName 文件名称
-    * @return 后缀
-    */
-   public static String extension(String sFileName){
-      int nIndex = sFileName.lastIndexOf('.');
-      if(nIndex > 0){
-         return sFileName.substring(nIndex + 1);
-      }
-      return null;
-   }
-
-   /**
-    * <p>格式化文件名为标准格式</p>
-    * <p>create date:2005/02/14</p>
-    * 
-    * @param filename 文件名称
-    * @return 格式化后的文件名
-    */
-   public static String format(String filename){
-      return RString.replaceChars(filename, '\\', File.separatorChar, '/', File.separatorChar);
    }
 
    /**
@@ -437,114 +653,6 @@ public class RFile
    //   // loadFromFileAsByte(sFileName1), loadFromFileAsByte(sFileName2));
    //   // }
    //
-   private static void listFile__(FStrings files,
-                                  File directory,
-                                  boolean deep,
-                                  String startsWith,
-                                  String endWith){
-      if(directory.isDirectory()){
-         for(File file : directory.listFiles()){
-            if(deep && file.isDirectory()){
-               listFile__(files, file, deep, startsWith, endWith);
-            }else{
-               String filename = file.getAbsolutePath();
-               boolean finded = false;
-               if(startsWith == null && endWith == null){
-                  finded = true;
-               }else if(startsWith != null && endWith == null){
-                  if(filename.startsWith(startsWith)){
-                     finded = true;
-                  }
-               }else if(startsWith == null && endWith != null){
-                  if(filename.startsWith(endWith)){
-                     finded = true;
-                  }
-               }else if(startsWith != null && endWith != null){
-                  if(filename.startsWith(startsWith) && filename.startsWith(endWith)){
-                     finded = true;
-                  }
-               }
-               if(finded){
-                  files.push(filename);
-               }
-            }
-         }
-      }
-   }
-
-   public static FStrings listFiles(String directory){
-      FStrings files = new FStrings();
-      listFile__(files, new File(directory), false, null, null);
-      return files;
-   }
-
-   /**
-    * <p>创建指定的名称的全路径</p>
-    * <p>create date:2005/02/14</p>
-    * 
-    * @param sDirectory 指定的名称
-    * @return TRUE：成功 <br>FALSE：失败
-    */
-   public static void makeFileDirectory(String filename){
-      filename = formatFileName(filename);
-      String filepath = filename.substring(0, filename.lastIndexOf(File.separatorChar));
-      File dir = new File(filepath);
-      if(!dir.isDirectory()){
-         dir.mkdirs();
-      }
-   }
-
-   public static String makeFilename(String... params){
-      FString filename = new FString();
-      if(params != null){
-         String param;
-         int count = params.length;
-         for(int n = 0; n < count; n++){
-            if(params[n] != null){
-               param = RString.replaceChars(params[n], '/', File.separatorChar, '\\', File.separatorChar);
-               if(n < count - 1){
-                  if(param.endsWith(File.separator)){
-                     filename.append(param);
-                  }else{
-                     filename.append(param);
-                     filename.append(File.separatorChar);
-                  }
-               }else{
-                  filename.append(param);
-               }
-            }
-         }
-      }
-      String file = filename.toString();
-      while(file.indexOf(File.separator + File.separator) != -1){
-         file = RString.replace(file, File.separator + File.separator, File.separator);
-      }
-      return file;
-   }
-
-   public static String makePathname(String... params){
-      FString filename = new FString();
-      if(params != null){
-         String param;
-         int count = params.length;
-         for(int n = 0; n < count; n++){
-            if(params[n] != null){
-               param = RString.replaceChars(params[n], '/', File.separatorChar, '\\', File.separatorChar);
-               if(n < count - 1){
-                  if(param.endsWith(File.separator)){
-                     filename.append(param);
-                  }else{
-                     filename.append(param);
-                     filename.append(File.separatorChar);
-                  }
-               }else{
-                  filename.append(param);
-               }
-            }
-         }
-      }
-      return filename.toString();
-   }
 
    //   /**
    //    * <p>获得文件的名称</p>
@@ -593,30 +701,6 @@ public class RFile
    //      return "";
    //   }
    //
-   public static String name(String filename){
-      File file = new File(filename);
-      return file.getName();
-   }
-
-   /**
-    * <p>删除指定的文件</p>
-    * 
-    * @param filename 文件名称
-    */
-   public static String path(String filename){
-      File file = new File(filename);
-      return file.getParent();
-   }
-
-   public static String removeExtension(String filename){
-      if(null != filename){
-         int sp = filename.lastIndexOf('.');
-         if(sp != -1){
-            return filename.substring(0, sp);
-         }
-      }
-      return filename;
-   }
 
    //
    //   // 列出指定目录下的所有文件

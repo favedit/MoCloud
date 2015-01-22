@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>数据集接口对象的XML节点基类。</T>
 //============================================================
 public interface XDatasetFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MDataset";
@@ -346,7 +347,6 @@ public interface XDatasetFace
    //============================================================
    void setEditMode(String value);
 
-
    //============================================================
    // <T>获得编辑设置的内容。</T>
    //
@@ -360,7 +360,6 @@ public interface XDatasetFace
    // @param value 编辑设置
    //============================================================
    void setEditConfig(String value);
-
 
    //============================================================
    // <T>获得复制编辑可的内容。</T>
@@ -515,7 +514,6 @@ public interface XDatasetFace
    // @param value 检查权限
    //============================================================
    void setValidAccess(String value);
-
 
    //============================================================
    // <T>获得新建检查可的内容。</T>

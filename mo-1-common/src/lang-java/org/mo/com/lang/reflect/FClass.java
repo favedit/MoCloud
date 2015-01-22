@@ -112,10 +112,10 @@ public class FClass<C>
    // @return 字段集合
    //============================================================
    public FField[] allFields(){
-      if(null == _allFields){
+      if(_allFields == null){
          Class<?> loop = _class;
          FObjects<FField> fields = new FObjects<FField>(FField.class);
-         while(null != loop){
+         while(loop != null){
             for(Field field : loop.getFields()){
                fields.push(new FField(field));
             }
@@ -132,10 +132,10 @@ public class FClass<C>
    // @return 函数集合
    //============================================================
    public FMethod[] allMethods(){
-      if(null == _allMethods){
+      if(_allMethods == null){
          Class<?> loop = _class;
          FObjects<FMethod> methods = new FObjects<FMethod>(FMethod.class);
-         while(null != loop){
+         while(loop != null){
             for(Method method : loop.getMethods()){
                methods.push(new FMethod(method));
             }

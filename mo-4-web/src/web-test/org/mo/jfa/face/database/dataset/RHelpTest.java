@@ -111,7 +111,6 @@ public class RHelpTest
          //            String name = jsClass.name();
          //            parser = tc.findParser("helper.javascript", "detail");
          //            FXmlNode node = jsClass.makeNode();
-         //            System.out.println(node);
          //            parser.define("class", node);
          //            source = parser.parse();
          //            RFile.saveToFile(_helpDir + "/detail/" + name + ".html", source.toString(), _encoding);

@@ -12,19 +12,39 @@ public class RResource
    private static FResourceDictionary _resources = new FResourceDictionary();
 
    //============================================================
+   // <T>获得类关联的资源对象。</T>
+   //
+   // @param clazz 类对象
+   // @return 资源对象
+   //============================================================
+   private static IResource innerBuild(Class<?> clazz){
+      FResource resource = new FResource();
+      String name = clazz.getName();
+      try{
+         resource.construct(clazz);
+      }catch(Exception e){
+         throw new FFatalError(e, "Find resource for class failure. (class={1})", name);
+      }
+      _resources.set(name, resource);
+      return resource;
+   }
+
+   //============================================================
    // <T>获得指定名称的资源对象。</T>
    //
    // @param name 名称
    // @return 资源对象
    //============================================================
-   public static IResource find(String name){
-      FResource resource = _resources.find(name);
-      if(null == resource){
+   public static synchronized IResource find(String name){
+      IResource resource = _resources.find(name);
+      if(resource == null){
+         // 获得类对象
          Class<?> clazz = RClass.findClass(name);
-         if(null == clazz){
-            throw new FFatalError("No found resource class {0}", name);
+         if(clazz == null){
+            throw new FFatalError("No found resource class. (class={1})", name);
          }
-         return find(clazz);
+         // 建立资源对象
+         resource = innerBuild(clazz);
       }
       return resource;
    }
@@ -35,17 +55,12 @@ public class RResource
    // @param clazz 类对象
    // @return 资源对象
    //============================================================
-   public static IResource find(Class<?> clazz){
+   public static synchronized IResource find(Class<?> clazz){
       String name = clazz.getName();
-      FResource resource = _resources.find(name);
-      if(null == resource){
-         try{
-            resource = new FResource();
-            resource.construct(clazz);
-            _resources.set(name, resource);
-         }catch(Exception e){
-            throw new FFatalError(e, "Find resource for class failure. (class={0})", name);
-         }
+      IResource resource = _resources.find(name);
+      if(resource == null){
+         // 建立资源对象
+         resource = innerBuild(clazz);
       }
       return resource;
    }

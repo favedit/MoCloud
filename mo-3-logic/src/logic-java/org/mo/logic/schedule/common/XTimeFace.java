@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>计划时间对象的XML节点基类。</T>
 //============================================================
 public interface XTimeFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "ITime";

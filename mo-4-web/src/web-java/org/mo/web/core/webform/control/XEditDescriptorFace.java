@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>编辑信息接口对象的XML节点基类。</T>
 //============================================================
 public interface XEditDescriptorFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MEditDescriptor";
@@ -206,7 +207,6 @@ public interface XEditDescriptorFace
    //============================================================
    void setEditMode(String value);
 
-
    //============================================================
    // <T>获得编辑设置的内容。</T>
    //
@@ -220,7 +220,6 @@ public interface XEditDescriptorFace
    // @param value 编辑设置
    //============================================================
    void setEditConfig(String value);
-
 
    //============================================================
    // <T>获得搜索编辑可的内容。</T>
@@ -347,7 +346,6 @@ public interface XEditDescriptorFace
    // @param value 检查权限
    //============================================================
    void setValidAccess(String value);
-
 
    //============================================================
    // <T>获得新建检查可的内容。</T>

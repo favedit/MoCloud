@@ -1,8 +1,5 @@
 package org.mo.data.connector;
 
-import org.mo.data.connector.common.XConnection;
-import org.mo.data.connector.common.XDatabase;
-
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
@@ -13,6 +10,8 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.IXmlObject;
 import org.mo.core.aop.face.AProperty;
+import org.mo.data.connector.common.XConnection;
+import org.mo.data.connector.common.XDatabase;
 import org.mo.eng.data.FConnectionConsole;
 import org.mo.eng.data.IConnectionConsole;
 import org.mo.eng.store.FXmlConfigConsole;
@@ -40,7 +39,7 @@ public class FConnectorConsole
    // 默认的数据库控制台
    @AProperty
    protected String _default;
-   
+
    @AProperty
    protected int _interval1;
 

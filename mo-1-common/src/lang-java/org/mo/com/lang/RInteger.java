@@ -55,6 +55,15 @@ public class RInteger
    // 8M的Byte数
    public final static int SIZE_8M = 1024 * 1024 * 8;
 
+   // 16M的Byte数
+   public final static int SIZE_16M = 1024 * 1024 * 16;
+
+   // 64M的Byte数
+   public final static int SIZE_64M = 1024 * 1024 * 64;
+
+   // 256M的Byte数
+   public final static int SIZE_256M = 1024 * 1024 * 256;
+
    // 默认分割长度
    public static int DEFAULT_GROUP_LENGTH = 3;
 
@@ -92,7 +101,7 @@ public class RInteger
    // @return 整数
    //============================================================
    public static int parse(String value){
-      if(null != value){
+      if(value != null){
          return parse(value, DEFAULT);
       }
       return DEFAULT;
@@ -108,14 +117,19 @@ public class RInteger
    //============================================================
    public static int parse(String value,
                            int defaultValue){
-      if(null != value){
-         try{
-            // 解析数字
-            value = value.trim();
-            if(value.length() > 0){
+      if(value != null){
+         value = value.trim();
+         if(value.length() > 0){
+            try{
+               // 去除小数
+               int index = value.indexOf('.');
+               if(index != -1){
+                  value = value.substring(0, index);
+               }
+               // 解析内容
                return Integer.parseInt(value);
+            }catch(Exception e){
             }
-         }catch(Exception e){
          }
       }
       return defaultValue;
@@ -129,7 +143,7 @@ public class RInteger
    // @return 整数
    //============================================================
    public static int parse(Object item){
-      if(null != item){
+      if(item != null){
          // 是否为数字
          if(item instanceof Integer){
             return ((Integer)item).intValue();
@@ -304,6 +318,17 @@ public class RInteger
       data[index + 2] = (byte)((value >>> 16) & 0xFF);
       data[index + 3] = (byte)((value >>> 24) & 0xFF);
    }
+
+   //============================================================
+   // <T>获得整数的字符串。</T>
+   //
+   // @param value 内容
+   // @return 字符串
+   //============================================================
+   public final static String toString(int value){
+      return Integer.toString(value);
+   }
+
    //   public static byte[] fromInteger(int value){
    //      return new byte[] { (byte)(value & 255), (byte)((value >> 8) & 255), (byte)((value >> 16) & 255), (byte)((value >> 24) & 255) };
    //   }

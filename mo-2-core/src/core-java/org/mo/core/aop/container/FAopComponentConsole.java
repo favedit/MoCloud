@@ -61,7 +61,7 @@ public class FAopComponentConsole
    //============================================================
    public <V> V find(String face){
       V component = tryFind(face);
-      if(null == component){
+      if(component == null){
          throw new FFatalError("Component is not exists. (face={1})", face);
       }
       return component;
@@ -77,7 +77,7 @@ public class FAopComponentConsole
    //============================================================
    public <V> V find(Class<V> clazz){
       V component = tryFind(clazz);
-      if(null == component){
+      if(component == null){
          throw new FFatalError("Component is not exists. (class={1})", clazz);
       }
       return component;
@@ -96,7 +96,7 @@ public class FAopComponentConsole
                      String face){
       FAopSession session = RAop.sessionConsole().find(sessionCode);
       V value = session.find(face);
-      if(null == value){
+      if(value == null){
          value = find(face);
          session.set(face, value);
       }
@@ -128,15 +128,16 @@ public class FAopComponentConsole
    public <V> V tryFind(String face){
       RStringValidator.checkEmpty(face, "face");
       // 检查已经取过，如果不存在的话直接返回。
-      if(!_noMap.contains(face)){
-         FAopComponent component = _components.find(face);
-         if(null != component){
-            // 查找组件
-            return findByComponent(component);
-         }
-         _noMap.set(face, null);
+      if(_noMap.contains(face)){
+         return null;
       }
-      return null;
+      FAopComponent component = _components.find(face);
+      if(component == null){
+         _noMap.set(face, null);
+         return null;
+      }
+      // 查找组件
+      return findByComponent(component);
    }
 
    //============================================================
@@ -151,23 +152,24 @@ public class FAopComponentConsole
       RValidator.checkNull(clazz, "clazz");
       // 检查已经取过，如果不存在的话直接返回。
       String className = clazz.getName();
-      if(!_noMap.contains(className)){
-         // 查找组件
-         FAopComponent component = null;
-         if(clazz.isInterface()){
-            // 查找对象接口
-            component = _components.find(className);
-         }else{
-            // 查找对象类
-            component = _components.findByClass(className);
-         }
-         if(null != component){
-            // 查找组件
-            return findByComponent(component);
-         }
-         _noMap.set(className, null);
+      if(_noMap.contains(className)){
+         return null;
       }
-      return null;
+      // 查找组件
+      FAopComponent component = null;
+      if(clazz.isInterface()){
+         // 查找对象接口
+         component = _components.find(className);
+      }else{
+         // 查找对象类
+         component = _components.findByClass(className);
+      }
+      if(component == null){
+         _noMap.set(className, null);
+         return null;
+      }
+      // 查找组件
+      return findByComponent(component);
    }
 
    //============================================================
@@ -200,19 +202,19 @@ public class FAopComponentConsole
    private <V> V findByComponent(FAopComponent component){
       // Create component
       V instance = null;
+      EComponentScope scopeCd = component.scopeCd();
       synchronized(component){
-         EComponentScope scope = component.scopeCd();
-         if(EComponentScope.Global == scope){
+         if(EComponentScope.Global == scopeCd){
             instance = (V)component.instance();
-         }else if(EComponentScope.Session == scope){
+         }else if(EComponentScope.Session == scopeCd){
             instance = (V)component.newInstance();
          }else{
             instance = (V)component.newInstance();
          }
-         if(_logger.debugAble()){
-            _logger.debug(this, "find", "Find component ({1}:{2})", scope, instance);
-         }
       }
+      //if(_logger.debugAble()){
+      //   _logger.debug(this, "find", "Find component ({1}:{2})", scope, instance);
+      //}
       return instance;
    }
 
@@ -254,7 +256,7 @@ public class FAopComponentConsole
    public void initialize(){
       // 布置所有启动组件
       XAopComponentCollection components = RAop.configConsole().componentCollection();
-      if(null != components){
+      if(components != null){
          for(XAopComponent component : components){
             if(EComponentDeploy.Start == component.deploy()){
                String face = component.face();

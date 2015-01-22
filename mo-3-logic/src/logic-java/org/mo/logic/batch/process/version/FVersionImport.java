@@ -15,8 +15,8 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.logic.batch.process.FBatchSqlCommand;
-import org.mo.mime.zip.IZipEntry;
-import org.mo.mime.zip.IZipInput;
+import org.mo.mime.zip.FZipEntry;
+import org.mo.mime.zip.FZipInput;
 import org.mo.mime.zip.RZip;
 
 public class FVersionImport
@@ -267,8 +267,8 @@ public class FVersionImport
             // 导入配置文件
             IAttributes excludes = getExclude(importItem);
             // 读取ZIP文件
-            IZipInput zipInput = RZip.openFile(zipPath);
-            IZipEntry entry = null;
+            FZipInput zipInput = RZip.openFile(zipPath);
+            FZipEntry entry = null;
             while(null != (entry = zipInput.nextEntry())){
                // 读取文件
                String outputFile = _outputPath + "/" + entry.name();

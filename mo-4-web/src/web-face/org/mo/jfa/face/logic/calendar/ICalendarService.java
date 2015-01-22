@@ -1,7 +1,8 @@
 package org.mo.jfa.face.logic.calendar;
 
+import org.mo.web.core.face.AWebLogin;
+
 import org.mo.logic.session.ISqlSessionContext;
-import org.mo.web.core.action.AWebLogin;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;

@@ -20,7 +20,8 @@ public class RBaseByte
    // @param target 目标字节数组
    // @return 是否相等
    //============================================================
-   public final static boolean equals(byte[] source, byte[] target){
+   public final static boolean equals(byte[] source,
+                                      byte[] target){
       // 内容都为空
       if((source == null) && (target == null)){
          return true;
@@ -41,7 +42,7 @@ public class RBaseByte
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源字节数组和目标字节数组是否相等。</T>
    //
@@ -51,7 +52,10 @@ public class RBaseByte
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(byte[] source, int sourceLength, byte[] target, int targetLength){
+   public final static boolean equals(byte[] source,
+                                      int sourceLength,
+                                      byte[] target,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -70,7 +74,7 @@ public class RBaseByte
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源字节数组和目标字节数组是否相等。</T>
    //
@@ -82,7 +86,12 @@ public class RBaseByte
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(byte[] source, int sourceOffset, int sourceLength, byte[] target, int targetOffset, int targetLength){
+   public final static boolean equals(byte[] source,
+                                      int sourceOffset,
+                                      int sourceLength,
+                                      byte[] target,
+                                      int targetOffset,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -101,7 +110,7 @@ public class RBaseByte
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在字节数组中是否含有指定字节内容。</T>
    //
@@ -109,7 +118,8 @@ public class RBaseByte
    // @param find 字节内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(byte[] values, byte find){
+   public final static boolean contains(byte[] values,
+                                        byte find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -120,7 +130,7 @@ public class RBaseByte
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在字节数组中是否含有指定字节内容。</T>
    //
@@ -130,7 +140,10 @@ public class RBaseByte
    // @param find 字节内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(byte[] values, int offset, int length, byte find){
+   public final static boolean contains(byte[] values,
+                                        int offset,
+                                        int length,
+                                        byte find){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
@@ -149,7 +162,8 @@ public class RBaseByte
    // @param target 目标字节数组
    // @return 比较结果
    //============================================================
-   public final static int compare(byte[] source, byte[] target){
+   public final static int compare(byte[] source,
+                                   byte[] target){
       return compare(source, 0, source.length, target, 0, target.length);
    }
 
@@ -164,7 +178,12 @@ public class RBaseByte
    // @param targetLength 目标长度
    // @return 比较结果
    //============================================================
-   public final static int compare(byte[] source, int sourceOffset, int sourceLength, byte[] target, int targetOffset, int targetLength){
+   public final static int compare(byte[] source,
+                                   int sourceOffset,
+                                   int sourceLength,
+                                   byte[] target,
+                                   int targetOffset,
+                                   int targetLength){
       int scl = sourceLength - sourceOffset;
       int tcl = targetLength - targetOffset;
       int loop = Math.min(scl, tcl);
@@ -183,7 +202,8 @@ public class RBaseByte
    // @param find 字节内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(byte[] values, byte find){
+   public final static int indexOf(byte[] values,
+                                   byte find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -204,7 +224,10 @@ public class RBaseByte
    // @param find 字节内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(byte[] values, int offset, int length, byte find){
+   public final static int indexOf(byte[] values,
+                                   int offset,
+                                   int length,
+                                   byte find){
       if(null != values){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
@@ -223,7 +246,8 @@ public class RBaseByte
    // @param target 目标字节数组
    // @return 索引位置
    //============================================================
-   public final static int search(byte[] source, byte[] target){
+   public final static int search(byte[] source,
+                                  byte[] target){
       return search(source, 0, source.length, target, 0, target.length);
    }
 
@@ -236,7 +260,10 @@ public class RBaseByte
    // @param target 目标字节数组
    // @return 索引位置
    //============================================================
-   public final static int search(byte[] source, int offset, int length, byte[] target){
+   public final static int search(byte[] source,
+                                  int offset,
+                                  int length,
+                                  byte[] target){
       return search(source, offset, length, target, 0, target.length);
    }
 
@@ -251,7 +278,12 @@ public class RBaseByte
    // @param targetLength 目标长度
    // @return 索引位置
    //============================================================
-   public final static int search(byte[] source, int sourceOffset, int sourceLength, byte[] target, int targetOffset, int targetLength){
+   public final static int search(byte[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  byte[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (null != target)){
          byte first = target[targetOffset];
          int m = sourceOffset - 1;
@@ -286,7 +318,14 @@ public class RBaseByte
    // @param after 结尾字节
    // @return 索引位置
    //============================================================
-   public final static int search(byte[] source, int offset, int length, byte before, byte[] target, int targetOffset, int targetLength, byte after){
+   public final static int search(byte[] source,
+                                  int offset,
+                                  int length,
+                                  byte before,
+                                  byte[] target,
+                                  int targetOffset,
+                                  int targetLength,
+                                  byte after){
       int i;
       int el;
       int n = offset - 1;
@@ -316,7 +355,8 @@ public class RBaseByte
    // @param source 字节数组
    // @param value 字节内容
    //============================================================
-   public final static void fill(byte[] source, byte value){
+   public final static void fill(byte[] source,
+                                 byte value){
       fill(source, 0, source.length, value);
    }
 
@@ -328,7 +368,10 @@ public class RBaseByte
    // @param count 数组长度
    // @param value 字节内容
    //============================================================
-   public final static void fill(byte[] source, int offset, int length, byte value){
+   public final static void fill(byte[] source,
+                                 int offset,
+                                 int length,
+                                 byte value){
       int n = offset - 1;
       int end = offset + length;
       while(++n < end){
@@ -343,7 +386,9 @@ public class RBaseByte
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(byte[] source, byte from, byte to){
+   public final static void replace(byte[] source,
+                                    byte from,
+                                    byte to){
       replace(source, 0, source.length, from, to);
    }
 
@@ -356,7 +401,11 @@ public class RBaseByte
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(byte[] source, int offset, int length, byte from, byte to){
+   public final static void replace(byte[] source,
+                                    int offset,
+                                    int length,
+                                    byte from,
+                                    byte to){
       int n = offset - 1;
       while(++n < length){
          if(source[n] == from){
@@ -375,7 +424,11 @@ public class RBaseByte
    // @param to 被替换字符数组
    // @return 替换后的字符数组
    //============================================================
-   public final static byte[] replace(byte[] source, int offset, int length, byte[] from, byte[] to){
+   public final static byte[] replace(byte[] source,
+                                      int offset,
+                                      int length,
+                                      byte[] from,
+                                      byte[] to){
       return replace(source, offset, length, from, 0, from.length, to, 0, to.length);
    }
 
@@ -393,7 +446,15 @@ public class RBaseByte
    // @param toLength 被替换字符数组数据长度
    // @return 替换后的字符数组
    //============================================================
-   public final static byte[] replace(byte[] source, int offset, int length, byte[] from, int fromOffset, int fromLength, byte[] to, int toOffset, int toLength){
+   public final static byte[] replace(byte[] source,
+                                      int offset,
+                                      int length,
+                                      byte[] from,
+                                      int fromOffset,
+                                      int fromLength,
+                                      byte[] to,
+                                      int toOffset,
+                                      int toLength){
       boolean same = true;
       byte[] tempChars = null;
       int p = 0;
@@ -476,7 +537,9 @@ public class RBaseByte
    // @param length 数组长度
    // @return 中间数组
    //============================================================
-   public final static byte[] sub(byte[] source, int offset, int length){
+   public final static byte[] sub(byte[] source,
+                                  int offset,
+                                  int length){
       byte[] result = null;
       if(length > 0){
          result = new byte[Math.abs(length)];
@@ -493,16 +556,18 @@ public class RBaseByte
    // @param end 结束位置
    // @return 中间数组
    //============================================================
-   public static byte[] mid(byte[] source, int start, int end){
+   public static byte[] mid(byte[] source,
+                            int start,
+                            int end){
       int length = Math.abs(end - start);
       if(length > 0){
          byte[] result = new byte[length];
-            System.arraycopy(source, start, result, 0, length);
-            if(start > end){
-               reverse(result, 0, length);
-            }
-            return result;
+         System.arraycopy(source, start, result, 0, length);
+         if(start > end){
+            reverse(result, 0, length);
          }
+         return result;
+      }
       return new byte[0];
    }
 
@@ -522,7 +587,9 @@ public class RBaseByte
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static void reverse(byte[] values, int index, int length){
+   public final static void reverse(byte[] values,
+                                    int index,
+                                    int length){
       int s = index - 1;
       int e = index + length + 1;
       while(++s < --e){
@@ -531,14 +598,15 @@ public class RBaseByte
          values[e] = temp;
       }
    }
-   
+
    //============================================================
    // <T>擦除字节数组中指定索引位置的字节内容。</T>
    //
    // @param values 字节数组
    // @param index 索引位置
    //============================================================
-   public final static int erase(char[] values, int index){
+   public final static int erase(char[] values,
+                                 int index){
       if(null != values){
          int length = values.length;
          if((index >= 0) && (index < length)){
@@ -549,7 +617,7 @@ public class RBaseByte
       }
       return 0;
    }
-   
+
    //============================================================
    // <T>擦除字节数组中从开始位置到结束位置之间的字节内容。</T>
    //
@@ -557,7 +625,9 @@ public class RBaseByte
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static int erase(byte[] values, int index, int length){
+   public final static int erase(byte[] values,
+                                 int index,
+                                 int length){
       if(null != values){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
@@ -577,7 +647,10 @@ public class RBaseByte
    // @param length 数组长度
    // @param find 字节内容
    //============================================================
-   public final static int remove(byte[] values, int offset, int length, byte find){
+   public final static int remove(byte[] values,
+                                  int offset,
+                                  int length,
+                                  byte find){
       int index = offset;
       for(int n = offset; n < length; n++){
          if(values[n] != find){
@@ -600,7 +673,12 @@ public class RBaseByte
    // @param targetOffset 目标位置
    // @param targetLength 目标长度
    //============================================================
-   public final static int remove(byte[] source, int sourceOffset, int sourceLength, byte[] target, int targetOffset, int targetLength){
+   public final static int remove(byte[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  byte[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
          int p = -1;
          int index = 0;
@@ -633,7 +711,7 @@ public class RBaseByte
       }
       return sourceLength;
    }
-   
+
    //============================================================
    // <T>清空字节数组。</T>
    //
@@ -655,7 +733,9 @@ public class RBaseByte
    // @param offset 开始位置
    // @param count 数组长度
    //============================================================
-   public final static void clear(byte[] values, int offset, int length){
+   public final static void clear(byte[] values,
+                                  int offset,
+                                  int length){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){

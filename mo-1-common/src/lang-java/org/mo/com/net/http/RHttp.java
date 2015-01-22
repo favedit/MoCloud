@@ -14,11 +14,12 @@ public class RHttp
    // @return 数据
    //============================================================
    public static byte[] loadUrlBytes(String url){
-      FHttpConnection http = new FHttpConnection(url);
-      http.connect();
-      http.fetch();
-      http.disconnect();
-      return http.response().data();
+      try(FHttpConnection http = new FHttpConnection(url)){
+         http.connect();
+         http.fetch();
+         http.disconnect();
+         return http.response().data();
+      }
    }
 
    //============================================================

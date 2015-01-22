@@ -20,7 +20,8 @@ public class RBaseBoolean
    // @param target 目标布尔值数组
    // @return 是否相等
    //============================================================
-   public final static boolean equals(boolean[] source, boolean[] target){
+   public final static boolean equals(boolean[] source,
+                                      boolean[] target){
       // 内容都为空
       if((source == null) && (target == null)){
          return true;
@@ -41,7 +42,7 @@ public class RBaseBoolean
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源布尔值数组和目标布尔值数组是否相等。</T>
    //
@@ -51,7 +52,10 @@ public class RBaseBoolean
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(boolean[] source, int sourceLength, boolean[] target, int targetLength){
+   public final static boolean equals(boolean[] source,
+                                      int sourceLength,
+                                      boolean[] target,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -70,7 +74,7 @@ public class RBaseBoolean
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源布尔值数组和目标布尔值数组是否相等。</T>
    //
@@ -82,7 +86,12 @@ public class RBaseBoolean
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(boolean[] source, int sourceOffset, int sourceLength, boolean[] target, int targetOffset, int targetLength){
+   public final static boolean equals(boolean[] source,
+                                      int sourceOffset,
+                                      int sourceLength,
+                                      boolean[] target,
+                                      int targetOffset,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -101,7 +110,7 @@ public class RBaseBoolean
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在布尔值数组中是否含有指定布尔值内容。</T>
    //
@@ -109,7 +118,8 @@ public class RBaseBoolean
    // @param find 布尔值内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(boolean[] values, boolean find){
+   public final static boolean contains(boolean[] values,
+                                        boolean find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -120,7 +130,7 @@ public class RBaseBoolean
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在布尔值数组中是否含有指定布尔值内容。</T>
    //
@@ -130,7 +140,10 @@ public class RBaseBoolean
    // @param find 布尔值内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(boolean[] values, int offset, int length, boolean find){
+   public final static boolean contains(boolean[] values,
+                                        int offset,
+                                        int length,
+                                        boolean find){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
@@ -149,7 +162,8 @@ public class RBaseBoolean
    // @param find 布尔值内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(boolean[] values, boolean find){
+   public final static int indexOf(boolean[] values,
+                                   boolean find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -170,7 +184,10 @@ public class RBaseBoolean
    // @param find 布尔值内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(boolean[] values, int offset, int length, boolean find){
+   public final static int indexOf(boolean[] values,
+                                   int offset,
+                                   int length,
+                                   boolean find){
       if(null != values){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
@@ -189,7 +206,8 @@ public class RBaseBoolean
    // @param target 目标布尔值数组
    // @return 索引位置
    //============================================================
-   public final static int search(boolean[] source, boolean[] target){
+   public final static int search(boolean[] source,
+                                  boolean[] target){
       return search(source, 0, source.length, target, 0, target.length);
    }
 
@@ -202,7 +220,10 @@ public class RBaseBoolean
    // @param target 目标布尔值数组
    // @return 索引位置
    //============================================================
-   public final static int search(boolean[] source, int offset, int length, boolean[] target){
+   public final static int search(boolean[] source,
+                                  int offset,
+                                  int length,
+                                  boolean[] target){
       return search(source, offset, length, target, 0, target.length);
    }
 
@@ -217,7 +238,12 @@ public class RBaseBoolean
    // @param targetLength 目标长度
    // @return 索引位置
    //============================================================
-   public final static int search(boolean[] source, int sourceOffset, int sourceLength, boolean[] target, int targetOffset, int targetLength){
+   public final static int search(boolean[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  boolean[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (null != target)){
          boolean first = target[targetOffset];
          int m = sourceOffset - 1;
@@ -252,7 +278,14 @@ public class RBaseBoolean
    // @param after 结尾布尔值
    // @return 索引位置
    //============================================================
-   public final static int search(boolean[] source, int offset, int length, boolean before, boolean[] target, int targetOffset, int targetLength, boolean after){
+   public final static int search(boolean[] source,
+                                  int offset,
+                                  int length,
+                                  boolean before,
+                                  boolean[] target,
+                                  int targetOffset,
+                                  int targetLength,
+                                  boolean after){
       int i;
       int el;
       int n = offset - 1;
@@ -282,7 +315,8 @@ public class RBaseBoolean
    // @param source 布尔值数组
    // @param value 布尔值内容
    //============================================================
-   public final static void fill(boolean[] source, boolean value){
+   public final static void fill(boolean[] source,
+                                 boolean value){
       fill(source, 0, source.length, value);
    }
 
@@ -294,7 +328,10 @@ public class RBaseBoolean
    // @param count 数组长度
    // @param value 布尔值内容
    //============================================================
-   public final static void fill(boolean[] source, int offset, int length, boolean value){
+   public final static void fill(boolean[] source,
+                                 int offset,
+                                 int length,
+                                 boolean value){
       int n = offset - 1;
       int end = offset + length;
       while(++n < end){
@@ -309,7 +346,9 @@ public class RBaseBoolean
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(boolean[] source, boolean from, boolean to){
+   public final static void replace(boolean[] source,
+                                    boolean from,
+                                    boolean to){
       replace(source, 0, source.length, from, to);
    }
 
@@ -322,7 +361,11 @@ public class RBaseBoolean
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(boolean[] source, int offset, int length, boolean from, boolean to){
+   public final static void replace(boolean[] source,
+                                    int offset,
+                                    int length,
+                                    boolean from,
+                                    boolean to){
       int n = offset - 1;
       while(++n < length){
          if(source[n] == from){
@@ -341,7 +384,11 @@ public class RBaseBoolean
    // @param to 被替换字符数组
    // @return 替换后的字符数组
    //============================================================
-   public final static boolean[] replace(boolean[] source, int offset, int length, boolean[] from, boolean[] to){
+   public final static boolean[] replace(boolean[] source,
+                                         int offset,
+                                         int length,
+                                         boolean[] from,
+                                         boolean[] to){
       return replace(source, offset, length, from, 0, from.length, to, 0, to.length);
    }
 
@@ -359,7 +406,15 @@ public class RBaseBoolean
    // @param toLength 被替换字符数组数据长度
    // @return 替换后的字符数组
    //============================================================
-   public final static boolean[] replace(boolean[] source, int offset, int length, boolean[] from, int fromOffset, int fromLength, boolean[] to, int toOffset, int toLength){
+   public final static boolean[] replace(boolean[] source,
+                                         int offset,
+                                         int length,
+                                         boolean[] from,
+                                         int fromOffset,
+                                         int fromLength,
+                                         boolean[] to,
+                                         int toOffset,
+                                         int toLength){
       boolean same = true;
       boolean[] tempChars = null;
       int p = 0;
@@ -442,7 +497,9 @@ public class RBaseBoolean
    // @param length 数组长度
    // @return 中间数组
    //============================================================
-   public final static boolean[] sub(boolean[] source, int offset, int length){
+   public final static boolean[] sub(boolean[] source,
+                                     int offset,
+                                     int length){
       boolean[] result = null;
       if(length > 0){
          result = new boolean[Math.abs(length)];
@@ -459,16 +516,18 @@ public class RBaseBoolean
    // @param end 结束位置
    // @return 中间数组
    //============================================================
-   public static boolean[] mid(boolean[] source, int start, int end){
+   public static boolean[] mid(boolean[] source,
+                               int start,
+                               int end){
       int length = Math.abs(end - start);
       if(length > 0){
          boolean[] result = new boolean[length];
-            System.arraycopy(source, start, result, 0, length);
-            if(start > end){
-               reverse(result, 0, length);
-            }
-            return result;
+         System.arraycopy(source, start, result, 0, length);
+         if(start > end){
+            reverse(result, 0, length);
          }
+         return result;
+      }
       return new boolean[0];
    }
 
@@ -488,7 +547,9 @@ public class RBaseBoolean
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static void reverse(boolean[] values, int index, int length){
+   public final static void reverse(boolean[] values,
+                                    int index,
+                                    int length){
       int s = index - 1;
       int e = index + length + 1;
       while(++s < --e){
@@ -497,14 +558,15 @@ public class RBaseBoolean
          values[e] = temp;
       }
    }
-   
+
    //============================================================
    // <T>擦除布尔值数组中指定索引位置的布尔值内容。</T>
    //
    // @param values 布尔值数组
    // @param index 索引位置
    //============================================================
-   public final static int erase(char[] values, int index){
+   public final static int erase(char[] values,
+                                 int index){
       if(null != values){
          int length = values.length;
          if((index >= 0) && (index < length)){
@@ -515,7 +577,7 @@ public class RBaseBoolean
       }
       return 0;
    }
-   
+
    //============================================================
    // <T>擦除布尔值数组中从开始位置到结束位置之间的布尔值内容。</T>
    //
@@ -523,7 +585,9 @@ public class RBaseBoolean
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static int erase(boolean[] values, int index, int length){
+   public final static int erase(boolean[] values,
+                                 int index,
+                                 int length){
       if(null != values){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
@@ -543,7 +607,10 @@ public class RBaseBoolean
    // @param length 数组长度
    // @param find 布尔值内容
    //============================================================
-   public final static int remove(boolean[] values, int offset, int length, boolean find){
+   public final static int remove(boolean[] values,
+                                  int offset,
+                                  int length,
+                                  boolean find){
       int index = offset;
       for(int n = offset; n < length; n++){
          if(values[n] != find){
@@ -566,7 +633,12 @@ public class RBaseBoolean
    // @param targetOffset 目标位置
    // @param targetLength 目标长度
    //============================================================
-   public final static int remove(boolean[] source, int sourceOffset, int sourceLength, boolean[] target, int targetOffset, int targetLength){
+   public final static int remove(boolean[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  boolean[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
          int p = -1;
          int index = 0;
@@ -599,7 +671,7 @@ public class RBaseBoolean
       }
       return sourceLength;
    }
-   
+
    //============================================================
    // <T>清空布尔值数组。</T>
    //
@@ -621,7 +693,9 @@ public class RBaseBoolean
    // @param offset 开始位置
    // @param count 数组长度
    //============================================================
-   public final static void clear(boolean[] values, int offset, int length){
+   public final static void clear(boolean[] values,
+                                  int offset,
+                                  int length){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){

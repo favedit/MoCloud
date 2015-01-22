@@ -3,7 +3,8 @@ package org.mo.web.core.service.common;
 import java.lang.annotation.Annotation;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
-import org.mo.web.core.action.AWebLogin;
+import org.mo.web.core.face.AWebLogin;
+import org.mo.web.core.face.AWebSession;
 
 //============================================================
 // <T>服务描述器。</T>
@@ -12,10 +13,19 @@ public class FServiceDescriptor
       extends FObject
 {
    // 类实例
-   protected final Class<?> _clazz;
+   protected Class<?> _clazz;
 
-   // 用户登录的描述器
+   // 会话的描述器
+   protected AWebSession _sessionDescriptor;
+
+   // 是否需要会话
+   protected boolean _sessionRequire;
+
+   // 登录的描述器
    protected AWebLogin _loginDescriptor;
+
+   // 是否需要登录
+   protected boolean _loginRequire;
 
    // 函数字典
    protected FDictionary<FServiceMethodDescriptor> _methods = new FDictionary<FServiceMethodDescriptor>(FServiceMethodDescriptor.class);
@@ -36,31 +46,54 @@ public class FServiceDescriptor
    protected void build(){
       // 获得函数的描述器
       Annotation[] methodAnnotations = _clazz.getAnnotations();
-      if(null != methodAnnotations){
+      if(methodAnnotations != null){
          for(Annotation annotation : methodAnnotations){
-            if(annotation instanceof AWebLogin){
+            if(annotation instanceof AWebSession){
+               _sessionDescriptor = (AWebSession)annotation;
+               _sessionRequire = _sessionDescriptor.require();
+
+            }else if(annotation instanceof AWebLogin){
                _loginDescriptor = (AWebLogin)annotation;
+               _loginRequire = _loginDescriptor.require();
             }
          }
       }
    }
 
    //============================================================
-   // <T>获得用户登录描述器。</T>
+   // <T>获得会话描述器。</T>
    //
-   // @return 获得用户登录描述器
+   // @return 会话描述器
+   //============================================================
+   public AWebSession sessionDescriptor(){
+      return _sessionDescriptor;
+   }
+
+   //============================================================
+   // <T>获得是否需要会话。</T>
+   //
+   // @return 是否需要
+   //============================================================
+   public boolean sessionRequire(){
+      return _sessionRequire;
+   }
+
+   //============================================================
+   // <T>获得登录描述器。</T>
+   //
+   // @return 登录描述器
    //============================================================
    public AWebLogin loginDescriptor(){
       return _loginDescriptor;
    }
 
    //============================================================
-   // <T>测试是否需要用户登录。</T>
+   // <T>获得是否需要登录。</T>
    //
    // @return 是否需要
    //============================================================
-   public boolean testRequireLogin(){
-      return (null != _loginDescriptor) ? _loginDescriptor.require() : false;
+   public boolean loginRequire(){
+      return _loginRequire;
    }
 
    //============================================================
@@ -79,8 +112,8 @@ public class FServiceDescriptor
    // @param name 函数名称
    // @return 函数描述器
    //============================================================
-   public FServiceMethodDescriptor find(String method){
-      return _methods.find(method);
+   public FServiceMethodDescriptor find(String name){
+      return _methods.find(name);
    }
 
    //============================================================

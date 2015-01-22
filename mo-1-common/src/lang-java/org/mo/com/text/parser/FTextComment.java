@@ -18,6 +18,23 @@ public class FTextComment
    public FTextComment(){
    }
 
+   //============================================================
+   // <T>判断是否含有行。</T>
+   //
+   // @return 是否含有行
+   //============================================================
+   public boolean hasSource(){
+      if(_sourceLines == null){
+         return false;
+      }
+      return !_sourceLines.isEmpty();
+   }
+
+   //============================================================
+   // <T>获得来源行集合。</T>
+   //
+   // @return 行集合
+   //============================================================
    public FStrings sourceLines(){
       return _sourceLines;
    }
@@ -34,5 +51,15 @@ public class FTextComment
    //============================================================
    public void push(String line){
       _sourceLines.push(line);
+   }
+
+   //============================================================
+   // <T>获得字符串。</T>
+   //
+   // @return 字符串
+   //============================================================
+   @Override
+   public String toString(){
+      return _sourceLines.join('\n');
    }
 }

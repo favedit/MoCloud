@@ -10,8 +10,10 @@ import java.lang.annotation.Target;
 //============================================================
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-public @interface AProperty
-{
+public @interface AProperty{
+   // 名称
+   String name() default "";
+
    // 是否转换
    boolean convert() default true;
 }

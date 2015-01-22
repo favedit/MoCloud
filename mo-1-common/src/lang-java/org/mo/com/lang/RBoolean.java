@@ -89,7 +89,7 @@ public class RBoolean
    // @return 是否为真
    //============================================================
    public final static boolean parse(String value){
-      if(null != value){
+      if(value != null){
          value = value.toLowerCase();
          if("y".equals(value) || "yes".equals(value)){
             return true;
@@ -114,7 +114,7 @@ public class RBoolean
    // @return 是否为真
    //============================================================
    public final static boolean parse(Object item){
-      if(null != item){
+      if(item != null){
          Class<?> clazz = item.getClass();
          String type = clazz.getName();
          if(clazz == String.class){
@@ -150,7 +150,12 @@ public class RBoolean
    // @return 字符
    //============================================================
    public final static char toChar(Boolean value){
-      return (null != value && value.booleanValue()) ? TRUE_CHAR : FALSE_CHAR;
+      if(value != null){
+         if(value.booleanValue()){
+            return TRUE_CHAR;
+         }
+      }
+      return FALSE_CHAR;
    }
 
    //============================================================
@@ -164,7 +169,11 @@ public class RBoolean
    public final static char toChar(Boolean value,
                                    char trueValue,
                                    char falseValue){
-      return parse(value) ? trueValue : falseValue;
+      boolean result = parse(value);
+      if(result){
+         return trueValue;
+      }
+      return falseValue;
    }
 
    //============================================================
@@ -184,7 +193,11 @@ public class RBoolean
    // @return 字符
    //============================================================
    public final static char toChar(String value){
-      return parse(value) ? TRUE_CHAR : FALSE_CHAR;
+      boolean result = parse(value);
+      if(result){
+         return TRUE_CHAR;
+      }
+      return FALSE_CHAR;
    }
 
    //============================================================
@@ -198,7 +211,11 @@ public class RBoolean
    public final static char toChar(String value,
                                    char trueValue,
                                    char falseValue){
-      return parse(value) ? trueValue : falseValue;
+      boolean result = parse(value);
+      if(result){
+         return trueValue;
+      }
+      return falseValue;
    }
 
    //============================================================
@@ -218,7 +235,12 @@ public class RBoolean
    // @return 字符串
    //============================================================
    public final static String toString(Boolean value){
-      return (null != value && value.booleanValue()) ? TRUE_STR : FALSE_STR;
+      if(value != null){
+         if(value.booleanValue()){
+            return TRUE_STR;
+         }
+      }
+      return FALSE_STR;
    }
 
    //============================================================

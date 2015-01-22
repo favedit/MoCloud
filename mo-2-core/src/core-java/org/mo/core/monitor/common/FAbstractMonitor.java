@@ -80,6 +80,7 @@ public abstract class FAbstractMonitor
    //
    // @param valid 有效性
    //============================================================
+   @Override
    public void setValid(boolean valid){
       _valid = valid;
    }

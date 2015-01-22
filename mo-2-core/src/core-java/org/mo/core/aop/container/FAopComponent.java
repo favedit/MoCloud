@@ -24,13 +24,13 @@ public class FAopComponent
    protected IAopDescriptor _descriptor;
 
    // 构建器
-   private FAopComponentBuilder _builder;
+   protected FAopComponentBuilder _builder;
 
    // 实体
-   private Object _instance;
+   protected Object _instance;
 
    // 本地实体
-   private Object _nativeInstance;
+   protected Object _nativeInstance;
 
    //============================================================
    // <T>构造AOP组件。</T>
@@ -45,7 +45,7 @@ public class FAopComponent
    //============================================================
    public FAopComponent(XAopComponent xcomponent){
       _config = xcomponent;
-      if(null == _config){
+      if(_config == null){
          throw new FFatalError("Component config is null");
       }
    }
@@ -129,16 +129,21 @@ public class FAopComponent
    //============================================================
    @SuppressWarnings("unchecked")
    public <V> V instance(){
-      if(null == _instance){
-         synchronized(this){
-            _nativeInstance = _descriptor.newInstance();
-            _builder.build(new FAopComponentBuildContext(_config, _nativeInstance));
-            if(_config.hasFace()){
-               _instance = RAop.dispatcherConsole().createDispatchObject(_nativeInstance, _config.faceClass());
-            }else{
-               _instance = _nativeInstance;
-            }
+      if(_instance == null){
+         // 对象处理
+         if(_descriptor == null){
+            throw new FFatalError("Descriptor is null. (config={1})", _config.config().xml());
          }
+         // 创建本地对象
+         _nativeInstance = _descriptor.newInstance();
+         if(_config.hasFace()){
+            _instance = RAop.dispatcherConsole().createDispatchObject(_nativeInstance, _config.faceClass());
+         }else{
+            _instance = _nativeInstance;
+         }
+         // 构建处理
+         FAopComponentBuildContext content = new FAopComponentBuildContext(_config, _nativeInstance);
+         _builder.build(content);
       }
       return (V)_instance;
    }
@@ -176,10 +181,11 @@ public class FAopComponent
    // @return 对象实例
    //============================================================
    @SuppressWarnings("unchecked")
-   public synchronized <V> V newInstance(){
-      Object object = _descriptor.newInstance();
-      _builder.build(new FAopComponentBuildContext(_config, object));
+   public <V> V newInstance(){
       V instance = null;
+      Object object = _descriptor.newInstance();
+      FAopComponentBuildContext content = new FAopComponentBuildContext(_config, object);
+      _builder.build(content);
       if(_config.hasFace()){
          instance = RAop.dispatcherConsole().createDispatchObject(object, _config.faceClass());
       }else{
@@ -194,19 +200,20 @@ public class FAopComponent
    public void initialize(){
       // 获得接口
       if(_config.hasFace()){
-         if(null == _config.faceClass()){
+         if(_config.faceClass() == null){
             throw new FFatalError("Face class is not find (name={0})", _config.face());
          }
       }
       // 获得描述器
-      _descriptor = RAop.descriptorConsole().find(FAopComponentDescriptor.class, _config.className());
+      String className = _config.className();
+      _descriptor = RAop.descriptorConsole().find(FAopComponentDescriptor.class, className);
    }
 
    //============================================================
    // <T>释放处理。</T>
    //============================================================
    public void release(){
-      if(null != _instance){
+      if(_instance != null){
          _builder.release(_config, _nativeInstance);
          _instance = null;
       }
@@ -219,7 +226,7 @@ public class FAopComponent
    // @param instance 实例
    //============================================================
    public void release(Object instance){
-      if(null != instance){
+      if(instance != null){
          _builder.release(_config, instance);
          instance = null;
       }

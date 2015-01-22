@@ -1,6 +1,7 @@
 package org.mo.core.bind;
 
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -28,8 +29,8 @@ public class FBindConsole
    //
    // @return 代码
    //============================================================
-   protected String currentCode(){
-      return Long.toString(Thread.currentThread().getId());
+   protected long currentCode(){
+      return Thread.currentThread().getId();
    }
 
    //============================================================
@@ -39,7 +40,8 @@ public class FBindConsole
    //============================================================
    @Override
    public boolean exists(){
-      return _infos.contains(currentCode());
+      long code = currentCode();
+      return _infos.containsByCode(code);
    }
 
    //============================================================
@@ -50,8 +52,13 @@ public class FBindConsole
    //============================================================
    @Override
    public boolean contains(Class<?> clazz){
-      FBindInfo info = _infos.get(currentCode());
-      return (info != null) ? info.contains(clazz.getName()) : false;
+      long code = currentCode();
+      FBindInfo info = _infos.findByCode(code);
+      if(info != null){
+         String className = clazz.getName();
+         return info.contains(className);
+      }
+      return false;
    }
 
    //============================================================
@@ -63,15 +70,16 @@ public class FBindConsole
    @Override
    @SuppressWarnings("unchecked")
    public <V> V find(Class<V> clazz){
-      if(_logger.debugAble()){
-         _logger.debug(this, "find", "Find bind value (class={1})", clazz);
-      }
       V value = null;
-      String code = currentCode();
-      FBindInfo info = _infos.get(code);
-      if(null != info){
-         value = (V)info.get(clazz.getName());
+      long code = currentCode();
+      String className = clazz.getName();
+      FBindInfo info = _infos.findByCode(code);
+      if(info != null){
+         value = (V)info.find(className);
       }
+      //      if(_logger.debugAble()){
+      //         _logger.debug(this, "find", "Find bind value (code={1}, class={2}, value={3})", code, className, value);
+      //      }
       return value;
    }
 
@@ -84,10 +92,36 @@ public class FBindConsole
    @Override
    public <V> V get(Class<V> clazz){
       V instance = find(clazz);
-      if(null == instance){
+      if(instance == null){
          throw new FFatalError("Can't get bind object (class={1})", clazz);
       }
       return instance;
+   }
+
+   //============================================================
+   // <T>绑定类对应的内容对象。</T>
+   //
+   // @param clazz 类对象
+   // @return 对象
+   //============================================================
+   @Override
+   @SuppressWarnings("unchecked")
+   public <T> T bind(Class<T> clazz){
+      // 检查参数
+      if(clazz == null){
+         throw new FFatalError("Unknown class. (class={1})", clazz);
+      }
+      // 获得绑定信息
+      long code = currentCode();
+      FBindInfo info = _infos.syncByCode(code);
+      // 设置内容
+      String className = clazz.getName();
+      T result = (T)info.find(className);
+      if(result != null){
+         result = RClass.newInstance(clazz);
+         info.set(className, result);
+      }
+      return result;
    }
 
    //============================================================
@@ -99,12 +133,13 @@ public class FBindConsole
    @Override
    public void bind(Class<?> clazz,
                     Object object){
-      if(_logger.debugAble()){
-         _logger.debug(this, "bind", "Bind value. ({1}={2})", clazz, object);
-      }
-      String code = currentCode();
-      FBindInfo info = _infos.sync(code);
-      info.set(clazz.getName(), object);
+      long code = currentCode();
+      FBindInfo info = _infos.syncByCode(code);
+      String className = clazz.getName();
+      info.set(className, object);
+      //      if(_logger.debugAble()){
+      //         _logger.debug(this, "bind", "Bind value (code={1}, class={2}, value={3})", code, className, object);
+      //      }
    }
 
    //============================================================
@@ -115,10 +150,27 @@ public class FBindConsole
    //============================================================
    @Override
    public <V> void unbind(Class<V> clazz){
-      String code = currentCode();
-      FBindInfo info = _infos.get(code);
-      if(null != info){
-         info.remove(clazz.getName());
+      //      if(_logger.debugAble()){
+      //         _logger.debug(this, "bind", "Unbind value. ({1})", clazz);
+      //      }
+      long code = currentCode();
+      FBindInfo info = _infos.findByCode(code);
+      if(info != null){
+         String className = clazz.getName();
+         info.remove(className);
+      }
+   }
+
+   //============================================================
+   // <T>清空所有内容对象。</T>
+   //============================================================
+   @Override
+   public void clear(){
+      long code = currentCode();
+      FBindInfo info = _infos.findByCode(code);
+      if(info != null){
+         info.clear();
+         _logger.debug(this, "clear", "Clear bind info (code={1})", code);
       }
    }
 
@@ -127,19 +179,12 @@ public class FBindConsole
    //============================================================
    @Override
    public void remove(){
-      _infos.remove(currentCode());
-   }
-
-   //============================================================
-   // <T>清空所有内容对象。</T>
-   //============================================================
-   @Override
-   public void clear(){
-      String id = currentCode();
-      FBindInfo info = _infos.get(id);
-      if(null != info){
-         _logger.debug(this, "clear", "Clear bind info (id={1})", id);
-         info.release();
+      long code = currentCode();
+      FBindInfo info = _infos.findByCode(code);
+      if(info != null){
+         info.clear();
+         _infos.remove(info);
+         _logger.debug(this, "remove", "Remove bind info (code={1})", code);
       }
    }
 }

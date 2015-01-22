@@ -59,6 +59,6 @@ public class RSystem
          dump.append(pair.value());
          dump.append("]\n");
       }
-      _logger.debug(null, "printProperties", "Properties:\n{0}", dump);
+      _logger.debug(null, "printProperties", "Properties:\n{1}", dump);
    }
 }

@@ -1,9 +1,8 @@
 package org.mo.jfa.face.database.connector;
 
-import org.mo.data.connector.common.XDatabase;
-
-import org.mo.data.connector.IConnectorConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.connector.IConnectorConsole;
+import org.mo.data.connector.common.XDatabase;
 import org.mo.jfa.common.xmlobjects.FAbsXmlObjectAction;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;

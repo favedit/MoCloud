@@ -1,9 +1,3 @@
-/*
- * @(#)FWebUpdateParser.java
- *
- * Copyright 2005 microbject, All Rights Reserved.
- *
- */
 package org.mo.web.protocol.common;
 
 import java.io.File;
@@ -17,18 +11,12 @@ import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 
-/**
- * <T>文件上载信息分解工具类。</T>
- * 
- * @author maocy
- * @version 1.00 - 2008/11/25
- */
+//============================================================
+// <T>文件上载信息分解工具类。</T>
+//============================================================
 public class FWebUpdateParser
 {
-
-   /**
-    * <T>文件上传标志</T>
-    */
+   // 文件上传标志
    public final static String MULTIPART_FORM_DATA = "multipart/form-data";
 
    // 最大行缓冲
@@ -52,12 +40,12 @@ public class FWebUpdateParser
    // 类型常来能够
    private final static String CONTENT_TYPE = "Content-Type: ";
 
-   /**
-    * <p>判断是否是上传模式</p>
-    *
-    * @param request WEB输入对象
-    * @return TRUE：是<br>FALSE：否
-    */
+   //============================================================
+   // <T>判断是否是上传模式。</T>
+   //
+   // @param request WEB输入对象
+   // @return TRUE：是<br>FALSE：否
+   //============================================================
    public static boolean isMultipart(HttpServletRequest request){
       if(request == null){
          return false;
@@ -102,67 +90,131 @@ public class FWebUpdateParser
    // 读取下一行的字节缓冲
    private byte[] _nextReadLineBytes = new byte[MAX_LINE_SIZE];
 
-   /**
-    * <p>创建对象的实例</p>
-    */
+   //============================================================
+   // <T>构造文件上载信息分解工具类。</T>
+   //============================================================
    public FWebUpdateParser(){
    }
 
-   /**
-    * <p>获得字符编码</p>
-    *
-    * @return 字符编码
-    */
+   //============================================================
+   // <T>获得字符编码。</T>
+   //
+   // @return 字符编码
+   //============================================================
    public String characterEncoding(){
       return _characterEncoding;
    }
 
-   /**
-    * <p>获得文件列表</p>
-    *
-    * @return 文件列表
-    */
+   //============================================================
+   // <T>设置字符编码。</T>
+   //
+   // @param encoding 字符编码
+   //============================================================
+   public void setCharacterEncoding(String encoding){
+      _characterEncoding = encoding;
+   }
+
+   //============================================================
+   // <T>获得临时路径。</T>
+   //
+   // @return 临时路径
+   //============================================================
+   public String uploadTempDir(){
+      return _uploadTempDir;
+   }
+
+   //============================================================
+   // <T>设置临时路径。</T>
+   //
+   // @param directory 临时路径
+   //============================================================
+   public void setUploadTempDir(String directory){
+      _uploadTempDir = directory;
+   }
+
+   //============================================================
+   // <T>获得是否含有文件。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasFile(){
+      return (_files != null) ? !_files.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>获得参数列表。</T>
+   //
+   // @return 参数列表
+   //============================================================
+   public FAttributes parameters(){
+      return _attributes;
+   }
+
+   //============================================================
+   // <T>获得文件列表。</T>
+   //
+   // @return 文件列表
+   //============================================================
    public FWebUploadFiles files(){
-      if(null == _files){
+      if(_files == null){
          _files = new FWebUploadFiles();
       }
       return _files;
    }
 
-   /**
-    * <T>获得是否含有文件。</T>
-    *
-    * @return 是否含有
-    */
-   public boolean hasFile(){
-      return (null != _files) ? !_files.isEmpty() : false;
+   //============================================================
+   // <T>读取一行数据。</T>
+   //
+   // @return 处理结果
+   //============================================================
+   private boolean readLine() throws Exception{
+      if(_hasReadNext){
+         if(_nextReadCount == -1){
+            return false;
+         }
+         _readLine = _nextReadLine;
+         _readCount = _nextReadCount;
+         System.arraycopy(_nextReadLineBytes, 0, _readLineBytes, 0, _nextReadCount);
+      }else{
+         _readCount = _servletInputStream.readLine(_readLineBytes, 0, MAX_LINE_SIZE);
+         if(_readCount == -1){
+            return false;
+         }
+         if(_characterEncoding == null){
+            _readLine = new String(_readLineBytes, 0, _readCount);
+         }else{
+            _readLine = new String(_readLineBytes, 0, _readCount, _characterEncoding);
+         }
+         _hasReadNext = true;
+      }
+      _nextReadCount = _servletInputStream.readLine(_nextReadLineBytes, 0, MAX_LINE_SIZE);
+      if(_nextReadCount == -1){
+         return false;
+      }
+      if(_characterEncoding == null){
+         _nextReadLine = new String(_nextReadLineBytes, 0, _nextReadCount);
+      }else{
+         _nextReadLine = new String(_nextReadLineBytes, 0, _nextReadCount, _characterEncoding);
+      }
+      return true;
    }
 
-   /**
-    * <p>获得参数列表</p>
-    *
-    * @return 参数列表
-    */
-   public FAttributes parameters(){
-      return _attributes;
-   }
-
-   /**
-    * <T>分解传入的信息。</T>
-    * <p>将信息分解到参数中，将文件放到指定的临时目录中<br>
-    * --- name = 参数名称 <br>
-    * --- file_name = 文件名称 <br>
-    * --- upload_file_name = 文件缓存地址<br>
-    * --- file_size = 文件大小 <br>
-    * --- file_content_type = 文件类型</p>
-    *
-    * @return TRUE：成功<br>FALSE：失败
-    */
+   //============================================================
+   // <T>分解传入的信息。</T>
+   // <p>将信息分解到参数中，将文件放到指定的临时目录中<br>
+   // --- name = 参数名称 <br>
+   // --- file_name = 文件名称 <br>
+   // --- upload_file_name = 文件缓存地址<br>
+   // --- file_size = 文件大小 <br>
+   // --- file_content_type = 文件类型</p>
+   //
+   // @return TRUE：成功<br>FALSE：失败
+   //============================================================
    public boolean parse(HttpServletRequest request){
       try{
          // 判断数据类型
          String contentType = request.getContentType();
-         if(contentType == null || contentType.indexOf(MULTIPART_FORM_DATA) == -1){
+         if((contentType == null) || (contentType.indexOf(MULTIPART_FORM_DATA) == -1)){
             return false;
          }
          // 获得文件缓冲目录
@@ -291,65 +343,5 @@ public class FWebUpdateParser
          throw new FFatalError(e);
       }
       return true;
-   }
-
-   // 读取一行数据
-   private boolean readLine() throws Exception{
-      if(_hasReadNext){
-         if(_nextReadCount == -1){
-            return false;
-         }
-         _readLine = _nextReadLine;
-         _readCount = _nextReadCount;
-         System.arraycopy(_nextReadLineBytes, 0, _readLineBytes, 0, _nextReadCount);
-      }else{
-         _readCount = _servletInputStream.readLine(_readLineBytes, 0, MAX_LINE_SIZE);
-         if(_readCount == -1){
-            return false;
-         }
-         if(_characterEncoding == null){
-            _readLine = new String(_readLineBytes, 0, _readCount);
-         }else{
-            _readLine = new String(_readLineBytes, 0, _readCount, _characterEncoding);
-         }
-         _hasReadNext = true;
-      }
-      _nextReadCount = _servletInputStream.readLine(_nextReadLineBytes, 0, MAX_LINE_SIZE);
-      if(_nextReadCount == -1){
-         return false;
-      }
-      if(_characterEncoding == null){
-         _nextReadLine = new String(_nextReadLineBytes, 0, _nextReadCount);
-      }else{
-         _nextReadLine = new String(_nextReadLineBytes, 0, _nextReadCount, _characterEncoding);
-      }
-      return true;
-   }
-
-   /**
-    * <p>设置字符编码</p>
-    *
-    * @param sValue 字符编码
-    */
-   public void setCharacterEncoding(String sValue){
-      _characterEncoding = sValue;
-   }
-
-   /**
-    * <p>设置临时路径</p>
-    *
-    * @param sValue 临时路径
-    */
-   public void setUploadTempDir(String sValue){
-      _uploadTempDir = sValue;
-   }
-
-   /**
-    * <p>获得临时路径</p>
-    *
-    * @return 临时路径
-    */
-   public String uploadTempDir(){
-      return _uploadTempDir;
    }
 }

@@ -46,7 +46,6 @@ public class FShowAction
       String pack = page.pack();
       // 获得表单定义
       FXmlNode xform = _webFormConsole.build(formName, EXmlConfig.Value);
-      System.out.println(xform.xml());
       IConnectionConsole connectionConsole = _databaseConsole.connectionConsole(databaseName);
       // 建立显示内容
       FWebHtmlBuilder builder = new FWebHtmlBuilder();

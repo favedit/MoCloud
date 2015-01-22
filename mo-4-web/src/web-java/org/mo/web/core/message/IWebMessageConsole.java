@@ -2,7 +2,6 @@ package org.mo.web.core.message;
 
 public interface IWebMessageConsole
 {
-
    String errorMessage();
 
    String fatalMessage();
@@ -14,5 +13,4 @@ public interface IWebMessageConsole
    String loginWithout();
 
    String warnMessage();
-
 }

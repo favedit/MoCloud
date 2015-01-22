@@ -19,6 +19,26 @@ public class RUuid
       return UUID.randomUUID().toString();
    }
 
+   //============================================================
+   // <T>生成唯一编号管理器。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public final static String makeUniqueId(){
+      String uuid = UUID.randomUUID().toString();
+      return RString.removeChars(uuid, '-').toUpperCase();
+   }
+
+   //============================================================
+   // <T>生成唯一编号管理器。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public final static String makeUniqueIdLower(){
+      String uuid = UUID.randomUUID().toString();
+      return RString.removeChars(uuid, '-').toLowerCase();
+   }
+
    //private static int _seed = 0;
 
    private static char[] ENCODE_CHARS = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',

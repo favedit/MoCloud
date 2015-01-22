@@ -2,6 +2,7 @@ package org.mo.com.lang.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import org.mo.com.lang.FFatalError;
 
 //============================================================
@@ -43,6 +44,16 @@ public class FField
    //============================================================
    public String name(){
       return _field.getName();
+   }
+
+   //============================================================
+   // <T>判断是否为静态。</T>
+   //
+   // @return 是否为静态
+   //============================================================
+   public boolean isStatic(){
+      int modifiers = _field.getModifiers();
+      return (modifiers & Modifier.STATIC) == Modifier.STATIC;
    }
 
    //============================================================
@@ -116,6 +127,44 @@ public class FField
    //============================================================
    public <C extends Annotation> C getAnnotation(Class<C> clazz){
       return _field.getAnnotation(clazz);
+   }
+
+   //============================================================
+   // <T>设置是否可以访问。</T>
+   //
+   // @param accessible 是否可以访问
+   //============================================================
+   public void setAccessible(boolean accessible){
+      _field.setAccessible(accessible);
+   }
+
+   //============================================================
+   // <T>获得实例内容。</T>
+   //
+   // @param instance 实例
+   // @return 内容
+   //============================================================
+   public Object get(Object instance){
+      try{
+         return _field.get(instance);
+      }catch(Exception e){
+         throw new FFatalError(e, "Get value failure. (instance={1}, name={2})", instance, _field.getName());
+      }
+   }
+
+   //============================================================
+   // <T>设置实例内容。</T>
+   //
+   // @param instance 实例
+   // @param value 内容
+   //============================================================
+   public void set(Object instance,
+                   Object value){
+      try{
+         _field.set(instance, value);
+      }catch(Exception e){
+         throw new FFatalError(e, "Set value failure. (instance={1}, value={2})", instance, value);
+      }
    }
 
    //============================================================

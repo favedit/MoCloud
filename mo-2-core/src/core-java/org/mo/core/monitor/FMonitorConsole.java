@@ -1,5 +1,6 @@
 package org.mo.core.monitor;
 
+import org.mo.com.console.FConsole;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -15,6 +16,7 @@ import org.mo.core.monitor.common.IMonitor;
 // <P>2. 初始化应用程序关闭时触发的线程。</P>
 //============================================================
 public class FMonitorConsole
+      extends FConsole
       implements
          IMonitorConsole
 {
@@ -71,6 +73,19 @@ public class FMonitorConsole
    public synchronized void unregister(IMonitor monitor){
       _pool.remove(monitor);
       _logger.info(this, "unregister", "Unregister monitor. (monitor={1})", monitor);
+   }
+
+   //============================================================
+   // <T>开始一个监视器。</T>
+   //
+   // @param monitor 监视器
+   //============================================================
+   @Override
+   public void start(IMonitor monitor){
+      monitor.setValid(true);
+      monitor.initialize();
+      _pool.push(monitor);
+      _logger.info(this, "start", "Start monitor success. (monitor={1})", monitor);
    }
 
    //============================================================

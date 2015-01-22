@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>放大镜接口对象的XML节点基类。</T>
 //============================================================
 public interface XZoomFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MZoom";

@@ -68,8 +68,8 @@ public class FWebContainerConsole
    //============================================================
    @Override
    public FWebContainerItem findContainer(IWebContext context,
-                                       AContainer type,
-                                       Class<?> clazz){
+                                          AContainer type,
+                                          Class<?> clazz){
       // 检查参数
       if(clazz == null){
          throw new NullPointerException("clazz");
@@ -82,12 +82,12 @@ public class FWebContainerConsole
       if(EContainerScope.Global == scopeCd){
          // 类型为全局对象时
          FWebContainerCollection containers = _globalConsole.find("web.containers", FWebContainerCollection.class);
-         form = containers.findContainer(type.name(), clazz);
+         form = containers.findContainer(containerName, clazz);
       }else if(EContainerScope.Session == scopeCd){
          // 类型为线程对象时
          IWebSession session = context.session();
          FWebContainerCollection containers = session.containers();
-         form = containers.findContainer(type.name(), clazz);
+         form = containers.findContainer(containerName, clazz);
       }else if(EContainerScope.Page == scopeCd){
          // 类型为页面对象时
          FWebContainerCollection containers = context.containers();

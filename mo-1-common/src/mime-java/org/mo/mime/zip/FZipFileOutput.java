@@ -4,12 +4,18 @@ import java.io.FileOutputStream;
 import java.util.zip.ZipOutputStream;
 import org.mo.com.lang.FFatalError;
 
+//============================================================
+// <T>ZIP文件输出流。</T>
+//============================================================
 public class FZipFileOutput
-      extends MZipOutput
-      implements
-         IZipOutput
+      extends FZipOutput
 {
-   protected FZipFileOutput(String fileName){
+   //============================================================
+   // <T>构造ZIP文件输出流。</T>
+   //
+   // @param fileName 文件名称
+   //============================================================
+   public FZipFileOutput(String fileName){
       try{
          FileOutputStream stream = new FileOutputStream(fileName);
          _output = new ZipOutputStream(stream);

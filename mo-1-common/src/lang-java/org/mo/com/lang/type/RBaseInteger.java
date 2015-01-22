@@ -20,7 +20,8 @@ public class RBaseInteger
    // @param target 目标整数数组
    // @return 是否相等
    //============================================================
-   public final static boolean equals(int[] source, int[] target){
+   public final static boolean equals(int[] source,
+                                      int[] target){
       // 内容都为空
       if((source == null) && (target == null)){
          return true;
@@ -41,7 +42,7 @@ public class RBaseInteger
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源整数数组和目标整数数组是否相等。</T>
    //
@@ -51,7 +52,10 @@ public class RBaseInteger
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(int[] source, int sourceLength, int[] target, int targetLength){
+   public final static boolean equals(int[] source,
+                                      int sourceLength,
+                                      int[] target,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -70,7 +74,7 @@ public class RBaseInteger
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源整数数组和目标整数数组是否相等。</T>
    //
@@ -82,7 +86,12 @@ public class RBaseInteger
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(int[] source, int sourceOffset, int sourceLength, int[] target, int targetOffset, int targetLength){
+   public final static boolean equals(int[] source,
+                                      int sourceOffset,
+                                      int sourceLength,
+                                      int[] target,
+                                      int targetOffset,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -101,7 +110,7 @@ public class RBaseInteger
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在整数数组中是否含有指定整数内容。</T>
    //
@@ -109,7 +118,8 @@ public class RBaseInteger
    // @param find 整数内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(int[] values, int find){
+   public final static boolean contains(int[] values,
+                                        int find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -120,7 +130,7 @@ public class RBaseInteger
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在整数数组中是否含有指定整数内容。</T>
    //
@@ -130,7 +140,10 @@ public class RBaseInteger
    // @param find 整数内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(int[] values, int offset, int length, int find){
+   public final static boolean contains(int[] values,
+                                        int offset,
+                                        int length,
+                                        int find){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
@@ -149,7 +162,8 @@ public class RBaseInteger
    // @param target 目标整数数组
    // @return 比较结果
    //============================================================
-   public final static int compare(int[] source, int[] target){
+   public final static int compare(int[] source,
+                                   int[] target){
       return compare(source, 0, source.length, target, 0, target.length);
    }
 
@@ -164,7 +178,12 @@ public class RBaseInteger
    // @param targetLength 目标长度
    // @return 比较结果
    //============================================================
-   public final static int compare(int[] source, int sourceOffset, int sourceLength, int[] target, int targetOffset, int targetLength){
+   public final static int compare(int[] source,
+                                   int sourceOffset,
+                                   int sourceLength,
+                                   int[] target,
+                                   int targetOffset,
+                                   int targetLength){
       int scl = sourceLength - sourceOffset;
       int tcl = targetLength - targetOffset;
       int loop = Math.min(scl, tcl);
@@ -183,7 +202,8 @@ public class RBaseInteger
    // @param find 整数内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(int[] values, int find){
+   public final static int indexOf(int[] values,
+                                   int find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -204,7 +224,10 @@ public class RBaseInteger
    // @param find 整数内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(int[] values, int offset, int length, int find){
+   public final static int indexOf(int[] values,
+                                   int offset,
+                                   int length,
+                                   int find){
       if(null != values){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
@@ -223,7 +246,8 @@ public class RBaseInteger
    // @param target 目标整数数组
    // @return 索引位置
    //============================================================
-   public final static int search(int[] source, int[] target){
+   public final static int search(int[] source,
+                                  int[] target){
       return search(source, 0, source.length, target, 0, target.length);
    }
 
@@ -236,7 +260,10 @@ public class RBaseInteger
    // @param target 目标整数数组
    // @return 索引位置
    //============================================================
-   public final static int search(int[] source, int offset, int length, int[] target){
+   public final static int search(int[] source,
+                                  int offset,
+                                  int length,
+                                  int[] target){
       return search(source, offset, length, target, 0, target.length);
    }
 
@@ -251,7 +278,12 @@ public class RBaseInteger
    // @param targetLength 目标长度
    // @return 索引位置
    //============================================================
-   public final static int search(int[] source, int sourceOffset, int sourceLength, int[] target, int targetOffset, int targetLength){
+   public final static int search(int[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  int[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (null != target)){
          int first = target[targetOffset];
          int m = sourceOffset - 1;
@@ -286,7 +318,14 @@ public class RBaseInteger
    // @param after 结尾整数
    // @return 索引位置
    //============================================================
-   public final static int search(int[] source, int offset, int length, int before, int[] target, int targetOffset, int targetLength, int after){
+   public final static int search(int[] source,
+                                  int offset,
+                                  int length,
+                                  int before,
+                                  int[] target,
+                                  int targetOffset,
+                                  int targetLength,
+                                  int after){
       int i;
       int el;
       int n = offset - 1;
@@ -316,7 +355,8 @@ public class RBaseInteger
    // @param source 整数数组
    // @param value 整数内容
    //============================================================
-   public final static void fill(int[] source, int value){
+   public final static void fill(int[] source,
+                                 int value){
       fill(source, 0, source.length, value);
    }
 
@@ -328,7 +368,10 @@ public class RBaseInteger
    // @param count 数组长度
    // @param value 整数内容
    //============================================================
-   public final static void fill(int[] source, int offset, int length, int value){
+   public final static void fill(int[] source,
+                                 int offset,
+                                 int length,
+                                 int value){
       int n = offset - 1;
       int end = offset + length;
       while(++n < end){
@@ -343,7 +386,9 @@ public class RBaseInteger
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(int[] source, int from, int to){
+   public final static void replace(int[] source,
+                                    int from,
+                                    int to){
       replace(source, 0, source.length, from, to);
    }
 
@@ -356,7 +401,11 @@ public class RBaseInteger
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(int[] source, int offset, int length, int from, int to){
+   public final static void replace(int[] source,
+                                    int offset,
+                                    int length,
+                                    int from,
+                                    int to){
       int n = offset - 1;
       while(++n < length){
          if(source[n] == from){
@@ -375,7 +424,11 @@ public class RBaseInteger
    // @param to 被替换字符数组
    // @return 替换后的字符数组
    //============================================================
-   public final static int[] replace(int[] source, int offset, int length, int[] from, int[] to){
+   public final static int[] replace(int[] source,
+                                     int offset,
+                                     int length,
+                                     int[] from,
+                                     int[] to){
       return replace(source, offset, length, from, 0, from.length, to, 0, to.length);
    }
 
@@ -393,7 +446,15 @@ public class RBaseInteger
    // @param toLength 被替换字符数组数据长度
    // @return 替换后的字符数组
    //============================================================
-   public final static int[] replace(int[] source, int offset, int length, int[] from, int fromOffset, int fromLength, int[] to, int toOffset, int toLength){
+   public final static int[] replace(int[] source,
+                                     int offset,
+                                     int length,
+                                     int[] from,
+                                     int fromOffset,
+                                     int fromLength,
+                                     int[] to,
+                                     int toOffset,
+                                     int toLength){
       boolean same = true;
       int[] tempChars = null;
       int p = 0;
@@ -476,7 +537,9 @@ public class RBaseInteger
    // @param length 数组长度
    // @return 中间数组
    //============================================================
-   public final static int[] sub(int[] source, int offset, int length){
+   public final static int[] sub(int[] source,
+                                 int offset,
+                                 int length){
       int[] result = null;
       if(length > 0){
          result = new int[Math.abs(length)];
@@ -493,16 +556,18 @@ public class RBaseInteger
    // @param end 结束位置
    // @return 中间数组
    //============================================================
-   public static int[] mid(int[] source, int start, int end){
+   public static int[] mid(int[] source,
+                           int start,
+                           int end){
       int length = Math.abs(end - start);
       if(length > 0){
          int[] result = new int[length];
-            System.arraycopy(source, start, result, 0, length);
-            if(start > end){
-               reverse(result, 0, length);
-            }
-            return result;
+         System.arraycopy(source, start, result, 0, length);
+         if(start > end){
+            reverse(result, 0, length);
          }
+         return result;
+      }
       return new int[0];
    }
 
@@ -522,7 +587,9 @@ public class RBaseInteger
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static void reverse(int[] values, int index, int length){
+   public final static void reverse(int[] values,
+                                    int index,
+                                    int length){
       int s = index - 1;
       int e = index + length + 1;
       while(++s < --e){
@@ -531,14 +598,15 @@ public class RBaseInteger
          values[e] = temp;
       }
    }
-   
+
    //============================================================
    // <T>擦除整数数组中指定索引位置的整数内容。</T>
    //
    // @param values 整数数组
    // @param index 索引位置
    //============================================================
-   public final static int erase(char[] values, int index){
+   public final static int erase(char[] values,
+                                 int index){
       if(null != values){
          int length = values.length;
          if((index >= 0) && (index < length)){
@@ -549,7 +617,7 @@ public class RBaseInteger
       }
       return 0;
    }
-   
+
    //============================================================
    // <T>擦除整数数组中从开始位置到结束位置之间的整数内容。</T>
    //
@@ -557,7 +625,9 @@ public class RBaseInteger
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static int erase(int[] values, int index, int length){
+   public final static int erase(int[] values,
+                                 int index,
+                                 int length){
       if(null != values){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
@@ -577,7 +647,10 @@ public class RBaseInteger
    // @param length 数组长度
    // @param find 整数内容
    //============================================================
-   public final static int remove(int[] values, int offset, int length, int find){
+   public final static int remove(int[] values,
+                                  int offset,
+                                  int length,
+                                  int find){
       int index = offset;
       for(int n = offset; n < length; n++){
          if(values[n] != find){
@@ -600,7 +673,12 @@ public class RBaseInteger
    // @param targetOffset 目标位置
    // @param targetLength 目标长度
    //============================================================
-   public final static int remove(int[] source, int sourceOffset, int sourceLength, int[] target, int targetOffset, int targetLength){
+   public final static int remove(int[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  int[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
          int p = -1;
          int index = 0;
@@ -633,7 +711,7 @@ public class RBaseInteger
       }
       return sourceLength;
    }
-   
+
    //============================================================
    // <T>清空整数数组。</T>
    //
@@ -655,7 +733,9 @@ public class RBaseInteger
    // @param offset 开始位置
    // @param count 数组长度
    //============================================================
-   public final static void clear(int[] values, int offset, int length){
+   public final static void clear(int[] values,
+                                  int offset,
+                                  int length){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){

@@ -61,18 +61,18 @@ public class FAopComponents
    // @param face 接口名称
    // @return 组件对象
    //============================================================
-   public FAopComponent find(String face){
+   public synchronized FAopComponent find(String face){
       FAopComponent component = _components.find(face);
-      if(null == component){
+      if(component == null){
          XAopComponentCollection xcomponents = collection();
-         if(null != xcomponents){
+         if(xcomponents != null){
             XAopComponent xcomponent = xcomponents.findByKey(face);
             // 查找定义
-            if(null == xcomponent){
+            if(xcomponent == null){
                xcomponent = RAop.configConsole().componentsCollection().matchByFace(face);
             }
             // 创建组件
-            if(null != xcomponent){
+            if(xcomponent != null){
                component = new FAopComponent(xcomponent);
                component.setBuilder(_builder);
                component.initialize();
@@ -89,17 +89,19 @@ public class FAopComponents
    // @param name 名称
    // @return 组件对象
    //============================================================
-   public FAopComponent findByName(String name){
-      FAopComponent component = _names.get(name);
-      if(null == component){
+   public synchronized FAopComponent findByName(String name){
+      FAopComponent component = _names.get(name, null);
+      if(component == null){
          XAopComponentCollection xcomponents = collection();
-         if(null != xcomponents){
+         if(xcomponents != null){
             XAopComponent xcomponent = xcomponents.findByName(name);
             if(xcomponent != null){
                component = new FAopComponent(xcomponent);
-               component.setBuilder(_builder);
-               component.initialize();
-               _names.set(name, component);
+               synchronized(component){
+                  component.setBuilder(_builder);
+                  component.initialize();
+                  _names.set(name, component);
+               }
             }
          }
       }
@@ -112,17 +114,19 @@ public class FAopComponents
    // @param className 类名称
    // @return 组件对象
    //============================================================
-   public FAopComponent findByClass(String className){
-      FAopComponent component = _classes.get(className);
-      if(null == component){
+   public synchronized FAopComponent findByClass(String className){
+      FAopComponent component = _classes.get(className, null);
+      if(component == null){
          XAopComponentCollection xcomponents = collection();
-         if(null != xcomponents){
+         if(xcomponents != null){
             XAopComponent xcomponent = xcomponents.findByClass(className);
             if(null != xcomponent){
                component = new FAopComponent(xcomponent);
-               component.setBuilder(_builder);
-               component.initialize();
-               _classes.set(className, component);
+               synchronized(component){
+                  component.setBuilder(_builder);
+                  component.initialize();
+                  _classes.set(className, component);
+               }
             }
          }
       }

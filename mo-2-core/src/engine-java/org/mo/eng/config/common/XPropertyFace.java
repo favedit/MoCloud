@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>属性接口对象的XML节点基类。</T>
 //============================================================
 public interface XPropertyFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "IProperty";

@@ -1,6 +1,5 @@
 package org.mo.logic.status.process;
 
-
 import org.mo.com.lang.FObjects;
 import org.mo.com.xml.FXmlNode;
 
@@ -23,13 +22,13 @@ public class SServerInfo
 
    // 交换自由大小
    public long swapFree;
-   
+
    //http状态
    public String httpResult;
-   
+
    // 进程信息集合
    public FObjects<SProcessInfo> processes = new FObjects<SProcessInfo>(SProcessInfo.class);
-   
+
    //============================================================
    // <T>查找进程信息。</T>
    //
@@ -69,7 +68,7 @@ public class SServerInfo
       xconfig.set("swap_free", swapFree);
       xconfig.set("http_result", httpResult);
    }
-   
+
    //============================================================
    // <T>保存http信息。</T>
    //
@@ -78,6 +77,7 @@ public class SServerInfo
    public void saveHttpConfig(FXmlNode xconfig){
       xconfig.set("http_result", httpResult);
    }
+
    //============================================================
    // <T>保存进程集合信息。</T>
    //
@@ -90,5 +90,5 @@ public class SServerInfo
          process.saveConfig(xprocess);
       }
    }
-   
+
 }

@@ -34,6 +34,9 @@ public class FConnectionWorker
    // 自由时间
    protected long freeTime;
 
+   // 测试时间
+   protected long testTime;
+
    // 测试命令
    protected String testSqlCmd;
 
@@ -81,9 +84,10 @@ public class FConnectionWorker
    //============================================================
    // <T>释放处理。</T>
    //============================================================ 
-   public synchronized void free(){
+   public void free(){
       inUsing = false;
       freeTime = System.currentTimeMillis();
+      testTime = freeTime;
    }
 
    //============================================================
@@ -107,7 +111,13 @@ public class FConnectionWorker
    // @return 处理结果
    //============================================================ 
    public boolean connectTest(){
-      return true;
+      testTime = System.currentTimeMillis();
+      try{
+         return connection.executeSql(testSqlCmd);
+      }catch(Exception e){
+         _logger.error(this, "connectTest", e);
+         return false;
+      }
    }
 
    //============================================================

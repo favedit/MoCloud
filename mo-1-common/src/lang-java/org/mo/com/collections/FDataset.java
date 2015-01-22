@@ -1,5 +1,6 @@
 package org.mo.com.collections;
 
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.IAttributes;
@@ -262,6 +263,18 @@ public class FDataset
    //============================================================
    public String pack(){
       StringBuilder pack = new StringBuilder();
+      // 存储属性
+      FAttributes attributes = new FAttributes();
+      attributes.set("code", _code);
+      attributes.set("total", _total);
+      attributes.set("page_size", _pageSize);
+      attributes.set("page_count", _pageCount);
+      attributes.set("page", _page);
+      String attributePack = attributes.pack();
+      pack.append(Integer.toString(attributePack.length()));
+      pack.append("_");
+      pack.append(attributePack);
+      // 存储行集合
       for(FRow row : this){
          String rowPack = row.pack();
          pack.append(Integer.toString(rowPack.length()));
@@ -296,11 +309,25 @@ public class FDataset
       if(!RString.isEmpty(pack)){
          // 初始化变量
          int position = 0;
-         int find = -1;
          int itemLength = 0;
          String itemPack = "";
          // 反解打包字符串
          try{
+            // 获得属性
+            int find = pack.indexOf("_", position);
+            if(find >= 0){
+               itemLength = Integer.parseInt(pack.substring(position, find));
+               itemPack = pack.substring(find + 1, find + 1 + itemLength);
+               FAttributes attributes = new FAttributes();
+               attributes.unpack(itemPack);
+               _code = attributes.get("code");
+               _total = attributes.getInt("total");
+               _pageSize = attributes.getInt("page_size");
+               _pageCount = attributes.getInt("page_count");
+               _page = attributes.getInt("page");
+               position = find + 1 + itemLength;
+            }
+            // 获得行集合
             while(true){
                find = pack.indexOf("_", position);
                if(find >= 0){
@@ -348,6 +375,25 @@ public class FDataset
          }
       }
       return outDsNode;
+   }
+
+   //============================================================
+   // <T>获得JSON字符串。</T>
+   //
+   // @return JSON字符串
+   //============================================================
+   public String toJsonListString(){
+      FString source = new FString();
+      source.append("{\"total\":" + _count + ",\"rows\":[");
+      for(int n = 0; n < _count; n++){
+         FRow row = _items[n];
+         if(n > 0){
+            source.append(',');
+         }
+         row.toJson(source);
+      }
+      source.append("]}");
+      return source.toString();
    }
 
    //============================================================

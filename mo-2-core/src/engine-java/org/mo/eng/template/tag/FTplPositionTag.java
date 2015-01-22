@@ -1,19 +1,11 @@
-/*
- * @(#)FTplPositionTag.java
- *
- * Copyright 2008 microbject, All Rights Reserved.
- *
- */
 package org.mo.eng.template.tag;
 
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.MString;
 
-/**
- * 根据数据源中指针位置，输出不同的内容
- * 
- * @author maocy
- */
+//============================================================
+// <T>根据数据源中指针位置，输出指定的内容。</T>
+//============================================================
 public class FTplPositionTag
       extends FAbstractTplTag
 {
@@ -31,19 +23,11 @@ public class FTplPositionTag
    // 不满足条件时要输出数据内容
    protected String _elsevalue;
 
-   /* (non-Javadoc)
-    * @see org.mo.eng.template.tag.FAbstractTplTag#onDump(org.mo.com.lang.FString)
-    */
-   @Override
-   public void onDump(MString dump){
-      dump.append(NAME, " [");
-      dump.append(" source=", _source);
-      dump.append(" ]");
-   }
-
-   /* (non-Javadoc)
-    * @see org.mo.eng.template.tag.FAbstractTplTag#onStart()
-    */
+   //============================================================
+   // <T>标签开始处理。</T>
+   //
+   // @return 处理结果
+   //============================================================
    @Override
    public int onStart(){
       // 获得总数
@@ -67,7 +51,7 @@ public class FTplPositionTag
                _context.append(_elsevalue);
             }
          }else if(_type.equalsIgnoreCase("middle")){
-            if(position > 0 && position < count - 1){
+            if(position > 0 && position < count){
                _context.append(_value);
             }else{
                _context.append(_elsevalue);
@@ -83,40 +67,52 @@ public class FTplPositionTag
       return STOP;
    }
 
-   /**
-    * 设置不满足条件时要输出数据内容
-    * 
-    * @param elseValue 不满足条件时要输出数据内容
-    */
-   public void setElseValue(String elseValue){
-      _elsevalue = elseValue;
-   }
-
-   /**
-    * 设置要测试的数据源<br>
-    * 必须是数据循环对象的字节点
-    * 
-    * @param value 满足条件时要输出数据内容
-    */
+   //============================================================
+   // <T>设置要测试的数据源，必须是数据循环对象的子节点。</T>
+   //
+   // @param source 满足条件时要输出数据内容
+   //============================================================
    public void setSource(String source){
       _source = source;
    }
 
-   /**
-    * 设置类型
-    * 
-    * @param type 类型(first,last)
-    */
+   //============================================================
+   // <T>设置测试类型。</T>
+   //
+   // @param type 类型(first,middle,last)
+   //============================================================
    public void setType(String type){
       _type = type;
    }
 
-   /**
-    * 设置满足条件时要输出数据内容
-    * 
-    * @param value 满足条件时要输出数据内容
-    */
+   //============================================================
+   // <T>设置满足条件时要输出的内容。</T>
+   //
+   // @param value 满足条件时要输出数据内容
+   //============================================================
    public void setValue(String value){
       _value = value;
    }
+
+   //============================================================
+   // <T>设置不满足条件时要输出的内容。</T>
+   //
+   // @param elseValue 不满足条件时要输出数据内容
+   //============================================================
+   public void setElseValue(String elseValue){
+      _elsevalue = elseValue;
+   }
+
+   //============================================================
+   // <T>输出运行信息。</T>
+   //
+   // @param 运行信息
+   //============================================================
+   @Override
+   public void onDump(MString dump){
+      dump.append(NAME, " [");
+      dump.append(" source=", _source);
+      dump.append(" ]");
+   }
+
 }

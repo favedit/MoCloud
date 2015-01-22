@@ -13,7 +13,7 @@ public class FWebFormTest
          RAop.initialize(config);
 
          IWebFormConsole console = RAop.find(IWebFormConsole.class);
-         System.out.println(console);
+         console.toString();
 
          RAop.release();
       }catch(Exception e){

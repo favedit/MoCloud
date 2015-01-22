@@ -2,7 +2,6 @@ package org.mo.logic.status.process;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 
@@ -132,40 +131,41 @@ public class SLinuxServerInfo
          }
       }
    }
-   
+
    //============================================================
    // <T>解析http信息。</T>
    //
    // @param source 来源字符串
    //============================================================
    public void parseHttp(String source){
-	   String[] lines = RString.split(source, "\n");
-	   int count = lines.length;
-	   for(int n = 0; n < count; n++){
-		   String line = RString.trim(lines[n]);
-	       checkHttpResult(line);
-	   }
+      String[] lines = RString.split(source, "\n");
+      int count = lines.length;
+      for(int n = 0; n < count; n++){
+         String line = RString.trim(lines[n]);
+         checkHttpResult(line);
+      }
    }
-   
+
    //============================================================
    // <T>获取http状态信息。</T>
    //
    // @param line 来源字符串
    //============================================================
-   private void checkHttpResult(String line) {
-	   String[] lineResults = replaceSpace(line).split(" ");
-	   httpResult = RString.parse(lineResults[1]);
+   private void checkHttpResult(String line){
+      String[] lineResults = replaceSpace(line).split(" ");
+      httpResult = RString.parse(lineResults[1]);
    }
+
    //============================================================
    // <T>把多个空格替换成一个空格</T>
    //
    // @param source 来源字符串
    //============================================================
    public String replaceSpace(String str){
- 		String regEX = "[' ']+";
- 		Pattern p = Pattern.compile(regEX);
- 		Matcher m = p.matcher(str);
- 		return m.replaceAll(" ");
+      String regEX = "[' ']+";
+      Pattern p = Pattern.compile(regEX);
+      Matcher m = p.matcher(str);
+      return m.replaceAll(" ");
    }
-   
+
 }

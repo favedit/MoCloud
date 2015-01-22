@@ -226,7 +226,7 @@ public class XAopComponent
    // @return 是否含有属性
    //============================================================
    public boolean hasProperties(){
-      return (null != _properties) ? !_properties.isEmpty() : false;
+      return (_properties != null) ? !_properties.isEmpty() : false;
    }
 
    //============================================================
@@ -235,7 +235,7 @@ public class XAopComponent
    // @return 属性集合
    //============================================================
    public XAopPropertyCollection properties(){
-      if(null == _properties){
+      if(_properties == null){
          _properties = new XAopPropertyCollection();
       }
       return _properties;
@@ -247,7 +247,7 @@ public class XAopComponent
    // @return 是否含有初始化集合
    //============================================================
    public boolean hasInitializes(){
-      return (null != _initializes) ? !_initializes.isEmpty() : false;
+      return (_initializes != null) ? !_initializes.isEmpty() : false;
    }
 
    //============================================================
@@ -256,7 +256,7 @@ public class XAopComponent
    // @return 初始化集合
    //============================================================
    public XAopInitializeCollection initializeMethods(){
-      if(null == _initializes){
+      if(_initializes == null){
          _initializes = new XAopInitializeCollection();
       }
       return _initializes;
@@ -268,7 +268,7 @@ public class XAopComponent
    // @return 是否含有释放集合
    //============================================================
    public boolean hasReleases(){
-      return (null != _releases) ? !_releases.isEmpty() : false;
+      return (_releases != null) ? !_releases.isEmpty() : false;
    }
 
    //============================================================
@@ -277,7 +277,7 @@ public class XAopComponent
    // @return 释放集合
    //============================================================
    public XAopReleaseCollection releaseMethods(){
-      if(null == _releases){
+      if(_releases == null){
          _releases = new XAopReleaseCollection();
       }
       return _releases;

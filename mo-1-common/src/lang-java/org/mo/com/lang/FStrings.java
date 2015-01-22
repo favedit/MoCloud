@@ -64,6 +64,20 @@ public class FStrings
    }
 
    //============================================================
+   // <T>判断是否含有数据。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasData(){
+      for(int n = 0; n < _count; n++){
+         if(!RString.isEmpty(_items[n])){
+            return true;
+         }
+      }
+      return false;
+   }
+
+   //============================================================
    // <T>判断来源和目标是否相等。</T>
    //
    // @param source 来源
@@ -184,7 +198,7 @@ public class FStrings
       FString pack = new FString();
       for(int n = 0; n < _count; n++){
          String value = _items[n];
-         if(null != value){
+         if(value != null){
             String length = Integer.toString(value.length());
             pack.appendInt(length.length());
             pack.append(length);
@@ -200,7 +214,7 @@ public class FStrings
    // @param pack 打包字符串
    //============================================================
    public void unpack(String pack){
-      if((null != pack) && !pack.isEmpty()){
+      if(!RString.isEmpty(pack)){
          try{
             char[] chars = pack.toCharArray();
             int total = chars.length;
@@ -212,7 +226,7 @@ public class FStrings
                n += length;
             }
          }catch(Exception e){
-            throw new FFatalError(e, "Pack string = [{0}]", pack);
+            throw new FFatalError(e, "Unpack string failure. (pack={1})", pack);
          }
       }
    }

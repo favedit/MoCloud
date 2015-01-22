@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>文本控件接口对象的XML节点基类。</T>
 //============================================================
 public interface XDescEditFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MDescEdit";

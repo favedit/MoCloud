@@ -1,7 +1,6 @@
 package org.mo.com.net.http;
 
 import java.io.UnsupportedEncodingException;
-
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -75,27 +74,24 @@ public class FHttpService
       if(!RString.isEmpty(action)){
          inputNode().set("action", action);
       }
-      //-E "mogametemplate|mogameproxy"
       String requestValue = inputNode().xml().toString();
       // 获取数据
-      FHttpConnection http = new FHttpConnection(url);
-      try {
-		   http.connect();
-	   } catch (Exception ex) {
-		   //ec.printStackTrace();
-		   return false;
-		  
-	   }
-     
-      http.request().setText(requestValue);//将命令发给服务器
-      http.fetch();//发送数据流，接收数据
-      http.disconnect();//断开连接
-      try{
-         byte[] responseData = http.response().data();
-         String responseValue = new String(responseData, "UTF-8");
-         outputDocument().loadString(responseValue);
-      }catch(UnsupportedEncodingException e){
-         throw new FFatalError(e);
+      try(FHttpConnection http = new FHttpConnection(url)){
+         try{
+            http.connect();
+         }catch(Exception ex){
+            return false;
+         }
+         http.request().setText(requestValue);//将命令发给服务器
+         http.fetch();//发送数据流，接收数据
+         http.disconnect();//断开连接
+         try{
+            byte[] responseData = http.response().data();
+            String responseValue = new String(responseData, "UTF-8");
+            outputDocument().loadString(responseValue);
+         }catch(UnsupportedEncodingException e){
+            throw new FFatalError(e);
+         }
       }
       return true;
    }

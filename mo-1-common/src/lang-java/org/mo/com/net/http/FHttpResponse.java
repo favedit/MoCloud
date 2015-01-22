@@ -1,5 +1,6 @@
 package org.mo.com.net.http;
 
+import org.mo.com.io.FByteFile;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDump;
@@ -17,6 +18,9 @@ public class FHttpResponse
 
    // 协议
    protected String _protocol;
+
+   // 字符集
+   protected String _charset = "utf-8";
 
    // 头信息集合
    protected FAttributes _heads = new FAttributes();
@@ -40,7 +44,11 @@ public class FHttpResponse
    //============================================================
    public FHttpResponse(FHttpConnection connection){
       _connection = connection;
-      _input = _connection.socket().input();
+      if(connection != null){
+         if(_connection.socket() != null){
+            _input = _connection.socket().input();
+         }
+      }
    }
 
    //============================================================
@@ -50,6 +58,24 @@ public class FHttpResponse
    //============================================================
    public String protocol(){
       return _protocol;
+   }
+
+   //============================================================
+   // <T>获得字符集。</T>
+   //
+   // @return 字符集
+   //============================================================
+   public String charset(){
+      return _charset;
+   }
+
+   //============================================================
+   // <T>设置字符集。</T>
+   //
+   // @param charset 字符集
+   //============================================================
+   public void setCharset(String charset){
+      _charset = charset;
    }
 
    //============================================================
@@ -123,10 +149,7 @@ public class FHttpResponse
    // @return 内容
    //============================================================
    public String content(){
-      if(_data != null){
-         return new String(_data);
-      }
-      return null;
+      return content(_charset);
    }
 
    //============================================================
@@ -228,6 +251,20 @@ public class FHttpResponse
          if(length > 0){
             _data = _input.read(length);
          }
+      }
+   }
+
+   //============================================================
+   // <T>存储到文件。</T>
+   //
+   // @param fileName 文件名称
+   //============================================================
+   public void saveFile(String fileName){
+      try(FByteFile file = new FByteFile()){
+         if(_data != null){
+            file.append(_data);
+         }
+         file.saveToFile(fileName);
       }
    }
 

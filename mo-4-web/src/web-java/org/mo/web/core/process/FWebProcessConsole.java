@@ -67,6 +67,7 @@ public class FWebProcessConsole
       return executeFace(face, methodName, args);
    }
 
+   @SuppressWarnings("resource")
    @Override
    public Object executeFace(Object face,
                              String methodName,
@@ -101,7 +102,7 @@ public class FWebProcessConsole
                value = webContext.session();
             }else if(type == ISqlContext.class){
                // 参数为数据环境对象时
-               if(null == sqlContext){
+               if(sqlContext == null){
                   sqlContext = new FSqlContext(_databaseConsole);
                }
                value = sqlContext;
@@ -170,7 +171,7 @@ public class FWebProcessConsole
                // 正常关闭数据库链接
                sqlSessionContext.unlink();
                FMessages messages = sqlSessionContext.messages();
-               if(null != messages){
+               if(messages != null){
                   webContext.messages().append(messages);
                }
                sqlSessionContext.release();
@@ -180,8 +181,8 @@ public class FWebProcessConsole
             }
          }
          // 释放数据库链接
-         if(null != sqlContext){
-            if(null == exception){
+         if(sqlContext != null){
+            if(exception == null){
                sqlContext.release();
             }else{
                sqlContext.rollback();

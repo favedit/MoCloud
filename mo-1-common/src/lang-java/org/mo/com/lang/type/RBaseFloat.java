@@ -20,7 +20,8 @@ public class RBaseFloat
    // @param target 目标浮点数数组
    // @return 是否相等
    //============================================================
-   public final static boolean equals(float[] source, float[] target){
+   public final static boolean equals(float[] source,
+                                      float[] target){
       // 内容都为空
       if((source == null) && (target == null)){
          return true;
@@ -41,7 +42,7 @@ public class RBaseFloat
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源浮点数数组和目标浮点数数组是否相等。</T>
    //
@@ -51,7 +52,10 @@ public class RBaseFloat
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(float[] source, int sourceLength, float[] target, int targetLength){
+   public final static boolean equals(float[] source,
+                                      int sourceLength,
+                                      float[] target,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -70,7 +74,7 @@ public class RBaseFloat
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源浮点数数组和目标浮点数数组是否相等。</T>
    //
@@ -82,7 +86,12 @@ public class RBaseFloat
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(float[] source, int sourceOffset, int sourceLength, float[] target, int targetOffset, int targetLength){
+   public final static boolean equals(float[] source,
+                                      int sourceOffset,
+                                      int sourceLength,
+                                      float[] target,
+                                      int targetOffset,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -101,7 +110,7 @@ public class RBaseFloat
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在浮点数数组中是否含有指定浮点数内容。</T>
    //
@@ -109,7 +118,8 @@ public class RBaseFloat
    // @param find 浮点数内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(float[] values, float find){
+   public final static boolean contains(float[] values,
+                                        float find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -120,7 +130,7 @@ public class RBaseFloat
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在浮点数数组中是否含有指定浮点数内容。</T>
    //
@@ -130,7 +140,10 @@ public class RBaseFloat
    // @param find 浮点数内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(float[] values, int offset, int length, float find){
+   public final static boolean contains(float[] values,
+                                        int offset,
+                                        int length,
+                                        float find){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
@@ -149,7 +162,8 @@ public class RBaseFloat
    // @param target 目标浮点数数组
    // @return 比较结果
    //============================================================
-   public final static int compare(float[] source, float[] target){
+   public final static int compare(float[] source,
+                                   float[] target){
       return compare(source, 0, source.length, target, 0, target.length);
    }
 
@@ -164,7 +178,12 @@ public class RBaseFloat
    // @param targetLength 目标长度
    // @return 比较结果
    //============================================================
-   public final static int compare(float[] source, int sourceOffset, int sourceLength, float[] target, int targetOffset, int targetLength){
+   public final static int compare(float[] source,
+                                   int sourceOffset,
+                                   int sourceLength,
+                                   float[] target,
+                                   int targetOffset,
+                                   int targetLength){
       int scl = sourceLength - sourceOffset;
       int tcl = targetLength - targetOffset;
       int loop = Math.min(scl, tcl);
@@ -183,7 +202,8 @@ public class RBaseFloat
    // @param find 浮点数内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(float[] values, float find){
+   public final static int indexOf(float[] values,
+                                   float find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -204,7 +224,10 @@ public class RBaseFloat
    // @param find 浮点数内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(float[] values, int offset, int length, float find){
+   public final static int indexOf(float[] values,
+                                   int offset,
+                                   int length,
+                                   float find){
       if(null != values){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
@@ -223,7 +246,8 @@ public class RBaseFloat
    // @param target 目标浮点数数组
    // @return 索引位置
    //============================================================
-   public final static int search(float[] source, float[] target){
+   public final static int search(float[] source,
+                                  float[] target){
       return search(source, 0, source.length, target, 0, target.length);
    }
 
@@ -236,7 +260,10 @@ public class RBaseFloat
    // @param target 目标浮点数数组
    // @return 索引位置
    //============================================================
-   public final static int search(float[] source, int offset, int length, float[] target){
+   public final static int search(float[] source,
+                                  int offset,
+                                  int length,
+                                  float[] target){
       return search(source, offset, length, target, 0, target.length);
    }
 
@@ -251,7 +278,12 @@ public class RBaseFloat
    // @param targetLength 目标长度
    // @return 索引位置
    //============================================================
-   public final static int search(float[] source, int sourceOffset, int sourceLength, float[] target, int targetOffset, int targetLength){
+   public final static int search(float[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  float[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (null != target)){
          float first = target[targetOffset];
          int m = sourceOffset - 1;
@@ -286,7 +318,14 @@ public class RBaseFloat
    // @param after 结尾浮点数
    // @return 索引位置
    //============================================================
-   public final static int search(float[] source, int offset, int length, float before, float[] target, int targetOffset, int targetLength, float after){
+   public final static int search(float[] source,
+                                  int offset,
+                                  int length,
+                                  float before,
+                                  float[] target,
+                                  int targetOffset,
+                                  int targetLength,
+                                  float after){
       int i;
       int el;
       int n = offset - 1;
@@ -316,7 +355,8 @@ public class RBaseFloat
    // @param source 浮点数数组
    // @param value 浮点数内容
    //============================================================
-   public final static void fill(float[] source, float value){
+   public final static void fill(float[] source,
+                                 float value){
       fill(source, 0, source.length, value);
    }
 
@@ -328,7 +368,10 @@ public class RBaseFloat
    // @param count 数组长度
    // @param value 浮点数内容
    //============================================================
-   public final static void fill(float[] source, int offset, int length, float value){
+   public final static void fill(float[] source,
+                                 int offset,
+                                 int length,
+                                 float value){
       int n = offset - 1;
       int end = offset + length;
       while(++n < end){
@@ -343,7 +386,9 @@ public class RBaseFloat
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(float[] source, float from, float to){
+   public final static void replace(float[] source,
+                                    float from,
+                                    float to){
       replace(source, 0, source.length, from, to);
    }
 
@@ -356,7 +401,11 @@ public class RBaseFloat
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(float[] source, int offset, int length, float from, float to){
+   public final static void replace(float[] source,
+                                    int offset,
+                                    int length,
+                                    float from,
+                                    float to){
       int n = offset - 1;
       while(++n < length){
          if(source[n] == from){
@@ -375,7 +424,11 @@ public class RBaseFloat
    // @param to 被替换字符数组
    // @return 替换后的字符数组
    //============================================================
-   public final static float[] replace(float[] source, int offset, int length, float[] from, float[] to){
+   public final static float[] replace(float[] source,
+                                       int offset,
+                                       int length,
+                                       float[] from,
+                                       float[] to){
       return replace(source, offset, length, from, 0, from.length, to, 0, to.length);
    }
 
@@ -393,7 +446,15 @@ public class RBaseFloat
    // @param toLength 被替换字符数组数据长度
    // @return 替换后的字符数组
    //============================================================
-   public final static float[] replace(float[] source, int offset, int length, float[] from, int fromOffset, int fromLength, float[] to, int toOffset, int toLength){
+   public final static float[] replace(float[] source,
+                                       int offset,
+                                       int length,
+                                       float[] from,
+                                       int fromOffset,
+                                       int fromLength,
+                                       float[] to,
+                                       int toOffset,
+                                       int toLength){
       boolean same = true;
       float[] tempChars = null;
       int p = 0;
@@ -476,7 +537,9 @@ public class RBaseFloat
    // @param length 数组长度
    // @return 中间数组
    //============================================================
-   public final static float[] sub(float[] source, int offset, int length){
+   public final static float[] sub(float[] source,
+                                   int offset,
+                                   int length){
       float[] result = null;
       if(length > 0){
          result = new float[Math.abs(length)];
@@ -493,16 +556,18 @@ public class RBaseFloat
    // @param end 结束位置
    // @return 中间数组
    //============================================================
-   public static float[] mid(float[] source, int start, int end){
+   public static float[] mid(float[] source,
+                             int start,
+                             int end){
       int length = Math.abs(end - start);
       if(length > 0){
          float[] result = new float[length];
-            System.arraycopy(source, start, result, 0, length);
-            if(start > end){
-               reverse(result, 0, length);
-            }
-            return result;
+         System.arraycopy(source, start, result, 0, length);
+         if(start > end){
+            reverse(result, 0, length);
          }
+         return result;
+      }
       return new float[0];
    }
 
@@ -522,7 +587,9 @@ public class RBaseFloat
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static void reverse(float[] values, int index, int length){
+   public final static void reverse(float[] values,
+                                    int index,
+                                    int length){
       int s = index - 1;
       int e = index + length + 1;
       while(++s < --e){
@@ -531,14 +598,15 @@ public class RBaseFloat
          values[e] = temp;
       }
    }
-   
+
    //============================================================
    // <T>擦除浮点数数组中指定索引位置的浮点数内容。</T>
    //
    // @param values 浮点数数组
    // @param index 索引位置
    //============================================================
-   public final static int erase(char[] values, int index){
+   public final static int erase(char[] values,
+                                 int index){
       if(null != values){
          int length = values.length;
          if((index >= 0) && (index < length)){
@@ -549,7 +617,7 @@ public class RBaseFloat
       }
       return 0;
    }
-   
+
    //============================================================
    // <T>擦除浮点数数组中从开始位置到结束位置之间的浮点数内容。</T>
    //
@@ -557,7 +625,9 @@ public class RBaseFloat
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static int erase(float[] values, int index, int length){
+   public final static int erase(float[] values,
+                                 int index,
+                                 int length){
       if(null != values){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
@@ -577,7 +647,10 @@ public class RBaseFloat
    // @param length 数组长度
    // @param find 浮点数内容
    //============================================================
-   public final static int remove(float[] values, int offset, int length, float find){
+   public final static int remove(float[] values,
+                                  int offset,
+                                  int length,
+                                  float find){
       int index = offset;
       for(int n = offset; n < length; n++){
          if(values[n] != find){
@@ -600,7 +673,12 @@ public class RBaseFloat
    // @param targetOffset 目标位置
    // @param targetLength 目标长度
    //============================================================
-   public final static int remove(float[] source, int sourceOffset, int sourceLength, float[] target, int targetOffset, int targetLength){
+   public final static int remove(float[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  float[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
          int p = -1;
          int index = 0;
@@ -633,7 +711,7 @@ public class RBaseFloat
       }
       return sourceLength;
    }
-   
+
    //============================================================
    // <T>清空浮点数数组。</T>
    //
@@ -655,7 +733,9 @@ public class RBaseFloat
    // @param offset 开始位置
    // @param count 数组长度
    //============================================================
-   public final static void clear(float[] values, int offset, int length){
+   public final static void clear(float[] values,
+                                  int offset,
+                                  int length){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){

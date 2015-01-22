@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 //============================================================
 // <T>对象集合描述。</T>
 //============================================================
-
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

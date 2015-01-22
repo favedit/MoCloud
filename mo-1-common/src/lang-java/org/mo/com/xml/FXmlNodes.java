@@ -1,5 +1,6 @@
 package org.mo.com.xml;
 
+import org.mo.com.lang.FString;
 import org.mo.com.lang.ICopyable;
 import org.mo.com.lang.RObject;
 import org.mo.com.lang.generic.MObjects;
@@ -107,7 +108,7 @@ public class FXmlNodes
    //============================================================
    public FXmlNode create(String name){
       FXmlNode node = new FXmlNode(name);
-      if(null != _parent && null != _parent._document){
+      if((_parent != null) && (_parent._document != null)){
          node = _parent._document.createNode(name);
       }else{
          node = new FXmlNode(name);
@@ -124,7 +125,7 @@ public class FXmlNodes
    //============================================================
    @Override
    public void push(FXmlNode node){
-      if(null != _parent){
+      if(_parent != null){
          node._document = _parent._document;
          node._parent = _parent;
       }
@@ -167,6 +168,22 @@ public class FXmlNodes
    }
 
    //============================================================
+   // <T>获得XML字符串。</T>
+   //
+   // @return XML字符串
+   //============================================================
+   public String xml(){
+      FString xml = new FString();
+      for(int n = 0; n < _count; n++){
+         FXmlNode node = _items[n];
+         if(node != null){
+            xml.append(node.xml());
+         }
+      }
+      return xml.toString();
+   }
+
+   //============================================================
    // <T>复制当前对象为一个新对象。</T>
    //
    // @return 新对象
@@ -175,10 +192,11 @@ public class FXmlNodes
    @SuppressWarnings("unchecked")
    public FXmlNodes copy(){
       FXmlNodes nodes = new FXmlNodes();
+      nodes._clazz = _clazz;
       nodes._parent = _parent;
       for(int n = 0; n < _count; n++){
          FXmlNode node = _items[n];
-         if(null != node){
+         if(node != null){
             nodes.push(node.copy());
          }
       }

@@ -92,7 +92,7 @@ public class FDatasetService
             // 统计节点包
             FXmlNodes outputNodes = output.config().nodes();
             for(FXmlConfigMeta meta : _datasetConsole.listMetas()){
-               if(RFile.removeExtension(meta.name()).equals(uuid)){
+               if(RFile.extensionPath(meta.name()).equals(uuid)){
                   String name = meta.name();
                   IXmlObject xcollection = _datasetConsole.find(name);
                   String type = xcollection.name();
@@ -128,7 +128,7 @@ public class FDatasetService
       for(IXmlObject xobject : _datasetConsole.list()){
          String type = xobject.name();
          String fullName = xobject.innerGet("name");
-         String path = RFile.removeExtension(fullName);
+         String path = RFile.extensionPath(fullName);
          // 过滤节点
          if(!RString.isEmpty(findType) && !type.equals(findType)){
             continue;
@@ -179,7 +179,7 @@ public class FDatasetService
          nodeAttrs.unpack(selectNode.get("attributes"));
          collection = nodeAttrs.get("dataset_name");
       }else if(TYPE_COMPONENT.equals(typeType)){
-         FXmlNode topNode = selectNode.findDeep("Node", "type_type", TYPE_COLLECTION);
+         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
          nodeAttrs.unpack(topNode.get("attributes"));
          collection = nodeAttrs.get("dataset_name");
       }

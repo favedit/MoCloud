@@ -189,7 +189,7 @@ public class MString
    // @param value 字符串
    //============================================================
    public void append(String value){
-      if(null != value){
+      if(value != null){
          int length = value.length();
          if(length > 0){
             ensureSize(_length + length);
@@ -218,7 +218,7 @@ public class MString
    // @param value 字符串对象
    //============================================================
    public void append(FString value){
-      if(null != value){
+      if(value != null){
          int length = value.length();
          if(length > 0){
             ensureSize(_length + length);
@@ -234,7 +234,7 @@ public class MString
    // @param value 对象
    //============================================================
    public void append(Object value){
-      if(null != value){
+      if(value != null){
          if(value instanceof String){
             append((String)value);
          }else{
@@ -266,6 +266,33 @@ public class MString
    }
 
    //============================================================
+   // <T>追加长整数。</T>
+   //
+   // @param value 长整数
+   //============================================================
+   public void appendLong(long value){
+      append(Long.toString(value));
+   }
+
+   //============================================================
+   // <T>追加单精度浮点数。</T>
+   //
+   // @param value 单精度浮点数
+   //============================================================
+   public void appendFloat(float value){
+      append(Float.toString(value));
+   }
+
+   //============================================================
+   // <T>追加双精度浮点数。</T>
+   //
+   // @param value 双精度浮点数
+   //============================================================
+   public void appendDouble(double value){
+      append(Double.toString(value));
+   }
+
+   //============================================================
    // <T>追加重复字符串。</T>
    //
    // @param value 字符串
@@ -273,7 +300,7 @@ public class MString
    //============================================================
    public void appendRepeat(String value,
                             int count){
-      if(null != value){
+      if(value != null){
          while(count-- > 0){
             append(value);
          }
@@ -293,7 +320,7 @@ public class MString
    // @param value 字符串
    //============================================================
    public void appendLine(String value){
-      if(null != value){
+      if(value != null){
          append(value);
       }
       append('\n');
@@ -305,7 +332,7 @@ public class MString
    // @param values 字符串集合
    //============================================================
    public void appendLine(String... values){
-      if(null != values){
+      if(values != null){
          int count = values.length;
          for(int n = 0; n < count; n++){
             append(values[n]);
@@ -320,7 +347,7 @@ public class MString
    // @param value 对象
    //============================================================
    public void appendLine(Object value){
-      if(null != value){
+      if(value != null){
          append(value);
       }
       append('\n');
@@ -332,7 +359,7 @@ public class MString
    // @param values 对象集合
    //============================================================
    public void appendLine(Object... values){
-      if(null != values){
+      if(values != null){
          int count = values.length;
          for(int n = 0; n < count; n++){
             append(values[n]);

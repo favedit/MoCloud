@@ -1,13 +1,13 @@
 package org.mo.com.message;
 
-import org.mo.com.lang.FObjects;
 import org.mo.com.lang.FValidError;
+import org.mo.com.lang.generic.MObjects;
 
 //============================================================
 // <T>消息集合。</T>
 //============================================================
 public class FMessages
-      extends FObjects<IMessage>
+      extends MObjects<IMessage>
 {
    //============================================================
    // <T>构造消息集合。</T>
@@ -34,7 +34,8 @@ public class FMessages
    public boolean hasMessage(Class<?> clazz){
       int n = -1;
       while(++n < _count){
-         if(_items[n].getClass().isAssignableFrom(clazz)){
+         IMessage message = _items[n];
+         if(clazz.isInstance(message)){
             return true;
          }
       }
@@ -57,10 +58,10 @@ public class FMessages
    // @return 个数
    //============================================================
    public int count(Class<?> clazz){
-      int n = -1;
       int count = 0;
-      while(++n < _count){
-         if(_items[n].getClass().isAssignableFrom(clazz)){
+      for(int n = 0; n < _count; n++){
+         IMessage message = _items[n];
+         if(clazz.isInstance(message)){
             count++;
          }
       }
@@ -77,6 +78,9 @@ public class FMessages
          return EMessageLevel.Fatal;
       }
       if(hasMessage(FErrorMessage.class)){
+         return EMessageLevel.Error;
+      }
+      if(hasMessage(FValidMessage.class)){
          return EMessageLevel.Error;
       }
       if(hasMessage(FWarnMessage.class)){
@@ -99,10 +103,10 @@ public class FMessages
    //============================================================
    @SuppressWarnings("unchecked")
    public <V extends IMessage> V message(Class<V> clazz){
-      int n = -1;
-      while(++n < _count){
-         if(_items[n].getClass().isAssignableFrom(clazz)){
-            return (V)_items[n];
+      for(int n = 0; n < _count; n++){
+         IMessage message = _items[n];
+         if(clazz.isInstance(message)){
+            return (V)message;
          }
       }
       return null;
@@ -115,11 +119,11 @@ public class FMessages
    // @return 消息集合
    //============================================================
    public FMessages messages(Class<?> clazz){
-      int n = -1;
       FMessages messages = new FMessages();
-      while(++n < _count){
-         if(_items[n].getClass().isAssignableFrom(clazz)){
-            messages.push(_items[n]);
+      for(int n = 0; n < _count; n++){
+         IMessage message = _items[n];
+         if(clazz.isInstance(message)){
+            messages.push(message);
          }
       }
       return messages;

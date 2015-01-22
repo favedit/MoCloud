@@ -33,8 +33,7 @@ public class FCharacterEncodingFilter
 
    public void doFilter(ServletRequest request,
                         ServletResponse response,
-                        FilterChain chain) throws IOException,
-                                          ServletException{
+                        FilterChain chain) throws IOException, ServletException{
       //      if(request instanceof HttpServletRequest){
       //         HttpServletRequest httpRequest = (HttpServletRequest) request;
       //         httpRequest.setCharacterEncoding(_encode);

@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 //============================================================
 // <T>代理描述器。</T>
 //============================================================
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface AProxy{

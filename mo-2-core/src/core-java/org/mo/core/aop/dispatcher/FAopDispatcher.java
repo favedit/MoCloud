@@ -1,6 +1,7 @@
 package org.mo.core.aop.dispatcher;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.mo.core.aop.face.ADispatcher;
 
@@ -41,23 +42,38 @@ public class FAopDispatcher
                         Method method,
                         Object[] args) throws Throwable{
       Object result = null;
+      boolean monitorInvoke = _dispatcherConsole.monitorInvoke();
       try{
          // 获得分发器
          ADispatcher adispatcher = method.getAnnotation(ADispatcher.class);
          // 开始处理
-         if(null != adispatcher){
+         if(adispatcher != null){
             _dispatcherConsole.invokeBefore(_delegate, proxy, method, args);
          }
          // 执行处理
-         result = method.invoke(_delegate, args);
+         if(monitorInvoke){
+            long time = System.nanoTime();
+            result = method.invoke(_delegate, args);
+            long span = System.nanoTime() - time;
+            _dispatcherConsole.invokeMonitor(_delegate, method, span);
+         }else{
+            result = method.invoke(_delegate, args);
+         }
          // 结束处理
-         if(null != adispatcher){
+         if(adispatcher != null){
             _dispatcherConsole.invokeAfter(_delegate, proxy, method, result, args);
          }
       }catch(Exception e){
+         // 获得原始异常
+         Throwable throwable = null;
+         if(e instanceof InvocationTargetException){
+            throwable = ((InvocationTargetException)e).getTargetException();
+         }else{
+            throwable = e;
+         }
          // 例外处理
-         if(!_dispatcherConsole.invokeException(_delegate, proxy, method, args, e)){
-            throw e;
+         if(!_dispatcherConsole.invokeException(_delegate, proxy, method, args, throwable)){
+            throw throwable;
          }
       }
       return result;

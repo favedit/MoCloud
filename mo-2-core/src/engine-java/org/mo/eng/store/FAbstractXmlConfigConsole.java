@@ -355,7 +355,7 @@ public abstract class FAbstractXmlConfigConsole
       FStrings files = RFile.listAllFile(_workpath);
       for(String filename : files){
          if(RFile.isExtension(filename, _extension)){
-            String name = RFile.removeExtension(filename.substring(startLength + 1));
+            String name = RFile.extensionPath(filename.substring(startLength + 1));
             name = RString.replaceChars(name, '/', '.', '\\', '.');
             // 加载设置信息
             FXmlConfig config = new FXmlConfig(this);

@@ -15,6 +15,9 @@ public abstract class FAbstractMessage
       implements
          IMessage
 {
+   // 类型
+   protected String _type;
+
    // 代码
    protected String _code;
 
@@ -26,9 +29,6 @@ public abstract class FAbstractMessage
 
    // 参数集合
    protected Object[] _params;
-
-   // 类型
-   protected String _type;
 
    //============================================================
    // <T>构造消息基础类。</T>
@@ -123,6 +123,7 @@ public abstract class FAbstractMessage
    //
    // @return 代码
    //============================================================
+   @Override
    public String code(){
       return _code;
    }
@@ -175,9 +176,9 @@ public abstract class FAbstractMessage
    }
 
    //============================================================
-   // <T>获得参数。</T>
+   // <T>获得参数集合。</T>
    //
-   // @return 参数
+   // @return 参数集合
    //============================================================
    @Override
    public Object[] params(){
@@ -185,38 +186,37 @@ public abstract class FAbstractMessage
    }
 
    //============================================================
+   // <T>设置参数集合。</T>
+   //
+   // @param params 参数集合
+   //============================================================
+   public void setParams(Object[] params){
+      _params = params;
+   }
+
+   //============================================================
    // <T>加载配置信息。</T>
    //
-   // @param config 配置信息
+   // @param xconfig 配置信息
    //============================================================
    @Override
-   public void loadConfig(FXmlNode config){
-      _message = config.get("message");
-      _description = config.get("description");
+   public void loadConfig(FXmlNode xconfig){
+      _code = xconfig.get("code");
+      _message = xconfig.get("message");
+      _description = xconfig.get("description");
    }
 
    //============================================================
    // <T>保存配置信息。</T>
    //
-   // @param config 配置信息
+   // @param xconfig 配置信息
    //============================================================
    @Override
-   public void saveConfig(FXmlNode config){
-      config.setName(name());
-      config.set("message", message());
-      config.set("description", description());
-   }
-
-   //============================================================
-   // <T>将当前内容转换为一个配置节点。</T>
-   //
-   // @return 配置节点
-   //============================================================
-   @Override
-   public FXmlNode convertToNode(){
-      FXmlNode config = new FXmlNode();
-      saveConfig(config);
-      return config;
+   public void saveConfig(FXmlNode xconfig){
+      xconfig.set("type", name());
+      xconfig.set("code", _code);
+      xconfig.set("message", message());
+      xconfig.set("description", description());
    }
 
    //============================================================
@@ -237,14 +237,10 @@ public abstract class FAbstractMessage
    public TDumpInfo dump(TDumpInfo info){
       RDump.dump(info, this);
       info.append("[");
-      info.append("Message:");
-      info.append(_message);
-      info.append(" Description:");
-      info.append(_description);
-      info.append(" Params:");
-      info.append(_params);
-      info.append(" Type:");
-      info.append(_type);
+      info.append("Message:", _message);
+      info.append(" Description:", _description);
+      info.append(" Params:", _params);
+      info.append(" Type:", _type);
       info.append("]");
       return info;
    }

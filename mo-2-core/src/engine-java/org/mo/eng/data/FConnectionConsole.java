@@ -12,6 +12,8 @@ import org.mo.com.data.MSqlConnection;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FList;
+import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.mo.com.lang.reflect.RClass;
@@ -39,6 +41,9 @@ public class FConnectionConsole
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FConnectionConsole.class);
+
+   // 激活字符串
+   public static String IDF_ACTIVE = "IDENTIFY:ACTIVE";
 
    // 链接鉴定字符串
    public static String IDF_CONNECTION = "IDENTIFY:CONNECTION";
@@ -70,6 +75,10 @@ public class FConnectionConsole
    @AProperty
    protected String _password;
 
+   // 是否支持事务
+   @AProperty
+   protected boolean _optionTransactions;
+
    // 链接初始化个数
    @AProperty
    protected int _initConnectionNumber;
@@ -90,13 +99,6 @@ public class FConnectionConsole
    @AProperty
    protected String _user;
 
-   // 数据库监视器
-   protected FConnectionMonitor _monitor;
-
-   // 监视器控制台
-   @ALink
-   protected IMonitorConsole _monitorConsole;
-
    // 测试命令
    @AProperty
    protected String _testSqlCmd;
@@ -107,8 +109,16 @@ public class FConnectionConsole
 
    // 关闭链接时等待时间
    @AProperty
-   protected int closeTimeLimit;
+   protected int _closeTimeLimit;
 
+   // 数据库监视器
+   protected FConnectionMonitor _monitor;
+
+   // 监视器控制台
+   @ALink
+   protected IMonitorConsole _monitorConsole;
+
+   // 关闭链接时等待时间
    // 创建次数
    protected int _createCount;
 
@@ -121,11 +131,17 @@ public class FConnectionConsole
    // 释放次数
    protected int _releaseCount;
 
-   // 数据库链接列表
-   protected FSlots<FConnectionWorker> _pools = new FSlots<FConnectionWorker>(FConnectionWorker.class);
-
    // 数据库驱动集合
    protected static FDictionary<Driver> _drivers = new FDictionary<Driver>(Driver.class);
+
+   // 数据库使用链接集合
+   protected FList<FConnectionWorker> _busyWorkers = new FList<FConnectionWorker>();
+
+   // 数据库未使用链接集合
+   protected FList<FConnectionWorker> _freeWorkers = new FList<FConnectionWorker>();
+
+   // 数据库链接列表
+   protected FSlots<FConnectionWorker> _pools = new FSlots<FConnectionWorker>(FConnectionWorker.class);
 
    //============================================================
    // <T>构造数据库链接控制台。</T>
@@ -306,7 +322,7 @@ public class FConnectionConsole
          workers = _pools.toObjects();
       }
       FAttributesList list = new FAttributesList();
-      if(null != workers){
+      if(workers != null){
          for(FConnectionWorker worker : workers){
             list.push(worker.config());
          }
@@ -340,7 +356,7 @@ public class FConnectionConsole
          String url = connection.makeUrl(_url);
          // 获得数据库链接
          _logger.debug(this, "createWorker", "Create sql connection begin. (url={1}, passport={2})", _url, _passport);
-         while((null == sqlConnection) || isClosed){
+         while((sqlConnection == null) || isClosed){
             if(count > cycleLimit){
                sqlConnection = null;
                break;
@@ -363,19 +379,19 @@ public class FConnectionConsole
          if(sqlConnection == null){
             throw new FFatalError("Create sql connection error. (url={1}, passport={2})", _url, _passport);
          }
+         connection.setSqlConnection(sqlConnection);
          // 获得数据库链接
          FConnectionWorker worker = new FConnectionWorker();
          worker.connection = connection;
-         worker.connection.setSqlConnection(sqlConnection);
-         worker.testSqlCmd = _testSqlCmd;
          worker.user = _user;
+         worker.testSqlCmd = _testSqlCmd;
          if(_logger.debugAble()){
             long end = System.currentTimeMillis();
             _logger.debug(this, "createWorker", end - start, "Create sql connection success. (url={1}, connection={2}, native={3})", _url, worker.connection, sqlConnection);
          }
          _createCount++;
          // 设置关联信息
-         FObjectDictionary attributes = worker.connection.attributes();
+         FObjectDictionary attributes = connection.attributes();
          attributes.set(IDF_CONNECTION, this);
          attributes.set(IDF_WORKER, worker);
          return worker;
@@ -389,31 +405,57 @@ public class FConnectionConsole
    //
    // @return 工作器
    //============================================================ 
-   protected FConnectionWorker allocateWorker(){
-      synchronized(_pools){
-         // 查找工作器
-         int count = _pools.count();
-         for(int n = 0; n < count; n++){
-            FConnectionWorker worker = _pools.get(n);
-            if((null != worker) && !worker.inUsing){
-               worker.active();
-               return worker;
-            }
-         }
-         // 如果大于上限，则返回空链接
-         if(count >= _maxConnectionNumber){
-            throw new FFatalError("Alloc connection failure. (count={1}, max_count={2})", count, _maxConnectionNumber);
+   protected synchronized FConnectionWorker allocateWorker(){
+      FConnectionWorker allocWorker = null;
+      // 收集一个链接
+      if(_freeWorkers.isEmpty()){
+         allocWorker = createWorker();
+      }else{
+         allocWorker = _freeWorkers.pop();
+      }
+      // 激活工作器
+      if(allocWorker != null){
+         allocWorker.active();
+         _busyWorkers.push(allocWorker);
+      }
+      return allocWorker;
+   }
+
+   //============================================================
+   // <T>释放一个工作器。</T>
+   //
+   // @param worker 工作器
+   //============================================================ 
+   protected synchronized void freeWorker(FConnectionWorker worker){
+      if(worker != null){
+         // 释放繁忙的链接
+         _busyWorkers.removeFirst(worker);
+         // 释放链接自由化
+         worker.free();
+         _freeWorkers.push(worker);
+         _freeCount++;
+      }
+   }
+
+   //============================================================
+   // <T>释放一个数据库链接工作器。</T>
+   //
+   // @param worker 工作器
+   //============================================================ 
+   public synchronized void releaseWorker(FConnectionWorker worker){
+      if(worker != null){
+         // 释放繁忙的链接
+         _busyWorkers.removeFirst(worker);
+         // 释放自由的链接
+         _freeWorkers.removeFirst(worker);
+         // 释放链接
+         try{
+            _releaseCount++;
+            worker.release();
+         }catch(Throwable t){
+            _logger.fatal(this, "releaseWorker", t);
          }
       }
-      // 如果没有找到自由的链接，则调整缓冲池大小
-      FConnectionWorker alloc = createWorker();
-      if(null != alloc){
-         alloc.active();
-         synchronized(_pools){
-            _pools.pushSlot(alloc);
-         }
-      }
-      return alloc;
    }
 
    //============================================================
@@ -428,6 +470,7 @@ public class FConnectionConsole
    @Override
    public ISqlConnection alloc(){
       long start = System.currentTimeMillis();
+      // 创建链接
       FConnectionWorker worker = allocateWorker();
       if(!worker.isConnect()){
          throw new FFatalError("Can't allocate connection");
@@ -437,7 +480,10 @@ public class FConnectionConsole
          _logger.debug(this, "alloc", spend, "Allocate sql connection. (active={1}, create={2}, alloc={3}, free={4}, release={5}, connection={6})", _createCount - _releaseCount, _createCount, _allocCount, _freeCount, _releaseCount, worker.connection);
       }
       _allocCount++;
-      return worker.connection;
+      // 激活链接
+      MSqlConnection connection = worker.connection;
+      connection.attributes().set(IDF_ACTIVE, RBoolean.TRUE_STR);
+      return connection;
    }
 
    //============================================================
@@ -447,35 +493,22 @@ public class FConnectionConsole
    //============================================================ 
    @Override
    public void free(ISqlConnection connection){
+      // 检查标志
+      String activeFlag = (String)connection.attributes().find(IDF_ACTIVE);
+      if(!RBoolean.TRUE_STR.equals(activeFlag)){
+         return;
+      }
+      // 提交之前数据
       long start = System.currentTimeMillis();
-      FConnectionWorker worker = (FConnectionWorker)connection.attributes().get(IDF_WORKER);
       connection.commit();
-      worker.free();
+      // 释放工作器
+      FConnectionWorker worker = (FConnectionWorker)connection.attributes().get(IDF_WORKER);
+      freeWorker(worker);
       _freeCount++;
+      connection.attributes().set(IDF_ACTIVE, RBoolean.FALSE_STR);
       if(_logger.debugAble()){
          long end = System.currentTimeMillis();
          _logger.debug(this, "free", end - start, "Free sql connection. (connection={1})", connection);
-      }
-   }
-
-   //============================================================
-   // <T>释放一个数据库链接工作器。</T>
-   //
-   // @param index 索引位置
-   //============================================================ 
-   public synchronized void releaseWorker(int index){
-      FConnectionWorker worker = null;
-      synchronized(_pools){
-         worker = _pools.get(index);
-         _pools.set(index, null);
-      }
-      if(null != worker){
-         try{
-            _releaseCount++;
-            worker.release();
-         }catch(Throwable t){
-            _logger.fatal(this, "releaseWorker", t);
-         }
       }
    }
 
@@ -486,8 +519,8 @@ public class FConnectionConsole
    //============================================================ 
    @Override
    public void release(ISqlConnection connection){
-      int index = _pools.indexOf((FConnectionWorker)connection.attributes().get(IDF_WORKER));
-      releaseWorker(index);
+      FConnectionWorker worker = (FConnectionWorker)connection.attributes().get(IDF_WORKER);
+      releaseWorker(worker);
    }
 
    //============================================================
@@ -504,10 +537,8 @@ public class FConnectionConsole
    //============================================================
    public void initializeConnections(){
       // 增加缓冲池的大小
-      synchronized(_pools){
-         for(int n = 0; n < _initConnectionNumber; n++){
-            _pools.push(createWorker());
-         }
+      for(int n = 0; n < _initConnectionNumber; n++){
+         _freeWorkers.push(createWorker());
       }
    }
 
@@ -515,33 +546,29 @@ public class FConnectionConsole
    // <T>刷新所有数据库链接。</T>
    //============================================================ 
    @Override
-   public void refresh(){
-      long now = System.currentTimeMillis();
-      FConnectionWorker[] workers = null;
-      synchronized(_pools){
-         workers = _pools.toObjects();
-      }
-      if(null != workers){
-         int count = workers.length;
+   public synchronized void refresh(){
+      long currentTime = System.currentTimeMillis();
+      // 获得个数
+      int count = _freeWorkers.count();
+      if(count > 0){
+         // 复制所有工作器
+         FConnectionWorker[] workers = new FConnectionWorker[count];
+         _freeWorkers.copy(workers, 0, count);
+         // 刷新处理
          for(int n = 0; n < count; n++){
             FConnectionWorker worker = workers[n];
-            if(null != worker){
-               if(worker.inUsing){
-                  // 释放超时链接
-                  if(now - worker.activeTime > _activeTimeLimit){
-                     releaseWorker(n);
-                  }
-               }else{
-                  // 测试链接失败时释放当前链接
-                  if((now - worker.activeTime) > _testTime){
-                     if(!worker.connectTest()){
-                        releaseWorker(n);
-                     }
-                  }
+            // 测试链接失败时释放当前链接
+            if((currentTime - worker.testTime) > _testTime){
+               if(!worker.connectTest()){
+                  releaseWorker(worker);
                }
             }
          }
       }
+      //      // 释放超时链接
+      //      if(currentTime - worker.activeTime > _activeTimeLimit){
+      //         releaseWorker(worker);
+      //      }
    }
 
    //============================================================
@@ -553,7 +580,7 @@ public class FConnectionConsole
          _logger.debug(this, "release", "Begin release sql connection");
       }
       int releaseCount = 0;
-      int timeout = closeTimeLimit;
+      int timeout = _closeTimeLimit;
       boolean forced = false;
       while(true){
          int used = 0;

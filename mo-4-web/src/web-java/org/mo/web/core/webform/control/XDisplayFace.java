@@ -6,7 +6,8 @@ import org.mo.com.xml.IXmlObject;
 // <T>控制显示接口对象的XML节点基类。</T>
 //============================================================
 public interface XDisplayFace
-      extends IXmlObject
+      extends
+         IXmlObject
 {
    // 名称定义
    String NAME = "MDisplay";
@@ -73,7 +74,6 @@ public interface XDisplayFace
    //============================================================
    void setDispMode(String value);
 
-
    //============================================================
    // <T>获得显示设置的内容。</T>
    //
@@ -87,7 +87,6 @@ public interface XDisplayFace
    // @param value 显示设置
    //============================================================
    void setDispConfig(String value);
-
 
    //============================================================
    // <T>获得查询的内容。</T>

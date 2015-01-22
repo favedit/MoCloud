@@ -6,10 +6,9 @@
  */
 package org.mo.jfa.face.design.translate;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.logic.data.ISyPropertyDi;
 import org.mo.logic.data.ISyTranslateDi;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 /**

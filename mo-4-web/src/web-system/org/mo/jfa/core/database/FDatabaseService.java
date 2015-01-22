@@ -16,6 +16,7 @@ public class FDatabaseService
    @ALink
    private IDatabaseConsole _console;
 
+   @Override
    public void list(IWebContext webContext,
                     ISqlContext sqlContext,
                     IWebInput input,
@@ -24,6 +25,7 @@ public class FDatabaseService
       output.config().nodes().append(nodes);
    }
 
+   @Override
    public void listTables(IWebContext webContext,
                           ISqlContext sqlContext,
                           IWebInput input,
@@ -32,6 +34,7 @@ public class FDatabaseService
       output.config().nodes().append(nodes.toObjects());
    }
 
+   @Override
    public void listViews(IWebContext webContext,
                          ISqlContext sqlContext,
                          IWebInput input,
@@ -40,6 +43,7 @@ public class FDatabaseService
       output.config().nodes().append(nodes.toObjects());
    }
 
+   @Override
    public void listFields(IWebContext webContext,
                           ISqlContext sqlContext,
                           IWebInput input,
@@ -47,7 +51,6 @@ public class FDatabaseService
       String attrsStr = input.config().nodeText("Attributes");
       FAttributes attrs = new FAttributes();
       attrs.unpack(attrsStr);
-      System.out.println(attrs.dump());
       FXmlNodes nodes = _console.listFields(sqlContext, attrs.get("name"));
       output.config().nodes().append(nodes);
    }

@@ -14,7 +14,7 @@ import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.logic.batch.process.FBatchSqlCommand;
 import org.mo.mime.zip.FZipEntry;
-import org.mo.mime.zip.IZipOutput;
+import org.mo.mime.zip.FZipOutput;
 import org.mo.mime.zip.RZip;
 
 public class FVersionExport
@@ -99,7 +99,7 @@ public class FVersionExport
     * 
     */
    @SuppressWarnings("resource")
-   public void exportFile(IZipOutput zipOutput,
+   public void exportFile(FZipOutput zipOutput,
                           IAttributes excludes,
                           String rootPath,
                           File root){
@@ -130,7 +130,7 @@ public class FVersionExport
             FByteFile bytes = new FByteFile(file.getAbsolutePath());
             // 导出文件
             _logger.debug(this, "exportFile", "Export file: {0}", path);
-            FZipEntry entry = zipOutput.openEntry(path.substring(rootPath.length()).substring(1));
+            FZipEntry entry = zipOutput.open(path.substring(rootPath.length()).substring(1));
             entry.setSize(bytes.length());
             entry.setTime(_processTime);
             entry.setComment(Integer.toString(bytes.length()));
@@ -154,7 +154,7 @@ public class FVersionExport
          // 获得zip包对象
          String subDate = RString.mid(_output, "{", "}");
          String outputFile = RString.replace(_output, "{" + subDate + "}", RDateTime.format(subDate));
-         IZipOutput zipOutput = null;
+         FZipOutput zipOutput = null;
          try{
             RFile.makeFileDirectory(outputFile);
             zipOutput = RZip.writeFile(outputFile);
@@ -184,7 +184,7 @@ public class FVersionExport
     * 
     */
    protected void exportVersion(FXmlNode config,
-                                IZipOutput zipOutput){
+                                FZipOutput zipOutput){
       // 获得要打包的路径文件
       String exportFile = RFile.makeFilename(config.get(FILE_PATH));
       if(RString.isNotEmpty(exportFile)){

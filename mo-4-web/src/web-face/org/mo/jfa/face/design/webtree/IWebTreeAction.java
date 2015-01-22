@@ -1,9 +1,8 @@
 package org.mo.jfa.face.design.webtree;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.logic.data.ISyCatalogDi;
 import org.mo.logic.data.ISyCatalogNodeDi;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 public interface IWebTreeAction

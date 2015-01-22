@@ -311,7 +311,7 @@ public class FAbsXmlObjectService<X extends IXmlObject>
          collection = selectNode.get("label");
          collection = makeCollectionName(collection);
       }else if(TYPE_COMPONENT.equals(typeType)){
-         FXmlNode topNode = selectNode.findDeep("Node", "type_type", TYPE_COLLECTION);
+         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
          nodeAttrs.unpack(topNode.get("attributes"));
          if(nodeAttrs.contains("linker_name")){
             collection = nodeAttrs.get("linker_name");
@@ -346,11 +346,11 @@ public class FAbsXmlObjectService<X extends IXmlObject>
          String port = null;
          if(xcomponent.innerGet("port") != null){
             port = xcomponent.innerGet("port");
-            xnode.setLabel(RString.nvl(xcomponent.innerGet(PTY_NAME), xcomponent.name())+"."+port);
+            xnode.setLabel(RString.nvl(xcomponent.innerGet(PTY_NAME), xcomponent.name()) + "." + port);
          }else{
             xnode.setLabel(RString.nvl(xcomponent.innerGet(PTY_NAME), xcomponent.name()));
          }
-         
+
          xnode.setNote(xcomponent.innerGet(PTY_LABEL));
          xnode.setChild(xcomponent.hasChild());
          onBuildTreeNode(xnode, xcomponent);

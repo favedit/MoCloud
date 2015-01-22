@@ -45,7 +45,49 @@ public enum ELoggerLevel{
    //
    // @retrun 字符串
    //============================================================
+   @Override
    public String toString(){
       return super.toString() + "(" + _value + ")";
+   }
+
+   //============================================================
+   // <T>是否可以输出的。</T>
+   //
+   // @retrun 可以输出
+   //============================================================
+   public static boolean isOutputAble(ELoggerLevel levelCd){
+      switch(levelCd){
+         case INFO:
+         case WARN:
+         case ERROR:
+         case FATAL:
+            return true;
+         default:
+            break;
+      }
+      return false;
+   }
+
+   //============================================================
+   // <T>获得字符内容。</T>
+   //
+   // @retrun 字符
+   //============================================================
+   public static char toChar(ELoggerLevel levelCd){
+      switch(levelCd){
+         case DEBUG:
+            return 'D';
+         case INFO:
+            return 'I';
+         case WARN:
+            return 'W';
+         case ERROR:
+            return 'E';
+         case FATAL:
+            return 'F';
+         default:
+            break;
+      }
+      return 'P';
    }
 }

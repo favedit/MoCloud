@@ -5,8 +5,7 @@ import org.mo.com.lang.REnum;
 //============================================================
 // <T>组件有效范围。</T>
 //============================================================
-public enum EComponentScope
-{
+public enum EComponentScope{
    // 全局有效
    Global,
 

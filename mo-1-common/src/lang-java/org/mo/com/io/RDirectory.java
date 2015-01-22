@@ -2,6 +2,7 @@ package org.mo.com.io;
 
 import java.io.File;
 import org.mo.com.lang.FStrings;
+import org.mo.com.lang.RString;
 
 //============================================================
 // <T>目录工具类。</T>
@@ -99,30 +100,31 @@ public class RDirectory
       return infos;
    }
 
-   /**
-    * <p>列出指定目录下的所有目录名称列表</p>
-    * 
-    * @param directory 指定目录
-    * @return 目录名称列表
-    */
+   //============================================================
+   // <T>列出指定目录下的所有目录名称列表。</T>
+   //
+   // @param directory 目录名称
+   // @return 目录名称列表
+   //============================================================
    public static FStrings listDirectory(String directory){
       return listDirectory(directory, false);
    }
 
-   /**
-    * <p>列出指定目录下的所有目录名称列表</p>
-    * 
-    * @param directory 指定目录
-    * @return 目录名称列表
-    */
+   //============================================================
+   // <T>列出指定目录下的所有目录名称列表。</T>
+   //
+   // @param directory 目录名称
+   // @param full 全名称
+   // @return 目录名称列表
+   //============================================================
    public static FStrings listDirectory(String directory,
-                                        boolean fullName){
+                                        boolean full){
       FStrings list = new FStrings();
       File dir = new File(directory);
       if(dir.isDirectory()){
          for(File file : dir.listFiles()){
             if(file.isDirectory()){
-               if(fullName){
+               if(full){
                   list.push(file.getAbsolutePath());
                }else{
                   list.push(file.getName());
@@ -131,5 +133,27 @@ public class RDirectory
          }
       }
       return list;
+   }
+
+   //============================================================
+   // <T>创建指定的名称的全路径。</T>
+   //
+   // @param pathName 路径名称
+   //============================================================
+   public static void makeDirectory(String pathName){
+      String name = RFile.format(pathName);
+      if(!RString.isEmpty(name)){
+         String path = name;
+         // 生成路径
+         int index = name.lastIndexOf(File.separatorChar);
+         if(index != -1){
+            path = name.substring(0, index);
+         }
+         // 建立目录
+         File dir = new File(path);
+         if(!dir.isDirectory()){
+            dir.mkdirs();
+         }
+      }
    }
 }

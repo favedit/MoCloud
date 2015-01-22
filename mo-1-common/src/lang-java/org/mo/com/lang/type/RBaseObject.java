@@ -20,7 +20,8 @@ public class RBaseObject
    // @param target 目标对象数组
    // @return 是否相等
    //============================================================
-   public final static boolean equals(Object[] source, Object[] target){
+   public final static boolean equals(Object[] source,
+                                      Object[] target){
       // 内容都为空
       if((source == null) && (target == null)){
          return true;
@@ -41,7 +42,7 @@ public class RBaseObject
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源对象数组和目标对象数组是否相等。</T>
    //
@@ -51,7 +52,10 @@ public class RBaseObject
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(Object[] source, int sourceLength, Object[] target, int targetLength){
+   public final static boolean equals(Object[] source,
+                                      int sourceLength,
+                                      Object[] target,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -70,7 +74,7 @@ public class RBaseObject
       }
       return false;
    }
-   
+
    //============================================================
    // <T>判断来源对象数组和目标对象数组是否相等。</T>
    //
@@ -82,7 +86,12 @@ public class RBaseObject
    // @param targetLength 来源长度
    // @return 是否相等
    //============================================================
-   public final static boolean equals(Object[] source, int sourceOffset, int sourceLength, Object[] target, int targetOffset, int targetLength){
+   public final static boolean equals(Object[] source,
+                                      int sourceOffset,
+                                      int sourceLength,
+                                      Object[] target,
+                                      int targetOffset,
+                                      int targetLength){
       // 内容都为空
       if((source == null) && (sourceLength == 0) && (target == null) && (targetLength == 0)){
          return true;
@@ -101,7 +110,7 @@ public class RBaseObject
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在对象数组中是否含有指定对象内容。</T>
    //
@@ -109,7 +118,8 @@ public class RBaseObject
    // @param find 对象内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(Object[] values, Object find){
+   public final static boolean contains(Object[] values,
+                                        Object find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -120,7 +130,7 @@ public class RBaseObject
       }
       return false;
    }
-   
+
    //============================================================
    // <T>在对象数组中是否含有指定对象内容。</T>
    //
@@ -130,7 +140,10 @@ public class RBaseObject
    // @param find 对象内容
    // @return 是否含有
    //============================================================
-   public final static boolean contains(Object[] values, int offset, int length, Object find){
+   public final static boolean contains(Object[] values,
+                                        int offset,
+                                        int length,
+                                        Object find){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
@@ -149,7 +162,8 @@ public class RBaseObject
    // @param find 对象内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(Object[] values, Object find){
+   public final static int indexOf(Object[] values,
+                                   Object find){
       if(null != values){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
@@ -170,7 +184,10 @@ public class RBaseObject
    // @param find 对象内容
    // @return 索引位置
    //============================================================
-   public final static int indexOf(Object[] values, int offset, int length, Object find){
+   public final static int indexOf(Object[] values,
+                                   int offset,
+                                   int length,
+                                   Object find){
       if(null != values){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
@@ -189,7 +206,8 @@ public class RBaseObject
    // @param target 目标对象数组
    // @return 索引位置
    //============================================================
-   public final static int search(Object[] source, Object[] target){
+   public final static int search(Object[] source,
+                                  Object[] target){
       return search(source, 0, source.length, target, 0, target.length);
    }
 
@@ -202,7 +220,10 @@ public class RBaseObject
    // @param target 目标对象数组
    // @return 索引位置
    //============================================================
-   public final static int search(Object[] source, int offset, int length, Object[] target){
+   public final static int search(Object[] source,
+                                  int offset,
+                                  int length,
+                                  Object[] target){
       return search(source, offset, length, target, 0, target.length);
    }
 
@@ -217,7 +238,12 @@ public class RBaseObject
    // @param targetLength 目标长度
    // @return 索引位置
    //============================================================
-   public final static int search(Object[] source, int sourceOffset, int sourceLength, Object[] target, int targetOffset, int targetLength){
+   public final static int search(Object[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  Object[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (null != target)){
          Object first = target[targetOffset];
          int m = sourceOffset - 1;
@@ -252,7 +278,14 @@ public class RBaseObject
    // @param after 结尾对象
    // @return 索引位置
    //============================================================
-   public final static int search(Object[] source, int offset, int length, Object before, Object[] target, int targetOffset, int targetLength, Object after){
+   public final static int search(Object[] source,
+                                  int offset,
+                                  int length,
+                                  Object before,
+                                  Object[] target,
+                                  int targetOffset,
+                                  int targetLength,
+                                  Object after){
       int i;
       int el;
       int n = offset - 1;
@@ -282,7 +315,8 @@ public class RBaseObject
    // @param source 对象数组
    // @param value 对象内容
    //============================================================
-   public final static void fill(Object[] source, Object value){
+   public final static void fill(Object[] source,
+                                 Object value){
       fill(source, 0, source.length, value);
    }
 
@@ -294,7 +328,10 @@ public class RBaseObject
    // @param count 数组长度
    // @param value 对象内容
    //============================================================
-   public final static void fill(Object[] source, int offset, int length, Object value){
+   public final static void fill(Object[] source,
+                                 int offset,
+                                 int length,
+                                 Object value){
       int n = offset - 1;
       int end = offset + length;
       while(++n < end){
@@ -309,7 +346,9 @@ public class RBaseObject
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(Object[] source, Object from, Object to){
+   public final static void replace(Object[] source,
+                                    Object from,
+                                    Object to){
       replace(source, 0, source.length, from, to);
    }
 
@@ -322,7 +361,11 @@ public class RBaseObject
    // @param from 要替换字符数组
    // @param to 被替换字符数组
    //============================================================
-   public final static void replace(Object[] source, int offset, int length, Object from, Object to){
+   public final static void replace(Object[] source,
+                                    int offset,
+                                    int length,
+                                    Object from,
+                                    Object to){
       int n = offset - 1;
       while(++n < length){
          if(source[n] == from){
@@ -341,7 +384,11 @@ public class RBaseObject
    // @param to 被替换字符数组
    // @return 替换后的字符数组
    //============================================================
-   public final static Object[] replace(Object[] source, int offset, int length, Object[] from, Object[] to){
+   public final static Object[] replace(Object[] source,
+                                        int offset,
+                                        int length,
+                                        Object[] from,
+                                        Object[] to){
       return replace(source, offset, length, from, 0, from.length, to, 0, to.length);
    }
 
@@ -359,7 +406,15 @@ public class RBaseObject
    // @param toLength 被替换字符数组数据长度
    // @return 替换后的字符数组
    //============================================================
-   public final static Object[] replace(Object[] source, int offset, int length, Object[] from, int fromOffset, int fromLength, Object[] to, int toOffset, int toLength){
+   public final static Object[] replace(Object[] source,
+                                        int offset,
+                                        int length,
+                                        Object[] from,
+                                        int fromOffset,
+                                        int fromLength,
+                                        Object[] to,
+                                        int toOffset,
+                                        int toLength){
       boolean same = true;
       Object[] tempChars = null;
       int p = 0;
@@ -442,7 +497,9 @@ public class RBaseObject
    // @param length 数组长度
    // @return 中间数组
    //============================================================
-   public final static Object[] sub(Object[] source, int offset, int length){
+   public final static Object[] sub(Object[] source,
+                                    int offset,
+                                    int length){
       Object[] result = null;
       if(length > 0){
          result = new Object[Math.abs(length)];
@@ -459,16 +516,18 @@ public class RBaseObject
    // @param end 结束位置
    // @return 中间数组
    //============================================================
-   public static Object[] mid(Object[] source, int start, int end){
+   public static Object[] mid(Object[] source,
+                              int start,
+                              int end){
       int length = Math.abs(end - start);
       if(length > 0){
          Object[] result = new Object[length];
-            System.arraycopy(source, start, result, 0, length);
-            if(start > end){
-               reverse(result, 0, length);
-            }
-            return result;
+         System.arraycopy(source, start, result, 0, length);
+         if(start > end){
+            reverse(result, 0, length);
          }
+         return result;
+      }
       return new Object[0];
    }
 
@@ -488,7 +547,9 @@ public class RBaseObject
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static void reverse(Object[] values, int index, int length){
+   public final static void reverse(Object[] values,
+                                    int index,
+                                    int length){
       int s = index - 1;
       int e = index + length + 1;
       while(++s < --e){
@@ -497,14 +558,15 @@ public class RBaseObject
          values[e] = temp;
       }
    }
-   
+
    //============================================================
    // <T>擦除对象数组中指定索引位置的对象内容。</T>
    //
    // @param values 对象数组
    // @param index 索引位置
    //============================================================
-   public final static int erase(char[] values, int index){
+   public final static int erase(char[] values,
+                                 int index){
       if(null != values){
          int length = values.length;
          if((index >= 0) && (index < length)){
@@ -515,7 +577,7 @@ public class RBaseObject
       }
       return 0;
    }
-   
+
    //============================================================
    // <T>擦除对象数组中从开始位置到结束位置之间的对象内容。</T>
    //
@@ -523,7 +585,9 @@ public class RBaseObject
    // @param index 索引位置
    // @param length 索引长度
    //============================================================
-   public final static int erase(Object[] values, int index, int length){
+   public final static int erase(Object[] values,
+                                 int index,
+                                 int length){
       if(null != values){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
@@ -543,7 +607,10 @@ public class RBaseObject
    // @param length 数组长度
    // @param find 对象内容
    //============================================================
-   public final static int remove(Object[] values, int offset, int length, Object find){
+   public final static int remove(Object[] values,
+                                  int offset,
+                                  int length,
+                                  Object find){
       int index = offset;
       for(int n = offset; n < length; n++){
          if(values[n] != find){
@@ -566,7 +633,12 @@ public class RBaseObject
    // @param targetOffset 目标位置
    // @param targetLength 目标长度
    //============================================================
-   public final static int remove(Object[] source, int sourceOffset, int sourceLength, Object[] target, int targetOffset, int targetLength){
+   public final static int remove(Object[] source,
+                                  int sourceOffset,
+                                  int sourceLength,
+                                  Object[] target,
+                                  int targetOffset,
+                                  int targetLength){
       if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
          int p = -1;
          int index = 0;
@@ -599,7 +671,7 @@ public class RBaseObject
       }
       return sourceLength;
    }
-   
+
    //============================================================
    // <T>清空对象数组。</T>
    //
@@ -621,7 +693,9 @@ public class RBaseObject
    // @param offset 开始位置
    // @param count 数组长度
    //============================================================
-   public final static void clear(Object[] values, int offset, int length){
+   public final static void clear(Object[] values,
+                                  int offset,
+                                  int length){
       if(null != values){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){

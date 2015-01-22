@@ -286,6 +286,16 @@ public class RLong
       return hex;
    }
 
+   //============================================================
+   // <T>获得长整数的字符串。</T>
+   //
+   // @param value 内容
+   // @return 字符串
+   //============================================================
+   public final static String toString(long value){
+      return Long.toString(value);
+   }
+
    //   /**
    //    * <p>将一个长整数数值格式化为字符串</p>
    //    * <p>create date:2005/02/14</p>

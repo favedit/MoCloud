@@ -8,7 +8,11 @@ import org.mo.com.lang.ICopyable;
 import org.mo.com.lang.IPack;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RDump;
+import org.mo.com.lang.RFloat;
+import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RStrings;
 
@@ -84,7 +88,7 @@ public abstract class MAttributes
    //============================================================
    public boolean getBoolean(int index){
       String value = value(index);
-      if(null != value){
+      if(value != null){
          return RBoolean.parse(value);
       }
       return false;
@@ -98,7 +102,7 @@ public abstract class MAttributes
    //============================================================
    public boolean getBoolean(String name){
       String value = get(name);
-      if(null != value){
+      if(value != null){
          return RBoolean.parse(value);
       }
       return false;
@@ -112,8 +116,8 @@ public abstract class MAttributes
    //============================================================
    public int getInt(int index){
       String value = value(index);
-      if(null != value){
-         return Integer.parseInt(value);
+      if(value != null){
+         return RInteger.parse(value);
       }
       return 0;
    }
@@ -126,8 +130,8 @@ public abstract class MAttributes
    //============================================================
    public int getInt(String name){
       String value = get(name);
-      if(null != value){
-         return Integer.parseInt(value);
+      if(value != null){
+         return RInteger.parse(value);
       }
       return 0;
    }
@@ -140,8 +144,8 @@ public abstract class MAttributes
    //============================================================
    public long getLong(int index){
       String value = value(index);
-      if(null != value){
-         return Long.parseLong(value);
+      if(value != null){
+         return RLong.parse(value);
       }
       return 0;
    }
@@ -154,8 +158,8 @@ public abstract class MAttributes
    //============================================================
    public long getLong(String name){
       String value = get(name);
-      if(null != value){
-         return Long.parseLong(value);
+      if(value != null){
+         return RLong.parse(value);
       }
       return 0;
    }
@@ -168,8 +172,8 @@ public abstract class MAttributes
    //============================================================
    public float getFloat(int index){
       String value = value(index);
-      if(null != value){
-         return Float.parseFloat(value);
+      if(value != null){
+         return RFloat.parse(value);
       }
       return 0;
    }
@@ -182,8 +186,8 @@ public abstract class MAttributes
    //============================================================
    public float getFloat(String name){
       String value = get(name);
-      if(null != value){
-         return Float.parseFloat(value);
+      if(value != null){
+         return RFloat.parse(value);
       }
       return 0;
    }
@@ -196,8 +200,8 @@ public abstract class MAttributes
    //============================================================
    public double getDouble(int index){
       String value = value(index);
-      if(null != value){
-         return Double.parseDouble(value);
+      if(value != null){
+         return RDouble.parse(value);
       }
       return 0;
    }
@@ -210,8 +214,8 @@ public abstract class MAttributes
    //============================================================
    public double getDouble(String name){
       String value = get(name);
-      if(null != value){
-         return Double.parseDouble(value);
+      if(value != null){
+         return RDouble.parse(value);
       }
       return 0;
    }
@@ -503,6 +507,44 @@ public abstract class MAttributes
          }catch(Exception e){
             throw new Error("Unpack string failure. (pack=" + pack + ", merge=" + merge + ")", e);
          }
+      }
+   }
+
+   //============================================================
+   // <T>获得JSON字符串。</T>
+   //
+   // @return JSON字符串
+   //============================================================
+   public String toJson(){
+      FString source = new FString();
+      toJson(source, true);
+      return source.toString();
+   }
+
+   //============================================================
+   // <T>获得JSON字符串。</T>
+   //
+   // @param source 来源代码
+   // @param full 是否全部
+   // @return JSON字符串
+   //============================================================
+   public void toJson(FString source,
+                      boolean full){
+      if(full){
+         source.append('{');
+      }
+      for(int n = 0; n < _count; n++){
+         if(n != 0){
+            source.append(',');
+         }
+         source.append('"');
+         source.append(_names[n]);
+         source.append("\":\"");
+         source.append(_values[n]);
+         source.append('"');
+      }
+      if(full){
+         source.append('}');
       }
    }
 

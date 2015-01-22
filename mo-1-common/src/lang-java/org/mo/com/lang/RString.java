@@ -1,5 +1,6 @@
 package org.mo.com.lang;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 //============================================================
@@ -34,8 +35,48 @@ public class RString
    // @param value 字符串
    // @return 是否为空
    //============================================================
+   public final static boolean isEmpty(CharSequence value){
+      return (value == null) ? true : (0 == value.length());
+   }
+
+   //============================================================
+   // <T>判断字符串是否为空。</T>
+   //
+   // @param value 字符串
+   // @return 是否为空
+   //============================================================
    public final static boolean isEmpty(String value){
       return (value == null) ? true : (0 == value.length());
+   }
+
+   //============================================================
+   // <T>判断字符串集合是否含有空。</T>
+   //
+   // @param values 字符串集合
+   // @return 是否为空
+   //============================================================
+   public final static boolean isEmpty(CharSequence... values){
+      // 检查参数
+      if(values == null){
+         return true;
+      }
+      // 检查个数
+      int count = values.length;
+      if(count == 0){
+         return true;
+      }
+      // 检查集合
+      int n = -1;
+      while(++n < count){
+         CharSequence value = values[n];
+         if(value == null){
+            return true;
+         }
+         if(value.length() == 0){
+            return true;
+         }
+      }
+      return false;
    }
 
    //============================================================
@@ -57,7 +98,7 @@ public class RString
       // 检查集合
       int n = -1;
       while(++n < count){
-         String value = values[n];
+         CharSequence value = values[n];
          if(value == null){
             return true;
          }
@@ -261,9 +302,11 @@ public class RString
    public static boolean isPartten(String value,
                                    String partten){
       if(!isEmpty(value)){
+         // 获得格式
          partten = partten.replaceAll("n", NUMBER_STR);
          partten = partten.replaceAll("a", LOWER_STR);
          partten = partten.replaceAll("A", UPPER_STR);
+         // 检查格式
          char[] chars = value.toCharArray();
          int length = chars.length;
          for(int n = 0; n < length; n++){
@@ -273,6 +316,40 @@ public class RString
          }
       }
       return true;
+   }
+
+   //============================================================
+   // <T>获得字符串长度。</T>
+   //
+   // @param value 指定字符
+   // @return 长度
+   //============================================================
+   public static int length(String value){
+      if(value != null){
+         return value.length();
+      }
+      return 0;
+   }
+
+   //============================================================
+   // <T>获得字符串字节长度。</T>
+   //
+   // @param value 指定字符
+   // @return 长度
+   //============================================================
+   public static int byteLength(String value){
+      int result = 0;
+      if(value != null){
+         int length = value.length();
+         for(int n = 0; n < length; n++){
+            char charValue = value.charAt(n);
+            if(charValue > 255){
+               result++;
+            }
+            result++;
+         }
+      }
+      return result;
    }
 
    //============================================================
@@ -414,11 +491,12 @@ public class RString
    //============================================================
    public static boolean contains(String value,
                                   String search){
-      if(null != value){
-         if(null == search){
+      if(value != null){
+         if(search == null){
             return true;
          }
-         return (-1 != value.indexOf(search));
+         int index = value.indexOf(search);
+         return (index != -1);
       }
       return false;
    }
@@ -432,7 +510,7 @@ public class RString
    //============================================================
    public static boolean containsPart(String value,
                                       String search){
-      if(null != value && null != search){
+      if((value != null) && (search != null)){
          value = "," + value + ",";
          search = "," + search + ",";
          return (value.indexOf(search) != -1);
@@ -453,7 +531,7 @@ public class RString
                                       String search,
                                       String startPart,
                                       String endPart){
-      if(null != value && null != search){
+      if((value != null) && (search != null)){
          value = startPart + value + endPart;
          search = startPart + search + endPart;
          return (value.indexOf(search) != -1);
@@ -470,7 +548,7 @@ public class RString
    //============================================================
    public static boolean inRange(String value,
                                  String... ranges){
-      if(null != value){
+      if(value != null){
          for(String item : ranges){
             if(value.equals(item)){
                return true;
@@ -691,18 +769,39 @@ public class RString
    //============================================================
    // <T>获得非空字符串。</T>
    //
-   // @param value 字符串
+   // @param object 对象
    // @return 字符串
    //============================================================
-   public static String nvl(Object value,
-                            Object other){
-      if(null != value){
-         String result = value.toString();
-         if(result.length() > 0){
-            return result;
+   public static String nvl(Object object){
+      if(object != null){
+         String value = object.toString();
+         if(object instanceof String){
+            value = (String)object;
+         }else{
+            value = object.toString();
+         }
+         if(value.length() > 0){
+            return value;
          }
       }
-      if(null != other){
+      return RString.EMPTY;
+   }
+
+   //============================================================
+   // <T>获得非空字符串。</T>
+   //
+   // @param object 对象
+   // @return 字符串
+   //============================================================
+   public static String nvl(Object object,
+                            Object other){
+      if(object != null){
+         String value = object.toString();
+         if(value.length() > 0){
+            return value;
+         }
+      }
+      if(other != null){
          return other.toString();
       }
       return RString.EMPTY;
@@ -1327,6 +1426,35 @@ public class RString
    }
 
    //============================================================
+   // <T>截取指定字符串左面定长(Byte)的字符串。</T>
+   //
+   // @param value 指定字符串
+   // @param length 截取长度(Byte)
+   // @param charset 字符串
+   // @return 截取后的字符串
+   //============================================================
+   public final static String leftb(String value,
+                                    int length,
+                                    String charset){
+      if(value == null){
+         return null;
+      }
+      try{
+         byte[] data = value.getBytes(charset);
+         int dataLength = data.length;
+         if((length > 0) && (dataLength > length)){
+            String result = new String(data, 0, length, charset);
+            if(result.length() == 0){
+               result = new String(data, 0, length - 1, charset);
+            }
+            return result;
+         }
+      }catch(UnsupportedEncodingException ex){
+      }
+      return EMPTY;
+   }
+
+   //============================================================
    // <T>截取指定字符串右面定长的字符串。</T>
    //
    // @param value 指定字符串
@@ -1366,6 +1494,35 @@ public class RString
    }
 
    //============================================================
+   // <T>截取指定字符串右面定长(Byte)的字符串。</T>
+   //
+   // @param value 指定字符串
+   // @param length 截取长度(Byte)
+   // @param charset 字符串
+   // @return 截取后的字符串
+   //============================================================
+   public final static String rightByte(String value,
+                                        int length,
+                                        String charset){
+      if(value == null){
+         return null;
+      }
+      try{
+         byte[] data = value.getBytes(charset);
+         int size = data.length;
+         if((length > 0) && (size > length)){
+            String result = new String(data, size - length, length, charset);
+            if(result.length() == 0){
+               result = new String(data, size - length + 1, length, charset);
+            }
+            return result;
+         }
+      }catch(UnsupportedEncodingException ex){
+      }
+      return EMPTY;
+   }
+
+   //============================================================
    // <T>格式化参数字符串。</T>
    //
    // @param source 字符串
@@ -1374,12 +1531,12 @@ public class RString
    //============================================================
    public final static String format(String source,
                                      Object... params){
-      if(null != params){
+      if(params != null){
          int count = params.length;
          for(int n = 0; n < count; n++){
             String info = null;
             Object param = params[n];
-            if(null != param){
+            if(param != null){
                if(param instanceof Object[]){
                   info = RDump.dump((Object[])param).toString();
                }else{
@@ -1443,32 +1600,32 @@ public class RString
    public final static String mid(String source,
                                   String left,
                                   String right){
-      if(null != source){
-         int nLeft = -1;
-         int nLeftLength = 0;
-         if(null != left){
-            nLeft = source.indexOf(left);
-            nLeftLength = left.length();
+      if(source != null){
+         int findLeft = -1;
+         int leftLength = 0;
+         if(left != null){
+            findLeft = source.indexOf(left);
+            leftLength = left.length();
          }
-         int nRight = -1;
-         if(null != right){
-            if(nLeft < 0){
-               nRight = source.indexOf(right);
+         int findRight = -1;
+         if(right != null){
+            if(findLeft < 0){
+               findRight = source.indexOf(right);
             }else{
-               nRight = source.indexOf(right, nLeft + nLeftLength);
+               findRight = source.indexOf(right, findLeft + leftLength);
             }
          }
-         if((nLeft >= 0) && (nRight >= 0)){
-            return source.substring(nLeft + nLeftLength, nRight);
-         }else if((nLeft >= 0) && (nRight < 0)){
-            return source.substring(nLeft + nLeftLength);
-         }else if((nLeft < 0) && (nRight >= 0)){
-            return source.substring(0, nRight);
-         }else{
-            return source;
+         if(findLeft >= 0){
+            if(findRight >= 0){
+               return source.substring(findLeft + leftLength, findRight);
+            }else{
+               return source.substring(findLeft + leftLength);
+            }
+         }else if(findRight >= 0){
+            return source.substring(0, findRight);
          }
       }
-      return null;
+      return source;
    }
 
    //============================================================
@@ -1502,11 +1659,12 @@ public class RString
             if(inRange && (ch == find)){
                return result.toString();
             }
-            // 追加自负
+            // 追加字符
             if(inRange){
                result.append(ch);
             }
          }
+         return result.toString();
       }
       return null;
    }
@@ -1546,6 +1704,55 @@ public class RString
                result.append(ch);
             }
          }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得首行字符串。</T>
+   //
+   // @param source 来源字符串
+   // @return 字符串
+   //============================================================
+   public final static String firstLine(String source){
+      if(source != null){
+         source = source.trim();
+         // 查找首行
+         int indexN = source.indexOf('\n');
+         if(indexN != -1){
+            int indexR = source.indexOf('\r');
+            if((indexR != -1) && (indexR < indexN)){
+               return source.substring(0, indexR);
+            }else{
+               return source.substring(0, indexN);
+            }
+         }
+         return source;
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得未行字符串。</T>
+   //
+   // @param source 来源字符串
+   // @return 字符串
+   //============================================================
+   public final static String lastLine(String source){
+      if(source != null){
+         source = source.trim();
+         // 查找尾行
+         int length = source.length();
+         int indexN = source.lastIndexOf('\n');
+         if(indexN != -1){
+            int indexR = source.lastIndexOf('\r');
+            if((indexR != -1) && (indexR > indexN)){
+               return source.substring(indexR, length);
+            }else{
+               return source.substring(indexN, length);
+            }
+         }
+         return source;
       }
       return null;
    }
@@ -1660,6 +1867,26 @@ public class RString
          return result.toString();
       }
       return null;
+   }
+
+   //============================================================
+   // <T>将一个字符串集合的内容合并为一个字符串。</T>
+   //
+   // @param values 字符串集合
+   // @param offset 开始位置
+   // @param count 总数
+   // @return 合并字符串
+   //============================================================
+   public static String join(String[] values,
+                             int offset,
+                             int count){
+      int n = offset - 1;
+      int loop = offset + count;
+      StringBuilder result = new StringBuilder();
+      while(++n < loop){
+         result.append(values[n]);
+      }
+      return result.toString();
    }
 
    //============================================================
@@ -2502,7 +2729,7 @@ public class RString
    // @return 字符串
    //============================================================
    public static String toString(Object item){
-      if(null != item){
+      if(item != null){
          if(item instanceof String){
             return (String)item;
          }
@@ -2510,176 +2737,4 @@ public class RString
       }
       return null;
    }
-   //
-   //   public final static String format(String source, int maxParamLength, Object... params){
-   //      if(null != params){
-   //         int count = params.length;
-   //         for(int n = 0; n < count; n++){
-   //            String info = null;
-   //            Object param = params[n];
-   //            if(null != param){
-   //               if(param instanceof Object[]){
-   //                  info = RDump.dump((Object[])param).toString();
-   //               }else{
-   //                  info = param.toString();
-   //               }
-   //            }else{
-   //               info = RString.EMPTY;
-   //            }
-   //            if(maxParamLength > 0 && info.length() > maxParamLength){
-   //               info = info.substring(0, maxParamLength) + "...";
-   //            }
-   //            source = RString.replace(source, "{" + n + "}", info);
-   //         }
-   //      }
-   //      return source;
-   //   }
-   //
-   //
-   //   /**
-   //    * <p>在指定字符串中是否含有目标字符串</p>
-   //    *
-   //    * @param value 指定字符串
-   //    * @param search 目标字符串
-   //    * @return true：是<br>false：否
-   //    */
-   //   public final static boolean hasString(String value, String search){
-   //      return (null != value && null != search) ? value.indexOf(search) > 0 : false;
-   //   }
-   //
-   //   public static int indexOf(String value, char first, String serach, char last){
-   //      if(null != value && null != serach){
-   //         char[] va = value.toCharArray();
-   //         char[] sa = serach.toCharArray();
-   //         return RChar.indexOf(va, 0, va.length, first, sa, 0, sa.length, last);
-   //      }
-   //      return -1;
-   //   }
-   //
-   //
-   //   /**
-   //    * <p>如果指定字符串为空,则返回默认值</p>
-   //    * <p>create date:2005/02/14</p>
-   //    *
-   //    * @param sValue 指定字符串
-   //    * @param sDefault 默认值
-   //    * @return 字符串
-   //    */
-   //   public final static String makeDefaultValue(String sValue, String sDefault){
-   //      return isNotEmpty(sValue) ? sValue : sDefault;
-   //   }
-   //
-   //
-   //   public static String notEmptyValue(Object oValue){
-   //      return (oValue != null) ? oValue.toString() : "";
-   //   }
-   //
-   //   public static String notEmptyValue(Object oValue, Object oDefault){
-   //      if(oValue == null){
-   //         return oDefault.toString();
-   //      }
-   //      String sValue = oValue.toString();
-   //      return (sValue.length() > 0) ? sValue : oDefault.toString();
-   //   }
-   //
-   //   public static String notEmptyValue(String sValue, String sDefault){
-   //      return (sValue != null) ? ((sValue.length() > 0) ? sValue : sDefault) : sDefault;
-   //   }
-   //
-   //
-   //   public final static void repeat(FString source, char value, int count){
-   //      if(null != source){
-   //         while(count-- > 0){
-   //            source.append(value);
-   //         }
-   //      }
-   //   }
-   //
-   //
-   //
-   //   //   /**
-   //   //    * <p>截取指定字符串左面定长(Byte)的字符串</p>
-   //   //    * <p>create date:2005/02/14</p>
-   //   //    *
-   //   //    * @param sValue 指定字符串
-   //   //    * @param nLength 截取长度(Byte)
-   //   //    * @param sCharset 字符串
-   //   //    * @return 截取后的字符串
-   //   //    */
-   //   //   public final static String leftb(String sValue, int nLength, String sCharset) {
-   //   //      if (sValue != null) {
-   //   //         try {
-   //   //            byte[] arByteValue = sValue.getBytes(sCharset);
-   //   //            int nTempLength = arByteValue.length;
-   //   //            if (nLength > 0 && nTempLength > nLength) {
-   //   //               String sResult = new String(arByteValue, 0, nLength, sCharset);
-   //   //               if (sResult.length() == 0) {
-   //   //                  sResult = new String(arByteValue, 0, nLength - 1, sCharset);
-   //   //               }
-   //   //               return sResult;
-   //   //            }
-   //   //         } catch (UnsupportedEncodingException ex) {
-   //   //         }
-   //   //         return "";
-   //   //      }
-   //   //      return null;
-   //   //   }
-   //   //
-   //
-   //   /**
-   //    * <p>截取指定字符串右面定长(Byte)的字符串</p>
-   //    *
-   //    * @param sValue 指定字符串
-   //    * @param nLength 截取长度(Byte)
-   //    * @param sCharset 字符串
-   //    * @return 截取后的字符串
-   //    */
-   //   public final static String rightb(String sValue, int nLength, String sCharset){
-   //      if(sValue != null){
-   //         try{
-   //            byte[] arByteValue = sValue.getBytes(sCharset);
-   //            int nTempLength = arByteValue.length;
-   //            if(nLength > 0 && nTempLength > nLength){
-   //               String sResult = new String(arByteValue, nTempLength - nLength, nLength, sCharset);
-   //               if(sResult.length() == 0){
-   //                  sResult = new String(arByteValue, nTempLength - nLength + 1, nLength, sCharset);
-   //               }
-   //               return sResult;
-   //            }
-   //         }catch(UnsupportedEncodingException ex){
-   //         }
-   //         return "";
-   //      }
-   //      return null;
-   //   }
-   //
-   //   /**
-   //    * <p>获得样板的部分内容对应的字符串</p>
-   //    *
-   //    * @param sValue 字符串
-   //    * @param sPartten 样板
-   //    * @param sSubPartten 样板内容
-   //    * @return 对应的字符串
-   //    */
-   //   public static String subParttenValue(String sValue, String sPartten, String sSubPartten){
-   //      if(sValue == null || sPartten == null || sSubPartten == null){
-   //         return null;
-   //      }
-   //      int nFind = sPartten.indexOf(sSubPartten);
-   //      return (nFind != -1) ? sValue.substring(nFind, nFind + sSubPartten.length()) : null;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>转变字符串为指定编码的16进制字符串。</T>
-   //   //
-   //   // @return 编码定义
-   //   //============================================================
-   //   public static String toHexString(String value){
-   //      FString result = new FString();
-   //      for(byte mb : value.getBytes()){
-   //         result.append('%');
-   //         RByte.toHexChars(result, mb);
-   //      }
-   //      return result.toString();
-   //   }
 }

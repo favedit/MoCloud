@@ -2,7 +2,7 @@ package org.mo.web.protocol.context;
 
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.IRelease;
-import org.mo.com.message.FMessages;
+import org.mo.com.message.IMessageContext;
 import org.mo.logic.session.ISqlSessionContext;
 import org.mo.web.core.container.common.FWebContainerCollection;
 import org.mo.web.core.session.IWebSession;
@@ -13,6 +13,7 @@ import org.mo.web.protocol.common.FWebUploadFiles;
 //============================================================
 public interface IWebContext
       extends
+         IMessageContext,
          IRelease
 {
    //============================================================
@@ -123,6 +124,13 @@ public interface IWebContext
    String requestUrl();
 
    //============================================================
+   // <T>获得请求主机。</T>
+   //
+   // @return 请求主机
+   //============================================================
+   String requestHost();
+
+   //============================================================
    // <T>获得请求字符串。</T>
    //
    // @return 请求字符串
@@ -142,7 +150,7 @@ public interface IWebContext
    // @param name 名称
    // @return 头信息
    //============================================================
-   String head(String sName);
+   String head(String name);
 
    //============================================================
    // <T>获得参数集合。</T>
@@ -158,6 +166,46 @@ public interface IWebContext
    // @return 参数信息
    //============================================================
    String parameter(String name);
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   boolean parameterAsBoolean(String name);
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   int parameterAsInteger(String name);
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   long parameterAsLong(String name);
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   float parameterAsFloat(String name);
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
+   // @return 参数信息
+   //============================================================
+   double parameterAsDouble(String name);
 
    //============================================================
    // <T>获得COOKIE信息集合。</T>
@@ -241,13 +289,6 @@ public interface IWebContext
    boolean hasMessages();
 
    //============================================================
-   // <T>获得消息集合。</T>
-   //
-   // @return 消息集合
-   //============================================================
-   FMessages messages();
-
-   //============================================================
    // <T>检查是否定义了当前别称。</T>
    //
    // @param alias 别称
@@ -286,13 +327,4 @@ public interface IWebContext
    // @return 图片路径
    //============================================================
    String parseImagePath(String source);
-
-   //   String env(String name);
-   //
-   //   void setEnv(String name,
-   //               String value);
-   //
-   //   void setRequestUri(String requestUri);
-   //
-   //   ISqlSessionContext sqlContext();
 }

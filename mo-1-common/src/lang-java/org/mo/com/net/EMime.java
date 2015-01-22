@@ -1,5 +1,7 @@
 package org.mo.com.net;
 
+import org.mo.com.lang.RString;
+
 //============================================================
 // <T>内容类型。</T>
 //============================================================
@@ -50,5 +52,32 @@ public enum EMime{
    //============================================================
    public String mime(){
       return _mime;
+   }
+
+   //============================================================
+   // <T>获得内容类型。</T>
+   //
+   // @return 内容类型
+   //============================================================
+   public static EMime parseExtension(String extension){
+      if(!RString.isEmpty(extension)){
+         extension = extension.toLowerCase();
+         switch(extension){
+            case "bmp":
+               return Bmp;
+            case "gif":
+               return Gif;
+            case "jpg":
+            case "jpeg":
+               return Jpg;
+            case "png":
+               return Png;
+            case "bin":
+               return Bin;
+            case "exe":
+               return Exe;
+         }
+      }
+      return null;
    }
 }

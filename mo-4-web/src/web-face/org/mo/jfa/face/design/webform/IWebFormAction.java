@@ -1,9 +1,8 @@
 package org.mo.jfa.face.design.webform;
 
-import org.mo.web.core.container.AContainer;
-
 import org.mo.logic.data.ISyModuleDi;
 import org.mo.logic.data.ISyTranslateDi;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================

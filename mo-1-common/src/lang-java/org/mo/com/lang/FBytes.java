@@ -71,6 +71,27 @@ public class FBytes
    }
 
    //============================================================
+   // <T>移除指定索引位置的定长数据。</T>
+   //
+   // @param index 索引位置 
+   // @param length 长度
+   //============================================================
+   public void remove(int index,
+                      int length){
+      if(null != _memory){
+         if(length <= 0){
+            throw new FFatalError("Length is out range.");
+         }
+         if(index + length > _length){
+            throw new FFatalError("Length is out range.");
+         }
+         int moved = _length - index - length;
+         System.arraycopy(_memory, index + length, _memory, index, moved);
+         _length -= length;
+      }
+   }
+
+   //============================================================
    // <T>获得字符串。</T>
    //
    // @return 字符串

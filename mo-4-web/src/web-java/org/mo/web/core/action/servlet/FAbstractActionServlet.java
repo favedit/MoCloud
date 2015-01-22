@@ -8,6 +8,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.RString;
@@ -47,8 +48,11 @@ public abstract class FAbstractActionServlet
    // 数据绑定管理器
    protected IBindConsole _bindConsole;
 
-   // 页面线程管理器
+   // 页面会话管理器
    protected IWebSessionConsole _sessionConsole;
+
+   // 页面会话超时
+   protected int _sessionTimeout;
 
    //============================================================
    // <T>初始化网络应用程序。</T>
@@ -63,6 +67,7 @@ public abstract class FAbstractActionServlet
          _bindConsole = RAop.find(IBindConsole.class);
          _actionConsole = RAop.find(IActionConsole.class);
          _sessionConsole = RAop.find(IWebSessionConsole.class);
+         _sessionTimeout = (int)(_sessionConsole.timeout() / 1000);
          // 初始化设置
          initialize(config);
       }catch(Exception e){
@@ -114,6 +119,11 @@ public abstract class FAbstractActionServlet
       long startTime = System.currentTimeMillis();
       try{
          // 建立会话对象
+         HttpSession httpSession = httpRequest.getSession();
+         int inactiveInterval = httpSession.getMaxInactiveInterval();
+         if(inactiveInterval != _sessionTimeout){
+            httpSession.setMaxInactiveInterval(_sessionTimeout);
+         }
          String httpSessionId = httpRequest.getSession().getId();
          session = _sessionConsole.build(httpSessionId);
          session.referIncrease();
@@ -123,7 +133,7 @@ public abstract class FAbstractActionServlet
          String encoding = culture.countryEncoding();
          RCulture.link(culture);
          if(_logger.debugAble()){
-            _logger.debug(this, "process", "Do{1} Begin - [{2}] (lang={3}, charset={4})", type, httpRequest.getRequestURI(), language, encoding);
+            _logger.debug(this, "process", "Do{1} Begin - [{2}] (lang={3}, charset={4}, session_id={5}, session={6})", type, httpRequest.getRequestURI(), language, encoding, httpSessionId, session);
          }
          httpRequest.setCharacterEncoding(encoding);
          httpResponse.setCharacterEncoding(encoding);
