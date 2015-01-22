@@ -26,6 +26,15 @@ public abstract class XBaseTreeColumn extends XContentObject
    // 备注的定义
    public final static FContentField FieldNote = new FContentField("note");
 
+   // 图标的定义
+   public final static FContentField FieldIcon = new FContentField("icon");
+
+   // 数据名称的定义
+   public final static FContentField FieldDataName = new FContentField("data_name");
+
+   // 宽度的定义
+   public final static FContentField FieldWidth = new FContentField("width");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -59,6 +68,18 @@ public abstract class XBaseTreeColumn extends XContentObject
    // 备注
    @AName("note")
    protected String _note;
+
+   // 图标
+   @AName("icon")
+   protected String _icon;
+
+   // 数据名称
+   @AName("data_name")
+   protected String _dataName;
+
+   // 宽度
+   @AName("width")
+   protected String _width;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -130,6 +151,60 @@ public abstract class XBaseTreeColumn extends XContentObject
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得图标的内容。</T>
+   //
+   // @return 图标
+   //============================================================
+   public String getIcon(){
+      return _icon;
+   }
+
+   //============================================================
+   // <T>设置图标的内容。</T>
+   //
+   // @param value 图标
+   //============================================================
+   public void setIcon(String value){
+      _icon = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDataName(){
+      return _dataName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDataName(String value){
+      _dataName = value;
+   }
+
+   //============================================================
+   // <T>获得宽度的内容。</T>
+   //
+   // @return 宽度
+   //============================================================
+   public String getWidth(){
+      return _width;
+   }
+
+   //============================================================
+   // <T>设置宽度的内容。</T>
+   //
+   // @param value 宽度
+   //============================================================
+   public void setWidth(String value){
+      _width = value;
    }
 
 }

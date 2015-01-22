@@ -1,0 +1,2 @@
+http://localhost:91/cloud.describe.tree.ws?action=query&code=design.list
+http://localhost:91/cloud.describe.frame.ws?action=query&code=common.country.CountryForm

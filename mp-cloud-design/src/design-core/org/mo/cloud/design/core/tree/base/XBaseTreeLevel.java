@@ -26,6 +26,9 @@ public abstract class XBaseTreeLevel extends XContentObject
    // 备注的定义
    public final static FContentField FieldNote = new FContentField("note");
 
+   // 编号的定义
+   public final static FContentField FieldId = new FContentField("id");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -59,6 +62,10 @@ public abstract class XBaseTreeLevel extends XContentObject
    // 备注
    @AName("note")
    protected String _note;
+
+   // 编号
+   @AName("id")
+   protected String _id;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -130,6 +137,24 @@ public abstract class XBaseTreeLevel extends XContentObject
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得编号的内容。</T>
+   //
+   // @return 编号
+   //============================================================
+   public String getId(){
+      return _id;
+   }
+
+   //============================================================
+   // <T>设置编号的内容。</T>
+   //
+   // @param value 编号
+   //============================================================
+   public void setId(String value){
+      _id = value;
    }
 
 }

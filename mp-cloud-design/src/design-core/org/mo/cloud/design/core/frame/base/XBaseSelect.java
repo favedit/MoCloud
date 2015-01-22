@@ -17,6 +17,9 @@ public abstract class XBaseSelect extends XContentObject
    // 名称的定义
    public final static FContentField FieldName = new FContentField("name");
 
+   // 有效性的定义
+   public final static FContentField FieldValid = new FContentField("valid");
+
    // 标签的定义
    public final static FContentField FieldLabel = new FContentField("label");
 
@@ -54,6 +57,10 @@ public abstract class XBaseSelect extends XContentObject
    @AName("name")
    protected String _name;
 
+   // 有效性
+   @AName("valid")
+   protected String _valid;
+
    // 标签
    @AName("label")
    protected String _label;
@@ -90,6 +97,24 @@ public abstract class XBaseSelect extends XContentObject
    //============================================================
    public void setName(String value){
       _name = value;
+   }
+
+   //============================================================
+   // <T>获得有效性的内容。</T>
+   //
+   // @return 有效性
+   //============================================================
+   public String getValid(){
+      return _valid;
+   }
+
+   //============================================================
+   // <T>设置有效性的内容。</T>
+   //
+   // @param value 有效性
+   //============================================================
+   public void setValid(String value){
+      _valid = value;
    }
 
    //============================================================

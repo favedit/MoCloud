@@ -3,27 +3,51 @@
 <Config>
 
    <!-- ==================================================== -->
-   <!-- 设计：内容列表数据服务                               -->
+   <!-- 设计：列表描述服务                                   -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.describe.list'
-         face  = 'org.mo.cloud.design.describe.list.IContentListDataService'/>
+         face  = 'org.mo.cloud.design.describe.list.IListService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.describe.list.IContentListDataService'
-         class = 'org.mo.cloud.design.describe.list.FContentListDataService'
+         face  = 'org.mo.cloud.design.describe.list.IListService'
+         class = 'org.mo.cloud.design.describe.list.FListService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：内容表单数据服务                               -->
+   <!-- 设计：目录描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.describe.tree'
+         face  = 'org.mo.cloud.design.describe.tree.ITreeService'/>
+
+   <Component
+         face  = 'org.mo.cloud.design.describe.tree.ITreeService'
+         class = 'org.mo.cloud.design.describe.tree.FTreeService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：数据描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.describe.dataset'
+         face  = 'org.mo.cloud.design.describe.dataset.IDatasetService'/>
+
+   <Component
+         face  = 'org.mo.cloud.design.describe.dataset.IDatasetService'
+         class = 'org.mo.cloud.design.describe.dataset.FDatasetService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：表单描述服务                                   -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.describe.frame'
-         face  = 'org.mo.cloud.design.describe.frame.IContentFrameDataService'/>
+         face  = 'org.mo.cloud.design.describe.frame.IFrameService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.describe.frame.IContentFrameDataService'
-         class = 'org.mo.cloud.design.describe.frame.FContentFrameDataService'
+         face  = 'org.mo.cloud.design.describe.frame.IFrameService'
+         class = 'org.mo.cloud.design.describe.frame.FFrameService'
          scope = 'global'/>
 
 </Config>

@@ -2,9 +2,9 @@ package org.mo.cloud.design.core.tree;
 
 import org.mo.cloud.design.core.configuration.FContentNode;
 import org.mo.cloud.design.core.configuration.FContentSpace;
-import org.mo.cloud.design.core.configuration.IContentConfigurationConsole;
-import org.mo.cloud.design.core.persistence.FContentPersistence;
-import org.mo.cloud.design.core.persistence.IContentPersistenceConsole;
+import org.mo.cloud.design.core.configuration.IConfigurationConsole;
+import org.mo.cloud.design.core.persistence.FPersistence;
+import org.mo.cloud.design.core.persistence.IPersistenceConsole;
 import org.mo.cloud.design.core.tree.common.XTreeView;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
@@ -29,20 +29,20 @@ public class FTreeConsole
 
    // 内容配置控制台接口
    @ALink
-   protected IContentConfigurationConsole _configurationConsole;
+   protected IConfigurationConsole _configurationConsole;
 
    // 内容持久化控制台接口
    @ALink
-   protected IContentPersistenceConsole _persistenceConsole;
+   protected IPersistenceConsole _persistenceConsole;
 
    // 列表
-   protected FDictionary<XTreeView> _list = new FDictionary<XTreeView>(XTreeView.class);
+   protected FDictionary<XTreeView> _treeDictionary = new FDictionary<XTreeView>(XTreeView.class);
 
    //============================================================
-   // <T>获得列表集合。</T>
+   // <T>获得目录集合。</T>
    //
    // @param storgeName 存储名称
-   // @return 列表集合
+   // @return 目录集合
    //============================================================
    @Override
    public XTreeView[] list(String storgeName){
@@ -50,30 +50,30 @@ public class FTreeConsole
       FContentSpace space = _configurationConsole.getSpace(storgeName, _pathName);
       for(INamePair<FContentNode> pair : space.contents()){
          FContentNode node = pair.value();
-         String listName = node.name();
-         XTreeView xtree = find(storgeName, listName);
+         String treeName = node.name();
+         XTreeView xtree = find(storgeName, treeName);
          results.push(xtree);
       }
       return results.toObjects();
    }
 
    //============================================================
-   // <T>根据名称获得列表。</T>
+   // <T>根据名称获得目录。</T>
    //
    // @param storgeName 存储名称
-   // @param listName 列表名称
-   // @return 列表
+   // @param treeName 目录名称
+   // @return 目录
    //============================================================
    @Override
    public XTreeView find(String storgeName,
-                         String listName){
-      String code = storgeName + "|" + listName;
-      XTreeView xtree = _list.find(code);
+                         String treeName){
+      String code = storgeName + "|" + treeName;
+      XTreeView xtree = _treeDictionary.find(code);
       if(xtree == null){
-         FContentPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
-         FContentNode node = _configurationConsole.getNode(storgeName, _pathName, listName);
+         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
+         FContentNode node = _configurationConsole.getNode(storgeName, _pathName, treeName);
          xtree = persistence.convertInstance(node.config());
-         _list.set(code, xtree);
+         _treeDictionary.set(code, xtree);
       }
       return xtree;
    }

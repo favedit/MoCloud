@@ -26,6 +26,9 @@ public abstract class XBaseTreeView extends XContentObject
    // 备注的定义
    public final static FContentField FieldNote = new FContentField("note");
 
+   // 服务的定义
+   public final static FContentField FieldService = new FContentField("service");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -59,6 +62,10 @@ public abstract class XBaseTreeView extends XContentObject
    // 备注
    @AName("note")
    protected String _note;
+
+   // 服务
+   @AName("service")
+   protected String _service;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -130,6 +137,24 @@ public abstract class XBaseTreeView extends XContentObject
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得服务的内容。</T>
+   //
+   // @return 服务
+   //============================================================
+   public String getService(){
+      return _service;
+   }
+
+   //============================================================
+   // <T>设置服务的内容。</T>
+   //
+   // @param value 服务
+   //============================================================
+   public void setService(String value){
+      _service = value;
    }
 
 }

@@ -1,0 +1,128 @@
+package org.mo.cloud.design.describe.frame;
+
+import org.mo.cloud.design.core.configuration.FContentObject;
+import org.mo.cloud.design.core.configuration.XContentObject;
+import org.mo.cloud.design.core.frame.IFrameConsole;
+import org.mo.cloud.design.core.persistence.FPersistence;
+import org.mo.cloud.design.core.persistence.IPersistenceConsole;
+import org.mo.com.lang.EResult;
+import org.mo.com.xml.FXmlNode;
+import org.mo.core.aop.face.ALink;
+import org.mo.web.protocol.context.IWebContext;
+import org.mo.web.protocol.context.IWebInput;
+import org.mo.web.protocol.context.IWebOutput;
+
+//============================================================
+// <T>内容表单服务。</T>
+//============================================================
+public class FFrameService
+      implements
+         IFrameService
+{
+   // 存储名称
+   protected String _storageName = "cloud";
+
+   // 内容持久化控制台接口
+   @ALink
+   protected IPersistenceConsole _persistenceConsole;
+
+   // 内容表单控制台接口
+   @ALink
+   protected IFrameConsole _frameConsole;
+
+   //============================================================
+   // <T>构造内容表单服务。</T>
+   //============================================================
+   public FFrameService(){
+   }
+
+   //============================================================
+   // <T>从配置文件中加载树目录节点。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult list(IWebContext context,
+                       IWebInput input,
+                       IWebOutput output){
+      XContentObject[] xwindows = _frameConsole.list(_storageName);
+      FXmlNode xconfig = output.config();
+      for(XContentObject xwindow : xwindows){
+         FXmlNode xnode = xconfig.createNode("Window");
+         xnode.set("type", xwindow.name());
+         xnode.set("name", xwindow.get("name"));
+         xnode.set("label", xwindow.get("label"));
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult query(IWebContext context,
+                        IWebInput input,
+                        IWebOutput output){
+      String code = context.parameter("code");
+      // 查找目录定义
+      XContentObject xtree = _frameConsole.find(_storageName, code);
+      if(xtree == null){
+         return EResult.Failure;
+      }
+      // 转换数据
+      FXmlNode xconfig = output.config().createNode();
+      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, "design.frame");
+      FContentObject content = persistence.convertConfig(xtree);
+      // 存储输出
+      content.saveConfig(xconfig);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>新建配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult insert(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult update(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult delete(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
+      return EResult.Success;
+   }
+}

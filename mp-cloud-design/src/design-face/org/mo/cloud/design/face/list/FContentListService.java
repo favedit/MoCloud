@@ -1,6 +1,6 @@
 package org.mo.cloud.design.face.list;
 
-import org.mo.cloud.design.core.list.IContentListConsole;
+import org.mo.cloud.design.core.list.IListConsole;
 
 import org.mo.cloud.design.core.list.common.XList;
 import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationService;
@@ -36,7 +36,7 @@ public class FContentListService
    public void catalog(IWebContext context,
                        IWebInput input,
                        IWebOutput output){
-      IContentListConsole _listConsole = RAop.find(IContentListConsole.class);
+      IListConsole _listConsole = RAop.find(IListConsole.class);
       XList xlist = _listConsole.find("cloud", "system.culture.Language");
       System.out.println(xlist.getName());
       super.catalog(context, input, output);

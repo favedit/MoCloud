@@ -8,8 +8,8 @@
    <!--  I:initializeConfig - 增加配置信息                   -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.cloud.design.core.configuration.IContentConfigurationConsole'
-         class = 'org.mo.cloud.design.core.configuration.FContentConfigurationConsole'
+         face  = 'org.mo.cloud.design.core.configuration.IConfigurationConsole'
+         class = 'org.mo.cloud.design.core.configuration.FConfigurationConsole'
          scope = 'global'>
       <Property name='config_path'>${application.content}</Property>
       <Initialize name='initializeConfig'/>
@@ -19,8 +19,8 @@
    <!-- ContentPersistenceConsole:内容持久化制台             -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.cloud.design.core.persistence.IContentPersistenceConsole'
-         class = 'org.mo.cloud.design.core.persistence.FContentPersistenceConsole'
+         face  = 'org.mo.cloud.design.core.persistence.IPersistenceConsole'
+         class = 'org.mo.cloud.design.core.persistence.FPersistenceConsole'
          scope = 'global'>
    </Component>
    
@@ -30,10 +30,10 @@
    <!--  P:path_name - 保存路径                              -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.cloud.design.core.list.IContentListConsole'
-         class = 'org.mo.cloud.design.core.list.FContentListConsole'
+         face  = 'org.mo.cloud.design.core.list.IListConsole'
+         class = 'org.mo.cloud.design.core.list.FListConsole'
          scope = 'global'>
-      <Property name='space_name'>content.list</Property>
+      <Property name='space_name'>design.list</Property>
       <Property name='path_name'>design.list</Property>
    </Component>
    
@@ -44,9 +44,9 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.cloud.design.core.tree.ITreeConsole'
-         class = 'org.mo.cloud.design.core.tree.FTreeConsolee'
+         class = 'org.mo.cloud.design.core.tree.FTreeConsole'
          scope = 'global'>
-      <Property name='space_name'>content.tree</Property>
+      <Property name='space_name'>design.tree</Property>
       <Property name='path_name'>design.tree</Property>
    </Component>
 
@@ -56,10 +56,10 @@
    <!--  P:path_name - 保存路径                              -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.cloud.design.core.frame.IContentFormConsole'
-         class = 'org.mo.cloud.design.core.frame.FContentFormConsole'
+         face  = 'org.mo.cloud.design.core.frame.IFrameConsole'
+         class = 'org.mo.cloud.design.core.frame.FFrameConsole'
          scope = 'global'>
-      <Property name='space_name'>content.frame</Property>
+      <Property name='space_name'>design.frame</Property>
       <Property name='path_name'>design.frame</Property>
    </Component>
 

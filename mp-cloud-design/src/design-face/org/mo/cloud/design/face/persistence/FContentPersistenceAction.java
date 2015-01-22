@@ -1,9 +1,9 @@
 package org.mo.cloud.design.face.persistence;
 
-import org.mo.cloud.design.core.persistence.EContentPersistenceAction;
-import org.mo.cloud.design.core.persistence.EContentPersistenceType;
-import org.mo.cloud.design.core.persistence.IContentPersistenceConsole;
-import org.mo.cloud.design.core.persistence.SContentPersistenceBuildArgs;
+import org.mo.cloud.design.core.persistence.EPersistenceAction;
+import org.mo.cloud.design.core.persistence.EPersistenceType;
+import org.mo.cloud.design.core.persistence.IPersistenceConsole;
+import org.mo.cloud.design.core.persistence.SPersistenceBuildArgs;
 
 import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationAction;
 import org.mo.core.aop.face.ALink;
@@ -26,7 +26,7 @@ public class FContentPersistenceAction
 
    // 内容持久控制台接口
    @ALink
-   protected IContentPersistenceConsole _persistenceConsole;
+   protected IPersistenceConsole _persistenceConsole;
 
    //============================================================
    // <T>构造内容持久化处理。</T>
@@ -125,9 +125,9 @@ public class FContentPersistenceAction
    public String buildAll(IWebContext context,
                           FContentPersistencePage page){
       // 设置代码生成参数
-      SContentPersistenceBuildArgs args = new SContentPersistenceBuildArgs();
-      args.setActionCd(EContentPersistenceAction.All);
-      args.setTypeCd(EContentPersistenceType.All);
+      SPersistenceBuildArgs args = new SPersistenceBuildArgs();
+      args.setActionCd(EPersistenceAction.All);
+      args.setTypeCd(EPersistenceType.All);
       _persistenceConsole.build(args);
       return IPublicPage.PROCESS_SUCCESS;
    }

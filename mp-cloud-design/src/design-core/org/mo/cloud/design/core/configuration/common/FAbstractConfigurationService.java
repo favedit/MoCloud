@@ -4,8 +4,7 @@ import org.mo.cloud.design.core.configuration.FContentNode;
 import org.mo.cloud.design.core.configuration.FContentObject;
 import org.mo.cloud.design.core.configuration.FContentObjects;
 import org.mo.cloud.design.core.configuration.FContentSpace;
-import org.mo.cloud.design.core.configuration.IContentConfigurationConsole;
-
+import org.mo.cloud.design.core.configuration.IConfigurationConsole;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.INamePair;
@@ -42,7 +41,7 @@ public class FAbstractConfigurationService
 
    // 内容配置控制台
    @ALink
-   protected IContentConfigurationConsole _configurationConsole;
+   protected IConfigurationConsole _configurationConsole;
 
    //============================================================
    // <T>生成集合名称。</T>

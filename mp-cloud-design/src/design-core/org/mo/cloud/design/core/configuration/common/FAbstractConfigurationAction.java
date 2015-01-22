@@ -4,8 +4,7 @@ import org.mo.cloud.design.core.configuration.FContentNode;
 import org.mo.cloud.design.core.configuration.FContentObject;
 import org.mo.cloud.design.core.configuration.FContentObjects;
 import org.mo.cloud.design.core.configuration.FContentSpace;
-import org.mo.cloud.design.core.configuration.IContentConfigurationConsole;
-
+import org.mo.cloud.design.core.configuration.IConfigurationConsole;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.FFatalError;
@@ -43,7 +42,7 @@ public class FAbstractConfigurationAction
 
    // 内容配置控制台
    @ALink
-   protected IContentConfigurationConsole _configurationConsole;
+   protected IConfigurationConsole _configurationConsole;
 
    //============================================================
    // <T>获得目录处理。</T>

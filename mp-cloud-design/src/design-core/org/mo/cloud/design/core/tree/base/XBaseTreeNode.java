@@ -26,6 +26,18 @@ public abstract class XBaseTreeNode extends XContentObject
    // 备注的定义
    public final static FContentField FieldNote = new FContentField("note");
 
+   // 含有子节点的定义
+   public final static FContentField FieldChild = new FContentField("child");
+
+   // 代码的定义
+   public final static FContentField FieldCode = new FContentField("code");
+
+   // 图标的定义
+   public final static FContentField FieldIcon = new FContentField("icon");
+
+   // 属性集合的定义
+   public final static FContentField FieldAttributes = new FContentField("attributes");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -59,6 +71,22 @@ public abstract class XBaseTreeNode extends XContentObject
    // 备注
    @AName("note")
    protected String _note;
+
+   // 含有子节点
+   @AName("child")
+   protected boolean _child;
+
+   // 代码
+   @AName("code")
+   protected String _code;
+
+   // 图标
+   @AName("icon")
+   protected String _icon;
+
+   // 属性集合
+   @AName("attributes")
+   protected String _attributes;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -130,6 +158,78 @@ public abstract class XBaseTreeNode extends XContentObject
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得含有子节点的内容。</T>
+   //
+   // @return 含有子节点
+   //============================================================
+   public Boolean getChild(){
+      return _child;
+   }
+
+   //============================================================
+   // <T>设置含有子节点的内容。</T>
+   //
+   // @param value 含有子节点
+   //============================================================
+   public void setChild(Boolean value){
+      _child = value;
+   }
+
+   //============================================================
+   // <T>获得代码的内容。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String getCode(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的内容。</T>
+   //
+   // @param value 代码
+   //============================================================
+   public void setCode(String value){
+      _code = value;
+   }
+
+   //============================================================
+   // <T>获得图标的内容。</T>
+   //
+   // @return 图标
+   //============================================================
+   public String getIcon(){
+      return _icon;
+   }
+
+   //============================================================
+   // <T>设置图标的内容。</T>
+   //
+   // @param value 图标
+   //============================================================
+   public void setIcon(String value){
+      _icon = value;
+   }
+
+   //============================================================
+   // <T>获得属性集合的内容。</T>
+   //
+   // @return 属性集合
+   //============================================================
+   public String getAttributes(){
+      return _attributes;
+   }
+
+   //============================================================
+   // <T>设置属性集合的内容。</T>
+   //
+   // @param value 属性集合
+   //============================================================
+   public void setAttributes(String value){
+      _attributes = value;
    }
 
 }

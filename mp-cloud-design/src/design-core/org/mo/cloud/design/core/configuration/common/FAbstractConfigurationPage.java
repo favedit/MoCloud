@@ -2,7 +2,6 @@ package org.mo.cloud.design.core.configuration.common;
 
 import org.mo.cloud.design.core.configuration.FContentNode;
 import org.mo.cloud.design.core.configuration.FContentObject;
-
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObjectId;
 import org.mo.com.lang.FString;
