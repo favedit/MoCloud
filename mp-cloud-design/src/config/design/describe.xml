@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ==================================================== -->
+   <!-- 设计：内容列表数据服务                               -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.describe.list'
+         face  = 'org.mo.cloud.design.describe.list.IContentListDataService'/>
+
+   <Component
+         face  = 'org.mo.cloud.design.describe.list.IContentListDataService'
+         class = 'org.mo.cloud.design.describe.list.FContentListDataService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：内容表单数据服务                               -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.describe.frame'
+         face  = 'org.mo.cloud.design.describe.frame.IContentFrameDataService'/>
+
+   <Component
+         face  = 'org.mo.cloud.design.describe.frame.IContentFrameDataService'
+         class = 'org.mo.cloud.design.describe.frame.FContentFrameDataService'
+         scope = 'global'/>
+
+</Config>
