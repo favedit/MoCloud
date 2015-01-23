@@ -23,17 +23,17 @@ public abstract class XBaseMenuBar extends XContentObject
    // 标签的定义
    public final static FContentField FieldLabel = new FContentField("label");
 
-   // 左位置的定义
-   public final static FContentField FieldLeft = new FContentField("left");
+   // 位置的定义
+   public final static FContentField FieldLocation = new FContentField("location");
 
-   // 上位置的定义
-   public final static FContentField FieldTop = new FContentField("top");
+   // 尺寸的定义
+   public final static FContentField FieldSize = new FContentField("size");
 
-   // 宽度的定义
-   public final static FContentField FieldWidth = new FContentField("width");
+   // 内空白的定义
+   public final static FContentField FieldPadding = new FContentField("padding");
 
-   // 高度的定义
-   public final static FContentField FieldHeight = new FContentField("height");
+   // 外空白的定义
+   public final static FContentField FieldMargin = new FContentField("margin");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -65,21 +65,21 @@ public abstract class XBaseMenuBar extends XContentObject
    @AName("label")
    protected String _label;
 
-   // 左位置
-   @AName("left")
-   protected String _left;
+   // 位置
+   @AName("location")
+   protected String _location;
 
-   // 上位置
-   @AName("top")
-   protected String _top;
+   // 尺寸
+   @AName("size")
+   protected String _size;
 
-   // 宽度
-   @AName("width")
-   protected String _width;
+   // 内空白
+   @AName("padding")
+   protected String _padding;
 
-   // 高度
-   @AName("height")
-   protected String _height;
+   // 外空白
+   @AName("margin")
+   protected String _margin;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -136,75 +136,75 @@ public abstract class XBaseMenuBar extends XContentObject
    }
 
    //============================================================
-   // <T>获得左位置的内容。</T>
+   // <T>获得位置的内容。</T>
    //
-   // @return 左位置
+   // @return 位置
    //============================================================
-   public String getLeft(){
-      return _left;
+   public String getLocation(){
+      return _location;
    }
 
    //============================================================
-   // <T>设置左位置的内容。</T>
+   // <T>设置位置的内容。</T>
    //
-   // @param value 左位置
+   // @param value 位置
    //============================================================
-   public void setLeft(String value){
-      _left = value;
+   public void setLocation(String value){
+      _location = value;
    }
 
    //============================================================
-   // <T>获得上位置的内容。</T>
+   // <T>获得尺寸的内容。</T>
    //
-   // @return 上位置
+   // @return 尺寸
    //============================================================
-   public String getTop(){
-      return _top;
+   public String getSize(){
+      return _size;
    }
 
    //============================================================
-   // <T>设置上位置的内容。</T>
+   // <T>设置尺寸的内容。</T>
    //
-   // @param value 上位置
+   // @param value 尺寸
    //============================================================
-   public void setTop(String value){
-      _top = value;
+   public void setSize(String value){
+      _size = value;
    }
 
    //============================================================
-   // <T>获得宽度的内容。</T>
+   // <T>获得内空白的内容。</T>
    //
-   // @return 宽度
+   // @return 内空白
    //============================================================
-   public String getWidth(){
-      return _width;
+   public String getPadding(){
+      return _padding;
    }
 
    //============================================================
-   // <T>设置宽度的内容。</T>
+   // <T>设置内空白的内容。</T>
    //
-   // @param value 宽度
+   // @param value 内空白
    //============================================================
-   public void setWidth(String value){
-      _width = value;
+   public void setPadding(String value){
+      _padding = value;
    }
 
    //============================================================
-   // <T>获得高度的内容。</T>
+   // <T>获得外空白的内容。</T>
    //
-   // @return 高度
+   // @return 外空白
    //============================================================
-   public String getHeight(){
-      return _height;
+   public String getMargin(){
+      return _margin;
    }
 
    //============================================================
-   // <T>设置高度的内容。</T>
+   // <T>设置外空白的内容。</T>
    //
-   // @param value 高度
+   // @param value 外空白
    //============================================================
-   public void setHeight(String value){
-      _height = value;
+   public void setMargin(String value){
+      _margin = value;
    }
 
 }

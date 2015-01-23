@@ -5,14 +5,14 @@ import org.mo.cloud.design.core.configuration.FContentField;
 import org.mo.cloud.design.core.configuration.XContentObject;
 
 //============================================================
-// <T>文本编辑框对象的内容基类。</T>
+// <T>表格编辑列对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseEdit extends XContentObject
+public abstract class XBaseColumnEdit extends XContentObject
 {
    // 组件名称
-   public static final String NAME = "Edit";
+   public static final String NAME = "ColumnEdit";
 
    // 名称的定义
    public final static FContentField FieldName = new FContentField("name");
@@ -34,15 +34,6 @@ public abstract class XBaseEdit extends XContentObject
 
    // 外空白的定义
    public final static FContentField FieldMargin = new FContentField("margin");
-
-   // 标签对齐的定义
-   public final static FContentField FieldLabelAlignCd = new FContentField("label_align_cd");
-
-   // 标签尺寸的定义
-   public final static FContentField FieldLabelSize = new FContentField("label_size");
-
-   // 编辑大小的定义
-   public final static FContentField FieldEditSize = new FContentField("edit_size");
 
    // 放大引用的定义
    public final static FContentField FieldZoomReference = new FContentField("zoom_reference");
@@ -82,9 +73,6 @@ public abstract class XBaseEdit extends XContentObject
 
    // 校验最大长度的定义
    public final static FContentField FieldValidLengthMax = new FContentField("valid_length_max");
-
-   // 输入尺寸的定义
-   public final static FContentField FieldInputSize = new FContentField("input_size");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -131,18 +119,6 @@ public abstract class XBaseEdit extends XContentObject
    // 外空白
    @AName("margin")
    protected String _margin;
-
-   // 标签对齐
-   @AName("label_align_cd")
-   protected String _labelAlignCd;
-
-   // 标签尺寸
-   @AName("label_size")
-   protected String _labelSize;
-
-   // 编辑大小
-   @AName("edit_size")
-   protected String _editSize;
 
    // 放大引用
    @AName("zoom_reference")
@@ -195,10 +171,6 @@ public abstract class XBaseEdit extends XContentObject
    // 校验最大长度
    @AName("valid_length_max")
    protected String _validLengthMax;
-
-   // 输入尺寸
-   @AName("input_size")
-   protected String _inputSize;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -324,60 +296,6 @@ public abstract class XBaseEdit extends XContentObject
    //============================================================
    public void setMargin(String value){
       _margin = value;
-   }
-
-   //============================================================
-   // <T>获得标签对齐的内容。</T>
-   //
-   // @return 标签对齐
-   //============================================================
-   public String getLabelAlignCd(){
-      return _labelAlignCd;
-   }
-
-   //============================================================
-   // <T>设置标签对齐的内容。</T>
-   //
-   // @param value 标签对齐
-   //============================================================
-   public void setLabelAlignCd(String value){
-      _labelAlignCd = value;
-   }
-
-   //============================================================
-   // <T>获得标签尺寸的内容。</T>
-   //
-   // @return 标签尺寸
-   //============================================================
-   public String getLabelSize(){
-      return _labelSize;
-   }
-
-   //============================================================
-   // <T>设置标签尺寸的内容。</T>
-   //
-   // @param value 标签尺寸
-   //============================================================
-   public void setLabelSize(String value){
-      _labelSize = value;
-   }
-
-   //============================================================
-   // <T>获得编辑大小的内容。</T>
-   //
-   // @return 编辑大小
-   //============================================================
-   public String getEditSize(){
-      return _editSize;
-   }
-
-   //============================================================
-   // <T>设置编辑大小的内容。</T>
-   //
-   // @param value 编辑大小
-   //============================================================
-   public void setEditSize(String value){
-      _editSize = value;
    }
 
    //============================================================
@@ -612,24 +530,6 @@ public abstract class XBaseEdit extends XContentObject
    //============================================================
    public void setValidLengthMax(String value){
       _validLengthMax = value;
-   }
-
-   //============================================================
-   // <T>获得输入尺寸的内容。</T>
-   //
-   // @return 输入尺寸
-   //============================================================
-   public String getInputSize(){
-      return _inputSize;
-   }
-
-   //============================================================
-   // <T>设置输入尺寸的内容。</T>
-   //
-   // @param value 输入尺寸
-   //============================================================
-   public void setInputSize(String value){
-      _inputSize = value;
    }
 
 }

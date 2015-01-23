@@ -5,14 +5,14 @@ import org.mo.cloud.design.core.configuration.FContentField;
 import org.mo.cloud.design.core.configuration.XContentObject;
 
 //============================================================
-// <T>下拉选择框对象的内容基类。</T>
+// <T>面板对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseSelect extends XContentObject
+public abstract class XBasePanel extends XContentObject
 {
    // 组件名称
-   public static final String NAME = "Select";
+   public static final String NAME = "Panel";
 
    // 名称的定义
    public final static FContentField FieldName = new FContentField("name");
@@ -35,17 +35,11 @@ public abstract class XBaseSelect extends XContentObject
    // 外空白的定义
    public final static FContentField FieldMargin = new FContentField("margin");
 
-   // 标签对齐的定义
-   public final static FContentField FieldLabelAlignCd = new FContentField("label_align_cd");
+   // 样式类型的定义
+   public final static FContentField FieldStyleCd = new FContentField("style_cd");
 
-   // 标签尺寸的定义
-   public final static FContentField FieldLabelSize = new FContentField("label_size");
-
-   // 编辑大小的定义
-   public final static FContentField FieldEditSize = new FContentField("edit_size");
-
-   // 输入尺寸的定义
-   public final static FContentField FieldInputSize = new FContentField("input_size");
+   // 图标的定义
+   public final static FContentField FieldIcon = new FContentField("icon");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -93,21 +87,13 @@ public abstract class XBaseSelect extends XContentObject
    @AName("margin")
    protected String _margin;
 
-   // 标签对齐
-   @AName("label_align_cd")
-   protected String _labelAlignCd;
+   // 样式类型
+   @AName("style_cd")
+   protected String _styleCd;
 
-   // 标签尺寸
-   @AName("label_size")
-   protected String _labelSize;
-
-   // 编辑大小
-   @AName("edit_size")
-   protected String _editSize;
-
-   // 输入尺寸
-   @AName("input_size")
-   protected String _inputSize;
+   // 图标
+   @AName("icon")
+   protected String _icon;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -236,75 +222,39 @@ public abstract class XBaseSelect extends XContentObject
    }
 
    //============================================================
-   // <T>获得标签对齐的内容。</T>
+   // <T>获得样式类型的内容。</T>
    //
-   // @return 标签对齐
+   // @return 样式类型
    //============================================================
-   public String getLabelAlignCd(){
-      return _labelAlignCd;
+   public String getStyleCd(){
+      return _styleCd;
    }
 
    //============================================================
-   // <T>设置标签对齐的内容。</T>
+   // <T>设置样式类型的内容。</T>
    //
-   // @param value 标签对齐
+   // @param value 样式类型
    //============================================================
-   public void setLabelAlignCd(String value){
-      _labelAlignCd = value;
+   public void setStyleCd(String value){
+      _styleCd = value;
    }
 
    //============================================================
-   // <T>获得标签尺寸的内容。</T>
+   // <T>获得图标的内容。</T>
    //
-   // @return 标签尺寸
+   // @return 图标
    //============================================================
-   public String getLabelSize(){
-      return _labelSize;
+   public String getIcon(){
+      return _icon;
    }
 
    //============================================================
-   // <T>设置标签尺寸的内容。</T>
+   // <T>设置图标的内容。</T>
    //
-   // @param value 标签尺寸
+   // @param value 图标
    //============================================================
-   public void setLabelSize(String value){
-      _labelSize = value;
-   }
-
-   //============================================================
-   // <T>获得编辑大小的内容。</T>
-   //
-   // @return 编辑大小
-   //============================================================
-   public String getEditSize(){
-      return _editSize;
-   }
-
-   //============================================================
-   // <T>设置编辑大小的内容。</T>
-   //
-   // @param value 编辑大小
-   //============================================================
-   public void setEditSize(String value){
-      _editSize = value;
-   }
-
-   //============================================================
-   // <T>获得输入尺寸的内容。</T>
-   //
-   // @return 输入尺寸
-   //============================================================
-   public String getInputSize(){
-      return _inputSize;
-   }
-
-   //============================================================
-   // <T>设置输入尺寸的内容。</T>
-   //
-   // @param value 输入尺寸
-   //============================================================
-   public void setInputSize(String value){
-      _inputSize = value;
+   public void setIcon(String value){
+      _icon = value;
    }
 
 }

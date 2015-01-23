@@ -5,14 +5,14 @@ import org.mo.cloud.design.core.configuration.FContentField;
 import org.mo.cloud.design.core.configuration.XContentObject;
 
 //============================================================
-// <T>下拉选择框对象的内容基类。</T>
+// <T>数字编辑框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseSelect extends XContentObject
+public abstract class XBaseNumber extends XContentObject
 {
    // 组件名称
-   public static final String NAME = "Select";
+   public static final String NAME = "Number";
 
    // 名称的定义
    public final static FContentField FieldName = new FContentField("name");
@@ -43,9 +43,6 @@ public abstract class XBaseSelect extends XContentObject
 
    // 编辑大小的定义
    public final static FContentField FieldEditSize = new FContentField("edit_size");
-
-   // 输入尺寸的定义
-   public final static FContentField FieldInputSize = new FContentField("input_size");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -104,10 +101,6 @@ public abstract class XBaseSelect extends XContentObject
    // 编辑大小
    @AName("edit_size")
    protected String _editSize;
-
-   // 输入尺寸
-   @AName("input_size")
-   protected String _inputSize;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -287,24 +280,6 @@ public abstract class XBaseSelect extends XContentObject
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
-   }
-
-   //============================================================
-   // <T>获得输入尺寸的内容。</T>
-   //
-   // @return 输入尺寸
-   //============================================================
-   public String getInputSize(){
-      return _inputSize;
-   }
-
-   //============================================================
-   // <T>设置输入尺寸的内容。</T>
-   //
-   // @param value 输入尺寸
-   //============================================================
-   public void setInputSize(String value){
-      _inputSize = value;
    }
 
 }
