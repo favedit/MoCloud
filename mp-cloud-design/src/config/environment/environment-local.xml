@@ -2,6 +2,22 @@
 
 <Config>
    
+   <!-- ============================================================ -->
+   <!-- 内存缓冲控制台                                               -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
+         class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
+         scope = 'global' >
+      <Property name='enable'>N</Property>
+      <Property name='code'>G2L</Property>
+      <Property name='servers'>10.30.101.11:11311</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- 环境控制台                                                   -->
+   <!-- ============================================================ -->
    <Component
          face  = 'org.mo.eng.environment.IEnvironmentConsole'
          class = 'org.mo.eng.environment.FEnvironmentConsole'
@@ -14,30 +30,36 @@
       <Initialize name='initializeConfig'/>
    </Component>
    
+   <!-- ============================================================ -->
+   <!-- 数据控制台                                                   -->
+   <!-- ============================================================ -->
    <Component
          face  = 'org.mo.eng.data.IDatabaseConsole'
          class = 'org.mo.eng.data.FDatabaseConsole'
          scope = 'global'>
-      <Property name='default'>MOGM</Property>
+      <Property name='default'>data</Property>
+      <!-- ============================================================ -->
+      <!-- 缓冲链接控制台                                               -->
+      <!-- ============================================================ -->
       <Initialize name='add'>
          <Parameter>
-            <Component
-                  class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>MOGM</Property>
-               <Property name='driver_class'>org.mo.data.driver.FSqlOracleConnection</Property>
-               <Property name='driver_name'>oracle.jdbc.driver.OracleDriver</Property>
-               <Property name='url'>jdbc:oracle:thin:@192.168.2.1:1521:ZQIS</Property>
-               <Property name='passport'>GAME</Property>
-               <Property name='password'>GAME</Property>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>data</Property>
+               <Property name='driver_class'>com.cyou.gccloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/data</Property>
+               <Property name='passport'>cloud</Property>
+               <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
                <Property name='connectionTimeLimit'>600000</Property>
                <Property name='retryCount'>10</Property>
                <Property name='retryDelay'>10</Property>
-               <Property name='testSql'>SELECT 1 FROM DUAL</Property>
-               <Property name='testTime'>30000</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
                <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
             </Component>
          </Parameter>
       </Initialize>

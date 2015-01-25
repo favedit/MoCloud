@@ -5,14 +5,14 @@ import org.mo.cloud.design.core.configuration.FContentField;
 import org.mo.cloud.design.core.configuration.XContentObject;
 
 //============================================================
-// <T>表格编辑列对象的内容基类。</T>
+// <T>表格数字列对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseColumnEdit extends XContentObject
+public abstract class XBaseColumnNumber extends XContentObject
 {
    // 组件名称
-   public static final String NAME = "ColumnEdit";
+   public static final String NAME = "ColumnNumber";
 
    // 名称的定义
    public final static FContentField FieldName = new FContentField("name");

@@ -35,6 +35,30 @@ public abstract class XBaseForm extends XContentObject
    // 外空白的定义
    public final static FContentField FieldMargin = new FContentField("margin");
 
+   // 数据名称的定义
+   public final static FContentField FieldDatasetName = new FContentField("dataset_name");
+
+   // 数据分页大小的定义
+   public final static FContentField FieldDatasetPageSize = new FContentField("dataset_page_size");
+
+   // 数据搜索的定义
+   public final static FContentField FieldDatasetSearch = new FContentField("dataset_search");
+
+   // 数据排序的定义
+   public final static FContentField FieldDatasetOrder = new FContentField("dataset_order");
+
+   // 数据查询指令的定义
+   public final static FContentField FieldDatasetFetchCommand = new FContentField("dataset_fetch_command");
+
+   // 数据新建命令的定义
+   public final static FContentField FieldDatasetInsertAction = new FContentField("dataset_insert_action");
+
+   // 数据更新命令的定义
+   public final static FContentField FieldDatasetUpdateAction = new FContentField("dataset_update_action");
+
+   // 数据删除命令的定义
+   public final static FContentField FieldDatasetDeleteAction = new FContentField("dataset_delete_action");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -80,6 +104,38 @@ public abstract class XBaseForm extends XContentObject
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 数据名称
+   @AName("dataset_name")
+   protected String _datasetName;
+
+   // 数据分页大小
+   @AName("dataset_page_size")
+   protected String _datasetPageSize;
+
+   // 数据搜索
+   @AName("dataset_search")
+   protected String _datasetSearch;
+
+   // 数据排序
+   @AName("dataset_order")
+   protected String _datasetOrder;
+
+   // 数据查询指令
+   @AName("dataset_fetch_command")
+   protected String _datasetFetchCommand;
+
+   // 数据新建命令
+   @AName("dataset_insert_action")
+   protected String _datasetInsertAction;
+
+   // 数据更新命令
+   @AName("dataset_update_action")
+   protected String _datasetUpdateAction;
+
+   // 数据删除命令
+   @AName("dataset_delete_action")
+   protected String _datasetDeleteAction;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -205,6 +261,150 @@ public abstract class XBaseForm extends XContentObject
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDatasetName(){
+      return _datasetName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDatasetName(String value){
+      _datasetName = value;
+   }
+
+   //============================================================
+   // <T>获得数据分页大小的内容。</T>
+   //
+   // @return 数据分页大小
+   //============================================================
+   public String getDatasetPageSize(){
+      return _datasetPageSize;
+   }
+
+   //============================================================
+   // <T>设置数据分页大小的内容。</T>
+   //
+   // @param value 数据分页大小
+   //============================================================
+   public void setDatasetPageSize(String value){
+      _datasetPageSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据搜索的内容。</T>
+   //
+   // @return 数据搜索
+   //============================================================
+   public String getDatasetSearch(){
+      return _datasetSearch;
+   }
+
+   //============================================================
+   // <T>设置数据搜索的内容。</T>
+   //
+   // @param value 数据搜索
+   //============================================================
+   public void setDatasetSearch(String value){
+      _datasetSearch = value;
+   }
+
+   //============================================================
+   // <T>获得数据排序的内容。</T>
+   //
+   // @return 数据排序
+   //============================================================
+   public String getDatasetOrder(){
+      return _datasetOrder;
+   }
+
+   //============================================================
+   // <T>设置数据排序的内容。</T>
+   //
+   // @param value 数据排序
+   //============================================================
+   public void setDatasetOrder(String value){
+      _datasetOrder = value;
+   }
+
+   //============================================================
+   // <T>获得数据查询指令的内容。</T>
+   //
+   // @return 数据查询指令
+   //============================================================
+   public String getDatasetFetchCommand(){
+      return _datasetFetchCommand;
+   }
+
+   //============================================================
+   // <T>设置数据查询指令的内容。</T>
+   //
+   // @param value 数据查询指令
+   //============================================================
+   public void setDatasetFetchCommand(String value){
+      _datasetFetchCommand = value;
+   }
+
+   //============================================================
+   // <T>获得数据新建命令的内容。</T>
+   //
+   // @return 数据新建命令
+   //============================================================
+   public String getDatasetInsertAction(){
+      return _datasetInsertAction;
+   }
+
+   //============================================================
+   // <T>设置数据新建命令的内容。</T>
+   //
+   // @param value 数据新建命令
+   //============================================================
+   public void setDatasetInsertAction(String value){
+      _datasetInsertAction = value;
+   }
+
+   //============================================================
+   // <T>获得数据更新命令的内容。</T>
+   //
+   // @return 数据更新命令
+   //============================================================
+   public String getDatasetUpdateAction(){
+      return _datasetUpdateAction;
+   }
+
+   //============================================================
+   // <T>设置数据更新命令的内容。</T>
+   //
+   // @param value 数据更新命令
+   //============================================================
+   public void setDatasetUpdateAction(String value){
+      _datasetUpdateAction = value;
+   }
+
+   //============================================================
+   // <T>获得数据删除命令的内容。</T>
+   //
+   // @return 数据删除命令
+   //============================================================
+   public String getDatasetDeleteAction(){
+      return _datasetDeleteAction;
+   }
+
+   //============================================================
+   // <T>设置数据删除命令的内容。</T>
+   //
+   // @param value 数据删除命令
+   //============================================================
+   public void setDatasetDeleteAction(String value){
+      _datasetDeleteAction = value;
    }
 
 }

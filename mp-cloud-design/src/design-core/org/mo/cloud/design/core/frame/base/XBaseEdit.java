@@ -44,6 +44,9 @@ public abstract class XBaseEdit extends XContentObject
    // 编辑大小的定义
    public final static FContentField FieldEditSize = new FContentField("edit_size");
 
+   // 数据名称的定义
+   public final static FContentField FieldDataName = new FContentField("data_name");
+
    // 放大引用的定义
    public final static FContentField FieldZoomReference = new FContentField("zoom_reference");
 
@@ -143,6 +146,10 @@ public abstract class XBaseEdit extends XContentObject
    // 编辑大小
    @AName("edit_size")
    protected String _editSize;
+
+   // 数据名称
+   @AName("data_name")
+   protected String _dataName;
 
    // 放大引用
    @AName("zoom_reference")
@@ -378,6 +385,24 @@ public abstract class XBaseEdit extends XContentObject
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDataName(){
+      return _dataName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDataName(String value){
+      _dataName = value;
    }
 
    //============================================================

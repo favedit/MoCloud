@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   <!-- ==================================================== -->
+   <!-- 设计：表单数据服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.data.frame'
+         face  = 'org.mo.cloud.design.data.frame.IFrameService'/>
+
+   <Component
+         face  = 'org.mo.cloud.design.data.frame.IFrameService'
+         class = 'org.mo.cloud.design.data.frame.FFrameService'
+         scope = 'global'/>
+
+</Config>

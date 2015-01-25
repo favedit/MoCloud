@@ -1,19 +1,21 @@
-package org.mo.cloud.design.describe.frame;
+package org.mo.cloud.design.data.frame;
 
-import org.mo.cloud.design.core.configuration.FContentObject;
 import org.mo.cloud.design.core.configuration.XContentObject;
 import org.mo.cloud.design.core.frame.IFrameConsole;
-import org.mo.cloud.design.core.persistence.FPersistence;
 import org.mo.cloud.design.core.persistence.IPersistenceConsole;
+import org.mo.com.collections.FDataset;
+import org.mo.com.collections.FRow;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.EResult;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
+import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>内容表单服务。</T>
+//<T>数据表单服务。</T>
 //============================================================
 public class FFrameService
       implements
@@ -37,61 +39,77 @@ public class FFrameService
    }
 
    //============================================================
-   // <T>从配置文件中加载树目录节点。</T>
+   // <T>获取数据集合。</T>
    //
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   @Override
-   public EResult list(IWebContext context,
-                       IWebInput input,
-                       IWebOutput output){
-      XContentObject[] xwindows = _frameConsole.list(_storageName);
-      FXmlNode xconfig = output.config();
-      for(XContentObject xwindow : xwindows){
-         FXmlNode xnode = xconfig.createNode("Window");
-         xnode.set("type", xwindow.name());
-         xnode.set("name", xwindow.get("name"));
-         xnode.set("label", xwindow.get("label"));
+   public EResult fetchDataset(IWebContext context,
+                               ISqlContext sqlContext,
+                               FXmlNode xconfig,
+                               FXmlNode xoutput){
+      String name = xconfig.get("name");
+      XContentObject xframe = _frameConsole.find(_storageName, name);
+      ISqlConnection connection = sqlContext.activeConnection();
+      // 生成查询命令
+      FDataCommandBuilder builder = new FDataCommandBuilder();
+      builder.setDataName((String)xframe.get("dataset_name"));
+      for(XContentObject child : xframe.children()){
+         FDataField field = new FDataField();
+         field.setDataName((String)child.get("data_name"));
+         builder.fields().push(field);
+      }
+      String sql = builder.makeFetchCommand();
+      // 生成数据集合
+      FXmlNode xdataset = xoutput.createNode("Dataset");
+      xdataset.set("name", name);
+      FDataset dataset = connection.fetchDataset(sql);
+      for(FRow row : dataset){
+         FXmlNode xrow = xdataset.createNode("Row");
+         xrow.attributes().assign(row);
       }
       return EResult.Success;
    }
 
    //============================================================
-   // <T>查询配置处理。</T>
+   // <T>获取数据集合。</T>
    //
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
    @Override
-   public EResult query(IWebContext context,
+   public EResult fetch(IWebContext context,
+                        ISqlContext sqlContext,
                         IWebInput input,
                         IWebOutput output){
-      // 获得参数
       FXmlNode xinput = input.config();
       FXmlNode xoutput = output.config();
-      // 活动转换器
-      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, "design.frame");
-      // 获得参数集合
-      for(FXmlNode xframe : xinput){
-         if(xframe.isName("Frame")){
-            String name = xframe.get("name");
-            // 查找目录定义
-            XContentObject xtree = _frameConsole.find(_storageName, name);
-            // 转换数据
-            FXmlNode xconfig = xoutput.createNode();
-            FContentObject content = persistence.convertConfig(xtree);
-            content.saveConfig(xconfig);
-            xconfig.set("name", name);
+      for(FXmlNode xnode : xinput){
+         if(xnode.isName("Frame")){
+            fetchDataset(context, sqlContext, xnode, xoutput);
          }
       }
       return EResult.Success;
    }
 
    //============================================================
-   // <T>新建配置处理。</T>
+   // <T>数据准备处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult prepare(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>数据新建处理。</T>
    //
    // @param context 网络环境
    // @param input 网络输入

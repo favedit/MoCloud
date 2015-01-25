@@ -23,6 +23,7 @@
    <!-- 包含：设计设定 -->
    <Include>${application.config}/design/core.xml</Include>
    <Include>${application.config}/design/describe.xml</Include>
+   <Include>${application.config}/design/data.xml</Include>
    <Include>${application.config}/design/service.xml</Include>
    <Include>${application.config}/design/face.xml</Include>
 

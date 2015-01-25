@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="common.country.CountryForm" update_date="20141210134046">
-   <Table name="database.codelist.CodeListList" label="数据库-定义列表" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_refer="design.list.ControlType" edit_copy="Y" edit_fetch="N" edit_search="N" edit_picker="N" edit_zoom="N" edit_print="N" edit_action="N" edit_insert="Y" edit_update="Y" edit_delete="Y" disp_toolbar="N" disp_searchbar="N" disp_titlebar="N">
-     <ColumnEdit name="code" label="代码" is_valid="Y" size='0,200' note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_auto="N" disp_size="N" disp_drag="N" style_refer="columnEditWide" data_name="NAME" disp_fixed="N" />
-     <ColumnEdit name="name" label="名称" is_valid="Y" size='0,100' note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_auto="N" disp_size="N" disp_drag="N" style_refer="columnEditWide" data_name="NAME" disp_fixed="N" />
-     <ColumnEdit name="label" label="标签" is_valid="Y" size='0,400' note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_auto="Y" disp_size="N" disp_drag="N" data_name="LABEL" disp_fixed="N" />
+   <Table name="database.codelist.CodeListList" label="数据库-定义列表" dataset_name='DT_COM_COUNTRY' is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_refer="design.list.ControlType" edit_copy="Y" edit_fetch="N" edit_search="N" edit_picker="N" edit_zoom="N" edit_print="N" edit_action="N" edit_insert="Y" edit_update="Y" edit_delete="Y" disp_toolbar="N" disp_searchbar="N" disp_titlebar="N">
+     <ColumnEdit name="code" label="代码" is_valid="Y" size='200,0' note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_auto="N" disp_size="N" disp_drag="N" style_refer="columnEditWide" data_name="code" disp_fixed="N" />
+     <ColumnEdit name="name" label="名称" is_valid="Y" size='100,0' note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_auto="N" disp_size="N" disp_drag="N" style_refer="columnEditWide" data_name="name" disp_fixed="N" />
+     <ColumnEdit name="label" label="标签" is_valid="Y" size='400,0' note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_auto="Y" disp_size="N" disp_drag="N" data_name="label" disp_fixed="N" />
    </Table>
 </Content>
