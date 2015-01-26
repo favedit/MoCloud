@@ -25,3 +25,5 @@ http://localhost:91/cloud.describe.frame.ws?action=query&code=common.country.Cou
       attributes="" />
 </Configuration>
 
+<test></test>
+
