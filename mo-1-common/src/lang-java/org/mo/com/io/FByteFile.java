@@ -5,14 +5,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import org.mo.com.io.base.MByteStream;
 import org.mo.com.lang.FFatalError;
 
 //============================================================
 // <T>字节流文件。</T>
 //============================================================
 public class FByteFile
-      extends MByteStream
+      extends FByteStream
       implements
          AutoCloseable
 {

@@ -25,6 +25,7 @@ public class FByteStream
    //
    // @return 布尔值
    //============================================================
+   @Override
    public boolean readBoolean(){
       byte value = _memory[_position++];
       return (value > 0);
@@ -35,6 +36,7 @@ public class FByteStream
    //
    // @return 有符号8位整数
    //============================================================
+   @Override
    public byte readInt8(){
       return _memory[_position++];
    }
@@ -44,6 +46,7 @@ public class FByteStream
    //
    // @return 有符号16位整数
    //============================================================
+   @Override
    public short readInt16(){
       int v1 = _memory[_position++];
       int v2 = _memory[_position++];
@@ -55,6 +58,7 @@ public class FByteStream
    //
    // @return 有符号32位整数
    //============================================================
+   @Override
    public int readInt32(){
       int v1 = _memory[_position++];
       int v2 = _memory[_position++];
@@ -68,6 +72,7 @@ public class FByteStream
    //
    // @return 有符号64位整数
    //============================================================
+   @Override
    public long readInt64(){
       long v1 = _memory[_position++];
       long v2 = _memory[_position++];
@@ -81,8 +86,9 @@ public class FByteStream
    //
    // @return 无符号8位整数
    //============================================================
-   public byte readUint8(){
-      return 0;
+   @Override
+   public short readUint8(){
+      return _memory[_position++];
    }
 
    //============================================================
@@ -90,8 +96,11 @@ public class FByteStream
    //
    // @return 无符号16位整数
    //============================================================
-   public short readUint16(){
-      return 0;
+   @Override
+   public int readUint16(){
+      int v1 = _memory[_position++];
+      int v2 = _memory[_position++];
+      return (short)((v1) + (v2 << 8));
    }
 
    //============================================================
@@ -99,18 +108,13 @@ public class FByteStream
    //
    // @return 无符号32位整数
    //============================================================
-   public int readUint32(){
-      return 0;
-   }
-
-   //============================================================
-   // <T>从字节流中读取一个无符号64位整数。</T>
-   //
-   // @param p:value 无符号64位整数
-   // @return 无符号64位整数
-   //============================================================
-   public long readUint64(){
-      return 0;
+   @Override
+   public long readUint32(){
+      int v1 = _memory[_position++];
+      int v2 = _memory[_position++];
+      int v3 = _memory[_position++];
+      int v4 = _memory[_position++];
+      return (v1) + (v2 << 8) + (v3 << 16) + (v4 << 24);
    }
 
    //============================================================
@@ -118,8 +122,14 @@ public class FByteStream
    //
    // @return 32位浮点数
    //============================================================
+   @Override
    public float readFloat(){
-      return 0;
+      int value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      value |= (_memory[_position++] & 0xFF) << 16;
+      value |= (_memory[_position++] & 0xFF) << 24;
+      return Float.intBitsToFloat(value);
    }
 
    //============================================================
@@ -127,8 +137,18 @@ public class FByteStream
    //
    // @return 64位浮点数
    //============================================================
+   @Override
    public double readDouble(){
-      return 0;
+      long value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      value |= (_memory[_position++] & 0xFF) << 16;
+      value |= (_memory[_position++] & 0xFF) << 24;
+      value |= (_memory[_position++] & 0xFF) << 32;
+      value |= (_memory[_position++] & 0xFF) << 40;
+      value |= (_memory[_position++] & 0xFF) << 48;
+      value |= (_memory[_position++] & 0xFF) << 56;
+      return Double.longBitsToDouble(value);
    }
 
    //============================================================
@@ -137,8 +157,15 @@ public class FByteStream
    //
    // @return 字符串
    //============================================================
+   @Override
    public String readString(){
-      return "";
+      // 读取长度
+      int length = readInt16();
+      StringBuffer result = new StringBuffer(length);
+      for(int n = 0; n < length; n++){
+         result.append((char)readInt16());
+      }
+      return result.toString();
    }
 
    //============================================================
@@ -147,6 +174,7 @@ public class FByteStream
    //
    // @param value 布尔值
    //============================================================
+   @Override
    public void writeBoolean(boolean value){
    }
 
@@ -155,6 +183,7 @@ public class FByteStream
    //
    // @param value 有符号整数
    //============================================================
+   @Override
    public void writeInt(int value){
    }
 
@@ -163,6 +192,7 @@ public class FByteStream
    //
    // @param value 有符号8位整数
    //============================================================
+   @Override
    public void writeInt8(byte value){
    }
 
@@ -171,6 +201,7 @@ public class FByteStream
    //
    // @param value 有符号16位整数
    //============================================================
+   @Override
    public void writeInt16(short value){
    }
 
@@ -179,6 +210,7 @@ public class FByteStream
    //
    // @param value 有符号32位整数
    //============================================================
+   @Override
    public void writeInt32(int value){
    }
 
@@ -187,6 +219,7 @@ public class FByteStream
    //
    // @param value 有符号64位整数
    //============================================================
+   @Override
    public void writeInt64(long value){
    }
 
@@ -195,6 +228,7 @@ public class FByteStream
    //
    // @param value 无符号8位整数
    //============================================================
+   @Override
    public void writeUint8(byte value){
    }
 
@@ -203,6 +237,7 @@ public class FByteStream
    //
    // @param value 无符号16位整数
    //============================================================
+   @Override
    public void writeUint16(short value){
    }
 
@@ -211,6 +246,7 @@ public class FByteStream
    //
    // @param value 无符号32位整数
    //============================================================
+   @Override
    public void writeUint32(int value){
    }
 
@@ -219,6 +255,7 @@ public class FByteStream
    //
    // @param value 无符号64位整数
    //============================================================
+   @Override
    public void writeUint64(long value){
    }
 
@@ -227,6 +264,7 @@ public class FByteStream
    //
    // @param value 32位浮点数
    //============================================================
+   @Override
    public void writeFloat(float value){
    }
 
@@ -235,6 +273,7 @@ public class FByteStream
    //
    // @param value 64位浮点数
    //============================================================
+   @Override
    public void writeDouble(double value){
    }
 
@@ -244,6 +283,7 @@ public class FByteStream
    // @param pValue 字符串
    // @param length 长度
    //============================================================
+   @Override
    public void writeString(String value){
    }
 

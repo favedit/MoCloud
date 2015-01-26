@@ -3,21 +3,19 @@ package org.mo.engine3d.resource.model;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.engine3d.resource.common.FRs3Resource;
 
 //============================================================
-// <T>资源模型。</T>
+// <T>资源模型网格。</T>
 //============================================================
-public class FRs3Model
-      extends FRs3Resource
+public class FRs3ModelMesh
 {
-   // 网格集合
-   protected FObjects<FRs3ModelMesh> _meshs = new FObjects<FRs3ModelMesh>(FRs3ModelMesh.class);
+   // 数据流集合
+   protected FObjects<FRs3ModelStream> _streams = new FObjects<FRs3ModelStream>(FRs3ModelStream.class);
 
    //============================================================
-   // <T>构造资源模型。</T>
+   // <T>构造资源模型网格。</T>
    //============================================================
-   public FRs3Model(){
+   public FRs3ModelMesh(){
    }
 
    //============================================================
@@ -25,9 +23,7 @@ public class FRs3Model
    //
    // @param output 输出流
    //============================================================
-   @Override
    public void serialize(IDataOutput output){
-      super.serialize(output);
    }
 
    //============================================================
@@ -35,15 +31,13 @@ public class FRs3Model
    //
    // @param input 输入流
    //============================================================
-   @Override
    public void unserialize(IDataInput input){
-      super.unserialize(input);
-      // 读取网格集合
+      // 读取数据流集合
       int meshCount = input.readInt16();
       for(int n = 0; n < meshCount; n++){
-         FRs3ModelMesh mesh = new FRs3ModelMesh();
-         mesh.unserialize(input);
-         _meshs.push(mesh);
+         FRs3ModelStream stream = new FRs3ModelStream();
+         stream.unserialize(input);
+         _streams.push(stream);
       }
    }
 }
