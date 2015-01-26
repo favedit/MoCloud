@@ -48,6 +48,12 @@ public class FDataResourceTypeUnit
    // 字段名称的定义。
    protected String _label;
 
+   // 存储字段图标地址的定义。
+   private String __iconUrl;
+
+   // 字段图标地址的定义。
+   protected String _iconUrl;
+
    // 存储字段是否显示的定义。
    private int __displayCd;
 
@@ -59,12 +65,6 @@ public class FDataResourceTypeUnit
 
    // 字段显示顺序的定义。
    protected int _displayOrder;
-
-   // 存储字段图标地址的定义。
-   private String __iconUrl;
-
-   // 字段图标地址的定义。
-   protected String _iconUrl;
 
    // 存储字段备注的定义。
    private String __note;
@@ -238,6 +238,33 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
+   // <T>判断图标地址的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIconUrlChanged(){
+      return !RString.equals(__iconUrl, _iconUrl);
+   }
+
+   //============================================================
+   // <T>获得图标地址的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String iconUrl(){
+      return _iconUrl;
+   }
+
+   //============================================================
+   // <T>设置图标地址的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIconUrl(String value){
+      _iconUrl = value;
+   }
+
+   //============================================================
    // <T>判断是否显示的数据是否改变。</T>
    //
    // @return 数据内容
@@ -289,33 +316,6 @@ public class FDataResourceTypeUnit
    //============================================================
    public void setDisplayOrder(int value){
       _displayOrder = value;
-   }
-
-   //============================================================
-   // <T>判断图标地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIconUrlChanged(){
-      return !RString.equals(__iconUrl, _iconUrl);
-   }
-
-   //============================================================
-   // <T>获得图标地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String iconUrl(){
-      return _iconUrl;
-   }
-
-   //============================================================
-   // <T>设置图标地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIconUrl(String value){
-      _iconUrl = value;
    }
 
    //============================================================
@@ -472,12 +472,12 @@ public class FDataResourceTypeUnit
             return _code;
          case "label":
             return _label;
+         case "icon_url":
+            return _iconUrl;
          case "display_cd":
             return RInteger.toString(_displayCd);
          case "display_order":
             return RInteger.toString(_displayOrder);
-         case "icon_url":
-            return _iconUrl;
          case "note":
             return _note;
          case "create_user_id":
@@ -517,14 +517,14 @@ public class FDataResourceTypeUnit
          case "label":
             _label = value;
             break;
+         case "icon_url":
+            _iconUrl = value;
+            break;
          case "display_cd":
             _displayCd = RInteger.parse(value);
             break;
          case "display_order":
             _displayOrder = RInteger.parse(value);
-            break;
-         case "icon_url":
-            _iconUrl = value;
             break;
          case "note":
             _note = value;
@@ -576,6 +576,10 @@ public class FDataResourceTypeUnit
                __label = value;
                _label = __label;
                break;
+            case "icon_url":
+               __iconUrl = value;
+               _iconUrl = __iconUrl;
+               break;
             case "display_cd":
                __displayCd = RInteger.parse(value);
                _displayCd = __displayCd;
@@ -583,10 +587,6 @@ public class FDataResourceTypeUnit
             case "display_order":
                __displayOrder = RInteger.parse(value);
                _displayOrder = __displayOrder;
-               break;
-            case "icon_url":
-               __iconUrl = value;
-               _iconUrl = __iconUrl;
                break;
             case "note":
                __note = value;
@@ -625,9 +625,9 @@ public class FDataResourceTypeUnit
       row.set("guid", _guid);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("iconUrl", _iconUrl);
       row.set("displayCd", _displayCd);
       row.set("displayOrder", _displayOrder);
-      row.set("iconUrl", _iconUrl);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -648,9 +648,9 @@ public class FDataResourceTypeUnit
       map.put("guid", _guid);
       map.put("code", _code);
       map.put("label", _label);
+      map.put("iconUrl", _iconUrl);
       map.put("displayCd", RInteger.toString(_displayCd));
       map.put("displayOrder", RInteger.toString(_displayOrder));
-      map.put("iconUrl", _iconUrl);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

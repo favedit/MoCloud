@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -41,42 +40,6 @@ public class FCacheSystemSessionUnit
 
    // 字段用户编号的定义。
    protected long _userId;
-
-   // 存储字段项目编号的定义。
-   private long __proectId;
-
-   // 字段项目编号的定义。
-   protected long _proectId;
-
-   // 存储字段来源类型的定义。
-   private int __fromCd;
-
-   // 字段来源类型的定义。
-   protected int _fromCd;
-
-   // 存储字段设备编号的定义。
-   private long __deviceId;
-
-   // 字段设备编号的定义。
-   protected long _deviceId;
-
-   // 存储字段设备品质的定义。
-   private String __deviceQuality;
-
-   // 字段设备品质的定义。
-   protected String _deviceQuality;
-
-   // 存储字段设备宽度的定义。
-   private int __deviceWidth;
-
-   // 字段设备宽度的定义。
-   protected int _deviceWidth;
-
-   // 存储字段设备高度的定义。
-   private int __deviceHeight;
-
-   // 字段设备高度的定义。
-   protected int _deviceHeight;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -217,168 +180,6 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
-   // <T>判断项目编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isProectIdChanged(){
-      return __proectId != _proectId;
-   }
-
-   //============================================================
-   // <T>获得项目编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long proectId(){
-      return _proectId;
-   }
-
-   //============================================================
-   // <T>设置项目编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setProectId(long value){
-      _proectId = value;
-   }
-
-   //============================================================
-   // <T>判断来源类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isFromCdChanged(){
-      return __fromCd != _fromCd;
-   }
-
-   //============================================================
-   // <T>获得来源类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int fromCd(){
-      return _fromCd;
-   }
-
-   //============================================================
-   // <T>设置来源类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setFromCd(int value){
-      _fromCd = value;
-   }
-
-   //============================================================
-   // <T>判断设备编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDeviceIdChanged(){
-      return __deviceId != _deviceId;
-   }
-
-   //============================================================
-   // <T>获得设备编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long deviceId(){
-      return _deviceId;
-   }
-
-   //============================================================
-   // <T>设置设备编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDeviceId(long value){
-      _deviceId = value;
-   }
-
-   //============================================================
-   // <T>判断设备品质的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDeviceQualityChanged(){
-      return !RString.equals(__deviceQuality, _deviceQuality);
-   }
-
-   //============================================================
-   // <T>获得设备品质的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String deviceQuality(){
-      return _deviceQuality;
-   }
-
-   //============================================================
-   // <T>设置设备品质的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDeviceQuality(String value){
-      _deviceQuality = value;
-   }
-
-   //============================================================
-   // <T>判断设备宽度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDeviceWidthChanged(){
-      return __deviceWidth != _deviceWidth;
-   }
-
-   //============================================================
-   // <T>获得设备宽度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int deviceWidth(){
-      return _deviceWidth;
-   }
-
-   //============================================================
-   // <T>设置设备宽度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDeviceWidth(int value){
-      _deviceWidth = value;
-   }
-
-   //============================================================
-   // <T>判断设备高度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDeviceHeightChanged(){
-      return __deviceHeight != _deviceHeight;
-   }
-
-   //============================================================
-   // <T>获得设备高度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int deviceHeight(){
-      return _deviceHeight;
-   }
-
-   //============================================================
-   // <T>设置设备高度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDeviceHeight(int value){
-      _deviceHeight = value;
-   }
-
-   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -503,18 +304,6 @@ public class FCacheSystemSessionUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
-         case "proect_id":
-            return Long.toString(_proectId);
-         case "from_cd":
-            return RInteger.toString(_fromCd);
-         case "device_id":
-            return Long.toString(_deviceId);
-         case "device_quality":
-            return _deviceQuality;
-         case "device_width":
-            return RInteger.toString(_deviceWidth);
-         case "device_height":
-            return RInteger.toString(_deviceHeight);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -548,24 +337,6 @@ public class FCacheSystemSessionUnit
             break;
          case "user_id":
             _userId = RLong.parse(value);
-            break;
-         case "proect_id":
-            _proectId = RLong.parse(value);
-            break;
-         case "from_cd":
-            _fromCd = RInteger.parse(value);
-            break;
-         case "device_id":
-            _deviceId = RLong.parse(value);
-            break;
-         case "device_quality":
-            _deviceQuality = value;
-            break;
-         case "device_width":
-            _deviceWidth = RInteger.parse(value);
-            break;
-         case "device_height":
-            _deviceHeight = RInteger.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -610,30 +381,6 @@ public class FCacheSystemSessionUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
-            case "proect_id":
-               __proectId = RLong.parse(value);
-               _proectId = __proectId;
-               break;
-            case "from_cd":
-               __fromCd = RInteger.parse(value);
-               _fromCd = __fromCd;
-               break;
-            case "device_id":
-               __deviceId = RLong.parse(value);
-               _deviceId = __deviceId;
-               break;
-            case "device_quality":
-               __deviceQuality = value;
-               _deviceQuality = __deviceQuality;
-               break;
-            case "device_width":
-               __deviceWidth = RInteger.parse(value);
-               _deviceWidth = __deviceWidth;
-               break;
-            case "device_height":
-               __deviceHeight = RInteger.parse(value);
-               _deviceHeight = __deviceHeight;
-               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -666,12 +413,6 @@ public class FCacheSystemSessionUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
-      row.set("proectId", _proectId);
-      row.set("fromCd", _fromCd);
-      row.set("deviceId", _deviceId);
-      row.set("deviceQuality", _deviceQuality);
-      row.set("deviceWidth", _deviceWidth);
-      row.set("deviceHeight", _deviceHeight);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -690,12 +431,6 @@ public class FCacheSystemSessionUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
-      map.put("proectId", RLong.toString(_proectId));
-      map.put("fromCd", RInteger.toString(_fromCd));
-      map.put("deviceId", RLong.toString(_deviceId));
-      map.put("deviceQuality", _deviceQuality);
-      map.put("deviceWidth", RInteger.toString(_deviceWidth));
-      map.put("deviceHeight", RInteger.toString(_deviceHeight));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

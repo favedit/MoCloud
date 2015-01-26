@@ -36,10 +36,10 @@ public class FDataResource3dModelUnit
    protected String _guid;
 
    // 存储字段对象版本标识的定义。
-   private String __gvid;
+   private String __ovid;
 
    // 字段对象版本标识的定义。
-   protected String _gvid;
+   protected String _ovid;
 
    // 存储字段类型编号的定义。
    private long __resourceId;
@@ -181,8 +181,8 @@ public class FDataResource3dModelUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
+   public boolean isOvidChanged(){
+      return !RString.equals(__ovid, _ovid);
    }
 
    //============================================================
@@ -190,8 +190,8 @@ public class FDataResource3dModelUnit
    //
    // @return 数据内容
    //============================================================
-   public String gvid(){
-      return _gvid;
+   public String ovid(){
+      return _ovid;
    }
 
    //============================================================
@@ -199,8 +199,8 @@ public class FDataResource3dModelUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setGvid(String value){
-      _gvid = value;
+   public void setOvid(String value){
+      _ovid = value;
    }
 
    //============================================================
@@ -445,8 +445,8 @@ public class FDataResource3dModelUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
+         case "ovid":
+            return _ovid;
          case "resource_id":
             return Long.toString(_resourceId);
          case "code":
@@ -486,8 +486,8 @@ public class FDataResource3dModelUnit
          case "guid":
             _guid = value;
             break;
-         case "gvid":
-            _gvid = value;
+         case "ovid":
+            _ovid = value;
             break;
          case "resource_id":
             _resourceId = RLong.parse(value);
@@ -540,9 +540,9 @@ public class FDataResource3dModelUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
+            case "ovid":
+               __ovid = value;
+               _ovid = __ovid;
                break;
             case "resource_id":
                __resourceId = RLong.parse(value);
@@ -591,7 +591,7 @@ public class FDataResource3dModelUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
+      row.set("ovid", _ovid);
       row.set("resourceId", _resourceId);
       row.set("code", _code);
       row.set("label", _label);
@@ -613,7 +613,7 @@ public class FDataResource3dModelUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
+      map.put("ovid", _ovid);
       map.put("resourceId", RLong.toString(_resourceId));
       map.put("code", _code);
       map.put("label", _label);

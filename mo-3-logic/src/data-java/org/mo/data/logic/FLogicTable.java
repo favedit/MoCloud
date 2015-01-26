@@ -156,7 +156,9 @@ public abstract class FLogicTable
       if(_cacheDataset == null){
          if(_cacheVendor != null){
             FLogicCacheChannel channel = _cacheVendor.channel();
-            _cacheDataset = channel.syncCache(_name);
+            if(channel != null){
+               _cacheDataset = channel.syncCache(_name);
+            }
          }
       }
       return _cacheDataset;
@@ -170,11 +172,14 @@ public abstract class FLogicTable
    //============================================================
    protected FRow innerCacheFindRow(long code){
       FLogicCacheDataset cache = innerCacheDataset();
-      FRow unit = cache.get(code);
-      if(unit != null){
-         _logger.debug(this, "innerCacheFindRow", "Find row from cache. (code={1})", code);
+      if(cache != null){
+         FRow unit = cache.get(code);
+         if(unit != null){
+            _logger.debug(this, "innerCacheFindRow", "Find row from cache. (code={1})", code);
+         }
+         return unit;
       }
-      return unit;
+      return null;
    }
 
    //============================================================
@@ -186,7 +191,9 @@ public abstract class FLogicTable
    protected void innerCacheSetRow(long code,
                                    FRow row){
       FLogicCacheDataset cache = innerCacheDataset();
-      cache.set(code, row);
+      if(cache != null){
+         cache.set(code, row);
+      }
    }
 
    //============================================================
@@ -196,7 +203,9 @@ public abstract class FLogicTable
    //============================================================
    protected void innerCacheDeleteRow(long code){
       FLogicCacheDataset cache = innerCacheDataset();
-      cache.set(code, null);
+      if(cache != null){
+         cache.set(code, null);
+      }
    }
 
    //============================================================
@@ -204,7 +213,9 @@ public abstract class FLogicTable
    //============================================================
    protected void innerCacheClear(){
       FLogicCacheDataset cache = innerCacheDataset();
-      cache.clear();
+      if(cache != null){
+         cache.clear();
+      }
    }
 
    //============================================================

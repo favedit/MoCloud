@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="a872fe22-73ae-4c81-a6db-7eb3713b7716" name="data.resource.resource" label="M#12cn15资源信息表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_RES_RESOURCE" data_alias="DT_RES_RES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="8aac1549-0076-401f-b968-8174a53f701f" name="type_id" label="M#12cn14类型编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TYPE_ID" data_alias="TYP" data_refer="data.resource.type" />
   <FieldString _uuid="9777a1be-6e2a-4c26-b7cb-4d84809e8d9c" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
-  <FieldString _uuid="2df89fb1-29ba-45fc-85a8-a2417a0a153c" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="80" />
   <FieldString _uuid="f2d506e2-e41f-4302-9ff6-aa45bfacc23f" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
-  <FieldRecordId _uuid="3945abe2-a80d-4688-a4af-c80030ee33f8" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldRecordId _uuid="80ba08ee-a0c5-4b1f-8f61-d5e271703db0" name="activity_id" label="M#12cn14活动编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVITY_ID" />
-  <FieldInteger _uuid="b2af8502-74c7-4fb2-b2e2-67686e0e7ca7" name="status_cd" label="M#12cn14状态类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
-  <FieldInteger _uuid="10c0cc3b-46ba-41cf-870c-69960ad2bc56" name="resource_cd" label="M#12cn14资源类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_CD" />
-  <FieldInteger _uuid="c294686d-fe3c-413e-b91e-fa4769d6f26d" name="resource_deploy_cd" label="M#12cn16资源部署状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_DEPLOY_CD" />
+  <FieldString _uuid="b4185291-88a9-4523-908b-0181f0ab0342" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
   <FieldInteger _uuid="0343513d-d6b5-4297-8073-8a999a3171ac" name="display_cd" label="M#12cn14显示类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
   <FieldInteger _uuid="f9f7b763-2a05-42b6-b26f-93e6ea4b058a" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" data_default="0" />
-  <FieldDateTime _uuid="93850846-fc67-442b-b96d-fa19e536f431" name="examine_date" label="M#12cn14审核日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EXAMINE_DATE" />
-  <FieldInteger _uuid="50e34d3a-2c86-4582-b927-34e1665a4d48" name="examine_result_cd" label="M#12cn16审核结果类型" is_valid="Y" note="M#12cn224EGcResourceExamineResult" is_null="Y" is_store="Y" is_abstract="N" data_name="EXAMINE_RESULT_CD" />
-  <FieldInteger _uuid="18364738-515f-4f62-920f-df1158cfd0d2" name="recommend_cd" label="M#12cn14推荐类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECOMMEND_CD" />
-  <FieldString _uuid="b4185291-88a9-4523-908b-0181f0ab0342" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
-  <FieldString _uuid="982fe8e4-4fc3-4d29-a193-041f05603e8e" name="link_url" label="M#12cn14外链地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_URL" data_size="800" />
-  <FieldInteger _uuid="39012de5-7ac8-4175-85bb-6495aee6d099" name="version_number" label="M#12cn14版本编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VERSION_NUMBER" data_default="0" />
-  <FieldString _uuid="8260335b-cbb3-4712-a59a-33c2d0546f56" name="version_code" label="M#12cn14版本代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VERSION_CODE" data_size="40" />
-  <FieldString _uuid="9f92222f-708c-421f-8bc2-91d9a7946ec1" name="keywords" label="M#12cn13关键字" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORDS" data_size="2000" />
-  <FieldInteger _uuid="c635caca-8512-40cb-9f3f-6e2dbb484f43" name="score_bean" label="M#12cn16点数(豆豆)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_BEAN" />
-  <FieldInteger _uuid="96f3764e-f2e6-4e45-ab8f-11925e56272c" name="score_point" label="M#12cn16点数(豆币)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_POINT" data_default="0" />
-  <FieldFloat _uuid="8af39e44-1bd8-4fd8-877d-0b5ee2209f91" name="score_gold" label="M#12cn16点数(金币)" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_GOLD" />
-  <FieldInteger _uuid="3856782e-99de-4d35-9c63-1f828119542f" name="play_count" label="M#12cn14播放次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PLAY_COUNT" />
-  <FieldInteger _uuid="602e9c0b-e8f5-4337-ac19-83a34b5a98fa" name="praise_count" label="M#12cn14点攒次数" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="PRAISE_COUNT" data_default="0" />
-  <FieldInteger _uuid="9f0287c0-722a-4b21-bcf6-404144342aba" name="attention_count" label="M#12cn18关注(收藏)次数" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="ATTENTION_COUNT" data_default="0" />
-  <FieldInteger _uuid="42ecd5df-eb38-4549-b2c4-7c687e2b7a10" name="share_count" label="M#12cn14分享次数" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SHARE_COUNT" data_default="0" />
-  <FieldInteger _uuid="fa45c921-d664-4b64-9f51-eafb9be74d7b" name="view_count" label="M#12cn14浏览次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
   <FieldString _uuid="fe8d85f5-ac0d-4e79-8950-3ea38008f666" name="description" label="M#12cn14详细描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
   <FieldContent _uuid="2e8305b1-e7bf-4ebd-9ee4-045b076146f5" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
   <FieldString _uuid="22fbdf5a-6667-4a22-8eb0-ea9291380865" name="note" label="M#12cn14注释内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="800" />

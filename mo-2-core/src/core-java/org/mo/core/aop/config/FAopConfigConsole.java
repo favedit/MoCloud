@@ -230,14 +230,14 @@ public class FAopConfigConsole
          _loadedFiles.push(localName);
          //............................................................
          // 加载设置文件
-         try{
-            FXmlDocument xdocument = new FXmlDocument(localName);
-            FXmlNode xconfig = xdocument.root();
-            loadNode(xconfig);
-            _logger.debug(this, "loadFile", "Load config success. (file_name={1})", localName);
-         }catch(Exception e){
-            throw new FFatalError(e, "Load config failed. (file_name={1})", localName);
-         }
+         //try{
+         FXmlDocument xdocument = new FXmlDocument(localName);
+         FXmlNode xconfig = xdocument.root();
+         loadNode(xconfig);
+         _logger.debug(this, "loadFile", "Load config success. (file_name={1})", localName);
+         //}catch(Exception e){
+         //   throw new FFatalError(e, "Load config failed. (file_name={1})", localName);
+         //}
       }
    }
 }

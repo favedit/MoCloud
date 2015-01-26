@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="src/design-describe"/>
 	<classpathentry kind="src" path="src/design-data"/>
 	<classpathentry kind="src" path="src/design-face"/>
+	<classpathentry kind="src" path="src/test-java"/>
 	<classpathentry kind="src" path="src/config"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>
@@ -24,5 +25,7 @@
 	<classpathentry kind="lib" path="lib/xom-1.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/jasper.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.5.2.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-5-cloud"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-6-content"/>
 	<classpathentry kind="output" path="webroot/WEB-INF/classes"/>
 </classpath>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="385ff408-b5ac-43e7-96c9-6cd03746c732" name="data.system.role" label="M#12cn15系统角色表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.System.Role" data_name="DT_SYS_ROLE" data_alias="DT_SYS_ROL" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldString _uuid="2699093d-a797-4a37-ab93-9e93138c1fcb" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
-  <FieldString _uuid="b6cc3e7a-8eaf-4f4e-9c5a-dee6367f6b31" name="label" label="M#12cn12标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
-  <FieldInteger _uuid="542a388b-83b5-4b5b-846f-4e988282f53a" name="display_cd" label="M#12cn14显示类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
-  <FieldInteger _uuid="32b26979-831b-47da-ad8d-6e16f0b50ef1" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
-  <FieldString _uuid="090282d1-be71-4f25-beea-6638b6ae09ce" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
-  <FieldTemplate _uuid="3f1e2083-b167-4092-b95a-25f2edb34563" name="track" label="M#12cn14追踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源3D模型数据流表逻辑。</T>
+// <T>资源3D网格数据表逻辑。</T>
 //============================================================
 @ASourceMachine
 public class FDataResource3dModelStreamLogic
       extends FLogicTable
 {
-   // 资源3D模型数据流表的定义。
+   // 资源3D网格数据表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源3D模型数据流表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.model.stream", "DT_RS3_MODEL_STREAM");
+   // 资源3D网格数据表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.model.stream", "DT_RS3_GEOMETRY_STREAM");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -42,7 +42,7 @@ public class FDataResource3dModelStreamLogic
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
    // 字段对象版本标识的定义。
-   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
+   public final static SLogicFieldInfo OVID = new SLogicFieldInfo("OVID");
 
    // 字段模型编号的定义。
    public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
@@ -50,19 +50,19 @@ public class FDataResource3dModelStreamLogic
    // 字段网格编号的定义。
    public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
 
-   // 字段类型代码的定义。
+   // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
-   // 字段元素类型的定义。
+   // 字段元素数据类型的定义。
    public final static SLogicFieldInfo ELEMENT_TYPE_CD = new SLogicFieldInfo("ELEMENT_TYPE_CD");
 
-   // 字段元素总数的定义。
+   // 字段元素个数的定义。
    public final static SLogicFieldInfo ELEMENT_COUNT = new SLogicFieldInfo("ELEMENT_COUNT");
 
    // 字段数据宽度的定义。
    public final static SLogicFieldInfo DATA_STRIDE = new SLogicFieldInfo("DATA_STRIDE");
 
-   // 字段数据总数的定义。
+   // 字段数据个数的定义。
    public final static SLogicFieldInfo DATA_COUNT = new SLogicFieldInfo("DATA_COUNT");
 
    // 字段数据长度的定义。
@@ -84,10 +84,10 @@ public class FDataResource3dModelStreamLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,MODEL_ID,MESH_ID,CODE,ELEMENT_TYPE_CD,ELEMENT_COUNT,DATA_STRIDE,DATA_COUNT,DATA_LENGTH,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,OVID,MODEL_ID,MESH_ID,CODE,ELEMENT_TYPE_CD,ELEMENT_COUNT,DATA_STRIDE,DATA_COUNT,DATA_LENGTH,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源3D模型数据流表逻辑单元。</T>
+   // <T>构造资源3D网格数据表逻辑单元。</T>
    //============================================================
    public FDataResource3dModelStreamLogic(){
       _name = TABLE.name();
@@ -95,7 +95,7 @@ public class FDataResource3dModelStreamLogic
    }
 
    //============================================================
-   // <T>构造资源3D模型数据流表逻辑单元。</T>
+   // <T>构造资源3D网格数据表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
@@ -577,7 +577,7 @@ public class FDataResource3dModelStreamLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`GVID`");
+      cmd.append(",`OVID`");
       cmd.append(",`MODEL_ID`");
       cmd.append(",`MESH_ID`");
       cmd.append(",`CODE`");
@@ -602,12 +602,12 @@ public class FDataResource3dModelStreamLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String gvid = unit.gvid();
-      if(RString.isEmpty(gvid)){
+      String ovid = unit.ovid();
+      if(RString.isEmpty(ovid)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(gvid));
+         cmd.append(RSql.formatValue(ovid));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -618,12 +618,7 @@ public class FDataResource3dModelStreamLogic
          cmd.append(modelId);
       }
       cmd.append(',');
-      long meshId = unit.meshId();
-      if(meshId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(meshId);
-      }
+      cmd.append(unit.meshId());
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -726,14 +721,14 @@ public class FDataResource3dModelStreamLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isGvidChanged()){
-         cmd.append(",`GVID`=");
-         String gvid = unit.gvid();
-         if(RString.isEmpty(gvid)){
+      if(unit.isOvidChanged()){
+         cmd.append(",`OVID`=");
+         String ovid = unit.ovid();
+         if(RString.isEmpty(ovid)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(gvid));
+            cmd.append(RSql.formatValue(ovid));
             cmd.append('\'');
          }
       }
@@ -748,12 +743,7 @@ public class FDataResource3dModelStreamLogic
       }
       if(unit.isMeshIdChanged()){
          cmd.append(",`MESH_ID`=");
-         long meshId = unit.meshId();
-         if(meshId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(meshId);
-         }
+         cmd.append(unit.meshId());
       }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");

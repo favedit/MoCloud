@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="26885efd-0fe2-4755-b92a-41022dbf92a9" name="data.person.user.invite" label="M#12cn15用户邀请表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Invite" data_name="DT_PSN_USER_INVITE" data_alias="DT_PSN_USR_INV" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="eb3eefdc-c0ec-4dd8-a0ad-e9be8400ccd2" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldRecordId _uuid="0da2d35e-ff1f-4054-bac5-1e9811a03ab8" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.system.project" />
-  <FieldRecordId _uuid="95713b98-8b98-499c-9a19-e77bbbcdd8c1" name="invite_id" label="M#12cn14邀请编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVITE_ID" data_alias="INV" data_refer="data.logic.invite" />
-  <FieldRecordId _uuid="2b5ab7d3-2898-490e-9817-85d326deda45" name="invite_user_id" label="M#12cn16邀请用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVITE_USER_ID" data_alias="IUS" data_refer="data.person.user" />
-  <FieldInteger _uuid="dff841d7-6723-4bcc-b2f3-b3744aafc767" name="status_cd" label="M#12cn14状态类型" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
-  <FieldTemplate _uuid="15c684e6-236e-49cf-aba5-2c5d114c7e21" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

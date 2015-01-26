@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="6cfc9f58-6aeb-4fcc-b66d-b943d876b2b3" name="data.external.weixin.reply.keyword" label="M#12cn18微信回复关键字表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_ENL_WX_REPLY_KEYWORD" data_alias="DT_ENL_WX_REP_KEY" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldRecordId _uuid="3c631380-9e50-454b-b9ec-542747e70de6" name="reply_id" label="M#12cn14回复编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REPLY_ID" data_alias="RPY" data_refer="data.external.weixin.reply" />
-  <FieldRecordId _uuid="4761a405-59d3-4ad7-b5f5-0efdf9b9b210" name="keyword_id" label="M#12cn15关键字编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORD_ID" data_alias="KEY" data_refer="data.external.weixin.keyword" />
-  <FieldInteger _uuid="528fd288-5cbf-4053-9d83-8086a07a06a8" name="keyword_match_cd" label="M#12cn17关键字匹配类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORD_MATCH_CD" />
-  <FieldTemplate _uuid="da817b8e-ff7b-474c-8ebb-8fcac91e495b" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

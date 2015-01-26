@@ -47,14 +47,14 @@ public class FDataResourceTypeLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段图标地址的定义。
+   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
+
    // 字段是否显示的定义。
    public final static SLogicFieldInfo DISPLAY_CD = new SLogicFieldInfo("DISPLAY_CD");
 
    // 字段显示顺序的定义。
    public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
-
-   // 字段图标地址的定义。
-   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -72,7 +72,7 @@ public class FDataResourceTypeLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,DISPLAY_CD,DISPLAY_ORDER,ICON_URL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,ICON_URL,DISPLAY_CD,DISPLAY_ORDER,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源类型表逻辑单元。</T>
@@ -567,9 +567,9 @@ public class FDataResourceTypeLogic
       cmd.append(",`GUID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`ICON_URL`");
       cmd.append(",`DISPLAY_CD`");
       cmd.append(",`DISPLAY_ORDER`");
-      cmd.append(",`ICON_URL`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -604,10 +604,6 @@ public class FDataResourceTypeLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.displayCd());
-      cmd.append(',');
-      cmd.append(unit.displayOrder());
-      cmd.append(',');
       String iconUrl = unit.iconUrl();
       if(RString.isEmpty(iconUrl)){
          cmd.append("NULL");
@@ -616,6 +612,10 @@ public class FDataResourceTypeLogic
          cmd.append(RSql.formatValue(iconUrl));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.displayCd());
+      cmd.append(',');
+      cmd.append(unit.displayOrder());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -721,14 +721,6 @@ public class FDataResourceTypeLogic
             cmd.append('\'');
          }
       }
-      if(unit.isDisplayCdChanged()){
-         cmd.append(",`DISPLAY_CD`=");
-         cmd.append(unit.displayCd());
-      }
-      if(unit.isDisplayOrderChanged()){
-         cmd.append(",`DISPLAY_ORDER`=");
-         cmd.append(unit.displayOrder());
-      }
       if(unit.isIconUrlChanged()){
          cmd.append(",`ICON_URL`=");
          String iconUrl = unit.iconUrl();
@@ -739,6 +731,14 @@ public class FDataResourceTypeLogic
             cmd.append(RSql.formatValue(iconUrl));
             cmd.append('\'');
          }
+      }
+      if(unit.isDisplayCdChanged()){
+         cmd.append(",`DISPLAY_CD`=");
+         cmd.append(unit.displayCd());
+      }
+      if(unit.isDisplayOrderChanged()){
+         cmd.append(",`DISPLAY_ORDER`=");
+         cmd.append(unit.displayOrder());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

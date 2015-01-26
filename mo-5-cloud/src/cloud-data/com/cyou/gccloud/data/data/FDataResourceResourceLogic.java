@@ -10,7 +10,6 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -42,83 +41,23 @@ public class FDataResourceResourceLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段类型编号的定义。
+   public final static SLogicFieldInfo TYPE_ID = new SLogicFieldInfo("TYPE_ID");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段名称的定义。
-   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
-
-   // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段用户编号的定义。
-   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
-
-   // 字段活动编号的定义。
-   public final static SLogicFieldInfo ACTIVITY_ID = new SLogicFieldInfo("ACTIVITY_ID");
-
-   // 字段状态类型的定义。
-   public final static SLogicFieldInfo STATUS_CD = new SLogicFieldInfo("STATUS_CD");
-
-   // 字段资源类型的定义。
-   public final static SLogicFieldInfo RESOURCE_CD = new SLogicFieldInfo("RESOURCE_CD");
-
-   // 字段资源部署状态的定义。
-   public final static SLogicFieldInfo RESOURCE_DEPLOY_CD = new SLogicFieldInfo("RESOURCE_DEPLOY_CD");
+   // 字段图标地址的定义。
+   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
 
    // 字段显示类型的定义。
    public final static SLogicFieldInfo DISPLAY_CD = new SLogicFieldInfo("DISPLAY_CD");
 
    // 字段排序值的定义。
    public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
-
-   // 字段审核日期的定义。
-   public final static SLogicFieldInfo EXAMINE_DATE = new SLogicFieldInfo("EXAMINE_DATE");
-
-   // 字段审核结果类型的定义。
-   public final static SLogicFieldInfo EXAMINE_RESULT_CD = new SLogicFieldInfo("EXAMINE_RESULT_CD");
-
-   // 字段推荐类型的定义。
-   public final static SLogicFieldInfo RECOMMEND_CD = new SLogicFieldInfo("RECOMMEND_CD");
-
-   // 字段图标地址的定义。
-   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
-
-   // 字段外链地址的定义。
-   public final static SLogicFieldInfo LINK_URL = new SLogicFieldInfo("LINK_URL");
-
-   // 字段版本编号的定义。
-   public final static SLogicFieldInfo VERSION_NUMBER = new SLogicFieldInfo("VERSION_NUMBER");
-
-   // 字段版本代码的定义。
-   public final static SLogicFieldInfo VERSION_CODE = new SLogicFieldInfo("VERSION_CODE");
-
-   // 字段关键字的定义。
-   public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
-
-   // 字段点数(豆豆)的定义。
-   public final static SLogicFieldInfo SCORE_BEAN = new SLogicFieldInfo("SCORE_BEAN");
-
-   // 字段点数(豆币)的定义。
-   public final static SLogicFieldInfo SCORE_POINT = new SLogicFieldInfo("SCORE_POINT");
-
-   // 字段点数(金币)的定义。
-   public final static SLogicFieldInfo SCORE_GOLD = new SLogicFieldInfo("SCORE_GOLD");
-
-   // 字段播放次数的定义。
-   public final static SLogicFieldInfo PLAY_COUNT = new SLogicFieldInfo("PLAY_COUNT");
-
-   // 字段点攒次数的定义。
-   public final static SLogicFieldInfo PRAISE_COUNT = new SLogicFieldInfo("PRAISE_COUNT");
-
-   // 字段关注(收藏)次数的定义。
-   public final static SLogicFieldInfo ATTENTION_COUNT = new SLogicFieldInfo("ATTENTION_COUNT");
-
-   // 字段分享次数的定义。
-   public final static SLogicFieldInfo SHARE_COUNT = new SLogicFieldInfo("SHARE_COUNT");
-
-   // 字段浏览次数的定义。
-   public final static SLogicFieldInfo VIEW_COUNT = new SLogicFieldInfo("VIEW_COUNT");
 
    // 字段详细描述的定义。
    public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
@@ -142,7 +81,7 @@ public class FDataResourceResourceLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,NAME,LABEL,USER_ID,ACTIVITY_ID,STATUS_CD,RESOURCE_CD,RESOURCE_DEPLOY_CD,DISPLAY_CD,DISPLAY_ORDER,EXAMINE_DATE,EXAMINE_RESULT_CD,RECOMMEND_CD,ICON_URL,LINK_URL,VERSION_NUMBER,VERSION_CODE,KEYWORDS,SCORE_BEAN,SCORE_POINT,SCORE_GOLD,PLAY_COUNT,PRAISE_COUNT,ATTENTION_COUNT,SHARE_COUNT,VIEW_COUNT,DESCRIPTION,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,TYPE_ID,CODE,LABEL,ICON_URL,DISPLAY_CD,DISPLAY_ORDER,DESCRIPTION,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源信息表逻辑单元。</T>
@@ -635,32 +574,12 @@ public class FDataResourceResourceLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`TYPE_ID`");
       cmd.append(",`CODE`");
-      cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
-      cmd.append(",`USER_ID`");
-      cmd.append(",`ACTIVITY_ID`");
-      cmd.append(",`STATUS_CD`");
-      cmd.append(",`RESOURCE_CD`");
-      cmd.append(",`RESOURCE_DEPLOY_CD`");
+      cmd.append(",`ICON_URL`");
       cmd.append(",`DISPLAY_CD`");
       cmd.append(",`DISPLAY_ORDER`");
-      cmd.append(",`EXAMINE_DATE`");
-      cmd.append(",`EXAMINE_RESULT_CD`");
-      cmd.append(",`RECOMMEND_CD`");
-      cmd.append(",`ICON_URL`");
-      cmd.append(",`LINK_URL`");
-      cmd.append(",`VERSION_NUMBER`");
-      cmd.append(",`VERSION_CODE`");
-      cmd.append(",`KEYWORDS`");
-      cmd.append(",`SCORE_BEAN`");
-      cmd.append(",`SCORE_POINT`");
-      cmd.append(",`SCORE_GOLD`");
-      cmd.append(",`PLAY_COUNT`");
-      cmd.append(",`PRAISE_COUNT`");
-      cmd.append(",`ATTENTION_COUNT`");
-      cmd.append(",`SHARE_COUNT`");
-      cmd.append(",`VIEW_COUNT`");
       cmd.append(",`DESCRIPTION`");
       cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
@@ -679,21 +598,19 @@ public class FDataResourceResourceLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
+      long typeId = unit.typeId();
+      if(typeId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(typeId);
+      }
+      cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String name = unit.name();
-      if(RString.isEmpty(name)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(name));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -706,45 +623,6 @@ public class FDataResourceResourceLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      long userId = unit.userId();
-      if(userId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(userId);
-      }
-      cmd.append(',');
-      long activityId = unit.activityId();
-      if(activityId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(activityId);
-      }
-      cmd.append(',');
-      cmd.append(unit.statusCd());
-      cmd.append(',');
-      cmd.append(unit.resourceCd());
-      cmd.append(',');
-      cmd.append(unit.resourceDeployCd());
-      cmd.append(',');
-      cmd.append(unit.displayCd());
-      cmd.append(',');
-      cmd.append(unit.displayOrder());
-      cmd.append(',');
-      TDateTime examineDate = unit.examineDate();
-      if(examineDate == null){
-         cmd.append("NULL");
-      }else if(examineDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(examineDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      cmd.append(unit.examineResultCd());
-      cmd.append(',');
-      cmd.append(unit.recommendCd());
-      cmd.append(',');
       String iconUrl = unit.iconUrl();
       if(RString.isEmpty(iconUrl)){
          cmd.append("NULL");
@@ -754,50 +632,9 @@ public class FDataResourceResourceLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String linkUrl = unit.linkUrl();
-      if(RString.isEmpty(linkUrl)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(linkUrl));
-         cmd.append('\'');
-      }
+      cmd.append(unit.displayCd());
       cmd.append(',');
-      cmd.append(unit.versionNumber());
-      cmd.append(',');
-      String versionCode = unit.versionCode();
-      if(RString.isEmpty(versionCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(versionCode));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String keywords = unit.keywords();
-      if(RString.isEmpty(keywords)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(keywords));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.scoreBean());
-      cmd.append(',');
-      cmd.append(unit.scorePoint());
-      cmd.append(',');
-      cmd.append(unit.scoreGold());
-      cmd.append(',');
-      cmd.append(unit.playCount());
-      cmd.append(',');
-      cmd.append(unit.praiseCount());
-      cmd.append(',');
-      cmd.append(unit.attentionCount());
-      cmd.append(',');
-      cmd.append(unit.shareCount());
-      cmd.append(',');
-      cmd.append(unit.viewCount());
+      cmd.append(unit.displayOrder());
       cmd.append(',');
       String description = unit.description();
       if(RString.isEmpty(description)){
@@ -899,6 +736,15 @@ public class FDataResourceResourceLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isTypeIdChanged()){
+         cmd.append(",`TYPE_ID`=");
+         long typeId = unit.typeId();
+         if(typeId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(typeId);
+         }
+      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();
@@ -907,17 +753,6 @@ public class FDataResourceResourceLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isNameChanged()){
-         cmd.append(",`NAME`=");
-         String name = unit.name();
-         if(RString.isEmpty(name)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(name));
             cmd.append('\'');
          }
       }
@@ -932,65 +767,6 @@ public class FDataResourceResourceLogic
             cmd.append('\'');
          }
       }
-      if(unit.isUserIdChanged()){
-         cmd.append(",`USER_ID`=");
-         long userId = unit.userId();
-         if(userId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(userId);
-         }
-      }
-      if(unit.isActivityIdChanged()){
-         cmd.append(",`ACTIVITY_ID`=");
-         long activityId = unit.activityId();
-         if(activityId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(activityId);
-         }
-      }
-      if(unit.isStatusCdChanged()){
-         cmd.append(",`STATUS_CD`=");
-         cmd.append(unit.statusCd());
-      }
-      if(unit.isResourceCdChanged()){
-         cmd.append(",`RESOURCE_CD`=");
-         cmd.append(unit.resourceCd());
-      }
-      if(unit.isResourceDeployCdChanged()){
-         cmd.append(",`RESOURCE_DEPLOY_CD`=");
-         cmd.append(unit.resourceDeployCd());
-      }
-      if(unit.isDisplayCdChanged()){
-         cmd.append(",`DISPLAY_CD`=");
-         cmd.append(unit.displayCd());
-      }
-      if(unit.isDisplayOrderChanged()){
-         cmd.append(",`DISPLAY_ORDER`=");
-         cmd.append(unit.displayOrder());
-      }
-      if(unit.isExamineDateChanged()){
-         cmd.append(",`EXAMINE_DATE`=");
-         TDateTime examineDate = unit.examineDate();
-         if(examineDate == null){
-            cmd.append("NULL");
-         }else if(examineDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(examineDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isExamineResultCdChanged()){
-         cmd.append(",`EXAMINE_RESULT_CD`=");
-         cmd.append(unit.examineResultCd());
-      }
-      if(unit.isRecommendCdChanged()){
-         cmd.append(",`RECOMMEND_CD`=");
-         cmd.append(unit.recommendCd());
-      }
       if(unit.isIconUrlChanged()){
          cmd.append(",`ICON_URL`=");
          String iconUrl = unit.iconUrl();
@@ -1002,74 +778,13 @@ public class FDataResourceResourceLogic
             cmd.append('\'');
          }
       }
-      if(unit.isLinkUrlChanged()){
-         cmd.append(",`LINK_URL`=");
-         String linkUrl = unit.linkUrl();
-         if(RString.isEmpty(linkUrl)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(linkUrl));
-            cmd.append('\'');
-         }
+      if(unit.isDisplayCdChanged()){
+         cmd.append(",`DISPLAY_CD`=");
+         cmd.append(unit.displayCd());
       }
-      if(unit.isVersionNumberChanged()){
-         cmd.append(",`VERSION_NUMBER`=");
-         cmd.append(unit.versionNumber());
-      }
-      if(unit.isVersionCodeChanged()){
-         cmd.append(",`VERSION_CODE`=");
-         String versionCode = unit.versionCode();
-         if(RString.isEmpty(versionCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(versionCode));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isKeywordsChanged()){
-         cmd.append(",`KEYWORDS`=");
-         String keywords = unit.keywords();
-         if(RString.isEmpty(keywords)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(keywords));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isScoreBeanChanged()){
-         cmd.append(",`SCORE_BEAN`=");
-         cmd.append(unit.scoreBean());
-      }
-      if(unit.isScorePointChanged()){
-         cmd.append(",`SCORE_POINT`=");
-         cmd.append(unit.scorePoint());
-      }
-      if(unit.isScoreGoldChanged()){
-         cmd.append(",`SCORE_GOLD`=");
-         cmd.append(unit.scoreGold());
-      }
-      if(unit.isPlayCountChanged()){
-         cmd.append(",`PLAY_COUNT`=");
-         cmd.append(unit.playCount());
-      }
-      if(unit.isPraiseCountChanged()){
-         cmd.append(",`PRAISE_COUNT`=");
-         cmd.append(unit.praiseCount());
-      }
-      if(unit.isAttentionCountChanged()){
-         cmd.append(",`ATTENTION_COUNT`=");
-         cmd.append(unit.attentionCount());
-      }
-      if(unit.isShareCountChanged()){
-         cmd.append(",`SHARE_COUNT`=");
-         cmd.append(unit.shareCount());
-      }
-      if(unit.isViewCountChanged()){
-         cmd.append(",`VIEW_COUNT`=");
-         cmd.append(unit.viewCount());
+      if(unit.isDisplayOrderChanged()){
+         cmd.append(",`DISPLAY_ORDER`=");
+         cmd.append(unit.displayOrder());
       }
       if(unit.isDescriptionChanged()){
          cmd.append(",`DESCRIPTION`=");

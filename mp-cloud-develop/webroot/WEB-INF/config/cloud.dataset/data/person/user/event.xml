@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="facfa58f-9ee7-48bf-9cb4-9e2472a63251" name="data.person.user.event" label="M#12cn15用户事件表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Event" data_name="DT_PSN_USER_EVENT" data_alias="DT_PSN_USR_EVE" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldRecordId _uuid="3fabc8b7-0871-404d-9450-1e70f99a64b3" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldRecordId _uuid="4ff5de7f-43a2-46c5-9ac3-bdeff1bd9ce3" name="event_id" label="M#12cn14事件编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EVENT_ID" data_alias="EVE" data_refer="data.logic.event" />
-  <FieldInteger _uuid="1eb55470-bd53-41b3-81fd-fd2d7aed42d6" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
-  <FieldRecordId _uuid="c5195038-40ad-445e-9897-5114a0f7b5aa" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
-  <FieldInteger _uuid="0dc08ddf-8114-411b-bf82-6c8f5656b430" name="status_cd" label="M#12cn14状态类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
-  <FieldTemplate _uuid="d5e36e66-1b5f-41d5-9f7f-aaf67c864b4a" name="track" label="M#12cn14追踪模版" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="aa50c113-d172-4f63-8a79-56850da2e1ba" name="logger.person.activity" label="M#12cn17用户活动日志表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Activity" data_name="LG_PSN_ACTIVITY" data_alias="LG_PSN_ACT" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldRecordId _uuid="8843771d-28c6-4e21-94a4-401bfd831e64" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldRecordId _uuid="e46c3f4a-4a86-40f7-a842-0ad6bb78b713" name="activity_id" label="M#12cn14活动编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="ACTIVITY_ID" />
-  <FieldInteger _uuid="6b25052c-ae2b-43f9-94f9-5a8d288490b2" name="operation_cd" label="M#12cn14操作代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OPERATION_CD" />
-  <FieldRecordId _uuid="48ef5840-35f1-4c01-ac89-41aebc3b1c37" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" />
-  <FieldString _uuid="c438b1b4-bd7b-43fe-b090-713b8a48c435" name="parameters" label="M#12cn14参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS" data_size="800" />
-  <FieldTemplate _uuid="cdce1a22-8b78-43a7-ae4e-83e2d6618e93" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

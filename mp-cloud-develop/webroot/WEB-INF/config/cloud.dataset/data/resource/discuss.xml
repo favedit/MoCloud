@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="562d8123-0eb8-45fa-996c-26e6123a312b" name="data.resource.discuss" label="M#12cn19资源讨论表    " is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_RES_DISCUSS" data_alias="DT_RES_DIS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="72d6321d-a5d1-45bd-9053-06f86f61aa2a" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_alias="RES" data_refer="data.resource.resource" />
-  <FieldRecordId _uuid="c96e9052-d0d5-441c-9c03-c5cbc5300f9b" name="parent_id" label="M#12cn15讨论父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARENT_ID" />
-  <FieldRecordId _uuid="a3749bf7-cbd5-44e8-b3ed-95383c10e147" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldContent _uuid="e6995428-25e9-447e-a494-17e86d307779" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
-  <FieldString _uuid="c7eacf7f-3ec6-4f75-921a-f0f6dcdbff08" name="note" label="M#12cn14讨论内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
-  <FieldTemplate _uuid="3df5f158-69e1-4e60-9951-8f0c3eff9eb2" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

@@ -165,16 +165,8 @@
          class     = 'org.mo.web.core.action.FActionConsole'
          scope     = 'global' >
       <Initialize name='addContext'>
-         <Parameter>/content</Parameter>
-         <Parameter>/content</Parameter>
-      </Initialize>
-      <Initialize name='addContext'>
-         <Parameter>/cloud</Parameter>
-         <Parameter>/cloud</Parameter>
-      </Initialize>
-      <Initialize name='addContext'>
-         <Parameter>/system</Parameter>
-         <Parameter>/system</Parameter>
+         <Parameter>/design</Parameter>
+         <Parameter>/design</Parameter>
       </Initialize>
    </Component>
 

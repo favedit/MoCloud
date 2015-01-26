@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="4cd0fe92-9afd-4563-b058-9338d8a92bdd" name="data.external.weixin.reply.item" label="M#12cn17微信回复项目表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_ENL_WX_REPLY_ITEM" data_alias="DT_ENL_WX_RPY_ITM" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldRecordId _uuid="26c608d1-661f-4920-92fa-8ab8ca138be5" name="reply_id" label="M#12cn14回复编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REPLY_ID" data_alias="RPY" data_refer="data.external.weixin.reply" />
-  <FieldRecordId _uuid="2b21e43c-c28f-4c90-8fef-7a656d35cfa1" name="news_id" label="M#12cn14资讯编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NEWS_ID" data_alias="NEW" data_refer="data.logic.news" />
-  <FieldInteger _uuid="95042579-ec91-4acc-990e-2a8f18927ee8" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
-  <FieldInteger _uuid="d8852140-cd39-4097-ae90-6cc5835913c5" name="view_count" label="M#12cn14查看次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
-  <FieldTemplate _uuid="b5f4b606-5bec-4595-8770-8eb9df458b3f" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

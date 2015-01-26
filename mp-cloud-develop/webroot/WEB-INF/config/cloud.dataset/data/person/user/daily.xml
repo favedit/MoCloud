@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="8a1b12ef-16ed-49f0-9019-c94b3c8da84f" name="data.person.user.daily" label="M#12cn15用户日常表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Daily" data_name="DT_PSN_USER_DAILY" data_alias="DT_PSN_USR_DAY" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="f2179fff-49f1-4d5d-a5f8-3044debbf426" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" data_uniques="DAY" />
-  <FieldDate _uuid="8ee771a7-d73e-465f-8257-8e995f28248a" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_DATE" data_uniques="DAY" />
-  <FieldInteger _uuid="a6ae99df-4f69-454e-bff1-928ea671153d" name="operation_cd" label="M#12cn14操作类型" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="OPERATION_CD" data_uniques="DAY" data_default="0" />
-  <FieldTemplate _uuid="d61f15c5-721c-4210-8c05-a576b53c3ed0" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

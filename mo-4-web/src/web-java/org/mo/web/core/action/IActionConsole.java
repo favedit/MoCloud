@@ -9,7 +9,6 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 public interface IActionConsole
 {
-
    //============================================================
    // <T>增加环境设置信息。</T>
    //

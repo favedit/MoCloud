@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="7d20ffab-7d3a-429c-af91-c82c6744bab4" name="cache.system.session" label="M#12cn15系统会话表" is_valid="Y" note="M#" data_engine="HEAP" data_group="cache" data_factory="Cache.System.Session" data_name="CC_SYS_SESSION" data_alias="CC_SYS_SES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
   <FieldRecordId _uuid="4b47f4e4-fd73-4374-bece-29292e1312e3" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldRecordId _uuid="f6931904-47df-491c-85e1-33c250767fc4" name="proect_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROECT_ID" />
-  <FieldInteger _uuid="aa1344bf-86da-4122-b07c-09d80cc35da1" name="from_cd" label="M#12cn14来源类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FROM_CD" />
-  <FieldRecordId _uuid="7d74b12b-15c9-4990-a805-a4343b1d91d3" name="device_id" label="M#12cn14设备编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEVICE_ID" />
-  <FieldString _uuid="f6bbd207-2676-47e5-9f0a-436bc729cf60" name="device_quality" label="M#12cn14设备品质" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEVICE_QUALITY" data_size="40" />
-  <FieldInteger _uuid="4fc9aabc-b68e-4092-b9b5-cff3129178aa" name="device_width" label="M#12cn14设备宽度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEVICE_WIDTH" />
-  <FieldInteger _uuid="c346a80c-7ed8-4c50-af78-fe1f5f75efab" name="device_height" label="M#12cn14设备高度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEVICE_HEIGHT" />
   <FieldTemplate _uuid="cc9e30ab-7ccd-4271-b9a2-6fb26b82a71c" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

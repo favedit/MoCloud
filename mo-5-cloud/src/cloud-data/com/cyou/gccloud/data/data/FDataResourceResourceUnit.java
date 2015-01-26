@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -37,6 +36,12 @@ public class FDataResourceResourceUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段类型编号的定义。
+   private long __typeId;
+
+   // 字段类型编号的定义。
+   protected long _typeId;
+
    // 存储字段代码的定义。
    private String __code;
 
@@ -44,46 +49,16 @@ public class FDataResourceResourceUnit
    protected String _code;
 
    // 存储字段名称的定义。
-   private String __name;
-
-   // 字段名称的定义。
-   protected String _name;
-
-   // 存储字段名称的定义。
    private String __label;
 
    // 字段名称的定义。
    protected String _label;
 
-   // 存储字段用户编号的定义。
-   private long __userId;
+   // 存储字段图标地址的定义。
+   private String __iconUrl;
 
-   // 字段用户编号的定义。
-   protected long _userId;
-
-   // 存储字段活动编号的定义。
-   private long __activityId;
-
-   // 字段活动编号的定义。
-   protected long _activityId;
-
-   // 存储字段状态类型的定义。
-   private int __statusCd;
-
-   // 字段状态类型的定义。
-   protected int _statusCd;
-
-   // 存储字段资源类型的定义。
-   private int __resourceCd;
-
-   // 字段资源类型的定义。
-   protected int _resourceCd;
-
-   // 存储字段资源部署状态的定义。
-   private int __resourceDeployCd;
-
-   // 字段资源部署状态的定义。
-   protected int _resourceDeployCd;
+   // 字段图标地址的定义。
+   protected String _iconUrl;
 
    // 存储字段显示类型的定义。
    private int __displayCd;
@@ -96,102 +71,6 @@ public class FDataResourceResourceUnit
 
    // 字段排序值的定义。
    protected int _displayOrder;
-
-   // 存储字段审核日期的定义。
-   private TDateTime __examineDate = new TDateTime();
-
-   // 字段审核日期的定义。
-   protected TDateTime _examineDate = new TDateTime();
-
-   // 存储字段审核结果类型的定义。
-   private int __examineResultCd;
-
-   // 字段审核结果类型的定义。
-   protected int _examineResultCd;
-
-   // 存储字段推荐类型的定义。
-   private int __recommendCd;
-
-   // 字段推荐类型的定义。
-   protected int _recommendCd;
-
-   // 存储字段图标地址的定义。
-   private String __iconUrl;
-
-   // 字段图标地址的定义。
-   protected String _iconUrl;
-
-   // 存储字段外链地址的定义。
-   private String __linkUrl;
-
-   // 字段外链地址的定义。
-   protected String _linkUrl;
-
-   // 存储字段版本编号的定义。
-   private int __versionNumber;
-
-   // 字段版本编号的定义。
-   protected int _versionNumber;
-
-   // 存储字段版本代码的定义。
-   private String __versionCode;
-
-   // 字段版本代码的定义。
-   protected String _versionCode;
-
-   // 存储字段关键字的定义。
-   private String __keywords;
-
-   // 字段关键字的定义。
-   protected String _keywords;
-
-   // 存储字段点数(豆豆)的定义。
-   private int __scoreBean;
-
-   // 字段点数(豆豆)的定义。
-   protected int _scoreBean;
-
-   // 存储字段点数(豆币)的定义。
-   private int __scorePoint;
-
-   // 字段点数(豆币)的定义。
-   protected int _scorePoint;
-
-   // 存储字段点数(金币)的定义。
-   private float __scoreGold;
-
-   // 字段点数(金币)的定义。
-   protected float _scoreGold;
-
-   // 存储字段播放次数的定义。
-   private int __playCount;
-
-   // 字段播放次数的定义。
-   protected int _playCount;
-
-   // 存储字段点攒次数的定义。
-   private int __praiseCount;
-
-   // 字段点攒次数的定义。
-   protected int _praiseCount;
-
-   // 存储字段关注(收藏)次数的定义。
-   private int __attentionCount;
-
-   // 字段关注(收藏)次数的定义。
-   protected int _attentionCount;
-
-   // 存储字段分享次数的定义。
-   private int __shareCount;
-
-   // 字段分享次数的定义。
-   protected int _shareCount;
-
-   // 存储字段浏览次数的定义。
-   private int __viewCount;
-
-   // 字段浏览次数的定义。
-   protected int _viewCount;
 
    // 存储字段详细描述的定义。
    private String __description;
@@ -323,6 +202,44 @@ public class FDataResourceResourceUnit
    }
 
    //============================================================
+   // <T>判断类型编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTypeIdChanged(){
+      return __typeId != _typeId;
+   }
+
+   //============================================================
+   // <T>获得类型编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long typeId(){
+      return _typeId;
+   }
+
+   //============================================================
+   // <T>获得类型编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceTypeUnit type(){
+      FDataResourceTypeLogic logic = _logicContext.findLogic(FDataResourceTypeLogic.class);
+      FDataResourceTypeUnit unit = logic.find(_typeId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置类型编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTypeId(long value){
+      _typeId = value;
+   }
+
+   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -354,33 +271,6 @@ public class FDataResourceResourceUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isNameChanged(){
-      return !RString.equals(__name, _name);
-   }
-
-   //============================================================
-   // <T>获得名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String name(){
-      return _name;
-   }
-
-   //============================================================
-   // <T>设置名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setName(String value){
-      _name = value;
-   }
-
-   //============================================================
-   // <T>判断名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
    public boolean isLabelChanged(){
       return !RString.equals(__label, _label);
    }
@@ -404,149 +294,30 @@ public class FDataResourceResourceUnit
    }
 
    //============================================================
-   // <T>判断用户编号的数据是否改变。</T>
+   // <T>判断图标地址的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isUserIdChanged(){
-      return __userId != _userId;
+   public boolean isIconUrlChanged(){
+      return !RString.equals(__iconUrl, _iconUrl);
    }
 
    //============================================================
-   // <T>获得用户编号的数据内容。</T>
+   // <T>获得图标地址的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long userId(){
-      return _userId;
+   public String iconUrl(){
+      return _iconUrl;
    }
 
    //============================================================
-   // <T>获得用户编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataPersonUserUnit user(){
-      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
-      FDataPersonUserUnit unit = logic.find(_userId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置用户编号的数据内容。</T>
+   // <T>设置图标地址的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setUserId(long value){
-      _userId = value;
-   }
-
-   //============================================================
-   // <T>判断活动编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isActivityIdChanged(){
-      return __activityId != _activityId;
-   }
-
-   //============================================================
-   // <T>获得活动编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long activityId(){
-      return _activityId;
-   }
-
-   //============================================================
-   // <T>设置活动编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setActivityId(long value){
-      _activityId = value;
-   }
-
-   //============================================================
-   // <T>判断状态类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isStatusCdChanged(){
-      return __statusCd != _statusCd;
-   }
-
-   //============================================================
-   // <T>获得状态类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int statusCd(){
-      return _statusCd;
-   }
-
-   //============================================================
-   // <T>设置状态类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setStatusCd(int value){
-      _statusCd = value;
-   }
-
-   //============================================================
-   // <T>判断资源类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isResourceCdChanged(){
-      return __resourceCd != _resourceCd;
-   }
-
-   //============================================================
-   // <T>获得资源类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int resourceCd(){
-      return _resourceCd;
-   }
-
-   //============================================================
-   // <T>设置资源类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setResourceCd(int value){
-      _resourceCd = value;
-   }
-
-   //============================================================
-   // <T>判断资源部署状态的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isResourceDeployCdChanged(){
-      return __resourceDeployCd != _resourceDeployCd;
-   }
-
-   //============================================================
-   // <T>获得资源部署状态的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int resourceDeployCd(){
-      return _resourceDeployCd;
-   }
-
-   //============================================================
-   // <T>设置资源部署状态的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setResourceDeployCd(int value){
-      _resourceDeployCd = value;
+   public void setIconUrl(String value){
+      _iconUrl = value;
    }
 
    //============================================================
@@ -601,438 +372,6 @@ public class FDataResourceResourceUnit
    //============================================================
    public void setDisplayOrder(int value){
       _displayOrder = value;
-   }
-
-   //============================================================
-   // <T>判断审核日期的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isExamineDateChanged(){
-      return !__examineDate.equals(_examineDate);
-   }
-
-   //============================================================
-   // <T>获得审核日期的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public TDateTime examineDate(){
-      return _examineDate;
-   }
-
-   //============================================================
-   // <T>设置审核日期的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setExamineDate(TDateTime value){
-      _examineDate = value;
-   }
-
-   //============================================================
-   // <T>判断审核结果类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isExamineResultCdChanged(){
-      return __examineResultCd != _examineResultCd;
-   }
-
-   //============================================================
-   // <T>获得审核结果类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int examineResultCd(){
-      return _examineResultCd;
-   }
-
-   //============================================================
-   // <T>设置审核结果类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setExamineResultCd(int value){
-      _examineResultCd = value;
-   }
-
-   //============================================================
-   // <T>判断推荐类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRecommendCdChanged(){
-      return __recommendCd != _recommendCd;
-   }
-
-   //============================================================
-   // <T>获得推荐类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int recommendCd(){
-      return _recommendCd;
-   }
-
-   //============================================================
-   // <T>设置推荐类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRecommendCd(int value){
-      _recommendCd = value;
-   }
-
-   //============================================================
-   // <T>判断图标地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIconUrlChanged(){
-      return !RString.equals(__iconUrl, _iconUrl);
-   }
-
-   //============================================================
-   // <T>获得图标地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String iconUrl(){
-      return _iconUrl;
-   }
-
-   //============================================================
-   // <T>设置图标地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIconUrl(String value){
-      _iconUrl = value;
-   }
-
-   //============================================================
-   // <T>判断外链地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLinkUrlChanged(){
-      return !RString.equals(__linkUrl, _linkUrl);
-   }
-
-   //============================================================
-   // <T>获得外链地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String linkUrl(){
-      return _linkUrl;
-   }
-
-   //============================================================
-   // <T>设置外链地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLinkUrl(String value){
-      _linkUrl = value;
-   }
-
-   //============================================================
-   // <T>判断版本编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isVersionNumberChanged(){
-      return __versionNumber != _versionNumber;
-   }
-
-   //============================================================
-   // <T>获得版本编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int versionNumber(){
-      return _versionNumber;
-   }
-
-   //============================================================
-   // <T>设置版本编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setVersionNumber(int value){
-      _versionNumber = value;
-   }
-
-   //============================================================
-   // <T>判断版本代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isVersionCodeChanged(){
-      return !RString.equals(__versionCode, _versionCode);
-   }
-
-   //============================================================
-   // <T>获得版本代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String versionCode(){
-      return _versionCode;
-   }
-
-   //============================================================
-   // <T>设置版本代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setVersionCode(String value){
-      _versionCode = value;
-   }
-
-   //============================================================
-   // <T>判断关键字的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isKeywordsChanged(){
-      return !RString.equals(__keywords, _keywords);
-   }
-
-   //============================================================
-   // <T>获得关键字的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String keywords(){
-      return _keywords;
-   }
-
-   //============================================================
-   // <T>设置关键字的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setKeywords(String value){
-      _keywords = value;
-   }
-
-   //============================================================
-   // <T>判断点数(豆豆)的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isScoreBeanChanged(){
-      return __scoreBean != _scoreBean;
-   }
-
-   //============================================================
-   // <T>获得点数(豆豆)的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int scoreBean(){
-      return _scoreBean;
-   }
-
-   //============================================================
-   // <T>设置点数(豆豆)的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setScoreBean(int value){
-      _scoreBean = value;
-   }
-
-   //============================================================
-   // <T>判断点数(豆币)的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isScorePointChanged(){
-      return __scorePoint != _scorePoint;
-   }
-
-   //============================================================
-   // <T>获得点数(豆币)的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int scorePoint(){
-      return _scorePoint;
-   }
-
-   //============================================================
-   // <T>设置点数(豆币)的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setScorePoint(int value){
-      _scorePoint = value;
-   }
-
-   //============================================================
-   // <T>判断点数(金币)的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isScoreGoldChanged(){
-      return __scoreGold != _scoreGold;
-   }
-
-   //============================================================
-   // <T>获得点数(金币)的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public float scoreGold(){
-      return _scoreGold;
-   }
-
-   //============================================================
-   // <T>设置点数(金币)的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setScoreGold(float value){
-      _scoreGold = value;
-   }
-
-   //============================================================
-   // <T>判断播放次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPlayCountChanged(){
-      return __playCount != _playCount;
-   }
-
-   //============================================================
-   // <T>获得播放次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int playCount(){
-      return _playCount;
-   }
-
-   //============================================================
-   // <T>设置播放次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPlayCount(int value){
-      _playCount = value;
-   }
-
-   //============================================================
-   // <T>判断点攒次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPraiseCountChanged(){
-      return __praiseCount != _praiseCount;
-   }
-
-   //============================================================
-   // <T>获得点攒次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int praiseCount(){
-      return _praiseCount;
-   }
-
-   //============================================================
-   // <T>设置点攒次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPraiseCount(int value){
-      _praiseCount = value;
-   }
-
-   //============================================================
-   // <T>判断关注(收藏)次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isAttentionCountChanged(){
-      return __attentionCount != _attentionCount;
-   }
-
-   //============================================================
-   // <T>获得关注(收藏)次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int attentionCount(){
-      return _attentionCount;
-   }
-
-   //============================================================
-   // <T>设置关注(收藏)次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setAttentionCount(int value){
-      _attentionCount = value;
-   }
-
-   //============================================================
-   // <T>判断分享次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isShareCountChanged(){
-      return __shareCount != _shareCount;
-   }
-
-   //============================================================
-   // <T>获得分享次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int shareCount(){
-      return _shareCount;
-   }
-
-   //============================================================
-   // <T>设置分享次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setShareCount(int value){
-      _shareCount = value;
-   }
-
-   //============================================================
-   // <T>判断浏览次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isViewCountChanged(){
-      return __viewCount != _viewCount;
-   }
-
-   //============================================================
-   // <T>获得浏览次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int viewCount(){
-      return _viewCount;
-   }
-
-   //============================================================
-   // <T>设置浏览次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setViewCount(int value){
-      _viewCount = value;
    }
 
    //============================================================
@@ -1239,58 +578,18 @@ public class FDataResourceResourceUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "type_id":
+            return Long.toString(_typeId);
          case "code":
             return _code;
-         case "name":
-            return _name;
          case "label":
             return _label;
-         case "user_id":
-            return Long.toString(_userId);
-         case "activity_id":
-            return Long.toString(_activityId);
-         case "status_cd":
-            return RInteger.toString(_statusCd);
-         case "resource_cd":
-            return RInteger.toString(_resourceCd);
-         case "resource_deploy_cd":
-            return RInteger.toString(_resourceDeployCd);
+         case "icon_url":
+            return _iconUrl;
          case "display_cd":
             return RInteger.toString(_displayCd);
          case "display_order":
             return RInteger.toString(_displayOrder);
-         case "examine_date":
-            return _examineDate.toString();
-         case "examine_result_cd":
-            return RInteger.toString(_examineResultCd);
-         case "recommend_cd":
-            return RInteger.toString(_recommendCd);
-         case "icon_url":
-            return _iconUrl;
-         case "link_url":
-            return _linkUrl;
-         case "version_number":
-            return RInteger.toString(_versionNumber);
-         case "version_code":
-            return _versionCode;
-         case "keywords":
-            return _keywords;
-         case "score_bean":
-            return RInteger.toString(_scoreBean);
-         case "score_point":
-            return RInteger.toString(_scorePoint);
-         case "score_gold":
-            return RFloat.toString(_scoreGold);
-         case "play_count":
-            return RInteger.toString(_playCount);
-         case "praise_count":
-            return RInteger.toString(_praiseCount);
-         case "attention_count":
-            return RInteger.toString(_attentionCount);
-         case "share_count":
-            return RInteger.toString(_shareCount);
-         case "view_count":
-            return RInteger.toString(_viewCount);
          case "description":
             return _description;
          case "content":
@@ -1328,83 +627,23 @@ public class FDataResourceResourceUnit
          case "guid":
             _guid = value;
             break;
+         case "type_id":
+            _typeId = RLong.parse(value);
+            break;
          case "code":
             _code = value;
-            break;
-         case "name":
-            _name = value;
             break;
          case "label":
             _label = value;
             break;
-         case "user_id":
-            _userId = RLong.parse(value);
-            break;
-         case "activity_id":
-            _activityId = RLong.parse(value);
-            break;
-         case "status_cd":
-            _statusCd = RInteger.parse(value);
-            break;
-         case "resource_cd":
-            _resourceCd = RInteger.parse(value);
-            break;
-         case "resource_deploy_cd":
-            _resourceDeployCd = RInteger.parse(value);
+         case "icon_url":
+            _iconUrl = value;
             break;
          case "display_cd":
             _displayCd = RInteger.parse(value);
             break;
          case "display_order":
             _displayOrder = RInteger.parse(value);
-            break;
-         case "examine_date":
-            _examineDate.parse(value);
-            break;
-         case "examine_result_cd":
-            _examineResultCd = RInteger.parse(value);
-            break;
-         case "recommend_cd":
-            _recommendCd = RInteger.parse(value);
-            break;
-         case "icon_url":
-            _iconUrl = value;
-            break;
-         case "link_url":
-            _linkUrl = value;
-            break;
-         case "version_number":
-            _versionNumber = RInteger.parse(value);
-            break;
-         case "version_code":
-            _versionCode = value;
-            break;
-         case "keywords":
-            _keywords = value;
-            break;
-         case "score_bean":
-            _scoreBean = RInteger.parse(value);
-            break;
-         case "score_point":
-            _scorePoint = RInteger.parse(value);
-            break;
-         case "score_gold":
-            _scoreGold = RFloat.parse(value);
-            break;
-         case "play_count":
-            _playCount = RInteger.parse(value);
-            break;
-         case "praise_count":
-            _praiseCount = RInteger.parse(value);
-            break;
-         case "attention_count":
-            _attentionCount = RInteger.parse(value);
-            break;
-         case "share_count":
-            _shareCount = RInteger.parse(value);
-            break;
-         case "view_count":
-            _viewCount = RInteger.parse(value);
             break;
          case "description":
             _description = value;
@@ -1454,37 +693,21 @@ public class FDataResourceResourceUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "type_id":
+               __typeId = RLong.parse(value);
+               _typeId = __typeId;
+               break;
             case "code":
                __code = value;
                _code = __code;
-               break;
-            case "name":
-               __name = value;
-               _name = __name;
                break;
             case "label":
                __label = value;
                _label = __label;
                break;
-            case "user_id":
-               __userId = RLong.parse(value);
-               _userId = __userId;
-               break;
-            case "activity_id":
-               __activityId = RLong.parse(value);
-               _activityId = __activityId;
-               break;
-            case "status_cd":
-               __statusCd = RInteger.parse(value);
-               _statusCd = __statusCd;
-               break;
-            case "resource_cd":
-               __resourceCd = RInteger.parse(value);
-               _resourceCd = __resourceCd;
-               break;
-            case "resource_deploy_cd":
-               __resourceDeployCd = RInteger.parse(value);
-               _resourceDeployCd = __resourceDeployCd;
+            case "icon_url":
+               __iconUrl = value;
+               _iconUrl = __iconUrl;
                break;
             case "display_cd":
                __displayCd = RInteger.parse(value);
@@ -1493,70 +716,6 @@ public class FDataResourceResourceUnit
             case "display_order":
                __displayOrder = RInteger.parse(value);
                _displayOrder = __displayOrder;
-               break;
-            case "examine_date":
-               __examineDate.parse(value);
-               _examineDate.assign(__examineDate);
-               break;
-            case "examine_result_cd":
-               __examineResultCd = RInteger.parse(value);
-               _examineResultCd = __examineResultCd;
-               break;
-            case "recommend_cd":
-               __recommendCd = RInteger.parse(value);
-               _recommendCd = __recommendCd;
-               break;
-            case "icon_url":
-               __iconUrl = value;
-               _iconUrl = __iconUrl;
-               break;
-            case "link_url":
-               __linkUrl = value;
-               _linkUrl = __linkUrl;
-               break;
-            case "version_number":
-               __versionNumber = RInteger.parse(value);
-               _versionNumber = __versionNumber;
-               break;
-            case "version_code":
-               __versionCode = value;
-               _versionCode = __versionCode;
-               break;
-            case "keywords":
-               __keywords = value;
-               _keywords = __keywords;
-               break;
-            case "score_bean":
-               __scoreBean = RInteger.parse(value);
-               _scoreBean = __scoreBean;
-               break;
-            case "score_point":
-               __scorePoint = RInteger.parse(value);
-               _scorePoint = __scorePoint;
-               break;
-            case "score_gold":
-               __scoreGold = RFloat.parse(value);
-               _scoreGold = __scoreGold;
-               break;
-            case "play_count":
-               __playCount = RInteger.parse(value);
-               _playCount = __playCount;
-               break;
-            case "praise_count":
-               __praiseCount = RInteger.parse(value);
-               _praiseCount = __praiseCount;
-               break;
-            case "attention_count":
-               __attentionCount = RInteger.parse(value);
-               _attentionCount = __attentionCount;
-               break;
-            case "share_count":
-               __shareCount = RInteger.parse(value);
-               _shareCount = __shareCount;
-               break;
-            case "view_count":
-               __viewCount = RInteger.parse(value);
-               _viewCount = __viewCount;
                break;
             case "description":
                __description = value;
@@ -1601,32 +760,12 @@ public class FDataResourceResourceUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("typeId", _typeId);
       row.set("code", _code);
-      row.set("name", _name);
       row.set("label", _label);
-      row.set("userId", _userId);
-      row.set("activityId", _activityId);
-      row.set("statusCd", _statusCd);
-      row.set("resourceCd", _resourceCd);
-      row.set("resourceDeployCd", _resourceDeployCd);
+      row.set("iconUrl", _iconUrl);
       row.set("displayCd", _displayCd);
       row.set("displayOrder", _displayOrder);
-      row.set("examineDate", _examineDate);
-      row.set("examineResultCd", _examineResultCd);
-      row.set("recommendCd", _recommendCd);
-      row.set("iconUrl", _iconUrl);
-      row.set("linkUrl", _linkUrl);
-      row.set("versionNumber", _versionNumber);
-      row.set("versionCode", _versionCode);
-      row.set("keywords", _keywords);
-      row.set("scoreBean", _scoreBean);
-      row.set("scorePoint", _scorePoint);
-      row.set("scoreGold", _scoreGold);
-      row.set("playCount", _playCount);
-      row.set("praiseCount", _praiseCount);
-      row.set("attentionCount", _attentionCount);
-      row.set("shareCount", _shareCount);
-      row.set("viewCount", _viewCount);
       row.set("description", _description);
       row.set("content", _content);
       row.set("note", _note);
@@ -1647,32 +786,12 @@ public class FDataResourceResourceUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("typeId", RLong.toString(_typeId));
       map.put("code", _code);
-      map.put("name", _name);
       map.put("label", _label);
-      map.put("userId", RLong.toString(_userId));
-      map.put("activityId", RLong.toString(_activityId));
-      map.put("statusCd", RInteger.toString(_statusCd));
-      map.put("resourceCd", RInteger.toString(_resourceCd));
-      map.put("resourceDeployCd", RInteger.toString(_resourceDeployCd));
+      map.put("iconUrl", _iconUrl);
       map.put("displayCd", RInteger.toString(_displayCd));
       map.put("displayOrder", RInteger.toString(_displayOrder));
-      map.put("examineDate", _examineDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("examineResultCd", RInteger.toString(_examineResultCd));
-      map.put("recommendCd", RInteger.toString(_recommendCd));
-      map.put("iconUrl", _iconUrl);
-      map.put("linkUrl", _linkUrl);
-      map.put("versionNumber", RInteger.toString(_versionNumber));
-      map.put("versionCode", _versionCode);
-      map.put("keywords", _keywords);
-      map.put("scoreBean", RInteger.toString(_scoreBean));
-      map.put("scorePoint", RInteger.toString(_scorePoint));
-      map.put("scoreGold", RFloat.toString(_scoreGold));
-      map.put("playCount", RInteger.toString(_playCount));
-      map.put("praiseCount", RInteger.toString(_praiseCount));
-      map.put("attentionCount", RInteger.toString(_attentionCount));
-      map.put("shareCount", RInteger.toString(_shareCount));
-      map.put("viewCount", RInteger.toString(_viewCount));
       map.put("description", _description);
       map.put("content", _content);
       map.put("note", _note);

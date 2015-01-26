@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -37,16 +36,22 @@ public class FDataResource3dModelMeshUnit
    protected String _guid;
 
    // 存储字段对象版本标识的定义。
-   private String __gvid;
+   private String __ovid;
 
    // 字段对象版本标识的定义。
-   protected String _gvid;
+   protected String _ovid;
 
    // 存储字段类型编号的定义。
    private long __resourceId;
 
    // 字段类型编号的定义。
    protected long _resourceId;
+
+   // 存储字段模型编号的定义。
+   private long __modelId;
+
+   // 字段模型编号的定义。
+   protected long _modelId;
 
    // 存储字段代码的定义。
    private String __code;
@@ -59,18 +64,6 @@ public class FDataResource3dModelMeshUnit
 
    // 字段名称的定义。
    protected String _label;
-
-   // 存储字段顶点个数的定义。
-   private int __vertexCount;
-
-   // 字段顶点个数的定义。
-   protected int _vertexCount;
-
-   // 存储字段索引个数的定义。
-   private int __indexCount;
-
-   // 字段索引个数的定义。
-   protected int _indexCount;
 
    // 存储字段备注的定义。
    private String __note;
@@ -194,8 +187,8 @@ public class FDataResource3dModelMeshUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
+   public boolean isOvidChanged(){
+      return !RString.equals(__ovid, _ovid);
    }
 
    //============================================================
@@ -203,8 +196,8 @@ public class FDataResource3dModelMeshUnit
    //
    // @return 数据内容
    //============================================================
-   public String gvid(){
-      return _gvid;
+   public String ovid(){
+      return _ovid;
    }
 
    //============================================================
@@ -212,8 +205,8 @@ public class FDataResource3dModelMeshUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setGvid(String value){
-      _gvid = value;
+   public void setOvid(String value){
+      _ovid = value;
    }
 
    //============================================================
@@ -252,6 +245,44 @@ public class FDataResource3dModelMeshUnit
    //============================================================
    public void setResourceId(long value){
       _resourceId = value;
+   }
+
+   //============================================================
+   // <T>判断模型编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isModelIdChanged(){
+      return __modelId != _modelId;
+   }
+
+   //============================================================
+   // <T>获得模型编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long modelId(){
+      return _modelId;
+   }
+
+   //============================================================
+   // <T>获得模型编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dModelUnit model(){
+      FDataResource3dModelLogic logic = _logicContext.findLogic(FDataResource3dModelLogic.class);
+      FDataResource3dModelUnit unit = logic.find(_modelId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置模型编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setModelId(long value){
+      _modelId = value;
    }
 
    //============================================================
@@ -306,60 +337,6 @@ public class FDataResource3dModelMeshUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
-   }
-
-   //============================================================
-   // <T>判断顶点个数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isVertexCountChanged(){
-      return __vertexCount != _vertexCount;
-   }
-
-   //============================================================
-   // <T>获得顶点个数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int vertexCount(){
-      return _vertexCount;
-   }
-
-   //============================================================
-   // <T>设置顶点个数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setVertexCount(int value){
-      _vertexCount = value;
-   }
-
-   //============================================================
-   // <T>判断索引个数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIndexCountChanged(){
-      return __indexCount != _indexCount;
-   }
-
-   //============================================================
-   // <T>获得索引个数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int indexCount(){
-      return _indexCount;
-   }
-
-   //============================================================
-   // <T>设置索引个数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIndexCount(int value){
-      _indexCount = value;
    }
 
    //============================================================
@@ -512,18 +489,16 @@ public class FDataResource3dModelMeshUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
+         case "ovid":
+            return _ovid;
          case "resource_id":
             return Long.toString(_resourceId);
+         case "model_id":
+            return Long.toString(_modelId);
          case "code":
             return _code;
          case "label":
             return _label;
-         case "vertex_count":
-            return RInteger.toString(_vertexCount);
-         case "index_count":
-            return RInteger.toString(_indexCount);
          case "note":
             return _note;
          case "create_user_id":
@@ -557,23 +532,20 @@ public class FDataResource3dModelMeshUnit
          case "guid":
             _guid = value;
             break;
-         case "gvid":
-            _gvid = value;
+         case "ovid":
+            _ovid = value;
             break;
          case "resource_id":
             _resourceId = RLong.parse(value);
+            break;
+         case "model_id":
+            _modelId = RLong.parse(value);
             break;
          case "code":
             _code = value;
             break;
          case "label":
             _label = value;
-            break;
-         case "vertex_count":
-            _vertexCount = RInteger.parse(value);
-            break;
-         case "index_count":
-            _indexCount = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -617,13 +589,17 @@ public class FDataResource3dModelMeshUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
+            case "ovid":
+               __ovid = value;
+               _ovid = __ovid;
                break;
             case "resource_id":
                __resourceId = RLong.parse(value);
                _resourceId = __resourceId;
+               break;
+            case "model_id":
+               __modelId = RLong.parse(value);
+               _modelId = __modelId;
                break;
             case "code":
                __code = value;
@@ -632,14 +608,6 @@ public class FDataResource3dModelMeshUnit
             case "label":
                __label = value;
                _label = __label;
-               break;
-            case "vertex_count":
-               __vertexCount = RInteger.parse(value);
-               _vertexCount = __vertexCount;
-               break;
-            case "index_count":
-               __indexCount = RInteger.parse(value);
-               _indexCount = __indexCount;
                break;
             case "note":
                __note = value;
@@ -676,12 +644,11 @@ public class FDataResource3dModelMeshUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
+      row.set("ovid", _ovid);
       row.set("resourceId", _resourceId);
+      row.set("modelId", _modelId);
       row.set("code", _code);
       row.set("label", _label);
-      row.set("vertexCount", _vertexCount);
-      row.set("indexCount", _indexCount);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -700,12 +667,11 @@ public class FDataResource3dModelMeshUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
+      map.put("ovid", _ovid);
       map.put("resourceId", RLong.toString(_resourceId));
+      map.put("modelId", RLong.toString(_modelId));
       map.put("code", _code);
       map.put("label", _label);
-      map.put("vertexCount", RInteger.toString(_vertexCount));
-      map.put("indexCount", RInteger.toString(_indexCount));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

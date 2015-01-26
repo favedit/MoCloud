@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="fe82cacb-d6aa-4797-a622-5a759e46f27f" name="data.external.weixin.keyword" label="M#12cn16微信关键字表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Game.MoGameStorage" data_name="DT_ENL_WX_KEYWORD" data_alias="DT_ENL_WX_KEY" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldString _uuid="9fe6f2cd-3d7f-4cc1-9a8c-32c4ee0b7f9e" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
-  <FieldString _uuid="bfb9f715-346c-4157-a06a-0016384a1f39" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
-  <FieldInteger _uuid="805b5473-ce68-48d1-8ac2-b216b56022dd" name="view_count" label="M#12cn14查看次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
-  <FieldTemplate _uuid="8d4e8356-5930-4900-a9fe-af1762de5f7c" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

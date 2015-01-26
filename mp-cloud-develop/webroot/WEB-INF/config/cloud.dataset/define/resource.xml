@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate _uuid="d18e0ebb-e805-4675-8e9c-1e22dd7dfbb5" name="define.resource" label="M#12cn16数据存储模板" is_valid="Y" note="M#">
+  <FieldRecordId _uuid="007b79b8-0ea8-4f5c-939a-cf7f51565a97" name="object_id" label="M#12cn14对象标识" is_valid="Y" note="M#" is_key="Y" is_store="Y" is_abstract="N" data_name="OUID" />
+  <FieldBoolean _uuid="ccfb44f5-7fcf-4a86-bf40-0316d38f5215" name="object_valid" label="M#12cn13有效性" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="OVLD" data_default="TRUE" />
+  <FieldString _uuid="51cfb91c-751d-4a3c-80f1-cfc0b8d09c88" name="object_unique" label="M#12cn16对象唯一标识" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="GUID" data_alias="GID" data_size="40" />
+  <FieldString _uuid="7f5c7585-9c7b-4a52-a890-90794a3f6d0f" name="object_version" label="M#12cn16对象版本标识" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OVID" data_alias="VID" data_size="40" />
+</DataTemplate>

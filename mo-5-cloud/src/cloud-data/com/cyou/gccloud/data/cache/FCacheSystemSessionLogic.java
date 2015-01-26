@@ -3,7 +3,6 @@ package com.cyou.gccloud.data.cache;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
-import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FString;
@@ -44,24 +43,6 @@ public class FCacheSystemSessionLogic
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
-   // 字段项目编号的定义。
-   public final static SLogicFieldInfo PROECT_ID = new SLogicFieldInfo("PROECT_ID");
-
-   // 字段来源类型的定义。
-   public final static SLogicFieldInfo FROM_CD = new SLogicFieldInfo("FROM_CD");
-
-   // 字段设备编号的定义。
-   public final static SLogicFieldInfo DEVICE_ID = new SLogicFieldInfo("DEVICE_ID");
-
-   // 字段设备品质的定义。
-   public final static SLogicFieldInfo DEVICE_QUALITY = new SLogicFieldInfo("DEVICE_QUALITY");
-
-   // 字段设备宽度的定义。
-   public final static SLogicFieldInfo DEVICE_WIDTH = new SLogicFieldInfo("DEVICE_WIDTH");
-
-   // 字段设备高度的定义。
-   public final static SLogicFieldInfo DEVICE_HEIGHT = new SLogicFieldInfo("DEVICE_HEIGHT");
-
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -75,7 +56,7 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,USER_ID,PROECT_ID,FROM_CD,DEVICE_ID,DEVICE_QUALITY,DEVICE_WIDTH,DEVICE_HEIGHT,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,USER_ID,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
@@ -569,12 +550,6 @@ public class FCacheSystemSessionLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
-      cmd.append(",`PROECT_ID`");
-      cmd.append(",`FROM_CD`");
-      cmd.append(",`DEVICE_ID`");
-      cmd.append(",`DEVICE_QUALITY`");
-      cmd.append(",`DEVICE_WIDTH`");
-      cmd.append(",`DEVICE_HEIGHT`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -596,35 +571,6 @@ public class FCacheSystemSessionLogic
       }else{
          cmd.append(userId);
       }
-      cmd.append(',');
-      long proectId = unit.proectId();
-      if(proectId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(proectId);
-      }
-      cmd.append(',');
-      cmd.append(unit.fromCd());
-      cmd.append(',');
-      long deviceId = unit.deviceId();
-      if(deviceId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(deviceId);
-      }
-      cmd.append(',');
-      String deviceQuality = unit.deviceQuality();
-      if(RString.isEmpty(deviceQuality)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(deviceQuality));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.deviceWidth());
-      cmd.append(',');
-      cmd.append(unit.deviceHeight());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -707,47 +653,6 @@ public class FCacheSystemSessionLogic
          }else{
             cmd.append(userId);
          }
-      }
-      if(unit.isProectIdChanged()){
-         cmd.append(",`PROECT_ID`=");
-         long proectId = unit.proectId();
-         if(proectId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(proectId);
-         }
-      }
-      if(unit.isFromCdChanged()){
-         cmd.append(",`FROM_CD`=");
-         cmd.append(unit.fromCd());
-      }
-      if(unit.isDeviceIdChanged()){
-         cmd.append(",`DEVICE_ID`=");
-         long deviceId = unit.deviceId();
-         if(deviceId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(deviceId);
-         }
-      }
-      if(unit.isDeviceQualityChanged()){
-         cmd.append(",`DEVICE_QUALITY`=");
-         String deviceQuality = unit.deviceQuality();
-         if(RString.isEmpty(deviceQuality)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(deviceQuality));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isDeviceWidthChanged()){
-         cmd.append(",`DEVICE_WIDTH`=");
-         cmd.append(unit.deviceWidth());
-      }
-      if(unit.isDeviceHeightChanged()){
-         cmd.append(",`DEVICE_HEIGHT`=");
-         cmd.append(unit.deviceHeight());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

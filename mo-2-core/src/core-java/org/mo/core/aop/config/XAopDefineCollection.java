@@ -62,6 +62,8 @@ public class XAopDefineCollection
             }
             if(parse == null){
                parse = "";
+            }else if(parse.contains(refer)){
+               throw new FFatalError("Define parser loop failure. (refer={1}, parse={2})", refer, parse);
             }
             // 设置内容
             value = value.substring(0, start) + parse + value.substring(end + 1);

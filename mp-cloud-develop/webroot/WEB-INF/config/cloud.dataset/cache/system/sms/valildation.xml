@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="6115b0e4-5818-4293-b815-aee041aafd40" name="cache.system.sms.valildation" label="M#12cn14短信认证" is_valid="Y" note="M#" data_engine="HEAP" data_group="cache" data_factory="Cache.System.Sms.Validation" data_name="CC_SYS_SMS_VALIDATION" data_alias="CC_SYS_SMS_VALID" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldString _uuid="fd3dfceb-2b79-43af-a424-42cfe0a9f11e" name="mobile_number" label="M#12cn13手机号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MOBILE_NUMBER" data_size="40" />
-  <FieldInteger _uuid="17c10d57-b1fa-4573-aec5-b732933224be" name="validate_cd" label="M#12cn14验证用途" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VALIDATE_CD" />
-  <FieldString _uuid="38ba8a6c-bee7-4e5c-a1a3-672f1ffb2a74" name="check_code" label="M#12cn13验证码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CHECK_CODE" data_size="40" />
-  <FieldTemplate _uuid="f43c41f1-d7c1-4bc2-9673-b9905d5494fc" name="track" label="M#12cn14追踪模板" is_valid="Y" note="M#" template_name="define.track" />
-</DataStore>

@@ -120,7 +120,6 @@ public class FGcSessionConsole
          }
       }
       // 生成质量代码
-      String qualityCode = _storageConsole.makeQualityCode(applicationCode, deviceWidth, deviceHeight);
       // 新建记录
       FGcSessionInfo sessionInfo = sessionLogic.doPrepare(FGcSessionInfo.class);
       //      FDataPersonConnectUnit unit = _accountsConsole.findConnectUnit(sqlContext, userId);
@@ -131,11 +130,7 @@ public class FGcSessionConsole
       //      }
       // 设置内容
       sessionInfo.setOvld(true);
-      sessionInfo.setFromCd(sessionFrom);
       sessionInfo.setUserId(userId);
-      sessionInfo.setDeviceQuality(qualityCode);
-      sessionInfo.setDeviceWidth(deviceWidth);
-      sessionInfo.setDeviceHeight(deviceHeight);
       sessionLogic.doInsert(sessionInfo);
       _logger.debug(this, "open", "Open session. (code={1})", sessionInfo.guid());
       // 绑定数据
