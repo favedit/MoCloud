@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源类型表逻辑。</T>
+// <T>资源3D模型网格表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceTypeLogic
+public class FDataResource3dModelMeshLogic
       extends FLogicTable
 {
-   // 资源类型表的定义。
+   // 资源3D模型网格表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源类型表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource.type", "DT_RES_TYPE");
+   // 资源3D模型网格表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.model.mesh", "DT_RS3_MODEL_MESH");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -41,20 +41,23 @@ public class FDataResourceTypeLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段对象版本标识的定义。
+   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
+
+   // 字段类型编号的定义。
+   public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段是否显示的定义。
-   public final static SLogicFieldInfo DISPLAY_CD = new SLogicFieldInfo("DISPLAY_CD");
+   // 字段顶点个数的定义。
+   public final static SLogicFieldInfo VERTEX_COUNT = new SLogicFieldInfo("VERTEX_COUNT");
 
-   // 字段显示顺序的定义。
-   public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
-
-   // 字段图标地址的定义。
-   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
+   // 字段索引个数的定义。
+   public final static SLogicFieldInfo INDEX_COUNT = new SLogicFieldInfo("INDEX_COUNT");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -72,25 +75,25 @@ public class FDataResourceTypeLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,DISPLAY_CD,DISPLAY_ORDER,ICON_URL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,RESOURCE_ID,CODE,LABEL,VERTEX_COUNT,INDEX_COUNT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源类型表逻辑单元。</T>
+   // <T>构造资源3D模型网格表逻辑单元。</T>
    //============================================================
-   public FDataResourceTypeLogic(){
+   public FDataResource3dModelMeshLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResourceTypeUnit.class;
+      _classUnit = FDataResource3dModelMeshUnit.class;
    }
 
    //============================================================
-   // <T>构造资源类型表逻辑单元。</T>
+   // <T>构造资源3D模型网格表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResourceTypeLogic(ILogicContext context){
+   public FDataResource3dModelMeshLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResourceTypeUnit.class;
+      _classUnit = FDataResource3dModelMeshUnit.class;
    }
 
    //============================================================
@@ -224,7 +227,7 @@ public class FDataResourceTypeLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResourceTypeUnit());
+            unit = (T)(new FDataResource3dModelMeshUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -240,8 +243,8 @@ public class FDataResourceTypeLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResourceTypeUnit search(CharSequence whereSql){
-      return search(null, FDataResourceTypeUnit.class, whereSql);
+   public FDataResource3dModelMeshUnit search(CharSequence whereSql){
+      return search(null, FDataResource3dModelMeshUnit.class, whereSql);
    }
 
    //============================================================
@@ -279,8 +282,8 @@ public class FDataResourceTypeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetch(int pageSize,
-                                                     int page){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetch(int pageSize,
+                                                            int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -292,9 +295,9 @@ public class FDataResourceTypeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetch(CharSequence whereSql,
-                                                     int pageSize,
-                                                     int page){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetch(CharSequence whereSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -307,10 +310,10 @@ public class FDataResourceTypeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetch(CharSequence whereSql,
-                                                     CharSequence orderSql,
-                                                     int pageSize,
-                                                     int page){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetch(CharSequence whereSql,
+                                                            CharSequence orderSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -324,11 +327,11 @@ public class FDataResourceTypeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetch(CharSequence fields,
-                                                     CharSequence whereSql,
-                                                     CharSequence orderSql,
-                                                     int pageSize,
-                                                     int page){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetch(CharSequence fields,
+                                                            CharSequence whereSql,
+                                                            CharSequence orderSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -342,12 +345,12 @@ public class FDataResourceTypeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetch(CharSequence fields,
-                                                     CharSequence whereSql,
-                                                     CharSequence groupSql,
-                                                     CharSequence orderSql,
-                                                     int pageSize,
-                                                     int page){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetch(CharSequence fields,
+                                                            CharSequence whereSql,
+                                                            CharSequence groupSql,
+                                                            CharSequence orderSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -452,10 +455,10 @@ public class FDataResourceTypeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetchSql(CharSequence code,
-                                                        CharSequence sql,
-                                                        int pageSize,
-                                                        int page){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetchSql(CharSequence code,
+                                                               CharSequence sql,
+                                                               int pageSize,
+                                                               int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -480,7 +483,7 @@ public class FDataResourceTypeLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResourceTypeUnit>(FDataResourceTypeUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dModelMeshUnit>(FDataResource3dModelMeshUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -493,7 +496,7 @@ public class FDataResourceTypeLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceTypeUnit> fetchAll(){
+   public FLogicDataset<FDataResource3dModelMeshUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -506,8 +509,8 @@ public class FDataResourceTypeLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResourceTypeUnit doPrepare(){
-      FDataResourceTypeUnit unit = new FDataResourceTypeUnit();
+   public FDataResource3dModelMeshUnit doPrepare(){
+      FDataResource3dModelMeshUnit unit = new FDataResource3dModelMeshUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -534,7 +537,7 @@ public class FDataResourceTypeLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResourceTypeUnit unit = (FDataResourceTypeUnit)logicUnit;
+      FDataResource3dModelMeshUnit unit = (FDataResource3dModelMeshUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -548,7 +551,7 @@ public class FDataResourceTypeLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResourceTypeUnit unit = (FDataResourceTypeUnit)logicUnit;
+      FDataResource3dModelMeshUnit unit = (FDataResource3dModelMeshUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -565,11 +568,12 @@ public class FDataResourceTypeLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`GVID`");
+      cmd.append(",`RESOURCE_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
-      cmd.append(",`DISPLAY_CD`");
-      cmd.append(",`DISPLAY_ORDER`");
-      cmd.append(",`ICON_URL`");
+      cmd.append(",`VERTEX_COUNT`");
+      cmd.append(",`INDEX_COUNT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -585,6 +589,22 @@ public class FDataResourceTypeLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      String gvid = unit.gvid();
+      if(RString.isEmpty(gvid)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(gvid));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long resourceId = unit.resourceId();
+      if(resourceId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(resourceId);
+      }
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -604,18 +624,9 @@ public class FDataResourceTypeLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.displayCd());
+      cmd.append(unit.vertexCount());
       cmd.append(',');
-      cmd.append(unit.displayOrder());
-      cmd.append(',');
-      String iconUrl = unit.iconUrl();
-      if(RString.isEmpty(iconUrl)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(iconUrl));
-         cmd.append('\'');
-      }
+      cmd.append(unit.indexCount());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -660,7 +671,7 @@ public class FDataResourceTypeLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResourceTypeUnit unit = (FDataResourceTypeUnit)logicUnit;
+      FDataResource3dModelMeshUnit unit = (FDataResource3dModelMeshUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -679,7 +690,7 @@ public class FDataResourceTypeLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResourceTypeUnit unit = (FDataResourceTypeUnit)logicUnit;
+      FDataResource3dModelMeshUnit unit = (FDataResource3dModelMeshUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -699,6 +710,26 @@ public class FDataResourceTypeLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isGvidChanged()){
+         cmd.append(",`GVID`=");
+         String gvid = unit.gvid();
+         if(RString.isEmpty(gvid)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(gvid));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isResourceIdChanged()){
+         cmd.append(",`RESOURCE_ID`=");
+         long resourceId = unit.resourceId();
+         if(resourceId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(resourceId);
+         }
+      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();
@@ -721,24 +752,13 @@ public class FDataResourceTypeLogic
             cmd.append('\'');
          }
       }
-      if(unit.isDisplayCdChanged()){
-         cmd.append(",`DISPLAY_CD`=");
-         cmd.append(unit.displayCd());
+      if(unit.isVertexCountChanged()){
+         cmd.append(",`VERTEX_COUNT`=");
+         cmd.append(unit.vertexCount());
       }
-      if(unit.isDisplayOrderChanged()){
-         cmd.append(",`DISPLAY_ORDER`=");
-         cmd.append(unit.displayOrder());
-      }
-      if(unit.isIconUrlChanged()){
-         cmd.append(",`ICON_URL`=");
-         String iconUrl = unit.iconUrl();
-         if(RString.isEmpty(iconUrl)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(iconUrl));
-            cmd.append('\'');
-         }
+      if(unit.isIndexCountChanged()){
+         cmd.append(",`INDEX_COUNT`=");
+         cmd.append(unit.indexCount());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
@@ -771,7 +791,7 @@ public class FDataResourceTypeLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResourceTypeUnit unit = (FDataResourceTypeUnit)logicUnit;
+      FDataResource3dModelMeshUnit unit = (FDataResource3dModelMeshUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

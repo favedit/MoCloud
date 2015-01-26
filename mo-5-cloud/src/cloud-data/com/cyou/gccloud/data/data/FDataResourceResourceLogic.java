@@ -51,24 +51,6 @@ public class FDataResourceResourceLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段模块编号的定义。
-   public final static SLogicFieldInfo MODULE_ID = new SLogicFieldInfo("MODULE_ID");
-
-   // 字段频道编号的定义。
-   public final static SLogicFieldInfo CHANNEL_ID = new SLogicFieldInfo("CHANNEL_ID");
-
-   // 字段类型编号的定义。
-   public final static SLogicFieldInfo TYPE_ID = new SLogicFieldInfo("TYPE_ID");
-
-   // 字段学校编号的定义。
-   public final static SLogicFieldInfo SCHOOL_ID = new SLogicFieldInfo("SCHOOL_ID");
-
-   // 字段提供商编号的定义。
-   public final static SLogicFieldInfo VENDOR_ID = new SLogicFieldInfo("VENDOR_ID");
-
-   // 字段老师编号的定义。
-   public final static SLogicFieldInfo TEACHER_ID = new SLogicFieldInfo("TEACHER_ID");
-
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
@@ -160,7 +142,7 @@ public class FDataResourceResourceLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,NAME,LABEL,MODULE_ID,CHANNEL_ID,TYPE_ID,SCHOOL_ID,VENDOR_ID,TEACHER_ID,USER_ID,ACTIVITY_ID,STATUS_CD,RESOURCE_CD,RESOURCE_DEPLOY_CD,DISPLAY_CD,DISPLAY_ORDER,EXAMINE_DATE,EXAMINE_RESULT_CD,RECOMMEND_CD,ICON_URL,LINK_URL,VERSION_NUMBER,VERSION_CODE,KEYWORDS,SCORE_BEAN,SCORE_POINT,SCORE_GOLD,PLAY_COUNT,PRAISE_COUNT,ATTENTION_COUNT,SHARE_COUNT,VIEW_COUNT,DESCRIPTION,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,CODE,NAME,LABEL,USER_ID,ACTIVITY_ID,STATUS_CD,RESOURCE_CD,RESOURCE_DEPLOY_CD,DISPLAY_CD,DISPLAY_ORDER,EXAMINE_DATE,EXAMINE_RESULT_CD,RECOMMEND_CD,ICON_URL,LINK_URL,VERSION_NUMBER,VERSION_CODE,KEYWORDS,SCORE_BEAN,SCORE_POINT,SCORE_GOLD,PLAY_COUNT,PRAISE_COUNT,ATTENTION_COUNT,SHARE_COUNT,VIEW_COUNT,DESCRIPTION,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源信息表逻辑单元。</T>
@@ -656,12 +638,6 @@ public class FDataResourceResourceLogic
       cmd.append(",`CODE`");
       cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
-      cmd.append(",`MODULE_ID`");
-      cmd.append(",`CHANNEL_ID`");
-      cmd.append(",`TYPE_ID`");
-      cmd.append(",`SCHOOL_ID`");
-      cmd.append(",`VENDOR_ID`");
-      cmd.append(",`TEACHER_ID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`ACTIVITY_ID`");
       cmd.append(",`STATUS_CD`");
@@ -728,48 +704,6 @@ public class FDataResourceResourceLogic
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
-      }
-      cmd.append(',');
-      long moduleId = unit.moduleId();
-      if(moduleId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(moduleId);
-      }
-      cmd.append(',');
-      long channelId = unit.channelId();
-      if(channelId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(channelId);
-      }
-      cmd.append(',');
-      long typeId = unit.typeId();
-      if(typeId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(typeId);
-      }
-      cmd.append(',');
-      long schoolId = unit.schoolId();
-      if(schoolId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(schoolId);
-      }
-      cmd.append(',');
-      long vendorId = unit.vendorId();
-      if(vendorId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(vendorId);
-      }
-      cmd.append(',');
-      long teacherId = unit.teacherId();
-      if(teacherId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(teacherId);
       }
       cmd.append(',');
       long userId = unit.userId();
@@ -996,60 +930,6 @@ public class FDataResourceResourceLogic
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
-         }
-      }
-      if(unit.isModuleIdChanged()){
-         cmd.append(",`MODULE_ID`=");
-         long moduleId = unit.moduleId();
-         if(moduleId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(moduleId);
-         }
-      }
-      if(unit.isChannelIdChanged()){
-         cmd.append(",`CHANNEL_ID`=");
-         long channelId = unit.channelId();
-         if(channelId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(channelId);
-         }
-      }
-      if(unit.isTypeIdChanged()){
-         cmd.append(",`TYPE_ID`=");
-         long typeId = unit.typeId();
-         if(typeId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(typeId);
-         }
-      }
-      if(unit.isSchoolIdChanged()){
-         cmd.append(",`SCHOOL_ID`=");
-         long schoolId = unit.schoolId();
-         if(schoolId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(schoolId);
-         }
-      }
-      if(unit.isVendorIdChanged()){
-         cmd.append(",`VENDOR_ID`=");
-         long vendorId = unit.vendorId();
-         if(vendorId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(vendorId);
-         }
-      }
-      if(unit.isTeacherIdChanged()){
-         cmd.append(",`TEACHER_ID`=");
-         long teacherId = unit.teacherId();
-         if(teacherId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(teacherId);
          }
       }
       if(unit.isUserIdChanged()){

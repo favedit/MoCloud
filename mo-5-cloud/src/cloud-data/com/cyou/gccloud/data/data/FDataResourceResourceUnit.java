@@ -55,42 +55,6 @@ public class FDataResourceResourceUnit
    // 字段名称的定义。
    protected String _label;
 
-   // 存储字段模块编号的定义。
-   private long __moduleId;
-
-   // 字段模块编号的定义。
-   protected long _moduleId;
-
-   // 存储字段频道编号的定义。
-   private long __channelId;
-
-   // 字段频道编号的定义。
-   protected long _channelId;
-
-   // 存储字段类型编号的定义。
-   private long __typeId;
-
-   // 字段类型编号的定义。
-   protected long _typeId;
-
-   // 存储字段学校编号的定义。
-   private long __schoolId;
-
-   // 字段学校编号的定义。
-   protected long _schoolId;
-
-   // 存储字段提供商编号的定义。
-   private long __vendorId;
-
-   // 字段提供商编号的定义。
-   protected long _vendorId;
-
-   // 存储字段老师编号的定义。
-   private long __teacherId;
-
-   // 字段老师编号的定义。
-   protected long _teacherId;
-
    // 存储字段用户编号的定义。
    private long __userId;
 
@@ -437,234 +401,6 @@ public class FDataResourceResourceUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
-   }
-
-   //============================================================
-   // <T>判断模块编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isModuleIdChanged(){
-      return __moduleId != _moduleId;
-   }
-
-   //============================================================
-   // <T>获得模块编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long moduleId(){
-      return _moduleId;
-   }
-
-   //============================================================
-   // <T>获得模块编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModuleUnit module(){
-      FDataResourceModuleLogic logic = _logicContext.findLogic(FDataResourceModuleLogic.class);
-      FDataResourceModuleUnit unit = logic.find(_moduleId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置模块编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setModuleId(long value){
-      _moduleId = value;
-   }
-
-   //============================================================
-   // <T>判断频道编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isChannelIdChanged(){
-      return __channelId != _channelId;
-   }
-
-   //============================================================
-   // <T>获得频道编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long channelId(){
-      return _channelId;
-   }
-
-   //============================================================
-   // <T>获得频道编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceChannelUnit channel(){
-      FDataResourceChannelLogic logic = _logicContext.findLogic(FDataResourceChannelLogic.class);
-      FDataResourceChannelUnit unit = logic.find(_channelId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置频道编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setChannelId(long value){
-      _channelId = value;
-   }
-
-   //============================================================
-   // <T>判断类型编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isTypeIdChanged(){
-      return __typeId != _typeId;
-   }
-
-   //============================================================
-   // <T>获得类型编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long typeId(){
-      return _typeId;
-   }
-
-   //============================================================
-   // <T>获得类型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceTypeUnit type(){
-      FDataResourceTypeLogic logic = _logicContext.findLogic(FDataResourceTypeLogic.class);
-      FDataResourceTypeUnit unit = logic.find(_typeId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置类型编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setTypeId(long value){
-      _typeId = value;
-   }
-
-   //============================================================
-   // <T>判断学校编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isSchoolIdChanged(){
-      return __schoolId != _schoolId;
-   }
-
-   //============================================================
-   // <T>获得学校编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long schoolId(){
-      return _schoolId;
-   }
-
-   //============================================================
-   // <T>获得学校编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataCommonSchoolUnit school(){
-      FDataCommonSchoolLogic logic = _logicContext.findLogic(FDataCommonSchoolLogic.class);
-      FDataCommonSchoolUnit unit = logic.find(_schoolId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置学校编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setSchoolId(long value){
-      _schoolId = value;
-   }
-
-   //============================================================
-   // <T>判断提供商编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isVendorIdChanged(){
-      return __vendorId != _vendorId;
-   }
-
-   //============================================================
-   // <T>获得提供商编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long vendorId(){
-      return _vendorId;
-   }
-
-   //============================================================
-   // <T>获得提供商编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataLogicVendorUnit vendor(){
-      FDataLogicVendorLogic logic = _logicContext.findLogic(FDataLogicVendorLogic.class);
-      FDataLogicVendorUnit unit = logic.find(_vendorId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置提供商编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setVendorId(long value){
-      _vendorId = value;
-   }
-
-   //============================================================
-   // <T>判断老师编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isTeacherIdChanged(){
-      return __teacherId != _teacherId;
-   }
-
-   //============================================================
-   // <T>获得老师编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long teacherId(){
-      return _teacherId;
-   }
-
-   //============================================================
-   // <T>获得老师编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataPersonUserUnit teacher(){
-      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
-      FDataPersonUserUnit unit = logic.find(_teacherId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置老师编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setTeacherId(long value){
-      _teacherId = value;
    }
 
    //============================================================
@@ -1509,18 +1245,6 @@ public class FDataResourceResourceUnit
             return _name;
          case "label":
             return _label;
-         case "module_id":
-            return Long.toString(_moduleId);
-         case "channel_id":
-            return Long.toString(_channelId);
-         case "type_id":
-            return Long.toString(_typeId);
-         case "school_id":
-            return Long.toString(_schoolId);
-         case "vendor_id":
-            return Long.toString(_vendorId);
-         case "teacher_id":
-            return Long.toString(_teacherId);
          case "user_id":
             return Long.toString(_userId);
          case "activity_id":
@@ -1612,24 +1336,6 @@ public class FDataResourceResourceUnit
             break;
          case "label":
             _label = value;
-            break;
-         case "module_id":
-            _moduleId = RLong.parse(value);
-            break;
-         case "channel_id":
-            _channelId = RLong.parse(value);
-            break;
-         case "type_id":
-            _typeId = RLong.parse(value);
-            break;
-         case "school_id":
-            _schoolId = RLong.parse(value);
-            break;
-         case "vendor_id":
-            _vendorId = RLong.parse(value);
-            break;
-         case "teacher_id":
-            _teacherId = RLong.parse(value);
             break;
          case "user_id":
             _userId = RLong.parse(value);
@@ -1759,30 +1465,6 @@ public class FDataResourceResourceUnit
             case "label":
                __label = value;
                _label = __label;
-               break;
-            case "module_id":
-               __moduleId = RLong.parse(value);
-               _moduleId = __moduleId;
-               break;
-            case "channel_id":
-               __channelId = RLong.parse(value);
-               _channelId = __channelId;
-               break;
-            case "type_id":
-               __typeId = RLong.parse(value);
-               _typeId = __typeId;
-               break;
-            case "school_id":
-               __schoolId = RLong.parse(value);
-               _schoolId = __schoolId;
-               break;
-            case "vendor_id":
-               __vendorId = RLong.parse(value);
-               _vendorId = __vendorId;
-               break;
-            case "teacher_id":
-               __teacherId = RLong.parse(value);
-               _teacherId = __teacherId;
                break;
             case "user_id":
                __userId = RLong.parse(value);
@@ -1922,12 +1604,6 @@ public class FDataResourceResourceUnit
       row.set("code", _code);
       row.set("name", _name);
       row.set("label", _label);
-      row.set("moduleId", _moduleId);
-      row.set("channelId", _channelId);
-      row.set("typeId", _typeId);
-      row.set("schoolId", _schoolId);
-      row.set("vendorId", _vendorId);
-      row.set("teacherId", _teacherId);
       row.set("userId", _userId);
       row.set("activityId", _activityId);
       row.set("statusCd", _statusCd);
@@ -1974,12 +1650,6 @@ public class FDataResourceResourceUnit
       map.put("code", _code);
       map.put("name", _name);
       map.put("label", _label);
-      map.put("moduleId", RLong.toString(_moduleId));
-      map.put("channelId", RLong.toString(_channelId));
-      map.put("typeId", RLong.toString(_typeId));
-      map.put("schoolId", RLong.toString(_schoolId));
-      map.put("vendorId", RLong.toString(_vendorId));
-      map.put("teacherId", RLong.toString(_teacherId));
       map.put("userId", RLong.toString(_userId));
       map.put("activityId", RLong.toString(_activityId));
       map.put("statusCd", RInteger.toString(_statusCd));

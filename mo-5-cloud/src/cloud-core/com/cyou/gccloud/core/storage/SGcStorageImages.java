@@ -1,8 +1,5 @@
 package com.cyou.gccloud.core.storage;
 
-import com.cyou.gccloud.define.enums.common.EGcStorageDevice;
-import com.cyou.gccloud.define.enums.common.EGcStorageDisplay;
-import com.cyou.gccloud.define.enums.common.EGcStorageQuality;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.FStrings;
@@ -29,19 +26,19 @@ public class SGcStorageImages
    public SGcStorageImage search(int deviceCd,
                                  int qualityCd,
                                  int displayCd){
-      for(int n = 0; n < _count; n++){
-         SGcStorageImage image = _items[n];
-         int imageDeviceCd = image.deviceCd();
-         if((imageDeviceCd == deviceCd) || (imageDeviceCd == EGcStorageDevice.All)){
-            int imageQualityCd = image.qualityCd();
-            if((imageQualityCd == qualityCd) || (imageQualityCd == EGcStorageQuality.All)){
-               int imageDisplayCd = image.displayCd();
-               if((imageDisplayCd == displayCd) || (imageDisplayCd == EGcStorageDisplay.All)){
-                  return image;
-               }
-            }
-         }
-      }
+      //      for(int n = 0; n < _count; n++){
+      //         SGcStorageImage image = _items[n];
+      //         int imageDeviceCd = image.deviceCd();
+      //         if((imageDeviceCd == deviceCd) || (imageDeviceCd == EGcStorageDevice.All)){
+      //            int imageQualityCd = image.qualityCd();
+      //            if((imageQualityCd == qualityCd) || (imageQualityCd == EGcStorageQuality.All)){
+      //               int imageDisplayCd = image.displayCd();
+      //               if((imageDisplayCd == displayCd) || (imageDisplayCd == EGcStorageDisplay.All)){
+      //                  return image;
+      //               }
+      //            }
+      //         }
+      //      }
       return null;
    }
 

@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -12,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源类型表逻辑单元。</T>
+// <T>资源3D网格表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceTypeUnit
+public class FDataResource3dTextureUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -36,6 +35,12 @@ public class FDataResourceTypeUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段类型编号的定义。
+   private long __resourceId;
+
+   // 字段类型编号的定义。
+   protected long _resourceId;
+
    // 存储字段代码的定义。
    private String __code;
 
@@ -48,28 +53,22 @@ public class FDataResourceTypeUnit
    // 字段名称的定义。
    protected String _label;
 
-   // 存储字段是否显示的定义。
-   private int __displayCd;
+   // 存储字段详细描述的定义。
+   private String __description;
 
-   // 字段是否显示的定义。
-   protected int _displayCd;
+   // 字段详细描述的定义。
+   protected String _description;
 
-   // 存储字段显示顺序的定义。
-   private int __displayOrder;
+   // 存储字段内容的定义。
+   private String __content;
 
-   // 字段显示顺序的定义。
-   protected int _displayOrder;
+   // 字段内容的定义。
+   protected String _content;
 
-   // 存储字段图标地址的定义。
-   private String __iconUrl;
-
-   // 字段图标地址的定义。
-   protected String _iconUrl;
-
-   // 存储字段备注的定义。
+   // 存储字段注释内容的定义。
    private String __note;
 
-   // 字段备注的定义。
+   // 字段注释内容的定义。
    protected String _note;
 
    // 存储字段创建用户标识的定义。
@@ -97,9 +96,9 @@ public class FDataResourceTypeUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源类型表逻辑单元。</T>
+   // <T>构造资源3D网格表逻辑单元。</T>
    //============================================================
-   public FDataResourceTypeUnit(){
+   public FDataResource3dTextureUnit(){
    }
 
    //============================================================
@@ -184,6 +183,44 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
+   // <T>判断类型编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isResourceIdChanged(){
+      return __resourceId != _resourceId;
+   }
+
+   //============================================================
+   // <T>获得类型编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long resourceId(){
+      return _resourceId;
+   }
+
+   //============================================================
+   // <T>获得类型编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceResourceUnit resource(){
+      FDataResourceResourceLogic logic = _logicContext.findLogic(FDataResourceResourceLogic.class);
+      FDataResourceResourceUnit unit = logic.find(_resourceId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置类型编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setResourceId(long value){
+      _resourceId = value;
+   }
+
+   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -238,88 +275,61 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>判断是否显示的数据是否改变。</T>
+   // <T>判断详细描述的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDisplayCdChanged(){
-      return __displayCd != _displayCd;
+   public boolean isDescriptionChanged(){
+      return !RString.equals(__description, _description);
    }
 
    //============================================================
-   // <T>获得是否显示的数据内容。</T>
+   // <T>获得详细描述的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int displayCd(){
-      return _displayCd;
+   public String description(){
+      return _description;
    }
 
    //============================================================
-   // <T>设置是否显示的数据内容。</T>
+   // <T>设置详细描述的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDisplayCd(int value){
-      _displayCd = value;
+   public void setDescription(String value){
+      _description = value;
    }
 
    //============================================================
-   // <T>判断显示顺序的数据是否改变。</T>
+   // <T>判断内容的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDisplayOrderChanged(){
-      return __displayOrder != _displayOrder;
+   public boolean isContentChanged(){
+      return !RString.equals(__content, _content);
    }
 
    //============================================================
-   // <T>获得显示顺序的数据内容。</T>
+   // <T>获得内容的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int displayOrder(){
-      return _displayOrder;
+   public String content(){
+      return _content;
    }
 
    //============================================================
-   // <T>设置显示顺序的数据内容。</T>
+   // <T>设置内容的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDisplayOrder(int value){
-      _displayOrder = value;
+   public void setContent(String value){
+      _content = value;
    }
 
    //============================================================
-   // <T>判断图标地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIconUrlChanged(){
-      return !RString.equals(__iconUrl, _iconUrl);
-   }
-
-   //============================================================
-   // <T>获得图标地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String iconUrl(){
-      return _iconUrl;
-   }
-
-   //============================================================
-   // <T>设置图标地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIconUrl(String value){
-      _iconUrl = value;
-   }
-
-   //============================================================
-   // <T>判断备注的数据是否改变。</T>
+   // <T>判断注释内容的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -328,7 +338,7 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>获得备注的数据内容。</T>
+   // <T>获得注释内容的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -337,7 +347,7 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>设置备注的数据内容。</T>
+   // <T>设置注释内容的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -468,16 +478,16 @@ public class FDataResourceTypeUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "resource_id":
+            return Long.toString(_resourceId);
          case "code":
             return _code;
          case "label":
             return _label;
-         case "display_cd":
-            return RInteger.toString(_displayCd);
-         case "display_order":
-            return RInteger.toString(_displayOrder);
-         case "icon_url":
-            return _iconUrl;
+         case "description":
+            return _description;
+         case "content":
+            return _content;
          case "note":
             return _note;
          case "create_user_id":
@@ -511,20 +521,20 @@ public class FDataResourceTypeUnit
          case "guid":
             _guid = value;
             break;
+         case "resource_id":
+            _resourceId = RLong.parse(value);
+            break;
          case "code":
             _code = value;
             break;
          case "label":
             _label = value;
             break;
-         case "display_cd":
-            _displayCd = RInteger.parse(value);
+         case "description":
+            _description = value;
             break;
-         case "display_order":
-            _displayOrder = RInteger.parse(value);
-            break;
-         case "icon_url":
-            _iconUrl = value;
+         case "content":
+            _content = value;
             break;
          case "note":
             _note = value;
@@ -568,6 +578,10 @@ public class FDataResourceTypeUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "resource_id":
+               __resourceId = RLong.parse(value);
+               _resourceId = __resourceId;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -576,17 +590,13 @@ public class FDataResourceTypeUnit
                __label = value;
                _label = __label;
                break;
-            case "display_cd":
-               __displayCd = RInteger.parse(value);
-               _displayCd = __displayCd;
+            case "description":
+               __description = value;
+               _description = __description;
                break;
-            case "display_order":
-               __displayOrder = RInteger.parse(value);
-               _displayOrder = __displayOrder;
-               break;
-            case "icon_url":
-               __iconUrl = value;
-               _iconUrl = __iconUrl;
+            case "content":
+               __content = value;
+               _content = __content;
                break;
             case "note":
                __note = value;
@@ -623,11 +633,11 @@ public class FDataResourceTypeUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("resourceId", _resourceId);
       row.set("code", _code);
       row.set("label", _label);
-      row.set("displayCd", _displayCd);
-      row.set("displayOrder", _displayOrder);
-      row.set("iconUrl", _iconUrl);
+      row.set("description", _description);
+      row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -646,11 +656,11 @@ public class FDataResourceTypeUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("resourceId", RLong.toString(_resourceId));
       map.put("code", _code);
       map.put("label", _label);
-      map.put("displayCd", RInteger.toString(_displayCd));
-      map.put("displayOrder", RInteger.toString(_displayOrder));
-      map.put("iconUrl", _iconUrl);
+      map.put("description", _description);
+      map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

@@ -1,8 +1,5 @@
 package com.cyou.gccloud.core.storage;
 
-import com.cyou.gccloud.define.enums.common.EGcStorageDevice;
-import com.cyou.gccloud.define.enums.common.EGcStorageDisplay;
-import com.cyou.gccloud.define.enums.common.EGcStorageQuality;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
@@ -208,9 +205,9 @@ public class SGcStorageImage
    // @param xconfig 配置节点
    //============================================================
    public void loadConfig(FXmlNode xconfig){
-      _deviceCd = EGcStorageDevice.parse(xconfig.get("device"));
-      _qualityCd = EGcStorageQuality.parse(xconfig.get("quality"));
-      _displayCd = EGcStorageDisplay.parse(xconfig.get("display"));
+      //      _deviceCd = EGcStorageDevice.parse(xconfig.get("device"));
+      //      _qualityCd = EGcStorageQuality.parse(xconfig.get("quality"));
+      //      _displayCd = EGcStorageDisplay.parse(xconfig.get("display"));
       _action = xconfig.get("action");
       _width = xconfig.getInt("width");
       _height = xconfig.getInt("height");

@@ -1,7 +1,5 @@
 package com.cyou.gccloud.core.logger;
 
-import com.cyou.gccloud.define.enums.common.EGcLogger;
-import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.xml.FXmlNode;
 
@@ -17,36 +15,36 @@ public class FGcLoggers
    // @param xconfig 配置节点
    //============================================================
    public void loadConfig(FXmlNode xconfig){
-      for(FXmlNode xlogger : xconfig){
-         if(xlogger.isName("Logger")){
-            // 创建日志对象
-            int typeCd = xlogger.getInt("type_cd");
-            FGcLogger logger = null;
-            switch(typeCd){
-               case EGcLogger.SystemLogger:
-                  logger = new FGcLoggerSystemLogger();
-                  break;
-               case EGcLogger.SystemException:
-                  logger = new FGcLoggerSystemException();
-                  break;
-               case EGcLogger.PersonOperation:
-                  logger = new FGcLoggerPersonOperation();
-                  break;
-               case EGcLogger.PersonActivity:
-                  logger = new FGcLoggerPersonActivity();
-                  break;
-               case EGcLogger.ResourceOperation:
-                  logger = new FGcLoggerResourceOperation();
-                  break;
-               default:
-                  throw new FFatalError("Unknown logger type. (type_cd={1})", typeCd);
-            }
-            // 加载日志配置
-            logger.loadConfig(xlogger);
-            // 增加日志
-            push(logger);
-         }
-      }
+      //      for(FXmlNode xlogger : xconfig){
+      //         if(xlogger.isName("Logger")){
+      //            // 创建日志对象
+      //            int typeCd = xlogger.getInt("type_cd");
+      //            FGcLogger logger = null;
+      //            switch(typeCd){
+      //               case EGcLogger.SystemLogger:
+      //                  logger = new FGcLoggerSystemLogger();
+      //                  break;
+      //               case EGcLogger.SystemException:
+      //                  logger = new FGcLoggerSystemException();
+      //                  break;
+      //               case EGcLogger.PersonOperation:
+      //                  logger = new FGcLoggerPersonOperation();
+      //                  break;
+      //               case EGcLogger.PersonActivity:
+      //                  logger = new FGcLoggerPersonActivity();
+      //                  break;
+      //               case EGcLogger.ResourceOperation:
+      //                  logger = new FGcLoggerResourceOperation();
+      //                  break;
+      //               default:
+      //                  throw new FFatalError("Unknown logger type. (type_cd={1})", typeCd);
+      //            }
+      //            // 加载日志配置
+      //            logger.loadConfig(xlogger);
+      //            // 增加日志
+      //            push(logger);
+      //         }
+      //      }
    }
 
    //============================================================

@@ -1,7 +1,5 @@
 package com.cyou.gccloud.core.storage;
 
-import com.cyou.gccloud.define.enums.common.EGcStorageDevice;
-import com.cyou.gccloud.define.enums.common.EGcStorageQuality;
 import com.cyou.gccloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.RFile;
@@ -160,7 +158,8 @@ public class FGcStorageConsole
                                 String subTypeName,
                                 int displayCd,
                                 String uri){
-      return makePictureUrl(typeName, subTypeName, EGcStorageDevice.Pc, EGcStorageQuality.All, displayCd, uri);
+      //return makePictureUrl(typeName, subTypeName, EGcStorageDevice.Pc, EGcStorageQuality.All, displayCd, uri);
+      return null;
    }
 
    //============================================================

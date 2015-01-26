@@ -2,6 +2,7 @@ package org.mo.engine3d.resource.model;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FBytes;
 
 //============================================================
 // <T>资源模型数据流。</T>
@@ -13,6 +14,8 @@ public class FRs3ModelStream
    protected int _stride;
 
    protected int _count;
+
+   protected FBytes _data = new FBytes();
 
    //============================================================
    // <T>构造资源模型数据流。</T>
@@ -34,5 +37,14 @@ public class FRs3ModelStream
    // @param input 输入流
    //============================================================
    public void unserialize(IDataInput input){
+      // 读取属性
+      _code = input.readString();
+      _stride = input.readInt16();
+      _count = input.readInt32();
+      // 读取数据
+      int size = _stride * _count;
+      _data.ensureSize(size);
+      input.read(_data.memory(), 0, size);
+      _data.setLength(size);
    }
 }
