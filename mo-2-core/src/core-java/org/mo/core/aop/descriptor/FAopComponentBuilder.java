@@ -223,7 +223,7 @@ public class FAopComponentBuilder
             FDictionary<Method> methodMap = RClass.makeMethodMap(instance);
             for(XAbsAopMethod methodConfig : config.initializeMethods()){
                String methodName = methodConfig.name();
-               Method method = methodMap.get(methodName);
+               Method method = methodMap.get(methodName, null);
                if(method != null){
                   if(_logger.debugAble()){
                      _logger.debug(this, "buildInitialize", "Initialize: {1}.{2}", RClass.shortName(instance), method.getName());

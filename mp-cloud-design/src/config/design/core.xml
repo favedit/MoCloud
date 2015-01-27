@@ -10,7 +10,7 @@
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' deploy = 'start'>
       <Property name='storage_server'>${cloud.server.storage.remote}</Property>
-      <Property name='storage_servlet'>${cloud.server.storage.local}/cloud.resource.upload.direct.wv</Property>
+      <Property name='storage_servlet'>${cloud.server.storage.local}/cloud.resource.upload.wv</Property>
       <Property name='storage_resource'>${cloud.server.storage.remote}/storage</Property>
       <Initialize name='initialize'/>
    </Component>

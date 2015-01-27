@@ -1,5 +1,7 @@
 package org.mo.cloud.core.storage;
 
+import org.mo.com.lang.type.TDateTime;
+
 //============================================================
 // <T>存储信息。</T>
 //============================================================
@@ -19,6 +21,9 @@ public class SGcStorage
 
    // 类型
    protected String _type;
+
+   // 数据
+   protected byte[] _data;
 
    // 来源
    protected String _source;
@@ -51,6 +56,27 @@ public class SGcStorage
                      String type){
       _catalog = catalog;
       _date = date;
+      _code = code;
+      _version = version;
+      _type = type;
+   }
+
+   //============================================================
+   // <T>构造存储信息。</T>
+   //
+   // @param catalog 分类
+   // @param type 类型
+   // @param code 代码
+   // @param name 名称
+   // @param source 来源
+   //============================================================
+   public SGcStorage(String catalog,
+                     TDateTime date,
+                     String code,
+                     String version,
+                     String type){
+      _catalog = catalog;
+      _date = date.format("YYYYMMDD");
       _code = code;
       _version = version;
       _type = type;
@@ -144,6 +170,24 @@ public class SGcStorage
    //============================================================
    public void setType(String type){
       _type = type;
+   }
+
+   //============================================================
+   // <T>获得数据。</T>
+   //
+   // @return 数据
+   //============================================================
+   public byte[] data(){
+      return _data;
+   }
+
+   //============================================================
+   // <T>设置数据。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public void setData(byte[] data){
+      _data = data;
    }
 
    //============================================================

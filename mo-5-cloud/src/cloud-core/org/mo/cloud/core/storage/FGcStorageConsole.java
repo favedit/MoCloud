@@ -63,30 +63,52 @@ public class FGcStorageConsole
       // 生成名称
       String storeName = "/" + catalog + "/" + date + "/" + code + "/" + version + "." + type;
       //............................................................
-      // 检查数据
+      // 获得数据
+      byte[] data = null;
       String source = storage.source();
-      try(FByteFile file = new FByteFile(source)){
-         int size = file.length();
-         if(size <= 0){
-            _logger.warn(this, "store", "File size is invalid. (source={1})", source);
-         }else{
-            // 生成地址
-            String urlFormat = "{1}?catalog={2}&date={3}&code={4}&version={5}&type={6}&size={7}";
-            String url = RString.format(urlFormat, _storageServlet, catalog, date, code, version, type, size);
-            _logger.debug(this, "store", "Store url send. (url={1})", url);
-            // 发送数据
-            try(FHttpConnection connection = new FHttpConnection(url)){
-               byte[] data = file.toArray();
-               connection.fetch(data);
+      if(!RString.isEmpty(source)){
+         try(FByteFile file = new FByteFile(source)){
+            int size = file.length();
+            if(size <= 0){
+               _logger.warn(this, "store", "File size is invalid. (source={1})", source);
+               return false;
+            }else{
+               data = file.toArray();
             }
-            _logger.debug(this, "store", "Store url send finish. (url={1}, length={2})", url, file.length());
-            // 设置地址
-            storage.setUri(storeName);
-            storage.setUrl(_storageResource + storeName);
-            return true;
+         }catch(Exception e){
+            _logger.error(this, "store", e);
          }
-      }catch(Exception e){
-         _logger.error(this, "store", e);
+      }
+      if(data == null){
+         data = storage.data();
+      }
+      //............................................................
+      // 上传数据
+      if(data != null){
+         try{
+            int size = data.length;
+            if(size <= 0){
+               _logger.warn(this, "store", "Data size is invalid. (size={1})", size);
+            }else{
+               // 生成地址
+               String urlFormat = "{1}?catalog={2}&date={3}&code={4}&version={5}&type={6}&size={7}";
+               String url = RString.format(urlFormat, _storageServlet, catalog, date, code, version, type, size);
+               _logger.debug(this, "store", "Store url send. (url={1})", url);
+               // 发送数据
+               try(FHttpConnection connection = new FHttpConnection(url)){
+                  connection.fetch(data);
+               }
+               _logger.debug(this, "store", "Store url send finish. (url={1})", url);
+               // 设置地址
+               storage.setUri(storeName);
+               storage.setUrl(_storageResource + storeName);
+               return true;
+            }
+         }catch(Exception e){
+            _logger.error(this, "store", e);
+         }
+      }else{
+         throw new FFatalError("Data is null.");
       }
       return false;
    }

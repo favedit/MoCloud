@@ -298,20 +298,22 @@ public abstract class FLogicTable
       FRow row = null;
       IMemoryCacheConsole memcacheConsole = innerMemcache();
       try(FMemoryChannel channel = memcacheConsole.alloc()){
-         // 获得当前代码
-         FLogicCacheTable cacheTable = innerCacheTable();
-         String currentCode = cacheTable.currentCode(channel);
-         // 生成标识
-         FString buffer = new FString();
-         buffer.append("mo-cache|logic.dataset.row|");
-         buffer.append(_name);
-         buffer.append('|');
-         buffer.append(currentCode);
-         buffer.append('|');
-         buffer.append(code);
-         String key = buffer.toString();
-         // 从内存中查找数据
-         if(channel != null){
+         if(channel == null){
+            row = _connection.find(sql);
+         }else{
+            // 获得当前代码
+            FLogicCacheTable cacheTable = innerCacheTable();
+            String currentCode = cacheTable.currentCode(channel);
+            // 生成标识
+            FString buffer = new FString();
+            buffer.append("mo-cache|logic.dataset.row|");
+            buffer.append(_name);
+            buffer.append('|');
+            buffer.append(currentCode);
+            buffer.append('|');
+            buffer.append(code);
+            String key = buffer.toString();
+            // 从内存中查找数据
             String value = channel.getTimeoutString(key);
             if(value != null){
                // 获得数据
@@ -319,12 +321,10 @@ public abstract class FLogicTable
                row.unpack(value);
                _logger.debug(this, "innerFindRow", "Find row from memcache. (key={1}, sql={2})", key, sql);
             }
-         }
-         // 获得结果集
-         if(row == null){
-            row = _connection.find(sql);
-            // 存储结果集合
-            if(channel != null){
+            // 获得结果集
+            if(row == null){
+               row = _connection.find(sql);
+               // 存储结果集合
                if(row != null){
                   String pack = row.pack();
                   channel.setTimeoutString(key, pack, _timeout);

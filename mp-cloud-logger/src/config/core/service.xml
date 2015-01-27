@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   <!-- ============================================================ -->
+   <!-- 设计：日志发布服务                                           -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'cloud.logger.publish'
+         face  = 'com.cyou.gccloud.logger.face.logger.IPublishService'/>
+
+   <Component
+         face  = 'com.cyou.gccloud.logger.face.logger.IPublishService'
+         class = 'com.cyou.gccloud.logger.face.logger.FPublishService'
+         scope = 'global'/>
+</Config>

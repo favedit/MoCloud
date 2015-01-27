@@ -122,7 +122,9 @@ public class FLogicCacheTable
       // 写入默认代码
       if(code == null){
          code = nextCode();
-         channel.set(key, code);
+         if(channel != null){
+            channel.set(key, code);
+         }
       }
       return code;
    }

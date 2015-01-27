@@ -1,10 +1,9 @@
 package org.mo.cloud.storage.face.resource;
 
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import org.mo.cloud.storage.core.storage.IGcStorageConsole;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -85,24 +84,17 @@ public class FUploadServlet
       // 写入文件
       String storageName = _storageConsole.makeStorageName(catalog, date, code, version, type);
       _logger.debug(this, "process", "Upload data. (catalog={1}, date={2}, code={3}, version={4}, type={5}, size={6})", catalog, date, code, version, type, size);
-      try(RandomAccessFile file = new RandomAccessFile(storageName, "w")){
-         // 设置文件大小
-         if(file.length() != size){
-            file.setLength(size);
-         }
-         // 设置开始位置
-         file.seek(0);
-         // 写入文件
-         byte buffer[] = new byte[BufferLength];
-         try(FileChannel channel = file.getChannel()){
-            MappedByteBuffer mapping = channel.map(FileChannel.MapMode.READ_WRITE, 0, size);
+      try(FileOutputStream file = new FileOutputStream(storageName)){
+         try(DataOutputStream output = new DataOutputStream(file)){
+            // 写入文件
+            byte buffer[] = new byte[BufferLength];
             // 接收数据
             InputStream inputStream = request.inputStream();
             int remain = size;
             while(remain > 0){
                int readed = inputStream.read(buffer, 0, BufferLength);
                if(readed > 0){
-                  mapping.put(buffer, 0, readed);
+                  output.write(buffer, 0, readed);
                }
                remain -= readed;
                if((readed == 0) || (remain <= 0)){
@@ -110,6 +102,24 @@ public class FUploadServlet
                }
             }
          }
+         //         // 写入文件
+         //         byte buffer[] = new byte[BufferLength];
+         //         FileChannel channel = file.getChannel();
+         //         MappedByteBuffer mapping = channel.map(FileChannel.MapMode.READ_WRITE, 0, size);
+         //         // 接收数据
+         //         InputStream inputStream = request.inputStream();
+         //         int remain = size;
+         //         while(remain > 0){
+         //            int readed = inputStream.read(buffer, 0, BufferLength);
+         //            if(readed > 0){
+         //               mapping.put(buffer, 0, readed);
+         //            }
+         //            remain -= readed;
+         //            if((readed == 0) || (remain <= 0)){
+         //               break;
+         //            }
+         //         }
+         //         channel.close();
          _logger.debug(this, "process", "Upload data success. (size={1}, file={2})", size, storageName);
       }catch(IOException e){
          _logger.error(this, "process", e);

@@ -5,3 +5,6 @@ tomcat-cloud.design: 91
 tomcat-cloud.content: 92
 
 tomcat-cloud.storage: 93
+
+tomcat-cloud.logger: 94
+

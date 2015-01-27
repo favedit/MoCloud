@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <!-- ============================================================ -->
+   <!-- SystemLoggerConsole:系统日志控制台                           -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.cyou.gccloud.logger.core.system.ISystemLoggerConsole'
+         class = 'com.cyou.gccloud.logger.core.system.FSystemLoggerConsole'
+         scope = 'global'>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- SystemExceptionConsole:系统例外控制台                        -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.cyou.gccloud.logger.core.system.ISystemExceptionConsole'
+         class = 'com.cyou.gccloud.logger.core.system.FSystemExceptionConsole'
+         scope = 'global'>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- PersonOperationConsole:用户操作控制台                        -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.cyou.gccloud.logger.core.person.IPersonOperationConsole'
+         class = 'com.cyou.gccloud.logger.core.person.FPersonOperationConsole'
+         scope = 'global'>
+   </Component>
+   
+</Config>
