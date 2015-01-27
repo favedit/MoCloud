@@ -26,6 +26,10 @@
    <Include>${application.config}/common/web.xml</Include>
    <Include>${application.config}/common/web-face.xml</Include>
 
+   <!-- 包含：设计设定 -->
+   <Include>${application.config}/design/core.xml</Include>
+   <Include>${application.config}/design/describe.xml</Include>
+
    <!-- 包含：内容设定 -->
    <Include>${application.config}/content/core.xml</Include>
    <Include>${application.config}/content/service.xml</Include>

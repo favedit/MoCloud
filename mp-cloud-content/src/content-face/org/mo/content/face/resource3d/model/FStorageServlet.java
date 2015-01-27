@@ -68,9 +68,9 @@ public class FStorageServlet
       }
       // 检查版本
       String version = context.parameter("version");
-      if(RString.isEmpty(version)){
-         throw new FFatalError("Model version is empty.");
-      }
+      //if(RString.isEmpty(version)){
+      //throw new FFatalError("Model version is empty.");
+      //}
       // 生成模型
       FRs3Model model = _modelConsole.makeModel(logicContext, code, version);
       // 存储为数组

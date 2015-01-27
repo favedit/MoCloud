@@ -44,6 +44,8 @@ public class FModelService
          // 创建树节点
          FXmlNode xnode = xoutput.createNode("TreeNode");
          xnode.set("name", modelUnit.code());
+         xnode.set("label", modelUnit.code());
+         xnode.set("type", "Model");
       }
       return EResult.Success;
    }

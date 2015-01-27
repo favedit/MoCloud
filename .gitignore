@@ -22,4 +22,5 @@
 /mt-server/tomcat-cloud.content/logs
 /mt-server/tomcat-cloud.storage/logs
 /mt-server/tomcat-cloud.logger/logs
+/mt-storage
 /mt-temp

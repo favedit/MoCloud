@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design.tree" update_date="20150122203602">
+  <Persistence is_valid="Y" name="conent.list" label="目录定义" template="" source="${output.design}/src/design-core" note="">
+    <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.design.core.tree.common.XObject" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="is_valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Interface>
+    <Component is_valid="Y" name="TreeColumn" label="目录分列" class_name="org.mo.cloud.design.core.tree.common.XTreeColumn" base_name="org.mo.cloud.design.core.tree.base.XBaseTreeColumn" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="data_name" label="数据名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="width" label="宽度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="TreeLevel" label="目录层级" class_name="org.mo.cloud.design.core.tree.common.XTreeLevel" base_name="org.mo.cloud.design.core.tree.base.XBaseTreeLevel" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="String" name="id" label="编号" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="TreeNodeType" label="节点类型" class_name="org.mo.cloud.design.core.tree.common.XTreeNodeType" base_name="org.mo.cloud.design.core.tree.base.XBaseTreeNodeType" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="String" name="linker" label="关联" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="service" label="服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="attributes" label="属性集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="TreeNode" label="节点" class_name="org.mo.cloud.design.core.tree.common.XTreeNode" base_name="org.mo.cloud.design.core.tree.base.XBaseTreeNode" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="Boolean" name="child" label="含有子节点" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="code" label="代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="attributes" label="属性集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="TreeView" label="目录树" class_name="org.mo.cloud.design.core.tree.common.XTreeView" base_name="org.mo.cloud.design.core.tree.base.XBaseTreeView" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="String" name="service" label="服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Component>
+  </Persistence>
+</Content>
