@@ -32,7 +32,9 @@ public class FJavaDeclareSource
    // @param token 文本块
    // @param line 代码行
    //============================================================
-   public void parseKeyword(FJavaParserContent content, FTextToken token, String line){
+   public void parseKeyword(FJavaParserContent content,
+                            FTextToken token,
+                            String line){
       if(RString.endsWith(line, ";")){
          line = line.substring(0, line.length() - 1);
       }
@@ -58,7 +60,8 @@ public class FJavaDeclareSource
    // @param source 代码内容
    //============================================================
    @Override
-   public void convertSourceBegin(FJavaConvertContent content, FTextSource source){
+   public void convertSourceBegin(FJavaConvertContent content,
+                                  FTextSource source){
       source.appendIndent();
       source.append(_typeName);
       source.append(" ");

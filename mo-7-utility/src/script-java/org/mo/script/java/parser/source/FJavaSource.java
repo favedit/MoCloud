@@ -111,7 +111,9 @@ public class FJavaSource
    // @param content 解析环境
    // @param token 文本块
    //============================================================
-   public void parseLine(FJavaParserContent content, FTextToken token, String line){
+   public void parseLine(FJavaParserContent content,
+                         FTextToken token,
+                         String line){
       String[] items = RString.split(line, ';');
       RString.trim(items);
       items = RStrings.filterNotBlank(items);
@@ -136,7 +138,8 @@ public class FJavaSource
    // @param content 解析环境
    // @param token 文本块
    //============================================================
-   public void parse(FJavaParserContent content, FTextToken token){
+   public void parse(FJavaParserContent content,
+                     FTextToken token){
       FTextTokens tokens = token.tokens();
       for(FTextToken subToken : tokens){
          String source = subToken.source();
@@ -187,7 +190,8 @@ public class FJavaSource
    // @param content 转换环境
    // @param source 代码内容
    //============================================================
-   public void convertSourceBegin(FJavaConvertContent content, FTextSource source){
+   public void convertSourceBegin(FJavaConvertContent content,
+                                  FTextSource source){
    }
 
    //============================================================
@@ -196,7 +200,8 @@ public class FJavaSource
    // @param content 转换环境
    // @param source 代码内容
    //============================================================
-   public void convertSourceEnd(FJavaConvertContent content, FTextSource source){
+   public void convertSourceEnd(FJavaConvertContent content,
+                                FTextSource source){
    }
 
    //============================================================
@@ -205,7 +210,8 @@ public class FJavaSource
    // @param content 转换环境
    // @param source 代码内容
    //============================================================
-   public void convert(FJavaConvertContent content, FTextSource source){
+   public void convert(FJavaConvertContent content,
+                       FTextSource source){
       // 转换前代码
       convertSourceBegin(content, source);
       //............................................................

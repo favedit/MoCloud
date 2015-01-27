@@ -9,7 +9,6 @@ import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.com.lang.RUuid;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
@@ -42,13 +41,13 @@ public class RRs3ModelImport
          for(FRs3ModelMesh mesh : model.meshs()){
             FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
             FDataResource3dModelMeshUnit meshUnit = meshLogic.doPrepare();
+            meshUnit.setCode(mesh.code());
             meshUnit.setModelId(modelUnit.ouid());
             meshLogic.doInsert(meshUnit);
             // 新建数据流
             for(FRs3ModelStream stream : mesh.streams()){
                FDataResource3dModelStreamLogic streamLogic = logicContext.findLogic(FDataResource3dModelStreamLogic.class);
                FDataResource3dModelStreamUnit streamUnit = streamLogic.doPrepare();
-               streamUnit.setGvid(RUuid.makeUuid());
                streamUnit.setCode(stream.code());
                streamUnit.setModelId(modelUnit.ouid());
                streamUnit.setMeshId(meshUnit.ouid());

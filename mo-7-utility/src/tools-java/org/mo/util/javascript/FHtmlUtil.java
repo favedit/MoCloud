@@ -8,7 +8,8 @@ package org.mo.util.javascript;
 
 import org.mo.com.lang.RString;
 
-public class FHtmlUtil{
+public class FHtmlUtil
+{
 
    public static String makeLabel(String type,
                                   String label,

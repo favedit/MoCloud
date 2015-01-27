@@ -593,23 +593,22 @@ public class FDataResource3dModelStreamLogic
       cmd.append(",`UPDATE_DATE`");
       cmd.append(") VALUES(");
       cmd.append(unit.ovld());
-      cmd.append(',');
       String guid = unit.guid();
       if(RString.isEmpty(guid)){
          guid = RUuid.makeUniqueId();
       }
+      cmd.append(',');
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      cmd.append(',');
       String gvid = unit.gvid();
       if(RString.isEmpty(gvid)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(gvid));
-         cmd.append('\'');
+         gvid = RUuid.makeUniqueId();
       }
+      cmd.append(',');
+      cmd.append('\'');
+      cmd.append(gvid);
+      cmd.append('\'');
       cmd.append(',');
       long modelId = unit.modelId();
       if(modelId == 0){

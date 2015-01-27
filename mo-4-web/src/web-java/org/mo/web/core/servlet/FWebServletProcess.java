@@ -1,8 +1,7 @@
 package org.mo.web.core.servlet;
 
-import org.mo.web.core.servlet.common.FAbstractWebServlet;
-
 import javax.servlet.ServletConfig;
+import org.mo.web.core.servlet.common.FAbstractWebServlet;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;

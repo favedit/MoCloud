@@ -1,8 +1,7 @@
 package com.cyou.gccloud.logic.person;
 
-import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
+import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicTable;
 import org.mo.data.logic.ILogicContext;
 

@@ -28,7 +28,9 @@ public class FJavaReturnSource
    // @param token 文本块
    // @param line 代码行
    //============================================================
-   public void parseKeyword(FJavaParserContent content, FTextToken token, String line){
+   public void parseKeyword(FJavaParserContent content,
+                            FTextToken token,
+                            String line){
       // 去掉关键字
       if(RString.startsWith(line, "return ")){
          line = line.substring("return ".length());
@@ -55,7 +57,8 @@ public class FJavaReturnSource
    // @param source 代码内容
    //============================================================
    @Override
-   public void convertSourceBegin(FJavaConvertContent content, FTextSource source){
+   public void convertSourceBegin(FJavaConvertContent content,
+                                  FTextSource source){
       source.appendIndent();
       source.append("return ");
       if(!hasSource()){
@@ -78,7 +81,8 @@ public class FJavaReturnSource
    // @param source 代码内容
    //============================================================
    @Override
-   public void convertSourceEnd(FJavaConvertContent content, FTextSource source){
+   public void convertSourceEnd(FJavaConvertContent content,
+                                FTextSource source){
       if(hasSource()){
          source.append(')');
          source.append(";");

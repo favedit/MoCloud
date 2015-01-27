@@ -23,7 +23,8 @@ public class FJavaParameters
    // @param content 转换环境
    // @param source 代码内容
    //============================================================
-   public void convert(FJavaConvertContent content, FTextSource source){
+   public void convert(FJavaConvertContent content,
+                       FTextSource source){
       for(int n = 0; n < _count; n++){
          // 增加
          if(n > 0){

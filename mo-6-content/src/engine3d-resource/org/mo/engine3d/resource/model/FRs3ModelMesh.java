@@ -9,6 +9,9 @@ import org.mo.com.lang.FObjects;
 //============================================================
 public class FRs3ModelMesh
 {
+   // 代码
+   protected String _code;
+
    // 数据流集合
    protected FObjects<FRs3ModelStream> _streams = new FObjects<FRs3ModelStream>(FRs3ModelStream.class);
 
@@ -16,6 +19,15 @@ public class FRs3ModelMesh
    // <T>构造资源模型网格。</T>
    //============================================================
    public FRs3ModelMesh(){
+   }
+
+   //============================================================
+   // <T>获得代码。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String code(){
+      return _code;
    }
 
    //============================================================
@@ -41,6 +53,8 @@ public class FRs3ModelMesh
    // @param input 输入流
    //============================================================
    public void unserialize(IDataInput input){
+      // 读取属性
+      _code = input.readString();
       // 读取数据流集合
       int meshCount = input.readInt16();
       for(int n = 0; n < meshCount; n++){

@@ -589,11 +589,11 @@ public class FDataResourceResourceLogic
       cmd.append(",`UPDATE_DATE`");
       cmd.append(") VALUES(");
       cmd.append(unit.ovld());
-      cmd.append(',');
       String guid = unit.guid();
       if(RString.isEmpty(guid)){
          guid = RUuid.makeUniqueId();
       }
+      cmd.append(',');
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');

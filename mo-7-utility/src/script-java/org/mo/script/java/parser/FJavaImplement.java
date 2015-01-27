@@ -46,7 +46,9 @@ public class FJavaImplement
    // @param token 文本段
    // @param line 文本行
    //============================================================
-   public void parse(FJavaParserContent content, FTextToken token, String line){
+   public void parse(FJavaParserContent content,
+                     FTextToken token,
+                     String line){
       _name = line;
    }
 }
