@@ -2,4 +2,16 @@
 
 <Config>
 
+   <!-- ==================================================== -->
+   <!-- 设计：模型数据服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content.model'
+         face  = 'org.mo.content.face.resource3d.model.IModelService'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.model.IModelService'
+         class = 'org.mo.content.face.resource3d.model.FModelService'
+         scope = 'global'/>
+
 </Config>
