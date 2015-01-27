@@ -29,23 +29,17 @@ public class FDataResource3dModelMeshUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段对象唯一标识的定义。
+   // 存储字段全局唯一标识的定义。
    private String __guid;
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段对象版本标识的定义。
-   private String __ovid;
+   // 存储字段全局版本标识的定义。
+   private String __gvid;
 
-   // 字段对象版本标识的定义。
-   protected String _ovid;
-
-   // 存储字段类型编号的定义。
-   private long __resourceId;
-
-   // 字段类型编号的定义。
-   protected long _resourceId;
+   // 字段全局版本标识的定义。
+   protected String _gvid;
 
    // 存储字段模型编号的定义。
    private long __modelId;
@@ -156,7 +150,7 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>判断对象唯一标识的数据是否改变。</T>
+   // <T>判断全局唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -165,7 +159,7 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>获得对象唯一标识的数据内容。</T>
+   // <T>获得全局唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -174,7 +168,7 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>设置对象唯一标识的数据内容。</T>
+   // <T>设置全局唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -183,68 +177,30 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>判断对象版本标识的数据是否改变。</T>
+   // <T>判断全局版本标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isOvidChanged(){
-      return !RString.equals(__ovid, _ovid);
+   public boolean isGvidChanged(){
+      return !RString.equals(__gvid, _gvid);
    }
 
    //============================================================
-   // <T>获得对象版本标识的数据内容。</T>
+   // <T>获得全局版本标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String ovid(){
-      return _ovid;
+   public String gvid(){
+      return _gvid;
    }
 
    //============================================================
-   // <T>设置对象版本标识的数据内容。</T>
+   // <T>设置全局版本标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setOvid(String value){
-      _ovid = value;
-   }
-
-   //============================================================
-   // <T>判断类型编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isResourceIdChanged(){
-      return __resourceId != _resourceId;
-   }
-
-   //============================================================
-   // <T>获得类型编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long resourceId(){
-      return _resourceId;
-   }
-
-   //============================================================
-   // <T>获得类型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceResourceUnit resource(){
-      FDataResourceResourceLogic logic = _logicContext.findLogic(FDataResourceResourceLogic.class);
-      FDataResourceResourceUnit unit = logic.find(_resourceId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置类型编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setResourceId(long value){
-      _resourceId = value;
+   public void setGvid(String value){
+      _gvid = value;
    }
 
    //============================================================
@@ -489,10 +445,8 @@ public class FDataResource3dModelMeshUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "ovid":
-            return _ovid;
-         case "resource_id":
-            return Long.toString(_resourceId);
+         case "gvid":
+            return _gvid;
          case "model_id":
             return Long.toString(_modelId);
          case "code":
@@ -532,11 +486,8 @@ public class FDataResource3dModelMeshUnit
          case "guid":
             _guid = value;
             break;
-         case "ovid":
-            _ovid = value;
-            break;
-         case "resource_id":
-            _resourceId = RLong.parse(value);
+         case "gvid":
+            _gvid = value;
             break;
          case "model_id":
             _modelId = RLong.parse(value);
@@ -589,13 +540,9 @@ public class FDataResource3dModelMeshUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "ovid":
-               __ovid = value;
-               _ovid = __ovid;
-               break;
-            case "resource_id":
-               __resourceId = RLong.parse(value);
-               _resourceId = __resourceId;
+            case "gvid":
+               __gvid = value;
+               _gvid = __gvid;
                break;
             case "model_id":
                __modelId = RLong.parse(value);
@@ -644,8 +591,7 @@ public class FDataResource3dModelMeshUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("ovid", _ovid);
-      row.set("resourceId", _resourceId);
+      row.set("gvid", _gvid);
       row.set("modelId", _modelId);
       row.set("code", _code);
       row.set("label", _label);
@@ -667,8 +613,7 @@ public class FDataResource3dModelMeshUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("ovid", _ovid);
-      map.put("resourceId", RLong.toString(_resourceId));
+      map.put("gvid", _gvid);
       map.put("modelId", RLong.toString(_modelId));
       map.put("code", _code);
       map.put("label", _label);

@@ -30,7 +30,7 @@ public class FDataResource3dModelMeshLogic
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
    // 资源3D模型网格表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.model.mesh", "DT_RS3_MODEL");
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.model.mesh", "DT_RS3_MODEL_MESH");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -38,14 +38,11 @@ public class FDataResource3dModelMeshLogic
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段对象版本标识的定义。
-   public final static SLogicFieldInfo OVID = new SLogicFieldInfo("OVID");
-
-   // 字段类型编号的定义。
-   public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
+   // 字段全局版本标识的定义。
+   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
 
    // 字段模型编号的定义。
    public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
@@ -72,7 +69,7 @@ public class FDataResource3dModelMeshLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,OVID,RESOURCE_ID,MODEL_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,MODEL_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D模型网格表逻辑单元。</T>
@@ -565,8 +562,7 @@ public class FDataResource3dModelMeshLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`OVID`");
-      cmd.append(",`RESOURCE_ID`");
+      cmd.append(",`GVID`");
       cmd.append(",`MODEL_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
@@ -586,20 +582,13 @@ public class FDataResource3dModelMeshLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String ovid = unit.ovid();
-      if(RString.isEmpty(ovid)){
+      String gvid = unit.gvid();
+      if(RString.isEmpty(gvid)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(ovid));
+         cmd.append(RSql.formatValue(gvid));
          cmd.append('\'');
-      }
-      cmd.append(',');
-      long resourceId = unit.resourceId();
-      if(resourceId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(resourceId);
       }
       cmd.append(',');
       long modelId = unit.modelId();
@@ -709,24 +698,15 @@ public class FDataResource3dModelMeshLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isOvidChanged()){
-         cmd.append(",`OVID`=");
-         String ovid = unit.ovid();
-         if(RString.isEmpty(ovid)){
+      if(unit.isGvidChanged()){
+         cmd.append(",`GVID`=");
+         String gvid = unit.gvid();
+         if(RString.isEmpty(gvid)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(ovid));
+            cmd.append(RSql.formatValue(gvid));
             cmd.append('\'');
-         }
-      }
-      if(unit.isResourceIdChanged()){
-         cmd.append(",`RESOURCE_ID`=");
-         long resourceId = unit.resourceId();
-         if(resourceId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(resourceId);
          }
       }
       if(unit.isModelIdChanged()){

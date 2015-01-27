@@ -30,17 +30,17 @@ public class FDataResource3dModelStreamUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段对象唯一标识的定义。
+   // 存储字段全局唯一标识的定义。
    private String __guid;
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段对象版本标识的定义。
-   private String __ovid;
+   // 存储字段全局版本标识的定义。
+   private String __gvid;
 
-   // 字段对象版本标识的定义。
-   protected String _ovid;
+   // 字段全局版本标识的定义。
+   protected String _gvid;
 
    // 存储字段模型编号的定义。
    private long __modelId;
@@ -49,10 +49,10 @@ public class FDataResource3dModelStreamUnit
    protected long _modelId;
 
    // 存储字段网格编号的定义。
-   private int __meshId;
+   private long __meshId;
 
    // 字段网格编号的定义。
-   protected int _meshId;
+   protected long _meshId;
 
    // 存储字段代码的定义。
    private String __code;
@@ -61,10 +61,10 @@ public class FDataResource3dModelStreamUnit
    protected String _code;
 
    // 存储字段元素数据类型的定义。
-   private int __elementTypeCd;
+   private int __elementDataCd;
 
    // 字段元素数据类型的定义。
-   protected int _elementTypeCd;
+   protected int _elementDataCd;
 
    // 存储字段元素个数的定义。
    private int __elementCount;
@@ -181,7 +181,7 @@ public class FDataResource3dModelStreamUnit
    }
 
    //============================================================
-   // <T>判断对象唯一标识的数据是否改变。</T>
+   // <T>判断全局唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -190,7 +190,7 @@ public class FDataResource3dModelStreamUnit
    }
 
    //============================================================
-   // <T>获得对象唯一标识的数据内容。</T>
+   // <T>获得全局唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -199,7 +199,7 @@ public class FDataResource3dModelStreamUnit
    }
 
    //============================================================
-   // <T>设置对象唯一标识的数据内容。</T>
+   // <T>设置全局唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -208,30 +208,30 @@ public class FDataResource3dModelStreamUnit
    }
 
    //============================================================
-   // <T>判断对象版本标识的数据是否改变。</T>
+   // <T>判断全局版本标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isOvidChanged(){
-      return !RString.equals(__ovid, _ovid);
+   public boolean isGvidChanged(){
+      return !RString.equals(__gvid, _gvid);
    }
 
    //============================================================
-   // <T>获得对象版本标识的数据内容。</T>
+   // <T>获得全局版本标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String ovid(){
-      return _ovid;
+   public String gvid(){
+      return _gvid;
    }
 
    //============================================================
-   // <T>设置对象版本标识的数据内容。</T>
+   // <T>设置全局版本标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setOvid(String value){
-      _ovid = value;
+   public void setGvid(String value){
+      _gvid = value;
    }
 
    //============================================================
@@ -286,8 +286,19 @@ public class FDataResource3dModelStreamUnit
    //
    // @return 数据内容
    //============================================================
-   public int meshId(){
+   public long meshId(){
       return _meshId;
+   }
+
+   //============================================================
+   // <T>获得网格编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dModelMeshUnit mesh(){
+      FDataResource3dModelMeshLogic logic = _logicContext.findLogic(FDataResource3dModelMeshLogic.class);
+      FDataResource3dModelMeshUnit unit = logic.find(_meshId);
+      return unit;
    }
 
    //============================================================
@@ -295,7 +306,7 @@ public class FDataResource3dModelStreamUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setMeshId(int value){
+   public void setMeshId(long value){
       _meshId = value;
    }
 
@@ -331,8 +342,8 @@ public class FDataResource3dModelStreamUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isElementTypeCdChanged(){
-      return __elementTypeCd != _elementTypeCd;
+   public boolean isElementDataCdChanged(){
+      return __elementDataCd != _elementDataCd;
    }
 
    //============================================================
@@ -340,8 +351,8 @@ public class FDataResource3dModelStreamUnit
    //
    // @return 数据内容
    //============================================================
-   public int elementTypeCd(){
-      return _elementTypeCd;
+   public int elementDataCd(){
+      return _elementDataCd;
    }
 
    //============================================================
@@ -349,8 +360,8 @@ public class FDataResource3dModelStreamUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setElementTypeCd(int value){
-      _elementTypeCd = value;
+   public void setElementDataCd(int value){
+      _elementDataCd = value;
    }
 
    //============================================================
@@ -611,16 +622,16 @@ public class FDataResource3dModelStreamUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "ovid":
-            return _ovid;
+         case "gvid":
+            return _gvid;
          case "model_id":
             return Long.toString(_modelId);
          case "mesh_id":
-            return RInteger.toString(_meshId);
+            return Long.toString(_meshId);
          case "code":
             return _code;
-         case "element_type_cd":
-            return RInteger.toString(_elementTypeCd);
+         case "element_data_cd":
+            return RInteger.toString(_elementDataCd);
          case "element_count":
             return RInteger.toString(_elementCount);
          case "data_stride":
@@ -662,20 +673,20 @@ public class FDataResource3dModelStreamUnit
          case "guid":
             _guid = value;
             break;
-         case "ovid":
-            _ovid = value;
+         case "gvid":
+            _gvid = value;
             break;
          case "model_id":
             _modelId = RLong.parse(value);
             break;
          case "mesh_id":
-            _meshId = RInteger.parse(value);
+            _meshId = RLong.parse(value);
             break;
          case "code":
             _code = value;
             break;
-         case "element_type_cd":
-            _elementTypeCd = RInteger.parse(value);
+         case "element_data_cd":
+            _elementDataCd = RInteger.parse(value);
             break;
          case "element_count":
             _elementCount = RInteger.parse(value);
@@ -731,25 +742,25 @@ public class FDataResource3dModelStreamUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "ovid":
-               __ovid = value;
-               _ovid = __ovid;
+            case "gvid":
+               __gvid = value;
+               _gvid = __gvid;
                break;
             case "model_id":
                __modelId = RLong.parse(value);
                _modelId = __modelId;
                break;
             case "mesh_id":
-               __meshId = RInteger.parse(value);
+               __meshId = RLong.parse(value);
                _meshId = __meshId;
                break;
             case "code":
                __code = value;
                _code = __code;
                break;
-            case "element_type_cd":
-               __elementTypeCd = RInteger.parse(value);
-               _elementTypeCd = __elementTypeCd;
+            case "element_data_cd":
+               __elementDataCd = RInteger.parse(value);
+               _elementDataCd = __elementDataCd;
                break;
             case "element_count":
                __elementCount = RInteger.parse(value);
@@ -802,11 +813,11 @@ public class FDataResource3dModelStreamUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("ovid", _ovid);
+      row.set("gvid", _gvid);
       row.set("modelId", _modelId);
       row.set("meshId", _meshId);
       row.set("code", _code);
-      row.set("elementTypeCd", _elementTypeCd);
+      row.set("elementDataCd", _elementDataCd);
       row.set("elementCount", _elementCount);
       row.set("dataStride", _dataStride);
       row.set("dataCount", _dataCount);
@@ -829,11 +840,11 @@ public class FDataResource3dModelStreamUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("ovid", _ovid);
+      map.put("gvid", _gvid);
       map.put("modelId", RLong.toString(_modelId));
-      map.put("meshId", RInteger.toString(_meshId));
+      map.put("meshId", RLong.toString(_meshId));
       map.put("code", _code);
-      map.put("elementTypeCd", RInteger.toString(_elementTypeCd));
+      map.put("elementDataCd", RInteger.toString(_elementDataCd));
       map.put("elementCount", RInteger.toString(_elementCount));
       map.put("dataStride", RInteger.toString(_dataStride));
       map.put("dataCount", RInteger.toString(_dataCount));

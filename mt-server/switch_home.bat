@@ -10,3 +10,6 @@ COPY /Y %HOME_SERVER%\server.home.xml %HOME_SERVER%\server.xml
 
 @SET HOME_SERVER=%HOME%\tomcat-cloud.content\conf
 COPY /Y %HOME_SERVER%\server.home.xml %HOME_SERVER%\server.xml
+
+@SET HOME_SERVER=%HOME%\tomcat-cloud.storage\conf
+COPY /Y %HOME_SERVER%\server.home.xml %HOME_SERVER%\server.xml

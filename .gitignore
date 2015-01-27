@@ -13,7 +13,10 @@
 /mp-cloud-design/webroot/WEB-INF/lib
 /mp-cloud-content/webroot/WEB-INF/classes
 /mp-cloud-content/webroot/WEB-INF/lib
+/mp-cloud-storage/webroot/WEB-INF/classes
+/mp-cloud-storage/webroot/WEB-INF/lib
 /mt-server/tomcat-cloud.develop/logs
 /mt-server/tomcat-cloud.design/logs
 /mt-server/tomcat-cloud.content/logs
+/mt-server/tomcat-cloud.storage/logs
 /mt-temp

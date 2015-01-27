@@ -10,7 +10,23 @@ import org.mo.com.io.IDataOutput;
 public class FRs3Resource
       extends FRs3Obejct
 {
-   protected String _name;
+   // 代码
+   protected String _code;
+
+   //============================================================
+   // <T>构造资源模型数据流。</T>
+   //============================================================
+   public FRs3Resource(){
+   }
+
+   //============================================================
+   // <T>获得代码。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String code(){
+      return _code;
+   }
 
    //============================================================
    // <T>从输入流反序列化数据。</T>
@@ -18,7 +34,7 @@ public class FRs3Resource
    // @param input 输入流
    //============================================================
    public void unserialize(IDataInput input){
-      _name = input.readString();
+      _code = input.readString();
    }
 
    //============================================================

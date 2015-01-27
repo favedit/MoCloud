@@ -29,17 +29,17 @@ public class FDataResource3dModelUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段对象唯一标识的定义。
+   // 存储字段全局唯一标识的定义。
    private String __guid;
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段对象版本标识的定义。
-   private String __ovid;
+   // 存储字段全局版本标识的定义。
+   private String __gvid;
 
-   // 字段对象版本标识的定义。
-   protected String _ovid;
+   // 字段全局版本标识的定义。
+   protected String _gvid;
 
    // 存储字段类型编号的定义。
    private long __resourceId;
@@ -150,7 +150,7 @@ public class FDataResource3dModelUnit
    }
 
    //============================================================
-   // <T>判断对象唯一标识的数据是否改变。</T>
+   // <T>判断全局唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -159,7 +159,7 @@ public class FDataResource3dModelUnit
    }
 
    //============================================================
-   // <T>获得对象唯一标识的数据内容。</T>
+   // <T>获得全局唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -168,7 +168,7 @@ public class FDataResource3dModelUnit
    }
 
    //============================================================
-   // <T>设置对象唯一标识的数据内容。</T>
+   // <T>设置全局唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -177,30 +177,30 @@ public class FDataResource3dModelUnit
    }
 
    //============================================================
-   // <T>判断对象版本标识的数据是否改变。</T>
+   // <T>判断全局版本标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isOvidChanged(){
-      return !RString.equals(__ovid, _ovid);
+   public boolean isGvidChanged(){
+      return !RString.equals(__gvid, _gvid);
    }
 
    //============================================================
-   // <T>获得对象版本标识的数据内容。</T>
+   // <T>获得全局版本标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String ovid(){
-      return _ovid;
+   public String gvid(){
+      return _gvid;
    }
 
    //============================================================
-   // <T>设置对象版本标识的数据内容。</T>
+   // <T>设置全局版本标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setOvid(String value){
-      _ovid = value;
+   public void setGvid(String value){
+      _gvid = value;
    }
 
    //============================================================
@@ -445,8 +445,8 @@ public class FDataResource3dModelUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "ovid":
-            return _ovid;
+         case "gvid":
+            return _gvid;
          case "resource_id":
             return Long.toString(_resourceId);
          case "code":
@@ -486,8 +486,8 @@ public class FDataResource3dModelUnit
          case "guid":
             _guid = value;
             break;
-         case "ovid":
-            _ovid = value;
+         case "gvid":
+            _gvid = value;
             break;
          case "resource_id":
             _resourceId = RLong.parse(value);
@@ -540,9 +540,9 @@ public class FDataResource3dModelUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "ovid":
-               __ovid = value;
-               _ovid = __ovid;
+            case "gvid":
+               __gvid = value;
+               _gvid = __gvid;
                break;
             case "resource_id":
                __resourceId = RLong.parse(value);
@@ -591,7 +591,7 @@ public class FDataResource3dModelUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("ovid", _ovid);
+      row.set("gvid", _gvid);
       row.set("resourceId", _resourceId);
       row.set("code", _code);
       row.set("label", _label);
@@ -613,7 +613,7 @@ public class FDataResource3dModelUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("ovid", _ovid);
+      map.put("gvid", _gvid);
       map.put("resourceId", RLong.toString(_resourceId));
       map.put("code", _code);
       map.put("label", _label);

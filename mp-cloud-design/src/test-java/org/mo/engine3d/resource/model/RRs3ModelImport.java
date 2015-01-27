@@ -1,7 +1,12 @@
 package org.mo.engine3d.resource.model;
 
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
+import com.cyou.gccloud.data.data.FDataResource3dModelMeshLogic;
+import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
+import com.cyou.gccloud.data.data.FDataResource3dModelStreamLogic;
+import com.cyou.gccloud.data.data.FDataResource3dModelStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
+import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -22,9 +27,34 @@ public class RRs3ModelImport
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
+         // 新建模型
          FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
          FDataResource3dModelUnit modelUnit = modelLogic.doPrepare();
+         modelUnit.setCode(model.code());
          modelLogic.doInsert(modelUnit);
+         // 新建网格
+         for(FRs3ModelMesh mesh : model.meshs()){
+            FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
+            FDataResource3dModelMeshUnit meshUnit = meshLogic.doPrepare();
+            meshUnit.setModelId(modelUnit.ouid());
+            meshLogic.doInsert(meshUnit);
+            // 新建数据流
+            for(FRs3ModelStream stream : mesh.streams()){
+               FDataResource3dModelStreamLogic streamLogic = logicContext.findLogic(FDataResource3dModelStreamLogic.class);
+               FDataResource3dModelStreamUnit streamUnit = streamLogic.doPrepare();
+               streamUnit.setCode(stream.code());
+               streamUnit.setModelId(modelUnit.ouid());
+               streamUnit.setMeshId(meshUnit.ouid());
+               streamUnit.setElementDataCd(stream.elementDataCd());
+               streamUnit.setElementCount(stream.elementCount());
+               streamUnit.setDataStride(stream.dataStride());
+               streamUnit.setDataCount(stream.dataCount());
+               streamUnit.setDataLength(stream.dataLength());
+               streamLogic.doInsert(streamUnit);
+            }
+         }
+      }catch(Exception e){
+         RLogger.find(RRs3ModelImport.class).error(null, "main", e);
       }
 
       RAop.release();

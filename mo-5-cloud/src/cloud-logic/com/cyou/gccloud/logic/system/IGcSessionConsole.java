@@ -1,6 +1,7 @@
 package com.cyou.gccloud.logic.system;
 
-import com.cyou.gccloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+
 import org.mo.com.message.IMessageContext;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
