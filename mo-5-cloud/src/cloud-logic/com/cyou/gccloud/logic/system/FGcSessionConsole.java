@@ -5,7 +5,6 @@ import com.cyou.gccloud.core.message.IGcMessageConsole;
 import com.cyou.gccloud.core.storage.IGcStorageConsole;
 import com.cyou.gccloud.data.cache.FCacheSystemSessionLogic;
 import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
-import com.cyou.gccloud.define.enums.core.EGcSessionFrom;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -113,13 +112,6 @@ public class FGcSessionConsole
                               int deviceHeight){
 
       FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      //判断用户ID是否为-1，如果为-1则为游客登陆，否则为正常登陆
-      if(userId != 0){
-         if(sessionFrom != EGcSessionFrom.Browser){
-            close(sessionLogic, userId, sessionFrom);
-         }
-      }
-      // 生成质量代码
       // 新建记录
       FGcSessionInfo sessionInfo = sessionLogic.doPrepare(FGcSessionInfo.class);
       //      FDataPersonConnectUnit unit = _accountsConsole.findConnectUnit(sqlContext, userId);

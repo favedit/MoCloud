@@ -13,12 +13,12 @@ public class RRs3ModelImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String configPath = "D:/Microbject/MoCloud";
+      String configPath = "E:/Microbject/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.configConsole().loadFile(configPath + "/mp-cloud-design/src/config/application-local.xml");
+      RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
 
       FRs3Model model = new FRs3Model();
-      model.loadFile("D:/Microbject/MoScript/source/assets/model/pvw.show.item.001.msd");
+      model.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.001.msd");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

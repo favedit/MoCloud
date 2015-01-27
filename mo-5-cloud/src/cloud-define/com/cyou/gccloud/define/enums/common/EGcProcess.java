@@ -1,19 +1,19 @@
 //============================================================
-// <T>任务接受。</T>
+// <T>运行模式。</T>
 //
 // @version 1.0.1
 //============================================================
-package com.cyou.gccloud.define.enums.core;
+package com.cyou.gccloud.define.enums.common;
 
 //============================================================
-// <T>任务接受枚举定义。</T>
+// <T>运行模式枚举定义。</T>
 //
 // @enum
 //============================================================
-public class EGcTaskAccept
+public class EGcProcess
 {
    // 枚举名称
-   public final static String DefineName = "GcTaskAccept";
+   public final static String DefineName = "GcProcess";
 
    // 未知
    public final static int Unknown = 0;
@@ -24,32 +24,32 @@ public class EGcTaskAccept
    // 未知标签
    public final static String UnknownLabel = "未知";
 
-   // 可
-   public final static int Able = 1;
+   // 测试
+   public final static int Test = 1;
 
-   // 可字符串
-   public final static String AbleString = "Able";
+   // 测试字符串
+   public final static String TestString = "Test";
 
-   // 可标签
-   public final static String AbleLabel = "可";
+   // 测试标签
+   public final static String TestLabel = "测试";
 
-   // 不可
-   public final static int Disable = 2;
+   // 调试
+   public final static int Debug = 2;
 
-   // 不可字符串
-   public final static String DisableString = "Disable";
+   // 调试字符串
+   public final static String DebugString = "Debug";
 
-   // 不可标签
-   public final static String DisableLabel = "不可";
+   // 调试标签
+   public final static String DebugLabel = "调试";
 
-   // 锁定
-   public final static int Lock = 3;
+   // 正式
+   public final static int Release = 3;
 
-   // 锁定字符串
-   public final static String LockString = "Lock";
+   // 正式字符串
+   public final static String ReleaseString = "Release";
 
-   // 锁定标签
-   public final static String LockLabel = "锁定";
+   // 正式标签
+   public final static String ReleaseLabel = "正式";
 
    //============================================================
    // <T>是否含有指定内容</T>
@@ -83,12 +83,12 @@ public class EGcTaskAccept
       switch(value){
          case Unknown:
             return UnknownString;
-         case Able:
-            return AbleString;
-         case Disable:
-            return DisableString;
-         case Lock:
-            return LockString;
+         case Test:
+            return TestString;
+         case Debug:
+            return DebugString;
+         case Release:
+            return ReleaseString;
          default:
             return "Unknown";
       }
@@ -104,12 +104,12 @@ public class EGcTaskAccept
       switch(value){
          case Unknown:
             return UnknownLabel;
-         case Able:
-            return AbleLabel;
-         case Disable:
-            return DisableLabel;
-         case Lock:
-            return LockLabel;
+         case Test:
+            return TestLabel;
+         case Debug:
+            return DebugLabel;
+         case Release:
+            return ReleaseLabel;
          default:
             return "Unknown";
       }
@@ -125,12 +125,12 @@ public class EGcTaskAccept
       switch(value){
          case UnknownString:
             return Unknown;
-         case AbleString:
-            return Able;
-         case DisableString:
-            return Disable;
-         case LockString:
-            return Lock;
+         case TestString:
+            return Test;
+         case DebugString:
+            return Debug;
+         case ReleaseString:
+            return Release;
          default:
             return 0;
       }

@@ -22,7 +22,7 @@ public class FGcLoggerSystemException
    // <T>构造系统例外日志。</T>
    //============================================================
    public FGcLoggerSystemException(){
-      _typeCd = EGcLogger.SystemException;
+      _typeCd = EGcLogger.Fatal;
    }
 
    //============================================================
@@ -35,7 +35,7 @@ public class FGcLoggerSystemException
                                    String code,
                                    String description,
                                    Object... parameters){
-      _typeCd = EGcLogger.SystemException;
+      _typeCd = EGcLogger.Fatal;
       _userId = userId;
       _code = code;
       _description = description;

@@ -25,7 +25,7 @@ public class FGcLoggerSystemLogger
    // <T>构造用户操作日志。</T>
    //============================================================
    public FGcLoggerSystemLogger(){
-      _typeCd = EGcLogger.SystemLogger;
+      _typeCd = EGcLogger.Error;
    }
 
    //============================================================
@@ -43,7 +43,7 @@ public class FGcLoggerSystemLogger
                                 String code,
                                 String description,
                                 Object... parameters){
-      _typeCd = EGcLogger.SystemLogger;
+      _typeCd = EGcLogger.Error;
       _userId = userId;
       _levelCd = levelCd;
       _code = code;

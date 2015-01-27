@@ -10,6 +10,7 @@ import org.mo.core.aop.descriptor.FAopComponentBuildContext;
 import org.mo.core.aop.descriptor.FAopComponentBuilder;
 import org.mo.core.aop.descriptor.FAopComponentDescriptor;
 import org.mo.core.aop.descriptor.IAopDescriptor;
+import org.mo.core.aop.dispatcher.FAopDispatcherConsole;
 
 //============================================================
 // <T>AOP组件。</T>
@@ -137,7 +138,8 @@ public class FAopComponent
          // 创建本地对象
          _nativeInstance = _descriptor.newInstance();
          if(_config.hasFace()){
-            _instance = RAop.dispatcherConsole().createDispatchObject(_nativeInstance, _config.faceClass());
+            FAopDispatcherConsole dispatcherConsole = RAop.dispatcherConsole();
+            _instance = dispatcherConsole.createDispatchObject(_nativeInstance, _config.faceClass());
          }else{
             _instance = _nativeInstance;
          }

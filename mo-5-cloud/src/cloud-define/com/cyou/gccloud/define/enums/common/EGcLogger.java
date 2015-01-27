@@ -1,12 +1,12 @@
 //============================================================
-// <T>日志类型。</T>
+// <T>系统日志。</T>
 //
 // @version 1.0.1
 //============================================================
 package com.cyou.gccloud.define.enums.common;
 
 //============================================================
-// <T>日志类型枚举定义。</T>
+// <T>系统日志枚举定义。</T>
 //
 // @enum
 //============================================================
@@ -15,59 +15,59 @@ public class EGcLogger
    // 枚举名称
    public final static String DefineName = "GcLogger";
 
-   // 系统日志
-   public final static int SystemLogger = 0;
-
-   // 系统日志字符串
-   public final static String SystemLoggerString = "SystemLogger";
-
-   // 系统日志标签
-   public final static String SystemLoggerLabel = "系统日志";
-
-   // 系统例外
-   public final static int SystemException = 1;
-
-   // 系统例外字符串
-   public final static String SystemExceptionString = "SystemException";
-
-   // 系统例外标签
-   public final static String SystemExceptionLabel = "系统例外";
-
-   // 用户操作
-   public final static int PersonOperation = 2;
-
-   // 用户操作字符串
-   public final static String PersonOperationString = "PersonOperation";
-
-   // 用户操作标签
-   public final static String PersonOperationLabel = "用户操作";
-
-   // 用户活动
-   public final static int PersonActivity = 3;
-
-   // 用户活动字符串
-   public final static String PersonActivityString = "PersonActivity";
-
-   // 用户活动标签
-   public final static String PersonActivityLabel = "用户活动";
-
-   // 资源操作
-   public final static int ResourceOperation = 4;
-
-   // 资源操作字符串
-   public final static String ResourceOperationString = "ResourceOperation";
-
-   // 资源操作标签
-   public final static String ResourceOperationLabel = "资源操作";
-
    // 未知
-   public final static int Unknown = 5;
+   public final static int Unknown = 0;
 
    // 未知字符串
    public final static String UnknownString = "Unknown";
 
    // 未知标签
    public final static String UnknownLabel = "未知";
+
+   // 调试
+   public final static int Debug = 1;
+
+   // 调试字符串
+   public final static String DebugString = "Debug";
+
+   // 调试标签
+   public final static String DebugLabel = "调试";
+
+   // 消息
+   public final static int Info = 2;
+
+   // 消息字符串
+   public final static String InfoString = "Info";
+
+   // 消息标签
+   public final static String InfoLabel = "消息";
+
+   // 警告
+   public final static int Warn = 3;
+
+   // 警告字符串
+   public final static String WarnString = "Warn";
+
+   // 警告标签
+   public final static String WarnLabel = "警告";
+
+   // 错误
+   public final static int Error = 4;
+
+   // 错误字符串
+   public final static String ErrorString = "Error";
+
+   // 错误标签
+   public final static String ErrorLabel = "错误";
+
+   // 例外
+   public final static int Fatal = 5;
+
+   // 例外字符串
+   public final static String FatalString = "Fatal";
+
+   // 例外标签
+   public final static String FatalLabel = "例外";
 
    //============================================================
    // <T>是否含有指定内容</T>
@@ -99,18 +99,18 @@ public class EGcLogger
    //============================================================
    public static String format(int value){
       switch(value){
-         case SystemLogger:
-            return SystemLoggerString;
-         case SystemException:
-            return SystemExceptionString;
-         case PersonOperation:
-            return PersonOperationString;
-         case PersonActivity:
-            return PersonActivityString;
-         case ResourceOperation:
-            return ResourceOperationString;
          case Unknown:
             return UnknownString;
+         case Debug:
+            return DebugString;
+         case Info:
+            return InfoString;
+         case Warn:
+            return WarnString;
+         case Error:
+            return ErrorString;
+         case Fatal:
+            return FatalString;
          default:
             return "Unknown";
       }
@@ -124,18 +124,18 @@ public class EGcLogger
    //============================================================
    public static String formatLabel(int value){
       switch(value){
-         case SystemLogger:
-            return SystemLoggerLabel;
-         case SystemException:
-            return SystemExceptionLabel;
-         case PersonOperation:
-            return PersonOperationLabel;
-         case PersonActivity:
-            return PersonActivityLabel;
-         case ResourceOperation:
-            return ResourceOperationLabel;
          case Unknown:
             return UnknownLabel;
+         case Debug:
+            return DebugLabel;
+         case Info:
+            return InfoLabel;
+         case Warn:
+            return WarnLabel;
+         case Error:
+            return ErrorLabel;
+         case Fatal:
+            return FatalLabel;
          default:
             return "Unknown";
       }
@@ -149,18 +149,18 @@ public class EGcLogger
    //============================================================
    public static int parse(String value){
       switch(value){
-         case SystemLoggerString:
-            return SystemLogger;
-         case SystemExceptionString:
-            return SystemException;
-         case PersonOperationString:
-            return PersonOperation;
-         case PersonActivityString:
-            return PersonActivity;
-         case ResourceOperationString:
-            return ResourceOperation;
          case UnknownString:
             return Unknown;
+         case DebugString:
+            return Debug;
+         case InfoString:
+            return Info;
+         case WarnString:
+            return Warn;
+         case ErrorString:
+            return Error;
+         case FatalString:
+            return Fatal;
          default:
             return 0;
       }
