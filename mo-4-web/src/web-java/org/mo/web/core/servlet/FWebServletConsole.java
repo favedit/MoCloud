@@ -13,8 +13,9 @@ import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.core.bind.IBindConsole;
+import org.mo.data.logic.FLogicContext;
+import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
-import org.mo.eng.data.common.FSqlContext;
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.IWebContainerConsole;
@@ -160,6 +161,7 @@ public class FWebServletConsole
                        IWebContext context,
                        IWebServletRequest request,
                        IWebServletResponse response){
+      Throwable throwable = null;
       FWebServlet servlet = findServlet(name);
       if(servlet == null){
          _logger.warn(this, "execute", "Can't find servlet config [{1} -> {2}]", name, servlet);
@@ -184,6 +186,7 @@ public class FWebServletConsole
       int count = types.length;
       FWebContainerItem[] forms = new FWebContainerItem[count];
       Object[] params = new Object[count];
+      FLogicContext logicContext = new FLogicContext(_databaseConsole);
       try{
          for(int n = 0; n < count; n++){
             Class<?> type = types[n];
@@ -191,7 +194,9 @@ public class FWebServletConsole
             if(type == IWebContext.class){
                value = context;
             }else if(type == ISqlContext.class){
-               value = new FSqlContext(_databaseConsole);
+               value = logicContext;
+            }else if(type == ILogicContext.class){
+               value = logicContext;
             }else if(type == IWebServletRequest.class){
                value = request;
             }else if(type == IWebServletResponse.class){
@@ -208,18 +213,35 @@ public class FWebServletConsole
             params[n] = value;
          }
          methodDsp.invoke(instance, params);
-      }catch(Exception e){
-         context.messages().push(new FFatalMessage(e));
+      }catch(Exception t){
+         throwable = t;
+         context.messages().push(new FFatalMessage(t));
       }finally{
-         // Release params
-         for(Object param : params){
-            if(param instanceof IRelease){
-               try{
-                  ((IRelease)param).release();
-               }catch(Exception e){
-                  _logger.error(this, "execute", e);
+         // 释放参数
+         if(null != params){
+            for(Object param : params){
+               if((param != logicContext) && (param instanceof IRelease)){
+                  try{
+                     ((IRelease)param).release();
+                  }catch(Exception e){
+                     throwable = e;
+                  }
                }
             }
+         }
+         // 释放数据库链接
+         if(logicContext != null){
+            if(throwable == null){
+               logicContext.release();
+            }else{
+               logicContext.rollback();
+            }
+            try{
+               logicContext.close();
+            }catch(Exception e){
+               throw new FFatalError(e);
+            }
+            logicContext = null;
          }
       }
    }

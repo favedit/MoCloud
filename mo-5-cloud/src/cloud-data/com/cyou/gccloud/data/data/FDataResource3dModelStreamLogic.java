@@ -247,6 +247,45 @@ public class FDataResource3dModelStreamLogic
    }
 
    //============================================================
+   // <T>根据唯一编号获得一个数据单元。</T>
+   //
+   // @param guid 唯一编号
+   // @return 数据单元
+   //============================================================
+   public FDataResource3dModelStreamUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataResource3dModelStreamUnit.class, guid);
+   }
+
+   //============================================================
+   // <T>根据唯一编号获得一个数据单元。</T>
+   //
+   // @param unit 数据单元
+   // @param clazz 类对象
+   // @param guid 唯一编号
+   // @return 是否获得
+   //============================================================
+   @Override
+   public <T extends FLogicUnit> T findByGuid(T unit,
+                                              Class<T> clazz,
+                                              CharSequence guid){
+      // 检查条件
+      if(RString.isEmpty(guid)){
+         return null;
+      }
+      // 生成命令
+      FSql cmd = new FSql("SELECT ");
+      cmd.append(FIELDS);
+      cmd.append(" FROM ");
+      cmd.append(_name);
+      cmd.append(" WHERE GUID='");
+      cmd.append(guid);
+      cmd.append("'");
+      String sql = cmd.toString();
+      // 获得数据
+      return searchSql(unit, clazz, guid, sql);
+   }
+
+   //============================================================
    // <T>根据条件获得一个数据单元。</T>
    //
    // @param whereSql 条件
@@ -286,6 +325,16 @@ public class FDataResource3dModelStreamLogic
 
    //============================================================
    // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param whereSql 条件
+   // @return 数据单元集合
+   //============================================================
+   public FLogicDataset<FDataResource3dModelStreamUnit> fetch(CharSequence whereSql){
+      return fetchClass(null, null, whereSql, null, null, -1, 0);
+   }
+
+   //============================================================
+   // <T>获得数据单元集合。</T>
    //
    // @param pageSize 分页大小
    // @param page 分页号码

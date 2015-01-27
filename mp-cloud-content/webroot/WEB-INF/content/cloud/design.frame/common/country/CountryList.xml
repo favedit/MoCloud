@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="common.country.CountryList" update_date="20141210134026">
-  <TableFrame _type="TableFrame" is_valid="Y" name="common.country.CountryList" label="国家列表" business_code="" parent_name="" version="" disp_toolbar="Y" disp_fetch="Y" disp_search="Y" disp_lov="Y" disp_zoom="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" width="" height="" disp_icon="" style_refer="" dataset="" lg_name="" table_name="" define_imports="" dataset_parameters="" dataset_search="" dataset_order="" dataset_group="" edit_fetch="Y" edit_search="Y" edit_picker="Y" edit_zoom="Y" edit_copy="Y" edit_insert="Y" edit_update="Y" edit_delete="Y" edit_action="Y" edit_print="Y" dataset_prepare="" action_prepare="" dataset_insert_parameters="" dataset_insert="" action_insert="" dataset_update_parameters="" dataset_update="" action_update="" dataset_delete_parameters="" dataset_delete="" action_delete="" note="" _status="I" />
-</Content>

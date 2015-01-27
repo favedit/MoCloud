@@ -1,6 +1,7 @@
 package org.mo.com.io;
 
 import org.mo.com.io.base.MByteStream;
+import org.mo.com.lang.RString;
 
 //============================================================
 // <T>字节数据流。</T>
@@ -48,9 +49,10 @@ public class FByteStream
    //============================================================
    @Override
    public short readInt16(){
-      int v1 = _memory[_position++];
-      int v2 = _memory[_position++];
-      return (short)((v1) + (v2 << 8));
+      short value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      return value;
    }
 
    //============================================================
@@ -60,11 +62,12 @@ public class FByteStream
    //============================================================
    @Override
    public int readInt32(){
-      int v1 = _memory[_position++];
-      int v2 = _memory[_position++];
-      int v3 = _memory[_position++];
-      int v4 = _memory[_position++];
-      return (v1) + (v2 << 8) + (v3 << 16) + (v4 << 24);
+      int value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      value |= (_memory[_position++] & 0xFF) << 16;
+      value |= (_memory[_position++] & 0xFF) << 24;
+      return value;
    }
 
    //============================================================
@@ -74,11 +77,16 @@ public class FByteStream
    //============================================================
    @Override
    public long readInt64(){
-      long v1 = _memory[_position++];
-      long v2 = _memory[_position++];
-      long v3 = _memory[_position++];
-      long v4 = _memory[_position++];
-      return (v1) + (v2 << 8) + (v3 << 16) + (v4 << 24);
+      long value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      value |= (_memory[_position++] & 0xFF) << 16;
+      value |= (_memory[_position++] & 0xFF) << 24;
+      value |= (_memory[_position++] & 0xFF) << 32;
+      value |= (_memory[_position++] & 0xFF) << 40;
+      value |= (_memory[_position++] & 0xFF) << 48;
+      value |= (_memory[_position++] & 0xFF) << 56;
+      return value;
    }
 
    //============================================================
@@ -98,9 +106,10 @@ public class FByteStream
    //============================================================
    @Override
    public int readUint16(){
-      int v1 = _memory[_position++];
-      int v2 = _memory[_position++];
-      return (short)((v1) + (v2 << 8));
+      int value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      return value;
    }
 
    //============================================================
@@ -110,11 +119,12 @@ public class FByteStream
    //============================================================
    @Override
    public long readUint32(){
-      int v1 = _memory[_position++];
-      int v2 = _memory[_position++];
-      int v3 = _memory[_position++];
-      int v4 = _memory[_position++];
-      return (v1) + (v2 << 8) + (v3 << 16) + (v4 << 24);
+      long value = 0;
+      value |= (_memory[_position++] & 0xFF);
+      value |= (_memory[_position++] & 0xFF) << 8;
+      value |= (_memory[_position++] & 0xFF) << 16;
+      value |= (_memory[_position++] & 0xFF) << 24;
+      return value;
    }
 
    //============================================================
@@ -185,6 +195,11 @@ public class FByteStream
    //============================================================
    @Override
    public void writeInt(int value){
+      ensureSize(_position + 1);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -194,6 +209,11 @@ public class FByteStream
    //============================================================
    @Override
    public void writeInt8(byte value){
+      ensureSize(_position + 1);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -203,6 +223,12 @@ public class FByteStream
    //============================================================
    @Override
    public void writeInt16(short value){
+      ensureSize(_position + 2);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -212,6 +238,14 @@ public class FByteStream
    //============================================================
    @Override
    public void writeInt32(int value){
+      ensureSize(_position + 4);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      _memory[_position++] = (byte)((value >> 16) & 0xFF);
+      _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -221,6 +255,18 @@ public class FByteStream
    //============================================================
    @Override
    public void writeInt64(long value){
+      ensureSize(_position + 8);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      _memory[_position++] = (byte)((value >> 16) & 0xFF);
+      _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      _memory[_position++] = (byte)((value >> 32) & 0xFF);
+      _memory[_position++] = (byte)((value >> 40) & 0xFF);
+      _memory[_position++] = (byte)((value >> 48) & 0xFF);
+      _memory[_position++] = (byte)((value >> 56) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -229,7 +275,12 @@ public class FByteStream
    // @param value 无符号8位整数
    //============================================================
    @Override
-   public void writeUint8(byte value){
+   public void writeUint8(short value){
+      ensureSize(_position + 1);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -238,7 +289,13 @@ public class FByteStream
    // @param value 无符号16位整数
    //============================================================
    @Override
-   public void writeUint16(short value){
+   public void writeUint16(int value){
+      ensureSize(_position + 2);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -247,16 +304,15 @@ public class FByteStream
    // @param value 无符号32位整数
    //============================================================
    @Override
-   public void writeUint32(int value){
-   }
-
-   //============================================================
-   // <T>向字节流中写入一个无符号64位整数。</T>
-   //
-   // @param value 无符号64位整数
-   //============================================================
-   @Override
-   public void writeUint64(long value){
+   public void writeUint32(long value){
+      ensureSize(_position + 4);
+      _memory[_position++] = (byte)((value) & 0xFF);
+      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      _memory[_position++] = (byte)((value >> 16) & 0xFF);
+      _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -266,6 +322,15 @@ public class FByteStream
    //============================================================
    @Override
    public void writeFloat(float value){
+      ensureSize(_position + 4);
+      int data = Float.floatToIntBits(value);
+      _memory[_position++] = (byte)((data) & 0xFF);
+      _memory[_position++] = (byte)((data >> 8) & 0xFF);
+      _memory[_position++] = (byte)((data >> 16) & 0xFF);
+      _memory[_position++] = (byte)((data >> 24) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
@@ -275,16 +340,39 @@ public class FByteStream
    //============================================================
    @Override
    public void writeDouble(double value){
+      ensureSize(_position + 8);
+      long data = Double.doubleToLongBits(value);
+      _memory[_position++] = (byte)((data) & 0xFF);
+      _memory[_position++] = (byte)((data >> 8) & 0xFF);
+      _memory[_position++] = (byte)((data >> 16) & 0xFF);
+      _memory[_position++] = (byte)((data >> 24) & 0xFF);
+      _memory[_position++] = (byte)((data >> 32) & 0xFF);
+      _memory[_position++] = (byte)((data >> 40) & 0xFF);
+      _memory[_position++] = (byte)((data >> 48) & 0xFF);
+      _memory[_position++] = (byte)((data >> 56) & 0xFF);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
-   // <T>向字节流中写入一个8位字符串。</T>
+   // <T>向字节流中写入一个字符串。</T>
    //
-   // @param pValue 字符串
-   // @param length 长度
+   // @param value 字符串
    //============================================================
    @Override
    public void writeString(String value){
+      if(RString.isEmpty(value)){
+         // 写入空字符串
+         writeUint16(0);
+      }else{
+         // 写入字符串
+         int length = value.length();
+         writeUint16(length);
+         for(int n = 0; n < length; n++){
+            writeUint16(value.charAt(n));
+         }
+      }
    }
 
    //============================================================

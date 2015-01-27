@@ -3,51 +3,28 @@
 <Config>
    
    <!-- ============================================================ -->
+   <!-- StorageConsole:存储控制台                                    -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
+         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
+         scope = 'global' deploy = 'start'>
+      <Property name='storage_path'>${application.storage}</Property>
+      <Property name='storage_server'>${cloud.server.storage.remote}</Property>
+      <Property name='storage_servlet'>${cloud.server.storage.local}/cloud.resource.upload.wv</Property>
+      <Property name='storage_resource'>${cloud.server.storage.remote}/storage</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
    <!-- ContentConfigurationConsole:内容配置控制台                   -->
    <!--  P:config_path - 配置文件路径                                -->
    <!--  I:initializeConfig - 增加配置信息                           -->
    <!-- ============================================================ -->
    <Component
-         face  = 'org.mo.content.core.configuration.IContentConfigurationConsole'
-         class = 'org.mo.content.core.configuration.FContentConfigurationConsole'
-         scope = 'global'>
-      <Property name='config_path'>${application.content}</Property>
-      <Initialize name='initializeConfig'/>
-   </Component>
-   
-   <!-- ============================================================ -->
-   <!-- ContentPersistenceConsole:内容持久化制台                     -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.content.core.persistence.IContentPersistenceConsole'
-         class = 'org.mo.content.core.persistence.FContentPersistenceConsole'
+         face  = 'org.mo.content.core.resource3d.model.IC3dModelConsole'
+         class = 'org.mo.content.core.resource3d.model.FC3dModelConsole'
          scope = 'global'>
    </Component>
    
-   <!-- ============================================================ -->
-   <!-- ContentListConsole:内容列表控制台                            -->
-   <!--  P:space_name - 空间名称                                     -->
-   <!--  P:path_name - 保存路径                                      -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.content.core.list.IContentListConsole'
-         class = 'org.mo.content.core.list.FContentListConsole'
-         scope = 'global'>
-      <Property name='space_name'>content.list</Property>
-      <Property name='path_name'>design.list</Property>
-   </Component>
-
-   <!-- ============================================================ -->
-   <!-- ContentFormConsole:内容表单控制台                            -->
-   <!--  P:space_name - 空间名称                                     -->
-   <!--  P:path_name - 保存路径                                      -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.content.core.frame.IContentFormConsole'
-         class = 'org.mo.content.core.frame.FContentFormConsole'
-         scope = 'global'>
-      <Property name='space_name'>content.frame</Property>
-      <Property name='path_name'>design.frame</Property>
-   </Component>
-
 </Config>

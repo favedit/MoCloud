@@ -497,6 +497,30 @@ public abstract class FLogicTable
                                                  long recordId);
 
    //============================================================
+   // <T>根据唯一编号获得一个数据单元。</T>
+   //
+   // @param clazz 类对象
+   // @param guid 唯一编号
+   // @return 数据单元
+   //============================================================
+   public <T extends FLogicUnit> T findByGuid(Class<T> clazz,
+                                              CharSequence guid){
+      return findByGuid(null, clazz, guid);
+   }
+
+   //============================================================
+   // <T>根据唯一编号获得一个数据单元。</T>
+   //
+   // @param unit 数据单元
+   // @param clazz 类对象
+   // @param guid 唯一编号
+   // @return 是否获得
+   //============================================================
+   public abstract <T extends FLogicUnit> T findByGuid(T unit,
+                                                       Class<T> clazz,
+                                                       CharSequence guid);
+
+   //============================================================
    // <T>根据条件获得一个数据单元。</T>
    //
    // @param clazz 类对象

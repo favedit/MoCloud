@@ -1,6 +1,7 @@
 package org.mo.cloud.core.storage;
 
 import org.mo.com.io.FByteFile;
+import org.mo.com.io.RFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -18,6 +19,10 @@ public class FGcStorageConsole
    // 日志输出接口
    private final static ILogger _logger = RLogger.find(FGcStorageConsole.class);
 
+   // 存储路径
+   @AProperty
+   protected String _storagePath;
+
    // 存储服务器
    @AProperty
    protected String _storageServer;
@@ -29,6 +34,27 @@ public class FGcStorageConsole
    // 存储服务器
    @AProperty
    protected String _storageResource;
+
+   //============================================================
+   // <T>生成存储文件名称。</T>
+   //
+   // @param catalog 目录
+   // @param date 日期
+   // @param code 代码
+   // @param version 版本
+   // @param type 类型
+   // @return 文件名称
+   //============================================================
+   @Override
+   public String makeFileName(String catalog,
+                              String date,
+                              String code,
+                              String version,
+                              String type){
+      String typeName = RString.nvl(type, "bin");
+      String storeName = "/" + catalog + "/" + date + "/" + code + "/" + version + "." + typeName;
+      return RFile.makeFilename(_storagePath, storeName);
+   }
 
    //============================================================
    // <T>保存一个存储信息。</T>

@@ -49,6 +49,9 @@ public class RDateTime
    // 默认时间格式
    public final static String DEFAULT_FORMAT = "YYYYMMDDHH24MISS";
 
+   // 默认日期格式
+   public final static String DEFAULT_DATA_FORMAT = "YYYYMMDD";
+
    // 默认时间补齐字符
    public final static char DEFAULT_FORMAT_CHAR = '0';
 

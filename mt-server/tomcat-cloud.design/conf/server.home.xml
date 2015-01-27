@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Server port="8028" shutdown="SHUTDOWN">
+<Server port="8018" shutdown="SHUTDOWN">
    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
    <Listener className="org.apache.catalina.core.JasperListener" />
    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
@@ -9,8 +9,8 @@
       <Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" pathname="conf/tomcat-users.xml" />
    </GlobalNamingResources>
    <Service name="Catalina">
-   <Connector port="91" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8429" />
-   <Connector port="8129" protocol="AJP/1.3" redirectPort="8429" />
+   <Connector port="91" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8419" />
+   <Connector port="8119" protocol="AJP/1.3" redirectPort="8419" />
    <Engine name="Catalina" defaultHost="localhost">
       <Realm className="org.apache.catalina.realm.LockOutRealm">
          <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>

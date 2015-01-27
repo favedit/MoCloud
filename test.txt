@@ -1,0 +1,13 @@
+tomcat-cloud.develop: 90
+
+tomcat-cloud.design: 91
+
+tomcat-cloud.content: 92
+
+tomcat-cloud.storage: 93
+
+tomcat-cloud.logger: 94
+
+测试资源：
+http://localhost:92/cloud.content.model.wv?code=EA1EAE9BBE414A66AA629BD45544522E&version=A60CBB35733D4AEEA0F98E4704A9546B
+

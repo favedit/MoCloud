@@ -1,7 +1,5 @@
 package org.mo.cloud.editor;
 
-import org.mo.cloud.editor.core.dataset.EDatasetSourceType;
-import org.mo.cloud.editor.core.dataset.IDatasetConsole;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.system.RApplication;
@@ -47,8 +45,8 @@ public class RGameSourceUtil
          }
          // 建立所有消息
          if("all".equals(sourceOption) || "dataset".equals(sourceOption)){
-            IDatasetConsole console = RAop.find(IDatasetConsole.class);
-            console.buildAll(EDatasetSourceType.JavaAll);
+            //IDatasetConsole console = RAop.find(IDatasetConsole.class);
+            //console.buildAll(EDatasetSourceType.JavaAll);
          }
          // 释放资源
          RAop.release();

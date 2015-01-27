@@ -16,8 +16,9 @@
     <Item _uuid="f2637177-2382-440b-a894-a0db5c77aaf0" name="Uint16" label="16位无符号整数" is_valid="Y" note="M#" />
     <Item _uuid="9010fad1-a96f-45d6-8d03-9bc2a831e908" name="Uint32" label="32位无符号整数" is_valid="Y" note="M#" />
     <Item _uuid="a08c9800-0151-4f74-8059-5e1be55e8292" name="Uint64" label="64位无符号整数" is_valid="Y" note="M#" />
-    <Item _uuid="c73d62a0-5dd2-45df-a568-e07bcf40b121" name="Float" label="32位浮点数" is_valid="Y" note="M#" />
-    <Item _uuid="42b2bc94-2bee-4921-bfa2-aa891202f9c8" name="Double" label="64位双精度浮点数" is_valid="Y" note="M#" />
+    <Item _uuid="afab64b2-eeae-4560-b392-d741064420ad" name="Float16" label="16位浮点数" is_valid="Y" note="M#" />
+    <Item _uuid="c73d62a0-5dd2-45df-a568-e07bcf40b121" name="Float32" label="32位浮点数" is_valid="Y" note="M#" />
+    <Item _uuid="42b2bc94-2bee-4921-bfa2-aa891202f9c8" name="Float64" label="64位浮点数" is_valid="Y" note="M#" />
     <Item _uuid="246657af-770e-4ff8-a808-540f40767e1a" name="String" label="字符串" is_valid="Y" note="M#12cn223前2字节为长度，后面为uint16的字符内容，" />
   </Enum>
   <Enum _uuid="a9c0e19e-a2ae-403f-b1d0-8416f977dfc2" name="GcActive" label="激活状态" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">

@@ -45,6 +45,13 @@ public class FRs3ModelMesh
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      // 输出网格集合
+      int streamCount = _streams.count();
+      output.writeInt8((byte)streamCount);
+      for(int i = 0; i < streamCount; i++){
+         FRs3ModelStream stream = _streams.get(i);
+         stream.serialize(output);
+      }
    }
 
    //============================================================
@@ -56,8 +63,8 @@ public class FRs3ModelMesh
       // 读取属性
       _code = input.readString();
       // 读取数据流集合
-      int meshCount = input.readInt16();
-      for(int n = 0; n < meshCount; n++){
+      int count = input.readInt16();
+      for(int n = 0; n < count; n++){
          FRs3ModelStream stream = new FRs3ModelStream();
          stream.unserialize(input);
          _streams.push(stream);

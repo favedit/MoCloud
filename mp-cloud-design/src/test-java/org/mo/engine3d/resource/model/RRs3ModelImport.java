@@ -26,7 +26,8 @@ public class RRs3ModelImport
       RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
 
       FRs3Model model = new FRs3Model();
-      model.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.001.msd");
+      //model.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.001.msd");
+      model.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.009.msd");
 
       IGcStorageConsole storageConsole = RAop.find(IGcStorageConsole.class);
 

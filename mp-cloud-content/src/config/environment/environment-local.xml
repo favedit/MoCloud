@@ -24,7 +24,7 @@
          face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
          class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
          scope = 'global' >
-      <Property name='enable'>Y</Property>
+      <Property name='enable'>N</Property>
       <Property name='code'>CC</Property>
       <Property name='servers'>10.30.101.11:11311</Property>
       <Initialize name='initialize'/>
@@ -45,7 +45,7 @@
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
                <Property name='name'>cache</Property>
-               <Property name='driver_class'>org.mo.content.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://10.127.3.12:3306/CD_CACHE</Property>
                <Property name='passport'>cloud</Property>
@@ -70,7 +70,7 @@
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
                <Property name='name'>data</Property>
-               <Property name='driver_class'>org.mo.content.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://10.127.3.12:3306/CD_DATA</Property>
                <Property name='passport'>cloud</Property>

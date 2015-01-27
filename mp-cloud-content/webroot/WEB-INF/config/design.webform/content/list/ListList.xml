@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<WebTable _uuid="b0140c8e-99fb-4993-8b58-0b8c90d0969c" name="content.list.ListList" label="M#12cn19环境-列表集合列表" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_refer="design.ControlStyle" edit_insert="Y" edit_update="Y" edit_delete="Y">
-  <ToolBar _uuid="e77df741-f609-4b30-8fed-7fbf8f73f6a6" name="toolBar" label="M#12cn13工具栏" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-    <ToolButton _uuid="645e6409-3a4c-4cd2-9f9f-eb88b57c1438" name="insertButton" label="M#12cn14新建列表" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="tool.insert" icon_disable="tool.insertd" hotkey="F5" page="insert@#/design/list/ContentList.wa" attributes="_type=List\nsel_type=collection\nform_name=content.list.ListForm" />
-  </ToolBar>
-  <ColumnEdit _uuid="59911abc-af5a-4ba6-bbfe-b07383b31a37" name="name" label="M#12cn12名称" is_valid="Y" note="M#" disp_search="Y" disp_list="Y" style_refer="columnEditWide" data_name="NAME" />
-  <ColumnEdit _uuid="403782a4-8643-4143-b5c0-f27a6d96e679" name="label" label="M#12cn12标签" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_auto="Y" data_name="LABEL" />
-</WebTable>

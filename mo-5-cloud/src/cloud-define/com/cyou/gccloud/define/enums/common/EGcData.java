@@ -96,26 +96,35 @@ public class EGcData
    // 64位无符号整数标签
    public final static String Uint64Label = "64位无符号整数";
 
+   // 16位浮点数
+   public final static int Float16 = 9;
+
+   // 16位浮点数字符串
+   public final static String Float16String = "Float16";
+
+   // 16位浮点数标签
+   public final static String Float16Label = "16位浮点数";
+
    // 32位浮点数
-   public final static int Float = 9;
+   public final static int Float32 = 10;
 
    // 32位浮点数字符串
-   public final static String FloatString = "Float";
+   public final static String Float32String = "Float32";
 
    // 32位浮点数标签
-   public final static String FloatLabel = "32位浮点数";
+   public final static String Float32Label = "32位浮点数";
 
-   // 64位双精度浮点数
-   public final static int Double = 10;
+   // 64位浮点数
+   public final static int Float64 = 11;
 
-   // 64位双精度浮点数字符串
-   public final static String DoubleString = "Double";
+   // 64位浮点数字符串
+   public final static String Float64String = "Float64";
 
-   // 64位双精度浮点数标签
-   public final static String DoubleLabel = "64位双精度浮点数";
+   // 64位浮点数标签
+   public final static String Float64Label = "64位浮点数";
 
    // 字符串
-   public final static int String = 11;
+   public final static int String = 12;
 
    // 字符串字符串
    public final static String StringString = "String";
@@ -171,10 +180,12 @@ public class EGcData
             return Uint32String;
          case Uint64:
             return Uint64String;
-         case Float:
-            return FloatString;
-         case Double:
-            return DoubleString;
+         case Float16:
+            return Float16String;
+         case Float32:
+            return Float32String;
+         case Float64:
+            return Float64String;
          case String:
             return StringString;
          default:
@@ -208,10 +219,12 @@ public class EGcData
             return Uint32Label;
          case Uint64:
             return Uint64Label;
-         case Float:
-            return FloatLabel;
-         case Double:
-            return DoubleLabel;
+         case Float16:
+            return Float16Label;
+         case Float32:
+            return Float32Label;
+         case Float64:
+            return Float64Label;
          case String:
             return StringLabel;
          default:
@@ -245,10 +258,12 @@ public class EGcData
             return Uint32;
          case Uint64String:
             return Uint64;
-         case FloatString:
-            return Float;
-         case DoubleString:
-            return Double;
+         case Float16String:
+            return Float16;
+         case Float32String:
+            return Float32;
+         case Float64String:
+            return Float64;
          case StringString:
             return String;
          default:

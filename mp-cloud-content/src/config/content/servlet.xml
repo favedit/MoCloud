@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>   
+         
+   <!-- ============================================================ -->
+   <!-- 设计：模型资源获取处理                                       -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.model'
+         face  = 'org.mo.content.face.resource3d.model.IStorageServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.model.IStorageServlet'
+         class = 'org.mo.content.face.resource3d.model.FStorageServlet'
+         scope = 'global'/>
+
+</Config>

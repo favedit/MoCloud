@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<List _uuid="deec1d15-60b8-47cf-982c-ee8f0ce3fac0" name="content.frame.FrameType" label="页面类型" is_valid="Y" note="M#" cache="Y">
-  <Item _uuid="b6394b64-6aa1-4d9c-96f1-81ed5d2d4f9c" name="formFrame" label="表单页面" is_valid="Y" note="M#" type="I" value="FormFrame" />
-  <Item _uuid="0b0f35ad-5c3f-4182-a652-17094a2f2fff" name="tableFrame" label="表格页面" is_valid="Y" note="M#" type="I" value="TableFrame" />
-  <Item _uuid="2064183d-6084-4415-bf4f-a3578b9f32db" name="pickerFrame" label="拾取页面" is_valid="Y" note="M#" type="I" value="PickerFrame" />
-  <Item _uuid="cdedc8f3-b3d3-4924-a619-d9914e2d65ee" name="dialogFrame" label="对话页面" is_valid="Y" note="M#" type="I" value="DialogFrame" />
-</List>

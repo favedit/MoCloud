@@ -42,12 +42,30 @@ public class FRs3ModelStream
    }
 
    //============================================================
+   // <T>设置代码。</T>
+   //
+   // @param 代码
+   //============================================================
+   public void setCode(String code){
+      _code = code;
+   }
+
+   //============================================================
    // <T>获得元素类型。</T>
    //
    // @return 元素类型
    //============================================================
    public int elementDataCd(){
       return _elementDataCd;
+   }
+
+   //============================================================
+   // <T>设置元素类型。</T>
+   //
+   // @param elementDataCd 元素类型
+   //============================================================
+   public void setElementDataCd(int elementDataCd){
+      _elementDataCd = elementDataCd;
    }
 
    //============================================================
@@ -60,21 +78,48 @@ public class FRs3ModelStream
    }
 
    //============================================================
-   // <T>获得宽度。</T>
+   // <T>设置元素个数。</T>
    //
-   // @return 宽度
+   // @param elementCount 元素个数
+   //============================================================
+   public void setElementCount(int elementCount){
+      _elementCount = elementCount;
+   }
+
+   //============================================================
+   // <T>获得数据宽度。</T>
+   //
+   // @return 数据宽度
    //============================================================
    public int dataStride(){
       return _dataStride;
    }
 
    //============================================================
-   // <T>获得个数。</T>
+   // <T>设置数据宽度。</T>
    //
-   // @return 个数
+   // @param dataStride 数据宽度
+   //============================================================
+   public void setDataStride(int dataStride){
+      _dataStride = dataStride;
+   }
+
+   //============================================================
+   // <T>获得数据个数。</T>
+   //
+   // @return 数据个数
    //============================================================
    public int dataCount(){
       return _dataCount;
+   }
+
+   //============================================================
+   // <T>设置数据个数。</T>
+   //
+   // @param dataCount 数据个数
+   //============================================================
+   public void setDataCount(int dataCount){
+      _dataCount = dataCount;
    }
 
    //============================================================
@@ -96,11 +141,28 @@ public class FRs3ModelStream
    }
 
    //============================================================
+   // <T>设置数据。</T>
+   //
+   // @param data 代码
+   //============================================================
+   public void setData(byte[] data){
+      _data = data;
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      // 读取属性
+      output.writeString(_code);
+      output.writeUint8((short)_elementDataCd);
+      output.writeUint8((short)_elementCount);
+      output.writeUint8((short)_dataStride);
+      output.writeInt32(_dataCount);
+      // 读取数据
+      output.write(_data, 0, _data.length);
    }
 
    //============================================================

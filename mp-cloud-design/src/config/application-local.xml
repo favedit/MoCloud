@@ -11,6 +11,7 @@
    <Define name='application.space'>${application.web}/WEB-INF/config</Define>
    <Define name='application.content'>${application.web}/WEB-INF/content</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
+   <Define name='application.storage'>${application}/mt-storage</Define>
 
    <!-- 服务器设定 -->
    <Define name='cloud.server.storage.local'>http://localhost:93</Define>
