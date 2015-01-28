@@ -95,14 +95,7 @@
          <Parameter>
             <Component class = 'org.mo.eng.mail.FMailGroup'>
                <Property name='name'>zqinet.monitor</Property>
-               <!--  毛春杨; 程逸飞; 吴敏; 李炎; 梁成武; 第五宏博 -->
                <Property name='to'>
-                  maochunyang@zqinet.com;
-                  chengyifei@zqinet.com;
-                  396217089@qq.com;
-                  18629383792@wo.com.cn;
-                  liangchengwu@zqinet.com;
-                  32554918@qq.com;
                </Property>
                <Property name='cc'></Property>
                <Property name='bcc'></Property>

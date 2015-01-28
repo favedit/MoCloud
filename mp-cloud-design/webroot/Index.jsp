@@ -4,7 +4,7 @@
 
 <BR><HR><BR>
 
-<H3><jh:a page="/cloud/home/Frame.wa">Cloud Develop</jh:a></H3>
+<H3><jh:a page="/design/home/Frame.wa">Cloud Develop</jh:a></H3>
 <BR>
 <H3><jh:a page="/system/home/Frame.wa">Cloud Designer</jh:a></H3>
 

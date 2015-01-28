@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+/* reset */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+/* render html5 elements as block */
+header, footer, section, aside, nav, article {
+	display: block;
+}
+
+body {
+	color: #333;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	line-height: 18px;
+	font: 12px/1.4 Microsoft YaHei, Verdana, Arial, Helvetica, sans-serif;
+}
+
+html, body {height: 100%;}
+	
+/* layout */
+ul, ol, dl { /* 由于浏览器之间的差异，最佳做法是在列表中将填充和边距都设置为零。为了保持一致，您可以在此处指定所需的数值，也可以在列表包含的列表项（LI、DT 和 DD）中指定所需的数值。请记住，除非编写一个更具体的选择器，否则，在此处进行的设置将层叠到 .nav 列表。 */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;	 /* 删除上边距可以解决边距会超出其包含的块的问题。剩余的下边距可以使块与后面的任何元素保持一定距离。 */
+}
+a img { /* 此选择器将删除某些浏览器中显示在图像周围的默认蓝色边框（当该图像包含在链接中时） */
+	border: none;
+}
+/* ~~ 站点链接的样式必须保持此顺序，包括用于创建悬停效果的选择器组在内。 ~~ */
+a:link {
+	text-decoration: none; /* 除非将链接设置成极为独特的外观样式，否则最好提供下划线，以便可从视觉上快速识别 */
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover, a:active, a:focus { /* 此组选择器将为键盘导航者提供与鼠标使用者相同的悬停体验。 */
+	text-decoration: none;
+}
+
+ul,li {
+	list-style:none;
+}
+
+.clear {
+	clear:both;
+}
+
+nav {
+	width: 940px;
+	height: 50px;
+	margin: 0 auto;
+	background: #2A590C;
+	margin-top: -5px;
+}
+
+#main {
+	width: 940px;
+	margin: 0 auto;
+	padding-top: 30px;
+	background: #FFF url(images/colbg.png) repeat-y;
+	overflow: hidden;
+}
+
+#content {
+	float: left;
+	width: 450px;
+	margin-left: 40px;
+}
+
+#sidebar1 {
+	float: left;
+	padding-left: 25px;
+	width: 180px;
+}
+
+#sidebar2 {
+	float: right;
+	padding-right: 30px;
+	width: 180px;
+}
+
+footer {
+	width: 940px;
+	margin: 0 auto;
+	clear: both;
+}
+
+/* CSS Document */
+
