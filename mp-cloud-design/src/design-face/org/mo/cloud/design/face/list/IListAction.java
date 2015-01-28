@@ -1,5 +1,6 @@
 package org.mo.cloud.design.face.list;
 
+import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -16,6 +17,7 @@ public interface IListAction
    // @return 处理结果
    //============================================================
    String catalog(IWebContext context,
+                  ILogicContext logicContext,
                   @AContainer(name = "page") FListPage page);
 
    //============================================================

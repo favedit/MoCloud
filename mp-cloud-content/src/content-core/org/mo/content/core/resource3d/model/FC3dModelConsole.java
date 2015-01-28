@@ -43,6 +43,9 @@ public class FC3dModelConsole
       // 获得模型信息
       FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
       FDataResource3dModelUnit modelUnit = modelLogic.findByGuid(code);
+      if(modelUnit == null){
+         return null;
+      }
       model.setCode(modelUnit.code());
       // 获得网格信息
       FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);

@@ -8,19 +8,19 @@
    <!-- ==================================================== -->
    <Actions
          uri   = '/apl/*/*'
-         face  = 'org.mo.cloud.design.editor.face.apl.*.I*Action'/>
+         face  = 'org.mo.cloud.design.face.apl.*.I*Action'/>
 
    <Actions
          uri   = '/apl/*'
-         face  = 'org.mo.cloud.design.editor.face.apl.I*Action' />
+         face  = 'org.mo.cloud.design.face.apl.I*Action' />
 
    <Components
-         face  = 'org.mo.cloud.design.editor.face.apl.*.I*Action'
-         class = 'org.mo.cloud.design.editor.face.apl.*.F*Action' />
+         face  = 'org.mo.cloud.design.face.apl.*.I*Action'
+         class = 'org.mo.cloud.design.face.apl.*.F*Action' />
 
    <Components
-         face  = 'org.mo.cloud.design.editor.face.apl.I*Action'
-         class = 'org.mo.cloud.design.editor.face.apl.F*Action' />
+         face  = 'org.mo.cloud.design.face.apl.I*Action'
+         class = 'org.mo.cloud.design.face.apl.F*Action' />
 
    <!-- ==================================================== -->
    <!-- 命令：内容的命令映射和组件定义                       -->

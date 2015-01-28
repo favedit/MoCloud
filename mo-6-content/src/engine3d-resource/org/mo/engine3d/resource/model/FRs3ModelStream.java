@@ -1,7 +1,10 @@
 package org.mo.engine3d.resource.model;
 
+import com.cyou.gccloud.define.enums.common.EGcData;
+import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 
 //============================================================
 // <T>资源模型数据流。</T>
@@ -154,15 +157,161 @@ public class FRs3ModelStream
    //
    // @param output 输出流
    //============================================================
-   public void serialize(IDataOutput output){
-      // 读取属性
-      output.writeString(_code);
+   public void serializeFloat2(IDataOutput output){
+      if((_elementDataCd != EGcData.Float32) || (_elementCount != 2)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
       output.writeUint8((short)_elementDataCd);
       output.writeUint8((short)_elementCount);
+      output.writeBoolean(false);
       output.writeUint8((short)_dataStride);
       output.writeInt32(_dataCount);
-      // 读取数据
+      // 输出数据
       output.write(_data, 0, _data.length);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serializeFloat3(IDataOutput output){
+      if((_elementDataCd != EGcData.Float32) || (_elementCount != 3)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)_elementDataCd);
+      output.writeUint8((short)_elementCount);
+      output.writeBoolean(false);
+      output.writeUint8((short)_dataStride);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      output.write(_data, 0, _data.length);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serializeByte4Normal(IDataOutput output){
+      if((_elementDataCd != EGcData.Float32) || (_elementCount != 3)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)EGcData.Uint8);
+      output.writeUint8((short)4);
+      output.writeBoolean(true);
+      output.writeUint8((short)4);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      FByteStream stream = new FByteStream(_data, _data.length);
+      for(int n = 0; n < _dataCount; n++){
+         float v1 = stream.readFloat();
+         float v2 = stream.readFloat();
+         float v3 = stream.readFloat();
+         output.writeUint8((byte)((v1 + 1) * 0.5f * 255.0f));
+         output.writeUint8((byte)((v2 + 1) * 0.5f * 255.0f));
+         output.writeUint8((byte)((v3 + 1) * 0.5f * 255.0f));
+         output.writeUint8((byte)255);
+      }
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serializeUint16(IDataOutput output){
+      if((_elementDataCd != EGcData.Int16) || (_elementCount != 3)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)EGcData.Uint16);
+      output.writeUint8((short)3);
+      output.writeBoolean(false);
+      output.writeUint8((short)6);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      FByteStream stream = new FByteStream(_data, _data.length);
+      int total = _dataCount * 3;
+      for(int n = 0; n < total; n++){
+         int index = stream.readUint16();
+         output.writeUint16(index);
+      }
+      // 输出数据
+      //output.write(_data, 0, _data.length);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serializeUint32(IDataOutput output){
+      if((_elementDataCd != EGcData.Int32) || (_elementCount != 3)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)EGcData.Uint16);
+      output.writeUint8((short)3);
+      output.writeBoolean(false);
+      output.writeUint8((short)6);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      FByteStream stream = new FByteStream(_data, _data.length);
+      int total = _dataCount * 3;
+      for(int n = 0; n < total; n++){
+         output.writeUint16(stream.readInt32());
+      }
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serializeData(IDataOutput output){
+      // 输出属性
+      output.writeUint8((short)_elementDataCd);
+      output.writeUint8((short)_elementCount);
+      output.writeBoolean(false);
+      output.writeUint8((short)_dataStride);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      output.write(_data, 0, _data.length);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
+      output.writeString(_code);
+      switch(_code){
+         case "position":
+            serializeFloat3(output);
+            break;
+         case "coord":
+            serializeFloat2(output);
+            break;
+         case "normal":
+         case "binormal":
+         case "tangent":
+            serializeByte4Normal(output);
+            break;
+         case "index16":
+            serializeUint16(output);
+            break;
+         case "index32":
+            serializeUint32(output);
+            break;
+         default:
+            serializeData(output);
+            throw new FFatalError("Unknown code");
+      }
    }
 
    //============================================================

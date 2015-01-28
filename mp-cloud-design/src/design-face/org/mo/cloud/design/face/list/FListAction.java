@@ -1,7 +1,8 @@
 package org.mo.cloud.design.face.list;
 
+import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationAction;
-
+import org.mo.data.logic.ILogicContext;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -36,7 +37,10 @@ public class FListAction
    //============================================================
    @Override
    public String catalog(IWebContext context,
+                         ILogicContext logicContext,
                          FListPage page){
+      FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
+      logic.fetchAll();
       return catalog(context, page, PAGE_CATALOG);
    }
 

@@ -21,6 +21,17 @@ public class FByteStream
    }
 
    //============================================================
+   // <T>构造字节数据流。</T>
+   //
+   // @param memory 内存
+   // @param length 长度
+   //============================================================
+   public FByteStream(byte[] memory,
+                      int length){
+      super(memory, length);
+   }
+
+   //============================================================
    // <T>从字节流中读取一个布尔值。</T>
    // <P>占用一个字节，为1表示真，为0表示假。</P>
    //
@@ -186,6 +197,11 @@ public class FByteStream
    //============================================================
    @Override
    public void writeBoolean(boolean value){
+      ensureSize(_position + 1);
+      _memory[_position++] = (byte)(value ? 1 : 0);
+      if(_position > _length){
+         _length = _position;
+      }
    }
 
    //============================================================
