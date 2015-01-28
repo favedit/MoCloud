@@ -1,7 +1,7 @@
 package org.mo.cloud.design.core.person;
 
-import com.cyou.gccloud.core.database.IAbstractLogicUnitConsole;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.cloud.design.face.base.FBasePage;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;

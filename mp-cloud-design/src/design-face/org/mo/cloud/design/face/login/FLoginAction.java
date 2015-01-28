@@ -1,5 +1,6 @@
 package org.mo.cloud.design.face.login;
 
+import org.mo.cloud.design.core.person.IPersonConsole;
 import org.mo.cloud.design.face.base.FBasePage;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -53,6 +54,7 @@ public class FLoginAction
    public String loginOut(IWebContext context,
                           ILogicContext logicContext,
                           FBasePage basePage){
+      basePage.setUser(null);
       return null;
    }
 }
