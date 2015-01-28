@@ -2633,6 +2633,29 @@ public class RString
    }
 
    //============================================================
+   // <T>移除字符串中的字符。</T>
+   //
+   // @param source 字符串
+   // @param char 字符
+   // @return 字符串
+   //============================================================
+   public static String removeChar(String source,
+                                   char value){
+      if(source != null){
+         StringBuffer result = new StringBuffer();
+         int length = source.length();
+         for(int n = 0; n < length; n++){
+            char find = source.charAt(n);
+            if(find != value){
+               result.append(find);
+            }
+         }
+         return result.toString();
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>移除字符串中的字符集合。</T>
    //
    // @param source 字符串

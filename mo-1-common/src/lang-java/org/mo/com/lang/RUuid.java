@@ -24,9 +24,43 @@ public class RUuid
    //
    // @return 唯一编号
    //============================================================
+   public final static String makeUuidUpper(){
+      String uuid = UUID.randomUUID().toString();
+      String result = RString.removeChar(uuid, '-');
+      return result.toUpperCase();
+   }
+
+   //============================================================
+   // <T>生成唯一编号管理器。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public final static String makeUuidLower(){
+      String uuid = UUID.randomUUID().toString();
+      String result = RString.removeChar(uuid, '-');
+      return result.toLowerCase();
+   }
+
+   //============================================================
+   // <T>生成唯一编号管理器。</T>
+   //
+   // @return 唯一编号
+   //============================================================
    public final static String makeUniqueId(){
       String uuid = UUID.randomUUID().toString();
-      return RString.removeChars(uuid, '-').toUpperCase();
+      String result = RString.removeChar(uuid, '-');
+      return result.toUpperCase();
+   }
+
+   //============================================================
+   // <T>生成唯一编号管理器。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public final static String makeUniqueId(String value){
+      String uuid = UUID.randomUUID().toString();
+      String result = RString.removeChar(uuid, '-');
+      return RString.nvl(value) + result.toUpperCase();
    }
 
    //============================================================
@@ -36,7 +70,8 @@ public class RUuid
    //============================================================
    public final static String makeUniqueIdLower(){
       String uuid = UUID.randomUUID().toString();
-      return RString.removeChars(uuid, '-').toLowerCase();
+      String result = RString.removeChar(uuid, '-');
+      return result.toLowerCase();
    }
 
    //private static int _seed = 0;

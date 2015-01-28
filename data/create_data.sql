@@ -79,6 +79,57 @@ ALTER TABLE DT_RES_RESOURCE ADD CONSTRAINT DT_RES_RES_FK_TYP
       FOREIGN KEY (`TYPE_ID`) REFERENCES DT_RES_TYPE(`OUID`); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Resource.Picture]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RES_PICTURE`;
+CREATE TABLE `DT_RES_PICTURE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RES_PICTURE 
+   ADD CONSTRAINT DT_RES_PIC_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource.Picture.Data]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RES_PICTURE_DATA`;
+CREATE TABLE `DT_RES_PICTURE_DATA` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `PICTURE_ID`                    BIGINT, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `FORMAT_CODE`                   VARCHAR(40), 
+   `WIDTH`                         INTEGER, 
+   `HEIGHT`                        INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RES_PICTURE_DATA 
+   ADD CONSTRAINT DT_RES_PIC_DAT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RES_PICTURE_DATA ADD CONSTRAINT DT_RES_PIC_DAT_FK_PIC 
+      FOREIGN KEY (`PICTURE_ID`) REFERENCES DT_RES_PICTURE(`OUID`); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Texture]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_RS3_TEXTURE`;

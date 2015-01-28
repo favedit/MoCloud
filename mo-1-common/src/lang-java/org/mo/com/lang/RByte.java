@@ -110,16 +110,17 @@ public class RByte
    //============================================================
    public final static byte[] fromHexString(String source){
       // 变换为字符串
-      char[] chars = source.toCharArray();
-      if(0 != chars.length % 2){
-         throw new Error("Source length invalid. (source=" + source + ", length=" + chars.length + ")");
+      int length = source.length();
+      if((length % 2) != 0){
+         throw new Error("Source length invalid. (source=" + source + ", length=" + length + ")");
       }
       // 变换为字节
       int index = 0;
-      int count = chars.length;
-      byte[] bytes = new byte[count >> 1];
-      for(int n = 0; n < count; n += 2){
-         bytes[index++] = (byte)((RHex.parse(chars[n]) << 4) + RHex.parse(chars[n + 1]));
+      byte[] bytes = new byte[length >> 1];
+      for(int n = 0; n < length; n += 2){
+         char value1 = source.charAt(n);
+         char value2 = source.charAt(n + 1);
+         bytes[index++] = (byte)((RHex.parse(value1) << 4) + RHex.parse(value2));
       }
       return bytes;
    }
