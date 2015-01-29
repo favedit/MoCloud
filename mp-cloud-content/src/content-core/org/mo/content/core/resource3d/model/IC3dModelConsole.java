@@ -1,7 +1,8 @@
 package org.mo.content.core.resource3d.model;
 
+import org.mo.content.resource3d.model.FRs3Model;
+
 import org.mo.data.logic.ILogicContext;
-import org.mo.engine3d.resource.model.FRs3Model;
 
 //============================================================
 // <T>模型控制台接口。</T>

@@ -1,5 +1,9 @@
 package org.mo.content.core.resource3d.model;
 
+import org.mo.content.resource3d.model.FRs3Model;
+import org.mo.content.resource3d.model.FRs3ModelMesh;
+import org.mo.content.resource3d.model.FRs3ModelStream;
+
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
@@ -12,9 +16,6 @@ import org.mo.com.io.FByteFile;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.engine3d.resource.model.FRs3Model;
-import org.mo.engine3d.resource.model.FRs3ModelMesh;
-import org.mo.engine3d.resource.model.FRs3ModelStream;
 
 //============================================================
 // <T>模型控制台。</T>

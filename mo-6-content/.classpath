@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/engine3d-resource"/>
+	<classpathentry kind="src" path="src/content-resource"/>
+	<classpathentry kind="src" path="src/engine-core"/>
+	<classpathentry kind="src" path="src/enginge2d-core"/>
+	<classpathentry kind="src" path="src/engine3d-core"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>

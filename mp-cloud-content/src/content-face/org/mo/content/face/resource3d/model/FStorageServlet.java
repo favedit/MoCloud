@@ -1,5 +1,7 @@
 package org.mo.content.face.resource3d.model;
 
+import org.mo.content.resource3d.model.FRs3Model;
+
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteStream;
@@ -12,7 +14,6 @@ import org.mo.com.net.EMime;
 import org.mo.content.core.resource3d.model.IC3dModelConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
-import org.mo.engine3d.resource.model.FRs3Model;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;

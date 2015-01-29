@@ -5,27 +5,19 @@ import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.design.face.base.FBasePage;
 import org.mo.data.logic.FLogicDataset;
-import org.mo.data.logic.FLogicTable;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>用户控制台。</T>
 //============================================================
 public class FPersonConsole
-      extends FAbstractLogicUnitConsole<FDataPersonUserUnit>
+      extends FAbstractLogicUnitConsole<FDataPersonUserLogic, FDataPersonUserUnit>
       implements
          IPersonConsole
 {
-   //============================================================
-   // <T>创建逻辑单元</T>
-   //
-   // @param sqlContext 数据环境
-   // @return 逻辑单元
-   //============================================================
 
-   @Override
-   protected FLogicTable createLogic(ILogicContext logicContext){
-      return new FDataPersonUserLogic(logicContext);
+   public FPersonConsole(){
+      super(FDataPersonUserLogic.class, FDataPersonUserUnit.class);
    }
 
    // ============================================================

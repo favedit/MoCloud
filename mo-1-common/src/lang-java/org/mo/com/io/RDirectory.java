@@ -50,7 +50,7 @@ public class RDirectory
                if(finded){
                   // 增加一个文件
                   FFileInfo info = new FFileInfo();
-                  info.setFileName(file.getAbsolutePath());
+                  info.parse(file.getAbsolutePath());
                   infos.push(info);
                }
             }

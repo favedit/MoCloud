@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src/design-describe"/>
 	<classpathentry kind="src" path="src/design-data"/>
+	<classpathentry kind="src" path="src/design-core"/>
 	<classpathentry kind="src" path="src/design-face"/>
 	<classpathentry kind="src" path="src/test-java"/>
 	<classpathentry kind="src" path="src/config"/>
-	<classpathentry kind="src" path="src/design-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-3-logic"/>

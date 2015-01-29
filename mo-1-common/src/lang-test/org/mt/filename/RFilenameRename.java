@@ -14,7 +14,7 @@ public class RFilenameRename
 
    public static FFileInfo findSource(String code){
       for(FFileInfo source : _sources){
-         String shortName = source.shortName();
+         String shortName = source.name();
          if(shortName.contains("第" + code + "話")){
             return source;
          }
@@ -28,7 +28,7 @@ public class RFilenameRename
       _sources = RDirectory.listFiles(sourcePath, false);
       _targets = RDirectory.listFiles(targetPath, false);
       for(FFileInfo target : _targets){
-         String shortName = target.shortName();
+         String shortName = target.name();
          String code = RString.mid(shortName, "灌篮高手", ".srt");
          if(code.startsWith("0")){
             code = code.substring(1);
@@ -37,7 +37,7 @@ public class RFilenameRename
          FFileInfo source = findSource(code);
          if(null != source){
             System.out.println(code);
-            String sourceShortName = source.shortName();
+            String sourceShortName = source.name();
             sourceShortName = sourceShortName.substring(0, sourceShortName.length() - 4) + ".srt";
             RFile.rename(target.fileName(), targetPath + "/" + sourceShortName);
          }

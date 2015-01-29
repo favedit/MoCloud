@@ -264,6 +264,29 @@ ALTER TABLE DT_RS3_MODEL_STREAM ADD CONSTRAINT DT_RS3_MOD_STM_FK_MSH
       FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MODEL_MESH(`OUID`); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Theme]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_THEME`;
+CREATE TABLE `DT_RS3_THEME` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `CONTENT`                       TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_THEME 
+   ADD CONSTRAINT DT_RS3_THM_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Material]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_RS3_MATERIAL`;
@@ -340,6 +363,67 @@ CREATE TABLE `DT_RS3_TEMPLATE`
 
 ALTER TABLE DT_RS3_TEMPLATE 
    ADD CONSTRAINT DT_RS3_TPL_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Template.Theme]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_TEMPLATE_THEME`;
+CREATE TABLE `DT_RS3_TEMPLATE_THEME` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `TEMPLATE_ID`                   BIGINT, 
+   `THEME_ID`                      BIGINT, 
+   `ACTIVE_CD`                     INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_TEMPLATE_THEME 
+   ADD CONSTRAINT DT_RS3_TPL_THM_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_TEMPLATE_THEME ADD CONSTRAINT DT_RS3_TPL_THM_FK_TPL 
+      FOREIGN KEY (`TEMPLATE_ID`) REFERENCES DT_RS3_TEMPLATE(`OUID`); 
+
+ALTER TABLE DT_RS3_TEMPLATE_THEME ADD CONSTRAINT DT_RS3_TPL_THM_FK_THM 
+      FOREIGN KEY (`THEME_ID`) REFERENCES DT_RS3_THEME(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Template.Material]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_TEMPLATE_MATERIAL`;
+CREATE TABLE `DT_RS3_TEMPLATE_MATERIAL` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `TEMPLATE_ID`                   BIGINT NOT NULL, 
+   `THEME_ID`                      BIGINT NOT NULL, 
+   `MATERIAL_ID`                   BIGINT NOT NULL, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_TEMPLATE_MATERIAL 
+   ADD CONSTRAINT DT_RS3_TPL_MTL_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_TEMPLATE_MATERIAL ADD CONSTRAINT DT_RS3_TPL_MTL_FK_TPL 
+      FOREIGN KEY (`TEMPLATE_ID`) REFERENCES DT_RS3_TEMPLATE(`OUID`); 
+
+ALTER TABLE DT_RS3_TEMPLATE_MATERIAL ADD CONSTRAINT DT_RS3_TPL_MTL_FK_THM 
+      FOREIGN KEY (`THEME_ID`) REFERENCES DT_RS3_THEME(`OUID`); 
+
+ALTER TABLE DT_RS3_TEMPLATE_MATERIAL ADD CONSTRAINT DT_RS3_TPL_MTL_FK_MTL 
+      FOREIGN KEY (`MATERIAL_ID`) REFERENCES DT_RS3_MATERIAL(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Scene]

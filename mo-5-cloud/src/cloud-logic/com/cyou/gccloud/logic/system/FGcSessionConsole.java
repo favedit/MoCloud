@@ -18,7 +18,7 @@ import org.mo.data.logic.ILogicContext;
 // <T>用户控制台。</T>
 //============================================================
 public class FGcSessionConsole
-      extends FAbstractLogicUnitConsole<FGcSessionInfo>
+      extends FAbstractLogicUnitConsole<FCacheSystemSessionLogic, FGcSessionInfo>
       implements
          IGcSessionConsole
 {
@@ -41,19 +41,7 @@ public class FGcSessionConsole
    // <T>构造用户控制台。</T>
    //============================================================
    public FGcSessionConsole(){
-      super(FGcSessionInfo.class);
-   }
-
-   //============================================================
-   // <T>创建逻辑单元</T>
-   //
-   // @param logicContext 逻辑环境
-   // @return 逻辑单元
-   //============================================================
-   @Override
-   protected FCacheSystemSessionLogic createLogic(ILogicContext logicContext){
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      return sessionLogic;
+      super(FCacheSystemSessionLogic.class, FGcSessionInfo.class);
    }
 
    //============================================================

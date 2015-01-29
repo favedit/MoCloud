@@ -38,7 +38,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param uniqueCode 唯一码
    // @return 处理结果
    //============================================================
-   T findUnique(ILogicContext logicContext,
+   T findByGuid(ILogicContext logicContext,
                 String uniqueCode);
 
    //============================================================
@@ -49,7 +49,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param clazz 类对象
    // @return 处理结果
    //============================================================
-   T findUnique(ILogicContext logicContext,
+   T findByGuid(ILogicContext logicContext,
                 String uniqueCode,
                 Class<T> clazz);
 
@@ -60,8 +60,8 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
-   EResult insert(ILogicContext logicContext,
-                  T unit);
+   EResult doInsert(ILogicContext logicContext,
+                    T unit);
 
    //============================================================
    // <T>修改记录</T>o
@@ -71,9 +71,9 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
-   EResult update(ILogicContext logicContext,
-                  T unit,
-                  long objectId);
+   EResult doUpdate(ILogicContext logicContext,
+                    T unit,
+                    long objectId);
 
    //============================================================
    // <T>删除记录</T>
@@ -82,6 +82,6 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
-   EResult delete(ILogicContext logicContext,
-                  long objectId);
+   EResult doDelete(ILogicContext logicContext,
+                    long objectId);
 }

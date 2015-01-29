@@ -2,7 +2,6 @@ package org.mo.com.io;
 
 import java.io.File;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 
 //============================================================
@@ -11,14 +10,14 @@ import org.mo.com.lang.generic.TDumpInfo;
 public class FFileInfo
       extends FObject
 {
+   // 名称
+   protected String _name;
+
+   // 扩展名
+   protected String _extension;
+
    // 文件名称
    protected String _fileName;
-
-   // 短名称
-   protected String _shortName;
-
-   // 扩展名称
-   protected String _extendName;
 
    //============================================================
    // <T>构造文件信息。</T>
@@ -32,7 +31,38 @@ public class FFileInfo
    // @param fileName 文件名称
    //============================================================
    public FFileInfo(String fileName){
-      setFileName(fileName);
+      parse(fileName);
+   }
+
+   //============================================================
+   // <T>获得代码。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String code(){
+      int find = _name.lastIndexOf('.');
+      if(find != -1){
+         return _name.substring(0, find);
+      }
+      return _name;
+   }
+
+   //============================================================
+   // <T>获得短名称。</T>
+   //
+   // @return 短名称
+   //============================================================
+   public String name(){
+      return _name;
+   }
+
+   //============================================================
+   // <T>获得扩展名称。</T>
+   //
+   // @return 扩展名称
+   //============================================================
+   public String extension(){
+      return _extension;
    }
 
    //============================================================
@@ -45,47 +75,37 @@ public class FFileInfo
    }
 
    //============================================================
-   // <T>获得短名称。</T>
-   //
-   // @return 短名称
-   //============================================================
-   public String shortName(){
-      return _shortName;
-   }
-
-   //============================================================
-   // <T>获得扩展名称。</T>
-   //
-   // @return 扩展名称
-   //============================================================
-   public String extendName(){
-      return _extendName;
-   }
-
-   //============================================================
    // <T>设置文件名称。</T>
    //
    // @param fileName 文件名称
    //============================================================
-   public void setFileName(String fileName){
+   public void parse(String fileName){
       // 替换分割符
-      fileName = RString.replace(fileName, '/', File.separatorChar);
-      fileName = RString.replace(fileName, '\\', File.separatorChar);
-      _fileName = fileName;
+      _fileName = RFile.format(fileName);
       // 生成短名称
       int find = _fileName.lastIndexOf(File.separatorChar);
       if(find != -1){
-         _shortName = _fileName.substring(find + 1);
+         _name = _fileName.substring(find + 1);
       }else{
-         _shortName = _fileName;
+         _name = _fileName;
       }
       // 生成扩展名称
-      find = _shortName.lastIndexOf('.');
+      find = _name.lastIndexOf('.');
       if(find != -1){
-         _extendName = _shortName.substring(find + 1);
+         _extension = _name.substring(find + 1);
       }else{
-         _extendName = "";
+         _extension = "";
       }
+   }
+
+   //============================================================
+   // <T>获得字符串。</T>
+   //
+   // @return 字符串
+   //============================================================
+   @Override
+   public String toString(){
+      return _fileName;
    }
 
    //============================================================

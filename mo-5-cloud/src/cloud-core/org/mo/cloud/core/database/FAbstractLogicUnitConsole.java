@@ -9,31 +9,16 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>逻辑单元控制台。</T>
 //============================================================
-public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
+public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends FLogicUnit>
       extends FConsole
       implements
-         IAbstractLogicUnitConsole<T>
+         IAbstractLogicUnitConsole<U>
 {
    // 逻辑类
    protected Class<T> _classLogic;
 
    // 单元类
-   protected Class<T> _classUnit;
-
-   //============================================================
-   // <T>构造逻辑单元控制台。</T>
-   //============================================================
-   public FAbstractLogicUnitConsole(){
-   }
-
-   //============================================================
-   // <T>构造逻辑单元控制台。</T>
-   //
-   // @param classUnit 单元类
-   //============================================================
-   public FAbstractLogicUnitConsole(Class<T> classUnit){
-      _classUnit = classUnit;
-   }
+   protected Class<U> _classUnit;
 
    //============================================================
    // <T>构造逻辑单元控制台。</T>
@@ -42,18 +27,20 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param classUnit 单元类
    //============================================================
    public FAbstractLogicUnitConsole(Class<T> classLogic,
-                                    Class<T> classUnit){
+                                    Class<U> classUnit){
       _classLogic = classLogic;
       _classUnit = classUnit;
    }
 
    //============================================================
-   // <T>创建逻辑单元</T>
+   // <T>获得逻辑单元</T>
    //
    // @param logicContext 逻辑环境
    // @return 逻辑单元
    //============================================================
-   protected abstract FLogicTable createLogic(ILogicContext logicContext);
+   protected FLogicTable findLogic(ILogicContext logicContext){
+      return logicContext.findLogic(_classLogic);
+   }
 
    //============================================================
    // <T>根据编号获得一个数据单元。</T>
@@ -63,7 +50,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public T find(ILogicContext logicContext,
+   public U find(ILogicContext logicContext,
                  long objectId){
       return find(logicContext, objectId, null);
    }
@@ -77,12 +64,12 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public T find(ILogicContext logicContext,
+   public U find(ILogicContext logicContext,
                  long objectId,
-                 Class<T> clazz){
-      FLogicTable logicTable = createLogic(logicContext);
-      Class<T> classUnit = (clazz != null) ? clazz : _classUnit;
-      T unit = logicTable.find(classUnit, objectId);
+                 Class<U> clazz){
+      FLogicTable logicTable = findLogic(logicContext);
+      Class<U> classUnit = (clazz != null) ? clazz : _classUnit;
+      U unit = logicTable.find(classUnit, objectId);
       return unit;
    }
 
@@ -94,9 +81,9 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public T findUnique(ILogicContext logicContext,
+   public U findByGuid(ILogicContext logicContext,
                        String uniqueCode){
-      return findUnique(logicContext, uniqueCode, null);
+      return findByGuid(logicContext, uniqueCode, null);
    }
 
    //============================================================
@@ -108,15 +95,15 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public T findUnique(ILogicContext logicContext,
+   public U findByGuid(ILogicContext logicContext,
                        String uniqueCode,
-                       Class<T> clazz){
+                       Class<U> clazz){
       // 生成参数
-      Class<T> classUnit = (clazz != null) ? clazz : _classUnit;
-      String whereSql = "OGID='" + uniqueCode + "'";
+      Class<U> classUnit = (clazz != null) ? clazz : _classUnit;
+      String whereSql = "GUID='" + uniqueCode + "'";
       // 查询内容
-      FLogicTable logicTable = createLogic(logicContext);
-      T unit = logicTable.search(classUnit, whereSql);
+      FLogicTable logicTable = findLogic(logicContext);
+      U unit = logicTable.search(classUnit, whereSql);
       return unit;
    }
 
@@ -128,9 +115,9 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public EResult insert(ILogicContext logicContext,
-                         T unit){
-      FLogicTable logicTable = createLogic(logicContext);
+   public EResult doInsert(ILogicContext logicContext,
+                           U unit){
+      FLogicTable logicTable = findLogic(logicContext);
       EResult resultCd = logicTable.doInsert(unit);
       return resultCd;
    }
@@ -144,10 +131,10 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public EResult update(ILogicContext logicContext,
-                         T unit,
-                         long objectId){
-      FLogicTable logicTable = createLogic(logicContext);
+   public EResult doUpdate(ILogicContext logicContext,
+                           U unit,
+                           long objectId){
+      FLogicTable logicTable = findLogic(logicContext);
       EResult resultCd = logicTable.doUpdate(unit, objectId);
       return resultCd;
    }
@@ -160,9 +147,9 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    @Override
-   public EResult delete(ILogicContext logicContext,
-                         long objectId){
-      FLogicTable logicTable = createLogic(logicContext);
+   public EResult doDelete(ILogicContext logicContext,
+                           long objectId){
+      FLogicTable logicTable = findLogic(logicContext);
       EResult resultCd = logicTable.doDelete(objectId);
       return resultCd;
    }

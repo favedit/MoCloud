@@ -1,0 +1,114 @@
+package org.mo.content.resource3d.common;
+
+import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FObject;
+import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RUuid;
+import org.mo.com.xml.FXmlNode;
+
+//============================================================
+// <T>资源模型。</T>
+//============================================================
+public class FRs3Theme
+      extends FObject
+{
+   protected String _guid;
+
+   protected String _code;
+
+   // 网格集合
+   protected FObjects<FRs3Material> _materials = new FObjects<FRs3Material>(FRs3Material.class);
+
+   //============================================================
+   // <T>构造资源模型。</T>
+   //============================================================
+   public FRs3Theme(){
+      _guid = RUuid.makeUniqueId();
+   }
+
+   //============================================================
+   // <T>获得网格集合。</T>
+   //
+   // @return 网格集合
+   //============================================================
+   public FObjects<FRs3Material> materials(){
+      return _materials;
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
+      // 输出网格集合
+      //      int meshCount = _bitmaps.count();
+      //      output.writeInt16((short)meshCount);
+      //      for(int i = 0; i < meshCount; i++){
+      //         FRs3MaterialBitmap mesh = _bitmaps.get(i);
+      //         mesh.serialize(output);
+      //      }
+   }
+
+   //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void loadConfig(FXmlNode xconfig){
+      // 读取属性
+      _guid = xconfig.get("guid");
+      _code = xconfig.get("code");
+      // 读取节点集合
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("MaterialCollection")){
+            // 读取材质集合
+            for(FXmlNode xchild : xnode){
+               if(xchild.isName("Material")){
+                  FRs3Material material = new FRs3Material();
+                  material.loadConfig(xchild);
+                  _materials.push(material);
+               }
+            }
+         }
+      }
+   }
+
+   //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void saveConfig(FXmlNode xconfig){
+      // 存储属性
+      xconfig.set("guid", _guid);
+      xconfig.set("code", _code);
+      // 存储材质集合
+      FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
+      for(FRs3Material material : _materials){
+         material.saveConfig(xmaterials.createNode("Material"));
+      }
+   }
+
+   //============================================================
+   // <T>从配置信息中导入配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void importConfig(FXmlNode xconfig){
+      // 读取属性
+      _code = xconfig.get("code");
+      // 处理所有节点
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("MaterialCollection")){
+            for(FXmlNode xchild : xnode){
+               if(xchild.isName("Material")){
+                  FRs3Material material = new FRs3Material();
+                  material.importConfig(xchild);
+                  _materials.push(material);
+               }
+            }
+         }
+      }
+   }
+}
