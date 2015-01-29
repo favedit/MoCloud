@@ -9,6 +9,9 @@ import org.mo.com.lang.FObjects;
 //============================================================
 public class FRs3ModelMesh
 {
+   // 唯一编号
+   protected String _guid;
+
    // 代码
    protected String _code;
 
@@ -19,6 +22,24 @@ public class FRs3ModelMesh
    // <T>构造资源模型网格。</T>
    //============================================================
    public FRs3ModelMesh(){
+   }
+
+   //============================================================
+   // <T>获得唯一编号。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public String _guid(){
+      return _guid;
+   }
+
+   //============================================================
+   // <T>设置唯一编号。</T>
+   //
+   // @param guid 唯一编号
+   //============================================================
+   public void setGuid(String guid){
+      _guid = guid;
    }
 
    //============================================================
@@ -45,7 +66,9 @@ public class FRs3ModelMesh
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      // 输出网格集合
+      // 输出属性
+      output.writeString(_guid);
+      // 输出数据流集合
       int streamCount = _streams.count();
       output.writeInt8((byte)streamCount);
       for(int i = 0; i < streamCount; i++){

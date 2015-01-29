@@ -1,9 +1,5 @@
 package org.mo.content.core.resource3d.model;
 
-import org.mo.content.resource3d.model.FRs3Model;
-import org.mo.content.resource3d.model.FRs3ModelMesh;
-import org.mo.content.resource3d.model.FRs3ModelStream;
-
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
@@ -13,6 +9,9 @@ import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteFile;
+import org.mo.content.resource3d.model.FRs3Model;
+import org.mo.content.resource3d.model.FRs3ModelMesh;
+import org.mo.content.resource3d.model.FRs3ModelStream;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -53,6 +52,7 @@ public class FC3dModelConsole
       FLogicDataset<FDataResource3dModelMeshUnit> meshUnits = meshLogic.fetch("MODEL_ID=" + modelUnit.ouid());
       for(FDataResource3dModelMeshUnit meshUnit : meshUnits){
          FRs3ModelMesh mesh = new FRs3ModelMesh();
+         mesh.setGuid(meshUnit.guid());
          // 获得数据流信息
          FDataResource3dModelStreamLogic streamLogic = logicContext.findLogic(FDataResource3dModelStreamLogic.class);
          FLogicDataset<FDataResource3dModelStreamUnit> streamUnits = streamLogic.fetch(FDataResource3dModelStreamLogic.MESH_ID + "=" + meshUnit.ouid());

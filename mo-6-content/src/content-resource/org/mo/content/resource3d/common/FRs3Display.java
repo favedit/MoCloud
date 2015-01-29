@@ -121,13 +121,18 @@ public class FRs3Display
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      //      // 输出网格集合
-      //      int meshCount = _meshs.count();
-      //      output.writeInt16((short)meshCount);
-      //      for(int i = 0; i < meshCount; i++){
-      //         FRs3ModelMesh mesh = _meshs.get(i);
-      //         mesh.serialize(output);
-      //      }
+      // 输出属性
+      output.writeString(_typeName);
+      output.writeString(_modelGuid);
+      output.writeString(_meshGuid);
+      _matrix.serialize(output);
+      // 输出网格集合
+      int materialCount = _materials.count();
+      output.writeInt16((short)materialCount);
+      for(int i = 0; i < materialCount; i++){
+         FRs3DisplayMaterial material = _materials.get(i);
+         material.serialize(output);
+      }
    }
 
    //============================================================
