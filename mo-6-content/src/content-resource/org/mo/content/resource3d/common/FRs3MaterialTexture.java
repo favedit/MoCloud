@@ -96,6 +96,8 @@ public class FRs3MaterialTexture
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      output.writeString(_typeCode);
+      output.writeString(_bitmapGuid);
    }
 
    //============================================================

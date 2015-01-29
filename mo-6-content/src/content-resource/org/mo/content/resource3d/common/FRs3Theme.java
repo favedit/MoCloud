@@ -42,12 +42,12 @@ public class FRs3Theme
    //============================================================
    public void serialize(IDataOutput output){
       // 输出网格集合
-      //      int meshCount = _bitmaps.count();
-      //      output.writeInt16((short)meshCount);
-      //      for(int i = 0; i < meshCount; i++){
-      //         FRs3MaterialBitmap mesh = _bitmaps.get(i);
-      //         mesh.serialize(output);
-      //      }
+      int materialCount = _materials.count();
+      output.writeInt16((short)materialCount);
+      for(int i = 0; i < materialCount; i++){
+         FRs3Material material = _materials.get(i);
+         material.serialize(output);
+      }
    }
 
    //============================================================

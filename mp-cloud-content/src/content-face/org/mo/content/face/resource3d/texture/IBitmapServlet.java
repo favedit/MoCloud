@@ -8,7 +8,7 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理接口。</T>
 //============================================================
-public interface IStorageServlet
+public interface IBitmapServlet
 {
    //============================================================
    // <T>逻辑处理。</T>

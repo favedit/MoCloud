@@ -6,7 +6,6 @@ import com.cyou.gccloud.data.data.FDataResource3dTemplateLogic;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
-import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
@@ -125,8 +124,7 @@ public class FRs3TemplateConsole
                // 设置纹理唯一编号
                String bitmapCode = texture.bitmapCode();
                FDataResource3dTextureBitmapUnit textureBitmapUnit = _textureBitmapConsole.findByCode(logicContext, textureUnit.ouid(), bitmapCode);
-               FDataResourceBitmapUnit bitmapUint = _bitmapConsole.find(logicContext, textureBitmapUnit.bitmapId());
-               texture.setBitmapGuid(bitmapUint.guid());
+               texture.setBitmapGuid(textureBitmapUnit.guid());
             }
          }
       }

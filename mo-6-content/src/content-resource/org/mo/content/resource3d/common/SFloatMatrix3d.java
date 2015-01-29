@@ -1,5 +1,6 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -24,6 +25,23 @@ public class SFloatMatrix3d
    public float sy;
 
    public float sz;
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
+      output.writeFloat(tx);
+      output.writeFloat(ty);
+      output.writeFloat(tz);
+      output.writeFloat(rx);
+      output.writeFloat(ry);
+      output.writeFloat(rz);
+      output.writeFloat(sx);
+      output.writeFloat(sy);
+      output.writeFloat(sz);
+   }
 
    //============================================================
    // <T>从配置信息中加载配置。</T>

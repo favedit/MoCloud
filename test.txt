@@ -9,7 +9,11 @@ tomcat-cloud.storage: 93
 tomcat-cloud.logger: 94
 
 测试资源：
-http://localhost:92/cloud.content.model.wv?code=F4C85519D24A4F2396A0E19E805C421D&version=05C927C022F8416B80363CFB35CDCE7A
+http://localhost:92/cloud.content.texture.bitmap.wv?code=760544B6AB4C49DEB984F5A39FDCD153
+
+http://localhost:92/cloud.content.model.wv?code=F4C85519D24A4F2396A0E19E805C421D
+
+http://localhost:92/cloud.content.template.wv?code=493267FE44E14B80AA668DAD5EFA08A0
 
 DELETE FROM DT_RS3_MODEL_STREAM;
 DELETE FROM DT_RS3_MODEL_MESH;

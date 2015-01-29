@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>   
-         
+
+   <!-- ============================================================ -->
+   <!-- 设计：纹理位图数据获取处理                                   -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.texture.bitmap'
+         face  = 'org.mo.content.face.resource3d.texture.IBitmapServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.texture.IBitmapServlet'
+         class = 'org.mo.content.face.resource3d.texture.FBitmapServlet'
+         scope = 'global'/>
+
    <!-- ============================================================ -->
    <!-- 设计：模型资源获取处理                                       -->
    <!-- ============================================================ -->
@@ -12,6 +24,18 @@
    <Component
          face  = 'org.mo.content.face.resource3d.model.IStorageServlet'
          class = 'org.mo.content.face.resource3d.model.FStorageServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：模型资源获取处理                                       -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.template'
+         face  = 'org.mo.content.face.resource3d.template.IStorageServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.template.IStorageServlet'
+         class = 'org.mo.content.face.resource3d.template.FStorageServlet'
          scope = 'global'/>
 
 </Config>

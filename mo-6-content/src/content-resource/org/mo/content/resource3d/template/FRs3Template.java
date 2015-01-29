@@ -104,14 +104,22 @@ public class FRs3Template
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      super.serialize(output);
-      //      // 输出网格集合
-      //      int meshCount = _meshs.count();
-      //      output.writeInt16((short)meshCount);
-      //      for(int i = 0; i < meshCount; i++){
-      //         FRs3ModelMesh mesh = _meshs.get(i);
-      //         mesh.serialize(output);
-      //      }
+      // 输入出属性
+      output.writeString(_guid);
+      // 输出主题集合
+      int themeCount = _themes.count();
+      output.writeInt16((short)themeCount);
+      for(int i = 0; i < themeCount; i++){
+         FRs3Theme theme = _themes.get(i);
+         theme.serialize(output);
+      }
+      // 输出显示集合
+      int displayCount = _displays.count();
+      output.writeInt16((short)displayCount);
+      for(int i = 0; i < displayCount; i++){
+         FRs3Display display = _displays.get(i);
+         display.serialize(output);
+      }
    }
 
    //============================================================

@@ -66,13 +66,7 @@ public class FRs3MaterialGroup
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      //      // 输出网格集合
-      //      int meshCount = _meshs.count();
-      //      output.writeInt16((short)meshCount);
-      //      for(int i = 0; i < meshCount; i++){
-      //         FRs3ModelMesh mesh = _meshs.get(i);
-      //         mesh.serialize(output);
-      //      }
+      output.writeString(_guid);
    }
 
    //============================================================

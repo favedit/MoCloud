@@ -139,13 +139,21 @@ public class FRs3Material
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      // 输出网格集合
-      //      int meshCount = _bitmaps.count();
-      //      output.writeInt16((short)meshCount);
-      //      for(int i = 0; i < meshCount; i++){
-      //         FRs3MaterialBitmap mesh = _bitmaps.get(i);
-      //         mesh.serialize(output);
-      //      }
+      // 输出属性
+      output.writeString(_guid);
+      output.writeString(_groupGuid);
+      output.writeString(_effectCode);
+      _ambientColor.serialize(output);
+      _diffuseColor.serialize(output);
+      _specularColor.serialize(output);
+      output.writeFloat(_specularLevel);
+      // 输出纹理集合
+      int textureCount = _textures.count();
+      output.writeInt16((short)textureCount);
+      for(int i = 0; i < textureCount; i++){
+         FRs3MaterialTexture texture = _textures.get(i);
+         texture.serialize(output);
+      }
    }
 
    //============================================================
