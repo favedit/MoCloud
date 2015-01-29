@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="0b3219f4-9494-49f5-8220-48961a320cef" name="data.resource3d.scene" label="M#12cn17资源3D场景表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-SC-DAT" data_name="DT_RS3_SCENE" data_alias="DT_RS3_SCN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldString _uuid="6dfd9bcd-7cb5-4ddd-af5c-29709de340ee" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="8c1aa8d3-7b16-4104-9ae1-65d6341e89a3" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldContent _uuid="5b93eafd-54c8-4168-a800-4853b7bddf3c" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldTemplate _uuid="12b6d171-7d76-468c-860e-5194627ba076" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

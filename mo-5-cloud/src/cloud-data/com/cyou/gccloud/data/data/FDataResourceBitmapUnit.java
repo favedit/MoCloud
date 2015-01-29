@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -12,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源图片数据表逻辑单元。</T>
+// <T>资源位图表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourcePictureDataUnit
+public class FDataResourceBitmapUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -42,12 +41,6 @@ public class FDataResourcePictureDataUnit
    // 字段全局版本标识的定义。
    protected String _gvid;
 
-   // 存储字段图片编号的定义。
-   private long __pictureId;
-
-   // 字段图片编号的定义。
-   protected long _pictureId;
-
    // 存储字段代码的定义。
    private String __code;
 
@@ -59,24 +52,6 @@ public class FDataResourcePictureDataUnit
 
    // 字段名称的定义。
    protected String _label;
-
-   // 存储字段格式的定义。
-   private String __formatCode;
-
-   // 字段格式的定义。
-   protected String _formatCode;
-
-   // 存储字段宽度的定义。
-   private int __width;
-
-   // 字段宽度的定义。
-   protected int _width;
-
-   // 存储字段高度的定义。
-   private int __height;
-
-   // 字段高度的定义。
-   protected int _height;
 
    // 存储字段备注的定义。
    private String __note;
@@ -109,9 +84,9 @@ public class FDataResourcePictureDataUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源图片数据表逻辑单元。</T>
+   // <T>构造资源位图表逻辑单元。</T>
    //============================================================
-   public FDataResourcePictureDataUnit(){
+   public FDataResourceBitmapUnit(){
    }
 
    //============================================================
@@ -223,44 +198,6 @@ public class FDataResourcePictureDataUnit
    }
 
    //============================================================
-   // <T>判断图片编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPictureIdChanged(){
-      return __pictureId != _pictureId;
-   }
-
-   //============================================================
-   // <T>获得图片编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long pictureId(){
-      return _pictureId;
-   }
-
-   //============================================================
-   // <T>获得图片编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourcePictureUnit picture(){
-      FDataResourcePictureLogic logic = _logicContext.findLogic(FDataResourcePictureLogic.class);
-      FDataResourcePictureUnit unit = logic.find(_pictureId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置图片编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPictureId(long value){
-      _pictureId = value;
-   }
-
-   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -312,87 +249,6 @@ public class FDataResourcePictureDataUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
-   }
-
-   //============================================================
-   // <T>判断格式的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isFormatCodeChanged(){
-      return !RString.equals(__formatCode, _formatCode);
-   }
-
-   //============================================================
-   // <T>获得格式的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String formatCode(){
-      return _formatCode;
-   }
-
-   //============================================================
-   // <T>设置格式的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setFormatCode(String value){
-      _formatCode = value;
-   }
-
-   //============================================================
-   // <T>判断宽度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isWidthChanged(){
-      return __width != _width;
-   }
-
-   //============================================================
-   // <T>获得宽度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int width(){
-      return _width;
-   }
-
-   //============================================================
-   // <T>设置宽度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setWidth(int value){
-      _width = value;
-   }
-
-   //============================================================
-   // <T>判断高度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isHeightChanged(){
-      return __height != _height;
-   }
-
-   //============================================================
-   // <T>获得高度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int height(){
-      return _height;
-   }
-
-   //============================================================
-   // <T>设置高度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setHeight(int value){
-      _height = value;
    }
 
    //============================================================
@@ -547,18 +403,10 @@ public class FDataResourcePictureDataUnit
             return _guid;
          case "gvid":
             return _gvid;
-         case "picture_id":
-            return Long.toString(_pictureId);
          case "code":
             return _code;
          case "label":
             return _label;
-         case "format_code":
-            return _formatCode;
-         case "width":
-            return RInteger.toString(_width);
-         case "height":
-            return RInteger.toString(_height);
          case "note":
             return _note;
          case "create_user_id":
@@ -595,23 +443,11 @@ public class FDataResourcePictureDataUnit
          case "gvid":
             _gvid = value;
             break;
-         case "picture_id":
-            _pictureId = RLong.parse(value);
-            break;
          case "code":
             _code = value;
             break;
          case "label":
             _label = value;
-            break;
-         case "format_code":
-            _formatCode = value;
-            break;
-         case "width":
-            _width = RInteger.parse(value);
-            break;
-         case "height":
-            _height = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -659,10 +495,6 @@ public class FDataResourcePictureDataUnit
                __gvid = value;
                _gvid = __gvid;
                break;
-            case "picture_id":
-               __pictureId = RLong.parse(value);
-               _pictureId = __pictureId;
-               break;
             case "code":
                __code = value;
                _code = __code;
@@ -670,18 +502,6 @@ public class FDataResourcePictureDataUnit
             case "label":
                __label = value;
                _label = __label;
-               break;
-            case "format_code":
-               __formatCode = value;
-               _formatCode = __formatCode;
-               break;
-            case "width":
-               __width = RInteger.parse(value);
-               _width = __width;
-               break;
-            case "height":
-               __height = RInteger.parse(value);
-               _height = __height;
                break;
             case "note":
                __note = value;
@@ -719,12 +539,8 @@ public class FDataResourcePictureDataUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("gvid", _gvid);
-      row.set("pictureId", _pictureId);
       row.set("code", _code);
       row.set("label", _label);
-      row.set("formatCode", _formatCode);
-      row.set("width", _width);
-      row.set("height", _height);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -744,12 +560,8 @@ public class FDataResourcePictureDataUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("gvid", _gvid);
-      map.put("pictureId", RLong.toString(_pictureId));
       map.put("code", _code);
       map.put("label", _label);
-      map.put("formatCode", _formatCode);
-      map.put("width", RInteger.toString(_width));
-      map.put("height", RInteger.toString(_height));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

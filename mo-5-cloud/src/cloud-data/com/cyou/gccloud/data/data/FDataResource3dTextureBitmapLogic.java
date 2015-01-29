@@ -38,25 +38,25 @@ public class FDataResource3dTextureBitmapLogic
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
+
+   // 字段全局版本标识的定义。
+   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
 
    // 字段纹理编号的定义。
    public final static SLogicFieldInfo TEXTURE_ID = new SLogicFieldInfo("TEXTURE_ID");
 
+   // 字段位图编号的定义。
+   public final static SLogicFieldInfo BITMAP_ID = new SLogicFieldInfo("BITMAP_ID");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
-   // 字段版本的定义。
-   public final static SLogicFieldInfo VERSION_NUMBER = new SLogicFieldInfo("VERSION_NUMBER");
+   // 字段标签的定义。
+   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段大小宽度的定义。
-   public final static SLogicFieldInfo SIZE_WIDTH = new SLogicFieldInfo("SIZE_WIDTH");
-
-   // 字段大小高度的定义。
-   public final static SLogicFieldInfo SIZE_HEIGHT = new SLogicFieldInfo("SIZE_HEIGHT");
-
-   // 字段注释内容的定义。
+   // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
@@ -72,7 +72,7 @@ public class FDataResource3dTextureBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,TEXTURE_ID,CODE,VERSION_NUMBER,SIZE_WIDTH,SIZE_HEIGHT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,TEXTURE_ID,BITMAP_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D纹理位图表逻辑单元。</T>
@@ -614,11 +614,11 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`GVID`");
       cmd.append(",`TEXTURE_ID`");
+      cmd.append(",`BITMAP_ID`");
       cmd.append(",`CODE`");
-      cmd.append(",`VERSION_NUMBER`");
-      cmd.append(",`SIZE_WIDTH`");
-      cmd.append(",`SIZE_HEIGHT`");
+      cmd.append(",`LABEL`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -634,12 +634,27 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      String gvid = unit.gvid();
+      if(RString.isEmpty(gvid)){
+         gvid = RUuid.makeUniqueId();
+      }
+      cmd.append(',');
+      cmd.append('\'');
+      cmd.append(gvid);
+      cmd.append('\'');
       cmd.append(',');
       long textureId = unit.textureId();
       if(textureId == 0){
          cmd.append("NULL");
       }else{
          cmd.append(textureId);
+      }
+      cmd.append(',');
+      long bitmapId = unit.bitmapId();
+      if(bitmapId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(bitmapId);
       }
       cmd.append(',');
       String code = unit.code();
@@ -651,11 +666,14 @@ public class FDataResource3dTextureBitmapLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.versionNumber());
-      cmd.append(',');
-      cmd.append(unit.sizeWidth());
-      cmd.append(',');
-      cmd.append(unit.sizeHeight());
+      String label = unit.label();
+      if(RString.isEmpty(label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -739,6 +757,17 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isGvidChanged()){
+         cmd.append(",`GVID`=");
+         String gvid = unit.gvid();
+         if(RString.isEmpty(gvid)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(gvid));
+            cmd.append('\'');
+         }
+      }
       if(unit.isTextureIdChanged()){
          cmd.append(",`TEXTURE_ID`=");
          long textureId = unit.textureId();
@@ -746,6 +775,15 @@ public class FDataResource3dTextureBitmapLogic
             cmd.append("NULL");
          }else{
             cmd.append(textureId);
+         }
+      }
+      if(unit.isBitmapIdChanged()){
+         cmd.append(",`BITMAP_ID`=");
+         long bitmapId = unit.bitmapId();
+         if(bitmapId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(bitmapId);
          }
       }
       if(unit.isCodeChanged()){
@@ -759,17 +797,16 @@ public class FDataResource3dTextureBitmapLogic
             cmd.append('\'');
          }
       }
-      if(unit.isVersionNumberChanged()){
-         cmd.append(",`VERSION_NUMBER`=");
-         cmd.append(unit.versionNumber());
-      }
-      if(unit.isSizeWidthChanged()){
-         cmd.append(",`SIZE_WIDTH`=");
-         cmd.append(unit.sizeWidth());
-      }
-      if(unit.isSizeHeightChanged()){
-         cmd.append(",`SIZE_HEIGHT`=");
-         cmd.append(unit.sizeHeight());
+      if(unit.isLabelChanged()){
+         cmd.append(",`LABEL`=");
+         String label = unit.label();
+         if(RString.isEmpty(label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

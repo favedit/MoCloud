@@ -1,15 +1,16 @@
 package org.mo.cloud.design.core.frame.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.design.core.configuration.FContentField;
 import org.mo.cloud.design.core.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>多行文本编辑器对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseMemo extends XContentObject
+public abstract class XBaseMemo
+      extends XContentObject
 {
    // 组件名称
    public static final String NAME = "Memo";

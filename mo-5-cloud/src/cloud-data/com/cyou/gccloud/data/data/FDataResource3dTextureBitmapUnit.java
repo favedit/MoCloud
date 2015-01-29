@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -30,11 +29,17 @@ public class FDataResource3dTextureBitmapUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段对象唯一标识的定义。
+   // 存储字段全局唯一标识的定义。
    private String __guid;
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    protected String _guid;
+
+   // 存储字段全局版本标识的定义。
+   private String __gvid;
+
+   // 字段全局版本标识的定义。
+   protected String _gvid;
 
    // 存储字段纹理编号的定义。
    private long __textureId;
@@ -42,34 +47,28 @@ public class FDataResource3dTextureBitmapUnit
    // 字段纹理编号的定义。
    protected long _textureId;
 
+   // 存储字段位图编号的定义。
+   private long __bitmapId;
+
+   // 字段位图编号的定义。
+   protected long _bitmapId;
+
    // 存储字段代码的定义。
    private String __code;
 
    // 字段代码的定义。
    protected String _code;
 
-   // 存储字段版本的定义。
-   private int __versionNumber;
+   // 存储字段标签的定义。
+   private String __label;
 
-   // 字段版本的定义。
-   protected int _versionNumber;
+   // 字段标签的定义。
+   protected String _label;
 
-   // 存储字段大小宽度的定义。
-   private int __sizeWidth;
-
-   // 字段大小宽度的定义。
-   protected int _sizeWidth;
-
-   // 存储字段大小高度的定义。
-   private int __sizeHeight;
-
-   // 字段大小高度的定义。
-   protected int _sizeHeight;
-
-   // 存储字段注释内容的定义。
+   // 存储字段备注的定义。
    private String __note;
 
-   // 字段注释内容的定义。
+   // 字段备注的定义。
    protected String _note;
 
    // 存储字段创建用户标识的定义。
@@ -157,7 +156,7 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
-   // <T>判断对象唯一标识的数据是否改变。</T>
+   // <T>判断全局唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -166,7 +165,7 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
-   // <T>获得对象唯一标识的数据内容。</T>
+   // <T>获得全局唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -175,12 +174,39 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
-   // <T>设置对象唯一标识的数据内容。</T>
+   // <T>设置全局唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断全局版本标识的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isGvidChanged(){
+      return !RString.equals(__gvid, _gvid);
+   }
+
+   //============================================================
+   // <T>获得全局版本标识的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String gvid(){
+      return _gvid;
+   }
+
+   //============================================================
+   // <T>设置全局版本标识的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setGvid(String value){
+      _gvid = value;
    }
 
    //============================================================
@@ -222,6 +248,44 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
+   // <T>判断位图编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isBitmapIdChanged(){
+      return __bitmapId != _bitmapId;
+   }
+
+   //============================================================
+   // <T>获得位图编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long bitmapId(){
+      return _bitmapId;
+   }
+
+   //============================================================
+   // <T>获得位图编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceBitmapUnit bitmap(){
+      FDataResourceBitmapLogic logic = _logicContext.findLogic(FDataResourceBitmapLogic.class);
+      FDataResourceBitmapUnit unit = logic.find(_bitmapId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置位图编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setBitmapId(long value){
+      _bitmapId = value;
+   }
+
+   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -249,88 +313,34 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
-   // <T>判断版本的数据是否改变。</T>
+   // <T>判断标签的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isVersionNumberChanged(){
-      return __versionNumber != _versionNumber;
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
    }
 
    //============================================================
-   // <T>获得版本的数据内容。</T>
+   // <T>获得标签的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int versionNumber(){
-      return _versionNumber;
+   public String label(){
+      return _label;
    }
 
    //============================================================
-   // <T>设置版本的数据内容。</T>
+   // <T>设置标签的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setVersionNumber(int value){
-      _versionNumber = value;
+   public void setLabel(String value){
+      _label = value;
    }
 
    //============================================================
-   // <T>判断大小宽度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isSizeWidthChanged(){
-      return __sizeWidth != _sizeWidth;
-   }
-
-   //============================================================
-   // <T>获得大小宽度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int sizeWidth(){
-      return _sizeWidth;
-   }
-
-   //============================================================
-   // <T>设置大小宽度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setSizeWidth(int value){
-      _sizeWidth = value;
-   }
-
-   //============================================================
-   // <T>判断大小高度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isSizeHeightChanged(){
-      return __sizeHeight != _sizeHeight;
-   }
-
-   //============================================================
-   // <T>获得大小高度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int sizeHeight(){
-      return _sizeHeight;
-   }
-
-   //============================================================
-   // <T>设置大小高度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setSizeHeight(int value){
-      _sizeHeight = value;
-   }
-
-   //============================================================
-   // <T>判断注释内容的数据是否改变。</T>
+   // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -339,7 +349,7 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
-   // <T>获得注释内容的数据内容。</T>
+   // <T>获得备注的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -348,7 +358,7 @@ public class FDataResource3dTextureBitmapUnit
    }
 
    //============================================================
-   // <T>设置注释内容的数据内容。</T>
+   // <T>设置备注的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -479,16 +489,16 @@ public class FDataResource3dTextureBitmapUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "gvid":
+            return _gvid;
          case "texture_id":
             return Long.toString(_textureId);
+         case "bitmap_id":
+            return Long.toString(_bitmapId);
          case "code":
             return _code;
-         case "version_number":
-            return RInteger.toString(_versionNumber);
-         case "size_width":
-            return RInteger.toString(_sizeWidth);
-         case "size_height":
-            return RInteger.toString(_sizeHeight);
+         case "label":
+            return _label;
          case "note":
             return _note;
          case "create_user_id":
@@ -522,20 +532,20 @@ public class FDataResource3dTextureBitmapUnit
          case "guid":
             _guid = value;
             break;
+         case "gvid":
+            _gvid = value;
+            break;
          case "texture_id":
             _textureId = RLong.parse(value);
+            break;
+         case "bitmap_id":
+            _bitmapId = RLong.parse(value);
             break;
          case "code":
             _code = value;
             break;
-         case "version_number":
-            _versionNumber = RInteger.parse(value);
-            break;
-         case "size_width":
-            _sizeWidth = RInteger.parse(value);
-            break;
-         case "size_height":
-            _sizeHeight = RInteger.parse(value);
+         case "label":
+            _label = value;
             break;
          case "note":
             _note = value;
@@ -579,25 +589,25 @@ public class FDataResource3dTextureBitmapUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "gvid":
+               __gvid = value;
+               _gvid = __gvid;
+               break;
             case "texture_id":
                __textureId = RLong.parse(value);
                _textureId = __textureId;
+               break;
+            case "bitmap_id":
+               __bitmapId = RLong.parse(value);
+               _bitmapId = __bitmapId;
                break;
             case "code":
                __code = value;
                _code = __code;
                break;
-            case "version_number":
-               __versionNumber = RInteger.parse(value);
-               _versionNumber = __versionNumber;
-               break;
-            case "size_width":
-               __sizeWidth = RInteger.parse(value);
-               _sizeWidth = __sizeWidth;
-               break;
-            case "size_height":
-               __sizeHeight = RInteger.parse(value);
-               _sizeHeight = __sizeHeight;
+            case "label":
+               __label = value;
+               _label = __label;
                break;
             case "note":
                __note = value;
@@ -634,11 +644,11 @@ public class FDataResource3dTextureBitmapUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("gvid", _gvid);
       row.set("textureId", _textureId);
+      row.set("bitmapId", _bitmapId);
       row.set("code", _code);
-      row.set("versionNumber", _versionNumber);
-      row.set("sizeWidth", _sizeWidth);
-      row.set("sizeHeight", _sizeHeight);
+      row.set("label", _label);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -657,11 +667,11 @@ public class FDataResource3dTextureBitmapUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("gvid", _gvid);
       map.put("textureId", RLong.toString(_textureId));
+      map.put("bitmapId", RLong.toString(_bitmapId));
       map.put("code", _code);
-      map.put("versionNumber", RInteger.toString(_versionNumber));
-      map.put("sizeWidth", RInteger.toString(_sizeWidth));
-      map.put("sizeHeight", RInteger.toString(_sizeHeight));
+      map.put("label", _label);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

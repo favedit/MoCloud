@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -11,10 +12,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D模型表逻辑单元。</T>
+// <T>资源图片数据表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dModelUnit
+public class FDataResourceBitmapImageUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -41,6 +42,12 @@ public class FDataResource3dModelUnit
    // 字段全局版本标识的定义。
    protected String _gvid;
 
+   // 存储字段位图编号的定义。
+   private long __bitmapId;
+
+   // 字段位图编号的定义。
+   protected long _bitmapId;
+
    // 存储字段代码的定义。
    private String __code;
 
@@ -52,6 +59,24 @@ public class FDataResource3dModelUnit
 
    // 字段名称的定义。
    protected String _label;
+
+   // 存储字段格式的定义。
+   private String __formatCode;
+
+   // 字段格式的定义。
+   protected String _formatCode;
+
+   // 存储字段大小宽度的定义。
+   private int __sizeWidth;
+
+   // 字段大小宽度的定义。
+   protected int _sizeWidth;
+
+   // 存储字段大小高度的定义。
+   private int __sizeHeight;
+
+   // 字段大小高度的定义。
+   protected int _sizeHeight;
 
    // 存储字段备注的定义。
    private String __note;
@@ -84,9 +109,9 @@ public class FDataResource3dModelUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D模型表逻辑单元。</T>
+   // <T>构造资源图片数据表逻辑单元。</T>
    //============================================================
-   public FDataResource3dModelUnit(){
+   public FDataResourceBitmapImageUnit(){
    }
 
    //============================================================
@@ -198,6 +223,44 @@ public class FDataResource3dModelUnit
    }
 
    //============================================================
+   // <T>判断位图编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isBitmapIdChanged(){
+      return __bitmapId != _bitmapId;
+   }
+
+   //============================================================
+   // <T>获得位图编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long bitmapId(){
+      return _bitmapId;
+   }
+
+   //============================================================
+   // <T>获得位图编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceBitmapUnit bitmap(){
+      FDataResourceBitmapLogic logic = _logicContext.findLogic(FDataResourceBitmapLogic.class);
+      FDataResourceBitmapUnit unit = logic.find(_bitmapId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置位图编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setBitmapId(long value){
+      _bitmapId = value;
+   }
+
+   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -249,6 +312,87 @@ public class FDataResource3dModelUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断格式的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFormatCodeChanged(){
+      return !RString.equals(__formatCode, _formatCode);
+   }
+
+   //============================================================
+   // <T>获得格式的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String formatCode(){
+      return _formatCode;
+   }
+
+   //============================================================
+   // <T>设置格式的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFormatCode(String value){
+      _formatCode = value;
+   }
+
+   //============================================================
+   // <T>判断大小宽度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSizeWidthChanged(){
+      return __sizeWidth != _sizeWidth;
+   }
+
+   //============================================================
+   // <T>获得大小宽度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int sizeWidth(){
+      return _sizeWidth;
+   }
+
+   //============================================================
+   // <T>设置大小宽度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSizeWidth(int value){
+      _sizeWidth = value;
+   }
+
+   //============================================================
+   // <T>判断大小高度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSizeHeightChanged(){
+      return __sizeHeight != _sizeHeight;
+   }
+
+   //============================================================
+   // <T>获得大小高度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int sizeHeight(){
+      return _sizeHeight;
+   }
+
+   //============================================================
+   // <T>设置大小高度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSizeHeight(int value){
+      _sizeHeight = value;
    }
 
    //============================================================
@@ -403,10 +547,18 @@ public class FDataResource3dModelUnit
             return _guid;
          case "gvid":
             return _gvid;
+         case "bitmap_id":
+            return Long.toString(_bitmapId);
          case "code":
             return _code;
          case "label":
             return _label;
+         case "format_code":
+            return _formatCode;
+         case "size_width":
+            return RInteger.toString(_sizeWidth);
+         case "size_height":
+            return RInteger.toString(_sizeHeight);
          case "note":
             return _note;
          case "create_user_id":
@@ -443,11 +595,23 @@ public class FDataResource3dModelUnit
          case "gvid":
             _gvid = value;
             break;
+         case "bitmap_id":
+            _bitmapId = RLong.parse(value);
+            break;
          case "code":
             _code = value;
             break;
          case "label":
             _label = value;
+            break;
+         case "format_code":
+            _formatCode = value;
+            break;
+         case "size_width":
+            _sizeWidth = RInteger.parse(value);
+            break;
+         case "size_height":
+            _sizeHeight = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -495,6 +659,10 @@ public class FDataResource3dModelUnit
                __gvid = value;
                _gvid = __gvid;
                break;
+            case "bitmap_id":
+               __bitmapId = RLong.parse(value);
+               _bitmapId = __bitmapId;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -502,6 +670,18 @@ public class FDataResource3dModelUnit
             case "label":
                __label = value;
                _label = __label;
+               break;
+            case "format_code":
+               __formatCode = value;
+               _formatCode = __formatCode;
+               break;
+            case "size_width":
+               __sizeWidth = RInteger.parse(value);
+               _sizeWidth = __sizeWidth;
+               break;
+            case "size_height":
+               __sizeHeight = RInteger.parse(value);
+               _sizeHeight = __sizeHeight;
                break;
             case "note":
                __note = value;
@@ -539,8 +719,12 @@ public class FDataResource3dModelUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("gvid", _gvid);
+      row.set("bitmapId", _bitmapId);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("formatCode", _formatCode);
+      row.set("sizeWidth", _sizeWidth);
+      row.set("sizeHeight", _sizeHeight);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -560,8 +744,12 @@ public class FDataResource3dModelUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("gvid", _gvid);
+      map.put("bitmapId", RLong.toString(_bitmapId));
       map.put("code", _code);
       map.put("label", _label);
+      map.put("formatCode", _formatCode);
+      map.put("sizeWidth", RInteger.toString(_sizeWidth));
+      map.put("sizeHeight", RInteger.toString(_sizeHeight));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

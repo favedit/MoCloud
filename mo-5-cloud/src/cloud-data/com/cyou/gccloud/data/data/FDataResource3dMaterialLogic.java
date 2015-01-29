@@ -38,11 +38,11 @@ public class FDataResource3dMaterialLogic
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段类型编号的定义。
-   public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
+   // 字段全局版本标识的定义。
+   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
 
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
@@ -50,22 +50,10 @@ public class FDataResource3dMaterialLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段散射光颜色的定义。
-   public final static SLogicFieldInfo DIFFUSE_COLOR = new SLogicFieldInfo("DIFFUSE_COLOR");
-
-   // 字段镜面光颜色的定义。
-   public final static SLogicFieldInfo SPECULAR_COLOR = new SLogicFieldInfo("SPECULAR_COLOR");
-
-   // 字段自发光颜色的定义。
-   public final static SLogicFieldInfo EMISSIVE_COLOR = new SLogicFieldInfo("EMISSIVE_COLOR");
-
-   // 字段详细描述的定义。
-   public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
-
    // 字段内容的定义。
    public final static SLogicFieldInfo CONTENT = new SLogicFieldInfo("CONTENT");
 
-   // 字段注释内容的定义。
+   // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
@@ -81,7 +69,7 @@ public class FDataResource3dMaterialLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,RESOURCE_ID,CODE,LABEL,DIFFUSE_COLOR,SPECULAR_COLOR,EMISSIVE_COLOR,DESCRIPTION,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,CODE,LABEL,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D材质表逻辑单元。</T>
@@ -623,13 +611,9 @@ public class FDataResource3dMaterialLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`RESOURCE_ID`");
+      cmd.append(",`GVID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
-      cmd.append(",`DIFFUSE_COLOR`");
-      cmd.append(",`SPECULAR_COLOR`");
-      cmd.append(",`EMISSIVE_COLOR`");
-      cmd.append(",`DESCRIPTION`");
       cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
@@ -646,13 +630,14 @@ public class FDataResource3dMaterialLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      cmd.append(',');
-      long resourceId = unit.resourceId();
-      if(resourceId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(resourceId);
+      String gvid = unit.gvid();
+      if(RString.isEmpty(gvid)){
+         gvid = RUuid.makeUniqueId();
       }
+      cmd.append(',');
+      cmd.append('\'');
+      cmd.append(gvid);
+      cmd.append('\'');
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -669,42 +654,6 @@ public class FDataResource3dMaterialLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String diffuseColor = unit.diffuseColor();
-      if(RString.isEmpty(diffuseColor)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(diffuseColor));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String specularColor = unit.specularColor();
-      if(RString.isEmpty(specularColor)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(specularColor));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String emissiveColor = unit.emissiveColor();
-      if(RString.isEmpty(emissiveColor)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(emissiveColor));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String description = unit.description();
-      if(RString.isEmpty(description)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(description));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -799,13 +748,15 @@ public class FDataResource3dMaterialLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isResourceIdChanged()){
-         cmd.append(",`RESOURCE_ID`=");
-         long resourceId = unit.resourceId();
-         if(resourceId == 0){
+      if(unit.isGvidChanged()){
+         cmd.append(",`GVID`=");
+         String gvid = unit.gvid();
+         if(RString.isEmpty(gvid)){
             cmd.append("NULL");
          }else{
-            cmd.append(resourceId);
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(gvid));
+            cmd.append('\'');
          }
       }
       if(unit.isCodeChanged()){
@@ -827,50 +778,6 @@ public class FDataResource3dMaterialLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isDiffuseColorChanged()){
-         cmd.append(",`DIFFUSE_COLOR`=");
-         String diffuseColor = unit.diffuseColor();
-         if(RString.isEmpty(diffuseColor)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(diffuseColor));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isSpecularColorChanged()){
-         cmd.append(",`SPECULAR_COLOR`=");
-         String specularColor = unit.specularColor();
-         if(RString.isEmpty(specularColor)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(specularColor));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isEmissiveColorChanged()){
-         cmd.append(",`EMISSIVE_COLOR`=");
-         String emissiveColor = unit.emissiveColor();
-         if(RString.isEmpty(emissiveColor)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(emissiveColor));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isDescriptionChanged()){
-         cmd.append(",`DESCRIPTION`=");
-         String description = unit.description();
-         if(RString.isEmpty(description)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(description));
             cmd.append('\'');
          }
       }

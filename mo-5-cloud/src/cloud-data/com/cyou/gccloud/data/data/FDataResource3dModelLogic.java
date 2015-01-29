@@ -44,9 +44,6 @@ public class FDataResource3dModelLogic
    // 字段全局版本标识的定义。
    public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
 
-   // 字段类型编号的定义。
-   public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
-
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
@@ -69,7 +66,7 @@ public class FDataResource3dModelLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,RESOURCE_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D模型表逻辑单元。</T>
@@ -612,7 +609,6 @@ public class FDataResource3dModelLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`GVID`");
-      cmd.append(",`RESOURCE_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`NOTE`");
@@ -638,13 +634,6 @@ public class FDataResource3dModelLogic
       cmd.append('\'');
       cmd.append(gvid);
       cmd.append('\'');
-      cmd.append(',');
-      long resourceId = unit.resourceId();
-      if(resourceId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(resourceId);
-      }
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -755,15 +744,6 @@ public class FDataResource3dModelLogic
             cmd.append('\'');
             cmd.append(RSql.formatValue(gvid));
             cmd.append('\'');
-         }
-      }
-      if(unit.isResourceIdChanged()){
-         cmd.append(",`RESOURCE_ID`=");
-         long resourceId = unit.resourceId();
-         if(resourceId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(resourceId);
          }
       }
       if(unit.isCodeChanged()){

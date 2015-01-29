@@ -79,10 +79,10 @@ ALTER TABLE DT_RES_RESOURCE ADD CONSTRAINT DT_RES_RES_FK_TYP
       FOREIGN KEY (`TYPE_ID`) REFERENCES DT_RES_TYPE(`OUID`); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource.Picture]
+-- Create table [Data.Resource.Bitmap]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RES_PICTURE`;
-CREATE TABLE `DT_RES_PICTURE` 
+DROP TABLE IF EXISTS `DT_RES_BITMAP`;
+CREATE TABLE `DT_RES_BITMAP` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
@@ -97,25 +97,25 @@ CREATE TABLE `DT_RES_PICTURE`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_RES_PICTURE 
-   ADD CONSTRAINT DT_RES_PIC_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_RES_BITMAP 
+   ADD CONSTRAINT DT_RES_BMP_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource.Picture.Data]
+-- Create table [Data.Resource.Bitmap.Image]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RES_PICTURE_DATA`;
-CREATE TABLE `DT_RES_PICTURE_DATA` 
+DROP TABLE IF EXISTS `DT_RES_BITMAP_IMAGE`;
+CREATE TABLE `DT_RES_BITMAP_IMAGE` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `GVID`                          VARCHAR(40), 
-   `PICTURE_ID`                    BIGINT, 
+   `BITMAP_ID`                     BIGINT, 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `FORMAT_CODE`                   VARCHAR(40), 
-   `WIDTH`                         INTEGER, 
-   `HEIGHT`                        INTEGER, 
+   `SIZE_WIDTH`                    INTEGER, 
+   `SIZE_HEIGHT`                   INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -123,11 +123,11 @@ CREATE TABLE `DT_RES_PICTURE_DATA`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_RES_PICTURE_DATA 
-   ADD CONSTRAINT DT_RES_PIC_DAT_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_RES_BITMAP_IMAGE 
+   ADD CONSTRAINT DT_RES_BMP_IMG_UK_GID UNIQUE ( GUID ); 
 
-ALTER TABLE DT_RES_PICTURE_DATA ADD CONSTRAINT DT_RES_PIC_DAT_FK_PIC 
-      FOREIGN KEY (`PICTURE_ID`) REFERENCES DT_RES_PICTURE(`OUID`); 
+ALTER TABLE DT_RES_BITMAP_IMAGE ADD CONSTRAINT DT_RES_BMP_IMG_FK_BMP 
+      FOREIGN KEY (`BITMAP_ID`) REFERENCES DT_RES_BITMAP(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Texture]
@@ -138,12 +138,10 @@ CREATE TABLE `DT_RS3_TEXTURE`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `RESOURCE_ID`                   BIGINT, 
+   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
-   `DESCRIPTION`                   VARCHAR(2000), 
-   `CONTENT`                       TEXT, 
-   `NOTE`                          VARCHAR(800), 
+   `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -152,9 +150,6 @@ CREATE TABLE `DT_RS3_TEXTURE`
 
 ALTER TABLE DT_RS3_TEXTURE 
    ADD CONSTRAINT DT_RS3_TXT_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_TEXTURE ADD CONSTRAINT DT_RS3_TXT_FK_RES 
-      FOREIGN KEY (`RESOURCE_ID`) REFERENCES DT_RES_RESOURCE(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Texture.Bitmap]
@@ -165,12 +160,12 @@ CREATE TABLE `DT_RS3_TEXTURE_BITMAP`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `TEXTURE_ID`                    BIGINT, 
+   `GVID`                          VARCHAR(40), 
+   `TEXTURE_ID`                    BIGINT NOT NULL, 
+   `BITMAP_ID`                     BIGINT NOT NULL, 
    `CODE`                          VARCHAR(80), 
-   `VERSION_NUMBER`                INTEGER, 
-   `SIZE_WIDTH`                    INTEGER, 
-   `SIZE_HEIGHT`                   INTEGER, 
-   `NOTE`                          VARCHAR(800), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -183,67 +178,8 @@ ALTER TABLE DT_RS3_TEXTURE_BITMAP
 ALTER TABLE DT_RS3_TEXTURE_BITMAP ADD CONSTRAINT DT_RS3_TXT_BMP_FK_TXT 
       FOREIGN KEY (`TEXTURE_ID`) REFERENCES DT_RS3_TEXTURE(`OUID`); 
 
--- ------------------------------------------------------------
--- Create table [Data.Resource3d.Material]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_MATERIAL`;
-CREATE TABLE `DT_RS3_MATERIAL` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `RESOURCE_ID`                   BIGINT, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(200), 
-   `DIFFUSE_COLOR`                 VARCHAR(64), 
-   `SPECULAR_COLOR`                VARCHAR(64), 
-   `EMISSIVE_COLOR`                VARCHAR(64), 
-   `DESCRIPTION`                   VARCHAR(2000), 
-   `CONTENT`                       TEXT, 
-   `NOTE`                          VARCHAR(800), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RS3_MATERIAL 
-   ADD CONSTRAINT DT_RS3_MTL_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_MATERIAL ADD CONSTRAINT DT_RS3_MTL_FK_RES 
-      FOREIGN KEY (`RESOURCE_ID`) REFERENCES DT_RES_RESOURCE(`OUID`); 
-
--- ------------------------------------------------------------
--- Create table [Data.Resource3d.Material.Texture]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_MATERIAL_TEXTURE`;
-CREATE TABLE `DT_RS3_MATERIAL_TEXTURE` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `MATERIAL_ID`                   BIGINT, 
-   `CODE`                          VARCHAR(80), 
-   `TEXTURE_ID`                    BIGINT, 
-   `TEXTURE_BITMAP_ID`             BIGINT, 
-   `NOTE`                          VARCHAR(800), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RS3_MATERIAL_TEXTURE 
-   ADD CONSTRAINT DT_RS3_MTL_TXT_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_MATERIAL_TEXTURE ADD CONSTRAINT DT_RS3_MTL_TXT_FK_MTL 
-      FOREIGN KEY (`MATERIAL_ID`) REFERENCES DT_RS3_MATERIAL(`OUID`); 
-
-ALTER TABLE DT_RS3_MATERIAL_TEXTURE ADD CONSTRAINT DT_RS3_MTL_TXT_FK_TXT 
-      FOREIGN KEY (`TEXTURE_ID`) REFERENCES DT_RS3_TEXTURE(`OUID`); 
-
-ALTER TABLE DT_RS3_MATERIAL_TEXTURE ADD CONSTRAINT DT_RS3_MTL_TXT_FK_TXT_BMP 
-      FOREIGN KEY (`TEXTURE_BITMAP_ID`) REFERENCES DT_RS3_TEXTURE_BITMAP(`OUID`); 
+ALTER TABLE DT_RS3_TEXTURE_BITMAP ADD CONSTRAINT DT_RS3_TXT_BMP_FK_BMP 
+      FOREIGN KEY (`BITMAP_ID`) REFERENCES DT_RES_BITMAP(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Model]
@@ -255,7 +191,6 @@ CREATE TABLE `DT_RS3_MODEL`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `GVID`                          VARCHAR(40), 
-   `RESOURCE_ID`                   BIGINT, 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `NOTE`                          VARCHAR(2000), 
@@ -267,9 +202,6 @@ CREATE TABLE `DT_RS3_MODEL`
 
 ALTER TABLE DT_RS3_MODEL 
    ADD CONSTRAINT DT_RS3_MOD_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_MODEL ADD CONSTRAINT DT_RS3_MOD_FK_RES 
-      FOREIGN KEY (`RESOURCE_ID`) REFERENCES DT_RES_RESOURCE(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Model.Mesh]
@@ -330,3 +262,104 @@ ALTER TABLE DT_RS3_MODEL_STREAM ADD CONSTRAINT DT_RS3_MOD_STM_FK_MOD
 
 ALTER TABLE DT_RS3_MODEL_STREAM ADD CONSTRAINT DT_RS3_MOD_STM_FK_MSH 
       FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MODEL_MESH(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Material]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_MATERIAL`;
+CREATE TABLE `DT_RS3_MATERIAL` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `CONTENT`                       TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_MATERIAL 
+   ADD CONSTRAINT DT_RS3_MTL_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Material.Texture]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_MATERIAL_TEXTURE`;
+CREATE TABLE `DT_RS3_MATERIAL_TEXTURE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MATERIAL_ID`                   BIGINT, 
+   `CODE`                          VARCHAR(80), 
+   `TEXTURE_ID`                    BIGINT, 
+   `TEXTURE_BITMAP_ID`             BIGINT, 
+   `NOTE`                          VARCHAR(800), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_MATERIAL_TEXTURE 
+   ADD CONSTRAINT DT_RS3_MTL_TXT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_MATERIAL_TEXTURE ADD CONSTRAINT DT_RS3_MTL_TXT_FK_MTL 
+      FOREIGN KEY (`MATERIAL_ID`) REFERENCES DT_RS3_MATERIAL(`OUID`); 
+
+ALTER TABLE DT_RS3_MATERIAL_TEXTURE ADD CONSTRAINT DT_RS3_MTL_TXT_FK_TXT 
+      FOREIGN KEY (`TEXTURE_ID`) REFERENCES DT_RS3_TEXTURE(`OUID`); 
+
+ALTER TABLE DT_RS3_MATERIAL_TEXTURE ADD CONSTRAINT DT_RS3_MTL_TXT_FK_TXT_BMP 
+      FOREIGN KEY (`TEXTURE_BITMAP_ID`) REFERENCES DT_RS3_TEXTURE_BITMAP(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Template]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_TEMPLATE`;
+CREATE TABLE `DT_RS3_TEMPLATE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `CONTENT`                       TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_TEMPLATE 
+   ADD CONSTRAINT DT_RS3_TPL_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Scene]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_SCENE`;
+CREATE TABLE `DT_RS3_SCENE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `GVID`                          VARCHAR(40), 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `CONTENT`                       TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_SCENE 
+   ADD CONSTRAINT DT_RS3_SCN_UK_GID UNIQUE ( GUID ); 

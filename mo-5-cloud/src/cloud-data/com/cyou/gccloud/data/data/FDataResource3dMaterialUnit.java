@@ -29,17 +29,17 @@ public class FDataResource3dMaterialUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段对象唯一标识的定义。
+   // 存储字段全局唯一标识的定义。
    private String __guid;
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段类型编号的定义。
-   private long __resourceId;
+   // 存储字段全局版本标识的定义。
+   private String __gvid;
 
-   // 字段类型编号的定义。
-   protected long _resourceId;
+   // 字段全局版本标识的定义。
+   protected String _gvid;
 
    // 存储字段代码的定义。
    private String __code;
@@ -53,40 +53,16 @@ public class FDataResource3dMaterialUnit
    // 字段名称的定义。
    protected String _label;
 
-   // 存储字段散射光颜色的定义。
-   private String __diffuseColor;
-
-   // 字段散射光颜色的定义。
-   protected String _diffuseColor;
-
-   // 存储字段镜面光颜色的定义。
-   private String __specularColor;
-
-   // 字段镜面光颜色的定义。
-   protected String _specularColor;
-
-   // 存储字段自发光颜色的定义。
-   private String __emissiveColor;
-
-   // 字段自发光颜色的定义。
-   protected String _emissiveColor;
-
-   // 存储字段详细描述的定义。
-   private String __description;
-
-   // 字段详细描述的定义。
-   protected String _description;
-
    // 存储字段内容的定义。
    private String __content;
 
    // 字段内容的定义。
    protected String _content;
 
-   // 存储字段注释内容的定义。
+   // 存储字段备注的定义。
    private String __note;
 
-   // 字段注释内容的定义。
+   // 字段备注的定义。
    protected String _note;
 
    // 存储字段创建用户标识的定义。
@@ -174,7 +150,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>判断对象唯一标识的数据是否改变。</T>
+   // <T>判断全局唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -183,7 +159,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>获得对象唯一标识的数据内容。</T>
+   // <T>获得全局唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -192,7 +168,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>设置对象唯一标识的数据内容。</T>
+   // <T>设置全局唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -201,41 +177,30 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>判断类型编号的数据是否改变。</T>
+   // <T>判断全局版本标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isResourceIdChanged(){
-      return __resourceId != _resourceId;
+   public boolean isGvidChanged(){
+      return !RString.equals(__gvid, _gvid);
    }
 
    //============================================================
-   // <T>获得类型编号的数据内容。</T>
+   // <T>获得全局版本标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long resourceId(){
-      return _resourceId;
+   public String gvid(){
+      return _gvid;
    }
 
    //============================================================
-   // <T>获得类型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceResourceUnit resource(){
-      FDataResourceResourceLogic logic = _logicContext.findLogic(FDataResourceResourceLogic.class);
-      FDataResourceResourceUnit unit = logic.find(_resourceId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置类型编号的数据内容。</T>
+   // <T>设置全局版本标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setResourceId(long value){
-      _resourceId = value;
+   public void setGvid(String value){
+      _gvid = value;
    }
 
    //============================================================
@@ -293,114 +258,6 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>判断散射光颜色的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDiffuseColorChanged(){
-      return !RString.equals(__diffuseColor, _diffuseColor);
-   }
-
-   //============================================================
-   // <T>获得散射光颜色的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String diffuseColor(){
-      return _diffuseColor;
-   }
-
-   //============================================================
-   // <T>设置散射光颜色的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDiffuseColor(String value){
-      _diffuseColor = value;
-   }
-
-   //============================================================
-   // <T>判断镜面光颜色的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isSpecularColorChanged(){
-      return !RString.equals(__specularColor, _specularColor);
-   }
-
-   //============================================================
-   // <T>获得镜面光颜色的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String specularColor(){
-      return _specularColor;
-   }
-
-   //============================================================
-   // <T>设置镜面光颜色的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setSpecularColor(String value){
-      _specularColor = value;
-   }
-
-   //============================================================
-   // <T>判断自发光颜色的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isEmissiveColorChanged(){
-      return !RString.equals(__emissiveColor, _emissiveColor);
-   }
-
-   //============================================================
-   // <T>获得自发光颜色的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String emissiveColor(){
-      return _emissiveColor;
-   }
-
-   //============================================================
-   // <T>设置自发光颜色的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setEmissiveColor(String value){
-      _emissiveColor = value;
-   }
-
-   //============================================================
-   // <T>判断详细描述的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDescriptionChanged(){
-      return !RString.equals(__description, _description);
-   }
-
-   //============================================================
-   // <T>获得详细描述的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String description(){
-      return _description;
-   }
-
-   //============================================================
-   // <T>设置详细描述的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDescription(String value){
-      _description = value;
-   }
-
-   //============================================================
    // <T>判断内容的数据是否改变。</T>
    //
    // @return 数据内容
@@ -428,7 +285,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>判断注释内容的数据是否改变。</T>
+   // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -437,7 +294,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>获得注释内容的数据内容。</T>
+   // <T>获得备注的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -446,7 +303,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>设置注释内容的数据内容。</T>
+   // <T>设置备注的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -577,20 +434,12 @@ public class FDataResource3dMaterialUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "resource_id":
-            return Long.toString(_resourceId);
+         case "gvid":
+            return _gvid;
          case "code":
             return _code;
          case "label":
             return _label;
-         case "diffuse_color":
-            return _diffuseColor;
-         case "specular_color":
-            return _specularColor;
-         case "emissive_color":
-            return _emissiveColor;
-         case "description":
-            return _description;
          case "content":
             return _content;
          case "note":
@@ -626,26 +475,14 @@ public class FDataResource3dMaterialUnit
          case "guid":
             _guid = value;
             break;
-         case "resource_id":
-            _resourceId = RLong.parse(value);
+         case "gvid":
+            _gvid = value;
             break;
          case "code":
             _code = value;
             break;
          case "label":
             _label = value;
-            break;
-         case "diffuse_color":
-            _diffuseColor = value;
-            break;
-         case "specular_color":
-            _specularColor = value;
-            break;
-         case "emissive_color":
-            _emissiveColor = value;
-            break;
-         case "description":
-            _description = value;
             break;
          case "content":
             _content = value;
@@ -692,9 +529,9 @@ public class FDataResource3dMaterialUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "resource_id":
-               __resourceId = RLong.parse(value);
-               _resourceId = __resourceId;
+            case "gvid":
+               __gvid = value;
+               _gvid = __gvid;
                break;
             case "code":
                __code = value;
@@ -703,22 +540,6 @@ public class FDataResource3dMaterialUnit
             case "label":
                __label = value;
                _label = __label;
-               break;
-            case "diffuse_color":
-               __diffuseColor = value;
-               _diffuseColor = __diffuseColor;
-               break;
-            case "specular_color":
-               __specularColor = value;
-               _specularColor = __specularColor;
-               break;
-            case "emissive_color":
-               __emissiveColor = value;
-               _emissiveColor = __emissiveColor;
-               break;
-            case "description":
-               __description = value;
-               _description = __description;
                break;
             case "content":
                __content = value;
@@ -759,13 +580,9 @@ public class FDataResource3dMaterialUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("resourceId", _resourceId);
+      row.set("gvid", _gvid);
       row.set("code", _code);
       row.set("label", _label);
-      row.set("diffuseColor", _diffuseColor);
-      row.set("specularColor", _specularColor);
-      row.set("emissiveColor", _emissiveColor);
-      row.set("description", _description);
       row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
@@ -785,13 +602,9 @@ public class FDataResource3dMaterialUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("resourceId", RLong.toString(_resourceId));
+      map.put("gvid", _gvid);
       map.put("code", _code);
       map.put("label", _label);
-      map.put("diffuseColor", _diffuseColor);
-      map.put("specularColor", _specularColor);
-      map.put("emissiveColor", _emissiveColor);
-      map.put("description", _description);
       map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));

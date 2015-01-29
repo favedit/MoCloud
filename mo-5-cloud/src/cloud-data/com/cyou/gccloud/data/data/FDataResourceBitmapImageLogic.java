@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源3D纹理表逻辑。</T>
+// <T>资源图片数据表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dTextureLogic
+public class FDataResourceBitmapImageLogic
       extends FLogicTable
 {
-   // 资源3D纹理表的定义。
+   // 资源图片数据表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源3D纹理表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.texture", "DT_RS3_TEXTURE");
+   // 资源图片数据表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource.bitmap.image", "DT_RES_BITMAP_IMAGE");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -44,11 +44,23 @@ public class FDataResource3dTextureLogic
    // 字段全局版本标识的定义。
    public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
 
+   // 字段位图编号的定义。
+   public final static SLogicFieldInfo BITMAP_ID = new SLogicFieldInfo("BITMAP_ID");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段格式的定义。
+   public final static SLogicFieldInfo FORMAT_CODE = new SLogicFieldInfo("FORMAT_CODE");
+
+   // 字段大小宽度的定义。
+   public final static SLogicFieldInfo SIZE_WIDTH = new SLogicFieldInfo("SIZE_WIDTH");
+
+   // 字段大小高度的定义。
+   public final static SLogicFieldInfo SIZE_HEIGHT = new SLogicFieldInfo("SIZE_HEIGHT");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -66,25 +78,25 @@ public class FDataResource3dTextureLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,BITMAP_ID,CODE,LABEL,FORMAT_CODE,SIZE_WIDTH,SIZE_HEIGHT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源3D纹理表逻辑单元。</T>
+   // <T>构造资源图片数据表逻辑单元。</T>
    //============================================================
-   public FDataResource3dTextureLogic(){
+   public FDataResourceBitmapImageLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResource3dTextureUnit.class;
+      _classUnit = FDataResourceBitmapImageUnit.class;
    }
 
    //============================================================
-   // <T>构造资源3D纹理表逻辑单元。</T>
+   // <T>构造资源图片数据表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResource3dTextureLogic(ILogicContext context){
+   public FDataResourceBitmapImageLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResource3dTextureUnit.class;
+      _classUnit = FDataResourceBitmapImageUnit.class;
    }
 
    //============================================================
@@ -218,7 +230,7 @@ public class FDataResource3dTextureLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResource3dTextureUnit());
+            unit = (T)(new FDataResourceBitmapImageUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -234,8 +246,8 @@ public class FDataResource3dTextureLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResource3dTextureUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResource3dTextureUnit.class, guid);
+   public FDataResourceBitmapImageUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataResourceBitmapImageUnit.class, guid);
    }
 
    //============================================================
@@ -273,8 +285,8 @@ public class FDataResource3dTextureLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResource3dTextureUnit search(CharSequence whereSql){
-      return search(null, FDataResource3dTextureUnit.class, whereSql);
+   public FDataResourceBitmapImageUnit search(CharSequence whereSql){
+      return search(null, FDataResourceBitmapImageUnit.class, whereSql);
    }
 
    //============================================================
@@ -311,7 +323,7 @@ public class FDataResource3dTextureLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -322,8 +334,8 @@ public class FDataResource3dTextureLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetch(int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetch(int pageSize,
+                                                            int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -335,9 +347,9 @@ public class FDataResource3dTextureLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetch(CharSequence whereSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetch(CharSequence whereSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -350,10 +362,10 @@ public class FDataResource3dTextureLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetch(CharSequence whereSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetch(CharSequence whereSql,
+                                                            CharSequence orderSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -367,11 +379,11 @@ public class FDataResource3dTextureLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetch(CharSequence fields,
-                                                          CharSequence whereSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetch(CharSequence fields,
+                                                            CharSequence whereSql,
+                                                            CharSequence orderSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -385,12 +397,12 @@ public class FDataResource3dTextureLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetch(CharSequence fields,
-                                                          CharSequence whereSql,
-                                                          CharSequence groupSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetch(CharSequence fields,
+                                                            CharSequence whereSql,
+                                                            CharSequence groupSql,
+                                                            CharSequence orderSql,
+                                                            int pageSize,
+                                                            int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -495,10 +507,10 @@ public class FDataResource3dTextureLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetchSql(CharSequence code,
-                                                             CharSequence sql,
-                                                             int pageSize,
-                                                             int page){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetchSql(CharSequence code,
+                                                               CharSequence sql,
+                                                               int pageSize,
+                                                               int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -523,7 +535,7 @@ public class FDataResource3dTextureLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dTextureUnit>(FDataResource3dTextureUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataResourceBitmapImageUnit>(FDataResourceBitmapImageUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -536,7 +548,7 @@ public class FDataResource3dTextureLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dTextureUnit> fetchAll(){
+   public FLogicDataset<FDataResourceBitmapImageUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -549,8 +561,8 @@ public class FDataResource3dTextureLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResource3dTextureUnit doPrepare(){
-      FDataResource3dTextureUnit unit = new FDataResource3dTextureUnit();
+   public FDataResourceBitmapImageUnit doPrepare(){
+      FDataResourceBitmapImageUnit unit = new FDataResourceBitmapImageUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -577,7 +589,7 @@ public class FDataResource3dTextureLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResource3dTextureUnit unit = (FDataResource3dTextureUnit)logicUnit;
+      FDataResourceBitmapImageUnit unit = (FDataResourceBitmapImageUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -591,7 +603,7 @@ public class FDataResource3dTextureLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResource3dTextureUnit unit = (FDataResource3dTextureUnit)logicUnit;
+      FDataResourceBitmapImageUnit unit = (FDataResourceBitmapImageUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -609,8 +621,12 @@ public class FDataResource3dTextureLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`GVID`");
+      cmd.append(",`BITMAP_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`FORMAT_CODE`");
+      cmd.append(",`SIZE_WIDTH`");
+      cmd.append(",`SIZE_HEIGHT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -635,6 +651,13 @@ public class FDataResource3dTextureLogic
       cmd.append(gvid);
       cmd.append('\'');
       cmd.append(',');
+      long bitmapId = unit.bitmapId();
+      if(bitmapId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(bitmapId);
+      }
+      cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
          cmd.append("NULL");
@@ -652,6 +675,19 @@ public class FDataResource3dTextureLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
+      cmd.append(',');
+      String formatCode = unit.formatCode();
+      if(RString.isEmpty(formatCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(formatCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.sizeWidth());
+      cmd.append(',');
+      cmd.append(unit.sizeHeight());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -696,7 +732,7 @@ public class FDataResource3dTextureLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResource3dTextureUnit unit = (FDataResource3dTextureUnit)logicUnit;
+      FDataResourceBitmapImageUnit unit = (FDataResourceBitmapImageUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -715,7 +751,7 @@ public class FDataResource3dTextureLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResource3dTextureUnit unit = (FDataResource3dTextureUnit)logicUnit;
+      FDataResourceBitmapImageUnit unit = (FDataResourceBitmapImageUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -746,6 +782,15 @@ public class FDataResource3dTextureLogic
             cmd.append('\'');
          }
       }
+      if(unit.isBitmapIdChanged()){
+         cmd.append(",`BITMAP_ID`=");
+         long bitmapId = unit.bitmapId();
+         if(bitmapId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(bitmapId);
+         }
+      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();
@@ -767,6 +812,25 @@ public class FDataResource3dTextureLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
+      }
+      if(unit.isFormatCodeChanged()){
+         cmd.append(",`FORMAT_CODE`=");
+         String formatCode = unit.formatCode();
+         if(RString.isEmpty(formatCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(formatCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isSizeWidthChanged()){
+         cmd.append(",`SIZE_WIDTH`=");
+         cmd.append(unit.sizeWidth());
+      }
+      if(unit.isSizeHeightChanged()){
+         cmd.append(",`SIZE_HEIGHT`=");
+         cmd.append(unit.sizeHeight());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
@@ -799,7 +863,7 @@ public class FDataResource3dTextureLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResource3dTextureUnit unit = (FDataResource3dTextureUnit)logicUnit;
+      FDataResourceBitmapImageUnit unit = (FDataResourceBitmapImageUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

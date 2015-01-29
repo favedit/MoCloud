@@ -1,15 +1,16 @@
 package org.mo.cloud.design.core.dataset.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.design.core.configuration.FContentField;
 import org.mo.cloud.design.core.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>字符串字段对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseFieldString extends XContentObject
+public abstract class XBaseFieldString
+      extends XContentObject
 {
    // 组件名称
    public static final String NAME = "FieldString";

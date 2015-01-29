@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源图片表逻辑单元。</T>
+// <T>资源3D场景表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourcePictureUnit
+public class FDataResource3dSceneUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -53,6 +53,12 @@ public class FDataResourcePictureUnit
    // 字段名称的定义。
    protected String _label;
 
+   // 存储字段内容的定义。
+   private String __content;
+
+   // 字段内容的定义。
+   protected String _content;
+
    // 存储字段备注的定义。
    private String __note;
 
@@ -84,9 +90,9 @@ public class FDataResourcePictureUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源图片表逻辑单元。</T>
+   // <T>构造资源3D场景表逻辑单元。</T>
    //============================================================
-   public FDataResourcePictureUnit(){
+   public FDataResource3dSceneUnit(){
    }
 
    //============================================================
@@ -252,6 +258,33 @@ public class FDataResourcePictureUnit
    }
 
    //============================================================
+   // <T>判断内容的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isContentChanged(){
+      return !RString.equals(__content, _content);
+   }
+
+   //============================================================
+   // <T>获得内容的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String content(){
+      return _content;
+   }
+
+   //============================================================
+   // <T>设置内容的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setContent(String value){
+      _content = value;
+   }
+
+   //============================================================
    // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
@@ -407,6 +440,8 @@ public class FDataResourcePictureUnit
             return _code;
          case "label":
             return _label;
+         case "content":
+            return _content;
          case "note":
             return _note;
          case "create_user_id":
@@ -448,6 +483,9 @@ public class FDataResourcePictureUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "content":
+            _content = value;
             break;
          case "note":
             _note = value;
@@ -503,6 +541,10 @@ public class FDataResourcePictureUnit
                __label = value;
                _label = __label;
                break;
+            case "content":
+               __content = value;
+               _content = __content;
+               break;
             case "note":
                __note = value;
                _note = __note;
@@ -541,6 +583,7 @@ public class FDataResourcePictureUnit
       row.set("gvid", _gvid);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -562,6 +605,7 @@ public class FDataResourcePictureUnit
       map.put("gvid", _gvid);
       map.put("code", _code);
       map.put("label", _label);
+      map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

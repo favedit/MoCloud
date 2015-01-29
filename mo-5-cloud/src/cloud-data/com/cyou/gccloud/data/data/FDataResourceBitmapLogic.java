@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源图片数据表逻辑。</T>
+// <T>资源位图表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourcePictureDataLogic
+public class FDataResourceBitmapLogic
       extends FLogicTable
 {
-   // 资源图片数据表的定义。
+   // 资源位图表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源图片数据表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource.picture.data", "DT_RES_PICTURE_DATA");
+   // 资源位图表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource.bitmap", "DT_RES_BITMAP");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -44,23 +44,11 @@ public class FDataResourcePictureDataLogic
    // 字段全局版本标识的定义。
    public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
 
-   // 字段图片编号的定义。
-   public final static SLogicFieldInfo PICTURE_ID = new SLogicFieldInfo("PICTURE_ID");
-
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
-
-   // 字段格式的定义。
-   public final static SLogicFieldInfo FORMAT_CODE = new SLogicFieldInfo("FORMAT_CODE");
-
-   // 字段宽度的定义。
-   public final static SLogicFieldInfo WIDTH = new SLogicFieldInfo("WIDTH");
-
-   // 字段高度的定义。
-   public final static SLogicFieldInfo HEIGHT = new SLogicFieldInfo("HEIGHT");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -78,25 +66,25 @@ public class FDataResourcePictureDataLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,PICTURE_ID,CODE,LABEL,FORMAT_CODE,WIDTH,HEIGHT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,GVID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源图片数据表逻辑单元。</T>
+   // <T>构造资源位图表逻辑单元。</T>
    //============================================================
-   public FDataResourcePictureDataLogic(){
+   public FDataResourceBitmapLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResourcePictureDataUnit.class;
+      _classUnit = FDataResourceBitmapUnit.class;
    }
 
    //============================================================
-   // <T>构造资源图片数据表逻辑单元。</T>
+   // <T>构造资源位图表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResourcePictureDataLogic(ILogicContext context){
+   public FDataResourceBitmapLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResourcePictureDataUnit.class;
+      _classUnit = FDataResourceBitmapUnit.class;
    }
 
    //============================================================
@@ -230,7 +218,7 @@ public class FDataResourcePictureDataLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResourcePictureDataUnit());
+            unit = (T)(new FDataResourceBitmapUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -246,8 +234,8 @@ public class FDataResourcePictureDataLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResourcePictureDataUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResourcePictureDataUnit.class, guid);
+   public FDataResourceBitmapUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataResourceBitmapUnit.class, guid);
    }
 
    //============================================================
@@ -285,8 +273,8 @@ public class FDataResourcePictureDataLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResourcePictureDataUnit search(CharSequence whereSql){
-      return search(null, FDataResourcePictureDataUnit.class, whereSql);
+   public FDataResourceBitmapUnit search(CharSequence whereSql){
+      return search(null, FDataResourceBitmapUnit.class, whereSql);
    }
 
    //============================================================
@@ -323,7 +311,7 @@ public class FDataResourcePictureDataLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataResourceBitmapUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -334,8 +322,8 @@ public class FDataResourcePictureDataLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetch(int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataResourceBitmapUnit> fetch(int pageSize,
+                                                       int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -347,9 +335,9 @@ public class FDataResourcePictureDataLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetch(CharSequence whereSql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataResourceBitmapUnit> fetch(CharSequence whereSql,
+                                                       int pageSize,
+                                                       int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -362,10 +350,10 @@ public class FDataResourcePictureDataLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetch(CharSequence whereSql,
-                                                            CharSequence orderSql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataResourceBitmapUnit> fetch(CharSequence whereSql,
+                                                       CharSequence orderSql,
+                                                       int pageSize,
+                                                       int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -379,11 +367,11 @@ public class FDataResourcePictureDataLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetch(CharSequence fields,
-                                                            CharSequence whereSql,
-                                                            CharSequence orderSql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataResourceBitmapUnit> fetch(CharSequence fields,
+                                                       CharSequence whereSql,
+                                                       CharSequence orderSql,
+                                                       int pageSize,
+                                                       int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -397,12 +385,12 @@ public class FDataResourcePictureDataLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetch(CharSequence fields,
-                                                            CharSequence whereSql,
-                                                            CharSequence groupSql,
-                                                            CharSequence orderSql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataResourceBitmapUnit> fetch(CharSequence fields,
+                                                       CharSequence whereSql,
+                                                       CharSequence groupSql,
+                                                       CharSequence orderSql,
+                                                       int pageSize,
+                                                       int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -507,10 +495,10 @@ public class FDataResourcePictureDataLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetchSql(CharSequence code,
-                                                               CharSequence sql,
-                                                               int pageSize,
-                                                               int page){
+   public FLogicDataset<FDataResourceBitmapUnit> fetchSql(CharSequence code,
+                                                          CharSequence sql,
+                                                          int pageSize,
+                                                          int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -535,7 +523,7 @@ public class FDataResourcePictureDataLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResourcePictureDataUnit>(FDataResourcePictureDataUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataResourceBitmapUnit>(FDataResourceBitmapUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -548,7 +536,7 @@ public class FDataResourcePictureDataLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourcePictureDataUnit> fetchAll(){
+   public FLogicDataset<FDataResourceBitmapUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -561,8 +549,8 @@ public class FDataResourcePictureDataLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResourcePictureDataUnit doPrepare(){
-      FDataResourcePictureDataUnit unit = new FDataResourcePictureDataUnit();
+   public FDataResourceBitmapUnit doPrepare(){
+      FDataResourceBitmapUnit unit = new FDataResourceBitmapUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -589,7 +577,7 @@ public class FDataResourcePictureDataLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResourcePictureDataUnit unit = (FDataResourcePictureDataUnit)logicUnit;
+      FDataResourceBitmapUnit unit = (FDataResourceBitmapUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -603,7 +591,7 @@ public class FDataResourcePictureDataLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResourcePictureDataUnit unit = (FDataResourcePictureDataUnit)logicUnit;
+      FDataResourceBitmapUnit unit = (FDataResourceBitmapUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -621,12 +609,8 @@ public class FDataResourcePictureDataLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`GVID`");
-      cmd.append(",`PICTURE_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
-      cmd.append(",`FORMAT_CODE`");
-      cmd.append(",`WIDTH`");
-      cmd.append(",`HEIGHT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -651,13 +635,6 @@ public class FDataResourcePictureDataLogic
       cmd.append(gvid);
       cmd.append('\'');
       cmd.append(',');
-      long pictureId = unit.pictureId();
-      if(pictureId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(pictureId);
-      }
-      cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
          cmd.append("NULL");
@@ -675,19 +652,6 @@ public class FDataResourcePictureDataLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
-      cmd.append(',');
-      String formatCode = unit.formatCode();
-      if(RString.isEmpty(formatCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(formatCode));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.width());
-      cmd.append(',');
-      cmd.append(unit.height());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -732,7 +696,7 @@ public class FDataResourcePictureDataLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResourcePictureDataUnit unit = (FDataResourcePictureDataUnit)logicUnit;
+      FDataResourceBitmapUnit unit = (FDataResourceBitmapUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -751,7 +715,7 @@ public class FDataResourcePictureDataLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResourcePictureDataUnit unit = (FDataResourcePictureDataUnit)logicUnit;
+      FDataResourceBitmapUnit unit = (FDataResourceBitmapUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -782,15 +746,6 @@ public class FDataResourcePictureDataLogic
             cmd.append('\'');
          }
       }
-      if(unit.isPictureIdChanged()){
-         cmd.append(",`PICTURE_ID`=");
-         long pictureId = unit.pictureId();
-         if(pictureId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(pictureId);
-         }
-      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();
@@ -812,25 +767,6 @@ public class FDataResourcePictureDataLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
-      }
-      if(unit.isFormatCodeChanged()){
-         cmd.append(",`FORMAT_CODE`=");
-         String formatCode = unit.formatCode();
-         if(RString.isEmpty(formatCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(formatCode));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isWidthChanged()){
-         cmd.append(",`WIDTH`=");
-         cmd.append(unit.width());
-      }
-      if(unit.isHeightChanged()){
-         cmd.append(",`HEIGHT`=");
-         cmd.append(unit.height());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
@@ -863,7 +799,7 @@ public class FDataResourcePictureDataLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResourcePictureDataUnit unit = (FDataResourcePictureDataUnit)logicUnit;
+      FDataResourceBitmapUnit unit = (FDataResourceBitmapUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
