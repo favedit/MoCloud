@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.template.MaterialForm" update_date="20141210134046">
+<Form name="design3d.template.MaterialForm" label="材质属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
+   <Panel name='panelName' icon='design.panel.icon' label='基本属性'>
+      <Edit name="length" label="编码:" label_size='80,0' valid="Y" edit_size='120,0' input_size='120,0' note="" />
+      <Edit name="length" label="名称:" label_size='80,0' valid="Y" edit_size='120,0' input_size='120,0' note="" />
+   </Panel>
+   <Panel name='size1' icon='design.panel.icon' label='环境参数'>
+      <Edit name="ambientColor" label="颜色:" label_size='80,0' valid="Y" edit_size='120,0' input_size='120,0' note="" />
+   </Panel>
+   <Panel name='size1' icon='design.panel.icon' label='散射参数'>
+      <Edit name="diffuseColor" label="颜色:" label_size='80,0' valid="Y" edit_size='120,0' input_size='120,0' note="" />
+   </Panel>
+   <Panel name='size2' icon='design.panel.icon' label='高光参数'>
+      <Edit name="specularColor" label="颜色:" label_size='80,0' valid="Y" edit_size='120,0' input_size='120,0' note="" />
+      <Edit name="specularLevel" label="级别:" label_size='80,0' valid="Y" edit_size='120,0' input_size='120,0' note="" />
+   </Panel>
+</Form>
+</Content>

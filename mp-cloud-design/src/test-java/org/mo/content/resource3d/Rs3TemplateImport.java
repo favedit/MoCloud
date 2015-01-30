@@ -13,7 +13,7 @@ public class Rs3TemplateImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String rootPath = "D:/Microbject";
+      String rootPath = "E:/Microbject";
       String configPath = rootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");

@@ -18,9 +18,6 @@ import org.mo.content.resource3d.common.FRs3Theme;
 public class FRs3Template
       extends FRs3Resource
 {
-   // 唯一编号
-   protected String _guid;
-
    // 材质集合
    protected FDictionary<FRs3MaterialGroup> _materialGroups = new FDictionary<FRs3MaterialGroup>(FRs3MaterialGroup.class);
 
@@ -34,24 +31,6 @@ public class FRs3Template
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3Template(){
-   }
-
-   //============================================================
-   // <T>获得唯一编号。</T>
-   //
-   // @return 唯一编号
-   //============================================================
-   public String guid(){
-      return _guid;
-   }
-
-   //============================================================
-   // <T>设置唯一编号。</T>
-   //
-   // @return 唯一编号
-   //============================================================
-   public void setGuid(String guid){
-      _guid = guid;
    }
 
    //============================================================
@@ -104,8 +83,14 @@ public class FRs3Template
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      // 输入出属性
-      output.writeString(_guid);
+      super.serialize(output);
+      // 输出材质组集合
+      int materialGroupCount = _materialGroups.count();
+      output.writeInt16((short)materialGroupCount);
+      for(int i = 0; i < materialGroupCount; i++){
+         FRs3MaterialGroup materialGroup = _materialGroups.value(i);
+         materialGroup.serialize(output);
+      }
       // 输出主题集合
       int themeCount = _themes.count();
       output.writeInt16((short)themeCount);

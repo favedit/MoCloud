@@ -41,6 +41,9 @@ public class FRs3Theme
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      // 输出属性
+      output.writeString(_guid);
+      output.writeString(_code);
       // 输出网格集合
       int materialCount = _materials.count();
       output.writeInt16((short)materialCount);

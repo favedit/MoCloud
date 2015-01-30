@@ -1,0 +1,21 @@
+/*  C:\Users\{user_name}\AppData\Local\Google\Chrome\User Data\Default\User StyleSheets\Custom.css */
+body.platform-mac .monospace, body.platform-mac .source-code {
+    font-size: 12px !important;
+    font-family: NSimSun;
+}
+
+body.platform-mac.platform-mac-snowleopard .monospace,
+body.platform-mac.platform-mac-snowleopard .source-code {
+    font-size: 12px !important;
+    font-family: NSimSun;
+}
+
+body.platform-windows .monospace, body.platform-windows .source-code {
+    font-size: 12px !important;
+    font-family: NSimSun;
+}
+
+body.platform-linux .monospace, body.platform-linux .source-code {
+    font-size: 12px !important;
+    font-family: NSimSun;
+}
