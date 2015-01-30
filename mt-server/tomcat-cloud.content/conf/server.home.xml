@@ -19,6 +19,7 @@
          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="localhost_access_log." suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
          <Context path="" docBase="D:/Microbject/MoCloud/mp-cloud-content/webroot" workDir="D:/Microbject/MoCloud/mt-temp/mp-cloud-content" reloadable="true" crossContext="false"/>
          <Context path="/script" docBase="D:/Microbject/MoScript/source" workDir="D:/Microbject/MoCloud/mt-temp/script-source" reloadable="true" crossContext="false"/>
+         <Context path="/script2" docBase="D:/Microbject/MoScript/source-v2" workDir="D:/Microbject/MoCloud/mt-temp/script-source-v2" reloadable="true" crossContext="false"/>
       </Host>
    </Engine>
    </Service>
