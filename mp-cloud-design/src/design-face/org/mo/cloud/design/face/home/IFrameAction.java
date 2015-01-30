@@ -6,7 +6,7 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
-public interface IHomeAction
+public interface IFrameAction
 {
    //============================================================
    // <T>默认跳转</T>

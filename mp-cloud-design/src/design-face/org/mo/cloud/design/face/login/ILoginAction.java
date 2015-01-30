@@ -8,6 +8,17 @@ import org.mo.web.protocol.context.IWebContext;
 
 public interface ILoginAction
 {
+   //============================================================
+   // <T>默认跳转</T>
+   //
+   // @param context 环境
+   // @param page 容器
+   // @return 处理结果
+   //============================================================
+   String construct(IWebContext context,
+                    @ASqlConnect(name = "CD_DATA") ILogicContext logicContext,
+                    FBasePage basePage);
+
    // ============================================================
    // <T>用户登陆</T>
    //
@@ -17,7 +28,7 @@ public interface ILoginAction
    // @return 要跳转页面
    // ============================================================
    String login(IWebContext context,
-                @ASqlConnect(name = "GCDATA") ILogicContext logicContext,
+                @ASqlConnect(name = "CD_DATA") ILogicContext logicContext,
                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
@@ -29,6 +40,6 @@ public interface ILoginAction
    // @return 要跳转页面
    // ============================================================
    String loginOut(IWebContext context,
-                   @ASqlConnect(name = "GCDATA") ILogicContext logicContext,
+                   @ASqlConnect(name = "CD_DATA") ILogicContext logicContext,
                    @AContainer(name = "basePage") FBasePage basePage);
 }

@@ -37,7 +37,8 @@ public class FPersonConsole
       if(personUserList.count() > 1){
          return "有重复用户名，数据异常。";
       }
-      if(personUserList.first().password().equals(password)){
+
+      if(personUserList.first() != null && personUserList.first().password().equals(password)){
          basePage.setUser(personUserList.first());
          return "1";
       }else{
@@ -59,8 +60,9 @@ public class FPersonConsole
       //条件
       StringBuffer sqlString = new StringBuffer();
       sqlString.append(FDataPersonUserLogic.PASSPORT);
-      sqlString.append(" = ");
+      sqlString.append(" = '");
       sqlString.append(passport);
+      sqlString.append("'");
 
       FLogicDataset<FDataPersonUserUnit> personUserList = personLogic.fetch(sqlString, 0, 0);
       return personUserList;

@@ -6,12 +6,12 @@ import org.mo.com.logging.RLogger;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
-public class FHomeAction
+public class FFrameAction
       implements
          IHomeAction
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FHomeAction.class);
+   private static ILogger _logger = RLogger.find(FFrameAction.class);
 
    //============================================================
    // <T>默认跳转。</T>
@@ -25,7 +25,7 @@ public class FHomeAction
                            ILogicContext logicContext,
                            FBasePage basePage){
       _logger.debug(this, "construct", "construct begin.");
-      return "#/manage/home/Frame";
+      return "#/design/home/Frame";
    }
 
    //============================================================

@@ -7,12 +7,11 @@
     <title>后台管理系统</title>
 	<link rel="stylesheet" href="/design/acs/style.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/design/acs/login.css" type="text/css" media="screen" />
-    <script type="text/javascript" src="/design/ajs/cookie.js" ></script>
-    <script type="text/javascript" src="/design/ajs/jquery.min.js" ></script>    
+    <script type="text/javascript" src="/design/ajs/cookie.js" ></script> 
+    <jsp:include page="/design/manage/component/jeui.jsp"></jsp:include>
     <script type="text/javascript" src="/design/ajs/myselfJs.js" ></script>
 </head>
 <script type="text/javascript">
-
 $(function(){
 	var passport = getCookieValue("passport");
 	if(passport != ""){
@@ -30,13 +29,17 @@ function submitForm(){
 			alertx("请输入密码","'warning'");
 			return;
 		}		
+		progress();
 		var data ={"passport":$("#passport").val(),"password":$("#password").val()};		
 		$.ajax({
 		   type: "POST",
-		   url: "/design/login/Login.wa?do=login&date="+new Date().valueOf(),
+		   //url: "/design/login/Login.wa?do=login&date="+new Date().valueOf(),
+		   url: "/design/home/Home.wa",
 		   data:data,
 		   success: function(msg){
-			  if(msg == '1'){	
+			   closeProgress();
+			   msg = replaceNbsp(msg);
+			  if(msg == '1'){
 				  location.href="/design/home/Home.wa";	  
 			  }else{
 				  alertx(msg,"'warning'");   			     

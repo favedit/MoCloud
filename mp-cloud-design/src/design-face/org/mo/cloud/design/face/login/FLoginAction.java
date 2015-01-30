@@ -19,6 +19,21 @@ public class FLoginAction
    @ALink
    public IPersonConsole personConsole;
 
+   //============================================================
+   // <T>默认跳转。</T>
+   //
+   // @param context 环境
+   // @param page 容器
+   // @return 处理结果
+   //============================================================
+   @Override
+   public String construct(IWebContext context,
+                           ILogicContext logicContext,
+                           FBasePage basePage){
+      _logger.debug(this, "construct", "construct begin.");
+      return "#/design/home/Frame";
+   }
+
    // ============================================================
    // <T>用户登陆</T>
    //
@@ -39,7 +54,7 @@ public class FLoginAction
       String result = personConsole.login(logicContext, basePage, passport, password);
       _logger.debug(this, "Login", "Login finish. (result={1})", result);
       basePage.ajax(result);
-      return "#/design/manage/component/ajax";
+      return "#/manage/component/ajax";
    }
 
    // ============================================================
