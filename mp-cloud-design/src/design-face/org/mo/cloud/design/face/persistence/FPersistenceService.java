@@ -1,6 +1,6 @@
 package org.mo.cloud.design.face.persistence;
 
-import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationService;
+import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationService;
 
 //============================================================
 // <T>内容持久化服务。</T>

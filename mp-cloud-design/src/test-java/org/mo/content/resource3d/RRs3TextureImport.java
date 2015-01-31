@@ -13,12 +13,11 @@ public class RRs3TextureImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String rootPath = "E:/Microbject";
-      String configPath = rootPath + "/MoCloud";
+      String configPath = RRs3Utility.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
 
-      String filePath = rootPath + "/MoScript/source/assets/texture/pvw.show.001.01";
+      String filePath = RRs3Utility.RootPath + "/MoScript/source/assets/texture/pvw.show.001.01";
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

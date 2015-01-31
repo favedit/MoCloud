@@ -1,8 +1,9 @@
 package org.mo.cloud.design.data.frame;
 
-import org.mo.cloud.design.core.configuration.XContentObject;
-import org.mo.cloud.design.core.frame.IFrameConsole;
-import org.mo.cloud.design.core.persistence.IPersistenceConsole;
+import org.mo.cloud.content.design.persistence.IPersistenceConsole;
+
+import org.mo.cloud.content.design.frame.IFrameConsole;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.ISqlConnection;

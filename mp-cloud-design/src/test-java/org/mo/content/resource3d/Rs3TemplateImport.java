@@ -13,12 +13,11 @@ public class Rs3TemplateImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String rootPath = "E:/Microbject";
-      String configPath = rootPath + "/MoCloud";
+      String configPath = RRs3Utility.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
 
-      String fileName = rootPath + "/MoScript/source/assets/template/pvw.show.item.001.xml";
+      String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.show.item.001.xml";
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

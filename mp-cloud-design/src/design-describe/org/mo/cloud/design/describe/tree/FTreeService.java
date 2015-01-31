@@ -1,10 +1,11 @@
 package org.mo.cloud.design.describe.tree;
 
-import org.mo.cloud.design.core.configuration.FContentObject;
-import org.mo.cloud.design.core.persistence.FPersistence;
-import org.mo.cloud.design.core.persistence.IPersistenceConsole;
-import org.mo.cloud.design.core.tree.ITreeConsole;
-import org.mo.cloud.design.core.tree.common.XTreeView;
+import org.mo.cloud.content.design.tree.common.XTreeView;
+
+import org.mo.cloud.content.design.tree.ITreeConsole;
+import org.mo.cloud.content.design.persistence.FPersistence;
+import org.mo.cloud.content.design.persistence.IPersistenceConsole;
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.com.lang.EResult;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;

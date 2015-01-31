@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="src/cloud-define"/>
 	<classpathentry kind="src" path="src/cloud-data"/>
 	<classpathentry kind="src" path="src/cloud-core"/>
-	<classpathentry kind="src" path="src/cloud-design"/>
 	<classpathentry kind="src" path="src/cloud-logic"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>

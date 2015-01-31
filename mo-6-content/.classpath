@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/content-design"/>
 	<classpathentry kind="src" path="src/content-resource"/>
 	<classpathentry kind="src" path="src/engine-core"/>
 	<classpathentry kind="src" path="src/engine3d-core"/>

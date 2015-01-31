@@ -1,10 +1,9 @@
 package org.mo.content.resource3d.model;
 
-import org.mo.content.resource3d.common.FRs3Resource;
-
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.content.resource3d.common.FRs3Resource;
 
 //============================================================
 // <T>资源模型。</T>

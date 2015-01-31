@@ -14,14 +14,13 @@ public class RRs3ModelImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String rootPath = "E:/Microbject";
-      String configPath = rootPath + "/MoCloud";
+      String configPath = RRs3Utility.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
 
       FByteFile file = new FByteFile();
       //file.loadFile("E:/Microbject/XiaoLongNv.mesh");
-      file.loadFile(rootPath + "/MoScript/source/assets/model/pvw.show.item.001.msd");
+      file.loadFile(RRs3Utility.RootPath + "/MoScript/source/assets/model/pvw.show.item.001.msd");
       //file.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.008.msd");
       //file.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.009.msd");
 

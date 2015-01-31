@@ -1,11 +1,11 @@
 package org.mo.cloud.design.face.persistence;
 
-import org.mo.cloud.design.core.persistence.EPersistenceAction;
-import org.mo.cloud.design.core.persistence.EPersistenceType;
-import org.mo.cloud.design.core.persistence.IPersistenceConsole;
-import org.mo.cloud.design.core.persistence.SPersistenceBuildArgs;
+import org.mo.cloud.content.design.persistence.EPersistenceAction;
+import org.mo.cloud.content.design.persistence.EPersistenceType;
+import org.mo.cloud.content.design.persistence.IPersistenceConsole;
+import org.mo.cloud.content.design.persistence.SPersistenceBuildArgs;
 
-import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationAction;
+import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;

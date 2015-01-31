@@ -12,7 +12,7 @@
    <Define name='application.content'>${application.web}/WEB-INF/content</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    
-   <Define name='output.design'>${application}/mp-cloud-design</Define>
+   <Define name='output.design'>${application}/mo-6-content</Define>
 
    <!-- 导出路径 -->
    <Define name='cloud.space'>${application.space}</Define>

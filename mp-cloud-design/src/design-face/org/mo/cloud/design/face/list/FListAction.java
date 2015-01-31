@@ -1,7 +1,8 @@
 package org.mo.cloud.design.face.list;
 
+import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationAction;
+
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
-import org.mo.cloud.design.core.configuration.common.FAbstractConfigurationAction;
 import org.mo.data.logic.ILogicContext;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
