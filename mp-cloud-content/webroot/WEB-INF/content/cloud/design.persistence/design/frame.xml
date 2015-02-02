@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150131233459">
+<Content name="design.frame" update_date="20150202102852">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -83,6 +83,10 @@
       <Attribute is_valid="Y" type="String" name="style_cd" label="样式类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
+    <Component is_valid="Y" name="PageSheet" label="页面表单" class_name="org.mo.cloud.content.design.frame.common.XPageSheet" base_name="org.mo.cloud.content.design.frame.base.XBasePageSheet" inherits="IContainer" note="">
+      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="PageControl" label="页面控件" class_name="org.mo.cloud.content.design.frame.common.XPageControl" base_name="org.mo.cloud.content.design.frame.base.XBasePageControl" inherits="IContainer" note="" />
     <Component is_valid="Y" name="Form" label="表单" class_name="org.mo.cloud.content.design.frame.common.XForm" base_name="org.mo.cloud.content.design.frame.base.XBaseForm" inherits="IContainer,MDataset" note="" />
     <Component is_valid="Y" name="Column" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" base_name="org.mo.cloud.content.design.frame.base.XBaseColumn" inherits="IColumn" note="" />
     <Component is_valid="Y" name="ColumnCheck" label="表格复选列" class_name="org.mo.cloud.content.design.frame.common.XColumnCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnCheck" inherits="IColumnEditControl,MDataField,MPropertyEdit" note="" />

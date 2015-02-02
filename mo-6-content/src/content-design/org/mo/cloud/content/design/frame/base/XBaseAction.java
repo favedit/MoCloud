@@ -15,6 +15,9 @@ public abstract class XBaseAction
    // 组件名称
    public static final String NAME = "Action";
 
+   // 类名称的定义
+   public final static FContentField FieldClassName = new FContentField("class_name");
+
    // 名称的定义
    public final static FContentField FieldName = new FContentField("name");
 
@@ -45,6 +48,10 @@ public abstract class XBaseAction
       return NAME.equals(xinstance.contentClass().name());
    }
 
+   // 类名称
+   @AName("class_name")
+   protected String _className;
+
    // 名称
    @AName("name")
    protected String _name;
@@ -60,6 +67,24 @@ public abstract class XBaseAction
    // 服务
    @AName("service")
    protected String _service;
+
+   //============================================================
+   // <T>获得类名称的内容。</T>
+   //
+   // @return 类名称
+   //============================================================
+   public String getClassName(){
+      return _className;
+   }
+
+   //============================================================
+   // <T>设置类名称的内容。</T>
+   //
+   // @param value 类名称
+   //============================================================
+   public void setClassName(String value){
+      _className = value;
+   }
 
    //============================================================
    // <T>获得名称的内容。</T>
