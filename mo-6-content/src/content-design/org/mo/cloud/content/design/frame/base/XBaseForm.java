@@ -1,5 +1,7 @@
 package org.mo.cloud.content.design.frame.base;
 
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
@@ -12,59 +14,76 @@ import org.mo.com.lang.face.AName;
 public abstract class XBaseForm
       extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "Form";
+   // 类名称
+   public static final String CLASS_NAME = "Form";
 
-   // 类名称的定义
-   public final static FContentField FieldClassName = new FContentField("class_name");
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String);
 
    // 名称的定义
-   public final static FContentField FieldName = new FContentField("name");
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
 
    // 有效性的定义
-   public final static FContentField FieldValid = new FContentField("valid");
+   @AContentField
+   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean);
 
    // 标签的定义
-   public final static FContentField FieldLabel = new FContentField("label");
+   @AContentField
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
 
    // 位置的定义
-   public final static FContentField FieldLocation = new FContentField("location");
+   @AContentField
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String);
 
    // 尺寸的定义
-   public final static FContentField FieldSize = new FContentField("size");
+   @AContentField
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String);
 
    // 内空白的定义
-   public final static FContentField FieldPadding = new FContentField("padding");
+   @AContentField
+   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String);
 
    // 外空白的定义
-   public final static FContentField FieldMargin = new FContentField("margin");
+   @AContentField
+   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String);
 
    // 页面来源的定义
-   public final static FContentField FieldFrameSource = new FContentField("frame_source");
+   @AContentField
+   public final static FContentField FRAME_SOURCE = new FContentField("frameSource", "frame_source", EContentData.String);
 
    // 数据名称的定义
-   public final static FContentField FieldDatasetName = new FContentField("dataset_name");
+   @AContentField
+   public final static FContentField DATASET_NAME = new FContentField("datasetName", "dataset_name", EContentData.String);
 
    // 数据分页大小的定义
-   public final static FContentField FieldDatasetPageSize = new FContentField("dataset_page_size");
+   @AContentField
+   public final static FContentField DATASET_PAGE_SIZE = new FContentField("datasetPageSize", "dataset_page_size", EContentData.String);
 
    // 数据搜索的定义
-   public final static FContentField FieldDatasetSearch = new FContentField("dataset_search");
+   @AContentField
+   public final static FContentField DATASET_SEARCH = new FContentField("datasetSearch", "dataset_search", EContentData.String);
 
    // 数据排序的定义
-   public final static FContentField FieldDatasetOrder = new FContentField("dataset_order");
+   @AContentField
+   public final static FContentField DATASET_ORDER = new FContentField("datasetOrder", "dataset_order", EContentData.String);
 
    // 数据查询指令的定义
-   public final static FContentField FieldDatasetFetchCommand = new FContentField("dataset_fetch_command");
+   @AContentField
+   public final static FContentField DATASET_FETCH_COMMAND = new FContentField("datasetFetchCommand", "dataset_fetch_command", EContentData.String);
 
    // 数据新建命令的定义
-   public final static FContentField FieldDatasetInsertAction = new FContentField("dataset_insert_action");
+   @AContentField
+   public final static FContentField DATASET_INSERT_ACTION = new FContentField("datasetInsertAction", "dataset_insert_action", EContentData.String);
 
    // 数据更新命令的定义
-   public final static FContentField FieldDatasetUpdateAction = new FContentField("dataset_update_action");
+   @AContentField
+   public final static FContentField DATASET_UPDATE_ACTION = new FContentField("datasetUpdateAction", "dataset_update_action", EContentData.String);
 
    // 数据删除命令的定义
-   public final static FContentField FieldDatasetDeleteAction = new FContentField("dataset_delete_action");
+   @AContentField
+   public final static FContentField DATASET_DELETE_ACTION = new FContentField("datasetDeleteAction", "dataset_delete_action", EContentData.String);
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -84,9 +103,9 @@ public abstract class XBaseForm
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类名称
-   @AName("class_name")
-   protected String _className;
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 名称
    @AName("name")
@@ -153,21 +172,21 @@ public abstract class XBaseForm
    protected String _datasetDeleteAction;
 
    //============================================================
-   // <T>获得类名称的内容。</T>
+   // <T>获得类型的内容。</T>
    //
-   // @return 类名称
+   // @return 类型
    //============================================================
-   public String getClassName(){
-      return _className;
+   public String getType(){
+      return _type;
    }
 
    //============================================================
-   // <T>设置类名称的内容。</T>
+   // <T>设置类型的内容。</T>
    //
-   // @param value 类名称
+   // @param value 类型
    //============================================================
-   public void setClassName(String value){
-      _className = value;
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================

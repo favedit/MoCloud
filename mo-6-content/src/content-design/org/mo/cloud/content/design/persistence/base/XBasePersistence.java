@@ -1,5 +1,7 @@
 package org.mo.cloud.content.design.persistence.base;
 
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
@@ -12,14 +14,16 @@ import org.mo.com.lang.face.AName;
 public abstract class XBasePersistence
       extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "Persistence";
+   // 类名称
+   public static final String CLASS_NAME = "Persistence";
 
    // 名称的定义
-   public final static FContentField FieldName = new FContentField("name");
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
 
    // 标签的定义
-   public final static FContentField FieldLabel = new FContentField("label");
+   @AContentField
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
 
    //============================================================
    // <T>判断是否指定实例。</T>

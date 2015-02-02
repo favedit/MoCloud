@@ -1,9 +1,9 @@
 package org.mo.content.face.design.list;
 
 import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationService;
+import org.mo.cloud.content.design.list.common.XList;
 import org.mo.com.lang.EResult;
 import org.mo.content.core.list.IContentListConsole;
-import org.mo.content.core.list.common.XList;
 import org.mo.core.aop.RAop;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;

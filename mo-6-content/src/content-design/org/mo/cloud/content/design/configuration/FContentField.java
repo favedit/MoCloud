@@ -1,7 +1,7 @@
 package org.mo.cloud.content.design.configuration;
 
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.face.AName;
+import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.reflect.FField;
 
 //============================================================
@@ -12,6 +12,9 @@ public class FContentField
 {
    // 类名称
    protected String _name;
+
+   // 数据类型
+   protected EContentData _dataCd;
 
    // 类名称
    protected String _linkName;
@@ -30,8 +33,12 @@ public class FContentField
    //
    // @param name 名称
    //============================================================
-   public FContentField(String name){
+   public FContentField(String name,
+                        String linkName,
+                        EContentData dataCd){
       _name = name;
+      _linkName = linkName;
+      _dataCd = dataCd;
    }
 
    //============================================================
@@ -53,6 +60,24 @@ public class FContentField
    }
 
    //============================================================
+   // <T>获得数据类型。</T>
+   //
+   // @return 数据类型
+   //============================================================
+   public EContentData _dataCd(){
+      return _dataCd;
+   }
+
+   //============================================================
+   // <T>设置数据类型。</T>
+   //
+   // @param dataCd 数据类型
+   //============================================================
+   public void setDataCd(EContentData dataCd){
+      _dataCd = dataCd;
+   }
+
+   //============================================================
    // <T>获得关联名称。</T>
    //
    // @return 关联名称
@@ -66,14 +91,7 @@ public class FContentField
    //
    // @param field 字段信息
    //============================================================
-   public void load(FField field){
-      _name = field.name();
-      AName aname = field.getAnnotation(AName.class);
-      if(aname != null){
-         _linkName = aname.value();
-      }else{
-         _linkName = _name;
-      }
+   public void link(FField field){
       _field = field;
       _field.setAccessible(true);
    }
@@ -96,6 +114,12 @@ public class FContentField
    //============================================================
    public void set(Object instance,
                    Object value){
-      _field.set(instance, value);
+      switch(_dataCd){
+         case Boolean:
+            _field.set(instance, RBoolean.parse(value));
+            break;
+         default:
+            _field.set(instance, value);
+      }
    }
 }

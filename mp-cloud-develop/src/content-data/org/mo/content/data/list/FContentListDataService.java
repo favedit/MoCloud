@@ -1,8 +1,8 @@
 package org.mo.content.data.list;
 
+import org.mo.cloud.content.design.list.common.XList;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.list.IContentListConsole;
-import org.mo.content.core.list.common.XList;
 import org.mo.core.aop.face.ALink;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;

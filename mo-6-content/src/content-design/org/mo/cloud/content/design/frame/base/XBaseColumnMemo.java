@@ -1,5 +1,7 @@
 package org.mo.cloud.content.design.frame.base;
 
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
@@ -12,74 +14,96 @@ import org.mo.com.lang.face.AName;
 public abstract class XBaseColumnMemo
       extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "ColumnMemo";
+   // 类名称
+   public static final String CLASS_NAME = "ColumnMemo";
 
-   // 类名称的定义
-   public final static FContentField FieldClassName = new FContentField("class_name");
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String);
 
    // 名称的定义
-   public final static FContentField FieldName = new FContentField("name");
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
 
    // 有效性的定义
-   public final static FContentField FieldValid = new FContentField("valid");
+   @AContentField
+   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean);
 
    // 标签的定义
-   public final static FContentField FieldLabel = new FContentField("label");
+   @AContentField
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
 
    // 位置的定义
-   public final static FContentField FieldLocation = new FContentField("location");
+   @AContentField
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String);
 
    // 尺寸的定义
-   public final static FContentField FieldSize = new FContentField("size");
+   @AContentField
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String);
 
    // 内空白的定义
-   public final static FContentField FieldPadding = new FContentField("padding");
+   @AContentField
+   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String);
 
    // 外空白的定义
-   public final static FContentField FieldMargin = new FContentField("margin");
+   @AContentField
+   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String);
 
    // 数据名称的定义
-   public final static FContentField FieldDataName = new FContentField("data_name");
+   @AContentField
+   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String);
 
    // 放大引用的定义
-   public final static FContentField FieldZoomReference = new FContentField("zoom_reference");
+   @AContentField
+   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String);
 
    // 放大字段的定义
-   public final static FContentField FieldZoomField = new FContentField("zoom_field");
+   @AContentField
+   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String);
 
    // 引用服务的定义
-   public final static FContentField FieldLovService = new FContentField("lov_service");
+   @AContentField
+   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String);
 
    // 引用地址的定义
-   public final static FContentField FieldLovReference = new FContentField("lov_reference");
+   @AContentField
+   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String);
 
    // 引用字段的定义
-   public final static FContentField FieldLovFields = new FContentField("lov_fields");
+   @AContentField
+   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String);
 
    // 应用条件的定义
-   public final static FContentField FieldLovWhere = new FContentField("lov_where");
+   @AContentField
+   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String);
 
    // 引用排序的定义
-   public final static FContentField FieldLovOrder = new FContentField("lov_order");
+   @AContentField
+   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String);
 
    // 编辑大小写类型的定义
-   public final static FContentField FieldEditCaseCd = new FContentField("edit_case_cd");
+   @AContentField
+   public final static FContentField EDIT_CASE_CD = new FContentField("editCaseCd", "edit_case_cd", EContentData.String);
 
    // 编辑模板的定义
-   public final static FContentField FieldEditPattern = new FContentField("edit_pattern");
+   @AContentField
+   public final static FContentField EDIT_PATTERN = new FContentField("editPattern", "edit_pattern", EContentData.String);
 
    // 编辑长度的定义
-   public final static FContentField FieldEditLength = new FContentField("edit_length");
+   @AContentField
+   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String);
 
    // 编辑自动完成的定义
-   public final static FContentField FieldEditComplete = new FContentField("edit_complete");
+   @AContentField
+   public final static FContentField EDIT_COMPLETE = new FContentField("editComplete", "edit_complete", EContentData.String);
 
    // 校验最小长度的定义
-   public final static FContentField FieldValidLengthMin = new FContentField("valid_length_min");
+   @AContentField
+   public final static FContentField VALID_LENGTH_MIN = new FContentField("validLengthMin", "valid_length_min", EContentData.String);
 
    // 校验最大长度的定义
-   public final static FContentField FieldValidLengthMax = new FContentField("valid_length_max");
+   @AContentField
+   public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String);
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -99,9 +123,9 @@ public abstract class XBaseColumnMemo
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类名称
-   @AName("class_name")
-   protected String _className;
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 名称
    @AName("name")
@@ -188,21 +212,21 @@ public abstract class XBaseColumnMemo
    protected String _validLengthMax;
 
    //============================================================
-   // <T>获得类名称的内容。</T>
+   // <T>获得类型的内容。</T>
    //
-   // @return 类名称
+   // @return 类型
    //============================================================
-   public String getClassName(){
-      return _className;
+   public String getType(){
+      return _type;
    }
 
    //============================================================
-   // <T>设置类名称的内容。</T>
+   // <T>设置类型的内容。</T>
    //
-   // @param value 类名称
+   // @param value 类型
    //============================================================
-   public void setClassName(String value){
-      _className = value;
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================

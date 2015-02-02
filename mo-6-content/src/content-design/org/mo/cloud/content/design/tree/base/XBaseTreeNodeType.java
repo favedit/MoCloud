@@ -1,5 +1,7 @@
 package org.mo.cloud.content.design.tree.base;
 
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
@@ -12,35 +14,44 @@ import org.mo.com.lang.face.AName;
 public abstract class XBaseTreeNodeType
       extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "TreeNodeType";
+   // 类名称
+   public static final String CLASS_NAME = "TreeNodeType";
 
    // 名称的定义
-   public final static FContentField FieldName = new FContentField("name");
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
 
    // 标签的定义
-   public final static FContentField FieldLabel = new FContentField("label");
+   @AContentField
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
 
    // 有效性的定义
-   public final static FContentField FieldIsValid = new FContentField("is_valid");
+   @AContentField
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String);
 
    // 备注的定义
-   public final static FContentField FieldNote = new FContentField("note");
+   @AContentField
+   public final static FContentField NOTE = new FContentField("note", "note", EContentData.String);
 
    // 关联的定义
-   public final static FContentField FieldLinker = new FContentField("linker");
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String);
 
    // 图标的定义
-   public final static FContentField FieldIcon = new FContentField("icon");
+   @AContentField
+   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String);
 
    // 服务的定义
-   public final static FContentField FieldService = new FContentField("service");
+   @AContentField
+   public final static FContentField SERVICE = new FContentField("service", "service", EContentData.String);
 
    // 命令的定义
-   public final static FContentField FieldAction = new FContentField("action");
+   @AContentField
+   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String);
 
    // 属性集合的定义
-   public final static FContentField FieldAttributes = new FContentField("attributes");
+   @AContentField
+   public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String);
 
    //============================================================
    // <T>判断是否指定实例。</T>

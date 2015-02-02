@@ -143,15 +143,29 @@ public class FContentClass
    //============================================================
    protected void build(){
       FClass<?> clazz = RClass.find(_className);
+      // 查找所有内容字段声明
       FField[] fields = clazz.allDeclaredFields();
       for(FField field : fields){
+         if(field.isStatic()){
+            // 获得内容字段
+            AContentField afield = field.getAnnotation(AContentField.class);
+            if(afield != null){
+               FContentField contentField = (FContentField)field.get(clazz.nativeObject());
+               _fields.set(contentField.linkName(), contentField);
+            }
+         }
+      }
+      // 设置所有内容字段关联
+      for(FField field : fields){
          if(!field.isStatic()){
+            // 获得内容字段
             AName aname = field.getAnnotation(AName.class);
             if(aname != null){
-               // 创建内容字段
-               FContentField contentField = new FContentField();
-               contentField.load(field);
-               _fields.set(contentField.linkName(), contentField);
+               String linkName = aname.value();
+               FContentField contentField = _fields.find(linkName);
+               if(contentField != null){
+                  contentField.link(field);
+               }
             }
          }
       }

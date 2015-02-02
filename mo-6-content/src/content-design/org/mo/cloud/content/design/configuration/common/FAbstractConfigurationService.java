@@ -6,6 +6,7 @@ import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
@@ -205,25 +206,41 @@ public class FAbstractConfigurationService
                        IWebInput input,
                        IWebOutput output){
       // 获得选中的内容
-      FXmlNode xfirst = input.config().findNode("TreeNode");
-      FXmlNode xlast = input.config().findLastNode("TreeNode");
-      if((xfirst == null) || (xlast == null)){
-         throw new FFatalError("Can't find select node.");
+      FXmlNode selectNode = getSelectNode(input);
+      FAttributes nodeAttrs = new FAttributes();
+      // 获得容器节点
+      String nodeName = null;
+      String typeType = selectNode.get("type_type");
+      if(TYPE_COLLECTION.equals(typeType)){
+         nodeName = selectNode.get("label");
+      }else if(TYPE_COMPONENT.equals(typeType)){
+         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
+         nodeAttrs.unpack(topNode.get("attributes"));
+         if(nodeAttrs.contains("linker_name")){
+            nodeName = nodeAttrs.get("linker_name");
+         }else{
+            nodeName = topNode.get("label");
+         }
       }
       // 获得内容空间
-      String code = xlast.get("label");
-      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, code);
-      // 查找控件集合
-      String objectId = xfirst.get("uuid");
-      FContentObject xcontrol = contentNode.search(objectId);
-      if(xcontrol == null){
-         throw new FFatalError("Find control node is null. (object_id={1})", objectId);
+      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, nodeName);
+      // 获得控件对象
+      FContentObjects xcontrols = null;
+      if(TYPE_COLLECTION.equals(typeType)){
+         xcontrols = contentNode.config().nodes();
+      }else{
+         String objectId = selectNode.get("uuid");
+         FContentObject xcontrol = contentNode.search(objectId);
+         if(xcontrol != null){
+            xcontrols = xcontrol.nodes();
+         }
       }
-      FContentObjects xcontrols = xcontrol.nodes();
+      if(xcontrols == null){
+         throw new FFatalError("Find control node is null. (node_name={1})", nodeName);
+      }
       // 新建所有子节点
       FXmlNodes outputNodes = output.config().nodes();
-      int count = xcontrols.count();
-      for(int n = 0; n < count; n++){
+      for(int n = 0; n < xcontrols.count(); n++){
          FContentObject xcomponent = xcontrols.get(n);
          // 建立树节点
          XTreeNode xnode = new XTreeNode();
@@ -236,35 +253,6 @@ public class FAbstractConfigurationService
          node.set("is_valid", xcomponent.get("is_valid"));
          outputNodes.push(node);
       }
-
-      //      FAttributes nodeAttrs = new FAttributes();
-      //      // 获得容器节点
-      //      String nodeName = null;
-      //      String typeType = xselect.get("type_type");
-      //      if(TYPE_COLLECTION.equals(typeType)){
-      //         nodeName = xselect.get("label");
-      //      }else if(TYPE_COMPONENT.equals(typeType)){
-      //         FXmlNode topNode = xselect.search("Node", "type_type", TYPE_COLLECTION);
-      //         nodeAttrs.unpack(topNode.get("attributes"));
-      //         if(nodeAttrs.contains("linker_name")){
-      //            nodeName = nodeAttrs.get("linker_name");
-      //         }else{
-      //            nodeName = topNode.get("label");
-      //         }
-      //      }
-      //      // 获得控件对象
-      //      if(TYPE_COLLECTION.equals(typeType)){
-      //         xcontrols = contentNode.config().nodes();
-      //      }else{
-      //         String objectId = xselect.get("uuid");
-      //         FContentObject xcontrol = contentNode.search(objectId);
-      //         if(xcontrol != null){
-      //            xcontrols = xcontrol.nodes();
-      //         }
-      //      }
-      //      if(xcontrols == null){
-      //         throw new FFatalError("Find control node is null. (node_name={1})", nodeName);
-      //      }
       return EResult.Success;
    }
 
@@ -341,6 +329,7 @@ public class FAbstractConfigurationService
       // 设置页面转向
       RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
       return EResult.Success;
+
    }
 
    //============================================================
@@ -366,6 +355,7 @@ public class FAbstractConfigurationService
          throw new FFatalError("Unknown select type. (type={1})", type);
       }
       return EResult.Success;
+
    }
 
    //============================================================
@@ -411,6 +401,7 @@ public class FAbstractConfigurationService
       RServiceResult.setTreeParentRefresh(output);
       RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
       return EResult.Success;
+
    }
 
    //============================================================
@@ -460,8 +451,8 @@ public class FAbstractConfigurationService
       RServiceResult.setTreeRefresh(output);
       RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_SUCCESS);
       return EResult.Success;
-   }
 
+   }
    //   //============================================================
    //   @SuppressWarnings("unchecked")
    //   protected void insertCollection(IXmlConfigConsole<X> console,

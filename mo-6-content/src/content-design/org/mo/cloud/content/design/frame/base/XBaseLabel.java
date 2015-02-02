@@ -1,5 +1,7 @@
 package org.mo.cloud.content.design.frame.base;
 
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
@@ -12,32 +14,40 @@ import org.mo.com.lang.face.AName;
 public abstract class XBaseLabel
       extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "Label";
+   // 类名称
+   public static final String CLASS_NAME = "Label";
 
-   // 类名称的定义
-   public final static FContentField FieldClassName = new FContentField("class_name");
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String);
 
    // 名称的定义
-   public final static FContentField FieldName = new FContentField("name");
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
 
    // 有效性的定义
-   public final static FContentField FieldValid = new FContentField("valid");
+   @AContentField
+   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean);
 
    // 标签的定义
-   public final static FContentField FieldLabel = new FContentField("label");
+   @AContentField
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
 
    // 位置的定义
-   public final static FContentField FieldLocation = new FContentField("location");
+   @AContentField
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String);
 
    // 尺寸的定义
-   public final static FContentField FieldSize = new FContentField("size");
+   @AContentField
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String);
 
    // 内空白的定义
-   public final static FContentField FieldPadding = new FContentField("padding");
+   @AContentField
+   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String);
 
    // 外空白的定义
-   public final static FContentField FieldMargin = new FContentField("margin");
+   @AContentField
+   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String);
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -57,9 +67,9 @@ public abstract class XBaseLabel
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类名称
-   @AName("class_name")
-   protected String _className;
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 名称
    @AName("name")
@@ -90,21 +100,21 @@ public abstract class XBaseLabel
    protected String _margin;
 
    //============================================================
-   // <T>获得类名称的内容。</T>
+   // <T>获得类型的内容。</T>
    //
-   // @return 类名称
+   // @return 类型
    //============================================================
-   public String getClassName(){
-      return _className;
+   public String getType(){
+      return _type;
    }
 
    //============================================================
-   // <T>设置类名称的内容。</T>
+   // <T>设置类型的内容。</T>
    //
-   // @param value 类名称
+   // @param value 类型
    //============================================================
-   public void setClassName(String value){
-      _className = value;
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================

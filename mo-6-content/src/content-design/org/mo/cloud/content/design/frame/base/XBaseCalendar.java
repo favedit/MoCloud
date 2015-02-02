@@ -1,5 +1,7 @@
 package org.mo.cloud.content.design.frame.base;
 
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
@@ -12,50 +14,64 @@ import org.mo.com.lang.face.AName;
 public abstract class XBaseCalendar
       extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "Calendar";
+   // 类名称
+   public static final String CLASS_NAME = "Calendar";
 
-   // 类名称的定义
-   public final static FContentField FieldClassName = new FContentField("class_name");
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String);
 
    // 名称的定义
-   public final static FContentField FieldName = new FContentField("name");
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
 
    // 有效性的定义
-   public final static FContentField FieldValid = new FContentField("valid");
+   @AContentField
+   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean);
 
    // 标签的定义
-   public final static FContentField FieldLabel = new FContentField("label");
+   @AContentField
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
 
    // 位置的定义
-   public final static FContentField FieldLocation = new FContentField("location");
+   @AContentField
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String);
 
    // 尺寸的定义
-   public final static FContentField FieldSize = new FContentField("size");
+   @AContentField
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String);
 
    // 内空白的定义
-   public final static FContentField FieldPadding = new FContentField("padding");
+   @AContentField
+   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String);
 
    // 外空白的定义
-   public final static FContentField FieldMargin = new FContentField("margin");
+   @AContentField
+   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String);
 
    // 标签对齐的定义
-   public final static FContentField FieldLabelAlignCd = new FContentField("label_align_cd");
+   @AContentField
+   public final static FContentField LABEL_ALIGN_CD = new FContentField("labelAlignCd", "label_align_cd", EContentData.String);
 
    // 标签尺寸的定义
-   public final static FContentField FieldLabelSize = new FContentField("label_size");
+   @AContentField
+   public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String);
 
    // 编辑大小的定义
-   public final static FContentField FieldEditSize = new FContentField("edit_size");
+   @AContentField
+   public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String);
 
    // 编辑只读的定义
-   public final static FContentField FieldEditReadonly = new FContentField("edit_readonly");
+   @AContentField
+   public final static FContentField EDIT_READONLY = new FContentField("editReadonly", "edit_readonly", EContentData.Boolean);
 
    // 数据名称的定义
-   public final static FContentField FieldDataName = new FContentField("data_name");
+   @AContentField
+   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String);
 
    // 输入尺寸的定义
-   public final static FContentField FieldInputSize = new FContentField("input_size");
+   @AContentField
+   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String);
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -75,9 +91,9 @@ public abstract class XBaseCalendar
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类名称
-   @AName("class_name")
-   protected String _className;
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 名称
    @AName("name")
@@ -132,21 +148,21 @@ public abstract class XBaseCalendar
    protected String _inputSize;
 
    //============================================================
-   // <T>获得类名称的内容。</T>
+   // <T>获得类型的内容。</T>
    //
-   // @return 类名称
+   // @return 类型
    //============================================================
-   public String getClassName(){
-      return _className;
+   public String getType(){
+      return _type;
    }
 
    //============================================================
-   // <T>设置类名称的内容。</T>
+   // <T>设置类型的内容。</T>
    //
-   // @param value 类名称
+   // @param value 类型
    //============================================================
-   public void setClassName(String value){
-      _className = value;
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================

@@ -394,5 +394,4 @@ public abstract class FAbstractConfigurationPage
    public void setSelectType(String selectType){
       _selectType = selectType;
    }
-
 }

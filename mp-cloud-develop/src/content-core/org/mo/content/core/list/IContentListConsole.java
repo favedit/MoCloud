@@ -1,6 +1,6 @@
 package org.mo.content.core.list;
 
-import org.mo.content.core.list.common.XList;
+import org.mo.cloud.content.design.list.common.XList;
 
 //============================================================
 // <T>内容列表控制台接口。</T>
