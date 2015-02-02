@@ -1,12 +1,12 @@
 package org.mo.cloud.content.describe.frame;
 
-import org.mo.cloud.content.design.persistence.FPersistence;
-import org.mo.cloud.content.design.persistence.IPersistenceConsole;
-
-import org.mo.cloud.content.design.frame.IFrameConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.cloud.content.design.frame.IFrameConsole;
+import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.web.protocol.context.IWebContext;
@@ -35,6 +35,52 @@ public class FFrameService
    // <T>构造内容表单服务。</T>
    //============================================================
    public FFrameService(){
+   }
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //========================================================
+   public void buildFrame(FContentObject control){
+      // 处理当前节点
+      String frameSource = control.get("frame_source");
+      if(!RString.isEmpty(frameSource)){
+         // 获得嵌入方式
+         String includeCd = null;
+         String frameName = null;
+         String[] items = RString.splitTwo(frameSource, '@');
+         if(items == null){
+            includeCd = "include";
+            frameName = frameSource;
+         }else{
+            includeCd = items[0];
+            frameName = items[1];
+         }
+         // 查找定义
+         FContentObject frame = _frameConsole.findDefine(_storageName, frameName);
+         if(frame == null){
+            throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
+         }
+         // 嵌入节点
+         if(includeCd.equals("include")){
+            control.push(frame);
+         }else if(includeCd.equals("children")){
+            for(FContentObject node : frame.nodes()){
+               control.push(node);
+            }
+         }else{
+            throw new FFatalError("Frame include type is invalid. (frame_name={1}, include_cd={2})", frameName, includeCd);
+         }
+      }
+      // 处理所有子节点
+      if(control.hasNode()){
+         for(FContentObject xchild : control.nodes()){
+            buildFrame(xchild);
+         }
+      }
    }
 
    //============================================================
@@ -73,19 +119,17 @@ public class FFrameService
       // 获得参数
       FXmlNode xinput = input.config();
       FXmlNode xoutput = output.config();
-      // 活动转换器
-      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, "design.frame");
       // 获得参数集合
       for(FXmlNode xframe : xinput){
          if(xframe.isName("Frame")){
             String name = xframe.get("name");
             // 查找目录定义
-            XContentObject xtree = _frameConsole.find(_storageName, name);
+            FContentObject content = _frameConsole.findDefine(_storageName, name);
+            content.set("name", name);
+            buildFrame(content);
             // 转换数据
             FXmlNode xconfig = xoutput.createNode();
-            FContentObject content = persistence.convertConfig(xtree);
             content.saveConfig(xconfig);
-            xconfig.set("name", name);
          }
       }
       return EResult.Success;

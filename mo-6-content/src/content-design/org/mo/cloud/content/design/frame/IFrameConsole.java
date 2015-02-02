@@ -1,5 +1,6 @@
 package org.mo.cloud.content.design.frame;
 
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 
 //============================================================
@@ -24,4 +25,14 @@ public interface IFrameConsole
    //============================================================
    XContentObject find(String storgeName,
                        String formName);
+
+   //============================================================
+   // <T>根据名称获得表单定义。</T>
+   //
+   // @param storgeName 存储名称
+   // @param formName 表单名称
+   // @return 表单定义
+   //============================================================
+   FContentObject findDefine(String storgeName,
+                             String formName);
 }

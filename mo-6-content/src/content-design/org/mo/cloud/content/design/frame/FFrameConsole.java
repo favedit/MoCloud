@@ -1,6 +1,7 @@
 package org.mo.cloud.content.design.frame;
 
 import org.mo.cloud.content.design.configuration.FContentNode;
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
 import org.mo.cloud.content.design.configuration.XContentObject;
@@ -76,5 +77,26 @@ public class FFrameConsole
          _frames.set(code, xlist);
       }
       return xlist;
+   }
+
+   //============================================================
+   // <T>根据名称获得表单定义。</T>
+   //
+   // @param storgeName 存储名称
+   // @param formName 表单名称
+   // @return 表单
+   //============================================================
+   @Override
+   public FContentObject findDefine(String storgeName,
+                                    String formName){
+      XContentObject xobject = find(storgeName, formName);
+      if(xobject != null){
+         // 获得转换器
+         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
+         // 转换对象
+         FContentObject content = persistence.convertConfig(xobject);
+         return content;
+      }
+      return null;
    }
 }

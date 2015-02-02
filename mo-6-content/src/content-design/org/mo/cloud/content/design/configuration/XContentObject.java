@@ -67,6 +67,20 @@ public class XContentObject
    }
 
    //============================================================
+   // <T>根据名称获得内容。</T>
+   //
+   // @param name 名称
+   // @return 内容
+   //============================================================
+   public String getString(String name){
+      Object value = get(name);
+      if(value != null){
+         return value.toString();
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>根据名称设置内容。</T>
    //
    // @param name 名称
