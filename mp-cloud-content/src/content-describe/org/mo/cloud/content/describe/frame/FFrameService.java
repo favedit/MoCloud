@@ -46,7 +46,7 @@ public class FFrameService
    //========================================================
    public void buildFrame(FContentObject control){
       // 处理当前节点
-      String frameSource = control.get("frame_source");
+      String frameSource = control.get("frame_source", null);
       if(!RString.isEmpty(frameSource)){
          // 获得嵌入方式
          String includeCd = null;

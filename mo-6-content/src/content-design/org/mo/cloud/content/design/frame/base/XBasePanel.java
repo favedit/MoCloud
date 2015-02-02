@@ -76,7 +76,7 @@ public abstract class XBasePanel
 
    // 有效性
    @AName("valid")
-   protected String _valid;
+   protected boolean _valid;
 
    // 标签
    @AName("label")
@@ -151,7 +151,7 @@ public abstract class XBasePanel
    //
    // @return 有效性
    //============================================================
-   public String getValid(){
+   public Boolean getValid(){
       return _valid;
    }
 
@@ -160,7 +160,7 @@ public abstract class XBasePanel
    //
    // @param value 有效性
    //============================================================
-   public void setValid(String value){
+   public void setValid(Boolean value){
       _valid = value;
    }
 

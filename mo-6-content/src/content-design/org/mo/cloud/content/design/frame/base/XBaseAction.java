@@ -58,7 +58,7 @@ public abstract class XBaseAction
 
    // 有效性
    @AName("valid")
-   protected String _valid;
+   protected boolean _valid;
 
    // 标签
    @AName("label")
@@ -109,7 +109,7 @@ public abstract class XBaseAction
    //
    // @return 有效性
    //============================================================
-   public String getValid(){
+   public Boolean getValid(){
       return _valid;
    }
 
@@ -118,7 +118,7 @@ public abstract class XBaseAction
    //
    // @param value 有效性
    //============================================================
-   public void setValid(String value){
+   public void setValid(Boolean value){
       _valid = value;
    }
 

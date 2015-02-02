@@ -48,6 +48,9 @@ public abstract class XBaseNumber4
    // 编辑大小的定义
    public final static FContentField FieldEditSize = new FContentField("edit_size");
 
+   // 编辑只读的定义
+   public final static FContentField FieldEditReadonly = new FContentField("edit_readonly");
+
    // 数据名称的定义
    public final static FContentField FieldDataName = new FContentField("data_name");
 
@@ -79,7 +82,7 @@ public abstract class XBaseNumber4
 
    // 有效性
    @AName("valid")
-   protected String _valid;
+   protected boolean _valid;
 
    // 标签
    @AName("label")
@@ -112,6 +115,10 @@ public abstract class XBaseNumber4
    // 编辑大小
    @AName("edit_size")
    protected String _editSize;
+
+   // 编辑只读
+   @AName("edit_readonly")
+   protected boolean _editReadonly;
 
    // 数据名称
    @AName("data_name")
@@ -158,7 +165,7 @@ public abstract class XBaseNumber4
    //
    // @return 有效性
    //============================================================
-   public String getValid(){
+   public Boolean getValid(){
       return _valid;
    }
 
@@ -167,7 +174,7 @@ public abstract class XBaseNumber4
    //
    // @param value 有效性
    //============================================================
-   public void setValid(String value){
+   public void setValid(Boolean value){
       _valid = value;
    }
 
@@ -313,6 +320,24 @@ public abstract class XBaseNumber4
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
+   }
+
+   //============================================================
+   // <T>获得编辑只读的内容。</T>
+   //
+   // @return 编辑只读
+   //============================================================
+   public Boolean getEditReadonly(){
+      return _editReadonly;
+   }
+
+   //============================================================
+   // <T>设置编辑只读的内容。</T>
+   //
+   // @param value 编辑只读
+   //============================================================
+   public void setEditReadonly(Boolean value){
+      _editReadonly = value;
    }
 
    //============================================================
