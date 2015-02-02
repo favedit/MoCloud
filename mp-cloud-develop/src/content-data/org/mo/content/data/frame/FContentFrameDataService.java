@@ -1,9 +1,8 @@
 package org.mo.content.data.frame;
 
-import org.mo.content.core.frame.IContentFormConsole;
-
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.configuration.XContentObject;
+import org.mo.content.core.frame.IContentFormConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;

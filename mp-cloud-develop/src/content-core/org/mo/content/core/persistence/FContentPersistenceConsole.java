@@ -1,5 +1,10 @@
 package org.mo.content.core.persistence;
 
+import org.mo.cloud.content.design.configuration.FContentNode;
+import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.FContentObjects;
+import org.mo.cloud.content.design.configuration.FContentSpace;
+import org.mo.cloud.content.design.configuration.IConfigurationConsole;
 import org.mo.com.io.FStringFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
@@ -13,11 +18,6 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
 import org.mo.com.xml.FXmlNodes;
-import org.mo.content.core.configuration.FContentNode;
-import org.mo.content.core.configuration.FContentObject;
-import org.mo.content.core.configuration.FContentObjects;
-import org.mo.content.core.configuration.FContentSpace;
-import org.mo.content.core.configuration.IContentConfigurationConsole;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
 import org.mo.eng.template.ITemplateConsole;
@@ -41,7 +41,7 @@ public class FContentPersistenceConsole
 
    // 配置控制台接口
    @ALink
-   protected IContentConfigurationConsole _configurationConsole;
+   protected IConfigurationConsole _configurationConsole;
 
    // 模板控制台接口
    @ALink

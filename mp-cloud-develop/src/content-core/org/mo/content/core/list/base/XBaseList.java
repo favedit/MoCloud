@@ -1,15 +1,16 @@
 package org.mo.content.core.list.base;
 
+import org.mo.cloud.content.design.configuration.FContentField;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
-import org.mo.content.core.configuration.FContentField;
-import org.mo.content.core.configuration.XContentObject;
 
 //============================================================
 // <T>列表对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseList extends XContentObject
+public abstract class XBaseList
+      extends XContentObject
 {
    // 组件名称
    public static final String NAME = "List";

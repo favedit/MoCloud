@@ -1,7 +1,7 @@
 package org.mo.content.face.design.list;
 
-import org.mo.content.core.configuration.common.FAbstractConfigurationService;
-
+import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationService;
+import org.mo.com.lang.EResult;
 import org.mo.content.core.list.IContentListConsole;
 import org.mo.content.core.list.common.XList;
 import org.mo.core.aop.RAop;
@@ -33,12 +33,12 @@ public class FContentListService
    // @param output 网络输出
    //============================================================
    @Override
-   public void catalog(IWebContext context,
-                       IWebInput input,
-                       IWebOutput output){
+   public EResult catalog(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
       IContentListConsole _listConsole = RAop.find(IContentListConsole.class);
       XList xlist = _listConsole.find("cloud", "system.culture.Language");
       System.out.println(xlist.getName());
-      super.catalog(context, input, output);
+      return super.catalog(context, input, output);
    }
 }

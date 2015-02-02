@@ -8,8 +8,8 @@
    <!--  I:initializeConfig - 增加配置信息                           -->
    <!-- ============================================================ -->
    <Component
-         face  = 'org.mo.content.core.configuration.IContentConfigurationConsole'
-         class = 'org.mo.content.core.configuration.FContentConfigurationConsole'
+         face  = 'org.mo.cloud.content.design.configuration.IConfigurationConsole'
+         class = 'org.mo.cloud.content.design.configuration.FConfigurationConsole'
          scope = 'global'>
       <Property name='config_path'>${application.content}</Property>
       <Initialize name='initializeConfig'/>

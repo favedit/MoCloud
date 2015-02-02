@@ -1,5 +1,9 @@
 package org.mo.content.core.persistence;
 
+import org.mo.cloud.content.design.configuration.FContentClass;
+import org.mo.cloud.content.design.configuration.FContentField;
+import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -7,10 +11,6 @@ import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.INamePair;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.configuration.FContentClass;
-import org.mo.content.core.configuration.FContentField;
-import org.mo.content.core.configuration.FContentObject;
-import org.mo.content.core.configuration.XContentObject;
 
 //============================================================
 // <T>内容持久化。</T>

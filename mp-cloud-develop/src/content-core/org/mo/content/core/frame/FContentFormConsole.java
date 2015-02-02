@@ -1,12 +1,12 @@
 package org.mo.content.core.frame;
 
+import org.mo.cloud.content.design.configuration.FContentNode;
+import org.mo.cloud.content.design.configuration.FContentSpace;
+import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
-import org.mo.content.core.configuration.FContentNode;
-import org.mo.content.core.configuration.FContentSpace;
-import org.mo.content.core.configuration.IContentConfigurationConsole;
-import org.mo.content.core.configuration.XContentObject;
 import org.mo.content.core.persistence.FContentPersistence;
 import org.mo.content.core.persistence.IContentPersistenceConsole;
 import org.mo.core.aop.face.ALink;
@@ -29,7 +29,7 @@ public class FContentFormConsole
 
    // 内容配置控制台接口
    @ALink
-   protected IContentConfigurationConsole _configurationConsole;
+   protected IConfigurationConsole _configurationConsole;
 
    // 内容持久化控制台接口
    @ALink

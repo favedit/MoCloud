@@ -1,6 +1,6 @@
 package org.mo.content.core.frame;
 
-import org.mo.content.core.configuration.XContentObject;
+import org.mo.cloud.content.design.configuration.XContentObject;
 
 //============================================================
 // <T>内容表单控制台接口。</T>

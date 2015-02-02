@@ -1,7 +1,6 @@
 package org.mo.content.face.design.list;
 
-import org.mo.content.core.configuration.common.FAbstractConfigurationAction;
-
+import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationAction;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
 

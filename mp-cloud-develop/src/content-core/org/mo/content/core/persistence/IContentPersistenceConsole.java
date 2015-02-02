@@ -1,7 +1,6 @@
 package org.mo.content.core.persistence;
 
-import org.mo.content.core.configuration.FContentNode;
-
+import org.mo.cloud.content.design.configuration.FContentNode;
 import org.mo.com.lang.EResult;
 
 //============================================================

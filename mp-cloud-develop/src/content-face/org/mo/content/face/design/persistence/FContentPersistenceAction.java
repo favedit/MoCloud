@@ -1,7 +1,6 @@
 package org.mo.content.face.design.persistence;
 
-import org.mo.content.core.configuration.common.FAbstractConfigurationAction;
-
+import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationAction;
 import org.mo.content.core.persistence.EContentPersistenceAction;
 import org.mo.content.core.persistence.EContentPersistenceType;
 import org.mo.content.core.persistence.IContentPersistenceConsole;
