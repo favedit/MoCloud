@@ -36,5 +36,5 @@
    <Include>${application.config}/content/servlet.xml</Include>
 
    <!-- 包含：环境设定 -->
-   <Include>${application.config}/environment/environment-local.xml</Include>
+   <Include>${application.config}/environment/environment-home.xml</Include>
 </Configuration>

@@ -18,10 +18,14 @@ public interface IRs3TemplateConsole
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
+   // @param code 代码
+   // @param version 版本
    // @return 处理结果
    //============================================================
    FRs3Template findTemplate(ILogicContext logicContext,
-                             String guid);
+                             String guid,
+                             String code,
+                             String version);
 
    //============================================================
    // <T>导入模板。</T>

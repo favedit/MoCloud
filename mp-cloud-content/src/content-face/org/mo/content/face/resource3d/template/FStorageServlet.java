@@ -3,6 +3,7 @@ package org.mo.content.face.resource3d.template;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteStream;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -58,30 +59,35 @@ public class FStorageServlet
                        ILogicContext logicContext,
                        IWebServletRequest request,
                        IWebServletResponse response){
-      // 检查代码
+      // 获得参数
+      String guid = context.parameter("guid");
       String code = context.parameter("code");
-      if(RString.isEmpty(code)){
-         throw new FFatalError("Model code is empty.");
+      String version = context.parameter("version");
+      // 检查编号和代码，必须存在一个
+      if(RString.isEmpty(guid) && RString.isEmpty(code)){
+         throw new FFatalError("Template is empty. (guid={1}, code={2}, version={3})", guid, code, version);
       }
-      // 检查版本
-      //String version = context.parameter("version");
-      //if(RString.isEmpty(version)){
-      //   throw new FFatalError("Model version is empty.");
-      //}
-      // 生成模型
-      FRs3Template template = _templateConsole.findTemplate(logicContext, code);
-      // 存储为数组
+      // 生成数据
+      FRs3Template template = _templateConsole.findTemplate(logicContext, guid, code, version);
       FByteStream stream = new FByteStream();
-      template.serialize(stream);
+      if(template == null){
+         String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);
+         stream.writeInt32(EResult.Failure.value());
+         stream.writeString(info);
+      }else{
+         stream.writeInt32(EResult.Success.value());
+         template.serialize(stream);
+      }
+      int dataLength = stream.length();
       // 发送数据
-      _logger.debug(this, "process", "Send data. (length={1})", stream.length());
+      _logger.debug(this, "process", "Send template data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
       response.addHeader("Last-Modified", System.currentTimeMillis());
       response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
       response.setContentType(EMime.Bin.mime());
-      response.setContentLength(stream.length());
-      response.write(stream.memory(), 0, stream.length());
+      response.setContentLength(dataLength);
+      response.write(stream.memory(), 0, dataLength);
    }
 }

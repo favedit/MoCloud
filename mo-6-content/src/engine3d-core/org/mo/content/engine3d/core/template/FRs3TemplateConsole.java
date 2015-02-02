@@ -9,6 +9,8 @@ import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.engine.core.bitmap.IResBitmapConsole;
@@ -66,6 +68,21 @@ public class FRs3TemplateConsole
    }
 
    //============================================================
+   // <T>根据代码查找模板单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 模板单元
+   //============================================================
+   public FDataResource3dTemplateUnit findByCode(ILogicContext logicContext,
+                                                 String code){
+      String sql = FDataResource3dTemplateLogic.CODE + "='" + code + "'";
+      FDataResource3dTemplateLogic templateLogic = logicContext.findLogic(FDataResource3dTemplateLogic.class);
+      FDataResource3dTemplateUnit templateUnit = templateLogic.search(sql);
+      return templateUnit;
+   }
+
+   //============================================================
    // <T>查找资源模板。</T>
    //
    // @param logicContext 逻辑环境
@@ -74,10 +91,20 @@ public class FRs3TemplateConsole
    //============================================================
    @Override
    public FRs3Template findTemplate(ILogicContext logicContext,
-                                    String guid){
+                                    String guid,
+                                    String code,
+                                    String version){
       FRs3Template template = null;
       // 查找数据
-      FDataResource3dTemplateUnit templateUnit = findByGuid(logicContext, guid);
+      FDataResource3dTemplateUnit templateUnit = null;
+      if(!RString.isEmpty(guid)){
+         templateUnit = findByGuid(logicContext, guid);
+      }else if(!RString.isEmpty(code)){
+         templateUnit = findByCode(logicContext, code);
+      }else{
+         throw new FFatalError("Find template failure. (guid={1}, code={2}, version={3})", guid, code, version);
+      }
+      // 生成配置
       if(templateUnit != null){
          // 读取配置
          FXmlDocument xdocument = new FXmlDocument();
