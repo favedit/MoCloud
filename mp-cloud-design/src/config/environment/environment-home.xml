@@ -3,6 +3,19 @@
 <Config>
    
    <!-- ============================================================ -->
+   <!-- 内存缓冲控制台                                               -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
+         class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
+         scope = 'global' >
+      <Property name='enable'>N</Property>
+      <Property name='code'>G2L</Property>
+      <Property name='servers'>10.30.101.11:11311</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
    <!-- 环境控制台                                                   -->
    <!-- ============================================================ -->
    <Component
@@ -15,19 +28,6 @@
       <Property name='workpath'>${home.web.config}/system.environment</Property>
       <Initialize name='initializeMonitor'/>
       <Initialize name='initializeConfig'/>
-   </Component>
-   
-   <!-- ============================================================ -->
-   <!-- 内存缓冲控制台                                               -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
-         class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
-         scope = 'global' >
-      <Property name='enable'>N</Property>
-      <Property name='code'>CC</Property>
-      <Property name='servers'>10.30.101.11:11311</Property>
-      <Initialize name='initialize'/>
    </Component>
    
    <!-- ============================================================ -->
@@ -47,7 +47,7 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.127.3.12:3306/CD_CACHE</Property>
+               <Property name='url'>jdbc:mysql://localhost:3306/cache</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -72,7 +72,7 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.127.3.12:3306/CD_DATA</Property>
+               <Property name='url'>jdbc:mysql://localhost:3306/data</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
