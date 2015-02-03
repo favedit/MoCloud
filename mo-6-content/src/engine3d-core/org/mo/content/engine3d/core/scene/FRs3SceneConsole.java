@@ -1,4 +1,4 @@
-package org.mo.content.engine3d.core.model;
+package org.mo.content.engine3d.core.scene;
 
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshLogic;
@@ -21,10 +21,10 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>资源模型控制台。</T>
 //============================================================
-public class FRs3ModelConsole
+public class FRs3SceneConsole
       extends FConsole
       implements
-         IRs3ModelConsole
+         IRs3SceneConsole
 {
    // 存储控制台
    @ALink

@@ -4,7 +4,7 @@ import com.cyou.gccloud.data.data.FDataResourceBitmapImageUnit;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.com.io.FByteFile;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -35,6 +35,10 @@ public class FBitmapServlet
    // 存储管理接口
    @ALink
    protected IGcStorageConsole _storageConsole;
+
+   // 存储管理接口
+   @ALink
+   protected IGcStorageConsole _resourceConsole;
 
    // 纹理位图接口
    @ALink
@@ -69,11 +73,8 @@ public class FBitmapServlet
       // 获得数据
       FDataResourceBitmapImageUnit imageUnit = _bitmapConsole.findBitmapUnit(logicContext, code, version);
       String formatCode = imageUnit.formatCode();
-      String fileName = _storageConsole.makeFileName(EGcStorageCatalog.ResourceBitmapImage, imageUnit.createDate().formatDate(), imageUnit.guid(), imageUnit.gvid(), imageUnit.formatCode());
-      byte[] data = null;
-      try(FByteFile file = new FByteFile(fileName)){
-         data = file.toArray();
-      }
+      SGcStorage resource = _resourceConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
+      byte[] data = resource.data();
       int dataLength = data.length;
       // 发送数据
       _logger.debug(this, "process", "Send data. (length={1})", dataLength);

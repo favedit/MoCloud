@@ -8,7 +8,7 @@ import com.cyou.gccloud.data.data.FDataResource3dModelStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.com.io.FByteFile;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.content.resource3d.model.FRs3ModelStream;
@@ -23,7 +23,6 @@ public class FC3dModelConsole
       implements
          IC3dModelConsole
 {
-
    // 存储管理接口
    @ALink
    protected IGcStorageConsole _storageConsole;
@@ -59,8 +58,6 @@ public class FC3dModelConsole
          FLogicDataset<FDataResource3dModelStreamUnit> streamUnits = streamLogic.fetch(FDataResource3dModelStreamLogic.MESH_ID + "=" + meshUnit.ouid());
          for(FDataResource3dModelStreamUnit streamUnit : streamUnits){
             String streamGuid = streamUnit.guid();
-            String streamGvid = streamUnit.gvid();
-            String streamDate = streamUnit.createDate().formatDate();
             // 设置属性
             FRs3ModelStream stream = new FRs3ModelStream();
             stream.setCode(streamUnit.code());
@@ -69,10 +66,8 @@ public class FC3dModelConsole
             stream.setDataStride(streamUnit.dataStride());
             stream.setDataCount(streamUnit.dataCount());
             // 读取文件
-            String fileName = _storageConsole.makeFileName(EGcStorageCatalog.Resource3dModelStream, streamDate, streamGuid, streamGvid, null);
-            try(FByteFile file = new FByteFile(fileName)){
-               stream.setData(file.toArray());
-            }
+            SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dModelStream, streamGuid);
+            stream.setData(resource.data());
             mesh.streams().push(stream);
          }
          model.meshs().push(mesh);

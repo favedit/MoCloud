@@ -94,9 +94,9 @@ public class FRs3TextureConsole
          // 上传位图数据
          imageLogic.find(imageUnit, imageUnit.ouid());
          try(FByteFile file = new FByteFile(fileInfo.fileName())){
-            SGcStorage storage = new SGcStorage(EGcStorageCatalog.ResourceBitmapImage, imageUnit.createDate(), imageUnit.guid(), imageUnit.gvid(), fileExtension);
-            storage.setData(file.toArray());
-            _storageConsole.store(storage);
+            SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid(), imageUnit.createDate(), fileExtension);
+            resource.setData(file.toArray());
+            _storageConsole.store(resource);
          }
          // 新建纹理位图
          FDataResource3dTextureBitmapLogic textureBitmapLogic = logicContext.findLogic(FDataResource3dTextureBitmapLogic.class);
