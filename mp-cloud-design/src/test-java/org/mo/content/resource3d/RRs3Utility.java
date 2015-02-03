@@ -4,4 +4,5 @@ public class RRs3Utility
 {
    public static String RootPath = "E:/Microbject";
 
+   public static String Config = "application-home.xml";
 }

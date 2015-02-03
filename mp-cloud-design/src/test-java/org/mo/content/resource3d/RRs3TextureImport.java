@@ -15,7 +15,7 @@ public class RRs3TextureImport
    public static void main(String[] args) throws Exception{
       String configPath = RRs3Utility.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
+      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
       String filePath = RRs3Utility.RootPath + "/MoScript/source/assets/texture/pvw.show.001.01";
 

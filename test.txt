@@ -1,6 +1,9 @@
 https://github.com/favedit/MoCloud.git  => E:\Microbject\MoCloud
 https://github.com/favedit/MoScript.git => E:\Microbject\MoScript
 
+mongod --logpath "E:\Microbject\MoCloud\mt-temp\database\logs.txt" --logappend --dbpath "E:\Microbject\MoCloud\mt-database" --directoryperdb --serviceName "ContentDB" --serviceDisplayName "ContentDB" --install
+mongod.exe --remove --serviceName "MongoDB"
+
 
 tomcat-cloud.develop: 90
 

@@ -16,7 +16,7 @@ public class RRs3ModelImport
    public static void main(String[] args) throws Exception{
       String configPath = RRs3Utility.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
+      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
       FByteFile file = new FByteFile();
       //file.loadFile("E:/Microbject/XiaoLongNv.mesh");

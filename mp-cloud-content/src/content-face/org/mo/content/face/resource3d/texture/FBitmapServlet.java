@@ -36,10 +36,6 @@ public class FBitmapServlet
    @ALink
    protected IGcStorageConsole _storageConsole;
 
-   // 存储管理接口
-   @ALink
-   protected IGcStorageConsole _resourceConsole;
-
    // 纹理位图接口
    @ALink
    protected IC3dBitmapConsole _bitmapConsole;
@@ -73,7 +69,7 @@ public class FBitmapServlet
       // 获得数据
       FDataResourceBitmapImageUnit imageUnit = _bitmapConsole.findBitmapUnit(logicContext, code, version);
       String formatCode = imageUnit.formatCode();
-      SGcStorage resource = _resourceConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
+      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
       byte[] data = resource.data();
       int dataLength = data.length;
       // 发送数据
