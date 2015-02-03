@@ -38,8 +38,10 @@ public class FGcStorageConsole
    @AProperty
    protected String _storageName;
 
+   // 数据库链接
    protected Mongo _connection;
 
+   // 数据库
    protected DB _database;
 
    //============================================================
@@ -50,15 +52,9 @@ public class FGcStorageConsole
    //============================================================
    @Override
    public SGcStorage find(String catalog,
-                           String guid){
+                          String guid){
       // 获得集合
       DBCollection collection = _database.getCollection(catalog);
-      //      // 新建数据
-      //      DBObject item = new BasicDBObject();
-      //      item.put("guid", guid);
-      //      item.put("date", date);
-      //      item.put("type", type);
-      //      item.put("data", data);
       // 查找内容
       DBObject search = new BasicDBObject("guid", guid);
       // 更新处理
@@ -131,7 +127,6 @@ public class FGcStorageConsole
       DBObject search = new BasicDBObject("guid", guid);
       // 更新处理
       collection.update(search, item, true, false);
-      //collection.insert(item);
       return true;
    }
 
