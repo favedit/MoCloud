@@ -15,15 +15,15 @@ public abstract class XBaseFieldString
       extends XContentObject
 {
    // 类名称
-   public static final String CLASS_NAME = "FieldString";
+   public static final String CONTENT_NAME = "FieldString";
 
    // 名称的定义
    @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
-   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>

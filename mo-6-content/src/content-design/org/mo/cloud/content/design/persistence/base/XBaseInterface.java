@@ -15,15 +15,23 @@ public abstract class XBaseInterface
       extends XContentObject
 {
    // 类名称
-   public static final String CLASS_NAME = "Interface";
+   public static final String CONTENT_NAME = "Interface";
 
    // 名称的定义
    @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
-   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
+
+   // 备注的定义
+   @AContentField
+   public final static FContentField NOTE = new FContentField("note", "note", EContentData.String, "", "", "", "YYNY");
+
+   // 继承集合的定义
+   @AContentField
+   public final static FContentField INHERITS = new FContentField("inherits", "inherits", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -50,6 +58,14 @@ public abstract class XBaseInterface
    // 标签
    @AName("label")
    protected String _label;
+
+   // 备注
+   @AName("note")
+   protected String _note;
+
+   // 继承集合
+   @AName("inherits")
+   protected String _inherits;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -85,6 +101,42 @@ public abstract class XBaseInterface
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得备注的内容。</T>
+   //
+   // @return 备注
+   //============================================================
+   public String getNote(){
+      return _note;
+   }
+
+   //============================================================
+   // <T>设置备注的内容。</T>
+   //
+   // @param value 备注
+   //============================================================
+   public void setNote(String value){
+      _note = value;
+   }
+
+   //============================================================
+   // <T>获得继承集合的内容。</T>
+   //
+   // @return 继承集合
+   //============================================================
+   public String getInherits(){
+      return _inherits;
+   }
+
+   //============================================================
+   // <T>设置继承集合的内容。</T>
+   //
+   // @param value 继承集合
+   //============================================================
+   public void setInherits(String value){
+      _inherits = value;
    }
 
 }

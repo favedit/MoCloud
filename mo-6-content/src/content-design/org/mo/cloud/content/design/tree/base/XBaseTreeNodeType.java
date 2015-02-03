@@ -15,43 +15,43 @@ public abstract class XBaseTreeNodeType
       extends XContentObject
 {
    // 类名称
-   public static final String CLASS_NAME = "TreeNodeType";
+   public static final String CONTENT_NAME = "TreeNodeType";
 
    // 名称的定义
    @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
-   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
    // 有效性的定义
    @AContentField
-   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String);
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
 
    // 备注的定义
    @AContentField
-   public final static FContentField NOTE = new FContentField("note", "note", EContentData.String);
+   public final static FContentField NOTE = new FContentField("note", "note", EContentData.String, "", "", "", "YYNY");
 
    // 关联的定义
    @AContentField
-   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String);
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
 
    // 图标的定义
    @AContentField
-   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String);
+   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
 
    // 服务的定义
    @AContentField
-   public final static FContentField SERVICE = new FContentField("service", "service", EContentData.String);
+   public final static FContentField SERVICE = new FContentField("service", "service", EContentData.String, "", "", "", "YYNY");
 
    // 命令的定义
    @AContentField
-   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String);
+   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String, "", "", "", "YYNY");
 
    // 属性集合的定义
    @AContentField
-   public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String);
+   public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>

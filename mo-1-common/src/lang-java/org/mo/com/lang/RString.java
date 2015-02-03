@@ -716,8 +716,39 @@ public class RString
    // @param value 字符串
    // @return 字符串
    //============================================================
+   public static String empty(String value){
+      if(value != null){
+         if(value.length() > 0){
+            return value;
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得去掉空白的非空字符串。</T>
+   //
+   // @param value 字符串
+   // @return 字符串
+   //============================================================
+   public static String blank(String value){
+      if(value != null){
+         String result = value.trim();
+         if(result.length() == 0){
+            return result;
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得非空字符串。</T>
+   //
+   // @param value 字符串
+   // @return 字符串
+   //============================================================
    public static String nvl(String value){
-      if(null != value){
+      if(value != null){
          if(value.length() > 0){
             return value;
          }

@@ -2,6 +2,7 @@ package org.mo.cloud.content.design.frame;
 
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 
 //============================================================
 // <T>内容表单控制台接口。</T>
@@ -31,8 +32,10 @@ public interface IFrameConsole
    //
    // @param storgeName 存储名称
    // @param formName 表单名称
+   // @param modeCd 模式类型
    // @return 表单定义
    //============================================================
    FContentObject findDefine(String storgeName,
-                             String formName);
+                             String formName,
+                             EPersistenceMode modeCd);
 }

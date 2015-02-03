@@ -17,12 +17,12 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 public abstract class <jt:item source='$component.class' format='class.name'/> extends XContentObject
 {
    // 类名称
-   public static final String CLASS_NAME = "<jt:item source='$component.name'/>";
+   public static final String CONTENT_NAME = "<jt:item source='$component.name'/>";
 
 <jt:loop source='$attributes' order='asc' alias='attribute'>
    // <jt:item source="$attribute.label"/>的定义
    @AContentField
-   public final static FContentField <jt:item source='$attribute.name' format='upper'/> = new FContentField("<jt:item source='$attribute.name' format='method'/>", "<jt:item source='$attribute.name' format='lower'/>", EContentData.<jt:item source='$attribute.type'/>);
+   public final static FContentField <jt:item source='$attribute.name' format='upper'/> = new FContentField("<jt:item source='$attribute.name' format='method'/>", "<jt:item source='$attribute.name' format='lower'/>", EContentData.<jt:item source='$attribute.type'/>, "<jt:item source='$attribute.data_group'/>", "<jt:item source='$attribute.data_code'/>", "<jt:item source='$attribute.data_default'/>", "<jt:item source='$attribute.is_store'/><jt:item source='$attribute.is_config'/><jt:item source='$attribute.is_abstract'/><jt:item source='$attribute.is_default'/>");
 
 </jt:loop>
    //============================================================

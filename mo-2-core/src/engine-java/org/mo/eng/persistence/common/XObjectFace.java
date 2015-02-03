@@ -3,15 +3,13 @@ package org.mo.eng.persistence.common;
 import org.mo.com.xml.IXmlObject;
 
 //============================================================
-// <T>接口的XML节点基类。</T>
-//
-// @author system
+// <T>对象对象的XML节点基类。</T>
 //============================================================
 public interface XObjectFace
       extends
          IXmlObject
 {
-   // 名称
+   // 名称定义
    String NAME = "IObject";
 
    // 名称的名称定义

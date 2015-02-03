@@ -5,6 +5,7 @@ import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.lang.FDictionary;
@@ -84,17 +85,19 @@ public class FFrameConsole
    //
    // @param storgeName 存储名称
    // @param formName 表单名称
+   // @param modeCd 模式类型
    // @return 表单
    //============================================================
    @Override
    public FContentObject findDefine(String storgeName,
-                                    String formName){
+                                    String formName,
+                                    EPersistenceMode modeCd){
       XContentObject xobject = find(storgeName, formName);
       if(xobject != null){
          // 获得转换器
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
          // 转换对象
-         FContentObject content = persistence.convertConfig(xobject);
+         FContentObject content = persistence.convertConfig(xobject, modeCd);
          return content;
       }
       return null;

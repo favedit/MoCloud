@@ -3,9 +3,11 @@ package org.mo.cloud.content.describe.frame;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.REnum;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
@@ -44,7 +46,8 @@ public class FFrameService
    // @param input 网络输入
    // @param output 网络输出
    //========================================================
-   public void buildFrame(FContentObject control){
+   public void buildFrame(FContentObject control,
+                          EPersistenceMode modeCd){
       // 处理当前节点
       String frameSource = control.get("frame_source", null);
       if(!RString.isEmpty(frameSource)){
@@ -60,7 +63,7 @@ public class FFrameService
             frameName = items[1];
          }
          // 查找定义
-         FContentObject frame = _frameConsole.findDefine(_storageName, frameName);
+         FContentObject frame = _frameConsole.findDefine(_storageName, frameName, modeCd);
          if(frame == null){
             throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
          }
@@ -78,7 +81,7 @@ public class FFrameService
       // 处理所有子节点
       if(control.hasNode()){
          for(FContentObject xchild : control.nodes()){
-            buildFrame(xchild);
+            buildFrame(xchild, modeCd);
          }
       }
    }
@@ -116,17 +119,35 @@ public class FFrameService
    public EResult query(IWebContext context,
                         IWebInput input,
                         IWebOutput output){
-      // 获得参数
+      // 获得输入
       FXmlNode xinput = input.config();
       FXmlNode xoutput = output.config();
-      // 获得参数集合
+      //............................................................
+      // 参数获取
+      String frameName = context.parameter("frame");
+      if(!RString.isEmpty(frameName)){
+         String mode = context.parameter("mode_cd");
+         EPersistenceMode modeCd = EPersistenceMode.Config;
+         if(!RString.isEmpty(mode)){
+            modeCd = REnum.parse(EPersistenceMode.class, mode);
+         }
+         FContentObject content = _frameConsole.findDefine(_storageName, frameName, modeCd);
+         content.set("name", frameName);
+         buildFrame(content, modeCd);
+         // 转换数据
+         FXmlNode xconfig = xoutput.createNode();
+         content.saveConfig(xconfig);
+         return EResult.Success;
+      }
+      //............................................................
+      // 内容获取
       for(FXmlNode xframe : xinput){
          if(xframe.isName("Frame")){
             String name = xframe.get("name");
             // 查找目录定义
-            FContentObject content = _frameConsole.findDefine(_storageName, name);
+            FContentObject content = _frameConsole.findDefine(_storageName, name, EPersistenceMode.Config);
             content.set("name", name);
-            buildFrame(content);
+            buildFrame(content, EPersistenceMode.Config);
             // 转换数据
             FXmlNode xconfig = xoutput.createNode();
             content.saveConfig(xconfig);

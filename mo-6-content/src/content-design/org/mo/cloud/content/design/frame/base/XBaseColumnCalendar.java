@@ -15,95 +15,135 @@ public abstract class XBaseColumnCalendar
       extends XContentObject
 {
    // 类名称
-   public static final String CLASS_NAME = "ColumnCalendar";
+   public static final String CONTENT_NAME = "ColumnCalendar";
 
    // 类型的定义
    @AContentField
-   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String);
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
 
    // 名称的定义
    @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
 
    // 有效性的定义
    @AContentField
-   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean);
+   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
-   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
    // 位置的定义
    @AContentField
-   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String);
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
 
    // 尺寸的定义
    @AContentField
-   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String);
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String, "", "", "", "YYNY");
 
    // 内空白的定义
    @AContentField
-   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String);
+   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String, "", "", "", "YYNY");
 
    // 外空白的定义
    @AContentField
-   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String);
+   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑模式的定义
+   @AContentField
+   public final static FContentField EDIT_MODE = new FContentField("editMode", "edit_mode", EContentData.String, "", "", "", "NYNN");
+
+   // 查看编辑的定义
+   @AContentField
+   public final static FContentField EDIT_VIEW = new FContentField("editView", "edit_view", EContentData.Boolean, "edit_mode", "V", "Y", "YNNY");
+
+   // 新建编辑的定义
+   @AContentField
+   public final static FContentField EDIT_INSERT = new FContentField("editInsert", "edit_insert", EContentData.Boolean, "edit_mode", "I", "Y", "YNNY");
+
+   // 更新编辑的定义
+   @AContentField
+   public final static FContentField EDIT_UPDATE = new FContentField("editUpdate", "edit_update", EContentData.Boolean, "edit_mode", "U", "Y", "YNNY");
+
+   // 删除编辑的定义
+   @AContentField
+   public final static FContentField EDIT_DELETE = new FContentField("editDelete", "edit_delete", EContentData.Boolean, "edit_mode", "D", "Y", "YNNY");
+
+   // 校验模式的定义
+   @AContentField
+   public final static FContentField VERIFY_MODE = new FContentField("verifyMode", "verify_mode", EContentData.String, "", "", "", "NYNN");
+
+   // 新建检查的定义
+   @AContentField
+   public final static FContentField VERIFY_INSERT = new FContentField("verifyInsert", "verify_insert", EContentData.Boolean, "verify_mode", "I", "Y", "YNNY");
+
+   // 编辑检查的定义
+   @AContentField
+   public final static FContentField VERIFY_UPDATE = new FContentField("verifyUpdate", "verify_update", EContentData.Boolean, "verify_mode", "U", "Y", "YNNY");
+
+   // 删除检查的定义
+   @AContentField
+   public final static FContentField VERIFY_DELETE = new FContentField("verifyDelete", "verify_delete", EContentData.Boolean, "verify_mode", "D", "Y", "YNNY");
 
    // 数据名称的定义
    @AContentField
-   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String);
+   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
+
+   // 数据类型的定义
+   @AContentField
+   public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
    // 放大引用的定义
    @AContentField
-   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String);
+   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
 
    // 放大字段的定义
    @AContentField
-   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String);
+   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
 
    // 引用服务的定义
    @AContentField
-   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String);
+   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
 
    // 引用地址的定义
    @AContentField
-   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String);
+   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
 
    // 引用字段的定义
    @AContentField
-   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String);
+   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
 
    // 应用条件的定义
    @AContentField
-   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String);
+   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
 
    // 引用排序的定义
    @AContentField
-   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String);
+   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
 
    // 编辑大小写类型的定义
    @AContentField
-   public final static FContentField EDIT_CASE_CD = new FContentField("editCaseCd", "edit_case_cd", EContentData.String);
+   public final static FContentField EDIT_CASE_CD = new FContentField("editCaseCd", "edit_case_cd", EContentData.String, "", "", "", "YYNY");
 
    // 编辑模板的定义
    @AContentField
-   public final static FContentField EDIT_PATTERN = new FContentField("editPattern", "edit_pattern", EContentData.String);
+   public final static FContentField EDIT_PATTERN = new FContentField("editPattern", "edit_pattern", EContentData.String, "", "", "", "YYNY");
 
    // 编辑长度的定义
    @AContentField
-   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String);
+   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String, "", "", "", "YYNY");
 
    // 编辑自动完成的定义
    @AContentField
-   public final static FContentField EDIT_COMPLETE = new FContentField("editComplete", "edit_complete", EContentData.String);
+   public final static FContentField EDIT_COMPLETE = new FContentField("editComplete", "edit_complete", EContentData.String, "", "", "", "YYNY");
 
    // 校验最小长度的定义
    @AContentField
-   public final static FContentField VALID_LENGTH_MIN = new FContentField("validLengthMin", "valid_length_min", EContentData.String);
+   public final static FContentField VALID_LENGTH_MIN = new FContentField("validLengthMin", "valid_length_min", EContentData.String, "", "", "", "YYNY");
 
    // 校验最大长度的定义
    @AContentField
-   public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String);
+   public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -155,9 +195,49 @@ public abstract class XBaseColumnCalendar
    @AName("margin")
    protected String _margin;
 
+   // 编辑模式
+   @AName("edit_mode")
+   protected String _editMode;
+
+   // 查看编辑
+   @AName("edit_view")
+   protected boolean _editView;
+
+   // 新建编辑
+   @AName("edit_insert")
+   protected boolean _editInsert;
+
+   // 更新编辑
+   @AName("edit_update")
+   protected boolean _editUpdate;
+
+   // 删除编辑
+   @AName("edit_delete")
+   protected boolean _editDelete;
+
+   // 校验模式
+   @AName("verify_mode")
+   protected String _verifyMode;
+
+   // 新建检查
+   @AName("verify_insert")
+   protected boolean _verifyInsert;
+
+   // 编辑检查
+   @AName("verify_update")
+   protected boolean _verifyUpdate;
+
+   // 删除检查
+   @AName("verify_delete")
+   protected boolean _verifyDelete;
+
    // 数据名称
    @AName("data_name")
    protected String _dataName;
+
+   // 数据类型
+   @AName("data_type_cd")
+   protected String _dataTypeCd;
 
    // 放大引用
    @AName("zoom_reference")
@@ -356,6 +436,168 @@ public abstract class XBaseColumnCalendar
    }
 
    //============================================================
+   // <T>获得编辑模式的内容。</T>
+   //
+   // @return 编辑模式
+   //============================================================
+   public String getEditMode(){
+      return _editMode;
+   }
+
+   //============================================================
+   // <T>设置编辑模式的内容。</T>
+   //
+   // @param value 编辑模式
+   //============================================================
+   public void setEditMode(String value){
+      _editMode = value;
+   }
+
+   //============================================================
+   // <T>获得查看编辑的内容。</T>
+   //
+   // @return 查看编辑
+   //============================================================
+   public Boolean getEditView(){
+      return _editView;
+   }
+
+   //============================================================
+   // <T>设置查看编辑的内容。</T>
+   //
+   // @param value 查看编辑
+   //============================================================
+   public void setEditView(Boolean value){
+      _editView = value;
+   }
+
+   //============================================================
+   // <T>获得新建编辑的内容。</T>
+   //
+   // @return 新建编辑
+   //============================================================
+   public Boolean getEditInsert(){
+      return _editInsert;
+   }
+
+   //============================================================
+   // <T>设置新建编辑的内容。</T>
+   //
+   // @param value 新建编辑
+   //============================================================
+   public void setEditInsert(Boolean value){
+      _editInsert = value;
+   }
+
+   //============================================================
+   // <T>获得更新编辑的内容。</T>
+   //
+   // @return 更新编辑
+   //============================================================
+   public Boolean getEditUpdate(){
+      return _editUpdate;
+   }
+
+   //============================================================
+   // <T>设置更新编辑的内容。</T>
+   //
+   // @param value 更新编辑
+   //============================================================
+   public void setEditUpdate(Boolean value){
+      _editUpdate = value;
+   }
+
+   //============================================================
+   // <T>获得删除编辑的内容。</T>
+   //
+   // @return 删除编辑
+   //============================================================
+   public Boolean getEditDelete(){
+      return _editDelete;
+   }
+
+   //============================================================
+   // <T>设置删除编辑的内容。</T>
+   //
+   // @param value 删除编辑
+   //============================================================
+   public void setEditDelete(Boolean value){
+      _editDelete = value;
+   }
+
+   //============================================================
+   // <T>获得校验模式的内容。</T>
+   //
+   // @return 校验模式
+   //============================================================
+   public String getVerifyMode(){
+      return _verifyMode;
+   }
+
+   //============================================================
+   // <T>设置校验模式的内容。</T>
+   //
+   // @param value 校验模式
+   //============================================================
+   public void setVerifyMode(String value){
+      _verifyMode = value;
+   }
+
+   //============================================================
+   // <T>获得新建检查的内容。</T>
+   //
+   // @return 新建检查
+   //============================================================
+   public Boolean getVerifyInsert(){
+      return _verifyInsert;
+   }
+
+   //============================================================
+   // <T>设置新建检查的内容。</T>
+   //
+   // @param value 新建检查
+   //============================================================
+   public void setVerifyInsert(Boolean value){
+      _verifyInsert = value;
+   }
+
+   //============================================================
+   // <T>获得编辑检查的内容。</T>
+   //
+   // @return 编辑检查
+   //============================================================
+   public Boolean getVerifyUpdate(){
+      return _verifyUpdate;
+   }
+
+   //============================================================
+   // <T>设置编辑检查的内容。</T>
+   //
+   // @param value 编辑检查
+   //============================================================
+   public void setVerifyUpdate(Boolean value){
+      _verifyUpdate = value;
+   }
+
+   //============================================================
+   // <T>获得删除检查的内容。</T>
+   //
+   // @return 删除检查
+   //============================================================
+   public Boolean getVerifyDelete(){
+      return _verifyDelete;
+   }
+
+   //============================================================
+   // <T>设置删除检查的内容。</T>
+   //
+   // @param value 删除检查
+   //============================================================
+   public void setVerifyDelete(Boolean value){
+      _verifyDelete = value;
+   }
+
+   //============================================================
    // <T>获得数据名称的内容。</T>
    //
    // @return 数据名称
@@ -371,6 +613,24 @@ public abstract class XBaseColumnCalendar
    //============================================================
    public void setDataName(String value){
       _dataName = value;
+   }
+
+   //============================================================
+   // <T>获得数据类型的内容。</T>
+   //
+   // @return 数据类型
+   //============================================================
+   public String getDataTypeCd(){
+      return _dataTypeCd;
+   }
+
+   //============================================================
+   // <T>设置数据类型的内容。</T>
+   //
+   // @param value 数据类型
+   //============================================================
+   public void setDataTypeCd(String value){
+      _dataTypeCd = value;
    }
 
    //============================================================

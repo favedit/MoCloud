@@ -14,6 +14,15 @@
    
    <Define name='output.design'>${application}/mo-6-content</Define>
 
+   <!-- 项目路径 -->
+   <Define name='project.common'>${application}/mo-1-common</Define>
+   <Define name='project.core'>${application}/mo-2-core</Define>
+   <Define name='project.logic'>${application}/mo-3-logic</Define>
+   <Define name='project.web'>${application}/mo-4-web</Define>
+   <Define name='project.cloud.content'>${application}/mp-cloud-content</Define>
+   <Define name='project.cloud.design'>${application}/mp-cloud-design</Define>
+   <Define name='project.cloud.develop'>${application}/mp-cloud-develop</Define>
+
    <!-- 导出路径 -->
    <Define name='cloud.space'>${application.space}</Define>
    <Define name='cloud.export.template'>D:/WP-SNS-Work/Temp/Cloud/Configuration/template</Define>

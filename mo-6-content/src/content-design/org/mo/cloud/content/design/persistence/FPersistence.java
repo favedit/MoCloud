@@ -88,29 +88,14 @@ public class FPersistence
    // @return 实例
    //============================================================
    public <T extends XContentObject> T createInstance(String name){
-      return createInstance(name, null);
-   }
-
-   //============================================================
-   // <T>创建实例。</T>
-   //
-   // @param name 名称
-   // @param attributes 属性集合
-   // @return 实例
-   //============================================================
-   public <T extends XContentObject> T createInstance(String name,
-                                                      IAttributes attributes){
       // 获得类对象
       FContentClass clazz = _classes.find(name);
       if(clazz == null){
          throw new FFatalError("Content class is not found. (name={1})", name);
       }
+      // 创建实例
       T instance = clazz.newInstance();
       instance.linkContentClass(clazz);
-      // 设置属性
-      if(attributes != null){
-         setAttributes(instance, attributes);
-      }
       return instance;
    }
 
@@ -122,13 +107,30 @@ public class FPersistence
    // @return 实例
    //============================================================
    public void setAttributes(XContentObject xinsance,
-                             IAttributes attributes){
+                             IAttributes attributes,
+                             EPersistenceMode modeCd){
       FContentClass clazz = xinsance.contentClass();
       for(INamePair<FContentField> pair : clazz.fields()){
          String name = pair.name();
          String value = attributes.get(name, null);
          FContentField field = pair.value();
          field.set(xinsance, value);
+         //         String name = pair.name();
+         //         FContentField field = pair.value();
+         //         // 存储模式
+         //         if(modeCd == EPersistenceMode.Store){
+         //            if(field.isStore()){
+         //               String value = attributes.get(name, null);
+         //               field.set(xinsance, value);
+         //            }
+         //         }
+         //         // 配置模式
+         //         if(modeCd == EPersistenceMode.Config){
+         //            if(field.isConfig()){
+         //               String value = attributes.get(name, null);
+         //               field.set(xinsance, value);
+         //            }
+         //         }
       }
    }
 
@@ -140,16 +142,26 @@ public class FPersistence
    // @return 实例
    //============================================================
    public void setAttributes(IAttributes attributes,
-                             XContentObject xinsance){
+                             XContentObject xinsance,
+                             EPersistenceMode modeCd){
       FContentClass clazz = xinsance.contentClass();
       for(INamePair<FContentField> pair : clazz.fields()){
          String name = pair.name();
          FContentField field = pair.value();
          Object value = field.get(xinsance);
          if(value != null){
-            attributes.set(name, value.toString());
-         }else{
-            attributes.set(name, null);
+            // 存储模式
+            if(modeCd == EPersistenceMode.Store){
+               if(field.isStore()){
+                  attributes.set(name, value.toString());
+               }
+            }
+            // 配置模式
+            if(modeCd == EPersistenceMode.Config){
+               if(field.isConfig()){
+                  attributes.set(name, value.toString());
+               }
+            }
          }
       }
    }
@@ -160,14 +172,25 @@ public class FPersistence
    // @param xconfig 配置节点
    //============================================================
    public <T extends XContentObject> T convertInstance(FContentObject xconfig){
+      return convertInstance(xconfig, EPersistenceMode.Config);
+   }
+
+   //============================================================
+   // <T>加载配置信息。</T>
+   //
+   // @param xconfig 配置节点
+   // @param modeCd 模式类型
+   //============================================================
+   public <T extends XContentObject> T convertInstance(FContentObject xconfig,
+                                                       EPersistenceMode modeCd){
       String name = xconfig.name();
       T xinstance = createInstance(name);
       if(xconfig.hasAttribute()){
-         setAttributes(xinstance, xconfig.attributes());
+         setAttributes(xinstance, xconfig.attributes(), modeCd);
       }
       if(xconfig.hasNode()){
          for(FContentObject xobject : xconfig.nodes()){
-            XContentObject xchild = convertInstance(xobject);
+            XContentObject xchild = convertInstance(xobject, modeCd);
             xinstance.children().push(xchild);
          }
       }
@@ -180,12 +203,23 @@ public class FPersistence
    // @param xconfig 配置节点
    //============================================================
    public <T extends XContentObject> FContentObject convertConfig(T instance){
+      return convertConfig(instance, EPersistenceMode.Config);
+   }
+
+   //============================================================
+   // <T>加载配置信息。</T>
+   //
+   // @param xconfig 配置节点
+   // @param modeCd 模式类型
+   //============================================================
+   public <T extends XContentObject> FContentObject convertConfig(T instance,
+                                                                  EPersistenceMode modeCd){
       FContentObject content = new FContentObject();
       content.setName(instance.name());
-      setAttributes(content.attributes(), instance);
+      setAttributes(content.attributes(), instance, modeCd);
       if(instance.hasChild()){
          for(XContentObject xchildren : instance.children()){
-            content.push(convertConfig(xchildren));
+            content.push(convertConfig(xchildren, modeCd));
          }
       }
       return content;

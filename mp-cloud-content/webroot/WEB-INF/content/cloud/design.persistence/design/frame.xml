@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150202174332">
+<Content name="design.frame" update_date="20150202210900">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
-      <Attribute is_valid="Y" type="String" name="class_name" label="类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="Boolean" name="valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>

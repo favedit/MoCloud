@@ -15,39 +15,39 @@ public abstract class XBaseTableFrame
       extends XContentObject
 {
    // 类名称
-   public static final String CLASS_NAME = "TableFrame";
+   public static final String CONTENT_NAME = "TableFrame";
 
    // 类型的定义
    @AContentField
-   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String);
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
 
    // 名称的定义
    @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String);
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
 
    // 有效性的定义
    @AContentField
-   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean);
+   public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
-   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String);
+   public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
    // 位置的定义
    @AContentField
-   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String);
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
 
    // 尺寸的定义
    @AContentField
-   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String);
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String, "", "", "", "YYNY");
 
    // 内空白的定义
    @AContentField
-   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String);
+   public final static FContentField PADDING = new FContentField("padding", "padding", EContentData.String, "", "", "", "YYNY");
 
    // 外空白的定义
    @AContentField
-   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String);
+   public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>

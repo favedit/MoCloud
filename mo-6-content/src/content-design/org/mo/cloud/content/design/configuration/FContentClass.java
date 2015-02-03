@@ -1,6 +1,7 @@
 package org.mo.cloud.content.design.configuration;
 
 import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
@@ -139,6 +140,25 @@ public class FContentClass
    }
 
    //============================================================
+   // <T>查找指定名称的节点。</T>
+   //============================================================
+   protected FField findField(FField[] fields,
+                              String name){
+      for(FField field : fields){
+         if(!field.isStatic()){
+            AName aname = field.getAnnotation(AName.class);
+            if(aname != null){
+               String linkName = aname.value();
+               if(linkName.equals(name)){
+                  return field;
+               }
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>建立内部信息。</T>
    //============================================================
    protected void build(){
@@ -162,9 +182,21 @@ public class FContentClass
             AName aname = field.getAnnotation(AName.class);
             if(aname != null){
                String linkName = aname.value();
+               // 查找名称
                FContentField contentField = _fields.find(linkName);
-               if(contentField != null){
-                  contentField.link(field);
+               if(contentField == null){
+                  throw new FFatalError("Content field is not exists. (link_name={1})", linkName);
+               }
+               // 关联字段
+               contentField.link(field);
+               // 设置分组字段
+               String dataGroup = contentField.dataGroup();
+               if(dataGroup != null){
+                  FField groupField = findField(fields, dataGroup);
+                  if(groupField == null){
+                     throw new FFatalError("Content group field is not exists. (link_name={1}, data_group={2})", linkName, dataGroup);
+                  }
+                  contentField.linkGroup(groupField);
                }
             }
          }

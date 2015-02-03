@@ -12,78 +12,82 @@ import org.mo.eng.persistence.common.XObjectFace;
 
 //============================================================
 // <T>属性对象的XML节点基类。</T>
-//
-// @author system
 //============================================================
 public abstract class XBaseAttribute
       extends FXmlObject
       implements
          XObjectFace
 {
-   // 名称
+   // 名称定义
    public static final String NAME = "Attribute";
 
-   // 名称的定义
-   public static final String PTY_NAME = "name";
-
-   // 标签的定义
-   public static final String PTY_LABEL = "label";
-
-   // 有效性的定义
-   public static final String PTY_IS_VALID = "is_valid";
-
-   // 描述信息的定义
-   public static final String PTY_NOTE = "note";
-
-   // 附加属性的定义
-   public static final String PTY_ATTRIBUTES = "attributes";
-
-   // 类型的定义
-   public static final String PTY_TYPE = "type";
-
-   // 可存储的定义
-   public static final String PTY_IS_STORE = "is_store";
-
-   // 可配置的定义
-   public static final String PTY_IS_CONFIG = "is_config";
-
-   // 虚属性的定义
-   public static final String PTY_IS_ABSTRACT = "is_abstract";
-
-   // 可默认的定义
-   public static final String PTY_IS_DEFAULT = "is_default";
-
-   // 默认值的定义
-   public static final String PTY_DATA_DEFAULT = "data_default";
+   //============================================================
+   // <T>获得名称定义。</T>
+   //
+   // @return 名称定义
+   //============================================================
+   public String name(){
+      return NAME;
+   }
 
    //============================================================
-   // <T>是否指定名称。</T>
+   // <T>判断是否指定名称。</T>
    //
    // @param name 名称
-   // @return 是否指定名称
+   // @return 是否指定
    //============================================================
    public static boolean isName(String name){
       return NAME.equals(name);
    }
 
    //============================================================
-   // <T>是否指定接口。</T>
+   // <T>判断是否指定实例。</T>
    //
-   // @param name 接口
-   // @return 是否指定接口
+   // @param xobject 对象
+   // @return 是否指定
    //============================================================
    public static boolean isInstance(IXmlObject xobject){
       return NAME.equals(xobject.name());
    }
 
-   //============================================================
-   // <T>获得名称。</T>
-   //
-   // @return 名称
-   //============================================================
-   public String name(){
-      return NAME;
-   }
+   // 名称的名称定义
+   public static final String PTY_NAME = "name";
+
+   // 标签的名称定义
+   public static final String PTY_LABEL = "label";
+
+   // 有效性的名称定义
+   public static final String PTY_IS_VALID = "is_valid";
+
+   // 描述信息的名称定义
+   public static final String PTY_NOTE = "note";
+
+   // 附加属性的名称定义
+   public static final String PTY_ATTRIBUTES = "attributes";
+
+   // 类型的名称定义
+   public static final String PTY_TYPE = "type";
+
+   // 可存储的名称定义
+   public static final String PTY_IS_STORE = "is_store";
+
+   // 可配置的名称定义
+   public static final String PTY_IS_CONFIG = "is_config";
+
+   // 虚属性的名称定义
+   public static final String PTY_IS_ABSTRACT = "is_abstract";
+
+   // 可默认的名称定义
+   public static final String PTY_IS_DEFAULT = "is_default";
+
+   // 数据组名的名称定义
+   public static final String PTY_DATA_GROUP = "data_group";
+
+   // 数据代码的名称定义
+   public static final String PTY_DATA_CODE = "data_code";
+
+   // 默认值的名称定义
+   public static final String PTY_DATA_DEFAULT = "data_default";
 
    // 名称的定义
    @AName("name")
@@ -124,6 +128,14 @@ public abstract class XBaseAttribute
    // 可默认的定义
    @AName("is_default")
    protected String _isDefault;
+
+   // 数据组名的定义
+   @AName("data_group")
+   protected String _dataGroup;
+
+   // 数据代码的定义
+   @AName("data_code")
+   protected String _dataCode;
 
    // 默认值的定义
    @AName("data_default")
@@ -310,6 +322,42 @@ public abstract class XBaseAttribute
    }
 
    //============================================================
+   // <T>获得数据组名的内容。</T>
+   //
+   // @return 数据组名
+   //============================================================
+   public String getDataGroup(){
+      return _dataGroup;
+   }
+
+   //============================================================
+   // <T>设置数据组名的内容。</T>
+   //
+   // @param value 数据组名
+   //============================================================
+   public void setDataGroup(String value){
+      _dataGroup = value;
+   }
+
+   //============================================================
+   // <T>获得数据代码的内容。</T>
+   //
+   // @return 数据代码
+   //============================================================
+   public String getDataCode(){
+      return _dataCode;
+   }
+
+   //============================================================
+   // <T>设置数据代码的内容。</T>
+   //
+   // @param value 数据代码
+   //============================================================
+   public void setDataCode(String value){
+      _dataCode = value;
+   }
+
+   //============================================================
    // <T>获得默认值的内容。</T>
    //
    // @return 默认值
@@ -328,7 +376,7 @@ public abstract class XBaseAttribute
    }
 
    //============================================================
-   // <T>根据名称获得内容。</T>
+   // <T>内部获得内容置信息。</T>
    //
    // @param name 名称
    // @return 内容
@@ -356,6 +404,10 @@ public abstract class XBaseAttribute
          return RBoolean.toString(getIsAbstract());
       }else if(PTY_IS_DEFAULT.equalsIgnoreCase(name)){
          return getIsDefault();
+      }else if(PTY_DATA_GROUP.equalsIgnoreCase(name)){
+         return getDataGroup();
+      }else if(PTY_DATA_CODE.equalsIgnoreCase(name)){
+         return getDataCode();
       }else if(PTY_DATA_DEFAULT.equalsIgnoreCase(name)){
          return getDataDefault();
       }
@@ -363,7 +415,7 @@ public abstract class XBaseAttribute
    }
 
    //============================================================
-   // <T>根据名称设置内容。</T>
+   // <T>内部设置内容置信息。</T>
    //
    // @param name 名称
    // @param value 内容
@@ -392,21 +444,25 @@ public abstract class XBaseAttribute
          setIsAbstract(RBoolean.parse(value));
       }else if(PTY_IS_DEFAULT.equalsIgnoreCase(name)){
          setIsDefault(value);
+      }else if(PTY_DATA_GROUP.equalsIgnoreCase(name)){
+         setDataGroup(value);
+      }else if(PTY_DATA_CODE.equalsIgnoreCase(name)){
+         setDataCode(value);
       }else if(PTY_DATA_DEFAULT.equalsIgnoreCase(name)){
          setDataDefault(value);
       }
    }
 
    //============================================================
-   // <T>从节点中加载设置信息。</T>
+   // <T>加载设置信息。</T>
    //
-   // @param config 节点
-   // @param typeCd 类型
+   // @param config 设置信息
+   // @param type 类型
    //============================================================
    public void loadConfig(FXmlNode config,
-                          EXmlConfig typeCd){
-      super.loadConfig(config, typeCd);
-      if(EXmlConfig.Full == typeCd){
+                          EXmlConfig type){
+      super.loadConfig(config, type);
+      if(EXmlConfig.Full == type){
          if(config.contains("name")){
             setName(config.get(PTY_NAME));
          }
@@ -437,10 +493,16 @@ public abstract class XBaseAttribute
          if(config.contains("is_default")){
             setIsDefault(config.get(PTY_IS_DEFAULT));
          }
+         if(config.contains("data_group")){
+            setDataGroup(config.get(PTY_DATA_GROUP));
+         }
+         if(config.contains("data_code")){
+            setDataCode(config.get(PTY_DATA_CODE));
+         }
          if(config.contains("data_default")){
             setDataDefault(config.get(PTY_DATA_DEFAULT));
          }
-      }else if(EXmlConfig.Simple == typeCd){
+      }else if(EXmlConfig.Simple == type){
          if(config.contains("name")){
             setName(config.get(PTY_NAME));
          }
@@ -471,10 +533,16 @@ public abstract class XBaseAttribute
          if(config.contains("is_default")){
             setIsDefault(config.get(PTY_IS_DEFAULT));
          }
+         if(config.contains("data_group")){
+            setDataGroup(config.get(PTY_DATA_GROUP));
+         }
+         if(config.contains("data_code")){
+            setDataCode(config.get(PTY_DATA_CODE));
+         }
          if(config.contains("data_default")){
             setDataDefault(config.get(PTY_DATA_DEFAULT));
          }
-      }else if(EXmlConfig.Value == typeCd){
+      }else if(EXmlConfig.Value == type){
          if(config.contains("name")){
             setName(config.get(PTY_NAME));
          }
@@ -505,42 +573,58 @@ public abstract class XBaseAttribute
          if(config.contains("is_default")){
             setIsDefault(config.get(PTY_IS_DEFAULT));
          }
+         if(config.contains("data_group")){
+            setDataGroup(config.get(PTY_DATA_GROUP));
+         }
+         if(config.contains("data_code")){
+            setDataCode(config.get(PTY_DATA_CODE));
+         }
          if(config.contains("data_default")){
             setDataDefault(config.get(PTY_DATA_DEFAULT));
          }
-      }else if(EXmlConfig.Default == typeCd){
+      }else if(EXmlConfig.Default == type){
+         if(RString.isEmpty(getDataGroup())){
+            if(config.contains("data_group")){
+               setDataGroup(config.get(PTY_DATA_GROUP));
+            }
+         }
+         if(RString.isEmpty(getDataCode())){
+            if(config.contains("data_code")){
+               setDataCode(config.get(PTY_DATA_CODE));
+            }
+         }
       }
    }
 
    //============================================================
-   // <T>存储设置信息到节点中加载。</T>
+   // <T>保存设置信息。</T>
    //
-   // @param config 节点
-   // @param typeCd 类型
+   // @param config 设置信息
+   // @param type 类型
    //============================================================
    public void saveConfig(FXmlNode config,
-                          EXmlConfig typeCd){
+                          EXmlConfig type){
       config.setName(NAME);
-      super.saveConfig(config, typeCd);
-      if(EXmlConfig.Full == typeCd){
-         if(!RString.isEmpty(getName())){
+      super.saveConfig(config, type);
+      if(EXmlConfig.Full == type){
+         if(RString.isNotEmpty(getName())){
             config.set(PTY_NAME, getName());
          }
          String label = _label.pack().toString();
-         if(!RString.isEmpty(label)){
+         if(RString.isNotEmpty(label)){
             config.set(PTY_LABEL, label);
          }
          if(RBoolean.parse(getIsValid())){
             config.set(PTY_IS_VALID, RBoolean.toString(getIsValid()));
          }
          String note = _note.pack().toString();
-         if(!RString.isEmpty(note)){
+         if(RString.isNotEmpty(note)){
             config.set(PTY_NOTE, note);
          }
-         if(!RString.isEmpty(getAttributes())){
+         if(RString.isNotEmpty(getAttributes())){
             config.set(PTY_ATTRIBUTES, getAttributes());
          }
-         if(!RString.isEmpty(getType())){
+         if(RString.isNotEmpty(getType())){
             config.set(PTY_TYPE, getType());
          }
          if(RBoolean.parse(getIsStore())){
@@ -552,29 +636,35 @@ public abstract class XBaseAttribute
          if(RBoolean.parse(getIsAbstract())){
             config.set(PTY_IS_ABSTRACT, RBoolean.toString(getIsAbstract()));
          }
-         if(!RString.isEmpty(getIsDefault())){
+         if(RString.isNotEmpty(getIsDefault())){
             config.set(PTY_IS_DEFAULT, getIsDefault());
          }
-         if(!RString.isEmpty(getDataDefault())){
+         if(RString.isNotEmpty(getDataGroup())){
+            config.set(PTY_DATA_GROUP, getDataGroup());
+         }
+         if(RString.isNotEmpty(getDataCode())){
+            config.set(PTY_DATA_CODE, getDataCode());
+         }
+         if(RString.isNotEmpty(getDataDefault())){
             config.set(PTY_DATA_DEFAULT, getDataDefault());
          }
-      }else if(EXmlConfig.Simple == typeCd){
-         if(!RString.isEmpty(getName())){
+      }else if(EXmlConfig.Simple == type){
+         if(RString.isNotEmpty(getName())){
             config.set(PTY_NAME, getName());
          }
-         if(!RString.isEmpty(getLabel())){
+         if(RString.isNotEmpty(getLabel())){
             config.set(PTY_LABEL, getLabel());
          }
          if(RBoolean.parse(getIsValid())){
             config.set(PTY_IS_VALID, RBoolean.toString(getIsValid()));
          }
-         if(!RString.isEmpty(getNote())){
+         if(RString.isNotEmpty(getNote())){
             config.set(PTY_NOTE, getNote());
          }
-         if(!RString.isEmpty(getAttributes())){
+         if(RString.isNotEmpty(getAttributes())){
             config.set(PTY_ATTRIBUTES, getAttributes());
          }
-         if(!RString.isEmpty(getType())){
+         if(RString.isNotEmpty(getType())){
             config.set(PTY_TYPE, getType());
          }
          if(RBoolean.parse(getIsStore())){
@@ -586,19 +676,25 @@ public abstract class XBaseAttribute
          if(RBoolean.parse(getIsAbstract())){
             config.set(PTY_IS_ABSTRACT, RBoolean.toString(getIsAbstract()));
          }
-         if(!RString.isEmpty(getIsDefault())){
+         if(RString.isNotEmpty(getIsDefault())){
             config.set(PTY_IS_DEFAULT, getIsDefault());
          }
-         if(!RString.isEmpty(getDataDefault())){
+         if(RString.isNotEmpty(getDataGroup())){
+            config.set(PTY_DATA_GROUP, getDataGroup());
+         }
+         if(RString.isNotEmpty(getDataCode())){
+            config.set(PTY_DATA_CODE, getDataCode());
+         }
+         if(RString.isNotEmpty(getDataDefault())){
             config.set(PTY_DATA_DEFAULT, getDataDefault());
          }
-      }else if(EXmlConfig.Value == typeCd){
+      }else if(EXmlConfig.Value == type){
          String sName = getName();
-         if(!RString.isEmpty(sName)){
+         if(RString.isNotEmpty(sName)){
             config.set(PTY_NAME, sName);
          }
          String sLabel = getLabel();
-         if(!RString.isEmpty(sLabel)){
+         if(RString.isNotEmpty(sLabel)){
             config.set(PTY_LABEL, sLabel);
          }
          Boolean bIsValid = getIsValid();
@@ -606,15 +702,15 @@ public abstract class XBaseAttribute
             config.set(PTY_IS_VALID, RBoolean.toString(bIsValid));
          }
          String sNote = getNote();
-         if(!RString.isEmpty(sNote)){
+         if(RString.isNotEmpty(sNote)){
             config.set(PTY_NOTE, sNote);
          }
          String sAttributes = getAttributes();
-         if(!RString.isEmpty(sAttributes)){
+         if(RString.isNotEmpty(sAttributes)){
             config.set(PTY_ATTRIBUTES, sAttributes);
          }
          String sType = getType();
-         if(!RString.isEmpty(sType)){
+         if(RString.isNotEmpty(sType)){
             config.set(PTY_TYPE, sType);
          }
          Boolean bIsStore = getIsStore();
@@ -630,14 +726,30 @@ public abstract class XBaseAttribute
             config.set(PTY_IS_ABSTRACT, RBoolean.toString(bIsAbstract));
          }
          String sIsDefault = getIsDefault();
-         if(!RString.isEmpty(sIsDefault)){
+         if(RString.isNotEmpty(sIsDefault)){
             config.set(PTY_IS_DEFAULT, sIsDefault);
          }
+         String sDataGroup = getDataGroup();
+         if(RString.isNotEmpty(sDataGroup)){
+            config.set(PTY_DATA_GROUP, sDataGroup);
+         }
+         String sDataCode = getDataCode();
+         if(RString.isNotEmpty(sDataCode)){
+            config.set(PTY_DATA_CODE, sDataCode);
+         }
          String sDataDefault = getDataDefault();
-         if(!RString.isEmpty(sDataDefault)){
+         if(RString.isNotEmpty(sDataDefault)){
             config.set(PTY_DATA_DEFAULT, sDataDefault);
          }
-      }else if(EXmlConfig.Default == typeCd){
+      }else if(EXmlConfig.Default == type){
+         String sDataGroup = getDataGroup();
+         if(RString.isNotEmpty(sDataGroup)){
+            config.set(PTY_DATA_GROUP, sDataGroup);
+         }
+         String sDataCode = getDataCode();
+         if(RString.isNotEmpty(sDataCode)){
+            config.set(PTY_DATA_CODE, sDataCode);
+         }
       }
    }
 }

@@ -12,69 +12,67 @@ import org.mo.eng.persistence.common.XObjectFace;
 
 //============================================================
 // <T>持久化集合对象的XML节点基类。</T>
-//
-// @author system
 //============================================================
 public abstract class XBasePersistence
       extends FXmlObject
       implements
          XObjectFace
 {
-   // 名称
+   // 名称定义
    public static final String NAME = "Persistence";
 
-   // 名称的定义
-   public static final String PTY_NAME = "name";
-
-   // 标签的定义
-   public static final String PTY_LABEL = "label";
-
-   // 有效性的定义
-   public static final String PTY_IS_VALID = "is_valid";
-
-   // 描述信息的定义
-   public static final String PTY_NOTE = "note";
-
-   // 附加属性的定义
-   public static final String PTY_ATTRIBUTES = "attributes";
-
-   // 代码模板的定义
-   public static final String PTY_TEMPLATE = "template";
-
-   // 命名空间的定义
-   public static final String PTY_NAMESPACE = "namespace";
-
-   // 代码位置的定义
-   public static final String PTY_SOURCE = "source";
+   //============================================================
+   // <T>获得名称定义。</T>
+   //
+   // @return 名称定义
+   //============================================================
+   public String name(){
+      return NAME;
+   }
 
    //============================================================
-   // <T>是否指定名称。</T>
+   // <T>判断是否指定名称。</T>
    //
    // @param name 名称
-   // @return 是否指定名称
+   // @return 是否指定
    //============================================================
    public static boolean isName(String name){
       return NAME.equals(name);
    }
 
    //============================================================
-   // <T>是否指定接口。</T>
+   // <T>判断是否指定实例。</T>
    //
-   // @param name 接口
-   // @return 是否指定接口
+   // @param xobject 对象
+   // @return 是否指定
    //============================================================
    public static boolean isInstance(IXmlObject xobject){
       return NAME.equals(xobject.name());
    }
 
-   //============================================================
-   // <T>获得名称。</T>
-   //
-   // @return 名称
-   //============================================================
-   public String name(){
-      return NAME;
-   }
+   // 名称的名称定义
+   public static final String PTY_NAME = "name";
+
+   // 标签的名称定义
+   public static final String PTY_LABEL = "label";
+
+   // 有效性的名称定义
+   public static final String PTY_IS_VALID = "is_valid";
+
+   // 描述信息的名称定义
+   public static final String PTY_NOTE = "note";
+
+   // 附加属性的名称定义
+   public static final String PTY_ATTRIBUTES = "attributes";
+
+   // 代码模板的名称定义
+   public static final String PTY_TEMPLATE = "template";
+
+   // 命名空间的名称定义
+   public static final String PTY_NAMESPACE = "namespace";
+
+   // 代码位置的名称定义
+   public static final String PTY_SOURCE = "source";
 
    // 名称的定义
    @AName("name")
@@ -253,7 +251,7 @@ public abstract class XBasePersistence
    }
 
    //============================================================
-   // <T>根据名称获得内容。</T>
+   // <T>内部获得内容置信息。</T>
    //
    // @param name 名称
    // @return 内容
@@ -282,7 +280,7 @@ public abstract class XBasePersistence
    }
 
    //============================================================
-   // <T>根据名称设置内容。</T>
+   // <T>内部设置内容置信息。</T>
    //
    // @param name 名称
    // @param value 内容
@@ -311,15 +309,15 @@ public abstract class XBasePersistence
    }
 
    //============================================================
-   // <T>从节点中加载设置信息。</T>
+   // <T>加载设置信息。</T>
    //
-   // @param config 节点
-   // @param typeCd 类型
+   // @param config 设置信息
+   // @param type 类型
    //============================================================
    public void loadConfig(FXmlNode config,
-                          EXmlConfig typeCd){
-      super.loadConfig(config, typeCd);
-      if(EXmlConfig.Full == typeCd){
+                          EXmlConfig type){
+      super.loadConfig(config, type);
+      if(EXmlConfig.Full == type){
          if(config.contains("name")){
             setName(config.get(PTY_NAME));
          }
@@ -344,7 +342,7 @@ public abstract class XBasePersistence
          if(config.contains("source")){
             setSource(config.get(PTY_SOURCE));
          }
-      }else if(EXmlConfig.Simple == typeCd){
+      }else if(EXmlConfig.Simple == type){
          if(config.contains("name")){
             setName(config.get(PTY_NAME));
          }
@@ -369,7 +367,7 @@ public abstract class XBasePersistence
          if(config.contains("source")){
             setSource(config.get(PTY_SOURCE));
          }
-      }else if(EXmlConfig.Value == typeCd){
+      }else if(EXmlConfig.Value == type){
          if(config.contains("name")){
             setName(config.get(PTY_NAME));
          }
@@ -394,7 +392,7 @@ public abstract class XBasePersistence
          if(config.contains("source")){
             setSource(config.get(PTY_SOURCE));
          }
-      }else if(EXmlConfig.Default == typeCd){
+      }else if(EXmlConfig.Default == type){
          if(RString.isEmpty(getNamespace())){
             if(config.contains("namespace")){
                setNamespace(config.get(PTY_NAMESPACE));
@@ -404,74 +402,74 @@ public abstract class XBasePersistence
    }
 
    //============================================================
-   // <T>存储设置信息到节点中加载。</T>
+   // <T>保存设置信息。</T>
    //
-   // @param config 节点
-   // @param typeCd 类型
+   // @param config 设置信息
+   // @param type 类型
    //============================================================
    public void saveConfig(FXmlNode config,
-                          EXmlConfig typeCd){
+                          EXmlConfig type){
       config.setName(NAME);
-      super.saveConfig(config, typeCd);
-      if(EXmlConfig.Full == typeCd){
-         if(!RString.isEmpty(getName())){
+      super.saveConfig(config, type);
+      if(EXmlConfig.Full == type){
+         if(RString.isNotEmpty(getName())){
             config.set(PTY_NAME, getName());
          }
          String label = _label.pack().toString();
-         if(!RString.isEmpty(label)){
+         if(RString.isNotEmpty(label)){
             config.set(PTY_LABEL, label);
          }
          if(RBoolean.parse(getIsValid())){
             config.set(PTY_IS_VALID, RBoolean.toString(getIsValid()));
          }
          String note = _note.pack().toString();
-         if(!RString.isEmpty(note)){
+         if(RString.isNotEmpty(note)){
             config.set(PTY_NOTE, note);
          }
-         if(!RString.isEmpty(getAttributes())){
+         if(RString.isNotEmpty(getAttributes())){
             config.set(PTY_ATTRIBUTES, getAttributes());
          }
-         if(!RString.isEmpty(getTemplate())){
+         if(RString.isNotEmpty(getTemplate())){
             config.set(PTY_TEMPLATE, getTemplate());
          }
-         if(!RString.isEmpty(getNamespace())){
+         if(RString.isNotEmpty(getNamespace())){
             config.set(PTY_NAMESPACE, getNamespace());
          }
-         if(!RString.isEmpty(getSource())){
+         if(RString.isNotEmpty(getSource())){
             config.set(PTY_SOURCE, getSource());
          }
-      }else if(EXmlConfig.Simple == typeCd){
-         if(!RString.isEmpty(getName())){
+      }else if(EXmlConfig.Simple == type){
+         if(RString.isNotEmpty(getName())){
             config.set(PTY_NAME, getName());
          }
-         if(!RString.isEmpty(getLabel())){
+         if(RString.isNotEmpty(getLabel())){
             config.set(PTY_LABEL, getLabel());
          }
          if(RBoolean.parse(getIsValid())){
             config.set(PTY_IS_VALID, RBoolean.toString(getIsValid()));
          }
-         if(!RString.isEmpty(getNote())){
+         if(RString.isNotEmpty(getNote())){
             config.set(PTY_NOTE, getNote());
          }
-         if(!RString.isEmpty(getAttributes())){
+         if(RString.isNotEmpty(getAttributes())){
             config.set(PTY_ATTRIBUTES, getAttributes());
          }
-         if(!RString.isEmpty(getTemplate())){
+         if(RString.isNotEmpty(getTemplate())){
             config.set(PTY_TEMPLATE, getTemplate());
          }
-         if(!RString.isEmpty(getNamespace())){
+         if(RString.isNotEmpty(getNamespace())){
             config.set(PTY_NAMESPACE, getNamespace());
          }
-         if(!RString.isEmpty(getSource())){
+         if(RString.isNotEmpty(getSource())){
             config.set(PTY_SOURCE, getSource());
          }
-      }else if(EXmlConfig.Value == typeCd){
+      }else if(EXmlConfig.Value == type){
          String sName = getName();
-         if(!RString.isEmpty(sName)){
+         if(RString.isNotEmpty(sName)){
             config.set(PTY_NAME, sName);
          }
          String sLabel = getLabel();
-         if(!RString.isEmpty(sLabel)){
+         if(RString.isNotEmpty(sLabel)){
             config.set(PTY_LABEL, sLabel);
          }
          Boolean bIsValid = getIsValid();
@@ -479,28 +477,28 @@ public abstract class XBasePersistence
             config.set(PTY_IS_VALID, RBoolean.toString(bIsValid));
          }
          String sNote = getNote();
-         if(!RString.isEmpty(sNote)){
+         if(RString.isNotEmpty(sNote)){
             config.set(PTY_NOTE, sNote);
          }
          String sAttributes = getAttributes();
-         if(!RString.isEmpty(sAttributes)){
+         if(RString.isNotEmpty(sAttributes)){
             config.set(PTY_ATTRIBUTES, sAttributes);
          }
          String sTemplate = getTemplate();
-         if(!RString.isEmpty(sTemplate)){
+         if(RString.isNotEmpty(sTemplate)){
             config.set(PTY_TEMPLATE, sTemplate);
          }
          String sNamespace = getNamespace();
-         if(!RString.isEmpty(sNamespace)){
+         if(RString.isNotEmpty(sNamespace)){
             config.set(PTY_NAMESPACE, sNamespace);
          }
          String sSource = getSource();
-         if(!RString.isEmpty(sSource)){
+         if(RString.isNotEmpty(sSource)){
             config.set(PTY_SOURCE, sSource);
          }
-      }else if(EXmlConfig.Default == typeCd){
+      }else if(EXmlConfig.Default == type){
          String sNamespace = getNamespace();
-         if(!RString.isEmpty(sNamespace)){
+         if(RString.isNotEmpty(sNamespace)){
             config.set(PTY_NAMESPACE, sNamespace);
          }
       }

@@ -128,6 +128,8 @@ public class RBoolean
             return ((Float)item).floatValue() > 0;
          }else if(clazz == Boolean.class || "boolean".equals(type)){
             return ((Boolean)item).booleanValue();
+         }else{
+            throw new FFatalError("Unknown format. (item={1})", item);
          }
       }
       return DEFAULT;
