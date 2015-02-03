@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
-   
-   <!-- ============================================================ -->
-   <!-- StorageConsole:存储控制台                                    -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
-         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
-         scope = 'global' deploy = 'start'>
-      <Property name='storage_path'>${application.storage}</Property>
-      <Property name='storage_server'>${cloud.server.storage.remote}</Property>
-      <Property name='storage_servlet'>${cloud.server.storage.local}/cloud.resource.upload.wv</Property>
-      <Property name='storage_resource'>${cloud.server.storage.remote}/storage</Property>
-      <Initialize name='initialize'/>
-   </Component>
-   
+
    <!-- ==================================================== -->
    <!-- ContentConfigurationConsole:内容配置控制台           -->
    <!--  P:config_path - 配置文件路径                        -->
