@@ -15,6 +15,8 @@ public class FPersonConsole
       implements
          IPersonConsole
 {
+   // 每页条数
+   static final int _pageSize = 20;
 
    public FPersonConsole(){
       super(FDataPersonUserLogic.class, FDataPersonUserUnit.class);
@@ -34,6 +36,9 @@ public class FPersonConsole
                        String password){
 
       FLogicDataset<FDataPersonUserUnit> personUserList = selectByPassport(logicContext, passport);
+      if(personUserList.count() < 1){
+         return "无此用户。";
+      }
       if(personUserList.count() > 1){
          return "有重复用户名，数据异常。";
       }
@@ -68,4 +73,25 @@ public class FPersonConsole
       return personUserList;
    }
 
+   // ============================================================
+   // <T>获得分页数据列表bySomerow</T>
+   //
+   // @param con 链接对象
+   // @pageNum 指定页面
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataPersonUserUnit> selectDataByPageAndSomerow(ILogicContext logicContext,
+                                                                        FDataPersonUserUnit userUnit,
+                                                                        int pageNum){
+      if(0 > pageNum){
+         pageNum = 0;
+      }
+      FDataPersonUserLogic personLogic = logicContext.findLogic(FDataPersonUserLogic.class);
+      //条件
+      StringBuffer sqlString = new StringBuffer();
+
+      FLogicDataset<FDataPersonUserUnit> userList = personLogic.fetch(null, _pageSize, pageNum);
+      return userList;
+   }
 }

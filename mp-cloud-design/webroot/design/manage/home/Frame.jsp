@@ -1,81 +1,84 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file='/design/apl/public.inc'%>
+<jh:define source="&basePage.user" alias="base"></jh:define>
 <html>
 <head>
-<title>贪吃西游运营平台</title>
+<title>后台管理系统</title>
 <jg:css/>
 <jg:js type='runtime'/>
 <jsp:include page="../component/jeui.jsp"></jsp:include>
 <script>
-$(function(){
-	var flag = "<jh:write source='&basePage.flag' />";
-	//alert(flag);
-	if(flag == "0"){
-		top.alertx("连接超时，请重新登录！","info",function(){
-			parent.location.href="/tcxy/Index.wa";	
-	    });
-	}
+$(document).ready(function(e) {
+    cover();
+	$(window).resize(function(){
+		cover();	
+	});
 });
-function menu(url){
-	progress();
-	window.open(url+"&date="+new Date().valueOf(),"ifMain");
+function cover(){
+       var win_width = $(window).width(); 
+       var win_height = $(window).height(); 
+	  // alert(win_height);
+	   //$("#easyui-layout").attr("height",win_height);
+	   //document.getElementById("#easyui_layout").style.height=win_height+"px";
+//	   $("#easyui-layout").layout("panel", "center").panel({height:win_height});
+}
+var index = 0;
+function addPanel(url,title){
+	index++;	
+	var content="<div style='padding:10px'><iframe width='100%' height='99%' src='/design/manage/home/Body.wp' scrolling='auto' frameborder='0' id='ifMain' name='ifMain"+index+"'></iframe></div>";
+	$('#tt').tabs('add',{
+		title: title+index,
+		content: content,
+		closable: true
+	});
+	window.open(url+"?date="+new Date().valueOf(),"ifMain"+index);
 }
 </script>
 </head>
-<body>
-    <div class="easyui-layout" fit='true' style="height:660px;" >
-		<div data-options="region:'north'" style="height:85px;">
+<body style="padding:0px;">
+    <div id="easyui_layout" class="easyui-layout" fit="true" style="height:879px" >
+		<div data-options="region:'north'" style="height:80px;">
           <table width="100%" border="0">
             <tr>
-              <th colspan="2" align="center"><h2>贪吃西游运营平台</h2></th>
+              <th colspan="2" align="center"><h2>后台管理系统</h2></th>
             </tr>
             <tr>
-              <td align="right">
-              <span>欢迎[<font color="#FF0000"><jh:write source="&user.user_name"/></font>]登录</span>
+              <td align="right"><span style="">欢迎[<font color="#FF0000"><jh:write source="&base.passport"/></font>]登录</span></td>
+              <td align="right" style="width:150px">              
               <a href="javascript:void(0)"  class="easyui-linkbutton" iconCls="icon-edit" plain="true" onClick="changePwd()" id="btn"  >修改密码</a>&nbsp;&nbsp; 
               <a href="javascript:void(0)"  class="easyui-linkbutton" onClick="loginout();" iconCls="icon-redo" plain="true" name="btn" id="btn"  >注销</a></td>
             </tr>
           </table>             
         </div>
-		<div data-options="region:'west',split:true" title="系统菜单" style="width:160px;"><br>
-               <ul class="easyui-tree">
-               		<jh:equals source="&user.user_state_authority" value="0">
-                        <li data-options="state:'closed'">
-                           <span>超级管理</span>
-                            <ul>
-                                <li>
-                                    <span><a onClick="menu('/tcxy/admin/user/User.wa?do=jumpToThisPage');" id="btn" >用户管理</a></span>
-                                </li>
-                                <li>
-                                   <span><a onClick="menu('/tcxy/admin/database/Database.wa?do=jumpToThisPage');" id="btn" >服务器管理</a></span>
-                                </li>
-                            </ul>
-                        </li>
-                       </jh:equals>
-                        <li>
-                            <span>普通信息</span>
-                            <ul>
-                                <li><a onClick="menu('/tcxy/admin/pay/Pay.wa?do=jumpToThisPage');" id="btn" >充值信息</a></li>
-                                <li><a onClick="menu('/tcxy/admin/player/Player.wa?do=jumpToThisPage');" id="btn" >玩家信息</a></li>
-                                <li><a onClick="menu('/tcxy/admin/activity/Activity.wa?do=jumpToThisPage');" id="btn" >活动信息</a></li>
-                                <li><a onClick="menu('/tcxy/admin/notice/Notice.wa?do=jumpToThisPage');" id="btn" >走马灯信息</a></li>
-                            </ul>
-                        </li>
-                        <jh:equals source="&user.user_state_authority" value="0">
-                        <li>
-                            <span>运算结果</span>
-                            <ul>
-                                <li><a onClick="" id="btn" >基础数据</a></li>
-                                <li><a onClick="" id="btn" >充值排行</a></li>
-                            </ul>
-                        </li>
-                        </jh:equals>
-                    </ul>     
-        </div>
-		<div data-options="region:'center',title:'主窗体',iconCls:'icon-ok'">
-         <iframe width="100%" height="99%" src="/tcxy/admin/home/Body.wp" scrolling="auto" frameborder="0" id="ifMain" name="ifMain"></iframe>			
+		<div data-options="region:'west',split:true" title="菜单" style="width:168px;">
+             <div class="easyui-accordion" style="width:100%;border:0">
+                <div title="用户管理" style="padding-top:10px;padding-bottom:10px">
+                    <ul class="easyui-tree">		
+                           <li><a onclick="addPanel('/design/person/User.wa','用户信息');">用户信息</a></li>
+                           <li>about.html</li>
+                           <li>welcome.html</li>
+                    </ul>
+                </div>
+                <div title="产品管理" style="padding-top:10px;padding-bottom:10px">
+                     <ul class="easyui-tree">				
+                           <li>index.html</li>
+                           <li>about.html</li>
+                           <li>welcome.html</li>
+                     </ul>	
+                </div>	
+                <div title="权限管理" style="padding-top:10px;padding-bottom:10px">
+                     <ul class="easyui-tree">				
+                            <li>index.html</li>
+                            <li>about.html</li>
+                            <li>welcome.html</li>
+                     </ul>
+                </div>		
+             </div>
+        </div>        
+		<div data-options="region:'center'">
+          <div id="tt" class="easyui-tabs" data-options="tools:'#tab-tools',border:0" fit="true"></div>
 		</div>
-	</div>
+</div>
 </body>
 </html>

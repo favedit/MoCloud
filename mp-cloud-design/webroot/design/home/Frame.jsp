@@ -33,8 +33,8 @@ function submitForm(){
 		var data ={"passport":$("#passport").val(),"password":$("#password").val()};		
 		$.ajax({
 		   type: "POST",
-		   //url: "/design/login/Login.wa?do=login&date="+new Date().valueOf(),
-		   url: "/design/home/Home.wa",
+		   url: "/design/login/Login.wa?do=login&date="+new Date().valueOf(),
+		   //url: "/design/home/Home.wa",
 		   data:data,
 		   success: function(msg){
 			   closeProgress();

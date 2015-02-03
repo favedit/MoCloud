@@ -34,4 +34,16 @@ public interface IPersonConsole
                 FBasePage basePage,
                 String passport,
                 String password);
+
+   // ============================================================
+   // <T>获得分页数据列表bySomerow</T>
+   //
+   // @param con 链接对象
+   // @pageNum 指定页面
+   // @return 数据集合
+   // ============================================================
+   public FLogicDataset<FDataPersonUserUnit> selectDataByPageAndSomerow(ILogicContext logicContext,
+                                                                        FDataPersonUserUnit userUnit,
+                                                                        int pageNum);
+
 }

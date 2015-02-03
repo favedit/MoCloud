@@ -8,7 +8,7 @@ import org.mo.web.protocol.context.IWebContext;
 
 public class FFrameAction
       implements
-         IHomeAction
+         IFrameAction
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FFrameAction.class);
@@ -25,7 +25,7 @@ public class FFrameAction
                            ILogicContext logicContext,
                            FBasePage basePage){
       _logger.debug(this, "construct", "construct begin.");
-      return "#/design/home/Frame";
+      return "#/home/Frame";
    }
 
    //============================================================
