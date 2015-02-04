@@ -4,8 +4,6 @@ import com.cyou.gccloud.data.data.FDataResource3dMaterialLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
-import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
-import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.com.console.FConsole;
@@ -33,19 +31,39 @@ public class FRs3MaterialConsole
    protected IRs3TextureBitmapConsole _textureBitmapConsole;
 
    //============================================================
-   // <T>根据代码查找模型单元。</T>
+   // <T>根据唯一编号查找材质。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
+   // @param guid 唯一编号
    // @return 处理结果
    //============================================================
    @Override
-   public FDataResource3dModelUnit findByCode(ILogicContext logicContext,
-                                              String code){
-      String searchSql = FDataResource3dModelLogic.CODE + "='" + code + "'";
-      FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
-      FDataResource3dModelUnit modelUnit = modelLogic.search(searchSql);
-      return modelUnit;
+   public FRs3Material findMaterial(ILogicContext logicContext,
+                                    String guid){
+      // 查找数据单元
+      FDataResource3dMaterialLogic materialLogic = logicContext.findLogic(FDataResource3dMaterialLogic.class);
+      FDataResource3dMaterialUnit materialUnit = materialLogic.findByGuid(guid);
+      // 创建材质
+      FRs3Material material = new FRs3Material();
+      material.loadUnit(materialUnit);
+      return material;
+   }
+
+   //============================================================
+   // <T>更新材质。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param material 材质
+   //============================================================
+   @Override
+   public void updateMaterial(ILogicContext logicContext,
+                              FRs3Material material){
+      long ouid = material.ouid();
+      // 查找数据单元
+      FDataResource3dMaterialLogic logic = logicContext.findLogic(FDataResource3dMaterialLogic.class);
+      FDataResource3dMaterialUnit unit = logic.find(ouid);
+      material.saveUnit(unit);
+      logic.doUpdate(unit);
    }
 
    //============================================================

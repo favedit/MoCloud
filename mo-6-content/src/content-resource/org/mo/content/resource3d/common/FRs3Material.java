@@ -96,6 +96,42 @@ public class FRs3Material
    }
 
    //============================================================
+   // <T>获得透明基础。</T>
+   //
+   // @return 透明基础
+   //============================================================
+   public float alphaBase(){
+      return _alphaBase;
+   }
+
+   //============================================================
+   // <T>设置透明基础。</T>
+   //
+   // @param alphaBase 透明基础
+   //============================================================
+   public void setAlphaBase(float alphaBase){
+      _alphaBase = alphaBase;
+   }
+
+   //============================================================
+   // <T>获得透明比率。</T>
+   //
+   // @return 透明比率
+   //============================================================
+   public float alphaRate(){
+      return _alphaRate;
+   }
+
+   //============================================================
+   // <T>设置透明比率。</T>
+   //
+   // @param alphaRate 透明比率
+   //============================================================
+   public void setAlphaRate(float alphaRate){
+      _alphaRate = alphaRate;
+   }
+
+   //============================================================
    // <T>获得环境颜色。</T>
    //
    // @return 环境颜色
@@ -127,8 +163,71 @@ public class FRs3Material
    //
    // @return 高光级别
    //============================================================
-   public float _specularLevel(){
+   public float specularLevel(){
       return _specularLevel;
+   }
+
+   //============================================================
+   // <T>设置高光级别。</T>
+   //
+   // @param specularLevel 高光级别
+   //============================================================
+   public void setSpecularLevel(float specularLevel){
+      _specularLevel = specularLevel;
+   }
+
+   //============================================================
+   // <T>获得反射颜色。</T>
+   //
+   // @return 反射颜色
+   //============================================================
+   public SFloatColor4 reflectColor(){
+      return _reflectColor;
+   }
+
+   //============================================================
+   // <T>获得反射合并。</T>
+   //
+   // @return 反射合并
+   //============================================================
+   public float reflectMerge(){
+      return _reflectMerge;
+   }
+
+   //============================================================
+   // <T>设置反射合并。</T>
+   //
+   // @param reflectMerge 反射合并
+   //============================================================
+   public void setReflectMerge(float reflectMerge){
+      _reflectMerge = reflectMerge;
+   }
+
+   //============================================================
+   // <T>获得折射前颜色。</T>
+   //
+   // @return 折射前颜色
+   //============================================================
+   public SFloatColor4 refractFrontColor(){
+      return _refractFrontColor;
+   }
+
+   //============================================================
+   // <T>获得折射后颜色。</T>
+   //
+   // @return 折射后颜色
+   //============================================================
+   public SFloatColor4 refractBackColor(){
+      return _refractBackColor;
+   }
+
+   //============================================================
+   // <T>获得发光颜色。</T>
+   //
+   // @return 发光颜色
+   //============================================================
+   public SFloatColor4 emissiveColor(){
+      return _emissiveColor;
    }
 
    //============================================================
@@ -277,12 +376,25 @@ public class FRs3Material
    //============================================================
    public void loadUnit(FDataResource3dMaterialUnit unit){
       // 加载属性
+      _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
+      _label = unit.label();
       // 加载配置
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadString(unit.content());
       this.loadConfig(xdocument.root());
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FDataResource3dMaterialUnit unit){
+      unit.setCode(_code);
+      unit.setLabel(_label);
+      unit.setContent(toXml());
    }
 
    //============================================================

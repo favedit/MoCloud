@@ -27,15 +27,15 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：模型资源获取处理                                       -->
+   <!-- 设计：模板获取处理                                           -->
    <!-- ============================================================ -->
    <WebServlet
          name  = 'cloud.content.template'
-         face  = 'org.mo.content.face.resource3d.template.IStorageServlet'/>
+         face  = 'org.mo.content.face.resource3d.template.ITemplateServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.template.IStorageServlet'
-         class = 'org.mo.content.face.resource3d.template.FStorageServlet'
+         face  = 'org.mo.content.face.resource3d.template.ITemplateServlet'
+         class = 'org.mo.content.face.resource3d.template.FTemplateServlet'
          scope = 'global'/>
 
 </Config>

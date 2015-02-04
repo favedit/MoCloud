@@ -14,4 +14,16 @@
          class = 'org.mo.content.face.resource3d.model.FModelService'
          scope = 'global'/>
 
+   <!-- ==================================================== -->
+   <!-- 设计：资源3D模板数据服务                             -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content.template'
+         face  = 'org.mo.content.face.resource3d.template.ITemplateService'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.template.ITemplateService'
+         class = 'org.mo.content.face.resource3d.template.FTemplateService'
+         scope = 'global'/>
+
 </Config>

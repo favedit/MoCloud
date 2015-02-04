@@ -21,13 +21,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理。</T>
 //============================================================
-public class FStorageServlet
+public class FTemplateServlet
       extends FObject
       implements
-         IStorageServlet
+         ITemplateServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FStorageServlet.class);
+   private static ILogger _logger = RLogger.find(FTemplateServlet.class);
 
    // 缓冲时间
    protected static long CacheTimeout = 3600 * 24 * 7 * 4;

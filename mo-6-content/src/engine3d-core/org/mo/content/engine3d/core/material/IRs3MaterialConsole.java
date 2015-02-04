@@ -2,7 +2,6 @@ package org.mo.content.engine3d.core.material;
 
 import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
-import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.common.FRs3MaterialTexture;
 import org.mo.data.logic.ILogicContext;
@@ -13,14 +12,23 @@ import org.mo.data.logic.ILogicContext;
 public interface IRs3MaterialConsole
 {
    //============================================================
-   // <T>根据代码查找模型单元。</T>
+   // <T>根据唯一编号查找材质。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
+   // @param guid 唯一编号
    // @return 处理结果
    //============================================================
-   FDataResource3dModelUnit findByCode(ILogicContext logicContext,
-                                       String code);
+   FRs3Material findMaterial(ILogicContext logicContext,
+                             String guid);
+
+   //============================================================
+   // <T>更新材质。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param material 材质
+   //============================================================
+   void updateMaterial(ILogicContext logicContext,
+                       FRs3Material material);
 
    //============================================================
    // <T>新建一个材质。</T>

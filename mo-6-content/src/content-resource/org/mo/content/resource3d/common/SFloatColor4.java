@@ -1,6 +1,9 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -66,5 +69,31 @@ public class SFloatColor4
       green = xconfig.getFloat("g");
       blue = xconfig.getFloat("b");
       power = xconfig.getFloat("power", 1.0f);
+   }
+
+   //============================================================
+   // <T>从配置信息中导入配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void parse(String value){
+      String[] items = RString.split(value, ',');
+      if(items.length != 4){
+         throw new FFatalError("Parse failure.");
+      }
+      red = (float)RDouble.parse(items[0]);
+      green = (float)RDouble.parse(items[1]);
+      blue = (float)RDouble.parse(items[2]);
+      power = (float)RDouble.parse(items[3]);
+   }
+
+   //============================================================
+   // <T>获得内容字符串。</T>
+   //
+   // @return 字符串
+   //============================================================
+   @Override
+   public String toString(){
+      return red + "," + green + "," + blue + "," + power;
    }
 }

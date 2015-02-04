@@ -1,5 +1,6 @@
 package org.mo.content.resource3d;
 
+import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
 import org.mo.core.aop.RAop;
@@ -17,16 +18,18 @@ public class Rs3TemplateImport
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
-      //String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.show.item.001.xml";
-      //String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.show.item.009.xml";
-      String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.sc.car.01.001.xml";
+      FStrings filePaths = new FStrings();
+      filePaths.push("pvw.show.item.001.xml");
+      filePaths.push("pvw.show.item.009.xml");
+      filePaths.push("pvw.sc.car.01.001.xml");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3TemplateConsole templateConsole = RAop.find(IRs3TemplateConsole.class);
-         templateConsole.importTemplate(logicContext, fileName);
-         //FRs3Template template = templateConsole.findTemplate(logicContext, "DDD55D1AF1BA4626875D21F16296D8AB");
-         //System.out.println(template);
+         for(String fileName : filePaths){
+            String path = RRs3Utility.RootPath + "/MoScript/source/assets/template/" + fileName;
+            templateConsole.importTemplate(logicContext, path);
+         }
       }catch(Exception e){
          RLogger.find(Rs3TemplateImport.class).error(null, "main", e);
       }
