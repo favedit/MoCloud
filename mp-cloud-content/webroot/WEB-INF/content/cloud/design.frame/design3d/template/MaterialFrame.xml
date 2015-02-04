@@ -16,5 +16,12 @@
          <Color3 name="specularColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Number name="specularLevel" label="级别:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
+      <Panel name='reflectPanel' icon='design.panel.icon' label='反射参数'>
+         <Color3 name="reflectColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="reflectMerge" label="融合:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='emissivePanel' icon='design.panel.icon' label='发光参数'>
+         <Color3 name="emissiveColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
    </Frame>
 </Content>

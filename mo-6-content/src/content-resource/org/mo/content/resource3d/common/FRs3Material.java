@@ -20,19 +20,49 @@ public class FRs3Material
    protected String _effectCode;
 
    // 配置双面
-   protected int _optionDouble;
+   protected boolean _optionDouble;
+
+   // 透明基础
+   protected float _alphaBase;
+
+   // 透明比率
+   protected float _alphaRate;
 
    // 环境颜色
-   protected SFloatColor3 _ambientColor = new SFloatColor3();
+   protected SFloatColor4 _ambientColor = new SFloatColor4();
 
    // 散射颜色
-   protected SFloatColor3 _diffuseColor = new SFloatColor3();
+   protected SFloatColor4 _diffuseColor = new SFloatColor4();
+
+   // 散射视角颜色
+   protected SFloatColor4 _diffuseViewColor = new SFloatColor4();
 
    // 高光颜色
-   protected SFloatColor3 _specularColor = new SFloatColor3();
+   protected SFloatColor4 _specularColor = new SFloatColor4();
 
    // 高光级别
    protected float _specularLevel;
+
+   // 高光视角颜色
+   protected SFloatColor4 _specularViewColor = new SFloatColor4();
+
+   // 高光视角级别
+   protected float _specularViewLevel;
+
+   // 反射颜色
+   protected SFloatColor4 _reflectColor = new SFloatColor4();
+
+   // 反射融合
+   protected float _reflectMerge;
+
+   // 前折射颜色
+   protected SFloatColor4 _refractFrontColor = new SFloatColor4();
+
+   // 后折射颜色
+   protected SFloatColor4 _refractBackColor = new SFloatColor4();
+
+   // 发光颜色
+   protected SFloatColor4 _emissiveColor = new SFloatColor4();
 
    // 网格集合
    protected FObjects<FRs3MaterialBitmap> _bitmaps = new FObjects<FRs3MaterialBitmap>(FRs3MaterialBitmap.class);
@@ -70,7 +100,7 @@ public class FRs3Material
    //
    // @return 环境颜色
    //============================================================
-   public SFloatColor3 ambientColor(){
+   public SFloatColor4 ambientColor(){
       return _ambientColor;
    }
 
@@ -79,7 +109,7 @@ public class FRs3Material
    //
    // @return 散射颜色
    //============================================================
-   public SFloatColor3 diffuseColor(){
+   public SFloatColor4 diffuseColor(){
       return _diffuseColor;
    }
 
@@ -88,7 +118,7 @@ public class FRs3Material
    //
    // @return 高光颜色
    //============================================================
-   public SFloatColor3 specularColor(){
+   public SFloatColor4 specularColor(){
       return _specularColor;
    }
 
@@ -130,10 +160,22 @@ public class FRs3Material
       // 输出属性
       output.writeString(_groupGuid);
       output.writeString(_effectCode);
+      // 输出透明
+      output.writeFloat(_alphaBase);
+      output.writeFloat(_alphaRate);
+      // 输出颜色
       _ambientColor.serialize(output);
       _diffuseColor.serialize(output);
+      _diffuseViewColor.serialize(output);
       _specularColor.serialize(output);
       output.writeFloat(_specularLevel);
+      _specularViewColor.serialize(output);
+      output.writeFloat(_specularViewLevel);
+      _reflectColor.serialize(output);
+      output.writeFloat(_reflectMerge);
+      _refractFrontColor.serialize(output);
+      _refractBackColor.serialize(output);
+      _emissiveColor.serialize(output);
       // 输出纹理集合
       int textureCount = _textures.count();
       output.writeInt16((short)textureCount);
@@ -150,26 +192,34 @@ public class FRs3Material
    //============================================================
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
-      //      _guid = xconfig.get("guid");
-      //      _groupGuid = xconfig.get("group_guid");
       _effectCode = xconfig.get("effect_code");
+      _optionDouble = xconfig.getBoolean("option_double", false);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Ambient")){
+         if(xnode.isName("Alpha")){
+            _alphaBase = xnode.getFloat("base");
+            _alphaRate = xnode.getFloat("rate");
+         }else if(xnode.isName("Ambient")){
             _ambientColor.loadConfig(xnode);
          }else if(xnode.isName("Diffuse")){
             _diffuseColor.loadConfig(xnode);
+         }else if(xnode.isName("DiffuseView")){
+            _diffuseViewColor.loadConfig(xnode);
          }else if(xnode.isName("Specular")){
             _specularColor.loadConfig(xnode);
             _specularLevel = xnode.getFloat("level");
-            //         }else if(xnode.isName("TextureCollection")){
-            //            for(FXmlNode xchild : xnode){
-            //               if(xchild.isName("Texture")){
-            //                  FRs3MaterialTexture texture = new FRs3MaterialTexture();
-            //                  texture.loadConfig(xchild);
-            //                  _textures.push(texture);
-            //               }
-            //            }
+         }else if(xnode.isName("SpecularView")){
+            _specularViewColor.loadConfig(xnode);
+            _specularViewLevel = xnode.getFloat("level");
+         }else if(xnode.isName("Reflect")){
+            _reflectColor.loadConfig(xnode);
+            _reflectMerge = xnode.getFloat("merge");
+         }else if(xnode.isName("RefractFront")){
+            _refractFrontColor.loadConfig(xnode);
+         }else if(xnode.isName("RefractBack")){
+            _refractBackColor.loadConfig(xnode);
+         }else if(xnode.isName("Emissive")){
+            _emissiveColor.loadConfig(xnode);
          }
       }
    }
@@ -181,20 +231,32 @@ public class FRs3Material
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
-      //      xconfig.set("guid", _guid);
-      //      xconfig.set("group_guid", _groupGuid);
       xconfig.set("effect_code", _effectCode);
+      xconfig.set("option_double", _optionDouble);
+      // 存储透明
+      FXmlNode xalpha = xconfig.createNode("Alpha");
+      xalpha.set("base", _alphaBase);
+      xalpha.set("rate", _alphaRate);
       // 存储颜色
       _ambientColor.saveConfig(xconfig.createNode("Ambient"));
       _diffuseColor.saveConfig(xconfig.createNode("Diffuse"));
+      _diffuseViewColor.saveConfig(xconfig.createNode("DiffuseView"));
       FXmlNode xspecular = xconfig.createNode("Specular");
       _specularColor.saveConfig(xspecular);
       xspecular.set("level", _specularLevel);
-      //      // 存储纹理集合
-      //      FXmlNode xtextures = xconfig.createNode("TextureCollection");
-      //      for(FRs3MaterialTexture texture : _textures){
-      //         texture.saveConfig(xtextures.createNode("Texture"));
-      //      }
+      FXmlNode xspecularView = xconfig.createNode("SpecularView");
+      _specularViewColor.saveConfig(xspecularView);
+      xspecularView.set("level", _specularViewLevel);
+      FXmlNode xreflect = xconfig.createNode("Reflect");
+      _reflectColor.saveConfig(xreflect);
+      xreflect.set("merge", _reflectMerge);
+      // 存储折射
+      FXmlNode xrefractFront = xconfig.createNode("RefractFront");
+      _refractFrontColor.saveConfig(xrefractFront);
+      FXmlNode xrefractBack = xconfig.createNode("RefractBack");
+      _refractBackColor.saveConfig(xrefractBack);
+      // 存储发光
+      _emissiveColor.saveConfig(xconfig.createNode("Emissive"));
    }
 
    //============================================================
@@ -232,15 +294,33 @@ public class FRs3Material
       // 读取属性
       _code = xconfig.get("code");
       _effectCode = xconfig.get("effect_code");
+      _optionDouble = xconfig.getBoolean("option_double", false);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Ambient")){
+         if(xnode.isName("Alpha")){
+            _alphaBase = xnode.getFloat("base");
+            _alphaRate = xnode.getFloat("rate");
+         }else if(xnode.isName("Ambient")){
             _ambientColor.importConfig(xnode);
          }else if(xnode.isName("Diffuse")){
             _diffuseColor.importConfig(xnode);
+         }else if(xnode.isName("DiffuseView")){
+            _diffuseViewColor.importConfig(xnode);
          }else if(xnode.isName("Specular")){
             _specularColor.importConfig(xnode);
             _specularLevel = xnode.getFloat("level");
+         }else if(xnode.isName("SpecularView")){
+            _specularViewColor.importConfig(xnode);
+            _specularViewLevel = xnode.getFloat("level");
+         }else if(xnode.isName("Reflect")){
+            _reflectColor.importConfig(xnode);
+            _reflectMerge = xnode.getFloat("merge");
+         }else if(xnode.isName("RefractFront")){
+            _refractFrontColor.importConfig(xnode);
+         }else if(xnode.isName("RefractBack")){
+            _refractBackColor.importConfig(xnode);
+         }else if(xnode.isName("Emissive")){
+            _emissiveColor.importConfig(xnode);
          }else if(xnode.isName("TextureCollection")){
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Texture")){
