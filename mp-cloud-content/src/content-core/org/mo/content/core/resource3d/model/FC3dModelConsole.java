@@ -2,15 +2,19 @@ package org.mo.content.core.resource3d.model;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMeshTrackLogic;
+import com.cyou.gccloud.data.data.FDataResource3dMeshTrackUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
+import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.content.resource3d.model.FRs3ModelStream;
@@ -75,6 +79,19 @@ public class FC3dModelConsole
             SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dStream, streamUnit.guid());
             stream.setData(resource.data());
             mesh.streams().push(stream);
+         }
+         // 获得跟踪信息
+         FDataResource3dMeshTrackLogic meshTrackLogic = logicContext.findLogic(FDataResource3dMeshTrackLogic.class);
+         FLogicDataset<FDataResource3dMeshTrackUnit> meshTrackUnits = meshTrackLogic.fetch(FDataResource3dMeshTrackLogic.MESH_ID + "=" + meshUnit.ouid());
+         for(FDataResource3dMeshTrackUnit meshTrackUnit : meshTrackUnits){
+            // 查找数据流
+            FDataResource3dTrackUnit trackUnit = meshTrackUnit.track();
+            // 设置属性
+            FRs3Track track = new FRs3Track();
+            // 读取文件
+            SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dTrack, trackUnit.guid());
+            track.setData(resource.data());
+            mesh.tracks().push(track);
          }
          model.meshs().push(mesh);
       }

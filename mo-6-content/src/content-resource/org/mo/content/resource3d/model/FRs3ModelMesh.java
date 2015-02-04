@@ -132,6 +132,14 @@ public class FRs3ModelMesh
          FRs3ModelStream stream = _streams.get(i);
          stream.serialize(output);
       }
+      //      // 输出跟踪集合
+      //      int trackCount = _tracks.count();
+      //      output.writeInt8((byte)trackCount);
+      //      for(int i = 0; i < trackCount; i++){
+      //         FRs3Track track = _tracks.get(i);
+      //         output.write(track.data(), 0, track.data().length);
+      //         //track.serialize(output);
+      //      }
    }
 
    //============================================================
