@@ -68,7 +68,7 @@ public class FStorageServlet
          throw new FFatalError("Template is empty. (guid={1}, code={2}, version={3})", guid, code, version);
       }
       // 生成数据
-      FRs3Template template = _templateConsole.findTemplate(logicContext, guid, code, version);
+      FRs3Template template = _templateConsole.makeTemplate(logicContext, guid, code);
       FByteStream stream = new FByteStream();
       if(template == null){
          String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);

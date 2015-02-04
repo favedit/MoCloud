@@ -9,16 +9,40 @@ import org.mo.com.lang.FObject;
 public class FRs3Obejct
       extends FObject
 {
+   // 编号
+   protected long _ouid;
+
    // 唯一编号
    protected String _guid;
 
    // 代码
    protected String _code;
 
+   // 标签
+   protected String _label;
+
    //============================================================
    // <T>构造资源对象。</T>
    //============================================================
    public FRs3Obejct(){
+   }
+
+   //============================================================
+   // <T>获得编号。</T>
+   //
+   // @return 编号
+   //============================================================
+   public long ouid(){
+      return _ouid;
+   }
+
+   //============================================================
+   // <T>获得编号。</T>
+   //
+   // @param ouid 编号
+   //============================================================
+   public void setOuid(long ouid){
+      _ouid = ouid;
    }
 
    //============================================================
@@ -58,6 +82,24 @@ public class FRs3Obejct
    }
 
    //============================================================
+   // <T>获得标签。</T>
+   //
+   // @return 标签
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>获得标签。</T>
+   //
+   // @param label 标签
+   //============================================================
+   public void setLabel(String label){
+      _label = label;
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -65,5 +107,6 @@ public class FRs3Obejct
    public void serialize(IDataOutput output){
       output.writeString(_guid);
       output.writeString(_code);
+      output.writeString(_label);
    }
 }

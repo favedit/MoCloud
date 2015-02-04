@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D材质表逻辑单元。</T>
+// <T>资源3D模板材质组表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dMaterialUnit
+public class FDataResource3dTemplateMaterialGroupUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -35,41 +35,17 @@ public class FDataResource3dMaterialUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段主题编号的定义。
-   private long __themeId;
+   // 存储字段模板编号的定义。
+   private long __templateId;
 
-   // 字段主题编号的定义。
-   protected long _themeId;
+   // 字段模板编号的定义。
+   protected long _templateId;
 
-   // 存储字段分组编号的定义。
+   // 存储字段材质编号的定义。
    private long __materialGroupId;
 
-   // 字段分组编号的定义。
+   // 字段材质编号的定义。
    protected long _materialGroupId;
-
-   // 存储字段全代码的定义。
-   private String __fullCode;
-
-   // 字段全代码的定义。
-   protected String _fullCode;
-
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段名称的定义。
-   private String __label;
-
-   // 字段名称的定义。
-   protected String _label;
-
-   // 存储字段内容的定义。
-   private String __content;
-
-   // 字段内容的定义。
-   protected String _content;
 
    // 存储字段备注的定义。
    private String __note;
@@ -102,9 +78,9 @@ public class FDataResource3dMaterialUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D材质表逻辑单元。</T>
+   // <T>构造资源3D模板材质组表逻辑单元。</T>
    //============================================================
-   public FDataResource3dMaterialUnit(){
+   public FDataResource3dTemplateMaterialGroupUnit(){
    }
 
    //============================================================
@@ -189,45 +165,45 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>判断主题编号的数据是否改变。</T>
+   // <T>判断模板编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isThemeIdChanged(){
-      return __themeId != _themeId;
+   public boolean isTemplateIdChanged(){
+      return __templateId != _templateId;
    }
 
    //============================================================
-   // <T>获得主题编号的数据内容。</T>
+   // <T>获得模板编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long themeId(){
-      return _themeId;
+   public long templateId(){
+      return _templateId;
    }
 
    //============================================================
-   // <T>获得主题编号的数据单元。</T>
+   // <T>获得模板编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public FDataResource3dThemeUnit theme(){
-      FDataResource3dThemeLogic logic = _logicContext.findLogic(FDataResource3dThemeLogic.class);
-      FDataResource3dThemeUnit unit = logic.find(_themeId);
+   public FDataResource3dTemplateUnit template(){
+      FDataResource3dTemplateLogic logic = _logicContext.findLogic(FDataResource3dTemplateLogic.class);
+      FDataResource3dTemplateUnit unit = logic.find(_templateId);
       return unit;
    }
 
    //============================================================
-   // <T>设置主题编号的数据内容。</T>
+   // <T>设置模板编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setThemeId(long value){
-      _themeId = value;
+   public void setTemplateId(long value){
+      _templateId = value;
    }
 
    //============================================================
-   // <T>判断分组编号的数据是否改变。</T>
+   // <T>判断材质编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -236,7 +212,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>获得分组编号的数据内容。</T>
+   // <T>获得材质编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -245,7 +221,7 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>获得分组编号的数据单元。</T>
+   // <T>获得材质编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
@@ -256,120 +232,12 @@ public class FDataResource3dMaterialUnit
    }
 
    //============================================================
-   // <T>设置分组编号的数据内容。</T>
+   // <T>设置材质编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setMaterialGroupId(long value){
       _materialGroupId = value;
-   }
-
-   //============================================================
-   // <T>判断全代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
-   }
-
-   //============================================================
-   // <T>获得全代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String fullCode(){
-      return _fullCode;
-   }
-
-   //============================================================
-   // <T>设置全代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
-   }
-
-   //============================================================
-   // <T>判断代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
-   }
-
-   //============================================================
-   // <T>获得代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
-   }
-
-   //============================================================
-   // <T>判断内容的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContentChanged(){
-      return !RString.equals(__content, _content);
-   }
-
-   //============================================================
-   // <T>获得内容的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String content(){
-      return _content;
-   }
-
-   //============================================================
-   // <T>设置内容的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContent(String value){
-      _content = value;
    }
 
    //============================================================
@@ -522,18 +390,10 @@ public class FDataResource3dMaterialUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "theme_id":
-            return Long.toString(_themeId);
+         case "template_id":
+            return Long.toString(_templateId);
          case "material_group_id":
             return Long.toString(_materialGroupId);
-         case "full_code":
-            return _fullCode;
-         case "code":
-            return _code;
-         case "label":
-            return _label;
-         case "content":
-            return _content;
          case "note":
             return _note;
          case "create_user_id":
@@ -567,23 +427,11 @@ public class FDataResource3dMaterialUnit
          case "guid":
             _guid = value;
             break;
-         case "theme_id":
-            _themeId = RLong.parse(value);
+         case "template_id":
+            _templateId = RLong.parse(value);
             break;
          case "material_group_id":
             _materialGroupId = RLong.parse(value);
-            break;
-         case "full_code":
-            _fullCode = value;
-            break;
-         case "code":
-            _code = value;
-            break;
-         case "label":
-            _label = value;
-            break;
-         case "content":
-            _content = value;
             break;
          case "note":
             _note = value;
@@ -627,29 +475,13 @@ public class FDataResource3dMaterialUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "theme_id":
-               __themeId = RLong.parse(value);
-               _themeId = __themeId;
+            case "template_id":
+               __templateId = RLong.parse(value);
+               _templateId = __templateId;
                break;
             case "material_group_id":
                __materialGroupId = RLong.parse(value);
                _materialGroupId = __materialGroupId;
-               break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
-               break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
-               break;
-            case "content":
-               __content = value;
-               _content = __content;
                break;
             case "note":
                __note = value;
@@ -686,12 +518,8 @@ public class FDataResource3dMaterialUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("themeId", _themeId);
+      row.set("templateId", _templateId);
       row.set("materialGroupId", _materialGroupId);
-      row.set("fullCode", _fullCode);
-      row.set("code", _code);
-      row.set("label", _label);
-      row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -710,12 +538,8 @@ public class FDataResource3dMaterialUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("themeId", RLong.toString(_themeId));
+      map.put("templateId", RLong.toString(_templateId));
       map.put("materialGroupId", RLong.toString(_materialGroupId));
-      map.put("fullCode", _fullCode);
-      map.put("code", _code);
-      map.put("label", _label);
-      map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

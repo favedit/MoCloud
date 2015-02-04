@@ -1,7 +1,7 @@
 package org.mo.content.resource3d.common;
 
+import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureUnit;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FObject;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
 
@@ -9,12 +9,8 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源模型。</T>
 //============================================================
 public class FRs3MaterialTexture
-      extends FObject
+      extends FRs3Obejct
 {
-   protected String _typeCode;
-
-   protected String _guid;
-
    // 纹理代码
    protected String _textureCode;
 
@@ -95,8 +91,9 @@ public class FRs3MaterialTexture
    //
    // @param output 输出流
    //============================================================
+   @Override
    public void serialize(IDataOutput output){
-      output.writeString(_typeCode);
+      super.serialize(output);
       output.writeString(_bitmapGuid);
    }
 
@@ -107,7 +104,7 @@ public class FRs3MaterialTexture
    //============================================================
    public void loadConfig(FXmlNode xconfig){
       _guid = xconfig.get("guid");
-      _typeCode = xconfig.get("type_code");
+      _code = xconfig.get("code");
       _textureGuid = xconfig.get("texture_guid");
       _bitmapGuid = xconfig.get("bitmap_guid");
    }
@@ -120,9 +117,20 @@ public class FRs3MaterialTexture
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", _guid);
-      xconfig.set("type_code", _typeCode);
+      xconfig.set("code", _code);
       xconfig.set("texture_guid", _textureGuid);
       xconfig.set("bitmap_guid", _bitmapGuid);
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dMaterialTextureUnit unit){
+      // 加载属性
+      _guid = unit.guid();
+      _code = unit.code();
    }
 
    //============================================================
@@ -131,7 +139,7 @@ public class FRs3MaterialTexture
    // @param xconfig 配置信息
    //============================================================
    public void importConfig(FXmlNode xconfig){
-      _typeCode = xconfig.get("type");
+      _code = xconfig.get("type");
       _textureCode = xconfig.get("texture");
       _bitmapCode = xconfig.get("bitmap");
       _index = xconfig.getInt("index");

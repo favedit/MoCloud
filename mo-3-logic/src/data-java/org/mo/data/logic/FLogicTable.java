@@ -381,31 +381,34 @@ public abstract class FLogicTable
       FDataset dataset = null;
       IMemoryCacheConsole memcacheConsole = innerMemcache();
       try(FMemoryChannel channel = memcacheConsole.alloc()){
-         // 获得当前代码
-         FLogicCacheTable cacheTable = innerCacheTable();
-         String currentCode = cacheTable.currentCode(channel);
-         // 生成标识
-         FString buffer = new FString();
-         buffer.append("mo-cache|logic.dataset|");
-         buffer.append(_name);
-         buffer.append('|');
-         buffer.append(currentCode);
-         buffer.append('|');
-         buffer.append(code);
-         buffer.append('|');
-         buffer.appendInt(pageSize);
-         buffer.append('|');
-         buffer.appendInt(page);
-         String key = buffer.toString();
-         // 查找数据
-         // 从内存中查找数据
+         String key = null;
          if(channel != null){
-            String value = channel.getTimeoutString(key);
-            if(value != null){
-               // 获得数据
-               dataset = new FDataset();
-               dataset.unpack(value);
-               _logger.debug(this, "innerFindDataset", "Find dataset from memcache. (key={1}, sql={2})", key, sql);
+            // 获得当前代码
+            FLogicCacheTable cacheTable = innerCacheTable();
+            String currentCode = cacheTable.currentCode(channel);
+            // 生成标识
+            FString buffer = new FString();
+            buffer.append("mo-cache|logic.dataset|");
+            buffer.append(_name);
+            buffer.append('|');
+            buffer.append(currentCode);
+            buffer.append('|');
+            buffer.append(code);
+            buffer.append('|');
+            buffer.appendInt(pageSize);
+            buffer.append('|');
+            buffer.appendInt(page);
+            key = buffer.toString();
+            // 查找数据
+            // 从内存中查找数据
+            if(channel != null){
+               String value = channel.getTimeoutString(key);
+               if(value != null){
+                  // 获得数据
+                  dataset = new FDataset();
+                  dataset.unpack(value);
+                  _logger.debug(this, "innerFindDataset", "Find dataset from memcache. (key={1}, sql={2})", key, sql);
+               }
             }
          }
          // 获得结果集

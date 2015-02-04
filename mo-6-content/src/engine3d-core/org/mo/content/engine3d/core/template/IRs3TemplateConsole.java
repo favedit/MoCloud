@@ -28,6 +28,19 @@ public interface IRs3TemplateConsole
                              String version);
 
    //============================================================
+   // <T>查找资源模板。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param code 代码
+   // @param version 版本
+   // @return 处理结果
+   //============================================================
+   FRs3Template makeTemplate(ILogicContext logicContext,
+                             String guid,
+                             String code);
+
+   //============================================================
    // <T>导入模板。</T>
    //
    // @param logicContext 逻辑环境

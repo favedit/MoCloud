@@ -1,12 +1,14 @@
 package org.mo.content.resource3d.template;
 
+import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.INamePair;
+import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Display;
+import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.common.FRs3MaterialGroup;
 import org.mo.content.resource3d.common.FRs3Resource;
 import org.mo.content.resource3d.common.FRs3Sprite;
@@ -39,14 +41,14 @@ public class FRs3Template
    // @param code 代码
    // @return 材质
    //============================================================
-   public FRs3MaterialGroup syncMaterial(String code){
-      FRs3MaterialGroup material = _materialGroups.find(code);
-      if(material == null){
-         material = new FRs3MaterialGroup();
-         material.setCode(code);
-         _materialGroups.set(code, material);
+   public FRs3MaterialGroup syncMaterialGroup(String code){
+      FRs3MaterialGroup materialGroup = _materialGroups.find(code);
+      if(materialGroup == null){
+         materialGroup = new FRs3MaterialGroup();
+         materialGroup.setCode(code);
+         _materialGroups.set(code, materialGroup);
       }
-      return material;
+      return materialGroup;
    }
 
    //============================================================
@@ -83,6 +85,7 @@ public class FRs3Template
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      // 存储属性
       super.serialize(output);
       // 输出材质组集合
       int materialGroupCount = _materialGroups.count();
@@ -118,29 +121,30 @@ public class FRs3Template
          throw new FFatalError("Invalid config.");
       }
       // 读取属性
-      _guid = xconfig.get("guid");
-      _code = xconfig.get("code");
+      //      _guid = xconfig.get("guid");
+      //      _code = xconfig.get("code");
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("MaterialGroupCollection")){
-            // 读取材质组集合
-            for(FXmlNode xchild : xnode){
-               if(xchild.isName("MaterialGroup")){
-                  FRs3MaterialGroup materialGroup = new FRs3MaterialGroup();
-                  materialGroup.loadConfig(xchild);
-                  _materialGroups.set(materialGroup.guid(), materialGroup);
-               }
-            }
-         }else if(xnode.isName("ThemeCollection")){
-            // 读取主题集合
-            for(FXmlNode xchild : xnode){
-               if(xchild.isName("Theme")){
-                  FRs3Theme theme = new FRs3Theme();
-                  theme.loadConfig(xchild);
-                  _themes.push(theme);
-               }
-            }
-         }else if(xnode.isName("DisplayCollection")){
+         //         if(xnode.isName("MaterialGroupCollection")){
+         //            // 读取材质组集合
+         //            for(FXmlNode xchild : xnode){
+         //               if(xchild.isName("MaterialGroup")){
+         //                  FRs3MaterialGroup materialGroup = new FRs3MaterialGroup();
+         //                  materialGroup.loadConfig(xchild);
+         //                  _materialGroups.set(materialGroup.guid(), materialGroup);
+         //               }
+         //            }
+         //         }else if(xnode.isName("ThemeCollection")){
+         //            // 读取主题集合
+         //            for(FXmlNode xchild : xnode){
+         //               if(xchild.isName("Theme")){
+         //                  FRs3Theme theme = new FRs3Theme();
+         //                  theme.loadConfig(xchild);
+         //                  _themes.push(theme);
+         //               }
+         //            }
+         //         }else 
+         if(xnode.isName("DisplayCollection")){
             // 读取显示集合
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Sprite")){
@@ -160,23 +164,49 @@ public class FRs3Template
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
-      xconfig.set("guid", _guid);
-      xconfig.set("code", _code);
-      // 存储材质分组集合
-      FXmlNode xmaterialGroups = xconfig.createNode("MaterialGroupCollection");
-      for(INamePair<FRs3MaterialGroup> pair : _materialGroups){
-         pair.value().saveConfig(xmaterialGroups.createNode("MaterialGroup"));
-      }
-      // 存储主题集合
-      FXmlNode xtheme = xconfig.createNode("ThemeCollection");
-      for(FRs3Theme theme : _themes){
-         theme.saveConfig(xtheme.createNode("Theme"));
-      }
+      //      xconfig.set("guid", _guid);
+      //      xconfig.set("code", _code);
+      //      // 存储材质分组集合
+      //      FXmlNode xmaterialGroups = xconfig.createNode("MaterialGroupCollection");
+      //      for(INamePair<FRs3MaterialGroup> pair : _materialGroups){
+      //         pair.value().saveConfig(xmaterialGroups.createNode("MaterialGroup"));
+      //      }
+      //      // 存储主题集合
+      //      FXmlNode xtheme = xconfig.createNode("ThemeCollection");
+      //      for(FRs3Theme theme : _themes){
+      //         theme.saveConfig(xtheme.createNode("Theme"));
+      //      }
       // 存储显示集合
       FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
       for(FRs3Display display : _displays){
          display.saveConfig(xdisplays.createNode("Display"));
       }
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dTemplateUnit unit){
+      // 加载属性
+      _guid = unit.guid();
+      _code = unit.code();
+      // 读取配置
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadString(unit.content());
+      loadConfig(xdocument.root());
+   }
+
+   //============================================================
+   // <T>从配置信息中导入配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public String toXml(){
+      FXmlNode xconfig = new FXmlNode("Template");
+      saveConfig(xconfig);
+      return xconfig.xml().toString();
    }
 
    //============================================================
@@ -205,6 +235,13 @@ public class FRs3Template
                   _displays.push(display);
                }
             }
+         }
+      }
+      //............................................................
+      // 建立所有材质组
+      for(FRs3Theme theme : _themes){
+         for(FRs3Material material : theme.materials()){
+            syncMaterialGroup(material.code());
          }
       }
    }

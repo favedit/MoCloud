@@ -1,21 +1,16 @@
 package org.mo.content.resource3d.common;
 
+import com.cyou.gccloud.data.data.FDataResource3dThemeUnit;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
 // <T>资源模型。</T>
 //============================================================
 public class FRs3Theme
-      extends FObject
+      extends FRs3Obejct
 {
-   protected String _guid;
-
-   protected String _code;
-
    // 网格集合
    protected FObjects<FRs3Material> _materials = new FObjects<FRs3Material>(FRs3Material.class);
 
@@ -23,7 +18,6 @@ public class FRs3Theme
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3Theme(){
-      _guid = RUuid.makeUniqueId();
    }
 
    //============================================================
@@ -40,10 +34,10 @@ public class FRs3Theme
    //
    // @param output 输出流
    //============================================================
+   @Override
    public void serialize(IDataOutput output){
       // 输出属性
-      output.writeString(_guid);
-      output.writeString(_code);
+      super.serialize(output);
       // 输出网格集合
       int materialCount = _materials.count();
       output.writeInt16((short)materialCount);
@@ -91,6 +85,17 @@ public class FRs3Theme
       for(FRs3Material material : _materials){
          material.saveConfig(xmaterials.createNode("Material"));
       }
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dThemeUnit unit){
+      // 加载属性
+      _guid = unit.guid();
+      _code = unit.code();
    }
 
    //============================================================

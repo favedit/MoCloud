@@ -1,11 +1,20 @@
 package org.mo.content.engine3d.core.template;
 
+import com.cyou.gccloud.data.data.FDataResource3dMaterialGroupUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMaterialLogic;
+import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureLogic;
+import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateLogic;
+import com.cyou.gccloud.data.data.FDataResource3dTemplateMaterialGroupLogic;
+import com.cyou.gccloud.data.data.FDataResource3dTemplateMaterialGroupUnit;
+import com.cyou.gccloud.data.data.FDataResource3dTemplateThemeLogic;
+import com.cyou.gccloud.data.data.FDataResource3dTemplateThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
-import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
+import com.cyou.gccloud.data.data.FDataResource3dThemeUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
@@ -14,10 +23,13 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.engine.core.bitmap.IResBitmapConsole;
+import org.mo.content.engine3d.core.material.IRs3MaterialConsole;
+import org.mo.content.engine3d.core.material.IRs3MaterialGroupConsole;
 import org.mo.content.engine3d.core.model.IRs3ModelConsole;
 import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureBitmapConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
+import org.mo.content.engine3d.core.theme.IRs3ThemeConsole;
 import org.mo.content.resource3d.common.FRs3Display;
 import org.mo.content.resource3d.common.FRs3DisplayMaterial;
 import org.mo.content.resource3d.common.FRs3Material;
@@ -26,6 +38,7 @@ import org.mo.content.resource3d.common.FRs3MaterialTexture;
 import org.mo.content.resource3d.common.FRs3Theme;
 import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -52,6 +65,10 @@ public class FRs3TemplateConsole
    @ALink
    protected IRs3TextureBitmapConsole _textureBitmapConsole;
 
+   // 材质组控制台
+   @ALink
+   protected IRs3MaterialGroupConsole _materialGroupConsole;
+
    // 模型控制台
    @ALink
    protected IRs3ModelConsole _modelConsole;
@@ -59,6 +76,14 @@ public class FRs3TemplateConsole
    // 模型网格控制台
    @ALink
    protected IRs3ModelMeshConsole _modelMeshConsole;
+
+   // 模型网格控制台
+   @ALink
+   protected IRs3ThemeConsole _themeConsole;
+
+   // 模型网格控制台
+   @ALink
+   protected IRs3MaterialConsole _materialConsole;
 
    //============================================================
    // <T>构造资源模板控制台。</T>
@@ -117,6 +142,79 @@ public class FRs3TemplateConsole
    }
 
    //============================================================
+   // <T>生成资源模板。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public FRs3Template makeTemplate(ILogicContext logicContext,
+                                    String guid,
+                                    String code){
+      FRs3Template template = null;
+      // 查找数据
+      FDataResource3dTemplateUnit templateUnit = null;
+      if(!RString.isEmpty(guid)){
+         templateUnit = findByGuid(logicContext, guid);
+      }else if(!RString.isEmpty(code)){
+         templateUnit = findByCode(logicContext, code);
+      }else{
+         throw new FFatalError("Find template failure. (guid={1}, code={2})", guid, code);
+      }
+      // 未查到处理
+      if(templateUnit == null){
+         return null;
+      }
+      // 读取内容
+      template = new FRs3Template();
+      template.loadUnit(templateUnit);
+      // 查找材质组
+      FDataResource3dTemplateMaterialGroupLogic templateMaterialGroupLogic = logicContext.findLogic(FDataResource3dTemplateMaterialGroupLogic.class);
+      String materialGroupSql = FDataResource3dTemplateMaterialGroupLogic.TEMPLATE_ID + "=" + templateUnit.ouid();
+      FLogicDataset<FDataResource3dTemplateMaterialGroupUnit> groupDataset = templateMaterialGroupLogic.fetch(materialGroupSql);
+      for(FDataResource3dTemplateMaterialGroupUnit unit : groupDataset){
+         FDataResource3dMaterialGroupUnit materialGroup = unit.materialGroup();
+         FRs3MaterialGroup group = new FRs3MaterialGroup();
+         group.loadUnit(materialGroup);
+         template.materialGroups().set(group.guid(), group);
+      }
+      // 查找主题
+      FDataResource3dTemplateThemeLogic templateThemeLogic = logicContext.findLogic(FDataResource3dTemplateThemeLogic.class);
+      String themeSql = FDataResource3dTemplateThemeLogic.TEMPLATE_ID + "=" + templateUnit.ouid();
+      FLogicDataset<FDataResource3dTemplateThemeUnit> themeDataset = templateThemeLogic.fetch(themeSql);
+      for(FDataResource3dTemplateThemeUnit unit : themeDataset){
+         FDataResource3dThemeUnit themeUnit = unit.theme();
+         FRs3Theme theme = new FRs3Theme();
+         theme.loadUnit(themeUnit);
+         template.themes().push(theme);
+         // 查找材质
+         FDataResource3dMaterialLogic materialLogic = logicContext.findLogic(FDataResource3dMaterialLogic.class);
+         String materialSql = FDataResource3dMaterialLogic.THEME_ID + "=" + themeUnit.ouid();
+         FLogicDataset<FDataResource3dMaterialUnit> materialDataset = materialLogic.fetch(materialSql);
+         for(FDataResource3dMaterialUnit materialUnit : materialDataset){
+            FDataResource3dMaterialGroupUnit materialGroup = materialUnit.materialGroup();
+            FRs3Material material = new FRs3Material();
+            material.loadUnit(materialUnit);
+            material.setGroupGuid(materialGroup.guid());
+            theme.materials().push(material);
+            // 查找纹理
+            FDataResource3dMaterialTextureLogic materialTextureLogic = logicContext.findLogic(FDataResource3dMaterialTextureLogic.class);
+            String materialTextureSql = FDataResource3dMaterialTextureLogic.MATERIAL_ID + "=" + materialUnit.ouid();
+            FLogicDataset<FDataResource3dMaterialTextureUnit> materialTextureDataset = materialTextureLogic.fetch(materialTextureSql);
+            for(FDataResource3dMaterialTextureUnit materialTextureUnit : materialTextureDataset){
+               FDataResource3dTextureBitmapUnit textureBitmapUnit = materialTextureUnit.textureBitmap();
+               FRs3MaterialTexture materialTexture = new FRs3MaterialTexture();
+               materialTexture.loadUnit(materialTextureUnit);
+               materialTexture.setBitmapGuid(textureBitmapUnit.guid());
+               material.textures().push(materialTexture);
+            }
+         }
+      }
+      return template;
+   }
+
+   //============================================================
    // <T>导入模板。</T>
    //
    // @param logicContext 逻辑环境
@@ -138,20 +236,36 @@ public class FRs3TemplateConsole
       templateUnit.setCode(template.code());
       templateLogic.doInsert(templateUnit);
       template.setGuid(templateUnit.guid());
+      // 修正材质组
+      for(FRs3MaterialGroup materialGroup : template.materialGroups().toObjects()){
+         // 新建材质组
+         FDataResource3dMaterialGroupUnit materialGroupUnit = _materialGroupConsole.insertMaterialGroup(logicContext, materialGroup);
+         materialGroup.setOuid(materialGroupUnit.ouid());
+         materialGroup.setGuid(materialGroupUnit.guid());
+         // 关联模板和材质组
+         FDataResource3dTemplateMaterialGroupLogic templateMaterialGroupLogic = logicContext.findLogic(FDataResource3dTemplateMaterialGroupLogic.class);
+         FDataResource3dTemplateMaterialGroupUnit templateMaterialGroupUnit = templateMaterialGroupLogic.doPrepare();
+         templateMaterialGroupUnit.setTemplateId(templateUnit.ouid());
+         templateMaterialGroupUnit.setMaterialGroupId(materialGroupUnit.ouid());
+         templateMaterialGroupLogic.doInsert(templateMaterialGroupUnit);
+      }
       // 修正材质数据
       for(FRs3Theme theme : template.themes()){
+         // 新建主题
+         FDataResource3dThemeUnit themeUnit = _themeConsole.insert(logicContext, theme);
+         theme.setGuid(themeUnit.guid());
+         // 关联模板和主题
+         FDataResource3dTemplateThemeLogic templateThemeLogic = logicContext.findLogic(FDataResource3dTemplateThemeLogic.class);
+         FDataResource3dTemplateThemeUnit templateThemeUnit = templateThemeLogic.doPrepare();
+         templateThemeUnit.setTemplateId(templateUnit.ouid());
+         templateThemeUnit.setThemeId(themeUnit.ouid());
+         templateThemeLogic.doInsert(templateThemeUnit);
+         // 新建材质
          for(FRs3Material material : theme.materials()){
-            FRs3MaterialGroup templateMaterial = template.syncMaterial(material.code());
-            material.setGroupGuid(templateMaterial.guid());
-            for(FRs3MaterialTexture texture : material.textures()){
-               // 设置纹理唯一编号
-               String textureCode = texture.textureCode();
-               FDataResource3dTextureUnit textureUnit = _textureConsole.findByCode(logicContext, textureCode);
-               texture.setTextureGuid(textureUnit.guid());
-               // 设置纹理唯一编号
-               String bitmapCode = texture.bitmapCode();
-               FDataResource3dTextureBitmapUnit textureBitmapUnit = _textureBitmapConsole.findByCode(logicContext, textureUnit.ouid(), bitmapCode);
-               texture.setBitmapGuid(textureBitmapUnit.guid());
+            FRs3MaterialGroup materialGroup = template.syncMaterialGroup(material.code());
+            FDataResource3dMaterialUnit materialUnit = _materialConsole.insertMaterial(logicContext, themeUnit.ouid(), materialGroup.ouid(), material);
+            for(FRs3MaterialTexture materialTexture : material.textures()){
+               _materialConsole.insertMaterialTexture(logicContext, materialUnit.ouid(), materialTexture);
             }
          }
       }
@@ -168,15 +282,13 @@ public class FRs3TemplateConsole
          // 修正材质
          for(FRs3DisplayMaterial material : display.materials()){
             String groupCode = material.code();
-            FRs3MaterialGroup templateMaterial = template.syncMaterial(groupCode);
+            FRs3MaterialGroup templateMaterial = template.syncMaterialGroup(groupCode);
             material.setGroupGuid(templateMaterial.guid());
          }
       }
       // 存储配置信息
-      FXmlNode xoutput = new FXmlNode("Template");
-      template.saveConfig(xoutput);
       templateUnit = templateLogic.find(templateUnit.ouid());
-      templateUnit.setContent(xoutput.xml().toString());
+      templateUnit.setContent(template.toXml());
       templateLogic.doUpdate(templateUnit);
       //System.out.println(xoutput.xml());
       // 修正材质数据

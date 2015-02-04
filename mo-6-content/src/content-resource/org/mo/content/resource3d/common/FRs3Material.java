@@ -1,25 +1,20 @@
 package org.mo.content.resource3d.common;
 
+import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RUuid;
+import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
 // <T>资源模型。</T>
 //============================================================
 public class FRs3Material
-      extends FObject
+      extends FRs3Obejct
 {
    // 分组唯一代码
    protected String _groupGuid;
-
-   // 代码
-   protected String _code;
-
-   // 唯一代码
-   protected String _guid;
 
    // 效果代码
    protected String _effectCode;
@@ -68,15 +63,6 @@ public class FRs3Material
    //============================================================
    public void setGroupGuid(String groupGuid){
       _groupGuid = groupGuid;
-   }
-
-   //============================================================
-   // <T>获得代码。</T>
-   //
-   // @return 代码
-   //============================================================
-   public String code(){
-      return _code;
    }
 
    //============================================================
@@ -138,9 +124,10 @@ public class FRs3Material
    //
    // @param output 输出流
    //============================================================
+   @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 输出属性
-      output.writeString(_guid);
       output.writeString(_groupGuid);
       output.writeString(_effectCode);
       _ambientColor.serialize(output);
@@ -163,8 +150,8 @@ public class FRs3Material
    //============================================================
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
-      _guid = xconfig.get("guid");
-      _groupGuid = xconfig.get("group_guid");
+      //      _guid = xconfig.get("guid");
+      //      _groupGuid = xconfig.get("group_guid");
       _effectCode = xconfig.get("effect_code");
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
@@ -175,14 +162,14 @@ public class FRs3Material
          }else if(xnode.isName("Specular")){
             _specularColor.loadConfig(xnode);
             _specularLevel = xnode.getFloat("level");
-         }else if(xnode.isName("TextureCollection")){
-            for(FXmlNode xchild : xnode){
-               if(xchild.isName("Texture")){
-                  FRs3MaterialTexture texture = new FRs3MaterialTexture();
-                  texture.loadConfig(xchild);
-                  _textures.push(texture);
-               }
-            }
+            //         }else if(xnode.isName("TextureCollection")){
+            //            for(FXmlNode xchild : xnode){
+            //               if(xchild.isName("Texture")){
+            //                  FRs3MaterialTexture texture = new FRs3MaterialTexture();
+            //                  texture.loadConfig(xchild);
+            //                  _textures.push(texture);
+            //               }
+            //            }
          }
       }
    }
@@ -194,8 +181,8 @@ public class FRs3Material
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
-      xconfig.set("guid", _guid);
-      xconfig.set("group_guid", _groupGuid);
+      //      xconfig.set("guid", _guid);
+      //      xconfig.set("group_guid", _groupGuid);
       xconfig.set("effect_code", _effectCode);
       // 存储颜色
       _ambientColor.saveConfig(xconfig.createNode("Ambient"));
@@ -203,11 +190,37 @@ public class FRs3Material
       FXmlNode xspecular = xconfig.createNode("Specular");
       _specularColor.saveConfig(xspecular);
       xspecular.set("level", _specularLevel);
-      // 存储纹理集合
-      FXmlNode xtextures = xconfig.createNode("TextureCollection");
-      for(FRs3MaterialTexture texture : _textures){
-         texture.saveConfig(xtextures.createNode("Texture"));
-      }
+      //      // 存储纹理集合
+      //      FXmlNode xtextures = xconfig.createNode("TextureCollection");
+      //      for(FRs3MaterialTexture texture : _textures){
+      //         texture.saveConfig(xtextures.createNode("Texture"));
+      //      }
+   }
+
+   //============================================================
+   // <T>从配置信息中导入配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public String toXml(){
+      FXmlNode xconfig = new FXmlNode("Material");
+      saveConfig(xconfig);
+      return xconfig.xml().toString();
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dMaterialUnit unit){
+      // 加载属性
+      _guid = unit.guid();
+      _code = unit.code();
+      // 加载配置
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadString(unit.content());
+      this.loadConfig(xdocument.root());
    }
 
    //============================================================

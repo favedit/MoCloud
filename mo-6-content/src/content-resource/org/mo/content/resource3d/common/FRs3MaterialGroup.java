@@ -1,5 +1,6 @@
 package org.mo.content.resource3d.common;
 
+import com.cyou.gccloud.data.data.FDataResource3dMaterialGroupUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
@@ -24,8 +25,7 @@ public class FRs3MaterialGroup
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      output.writeString(_guid);
-      output.writeString(_code);
+      super.serialize(output);
    }
 
    //============================================================
@@ -48,6 +48,17 @@ public class FRs3MaterialGroup
       // 存储属性
       xconfig.set("guid", _guid);
       xconfig.set("code", _code);
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dMaterialGroupUnit unit){
+      // 加载属性
+      _guid = unit.guid();
+      _code = unit.code();
    }
 
    //============================================================

@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源3D材质表逻辑。</T>
+// <T>资源3D材质组表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dMaterialLogic
+public class FDataResource3dMaterialGroupLogic
       extends FLogicTable
 {
-   // 资源3D材质表的定义。
+   // 资源3D材质组表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源3D材质表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.material", "DT_RS3_MATERIAL");
+   // 资源3D材质组表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.material.group", "DT_RS3_MATERIAL_GROUP");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -38,14 +38,8 @@ public class FDataResource3dMaterialLogic
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段全局唯一标识的定义。
+   // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
-
-   // 字段主题编号的定义。
-   public final static SLogicFieldInfo THEME_ID = new SLogicFieldInfo("THEME_ID");
-
-   // 字段分组编号的定义。
-   public final static SLogicFieldInfo MATERIAL_GROUP_ID = new SLogicFieldInfo("MATERIAL_GROUP_ID");
 
    // 字段全代码的定义。
    public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
@@ -53,14 +47,8 @@ public class FDataResource3dMaterialLogic
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
-   // 字段名称的定义。
+   // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
-
-   // 字段内容的定义。
-   public final static SLogicFieldInfo CONTENT = new SLogicFieldInfo("CONTENT");
-
-   // 字段备注的定义。
-   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -75,25 +63,25 @@ public class FDataResource3dMaterialLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,THEME_ID,MATERIAL_GROUP_ID,FULL_CODE,CODE,LABEL,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,FULL_CODE,CODE,LABEL,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源3D材质表逻辑单元。</T>
+   // <T>构造资源3D材质组表逻辑单元。</T>
    //============================================================
-   public FDataResource3dMaterialLogic(){
+   public FDataResource3dMaterialGroupLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResource3dMaterialUnit.class;
+      _classUnit = FDataResource3dMaterialGroupUnit.class;
    }
 
    //============================================================
-   // <T>构造资源3D材质表逻辑单元。</T>
+   // <T>构造资源3D材质组表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResource3dMaterialLogic(ILogicContext context){
+   public FDataResource3dMaterialGroupLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResource3dMaterialUnit.class;
+      _classUnit = FDataResource3dMaterialGroupUnit.class;
    }
 
    //============================================================
@@ -227,7 +215,7 @@ public class FDataResource3dMaterialLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResource3dMaterialUnit());
+            unit = (T)(new FDataResource3dMaterialGroupUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -243,8 +231,8 @@ public class FDataResource3dMaterialLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResource3dMaterialUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResource3dMaterialUnit.class, guid);
+   public FDataResource3dMaterialGroupUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataResource3dMaterialGroupUnit.class, guid);
    }
 
    //============================================================
@@ -282,8 +270,8 @@ public class FDataResource3dMaterialLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResource3dMaterialUnit search(CharSequence whereSql){
-      return search(null, FDataResource3dMaterialUnit.class, whereSql);
+   public FDataResource3dMaterialGroupUnit search(CharSequence whereSql){
+      return search(null, FDataResource3dMaterialGroupUnit.class, whereSql);
    }
 
    //============================================================
@@ -320,7 +308,7 @@ public class FDataResource3dMaterialLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -331,8 +319,8 @@ public class FDataResource3dMaterialLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetch(int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetch(int pageSize,
+                                                                int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -344,9 +332,9 @@ public class FDataResource3dMaterialLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetch(CharSequence whereSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetch(CharSequence whereSql,
+                                                                int pageSize,
+                                                                int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -359,10 +347,10 @@ public class FDataResource3dMaterialLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetch(CharSequence whereSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetch(CharSequence whereSql,
+                                                                CharSequence orderSql,
+                                                                int pageSize,
+                                                                int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -376,11 +364,11 @@ public class FDataResource3dMaterialLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetch(CharSequence fields,
-                                                           CharSequence whereSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetch(CharSequence fields,
+                                                                CharSequence whereSql,
+                                                                CharSequence orderSql,
+                                                                int pageSize,
+                                                                int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -394,12 +382,12 @@ public class FDataResource3dMaterialLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetch(CharSequence fields,
-                                                           CharSequence whereSql,
-                                                           CharSequence groupSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetch(CharSequence fields,
+                                                                CharSequence whereSql,
+                                                                CharSequence groupSql,
+                                                                CharSequence orderSql,
+                                                                int pageSize,
+                                                                int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -504,10 +492,10 @@ public class FDataResource3dMaterialLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetchSql(CharSequence code,
-                                                              CharSequence sql,
-                                                              int pageSize,
-                                                              int page){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetchSql(CharSequence code,
+                                                                   CharSequence sql,
+                                                                   int pageSize,
+                                                                   int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -532,7 +520,7 @@ public class FDataResource3dMaterialLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dMaterialUnit>(FDataResource3dMaterialUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dMaterialGroupUnit>(FDataResource3dMaterialGroupUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -545,7 +533,7 @@ public class FDataResource3dMaterialLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMaterialUnit> fetchAll(){
+   public FLogicDataset<FDataResource3dMaterialGroupUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -558,8 +546,8 @@ public class FDataResource3dMaterialLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResource3dMaterialUnit doPrepare(){
-      FDataResource3dMaterialUnit unit = new FDataResource3dMaterialUnit();
+   public FDataResource3dMaterialGroupUnit doPrepare(){
+      FDataResource3dMaterialGroupUnit unit = new FDataResource3dMaterialGroupUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -586,7 +574,7 @@ public class FDataResource3dMaterialLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResource3dMaterialUnit unit = (FDataResource3dMaterialUnit)logicUnit;
+      FDataResource3dMaterialGroupUnit unit = (FDataResource3dMaterialGroupUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -600,7 +588,7 @@ public class FDataResource3dMaterialLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResource3dMaterialUnit unit = (FDataResource3dMaterialUnit)logicUnit;
+      FDataResource3dMaterialGroupUnit unit = (FDataResource3dMaterialGroupUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -617,13 +605,9 @@ public class FDataResource3dMaterialLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`THEME_ID`");
-      cmd.append(",`MATERIAL_GROUP_ID`");
       cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
-      cmd.append(",`CONTENT`");
-      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -638,20 +622,6 @@ public class FDataResource3dMaterialLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      cmd.append(',');
-      long themeId = unit.themeId();
-      if(themeId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(themeId);
-      }
-      cmd.append(',');
-      long materialGroupId = unit.materialGroupId();
-      if(materialGroupId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(materialGroupId);
-      }
       cmd.append(',');
       String fullCode = unit.fullCode();
       if(RString.isEmpty(fullCode)){
@@ -677,24 +647,6 @@ public class FDataResource3dMaterialLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String content = unit.content();
-      if(RString.isEmpty(content)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(content));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String note = unit.note();
-      if(RString.isEmpty(note)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(note));
          cmd.append('\'');
       }
       // 设置更新信息
@@ -732,7 +684,7 @@ public class FDataResource3dMaterialLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResource3dMaterialUnit unit = (FDataResource3dMaterialUnit)logicUnit;
+      FDataResource3dMaterialGroupUnit unit = (FDataResource3dMaterialGroupUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -751,7 +703,7 @@ public class FDataResource3dMaterialLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResource3dMaterialUnit unit = (FDataResource3dMaterialUnit)logicUnit;
+      FDataResource3dMaterialGroupUnit unit = (FDataResource3dMaterialGroupUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -771,24 +723,6 @@ public class FDataResource3dMaterialLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isThemeIdChanged()){
-         cmd.append(",`THEME_ID`=");
-         long themeId = unit.themeId();
-         if(themeId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(themeId);
-         }
-      }
-      if(unit.isMaterialGroupIdChanged()){
-         cmd.append(",`MATERIAL_GROUP_ID`=");
-         long materialGroupId = unit.materialGroupId();
-         if(materialGroupId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(materialGroupId);
-         }
-      }
       if(unit.isFullCodeChanged()){
          cmd.append(",`FULL_CODE`=");
          String fullCode = unit.fullCode();
@@ -822,28 +756,6 @@ public class FDataResource3dMaterialLogic
             cmd.append('\'');
          }
       }
-      if(unit.isContentChanged()){
-         cmd.append(",`CONTENT`=");
-         String content = unit.content();
-         if(RString.isEmpty(content)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(content));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isNoteChanged()){
-         cmd.append(",`NOTE`=");
-         String note = unit.note();
-         if(RString.isEmpty(note)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(note));
-            cmd.append('\'');
-         }
-      }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
       cmd.append(recordId);
@@ -864,7 +776,7 @@ public class FDataResource3dMaterialLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResource3dMaterialUnit unit = (FDataResource3dMaterialUnit)logicUnit;
+      FDataResource3dMaterialGroupUnit unit = (FDataResource3dMaterialGroupUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
