@@ -26,7 +26,7 @@ public class FRs3Frame
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      output.writeInt32(_tick);
+      output.writeUint16(_tick);
       _matrix.serialize(output);
    }
 

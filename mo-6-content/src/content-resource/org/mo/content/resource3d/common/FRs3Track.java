@@ -54,12 +54,12 @@ public class FRs3Track
    @Override
    public void serialize(IDataOutput output){
       // 读取属性
-      output.writeUint8((byte)_boneId);
-      output.writeInt32(_frameTick);
+      output.writeUint8((short)_boneId);
+      output.writeUint16(_frameTick);
       _matrix.serialize(output);
       // 读取所有帧信息
       int frameCount = _frames.count();
-      output.writeInt16((short)frameCount);
+      output.writeUint16(frameCount);
       for(int n = 0; n < frameCount; n++){
          FRs3Frame frame = _frames.get(n);
          frame.serialize(output);
