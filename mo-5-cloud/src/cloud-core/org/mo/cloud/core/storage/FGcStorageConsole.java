@@ -84,11 +84,6 @@ public class FGcStorageConsole
       if(RString.isEmpty(guid)){
          throw new FFatalError("Store code is empty.");
       }
-      // 检查日期
-      String date = storage.date();
-      if(RString.isEmpty(date)){
-         throw new FFatalError("Store date is empty.");
-      }
       // 检查类型
       String type = RString.nvl(storage.type(), "bin");
       //............................................................
@@ -120,7 +115,6 @@ public class FGcStorageConsole
       // 新建数据
       DBObject item = new BasicDBObject();
       item.put("guid", guid);
-      item.put("date", date);
       item.put("type", type);
       item.put("data", data);
       // 查找内容

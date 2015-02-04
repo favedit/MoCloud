@@ -2,13 +2,18 @@ package org.mo.content.resource3d.model;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 
 //============================================================
 // <T>资源模型网格。</T>
 //============================================================
 public class FRs3ModelMesh
+      extends FObject
 {
+   // 模型
+   protected FRs3Model _model;
+
    // 唯一编号
    protected String _guid;
 
@@ -22,6 +27,24 @@ public class FRs3ModelMesh
    // <T>构造资源模型网格。</T>
    //============================================================
    public FRs3ModelMesh(){
+   }
+
+   //============================================================
+   // <T>获得模型。</T>
+   //
+   // @return 模型
+   //============================================================
+   public FRs3Model model(){
+      return _model;
+   }
+
+   //============================================================
+   // <T>设置模型。</T>
+   //
+   // @param model 模型
+   //============================================================
+   public void setModel(FRs3Model model){
+      _model = model;
    }
 
    //============================================================
@@ -49,6 +72,15 @@ public class FRs3ModelMesh
    //============================================================
    public String code(){
       return _code;
+   }
+
+   //============================================================
+   // <T>获得全代码。</T>
+   //
+   // @return 全代码
+   //============================================================
+   public String fullCode(){
+      return _model.code() + "|" + _code;
    }
 
    //============================================================
@@ -89,6 +121,7 @@ public class FRs3ModelMesh
       int count = input.readInt16();
       for(int n = 0; n < count; n++){
          FRs3ModelStream stream = new FRs3ModelStream();
+         stream.setMesh(this);
          stream.unserialize(input);
          _streams.push(stream);
       }

@@ -1,6 +1,6 @@
 package org.mo.content.engine3d.core.model;
 
-import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -15,7 +15,7 @@ public interface IRs3ModelMeshConsole
    // @param code 代码
    // @return 模型网格单元
    //============================================================
-   FDataResource3dModelMeshUnit findByCode(ILogicContext logicContext,
-                                           long modelId,
-                                           String code);
+   FDataResource3dMeshUnit findMeshByCode(ILogicContext logicContext,
+                                          long modelId,
+                                          String code);
 }

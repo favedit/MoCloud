@@ -109,8 +109,10 @@ public class FBitmapServlet
             default:
                throw new FFatalError("Unknown type. (type={1})", type);
          }
-         FImage dataImage = image.imageRectangle(x, y, height, height);
-         data = dataImage.toBytes("jpg");
+         synchronized(this){
+            FImage dataImage = image.imageRectangle(x, y, height, height);
+            data = dataImage.toBytes("jpg");
+         }
       }
       int dataLength = data.length;
       // 发送数据

@@ -12,7 +12,7 @@ public interface IGcStorageConsole
    // @return 处理结果
    //============================================================
    SGcStorage find(String catalog,
-                    String guid);
+                   String guid);
 
    //============================================================
    // <T>保存一个存储信息。</T>

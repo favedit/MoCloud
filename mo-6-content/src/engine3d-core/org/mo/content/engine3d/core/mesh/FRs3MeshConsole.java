@@ -37,6 +37,7 @@ public class FRs3MeshConsole
       // 新建模型
       FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
       FDataResource3dMeshUnit meshUnit = meshLogic.doPrepare();
+      meshUnit.setFullCode(mesh.fullCode());
       meshUnit.setCode(mesh.code());
       meshLogic.doInsert(meshUnit);
       // 新建数据流

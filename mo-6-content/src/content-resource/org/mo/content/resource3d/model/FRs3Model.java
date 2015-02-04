@@ -58,6 +58,7 @@ public class FRs3Model
       int meshCount = input.readInt16();
       for(int n = 0; n < meshCount; n++){
          FRs3ModelMesh mesh = new FRs3ModelMesh();
+         mesh.setModel(this);
          mesh.unserialize(input);
          _meshs.push(mesh);
       }

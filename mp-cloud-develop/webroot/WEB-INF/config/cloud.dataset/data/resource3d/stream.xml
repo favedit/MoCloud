@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="a89061f0-37de-41e2-bb6f-8f1a6815d000" name="data.resource3d.stream" label="M#12cn18资源3D数据流表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Stream" data_name="DT_RS3_STREAM" data_alias="DT_RS3_STM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldString _uuid="353421de-30ab-4192-8f0c-d74121148a33" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="0b0e12b7-d6c0-4bd6-980b-4f0a42b48e05" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldInteger _uuid="c2506d09-5701-4e95-b830-acb896d13f35" name="element_data_cd" label="M#12cn16元素数据类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_DATA_CD" />
   <FieldInteger _uuid="5b823992-171a-409a-be5d-caa0414e4ef5" name="element_count" label="M#12cn14元素个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_COUNT" />

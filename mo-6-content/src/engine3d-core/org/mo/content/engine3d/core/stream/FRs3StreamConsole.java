@@ -36,6 +36,7 @@ public class FRs3StreamConsole
       FDataResource3dStreamLogic streamLogic = logicContext.findLogic(FDataResource3dStreamLogic.class);
       // 设置数据
       FDataResource3dStreamUnit streamUnit = streamLogic.doPrepare();
+      streamUnit.setFullCode(stream.fullCode());
       streamUnit.setCode(stream.code());
       streamUnit.setElementDataCd(stream.elementDataCd());
       streamUnit.setElementCount(stream.elementCount());
@@ -44,7 +45,7 @@ public class FRs3StreamConsole
       streamUnit.setDataLength(stream.dataLength());
       streamLogic.doInsert(streamUnit);
       // 存储数据
-      SGcStorage resource = new SGcStorage(EGcStorageCatalog.Resource3dModelStream, streamUnit.guid(), EMime.Bin.type());
+      SGcStorage resource = new SGcStorage(EGcStorageCatalog.Resource3dStream, streamUnit.guid(), EMime.Bin.type());
       resource.setData(stream.data());
       _storageConsole.store(resource);
       // 返回内容

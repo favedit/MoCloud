@@ -8,7 +8,7 @@ public class EGcStorageCatalog
    // 资源位图图片
    public final static String ResourceBitmapImage = "resource.bitmap.image";
 
-   // 模型数据流
-   public final static String Resource3dModelStream = "resource3d.model.stream";
+   // 资源3D数据流
+   public final static String Resource3dStream = "resource3d.stream";
 
 }

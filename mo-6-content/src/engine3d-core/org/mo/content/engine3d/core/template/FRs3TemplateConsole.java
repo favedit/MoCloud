@@ -1,6 +1,6 @@
 package org.mo.content.engine3d.core.template;
 
-import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateLogic;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
@@ -163,7 +163,7 @@ public class FRs3TemplateConsole
          display.setModelGuid(modelUnit.guid());
          // 设置网格唯一编号
          String meshCode = display.meshCode();
-         FDataResource3dModelMeshUnit meshUnit = _modelMeshConsole.findByCode(logicContext, modelUnit.ouid(), meshCode);
+         FDataResource3dMeshUnit meshUnit = _modelMeshConsole.findMeshByCode(logicContext, modelUnit.ouid(), meshCode);
          display.setMeshGuid(meshUnit.guid());
          // 修正材质
          for(FRs3DisplayMaterial material : display.materials()){
