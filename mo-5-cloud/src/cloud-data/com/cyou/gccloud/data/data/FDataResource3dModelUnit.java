@@ -35,12 +35,6 @@ public class FDataResource3dModelUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全局版本标识的定义。
-   private String __gvid;
-
-   // 字段全局版本标识的定义。
-   protected String _gvid;
-
    // 存储字段代码的定义。
    private String __code;
 
@@ -168,33 +162,6 @@ public class FDataResource3dModelUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
-   }
-
-   //============================================================
-   // <T>判断全局版本标识的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
-   }
-
-   //============================================================
-   // <T>获得全局版本标识的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String gvid(){
-      return _gvid;
-   }
-
-   //============================================================
-   // <T>设置全局版本标识的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setGvid(String value){
-      _gvid = value;
    }
 
    //============================================================
@@ -401,8 +368,6 @@ public class FDataResource3dModelUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
          case "code":
             return _code;
          case "label":
@@ -439,9 +404,6 @@ public class FDataResource3dModelUnit
             break;
          case "guid":
             _guid = value;
-            break;
-         case "gvid":
-            _gvid = value;
             break;
          case "code":
             _code = value;
@@ -491,10 +453,6 @@ public class FDataResource3dModelUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
-               break;
             case "code":
                __code = value;
                _code = __code;
@@ -538,7 +496,6 @@ public class FDataResource3dModelUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
       row.set("code", _code);
       row.set("label", _label);
       row.set("note", _note);
@@ -559,7 +516,6 @@ public class FDataResource3dModelUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
       map.put("code", _code);
       map.put("label", _label);
       map.put("note", _note);

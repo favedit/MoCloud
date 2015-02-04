@@ -36,12 +36,6 @@ public class FDataResource3dTemplateThemeUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全局版本标识的定义。
-   private String __gvid;
-
-   // 字段全局版本标识的定义。
-   protected String _gvid;
-
    // 存储字段模板编号的定义。
    private long __templateId;
 
@@ -175,33 +169,6 @@ public class FDataResource3dTemplateThemeUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
-   }
-
-   //============================================================
-   // <T>判断全局版本标识的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
-   }
-
-   //============================================================
-   // <T>获得全局版本标识的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String gvid(){
-      return _gvid;
-   }
-
-   //============================================================
-   // <T>设置全局版本标识的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setGvid(String value){
-      _gvid = value;
    }
 
    //============================================================
@@ -457,8 +424,6 @@ public class FDataResource3dTemplateThemeUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
          case "template_id":
             return Long.toString(_templateId);
          case "theme_id":
@@ -497,9 +462,6 @@ public class FDataResource3dTemplateThemeUnit
             break;
          case "guid":
             _guid = value;
-            break;
-         case "gvid":
-            _gvid = value;
             break;
          case "template_id":
             _templateId = RLong.parse(value);
@@ -552,10 +514,6 @@ public class FDataResource3dTemplateThemeUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
-               break;
             case "template_id":
                __templateId = RLong.parse(value);
                _templateId = __templateId;
@@ -603,7 +561,6 @@ public class FDataResource3dTemplateThemeUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
       row.set("templateId", _templateId);
       row.set("themeId", _themeId);
       row.set("activeCd", _activeCd);
@@ -625,7 +582,6 @@ public class FDataResource3dTemplateThemeUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
       map.put("templateId", RLong.toString(_templateId));
       map.put("themeId", RLong.toString(_themeId));
       map.put("activeCd", RInteger.toString(_activeCd));

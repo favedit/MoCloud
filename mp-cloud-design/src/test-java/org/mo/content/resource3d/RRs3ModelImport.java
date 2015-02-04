@@ -20,9 +20,8 @@ public class RRs3ModelImport
 
       FByteFile file = new FByteFile();
       //file.loadFile("E:/Microbject/XiaoLongNv.mesh");
-      file.loadFile(RRs3Utility.RootPath + "/MoScript/source/assets/model/pvw.show.item.001.msd");
-      //file.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.008.msd");
-      //file.loadFile("E:/Microbject/MoScript/source/assets/model/pvw.show.item.009.msd");
+      //file.loadFile(RRs3Utility.RootPath + "/MoScript/source/assets/model/pvw.show.item.001.msd");
+      file.loadFile(RRs3Utility.RootPath + "/MoScript/source/assets/model/pvw.show.item.009.msd");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

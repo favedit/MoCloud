@@ -25,60 +25,6 @@ ALTER TABLE DT_PSN_USER
    ADD CONSTRAINT DT_PSN_USR_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource.Type]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RES_TYPE`;
-CREATE TABLE `DT_RES_TYPE` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(200), 
-   `ICON_URL`                      VARCHAR(400), 
-   `DISPLAY_CD`                    INTEGER, 
-   `DISPLAY_ORDER`                 INTEGER, 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RES_TYPE 
-   ADD CONSTRAINT DT_RES_TYP_UK_GID UNIQUE ( GUID ); 
-
--- ------------------------------------------------------------
--- Create table [Data.Resource.Resource]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RES_RESOURCE`;
-CREATE TABLE `DT_RES_RESOURCE` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `TYPE_ID`                       BIGINT, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(80), 
-   `ICON_URL`                      VARCHAR(200), 
-   `DISPLAY_CD`                    INTEGER, 
-   `DISPLAY_ORDER`                 INTEGER DEFAULT 0, 
-   `DESCRIPTION`                   VARCHAR(2000), 
-   `CONTENT`                       TEXT, 
-   `NOTE`                          VARCHAR(800), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RES_RESOURCE 
-   ADD CONSTRAINT DT_RES_RES_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RES_RESOURCE ADD CONSTRAINT DT_RES_RES_FK_TYP 
-      FOREIGN KEY (`TYPE_ID`) REFERENCES DT_RES_TYPE(`OUID`); 
-
--- ------------------------------------------------------------
 -- Create table [Data.Resource.Bitmap]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_RES_BITMAP`;
@@ -87,7 +33,6 @@ CREATE TABLE `DT_RES_BITMAP`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `NOTE`                          VARCHAR(2000), 
@@ -109,7 +54,6 @@ CREATE TABLE `DT_RES_BITMAP_IMAGE`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `BITMAP_ID`                     BIGINT, 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
@@ -138,7 +82,6 @@ CREATE TABLE `DT_RS3_TEXTURE`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `NOTE`                          VARCHAR(2000), 
@@ -160,11 +103,12 @@ CREATE TABLE `DT_RS3_TEXTURE_BITMAP`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `TEXTURE_ID`                    BIGINT NOT NULL, 
    `BITMAP_ID`                     BIGINT NOT NULL, 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
+   `CHANNEL_SOURCE`                VARCHAR(40), 
+   `CHANNEL_TARGET`                VARCHAR(40), 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -182,6 +126,206 @@ ALTER TABLE DT_RS3_TEXTURE_BITMAP ADD CONSTRAINT DT_RS3_TXT_BMP_FK_BMP
       FOREIGN KEY (`BITMAP_ID`) REFERENCES DT_RES_BITMAP(`OUID`); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Track]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_TRACK`;
+CREATE TABLE `DT_RS3_TRACK` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_TRACK 
+   ADD CONSTRAINT DT_RS3_TCK_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Animation]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_ANIMATION`;
+CREATE TABLE `DT_RS3_ANIMATION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_ANIMATION 
+   ADD CONSTRAINT DT_RS3_ANM_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Animation.Track]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_ANIMATION_TRACK`;
+CREATE TABLE `DT_RS3_ANIMATION_TRACK` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `ANIMATION_ID`                  BIGINT, 
+   `BONE_ID`                       BIGINT, 
+   `TRACK_ID`                      BIGINT, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_ANIMATION_TRACK 
+   ADD CONSTRAINT DT_RS3_ANM_TCK_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_ANM 
+      FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
+
+ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_TCK 
+      FOREIGN KEY (`TRACK_ID`) REFERENCES DT_RS3_TRACK(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Animation.Action]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_ANIMATION_ACTION`;
+CREATE TABLE `DT_RS3_ANIMATION_ACTION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `ANIMATION_ID`                  BIGINT NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `FRAME_BEGIN`                   INTEGER, 
+   `FRAME_END`                     INTEGER, 
+   `FRAME_RATE`                    FLOAT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_ANIMATION_ACTION 
+   ADD CONSTRAINT DT_RS3_ANM_ACT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_ANIMATION_ACTION ADD CONSTRAINT DT_RS3_ANM_ACT_FK_ANM 
+      FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Stream]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_STREAM`;
+CREATE TABLE `DT_RS3_STREAM` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `ELEMENT_DATA_CD`               INTEGER, 
+   `ELEMENT_COUNT`                 INTEGER, 
+   `DATA_STRIDE`                   INTEGER, 
+   `DATA_COUNT`                    INTEGER, 
+   `DATA_LENGTH`                   INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_STREAM 
+   ADD CONSTRAINT DT_RS3_STM_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Mesh]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_MESH`;
+CREATE TABLE `DT_RS3_MESH` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_MESH 
+   ADD CONSTRAINT DT_RS3_MSH_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Mesh.Stream]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_MESH_STREAM`;
+CREATE TABLE `DT_RS3_MESH_STREAM` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MESH_ID`                       BIGINT, 
+   `STREAM_ID`                     BIGINT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_MESH_STREAM 
+   ADD CONSTRAINT DT_RS3_MSH_STM_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_MESH_STREAM ADD CONSTRAINT DT_RS3_MSH_STM_FK_MSH 
+      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MESH(`OUID`); 
+
+ALTER TABLE DT_RS3_MESH_STREAM ADD CONSTRAINT DT_RS3_MSH_STM_FK_STM 
+      FOREIGN KEY (`STREAM_ID`) REFERENCES DT_RS3_STREAM(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Mesh.Track]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_MESH_TRACK`;
+CREATE TABLE `DT_RS3_MESH_TRACK` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MESH_ID`                       BIGINT, 
+   `TRACK_ID`                      BIGINT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_MESH_TRACK 
+   ADD CONSTRAINT DT_RS3_MSH_TCK_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_MESH_TRACK ADD CONSTRAINT DT_RS3_MSH_TCK_FK_MSH 
+      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MESH(`OUID`); 
+
+ALTER TABLE DT_RS3_MESH_TRACK ADD CONSTRAINT DT_RS3_MSH_TCK_FK_TCK 
+      FOREIGN KEY (`TRACK_ID`) REFERENCES DT_RS3_TRACK(`OUID`); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Model]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_RS3_MODEL`;
@@ -190,7 +334,6 @@ CREATE TABLE `DT_RS3_MODEL`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `NOTE`                          VARCHAR(2000), 
@@ -212,10 +355,8 @@ CREATE TABLE `DT_RS3_MODEL_MESH`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `MODEL_ID`                      BIGINT, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(200), 
+   `MESH_ID`                       BIGINT, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -229,39 +370,8 @@ ALTER TABLE DT_RS3_MODEL_MESH
 ALTER TABLE DT_RS3_MODEL_MESH ADD CONSTRAINT DT_RS3_MOD_MSH_FK_MOD 
       FOREIGN KEY (`MODEL_ID`) REFERENCES DT_RS3_MODEL(`OUID`); 
 
--- ------------------------------------------------------------
--- Create table [Data.Resource3d.Model.Stream]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_MODEL_STREAM`;
-CREATE TABLE `DT_RS3_MODEL_STREAM` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
-   `MODEL_ID`                      BIGINT, 
-   `MESH_ID`                       BIGINT, 
-   `CODE`                          VARCHAR(80), 
-   `ELEMENT_DATA_CD`               INTEGER, 
-   `ELEMENT_COUNT`                 INTEGER, 
-   `DATA_STRIDE`                   INTEGER, 
-   `DATA_COUNT`                    INTEGER, 
-   `DATA_LENGTH`                   INTEGER, 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RS3_MODEL_STREAM 
-   ADD CONSTRAINT DT_RS3_MOD_STM_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_MODEL_STREAM ADD CONSTRAINT DT_RS3_MOD_STM_FK_MOD 
-      FOREIGN KEY (`MODEL_ID`) REFERENCES DT_RS3_MODEL(`OUID`); 
-
-ALTER TABLE DT_RS3_MODEL_STREAM ADD CONSTRAINT DT_RS3_MOD_STM_FK_MSH 
-      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MODEL_MESH(`OUID`); 
+ALTER TABLE DT_RS3_MODEL_MESH ADD CONSTRAINT DT_RS3_MOD_MSH_FK_MSH 
+      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MESH(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Theme]
@@ -272,7 +382,6 @@ CREATE TABLE `DT_RS3_THEME`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `CONTENT`                       TEXT, 
@@ -295,7 +404,6 @@ CREATE TABLE `DT_RS3_MATERIAL`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `CONTENT`                       TEXT, 
@@ -350,7 +458,6 @@ CREATE TABLE `DT_RS3_TEMPLATE`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `CONTENT`                       TEXT, 
@@ -373,7 +480,6 @@ CREATE TABLE `DT_RS3_TEMPLATE_THEME`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `TEMPLATE_ID`                   BIGINT, 
    `THEME_ID`                      BIGINT, 
    `ACTIVE_CD`                     INTEGER, 
@@ -402,7 +508,6 @@ CREATE TABLE `DT_RS3_TEMPLATE_MATERIAL`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `TEMPLATE_ID`                   BIGINT NOT NULL, 
    `THEME_ID`                      BIGINT NOT NULL, 
    `MATERIAL_ID`                   BIGINT NOT NULL, 
@@ -434,7 +539,6 @@ CREATE TABLE `DT_RS3_SCENE`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `GVID`                          VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `CONTENT`                       TEXT, 

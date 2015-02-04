@@ -94,7 +94,7 @@ public class FRs3TextureConsole
          // 上传位图数据
          imageLogic.find(imageUnit, imageUnit.ouid());
          try(FByteFile file = new FByteFile(fileInfo.fileName())){
-            SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid(), imageUnit.createDate(), fileExtension);
+            SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid(), fileExtension);
             resource.setData(file.toArray());
             _storageConsole.store(resource);
          }

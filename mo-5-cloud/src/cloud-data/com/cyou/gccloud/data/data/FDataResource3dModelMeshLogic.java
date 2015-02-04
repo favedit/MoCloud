@@ -41,17 +41,11 @@ public class FDataResource3dModelMeshLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段全局版本标识的定义。
-   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
-
    // 字段模型编号的定义。
    public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
 
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
-
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+   // 字段网格编号的定义。
+   public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -69,7 +63,7 @@ public class FDataResource3dModelMeshLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,MODEL_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,MODEL_ID,MESH_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D模型网格表逻辑单元。</T>
@@ -611,10 +605,8 @@ public class FDataResource3dModelMeshLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`GVID`");
       cmd.append(",`MODEL_ID`");
-      cmd.append(",`CODE`");
-      cmd.append(",`LABEL`");
+      cmd.append(",`MESH_ID`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -630,14 +622,6 @@ public class FDataResource3dModelMeshLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      String gvid = unit.gvid();
-      if(RString.isEmpty(gvid)){
-         gvid = RUuid.makeUniqueId();
-      }
-      cmd.append(',');
-      cmd.append('\'');
-      cmd.append(gvid);
-      cmd.append('\'');
       cmd.append(',');
       long modelId = unit.modelId();
       if(modelId == 0){
@@ -646,22 +630,11 @@ public class FDataResource3dModelMeshLogic
          cmd.append(modelId);
       }
       cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
+      long meshId = unit.meshId();
+      if(meshId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
+         cmd.append(meshId);
       }
       cmd.append(',');
       String note = unit.note();
@@ -746,17 +719,6 @@ public class FDataResource3dModelMeshLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isGvidChanged()){
-         cmd.append(",`GVID`=");
-         String gvid = unit.gvid();
-         if(RString.isEmpty(gvid)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(gvid));
-            cmd.append('\'');
-         }
-      }
       if(unit.isModelIdChanged()){
          cmd.append(",`MODEL_ID`=");
          long modelId = unit.modelId();
@@ -766,26 +728,13 @@ public class FDataResource3dModelMeshLogic
             cmd.append(modelId);
          }
       }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
+      if(unit.isMeshIdChanged()){
+         cmd.append(",`MESH_ID`=");
+         long meshId = unit.meshId();
+         if(meshId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
+            cmd.append(meshId);
          }
       }
       if(unit.isNoteChanged()){

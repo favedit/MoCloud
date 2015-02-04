@@ -35,29 +35,17 @@ public class FDataResource3dModelMeshUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全局版本标识的定义。
-   private String __gvid;
-
-   // 字段全局版本标识的定义。
-   protected String _gvid;
-
    // 存储字段模型编号的定义。
    private long __modelId;
 
    // 字段模型编号的定义。
    protected long _modelId;
 
-   // 存储字段代码的定义。
-   private String __code;
+   // 存储字段网格编号的定义。
+   private long __meshId;
 
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段名称的定义。
-   private String __label;
-
-   // 字段名称的定义。
-   protected String _label;
+   // 字段网格编号的定义。
+   protected long _meshId;
 
    // 存储字段备注的定义。
    private String __note;
@@ -177,33 +165,6 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>判断全局版本标识的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
-   }
-
-   //============================================================
-   // <T>获得全局版本标识的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String gvid(){
-      return _gvid;
-   }
-
-   //============================================================
-   // <T>设置全局版本标识的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setGvid(String value){
-      _gvid = value;
-   }
-
-   //============================================================
    // <T>判断模型编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -242,57 +203,41 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断网格编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isMeshIdChanged(){
+      return __meshId != _meshId;
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得网格编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public long meshId(){
+      return _meshId;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
+   // <T>获得网格编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dMeshUnit mesh(){
+      FDataResource3dMeshLogic logic = _logicContext.findLogic(FDataResource3dMeshLogic.class);
+      FDataResource3dMeshUnit unit = logic.find(_meshId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置网格编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
+   public void setMeshId(long value){
+      _meshId = value;
    }
 
    //============================================================
@@ -445,14 +390,10 @@ public class FDataResource3dModelMeshUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
          case "model_id":
             return Long.toString(_modelId);
-         case "code":
-            return _code;
-         case "label":
-            return _label;
+         case "mesh_id":
+            return Long.toString(_meshId);
          case "note":
             return _note;
          case "create_user_id":
@@ -486,17 +427,11 @@ public class FDataResource3dModelMeshUnit
          case "guid":
             _guid = value;
             break;
-         case "gvid":
-            _gvid = value;
-            break;
          case "model_id":
             _modelId = RLong.parse(value);
             break;
-         case "code":
-            _code = value;
-            break;
-         case "label":
-            _label = value;
+         case "mesh_id":
+            _meshId = RLong.parse(value);
             break;
          case "note":
             _note = value;
@@ -540,21 +475,13 @@ public class FDataResource3dModelMeshUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
-               break;
             case "model_id":
                __modelId = RLong.parse(value);
                _modelId = __modelId;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
+            case "mesh_id":
+               __meshId = RLong.parse(value);
+               _meshId = __meshId;
                break;
             case "note":
                __note = value;
@@ -591,10 +518,8 @@ public class FDataResource3dModelMeshUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
       row.set("modelId", _modelId);
-      row.set("code", _code);
-      row.set("label", _label);
+      row.set("meshId", _meshId);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -613,10 +538,8 @@ public class FDataResource3dModelMeshUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
       map.put("modelId", RLong.toString(_modelId));
-      map.put("code", _code);
-      map.put("label", _label);
+      map.put("meshId", RLong.toString(_meshId));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

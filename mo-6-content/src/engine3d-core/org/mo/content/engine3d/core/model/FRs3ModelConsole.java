@@ -1,20 +1,16 @@
 package org.mo.content.engine3d.core.model;
 
+import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
-import com.cyou.gccloud.data.data.FDataResource3dModelStreamLogic;
-import com.cyou.gccloud.data.data.FDataResource3dModelStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.IDataInput;
 import org.mo.com.lang.EResult;
+import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
-import org.mo.content.resource3d.model.FRs3ModelStream;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 
@@ -26,9 +22,9 @@ public class FRs3ModelConsole
       implements
          IRs3ModelConsole
 {
-   // 存储控制台
+   // 网格控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IRs3MeshConsole _meshConsole;
 
    //============================================================
    // <T>根据代码查找模型单元。</T>
@@ -59,6 +55,7 @@ public class FRs3ModelConsole
       // 加载模型资源
       FRs3Model model = new FRs3Model();
       model.loadStream(input);
+      //............................................................
       // 新建模型
       FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
       FDataResource3dModelUnit modelUnit = modelLogic.doPrepare();
@@ -66,30 +63,14 @@ public class FRs3ModelConsole
       modelLogic.doInsert(modelUnit);
       // 新建网格
       for(FRs3ModelMesh mesh : model.meshs()){
-         FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
-         FDataResource3dModelMeshUnit meshUnit = meshLogic.doPrepare();
-         meshUnit.setCode(mesh.code());
-         meshUnit.setModelId(modelUnit.ouid());
-         meshLogic.doInsert(meshUnit);
-         // 新建数据流
-         for(FRs3ModelStream stream : mesh.streams()){
-            FDataResource3dModelStreamLogic streamLogic = logicContext.findLogic(FDataResource3dModelStreamLogic.class);
-            FDataResource3dModelStreamUnit streamUnit = streamLogic.doPrepare();
-            streamUnit.setCode(stream.code());
-            streamUnit.setModelId(modelUnit.ouid());
-            streamUnit.setMeshId(meshUnit.ouid());
-            streamUnit.setElementDataCd(stream.elementDataCd());
-            streamUnit.setElementCount(stream.elementCount());
-            streamUnit.setDataStride(stream.dataStride());
-            streamUnit.setDataCount(stream.dataCount());
-            streamUnit.setDataLength(stream.dataLength());
-            streamLogic.doInsert(streamUnit);
-            // 上传数据
-            FDataResource3dModelStreamUnit unit = streamLogic.find(streamUnit.ouid());
-            SGcStorage resource = new SGcStorage(EGcStorageCatalog.Resource3dModelStream, unit.guid(), unit.createDate(), null);
-            resource.setData(stream.data());
-            _storageConsole.store(resource);
-         }
+         // 新建模型
+         FDataResource3dMeshUnit meshUnit = _meshConsole.insert(logicContext, mesh);
+         // 关联网格和模型
+         FDataResource3dModelMeshLogic modelMeshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
+         FDataResource3dModelMeshUnit modelMeshUnit = modelMeshLogic.doPrepare();
+         modelMeshUnit.setModelId(modelUnit.ouid());
+         modelMeshUnit.setMeshId(meshUnit.ouid());
+         modelMeshLogic.doInsert(modelMeshUnit);
       }
       return EResult.Success;
    }

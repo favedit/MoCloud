@@ -17,7 +17,8 @@ public class RRs3TextureImport
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
-      String filePath = RRs3Utility.RootPath + "/MoScript/source/assets/texture/pvw.show.001.01";
+      //String filePath = RRs3Utility.RootPath + "/MoScript/source/assets/texture/pvw.show.001.01";
+      String filePath = RRs3Utility.RootPath + "/MoScript/source/assets/texture/pvw.show.009.01";
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

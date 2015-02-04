@@ -41,9 +41,6 @@ public class FDataResource3dTextureLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段全局版本标识的定义。
-   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
-
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
@@ -66,7 +63,7 @@ public class FDataResource3dTextureLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D纹理表逻辑单元。</T>
@@ -608,7 +605,6 @@ public class FDataResource3dTextureLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`GVID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`NOTE`");
@@ -625,14 +621,6 @@ public class FDataResource3dTextureLogic
       cmd.append(',');
       cmd.append('\'');
       cmd.append(guid);
-      cmd.append('\'');
-      String gvid = unit.gvid();
-      if(RString.isEmpty(gvid)){
-         gvid = RUuid.makeUniqueId();
-      }
-      cmd.append(',');
-      cmd.append('\'');
-      cmd.append(gvid);
       cmd.append('\'');
       cmd.append(',');
       String code = unit.code();
@@ -735,17 +723,6 @@ public class FDataResource3dTextureLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isGvidChanged()){
-         cmd.append(",`GVID`=");
-         String gvid = unit.gvid();
-         if(RString.isEmpty(gvid)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(gvid));
-            cmd.append('\'');
-         }
-      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();

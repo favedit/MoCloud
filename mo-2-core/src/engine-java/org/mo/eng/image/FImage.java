@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import javax.imageio.ImageIO;
 import org.mo.com.io.RFile;
@@ -25,7 +27,7 @@ public class FImage
    private final static ILogger _logger = RLogger.find(FImage.class);
 
    // 位图
-   BufferedImage _image;
+   protected BufferedImage _image;
 
    //============================================================
    // <T>构造图形对象。</T>
@@ -36,10 +38,90 @@ public class FImage
    //============================================================
    // <T>构造图形对象。</T>
    //
+   // @param image 位图
+   //============================================================
+   public FImage(BufferedImage image){
+      _image = image;
+   }
+
+   //============================================================
+   // <T>构造图形对象。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public FImage(byte[] data){
+      loadData(data);
+   }
+
+   //============================================================
+   // <T>构造图形对象。</T>
+   //
    // @param fileName 文件名称
    //============================================================
    public FImage(String fileName){
       loadFile(fileName);
+   }
+
+   //============================================================
+   // <T>获得宽度。</T>
+   //
+   // @return 宽度
+   //============================================================
+   public int width(){
+      return _image.getWidth();
+   }
+
+   //============================================================
+   // <T>获得高度。</T>
+   //
+   // @return 高度
+   //============================================================
+   public int height(){
+      return _image.getHeight();
+   }
+
+   //============================================================
+   // <T>加载数据。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public FImage imageRectangle(int x,
+                                int y,
+                                int width,
+                                int height){
+      // 检查参数
+      if((x < 0) || (y < 0) || (width <= 0) || (height <= 0)){
+         throw new FFatalError("Rect size is invalid. (x={1}, y={2},width={3}, height={4})", x, y, width, height);
+      }
+      // 创建目标
+      int imageType = _image.getType();
+      BufferedImage image = new BufferedImage(width, height, imageType);
+      Graphics2D graphics = null;
+      try{
+         graphics = image.createGraphics();
+         graphics.drawImage(_image, 0, 0, width, height, x, y, x + width, y + height, null);
+      }finally{
+         if(graphics != null){
+            graphics.dispose();
+         }
+      }
+      _logger.debug(this, "resize", "Rect image success. (x={1}, y={2},width={3}, height={4})", x, y, width, height);
+      return new FImage(image);
+   }
+
+   //============================================================
+   // <T>加载数据。</T>
+   //
+   // @param data 数据
+   //============================================================
+   public void loadData(byte[] data){
+      try{
+         _logger.debug(this, "loadFile", "Load image data. (data={1}, length={2})", data, data.length);
+         _image = ImageIO.read(new ByteArrayInputStream(data));
+      }catch(Exception e){
+         _logger.error(this, "loadFile", e, "Load image data failure. (data={1}, length={2})", data, data.length);
+         throw new FFatalError(e);
+      }
    }
 
    //============================================================
@@ -69,6 +151,23 @@ public class FImage
          ImageIO.write(_image, extension, new File(fileName));
       }catch(Exception e){
          _logger.error(this, "saveFile", e, "Save image file failure. (file_name={1})", fileName);
+         throw new FFatalError(e);
+      }
+   }
+
+   //============================================================
+   // <T>存储数据。</T>
+   //
+   // @param extension 格式
+   // @return 数据
+   //============================================================
+   public byte[] toBytes(String extension){
+      try{
+         ByteArrayOutputStream output = new ByteArrayOutputStream();
+         ImageIO.write(_image, extension, output);
+         return output.toByteArray();
+      }catch(Exception e){
+         _logger.error(this, "saveFile", e, "Save image data failure. (extension={1})", extension);
          throw new FFatalError(e);
       }
    }

@@ -35,12 +35,6 @@ public class FDataResource3dTextureBitmapUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全局版本标识的定义。
-   private String __gvid;
-
-   // 字段全局版本标识的定义。
-   protected String _gvid;
-
    // 存储字段纹理编号的定义。
    private long __textureId;
 
@@ -64,6 +58,18 @@ public class FDataResource3dTextureBitmapUnit
 
    // 字段标签的定义。
    protected String _label;
+
+   // 存储字段来源通道的定义。
+   private String __channelSource;
+
+   // 字段来源通道的定义。
+   protected String _channelSource;
+
+   // 存储字段目标通道的定义。
+   private String __channelTarget;
+
+   // 字段目标通道的定义。
+   protected String _channelTarget;
 
    // 存储字段备注的定义。
    private String __note;
@@ -180,33 +186,6 @@ public class FDataResource3dTextureBitmapUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
-   }
-
-   //============================================================
-   // <T>判断全局版本标识的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
-   }
-
-   //============================================================
-   // <T>获得全局版本标识的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String gvid(){
-      return _gvid;
-   }
-
-   //============================================================
-   // <T>设置全局版本标识的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setGvid(String value){
-      _gvid = value;
    }
 
    //============================================================
@@ -337,6 +316,60 @@ public class FDataResource3dTextureBitmapUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断来源通道的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isChannelSourceChanged(){
+      return !RString.equals(__channelSource, _channelSource);
+   }
+
+   //============================================================
+   // <T>获得来源通道的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String channelSource(){
+      return _channelSource;
+   }
+
+   //============================================================
+   // <T>设置来源通道的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setChannelSource(String value){
+      _channelSource = value;
+   }
+
+   //============================================================
+   // <T>判断目标通道的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isChannelTargetChanged(){
+      return !RString.equals(__channelTarget, _channelTarget);
+   }
+
+   //============================================================
+   // <T>获得目标通道的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String channelTarget(){
+      return _channelTarget;
+   }
+
+   //============================================================
+   // <T>设置目标通道的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setChannelTarget(String value){
+      _channelTarget = value;
    }
 
    //============================================================
@@ -489,8 +522,6 @@ public class FDataResource3dTextureBitmapUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
          case "texture_id":
             return Long.toString(_textureId);
          case "bitmap_id":
@@ -499,6 +530,10 @@ public class FDataResource3dTextureBitmapUnit
             return _code;
          case "label":
             return _label;
+         case "channel_source":
+            return _channelSource;
+         case "channel_target":
+            return _channelTarget;
          case "note":
             return _note;
          case "create_user_id":
@@ -532,9 +567,6 @@ public class FDataResource3dTextureBitmapUnit
          case "guid":
             _guid = value;
             break;
-         case "gvid":
-            _gvid = value;
-            break;
          case "texture_id":
             _textureId = RLong.parse(value);
             break;
@@ -546,6 +578,12 @@ public class FDataResource3dTextureBitmapUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "channel_source":
+            _channelSource = value;
+            break;
+         case "channel_target":
+            _channelTarget = value;
             break;
          case "note":
             _note = value;
@@ -589,10 +627,6 @@ public class FDataResource3dTextureBitmapUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
-               break;
             case "texture_id":
                __textureId = RLong.parse(value);
                _textureId = __textureId;
@@ -608,6 +642,14 @@ public class FDataResource3dTextureBitmapUnit
             case "label":
                __label = value;
                _label = __label;
+               break;
+            case "channel_source":
+               __channelSource = value;
+               _channelSource = __channelSource;
+               break;
+            case "channel_target":
+               __channelTarget = value;
+               _channelTarget = __channelTarget;
                break;
             case "note":
                __note = value;
@@ -644,11 +686,12 @@ public class FDataResource3dTextureBitmapUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
       row.set("textureId", _textureId);
       row.set("bitmapId", _bitmapId);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("channelSource", _channelSource);
+      row.set("channelTarget", _channelTarget);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -667,11 +710,12 @@ public class FDataResource3dTextureBitmapUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
       map.put("textureId", RLong.toString(_textureId));
       map.put("bitmapId", RLong.toString(_bitmapId));
       map.put("code", _code);
       map.put("label", _label);
+      map.put("channelSource", _channelSource);
+      map.put("channelTarget", _channelTarget);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

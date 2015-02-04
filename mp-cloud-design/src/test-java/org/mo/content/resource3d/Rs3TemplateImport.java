@@ -17,7 +17,8 @@ public class Rs3TemplateImport
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
-      String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.show.item.001.xml";
+      //String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.show.item.001.xml";
+      String fileName = RRs3Utility.RootPath + "/MoScript/source/assets/template/pvw.show.item.009.xml";
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

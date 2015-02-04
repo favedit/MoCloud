@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="a89061f0-37de-41e2-bb6f-8f1a6815d000" name="data.resource3d.stream" label="M#12cn18资源3D数据流表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Stream" data_name="DT_RS3_STREAM" data_alias="DT_RS3_STM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldString _uuid="0b0e12b7-d6c0-4bd6-980b-4f0a42b48e05" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldInteger _uuid="c2506d09-5701-4e95-b830-acb896d13f35" name="element_data_cd" label="M#12cn16元素数据类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_DATA_CD" />
+  <FieldInteger _uuid="5b823992-171a-409a-be5d-caa0414e4ef5" name="element_count" label="M#12cn14元素个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_COUNT" />
+  <FieldInteger _uuid="c88350f1-3ab2-47f2-95c7-7de1616110c9" name="data_stride" label="M#12cn14数据宽度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_STRIDE" />
+  <FieldInteger _uuid="ff181333-5d67-4593-be45-6944db614e65" name="data_count" label="M#12cn14数据个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_COUNT" />
+  <FieldInteger _uuid="16965648-ca06-4094-8d36-6b0f249512e3" name="data_length" label="M#12cn14数据长度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_LENGTH" />
+  <FieldTemplate _uuid="3dca7589-700c-4a9a-9739-0b417e90506f" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

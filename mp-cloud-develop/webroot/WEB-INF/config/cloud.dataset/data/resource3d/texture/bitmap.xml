@@ -4,5 +4,7 @@
   <FieldRecordId _uuid="d9136241-24b6-4770-aa1c-bf753504e605" name="bitmap_id" label="M#12cn14位图编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="BITMAP_ID" data_alias="BMP" data_refer="data.resource.bitmap" />
   <FieldString _uuid="09c6e523-c358-412f-b32a-fc9cd946de30" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="a7028e63-9f66-471e-be71-d0b6663e28bf" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="868d6c84-efe9-416a-bdae-e3a8b542d6eb" name="channel_source" label="M#12cn14来源通道" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CHANNEL_SOURCE" data_size="40" />
+  <FieldString _uuid="2aa3e092-cc60-4d8e-aa50-f7e9872645a7" name="channel_target" label="M#12cn14目标通道" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CHANNEL_TARGET" data_size="40" />
   <FieldTemplate _uuid="b0a784a2-cb10-4533-b758-62375e4e71bf" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

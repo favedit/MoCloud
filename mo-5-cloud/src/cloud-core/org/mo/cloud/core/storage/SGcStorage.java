@@ -1,7 +1,5 @@
 package org.mo.cloud.core.storage;
 
-import org.mo.com.lang.type.TDateTime;
-
 //============================================================
 // <T>资源信息。</T>
 //============================================================
@@ -35,36 +33,13 @@ public class SGcStorage
    // <T>构造资源信息。</T>
    //
    // @param catalog 分类
+   // @param guid 类型
    // @param type 类型
-   // @param code 代码
-   // @param name 名称
-   // @param source 来源
    //============================================================
    public SGcStorage(String catalog,
-                      String guid,
-                      String date,
-                      String type){
+                     String guid,
+                     String type){
       _catalog = catalog;
-      _date = date;
-      _guid = guid;
-      _type = type;
-   }
-
-   //============================================================
-   // <T>构造资源信息。</T>
-   //
-   // @param catalog 分类
-   // @param type 类型
-   // @param code 代码
-   // @param name 名称
-   // @param source 来源
-   //============================================================
-   public SGcStorage(String catalog,
-                      String guid,
-                      TDateTime date,
-                      String type){
-      _catalog = catalog;
-      _date = date.format("YYYYMMDD");
       _guid = guid;
       _type = type;
    }

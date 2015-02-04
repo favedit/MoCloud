@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="2d7952b0-2cbd-4fea-b1c8-cdacd9b37aa4" name="data.resource3d.animation.track" label="M#12cn19资源3D动画跟踪表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-AM-TCK" data_name="DT_RS3_ANIMATION_TRACK" data_alias="DT_RS3_ANM_TCK" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="663e6d31-2fbe-4689-9cb5-8221c4051b12" name="animation_id" label="M#12cn14动画编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ANIMATION_ID" data_alias="ANM" data_refer="data.resource3d.animation" />
+  <FieldRecordId _uuid="f074cbdb-9e3f-4a23-bbac-91af7fbc390e" name="bone_id" label="M#12cn14骨头编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BONE_ID" />
+  <FieldRecordId _uuid="eae928fb-d83e-435e-bbcd-6edc0060579b" name="track_id" label="M#12cn14跟踪编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TRACK_ID" data_alias="TCK" data_refer="data.resource3d.track" />
+  <FieldString _uuid="fc0ba47e-f850-4dc7-8c61-c37c2ceb40d9" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="44e08cd0-23bc-4593-a75c-cf413be9a3b1" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldTemplate _uuid="12f97f6c-5d36-4493-9f57-2ad99cde24d8" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

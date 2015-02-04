@@ -14,6 +14,7 @@ import org.mo.com.net.EMime;
 import org.mo.content.core.resource3d.texture.IC3dBitmapConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eng.image.FImage;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -66,11 +67,51 @@ public class FBitmapServlet
       }
       // 检查版本
       String version = context.parameter("version");
+      // 环境贴图处理
+      String type = null;
+      if(code.contains("-")){
+         String[] items = RString.split(code, '-');
+         if(items.length == 2){
+            code = items[0];
+            type = items[1];
+         }
+      }
       // 获得数据
       FDataResourceBitmapImageUnit imageUnit = _bitmapConsole.findBitmapUnit(logicContext, code, version);
       String formatCode = imageUnit.formatCode();
       SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
       byte[] data = resource.data();
+      // 获得部分数据
+      if(type != null){
+         FImage image = new FImage(data);
+         int x = 0;
+         int y = 0;
+         int height = image.height();
+         switch(type){
+            case "x1":
+               x = 0;
+               break;
+            case "x2":
+               x = height;
+               break;
+            case "y1":
+               x = height * 2;
+               break;
+            case "y2":
+               x = height * 3;
+               break;
+            case "z1":
+               x = height * 4;
+               break;
+            case "z2":
+               x = height * 5;
+               break;
+            default:
+               throw new FFatalError("Unknown type. (type={1})", type);
+         }
+         FImage dataImage = image.imageRectangle(x, y, height, height);
+         data = dataImage.toBytes("jpg");
+      }
       int dataLength = data.length;
       // 发送数据
       _logger.debug(this, "process", "Send data. (length={1})", dataLength);

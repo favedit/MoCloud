@@ -36,12 +36,6 @@ public class FDataResourceBitmapImageUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全局版本标识的定义。
-   private String __gvid;
-
-   // 字段全局版本标识的定义。
-   protected String _gvid;
-
    // 存储字段位图编号的定义。
    private long __bitmapId;
 
@@ -193,33 +187,6 @@ public class FDataResourceBitmapImageUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
-   }
-
-   //============================================================
-   // <T>判断全局版本标识的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
-   }
-
-   //============================================================
-   // <T>获得全局版本标识的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String gvid(){
-      return _gvid;
-   }
-
-   //============================================================
-   // <T>设置全局版本标识的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setGvid(String value){
-      _gvid = value;
    }
 
    //============================================================
@@ -545,8 +512,6 @@ public class FDataResourceBitmapImageUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
          case "bitmap_id":
             return Long.toString(_bitmapId);
          case "code":
@@ -591,9 +556,6 @@ public class FDataResourceBitmapImageUnit
             break;
          case "guid":
             _guid = value;
-            break;
-         case "gvid":
-            _gvid = value;
             break;
          case "bitmap_id":
             _bitmapId = RLong.parse(value);
@@ -655,10 +617,6 @@ public class FDataResourceBitmapImageUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
-               break;
             case "bitmap_id":
                __bitmapId = RLong.parse(value);
                _bitmapId = __bitmapId;
@@ -718,7 +676,6 @@ public class FDataResourceBitmapImageUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
       row.set("bitmapId", _bitmapId);
       row.set("code", _code);
       row.set("label", _label);
@@ -743,7 +700,6 @@ public class FDataResourceBitmapImageUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
       map.put("bitmapId", RLong.toString(_bitmapId));
       map.put("code", _code);
       map.put("label", _label);

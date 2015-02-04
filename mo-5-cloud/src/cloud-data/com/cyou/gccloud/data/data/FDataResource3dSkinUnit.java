@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -12,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D网格数据表逻辑单元。</T>
+// <T>资源3D跟踪表     逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dModelStreamUnit
+public class FDataResource3dSkinUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -36,59 +35,17 @@ public class FDataResource3dModelStreamUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全局版本标识的定义。
-   private String __gvid;
-
-   // 字段全局版本标识的定义。
-   protected String _gvid;
-
-   // 存储字段模型编号的定义。
-   private long __modelId;
-
-   // 字段模型编号的定义。
-   protected long _modelId;
-
-   // 存储字段网格编号的定义。
-   private long __meshId;
-
-   // 字段网格编号的定义。
-   protected long _meshId;
-
    // 存储字段代码的定义。
    private String __code;
 
    // 字段代码的定义。
    protected String _code;
 
-   // 存储字段元素数据类型的定义。
-   private int __elementDataCd;
+   // 存储字段名称的定义。
+   private String __label;
 
-   // 字段元素数据类型的定义。
-   protected int _elementDataCd;
-
-   // 存储字段元素个数的定义。
-   private int __elementCount;
-
-   // 字段元素个数的定义。
-   protected int _elementCount;
-
-   // 存储字段数据宽度的定义。
-   private int __dataStride;
-
-   // 字段数据宽度的定义。
-   protected int _dataStride;
-
-   // 存储字段数据个数的定义。
-   private int __dataCount;
-
-   // 字段数据个数的定义。
-   protected int _dataCount;
-
-   // 存储字段数据长度的定义。
-   private int __dataLength;
-
-   // 字段数据长度的定义。
-   protected int _dataLength;
+   // 字段名称的定义。
+   protected String _label;
 
    // 存储字段备注的定义。
    private String __note;
@@ -121,9 +78,9 @@ public class FDataResource3dModelStreamUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D网格数据表逻辑单元。</T>
+   // <T>构造资源3D跟踪表     逻辑单元。</T>
    //============================================================
-   public FDataResource3dModelStreamUnit(){
+   public FDataResource3dSkinUnit(){
    }
 
    //============================================================
@@ -208,109 +165,6 @@ public class FDataResource3dModelStreamUnit
    }
 
    //============================================================
-   // <T>判断全局版本标识的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isGvidChanged(){
-      return !RString.equals(__gvid, _gvid);
-   }
-
-   //============================================================
-   // <T>获得全局版本标识的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String gvid(){
-      return _gvid;
-   }
-
-   //============================================================
-   // <T>设置全局版本标识的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setGvid(String value){
-      _gvid = value;
-   }
-
-   //============================================================
-   // <T>判断模型编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isModelIdChanged(){
-      return __modelId != _modelId;
-   }
-
-   //============================================================
-   // <T>获得模型编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long modelId(){
-      return _modelId;
-   }
-
-   //============================================================
-   // <T>获得模型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResource3dModelUnit model(){
-      FDataResource3dModelLogic logic = _logicContext.findLogic(FDataResource3dModelLogic.class);
-      FDataResource3dModelUnit unit = logic.find(_modelId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置模型编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setModelId(long value){
-      _modelId = value;
-   }
-
-   //============================================================
-   // <T>判断网格编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isMeshIdChanged(){
-      return __meshId != _meshId;
-   }
-
-   //============================================================
-   // <T>获得网格编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long meshId(){
-      return _meshId;
-   }
-
-   //============================================================
-   // <T>获得网格编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResource3dModelMeshUnit mesh(){
-      FDataResource3dModelMeshLogic logic = _logicContext.findLogic(FDataResource3dModelMeshLogic.class);
-      FDataResource3dModelMeshUnit unit = logic.find(_meshId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置网格编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setMeshId(long value){
-      _meshId = value;
-   }
-
-   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -338,138 +192,30 @@ public class FDataResource3dModelStreamUnit
    }
 
    //============================================================
-   // <T>判断元素数据类型的数据是否改变。</T>
+   // <T>判断名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isElementDataCdChanged(){
-      return __elementDataCd != _elementDataCd;
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
    }
 
    //============================================================
-   // <T>获得元素数据类型的数据内容。</T>
+   // <T>获得名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int elementDataCd(){
-      return _elementDataCd;
+   public String label(){
+      return _label;
    }
 
    //============================================================
-   // <T>设置元素数据类型的数据内容。</T>
+   // <T>设置名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setElementDataCd(int value){
-      _elementDataCd = value;
-   }
-
-   //============================================================
-   // <T>判断元素个数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isElementCountChanged(){
-      return __elementCount != _elementCount;
-   }
-
-   //============================================================
-   // <T>获得元素个数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int elementCount(){
-      return _elementCount;
-   }
-
-   //============================================================
-   // <T>设置元素个数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setElementCount(int value){
-      _elementCount = value;
-   }
-
-   //============================================================
-   // <T>判断数据宽度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDataStrideChanged(){
-      return __dataStride != _dataStride;
-   }
-
-   //============================================================
-   // <T>获得数据宽度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int dataStride(){
-      return _dataStride;
-   }
-
-   //============================================================
-   // <T>设置数据宽度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataStride(int value){
-      _dataStride = value;
-   }
-
-   //============================================================
-   // <T>判断数据个数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDataCountChanged(){
-      return __dataCount != _dataCount;
-   }
-
-   //============================================================
-   // <T>获得数据个数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int dataCount(){
-      return _dataCount;
-   }
-
-   //============================================================
-   // <T>设置数据个数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataCount(int value){
-      _dataCount = value;
-   }
-
-   //============================================================
-   // <T>判断数据长度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDataLengthChanged(){
-      return __dataLength != _dataLength;
-   }
-
-   //============================================================
-   // <T>获得数据长度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int dataLength(){
-      return _dataLength;
-   }
-
-   //============================================================
-   // <T>设置数据长度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataLength(int value){
-      _dataLength = value;
+   public void setLabel(String value){
+      _label = value;
    }
 
    //============================================================
@@ -622,24 +368,10 @@ public class FDataResource3dModelStreamUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "gvid":
-            return _gvid;
-         case "model_id":
-            return Long.toString(_modelId);
-         case "mesh_id":
-            return Long.toString(_meshId);
          case "code":
             return _code;
-         case "element_data_cd":
-            return RInteger.toString(_elementDataCd);
-         case "element_count":
-            return RInteger.toString(_elementCount);
-         case "data_stride":
-            return RInteger.toString(_dataStride);
-         case "data_count":
-            return RInteger.toString(_dataCount);
-         case "data_length":
-            return RInteger.toString(_dataLength);
+         case "label":
+            return _label;
          case "note":
             return _note;
          case "create_user_id":
@@ -673,32 +405,11 @@ public class FDataResource3dModelStreamUnit
          case "guid":
             _guid = value;
             break;
-         case "gvid":
-            _gvid = value;
-            break;
-         case "model_id":
-            _modelId = RLong.parse(value);
-            break;
-         case "mesh_id":
-            _meshId = RLong.parse(value);
-            break;
          case "code":
             _code = value;
             break;
-         case "element_data_cd":
-            _elementDataCd = RInteger.parse(value);
-            break;
-         case "element_count":
-            _elementCount = RInteger.parse(value);
-            break;
-         case "data_stride":
-            _dataStride = RInteger.parse(value);
-            break;
-         case "data_count":
-            _dataCount = RInteger.parse(value);
-            break;
-         case "data_length":
-            _dataLength = RInteger.parse(value);
+         case "label":
+            _label = value;
             break;
          case "note":
             _note = value;
@@ -742,41 +453,13 @@ public class FDataResource3dModelStreamUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "gvid":
-               __gvid = value;
-               _gvid = __gvid;
-               break;
-            case "model_id":
-               __modelId = RLong.parse(value);
-               _modelId = __modelId;
-               break;
-            case "mesh_id":
-               __meshId = RLong.parse(value);
-               _meshId = __meshId;
-               break;
             case "code":
                __code = value;
                _code = __code;
                break;
-            case "element_data_cd":
-               __elementDataCd = RInteger.parse(value);
-               _elementDataCd = __elementDataCd;
-               break;
-            case "element_count":
-               __elementCount = RInteger.parse(value);
-               _elementCount = __elementCount;
-               break;
-            case "data_stride":
-               __dataStride = RInteger.parse(value);
-               _dataStride = __dataStride;
-               break;
-            case "data_count":
-               __dataCount = RInteger.parse(value);
-               _dataCount = __dataCount;
-               break;
-            case "data_length":
-               __dataLength = RInteger.parse(value);
-               _dataLength = __dataLength;
+            case "label":
+               __label = value;
+               _label = __label;
                break;
             case "note":
                __note = value;
@@ -813,15 +496,8 @@ public class FDataResource3dModelStreamUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("gvid", _gvid);
-      row.set("modelId", _modelId);
-      row.set("meshId", _meshId);
       row.set("code", _code);
-      row.set("elementDataCd", _elementDataCd);
-      row.set("elementCount", _elementCount);
-      row.set("dataStride", _dataStride);
-      row.set("dataCount", _dataCount);
-      row.set("dataLength", _dataLength);
+      row.set("label", _label);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -840,15 +516,8 @@ public class FDataResource3dModelStreamUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("gvid", _gvid);
-      map.put("modelId", RLong.toString(_modelId));
-      map.put("meshId", RLong.toString(_meshId));
       map.put("code", _code);
-      map.put("elementDataCd", RInteger.toString(_elementDataCd));
-      map.put("elementCount", RInteger.toString(_elementCount));
-      map.put("dataStride", RInteger.toString(_dataStride));
-      map.put("dataCount", RInteger.toString(_dataCount));
-      map.put("dataLength", RInteger.toString(_dataLength));
+      map.put("label", _label);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

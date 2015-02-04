@@ -31,6 +31,20 @@
    </Component>
    
    <!-- ============================================================ -->
+   <!-- 资源存储控制台                                               -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
+         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
+         scope = 'global' >
+      <Property name='enable'>Y</Property>
+      <Property name='storage_host'>127.0.0.1</Property>
+      <Property name='storage_port'>27017</Property>
+      <Property name='storage_name'>content</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
    <!-- 数据控制台                                                   -->
    <!-- ============================================================ -->
    <Component
@@ -69,35 +83,10 @@
       <Initialize name='add'>
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>data1</Property>
+               <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://10.127.3.12:3306/CD_DATA</Property>
-               <Property name='passport'>cloud</Property>
-               <Property name='password'>cloud</Property>
-               <Property name='initConnectionNumber'>1</Property>
-               <Property name='maxConnectionNumber'>8</Property>
-               <Property name='activeTimeLimit'>60000</Property>
-               <Property name='connectionTimeLimit'>600000</Property>
-               <Property name='retryCount'>10</Property>
-               <Property name='retryDelay'>10</Property>
-               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
-               <Property name='testTime'>600000</Property>
-               <Property name='closeTimeLimit'>5000</Property>
-               <Initialize name='initializeMonitor'/>
-            </Component>
-         </Parameter>
-      </Initialize>
-      <!-- ============================================================ -->
-      <!-- 缓冲链接控制台                                               -->
-      <!-- ============================================================ -->
-      <Initialize name='add'>
-         <Parameter>
-            <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>data2</Property>
-               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
-               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://localhost:3306/data</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>

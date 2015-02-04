@@ -41,9 +41,6 @@ public class FDataResourceBitmapImageLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段全局版本标识的定义。
-   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
-
    // 字段位图编号的定义。
    public final static SLogicFieldInfo BITMAP_ID = new SLogicFieldInfo("BITMAP_ID");
 
@@ -78,7 +75,7 @@ public class FDataResourceBitmapImageLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,BITMAP_ID,CODE,LABEL,FORMAT_CODE,SIZE_WIDTH,SIZE_HEIGHT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,BITMAP_ID,CODE,LABEL,FORMAT_CODE,SIZE_WIDTH,SIZE_HEIGHT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源图片数据表逻辑单元。</T>
@@ -620,7 +617,6 @@ public class FDataResourceBitmapImageLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`GVID`");
       cmd.append(",`BITMAP_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
@@ -641,14 +637,6 @@ public class FDataResourceBitmapImageLogic
       cmd.append(',');
       cmd.append('\'');
       cmd.append(guid);
-      cmd.append('\'');
-      String gvid = unit.gvid();
-      if(RString.isEmpty(gvid)){
-         gvid = RUuid.makeUniqueId();
-      }
-      cmd.append(',');
-      cmd.append('\'');
-      cmd.append(gvid);
       cmd.append('\'');
       cmd.append(',');
       long bitmapId = unit.bitmapId();
@@ -771,17 +759,6 @@ public class FDataResourceBitmapImageLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isGvidChanged()){
-         cmd.append(",`GVID`=");
-         String gvid = unit.gvid();
-         if(RString.isEmpty(gvid)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(gvid));
-            cmd.append('\'');
-         }
-      }
       if(unit.isBitmapIdChanged()){
          cmd.append(",`BITMAP_ID`=");
          long bitmapId = unit.bitmapId();

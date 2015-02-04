@@ -25,7 +25,7 @@ public class FRs3ModelMeshConsole
                                                   long modelId,
                                                   String code){
       String searchSql = "(" + FDataResource3dModelMeshLogic.MODEL_ID + "=" + modelId + ")";
-      searchSql += " AND (" + FDataResource3dModelMeshLogic.CODE + "='" + code + "')";
+      //searchSql += " AND (" + FDataResource3dModelMeshLogic.CODE + "='" + code + "')";
       FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
       FDataResource3dModelMeshUnit meshUnit = meshLogic.search(searchSql);
       return meshUnit;

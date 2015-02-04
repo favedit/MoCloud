@@ -41,9 +41,6 @@ public class FDataResource3dTextureBitmapLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段全局版本标识的定义。
-   public final static SLogicFieldInfo GVID = new SLogicFieldInfo("GVID");
-
    // 字段纹理编号的定义。
    public final static SLogicFieldInfo TEXTURE_ID = new SLogicFieldInfo("TEXTURE_ID");
 
@@ -55,6 +52,12 @@ public class FDataResource3dTextureBitmapLogic
 
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段来源通道的定义。
+   public final static SLogicFieldInfo CHANNEL_SOURCE = new SLogicFieldInfo("CHANNEL_SOURCE");
+
+   // 字段目标通道的定义。
+   public final static SLogicFieldInfo CHANNEL_TARGET = new SLogicFieldInfo("CHANNEL_TARGET");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -72,7 +75,7 @@ public class FDataResource3dTextureBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,GVID,TEXTURE_ID,BITMAP_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,TEXTURE_ID,BITMAP_ID,CODE,LABEL,CHANNEL_SOURCE,CHANNEL_TARGET,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D纹理位图表逻辑单元。</T>
@@ -614,11 +617,12 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`GVID`");
       cmd.append(",`TEXTURE_ID`");
       cmd.append(",`BITMAP_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`CHANNEL_SOURCE`");
+      cmd.append(",`CHANNEL_TARGET`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -633,14 +637,6 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append(',');
       cmd.append('\'');
       cmd.append(guid);
-      cmd.append('\'');
-      String gvid = unit.gvid();
-      if(RString.isEmpty(gvid)){
-         gvid = RUuid.makeUniqueId();
-      }
-      cmd.append(',');
-      cmd.append('\'');
-      cmd.append(gvid);
       cmd.append('\'');
       cmd.append(',');
       long textureId = unit.textureId();
@@ -672,6 +668,24 @@ public class FDataResource3dTextureBitmapLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String channelSource = unit.channelSource();
+      if(RString.isEmpty(channelSource)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(channelSource));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String channelTarget = unit.channelTarget();
+      if(RString.isEmpty(channelTarget)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(channelTarget));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -757,17 +771,6 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isGvidChanged()){
-         cmd.append(",`GVID`=");
-         String gvid = unit.gvid();
-         if(RString.isEmpty(gvid)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(gvid));
-            cmd.append('\'');
-         }
-      }
       if(unit.isTextureIdChanged()){
          cmd.append(",`TEXTURE_ID`=");
          long textureId = unit.textureId();
@@ -805,6 +808,28 @@ public class FDataResource3dTextureBitmapLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isChannelSourceChanged()){
+         cmd.append(",`CHANNEL_SOURCE`=");
+         String channelSource = unit.channelSource();
+         if(RString.isEmpty(channelSource)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(channelSource));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isChannelTargetChanged()){
+         cmd.append(",`CHANNEL_TARGET`=");
+         String channelTarget = unit.channelTarget();
+         if(RString.isEmpty(channelTarget)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(channelTarget));
             cmd.append('\'');
          }
       }
