@@ -11,4 +11,7 @@ public class EGcStorageCatalog
    // 资源3D数据流
    public final static String Resource3dStream = "resource3d.stream";
 
+   // 资源3D跟踪
+   public final static String Resource3dTrack = "resource3d.track";
+
 }

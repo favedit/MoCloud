@@ -7,7 +7,7 @@ import org.mo.com.xml.FXmlNode;
 //============================================================
 // <T>浮点三维矩阵。</T>
 //============================================================
-public class SFloatMatrix3d
+public class SFloatMatrixQuat
 {
    public float tx;
 
@@ -15,11 +15,13 @@ public class SFloatMatrix3d
 
    public float tz;
 
-   public float rx;
+   public float qx;
 
-   public float ry;
+   public float qy;
 
-   public float rz;
+   public float qz;
+
+   public float qw;
 
    public float sx;
 
@@ -36,9 +38,10 @@ public class SFloatMatrix3d
       output.writeFloat(tx);
       output.writeFloat(ty);
       output.writeFloat(tz);
-      output.writeFloat(rx);
-      output.writeFloat(ry);
-      output.writeFloat(rz);
+      output.writeFloat(qx);
+      output.writeFloat(qy);
+      output.writeFloat(qz);
+      output.writeFloat(qw);
       output.writeFloat(sx);
       output.writeFloat(sy);
       output.writeFloat(sz);
@@ -53,9 +56,10 @@ public class SFloatMatrix3d
       tx = input.readFloat();
       ty = input.readFloat();
       tz = input.readFloat();
-      rx = input.readFloat();
-      ry = input.readFloat();
-      rz = input.readFloat();
+      qx = input.readFloat();
+      qy = input.readFloat();
+      qz = input.readFloat();
+      qw = input.readFloat();
       sx = input.readFloat();
       sy = input.readFloat();
       sz = input.readFloat();
@@ -70,9 +74,10 @@ public class SFloatMatrix3d
       tx = xconfig.getFloat("tx");
       ty = xconfig.getFloat("ty");
       tz = xconfig.getFloat("tz");
-      rx = xconfig.getFloat("rx");
-      ry = xconfig.getFloat("ry");
-      rz = xconfig.getFloat("rz");
+      qx = xconfig.getFloat("qx");
+      qy = xconfig.getFloat("qy");
+      qz = xconfig.getFloat("qz");
+      qw = xconfig.getFloat("qw");
       sx = xconfig.getFloat("sx");
       sy = xconfig.getFloat("sy");
       sz = xconfig.getFloat("sz");
@@ -87,9 +92,10 @@ public class SFloatMatrix3d
       xconfig.set("tx", tx);
       xconfig.set("ty", ty);
       xconfig.set("tz", tz);
-      xconfig.set("rx", rx);
-      xconfig.set("ry", ry);
-      xconfig.set("rz", rz);
+      xconfig.set("qx", qx);
+      xconfig.set("qy", qy);
+      xconfig.set("qz", qz);
+      xconfig.set("qw", qw);
       xconfig.set("sx", sx);
       xconfig.set("sy", sy);
       xconfig.set("sz", sz);
