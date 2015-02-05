@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="569b7768-6238-44fb-a915-26e28d6bdc85" name="data.resource3d.model.skeleton" label="M#12cn19资源3D模型骨骼表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Model.Skeleton" data_name="DT_RS3_MODEL_SKELETON" data_alias="DT_RS3_MOD_SKT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="bcf54965-56fc-4af3-8d8f-6c5dcf1766b1" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource3d.model" />
+  <FieldRecordId _uuid="a9dabe1a-e5d4-4e6d-b46e-64eed61fca16" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource3d.skeleton" />
+  <FieldTemplate _uuid="035e968c-cab6-4eed-94d5-58ca46d2c2db" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

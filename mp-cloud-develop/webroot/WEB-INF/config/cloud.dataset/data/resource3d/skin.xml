@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid2="4a68a9ac-3229-402a-bb38-005f65d440cb" name="data.resource3d.track" label="M#12cn212资源3D跟踪表     " is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-TK-DAT" data_name="DT_RS3_TRACK" data_alias="DT_RS3_TCK" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldString _uuid2="8f86b321-2278-4b75-990c-0af65bacb8fc" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
-  <FieldString _uuid2="ae3ac2f1-a8ad-480f-8948-0380a4b1dfc4" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
-  <FieldTemplate _uuid2="007a1ad6-0967-4f89-b6c8-0f26fc834155" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+<DataStore _uuid="878f7d08-9bfd-43f0-847d-ad7e75c81d2b" name="data.resource3d.skin" label="M#12cn17资源3D蒙皮表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-SK-DAT" data_name="DT_RS3_SKIN" data_alias="DT_RS3_SKN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="b681ffb0-986a-4fb6-a101-e67178a2831b" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource3d.skeleton" />
+  <FieldString _uuid="58815230-9e18-4406-9704-27483e31ce16" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
+  <FieldString _uuid="f4f0f326-932e-4daf-9358-f8d75a09eccc" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="0399b8b2-d767-4e7e-a60c-21461b2b9e9d" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldTemplate _uuid="c3d9ea62-2e42-4b92-8897-215ba9a9e8d8" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

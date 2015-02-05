@@ -37,6 +37,12 @@ public class FDataResource3dAnimationActionUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段骨骼编号的定义。
+   private long __skeletonId;
+
+   // 字段骨骼编号的定义。
+   protected long _skeletonId;
+
    // 存储字段动画编号的定义。
    private long __animationId;
 
@@ -188,6 +194,44 @@ public class FDataResource3dAnimationActionUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断骨骼编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long skeletonId(){
+      return _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dSkeletonUnit skeleton(){
+      FDataResource3dSkeletonLogic logic = _logicContext.findLogic(FDataResource3dSkeletonLogic.class);
+      FDataResource3dSkeletonUnit unit = logic.find(_skeletonId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置骨骼编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSkeletonId(long value){
+      _skeletonId = value;
    }
 
    //============================================================
@@ -513,6 +557,8 @@ public class FDataResource3dAnimationActionUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "skeleton_id":
+            return Long.toString(_skeletonId);
          case "animation_id":
             return Long.toString(_animationId);
          case "code":
@@ -557,6 +603,9 @@ public class FDataResource3dAnimationActionUnit
             break;
          case "guid":
             _guid = value;
+            break;
+         case "skeleton_id":
+            _skeletonId = RLong.parse(value);
             break;
          case "animation_id":
             _animationId = RLong.parse(value);
@@ -618,6 +667,10 @@ public class FDataResource3dAnimationActionUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "skeleton_id":
+               __skeletonId = RLong.parse(value);
+               _skeletonId = __skeletonId;
+               break;
             case "animation_id":
                __animationId = RLong.parse(value);
                _animationId = __animationId;
@@ -677,6 +730,7 @@ public class FDataResource3dAnimationActionUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("skeletonId", _skeletonId);
       row.set("animationId", _animationId);
       row.set("code", _code);
       row.set("label", _label);
@@ -701,6 +755,7 @@ public class FDataResource3dAnimationActionUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("animationId", RLong.toString(_animationId));
       map.put("code", _code);
       map.put("label", _label);

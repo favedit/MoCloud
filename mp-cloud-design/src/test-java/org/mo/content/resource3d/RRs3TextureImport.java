@@ -24,6 +24,9 @@ public class RRs3TextureImport
       filePaths.push("pvw.sc.car.01.001.01");
       filePaths.push("pvw.sc.car.01.001.02");
       filePaths.push("pvw.sc.car.01.001.03");
+      filePaths.push("pvw.show.013.01");
+      filePaths.push("pvw.show.013.02");
+      filePaths.push("pvw.show.013.03");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

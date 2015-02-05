@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源3D动画跟踪表逻辑。</T>
+// <T>资源3D蒙皮数据流表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dAnimationTrackLogic
+public class FDataResource3dSkinStreamLogic
       extends FLogicTable
 {
-   // 资源3D动画跟踪表的定义。
+   // 资源3D蒙皮数据流表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源3D动画跟踪表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.animation.track", "DT_RS3_ANIMATION_TRACK");
+   // 资源3D蒙皮数据流表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.skin.stream", "DT_RS3_SKIN_STREAM");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -41,23 +41,14 @@ public class FDataResource3dAnimationTrackLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段骨骼编号的定义。
-   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
-
-   // 字段动画编号的定义。
-   public final static SLogicFieldInfo ANIMATION_ID = new SLogicFieldInfo("ANIMATION_ID");
-
-   // 字段骨头索引的定义。
-   public final static SLogicFieldInfo BONE_INDEX = new SLogicFieldInfo("BONE_INDEX");
-
-   // 字段跟踪编号的定义。
-   public final static SLogicFieldInfo TRACK_ID = new SLogicFieldInfo("TRACK_ID");
+   // 字段蒙皮编号的定义。
+   public final static SLogicFieldInfo SKIN_ID = new SLogicFieldInfo("SKIN_ID");
 
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+   // 字段数据流编号的定义。
+   public final static SLogicFieldInfo STREAM_ID = new SLogicFieldInfo("STREAM_ID");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -75,25 +66,25 @@ public class FDataResource3dAnimationTrackLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,SKELETON_ID,ANIMATION_ID,BONE_INDEX,TRACK_ID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,SKIN_ID,CODE,STREAM_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源3D动画跟踪表逻辑单元。</T>
+   // <T>构造资源3D蒙皮数据流表逻辑单元。</T>
    //============================================================
-   public FDataResource3dAnimationTrackLogic(){
+   public FDataResource3dSkinStreamLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResource3dAnimationTrackUnit.class;
+      _classUnit = FDataResource3dSkinStreamUnit.class;
    }
 
    //============================================================
-   // <T>构造资源3D动画跟踪表逻辑单元。</T>
+   // <T>构造资源3D蒙皮数据流表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResource3dAnimationTrackLogic(ILogicContext context){
+   public FDataResource3dSkinStreamLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResource3dAnimationTrackUnit.class;
+      _classUnit = FDataResource3dSkinStreamUnit.class;
    }
 
    //============================================================
@@ -227,7 +218,7 @@ public class FDataResource3dAnimationTrackLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResource3dAnimationTrackUnit());
+            unit = (T)(new FDataResource3dSkinStreamUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -243,8 +234,8 @@ public class FDataResource3dAnimationTrackLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResource3dAnimationTrackUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResource3dAnimationTrackUnit.class, guid);
+   public FDataResource3dSkinStreamUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataResource3dSkinStreamUnit.class, guid);
    }
 
    //============================================================
@@ -282,8 +273,8 @@ public class FDataResource3dAnimationTrackLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResource3dAnimationTrackUnit search(CharSequence whereSql){
-      return search(null, FDataResource3dAnimationTrackUnit.class, whereSql);
+   public FDataResource3dSkinStreamUnit search(CharSequence whereSql){
+      return search(null, FDataResource3dSkinStreamUnit.class, whereSql);
    }
 
    //============================================================
@@ -320,7 +311,7 @@ public class FDataResource3dAnimationTrackLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -331,8 +322,8 @@ public class FDataResource3dAnimationTrackLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetch(int pageSize,
-                                                                 int page){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetch(int pageSize,
+                                                             int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -344,9 +335,9 @@ public class FDataResource3dAnimationTrackLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetch(CharSequence whereSql,
-                                                                 int pageSize,
-                                                                 int page){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetch(CharSequence whereSql,
+                                                             int pageSize,
+                                                             int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -359,10 +350,10 @@ public class FDataResource3dAnimationTrackLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetch(CharSequence whereSql,
-                                                                 CharSequence orderSql,
-                                                                 int pageSize,
-                                                                 int page){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetch(CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -376,11 +367,11 @@ public class FDataResource3dAnimationTrackLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetch(CharSequence fields,
-                                                                 CharSequence whereSql,
-                                                                 CharSequence orderSql,
-                                                                 int pageSize,
-                                                                 int page){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetch(CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -394,12 +385,12 @@ public class FDataResource3dAnimationTrackLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetch(CharSequence fields,
-                                                                 CharSequence whereSql,
-                                                                 CharSequence groupSql,
-                                                                 CharSequence orderSql,
-                                                                 int pageSize,
-                                                                 int page){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetch(CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence groupSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -504,10 +495,10 @@ public class FDataResource3dAnimationTrackLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetchSql(CharSequence code,
-                                                                    CharSequence sql,
-                                                                    int pageSize,
-                                                                    int page){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetchSql(CharSequence code,
+                                                                CharSequence sql,
+                                                                int pageSize,
+                                                                int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -532,7 +523,7 @@ public class FDataResource3dAnimationTrackLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dAnimationTrackUnit>(FDataResource3dAnimationTrackUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dSkinStreamUnit>(FDataResource3dSkinStreamUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -545,7 +536,7 @@ public class FDataResource3dAnimationTrackLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dAnimationTrackUnit> fetchAll(){
+   public FLogicDataset<FDataResource3dSkinStreamUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -558,8 +549,8 @@ public class FDataResource3dAnimationTrackLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResource3dAnimationTrackUnit doPrepare(){
-      FDataResource3dAnimationTrackUnit unit = new FDataResource3dAnimationTrackUnit();
+   public FDataResource3dSkinStreamUnit doPrepare(){
+      FDataResource3dSkinStreamUnit unit = new FDataResource3dSkinStreamUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -586,7 +577,7 @@ public class FDataResource3dAnimationTrackLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResource3dAnimationTrackUnit unit = (FDataResource3dAnimationTrackUnit)logicUnit;
+      FDataResource3dSkinStreamUnit unit = (FDataResource3dSkinStreamUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -600,7 +591,7 @@ public class FDataResource3dAnimationTrackLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResource3dAnimationTrackUnit unit = (FDataResource3dAnimationTrackUnit)logicUnit;
+      FDataResource3dSkinStreamUnit unit = (FDataResource3dSkinStreamUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -617,12 +608,9 @@ public class FDataResource3dAnimationTrackLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`SKELETON_ID`");
-      cmd.append(",`ANIMATION_ID`");
-      cmd.append(",`BONE_INDEX`");
-      cmd.append(",`TRACK_ID`");
+      cmd.append(",`SKIN_ID`");
       cmd.append(",`CODE`");
-      cmd.append(",`LABEL`");
+      cmd.append(",`STREAM_ID`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -639,27 +627,11 @@ public class FDataResource3dAnimationTrackLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      long skeletonId = unit.skeletonId();
-      if(skeletonId == 0){
+      long skinId = unit.skinId();
+      if(skinId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(skeletonId);
-      }
-      cmd.append(',');
-      long animationId = unit.animationId();
-      if(animationId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(animationId);
-      }
-      cmd.append(',');
-      cmd.append(unit.boneIndex());
-      cmd.append(',');
-      long trackId = unit.trackId();
-      if(trackId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(trackId);
+         cmd.append(skinId);
       }
       cmd.append(',');
       String code = unit.code();
@@ -671,13 +643,11 @@ public class FDataResource3dAnimationTrackLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
+      long streamId = unit.streamId();
+      if(streamId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
+         cmd.append(streamId);
       }
       cmd.append(',');
       String note = unit.note();
@@ -723,7 +693,7 @@ public class FDataResource3dAnimationTrackLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResource3dAnimationTrackUnit unit = (FDataResource3dAnimationTrackUnit)logicUnit;
+      FDataResource3dSkinStreamUnit unit = (FDataResource3dSkinStreamUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -742,7 +712,7 @@ public class FDataResource3dAnimationTrackLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResource3dAnimationTrackUnit unit = (FDataResource3dAnimationTrackUnit)logicUnit;
+      FDataResource3dSkinStreamUnit unit = (FDataResource3dSkinStreamUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -762,35 +732,13 @@ public class FDataResource3dAnimationTrackLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isSkeletonIdChanged()){
-         cmd.append(",`SKELETON_ID`=");
-         long skeletonId = unit.skeletonId();
-         if(skeletonId == 0){
+      if(unit.isSkinIdChanged()){
+         cmd.append(",`SKIN_ID`=");
+         long skinId = unit.skinId();
+         if(skinId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(skeletonId);
-         }
-      }
-      if(unit.isAnimationIdChanged()){
-         cmd.append(",`ANIMATION_ID`=");
-         long animationId = unit.animationId();
-         if(animationId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(animationId);
-         }
-      }
-      if(unit.isBoneIndexChanged()){
-         cmd.append(",`BONE_INDEX`=");
-         cmd.append(unit.boneIndex());
-      }
-      if(unit.isTrackIdChanged()){
-         cmd.append(",`TRACK_ID`=");
-         long trackId = unit.trackId();
-         if(trackId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(trackId);
+            cmd.append(skinId);
          }
       }
       if(unit.isCodeChanged()){
@@ -804,15 +752,13 @@ public class FDataResource3dAnimationTrackLogic
             cmd.append('\'');
          }
       }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
+      if(unit.isStreamIdChanged()){
+         cmd.append(",`STREAM_ID`=");
+         long streamId = unit.streamId();
+         if(streamId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
+            cmd.append(streamId);
          }
       }
       if(unit.isNoteChanged()){
@@ -846,7 +792,7 @@ public class FDataResource3dAnimationTrackLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResource3dAnimationTrackUnit unit = (FDataResource3dAnimationTrackUnit)logicUnit;
+      FDataResource3dSkinStreamUnit unit = (FDataResource3dSkinStreamUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

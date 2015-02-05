@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源3D跟踪表     逻辑。</T>
+// <T>资源3D蒙皮表逻辑。</T>
 //============================================================
 @ASourceMachine
 public class FDataResource3dSkinLogic
       extends FLogicTable
 {
-   // 资源3D跟踪表     的定义。
+   // 资源3D蒙皮表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源3D跟踪表     的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.skin", "DT_RS3_TRACK");
+   // 资源3D蒙皮表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.skin", "DT_RS3_SKIN");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -40,6 +40,12 @@ public class FDataResource3dSkinLogic
 
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
+
+   // 字段骨骼编号的定义。
+   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
+
+   // 字段全代码的定义。
+   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
 
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
@@ -63,10 +69,10 @@ public class FDataResource3dSkinLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,SKELETON_ID,FULL_CODE,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源3D跟踪表     逻辑单元。</T>
+   // <T>构造资源3D蒙皮表逻辑单元。</T>
    //============================================================
    public FDataResource3dSkinLogic(){
       _name = TABLE.name();
@@ -74,7 +80,7 @@ public class FDataResource3dSkinLogic
    }
 
    //============================================================
-   // <T>构造资源3D跟踪表     逻辑单元。</T>
+   // <T>构造资源3D蒙皮表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
@@ -605,6 +611,8 @@ public class FDataResource3dSkinLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`SKELETON_ID`");
+      cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`NOTE`");
@@ -622,6 +630,22 @@ public class FDataResource3dSkinLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      long skeletonId = unit.skeletonId();
+      if(skeletonId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(skeletonId);
+      }
+      cmd.append(',');
+      String fullCode = unit.fullCode();
+      if(RString.isEmpty(fullCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(fullCode));
+         cmd.append('\'');
+      }
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -723,6 +747,26 @@ public class FDataResource3dSkinLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isSkeletonIdChanged()){
+         cmd.append(",`SKELETON_ID`=");
+         long skeletonId = unit.skeletonId();
+         if(skeletonId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(skeletonId);
+         }
+      }
+      if(unit.isFullCodeChanged()){
+         cmd.append(",`FULL_CODE`=");
+         String fullCode = unit.fullCode();
+         if(RString.isEmpty(fullCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(fullCode));
+            cmd.append('\'');
+         }
+      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();

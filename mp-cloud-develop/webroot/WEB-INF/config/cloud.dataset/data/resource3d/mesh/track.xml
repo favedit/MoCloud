@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="83d0bc71-63d9-4e5b-9279-c644d52f9a3f" name="data.resource3d.mesh.track" label="M#12cn19资源3D网格跟踪表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Mesh.Track" data_name="DT_RS3_MESH_TRACK" data_alias="DT_RS3_MSH_TCK" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="c4960192-fc4c-4794-b251-5d910432b037" name="mesh_id" label="M#12cn14网格编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MESH_ID" data_alias="MSH" data_refer="data.resource3d.mesh" />
-  <FieldRecordId _uuid="67d67940-e789-4460-a38a-56676bb14b8c" name="track_id" label="M#12cn14跟踪编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TRACK_ID" data_alias="TCK" data_refer="data.resource3d.track" />
+  <FieldRecordId _uuid="c4960192-fc4c-4794-b251-5d910432b037" name="mesh_id" label="M#12cn14网格编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MESH_ID" data_alias="MSH" data_refer="data.resource3d.mesh" />
+  <FieldRecordId _uuid="67d67940-e789-4460-a38a-56676bb14b8c" name="track_id" label="M#12cn14跟踪编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="TRACK_ID" data_alias="TCK" data_refer="data.resource3d.track" />
   <FieldTemplate _uuid="ea22f976-a2c8-451b-934b-163087af47c0" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

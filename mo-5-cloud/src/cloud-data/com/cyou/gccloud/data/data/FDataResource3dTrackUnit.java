@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -46,6 +47,24 @@ public class FDataResource3dTrackUnit
 
    // 字段名称的定义。
    protected String _label;
+
+   // 存储字段帧间隔的定义。
+   private int __frameTick;
+
+   // 字段帧间隔的定义。
+   protected int _frameTick;
+
+   // 存储字段帧总数的定义。
+   private int __frameCount;
+
+   // 字段帧总数的定义。
+   protected int _frameCount;
+
+   // 存储字段帧总长的定义。
+   private int __frameTotal;
+
+   // 字段帧总长的定义。
+   protected int _frameTotal;
 
    // 存储字段备注的定义。
    private String __note;
@@ -219,6 +238,87 @@ public class FDataResource3dTrackUnit
    }
 
    //============================================================
+   // <T>判断帧间隔的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFrameTickChanged(){
+      return __frameTick != _frameTick;
+   }
+
+   //============================================================
+   // <T>获得帧间隔的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int frameTick(){
+      return _frameTick;
+   }
+
+   //============================================================
+   // <T>设置帧间隔的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFrameTick(int value){
+      _frameTick = value;
+   }
+
+   //============================================================
+   // <T>判断帧总数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFrameCountChanged(){
+      return __frameCount != _frameCount;
+   }
+
+   //============================================================
+   // <T>获得帧总数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int frameCount(){
+      return _frameCount;
+   }
+
+   //============================================================
+   // <T>设置帧总数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFrameCount(int value){
+      _frameCount = value;
+   }
+
+   //============================================================
+   // <T>判断帧总长的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFrameTotalChanged(){
+      return __frameTotal != _frameTotal;
+   }
+
+   //============================================================
+   // <T>获得帧总长的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int frameTotal(){
+      return _frameTotal;
+   }
+
+   //============================================================
+   // <T>设置帧总长的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFrameTotal(int value){
+      _frameTotal = value;
+   }
+
+   //============================================================
    // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
@@ -372,6 +472,12 @@ public class FDataResource3dTrackUnit
             return _code;
          case "label":
             return _label;
+         case "frame_tick":
+            return RInteger.toString(_frameTick);
+         case "frame_count":
+            return RInteger.toString(_frameCount);
+         case "frame_total":
+            return RInteger.toString(_frameTotal);
          case "note":
             return _note;
          case "create_user_id":
@@ -410,6 +516,15 @@ public class FDataResource3dTrackUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "frame_tick":
+            _frameTick = RInteger.parse(value);
+            break;
+         case "frame_count":
+            _frameCount = RInteger.parse(value);
+            break;
+         case "frame_total":
+            _frameTotal = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -461,6 +576,18 @@ public class FDataResource3dTrackUnit
                __label = value;
                _label = __label;
                break;
+            case "frame_tick":
+               __frameTick = RInteger.parse(value);
+               _frameTick = __frameTick;
+               break;
+            case "frame_count":
+               __frameCount = RInteger.parse(value);
+               _frameCount = __frameCount;
+               break;
+            case "frame_total":
+               __frameTotal = RInteger.parse(value);
+               _frameTotal = __frameTotal;
+               break;
             case "note":
                __note = value;
                _note = __note;
@@ -498,6 +625,9 @@ public class FDataResource3dTrackUnit
       row.set("guid", _guid);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("frameTick", _frameTick);
+      row.set("frameCount", _frameCount);
+      row.set("frameTotal", _frameTotal);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -518,6 +648,9 @@ public class FDataResource3dTrackUnit
       map.put("guid", _guid);
       map.put("code", _code);
       map.put("label", _label);
+      map.put("frameTick", RInteger.toString(_frameTick));
+      map.put("frameCount", RInteger.toString(_frameCount));
+      map.put("frameTotal", RInteger.toString(_frameTotal));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

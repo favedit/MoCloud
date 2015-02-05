@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="dbee1249-64f2-4c54-a0d9-7e31ea188281" name="data.resource3d.template.theme" label="M#12cn19资源3D模板主题表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-TP-THM" data_name="DT_RS3_TEMPLATE_THEME" data_alias="DT_RS3_TPL_THM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="aec8ca80-91a6-4967-9205-9a6c38e29269" name="template_id" label="M#12cn14模板编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TEMPLATE_ID" data_alias="TPL" data_refer="data.resource3d.template" />
-  <FieldRecordId _uuid="a52bf2fc-6445-4fda-aa9c-ae01ef1f72d8" name="theme_id" label="M#12cn14主题编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="THEME_ID" data_alias="THM" data_refer="data.resource3d.theme" />
+  <FieldRecordId _uuid="aec8ca80-91a6-4967-9205-9a6c38e29269" name="template_id" label="M#12cn14模板编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="TEMPLATE_ID" data_alias="TPL" data_refer="data.resource3d.template" />
+  <FieldRecordId _uuid="a52bf2fc-6445-4fda-aa9c-ae01ef1f72d8" name="theme_id" label="M#12cn14主题编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="THEME_ID" data_alias="THM" data_refer="data.resource3d.theme" />
   <FieldInteger _uuid="c077a2d2-4eb9-433c-8550-04ed0fe9a6f2" name="active_cd" label="M#12cn14激活标志" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
   <FieldTemplate _uuid="4e2afa1d-ea2d-4f6d-95d7-0e8470b7915e" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

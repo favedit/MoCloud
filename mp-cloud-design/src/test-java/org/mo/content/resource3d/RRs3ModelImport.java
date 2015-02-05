@@ -23,6 +23,7 @@ public class RRs3ModelImport
       filePaths.push("pvw.show.item.001.msd");
       filePaths.push("pvw.show.item.009.msd");
       filePaths.push("pvw.sc.car.01.001.msd");
+      //filePaths.push("pvw.show.skeleton.001.msd");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

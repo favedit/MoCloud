@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D蒙皮表逻辑单元。</T>
+// <T>资源3D模型骨骼表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dSkinUnit
+public class FDataResource3dModelSkeletonUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -35,29 +35,17 @@ public class FDataResource3dSkinUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段模型编号的定义。
+   private long __modelId;
+
+   // 字段模型编号的定义。
+   protected long _modelId;
+
    // 存储字段骨骼编号的定义。
    private long __skeletonId;
 
    // 字段骨骼编号的定义。
    protected long _skeletonId;
-
-   // 存储字段全代码的定义。
-   private String __fullCode;
-
-   // 字段全代码的定义。
-   protected String _fullCode;
-
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段名称的定义。
-   private String __label;
-
-   // 字段名称的定义。
-   protected String _label;
 
    // 存储字段备注的定义。
    private String __note;
@@ -90,9 +78,9 @@ public class FDataResource3dSkinUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D蒙皮表逻辑单元。</T>
+   // <T>构造资源3D模型骨骼表逻辑单元。</T>
    //============================================================
-   public FDataResource3dSkinUnit(){
+   public FDataResource3dModelSkeletonUnit(){
    }
 
    //============================================================
@@ -177,6 +165,44 @@ public class FDataResource3dSkinUnit
    }
 
    //============================================================
+   // <T>判断模型编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isModelIdChanged(){
+      return __modelId != _modelId;
+   }
+
+   //============================================================
+   // <T>获得模型编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long modelId(){
+      return _modelId;
+   }
+
+   //============================================================
+   // <T>获得模型编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dModelUnit model(){
+      FDataResource3dModelLogic logic = _logicContext.findLogic(FDataResource3dModelLogic.class);
+      FDataResource3dModelUnit unit = logic.find(_modelId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置模型编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setModelId(long value){
+      _modelId = value;
+   }
+
+   //============================================================
    // <T>判断骨骼编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -212,87 +238,6 @@ public class FDataResource3dSkinUnit
    //============================================================
    public void setSkeletonId(long value){
       _skeletonId = value;
-   }
-
-   //============================================================
-   // <T>判断全代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
-   }
-
-   //============================================================
-   // <T>获得全代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String fullCode(){
-      return _fullCode;
-   }
-
-   //============================================================
-   // <T>设置全代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
-   }
-
-   //============================================================
-   // <T>判断代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
-   }
-
-   //============================================================
-   // <T>获得代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
    }
 
    //============================================================
@@ -445,14 +390,10 @@ public class FDataResource3dSkinUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "model_id":
+            return Long.toString(_modelId);
          case "skeleton_id":
             return Long.toString(_skeletonId);
-         case "full_code":
-            return _fullCode;
-         case "code":
-            return _code;
-         case "label":
-            return _label;
          case "note":
             return _note;
          case "create_user_id":
@@ -486,17 +427,11 @@ public class FDataResource3dSkinUnit
          case "guid":
             _guid = value;
             break;
+         case "model_id":
+            _modelId = RLong.parse(value);
+            break;
          case "skeleton_id":
             _skeletonId = RLong.parse(value);
-            break;
-         case "full_code":
-            _fullCode = value;
-            break;
-         case "code":
-            _code = value;
-            break;
-         case "label":
-            _label = value;
             break;
          case "note":
             _note = value;
@@ -540,21 +475,13 @@ public class FDataResource3dSkinUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "model_id":
+               __modelId = RLong.parse(value);
+               _modelId = __modelId;
+               break;
             case "skeleton_id":
                __skeletonId = RLong.parse(value);
                _skeletonId = __skeletonId;
-               break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
-               break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
                break;
             case "note":
                __note = value;
@@ -591,10 +518,8 @@ public class FDataResource3dSkinUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("modelId", _modelId);
       row.set("skeletonId", _skeletonId);
-      row.set("fullCode", _fullCode);
-      row.set("code", _code);
-      row.set("label", _label);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -613,10 +538,8 @@ public class FDataResource3dSkinUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("modelId", RLong.toString(_modelId));
       map.put("skeletonId", RLong.toString(_skeletonId));
-      map.put("fullCode", _fullCode);
-      map.put("code", _code);
-      map.put("label", _label);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

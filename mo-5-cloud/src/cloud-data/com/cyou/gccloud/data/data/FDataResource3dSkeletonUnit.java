@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D蒙皮表逻辑单元。</T>
+// <T>资源3D骨骼表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dSkinUnit
+public class FDataResource3dSkeletonUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -34,12 +34,6 @@ public class FDataResource3dSkinUnit
 
    // 字段全局唯一标识的定义。
    protected String _guid;
-
-   // 存储字段骨骼编号的定义。
-   private long __skeletonId;
-
-   // 字段骨骼编号的定义。
-   protected long _skeletonId;
 
    // 存储字段全代码的定义。
    private String __fullCode;
@@ -90,9 +84,9 @@ public class FDataResource3dSkinUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D蒙皮表逻辑单元。</T>
+   // <T>构造资源3D骨骼表逻辑单元。</T>
    //============================================================
-   public FDataResource3dSkinUnit(){
+   public FDataResource3dSkeletonUnit(){
    }
 
    //============================================================
@@ -174,44 +168,6 @@ public class FDataResource3dSkinUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
-   }
-
-   //============================================================
-   // <T>判断骨骼编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isSkeletonIdChanged(){
-      return __skeletonId != _skeletonId;
-   }
-
-   //============================================================
-   // <T>获得骨骼编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long skeletonId(){
-      return _skeletonId;
-   }
-
-   //============================================================
-   // <T>获得骨骼编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResource3dSkeletonUnit skeleton(){
-      FDataResource3dSkeletonLogic logic = _logicContext.findLogic(FDataResource3dSkeletonLogic.class);
-      FDataResource3dSkeletonUnit unit = logic.find(_skeletonId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置骨骼编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setSkeletonId(long value){
-      _skeletonId = value;
    }
 
    //============================================================
@@ -445,8 +401,6 @@ public class FDataResource3dSkinUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "skeleton_id":
-            return Long.toString(_skeletonId);
          case "full_code":
             return _fullCode;
          case "code":
@@ -485,9 +439,6 @@ public class FDataResource3dSkinUnit
             break;
          case "guid":
             _guid = value;
-            break;
-         case "skeleton_id":
-            _skeletonId = RLong.parse(value);
             break;
          case "full_code":
             _fullCode = value;
@@ -540,10 +491,6 @@ public class FDataResource3dSkinUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "skeleton_id":
-               __skeletonId = RLong.parse(value);
-               _skeletonId = __skeletonId;
-               break;
             case "full_code":
                __fullCode = value;
                _fullCode = __fullCode;
@@ -591,7 +538,6 @@ public class FDataResource3dSkinUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("skeletonId", _skeletonId);
       row.set("fullCode", _fullCode);
       row.set("code", _code);
       row.set("label", _label);
@@ -613,7 +559,6 @@ public class FDataResource3dSkinUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("fullCode", _fullCode);
       map.put("code", _code);
       map.put("label", _label);

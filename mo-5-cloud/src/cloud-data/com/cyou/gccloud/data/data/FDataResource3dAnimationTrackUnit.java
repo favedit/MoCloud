@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -35,17 +36,23 @@ public class FDataResource3dAnimationTrackUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段骨骼编号的定义。
+   private long __skeletonId;
+
+   // 字段骨骼编号的定义。
+   protected long _skeletonId;
+
    // 存储字段动画编号的定义。
    private long __animationId;
 
    // 字段动画编号的定义。
    protected long _animationId;
 
-   // 存储字段骨头编号的定义。
-   private long __boneId;
+   // 存储字段骨头索引的定义。
+   private int __boneIndex;
 
-   // 字段骨头编号的定义。
-   protected long _boneId;
+   // 字段骨头索引的定义。
+   protected int _boneIndex;
 
    // 存储字段跟踪编号的定义。
    private long __trackId;
@@ -183,6 +190,44 @@ public class FDataResource3dAnimationTrackUnit
    }
 
    //============================================================
+   // <T>判断骨骼编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long skeletonId(){
+      return _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dSkeletonUnit skeleton(){
+      FDataResource3dSkeletonLogic logic = _logicContext.findLogic(FDataResource3dSkeletonLogic.class);
+      FDataResource3dSkeletonUnit unit = logic.find(_skeletonId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置骨骼编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSkeletonId(long value){
+      _skeletonId = value;
+   }
+
+   //============================================================
    // <T>判断动画编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -221,30 +266,30 @@ public class FDataResource3dAnimationTrackUnit
    }
 
    //============================================================
-   // <T>判断骨头编号的数据是否改变。</T>
+   // <T>判断骨头索引的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isBoneIdChanged(){
-      return __boneId != _boneId;
+   public boolean isBoneIndexChanged(){
+      return __boneIndex != _boneIndex;
    }
 
    //============================================================
-   // <T>获得骨头编号的数据内容。</T>
+   // <T>获得骨头索引的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long boneId(){
-      return _boneId;
+   public int boneIndex(){
+      return _boneIndex;
    }
 
    //============================================================
-   // <T>设置骨头编号的数据内容。</T>
+   // <T>设置骨头索引的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setBoneId(long value){
-      _boneId = value;
+   public void setBoneIndex(int value){
+      _boneIndex = value;
    }
 
    //============================================================
@@ -489,10 +534,12 @@ public class FDataResource3dAnimationTrackUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "skeleton_id":
+            return Long.toString(_skeletonId);
          case "animation_id":
             return Long.toString(_animationId);
-         case "bone_id":
-            return Long.toString(_boneId);
+         case "bone_index":
+            return RInteger.toString(_boneIndex);
          case "track_id":
             return Long.toString(_trackId);
          case "code":
@@ -532,11 +579,14 @@ public class FDataResource3dAnimationTrackUnit
          case "guid":
             _guid = value;
             break;
+         case "skeleton_id":
+            _skeletonId = RLong.parse(value);
+            break;
          case "animation_id":
             _animationId = RLong.parse(value);
             break;
-         case "bone_id":
-            _boneId = RLong.parse(value);
+         case "bone_index":
+            _boneIndex = RInteger.parse(value);
             break;
          case "track_id":
             _trackId = RLong.parse(value);
@@ -589,13 +639,17 @@ public class FDataResource3dAnimationTrackUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "skeleton_id":
+               __skeletonId = RLong.parse(value);
+               _skeletonId = __skeletonId;
+               break;
             case "animation_id":
                __animationId = RLong.parse(value);
                _animationId = __animationId;
                break;
-            case "bone_id":
-               __boneId = RLong.parse(value);
-               _boneId = __boneId;
+            case "bone_index":
+               __boneIndex = RInteger.parse(value);
+               _boneIndex = __boneIndex;
                break;
             case "track_id":
                __trackId = RLong.parse(value);
@@ -644,8 +698,9 @@ public class FDataResource3dAnimationTrackUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("skeletonId", _skeletonId);
       row.set("animationId", _animationId);
-      row.set("boneId", _boneId);
+      row.set("boneIndex", _boneIndex);
       row.set("trackId", _trackId);
       row.set("code", _code);
       row.set("label", _label);
@@ -667,8 +722,9 @@ public class FDataResource3dAnimationTrackUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("animationId", RLong.toString(_animationId));
-      map.put("boneId", RLong.toString(_boneId));
+      map.put("boneIndex", RInteger.toString(_boneIndex));
       map.put("trackId", RLong.toString(_trackId));
       map.put("code", _code);
       map.put("label", _label);

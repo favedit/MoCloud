@@ -47,6 +47,15 @@ public class FDataResource3dTrackLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段帧间隔的定义。
+   public final static SLogicFieldInfo FRAME_TICK = new SLogicFieldInfo("FRAME_TICK");
+
+   // 字段帧总数的定义。
+   public final static SLogicFieldInfo FRAME_COUNT = new SLogicFieldInfo("FRAME_COUNT");
+
+   // 字段帧总长的定义。
+   public final static SLogicFieldInfo FRAME_TOTAL = new SLogicFieldInfo("FRAME_TOTAL");
+
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
@@ -63,7 +72,7 @@ public class FDataResource3dTrackLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,FRAME_TICK,FRAME_COUNT,FRAME_TOTAL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D跟踪表     逻辑单元。</T>
@@ -607,6 +616,9 @@ public class FDataResource3dTrackLogic
       cmd.append(",`GUID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`FRAME_TICK`");
+      cmd.append(",`FRAME_COUNT`");
+      cmd.append(",`FRAME_TOTAL`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -640,6 +652,12 @@ public class FDataResource3dTrackLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.frameTick());
+      cmd.append(',');
+      cmd.append(unit.frameCount());
+      cmd.append(',');
+      cmd.append(unit.frameTotal());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -744,6 +762,18 @@ public class FDataResource3dTrackLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
+      }
+      if(unit.isFrameTickChanged()){
+         cmd.append(",`FRAME_TICK`=");
+         cmd.append(unit.frameTick());
+      }
+      if(unit.isFrameCountChanged()){
+         cmd.append(",`FRAME_COUNT`=");
+         cmd.append(unit.frameCount());
+      }
+      if(unit.isFrameTotalChanged()){
+         cmd.append(",`FRAME_TOTAL`=");
+         cmd.append(unit.frameTotal());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
