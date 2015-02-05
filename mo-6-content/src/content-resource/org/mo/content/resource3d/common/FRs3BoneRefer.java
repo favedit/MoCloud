@@ -1,33 +1,40 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataInput;
-import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
+import org.mo.com.xml.FXmlNode;
 
 //============================================================
-// <T>资源精灵。</T>
+// <T>资源3D骨头引用。</T>
 //============================================================
-public class FRs3Frame
+public class FRs3BoneRefer
       extends FObject
 {
-   protected int _tick;
-
-   protected SFloatMatrixQuat _matrix = new SFloatMatrixQuat();
+   // 索引位置
+   protected int _index;
 
    //============================================================
-   // <T>构造资源精灵。</T>
+   // <T>构造资源3D骨头。</T>
    //============================================================
-   public FRs3Frame(){
+   public FRs3BoneRefer(){
    }
 
    //============================================================
-   // <T>序列化数据到输出流。</T>
+   // <T>从配置信息中加载配置。</T>
    //
-   // @param output 输出流
+   // @param xconfig 配置信息
    //============================================================
-   public void serialize(IDataOutput output){
-      output.writeUint16(_tick);
-      _matrix.serialize(output);
+   public void loadConfig(FXmlNode xconfig){
+      _index = xconfig.getInt("index");
+   }
+
+   //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void saveConfig(FXmlNode xconfig){
+      xconfig.set("index", _index);
    }
 
    //============================================================
@@ -35,18 +42,7 @@ public class FRs3Frame
    //
    // @param input 输入流
    //============================================================
-   public void unserialize(IDataInput input){
-      _tick = input.readInt32();
-      _matrix.unserialize(input);
-   }
-
-   //============================================================
-   // <T>从输入流中导入数据。</T>
-   //
-   // @param input 输入流
-   //============================================================
    public void importData(IDataInput input){
-      _tick = input.readInt32();
-      _matrix.unserialize(input);
+      _index = input.readInt32();
    }
 }

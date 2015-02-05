@@ -1,5 +1,7 @@
 package org.mo.content.engine3d.core.mesh;
 
+import org.mo.content.resource3d.model.FRs3ModelStream;
+
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamUnit;
@@ -13,7 +15,6 @@ import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
 import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
-import org.mo.content.resource3d.model.FRs3ModelStream;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 

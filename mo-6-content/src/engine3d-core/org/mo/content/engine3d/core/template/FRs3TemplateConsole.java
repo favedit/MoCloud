@@ -26,7 +26,6 @@ import org.mo.content.engine.core.bitmap.IResBitmapConsole;
 import org.mo.content.engine3d.core.material.IRs3MaterialConsole;
 import org.mo.content.engine3d.core.material.IRs3MaterialGroupConsole;
 import org.mo.content.engine3d.core.model.IRs3ModelConsole;
-import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureBitmapConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.content.engine3d.core.theme.IRs3ThemeConsole;
@@ -72,10 +71,6 @@ public class FRs3TemplateConsole
    // 模型控制台
    @ALink
    protected IRs3ModelConsole _modelConsole;
-
-   // 模型网格控制台
-   @ALink
-   protected IRs3ModelMeshConsole _modelMeshConsole;
 
    // 模型网格控制台
    @ALink
@@ -277,7 +272,7 @@ public class FRs3TemplateConsole
          display.setModelGuid(modelUnit.guid());
          // 设置网格唯一编号
          String meshCode = display.meshCode();
-         FDataResource3dMeshUnit meshUnit = _modelMeshConsole.findMeshByCode(logicContext, modelUnit.ouid(), meshCode);
+         FDataResource3dMeshUnit meshUnit = _modelConsole.findMeshByCode(logicContext, modelUnit.ouid(), meshCode);
          display.setMeshGuid(meshUnit.guid());
          // 修正材质
          for(FRs3DisplayMaterial material : display.materials()){

@@ -3,7 +3,9 @@ package org.mo.content.resource3d.model;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Resource;
+import org.mo.content.resource3d.common.FRs3Skeleton;
 
 //============================================================
 // <T>资源模型。</T>
@@ -12,7 +14,13 @@ public class FRs3Model
       extends FRs3Resource
 {
    // 网格集合
-   protected FObjects<FRs3ModelMesh> _meshs = new FObjects<FRs3ModelMesh>(FRs3ModelMesh.class);
+   protected FObjects<FRs3ModelMesh> _meshs;
+
+   // 骨骼集合
+   protected FObjects<FRs3Skeleton> _skeletons;
+
+   // 动画集合
+   protected FObjects<FRs3Animation> _animations;
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -26,7 +34,34 @@ public class FRs3Model
    // @return 网格集合
    //============================================================
    public FObjects<FRs3ModelMesh> meshs(){
+      if(_meshs == null){
+         _meshs = new FObjects<FRs3ModelMesh>(FRs3ModelMesh.class);
+      }
       return _meshs;
+   }
+
+   //============================================================
+   // <T>获得骨骼集合。</T>
+   //
+   // @return 骨骼集合
+   //============================================================
+   public FObjects<FRs3Skeleton> skeletons(){
+      if(_skeletons == null){
+         _skeletons = new FObjects<FRs3Skeleton>(FRs3Skeleton.class);
+      }
+      return _skeletons;
+   }
+
+   //============================================================
+   // <T>获得动画集合。</T>
+   //
+   // @return 动画集合
+   //============================================================
+   public FObjects<FRs3Animation> animations(){
+      if(_animations == null){
+         _animations = new FObjects<FRs3Animation>(FRs3Animation.class);
+      }
+      return _animations;
    }
 
    //============================================================
@@ -38,11 +73,15 @@ public class FRs3Model
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 输出网格集合
-      int meshCount = _meshs.count();
-      output.writeInt16((short)meshCount);
-      for(int i = 0; i < meshCount; i++){
-         FRs3ModelMesh mesh = _meshs.get(i);
-         mesh.serialize(output);
+      if(_meshs != null){
+         int meshCount = _meshs.count();
+         output.writeInt16((short)meshCount);
+         for(int i = 0; i < meshCount; i++){
+            FRs3ModelMesh mesh = _meshs.get(i);
+            mesh.serialize(output);
+         }
+      }else{
+         output.writeInt16((short)0);
       }
    }
 
@@ -55,12 +94,12 @@ public class FRs3Model
    public void unserialize(IDataInput input){
       super.unserialize(input);
       // 读取网格集合
-      int meshCount = input.readInt16();
+      int meshCount = input.readInt32();
       for(int n = 0; n < meshCount; n++){
          FRs3ModelMesh mesh = new FRs3ModelMesh();
          mesh.setModel(this);
          mesh.unserialize(input);
-         _meshs.push(mesh);
+         meshs().push(mesh);
       }
    }
 }

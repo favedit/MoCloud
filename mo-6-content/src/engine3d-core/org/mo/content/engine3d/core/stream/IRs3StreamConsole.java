@@ -1,7 +1,7 @@
 package org.mo.content.engine3d.core.stream;
 
 import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
-import org.mo.content.resource3d.model.FRs3ModelStream;
+import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -17,5 +17,15 @@ public interface IRs3StreamConsole
    // @return 数据流单元
    //============================================================
    FDataResource3dStreamUnit insert(ILogicContext logicContext,
-                                    FRs3ModelStream stream);
+                                    FRs3Stream stream);
+
+   //============================================================
+   // <T>构建一个数据流。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param streamId 数据流编号
+   // @return 数据流
+   //============================================================
+   FRs3Stream makeStream(ILogicContext logicContext,
+                         long streamId);
 }

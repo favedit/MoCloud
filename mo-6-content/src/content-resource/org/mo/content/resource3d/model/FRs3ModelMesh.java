@@ -151,25 +151,25 @@ public class FRs3ModelMesh
       // 读取属性
       _code = input.readString();
       // 读取数据流集合
-      int count = input.readInt16();
+      int count = input.readInt32();
       for(int n = 0; n < count; n++){
          FRs3ModelStream stream = new FRs3ModelStream();
          stream.setMesh(this);
          stream.unserialize(input);
          _streams.push(stream);
       }
-      // 读取骨头集合
-      int boneCount = input.readInt32();
-      for(int n = 0; n < boneCount; n++){
-         FRs3ModelMeshBone bone = new FRs3ModelMeshBone();
-         bone.unserialize(input);
-         _bones.push(bone);
-      }
-      // 读取跟踪
-      if(input.readBoolean()){
-         FRs3Track track = new FRs3Track();
-         track.unserialize(input);
-         _tracks.push(track);
-      }
+      //      // 读取骨头集合
+      //      int boneCount = input.readInt32();
+      //      for(int n = 0; n < boneCount; n++){
+      //         FRs3ModelMeshBone bone = new FRs3ModelMeshBone();
+      //         bone.unserialize(input);
+      //         _bones.push(bone);
+      //      }
+      //      // 读取跟踪
+      //      if(input.readBoolean()){
+      //         FRs3Track track = new FRs3Track();
+      //         track.unserialize(input);
+      //         _tracks.push(track);
+      //      }
    }
 }

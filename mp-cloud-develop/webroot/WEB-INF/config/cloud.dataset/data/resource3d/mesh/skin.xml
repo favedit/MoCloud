@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="7283ffd5-416a-4e4f-84be-e9c7083fb33d" name="data.resource3d.mesh.skin" label="M#12cn19资源3D网格蒙皮表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-MS-SKN" data_name="DT_RS3_MESH_SKIN" data_alias="DT_RS3_MSH_SKN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="7d6f55f6-1734-46d2-ae89-91749a3a6b1b" name="mesh_id" label="M#12cn14网格编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MESH_ID" data_alias="MSH" data_refer="data.resource3d.mesh" />
-  <FieldRecordId _uuid="2f6b469e-258a-4832-8fa2-c4bcdfe36474" name="skin_id" label="M#12cn14蒙皮编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKIN_ID" data_alias="data.resource3d.skin" />
-  <FieldTemplate _uuid="edc48034-8dff-4ebd-a635-71443054e274" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
-</DataStore>

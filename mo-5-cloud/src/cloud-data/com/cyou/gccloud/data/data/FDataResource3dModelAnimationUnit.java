@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D网格蒙皮表逻辑单元。</T>
+// <T>资源3D模型动画表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dMeshSkinUnit
+public class FDataResource3dModelAnimationUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -35,17 +35,17 @@ public class FDataResource3dMeshSkinUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段网格编号的定义。
-   private long __meshId;
+   // 存储字段模型编号的定义。
+   private long __modelId;
 
-   // 字段网格编号的定义。
-   protected long _meshId;
+   // 字段模型编号的定义。
+   protected long _modelId;
 
-   // 存储字段蒙皮编号的定义。
-   private long __skinId;
+   // 存储字段动画编号的定义。
+   private long __animationId;
 
-   // 字段蒙皮编号的定义。
-   protected long _skinId;
+   // 字段动画编号的定义。
+   protected long _animationId;
 
    // 存储字段备注的定义。
    private String __note;
@@ -78,9 +78,9 @@ public class FDataResource3dMeshSkinUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D网格蒙皮表逻辑单元。</T>
+   // <T>构造资源3D模型动画表逻辑单元。</T>
    //============================================================
-   public FDataResource3dMeshSkinUnit(){
+   public FDataResource3dModelAnimationUnit(){
    }
 
    //============================================================
@@ -165,68 +165,79 @@ public class FDataResource3dMeshSkinUnit
    }
 
    //============================================================
-   // <T>判断网格编号的数据是否改变。</T>
+   // <T>判断模型编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMeshIdChanged(){
-      return __meshId != _meshId;
+   public boolean isModelIdChanged(){
+      return __modelId != _modelId;
    }
 
    //============================================================
-   // <T>获得网格编号的数据内容。</T>
+   // <T>获得模型编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long meshId(){
-      return _meshId;
+   public long modelId(){
+      return _modelId;
    }
 
    //============================================================
-   // <T>获得网格编号的数据单元。</T>
+   // <T>获得模型编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public FDataResource3dMeshUnit mesh(){
-      FDataResource3dMeshLogic logic = _logicContext.findLogic(FDataResource3dMeshLogic.class);
-      FDataResource3dMeshUnit unit = logic.find(_meshId);
+   public FDataResource3dModelUnit model(){
+      FDataResource3dModelLogic logic = _logicContext.findLogic(FDataResource3dModelLogic.class);
+      FDataResource3dModelUnit unit = logic.find(_modelId);
       return unit;
    }
 
    //============================================================
-   // <T>设置网格编号的数据内容。</T>
+   // <T>设置模型编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMeshId(long value){
-      _meshId = value;
+   public void setModelId(long value){
+      _modelId = value;
    }
 
    //============================================================
-   // <T>判断蒙皮编号的数据是否改变。</T>
+   // <T>判断动画编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isSkinIdChanged(){
-      return __skinId != _skinId;
+   public boolean isAnimationIdChanged(){
+      return __animationId != _animationId;
    }
 
    //============================================================
-   // <T>获得蒙皮编号的数据内容。</T>
+   // <T>获得动画编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long skinId(){
-      return _skinId;
+   public long animationId(){
+      return _animationId;
    }
 
    //============================================================
-   // <T>设置蒙皮编号的数据内容。</T>
+   // <T>获得动画编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dAnimationUnit animation(){
+      FDataResource3dAnimationLogic logic = _logicContext.findLogic(FDataResource3dAnimationLogic.class);
+      FDataResource3dAnimationUnit unit = logic.find(_animationId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置动画编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setSkinId(long value){
-      _skinId = value;
+   public void setAnimationId(long value){
+      _animationId = value;
    }
 
    //============================================================
@@ -379,10 +390,10 @@ public class FDataResource3dMeshSkinUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "mesh_id":
-            return Long.toString(_meshId);
-         case "skin_id":
-            return Long.toString(_skinId);
+         case "model_id":
+            return Long.toString(_modelId);
+         case "animation_id":
+            return Long.toString(_animationId);
          case "note":
             return _note;
          case "create_user_id":
@@ -416,11 +427,11 @@ public class FDataResource3dMeshSkinUnit
          case "guid":
             _guid = value;
             break;
-         case "mesh_id":
-            _meshId = RLong.parse(value);
+         case "model_id":
+            _modelId = RLong.parse(value);
             break;
-         case "skin_id":
-            _skinId = RLong.parse(value);
+         case "animation_id":
+            _animationId = RLong.parse(value);
             break;
          case "note":
             _note = value;
@@ -464,13 +475,13 @@ public class FDataResource3dMeshSkinUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "mesh_id":
-               __meshId = RLong.parse(value);
-               _meshId = __meshId;
+            case "model_id":
+               __modelId = RLong.parse(value);
+               _modelId = __modelId;
                break;
-            case "skin_id":
-               __skinId = RLong.parse(value);
-               _skinId = __skinId;
+            case "animation_id":
+               __animationId = RLong.parse(value);
+               _animationId = __animationId;
                break;
             case "note":
                __note = value;
@@ -507,8 +518,8 @@ public class FDataResource3dMeshSkinUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("meshId", _meshId);
-      row.set("skinId", _skinId);
+      row.set("modelId", _modelId);
+      row.set("animationId", _animationId);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -527,8 +538,8 @@ public class FDataResource3dMeshSkinUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("meshId", RLong.toString(_meshId));
-      map.put("skinId", RLong.toString(_skinId));
+      map.put("modelId", RLong.toString(_modelId));
+      map.put("animationId", RLong.toString(_animationId));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

@@ -41,9 +41,6 @@ public class FDataResource3dAnimationActionLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段骨骼编号的定义。
-   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
-
    // 字段动画编号的定义。
    public final static SLogicFieldInfo ANIMATION_ID = new SLogicFieldInfo("ANIMATION_ID");
 
@@ -78,7 +75,7 @@ public class FDataResource3dAnimationActionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,SKELETON_ID,ANIMATION_ID,CODE,LABEL,FRAME_BEGIN,FRAME_END,FRAME_RATE,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,ANIMATION_ID,CODE,LABEL,FRAME_BEGIN,FRAME_END,FRAME_RATE,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D动画动作表逻辑单元。</T>
@@ -620,7 +617,6 @@ public class FDataResource3dAnimationActionLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`SKELETON_ID`");
       cmd.append(",`ANIMATION_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
@@ -642,13 +638,6 @@ public class FDataResource3dAnimationActionLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      cmd.append(',');
-      long skeletonId = unit.skeletonId();
-      if(skeletonId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(skeletonId);
-      }
       cmd.append(',');
       long animationId = unit.animationId();
       if(animationId == 0){
@@ -763,15 +752,6 @@ public class FDataResource3dAnimationActionLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isSkeletonIdChanged()){
-         cmd.append(",`SKELETON_ID`=");
-         long skeletonId = unit.skeletonId();
-         if(skeletonId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(skeletonId);
-         }
-      }
       if(unit.isAnimationIdChanged()){
          cmd.append(",`ANIMATION_ID`=");
          long animationId = unit.animationId();

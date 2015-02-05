@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D蒙皮数据流表逻辑单元。</T>
+// <T>资源3D骨骼动画表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dSkinStreamUnit
+public class FDataResource3dSkeletonAnimationUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -35,23 +35,17 @@ public class FDataResource3dSkinStreamUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段蒙皮编号的定义。
-   private long __skinId;
+   // 存储字段骨骼编号的定义。
+   private long __skeletonId;
 
-   // 字段蒙皮编号的定义。
-   protected long _skinId;
+   // 字段骨骼编号的定义。
+   protected long _skeletonId;
 
-   // 存储字段代码的定义。
-   private String __code;
+   // 存储字段动画编号的定义。
+   private long __animationId;
 
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段数据流编号的定义。
-   private long __streamId;
-
-   // 字段数据流编号的定义。
-   protected long _streamId;
+   // 字段动画编号的定义。
+   protected long _animationId;
 
    // 存储字段备注的定义。
    private String __note;
@@ -84,9 +78,9 @@ public class FDataResource3dSkinStreamUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D蒙皮数据流表逻辑单元。</T>
+   // <T>构造资源3D骨骼动画表逻辑单元。</T>
    //============================================================
-   public FDataResource3dSkinStreamUnit(){
+   public FDataResource3dSkeletonAnimationUnit(){
    }
 
    //============================================================
@@ -171,106 +165,79 @@ public class FDataResource3dSkinStreamUnit
    }
 
    //============================================================
-   // <T>判断蒙皮编号的数据是否改变。</T>
+   // <T>判断骨骼编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isSkinIdChanged(){
-      return __skinId != _skinId;
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
    }
 
    //============================================================
-   // <T>获得蒙皮编号的数据内容。</T>
+   // <T>获得骨骼编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long skinId(){
-      return _skinId;
+   public long skeletonId(){
+      return _skeletonId;
    }
 
    //============================================================
-   // <T>获得蒙皮编号的数据单元。</T>
+   // <T>获得骨骼编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public FDataResource3dSkinUnit skin(){
-      FDataResource3dSkinLogic logic = _logicContext.findLogic(FDataResource3dSkinLogic.class);
-      FDataResource3dSkinUnit unit = logic.find(_skinId);
+   public FDataResource3dSkeletonUnit skeleton(){
+      FDataResource3dSkeletonLogic logic = _logicContext.findLogic(FDataResource3dSkeletonLogic.class);
+      FDataResource3dSkeletonUnit unit = logic.find(_skeletonId);
       return unit;
    }
 
    //============================================================
-   // <T>设置蒙皮编号的数据内容。</T>
+   // <T>设置骨骼编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setSkinId(long value){
-      _skinId = value;
+   public void setSkeletonId(long value){
+      _skeletonId = value;
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断动画编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isAnimationIdChanged(){
+      return __animationId != _animationId;
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得动画编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public long animationId(){
+      return _animationId;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断数据流编号的数据是否改变。</T>
+   // <T>获得动画编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isStreamIdChanged(){
-      return __streamId != _streamId;
-   }
-
-   //============================================================
-   // <T>获得数据流编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long streamId(){
-      return _streamId;
-   }
-
-   //============================================================
-   // <T>获得数据流编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResource3dStreamUnit stream(){
-      FDataResource3dStreamLogic logic = _logicContext.findLogic(FDataResource3dStreamLogic.class);
-      FDataResource3dStreamUnit unit = logic.find(_streamId);
+   public FDataResource3dAnimationUnit animation(){
+      FDataResource3dAnimationLogic logic = _logicContext.findLogic(FDataResource3dAnimationLogic.class);
+      FDataResource3dAnimationUnit unit = logic.find(_animationId);
       return unit;
    }
 
    //============================================================
-   // <T>设置数据流编号的数据内容。</T>
+   // <T>设置动画编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setStreamId(long value){
-      _streamId = value;
+   public void setAnimationId(long value){
+      _animationId = value;
    }
 
    //============================================================
@@ -423,12 +390,10 @@ public class FDataResource3dSkinStreamUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "skin_id":
-            return Long.toString(_skinId);
-         case "code":
-            return _code;
-         case "stream_id":
-            return Long.toString(_streamId);
+         case "skeleton_id":
+            return Long.toString(_skeletonId);
+         case "animation_id":
+            return Long.toString(_animationId);
          case "note":
             return _note;
          case "create_user_id":
@@ -462,14 +427,11 @@ public class FDataResource3dSkinStreamUnit
          case "guid":
             _guid = value;
             break;
-         case "skin_id":
-            _skinId = RLong.parse(value);
+         case "skeleton_id":
+            _skeletonId = RLong.parse(value);
             break;
-         case "code":
-            _code = value;
-            break;
-         case "stream_id":
-            _streamId = RLong.parse(value);
+         case "animation_id":
+            _animationId = RLong.parse(value);
             break;
          case "note":
             _note = value;
@@ -513,17 +475,13 @@ public class FDataResource3dSkinStreamUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "skin_id":
-               __skinId = RLong.parse(value);
-               _skinId = __skinId;
+            case "skeleton_id":
+               __skeletonId = RLong.parse(value);
+               _skeletonId = __skeletonId;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "stream_id":
-               __streamId = RLong.parse(value);
-               _streamId = __streamId;
+            case "animation_id":
+               __animationId = RLong.parse(value);
+               _animationId = __animationId;
                break;
             case "note":
                __note = value;
@@ -560,9 +518,8 @@ public class FDataResource3dSkinStreamUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("skinId", _skinId);
-      row.set("code", _code);
-      row.set("streamId", _streamId);
+      row.set("skeletonId", _skeletonId);
+      row.set("animationId", _animationId);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -581,9 +538,8 @@ public class FDataResource3dSkinStreamUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("skinId", RLong.toString(_skinId));
-      map.put("code", _code);
-      map.put("streamId", RLong.toString(_streamId));
+      map.put("skeletonId", RLong.toString(_skeletonId));
+      map.put("animationId", RLong.toString(_animationId));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

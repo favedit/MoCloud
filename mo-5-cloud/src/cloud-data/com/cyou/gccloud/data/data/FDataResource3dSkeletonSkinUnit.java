@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D蒙皮表逻辑单元。</T>
+// <T>资源3D骨骼蒙皮表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dSkinUnit
+public class FDataResource3dSkeletonSkinUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -53,11 +53,17 @@ public class FDataResource3dSkinUnit
    // 字段代码的定义。
    protected String _code;
 
-   // 存储字段名称的定义。
+   // 存储字段标签的定义。
    private String __label;
 
-   // 字段名称的定义。
+   // 字段标签的定义。
    protected String _label;
+
+   // 存储字段内容的定义。
+   private String __content;
+
+   // 字段内容的定义。
+   protected String _content;
 
    // 存储字段备注的定义。
    private String __note;
@@ -90,9 +96,9 @@ public class FDataResource3dSkinUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D蒙皮表逻辑单元。</T>
+   // <T>构造资源3D骨骼蒙皮表逻辑单元。</T>
    //============================================================
-   public FDataResource3dSkinUnit(){
+   public FDataResource3dSkeletonSkinUnit(){
    }
 
    //============================================================
@@ -269,7 +275,7 @@ public class FDataResource3dSkinUnit
    }
 
    //============================================================
-   // <T>判断名称的数据是否改变。</T>
+   // <T>判断标签的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -278,7 +284,7 @@ public class FDataResource3dSkinUnit
    }
 
    //============================================================
-   // <T>获得名称的数据内容。</T>
+   // <T>获得标签的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -287,12 +293,39 @@ public class FDataResource3dSkinUnit
    }
 
    //============================================================
-   // <T>设置名称的数据内容。</T>
+   // <T>设置标签的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断内容的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isContentChanged(){
+      return !RString.equals(__content, _content);
+   }
+
+   //============================================================
+   // <T>获得内容的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String content(){
+      return _content;
+   }
+
+   //============================================================
+   // <T>设置内容的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setContent(String value){
+      _content = value;
    }
 
    //============================================================
@@ -453,6 +486,8 @@ public class FDataResource3dSkinUnit
             return _code;
          case "label":
             return _label;
+         case "content":
+            return _content;
          case "note":
             return _note;
          case "create_user_id":
@@ -497,6 +532,9 @@ public class FDataResource3dSkinUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "content":
+            _content = value;
             break;
          case "note":
             _note = value;
@@ -556,6 +594,10 @@ public class FDataResource3dSkinUnit
                __label = value;
                _label = __label;
                break;
+            case "content":
+               __content = value;
+               _content = __content;
+               break;
             case "note":
                __note = value;
                _note = __note;
@@ -595,6 +637,7 @@ public class FDataResource3dSkinUnit
       row.set("fullCode", _fullCode);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -617,6 +660,7 @@ public class FDataResource3dSkinUnit
       map.put("fullCode", _fullCode);
       map.put("code", _code);
       map.put("label", _label);
+      map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

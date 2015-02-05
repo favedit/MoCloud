@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源3D网格蒙皮表逻辑。</T>
+// <T>资源3D模型动画表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dMeshSkinLogic
+public class FDataResource3dModelAnimationLogic
       extends FLogicTable
 {
-   // 资源3D网格蒙皮表的定义。
+   // 资源3D模型动画表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源3D网格蒙皮表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.mesh.skin", "DT_RS3_MESH_SKIN");
+   // 资源3D模型动画表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource3d.model.animation", "DT_RS3_MODEL_ANIMATION");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -41,11 +41,11 @@ public class FDataResource3dMeshSkinLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段网格编号的定义。
-   public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
+   // 字段模型编号的定义。
+   public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
 
-   // 字段蒙皮编号的定义。
-   public final static SLogicFieldInfo SKIN_ID = new SLogicFieldInfo("SKIN_ID");
+   // 字段动画编号的定义。
+   public final static SLogicFieldInfo ANIMATION_ID = new SLogicFieldInfo("ANIMATION_ID");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -63,25 +63,25 @@ public class FDataResource3dMeshSkinLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,MESH_ID,SKIN_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,MODEL_ID,ANIMATION_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
-   // <T>构造资源3D网格蒙皮表逻辑单元。</T>
+   // <T>构造资源3D模型动画表逻辑单元。</T>
    //============================================================
-   public FDataResource3dMeshSkinLogic(){
+   public FDataResource3dModelAnimationLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResource3dMeshSkinUnit.class;
+      _classUnit = FDataResource3dModelAnimationUnit.class;
    }
 
    //============================================================
-   // <T>构造资源3D网格蒙皮表逻辑单元。</T>
+   // <T>构造资源3D模型动画表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResource3dMeshSkinLogic(ILogicContext context){
+   public FDataResource3dModelAnimationLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResource3dMeshSkinUnit.class;
+      _classUnit = FDataResource3dModelAnimationUnit.class;
    }
 
    //============================================================
@@ -215,7 +215,7 @@ public class FDataResource3dMeshSkinLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResource3dMeshSkinUnit());
+            unit = (T)(new FDataResource3dModelAnimationUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -231,8 +231,8 @@ public class FDataResource3dMeshSkinLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResource3dMeshSkinUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResource3dMeshSkinUnit.class, guid);
+   public FDataResource3dModelAnimationUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataResource3dModelAnimationUnit.class, guid);
    }
 
    //============================================================
@@ -270,8 +270,8 @@ public class FDataResource3dMeshSkinLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResource3dMeshSkinUnit search(CharSequence whereSql){
-      return search(null, FDataResource3dMeshSkinUnit.class, whereSql);
+   public FDataResource3dModelAnimationUnit search(CharSequence whereSql){
+      return search(null, FDataResource3dModelAnimationUnit.class, whereSql);
    }
 
    //============================================================
@@ -308,7 +308,7 @@ public class FDataResource3dMeshSkinLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -319,8 +319,8 @@ public class FDataResource3dMeshSkinLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetch(int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetch(int pageSize,
+                                                                 int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -332,9 +332,9 @@ public class FDataResource3dMeshSkinLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetch(CharSequence whereSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetch(CharSequence whereSql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -347,10 +347,10 @@ public class FDataResource3dMeshSkinLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetch(CharSequence whereSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetch(CharSequence whereSql,
+                                                                 CharSequence orderSql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -364,11 +364,11 @@ public class FDataResource3dMeshSkinLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetch(CharSequence fields,
-                                                           CharSequence whereSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetch(CharSequence fields,
+                                                                 CharSequence whereSql,
+                                                                 CharSequence orderSql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -382,12 +382,12 @@ public class FDataResource3dMeshSkinLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetch(CharSequence fields,
-                                                           CharSequence whereSql,
-                                                           CharSequence groupSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetch(CharSequence fields,
+                                                                 CharSequence whereSql,
+                                                                 CharSequence groupSql,
+                                                                 CharSequence orderSql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -492,10 +492,10 @@ public class FDataResource3dMeshSkinLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetchSql(CharSequence code,
-                                                              CharSequence sql,
-                                                              int pageSize,
-                                                              int page){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetchSql(CharSequence code,
+                                                                    CharSequence sql,
+                                                                    int pageSize,
+                                                                    int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -520,7 +520,7 @@ public class FDataResource3dMeshSkinLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dMeshSkinUnit>(FDataResource3dMeshSkinUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataResource3dModelAnimationUnit>(FDataResource3dModelAnimationUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -533,7 +533,7 @@ public class FDataResource3dMeshSkinLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResource3dMeshSkinUnit> fetchAll(){
+   public FLogicDataset<FDataResource3dModelAnimationUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -546,8 +546,8 @@ public class FDataResource3dMeshSkinLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResource3dMeshSkinUnit doPrepare(){
-      FDataResource3dMeshSkinUnit unit = new FDataResource3dMeshSkinUnit();
+   public FDataResource3dModelAnimationUnit doPrepare(){
+      FDataResource3dModelAnimationUnit unit = new FDataResource3dModelAnimationUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -574,7 +574,7 @@ public class FDataResource3dMeshSkinLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResource3dMeshSkinUnit unit = (FDataResource3dMeshSkinUnit)logicUnit;
+      FDataResource3dModelAnimationUnit unit = (FDataResource3dModelAnimationUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -588,7 +588,7 @@ public class FDataResource3dMeshSkinLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResource3dMeshSkinUnit unit = (FDataResource3dMeshSkinUnit)logicUnit;
+      FDataResource3dModelAnimationUnit unit = (FDataResource3dModelAnimationUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -605,8 +605,8 @@ public class FDataResource3dMeshSkinLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`MESH_ID`");
-      cmd.append(",`SKIN_ID`");
+      cmd.append(",`MODEL_ID`");
+      cmd.append(",`ANIMATION_ID`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -623,18 +623,18 @@ public class FDataResource3dMeshSkinLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      long meshId = unit.meshId();
-      if(meshId == 0){
+      long modelId = unit.modelId();
+      if(modelId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(meshId);
+         cmd.append(modelId);
       }
       cmd.append(',');
-      long skinId = unit.skinId();
-      if(skinId == 0){
+      long animationId = unit.animationId();
+      if(animationId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(skinId);
+         cmd.append(animationId);
       }
       cmd.append(',');
       String note = unit.note();
@@ -680,7 +680,7 @@ public class FDataResource3dMeshSkinLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResource3dMeshSkinUnit unit = (FDataResource3dMeshSkinUnit)logicUnit;
+      FDataResource3dModelAnimationUnit unit = (FDataResource3dModelAnimationUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -699,7 +699,7 @@ public class FDataResource3dMeshSkinLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResource3dMeshSkinUnit unit = (FDataResource3dMeshSkinUnit)logicUnit;
+      FDataResource3dModelAnimationUnit unit = (FDataResource3dModelAnimationUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -719,22 +719,22 @@ public class FDataResource3dMeshSkinLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isMeshIdChanged()){
-         cmd.append(",`MESH_ID`=");
-         long meshId = unit.meshId();
-         if(meshId == 0){
+      if(unit.isModelIdChanged()){
+         cmd.append(",`MODEL_ID`=");
+         long modelId = unit.modelId();
+         if(modelId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(meshId);
+            cmd.append(modelId);
          }
       }
-      if(unit.isSkinIdChanged()){
-         cmd.append(",`SKIN_ID`=");
-         long skinId = unit.skinId();
-         if(skinId == 0){
+      if(unit.isAnimationIdChanged()){
+         cmd.append(",`ANIMATION_ID`=");
+         long animationId = unit.animationId();
+         if(animationId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(skinId);
+            cmd.append(animationId);
          }
       }
       if(unit.isNoteChanged()){
@@ -768,7 +768,7 @@ public class FDataResource3dMeshSkinLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResource3dMeshSkinUnit unit = (FDataResource3dMeshSkinUnit)logicUnit;
+      FDataResource3dModelAnimationUnit unit = (FDataResource3dModelAnimationUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

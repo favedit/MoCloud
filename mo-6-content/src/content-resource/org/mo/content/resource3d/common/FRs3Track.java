@@ -86,6 +86,25 @@ public class FRs3Track
    }
 
    //============================================================
+   // <T>从输入流中导入数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void importData(IDataInput input){
+      // 读取属性
+      _boneId = input.readInt32();
+      _frameTick = input.readInt32();
+      _matrix.unserialize(input);
+      // 读取所有帧信息
+      int frameCount = input.readInt32();
+      for(int n = 0; n < frameCount; n++){
+         FRs3Frame frame = new FRs3Frame();
+         frame.importData(input);
+         _frames.push(frame);
+      }
+   }
+
+   //============================================================
    // <T>获得数据。</T>
    //
    // @return 数据

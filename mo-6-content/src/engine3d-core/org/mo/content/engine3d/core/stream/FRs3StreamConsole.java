@@ -7,7 +7,7 @@ import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
 import org.mo.com.net.EMime;
-import org.mo.content.resource3d.model.FRs3ModelStream;
+import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 
@@ -32,7 +32,7 @@ public class FRs3StreamConsole
    //============================================================
    @Override
    public FDataResource3dStreamUnit insert(ILogicContext logicContext,
-                                           FRs3ModelStream stream){
+                                           FRs3Stream stream){
       FDataResource3dStreamLogic streamLogic = logicContext.findLogic(FDataResource3dStreamLogic.class);
       // 设置数据
       FDataResource3dStreamUnit streamUnit = streamLogic.doPrepare();
@@ -50,5 +50,31 @@ public class FRs3StreamConsole
       _storageConsole.store(resource);
       // 返回内容
       return streamLogic.find(streamUnit.ouid());
+   }
+
+   //============================================================
+   // <T>构建一个数据流。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param streamId 数据流编号
+   // @return 数据流
+   //============================================================
+   @Override
+   public FRs3Stream makeStream(ILogicContext logicContext,
+                                long streamId){
+      // 获得数据流但愿
+      FDataResource3dStreamLogic streamLogic = logicContext.findLogic(FDataResource3dStreamLogic.class);
+      FDataResource3dStreamUnit streamUnit = streamLogic.find(streamId);
+      // 设置属性
+      FRs3Stream stream = new FRs3Stream();
+      stream.setCode(streamUnit.code());
+      stream.setElementDataCd(streamUnit.elementDataCd());
+      stream.setElementCount(streamUnit.elementCount());
+      stream.setDataStride(streamUnit.dataStride());
+      stream.setDataCount(streamUnit.dataCount());
+      // 读取数据
+      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dStream, streamUnit.guid());
+      stream.setData(resource.data());
+      return stream;
    }
 }

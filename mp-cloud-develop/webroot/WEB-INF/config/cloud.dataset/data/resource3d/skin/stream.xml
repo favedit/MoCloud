@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="6b456cb2-752a-4506-8ed2-d038f4625fd4" name="data.resource3d.skin.stream" label="M#12cn210资源3D蒙皮数据流表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-SK-STM" data_name="DT_RS3_SKIN_STREAM" data_alias="DT_RS3_SKN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="170de6e2-44a9-4a0c-aa77-4505f4d49350" name="skin_id" label="M#12cn14蒙皮编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKIN_ID" data_alias="SKN" data_refer="data.resource3d.skin" />
-  <FieldString _uuid="afb54cbf-2d23-4ce5-aabb-f8b3dc4a635b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
-  <FieldRecordId _uuid="2028f309-19bd-4c5f-8f80-427f94fb3aa6" name="stream_id" label="M#12cn15数据流编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STREAM_ID" data_alias="STM" data_refer="data.resource3d.stream" />
-  <FieldTemplate _uuid="6bb547ba-b7d8-4ed0-ac2a-a4006d37d8fc" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
-</DataStore>

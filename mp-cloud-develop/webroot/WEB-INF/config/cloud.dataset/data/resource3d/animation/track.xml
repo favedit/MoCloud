@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="2d7952b0-2cbd-4fea-b1c8-cdacd9b37aa4" name="data.resource3d.animation.track" label="M#12cn19资源3D动画跟踪表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-AM-TCK" data_name="DT_RS3_ANIMATION_TRACK" data_alias="DT_RS3_ANM_TCK" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="e6993f70-a423-4a1d-9f14-a28df44c8615" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource3d.skeleton" />
   <FieldRecordId _uuid="663e6d31-2fbe-4689-9cb5-8221c4051b12" name="animation_id" label="M#12cn14动画编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="ANIMATION_ID" data_alias="ANM" data_refer="data.resource3d.animation" />
   <FieldInteger _uuid="601c7a8a-220b-477d-b880-cd6e9ef4dc43" name="bone_index" label="M#12cn14骨头索引" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BONE_INDEX" />
   <FieldRecordId _uuid="eae928fb-d83e-435e-bbcd-6edc0060579b" name="track_id" label="M#12cn14跟踪编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="TRACK_ID" data_alias="TCK" data_refer="data.resource3d.track" />

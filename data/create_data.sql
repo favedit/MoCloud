@@ -176,6 +176,85 @@ ALTER TABLE DT_RS3_TRACK
    ADD CONSTRAINT DT_RS3_TCK_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Animation]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_ANIMATION`;
+CREATE TABLE `DT_RS3_ANIMATION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_ANIMATION 
+   ADD CONSTRAINT DT_RS3_ANM_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Animation.Track]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_ANIMATION_TRACK`;
+CREATE TABLE `DT_RS3_ANIMATION_TRACK` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `ANIMATION_ID`                  BIGINT NOT NULL, 
+   `BONE_INDEX`                    INTEGER, 
+   `TRACK_ID`                      BIGINT NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_ANIMATION_TRACK 
+   ADD CONSTRAINT DT_RS3_ANM_TCK_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_ANM 
+      FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
+
+ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_TCK 
+      FOREIGN KEY (`TRACK_ID`) REFERENCES DT_RS3_TRACK(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Resource3d.Animation.Action]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_RS3_ANIMATION_ACTION`;
+CREATE TABLE `DT_RS3_ANIMATION_ACTION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `ANIMATION_ID`                  BIGINT NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `FRAME_BEGIN`                   INTEGER, 
+   `FRAME_END`                     INTEGER, 
+   `FRAME_RATE`                    FLOAT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_RS3_ANIMATION_ACTION 
+   ADD CONSTRAINT DT_RS3_ANM_ACT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_RS3_ANIMATION_ACTION ADD CONSTRAINT DT_RS3_ANM_ACT_FK_ANM 
+      FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Mesh.Skeleton]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_RS3_SKELETON`;
@@ -187,6 +266,7 @@ CREATE TABLE `DT_RS3_SKELETON`
    `FULL_CODE`                     VARCHAR(200), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
+   `CONTENT`                       TEXT, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -198,10 +278,10 @@ ALTER TABLE DT_RS3_SKELETON
    ADD CONSTRAINT DT_RS3_SKT_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource3d.Skin]
+-- Create table [Data.Resource3d.Skeleton.Skin]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_SKIN`;
-CREATE TABLE `DT_RS3_SKIN` 
+DROP TABLE IF EXISTS `DT_RS3_SKELETON_SKIN`;
+CREATE TABLE `DT_RS3_SKELETON_SKIN` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
@@ -210,6 +290,7 @@ CREATE TABLE `DT_RS3_SKIN`
    `FULL_CODE`                     VARCHAR(200), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
+   `CONTENT`                       TEXT, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -217,24 +298,23 @@ CREATE TABLE `DT_RS3_SKIN`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_RS3_SKIN 
-   ADD CONSTRAINT DT_RS3_SKN_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_RS3_SKELETON_SKIN 
+   ADD CONSTRAINT DT_RS3_SKT_SKN_UK_GID UNIQUE ( GUID ); 
 
-ALTER TABLE DT_RS3_SKIN ADD CONSTRAINT DT_RS3_SKN_FK_SKT 
+ALTER TABLE DT_RS3_SKELETON_SKIN ADD CONSTRAINT DT_RS3_SKT_SKN_FK_SKT 
       FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource3d.Skin.Stream]
+-- Create table [Data.Resource3d.Skeleton.Animation]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_SKIN_STREAM`;
-CREATE TABLE `DT_RS3_SKIN_STREAM` 
+DROP TABLE IF EXISTS `DT_RS3_SKELETON_ANIMATION`;
+CREATE TABLE `DT_RS3_SKELETON_ANIMATION` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `SKIN_ID`                       BIGINT NOT NULL, 
-   `CODE`                          VARCHAR(80), 
-   `STREAM_ID`                     BIGINT, 
+   `SKELETON_ID`                   BIGINT NOT NULL, 
+   `ANIMATION_ID`                  BIGINT NOT NULL, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -242,14 +322,14 @@ CREATE TABLE `DT_RS3_SKIN_STREAM`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_RS3_SKIN_STREAM 
-   ADD CONSTRAINT DT_RS3_SKN_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_RS3_SKELETON_ANIMATION 
+   ADD CONSTRAINT DT_RS3_SKT_ANM_UK_GID UNIQUE ( GUID ); 
 
-ALTER TABLE DT_RS3_SKIN_STREAM ADD CONSTRAINT DT_RS3_SKN_FK_SKN 
-      FOREIGN KEY (`SKIN_ID`) REFERENCES DT_RS3_SKIN(`OUID`); 
+ALTER TABLE DT_RS3_SKELETON_ANIMATION ADD CONSTRAINT DT_RS3_SKT_ANM_FK_SKT 
+      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
 
-ALTER TABLE DT_RS3_SKIN_STREAM ADD CONSTRAINT DT_RS3_SKN_FK_STM 
-      FOREIGN KEY (`STREAM_ID`) REFERENCES DT_RS3_STREAM(`OUID`); 
+ALTER TABLE DT_RS3_SKELETON_ANIMATION ADD CONSTRAINT DT_RS3_SKT_ANM_FK_ANM 
+      FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Mesh]
@@ -301,16 +381,18 @@ ALTER TABLE DT_RS3_MESH_STREAM ADD CONSTRAINT DT_RS3_MSH_STM_FK_STM
       FOREIGN KEY (`STREAM_ID`) REFERENCES DT_RS3_STREAM(`OUID`); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource3d.Mesh.Skin]
+-- Create table [Data.Resource3d.Mesh.Skin.Stream]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_MESH_SKIN`;
-CREATE TABLE `DT_RS3_MESH_SKIN` 
+DROP TABLE IF EXISTS `DT_RS3_MESH_SKIN_STREAM`;
+CREATE TABLE `DT_RS3_MESH_SKIN_STREAM` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `MESH_ID`                       BIGINT NOT NULL, 
-   `SKIN_ID`                       BIGINT NOT NULL, 
+   `SKELETON_ID`                   BIGINT NOT NULL, 
+   `SKELETON_SKIN_ID`              BIGINT NOT NULL, 
+   `STREAM_ID`                     BIGINT NOT NULL, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -318,11 +400,20 @@ CREATE TABLE `DT_RS3_MESH_SKIN`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_RS3_MESH_SKIN 
-   ADD CONSTRAINT DT_RS3_MSH_SKN_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_RS3_MESH_SKIN_STREAM 
+   ADD CONSTRAINT DT_RS3_MSH_SKN_STM_UK_GID UNIQUE ( GUID ); 
 
-ALTER TABLE DT_RS3_MESH_SKIN ADD CONSTRAINT DT_RS3_MSH_SKN_FK_MSH 
+ALTER TABLE DT_RS3_MESH_SKIN_STREAM ADD CONSTRAINT DT_RS3_MSH_SKN_STM_FK_MSH 
       FOREIGN KEY (`MESH_ID`) REFERENCES DT_RS3_MESH(`OUID`); 
+
+ALTER TABLE DT_RS3_MESH_SKIN_STREAM ADD CONSTRAINT DT_RS3_MSH_SKN_STM_FK_SKT 
+      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
+
+ALTER TABLE DT_RS3_MESH_SKIN_STREAM ADD CONSTRAINT DT_RS3_MSH_SKN_STM_FK_SKN 
+      FOREIGN KEY (`SKELETON_SKIN_ID`) REFERENCES DT_RS3_SKELETON_SKIN(`OUID`); 
+
+ALTER TABLE DT_RS3_MESH_SKIN_STREAM ADD CONSTRAINT DT_RS3_MSH_SKN_STM_FK_STM 
+      FOREIGN KEY (`STREAM_ID`) REFERENCES DT_RS3_STREAM(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource3d.Mesh.Track]
@@ -427,45 +518,16 @@ ALTER TABLE DT_RS3_MODEL_SKELETON ADD CONSTRAINT DT_RS3_MOD_SKT_FK_SKT
       FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Resource3d.Animation]
+-- Create table [Data.Resource3d.Model.Animation]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_ANIMATION`;
-CREATE TABLE `DT_RS3_ANIMATION` 
+DROP TABLE IF EXISTS `DT_RS3_MODEL_ANIMATION`;
+CREATE TABLE `DT_RS3_MODEL_ANIMATION` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `SKELETON_ID`                   BIGINT NOT NULL, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(200), 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RS3_ANIMATION 
-   ADD CONSTRAINT DT_RS3_ANM_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_ANIMATION ADD CONSTRAINT DT_RS3_ANM_FK_SKT 
-      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
-
--- ------------------------------------------------------------
--- Create table [Data.Resource3d.Animation.Track]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_ANIMATION_TRACK`;
-CREATE TABLE `DT_RS3_ANIMATION_TRACK` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `SKELETON_ID`                   BIGINT NOT NULL, 
+   `MODEL_ID`                      BIGINT NOT NULL, 
    `ANIMATION_ID`                  BIGINT NOT NULL, 
-   `BONE_INDEX`                    INTEGER, 
-   `TRACK_ID`                      BIGINT NOT NULL, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(200), 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -473,48 +535,13 @@ CREATE TABLE `DT_RS3_ANIMATION_TRACK`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_RS3_ANIMATION_TRACK 
-   ADD CONSTRAINT DT_RS3_ANM_TCK_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_RS3_MODEL_ANIMATION 
+   ADD CONSTRAINT DT_RS3_MOD_ANM_UK_GID UNIQUE ( GUID ); 
 
-ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_SKT 
-      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
+ALTER TABLE DT_RS3_MODEL_ANIMATION ADD CONSTRAINT DT_RS3_MOD_ANM_FK_MOD 
+      FOREIGN KEY (`MODEL_ID`) REFERENCES DT_RS3_MODEL(`OUID`); 
 
-ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_ANM 
-      FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
-
-ALTER TABLE DT_RS3_ANIMATION_TRACK ADD CONSTRAINT DT_RS3_ANM_TCK_FK_TCK 
-      FOREIGN KEY (`TRACK_ID`) REFERENCES DT_RS3_TRACK(`OUID`); 
-
--- ------------------------------------------------------------
--- Create table [Data.Resource3d.Animation.Action]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_RS3_ANIMATION_ACTION`;
-CREATE TABLE `DT_RS3_ANIMATION_ACTION` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `SKELETON_ID`                   BIGINT NOT NULL, 
-   `ANIMATION_ID`                  BIGINT NOT NULL, 
-   `CODE`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(200), 
-   `FRAME_BEGIN`                   INTEGER, 
-   `FRAME_END`                     INTEGER, 
-   `FRAME_RATE`                    FLOAT, 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_RS3_ANIMATION_ACTION 
-   ADD CONSTRAINT DT_RS3_ANM_ACT_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_RS3_ANIMATION_ACTION ADD CONSTRAINT DT_RS3_ANM_ACT_FK_SKT 
-      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RS3_SKELETON(`OUID`); 
-
-ALTER TABLE DT_RS3_ANIMATION_ACTION ADD CONSTRAINT DT_RS3_ANM_ACT_FK_ANM 
+ALTER TABLE DT_RS3_MODEL_ANIMATION ADD CONSTRAINT DT_RS3_MOD_ANM_FK_ANM 
       FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RS3_ANIMATION(`OUID`); 
 
 -- ------------------------------------------------------------

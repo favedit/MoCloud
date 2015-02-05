@@ -3,5 +3,6 @@
   <FieldString _uuid="df701026-dcbc-4355-9fab-80f84aa383a5" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="6e603de9-6210-4f0a-bb2a-965e3d32fcef" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="1957dc22-8b18-4df2-9a89-541f52e2c6b3" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldContent _uuid="b9811c8a-a9a3-4d48-8d4c-828712349bad" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
   <FieldTemplate _uuid="874a049d-c3ae-4c36-90cf-aa60659484d3" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

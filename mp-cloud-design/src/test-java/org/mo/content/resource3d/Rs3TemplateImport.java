@@ -19,15 +19,16 @@ public class Rs3TemplateImport
       RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
       FStrings filePaths = new FStrings();
-      filePaths.push("pvw.show.item.001.xml");
-      filePaths.push("pvw.show.item.009.xml");
-      filePaths.push("pvw.sc.car.01.001.xml");
+      //filePaths.push("pvw.show.item.001");
+      //filePaths.push("pvw.show.item.009");
+      //filePaths.push("pvw.sc.car.01.001");
+      filePaths.push("pvw.show.skeleton.001");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3TemplateConsole templateConsole = RAop.find(IRs3TemplateConsole.class);
          for(String fileName : filePaths){
-            String path = RRs3Utility.RootPath + "/MoScript/source/assets/template/" + fileName;
+            String path = RRs3Utility.RootPath + "/MoScript/source/assets/template/" + fileName + ".xml";
             templateConsole.importTemplate(logicContext, path);
          }
       }catch(Exception e){
