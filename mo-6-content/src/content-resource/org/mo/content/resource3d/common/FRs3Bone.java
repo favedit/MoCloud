@@ -44,13 +44,12 @@ public class FRs3Bone
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      // 存储属性
       output.writeUint8((short)_index);
       // 输出子骨头集合
       if(_bones != null){
-         int count = _bones.count();
-         output.writeUint8((short)count);
-         for(int i = 0; i < count; i++){
-            FRs3Bone bone = _bones.get(i);
+         output.writeUint8((short)_bones.count());
+         for(FRs3Bone bone : _bones){
             bone.serialize(output);
          }
       }else{

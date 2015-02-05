@@ -283,6 +283,52 @@ public class FRs3Stream
    //
    // @param output 输出流
    //============================================================
+   public void serializeBoneIndex(IDataOutput output){
+      if((_elementDataCd != EGcData.Int16) || (_elementCount != 4)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)EGcData.Uint8);
+      output.writeUint8((short)4);
+      output.writeBoolean(false);
+      output.writeUint8((short)4);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      FByteStream stream = new FByteStream(_data, _data.length);
+      int total = _dataCount * 4;
+      for(int n = 0; n < total; n++){
+         output.writeUint8(stream.readInt16());
+      }
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serializeBoneWeight(IDataOutput output){
+      if((_elementDataCd != EGcData.Float32) || (_elementCount != 4)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)EGcData.Uint8);
+      output.writeUint8((short)4);
+      output.writeBoolean(true);
+      output.writeUint8((short)4);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      FByteStream stream = new FByteStream(_data, _data.length);
+      int total = _dataCount * 4;
+      for(int n = 0; n < total; n++){
+         output.writeUint8((short)(stream.readFloat() * 255.0f));
+      }
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
    public void serializeData(IDataOutput output){
       // 输出属性
       output.writeUint8((short)_elementDataCd);
@@ -313,6 +359,12 @@ public class FRs3Stream
          case "tangent":
             serializeByte4Normal(output);
             break;
+         case "bone_index":
+            serializeBoneIndex(output);
+            break;
+         case "bone_weight":
+            serializeBoneWeight(output);
+            break;
          case "index16":
             serializeUint16(output);
             break;
@@ -320,7 +372,6 @@ public class FRs3Stream
             serializeUint32(output);
             break;
          default:
-            serializeData(output);
             throw new FFatalError("Unknown code");
       }
    }

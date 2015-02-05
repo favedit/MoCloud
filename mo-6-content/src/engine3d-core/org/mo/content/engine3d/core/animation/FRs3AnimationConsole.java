@@ -44,4 +44,26 @@ public class FRs3AnimationConsole
       // 返回跟踪单元
       return trackLogic.find(trackUnit.ouid());
    }
+
+   //============================================================
+   // <T>构建一个跟踪。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param trackId 跟踪编号
+   // @return 跟踪
+   //============================================================
+   @Override
+   public FRs3Track makeTrack(ILogicContext logicContext,
+                              long trackId){
+      // 获得跟踪单元
+      FDataResource3dTrackLogic trackLogic = logicContext.findLogic(FDataResource3dTrackLogic.class);
+      FDataResource3dTrackUnit trackUnit = trackLogic.find(trackId);
+      // 设置属性
+      FRs3Track track = new FRs3Track();
+      track.loadUnit(trackUnit);
+      // 读取数据
+      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dTrack, trackUnit.guid());
+      track.setData(resource.data());
+      return track;
+   }
 }

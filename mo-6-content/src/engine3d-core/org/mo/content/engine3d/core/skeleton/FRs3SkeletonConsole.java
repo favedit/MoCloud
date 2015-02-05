@@ -1,9 +1,9 @@
 package org.mo.content.engine3d.core.skeleton;
 
-import com.cyou.gccloud.data.data.FDataResource3dMeshSkinStreamLogic;
-import com.cyou.gccloud.data.data.FDataResource3dMeshSkinStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonSkinLogic;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonSkinStreamLogic;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonSkinStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonSkinUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
@@ -66,13 +66,12 @@ public class FRs3SkeletonConsole
          // 新建数据流
          FDataResource3dStreamUnit streamUnit = _streamConsole.insert(logicContext, stream);
          // 关联蒙皮和数据流
-         FDataResource3dMeshSkinStreamLogic meshSkinStreamLogic = logicContext.findLogic(FDataResource3dMeshSkinStreamLogic.class);
-         FDataResource3dMeshSkinStreamUnit meshSkinStreamUnit = meshSkinStreamLogic.doPrepare();
-         meshSkinStreamUnit.setMeshId(meshId);
-         meshSkinStreamUnit.setSkeletonId(skeletonId);
-         meshSkinStreamUnit.setSkeletonSkinId(skeletonSkinUnit.ouid());
-         meshSkinStreamUnit.setStreamId(streamUnit.ouid());
-         meshSkinStreamLogic.doInsert(meshSkinStreamUnit);
+         FDataResource3dSkeletonSkinStreamLogic skeletonSkinStreamLogic = logicContext.findLogic(FDataResource3dSkeletonSkinStreamLogic.class);
+         FDataResource3dSkeletonSkinStreamUnit skeletonSkinStreamUnit = skeletonSkinStreamLogic.doPrepare();
+         skeletonSkinStreamUnit.setSkeletonId(skeletonId);
+         skeletonSkinStreamUnit.setSkeletonSkinId(skeletonSkinUnit.ouid());
+         skeletonSkinStreamUnit.setStreamId(streamUnit.ouid());
+         skeletonSkinStreamLogic.doInsert(skeletonSkinStreamUnit);
       }
       // 返回骨骼皮肤单元
       return skeletonSkinLogic.find(skeletonSkinUnit.ouid());

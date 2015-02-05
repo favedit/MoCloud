@@ -18,4 +18,14 @@ public interface IRs3AnimationConsole
    //============================================================
    FDataResource3dTrackUnit insertTrack(ILogicContext logicContext,
                                         FRs3Track track);
+
+   //============================================================
+   // <T>构建一个跟踪。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param trackId 跟踪编号
+   // @return 跟踪
+   //============================================================
+   FRs3Track makeTrack(ILogicContext logicContext,
+                       long trackId);
 }

@@ -11,17 +11,15 @@ import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
-import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.content.core.resource3d.animation.IC3dAnimationConsole;
 import org.mo.content.core.resource3d.skeleton.IC3dSkeletonConsole;
+import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
 import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Skeleton;
+import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
-import org.mo.content.resource3d.model.FRs3ModelStream;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -36,6 +34,10 @@ public class FC3dModelConsole
    // 存储管理接口
    @ALink
    protected IGcStorageConsole _storageConsole;
+
+   // 数据流管理接口
+   @ALink
+   protected IRs3StreamConsole _streamConsole;
 
    // 骨骼管理接口
    @ALink
@@ -79,18 +81,8 @@ public class FC3dModelConsole
          FDataResource3dMeshStreamLogic meshStreamLogic = logicContext.findLogic(FDataResource3dMeshStreamLogic.class);
          FLogicDataset<FDataResource3dMeshStreamUnit> meshStreamUnits = meshStreamLogic.fetch(FDataResource3dMeshStreamLogic.MESH_ID + "=" + meshUnit.ouid());
          for(FDataResource3dMeshStreamUnit meshStreamUnit : meshStreamUnits){
-            // 查找数据流
-            FDataResource3dStreamUnit streamUnit = meshStreamUnit.stream();
-            // 设置属性
-            FRs3ModelStream stream = new FRs3ModelStream();
-            stream.setCode(streamUnit.code());
-            stream.setElementDataCd(streamUnit.elementDataCd());
-            stream.setElementCount(streamUnit.elementCount());
-            stream.setDataStride(streamUnit.dataStride());
-            stream.setDataCount(streamUnit.dataCount());
-            // 读取文件
-            SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dStream, streamUnit.guid());
-            stream.setData(resource.data());
+            // 建立数据流
+            FRs3Stream stream = _streamConsole.makeStream(logicContext, meshStreamUnit.streamId());
             mesh.streams().push(stream);
          }
          //         // 获得跟踪信息

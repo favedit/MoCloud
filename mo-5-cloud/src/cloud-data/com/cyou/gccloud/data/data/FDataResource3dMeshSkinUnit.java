@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D模型网格表逻辑单元。</T>
+// <T>资源3D网格蒙皮表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dModelMeshUnit
+public class FDataResource3dMeshSkinUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -35,17 +35,23 @@ public class FDataResource3dModelMeshUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段模型编号的定义。
-   private long __modelId;
-
-   // 字段模型编号的定义。
-   protected long _modelId;
-
    // 存储字段网格编号的定义。
    private long __meshId;
 
    // 字段网格编号的定义。
    protected long _meshId;
+
+   // 存储字段骨骼编号的定义。
+   private long __skeletonId;
+
+   // 字段骨骼编号的定义。
+   protected long _skeletonId;
+
+   // 存储字段骨骼蒙皮编号的定义。
+   private long __skeletonSkinId;
+
+   // 字段骨骼蒙皮编号的定义。
+   protected long _skeletonSkinId;
 
    // 存储字段备注的定义。
    private String __note;
@@ -78,9 +84,9 @@ public class FDataResource3dModelMeshUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D模型网格表逻辑单元。</T>
+   // <T>构造资源3D网格蒙皮表逻辑单元。</T>
    //============================================================
-   public FDataResource3dModelMeshUnit(){
+   public FDataResource3dMeshSkinUnit(){
    }
 
    //============================================================
@@ -165,44 +171,6 @@ public class FDataResource3dModelMeshUnit
    }
 
    //============================================================
-   // <T>判断模型编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isModelIdChanged(){
-      return __modelId != _modelId;
-   }
-
-   //============================================================
-   // <T>获得模型编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long modelId(){
-      return _modelId;
-   }
-
-   //============================================================
-   // <T>获得模型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResource3dModelUnit model(){
-      FDataResource3dModelLogic logic = _logicContext.findLogic(FDataResource3dModelLogic.class);
-      FDataResource3dModelUnit unit = logic.find(_modelId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置模型编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setModelId(long value){
-      _modelId = value;
-   }
-
-   //============================================================
    // <T>判断网格编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -238,6 +206,82 @@ public class FDataResource3dModelMeshUnit
    //============================================================
    public void setMeshId(long value){
       _meshId = value;
+   }
+
+   //============================================================
+   // <T>判断骨骼编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long skeletonId(){
+      return _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dSkeletonUnit skeleton(){
+      FDataResource3dSkeletonLogic logic = _logicContext.findLogic(FDataResource3dSkeletonLogic.class);
+      FDataResource3dSkeletonUnit unit = logic.find(_skeletonId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置骨骼编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSkeletonId(long value){
+      _skeletonId = value;
+   }
+
+   //============================================================
+   // <T>判断骨骼蒙皮编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSkeletonSkinIdChanged(){
+      return __skeletonSkinId != _skeletonSkinId;
+   }
+
+   //============================================================
+   // <T>获得骨骼蒙皮编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long skeletonSkinId(){
+      return _skeletonSkinId;
+   }
+
+   //============================================================
+   // <T>获得骨骼蒙皮编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dSkeletonSkinUnit skeletonSkin(){
+      FDataResource3dSkeletonSkinLogic logic = _logicContext.findLogic(FDataResource3dSkeletonSkinLogic.class);
+      FDataResource3dSkeletonSkinUnit unit = logic.find(_skeletonSkinId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置骨骼蒙皮编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSkeletonSkinId(long value){
+      _skeletonSkinId = value;
    }
 
    //============================================================
@@ -390,10 +434,12 @@ public class FDataResource3dModelMeshUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "model_id":
-            return Long.toString(_modelId);
          case "mesh_id":
             return Long.toString(_meshId);
+         case "skeleton_id":
+            return Long.toString(_skeletonId);
+         case "skeleton_skin_id":
+            return Long.toString(_skeletonSkinId);
          case "note":
             return _note;
          case "create_user_id":
@@ -427,11 +473,14 @@ public class FDataResource3dModelMeshUnit
          case "guid":
             _guid = value;
             break;
-         case "model_id":
-            _modelId = RLong.parse(value);
-            break;
          case "mesh_id":
             _meshId = RLong.parse(value);
+            break;
+         case "skeleton_id":
+            _skeletonId = RLong.parse(value);
+            break;
+         case "skeleton_skin_id":
+            _skeletonSkinId = RLong.parse(value);
             break;
          case "note":
             _note = value;
@@ -475,13 +524,17 @@ public class FDataResource3dModelMeshUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "model_id":
-               __modelId = RLong.parse(value);
-               _modelId = __modelId;
-               break;
             case "mesh_id":
                __meshId = RLong.parse(value);
                _meshId = __meshId;
+               break;
+            case "skeleton_id":
+               __skeletonId = RLong.parse(value);
+               _skeletonId = __skeletonId;
+               break;
+            case "skeleton_skin_id":
+               __skeletonSkinId = RLong.parse(value);
+               _skeletonSkinId = __skeletonSkinId;
                break;
             case "note":
                __note = value;
@@ -518,8 +571,9 @@ public class FDataResource3dModelMeshUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("modelId", _modelId);
       row.set("meshId", _meshId);
+      row.set("skeletonId", _skeletonId);
+      row.set("skeletonSkinId", _skeletonSkinId);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -538,8 +592,9 @@ public class FDataResource3dModelMeshUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("modelId", RLong.toString(_modelId));
       map.put("meshId", RLong.toString(_meshId));
+      map.put("skeletonId", RLong.toString(_skeletonId));
+      map.put("skeletonSkinId", RLong.toString(_skeletonSkinId));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

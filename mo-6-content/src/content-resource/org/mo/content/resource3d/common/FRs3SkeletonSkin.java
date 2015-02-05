@@ -13,6 +13,9 @@ import org.mo.com.xml.FXmlNode;
 public class FRs3SkeletonSkin
       extends FRs3Obejct
 {
+   // 网格唯一编号
+   protected String _meshGuid;
+
    // 数据流集合
    protected FObjects<FRs3Stream> _streams;
 
@@ -23,6 +26,24 @@ public class FRs3SkeletonSkin
    // <T>构造资源3D蒙皮。</T>
    //============================================================
    public FRs3SkeletonSkin(){
+   }
+
+   //============================================================
+   // <T>获得网格唯一编号。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public String meshGuid(){
+      return _meshGuid;
+   }
+
+   //============================================================
+   // <T>设置网格唯一编号。</T>
+   //
+   // @param meshGuid 唯一编号
+   //============================================================
+   public void setMeshGuid(String meshGuid){
+      _meshGuid = meshGuid;
    }
 
    //============================================================
@@ -65,6 +86,27 @@ public class FRs3SkeletonSkin
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
+      // 存储属性
+      output.writeString(_meshGuid);
+      // 存储属性流集合
+      if(_streams != null){
+         output.writeUint8((short)_streams.count());
+         for(FRs3Stream stream : _streams){
+            stream.serialize(output);
+         }
+      }else{
+         output.writeUint8((short)0);
+      }
+      // 存储骨头引用集合
+      if(_boneRefers != null){
+         output.writeUint8((short)_boneRefers.count());
+         for(FRs3BoneRefer boneRefer : _boneRefers){
+            boneRefer.serialize(output);
+         }
+      }else{
+         output.writeUint8((short)0);
+      }
    }
 
    //============================================================

@@ -1,6 +1,7 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
 import org.mo.com.xml.FXmlNode;
 
@@ -17,6 +18,15 @@ public class FRs3BoneRefer
    // <T>构造资源3D骨头。</T>
    //============================================================
    public FRs3BoneRefer(){
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
+      output.writeUint8((short)_index);
    }
 
    //============================================================

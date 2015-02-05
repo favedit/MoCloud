@@ -74,11 +74,33 @@ public class FRs3Model
       super.serialize(output);
       // 输出网格集合
       if(_meshs != null){
-         int meshCount = _meshs.count();
-         output.writeInt16((short)meshCount);
-         for(int i = 0; i < meshCount; i++){
+         int count = _meshs.count();
+         output.writeInt16((short)count);
+         for(int i = 0; i < count; i++){
             FRs3ModelMesh mesh = _meshs.get(i);
             mesh.serialize(output);
+         }
+      }else{
+         output.writeInt16((short)0);
+      }
+      // 输出骨骼集合
+      if(_skeletons != null){
+         int count = _skeletons.count();
+         output.writeInt16((short)count);
+         for(int i = 0; i < count; i++){
+            FRs3Skeleton skeleton = _skeletons.get(i);
+            skeleton.serialize(output);
+         }
+      }else{
+         output.writeInt16((short)0);
+      }
+      // 输出动画集合
+      if(_animations != null){
+         int count = _animations.count();
+         output.writeInt16((short)count);
+         for(int i = 0; i < count; i++){
+            FRs3Animation animation = _animations.get(i);
+            animation.serialize(output);
          }
       }else{
          output.writeInt16((short)0);

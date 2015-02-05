@@ -36,6 +36,9 @@ public class FRs3Animation
    // @return 跟踪集合
    //============================================================
    public FObjects<FRs3Track> tracks(){
+      if(_tracks == null){
+         _tracks = new FObjects<FRs3Track>(FRs3Track.class);
+      }
       return _tracks;
    }
 
@@ -45,10 +48,7 @@ public class FRs3Animation
    // @param track 跟踪
    //============================================================
    public void pushTrack(FRs3Track track){
-      if(_tracks == null){
-         _tracks = new FObjects<FRs3Track>(FRs3Track.class);
-      }
-      _tracks.push(track);
+      tracks().push(track);
    }
 
    //============================================================
@@ -58,6 +58,25 @@ public class FRs3Animation
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
+      // 存储属性
+      output.writeUint16(_frameCount);
+      output.writeUint16(_frameTick);
+      output.writeInt32(_frameSpan);
+      // 输出跟踪集合
+      if(_tracks != null){
+         output.writeInt16((short)_tracks.count());
+         for(FRs3Track track : _tracks){
+            byte[] trackData = track.data();
+            if(trackData != null){
+               output.write(trackData, 0, trackData.length);
+            }else{
+               track.serialize(output);
+            }
+         }
+      }else{
+         output.writeInt16((short)0);
+      }
    }
 
    //============================================================
@@ -80,6 +99,9 @@ public class FRs3Animation
       _guid = unit.guid();
       _code = unit.code();
       _label = unit.label();
+      _frameCount = unit.frameCount();
+      _frameTick = unit.frameTick();
+      _frameSpan = unit.frameSpan();
    }
 
    //============================================================
@@ -90,6 +112,9 @@ public class FRs3Animation
    public void saveUnit(FDataResource3dAnimationUnit unit){
       unit.setCode(_code);
       unit.setLabel(_label);
+      unit.setFrameCount(_frameCount);
+      unit.setFrameTick(_frameTick);
+      unit.setFrameSpan(_frameSpan);
    }
 
    //============================================================

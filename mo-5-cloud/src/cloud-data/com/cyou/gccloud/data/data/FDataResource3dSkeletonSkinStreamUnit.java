@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -12,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D动画跟踪表逻辑单元。</T>
+// <T>资源3D骨骼蒙皮数据流表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dAnimationTrackUnit
+public class FDataResource3dSkeletonSkinStreamUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -36,35 +35,23 @@ public class FDataResource3dAnimationTrackUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段动画编号的定义。
-   private long __animationId;
+   // 存储字段骨骼编号的定义。
+   private long __skeletonId;
 
-   // 字段动画编号的定义。
-   protected long _animationId;
+   // 字段骨骼编号的定义。
+   protected long _skeletonId;
 
-   // 存储字段骨头索引的定义。
-   private int __boneIndex;
+   // 存储字段蒙皮编号的定义。
+   private long __skeletonSkinId;
 
-   // 字段骨头索引的定义。
-   protected int _boneIndex;
+   // 字段蒙皮编号的定义。
+   protected long _skeletonSkinId;
 
-   // 存储字段跟踪编号的定义。
-   private long __trackId;
+   // 存储字段数据流编号的定义。
+   private long __streamId;
 
-   // 字段跟踪编号的定义。
-   protected long _trackId;
-
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段名称的定义。
-   private String __label;
-
-   // 字段名称的定义。
-   protected String _label;
+   // 字段数据流编号的定义。
+   protected long _streamId;
 
    // 存储字段备注的定义。
    private String __note;
@@ -97,9 +84,9 @@ public class FDataResource3dAnimationTrackUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D动画跟踪表逻辑单元。</T>
+   // <T>构造资源3D骨骼蒙皮数据流表逻辑单元。</T>
    //============================================================
-   public FDataResource3dAnimationTrackUnit(){
+   public FDataResource3dSkeletonSkinStreamUnit(){
    }
 
    //============================================================
@@ -184,160 +171,117 @@ public class FDataResource3dAnimationTrackUnit
    }
 
    //============================================================
-   // <T>判断动画编号的数据是否改变。</T>
+   // <T>判断骨骼编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isAnimationIdChanged(){
-      return __animationId != _animationId;
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
    }
 
    //============================================================
-   // <T>获得动画编号的数据内容。</T>
+   // <T>获得骨骼编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long animationId(){
-      return _animationId;
+   public long skeletonId(){
+      return _skeletonId;
    }
 
    //============================================================
-   // <T>获得动画编号的数据单元。</T>
+   // <T>获得骨骼编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public FDataResource3dAnimationUnit animation(){
-      FDataResource3dAnimationLogic logic = _logicContext.findLogic(FDataResource3dAnimationLogic.class);
-      FDataResource3dAnimationUnit unit = logic.find(_animationId);
+   public FDataResource3dSkeletonUnit skeleton(){
+      FDataResource3dSkeletonLogic logic = _logicContext.findLogic(FDataResource3dSkeletonLogic.class);
+      FDataResource3dSkeletonUnit unit = logic.find(_skeletonId);
       return unit;
    }
 
    //============================================================
-   // <T>设置动画编号的数据内容。</T>
+   // <T>设置骨骼编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setAnimationId(long value){
-      _animationId = value;
+   public void setSkeletonId(long value){
+      _skeletonId = value;
    }
 
    //============================================================
-   // <T>判断骨头索引的数据是否改变。</T>
+   // <T>判断蒙皮编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isBoneIndexChanged(){
-      return __boneIndex != _boneIndex;
+   public boolean isSkeletonSkinIdChanged(){
+      return __skeletonSkinId != _skeletonSkinId;
    }
 
    //============================================================
-   // <T>获得骨头索引的数据内容。</T>
+   // <T>获得蒙皮编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int boneIndex(){
-      return _boneIndex;
+   public long skeletonSkinId(){
+      return _skeletonSkinId;
    }
 
    //============================================================
-   // <T>设置骨头索引的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setBoneIndex(int value){
-      _boneIndex = value;
-   }
-
-   //============================================================
-   // <T>判断跟踪编号的数据是否改变。</T>
+   // <T>获得蒙皮编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isTrackIdChanged(){
-      return __trackId != _trackId;
-   }
-
-   //============================================================
-   // <T>获得跟踪编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long trackId(){
-      return _trackId;
-   }
-
-   //============================================================
-   // <T>获得跟踪编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResource3dTrackUnit track(){
-      FDataResource3dTrackLogic logic = _logicContext.findLogic(FDataResource3dTrackLogic.class);
-      FDataResource3dTrackUnit unit = logic.find(_trackId);
+   public FDataResource3dSkeletonSkinUnit skeletonSkin(){
+      FDataResource3dSkeletonSkinLogic logic = _logicContext.findLogic(FDataResource3dSkeletonSkinLogic.class);
+      FDataResource3dSkeletonSkinUnit unit = logic.find(_skeletonSkinId);
       return unit;
    }
 
    //============================================================
-   // <T>设置跟踪编号的数据内容。</T>
+   // <T>设置蒙皮编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setTrackId(long value){
-      _trackId = value;
+   public void setSkeletonSkinId(long value){
+      _skeletonSkinId = value;
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断数据流编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isStreamIdChanged(){
+      return __streamId != _streamId;
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得数据流编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public long streamId(){
+      return _streamId;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
+   // <T>获得数据流编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dStreamUnit stream(){
+      FDataResource3dStreamLogic logic = _logicContext.findLogic(FDataResource3dStreamLogic.class);
+      FDataResource3dStreamUnit unit = logic.find(_streamId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置数据流编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
+   public void setStreamId(long value){
+      _streamId = value;
    }
 
    //============================================================
@@ -490,16 +434,12 @@ public class FDataResource3dAnimationTrackUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "animation_id":
-            return Long.toString(_animationId);
-         case "bone_index":
-            return RInteger.toString(_boneIndex);
-         case "track_id":
-            return Long.toString(_trackId);
-         case "code":
-            return _code;
-         case "label":
-            return _label;
+         case "skeleton_id":
+            return Long.toString(_skeletonId);
+         case "skeleton_skin_id":
+            return Long.toString(_skeletonSkinId);
+         case "stream_id":
+            return Long.toString(_streamId);
          case "note":
             return _note;
          case "create_user_id":
@@ -533,20 +473,14 @@ public class FDataResource3dAnimationTrackUnit
          case "guid":
             _guid = value;
             break;
-         case "animation_id":
-            _animationId = RLong.parse(value);
+         case "skeleton_id":
+            _skeletonId = RLong.parse(value);
             break;
-         case "bone_index":
-            _boneIndex = RInteger.parse(value);
+         case "skeleton_skin_id":
+            _skeletonSkinId = RLong.parse(value);
             break;
-         case "track_id":
-            _trackId = RLong.parse(value);
-            break;
-         case "code":
-            _code = value;
-            break;
-         case "label":
-            _label = value;
+         case "stream_id":
+            _streamId = RLong.parse(value);
             break;
          case "note":
             _note = value;
@@ -590,25 +524,17 @@ public class FDataResource3dAnimationTrackUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "animation_id":
-               __animationId = RLong.parse(value);
-               _animationId = __animationId;
+            case "skeleton_id":
+               __skeletonId = RLong.parse(value);
+               _skeletonId = __skeletonId;
                break;
-            case "bone_index":
-               __boneIndex = RInteger.parse(value);
-               _boneIndex = __boneIndex;
+            case "skeleton_skin_id":
+               __skeletonSkinId = RLong.parse(value);
+               _skeletonSkinId = __skeletonSkinId;
                break;
-            case "track_id":
-               __trackId = RLong.parse(value);
-               _trackId = __trackId;
-               break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
+            case "stream_id":
+               __streamId = RLong.parse(value);
+               _streamId = __streamId;
                break;
             case "note":
                __note = value;
@@ -645,11 +571,9 @@ public class FDataResource3dAnimationTrackUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("animationId", _animationId);
-      row.set("boneIndex", _boneIndex);
-      row.set("trackId", _trackId);
-      row.set("code", _code);
-      row.set("label", _label);
+      row.set("skeletonId", _skeletonId);
+      row.set("skeletonSkinId", _skeletonSkinId);
+      row.set("streamId", _streamId);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -668,11 +592,9 @@ public class FDataResource3dAnimationTrackUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("animationId", RLong.toString(_animationId));
-      map.put("boneIndex", RInteger.toString(_boneIndex));
-      map.put("trackId", RLong.toString(_trackId));
-      map.put("code", _code);
-      map.put("label", _label);
+      map.put("skeletonId", RLong.toString(_skeletonId));
+      map.put("skeletonSkinId", RLong.toString(_skeletonSkinId));
+      map.put("streamId", RLong.toString(_streamId));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

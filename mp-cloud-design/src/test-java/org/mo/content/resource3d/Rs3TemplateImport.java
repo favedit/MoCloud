@@ -19,9 +19,9 @@ public class Rs3TemplateImport
       RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
 
       FStrings filePaths = new FStrings();
-      //filePaths.push("pvw.show.item.001");
-      //filePaths.push("pvw.show.item.009");
-      //filePaths.push("pvw.sc.car.01.001");
+      filePaths.push("pvw.show.item.001");
+      filePaths.push("pvw.show.item.009");
+      filePaths.push("pvw.sc.car.01.001");
       filePaths.push("pvw.show.skeleton.001");
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);

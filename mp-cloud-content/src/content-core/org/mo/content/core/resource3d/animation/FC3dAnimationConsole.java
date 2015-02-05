@@ -1,10 +1,16 @@
 package org.mo.content.core.resource3d.animation;
 
 import com.cyou.gccloud.data.data.FDataResource3dAnimationLogic;
+import com.cyou.gccloud.data.data.FDataResource3dAnimationTrackLogic;
+import com.cyou.gccloud.data.data.FDataResource3dAnimationTrackUnit;
 import com.cyou.gccloud.data.data.FDataResource3dAnimationUnit;
+import org.mo.com.lang.FObjects;
+import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
 import org.mo.content.resource3d.common.FRs3Animation;
+import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -17,6 +23,10 @@ public class FC3dAnimationConsole
    // 存储管理接口
    @ALink
    protected IRs3StreamConsole _streamConsole;
+
+   // 动画管理接口
+   @ALink
+   protected IRs3AnimationConsole _animationConsole;
 
    //============================================================
    // <T>构建蒙皮处理。</T>
@@ -36,22 +46,16 @@ public class FC3dAnimationConsole
          return null;
       }
       animation.loadUnit(animationUnit);
-      //      // 获得蒙皮集合
-      //      FDataResource3dSkinLogic skinLogic = logicContext.findLogic(FDataResource3dSkinLogic.class);
-      //      FLogicDataset<FDataResource3dSkinUnit> skinUnits = skinLogic.fetch(FDataResource3dSkinLogic.SKELETON_ID + "=" + skeletonUnit.ouid());
-      //      for(FDataResource3dSkinUnit skinUnit : skinUnits){
-      //         // 创建蒙皮
-      //         FRs3SkeletonSkin skin = new FRs3SkeletonSkin();
-      //         skin.loadUnit(skinUnit);
-      //         // 获得蒙皮数据流集合
-      //         FDataResource3dSkinStreamLogic skinStreamLogic = logicContext.findLogic(FDataResource3dSkinStreamLogic.class);
-      //         FLogicDataset<FDataResource3dSkinStreamUnit> skinStreamUnits = skinStreamLogic.fetch(FDataResource3dSkinStreamLogic.SKIN_ID + "=" + skinUnit.ouid());
-      //         for(FDataResource3dSkinStreamUnit skinStreamUnit : skinStreamUnits){
-      //            // 构建数据流
-      //            FRs3Stream stream = _streamConsole.makeStream(logicContext, skinStreamUnit.streamId());
-      //            skin.pushStream(stream);
-      //         }
-      //      }
+      // 获得跟踪集合
+      FDataResource3dAnimationTrackLogic animationTrackLogic = logicContext.findLogic(FDataResource3dAnimationTrackLogic.class);
+      FLogicDataset<FDataResource3dAnimationTrackUnit> animationTrackUnits = animationTrackLogic.fetch(FDataResource3dAnimationTrackLogic.ANIMATION_ID + "=" + animationId);
+      if(!animationTrackUnits.isEmpty()){
+         FObjects<FRs3Track> tracks = animation.tracks();
+         for(FDataResource3dAnimationTrackUnit animationTrackUnit : animationTrackUnits){
+            FRs3Track track = _animationConsole.makeTrack(logicContext, animationTrackUnit.trackId());
+            tracks.push(track);
+         }
+      }
       return animation;
    }
 }

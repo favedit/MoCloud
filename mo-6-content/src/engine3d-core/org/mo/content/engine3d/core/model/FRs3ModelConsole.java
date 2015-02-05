@@ -4,6 +4,8 @@ import com.cyou.gccloud.data.data.FDataResource3dAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResource3dAnimationTrackLogic;
 import com.cyou.gccloud.data.data.FDataResource3dAnimationTrackUnit;
 import com.cyou.gccloud.data.data.FDataResource3dAnimationUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMeshSkinLogic;
+import com.cyou.gccloud.data.data.FDataResource3dMeshSkinUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelAnimationUnit;
@@ -14,6 +16,7 @@ import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonLogic;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonSkinUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.console.FConsole;
@@ -158,7 +161,14 @@ public class FRs3ModelConsole
          // 查找网格
          FDataResource3dMeshUnit meshUnit = findMeshByCode(logicContext, modelUnit.ouid(), skin.code());
          // 新建蒙皮
-         _skeletonConsole.insertSkin(logicContext, meshUnit.ouid(), skeletonUnit.ouid(), skin);
+         FDataResource3dSkeletonSkinUnit skeletonSkinUnit = _skeletonConsole.insertSkin(logicContext, meshUnit.ouid(), skeletonUnit.ouid(), skin);
+         // 关联网格和蒙皮
+         FDataResource3dMeshSkinLogic meshSkinLogic = logicContext.findLogic(FDataResource3dMeshSkinLogic.class);
+         FDataResource3dMeshSkinUnit meshSkinUnit = meshSkinLogic.doPrepare();
+         meshSkinUnit.setMeshId(meshUnit.ouid());
+         meshSkinUnit.setSkeletonId(skeletonUnit.ouid());
+         meshSkinUnit.setSkeletonSkinId(skeletonSkinUnit.ouid());
+         meshSkinLogic.doInsert(meshSkinUnit);
       }
       return EResult.Success;
    }

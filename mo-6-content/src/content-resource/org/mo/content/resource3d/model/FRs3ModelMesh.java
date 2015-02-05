@@ -4,6 +4,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.common.FRs3Track;
 
 //============================================================
@@ -22,7 +23,7 @@ public class FRs3ModelMesh
    protected String _code;
 
    // 数据流集合
-   protected FObjects<FRs3ModelStream> _streams = new FObjects<FRs3ModelStream>(FRs3ModelStream.class);
+   protected FObjects<FRs3Stream> _streams = new FObjects<FRs3Stream>(FRs3Stream.class);
 
    // 骨头集合
    protected FObjects<FRs3ModelMeshBone> _bones = new FObjects<FRs3ModelMeshBone>(FRs3ModelMeshBone.class);
@@ -95,7 +96,7 @@ public class FRs3ModelMesh
    //
    // @return 网格集合
    //============================================================
-   public FObjects<FRs3ModelStream> streams(){
+   public FObjects<FRs3Stream> streams(){
       return _streams;
    }
 
@@ -129,17 +130,17 @@ public class FRs3ModelMesh
       int streamCount = _streams.count();
       output.writeInt8((byte)streamCount);
       for(int i = 0; i < streamCount; i++){
-         FRs3ModelStream stream = _streams.get(i);
+         FRs3Stream stream = _streams.get(i);
          stream.serialize(output);
       }
-      // 输出跟踪集合
-      int trackCount = _tracks.count();
-      output.writeInt8((byte)trackCount);
-      for(int i = 0; i < trackCount; i++){
-         FRs3Track track = _tracks.get(i);
-         output.write(track.data(), 0, track.data().length);
-         //track.serialize(output);
-      }
+      //      // 输出跟踪集合
+      //      int trackCount = _tracks.count();
+      //      output.writeInt8((byte)trackCount);
+      //      for(int i = 0; i < trackCount; i++){
+      //         FRs3Track track = _tracks.get(i);
+      //         output.write(track.data(), 0, track.data().length);
+      //         //track.serialize(output);
+      //      }
    }
 
    //============================================================

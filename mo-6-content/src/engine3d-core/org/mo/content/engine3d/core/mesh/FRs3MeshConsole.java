@@ -1,7 +1,5 @@
 package org.mo.content.engine3d.core.mesh;
 
-import org.mo.content.resource3d.model.FRs3ModelStream;
-
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamUnit;
@@ -13,6 +11,7 @@ import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.console.FConsole;
 import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
+import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.core.aop.face.ALink;
@@ -51,7 +50,7 @@ public class FRs3MeshConsole
       meshUnit.setCode(mesh.code());
       meshLogic.doInsert(meshUnit);
       // 新建数据流
-      for(FRs3ModelStream stream : mesh.streams()){
+      for(FRs3Stream stream : mesh.streams()){
          // 新建数据流
          FDataResource3dStreamUnit streamUnit = _streamConsole.insert(logicContext, stream);
          // 建立网格和数据流关联

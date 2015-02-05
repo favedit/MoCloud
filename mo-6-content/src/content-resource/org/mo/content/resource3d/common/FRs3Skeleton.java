@@ -77,13 +77,24 @@ public class FRs3Skeleton
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
-      // 输出网格集合
-      //      int meshCount = _meshs.count();
-      //      output.writeInt16((short)meshCount);
-      //      for(int i = 0; i < meshCount; i++){
-      //         FRs3ModelMesh mesh = _meshs.get(i);
-      //         mesh.serialize(output);
-      //      }
+      // 存储骨头集合
+      if(_bones != null){
+         output.writeUint8((short)_bones.count());
+         for(FRs3Bone bone : _bones){
+            bone.serialize(output);
+         }
+      }else{
+         output.writeUint8((short)0);
+      }
+      // 存储蒙皮集合
+      if(_skins != null){
+         output.writeUint8((short)_skins.count());
+         for(FRs3SkeletonSkin skin : _skins){
+            skin.serialize(output);
+         }
+      }else{
+         output.writeUint8((short)0);
+      }
    }
 
    //============================================================

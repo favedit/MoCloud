@@ -62,7 +62,7 @@ public class FRs3StreamConsole
    @Override
    public FRs3Stream makeStream(ILogicContext logicContext,
                                 long streamId){
-      // 获得数据流但愿
+      // 获得数据流单元
       FDataResource3dStreamLogic streamLogic = logicContext.findLogic(FDataResource3dStreamLogic.class);
       FDataResource3dStreamUnit streamUnit = streamLogic.find(streamId);
       // 设置属性
