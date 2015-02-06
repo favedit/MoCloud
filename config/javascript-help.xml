@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Configuration>
+   <NamespaceCollection>
+      <Namespace name='lang'>
+         <ClassCollection>
+            <Class name='FObject' label='基础对象'>
+               <MethodCollection>
+                  <Method name='innerDump' label='获得运行信息'>
+                     <ParameterCollection>
+                        <Parameter code='s' name='source' type='TString' label='信息字符串'/>
+                     <ParameterCollection>
+                     <ReturnParameter type='TString' label='运行信息'/>
+                  </Method>
+               </MethodCollection>
+            </Class>
+         </ClassCollection>
+      </Namespace>
+   </NamespaceCollection>
+</Configuration>
