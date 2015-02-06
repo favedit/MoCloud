@@ -12,7 +12,7 @@ import org.mo.com.lang.FObjects;
 public class FRs3Track
       extends FRs3Obejct
 {
-   protected int _boneId;
+   protected int _boneIndex;
 
    protected int _frameTick;
 
@@ -27,6 +27,33 @@ public class FRs3Track
    // <T>构造资源精灵。</T>
    //============================================================
    public FRs3Track(){
+   }
+
+   //============================================================
+   // <T>获得骨头索引。</T>
+   //
+   // @return 骨头索引
+   //============================================================
+   public int boneIndex(){
+      return _boneIndex;
+   }
+
+   //============================================================
+   // <T>获得帧间隔。</T>
+   //
+   // @return 帧间隔
+   //============================================================
+   public int frameTick(){
+      return _frameTick;
+   }
+
+   //============================================================
+   // <T>获得帧个数。</T>
+   //
+   // @return 帧个数
+   //============================================================
+   public int frameCount(){
+      return _frames.count();
    }
 
    //============================================================
@@ -55,7 +82,7 @@ public class FRs3Track
    @Override
    public void serialize(IDataOutput output){
       // 读取属性
-      output.writeUint8((short)_boneId);
+      output.writeUint8((short)_boneIndex);
       output.writeUint16(_frameTick);
       _matrix.serialize(output);
       // 读取所有帧信息
@@ -74,7 +101,7 @@ public class FRs3Track
    //============================================================
    public void unserialize(IDataInput input){
       // 读取属性
-      _boneId = input.readInt32();
+      _boneIndex = input.readInt32();
       _frameTick = input.readInt32();
       _matrix.unserialize(input);
       // 读取所有帧信息
@@ -93,7 +120,7 @@ public class FRs3Track
    //============================================================
    public void importData(IDataInput input){
       // 读取属性
-      _boneId = input.readInt32();
+      _boneIndex = input.readInt32();
       _frameTick = input.readInt32();
       _matrix.unserialize(input);
       // 读取所有帧信息

@@ -12,6 +12,9 @@ import org.mo.com.lang.FObjects;
 public class FRs3Animation
       extends FRs3Resource
 {
+   // 骨骼唯一编号
+   protected String _skeletonGuid;
+
    // 帧总长
    protected int _frameCount;
 
@@ -28,6 +31,24 @@ public class FRs3Animation
    // <T>构造资源精灵。</T>
    //============================================================
    public FRs3Animation(){
+   }
+
+   //============================================================
+   // <T>获得骨骼唯一编号。</T>
+   //
+   // @return 骨骼唯一编号
+   //============================================================
+   public String skeletonGuid(){
+      return _skeletonGuid;
+   }
+
+   //============================================================
+   // <T>设置骨骼唯一编号。</T>
+   //
+   // @param skeletonGuid 骨骼唯一编号
+   //============================================================
+   public void setSkeletonGuid(String skeletonGuid){
+      _skeletonGuid = skeletonGuid;
    }
 
    //============================================================
@@ -60,6 +81,7 @@ public class FRs3Animation
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 存储属性
+      output.writeString(_skeletonGuid);
       output.writeUint16(_frameCount);
       output.writeUint16(_frameTick);
       output.writeInt32(_frameSpan);

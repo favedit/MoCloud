@@ -15,12 +15,15 @@ import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonAnimationLogic;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonAnimationUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonSkinUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.console.FConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
 import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
 import org.mo.content.engine3d.core.skeleton.IRs3SkeletonConsole;
@@ -189,6 +192,9 @@ public class FRs3ModelConsole
       //............................................................
       // 查找模型
       FDataResource3dModelUnit modelUnit = findByCode(logicContext, animation.code());
+      if(modelUnit == null){
+         throw new FFatalError("Model is not exists. (code={1})", animation.code());
+      }
       //............................................................
       // 新建动画
       FDataResource3dAnimationLogic animationLogic = logicContext.findLogic(FDataResource3dAnimationLogic.class);
@@ -202,10 +208,18 @@ public class FRs3ModelConsole
       modelAnimationUnit.setAnimationId(animationUnit.ouid());
       modelAnimationLogic.doInsert(modelAnimationUnit);
       //............................................................
+      // 关联骨骼和动画
+      FDataResource3dSkeletonUnit skeletonUnit = _skeletonConsole.findByCode(logicContext, animation.code());
+      if(skeletonUnit != null){
+         FDataResource3dSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResource3dSkeletonAnimationLogic.class);
+         FDataResource3dSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationLogic.doPrepare();
+         skeletonAnimationUnit.setSkeletonId(skeletonUnit.ouid());
+         skeletonAnimationUnit.setAnimationId(animationUnit.ouid());
+         skeletonAnimationLogic.doInsert(skeletonAnimationUnit);
+      }
+      //............................................................
       // 新建蒙皮集合
       for(FRs3Track track : animation.tracks()){
-         // 查找网格
-         //FDataResource3dMeshUnit meshUnit = findMeshByCode(logicContext, modelUnit.ouid(), skin.code());
          // 新建蒙皮
          FDataResource3dTrackUnit trackUnit = _animationConsole.insertTrack(logicContext, track);
          // 关联动画和跟踪

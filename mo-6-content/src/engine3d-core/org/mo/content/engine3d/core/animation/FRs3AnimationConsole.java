@@ -36,6 +36,9 @@ public class FRs3AnimationConsole
       // 新建跟踪
       FDataResource3dTrackLogic trackLogic = logicContext.findLogic(FDataResource3dTrackLogic.class);
       FDataResource3dTrackUnit trackUnit = trackLogic.doPrepare();
+      trackUnit.setFrameCount(track.frameCount());
+      trackUnit.setFrameTick(track.frameTick());
+      trackUnit.setFrameTotal(track.frameTick() * track.frameCount());
       trackLogic.doInsert(trackUnit);
       // 存储数据
       SGcStorage resource = new SGcStorage(EGcStorageCatalog.Resource3dTrack, trackUnit.guid(), EMime.Bin.type());

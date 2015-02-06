@@ -11,7 +11,11 @@ import com.cyou.gccloud.data.data.FDataResource3dModelMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelSkeletonUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonAnimationLogic;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonAnimationUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSkeletonUnit;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.com.lang.FFatalError;
 import org.mo.content.core.resource3d.animation.IC3dAnimationConsole;
 import org.mo.content.core.resource3d.skeleton.IC3dSkeletonConsole;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
@@ -85,19 +89,6 @@ public class FC3dModelConsole
             FRs3Stream stream = _streamConsole.makeStream(logicContext, meshStreamUnit.streamId());
             mesh.streams().push(stream);
          }
-         //         // 获得跟踪信息
-         //         FDataResource3dMeshTrackLogic meshTrackLogic = logicContext.findLogic(FDataResource3dMeshTrackLogic.class);
-         //         FLogicDataset<FDataResource3dMeshTrackUnit> meshTrackUnits = meshTrackLogic.fetch(FDataResource3dMeshTrackLogic.MESH_ID + "=" + meshUnit.ouid());
-         //         for(FDataResource3dMeshTrackUnit meshTrackUnit : meshTrackUnits){
-         //            // 查找数据流
-         //            FDataResource3dTrackUnit trackUnit = meshTrackUnit.track();
-         //            // 设置属性
-         //            FRs3Track track = new FRs3Track();
-         //            // 读取文件
-         //            SGcStorage resource = _storageConsole.find(EGcStorageCatalog.Resource3dTrack, trackUnit.guid());
-         //            track.setData(resource.data());
-         //            mesh.tracks().push(track);
-         //         }
          model.meshs().push(mesh);
       }
       //............................................................
@@ -119,6 +110,17 @@ public class FC3dModelConsole
          // 获得动画
          FRs3Animation animation = _animationConsole.makeAnimation(logicContext, animationId);
          model.animations().push(animation);
+         // 查找动画关联骨骼
+         FDataResource3dSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResource3dSkeletonAnimationLogic.class);
+         FLogicDataset<FDataResource3dSkeletonAnimationUnit> skeletonAnimationUnits = skeletonAnimationLogic.fetch(FDataResource3dSkeletonAnimationLogic.ANIMATION_ID + "=" + animationId);
+         if(!skeletonAnimationUnits.isEmpty()){
+            if(skeletonAnimationUnits.count() > 1){
+               throw new FFatalError("Animation skeleton is too many.");
+            }
+            FDataResource3dSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationUnits.first();
+            FDataResource3dSkeletonUnit skeletonUnit = skeletonAnimationUnit.skeleton();
+            animation.setSkeletonGuid(skeletonUnit.guid());
+         }
       }
       return model;
    }
