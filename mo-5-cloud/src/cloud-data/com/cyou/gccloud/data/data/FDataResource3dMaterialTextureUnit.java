@@ -41,6 +41,12 @@ public class FDataResource3dMaterialTextureUnit
    // 字段材质编号的定义。
    protected long _materialId;
 
+   // 存储字段全代码的定义。
+   private String __fullCode;
+
+   // 字段全代码的定义。
+   protected String _fullCode;
+
    // 存储字段代码的定义。
    private String __code;
 
@@ -212,6 +218,33 @@ public class FDataResource3dMaterialTextureUnit
    //============================================================
    public void setMaterialId(long value){
       _materialId = value;
+   }
+
+   //============================================================
+   // <T>判断全代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullCodeChanged(){
+      return !RString.equals(__fullCode, _fullCode);
+   }
+
+   //============================================================
+   // <T>获得全代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullCode(){
+      return _fullCode;
+   }
+
+   //============================================================
+   // <T>设置全代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullCode(String value){
+      _fullCode = value;
    }
 
    //============================================================
@@ -469,6 +502,8 @@ public class FDataResource3dMaterialTextureUnit
             return _guid;
          case "material_id":
             return Long.toString(_materialId);
+         case "full_code":
+            return _fullCode;
          case "code":
             return _code;
          case "texture_id":
@@ -510,6 +545,9 @@ public class FDataResource3dMaterialTextureUnit
             break;
          case "material_id":
             _materialId = RLong.parse(value);
+            break;
+         case "full_code":
+            _fullCode = value;
             break;
          case "code":
             _code = value;
@@ -566,6 +604,10 @@ public class FDataResource3dMaterialTextureUnit
                __materialId = RLong.parse(value);
                _materialId = __materialId;
                break;
+            case "full_code":
+               __fullCode = value;
+               _fullCode = __fullCode;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -614,6 +656,7 @@ public class FDataResource3dMaterialTextureUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("materialId", _materialId);
+      row.set("fullCode", _fullCode);
       row.set("code", _code);
       row.set("textureId", _textureId);
       row.set("textureBitmapId", _textureBitmapId);
@@ -636,6 +679,7 @@ public class FDataResource3dMaterialTextureUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("materialId", RLong.toString(_materialId));
+      map.put("fullCode", _fullCode);
       map.put("code", _code);
       map.put("textureId", RLong.toString(_textureId));
       map.put("textureBitmapId", RLong.toString(_textureBitmapId));

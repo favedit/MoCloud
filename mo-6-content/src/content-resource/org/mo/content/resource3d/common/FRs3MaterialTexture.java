@@ -11,6 +11,9 @@ import org.mo.com.xml.FXmlNode;
 public class FRs3MaterialTexture
       extends FRs3Obejct
 {
+   // 材质
+   protected FRs3Material _material;
+
    // 纹理代码
    protected String _textureCode;
 
@@ -30,6 +33,33 @@ public class FRs3MaterialTexture
    //============================================================
    public FRs3MaterialTexture(){
       _guid = RUuid.makeUniqueId();
+   }
+
+   //============================================================
+   // <T>获得材质。</T>
+   //
+   // @return 材质
+   //============================================================
+   public FRs3Material material(){
+      return _material;
+   }
+
+   //============================================================
+   // <T>设置材质。</T>
+   //
+   // @param material 材质
+   //============================================================
+   public void setMaterial(FRs3Material material){
+      _material = material;
+   }
+
+   //============================================================
+   // <T>获得全代码。</T>
+   //
+   // @return 全代码
+   //============================================================
+   public String fullCode(){
+      return _material.fullCode() + "|" + _textureCode;
    }
 
    //============================================================

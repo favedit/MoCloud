@@ -20,7 +20,7 @@ public class FRs3Resource
    //
    // @param input 输入流
    //============================================================
-   public void unserialize(IDataInput input){
+   public void importData(IDataInput input){
       //_guid = input.readString();
       _code = input.readString();
    }
@@ -31,7 +31,7 @@ public class FRs3Resource
    // @param fileName 文件名称
    //============================================================
    public void loadStream(IDataInput inputName){
-      unserialize(inputName);
+      importData(inputName);
    }
 
    //============================================================
@@ -41,7 +41,7 @@ public class FRs3Resource
    //============================================================
    public void loadFile(String fileName){
       try(FByteFile file = new FByteFile(fileName)){
-         unserialize(file);
+         importData(file);
       }
    }
 

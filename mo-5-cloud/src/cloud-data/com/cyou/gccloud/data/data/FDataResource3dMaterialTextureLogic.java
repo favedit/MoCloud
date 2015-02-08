@@ -44,6 +44,9 @@ public class FDataResource3dMaterialTextureLogic
    // 字段材质编号的定义。
    public final static SLogicFieldInfo MATERIAL_ID = new SLogicFieldInfo("MATERIAL_ID");
 
+   // 字段全代码的定义。
+   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
@@ -69,7 +72,7 @@ public class FDataResource3dMaterialTextureLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,MATERIAL_ID,CODE,TEXTURE_ID,TEXTURE_BITMAP_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,MATERIAL_ID,FULL_CODE,CODE,TEXTURE_ID,TEXTURE_BITMAP_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D材质纹理表逻辑单元。</T>
@@ -612,6 +615,7 @@ public class FDataResource3dMaterialTextureLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`MATERIAL_ID`");
+      cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
       cmd.append(",`TEXTURE_ID`");
       cmd.append(",`TEXTURE_BITMAP_ID`");
@@ -636,6 +640,15 @@ public class FDataResource3dMaterialTextureLogic
          cmd.append("NULL");
       }else{
          cmd.append(materialId);
+      }
+      cmd.append(',');
+      String fullCode = unit.fullCode();
+      if(RString.isEmpty(fullCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(fullCode));
+         cmd.append('\'');
       }
       cmd.append(',');
       String code = unit.code();
@@ -750,6 +763,17 @@ public class FDataResource3dMaterialTextureLogic
             cmd.append("NULL");
          }else{
             cmd.append(materialId);
+         }
+      }
+      if(unit.isFullCodeChanged()){
+         cmd.append(",`FULL_CODE`=");
+         String fullCode = unit.fullCode();
+         if(RString.isEmpty(fullCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(fullCode));
+            cmd.append('\'');
          }
       }
       if(unit.isCodeChanged()){

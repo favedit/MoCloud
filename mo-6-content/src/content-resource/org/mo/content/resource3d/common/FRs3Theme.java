@@ -112,6 +112,7 @@ public class FRs3Theme
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Material")){
                   FRs3Material material = new FRs3Material();
+                  material.setTheme(this);
                   material.importConfig(xchild);
                   _materials.push(material);
                }

@@ -13,6 +13,9 @@ import org.mo.com.xml.FXmlNode;
 public class FRs3Material
       extends FRs3Obejct
 {
+   // 主题
+   protected FRs3Theme _theme;
+
    // 分组唯一代码
    protected String _groupGuid;
 
@@ -75,6 +78,33 @@ public class FRs3Material
    //============================================================
    public FRs3Material(){
       _guid = RUuid.makeUniqueId();
+   }
+
+   //============================================================
+   // <T>获得主题。</T>
+   //
+   // @return 主题
+   //============================================================
+   public FRs3Theme theme(){
+      return _theme;
+   }
+
+   //============================================================
+   // <T>设置主题。</T>
+   //
+   // @param theme 主题
+   //============================================================
+   public void setTheme(FRs3Theme theme){
+      _theme = theme;
+   }
+
+   //============================================================
+   // <T>获得全代码。</T>
+   //
+   // @return 全代码
+   //============================================================
+   public String fullCode(){
+      return _theme.code() + "|" + _code;
    }
 
    //============================================================
@@ -437,6 +467,7 @@ public class FRs3Material
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Texture")){
                   FRs3MaterialTexture texture = new FRs3MaterialTexture();
+                  texture.setMaterial(this);
                   texture.importConfig(xchild);
                   _textures.push(texture);
                }

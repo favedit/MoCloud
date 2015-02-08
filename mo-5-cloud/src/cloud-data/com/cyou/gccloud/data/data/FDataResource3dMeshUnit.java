@@ -53,6 +53,24 @@ public class FDataResource3dMeshUnit
    // 字段名称的定义。
    protected String _label;
 
+   // 存储字段轮廓最小点的定义。
+   private String __outlineMin;
+
+   // 字段轮廓最小点的定义。
+   protected String _outlineMin;
+
+   // 存储字段轮廓最大点的定义。
+   private String __outlineMax;
+
+   // 字段轮廓最大点的定义。
+   protected String _outlineMax;
+
+   // 存储字段内容的定义。
+   private String __content;
+
+   // 字段内容的定义。
+   protected String _content;
+
    // 存储字段备注的定义。
    private String __note;
 
@@ -252,6 +270,87 @@ public class FDataResource3dMeshUnit
    }
 
    //============================================================
+   // <T>判断轮廓最小点的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isOutlineMinChanged(){
+      return !RString.equals(__outlineMin, _outlineMin);
+   }
+
+   //============================================================
+   // <T>获得轮廓最小点的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String outlineMin(){
+      return _outlineMin;
+   }
+
+   //============================================================
+   // <T>设置轮廓最小点的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setOutlineMin(String value){
+      _outlineMin = value;
+   }
+
+   //============================================================
+   // <T>判断轮廓最大点的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isOutlineMaxChanged(){
+      return !RString.equals(__outlineMax, _outlineMax);
+   }
+
+   //============================================================
+   // <T>获得轮廓最大点的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String outlineMax(){
+      return _outlineMax;
+   }
+
+   //============================================================
+   // <T>设置轮廓最大点的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setOutlineMax(String value){
+      _outlineMax = value;
+   }
+
+   //============================================================
+   // <T>判断内容的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isContentChanged(){
+      return !RString.equals(__content, _content);
+   }
+
+   //============================================================
+   // <T>获得内容的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String content(){
+      return _content;
+   }
+
+   //============================================================
+   // <T>设置内容的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setContent(String value){
+      _content = value;
+   }
+
+   //============================================================
    // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
@@ -407,6 +506,12 @@ public class FDataResource3dMeshUnit
             return _code;
          case "label":
             return _label;
+         case "outline_min":
+            return _outlineMin;
+         case "outline_max":
+            return _outlineMax;
+         case "content":
+            return _content;
          case "note":
             return _note;
          case "create_user_id":
@@ -448,6 +553,15 @@ public class FDataResource3dMeshUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "outline_min":
+            _outlineMin = value;
+            break;
+         case "outline_max":
+            _outlineMax = value;
+            break;
+         case "content":
+            _content = value;
             break;
          case "note":
             _note = value;
@@ -503,6 +617,18 @@ public class FDataResource3dMeshUnit
                __label = value;
                _label = __label;
                break;
+            case "outline_min":
+               __outlineMin = value;
+               _outlineMin = __outlineMin;
+               break;
+            case "outline_max":
+               __outlineMax = value;
+               _outlineMax = __outlineMax;
+               break;
+            case "content":
+               __content = value;
+               _content = __content;
+               break;
             case "note":
                __note = value;
                _note = __note;
@@ -541,6 +667,9 @@ public class FDataResource3dMeshUnit
       row.set("fullCode", _fullCode);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("outlineMin", _outlineMin);
+      row.set("outlineMax", _outlineMax);
+      row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -562,6 +691,9 @@ public class FDataResource3dMeshUnit
       map.put("fullCode", _fullCode);
       map.put("code", _code);
       map.put("label", _label);
+      map.put("outlineMin", _outlineMin);
+      map.put("outlineMax", _outlineMax);
+      map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

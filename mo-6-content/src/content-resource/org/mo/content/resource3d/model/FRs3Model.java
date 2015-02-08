@@ -113,14 +113,14 @@ public class FRs3Model
    // @param input 输入流
    //============================================================
    @Override
-   public void unserialize(IDataInput input){
-      super.unserialize(input);
+   public void importData(IDataInput input){
+      super.importData(input);
       // 读取网格集合
       int meshCount = input.readInt32();
       for(int n = 0; n < meshCount; n++){
          FRs3ModelMesh mesh = new FRs3ModelMesh();
          mesh.setModel(this);
-         mesh.unserialize(input);
+         mesh.importData(input);
          meshs().push(mesh);
       }
    }

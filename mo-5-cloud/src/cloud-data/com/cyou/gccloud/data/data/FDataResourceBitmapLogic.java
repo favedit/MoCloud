@@ -41,6 +41,9 @@ public class FDataResourceBitmapLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段全代码的定义。
+   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
@@ -63,7 +66,7 @@ public class FDataResourceBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,FULL_CODE,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源位图表逻辑单元。</T>
@@ -605,6 +608,7 @@ public class FDataResourceBitmapLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`NOTE`");
@@ -622,6 +626,15 @@ public class FDataResourceBitmapLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      String fullCode = unit.fullCode();
+      if(RString.isEmpty(fullCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(fullCode));
+         cmd.append('\'');
+      }
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -723,6 +736,17 @@ public class FDataResourceBitmapLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isFullCodeChanged()){
+         cmd.append(",`FULL_CODE`=");
+         String fullCode = unit.fullCode();
+         if(RString.isEmpty(fullCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(fullCode));
+            cmd.append('\'');
+         }
+      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();

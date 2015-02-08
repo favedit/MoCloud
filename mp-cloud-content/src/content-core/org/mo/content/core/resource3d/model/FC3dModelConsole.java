@@ -80,7 +80,7 @@ public class FC3dModelConsole
          FDataResource3dMeshUnit meshUnit = modelMeshUnit.mesh();
          // 创建资源网格
          FRs3ModelMesh mesh = new FRs3ModelMesh();
-         mesh.setGuid(meshUnit.guid());
+         mesh.loadUnit(meshUnit);
          // 获得数据流信息
          FDataResource3dMeshStreamLogic meshStreamLogic = logicContext.findLogic(FDataResource3dMeshStreamLogic.class);
          FLogicDataset<FDataResource3dMeshStreamUnit> meshStreamUnits = meshStreamLogic.fetch(FDataResource3dMeshStreamLogic.MESH_ID + "=" + meshUnit.ouid());

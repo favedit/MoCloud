@@ -3,5 +3,8 @@
   <FieldString _uuid="4db98db8-7735-4e81-b765-bf7845686984" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="18e7edba-48fc-4916-beea-1b2c69e37d1b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="28e257a6-eb8b-4b5c-96f0-9fbb011fdaff" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="846783dd-87bc-46e4-8302-8a3343ca9334" name="outline_min" label="M#12cn15轮廓最小点" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OUTLINE_MIN" data_size="80" />
+  <FieldString _uuid="19c9a0ad-04f8-4cfa-b9b1-06475415feb8" name="outline_max" label="M#12cn15轮廓最大点" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OUTLINE_MAX" data_size="80" />
+  <FieldContent _uuid="eee37268-28b0-48f8-aca3-f582d0ccc445" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
   <FieldTemplate _uuid="8e1f7f25-c342-49d1-b7db-9b6e6a54c2f2" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

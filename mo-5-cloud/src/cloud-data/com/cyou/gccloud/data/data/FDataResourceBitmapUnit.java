@@ -35,6 +35,12 @@ public class FDataResourceBitmapUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段全代码的定义。
+   private String __fullCode;
+
+   // 字段全代码的定义。
+   protected String _fullCode;
+
    // 存储字段代码的定义。
    private String __code;
 
@@ -162,6 +168,33 @@ public class FDataResourceBitmapUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断全代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullCodeChanged(){
+      return !RString.equals(__fullCode, _fullCode);
+   }
+
+   //============================================================
+   // <T>获得全代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullCode(){
+      return _fullCode;
+   }
+
+   //============================================================
+   // <T>设置全代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullCode(String value){
+      _fullCode = value;
    }
 
    //============================================================
@@ -368,6 +401,8 @@ public class FDataResourceBitmapUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "full_code":
+            return _fullCode;
          case "code":
             return _code;
          case "label":
@@ -404,6 +439,9 @@ public class FDataResourceBitmapUnit
             break;
          case "guid":
             _guid = value;
+            break;
+         case "full_code":
+            _fullCode = value;
             break;
          case "code":
             _code = value;
@@ -453,6 +491,10 @@ public class FDataResourceBitmapUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "full_code":
+               __fullCode = value;
+               _fullCode = __fullCode;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -496,6 +538,7 @@ public class FDataResourceBitmapUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("fullCode", _fullCode);
       row.set("code", _code);
       row.set("label", _label);
       row.set("note", _note);
@@ -516,6 +559,7 @@ public class FDataResourceBitmapUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("fullCode", _fullCode);
       map.put("code", _code);
       map.put("label", _label);
       map.put("note", _note);

@@ -106,9 +106,9 @@ public class FRs3Animation
    //
    // @param input 输入流
    //============================================================
-   @Override
-   public void unserialize(IDataInput input){
-   }
+   //   @Override
+   //   public void importData(IDataInput input){
+   //   }
 
    //============================================================
    // <T>从数据单元中导入配置。</T>
@@ -144,6 +144,7 @@ public class FRs3Animation
    //
    // @param input 输入流
    //============================================================
+   @Override
    public void importData(IDataInput input){
       // 读取属性
       _code = input.readString();

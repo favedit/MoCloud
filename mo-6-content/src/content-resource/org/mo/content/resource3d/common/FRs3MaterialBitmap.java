@@ -30,6 +30,6 @@ public class FRs3MaterialBitmap
    // @param input 输入流
    //============================================================
    @Override
-   public void unserialize(IDataInput input){
+   public void importData(IDataInput input){
    }
 }

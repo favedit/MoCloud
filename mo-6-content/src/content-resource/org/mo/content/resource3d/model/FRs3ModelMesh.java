@@ -1,35 +1,27 @@
 package org.mo.content.resource3d.model;
 
+import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.content.resource3d.common.FRs3Obejct;
 import org.mo.content.resource3d.common.FRs3Stream;
-import org.mo.content.resource3d.common.FRs3Track;
+import org.mo.content.resource3d.common.SFloatOutline3;
 
 //============================================================
 // <T>资源模型网格。</T>
 //============================================================
 public class FRs3ModelMesh
-      extends FObject
+      extends FRs3Obejct
 {
    // 模型
    protected FRs3Model _model;
 
-   // 唯一编号
-   protected String _guid;
-
-   // 代码
-   protected String _code;
+   // 轮廓
+   protected SFloatOutline3 _outline = new SFloatOutline3();
 
    // 数据流集合
    protected FObjects<FRs3Stream> _streams = new FObjects<FRs3Stream>(FRs3Stream.class);
-
-   // 骨头集合
-   protected FObjects<FRs3ModelMeshBone> _bones = new FObjects<FRs3ModelMeshBone>(FRs3ModelMeshBone.class);
-
-   // 跟踪集合
-   protected FObjects<FRs3Track> _tracks = new FObjects<FRs3Track>(FRs3Track.class);
 
    //============================================================
    // <T>构造资源模型网格。</T>
@@ -56,39 +48,21 @@ public class FRs3ModelMesh
    }
 
    //============================================================
-   // <T>获得唯一编号。</T>
-   //
-   // @return 唯一编号
-   //============================================================
-   public String _guid(){
-      return _guid;
-   }
-
-   //============================================================
-   // <T>设置唯一编号。</T>
-   //
-   // @param guid 唯一编号
-   //============================================================
-   public void setGuid(String guid){
-      _guid = guid;
-   }
-
-   //============================================================
-   // <T>获得代码。</T>
-   //
-   // @return 代码
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
    // <T>获得全代码。</T>
    //
    // @return 全代码
    //============================================================
    public String fullCode(){
       return _model.code() + "|" + _code;
+   }
+
+   //============================================================
+   // <T>获得轮廓。</T>
+   //
+   // @return 轮廓
+   //============================================================
+   public SFloatOutline3 outline(){
+      return _outline;
    }
 
    //============================================================
@@ -101,31 +75,16 @@ public class FRs3ModelMesh
    }
 
    //============================================================
-   // <T>获得骨头集合。</T>
-   //
-   // @return 骨头集合
-   //============================================================
-   public FObjects<FRs3ModelMeshBone> bones(){
-      return _bones;
-   }
-
-   //============================================================
-   // <T>获得跟踪集合。</T>
-   //
-   // @return 跟踪集合
-   //============================================================
-   public FObjects<FRs3Track> tracks(){
-      return _tracks;
-   }
-
-   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
    //============================================================
+   @Override
    public void serialize(IDataOutput output){
       // 输出属性
-      output.writeString(_guid);
+      super.serialize(output);
+      // 输出轮廓
+      _outline.serialize(output);
       // 输出数据流集合
       int streamCount = _streams.count();
       output.writeInt8((byte)streamCount);
@@ -133,14 +92,6 @@ public class FRs3ModelMesh
          FRs3Stream stream = _streams.get(i);
          stream.serialize(output);
       }
-      //      // 输出跟踪集合
-      //      int trackCount = _tracks.count();
-      //      output.writeInt8((byte)trackCount);
-      //      for(int i = 0; i < trackCount; i++){
-      //         FRs3Track track = _tracks.get(i);
-      //         output.write(track.data(), 0, track.data().length);
-      //         //track.serialize(output);
-      //      }
    }
 
    //============================================================
@@ -148,29 +99,45 @@ public class FRs3ModelMesh
    //
    // @param input 输入流
    //============================================================
-   public void unserialize(IDataInput input){
+   public void importData(IDataInput input){
       // 读取属性
       _code = input.readString();
+      // 读取轮廓
+      _outline.unserialize(input);
       // 读取数据流集合
       int count = input.readInt32();
       for(int n = 0; n < count; n++){
          FRs3ModelStream stream = new FRs3ModelStream();
          stream.setMesh(this);
-         stream.unserialize(input);
+         stream.importData(input);
          _streams.push(stream);
       }
-      //      // 读取骨头集合
-      //      int boneCount = input.readInt32();
-      //      for(int n = 0; n < boneCount; n++){
-      //         FRs3ModelMeshBone bone = new FRs3ModelMeshBone();
-      //         bone.unserialize(input);
-      //         _bones.push(bone);
-      //      }
-      //      // 读取跟踪
-      //      if(input.readBoolean()){
-      //         FRs3Track track = new FRs3Track();
-      //         track.unserialize(input);
-      //         _tracks.push(track);
-      //      }
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dMeshUnit unit){
+      _ouid = unit.ouid();
+      _guid = unit.guid();
+      _code = unit.code();
+      _label = unit.label();
+      _outline.min.parse(unit.outlineMin());
+      _outline.max.parse(unit.outlineMax());
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FDataResource3dMeshUnit unit){
+      unit.setFullCode(fullCode());
+      unit.setCode(_code);
+      unit.setLabel(_label);
+      unit.setOutlineMin(_outline.min.toString());
+      unit.setOutlineMax(_outline.max.toString());
    }
 }

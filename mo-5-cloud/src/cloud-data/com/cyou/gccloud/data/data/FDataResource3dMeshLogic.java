@@ -50,6 +50,15 @@ public class FDataResource3dMeshLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段轮廓最小点的定义。
+   public final static SLogicFieldInfo OUTLINE_MIN = new SLogicFieldInfo("OUTLINE_MIN");
+
+   // 字段轮廓最大点的定义。
+   public final static SLogicFieldInfo OUTLINE_MAX = new SLogicFieldInfo("OUTLINE_MAX");
+
+   // 字段内容的定义。
+   public final static SLogicFieldInfo CONTENT = new SLogicFieldInfo("CONTENT");
+
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
@@ -66,7 +75,7 @@ public class FDataResource3dMeshLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,FULL_CODE,CODE,LABEL,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "OUID,OVLD,GUID,FULL_CODE,CODE,LABEL,OUTLINE_MIN,OUTLINE_MAX,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
 
    //============================================================
    // <T>构造资源3D网格表逻辑单元。</T>
@@ -611,6 +620,9 @@ public class FDataResource3dMeshLogic
       cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`OUTLINE_MIN`");
+      cmd.append(",`OUTLINE_MAX`");
+      cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -651,6 +663,33 @@ public class FDataResource3dMeshLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String outlineMin = unit.outlineMin();
+      if(RString.isEmpty(outlineMin)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(outlineMin));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String outlineMax = unit.outlineMax();
+      if(RString.isEmpty(outlineMax)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(outlineMax));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String content = unit.content();
+      if(RString.isEmpty(content)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(content));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -766,6 +805,39 @@ public class FDataResource3dMeshLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isOutlineMinChanged()){
+         cmd.append(",`OUTLINE_MIN`=");
+         String outlineMin = unit.outlineMin();
+         if(RString.isEmpty(outlineMin)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(outlineMin));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isOutlineMaxChanged()){
+         cmd.append(",`OUTLINE_MAX`=");
+         String outlineMax = unit.outlineMax();
+         if(RString.isEmpty(outlineMax)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(outlineMax));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isContentChanged()){
+         cmd.append(",`CONTENT`=");
+         String content = unit.content();
+         if(RString.isEmpty(content)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(content));
             cmd.append('\'');
          }
       }

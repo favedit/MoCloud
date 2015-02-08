@@ -82,7 +82,8 @@ public class FRs3TextureConsole
          // 新建位图
          FDataResourceBitmapLogic bitmapLogic = logicContext.findLogic(FDataResourceBitmapLogic.class);
          FDataResourceBitmapUnit bitmapUnit = bitmapLogic.doPrepare();
-         bitmapUnit.setCode(textureCode + " - " + fileCode);
+         bitmapUnit.setFullCode(textureCode + "|" + fileCode);
+         bitmapUnit.setCode(fileCode);
          bitmapLogic.doInsert(bitmapUnit);
          // 新建位图图片
          FDataResourceBitmapImageLogic imageLogic = logicContext.findLogic(FDataResourceBitmapImageLogic.class);

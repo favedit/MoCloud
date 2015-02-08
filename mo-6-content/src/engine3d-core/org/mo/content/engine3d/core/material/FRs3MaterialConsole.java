@@ -83,6 +83,7 @@ public class FRs3MaterialConsole
       FDataResource3dMaterialUnit materialUnit = materialLogic.doPrepare();
       materialUnit.setThemeId(themeId);
       materialUnit.setMaterialGroupId(materialGroupId);
+      materialUnit.setFullCode(material.fullCode());
       materialUnit.setCode(material.code());
       materialUnit.setContent(material.toXml());
       materialLogic.doInsert(materialUnit);
@@ -114,6 +115,7 @@ public class FRs3MaterialConsole
       FDataResource3dMaterialTextureLogic materialTextureLogic = logicContext.findLogic(FDataResource3dMaterialTextureLogic.class);
       FDataResource3dMaterialTextureUnit materialTextureUnit = materialTextureLogic.doPrepare();
       materialTextureUnit.setMaterialId(materialId);
+      materialTextureUnit.setFullCode(materialTexture.fullCode());
       materialTextureUnit.setCode(materialTexture.code());
       materialTextureUnit.setTextureId(textureUnit.ouid());
       materialTextureUnit.setTextureBitmapId(textureBitmapUnit.ouid());
