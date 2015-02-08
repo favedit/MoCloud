@@ -9,7 +9,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源模型。</T>
 //============================================================
 public class FRs3MaterialTexture
-      extends FRs3Obejct
+      extends FRs3Object
 {
    // 材质
    protected FRs3Material _material;

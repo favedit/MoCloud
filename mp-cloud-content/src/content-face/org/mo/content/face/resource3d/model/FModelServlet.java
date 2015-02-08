@@ -21,13 +21,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理。</T>
 //============================================================
-public class FStorageServlet
+public class FModelServlet
       extends FObject
       implements
-         IStorageServlet
+         IModelServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FStorageServlet.class);
+   private static ILogger _logger = RLogger.find(FModelServlet.class);
 
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;

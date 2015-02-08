@@ -2,11 +2,13 @@ package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 
 //============================================================
 // <T>资源对象。</T>
 //============================================================
-public class FRs3Obejct
+public class FRs3Object
       extends FObject
 {
    // 编号
@@ -24,7 +26,7 @@ public class FRs3Obejct
    //============================================================
    // <T>构造资源对象。</T>
    //============================================================
-   public FRs3Obejct(){
+   public FRs3Object(){
    }
 
    //============================================================
@@ -51,6 +53,18 @@ public class FRs3Obejct
    // @return 唯一编号
    //============================================================
    public String guid(){
+      return _guid;
+   }
+
+   //============================================================
+   // <T>生成唯一编号。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public String makeGuid(){
+      if(RString.isEmpty(_guid)){
+         _guid = RUuid.makeUniqueId();
+      }
       return _guid;
    }
 

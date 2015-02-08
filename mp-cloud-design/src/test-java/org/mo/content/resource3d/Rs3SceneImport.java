@@ -1,15 +1,14 @@
 package org.mo.content.resource3d;
 
-import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
-import org.mo.content.engine3d.core.model.IRs3ModelConsole;
+import org.mo.content.engine3d.core.scene.IRs3SceneConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 
-public class RRs3ModelImport
+public class Rs3SceneImport
 {
    //============================================================
    // <T>导入处理。</T>
@@ -18,22 +17,13 @@ public class RRs3ModelImport
       // 设置数据
       FStrings filePaths = new FStrings();
       filePaths.push("pvw.show.item.001");
-      filePaths.push("pvw.show.item.009");
-      filePaths.push("pvw.sc.car.01.001");
-      filePaths.push("pvw.show.skeleton.001");
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3ModelConsole modelConsole = RAop.find(IRs3ModelConsole.class);
+         IRs3SceneConsole sceneConsole = RAop.find(IRs3SceneConsole.class);
          for(String fileName : filePaths){
-            String fullName = RRs3Utility.RootPath + "/MoScript/source/assets/model/" + fileName;
-            modelConsole.importModel(logicContext, fullName + ".msh");
-            if(RFile.exists(fullName + ".skt")){
-               modelConsole.importSkeleton(logicContext, fullName + ".skt");
-            }
-            if(RFile.exists(fullName + ".anm")){
-               modelConsole.importAnimation(logicContext, fullName + ".anm");
-            }
+            String path = RRs3Utility.RootPath + "/MoScript/source/assets/scene/" + fileName + ".ser";
+            sceneConsole.importScene(logicContext, path);
          }
       }
    }
@@ -48,7 +38,7 @@ public class RRs3ModelImport
       try{
          importProcess();
       }catch(Exception e){
-         RLogger.find(RRs3ModelImport.class).error(null, "main", e);
+         RLogger.find(Rs3SceneImport.class).error(null, "main", e);
       }
       RAop.release();
    }

@@ -9,7 +9,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源模型。</T>
 //============================================================
 public class FRs3Theme
-      extends FRs3Obejct
+      extends FRs3Object
 {
    // 网格集合
    protected FObjects<FRs3Material> _materials = new FObjects<FRs3Material>(FRs3Material.class);

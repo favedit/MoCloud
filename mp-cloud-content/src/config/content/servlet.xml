@@ -19,11 +19,11 @@
    <!-- ============================================================ -->
    <WebServlet
          name  = 'cloud.content.model'
-         face  = 'org.mo.content.face.resource3d.model.IStorageServlet'/>
+         face  = 'org.mo.content.face.resource3d.model.IModelServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.model.IStorageServlet'
-         class = 'org.mo.content.face.resource3d.model.FStorageServlet'
+         face  = 'org.mo.content.face.resource3d.model.IModelServlet'
+         class = 'org.mo.content.face.resource3d.model.FModelServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
@@ -36,6 +36,18 @@
    <Component
          face  = 'org.mo.content.face.resource3d.template.ITemplateServlet'
          class = 'org.mo.content.face.resource3d.template.FTemplateServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：场景获取处理                                           -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.scene'
+         face  = 'org.mo.content.face.resource3d.scene.ISceneServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.scene.ISceneServlet'
+         class = 'org.mo.content.face.resource3d.scene.FSceneServlet'
          scope = 'global'/>
 
 </Config>

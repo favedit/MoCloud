@@ -26,4 +26,16 @@
          class = 'org.mo.content.face.resource3d.template.FTemplateService'
          scope = 'global'/>
 
+   <!-- ==================================================== -->
+   <!-- 设计：资源3D场景数据服务                             -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content.scene'
+         face  = 'org.mo.content.face.resource3d.scene.ISceneService'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.scene.ISceneService'
+         class = 'org.mo.content.face.resource3d.scene.FSceneService'
+         scope = 'global'/>
+
 </Config>

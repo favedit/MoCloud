@@ -7,7 +7,7 @@ import org.mo.com.io.IDataInput;
 // <T>资源基类。</T>
 //============================================================
 public class FRs3Resource
-      extends FRs3Obejct
+      extends FRs3Object
 {
    //============================================================
    // <T>构造资源基类。</T>

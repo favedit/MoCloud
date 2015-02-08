@@ -8,21 +8,18 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
-// <T>三维浮点颜色。</T>
+// <T>三维浮点坐标。</T>
 //============================================================
-public class SFloatColor4
+public class SFloatVector3
 {
-   // 红色
-   public float red;
+   // X坐标
+   public float x;
 
-   // 绿色
-   public float green;
+   // Y坐标
+   public float y;
 
-   // 蓝色
-   public float blue;
-
-   // 强度
-   public float power;
+   // Z坐标
+   public float z;
 
    //============================================================
    // <T>序列化数据到输出流。</T>
@@ -30,10 +27,9 @@ public class SFloatColor4
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      output.writeFloat(red);
-      output.writeFloat(green);
-      output.writeFloat(blue);
-      output.writeFloat(power);
+      output.writeFloat(x);
+      output.writeFloat(y);
+      output.writeFloat(z);
    }
 
    //============================================================
@@ -42,10 +38,9 @@ public class SFloatColor4
    // @param input 输入流
    //============================================================
    public void unserialize(IDataInput input){
-      red = input.readFloat();
-      green = input.readFloat();
-      blue = input.readFloat();
-      power = input.readFloat();
+      x = input.readFloat();
+      y = input.readFloat();
+      z = input.readFloat();
    }
 
    //============================================================
@@ -54,10 +49,9 @@ public class SFloatColor4
    // @param xconfig 配置信息
    //============================================================
    public void loadConfig(FXmlNode xconfig){
-      red = xconfig.getFloat("r");
-      green = xconfig.getFloat("g");
-      blue = xconfig.getFloat("b");
-      power = xconfig.getFloat("power");
+      x = xconfig.getFloat("x");
+      y = xconfig.getFloat("y");
+      z = xconfig.getFloat("z");
    }
 
    //============================================================
@@ -66,10 +60,9 @@ public class SFloatColor4
    // @param xconfig 配置信息
    //============================================================
    public void saveConfig(FXmlNode xconfig){
-      xconfig.set("r", red);
-      xconfig.set("g", green);
-      xconfig.set("b", blue);
-      xconfig.set("power", power);
+      xconfig.set("x", x);
+      xconfig.set("y", y);
+      xconfig.set("z", z);
    }
 
    //============================================================
@@ -78,10 +71,9 @@ public class SFloatColor4
    // @param xconfig 配置信息
    //============================================================
    public void importConfig(FXmlNode xconfig){
-      red = xconfig.getFloat("r");
-      green = xconfig.getFloat("g");
-      blue = xconfig.getFloat("b");
-      power = xconfig.getFloat("power", 1.0f);
+      x = xconfig.getFloat("x");
+      y = xconfig.getFloat("y");
+      z = xconfig.getFloat("z");
    }
 
    //============================================================
@@ -91,13 +83,12 @@ public class SFloatColor4
    //============================================================
    public void parse(String value){
       String[] items = RString.split(value, ',');
-      if(items.length != 4){
+      if(items.length != 3){
          throw new FFatalError("Parse failure.");
       }
-      red = (float)RDouble.parse(items[0]);
-      green = (float)RDouble.parse(items[1]);
-      blue = (float)RDouble.parse(items[2]);
-      power = (float)RDouble.parse(items[3]);
+      x = (float)RDouble.parse(items[0]);
+      y = (float)RDouble.parse(items[1]);
+      z = (float)RDouble.parse(items[2]);
    }
 
    //============================================================
@@ -107,6 +98,6 @@ public class SFloatColor4
    //============================================================
    @Override
    public String toString(){
-      return red + "," + green + "," + blue + "," + power;
+      return x + "," + y + "," + z;
    }
 }

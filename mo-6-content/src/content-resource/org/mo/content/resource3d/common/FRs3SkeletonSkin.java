@@ -11,7 +11,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源3D蒙皮。</T>
 //============================================================
 public class FRs3SkeletonSkin
-      extends FRs3Obejct
+      extends FRs3Object
 {
    // 网格唯一编号
    protected String _meshGuid;

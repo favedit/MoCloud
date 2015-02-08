@@ -11,13 +11,10 @@ import org.mo.eng.data.IDatabaseConsole;
 public class RRs3TextureImport
 {
    //============================================================
-   // <T>主函数。</T>
+   // <T>导入处理。</T>
    //============================================================
-   public static void main(String[] args) throws Exception{
-      String configPath = RRs3Utility.RootPath + "/MoCloud";
-      RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
-
+   public static void importProcess() throws Exception{
+      // 设置数据
       FStrings filePaths = new FStrings();
       filePaths.push("pvw.show.001.01");
       filePaths.push("pvw.show.009.01");
@@ -27,7 +24,7 @@ public class RRs3TextureImport
       filePaths.push("pvw.show.013.01");
       filePaths.push("pvw.show.013.02");
       filePaths.push("pvw.show.013.03");
-
+      // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3TextureConsole textureConsole = RAop.find(IRs3TextureConsole.class);
@@ -35,10 +32,21 @@ public class RRs3TextureImport
             String path = RRs3Utility.RootPath + "/MoScript/source/assets/texture/" + fileName;
             textureConsole.importTexture(logicContext, path);
          }
+      }
+   }
+
+   //============================================================
+   // <T>主函数。</T>
+   //============================================================
+   public static void main(String[] args) throws Exception{
+      String configPath = RRs3Utility.RootPath + "/MoCloud";
+      RAop.configConsole().defineCollection().attributes().set("application", configPath);
+      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
+      try{
+         importProcess();
       }catch(Exception e){
          RLogger.find(RRs3TextureImport.class).error(null, "main", e);
       }
-
       RAop.release();
    }
 }

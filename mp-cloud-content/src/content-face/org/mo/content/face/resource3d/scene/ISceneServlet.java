@@ -1,4 +1,4 @@
-package org.mo.content.face.resource3d.model;
+package org.mo.content.face.resource3d.scene;
 
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -8,7 +8,7 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理接口。</T>
 //============================================================
-public interface IStorageServlet
+public interface ISceneServlet
 {
    //============================================================
    // <T>逻辑处理。</T>

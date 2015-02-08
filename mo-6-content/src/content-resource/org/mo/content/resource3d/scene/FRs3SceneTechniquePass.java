@@ -1,42 +1,33 @@
-package org.mo.content.resource3d.common;
+package org.mo.content.resource3d.scene;
 
-import com.cyou.gccloud.data.data.FDataResource3dMaterialGroupUnit;
+import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource3d.common.FRs3Object;
+import org.mo.content.resource3d.common.SIntSize2;
 
 //============================================================
-// <T>资源模板。</T>
+// <T>场景技术过程。</T>
 //============================================================
-public class FRs3MaterialGroup
+public class FRs3SceneTechniquePass
       extends FRs3Object
 {
-   // 主题
-   protected FRs3Theme _theme;
+   // 目标尺寸
+   protected SIntSize2 _targetSize = new SIntSize2();
 
    //============================================================
-   // <T>构造资源模型。</T>
+   // <T>构造场景技术过程。</T>
    //============================================================
-   public FRs3MaterialGroup(){
-      _guid = RUuid.makeUniqueId();
+   public FRs3SceneTechniquePass(){
    }
 
    //============================================================
-   // <T>获得主题。</T>
+   // <T>获得目标尺寸。</T>
    //
-   // @return 主题
+   // @param SIntSize2 目标尺寸
    //============================================================
-   public FRs3Theme theme(){
-      return _theme;
-   }
-
-   //============================================================
-   // <T>设置主题。</T>
-   //
-   // @param theme 主题
-   //============================================================
-   public void setTheme(FRs3Theme theme){
-      _theme = theme;
+   public SIntSize2 targetSize(){
+      return _targetSize;
    }
 
    //============================================================
@@ -46,7 +37,8 @@ public class FRs3MaterialGroup
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      super.serialize(output);
+      output.writeString(_code);
+      _targetSize.serialize(output);
    }
 
    //============================================================
@@ -58,6 +50,7 @@ public class FRs3MaterialGroup
       // 读取属性
       _guid = xconfig.get("guid");
       _code = xconfig.get("code");
+      _targetSize.parse(xconfig.get("target_size"));
    }
 
    //============================================================
@@ -67,28 +60,19 @@ public class FRs3MaterialGroup
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
-      xconfig.set("guid", _guid);
+      xconfig.set("guid", makeGuid());
       xconfig.set("code", _code);
+      xconfig.set("target_size", _targetSize);
    }
 
    //============================================================
-   // <T>从数据单元中导入配置。</T>
+   // <T>从输入流反序列化数据。</T>
    //
-   // @param unit 数据单元
+   // @param input 输入流
    //============================================================
-   public void loadUnit(FDataResource3dMaterialGroupUnit unit){
-      // 加载属性
-      _guid = unit.guid();
-      _code = unit.code();
-   }
-
-   //============================================================
-   // <T>从配置信息中导入配置。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   public void importConfig(FXmlNode xconfig){
+   public void importData(IDataInput input){
       // 读取属性
-      _code = xconfig.get("code");
+      _code = input.readString();
+      _targetSize.unserialize(input);
    }
 }

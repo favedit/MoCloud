@@ -10,7 +10,7 @@ import org.mo.com.lang.FObjects;
 // <T>资源精灵。</T>
 //============================================================
 public class FRs3Track
-      extends FRs3Obejct
+      extends FRs3Object
 {
    protected int _boneIndex;
 

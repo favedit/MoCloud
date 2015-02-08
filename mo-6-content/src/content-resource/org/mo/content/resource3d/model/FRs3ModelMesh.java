@@ -4,7 +4,7 @@ import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.content.resource3d.common.FRs3Obejct;
+import org.mo.content.resource3d.common.FRs3Object;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.common.SFloatOutline3;
 
@@ -12,7 +12,7 @@ import org.mo.content.resource3d.common.SFloatOutline3;
 // <T>资源模型网格。</T>
 //============================================================
 public class FRs3ModelMesh
-      extends FRs3Obejct
+      extends FRs3Object
 {
    // 模型
    protected FRs3Model _model;

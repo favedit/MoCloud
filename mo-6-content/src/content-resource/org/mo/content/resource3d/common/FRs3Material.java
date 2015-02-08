@@ -11,7 +11,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源模型。</T>
 //============================================================
 public class FRs3Material
-      extends FRs3Obejct
+      extends FRs3Object
 {
    // 主题
    protected FRs3Theme _theme;
@@ -360,6 +360,8 @@ public class FRs3Material
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
+      xconfig.set("guid", makeGuid());
+      xconfig.set("code", _code);
       xconfig.set("effect_code", _effectCode);
       xconfig.set("option_double", _optionDouble);
       // 存储透明
