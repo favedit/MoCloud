@@ -2,6 +2,7 @@ package org.mo.content.resource3d.scene;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
@@ -13,6 +14,9 @@ import org.mo.content.resource3d.common.SFloatMatrix3d;
 public class FRs3SceneDisplay
       extends FRs3Object
 {
+   // 模板唯一编号
+   protected String _templateGuid;
+
    // 矩阵
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
 
@@ -26,6 +30,42 @@ public class FRs3SceneDisplay
    // <T>构造场景显示。</T>
    //============================================================
    public FRs3SceneDisplay(){
+   }
+
+   //============================================================
+   // <T>获得模板唯一编号。</T>
+   //
+   // @return 模板唯一编号
+   //============================================================
+   public String templateGuid(){
+      return _templateGuid;
+   }
+
+   //============================================================
+   // <T>设置模板唯一编号。</T>
+   //
+   // @param templateGuid 模板唯一编号
+   //============================================================
+   public void setTemplateGuid(String templateGuid){
+      _templateGuid = templateGuid;
+   }
+
+   //============================================================
+   // <T>获得矩阵。</T>
+   //
+   // @return 矩阵
+   //============================================================
+   public SFloatMatrix3d matrix(){
+      return _matrix;
+   }
+
+   //============================================================
+   // <T>判断是否含有材质。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasMaterial(){
+      return (_materials != null) ? !_materials.isEmpty() : false;
    }
 
    //============================================================
@@ -107,26 +147,32 @@ public class FRs3SceneDisplay
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
+      super.loadConfig(xconfig);
       // 读取属性
-      _guid = xconfig.get("guid");
-      _code = xconfig.get("code");
-      // 读取材质集合
-      FXmlNode xmaterials = xconfig.findNode("MaterialCollection");
-      if(xmaterials != null){
-         for(FXmlNode xmaterial : xmaterials){
-            FRs3SceneMaterial material = new FRs3SceneMaterial();
-            material.loadConfig(xmaterial);
-            pushMaterial(material);
-         }
-      }
-      // 读取材质集合
-      FXmlNode xrenderables = xconfig.findNode("RenderableCollection");
-      if(xrenderables != null){
-         for(FXmlNode xrenderable : xrenderables){
-            FRs3SceneRenderable renderable = new FRs3SceneRenderable();
-            renderable.loadConfig(xrenderable);
-            pushRenderable(renderable);
+      _templateGuid = xconfig.get("template_guid");
+      // 读取节点集合
+      for(FXmlNode xnode : xconfig.nodes()){
+         if(xnode.isName("Matrix")){
+            // 读取矩阵
+            _matrix.loadConfig(xnode);
+         }else if(xnode.isName("MaterialCollection")){
+            // 读取材质集合
+            for(FXmlNode xmaterial : xnode){
+               FRs3SceneMaterial material = new FRs3SceneMaterial();
+               material.loadConfig(xmaterial);
+               pushMaterial(material);
+            }
+         }else if(xnode.isName("RenderableCollection")){
+            // 读取渲染集合
+            for(FXmlNode xrenderable : xnode){
+               FRs3SceneRenderable renderable = new FRs3SceneRenderable();
+               renderable.loadConfig(xrenderable);
+               pushRenderable(renderable);
+            }
+         }else{
+            throw new FFatalError("Unknown node type.");
          }
       }
    }
@@ -136,10 +182,12 @@ public class FRs3SceneDisplay
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("guid", makeGuid());
-      xconfig.set("code", _code);
+      xconfig.set("template_guid", _templateGuid);
+      _matrix.saveConfig(xconfig.createNode("Matrix"));
       // 存储材质集合
       if(_materials != null){
          FXmlNode xmaterials = xconfig.createNode("MaterialCollection");

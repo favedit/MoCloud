@@ -7,6 +7,7 @@ import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.com.console.FConsole;
+import org.mo.com.lang.FFatalError;
 import org.mo.content.engine3d.core.texture.IRs3TextureBitmapConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.content.resource3d.common.FRs3Material;
@@ -106,6 +107,9 @@ public class FRs3MaterialConsole
       // 查找纹理单元
       String textureCode = materialTexture.textureCode();
       FDataResource3dTextureUnit textureUnit = _textureConsole.findByCode(logicContext, textureCode);
+      if(textureUnit == null){
+         throw new FFatalError("Texture is not exists. (code={1})", textureCode);
+      }
       materialTexture.setTextureGuid(textureUnit.guid());
       // 查找纹理单元
       String bitmapCode = materialTexture.bitmapCode();

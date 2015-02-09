@@ -88,18 +88,43 @@ public class FRs3TemplateConsole
    }
 
    //============================================================
-   // <T>根据代码查找模板单元。</T>
+   // <T>根据代码查找资源模板单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param code 代码
-   // @return 模板单元
+   // @return 资源模板单元
    //============================================================
+   @Override
    public FDataResource3dTemplateUnit findByCode(ILogicContext logicContext,
                                                  String code){
       String sql = FDataResource3dTemplateLogic.CODE + "='" + code + "'";
-      FDataResource3dTemplateLogic templateLogic = logicContext.findLogic(FDataResource3dTemplateLogic.class);
-      FDataResource3dTemplateUnit templateUnit = templateLogic.search(sql);
-      return templateUnit;
+      FDataResource3dTemplateLogic logic = logicContext.findLogic(FDataResource3dTemplateLogic.class);
+      FDataResource3dTemplateUnit unit = logic.search(sql);
+      return unit;
+   }
+
+   //============================================================
+   // <T>根据编号和代码查找材质组单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param templateId 模板编号
+   // @param code 代码
+   // @return 材质组单元
+   //============================================================
+   @Override
+   public FDataResource3dMaterialGroupUnit findMaterialGroupByCode(ILogicContext logicContext,
+                                                                   long templateId,
+                                                                   String code){
+      String sql = FDataResource3dTemplateMaterialGroupLogic.TEMPLATE_ID + "=" + templateId;
+      FDataResource3dTemplateMaterialGroupLogic logic = logicContext.findLogic(FDataResource3dTemplateMaterialGroupLogic.class);
+      FLogicDataset<FDataResource3dTemplateMaterialGroupUnit> units = logic.fetch(sql);
+      for(FDataResource3dTemplateMaterialGroupUnit unit : units){
+         FDataResource3dMaterialGroupUnit materialGroupUnit = unit.materialGroup();
+         if(materialGroupUnit.code().equals(code)){
+            return materialGroupUnit;
+         }
+      }
+      return null;
    }
 
    //============================================================
@@ -258,6 +283,7 @@ public class FRs3TemplateConsole
          // 新建材质
          for(FRs3Material material : theme.materials()){
             FRs3MaterialGroup materialGroup = template.syncMaterialGroup(material.code());
+            material.setGroupGuid(materialGroup.guid());
             FDataResource3dMaterialUnit materialUnit = _materialConsole.insertMaterial(logicContext, themeUnit.ouid(), materialGroup.ouid(), material);
             for(FRs3MaterialTexture materialTexture : material.textures()){
                _materialConsole.insertMaterialTexture(logicContext, materialUnit.ouid(), materialTexture);

@@ -46,6 +46,19 @@ public class FRs3SceneLayer
    }
 
    //============================================================
+   // <T>获得场景显示集合。</T>
+   //
+   // @return 场景显示集合
+   //============================================================
+   public void filterDisplays(FObjects<FRs3SceneDisplay> displays){
+      if(_displays != null){
+         for(FRs3SceneDisplay display : _displays){
+            displays.push(display);
+         }
+      }
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -72,7 +85,9 @@ public class FRs3SceneLayer
    //============================================================
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
+      _guid = xconfig.get("guid");
       _code = xconfig.get("code");
+      _label = xconfig.get("label");
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("DisplayCollection")){
@@ -97,6 +112,7 @@ public class FRs3SceneLayer
       // 存储属性
       xconfig.set("guid", makeGuid());
       xconfig.set("code", _code);
+      xconfig.set("label", _label);
       xconfig.set("type_cd", _typeCd);
       // 存储层集合
       if(_displays != null){

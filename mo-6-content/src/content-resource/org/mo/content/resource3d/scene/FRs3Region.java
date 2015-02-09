@@ -8,9 +8,9 @@ import org.mo.content.resource3d.common.FRs3Object;
 import org.mo.content.resource3d.common.SFloatColor4;
 
 //============================================================
-// <T>场景区域。</T>
+// <T>资源3D区域。</T>
 //============================================================
-public class FRs3SceneRegion
+public class FRs3Region
       extends FRs3Object
 {
    // 颜色
@@ -25,7 +25,7 @@ public class FRs3SceneRegion
    //============================================================
    // <T>构造场景区域。</T>
    //============================================================
-   public FRs3SceneRegion(){
+   public FRs3Region(){
    }
 
    //============================================================
@@ -55,6 +55,7 @@ public class FRs3SceneRegion
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 存储属性
+      _color.serialize(output);
       _camera.serialize(output);
       _light.serialize(output);
    }
@@ -64,6 +65,7 @@ public class FRs3SceneRegion
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
@@ -85,6 +87,7 @@ public class FRs3SceneRegion
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", makeGuid());

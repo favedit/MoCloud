@@ -22,7 +22,7 @@ public class FRs3Scene
    protected FRs3SceneTechnique _technique = new FRs3SceneTechnique();
 
    // 场景区域
-   protected FRs3SceneRegion _region = new FRs3SceneRegion();
+   protected FRs3Region _region = new FRs3Region();
 
    // 场景层集合
    protected FObjects<FRs3SceneLayer> _layers = new FObjects<FRs3SceneLayer>(FRs3SceneLayer.class);
@@ -31,6 +31,48 @@ public class FRs3Scene
    // <T>构造场景。</T>
    //============================================================
    public FRs3Scene(){
+   }
+
+   //============================================================
+   // <T>获得场景技术。</T>
+   //
+   // @return 场景技术
+   //============================================================
+   public FRs3SceneTechnique technique(){
+      return _technique;
+   }
+
+   //============================================================
+   // <T>获得场景区域。</T>
+   //
+   // @return 场景区域
+   //============================================================
+   public FRs3Region region(){
+      return _region;
+   }
+
+   //============================================================
+   // <T>获得场景层集合。</T>
+   //
+   // @return 场景层集合
+   //============================================================
+   public FObjects<FRs3SceneLayer> layers(){
+      return _layers;
+   }
+
+   //============================================================
+   // <T>获得场景显示集合。</T>
+   //
+   // @return 场景显示集合
+   //============================================================
+   public FObjects<FRs3SceneDisplay> filterDisplays(){
+      FObjects<FRs3SceneDisplay> displays = new FObjects<FRs3SceneDisplay>(FRs3SceneDisplay.class);
+      if(_layers != null){
+         for(FRs3SceneLayer layer : _layers){
+            layer.filterDisplays(displays);
+         }
+      }
+      return displays;
    }
 
    //============================================================

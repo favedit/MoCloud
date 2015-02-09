@@ -10,7 +10,7 @@ import org.mo.com.xml.FXmlNode;
 //============================================================
 // <T>三维浮点颜色。</T>
 //============================================================
-public class SFloatColor4
+public class SFloatColor4Power
 {
    // 红色
    public float red;
@@ -22,7 +22,7 @@ public class SFloatColor4
    public float blue;
 
    // 强度
-   public float alpha;
+   public float power;
 
    //============================================================
    // <T>序列化数据到输出流。</T>
@@ -33,7 +33,7 @@ public class SFloatColor4
       output.writeFloat(red);
       output.writeFloat(green);
       output.writeFloat(blue);
-      output.writeFloat(alpha);
+      output.writeFloat(power);
    }
 
    //============================================================
@@ -45,7 +45,7 @@ public class SFloatColor4
       red = input.readFloat();
       green = input.readFloat();
       blue = input.readFloat();
-      alpha = input.readFloat();
+      power = input.readFloat();
    }
 
    //============================================================
@@ -57,7 +57,7 @@ public class SFloatColor4
       red = xconfig.getFloat("r");
       green = xconfig.getFloat("g");
       blue = xconfig.getFloat("b");
-      alpha = xconfig.getFloat("power");
+      power = xconfig.getFloat("power");
    }
 
    //============================================================
@@ -69,7 +69,7 @@ public class SFloatColor4
       xconfig.set("r", red);
       xconfig.set("g", green);
       xconfig.set("b", blue);
-      xconfig.set("power", alpha);
+      xconfig.set("power", power);
    }
 
    //============================================================
@@ -81,7 +81,7 @@ public class SFloatColor4
       red = xconfig.getFloat("r");
       green = xconfig.getFloat("g");
       blue = xconfig.getFloat("b");
-      alpha = xconfig.getFloat("power", 1.0f);
+      power = xconfig.getFloat("power", 1.0f);
    }
 
    //============================================================
@@ -97,7 +97,7 @@ public class SFloatColor4
       red = (float)RDouble.parse(items[0]);
       green = (float)RDouble.parse(items[1]);
       blue = (float)RDouble.parse(items[2]);
-      alpha = (float)RDouble.parse(items[3]);
+      power = (float)RDouble.parse(items[3]);
    }
 
    //============================================================
@@ -107,6 +107,6 @@ public class SFloatColor4
    //============================================================
    @Override
    public String toString(){
-      return red + "," + green + "," + blue + "," + alpha;
+      return red + "," + green + "," + blue + "," + power;
    }
 }

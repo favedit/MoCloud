@@ -319,8 +319,11 @@ public class FRs3Material
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
+      super.loadConfig(xconfig);
       // 读取属性
+      _groupGuid = xconfig.get("group_guid");
       _effectCode = xconfig.get("effect_code");
       _optionDouble = xconfig.getBoolean("option_double", false);
       // 处理所有节点
@@ -358,10 +361,11 @@ public class FRs3Material
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("guid", makeGuid());
-      xconfig.set("code", _code);
+      xconfig.set("group_guid", _groupGuid);
       xconfig.set("effect_code", _effectCode);
       xconfig.set("option_double", _optionDouble);
       // 存储透明
@@ -407,15 +411,15 @@ public class FRs3Material
    // @param unit 数据单元
    //============================================================
    public void loadUnit(FDataResource3dMaterialUnit unit){
+      // 加载配置
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadString(unit.content());
+      this.loadConfig(xdocument.root());
       // 加载属性
       _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
       _label = unit.label();
-      // 加载配置
-      FXmlDocument xdocument = new FXmlDocument();
-      xdocument.loadString(unit.content());
-      this.loadConfig(xdocument.root());
    }
 
    //============================================================
