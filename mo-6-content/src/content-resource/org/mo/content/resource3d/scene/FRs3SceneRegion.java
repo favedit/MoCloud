@@ -53,8 +53,8 @@ public class FRs3SceneRegion
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 存储属性
-      output.writeString(_code);
       _camera.serialize(output);
       _light.serialize(output);
    }

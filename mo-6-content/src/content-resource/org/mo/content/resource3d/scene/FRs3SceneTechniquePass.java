@@ -37,8 +37,8 @@ public class FRs3SceneTechniquePass
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      output.writeString(_code);
-      _targetSize.serialize(output);
+      super.serialize(output);
+      _targetSize.serialize16(output);
    }
 
    //============================================================

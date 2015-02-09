@@ -1,7 +1,6 @@
 package org.mo.content.resource3d.scene;
 
 import org.mo.com.io.IDataInput;
-import org.mo.com.io.IDataOutput;
 import org.mo.content.resource3d.common.FRs3Material;
 
 //============================================================
@@ -14,17 +13,6 @@ public class FRs3SceneMaterial
    // <T>构造场景层。</T>
    //============================================================
    public FRs3SceneMaterial(){
-   }
-
-   //============================================================
-   // <T>序列化数据到输出流。</T>
-   //
-   // @param output 输出流
-   //============================================================
-   @Override
-   public void serialize(IDataOutput output){
-      // 存储属性
-      output.writeString(_code);
    }
 
    //============================================================

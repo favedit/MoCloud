@@ -5,6 +5,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.INamePair;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Display;
@@ -164,18 +165,19 @@ public class FRs3Template
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
-      //      xconfig.set("guid", _guid);
-      //      xconfig.set("code", _code);
-      //      // 存储材质分组集合
-      //      FXmlNode xmaterialGroups = xconfig.createNode("MaterialGroupCollection");
-      //      for(INamePair<FRs3MaterialGroup> pair : _materialGroups){
-      //         pair.value().saveConfig(xmaterialGroups.createNode("MaterialGroup"));
-      //      }
-      //      // 存储主题集合
-      //      FXmlNode xtheme = xconfig.createNode("ThemeCollection");
-      //      for(FRs3Theme theme : _themes){
-      //         theme.saveConfig(xtheme.createNode("Theme"));
-      //      }
+      xconfig.set("guid", _guid);
+      xconfig.set("code", _code);
+      xconfig.set("label", _label);
+      // 存储材质分组集合
+      FXmlNode xmaterialGroups = xconfig.createNode("MaterialGroupCollection");
+      for(INamePair<FRs3MaterialGroup> pair : _materialGroups){
+         pair.value().saveConfig(xmaterialGroups.createNode("MaterialGroup"));
+      }
+      // 存储主题集合
+      FXmlNode xtheme = xconfig.createNode("ThemeCollection");
+      for(FRs3Theme theme : _themes){
+         theme.saveConfig(xtheme.createNode("Theme"));
+      }
       // 存储显示集合
       FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
       for(FRs3Display display : _displays){

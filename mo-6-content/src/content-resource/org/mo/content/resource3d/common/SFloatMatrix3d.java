@@ -9,23 +9,23 @@ import org.mo.com.xml.FXmlNode;
 //============================================================
 public class SFloatMatrix3d
 {
-   public float tx;
+   public float tx = 0.0f;
 
-   public float ty;
+   public float ty = 0.0f;
 
-   public float tz;
+   public float tz = 0.0f;
 
-   public float rx;
+   public float rx = 0.0f;
 
-   public float ry;
+   public float ry = 0.0f;
 
-   public float rz;
+   public float rz = 0.0f;
 
-   public float sx;
+   public float sx = 1.0f;
 
-   public float sy;
+   public float sy = 1.0f;
 
-   public float sz;
+   public float sz = 1.0f;
 
    //============================================================
    // <T>序列化数据到输出流。</T>

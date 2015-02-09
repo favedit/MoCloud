@@ -77,28 +77,28 @@ public class FRs3SceneDisplay
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 存储属性
-      output.writeString(_code);
       _matrix.serialize(output);
       // 存储材质集合
       if(_materials != null){
          int count = _materials.count();
-         output.writeInt16((short)count);
+         output.writeUint16(count);
          for(FRs3SceneMaterial material : _materials){
             material.serialize(output);
          }
       }else{
-         output.writeInt16((short)0);
+         output.writeUint16(0);
       }
       // 存储渲染集合
       if(_renderables != null){
          int count = _renderables.count();
-         output.writeInt16((short)count);
+         output.writeUint16(count);
          for(FRs3SceneRenderable renderable : _renderables){
             renderable.serialize(output);
          }
       }else{
-         output.writeInt16((short)0);
+         output.writeUint16(0);
       }
    }
 

@@ -80,6 +80,7 @@ public class FRs3Theme
       // 存储属性
       xconfig.set("guid", _guid);
       xconfig.set("code", _code);
+      xconfig.set("label", _label);
       // 存储材质集合
       FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
       for(FRs3Material material : _materials){

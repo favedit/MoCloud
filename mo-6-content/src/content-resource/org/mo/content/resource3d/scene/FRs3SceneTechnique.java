@@ -50,8 +50,7 @@ public class FRs3SceneTechnique
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      // 存储属性
-      output.writeString(_code);
+      super.serialize(output);
       // 存储技术过程集合
       if(_passes != null){
          int count = _passes.count();

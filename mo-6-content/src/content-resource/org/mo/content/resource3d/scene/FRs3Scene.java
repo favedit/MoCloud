@@ -40,8 +40,9 @@ public class FRs3Scene
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 存储属性
-      output.writeString(_code);
+      output.writeString(_themeCode);
       _technique.serialize(output);
       _region.serialize(output);
       // 存储场景层集合

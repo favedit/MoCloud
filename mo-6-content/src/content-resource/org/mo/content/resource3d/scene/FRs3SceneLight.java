@@ -7,15 +7,18 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================
-// <T>场景显示。</T>
+// <T>场景光源显示。</T>
 //============================================================
 public class FRs3SceneLight
       extends FRs3Object
 {
+   // 类型
    protected String _typeCd;
 
+   // 材质
    protected FRs3SceneMaterial _material = new FRs3SceneMaterial();
 
+   // 相机
    protected FRs3SceneCamera _camera = new FRs3SceneCamera();
 
    //============================================================
@@ -31,6 +34,7 @@ public class FRs3SceneLight
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 存储属性
       output.writeString(_typeCd);
       _material.serialize(output);

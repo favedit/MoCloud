@@ -24,8 +24,7 @@ public class FRs3SceneRenderable
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      // 存储属性
-      output.writeString(_code);
+      super.serialize(output);
    }
 
    //============================================================

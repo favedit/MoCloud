@@ -33,6 +33,7 @@ public class FRs3SceneProjection
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 存储属性
       output.writeFloat(_angle);
       output.writeFloat(_znear);

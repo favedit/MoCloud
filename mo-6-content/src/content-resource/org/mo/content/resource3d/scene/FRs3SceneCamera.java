@@ -35,8 +35,9 @@ public class FRs3SceneCamera
    //============================================================
    @Override
    public void serialize(IDataOutput output){
+      super.serialize(output);
       // 存储属性
-      output.writeString(_code);
+      output.writeString(_typeCd);
       _position.serialize(output);
       _direction.serialize(output);
       _projection.serialize(output);
