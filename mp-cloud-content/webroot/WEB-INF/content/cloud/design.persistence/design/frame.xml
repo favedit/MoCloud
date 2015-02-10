@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150210125229">
+<Content name="design.frame" update_date="20150210180201">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -112,6 +112,9 @@
     <Component is_valid="Y" name="Memo" label="多行文本编辑器" class_name="org.mo.cloud.content.design.frame.common.XMemo" base_name="org.mo.cloud.content.design.frame.base.XBaseMemo" inherits="IEditControl,MDataField" note="">
       <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
+    <Component is_valid="Y" name="ListItem" label="列表项目" class_name="org.mo.cloud.content.design.frame.common.XListItem" base_name="org.mo.cloud.content.design.frame.base.XBaseListItem" inherits="IControl" note="" />
+    <Component is_valid="Y" name="ListBox" label="列表控件" class_name="org.mo.cloud.content.design.frame.common.XListBox" base_name="org.mo.cloud.content.design.frame.base.XBaseListBox" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="ListView" label="列表视图" class_name="org.mo.cloud.content.design.frame.common.XListView" base_name="org.mo.cloud.content.design.frame.base.XBaseListView" inherits="IContainer" note="" />
     <Component is_valid="Y" name="Panel" label="面板" class_name="org.mo.cloud.content.design.frame.common.XPanel" base_name="org.mo.cloud.content.design.frame.base.XBasePanel" inherits="IContainer" note="">
       <Attribute is_valid="Y" type="String" name="style_cd" label="样式类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />

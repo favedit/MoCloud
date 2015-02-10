@@ -16,7 +16,7 @@ public class RRs3Import
       RRs3TextureImport.importProcess();
       RRs3ModelImport.importProcess();
       Rs3TemplateImport.importProcess();
-      //Rs3SceneImport.importProcess();
+      Rs3SceneImport.importProcess();
       // 释放环境
       RAop.release();
    }
