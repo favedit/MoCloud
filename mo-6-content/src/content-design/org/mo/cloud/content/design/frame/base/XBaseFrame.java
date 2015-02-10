@@ -49,6 +49,10 @@ public abstract class XBaseFrame
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
+   // 关联属性的定义
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
    // 页面来源的定义
    @AContentField
    public final static FContentField FRAME_SOURCE = new FContentField("frameSource", "frame_source", EContentData.String, "", "", "", "YYNY");
@@ -102,6 +106,10 @@ public abstract class XBaseFrame
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 关联属性
+   @AName("linker")
+   protected String _linker;
 
    // 页面来源
    @AName("frame_source")
@@ -249,6 +257,24 @@ public abstract class XBaseFrame
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得关联属性的内容。</T>
+   //
+   // @return 关联属性
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联属性的内容。</T>
+   //
+   // @param value 关联属性
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
    }
 
    //============================================================

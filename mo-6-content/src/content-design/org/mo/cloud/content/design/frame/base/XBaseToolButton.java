@@ -49,6 +49,10 @@ public abstract class XBaseToolButton
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
+   // 关联属性的定义
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
    // 图标的定义
    @AContentField
    public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
@@ -106,6 +110,10 @@ public abstract class XBaseToolButton
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 关联属性
+   @AName("linker")
+   protected String _linker;
 
    // 图标
    @AName("icon")
@@ -257,6 +265,24 @@ public abstract class XBaseToolButton
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得关联属性的内容。</T>
+   //
+   // @return 关联属性
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联属性的内容。</T>
+   //
+   // @param value 关联属性
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
    }
 
    //============================================================

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene" update_date="20141209154356">
+   <TreeView name="design3d.scene" label="模板列表" is_valid="Y" note="" is_config="N" disp_checked="N">
+     <TreeNodeType name="scene" linker="Scene" label="场景" is_valid="Y" note="" icon="design3d.scene.scene"/>
+     <TreeNodeType name="technique" linker="Technique" label="技术" is_valid="Y" note="" icon="design3d.scene.technique"/>
+     <TreeNodeType name="region" linker="Region" label="区域" is_valid="Y" note="" icon="design3d.scene.region"/>
+     <TreeNodeType name="camera" linker="Camera" label="相机" is_valid="Y" note="" icon="design3d.scene.camera"/>
+     <TreeNodeType name="light" linker="Light" label="光源" is_valid="Y" note="" icon="design3d.scene.light"/>
+     <TreeNodeType name="layers" linker="Layers" label="显示层集合" is_valid="Y" note="" icon="design3d.scene.layers"/>
+     <TreeNodeType name="layer" linker="Layer" label="显示层" is_valid="Y" note="" icon="design3d.scene.layer"/>
+     <TreeNodeType name="display" linker="Display" label="显示对象" is_valid="Y" note="" icon="design3d.scene.display"/>
+     <TreeNodeType name="renderable" linker="Renderable" label="渲染对象" is_valid="Y" note="" icon="design3d.scene.renderable"/>
+   </TreeView>
+</Content>

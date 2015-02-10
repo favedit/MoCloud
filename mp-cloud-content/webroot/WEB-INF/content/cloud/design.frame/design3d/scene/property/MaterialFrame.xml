@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.template.property.MaterialFrame" update_date="20141210134046">
+   <Frame type='FDsSceneMaterialPropertyFrame' name="design3d.template.property.MaterialFrame" label="材质属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
+      <Panel name='infoPanel' icon='design.panel.icon' label='材质属性'>
+         <Edit name="guid" label="标识:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" label="代码:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" label="名称:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <PageControl name='propertyPageControl' icon='design.panel.icon' label='信息页面'>
+         <PageSheet name='materialFrame' icon='design.panel.icon' label='材质信息' frame_source='design3d.template.MaterialFrame'/>
+      </PageControl>
+   </Frame>
+</Content>

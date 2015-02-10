@@ -7,7 +7,7 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>工具按键分割栏对象的内容基类。</T>
+// <T>工具分割按键对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
@@ -48,6 +48,18 @@ public abstract class XBaseToolButtonSplit
    // 外空白的定义
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
+
+   // 关联属性的定义
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
+   // 图标的定义
+   @AContentField
+   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
+
+   // 命令的定义
+   @AContentField
+   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -98,6 +110,18 @@ public abstract class XBaseToolButtonSplit
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 关联属性
+   @AName("linker")
+   protected String _linker;
+
+   // 图标
+   @AName("icon")
+   protected String _icon;
+
+   // 命令
+   @AName("action")
+   protected String _action;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -241,6 +265,60 @@ public abstract class XBaseToolButtonSplit
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得关联属性的内容。</T>
+   //
+   // @return 关联属性
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联属性的内容。</T>
+   //
+   // @param value 关联属性
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
+   }
+
+   //============================================================
+   // <T>获得图标的内容。</T>
+   //
+   // @return 图标
+   //============================================================
+   public String getIcon(){
+      return _icon;
+   }
+
+   //============================================================
+   // <T>设置图标的内容。</T>
+   //
+   // @param value 图标
+   //============================================================
+   public void setIcon(String value){
+      _icon = value;
+   }
+
+   //============================================================
+   // <T>获得命令的内容。</T>
+   //
+   // @return 命令
+   //============================================================
+   public String getAction(){
+      return _action;
+   }
+
+   //============================================================
+   // <T>设置命令的内容。</T>
+   //
+   // @param value 命令
+   //============================================================
+   public void setAction(String value){
+      _action = value;
    }
 
 }

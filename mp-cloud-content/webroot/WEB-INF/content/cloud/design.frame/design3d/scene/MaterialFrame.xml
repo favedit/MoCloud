@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.template.MaterialFrame" update_date="20141210134046">
+   <Frame type='FDsTemplateMaterialFrame' name="design3d.template.MaterialFrame" label="材质属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
+      <Panel name='infoPanel' icon='design.panel.icon' label='材质属性'>
+         <Edit name="guid" label="标识:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" label="代码:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" label="名称:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
+         <Color3 name="ambientColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='diffusePanel' icon='design.panel.icon' label='散射参数'>
+         <Color3 name="diffuseColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='specularPanel' icon='design.panel.icon' label='高光参数'>
+         <Color3 name="specularColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="specularLevel" label="级别:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='reflectPanel' icon='design.panel.icon' label='反射参数'>
+         <Color3 name="reflectColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="reflectMerge" label="融合:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='emissivePanel' icon='design.panel.icon' label='发光参数'>
+         <Color3 name="emissiveColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

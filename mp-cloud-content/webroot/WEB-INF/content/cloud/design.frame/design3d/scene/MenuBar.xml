@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.MenuBar">
+   <MenuBar name="design3d.scene.MenuBar" label="菜单">
+      <MenuButton name='refreshButton' icon='design3d.tools.refresh' label='刷新'/>
+      <MenuButton name='saveButton' icon='design3d.tools.save' label='保存'/>
+   </MenuBar>
+</Content>

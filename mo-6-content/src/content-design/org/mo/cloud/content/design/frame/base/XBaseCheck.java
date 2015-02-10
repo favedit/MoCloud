@@ -49,6 +49,10 @@ public abstract class XBaseCheck
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
+   // 关联属性的定义
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
    // 显示模式的定义
    @AContentField
    public final static FContentField DISPLAY_MODE = new FContentField("displayMode", "display_mode", EContentData.String, "", "", "", "NYNN");
@@ -182,6 +186,10 @@ public abstract class XBaseCheck
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 关联属性
+   @AName("linker")
+   protected String _linker;
 
    // 显示模式
    @AName("display_mode")
@@ -409,6 +417,24 @@ public abstract class XBaseCheck
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得关联属性的内容。</T>
+   //
+   // @return 关联属性
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联属性的内容。</T>
+   //
+   // @param value 关联属性
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
    }
 
    //============================================================

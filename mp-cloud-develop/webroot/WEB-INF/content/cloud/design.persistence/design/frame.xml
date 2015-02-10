@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150203110855">
+<Content name="design.frame" update_date="20150210125229">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -14,6 +14,7 @@
       <Attribute is_valid="Y" type="String" name="size" label="尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="padding" label="内空白" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="margin" label="外空白" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="linker" label="关联属性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="IContainer" label="容器接口" class_name="org.mo.cloud.content.design.frame.common.XContainer" inherits="IControl" note="">
       <Attribute is_valid="Y" type="String" name="frame_source" label="页面来源" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -132,9 +133,14 @@
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="ToolButtonSplit" label="工具按键分割栏" class_name="org.mo.cloud.content.design.frame.common.XToolButtonSplit" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonSplit" inherits="IControl" note="" />
-    <Component is_valid="Y" name="ToolButtonMenu" label="工具按键菜单" class_name="org.mo.cloud.content.design.frame.common.XToolButtonMenu" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonMenu" inherits="IControl" note="" />
-    <Component is_valid="Y" name="MenuBar" label="菜单栏" class_name="org.mo.cloud.content.design.frame.common.XMenuBar" base_name="org.mo.cloud.content.design.frame.base.XBaseMenuBar" inherits="IControl" note="" />
+    <Component is_valid="Y" name="ToolButtonCheck" label="工具选中按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonCheck" inherits="ToolButton" note="">
+      <Attribute is_valid="Y" type="String" name="check" label="选中标志" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="group_name" label="分组名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="group_default" label="分组默认" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="ToolButtonSplit" label="工具分割按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonSplit" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonSplit" inherits="ToolButton" note="" />
+    <Component is_valid="Y" name="ToolButtonMenu" label="工具菜单按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonMenu" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonMenu" inherits="ToolButton" note="" />
+    <Component is_valid="Y" name="MenuBar" label="菜单栏" class_name="org.mo.cloud.content.design.frame.common.XMenuBar" base_name="org.mo.cloud.content.design.frame.base.XBaseMenuBar" inherits="IContainer" note="" />
     <Component is_valid="Y" name="MenuButton" label="菜单按键" class_name="org.mo.cloud.content.design.frame.common.XMenuButton" base_name="org.mo.cloud.content.design.frame.base.XBaseMenuButton" inherits="IControl" note="">
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -144,6 +150,12 @@
     <Component is_valid="Y" name="TableFrame" label="表格页面" class_name="org.mo.cloud.content.design.frame.common.XTableFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTableFrame" inherits="IControl" note="" />
     <Component is_valid="Y" name="PickerFrame" label="拾取页面" class_name="org.mo.cloud.content.design.frame.common.XPickerFrame" base_name="org.mo.cloud.content.design.frame.base.XBasePickerFrame" inherits="IControl" note="" />
     <Component is_valid="Y" name="DialogFrame" label="对话页面" class_name="org.mo.cloud.content.design.frame.common.XDialogFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseDialogFrame" inherits="IControl" note="" />
-    <Component is_valid="Y" name="Window" label="窗口" class_name="org.mo.cloud.content.design.frame.common.XWindow" base_name="org.mo.cloud.content.design.frame.base.XBaseWindow" inherits="IControl" note="" />
+    <Component is_valid="Y" name="Window" label="窗口" class_name="org.mo.cloud.content.design.frame.common.XWindow" base_name="org.mo.cloud.content.design.frame.base.XBaseWindow" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="FramePage" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFramePage" base_name="org.mo.cloud.content.design.frame.base.XBaseFramePage" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="FrameSpliter" label="页面分割" class_name="org.mo.cloud.content.design.frame.common.XFrameSpliter" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameSpliter" inherits="IControl" note="" />
+    <Component is_valid="Y" name="FrameSet" label="页面集合" class_name="org.mo.cloud.content.design.frame.common.XFrameSet" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameSet" inherits="IContainer" note="">
+      <Attribute is_valid="Y" type="String" name="direction_cd" label="方向类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="Workspace" label="工作空间" class_name="org.mo.cloud.content.design.frame.common.XWorkspace" base_name="org.mo.cloud.content.design.frame.base.XBaseWorkspace" inherits="IContainer" note="" />
   </Persistence>
 </Content>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.CanvasToolBar">
+   <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
+      <ToolButtonCheck name='dropButton' icon='design3d.canvas.hand' group_name='mode' group_default='dropButton'/>
+      <ToolButtonCheck name='selectButton' icon='design3d.canvas.pointer' group_name='mode' group_default='dropButton'/>
+      <ToolButtonSplit/>
+      <ToolButtonCheck name='translateButton' icon='design3d.canvas.translate' group_name='mode' group_default='dropButton'/>
+      <ToolButtonCheck name='rotationButton' icon='design3d.canvas.rotation' group_name='mode' group_default='dropButton'/>
+      <ToolButtonCheck name='scaleButton' icon='design3d.canvas.scale' group_name='mode' group_default='dropButton'/>
+      <ToolButtonSplit/>
+      <ToolButtonCheck name='lookFrontButton' label='前'/>
+      <ToolButtonCheck name='lookUpButton' label='上'/>
+      <ToolButtonCheck name='lookLeftButton' label='左'/>
+      <ToolButtonSplit/>
+      <ToolButtonCheck name='playButton' icon='design3d.tools.play' label='播放'/>
+      <ToolButtonCheck name='viewButton' icon='design3d.tools.rotation' label='旋转'/>
+   </ToolBar>
+</Content>

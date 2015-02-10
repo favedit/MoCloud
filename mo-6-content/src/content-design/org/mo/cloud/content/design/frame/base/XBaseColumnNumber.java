@@ -49,6 +49,10 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
+   // 关联属性的定义
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
    // 编辑模式的定义
    @AContentField
    public final static FContentField EDIT_MODE = new FContentField("editMode", "edit_mode", EContentData.String, "", "", "", "NYNN");
@@ -142,6 +146,10 @@ public abstract class XBaseColumnNumber
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 关联属性
+   @AName("linker")
+   protected String _linker;
 
    // 编辑模式
    @AName("edit_mode")
@@ -329,6 +337,24 @@ public abstract class XBaseColumnNumber
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得关联属性的内容。</T>
+   //
+   // @return 关联属性
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联属性的内容。</T>
+   //
+   // @param value 关联属性
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
    }
 
    //============================================================

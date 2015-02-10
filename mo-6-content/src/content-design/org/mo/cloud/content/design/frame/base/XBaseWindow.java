@@ -49,6 +49,14 @@ public abstract class XBaseWindow
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
+   // 关联属性的定义
+   @AContentField
+   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
+   // 页面来源的定义
+   @AContentField
+   public final static FContentField FRAME_SOURCE = new FContentField("frameSource", "frame_source", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -98,6 +106,14 @@ public abstract class XBaseWindow
    // 外空白
    @AName("margin")
    protected String _margin;
+
+   // 关联属性
+   @AName("linker")
+   protected String _linker;
+
+   // 页面来源
+   @AName("frame_source")
+   protected String _frameSource;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -241,6 +257,42 @@ public abstract class XBaseWindow
    //============================================================
    public void setMargin(String value){
       _margin = value;
+   }
+
+   //============================================================
+   // <T>获得关联属性的内容。</T>
+   //
+   // @return 关联属性
+   //============================================================
+   public String getLinker(){
+      return _linker;
+   }
+
+   //============================================================
+   // <T>设置关联属性的内容。</T>
+   //
+   // @param value 关联属性
+   //============================================================
+   public void setLinker(String value){
+      _linker = value;
+   }
+
+   //============================================================
+   // <T>获得页面来源的内容。</T>
+   //
+   // @return 页面来源
+   //============================================================
+   public String getFrameSource(){
+      return _frameSource;
+   }
+
+   //============================================================
+   // <T>设置页面来源的内容。</T>
+   //
+   // @param value 页面来源
+   //============================================================
+   public void setFrameSource(String value){
+      _frameSource = value;
    }
 
 }
