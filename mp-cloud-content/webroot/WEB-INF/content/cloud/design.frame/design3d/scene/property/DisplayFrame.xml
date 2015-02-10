@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.template.property.DisplayFrame" update_date="20141210134046">
-   <Frame type='FDsSceneDisplayPropertyFrame' name="design3d.template.property.DisplayFrame" label="显示属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
+   <Frame name="design3d.template.property.DisplayFrame" type='FDsSceneDisplayPropertyFrame' label="显示属性" is_valid="Y" note="">
       <Panel name='infoPanel' icon='design.panel.icon' label='显示属性'>
-         <Edit name="guid" label="标识:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='N' input_size='200,0' note="" />
-         <Edit name="code" label="代码:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
-         <Edit name="label" label="名称:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
+         <Edit name="guid" linker='_controlGuid' label="标识:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='N' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
       </Panel>
       <PageControl name='propertyPageControl' icon='design.panel.icon' label='信息页面'>
-         <PageSheet name='displayFrame' icon='design.panel.icon' label='显示信息' frame_source='design3d.template.DisplayFrame'/>
-         <PageSheet name='materialFrame' icon='design.panel.icon' label='材质信息' frame_source='design3d.template.MaterialFrame'/>
+         <PageSheet name='displayFrame' icon='design.panel.icon' label='显示信息' frame_source='design3d.scene.DisplayFrame'/>
+         <PageSheet name='materialFrame' icon='design.panel.icon' label='材质信息' frame_source='design3d.scene.MaterialFrame'/>
       </PageControl>
    </Frame>
 </Content>
