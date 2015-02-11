@@ -2,26 +2,26 @@
 <Content name="design3d.scene.MaterialFrame" update_date="20141210134046">
    <Frame name="design3d.scene.MaterialFrame" type='FDsSceneMaterialFrame' linker='_frameMaterial' label="材质属性" is_valid="Y" note="">
       <Panel name='infoPanel' icon='design.panel.icon' label='材质属性'>
-         <Edit name="guid" linker='_controlGuid' label="标识:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="code" linker='_controlCode' label="代码:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" linker='_controlLabel' label="名称:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
-         <Color3 name="ambientColor" linker='_controlAmbientColor' label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="ambientColor" linker='_controlAmbientColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='diffusePanel' icon='design.panel.icon' label='散射参数'>
-         <Color3 name="diffuseColor" linker='_controlDiffuseColor' label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="diffuseColor" linker='_controlDiffuseColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='specularPanel' icon='design.panel.icon' label='高光参数'>
-         <Color3 name="specularColor" linker='_controlSpecularColor' label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Number name="specularLevel" linker='_controlSpecularLevel' label="级别:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="specularColor" linker='_controlSpecularColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="specularLevel" linker='_controlSpecularLevel' label="级别" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='reflectPanel' icon='design.panel.icon' label='反射参数'>
-         <Color3 name="reflectColor" linker='_controlReflectColor' label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Number name="reflectMerge" linker='_controlReflectMerge' label="融合:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="reflectColor" linker='_controlReflectColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="reflectMerge" linker='_controlReflectMerge' label="融合" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='emissivePanel' icon='design.panel.icon' label='发光参数'>
-         <Color3 name="emissiveColor" linker='_controlEmissiveColor' label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="emissiveColor" linker='_controlEmissiveColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
    </Frame>
 </Content>

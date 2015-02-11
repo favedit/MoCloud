@@ -16,13 +16,11 @@ public class Rs3TemplateImport
    public static void importProcess() throws Exception{
       // 设置数据
       FStrings filePaths = new FStrings();
-      filePaths.push("com.design.translation");
-      filePaths.push("com.design.rotation");
-      filePaths.push("com.design.scale");
-
-      filePaths.push("com.light.point");
-      filePaths.push("com.light.spot");
-
+      //      filePaths.push("com.design.translation");
+      //      filePaths.push("com.design.rotation");
+      //      filePaths.push("com.design.scale");
+      //      filePaths.push("com.light.point");
+      //      filePaths.push("com.light.spot");
       //      filePaths.push("pvw.show.item.001");
       //      filePaths.push("pvw.show.item.004");
       //      filePaths.push("pvw.show.item.005");
@@ -39,7 +37,8 @@ public class Rs3TemplateImport
       //      filePaths.push("pvw.showcase.003");
       //      filePaths.push("pvw.showcase.004");
       //      filePaths.push("pvw.showcase.005");
-      filePaths.push("pvw.showcase.007");
+      //      filePaths.push("pvw.showcase.007");
+      filePaths.push("pvw.sc.house.01.scene");
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

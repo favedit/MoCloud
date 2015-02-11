@@ -18,7 +18,6 @@ public class Rs3SceneImport
       FStrings filePaths = new FStrings();
       filePaths.push("pvw.show.item.001");
       filePaths.push("pvw.show.item.004");
-      //filePaths.push("pvw.show.item.005");
       filePaths.push("pvw.show.item.006");
       filePaths.push("pvw.show.item.007");
       filePaths.push("pvw.show.item.008");
@@ -27,6 +26,7 @@ public class Rs3SceneImport
       filePaths.push("pvw.sc.car.01.001");
       filePaths.push("pvw.sc.car.01.002");
       filePaths.push("pvw.sc.car.01.003");
+      filePaths.push("pvw.sc.house.01.scene");
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

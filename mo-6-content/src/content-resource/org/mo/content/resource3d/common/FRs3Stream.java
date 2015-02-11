@@ -206,6 +206,35 @@ public class FRs3Stream
    //
    // @param output 输出流
    //============================================================
+   public void serializeColor4(IDataOutput output){
+      if((_elementDataCd != EGcData.Float32) || (_elementCount != 4)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)EGcData.Uint8);
+      output.writeUint8((short)4);
+      output.writeBoolean(true);
+      output.writeUint8((short)4);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      FByteStream stream = new FByteStream(_data, _data.length);
+      for(int n = 0; n < _dataCount; n++){
+         float v1 = stream.readFloat();
+         float v2 = stream.readFloat();
+         float v3 = stream.readFloat();
+         float v4 = stream.readFloat();
+         output.writeUint8((byte)(v1 * 255.0f));
+         output.writeUint8((byte)(v2 * 255.0f));
+         output.writeUint8((byte)(v3 * 255.0f));
+         output.writeUint8((byte)(v4 * 255.0f));
+      }
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
    public void serializeByte4Normal(IDataOutput output){
       if((_elementDataCd != EGcData.Float32) || (_elementCount != 3)){
          throw new FFatalError("Invalid format.");
@@ -350,6 +379,9 @@ public class FRs3Stream
       switch(_code){
          case "position":
             serializeFloat3(output);
+            break;
+         case "color":
+            serializeColor4(output);
             break;
          case "coord":
             serializeFloat2(output);
