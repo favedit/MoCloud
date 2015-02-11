@@ -43,7 +43,7 @@ public class RRs3TextureImport
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3TextureConsole textureConsole = RAop.find(IRs3TextureConsole.class);
          for(String fileName : filePaths){
-            String path = RRs3Utility.RootPath + "/MoScript/source/assets/texture/" + fileName;
+            String path = RRs3Configuration.RootPath + "/MoScript/source/assets/texture/" + fileName;
             textureConsole.importTexture(logicContext, path);
          }
       }
@@ -53,9 +53,9 @@ public class RRs3TextureImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String configPath = RRs3Utility.RootPath + "/MoCloud";
+      String configPath = RRs3Configuration.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
+      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Configuration.Config);
       try{
          importProcess();
       }catch(Exception e){

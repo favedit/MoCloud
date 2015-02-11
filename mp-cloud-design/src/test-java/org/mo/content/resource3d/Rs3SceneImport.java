@@ -32,7 +32,7 @@ public class Rs3SceneImport
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3SceneConsole sceneConsole = RAop.find(IRs3SceneConsole.class);
          for(String fileName : filePaths){
-            String path = RRs3Utility.RootPath + "/MoScript/source/assets/scene/" + fileName + ".ser";
+            String path = RRs3Configuration.RootPath + "/MoScript/source/assets/scene/" + fileName + ".ser";
             sceneConsole.importScene(logicContext, path);
          }
       }
@@ -42,9 +42,9 @@ public class Rs3SceneImport
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String configPath = RRs3Utility.RootPath + "/MoCloud";
+      String configPath = RRs3Configuration.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Utility.Config);
+      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Configuration.Config);
       try{
          importProcess();
       }catch(Exception e){
