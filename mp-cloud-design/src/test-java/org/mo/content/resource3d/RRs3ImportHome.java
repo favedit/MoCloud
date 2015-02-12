@@ -11,7 +11,7 @@ public class RRs3ImportHome
    //============================================================
    public static void main(String[] args) throws Exception{
       // 设置变量
-      RRs3Configuration.Config = RRs3ImportLocal.Config;
+      RRs3Configuration.Config = RRs3ImportHome.Config;
       // 设置环境
       String configPath = RRs3Configuration.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
