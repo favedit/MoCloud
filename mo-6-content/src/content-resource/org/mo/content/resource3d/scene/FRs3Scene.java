@@ -5,6 +5,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Resource;
@@ -49,6 +50,23 @@ public class FRs3Scene
    //============================================================
    public FRs3Region region(){
       return _region;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找场景层。</T>
+   //
+   // @param guid 唯一编号
+   // @return 场景层
+   //============================================================
+   public FRs3SceneLayer findLayerByGuid(String guid){
+      if(!RString.isEmpty(guid)){
+         for(FRs3SceneLayer layer : _layers){
+            if(guid.equals(layer.guid())){
+               return layer;
+            }
+         }
+      }
+      return null;
    }
 
    //============================================================
@@ -104,9 +122,11 @@ public class FRs3Scene
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _code = xconfig.get("code");
+      _label = xconfig.get("label");
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Technique")){
@@ -129,10 +149,40 @@ public class FRs3Scene
    }
 
    //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      // 读取属性
+      _code = xconfig.get("code");
+      _label = xconfig.get("label");
+      // 读取节点集合
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("Technique")){
+            // 读取技术
+            //_technique.loadConfig(xnode);
+         }else if(xnode.isName("Region")){
+            // 读取区域
+            //_region.loadConfig(xnode);
+         }else if(xnode.isName("LayerCollection")){
+            // 读取层集合
+            for(FXmlNode xlayer : xnode){
+               String layerGuid = xlayer.get("guid");
+               FRs3SceneLayer layer = findLayerByGuid(layerGuid);
+               layer.mergeConfig(xlayer);
+            }
+         }
+      }
+   }
+
+   //============================================================
    // <T>存储数据信息到配置节点中。</T>
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", _guid);
@@ -204,17 +254,9 @@ public class FRs3Scene
       // 存储属性
       unit.setCode(_code);
       unit.setLabel(_label);
-      unit.setContent(toXml());
-   }
-
-   //============================================================
-   // <T>从配置信息中导入配置。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   public String toXml(){
+      // 存储配置
       FXmlNode xconfig = new FXmlNode("Scene");
       saveConfig(xconfig);
-      return xconfig.xml().toString();
+      unit.setContent(xconfig.xml().toString());
    }
 }

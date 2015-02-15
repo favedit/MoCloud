@@ -3,6 +3,7 @@ package org.mo.content.core.resource3d.scene;
 import com.cyou.gccloud.data.data.FDataResource3dSceneLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.content.resource3d.scene.FRs3Scene;
@@ -40,11 +41,12 @@ public class FC3dSceneConsole
    }
 
    //============================================================
-   // <T>逻辑处理。</T>
+   // <T>生成场景。</T>
    //
    // @param logicContext 逻辑环境
    // @param code 代码
    // @param version 版本
+   // @return 场景
    //============================================================
    @Override
    public FRs3Scene makeScene(ILogicContext logicContext,
@@ -67,5 +69,31 @@ public class FC3dSceneConsole
       FRs3Scene scene = new FRs3Scene();
       scene.loadUnit(sceneUnit);
       return scene;
+   }
+
+   //============================================================
+   // <T>更新场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param scene 场景
+   //============================================================
+   @Override
+   public EResult updateScene(ILogicContext logicContext,
+                              FRs3Scene scene){
+      // 检查参数
+      String guid = scene.guid();
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Find scene guid is empty. (guid={1}})", guid);
+      }
+      // 查找数据
+      FDataResource3dSceneUnit unit = findByGuid(logicContext, guid);
+      if(unit == null){
+         throw new FFatalError("Find scene is not exists. (guid={1}})", guid);
+      }
+      // 创建场景
+      scene.saveUnit(unit);
+      doUpdate(logicContext, unit);
+      // 返回结果
+      return EResult.Success;
    }
 }

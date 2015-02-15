@@ -4,6 +4,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
 
@@ -22,6 +23,23 @@ public class FRs3SceneLayer
    // <T>构造场景层。</T>
    //============================================================
    public FRs3SceneLayer(){
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找显示对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 显示对象
+   //============================================================
+   public FRs3SceneDisplay findDisplayByGuid(String guid){
+      if(!RString.isEmpty(guid) && (_displays != null)){
+         for(FRs3SceneDisplay display : _displays){
+            if(guid.equals(display.guid())){
+               return display;
+            }
+         }
+      }
+      return null;
    }
 
    //============================================================
@@ -83,6 +101,7 @@ public class FRs3SceneLayer
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
@@ -104,10 +123,34 @@ public class FRs3SceneLayer
    }
 
    //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 处理所有节点
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("DisplayCollection")){
+            // 读取显示集合
+            for(FXmlNode xdisplay : xnode){
+               String displayGuid = xdisplay.get("guid");
+               FRs3SceneDisplay display = findDisplayByGuid(displayGuid);
+               display.mergeConfig(xdisplay);
+            }
+         }else{
+            throw new FFatalError("Invalid config node.");
+         }
+      }
+   }
+
+   //============================================================
    // <T>存储数据信息到配置节点中。</T>
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", makeGuid());

@@ -319,14 +319,7 @@ public class FRs3Material
    //
    // @param xconfig 配置信息
    //============================================================
-   @Override
-   public void loadConfig(FXmlNode xconfig){
-      super.loadConfig(xconfig);
-      // 读取属性
-      _groupGuid = xconfig.get("group_guid");
-      _effectCode = xconfig.get("effect_code");
-      _optionDouble = xconfig.getBoolean("option_double", false);
-      // 处理所有节点
+   public void loadConfigInfo(FXmlNode xconfig){
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Alpha")){
             _alphaBase = xnode.getFloat("base");
@@ -354,6 +347,37 @@ public class FRs3Material
             _emissiveColor.loadConfig(xnode);
          }
       }
+   }
+
+   //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void loadConfig(FXmlNode xconfig){
+      super.loadConfig(xconfig);
+      // 读取属性
+      _groupGuid = xconfig.get("group_guid");
+      _effectCode = xconfig.get("effect_code");
+      _optionDouble = xconfig.getBoolean("option_double", false);
+      // 处理所有节点
+      loadConfigInfo(xconfig);
+   }
+
+   //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 读取属性
+      _effectCode = xconfig.get("effect_code");
+      _optionDouble = xconfig.getBoolean("option_double", false);
+      // 处理所有节点
+      loadConfigInfo(xconfig);
    }
 
    //============================================================

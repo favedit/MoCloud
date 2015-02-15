@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Server port="8049" shutdown="SHUTDOWN">
+<Server port="8048" shutdown="SHUTDOWN">
    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
    <Listener className="org.apache.catalina.core.JasperListener" />
    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
@@ -17,7 +17,7 @@
       </Realm>
       <Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true">
          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="localhost_access_log." suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-         <Context path="" docBase="E:/Microbject/MoCloud/mp-cloud-logger/webroot" workDir="E:/Microbject/MoCloud/mt-temp/mp-cloud-logger" reloadable="true" crossContext="false"/>
+         <Context path="" docBase="D:/Microbject/MoCloud/mp-cloud-logger/webroot" workDir="D:/Microbject/MoCloud/mt-temp/mp-cloud-logger" reloadable="true" crossContext="false"/>
       </Host>
    </Engine>
    </Service>

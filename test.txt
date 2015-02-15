@@ -3,6 +3,8 @@ https://github.com/favedit/MoScript.git => E:\Microbject\MoScript
 
 D:\Studio\MongoDB\Standard-2.6\bin
 mongod --logpath "E:\Microbject\MoCloud\mt-temp\database\logs.txt" --logappend --dbpath "E:\Microbject\MoCloud\mt-database" --directoryperdb --serviceName "ContentDB" --serviceDisplayName "ContentDB" --install
+D:\Studio\Database\MongoDB\bin
+mongod --logpath "D:\Microbject\Database\MongoDB\Log\logs.txt" --logappend --dbpath "D:\Microbject\Database\MongoDB\Data" --directoryperdb --serviceName "MongoDB" --serviceDisplayName "MongoDB" --install
 mongod.exe --remove --serviceName "MongoDB"
 
 

@@ -68,6 +68,16 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    //
    // @param logicContext 逻辑环境
    // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   EResult doUpdate(ILogicContext logicContext,
+                    T unit);
+
+   //============================================================
+   // <T>修改记录</T>o
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
