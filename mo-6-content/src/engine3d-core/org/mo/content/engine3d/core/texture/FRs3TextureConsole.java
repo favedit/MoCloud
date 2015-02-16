@@ -52,6 +52,32 @@ public class FRs3TextureConsole
    }
 
    //============================================================
+   // <T>导出数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult exportData(ILogicContext logicContext,
+                             String path){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导入数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importData(ILogicContext logicContext,
+                             String path){
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>导入纹理。</T>
    //
    // @param logicContext 逻辑环境

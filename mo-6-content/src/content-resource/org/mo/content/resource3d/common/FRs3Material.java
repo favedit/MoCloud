@@ -22,8 +22,29 @@ public class FRs3Material
    // 效果代码
    protected String _effectCode;
 
+   // 配置透明
+   protected boolean _optionAlpha;
+
    // 配置双面
    protected boolean _optionDouble;
+
+   // 配置高光
+   protected boolean _optionSpecular;
+
+   // 配置视角高光
+   protected boolean _optionViewSpecular;
+
+   // 颜色最小
+   protected float _colorMin;
+
+   // 颜色最大
+   protected float _colorMax;
+
+   // 颜色比率
+   protected float _colorRate;
+
+   // 颜色融合
+   protected float _colorMerge;
 
    // 透明基础
    protected float _alphaBase;
@@ -43,11 +64,17 @@ public class FRs3Material
    // 高光颜色
    protected SFloatColor4 _specularColor = new SFloatColor4();
 
+   // 高光基础
+   protected float _specularBase;
+
    // 高光级别
    protected float _specularLevel;
 
    // 高光视角颜色
    protected SFloatColor4 _specularViewColor = new SFloatColor4();
+
+   // 高光视角基础
+   protected float _specularViewBase;
 
    // 高光视角级别
    protected float _specularViewLevel;
@@ -289,6 +316,9 @@ public class FRs3Material
       // 输出属性
       output.writeString(_groupGuid);
       output.writeString(_effectCode);
+      // 输出配置
+      output.writeBoolean(_optionAlpha);
+      output.writeBoolean(_optionDouble);
       // 输出透明
       output.writeFloat(_alphaBase);
       output.writeFloat(_alphaRate);
@@ -320,6 +350,10 @@ public class FRs3Material
    // @param xconfig 配置信息
    //============================================================
    public void loadConfigInfo(FXmlNode xconfig){
+      // 加载配置
+      _optionAlpha = xconfig.getBoolean("option_alpha", false);
+      _optionDouble = xconfig.getBoolean("option_double", false);
+      // 加载节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Alpha")){
             _alphaBase = xnode.getFloat("base");
@@ -360,7 +394,6 @@ public class FRs3Material
       // 读取属性
       _groupGuid = xconfig.get("group_guid");
       _effectCode = xconfig.get("effect_code");
-      _optionDouble = xconfig.getBoolean("option_double", false);
       // 处理所有节点
       loadConfigInfo(xconfig);
    }
@@ -375,7 +408,6 @@ public class FRs3Material
       super.mergeConfig(xconfig);
       // 读取属性
       _effectCode = xconfig.get("effect_code");
-      _optionDouble = xconfig.getBoolean("option_double", false);
       // 处理所有节点
       loadConfigInfo(xconfig);
    }
@@ -391,6 +423,8 @@ public class FRs3Material
       // 存储属性
       xconfig.set("group_guid", _groupGuid);
       xconfig.set("effect_code", _effectCode);
+      // 存储配置
+      xconfig.set("option_alpha", _optionAlpha);
       xconfig.set("option_double", _optionDouble);
       // 存储透明
       FXmlNode xalpha = xconfig.createNode("Alpha");

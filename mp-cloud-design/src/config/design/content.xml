@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.content.engine3d.core.storage.IRs3StorageConsole'
+         class = 'org.mo.content.engine3d.core.storage.FRs3StorageConsole'
+         scope = 'global'>
+      <Property name='config_file_name'>${application}/data/storage.xml</Property>
+      <Initialize name='initialize'/>
+   </Component>
+
+</Config>

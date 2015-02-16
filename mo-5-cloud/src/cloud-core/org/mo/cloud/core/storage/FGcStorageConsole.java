@@ -6,6 +6,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import org.mo.com.io.FByteFile;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -122,6 +123,61 @@ public class FGcStorageConsole
       // 更新处理
       collection.update(search, item, true, false);
       return true;
+   }
+
+   //============================================================
+   // <T>保存一个存储信息。</T>
+   //
+   // @param storage 存储信息
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult exportFile(String catalog,
+                             String guid,
+                             String path){
+      // 获得集合
+      DBCollection collection = _database.getCollection(catalog);
+      // 查找内容
+      DBObject search = new BasicDBObject("guid", guid);
+      // 获得数据
+      DBObject item = collection.findOne(search);
+      String type = (String)item.get("type");
+      byte[] data = (byte[])item.get("data");
+      // 存储内容
+      String fileName = path + "/" + guid + "." + type;
+      try(FByteFile file = new FByteFile()){
+         file.assign(data, 0, data.length);
+         file.saveToFile(fileName);
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>保存一个存储信息。</T>
+   //
+   // @param storage 存储信息
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importFile(String catalog,
+                             String guid,
+                             String type,
+                             String fileName){
+      // 获得集合
+      DBCollection collection = _database.getCollection(catalog);
+      // 查找内容
+      DBObject search = new BasicDBObject("guid", guid);
+      // 存储内容
+      try(FByteFile file = new FByteFile(fileName)){
+         // 新建数据
+         DBObject item = new BasicDBObject();
+         item.put("guid", guid);
+         item.put("type", type);
+         item.put("data", file.toArray());
+         // 更新处理
+         collection.update(search, item, true, false);
+      }
+      return EResult.Success;
    }
 
    //============================================================

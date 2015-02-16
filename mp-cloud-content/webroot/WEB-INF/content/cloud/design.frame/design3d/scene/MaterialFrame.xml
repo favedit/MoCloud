@@ -6,6 +6,14 @@
          <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
+      <Panel name='optionPanel' icon='design.panel.icon' label='特性参数'>
+         <Check name="optionDouble" linker='_controlOptionDouble' label="双面" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='alphaPanel' icon='design.panel.icon' label='透明参数'>
+         <Check name="optionAlpha" linker='_controlOptionAlpha' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="alphaBase" linker='_controlAlphaBase' label="基础" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="alphaRate" linker='_controlAlphaRate' label="比率" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
       <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
          <ColorPower name="ambientColor" linker='_controlAmbientColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>

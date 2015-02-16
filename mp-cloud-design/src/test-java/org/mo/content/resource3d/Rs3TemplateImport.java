@@ -1,5 +1,7 @@
 package org.mo.content.resource3d;
 
+import org.mo.content.common.RRs3Configuration;
+
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.engine3d.core.template.IRs3TemplateConsole;

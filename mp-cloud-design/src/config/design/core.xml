@@ -51,9 +51,9 @@
    </Component>
 
    <!-- ==================================================== -->
-   <!-- ContentFormConsole:内容表单控制台                                                   -->
-   <!--  P:space_name - 空间名称                                                                      -->
-   <!--  P:path_name - 保存路径                                                                        -->
+   <!-- ContentFormConsole:内容表单控制台                    -->
+   <!--  P:space_name - 空间名称                             -->
+   <!--  P:path_name - 保存路径                              -->
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.cloud.content.design.frame.IFrameConsole'

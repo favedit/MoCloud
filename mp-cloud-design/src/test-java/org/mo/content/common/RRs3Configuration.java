@@ -1,4 +1,4 @@
-package org.mo.content.resource3d;
+package org.mo.content.common;
 
 public class RRs3Configuration
 {

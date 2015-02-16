@@ -1,23 +1,20 @@
-package org.mo.content.engine3d.core.texture;
+package org.mo.content.engine3d.core.storage;
 
-import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
-// <T>资源纹理控制台接口。</T>
+// <T>资源存储控制台接口。</T>
 //============================================================
-public interface IRs3TextureConsole
+public interface IRs3StorageConsole
 {
    //============================================================
-   // <T>根据代码查找纹理单元。</T>
+   // <T>清空数据。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @return 纹理单元
+   // @return 处理结果
    //============================================================
-   FDataResource3dTextureUnit findByCode(ILogicContext logicContext,
-                                         String code);
+   EResult clearData(ILogicContext logicContext);
 
    //============================================================
    // <T>导出数据。</T>
@@ -30,6 +27,16 @@ public interface IRs3TextureConsole
                       String path);
 
    //============================================================
+   // <T>导出存储。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   EResult exportStorage(ILogicContext logicContext,
+                         String path);
+
+   //============================================================
    // <T>导入数据。</T>
    //
    // @param logicContext 逻辑环境
@@ -40,12 +47,12 @@ public interface IRs3TextureConsole
                       String path);
 
    //============================================================
-   // <T>导入纹理。</T>
+   // <T>导入存储。</T>
    //
    // @param logicContext 逻辑环境
    // @param path 路径
    // @return 处理结果
    //============================================================
-   EResult importTexture(ILogicContext logicContext,
+   EResult importStorage(ILogicContext logicContext,
                          String path);
 }
