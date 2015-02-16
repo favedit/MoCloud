@@ -21,6 +21,9 @@ public class FRs3SceneDisplay
    // 矩阵
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
 
+   // 场景动画集合
+   protected FObjects<FRs3SceneMovie> _movies;
+
    // 场景材质集合
    protected FObjects<FRs3SceneMaterial> _materials;
 
@@ -58,6 +61,53 @@ public class FRs3SceneDisplay
    //============================================================
    public SFloatMatrix3d matrix(){
       return _matrix;
+   }
+
+   //============================================================
+   // <T>判断是否含有动画。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasMovie(){
+      return (_movies != null) ? !_movies.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找动画对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 动画对象
+   //============================================================
+   public FRs3SceneMovie findMovieByGuid(String guid){
+      if(!RString.isEmpty(guid) && (_movies != null)){
+         for(FRs3SceneMovie movie : _movies){
+            if(guid.equals(movie.guid())){
+               return movie;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得场景动画集合。</T>
+   //
+   // @return 场景动画集合
+   //============================================================
+   public FObjects<FRs3SceneMovie> movies(){
+      return _movies;
+   }
+
+   //============================================================
+   // <T>增加一个场景动画。</T>
+   //
+   // @param movie 场景动画
+   //============================================================
+   public void pushMovie(FRs3SceneMovie movie){
+      if(_movies == null){
+         _movies = new FObjects<FRs3SceneMovie>(FRs3SceneMovie.class);
+      }
+      _movies.push(movie);
    }
 
    //============================================================
@@ -155,6 +205,16 @@ public class FRs3SceneDisplay
       super.serialize(output);
       // 存储属性
       _matrix.serialize(output);
+      // 存储动画集合
+      if(_movies != null){
+         int count = _movies.count();
+         output.writeUint16(count);
+         for(FRs3SceneMovie movie : _movies){
+            movie.serialize(output);
+         }
+      }else{
+         output.writeUint16(0);
+      }
       // 存储材质集合
       if(_materials != null){
          int count = _materials.count();
@@ -192,6 +252,13 @@ public class FRs3SceneDisplay
          if(xnode.isName("Matrix")){
             // 读取矩阵
             _matrix.loadConfig(xnode);
+         }else if(xnode.isName("MovieCollection")){
+            // 读取动画集合
+            for(FXmlNode xmovie : xnode){
+               FRs3SceneMovie movie = new FRs3SceneMovie();
+               movie.loadConfig(xmovie);
+               pushMovie(movie);
+            }
          }else if(xnode.isName("MaterialCollection")){
             // 读取材质集合
             for(FXmlNode xmaterial : xnode){
@@ -225,6 +292,13 @@ public class FRs3SceneDisplay
          if(xnode.isName("Matrix")){
             // 读取矩阵
             _matrix.loadConfig(xnode);
+         }else if(xnode.isName("MovieCollection")){
+            // 读取动画集合
+            for(FXmlNode xmovie : xnode){
+               String movieGuid = xmovie.get("guid");
+               FRs3SceneMovie movie = findMovieByGuid(movieGuid);
+               movie.mergeConfig(xmovie);
+            }
          }else if(xnode.isName("MaterialCollection")){
             // 读取材质集合
             for(FXmlNode xmaterial : xnode){
@@ -256,6 +330,13 @@ public class FRs3SceneDisplay
       // 存储属性
       xconfig.set("template_guid", _templateGuid);
       _matrix.saveConfig(xconfig.createNode("Matrix"));
+      // 存储动画集合
+      if(_movies != null){
+         FXmlNode xmovies = xconfig.createNode("MovieCollection");
+         for(FRs3SceneMovie movie : _movies){
+            movie.saveConfig(xmovies.createNode("Movie"));
+         }
+      }
       // 存储材质集合
       if(_materials != null){
          FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
@@ -281,6 +362,13 @@ public class FRs3SceneDisplay
       // 读取属性
       _code = input.readString();
       _matrix.unserialize(input);
+      // 读取动画集合
+      int movieCount = input.readInt32();
+      for(int n = 0; n < movieCount; n++){
+         FRs3SceneMovie movie = new FRs3SceneMovie();
+         movie.importData(input);
+         pushMovie(movie);
+      }
       // 读取材质集合
       int materialCount = input.readInt32();
       for(int n = 0; n < materialCount; n++){
