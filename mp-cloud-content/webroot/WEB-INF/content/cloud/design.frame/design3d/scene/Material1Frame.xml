@@ -6,6 +6,10 @@
          <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="effectCode" linker='_controlEffectCode' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Select name="effectCode" linker='_controlEffectCode2' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+            <SelectItem name="automatic" label="自动效果器" data_value='automatic'/>
+            <SelectItem name="skeleton" label="动画效果器" data_value='skeleton'/>
+         </Select>
       </Panel>
       <Panel name='alphaPanel' icon='design.panel.icon' label='透明参数'>
          <Check name="optionAlpha" linker='_controlOptionAlpha' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />

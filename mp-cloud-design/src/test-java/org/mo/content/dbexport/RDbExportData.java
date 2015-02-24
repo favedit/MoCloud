@@ -20,9 +20,9 @@ public class RDbExportData
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3StorageConsole textureConsole = RAop.find(IRs3StorageConsole.class);
-         //textureConsole.exportData(logicContext, path);
-         textureConsole.exportStorage(logicContext, path);
+         IRs3StorageConsole storageConsole = RAop.find(IRs3StorageConsole.class);
+         storageConsole.exportData(logicContext, path);
+         //textureConsole.exportStorage(logicContext, path);
       }
    }
 

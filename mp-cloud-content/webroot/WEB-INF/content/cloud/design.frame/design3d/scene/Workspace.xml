@@ -2,22 +2,22 @@
 <Content name="design3d.scene.Workspace">
    <Workspace name="design3d.scene.Workspace" label="场景工作区">
       <FrameSet name='mainFrameSet' direction_cd='V' label='页面布局'>
-         <FramePage name='toolbarFrame' label='工具栏区' size='0,24'/>
+         <FramePage name='toolbarFrame' label='工具栏区' size='0,26'/>
          <FramePage name='bodyFrame' label='主区'>
             <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
-               <FramePage name='catalogFrame' label='目录区' size='360,0'/>
+               <FramePage name='catalogFrame' label='目录区' size='320,0'/>
                <FrameSpliter name='catalogSpliter'/>
                <FramePage name='spaceFrame' label='工作区'>
                   <FrameSet name='canvasFrameSet' direction_cd='V' label='绘制布局'>
-                     <FramePage name='canvasToolbarFrame' label='画板工作区' size='0,20'/>
+                     <FramePage name='canvasToolbarFrame' label='画板工作区' size='0,26'/>
                      <FramePage name='canvasFrame' label='画板区'/>
                   </FrameSet>
                </FramePage>
                <FrameSpliter name='propertySpliter'/>
-               <FramePage name='propertyFrame' label='属性区' size='200,0'/>
+               <FramePage name='propertyFrame' label='属性区' size='300,0'/>
             </FrameSet>
          </FramePage>
-         <FramePage name='statusFrame' label='状态区' size='0,18'/>
+         <FramePage name='statusFrame' label='状态区' size='0,20'/>
       </FrameSet>
    </Workspace>
 </Content>

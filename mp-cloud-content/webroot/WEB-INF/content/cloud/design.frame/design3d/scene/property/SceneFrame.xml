@@ -5,6 +5,10 @@
          <Edit name="guid" label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="code" label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="label" label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Select name="effectCode" linker='_controlEffectCode' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+            <SelectItem name="automatic" label="自动效果器" data_value='automatic'/>
+            <SelectItem name="skeleton" label="动画效果器" data_value='skeleton'/>
+         </Select>
       </Panel>
    </Frame>
 </Content>

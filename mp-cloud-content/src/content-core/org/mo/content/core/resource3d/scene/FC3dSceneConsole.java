@@ -2,11 +2,16 @@ package org.mo.content.core.resource3d.scene;
 
 import com.cyou.gccloud.data.data.FDataResource3dSceneLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
+import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
 import org.mo.content.resource3d.scene.FRs3Scene;
+import org.mo.content.resource3d.scene.FRs3SceneDisplay;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -17,6 +22,9 @@ public class FC3dSceneConsole
       implements
          IC3dSceneConsole
 {
+   // 模板控制台
+   @ALink
+   protected IRs3TemplateConsole _templateConsole;
 
    //============================================================
    // <T>构造场景控制台。</T>
@@ -92,6 +100,17 @@ public class FC3dSceneConsole
       }
       // 创建场景
       scene.saveUnit(unit);
+      // 修正数据
+      FObjects<FRs3SceneDisplay> displays = scene.filterDisplays();
+      for(FRs3SceneDisplay display : displays){
+         String displayLabel = display.label();
+         if(RString.isEmpty(displayLabel)){
+            String templateGuid = display.templateGuid();
+            FDataResource3dTemplateUnit templateUnit = _templateConsole.findByGuid(logicContext, templateGuid);
+            display.setLabel(templateUnit.label());
+         }
+      }
+      // 更新数据
       doUpdate(logicContext, unit);
       // 返回结果
       return EResult.Success;
