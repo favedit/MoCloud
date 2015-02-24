@@ -6,5 +6,8 @@
          <Number3 name="rotation" linker='_controlRotation' label="旋转" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Number3 name="scale" linker='_controlScale' label="缩放" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
+      <Panel name='effectPanel' icon='design.panel.icon' label='渲染信息'>
+         <ListBox name="effectBox" linker='_controlEffects' label="效果器" label_size='70,0' valid="Y" edit_size='200,0' note="" />
+      </Panel>
    </Frame>
 </Content>

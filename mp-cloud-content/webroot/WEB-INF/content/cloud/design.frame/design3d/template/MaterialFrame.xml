@@ -7,21 +7,21 @@
          <Edit name="label" label="名称:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
-         <Color3 name="ambientColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="ambientColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='diffusePanel' icon='design.panel.icon' label='散射参数'>
-         <Color3 name="diffuseColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="diffuseColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='specularPanel' icon='design.panel.icon' label='高光参数'>
-         <Color3 name="specularColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="specularColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Number name="specularLevel" label="级别:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='reflectPanel' icon='design.panel.icon' label='反射参数'>
-         <Color3 name="reflectColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="reflectColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Number name="reflectMerge" label="融合:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
       <Panel name='emissivePanel' icon='design.panel.icon' label='发光参数'>
-         <Color3 name="emissiveColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="emissiveColor" label="颜色:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
    </Frame>
 </Content>

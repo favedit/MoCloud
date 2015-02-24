@@ -22,29 +22,44 @@ public class FRs3Material
    // 效果代码
    protected String _effectCode;
 
-   // 配置透明
-   protected boolean _optionAlpha;
+   // 配置深度
+   protected boolean _optionDepth = true;
 
    // 配置双面
-   protected boolean _optionDouble;
+   protected boolean _optionDouble = false;
+
+   // 配置透明
+   protected boolean _optionAlpha = false;
+
+   // 配置视角
+   protected boolean _optionView = false;
+
+   // 配置法线反向
+   protected boolean _optionNormalInvert = false;
+
+   // 配置阴影
+   protected boolean _optionShadow = true;
+
+   // 配置自阴影
+   protected boolean _optionShadowSelf = true;
 
    // 配置高光
-   protected boolean _optionSpecular;
+   protected boolean _optionSpecular = true;
 
    // 配置视角高光
-   protected boolean _optionViewSpecular;
+   protected boolean _optionViewSpecular = true;
 
    // 颜色最小
-   protected float _colorMin;
+   protected float _colorMin = 0.0f;
 
    // 颜色最大
-   protected float _colorMax;
+   protected float _colorMax = 1.0f;
 
    // 颜色比率
-   protected float _colorRate;
+   protected float _colorRate = 1.0f;
 
    // 颜色融合
-   protected float _colorMerge;
+   protected float _colorMerge = 0.5f;
 
    // 透明基础
    protected float _alphaBase;
@@ -216,6 +231,24 @@ public class FRs3Material
    }
 
    //============================================================
+   // <T>获得高光基础。</T>
+   //
+   // @return 高光基础
+   //============================================================
+   public float specularBase(){
+      return _specularBase;
+   }
+
+   //============================================================
+   // <T>设置高光基础。</T>
+   //
+   // @param specularBase 高光基础
+   //============================================================
+   public void setSpecularBase(float specularBase){
+      _specularBase = specularBase;
+   }
+
+   //============================================================
    // <T>获得高光级别。</T>
    //
    // @return 高光级别
@@ -317,18 +350,30 @@ public class FRs3Material
       output.writeString(_groupGuid);
       output.writeString(_effectCode);
       // 输出配置
+      output.writeBoolean(_optionDepth);
       output.writeBoolean(_optionAlpha);
       output.writeBoolean(_optionDouble);
+      output.writeBoolean(_optionView);
+      output.writeBoolean(_optionNormalInvert);
+      output.writeBoolean(_optionShadow);
+      output.writeBoolean(_optionShadowSelf);
       // 输出透明
       output.writeFloat(_alphaBase);
       output.writeFloat(_alphaRate);
+      // 输出颜色
+      output.writeFloat(_colorMin);
+      output.writeFloat(_colorMax);
+      output.writeFloat(_colorRate);
+      output.writeFloat(_colorMerge);
       // 输出颜色
       _ambientColor.serialize(output);
       _diffuseColor.serialize(output);
       _diffuseViewColor.serialize(output);
       _specularColor.serialize(output);
+      output.writeFloat(_specularBase);
       output.writeFloat(_specularLevel);
       _specularViewColor.serialize(output);
+      output.writeFloat(_specularViewBase);
       output.writeFloat(_specularViewLevel);
       _reflectColor.serialize(output);
       output.writeFloat(_reflectMerge);
@@ -351,13 +396,23 @@ public class FRs3Material
    //============================================================
    public void loadConfigInfo(FXmlNode xconfig){
       // 加载配置
-      _optionAlpha = xconfig.getBoolean("option_alpha", false);
-      _optionDouble = xconfig.getBoolean("option_double", false);
+      _optionDepth = xconfig.getBoolean("option_depth", _optionDepth);
+      _optionAlpha = xconfig.getBoolean("option_alpha", _optionAlpha);
+      _optionDouble = xconfig.getBoolean("option_double", _optionDouble);
+      _optionView = xconfig.getBoolean("option_view", _optionView);
+      _optionNormalInvert = xconfig.getBoolean("option_normal_invert", _optionNormalInvert);
+      _optionShadow = xconfig.getBoolean("option_shadow", _optionShadow);
+      _optionShadowSelf = xconfig.getBoolean("option_shadow_self", _optionShadowSelf);
       // 加载节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Alpha")){
-            _alphaBase = xnode.getFloat("base");
-            _alphaRate = xnode.getFloat("rate");
+            _alphaBase = xnode.getFloat("base", 0.1f);
+            _alphaRate = xnode.getFloat("rate", 1.0f);
+         }else if(xnode.isName("Color")){
+            _colorMin = xnode.getFloat("min", 0.0f);
+            _colorMax = xnode.getFloat("max", 1.0f);
+            _colorRate = xnode.getFloat("rate", 2.0f);
+            _colorMerge = xnode.getFloat("merge", 0.5f);
          }else if(xnode.isName("Ambient")){
             _ambientColor.loadConfig(xnode);
          }else if(xnode.isName("Diffuse")){
@@ -366,10 +421,12 @@ public class FRs3Material
             _diffuseViewColor.loadConfig(xnode);
          }else if(xnode.isName("Specular")){
             _specularColor.loadConfig(xnode);
-            _specularLevel = xnode.getFloat("level");
+            _specularBase = xnode.getFloat("base", 0.0f);
+            _specularLevel = xnode.getFloat("level", 16.0f);
          }else if(xnode.isName("SpecularView")){
             _specularViewColor.loadConfig(xnode);
-            _specularViewLevel = xnode.getFloat("level");
+            _specularViewBase = xnode.getFloat("base", 0.0f);
+            _specularViewLevel = xnode.getFloat("level", 16.0f);
          }else if(xnode.isName("Reflect")){
             _reflectColor.loadConfig(xnode);
             _reflectMerge = xnode.getFloat("merge");
@@ -424,21 +481,34 @@ public class FRs3Material
       xconfig.set("group_guid", _groupGuid);
       xconfig.set("effect_code", _effectCode);
       // 存储配置
+      xconfig.set("option_depth", _optionDepth);
       xconfig.set("option_alpha", _optionAlpha);
       xconfig.set("option_double", _optionDouble);
+      xconfig.set("option_view", _optionView);
+      xconfig.set("option_normal_invert", _optionNormalInvert);
+      xconfig.set("option_shadow", _optionShadow);
+      xconfig.set("option_shadow_self", _optionShadowSelf);
       // 存储透明
       FXmlNode xalpha = xconfig.createNode("Alpha");
       xalpha.set("base", _alphaBase);
       xalpha.set("rate", _alphaRate);
+      // 存储颜色
+      FXmlNode xcolor = xconfig.createNode("Color");
+      xcolor.set("min", _colorMin);
+      xcolor.set("max", _colorMax);
+      xcolor.set("rate", _colorRate);
+      xcolor.set("merge", _colorMerge);
       // 存储颜色
       _ambientColor.saveConfig(xconfig.createNode("Ambient"));
       _diffuseColor.saveConfig(xconfig.createNode("Diffuse"));
       _diffuseViewColor.saveConfig(xconfig.createNode("DiffuseView"));
       FXmlNode xspecular = xconfig.createNode("Specular");
       _specularColor.saveConfig(xspecular);
+      xspecular.set("base", _specularBase);
       xspecular.set("level", _specularLevel);
       FXmlNode xspecularView = xconfig.createNode("SpecularView");
       _specularViewColor.saveConfig(xspecularView);
+      xspecularView.set("base", _specularViewBase);
       xspecularView.set("level", _specularViewLevel);
       FXmlNode xreflect = xconfig.createNode("Reflect");
       _reflectColor.saveConfig(xreflect);
@@ -506,6 +576,11 @@ public class FRs3Material
          if(xnode.isName("Alpha")){
             _alphaBase = xnode.getFloat("base");
             _alphaRate = xnode.getFloat("rate");
+         }else if(xnode.isName("Color")){
+            _colorMin = xnode.getFloat("min");
+            _colorMax = xnode.getFloat("max");
+            _colorRate = xnode.getFloat("rate");
+            _colorMerge = xnode.getFloat("merge");
          }else if(xnode.isName("Ambient")){
             _ambientColor.importConfig(xnode);
          }else if(xnode.isName("Diffuse")){
@@ -514,9 +589,11 @@ public class FRs3Material
             _diffuseViewColor.importConfig(xnode);
          }else if(xnode.isName("Specular")){
             _specularColor.importConfig(xnode);
+            _specularBase = xnode.getFloat("base");
             _specularLevel = xnode.getFloat("level");
          }else if(xnode.isName("SpecularView")){
             _specularViewColor.importConfig(xnode);
+            _specularViewBase = xnode.getFloat("base");
             _specularViewLevel = xnode.getFloat("level");
          }else if(xnode.isName("Reflect")){
             _reflectColor.importConfig(xnode);

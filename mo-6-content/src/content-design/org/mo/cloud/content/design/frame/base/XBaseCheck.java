@@ -129,13 +129,13 @@ public abstract class XBaseCheck
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
-   // 真数据的定义
+   // 真值的定义
    @AContentField
-   public final static FContentField DATA_TRUE = new FContentField("dataTrue", "data_true", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField VALUE_TRUE = new FContentField("valueTrue", "value_true", EContentData.String, "", "", "", "YYNY");
 
-   // 假数据的定义
+   // 假值的定义
    @AContentField
-   public final static FContentField DATA_FALSE = new FContentField("dataFalse", "data_false", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField VALUE_FALSE = new FContentField("valueFalse", "value_false", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -267,13 +267,13 @@ public abstract class XBaseCheck
    @AName("data_type_cd")
    protected String _dataTypeCd;
 
-   // 真数据
-   @AName("data_true")
-   protected String _dataTrue;
+   // 真值
+   @AName("value_true")
+   protected String _valueTrue;
 
-   // 假数据
-   @AName("data_false")
-   protected String _dataFalse;
+   // 假值
+   @AName("value_false")
+   protected String _valueFalse;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -780,39 +780,39 @@ public abstract class XBaseCheck
    }
 
    //============================================================
-   // <T>获得真数据的内容。</T>
+   // <T>获得真值的内容。</T>
    //
-   // @return 真数据
+   // @return 真值
    //============================================================
-   public String getDataTrue(){
-      return _dataTrue;
+   public String getValueTrue(){
+      return _valueTrue;
    }
 
    //============================================================
-   // <T>设置真数据的内容。</T>
+   // <T>设置真值的内容。</T>
    //
-   // @param value 真数据
+   // @param value 真值
    //============================================================
-   public void setDataTrue(String value){
-      _dataTrue = value;
+   public void setValueTrue(String value){
+      _valueTrue = value;
    }
 
    //============================================================
-   // <T>获得假数据的内容。</T>
+   // <T>获得假值的内容。</T>
    //
-   // @return 假数据
+   // @return 假值
    //============================================================
-   public String getDataFalse(){
-      return _dataFalse;
+   public String getValueFalse(){
+      return _valueFalse;
    }
 
    //============================================================
-   // <T>设置假数据的内容。</T>
+   // <T>设置假值的内容。</T>
    //
-   // @param value 假数据
+   // @param value 假值
    //============================================================
-   public void setDataFalse(String value){
-      _dataFalse = value;
+   public void setValueFalse(String value){
+      _valueFalse = value;
    }
 
 }

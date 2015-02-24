@@ -53,6 +53,26 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
 
+   // 显示模式的定义
+   @AContentField
+   public final static FContentField DISPLAY_MODE = new FContentField("displayMode", "display_mode", EContentData.String, "", "", "", "NYNN");
+
+   // 查看显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_VIEW = new FContentField("displayView", "display_view", EContentData.Boolean, "display_mode", "V", "Y", "YNNY");
+
+   // 新建显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_INSERT = new FContentField("displayInsert", "display_insert", EContentData.Boolean, "display_mode", "I", "Y", "YNNY");
+
+   // 更新显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_UPDATE = new FContentField("displayUpdate", "display_update", EContentData.Boolean, "display_mode", "U", "Y", "YNNY");
+
+   // 删除显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_DELETE = new FContentField("displayDelete", "display_delete", EContentData.Boolean, "display_mode", "D", "Y", "YNNY");
+
    // 编辑模式的定义
    @AContentField
    public final static FContentField EDIT_MODE = new FContentField("editMode", "edit_mode", EContentData.String, "", "", "", "NYNN");
@@ -89,6 +109,14 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField VERIFY_DELETE = new FContentField("verifyDelete", "verify_delete", EContentData.Boolean, "verify_mode", "D", "Y", "YNNY");
 
+   // 标签对齐的定义
+   @AContentField
+   public final static FContentField LABEL_ALIGN_CD = new FContentField("labelAlignCd", "label_align_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 标签尺寸的定义
+   @AContentField
+   public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String, "", "", "", "YYNY");
+
    // 数据名称的定义
    @AContentField
    public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
@@ -97,13 +125,13 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
-   // 真数据的定义
+   // 真值的定义
    @AContentField
-   public final static FContentField DATA_TRUE = new FContentField("dataTrue", "data_true", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField VALUE_TRUE = new FContentField("valueTrue", "value_true", EContentData.String, "", "", "", "YYNY");
 
-   // 假数据的定义
+   // 假值的定义
    @AContentField
-   public final static FContentField DATA_FALSE = new FContentField("dataFalse", "data_false", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField VALUE_FALSE = new FContentField("valueFalse", "value_false", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -159,6 +187,26 @@ public abstract class XBaseColumnCheck
    @AName("linker")
    protected String _linker;
 
+   // 显示模式
+   @AName("display_mode")
+   protected String _displayMode;
+
+   // 查看显示
+   @AName("display_view")
+   protected boolean _displayView;
+
+   // 新建显示
+   @AName("display_insert")
+   protected boolean _displayInsert;
+
+   // 更新显示
+   @AName("display_update")
+   protected boolean _displayUpdate;
+
+   // 删除显示
+   @AName("display_delete")
+   protected boolean _displayDelete;
+
    // 编辑模式
    @AName("edit_mode")
    protected String _editMode;
@@ -195,6 +243,14 @@ public abstract class XBaseColumnCheck
    @AName("verify_delete")
    protected boolean _verifyDelete;
 
+   // 标签对齐
+   @AName("label_align_cd")
+   protected String _labelAlignCd;
+
+   // 标签尺寸
+   @AName("label_size")
+   protected String _labelSize;
+
    // 数据名称
    @AName("data_name")
    protected String _dataName;
@@ -203,13 +259,13 @@ public abstract class XBaseColumnCheck
    @AName("data_type_cd")
    protected String _dataTypeCd;
 
-   // 真数据
-   @AName("data_true")
-   protected String _dataTrue;
+   // 真值
+   @AName("value_true")
+   protected String _valueTrue;
 
-   // 假数据
-   @AName("data_false")
-   protected String _dataFalse;
+   // 假值
+   @AName("value_false")
+   protected String _valueFalse;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -371,6 +427,96 @@ public abstract class XBaseColumnCheck
    //============================================================
    public void setLinker(String value){
       _linker = value;
+   }
+
+   //============================================================
+   // <T>获得显示模式的内容。</T>
+   //
+   // @return 显示模式
+   //============================================================
+   public String getDisplayMode(){
+      return _displayMode;
+   }
+
+   //============================================================
+   // <T>设置显示模式的内容。</T>
+   //
+   // @param value 显示模式
+   //============================================================
+   public void setDisplayMode(String value){
+      _displayMode = value;
+   }
+
+   //============================================================
+   // <T>获得查看显示的内容。</T>
+   //
+   // @return 查看显示
+   //============================================================
+   public Boolean getDisplayView(){
+      return _displayView;
+   }
+
+   //============================================================
+   // <T>设置查看显示的内容。</T>
+   //
+   // @param value 查看显示
+   //============================================================
+   public void setDisplayView(Boolean value){
+      _displayView = value;
+   }
+
+   //============================================================
+   // <T>获得新建显示的内容。</T>
+   //
+   // @return 新建显示
+   //============================================================
+   public Boolean getDisplayInsert(){
+      return _displayInsert;
+   }
+
+   //============================================================
+   // <T>设置新建显示的内容。</T>
+   //
+   // @param value 新建显示
+   //============================================================
+   public void setDisplayInsert(Boolean value){
+      _displayInsert = value;
+   }
+
+   //============================================================
+   // <T>获得更新显示的内容。</T>
+   //
+   // @return 更新显示
+   //============================================================
+   public Boolean getDisplayUpdate(){
+      return _displayUpdate;
+   }
+
+   //============================================================
+   // <T>设置更新显示的内容。</T>
+   //
+   // @param value 更新显示
+   //============================================================
+   public void setDisplayUpdate(Boolean value){
+      _displayUpdate = value;
+   }
+
+   //============================================================
+   // <T>获得删除显示的内容。</T>
+   //
+   // @return 删除显示
+   //============================================================
+   public Boolean getDisplayDelete(){
+      return _displayDelete;
+   }
+
+   //============================================================
+   // <T>设置删除显示的内容。</T>
+   //
+   // @param value 删除显示
+   //============================================================
+   public void setDisplayDelete(Boolean value){
+      _displayDelete = value;
    }
 
    //============================================================
@@ -536,6 +682,42 @@ public abstract class XBaseColumnCheck
    }
 
    //============================================================
+   // <T>获得标签对齐的内容。</T>
+   //
+   // @return 标签对齐
+   //============================================================
+   public String getLabelAlignCd(){
+      return _labelAlignCd;
+   }
+
+   //============================================================
+   // <T>设置标签对齐的内容。</T>
+   //
+   // @param value 标签对齐
+   //============================================================
+   public void setLabelAlignCd(String value){
+      _labelAlignCd = value;
+   }
+
+   //============================================================
+   // <T>获得标签尺寸的内容。</T>
+   //
+   // @return 标签尺寸
+   //============================================================
+   public String getLabelSize(){
+      return _labelSize;
+   }
+
+   //============================================================
+   // <T>设置标签尺寸的内容。</T>
+   //
+   // @param value 标签尺寸
+   //============================================================
+   public void setLabelSize(String value){
+      _labelSize = value;
+   }
+
+   //============================================================
    // <T>获得数据名称的内容。</T>
    //
    // @return 数据名称
@@ -572,39 +754,39 @@ public abstract class XBaseColumnCheck
    }
 
    //============================================================
-   // <T>获得真数据的内容。</T>
+   // <T>获得真值的内容。</T>
    //
-   // @return 真数据
+   // @return 真值
    //============================================================
-   public String getDataTrue(){
-      return _dataTrue;
+   public String getValueTrue(){
+      return _valueTrue;
    }
 
    //============================================================
-   // <T>设置真数据的内容。</T>
+   // <T>设置真值的内容。</T>
    //
-   // @param value 真数据
+   // @param value 真值
    //============================================================
-   public void setDataTrue(String value){
-      _dataTrue = value;
+   public void setValueTrue(String value){
+      _valueTrue = value;
    }
 
    //============================================================
-   // <T>获得假数据的内容。</T>
+   // <T>获得假值的内容。</T>
    //
-   // @return 假数据
+   // @return 假值
    //============================================================
-   public String getDataFalse(){
-      return _dataFalse;
+   public String getValueFalse(){
+      return _valueFalse;
    }
 
    //============================================================
-   // <T>设置假数据的内容。</T>
+   // <T>设置假值的内容。</T>
    //
-   // @param value 假数据
+   // @param value 假值
    //============================================================
-   public void setDataFalse(String value){
-      _dataFalse = value;
+   public void setValueFalse(String value){
+      _valueFalse = value;
    }
 
 }

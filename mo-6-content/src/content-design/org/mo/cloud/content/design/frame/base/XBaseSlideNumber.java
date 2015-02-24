@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>数字2编辑框对象的内容基类。</T>
+// <T>滑动数字编辑框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseNumber2
+public abstract class XBaseSlideNumber
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "Number2";
+   public static final String CONTENT_NAME = "SlideNumber";
 
    // 类型的定义
    @AContentField
@@ -136,6 +136,10 @@ public abstract class XBaseNumber2
    // 最大值的定义
    @AContentField
    public final static FContentField VALUE_MAX = new FContentField("valueMax", "value_max", EContentData.String, "", "", "", "YYNY");
+
+   // 输入尺寸的定义
+   @AContentField
+   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -274,6 +278,10 @@ public abstract class XBaseNumber2
    // 最大值
    @AName("value_max")
    protected String _valueMax;
+
+   // 输入尺寸
+   @AName("input_size")
+   protected String _inputSize;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -813,6 +821,24 @@ public abstract class XBaseNumber2
    //============================================================
    public void setValueMax(String value){
       _valueMax = value;
+   }
+
+   //============================================================
+   // <T>获得输入尺寸的内容。</T>
+   //
+   // @return 输入尺寸
+   //============================================================
+   public String getInputSize(){
+      return _inputSize;
+   }
+
+   //============================================================
+   // <T>设置输入尺寸的内容。</T>
+   //
+   // @param value 输入尺寸
+   //============================================================
+   public void setInputSize(String value){
+      _inputSize = value;
    }
 
 }

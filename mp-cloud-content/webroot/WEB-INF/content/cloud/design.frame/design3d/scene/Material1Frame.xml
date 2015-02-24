@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.Material1Frame" update_date="20141210134046">
+   <Frame name="design3d.scene.Material1Frame" type='FDsSceneMaterial1Frame' linker='_frameMaterial1' label="材质属性" is_valid="Y" note="">
+      <Panel name='infoPanel' icon='design.panel.icon' label='材质属性'>
+         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="effectCode" linker='_controlEffectCode' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='alphaPanel' icon='design.panel.icon' label='透明参数'>
+         <Check name="optionAlpha" linker='_controlOptionAlpha' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <SlideNumber name="alphaBase" linker='_controlAlphaBase' label="基础" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+         <SlideNumber name="alphaRate" linker='_controlAlphaRate' label="比率" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+      </Panel>
+      <Panel name='alphaPanel' icon='design.panel.icon' label='颜色参数'>
+         <SlideNumber name="colorMin" linker='_controlColorMin' label="下限" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+         <SlideNumber name="colorMax" linker='_controlColorMax' label="上限" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+         <SlideNumber name="colorRate" linker='_controlColorRate' label="比率" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='2' value_step='0.01' note="" />
+         <SlideNumber name="colorMerge" linker='_controlColorMerge' label="合并" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+      </Panel>
+      <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
+         <ColorPower name="ambientColor" linker='_controlAmbientColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='diffusePanel' icon='design.panel.icon' label='散射参数'>
+         <ColorPower name="diffuseColor" linker='_controlDiffuseColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='specularPanel' icon='design.panel.icon' label='高光参数'>
+         <ColorPower name="specularColor" linker='_controlSpecularColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <SlideNumber name="specularBase" linker='_controlSpecularBase' label="基础" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.1' note="" />
+         <SlideNumber name="specularLevel" linker='_controlSpecularLevel' label="级别" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='100' value_step='1' note="" />
+      </Panel>
+      <Panel name='reflectPanel' icon='design.panel.icon' label='反射参数'>
+         <ColorPower name="reflectColor" linker='_controlReflectColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <SlideNumber name="reflectMerge" linker='_controlReflectMerge' label="融合" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='2' value_step='0.1' note="" />
+      </Panel>
+      <Panel name='emissivePanel' icon='design.panel.icon' label='发光参数'>
+         <ColorPower name="emissiveColor" linker='_controlEmissiveColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>
