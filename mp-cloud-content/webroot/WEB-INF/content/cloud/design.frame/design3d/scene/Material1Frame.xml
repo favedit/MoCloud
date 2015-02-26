@@ -22,22 +22,22 @@
          <SlideNumber name="colorMerge" linker='_controlColorMerge' label="合并" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
       </Panel>
       <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
-         <ColorPower name="ambientColor" linker='_controlAmbientColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="ambientColor" linker='_controlAmbientColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='4' note="" />
       </Panel>
       <Panel name='diffusePanel' icon='design.panel.icon' label='散射参数'>
-         <ColorPower name="diffuseColor" linker='_controlDiffuseColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="diffuseColor" linker='_controlDiffuseColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='4' note="" />
       </Panel>
       <Panel name='specularPanel' icon='design.panel.icon' label='高光参数'>
-         <ColorPower name="specularColor" linker='_controlSpecularColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="specularColor" linker='_controlSpecularColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='32' note="" />
          <SlideNumber name="specularBase" linker='_controlSpecularBase' label="基础" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.1' note="" />
          <SlideNumber name="specularLevel" linker='_controlSpecularLevel' label="级别" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='100' value_step='1' note="" />
       </Panel>
       <Panel name='reflectPanel' icon='design.panel.icon' label='反射参数'>
-         <ColorPower name="reflectColor" linker='_controlReflectColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="reflectColor" linker='_controlReflectColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='4' note="" />
          <SlideNumber name="reflectMerge" linker='_controlReflectMerge' label="融合" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='2' value_step='0.1' note="" />
       </Panel>
       <Panel name='emissivePanel' icon='design.panel.icon' label='发光参数'>
-         <ColorPower name="emissiveColor" linker='_controlEmissiveColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="emissiveColor" linker='_controlEmissiveColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='4' note="" />
       </Panel>
    </Frame>
 </Content>

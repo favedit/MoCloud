@@ -129,6 +129,14 @@ public abstract class XBaseColorPower
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 最小值的定义
+   @AContentField
+   public final static FContentField VALUE_MIN = new FContentField("valueMin", "value_min", EContentData.String, "", "", "", "YYNY");
+
+   // 最大值的定义
+   @AContentField
+   public final static FContentField VALUE_MAX = new FContentField("valueMax", "value_max", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -258,6 +266,14 @@ public abstract class XBaseColorPower
    // 数据类型
    @AName("data_type_cd")
    protected String _dataTypeCd;
+
+   // 最小值
+   @AName("value_min")
+   protected String _valueMin;
+
+   // 最大值
+   @AName("value_max")
+   protected String _valueMax;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -761,6 +777,42 @@ public abstract class XBaseColorPower
    //============================================================
    public void setDataTypeCd(String value){
       _dataTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得最小值的内容。</T>
+   //
+   // @return 最小值
+   //============================================================
+   public String getValueMin(){
+      return _valueMin;
+   }
+
+   //============================================================
+   // <T>设置最小值的内容。</T>
+   //
+   // @param value 最小值
+   //============================================================
+   public void setValueMin(String value){
+      _valueMin = value;
+   }
+
+   //============================================================
+   // <T>获得最大值的内容。</T>
+   //
+   // @return 最大值
+   //============================================================
+   public String getValueMax(){
+      return _valueMax;
+   }
+
+   //============================================================
+   // <T>设置最大值的内容。</T>
+   //
+   // @param value 最大值
+   //============================================================
+   public void setValueMax(String value){
+      _valueMax = value;
    }
 
 }

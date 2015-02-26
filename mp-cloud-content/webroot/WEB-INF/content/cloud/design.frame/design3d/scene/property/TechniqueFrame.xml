@@ -5,13 +5,13 @@
          <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
-      <Panel name='infoPanel' icon='design.panel.icon' label='渲染技术'>
          <Select name="techniqueCode" linker='_controlTechniqueCode' label="技术代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
             <SelectItem name="general" label="通常技术" data_value='general'/>
             <SelectItem name="shadow" label="阴影技术" data_value='shadow'/>
             <SelectItem name="deferred" label="延迟技术" data_value='deferred'/>
          </Select>
+      </Panel>
+      <Panel name='infoPanel' icon='design.panel.icon' label='渲染模式'>
          <ListBox name="renderModesBox" linker='_controlRenderModes' label="渲染模式" label_size='70,0' valid="Y" edit_size='200,0' note="" />
       </Panel>
    </Frame>
