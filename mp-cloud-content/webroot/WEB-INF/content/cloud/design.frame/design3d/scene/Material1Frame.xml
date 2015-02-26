@@ -5,8 +5,7 @@
          <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="effectCode" linker='_controlEffectCode' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Select name="effectCode" linker='_controlEffectCode2' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+         <Select name="effectCode" linker='_controlEffectCode' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
             <SelectItem name="automatic" label="自动效果器" data_value='automatic'/>
             <SelectItem name="skeleton" label="动画效果器" data_value='skeleton'/>
          </Select>
@@ -16,7 +15,7 @@
          <SlideNumber name="alphaBase" linker='_controlAlphaBase' label="基础" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
          <SlideNumber name="alphaRate" linker='_controlAlphaRate' label="比率" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
       </Panel>
-      <Panel name='alphaPanel' icon='design.panel.icon' label='颜色参数'>
+      <Panel name='colorPanel' icon='design.panel.icon' label='颜色参数'>
          <SlideNumber name="colorMin" linker='_controlColorMin' label="下限" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
          <SlideNumber name="colorMax" linker='_controlColorMax' label="上限" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
          <SlideNumber name="colorRate" linker='_controlColorRate' label="比率" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='2' value_step='0.01' note="" />

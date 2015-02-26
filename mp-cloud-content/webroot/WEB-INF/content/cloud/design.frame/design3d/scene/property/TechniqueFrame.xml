@@ -2,7 +2,17 @@
 <Content name="design3d.template.property.TechniqueFrame" update_date="20141210134046">
    <Frame type='FDsSceneTechniquePropertyFrame' name="design3d.template.property.TechniqueFrame" label="技术属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
       <Panel name='infoPanel' icon='design.panel.icon' label='技术属性'>
+         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='infoPanel' icon='design.panel.icon' label='渲染技术'>
+         <Select name="techniqueCode" linker='_controlTechniqueCode' label="技术代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+            <SelectItem name="general" label="通常技术" data_value='general'/>
+            <SelectItem name="shadow" label="阴影技术" data_value='shadow'/>
+            <SelectItem name="deferred" label="延迟技术" data_value='deferred'/>
+         </Select>
+         <ListBox name="renderModesBox" linker='_controlRenderModes' label="渲染模式" label_size='70,0' valid="Y" edit_size='200,0' note="" />
       </Panel>
    </Frame>
 </Content>
