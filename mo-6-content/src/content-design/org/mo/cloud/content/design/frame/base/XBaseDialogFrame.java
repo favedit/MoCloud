@@ -33,6 +33,10 @@ public abstract class XBaseDialogFrame
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
+   // 属性集合的定义
+   @AContentField
+   public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
+
    // 位置的定义
    @AContentField
    public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
@@ -52,6 +56,10 @@ public abstract class XBaseDialogFrame
    // 关联属性的定义
    @AContentField
    public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+
+   // 提示信息的定义
+   @AContentField
+   public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -87,6 +95,10 @@ public abstract class XBaseDialogFrame
    @AName("label")
    protected String _label;
 
+   // 属性集合
+   @AName("attributes")
+   protected String _attributes;
+
    // 位置
    @AName("location")
    protected String _location;
@@ -106,6 +118,10 @@ public abstract class XBaseDialogFrame
    // 关联属性
    @AName("linker")
    protected String _linker;
+
+   // 提示信息
+   @AName("hint")
+   protected String _hint;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -177,6 +193,24 @@ public abstract class XBaseDialogFrame
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得属性集合的内容。</T>
+   //
+   // @return 属性集合
+   //============================================================
+   public String getAttributes(){
+      return _attributes;
+   }
+
+   //============================================================
+   // <T>设置属性集合的内容。</T>
+   //
+   // @param value 属性集合
+   //============================================================
+   public void setAttributes(String value){
+      _attributes = value;
    }
 
    //============================================================
@@ -267,6 +301,24 @@ public abstract class XBaseDialogFrame
    //============================================================
    public void setLinker(String value){
       _linker = value;
+   }
+
+   //============================================================
+   // <T>获得提示信息的内容。</T>
+   //
+   // @return 提示信息
+   //============================================================
+   public String getHint(){
+      return _hint;
+   }
+
+   //============================================================
+   // <T>设置提示信息的内容。</T>
+   //
+   // @param value 提示信息
+   //============================================================
+   public void setHint(String value){
+      _hint = value;
    }
 
 }

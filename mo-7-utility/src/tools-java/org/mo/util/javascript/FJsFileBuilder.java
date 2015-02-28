@@ -1,16 +1,16 @@
 package org.mo.util.javascript;
 
 import java.io.File;
-import java.util.UUID;
-import org.mo.com.encoding.RCode64;
 import org.mo.com.io.FLinesFile;
 import org.mo.com.io.FStringFile;
+import org.mo.com.io.RFile;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.FStrings;
-import org.mo.com.lang.RByte;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.xml.FXmlDocument;
+import org.mo.com.xml.FXmlNode;
 
 //============================================================
 //<T>JavaScript文件合并。</T>
@@ -75,15 +75,38 @@ public class FJsFileBuilder
                                 String targetFile){
       boolean comment = false;
       try{
-         FStringFile result = new FStringFile();
+         // 链接目录下内容
+         FString sourceS = new FString();
+         FString sourceT = new FString();
+         FString sourceF = new FString();
+         FString sourceR = new FString();
+         FString sourceA = new FString();
          File path = new File(sourcePath);
          if(path.isDirectory()){
-            for(File file : path.listFiles()){
+            for(File file : new File(sourcePath).listFiles()){
                if(file.isFile()){
-                  formatFile(result, comment, file);
+                  String fileName = file.getName();
+                  if(fileName.startsWith("S")){
+                     formatFile(sourceS, comment, file);
+                  }else if(fileName.startsWith("T")){
+                     formatFile(sourceT, comment, file);
+                  }else if(fileName.startsWith("F")){
+                     formatFile(sourceF, comment, file);
+                  }else if(fileName.startsWith("R")){
+                     formatFile(sourceR, comment, file);
+                  }else{
+                     formatFile(sourceA, comment, file);
+                  }
                }
             }
          }
+         // 存储文件
+         FStringFile result = new FStringFile();
+         result.append(sourceA);
+         result.append(sourceS);
+         result.append(sourceT);
+         result.append(sourceF);
+         result.append(sourceR);
          // 存储文件
          result.saveFile(targetFile, CHARSET);
          System.out.println("Merge javascript path file. (file_name=" + targetFile + ")");
@@ -118,60 +141,47 @@ public class FJsFileBuilder
    // @param params 参数集合
    //============================================================
    public static void main(String[] params){
-      UUID q = UUID.randomUUID();
-      String value = RString.removeChars(q.toString(), '-');
-      byte[] data = RByte.fromHexString(value);
-      String result = RCode64.encode(data);
-      //RString.replace(value, from, to) q.toString()
-      //RUuid.makeUniqueId()
-
-      System.out.println(q.toString());
-      System.out.println(value.length() + " - " + value);
-      System.out.println(result.length() + " - " + result);
-      //RBase64.encode(data)
-      return;
-
-      //      try{
-      //         // 检查路径
-      //         String path = params[0];
-      //         if(!RFile.isDirectory(path)){
-      //            System.out.println("Unknown directory. (parameter=" + path + ")");
-      //            return;
-      //         }
-      //         // 文件处理
-      //         String configName = path + "/mojs.xml";
-      //         FXmlDocument xdoc = new FXmlDocument(configName);
-      //         FXmlNode xconfig = xdoc.root();
-      //         // 处理所有路径合并
-      //         if(xconfig.hasNode()){
-      //            FXmlNode xmergers = xconfig.findNode("PathMergerCollection");
-      //            for(FXmlNode xmerger : xmergers){
-      //               if(xmerger.isName("PathMerger")){
-      //                  String sourcePath = RFile.makeFilename(path, xmerger.get("source"));
-      //                  String targetFile = RFile.makeFilename(path, xmerger.get("target"));
-      //                  mergePath(sourcePath, targetFile);
-      //               }
-      //            }
-      //         }
-      //         // 处理所有文件合并
-      //         if(xconfig.hasNode()){
-      //            FXmlNode xmergers = xconfig.findNode("FileMergerCollection");
-      //            for(FXmlNode xmerger : xmergers){
-      //               if(xmerger.isName("FileMerger")){
-      //                  String targetFile = RFile.makeFilename(path, xmerger.get("target"));
-      //                  FStrings sourceFiles = new FStrings();
-      //                  for(FXmlNode xfile : xmerger){
-      //                     if(xfile.isName("File")){
-      //                        String sourceFile = RFile.makeFilename(path, xfile.get("source"));
-      //                        sourceFiles.push(sourceFile);
-      //                     }
-      //                  }
-      //                  mergeFiles(sourceFiles, targetFile);
-      //               }
-      //            }
-      //         }
-      //      }catch(Exception e){
-      //         RLogger.find(FJsFileBuilder.class).error(null, "main", e);
-      //      }
+      try{
+         // 检查路径
+         String path = params[0];
+         if(!RFile.isDirectory(path)){
+            System.out.println("Unknown directory. (parameter=" + path + ")");
+            return;
+         }
+         // 文件处理
+         String configName = path + "/mojs.xml";
+         FXmlDocument xdoc = new FXmlDocument(configName);
+         FXmlNode xconfig = xdoc.root();
+         // 处理所有路径合并
+         if(xconfig.hasNode()){
+            FXmlNode xmergers = xconfig.findNode("PathMergerCollection");
+            for(FXmlNode xmerger : xmergers){
+               if(xmerger.isName("PathMerger")){
+                  String sourcePath = RFile.makeFilename(path, xmerger.get("source"));
+                  String targetFile = RFile.makeFilename(path, xmerger.get("target"));
+                  mergePath(sourcePath, targetFile);
+               }
+            }
+         }
+         // 处理所有文件合并
+         if(xconfig.hasNode()){
+            FXmlNode xmergers = xconfig.findNode("FileMergerCollection");
+            for(FXmlNode xmerger : xmergers){
+               if(xmerger.isName("FileMerger")){
+                  String targetFile = RFile.makeFilename(path, xmerger.get("target"));
+                  FStrings sourceFiles = new FStrings();
+                  for(FXmlNode xfile : xmerger){
+                     if(xfile.isName("File")){
+                        String sourceFile = RFile.makeFilename(path, xfile.get("source"));
+                        sourceFiles.push(sourceFile);
+                     }
+                  }
+                  mergeFiles(sourceFiles, targetFile);
+               }
+            }
+         }
+      }catch(Exception e){
+         RLogger.find(FJsFileBuilder.class).error(null, "main", e);
+      }
    }
 }

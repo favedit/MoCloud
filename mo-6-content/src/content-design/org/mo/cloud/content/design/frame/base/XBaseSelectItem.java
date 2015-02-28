@@ -33,6 +33,10 @@ public abstract class XBaseSelectItem
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
+   // 属性集合的定义
+   @AContentField
+   public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
+
    // 数据内容的定义
    @AContentField
    public final static FContentField DATA_VALUE = new FContentField("dataValue", "data_value", EContentData.String, "", "", "", "YYNY");
@@ -70,6 +74,10 @@ public abstract class XBaseSelectItem
    // 标签
    @AName("label")
    protected String _label;
+
+   // 属性集合
+   @AName("attributes")
+   protected String _attributes;
 
    // 数据内容
    @AName("data_value")
@@ -145,6 +153,24 @@ public abstract class XBaseSelectItem
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得属性集合的内容。</T>
+   //
+   // @return 属性集合
+   //============================================================
+   public String getAttributes(){
+      return _attributes;
+   }
+
+   //============================================================
+   // <T>设置属性集合的内容。</T>
+   //
+   // @param value 属性集合
+   //============================================================
+   public void setAttributes(String value){
+      _attributes = value;
    }
 
    //============================================================

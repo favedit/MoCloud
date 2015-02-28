@@ -83,13 +83,34 @@ public class FJsPathMerger
       }
       try{
          // 链接目录下内容
-         FStringFile result = new FStringFile();
+         FString sourceS = new FString();
+         FString sourceT = new FString();
+         FString sourceF = new FString();
+         FString sourceR = new FString();
+         FString sourceA = new FString();
          for(File file : new File(path).listFiles()){
             if(file.isFile()){
-               formatFile(result, comment, file);
+               String fileName = file.getName();
+               if(fileName.startsWith("S")){
+                  formatFile(sourceS, comment, file);
+               }else if(fileName.startsWith("T")){
+                  formatFile(sourceT, comment, file);
+               }else if(fileName.startsWith("F")){
+                  formatFile(sourceF, comment, file);
+               }else if(fileName.startsWith("R")){
+                  formatFile(sourceR, comment, file);
+               }else{
+                  formatFile(sourceA, comment, file);
+               }
             }
          }
          // 存储文件
+         FStringFile result = new FStringFile();
+         result.append(sourceA);
+         result.append(sourceS);
+         result.append(sourceT);
+         result.append(sourceF);
+         result.append(sourceR);
          result.saveFile(target, CHARSET);
          System.out.println("Merge javascript path file. (file_name=" + target + ")");
       }catch(Throwable t){

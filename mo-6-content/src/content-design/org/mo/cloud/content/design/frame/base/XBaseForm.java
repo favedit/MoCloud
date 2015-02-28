@@ -33,6 +33,10 @@ public abstract class XBaseForm
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
 
+   // 属性集合的定义
+   @AContentField
+   public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
+
    // 位置的定义
    @AContentField
    public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
@@ -53,9 +57,17 @@ public abstract class XBaseForm
    @AContentField
    public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
 
+   // 提示信息的定义
+   @AContentField
+   public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
+
    // 页面来源的定义
    @AContentField
    public final static FContentField FRAME_SOURCE = new FContentField("frameSource", "frame_source", EContentData.String, "", "", "", "YYNY");
+
+   // 滚动类型的定义
+   @AContentField
+   public final static FContentField SCROLL_CD = new FContentField("scrollCd", "scroll_cd", EContentData.String, "", "", "", "YYNY");
 
    // 数据名称的定义
    @AContentField
@@ -123,6 +135,10 @@ public abstract class XBaseForm
    @AName("label")
    protected String _label;
 
+   // 属性集合
+   @AName("attributes")
+   protected String _attributes;
+
    // 位置
    @AName("location")
    protected String _location;
@@ -143,9 +159,17 @@ public abstract class XBaseForm
    @AName("linker")
    protected String _linker;
 
+   // 提示信息
+   @AName("hint")
+   protected String _hint;
+
    // 页面来源
    @AName("frame_source")
    protected String _frameSource;
+
+   // 滚动类型
+   @AName("scroll_cd")
+   protected String _scrollCd;
 
    // 数据名称
    @AName("dataset_name")
@@ -252,6 +276,24 @@ public abstract class XBaseForm
    }
 
    //============================================================
+   // <T>获得属性集合的内容。</T>
+   //
+   // @return 属性集合
+   //============================================================
+   public String getAttributes(){
+      return _attributes;
+   }
+
+   //============================================================
+   // <T>设置属性集合的内容。</T>
+   //
+   // @param value 属性集合
+   //============================================================
+   public void setAttributes(String value){
+      _attributes = value;
+   }
+
+   //============================================================
    // <T>获得位置的内容。</T>
    //
    // @return 位置
@@ -342,6 +384,24 @@ public abstract class XBaseForm
    }
 
    //============================================================
+   // <T>获得提示信息的内容。</T>
+   //
+   // @return 提示信息
+   //============================================================
+   public String getHint(){
+      return _hint;
+   }
+
+   //============================================================
+   // <T>设置提示信息的内容。</T>
+   //
+   // @param value 提示信息
+   //============================================================
+   public void setHint(String value){
+      _hint = value;
+   }
+
+   //============================================================
    // <T>获得页面来源的内容。</T>
    //
    // @return 页面来源
@@ -357,6 +417,24 @@ public abstract class XBaseForm
    //============================================================
    public void setFrameSource(String value){
       _frameSource = value;
+   }
+
+   //============================================================
+   // <T>获得滚动类型的内容。</T>
+   //
+   // @return 滚动类型
+   //============================================================
+   public String getScrollCd(){
+      return _scrollCd;
+   }
+
+   //============================================================
+   // <T>设置滚动类型的内容。</T>
+   //
+   // @param value 滚动类型
+   //============================================================
+   public void setScrollCd(String value){
+      _scrollCd = value;
    }
 
    //============================================================
