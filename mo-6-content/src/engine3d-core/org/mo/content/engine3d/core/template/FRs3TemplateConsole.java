@@ -14,6 +14,7 @@ import com.cyou.gccloud.data.data.FDataResource3dTemplateThemeLogic;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
+import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import com.cyou.gccloud.data.data.FDataResource3dThemeUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
@@ -223,9 +224,11 @@ public class FRs3TemplateConsole
             String materialTextureSql = FDataResource3dMaterialTextureLogic.MATERIAL_ID + "=" + materialUnit.ouid();
             FLogicDataset<FDataResource3dMaterialTextureUnit> materialTextureDataset = materialTextureLogic.fetch(materialTextureSql);
             for(FDataResource3dMaterialTextureUnit materialTextureUnit : materialTextureDataset){
+               FDataResource3dTextureUnit textureUnit = materialTextureUnit.texture();
                FDataResource3dTextureBitmapUnit textureBitmapUnit = materialTextureUnit.textureBitmap();
                FRs3MaterialTexture materialTexture = new FRs3MaterialTexture();
                materialTexture.loadUnit(materialTextureUnit);
+               materialTexture.setTextureGuid(textureUnit.guid());
                materialTexture.setBitmapGuid(textureBitmapUnit.guid());
                material.textures().push(materialTexture);
             }

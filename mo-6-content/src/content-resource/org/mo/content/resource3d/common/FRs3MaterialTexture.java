@@ -124,6 +124,7 @@ public class FRs3MaterialTexture
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
+      output.writeString(_textureGuid);
       output.writeString(_bitmapGuid);
    }
 
@@ -132,6 +133,7 @@ public class FRs3MaterialTexture
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       _guid = xconfig.get("guid");
       _code = xconfig.get("code");
@@ -144,6 +146,7 @@ public class FRs3MaterialTexture
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", _guid);
@@ -159,6 +162,7 @@ public class FRs3MaterialTexture
    //============================================================
    public void loadUnit(FDataResource3dMaterialTextureUnit unit){
       // 加载属性
+      _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
    }

@@ -1,7 +1,6 @@
-package org.mo.content.face.resource3d.model;
+package org.mo.content.face.resource3d.texture;
 
 import javax.servlet.http.HttpServletResponse;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -10,8 +9,8 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.core.resource3d.model.IC3dModelConsole;
-import org.mo.content.resource3d.model.FRs3Model;
+import org.mo.content.engine3d.core.texture.FRs3Texture;
+import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -19,29 +18,22 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>上传处理。</T>
+// <T>纹理数据。</T>
 //============================================================
-public class FModelServlet
+public class FTextureServlet
       extends FObject
       implements
-         IModelServlet
+         ITextureServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FModelServlet.class);
-
-   // 数据缓冲大小
-   protected static int BufferLength = 1024 * 64;
+   private static ILogger _logger = RLogger.find(FTextureServlet.class);
 
    // 缓冲时间
    protected static long CacheTimeout = 3600 * 24 * 7 * 4;
 
-   // 存储管理接口
+   // 纹理位图接口
    @ALink
-   protected IGcStorageConsole _storageConsole;
-
-   // 资源模型接口
-   @ALink
-   protected IC3dModelConsole _modelConsole;
+   protected IRs3TextureConsole _textureConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -64,27 +56,24 @@ public class FModelServlet
                        IWebServletResponse response){
       // 检查代码
       String guid = context.parameter("guid");
-      String code = context.parameter("code");
-      String version = context.parameter("version");
-      // 检查参数
-      if(RString.isEmpty(code)){
+      if(RString.isEmpty(guid)){
          throw new FFatalError("Model code is empty.");
       }
-      // 生成数据
-      FRs3Model model = _modelConsole.makeModel(logicContext, code, version);
+      // 获得数据
+      FRs3Texture texture = _textureConsole.makeTexture(logicContext, guid);
       FByteStream stream = new FByteStream();
-      if(model == null){
-         String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);
+      if(texture == null){
+         String info = RString.format("Texture is not exists. (guid={1})", guid);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         model.serialize(stream);
+         texture.serialize(stream);
       }
       int dataLength = stream.length();
       byte[] data = stream.memory();
       // 发送数据
-      _logger.debug(this, "process", "Send model data. (length={1})", dataLength);
+      _logger.debug(this, "process", "Send data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=" + CacheTimeout);

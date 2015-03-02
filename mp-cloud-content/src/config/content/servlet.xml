@@ -15,6 +15,18 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
+   <!-- 设计：纹理数据获取处理                                       -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.texture'
+         face  = 'org.mo.content.face.resource3d.texture.ITextureServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.texture.ITextureServlet'
+         class = 'org.mo.content.face.resource3d.texture.FTextureServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
    <!-- 设计：模型资源获取处理                                       -->
    <!-- ============================================================ -->
    <WebServlet

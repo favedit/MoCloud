@@ -22,6 +22,8 @@ import org.mo.com.logging.RLogger;
 //============================================================
 public class FImage
       extends FObject
+      implements
+         AutoCloseable
 {
    // 日志输出接口
    private final static ILogger _logger = RLogger.find(FImage.class);
@@ -78,6 +80,30 @@ public class FImage
    //============================================================
    public int height(){
       return _image.getHeight();
+   }
+
+   //============================================================
+   // <T>获得数据。</T>
+   //
+   // @param data 数据
+   // @return 数据
+   //============================================================
+   public int[] getData(){
+      int width = _image.getWidth();
+      int height = _image.getHeight();
+      return _image.getRGB(0, 0, width, height, null, 0, width);
+   }
+
+   //============================================================
+   // <T>设置数据。</T>
+   //
+   // @param data 数据
+   // @return 数据
+   //============================================================
+   public void setData(int[] data){
+      int width = _image.getWidth();
+      int height = _image.getHeight();
+      _image.setRGB(0, 0, width, height, data, 0, width);
    }
 
    //============================================================
@@ -257,5 +283,13 @@ public class FImage
       int scaleHeight = (int)(imageHeight * rate);
       // 改变尺寸
       resize(scaleWidth, scaleHeight, alpha);
+   }
+
+   //============================================================
+   // <T>释放处理。</T>
+   //============================================================
+   @Override
+   public void close() throws Exception{
+      _image = null;
    }
 }

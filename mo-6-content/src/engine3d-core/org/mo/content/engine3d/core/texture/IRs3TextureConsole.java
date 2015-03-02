@@ -48,4 +48,14 @@ public interface IRs3TextureConsole
    //============================================================
    EResult importTexture(ILogicContext logicContext,
                          String path);
+
+   //============================================================
+   // <T>生成纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   FRs3Texture makeTexture(ILogicContext logicContext,
+                           String guid);
 }
