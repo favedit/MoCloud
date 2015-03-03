@@ -83,6 +83,7 @@ public class FRs3Texture
       if((diffuseBitmap != null) || (alphaBitmap != null)){
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          if((diffuseBitmap != null) && (alphaBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
             bitmapPack.setCode("diffuse|alpha");
             bitmapPack.mergeRgb(diffuseBitmap);
             bitmapPack.mergeAlpha(alphaBitmap);
@@ -90,6 +91,7 @@ public class FRs3Texture
             bitmapPack.setCode("diffuse");
             bitmapPack.mergeRgb(diffuseBitmap, 0xFF);
          }else if((diffuseBitmap == null) && (alphaBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
             bitmapPack.setCode("alpha");
             bitmapPack.mergeAlpha(alphaBitmap, 0xFFFFFF);
          }
@@ -102,13 +104,15 @@ public class FRs3Texture
       if((normalBitmap != null) || (specularLevelBitmap != null)){
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          if((normalBitmap != null) && (specularLevelBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
             bitmapPack.setCode("normal|specular.level");
             bitmapPack.mergeRgb(normalBitmap);
             bitmapPack.mergeAlpha(specularLevelBitmap);
          }else if((normalBitmap != null) && (specularLevelBitmap == null)){
             bitmapPack.setCode("normal");
-            bitmapPack.mergeRgb(normalBitmap);
+            bitmapPack.mergeRgb(normalBitmap, 0xFF);
          }else if((normalBitmap == null) && (specularLevelBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
             bitmapPack.setCode("specular.level");
             bitmapPack.mergeAlpha(specularLevelBitmap);
          }
@@ -126,7 +130,7 @@ public class FRs3Texture
             bitmapPack.mergeAlpha(heightBitmap);
          }else if((specularBitmap != null) && (heightBitmap == null)){
             bitmapPack.setCode("specular");
-            bitmapPack.mergeRgb(specularBitmap);
+            bitmapPack.mergeRgb(specularBitmap, 0xFF);
          }else if((specularBitmap == null) && (heightBitmap != null)){
             bitmapPack.setCode("height");
             bitmapPack.mergeAlpha(heightBitmap);
@@ -155,6 +159,7 @@ public class FRs3Texture
             bitmapPack.mergeB(refractBitmap);
          }
          if(emissiveBitmap != null){
+            bitmapPack.setOptionAlpha(true);
             code += "|emissive";
             bitmapPack.mergeG(emissiveBitmap);
          }
@@ -168,13 +173,15 @@ public class FRs3Texture
       if((transmittanceColorBitmap != null) || (transmittanceLevelBitmap != null)){
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
             bitmapPack.setCode("transmittance.color|transmittance.level");
             bitmapPack.mergeRgb(transmittanceColorBitmap);
             bitmapPack.mergeAlpha(transmittanceLevelBitmap);
          }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
             bitmapPack.setCode("transmittance.color");
-            bitmapPack.mergeRgb(transmittanceColorBitmap);
+            bitmapPack.mergeRgb(transmittanceColorBitmap, 0xFF);
          }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
             bitmapPack.setCode("transmittance.level");
             bitmapPack.mergeAlpha(transmittanceLevelBitmap);
          }

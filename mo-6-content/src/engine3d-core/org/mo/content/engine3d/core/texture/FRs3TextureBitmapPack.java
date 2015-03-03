@@ -1,6 +1,7 @@
 package org.mo.content.engine3d.core.texture;
 
 import java.awt.image.BufferedImage;
+import org.mo.com.geom.SIntSize2;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.content.resource3d.common.FRs3Object;
@@ -14,11 +15,17 @@ public class FRs3TextureBitmapPack
       implements
          AutoCloseable
 {
+   // 透明
+   protected boolean _optionAlpha;
+
    // 数据
    protected int[] _data;
 
    // 位图
    protected FImage _image;
+
+   // 位图
+   protected SIntSize2 _size = new SIntSize2();
 
    // 资源位图
    protected FRs3TextureBitmap _textureBitmap;
@@ -27,6 +34,24 @@ public class FRs3TextureBitmapPack
    // <T>构造资源纹理位图。</T>
    //============================================================
    public FRs3TextureBitmapPack(){
+   }
+
+   //============================================================
+   // <T>获得透明配置。</T>
+   //
+   // @return 透明配置
+   //============================================================
+   public boolean optionAlpha(){
+      return _optionAlpha;
+   }
+
+   //============================================================
+   // <T>设置透明配置。</T>
+   //
+   // @param optionAlpha 透明配置
+   //============================================================
+   public void setOptionAlpha(boolean optionAlpha){
+      _optionAlpha = optionAlpha;
    }
 
    //============================================================
@@ -60,6 +85,7 @@ public class FRs3TextureBitmapPack
          int size = width * height;
          _data = new int[size];
          _image = new FImage(image);
+         _size.set(width, height);
       }else if((width != _image.width()) || (height != _image.height())){
          throw new FFatalError("Image size is invalid. (origin_size={1}x{2}, size={3}x{4})", _image.width(), _image.height(), width, height);
       }
@@ -254,28 +280,48 @@ public class FRs3TextureBitmapPack
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
+      // 非压缩模式
+      String format = "jpg";
+      if(_optionAlpha){
+         format = "png";
+      }
       // 转换数据
       if(_textureBitmap == null){
-         byte[] data = _image.toBytes("png");
-         int length = data.length;
+         //byte[] data = _image.toBytes("png");
+         //int length = data.length;
          // 写入数据
+         output.writeBoolean(false);
          output.writeString("flat");
-         output.writeString("png");
-         output.writeInt32(length);
-         output.write(data, 0, length);
+         output.writeString(format);
+         output.writeUint16(_size.width);
+         output.writeUint16(_size.height);
+         output.writeInt32(4 * _data.length);
+         for(int value : _data){
+            output.writeUint8((short)((value >> 16) & 0xFF));
+            output.writeUint8((short)((value >> 8) & 0xFF));
+            output.writeUint8((short)(value & 0xFF));
+            output.writeUint8((short)((value >> 24) & 0xFF));
+         }
+         //output.writeInt32(length);
+         //output.write(data, 0, length);
       }else{
+         output.writeBoolean(true);
          String code = _textureBitmap.code();
          if(code.equals("environment")){
             // 分拆为6个面
             output.writeString("cube");
-            output.writeString("jpg");
+            output.writeString(format);
+            output.writeUint16(_size.width);
+            output.writeUint16(_size.height);
             serializeEnvironment(output);
          }else{
             byte[] data = _textureBitmap.data();
             int length = data.length;
             // 写入数据
             output.writeString("flat");
-            output.writeString("jpg");
+            output.writeString(format);
+            output.writeUint16(_size.width);
+            output.writeUint16(_size.height);
             output.writeInt32(length);
             output.write(data, 0, length);
          }
