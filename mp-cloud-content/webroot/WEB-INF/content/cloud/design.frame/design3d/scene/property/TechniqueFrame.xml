@@ -14,5 +14,9 @@
       <Panel name='infoPanel' icon='design.panel.icon' label='渲染模式'>
          <ListBox name="renderModesBox" linker='_controlRenderModes' label="渲染模式" label_size='70,0' valid="Y" edit_size='200,0' note="" />
       </Panel>
+      <Panel name='statisticsPanel' icon='design.panel.icon' label='帧统计信息'>
+         <Edit name="statisticsTriangleCount" linker='_controlTriangleCount' label="三角形总数" label_size='70,0' valid="Y" edit_size='200,0' note="" />
+         <Edit name="statisticsDrawCount" linker='_controlDrawCount' label="绘制次数" label_size='70,0' valid="Y" edit_size='200,0' note="" />
+      </Panel>
    </Frame>
 </Content>
