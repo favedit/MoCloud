@@ -14,4 +14,15 @@ public class EGcStorageCatalog
    // 资源3D跟踪
    public final static String Resource3dTrack = "resource3d.track";
 
+   // 资源3D纹理
+   public final static String Resource3dTexture = "resource3d.texture";
+
+   // 资源3D模型
+   public final static String Resource3dModel = "resource3d.model";
+
+   // 资源3D模板
+   public final static String Resource3dTemplate = "resource3d.template";
+
+   // 资源3D场景
+   public final static String Resource3dScene = "resource3d.scene";
 }

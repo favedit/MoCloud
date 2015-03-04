@@ -14,7 +14,10 @@ import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonAnimationUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSkeletonUnit;
+import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
 import org.mo.content.core.resource3d.animation.IC3dAnimationConsole;
 import org.mo.content.core.resource3d.skeleton.IC3dSkeletonConsole;
@@ -55,21 +58,21 @@ public class FC3dModelConsole
    // <T>逻辑处理。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @param version 版本
+   // @param guid 唯一编号
    //============================================================
    @Override
    public FRs3Model makeModel(ILogicContext logicContext,
-                              String code,
-                              String version){
-      FRs3Model model = new FRs3Model();
+                              String guid){
       // 获得模型信息
       FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
-      FDataResource3dModelUnit modelUnit = modelLogic.findByGuid(code);
+      FDataResource3dModelUnit modelUnit = modelLogic.findByGuid(guid);
       if(modelUnit == null){
          return null;
       }
       long modelId = modelUnit.ouid();
+      //............................................................
+      // 生成数据
+      FRs3Model model = new FRs3Model();
       model.setGuid(modelUnit.guid());
       model.setCode(modelUnit.code());
       // 获得网格信息
@@ -122,6 +125,38 @@ public class FC3dModelConsole
             animation.setSkeletonGuid(skeletonUnit.guid());
          }
       }
+      // 返回模型
       return model;
+   }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   //============================================================
+   @Override
+   public byte[] makeModelData(ILogicContext logicContext,
+                               String guid){
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dModel, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      FRs3Model model = makeModel(logicContext, guid);
+      // 获得数据
+      FByteStream stream = new FByteStream();
+      model.serialize(stream);
+      byte[] data = stream.toArray();
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dModel, guid, "bin");
+      storage.setCode(model.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 }

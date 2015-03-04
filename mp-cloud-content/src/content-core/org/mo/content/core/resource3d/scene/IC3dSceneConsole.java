@@ -26,6 +26,18 @@ public interface IC3dSceneConsole
                        String code);
 
    //============================================================
+   // <T>生成场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   // @return 场景
+   //============================================================
+   byte[] makeSceneData(ILogicContext logicContext,
+                        String guid,
+                        String code);
+
+   //============================================================
    // <T>更新场景。</T>
    //
    // @param logicContext 逻辑环境

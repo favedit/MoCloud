@@ -11,6 +11,9 @@ public class SGcStorage
    // 标识
    protected String _guid;
 
+   // 代码
+   protected String _code;
+
    // 日期
    protected String _date;
 
@@ -78,6 +81,24 @@ public class SGcStorage
    //============================================================
    public void setGuid(String guid){
       _guid = guid;
+   }
+
+   //============================================================
+   // <T>获得代码。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码。</T>
+   //
+   // @param code 代码
+   //============================================================
+   public void setCode(String code){
+      _code = code;
    }
 
    //============================================================

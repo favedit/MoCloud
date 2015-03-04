@@ -22,7 +22,7 @@ public class RDbExportData
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3StorageConsole storageConsole = RAop.find(IRs3StorageConsole.class);
          storageConsole.exportData(logicContext, path);
-         //textureConsole.exportStorage(logicContext, path);
+         storageConsole.exportStorage(logicContext, path);
       }
    }
 

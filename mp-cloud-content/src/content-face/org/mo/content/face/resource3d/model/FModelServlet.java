@@ -11,7 +11,6 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource3d.model.IC3dModelConsole;
-import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -71,15 +70,15 @@ public class FModelServlet
          throw new FFatalError("Model code is empty.");
       }
       // 生成数据
-      FRs3Model model = _modelConsole.makeModel(logicContext, code, version);
+      byte[] modelData = _modelConsole.makeModelData(logicContext, code);
       FByteStream stream = new FByteStream();
-      if(model == null){
+      if(modelData == null){
          String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         model.serialize(stream);
+         stream.write(modelData, 0, modelData.length);
       }
       int dataLength = stream.length();
       byte[] data = stream.memory();

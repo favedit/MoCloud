@@ -9,7 +9,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.engine3d.core.texture.FRs3Texture;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -60,15 +59,15 @@ public class FTextureServlet
          throw new FFatalError("Model code is empty.");
       }
       // 获得数据
-      FRs3Texture texture = _textureConsole.makeTexture(logicContext, guid);
+      byte[] textureData = _textureConsole.makeTextureData(logicContext, guid);
       FByteStream stream = new FByteStream();
-      if(texture == null){
+      if(textureData == null){
          String info = RString.format("Texture is not exists. (guid={1})", guid);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         texture.serialize(stream);
+         stream.write(textureData, 0, textureData.length);
       }
       int dataLength = stream.length();
       byte[] data = stream.memory();

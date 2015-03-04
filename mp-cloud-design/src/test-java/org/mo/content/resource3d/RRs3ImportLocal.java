@@ -21,8 +21,8 @@ public class RRs3ImportLocal
       // 导入处理
       RRs3TextureImport.importProcess();
       RRs3ModelImport.importProcess();
-      Rs3TemplateImport.importProcess();
-      Rs3SceneImport.importProcess();
+      RRs3TemplateImport.importProcess();
+      RRs3SceneImport.importProcess();
       // 释放环境
       RAop.release();
    }

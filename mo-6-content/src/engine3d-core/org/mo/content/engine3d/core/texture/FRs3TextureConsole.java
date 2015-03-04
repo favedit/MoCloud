@@ -14,6 +14,7 @@ import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteFile;
+import org.mo.com.io.FByteStream;
 import org.mo.com.io.FFileInfo;
 import org.mo.com.io.FFileInfos;
 import org.mo.com.io.RDirectory;
@@ -184,5 +185,37 @@ public class FRs3TextureConsole
       texture.pack();
       // 返回纹理
       return texture;
+   }
+
+   //============================================================
+   // <T>生成纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public byte[] makeTextureData(ILogicContext logicContext,
+                                 String guid){
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTexture, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      FRs3Texture texture = makeTexture(logicContext, guid);
+      // 获得数据
+      FByteStream stream = new FByteStream();
+      texture.serialize(stream);
+      byte[] data = stream.toArray();
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTexture, guid, "bin");
+      storage.setCode(texture.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 }

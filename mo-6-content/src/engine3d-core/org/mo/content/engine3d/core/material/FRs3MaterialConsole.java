@@ -114,6 +114,9 @@ public class FRs3MaterialConsole
       // 查找纹理单元
       String bitmapCode = materialTexture.bitmapCode();
       FDataResource3dTextureBitmapUnit textureBitmapUnit = _textureBitmapConsole.findByCode(logicContext, textureUnit.ouid(), bitmapCode);
+      if(textureBitmapUnit == null){
+         throw new FFatalError("Texture bitmap is not exists. (texture={1}, bitmap={2})", textureUnit.code(), bitmapCode);
+      }
       materialTexture.setBitmapGuid(textureBitmapUnit.guid());
       // 新建材质纹理单元
       FDataResource3dMaterialTextureLogic materialTextureLogic = logicContext.findLogic(FDataResource3dMaterialTextureLogic.class);

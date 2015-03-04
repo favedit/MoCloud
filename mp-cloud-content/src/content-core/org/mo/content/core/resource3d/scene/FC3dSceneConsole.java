@@ -4,6 +4,10 @@ import com.cyou.gccloud.data.data.FDataResource3dSceneLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.EGcStorageCatalog;
+import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
@@ -22,6 +26,10 @@ public class FC3dSceneConsole
       implements
          IC3dSceneConsole
 {
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _storageConsole;
+
    // 模板控制台
    @ALink
    protected IRs3TemplateConsole _templateConsole;
@@ -77,6 +85,48 @@ public class FC3dSceneConsole
       FRs3Scene scene = new FRs3Scene();
       scene.loadUnit(sceneUnit);
       return scene;
+   }
+
+   //============================================================
+   // <T>生成场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   // @return 场景
+   //============================================================
+   @Override
+   public byte[] makeSceneData(ILogicContext logicContext,
+                               String guid,
+                               String code){
+      // 查找唯一编号
+      if(RString.isEmpty(guid)){
+         FDataResource3dSceneUnit unit = findByCode(logicContext, code);
+         if(unit == null){
+            return null;
+         }
+         guid = unit.guid();
+      }
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dScene, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      FRs3Scene scene = makeScene(logicContext, guid, code);
+      // 获得数据
+      FByteStream stream = new FByteStream();
+      scene.serialize(stream);
+      byte[] data = stream.toArray();
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dScene, guid, "bin");
+      storage.setCode(scene.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 
    //============================================================

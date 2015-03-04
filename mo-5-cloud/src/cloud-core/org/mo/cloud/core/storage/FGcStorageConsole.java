@@ -8,6 +8,7 @@ import com.mongodb.Mongo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -60,6 +61,9 @@ public class FGcStorageConsole
       DBObject search = new BasicDBObject("guid", guid);
       // 更新处理
       DBObject item = collection.findOne(search);
+      if(item == null){
+         return null;
+      }
       byte[] data = (byte[])item.get("data");
       // 返回内容
       SGcStorage resource = new SGcStorage();
@@ -111,12 +115,20 @@ public class FGcStorageConsole
          throw new FFatalError("Resource data is empty.");
       }
       //............................................................
+      // 检查数据限制
+      if(data.length > RInteger.SIZE_16M){
+         _logger.error(this, "store", "Storage document is too large. (size={1}, limit={2})", data.length, RInteger.SIZE_16M);
+         return false;
+      }
+      //............................................................
       // 获得集合
       DBCollection collection = _database.getCollection(catalog);
       // 新建数据
       DBObject item = new BasicDBObject();
       item.put("guid", guid);
+      item.put("code", storage.code());
       item.put("type", type);
+      item.put("data_length", data.length);
       item.put("data", data);
       // 查找内容
       DBObject search = new BasicDBObject("guid", guid);

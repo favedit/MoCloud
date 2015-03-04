@@ -11,7 +11,6 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
-import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -68,17 +67,18 @@ public class FTemplateServlet
          throw new FFatalError("Template is empty. (guid={1}, code={2}, version={3})", guid, code, version);
       }
       // 生成数据
-      FRs3Template template = _templateConsole.makeTemplate(logicContext, guid, code);
+      byte[] templateData = _templateConsole.makeTemplateData(logicContext, guid, code);
       FByteStream stream = new FByteStream();
-      if(template == null){
+      if(templateData == null){
          String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         template.serialize(stream);
+         stream.write(templateData, 0, templateData.length);
       }
       int dataLength = stream.length();
+      byte[] data = stream.memory();
       // 发送数据
       _logger.debug(this, "process", "Send template data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");
@@ -88,6 +88,6 @@ public class FTemplateServlet
       response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
       response.setContentType(EMime.Bin.mime());
       response.setContentLength(dataLength);
-      response.write(stream.memory(), 0, dataLength);
+      response.write(data, 0, dataLength);
    }
 }

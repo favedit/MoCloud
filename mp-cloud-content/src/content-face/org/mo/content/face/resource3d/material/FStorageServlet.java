@@ -1,7 +1,5 @@
 package org.mo.content.face.resource3d.material;
 
-import org.mo.content.resource3d.model.FRs3Model;
-
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
@@ -10,6 +8,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.resource3d.model.IC3dModelConsole;
+import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -68,7 +67,7 @@ public class FStorageServlet
          throw new FFatalError("Model version is empty.");
       }
       // 生成模型
-      FRs3Model model = _modelConsole.makeModel(logicContext, code, version);
+      FRs3Model model = _modelConsole.makeModel(logicContext, code);
       // 存储为数组
       FByteStream stream = new FByteStream();
       model.serialize(stream);

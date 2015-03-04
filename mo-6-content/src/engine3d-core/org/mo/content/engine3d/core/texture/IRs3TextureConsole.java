@@ -58,4 +58,14 @@ public interface IRs3TextureConsole
    //============================================================
    FRs3Texture makeTexture(ILogicContext logicContext,
                            String guid);
+
+   //============================================================
+   // <T>生成纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   byte[] makeTextureData(ILogicContext logicContext,
+                          String guid);
 }

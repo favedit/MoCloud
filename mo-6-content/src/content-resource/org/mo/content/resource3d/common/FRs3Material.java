@@ -589,11 +589,11 @@ public class FRs3Material
             _diffuseViewColor.importConfig(xnode);
          }else if(xnode.isName("Specular")){
             _specularColor.importConfig(xnode);
-            _specularBase = xnode.getFloat("base");
+            _specularBase = xnode.getFloat("base", 0.1f);
             _specularLevel = xnode.getFloat("level");
          }else if(xnode.isName("SpecularView")){
             _specularViewColor.importConfig(xnode);
-            _specularViewBase = xnode.getFloat("base");
+            _specularViewBase = xnode.getFloat("base", 0.1f);
             _specularViewLevel = xnode.getFloat("level");
          }else if(xnode.isName("Reflect")){
             _reflectColor.importConfig(xnode);

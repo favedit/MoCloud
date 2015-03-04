@@ -10,7 +10,6 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource3d.scene.IC3dSceneConsole;
-import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -64,17 +63,18 @@ public class FSceneServlet
          throw new FFatalError("Scene is empty.");
       }
       // 生成数据
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, guid, code);
+      byte[] sceneData = _sceneConsole.makeSceneData(logicContext, guid, code);
       FByteStream stream = new FByteStream();
-      if(scene == null){
+      if(sceneData == null){
          String info = RString.format("Scene is not exists. (guid={1}, code={2})", guid, code);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         scene.serialize(stream);
+         stream.write(sceneData, 0, sceneData.length);
       }
       int dataLength = stream.length();
+      byte[] data = stream.memory();
       // 发送数据
       _logger.debug(this, "process", "Send template data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");
@@ -84,6 +84,6 @@ public class FSceneServlet
       response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
       response.setContentType(EMime.Bin.mime());
       response.setContentLength(dataLength);
-      response.write(stream.memory(), 0, dataLength);
+      response.write(data, 0, dataLength);
    }
 }

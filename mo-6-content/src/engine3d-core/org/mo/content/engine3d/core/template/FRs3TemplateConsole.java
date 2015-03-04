@@ -17,7 +17,10 @@ import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import com.cyou.gccloud.data.data.FDataResource3dThemeUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -235,6 +238,47 @@ public class FRs3TemplateConsole
          }
       }
       return template;
+   }
+
+   //============================================================
+   // <T>生成资源模板。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public byte[] makeTemplateData(ILogicContext logicContext,
+                                  String guid,
+                                  String code){
+      // 查找唯一编号
+      if(RString.isEmpty(guid)){
+         FDataResource3dTemplateUnit unit = findByCode(logicContext, code);
+         if(unit == null){
+            return null;
+         }
+         guid = unit.guid();
+      }
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTemplate, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      FRs3Template template = makeTemplate(logicContext, guid, code);
+      // 获得数据
+      FByteStream stream = new FByteStream();
+      template.serialize(stream);
+      byte[] data = stream.toArray();
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTemplate, guid, "bin");
+      storage.setCode(template.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 
    //============================================================
