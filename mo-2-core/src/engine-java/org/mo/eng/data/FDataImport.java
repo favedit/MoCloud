@@ -59,7 +59,9 @@ public class FDataImport
             if(!fields.isEmpty()){
                fields.append(',');
             }
+            fields.append('`');
             fields.append(columnName.toUpperCase());
+            fields.append('`');
             // 增加内容
             if(!values.isEmpty()){
                values.append(',');

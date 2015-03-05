@@ -40,6 +40,7 @@
       <Dataset data_name='DT_RS3_TEMPLATE_MATERIAL_GROUP'/>
 
       <Dataset data_name='DT_RS3_SCENE'/>
+      <Dataset data_name='DT_RS3_SCENE_THEME'/>
    </Database>
    <!-- 数据库传输 -->
    <Database type='mongodb'>
