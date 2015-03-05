@@ -45,7 +45,9 @@ public class FRs3MeshConsole
       mesh.saveUnit(meshUnit);
       meshLogic.doInsert(meshUnit);
       // 新建数据流
-      for(FRs3Stream stream : mesh.streams()){
+      int streamCount = mesh.streams().count();
+      for(int n = 0; n < streamCount; n++){
+         FRs3Stream stream = mesh.streams().get(n);
          // 新建数据流
          FDataResource3dStreamUnit streamUnit = _streamConsole.insert(logicContext, stream);
          // 建立网格和数据流关联
@@ -53,6 +55,8 @@ public class FRs3MeshConsole
          FDataResource3dMeshStreamUnit meshStreamUnit = meshStreamLogic.doPrepare();
          meshStreamUnit.setMeshId(meshUnit.ouid());
          meshStreamUnit.setStreamId(streamUnit.ouid());
+         meshStreamUnit.setIndex(n);
+         meshStreamUnit.setCode(stream.code());
          meshStreamLogic.doInsert(meshStreamUnit);
       }
       // 返回网格单元

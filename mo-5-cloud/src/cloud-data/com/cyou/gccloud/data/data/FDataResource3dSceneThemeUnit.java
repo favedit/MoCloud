@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源3D纹理表逻辑单元。</T>
+// <T>资源3D场景主题表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResource3dTextureUnit
+public class FDataResource3dSceneThemeUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -46,6 +46,12 @@ public class FDataResource3dTextureUnit
 
    // 字段项目编号的定义。
    protected long _projectId;
+
+   // 存储字段场景编号的定义。
+   private long __sceneId;
+
+   // 字段场景编号的定义。
+   protected long _sceneId;
 
    // 存储字段代码的定义。
    private String __code;
@@ -108,9 +114,9 @@ public class FDataResource3dTextureUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源3D纹理表逻辑单元。</T>
+   // <T>构造资源3D场景主题表逻辑单元。</T>
    //============================================================
-   public FDataResource3dTextureUnit(){
+   public FDataResource3dSceneThemeUnit(){
    }
 
    //============================================================
@@ -246,6 +252,44 @@ public class FDataResource3dTextureUnit
    //============================================================
    public void setProjectId(long value){
       _projectId = value;
+   }
+
+   //============================================================
+   // <T>判断场景编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSceneIdChanged(){
+      return __sceneId != _sceneId;
+   }
+
+   //============================================================
+   // <T>获得场景编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long sceneId(){
+      return _sceneId;
+   }
+
+   //============================================================
+   // <T>获得场景编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResource3dSceneUnit scene(){
+      FDataResource3dSceneLogic logic = _logicContext.findLogic(FDataResource3dSceneLogic.class);
+      FDataResource3dSceneUnit unit = logic.find(_sceneId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置场景编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSceneId(long value){
+      _sceneId = value;
    }
 
    //============================================================
@@ -537,6 +581,8 @@ public class FDataResource3dTextureUnit
             return Long.toString(_userId);
          case "project_id":
             return Long.toString(_projectId);
+         case "scene_id":
+            return Long.toString(_sceneId);
          case "code":
             return _code;
          case "full_code":
@@ -585,6 +631,9 @@ public class FDataResource3dTextureUnit
             break;
          case "project_id":
             _projectId = RLong.parse(value);
+            break;
+         case "scene_id":
+            _sceneId = RLong.parse(value);
             break;
          case "code":
             _code = value;
@@ -651,6 +700,10 @@ public class FDataResource3dTextureUnit
                __projectId = RLong.parse(value);
                _projectId = __projectId;
                break;
+            case "scene_id":
+               __sceneId = RLong.parse(value);
+               _sceneId = __sceneId;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -708,6 +761,7 @@ public class FDataResource3dTextureUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("projectId", _projectId);
+      row.set("sceneId", _sceneId);
       row.set("code", _code);
       row.set("fullCode", _fullCode);
       row.set("label", _label);
@@ -733,6 +787,7 @@ public class FDataResource3dTextureUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
+      map.put("sceneId", RLong.toString(_sceneId));
       map.put("code", _code);
       map.put("fullCode", _fullCode);
       map.put("label", _label);

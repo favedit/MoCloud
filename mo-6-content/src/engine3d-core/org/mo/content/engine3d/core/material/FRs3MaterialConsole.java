@@ -84,8 +84,10 @@ public class FRs3MaterialConsole
       FDataResource3dMaterialUnit materialUnit = materialLogic.doPrepare();
       materialUnit.setThemeId(themeId);
       materialUnit.setMaterialGroupId(materialGroupId);
-      materialUnit.setFullCode(material.fullCode());
       materialUnit.setCode(material.code());
+      materialUnit.setFullCode(material.fullCode());
+      materialUnit.setLabel(material.label());
+      materialUnit.setKeywords(material.keywords());
       materialUnit.setContent(material.toXml());
       materialLogic.doInsert(materialUnit);
       // 返回材质单元

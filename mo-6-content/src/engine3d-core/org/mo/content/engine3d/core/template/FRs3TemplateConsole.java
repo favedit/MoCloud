@@ -24,6 +24,8 @@ import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.engine.core.bitmap.IResBitmapConsole;
@@ -52,6 +54,9 @@ public class FRs3TemplateConsole
       implements
          IRs3TemplateConsole
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FRs3TemplateConsole.class);
+
    // 存储控制台
    @ALink
    protected IGcStorageConsole _storageConsole;
@@ -291,6 +296,8 @@ public class FRs3TemplateConsole
    @Override
    public EResult importTemplate(ILogicContext logicContext,
                                  String fileName){
+      // 获得配置
+      _logger.debug(this, "importTemplate", "Import template. (file={1})", fileName);
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadFile(fileName);
       FXmlNode xconfig = xdocument.root();
@@ -301,6 +308,9 @@ public class FRs3TemplateConsole
       FDataResource3dTemplateLogic templateLogic = logicContext.findLogic(FDataResource3dTemplateLogic.class);
       FDataResource3dTemplateUnit templateUnit = templateLogic.doPrepare();
       templateUnit.setCode(template.code());
+      templateUnit.setFullCode(template.fullCode());
+      templateUnit.setLabel(template.label());
+      templateUnit.setKeywords(template.keywords());
       templateLogic.doInsert(templateUnit);
       template.setGuid(templateUnit.guid());
       // 修正材质组
@@ -358,7 +368,6 @@ public class FRs3TemplateConsole
       templateUnit = templateLogic.find(templateUnit.ouid());
       templateUnit.setContent(template.toXml());
       templateLogic.doUpdate(templateUnit);
-      //System.out.println(xoutput.xml());
       // 修正材质数据
       return EResult.Success;
    }

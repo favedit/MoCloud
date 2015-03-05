@@ -34,6 +34,7 @@ public class FRs3ThemeConsole
       // 设置数据
       FDataResource3dThemeUnit themeUnit = themeLogic.doPrepare();
       themeUnit.setCode(theme.code());
+      themeUnit.setLabel(theme.label());
       themeLogic.doInsert(themeUnit);
       // 返回内容
       return themeLogic.find(themeUnit.ouid());

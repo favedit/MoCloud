@@ -52,6 +52,7 @@ public class FRs3Theme
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
@@ -76,6 +77,7 @@ public class FRs3Theme
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", _guid);
@@ -107,6 +109,7 @@ public class FRs3Theme
    public void importConfig(FXmlNode xconfig){
       // 读取属性
       _code = xconfig.get("code");
+      _label = xconfig.get("label");
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("MaterialCollection")){

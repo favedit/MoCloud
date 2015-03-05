@@ -35,23 +35,35 @@ public class FDataResource3dSkeletonSkinUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段用户编号的定义。
+   private long __userId;
+
+   // 字段用户编号的定义。
+   protected long _userId;
+
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
+
    // 存储字段骨骼编号的定义。
    private long __skeletonId;
 
    // 字段骨骼编号的定义。
    protected long _skeletonId;
 
-   // 存储字段全代码的定义。
-   private String __fullCode;
-
-   // 字段全代码的定义。
-   protected String _fullCode;
-
    // 存储字段代码的定义。
    private String __code;
 
    // 字段代码的定义。
    protected String _code;
+
+   // 存储字段全代码的定义。
+   private String __fullCode;
+
+   // 字段全代码的定义。
+   protected String _fullCode;
 
    // 存储字段标签的定义。
    private String __label;
@@ -183,6 +195,60 @@ public class FDataResource3dSkeletonSkinUnit
    }
 
    //============================================================
+   // <T>判断用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long userId(){
+      return _userId;
+   }
+
+   //============================================================
+   // <T>设置用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserId(long value){
+      _userId = value;
+   }
+
+   //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
+   }
+
+   //============================================================
    // <T>判断骨骼编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -221,33 +287,6 @@ public class FDataResource3dSkeletonSkinUnit
    }
 
    //============================================================
-   // <T>判断全代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
-   }
-
-   //============================================================
-   // <T>获得全代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String fullCode(){
-      return _fullCode;
-   }
-
-   //============================================================
-   // <T>设置全代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
-   }
-
-   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -272,6 +311,33 @@ public class FDataResource3dSkeletonSkinUnit
    //============================================================
    public void setCode(String value){
       _code = value;
+   }
+
+   //============================================================
+   // <T>判断全代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullCodeChanged(){
+      return !RString.equals(__fullCode, _fullCode);
+   }
+
+   //============================================================
+   // <T>获得全代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullCode(){
+      return _fullCode;
+   }
+
+   //============================================================
+   // <T>设置全代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullCode(String value){
+      _fullCode = value;
    }
 
    //============================================================
@@ -478,12 +544,16 @@ public class FDataResource3dSkeletonSkinUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "user_id":
+            return Long.toString(_userId);
+         case "project_id":
+            return Long.toString(_projectId);
          case "skeleton_id":
             return Long.toString(_skeletonId);
-         case "full_code":
-            return _fullCode;
          case "code":
             return _code;
+         case "full_code":
+            return _fullCode;
          case "label":
             return _label;
          case "content":
@@ -521,14 +591,20 @@ public class FDataResource3dSkeletonSkinUnit
          case "guid":
             _guid = value;
             break;
+         case "user_id":
+            _userId = RLong.parse(value);
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
+            break;
          case "skeleton_id":
             _skeletonId = RLong.parse(value);
             break;
-         case "full_code":
-            _fullCode = value;
-            break;
          case "code":
             _code = value;
+            break;
+         case "full_code":
+            _fullCode = value;
             break;
          case "label":
             _label = value;
@@ -578,17 +654,25 @@ public class FDataResource3dSkeletonSkinUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "user_id":
+               __userId = RLong.parse(value);
+               _userId = __userId;
+               break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
+               break;
             case "skeleton_id":
                __skeletonId = RLong.parse(value);
                _skeletonId = __skeletonId;
                break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
-               break;
             case "code":
                __code = value;
                _code = __code;
+               break;
+            case "full_code":
+               __fullCode = value;
+               _fullCode = __fullCode;
                break;
             case "label":
                __label = value;
@@ -633,9 +717,11 @@ public class FDataResource3dSkeletonSkinUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("userId", _userId);
+      row.set("projectId", _projectId);
       row.set("skeletonId", _skeletonId);
-      row.set("fullCode", _fullCode);
       row.set("code", _code);
+      row.set("fullCode", _fullCode);
       row.set("label", _label);
       row.set("content", _content);
       row.set("note", _note);
@@ -656,9 +742,11 @@ public class FDataResource3dSkeletonSkinUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("userId", RLong.toString(_userId));
+      map.put("projectId", RLong.toString(_projectId));
       map.put("skeletonId", RLong.toString(_skeletonId));
-      map.put("fullCode", _fullCode);
       map.put("code", _code);
+      map.put("fullCode", _fullCode);
       map.put("label", _label);
       map.put("content", _content);
       map.put("note", _note);

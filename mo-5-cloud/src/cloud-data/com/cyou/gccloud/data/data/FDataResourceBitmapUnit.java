@@ -35,11 +35,17 @@ public class FDataResourceBitmapUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
-   // 存储字段全代码的定义。
-   private String __fullCode;
+   // 存储字段用户编号的定义。
+   private long __userId;
 
-   // 字段全代码的定义。
-   protected String _fullCode;
+   // 字段用户编号的定义。
+   protected long _userId;
+
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
 
    // 存储字段代码的定义。
    private String __code;
@@ -47,11 +53,23 @@ public class FDataResourceBitmapUnit
    // 字段代码的定义。
    protected String _code;
 
+   // 存储字段全代码的定义。
+   private String __fullCode;
+
+   // 字段全代码的定义。
+   protected String _fullCode;
+
    // 存储字段名称的定义。
    private String __label;
 
    // 字段名称的定义。
    protected String _label;
+
+   // 存储字段关键字的定义。
+   private String __keywords;
+
+   // 字段关键字的定义。
+   protected String _keywords;
 
    // 存储字段备注的定义。
    private String __note;
@@ -171,30 +189,57 @@ public class FDataResourceBitmapUnit
    }
 
    //============================================================
-   // <T>判断全代码的数据是否改变。</T>
+   // <T>判断用户编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
    }
 
    //============================================================
-   // <T>获得全代码的数据内容。</T>
+   // <T>获得用户编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String fullCode(){
-      return _fullCode;
+   public long userId(){
+      return _userId;
    }
 
    //============================================================
-   // <T>设置全代码的数据内容。</T>
+   // <T>设置用户编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
+   public void setUserId(long value){
+      _userId = value;
+   }
+
+   //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
    }
 
    //============================================================
@@ -225,6 +270,33 @@ public class FDataResourceBitmapUnit
    }
 
    //============================================================
+   // <T>判断全代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullCodeChanged(){
+      return !RString.equals(__fullCode, _fullCode);
+   }
+
+   //============================================================
+   // <T>获得全代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullCode(){
+      return _fullCode;
+   }
+
+   //============================================================
+   // <T>设置全代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullCode(String value){
+      _fullCode = value;
+   }
+
+   //============================================================
    // <T>判断名称的数据是否改变。</T>
    //
    // @return 数据内容
@@ -249,6 +321,33 @@ public class FDataResourceBitmapUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断关键字的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isKeywordsChanged(){
+      return !RString.equals(__keywords, _keywords);
+   }
+
+   //============================================================
+   // <T>获得关键字的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String keywords(){
+      return _keywords;
+   }
+
+   //============================================================
+   // <T>设置关键字的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setKeywords(String value){
+      _keywords = value;
    }
 
    //============================================================
@@ -401,12 +500,18 @@ public class FDataResourceBitmapUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "full_code":
-            return _fullCode;
+         case "user_id":
+            return Long.toString(_userId);
+         case "project_id":
+            return Long.toString(_projectId);
          case "code":
             return _code;
+         case "full_code":
+            return _fullCode;
          case "label":
             return _label;
+         case "keywords":
+            return _keywords;
          case "note":
             return _note;
          case "create_user_id":
@@ -440,14 +545,23 @@ public class FDataResourceBitmapUnit
          case "guid":
             _guid = value;
             break;
-         case "full_code":
-            _fullCode = value;
+         case "user_id":
+            _userId = RLong.parse(value);
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
             break;
          case "code":
             _code = value;
             break;
+         case "full_code":
+            _fullCode = value;
+            break;
          case "label":
             _label = value;
+            break;
+         case "keywords":
+            _keywords = value;
             break;
          case "note":
             _note = value;
@@ -491,17 +605,29 @@ public class FDataResourceBitmapUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
+            case "user_id":
+               __userId = RLong.parse(value);
+               _userId = __userId;
+               break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
                break;
             case "code":
                __code = value;
                _code = __code;
                break;
+            case "full_code":
+               __fullCode = value;
+               _fullCode = __fullCode;
+               break;
             case "label":
                __label = value;
                _label = __label;
+               break;
+            case "keywords":
+               __keywords = value;
+               _keywords = __keywords;
                break;
             case "note":
                __note = value;
@@ -538,9 +664,12 @@ public class FDataResourceBitmapUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("fullCode", _fullCode);
+      row.set("userId", _userId);
+      row.set("projectId", _projectId);
       row.set("code", _code);
+      row.set("fullCode", _fullCode);
       row.set("label", _label);
+      row.set("keywords", _keywords);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -559,9 +688,12 @@ public class FDataResourceBitmapUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("fullCode", _fullCode);
+      map.put("userId", RLong.toString(_userId));
+      map.put("projectId", RLong.toString(_projectId));
       map.put("code", _code);
+      map.put("fullCode", _fullCode);
       map.put("label", _label);
+      map.put("keywords", _keywords);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

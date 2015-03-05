@@ -28,7 +28,7 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
 
 </jt:loop>
    // 字段集合的定义。
-   public final static String FIELDS = "<jt:loop source='$fields' alias='field'><jt:position source='$field' type='middle' value=','/><jt:Item source='$field.data_name'/></jt:loop>";
+   public final static String FIELDS = "<jt:loop source='$fields' alias='field'><jt:position source='$field' type='middle' value=','/>`<jt:Item source='$field.data_name'/>`</jt:loop>";
 
    //============================================================
    // <T>构造<jt:item source='$dataset.label'/>逻辑单元。</T>

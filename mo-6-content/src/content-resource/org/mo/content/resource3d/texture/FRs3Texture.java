@@ -1,15 +1,18 @@
-package org.mo.content.engine3d.core.texture;
+package org.mo.content.resource3d.texture;
 
+import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.content.resource3d.common.FRs3Object;
+import org.mo.com.xml.FXmlDocument;
+import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource3d.common.FRs3Resource;
 
 //============================================================
 // <T>资源纹理。</T>
 //============================================================
 public class FRs3Texture
-      extends FRs3Object
+      extends FRs3Resource
 {
    // 资源位图集合
    protected FObjects<FRs3TextureBitmap> _bitmaps = new FObjects<FRs3TextureBitmap>(FRs3TextureBitmap.class);
@@ -223,5 +226,113 @@ public class FRs3Texture
          FRs3TextureBitmapPack bitmapPack = _bitmapPacks.get(i);
          bitmapPack.serialize(output);
       }
+   }
+
+   //============================================================
+   // <T>从配置节点中加载数据信息。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   @Override
+   public void loadConfig(FXmlNode xconfig){
+      // 设置属性
+      _guid = xconfig.get("guid");
+      _code = xconfig.get("code");
+      _fullCode = xconfig.get("name");
+      _label = xconfig.get("label");
+      _keywords = xconfig.get("full_label");
+      // 处理所有节点
+      FXmlNode xbitmaps = xconfig.findNode("BitmapCollection");
+      if(xbitmaps != null){
+         for(FXmlNode xbitmap : xbitmaps){
+            if(xbitmap.isName("Bitmap")){
+               FRs3TextureBitmap bitmap = new FRs3TextureBitmap();
+               bitmap.importConfig(xbitmap);
+               _bitmaps.push(bitmap);
+            }
+         }
+      }
+   }
+
+   //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void saveConfig(FXmlNode xconfig){
+      // 设置属性
+      xconfig.set("guid", _guid);
+      xconfig.set("code", _code);
+      xconfig.set("name", _fullCode);
+      xconfig.set("label", _label);
+      xconfig.set("keywords", _keywords);
+      // 处理所有节点
+      if(!_bitmaps.isEmpty()){
+         FXmlNode xbitmaps = xconfig.createNode("BitmapCollection");
+         for(FRs3TextureBitmap bitmap : _bitmaps){
+            bitmap.saveConfig(xbitmaps.createNode("Bitmap"));
+         }
+      }
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResource3dTemplateUnit unit){
+      // 加载属性
+      _guid = unit.guid();
+      _code = unit.code();
+      // 读取配置
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadString(unit.content());
+      loadConfig(xdocument.root());
+   }
+
+   //============================================================
+   // <T>从配置节点中导入数据信息。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   public void importConfig(FXmlNode xconfig){
+      FXmlNode xtexture = xconfig.findNode("Texture");
+      // 设置属性
+      _code = xtexture.get("code");
+      _fullCode = xtexture.get("name");
+      _label = xtexture.get("label");
+      _keywords = xtexture.get("full_label");
+      // 处理所有节点
+      for(FXmlNode xnode : xtexture){
+         if(xnode.isName("Bitmap")){
+            FRs3TextureBitmap bitmap = new FRs3TextureBitmap();
+            bitmap.importConfig(xnode);
+            _bitmaps.push(bitmap);
+         }
+      }
+   }
+
+   //============================================================
+   // <T>从配置信息中导入配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public String toXml(){
+      FXmlNode xconfig = new FXmlNode("Texture");
+      saveConfig(xconfig);
+      return xconfig.xml().toString();
+   }
+
+   //============================================================
+   // <T>获得字符串。</T>
+   //
+   // @return 字符串
+   //============================================================
+   @Override
+   public String toString(){
+      FXmlNode xconfig = new FXmlNode("Texture");
+      saveConfig(xconfig);
+      return xconfig.xml().toString();
    }
 }

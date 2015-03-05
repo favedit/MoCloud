@@ -44,7 +44,8 @@ public class FSceneService
                         IWebOutput output){
       String guid = context.parameter("guid");
       String code = context.parameter("code");
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, guid, code);
+      String theme = context.parameter("theme");
+      FRs3Scene scene = _sceneConsole.makeScene(logicContext, guid, code, theme);
       FXmlNode xconfig = output.config().createNode("Scene");
       scene.saveConfig(xconfig);
       return EResult.Success;
@@ -71,7 +72,8 @@ public class FSceneService
       // 获得场景
       String sceneGuid = xscene.get("guid");
       String sceneCode = xscene.get("code");
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneGuid, sceneCode);
+      String theme = context.parameter("theme");
+      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneGuid, sceneCode, theme);
       // 合并场景
       scene.mergeConfig(xscene);
       // 更新场景

@@ -41,6 +41,12 @@ public class FDataResource3dTextureBitmapLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段用户编号的定义。
+   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
+
+   // 字段项目编号的定义。
+   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+
    // 字段纹理编号的定义。
    public final static SLogicFieldInfo TEXTURE_ID = new SLogicFieldInfo("TEXTURE_ID");
 
@@ -50,14 +56,17 @@ public class FDataResource3dTextureBitmapLogic
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
+   // 字段索引的定义。
+   public final static SLogicFieldInfo INDEX = new SLogicFieldInfo("INDEX");
+
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段来源通道的定义。
-   public final static SLogicFieldInfo CHANNEL_SOURCE = new SLogicFieldInfo("CHANNEL_SOURCE");
+   // 字段关键字的定义。
+   public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
 
-   // 字段目标通道的定义。
-   public final static SLogicFieldInfo CHANNEL_TARGET = new SLogicFieldInfo("CHANNEL_TARGET");
+   // 字段通道的定义。
+   public final static SLogicFieldInfo CHANNELS = new SLogicFieldInfo("CHANNELS");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -75,7 +84,7 @@ public class FDataResource3dTextureBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,TEXTURE_ID,BITMAP_ID,CODE,LABEL,CHANNEL_SOURCE,CHANNEL_TARGET,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TEXTURE_ID`,`BITMAP_ID`,`CODE`,`INDEX`,`LABEL`,`KEYWORDS`,`CHANNELS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源3D纹理位图表逻辑单元。</T>
@@ -617,12 +626,15 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`USER_ID`");
+      cmd.append(",`PROJECT_ID`");
       cmd.append(",`TEXTURE_ID`");
       cmd.append(",`BITMAP_ID`");
       cmd.append(",`CODE`");
+      cmd.append(",`INDEX`");
       cmd.append(",`LABEL`");
-      cmd.append(",`CHANNEL_SOURCE`");
-      cmd.append(",`CHANNEL_TARGET`");
+      cmd.append(",`KEYWORDS`");
+      cmd.append(",`CHANNELS`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -638,6 +650,20 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
+      cmd.append(',');
+      long projectId = unit.projectId();
+      if(projectId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(projectId);
+      }
       cmd.append(',');
       long textureId = unit.textureId();
       if(textureId == 0){
@@ -662,6 +688,8 @@ public class FDataResource3dTextureBitmapLogic
          cmd.append('\'');
       }
       cmd.append(',');
+      cmd.append(unit.index());
+      cmd.append(',');
       String label = unit.label();
       if(RString.isEmpty(label)){
          cmd.append("NULL");
@@ -671,21 +699,21 @@ public class FDataResource3dTextureBitmapLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String channelSource = unit.channelSource();
-      if(RString.isEmpty(channelSource)){
+      String keywords = unit.keywords();
+      if(RString.isEmpty(keywords)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(channelSource));
+         cmd.append(RSql.formatValue(keywords));
          cmd.append('\'');
       }
       cmd.append(',');
-      String channelTarget = unit.channelTarget();
-      if(RString.isEmpty(channelTarget)){
+      String channels = unit.channels();
+      if(RString.isEmpty(channels)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(channelTarget));
+         cmd.append(RSql.formatValue(channels));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -771,6 +799,24 @@ public class FDataResource3dTextureBitmapLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isUserIdChanged()){
+         cmd.append(",`USER_ID`=");
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
+      }
+      if(unit.isProjectIdChanged()){
+         cmd.append(",`PROJECT_ID`=");
+         long projectId = unit.projectId();
+         if(projectId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(projectId);
+         }
+      }
       if(unit.isTextureIdChanged()){
          cmd.append(",`TEXTURE_ID`=");
          long textureId = unit.textureId();
@@ -800,6 +846,10 @@ public class FDataResource3dTextureBitmapLogic
             cmd.append('\'');
          }
       }
+      if(unit.isIndexChanged()){
+         cmd.append(",`INDEX`=");
+         cmd.append(unit.index());
+      }
       if(unit.isLabelChanged()){
          cmd.append(",`LABEL`=");
          String label = unit.label();
@@ -811,25 +861,25 @@ public class FDataResource3dTextureBitmapLogic
             cmd.append('\'');
          }
       }
-      if(unit.isChannelSourceChanged()){
-         cmd.append(",`CHANNEL_SOURCE`=");
-         String channelSource = unit.channelSource();
-         if(RString.isEmpty(channelSource)){
+      if(unit.isKeywordsChanged()){
+         cmd.append(",`KEYWORDS`=");
+         String keywords = unit.keywords();
+         if(RString.isEmpty(keywords)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(channelSource));
+            cmd.append(RSql.formatValue(keywords));
             cmd.append('\'');
          }
       }
-      if(unit.isChannelTargetChanged()){
-         cmd.append(",`CHANNEL_TARGET`=");
-         String channelTarget = unit.channelTarget();
-         if(RString.isEmpty(channelTarget)){
+      if(unit.isChannelsChanged()){
+         cmd.append(",`CHANNELS`=");
+         String channels = unit.channels();
+         if(RString.isEmpty(channels)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(channelTarget));
+            cmd.append(RSql.formatValue(channels));
             cmd.append('\'');
          }
       }

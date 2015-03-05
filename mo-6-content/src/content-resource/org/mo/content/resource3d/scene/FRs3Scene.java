@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.scene;
 
-import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
@@ -126,7 +126,9 @@ public class FRs3Scene
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _code = xconfig.get("code");
+      _fullCode = xconfig.get("full_code");
       _label = xconfig.get("label");
+      _keywords = xconfig.get("keywords");
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Technique")){
@@ -187,7 +189,9 @@ public class FRs3Scene
       // 存储属性
       xconfig.set("guid", _guid);
       xconfig.set("code", _code);
+      xconfig.set("full_code", _fullCode);
       xconfig.set("label", _label);
+      xconfig.set("keywords", _keywords);
       // 存储技术
       _technique.saveConfig(xconfig.createNode("Technique"));
       // 存储区域
@@ -210,7 +214,9 @@ public class FRs3Scene
    public void importData(IDataInput input){
       // 读取属性
       _code = input.readString();
+      _fullCode = input.readString();
       _label = input.readString();
+      _keywords = input.readString();
       _themeCode = input.readString();
       // 导入技术
       _technique.importData(input);
@@ -233,7 +239,7 @@ public class FRs3Scene
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dSceneUnit unit){
+   public void loadUnit(FDataResource3dSceneThemeUnit unit){
       // 加载属性
       _ouid = unit.ouid();
       _guid = unit.guid();
@@ -250,10 +256,12 @@ public class FRs3Scene
    //
    // @param unit 数据单元
    //============================================================
-   public void saveUnit(FDataResource3dSceneUnit unit){
+   public void saveUnit(FDataResource3dSceneThemeUnit unit){
       // 存储属性
       unit.setCode(_code);
+      unit.setFullCode(_fullCode);
       unit.setLabel(_label);
+      unit.setKeywords(_keywords);
       // 存储配置
       FXmlNode xconfig = new FXmlNode("Scene");
       saveConfig(xconfig);

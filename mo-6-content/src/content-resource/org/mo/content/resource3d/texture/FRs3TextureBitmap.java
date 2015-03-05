@@ -1,7 +1,8 @@
-package org.mo.content.engine3d.core.texture;
+package org.mo.content.resource3d.texture;
 
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================
@@ -12,6 +13,12 @@ public class FRs3TextureBitmap
 {
    // 位图打包
    protected FRs3TextureBitmapPack _bitmapPack;
+
+   // 数据
+   protected int _index;
+
+   // 间隔
+   protected int _tick;
 
    // 数据
    protected byte[] _data;
@@ -38,6 +45,24 @@ public class FRs3TextureBitmap
    //============================================================
    public void setBitmapPack(FRs3TextureBitmapPack bitmapPack){
       _bitmapPack = bitmapPack;
+   }
+
+   //============================================================
+   // <T>获得索引。</T>
+   //
+   // @return 索引
+   //============================================================
+   public int index(){
+      return _index;
+   }
+
+   //============================================================
+   // <T>设置索引。</T>
+   //
+   // @param index 索引
+   //============================================================
+   public void setIndex(int index){
+      _index = index;
    }
 
    //============================================================
@@ -85,5 +110,42 @@ public class FRs3TextureBitmap
          bitmapPackCode = _code;
       }
       output.writeString(bitmapPackCode);
+   }
+
+   //============================================================
+   // <T>从配置节点中加载数据信息。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   @Override
+   public void loadConfig(FXmlNode xconfig){
+      _guid = xconfig.get("guid");
+      _code = xconfig.get("code");
+      _index = xconfig.getInt("index");
+      _tick = xconfig.getInt("tick");
+   }
+
+   //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void saveConfig(FXmlNode xconfig){
+      xconfig.set("guid", _guid);
+      xconfig.set("code", _code);
+      xconfig.set("index", _index);
+      xconfig.set("tick", _tick);
+   }
+
+   //============================================================
+   // <T>从配置节点中导入数据信息。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   public void importConfig(FXmlNode xconfig){
+      _code = xconfig.get("type_name");
+      _index = xconfig.getInt("index");
+      _tick = xconfig.getInt("tick");
    }
 }

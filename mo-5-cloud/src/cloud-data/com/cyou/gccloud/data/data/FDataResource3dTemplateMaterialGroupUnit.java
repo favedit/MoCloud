@@ -35,6 +35,18 @@ public class FDataResource3dTemplateMaterialGroupUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段用户编号的定义。
+   private long __userId;
+
+   // 字段用户编号的定义。
+   protected long _userId;
+
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
+
    // 存储字段模板编号的定义。
    private long __templateId;
 
@@ -162,6 +174,60 @@ public class FDataResource3dTemplateMaterialGroupUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long userId(){
+      return _userId;
+   }
+
+   //============================================================
+   // <T>设置用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserId(long value){
+      _userId = value;
+   }
+
+   //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
    }
 
    //============================================================
@@ -390,6 +456,10 @@ public class FDataResource3dTemplateMaterialGroupUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "user_id":
+            return Long.toString(_userId);
+         case "project_id":
+            return Long.toString(_projectId);
          case "template_id":
             return Long.toString(_templateId);
          case "material_group_id":
@@ -426,6 +496,12 @@ public class FDataResource3dTemplateMaterialGroupUnit
             break;
          case "guid":
             _guid = value;
+            break;
+         case "user_id":
+            _userId = RLong.parse(value);
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
             break;
          case "template_id":
             _templateId = RLong.parse(value);
@@ -475,6 +551,14 @@ public class FDataResource3dTemplateMaterialGroupUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "user_id":
+               __userId = RLong.parse(value);
+               _userId = __userId;
+               break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
+               break;
             case "template_id":
                __templateId = RLong.parse(value);
                _templateId = __templateId;
@@ -518,6 +602,8 @@ public class FDataResource3dTemplateMaterialGroupUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("userId", _userId);
+      row.set("projectId", _projectId);
       row.set("templateId", _templateId);
       row.set("materialGroupId", _materialGroupId);
       row.set("note", _note);
@@ -538,6 +624,8 @@ public class FDataResource3dTemplateMaterialGroupUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("userId", RLong.toString(_userId));
+      map.put("projectId", RLong.toString(_projectId));
       map.put("templateId", RLong.toString(_templateId));
       map.put("materialGroupId", RLong.toString(_materialGroupId));
       map.put("note", _note);

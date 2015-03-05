@@ -78,7 +78,7 @@ public class FDataPersonUserLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,PASSPORT,PASSWORD,CODE,LABEL,ICON_URL,DESCRIPTION,CONTENT,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`PASSPORT`,`PASSWORD`,`CODE`,`LABEL`,`ICON_URL`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造人员用户信息逻辑单元。</T>

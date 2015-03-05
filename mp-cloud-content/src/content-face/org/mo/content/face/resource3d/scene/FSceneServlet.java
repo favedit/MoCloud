@@ -59,14 +59,15 @@ public class FSceneServlet
       // 检查参数
       String guid = context.parameter("guid");
       String code = context.parameter("code");
+      String theme = RString.nvl(context.parameter("theme"), "general");
       if(RString.isEmpty(guid) && RString.isEmpty(code)){
          throw new FFatalError("Scene is empty.");
       }
       // 生成数据
-      byte[] sceneData = _sceneConsole.makeSceneData(logicContext, guid, code);
+      byte[] sceneData = _sceneConsole.makeSceneData(logicContext, guid, code, theme);
       FByteStream stream = new FByteStream();
       if(sceneData == null){
-         String info = RString.format("Scene is not exists. (guid={1}, code={2})", guid, code);
+         String info = RString.format("Scene is not exists. (guid={1}, code={2}, theme={3})", guid, code, theme);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
@@ -76,7 +77,7 @@ public class FSceneServlet
       int dataLength = stream.length();
       byte[] data = stream.memory();
       // 发送数据
-      _logger.debug(this, "process", "Send template data. (length={1})", dataLength);
+      _logger.debug(this, "process", "Send scene theme data. (guid={1}, code={2}, theme={3}, length={4})", guid, code, theme, dataLength);
       response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=" + CacheTimeout);

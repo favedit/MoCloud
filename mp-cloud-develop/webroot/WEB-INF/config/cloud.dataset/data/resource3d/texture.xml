@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="2941a5a2-abf4-45b4-b2aa-65ed008de4df" name="data.resource3d.texture" label="M#12cn17资源3D纹理表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-TX-DAT" data_name="DT_RS3_TEXTURE" data_alias="DT_RS3_TXT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="7aaa4f74-33c1-4c6a-9fa2-8cb8630db063" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldRecordId _uuid="263aaa57-ff05-43f5-9bab-cce7fe8c0de7" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
   <FieldString _uuid="ac2c657d-765e-46a8-b4f5-78eb765d936d" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="5ccf0020-15c3-451c-9f10-6a34dad5acce" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="0fb799c4-dedb-4d1d-be94-8166b0f41ea7" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="2e08b80a-453d-49f4-ab93-7359b011b9e1" name="keywords" label="M#12cn13关键字" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORDS" data_size="2000" />
+  <FieldContent _uuid="da3b336b-d793-41de-8a15-113740004717" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
   <FieldTemplate _uuid="24171f12-b270-418a-9ebd-14998d592d30" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

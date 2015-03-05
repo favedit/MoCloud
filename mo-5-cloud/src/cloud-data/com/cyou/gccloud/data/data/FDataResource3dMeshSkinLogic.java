@@ -41,6 +41,12 @@ public class FDataResource3dMeshSkinLogic
    // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段用户编号的定义。
+   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
+
+   // 字段项目编号的定义。
+   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+
    // 字段网格编号的定义。
    public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
 
@@ -66,7 +72,7 @@ public class FDataResource3dMeshSkinLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,MESH_ID,SKELETON_ID,SKELETON_SKIN_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MESH_ID`,`SKELETON_ID`,`SKELETON_SKIN_ID`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源3D网格蒙皮表逻辑单元。</T>
@@ -608,6 +614,8 @@ public class FDataResource3dMeshSkinLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`USER_ID`");
+      cmd.append(",`PROJECT_ID`");
       cmd.append(",`MESH_ID`");
       cmd.append(",`SKELETON_ID`");
       cmd.append(",`SKELETON_SKIN_ID`");
@@ -626,6 +634,20 @@ public class FDataResource3dMeshSkinLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
+      cmd.append(',');
+      long projectId = unit.projectId();
+      if(projectId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(projectId);
+      }
       cmd.append(',');
       long meshId = unit.meshId();
       if(meshId == 0){
@@ -730,6 +752,24 @@ public class FDataResource3dMeshSkinLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isUserIdChanged()){
+         cmd.append(",`USER_ID`=");
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
+      }
+      if(unit.isProjectIdChanged()){
+         cmd.append(",`PROJECT_ID`=");
+         long projectId = unit.projectId();
+         if(projectId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(projectId);
+         }
+      }
       if(unit.isMeshIdChanged()){
          cmd.append(",`MESH_ID`=");
          long meshId = unit.meshId();

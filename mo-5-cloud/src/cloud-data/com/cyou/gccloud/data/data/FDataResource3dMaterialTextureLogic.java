@@ -41,14 +41,20 @@ public class FDataResource3dMaterialTextureLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段用户编号的定义。
+   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
+
+   // 字段项目编号的定义。
+   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+
    // 字段材质编号的定义。
    public final static SLogicFieldInfo MATERIAL_ID = new SLogicFieldInfo("MATERIAL_ID");
 
-   // 字段全代码的定义。
-   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
-
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+
+   // 字段全代码的定义。
+   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
 
    // 字段纹理编号的定义。
    public final static SLogicFieldInfo TEXTURE_ID = new SLogicFieldInfo("TEXTURE_ID");
@@ -72,7 +78,7 @@ public class FDataResource3dMaterialTextureLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,MATERIAL_ID,FULL_CODE,CODE,TEXTURE_ID,TEXTURE_BITMAP_ID,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MATERIAL_ID`,`CODE`,`FULL_CODE`,`TEXTURE_ID`,`TEXTURE_BITMAP_ID`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源3D材质纹理表逻辑单元。</T>
@@ -614,9 +620,11 @@ public class FDataResource3dMaterialTextureLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`USER_ID`");
+      cmd.append(",`PROJECT_ID`");
       cmd.append(",`MATERIAL_ID`");
-      cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
+      cmd.append(",`FULL_CODE`");
       cmd.append(",`TEXTURE_ID`");
       cmd.append(",`TEXTURE_BITMAP_ID`");
       cmd.append(",`NOTE`");
@@ -635,20 +643,25 @@ public class FDataResource3dMaterialTextureLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
+      cmd.append(',');
+      long projectId = unit.projectId();
+      if(projectId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(projectId);
+      }
+      cmd.append(',');
       long materialId = unit.materialId();
       if(materialId == 0){
          cmd.append("NULL");
       }else{
          cmd.append(materialId);
-      }
-      cmd.append(',');
-      String fullCode = unit.fullCode();
-      if(RString.isEmpty(fullCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(fullCode));
-         cmd.append('\'');
       }
       cmd.append(',');
       String code = unit.code();
@@ -657,6 +670,15 @@ public class FDataResource3dMaterialTextureLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(code));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String fullCode = unit.fullCode();
+      if(RString.isEmpty(fullCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(fullCode));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -756,6 +778,24 @@ public class FDataResource3dMaterialTextureLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isUserIdChanged()){
+         cmd.append(",`USER_ID`=");
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
+      }
+      if(unit.isProjectIdChanged()){
+         cmd.append(",`PROJECT_ID`=");
+         long projectId = unit.projectId();
+         if(projectId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(projectId);
+         }
+      }
       if(unit.isMaterialIdChanged()){
          cmd.append(",`MATERIAL_ID`=");
          long materialId = unit.materialId();
@@ -763,17 +803,6 @@ public class FDataResource3dMaterialTextureLogic
             cmd.append("NULL");
          }else{
             cmd.append(materialId);
-         }
-      }
-      if(unit.isFullCodeChanged()){
-         cmd.append(",`FULL_CODE`=");
-         String fullCode = unit.fullCode();
-         if(RString.isEmpty(fullCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(fullCode));
-            cmd.append('\'');
          }
       }
       if(unit.isCodeChanged()){
@@ -784,6 +813,17 @@ public class FDataResource3dMaterialTextureLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(code));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isFullCodeChanged()){
+         cmd.append(",`FULL_CODE`=");
+         String fullCode = unit.fullCode();
+         if(RString.isEmpty(fullCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(fullCode));
             cmd.append('\'');
          }
       }

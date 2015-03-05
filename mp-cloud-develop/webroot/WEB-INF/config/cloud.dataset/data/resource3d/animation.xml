@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="b213e74e-8604-417c-8fe6-f11b8b584a7c" name="data.resource3d.animation" label="M#12cn17资源3D动画表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-AM-DAT" data_name="DT_RS3_ANIMATION" data_alias="DT_RS3_ANM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="22129484-89a0-4634-8f7b-64eaa64237fe" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldRecordId _uuid="5291e3b3-c07f-40d7-88c6-f78c1eefd8de" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
   <FieldString _uuid="95149283-9964-4a2e-b008-719dec973317" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="64613cd1-e2a5-418e-888d-32bf78b107cd" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
   <FieldInteger _uuid="865d1dbf-68ee-4329-a9ad-1212e905b4b7" name="frame_count" label="M#12cn13帧总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FRAME_COUNT" />

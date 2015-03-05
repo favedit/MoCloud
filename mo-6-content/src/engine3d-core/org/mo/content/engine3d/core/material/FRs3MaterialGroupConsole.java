@@ -57,6 +57,7 @@ public class FRs3MaterialGroupConsole
       FDataResource3dMaterialGroupLogic materialGroupLogic = logicContext.findLogic(FDataResource3dMaterialGroupLogic.class);
       FDataResource3dMaterialGroupUnit materialGroupUnit = materialGroupLogic.doPrepare();
       materialGroupUnit.setCode(materialGroup.code());
+      materialGroupUnit.setLabel(materialGroup.label());
       materialGroupLogic.doInsert(materialGroupUnit);
       // 返回材质单元
       return materialGroupLogic.find(materialGroupUnit.ouid());

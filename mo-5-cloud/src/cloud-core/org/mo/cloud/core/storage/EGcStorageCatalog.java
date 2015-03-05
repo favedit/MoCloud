@@ -24,5 +24,5 @@ public class EGcStorageCatalog
    public final static String Resource3dTemplate = "resource3d.template";
 
    // 资源3D场景
-   public final static String Resource3dScene = "resource3d.scene";
+   public final static String Resource3dSceneTheme = "resource3d.scene.theme";
 }

@@ -42,7 +42,6 @@ public class FRs3Resource
    // @param input 输入流
    //============================================================
    public void importData(IDataInput input){
-      //_guid = input.readString();
       _code = input.readString();
    }
 

@@ -35,6 +35,18 @@ public class FDataResource3dMeshTrackUnit
    // 字段全局唯一标识的定义。
    protected String _guid;
 
+   // 存储字段用户编号的定义。
+   private long __userId;
+
+   // 字段用户编号的定义。
+   protected long _userId;
+
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
+
    // 存储字段网格编号的定义。
    private long __meshId;
 
@@ -46,6 +58,18 @@ public class FDataResource3dMeshTrackUnit
 
    // 字段跟踪编号的定义。
    protected long _trackId;
+
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
+
+   // 存储字段标签的定义。
+   private String __label;
+
+   // 字段标签的定义。
+   protected String _label;
 
    // 存储字段备注的定义。
    private String __note;
@@ -165,6 +189,60 @@ public class FDataResource3dMeshTrackUnit
    }
 
    //============================================================
+   // <T>判断用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long userId(){
+      return _userId;
+   }
+
+   //============================================================
+   // <T>设置用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserId(long value){
+      _userId = value;
+   }
+
+   //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
+   }
+
+   //============================================================
    // <T>判断网格编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -238,6 +316,60 @@ public class FDataResource3dMeshTrackUnit
    //============================================================
    public void setTrackId(long value){
       _trackId = value;
+   }
+
+   //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
+   }
+
+   //============================================================
+   // <T>判断标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
+   }
+
+   //============================================================
+   // <T>获得标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>设置标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabel(String value){
+      _label = value;
    }
 
    //============================================================
@@ -390,10 +522,18 @@ public class FDataResource3dMeshTrackUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "user_id":
+            return Long.toString(_userId);
+         case "project_id":
+            return Long.toString(_projectId);
          case "mesh_id":
             return Long.toString(_meshId);
          case "track_id":
             return Long.toString(_trackId);
+         case "code":
+            return _code;
+         case "label":
+            return _label;
          case "note":
             return _note;
          case "create_user_id":
@@ -427,11 +567,23 @@ public class FDataResource3dMeshTrackUnit
          case "guid":
             _guid = value;
             break;
+         case "user_id":
+            _userId = RLong.parse(value);
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
+            break;
          case "mesh_id":
             _meshId = RLong.parse(value);
             break;
          case "track_id":
             _trackId = RLong.parse(value);
+            break;
+         case "code":
+            _code = value;
+            break;
+         case "label":
+            _label = value;
             break;
          case "note":
             _note = value;
@@ -475,6 +627,14 @@ public class FDataResource3dMeshTrackUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "user_id":
+               __userId = RLong.parse(value);
+               _userId = __userId;
+               break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
+               break;
             case "mesh_id":
                __meshId = RLong.parse(value);
                _meshId = __meshId;
@@ -482,6 +642,14 @@ public class FDataResource3dMeshTrackUnit
             case "track_id":
                __trackId = RLong.parse(value);
                _trackId = __trackId;
+               break;
+            case "code":
+               __code = value;
+               _code = __code;
+               break;
+            case "label":
+               __label = value;
+               _label = __label;
                break;
             case "note":
                __note = value;
@@ -518,8 +686,12 @@ public class FDataResource3dMeshTrackUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("userId", _userId);
+      row.set("projectId", _projectId);
       row.set("meshId", _meshId);
       row.set("trackId", _trackId);
+      row.set("code", _code);
+      row.set("label", _label);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -538,8 +710,12 @@ public class FDataResource3dMeshTrackUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("userId", RLong.toString(_userId));
+      map.put("projectId", RLong.toString(_projectId));
       map.put("meshId", RLong.toString(_meshId));
       map.put("trackId", RLong.toString(_trackId));
+      map.put("code", _code);
+      map.put("label", _label);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

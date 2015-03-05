@@ -2,6 +2,7 @@ package org.mo.content.engine3d.core.texture;
 
 import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.com.lang.EResult;
+import org.mo.content.resource3d.texture.FRs3Texture;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -18,36 +19,6 @@ public interface IRs3TextureConsole
    //============================================================
    FDataResource3dTextureUnit findByCode(ILogicContext logicContext,
                                          String code);
-
-   //============================================================
-   // <T>导出数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param path 路径
-   // @return 处理结果
-   //============================================================
-   EResult exportData(ILogicContext logicContext,
-                      String path);
-
-   //============================================================
-   // <T>导入数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param path 路径
-   // @return 处理结果
-   //============================================================
-   EResult importData(ILogicContext logicContext,
-                      String path);
-
-   //============================================================
-   // <T>导入纹理。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param path 路径
-   // @return 处理结果
-   //============================================================
-   EResult importTexture(ILogicContext logicContext,
-                         String path);
 
    //============================================================
    // <T>生成纹理。</T>
@@ -68,4 +39,14 @@ public interface IRs3TextureConsole
    //============================================================
    byte[] makeTextureData(ILogicContext logicContext,
                           String guid);
+
+   //============================================================
+   // <T>导入纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   EResult importTexture(ILogicContext logicContext,
+                         String path);
 }

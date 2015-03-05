@@ -116,6 +116,7 @@ public class FRs3Template
    //
    // @param xconfig 配置节点
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 检查参数
       if(!xconfig.isName("Template")){
@@ -163,6 +164,7 @@ public class FRs3Template
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", _guid);
@@ -201,17 +203,6 @@ public class FRs3Template
    }
 
    //============================================================
-   // <T>从配置信息中导入配置。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   public String toXml(){
-      FXmlNode xconfig = new FXmlNode("Template");
-      saveConfig(xconfig);
-      return xconfig.xml().toString();
-   }
-
-   //============================================================
    // <T>从配置节点中导入数据信息。</T>
    //
    // @param xconfig 配置节点
@@ -219,6 +210,9 @@ public class FRs3Template
    public void importConfig(FXmlNode xconfig){
       FXmlNode xtemplate = xconfig.findNode("Template");
       _code = xtemplate.get("code");
+      _fullCode = xtemplate.get("full_code");
+      _label = xtemplate.get("label");
+      _keywords = xtemplate.get("keywords");
       // 处理所有节点
       for(FXmlNode xnode : xtemplate){
          if(xnode.isName("ThemeCollection")){
@@ -243,9 +237,21 @@ public class FRs3Template
       // 建立所有材质组
       for(FRs3Theme theme : _themes){
          for(FRs3Material material : theme.materials()){
-            syncMaterialGroup(material.code());
+            FRs3MaterialGroup materialGroup = syncMaterialGroup(material.code());
+            materialGroup.setLabel(material.label());
          }
       }
+   }
+
+   //============================================================
+   // <T>从配置信息中导入配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public String toXml(){
+      FXmlNode xconfig = new FXmlNode("Template");
+      saveConfig(xconfig);
+      return xconfig.xml().toString();
    }
 
    //============================================================
@@ -256,7 +262,7 @@ public class FRs3Template
    @Override
    public String toString(){
       FXmlNode xconfig = new FXmlNode("Template");
-      this.saveConfig(xconfig);
+      saveConfig(xconfig);
       return xconfig.xml().toString();
    }
 }

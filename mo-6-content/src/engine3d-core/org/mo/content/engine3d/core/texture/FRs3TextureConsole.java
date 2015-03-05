@@ -8,23 +8,24 @@ import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapImageUnit;
 import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
-import java.io.File;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.FByteStream;
-import org.mo.com.io.FFileInfo;
-import org.mo.com.io.FFileInfos;
-import org.mo.com.io.RDirectory;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
+import org.mo.com.xml.FXmlDocument;
+import org.mo.content.resource3d.texture.FRs3Texture;
+import org.mo.content.resource3d.texture.FRs3TextureBitmap;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eng.image.FImage;
 
 //============================================================
 // <T>资源纹理控制台。</T>
@@ -34,6 +35,9 @@ public class FRs3TextureConsole
       implements
          IRs3TextureConsole
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FRs3TextureConsole.class);
+
    // 存储控制台
    @ALink
    protected IGcStorageConsole _storageConsole;
@@ -52,91 +56,6 @@ public class FRs3TextureConsole
       FDataResource3dTextureLogic textureLogic = logicContext.findLogic(FDataResource3dTextureLogic.class);
       FDataResource3dTextureUnit textureUnit = textureLogic.search(searchSql);
       return textureUnit;
-   }
-
-   //============================================================
-   // <T>导出数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param path 路径
-   // @return 处理结果
-   //============================================================
-   @Override
-   public EResult exportData(ILogicContext logicContext,
-                             String path){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>导入数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param path 路径
-   // @return 处理结果
-   //============================================================
-   @Override
-   public EResult importData(ILogicContext logicContext,
-                             String path){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>导入纹理。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param path 路径
-   // @return 处理结果
-   //============================================================
-   @Override
-   public EResult importTexture(ILogicContext logicContext,
-                                String path){
-      path = RFile.format(path);
-      // 获得文件列表
-      FFileInfos fileInfos = RDirectory.listFiles(path);
-      if(fileInfos.isEmpty()){
-         return EResult.Failure;
-      }
-      // 获得纹理名称
-      String[] items = RString.split(path, File.separatorChar);
-      String textureCode = items[items.length - 1];
-      // 新建纹理
-      FDataResource3dTextureLogic textureLogic = logicContext.findLogic(FDataResource3dTextureLogic.class);
-      FDataResource3dTextureUnit textureUnit = textureLogic.doPrepare();
-      textureUnit.setCode(textureCode);
-      textureLogic.doInsert(textureUnit);
-      // 新建位图集合
-      for(FFileInfo fileInfo : fileInfos){
-         String fileCode = fileInfo.code();
-         String fileExtension = fileInfo.extension();
-         // 新建位图
-         FDataResourceBitmapLogic bitmapLogic = logicContext.findLogic(FDataResourceBitmapLogic.class);
-         FDataResourceBitmapUnit bitmapUnit = bitmapLogic.doPrepare();
-         bitmapUnit.setFullCode(textureCode + "|" + fileCode);
-         bitmapUnit.setCode(fileCode);
-         bitmapLogic.doInsert(bitmapUnit);
-         // 新建位图图片
-         FDataResourceBitmapImageLogic imageLogic = logicContext.findLogic(FDataResourceBitmapImageLogic.class);
-         FDataResourceBitmapImageUnit imageUnit = imageLogic.doPrepare();
-         imageUnit.setBitmapId(bitmapUnit.ouid());
-         imageUnit.setCode(fileCode);
-         imageUnit.setFormatCode(fileExtension);
-         imageLogic.doInsert(imageUnit);
-         // 上传位图数据
-         imageLogic.find(imageUnit, imageUnit.ouid());
-         try(FByteFile file = new FByteFile(fileInfo.fileName())){
-            SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid(), fileExtension);
-            resource.setData(file.toArray());
-            _storageConsole.store(resource);
-         }
-         // 新建纹理位图
-         FDataResource3dTextureBitmapLogic textureBitmapLogic = logicContext.findLogic(FDataResource3dTextureBitmapLogic.class);
-         FDataResource3dTextureBitmapUnit textureBitmapUnit = textureBitmapLogic.doPrepare();
-         textureBitmapUnit.setTextureId(textureUnit.ouid());
-         textureBitmapUnit.setBitmapId(bitmapUnit.ouid());
-         textureBitmapUnit.setCode(fileCode);
-         textureBitmapLogic.doInsert(textureBitmapUnit);
-      }
-      return EResult.Success;
    }
 
    //============================================================
@@ -217,5 +136,98 @@ public class FRs3TextureConsole
       _storageConsole.store(storage);
       // 返回数据
       return data;
+   }
+
+   //============================================================
+   // <T>导入纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importTexture(ILogicContext logicContext,
+                                String path){
+      path = RFile.format(path);
+      //............................................................
+      // 导入配置信息
+      FRs3Texture texture = new FRs3Texture();
+      String configFile = RFile.makeFilename(path, "config.xml");
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadFile(configFile);
+      texture.importConfig(xdocument.root());
+      String textureCode = texture.code();
+      String textureLabel = texture.label();
+      String textureKeywords = texture.keywords();
+      //............................................................
+      // 新建纹理
+      FDataResource3dTextureLogic textureLogic = logicContext.findLogic(FDataResource3dTextureLogic.class);
+      FDataResource3dTextureUnit textureUnit = textureLogic.doPrepare();
+      textureUnit.setCode(textureCode);
+      textureUnit.setFullCode(texture.fullCode());
+      textureUnit.setLabel(texture.label());
+      textureUnit.setKeywords(textureKeywords);
+      textureUnit.setContent(texture.toXml());
+      textureLogic.doInsert(textureUnit);
+      texture.setGuid(textureUnit.guid());
+      //............................................................
+      for(FRs3TextureBitmap bitmap : texture.bitmaps()){
+         // 检查文件
+         String bitmapCode = bitmap.code();
+         int bitmapIndex = bitmap.index();
+         String fileExtension = "jpg";
+         String bitmapFile = RFile.makeFilename(path, bitmapCode + "." + fileExtension);
+         if(!RFile.exists(bitmapFile)){
+            throw new FFatalError("Bitmap file is not exists. (file_name={1})", bitmapFile);
+         }
+         FImage image = new FImage();
+         image.loadFile(bitmapFile);
+         // 新建位图
+         FDataResourceBitmapLogic bitmapLogic = logicContext.findLogic(FDataResourceBitmapLogic.class);
+         FDataResourceBitmapUnit bitmapUnit = bitmapLogic.doPrepare();
+         bitmapUnit.setCode(bitmapCode);
+         bitmapUnit.setFullCode(textureCode + "|" + bitmapCode);
+         bitmapUnit.setLabel(textureLabel);
+         bitmapUnit.setKeywords(textureKeywords);
+         bitmapLogic.doInsert(bitmapUnit);
+         // 新建位图图片
+         FDataResourceBitmapImageLogic imageLogic = logicContext.findLogic(FDataResourceBitmapImageLogic.class);
+         FDataResourceBitmapImageUnit imageUnit = imageLogic.doPrepare();
+         imageUnit.setBitmapId(bitmapUnit.ouid());
+         imageUnit.setCode(bitmapCode);
+         imageUnit.setLabel(textureLabel);
+         imageUnit.setKeywords(textureKeywords);
+         imageUnit.setSizeWidth(image.width());
+         imageUnit.setSizeHeight(image.height());
+         imageUnit.setFormatCode(fileExtension);
+         imageLogic.doInsert(imageUnit);
+         // 上传位图数据
+         try(FByteFile file = new FByteFile(bitmapFile)){
+            SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid(), fileExtension);
+            resource.setData(file.toArray());
+            _storageConsole.store(resource);
+         }
+         // 新建纹理位图
+         FDataResource3dTextureBitmapLogic textureBitmapLogic = logicContext.findLogic(FDataResource3dTextureBitmapLogic.class);
+         FDataResource3dTextureBitmapUnit textureBitmapUnit = textureBitmapLogic.doPrepare();
+         textureBitmapUnit.setTextureId(textureUnit.ouid());
+         textureBitmapUnit.setBitmapId(bitmapUnit.ouid());
+         textureBitmapUnit.setCode(bitmapCode);
+         textureBitmapUnit.setLabel(textureLabel);
+         textureBitmapUnit.setKeywords(textureKeywords);
+         textureBitmapUnit.setIndex(bitmapIndex);
+         textureBitmapLogic.doInsert(textureBitmapUnit);
+         bitmap.setGuid(textureBitmapUnit.guid());
+         // 释放资源
+         try{
+            image.close();
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
+      }
+      textureUnit.setContent(texture.toXml());
+      textureLogic.doUpdate(textureUnit);
+      _logger.debug(this, "importTexture", "Import texture success. (path={1})", path);
+      return EResult.Success;
    }
 }

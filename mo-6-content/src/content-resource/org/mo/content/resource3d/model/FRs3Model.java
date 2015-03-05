@@ -115,6 +115,9 @@ public class FRs3Model
    @Override
    public void importData(IDataInput input){
       super.importData(input);
+      _fullCode = input.readString();
+      _label = input.readString();
+      _keywords = input.readString();
       // 读取网格集合
       int meshCount = input.readInt32();
       for(int n = 0; n < meshCount; n++){

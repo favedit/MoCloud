@@ -35,23 +35,35 @@ public class FDataResource3dMaterialTextureUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段用户编号的定义。
+   private long __userId;
+
+   // 字段用户编号的定义。
+   protected long _userId;
+
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
+
    // 存储字段材质编号的定义。
    private long __materialId;
 
    // 字段材质编号的定义。
    protected long _materialId;
 
-   // 存储字段全代码的定义。
-   private String __fullCode;
-
-   // 字段全代码的定义。
-   protected String _fullCode;
-
    // 存储字段代码的定义。
    private String __code;
 
    // 字段代码的定义。
    protected String _code;
+
+   // 存储字段全代码的定义。
+   private String __fullCode;
+
+   // 字段全代码的定义。
+   protected String _fullCode;
 
    // 存储字段纹理编号的定义。
    private long __textureId;
@@ -183,6 +195,60 @@ public class FDataResource3dMaterialTextureUnit
    }
 
    //============================================================
+   // <T>判断用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long userId(){
+      return _userId;
+   }
+
+   //============================================================
+   // <T>设置用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserId(long value){
+      _userId = value;
+   }
+
+   //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
+   }
+
+   //============================================================
    // <T>判断材质编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -221,33 +287,6 @@ public class FDataResource3dMaterialTextureUnit
    }
 
    //============================================================
-   // <T>判断全代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
-   }
-
-   //============================================================
-   // <T>获得全代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String fullCode(){
-      return _fullCode;
-   }
-
-   //============================================================
-   // <T>设置全代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
-   }
-
-   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -272,6 +311,33 @@ public class FDataResource3dMaterialTextureUnit
    //============================================================
    public void setCode(String value){
       _code = value;
+   }
+
+   //============================================================
+   // <T>判断全代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullCodeChanged(){
+      return !RString.equals(__fullCode, _fullCode);
+   }
+
+   //============================================================
+   // <T>获得全代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullCode(){
+      return _fullCode;
+   }
+
+   //============================================================
+   // <T>设置全代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullCode(String value){
+      _fullCode = value;
    }
 
    //============================================================
@@ -500,12 +566,16 @@ public class FDataResource3dMaterialTextureUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "user_id":
+            return Long.toString(_userId);
+         case "project_id":
+            return Long.toString(_projectId);
          case "material_id":
             return Long.toString(_materialId);
-         case "full_code":
-            return _fullCode;
          case "code":
             return _code;
+         case "full_code":
+            return _fullCode;
          case "texture_id":
             return Long.toString(_textureId);
          case "texture_bitmap_id":
@@ -543,14 +613,20 @@ public class FDataResource3dMaterialTextureUnit
          case "guid":
             _guid = value;
             break;
+         case "user_id":
+            _userId = RLong.parse(value);
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
+            break;
          case "material_id":
             _materialId = RLong.parse(value);
             break;
-         case "full_code":
-            _fullCode = value;
-            break;
          case "code":
             _code = value;
+            break;
+         case "full_code":
+            _fullCode = value;
             break;
          case "texture_id":
             _textureId = RLong.parse(value);
@@ -600,17 +676,25 @@ public class FDataResource3dMaterialTextureUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "user_id":
+               __userId = RLong.parse(value);
+               _userId = __userId;
+               break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
+               break;
             case "material_id":
                __materialId = RLong.parse(value);
                _materialId = __materialId;
                break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
-               break;
             case "code":
                __code = value;
                _code = __code;
+               break;
+            case "full_code":
+               __fullCode = value;
+               _fullCode = __fullCode;
                break;
             case "texture_id":
                __textureId = RLong.parse(value);
@@ -655,9 +739,11 @@ public class FDataResource3dMaterialTextureUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("userId", _userId);
+      row.set("projectId", _projectId);
       row.set("materialId", _materialId);
-      row.set("fullCode", _fullCode);
       row.set("code", _code);
+      row.set("fullCode", _fullCode);
       row.set("textureId", _textureId);
       row.set("textureBitmapId", _textureBitmapId);
       row.set("note", _note);
@@ -678,9 +764,11 @@ public class FDataResource3dMaterialTextureUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("userId", RLong.toString(_userId));
+      map.put("projectId", RLong.toString(_projectId));
       map.put("materialId", RLong.toString(_materialId));
-      map.put("fullCode", _fullCode);
       map.put("code", _code);
+      map.put("fullCode", _fullCode);
       map.put("textureId", RLong.toString(_textureId));
       map.put("textureBitmapId", RLong.toString(_textureBitmapId));
       map.put("note", _note);

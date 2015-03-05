@@ -1,4 +1,4 @@
-package org.mo.content.engine3d.core.texture;
+package org.mo.content.resource3d.texture;
 
 import java.awt.image.BufferedImage;
 import org.mo.com.geom.SIntSize2;

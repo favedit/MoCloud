@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="c39ebe83-e9e6-427f-b5bd-205dc6dbc904" name="data.resource3d.skeleton" label="M#12cn17资源3D骨骼表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-KT-DAT" data_name="DT_RS3_SKELETON" data_alias="DT_RS3_SKT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldString _uuid="df701026-dcbc-4355-9fab-80f84aa383a5" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
+  <FieldRecordId _uuid="5aaae420-40a0-41c4-972c-4e187590d0a2" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldRecordId _uuid="0a7ebe92-302c-4345-b715-193e7296d67f" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
   <FieldString _uuid="6e603de9-6210-4f0a-bb2a-965e3d32fcef" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="df701026-dcbc-4355-9fab-80f84aa383a5" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="1957dc22-8b18-4df2-9a89-541f52e2c6b3" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
   <FieldContent _uuid="b9811c8a-a9a3-4d48-8d4c-828712349bad" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
   <FieldTemplate _uuid="874a049d-c3ae-4c36-90cf-aa60659484d3" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />

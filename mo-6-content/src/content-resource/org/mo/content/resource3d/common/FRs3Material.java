@@ -145,6 +145,7 @@ public class FRs3Material
    //
    // @return 全代码
    //============================================================
+   @Override
    public String fullCode(){
       return _theme.code() + "|" + _code;
    }
@@ -569,6 +570,7 @@ public class FRs3Material
    public void importConfig(FXmlNode xconfig){
       // 读取属性
       _code = xconfig.get("code");
+      _label = xconfig.get("label");
       _effectCode = xconfig.get("effect_code");
       _optionDouble = xconfig.getBoolean("option_double", false);
       // 处理所有节点

@@ -23,7 +23,8 @@ public interface IC3dSceneConsole
    //============================================================
    FRs3Scene makeScene(ILogicContext logicContext,
                        String guid,
-                       String code);
+                       String code,
+                       String themeCode);
 
    //============================================================
    // <T>生成场景。</T>
@@ -35,7 +36,8 @@ public interface IC3dSceneConsole
    //============================================================
    byte[] makeSceneData(ILogicContext logicContext,
                         String guid,
-                        String code);
+                        String code,
+                        String themeCode);
 
    //============================================================
    // <T>更新场景。</T>

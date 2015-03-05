@@ -24,46 +24,12 @@ public class RRs3ModelImport
          String name = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
          if(name.endsWith(".msh")){
             name = name.substring(0, name.length() - 4);
-            if(name.startsWith("lbl.")){
-               filePaths.push(name);
-            }
+            //if(name.startsWith("lbl.")){
+            filePaths.push(name);
+            //}
          }
       }
-      //      filePaths.push("com.design.translation");
-      //      filePaths.push("com.design.rotation");
-      //      filePaths.push("com.design.scale");
-      //      filePaths.push("com.light.point");
-      //      filePaths.push("com.light.spot");
-      //filePaths.push("dev.water.001");
-      //      filePaths.push("pvw.show.item.001");
-      //      filePaths.push("pvw.show.item.003");
-      //      filePaths.push("pvw.show.item.004");
-      //      filePaths.push("pvw.show.item.005");
-      //      filePaths.push("pvw.show.item.006");
-      //      filePaths.push("pvw.show.item.007");
-      //      filePaths.push("pvw.show.item.008");
-      //      filePaths.push("pvw.show.item.009");
-      //      filePaths.push("pvw.show.item.010");
-      //      filePaths.push("pvw.show.item.011");
-      //      filePaths.push("pvw.show.item.012");
-      //      filePaths.push("pvw.show.skeleton.001");
-      //      filePaths.push("pvw.show.skeleton.002");
-      //      filePaths.push("pvw.show.skeleton.003");
-      //      filePaths.push("pvw.show.skeleton.004");
-      //      filePaths.push("pvw.show.skeleton.005");
-      //      filePaths.push("pvw.sc.car.01.001");
-      //      filePaths.push("pvw.sc.car.01.002");
-      //      filePaths.push("pvw.sc.car.01.003");
-      //      filePaths.push("pvw.showcase.001");
-      //      filePaths.push("pvw.showcase.002");
-      //      filePaths.push("pvw.showcase.003");
-      //      filePaths.push("pvw.showcase.004");
-      //      filePaths.push("pvw.showcase.005");
-      //      filePaths.push("pvw.showcase.007");
-      //      filePaths.push("pvw.sc.house.01.001");
-      //      filePaths.push("pvw.sc.science.item.001");
-      //      filePaths.push("pvw.sc.science.item.002");
-      //      filePaths.push("pvw.sc.science.item.003");
+      //filePaths.push("pvw.show.item.001");
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

@@ -115,9 +115,15 @@ public class FRs3ModelConsole
       FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
       FDataResource3dModelUnit modelUnit = modelLogic.doPrepare();
       modelUnit.setCode(model.code());
+      modelUnit.setFullCode(model.fullCode());
+      modelUnit.setLabel(model.label());
+      modelUnit.setKeywords(model.keywords());
       modelLogic.doInsert(modelUnit);
       // 新建网格
-      for(FRs3ModelMesh mesh : model.meshs()){
+      int meshCount = model.meshs().count();
+      for(int n = 0; n < meshCount; n++){
+         FRs3ModelMesh mesh = model.meshs().get(n);
+         String meshCode = mesh.code();
          // 新建模型
          FDataResource3dMeshUnit meshUnit = _meshConsole.insert(logicContext, mesh);
          // 关联网格和模型
@@ -125,6 +131,8 @@ public class FRs3ModelConsole
          FDataResource3dModelMeshUnit modelMeshUnit = modelMeshLogic.doPrepare();
          modelMeshUnit.setModelId(modelUnit.ouid());
          modelMeshUnit.setMeshId(meshUnit.ouid());
+         modelMeshUnit.setIndex(n);
+         modelMeshUnit.setCode(meshCode);
          modelMeshLogic.doInsert(modelMeshUnit);
       }
       return EResult.Success;
