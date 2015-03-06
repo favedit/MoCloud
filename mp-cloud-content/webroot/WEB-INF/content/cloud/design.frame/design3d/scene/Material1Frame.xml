@@ -2,12 +2,11 @@
 <Content name="design3d.scene.Material1Frame" update_date="20141210134046">
    <Frame name="design3d.scene.Material1Frame" type='FDsSceneMaterial1Frame' linker='_frameMaterial1' label="材质属性" is_valid="Y" note="">
       <Panel name='infoPanel' icon='design.panel.icon' label='材质属性'>
-         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="optionDouble" linker='_controlOptionDouble' label="双面效果" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Select name="effectCode" linker='_controlEffectCode' label="效果名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
             <SelectItem name="automatic" label="自动效果器" data_value='automatic'/>
             <SelectItem name="skeleton" label="动画效果器" data_value='skeleton'/>
+            <SelectItem name="water" label="水效果器" data_value='water'/>
          </Select>
       </Panel>
       <Panel name='alphaPanel' icon='design.panel.icon' label='透明参数'>

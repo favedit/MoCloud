@@ -24,12 +24,9 @@ public class RRs3ModelImport
          String name = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
          if(name.endsWith(".msh")){
             name = name.substring(0, name.length() - 4);
-            //if(name.startsWith("lbl.")){
             filePaths.push(name);
-            //}
          }
       }
-      //filePaths.push("pvw.show.item.001");
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

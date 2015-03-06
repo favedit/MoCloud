@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.Material2Frame" update_date="20141210134046">
    <Frame name="design3d.scene.Material2Frame" type='FDsSceneMaterial2Frame' linker='_frameMaterial2' label="材质属性" is_valid="Y" note="">
-      <Panel name='infoPanel' icon='design.panel.icon' label='材质属性'>
-         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
       <Panel name='optionPanel' icon='design.panel.icon' label='特性参数'>
          <Check name="optionDepth" linker='_controlOptionDepth' label="深度" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Check name="optionDouble" linker='_controlOptionDouble' label="双面" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Check name="optionView" linker='_controlOptionView' label="环境" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Check name="optionNormalInvert" linker='_controlOptionNormalInvert' label="法线反向" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Check name="optionShadow" linker='_controlOptionShadow' label="阴影" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />

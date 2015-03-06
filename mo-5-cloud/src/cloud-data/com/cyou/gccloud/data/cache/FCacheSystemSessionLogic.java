@@ -341,6 +341,20 @@ public class FCacheSystemSessionLogic
    // @return 数据单元集合
    //============================================================
    public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence whereSql,
+                                                       CharSequence orderSql){
+      return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param whereSql 条件命令
+   // @param orderSql 排序命令
+   // @param pageSize 分页大小
+   // @param page 分页号码
+   // @return 数据单元集合
+   //============================================================
+   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence whereSql,
                                                        CharSequence orderSql,
                                                        int pageSize,
                                                        int page){

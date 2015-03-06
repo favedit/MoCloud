@@ -10,7 +10,8 @@ public interface IGcStorageConsole
    //============================================================
    // <T>保存一个存储信息。</T>
    //
-   // @param storage 存储信息
+   // @param catalog 集合分类
+   // @param guid 唯一编号
    // @return 处理结果
    //============================================================
    SGcStorage find(String catalog,
@@ -23,6 +24,16 @@ public interface IGcStorageConsole
    // @return 处理结果
    //============================================================
    boolean store(SGcStorage storage);
+
+   //============================================================
+   // <T>删除一个存储信息。</T>
+   //
+   // @param catalog 集合分类
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   boolean delete(String catalog,
+                  String guid);
 
    //============================================================
    // <T>保存一个存储信息。</T>

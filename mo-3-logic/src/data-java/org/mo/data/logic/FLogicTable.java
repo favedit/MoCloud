@@ -603,6 +603,7 @@ public abstract class FLogicTable
       if(unit == null){
          throw new FFatalError("Unit is empty. (unit={1}, class={2})", unit, clazz);
       }
+      unit.linkLogicContext(_logicContext);
       unit.load(row);
       return unit;
    }

@@ -18,4 +18,14 @@ public interface IC3dBitmapConsole
    FDataResourceBitmapImageUnit findBitmapUnit(ILogicContext logicContext,
                                                String code,
                                                String version);
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   //============================================================
+   FDataResourceBitmapImageUnit findBitmapUnit(ILogicContext logicContext,
+                                               long bitmapId);
 }

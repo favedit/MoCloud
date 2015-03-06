@@ -76,6 +76,8 @@ public class FRs3Texture
 
    //============================================================
    // <T>从数据单元中导入配置。</T>
+   // <P>移动平台上透明通道会预乘处理，暂时无法解决，先全部使用JPG的RGB通道。</P>
+   // <P>颜色文理diffuse可以使用透明PNG通道。</P>
    //
    // @param unit 数据单元
    //============================================================
@@ -102,48 +104,76 @@ public class FRs3Texture
       }
       //............................................................
       // 合并法线纹理和高光级别纹理
-      FRs3TextureBitmap normalBitmap = findBitmapByCode("normal");
-      FRs3TextureBitmap specularLevelBitmap = findBitmapByCode("specular.level");
-      if((normalBitmap != null) || (specularLevelBitmap != null)){
-         FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
-         if((normalBitmap != null) && (specularLevelBitmap != null)){
-            bitmapPack.setOptionAlpha(true);
-            bitmapPack.setCode("normal|specular.level");
-            bitmapPack.mergeRgb(normalBitmap);
-            bitmapPack.mergeAlpha(specularLevelBitmap);
-         }else if((normalBitmap != null) && (specularLevelBitmap == null)){
-            bitmapPack.setCode("normal");
-            bitmapPack.mergeRgb(normalBitmap, 0xFF);
-         }else if((normalBitmap == null) && (specularLevelBitmap != null)){
-            bitmapPack.setOptionAlpha(true);
-            bitmapPack.setCode("specular.level");
-            bitmapPack.mergeAlpha(specularLevelBitmap);
-         }
-         _bitmapPacks.push(bitmapPack);
-      }
+      //      FRs3TextureBitmap normalBitmap = findBitmapByCode("normal");
+      //      FRs3TextureBitmap specularLevelBitmap = findBitmapByCode("specular.level");
+      //      if((normalBitmap != null) || (specularLevelBitmap != null)){
+      //         FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
+      //         if((normalBitmap != null) && (specularLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("normal|specular.level");
+      //            bitmapPack.mergeRgb(normalBitmap, 0xFF);
+      //            // bitmapPack.mergeAlpha(specularLevelBitmap);
+      //         }else if((normalBitmap != null) && (specularLevelBitmap == null)){
+      //            bitmapPack.setCode("normal");
+      //            bitmapPack.mergeRgb(normalBitmap, 0xFF);
+      //         }else if((normalBitmap == null) && (specularLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("specular.level");
+      //            bitmapPack.mergeAlpha(specularLevelBitmap, 0xFFFFFF);
+      //         }
+      //         _bitmapPacks.push(bitmapPack);
+      //      }
+      //      //............................................................
+      //      // 合并高光纹理和高度纹理
+      //      FRs3TextureBitmap specularBitmap = findBitmapByCode("specular");
+      //      FRs3TextureBitmap heightBitmap = findBitmapByCode("height");
+      //      if((specularBitmap != null) || (heightBitmap != null)){
+      //         FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
+      //         if((specularBitmap != null) && (heightBitmap != null)){
+      //            bitmapPack.setCode("specular|height");
+      //            bitmapPack.mergeRgb(specularBitmap);
+      //            bitmapPack.mergeAlpha(heightBitmap);
+      //         }else if((specularBitmap != null) && (heightBitmap == null)){
+      //            bitmapPack.setCode("specular");
+      //            bitmapPack.mergeRgb(specularBitmap, 0xFF);
+      //         }else if((specularBitmap == null) && (heightBitmap != null)){
+      //            bitmapPack.setCode("height");
+      //            bitmapPack.mergeAlpha(heightBitmap, 0xFFFFFF);
+      //         }
+      //         _bitmapPacks.push(bitmapPack);
+      //      }
       //............................................................
-      // 合并高光纹理和高度纹理
-      FRs3TextureBitmap specularBitmap = findBitmapByCode("specular");
+      // 合并高光强度，反射强度，高度纹理
+      FRs3TextureBitmap specularLevelBitmap = findBitmapByCode("specular.level");
+      FRs3TextureBitmap reflectBitmap = findBitmapByCode("reflect");
       FRs3TextureBitmap heightBitmap = findBitmapByCode("height");
-      if((specularBitmap != null) || (heightBitmap != null)){
+      if((specularLevelBitmap != null) || (reflectBitmap != null) || (heightBitmap != null)){
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
-         if((specularBitmap != null) && (heightBitmap != null)){
-            bitmapPack.setCode("specular|height");
-            bitmapPack.mergeRgb(specularBitmap);
-            bitmapPack.mergeAlpha(heightBitmap);
-         }else if((specularBitmap != null) && (heightBitmap == null)){
-            bitmapPack.setCode("specular");
-            bitmapPack.mergeRgb(specularBitmap, 0xFF);
-         }else if((specularBitmap == null) && (heightBitmap != null)){
-            bitmapPack.setCode("height");
-            bitmapPack.mergeAlpha(heightBitmap);
+         String code = "";
+         if(specularLevelBitmap != null){
+            code += "|specular.level";
+            bitmapPack.mergeR(specularLevelBitmap);
+         }else{
+            code += "|";
          }
+         if(reflectBitmap != null){
+            code += "|reflect";
+            bitmapPack.mergeG(reflectBitmap);
+         }else{
+            code += "|";
+         }
+         if(heightBitmap != null){
+            code += "|height";
+            bitmapPack.mergeB(heightBitmap);
+         }else{
+            code += "|";
+         }
+         bitmapPack.setCode(code.substring(1));
          _bitmapPacks.push(bitmapPack);
       }
       //............................................................
       // 合并光照纹理
       FRs3TextureBitmap lightBitmap = findBitmapByCode("light");
-      FRs3TextureBitmap reflectBitmap = findBitmapByCode("reflect");
       FRs3TextureBitmap refractBitmap = findBitmapByCode("refract");
       FRs3TextureBitmap emissiveBitmap = findBitmapByCode("emissive");
       if((lightBitmap != null) || (reflectBitmap != null) || (refractBitmap != null) || (emissiveBitmap != null)){
@@ -152,44 +182,46 @@ public class FRs3Texture
          if(lightBitmap != null){
             code += "|light";
             bitmapPack.mergeR(lightBitmap);
-         }
-         if(reflectBitmap != null){
-            code += "|reflect";
-            bitmapPack.mergeG(reflectBitmap);
+         }else{
+            code += "|";
          }
          if(refractBitmap != null){
             code += "|refract";
-            bitmapPack.mergeB(refractBitmap);
+            bitmapPack.mergeG(refractBitmap);
+         }else{
+            code += "|";
          }
          if(emissiveBitmap != null){
             bitmapPack.setOptionAlpha(true);
             code += "|emissive";
-            bitmapPack.mergeG(emissiveBitmap);
+            bitmapPack.mergeB(emissiveBitmap);
+         }else{
+            code += "|";
          }
          bitmapPack.setCode(code.substring(1));
          _bitmapPacks.push(bitmapPack);
       }
       //............................................................
       // 合并透明纹理和透明级别纹理
-      FRs3TextureBitmap transmittanceColorBitmap = findBitmapByCode("transmittance.color");
-      FRs3TextureBitmap transmittanceLevelBitmap = findBitmapByCode("transmittance.level");
-      if((transmittanceColorBitmap != null) || (transmittanceLevelBitmap != null)){
-         FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
-         if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
-            bitmapPack.setOptionAlpha(true);
-            bitmapPack.setCode("transmittance.color|transmittance.level");
-            bitmapPack.mergeRgb(transmittanceColorBitmap);
-            bitmapPack.mergeAlpha(transmittanceLevelBitmap);
-         }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
-            bitmapPack.setCode("transmittance.color");
-            bitmapPack.mergeRgb(transmittanceColorBitmap, 0xFF);
-         }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
-            bitmapPack.setOptionAlpha(true);
-            bitmapPack.setCode("transmittance.level");
-            bitmapPack.mergeAlpha(transmittanceLevelBitmap);
-         }
-         _bitmapPacks.push(bitmapPack);
-      }
+      //      FRs3TextureBitmap transmittanceColorBitmap = findBitmapByCode("transmittance.color");
+      //      FRs3TextureBitmap transmittanceLevelBitmap = findBitmapByCode("transmittance.level");
+      //      if((transmittanceColorBitmap != null) || (transmittanceLevelBitmap != null)){
+      //         FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
+      //         if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("transmittance.color|transmittance.level");
+      //            bitmapPack.mergeRgb(transmittanceColorBitmap);
+      //            bitmapPack.mergeAlpha(transmittanceLevelBitmap);
+      //         }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+      //            bitmapPack.setCode("transmittance.color");
+      //            bitmapPack.mergeRgb(transmittanceColorBitmap, 0xFF);
+      //         }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("transmittance.level");
+      //            bitmapPack.mergeAlpha(transmittanceLevelBitmap, 0xFFFFFF);
+      //         }
+      //         _bitmapPacks.push(bitmapPack);
+      //      }
       //............................................................
       // 输出其余纹理集合
       int bitmapCount = _bitmaps.count();

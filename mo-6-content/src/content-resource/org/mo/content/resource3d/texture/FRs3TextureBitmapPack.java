@@ -108,8 +108,36 @@ public class FRs3TextureBitmapPack
    public void mergeRgb(FRs3TextureBitmap bitmap,
                         int alpha){
       bitmap.setBitmapPack(this);
+      //      // 加载图片
+      //      try(FImage image = new FImage(bitmap.data())){
+      //         int width = image.width();
+      //         int height = image.height();
+      //         // 初始化位图
+      //         initializeImage(width, height);
+      //         // 合并数据
+      //         int colorAlpha = (alpha & 0xFF) << 24;
+      //         int size = width * height;
+      //         int[] data = image.getData();
+      //         for(int i = 0; i < size; i++){
+      //            int source = data[i];
+      //            _data[i] = colorAlpha | (source & 0xFFFFFF);
+      //         }
+      //      }catch(Exception e){
+      //         throw new FFatalError("Merge alpha failure.");
+      //      }
+      //      // 设置数据
+      //      _image.setData(_data);
+   }
+
+   //============================================================
+   // <T>合并RGB位图。</T>
+   //
+   // @param bitmap 位图
+   //============================================================
+   public void mergeRgb(byte[] data,
+                        int alpha){
       // 加载图片
-      try(FImage image = new FImage(bitmap.data())){
+      try(FImage image = new FImage(data)){
          int width = image.width();
          int height = image.height();
          // 初始化位图
@@ -117,9 +145,9 @@ public class FRs3TextureBitmapPack
          // 合并数据
          int colorAlpha = (alpha & 0xFF) << 24;
          int size = width * height;
-         int[] data = image.getData();
+         int[] imageData = image.getData();
          for(int i = 0; i < size; i++){
-            int source = data[i];
+            int source = imageData[i];
             _data[i] = colorAlpha | (source & 0xFFFFFF);
          }
       }catch(Exception e){
@@ -146,21 +174,122 @@ public class FRs3TextureBitmapPack
    public void mergeAlpha(FRs3TextureBitmap bitmap,
                           int rgb){
       bitmap.setBitmapPack(this);
+      //      // 加载图片
+      //      try(FImage image = new FImage(bitmap.data())){
+      //         int width = image.width();
+      //         int height = image.height();
+      //         // 初始化位图
+      //         initializeImage(width, height);
+      //         // 合并数据
+      //         int size = width * height;
+      //         int[] data = image.getData();
+      //         for(int i = 0; i < size; i++){
+      //            int source = data[i];
+      //            _data[i] |= (source & 0xFF) << 24 | rgb;
+      //         }
+      //      }catch(Exception e){
+      //         throw new FFatalError("Merge alpha failure.");
+      //      }
+      //      // 设置数据
+      //      _image.setData(_data);
+   }
+
+   //============================================================
+   // <T>合并Alpha位图。</T>
+   //
+   // @param bitmap 位图
+   //============================================================
+   public void mergeAlpha(byte[] data,
+                          int rgb){
       // 加载图片
-      try(FImage image = new FImage(bitmap.data())){
+      try(FImage image = new FImage(data)){
          int width = image.width();
          int height = image.height();
          // 初始化位图
          initializeImage(width, height);
          // 合并数据
          int size = width * height;
-         int[] data = image.getData();
+         int[] imageData = image.getData();
          for(int i = 0; i < size; i++){
-            int source = data[i];
+            int source = imageData[i];
             _data[i] |= (source & 0xFF) << 24 | rgb;
          }
       }catch(Exception e){
          throw new FFatalError("Merge alpha failure.");
+      }
+      // 设置数据
+      _image.setData(_data);
+   }
+
+   //============================================================
+   // <T>合并RGB位图。</T>
+   //
+   // @param bitmap 位图
+   //============================================================
+   public void mergeRgba(byte[] rgbData,
+                         byte[] alphaData){
+      // 加载图片
+      try(FImage imageRgb = new FImage(rgbData); FImage imageAlpha = new FImage(alphaData)){
+         int width = imageRgb.width();
+         int height = imageRgb.height();
+         // 初始化位图
+         initializeImage(width, height);
+         // 合并数据
+         int size = width * height;
+         int[] imageRgbData = imageRgb.getData();
+         int[] imageAlphaData = imageAlpha.getData();
+         for(int i = 0; i < size; i++){
+            _data[i] = ((imageAlphaData[i] & 0xFF) << 24) | (imageRgbData[i] & 0xFFFFFF);
+         }
+      }catch(Exception e){
+         throw new FFatalError("Merge alpha failure.");
+      }
+      // 设置数据
+      _image.setData(_data);
+   }
+
+   //============================================================
+   // <T>合并RGB位图。</T>
+   //
+   // @param bitmap 位图
+   //============================================================
+   public void mergeRgba3(byte[] rData,
+                          byte[] gData,
+                          byte[] bData){
+      FImage image = null;
+      FImage imageR = null;
+      int[] imageRData = null;
+      if(rData != null){
+         imageR = new FImage(rData);
+         imageRData = imageR.getData();
+         image = imageR;
+      }
+      FImage imageG = null;
+      int[] imageGData = null;
+      if(gData != null){
+         imageG = new FImage(gData);
+         imageGData = imageG.getData();
+         image = imageG;
+      }
+      FImage imageB = null;
+      int[] imageBData = null;
+      if(bData != null){
+         imageB = new FImage(bData);
+         imageBData = imageB.getData();
+         image = imageB;
+      }
+      // 加载图片
+      int width = image.width();
+      int height = image.height();
+      // 初始化位图
+      initializeImage(width, height);
+      // 合并数据
+      int size = width * height;
+      for(int i = 0; i < size; i++){
+         int r = (imageRData != null) ? imageRData[i] : 0;
+         int g = (imageGData != null) ? imageGData[i] : 0;
+         int b = (imageBData != null) ? imageBData[i] : 0;
+         _data[i] = (0xFF << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
       }
       // 设置数据
       _image.setData(_data);
@@ -173,24 +302,24 @@ public class FRs3TextureBitmapPack
    //============================================================
    public void mergeR(FRs3TextureBitmap bitmap){
       bitmap.setBitmapPack(this);
-      // 加载图片
-      try(FImage image = new FImage(bitmap.data())){
-         int width = image.width();
-         int height = image.height();
-         // 初始化位图
-         initializeImage(width, height);
-         // 合并数据
-         int size = width * height;
-         int[] data = image.getData();
-         for(int i = 0; i < size; i++){
-            int source = data[i];
-            _data[i] |= (source & 0xFF) << 16;
-         }
-      }catch(Exception e){
-         throw new FFatalError("Merge red failure.");
-      }
-      // 设置数据
-      _image.setData(_data);
+      //      // 加载图片
+      //      try(FImage image = new FImage(bitmap.data())){
+      //         int width = image.width();
+      //         int height = image.height();
+      //         // 初始化位图
+      //         initializeImage(width, height);
+      //         // 合并数据
+      //         int size = width * height;
+      //         int[] data = image.getData();
+      //         for(int i = 0; i < size; i++){
+      //            int source = data[i];
+      //            _data[i] |= (source & 0xFF) << 16;
+      //         }
+      //      }catch(Exception e){
+      //         throw new FFatalError("Merge red failure.");
+      //      }
+      //      // 设置数据
+      //      _image.setData(_data);
    }
 
    //============================================================
@@ -200,24 +329,24 @@ public class FRs3TextureBitmapPack
    //============================================================
    public void mergeG(FRs3TextureBitmap bitmap){
       bitmap.setBitmapPack(this);
-      // 加载图片
-      try(FImage image = new FImage(bitmap.data())){
-         int width = image.width();
-         int height = image.height();
-         // 初始化位图
-         initializeImage(width, height);
-         // 合并数据
-         int size = width * height;
-         int[] data = image.getData();
-         for(int i = 0; i < size; i++){
-            int source = data[i];
-            _data[i] |= (source & 0xFF) << 8;
-         }
-      }catch(Exception e){
-         throw new FFatalError("Merge red failure.");
-      }
-      // 设置数据
-      _image.setData(_data);
+      //      // 加载图片
+      //      try(FImage image = new FImage(bitmap.data())){
+      //         int width = image.width();
+      //         int height = image.height();
+      //         // 初始化位图
+      //         initializeImage(width, height);
+      //         // 合并数据
+      //         int size = width * height;
+      //         int[] data = image.getData();
+      //         for(int i = 0; i < size; i++){
+      //            int source = data[i];
+      //            _data[i] |= (source & 0xFF) << 8;
+      //         }
+      //      }catch(Exception e){
+      //         throw new FFatalError("Merge red failure.");
+      //      }
+      //      // 设置数据
+      //      _image.setData(_data);
    }
 
    //============================================================
@@ -227,24 +356,24 @@ public class FRs3TextureBitmapPack
    //============================================================
    public void mergeB(FRs3TextureBitmap bitmap){
       bitmap.setBitmapPack(this);
-      // 加载图片
-      try(FImage image = new FImage(bitmap.data())){
-         int width = image.width();
-         int height = image.height();
-         // 初始化位图
-         initializeImage(width, height);
-         // 合并数据
-         int size = width * height;
-         int[] data = image.getData();
-         for(int i = 0; i < size; i++){
-            int source = data[i];
-            _data[i] |= (source & 0xFF);
-         }
-      }catch(Exception e){
-         throw new FFatalError("Merge red failure.");
-      }
-      // 设置数据
-      _image.setData(_data);
+      //      // 加载图片
+      //      try(FImage image = new FImage(bitmap.data())){
+      //         int width = image.width();
+      //         int height = image.height();
+      //         // 初始化位图
+      //         initializeImage(width, height);
+      //         // 合并数据
+      //         int size = width * height;
+      //         int[] data = image.getData();
+      //         for(int i = 0; i < size; i++){
+      //            int source = data[i];
+      //            _data[i] |= (source & 0xFF);
+      //         }
+      //      }catch(Exception e){
+      //         throw new FFatalError("Merge red failure.");
+      //      }
+      //      // 设置数据
+      //      _image.setData(_data);
    }
 
    //============================================================
@@ -287,25 +416,13 @@ public class FRs3TextureBitmapPack
       }
       // 转换数据
       if(_textureBitmap == null){
-         //byte[] data = _image.toBytes("png");
-         //int length = data.length;
          // 写入数据
-         output.writeBoolean(false);
          output.writeString("flat");
          output.writeString(format);
          output.writeUint16(_size.width);
          output.writeUint16(_size.height);
-         output.writeInt32(4 * _data.length);
-         for(int value : _data){
-            output.writeUint8((short)((value >> 16) & 0xFF));
-            output.writeUint8((short)((value >> 8) & 0xFF));
-            output.writeUint8((short)(value & 0xFF));
-            output.writeUint8((short)((value >> 24) & 0xFF));
-         }
-         //output.writeInt32(length);
-         //output.write(data, 0, length);
+         output.writeInt32(0);
       }else{
-         output.writeBoolean(true);
          String code = _textureBitmap.code();
          if(code.equals("environment")){
             // 分拆为6个面
@@ -315,17 +432,67 @@ public class FRs3TextureBitmapPack
             output.writeUint16(_size.height);
             serializeEnvironment(output);
          }else{
-            byte[] data = _textureBitmap.data();
-            int length = data.length;
             // 写入数据
             output.writeString("flat");
             output.writeString(format);
             output.writeUint16(_size.width);
             output.writeUint16(_size.height);
-            output.writeInt32(length);
-            output.write(data, 0, length);
+            output.writeInt32(0);
          }
       }
+      //      // 非压缩模式
+      //      String format = "jpg";
+      //      if(_optionAlpha){
+      //         format = "png";
+      //      }
+      //      // 转换数据
+      //      if(_textureBitmap == null){
+      //         //byte[] data = _image.toBytes("png");
+      //         //int length = data.length;
+      //         // 写入数据
+      //         output.writeBoolean(false);
+      //         output.writeString("flat");
+      //         output.writeString(format);
+      //         output.writeUint16(_size.width);
+      //         output.writeUint16(_size.height);
+      //         output.writeInt32(4 * _data.length);
+      //         for(int value : _data){
+      //            output.writeUint8((short)((value >> 16) & 0xFF));
+      //            output.writeUint8((short)((value >> 8) & 0xFF));
+      //            output.writeUint8((short)(value & 0xFF));
+      //            output.writeUint8((short)((value >> 24) & 0xFF));
+      //         }
+      //         //output.writeInt32(length);
+      //         //output.write(data, 0, length);
+      //      }else{
+      //         output.writeBoolean(true);
+      //         String code = _textureBitmap.code();
+      //         if(code.equals("environment")){
+      //            // 分拆为6个面
+      //            output.writeString("cube");
+      //            output.writeString(format);
+      //            output.writeUint16(_size.width);
+      //            output.writeUint16(_size.height);
+      //            serializeEnvironment(output);
+      //         }else{
+      //            byte[] data = _textureBitmap.data();
+      //            int length = data.length;
+      //            // 写入数据
+      //            output.writeString("flat");
+      //            output.writeString(format);
+      //            output.writeUint16(_size.width);
+      //            output.writeUint16(_size.height);
+      //            output.writeInt32(length);
+      //            output.write(data, 0, length);
+      //         }
+      //      }
+   }
+
+   //============================================================
+   // <T>释放处理。</T>
+   //============================================================
+   public byte[] toArray(){
+      return _image.toBytes("png");
    }
 
    //============================================================

@@ -6,6 +6,8 @@ import com.cyou.gccloud.data.data.FDataResource3dAnimationTrackUnit;
 import com.cyou.gccloud.data.data.FDataResource3dAnimationUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshSkinLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshSkinUnit;
+import com.cyou.gccloud.data.data.FDataResource3dMeshTrackLogic;
+import com.cyou.gccloud.data.data.FDataResource3dMeshTrackUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelAnimationUnit;
@@ -24,6 +26,7 @@ import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.console.FConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
 import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
 import org.mo.content.engine3d.core.skeleton.IRs3SkeletonConsole;
@@ -34,7 +37,6 @@ import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.core.aop.face.ALink;
-import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -84,17 +86,10 @@ public class FRs3ModelConsole
    public FDataResource3dMeshUnit findMeshByCode(ILogicContext logicContext,
                                                  long modelId,
                                                  String code){
-      String whereSql = FDataResource3dModelMeshLogic.MODEL_ID + "=" + modelId;
-      FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
-      FLogicDataset<FDataResource3dModelMeshUnit> dataset = meshLogic.fetch(whereSql);
-      for(FDataResource3dModelMeshUnit modelMeshUnit : dataset){
-         FDataResource3dMeshUnit meshUnit = modelMeshUnit.mesh();
-         String meshCode = meshUnit.code();
-         if(meshCode.equals(code)){
-            return meshUnit;
-         }
-      }
-      return null;
+      String whereSql = "(" + FDataResource3dModelMeshLogic.MODEL_ID + "=" + modelId + ") AND (" + FDataResource3dModelMeshLogic.CODE + "='" + code + "')";
+      FDataResource3dModelMeshLogic modelMeshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
+      FDataResource3dModelMeshUnit modelMeshUnit = modelMeshLogic.search(whereSql);
+      return modelMeshUnit.mesh();
    }
 
    //============================================================
@@ -197,12 +192,14 @@ public class FRs3ModelConsole
       // 加载骨骼资源
       FRs3Animation animation = new FRs3Animation();
       animation.importFile(fileName);
+      String modelCode = animation.code();
       //............................................................
       // 查找模型
-      FDataResource3dModelUnit modelUnit = findByCode(logicContext, animation.code());
+      FDataResource3dModelUnit modelUnit = findByCode(logicContext, modelCode);
       if(modelUnit == null){
-         throw new FFatalError("Model is not exists. (code={1})", animation.code());
+         throw new FFatalError("Model is not exists. (code={1})", modelCode);
       }
+      long modelId = modelUnit.ouid();
       //............................................................
       // 新建动画
       FDataResource3dAnimationLogic animationLogic = logicContext.findLogic(FDataResource3dAnimationLogic.class);
@@ -212,12 +209,12 @@ public class FRs3ModelConsole
       // 关联模型和动画
       FDataResource3dModelAnimationLogic modelAnimationLogic = logicContext.findLogic(FDataResource3dModelAnimationLogic.class);
       FDataResource3dModelAnimationUnit modelAnimationUnit = modelAnimationLogic.doPrepare();
-      modelAnimationUnit.setModelId(modelUnit.ouid());
+      modelAnimationUnit.setModelId(modelId);
       modelAnimationUnit.setAnimationId(animationUnit.ouid());
       modelAnimationLogic.doInsert(modelAnimationUnit);
       //............................................................
       // 关联骨骼和动画
-      FDataResource3dSkeletonUnit skeletonUnit = _skeletonConsole.findByCode(logicContext, animation.code());
+      FDataResource3dSkeletonUnit skeletonUnit = _skeletonConsole.findByCode(logicContext, modelCode);
       if(skeletonUnit != null){
          FDataResource3dSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResource3dSkeletonAnimationLogic.class);
          FDataResource3dSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationLogic.doPrepare();
@@ -236,6 +233,19 @@ public class FRs3ModelConsole
          animationTrackUnit.setAnimationId(animationUnit.ouid());
          animationTrackUnit.setTrackId(trackUnit.ouid());
          animationTrackLogic.doInsert(animationTrackUnit);
+         // 关联网格和跟踪
+         String meshCode = track.meshCode();
+         if(!RString.isEmpty(meshCode)){
+            FDataResource3dMeshUnit meshUnit = findMeshByCode(logicContext, modelId, meshCode);
+            if(meshUnit == null){
+               throw new FFatalError("Model mesh is not found. (model={1}, mesh={2})", modelCode, meshCode);
+            }
+            FDataResource3dMeshTrackLogic meshTrackLogic = logicContext.findLogic(FDataResource3dMeshTrackLogic.class);
+            FDataResource3dMeshTrackUnit meshTrackUnit = meshTrackLogic.doPrepare();
+            meshTrackUnit.setMeshId(meshUnit.ouid());
+            meshTrackUnit.setTrackId(trackUnit.ouid());
+            meshTrackLogic.doInsert(meshTrackUnit);
+         }
       }
       return EResult.Success;
    }

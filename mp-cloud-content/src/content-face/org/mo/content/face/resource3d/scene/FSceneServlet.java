@@ -1,5 +1,7 @@
 package org.mo.content.face.resource3d.scene;
 
+import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
@@ -59,15 +61,27 @@ public class FSceneServlet
       // 检查参数
       String guid = context.parameter("guid");
       String code = context.parameter("code");
-      String theme = RString.nvl(context.parameter("theme"), "general");
+      String themeCode = RString.nvl(context.parameter("theme"), "general");
       if(RString.isEmpty(guid) && RString.isEmpty(code)){
          throw new FFatalError("Scene is empty.");
       }
+      //............................................................
+      // 查找场景
+      byte[] sceneData = null;
+      FDataResource3dSceneUnit sceneUnit = _sceneConsole.findSceneUnit(logicContext, guid, code);
+      if(sceneUnit != null){
+         // 查找主题
+         FDataResource3dSceneThemeUnit themeUnit = _sceneConsole.findThemeUnit(logicContext, sceneUnit.ouid(), themeCode);
+         if(themeUnit != null){
+            // 生成数据
+            sceneData = _sceneConsole.makeThemeData(logicContext, themeUnit.guid());
+         }
+      }
+      //............................................................
       // 生成数据
-      byte[] sceneData = _sceneConsole.makeSceneData(logicContext, guid, code, theme);
       FByteStream stream = new FByteStream();
       if(sceneData == null){
-         String info = RString.format("Scene is not exists. (guid={1}, code={2}, theme={3})", guid, code, theme);
+         String info = RString.format("Scene is not exists. (guid={1}, code={2}, theme={3})", guid, code, themeCode);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
@@ -76,8 +90,9 @@ public class FSceneServlet
       }
       int dataLength = stream.length();
       byte[] data = stream.memory();
+      //............................................................
       // 发送数据
-      _logger.debug(this, "process", "Send scene theme data. (guid={1}, code={2}, theme={3}, length={4})", guid, code, theme, dataLength);
+      _logger.debug(this, "process", "Send scene theme data. (guid={1}, code={2}, theme={3}, length={4})", guid, code, themeCode, dataLength);
       response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=" + CacheTimeout);

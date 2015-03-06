@@ -24,12 +24,11 @@ public class RRs3TemplateImport
          String name = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
          if(name.endsWith(".xml")){
             name = name.substring(0, name.length() - 4);
-            //if(name.startsWith("pvw.sc.courtyard")){
             filePaths.push(name);
-            //}
          }
       }
       //filePaths.push("pvw.show.item.001");
+      //      filePaths.push("pvw.show.item.001");
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

@@ -20,12 +20,9 @@ public class RRs3TextureImport
       String path = RRs3Configuration.RootPath + "/MoScript/source/assets/texture/";
       // 设置数据
       FStrings filePaths = new FStrings();
-      // filePaths.push("pvw.show.001.01");
       for(String fileName : RFile.listFiles(path)){
          String name = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
-         //if(name.startsWith("lbl.")){
          filePaths.push(name);
-         //}
       }
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);

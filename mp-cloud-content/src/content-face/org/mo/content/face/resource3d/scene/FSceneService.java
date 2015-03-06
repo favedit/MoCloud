@@ -1,5 +1,7 @@
 package org.mo.content.face.resource3d.scene;
 
+import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -44,10 +46,22 @@ public class FSceneService
                         IWebOutput output){
       String guid = context.parameter("guid");
       String code = context.parameter("code");
-      String theme = context.parameter("theme");
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, guid, code, theme);
-      FXmlNode xconfig = output.config().createNode("Scene");
-      scene.saveConfig(xconfig);
+      String themeCode = context.parameter("theme");
+      //............................................................
+      // 查找场景
+      FDataResource3dSceneUnit sceneUnit = _sceneConsole.findSceneUnit(logicContext, guid, code);
+      if(sceneUnit != null){
+         // 查找主题
+         FDataResource3dSceneThemeUnit themeUnit = _sceneConsole.findThemeUnit(logicContext, sceneUnit.ouid(), themeCode);
+         if(themeUnit != null){
+            // 生成数据
+            FRs3Scene scene = _sceneConsole.makeTheme(logicContext, themeUnit.guid());
+            if(scene != null){
+               FXmlNode xconfig = output.config().createNode("Scene");
+               scene.saveConfig(xconfig);
+            }
+         }
+      }
       return EResult.Success;
    }
 
@@ -100,8 +114,8 @@ public class FSceneService
          throw new FFatalError("Invalid config code.");
       }
       // 获得场景
-      String themeGuid = xscene.get("guid");
-      FRs3Scene scene = _sceneConsole.makeSceneTheme(logicContext, themeGuid);
+      String themeGuid = xscene.get("theme_guid");
+      FRs3Scene scene = _sceneConsole.makeTheme(logicContext, themeGuid);
       // 合并场景
       scene.mergeConfig(xscene);
       // 更新场景

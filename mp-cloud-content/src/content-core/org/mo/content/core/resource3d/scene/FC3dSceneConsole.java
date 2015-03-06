@@ -59,16 +59,42 @@ public class FC3dSceneConsole
    }
 
    //============================================================
-   // <T>根据代码查找模板单元。</T>
+   // <T>查找场景单元。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @return 模板单元
+   // @param guid 场景唯一编码
+   // @param code 场景代码
+   // @return 场景单元
    //============================================================
-   public FDataResource3dSceneThemeUnit findThemeByCode(ILogicContext logicContext,
-                                                        long sceneId,
-                                                        String code){
-      String sql = "(" + FDataResource3dSceneThemeLogic.SCENE_ID + "=" + sceneId + ") AND (" + FDataResource3dSceneThemeLogic.CODE + "='" + code + "')";
+   @Override
+   public FDataResource3dSceneUnit findSceneUnit(ILogicContext logicContext,
+                                                 String guid,
+                                                 String code){
+      FDataResource3dSceneUnit unit = null;
+      // 根据唯一编号查找
+      if(!RString.isEmpty(guid)){
+         unit = findByGuid(logicContext, guid);
+      }
+      // 根据唯一编号查找
+      else if(!RString.isEmpty(code)){
+         unit = findByCode(logicContext, code);
+      }
+      return unit;
+   }
+
+   //============================================================
+   // <T>查找场景主题单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param sceneId 场景编码
+   // @param themeCode 主题代码
+   // @return 场景主题单元
+   //============================================================
+   @Override
+   public FDataResource3dSceneThemeUnit findThemeUnit(ILogicContext logicContext,
+                                                      long sceneId,
+                                                      String themeCode){
+      String sql = "(" + FDataResource3dSceneThemeLogic.SCENE_ID + "=" + sceneId + ") AND (" + FDataResource3dSceneThemeLogic.CODE + "='" + themeCode + "')";
       FDataResource3dSceneThemeLogic logic = logicContext.findLogic(FDataResource3dSceneThemeLogic.class);
       FDataResource3dSceneThemeUnit unit = logic.search(sql);
       return unit;
@@ -83,8 +109,8 @@ public class FC3dSceneConsole
    // @return 场景
    //============================================================
    @Override
-   public FRs3Scene makeSceneTheme(ILogicContext logicContext,
-                                   String guid){
+   public FRs3Scene makeTheme(ILogicContext logicContext,
+                              String guid){
       // 检查参数
       if(RString.isEmpty(guid)){
          throw new FFatalError("Scene theme guid is null.");
@@ -107,66 +133,15 @@ public class FC3dSceneConsole
    }
 
    //============================================================
-   // <T>生成场景。</T>
+   // <T>生成场景主题。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @param version 版本
-   // @return 场景
+   // @param guid 唯一编码
+   // @return 场景主题
    //============================================================
    @Override
-   public FRs3Scene makeScene(ILogicContext logicContext,
-                              String guid,
-                              String code,
-                              String themeCode){
-      // 设置变量
-      themeCode = RString.nvl(themeCode, "general");
-      // 查找场景单元
-      FDataResource3dSceneUnit sceneUnit = null;
-      if(!RString.isEmpty(guid)){
-         sceneUnit = findByGuid(logicContext, guid);
-      }else if(!RString.isEmpty(code)){
-         sceneUnit = findByCode(logicContext, code);
-      }else{
-         throw new FFatalError("Find scene failure. (guid={1}, code={2})", guid, code);
-      }
-      if(sceneUnit == null){
-         throw new FFatalError("Scene is not exists. (guid={1}, code={2})", guid, code);
-      }
-      // 查找主题单元
-      FDataResource3dSceneThemeUnit themeUnit = findThemeByCode(logicContext, sceneUnit.ouid(), themeCode);
-      if(themeUnit == null){
-         throw new FFatalError("Scene theme is not exists. (guid={1}, code={2}, theme={3})", guid, code, themeCode);
-      }
-      // 创建场景
-      FRs3Scene scene = new FRs3Scene();
-      scene.loadSceneUnit(sceneUnit);
-      scene.loadThemeUnit(themeUnit);
-      return scene;
-   }
-
-   //============================================================
-   // <T>生成场景。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param code 代码
-   // @param version 版本
-   // @return 场景
-   //============================================================
-   @Override
-   public byte[] makeSceneData(ILogicContext logicContext,
-                               String guid,
-                               String code,
-                               String themeCode){
-      // 查找唯一编号
-      if(RString.isEmpty(guid)){
-         FDataResource3dSceneUnit sceneUnit = findByCode(logicContext, code);
-         if(sceneUnit == null){
-            return null;
-         }
-         guid = sceneUnit.guid();
-      }
-      //............................................................
+   public byte[] makeThemeData(ILogicContext logicContext,
+                               String guid){
       // 查找数据
       SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dSceneTheme, guid);
       if(findStorage != null){
@@ -174,11 +149,12 @@ public class FC3dSceneConsole
       }
       //............................................................
       // 生成模型
-      FRs3Scene scene = makeScene(logicContext, guid, code, themeCode);
+      FRs3Scene scene = makeTheme(logicContext, guid);
       // 获得数据
       FByteStream stream = new FByteStream();
       scene.serialize(stream);
       byte[] data = stream.toArray();
+      //............................................................
       // 存储数据
       SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dSceneTheme, guid, "bin");
       storage.setCode(scene.code());
@@ -260,6 +236,9 @@ public class FC3dSceneConsole
       }
       // 更新数据
       themeLogic.doUpdate(themeUnit);
+      //............................................................
+      // 废弃临时数据
+      _storageConsole.delete(EGcStorageCatalog.Resource3dSceneTheme, themeGuid);
       // 返回结果
       return EResult.Success;
    }

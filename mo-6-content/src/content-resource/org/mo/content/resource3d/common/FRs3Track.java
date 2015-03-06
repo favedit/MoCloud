@@ -12,10 +12,16 @@ import org.mo.com.lang.FObjects;
 public class FRs3Track
       extends FRs3Object
 {
+   // 网格代码
+   protected String _meshCode;
+
+   // 骨头索引
    protected int _boneIndex;
 
+   // 帧间隔
    protected int _frameTick;
 
+   // 矩阵
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
 
    // 数据长度
@@ -27,6 +33,15 @@ public class FRs3Track
    // <T>构造资源精灵。</T>
    //============================================================
    public FRs3Track(){
+   }
+
+   //============================================================
+   // <T>获得网格代码。</T>
+   //
+   // @return 网格代码
+   //============================================================
+   public String meshCode(){
+      return _meshCode;
    }
 
    //============================================================
@@ -82,6 +97,7 @@ public class FRs3Track
    @Override
    public void serialize(IDataOutput output){
       // 读取属性
+      output.writeString(_meshCode);
       output.writeUint8((short)_boneIndex);
       output.writeUint16(_frameTick);
       _matrix.serialize(output);
@@ -101,6 +117,7 @@ public class FRs3Track
    //============================================================
    public void unserialize(IDataInput input){
       // 读取属性
+      _meshCode = input.readString();
       _boneIndex = input.readInt32();
       _frameTick = input.readInt32();
       _matrix.unserialize(input);
@@ -120,6 +137,7 @@ public class FRs3Track
    //============================================================
    public void importData(IDataInput input){
       // 读取属性
+      _meshCode = input.readString();
       _boneIndex = input.readInt32();
       _frameTick = input.readInt32();
       _matrix.unserialize(input);

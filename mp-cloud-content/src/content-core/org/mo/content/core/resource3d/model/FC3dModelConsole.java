@@ -77,7 +77,7 @@ public class FC3dModelConsole
       model.setCode(modelUnit.code());
       // 获得网格信息
       FDataResource3dModelMeshLogic meshLogic = logicContext.findLogic(FDataResource3dModelMeshLogic.class);
-      FLogicDataset<FDataResource3dModelMeshUnit> modelMeshUnits = meshLogic.fetch(FDataResource3dModelMeshLogic.MODEL_ID + "=" + modelId);
+      FLogicDataset<FDataResource3dModelMeshUnit> modelMeshUnits = meshLogic.fetch(FDataResource3dModelMeshLogic.MODEL_ID + "=" + modelId, "`" + FDataResource3dModelMeshLogic.INDEX + "` ASC");
       for(FDataResource3dModelMeshUnit modelMeshUnit : modelMeshUnits){
          // 查找网格
          FDataResource3dMeshUnit meshUnit = modelMeshUnit.mesh();

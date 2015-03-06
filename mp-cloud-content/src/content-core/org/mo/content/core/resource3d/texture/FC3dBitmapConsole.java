@@ -48,4 +48,24 @@ public class FC3dBitmapConsole
       FDataResourceBitmapImageUnit bitmapImageUnit = bitmapImageLogic.search(bitmapSql);
       return bitmapImageUnit;
    }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   //============================================================
+   @Override
+   public FDataResourceBitmapImageUnit findBitmapUnit(ILogicContext logicContext,
+                                                      long bitmapId){
+      // 查找位图
+      FDataResourceBitmapLogic bitmapLogic = logicContext.findLogic(FDataResourceBitmapLogic.class);
+      FDataResourceBitmapUnit bitmapUnit = bitmapLogic.find(bitmapId);
+      // 查找图片
+      String bitmapSql = FDataResourceBitmapImageLogic.BITMAP_ID + "=" + bitmapUnit.ouid();
+      FDataResourceBitmapImageLogic bitmapImageLogic = logicContext.findLogic(FDataResourceBitmapImageLogic.class);
+      FDataResourceBitmapImageUnit bitmapImageUnit = bitmapImageLogic.search(bitmapSql);
+      return bitmapImageUnit;
+   }
 }

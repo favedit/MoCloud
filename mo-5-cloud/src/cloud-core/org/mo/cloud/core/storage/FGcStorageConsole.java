@@ -5,6 +5,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
+import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -18,6 +19,7 @@ import org.mo.core.aop.face.AProperty;
 // <T>存储控制台。</T>
 //============================================================
 public class FGcStorageConsole
+      extends FConsole
       implements
          IGcStorageConsole
 {
@@ -49,8 +51,9 @@ public class FGcStorageConsole
    //============================================================
    // <T>保存一个存储信息。</T>
    //
-   // @param storage 存储信息
-   // @return 处理结果
+   // @param catalog 集合分类
+   // @param guid 唯一编号
+   // @return 查找结果
    //============================================================
    @Override
    public SGcStorage find(String catalog,
@@ -135,6 +138,37 @@ public class FGcStorageConsole
       // 更新处理
       collection.update(search, item, true, false);
       return true;
+   }
+
+   //============================================================
+   // <T>删除一个存储信息。</T>
+   //
+   // @param catalog 集合分类
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public boolean delete(String catalog,
+                         String guid){
+      // 检查参数
+      if(RString.isEmpty(catalog)){
+         throw new FFatalError("Parameter catalog is empty.");
+      }
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Parameter guid is empty.");
+      }
+      //............................................................
+      // 获得集合
+      DBCollection collection = _database.getCollection(catalog);
+      // 查找内容
+      DBObject search = new BasicDBObject("guid", guid);
+      // 更新处理
+      DBObject find = collection.findOne(search);
+      if(find != null){
+         collection.remove(find);
+         return true;
+      }
+      return false;
    }
 
    //============================================================

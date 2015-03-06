@@ -1,5 +1,6 @@
 package org.mo.content.core.resource3d.scene;
 
+import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
@@ -14,41 +15,48 @@ public interface IC3dSceneConsole
          IAbstractLogicUnitConsole<FDataResource3dSceneUnit>
 {
    //============================================================
-   // <T>生成场景。</T>
+   // <T>查找场景单元。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @param version 版本
-   // @return 场景
+   // @param guid 场景唯一编码
+   // @param code 场景代码
+   // @return 场景单元
    //============================================================
-   FRs3Scene makeSceneTheme(ILogicContext logicContext,
-                            String guid);
+   FDataResource3dSceneUnit findSceneUnit(ILogicContext logicContext,
+                                          String guid,
+                                          String code);
+
+   //============================================================
+   // <T>查找场景主题单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param sceneId 场景编码
+   // @param themeCode 主题代码
+   // @return 场景主题单元
+   //============================================================
+   FDataResource3dSceneThemeUnit findThemeUnit(ILogicContext logicContext,
+                                               long sceneId,
+                                               String themeCode);
 
    //============================================================
    // <T>生成场景。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @param version 版本
+   // @param guid 唯一编码
    // @return 场景
    //============================================================
-   FRs3Scene makeScene(ILogicContext logicContext,
-                       String guid,
-                       String code,
-                       String themeCode);
+   FRs3Scene makeTheme(ILogicContext logicContext,
+                       String guid);
 
    //============================================================
-   // <T>生成场景。</T>
+   // <T>生成场景主题。</T>
    //
    // @param logicContext 逻辑环境
-   // @param code 代码
-   // @param version 版本
-   // @return 场景
+   // @param guid 唯一编码
+   // @return 场景主题
    //============================================================
-   byte[] makeSceneData(ILogicContext logicContext,
-                        String guid,
-                        String code,
-                        String themeCode);
+   byte[] makeThemeData(ILogicContext logicContext,
+                        String guid);
 
    //============================================================
    // <T>更新场景。</T>
