@@ -22,7 +22,7 @@ public class RDbImportData
          IRs3StorageConsole storageConsole = RAop.find(IRs3StorageConsole.class);
          //storageConsole.clearData(logicContext);
          storageConsole.importData(logicContext, path);
-         storageConsole.importStorage(logicContext, path);
+         //storageConsole.importStorage(logicContext, path);
       }
    }
 

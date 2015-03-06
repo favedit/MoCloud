@@ -64,20 +64,48 @@ public class FSceneService
                          ILogicContext logicContext,
                          IWebInput input,
                          IWebOutput output){
+      //      // 检查输入
+      //      FXmlNode xscene = input.config();
+      //      if(!xscene.isName("Scene")){
+      //         throw new FFatalError("Invalid config code.");
+      //      }
+      //      // 获得场景
+      //      String sceneGuid = xscene.get("guid");
+      //      String sceneCode = xscene.get("code");
+      //      String theme = context.parameter("theme");
+      //      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneGuid, sceneCode, theme);
+      //      // 合并场景
+      //      scene.mergeConfig(xscene);
+      //      // 更新场景
+      //      _sceneConsole.updateScene(logicContext, scene);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult updateTheme(IWebContext context,
+                              ILogicContext logicContext,
+                              IWebInput input,
+                              IWebOutput output){
       // 检查输入
       FXmlNode xscene = input.config();
       if(!xscene.isName("Scene")){
          throw new FFatalError("Invalid config code.");
       }
       // 获得场景
-      String sceneGuid = xscene.get("guid");
-      String sceneCode = xscene.get("code");
-      String theme = context.parameter("theme");
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneGuid, sceneCode, theme);
+      String themeGuid = xscene.get("guid");
+      FRs3Scene scene = _sceneConsole.makeSceneTheme(logicContext, themeGuid);
       // 合并场景
       scene.mergeConfig(xscene);
       // 更新场景
-      _sceneConsole.updateScene(logicContext, scene);
+      _sceneConsole.updateSceneTheme(logicContext, scene);
       return EResult.Success;
    }
 }

@@ -2,42 +2,6 @@
 <Configuration>
    <!-- 数据库传输 -->
    <Database type='mysql'>
-      <Dataset data_name='DT_RES_BITMAP'/>
-      <Dataset data_name='DT_RES_BITMAP_IMAGE'/>
-
-      <Dataset data_name='DT_RS3_TEXTURE'/>
-      <Dataset data_name='DT_RS3_TEXTURE_BITMAP'/>
-
-      <Dataset data_name='DT_RS3_STREAM'/>
-      <Dataset data_name='DT_RS3_TRACK'/>
-
-      <Dataset data_name='DT_RS3_ANIMATION'/>
-      <Dataset data_name='DT_RS3_ANIMATION_TRACK'/>
-      <Dataset data_name='DT_RS3_ANIMATION_ACTION'/>
-
-      <Dataset data_name='DT_RS3_SKELETON'/>
-      <Dataset data_name='DT_RS3_SKELETON_SKIN'/>
-      <Dataset data_name='DT_RS3_SKELETON_SKIN_STREAM'/>
-      <Dataset data_name='DT_RS3_SKELETON_ANIMATION'/>
-
-      <Dataset data_name='DT_RS3_MESH'/>
-      <Dataset data_name='DT_RS3_MESH_STREAM'/>
-      <Dataset data_name='DT_RS3_MESH_SKIN'/>
-      <Dataset data_name='DT_RS3_MESH_TRACK'/>
-
-      <Dataset data_name='DT_RS3_MODEL'/>
-      <Dataset data_name='DT_RS3_MODEL_MESH'/>
-      <Dataset data_name='DT_RS3_MODEL_SKELETON'/>
-      <Dataset data_name='DT_RS3_MODEL_ANIMATION'/>
-
-      <Dataset data_name='DT_RS3_THEME'/>
-      <Dataset data_name='DT_RS3_MATERIAL_GROUP'/>
-      <Dataset data_name='DT_RS3_MATERIAL'/>
-      <Dataset data_name='DT_RS3_MATERIAL_TEXTURE'/>
-
-      <Dataset data_name='DT_RS3_TEMPLATE'/>
-      <Dataset data_name='DT_RS3_TEMPLATE_THEME'/>
-      <Dataset data_name='DT_RS3_TEMPLATE_MATERIAL_GROUP'/>
 
       <Dataset data_name='DT_RS3_SCENE'/>
       <Dataset data_name='DT_RS3_SCENE_THEME'/>

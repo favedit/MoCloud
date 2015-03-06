@@ -1,6 +1,7 @@
 package org.mo.content.resource3d.scene;
 
 import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
+import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
@@ -16,6 +17,9 @@ import org.mo.content.resource3d.common.FRs3Resource;
 public class FRs3Scene
       extends FRs3Resource
 {
+   // 主题唯一编号
+   protected String _themeGuid;
+
    // 主题代码
    protected String _themeCode;
 
@@ -32,6 +36,24 @@ public class FRs3Scene
    // <T>构造场景。</T>
    //============================================================
    public FRs3Scene(){
+   }
+
+   //============================================================
+   // <T>获得主题唯一编号。</T>
+   //
+   // @return 主题唯一编号
+   //============================================================
+   public String themeGuid(){
+      return _themeGuid;
+   }
+
+   //============================================================
+   // <T>设置主题唯一编号。</T>
+   //
+   // @param guid 主题唯一编号
+   //============================================================
+   public void setThemeGuid(String themeGuid){
+      _themeGuid = themeGuid;
    }
 
    //============================================================
@@ -102,6 +124,7 @@ public class FRs3Scene
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 存储属性
+      output.writeString(_themeGuid);
       output.writeString(_themeCode);
       _technique.serialize(output);
       _region.serialize(output);
@@ -158,7 +181,7 @@ public class FRs3Scene
    @Override
    public void mergeConfig(FXmlNode xconfig){
       // 读取属性
-      _code = xconfig.get("code");
+      //_code = xconfig.get("code");
       _label = xconfig.get("label");
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
@@ -239,12 +262,23 @@ public class FRs3Scene
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dSceneThemeUnit unit){
+   public void loadSceneUnit(FDataResource3dSceneUnit unit){
       // 加载属性
       _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
       _label = unit.label();
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadThemeUnit(FDataResource3dSceneThemeUnit unit){
+      // 加载属性
+      _themeGuid = unit.guid();
+      _themeCode = unit.code();
       // 读取配置
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadString(unit.content());
@@ -256,12 +290,12 @@ public class FRs3Scene
    //
    // @param unit 数据单元
    //============================================================
-   public void saveUnit(FDataResource3dSceneThemeUnit unit){
+   public void saveThemeUnit(FDataResource3dSceneThemeUnit unit){
       // 存储属性
-      unit.setCode(_code);
-      unit.setFullCode(_fullCode);
+      //unit.setCode(_code);
+      //unit.setFullCode(_fullCode);
       unit.setLabel(_label);
-      unit.setKeywords(_keywords);
+      //unit.setKeywords(_keywords);
       // 存储配置
       FXmlNode xconfig = new FXmlNode("Scene");
       saveConfig(xconfig);

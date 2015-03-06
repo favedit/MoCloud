@@ -104,7 +104,7 @@ public class FRs3SceneConsole
          FDataResource3dSceneThemeUnit sceneThemeUnit = sceneThemeLogic.doPrepare();
          sceneThemeUnit.setSceneId(sceneUnit.ouid());
          scene.setGuid(sceneThemeUnit.guid());
-         scene.saveUnit(sceneThemeUnit);
+         scene.saveThemeUnit(sceneThemeUnit);
          sceneThemeUnit.setCode(themeCode);
          sceneThemeUnit.setFullCode(scene.code() + "|" + themeCode);
          sceneThemeLogic.doInsert(sceneThemeUnit);

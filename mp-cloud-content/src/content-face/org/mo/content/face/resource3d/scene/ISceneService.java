@@ -36,4 +36,17 @@ public interface ISceneService
                   ILogicContext logicContext,
                   IWebInput input,
                   IWebOutput output);
+
+   //============================================================
+   // <T>更新主题配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult updateTheme(IWebContext context,
+                       ILogicContext logicContext,
+                       IWebInput input,
+                       IWebOutput output);
 }

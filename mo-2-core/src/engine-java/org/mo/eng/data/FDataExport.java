@@ -46,7 +46,9 @@ public class FDataExport
             fields.append(",");
          }
          String name = column.get("column_name");
+         fields.append('`');
          fields.append(name);
+         fields.append('`');
       }
       // 生成查询命令
       FString sql = new FString();

@@ -83,10 +83,43 @@ public class FC3dSceneConsole
    // @return 场景
    //============================================================
    @Override
+   public FRs3Scene makeSceneTheme(ILogicContext logicContext,
+                                   String guid){
+      // 检查参数
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Scene theme guid is null.");
+      }
+      // 查找信息
+      FDataResource3dSceneThemeLogic themeLogic = logicContext.findLogic(FDataResource3dSceneThemeLogic.class);
+      FDataResource3dSceneThemeUnit themeUnit = themeLogic.findByGuid(guid);
+      if(themeUnit == null){
+         throw new FFatalError("Scene theme is not exists. (guid={1})", guid);
+      }
+      FDataResource3dSceneUnit sceneUnit = themeUnit.scene();
+      if(sceneUnit == null){
+         throw new FFatalError("Scene is not exists. (theme_guid={1})", guid);
+      }
+      // 创建场景
+      FRs3Scene scene = new FRs3Scene();
+      scene.loadSceneUnit(sceneUnit);
+      scene.loadThemeUnit(themeUnit);
+      return scene;
+   }
+
+   //============================================================
+   // <T>生成场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   // @return 场景
+   //============================================================
+   @Override
    public FRs3Scene makeScene(ILogicContext logicContext,
                               String guid,
                               String code,
                               String themeCode){
+      // 设置变量
       themeCode = RString.nvl(themeCode, "general");
       // 查找场景单元
       FDataResource3dSceneUnit sceneUnit = null;
@@ -97,15 +130,18 @@ public class FC3dSceneConsole
       }else{
          throw new FFatalError("Find scene failure. (guid={1}, code={2})", guid, code);
       }
+      if(sceneUnit == null){
+         throw new FFatalError("Scene is not exists. (guid={1}, code={2})", guid, code);
+      }
       // 查找主题单元
       FDataResource3dSceneThemeUnit themeUnit = findThemeByCode(logicContext, sceneUnit.ouid(), themeCode);
-      // 未查到处理
       if(themeUnit == null){
-         return null;
+         throw new FFatalError("Scene theme is not exists. (guid={1}, code={2}, theme={3})", guid, code, themeCode);
       }
       // 创建场景
       FRs3Scene scene = new FRs3Scene();
-      scene.loadUnit(themeUnit);
+      scene.loadSceneUnit(sceneUnit);
+      scene.loadThemeUnit(themeUnit);
       return scene;
    }
 
@@ -124,11 +160,11 @@ public class FC3dSceneConsole
                                String themeCode){
       // 查找唯一编号
       if(RString.isEmpty(guid)){
-         FDataResource3dSceneUnit unit = findByCode(logicContext, code);
-         if(unit == null){
+         FDataResource3dSceneUnit sceneUnit = findByCode(logicContext, code);
+         if(sceneUnit == null){
             return null;
          }
-         guid = unit.guid();
+         guid = sceneUnit.guid();
       }
       //............................................................
       // 查找数据
@@ -173,7 +209,45 @@ public class FC3dSceneConsole
          throw new FFatalError("Find scene is not exists. (guid={1}})", guid);
       }
       // 创建场景
-      scene.saveUnit(themeUnit);
+      scene.saveThemeUnit(themeUnit);
+      // 修正数据
+      FObjects<FRs3SceneDisplay> displays = scene.filterDisplays();
+      for(FRs3SceneDisplay display : displays){
+         String displayLabel = display.label();
+         if(RString.isEmpty(displayLabel)){
+            String templateGuid = display.templateGuid();
+            FDataResource3dTemplateUnit templateUnit = _templateConsole.findByGuid(logicContext, templateGuid);
+            display.setLabel(templateUnit.label());
+         }
+      }
+      // 更新数据
+      themeLogic.doUpdate(themeUnit);
+      // 返回结果
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param scene 场景
+   //============================================================
+   @Override
+   public EResult updateSceneTheme(ILogicContext logicContext,
+                                   FRs3Scene scene){
+      // 检查参数
+      String themeGuid = scene.themeGuid();
+      if(RString.isEmpty(themeGuid)){
+         throw new FFatalError("Scene theme guid is null.");
+      }
+      // 查找数据
+      FDataResource3dSceneThemeLogic themeLogic = logicContext.findLogic(FDataResource3dSceneThemeLogic.class);
+      FDataResource3dSceneThemeUnit themeUnit = themeLogic.findByGuid(themeGuid);
+      if(themeUnit == null){
+         throw new FFatalError("Scene theme is not exists. (guid={1}})", themeGuid);
+      }
+      // 创建场景
+      scene.saveThemeUnit(themeUnit);
       // 修正数据
       FObjects<FRs3SceneDisplay> displays = scene.filterDisplays();
       for(FRs3SceneDisplay display : displays){

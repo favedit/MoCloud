@@ -21,6 +21,17 @@ public interface IC3dSceneConsole
    // @param version 版本
    // @return 场景
    //============================================================
+   FRs3Scene makeSceneTheme(ILogicContext logicContext,
+                            String guid);
+
+   //============================================================
+   // <T>生成场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   // @return 场景
+   //============================================================
    FRs3Scene makeScene(ILogicContext logicContext,
                        String guid,
                        String code,
@@ -47,4 +58,13 @@ public interface IC3dSceneConsole
    //============================================================
    EResult updateScene(ILogicContext logicContext,
                        FRs3Scene scene);
+
+   //============================================================
+   // <T>更新场景主题。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param scene 场景
+   //============================================================
+   EResult updateSceneTheme(ILogicContext logicContext,
+                            FRs3Scene scene);
 }
