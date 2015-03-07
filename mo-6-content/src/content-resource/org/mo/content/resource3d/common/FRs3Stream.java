@@ -206,6 +206,25 @@ public class FRs3Stream
    //
    // @param output 输出流
    //============================================================
+   public void serializeFloat4(IDataOutput output){
+      if((_elementDataCd != EGcData.Float32) || (_elementCount != 4)){
+         throw new FFatalError("Invalid format.");
+      }
+      // 输出属性
+      output.writeUint8((short)_elementDataCd);
+      output.writeUint8((short)_elementCount);
+      output.writeBoolean(false);
+      output.writeUint8((short)_dataStride);
+      output.writeInt32(_dataCount);
+      // 输出数据
+      output.write(_data, 0, _data.length);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
    public void serializeColor4(IDataOutput output){
       if((_elementDataCd != EGcData.Float32) || (_elementCount != 4)){
          throw new FFatalError("Invalid format.");
@@ -223,10 +242,10 @@ public class FRs3Stream
          float v2 = stream.readFloat();
          float v3 = stream.readFloat();
          float v4 = stream.readFloat();
-         output.writeUint8((byte)(v1 * 255.0f));
-         output.writeUint8((byte)(v2 * 255.0f));
-         output.writeUint8((byte)(v3 * 255.0f));
-         output.writeUint8((byte)(v4 * 255.0f));
+         output.writeUint8((byte)(v1 * 240.0f));
+         output.writeUint8((byte)(v2 * 240.0f));
+         output.writeUint8((byte)(v3 * 240.0f));
+         output.writeUint8((byte)(v4 * 240.0f));
       }
    }
 
@@ -251,10 +270,12 @@ public class FRs3Stream
          float v1 = stream.readFloat();
          float v2 = stream.readFloat();
          float v3 = stream.readFloat();
-         output.writeUint8((byte)((v1 + 1) * 0.5f * 255.0f));
-         output.writeUint8((byte)((v2 + 1) * 0.5f * 255.0f));
-         output.writeUint8((byte)((v3 + 1) * 0.5f * 255.0f));
-         output.writeUint8((byte)255);
+         //SFloatVector3 value = new SFloatVector3(v1, v2, v3);
+         //value.normallize();
+         output.writeUint8((short)((v1 + 1.0) * 0.5f * 240.0f));
+         output.writeUint8((short)((v2 + 1.0) * 0.5f * 240.0f));
+         output.writeUint8((short)((v3 + 1.0) * 0.5f * 240.0f));
+         output.writeUint8((short)255);
       }
    }
 
@@ -389,6 +410,7 @@ public class FRs3Stream
          case "normal":
          case "binormal":
          case "tangent":
+            //serializeFloat3(output);
             serializeByte4Normal(output);
             break;
          case "bone_index":

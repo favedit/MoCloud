@@ -176,7 +176,7 @@ public class FRs3Texture
       FRs3TextureBitmap lightBitmap = findBitmapByCode("light");
       FRs3TextureBitmap refractBitmap = findBitmapByCode("refract");
       FRs3TextureBitmap emissiveBitmap = findBitmapByCode("emissive");
-      if((lightBitmap != null) || (reflectBitmap != null) || (refractBitmap != null) || (emissiveBitmap != null)){
+      if((lightBitmap != null) || (refractBitmap != null) || (emissiveBitmap != null)){
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          String code = "";
          if(lightBitmap != null){
