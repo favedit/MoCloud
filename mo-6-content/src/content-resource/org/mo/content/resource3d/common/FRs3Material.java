@@ -28,12 +28,6 @@ public class FRs3Material
    // 配置双面
    protected boolean _optionDouble = false;
 
-   // 配置透明
-   protected boolean _optionAlpha = false;
-
-   // 配置视角
-   protected boolean _optionView = false;
-
    // 配置法线反向
    protected boolean _optionNormalInvert = false;
 
@@ -43,11 +37,8 @@ public class FRs3Material
    // 配置自阴影
    protected boolean _optionShadowSelf = true;
 
-   // 配置高光
-   protected boolean _optionSpecular = true;
-
-   // 配置视角高光
-   protected boolean _optionViewSpecular = true;
+   // 配置颜色
+   protected boolean _optionColor = true;
 
    // 颜色最小
    protected float _colorMin = 0.0f;
@@ -61,20 +52,35 @@ public class FRs3Material
    // 颜色融合
    protected float _colorMerge = 0.5f;
 
+   // 配置透明
+   protected boolean _optionAlpha = false;
+
    // 透明基础
    protected float _alphaBase;
 
    // 透明比率
    protected float _alphaRate;
 
+   // 配置环境
+   protected boolean _optionAmbient = true;
+
    // 环境颜色
    protected SFloatColor4 _ambientColor = new SFloatColor4();
+
+   // 配置散射
+   protected boolean _optionDiffuse = true;
 
    // 散射颜色
    protected SFloatColor4 _diffuseColor = new SFloatColor4();
 
+   // 配置散射视角
+   protected boolean _optionDiffuseView = false;
+
    // 散射视角颜色
    protected SFloatColor4 _diffuseViewColor = new SFloatColor4();
+
+   // 配置高光
+   protected boolean _optionSpecular = true;
 
    // 高光颜色
    protected SFloatColor4 _specularColor = new SFloatColor4();
@@ -85,6 +91,9 @@ public class FRs3Material
    // 高光级别
    protected float _specularLevel;
 
+   // 配置视角高光
+   protected boolean _optionSpecularView = false;
+
    // 高光视角颜色
    protected SFloatColor4 _specularViewColor = new SFloatColor4();
 
@@ -94,17 +103,44 @@ public class FRs3Material
    // 高光视角级别
    protected float _specularViewLevel;
 
+   // 配置反射
+   protected boolean _optionReflect = true;
+
    // 反射颜色
    protected SFloatColor4 _reflectColor = new SFloatColor4();
 
    // 反射融合
    protected float _reflectMerge;
 
+   // 配置折射
+   protected boolean _optionRefract = true;
+
    // 前折射颜色
    protected SFloatColor4 _refractFrontColor = new SFloatColor4();
 
    // 后折射颜色
    protected SFloatColor4 _refractBackColor = new SFloatColor4();
+
+   // 配置不透明
+   protected boolean _optionOpacity = false;
+
+   // 不透明颜色
+   protected SFloatColor4 _opacityColor = new SFloatColor4();
+
+   // 不透明比率
+   protected float _opacityRate;
+
+   // 不透明透过度
+   protected float _opacityAlpha;
+
+   // 不透明深度
+   protected float _opacityDepth;
+
+   // 不透明度
+   protected float _opacityTransmittance;
+
+   // 配置发光
+   protected boolean _optionEmissive = false;
 
    // 发光颜色
    protected SFloatColor4 _emissiveColor = new SFloatColor4();
@@ -347,39 +383,59 @@ public class FRs3Material
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
-      // 输出属性
       output.writeString(_groupGuid);
+      // 输出属性
       output.writeString(_effectCode);
       // 输出配置
       output.writeBoolean(_optionDepth);
-      output.writeBoolean(_optionAlpha);
       output.writeBoolean(_optionDouble);
-      output.writeBoolean(_optionView);
       output.writeBoolean(_optionNormalInvert);
       output.writeBoolean(_optionShadow);
       output.writeBoolean(_optionShadowSelf);
       // 输出透明
+      output.writeBoolean(_optionAlpha);
       output.writeFloat(_alphaBase);
       output.writeFloat(_alphaRate);
       // 输出颜色
+      output.writeBoolean(_optionColor);
       output.writeFloat(_colorMin);
       output.writeFloat(_colorMax);
       output.writeFloat(_colorRate);
       output.writeFloat(_colorMerge);
       // 输出颜色
+      output.writeBoolean(_optionAmbient);
       _ambientColor.serialize(output);
+      // 输出颜色
+      output.writeBoolean(_optionDiffuse);
       _diffuseColor.serialize(output);
+      output.writeBoolean(_optionDiffuseView);
       _diffuseViewColor.serialize(output);
+      // 输出颜色
+      output.writeBoolean(_optionSpecular);
       _specularColor.serialize(output);
       output.writeFloat(_specularBase);
       output.writeFloat(_specularLevel);
+      output.writeBoolean(_optionSpecularView);
       _specularViewColor.serialize(output);
       output.writeFloat(_specularViewBase);
       output.writeFloat(_specularViewLevel);
+      // 输出颜色
+      output.writeBoolean(_optionReflect);
       _reflectColor.serialize(output);
       output.writeFloat(_reflectMerge);
+      // 输出颜色
+      output.writeBoolean(_optionRefract);
       _refractFrontColor.serialize(output);
       _refractBackColor.serialize(output);
+      // 输出不透明度
+      output.writeBoolean(_optionOpacity);
+      _opacityColor.serialize(output);
+      output.writeFloat(_opacityRate);
+      output.writeFloat(_opacityAlpha);
+      output.writeFloat(_opacityDepth);
+      output.writeFloat(_opacityTransmittance);
+      // 输出颜色
+      output.writeBoolean(_optionEmissive);
       _emissiveColor.serialize(output);
       // 输出纹理集合
       int textureCount = _textures.count();
@@ -400,42 +456,63 @@ public class FRs3Material
       _optionDepth = xconfig.getBoolean("option_depth", _optionDepth);
       _optionAlpha = xconfig.getBoolean("option_alpha", _optionAlpha);
       _optionDouble = xconfig.getBoolean("option_double", _optionDouble);
-      _optionView = xconfig.getBoolean("option_view", _optionView);
       _optionNormalInvert = xconfig.getBoolean("option_normal_invert", _optionNormalInvert);
       _optionShadow = xconfig.getBoolean("option_shadow", _optionShadow);
       _optionShadowSelf = xconfig.getBoolean("option_shadow_self", _optionShadowSelf);
       // 加载节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Alpha")){
+            _optionAlpha = xnode.getBoolean("valid", _optionAlpha);
             _alphaBase = xnode.getFloat("base", 0.1f);
             _alphaRate = xnode.getFloat("rate", 1.0f);
          }else if(xnode.isName("Color")){
+            _optionColor = xnode.getBoolean("valid", _optionColor);
             _colorMin = xnode.getFloat("min", 0.0f);
             _colorMax = xnode.getFloat("max", 1.0f);
             _colorRate = xnode.getFloat("rate", 2.0f);
             _colorMerge = xnode.getFloat("merge", 0.5f);
          }else if(xnode.isName("Ambient")){
+            _optionAmbient = xnode.getBoolean("valid", _optionAmbient);
             _ambientColor.loadConfig(xnode);
          }else if(xnode.isName("Diffuse")){
+            _optionDiffuse = xnode.getBoolean("valid", _optionDiffuse);
             _diffuseColor.loadConfig(xnode);
          }else if(xnode.isName("DiffuseView")){
+            _optionDiffuseView = xnode.getBoolean("valid", _optionDiffuseView);
             _diffuseViewColor.loadConfig(xnode);
          }else if(xnode.isName("Specular")){
+            _optionSpecular = xnode.getBoolean("valid", _optionSpecular);
             _specularColor.loadConfig(xnode);
             _specularBase = xnode.getFloat("base", 0.0f);
             _specularLevel = xnode.getFloat("level", 16.0f);
          }else if(xnode.isName("SpecularView")){
+            _optionSpecularView = xnode.getBoolean("valid", _optionSpecularView);
             _specularViewColor.loadConfig(xnode);
             _specularViewBase = xnode.getFloat("base", 0.0f);
             _specularViewLevel = xnode.getFloat("level", 16.0f);
          }else if(xnode.isName("Reflect")){
+            _optionReflect = xnode.getBoolean("valid", _optionReflect);
             _reflectColor.loadConfig(xnode);
-            _reflectMerge = xnode.getFloat("merge");
-         }else if(xnode.isName("RefractFront")){
-            _refractFrontColor.loadConfig(xnode);
-         }else if(xnode.isName("RefractBack")){
-            _refractBackColor.loadConfig(xnode);
+            _reflectMerge = xnode.getFloat("merge", _reflectMerge);
+         }else if(xnode.isName("Refract")){
+            _optionRefract = xnode.getBoolean("valid", _optionRefract);
+            FXmlNode xfront = xnode.findNode("Front");
+            if(xfront != null){
+               _refractFrontColor.loadConfig(xfront);
+            }
+            FXmlNode xback = xnode.findNode("Back");
+            if(xback != null){
+               _refractBackColor.loadConfig(xback);
+            }
+         }else if(xnode.isName("Opacity")){
+            _optionOpacity = xnode.getBoolean("valid", _optionOpacity);
+            _opacityColor.loadConfig(xnode);
+            _opacityRate = xnode.getFloat("rate", _opacityRate);
+            _opacityAlpha = xnode.getFloat("alpha", _opacityAlpha);
+            _opacityDepth = xnode.getFloat("depth", _opacityDepth);
+            _opacityTransmittance = xnode.getFloat("transmittance", _opacityTransmittance);
          }else if(xnode.isName("Emissive")){
+            _optionEmissive = xnode.getBoolean("valid", _optionEmissive);
             _emissiveColor.loadConfig(xnode);
          }
       }
@@ -483,44 +560,70 @@ public class FRs3Material
       xconfig.set("effect_code", _effectCode);
       // 存储配置
       xconfig.set("option_depth", _optionDepth);
-      xconfig.set("option_alpha", _optionAlpha);
       xconfig.set("option_double", _optionDouble);
-      xconfig.set("option_view", _optionView);
       xconfig.set("option_normal_invert", _optionNormalInvert);
       xconfig.set("option_shadow", _optionShadow);
       xconfig.set("option_shadow_self", _optionShadowSelf);
       // 存储透明
       FXmlNode xalpha = xconfig.createNode("Alpha");
+      xalpha.set("valid", _optionAlpha);
       xalpha.set("base", _alphaBase);
       xalpha.set("rate", _alphaRate);
       // 存储颜色
       FXmlNode xcolor = xconfig.createNode("Color");
+      xcolor.set("valid", _optionColor);
       xcolor.set("min", _colorMin);
       xcolor.set("max", _colorMax);
       xcolor.set("rate", _colorRate);
       xcolor.set("merge", _colorMerge);
-      // 存储颜色
-      _ambientColor.saveConfig(xconfig.createNode("Ambient"));
-      _diffuseColor.saveConfig(xconfig.createNode("Diffuse"));
-      _diffuseViewColor.saveConfig(xconfig.createNode("DiffuseView"));
+      // 存储环境
+      FXmlNode xambient = xconfig.createNode("Ambient");
+      xambient.set("valid", _optionAmbient);
+      _ambientColor.saveConfig(xambient);
+      // 存储散射
+      FXmlNode xdiffuse = xconfig.createNode("Diffuse");
+      xdiffuse.set("valid", _optionDiffuse);
+      _diffuseColor.saveConfig(xdiffuse);
+      // 存储散射视角
+      FXmlNode xdiffuseView = xconfig.createNode("DiffuseView");
+      xdiffuseView.set("valid", _optionDiffuseView);
+      _diffuseViewColor.saveConfig(xdiffuseView);
+      // 存储高光
       FXmlNode xspecular = xconfig.createNode("Specular");
+      xspecular.set("valid", _optionSpecular);
       _specularColor.saveConfig(xspecular);
       xspecular.set("base", _specularBase);
       xspecular.set("level", _specularLevel);
+      // 存储高光视角
       FXmlNode xspecularView = xconfig.createNode("SpecularView");
+      xspecularView.set("valid", _optionSpecularView);
       _specularViewColor.saveConfig(xspecularView);
       xspecularView.set("base", _specularViewBase);
       xspecularView.set("level", _specularViewLevel);
+      // 存储反射
       FXmlNode xreflect = xconfig.createNode("Reflect");
+      xreflect.set("valid", _optionReflect);
       _reflectColor.saveConfig(xreflect);
       xreflect.set("merge", _reflectMerge);
       // 存储折射
-      FXmlNode xrefractFront = xconfig.createNode("RefractFront");
+      FXmlNode xrefract = xconfig.createNode("Refract");
+      xrefract.set("valid", _optionRefract);
+      FXmlNode xrefractFront = xrefract.createNode("Front");
       _refractFrontColor.saveConfig(xrefractFront);
-      FXmlNode xrefractBack = xconfig.createNode("RefractBack");
+      FXmlNode xrefractBack = xrefract.createNode("Back");
       _refractBackColor.saveConfig(xrefractBack);
+      // 存储不透明
+      FXmlNode xopacity = xconfig.createNode("Opacity");
+      xopacity.set("valid", _optionOpacity);
+      _opacityColor.saveConfig(xopacity);
+      xopacity.set("rate", _opacityRate);
+      xopacity.set("alpha", _opacityAlpha);
+      xopacity.set("depth", _opacityDepth);
+      xopacity.set("transmittance", _opacityTransmittance);
       // 存储发光
-      _emissiveColor.saveConfig(xconfig.createNode("Emissive"));
+      FXmlNode xemissive = xconfig.createNode("Emissive");
+      xemissive.set("valid", _optionEmissive);
+      _emissiveColor.saveConfig(xemissive);
    }
 
    //============================================================
