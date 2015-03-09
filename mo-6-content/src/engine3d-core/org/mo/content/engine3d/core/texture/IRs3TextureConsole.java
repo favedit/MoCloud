@@ -41,6 +41,30 @@ public interface IRs3TextureConsole
                           String guid);
 
    //============================================================
+   // <T>生成纹理位图。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   byte[] makeBitmap(ILogicContext logicContext,
+                     String guid,
+                     String code);
+
+   //============================================================
+   // <T>生成纹理位图。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   byte[] makeBitmapData(ILogicContext logicContext,
+                         String guid,
+                         String code);
+
+   //============================================================
    // <T>导入纹理。</T>
    //
    // @param logicContext 逻辑环境

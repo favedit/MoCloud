@@ -18,6 +18,9 @@ public class FRs3TextureBitmapPack
    // 透明
    protected boolean _optionAlpha;
 
+   // 格式
+   protected String _formatCode;
+
    // 数据
    protected int[] _data;
 
@@ -52,6 +55,30 @@ public class FRs3TextureBitmapPack
    //============================================================
    public void setOptionAlpha(boolean optionAlpha){
       _optionAlpha = optionAlpha;
+   }
+
+   //============================================================
+   // <T>获得格式。</T>
+   //
+   // @return 格式
+   //============================================================
+   public String formatCode(){
+      // 非压缩模式
+      String format = "jpg";
+      if(_optionAlpha){
+         return "png";
+      }
+      // 转换数据
+      if(_textureBitmap == null){
+         return format;
+      }else{
+         String code = _textureBitmap.code();
+         if(code.equals("environment")){
+            // 分拆为6个面
+            return "jpg";
+         }
+      }
+      return format;
    }
 
    //============================================================

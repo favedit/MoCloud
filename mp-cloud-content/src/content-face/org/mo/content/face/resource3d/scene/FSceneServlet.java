@@ -11,7 +11,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.core.resource3d.scene.IC3dSceneConsole;
+import org.mo.content.engine3d.core.scene.IRs3SceneConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -37,7 +37,7 @@ public class FSceneServlet
 
    // 资源模型接口
    @ALink
-   protected IC3dSceneConsole _sceneConsole;
+   protected IRs3SceneConsole _sceneConsole;
 
    //============================================================
    // <T>逻辑处理。</T>

@@ -1,6 +1,7 @@
 package org.mo.content.engine3d.core.texture;
 
 import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
+import com.cyou.gccloud.data.data.FDataResourceBitmapImageUnit;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -20,4 +21,24 @@ public interface IRs3TextureBitmapConsole
                                                long textureId,
                                                String code);
 
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   //============================================================
+   FDataResourceBitmapImageUnit findBitmapUnit(ILogicContext logicContext,
+                                               String code,
+                                               String version);
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   //============================================================
+   FDataResourceBitmapImageUnit findBitmapUnit(ILogicContext logicContext,
+                                               long bitmapId);
 }

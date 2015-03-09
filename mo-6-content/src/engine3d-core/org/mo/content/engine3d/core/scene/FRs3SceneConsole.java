@@ -7,11 +7,16 @@ import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import java.io.File;
+import org.mo.cloud.core.storage.EGcStorageCatalog;
+import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
+import org.mo.com.io.FByteStream;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
 import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.content.resource3d.scene.FRs3SceneDisplay;
@@ -27,6 +32,10 @@ public class FRs3SceneConsole
       implements
          IRs3SceneConsole
 {
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _storageConsole;
+
    // 资源模板控制台
    @ALink
    protected IRs3TemplateConsole _templateConsole;
@@ -45,6 +54,121 @@ public class FRs3SceneConsole
       FDataResource3dSceneLogic logic = logicContext.findLogic(FDataResource3dSceneLogic.class);
       FDataResource3dSceneUnit unit = logic.search(searchSql);
       return unit;
+   }
+
+   //============================================================
+   // <T>查找场景单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 场景唯一编码
+   // @param code 场景代码
+   // @return 场景单元
+   //============================================================
+   @Override
+   public FDataResource3dSceneUnit findSceneUnit(ILogicContext logicContext,
+                                                 String guid,
+                                                 String code){
+      FDataResource3dSceneUnit unit = null;
+      // 根据唯一编号查找
+      if(!RString.isEmpty(guid)){
+         FDataResource3dSceneLogic logic = logicContext.findLogic(FDataResource3dSceneLogic.class);
+         unit = logic.findByGuid(guid);
+      }
+      // 根据唯一编号查找
+      else if(!RString.isEmpty(code)){
+         unit = findByCode(logicContext, code);
+      }
+      return unit;
+   }
+
+   //============================================================
+   // <T>查找场景主题单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param sceneId 场景编码
+   // @param themeCode 主题代码
+   // @return 场景主题单元
+   //============================================================
+   @Override
+   public FDataResource3dSceneThemeUnit findThemeUnit(ILogicContext logicContext,
+                                                      long sceneId,
+                                                      String themeCode){
+      String sql = "(" + FDataResource3dSceneThemeLogic.SCENE_ID + "=" + sceneId + ") AND (" + FDataResource3dSceneThemeLogic.CODE + "='" + themeCode + "')";
+      FDataResource3dSceneThemeLogic logic = logicContext.findLogic(FDataResource3dSceneThemeLogic.class);
+      FDataResource3dSceneThemeUnit unit = logic.search(sql);
+      return unit;
+   }
+
+   //============================================================
+   // <T>生成场景。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @param version 版本
+   // @return 场景
+   //============================================================
+   @Override
+   public FRs3Scene makeTheme(ILogicContext logicContext,
+                              String guid){
+      // 检查参数
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Scene theme guid is null.");
+      }
+      // 查找信息
+      FDataResource3dSceneThemeLogic themeLogic = logicContext.findLogic(FDataResource3dSceneThemeLogic.class);
+      FDataResource3dSceneThemeUnit themeUnit = themeLogic.findByGuid(guid);
+      if(themeUnit == null){
+         throw new FFatalError("Scene theme is not exists. (guid={1})", guid);
+      }
+      FDataResource3dSceneUnit sceneUnit = themeUnit.scene();
+      if(sceneUnit == null){
+         throw new FFatalError("Scene is not exists. (theme_guid={1})", guid);
+      }
+      // 创建场景
+      FRs3Scene scene = new FRs3Scene();
+      scene.loadSceneUnit(sceneUnit);
+      scene.loadThemeUnit(themeUnit);
+      //      // 更新数据
+      //      FDataResource3dTemplateLogic templateLogic = logicContext.findLogic(FDataResource3dTemplateLogic.class);
+      //      FObjects<FRs3SceneDisplay> displays = scene.filterDisplays();
+      //      for(FRs3SceneDisplay display : displays){
+      //         String displayCode = display.code();
+      //         FDataResource3dTemplateUnit templateUnit = templateLogic.search(FDataResource3dTemplateLogic.CODE + "='" + displayCode + "'");
+      //         display.setTemplateGuid(templateUnit.guid());
+      //      }
+      return scene;
+   }
+
+   //============================================================
+   // <T>生成场景主题。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编码
+   // @return 场景主题
+   //============================================================
+   @Override
+   public byte[] makeThemeData(ILogicContext logicContext,
+                               String guid){
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dSceneTheme, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      FRs3Scene scene = makeTheme(logicContext, guid);
+      // 获得数据
+      FByteStream stream = new FByteStream();
+      scene.serialize(stream);
+      byte[] data = stream.toArray();
+      //............................................................
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dSceneTheme, guid, "bin");
+      storage.setCode(scene.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 
    //============================================================

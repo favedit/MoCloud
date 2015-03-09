@@ -1,5 +1,6 @@
 package org.mo.content.face.resource3d.template;
 
+import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteStream;
@@ -61,21 +62,25 @@ public class FTemplateServlet
       // 获得参数
       String guid = context.parameter("guid");
       String code = context.parameter("code");
-      String version = context.parameter("version");
       // 检查编号和代码，必须存在一个
       if(RString.isEmpty(guid) && RString.isEmpty(code)){
-         throw new FFatalError("Template is empty. (guid={1}, code={2}, version={3})", guid, code, version);
+         throw new FFatalError("Template guid and code is empty.");
+      }
+      // 获得唯一编号
+      if(RString.isEmpty(guid)){
+         FDataResource3dTemplateUnit unit = _templateConsole.findByCode(logicContext, code);
+         guid = unit.guid();
       }
       // 生成数据
-      byte[] templateData = _templateConsole.makeTemplateData(logicContext, guid, code);
+      byte[] content = _templateConsole.makeTemplateData(logicContext, guid);
       FByteStream stream = new FByteStream();
-      if(templateData == null){
-         String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);
+      if(content == null){
+         String info = RString.format("Template is not exists. (guid={1}, code={2})", guid, code);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         stream.write(templateData, 0, templateData.length);
+         stream.write(content, 0, content.length);
       }
       int dataLength = stream.length();
       byte[] data = stream.memory();

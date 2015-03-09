@@ -17,6 +17,9 @@ public class EGcStorageCatalog
    // 资源3D纹理
    public final static String Resource3dTexture = "resource3d.texture";
 
+   // 资源3D纹理位图
+   public final static String Resource3dTextureBitmap = "resource3d.texture.bitmap";
+
    // 资源3D模型
    public final static String Resource3dModel = "resource3d.model";
 

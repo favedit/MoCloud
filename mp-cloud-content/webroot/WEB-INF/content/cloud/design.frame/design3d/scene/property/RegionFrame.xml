@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.property.RegionFrame" update_date="20141210134046">
+   <Frame name="design3d.scene.property.RegionFrame" type='FDsSceneRegionPropertyFrame' label="显示属性" is_valid="Y" note="">
+      <Panel name='infoPanel' icon='design.panel.icon' label='显示属性'>
+         <Edit name="guid" linker='_controlGuid' label="标识:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='N' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

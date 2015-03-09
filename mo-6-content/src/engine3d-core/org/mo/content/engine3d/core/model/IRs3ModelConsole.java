@@ -3,6 +3,7 @@ package org.mo.content.engine3d.core.model;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.com.lang.EResult;
+import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -30,6 +31,24 @@ public interface IRs3ModelConsole
    FDataResource3dMeshUnit findMeshByCode(ILogicContext logicContext,
                                           long modelId,
                                           String code);
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   //============================================================
+   FRs3Model makeModel(ILogicContext logicContext,
+                       String guid);
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   //============================================================
+   byte[] makeModelData(ILogicContext logicContext,
+                        String guid);
 
    //============================================================
    // <T>导入模型。</T>

@@ -7,7 +7,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.resource3d.model.IC3dModelConsole;
+import org.mo.content.engine3d.core.model.IRs3ModelConsole;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -35,7 +35,7 @@ public class FStorageServlet
 
    // 资源模型接口
    @ALink
-   protected IC3dModelConsole _modelConsole;
+   protected IRs3ModelConsole _modelConsole;
 
    //============================================================
    // <T>逻辑处理。</T>

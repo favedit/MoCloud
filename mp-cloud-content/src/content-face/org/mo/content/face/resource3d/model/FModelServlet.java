@@ -1,5 +1,6 @@
 package org.mo.content.face.resource3d.model;
 
+import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.io.FByteStream;
@@ -10,7 +11,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.core.resource3d.model.IC3dModelConsole;
+import org.mo.content.engine3d.core.model.IRs3ModelConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -40,7 +41,7 @@ public class FModelServlet
 
    // 资源模型接口
    @ALink
-   protected IC3dModelConsole _modelConsole;
+   protected IRs3ModelConsole _modelConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -61,24 +62,27 @@ public class FModelServlet
                        ILogicContext logicContext,
                        IWebServletRequest request,
                        IWebServletResponse response){
-      // 检查代码
+      // 检查参数
       String guid = context.parameter("guid");
       String code = context.parameter("code");
-      String version = context.parameter("version");
-      // 检查参数
-      if(RString.isEmpty(code)){
-         throw new FFatalError("Model code is empty.");
+      if(RString.isEmpty(guid) && RString.isEmpty(code)){
+         throw new FFatalError("Model guid and code is empty.");
+      }
+      // 获得唯一编号
+      if(RString.isEmpty(guid)){
+         FDataResource3dModelUnit unit = _modelConsole.findByCode(logicContext, code);
+         guid = unit.guid();
       }
       // 生成数据
-      byte[] modelData = _modelConsole.makeModelData(logicContext, code);
+      byte[] content = _modelConsole.makeModelData(logicContext, guid);
       FByteStream stream = new FByteStream();
-      if(modelData == null){
-         String info = RString.format("Template is not exists. (guid={1}, code={2}, version={3})", guid, code, version);
+      if(content == null){
+         String info = RString.format("Model is not exists. (guid={1}, code={2})", guid, code);
          stream.writeInt32(EResult.Failure.value());
          stream.writeString(info);
       }else{
          stream.writeInt32(EResult.Success.value());
-         stream.write(modelData, 0, modelData.length);
+         stream.write(content, 0, content.length);
       }
       int dataLength = stream.length();
       byte[] data = stream.memory();

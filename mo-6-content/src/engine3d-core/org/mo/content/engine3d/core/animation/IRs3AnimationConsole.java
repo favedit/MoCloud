@@ -1,6 +1,7 @@
 package org.mo.content.engine3d.core.animation;
 
 import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
+import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.data.logic.ILogicContext;
 
@@ -28,4 +29,14 @@ public interface IRs3AnimationConsole
    //============================================================
    FRs3Track makeTrack(ILogicContext logicContext,
                        long trackId);
+
+   //============================================================
+   // <T>构建蒙皮处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 蒙皮
+   //============================================================
+   FRs3Animation makeAnimation(ILogicContext logicContext,
+                               long animationId);
 }

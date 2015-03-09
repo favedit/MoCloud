@@ -179,24 +179,14 @@ public class FRs3TemplateConsole
    //============================================================
    @Override
    public FRs3Template makeTemplate(ILogicContext logicContext,
-                                    String guid,
-                                    String code){
-      FRs3Template template = null;
-      // 查找数据
-      FDataResource3dTemplateUnit templateUnit = null;
-      if(!RString.isEmpty(guid)){
-         templateUnit = findByGuid(logicContext, guid);
-      }else if(!RString.isEmpty(code)){
-         templateUnit = findByCode(logicContext, code);
-      }else{
-         throw new FFatalError("Find template failure. (guid={1}, code={2})", guid, code);
-      }
-      // 未查到处理
+                                    String guid){
+      // 查找数据单元
+      FDataResource3dTemplateUnit templateUnit = findByGuid(logicContext, guid);
       if(templateUnit == null){
          return null;
       }
       // 读取内容
-      template = new FRs3Template();
+      FRs3Template template = new FRs3Template();
       template.loadUnit(templateUnit);
       // 查找材质组
       FDataResource3dTemplateMaterialGroupLogic templateMaterialGroupLogic = logicContext.findLogic(FDataResource3dTemplateMaterialGroupLogic.class);
@@ -254,17 +244,7 @@ public class FRs3TemplateConsole
    //============================================================
    @Override
    public byte[] makeTemplateData(ILogicContext logicContext,
-                                  String guid,
-                                  String code){
-      // 查找唯一编号
-      if(RString.isEmpty(guid)){
-         FDataResource3dTemplateUnit unit = findByCode(logicContext, code);
-         if(unit == null){
-            return null;
-         }
-         guid = unit.guid();
-      }
-      //............................................................
+                                  String guid){
       // 查找数据
       SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTemplate, guid);
       if(findStorage != null){
@@ -272,7 +252,7 @@ public class FRs3TemplateConsole
       }
       //............................................................
       // 生成模型
-      FRs3Template template = makeTemplate(logicContext, guid, code);
+      FRs3Template template = makeTemplate(logicContext, guid);
       // 获得数据
       FByteStream stream = new FByteStream();
       template.serialize(stream);

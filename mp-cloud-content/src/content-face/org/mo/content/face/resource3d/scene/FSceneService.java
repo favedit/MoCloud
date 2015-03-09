@@ -7,6 +7,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource3d.scene.IC3dSceneConsole;
+import org.mo.content.engine3d.core.scene.IRs3SceneConsole;
 import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -23,7 +24,10 @@ public class FSceneService
          ISceneService
 {
    @ALink
-   protected IC3dSceneConsole _sceneConsole;
+   protected IRs3SceneConsole _sceneConsole;
+
+   @ALink
+   protected IC3dSceneConsole _contentSceneConsole;
 
    //============================================================
    // <T>构造资源3D模板服务。</T>
@@ -119,7 +123,7 @@ public class FSceneService
       // 合并场景
       scene.mergeConfig(xscene);
       // 更新场景
-      _sceneConsole.updateSceneTheme(logicContext, scene);
+      _contentSceneConsole.updateSceneTheme(logicContext, scene);
       return EResult.Success;
    }
 }

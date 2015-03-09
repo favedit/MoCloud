@@ -17,11 +17,13 @@ import org.mo.com.io.FByteStream;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.content.resource3d.texture.FRs3Texture;
 import org.mo.content.resource3d.texture.FRs3TextureBitmap;
+import org.mo.content.resource3d.texture.FRs3TextureBitmapPack;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -41,6 +43,10 @@ public class FRs3TextureConsole
    // 存储控制台
    @ALink
    protected IGcStorageConsole _storageConsole;
+
+   // 纹理位图控制台
+   @ALink
+   protected IRs3TextureBitmapConsole _bitmapConsole;
 
    //============================================================
    // <T>根据代码查找纹理单元。</T>
@@ -132,6 +138,106 @@ public class FRs3TextureConsole
       // 存储数据
       SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTexture, guid, "bin");
       storage.setCode(texture.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
+   }
+
+   //============================================================
+   // <T>生成纹理位图。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   @Override
+   public byte[] makeBitmap(ILogicContext logicContext,
+                            String guid,
+                            String code){
+      // 检查代码
+      if(RString.isEmpty(guid) || RString.isEmpty(code)){
+         throw new FFatalError("Texture parameter is invalid. (guid={1}, code={2})", guid, code);
+      }
+      // 查找纹理
+      FDataResource3dTextureLogic textureLogic = logicContext.findLogic(FDataResource3dTextureLogic.class);
+      FDataResource3dTextureUnit textureUnit = textureLogic.findByGuid(guid);
+      if(textureUnit == null){
+         throw new FFatalError("Texture is not exists. (guid={1})", guid);
+      }
+      long textureId = textureUnit.ouid();
+      byte[] data = null;
+      if(code.contains("-")){
+         String[] items = RString.split(code, '-');
+         int count = items.length;
+         Object[] itemDatas = new Object[items.length];
+         for(int n = 0; n < count; n++){
+            String item = items[n];
+            if(!RString.isEmpty(item)){
+               String whereSql = "(" + FDataResource3dTextureBitmapLogic.TEXTURE_ID + "=" + textureId + ") AND (" + FDataResource3dTextureBitmapLogic.CODE + "='" + item + "')";
+               FDataResource3dTextureBitmapLogic textureBitmapLogic = logicContext.findLogic(FDataResource3dTextureBitmapLogic.class);
+               FDataResource3dTextureBitmapUnit textureBitmapUnit = textureBitmapLogic.search(whereSql);
+               if(textureBitmapUnit == null){
+                  throw new FFatalError("Texture bitmap is not exists. (code={1})", code);
+               }
+               FDataResourceBitmapImageUnit imageUnit = _bitmapConsole.findBitmapUnit(logicContext, textureBitmapUnit.bitmapId());
+               SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
+               itemDatas[n] = resource.data();
+            }
+         }
+         try(FRs3TextureBitmapPack pack = new FRs3TextureBitmapPack()){
+            if(count == 2){
+               // Merge rgb + a
+               pack.mergeRgba((byte[])itemDatas[0], (byte[])itemDatas[1]);
+            }else if(count == 3){
+               // Merge rgb + a
+               pack.mergeRgba3((byte[])itemDatas[0], (byte[])itemDatas[1], (byte[])itemDatas[2]);
+            }else{
+               throw new FFatalError("Unserport mode");
+            }
+            data = pack.toArray();
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
+      }else{
+         String whereSql = "(" + FDataResource3dTextureBitmapLogic.TEXTURE_ID + "=" + textureId + ") AND (" + FDataResource3dTextureBitmapLogic.CODE + "='" + code + "')";
+         FDataResource3dTextureBitmapLogic textureBitmapLogic = logicContext.findLogic(FDataResource3dTextureBitmapLogic.class);
+         FDataResource3dTextureBitmapUnit textureBitmapUnit = textureBitmapLogic.search(whereSql);
+         if(textureBitmapUnit == null){
+            throw new FFatalError("Texture bitmap is not exists. (code={1})", code);
+         }
+         FDataResourceBitmapImageUnit imageUnit = _bitmapConsole.findBitmapUnit(logicContext, textureBitmapUnit.bitmapId());
+         SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
+         data = resource.data();
+      }
+      return data;
+   }
+
+   //============================================================
+   // <T>生成纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public byte[] makeBitmapData(ILogicContext logicContext,
+                                String guid,
+                                String code){
+      String uniqueCode = guid + "|" + code;
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTextureBitmap, uniqueCode);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      byte[] data = makeBitmap(logicContext, guid, code);
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTextureBitmap, uniqueCode, "bin");
+      storage.setCode(uniqueCode);
       storage.setData(data);
       _storageConsole.store(storage);
       // 返回数据

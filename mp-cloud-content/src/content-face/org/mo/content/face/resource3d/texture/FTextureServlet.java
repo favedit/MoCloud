@@ -56,7 +56,7 @@ public class FTextureServlet
       // 检查代码
       String guid = context.parameter("guid");
       if(RString.isEmpty(guid)){
-         throw new FFatalError("Model code is empty.");
+         throw new FFatalError("Texture guid is empty.");
       }
       // 获得数据
       byte[] textureData = _textureConsole.makeTextureData(logicContext, guid);

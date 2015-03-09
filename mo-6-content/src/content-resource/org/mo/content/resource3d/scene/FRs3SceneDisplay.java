@@ -204,6 +204,7 @@ public class FRs3SceneDisplay
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 存储属性
+      output.writeString(_templateGuid);
       _matrix.serialize(output);
       // 存储动画集合
       if(_movies != null){

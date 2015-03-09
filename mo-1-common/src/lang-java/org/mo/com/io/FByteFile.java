@@ -27,6 +27,31 @@ public class FByteFile
    //============================================================
    // <T>构造字节流文件。</T>
    //
+   // @param data 数据
+   //============================================================
+   public FByteFile(byte[] data){
+      _length = data.length;
+      _memory = data;
+   }
+
+   //============================================================
+   // <T>构造字节流文件。</T>
+   //
+   // @param data 数据
+   // @param offset 位置
+   // @param length 长度
+   //============================================================
+   public FByteFile(byte[] data,
+                    int offset,
+                    int length){
+      _length = length;
+      _memory = new byte[length];
+      System.arraycopy(data, offset, _memory, 0, length);
+   }
+
+   //============================================================
+   // <T>构造字节流文件。</T>
+   //
    // @param fileName 文件名称
    //============================================================
    public FByteFile(String fileName){

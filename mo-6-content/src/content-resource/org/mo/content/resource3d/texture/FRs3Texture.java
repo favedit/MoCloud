@@ -89,7 +89,7 @@ public class FRs3Texture
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          if((diffuseBitmap != null) && (alphaBitmap != null)){
             bitmapPack.setOptionAlpha(true);
-            bitmapPack.setCode("diffuse|alpha");
+            bitmapPack.setCode("diffuse-alpha");
             bitmapPack.mergeRgb(diffuseBitmap);
             bitmapPack.mergeAlpha(alphaBitmap);
          }else if((diffuseBitmap != null) && (alphaBitmap == null)){
@@ -151,22 +151,22 @@ public class FRs3Texture
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          String code = "";
          if(specularLevelBitmap != null){
-            code += "|specular.level";
+            code += "-specular.level";
             bitmapPack.mergeR(specularLevelBitmap);
          }else{
-            code += "|";
+            code += "-";
          }
          if(reflectBitmap != null){
-            code += "|reflect";
+            code += "-reflect";
             bitmapPack.mergeG(reflectBitmap);
          }else{
-            code += "|";
+            code += "-";
          }
          if(heightBitmap != null){
-            code += "|height";
+            code += "-height";
             bitmapPack.mergeB(heightBitmap);
          }else{
-            code += "|";
+            code += "-";
          }
          bitmapPack.setCode(code.substring(1));
          _bitmapPacks.push(bitmapPack);
@@ -180,23 +180,22 @@ public class FRs3Texture
          FRs3TextureBitmapPack bitmapPack = new FRs3TextureBitmapPack();
          String code = "";
          if(lightBitmap != null){
-            code += "|light";
+            code += "-light";
             bitmapPack.mergeR(lightBitmap);
          }else{
-            code += "|";
+            code += "-";
          }
          if(refractBitmap != null){
-            code += "|refract";
+            code += "-refract";
             bitmapPack.mergeG(refractBitmap);
          }else{
-            code += "|";
+            code += "-";
          }
          if(emissiveBitmap != null){
-            bitmapPack.setOptionAlpha(true);
-            code += "|emissive";
+            code += "-emissive";
             bitmapPack.mergeB(emissiveBitmap);
          }else{
-            code += "|";
+            code += "-";
          }
          bitmapPack.setCode(code.substring(1));
          _bitmapPacks.push(bitmapPack);
