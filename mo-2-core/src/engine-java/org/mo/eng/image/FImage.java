@@ -1,5 +1,6 @@
 package org.mo.eng.image;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,7 +11,12 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -196,6 +202,49 @@ public class FImage
          _logger.error(this, "saveFile", e, "Save image data failure. (extension={1})", extension);
          throw new FFatalError(e);
       }
+   }
+
+   //============================================================
+   // <T>存储JPEG品质数据。</T>
+   //
+   // @param quality 品质(0.0f ~ 1.0f)
+   // @return 数据
+   //============================================================
+   public byte[] toJpegBytes(float quality){
+      byte[] data = null;
+      ImageWriter writer = null;
+      ByteOutputStream outputStream = null;
+      ImageOutputStream imageOutputStream = null;
+      try{
+         // 获得参数
+         writer = ImageIO.getImageWritersByFormatName("jpeg").next();
+         ImageWriteParam param = writer.getDefaultWriteParam();
+         param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+         param.setCompressionQuality(quality);
+         // 压缩数据
+         outputStream = new ByteOutputStream();
+         imageOutputStream = ImageIO.createImageOutputStream(outputStream);
+         writer.setOutput(imageOutputStream);
+         writer.write(null, new IIOImage(_image, null, null), param);
+         data = outputStream.getBytes();
+      }catch(Exception e){
+         throw new FFatalError(e);
+      }finally{
+         if(imageOutputStream != null){
+            try{
+               imageOutputStream.close();
+            }catch(IOException e){
+               throw new FFatalError(e);
+            }
+         }
+         if(outputStream != null){
+            outputStream.close();
+         }
+         if(writer != null){
+            writer.dispose();
+         }
+      }
+      return data;
    }
 
    //============================================================

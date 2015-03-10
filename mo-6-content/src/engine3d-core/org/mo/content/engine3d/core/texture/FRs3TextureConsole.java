@@ -8,14 +8,6 @@ import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapImageUnit;
 import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.ImageOutputStream;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
@@ -174,8 +166,10 @@ public class FRs3TextureConsole
       if(textureUnit == null){
          throw new FFatalError("Texture is not exists. (guid={1})", guid);
       }
-      long textureId = textureUnit.ouid();
+      //............................................................
       byte[] data = null;
+      boolean compress = false;
+      long textureId = textureUnit.ouid();
       if(code.contains("-")){
          String[] items = RString.split(code, '-');
          int count = items.length;
@@ -199,10 +193,11 @@ public class FRs3TextureConsole
                // Merge rgb + a
                pack.mergeRgba((byte[])itemDatas[0], (byte[])itemDatas[1]);
             }else if(count == 3){
-               // Merge rgb + a
+               // Merge r + g + b
                pack.mergeRgba3((byte[])itemDatas[0], (byte[])itemDatas[1], (byte[])itemDatas[2]);
+               compress = true;
             }else{
-               throw new FFatalError("Unserport mode");
+               throw new FFatalError("Unknown pack mode");
             }
             data = pack.toArray();
          }catch(Exception e){
@@ -220,23 +215,31 @@ public class FRs3TextureConsole
          data = resource.data();
          if(imageUnit.formatCode().equals("jpg")){
             // 对大于256K的数据进行降低画质压缩处理
-            if(data.length > 1024 * 256){
-               try{
-                  BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
-                  ByteOutputStream outputStream = new ByteOutputStream();
-                  ImageOutputStream imageOutputStream = ImageIO.createImageOutputStream(outputStream);
-                  ImageWriter writer = ImageIO.getImageWritersByFormatName("jpeg").next();
-                  ImageWriteParam param = writer.getDefaultWriteParam();
-                  param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-                  param.setCompressionQuality(0.6f);
-                  writer.setOutput(imageOutputStream);
-                  writer.write(null, new IIOImage(image, null, null), param);
-                  writer.dispose();
-                  data = outputStream.getBytes();
-               }catch(Exception e){
-                  throw new FFatalError(e);
-               }
+            if(data.length > 1024 * 128){
+               compress = true;
             }
+         }
+      }
+      //............................................................
+      // 压缩纹理数据
+      if(compress){
+         // 计算压缩率
+         int dataLength = data.length;
+         float quality = 0.0f;
+         if(dataLength > 1024 * 1024){
+            quality = 0.6f;
+         }else if(dataLength > 1024 * 512){
+            quality = 0.7f;
+         }else if(dataLength > 1024 * 256){
+            quality = 0.8f;
+         }else{
+            quality = 0.9f;
+         }
+         // 压缩数据
+         try(FImage image = new FImage(data)){
+            data = image.toJpegBytes(quality);
+         }catch(Exception e){
+            throw new FFatalError(e);
          }
       }
       return data;

@@ -3,8 +3,6 @@ package org.mo.content.face.resource3d.scene;
 import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import javax.servlet.http.HttpServletResponse;
-import org.mo.com.io.FByteStream;
-import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -67,29 +65,20 @@ public class FSceneServlet
       }
       //............................................................
       // 查找场景
-      byte[] sceneData = null;
+      byte[] data = null;
       FDataResource3dSceneUnit sceneUnit = _sceneConsole.findSceneUnit(logicContext, guid, code);
       if(sceneUnit != null){
          // 查找主题
          FDataResource3dSceneThemeUnit themeUnit = _sceneConsole.findThemeUnit(logicContext, sceneUnit.ouid(), themeCode);
          if(themeUnit != null){
             // 生成数据
-            sceneData = _sceneConsole.makeThemeData(logicContext, themeUnit.guid());
+            data = _sceneConsole.makeThemeData(logicContext, themeUnit.guid());
          }
       }
-      //............................................................
-      // 生成数据
-      FByteStream stream = new FByteStream();
-      if(sceneData == null){
-         String info = RString.format("Scene is not exists. (guid={1}, code={2}, theme={3})", guid, code, themeCode);
-         stream.writeInt32(EResult.Failure.value());
-         stream.writeString(info);
-      }else{
-         stream.writeInt32(EResult.Success.value());
-         stream.write(sceneData, 0, sceneData.length);
+      if(data == null){
+         throw new FFatalError("process", "Scene is not exists. (guid={1}, code={2}, theme={3})", guid, code, themeCode);
       }
-      int dataLength = stream.length();
-      byte[] data = stream.memory();
+      int dataLength = data.length;
       //............................................................
       // 发送数据
       _logger.debug(this, "process", "Send scene theme data. (guid={1}, code={2}, theme={3}, length={4})", guid, code, themeCode, dataLength);

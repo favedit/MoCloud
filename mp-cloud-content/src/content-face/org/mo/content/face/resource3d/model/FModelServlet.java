@@ -71,21 +71,14 @@ public class FModelServlet
          FDataResource3dModelUnit unit = _modelConsole.findByCode(logicContext, code);
          guid = unit.guid();
       }
+      //............................................................
       // 生成数据
-      byte[] content = _modelConsole.makeModelData(logicContext, guid);
-      //      FByteStream stream = new FByteStream();
-      //      if(content == null){
-      //         String info = RString.format("Model is not exists. (guid={1}, code={2})", guid, code);
-      //         stream.writeInt32(EResult.Failure.value());
-      //         stream.writeString(info);
-      //      }else{
-      //         stream.writeInt32(EResult.Success.value());
-      //         stream.write(content, 0, content.length);
-      //      }
-      //      int dataLength = stream.length();
-      //      byte[] data = stream.memory();
-      byte[] data = content;
+      byte[] data = _modelConsole.makeModelData(logicContext, guid);
+      if(data == null){
+         throw new FFatalError("process", "Model is not exists. (guid={1}, code={2})", guid, code);
+      }
       int dataLength = data.length;
+      //............................................................
       // 发送数据
       _logger.debug(this, "process", "Send model data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");

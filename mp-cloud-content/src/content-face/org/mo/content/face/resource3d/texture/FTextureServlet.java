@@ -1,8 +1,6 @@
 package org.mo.content.face.resource3d.texture;
 
 import javax.servlet.http.HttpServletResponse;
-import org.mo.com.io.FByteStream;
-import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -58,19 +56,14 @@ public class FTextureServlet
       if(RString.isEmpty(guid)){
          throw new FFatalError("Texture guid is empty.");
       }
+      //............................................................
       // 获得数据
-      byte[] textureData = _textureConsole.makeTextureData(logicContext, guid);
-      FByteStream stream = new FByteStream();
-      if(textureData == null){
-         String info = RString.format("Texture is not exists. (guid={1})", guid);
-         stream.writeInt32(EResult.Failure.value());
-         stream.writeString(info);
-      }else{
-         stream.writeInt32(EResult.Success.value());
-         stream.write(textureData, 0, textureData.length);
+      byte[] data = _textureConsole.makeTextureData(logicContext, guid);
+      if(data == null){
+         throw new FFatalError("process", "Texture is not exists. (guid={1})", guid);
       }
-      int dataLength = stream.length();
-      byte[] data = stream.memory();
+      int dataLength = data.length;
+      //............................................................
       // 发送数据
       _logger.debug(this, "process", "Send data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");

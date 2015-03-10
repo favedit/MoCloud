@@ -21,6 +21,21 @@ public class FRs3Theme
    }
 
    //============================================================
+   // <T>根据分组唯一编号查找材质。</T>
+   //
+   // @param groupGuid 分组唯一编号
+   // @return 材质
+   //============================================================
+   public FRs3Material findMaterialByGroupGuid(String groupGuid){
+      for(FRs3Material material : _materials){
+         if(groupGuid.equals(material.groupGuid())){
+            return material;
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得网格集合。</T>
    //
    // @return 网格集合

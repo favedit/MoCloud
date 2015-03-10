@@ -4,12 +4,16 @@ import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Resource;
+import org.mo.content.resource3d.template.FRs3Template;
+import org.mo.content.resource3d.texture.FRs3Texture;
 
 //============================================================
 // <T>场景。</T>
@@ -28,6 +32,12 @@ public class FRs3Scene
 
    // 场景区域
    protected FRs3Region _region = new FRs3Region();
+
+   // 纹理集合
+   protected FDictionary<FRs3Texture> _textures = new FDictionary<FRs3Texture>(FRs3Texture.class);
+
+   // 模型集合
+   protected FDictionary<FRs3Template> _templates = new FDictionary<FRs3Template>(FRs3Template.class);
 
    // 场景层集合
    protected FObjects<FRs3SceneLayer> _layers = new FObjects<FRs3SceneLayer>(FRs3SceneLayer.class);
@@ -92,6 +102,24 @@ public class FRs3Scene
    }
 
    //============================================================
+   // <T>获得纹理集合。</T>
+   //
+   // @return 纹理集合
+   //============================================================
+   public FDictionary<FRs3Texture> textures(){
+      return _textures;
+   }
+
+   //============================================================
+   // <T>获得模板集合。</T>
+   //
+   // @return 模板集合
+   //============================================================
+   public FDictionary<FRs3Template> templates(){
+      return _templates;
+   }
+
+   //============================================================
    // <T>获得场景层集合。</T>
    //
    // @return 场景层集合
@@ -128,6 +156,27 @@ public class FRs3Scene
       output.writeString(_themeCode);
       _technique.serialize(output);
       _region.serialize(output);
+      // 存储纹理定义集合
+      if(_textures != null){
+         int count = _textures.count();
+         output.writeInt16((short)count);
+         for(INamePair<FRs3Texture> pair : _textures){
+            byte[] data = pair.value().data();
+            output.write(data, 0, data.length);
+         }
+      }else{
+         output.writeInt16((short)0);
+      }
+      // 存储模板定义集合
+      if(_templates != null){
+         int count = _templates.count();
+         output.writeInt16((short)count);
+         for(INamePair<FRs3Template> pair : _templates){
+            pair.value().serialize(output);
+         }
+      }else{
+         output.writeInt16((short)0);
+      }
       // 存储场景层集合
       if(_layers != null){
          int count = _layers.count();

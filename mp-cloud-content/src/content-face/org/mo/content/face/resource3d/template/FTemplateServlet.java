@@ -3,8 +3,6 @@ package org.mo.content.face.resource3d.template;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.com.io.FByteStream;
-import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -71,19 +69,14 @@ public class FTemplateServlet
          FDataResource3dTemplateUnit unit = _templateConsole.findByCode(logicContext, code);
          guid = unit.guid();
       }
+      //............................................................
       // 生成数据
-      byte[] content = _templateConsole.makeTemplateData(logicContext, guid);
-      FByteStream stream = new FByteStream();
-      if(content == null){
-         String info = RString.format("Template is not exists. (guid={1}, code={2})", guid, code);
-         stream.writeInt32(EResult.Failure.value());
-         stream.writeString(info);
-      }else{
-         stream.writeInt32(EResult.Success.value());
-         stream.write(content, 0, content.length);
+      byte[] data = _templateConsole.makeTemplateData(logicContext, guid);
+      if(data == null){
+         throw new FFatalError("process", "Template is not exists. (guid={1}, code={2})", guid, code);
       }
-      int dataLength = stream.length();
-      byte[] data = stream.memory();
+      int dataLength = data.length;
+      //............................................................
       // 发送数据
       _logger.debug(this, "process", "Send template data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");
