@@ -8,7 +8,7 @@ import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 
-public class RDbImportData
+public class RDbImportTest
 {
    //============================================================
    // <T>导入处理。</T>
@@ -21,7 +21,7 @@ public class RDbImportData
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3StorageConsole storageConsole = RAop.find(IRs3StorageConsole.class);
          //storageConsole.clearData(logicContext);
-         //storageConsole.importData(logicContext, path);
+         storageConsole.importData(logicContext, path);
          storageConsole.importStorage(logicContext, path);
       }
    }
@@ -36,7 +36,7 @@ public class RDbImportData
       try{
          importProcess();
       }catch(Exception e){
-         RLogger.find(RDbImportData.class).error(null, "main", e);
+         RLogger.find(RDbImportTest.class).error(null, "main", e);
       }
       RAop.release();
    }

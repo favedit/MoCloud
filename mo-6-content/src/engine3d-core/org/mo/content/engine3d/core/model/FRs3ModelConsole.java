@@ -47,6 +47,7 @@ import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.mime.lzma.FLzmaFile;
 
 //============================================================
 // <T>资源模型控制台。</T>
@@ -205,7 +206,12 @@ public class FRs3ModelConsole
       // 获得数据
       FByteStream stream = new FByteStream();
       model.serialize(stream);
-      byte[] data = stream.toArray();
+      // 使用LZMA压缩数据
+      byte[] data = null;
+      try(FLzmaFile file = new FLzmaFile(stream.toArray())){
+         data = file.toLzmaArray();
+      }
+      //............................................................
       // 存储数据
       SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dModel, guid, "bin");
       storage.setCode(model.code());

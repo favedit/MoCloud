@@ -1,7 +1,7 @@
 修改服务器： /MySQL/my.ini
 ============================================================
-default-character-set=utf8
-character-set-server=utf8
+[client] default-character-set=utf8
+[mysqld] character-set-server=utf8
 
 链接数据库：
 ============================================================
@@ -20,11 +20,15 @@ x
 创建用户：
 ============================================================
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
+CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
+CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
 
 用户授权：
 ============================================================
 GRANT ALL PRIVILEGES ON *.* TO 'cloud'@'%';
 GRANT ALL ON *.* TO 'cloud'@'%' IDENTIFIED BY "cloud";
+GRANT ALL ON *.* TO 'cloud'@'%' IDENTIFIED BY "Iamcloud1503";
+GRANT ALL ON *.* TO 'cloud'@'localhost' IDENTIFIED BY "Iamcloud1503";
 
 修改最大链接数：
 ============================================================

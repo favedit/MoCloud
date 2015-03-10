@@ -11,5 +11,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-4-web"/>
 	<classpathentry kind="lib" path="lib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-5-cloud"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-lib-lzma"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
