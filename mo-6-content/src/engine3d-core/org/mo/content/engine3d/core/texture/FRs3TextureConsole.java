@@ -8,6 +8,14 @@ import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapImageUnit;
 import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
@@ -210,6 +218,26 @@ public class FRs3TextureConsole
          FDataResourceBitmapImageUnit imageUnit = _bitmapConsole.findBitmapUnit(logicContext, textureBitmapUnit.bitmapId());
          SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
          data = resource.data();
+         if(imageUnit.formatCode().equals("jpg")){
+            // 对大于256K的数据进行降低画质压缩处理
+            if(data.length > 1024 * 256){
+               try{
+                  BufferedImage image = ImageIO.read(new ByteArrayInputStream(data));
+                  ByteOutputStream outputStream = new ByteOutputStream();
+                  ImageOutputStream imageOutputStream = ImageIO.createImageOutputStream(outputStream);
+                  ImageWriter writer = ImageIO.getImageWritersByFormatName("jpeg").next();
+                  ImageWriteParam param = writer.getDefaultWriteParam();
+                  param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+                  param.setCompressionQuality(0.6f);
+                  writer.setOutput(imageOutputStream);
+                  writer.write(null, new IIOImage(image, null, null), param);
+                  writer.dispose();
+                  data = outputStream.getBytes();
+               }catch(Exception e){
+                  throw new FFatalError(e);
+               }
+            }
+         }
       }
       return data;
    }

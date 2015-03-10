@@ -2,7 +2,7 @@
 
 @SET APP_ROOT=%cd%\..
 
-@SET CATALINA_OPTS=-Xms256m -Xmx512m
+@SET CATALINA_OPTS=-Xms512m -Xmx1024m
 @SET CATALINA_HOME=%APP_ROOT%\mt-server\tomcat-cloud.content
 @SET MOBJ_MODE=Logic
 @SET MOBJ_JS=Test
