@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.property.RegionFrame" update_date="20141210134046">
    <Frame name="design3d.scene.property.RegionFrame" type='FDsSceneRegionPropertyFrame' label="显示属性" is_valid="Y" note="">
+      <Panel name='viewPanel' icon='design.panel.icon' label='查看参数'>
+         <Number name="moveSpeed" linker='_controlMoveSpeed' label="移动速度" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="rotationKeySpeed" linker='_controlRotationKeySpeed' label="按键旋转" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number name="rotationMouseSpeed" linker='_controlRotationMouseSpeed' label="鼠标旋转" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
       <Panel name='backgroundPanel' icon='design.panel.icon' label='背景参数'>
          <Check name="optionBackground" linker='_controlOptionBackground' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <ColorPower name="backgroundColor" linker='_controlBackgroundColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='1' note="" />

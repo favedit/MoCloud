@@ -46,6 +46,7 @@ public class FRs3SceneLight
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
@@ -67,12 +68,23 @@ public class FRs3SceneLight
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", makeGuid());
       xconfig.set("type_cd", _typeCd);
       _material.saveConfig(xconfig.createNode("Material"));
       _camera.saveConfig(xconfig.createNode("Camera"));
+   }
+
+   //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
    }
 
    //============================================================

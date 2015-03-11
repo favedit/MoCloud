@@ -40,6 +40,7 @@ public class FRs3SceneCamera
       output.writeString(_typeCd);
       _position.serialize(output);
       _direction.serialize(output);
+      // 存储投影
       _projection.serialize(output);
    }
 
@@ -48,6 +49,7 @@ public class FRs3SceneCamera
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
@@ -69,6 +71,7 @@ public class FRs3SceneCamera
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", makeGuid());
@@ -76,6 +79,24 @@ public class FRs3SceneCamera
       xconfig.set("position", _position);
       xconfig.set("direction", _direction);
       _projection.saveConfig(xconfig.createNode("Projection"));
+   }
+
+   //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 处理所有节点
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("Projection")){
+            _projection.mergeConfig(xnode);
+         }else{
+            throw new FFatalError("Invalid config node.");
+         }
+      }
    }
 
    //============================================================

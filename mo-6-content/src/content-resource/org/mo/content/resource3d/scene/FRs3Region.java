@@ -13,6 +13,15 @@ import org.mo.content.resource3d.common.SFloatColor4;
 public class FRs3Region
       extends FRs3Object
 {
+   // 移动速度
+   protected float _moveSpeed = 0.1f;
+
+   // 旋转按键速度
+   protected float _rotationKeySpeed = 0.005f;
+
+   // 旋转鼠标速度
+   protected float _rotationMouseSpeed = 0.003f;
+
    // 颜色
    protected SFloatColor4 _color = new SFloatColor4();
 
@@ -56,7 +65,12 @@ public class FRs3Region
       super.serialize(output);
       // 存储属性
       _color.serialize(output);
+      output.writeFloat(_moveSpeed);
+      output.writeFloat(_rotationKeySpeed);
+      output.writeFloat(_rotationMouseSpeed);
+      // 存储相机
       _camera.serialize(output);
+      // 存储光源
       _light.serialize(output);
    }
 
@@ -70,6 +84,9 @@ public class FRs3Region
       // 读取属性
       _guid = xconfig.get("guid");
       _color.parse(xconfig.get("color"));
+      _moveSpeed = xconfig.getFloat("move_speed", _moveSpeed);
+      _rotationKeySpeed = xconfig.getFloat("rotation_key_speed", _rotationKeySpeed);
+      _rotationMouseSpeed = xconfig.getFloat("rotation_mouse_speed", _rotationMouseSpeed);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Camera")){
@@ -92,8 +109,38 @@ public class FRs3Region
       // 存储属性
       xconfig.set("guid", makeGuid());
       xconfig.set("color", _color);
+      xconfig.set("move_speed", _moveSpeed);
+      xconfig.set("rotation_key_speed", _rotationKeySpeed);
+      xconfig.set("rotation_mouse_speed", _rotationMouseSpeed);
+      // 存储相机
       _camera.saveConfig(xconfig.createNode("Camera"));
+      // 存储光源
       _light.saveConfig(xconfig.createNode("Light"));
+   }
+
+   //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 读取属性
+      _color.parse(xconfig.get("color"));
+      _moveSpeed = xconfig.getFloat("move_speed", _moveSpeed);
+      _rotationKeySpeed = xconfig.getFloat("rotation_key_speed", _rotationKeySpeed);
+      _rotationMouseSpeed = xconfig.getFloat("rotation_mouse_speed", _rotationMouseSpeed);
+      // 处理所有节点
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("Camera")){
+            _camera.mergeConfig(xnode);
+         }else if(xnode.isName("Light")){
+            _light.mergeConfig(xnode);
+         }else{
+            throw new FFatalError("Invalid config node.");
+         }
+      }
    }
 
    //============================================================

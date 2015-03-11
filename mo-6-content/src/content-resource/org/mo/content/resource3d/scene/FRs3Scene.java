@@ -236,10 +236,10 @@ public class FRs3Scene
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Technique")){
             // 读取技术
-            //_technique.loadConfig(xnode);
+            _technique.mergeConfig(xnode);
          }else if(xnode.isName("Region")){
             // 读取区域
-            //_region.loadConfig(xnode);
+            _region.mergeConfig(xnode);
          }else if(xnode.isName("LayerCollection")){
             // 读取层集合
             for(FXmlNode xlayer : xnode){
