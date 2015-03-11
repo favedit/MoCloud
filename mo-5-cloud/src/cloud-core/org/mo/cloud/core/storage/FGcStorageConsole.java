@@ -172,6 +172,31 @@ public class FGcStorageConsole
    }
 
    //============================================================
+   // <T>删除一个存储集合。</T>
+   //
+   // @param catalog 集合分类
+   // @return 处理结果
+   //============================================================
+   @Override
+   public boolean drop(String catalog){
+      // 检查参数
+      if(RString.isEmpty(catalog)){
+         throw new FFatalError("Parameter catalog is empty.");
+      }
+      //............................................................
+      // 删除集合
+      if(_database.collectionExists(catalog)){
+         DBCollection collection = _database.getCollection(catalog);
+         collection.drop();
+         _logger.debug(this, "drop", "Drop data collection. (name={1})", catalog);
+         return true;
+      }else{
+         _logger.debug(this, "drop", "Data collection is not exists. (name={1})", catalog);
+         return false;
+      }
+   }
+
+   //============================================================
    // <T>保存一个存储信息。</T>
    //
    // @param storage 存储信息

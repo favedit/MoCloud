@@ -127,34 +127,35 @@ public class FRs3Template
       //      _code = xconfig.get("code");
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
-         //         if(xnode.isName("MaterialGroupCollection")){
-         //            // 读取材质组集合
-         //            for(FXmlNode xchild : xnode){
-         //               if(xchild.isName("MaterialGroup")){
-         //                  FRs3MaterialGroup materialGroup = new FRs3MaterialGroup();
-         //                  materialGroup.loadConfig(xchild);
-         //                  _materialGroups.set(materialGroup.guid(), materialGroup);
-         //               }
-         //            }
-         //         }else if(xnode.isName("ThemeCollection")){
-         //            // 读取主题集合
-         //            for(FXmlNode xchild : xnode){
-         //               if(xchild.isName("Theme")){
-         //                  FRs3Theme theme = new FRs3Theme();
-         //                  theme.loadConfig(xchild);
-         //                  _themes.push(theme);
-         //               }
-         //            }
-         //         }else 
-         if(xnode.isName("DisplayCollection")){
+         if(xnode.isName("MaterialGroupCollection")){
+            // 读取材质组集合
+            //            for(FXmlNode xchild : xnode){
+            //               if(xchild.isName("MaterialGroup")){
+            //                  FRs3MaterialGroup materialGroup = new FRs3MaterialGroup();
+            //                  materialGroup.loadConfig(xchild);
+            //                  _materialGroups.set(materialGroup.guid(), materialGroup);
+            //               }
+            //            }
+         }else if(xnode.isName("ThemeCollection")){
+            // 读取主题集合
+            //            for(FXmlNode xchild : xnode){
+            //               if(xchild.isName("Theme")){
+            //                  FRs3Theme theme = new FRs3Theme();
+            //                  theme.loadConfig(xchild);
+            //                  _themes.push(theme);
+            //               }
+            //            }
+         }else if(xnode.isName("DisplayCollection")){
             // 读取显示集合
             for(FXmlNode xchild : xnode){
-               if(xchild.isName("Sprite")){
+               if(xchild.isName("Sprite") || xchild.isName("Display")){
                   FRs3Sprite display = new FRs3Sprite();
                   display.loadConfig(xchild);
                   _displays.push(display);
                }
             }
+         }else{
+            throw new FFatalError("Unknown child node. (name={1})", xnode.name());
          }
       }
    }

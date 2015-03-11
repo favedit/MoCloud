@@ -1,14 +1,8 @@
 package org.mo.content.face.resource3d.material;
 
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.com.io.FByteStream;
-import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.RString;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 import org.mo.content.engine3d.core.model.IRs3ModelConsole;
-import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -24,7 +18,7 @@ public class FStorageServlet
          IStorageServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FStorageServlet.class);
+   //private static ILogger _logger = RLogger.find(FStorageServlet.class);
 
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;
@@ -56,23 +50,5 @@ public class FStorageServlet
                        ILogicContext logicContext,
                        IWebServletRequest request,
                        IWebServletResponse response){
-      // 检查代码
-      String code = context.parameter("code");
-      if(RString.isEmpty(code)){
-         throw new FFatalError("Model code is empty.");
-      }
-      // 检查版本
-      String version = context.parameter("version");
-      if(RString.isEmpty(version)){
-         throw new FFatalError("Model version is empty.");
-      }
-      // 生成模型
-      FRs3Model model = _modelConsole.makeModel(logicContext, code);
-      // 存储为数组
-      FByteStream stream = new FByteStream();
-      model.serialize(stream);
-      // 发送数据
-      _logger.debug(this, "process", "Send data. (length={1})", stream.length());
-      response.write(stream.memory(), 0, stream.length());
    }
 }

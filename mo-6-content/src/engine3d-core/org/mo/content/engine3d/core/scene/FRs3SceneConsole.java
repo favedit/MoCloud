@@ -18,6 +18,7 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.content.resource3d.common.FRs3Material;
@@ -30,6 +31,7 @@ import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.content.resource3d.texture.FRs3Texture;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.mime.lzma.FLzmaFile;
 
 //============================================================
 // <T>资源场景控制台。</T>
@@ -157,7 +159,7 @@ public class FRs3SceneConsole
             for(FRs3MaterialTexture materialTexture : material.textures()){
                String textureGuid = materialTexture.textureGuid();
                if(!textures.contains(textureGuid)){
-                  byte[] data = _textureConsole.makeTextureData(logicContext, textureGuid);
+                  byte[] data = _textureConsole.makeTextureData(logicContext, textureGuid, false);
                   FRs3Texture texture = new FRs3Texture();
                   texture.setData(data);
                   textures.set(textureGuid, texture);
@@ -189,10 +191,14 @@ public class FRs3SceneConsole
       // 获得数据
       FByteStream stream = new FByteStream();
       scene.serialize(stream);
-      byte[] data = stream.toArray();
+      // 使用LZMA压缩数据
+      byte[] data = null;
+      try(FLzmaFile file = new FLzmaFile(stream.toArray())){
+         data = file.toLzmaArray();
+      }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dSceneTheme, guid, "bin");
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dSceneTheme, guid, EMime.Bin.type());
       storage.setCode(scene.code());
       storage.setData(data);
       _storageConsole.store(storage);

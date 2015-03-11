@@ -20,6 +20,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.net.EMime;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.content.resource3d.texture.FRs3Texture;
 import org.mo.content.resource3d.texture.FRs3TextureBitmap;
@@ -28,6 +29,7 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
+import org.mo.mime.lzma.FLzmaFile;
 
 //============================================================
 // <T>资源纹理控制台。</T>
@@ -113,18 +115,34 @@ public class FRs3TextureConsole
    }
 
    //============================================================
-   // <T>生成纹理。</T>
+   // <T>生成纹理数据。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
-   // @return 处理结果
+   // @return 数据
    //============================================================
    @Override
    public byte[] makeTextureData(ILogicContext logicContext,
                                  String guid){
+      return makeTextureData(logicContext, guid, true);
+   }
+
+   //============================================================
+   // <T>生成纹理数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param compress 是否压缩
+   // @return 数据
+   //============================================================
+   @Override
+   public byte[] makeTextureData(ILogicContext logicContext,
+                                 String guid,
+                                 boolean compress){
+      String catalog = compress ? EGcStorageCatalog.Resource3dTextureCompress : EGcStorageCatalog.Resource3dTexture;
       //............................................................
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTexture, guid);
+      SGcStorage findStorage = _storageConsole.find(catalog, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -134,9 +152,18 @@ public class FRs3TextureConsole
       // 获得数据
       FByteStream stream = new FByteStream();
       texture.serialize(stream);
-      byte[] data = stream.toArray();
+      byte[] data = null;
+      if(compress){
+         // 使用LZMA压缩数据
+         try(FLzmaFile file = new FLzmaFile(stream.toArray())){
+            data = file.toLzmaArray();
+         }
+      }else{
+         data = stream.toArray();
+      }
+      //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTexture, guid, "bin");
+      SGcStorage storage = new SGcStorage(catalog, guid, EMime.Bin.type());
       storage.setCode(texture.code());
       storage.setData(data);
       _storageConsole.store(storage);
@@ -237,7 +264,10 @@ public class FRs3TextureConsole
          }
          // 压缩数据
          try(FImage image = new FImage(data)){
-            data = image.toJpegBytes(quality);
+            // 数据转换不支持多线程处理
+            synchronized(this){
+               data = image.toJpegBytes(quality);
+            }
          }catch(Exception e){
             throw new FFatalError(e);
          }

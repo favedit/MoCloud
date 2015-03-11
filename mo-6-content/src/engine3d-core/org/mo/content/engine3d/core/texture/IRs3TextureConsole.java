@@ -31,14 +31,26 @@ public interface IRs3TextureConsole
                            String guid);
 
    //============================================================
-   // <T>生成纹理。</T>
+   // <T>生成纹理数据。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
-   // @return 处理结果
+   // @return 数据
    //============================================================
    byte[] makeTextureData(ILogicContext logicContext,
                           String guid);
+
+   //============================================================
+   // <T>生成纹理数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param compress 是否压缩
+   // @return 数据
+   //============================================================
+   byte[] makeTextureData(ILogicContext logicContext,
+                          String guid,
+                          boolean compress);
 
    //============================================================
    // <T>生成纹理位图。</T>

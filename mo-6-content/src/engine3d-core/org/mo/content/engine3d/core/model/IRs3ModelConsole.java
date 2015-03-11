@@ -33,19 +33,21 @@ public interface IRs3ModelConsole
                                           String code);
 
    //============================================================
-   // <T>逻辑处理。</T>
+   // <T>生成资源模型。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
+   // @return 资源模型
    //============================================================
    FRs3Model makeModel(ILogicContext logicContext,
                        String guid);
 
    //============================================================
-   // <T>逻辑处理。</T>
+   // <T>生成资源模型数据。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
+   // @return 资源模型数据
    //============================================================
    byte[] makeModelData(ILogicContext logicContext,
                         String guid);

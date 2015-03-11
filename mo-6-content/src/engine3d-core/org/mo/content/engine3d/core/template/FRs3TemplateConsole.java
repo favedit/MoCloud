@@ -26,6 +26,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.net.EMime;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.engine.core.bitmap.IResBitmapConsole;
@@ -45,6 +46,7 @@ import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.mime.lzma.FLzmaFile;
 
 //============================================================
 // <T>资源模板控制台。</T>
@@ -188,6 +190,7 @@ public class FRs3TemplateConsole
       // 读取内容
       FRs3Template template = new FRs3Template();
       template.loadUnit(templateUnit);
+      //............................................................
       // 查找材质组
       FDataResource3dTemplateMaterialGroupLogic templateMaterialGroupLogic = logicContext.findLogic(FDataResource3dTemplateMaterialGroupLogic.class);
       String materialGroupSql = FDataResource3dTemplateMaterialGroupLogic.TEMPLATE_ID + "=" + templateUnit.ouid();
@@ -198,6 +201,7 @@ public class FRs3TemplateConsole
          group.loadUnit(materialGroup);
          template.materialGroups().set(group.guid(), group);
       }
+      //............................................................
       // 查找主题
       FDataResource3dTemplateThemeLogic templateThemeLogic = logicContext.findLogic(FDataResource3dTemplateThemeLogic.class);
       String themeSql = FDataResource3dTemplateThemeLogic.TEMPLATE_ID + "=" + templateUnit.ouid();
@@ -207,6 +211,7 @@ public class FRs3TemplateConsole
          FRs3Theme theme = new FRs3Theme();
          theme.loadUnit(themeUnit);
          template.themes().push(theme);
+         //............................................................
          // 查找材质
          FDataResource3dMaterialLogic materialLogic = logicContext.findLogic(FDataResource3dMaterialLogic.class);
          String materialSql = FDataResource3dMaterialLogic.THEME_ID + "=" + themeUnit.ouid();
@@ -217,6 +222,7 @@ public class FRs3TemplateConsole
             material.loadUnit(materialUnit);
             material.setGroupGuid(materialGroup.guid());
             theme.materials().push(material);
+            //............................................................
             // 查找纹理
             FDataResource3dMaterialTextureLogic materialTextureLogic = logicContext.findLogic(FDataResource3dMaterialTextureLogic.class);
             String materialTextureSql = FDataResource3dMaterialTextureLogic.MATERIAL_ID + "=" + materialUnit.ouid();
@@ -256,9 +262,14 @@ public class FRs3TemplateConsole
       // 获得数据
       FByteStream stream = new FByteStream();
       template.serialize(stream);
-      byte[] data = stream.toArray();
+      // 使用LZMA压缩数据
+      byte[] data = null;
+      try(FLzmaFile file = new FLzmaFile(stream.toArray())){
+         data = file.toLzmaArray();
+      }
+      //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTemplate, guid, "bin");
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTemplate, guid, EMime.Bin.type());
       storage.setCode(template.code());
       storage.setData(data);
       _storageConsole.store(storage);

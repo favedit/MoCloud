@@ -29,6 +29,8 @@ public class FRs3DisplayContainer
       switch(name){
          case "Sprite":
             return new FRs3Sprite();
+         case "Display":
+            return new FRs3Sprite();
       }
       throw new FFatalError("Invalid type.");
    }
@@ -51,12 +53,15 @@ public class FRs3DisplayContainer
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
       // 处理所有节点
-      for(FXmlNode xnode : xconfig){
-         if(xnode.isName("DisplayCollection")){
-            for(FXmlNode xchild : xnode){
-               FRs3Display display = createChild(xchild);
-               display.loadConfig(xchild);
+      FXmlNode xdisplays = xconfig.findNode("DisplayCollection");
+      if(xdisplays != null){
+         for(FXmlNode xdisplay : xdisplays){
+            if(xdisplay.isName("Display")){
+               FRs3Display display = createChild(xdisplay);
+               display.loadConfig(xdisplay);
                _displays.push(display);
+            }else{
+               throw new FFatalError("Unknown child node. (name={1})", xdisplay.name());
             }
          }
       }

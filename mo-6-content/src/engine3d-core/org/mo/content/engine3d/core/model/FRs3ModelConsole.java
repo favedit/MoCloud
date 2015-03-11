@@ -33,6 +33,7 @@ import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
 import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
 import org.mo.content.engine3d.core.skeleton.IRs3SkeletonConsole;
@@ -111,10 +112,11 @@ public class FRs3ModelConsole
    }
 
    //============================================================
-   // <T>逻辑处理。</T>
+   // <T>生成资源模型。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
+   // @return 资源模型
    //============================================================
    @Override
    public FRs3Model makeModel(ILogicContext logicContext,
@@ -186,15 +188,15 @@ public class FRs3ModelConsole
    }
 
    //============================================================
-   // <T>逻辑处理。</T>
+   // <T>生成资源模型数据。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
+   // @return 资源模型数据
    //============================================================
    @Override
    public byte[] makeModelData(ILogicContext logicContext,
                                String guid){
-      //............................................................
       // 查找数据
       SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dModel, guid);
       if(findStorage != null){
@@ -213,7 +215,7 @@ public class FRs3ModelConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dModel, guid, "bin");
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dModel, guid, EMime.Bin.type());
       storage.setCode(model.code());
       storage.setData(data);
       _storageConsole.store(storage);
