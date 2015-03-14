@@ -5,6 +5,8 @@
 @SET TARGET=%HOME%\AliSvn-Microbject
 
 xcopy /E /I /Y %SOURCE%\mp-cloud-content\webroot %TARGET%\cloud.content\webroot
-xcopy /E /I /Y %HOME%\MoScript\source\ajs %TARGET%\cloud.content\script\ajs
-xcopy /E /I /Y %HOME%\MoScript\source\ejs %TARGET%\cloud.content\script\ejs
-xcopy /E /I /Y %HOME%\MoScript\source\design %TARGET%\cloud.content\script\design
+
+xcopy /E /I /Y %HOME%\MoScript\source\home        %TARGET%\webroot
+xcopy /E /I /Y %HOME%\MoScript\source\ajs\release %TARGET%\webroot\engine\ajs
+xcopy /E /I /Y %HOME%\MoScript\source\ar3\shader  %TARGET%\webroot\engine\ar3\shader
+xcopy /E /I /Y %HOME%\MoScript\source\ars         %TARGET%\webroot\engine\ars
