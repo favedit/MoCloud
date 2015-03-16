@@ -14,13 +14,13 @@ public class FRs3Region
       extends FRs3Object
 {
    // 移动速度
-   protected float _moveSpeed = 0.5f;
+   protected float _moveSpeed = 35.0f;
 
    // 旋转按键速度
-   protected float _rotationKeySpeed = 0.01f;
+   protected float _rotationKeySpeed = 2.5f;
 
    // 旋转鼠标速度
-   protected float _rotationMouseSpeed = 0.003f;
+   protected float _rotationMouseSpeed = 0.0035f;
 
    // 颜色
    protected SFloatColor4 _color = new SFloatColor4();

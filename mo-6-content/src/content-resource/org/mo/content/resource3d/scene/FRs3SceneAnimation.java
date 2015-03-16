@@ -2,49 +2,40 @@ package org.mo.content.resource3d.scene;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.RString;
-import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
-import org.mo.content.resource3d.common.SFloatVector3;
 
 //============================================================
-// <T>场景动画。</T>
+// <T>场景显示。</T>
 //============================================================
-public class FRs3SceneMovie
+public class FRs3SceneAnimation
       extends FRs3Object
 {
-   // 类型代码
-   protected String _typeCode;
-
-   // 间隔
-   protected int _interval;
-
-   // 旋转信息
-   protected SFloatVector3 _rotation = new SFloatVector3();
+   // 播放速率
+   protected float _playRate;
 
    //============================================================
-   // <T>构造场景动画。</T>
+   // <T>构造场景显示。</T>
    //============================================================
-   public FRs3SceneMovie(){
+   public FRs3SceneAnimation(){
    }
 
    //============================================================
-   // <T>获得类型代码。</T>
+   // <T>获得播放速率。</T>
    //
-   // @return 类型代码
+   // @return 播放速率
    //============================================================
-   public String typeCode(){
-      return _typeCode;
+   public float playRate(){
+      return _playRate;
    }
 
    //============================================================
-   // <T>设置类型代码。</T>
+   // <T>设置播放速率。</T>
    //
-   // @param typeCode 类型代码
+   // @param playRate 播放速率
    //============================================================
-   public void setTypeCode(String typeCode){
-      _typeCode = typeCode;
+   public void setPlayRate(float playRate){
+      _playRate = playRate;
    }
 
    //============================================================
@@ -56,8 +47,7 @@ public class FRs3SceneMovie
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 存储属性
-      output.writeInt32(_interval);
-      _rotation.serialize(output);
+      output.writeFloat(_playRate);
    }
 
    //============================================================
@@ -68,13 +58,8 @@ public class FRs3SceneMovie
    @Override
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
-      // 检查唯一编号
-      if(RString.isEmpty(_guid)){
-         _guid = RUuid.makeUniqueId();
-      }
       // 读取属性
-      _interval = xconfig.getInt("interval");
-      _rotation.parse(xconfig.get("rotation"));
+      _playRate = xconfig.getFloat("play_rate", _playRate);
    }
 
    //============================================================
@@ -85,9 +70,8 @@ public class FRs3SceneMovie
    @Override
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
-      // 读取属性
-      _interval = xconfig.getInt("interval");
-      _rotation.parse(xconfig.get("rotation"));
+      // 读取节点集合
+      _playRate = xconfig.getFloat("play_rate", _playRate);
    }
 
    //============================================================
@@ -99,8 +83,7 @@ public class FRs3SceneMovie
    public void saveConfig(FXmlNode xconfig){
       super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("interval", _interval);
-      xconfig.set("rotation", _rotation);
+      xconfig.set("play_rate", _playRate);
    }
 
    //============================================================
@@ -109,9 +92,5 @@ public class FRs3SceneMovie
    // @param input 输入流
    //============================================================
    public void importData(IDataInput input){
-      // 读取属性
-      _code = input.readString();
-      _interval = input.readInt32();
-      _rotation.unserialize(input);
    }
 }

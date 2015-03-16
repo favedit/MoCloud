@@ -141,6 +141,10 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField VALUE_MAX = new FContentField("valueMax", "value_max", EContentData.String, "", "", "", "YYNY");
 
+   // 值精度的定义
+   @AContentField
+   public final static FContentField VALUE_PRECISION = new FContentField("valuePrecision", "value_precision", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -282,6 +286,10 @@ public abstract class XBaseColumnNumber
    // 最大值
    @AName("value_max")
    protected String _valueMax;
+
+   // 值精度
+   @AName("value_precision")
+   protected String _valuePrecision;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -839,6 +847,24 @@ public abstract class XBaseColumnNumber
    //============================================================
    public void setValueMax(String value){
       _valueMax = value;
+   }
+
+   //============================================================
+   // <T>获得值精度的内容。</T>
+   //
+   // @return 值精度
+   //============================================================
+   public String getValuePrecision(){
+      return _valuePrecision;
+   }
+
+   //============================================================
+   // <T>设置值精度的内容。</T>
+   //
+   // @param value 值精度
+   //============================================================
+   public void setValuePrecision(String value){
+      _valuePrecision = value;
    }
 
 }

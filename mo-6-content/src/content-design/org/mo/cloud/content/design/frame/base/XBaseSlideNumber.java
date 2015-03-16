@@ -145,6 +145,10 @@ public abstract class XBaseSlideNumber
    @AContentField
    public final static FContentField VALUE_MAX = new FContentField("valueMax", "value_max", EContentData.String, "", "", "", "YYNY");
 
+   // 值精度的定义
+   @AContentField
+   public final static FContentField VALUE_PRECISION = new FContentField("valuePrecision", "value_precision", EContentData.String, "", "", "", "YYNY");
+
    // 输入尺寸的定义
    @AContentField
    public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
@@ -294,6 +298,10 @@ public abstract class XBaseSlideNumber
    // 最大值
    @AName("value_max")
    protected String _valueMax;
+
+   // 值精度
+   @AName("value_precision")
+   protected String _valuePrecision;
 
    // 输入尺寸
    @AName("input_size")
@@ -873,6 +881,24 @@ public abstract class XBaseSlideNumber
    //============================================================
    public void setValueMax(String value){
       _valueMax = value;
+   }
+
+   //============================================================
+   // <T>获得值精度的内容。</T>
+   //
+   // @return 值精度
+   //============================================================
+   public String getValuePrecision(){
+      return _valuePrecision;
+   }
+
+   //============================================================
+   // <T>设置值精度的内容。</T>
+   //
+   // @param value 值精度
+   //============================================================
+   public void setValuePrecision(String value){
+      _valuePrecision = value;
    }
 
    //============================================================

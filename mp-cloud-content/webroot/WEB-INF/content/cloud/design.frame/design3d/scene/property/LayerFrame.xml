@@ -2,9 +2,23 @@
 <Content name="design3d.template.property.LayerFrame" update_date="20141210134046">
    <Frame type='FDsSceneLayerPropertyFrame' name="design3d.template.property.LayerFrame" label="显示层属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
       <Panel name='infoPanel' icon='design.panel.icon' label='显示层属性'>
-         <Edit name="guid" linker='_controlGuid' label="标识:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="code" linker='_controlCode' label="代码:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" linker='_controlLabel' label="名称:" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='optionPanel' icon='design.panel.icon' label='设置属性'>
+         <Select name="typeCd" linker='_controlTypeCd' label="类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+            <SelectItem name="sky" label="天空层" data_value='sky'/>
+            <SelectItem name="map" label="地图层" data_value='map'/>
+            <SelectItem name="sprite" label="精灵层" data_value='sprite'/>
+            <SelectItem name="ui" label="界面层" data_value='ui'/>
+         </Select>
+         <Select name="transformCd" linker='_controlTransformCd' label="变换" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+            <SelectItem name="cameraPosition" label="相机位置" data_value='camera.position'/>
+            <SelectItem name="cameraDirection" label="相机方向" data_value='camera.direction'/>
+            <SelectItem name="bilboardedSphere" label="球形公告牌" data_value='bilboarded.sphere'/>
+            <SelectItem name="bilboardedCylinder" label="圆柱公告牌" data_value='bilboarded.cylinder'/>
+         </Select>
       </Panel>
    </Frame>
 </Content>

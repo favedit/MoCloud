@@ -14,6 +14,10 @@ import org.mo.content.resource3d.common.FRs3Object;
 public class FRs3SceneLayer
       extends FRs3Object
 {
+   // 变换类型
+   protected String _transformCd;
+
+   // 类型名称
    protected String _typeCd;
 
    // 场景技术过程集合
@@ -84,6 +88,9 @@ public class FRs3SceneLayer
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
+      // 输出属性
+      output.writeString(_typeCd);
+      output.writeString(_transformCd);
       // 存储技术过程集合
       if(_displays != null){
          int count = _displays.count();
@@ -103,10 +110,10 @@ public class FRs3SceneLayer
    //============================================================
    @Override
    public void loadConfig(FXmlNode xconfig){
+      super.loadConfig(xconfig);
       // 读取属性
-      _guid = xconfig.get("guid");
-      _code = xconfig.get("code");
-      _label = xconfig.get("label");
+      _typeCd = xconfig.get("type_cd", _typeCd);
+      _transformCd = xconfig.get("transform_cd", _transformCd);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("DisplayCollection")){
@@ -130,6 +137,9 @@ public class FRs3SceneLayer
    @Override
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
+      // 读取属性
+      _typeCd = xconfig.get("type_cd", _typeCd);
+      _transformCd = xconfig.get("transform_cd", _transformCd);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("DisplayCollection")){
@@ -152,11 +162,10 @@ public class FRs3SceneLayer
    //============================================================
    @Override
    public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("guid", makeGuid());
-      xconfig.set("code", _code);
-      xconfig.set("label", _label);
       xconfig.set("type_cd", _typeCd);
+      xconfig.set("transform_cd", _transformCd);
       // 存储层集合
       if(_displays != null){
          FXmlNode xdisplays = xconfig.createNode("DisplayCollection");

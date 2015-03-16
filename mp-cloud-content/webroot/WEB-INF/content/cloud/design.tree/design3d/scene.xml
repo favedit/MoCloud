@@ -10,6 +10,8 @@
      <TreeNodeType name="layer" linker="Layer" label="显示层" is_valid="Y" note="" icon="design3d.scene.layer"/>
      <TreeNodeType name="display" linker="Display" label="显示对象" is_valid="Y" note="" icon="design3d.scene.display"/>
      <TreeNodeType name="material" linker="Material" label="渲染材质" is_valid="Y" note="" icon="design3d.scene.material"/>
+     <TreeNodeType name="animation" linker="Animation" label="动画对象" is_valid="Y" note="" icon="design3d.scene.animation"/>
+     <TreeNodeType name="movie" linker="Movie" label="剪辑对象" is_valid="Y" note="" icon="design3d.scene.movie"/>
      <TreeNodeType name="renderable" linker="Renderable" label="渲染对象" is_valid="Y" note="" icon="design3d.scene.renderable"/>
    </TreeView>
 </Content>

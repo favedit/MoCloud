@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150228125935">
+<Content name="design.frame" update_date="20150316102013">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -82,6 +82,7 @@
     <Interface is_valid="Y" name="MPropertyNumber" label="数字属性" class_name="org.mo.cloud.content.design.frame.common.XProperyNumber" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="value_min" label="最小值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="value_max" label="最大值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="value_precision" label="值精度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="MPropertyEdit" label="编辑属性" class_name="org.mo.cloud.content.design.frame.common.XProperyEdit" inherits="MEditZoom,MEditReference" note="">
       <Attribute is_valid="Y" type="String" name="edit_case_cd" label="编辑大小写类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />

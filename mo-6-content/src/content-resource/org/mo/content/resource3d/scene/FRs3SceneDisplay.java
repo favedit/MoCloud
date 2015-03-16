@@ -22,6 +22,9 @@ public class FRs3SceneDisplay
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
 
    // 场景动画集合
+   protected FObjects<FRs3SceneAnimation> _animations;
+
+   // 场景剪辑集合
    protected FObjects<FRs3SceneMovie> _movies;
 
    // 场景材质集合
@@ -61,6 +64,69 @@ public class FRs3SceneDisplay
    //============================================================
    public SFloatMatrix3d matrix(){
       return _matrix;
+   }
+
+   //============================================================
+   // <T>判断是否含有动画。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasAnimation(){
+      return (_animations != null) ? !_animations.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找动画对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 动画对象
+   //============================================================
+   public FRs3SceneAnimation findAnimationByGuid(String guid){
+      if(!RString.isEmpty(guid) && (_animations != null)){
+         for(FRs3SceneAnimation animation : _animations){
+            if(guid.equals(animation.guid())){
+               return animation;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找动画对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 动画对象
+   //============================================================
+   public FRs3SceneAnimation syncAnimationByGuid(String guid){
+      FRs3SceneAnimation animation = findAnimationByGuid(guid);
+      if(animation == null){
+         animation = new FRs3SceneAnimation();
+         animation.setGuid(guid);
+         pushAnimation(animation);
+      }
+      return animation;
+   }
+
+   //============================================================
+   // <T>获得场景动画集合。</T>
+   //
+   // @return 场景动画集合
+   //============================================================
+   public FObjects<FRs3SceneAnimation> animations(){
+      return _animations;
+   }
+
+   //============================================================
+   // <T>增加一个场景动画。</T>
+   //
+   // @param movie 场景动画
+   //============================================================
+   public void pushAnimation(FRs3SceneAnimation animation){
+      if(_animations == null){
+         _animations = new FObjects<FRs3SceneAnimation>(FRs3SceneAnimation.class);
+      }
+      _animations.push(animation);
    }
 
    //============================================================
@@ -207,6 +273,16 @@ public class FRs3SceneDisplay
       output.writeString(_templateGuid);
       _matrix.serialize(output);
       // 存储动画集合
+      if(_animations != null){
+         int count = _animations.count();
+         output.writeUint16(count);
+         for(FRs3SceneAnimation animation : _animations){
+            animation.serialize(output);
+         }
+      }else{
+         output.writeUint16(0);
+      }
+      // 存储动画集合
       if(_movies != null){
          int count = _movies.count();
          output.writeUint16(count);
@@ -253,8 +329,15 @@ public class FRs3SceneDisplay
          if(xnode.isName("Matrix")){
             // 读取矩阵
             _matrix.loadConfig(xnode);
-         }else if(xnode.isName("MovieCollection")){
+         }else if(xnode.isName("AnimationCollection")){
             // 读取动画集合
+            for(FXmlNode xanimation : xnode){
+               FRs3SceneAnimation animation = new FRs3SceneAnimation();
+               animation.loadConfig(xanimation);
+               pushAnimation(animation);
+            }
+         }else if(xnode.isName("MovieCollection")){
+            // 读取剪辑集合
             for(FXmlNode xmovie : xnode){
                FRs3SceneMovie movie = new FRs3SceneMovie();
                movie.loadConfig(xmovie);
@@ -293,8 +376,15 @@ public class FRs3SceneDisplay
          if(xnode.isName("Matrix")){
             // 读取矩阵
             _matrix.loadConfig(xnode);
-         }else if(xnode.isName("MovieCollection")){
+         }else if(xnode.isName("AnimationCollection")){
             // 读取动画集合
+            for(FXmlNode xanimation : xnode){
+               String animationGuid = xanimation.get("guid");
+               FRs3SceneAnimation animation = syncAnimationByGuid(animationGuid);
+               animation.mergeConfig(xanimation);
+            }
+         }else if(xnode.isName("MovieCollection")){
+            // 读取剪辑集合
             for(FXmlNode xmovie : xnode){
                String movieGuid = xmovie.get("guid");
                FRs3SceneMovie movie = findMovieByGuid(movieGuid);
@@ -332,6 +422,13 @@ public class FRs3SceneDisplay
       xconfig.set("template_guid", _templateGuid);
       _matrix.saveConfig(xconfig.createNode("Matrix"));
       // 存储动画集合
+      if(_animations != null){
+         FXmlNode xanimation = xconfig.createNode("AnimationCollection");
+         for(FRs3SceneAnimation animation : _animations){
+            animation.saveConfig(xanimation.createNode("Animation"));
+         }
+      }
+      // 存储剪辑集合
       if(_movies != null){
          FXmlNode xmovies = xconfig.createNode("MovieCollection");
          for(FRs3SceneMovie movie : _movies){
@@ -363,7 +460,7 @@ public class FRs3SceneDisplay
       // 读取属性
       _code = input.readString();
       _matrix.unserialize(input);
-      // 读取动画集合
+      // 读取剪辑集合
       int movieCount = input.readInt32();
       for(int n = 0; n < movieCount; n++){
          FRs3SceneMovie movie = new FRs3SceneMovie();
