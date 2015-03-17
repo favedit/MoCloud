@@ -33,8 +33,13 @@ public class FRs3StorageConsole
    @AProperty
    protected String _configFileName;
 
+   // 文件编码
+   protected String _charset = "utf-8";
+
+   // 数据库配置
    protected FXmlNode _xdatabaseMysql;
 
+   // 存储配置
    protected FXmlNode _xdatabaseMongo;
 
    // 存储控制台
@@ -72,7 +77,7 @@ public class FRs3StorageConsole
    public EResult exportData(ILogicContext logicContext,
                              String path){
       ISqlConnection connection = logicContext.activeConnection();
-      FDataExport exportor = new FDataExport(connection);
+      FDataExport exportor = new FDataExport(connection, _charset);
       for(FXmlNode xdataset : _xdatabaseMysql.nodes()){
          String dataName = xdataset.get("data_name");
          String fileName = RFile.format(path + "/" + dataName + ".pck");
@@ -120,7 +125,7 @@ public class FRs3StorageConsole
    public EResult importData(ILogicContext logicContext,
                              String path){
       ISqlConnection connection = logicContext.activeConnection();
-      FDataImport importor = new FDataImport(connection);
+      FDataImport importor = new FDataImport(connection, _charset);
       for(FXmlNode xdataset : _xdatabaseMysql.nodes()){
          String dataName = xdataset.get("data_name");
          String fileName = RFile.format(path + "/" + dataName + ".pck");

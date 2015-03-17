@@ -15,14 +15,15 @@ public class RDbImportData
    //============================================================
    public static void importProcess() throws Exception{
       // 设置数据
-      String path = RRs3Configuration.RootPath + "/Database/Assest";
+      //String path = RRs3Configuration.RootPath + "/Database/Assest";
+      String path = RRs3Configuration.RootPath + "/MoResource/Assest";
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IRs3StorageConsole storageConsole = RAop.find(IRs3StorageConsole.class);
          //storageConsole.clearData(logicContext);
-         //storageConsole.importData(logicContext, path);
-         storageConsole.importStorage(logicContext, path);
+         storageConsole.importData(logicContext, path);
+         //storageConsole.importStorage(logicContext, path);
       }
    }
 

@@ -29,7 +29,8 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
-import org.mo.mime.lzma.FLzmaFile;
+import org.mo.mime.compress.ECompressMode;
+import org.mo.mime.compress.FCompressStream;
 
 //============================================================
 // <T>资源纹理控制台。</T>
@@ -154,9 +155,9 @@ public class FRs3TextureConsole
       texture.serialize(stream);
       byte[] data = null;
       if(compress){
-         // 使用LZMA压缩数据
-         try(FLzmaFile file = new FLzmaFile(stream.toArray())){
-            data = file.toLzmaArray();
+         // 压缩数据
+         try(FCompressStream file = new FCompressStream(stream.toArray())){
+            data = file.toCompressArray(ECompressMode.Lzma);
          }
       }else{
          data = stream.toArray();

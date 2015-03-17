@@ -32,6 +32,17 @@ public class FDataImport
    }
 
    //============================================================
+   // <T>构造数据导入器。</T>
+   //
+   // @param connection 数据库链接
+   // @param charset 字符串编码
+   //============================================================
+   public FDataImport(ISqlConnection connection,
+                      String charset){
+      super(connection, charset);
+   }
+
+   //============================================================
    // <T>构造行命令。</T>
    //
    // @param tableName 表名
@@ -95,7 +106,7 @@ public class FDataImport
       String tableName = RFile.shortName(fileName);
       FDataset columns = _connection.fetchDataset("SHOW COLUMNS FROM " + tableName);
       // 生成所有命令
-      FLinesFile sourceFile = new FLinesFile(fileName);
+      FLinesFile sourceFile = new FLinesFile(fileName, _charset);
       for(String line : sourceFile.lines()){
          if(RString.isEmpty(line)){
             continue;

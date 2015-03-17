@@ -31,6 +31,17 @@ public class FDataExport
    }
 
    //============================================================
+   // <T>构造数据导出器。</T>
+   //
+   // @param connection 数据库链接
+   // @param charset 字符串编码
+   //============================================================
+   public FDataExport(ISqlConnection connection,
+                      String charset){
+      super(connection, charset);
+   }
+
+   //============================================================
    // <T>生成表格命令。</T>
    //
    // @param tableName 表名
@@ -45,9 +56,8 @@ public class FDataExport
          if(!fields.isEmpty()){
             fields.append(",");
          }
-         String name = column.get("column_name");
          fields.append('`');
-         fields.append(name);
+         fields.append(column.get("column_name"));
          fields.append('`');
       }
       // 生成查询命令
@@ -62,7 +72,7 @@ public class FDataExport
          }
          file.appendLine(row.pack());
       }
-      file.saveFile(outputFileName);
+      file.saveFile(outputFileName, _charset);
    }
 
    //============================================================

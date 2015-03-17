@@ -59,7 +59,7 @@ public class RSql
             }else if('\t' == ch){
                buffer.append("\\t");
             }else if('\r' == ch){
-               // buffer.append("\\r");
+               continue;
             }else if('\n' == ch){
                buffer.append("\\n");
             }else{

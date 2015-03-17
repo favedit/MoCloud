@@ -46,7 +46,8 @@ import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.mime.lzma.FLzmaFile;
+import org.mo.mime.compress.ECompressMode;
+import org.mo.mime.compress.FCompressStream;
 
 //============================================================
 // <T>资源模板控制台。</T>
@@ -262,10 +263,10 @@ public class FRs3TemplateConsole
       // 获得数据
       FByteStream stream = new FByteStream();
       template.serialize(stream);
-      // 使用LZMA压缩数据
+      // 压缩数据
       byte[] data = null;
-      try(FLzmaFile file = new FLzmaFile(stream.toArray())){
-         data = file.toLzmaArray();
+      try(FCompressStream file = new FCompressStream(stream.toArray())){
+         data = file.toCompressArray(ECompressMode.Lzma);
       }
       //............................................................
       // 存储数据

@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src/library"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
+	<classpathentry kind="lib" path="lib/commons-compress-1.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
