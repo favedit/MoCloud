@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/design-common"/>
 	<classpathentry kind="src" path="src/design-describe"/>
 	<classpathentry kind="src" path="src/design-data"/>
 	<classpathentry kind="src" path="src/design-core"/>
 	<classpathentry kind="src" path="src/design-face"/>
+	<classpathentry kind="src" path="src/system-face"/>
 	<classpathentry kind="src" path="src/test-java"/>
 	<classpathentry kind="src" path="src/config"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>

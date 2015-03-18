@@ -24,8 +24,28 @@
    </tag>
 
    <tag>
-      <name>form</name>
-      <tagclass>org.mo.web.tag.control.FFormTag</tagclass>
+      <name>tree</name>
+      <tagclass>org.mo.cloud.design.web.tag.FTreeTag</tagclass>
+      <attribute>
+          <name>name</name>
+          <required>true</required>
+          <rtexprvalue>false</rtexprvalue>
+      </attribute>
+      <attribute>
+          <name>source</name>
+          <required>true</required>
+          <rtexprvalue>false</rtexprvalue>
+      </attribute>
+      <attribute>
+          <name>permission</name>
+          <required>false</required>
+          <rtexprvalue>false</rtexprvalue>
+      </attribute>
+   </tag>
+
+   <tag>
+      <name>frame</name>
+      <tagclass>org.mo.cloud.design.web.tag.FFrameTag</tagclass>
       <attribute>
           <name>name</name>
           <required>true</required>
@@ -49,26 +69,6 @@
       <attribute>
           <name>source</name>
           <required>true</required>
-          <rtexprvalue>false</rtexprvalue>
-      </attribute>
-   </tag>
-
-   <tag>
-      <name>tree</name>
-      <tagclass>org.mo.web.tag.control.FTreeTag</tagclass>
-      <attribute>
-          <name>name</name>
-          <required>true</required>
-          <rtexprvalue>false</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>source</name>
-          <required>true</required>
-          <rtexprvalue>false</rtexprvalue>
-      </attribute>
-      <attribute>
-          <name>permission</name>
-          <required>false</required>
           <rtexprvalue>false</rtexprvalue>
       </attribute>
    </tag>

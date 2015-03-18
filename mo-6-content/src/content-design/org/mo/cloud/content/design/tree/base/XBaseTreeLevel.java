@@ -1,18 +1,17 @@
 package org.mo.cloud.content.design.tree.base;
 
+import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
-import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>目录层级对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseTreeLevel
-      extends XContentObject
+public abstract class XBaseTreeLevel extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "TreeLevel";
@@ -20,6 +19,10 @@ public abstract class XBaseTreeLevel
    // 名称的定义
    @AContentField
    public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+
+   // 代码的定义
+   @AContentField
+   public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
@@ -59,6 +62,10 @@ public abstract class XBaseTreeLevel
    @AName("name")
    protected String _name;
 
+   // 代码
+   @AName("code")
+   protected String _code;
+
    // 标签
    @AName("label")
    protected String _label;
@@ -91,6 +98,24 @@ public abstract class XBaseTreeLevel
    //============================================================
    public void setName(String value){
       _name = value;
+   }
+
+   //============================================================
+   // <T>获得代码的内容。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String getCode(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的内容。</T>
+   //
+   // @param value 代码
+   //============================================================
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================

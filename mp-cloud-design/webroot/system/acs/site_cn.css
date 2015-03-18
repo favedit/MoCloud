@@ -1,0 +1,139 @@
+/* ------------------------------------------------------ */
+/* html                                                   */
+/* ------------------------------------------------------ */
+html{
+   width:100%;
+   height:100%;
+}
+
+/* ------------------------------------------------------ */
+/* Body                                                   */
+/* ------------------------------------------------------ */
+body{
+   width:100%;
+   height:100%;
+   margin: 0px;
+}
+
+a{
+   text-decoration: none ; color : blue;
+}
+a:hover{
+   text-decoration: underline
+}
+td{
+   font-family:"NSimSun"; font-size:9pt;
+}
+div{
+   font-family:"NSimSun"; font-size:9pt;
+}
+span{
+   font-family:"NSimSun"; font-size:9pt;
+}
+input{
+   font-family:"NSimSun"; font-size:9pt; border:1px solid #999999;
+}
+textarea{
+   font-family:"NSimSun"; font-size:9pt; border:1px solid #999999;
+}
+
+Tag_Check
+{
+   cursor: hand;
+   border: 0;
+}
+
+.Title_MenuNormal{
+   white-space: nowrap;
+   color:#666666;
+   text-align:center;
+   background-color:#BBBAE4;
+   border-radius: 5px 5px 5px 5px;
+   padding-top:5px; padding-left:12px; padding-bottom:3px; padding-right:12px;
+   border-left:1px solid #9B9AD4; border-top:1px solid #9B9AD4; border-right:1px solid #9B9AD4; border-bottom:1px solid #9B9AD4;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#BDB7AC);
+}
+.Title_MenuHover{
+   white-space: nowrap; cursor:hand;
+   color:#666666;
+   background-color:#DBDAF4;
+   text-align:center;
+   border-radius: 5px 5px 5px 5px;
+   padding-top:5px; padding-left:12px; padding-bottom:3px; padding-right:12px;
+   border-left:1px solid #9B9AD4; border-top:1px solid #9B9AD4; border-right:1px solid #9B9AD4; border-bottom:1px solid #9B9AD4;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#BDB7AC, endcolorstr=#FFFFFF);
+}
+.Title_MenuSelect{
+   white-space: nowrap;
+   color:#333333;
+   background-color:#EBEAF4;
+   text-align:center;
+   border-radius: 5px 5px 0px 0px;
+   padding-top:5px; padding-left:12px; padding-bottom:3px; padding-right:12px;
+   border-left:1px solid #9B9AD4; border-top:1px solid #9B9AD4; border-right:1px solid #9B9AD4; border-bottom:0px solid #9B9AD4;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#BDB7AC, endcolorstr=#FFFFFF);
+}
+
+.Title_MenuBar{
+   white-space: nowrap;
+   background-color: #9B9AB4;
+   filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#9B9AB4, endColorStr=#FFFFFF, gradientType=1);
+}
+
+.Title_ButtonNormal {
+   white-space:nowrap;
+   color: #000000;
+   background-color: #CCCCCC;
+   border: 1px solid #333333;
+   opacity: 0.5;
+   border-radius: 3px;
+   padding-top: 1px; padding-left: 16px; padding-bottom: 1px; padding-right: 16px;
+   filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+.Title_ButtonHover {
+   white-space:nowrap;
+   cursor:hand;
+   color:#666666;
+   border:1px solid #333333;
+   background-color:#D5D5FA;
+   border-radius: 3px;
+   padding-top: 0px; padding-left: 16px; padding-bottom: 0px; padding-right: 16px;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#D2D2F6);
+}
+.Title_ButtonSelect {
+   white-space:nowrap;
+   color:#6A6A7C;
+   border:1px solid #333333;
+   background-color:#E5E5FF;
+   border-radius: 3px;
+   padding-top: 0px; padding-left: 16px; padding-bottom: 0px; padding-right: 16px;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#ACACCA);
+}
+
+/* ------------------------------------------------------ */
+/* Frame                                                  */
+/* ------------------------------------------------------ */
+.Frame_Catalog{
+   background-color: #FFFFFF;
+}
+
+.Frame_Body{
+   background-color: #FFFFFF;
+}
+
+/* ------------------------------------------------------ */
+/* Catalog                                                  */
+/* ------------------------------------------------------ */
+.Catalog_ToolBar{
+   width:100%;
+   height:100%;
+   overflow:hidden;
+   padding-top: 3px;
+   padding-bottom: 1px;
+   background-color: #9B9AB4;
+   border-top: 1px solid #6B6AA4;
+   background: -ms-linear-gradient(top, #ABAAE4, #FFFFFF);
+   background: -moz-linear-gradient(top, #ABAAE4, #FFFFFF); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#ABAAE4), to(#FFFFFF)); 
+   filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#ABAAE4, endColorStr=#FFFFFF);
+}

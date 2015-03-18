@@ -55,7 +55,7 @@ public class FAbstractConfigurationAction
                          FAbstractConfigurationPage page,
                          String redirect){
       // 获得上传的数据
-      page.appachContext(context);
+      page.attachContext(context);
       return redirect;
    }
 
@@ -70,11 +70,11 @@ public class FAbstractConfigurationAction
                       FAbstractConfigurationPage page,
                       String redirect){
       // 获得上传的数据
-      page.appachContext(context);
+      page.attachContext(context);
       // 获得列表数据
       FXmlNode config = new FXmlNode(RXml.DEFAULT_ROOT_NAME);
       FXmlNode dsNode = config.createNode(FDataset.NAME);
-      dsNode.set("name", page.getFormName());
+      dsNode.set("name", page.frameCode());
       // 设置内容
       FContentSpace contentSpace = _configurationConsole.getSpace(_storageName, _spaceName);
       for(INamePair<FContentNode> pair : contentSpace.contents()){
@@ -84,7 +84,7 @@ public class FAbstractConfigurationAction
          rowNode.attributes().assign(contentNode.config().attributes());
       }
       page.setPageAction("display");
-      page.setFormValue(config.xml());
+      page.setFormValue(config.xml().toString());
       return redirect;
    }
 
@@ -99,11 +99,11 @@ public class FAbstractConfigurationAction
                         FAbstractConfigurationPage page,
                         String redirect){
       // 获得上传的数据
-      page.appachContext(context);
+      page.attachContext(context);
       // 重置表单数据
       FXmlNode config = new FXmlNode("Config");
       config.set(PTY_TYPE, context.parameter(PTY_TYPE));
-      page.setFormValue(config.xml());
+      page.setFormValue(config.xml().toString());
       return redirect;
    }
 
@@ -118,14 +118,14 @@ public class FAbstractConfigurationAction
                         FAbstractConfigurationPage page,
                         String redirect){
       // 获得上传的数据
-      page.appachContext(context);
+      page.attachContext(context);
       // 查找选中的XML集合对象和XML对象
-      String collection = page.getSelectCollection();
+      String collection = page.collectionCode();
       // 获得内容空间
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
       page.setCollection(contentNode);
       // 判断操作类型
-      String type = page.getSelectType();
+      String type = page.storageCode();
       FXmlNode xconfig = new FXmlNode();
       if(TYPE_COLLECTION.equals(type)){
          // 存储选中的XML集合对象
@@ -133,7 +133,7 @@ public class FAbstractConfigurationAction
          page.setFormValue(contentNode.config().simpleXml());
       }else if(TYPE_COMPONENT.equals(type)){
          // 存储选中的XML对象
-         String component = page.getSelectComponent();
+         String component = page.componentCode();
          FContentObject xcomponent = contentNode.search(component);
          if(xcomponent == null){
             throw new FFatalError("Xml component is not found. (collection={1}, component={2})", collection, component);
@@ -159,19 +159,19 @@ public class FAbstractConfigurationAction
                         FAbstractConfigurationPage page,
                         String redirect){
       // 获得上传的数据
-      page.appachContext(context);
+      page.attachContext(context);
       // 查找选中的XML集合对象和XML对象
-      String collection = page.getSelectCollection();
+      String collection = page.collectionCode();
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
       page.setCollection(contentNode);
       // 判断操作类型
-      String type = page.getSelectType();
+      String type = page.storageCode();
       if(TYPE_COLLECTION.equals(type)){
          // 删除选中的XML集合对象
          contentNode.remove();
       }else if(TYPE_COMPONENT.equals(type)){
          // 删除选中的XML对象
-         String component = page.getSelectComponent();
+         String component = page.componentCode();
          FContentObject xcomponent = contentNode.search(component);
          if(xcomponent == null){
             throw new FFatalError("Xml component is not found. (collection={1}, component={2})", collection, component);
@@ -186,8 +186,8 @@ public class FAbstractConfigurationAction
          contentNode.store();
       }
       // 刷新树目录
-      page.resetCommands();
-      page.setTreeParentRefresh();
+      //page.resetCommands();
+      //page.setTreeParentRefresh();
       return redirect;
    }
 
@@ -202,8 +202,8 @@ public class FAbstractConfigurationAction
                       FAbstractConfigurationPage page,
                       String redirect){
       // 获得上传的数据
-      page.appachContext(context);
-      String formName = page.getFormName();
+      page.attachContext(context);
+      String formName = page.frameCode();
       FXmlNode buildNode = _formConsole.build(formName, EXmlConfig.Value);
       FXmlNode orderActionNode = buildNode.findNode("name", ACTION_SORT);
       if(orderActionNode == null){
@@ -211,18 +211,18 @@ public class FAbstractConfigurationAction
       }
       orderActionNode.setName("ConfigAction");
       // 查找选中的XML集合对象
-      String collection = page.getSelectCollection();
+      String collection = page.collectionCode();
       // 获得内容空间
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
       page.setCollection(contentNode);
       // 判断操作类型
-      String type = page.getSelectType();
+      String type = page.storageCode();
       FContentObjects xcomponents = null;
       if(TYPE_COLLECTION.equals(type)){
          xcomponents = contentNode.config().nodes();
       }else if(TYPE_COMPONENT.equals(type)){
          // 存储选中的XML对象
-         String component = page.getSelectComponent();
+         String component = page.componentCode();
          FContentObject xcomponent = contentNode.search(component);
          if(xcomponent == null){
             throw new FFatalError("Xml component is not found. (collection={1}, component={2})", collection, component);
@@ -247,7 +247,7 @@ public class FAbstractConfigurationAction
          itemNode.set("name", xcomponent.objectId());
          itemNode.set("label", xcomponent.get("name") + "(" + label + ")");
       }
-      page.setFormConfig(formNode.xml());
+      //page.setFormConfig(formNode.xml());
       return redirect;
    }
 

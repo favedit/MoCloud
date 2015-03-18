@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.culture.Language" update_date="20141209154356">
+   <TreeView name="cloud.design.list" label="内容-设计-列表" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@cloud.design.list">
+     <TreeNodeType name="list" code='List' label="列表" is_valid="Y" note="" storage="collection" icon="design.list.list" action="list" attributes="form_name=cloud.design.list.ListForm" />
+     <TreeNodeType name="item" code='Item' label="项目" is_valid="Y" note="" storage="component" icon="design.list.item" action="list" attributes="form_name=cloud.design.list.ItemForm" />
+   </TreeView>
+</Content>

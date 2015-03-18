@@ -7,11 +7,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.persistence'
-         face  = 'org.mo.cloud.design.face.persistence.IPersistenceService'/>
+         face  = 'org.mo.cloud.system.face.design.persistence.IPersistenceService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.persistence.IPersistenceService'
-         class = 'org.mo.cloud.design.face.persistence.FPersistenceService'
+         face  = 'org.mo.cloud.system.face.design.persistence.IPersistenceService'
+         class  = 'org.mo.cloud.system.face.design.persistence.FPersistenceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -19,23 +19,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.list'
-         face  = 'org.mo.cloud.design.face.list.IListService'/>
+         face  = 'org.mo.cloud.system.face.design.list.IListService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.list.IListService'
-         class = 'org.mo.cloud.design.face.list.FListService'
-         scope = 'global'/>
-
-   <!-- ==================================================== -->
-   <!-- 设计：内容数据服务                                   -->
-   <!-- ==================================================== -->
-   <WebService
-         name  = 'cloud.design.dataset'
-         face  = 'org.mo.cloud.design.face.dataset.IDatasetService'/>
-
-   <Component
-         face  = 'org.mo.cloud.design.face.dataset.IDatasetService'
-         class = 'org.mo.cloud.design.face.dataset.FDatasetService'
+         face  = 'org.mo.cloud.system.face.design.list.IListService'
+         class = 'org.mo.cloud.system.face.design.list.FListService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -43,11 +31,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.tree'
-         face  = 'org.mo.cloud.design.face.tree.ITreeService'/>
+         face  = 'org.mo.cloud.system.face.design.tree.ITreeService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.tree.ITreeService'
-         class = 'org.mo.cloud.design.face.tree.FTreeService'
+         face  = 'org.mo.cloud.system.face.design.tree.ITreeService'
+         class = 'org.mo.cloud.system.face.design.tree.FTreeService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -55,11 +43,23 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.design.frame'
-         face  = 'org.mo.cloud.design.face.frame.IFrameService'/>
+         face  = 'org.mo.cloud.system.face.design.frame.IFrameService'/>
 
    <Component
-         face  = 'org.mo.cloud.design.face.frame.IFrameService'
-         class = 'org.mo.cloud.design.face.frame.FFrameService'
+         face  = 'org.mo.cloud.system.face.design.frame.IFrameService'
+         class = 'org.mo.cloud.system.face.design.frame.FFrameService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：内容数据服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.design.dataset'
+         face  = 'org.mo.cloud.system.face.database.dataset.IDatasetService'/>
+
+   <Component
+         face  = 'org.mo.cloud.system.face.database.dataset.IDatasetService'
+         class = 'org.mo.cloud.system.face.database.dataset.FDatasetService'
          scope = 'global'/>
 
 </Config>

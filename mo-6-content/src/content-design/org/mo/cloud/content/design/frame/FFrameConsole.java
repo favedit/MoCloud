@@ -8,9 +8,11 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
+import org.mo.com.console.FConsole;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
+import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 
@@ -18,6 +20,7 @@ import org.mo.core.aop.face.AProperty;
 // <T>内容表单控制台。</T>
 //============================================================
 public class FFrameConsole
+      extends FConsole
       implements
          IFrameConsole
 {
@@ -70,14 +73,14 @@ public class FFrameConsole
    public XContentObject find(String storgeName,
                               String formName){
       String code = storgeName + "|" + formName;
-      XContentObject xlist = _frames.find(code);
-      if(xlist == null){
+      XContentObject xframe = _frames.find(code);
+      if(xframe == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, formName);
-         xlist = persistence.convertInstance(node.config());
-         _frames.set(code, xlist);
+         xframe = persistence.convertInstance(node.config());
+         _frames.set(code, xframe);
       }
-      return xlist;
+      return xframe;
    }
 
    //============================================================
@@ -101,5 +104,26 @@ public class FFrameConsole
          return content;
       }
       return null;
+   }
+
+   //============================================================
+   // <T>根据名称建立目录配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param treeName 目录名称
+   // @return 目录配置
+   //============================================================
+   @Override
+   public FXmlNode buildConfig(String storgeName,
+                               String treeName){
+      // 查找目录定义
+      XContentObject xframe = find(storgeName, treeName);
+      // 转换数据
+      FXmlNode xconfig = new FXmlNode();
+      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
+      FContentObject content = persistence.convertConfig(xframe);
+      // 存储输出
+      content.saveConfig(xconfig);
+      return xconfig;
    }
 }

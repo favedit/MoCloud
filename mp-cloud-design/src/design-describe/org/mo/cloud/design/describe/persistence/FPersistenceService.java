@@ -1,10 +1,9 @@
 package org.mo.cloud.design.describe.persistence;
 
-import org.mo.cloud.content.design.persistence.common.XPersistence;
-
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
-import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.persistence.common.XPersistence;
 import org.mo.com.lang.EResult;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;

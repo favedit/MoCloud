@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+   <!-- 包含：共通设定 -->
+   <Include>${application.config}/common/define.xml</Include>
+   <Include>${application.config}/common/core.xml</Include>
+   <Include>${application.config}/common/engine.xml</Include>
+   <Include>${application.config}/common/data.xml</Include>
+
+   <!-- 包含：核心设定 -->
+   <Include>${application.config}/core/face.xml</Include>
+   <Include>${application.config}/core/web.xml</Include>
+   <Include>${application.config}/core/web-face.xml</Include>
+
+   <!-- 包含：内容设定 -->
+   <Include>${application.config}/content/core.xml</Include>
+   <Include>${application.config}/content/data.xml</Include>
+   <Include>${application.config}/content/service.xml</Include>
+
+   <!-- 包含：设计设定 -->
+   <Include>${application.config}/design/content.xml</Include>
+   <Include>${application.config}/design/core.xml</Include>
+   <Include>${application.config}/design/describe.xml</Include>
+   <Include>${application.config}/design/data.xml</Include>
+   <Include>${application.config}/design/service.xml</Include>
+
+   <!-- 包含：管理设定 -->
+
+   <!-- 包含：系统设定 -->
+</Configuration>

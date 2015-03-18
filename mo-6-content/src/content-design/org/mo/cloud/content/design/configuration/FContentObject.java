@@ -719,6 +719,9 @@ public class FContentObject
    // @param xconfig 配置节点
    //============================================================
    public void loadConfig(FXmlNode xconfig){
+      if(xconfig == null){
+         throw new FFatalError("Config is null.");
+      }
       // 设置属性
       setName(xconfig.name());
       // 设置属性集合

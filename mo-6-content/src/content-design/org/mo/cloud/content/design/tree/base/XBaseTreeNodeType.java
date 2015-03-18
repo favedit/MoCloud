@@ -1,18 +1,17 @@
 package org.mo.cloud.content.design.tree.base;
 
+import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
-import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>节点类型对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseTreeNodeType
-      extends XContentObject
+public abstract class XBaseTreeNodeType extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "TreeNodeType";
@@ -20,6 +19,10 @@ public abstract class XBaseTreeNodeType
    // 名称的定义
    @AContentField
    public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+
+   // 代码的定义
+   @AContentField
+   public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
 
    // 标签的定义
    @AContentField
@@ -33,9 +36,9 @@ public abstract class XBaseTreeNodeType
    @AContentField
    public final static FContentField NOTE = new FContentField("note", "note", EContentData.String, "", "", "", "YYNY");
 
-   // 关联的定义
+   // 存储的定义
    @AContentField
-   public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField STORAGE = new FContentField("storage", "storage", EContentData.String, "", "", "", "YYNY");
 
    // 图标的定义
    @AContentField
@@ -75,6 +78,10 @@ public abstract class XBaseTreeNodeType
    @AName("name")
    protected String _name;
 
+   // 代码
+   @AName("code")
+   protected String _code;
+
    // 标签
    @AName("label")
    protected String _label;
@@ -87,9 +94,9 @@ public abstract class XBaseTreeNodeType
    @AName("note")
    protected String _note;
 
-   // 关联
-   @AName("linker")
-   protected String _linker;
+   // 存储
+   @AName("storage")
+   protected String _storage;
 
    // 图标
    @AName("icon")
@@ -123,6 +130,24 @@ public abstract class XBaseTreeNodeType
    //============================================================
    public void setName(String value){
       _name = value;
+   }
+
+   //============================================================
+   // <T>获得代码的内容。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String getCode(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的内容。</T>
+   //
+   // @param value 代码
+   //============================================================
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================
@@ -180,21 +205,21 @@ public abstract class XBaseTreeNodeType
    }
 
    //============================================================
-   // <T>获得关联的内容。</T>
+   // <T>获得存储的内容。</T>
    //
-   // @return 关联
+   // @return 存储
    //============================================================
-   public String getLinker(){
-      return _linker;
+   public String getStorage(){
+      return _storage;
    }
 
    //============================================================
-   // <T>设置关联的内容。</T>
+   // <T>设置存储的内容。</T>
    //
-   // @param value 关联
+   // @param value 存储
    //============================================================
-   public void setLinker(String value){
-      _linker = value;
+   public void setStorage(String value){
+      _storage = value;
    }
 
    //============================================================

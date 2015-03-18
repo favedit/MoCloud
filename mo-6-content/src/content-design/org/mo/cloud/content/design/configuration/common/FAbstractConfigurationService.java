@@ -210,10 +210,10 @@ public class FAbstractConfigurationService
       FAttributes nodeAttrs = new FAttributes();
       // 获得容器节点
       String nodeName = null;
-      String typeType = selectNode.get("type_type");
-      if(TYPE_COLLECTION.equals(typeType)){
+      String storageCd = selectNode.get("storage");
+      if(TYPE_COLLECTION.equals(storageCd)){
          nodeName = selectNode.get("label");
-      }else if(TYPE_COMPONENT.equals(typeType)){
+      }else if(TYPE_COMPONENT.equals(storageCd)){
          FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
          nodeAttrs.unpack(topNode.get("attributes"));
          if(nodeAttrs.contains("linker_name")){
@@ -226,7 +226,7 @@ public class FAbstractConfigurationService
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, nodeName);
       // 获得控件对象
       FContentObjects xcontrols = null;
-      if(TYPE_COLLECTION.equals(typeType)){
+      if(TYPE_COLLECTION.equals(storageCd)){
          xcontrols = contentNode.config().nodes();
       }else{
          String objectId = selectNode.get("uuid");

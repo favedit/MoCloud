@@ -79,6 +79,9 @@ public class FAbstractConfigurationBase
    public FXmlNode getSelectNode(IWebInput input){
       FXmlNode config = input.config().node("Node");
       if(config == null){
+         config = input.config().findNode("TreeNode");
+      }
+      if(config == null){
          throw new FFatalError("Can't find select node.");
       }
       return config;

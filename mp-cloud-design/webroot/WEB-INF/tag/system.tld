@@ -11,12 +11,12 @@
 
    <tag>
       <name>css</name>
-      <tagclass>org.mo.jfa.web.tag.FCssTag</tagclass>
+      <tagclass>org.mo.cloud.design.web.tag.FCssTag</tagclass>
    </tag>
 
    <tag>
       <name>js</name>
-      <tagclass>org.mo.jfa.web.tag.FJsTag</tagclass>
+      <tagclass>org.mo.cloud.design.web.tag.FJsTag</tagclass>
       <attribute>
          <name>type</name>
          <required>false</required>
@@ -43,5 +43,4 @@
          <rtexprvalue>false</rtexprvalue>
       </attribute>
    </tag>
-
 </taglib>

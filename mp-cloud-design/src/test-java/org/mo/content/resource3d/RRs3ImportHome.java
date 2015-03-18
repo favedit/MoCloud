@@ -1,7 +1,6 @@
 package org.mo.content.resource3d;
 
 import org.mo.content.common.RRs3Configuration;
-
 import org.mo.core.aop.RAop;
 
 public class RRs3ImportHome
