@@ -84,7 +84,7 @@ public class FAbstractConfigurationAction
          rowNode.attributes().assign(contentNode.config().attributes());
       }
       page.setPageAction("display");
-      page.setFormValue(config.xml().toString());
+      page.setFrameValue(config.xml().toString());
       return redirect;
    }
 
@@ -103,7 +103,7 @@ public class FAbstractConfigurationAction
       // 重置表单数据
       FXmlNode config = new FXmlNode("Config");
       config.set(PTY_TYPE, context.parameter(PTY_TYPE));
-      page.setFormValue(config.xml().toString());
+      page.setFrameValue(config.xml().toString());
       return redirect;
    }
 
@@ -130,7 +130,7 @@ public class FAbstractConfigurationAction
       if(TYPE_COLLECTION.equals(type)){
          // 存储选中的XML集合对象
          contentNode.config().saveConfig(xconfig, false);
-         page.setFormValue(contentNode.config().simpleXml());
+         page.setFrameValue(contentNode.config().simpleXml());
       }else if(TYPE_COMPONENT.equals(type)){
          // 存储选中的XML对象
          String component = page.componentCode();
@@ -144,7 +144,7 @@ public class FAbstractConfigurationAction
          throw new FFatalError("Unknown select type. (type={1})", type);
       }
       xconfig.set(PTY_TYPE, xconfig.name());
-      page.setFormValue(xconfig.simpleXml());
+      page.setFrameValue(xconfig.simpleXml());
       return redirect;
    }
 

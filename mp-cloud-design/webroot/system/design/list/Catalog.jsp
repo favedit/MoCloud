@@ -63,7 +63,7 @@ function onPageLoad(){
 <!-- TreeView config ----------------------------------------->
 <jc:tree name='xTree' source='design.list'/>
 <!-- Body begin ---------------------------------------------->
-<jh:body style='overflow:hidden' scroll='no' onload='onPageLoad()'>
+<jh:body style='Frame_Catalog' scroll='no' onload='onPageLoad()'>
 <jh:form name='fmMain' method='post'>
 <!-- Hidden -------------------------------------------------->
 <jh:hidden name='frame_code'/>

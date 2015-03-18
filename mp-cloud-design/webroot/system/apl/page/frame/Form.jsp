@@ -8,9 +8,9 @@
 </HEAD>
 <!-- Script -------------------------------------------------->
 <SCRIPT>
-var mode = '<jh:write source="&page.pageAction"/>';
-var form = null;
+var modeCd = '<jh:write source="&page.pageAction"/>';
 var toolbar = null;
+var frame = null;
 //----------------------------------------------------------
 function doRefresh(){
    fmMain.action = '';
@@ -18,25 +18,25 @@ function doRefresh(){
 }
 //----------------------------------------------------------
 function doInsert(){
-   form.doAction('insertAction');
+   frame.doAction('insertAction');
 }
 //----------------------------------------------------------
 function doSave(){
    if(RWindow.inDisable){
       return;
    }
-   var emode = REnum.encode(EMode, mode)
+   var emode = REnum.encode(EMode, modeCd)
    if(EMode.Insert == emode){
-      form.doAction('insertAction');
+      frame.doAction('insertAction');
    }else if(EMode.Update == emode){
-      form.doAction('updateAction');
+      frame.doAction('updateAction');
    }else{
       alert('Unknown action [' + mode + ']');
    }
 }
 //----------------------------------------------------------
 function doDelete(){
-   form.doAction('deleteAction');
+   frame.doAction('deleteAction');
 }
 //----------------------------------------------------------
 function _onloadAll(){
@@ -77,34 +77,44 @@ function _onloadAll(){
 }
 //----------------------------------------------------------
 function _onload(){
-   //RWindow.connect(window);
-   //RLoader.loadJs('mobj');
-   //RLoader.waitJs(new TInvoke(null, _onloadAll), 'mobj');
+   // 环境设置
+   RRuntime.setProcessCd(EProcess.Release);
+   RApplication.initialize();
+   RBrowser.setContentPath('/system');
+   var xframe = RXml.makeNode(xFrame);
+   // 创建工具栏
+   toolbar = RClass.create(FUiDataToolBar);
+   RUiToolBar.fromNode(toolbar, xframe, _id_toolbar, true);
+   //if(!toolbar){
+   //   toolbar = RControl.fromXml(xToolBar, _id_toolbar);
+   //}
+   //toolbar.psMode(emode);  
+   toolbar.setPanel(_id_toolbar);
+   // 创建表单
+   frame = RClass.create(FUiDataFrame);
+   RControl.build(frame, xframe, null, _id_frame);
+   frame.setPanel(_id_frame);
 }
 </SCRIPT>
-<!-- Environment --------------------------------------------->
-<XML ID="xEnvironment"><jh:write source='&page.environment' format='text'/></XML>
-<!-- Form ---------------------------------------------------->
-<jc:frame name='xForm' source='&page.frameCode'/>
-<!-- Value --------------------------------------------------->
-<XML ID="xValue"><jh:write source='&page.formValue' format='text'/></XML>
+<!-- Xml Config ---------------------------------------------->
+<jc:frame name='xFrame' source='&page.frameCode'/>
+<SCRIPT id='xValue' type='application/xml'><jh:write source='&page.frameValue' format='text'/></SCRIPT>
+<SCRIPT id='xEnvironment' type='application/xml'><jh:write source='&page.environmentXml' format='text'/></SCRIPT>
 <!-- Body begin ---------------------------------------------->
 <jh:body style='bodyMain' scroll='no' onload='_onload()'>
 <jh:form>
-<jh:hidden name='form_code' source='&page.frameCode'/>
-<jh:hidden name='form_service' source='&page.formService'/>
-<jh:hidden name='sel_type' source='&page.selectType'/>
-<jh:hidden name='sel_collection' source='&page.selectCollection'/>
-<jh:hidden name='sel_component' source='&page.selectComponent'/>
+<jh:hidden name='storage_code' source='&page.storageCode'/>
+<jh:hidden name='collection_code' source='&page.collectionCode'/>
+<jh:hidden name='component_code' source='&page.componentCode'/>
+<jh:hidden name='frame_code' source='&page.frameCode'/>
+<jh:hidden name='frame_service' source='&page.frameService'/>
 <!-- Data begin ---------------------------------------------->
-<TABLE border='0' cellpadding='0' cellspacing='0' width='100%' height='100%' style='layout:fix'>
-<TR><TD height='24'>
-<!-- Toolbar begin ------------------------------------------->
-<DIV id='_id_toolbar'></DIV>
-<!-- Toolbar end --------------------------------------------->
-</TD></TR>
+<TABLE border='0' cellpadding='0' cellspacing='0' width='100%' height='100%'>
+<!-- Toolbar begin ---------------------------------------------->
+<TR><TD height='24px'><DIV id='_id_toolbar' class='Body_ToolBar'></DIV></TD></TR>
+<!-- Form end ------------------------------------------------>
 <!-- Form begin ---------------------------------------------->
-<TR><TD><DIV id='_id_form' style='padding:8;width:100%;height:100%;overflow:auto;'></DIV></TD></TR>
+<TR><TD style='padding:8px'><DIV id='_id_frame' style='width:100%;height:100%;overflow:auto;'></DIV></TD></TR>
 <!-- Form end ------------------------------------------------>
 </TABLE>
 <!-- Data end ------------------------------------------------>

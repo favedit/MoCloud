@@ -9,7 +9,7 @@
 <TR><TD>
 <!-- Form begin ---------------------------------------------->
 <DIV style='width:100%;height:100%;overflow:auto'>
-	<DIV id='_id_form' style='padding:8'></DIV>
+	<DIV id='_id_frame' style='padding:8'></DIV>
 </DIV>
 <!-- Form end ------------------------------------------------>
 </TD></TR>

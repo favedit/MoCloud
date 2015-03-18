@@ -59,8 +59,11 @@ public abstract class FAbstractConfigurationPage
    // 表单名称
    protected String _frameCode;
 
+   // 表单服务
+   protected String _frameService;
+
    // 表单内容
-   protected String _formValue;
+   protected String _frameValue;
 
    // 环境信息
    protected FXmlNode _environment = new FXmlNode("Environment");
@@ -96,8 +99,6 @@ public abstract class FAbstractConfigurationPage
    //   protected String _formParent;
    //
    //   protected String _formSearch;
-   //
-   //   private String _formService;
    //
    //   protected FXmlNode _result = new FXmlNode("Result");
 
@@ -278,12 +279,30 @@ public abstract class FAbstractConfigurationPage
    }
 
    //============================================================
+   // <T>获得表单服务。</T>
+   //
+   // @return 表单代码
+   //============================================================
+   public String frameService(){
+      return _frameService;
+   }
+
+   //============================================================
+   // <T>设置表单服务。</T>
+   //
+   // @param code 表单代码
+   //============================================================
+   public void setFrameService(String frameService){
+      _frameService = frameService;
+   }
+
+   //============================================================
    // <T>获得表单内容。</T>
    //
    // @return 表单内容
    //============================================================
-   public String formValue(){
-      return _formValue;
+   public String frameValue(){
+      return _frameValue;
    }
 
    //============================================================
@@ -291,8 +310,8 @@ public abstract class FAbstractConfigurationPage
    //
    // @param value 表单内容
    //============================================================
-   public void setFormValue(String value){
-      _formValue = value;
+   public void setFrameValue(String frameValue){
+      _frameValue = frameValue;
    }
 
    //============================================================
@@ -309,8 +328,17 @@ public abstract class FAbstractConfigurationPage
    //
    // @return 环境打包内容
    //============================================================
-   public String getEnvironmentPack(){
+   public String environmentPack(){
       return _environment.attributes().pack();
+   }
+
+   //============================================================
+   // <T>获得环境配置字符串。</T>
+   //
+   // @return 环境配置字符串
+   //============================================================
+   public String environmentXml(){
+      return _environment.xml().toString();
    }
 
    //============================================================
@@ -374,10 +402,6 @@ public abstract class FAbstractConfigurationPage
    //
    //   public String getFormSearch(){
    //      return _formSearch;
-   //   }
-   //
-   //   public String getFormService(){
-   //      return _formService;
    //   }
    //
    //   public FString getResultXml(){
@@ -451,10 +475,6 @@ public abstract class FAbstractConfigurationPage
    //
    //   public void setFormSearch(String search){
    //      _formSearch = search;
-   //   }
-   //
-   //   public void setFormService(String formService){
-   //      _formService = formService;
    //   }
    //
    //   public void setFormValue(FString value){
