@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>表格复选列对象的内容基类。</T>
+// <T>数据多行文本编辑框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseColumnCheck
+public abstract class XBaseDataMemo
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "ColumnCheck";
+   public static final String CONTENT_NAME = "DataMemo";
 
    // 类型的定义
    @AContentField
@@ -125,6 +125,10 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String, "", "", "", "YYNY");
 
+   // 编辑尺寸的定义
+   @AContentField
+   public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
+
    // 数据名称的定义
    @AContentField
    public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
@@ -133,13 +137,9 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
-   // 真值的定义
+   // 输入尺寸的定义
    @AContentField
-   public final static FContentField VALUE_TRUE = new FContentField("valueTrue", "value_true", EContentData.String, "", "", "", "YYNY");
-
-   // 假值的定义
-   @AContentField
-   public final static FContentField VALUE_FALSE = new FContentField("valueFalse", "value_false", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -267,6 +267,10 @@ public abstract class XBaseColumnCheck
    @AName("label_size")
    protected String _labelSize;
 
+   // 编辑尺寸
+   @AName("edit_size")
+   protected String _editSize;
+
    // 数据名称
    @AName("data_name")
    protected String _dataName;
@@ -275,13 +279,9 @@ public abstract class XBaseColumnCheck
    @AName("data_type_cd")
    protected String _dataTypeCd;
 
-   // 真值
-   @AName("value_true")
-   protected String _valueTrue;
-
-   // 假值
-   @AName("value_false")
-   protected String _valueFalse;
+   // 输入尺寸
+   @AName("input_size")
+   protected String _inputSize;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -770,6 +770,24 @@ public abstract class XBaseColumnCheck
    }
 
    //============================================================
+   // <T>获得编辑尺寸的内容。</T>
+   //
+   // @return 编辑尺寸
+   //============================================================
+   public String getEditSize(){
+      return _editSize;
+   }
+
+   //============================================================
+   // <T>设置编辑尺寸的内容。</T>
+   //
+   // @param value 编辑尺寸
+   //============================================================
+   public void setEditSize(String value){
+      _editSize = value;
+   }
+
+   //============================================================
    // <T>获得数据名称的内容。</T>
    //
    // @return 数据名称
@@ -806,39 +824,21 @@ public abstract class XBaseColumnCheck
    }
 
    //============================================================
-   // <T>获得真值的内容。</T>
+   // <T>获得输入尺寸的内容。</T>
    //
-   // @return 真值
+   // @return 输入尺寸
    //============================================================
-   public String getValueTrue(){
-      return _valueTrue;
+   public String getInputSize(){
+      return _inputSize;
    }
 
    //============================================================
-   // <T>设置真值的内容。</T>
+   // <T>设置输入尺寸的内容。</T>
    //
-   // @param value 真值
+   // @param value 输入尺寸
    //============================================================
-   public void setValueTrue(String value){
-      _valueTrue = value;
-   }
-
-   //============================================================
-   // <T>获得假值的内容。</T>
-   //
-   // @return 假值
-   //============================================================
-   public String getValueFalse(){
-      return _valueFalse;
-   }
-
-   //============================================================
-   // <T>设置假值的内容。</T>
-   //
-   // @param value 假值
-   //============================================================
-   public void setValueFalse(String value){
-      _valueFalse = value;
+   public void setInputSize(String value){
+      _inputSize = value;
    }
 
 }

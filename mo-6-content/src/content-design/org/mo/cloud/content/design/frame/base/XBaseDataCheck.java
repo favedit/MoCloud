@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>表格复选列对象的内容基类。</T>
+// <T>数据复选框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseColumnCheck
+public abstract class XBaseDataCheck
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "ColumnCheck";
+   public static final String CONTENT_NAME = "DataCheck";
 
    // 类型的定义
    @AContentField
@@ -124,6 +124,10 @@ public abstract class XBaseColumnCheck
    // 标签尺寸的定义
    @AContentField
    public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑尺寸的定义
+   @AContentField
+   public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
    // 数据名称的定义
    @AContentField
@@ -266,6 +270,10 @@ public abstract class XBaseColumnCheck
    // 标签尺寸
    @AName("label_size")
    protected String _labelSize;
+
+   // 编辑尺寸
+   @AName("edit_size")
+   protected String _editSize;
 
    // 数据名称
    @AName("data_name")
@@ -767,6 +775,24 @@ public abstract class XBaseColumnCheck
    //============================================================
    public void setLabelSize(String value){
       _labelSize = value;
+   }
+
+   //============================================================
+   // <T>获得编辑尺寸的内容。</T>
+   //
+   // @return 编辑尺寸
+   //============================================================
+   public String getEditSize(){
+      return _editSize;
+   }
+
+   //============================================================
+   // <T>设置编辑尺寸的内容。</T>
+   //
+   // @param value 编辑尺寸
+   //============================================================
+   public void setEditSize(String value){
+      _editSize = value;
    }
 
    //============================================================

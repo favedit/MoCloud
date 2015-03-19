@@ -1,17 +1,18 @@
 package org.mo.cloud.content.design.tree.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>节点分组对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseTreeNodeGroup extends XContentObject
+public abstract class XBaseTreeNodeGroup
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "TreeNodeGroup";
@@ -30,11 +31,15 @@ public abstract class XBaseTreeNodeGroup extends XContentObject
 
    // 有效性的定义
    @AContentField
-   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.Boolean, "", "", "", "YYNY");
 
    // 备注的定义
    @AContentField
    public final static FContentField NOTE = new FContentField("note", "note", EContentData.String, "", "", "", "YYNY");
+
+   // 图标的定义
+   @AContentField
+   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -68,11 +73,15 @@ public abstract class XBaseTreeNodeGroup extends XContentObject
 
    // 有效性
    @AName("is_valid")
-   protected String _isValid;
+   protected boolean _isValid;
 
    // 备注
    @AName("note")
    protected String _note;
+
+   // 图标
+   @AName("icon")
+   protected String _icon;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -133,7 +142,7 @@ public abstract class XBaseTreeNodeGroup extends XContentObject
    //
    // @return 有效性
    //============================================================
-   public String getIsValid(){
+   public Boolean getIsValid(){
       return _isValid;
    }
 
@@ -142,7 +151,7 @@ public abstract class XBaseTreeNodeGroup extends XContentObject
    //
    // @param value 有效性
    //============================================================
-   public void setIsValid(String value){
+   public void setIsValid(Boolean value){
       _isValid = value;
    }
 
@@ -162,6 +171,24 @@ public abstract class XBaseTreeNodeGroup extends XContentObject
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得图标的内容。</T>
+   //
+   // @return 图标
+   //============================================================
+   public String getIcon(){
+      return _icon;
+   }
+
+   //============================================================
+   // <T>设置图标的内容。</T>
+   //
+   // @param value 图标
+   //============================================================
+   public void setIcon(String value){
+      _icon = value;
    }
 
 }

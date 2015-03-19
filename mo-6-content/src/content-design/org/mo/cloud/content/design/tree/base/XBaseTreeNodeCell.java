@@ -1,17 +1,18 @@
 package org.mo.cloud.content.design.tree.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>节点格子对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseTreeNodeCell extends XContentObject
+public abstract class XBaseTreeNodeCell
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "TreeNodeCell";
@@ -30,7 +31,7 @@ public abstract class XBaseTreeNodeCell extends XContentObject
 
    // 有效性的定义
    @AContentField
-   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.Boolean, "", "", "", "YYNY");
 
    // 备注的定义
    @AContentField
@@ -68,7 +69,7 @@ public abstract class XBaseTreeNodeCell extends XContentObject
 
    // 有效性
    @AName("is_valid")
-   protected String _isValid;
+   protected boolean _isValid;
 
    // 备注
    @AName("note")
@@ -133,7 +134,7 @@ public abstract class XBaseTreeNodeCell extends XContentObject
    //
    // @return 有效性
    //============================================================
-   public String getIsValid(){
+   public Boolean getIsValid(){
       return _isValid;
    }
 
@@ -142,7 +143,7 @@ public abstract class XBaseTreeNodeCell extends XContentObject
    //
    // @param value 有效性
    //============================================================
-   public void setIsValid(String value){
+   public void setIsValid(Boolean value){
       _isValid = value;
    }
 

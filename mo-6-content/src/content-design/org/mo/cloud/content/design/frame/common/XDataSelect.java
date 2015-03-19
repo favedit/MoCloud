@@ -1,11 +1,11 @@
 package org.mo.cloud.content.design.frame.common;
 
-import org.mo.cloud.content.design.frame.base.XBaseDataAction;
+import org.mo.cloud.content.design.frame.base.XBaseDataSelect;
 
 //============================================================
-// <T>数据命令。</T>
+// <T>数据选择框。</T>
 //============================================================
-public class XDataAction
-      extends XBaseDataAction
+public class XDataSelect
+      extends XBaseDataSelect
 {
 }

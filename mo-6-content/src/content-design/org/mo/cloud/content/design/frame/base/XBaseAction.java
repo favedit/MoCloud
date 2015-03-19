@@ -1,17 +1,18 @@
 package org.mo.cloud.content.design.frame.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>命令对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseAction extends XContentObject
+public abstract class XBaseAction
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "Action";
@@ -36,9 +37,17 @@ public abstract class XBaseAction extends XContentObject
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
+   // 命令的定义
+   @AContentField
+   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String, "", "", "", "YYNY");
+
    // 服务的定义
    @AContentField
    public final static FContentField SERVICE = new FContentField("service", "service", EContentData.String, "", "", "", "YYNY");
+
+   // 执行的定义
+   @AContentField
+   public final static FContentField EXECUTE = new FContentField("execute", "execute", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -78,9 +87,17 @@ public abstract class XBaseAction extends XContentObject
    @AName("attributes")
    protected String _attributes;
 
+   // 命令
+   @AName("action")
+   protected String _action;
+
    // 服务
    @AName("service")
    protected String _service;
+
+   // 执行
+   @AName("execute")
+   protected String _execute;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -173,6 +190,24 @@ public abstract class XBaseAction extends XContentObject
    }
 
    //============================================================
+   // <T>获得命令的内容。</T>
+   //
+   // @return 命令
+   //============================================================
+   public String getAction(){
+      return _action;
+   }
+
+   //============================================================
+   // <T>设置命令的内容。</T>
+   //
+   // @param value 命令
+   //============================================================
+   public void setAction(String value){
+      _action = value;
+   }
+
+   //============================================================
    // <T>获得服务的内容。</T>
    //
    // @return 服务
@@ -188,6 +223,24 @@ public abstract class XBaseAction extends XContentObject
    //============================================================
    public void setService(String value){
       _service = value;
+   }
+
+   //============================================================
+   // <T>获得执行的内容。</T>
+   //
+   // @return 执行
+   //============================================================
+   public String getExecute(){
+      return _execute;
+   }
+
+   //============================================================
+   // <T>设置执行的内容。</T>
+   //
+   // @param value 执行
+   //============================================================
+   public void setExecute(String value){
+      _execute = value;
    }
 
 }

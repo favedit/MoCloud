@@ -5,6 +5,7 @@ import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.tree.common.XTreeNode;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
@@ -17,7 +18,6 @@ import org.mo.eng.validator.IValidatorConsole;
 import org.mo.eng.validator.common.FStringValidator;
 import org.mo.jfa.common.service.RServiceResult;
 import org.mo.jfa.face.apl.page.IPublicPage;
-import org.mo.web.core.webtree.common.XTreeNode;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -172,22 +172,21 @@ public class FAbstractConfigurationService
          // 获得属性
          FContentNode contentNode = pair.value();
          String name = contentNode.name();
-         String type = contentNode.config().name();
+         String typeCode = contentNode.config().name();
          String label = contentNode.config().get("label");
-         String uuid = contentNode.config().objectId();
+         String guid = contentNode.config().objectId();
          boolean hasChild = contentNode.config().hasNode();
          boolean isValid = contentNode.config().getBoolean("is_valid", true);
          // 新建节点
          XTreeNode xnode = new XTreeNode();
-         xnode.setType(type);
-         xnode.setUuid(uuid);
+         xnode.setIsValid(isValid);
+         xnode.setTypeCode(typeCode);
+         xnode.setGuid(guid);
+         xnode.setCode(name);
          xnode.setLabel(name);
          xnode.setNote(label);
-         xnode.setChild(hasChild);
-         xnode.set("linker_name", name);
-         FXmlNode node = xnode.toSimpleNode();
-         node.set("is_valid", isValid);
-         outputNodes.push(node);
+         xnode.setHasChild(hasChild);
+         xnode.saveConfig(outputNodes.create(XTreeNode.CONTENT_NAME));
       }
       // 控制排序
       outputNodes.sortByAttribute("label");
@@ -242,16 +241,18 @@ public class FAbstractConfigurationService
       FXmlNodes outputNodes = output.config().nodes();
       for(int n = 0; n < xcontrols.count(); n++){
          FContentObject xcomponent = xcontrols.get(n);
+         String componentName = xcomponent.get(PTY_NAME);
+         String componentLabel = xcomponent.get(PTY_LABEL);
          // 建立树节点
          XTreeNode xnode = new XTreeNode();
-         xnode.setType(xcomponent.name());
-         xnode.setUuid(xcomponent.objectId());
-         xnode.setLabel(RString.nvl(xcomponent.get(PTY_NAME), xcomponent.name()));
-         xnode.setNote(xcomponent.get(PTY_LABEL));
-         xnode.setChild(xcomponent.hasNode());
-         FXmlNode node = xnode.toSimpleNode();
-         node.set("is_valid", xcomponent.get("is_valid"));
-         outputNodes.push(node);
+         xnode.setIsValid(xcomponent.getBoolean("is_valid", true));
+         xnode.setTypeCode(xcomponent.name());
+         xnode.setCode(componentName);
+         xnode.setGuid(xcomponent.objectId());
+         xnode.setLabel(RString.nvl(componentName, componentLabel));
+         xnode.setNote(componentLabel);
+         xnode.setHasChild(xcomponent.hasNode());
+         xnode.saveConfig(outputNodes.create(XTreeNode.CONTENT_NAME));
       }
       return EResult.Success;
    }

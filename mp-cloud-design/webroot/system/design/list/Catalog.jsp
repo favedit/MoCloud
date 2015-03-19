@@ -23,11 +23,11 @@ function onNodeClick(sender, node){
 	fmMain.frame_code.value = type.get('form_name');
 	fmMain.storage_code.value = storage;
 	if(storage == 'collection'){
-		fmMain.collection_code.value = node.label();
+		fmMain.collection_code.value = node.code();
 		fmMain.component_code.value = '';
 	}else if(storage == 'component'){
-		fmMain.collection_code.value = node.topNode().label();
-		fmMain.component_code.value = node.uuid;
+		fmMain.collection_code.value = node.topNode().code();
+		fmMain.component_code.value = node.guid();
 	}else{
 		throw new TError(o, 'Unknown storage type. (storage={1})', storage);
 	}

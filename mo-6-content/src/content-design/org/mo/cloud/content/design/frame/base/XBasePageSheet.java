@@ -1,17 +1,18 @@
 package org.mo.cloud.content.design.frame.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>页面表单对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBasePageSheet extends XContentObject
+public abstract class XBasePageSheet
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "PageSheet";

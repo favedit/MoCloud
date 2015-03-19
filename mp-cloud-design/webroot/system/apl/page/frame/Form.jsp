@@ -22,16 +22,18 @@ function doInsert(){
 }
 //----------------------------------------------------------
 function doSave(){
-   if(RWindow.inDisable){
+   // 检查窗口是否禁止
+   if(!RWindow.isEnable()){
       return;
    }
-   var emode = REnum.encode(EMode, modeCd)
-   if(EMode.Insert == emode){
+   // 执行命令
+   var emode = REnum.encode(EUiDataMode, modeCd)
+   if(emode == EUiDataMode.Insert){
       frame.doAction('insertAction');
-   }else if(EMode.Update == emode){
+   }else if(emode == EUiDataMode.Update){
       frame.doAction('updateAction');
    }else{
-      alert('Unknown action [' + mode + ']');
+      throw new TError(o, 'Unknown action [' + mode + ']');
    }
 }
 //----------------------------------------------------------
@@ -81,8 +83,10 @@ function _onload(){
    RRuntime.setProcessCd(EProcess.Release);
    RApplication.initialize();
    RBrowser.setContentPath('/system');
-   var xframe = RXml.makeNode(xFrame);
+   // 加载环境
+   RConsole.find(FEnvironmentConsole).load(xEnvironment);
    // 创建工具栏
+   var xframe = RXml.makeNode(xFrame);
    toolbar = RClass.create(FUiDataToolBar);
    RUiToolBar.fromNode(toolbar, xframe, _id_toolbar, true);
    //if(!toolbar){

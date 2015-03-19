@@ -41,6 +41,15 @@ public abstract class FAbstractConfigurationPage
    // 页面命令
    protected String _pageAction;
 
+   // 节点类型
+   protected String _nodeType;
+
+   // 节点过滤
+   protected String _nodeFilter;
+
+   // 节点排序
+   protected String _nodeSort;
+
    // 集合代码
    protected String _storageCode;
 
@@ -71,12 +80,6 @@ public abstract class FAbstractConfigurationPage
    //   private String _componentType;
    //
    //   private String _help;
-   //
-   //   private String _nodeFilter;
-   //
-   //   private String _nodeSort;
-   //
-   //   private String _nodeType;
    //
    //   protected String _action;
    //
@@ -109,7 +112,9 @@ public abstract class FAbstractConfigurationPage
    }
 
    //============================================================
-   // <T>接受环境内容。</T>
+   // <T>接收环境内容。</T>
+   //
+   // @param context 内容
    //============================================================
    public void attachContext(IWebContext context){
       IAttributes parameters = context.parameters();
@@ -118,38 +123,37 @@ public abstract class FAbstractConfigurationPage
       if(RString.isNotEmpty(frameName)){
          setFrameCode(frameName);
       }
-      //      String formService = parameters.get(PTY_FRAME_SERVICE, null);
-      //      if(RString.isNotEmpty(formService)){
-      //         setFormService(formService);
-      //      }
-      // 获得选中的数据
+      String formService = parameters.get(PTY_FRAME_SERVICE, null);
+      if(RString.isNotEmpty(formService)){
+         setFrameService(formService);
+      }
       _pageAction = parameters.get("do", null);
-      //      _nodeType = parameters.get(PTY_NODE_TYPE, null);
-      //      _nodeFilter = parameters.get(PTY_NODE_FILTER, null);
-      //      _nodeSort = parameters.get(PTY_NODE_SORT, null);
+      _nodeType = parameters.get(PTY_NODE_TYPE, null);
+      _nodeFilter = parameters.get(PTY_NODE_FILTER, null);
+      _nodeSort = parameters.get(PTY_NODE_SORT, null);
       _storageCode = parameters.get(PTY_STORAGE_CODE, null);
       _collectionCode = parameters.get(PTY_COLLECTION_CODE, null);
       _componentCode = parameters.get(PTY_COMPONENT_CODE, null);
       //      _componentType = parameters.get("component_type", null);
-      //      // 设置环境对象
-      //      if(parameters.contains(PTY_NODE_TYPE)){
-      //         setEnvironment(PTY_NODE_TYPE, _nodeType);
-      //      }
-      //      if(parameters.contains(PTY_NODE_FILTER)){
-      //         setEnvironment(PTY_NODE_FILTER, _nodeFilter);
-      //      }
-      //      if(parameters.contains(PTY_NODE_SORT)){
-      //         setEnvironment(PTY_NODE_SORT, _nodeSort);
-      //      }
-      //      if(parameters.contains(PTY_STORAGE_CODE)){
-      //         setEnvironment("sel_type", _selectType);
-      //      }
-      //      if(parameters.contains(PTY_COLLECTION_CODE)){
-      //         setEnvironment(PTY_COLLECTION_CODE, _selectCollection);
-      //      }
-      //      if(parameters.contains(PTY_COMPONENT_CODE)){
-      //         setEnvironment(PTY_COMPONENT_CODE, _selectComponent);
-      //      }
+      // 设置环境对象
+      if(parameters.contains(PTY_NODE_TYPE)){
+         setEnvironment(PTY_NODE_TYPE, _nodeType);
+      }
+      if(parameters.contains(PTY_NODE_FILTER)){
+         setEnvironment(PTY_NODE_FILTER, _nodeFilter);
+      }
+      if(parameters.contains(PTY_NODE_SORT)){
+         setEnvironment(PTY_NODE_SORT, _nodeSort);
+      }
+      if(parameters.contains(PTY_STORAGE_CODE)){
+         setEnvironment("storage_code", _storageCode);
+      }
+      if(parameters.contains(PTY_COLLECTION_CODE)){
+         setEnvironment(PTY_COLLECTION_CODE, _collectionCode);
+      }
+      if(parameters.contains(PTY_COMPONENT_CODE)){
+         setEnvironment(PTY_COMPONENT_CODE, _componentCode);
+      }
    }
 
    //============================================================
@@ -168,6 +172,60 @@ public abstract class FAbstractConfigurationPage
    //============================================================
    public void setPageAction(String pageAction){
       _pageAction = pageAction;
+   }
+
+   //============================================================
+   // <T>获得节点类型。</T>
+   //
+   // @return 节点类型
+   //============================================================
+   public String nodeType(){
+      return _nodeType;
+   }
+
+   //============================================================
+   // <T>设置节点类型。</T>
+   //
+   // @param nodeType 节点类型
+   //============================================================
+   public void setNodeType(String nodeType){
+      _nodeType = nodeType;
+   }
+
+   //============================================================
+   // <T>获得节点过滤。</T>
+   //
+   // @return 节点过滤
+   //============================================================
+   public String nodeFilter(){
+      return _nodeFilter;
+   }
+
+   //============================================================
+   // <T>设置节点过滤。</T>
+   //
+   // @param nodeFilter 节点过滤
+   //============================================================
+   public void setNodeFilter(String nodeFilter){
+      _nodeFilter = nodeFilter;
+   }
+
+   //============================================================
+   // <T>获得节点排序。</T>
+   //
+   // @return 节点排序
+   //============================================================
+   public String nodeSort(){
+      return _nodeSort;
+   }
+
+   //============================================================
+   // <T>设置节点排序。</T>
+   //
+   // @param code 节点排序
+   //============================================================
+   public void setNodeSort(String nodeSort){
+      _nodeSort = nodeSort;
    }
 
    //============================================================
@@ -499,36 +557,12 @@ public abstract class FAbstractConfigurationPage
    //      return _help;
    //   }
    //
-   //   public String getNodeFilter(){
-   //      return _nodeFilter;
-   //   }
-   //
-   //   public String getNodeSort(){
-   //      return _nodeSort;
-   //   }
-   //
-   //   public String getNodeType(){
-   //      return _nodeType;
-   //   }
-   //
    //   public void setComponentType(String componentType){
    //      _componentType = componentType;
    //   }
    //
    //   public void setHelp(String help){
    //      _help = help;
-   //   }
-   //
-   //   public void setNodeFilter(String nodeFilter){
-   //      _nodeFilter = nodeFilter;
-   //   }
-   //
-   //   public void setNodeSort(String nodeSort){
-   //      _nodeSort = nodeSort;
-   //   }
-   //
-   //   public void setNodeType(String _nodeType){
-   //      this._nodeType = _nodeType;
    //   }
    //
 }

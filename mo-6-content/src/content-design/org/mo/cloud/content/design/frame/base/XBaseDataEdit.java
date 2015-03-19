@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>表格复选列对象的内容基类。</T>
+// <T>数据文本编辑框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseColumnCheck
+public abstract class XBaseDataEdit
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "ColumnCheck";
+   public static final String CONTENT_NAME = "DataEdit";
 
    // 类型的定义
    @AContentField
@@ -125,6 +125,10 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String, "", "", "", "YYNY");
 
+   // 编辑尺寸的定义
+   @AContentField
+   public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
+
    // 数据名称的定义
    @AContentField
    public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
@@ -133,13 +137,61 @@ public abstract class XBaseColumnCheck
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
-   // 真值的定义
+   // 放大引用的定义
    @AContentField
-   public final static FContentField VALUE_TRUE = new FContentField("valueTrue", "value_true", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
 
-   // 假值的定义
+   // 放大字段的定义
    @AContentField
-   public final static FContentField VALUE_FALSE = new FContentField("valueFalse", "value_false", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
+
+   // 引用服务的定义
+   @AContentField
+   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
+
+   // 引用地址的定义
+   @AContentField
+   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
+
+   // 引用字段的定义
+   @AContentField
+   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
+
+   // 应用条件的定义
+   @AContentField
+   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
+
+   // 引用排序的定义
+   @AContentField
+   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑大小写类型的定义
+   @AContentField
+   public final static FContentField EDIT_CASE_CD = new FContentField("editCaseCd", "edit_case_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑模板的定义
+   @AContentField
+   public final static FContentField EDIT_PATTERN = new FContentField("editPattern", "edit_pattern", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑长度的定义
+   @AContentField
+   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑自动完成的定义
+   @AContentField
+   public final static FContentField EDIT_COMPLETE = new FContentField("editComplete", "edit_complete", EContentData.String, "", "", "", "YYNY");
+
+   // 校验最小长度的定义
+   @AContentField
+   public final static FContentField VALID_LENGTH_MIN = new FContentField("validLengthMin", "valid_length_min", EContentData.String, "", "", "", "YYNY");
+
+   // 校验最大长度的定义
+   @AContentField
+   public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String, "", "", "", "YYNY");
+
+   // 输入尺寸的定义
+   @AContentField
+   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -267,6 +319,10 @@ public abstract class XBaseColumnCheck
    @AName("label_size")
    protected String _labelSize;
 
+   // 编辑尺寸
+   @AName("edit_size")
+   protected String _editSize;
+
    // 数据名称
    @AName("data_name")
    protected String _dataName;
@@ -275,13 +331,61 @@ public abstract class XBaseColumnCheck
    @AName("data_type_cd")
    protected String _dataTypeCd;
 
-   // 真值
-   @AName("value_true")
-   protected String _valueTrue;
+   // 放大引用
+   @AName("zoom_reference")
+   protected String _zoomReference;
 
-   // 假值
-   @AName("value_false")
-   protected String _valueFalse;
+   // 放大字段
+   @AName("zoom_field")
+   protected String _zoomField;
+
+   // 引用服务
+   @AName("lov_service")
+   protected String _lovService;
+
+   // 引用地址
+   @AName("lov_reference")
+   protected String _lovReference;
+
+   // 引用字段
+   @AName("lov_fields")
+   protected String _lovFields;
+
+   // 应用条件
+   @AName("lov_where")
+   protected String _lovWhere;
+
+   // 引用排序
+   @AName("lov_order")
+   protected String _lovOrder;
+
+   // 编辑大小写类型
+   @AName("edit_case_cd")
+   protected String _editCaseCd;
+
+   // 编辑模板
+   @AName("edit_pattern")
+   protected String _editPattern;
+
+   // 编辑长度
+   @AName("edit_length")
+   protected String _editLength;
+
+   // 编辑自动完成
+   @AName("edit_complete")
+   protected String _editComplete;
+
+   // 校验最小长度
+   @AName("valid_length_min")
+   protected String _validLengthMin;
+
+   // 校验最大长度
+   @AName("valid_length_max")
+   protected String _validLengthMax;
+
+   // 输入尺寸
+   @AName("input_size")
+   protected String _inputSize;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -770,6 +874,24 @@ public abstract class XBaseColumnCheck
    }
 
    //============================================================
+   // <T>获得编辑尺寸的内容。</T>
+   //
+   // @return 编辑尺寸
+   //============================================================
+   public String getEditSize(){
+      return _editSize;
+   }
+
+   //============================================================
+   // <T>设置编辑尺寸的内容。</T>
+   //
+   // @param value 编辑尺寸
+   //============================================================
+   public void setEditSize(String value){
+      _editSize = value;
+   }
+
+   //============================================================
    // <T>获得数据名称的内容。</T>
    //
    // @return 数据名称
@@ -806,39 +928,255 @@ public abstract class XBaseColumnCheck
    }
 
    //============================================================
-   // <T>获得真值的内容。</T>
+   // <T>获得放大引用的内容。</T>
    //
-   // @return 真值
+   // @return 放大引用
    //============================================================
-   public String getValueTrue(){
-      return _valueTrue;
+   public String getZoomReference(){
+      return _zoomReference;
    }
 
    //============================================================
-   // <T>设置真值的内容。</T>
+   // <T>设置放大引用的内容。</T>
    //
-   // @param value 真值
+   // @param value 放大引用
    //============================================================
-   public void setValueTrue(String value){
-      _valueTrue = value;
+   public void setZoomReference(String value){
+      _zoomReference = value;
    }
 
    //============================================================
-   // <T>获得假值的内容。</T>
+   // <T>获得放大字段的内容。</T>
    //
-   // @return 假值
+   // @return 放大字段
    //============================================================
-   public String getValueFalse(){
-      return _valueFalse;
+   public String getZoomField(){
+      return _zoomField;
    }
 
    //============================================================
-   // <T>设置假值的内容。</T>
+   // <T>设置放大字段的内容。</T>
    //
-   // @param value 假值
+   // @param value 放大字段
    //============================================================
-   public void setValueFalse(String value){
-      _valueFalse = value;
+   public void setZoomField(String value){
+      _zoomField = value;
+   }
+
+   //============================================================
+   // <T>获得引用服务的内容。</T>
+   //
+   // @return 引用服务
+   //============================================================
+   public String getLovService(){
+      return _lovService;
+   }
+
+   //============================================================
+   // <T>设置引用服务的内容。</T>
+   //
+   // @param value 引用服务
+   //============================================================
+   public void setLovService(String value){
+      _lovService = value;
+   }
+
+   //============================================================
+   // <T>获得引用地址的内容。</T>
+   //
+   // @return 引用地址
+   //============================================================
+   public String getLovReference(){
+      return _lovReference;
+   }
+
+   //============================================================
+   // <T>设置引用地址的内容。</T>
+   //
+   // @param value 引用地址
+   //============================================================
+   public void setLovReference(String value){
+      _lovReference = value;
+   }
+
+   //============================================================
+   // <T>获得引用字段的内容。</T>
+   //
+   // @return 引用字段
+   //============================================================
+   public String getLovFields(){
+      return _lovFields;
+   }
+
+   //============================================================
+   // <T>设置引用字段的内容。</T>
+   //
+   // @param value 引用字段
+   //============================================================
+   public void setLovFields(String value){
+      _lovFields = value;
+   }
+
+   //============================================================
+   // <T>获得应用条件的内容。</T>
+   //
+   // @return 应用条件
+   //============================================================
+   public String getLovWhere(){
+      return _lovWhere;
+   }
+
+   //============================================================
+   // <T>设置应用条件的内容。</T>
+   //
+   // @param value 应用条件
+   //============================================================
+   public void setLovWhere(String value){
+      _lovWhere = value;
+   }
+
+   //============================================================
+   // <T>获得引用排序的内容。</T>
+   //
+   // @return 引用排序
+   //============================================================
+   public String getLovOrder(){
+      return _lovOrder;
+   }
+
+   //============================================================
+   // <T>设置引用排序的内容。</T>
+   //
+   // @param value 引用排序
+   //============================================================
+   public void setLovOrder(String value){
+      _lovOrder = value;
+   }
+
+   //============================================================
+   // <T>获得编辑大小写类型的内容。</T>
+   //
+   // @return 编辑大小写类型
+   //============================================================
+   public String getEditCaseCd(){
+      return _editCaseCd;
+   }
+
+   //============================================================
+   // <T>设置编辑大小写类型的内容。</T>
+   //
+   // @param value 编辑大小写类型
+   //============================================================
+   public void setEditCaseCd(String value){
+      _editCaseCd = value;
+   }
+
+   //============================================================
+   // <T>获得编辑模板的内容。</T>
+   //
+   // @return 编辑模板
+   //============================================================
+   public String getEditPattern(){
+      return _editPattern;
+   }
+
+   //============================================================
+   // <T>设置编辑模板的内容。</T>
+   //
+   // @param value 编辑模板
+   //============================================================
+   public void setEditPattern(String value){
+      _editPattern = value;
+   }
+
+   //============================================================
+   // <T>获得编辑长度的内容。</T>
+   //
+   // @return 编辑长度
+   //============================================================
+   public String getEditLength(){
+      return _editLength;
+   }
+
+   //============================================================
+   // <T>设置编辑长度的内容。</T>
+   //
+   // @param value 编辑长度
+   //============================================================
+   public void setEditLength(String value){
+      _editLength = value;
+   }
+
+   //============================================================
+   // <T>获得编辑自动完成的内容。</T>
+   //
+   // @return 编辑自动完成
+   //============================================================
+   public String getEditComplete(){
+      return _editComplete;
+   }
+
+   //============================================================
+   // <T>设置编辑自动完成的内容。</T>
+   //
+   // @param value 编辑自动完成
+   //============================================================
+   public void setEditComplete(String value){
+      _editComplete = value;
+   }
+
+   //============================================================
+   // <T>获得校验最小长度的内容。</T>
+   //
+   // @return 校验最小长度
+   //============================================================
+   public String getValidLengthMin(){
+      return _validLengthMin;
+   }
+
+   //============================================================
+   // <T>设置校验最小长度的内容。</T>
+   //
+   // @param value 校验最小长度
+   //============================================================
+   public void setValidLengthMin(String value){
+      _validLengthMin = value;
+   }
+
+   //============================================================
+   // <T>获得校验最大长度的内容。</T>
+   //
+   // @return 校验最大长度
+   //============================================================
+   public String getValidLengthMax(){
+      return _validLengthMax;
+   }
+
+   //============================================================
+   // <T>设置校验最大长度的内容。</T>
+   //
+   // @param value 校验最大长度
+   //============================================================
+   public void setValidLengthMax(String value){
+      _validLengthMax = value;
+   }
+
+   //============================================================
+   // <T>获得输入尺寸的内容。</T>
+   //
+   // @return 输入尺寸
+   //============================================================
+   public String getInputSize(){
+      return _inputSize;
+   }
+
+   //============================================================
+   // <T>设置输入尺寸的内容。</T>
+   //
+   // @param value 输入尺寸
+   //============================================================
+   public void setInputSize(String value){
+      _inputSize = value;
    }
 
 }
