@@ -6,7 +6,6 @@ import org.mo.web.protocol.context.IWebOutput;
 
 public class RServiceResult
 {
-
    public static String NODE_COMMANDS = "Commands";
 
    public static String NODE_COMMAND = "Command";

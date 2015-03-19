@@ -6,19 +6,19 @@
    <!-- 设计：内容设计持久服务                               -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.design.persistence'
+         name  = 'system.design.persistence'
          face  = 'org.mo.cloud.system.face.design.persistence.IPersistenceService'/>
 
    <Component
          face  = 'org.mo.cloud.system.face.design.persistence.IPersistenceService'
-         class  = 'org.mo.cloud.system.face.design.persistence.FPersistenceService'
+         class = 'org.mo.cloud.system.face.design.persistence.FPersistenceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
    <!-- 设计：内容列表服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.design.list'
+         name  = 'system.design.list'
          face  = 'org.mo.cloud.system.face.design.list.IListService'/>
 
    <Component
@@ -30,7 +30,7 @@
    <!-- 设计：内容目录服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.design.tree'
+         name  = 'system.design.tree'
          face  = 'org.mo.cloud.system.face.design.tree.ITreeService'/>
 
    <Component
@@ -42,7 +42,7 @@
    <!-- 设计：内容表单服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.design.frame'
+         name  = 'system.design.frame'
          face  = 'org.mo.cloud.system.face.design.frame.IFrameService'/>
 
    <Component
@@ -54,7 +54,7 @@
    <!-- 设计：内容数据服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.design.dataset'
+         name  = 'system.design.dataset'
          face  = 'org.mo.cloud.system.face.database.dataset.IDatasetService'/>
 
    <Component

@@ -41,63 +41,46 @@ function doDelete(){
    frame.doAction('deleteAction');
 }
 //----------------------------------------------------------
-function _onloadAll(){
-   MoJS.connect();
-   //
+function onPageLoad(){
    var start = new Date().getTime();
-   RWindow.connect(window);
-   // RConsole.find(FLoggerConsole).connect();
-   var xform = RXml.makeNode(xForm);
-   var xvalue = RXml.makeNode(xValue);
-   var emode = REnum.encode(EMode, mode)
-   // Build toolbar
-   toolbar = RToolBar.fromNode(xform, _id_toolbar, true);
-   if(!toolbar){
-      toolbar = RControl.fromXml(xToolBar, _id_toolbar);
-   }
-   toolbar.psMode(emode);  
-   // Build form
-   form = RControl.fromNode(xform, _id_form);
-   form.psMode(emode);
-   if(EMode.Insert == emode){
-      var valueNode  = RXml.makeNode(xValue);
-      form.doPrepare(valueNode.attributes());
-   }else{
-      if(RClass.isClass(form, FForm)){
-         form.loadValue(xvalue, EStore.DataNvl);
-      }else if(RClass.isClass(form, FTable)){
-         form.loadDatasets(xvalue)
-      }
-   }
-   top.document.title = form.label;
-   form.psRefresh();
-   form.focus();
-   // show
-   var end = new Date().getTime();
-   top.document.title = form.label + ' ( Show page in ' + (end - pageStart) + 'ms. ' + 
-      'Build form: ' + (end - start) + 'ms )';
-}
-//----------------------------------------------------------
-function _onload(){
    // 环境设置
    RRuntime.setProcessCd(EProcess.Release);
    RApplication.initialize();
    RBrowser.setContentPath('/system');
    // 加载环境
+   var xframe = RXml.makeNode(xFrame);
+   var xvalue = RXml.makeNode(xValue);
    RConsole.find(FEnvironmentConsole).load(xEnvironment);
    // 创建工具栏
-   var xframe = RXml.makeNode(xFrame);
    toolbar = RClass.create(FUiDataToolBar);
    RUiToolBar.fromNode(toolbar, xframe, _id_toolbar, true);
+   toolbar.psMode(emode);  
    //if(!toolbar){
    //   toolbar = RControl.fromXml(xToolBar, _id_toolbar);
    //}
    //toolbar.psMode(emode);  
    toolbar.setPanel(_id_toolbar);
    // 创建表单
+   var emode = REnum.encode(EUiDataMode, modeCd)
    frame = RClass.create(FUiDataFrame);
+   frame.psMode(emode);
    RControl.build(frame, xframe, null, _id_frame);
+   if(emode == EUiDataMode.Insert){
+      frame.doPrepare(xvalue.attributes());
+   }else{
+      if(RClass.isClass(frame, FUiFrame)){
+         frame.dsLoadValue(xvalue, EUiDataStore.DataNvl);
+      }else if(RClass.isClass(form, FUiTable)){
+         frame.dsLoadDatasets(xvalue)
+      }
+   }
    frame.setPanel(_id_frame);
+   //frame.psRefresh();
+   //frame.focus();
+   // 加载内容
+   // show
+   var end = new Date().getTime();
+   RWindow.setCaption(frame.label() + ' (Show page in ' + (end - pageStart) + 'ms. Build form: ' + (end - start) + 'ms)');
 }
 </SCRIPT>
 <!-- Xml Config ---------------------------------------------->
@@ -105,7 +88,7 @@ function _onload(){
 <SCRIPT id='xValue' type='application/xml'><jh:write source='&page.frameValue' format='text'/></SCRIPT>
 <SCRIPT id='xEnvironment' type='application/xml'><jh:write source='&page.environmentXml' format='text'/></SCRIPT>
 <!-- Body begin ---------------------------------------------->
-<jh:body style='bodyMain' scroll='no' onload='_onload()'>
+<jh:body style='bodyMain' scroll='no' onload='onPageLoad()'>
 <jh:form>
 <jh:hidden name='storage_code' source='&page.storageCode'/>
 <jh:hidden name='collection_code' source='&page.collectionCode'/>

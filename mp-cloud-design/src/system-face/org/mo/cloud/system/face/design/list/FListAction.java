@@ -1,9 +1,7 @@
 package org.mo.cloud.system.face.design.list;
 
-import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationAction;
 import org.mo.cloud.system.face.common.ICommonAction;
-import org.mo.data.logic.ILogicContext;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -38,10 +36,7 @@ public class FListAction
    //============================================================
    @Override
    public String catalog(IWebContext context,
-                         ILogicContext logicContext,
                          FListPage page){
-      FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
-      logic.fetchAll();
       return catalog(context, page, PAGE_CATALOG);
    }
 
@@ -55,7 +50,7 @@ public class FListAction
    @Override
    public String list(IWebContext context,
                       FListPage page){
-      return list(context, page, IPublicPage.XOBJECT_FORM);
+      return list(context, page, ICommonAction.XFRAME);
    }
 
    //============================================================
@@ -68,7 +63,7 @@ public class FListAction
    @Override
    public String insert(IWebContext context,
                         FListPage page){
-      return insert(context, page, IPublicPage.XOBJECT_FORM);
+      return insert(context, page, ICommonAction.XFRAME);
    }
 
    //============================================================
@@ -107,7 +102,7 @@ public class FListAction
    @Override
    public String sort(IWebContext context,
                       FListPage page){
-      return sort(context, page, IPublicPage.XOBJECT_SORT);
+      return sort(context, page, ICommonAction.XFRAME);
    }
 
    //============================================================

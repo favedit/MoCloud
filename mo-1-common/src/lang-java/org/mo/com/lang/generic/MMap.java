@@ -81,10 +81,10 @@ public class MMap<P extends IPair<N, V>, N, V>
    protected void innerConstruct(Class<N> nameClass,
                                  Class<V> valueClass,
                                  int capacity){
-      if(null == nameClass){
+      if(nameClass == null){
          throw new NullPointerException("nameClass");
       }
-      if(null == valueClass){
+      if(valueClass == null){
          throw new NullPointerException("valueClass");
       }
       _nameClass = nameClass;
@@ -182,7 +182,7 @@ public class MMap<P extends IPair<N, V>, N, V>
          N find = innerMakeName(name);
          int hash = RHash.hash(find);
          SHashIntEntry entry = _table[hash % _table.length];
-         while(null != entry){
+         while(entry != null){
             if(entry.hash == hash){
                N entryName = innerMakeName(_names[entry.index]);
                if(find.equals(entryName)){
@@ -232,7 +232,7 @@ public class MMap<P extends IPair<N, V>, N, V>
    //============================================================
    @SuppressWarnings("unchecked")
    public void ensureSize(int count){
-      if(null == _values){
+      if(_values == null){
          // 创建数据
          int total = Math.max(CAPACITY, count);
          _names = (N[])Array.newInstance(_nameClass, total);
@@ -301,7 +301,7 @@ public class MMap<P extends IPair<N, V>, N, V>
    public void append(IMap<N, V> map,
                       int offset,
                       int count){
-      if(null != map){
+      if(map != null){
          int loop = offset + count;
          for(int n = offset; n < loop; n++){
             set(map.name(n), map.value(n));
@@ -321,7 +321,7 @@ public class MMap<P extends IPair<N, V>, N, V>
                       V[] values,
                       int offset,
                       int count){
-      if((null != names) && (null != values)){
+      if((names != null) && (values != null)){
          int n = offset - 1;
          int loop = offset + count;
          while(++n < loop){
@@ -432,7 +432,7 @@ public class MMap<P extends IPair<N, V>, N, V>
    @Override
    public void set(N name,
                    V value){
-      if(null == name){
+      if(name == null){
          throw new NullPointerException("name");
       }
       // 查找内容
@@ -475,7 +475,7 @@ public class MMap<P extends IPair<N, V>, N, V>
    //============================================================
    @Override
    public V remove(N name){
-      if(null == name){
+      if(name == null){
          throw new NullPointerException("name");
       }
       // find

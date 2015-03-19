@@ -19,29 +19,17 @@ public class FAbstractConfigurationBase
 
    public final static String NAME_SORT = "sortList";
 
-   public final static String PTY_NAME = "name";
-
-   public final static String PTY_LABEL = "label";
-
-   public final static String PTY_TYPE = "_type";
-
-   public final static String PTY_NODE_TYPE = "node_type";
-
-   public final static String PTY_NODE_FILTER = "node_filter";
-
-   public final static String PTY_NODE_SORT = "node_sort";
-
-   public final static String PTY_SEL_TYPE = "sel_type";
-
-   public final static String PTY_SEL_COLLECTION = "sel_collection";
-
-   public final static String PTY_SEL_COMPONENT = "sel_component";
-
    public final static String TYPE_COLLECTION = "collection";
 
    public final static String TYPE_COMPONENT = "component";
 
+   public final static String PTY_TYPE = "_type";
+
    public final static String PTY_IS_VALID = "is_valid";
+
+   public final static String PTY_NAME = "name";
+
+   public final static String PTY_LABEL = "label";
 
    protected int _processConditionOrder = 0;
 
@@ -63,11 +51,11 @@ public class FAbstractConfigurationBase
    // @return 环境设置
    //============================================================
    public FXmlNode getEnvironmentNode(IWebInput input){
-      FXmlNode config = input.config().findNode(NODE_ENVIRONMENT);
-      if(config == null){
+      FXmlNode xconfig = input.config().findNode(NODE_ENVIRONMENT);
+      if(xconfig == null){
          throw new FFatalError("Can't find environment config.");
       }
-      return config;
+      return xconfig;
    }
 
    //============================================================
@@ -77,14 +65,14 @@ public class FAbstractConfigurationBase
    // @return 选择设置
    //============================================================
    public FXmlNode getSelectNode(IWebInput input){
-      FXmlNode config = input.config().node("Node");
-      if(config == null){
-         config = input.config().findNode("TreeNode");
+      FXmlNode xconfig = input.config().node("Node");
+      if(xconfig == null){
+         xconfig = input.config().findNode("TreeNode");
       }
-      if(config == null){
+      if(xconfig == null){
          throw new FFatalError("Can't find select node.");
       }
-      return config;
+      return xconfig;
    }
 
    //============================================================
@@ -94,11 +82,11 @@ public class FAbstractConfigurationBase
    // @return 数据设置
    //============================================================
    public FXmlNode getDataNode(IWebInput input){
-      FXmlNode config = input.config().findNode("Data");
-      if(config == null){
+      FXmlNode xconfig = input.config().findNode("Data");
+      if(xconfig == null){
          throw new FFatalError("Can't find data config.");
       }
-      return config;
+      return xconfig;
    }
 
 }

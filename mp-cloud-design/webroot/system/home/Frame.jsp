@@ -111,7 +111,8 @@ function onPageLoad(){
 		btn.onmouseleave = onButtonLeave;
 	}
 	selectTitlePage(_id_page[0]);
-   onButtonClick(null, "/design/list/List.wa?do=catalog");
+   //onButtonClick(null, "/design/list/List.wa?do=catalog");
+   onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=&node_filter=")
    RWindow.setEnable(true);
    //RWindow.connect(window);
    //RWindow.setEnable(false, true);
@@ -178,18 +179,16 @@ function onPageLoad(){
 			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/persistence/Persistence.wa?do=catalog")'>持久化对象</TD>
 			<TD>&nbsp;</TD>
 			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/list/List.wa?do=catalog")'>列表</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webtools/WebTools.wa?do=catalog")'>工具栏</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webtree/WebTree.wa?do=catalog")'>树目录</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webtheme/WebTheme.wa?do=catalog")'>主题</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/toolbar/WebTools.wa?do=catalog")'>工具栏</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/tree/WebTree.wa?do=catalog")'>树目录</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/theme/WebTheme.wa?do=catalog")'>主题</TD>
 			<TD>&nbsp;</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webform/WebForm.wa?do=catalog&node_type=Style&node_filter=")'>样式</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webform/WebForm.wa?do=catalog&node_type=Template&node_filter=")'>模板</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webform/WebForm.wa?do=catalog&node_type=Picker&node_filter=")'>选取</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webform/WebForm.wa?do=catalog&node_type=Form&node_filter=")'>表单</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webform/WebForm.wa?do=catalog&node_type=List&node_filter=")'>表格</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webform/WebForm.wa?do=catalog&node_type=&node_filter=")'>全部</TD>
-			<!-- <TD>&nbsp;</TD>
-			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/webwindow/WebWindow.wa?do=catalog")'>窗口</TD>  -->
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=Style&node_filter=")'>样式</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=Template&node_filter=")'>模板</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=Picker&node_filter=")'>选取</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=Form&node_filter=")'>表单</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=List&node_filter=")'>表格</TD>
+			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/frame/Frame.wa?do=catalog&node_type=&node_filter=")'>全部</TD>
          <TD>&nbsp;</TD>
 			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/chart/Chart.wa?do=catalog&node_type=&node_filter=")'>图表</TD>
 			<TD id='_id_button' onmousedown='onButtonClick(this, "/design/report/Report.wa?do=catalog&node_type=&node_filter=")'>报表</TD>

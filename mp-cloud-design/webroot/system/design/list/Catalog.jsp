@@ -20,7 +20,7 @@ function onNodeClick(sender, node){
    var type = node.type();
    var storage = type.storage();
 	fmMain.target = 'frmMain';
-	fmMain.frame_code.value = type.get('form_name');
+	fmMain.frame_code.value = type.get('frame_code');
 	fmMain.storage_code.value = storage;
 	if(storage == 'collection'){
 		fmMain.collection_code.value = node.code();
@@ -56,20 +56,20 @@ function onPageLoad(){
 <!-- Toolbar config ------------------------------------------>
 <SCRIPT id='xToolBar' type='application/xml'>
 <ToolBar width='100%' height='100%' align='right'>
-	<ToolButtonText name='btnForm' label='列表定义' icon='tools.design' target='frmMain' page='#/design/list/List.wa?do=list&amp;form_name=design.list.ListList'/>
+	<ToolButtonText name='btnForm' label='列表定义' icon='tools.design' target='frmMain' page='#/design/list/List.wa?do=list&amp;form_name=system.design.list.ListList'/>
 	<ToolButton name='btnRefresh' icon='tools.refresh' action='refreshNode()'/>
 </ToolBar>
 </SCRIPT>
 <!-- TreeView config ----------------------------------------->
-<jc:tree name='xTree' source='design.list'/>
+<jc:tree name='xTree' source='system.design.list'/>
 <!-- Body begin ---------------------------------------------->
 <jh:body style='Frame_Catalog' scroll='no' onload='onPageLoad()'>
 <jh:form name='fmMain' method='post'>
 <!-- Hidden -------------------------------------------------->
-<jh:hidden name='frame_code'/>
 <jh:hidden name='storage_code'/>
 <jh:hidden name='collection_code'/>
 <jh:hidden name='component_code'/>
+<jh:hidden name='frame_code'/>
 <!-- Catalog ------------------------------------------------->
 <jc:include uri='#/apl/template/CatalogBody.tpl'/>
 </jh:form>

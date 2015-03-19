@@ -5,6 +5,10 @@ import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.configuration.RContentConfiguration;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
+import org.mo.cloud.content.design.persistence.FPersistence;
+import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.cloud.content.design.tree.common.XTreeNode;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FAttributes;
@@ -16,7 +20,6 @@ import org.mo.com.xml.FXmlNodes;
 import org.mo.core.aop.face.ALink;
 import org.mo.eng.validator.IValidatorConsole;
 import org.mo.eng.validator.common.FStringValidator;
-import org.mo.jfa.common.service.RServiceResult;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
@@ -39,6 +42,10 @@ public class FAbstractConfigurationService
    // 校验控制台接口
    @ALink
    protected IValidatorConsole _validatorConsole;
+
+   // 持久化控制台接口
+   @ALink
+   protected IPersistenceConsole _persistenceConsole;
 
    // 内容配置控制台
    @ALink
@@ -71,24 +78,34 @@ public class FAbstractConfigurationService
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   protected void saveCollection(IWebContext context,
-                                 IWebInput input,
-                                 IWebOutput output){
+   protected EResult saveCollection(IWebContext context,
+                                    IWebInput input,
+                                    IWebOutput output){
       // 查找上传的控件数据信息
-      FXmlNode data = input.config().findNode("Data");
-      if(data == null){
+      FXmlNode xconfig = input.config().findNode("Data");
+      if(xconfig == null){
          throw new FFatalError("Collection config is null.");
       }
+      // 查找持久器
+      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, _spaceName);
+      if(persistence == null){
+         throw new FFatalError("Persistence is not exists. (storage_name={1}, space_name={2})", _storageName, _spaceName);
+      }
       // 查找目录树和控件定义对象
-      FXmlNode envNode = input.config().findNode("Environment");
-      String collection = envNode.get(PTY_SEL_COLLECTION);
-      if(RString.isEmpty(collection)){
+      FXmlNode xenvironment = input.config().findNode("Environment");
+      String collectionCode = xenvironment.get(RContentConfiguration.PTY_COLLECTION_CODE);
+      if(RString.isEmpty(collectionCode)){
          throw new FFatalError("Can't find selected collection.");
       }
       // 获得内容空间
-      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
-      contentNode.config().assignAttributes(data.attributes());
+      String type = xconfig.get(RContentConfiguration.PTY_TYPE);
+      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collectionCode);
+      FAttributes attributes = new FAttributes();
+      persistence.setAttributes(type, attributes, contentNode.config().attributes(), EPersistenceMode.Config);
+      persistence.setAttributes(type, attributes, xconfig.attributes(), EPersistenceMode.Config);
+      contentNode.config().attributes().assign(attributes);
       contentNode.store();
+      return EResult.Success;
    }
 
    //============================================================
@@ -98,59 +115,51 @@ public class FAbstractConfigurationService
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   protected void saveComponent(IWebContext context,
-                                IWebInput input,
-                                IWebOutput output){
+   protected EResult saveComponent(IWebContext context,
+                                   IWebInput input,
+                                   IWebOutput output){
       // 获得上传数据
-      FXmlNode envNode = getEnvironmentNode(input);
-      FXmlNode dataNode = getDataNode(input);
+      FXmlNode xenvironment = getEnvironmentNode(input);
+      FXmlNode xconfig = getDataNode(input);
+      String type = xconfig.get(RContentConfiguration.PTY_TYPE);
+      // 查找持久器
+      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, _spaceName);
+      if(persistence == null){
+         throw new FFatalError("Persistence is not exists. (storage_name={1}, space_name={2})", _storageName, _spaceName);
+      }
       // 查找表单和控件定义对象
-      String type = envNode.get(PTY_SEL_TYPE);
-      String collection = envNode.get(PTY_SEL_COLLECTION);
-      String component = envNode.get(PTY_SEL_COMPONENT);
+      String storageCode = xenvironment.get(RContentConfiguration.PTY_STORAGE_CODE);
+      String collectionCode = xenvironment.get(RContentConfiguration.PTY_COLLECTION_CODE);
+      String componentCode = xenvironment.get(RContentConfiguration.PTY_COMPONENT_CODE);
       // 查找XML集合对象
-      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
+      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collectionCode);
       // 根据类型来选择操作
-      if(TYPE_COLLECTION.equals(type)){
-         // 存储XML集合对象
-         contentNode.config().assignAttributes(dataNode.attributes());
-      }else if(TYPE_COMPONENT.equals(type)){
-         // 存储XML对象
-         FContentObject xcomponent = contentNode.search(component);
-         if(null == xcomponent){
-            throw new FFatalError("Component is null. (collection={0}, component={1})", collection, component);
+      FAttributes attributes = new FAttributes();
+      if(TYPE_COLLECTION.equals(storageCode)){
+         // 存储配置集合对象
+         persistence.setAttributes(type, attributes, contentNode.config().attributes(), EPersistenceMode.Config);
+         persistence.setAttributes(type, attributes, xconfig.attributes(), EPersistenceMode.Config);
+         contentNode.config().attributes().assign(attributes);
+      }else if(TYPE_COMPONENT.equals(storageCode)){
+         // 存储配置对象
+         FContentObject xcomponent = contentNode.search(componentCode);
+         if(xcomponent == null){
+            throw new FFatalError("Component is null. (collection={0}, component={1})", collectionCode, componentCode);
          }
          // 更新操作
-         String componentType = dataNode.get(PTY_TYPE);
-         if(RString.equalsIgnoreCase(componentType, xcomponent.name())){
-            // 读取控件设置
-            xcomponent.assignAttributes(dataNode.attributes());
-         }else{
-            // 查找当前控件的父控件
-            FContentObject xparent = xcomponent.parent();
-            if(null == xparent){
-               throw new FFatalError("Control parent is null. (collection={0}, component={1})", collection, component);
-            }
-            // 创建指定类型的新控件
-            dataNode.setName(componentType);
-            //IXmlObject xcreate = console.createElement(dataNode, EXmlConfig.Value);
-            FContentObject xcreate = new FContentObject();
-            //            if(xcreate == null){
-            //               throw new FFatalError("Create component failure. (collection={0}, config={1})", collection, dataNode.xml());
-            //            }
-            int index = xparent.nodes().indexOf(xcomponent);
-            if(-1 == index){
-               throw new FFatalError("Find component index failure. (collection={0}, component={1})", collection, component);
-            }
-            xparent.nodes().set(index, xcreate);
-            // 刷新树内容
-            RServiceResult.setTreeParentRefresh(output);
-         }
+         String componentType = xconfig.get(RContentConfiguration.PTY_TYPE);
+         persistence.setAttributes(componentType, attributes, xcomponent.attributes(), EPersistenceMode.Config);
+         persistence.setAttributes(componentType, attributes, xconfig.attributes(), EPersistenceMode.Config);
+         xcomponent.attributes().assign(attributes);
+         xcomponent.setName(componentType);
+         // 刷新树内容
+         RContentConfiguration.setTreeParentRefresh(output);
       }else{
-         throw new FFatalError("Unknown select type. (type={0})", type);
+         throw new FFatalError("Unknown select type. (type={0})", storageCode);
       }
       // 存储表单
       contentNode.store();
+      return EResult.Success;
    }
 
    //============================================================
@@ -272,7 +281,7 @@ public class FAbstractConfigurationService
       FXmlNode envNode = getEnvironmentNode(input);
       FXmlNode dataNode = getDataNode(input);
       // 判断操作类型
-      String selectType = envNode.get(PTY_SEL_TYPE);
+      String selectType = envNode.get(RContentConfiguration.PTY_STORAGE_CODE);
       String uuid = null;
       if(TYPE_COLLECTION.equals(selectType)){
          // 基本数据检查
@@ -291,14 +300,14 @@ public class FAbstractConfigurationService
          contentNode.store();
          uuid = contentNode.config().objectId();
          // 刷新树目录
-         RServiceResult.setTreeReload(output);
+         RContentConfiguration.setTreeReload(output);
       }else if(TYPE_COMPONENT.equals(selectType)){
          // 查找选中的表单和控件
-         String collection = envNode.get(PTY_SEL_COLLECTION);
+         String collection = envNode.get(RContentConfiguration.PTY_COLLECTION_CODE);
          FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
          // 查找父控件，当是顶层控件时，父控件为空
          FContentObject xparent = null;
-         String parentControl = envNode.get(PTY_SEL_COMPONENT);
+         String parentControl = envNode.get(RContentConfiguration.PTY_COMPONENT_CODE);
          if(RString.isNotEmpty(parentControl)){
             xparent = contentNode.search(parentControl);
             if(null == xparent){
@@ -323,12 +332,12 @@ public class FAbstractConfigurationService
          }
          contentNode.store();
          // 刷新树目录
-         RServiceResult.setTreeNodeRefresh(output, uuid);
+         RContentConfiguration.setTreeNodeRefresh(output, uuid);
       }else{
          throw new FFatalError("Unknown select type. (type={1})", selectType);
       }
       // 设置页面转向
-      RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
+      RContentConfiguration.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
       return EResult.Success;
 
    }
@@ -345,17 +354,16 @@ public class FAbstractConfigurationService
                          IWebInput input,
                          IWebOutput output){
       // 获得上传数据
-      FXmlNode envNode = getEnvironmentNode(input);
+      FXmlNode xenvironment = getEnvironmentNode(input);
       // 判断操作类型
-      String type = envNode.get(PTY_SEL_TYPE);
-      if(TYPE_COLLECTION.equals(type)){
-         saveCollection(context, input, output);
-      }else if(TYPE_COMPONENT.equals(type)){
-         saveComponent(context, input, output);
+      String storageCode = xenvironment.get(RContentConfiguration.PTY_STORAGE_CODE);
+      if(TYPE_COLLECTION.equals(storageCode)){
+         return saveCollection(context, input, output);
+      }else if(TYPE_COMPONENT.equals(storageCode)){
+         return saveComponent(context, input, output);
       }else{
-         throw new FFatalError("Unknown select type. (type={1})", type);
+         throw new FFatalError("Unknown select type. (type={1})", storageCode);
       }
-      return EResult.Success;
 
    }
 
@@ -371,36 +379,36 @@ public class FAbstractConfigurationService
                          IWebInput input,
                          IWebOutput output){
       // 获得上传数据
-      FXmlNode envNode = getEnvironmentNode(input);
+      FXmlNode xenvironment = getEnvironmentNode(input);
       // 判断操作类型
-      String type = envNode.get(PTY_SEL_TYPE);
-      String collection = envNode.get(PTY_SEL_COLLECTION);
+      String storageCode = xenvironment.get(RContentConfiguration.PTY_STORAGE_CODE);
+      String collectionCode = xenvironment.get(RContentConfiguration.PTY_COLLECTION_CODE);
       // 获得内容空间
-      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
-      if(TYPE_COLLECTION.equals(type)){
+      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collectionCode);
+      if(TYPE_COLLECTION.equals(storageCode)){
          // 删除选中的内容节点对象
          contentNode.remove();
-      }else if(TYPE_COMPONENT.equals(type)){
+      }else if(TYPE_COMPONENT.equals(storageCode)){
          // 删除选中的内容对象
-         String component = envNode.get(PTY_SEL_COMPONENT);
-         FContentObject xcomponent = contentNode.search(component);
+         String componentCode = xenvironment.get(RContentConfiguration.PTY_COMPONENT_CODE);
+         FContentObject xcomponent = contentNode.search(componentCode);
          if(xcomponent == null){
-            throw new FFatalError("Xml component is not found. (collection={1},component={2})", collection, component);
+            throw new FFatalError("Xml component is not found. (collection={1},component={2})", collectionCode, componentCode);
          }
          // 查找要删除XML对象的父节点对象
          FContentObject xparent = xcomponent.parent();
          if(xparent == null){
-            throw new FFatalError("Xml parent is not found. (collection={1},component={2})", collection, component);
+            throw new FFatalError("Xml parent is not found. (collection={1},component={2})", collectionCode, componentCode);
          }
          // 删除XML对象
          xparent.nodes().remove(xcomponent);
          contentNode.store();
       }else{
-         throw new FFatalError("Unknown select type. (type={0})", type);
+         throw new FFatalError("Unknown select type. (type={0})", storageCode);
       }
       // 刷新树目录
-      RServiceResult.setTreeParentRefresh(output);
-      RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
+      RContentConfiguration.setTreeParentRefresh(output);
+      RContentConfiguration.setPageRedirect(output, IPublicPage.PROCESS_END_INSERT);
       return EResult.Success;
 
    }
@@ -422,7 +430,7 @@ public class FAbstractConfigurationService
          throw new FFatalError("Environment config is null.");
       }
       // 查找XML集合对象
-      String collection = envNode.get(PTY_SEL_COLLECTION);
+      String collection = envNode.get(RContentConfiguration.PTY_COLLECTION_CODE);
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
       FXmlNode sortForm = input.config().findNode("FWebForm");
       FXmlNode sortNode = sortForm.findNode("FListBox", "name", NAME_SORT);
@@ -430,12 +438,12 @@ public class FAbstractConfigurationService
          throw new FFatalError("Sort config is null.");
       }
       // 根据类型来选择操作
-      String type = envNode.get(PTY_SEL_TYPE);
+      String type = envNode.get(RContentConfiguration.PTY_STORAGE_CODE);
       FContentObject xsort = null;
       if(TYPE_COLLECTION.equals(type)){
          xsort = contentNode.config();
       }else if(TYPE_COMPONENT.equals(type)){
-         String component = envNode.get(PTY_SEL_COMPONENT);
+         String component = envNode.get(RContentConfiguration.PTY_COMPONENT_CODE);
          FContentObject xcomponent = contentNode.search(component);
          if(xcomponent == null){
             throw new FFatalError("Component is null. (collection={0}, component={1})", collection, component);
@@ -449,8 +457,8 @@ public class FAbstractConfigurationService
          contentNode.store();
       }
       // 刷新树目录节点
-      RServiceResult.setTreeRefresh(output);
-      RServiceResult.setPageRedirect(output, IPublicPage.PROCESS_SUCCESS);
+      RContentConfiguration.setTreeRefresh(output);
+      RContentConfiguration.setPageRedirect(output, IPublicPage.PROCESS_SUCCESS);
       return EResult.Success;
 
    }

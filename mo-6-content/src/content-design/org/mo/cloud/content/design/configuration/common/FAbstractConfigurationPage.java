@@ -2,6 +2,7 @@ package org.mo.cloud.content.design.configuration.common;
 
 import org.mo.cloud.content.design.configuration.FContentNode;
 import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.RContentConfiguration;
 import org.mo.com.lang.FObjectId;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.RString;
@@ -14,30 +15,6 @@ import org.mo.web.protocol.context.IWebContext;
 public abstract class FAbstractConfigurationPage
       extends FObjectId
 {
-   // 节点过滤
-   public final static String PTY_NODE_FILTER = "node_filter";
-
-   // 节点排序
-   public final static String PTY_NODE_SORT = "node_sort";
-
-   // 节点类型
-   public final static String PTY_NODE_TYPE = "node_type";
-
-   // 存储代码
-   public final static String PTY_STORAGE_CODE = "storage_code";
-
-   // 集合代码
-   public final static String PTY_COLLECTION_CODE = "collection_code";
-
-   // 组件代码
-   public final static String PTY_COMPONENT_CODE = "component_code";
-
-   // 表单名称
-   public final static String PTY_FRAME_CODE = "frame_code";
-
-   // 表单服务
-   public final static String PTY_FRAME_SERVICE = "frame_service";
-
    // 页面命令
    protected String _pageAction;
 
@@ -119,40 +96,40 @@ public abstract class FAbstractConfigurationPage
    public void attachContext(IWebContext context){
       IAttributes parameters = context.parameters();
       // 填充数据
-      String frameName = parameters.get(PTY_FRAME_CODE, null);
+      String frameName = parameters.get(RContentConfiguration.PTY_FRAME_CODE, null);
       if(RString.isNotEmpty(frameName)){
          setFrameCode(frameName);
       }
-      String formService = parameters.get(PTY_FRAME_SERVICE, null);
+      String formService = parameters.get(RContentConfiguration.PTY_FRAME_SERVICE, null);
       if(RString.isNotEmpty(formService)){
          setFrameService(formService);
       }
       _pageAction = parameters.get("do", null);
-      _nodeType = parameters.get(PTY_NODE_TYPE, null);
-      _nodeFilter = parameters.get(PTY_NODE_FILTER, null);
-      _nodeSort = parameters.get(PTY_NODE_SORT, null);
-      _storageCode = parameters.get(PTY_STORAGE_CODE, null);
-      _collectionCode = parameters.get(PTY_COLLECTION_CODE, null);
-      _componentCode = parameters.get(PTY_COMPONENT_CODE, null);
+      _nodeType = parameters.get(RContentConfiguration.PTY_NODE_TYPE, null);
+      _nodeFilter = parameters.get(RContentConfiguration.PTY_NODE_FILTER, null);
+      _nodeSort = parameters.get(RContentConfiguration.PTY_NODE_SORT, null);
+      _storageCode = parameters.get(RContentConfiguration.PTY_STORAGE_CODE, null);
+      _collectionCode = parameters.get(RContentConfiguration.PTY_COLLECTION_CODE, null);
+      _componentCode = parameters.get(RContentConfiguration.PTY_COMPONENT_CODE, null);
       //      _componentType = parameters.get("component_type", null);
       // 设置环境对象
-      if(parameters.contains(PTY_NODE_TYPE)){
-         setEnvironment(PTY_NODE_TYPE, _nodeType);
+      if(parameters.contains(RContentConfiguration.PTY_NODE_TYPE)){
+         setEnvironment(RContentConfiguration.PTY_NODE_TYPE, _nodeType);
       }
-      if(parameters.contains(PTY_NODE_FILTER)){
-         setEnvironment(PTY_NODE_FILTER, _nodeFilter);
+      if(parameters.contains(RContentConfiguration.PTY_NODE_FILTER)){
+         setEnvironment(RContentConfiguration.PTY_NODE_FILTER, _nodeFilter);
       }
-      if(parameters.contains(PTY_NODE_SORT)){
-         setEnvironment(PTY_NODE_SORT, _nodeSort);
+      if(parameters.contains(RContentConfiguration.PTY_NODE_SORT)){
+         setEnvironment(RContentConfiguration.PTY_NODE_SORT, _nodeSort);
       }
-      if(parameters.contains(PTY_STORAGE_CODE)){
-         setEnvironment("storage_code", _storageCode);
+      if(parameters.contains(RContentConfiguration.PTY_STORAGE_CODE)){
+         setEnvironment(RContentConfiguration.PTY_STORAGE_CODE, _storageCode);
       }
-      if(parameters.contains(PTY_COLLECTION_CODE)){
-         setEnvironment(PTY_COLLECTION_CODE, _collectionCode);
+      if(parameters.contains(RContentConfiguration.PTY_COLLECTION_CODE)){
+         setEnvironment(RContentConfiguration.PTY_COLLECTION_CODE, _collectionCode);
       }
-      if(parameters.contains(PTY_COMPONENT_CODE)){
-         setEnvironment(PTY_COMPONENT_CODE, _componentCode);
+      if(parameters.contains(RContentConfiguration.PTY_COMPONENT_CODE)){
+         setEnvironment(RContentConfiguration.PTY_COMPONENT_CODE, _componentCode);
       }
    }
 

@@ -15,21 +15,21 @@ function refreshNode(){
 	tree.reloadNode();
 }
 function onNodeClick(sender, node){
-	var type = node.type.get('type');
+   var type = node.type();
+   var storage = type.storage();
 	fmMain.target = 'frmMain';
-	fmMain.form_name.value = node.type.get('form_name');
-	fmMain.sel_type.value = type;
-	if('collection' == type){
-		fmMain.sel_collection.value = node.get('form_name');
-		fmMain.sel_component.value = '';
-	}else if('component' == type){
-      var colNode = node.topNodeByType('collection');
-		fmMain.sel_collection.value = colNode.get('form_name');
-		fmMain.sel_component.value = node.uuid;
+	fmMain.frame_code.value = type.get('frame_code');
+	fmMain.storage_code.value = storage;
+	if(storage == 'collection'){
+		fmMain.collection_code.value = node.code();
+		fmMain.component_code.value = '';
+	}else if(storage == 'component'){
+		fmMain.collection_code.value = node.topNode().code();
+		fmMain.component_code.value = node.guid();
 	}else{
-		return;
+		throw new TError(o, 'Unknown storage type. (storage={1})', storage);
 	}
-   fmMain.action = '<jh:context/>/design/webform/WebForm.wa?do=update';
+	fmMain.action = '<jh:context/>/design/frame/Frame.wa?do=update';
 	fmMain.submit();
 }
 //----------------------------------------------------------
@@ -52,46 +52,43 @@ function onSearch(){
    }
 }
 //----------------------------------------------------------
-function _onloadAll(){
-	MoJS.connect();
-	// Toolbar
-	toolbar = RControl.fromXml(xToolBar, _id_toolbar);
-	// TreeView
-	tree = RControl.fromXml(xTree, _id_tree);
-	tree.lsnsClick.push(new TListener(tree, onNodeClick));
-   tree.attributes.set('node_type', "<jh:write source='&#parameter.node_type'/>");
-	tree.connect();
-   // Focus
-   fmMain.search_value.focus();
-	// Global
-	RGlobal.set('catalog.tree', tree);
-}
-//----------------------------------------------------------
-function _onload(){
-   RWindow.connect(window);
-   RLoader.loadJs('mobj');
-   RLoader.waitJs(new TInvoke(null, _onloadAll), 'mobj');
+function onPageLoad(){
+   // 环境设置
+   RRuntime.setProcessCd(EProcess.Release);
+   RApplication.initialize();
+   RBrowser.setContentPath('/system');
+   // 创建工具栏
+   toolbar = RClass.create(FUiDataToolBar);
+   RControl.build(toolbar, RXml.makeNode(xToolBar), null, _id_toolbar);
+   toolbar.setPanel(_id_toolbar);
+   //toolbar = RControl.fromXml(xToolBar, _id_toolbar);
+   // 创建目录
+   tree = RClass.create(FUiDataTreeView);
+   RControl.build(tree, RXml.makeNode(xTree), null, _id_tree);
+   tree.lsnsClick.register(null, onNodeClick);
+   tree.load();
+   tree.setPanel(_id_tree);
 }
 </SCRIPT>
 <!-- Environment --------------------------------------------->
-<XML ID="xEnvironment"><jh:write source='&page.environment' format='text'/></XML>
+<SCRIPT id='xEnvironment' type='application/xml'><jh:write source='&page.environment' format='text'/></SCRIPT>
 <!-- Toolbar config ------------------------------------------>
-<XML ID="xToolBar">
+<SCRIPT id='xToolBar' type='application/xml'>
 <ToolBar width='100%' height='100%' align='right'>
-	<ToolButtonText name='btnForm' label='表单定义' icon='sys.pst.mgr' target='frmMain' page='#/design/webform/WebForm.wa?do=list&amp;form_name=design.webform.WebFormList'/>
-	<ToolButton name='btnRefresh' icon='tool.refresh' action='refreshNode()'/>
+	<ToolButtonText name='btnForm' label='表单定义' icon='tools.design' target='frmMain' page='#/design/webform/WebForm.wa?do=list&amp;form_name=design.webform.WebFormList'/>
+	<ToolButton name='btnRefresh' icon='tools.refresh' action='refreshNode()'/>
 </ToolBar>
-</XML>
+</SCRIPT>
 <!-- TreeView config ----------------------------------------->
-<jc:tree name='xTree' source='system.design.webform'/>
+<jc:tree name='xTree' source='system.design.frame'/>
 <!-- Body begin ---------------------------------------------->
-<jh:body style='bodyCatalog' scroll='no' onload='_onload()'>
+<jh:body style='bodyCatalog' scroll='no' onload='onPageLoad()'>
 <jh:form name='fmMain' method='post'>
 <!-- Hidden -------------------------------------------------->
-<jh:hidden name='form_name'/>
-<jh:hidden name='sel_type'/>
-<jh:hidden name='sel_collection'/>
-<jh:hidden name='sel_component'/>
+<jh:hidden name='storage_code'/>
+<jh:hidden name='collection_code'/>
+<jh:hidden name='component_code'/>
+<jh:hidden name='frame_code'/>
 <!-- Catalog ------------------------------------------------->
 <TABLE border='0' cellpadding='0' cellspacing='0' style='width:100%; height:100%;'>
 <TR>
@@ -106,7 +103,7 @@ function _onload(){
          <TR>
             <TD><INPUT name='search_value' style='width:100%; height:18;' onkeydown='onSearchKeyDown()'></TD>
             <TD width='4'></TD>
-            <TD width='1'><INPUT type='button' style='width:80; height:18;' style='cursor:hand' onclick='onSearch()' value='搜索'></TD>
+            <TD width='80'><INPUT type='button' style='width:80; height:18;' style='cursor:hand' onclick='onSearch()' value='搜索'></TD>
          </TR>
       </TABLE>
    </TD>

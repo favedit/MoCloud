@@ -249,6 +249,26 @@ public class RBoolean
    // <T>获得布尔值的字符串。</T>
    //
    // @param value 内容
+   // @return 字符串
+   //============================================================
+   public final static String toString(Object value){
+      if(value != null){
+         Class<?> valueClass = value.getClass();
+         if(valueClass == Boolean.class){
+            if(((Boolean)value).booleanValue()){
+               return TRUE_STR;
+            }
+         }else{
+            return RBoolean.toString(value.toString());
+         }
+      }
+      return FALSE_STR;
+   }
+
+   //============================================================
+   // <T>获得布尔值的字符串。</T>
+   //
+   // @param value 内容
    // @param trueValue 真值
    // @param falseValue 假值
    // @return 字符串

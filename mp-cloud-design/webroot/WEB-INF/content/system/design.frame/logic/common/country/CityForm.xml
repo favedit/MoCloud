@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="common.country.CountryForm" update_date="20141210134046">
-<Form _uuid="tUVnm2HVGSQx9mRnVEzosg" name="database.codelist.CodeListForm" label="数据库-定义列表" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
+<FrameForm _uuid="tUVnm2HVGSQx9mRnVEzosg" name="database.codelist.CodeListForm" label="数据库-定义列表" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
   <Action _uuid="bU]QjZf[g[hN[uzRyX[ygg" name="insertAction" label="新建处理" is_valid="Y" note="" service="insert@database.codelist" />
   <Action _uuid="AEkyfkdqJeXuIneSiBn4mw" name="updateAction" label="保存处理" is_valid="Y" note="" service="update@database.codelist" />
   <Action _uuid="oE5miPgcy5fc8Bf7RsR]jQ" name="deleteAction" label="删除处理" is_valid="Y" note="" service="delete@database.codelist" />
@@ -26,5 +26,5 @@
   <Edit _uuid="GEouKtT5zIUUpJ[qgrbPpg" name="label" label="标签" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="LABEL" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" />
   <Edit _uuid="uE8wyGbt4VzYVaKWjrCUiQ" name="dataName" label="数据名称" is_valid="Y" note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="DATA_NAME" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" label_position="left" />
   <Memo _uuid="8kMq0n2]JryVOyBeGbKBhw" name="note" label="注释" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" data_name="NOTE" edit_insert="Y" edit_update="Y" edit_delete="Y" valid_insert="Y" valid_update="Y" valid_delete="Y" />
-</Form>
+</FrameForm>
 </Content>

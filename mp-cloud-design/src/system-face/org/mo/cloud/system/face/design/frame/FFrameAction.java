@@ -1,6 +1,7 @@
 package org.mo.cloud.system.face.design.frame;
 
 import org.mo.cloud.content.design.configuration.common.FAbstractConfigurationAction;
+import org.mo.cloud.system.face.common.ICommonAction;
 import org.mo.jfa.face.apl.page.IPublicPage;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -22,7 +23,7 @@ public class FFrameAction
    // <T>构造内容列表处理。</T>
    //============================================================
    public FFrameAction(){
-      _storageName = "cloud";
+      _storageName = "system";
       _spaceName = "design.frame";
    }
 
@@ -49,7 +50,7 @@ public class FFrameAction
    @Override
    public String list(IWebContext context,
                       FFramePage page){
-      return list(context, page, IPublicPage.XOBJECT_FORM);
+      return list(context, page, ICommonAction.XFRAME);
    }
 
    //============================================================
@@ -62,7 +63,7 @@ public class FFrameAction
    @Override
    public String insert(IWebContext context,
                         FFramePage page){
-      return insert(context, page, IPublicPage.XOBJECT_FORM);
+      return insert(context, page, ICommonAction.XFRAME);
    }
 
    //============================================================
@@ -75,7 +76,7 @@ public class FFrameAction
    @Override
    public String update(IWebContext context,
                         FFramePage page){
-      return update(context, page, IPublicPage.XOBJECT_FORM);
+      return update(context, page, ICommonAction.XFRAME);
    }
 
    //============================================================

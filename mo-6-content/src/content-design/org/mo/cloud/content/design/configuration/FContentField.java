@@ -113,7 +113,7 @@ public class FContentField
    //
    // @return 数据类型
    //============================================================
-   public EContentData _dataCd(){
+   public EContentData dataCd(){
       return _dataCd;
    }
 

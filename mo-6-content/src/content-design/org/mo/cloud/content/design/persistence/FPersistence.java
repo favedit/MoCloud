@@ -1,5 +1,6 @@
 package org.mo.cloud.content.design.persistence;
 
+import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentClass;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.FContentObject;
@@ -9,6 +10,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.INamePair;
+import org.mo.com.lang.RBoolean;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -70,6 +72,16 @@ public class FPersistence
    //============================================================
    public void setPersistenceName(String persistenceName){
       _persistenceName = persistenceName;
+   }
+
+   //============================================================
+   // <T>获得内容类。</T>
+   //
+   // @param className 类名称
+   // @return 内容类
+   //============================================================
+   public FContentClass findClass(String className){
+      return _classes.get(className);
    }
 
    //============================================================
@@ -141,28 +153,75 @@ public class FPersistence
    // @param attributes 属性集合
    // @return 实例
    //============================================================
+   public void setAttributeValue(IAttributes attributes,
+                                 FContentField field,
+                                 Object value,
+                                 EPersistenceMode modeCd){
+      // 处理所有节点
+      String name = field.linkName();
+      if(value != null){
+         String contentValue = null;
+         // 数据类型判断
+         EContentData dataCd = field.dataCd();
+         if(dataCd == EContentData.Boolean){
+            contentValue = RBoolean.toString(value);
+         }else{
+            contentValue = value.toString();
+         }
+         // 存储模式
+         if(modeCd == EPersistenceMode.Store){
+            if(field.isStore()){
+               attributes.set(name, contentValue);
+            }
+         }
+         // 配置模式
+         if(modeCd == EPersistenceMode.Config){
+            if(field.isConfig()){
+               attributes.set(name, contentValue);
+            }
+         }
+      }
+   }
+
+   //============================================================
+   // <T>创建实例。</T>
+   //
+   // @param name 名称
+   // @param attributes 属性集合
+   // @return 实例
+   //============================================================
    public void setAttributes(IAttributes attributes,
                              XContentObject xinsance,
                              EPersistenceMode modeCd){
       FContentClass clazz = xinsance.contentClass();
       for(INamePair<FContentField> pair : clazz.fields()){
-         String name = pair.name();
          FContentField field = pair.value();
          Object value = field.get(xinsance);
-         if(value != null){
-            // 存储模式
-            if(modeCd == EPersistenceMode.Store){
-               if(field.isStore()){
-                  attributes.set(name, value.toString());
-               }
-            }
-            // 配置模式
-            if(modeCd == EPersistenceMode.Config){
-               if(field.isConfig()){
-                  attributes.set(name, value.toString());
-               }
-            }
-         }
+         setAttributeValue(attributes, field, value, modeCd);
+      }
+   }
+
+   //============================================================
+   // <T>创建实例。</T>
+   //
+   // @param name 名称
+   // @param attributes 属性集合
+   // @return 实例
+   //============================================================
+   public void setAttributes(String className,
+                             IAttributes attributes,
+                             IAttributes values,
+                             EPersistenceMode modeCd){
+      // 查找内容类对象
+      FContentClass clazz = findClass(className);
+      if(clazz == null){
+         throw new FFatalError("Content class is not exists. (class_name={1})", className);
+      }
+      // 处理所有节点
+      for(INamePair<FContentField> pair : clazz.fields()){
+         FContentField field = pair.value();
+         String value = values.get(field.linkName(), null);
+         setAttributeValue(attributes, field, value, modeCd);
       }
    }
 

@@ -14,7 +14,7 @@ public class FFrameService
    // <T>构造内容表单服务。</T>
    //============================================================
    public FFrameService(){
-      _storageName = "cloud";
+      _storageName = "system";
       _spaceName = "design.frame";
    }
 }
