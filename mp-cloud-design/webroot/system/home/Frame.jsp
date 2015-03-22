@@ -228,7 +228,7 @@ function onPageLoad(){
 <!-- 分页部分 - start -->
 <TABLE width='100%' height='100%' border='0' cellpadding='0' cellspacing='0'>
 <TR>
-	<TD id='id_left' width='300'>
+	<TD id='id_left' width='400'>
 		<IFRAME name='frmCatalog' width='100%' height='100%' frameborder='0' src='<jh:context path='/system/home/Catalog.wa'/>'></IFRAME>
 	</TD>
 	<TD width='3' id='id_split' bgcolor='#9E9EBA'></TD>
