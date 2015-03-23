@@ -1,11 +1,11 @@
 package org.mo.script.javascript;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.xml.FXmlDocument;
+import org.mo.com.xml.FXmlNode;
 
 public class FJavascriptOutput
 {
@@ -45,41 +45,75 @@ public class FJavascriptOutput
    //
    // @param xmlFile 文件
    //============================================================
-   public void outputHelp(File xmlFile){
+   public void outputHelp(String fileName){
       try{
-         //如果没有此文件创建一个
-         if(!xmlFile.exists()){
-            xmlFile.createNewFile();
-         }
+         //         //如果没有此文件创建一个
+         //         if(!xmlFile.exists()){
+         //            xmlFile.createNewFile();
+         //         }
          String newTime = RDateTime.currentDateTime().format("YYYYMMDDHH24MISS").toString();
          System.out.println("startTime:" + newTime);
-         FileWriter fw = new FileWriter(xmlFile.getAbsoluteFile());
-         BufferedWriter bw = new BufferedWriter(fw);
-         createHeader(bw);
+         //         FileWriter fw = new FileWriter(xmlFile.getAbsoluteFile());
+         //         BufferedWriter bw = new BufferedWriter(fw);
+         FXmlDocument xd = new FXmlDocument();
+
+         FXmlNode xmlnode1 = new FXmlNode("Configuration");
+         FXmlNode xmlnode2 = new FXmlNode("NamespaceCollection");
+
          //创建包XML
          for(FJavascriptPackage javascriptPackage : packageList){
-            bw.newLine();
-            bw.write("      <Namespace name='" + javascriptPackage.packageName() + "'>");
+            FXmlNode xnSpace = new FXmlNode("Namespace");
+            xnSpace.set("name", javascriptPackage.packageName());
+
             //创建类xml
             for(FJavascriptClass fJavascriptClass : javascriptPackage.classes()){
-               bw.newLine();
-               bw.write("         <ClassCollection>");
-               bw.newLine();
-               bw.write("            <Class name='" + fJavascriptClass.className() + "' label='" + fJavascriptClass.classAnnotation() + "'>");
-               createMethod(bw, fJavascriptClass);
-               bw.newLine();
-               bw.write("            </Class>");
-               bw.newLine();
-               bw.write("         </ClassCollection>");
+               FXmlNode xnClassCollection = new FXmlNode("ClassCollection");
+               xnSpace.push(xnClassCollection);
+               FXmlNode xnClass = new FXmlNode("Class");
+               xnClass.set("name", fJavascriptClass.className());
+               xnClass.set("label", fJavascriptClass.classAnnotation());
+               xnClassCollection.push(xnClass);
+               //               createMethod(bw, fJavascriptClass);
+               for(FJavascriptMethod method : fJavascriptClass.methods()){
+                  FXmlNode xnMethodCollection = new FXmlNode("MethodCollection");
+                  xnClass.push(xnMethodCollection);
+                  FXmlNode xnMethod = new FXmlNode("Method");
+                  xnMethod.set("name", method.methodName());
+                  xnMethod.set("label", method.methodAnnotation());
+                  xnMethodCollection.push(xnMethod);
+                  FXmlNode xnParameterCollection = new FXmlNode("ParameterCollection");
+                  for(FJavascriptMethodParam methodParam : method.methodParam()){
+                     //方法参数
+                     FXmlNode xnParameter = new FXmlNode("Parameter");
+                     xnParameter.set("code", methodParam.paramCode());
+                     xnParameter.set("name", methodParam.paramName());
+                     xnParameter.set("type", methodParam.paramType());
+                     xnParameter.set("label", methodParam.paramAnnotation());
+                     xnParameterCollection.push(xnParameter);
+                  }
+
+                  xnMethod.push(xnParameterCollection);
+                  //返回值 
+                  FXmlNode xnReturn = new FXmlNode("ReturnParameter");
+                  if(method.methodReturn() != null){
+                     xnReturn.set("type", method.methodReturn().returnType());
+                     xnReturn.set("label", method.methodReturn().returnAnnotation());
+                  }
+                  xnMethod.push(xnReturn);
+               }
+
+               //xmlnode2.push(xnMethodCollection);
             }
-            bw.newLine();
-            bw.write("      </Namespace>");
+            xmlnode2.push(xnSpace);
          }
-         createFooter(bw);
+
+         xmlnode1.push(xmlnode2);
+         xd.setRoot(xmlnode1);
+         xd.saveFile(fileName);
          String endTime = RDateTime.currentDateTime().format("YYYYMMDDHH24MISS").toString();
          System.out.println("endTime:" + endTime);
-         bw.close();
-      }catch(IOException e){
+         //         bw.close();
+      }catch(Exception e){
          e.printStackTrace();
       }
    }
@@ -128,33 +162,4 @@ public class FJavascriptOutput
       }
    }
 
-   //============================================================
-   // <T>创建XML底部。</T>
-   //
-   // @param bw 流对象
-   //============================================================
-   private void createFooter(BufferedWriter bw) throws IOException{
-      String endConfiguration = "</Configuration>";
-      String endNamespaceCollection = "   </NamespaceCollection>";
-      bw.newLine();
-      bw.write(endNamespaceCollection);
-      bw.newLine();
-      bw.write(endConfiguration);
-   }
-
-   //============================================================
-   // <T>创建XML头部。</T>
-   //
-   // @param bw 流对象
-   //============================================================
-   private void createHeader(BufferedWriter bw) throws IOException{
-      String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>";
-      String configuration = "<Configuration>";
-      String namespaceCollection = "   <NamespaceCollection>";
-      bw.write(header);
-      bw.newLine();
-      bw.write(configuration);
-      bw.newLine();
-      bw.write(namespaceCollection);
-   }
 }

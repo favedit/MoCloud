@@ -65,8 +65,9 @@ public class FJavascriptInput
                //获取包名
                String packageName = fs[i].getName().substring(fs[i].getName().indexOf('-') + 1, fs[i].getName().length());
                String firstWord = fs[i].getName().substring(0, 1);
+               //文件夹名中是否有数字
                if(!Character.isDigit(firstWord.charAt(0))){
-                  return;
+                  continue;
                }
                classList = new ArrayList<FJavascriptClass>();
                javascriptPackage = new FJavascriptPackage();
@@ -80,63 +81,99 @@ public class FJavascriptInput
          }else if(fs[i].isFile()){
 
             //获取类名
-            String className = fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.'));
-            fJavascriptClass = new FJavascriptClass();
-            fJavascriptClass.setClassName(className);
-            System.out.println("className=" + className);
-            methodList = new ArrayList<FJavascriptMethod>();
-            String lineTxt = null;
-            InputStreamReader read = new InputStreamReader(new FileInputStream(fs[i]), "UTF-8");
-            bufferedReader = new BufferedReader(read);
-            while((lineTxt = bufferedReader.readLine()) != null){
-               //获取方法注释
-               if(isMethodAnnotation(lineTxt)){
-                  String methodAnnotation = lineTxt.substring(lineTxt.indexOf("<T>") + 3, lineTxt.lastIndexOf("<"));
-                  fJavascriptMethod = new FJavascriptMethod();
-                  fJavascriptMethod.setMethodAnnotation(methodAnnotation);
-                  methodParamList = new ArrayList<FJavascriptMethodParam>();
-                  System.out.println("methodAnnotation -->" + methodAnnotation);
-               }
-               //获取方法参数
-               if(isParam(lineTxt)){
-                  String paramCode = lineTxt.trim().substring(lineTxt.indexOf(':') - 1, lineTxt.indexOf(':'));
-                  String paramType = lineTxt.trim().substring(lineTxt.lastIndexOf(':') + 1, lineTxt.lastIndexOf(' '));
-                  String paramName = lineTxt.trim().substring(lineTxt.indexOf(':') + 1, lineTxt.lastIndexOf(':'));
-                  String paramAnnotation = lineTxt.trim().substring(lineTxt.lastIndexOf(' '), lineTxt.length());
-                  methodParam = new FJavascriptMethodParam();
-                  methodParam.setParamCode(paramCode);
-                  methodParam.setParamType(paramType);
-                  methodParam.setParamName(paramName);
-                  methodParam.setParamAnnotation(paramAnnotation);
-                  methodParamList.add(methodParam);
-                  System.out.println("paramType:" + paramType + ",paramName:" + paramName + ",paramAnnotation:" + paramAnnotation);
-               }
-               //return参数
-               if(isReturn(lineTxt)){
-                  String returnType = lineTxt.substring(lineTxt.indexOf("return") + 7, lineTxt.trim().lastIndexOf(' '));
-                  String returnAnnotation = lineTxt.substring(lineTxt.trim().lastIndexOf(' '), lineTxt.length());
-                  methodReturn = new FJavascriptMethodReturn();
-                  methodReturn.setReturnType(returnType);
-                  methodReturn.setReturnAnnotation(returnAnnotation);
-                  fJavascriptMethod.setMethodReturn(methodReturn);
-                  System.out.println("methodReturnType:" + returnType);
-                  System.out.println("methodReturnAnnotation:" + returnAnnotation);
-               }
-               //获取方法名
-               if(isMethod(lineTxt)){
-                  String methodName = lineTxt.trim().substring(lineTxt.indexOf("function") + 9, lineTxt.indexOf('('));
-                  fJavascriptMethod.setMethodName(methodName);
-                  fJavascriptMethod.setMethodParam(methodParamList);
-                  System.out.println("methodName -->" + methodName);
-                  this.methodList.add(fJavascriptMethod);
+            try{
+               String className = fs[i].getName().substring(0, fs[i].getName().lastIndexOf('.'));
+               String isJs = fs[i].getName().substring(fs[i].getName().lastIndexOf('.') + 1, fs[i].getName().length());
+               if(!isJs.equals("js"))
+                  continue;
+               fJavascriptClass = new FJavascriptClass();
+               fJavascriptClass.setClassName(className);
+               System.out.println("className=" + className);
 
+               methodList = new ArrayList<FJavascriptMethod>();
+               String lineTxt = null;
+               InputStreamReader read = new InputStreamReader(new FileInputStream(fs[i]), "UTF-8");
+               bufferedReader = new BufferedReader(read);
+               while((lineTxt = bufferedReader.readLine()) != null){
+                  lineTxt = lineTxt.trim();
+                  //获取方法注释
+                  if(isMethodAnnotation(lineTxt)){
+                     String methodAnnotation = lineTxt.substring(lineTxt.indexOf("<T>") + 3, lineTxt.lastIndexOf("<"));
+                     fJavascriptMethod = new FJavascriptMethod();
+                     fJavascriptMethod.setMethodAnnotation(methodAnnotation);
+                     methodParamList = new ArrayList<FJavascriptMethodParam>();
+                     System.out.println("methodAnnotation -->" + methodAnnotation);
+                  }
+                  //获取方法参数
+                  if(isParam(lineTxt)){
+                     String paramCode = "方法参数注释异常";
+                     String paramType = "方法参数注释异常";
+                     String paramName = "方法参数注释异常";
+                     String paramAnnotation = "方法参数注释异常";
+                     if(isStandardAnnotation(lineTxt) == 1){
+                        paramCode = lineTxt.substring(lineTxt.indexOf(':') - 1, lineTxt.indexOf(':'));
+                        paramType = lineTxt.substring(lineTxt.lastIndexOf(':') + 1, lineTxt.lastIndexOf(' '));
+                        paramName = lineTxt.substring(lineTxt.indexOf(':') + 1, lineTxt.lastIndexOf(':'));
+                        paramAnnotation = lineTxt.substring(lineTxt.lastIndexOf(' ') + 1, lineTxt.length());
+                     }
+                     methodParam = new FJavascriptMethodParam();
+                     methodParam.setParamCode(paramCode);
+                     methodParam.setParamType(paramType);
+                     methodParam.setParamName(paramName);
+                     methodParam.setParamAnnotation(paramAnnotation);
+                     methodParamList.add(methodParam);
+                     System.out.println("paramCode:" + paramCode + ",paramType:" + paramType + ",paramName:" + paramName + ",paramAnnotation:" + paramAnnotation);
+                  }
+                  //return参数
+                  if(isReturn(lineTxt)){
+                     String returnType = "类型注释异常";
+                     String returnAnnotation = "注释异常";
+                     int returnEnum = isStandardAnnotation(lineTxt);
+                     if(returnEnum == 1){
+                        returnType = lineTxt.substring(lineTxt.indexOf("return") + 7, lineTxt.lastIndexOf(' '));
+                        returnAnnotation = lineTxt.substring(lineTxt.lastIndexOf(' ') + 1, lineTxt.length());
+                     }else if(returnEnum == 2){
+                        returnAnnotation = lineTxt.substring(lineTxt.lastIndexOf(' ') + 1, lineTxt.length());
+                     }
+
+                     methodReturn = new FJavascriptMethodReturn();
+                     methodReturn.setReturnType(returnType);
+                     methodReturn.setReturnAnnotation(returnAnnotation);
+                     fJavascriptMethod.setMethodReturn(methodReturn);
+                     System.out.println("methodReturnType:" + returnType);
+                     System.out.println("methodReturnAnnotation:" + returnAnnotation);
+                  }
+                  //获取方法名
+                  if(isMethod(lineTxt)){
+                     String methodName = "";
+                     if(noFunName(lineTxt)){
+                        methodName = lineTxt.substring(lineTxt.indexOf("function") + 9, lineTxt.indexOf('('));
+                     }
+                     fJavascriptMethod.setMethodName(methodName);
+                     fJavascriptMethod.setMethodParam(methodParamList);
+                     System.out.println("methodName -->" + methodName);
+                     if(methodName.equals("RClass_innerCopy")){
+                        System.out.println("123");
+                     }
+                     this.methodList.add(fJavascriptMethod);
+
+                  }
                }
+               fJavascriptClass.setMethods(methodList);
+               this.classList.add(fJavascriptClass);
+            }catch(Exception e){
+               e.printStackTrace();
             }
-            fJavascriptClass.setMethods(methodList);
-            this.classList.add(fJavascriptClass);
          }
 
       }
+   }
+
+   private boolean noFunName(String lineTxt){
+      if(!lineTxt.substring(lineTxt.lastIndexOf("(") - 9, lineTxt.lastIndexOf("(")).equals("function")){
+         return true;
+      }
+      return false;
    }
 
    //============================================================
@@ -153,7 +190,7 @@ public class FJavascriptInput
    }
 
    //============================================================
-   // <T>检查此行是否是方法</T>
+   // <T>检查此行是否是方法参数</T>
    //
    // @param lineText 行内容
    //============================================================
@@ -162,6 +199,20 @@ public class FJavascriptInput
          return true;
       }
       return false;
+   }
+
+   //============================================================
+   // <T>检查此行是否是注释</T>
+   //
+   // @param lineText 行内容
+   //============================================================
+   private int isStandardAnnotation(String lineTxt){
+      if(lineTxt.split(" ").length > 3){
+         return 1;
+      }else if(lineTxt.split(" ").length > 2){
+         return 2;
+      }
+      return 0;
    }
 
    //============================================================
@@ -194,7 +245,7 @@ public class FJavascriptInput
    // @param lineText 行内容
    //============================================================
    private boolean isMethodAnnotation(String lineText){
-      if(isAnnotation(lineText) && lineText.trim().contains("<T>")){
+      if(isAnnotation(lineText) && lineText.contains("<T>")){
          return true;
       }
       return false;

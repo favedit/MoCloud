@@ -21,10 +21,10 @@ public class RJsCompileJava
 
       FJavascriptInput process = new FJavascriptInput(packageList, classList, methodList, methodParamList);
       process.foreachFiles(root);
-
-      File xmlFile = new File("E:\\Microbject\\MoScript\\source-v2\\javascript-help.xml");
+      //
+      //      File xmlFile = new File("E:\\Microbject\\MoScript\\source-v2\\javascript-help.xml");
       FJavascriptOutput outputToXml = new FJavascriptOutput(packageList, classList, methodList, methodParamList);
-      outputToXml.outputHelp(xmlFile);
+      outputToXml.outputHelp("E:\\Microbject\\MoScript\\source-v2\\javascript-help.xml");
 
    }
 }
