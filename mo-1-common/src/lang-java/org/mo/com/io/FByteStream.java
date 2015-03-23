@@ -14,6 +14,9 @@ public class FByteStream
          IDataInput,
          IDataOutput
 {
+   // 读取方式
+   protected EByteEndian _endianCd = EByteEndian.Big;
+
    //============================================================
    // <T>构造字节数据流。</T>
    //============================================================
@@ -29,6 +32,24 @@ public class FByteStream
    public FByteStream(byte[] memory,
                       int length){
       super(memory, length);
+   }
+
+   //============================================================
+   // <T>忽略指定长度。</T>
+   //
+   // @param length 长度
+   //============================================================
+   public EByteEndian endianCd(){
+      return _endianCd;
+   }
+
+   //============================================================
+   // <T>忽略指定长度。</T>
+   //
+   // @param length 长度
+   //============================================================
+   public void setEndianCd(EByteEndian endianCd){
+      _endianCd = endianCd;
    }
 
    //============================================================
@@ -70,8 +91,13 @@ public class FByteStream
    @Override
    public short readInt16(){
       short value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+      }
       return value;
    }
 
@@ -83,10 +109,17 @@ public class FByteStream
    @Override
    public int readInt32(){
       int value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
-      value |= (_memory[_position++] & 0xFF) << 16;
-      value |= (_memory[_position++] & 0xFF) << 24;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+      }
       return value;
    }
 
@@ -98,14 +131,25 @@ public class FByteStream
    @Override
    public long readInt64(){
       long value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
-      value |= (_memory[_position++] & 0xFF) << 16;
-      value |= (_memory[_position++] & 0xFF) << 24;
-      value |= (_memory[_position++] & 0xFF) << 32;
-      value |= (_memory[_position++] & 0xFF) << 40;
-      value |= (_memory[_position++] & 0xFF) << 48;
-      value |= (_memory[_position++] & 0xFF) << 56;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 56;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 56;
+      }
       return value;
    }
 
@@ -127,8 +171,13 @@ public class FByteStream
    @Override
    public int readUint16(){
       int value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+      }
       return value;
    }
 
@@ -140,10 +189,17 @@ public class FByteStream
    @Override
    public long readUint32(){
       long value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
-      value |= (_memory[_position++] & 0xFF) << 16;
-      value |= (_memory[_position++] & 0xFF) << 24;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+      }
       return value;
    }
 
@@ -155,10 +211,17 @@ public class FByteStream
    @Override
    public float readFloat(){
       int value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
-      value |= (_memory[_position++] & 0xFF) << 16;
-      value |= (_memory[_position++] & 0xFF) << 24;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+      }
       return Float.intBitsToFloat(value);
    }
 
@@ -170,14 +233,25 @@ public class FByteStream
    @Override
    public double readDouble(){
       long value = 0;
-      value |= (_memory[_position++] & 0xFF);
-      value |= (_memory[_position++] & 0xFF) << 8;
-      value |= (_memory[_position++] & 0xFF) << 16;
-      value |= (_memory[_position++] & 0xFF) << 24;
-      value |= (_memory[_position++] & 0xFF) << 32;
-      value |= (_memory[_position++] & 0xFF) << 40;
-      value |= (_memory[_position++] & 0xFF) << 48;
-      value |= (_memory[_position++] & 0xFF) << 56;
+      if(_endianCd == EByteEndian.Little){
+         value |= (_memory[_position++] & 0xFF) << 56;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
+      }else{
+         value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 56;
+      }
       return Double.longBitsToDouble(value);
    }
 

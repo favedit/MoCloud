@@ -1,5 +1,6 @@
 package org.mo.content.mime.phy;
 
+import org.mo.com.io.EByteEndian;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.FFileLineReader;
 import org.mo.com.lang.FFatalError;
@@ -185,6 +186,7 @@ public class FPlyFile
          // 二进制小头读取方式
          else if(_formatCd.equals("binary_little_endian")){
             FByteFile stream = new FByteFile(fileName);
+            stream.setEndianCd(EByteEndian.Little);
             byte[] find = "end_header".getBytes();
             int index = RByte.search(stream.memory(), find);
             if(index == -1){
