@@ -1,6 +1,5 @@
 package org.mo.content.mime.phy;
 
-import org.mo.com.io.EByteEndian;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.FFileLineReader;
 import org.mo.com.lang.FFatalError;
@@ -186,7 +185,7 @@ public class FPlyFile
          // 二进制小头读取方式
          else if(_formatCd.equals("binary_little_endian")){
             FByteFile stream = new FByteFile(fileName);
-            stream.setEndianCd(EByteEndian.Little);
+            //stream.setEndianCd(EByteEndian.Little);
             byte[] find = "end_header".getBytes();
             int index = RByte.search(stream.memory(), find);
             if(index == -1){
@@ -227,6 +226,9 @@ public class FPlyFile
             for(int n = 0; n < _faceCount; n++){
                SPlyFace face = new SPlyFace();
                int count = stream.readUint8();
+               if(count != 3){
+                  throw new FFatalError("Unknown index count.");
+               }
                int[] data = new int[count];
                for(int i = 0; i < count; i++){
                   data[i] = (int)stream.readUint32();

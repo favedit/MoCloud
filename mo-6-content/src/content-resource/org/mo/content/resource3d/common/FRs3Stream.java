@@ -334,17 +334,34 @@ public class FRs3Stream
       if((_elementDataCd != EGcData.Int32) || (_elementCount != 3)){
          throw new FFatalError("Invalid format.");
       }
-      // 输出属性
-      output.writeUint8((short)EGcData.Uint16);
-      output.writeUint8((short)3);
-      output.writeBoolean(false);
-      output.writeUint8((short)6);
-      output.writeInt32(_dataCount);
-      // 输出数据
-      FByteStream stream = new FByteStream(_data, _data.length);
-      int total = _dataCount * 3;
-      for(int n = 0; n < total; n++){
-         output.writeUint16(stream.readInt32());
+      if(_dataCount > 65536){
+         // 输出属性
+         output.writeString("index32");
+         output.writeUint8((short)EGcData.Uint32);
+         output.writeUint8((short)3);
+         output.writeBoolean(false);
+         output.writeUint8((short)12);
+         output.writeInt32(_dataCount);
+         // 输出数据
+         FByteStream stream = new FByteStream(_data, _data.length);
+         int total = _dataCount * 3;
+         for(int n = 0; n < total; n++){
+            output.writeUint32(stream.readUint32());
+         }
+      }else{
+         // 输出属性
+         output.writeString("index16");
+         output.writeUint8((short)EGcData.Uint16);
+         output.writeUint8((short)3);
+         output.writeBoolean(false);
+         output.writeUint8((short)6);
+         output.writeInt32(_dataCount);
+         // 输出数据
+         FByteStream stream = new FByteStream(_data, _data.length);
+         int total = _dataCount * 3;
+         for(int n = 0; n < total; n++){
+            output.writeUint16(stream.readInt32());
+         }
       }
    }
 
@@ -416,30 +433,35 @@ public class FRs3Stream
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      output.writeString(_code);
       switch(_code){
          case "position":
+            output.writeString(_code);
             serializeFloat3(output);
             break;
          case "color":
+            output.writeString(_code);
             serializeColor4(output);
             break;
          case "coord":
+            output.writeString(_code);
             serializeFloat2(output);
             break;
          case "normal":
          case "binormal":
          case "tangent":
-            //serializeFloat3(output);
+            output.writeString(_code);
             serializeByte4Normal(output);
             break;
          case "bone_index":
+            output.writeString(_code);
             serializeBoneIndex(output);
             break;
          case "bone_weight":
+            output.writeString(_code);
             serializeBoneWeight(output);
             break;
          case "index16":
+            output.writeString(_code);
             serializeUint16(output);
             break;
          case "index32":
