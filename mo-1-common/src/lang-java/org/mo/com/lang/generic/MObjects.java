@@ -204,7 +204,7 @@ public abstract class MObjects<T>
    //============================================================
    @SuppressWarnings("unchecked")
    public void ensureSize(int length){
-      if(null == _items){
+      if(_items == null){
          int total = Math.max(length, CAPACITY);
          _items = (T[])Array.newInstance(_clazz, total);
       }else if(length > _items.length){
@@ -215,6 +215,21 @@ public abstract class MObjects<T>
          }
          _items = alloc;
       }
+   }
+
+   //============================================================
+   // <T>设置指定大小的容量。</T>
+   //
+   // @param size 容量
+   //============================================================
+   @SuppressWarnings("unchecked")
+   public void setSize(int size){
+      T[] alloc = (T[])Array.newInstance(_clazz, size);
+      if(_count > 0){
+         int total = Math.min(size, _count);
+         System.arraycopy(_items, 0, alloc, 0, total);
+      }
+      _items = alloc;
    }
 
    //============================================================

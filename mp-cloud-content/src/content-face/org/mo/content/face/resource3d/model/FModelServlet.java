@@ -2,7 +2,6 @@ package org.mo.content.face.resource3d.model;
 
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import javax.servlet.http.HttpServletResponse;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -32,10 +31,6 @@ public class FModelServlet
 
    // 缓冲时间
    protected static long CacheTimeout = 3600 * 24 * 7 * 4;
-
-   // 存储管理接口
-   @ALink
-   protected IGcStorageConsole _storageConsole;
 
    // 资源模型接口
    @ALink

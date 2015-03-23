@@ -226,26 +226,46 @@ public class FRs3Stream
    // @param output 输出流
    //============================================================
    public void serializeColor4(IDataOutput output){
-      if((_elementDataCd != EGcData.Float32) || (_elementCount != 4)){
+      if((_elementDataCd == EGcData.Uint8) && (_elementCount == 4)){
+         // 输出属性
+         output.writeUint8((short)EGcData.Uint8);
+         output.writeUint8((short)4);
+         output.writeBoolean(true);
+         output.writeUint8((short)4);
+         output.writeInt32(_dataCount);
+         // 输出数据
+         FByteStream stream = new FByteStream(_data, _data.length);
+         for(int n = 0; n < _dataCount; n++){
+            short v1 = stream.readUint8();
+            short v2 = stream.readUint8();
+            short v3 = stream.readUint8();
+            short v4 = stream.readUint8();
+            output.writeUint8(v1);
+            output.writeUint8(v2);
+            output.writeUint8(v3);
+            output.writeUint8(v4);
+         }
+      }else if((_elementDataCd == EGcData.Float32) && (_elementCount == 4)){
+         // 输出属性
+         output.writeUint8((short)EGcData.Uint8);
+         output.writeUint8((short)4);
+         output.writeBoolean(true);
+         output.writeUint8((short)4);
+         output.writeInt32(_dataCount);
+         // 输出数据
+         FByteStream stream = new FByteStream(_data, _data.length);
+         for(int n = 0; n < _dataCount; n++){
+            float v1 = stream.readFloat();
+            float v2 = stream.readFloat();
+            float v3 = stream.readFloat();
+            float v4 = stream.readFloat();
+            output.writeUint8((byte)(v1 * 240.0f));
+            output.writeUint8((byte)(v2 * 240.0f));
+            output.writeUint8((byte)(v3 * 240.0f));
+            output.writeUint8((byte)(v4 * 240.0f));
+         }
+      }else{
          throw new FFatalError("Invalid format.");
-      }
-      // 输出属性
-      output.writeUint8((short)EGcData.Uint8);
-      output.writeUint8((short)4);
-      output.writeBoolean(true);
-      output.writeUint8((short)4);
-      output.writeInt32(_dataCount);
-      // 输出数据
-      FByteStream stream = new FByteStream(_data, _data.length);
-      for(int n = 0; n < _dataCount; n++){
-         float v1 = stream.readFloat();
-         float v2 = stream.readFloat();
-         float v3 = stream.readFloat();
-         float v4 = stream.readFloat();
-         output.writeUint8((byte)(v1 * 240.0f));
-         output.writeUint8((byte)(v2 * 240.0f));
-         output.writeUint8((byte)(v3 * 240.0f));
-         output.writeUint8((byte)(v4 * 240.0f));
       }
    }
 

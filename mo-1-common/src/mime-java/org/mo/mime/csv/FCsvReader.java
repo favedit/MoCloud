@@ -1,6 +1,6 @@
 package org.mo.mime.csv;
 
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import org.mo.com.io.FFileLineReader;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -193,7 +193,7 @@ public class FCsvReader
     * 
     * @param fileName
     */
-   public void openStream(InputStreamReader inputStream,
+   public void openStream(InputStream inputStream,
                           String charset){
       _reader.openStream(inputStream, charset);
    }

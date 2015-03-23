@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -1435,8 +1434,7 @@ public class FBatchTable
             File file = new File(filePath);
             if(file.canRead()){
                FCsvReader reader = new FCsvReader();
-               InputStream in = new FileInputStream(file);
-               InputStreamReader stream = new InputStreamReader(in, _encode);
+               InputStream stream = new FileInputStream(file);
                reader.openStream(stream, _encode);
                reader.openSegment();
                return reader;
@@ -1460,7 +1458,7 @@ public class FBatchTable
             ZipEntry entry = zipfile.getEntry(filePath);
             if(null != entry){
                FCsvReader reader = new FCsvReader();
-               InputStreamReader stream = new InputStreamReader(zipfile.getInputStream(entry), _encode);
+               InputStream stream = zipfile.getInputStream(entry);
                reader.openStream(stream, _encode);
                reader.openSegment();
                return reader;

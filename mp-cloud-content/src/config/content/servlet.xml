@@ -27,6 +27,18 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
+   <!-- 设计：网格资源获取处理                                       -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.mesh'
+         face  = 'org.mo.content.face.resource3d.mesh.IMeshServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.mesh.IMeshServlet'
+         class = 'org.mo.content.face.resource3d.mesh.FMeshServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
    <!-- 设计：模型资源获取处理                                       -->
    <!-- ============================================================ -->
    <WebServlet

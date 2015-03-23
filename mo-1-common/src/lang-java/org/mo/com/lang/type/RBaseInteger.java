@@ -189,7 +189,7 @@ public class RBaseInteger
       int loop = Math.min(scl, tcl);
       while(loop-- != 0){
          if(source[sourceOffset++] != target[targetOffset++]){
-            return (int)(source[sourceOffset - 1] - target[targetOffset - 1]);
+            return source[sourceOffset - 1] - target[targetOffset - 1];
          }
       }
       return scl - tcl;
@@ -290,13 +290,13 @@ public class RBaseInteger
          int end = sourceOffset + sourceLength;
          while(++m < end){
             if(source[m] == first){
-               int n = targetOffset;
+               int n = 0;
                while(++n < targetLength){
-                  if(source[m + n] != target[n]){
+                  if(source[m + n] != target[targetOffset + n]){
                      break;
                   }
                }
-               if(n == targetLength - 1){
+               if(n == targetLength){
                   return m;
                }
             }

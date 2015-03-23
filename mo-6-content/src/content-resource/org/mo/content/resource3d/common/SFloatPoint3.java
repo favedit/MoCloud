@@ -82,13 +82,15 @@ public class SFloatPoint3
    // @param xconfig 配置信息
    //============================================================
    public void parse(String value){
-      String[] items = RString.split(value, ',');
-      if(items.length != 3){
-         throw new FFatalError("Parse failure.");
+      if(!RString.isEmpty(value)){
+         String[] items = RString.split(value, ',');
+         if(items.length != 3){
+            throw new FFatalError("Parse failure.");
+         }
+         x = (float)RDouble.parse(items[0]);
+         y = (float)RDouble.parse(items[1]);
+         z = (float)RDouble.parse(items[2]);
       }
-      x = (float)RDouble.parse(items[0]);
-      y = (float)RDouble.parse(items[1]);
-      z = (float)RDouble.parse(items[2]);
    }
 
    //============================================================

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.Material2Frame" update_date="20141210134046">
+   <Frame name="design3d.scene.Material2Frame" type='FDsSceneMaterial2Frame' linker='_frameMaterial2' label="材质属性" is_valid="Y" note="">
+      <Panel name='optionPanel' icon='design.panel.icon' label='特性参数'>
+         <Check name="optionDepth" linker='_controlOptionDepth' label="深度" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="optionView" linker='_controlOptionView' label="环境" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="optionNormalInvert" linker='_controlOptionNormalInvert' label="法线反向" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="optionShadow" linker='_controlOptionShadow' label="阴影" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="optionShadowSelf" linker='_controlOptionShadowSelf' label="自阴影" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='diffuseViewPanel' icon='design.panel.icon' label='环境参数'>
+         <ColorPower name="diffuseViewColor" linker='_controlDiffuseViewColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='specularViewPanel' icon='design.panel.icon' label='环境高光参数'>
+         <ColorPower name="specularViewColor" linker='_controlSpecularViewColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <SlideNumber name="specularViewBase" linker='_controlSpecularViewBase' label="基础" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.1' note="" />
+         <SlideNumber name="specularViewLevel" linker='_controlSpecularViewLevel' label="级别" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='100' value_step='1' note="" />
+      </Panel>
+   </Frame>
+</Content>

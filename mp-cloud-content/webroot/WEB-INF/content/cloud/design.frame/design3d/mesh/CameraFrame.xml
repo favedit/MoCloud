@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.CameraFrame" update_date="20141210134046">
+   <Frame name="design3d.scene.CameraFrame" type='FDsSceneCameraFrame' linker='_frameCamera' label="相机属性" is_valid="Y" note="">
+      <Panel name='matrixPanel' icon='design.panel.icon' label='基本参数'>
+         <Number3 name="position" linker='_controlPosition' label="位置" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number3 name="direction" linker='_controlDirection' label="方向" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

@@ -290,13 +290,13 @@ public class RBaseFloat
          int end = sourceOffset + sourceLength;
          while(++m < end){
             if(source[m] == first){
-               int n = targetOffset;
+               int n = 0;
                while(++n < targetLength){
-                  if(source[m + n] != target[n]){
+                  if(source[m + n] != target[targetOffset + n]){
                      break;
                   }
                }
-               if(n == targetLength - 1){
+               if(n == targetLength){
                   return m;
                }
             }
