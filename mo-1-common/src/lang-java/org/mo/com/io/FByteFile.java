@@ -55,7 +55,6 @@ public class FByteFile
    // @param fileName 文件名称
    //============================================================
    public FByteFile(String fileName){
-      _fileName = fileName;
       loadFile(fileName);
    }
 
@@ -67,9 +66,10 @@ public class FByteFile
    //============================================================
    public FByteFile(String fileName,
                     boolean loaded){
-      _fileName = fileName;
       if(loaded){
          loadFile(fileName);
+      }else{
+         _fileName = fileName;
       }
    }
 
@@ -79,15 +79,24 @@ public class FByteFile
    // @param fileName 文件名称
    //============================================================
    public void loadFile(String fileName){
+      // 检查文件合法
+      File file = new File(fileName);
+      if(!file.exists()){
+         throw new FFatalError("File is not exists. (file_name={1})", fileName);
+      }
+      if(!file.isFile()){
+         throw new FFatalError("File is invalid. (file_name={1})", fileName);
+      }
+      _fileName = fileName;
       // 清空内容
       clear();
       // 加载内容
       BufferedInputStream inputStream = null;
       try{
-         File file = new File(fileName);
          int length = (int)file.length();
          if(length > 0){
-            ensureSize(length);
+            forceSize(length);
+            // 读取文件
             inputStream = new BufferedInputStream(new FileInputStream(file));
             inputStream.read(_memory, 0, length);
             _length = length;
@@ -112,17 +121,19 @@ public class FByteFile
    // @param fileName 文件名称
    //============================================================
    public void saveToFile(String fileName){
+      // 建立目录
+      fileName = RFile.formatFileName(fileName);
+      int find = fileName.lastIndexOf(File.separator);
+      if(-1 != find){
+         String path = fileName.substring(0, find);
+         File directory = new File(path);
+         if(!directory.isDirectory()){
+            directory.mkdirs();
+         }
+      }
+      // 存储文件
       BufferedOutputStream outputStream = null;
       try{
-         fileName = RFile.formatFileName(fileName);
-         int find = fileName.lastIndexOf(File.separator);
-         if(-1 != find){
-            String path = fileName.substring(0, find);
-            File directory = new File(path);
-            if(!directory.isDirectory()){
-               directory.mkdirs();
-            }
-         }
          File file = new File(fileName);
          outputStream = new BufferedOutputStream(new FileOutputStream(file));
          if(_memory != null){
@@ -131,7 +142,7 @@ public class FByteFile
       }catch(Exception e){
          throw new FFatalError(e, "Save file failure. (file_name={1})", fileName);
       }finally{
-         if(null != outputStream){
+         if(outputStream != null){
             try{
                outputStream.close();
             }catch(Exception e){

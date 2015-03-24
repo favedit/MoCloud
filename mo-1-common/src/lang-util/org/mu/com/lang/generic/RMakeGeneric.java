@@ -5,7 +5,7 @@ import org.mo.com.lang.RString;
 
 public class RMakeGeneric
 {
-   private static String PATH_TEMPLATE = "D:\\ZW-Platform.WK\\mo-1-common\\src\\lang-util\\org\\mu\\com\\lang\\generic";
+   private static String PATH_TEMPLATE = "E:\\Microbject\\MoCloud\\mo-1-common\\src\\lang-util\\org\\mu\\com\\lang\\generic";
 
    //============================================================
    public static void makeLanguageTypes(String filePath,
@@ -94,7 +94,7 @@ public class RMakeGeneric
 
    //============================================================
    public static void main(String[] args){
-      String filePath = "D:\\ZW-Platform.WK\\mo-1-common\\src\\lang-java\\org\\mo\\com";
+      String filePath = "E:\\Microbject\\MoCloud\\mo-1-common\\src\\lang-java\\org\\mo\\com";
       // 生成类型集合
       makeLanguageTypes(filePath + "\\lang\\type", "boolean", "Boolean", "boolean", "false", "布尔值");
       makeLanguageTypes(filePath + "\\lang\\type", "normal", "Char", "char", "0", "字符");

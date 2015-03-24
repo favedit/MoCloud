@@ -218,19 +218,19 @@ public class RBase{type_name}
    // @return 索引位置
    //============================================================
    public final static int search({type_base}[] source, int sourceOffset, int sourceLength, {type_base}[] target, int targetOffset, int targetLength){
-      if((null != source) && (null != target)){
+      if((source != null) && (target != null)){
          {type_base} first = target[targetOffset];
          int m = sourceOffset - 1;
          int end = sourceOffset + sourceLength;
          while(++m < end){
             if(source[m] == first){
-               int n = targetOffset;
+               int n = 0;
                while(++n < targetLength){
-                  if(source[m + n] != target[n]){
+                  if(source[m + n] != target[targetOffset + n]){
                      break;
                   }
                }
-               if(n == targetLength - 1){
+               if(n == targetLength){
                   return m;
                }
             }
@@ -505,7 +505,7 @@ public class RBase{type_name}
    // @param index 索引位置
    //============================================================
    public final static int erase(char[] values, int index){
-      if(null != values){
+      if(values != null){
          int length = values.length;
          if((index >= 0) && (index < length)){
             System.arraycopy(values, index + 1, values, index, length - index);
@@ -524,7 +524,7 @@ public class RBase{type_name}
    // @param length 索引长度
    //============================================================
    public final static int erase({type_base}[] values, int index, int length){
-      if(null != values){
+      if(values != null){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
             System.arraycopy(values, index + length, values, index, total - index - length);
@@ -567,7 +567,7 @@ public class RBase{type_name}
    // @param targetLength 目标长度
    //============================================================
    public final static int remove({type_base}[] source, int sourceOffset, int sourceLength, {type_base}[] target, int targetOffset, int targetLength){
-      if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
+      if((source != null) && (sourceLength > 0) && (target != null) && (targetLength > 0)){
          int p = -1;
          int index = 0;
          int loop = sourceLength - targetLength;
@@ -606,7 +606,7 @@ public class RBase{type_name}
    // @param values {type_label}数组
    //============================================================
    public final static void clear({type_base}[] values){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             values[n] = {type_default};
@@ -622,7 +622,7 @@ public class RBase{type_name}
    // @param count 数组长度
    //============================================================
    public final static void clear({type_base}[] values, int offset, int length){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
             values[n] = {type_default};

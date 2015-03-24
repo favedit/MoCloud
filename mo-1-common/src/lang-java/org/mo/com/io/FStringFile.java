@@ -153,6 +153,9 @@ public class FStringFile
    //============================================================
    public void loadFile(File file,
                         String charset){
+      // 检查文件有效
+      RFile.checkFile(file);
+      // 读取文件
       FileInputStream fileInputStream = null;
       try{
          int length = (int)file.length();
@@ -165,7 +168,7 @@ public class FStringFile
             _charset = charset;
             // 追加内容
             char[] chars = null;
-            if(null == charset){
+            if(charset == null){
                chars = new String(buffer).toCharArray();
             }else{
                chars = REncoding.convertString(buffer, charset).toCharArray();
@@ -175,7 +178,7 @@ public class FStringFile
       }catch(Exception e){
          throw new FFatalError(e, "Load file failure. (file_name={1}, charset={2})", file.getAbsolutePath(), charset);
       }finally{
-         if(null != fileInputStream){
+         if(fileInputStream != null){
             try{
                fileInputStream.close();
             }catch(Exception e){

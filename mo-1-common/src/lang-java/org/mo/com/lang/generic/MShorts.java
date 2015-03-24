@@ -34,6 +34,18 @@ public abstract class MShorts
    }
 
    //============================================================
+   // <T>构造基础类型集合。</T>
+   //
+   // @param memory 内存
+   // @param length 长度
+   //============================================================
+   public MShorts(short[] memory,
+                  int length){
+      _memory = memory;
+      _length = length;
+   }
+
+   //============================================================
    // <T>内部调整内存大小。</T>
    //
    // @param length 长度

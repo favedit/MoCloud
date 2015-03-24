@@ -189,7 +189,7 @@ public class RBaseByte
       int loop = Math.min(scl, tcl);
       while(loop-- != 0){
          if(source[sourceOffset++] != target[targetOffset++]){
-            return source[sourceOffset - 1] - target[targetOffset - 1];
+            return (int)(source[sourceOffset - 1] - target[targetOffset - 1]);
          }
       }
       return scl - tcl;
@@ -284,7 +284,7 @@ public class RBaseByte
                                   byte[] target,
                                   int targetOffset,
                                   int targetLength){
-      if((null != source) && (null != target)){
+      if((source != null) && (target != null)){
          byte first = target[targetOffset];
          int m = sourceOffset - 1;
          int end = sourceOffset + sourceLength;
@@ -607,7 +607,7 @@ public class RBaseByte
    //============================================================
    public final static int erase(char[] values,
                                  int index){
-      if(null != values){
+      if(values != null){
          int length = values.length;
          if((index >= 0) && (index < length)){
             System.arraycopy(values, index + 1, values, index, length - index);
@@ -628,7 +628,7 @@ public class RBaseByte
    public final static int erase(byte[] values,
                                  int index,
                                  int length){
-      if(null != values){
+      if(values != null){
          int total = values.length;
          if((index >= 0) && (index + length < total)){
             System.arraycopy(values, index + length, values, index, total - index - length);
@@ -679,7 +679,7 @@ public class RBaseByte
                                   byte[] target,
                                   int targetOffset,
                                   int targetLength){
-      if((null != source) && (sourceLength > 0) && (null != target) && (targetLength > 0)){
+      if((source != null) && (sourceLength > 0) && (target != null) && (targetLength > 0)){
          int p = -1;
          int index = 0;
          int loop = sourceLength - targetLength;
@@ -718,7 +718,7 @@ public class RBaseByte
    // @param values 字节数组
    //============================================================
    public final static void clear(byte[] values){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             values[n] = 0;
@@ -736,7 +736,7 @@ public class RBaseByte
    public final static void clear(byte[] values,
                                   int offset,
                                   int length){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
             values[n] = 0;

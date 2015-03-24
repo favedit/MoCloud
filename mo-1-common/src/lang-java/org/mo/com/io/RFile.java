@@ -320,6 +320,35 @@ public class RFile
       return true;
    }
 
+   //============================================================
+   // <T>复制来源文件到目标文件。</T>
+   //
+   // @param fromFile 来源文件
+   // @param destName 目标文件
+   // @return 处理结果
+   //============================================================
+   public static void checkFile(String fileName){
+      checkFile(new File(fileName));
+   }
+
+   //============================================================
+   // <T>复制来源文件到目标文件。</T>
+   //
+   // @param fromFile 来源文件
+   // @param destName 目标文件
+   // @return 处理结果
+   //============================================================
+   public static void checkFile(File file){
+      // 检查文件存在
+      if(!file.exists()){
+         throw new FFatalError("File is not exists. (file_name={1})", file.getAbsolutePath());
+      }
+      // 检查是文件
+      if(!file.isFile()){
+         throw new FFatalError("File is invalid. (file_name={1})", file.getAbsolutePath());
+      }
+   }
+
    private static void listFile__(FStrings files,
                                   File directory,
                                   boolean deep,

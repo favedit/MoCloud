@@ -14,8 +14,8 @@ public class FByteStream
          IDataInput,
          IDataOutput
 {
-   // 读取方式
-   protected EByteEndian _endianCd = EByteEndian.Big;
+   // 字节顺序
+   protected EByteEndian _endianCd = EByteEndian.Little;
 
    //============================================================
    // <T>构造字节数据流。</T>
@@ -35,18 +35,18 @@ public class FByteStream
    }
 
    //============================================================
-   // <T>忽略指定长度。</T>
+   // <T>获得字节顺序。</T>
    //
-   // @param length 长度
+   // @return 字节顺序
    //============================================================
    public EByteEndian endianCd(){
       return _endianCd;
    }
 
    //============================================================
-   // <T>忽略指定长度。</T>
+   // <T>设置字节顺序。</T>
    //
-   // @param length 长度
+   // @param endianCd 字节顺序
    //============================================================
    public void setEndianCd(EByteEndian endianCd){
       _endianCd = endianCd;
@@ -92,11 +92,11 @@ public class FByteStream
    public short readInt16(){
       short value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
       }else{
-         value |= (_memory[_position++] & 0xFF);
          value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return value;
    }
@@ -110,15 +110,15 @@ public class FByteStream
    public int readInt32(){
       int value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
       }else{
-         value |= (_memory[_position++] & 0xFF);
-         value |= (_memory[_position++] & 0xFF) << 8;
-         value |= (_memory[_position++] & 0xFF) << 16;
          value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return value;
    }
@@ -132,23 +132,23 @@ public class FByteStream
    public long readInt64(){
       long value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 56;
-         value |= (_memory[_position++] & 0xFF) << 48;
-         value |= (_memory[_position++] & 0xFF) << 40;
-         value |= (_memory[_position++] & 0xFF) << 32;
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 56;
       }else{
-         value |= (_memory[_position++] & 0xFF);
-         value |= (_memory[_position++] & 0xFF) << 8;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 32;
-         value |= (_memory[_position++] & 0xFF) << 40;
-         value |= (_memory[_position++] & 0xFF) << 48;
          value |= (_memory[_position++] & 0xFF) << 56;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return value;
    }
@@ -172,11 +172,11 @@ public class FByteStream
    public int readUint16(){
       int value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
       }else{
-         value |= (_memory[_position++] & 0xFF);
          value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return value;
    }
@@ -190,15 +190,15 @@ public class FByteStream
    public long readUint32(){
       long value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
       }else{
-         value |= (_memory[_position++] & 0xFF);
-         value |= (_memory[_position++] & 0xFF) << 8;
-         value |= (_memory[_position++] & 0xFF) << 16;
          value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return value;
    }
@@ -212,15 +212,15 @@ public class FByteStream
    public float readFloat(){
       int value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
       }else{
-         value |= (_memory[_position++] & 0xFF);
-         value |= (_memory[_position++] & 0xFF) << 8;
-         value |= (_memory[_position++] & 0xFF) << 16;
          value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return Float.intBitsToFloat(value);
    }
@@ -234,23 +234,23 @@ public class FByteStream
    public double readDouble(){
       long value = 0;
       if(_endianCd == EByteEndian.Little){
-         value |= (_memory[_position++] & 0xFF) << 56;
-         value |= (_memory[_position++] & 0xFF) << 48;
-         value |= (_memory[_position++] & 0xFF) << 40;
-         value |= (_memory[_position++] & 0xFF) << 32;
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 8;
          value |= (_memory[_position++] & 0xFF);
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 56;
       }else{
-         value |= (_memory[_position++] & 0xFF);
-         value |= (_memory[_position++] & 0xFF) << 8;
-         value |= (_memory[_position++] & 0xFF) << 16;
-         value |= (_memory[_position++] & 0xFF) << 24;
-         value |= (_memory[_position++] & 0xFF) << 32;
-         value |= (_memory[_position++] & 0xFF) << 40;
-         value |= (_memory[_position++] & 0xFF) << 48;
          value |= (_memory[_position++] & 0xFF) << 56;
+         value |= (_memory[_position++] & 0xFF) << 48;
+         value |= (_memory[_position++] & 0xFF) << 40;
+         value |= (_memory[_position++] & 0xFF) << 32;
+         value |= (_memory[_position++] & 0xFF) << 24;
+         value |= (_memory[_position++] & 0xFF) << 16;
+         value |= (_memory[_position++] & 0xFF) << 8;
+         value |= (_memory[_position++] & 0xFF);
       }
       return Double.longBitsToDouble(value);
    }
@@ -323,8 +323,13 @@ public class FByteStream
    @Override
    public void writeInt16(short value){
       ensureSize(_position + 2);
-      _memory[_position++] = (byte)((value) & 0xFF);
-      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((value) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -338,10 +343,17 @@ public class FByteStream
    @Override
    public void writeInt32(int value){
       ensureSize(_position + 4);
-      _memory[_position++] = (byte)((value) & 0xFF);
-      _memory[_position++] = (byte)((value >> 8) & 0xFF);
-      _memory[_position++] = (byte)((value >> 16) & 0xFF);
-      _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((value) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value >> 16) & 0xFF);
+         _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((value >> 24) & 0xFF);
+         _memory[_position++] = (byte)((value >> 16) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -355,14 +367,25 @@ public class FByteStream
    @Override
    public void writeInt64(long value){
       ensureSize(_position + 8);
-      _memory[_position++] = (byte)((value) & 0xFF);
-      _memory[_position++] = (byte)((value >> 8) & 0xFF);
-      _memory[_position++] = (byte)((value >> 16) & 0xFF);
-      _memory[_position++] = (byte)((value >> 24) & 0xFF);
-      _memory[_position++] = (byte)((value >> 32) & 0xFF);
-      _memory[_position++] = (byte)((value >> 40) & 0xFF);
-      _memory[_position++] = (byte)((value >> 48) & 0xFF);
-      _memory[_position++] = (byte)((value >> 56) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((value) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value >> 16) & 0xFF);
+         _memory[_position++] = (byte)((value >> 24) & 0xFF);
+         _memory[_position++] = (byte)((value >> 32) & 0xFF);
+         _memory[_position++] = (byte)((value >> 40) & 0xFF);
+         _memory[_position++] = (byte)((value >> 48) & 0xFF);
+         _memory[_position++] = (byte)((value >> 56) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((value >> 56) & 0xFF);
+         _memory[_position++] = (byte)((value >> 48) & 0xFF);
+         _memory[_position++] = (byte)((value >> 40) & 0xFF);
+         _memory[_position++] = (byte)((value >> 32) & 0xFF);
+         _memory[_position++] = (byte)((value >> 24) & 0xFF);
+         _memory[_position++] = (byte)((value >> 16) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -390,8 +413,13 @@ public class FByteStream
    @Override
    public void writeUint16(int value){
       ensureSize(_position + 2);
-      _memory[_position++] = (byte)((value) & 0xFF);
-      _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((value) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -405,10 +433,17 @@ public class FByteStream
    @Override
    public void writeUint32(long value){
       ensureSize(_position + 4);
-      _memory[_position++] = (byte)((value) & 0xFF);
-      _memory[_position++] = (byte)((value >> 8) & 0xFF);
-      _memory[_position++] = (byte)((value >> 16) & 0xFF);
-      _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((value) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value >> 16) & 0xFF);
+         _memory[_position++] = (byte)((value >> 24) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((value >> 24) & 0xFF);
+         _memory[_position++] = (byte)((value >> 16) & 0xFF);
+         _memory[_position++] = (byte)((value >> 8) & 0xFF);
+         _memory[_position++] = (byte)((value) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -423,10 +458,17 @@ public class FByteStream
    public void writeFloat(float value){
       ensureSize(_position + 4);
       int data = Float.floatToIntBits(value);
-      _memory[_position++] = (byte)((data) & 0xFF);
-      _memory[_position++] = (byte)((data >> 8) & 0xFF);
-      _memory[_position++] = (byte)((data >> 16) & 0xFF);
-      _memory[_position++] = (byte)((data >> 24) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((data) & 0xFF);
+         _memory[_position++] = (byte)((data >> 8) & 0xFF);
+         _memory[_position++] = (byte)((data >> 16) & 0xFF);
+         _memory[_position++] = (byte)((data >> 24) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((data >> 24) & 0xFF);
+         _memory[_position++] = (byte)((data >> 16) & 0xFF);
+         _memory[_position++] = (byte)((data >> 8) & 0xFF);
+         _memory[_position++] = (byte)((data) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -441,14 +483,25 @@ public class FByteStream
    public void writeDouble(double value){
       ensureSize(_position + 8);
       long data = Double.doubleToLongBits(value);
-      _memory[_position++] = (byte)((data) & 0xFF);
-      _memory[_position++] = (byte)((data >> 8) & 0xFF);
-      _memory[_position++] = (byte)((data >> 16) & 0xFF);
-      _memory[_position++] = (byte)((data >> 24) & 0xFF);
-      _memory[_position++] = (byte)((data >> 32) & 0xFF);
-      _memory[_position++] = (byte)((data >> 40) & 0xFF);
-      _memory[_position++] = (byte)((data >> 48) & 0xFF);
-      _memory[_position++] = (byte)((data >> 56) & 0xFF);
+      if(_endianCd == EByteEndian.Little){
+         _memory[_position++] = (byte)((data) & 0xFF);
+         _memory[_position++] = (byte)((data >> 8) & 0xFF);
+         _memory[_position++] = (byte)((data >> 16) & 0xFF);
+         _memory[_position++] = (byte)((data >> 24) & 0xFF);
+         _memory[_position++] = (byte)((data >> 32) & 0xFF);
+         _memory[_position++] = (byte)((data >> 40) & 0xFF);
+         _memory[_position++] = (byte)((data >> 48) & 0xFF);
+         _memory[_position++] = (byte)((data >> 56) & 0xFF);
+      }else{
+         _memory[_position++] = (byte)((data >> 56) & 0xFF);
+         _memory[_position++] = (byte)((data >> 48) & 0xFF);
+         _memory[_position++] = (byte)((data >> 40) & 0xFF);
+         _memory[_position++] = (byte)((data >> 32) & 0xFF);
+         _memory[_position++] = (byte)((data >> 24) & 0xFF);
+         _memory[_position++] = (byte)((data >> 16) & 0xFF);
+         _memory[_position++] = (byte)((data >> 8) & 0xFF);
+         _memory[_position++] = (byte)((data) & 0xFF);
+      }
       if(_position > _length){
          _length = _position;
       }
@@ -475,263 +528,28 @@ public class FByteStream
    }
 
    //============================================================
-   //   // <T>写入一个字节数组。</T>
-   //   //
-   //   // @param bytes 字节数组
-   //   // @param offset 位置
-   //   // @param length 长度
-   //   //============================================================
-   //   @Override
-   //   public void WriteBytes(byte[] bytes, int offset, int length){
-   //      ensureSize(_position + length);
-   //      System.arraycopy(bytes, offset, _memory, _position, length);
-   //      _position += length;
-   //      if(_position > _length){
-   //         _length = _position;
-   //      }
-   //   }
-   //
-   //   //============================================================
-   //   // <T>将float型数值写入</T>
-   //   //
-   //   // @param value 待写入的值
-   //   //============================================================
-   //   @Override
-   //   public void WriteFloat(float value){
-   //      ensureSize(_position + 4);
-   //      bb = ByteBuffer.allocate(4);
-   //      byte[] ret = new byte[4];
-   //      FloatBuffer fb = bb.asFloatBuffer();
-   //      fb.put(value);
-   //      bb.get(ret);
-   //      System.arraycopy(ret, 0, _memory, _position, ret.length);
-   //      _position += 4;
-   //      if(_position > _length){
-   //         _length = _position;
-   //      }
-   //   }
-   //
-   //   //============================================================
-   //   // <T>将double型数值写入</T>
-   //   //
-   //   // @param value 待写入的值
-   //   //============================================================
-   //   @Override
-   //   public void WriteDouble(double value){
-   //      ensureSize(_position + 8);
-   //      bb = ByteBuffer.allocate(8);
-   //      byte[] ret = new byte[8];
-   //      DoubleBuffer fb = bb.asDoubleBuffer();
-   //      fb.put(value);
-   //      bb.get(ret);
-   //      System.arraycopy(ret, 0, _memory, _position, ret.length);
-   //      _position += 8;
-   //      if(_position > _length){
-   //         _length = _position;
-   //      }
-   //   }
-   //
-   //   //============================================================
-   //   // <T>将字符串写入</T>
-   //   //
-   //   // @param value 待写入的值
-   //   //============================================================
-   //   @Override
-   //   public void WriteString(String value){
-   //      if(null == value){
-   //         WriteInt16((short)0);
-   //      }else{
-   //         WriteInt16((short)value.length());
-   //         byte[] bytes = value.getBytes();
-   //         ensureSize(_position + bytes.length);
-   //         System.arraycopy(bytes, 0, _memory, _position, bytes.length);
-   //         _position += value.length();
-   //         if(_position > _length){
-   //            _length = _position;
-   //         }
-   //      }
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个byte类型数字。</T>
-   //   //
-   //   // @return byte数字
-   //   //============================================================
-   //   @Override
-   //   public byte ReadInt8(){
-   //      return _memory[_position++];
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个short类型数字。</T>
-   //   //
-   //   // @return short数字
-   //   //============================================================
-   //   @Override
-   //   public short ReadInt16(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 2);
-   //      bb = ByteBuffer.wrap(bytes);
-   //      ShortBuffer sb = bb.asShortBuffer();
-   //      _position += 2;
-   //      return sb.get();
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个int类型数字。</T>
-   //   //
-   //   // @return int数字
-   //   //============================================================
-   //   @Override
-   //   public int ReadInt32(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 4);
-   //      _position += 4;
-   //      bb = ByteBuffer.wrap(bytes);
-   //      IntBuffer ib = bb.asIntBuffer();
-   //      return ib.get();
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个long类型数字。</T>
-   //   //
-   //   // @return long数字
-   //   //============================================================
-   //   @Override
-   //   public long ReadInt64(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 8);
-   //      _position += 8;
-   //      bb = ByteBuffer.wrap(bytes);
-   //      LongBuffer lb = bb.asLongBuffer();
-   //      return lb.get();
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个byte类型数字。</T>
-   //   //
-   //   // @return byte数字
-   //   //============================================================
-   //   @Override
-   //   public byte ReadUInt8(){
-   //      return _memory[_position++];
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个short类型数字。</T>
-   //   //
-   //   // @return short数字
-   //   //============================================================
-   //   @Override
-   //   public short ReadUInt16(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 2);
-   //      bb = ByteBuffer.wrap(bytes);
-   //      ShortBuffer sb = bb.asShortBuffer();
-   //      _position += 2;
-   //      return sb.get();
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个int类型数字。</T>
-   //   //
-   //   // @return int数字
-   //   //============================================================
-   //   @Override
-   //   public int ReadUInt32(){
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个long类型数字。</T>
-   //   //
-   //   // @return long数字
-   //   //============================================================
-   //   @Override
-   //   public long ReadUInt64(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 8);
-   //      _position += 8;
-   //      bb = ByteBuffer.wrap(bytes);
-   //      LongBuffer lb = bb.asLongBuffer();
-   //      return lb.get();
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个float类型数字。</T>
-   //   //
-   //   // @return float数字
-   //   //============================================================
-   //   @Override
-   //   public float ReadFloat(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 4);
-   //      bb = ByteBuffer.wrap(bytes);
-   //      FloatBuffer fb = bb.asFloatBuffer();
-   //      _position += 4;
-   //      return fb.get();
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取指定位置的一个double类型数字。</T>
-   //   //
-   //   // @return double数
-   //   //============================================================
-   //   @Override
-   //   public double ReadDouble(){
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, _position + 8);
-   //      bb = ByteBuffer.wrap(bytes);
-   //      DoubleBuffer fb = bb.asDoubleBuffer();
-   //      _position += 8;
-   //      return fb.get();
-   //   }
-   //   //============================================================
-   //   // <T>读取指定位置的一个字符串。</T>
-   //   //
-   //   // @return 字符串 
-   //   //============================================================
-   //   @Override
-   //   public String ReadString(){
-   //      String str = "";
-   //      int result = ReadInt16();
-   //      byte[] bytes = Arrays.copyOfRange(_memory, _position, result + _position);
-   //      if(result > 0){
-   //         str = new String(bytes);
-   //      }
-   //      _position += result;
-   //      return str;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>读取从指定位置到结尾的所有数值</T>
-   //   //
-   //   // @return byte数组
-   //   //============================================================
-   //   @Override
-   //   public byte[] ReadAll(){
-   //      int length = _length - _position;
-   //      byte[] bytes = new byte[length];
-   //      System.arraycopy(_memory, _position, bytes, 0, length);
-   //      return bytes;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>清除所有数据内容。</T>
-   //   //============================================================
-   //   @Override
-   //   public void Reset(){
-   //      Arrays.copyOf(_memory, 0);
-   //      _position = 0;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>清除所有数据内容。</T>
-   //   // <P>不清空数据，只是重设长度和位置。</P>
-   //   //============================================================
-   //   @Override
-   //   public void Clear(){
-   //      _length = 0;
-   //      _position = 0;
-   //
-   //   }
-   //============================================================
    // <T>重设数据开始位置和长度。</T>
    //============================================================
-   public void Flip(){
+   public void flip(){
       _length = _position;
       _position = 0;
+   }
+
+   //============================================================
+   // <T>清除所有数据内容。</T>
+   //============================================================
+   public void reset(){
+      _position = 0;
+   }
+
+   //============================================================
+   // <T>清除所有数据内容。</T>
+   // <P>不清空数据，只是重设长度和位置。</P>
+   //============================================================
+   @Override
+   public void clear(){
+      super.clear();
+      _position = 0;
+
    }
 }

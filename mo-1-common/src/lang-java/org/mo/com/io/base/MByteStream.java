@@ -29,12 +29,12 @@ public abstract class MByteStream
    //============================================================
    // <T>构造字节数据流基类。</T>
    //
-   // @param memory 内存
+   // @param data 数据
    // @param length 长度
    //============================================================
-   public MByteStream(byte[] memory,
+   public MByteStream(byte[] data,
                       int length){
-      super(memory, length);
+      super(data, length);
    }
 
    //============================================================
