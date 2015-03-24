@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.Material2Frame" update_date="20141210134046">
-   <Frame name="design3d.scene.Material2Frame" type='FDsSceneMaterial2Frame' linker='_frameMaterial2' label="材质属性" is_valid="Y" note="">
+<Content name="design3d.mesh.Material2Frame" update_date="20141210134046">
+   <Frame name="design3d.mesh.Material2Frame" type='FDsMeshMaterial2Frame' linker='_frameMaterial2' label="材质属性" is_valid="Y" note="">
       <Panel name='optionPanel' icon='design.panel.icon' label='特性参数'>
          <Check name="optionDepth" linker='_controlOptionDepth' label="深度" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Check name="optionView" linker='_controlOptionView' label="环境" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
