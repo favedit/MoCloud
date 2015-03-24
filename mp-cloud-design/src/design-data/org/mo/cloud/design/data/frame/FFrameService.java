@@ -2,6 +2,7 @@ package org.mo.cloud.design.data.frame;
 
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -50,7 +51,7 @@ public class FFrameService
                                FXmlNode xconfig,
                                FXmlNode xoutput){
       String name = xconfig.get("name");
-      XContentObject xframe = _frameConsole.find(_storageName, name);
+      XContentObject xframe = _frameConsole.find(_storageName, name, EPersistenceMode.Config);
       ISqlConnection connection = sqlContext.activeConnection();
       // 生成查询命令
       FDataCommandBuilder builder = new FDataCommandBuilder();

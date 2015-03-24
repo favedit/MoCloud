@@ -84,7 +84,7 @@ function onPageLoad(){
 <!-- TreeView config ----------------------------------------->
 <jc:tree name='xTree' source='system.design.frame'/>
 <!-- Body begin ---------------------------------------------->
-<jh:body style='bodyCatalog' scroll='no' onload='onPageLoad()'>
+<jh:body style='Frame_Catalog' scroll='no' onload='onPageLoad()'>
 <jh:form name='fmMain' method='post'>
 <!-- Hidden -------------------------------------------------->
 <jh:hidden name='storage_code'/>
@@ -96,7 +96,7 @@ function onPageLoad(){
 <TR>
 <TD height='24'>
 <!-- Toolbar begin ------------------------------------------->
-<DIV id='_id_toolbar' style='width:100%; height:100%; overflow:auto'><DIV>
+<DIV id='_id_toolbar' style='width:100%; height:100%; overflow:hidden' class='Catalog_ToolBar'><DIV>
 <!-- Toolbar end --------------------------------------------->
 </TD></TR>
 <TR>

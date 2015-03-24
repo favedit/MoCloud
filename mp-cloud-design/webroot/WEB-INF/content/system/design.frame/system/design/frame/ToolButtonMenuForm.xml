@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.design.frame.ToolButtonMenuForm" update_date="20150324141900">
+  <FrameForm name="design.webform.ToolButtonMenuForm" label="工具栏-菜单按键">
+    <DataAction name="insertAction" label="新建命令" service="insert@design.webform" />
+    <DataAction name="updateAction" label="保存命令" service="update@design.webform" />
+    <DataAction name="deleteAction" label="删除命令" service="delete@design.webform" />
+    <DataAction name="sortAction" label="排序命令" service="sort@design.webform" />
+    <ToolBar name="toolBar" label="工具栏">
+      <ToolButton name="saveButton" label="保存" icon="tool.save" icon_disable="tool.saved" hotkey="F8" action="doSave()" />
+      <ToolButton name="deleteButton" label="删除" icon="tool.delete" icon_disable="tool.deleted" hotkey="F6" action="doDelete()" />
+      <ToolButtonSplit name="split2Button" label="分割" />
+      <ToolButton name="insertMenuItem" label="新建菜单按钮" attributes="_type=MenuButton\nsel_type=component\nform_name=design.webform.MenuButtonForm" icon="#design.webtools.menuitemNew" />
+      <ToolButton name="insertMenuButtonSplit" label="新建菜单分割" attributes="_type=MenuButtonSplit\nsel_type=component\nform_name=design.webform.MenuButtonSplitForm" icon="#design.webtools.menuitemNew" />
+      <ToolButtonSplit name="split5Button" label="分隔" />
+      <ToolButton name="sortButton" label="排序" attributes="sel_type=component" icon="#tools.sort" icon_disable="#tools.sortDisable" />
+    </ToolBar>
+    <DataSelect name="componentType" label="控件类型" data_name="_TYPE" />
+    <DataCheck name="isValid" label="有效性" data_name="IS_VALID" />
+    <DataEdit name="name" label="名称" data_name="NAME" />
+    <DataEdit name="label" label="标签" data_name="LABEL" />
+    <DataIconPicker name="icon" label="图标" />
+    <DataCheck name="dispSearch" label="搜索" data_name="DISP_SEARCH" />
+    <DataCheck name="dispPicker" label="选取" data_name="DISP_PICKER" />
+    <DataCheck name="dispList" label="列表" data_name="DISP_LIST" />
+    <DataCheck name="dispInsert" label="新建" data_name="DISP_INSERT" />
+    <DataCheck name="dispUpdate" label="更新" data_name="DISP_UPDATE" />
+    <DataCheck name="dispDelete" label="删除" data_name="DISP_DELETE" />
+    <DataEdit name="action" label="命令" data_name="ACTION" />
+    <DataEdit name="page" label="转向页面" data_name="PAGE" />
+    <DataMemo name="note" label="描述信息" data_name="NOTE" />
+  </FrameForm>
+</Content>

@@ -5,12 +5,16 @@ import org.mo.cloud.content.design.configuration.FContentClass;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FMultiString;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.INamePair;
+import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -164,7 +168,15 @@ public class FPersistence
          // 数据类型判断
          EContentData dataCd = field.dataCd();
          if(dataCd == EContentData.Boolean){
-            contentValue = RBoolean.toString(value);
+            if(RBoolean.parse(value)){
+               contentValue = RBoolean.TRUE_STR;
+            }
+         }else if(dataCd == EContentData.String){
+            String valueString = value.toString();
+            if(!RString.isEmpty(valueString)){
+               contentValue = valueString;
+            }
+
          }else{
             contentValue = value.toString();
          }
@@ -298,6 +310,43 @@ public class FPersistence
             clazz.load(xobject);
             _logger.debug(this, "load", "Create content class. (storage={1}, persistence={2}, class={3})", _storageName, _persistenceName, clazz.name());
             _classes.set(name, clazz);
+         }
+      }
+   }
+
+   //============================================================
+   // <T>创建实例。</T>
+   //
+   // @param name 名称
+   // @param attributes 属性集合
+   // @return 实例
+   //============================================================
+   public void format(FContentObject contentObject,
+                      EPersistenceMode modeCd){
+      // 重新设置属性集合
+      String type = contentObject.name();
+      FAttributes attributes = new FAttributes();
+      setAttributes(type, attributes, contentObject.attributes(), modeCd);
+      for(IStringPair pair : attributes){
+         String value = pair.value();
+         if(!RString.isEmpty(value)){
+            if(value.startsWith("M#")){
+               FMultiString source = new FMultiString();
+               source.unpack(value);
+               if(source.contains("cn")){
+                  value = source.get("cn");
+               }else if(!source.isEmpty()){
+                  value = source.value(0);
+               }
+               attributes.set(pair.name(), value);
+            }
+         }
+      }
+      contentObject.attributes().assignNotEmpty(attributes);
+      // 处理所有节点
+      if(contentObject.hasNode()){
+         for(FContentObject contentNode : contentObject.nodes()){
+            format(contentNode, modeCd);
          }
       }
    }

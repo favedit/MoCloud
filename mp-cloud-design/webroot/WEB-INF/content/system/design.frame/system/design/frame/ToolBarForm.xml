@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.design.frame.ToolBarForm" update_date="20150324141901">
+  <FrameForm name="design.webform.ToolBarForm" label="工具栏">
+    <DataAction name="insertAction" label="新建命令" service="insert@design.webform" />
+    <DataAction name="updateAction" label="保存命令" service="update@design.webform" />
+    <DataAction name="deleteAction" label="删除命令" service="delete@design.webform" />
+    <DataAction name="sortAction" label="排序命令" service="sort@design.webform" />
+    <ToolBar name="toolBar" label="工具栏">
+      <ToolButton name="saveButton" label="保存" icon="tool.save" icon_disable="tool.saved" hotkey="F8" action="doSave()" />
+      <ToolButton name="deleteButton" label="删除" icon="tool.delete" icon_disable="tool.deleted" hotkey="F6" action="doDelete()" />
+      <ToolButtonSplit name="split2Button" label="分割" />
+      <ToolButtonMenu name="insertButton" label="新建控件" icon="tool.insert" icon_disable="tool.insertd">
+        <MenuButton name="insertToolButton" label="新建 - 按键" attributes="_type=ToolButton\nsel_type=component\nform_name=design.webform.ToolButtonForm" icon="#design.webform.toolbuttonNew" />
+        <MenuButton name="insertToolButtonSplit" label="新建 - 分割" attributes="_type=ToolButtonSplit\nsel_type=component\nform_name=design.webform.ToolButtonSplitForm" icon="#design.webform.toolbtnsplitNew" />
+        <MenuButton name="insertToolButtonMenu" label="新建 - 菜单" attributes="_type=ToolButtonMenu\nsel_type=component\nform_name=design.webform.ToolButtonMenuForm" icon="#design.webform.toolbuttonmenuNew" />
+      </ToolButtonMenu>
+      <ToolButtonSplit name="split4Button" label="分割" />
+      <ToolButton name="sortButton" label="排序" attributes="sel_type=component" icon="#tools.sort" icon_disable="#tools.sortDisable" />
+    </ToolBar>
+    <DataSelect name="type" label="控件类型" data_name="_TYPE" />
+    <DataCheck name="isValid" label="有效性" data_name="IS_VALID" />
+    <DataEdit name="name" label="名称" data_name="NAME" />
+    <DataCheck name="isMerge" label="是否合并" data_name="IS_MERGE" />
+    <DataEdit name="label" label="标签" data_name="LABEL" />
+    <DataNumber name="width" label="宽度" data_name="WIDTH" />
+    <DataNumber name="height" label="高度" data_name="HEIGHT" />
+    <DataSelect name="styleRefer" label="样式引用" data_name="STYLE_REFER" />
+    <DataMemo name="note" label="描述信息" data_name="NOTE" />
+  </FrameForm>
+</Content>

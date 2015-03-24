@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150324163403">
+  <FrameForm name="system.design.frame.TemplateForm" label="模板">
+    <DataAction name="updateAction" label="保存命令" service="update@system.design.frame" />
+    <DataAction name="deleteAction" label="删除命令" service="delete@system.design.frame" />
+    <ToolBar name="toolBar" label="工具栏">
+      <ToolButton name="saveButton" label="保存" icon="tool.save" icon_disable="tool.saved" hotkey="F8" action="doSave()" />
+      <ToolButton name="deleteButton" label="删除" icon="tool.delete" icon_disable="tool.deleted" hotkey="F6" action="doDelete()" />
+    </ToolBar>
+    <Split name="basic" label="基本信息" />
+    <DataSelect name="type" label="类型" data_name="_TYPE" />
+    <DataCheck name="isValid" label="有效性" data_name="IS_VALID" data_default="Y" />
+    <DataEdit name="name" label="名称" data_name="NAME" />
+    <DataEdit name="label" label="标签" data_name="LABEL" />
+    <Split name="edit" label="编辑信息" />
+    <DataEdit name="templateName" label="模板名称" data_name="TEMPLATE_NAME" />
+    <DataAction name="insertAction" label="新建命令" service="insert@design.webform" />
+  </FrameForm>
+</Content>

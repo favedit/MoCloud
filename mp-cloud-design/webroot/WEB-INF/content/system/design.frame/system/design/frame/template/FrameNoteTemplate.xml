@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="common.country.CountryForm" update_date="20141210134046">
-   <FrameTemplate _uuid="zkneyywR9RpH19br0XE2pA" name="design.webform.FormNoteTemplate" label="M#12cn14表单模板" is_valid="Y" note="M#">
-     <Split _uuid="LUDPxRl8o4MWv]rAAIoCgA" name="noteGroup" label="注释信息" is_valid="Y" note="M#" disp_search="Y" disp_lov="Y" disp_zoom="Y" disp_display="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" icon="ctl.radios" disp_type="H" />
-     <DataMemo _uuid="hUhyxlMvgsV0[qwLR2jovg" name="note" label="描述信息" is_valid="Y" note="M#" disp_search="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="NOTE" edit_insert="Y" edit_update="Y" />
-   </FrameTemplate>
+<Content name="system.design.frame.template.FrameNoteTemplate" update_date="20150324132240">
+  <FrameTemplate name="design.webform.FormNoteTemplate" label="表单模板">
+    <Split name="noteGroup" label="注释信息" />
+    <DataMemo name="note" label="描述信息" data_name="NOTE" />
+  </FrameTemplate>
 </Content>

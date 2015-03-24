@@ -37,6 +37,10 @@ public abstract class XBaseToolButton
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
+   // 回行类型的定义
+   @AContentField
+   public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
+
    // 位置的定义
    @AContentField
    public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
@@ -64,6 +68,14 @@ public abstract class XBaseToolButton
    // 图标的定义
    @AContentField
    public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
+
+   // 禁止图标的定义
+   @AContentField
+   public final static FContentField ICON_DISABLE = new FContentField("iconDisable", "icon_disable", EContentData.String, "", "", "", "YYNY");
+
+   // 热键的定义
+   @AContentField
+   public final static FContentField HOTKEY = new FContentField("hotkey", "hotkey", EContentData.String, "", "", "", "YYNY");
 
    // 命令的定义
    @AContentField
@@ -107,6 +119,10 @@ public abstract class XBaseToolButton
    @AName("attributes")
    protected String _attributes;
 
+   // 回行类型
+   @AName("wrap_cd")
+   protected String _wrapCd;
+
    // 位置
    @AName("location")
    protected String _location;
@@ -134,6 +150,14 @@ public abstract class XBaseToolButton
    // 图标
    @AName("icon")
    protected String _icon;
+
+   // 禁止图标
+   @AName("icon_disable")
+   protected String _iconDisable;
+
+   // 热键
+   @AName("hotkey")
+   protected String _hotkey;
 
    // 命令
    @AName("action")
@@ -227,6 +251,24 @@ public abstract class XBaseToolButton
    //============================================================
    public void setAttributes(String value){
       _attributes = value;
+   }
+
+   //============================================================
+   // <T>获得回行类型的内容。</T>
+   //
+   // @return 回行类型
+   //============================================================
+   public String getWrapCd(){
+      return _wrapCd;
+   }
+
+   //============================================================
+   // <T>设置回行类型的内容。</T>
+   //
+   // @param value 回行类型
+   //============================================================
+   public void setWrapCd(String value){
+      _wrapCd = value;
    }
 
    //============================================================
@@ -353,6 +395,42 @@ public abstract class XBaseToolButton
    //============================================================
    public void setIcon(String value){
       _icon = value;
+   }
+
+   //============================================================
+   // <T>获得禁止图标的内容。</T>
+   //
+   // @return 禁止图标
+   //============================================================
+   public String getIconDisable(){
+      return _iconDisable;
+   }
+
+   //============================================================
+   // <T>设置禁止图标的内容。</T>
+   //
+   // @param value 禁止图标
+   //============================================================
+   public void setIconDisable(String value){
+      _iconDisable = value;
+   }
+
+   //============================================================
+   // <T>获得热键的内容。</T>
+   //
+   // @return 热键
+   //============================================================
+   public String getHotkey(){
+      return _hotkey;
+   }
+
+   //============================================================
+   // <T>设置热键的内容。</T>
+   //
+   // @param value 热键
+   //============================================================
+   public void setHotkey(String value){
+      _hotkey = value;
    }
 
    //============================================================

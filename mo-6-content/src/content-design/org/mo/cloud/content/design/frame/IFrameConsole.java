@@ -22,31 +22,35 @@ public interface IFrameConsole
    // <T>根据名称查找表单。</T>
    //
    // @param storgeName 存储名称
-   // @param formName 表单名称
+   // @param frameName 页面名称
+   // @param modeCd 模式类型
    // @return 表单
    //============================================================
    XContentObject find(String storgeName,
-                       String formName);
+                       String frameName,
+                       EPersistenceMode modeCd);
 
    //============================================================
    // <T>根据名称获得表单定义。</T>
    //
    // @param storgeName 存储名称
-   // @param formName 表单名称
+   // @param frameName 页面名称
    // @param modeCd 模式类型
    // @return 表单定义
    //============================================================
    FContentObject findDefine(String storgeName,
-                             String formName,
+                             String frameName,
                              EPersistenceMode modeCd);
 
    //============================================================
    // <T>根据名称建立目录配置。</T>
    //
    // @param storgeName 存储名称
-   // @param treeName 目录名称
+   // @param frameName 页面名称
+   // @param modeCd 模式类型
    // @return 目录配置
    //============================================================
    FXmlNode buildConfig(String storgeName,
-                        String treeName);
+                        String frameName,
+                        EPersistenceMode modeCd);
 }

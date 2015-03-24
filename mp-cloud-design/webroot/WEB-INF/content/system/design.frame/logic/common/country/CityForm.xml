@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="common.country.CountryForm" update_date="20141210134046">
-<FrameForm _uuid="tUVnm2HVGSQx9mRnVEzosg" name="database.codelist.CodeListForm" label="数据库-定义列表" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y" action="/system/design/weblist/WebList.wa?type=list">
-  <Action _uuid="bU]QjZf[g[hN[uzRyX[ygg" name="insertAction" label="新建处理" is_valid="Y" note="" service="insert@database.codelist" />
-  <Action _uuid="AEkyfkdqJeXuIneSiBn4mw" name="updateAction" label="保存处理" is_valid="Y" note="" service="update@database.codelist" />
-  <Action _uuid="oE5miPgcy5fc8Bf7RsR]jQ" name="deleteAction" label="删除处理" is_valid="Y" note="" service="delete@database.codelist" />
-  <Action _uuid="Q0wXGN03XMwjV7tlxr40sw" name="sortAction" label="排序处理" is_valid="Y" note="" service="sort@database.codelist" />
-  <ToolBar _uuid="3ULiKr0xupM[FD6tYJdXrQ" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-    <ToolButton _uuid="jknZaJ6iTiB4Rbl]jax4hw" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#tools.save" hotkey="F8" action="doSave()" />
-    <ToolButton _uuid="TE2]V2RO8boTxLJJzbUcgQ" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="#tools.delete" hotkey="F6" action="doDelete()" />
-    <ToolButtonSplit _uuid="cEd1OW83KNGakQujIyC[nQ" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-    <ToolButton _uuid="wkAPmxKhEDbGR2xteBlQqw" name="insertCode" label="新建项目" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="#database.codelist.code" hotkey="F5" page="insert@#/database/codelist/CodeList.wa" attributes="_type=Code\nsel_type=component\nform_name=database.codelist.CodeForm" />
-    <ToolButtonSplit _uuid="Vkf2pwLe9JquFx5ZOL22mQ" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-    <ToolButtonMenu _uuid="6UUR0oVQa7caqbLBiUlZsg" name="sqlButton" label="SQL代码" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="#tools.build">
-      <MenuButton _uuid="J07F4E[AuXOelLUH3JRFqA" name="sqlPackageHeadButton" label="PLSQL - 包头" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#database.dataset.source" page="build@#/database/codelist/CodeList.wa?type=packageHead" />
-      <MenuButton _uuid="jE8HXhkUXNSHN2QOddfnpA" name="sqlPackageBodyButton" label="PLSQL - 包体" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#database.dataset.source" page="build@#/database/codelist/CodeList.wa?type=packageBody" />
-    </ToolButtonMenu>
-    <ToolButton _uuid="8EMf9mRA302mPZ0pi70ilQ" name="commitButton" label="提交" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" icon="#tools.commit" page="commit@#/database/codelist/CodeList.wa" />
-    <ToolButtonSplit _uuid="T023JbhXSKu4cW9RET[7pg" name="split3Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-    <ToolButton _uuid="vE]r2FdHfV6keaB7gXm5sw" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="#tools.sort" hotkey="F9" page="sort@#/database/codelist/CodeList.wa" attributes="sel_type=collection" />
-  </ToolBar>
-  <Select _uuid="m0bdD7mYwMm3N9IgKgcFtA" name="componentType" label="组件类型" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" style_edit="selectWide" data_name="_TYPE" valid_insert="Y" valid_update="Y" valid_delete="Y" valid_require="Y" edit_refer="database.codelist.ComponentType" edit_check="N" />
-  <Check _uuid="p08T192fboTqOJbIt7Jong" name="isValid" label="有效性" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="check" data_name="IS_VALID" data_default="Y" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" />
-  <Edit _uuid="PU[XwYnx3tCUKX0bQMg9sQ" name="name" label="名称" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" style_edit="editWide" data_name="NAME" edit_insert="Y" edit_delete="Y" valid_insert="Y" valid_delete="Y" valid_require="Y" />
-  <Check _uuid="lknYSIYaT7pEcjPmLySqhQ" name="cache" label="缓冲" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" style_edit="check" data_name="CACHE" edit_insert="Y" edit_update="Y" edit_delete="Y" valid_insert="Y" valid_update="Y" valid_delete="Y" />
-  <Edit _uuid="GEouKtT5zIUUpJ[qgrbPpg" name="label" label="标签" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="LABEL" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" />
-  <Edit _uuid="uE8wyGbt4VzYVaKWjrCUiQ" name="dataName" label="数据名称" is_valid="Y" note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="DATA_NAME" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" label_position="left" />
-  <Memo _uuid="8kMq0n2]JryVOyBeGbKBhw" name="note" label="注释" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" data_name="NOTE" edit_insert="Y" edit_update="Y" edit_delete="Y" valid_insert="Y" valid_update="Y" valid_delete="Y" />
-</FrameForm>
+<Content name="logic.common.country.CityForm" update_date="20150324132627">
+  <FrameForm name="database.codelist.CodeListForm" label="数据库-定义列表">
+    <Action name="insertAction" label="新建处理" service="insert@database.codelist" />
+    <Action name="updateAction" label="保存处理" service="update@database.codelist" />
+    <Action name="deleteAction" label="删除处理" service="delete@database.codelist" />
+    <Action name="sortAction" label="排序处理" service="sort@database.codelist" />
+    <ToolBar name="toolBar" label="工具栏">
+      <ToolButton name="saveButton" label="保存" icon="#tools.save" action="doSave()" />
+      <ToolButton name="deleteButton" label="删除" icon="#tools.delete" action="doDelete()" />
+      <ToolButtonSplit name="split1Button" label="分割" />
+      <ToolButton name="insertCode" label="新建项目" attributes="_type=Code\nsel_type=component\nform_name=database.codelist.CodeForm" icon="#database.codelist.code" />
+      <ToolButtonSplit name="split2Button" label="分割" />
+      <ToolButtonMenu name="sqlButton" label="SQL代码" icon="#tools.build">
+        <MenuButton name="sqlPackageHeadButton" label="PLSQL - 包头" icon="#database.dataset.source" />
+        <MenuButton name="sqlPackageBodyButton" label="PLSQL - 包体" icon="#database.dataset.source" />
+      </ToolButtonMenu>
+      <ToolButton name="commitButton" label="提交" icon="#tools.commit" />
+      <ToolButtonSplit name="split3Button" label="分割" />
+      <ToolButton name="sortButton" label="排序" attributes="sel_type=collection" icon="#tools.sort" />
+    </ToolBar>
+    <Select name="componentType" label="组件类型" />
+    <Check name="isValid" label="有效性" />
+    <Edit name="name" label="名称" />
+    <Check name="cache" label="缓冲" />
+    <Edit name="label" label="标签" />
+    <Edit name="dataName" label="数据名称" />
+    <Memo name="note" label="注释" />
+  </FrameForm>
 </Content>

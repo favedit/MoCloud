@@ -3604,8 +3604,14 @@ function RBoolean_parse(v){
    }
    return false;
 }
-function RBoolean_toString(v){
-   return v ? EBoolean.True : EBoolean.False;
+function RBoolean_toString(value, valueTrue, valueFalse){
+   if(valueTrue == null){
+      valueTrue = EBoolean.True;
+   }
+   if(valueFalse == null){
+      valueFalse = EBoolean.False;
+   }
+   return value ? valueTrue : valueFalse;
 }
 var RByte = new function RByte(){
    var o = this;
@@ -4869,6 +4875,7 @@ var RInteger = new function RInteger(){
    o.MAX_UINT16 = 65535;
    o.MAX_UINT32 = 4294967295;
    o.isInt      = RInteger_isInt;
+   o.isInteger  = RInteger_isInt;
    o.nvl        = RInteger_nvl;
    o.parse      = RInteger_parse;
    o.format     = RInteger_format;
@@ -5453,7 +5460,7 @@ function RString_isPattern(v, p){
       p = p.replace(/\a/g, o.LOWER);
       p = p.replace(/\A/g, o.UPPER);
       p = p.replace(/\f/g, RFloat.NUMBER);
-      p = p.replace(/\n/g, RInt.NUMBER);
+      p = p.replace(/\n/g, RInteger.NUMBER);
       var c = v.length;
       for(var n = 0; n < c; n++){
          if(p.indexOf(v.charAt(n)) == -1){
@@ -29521,8 +29528,8 @@ function MListenerSelected_processSelectedListener(p1, p2, p3, p4, p5){
 }
 function MPropertyCheck(o){
    o = RClass.inherits(this, o);
-   o._valueTrue  = RClass.register(o, new APtyNumber('_valueTrue'));
-   o._valueFalse = RClass.register(o, new APtyNumber('_valueFalse'));
+   o._valueTrue  = RClass.register(o, new APtyString('_valueTrue'), EBoolean.True);
+   o._valueFalse = RClass.register(o, new APtyString('_valueFalse'), EBoolean.False);
    return o;
 }
 function MPropertyEdit(o){
@@ -32343,10 +32350,9 @@ function FKeyConsole(o){
    o.register        = FKeyConsole_register;
    return o;
 }
-function FKeyConsole_onKeyDown(s, e){
-   debugger
+function FKeyConsole_onKeyDown(e){
    var o = this;
-   var k = REnum.tryDecode(EKey, e.keyCode);
+   var k = REnum.tryDecode(EKeyCode, e.keyCode);
    if(k && o._enable){
       var ls = o._listeners[k];
       if(ls){
@@ -32388,6 +32394,7 @@ function FKeyConsole_register(k, w, p){
       if(!s){
          s = ks[k] = new TListeners();
       }
+      s.clear();
       s.register(w, p);
    }
 }
@@ -34082,13 +34089,17 @@ function FUiCheck_oeSaveValue(e){
 function FUiCheck_construct(){
    var o = this;
    o.__base.FUiEditControl.construct.call(o);
-   o._editSize.set(80, 20);
+   o._editSize.set(60, 20);
 }
 function FUiCheck_get(){
-   return this._hInput.checked;
+   var o = this;
+   var v = o._hInput.checked;
+   return RBoolean.toString(v, o._valueTrue, o._valueFalse);
 }
 function FUiCheck_set(p){
-   this._hInput.checked = RBoolean.parse(p);
+   var o = this;
+   var v = (p == o._valueTrue);
+   o._hInput.checked = v;
 }
 function FUiCheck_refreshValue(){
    var o = this;
@@ -35496,6 +35507,8 @@ function FUiEditControl_onBuildLabelIcon(p){
    var o = this;
    if(o._labelIcon){
       o._hIcon = RBuilder.appendIcon(o._hIconPanel, null, o._labelIcon);
+   }else{
+      o._hIcon = RBuilder.appendIcon(o._hIconPanel, null, 'n', 16, 16);
    }
 }
 function FUiEditControl_onBuildLabelText(p){
@@ -35507,6 +35520,7 @@ function FUiEditControl_onBuildLabel(p){
    var h = o._hLabelForm = RBuilder.appendTable(o._hLabelPanel, o.styleName('LabelPanel'));
    var hr = RBuilder.appendTableRow(h);
    var hip = o._hIconPanel = RBuilder.appendTableCell(hr);
+   hip.width = '20px';
    o.onBuildLabelIcon(p);
    var htp = o._hTextPanel = RBuilder.appendTableCell(hr);
    htp.noWrap = true;
@@ -37299,8 +37313,8 @@ function FUiNumber_onInputChanged(p){
 function FUiNumber_construct(){
    var o = this;
    o.__base.FUiEditControl.construct.call(o);
-   o._editSize.set(120, 20);
-   o._inputSize = new SSize2(100, 0);
+   o._editSize.set(100, 20);
+   o._inputSize = new SSize2(80, 0);
 }
 function FUiNumber_formatDisplay(p){
    var o = this;
@@ -37419,7 +37433,7 @@ function FUiNumber_drop(){
    }
 }
 function FUiNumber2(o){
-   o = RClass.inherits(this, o, FEditControl);
+   o = RClass.inherits(this, o, FUiEditControl);
    o._inputSize       = RClass.register(o, new APtySize2('_inputSize'));
    o._styleInputPanel = RClass.register(o, new AStyle('_styleInputPanel'));
    o._styleInput      = RClass.register(o, new AStyle('_styleInput'));
@@ -37454,12 +37468,12 @@ function FUiNumber2_onBuildEditValue(p){
 }
 function FUiNumber2_construct(){
    var o = this;
-   o.__base.FEditControl.construct.call(o);
+   o.__base.FUiEditControl.construct.call(o);
    o._inputSize = new SSize2(120, 0);
 }
 function FUiNumber2_get(p){
    var o = this;
-   var r = o.__base.FEditControl.get.call(o, p);
+   var r = o.__base.FUiEditControl.get.call(o, p);
    var h = o._hInput;
    if(h){
       r = h.value;
@@ -37468,7 +37482,7 @@ function FUiNumber2_get(p){
 }
 function FUiNumber2_set(p){
    var o = this;
-   o.__base.FEditControl.set.call(o, p);
+   o.__base.FUiEditControl.set.call(o, p);
    var h = o._hInput;
    if(h){
       h.value = RString.nvl(p);
@@ -37476,7 +37490,7 @@ function FUiNumber2_set(p){
 }
 function FUiNumber2_onDataKeyDown(s, e){
    var o = this;
-   o.__base.FEditControl.onDataKeyDown.call(o, s, e);
+   o.__base.FUiEditControl.onDataKeyDown.call(o, s, e);
    if(o.editCase){
       RKey.fixCase(e, o.editCase);
    }
@@ -37524,7 +37538,7 @@ function FUiNumber2_setText(t){
 }
 function FUiNumber2_validText(t){
    var o = this;
-   var r = o.__base.FEditControl.validText.call(o, t);
+   var r = o.__base.FUiEditControl.validText.call(o, t);
    if(!r){
       if(o.validLenmin){
          if(o.validLenmin > t.length){
@@ -37801,7 +37815,7 @@ function FUiNumber3_link(){
    var o = this;
 }
 function FUiNumber4(o){
-   o = RClass.inherits(this, o, FEditControl);
+   o = RClass.inherits(this, o, FUiEditControl);
    o._inputSize       = RClass.register(o, new APtySize2('_inputSize'));
    o._styleInputPanel = RClass.register(o, new AStyle('_styleInputPanel'));
    o._styleInput      = RClass.register(o, new AStyle('_styleInput'));
@@ -37844,12 +37858,12 @@ function FUiNumber4_onBuildEditValue(p){
 }
 function FUiNumber4_construct(){
    var o = this;
-   o.__base.FEditControl.construct.call(o);
+   o.__base.FUiEditControl.construct.call(o);
    o._inputSize = new SSize2(120, 0);
 }
 function FUiNumber4_get(p){
    var o = this;
-   var r = o.__base.FEditControl.get.call(o, p);
+   var r = o.__base.FUiEditControl.get.call(o, p);
    var h = o._hInput;
    if(h){
       r = h.value;
@@ -37858,7 +37872,7 @@ function FUiNumber4_get(p){
 }
 function FUiNumber4_set(p){
    var o = this;
-   o.__base.FEditControl.set.call(o, p);
+   o.__base.FUiEditControl.set.call(o, p);
    var h = o._hInput;
    if(h){
       h.value = RString.nvl(p);
@@ -37866,7 +37880,7 @@ function FUiNumber4_set(p){
 }
 function FUiNumber4_onDataKeyDown(s, e){
    var o = this;
-   o.__base.FEditControl.onDataKeyDown.call(o, s, e);
+   o.__base.FUiEditControl.onDataKeyDown.call(o, s, e);
    if(o.editCase){
       RKey.fixCase(e, o.editCase);
    }
@@ -37914,7 +37928,7 @@ function FUiNumber4_setText(t){
 }
 function FUiNumber4_validText(t){
    var o = this;
-   var r = o.__base.FEditControl.validText.call(o, t);
+   var r = o.__base.FUiEditControl.validText.call(o, t);
    if(!r){
       if(o.validLenmin){
          if(o.validLenmin > t.length){
@@ -47261,6 +47275,672 @@ function FUiDataNumber_dispose(){
    o.hDownIcon = null;
    o.hChgIic = null;
 }
+function FUiDataNumber2(o){
+   o = RClass.inherits(this, o, FUiNumber2);
+   return o;
+}
+function FUiDataNumber2_onEditFocus(e){
+   var o = this;
+   o.setText(o.formatValue(o.text()));
+}
+function FUiDataNumber2_onEditBlur(e){
+   var o = this;
+   o.setText(o.formatText(o.text()));
+}
+function FUiDataNumber2_onBuildEdit(b){
+   var o = this;
+   var htb = RBuilder.appendTable(b.hPanel);
+   htb.style.tableLayout = 'fixed';
+   var hr = o.hEdit = htb.insertRow();
+   o.onBuildChange(hr.insertCell());
+   if(o.canZoom()){
+      var hc = hr.insertCell();
+      o.hZoom = RBuilder.appendIcon(hc, 'ctl.zooms');
+      hc.width = 16;
+   }
+   var hc = hr.insertCell();
+   hc.style.width = '100%';
+   var he = o.hEdit = RBuilder.appendEdit(hc, o.style('Edit'));
+   o.attachEvent('onEditFocus', he, o.onEditFocus);
+   o.attachEvent('onEditKeyPress', he, o.onEditKeyPress);
+   o.attachEvent('onEditBlur', he, o.onEditBlur);
+   o.attachEvent('onDataKeyUp', he, o.ohEditKeyUp);
+   if(o.editLength){
+      he.maxLength = o.editLength;
+   }
+   o.buildAdjustForm(b.hDrop);
+}
+function FUiDataNumber2_setUnitIcon(i){
+   var o = this;
+   var hui = o.hUnit;
+   hui.innerHTML = '<IMG src='+i+'>';
+}
+function FUiDataNumber2_onDataKeyDown(s, e){
+   var o = this;
+   if(o.canEdit){
+      if(EKey.Up == e.keyCode){
+         o.adjustValue(true);
+      }else if(EKey.Down == e.keyCode){
+         o.adjustValue(false);
+      }
+   }
+   o.base.FUiNumber2.onDataKeyDown.call(o, s, e);
+}
+function FUiDataNumber2_ohEditKeyUp(s, e){
+   var o = this;
+   if(EKey.Up == e.keyCode && o.canEdit){
+      o.hUpIcon.src = o.styleIconPath('UpSelect');
+   }else if(EKey.Down == e.keyCode && o.canEdit){
+      o.hDownIcon.src = o.styleIconPath('DownSelect');
+   }
+}
+function FUiDataNumber2_onEditKeyDown(e) {
+   var o = this;
+   if(o.canEdit){
+      if (EKey.Up == e.keyCode) {
+         e.source.hUpIcon.src = o.styleIconPath('up');
+         o.changeValue(e, 'Y');
+      }else if (EKey.Down == e.keyCode){
+         e.source.hDownIcon.src = o.styleIconPath('down');
+         o.changeValue(e, 'N');
+      }
+   }
+}
+function FUiDataNumber2_onEditKeyUp(e) {
+   var o = this;
+   if(o.canEdit){
+      if (EKey.Up == e.keyCode){
+         e.source.hUpIcon.src = o.styleIconPath('upSelect');
+      }else if (EKey.Down == e.keyCode){
+         e.source.hDownIcon.src = o.styleIconPath('downSelect');
+      }
+   }
+}
+function FUiDataNumber2_onEditDoubleClick(){
+   var o = this;
+   this.onListClick();
+}
+function FUiDataNumber2_validPattern(s) {
+   var o = this;
+   var flag = true;
+   var s = RString.nvl(s);
+   if(!RRegExp.test(ERegExp.NUMBER,s)){
+      return false;
+   }
+   var r = null;
+   if (o.dataType) {
+      for (n in ERegExp) {
+         if (RString.equals(n, o.dataType)) {
+            r = ERegExp[n];
+            break;
+         }
+      }
+      if (RString.equals(RClass.name(r), "RegExp")) {
+         flag = RRegExp.test(r, s) ? flag & true : flag & false;
+      }
+   }
+   if (o.editMaxvalue) {
+      flag = parseFloat(s) <= parseFloat(o.editMaxvalue) ? flag & true : flag & false;
+   }
+   if (o.editMinvalue) {
+      flag = parseFloat(s) >= parseFloat(o.editMinvalue) ? flag & true : flag & false;
+   }
+   return flag;
+}
+function FUiDataNumber2_refreshStyle(){
+   var o = this;
+   o.base.FUiNumber2.refreshStyle.call(o);
+   o.hUpIcon.src = o.styleIconPath(o._hover ? 'UpSelect' : 'Up');
+   o.hDownIcon.src = o.styleIconPath(o._hover ? 'DownSelect' : 'Down');
+}
+function FUiDataNumber2_splitValue(v){
+   var o = this;
+   var s = RString.nvl(v.toString());
+   var j = RString.findChars(s,"-");
+   var b = RString.findChars(s,"%");
+   s = RString.removeChars(s, "'");
+   s = RString.removeChars(s, " ");
+   s = RString.removeChars(s, "%");
+   s = RString.removeChars(s, "-");
+   if (!RString.isEmpty(s)) {
+      var sc = '';
+      var c = '';
+      var n = 0;
+      for(var i = s.length; i > -1; i--){
+         if(i != 0 && n != 0 && n % 3 == 0){
+            sc = "'" + s.charAt(i) + sc;
+         }else{
+            sc = s.charAt(i) + sc;
+         }
+         n++;
+      }
+      if(-1 != j){
+          sc = "-" + sc ;
+       }
+      if(-1 != b){
+         sc = sc +"%";
+      }
+      return sc;
+   }
+   return s;
+}
+function FUiDataNumber2_removeSplit(s){
+   var o = this;
+   var s = RString.nvl(s);
+   s = RString.removeChars(s,"'");
+   s = RString.removeChars(s,"%");
+   return s;
+}
+function FUiDataNumber2_precisionValue(v){
+   var o = this;
+   if(RString.isEmpty(v)){
+      return v;
+   }
+   var l1,l2;
+   var p = RString.nvl(o.editPrecision);
+   v = RString.nvl(v);
+   if(RString.contains(p,'.')){
+      var sp = p.split('.')
+      l2 = sp[1].length;
+   }else{
+     l1 = p.length;
+   }
+   if(RString.contains(v, '.')){
+      var vs = v.split('.');
+      if(l2){
+         if(l2 > vs[1].length){
+            vs[1] = RString.rpad(vs[1],l2 - vs[1].length,'0');
+         }else if(l2 <= vs[1].length){
+            vs[1] = vs[1].substring(0, l2);
+         }
+      }
+      if(l1){
+         if(l1 > vs[0].length){
+            alert(l1);
+         }else if(l1 < vs[0].length){
+            vs[0] = vs[0].substring(0, vs[0].length - l1);
+            vs[0] = RString.rpad(vs[0],l1,'0');
+         }
+         vs[1] = null;
+      }
+      if(vs[1]){
+         v = vs[0] + '.' + RString.nvl(vs[1]);
+      }else{
+         v = vs[0];
+      }
+   }else{
+      if(l1){
+         if(l1 <= v.length){
+            v = v.substring(0, v.length - l1 + 1);
+            for(var n = 0; n < l1 - 1;n++){
+               v = v.concat('0');
+            }
+         }
+         else if(l1 > v.length){
+            v = 0;
+         }
+      }
+      if(l2){
+         v = v + '.';
+         for(var n = 0; n < l2;n++){
+            v = v.concat('0');
+         }
+      }
+   }
+   return v;
+}
+function FUiDataNumber2_dispose(){
+   var o = this;
+   o.base.FUiNumber2.dispose.call(o);
+   o.hLabel = null;
+   o.hUpIcon = null;
+   o.hDownIcon = null;
+   o.hChgIic = null;
+}
+function FUiDataNumber3(o){
+   o = RClass.inherits(this, o, FUiNumber3);
+   return o;
+}
+function FUiDataNumber3_onEditFocus(e){
+   var o = this;
+   o.setText(o.formatValue(o.text()));
+}
+function FUiDataNumber3_onEditBlur(e){
+   var o = this;
+   o.setText(o.formatText(o.text()));
+}
+function FUiDataNumber3_onBuildEdit(b){
+   var o = this;
+   var htb = RBuilder.appendTable(b.hPanel);
+   htb.style.tableLayout = 'fixed';
+   var hr = o.hEdit = htb.insertRow();
+   o.onBuildChange(hr.insertCell());
+   if(o.canZoom()){
+      var hc = hr.insertCell();
+      o.hZoom = RBuilder.appendIcon(hc, 'ctl.zooms');
+      hc.width = 16;
+   }
+   var hc = hr.insertCell();
+   hc.style.width = '100%';
+   var he = o.hEdit = RBuilder.appendEdit(hc, o.style('Edit'));
+   o.attachEvent('onEditFocus', he, o.onEditFocus);
+   o.attachEvent('onEditKeyPress', he, o.onEditKeyPress);
+   o.attachEvent('onEditBlur', he, o.onEditBlur);
+   o.attachEvent('onDataKeyUp', he, o.ohEditKeyUp);
+   if(o.editLength){
+      he.maxLength = o.editLength;
+   }
+   o.buildAdjustForm(b.hDrop);
+}
+function FUiDataNumber3_setUnitIcon(i){
+   var o = this;
+   var hui = o.hUnit;
+   hui.innerHTML = '<IMG src='+i+'>';
+}
+function FUiDataNumber3_onDataKeyDown(s, e){
+   var o = this;
+   if(o.canEdit){
+      if(EKey.Up == e.keyCode){
+         o.adjustValue(true);
+      }else if(EKey.Down == e.keyCode){
+         o.adjustValue(false);
+      }
+   }
+   o.base.FUiNumber3.onDataKeyDown.call(o, s, e);
+}
+function FUiDataNumber3_ohEditKeyUp(s, e){
+   var o = this;
+   if(EKey.Up == e.keyCode && o.canEdit){
+      o.hUpIcon.src = o.styleIconPath('UpSelect');
+   }else if(EKey.Down == e.keyCode && o.canEdit){
+      o.hDownIcon.src = o.styleIconPath('DownSelect');
+   }
+}
+function FUiDataNumber3_onEditKeyDown(e) {
+   var o = this;
+   if(o.canEdit){
+      if (EKey.Up == e.keyCode) {
+         e.source.hUpIcon.src = o.styleIconPath('up');
+         o.changeValue(e, 'Y');
+      }else if (EKey.Down == e.keyCode){
+         e.source.hDownIcon.src = o.styleIconPath('down');
+         o.changeValue(e, 'N');
+      }
+   }
+}
+function FUiDataNumber3_onEditKeyUp(e) {
+   var o = this;
+   if(o.canEdit){
+      if (EKey.Up == e.keyCode){
+         e.source.hUpIcon.src = o.styleIconPath('upSelect');
+      }else if (EKey.Down == e.keyCode){
+         e.source.hDownIcon.src = o.styleIconPath('downSelect');
+      }
+   }
+}
+function FUiDataNumber3_onEditDoubleClick(){
+   var o = this;
+   this.onListClick();
+}
+function FUiDataNumber3_validPattern(s) {
+   var o = this;
+   var flag = true;
+   var s = RString.nvl(s);
+   if(!RRegExp.test(ERegExp.NUMBER,s)){
+      return false;
+   }
+   var r = null;
+   if (o.dataType) {
+      for (n in ERegExp) {
+         if (RString.equals(n, o.dataType)) {
+            r = ERegExp[n];
+            break;
+         }
+      }
+      if (RString.equals(RClass.name(r), "RegExp")) {
+         flag = RRegExp.test(r, s) ? flag & true : flag & false;
+      }
+   }
+   if (o.editMaxvalue) {
+      flag = parseFloat(s) <= parseFloat(o.editMaxvalue) ? flag & true : flag & false;
+   }
+   if (o.editMinvalue) {
+      flag = parseFloat(s) >= parseFloat(o.editMinvalue) ? flag & true : flag & false;
+   }
+   return flag;
+}
+function FUiDataNumber3_refreshStyle(){
+   var o = this;
+   o.base.FUiNumber3.refreshStyle.call(o);
+   o.hUpIcon.src = o.styleIconPath(o._hover ? 'UpSelect' : 'Up');
+   o.hDownIcon.src = o.styleIconPath(o._hover ? 'DownSelect' : 'Down');
+}
+function FUiDataNumber3_splitValue(v){
+   var o = this;
+   var s = RString.nvl(v.toString());
+   var j = RString.findChars(s,"-");
+   var b = RString.findChars(s,"%");
+   s = RString.removeChars(s, "'");
+   s = RString.removeChars(s, " ");
+   s = RString.removeChars(s, "%");
+   s = RString.removeChars(s, "-");
+   if (!RString.isEmpty(s)) {
+      var sc = '';
+      var c = '';
+      var n = 0;
+      for(var i = s.length; i > -1; i--){
+         if(i != 0 && n != 0 && n % 3 == 0){
+            sc = "'" + s.charAt(i) + sc;
+         }else{
+            sc = s.charAt(i) + sc;
+         }
+         n++;
+      }
+      if(-1 != j){
+          sc = "-" + sc ;
+       }
+      if(-1 != b){
+         sc = sc +"%";
+      }
+      return sc;
+   }
+   return s;
+}
+function FUiDataNumber3_removeSplit(s){
+   var o = this;
+   var s = RString.nvl(s);
+   s = RString.removeChars(s,"'");
+   s = RString.removeChars(s,"%");
+   return s;
+}
+function FUiDataNumber3_precisionValue(v){
+   var o = this;
+   if(RString.isEmpty(v)){
+      return v;
+   }
+   var l1,l2;
+   var p = RString.nvl(o.editPrecision);
+   v = RString.nvl(v);
+   if(RString.contains(p,'.')){
+      var sp = p.split('.')
+      l2 = sp[1].length;
+   }else{
+     l1 = p.length;
+   }
+   if(RString.contains(v, '.')){
+      var vs = v.split('.');
+      if(l2){
+         if(l2 > vs[1].length){
+            vs[1] = RString.rpad(vs[1],l2 - vs[1].length,'0');
+         }else if(l2 <= vs[1].length){
+            vs[1] = vs[1].substring(0, l2);
+         }
+      }
+      if(l1){
+         if(l1 > vs[0].length){
+            alert(l1);
+         }else if(l1 < vs[0].length){
+            vs[0] = vs[0].substring(0, vs[0].length - l1);
+            vs[0] = RString.rpad(vs[0],l1,'0');
+         }
+         vs[1] = null;
+      }
+      if(vs[1]){
+         v = vs[0] + '.' + RString.nvl(vs[1]);
+      }else{
+         v = vs[0];
+      }
+   }else{
+      if(l1){
+         if(l1 <= v.length){
+            v = v.substring(0, v.length - l1 + 1);
+            for(var n = 0; n < l1 - 1;n++){
+               v = v.concat('0');
+            }
+         }
+         else if(l1 > v.length){
+            v = 0;
+         }
+      }
+      if(l2){
+         v = v + '.';
+         for(var n = 0; n < l2;n++){
+            v = v.concat('0');
+         }
+      }
+   }
+   return v;
+}
+function FUiDataNumber3_dispose(){
+   var o = this;
+   o.base.FUiNumber3.dispose.call(o);
+   o.hLabel = null;
+   o.hUpIcon = null;
+   o.hDownIcon = null;
+   o.hChgIic = null;
+}
+function FUiDataNumber4(o){
+   o = RClass.inherits(this, o, FUiNumber4);
+   return o;
+}
+function FUiDataNumber4_onEditFocus(e){
+   var o = this;
+   o.setText(o.formatValue(o.text()));
+}
+function FUiDataNumber4_onEditBlur(e){
+   var o = this;
+   o.setText(o.formatText(o.text()));
+}
+function FUiDataNumber4_onBuildEdit(b){
+   var o = this;
+   var htb = RBuilder.appendTable(b.hPanel);
+   htb.style.tableLayout = 'fixed';
+   var hr = o.hEdit = htb.insertRow();
+   o.onBuildChange(hr.insertCell());
+   if(o.canZoom()){
+      var hc = hr.insertCell();
+      o.hZoom = RBuilder.appendIcon(hc, 'ctl.zooms');
+      hc.width = 16;
+   }
+   var hc = hr.insertCell();
+   hc.style.width = '100%';
+   var he = o.hEdit = RBuilder.appendEdit(hc, o.style('Edit'));
+   o.attachEvent('onEditFocus', he, o.onEditFocus);
+   o.attachEvent('onEditKeyPress', he, o.onEditKeyPress);
+   o.attachEvent('onEditBlur', he, o.onEditBlur);
+   o.attachEvent('onDataKeyUp', he, o.ohEditKeyUp);
+   if(o.editLength){
+      he.maxLength = o.editLength;
+   }
+   o.buildAdjustForm(b.hDrop);
+}
+function FUiDataNumber4_setUnitIcon(i){
+   var o = this;
+   var hui = o.hUnit;
+   hui.innerHTML = '<IMG src='+i+'>';
+}
+function FUiDataNumber4_onDataKeyDown(s, e){
+   var o = this;
+   if(o.canEdit){
+      if(EKey.Up == e.keyCode){
+         o.adjustValue(true);
+      }else if(EKey.Down == e.keyCode){
+         o.adjustValue(false);
+      }
+   }
+   o.base.FUiNumber4.onDataKeyDown.call(o, s, e);
+}
+function FUiDataNumber4_ohEditKeyUp(s, e){
+   var o = this;
+   if(EKey.Up == e.keyCode && o.canEdit){
+      o.hUpIcon.src = o.styleIconPath('UpSelect');
+   }else if(EKey.Down == e.keyCode && o.canEdit){
+      o.hDownIcon.src = o.styleIconPath('DownSelect');
+   }
+}
+function FUiDataNumber4_onEditKeyDown(e) {
+   var o = this;
+   if(o.canEdit){
+      if (EKey.Up == e.keyCode) {
+         e.source.hUpIcon.src = o.styleIconPath('up');
+         o.changeValue(e, 'Y');
+      }else if (EKey.Down == e.keyCode){
+         e.source.hDownIcon.src = o.styleIconPath('down');
+         o.changeValue(e, 'N');
+      }
+   }
+}
+function FUiDataNumber4_onEditKeyUp(e) {
+   var o = this;
+   if(o.canEdit){
+      if (EKey.Up == e.keyCode){
+         e.source.hUpIcon.src = o.styleIconPath('upSelect');
+      }else if (EKey.Down == e.keyCode){
+         e.source.hDownIcon.src = o.styleIconPath('downSelect');
+      }
+   }
+}
+function FUiDataNumber4_onEditDoubleClick(){
+   var o = this;
+   this.onListClick();
+}
+function FUiDataNumber4_validPattern(s) {
+   var o = this;
+   var flag = true;
+   var s = RString.nvl(s);
+   if(!RRegExp.test(ERegExp.NUMBER,s)){
+      return false;
+   }
+   var r = null;
+   if (o.dataType) {
+      for (n in ERegExp) {
+         if (RString.equals(n, o.dataType)) {
+            r = ERegExp[n];
+            break;
+         }
+      }
+      if (RString.equals(RClass.name(r), "RegExp")) {
+         flag = RRegExp.test(r, s) ? flag & true : flag & false;
+      }
+   }
+   if (o.editMaxvalue) {
+      flag = parseFloat(s) <= parseFloat(o.editMaxvalue) ? flag & true : flag & false;
+   }
+   if (o.editMinvalue) {
+      flag = parseFloat(s) >= parseFloat(o.editMinvalue) ? flag & true : flag & false;
+   }
+   return flag;
+}
+function FUiDataNumber4_refreshStyle(){
+   var o = this;
+   o.base.FUiNumber4.refreshStyle.call(o);
+   o.hUpIcon.src = o.styleIconPath(o._hover ? 'UpSelect' : 'Up');
+   o.hDownIcon.src = o.styleIconPath(o._hover ? 'DownSelect' : 'Down');
+}
+function FUiDataNumber4_splitValue(v){
+   var o = this;
+   var s = RString.nvl(v.toString());
+   var j = RString.findChars(s,"-");
+   var b = RString.findChars(s,"%");
+   s = RString.removeChars(s, "'");
+   s = RString.removeChars(s, " ");
+   s = RString.removeChars(s, "%");
+   s = RString.removeChars(s, "-");
+   if (!RString.isEmpty(s)) {
+      var sc = '';
+      var c = '';
+      var n = 0;
+      for(var i = s.length; i > -1; i--){
+         if(i != 0 && n != 0 && n % 3 == 0){
+            sc = "'" + s.charAt(i) + sc;
+         }else{
+            sc = s.charAt(i) + sc;
+         }
+         n++;
+      }
+      if(-1 != j){
+          sc = "-" + sc ;
+       }
+      if(-1 != b){
+         sc = sc +"%";
+      }
+      return sc;
+   }
+   return s;
+}
+function FUiDataNumber4_removeSplit(s){
+   var o = this;
+   var s = RString.nvl(s);
+   s = RString.removeChars(s,"'");
+   s = RString.removeChars(s,"%");
+   return s;
+}
+function FUiDataNumber4_precisionValue(v){
+   var o = this;
+   if(RString.isEmpty(v)){
+      return v;
+   }
+   var l1,l2;
+   var p = RString.nvl(o.editPrecision);
+   v = RString.nvl(v);
+   if(RString.contains(p,'.')){
+      var sp = p.split('.')
+      l2 = sp[1].length;
+   }else{
+     l1 = p.length;
+   }
+   if(RString.contains(v, '.')){
+      var vs = v.split('.');
+      if(l2){
+         if(l2 > vs[1].length){
+            vs[1] = RString.rpad(vs[1],l2 - vs[1].length,'0');
+         }else if(l2 <= vs[1].length){
+            vs[1] = vs[1].substring(0, l2);
+         }
+      }
+      if(l1){
+         if(l1 > vs[0].length){
+            alert(l1);
+         }else if(l1 < vs[0].length){
+            vs[0] = vs[0].substring(0, vs[0].length - l1);
+            vs[0] = RString.rpad(vs[0],l1,'0');
+         }
+         vs[1] = null;
+      }
+      if(vs[1]){
+         v = vs[0] + '.' + RString.nvl(vs[1]);
+      }else{
+         v = vs[0];
+      }
+   }else{
+      if(l1){
+         if(l1 <= v.length){
+            v = v.substring(0, v.length - l1 + 1);
+            for(var n = 0; n < l1 - 1;n++){
+               v = v.concat('0');
+            }
+         }
+         else if(l1 > v.length){
+            v = 0;
+         }
+      }
+      if(l2){
+         v = v + '.';
+         for(var n = 0; n < l2;n++){
+            v = v.concat('0');
+         }
+      }
+   }
+   return v;
+}
+function FUiDataNumber4_dispose(){
+   var o = this;
+   o.base.FUiNumber4.dispose.call(o);
+   o.hLabel = null;
+   o.hUpIcon = null;
+   o.hDownIcon = null;
+   o.hChgIic = null;
+}
 function FUiDataSelect(o){
    o = RClass.inherits(this, o, FUiSelect, MUiDataField);
    return o;
@@ -47864,8 +48544,8 @@ function FUiDataTreeView_loadNode(pn, pf){
    x.create('Attributes', o._attributes);
    var fn = pn;
    while(RClass.isClass(fn, FUiTreeNode)){
-      var xc = x.create('TreeNode');
-      fn.propertySave(xc);
+      x = x.create('TreeNode');
+      fn.propertySave(x);
       fn = fn._parent;
    }
    pn._extended = true;

@@ -349,7 +349,7 @@ public abstract class MInts
                       int index){
       if((index >= 0) && (index < _length)){
          innerResize(_length + 1, true, true);
-         System.arraycopy(_memory, index, _memory, index + 1, _length - index - 1);
+         System.arraycopy(_memory, index, _memory, index + 1, _length - index);
          _length++;
          _memory[index] = value;
       }

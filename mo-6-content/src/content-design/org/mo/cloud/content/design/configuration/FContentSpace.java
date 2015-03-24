@@ -127,7 +127,10 @@ public class FContentSpace
    public FContentNode find(String name){
       FContentNode node = _nodes.find(name);
       if(node != null){
-         node.open();
+         if(!node.statusOpen()){
+            node.open();
+         }
+         node.check();
       }
       return node;
    }

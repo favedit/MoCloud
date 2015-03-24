@@ -24,7 +24,7 @@ public class RRs3MeshImport
          String name = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
          if(name.endsWith(".ply")){
             name = name.substring(0, name.length() - 4);
-            if(name.equals("person")){
+            if(name.equals("person2")){
                filePaths.push(name);
             }
          }

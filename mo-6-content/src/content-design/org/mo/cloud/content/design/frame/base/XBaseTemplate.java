@@ -37,6 +37,10 @@ public abstract class XBaseTemplate
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
+   // 页面来源的定义
+   @AContentField
+   public final static FContentField FRAME_SOURCE = new FContentField("frameSource", "frame_source", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -74,6 +78,10 @@ public abstract class XBaseTemplate
    // 属性集合
    @AName("attributes")
    protected String _attributes;
+
+   // 页面来源
+   @AName("frame_source")
+   protected String _frameSource;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -163,6 +171,24 @@ public abstract class XBaseTemplate
    //============================================================
    public void setAttributes(String value){
       _attributes = value;
+   }
+
+   //============================================================
+   // <T>获得页面来源的内容。</T>
+   //
+   // @return 页面来源
+   //============================================================
+   public String getFrameSource(){
+      return _frameSource;
+   }
+
+   //============================================================
+   // <T>设置页面来源的内容。</T>
+   //
+   // @param value 页面来源
+   //============================================================
+   public void setFrameSource(String value){
+      _frameSource = value;
    }
 
 }

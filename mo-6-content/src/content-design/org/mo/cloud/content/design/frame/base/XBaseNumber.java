@@ -37,6 +37,10 @@ public abstract class XBaseNumber
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
+   // 回行类型的定义
+   @AContentField
+   public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
+
    // 位置的定义
    @AContentField
    public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
@@ -63,11 +67,19 @@ public abstract class XBaseNumber
 
    // 显示模式的定义
    @AContentField
-   public final static FContentField DISPLAY_MODE = new FContentField("displayMode", "display_mode", EContentData.String, "", "", "", "NYNN");
+   public final static FContentField DISPLAY_MODE = new FContentField("displayMode", "display_mode", EContentData.String, "", "", "", "YYNN");
 
    // 查看显示的定义
    @AContentField
    public final static FContentField DISPLAY_VIEW = new FContentField("displayView", "display_view", EContentData.Boolean, "display_mode", "V", "Y", "YNNY");
+
+   // 设计显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_DESIGN = new FContentField("displayDesign", "display_design", EContentData.String, "display_mode", "G", "Y", "YNNY");
+
+   // 搜索显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_SEARCH = new FContentField("displaySearch", "display_search", EContentData.String, "display_mode", "S", "Y", "YNNY");
 
    // 新建显示的定义
    @AContentField
@@ -80,6 +92,14 @@ public abstract class XBaseNumber
    // 删除显示的定义
    @AContentField
    public final static FContentField DISPLAY_DELETE = new FContentField("displayDelete", "display_delete", EContentData.Boolean, "display_mode", "D", "Y", "YNNY");
+
+   // 缩放显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_ZOOM = new FContentField("displayZoom", "display_zoom", EContentData.Boolean, "display_mode", "Z", "Y", "YNNY");
+
+   // 打印显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_PRINT = new FContentField("displayPrint", "display_print", EContentData.Boolean, "display_mode", "project_id", "Y", "YNNY");
 
    // 编辑模式的定义
    @AContentField
@@ -129,13 +149,33 @@ public abstract class XBaseNumber
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
-   // 数据名称的定义
+   // 放大引用的定义
    @AContentField
-   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
 
-   // 数据类型的定义
+   // 放大字段的定义
    @AContentField
-   public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
+
+   // 引用服务的定义
+   @AContentField
+   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
+
+   // 引用地址的定义
+   @AContentField
+   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
+
+   // 引用字段的定义
+   @AContentField
+   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
+
+   // 应用条件的定义
+   @AContentField
+   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
+
+   // 引用排序的定义
+   @AContentField
+   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
 
    // 最小值的定义
    @AContentField
@@ -191,6 +231,10 @@ public abstract class XBaseNumber
    @AName("attributes")
    protected String _attributes;
 
+   // 回行类型
+   @AName("wrap_cd")
+   protected String _wrapCd;
+
    // 位置
    @AName("location")
    protected String _location;
@@ -223,6 +267,14 @@ public abstract class XBaseNumber
    @AName("display_view")
    protected boolean _displayView;
 
+   // 设计显示
+   @AName("display_design")
+   protected String _displayDesign;
+
+   // 搜索显示
+   @AName("display_search")
+   protected String _displaySearch;
+
    // 新建显示
    @AName("display_insert")
    protected boolean _displayInsert;
@@ -234,6 +286,14 @@ public abstract class XBaseNumber
    // 删除显示
    @AName("display_delete")
    protected boolean _displayDelete;
+
+   // 缩放显示
+   @AName("display_zoom")
+   protected boolean _displayZoom;
+
+   // 打印显示
+   @AName("display_print")
+   protected boolean _displayPrint;
 
    // 编辑模式
    @AName("edit_mode")
@@ -283,13 +343,33 @@ public abstract class XBaseNumber
    @AName("edit_size")
    protected String _editSize;
 
-   // 数据名称
-   @AName("data_name")
-   protected String _dataName;
+   // 放大引用
+   @AName("zoom_reference")
+   protected String _zoomReference;
 
-   // 数据类型
-   @AName("data_type_cd")
-   protected String _dataTypeCd;
+   // 放大字段
+   @AName("zoom_field")
+   protected String _zoomField;
+
+   // 引用服务
+   @AName("lov_service")
+   protected String _lovService;
+
+   // 引用地址
+   @AName("lov_reference")
+   protected String _lovReference;
+
+   // 引用字段
+   @AName("lov_fields")
+   protected String _lovFields;
+
+   // 应用条件
+   @AName("lov_where")
+   protected String _lovWhere;
+
+   // 引用排序
+   @AName("lov_order")
+   protected String _lovOrder;
 
    // 最小值
    @AName("value_min")
@@ -395,6 +475,24 @@ public abstract class XBaseNumber
    //============================================================
    public void setAttributes(String value){
       _attributes = value;
+   }
+
+   //============================================================
+   // <T>获得回行类型的内容。</T>
+   //
+   // @return 回行类型
+   //============================================================
+   public String getWrapCd(){
+      return _wrapCd;
+   }
+
+   //============================================================
+   // <T>设置回行类型的内容。</T>
+   //
+   // @param value 回行类型
+   //============================================================
+   public void setWrapCd(String value){
+      _wrapCd = value;
    }
 
    //============================================================
@@ -542,6 +640,42 @@ public abstract class XBaseNumber
    }
 
    //============================================================
+   // <T>获得设计显示的内容。</T>
+   //
+   // @return 设计显示
+   //============================================================
+   public String getDisplayDesign(){
+      return _displayDesign;
+   }
+
+   //============================================================
+   // <T>设置设计显示的内容。</T>
+   //
+   // @param value 设计显示
+   //============================================================
+   public void setDisplayDesign(String value){
+      _displayDesign = value;
+   }
+
+   //============================================================
+   // <T>获得搜索显示的内容。</T>
+   //
+   // @return 搜索显示
+   //============================================================
+   public String getDisplaySearch(){
+      return _displaySearch;
+   }
+
+   //============================================================
+   // <T>设置搜索显示的内容。</T>
+   //
+   // @param value 搜索显示
+   //============================================================
+   public void setDisplaySearch(String value){
+      _displaySearch = value;
+   }
+
+   //============================================================
    // <T>获得新建显示的内容。</T>
    //
    // @return 新建显示
@@ -593,6 +727,42 @@ public abstract class XBaseNumber
    //============================================================
    public void setDisplayDelete(Boolean value){
       _displayDelete = value;
+   }
+
+   //============================================================
+   // <T>获得缩放显示的内容。</T>
+   //
+   // @return 缩放显示
+   //============================================================
+   public Boolean getDisplayZoom(){
+      return _displayZoom;
+   }
+
+   //============================================================
+   // <T>设置缩放显示的内容。</T>
+   //
+   // @param value 缩放显示
+   //============================================================
+   public void setDisplayZoom(Boolean value){
+      _displayZoom = value;
+   }
+
+   //============================================================
+   // <T>获得打印显示的内容。</T>
+   //
+   // @return 打印显示
+   //============================================================
+   public Boolean getDisplayPrint(){
+      return _displayPrint;
+   }
+
+   //============================================================
+   // <T>设置打印显示的内容。</T>
+   //
+   // @param value 打印显示
+   //============================================================
+   public void setDisplayPrint(Boolean value){
+      _displayPrint = value;
    }
 
    //============================================================
@@ -812,39 +982,129 @@ public abstract class XBaseNumber
    }
 
    //============================================================
-   // <T>获得数据名称的内容。</T>
+   // <T>获得放大引用的内容。</T>
    //
-   // @return 数据名称
+   // @return 放大引用
    //============================================================
-   public String getDataName(){
-      return _dataName;
+   public String getZoomReference(){
+      return _zoomReference;
    }
 
    //============================================================
-   // <T>设置数据名称的内容。</T>
+   // <T>设置放大引用的内容。</T>
    //
-   // @param value 数据名称
+   // @param value 放大引用
    //============================================================
-   public void setDataName(String value){
-      _dataName = value;
+   public void setZoomReference(String value){
+      _zoomReference = value;
    }
 
    //============================================================
-   // <T>获得数据类型的内容。</T>
+   // <T>获得放大字段的内容。</T>
    //
-   // @return 数据类型
+   // @return 放大字段
    //============================================================
-   public String getDataTypeCd(){
-      return _dataTypeCd;
+   public String getZoomField(){
+      return _zoomField;
    }
 
    //============================================================
-   // <T>设置数据类型的内容。</T>
+   // <T>设置放大字段的内容。</T>
    //
-   // @param value 数据类型
+   // @param value 放大字段
    //============================================================
-   public void setDataTypeCd(String value){
-      _dataTypeCd = value;
+   public void setZoomField(String value){
+      _zoomField = value;
+   }
+
+   //============================================================
+   // <T>获得引用服务的内容。</T>
+   //
+   // @return 引用服务
+   //============================================================
+   public String getLovService(){
+      return _lovService;
+   }
+
+   //============================================================
+   // <T>设置引用服务的内容。</T>
+   //
+   // @param value 引用服务
+   //============================================================
+   public void setLovService(String value){
+      _lovService = value;
+   }
+
+   //============================================================
+   // <T>获得引用地址的内容。</T>
+   //
+   // @return 引用地址
+   //============================================================
+   public String getLovReference(){
+      return _lovReference;
+   }
+
+   //============================================================
+   // <T>设置引用地址的内容。</T>
+   //
+   // @param value 引用地址
+   //============================================================
+   public void setLovReference(String value){
+      _lovReference = value;
+   }
+
+   //============================================================
+   // <T>获得引用字段的内容。</T>
+   //
+   // @return 引用字段
+   //============================================================
+   public String getLovFields(){
+      return _lovFields;
+   }
+
+   //============================================================
+   // <T>设置引用字段的内容。</T>
+   //
+   // @param value 引用字段
+   //============================================================
+   public void setLovFields(String value){
+      _lovFields = value;
+   }
+
+   //============================================================
+   // <T>获得应用条件的内容。</T>
+   //
+   // @return 应用条件
+   //============================================================
+   public String getLovWhere(){
+      return _lovWhere;
+   }
+
+   //============================================================
+   // <T>设置应用条件的内容。</T>
+   //
+   // @param value 应用条件
+   //============================================================
+   public void setLovWhere(String value){
+      _lovWhere = value;
+   }
+
+   //============================================================
+   // <T>获得引用排序的内容。</T>
+   //
+   // @return 引用排序
+   //============================================================
+   public String getLovOrder(){
+      return _lovOrder;
+   }
+
+   //============================================================
+   // <T>设置引用排序的内容。</T>
+   //
+   // @param value 引用排序
+   //============================================================
+   public void setLovOrder(String value){
+      _lovOrder = value;
    }
 
    //============================================================

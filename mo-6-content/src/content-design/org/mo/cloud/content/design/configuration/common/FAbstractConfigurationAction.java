@@ -5,6 +5,8 @@ import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.persistence.FPersistence;
+import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.FFatalError;
@@ -36,13 +38,17 @@ public class FAbstractConfigurationAction
    // 空间名称
    protected String _spaceName;
 
-   // 表单配置控制台
+   // 持久化控制台接口
    @ALink
-   protected IWebFormConsole _formConsole;
+   protected IPersistenceConsole _persistenceConsole;
 
    // 内容配置控制台
    @ALink
    protected IConfigurationConsole _configurationConsole;
+
+   // 表单配置控制台
+   @ALink
+   protected IWebFormConsole _formConsole;
 
    //============================================================
    // <T>获得目录处理。</T>
@@ -121,6 +127,11 @@ public class FAbstractConfigurationAction
       page.attachContext(context);
       // 查找选中的XML集合对象和XML对象
       String collection = page.collectionCode();
+      // 查找持久器
+      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, _spaceName);
+      if(persistence == null){
+         throw new FFatalError("Persistence is not exists. (storage_name={1}, space_name={2})", _storageName, _spaceName);
+      }
       // 获得内容空间
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collection);
       page.setCollection(contentNode);
@@ -133,10 +144,10 @@ public class FAbstractConfigurationAction
          page.setFrameValue(contentNode.config().simpleXml());
       }else if(TYPE_COMPONENT.equals(type)){
          // 存储选中的XML对象
-         String component = page.componentCode();
-         FContentObject xcomponent = contentNode.search(component);
+         String componentCode = page.componentCode();
+         FContentObject xcomponent = contentNode.search(componentCode);
          if(xcomponent == null){
-            throw new FFatalError("Xml component is not found. (collection={1}, component={2})", collection, component);
+            throw new FFatalError("Xml component is not found. (collection={1}, component={2})", collection, componentCode);
          }
          page.setComponent(xcomponent);
          xcomponent.saveConfig(xconfig, false);

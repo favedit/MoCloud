@@ -373,7 +373,7 @@ public abstract class MObjects<T>
                       int index){
       if(index >= 0 && index < _count){
          ensureSize(_count + 1);
-         System.arraycopy(_items, index, _items, index + 1, _count - index - 1);
+         System.arraycopy(_items, index, _items, index + 1, _count - index);
          _count++;
          _items[index] = value;
       }

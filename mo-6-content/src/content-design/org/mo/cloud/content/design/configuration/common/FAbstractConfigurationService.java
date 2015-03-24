@@ -103,7 +103,9 @@ public class FAbstractConfigurationService
       FAttributes attributes = new FAttributes();
       persistence.setAttributes(type, attributes, contentNode.config().attributes(), EPersistenceMode.Config);
       persistence.setAttributes(type, attributes, xconfig.attributes(), EPersistenceMode.Config);
+      attributes.set("name", collectionCode);
       contentNode.config().attributes().assign(attributes);
+      persistence.format(contentNode.config(), EPersistenceMode.Config);
       contentNode.store();
       return EResult.Success;
    }
@@ -134,11 +136,12 @@ public class FAbstractConfigurationService
       // 查找XML集合对象
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collectionCode);
       // 根据类型来选择操作
+      EPersistenceMode modeCd = EPersistenceMode.Store;
       FAttributes attributes = new FAttributes();
       if(TYPE_COLLECTION.equals(storageCode)){
          // 存储配置集合对象
-         persistence.setAttributes(type, attributes, contentNode.config().attributes(), EPersistenceMode.Config);
-         persistence.setAttributes(type, attributes, xconfig.attributes(), EPersistenceMode.Config);
+         persistence.setAttributes(type, attributes, contentNode.config().attributes(), modeCd);
+         persistence.setAttributes(type, attributes, xconfig.attributes(), modeCd);
          contentNode.config().attributes().assign(attributes);
       }else if(TYPE_COMPONENT.equals(storageCode)){
          // 存储配置对象
@@ -148,8 +151,8 @@ public class FAbstractConfigurationService
          }
          // 更新操作
          String componentType = xconfig.get(RContentConfiguration.PTY_TYPE);
-         persistence.setAttributes(componentType, attributes, xcomponent.attributes(), EPersistenceMode.Config);
-         persistence.setAttributes(componentType, attributes, xconfig.attributes(), EPersistenceMode.Config);
+         persistence.setAttributes(componentType, attributes, xcomponent.attributes(), modeCd);
+         persistence.setAttributes(componentType, attributes, xconfig.attributes(), modeCd);
          xcomponent.attributes().assign(attributes);
          xcomponent.setName(componentType);
          // 刷新树内容
@@ -217,34 +220,30 @@ public class FAbstractConfigurationService
       FXmlNode selectNode = getSelectNode(input);
       FAttributes nodeAttrs = new FAttributes();
       // 获得容器节点
-      String nodeName = null;
+      String nodeCode = null;
       String storageCd = selectNode.get("storage");
       if(TYPE_COLLECTION.equals(storageCd)){
-         nodeName = selectNode.get("label");
+         nodeCode = selectNode.get("label");
       }else if(TYPE_COMPONENT.equals(storageCd)){
-         FXmlNode topNode = selectNode.search("Node", "type_type", TYPE_COLLECTION);
-         nodeAttrs.unpack(topNode.get("attributes"));
-         if(nodeAttrs.contains("linker_name")){
-            nodeName = nodeAttrs.get("linker_name");
-         }else{
-            nodeName = topNode.get("label");
-         }
+         FXmlNode topNode = selectNode.search("TreeNode", "storage", TYPE_COLLECTION);
+         nodeCode = topNode.get("code");
+         nodeAttrs.unpack(topNode.get("attributes", null));
       }
       // 获得内容空间
-      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, nodeName);
+      FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, nodeCode);
       // 获得控件对象
       FContentObjects xcontrols = null;
       if(TYPE_COLLECTION.equals(storageCd)){
          xcontrols = contentNode.config().nodes();
       }else{
-         String objectId = selectNode.get("uuid");
+         String objectId = selectNode.get("guid");
          FContentObject xcontrol = contentNode.search(objectId);
          if(xcontrol != null){
             xcontrols = xcontrol.nodes();
          }
       }
       if(xcontrols == null){
-         throw new FFatalError("Find control node is null. (node_name={1})", nodeName);
+         throw new FFatalError("Find control node is null. (node_name={1})", nodeCode);
       }
       // 新建所有子节点
       FXmlNodes outputNodes = output.config().nodes();

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.design.frame.ToolButtonForm" update_date="20150324141800">
+  <FrameForm name="design.webform.ToolButtonForm" label="工具栏-命令按键">
+    <DataAction name="insertAction" label="新建命令" service="insert@design.webform" />
+    <DataAction name="updateAction" label="保存命令" service="update@design.webform" />
+    <DataAction name="deleteAction" label="删除命令" service="delete@design.webform" />
+    <ToolBar name="toolBar" label="工具栏">
+      <ToolButton name="updateButton" label="保存" icon="#tools.save" icon_disable="#tools.saveDisable" hotkey="F8" action="doSave()" />
+      <ToolButton name="deleteButton" label="删除" icon="#tools.delete" icon_disable="#tools.deleteDisable" hotkey="F6" action="doDelete()" />
+    </ToolBar>
+    <DataSelect name="type" label="控件类型" data_name="_TYPE" />
+    <DataCheck name="isValid" label="有效性" data_name="IS_VALID" />
+    <DataEdit name="name" label="名称" data_name="NAME" />
+    <DataEdit name="hotkey" label="热键" data_name="HOTKEY" />
+    <DataEdit name="label" label="标签" data_name="LABEL" />
+    <DataCheck name="dispList" label="列表" data_name="DISP_LIST" />
+    <DataCheck name="dispInsert" label="新建" data_name="DISP_INSERT" />
+    <DataCheck name="dispUpdate" label="更新" data_name="DISP_UPDATE" />
+    <DataCheck name="dispDelete" label="删除" data_name="DISP_DELETE" />
+    <DataIconPicker name="icon" label="图标" />
+    <DataIconPicker name="iconDisable" label="禁止图标" />
+    <DataEdit name="action" label="命令" data_name="ACTION" />
+    <DataEdit name="service" label="服务" data_name="SERVICE" />
+    <DataEdit name="page" label="转向页面" data_name="PAGE" />
+    <DataEdit name="dataAction" label="数据命令" data_name="DATA_ACTION" />
+    <DataMemo name="attributes" label="属性内容" data_name="ATTRIBUTES" />
+    <DataMemo name="execute" label="执行内容" data_name="EXECUTE" />
+    <DataMemo name="note" label="描述信息" data_name="NOTE" />
+  </FrameForm>
+</Content>

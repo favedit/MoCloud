@@ -53,6 +53,21 @@ public abstract class MAttributes
    }
 
    //============================================================
+   // <T>接收数据集合到自己内部。</T>
+   //
+   // @param map 数据集合
+   //============================================================
+   public void assignNotEmpty(MAttributes attributes){
+      clear();
+      for(IStringPair pair : attributes){
+         String value = pair.value();
+         if(!RString.isEmpty(value)){
+            set(pair.name(), pair.value());
+         }
+      }
+   }
+
+   //============================================================
    // <T>获得迭代器。</T>
    //
    // @return 迭代器
@@ -474,7 +489,7 @@ public abstract class MAttributes
       if(!merge){
          clear();
       }
-      if((null != pack) && !pack.isEmpty()){
+      if((pack != null) && !pack.isEmpty()){
          try{
             String name;
             int len, length = 0, n = 0;

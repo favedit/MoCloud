@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150324163431">
+  <FrameForm name="system.design.frame.DataActionForm" label="数据命令表单">
+    <Template name="basicTemplate" label="基本模板" frame_source="system.design.frame.template.BasicTemplate" />
+    <Split name="srvice" label="服务信息" />
+    <DataEdit name="service" label="服务内容" data_name="SERVICE" />
+    <DataEdit name="action" label="执行操作" data_name="ACTION" />
+    <Template name="noteTemplate" label="备注模板" frame_source="system.design.frame.template.NoteTemplate" />
+    <DataMemo name="executeAction" label="记录命令" data_name="EXECUTE_ACTION" />
+    <DataMemo name="executeFinalAction" label="集合命令" data_name="EXECUTE_FINAL_ACTION" />
+    <DataIconPicker name="iconPath" label="图片路径" />
+    <DataMemo name="invokeFunction" label="回调函数" data_name="INVOKE_FUNCTION" />
+  </FrameForm>
+</Content>

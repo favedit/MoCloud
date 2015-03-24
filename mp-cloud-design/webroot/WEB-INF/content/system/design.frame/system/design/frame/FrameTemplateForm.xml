@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.design.frame.FrameTemplateForm" update_date="20150324142135">
+  <FrameForm name="design.webform.WebTemplateForm" label="数据模板">
+    <Template name="basicTemplate" label="基本信息模板" frame_source="system.design.frame.template.FrameBasicTemplate" />
+    <ToolBar name="toolBar" label="工具栏">
+      <ToolButtonSplit name="split1Button" label="分割" />
+      <ToolButtonMenu name="insertButton" label="新建控件" icon="tools.insert" icon_disable="tool.insertd">
+        <MenuButton name="insertTemplateButton" label="表单模板" attributes="_type=Template\nsel_type=component\nform_name=design.webform.TemplateForm" icon="#design.webform.webtemplateNew" />
+        <MenuButton name="insertEdit" label="文本输入框控件" attributes="_type=Edit\nsel_type=component\nform_name=design.webform.EditForm" icon="#design.webform.edit" />
+        <MenuButton name="insertReferenceButton" label="引用编辑控件" attributes="_type=Reference\nsel_type=component\nform_name=design.webform.ReferenceForm" icon="#design.webform.reference" />
+        <MenuButton name="insertNumber" label="数字输入框控件" attributes="_type=Number\nsel_type=component\nform_name=design.webform.NumberForm" icon="#design.webform.number" />
+        <MenuButton name="insertCheck" label="单选框控件" attributes="_type=Check\nsel_type=component\nform_name=design.webform.CheckForm" icon="#design.webform.check" />
+        <MenuButton name="insertMemo" label="多行文本控件" attributes="_type=Memo\nsel_type=component\nform_name=design.webform.MemoForm" icon="#design.webform.memo" />
+        <MenuButton name="insertSelect" label="下拉选择框控件" attributes="_type=Select\nsel_type=component\nform_name=design.webform.SelectForm" icon="#design.webform.select" />
+        <MenuButton name="insertCalendar" label="时间选取框控件" attributes="_type=Calendar\nsel_type=component\nform_name=design.webform.CalendarForm" icon="#design.webform.calendar" />
+        <MenuButton name="insertIconPicker" label="图标选取" attributes="_type=IconPicker\nsel_type=component\nform_name=design.webform.IconPickerForm" icon="#design.webform.iconPicker" />
+        <MenuButton name="insertColorPicker" label="颜色选取框控件" attributes="_type=ColorPicker\nsel_type=component\nform_name=design.webform.ColorPickerForm" icon="#design.webform.colorpicker" />
+        <MenuButton name="insertPicker" label="记录选取框控件" attributes="_type=Picker\nsel_type=component\nform_name=design.webform.PickerForm" icon="#design.webform.picker" />
+        <MenuButton name="insertSplit" label="分割线控件" attributes="_type=Split\nsel_type=component\nform_name=design.webform.SplitForm" icon="#design.webform.split" />
+        <MenuButton name="insertDataAction" label="数据命令" attributes="_type=DataAction\nsel_type=component\nform_name=design.webform.DataActionForm" icon="#design.webform.dataaction" />
+        <MenuButton name="insertColumnButton" label="数据列控件" attributes="_type=Column\nsel_type=component\nform_name=design.webform.ColumnForm" icon="#design.webform.column" />
+        <MenuButton name="insertColumnEdit" label="数据列-文本输入框控件" attributes="_type=ColumnEdit\nsel_type=component\nform_name=design.webform.ColumnForm" icon="#design.webform.coledit" />
+        <MenuButton name="insertColumnRadioGroup" label="数据列-多选框" attributes="_type=ColumnRadioGroup\nsel_type=component\nform_name=design.webform.ColumnRadioGroupForm" icon="#design.webform.columnradiogroup" />
+        <MenuButton name="insertColumnNumber" label="数据列-数字输入框控件" attributes="_type=ColumnNumber\nsel_type=component\nform_name=design.webform.ColumnForm" icon="#design.webform.colnum" />
+        <MenuButton name="insertColumnCheck" label="数据列-点选框控件" attributes="_type=ColumnCheck\nsel_type=component\nform_name=design.webform.ColumnForm" icon="#design.webform.colchk" />
+        <MenuButton name="insertToolBar" label="工具栏控件" attributes="_type=ToolBar\nsel_type=component\nform_name=design.webform.ToolBarForm" icon="#design.webform.toolbar" />
+        <MenuButton name="insertPageControl" label="分页控件" attributes="_type=PageControl\nsel_type=component\nform_name=design.webform.PageControlForm" icon="#design.webform.pagecontrol" />
+        <MenuButton name="insertBrowserControl" label="浏览控件" attributes="_type=BrowserControl\nsel_type=component\nform_name=design.webform.BrowserControlForm" icon="#design.webform.webbrowser" />
+        <MenuButton name="insertFormInformationBarButton" label="表单信息控件" attributes="_type=FormInformationBar\nsel_type=component\nform_name=design.webform.FormInformationBarForm" />
+      </ToolButtonMenu>
+      <ToolButtonSplit name="split2Button" label="分割" />
+      <ToolButton name="designButton" label="设计" attributes="sel_type=collection" icon="tools.design" hotkey="F9" />
+      <ToolButton name="sortButton" label="排序" attributes="sel_type=collection" icon="tools.sort" />
+    </ToolBar>
+    <Edit name="styleRefer" label="样式引用" />
+    <Template name="noteTemplate" label="注释模板" frame_source="system.design.frame.template.FrameNoteTemplate" />
+  </FrameForm>
+</Content>

@@ -1,5 +1,6 @@
 package org.mo.cloud.content.design.configuration;
 
+import java.io.File;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
@@ -30,6 +31,9 @@ public class FContentNode
 
    // 打开状态
    protected boolean _statusOpen;
+
+   // 修改时间
+   protected long _lastModified;
 
    // 配置节点
    protected FContentObject _config = new FContentObject();
@@ -126,6 +130,15 @@ public class FContentNode
    }
 
    //============================================================
+   // <T>获得是否打开。</T>
+   //
+   // @return 是否打开
+   //============================================================
+   public boolean statusOpen(){
+      return _statusOpen;
+   }
+
+   //============================================================
    // <T>保存配置节点。</T>
    //
    // @param xconfig 配置节点
@@ -133,7 +146,6 @@ public class FContentNode
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       xconfig.setName("Content");
-      xconfig.set("name", _name);
       xconfig.set("update_date", RDateTime.format());
    }
 
@@ -160,10 +172,12 @@ public class FContentNode
          return EResult.Failure;
       }
       // 检查文件存在性
-      if(!RFile.exists(_fileName)){
+      File file = new File(_fileName);
+      if(!file.exists()){
          _statusOpen = true;
          return EResult.Failure;
       }
+      _lastModified = file.lastModified();
       // 加载配置节点
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadFile(_fileName);
@@ -171,6 +185,25 @@ public class FContentNode
       loadConfig(xroot);
       _config.loadConfig(xroot.nodes().first());
       _statusOpen = true;
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>检查处理，如果发生改变重新加载内容。</T>
+   // <P>TODO:Debug模式检查，运行模式不检查。</P>
+   //
+   // @return 处理结果
+   //============================================================
+   public EResult check(){
+      // 检查文件时间
+      File file = new File(_fileName);
+      if(file.lastModified() == _lastModified){
+         return EResult.Success;
+      }
+      // 重新加载文件
+      _statusOpen = false;
+      _config = new FContentObject();
+      open();
       return EResult.Success;
    }
 
@@ -199,6 +232,7 @@ public class FContentNode
       _config.saveConfig(xroot.createNode());
       xdocument.saveFile(_fileName);
       _logger.debug(this, "store", "Store content node. (name={1}, file_name={2})", _name, _fileName);
+      _lastModified = new File(_fileName).lastModified();
       return EResult.Success;
    }
 

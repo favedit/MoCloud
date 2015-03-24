@@ -56,7 +56,7 @@ public class FFrameConsole
       for(INamePair<FContentNode> pair : space.contents()){
          FContentNode node = pair.value();
          String listName = node.name();
-         XContentObject xlist = find(storgeName, listName);
+         XContentObject xlist = find(storgeName, listName, EPersistenceMode.Store);
          results.push(xlist);
       }
       return results.toObjects();
@@ -67,18 +67,22 @@ public class FFrameConsole
    //
    // @param storgeName 存储名称
    // @param formName 表单名称
+   // @param modeCd 模式类型
    // @return 表单
    //============================================================
    @Override
    public XContentObject find(String storgeName,
-                              String formName){
-      String code = storgeName + "|" + formName;
+                              String formName,
+                              EPersistenceMode modeCd){
+      String code = storgeName + "|" + formName + "|" + modeCd.toString();
       XContentObject xframe = _frames.find(code);
       if(xframe == null){
-         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, formName);
-         xframe = persistence.convertInstance(node.config());
-         _frames.set(code, xframe);
+         if(node != null){
+            FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
+            xframe = persistence.convertInstance(node.config(), modeCd);
+            _frames.set(code, xframe);
+         }
       }
       return xframe;
    }
@@ -95,13 +99,12 @@ public class FFrameConsole
    public FContentObject findDefine(String storgeName,
                                     String formName,
                                     EPersistenceMode modeCd){
-      XContentObject xobject = find(storgeName, formName);
+      XContentObject xobject = find(storgeName, formName, modeCd);
       if(xobject != null){
          // 获得转换器
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
          // 转换对象
-         FContentObject content = persistence.convertConfig(xobject, modeCd);
-         return content;
+         return persistence.convertConfig(xobject, modeCd);
       }
       return null;
    }
@@ -110,19 +113,53 @@ public class FFrameConsole
    // <T>根据名称建立目录配置。</T>
    //
    // @param storgeName 存储名称
-   // @param treeName 目录名称
+   // @param frameName 页面名称
+   // @return 目录配置
+   //============================================================
+   protected void buildContentConfig(String storgeName,
+                                     FContentObject contentObject,
+                                     EPersistenceMode modeCd){
+      // 处理模板
+      if(contentObject.isName("Template")){
+         FContentObject contentParent = contentObject.parent();
+         int index = contentParent.nodes().indexOf(contentObject);
+         contentParent.nodes().remove(contentObject);
+         // 查找引用内容
+         String frameSource = contentObject.get("frame_source");
+         FContentObject contentTemplate = findDefine(storgeName, frameSource, modeCd);
+         buildContentConfig(storgeName, contentTemplate, modeCd);
+         if(contentTemplate.hasNode()){
+            for(FContentObject contentNode : contentTemplate.nodes()){
+               contentParent.nodes().insert(contentNode, index++);
+            }
+         }
+      }
+      // 处理子节点
+      if(contentObject.hasNode()){
+         for(FContentObject contentNode : contentObject.nodes()){
+            buildContentConfig(storgeName, contentNode, modeCd);
+         }
+      }
+   }
+
+   //============================================================
+   // <T>根据名称建立目录配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param frameName 页面名称
+   // @param modeCd 模式类型
    // @return 目录配置
    //============================================================
    @Override
    public FXmlNode buildConfig(String storgeName,
-                               String treeName){
+                               String frameName,
+                               EPersistenceMode modeCd){
       // 查找目录定义
-      XContentObject xframe = find(storgeName, treeName);
+      FContentObject content = findDefine(storgeName, frameName, modeCd);
       // 转换数据
-      FXmlNode xconfig = new FXmlNode();
-      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
-      FContentObject content = persistence.convertConfig(xframe);
+      buildContentConfig(storgeName, content, modeCd);
       // 存储输出
+      FXmlNode xconfig = new FXmlNode();
       content.saveConfig(xconfig);
       return xconfig;
    }

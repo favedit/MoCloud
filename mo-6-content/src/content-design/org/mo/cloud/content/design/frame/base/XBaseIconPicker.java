@@ -7,7 +7,7 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>图片选择框对象的内容基类。</T>
+// <T>图标选择框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
@@ -36,6 +36,10 @@ public abstract class XBaseIconPicker
    // 属性集合的定义
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
+
+   // 回行类型的定义
+   @AContentField
+   public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
 
    // 位置的定义
    @AContentField
@@ -98,6 +102,10 @@ public abstract class XBaseIconPicker
    // 属性集合
    @AName("attributes")
    protected String _attributes;
+
+   // 回行类型
+   @AName("wrap_cd")
+   protected String _wrapCd;
 
    // 位置
    @AName("location")
@@ -211,6 +219,24 @@ public abstract class XBaseIconPicker
    //============================================================
    public void setAttributes(String value){
       _attributes = value;
+   }
+
+   //============================================================
+   // <T>获得回行类型的内容。</T>
+   //
+   // @return 回行类型
+   //============================================================
+   public String getWrapCd(){
+      return _wrapCd;
+   }
+
+   //============================================================
+   // <T>设置回行类型的内容。</T>
+   //
+   // @param value 回行类型
+   //============================================================
+   public void setWrapCd(String value){
+      _wrapCd = value;
    }
 
    //============================================================

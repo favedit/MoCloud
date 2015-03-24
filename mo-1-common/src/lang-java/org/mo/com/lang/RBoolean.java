@@ -120,14 +120,14 @@ public class RBoolean
          if(clazz == String.class){
             String value = (String)item;
             return parse(value);
+         }else if(clazz == Boolean.class || "boolean".equals(type)){
+            return ((Boolean)item).booleanValue();
          }else if(clazz == Integer.class || "int".equals(type)){
             return ((Integer)item).intValue() > 0;
          }else if(clazz == Long.class || "long".equals(type)){
             return ((Long)item).longValue() > 0;
          }else if(clazz == Float.class || "float".equals(type)){
             return ((Float)item).floatValue() > 0;
-         }else if(clazz == Boolean.class || "boolean".equals(type)){
-            return ((Boolean)item).booleanValue();
          }else{
             throw new FFatalError("Unknown format. (item={1})", item);
          }
@@ -251,6 +251,26 @@ public class RBoolean
    // @param value 内容
    // @return 字符串
    //============================================================
+   public final static String toString(int value){
+      return (value > 0) ? TRUE_STR : FALSE_STR;
+   }
+
+   //============================================================
+   // <T>获得布尔值的字符串。</T>
+   //
+   // @param value 内容
+   // @return 字符串
+   //============================================================
+   public final static String toString(String value){
+      return parse(value) ? TRUE_STR : FALSE_STR;
+   }
+
+   //============================================================
+   // <T>获得布尔值的字符串。</T>
+   //
+   // @param value 内容
+   // @return 字符串
+   //============================================================
    public final static String toString(Object value){
       if(value != null){
          Class<?> valueClass = value.getClass();
@@ -273,30 +293,10 @@ public class RBoolean
    // @param falseValue 假值
    // @return 字符串
    //============================================================
-   public final static String toString(Boolean value,
+   public final static String toString(String value,
                                        String trueValue,
                                        String falseValue){
       return parse(value) ? trueValue : falseValue;
-   }
-
-   //============================================================
-   // <T>获得布尔值的字符串。</T>
-   //
-   // @param value 内容
-   // @return 字符串
-   //============================================================
-   public final static String toString(int value){
-      return (value > 0) ? TRUE_STR : FALSE_STR;
-   }
-
-   //============================================================
-   // <T>获得布尔值的字符串。</T>
-   //
-   // @param value 内容
-   // @return 字符串
-   //============================================================
-   public final static String toString(String value){
-      return parse(value) ? TRUE_STR : FALSE_STR;
    }
 
    //============================================================
@@ -307,7 +307,7 @@ public class RBoolean
    // @param falseValue 假值
    // @return 字符串
    //============================================================
-   public final static String toString(String value,
+   public final static String toString(Object value,
                                        String trueValue,
                                        String falseValue){
       return parse(value) ? trueValue : falseValue;

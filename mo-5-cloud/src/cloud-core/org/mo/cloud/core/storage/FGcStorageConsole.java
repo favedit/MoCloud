@@ -7,6 +7,7 @@ import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteFile;
+import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RInteger;
@@ -42,6 +43,10 @@ public class FGcStorageConsole
    @AProperty
    protected String _storageName;
 
+   // 存储名称
+   @AProperty
+   protected String _storagePath = "E:/Microbject/storage";
+
    // 数据库链接
    protected Mongo _connection;
 
@@ -68,6 +73,15 @@ public class FGcStorageConsole
          return null;
       }
       byte[] data = (byte[])item.get("data");
+      if(data == null){
+         String fileName = _storagePath + "/" + catalog + "/" + guid + ".bin";
+         if(RFile.exists(fileName)){
+            FByteFile storgeFile = new FByteFile(fileName);
+            storgeFile.loadFile(fileName);
+            data = storgeFile.toArray();
+            storgeFile.close();
+         }
+      }
       // 返回内容
       SGcStorage resource = new SGcStorage();
       resource.setData(data);
@@ -118,11 +132,9 @@ public class FGcStorageConsole
          throw new FFatalError("Resource data is empty.");
       }
       //............................................................
-      // 检查数据限制
-      if(data.length > RInteger.SIZE_16M){
-         _logger.error(this, "store", "Storage document is too large. (size={1}, limit={2})", data.length, RInteger.SIZE_16M);
-         return false;
-      }
+      // 压缩数据
+      //FLzmaFile file = new FLzmaFile(data);
+      //byte[] lzmaData = file.toLzmaArray();
       //............................................................
       // 获得集合
       DBCollection collection = _database.getCollection(catalog);
@@ -131,12 +143,24 @@ public class FGcStorageConsole
       item.put("guid", guid);
       item.put("code", storage.code());
       item.put("type", type);
+      //item.put("compress", "lzma");
       item.put("data_length", data.length);
-      item.put("data", data);
+      //item.put("compress_length", lzmaData.length);
+      // 检查数据限制
+      if(data.length > RInteger.SIZE_4M){
+         _logger.error(this, "store", "Storage document is too large. (size={1}, limit={2})", data.length, RInteger.SIZE_16M);
+         FByteFile storgeFile = new FByteFile(data);
+         storgeFile.saveToFile(_storagePath + "/" + catalog + "/" + guid + ".bin");
+         storgeFile.close();
+         item.put("data", null);
+      }else{
+         item.put("data", data);
+      }
       // 查找内容
       DBObject search = new BasicDBObject("guid", guid);
       // 更新处理
       collection.update(search, item, true, false);
+      //file.close();
       return true;
    }
 

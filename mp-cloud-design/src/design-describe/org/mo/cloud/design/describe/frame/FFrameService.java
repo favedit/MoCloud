@@ -3,6 +3,7 @@ package org.mo.cloud.design.describe.frame;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.lang.EResult;
@@ -79,7 +80,7 @@ public class FFrameService
          if(xframe.isName("Frame")){
             String name = xframe.get("name");
             // 查找目录定义
-            XContentObject xtree = _frameConsole.find(_storageName, name);
+            XContentObject xtree = _frameConsole.find(_storageName, name, EPersistenceMode.Config);
             // 转换数据
             FXmlNode xconfig = xoutput.createNode();
             FContentObject content = persistence.convertConfig(xtree);
