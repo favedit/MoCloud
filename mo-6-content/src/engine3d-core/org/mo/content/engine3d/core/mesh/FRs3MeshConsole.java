@@ -6,6 +6,8 @@ import com.cyou.gccloud.data.data.FDataResource3dMeshStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
 import com.cyou.gccloud.define.enums.common.EGcData;
+import com.cyou.gccloud.logic.resource3d.mesh.FGcRs3MeshUnit;
+import com.cyou.gccloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
@@ -41,6 +43,10 @@ public class FRs3MeshConsole
    // 存储控制台
    @ALink
    protected IRs3StreamConsole _streamConsole;
+
+   // 数据网格控制台
+   @ALink
+   protected IGcRs3MeshConsole _dataMeshConsole;
 
    //============================================================
    // <T>根据代码查找网格单元。</T>
@@ -187,9 +193,14 @@ public class FRs3MeshConsole
    public EResult importMeshPly(ILogicContext logicContext,
                                 String code,
                                 String fileName){
+      // 删除已经存在的数据网格
+      FGcRs3MeshUnit findMeshUnit = _dataMeshConsole.findByCode(logicContext, code);
+      if(findMeshUnit != null){
+         _dataMeshConsole.doDelete(logicContext, findMeshUnit);
+      }
+      //............................................................
       // 加载模型资源
       FRs3Mesh mesh = new FRs3Mesh();
-      //............................................................
       // 导入数据流
       FPlyFile file = new FPlyFile(fileName);
       int vertexCount = file.vertexs().count();

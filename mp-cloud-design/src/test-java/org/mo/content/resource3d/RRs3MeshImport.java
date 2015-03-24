@@ -17,14 +17,14 @@ public class RRs3MeshImport
    // <T>导入处理。</T>
    //============================================================
    public static void importProcess() throws Exception{
-      String path = RRs3Configuration.RootPath + "/Temp/";
+      String path = RRs3Configuration.RootPath + "/MoScript/Temp/";
       // 设置数据
       FStrings filePaths = new FStrings();
       for(String fileName : RFile.listFiles(path)){
          String name = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
          if(name.endsWith(".ply")){
             name = name.substring(0, name.length() - 4);
-            if(name.equals("person2")){
+            if(name.equals("person-02")){
                filePaths.push(name);
             }
          }

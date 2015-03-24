@@ -425,6 +425,22 @@ public class FDataPersonUserLogic
    //
    // @param clazz 单元类型
    // @param whereSql 条件命令
+   // @return 数据单元集合
+   //============================================================
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql){
+      // 生成命令
+      String code = innerMemcacheKey(null, whereSql, null, null);
+      String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
+      // 获得数据
+      return fetchSql(clazz, code, sql, 0, 0);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param clazz 单元类型
+   // @param whereSql 条件命令
    // @param pageSize 分页大小
    // @param page 分页号码
    // @return 数据单元集合

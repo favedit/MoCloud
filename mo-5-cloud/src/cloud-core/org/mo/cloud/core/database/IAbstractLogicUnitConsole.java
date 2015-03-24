@@ -7,7 +7,7 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>逻辑单元控制台基类。</T>
 //============================================================
-public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
+public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
 {
    //============================================================
    // <T>根据编号获得一个数据单元。</T>
@@ -16,7 +16,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
-   T find(ILogicContext logicContext,
+   U find(ILogicContext logicContext,
           long objectId);
 
    //============================================================
@@ -27,9 +27,9 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param clazz 类对象
    // @return 处理结果
    //============================================================
-   T find(ILogicContext logicContext,
+   U find(ILogicContext logicContext,
           long objectId,
-          Class<T> clazz);
+          Class<U> clazz);
 
    //============================================================
    // <T>根据唯一码获得一个数据单元。</T>
@@ -38,7 +38,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param uniqueCode 唯一码
    // @return 处理结果
    //============================================================
-   T findByGuid(ILogicContext logicContext,
+   U findByGuid(ILogicContext logicContext,
                 String uniqueCode);
 
    //============================================================
@@ -49,9 +49,19 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @param clazz 类对象
    // @return 处理结果
    //============================================================
-   T findByGuid(ILogicContext logicContext,
+   U findByGuid(ILogicContext logicContext,
                 String uniqueCode,
-                Class<T> clazz);
+                Class<U> clazz);
+
+   //============================================================
+   // <T>准备记录</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   EResult doPrepare(ILogicContext logicContext,
+                     U unit);
 
    //============================================================
    // <T>新建记录</T>
@@ -61,7 +71,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    EResult doInsert(ILogicContext logicContext,
-                    T unit);
+                    U unit);
 
    //============================================================
    // <T>修改记录</T>o
@@ -71,7 +81,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    EResult doUpdate(ILogicContext logicContext,
-                    T unit);
+                    U unit);
 
    //============================================================
    // <T>修改记录</T>o
@@ -82,7 +92,7 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    // @return 处理结果
    //============================================================
    EResult doUpdate(ILogicContext logicContext,
-                    T unit,
+                    U unit,
                     long objectId);
 
    //============================================================
@@ -94,4 +104,14 @@ public interface IAbstractLogicUnitConsole<T extends FLogicUnit>
    //============================================================
    EResult doDelete(ILogicContext logicContext,
                     long objectId);
+
+   //============================================================
+   // <T>删除记录</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   EResult doDelete(ILogicContext logicContext,
+                    U unit);
 }
