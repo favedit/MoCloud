@@ -38,6 +38,107 @@ function FUiDataCheck(o){
    o = RClass.inherits(this, o, FUiCheck, MUiDataField);
    return o;
 }
+function FUiDataColorPicker(o){
+   o = RClass.inherits(this, o, FUiEdit, MUiDataField);
+   return o;
+}
+function FUiDataColorPicker_onDataKeyDown(s, e){
+   var o = this;
+   o.__base.FUiEdit.onDataKeyDown.call(o, s, e);
+   if(o.editCase){
+      RKey.fixCase(e, o.editCase);
+   }
+   if(o._editable){
+      return;
+      if(o.editComplete){
+         if( 16 != e.keyCode && 17 != e.keyCode && 18 != e.keyCode && 20 != e.keyCode ){
+            var ed = o.findEditor();
+            if(ed){
+               ed.onEditKeyDown(s, e);
+            }
+         }
+      }
+   }
+}
+function FUiDataColorPicker_formatValue(v){
+   var o = this;
+   var r = RString.nvl(v);
+   if(ECase.Upper == o.editCase){
+      r = RString.toUpper(r);
+   }else if(ECase.Lower == o.editCase){
+      r = RString.toLower(r);
+   }
+   return r;
+}
+function FUiDataColorPicker_setText(t){
+   var o = this;
+   if(!o.hEdit){
+      return;
+   }
+   if('U'== o.editCase){
+      o.hEdit.value = RString.toUpper(t);
+   }else if('L'== o.editCase){
+         o.hEdit.value = RString.toLower(t);
+   }else{
+      o.hEdit.value = t;
+   }
+   if('right' == o.editAlign){
+      o.hEdit.style.textAlign = 'right';
+   }else if('left' == o.editAlign ){
+      o.hEdit.style.textAlign = 'left';
+   }else{
+      o.hEdit.style.textAlign = 'center';
+   }
+}
+function FUiDataColorPicker_validText(t){
+   var o = this;
+   var r = o.__base.FUiEdit.validText.call(o, t);
+   if(!r){
+      if(o.validLenmin){
+         if(o.validLenmin > t.length){
+            return RContext.get('MDescEdit:ValidMinLength', o.validLenmin);
+         }
+      }
+      if(o.validLenmax){
+         if(o.validLenmax < t.length){
+            return RContext.get('MDescEdit:ValidMaxLength', o.validLenmax);
+         }
+      }
+   }
+   return r;
+}
+function FUiDataColorPicker_findEditor(){
+   var o = this;
+   if(o.editComplete){
+      var de = o.editor;
+      if(!de){
+         o.dsControl = o.topControl(MDataset);
+         if(o.dsControl){
+            de = o.editor = RConsole.find(FUiDataColorPickerConsole).focus(o, FUiDataColorPickerEditor);
+         }
+      }
+      if(de){
+         de.linkControl(o);
+      }
+      return o.editor;
+   }
+}
+function FUiDataColorPicker_drop(){
+   var o = this;
+   var de = o.findEditor();
+   if(de){
+      var t = o.reget();
+      if(t.length > 0){
+         if(o.finded != t){
+            if(de.source != o){
+               de.linkControl(o);
+            }
+            de.search(t);
+         }
+         o.finded = t;
+      }
+   }
+}
 function FUiDataEdit(o){
    o = RClass.inherits(this, o, FUiEdit, MUiDataField);
    return o;
@@ -587,12 +688,113 @@ function FUiDataFrame(o){
    o = RClass.inherits(this, o, FUiFrame, MUiDataset, MUiDataContainer, MUiDataAction);
    return o;
 }
+function FUiDataIconPicker(o){
+   o = RClass.inherits(this, o, FUiEdit, MUiDataField);
+   return o;
+}
+function FUiDataIconPicker_onDataKeyDown(s, e){
+   var o = this;
+   o.__base.FUiEdit.onDataKeyDown.call(o, s, e);
+   if(o.editCase){
+      RKey.fixCase(e, o.editCase);
+   }
+   if(o._editable){
+      return;
+      if(o.editComplete){
+         if( 16 != e.keyCode && 17 != e.keyCode && 18 != e.keyCode && 20 != e.keyCode ){
+            var ed = o.findEditor();
+            if(ed){
+               ed.onEditKeyDown(s, e);
+            }
+         }
+      }
+   }
+}
+function FUiDataIconPicker_formatValue(v){
+   var o = this;
+   var r = RString.nvl(v);
+   if(ECase.Upper == o.editCase){
+      r = RString.toUpper(r);
+   }else if(ECase.Lower == o.editCase){
+      r = RString.toLower(r);
+   }
+   return r;
+}
+function FUiDataIconPicker_setText(t){
+   var o = this;
+   if(!o.hEdit){
+      return;
+   }
+   if('U'== o.editCase){
+      o.hEdit.value = RString.toUpper(t);
+   }else if('L'== o.editCase){
+         o.hEdit.value = RString.toLower(t);
+   }else{
+      o.hEdit.value = t;
+   }
+   if('right' == o.editAlign){
+      o.hEdit.style.textAlign = 'right';
+   }else if('left' == o.editAlign ){
+      o.hEdit.style.textAlign = 'left';
+   }else{
+      o.hEdit.style.textAlign = 'center';
+   }
+}
+function FUiDataIconPicker_validText(t){
+   var o = this;
+   var r = o.__base.FUiEdit.validText.call(o, t);
+   if(!r){
+      if(o.validLenmin){
+         if(o.validLenmin > t.length){
+            return RContext.get('MDescEdit:ValidMinLength', o.validLenmin);
+         }
+      }
+      if(o.validLenmax){
+         if(o.validLenmax < t.length){
+            return RContext.get('MDescEdit:ValidMaxLength', o.validLenmax);
+         }
+      }
+   }
+   return r;
+}
+function FUiDataIconPicker_findEditor(){
+   var o = this;
+   if(o.editComplete){
+      var de = o.editor;
+      if(!de){
+         o.dsControl = o.topControl(MDataset);
+         if(o.dsControl){
+            de = o.editor = RConsole.find(FUiDataIconPickerConsole).focus(o, FUiDataIconPickerEditor);
+         }
+      }
+      if(de){
+         de.linkControl(o);
+      }
+      return o.editor;
+   }
+}
+function FUiDataIconPicker_drop(){
+   var o = this;
+   var de = o.findEditor();
+   if(de){
+      var t = o.reget();
+      if(t.length > 0){
+         if(o.finded != t){
+            if(de.source != o){
+               de.linkControl(o);
+            }
+            de.search(t);
+         }
+         o.finded = t;
+      }
+   }
+}
 function FUiDataMemo(o){
    o = RClass.inherits(this, o, FUiMemo, MUiDataField);
    return o;
 }
 function FUiDataNumber(o){
-   o = RClass.inherits(this, o, FEditControl);
+   o = RClass.inherits(this, o, FUiNumber);
    return o;
 }
 function FUiDataNumber_onEditFocus(e){
@@ -640,7 +842,7 @@ function FUiDataNumber_onDataKeyDown(s, e){
          o.adjustValue(false);
       }
    }
-   o.base.FEditControl.onDataKeyDown.call(o, s, e);
+   o.base.FUiNumber.onDataKeyDown.call(o, s, e);
 }
 function FUiDataNumber_ohEditKeyUp(s, e){
    var o = this;
@@ -705,7 +907,7 @@ function FUiDataNumber_validPattern(s) {
 }
 function FUiDataNumber_refreshStyle(){
    var o = this;
-   o.base.FEditControl.refreshStyle.call(o);
+   o.base.FUiNumber.refreshStyle.call(o);
    o.hUpIcon.src = o.styleIconPath(o._hover ? 'UpSelect' : 'Up');
    o.hDownIcon.src = o.styleIconPath(o._hover ? 'DownSelect' : 'Down');
 }
@@ -807,7 +1009,7 @@ function FUiDataNumber_precisionValue(v){
 }
 function FUiDataNumber_dispose(){
    var o = this;
-   o.base.FEditControl.dispose.call(o);
+   o.base.FUiNumber.dispose.call(o);
    o.hLabel = null;
    o.hUpIcon = null;
    o.hDownIcon = null;

@@ -1,6 +1,7 @@
 package org.mo.cloud.design.web.tag;
 
 import org.mo.cloud.content.design.frame.IFrameConsole;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -28,7 +29,7 @@ public class FFrameTag
       }
       // 获得定义
       IFrameConsole console = RAop.find(IFrameConsole.class);
-      FXmlNode xframe = console.buildConfig("system", frameName);
+      FXmlNode xframe = console.buildConfig("system", frameName, EPersistenceMode.Config);
       if(xframe == null){
          throw new FFatalError("Form is not exists. (source={1}, form_name={2})", _source, frameName);
       }

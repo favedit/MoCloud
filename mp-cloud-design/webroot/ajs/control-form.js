@@ -1502,6 +1502,7 @@ function FUiCheck(o){
    o.onBuildEditValue = FUiCheck_onBuildEditValue;
    o.onInputClick     = RClass.register(o, new AEventClick('onInputClick'), FUiCheck_onInputClick);
    o.oeSaveValue      = FUiCheck_oeSaveValue;
+   o.construct        = FUiCheck_construct;
    o.get              = FUiCheck_get;
    o.set              = FUiCheck_set;
    o.refreshValue     = FUiCheck_refreshValue;
@@ -1525,6 +1526,11 @@ function FUiCheck_oeSaveValue(e){
       return EEventStatus.Stop;
    }
    return o.base.FUiEditControl.oeSaveValue.call(o, e);
+}
+function FUiCheck_construct(){
+   var o = this;
+   o.__base.FUiEditControl.construct.call(o);
+   o._editSize.set(80, 20);
 }
 function FUiCheck_get(){
    return this._hInput.checked;
@@ -4157,7 +4163,7 @@ function FUiLayout_appendChild(ctl){
       }
       hCell.appendChild(ctl._hPanel);
       ctl._hLayoutCell = hCell;
-      if(!ctl.nowrap && (o.controls.last() != ctl)){
+      if((ctl.wrapCd() == EUiWrap.NextLine) && (o.controls.last() != ctl)){
          o.innerAppendLine();
       }
    }else{
@@ -4196,7 +4202,7 @@ function FUiLayout_appendChild(ctl){
          o._hPanelLast = hc;
          hc.appendChild(ctl._hPanel);
          ctl._hLayoutCell = hc;
-         if(!ctl.nowrap){
+         if(ctl.wrapCd() == EUiWrap.NextLine){
             o._hPanelLine = null;
          }
       }
@@ -4741,7 +4747,8 @@ function FUiNumber_onInputChanged(p){
 function FUiNumber_construct(){
    var o = this;
    o.__base.FUiEditControl.construct.call(o);
-   o._inputSize = new SSize2(120, 0);
+   o._editSize.set(120, 20);
+   o._inputSize = new SSize2(100, 0);
 }
 function FUiNumber_formatDisplay(p){
    var o = this;

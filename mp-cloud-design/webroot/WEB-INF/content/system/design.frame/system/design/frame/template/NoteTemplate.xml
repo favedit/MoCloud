@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="common.country.CountryForm" update_date="20141210134046">
-   <FrameTemplate _uuid="o0[2upcboF6wsX35Ju69hA" name="design.webform.NoteTemplate" label="M#12cn17表单-备注信息" is_valid="Y" note="M#">
+   <FrameTemplate _uuid="o0[2upcboF6wsX35Ju69hA" name="design.webform.NoteTemplate" label="备注信息模板" is_valid="Y" note="M#">
      <Split _uuid="qk6mEzH]G9eOmG5AVgRZkg" name="noteGroup" label="M#12cn14注释信息" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_lov="Y" disp_zoom="Y" disp_list="Y" disp_display="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" icon="ctl.radios" disp_type="H" />
      <DataEdit _uuid="nkdkAvtFV4ZLSnL6rrXdlA" name="editTip" label="M#12cn14输入信息" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="EDIT_TIP" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" />
      <DataEdit _uuid="g0Tanxqlg24mwd9R9yAPlw" name="hint" label="M#12cn14提示信息" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="HINT" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" />

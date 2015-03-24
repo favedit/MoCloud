@@ -11,9 +11,11 @@
 <SCRIPT language='javascript'>
 var tree = null;
 var toolbar = null;
+//----------------------------------------------------------
 function refreshNode(){
 	tree.reloadNode();
 }
+//----------------------------------------------------------
 function onNodeClick(sender, node){
    var type = node.type();
    var storage = type.storage();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="system.culture.Language" update_date="20150319213751">
+<Content name="system.culture.Language" update_date="20150324125813">
   <List is_valid="Y" name="1" label="2" note="3">
     <Item is_valid="Y" name="3" label="4" note="7" value="5" type_cd="1" icon="6" />
     <Item is_valid="Y" name="chinese" label="中文" note="" value="" />

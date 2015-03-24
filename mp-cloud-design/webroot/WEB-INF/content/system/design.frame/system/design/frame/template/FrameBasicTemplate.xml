@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="common.country.CountryForm" update_date="20141210134046">
+   <FrameTemplate _uuid="YUQzeOWgMPPSzfiBXt3AkA" name="design.webform.FormBasicTemplate" label="M#12cn14表单模板" is_valid="Y" note="M#">
+     <DataAction _uuid="p0Tbp1nHM5LhBrvnNso[tA" name="insertAction" label="新建命令" is_valid="Y" note="M#" service="insert@system.design.frame" />
+     <DataAction _uuid="[Ef2VYHVsteeF[hU]ponvQ" name="updateAction" label="保存命令" is_valid="Y" note="M#" service="update@system.design.frame" />
+     <DataAction _uuid="w0YqLDI4K7pt3Gf15O]Mmg" name="deleteAction" label="删除命令" is_valid="Y" note="M#" service="delete@system.design.frame" />
+     <DataAction _uuid="7EJbkI1aU[dX8GF4m2Snow" name="designAction" label="设计命令" is_valid="Y" note="M#" service="design@system.design.frame" />
+     <DataAction _uuid="oUPHBYBps2uWhCo1IoyRkA" name="sortAction" label="排序命令" is_valid="Y" note="M#" service="sort@design.webform" />
+     <ToolBar _uuid="yEZoGD9KuuyA0]]K[fNlqQ" name="toolBar" label="工具栏" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+       <ToolButton _uuid="EEwko[UC7Lkdd45jlkTrvA" name="saveButton" label="保存" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="tools.save" hotkey="F8" action="doSave()" />
+       <ToolButton _uuid="cklfUW6TK0qy14bLbvGXrg" name="deleteButton" label="删除" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="tools.delete" hotkey="F6" action="doDelete()" />
+     </ToolBar>
+     <DataSelect _uuid="4UsSj6d4BMTotIyfL3J5mQ" name="componentType" label="表单类型" is_valid="Y" note="M#" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" wrap_cd="1" data_name="_TYPE" edit_insert="Y" valid_insert="Y" valid_update="Y" edit_refer="design.webform.FormType" />
+     <DataCheck _uuid="aU8IHlbd9VirTL[YCJ0muw" name="isVaild" label="有效性" is_valid="Y" note="M#" disp_search="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="IS_VALID" data_default="Y" edit_insert="Y" edit_update="Y" edit_delete="Y" valid_insert="Y" valid_update="Y" label_position="left" />
+     <DataEdit _uuid="ZUOwC71EnSo84mvbkieHjA" name="name" label="名称" is_valid="Y" note="M#" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="NAME" edit_insert="Y" label_icon="#design.webform.iconPickerNew" valid_insert="Y" valid_update="Y" valid_require="Y" />
+     <DataEdit _uuid="P0DSBCSVFj9]dtGxTSnupQ" name="label" label="标签" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="LABEL" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" valid_require="Y" />
+     <DataEdit _uuid="vkogCc1T7UivYHiRT645jw" name="businessCode" label="业务代码" is_valid="Y" note="M#" disp_search="Y" disp_lov="Y" disp_display="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" style_edit="editMax" data_name="BUSINESS_CODE" edit_display="Y" edit_insert="Y" edit_update="Y" valid_display="Y" valid_insert="Y" valid_update="Y" edit_copy="Y" />
+   </FrameTemplate>
+</Content>
