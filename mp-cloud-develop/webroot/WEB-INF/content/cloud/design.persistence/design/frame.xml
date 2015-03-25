@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150324161603">
+<Content name="design.frame" update_date="20150325180650">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -25,6 +25,7 @@
     </Interface>
     <Interface is_valid="Y" name="IColumn" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" inherits="IControl" note="" />
     <Interface is_valid="Y" name="MDataField" label="数据字段" class_name="org.mo.cloud.content.design.frame.common.XDataField" inherits="" note="">
+      <Attribute is_valid="Y" type="Boolean" name="data_require" label="数据必须" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_name" label="数据名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_value" label="数据内容" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />

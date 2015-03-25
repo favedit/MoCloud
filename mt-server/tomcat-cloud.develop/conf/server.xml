@@ -10,7 +10,7 @@
    </GlobalNamingResources>
    <Service name="Catalina">
    <Connector port="90" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8409" />
-   <Connector port="8129" protocol="AJP/1.3" redirectPort="8409" />
+   <Connector port="8102" protocol="AJP/1.3" redirectPort="8409" />
    <Engine name="Catalina" defaultHost="localhost">
       <Realm className="org.apache.catalina.realm.LockOutRealm">
          <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
