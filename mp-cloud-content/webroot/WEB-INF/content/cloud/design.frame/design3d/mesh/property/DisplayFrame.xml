@@ -7,7 +7,7 @@
          <Edit name="label" linker='_controlLabel' label="名称:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
       </Panel>
       <PageControl name='propertyPageControl' icon='design.panel.icon' label='信息页面'>
-         <PageSheet name='displayFrame' icon='design.panel.icon' label='显示信息' frame_source='design3d.scene.DisplayFrame'/>
+         <PageSheet name='displayFrame' icon='design.panel.icon' label='显示信息' frame_source='design3d.mesh.DisplayFrame'/>
       </PageControl>
    </Frame>
 </Content>

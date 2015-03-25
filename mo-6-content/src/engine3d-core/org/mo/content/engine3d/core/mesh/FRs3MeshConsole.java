@@ -14,6 +14,8 @@ import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
 import org.mo.content.mime.phy.FPlyFile;
@@ -109,6 +111,37 @@ public class FRs3MeshConsole
          meshStreamUnit.setCode(stream.code());
          meshStreamLogic.doInsert(meshStreamUnit);
       }
+      // 返回网格单元
+      return meshLogic.find(meshUnit.ouid());
+   }
+
+   //============================================================
+   // <T>更新网格。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param mesh 网格
+   //============================================================
+   @Override
+   public FDataResource3dMeshUnit updateMesh(ILogicContext logicContext,
+                                             FRs3Mesh mesh){
+      // 检查参数
+      String guid = mesh.guid();
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Mesh guid is null.");
+      }
+      // 查找数据
+      FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
+      FDataResource3dMeshUnit meshUnit = meshLogic.findByGuid(guid);
+      if(meshUnit == null){
+         throw new FFatalError("Mesh is not exists. (guid={1}})", meshUnit);
+      }
+      // 创建场景
+      mesh.saveUnit(meshUnit);
+      // 更新数据
+      meshLogic.doUpdate(meshUnit);
+      //............................................................
+      // 废弃临时数据
+      _storageConsole.delete(EGcStorageCatalog.Resource3dMesh, guid);
       // 返回网格单元
       return meshLogic.find(meshUnit.ouid());
    }

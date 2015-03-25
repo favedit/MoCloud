@@ -542,7 +542,7 @@ public class FRs3Material
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
       // 读取属性
-      _effectCode = xconfig.get("effect_code");
+      _effectCode = xconfig.get("effect_code", "automatic");
       // 处理所有节点
       loadConfigInfo(xconfig);
    }

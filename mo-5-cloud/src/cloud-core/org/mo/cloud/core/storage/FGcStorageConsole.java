@@ -7,10 +7,8 @@ import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteFile;
-import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -73,15 +71,15 @@ public class FGcStorageConsole
          return null;
       }
       byte[] data = (byte[])item.get("data");
-      if(data == null){
-         String fileName = _storagePath + "/" + catalog + "/" + guid + ".bin";
-         if(RFile.exists(fileName)){
-            FByteFile storgeFile = new FByteFile(fileName);
-            storgeFile.loadFile(fileName);
-            data = storgeFile.toArray();
-            storgeFile.close();
-         }
-      }
+      //      if(data == null){
+      //         String fileName = _storagePath + "/" + catalog + "/" + guid + ".bin";
+      //         if(RFile.exists(fileName)){
+      //            FByteFile storgeFile = new FByteFile(fileName);
+      //            storgeFile.loadFile(fileName);
+      //            data = storgeFile.toArray();
+      //            storgeFile.close();
+      //         }
+      //      }
       // 返回内容
       SGcStorage resource = new SGcStorage();
       resource.setData(data);
@@ -146,20 +144,27 @@ public class FGcStorageConsole
       //item.put("compress", "lzma");
       item.put("data_length", data.length);
       //item.put("compress_length", lzmaData.length);
+      item.put("data", data);
       // 检查数据限制
-      if(data.length > RInteger.SIZE_4M){
-         _logger.error(this, "store", "Storage document is too large. (size={1}, limit={2})", data.length, RInteger.SIZE_16M);
-         FByteFile storgeFile = new FByteFile(data);
-         storgeFile.saveToFile(_storagePath + "/" + catalog + "/" + guid + ".bin");
-         storgeFile.close();
-         item.put("data", null);
-      }else{
-         item.put("data", data);
-      }
+      //      if(data.length > RInteger.SIZE_4M){
+      //         _logger.error(this, "store", "Storage document is too large. (size={1}, limit={2})", data.length, RInteger.SIZE_16M);
+      //         FByteFile storgeFile = new FByteFile(data);
+      //         storgeFile.saveToFile(_storagePath + "/" + catalog + "/" + guid + ".bin");
+      //         storgeFile.close();
+      //         item.put("data", null);
+      //      }else{
+      //         item.put("data", data);
+      //      }
       // 查找内容
       DBObject search = new BasicDBObject("guid", guid);
-      // 更新处理
-      collection.update(search, item, true, false);
+      // 删除处理（不删除，更新时大小达不到16M上限就报错）
+      DBObject find = collection.findOne(search);
+      if(find != null){
+         collection.remove(find);
+      }
+      // 新建处理
+      collection.insert(item);
+      //collection.update(search, item, true, false);
       //file.close();
       return true;
    }
@@ -186,7 +191,7 @@ public class FGcStorageConsole
       DBCollection collection = _database.getCollection(catalog);
       // 查找内容
       DBObject search = new BasicDBObject("guid", guid);
-      // 更新处理
+      // 删除处理
       DBObject find = collection.findOne(search);
       if(find != null){
          collection.remove(find);

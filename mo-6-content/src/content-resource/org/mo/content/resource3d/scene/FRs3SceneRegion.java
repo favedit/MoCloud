@@ -1,18 +1,19 @@
 package org.mo.content.resource3d.scene;
 
 import org.mo.com.io.IDataInput;
-import org.mo.content.resource3d.common.FRs3Technique;
+import org.mo.content.resource3d.common.FRs3Region;
 
 //============================================================
-// <T>场景技术。</T>
+// <T>资源3D区域。</T>
 //============================================================
-public class FRs3SceneTechnique
-      extends FRs3Technique
+public class FRs3SceneRegion
+      extends FRs3Region
 {
    //============================================================
-   // <T>构造场景技术。</T>
+   // <T>构造场景区域。</T>
    //============================================================
-   public FRs3SceneTechnique(){
+   public FRs3SceneRegion(){
+      _light = new FRs3SceneLight();
    }
 
    //============================================================
@@ -22,13 +23,9 @@ public class FRs3SceneTechnique
    //============================================================
    public void importData(IDataInput input){
       // 读取属性
-      _code = input.readString();
-      // 读取网格集合
-      int passCount = input.readInt32();
-      for(int n = 0; n < passCount; n++){
-         FRs3SceneTechniquePass pass = new FRs3SceneTechniquePass();
-         pass.importData(input);
-         pushPass(pass);
-      }
+      _color.unserialize(input);
+      _camera.importData(input);
+      FRs3SceneLight light = (FRs3SceneLight)_light;
+      light.importData(input);
    }
 }

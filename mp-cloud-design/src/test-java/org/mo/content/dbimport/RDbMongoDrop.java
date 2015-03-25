@@ -17,6 +17,7 @@ public class RDbMongoDrop
       console.drop(EGcStorageCatalog.Resource3dTextureBitmap);
       console.drop(EGcStorageCatalog.Resource3dTexture);
       console.drop(EGcStorageCatalog.Resource3dTextureCompress);
+      console.drop(EGcStorageCatalog.Resource3dMesh);
       console.drop(EGcStorageCatalog.Resource3dModel);
       console.drop(EGcStorageCatalog.Resource3dTemplate);
       console.drop(EGcStorageCatalog.Resource3dSceneTheme);

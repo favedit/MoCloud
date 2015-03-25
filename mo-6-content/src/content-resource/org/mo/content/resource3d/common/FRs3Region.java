@@ -1,11 +1,8 @@
-package org.mo.content.resource3d.scene;
+package org.mo.content.resource3d.common;
 
-import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.resource3d.common.FRs3Object;
-import org.mo.content.resource3d.common.SFloatColor4;
 
 //============================================================
 // <T>资源3D区域。</T>
@@ -26,10 +23,10 @@ public class FRs3Region
    protected SFloatColor4 _color = new SFloatColor4();
 
    // 相机
-   protected FRs3SceneCamera _camera = new FRs3SceneCamera();
+   protected FRs3Camera _camera = new FRs3Camera();
 
    // 光源
-   protected FRs3SceneLight _light = new FRs3SceneLight();
+   protected FRs3Light _light = new FRs3Light();
 
    //============================================================
    // <T>构造场景区域。</T>
@@ -42,7 +39,7 @@ public class FRs3Region
    //
    // @return 相机
    //============================================================
-   public FRs3SceneCamera camera(){
+   public FRs3Camera camera(){
       return _camera;
    }
 
@@ -51,7 +48,7 @@ public class FRs3Region
    //
    // @return 光源
    //============================================================
-   public FRs3SceneLight light(){
+   public FRs3Light light(){
       return _light;
    }
 
@@ -141,17 +138,5 @@ public class FRs3Region
             throw new FFatalError("Invalid config node.");
          }
       }
-   }
-
-   //============================================================
-   // <T>从输入流反序列化数据。</T>
-   //
-   // @param input 输入流
-   //============================================================
-   public void importData(IDataInput input){
-      // 读取属性
-      _color.unserialize(input);
-      _camera.importData(input);
-      _light.importData(input);
    }
 }

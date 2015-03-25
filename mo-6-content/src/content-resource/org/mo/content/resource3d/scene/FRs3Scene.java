@@ -11,6 +11,7 @@ import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource3d.common.FRs3Region;
 import org.mo.content.resource3d.common.FRs3Resource;
 import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.content.resource3d.texture.FRs3Texture;
@@ -293,7 +294,7 @@ public class FRs3Scene
       // 导入技术
       _technique.importData(input);
       // 导入区域
-      _region.importData(input);
+      ((FRs3SceneRegion)_region).importData(input);
       // 读取层集合
       FRs3SceneLayer skyLayer = new FRs3SceneLayer();
       skyLayer.importData(input);

@@ -1,29 +1,30 @@
-package org.mo.content.resource3d.scene;
+package org.mo.content.resource3d.common;
 
-import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================
-// <T>场景显示。</T>
+// <T>场景技术过程。</T>
 //============================================================
-public class FRs3SceneProjection
+public class FRs3TechniquePass
       extends FRs3Object
 {
-   // 夹角
-   protected float _angle;
-
-   // 近平面距离
-   protected float _znear;
-
-   // 远平面距离
-   protected float _zfar;
+   // 目标尺寸
+   protected SIntSize2 _targetSize = new SIntSize2();
 
    //============================================================
-   // <T>构造场景层。</T>
+   // <T>构造场景技术过程。</T>
    //============================================================
-   public FRs3SceneProjection(){
+   public FRs3TechniquePass(){
+   }
+
+   //============================================================
+   // <T>获得目标尺寸。</T>
+   //
+   // @param SIntSize2 目标尺寸
+   //============================================================
+   public SIntSize2 targetSize(){
+      return _targetSize;
    }
 
    //============================================================
@@ -34,10 +35,7 @@ public class FRs3SceneProjection
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
-      // 存储属性
-      output.writeFloat(_angle);
-      output.writeFloat(_znear);
-      output.writeFloat(_zfar);
+      _targetSize.serialize16(output);
    }
 
    //============================================================
@@ -45,12 +43,12 @@ public class FRs3SceneProjection
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
-      _angle = xconfig.getFloat("angle");
-      _znear = xconfig.getFloat("znear");
-      _zfar = xconfig.getFloat("zfar");
+      _code = xconfig.get("code");
+      _targetSize.parse(xconfig.get("target_size"));
    }
 
    //============================================================
@@ -58,23 +56,11 @@ public class FRs3SceneProjection
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       // 存储属性
       xconfig.set("guid", makeGuid());
-      xconfig.set("angle", _angle);
-      xconfig.set("znear", _znear);
-      xconfig.set("zfar", _zfar);
-   }
-
-   //============================================================
-   // <T>从输入流反序列化数据。</T>
-   //
-   // @param input 输入流
-   //============================================================
-   public void importData(IDataInput input){
-      // 读取属性
-      _angle = input.readFloat();
-      _znear = input.readFloat();
-      _zfar = input.readFloat();
+      xconfig.set("code", _code);
+      xconfig.set("target_size", _targetSize);
    }
 }

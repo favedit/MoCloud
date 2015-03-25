@@ -32,7 +32,7 @@ public interface IRs3MeshConsole
                                       String code);
 
    //============================================================
-   // <T>新建一个网格。</T>
+   // <T>新建网格。</T>
    //
    // @param logicContext 逻辑环境
    // @param mesh 网格
@@ -40,6 +40,16 @@ public interface IRs3MeshConsole
    //============================================================
    FDataResource3dMeshUnit insert(ILogicContext logicContext,
                                   FRs3ModelMesh mesh);
+
+   //============================================================
+   // <T>更新网格。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param mesh 网格
+   // @return 网格单元
+   //============================================================
+   FDataResource3dMeshUnit updateMesh(ILogicContext logicContext,
+                                      FRs3Mesh mesh);
 
    //============================================================
    // <T>生成资源网格。</T>

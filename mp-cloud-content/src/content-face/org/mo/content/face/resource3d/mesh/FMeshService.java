@@ -1,9 +1,16 @@
 package org.mo.content.face.resource3d.mesh;
 
+import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
+import org.mo.content.resource3d.mesh.FRs3Mesh;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -14,9 +21,14 @@ import org.mo.web.protocol.context.IWebOutput;
 // <T>目录描述服务。</T>
 //============================================================
 public class FMeshService
+      extends FObject
       implements
          IMeshService
 {
+   // 网格控制台
+   @ALink
+   protected IRs3MeshConsole _meshConsole;
+
    //============================================================
    // <T>构造内容表单服务。</T>
    //============================================================
@@ -80,14 +92,35 @@ public class FMeshService
    // <T>更新配置处理。</T>
    //
    // @param context 网络环境
+   // @param logicContext 逻辑环境
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
    @Override
    public EResult update(IWebContext context,
+                         ILogicContext logicContext,
                          IWebInput input,
                          IWebOutput output){
-      // TODO Auto-generated method stub
-      return null;
+      // 检查输入
+      FXmlNode xmesh = input.config();
+      if(!xmesh.isName("Mesh")){
+         throw new FFatalError("Invalid config code.");
+      }
+      // 获得唯一编号
+      String guid = xmesh.get("guid");
+      if(RString.isEmpty(guid)){
+         String code = xmesh.get("code");
+         if(RString.isEmpty(guid)){
+            throw new FFatalError("Parameter failure. (guid={1}, code={2})", guid, code);
+         }
+         FDataResource3dMeshUnit meshUnit = _meshConsole.findByCode(logicContext, code);
+         guid = meshUnit.guid();
+      }
+      FRs3Mesh mesh = _meshConsole.makeMesh(logicContext, guid);
+      // 合并场景
+      mesh.mergeConfig(xmesh);
+      // 更新场景
+      _meshConsole.updateMesh(logicContext, mesh);
+      return EResult.Success;
    }
 }

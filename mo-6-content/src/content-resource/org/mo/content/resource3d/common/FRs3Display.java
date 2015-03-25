@@ -1,7 +1,6 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
@@ -10,7 +9,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源显示对象。</T>
 //============================================================
 public class FRs3Display
-      extends FObject
+      extends FRs3Object
 {
    // 类型名称
    protected String _typeName = "Display";
@@ -120,6 +119,7 @@ public class FRs3Display
    //
    // @param output 输出流
    //============================================================
+   @Override
    public void serialize(IDataOutput output){
       // 输出属性
       output.writeString(_typeName);
@@ -140,6 +140,7 @@ public class FRs3Display
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
@@ -166,6 +167,7 @@ public class FRs3Display
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void saveConfig(FXmlNode xconfig){
       xconfig.setName(_typeName);
       // 存储属性

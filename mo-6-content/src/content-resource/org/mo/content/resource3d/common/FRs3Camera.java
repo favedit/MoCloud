@@ -1,31 +1,32 @@
-package org.mo.content.resource3d.scene;
+package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.resource3d.common.FRs3Object;
-import org.mo.content.resource3d.common.SFloatPoint3;
-import org.mo.content.resource3d.common.SFloatVector3;
 
 //============================================================
 // <T>场景显示。</T>
 //============================================================
-public class FRs3SceneCamera
+public class FRs3Camera
       extends FRs3Object
 {
+   // 类型
    protected String _typeCd;
 
+   // 位置
    protected SFloatPoint3 _position = new SFloatPoint3();
 
+   // 方向
    protected SFloatVector3 _direction = new SFloatVector3();
 
-   protected FRs3SceneProjection _projection = new FRs3SceneProjection();
+   // 投影
+   protected FRs3Projection _projection = new FRs3Projection();
 
    //============================================================
    // <T>构造场景层。</T>
    //============================================================
-   public FRs3SceneCamera(){
+   public FRs3Camera(){
    }
 
    //============================================================

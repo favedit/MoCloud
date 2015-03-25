@@ -3,7 +3,19 @@
 <Config>
 
    <!-- ==================================================== -->
-   <!-- 设计：模型数据服务                                   -->
+   <!-- 设计：资源3D网格数据服务                             -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content.mesh'
+         face  = 'org.mo.content.face.resource3d.mesh.IMeshService'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.mesh.IMeshService'
+         class = 'org.mo.content.face.resource3d.mesh.FMeshService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：资源3D模型数据服务                             -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.content.model'
