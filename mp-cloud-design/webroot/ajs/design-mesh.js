@@ -920,18 +920,6 @@ function FDsMeshMaterial1Frame_onBuilded(p){
 }
 function FDsMeshMaterial1Frame_onOptionChanged(p){
    var o = this;
-   var t = o._activeSpace;
-   var m = o._activeMaterial;
-   var mr = m.resource();
-   var mi = mr.info();
-   mi.optionColor = o._controlOptionColor.get();
-   mi.optionAmbient = o._controlOptionAmbient.get();
-   mi.optionDiffuse = o._controlOptionDiffuse.get();
-   mi.optionSpecular = o._controlOptionSpecular.get();
-   mi.optionReflect = o._controlOptionReflect.get();
-   mi.optionEmissive = o._controlOptionEmissive.get();
-   m.reloadResource();
-   o._activeSpace.dirty();
 }
 function FDsMeshMaterial1Frame_onDataChanged(p){
    var o = this;
