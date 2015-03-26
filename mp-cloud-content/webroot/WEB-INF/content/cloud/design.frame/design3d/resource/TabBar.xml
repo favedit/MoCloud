@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.mesh.MenuBar">
-   <TabBar name="design3d.mesh.MenuBar" type='FDsSceneMenuBar' label="菜单">
+<Content name="design3d.resource.TabBar">
+   <TabBar name="design3d.resource.TabBar" type='FDsResourceTabBar' label="菜单">
       <TabButton name='pictureButton' linker='_controlPictureButton' icon='design3d.tools.save' label='图片'/>
       <TabButton name='soundButton' linker='_controlSoundButton' icon='design3d.tools.save' label='声音'/>
       <TabButton name='videoButton' linker='_controlVidioButton' icon='design3d.tools.save' label='视频'/>
