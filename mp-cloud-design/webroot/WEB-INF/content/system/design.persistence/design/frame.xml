@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150326122332">
+<Content name="design.frame" update_date="20150326212824">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -181,12 +181,16 @@
       <Attribute is_valid="Y" type="String" name="hotkey" label="热键" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
+    <Component is_valid="Y" name="ToolButtonSplit" label="工具分割按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonSplit" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonSplit" inherits="ToolButton" note="" />
     <Component is_valid="Y" name="ToolButtonCheck" label="工具选中按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonCheck" inherits="ToolButton" note="">
       <Attribute is_valid="Y" type="String" name="check" label="选中标志" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="group_name" label="分组名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="group_default" label="分组默认" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="ToolButtonSplit" label="工具分割按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonSplit" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonSplit" inherits="ToolButton" note="" />
+    <Component is_valid="Y" name="ToolButtonEdit" label="工具编辑按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonEdit" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonEdit" inherits="ToolButton" note="">
+      <Attribute is_valid="Y" type="String" name="edit_size" label="编辑大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="ToolButtonSelect" label="工具选择按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonSelect" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonSelect" inherits="ToolButton" note="" />
     <Component is_valid="Y" name="ToolButtonMenu" label="工具菜单按键" class_name="org.mo.cloud.content.design.frame.common.XToolButtonMenu" base_name="org.mo.cloud.content.design.frame.base.XBaseToolButtonMenu" inherits="ToolButton" note="" />
     <Component is_valid="Y" name="MenuBar" label="菜单栏" class_name="org.mo.cloud.content.design.frame.common.XMenuBar" base_name="org.mo.cloud.content.design.frame.base.XBaseMenuBar" inherits="IContainer" note="" />
     <Component is_valid="Y" name="MenuButton" label="菜单按键" class_name="org.mo.cloud.content.design.frame.common.XMenuButton" base_name="org.mo.cloud.content.design.frame.base.XBaseMenuButton" inherits="IControl" note="">

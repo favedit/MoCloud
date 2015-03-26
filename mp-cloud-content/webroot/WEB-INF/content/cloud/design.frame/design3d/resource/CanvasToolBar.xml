@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.CanvasToolBar">
-   <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButtonCheck name='dropButton' icon='design3d.canvas.hand' group_name='mode' group_default='dropButton' hint='观察模式'/>
-      <ToolButtonSplit/>
-      <ToolButtonCheck name='viewButton' icon='design3d.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
-   </ToolBar>
-</Content>
