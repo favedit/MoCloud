@@ -49,6 +49,22 @@ public class FGcRs3MeshConsole
    }
 
    //============================================================
+   // <T>根据全代码查找网格单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param fullCode 全代码
+   // @return 网格单元
+   //============================================================
+   @Override
+   public FGcRs3MeshUnit findByFullCode(ILogicContext logicContext,
+                                        String code){
+      String searchSql = FDataResource3dMeshLogic.FULL_CODE + "='" + code + "'";
+      FDataResource3dMeshLogic logic = logicContext.findLogic(FDataResource3dMeshLogic.class);
+      FGcRs3MeshUnit unit = logic.search(FGcRs3MeshUnit.class, searchSql);
+      return unit;
+   }
+
+   //============================================================
    // <T>删除记录前处理</T>
    //
    // @param logicContext 逻辑环境

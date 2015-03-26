@@ -765,12 +765,12 @@ public class RString
    //============================================================
    public static String nvl(String value,
                             String other){
-      if(null != value){
+      if(value != null){
          if(value.length() > 0){
             return value;
          }
       }
-      if(null != other){
+      if(other != null){
          return other;
       }
       return RString.EMPTY;

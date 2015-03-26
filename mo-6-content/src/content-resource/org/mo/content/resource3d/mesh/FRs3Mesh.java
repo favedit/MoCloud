@@ -115,19 +115,21 @@ public class FRs3Mesh
    // @param unit 数据单元
    //============================================================
    public void loadUnit(FDataResource3dMeshUnit unit){
-      // 读取属性
-      _ouid = unit.ouid();
-      _guid = unit.guid();
-      _code = unit.code();
-      _label = unit.label();
-      _outline.min.parse(unit.outlineMin());
-      _outline.max.parse(unit.outlineMax());
       // 读取配置
       if(!RString.isEmpty(unit.content())){
          FXmlDocument xdocument = new FXmlDocument();
          xdocument.loadString(unit.content());
          loadConfig(xdocument.root());
       }
+      // 读取属性
+      _ouid = unit.ouid();
+      _guid = unit.guid();
+      _code = unit.code();
+      _fullCode = unit.fullCode();
+      _label = unit.label();
+      // 读取轮廓
+      _outline.min.parse(unit.outlineMin());
+      _outline.max.parse(unit.outlineMax());
    }
 
    //============================================================
@@ -137,9 +139,10 @@ public class FRs3Mesh
    //============================================================
    public void saveUnit(FDataResource3dMeshUnit unit){
       // 存储属性
-      unit.setFullCode(_code);
       unit.setCode(_code);
+      unit.setFullCode(_fullCode);
       unit.setLabel(_label);
+      // 存储轮廓
       unit.setOutlineMin(_outline.min.toString());
       unit.setOutlineMax(_outline.max.toString());
       // 存储配置

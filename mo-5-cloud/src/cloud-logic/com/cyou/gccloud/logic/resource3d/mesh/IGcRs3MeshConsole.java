@@ -19,4 +19,14 @@ public interface IGcRs3MeshConsole
    //============================================================
    FGcRs3MeshUnit findByCode(ILogicContext logicContext,
                              String code);
+
+   //============================================================
+   // <T>根据全代码查找网格单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param fullCode 全代码
+   // @return 网格单元
+   //============================================================
+   FGcRs3MeshUnit findByFullCode(ILogicContext logicContext,
+                                 String fullCode);
 }

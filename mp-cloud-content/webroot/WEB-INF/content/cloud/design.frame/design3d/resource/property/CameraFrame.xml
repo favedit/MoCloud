@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.mesh.property.CameraFrame" update_date="20141210134046">
+   <Frame name="design3d.mesh.property.CameraFrame" type='FDsMeshCameraPropertyFrame' label="相机属性" is_valid="Y" note="">
+      <Panel name='infoPanel' icon='design.panel.icon' label='相机属性'>
+         <Edit name="guid" linker='_controlGuid' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='matrixPanel' icon='design.panel.icon' label='基本参数'>
+         <Check name="optionCamera" linker='_controlOptionCamera' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number3 name="position" linker='_controlPosition' label="位置" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number3 name="direction" linker='_controlDirection' label="方向" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

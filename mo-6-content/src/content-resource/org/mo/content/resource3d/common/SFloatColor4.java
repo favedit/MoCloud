@@ -8,7 +8,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
-// <T>三维浮点颜色。</T>
+// <T>浮点颜色。</T>
 //============================================================
 public class SFloatColor4
 {
@@ -23,6 +23,30 @@ public class SFloatColor4
 
    // 强度
    public float alpha;
+
+   //============================================================
+   // <T>构造浮点颜色。</T>
+   //============================================================
+   public SFloatColor4(){
+   }
+
+   //============================================================
+   // <T>构造浮点颜色。</T>
+   //
+   // @param red 红色
+   // @param green 绿色
+   // @param blue 蓝色
+   // @param alpha 透明色
+   //============================================================
+   public SFloatColor4(float redValue,
+                       float greenValue,
+                       float blueValue,
+                       float alphaValue){
+      red = redValue;
+      green = greenValue;
+      blue = blueValue;
+      alpha = alphaValue;
+   }
 
    //============================================================
    // <T>序列化数据到输出流。</T>
