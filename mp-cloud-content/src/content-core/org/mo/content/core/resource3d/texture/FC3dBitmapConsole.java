@@ -104,20 +104,8 @@ public class FC3dBitmapConsole
       byte[] data = null;
       synchronized(FC3dBitmapConsole.class){
          try(FImage image = new FImage(imageData)){
-            //            BufferedImage bsrc = ImageIO.read(new ByteArrayInputStream(imageData));
-            //            ImageScale scaleImage = new ImageScale();
-            //            BufferedImage bsmall = scaleImage.imageZoomOut(bsrc, 200, 150);
-            //            //         AffineTransform transform = new AffineTransform();
-            //            //         AffineTransformOp ato = new AffineTransformOp(transform, null);
-            //            //         transform.setToScale(200 / bsrc.getWidth(), 150 / bsrc.getHeight());
-            //            //         BufferedImage bsmall = new BufferedImage(200, 150, BufferedImage.TYPE_3BYTE_BGR);
-            //            //         ato.filter(bsrc, bsmall);
-            //            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            //            ImageIO.write(bsmall, "jpeg", output);
-            //            data = output.toByteArray();
             image.resizeScale(200, 150, true);
             data = image.toBytes("jpeg");
-            //data = image.toJpegBytes(0.9f);
          }catch(Exception e){
             throw new FFatalError(e);
          }

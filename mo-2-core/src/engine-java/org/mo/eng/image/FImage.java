@@ -4,7 +4,6 @@ import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -287,24 +286,24 @@ public class FImage
       if((width <= 0) || (height <= 0)){
          throw new FFatalError("Scale size is invalid. (width={1}, height={2})", width, height);
       }
-      // 创建目标
-      int imageType = alpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
-      BufferedImage image = new BufferedImage(width, height, imageType);
+      // 绘制目标
+      int type = _image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : _image.getType();
+      BufferedImage image = new BufferedImage(width, height, type);
       Graphics2D graphics = null;
       try{
          graphics = image.createGraphics();
-         if(alpha){
-            graphics.setComposite(AlphaComposite.Src);
-         }
-         Image scaledImage = _image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-         graphics.drawImage(scaledImage, 0, 0, width, height, null);
+         graphics.setComposite(AlphaComposite.Src);
+         graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+         graphics.drawImage(_image, 0, 0, width, height, null);
       }finally{
          if(graphics != null){
             graphics.dispose();
          }
       }
-      _logger.debug(this, "resize", "Resize image. (source_size={1}x{2}, target_size={3}x{4})", _image.getWidth(), _image.getHeight(), image.getWidth(), image.getHeight());
       _image = image;
+      _logger.debug(this, "resize", "Resize image. (source_size={1}x{2}, target_size={3}x{4})", _image.getWidth(), _image.getHeight(), image.getWidth(), image.getHeight());
    }
 
    //============================================================
@@ -330,8 +329,27 @@ public class FImage
       // 计算大小
       int scaleWidth = (int)(imageWidth * rate);
       int scaleHeight = (int)(imageHeight * rate);
-      // 改变尺寸
-      resize(scaleWidth, scaleHeight, alpha);
+      int left = (width - scaleWidth) >> 1;
+      int top = (height - scaleHeight) >> 1;
+      // 绘制目标
+      int type = _image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : _image.getType();
+      BufferedImage image = new BufferedImage(width, height, type);
+      Graphics2D graphics = null;
+      try{
+         graphics = image.createGraphics();
+         graphics.setComposite(AlphaComposite.Src);
+         graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+         graphics.drawImage(_image, left, top, scaleWidth, scaleHeight, null);
+      }finally{
+         if(graphics != null){
+            graphics.dispose();
+         }
+      }
+      _image = image;
+      _logger.debug(this, "resize", "Resize image. (source_size={1}x{2}, target_size={3}x{4})", _image.getWidth(), _image.getHeight(), image.getWidth(), image.getHeight());
+      //resize(scaleWidth, scaleHeight, alpha);
    }
 
    //============================================================
