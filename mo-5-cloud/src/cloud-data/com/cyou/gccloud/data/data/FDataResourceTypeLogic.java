@@ -38,7 +38,7 @@ public class FDataResourceTypeLogic
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
    // 字段代码的定义。
@@ -50,11 +50,8 @@ public class FDataResourceTypeLogic
    // 字段图标地址的定义。
    public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
 
-   // 字段是否显示的定义。
-   public final static SLogicFieldInfo DISPLAY_CD = new SLogicFieldInfo("DISPLAY_CD");
-
-   // 字段显示顺序的定义。
-   public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
+   // 字段描述的定义。
+   public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -72,7 +69,7 @@ public class FDataResourceTypeLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "OUID,OVLD,GUID,CODE,LABEL,ICON_URL,DISPLAY_CD,DISPLAY_ORDER,NOTE,CREATE_USER_ID,CREATE_DATE,UPDATE_USER_ID,UPDATE_DATE";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CODE`,`LABEL`,`ICON_URL`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源类型表逻辑单元。</T>
@@ -357,6 +354,20 @@ public class FDataResourceTypeLogic
    // @return 数据单元集合
    //============================================================
    public FLogicDataset<FDataResourceTypeUnit> fetch(CharSequence whereSql,
+                                                     CharSequence orderSql){
+      return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param whereSql 条件命令
+   // @param orderSql 排序命令
+   // @param pageSize 分页大小
+   // @param page 分页号码
+   // @return 数据单元集合
+   //============================================================
+   public FLogicDataset<FDataResourceTypeUnit> fetch(CharSequence whereSql,
                                                      CharSequence orderSql,
                                                      int pageSize,
                                                      int page){
@@ -398,6 +409,22 @@ public class FDataResourceTypeLogic
                                                      int pageSize,
                                                      int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param clazz 单元类型
+   // @param whereSql 条件命令
+   // @return 数据单元集合
+   //============================================================
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql){
+      // 生成命令
+      String code = innerMemcacheKey(null, whereSql, null, null);
+      String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
+      // 获得数据
+      return fetchSql(clazz, code, sql, 0, 0);
    }
 
    //============================================================
@@ -617,8 +644,7 @@ public class FDataResourceTypeLogic
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`ICON_URL`");
-      cmd.append(",`DISPLAY_CD`");
-      cmd.append(",`DISPLAY_ORDER`");
+      cmd.append(",`DESCRIPTION`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -662,9 +688,14 @@ public class FDataResourceTypeLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.displayCd());
-      cmd.append(',');
-      cmd.append(unit.displayOrder());
+      String description = unit.description();
+      if(RString.isEmpty(description)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(description));
+         cmd.append('\'');
+      }
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -781,13 +812,16 @@ public class FDataResourceTypeLogic
             cmd.append('\'');
          }
       }
-      if(unit.isDisplayCdChanged()){
-         cmd.append(",`DISPLAY_CD`=");
-         cmd.append(unit.displayCd());
-      }
-      if(unit.isDisplayOrderChanged()){
-         cmd.append(",`DISPLAY_ORDER`=");
-         cmd.append(unit.displayOrder());
+      if(unit.isDescriptionChanged()){
+         cmd.append(",`DESCRIPTION`=");
+         String description = unit.description();
+         if(RString.isEmpty(description)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(description));
+            cmd.append('\'');
+         }
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

@@ -11,10 +11,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源信息表逻辑单元。</T>
+// <T>资源目录表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceResourceUnit
+public class FDataResourceCatalogUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -46,18 +46,6 @@ public class FDataResourceResourceUnit
 
    // 字段项目编号的定义。
    protected long _projectId;
-
-   // 存储字段类型编号的定义。
-   private long __typeId;
-
-   // 字段类型编号的定义。
-   protected long _typeId;
-
-   // 存储字段目录编号的定义。
-   private long __catalogId;
-
-   // 字段目录编号的定义。
-   protected long _catalogId;
 
    // 存储字段代码的定义。
    private String __code;
@@ -114,9 +102,9 @@ public class FDataResourceResourceUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源信息表逻辑单元。</T>
+   // <T>构造资源目录表逻辑单元。</T>
    //============================================================
-   public FDataResourceResourceUnit(){
+   public FDataResourceCatalogUnit(){
    }
 
    //============================================================
@@ -274,82 +262,6 @@ public class FDataResourceResourceUnit
    //============================================================
    public void setProjectId(long value){
       _projectId = value;
-   }
-
-   //============================================================
-   // <T>判断类型编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isTypeIdChanged(){
-      return __typeId != _typeId;
-   }
-
-   //============================================================
-   // <T>获得类型编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long typeId(){
-      return _typeId;
-   }
-
-   //============================================================
-   // <T>获得类型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceTypeUnit type(){
-      FDataResourceTypeLogic logic = _logicContext.findLogic(FDataResourceTypeLogic.class);
-      FDataResourceTypeUnit unit = logic.find(_typeId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置类型编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setTypeId(long value){
-      _typeId = value;
-   }
-
-   //============================================================
-   // <T>判断目录编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCatalogIdChanged(){
-      return __catalogId != _catalogId;
-   }
-
-   //============================================================
-   // <T>获得目录编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long catalogId(){
-      return _catalogId;
-   }
-
-   //============================================================
-   // <T>获得目录编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceCatalogUnit catalog(){
-      FDataResourceCatalogLogic logic = _logicContext.findLogic(FDataResourceCatalogLogic.class);
-      FDataResourceCatalogUnit unit = logic.find(_catalogId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置目录编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCatalogId(long value){
-      _catalogId = value;
    }
 
    //============================================================
@@ -614,10 +526,6 @@ public class FDataResourceResourceUnit
             return Long.toString(_userId);
          case "project_id":
             return Long.toString(_projectId);
-         case "type_id":
-            return Long.toString(_typeId);
-         case "catalog_id":
-            return Long.toString(_catalogId);
          case "code":
             return _code;
          case "label":
@@ -664,12 +572,6 @@ public class FDataResourceResourceUnit
             break;
          case "project_id":
             _projectId = RLong.parse(value);
-            break;
-         case "type_id":
-            _typeId = RLong.parse(value);
-            break;
-         case "catalog_id":
-            _catalogId = RLong.parse(value);
             break;
          case "code":
             _code = value;
@@ -733,14 +635,6 @@ public class FDataResourceResourceUnit
                __projectId = RLong.parse(value);
                _projectId = __projectId;
                break;
-            case "type_id":
-               __typeId = RLong.parse(value);
-               _typeId = __typeId;
-               break;
-            case "catalog_id":
-               __catalogId = RLong.parse(value);
-               _catalogId = __catalogId;
-               break;
             case "code":
                __code = value;
                _code = __code;
@@ -794,8 +688,6 @@ public class FDataResourceResourceUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("projectId", _projectId);
-      row.set("typeId", _typeId);
-      row.set("catalogId", _catalogId);
       row.set("code", _code);
       row.set("label", _label);
       row.set("iconUrl", _iconUrl);
@@ -820,8 +712,6 @@ public class FDataResourceResourceUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
-      map.put("typeId", RLong.toString(_typeId));
-      map.put("catalogId", RLong.toString(_catalogId));
       map.put("code", _code);
       map.put("label", _label);
       map.put("iconUrl", _iconUrl);

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="ca7ec234-c151-49e6-99fa-2e0d94b16a4c" name="data.resource.type" label="M#12cn15资源类型表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-RS-TYPE" data_name="DT_RES_TYPE" data_alias="DT_RES_TYP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldString _uuid="05a0d041-59d6-4ee4-956f-5c39e87c4195" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="3b8b8ebf-d3a1-48a6-b767-0eceb409a6f8" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="13e9ff86-26bc-40e9-b1a5-118d0b06cf77" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldString _uuid="0133a604-3578-4191-bf11-b3505b00e606" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldTemplate _uuid="ad0e8971-b383-4310-9ef2-8bfa6df87854" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

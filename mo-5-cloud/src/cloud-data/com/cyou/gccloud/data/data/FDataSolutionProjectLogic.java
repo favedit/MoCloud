@@ -1,8 +1,9 @@
-package com.cyou.gccloud.data.cache;
+package com.cyou.gccloud.data.data;
 
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
+import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FString;
@@ -19,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>系统会话表逻辑。</T>
+// <T>方案项目信息逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FCacheSystemSessionLogic
+public class FDataSolutionProjectLogic
       extends FLogicTable
 {
-   // 系统会话表的定义。
-   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("cache");
+   // 方案项目信息的定义。
+   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 系统会话表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("cache.system.session", "CC_SYS_SESSION");
+   // 方案项目信息的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.solution.project", "DT_SOL_PROJECT");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -43,8 +44,23 @@ public class FCacheSystemSessionLogic
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
-   // 字段项目编号的定义。
-   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+   // 字段代码的定义。
+   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+
+   // 字段真实名称的定义。
+   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段图标地址的定义。
+   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
+
+   // 字段描述的定义。
+   public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
+
+   // 字段内容的定义。
+   public final static SLogicFieldInfo CONTENT = new SLogicFieldInfo("CONTENT");
+
+   // 字段备注的定义。
+   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -59,25 +75,25 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`CODE`,`LABEL`,`ICON_URL`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造系统会话表逻辑单元。</T>
+   // <T>构造方案项目信息逻辑单元。</T>
    //============================================================
-   public FCacheSystemSessionLogic(){
+   public FDataSolutionProjectLogic(){
       _name = TABLE.name();
-      _classUnit = FCacheSystemSessionUnit.class;
+      _classUnit = FDataSolutionProjectUnit.class;
    }
 
    //============================================================
-   // <T>构造系统会话表逻辑单元。</T>
+   // <T>构造方案项目信息逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FCacheSystemSessionLogic(ILogicContext context){
+   public FDataSolutionProjectLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FCacheSystemSessionUnit.class;
+      _classUnit = FDataSolutionProjectUnit.class;
    }
 
    //============================================================
@@ -211,7 +227,7 @@ public class FCacheSystemSessionLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FCacheSystemSessionUnit());
+            unit = (T)(new FDataSolutionProjectUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -227,8 +243,8 @@ public class FCacheSystemSessionLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FCacheSystemSessionUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FCacheSystemSessionUnit.class, guid);
+   public FDataSolutionProjectUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataSolutionProjectUnit.class, guid);
    }
 
    //============================================================
@@ -266,8 +282,8 @@ public class FCacheSystemSessionLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FCacheSystemSessionUnit search(CharSequence whereSql){
-      return search(null, FCacheSystemSessionUnit.class, whereSql);
+   public FDataSolutionProjectUnit search(CharSequence whereSql){
+      return search(null, FDataSolutionProjectUnit.class, whereSql);
    }
 
    //============================================================
@@ -304,7 +320,7 @@ public class FCacheSystemSessionLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -315,8 +331,8 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(int pageSize,
-                                                       int page){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(int pageSize,
+                                                        int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -328,9 +344,9 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence whereSql,
-                                                       int pageSize,
-                                                       int page){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(CharSequence whereSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -343,8 +359,8 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence whereSql,
-                                                       CharSequence orderSql){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(CharSequence whereSql,
+                                                        CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -357,10 +373,10 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence whereSql,
-                                                       CharSequence orderSql,
-                                                       int pageSize,
-                                                       int page){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(CharSequence whereSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -374,11 +390,11 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence fields,
-                                                       CharSequence whereSql,
-                                                       CharSequence orderSql,
-                                                       int pageSize,
-                                                       int page){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(CharSequence fields,
+                                                        CharSequence whereSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -392,12 +408,12 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetch(CharSequence fields,
-                                                       CharSequence whereSql,
-                                                       CharSequence groupSql,
-                                                       CharSequence orderSql,
-                                                       int pageSize,
-                                                       int page){
+   public FLogicDataset<FDataSolutionProjectUnit> fetch(CharSequence fields,
+                                                        CharSequence whereSql,
+                                                        CharSequence groupSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -518,10 +534,10 @@ public class FCacheSystemSessionLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetchSql(CharSequence code,
-                                                          CharSequence sql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataSolutionProjectUnit> fetchSql(CharSequence code,
+                                                           CharSequence sql,
+                                                           int pageSize,
+                                                           int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -546,7 +562,7 @@ public class FCacheSystemSessionLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FCacheSystemSessionUnit>(FCacheSystemSessionUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataSolutionProjectUnit>(FDataSolutionProjectUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -559,7 +575,7 @@ public class FCacheSystemSessionLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FCacheSystemSessionUnit> fetchAll(){
+   public FLogicDataset<FDataSolutionProjectUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -572,8 +588,8 @@ public class FCacheSystemSessionLogic
    //
    // @return 数据单元
    //============================================================
-   public FCacheSystemSessionUnit doPrepare(){
-      FCacheSystemSessionUnit unit = new FCacheSystemSessionUnit();
+   public FDataSolutionProjectUnit doPrepare(){
+      FDataSolutionProjectUnit unit = new FDataSolutionProjectUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -600,7 +616,7 @@ public class FCacheSystemSessionLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FCacheSystemSessionUnit unit = (FCacheSystemSessionUnit)logicUnit;
+      FDataSolutionProjectUnit unit = (FDataSolutionProjectUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -614,7 +630,7 @@ public class FCacheSystemSessionLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FCacheSystemSessionUnit unit = (FCacheSystemSessionUnit)logicUnit;
+      FDataSolutionProjectUnit unit = (FDataSolutionProjectUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -632,7 +648,12 @@ public class FCacheSystemSessionLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
-      cmd.append(",`PROJECT_ID`");
+      cmd.append(",`CODE`");
+      cmd.append(",`LABEL`");
+      cmd.append(",`ICON_URL`");
+      cmd.append(",`DESCRIPTION`");
+      cmd.append(",`CONTENT`");
+      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -655,11 +676,58 @@ public class FCacheSystemSessionLogic
          cmd.append(userId);
       }
       cmd.append(',');
-      long projectId = unit.projectId();
-      if(projectId == 0){
+      String code = unit.code();
+      if(RString.isEmpty(code)){
          cmd.append("NULL");
       }else{
-         cmd.append(projectId);
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(code));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String label = unit.label();
+      if(RString.isEmpty(label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String iconUrl = unit.iconUrl();
+      if(RString.isEmpty(iconUrl)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(iconUrl));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String description = unit.description();
+      if(RString.isEmpty(description)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(description));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String content = unit.content();
+      if(RString.isEmpty(content)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(content));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String note = unit.note();
+      if(RString.isEmpty(note)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(note));
+         cmd.append('\'');
       }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
@@ -696,7 +764,7 @@ public class FCacheSystemSessionLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FCacheSystemSessionUnit unit = (FCacheSystemSessionUnit)logicUnit;
+      FDataSolutionProjectUnit unit = (FDataSolutionProjectUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -715,7 +783,7 @@ public class FCacheSystemSessionLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FCacheSystemSessionUnit unit = (FCacheSystemSessionUnit)logicUnit;
+      FDataSolutionProjectUnit unit = (FDataSolutionProjectUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -744,13 +812,70 @@ public class FCacheSystemSessionLogic
             cmd.append(userId);
          }
       }
-      if(unit.isProjectIdChanged()){
-         cmd.append(",`PROJECT_ID`=");
-         long projectId = unit.projectId();
-         if(projectId == 0){
+      if(unit.isCodeChanged()){
+         cmd.append(",`CODE`=");
+         String code = unit.code();
+         if(RString.isEmpty(code)){
             cmd.append("NULL");
          }else{
-            cmd.append(projectId);
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(code));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isLabelChanged()){
+         cmd.append(",`LABEL`=");
+         String label = unit.label();
+         if(RString.isEmpty(label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isIconUrlChanged()){
+         cmd.append(",`ICON_URL`=");
+         String iconUrl = unit.iconUrl();
+         if(RString.isEmpty(iconUrl)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(iconUrl));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDescriptionChanged()){
+         cmd.append(",`DESCRIPTION`=");
+         String description = unit.description();
+         if(RString.isEmpty(description)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(description));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isContentChanged()){
+         cmd.append(",`CONTENT`=");
+         String content = unit.content();
+         if(RString.isEmpty(content)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(content));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isNoteChanged()){
+         cmd.append(",`NOTE`=");
+         String note = unit.note();
+         if(RString.isEmpty(note)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(note));
+            cmd.append('\'');
          }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
@@ -773,7 +898,7 @@ public class FCacheSystemSessionLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FCacheSystemSessionUnit unit = (FCacheSystemSessionUnit)logicUnit;
+      FDataSolutionProjectUnit unit = (FDataSolutionProjectUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
