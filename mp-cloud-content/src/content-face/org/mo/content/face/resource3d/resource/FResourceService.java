@@ -61,7 +61,7 @@ public class FResourceService
       if(typeCd.equals("mesh")){
          String whereSql = null;
          if(!RString.isEmpty(serach)){
-            whereSql = FDataResource3dMeshLogic.CODE + " LIKE '%" + serach + "%'";
+            whereSql = FDataResource3dMeshLogic.FULL_CODE + " LIKE '%" + serach + "%'";
          }
          FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
          FLogicDataset<FDataResource3dMeshUnit> meshUnits = meshLogic.fetch(whereSql, pageSize, page);
@@ -75,7 +75,7 @@ public class FResourceService
             FXmlNode xitem = xitems.createNode("Item");
             xitem.set("guid", meshUnit.guid());
             xitem.set("type", "mesh");
-            xitem.set("code", meshUnit.code());
+            xitem.set("code", meshUnit.fullCode());
             xitem.set("label", meshUnit.label());
          }
       }else{

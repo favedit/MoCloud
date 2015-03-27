@@ -7,24 +7,24 @@
 }
 
 /* ------------------------------------------------------ */
-/* MEditChange                                            */
+/* MUiEditChange                                          */
 /* ------------------------------------------------------ */
-.MEditChange_ChangePanel{
+.MUiEditChange_ChangePanel{
    cursor: pointer;
 }
 
-.MEditChange_ChangeIcon{
+.MUiEditChange_ChangeIcon{
    display: none;
 }
 
 /* ------------------------------------------------------ */
-/* MEditDrop                                              */
+/* MUiEditDrop                                            */
 /* ------------------------------------------------------ */
-.MEditDrop_DropPanel{
+.MUiEditDrop_DropPanel{
    cursor: pointer;
 }
 
-.MEditDrop_DropIcon{
+.MUiEditDrop_DropIcon{
 }
 
 /* ------------------------------------------------------ */
