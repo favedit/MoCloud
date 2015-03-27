@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.resource.TabBar">
    <TabBar name="design3d.resource.TabBar" type='FDsResourceTabBar' label="菜单">
-      <TabButton name='pictureButton' linker='_controlPictureButton' icon='design3d.tools.save' label='图片'/>
-      <TabButton name='soundButton' linker='_controlSoundButton' icon='design3d.tools.save' label='声音'/>
-      <TabButton name='videoButton' linker='_controlVidioButton' icon='design3d.tools.save' label='视频'/>
-      <TabButton name='textureButton' linker='_controlTextureButton' icon='design3d.tools.save' label='纹理'/>
-      <TabButton name='materialButton' linker='_controlMaterialButton' icon='design3d.tools.save' label='材质'/>
-      <TabButton name='meshButton' linker='_controlMeshButton' icon='design3d.tools.save' label='网格'/>
-      <TabButton name='modelButton' linker='_controlModelButton' icon='design3d.tools.save' label='模型'/>
-      <TabButton name='templateButton' linker='_controlTemplateButton' icon='design3d.tools.save' label='模板'/>
-      <TabButton name='sceneButton' linker='_controlSceneButton' icon='design3d.tools.save' label='场景'/>
+      <TabButton name='picture' linker='_controlPictureButton' icon='design3d.tools.save' label='图片'/>
+      <TabButton name='sound' linker='_controlSoundButton' icon='design3d.tools.save' label='声音'/>
+      <TabButton name='video' linker='_controlVidioButton' icon='design3d.tools.save' label='视频'/>
+      <TabButton name='texture' linker='_controlTextureButton' icon='design3d.tools.save' label='纹理'/>
+      <TabButton name='material' linker='_controlMaterialButton' icon='design3d.tools.save' label='材质'/>
+      <TabButton name='mesh' linker='_controlMeshButton' icon='design3d.tools.save' label='网格'/>
+      <TabButton name='model' linker='_controlModelButton' icon='design3d.tools.save' label='模型'/>
+      <TabButton name='template' linker='_controlTemplateButton' icon='design3d.tools.save' label='模板'/>
+      <TabButton name='scene' linker='_controlSceneButton' icon='design3d.tools.save' label='场景'/>
    </TabBar>
 </Content>

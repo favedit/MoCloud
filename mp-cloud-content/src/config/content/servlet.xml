@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Config>   
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 设计：资源预览数据获取处理                                   -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.resource.preview'
+         face  = 'org.mo.content.face.resource3d.resource.IPreviewServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.resource.IPreviewServlet'
+         class = 'org.mo.content.face.resource3d.resource.FPreviewServlet'
+         scope = 'global'/>
 
    <!-- ============================================================ -->
    <!-- 设计：纹理位图数据获取处理                                   -->

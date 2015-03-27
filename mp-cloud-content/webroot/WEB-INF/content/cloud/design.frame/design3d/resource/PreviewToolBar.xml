@@ -5,6 +5,6 @@
       <ToolButton name='updateButton' linker='_controlUpdateButton' icon='design3d.tools.update' label='编辑' />
       <ToolButton name='deleteButton' linker='_controlDeleteButton' icon='design3d.tools.delete' label='删除' />
       <ToolButtonSplit/>
-      <ToolButtonCheck name='rotationButton' icon='design3d.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='rotationButton' linker='_controlRotationButton' icon='design3d.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
    </ToolBar>
 </Content>
