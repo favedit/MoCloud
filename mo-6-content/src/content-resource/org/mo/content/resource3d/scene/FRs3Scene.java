@@ -326,13 +326,13 @@ public class FRs3Scene
    // @param unit 数据单元
    //============================================================
    public void loadThemeUnit(FDataResource3dSceneThemeUnit unit){
-      // 加载属性
-      _themeGuid = unit.guid();
-      _themeCode = unit.code();
       // 读取配置
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadString(unit.content());
       loadConfig(xdocument.root());
+      // 加载属性
+      _themeGuid = unit.guid();
+      _themeCode = unit.code();
    }
 
    //============================================================

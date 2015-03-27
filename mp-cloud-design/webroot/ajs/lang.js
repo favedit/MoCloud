@@ -1478,6 +1478,7 @@ function TNode(){
    o.node         = TNode_node;
    o.nodes        = TNode_nodes;
    o.get          = TNode_get;
+   o.getInteger   = TNode_getInteger;
    o.set          = TNode_set;
    o.setBoolean   = TNode_setBoolean;
    o.setFloat     = TNode_setFloat;
@@ -1539,6 +1540,9 @@ function TNode_nodes(){
 }
 function TNode_get(n, v){
    return this._attributes ? this._attributes.get(n, v) : null;
+}
+function TNode_getInteger(n, v){
+   return RInteger.parse(this.get(n, v));
 }
 function TNode_set(n, v){
    if(v != null){
@@ -1784,8 +1788,9 @@ function TSpeed_toString(){
    var o = this;
    return o._span + ' (' + o._spanMin + ' - ' + o._spanMax + ')';
 }
-function TUnsupportError(po, pm, pp){
+function TUnsupportError(po, pp){
    var o = this;
+   var pm = 'Unsupport method. (name={1})'
    var r = new TString();
    var f = TUnsupportError.caller;
    var s = new TString();
@@ -1807,7 +1812,7 @@ function TUnsupportError(po, pm, pp){
    }
    var a = arguments;
    var c = a.length;
-   for(var n = 2; n < c; n++){
+   for(var n = 1; n < c; n++){
       var v = a[n];
       var vs = null;
       if(typeof(v) == 'function'){
@@ -3489,20 +3494,20 @@ function RInteger_format(v, l, p){
    }
    return v;
 }
-function RInteger_toRange(v, i, a){
-   if(v == null){
-      v = 0;
+function RInteger_toRange(value, min, max){
+   if(value == null){
+      value = 0;
    }
-   if(isNaN(v)){
-      v = 0;
+   if(isNaN(value)){
+      value = 0;
    }
-   if(v < i){
-      v = i;
+   if(value < min){
+      value = min;
    }
-   if(v > a){
-      v = a;
+   if(value > max){
+      value = max;
    }
-   return v;
+   return value;
 }
 function RInteger_sum(){
    var r = 0;
@@ -3833,7 +3838,9 @@ function RObject_free(p){
 }
 function RObject_dispose(p){
    if(p){
-      p.dispose();
+      if(!p.__dispose){
+         p.dispose();
+      }
    }
    return null;
 }

@@ -34,4 +34,7 @@ public class EGcStorageCatalog
 
    // 资源3D场景
    public final static String Resource3dSceneTheme = "resource3d.scene.theme";
+
+   // 资源位图预览
+   public final static String ResourceCacheBitmap = "cache.bitmap.preview";
 }

@@ -3,6 +3,18 @@
 <Config>
 
    <!-- ==================================================== -->
+   <!-- 设计：资源3D数据服务                             -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content.resource'
+         face  = 'org.mo.content.face.resource3d.resource.IResourceService'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.resource.IResourceService'
+         class = 'org.mo.content.face.resource3d.resource.FResourceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
    <!-- 设计：资源3D网格数据服务                             -->
    <!-- ==================================================== -->
    <WebService

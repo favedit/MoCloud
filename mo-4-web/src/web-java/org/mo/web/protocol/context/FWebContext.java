@@ -474,6 +474,25 @@ public class FWebContext
    // <T>根据名称获得参数信息。</T>
    //
    // @param name 名称
+   // @param defaultValue 默认内容
+   // @return 参数信息
+   //============================================================
+   @Override
+   public int parameterAsInteger(String name,
+                                 int defaultValue){
+      if(_parameters.contains(name)){
+         String value = _parameters.find(name);
+         if(value != null){
+            return RInteger.parse(value);
+         }
+      }
+      return defaultValue;
+   }
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
    // @return 参数信息
    //============================================================
    @Override

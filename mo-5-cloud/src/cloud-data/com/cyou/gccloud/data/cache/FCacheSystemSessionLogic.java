@@ -43,6 +43,9 @@ public class FCacheSystemSessionLogic
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
+   // 字段项目编号的定义。
+   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -56,7 +59,7 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
@@ -629,6 +632,7 @@ public class FCacheSystemSessionLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
+      cmd.append(",`PROJECT_ID`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -649,6 +653,13 @@ public class FCacheSystemSessionLogic
          cmd.append("NULL");
       }else{
          cmd.append(userId);
+      }
+      cmd.append(',');
+      long projectId = unit.projectId();
+      if(projectId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(projectId);
       }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
@@ -731,6 +742,15 @@ public class FCacheSystemSessionLogic
             cmd.append("NULL");
          }else{
             cmd.append(userId);
+         }
+      }
+      if(unit.isProjectIdChanged()){
+         cmd.append(",`PROJECT_ID`=");
+         long projectId = unit.projectId();
+         if(projectId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(projectId);
          }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");

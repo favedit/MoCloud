@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.CanvasToolBar">
+   <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
+      <ToolButtonEdit name='searchEdit' linker='_controlSearchEdit' icon='design3d.tools.search' label='搜索' edit_size='200,0'/>
+      <ToolButtonSplit/>
+      <ToolButton name='firstButton' linker='_controlFirstButton' icon='design3d.tools.first' label='首页' hint='场景旋转播放开关'/>
+      <ToolButton name='priorButton' linker='_controlPriorButton' icon='design3d.tools.prior' label='上页' hint='场景旋转播放开关'/>
+      <ToolButtonEdit name='pageEdit' linker='_controlPageEdit' edit_size='60,0'/>
+      <ToolButton name='nextButton' linker='_controlNextButton' icon='design3d.tools.next' label='下页' hint='场景旋转播放开关'/>
+      <ToolButton name='lastButton' linker='_controlLastButton' icon='design3d.tools.last' label='尾页' hint='场景旋转播放开关'/>
+   </ToolBar>
+</Content>

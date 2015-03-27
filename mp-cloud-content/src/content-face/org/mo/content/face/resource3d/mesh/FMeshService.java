@@ -1,6 +1,5 @@
 package org.mo.content.face.resource3d.mesh;
 
-import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dModelLogic;
 import com.cyou.gccloud.data.data.FDataResource3dModelUnit;
 import org.mo.com.lang.EResult;
@@ -109,15 +108,10 @@ public class FMeshService
       // 获得唯一编号
       String guid = xmesh.get("guid");
       if(RString.isEmpty(guid)){
-         String code = xmesh.get("code");
-         if(RString.isEmpty(guid)){
-            throw new FFatalError("Parameter failure. (guid={1}, code={2})", guid, code);
-         }
-         FDataResource3dMeshUnit meshUnit = _meshConsole.findByCode(logicContext, code);
-         guid = meshUnit.guid();
+         throw new FFatalError("Parameter guid is empry. (guid={1})", guid);
       }
-      FRs3Mesh mesh = _meshConsole.makeMesh(logicContext, guid);
       // 合并场景
+      FRs3Mesh mesh = _meshConsole.makeMesh(logicContext, guid);
       mesh.mergeConfig(xmesh);
       // 更新场景
       _meshConsole.updateMesh(logicContext, mesh);

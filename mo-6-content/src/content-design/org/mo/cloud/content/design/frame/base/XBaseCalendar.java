@@ -149,6 +149,10 @@ public abstract class XBaseCalendar
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
+   // 数据必须的定义
+   @AContentField
+   public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
+
    // 数据名称的定义
    @AContentField
    public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
@@ -318,6 +322,10 @@ public abstract class XBaseCalendar
    // 编辑尺寸
    @AName("edit_size")
    protected String _editSize;
+
+   // 数据必须
+   @AName("data_require")
+   protected boolean _dataRequire;
 
    // 数据名称
    @AName("data_name")
@@ -931,6 +939,24 @@ public abstract class XBaseCalendar
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据必须的内容。</T>
+   //
+   // @return 数据必须
+   //============================================================
+   public Boolean getDataRequire(){
+      return _dataRequire;
+   }
+
+   //============================================================
+   // <T>设置数据必须的内容。</T>
+   //
+   // @param value 数据必须
+   //============================================================
+   public void setDataRequire(Boolean value){
+      _dataRequire = value;
    }
 
    //============================================================

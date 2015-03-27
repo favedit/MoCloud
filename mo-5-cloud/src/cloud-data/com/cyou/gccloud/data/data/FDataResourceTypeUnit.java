@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -30,10 +29,10 @@ public class FDataResourceTypeUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段对象唯一标识的定义。
+   // 存储字段全局唯一标识的定义。
    private String __guid;
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    protected String _guid;
 
    // 存储字段代码的定义。
@@ -54,17 +53,11 @@ public class FDataResourceTypeUnit
    // 字段图标地址的定义。
    protected String _iconUrl;
 
-   // 存储字段是否显示的定义。
-   private int __displayCd;
+   // 存储字段描述的定义。
+   private String __description;
 
-   // 字段是否显示的定义。
-   protected int _displayCd;
-
-   // 存储字段显示顺序的定义。
-   private int __displayOrder;
-
-   // 字段显示顺序的定义。
-   protected int _displayOrder;
+   // 字段描述的定义。
+   protected String _description;
 
    // 存储字段备注的定义。
    private String __note;
@@ -157,7 +150,7 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>判断对象唯一标识的数据是否改变。</T>
+   // <T>判断全局唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -166,7 +159,7 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>获得对象唯一标识的数据内容。</T>
+   // <T>获得全局唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -175,7 +168,7 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>设置对象唯一标识的数据内容。</T>
+   // <T>设置全局唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -265,57 +258,30 @@ public class FDataResourceTypeUnit
    }
 
    //============================================================
-   // <T>判断是否显示的数据是否改变。</T>
+   // <T>判断描述的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDisplayCdChanged(){
-      return __displayCd != _displayCd;
+   public boolean isDescriptionChanged(){
+      return !RString.equals(__description, _description);
    }
 
    //============================================================
-   // <T>获得是否显示的数据内容。</T>
+   // <T>获得描述的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int displayCd(){
-      return _displayCd;
+   public String description(){
+      return _description;
    }
 
    //============================================================
-   // <T>设置是否显示的数据内容。</T>
+   // <T>设置描述的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDisplayCd(int value){
-      _displayCd = value;
-   }
-
-   //============================================================
-   // <T>判断显示顺序的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDisplayOrderChanged(){
-      return __displayOrder != _displayOrder;
-   }
-
-   //============================================================
-   // <T>获得显示顺序的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int displayOrder(){
-      return _displayOrder;
-   }
-
-   //============================================================
-   // <T>设置显示顺序的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDisplayOrder(int value){
-      _displayOrder = value;
+   public void setDescription(String value){
+      _description = value;
    }
 
    //============================================================
@@ -474,10 +440,8 @@ public class FDataResourceTypeUnit
             return _label;
          case "icon_url":
             return _iconUrl;
-         case "display_cd":
-            return RInteger.toString(_displayCd);
-         case "display_order":
-            return RInteger.toString(_displayOrder);
+         case "description":
+            return _description;
          case "note":
             return _note;
          case "create_user_id":
@@ -520,11 +484,8 @@ public class FDataResourceTypeUnit
          case "icon_url":
             _iconUrl = value;
             break;
-         case "display_cd":
-            _displayCd = RInteger.parse(value);
-            break;
-         case "display_order":
-            _displayOrder = RInteger.parse(value);
+         case "description":
+            _description = value;
             break;
          case "note":
             _note = value;
@@ -580,13 +541,9 @@ public class FDataResourceTypeUnit
                __iconUrl = value;
                _iconUrl = __iconUrl;
                break;
-            case "display_cd":
-               __displayCd = RInteger.parse(value);
-               _displayCd = __displayCd;
-               break;
-            case "display_order":
-               __displayOrder = RInteger.parse(value);
-               _displayOrder = __displayOrder;
+            case "description":
+               __description = value;
+               _description = __description;
                break;
             case "note":
                __note = value;
@@ -626,8 +583,7 @@ public class FDataResourceTypeUnit
       row.set("code", _code);
       row.set("label", _label);
       row.set("iconUrl", _iconUrl);
-      row.set("displayCd", _displayCd);
-      row.set("displayOrder", _displayOrder);
+      row.set("description", _description);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -649,8 +605,7 @@ public class FDataResourceTypeUnit
       map.put("code", _code);
       map.put("label", _label);
       map.put("iconUrl", _iconUrl);
-      map.put("displayCd", RInteger.toString(_displayCd));
-      map.put("displayOrder", RInteger.toString(_displayOrder));
+      map.put("description", _description);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

@@ -1,6 +1,7 @@
 package org.mo.content.face.resource3d.mesh;
 
-import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
+import com.cyou.gccloud.logic.resource3d.mesh.FGcRs3MeshUnit;
+import com.cyou.gccloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -31,6 +32,10 @@ public class FMeshServlet
 
    // 缓冲时间
    protected static long CacheTimeout = 3600 * 24 * 7 * 4;
+
+   // 数据网格控制台
+   @ALink
+   protected IGcRs3MeshConsole _dataMeshConsole;
 
    // 资源网格接口
    @ALink
@@ -63,8 +68,15 @@ public class FMeshServlet
       }
       // 获得唯一编号
       if(RString.isEmpty(guid)){
-         FDataResource3dMeshUnit unit = _meshConsole.findByCode(logicContext, code);
-         guid = unit.guid();
+         FGcRs3MeshUnit unit = _dataMeshConsole.findByFullCode(logicContext, code);
+         if(unit == null){
+            unit = _dataMeshConsole.findByCode(logicContext, code);
+         }
+         if(unit != null){
+            guid = unit.guid();
+         }else{
+            throw new FFatalError("process", "Model guid is not exists. (code={1})", code);
+         }
       }
       //............................................................
       // 生成数据

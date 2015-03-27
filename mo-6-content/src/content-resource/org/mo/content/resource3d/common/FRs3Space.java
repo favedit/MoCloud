@@ -116,10 +116,10 @@ public class FRs3Space
    @Override
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
-      _code = xconfig.get("code");
-      _fullCode = xconfig.get("full_code");
-      _label = xconfig.get("label");
-      _keywords = xconfig.get("keywords");
+      _code = xconfig.get("code", _code);
+      _fullCode = xconfig.get("full_code", _fullCode);
+      _label = xconfig.get("label", _label);
+      _keywords = xconfig.get("keywords", _keywords);
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Technique")){

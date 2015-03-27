@@ -189,6 +189,10 @@ public abstract class XBaseDataNumber2
    @AContentField
    public final static FContentField VALUE_PRECISION = new FContentField("valuePrecision", "value_precision", EContentData.String, "", "", "", "YYNY");
 
+   // 数据必须的定义
+   @AContentField
+   public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
+
    // 数据名称的定义
    @AContentField
    public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
@@ -394,6 +398,10 @@ public abstract class XBaseDataNumber2
    // 值精度
    @AName("value_precision")
    protected String _valuePrecision;
+
+   // 数据必须
+   @AName("data_require")
+   protected boolean _dataRequire;
 
    // 数据名称
    @AName("data_name")
@@ -1183,6 +1191,24 @@ public abstract class XBaseDataNumber2
    //============================================================
    public void setValuePrecision(String value){
       _valuePrecision = value;
+   }
+
+   //============================================================
+   // <T>获得数据必须的内容。</T>
+   //
+   // @return 数据必须
+   //============================================================
+   public Boolean getDataRequire(){
+      return _dataRequire;
+   }
+
+   //============================================================
+   // <T>设置数据必须的内容。</T>
+   //
+   // @param value 数据必须
+   //============================================================
+   public void setDataRequire(Boolean value){
+      _dataRequire = value;
    }
 
    //============================================================

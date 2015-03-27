@@ -20,7 +20,7 @@ public class FRs3Material
    protected String _groupGuid;
 
    // 效果代码
-   protected String _effectCode;
+   protected String _effectCode = "automatic";
 
    // 配置深度
    protected boolean _optionDepth = true;
@@ -56,52 +56,52 @@ public class FRs3Material
    protected boolean _optionAlpha = false;
 
    // 透明基础
-   protected float _alphaBase;
+   protected float _alphaBase = 0.0f;
 
    // 透明比率
-   protected float _alphaRate;
+   protected float _alphaRate = 1.0f;
 
    // 配置环境
    protected boolean _optionAmbient = true;
 
    // 环境颜色
-   protected SFloatColor4 _ambientColor = new SFloatColor4();
+   protected SFloatColor4 _ambientColor = new SFloatColor4(0.5f, 0.5f, 0.5f, 1.0f);
 
    // 配置散射
    protected boolean _optionDiffuse = true;
 
    // 散射颜色
-   protected SFloatColor4 _diffuseColor = new SFloatColor4();
+   protected SFloatColor4 _diffuseColor = new SFloatColor4(0.5f, 0.5f, 0.5f, 1.0f);
 
    // 配置散射视角
    protected boolean _optionDiffuseView = false;
 
    // 散射视角颜色
-   protected SFloatColor4 _diffuseViewColor = new SFloatColor4();
+   protected SFloatColor4 _diffuseViewColor = new SFloatColor4(0.5f, 0.5f, 0.5f, 1.0f);
 
    // 配置高光
    protected boolean _optionSpecular = true;
 
    // 高光颜色
-   protected SFloatColor4 _specularColor = new SFloatColor4();
+   protected SFloatColor4 _specularColor = new SFloatColor4(0.5f, 0.5f, 0.5f, 1.0f);
 
    // 高光基础
-   protected float _specularBase;
+   protected float _specularBase = 0.0f;
 
    // 高光级别
-   protected float _specularLevel;
+   protected float _specularLevel = 1.0f;
 
    // 配置视角高光
    protected boolean _optionSpecularView = false;
 
    // 高光视角颜色
-   protected SFloatColor4 _specularViewColor = new SFloatColor4();
+   protected SFloatColor4 _specularViewColor = new SFloatColor4(0.5f, 0.5f, 0.5f, 1.0f);
 
    // 高光视角基础
-   protected float _specularViewBase;
+   protected float _specularViewBase = 0.0f;
 
    // 高光视角级别
-   protected float _specularViewLevel;
+   protected float _specularViewLevel = 1.0f;
 
    // 配置反射
    protected boolean _optionReflect = true;
@@ -110,40 +110,40 @@ public class FRs3Material
    protected SFloatColor4 _reflectColor = new SFloatColor4();
 
    // 反射融合
-   protected float _reflectMerge;
+   protected float _reflectMerge = 0.5f;
 
    // 配置折射
    protected boolean _optionRefract = true;
 
    // 前折射颜色
-   protected SFloatColor4 _refractFrontColor = new SFloatColor4();
+   protected SFloatColor4 _refractFrontColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 后折射颜色
-   protected SFloatColor4 _refractBackColor = new SFloatColor4();
+   protected SFloatColor4 _refractBackColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 配置不透明
    protected boolean _optionOpacity = false;
 
    // 不透明颜色
-   protected SFloatColor4 _opacityColor = new SFloatColor4();
+   protected SFloatColor4 _opacityColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 不透明比率
-   protected float _opacityRate;
+   protected float _opacityRate = 0.0f;
 
    // 不透明透过度
-   protected float _opacityAlpha;
+   protected float _opacityAlpha = 1.0f;
 
    // 不透明深度
-   protected float _opacityDepth;
+   protected float _opacityDepth = 1.0f;
 
    // 不透明度
-   protected float _opacityTransmittance;
+   protected float _opacityTransmittance = 1.0f;
 
    // 配置发光
    protected boolean _optionEmissive = false;
 
    // 发光颜色
-   protected SFloatColor4 _emissiveColor = new SFloatColor4();
+   protected SFloatColor4 _emissiveColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 网格集合
    protected FObjects<FRs3MaterialBitmap> _bitmaps = new FObjects<FRs3MaterialBitmap>(FRs3MaterialBitmap.class);

@@ -41,6 +41,12 @@ public class FCacheSystemSessionUnit
    // 字段用户编号的定义。
    protected long _userId;
 
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
+
    // 存储字段创建用户标识的定义。
    private long __createUserId;
 
@@ -180,6 +186,33 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -304,6 +337,8 @@ public class FCacheSystemSessionUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
+         case "project_id":
+            return Long.toString(_projectId);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -337,6 +372,9 @@ public class FCacheSystemSessionUnit
             break;
          case "user_id":
             _userId = RLong.parse(value);
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -381,6 +419,10 @@ public class FCacheSystemSessionUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -413,6 +455,7 @@ public class FCacheSystemSessionUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
+      row.set("projectId", _projectId);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -431,6 +474,7 @@ public class FCacheSystemSessionUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
+      map.put("projectId", RLong.toString(_projectId));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
