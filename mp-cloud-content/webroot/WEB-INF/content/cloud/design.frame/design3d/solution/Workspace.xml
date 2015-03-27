@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.solution.Workspace">
+   <Workspace name="design3d.solution.Workspace" label="资源工作区">
+      <FrameSet name='mainFrameSet' direction_cd='V' label='页面布局'>
+         <FramePage name='toolbarFrame' label='工具栏区' size='0,24'/>
+         <FramePage name='bodyFrame' label='主区'>
+            <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
+               <FramePage name='catalogFrame' label='目录区' size='300,0'>
+                  <FrameSet name='catalogFrameSet' direction_cd='V' label='目录布局'>
+                     <FramePage name='catalogToolbarFrame' label='目录工具栏区' size='0,24'/>
+                     <FramePage name='catalogContentFrame' label='目录内容区'/>
+                  </FrameSet>
+               </FramePage>
+               <FrameSpliter name='catalogSpliter'/>
+               <FramePage name='searchFrame' label='工作区'>
+                  <FrameSet name='searchFrameSet' direction_cd='V' label='搜索布局'>
+                     <FramePage name='searchToolbarFrame' label='搜索工具栏' size='0,24'/>
+                     <FramePage name='searchContentFrame' label='搜索内容区'/>
+                  </FrameSet>
+               </FramePage>
+               <FrameSpliter name='previewSpliter'/>
+               <FramePage name='previewFrame' label='预览区' size='320,0' scroll_cd='VA'>
+                  <FrameSet name='previewFrameSet' direction_cd='V' label='预览布局'>
+                     <FramePage name='previewToolbarFrame' label='预览工具栏' size='0,24'/>
+                     <FramePage name='previewContentFrame' label='预览内容区'/>
+                     <FramePage name='previewPropertyFrame' label='预览属性区' size='0,60'/>
+                  </FrameSet>
+               </FramePage>
+            </FrameSet>
+         </FramePage>
+         <FramePage name='statusFrame' label='状态区' size='0,20'/>
+      </FrameSet>
+   </Workspace>
+</Content>

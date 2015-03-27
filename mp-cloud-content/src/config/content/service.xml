@@ -3,6 +3,18 @@
 <Config>
 
    <!-- ==================================================== -->
+   <!-- 设计：方案项目数据服务                               -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.solution.project'
+         face  = 'org.mo.content.face.solution.project.IProjectService'/>
+
+   <Component
+         face  = 'org.mo.content.face.solution.project.IProjectService'
+         class = 'org.mo.content.face.solution.project.FProjectService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
    <!-- 设计：资源3D数据服务                             -->
    <!-- ==================================================== -->
    <WebService

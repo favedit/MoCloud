@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.solution.MenuBar">
+   <MenuBar name="design3d.solution.MenuBar" type='FDsSolutionMenuBar' label="菜单">
+      <MenuButton name='createButton' linker='_controlCreateButton' icon='design3d.tools.insert' label='新建项目'/>
+      <MenuButton name='refreshButton' linker='_controlRefreshButton' icon='design3d.tools.refresh' label='刷新内容'/>
+   </MenuBar>
+</Content>
