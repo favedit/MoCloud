@@ -7,6 +7,7 @@ import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource3d.scene.IC3dSceneConsole;
 import org.mo.content.engine3d.core.scene.IRs3SceneConsole;
@@ -19,7 +20,7 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>资源3D模板服务。</T>
+// <T>资源3D服务。</T>
 //============================================================
 public class FResourceService
       extends FObject
@@ -33,13 +34,13 @@ public class FResourceService
    protected IC3dSceneConsole _contentSceneConsole;
 
    //============================================================
-   // <T>构造资源3D模板服务。</T>
+   // <T>构造资源3D服务。</T>
    //============================================================
    public FResourceService(){
    }
 
    //============================================================
-   // <T>搜索数据处理。</T>
+   // <T>获取数据处理。</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -47,23 +48,38 @@ public class FResourceService
    // @param output 网络输出
    //============================================================
    @Override
-   public EResult search(IWebContext context,
-                         ILogicContext logicContext,
-                         IWebInput input,
-                         IWebOutput output){
-      //String type = context.parameter("type");
-      //String serach = context.parameter("serach");
+   public EResult fetch(IWebContext context,
+                        ILogicContext logicContext,
+                        IWebInput input,
+                        IWebOutput output){
+      String typeCd = context.parameter("type_cd");
+      String serach = context.parameter("serach");
+      int pageSize = context.parameterAsInteger("page_size", 20);
+      int page = context.parameterAsInteger("page", 0);
       //............................................................
       // 查找网格
-      FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-      FLogicDataset<FDataResource3dMeshUnit> meshUnits = meshLogic.fetch(200, 0);
-      FXmlNode xitems = output.config().createNode("ItemCollection");
-      for(FDataResource3dMeshUnit meshUnit : meshUnits){
-         FXmlNode xitem = xitems.createNode("Item");
-         xitem.set("guid", meshUnit.guid());
-         xitem.set("type", "mesh");
-         xitem.set("code", meshUnit.code());
-         xitem.set("label", meshUnit.label());
+      if(typeCd.equals("mesh")){
+         String whereSql = null;
+         if(!RString.isEmpty(serach)){
+            whereSql = FDataResource3dMeshLogic.CODE + " LIKE '%" + serach + "%'";
+         }
+         FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
+         FLogicDataset<FDataResource3dMeshUnit> meshUnits = meshLogic.fetch(whereSql, pageSize, page);
+         FXmlNode xitems = output.config().createNode("ItemCollection");
+         xitems.set("total", meshUnits.total());
+         xitems.set("count", meshUnits.count());
+         xitems.set("page_size", meshUnits.pageSize());
+         xitems.set("page_count", meshUnits.pageCount());
+         xitems.set("page", meshUnits.page());
+         for(FDataResource3dMeshUnit meshUnit : meshUnits){
+            FXmlNode xitem = xitems.createNode("Item");
+            xitem.set("guid", meshUnit.guid());
+            xitem.set("type", "mesh");
+            xitem.set("code", meshUnit.code());
+            xitem.set("label", meshUnit.label());
+         }
+      }else{
+         throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
       }
       return EResult.Success;
    }

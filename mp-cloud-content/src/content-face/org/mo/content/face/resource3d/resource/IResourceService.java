@@ -12,17 +12,17 @@ import org.mo.web.protocol.context.IWebOutput;
 public interface IResourceService
 {
    //============================================================
-   // <T>搜索数据处理。</T>
+   // <T>获取数据处理。</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   EResult search(IWebContext context,
-                  ILogicContext logicContext,
-                  IWebInput input,
-                  IWebOutput output);
+   EResult fetch(IWebContext context,
+                 ILogicContext logicContext,
+                 IWebInput input,
+                 IWebOutput output);
 
    //============================================================
    // <T>更新配置处理。</T>

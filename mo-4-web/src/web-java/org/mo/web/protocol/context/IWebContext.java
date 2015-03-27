@@ -187,6 +187,16 @@ public interface IWebContext
    // <T>根据名称获得参数信息。</T>
    //
    // @param name 名称
+   // @param defaultValue 默认内容
+   // @return 参数信息
+   //============================================================
+   int parameterAsInteger(String name,
+                          int defaultValue);
+
+   //============================================================
+   // <T>根据名称获得参数信息。</T>
+   //
+   // @param name 名称
    // @return 参数信息
    //============================================================
    long parameterAsLong(String name);
