@@ -1095,16 +1095,9 @@ function MProperty_propertySave(p){
       }
    }
 }
-function SClickEvent(sender){
-   var o = this;
-   SEvent.call(o, sender);
-   return o;
-}
-function SEvent(sender){
+function SEvent(){
    var o = this;
    o.annotation = null;
-   o.listener   = null;
-   o.sender     = sender;
    o.source     = null;
    o.hEvent     = null;
    o.hSender    = null;

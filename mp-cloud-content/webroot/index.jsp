@@ -6,6 +6,10 @@
     <title>首页</title>
 </head>
 <body>
-<div style="width:100%;height:30px; line-height:30px;border:solid 1px #F00;"><a href="register.jsp" style="float:right">注册</a></div>
+<div style="width:100%;height:30px; line-height:30px;border:solid 1px #F00;text-align:center;font-size:16pt;">
+   <a href="/person/account/Register.wp">注册</a>
+   |
+   <a href="/person/account/Login.wp">登录</a>
+</div>
 </body>
 </html>

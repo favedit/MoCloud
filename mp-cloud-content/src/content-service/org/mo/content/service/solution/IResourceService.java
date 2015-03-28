@@ -1,4 +1,4 @@
-package org.mo.content.face.resource3d.resource;
+package org.mo.content.service.solution;
 
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;

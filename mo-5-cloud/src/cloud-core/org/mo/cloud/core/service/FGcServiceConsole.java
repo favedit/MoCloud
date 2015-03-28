@@ -21,7 +21,7 @@ public class FGcServiceConsole
       extends FServiceConsole
 {
    // 头标志
-   public final static String HeadSession = "cloud_session";
+   public final static String HeadSession = "session_guid";
 
    // 消息控制台
    @ALink
@@ -52,22 +52,22 @@ public class FGcServiceConsole
                                IWebInput input,
                                IWebOutput output){
       // 获得会话代码
-      String sessionCode = context.head(HeadSession);
-      if(RString.isEmpty(sessionCode)){
-         sessionCode = input.config().nodeText("SessionCode");
+      String sessionGuid = context.head(HeadSession);
+      if(RString.isEmpty(sessionGuid)){
+         sessionGuid = input.config().nodeText("SessionGuid");
       }
       // 验证会话存在
-      FGcSessionInfo sessionInfo = _gcSessionConsole.findByCode(logicContext, sessionCode);
+      FGcSessionInfo session = _gcSessionConsole.findByGuid(logicContext, sessionGuid);
       // 检查会话信息
-      if(sessionInfo == null){
-         _gcMessageConsole.pushError(context, "E00103", sessionCode);
+      if(session == null){
+         _gcMessageConsole.pushError(context, "E00103", sessionGuid);
          return EResult.Failure;
-      }else if(!sessionInfo.ovld()){
-         _gcMessageConsole.pushError(context, "E00104", sessionCode);
+      }else if(!session.ovld()){
+         _gcMessageConsole.pushError(context, "E00104", sessionGuid);
          return EResult.Failure;
       }
       // 绑定数据
-      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
+      _bindConsole.bind(FGcSessionInfo.class, session);
       return EResult.Success;
    }
 
@@ -86,24 +86,24 @@ public class FGcServiceConsole
                              IWebInput input,
                              IWebOutput output){
       // 获得会话代码
-      String sessionCode = context.head(HeadSession);
-      if(RString.isEmpty(sessionCode)){
-         sessionCode = input.config().nodeText("SessionCode");
+      String sessionGuid = context.head(HeadSession);
+      if(RString.isEmpty(sessionGuid)){
+         sessionGuid = input.config().nodeText("SessionGuid");
       }
       // 验证会话存在
-      FGcSessionInfo sessionInfo = _gcSessionConsole.findByCode(logicContext, sessionCode);
+      FGcSessionInfo sessionInfo = _gcSessionConsole.findByGuid(logicContext, sessionGuid);
       // 检查会话信息
       if(sessionInfo == null){
          // 会话不存在
-         _gcMessageConsole.pushError(context, "E00103", sessionCode);
+         _gcMessageConsole.pushError(context, "E00103", sessionGuid);
          return EResult.Failure;
       }else if(!sessionInfo.ovld()){
          // 会话已经失效
-         _gcMessageConsole.pushError(context, "E00104", sessionCode);
+         _gcMessageConsole.pushError(context, "E00104", sessionGuid);
          return EResult.Failure;
       }else if(sessionInfo.userId() == 0){
          // 会话用户未登录
-         _gcMessageConsole.pushError(context, "E00105", sessionCode);
+         _gcMessageConsole.pushError(context, "E00105", sessionGuid);
          return EResult.Failure;
       }
       // 绑定会话数据
@@ -112,26 +112,6 @@ public class FGcServiceConsole
       FDataOperator operator = new FDataOperator();
       operator.setUserId(sessionInfo.userId());
       _bindConsole.bind(FDataOperator.class, operator);
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>执行后处理。</T>
-   //
-   // @return 处理结果
-   //============================================================
-   @Override
-   public EResult executeBefore(){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>执行后处理。</T>
-   //
-   // @return 处理结果
-   //============================================================
-   @Override
-   public EResult executeAfter(Object result){
       return EResult.Success;
    }
 }

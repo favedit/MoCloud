@@ -502,7 +502,12 @@ public class FActionConsole
                context.define(acontainers[n].name(), value);
             }else{
                // 未知参数时
-               throw new FFatalError("Build param error. (type={1})", type);
+               Object bindObject = _bindConsole.find(type);
+               if(bindObject != null){
+                  value = bindObject;
+               }else{
+                  throw new FFatalError("Unknown param type. (type={1})", type);
+               }
             }
             params[n] = value;
          }

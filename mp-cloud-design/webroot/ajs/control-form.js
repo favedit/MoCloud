@@ -1535,11 +1535,9 @@ function FUiCheck_construct(){
    o._editSize.set(60, 20);
 }
 function FUiCheck_formatLoad(value){
-   var o = this;
    return (value == o._valueTrue);
 }
 function FUiCheck_formatSave(value){
-   var o = this;
    return RBoolean.toString(value, o._valueTrue, o._valueFalse);
 }
 function FUiCheck_get(){
@@ -4161,10 +4159,8 @@ function FUiListView(o){
    o = RClass.inherits(this, o, FUiContainer, MUiHorizontal, MListenerClick);
    o._sizeCd      = EUiSize.Horizontal
    o._stylePanel  = RClass.register(o, new AStyle('_stylePanel'));
-   o._itemPool    = null;
    o._hForm       = null;
    o.onBuildPanel = FUiListView_onBuildPanel;
-   o.construct    = FUiListView_construct;
    o.createItem   = FUiListView_createItem;
    o.appendChild  = FUiListView_appendChild;
    o.clickItem    = FUiListView_clickItem;
@@ -4176,23 +4172,12 @@ function FUiListView_onBuildPanel(p){
    var o = this;
    o._hPanel = RBuilder.createDiv(p, o.styleName('Panel'));
 }
-function FUiListView_construct(){
+function FUiListView_createItem(pi, pl){
    var o = this;
-   o.__base.FUiContainer.construct.call(o);
-   o._itemPool = RClass.create(FObjectPool);
-}
-function FUiListView_createItem(clazz, pi, pl){
-   var o = this;
-   var item = o._itemPool.alloc();
-   if(!item){
-      if(clazz){
-         item = RClass.create(clazz);
-      }else{
-         item = RClass.create(FUiListViewItem);
-      }
-      item.build(o._hPanel);
-   }
-   return item;
+   var c = RClass.create(FUiListItem);
+   c.build(o._hPanel);
+   c.setLabel(pl);
+   return c;
 }
 function FUiListView_appendChild(p){
    var o = this;
@@ -4219,12 +4204,10 @@ function FUiListView_clear(){
       var c = cs.count();
       for(var i = 0; i < c; i++){
          var m = cs.value(i);
-         if(RClass.isClass(m, FUiListViewItem)){
+         if(RClass.isClass(m, FUiListItem)){
             o._hPanel.removeChild(m._hPanel);
-            o._itemPool.free(m)
-         }else{
-            m.dispose();
          }
+         m.dispose();
       }
       cs.clear();
       o._controls.clear();
@@ -4247,10 +4230,6 @@ function FUiListViewItem(o){
    o._checked        = false;
    o._contentHeight  = 28;
    o._hPanel         = null;
-   o._hBorder        = null;
-   o._hForm          = null;
-   o._hContentForm   = null;
-   o._hContentLine   = null;
    o._hIconPanel     = null;
    o._hIcon          = null;
    o._hLabel         = null;
@@ -4277,8 +4256,8 @@ function FUiListViewItem_onBuild(p){
    var hTable = o._hForm = RBuilder.appendTable(hBorder);
    hTable.style.width = '100%';
    hTable.style.height = '100%';
-   var hLine1 = RBuilder.appendTableRowCell(hTable)
-   var hLine2 = RBuilder.appendTableRowCell(hTable)
+   var hLine1 = o._hFormLine1 = RBuilder.appendTableRowCell(hTable)
+   var hLine2 = o._hFormLine1 = RBuilder.appendTableRowCell(hTable)
    hLine2.height = o._contentHeight;
    var hContentForm = o._hContentForm = RBuilder.appendTable(hLine2, o.styleName('Content'));
    var hContentLine = o._hContentLine = RBuilder.appendTableRow(hContentForm);
@@ -4327,10 +4306,6 @@ function FUiListViewItem_setChecked(p){
 function FUiListViewItem_dispose(){
    var o = this;
    o._hPanel = RHtml.free(o._hPanel);
-   o._hBorder = RHtml.free(o._hBorder);
-   o._hForm = RHtml.free(o._hForm);
-   o._hContentForm = RHtml.free(o._hContentForm);
-   o._hContentLine = RHtml.free(o._hContentLine);
    o._hIconPanel = RHtml.free(o._hIconPanel);
    o._hIcon = RHtml.free(o._hIcon);
    o._hLabel = RHtml.free(o._hLabel);

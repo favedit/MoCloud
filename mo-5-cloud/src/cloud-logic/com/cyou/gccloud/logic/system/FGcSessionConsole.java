@@ -4,10 +4,8 @@ import com.cyou.gccloud.data.cache.FCacheSystemSessionLogic;
 import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.message.IGcMessageConsole;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.com.message.IMessageContext;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.bind.IBindConsole;
 import org.mo.data.logic.FLogicDataset;
@@ -40,243 +38,179 @@ public class FGcSessionConsole
    }
 
    //============================================================
-   // <T>根据代码查找会话。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param code 代码
-   // @return 会话集合
-   //============================================================
-   @Override
-   public FGcSessionInfo findByCode(ILogicContext logicContext,
-                                    String code){
-      // 检查参数
-      if(RString.isEmpty(code)){
-         return null;
-      }
-      // 查找会话
-      String whereSql = FCacheSystemSessionLogic.GUID + "='" + code + "'";
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
-      return sessionInfo;
-   }
-
-   //============================================================
    // <T>根据用户编号查找会话集合。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param userId 用户编号
    // @return 会话集合
    //============================================================
    @Override
-   public FLogicDataset<FGcSessionInfo> findByUserId(ILogicContext logicContext,
+   public FLogicDataset<FGcSessionInfo> findByUserId(ILogicContext context,
                                                      long userId){
       String whereSql = "(" + FCacheSystemSessionLogic.USER_ID + "=" + userId + ") AND (" + FCacheSystemSessionLogic.OVLD + "=1)";
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      FLogicDataset<FGcSessionInfo> sessionInfos = sessionLogic.fetchClass(FGcSessionInfo.class, whereSql, -1, -1);
-      return sessionInfos;
+      FCacheSystemSessionLogic logic = findLogic(context);
+      FLogicDataset<FGcSessionInfo> sessions = logic.fetchClass(FGcSessionInfo.class, whereSql);
+      return sessions;
    }
 
    //============================================================
    // <T>打开一个会话。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param userId 用户编号
-   // @param sysAppCode 系统应用编号
-   // @param deviceWidth 设备宽度
-   // @param deviceHeight 设备高度
+   // @param fromCd 来源类型
    // @return 会话信息
    //============================================================
    @Override
-   public FGcSessionInfo open(ILogicContext logicContext,
+   public FGcSessionInfo open(ILogicContext context,
                               long userId,
-                              int sessionFrom,
-                              String applicationCode,
-                              int deviceWidth,
-                              int deviceHeight){
-
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
+                              int fromCd){
+      FCacheSystemSessionLogic logic = findLogic(context);
       // 新建记录
-      FGcSessionInfo sessionInfo = sessionLogic.doPrepare(FGcSessionInfo.class);
-      //      FDataPersonConnectUnit unit = _accountsConsole.findConnectUnit(sqlContext, userId);
-      //      if(null == unit){
-      //         sessionInfo.setDeviceId(0);
-      //      }else{
-      //         sessionInfo.setDeviceId(unit.deviceId());
-      //      }
-      // 设置内容
-      sessionInfo.setOvld(true);
-      sessionInfo.setUserId(userId);
-      sessionLogic.doInsert(sessionInfo);
-      _logger.debug(this, "open", "Open session. (code={1})", sessionInfo.guid());
+      FGcSessionInfo session = logic.doPrepare(FGcSessionInfo.class);
+      session.setUserId(userId);
+      logic.doInsert(session);
+      _logger.debug(this, "open", "Open session. (guid={1}, user_id={2})", session.guid(), userId);
       // 绑定数据
-      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
+      _bindConsole.bind(FGcSessionInfo.class, session);
       // 返回结果
-      return sessionInfo;
+      return session;
    }
 
-   //============================================================
-   // <T>验证一个会话是否有效。</T>
+   //   //============================================================
+   //   // <T>验证一个会话是否有效。</T>
+   //   //
+   //   // @param messageContext 消息环境
+   //   // @param context 逻辑环境
+   //   // @param code 代码
+   //   // @return 会话信息
+   //   //============================================================
+   //   @Override
+   //   public FGcSessionInfo verify(IMessageContext messageContext,
+   //                                ILogicContext context,
+   //                                String code){
+   //      // 检查参数
+   //      if(RString.isEmpty(code)){
+   //         _logicMessageConsole.throwError(messageContext, "E00103", code);
+   //         return null;
+   //      }
+   //      // 新建记录
+   //      String whereSql = "(" + FCacheSystemSessionLogic.GUID + "='" + code + "') AND (OVLD=1)";
+   //      FCacheSystemSessionLogic sessionLogic = context.findLogic(FCacheSystemSessionLogic.class);
+   //      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
+   //      // 检查会话信息
+   //      if(sessionInfo == null){
+   //         _logicMessageConsole.throwError(messageContext, "E00103", code);
+   //      }else if(!sessionInfo.ovld()){
+   //         _logicMessageConsole.throwError(messageContext, "E00104", code);
+   //      }
+   //      // 绑定数据
+   //      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
+   //      return sessionInfo;
+   //   }
    //
-   // @param messageContext 消息环境
-   // @param logicContext 逻辑环境
-   // @param code 代码
-   // @return 会话信息
-   //============================================================
-   @Override
-   public FGcSessionInfo verify(IMessageContext messageContext,
-                                ILogicContext logicContext,
-                                String code){
-      // 检查参数
-      if(RString.isEmpty(code)){
-         _logicMessageConsole.throwError(messageContext, "E00103", code);
-         return null;
-      }
-      // 新建记录
-      String whereSql = "(" + FCacheSystemSessionLogic.GUID + "='" + code + "') AND (OVLD=1)";
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
-      // 检查会话信息
-      if(sessionInfo == null){
-         _logicMessageConsole.throwError(messageContext, "E00103", code);
-      }else if(!sessionInfo.ovld()){
-         _logicMessageConsole.throwError(messageContext, "E00104", code);
-      }
-      // 绑定数据
-      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
-      return sessionInfo;
-   }
-
-   //============================================================
-   // <T>验证一个会话是否有效。</T>
+   //   //============================================================
+   //   // <T>验证一个会话是否有效。</T>
+   //   //
+   //   // @param messageContext 消息环境
+   //   // @param context 逻辑环境
+   //   // @param code 代码
+   //   // @return 会话信息
+   //   //============================================================
+   //   @Override
+   //   public FGcSessionInfo verifySession(IMessageContext messageContext,
+   //                                       ILogicContext context,
+   //                                       String code){
+   //      // 检查参数
+   //      if(RString.isEmpty(code)){
+   //         _logicMessageConsole.throwError(messageContext, "E00103", code);
+   //         return null;
+   //      }
+   //      // 新建记录
+   //      String whereSql = "(" + FCacheSystemSessionLogic.GUID + "='" + code + "') AND (OVLD=1)";
+   //      FCacheSystemSessionLogic sessionLogic = context.findLogic(FCacheSystemSessionLogic.class);
+   //      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
+   //      // 检查会话信息
+   //      if(sessionInfo == null){
+   //         _logicMessageConsole.pushError(messageContext, "E00103", code);
+   //      }else if(!sessionInfo.ovld()){
+   //         _logicMessageConsole.pushError(messageContext, "E00104", code);
+   //      }
+   //      // 绑定数据
+   //      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
+   //      return sessionInfo;
+   //   }
    //
-   // @param messageContext 消息环境
-   // @param logicContext 逻辑环境
-   // @param code 代码
-   // @return 会话信息
-   //============================================================
-   @Override
-   public FGcSessionInfo verifySession(IMessageContext messageContext,
-                                       ILogicContext logicContext,
-                                       String code){
-      // 检查参数
-      if(RString.isEmpty(code)){
-         _logicMessageConsole.throwError(messageContext, "E00103", code);
-         return null;
-      }
-      // 新建记录
-      String whereSql = "(" + FCacheSystemSessionLogic.GUID + "='" + code + "') AND (OVLD=1)";
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
-      // 检查会话信息
-      if(sessionInfo == null){
-         _logicMessageConsole.pushError(messageContext, "E00103", code);
-      }else if(!sessionInfo.ovld()){
-         _logicMessageConsole.pushError(messageContext, "E00104", code);
-      }
-      // 绑定数据
-      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
-      return sessionInfo;
-   }
-
-   //============================================================
-   // <T>验证一个会话是否登录。</T>
-   //
-   // @param messageContext 消息环境
-   // @param logicContext 逻辑环境
-   // @param code 代码
-   // @return 会话信息
-   //============================================================
-   @Override
-   public FGcSessionInfo verifyLogin(IMessageContext messageContext,
-                                     ILogicContext logicContext,
-                                     String code){
-      // 检查参数
-      if(RString.isEmpty(code)){
-         _logicMessageConsole.throwError(messageContext, "E00103", code);
-         return null;
-      }
-      // 新建记录
-      String whereSql = "(" + FCacheSystemSessionLogic.GUID + "='" + code + "') AND (OVLD=1)";
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
-      // 检查会话信息
-      if(sessionInfo == null){
-         _logicMessageConsole.pushError(messageContext, "E00103", code);
-      }else if(!sessionInfo.ovld()){
-         _logicMessageConsole.pushError(messageContext, "E00104", code);
-      }
-      // 绑定数据
-      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
-      return sessionInfo;
-   }
-
-   //============================================================
-   // <T>关闭用户的会话。</T>
-   //============================================================
-   protected void close(FCacheSystemSessionLogic sessionLogic,
-                        long userId){
-      String whereSql = String.format("(USER_ID=%d) AND (OVLD=1)", userId);
-      FLogicDataset<FCacheSystemSessionUnit> sessionUnits = sessionLogic.fetch(whereSql, 100, 0);
-      if(sessionUnits != null){
-         for(FCacheSystemSessionUnit unit : sessionUnits){
-            sessionLogic.doDelete(unit);
-         }
-      }
-   }
-
-   //============================================================
-   // <T>关闭用户的会话。</T>
-   //============================================================
-   protected void close(FCacheSystemSessionLogic sessionLogic,
-                        long userId,
-                        int sessionFrom){
-      String whereSql = String.format("(USER_ID=%d) AND (FROM_CD=%d) AND (OVLD=1)", userId, sessionFrom);
-      FLogicDataset<FCacheSystemSessionUnit> sessionUnits = sessionLogic.fetch(whereSql, 100, 0);
-      if(sessionUnits != null){
-         for(FCacheSystemSessionUnit unit : sessionUnits){
-            sessionLogic.doDelete(unit);
-         }
-      }
-   }
-
-   protected void close(FCacheSystemSessionLogic sessionLogic,
-                        FCacheSystemSessionUnit unit){
-      sessionLogic.doDelete(unit);
-   }
+   //   //============================================================
+   //   // <T>验证一个会话是否登录。</T>
+   //   //
+   //   // @param messageContext 消息环境
+   //   // @param context 逻辑环境
+   //   // @param code 代码
+   //   // @return 会话信息
+   //   //============================================================
+   //   @Override
+   //   public FGcSessionInfo verifyLogin(IMessageContext messageContext,
+   //                                     ILogicContext context,
+   //                                     String code){
+   //      // 检查参数
+   //      if(RString.isEmpty(code)){
+   //         _logicMessageConsole.throwError(messageContext, "E00103", code);
+   //         return null;
+   //      }
+   //      // 新建记录
+   //      String whereSql = "(" + FCacheSystemSessionLogic.GUID + "='" + code + "') AND (OVLD=1)";
+   //      FCacheSystemSessionLogic sessionLogic = context.findLogic(FCacheSystemSessionLogic.class);
+   //      FGcSessionInfo sessionInfo = sessionLogic.search(FGcSessionInfo.class, whereSql);
+   //      // 检查会话信息
+   //      if(sessionInfo == null){
+   //         _logicMessageConsole.pushError(messageContext, "E00103", code);
+   //      }else if(!sessionInfo.ovld()){
+   //         _logicMessageConsole.pushError(messageContext, "E00104", code);
+   //      }
+   //      // 绑定数据
+   //      _bindConsole.bind(FGcSessionInfo.class, sessionInfo);
+   //      return sessionInfo;
+   //   }
 
    //============================================================
    // <T>关闭指定代码的会话。</T>
    //
-   // @param logicContext 逻辑环境
-   // @param code 代码
+   // @param context 逻辑环境
+   // @param guid 唯一编码
    //============================================================
    @Override
-   public void close(ILogicContext logicContext,
-                     String code){
+   public void close(ILogicContext context,
+                     String guid){
       // 新建记录
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      FCacheSystemSessionUnit sessionUnit = sessionLogic.search(FCacheSystemSessionLogic.GUID + "='" + code + "'");
-      if(sessionUnit != null){
-         //long ouid = sessionUnit.ouid();
-         //sessionUnit.setOvld(false);
-         //sessionLogic.doUpdate(sessionUnit, ouid);
-         sessionLogic.doDelete(sessionUnit);
-         _logger.debug(this, "close", "Close session. (code={1})", code);
+      FCacheSystemSessionLogic logic = findLogic(context);
+      FCacheSystemSessionUnit unit = logic.findByGuid(guid);
+      if(unit != null){
+         close(context, unit.userId());
+         _logger.debug(this, "close", "Close session. (guid={1})", guid);
       }else{
-         _logger.warn(this, "close", "Session is not exists. (code={1})", code);
+         _logger.warn(this, "close", "Session is not exists. (guid={1})", guid);
       }
    }
 
    //============================================================
    // <T>关闭指定用户的所有会话。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param userId 用户编号
    //============================================================
    @Override
-   public void close(ILogicContext logicContext,
+   public void close(ILogicContext context,
                      long userId){
-      FCacheSystemSessionLogic sessionLogic = logicContext.findLogic(FCacheSystemSessionLogic.class);
-      close(sessionLogic, userId);
+      // 查找当前用户会话
+      String whereSql = FCacheSystemSessionLogic.USER_ID + "=" + userId;
+      FCacheSystemSessionLogic logic = findLogic(context);
+      FLogicDataset<FCacheSystemSessionUnit> sessions = logic.fetch(whereSql, 100, 0);
+      // 删除当前用户所有会话
+      if(sessions != null){
+         for(FCacheSystemSessionUnit unit : sessions){
+            logic.doDelete(unit);
+         }
+      }
    }
 }

@@ -7,11 +7,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.solution.project'
-         face  = 'org.mo.content.face.solution.project.IProjectService'/>
+         face  = 'org.mo.content.service.solution.IProjectService'/>
 
    <Component
-         face  = 'org.mo.content.face.solution.project.IProjectService'
-         class = 'org.mo.content.face.solution.project.FProjectService'
+         face  = 'org.mo.content.service.solution.IProjectService'
+         class = 'org.mo.content.service.solution.FProjectService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
@@ -19,11 +19,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.content.resource'
-         face  = 'org.mo.content.face.resource3d.resource.IResourceService'/>
+         face  = 'org.mo.content.service.solution.IResourceService'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.resource.IResourceService'
-         class = 'org.mo.content.face.resource3d.resource.FResourceService'
+         face  = 'org.mo.content.service.solution.IResourceService'
+         class = 'org.mo.content.service.solution.FResourceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->

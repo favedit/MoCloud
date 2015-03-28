@@ -4,6 +4,7 @@ import org.mo.com.console.FConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RLong;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.data.logic.FLogicTable;
 import org.mo.data.logic.FLogicUnit;
 import org.mo.data.logic.ILogicContext;
@@ -37,86 +38,86 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>获得逻辑单元</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @return 逻辑单元
    //============================================================
-   protected FLogicTable findLogic(ILogicContext logicContext){
-      return logicContext.findLogic(_classLogic);
+   protected T findLogic(ILogicContext context){
+      return context.findLogic(_classLogic);
    }
 
    //============================================================
    // <T>根据编号获得一个数据单元。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
    @Override
-   public U find(ILogicContext logicContext,
+   public U find(ILogicContext context,
                  long objectId){
-      return find(logicContext, objectId, null);
+      return find(context, objectId, null);
    }
 
    //============================================================
    // <T>根据编号获得一个数据单元。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param objectId 对象编号
    // @param clazz 类对象
    // @return 处理结果
    //============================================================
    @Override
-   public U find(ILogicContext logicContext,
+   public U find(ILogicContext context,
                  long objectId,
                  Class<U> clazz){
-      FLogicTable logicTable = findLogic(logicContext);
+      FLogicTable logic = findLogic(context);
       Class<U> classUnit = (clazz != null) ? clazz : _classUnit;
-      U unit = logicTable.find(classUnit, objectId);
+      U unit = logic.find(classUnit, objectId);
       return unit;
    }
 
    //============================================================
    // <T>根据唯一码获得一个数据单元。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param uniqueCode 唯一码
    // @return 处理结果
    //============================================================
    @Override
-   public U findByGuid(ILogicContext logicContext,
+   public U findByGuid(ILogicContext context,
                        String uniqueCode){
-      return findByGuid(logicContext, uniqueCode, null);
+      return findByGuid(context, uniqueCode, null);
    }
 
    //============================================================
    // <T>根据编号获得一个数据单元。</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param uniqueCode 唯一码
    // @param clazz 类对象
    // @return 处理结果
    //============================================================
    @Override
-   public U findByGuid(ILogicContext logicContext,
+   public U findByGuid(ILogicContext context,
                        String uniqueCode,
                        Class<U> clazz){
       // 生成参数
       Class<U> classUnit = (clazz != null) ? clazz : _classUnit;
       String whereSql = "GUID='" + uniqueCode + "'";
       // 查询内容
-      FLogicTable logicTable = findLogic(logicContext);
-      U unit = logicTable.search(classUnit, whereSql);
+      FLogicTable logic = findLogic(context);
+      U unit = logic.search(classUnit, whereSql);
       return unit;
    }
 
    //============================================================
    // <T>准备记录理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onPrepare(ILogicContext logicContext,
+   protected EResult onPrepare(ILogicContext context,
                                U unit){
       return EResult.Success;
    }
@@ -124,25 +125,40 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>准备记录</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
+   // @return 数据单元
+   //============================================================
+   @Override
+   public U doPrepare(ILogicContext context){
+      FLogicTable logic = findLogic(context);
+      U unit = RClass.newInstance(_classUnit);
+      logic.doPrepare(unit);
+      onPrepare(context, unit);
+      return unit;
+   }
+
+   //============================================================
+   // <T>准备记录</T>
+   //
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
    @Override
-   public EResult doPrepare(ILogicContext logicContext,
+   public EResult doPrepare(ILogicContext context,
                             U unit){
-      return onPrepare(logicContext, unit);
+      return onPrepare(context, unit);
    }
 
    //============================================================
    // <T>新建记录前处理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @param oldUnit 原始数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onInsertBefore(ILogicContext logicContext,
+   protected EResult onInsertBefore(ILogicContext context,
                                     U unit){
       return EResult.Success;
    }
@@ -150,11 +166,11 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>新建记录后处理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onInsertAfter(ILogicContext logicContext,
+   protected EResult onInsertAfter(ILogicContext context,
                                    U unit){
       return EResult.Success;
    }
@@ -162,20 +178,20 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>新建记录</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
    @Override
-   public EResult doInsert(ILogicContext logicContext,
+   public EResult doInsert(ILogicContext context,
                            U unit){
 
-      FLogicTable logic = findLogic(logicContext);
+      FLogicTable logic = findLogic(context);
       // 新建记录处理
-      EResult resultCd = onInsertBefore(logicContext, unit);
+      EResult resultCd = onInsertBefore(context, unit);
       if(resultCd == EResult.Success){
-         logic.doUpdate(unit);
-         resultCd = onInsertAfter(logicContext, unit);
+         logic.doInsert(unit);
+         resultCd = onInsertAfter(context, unit);
       }
       return resultCd;
    }
@@ -183,12 +199,12 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>更新记录前处理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @param oldUnit 原始数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onUpdateBefore(ILogicContext logicContext,
+   protected EResult onUpdateBefore(ILogicContext context,
                                     U unit,
                                     U oldUnit){
       return EResult.Success;
@@ -197,11 +213,11 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>更新记录后处理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onUpdateAfter(ILogicContext logicContext,
+   protected EResult onUpdateAfter(ILogicContext context,
                                    U unit){
       return EResult.Success;
    }
@@ -209,40 +225,40 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>修改记录</T>o
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
    @Override
-   public EResult doUpdate(ILogicContext logicContext,
+   public EResult doUpdate(ILogicContext context,
                            U unit){
       long ouid = RLong.parse(unit.get("ouid"));
-      return doUpdate(logicContext, unit, ouid);
+      return doUpdate(context, unit, ouid);
    }
 
    //============================================================
    // <T>修改记录</T>o
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
    @Override
-   public EResult doUpdate(ILogicContext logicContext,
+   public EResult doUpdate(ILogicContext context,
                            U unit,
                            long objectId){
-      FLogicTable logic = findLogic(logicContext);
+      FLogicTable logic = findLogic(context);
       // 检查存在性
       U oldUnit = logic.find(_classUnit, objectId);
       if(oldUnit == null){
          throw new FFatalError("Update unit is not exists. (object_id={1})", objectId);
       }
       // 更新记录处理
-      EResult resultCd = onUpdateBefore(logicContext, unit, oldUnit);
+      EResult resultCd = onUpdateBefore(context, unit, oldUnit);
       if(resultCd == EResult.Success){
          logic.doUpdate(unit);
-         resultCd = onUpdateAfter(logicContext, unit);
+         resultCd = onUpdateAfter(context, unit);
       }
       return resultCd;
    }
@@ -250,11 +266,11 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>删除记录前处理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onDeleteBefore(ILogicContext logicContext,
+   protected EResult onDeleteBefore(ILogicContext context,
                                     U unit){
       return EResult.Success;
    }
@@ -262,11 +278,11 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>删除记录后处理</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
-   protected EResult onDeleteAfter(ILogicContext logicContext,
+   protected EResult onDeleteAfter(ILogicContext context,
                                    U unit){
       return EResult.Success;
    }
@@ -274,24 +290,24 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>删除记录</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param objectId 对象编号
    // @return 处理结果
    //============================================================
    @Override
-   public EResult doDelete(ILogicContext logicContext,
+   public EResult doDelete(ILogicContext context,
                            long objectId){
-      FLogicTable logic = findLogic(logicContext);
+      FLogicTable logic = findLogic(context);
       // 检查存在性
       U unit = logic.find(_classUnit, objectId);
       if(unit == null){
          throw new FFatalError("Delete unit is not exists. (object_id={1})", objectId);
       }
       // 删除记录处理
-      EResult resultCd = onDeleteBefore(logicContext, unit);
+      EResult resultCd = onDeleteBefore(context, unit);
       if(resultCd == EResult.Success){
          logic.doDelete(unit);
-         resultCd = onDeleteAfter(logicContext, unit);
+         resultCd = onDeleteAfter(context, unit);
       }
       return resultCd;
    }
@@ -299,19 +315,19 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    // <T>删除记录</T>
    //
-   // @param logicContext 逻辑环境
+   // @param context 逻辑环境
    // @param unit 数据单元
    // @return 处理结果
    //============================================================
    @Override
-   public EResult doDelete(ILogicContext logicContext,
+   public EResult doDelete(ILogicContext context,
                            U unit){
-      FLogicTable logic = findLogic(logicContext);
+      FLogicTable logic = findLogic(context);
       // 删除记录处理
-      EResult resultCd = onDeleteBefore(logicContext, unit);
+      EResult resultCd = onDeleteBefore(context, unit);
       if(resultCd == EResult.Success){
          logic.doDelete(unit);
-         resultCd = onDeleteAfter(logicContext, unit);
+         resultCd = onDeleteAfter(context, unit);
       }
       return resultCd;
    }

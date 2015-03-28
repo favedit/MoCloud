@@ -459,6 +459,7 @@ public class FServiceConsole
                value = forms[n].container();
                context.define(aforms[n].name(), value);
             }else{
+               // 未知参数时
                Object bindObject = _bindConsole.find(type);
                if(bindObject != null){
                   value = bindObject;

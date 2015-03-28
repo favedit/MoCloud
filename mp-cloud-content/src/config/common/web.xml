@@ -162,7 +162,7 @@
    <!-- ==================================================== -->
    <Component
          face      = 'org.mo.web.core.action.IActionConsole'
-         class     = 'org.mo.web.core.action.FActionConsole'
+         class     = 'org.mo.cloud.core.action.FGcActionConsole'
          scope     = 'global' >
       <Initialize name='addContext'>
          <Parameter>/content</Parameter>
@@ -187,7 +187,7 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.service.IServiceConsole'
-         class = 'org.mo.web.core.service.FServiceConsole'
+         class = 'org.mo.cloud.core.service.FGcServiceConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
       <Initialize name='initializeConfig'/>

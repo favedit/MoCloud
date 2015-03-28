@@ -1,9 +1,11 @@
 package org.mo.web.protocol.context;
 
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.IRelease;
 import org.mo.com.message.IMessageContext;
 import org.mo.logic.session.ISqlSessionContext;
+import org.mo.web.core.action.common.IWebCookie;
 import org.mo.web.core.container.common.FWebContainerCollection;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.common.FWebUploadFiles;
@@ -218,6 +220,13 @@ public interface IWebContext
    double parameterAsDouble(String name);
 
    //============================================================
+   // <T>测试COOKIE是否发生变更。</T>
+   //
+   // @return 是否变更
+   //============================================================
+   boolean testCookieChanged();
+
+   //============================================================
    // <T>获得COOKIE信息集合。</T>
    //
    // @return COOKIE信息集合
@@ -233,11 +242,32 @@ public interface IWebContext
    String cookie(String name);
 
    //============================================================
-   // <T>测试COOKIE是否发生变更。</T>
+   // <T>获得是否有输入COOKIE信息集合。</T>
    //
-   // @return 是否变更
+   // @return 是否有
    //============================================================
-   boolean testCookieChanged();
+   boolean hasInputCookie();
+
+   //============================================================
+   // <T>获得输入COOKIE信息集合。</T>
+   //
+   // @return COOKIE信息集合
+   //============================================================
+   FObjects<IWebCookie> inputCookies();
+
+   //============================================================
+   // <T>获得是否有输出COOKIE信息集合。</T>
+   //
+   // @return 是否有
+   //============================================================
+   boolean hasOutputCookies();
+
+   //============================================================
+   // <T>获得输出COOKIE信息集合。</T>
+   //
+   // @return COOKIE信息集合
+   //============================================================
+   FObjects<IWebCookie> outputCookies();
 
    //============================================================
    // <T>判断是否含有文件。</T>

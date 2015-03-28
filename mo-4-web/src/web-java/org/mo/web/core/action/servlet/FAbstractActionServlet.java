@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.cultrue.FCulture;
@@ -19,6 +20,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
 import org.mo.core.bind.IBindConsole;
 import org.mo.web.core.action.IActionConsole;
+import org.mo.web.core.action.common.IWebCookie;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.common.IWebServlet;
@@ -108,7 +110,6 @@ public abstract class FAbstractActionServlet
    public void process(String type,
                        HttpServletRequest httpRequest,
                        HttpServletResponse httpResponse){
-
       String redirect = null;
       FWebContext context = null;
       IWebSession session = null;
@@ -162,6 +163,18 @@ public abstract class FAbstractActionServlet
             Cookie cookie = new Cookie("MOCK", cookies.pack().toString());
             cookie.setMaxAge(60 * 60 * 24 * 365);
             httpResponse.addCookie(cookie);
+         }
+         if(context.hasOutputCookies()){
+            FObjects<IWebCookie> webCookies = context.outputCookies();
+            for(IWebCookie webCookie : webCookies){
+               if(_logger.debugAble()){
+                  _logger.debug(this, "process", "Set cookie. {name={1}, value={2}}", webCookie.name(), webCookie.value());
+               }
+               Cookie cookie = new Cookie(webCookie.name(), webCookie.value());
+               cookie.setPath("/");
+               cookie.setMaxAge(60 * 60 * 24 * 365);
+               httpResponse.addCookie(cookie);
+            }
          }
          // 画面转向
          if(!IActionResult.NO_REDIRECT.equals(redirect)){

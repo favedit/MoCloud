@@ -8,6 +8,7 @@ import org.mo.com.io.RFile;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.IObjectId;
 import org.mo.com.lang.RBoolean;
@@ -25,6 +26,7 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.RAop;
 import org.mo.core.convert.RObjectConvert;
 import org.mo.logic.session.ISqlSessionContext;
+import org.mo.web.core.action.common.IWebCookie;
 import org.mo.web.core.container.EContainerScope;
 import org.mo.web.core.container.RWebContainer;
 import org.mo.web.core.container.common.FWebContainerCollection;
@@ -94,11 +96,17 @@ public class FWebContext
    // 参数集合
    protected FAttributes _parameters;
 
-   // Cookie字符串
+   // Cookie存储
    protected String _cookieStore;
 
    // Cookie集合
    protected FAttributes _cookies = new FAttributes();
+
+   // 输入Cookie集合
+   protected FObjects<IWebCookie> _inputCookies;
+
+   // 输出Cookie集合
+   protected FObjects<IWebCookie> _outputCookies;
 
    // 上传文件
    protected FWebUploadFiles _files;
@@ -161,8 +169,10 @@ public class FWebContext
             if("MOCK".equalsIgnoreCase(cookie.getName())){
                cookies().unpack(cookie.getValue());
                _cookieStore = cookies().pack().toString();
-               break;
             }
+         }
+         for(Cookie cookie : cookies){
+            cookies().set(cookie.getName(), cookie.getValue());
          }
       }
       // 默认定义
@@ -535,6 +545,20 @@ public class FWebContext
    }
 
    //============================================================
+   // <T>测试COOKIE是否发生变更。</T>
+   //
+   // @return 是否变更
+   //============================================================
+   @Override
+   public boolean testCookieChanged(){
+      if(null != _cookieStore){
+         String cookieString = cookies().pack();
+         return !_cookieStore.equals(cookieString);
+      }
+      return false;
+   }
+
+   //============================================================
    // <T>获得COOKIE信息集合。</T>
    //
    // @return COOKIE信息集合
@@ -556,17 +580,49 @@ public class FWebContext
    }
 
    //============================================================
-   // <T>测试COOKIE是否发生变更。</T>
+   // <T>获得是否有输入COOKIE信息集合。</T>
    //
-   // @return 是否变更
+   // @return 是否有
    //============================================================
    @Override
-   public boolean testCookieChanged(){
-      if(null != _cookieStore){
-         String cookieString = cookies().pack();
-         return !_cookieStore.equals(cookieString);
+   public boolean hasInputCookie(){
+      return (_inputCookies != null) ? !_inputCookies.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>获得输入COOKIE信息集合。</T>
+   //
+   // @return COOKIE信息集合
+   //============================================================
+   @Override
+   public FObjects<IWebCookie> inputCookies(){
+      if(_inputCookies == null){
+         _inputCookies = new FObjects<IWebCookie>(IWebCookie.class);
       }
-      return false;
+      return _inputCookies;
+   }
+
+   //============================================================
+   // <T>获得是否有输出COOKIE信息集合。</T>
+   //
+   // @return 是否有
+   //============================================================
+   @Override
+   public boolean hasOutputCookies(){
+      return (_outputCookies != null) ? !_outputCookies.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>获得输出COOKIE信息集合。</T>
+   //
+   // @return COOKIE信息集合
+   //============================================================
+   @Override
+   public FObjects<IWebCookie> outputCookies(){
+      if(_outputCookies == null){
+         _outputCookies = new FObjects<IWebCookie>(IWebCookie.class);
+      }
+      return _outputCookies;
    }
 
    //============================================================
