@@ -1,4 +1,4 @@
-package com.cyou.gccloud.logic.person;
+package org.mo.cloud.logic.person;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 

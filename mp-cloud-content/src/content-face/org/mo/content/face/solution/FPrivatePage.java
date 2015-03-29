@@ -12,7 +12,7 @@ import org.mo.com.lang.FObjectId;
 //@Date 2012.11.05  
 //@version 1.0.0
 //============================================================
-public class FProjectPage
+public class FPrivatePage
       extends FObjectId
 {
    protected String _userLabel;

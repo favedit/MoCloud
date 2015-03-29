@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150326212824">
+<Content name="design.frame" update_date="20150329142944">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -160,6 +160,11 @@
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="PageControl" label="页面控件" class_name="org.mo.cloud.content.design.frame.common.XPageControl" base_name="org.mo.cloud.content.design.frame.base.XBasePageControl" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="Button" label="按键" class_name="org.mo.cloud.content.design.frame.common.XButton" base_name="org.mo.cloud.content.design.frame.base.XBaseButton" inherits="IControl" note="">
+      <Attribute is_valid="Y" type="String" name="label_position_cd" label="标签位置方式" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="Form" label="表单" class_name="org.mo.cloud.content.design.frame.common.XForm" base_name="org.mo.cloud.content.design.frame.base.XBaseForm" inherits="IContainer,MDataset" note="" />
     <Component is_valid="Y" name="Column" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" base_name="org.mo.cloud.content.design.frame.base.XBaseColumn" inherits="IColumn" note="" />
     <Component is_valid="Y" name="ColumnCheck" label="表格复选列" class_name="org.mo.cloud.content.design.frame.common.XColumnCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnCheck" inherits="IColumnEditControl,MDataField,MPropertyCheck" note="" />

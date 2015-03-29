@@ -1,4 +1,4 @@
-package com.cyou.gccloud.logic.person;
+package org.mo.cloud.logic.person;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.ILogicContext;

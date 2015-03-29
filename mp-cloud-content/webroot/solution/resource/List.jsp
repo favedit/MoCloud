@@ -1,4 +1,5 @@
 <%@ include file='/apl/public.inc' %>
+<jh:define source='&page.user' alias='user'/>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -48,7 +49,9 @@ function _load(){
          <TABLE width='100%' height='100%'>
             <TR height='20px' style='color:#FFFFFF'>
                <TD width='300'><IMG src='../script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:4px;'></TD>
-               <TD align='center'>项目管理</TD>
+               <TD align='center'>
+                  资源管理 - <jh:write source='&user.label'/> (<jh:write source='&user.guid'/>)
+               </TD>
                <TD width='300' align='right'>
                   用户空间
                   |

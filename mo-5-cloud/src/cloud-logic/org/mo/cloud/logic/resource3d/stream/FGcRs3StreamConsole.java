@@ -1,4 +1,4 @@
-package com.cyou.gccloud.logic.resource3d.stream;
+package org.mo.cloud.logic.resource3d.stream;
 
 import com.cyou.gccloud.data.data.FDataResource3dStreamLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;

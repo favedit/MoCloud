@@ -14,7 +14,7 @@
 <SCRIPT language='javascript' src='../script/ajs/context_cn.js'></SCRIPT>
 
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalog.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogContent.js'></SCRIPT>
 
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchToolBar.js'></SCRIPT>
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchItem.js'></SCRIPT>

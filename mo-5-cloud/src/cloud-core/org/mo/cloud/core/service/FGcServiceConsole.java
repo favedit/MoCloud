@@ -1,7 +1,8 @@
 package org.mo.cloud.core.service;
 
-import com.cyou.gccloud.logic.system.FGcSessionInfo;
-import com.cyou.gccloud.logic.system.IGcSessionConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.system.IGcSessionConsole;
+
 import org.mo.cloud.core.message.IGcMessageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
@@ -54,7 +55,10 @@ public class FGcServiceConsole
       // 获得会话代码
       String sessionGuid = context.head(HeadSession);
       if(RString.isEmpty(sessionGuid)){
-         sessionGuid = input.config().nodeText("SessionGuid");
+         sessionGuid = context.parameter("session_guid");
+      }
+      if(RString.isEmpty(sessionGuid)){
+         sessionGuid = context.cookie("session_guid");
       }
       // 验证会话存在
       FGcSessionInfo session = _gcSessionConsole.findByGuid(logicContext, sessionGuid);
@@ -88,7 +92,10 @@ public class FGcServiceConsole
       // 获得会话代码
       String sessionGuid = context.head(HeadSession);
       if(RString.isEmpty(sessionGuid)){
-         sessionGuid = input.config().nodeText("SessionGuid");
+         sessionGuid = context.parameter("session_guid");
+      }
+      if(RString.isEmpty(sessionGuid)){
+         sessionGuid = context.cookie("session_guid");
       }
       // 验证会话存在
       FGcSessionInfo sessionInfo = _gcSessionConsole.findByGuid(logicContext, sessionGuid);

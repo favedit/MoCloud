@@ -1,7 +1,8 @@
 package org.mo.content.core.person;
 
-import com.cyou.gccloud.logic.person.FGcUserInfo;
-import com.cyou.gccloud.logic.person.IGcUserConsole;
+import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.person.IGcUserConsole;
+
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
 

@@ -1,8 +1,9 @@
-package com.cyou.gccloud.logic.resource3d.mesh;
+package org.mo.cloud.logic.resource3d.mesh;
+
+import org.mo.cloud.logic.resource3d.stream.IGcRs3StreamConsole;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
-import com.cyou.gccloud.logic.resource3d.stream.IGcRs3StreamConsole;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;

@@ -1,4 +1,4 @@
-package com.cyou.gccloud.logic.resource3d.mesh;
+package org.mo.cloud.logic.resource3d.mesh;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.ILogicContext;

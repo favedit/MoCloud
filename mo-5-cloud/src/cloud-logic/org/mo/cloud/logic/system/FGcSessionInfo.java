@@ -1,4 +1,4 @@
-package com.cyou.gccloud.logic.system;
+package org.mo.cloud.logic.system;
 
 import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
 

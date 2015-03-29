@@ -1,8 +1,9 @@
 package org.mo.content.face.solution;
 
-import com.cyou.gccloud.logic.person.FGcUserInfo;
-import com.cyou.gccloud.logic.person.IGcUserConsole;
-import com.cyou.gccloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.person.IGcUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;

@@ -1,5 +1,9 @@
 package org.mo.content.service.solution;
 
+import org.mo.cloud.logic.system.FGcSessionInfo;
+
+import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
+import com.cyou.gccloud.data.data.FDataSolutionProjectUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -69,6 +73,64 @@ public class FProjectService
          default:
             throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
       }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>新建数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult insert(IWebContext context,
+                         ILogicContext logicContext,
+                         FGcSessionInfo session,
+                         IWebInput input,
+                         IWebOutput output){
+      FXmlNode xdata = input.config().findNode("Data");
+      String code = xdata.get("code");
+      String label = xdata.get("label");
+      FDataSolutionProjectLogic logic = logicContext.findLogic(FDataSolutionProjectLogic.class);
+      FDataSolutionProjectUnit unit = logic.doPrepare();
+      unit.setUserId(session.userId());
+      unit.setCode(code);
+      unit.setLabel(label);
+      logic.doInsert(unit);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>修改数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult upate(IWebContext context,
+                        ILogicContext logicContext,
+                        IWebInput input,
+                        IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult delete(IWebContext context,
+                         ILogicContext logicContext,
+                         IWebInput input,
+                         IWebOutput output){
       return EResult.Success;
    }
 }

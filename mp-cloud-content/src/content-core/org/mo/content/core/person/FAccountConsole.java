@@ -1,9 +1,10 @@
 package org.mo.content.core.person;
 
-import com.cyou.gccloud.logic.person.FGcUserConsole;
-import com.cyou.gccloud.logic.person.FGcUserInfo;
-import com.cyou.gccloud.logic.system.FGcSessionInfo;
-import com.cyou.gccloud.logic.system.IGcSessionConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.system.IGcSessionConsole;
+
+import org.mo.cloud.logic.person.FGcUserConsole;
+import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;

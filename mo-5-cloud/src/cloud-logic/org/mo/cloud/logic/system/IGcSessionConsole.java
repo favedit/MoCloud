@@ -1,4 +1,4 @@
-package com.cyou.gccloud.logic.system;
+package org.mo.cloud.logic.system;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;

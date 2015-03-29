@@ -1,7 +1,8 @@
 package org.mo.content.face.resource3d.mesh;
 
-import com.cyou.gccloud.logic.resource3d.mesh.FGcRs3MeshUnit;
-import com.cyou.gccloud.logic.resource3d.mesh.IGcRs3MeshConsole;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshUnit;
+import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
+
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;

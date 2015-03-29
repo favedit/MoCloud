@@ -13,7 +13,7 @@ import org.mo.web.protocol.context.IWebContext;
 // @author sunhr
 // @version 150328
 //============================================================
-public interface IProjectAction
+public interface IPrivateAction
 {
    //============================================================
    // <T>列表页面</T>
