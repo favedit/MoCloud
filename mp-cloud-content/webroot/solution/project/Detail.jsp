@@ -1,45 +1,76 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>登录</title>
-</head>
-<script>
-function checkPwd(){
-	var passport = document.getElementById("passport").value;
-	var password = document.getElementById("password").value;
-	if(trim(passport) == '' || trim(password) == ''){
-		alert("标‘*’是必输项！");
-		return false;
-	}
+<%@ include file='/apl/public.inc' %>
+<jh:define source='&page.user' alias='user'/>
+<jh:define source='&page.project' alias='project'/>
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>CoolLight Designer</TITLE>
+<META http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<LINK rel="stylesheet" href='../script/acs/control.css' type="text/css" media="all"/>
+<LINK rel="stylesheet" href='../script/acs/design.css' type="text/css" media="all"/>
+<LINK rel="stylesheet" href='../script/acs/lang_cn.css' type="text/css" media="all"/>
+
+<SCRIPT language='javascript' src='../script/ajs/lzma.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/ajs/mo.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/ajs/context_cn.js'></SCRIPT>
+
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionProjectProperty.js'></SCRIPT>
+
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogContent.js'></SCRIPT>
+
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchItem.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchContent.js'></SCRIPT>
+
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPreviewToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPreviewContent.js'></SCRIPT>
+
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionMenuBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionTabBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionWorkspace.js'></SCRIPT>
+
+<SCRIPT>
+function _load(){
+   RRuntime.setProcessCd(EProcess.Debug);
+   RApplication.initialize();
+   RBrowser.setContentPath('../script');
+   // 加载工作区
+   var w = RApplication.findWorkspace(FDsSolutionWorkspace);
+   w.buildDefine(id_workspace);
+   w.setPanel(id_workspace);
+   w.psResize();
+   w.load();
+   RConsole.find(FUiWorkspaceConsole).active(w);
 }
-function trim(str){
-return str.replace(/(^\s*)|(\s*$)/g, ""); 
-}
-</script>
-<body>
-<a href="/index.jsp">返回</a>
-<form id="form" method="post" action="/person/Account.wa?do=login" onsubmit="return checkPwd();">
-  <center>
-      <table border="0">
-      	<th>
-        	<td style="font-size:24px; font-weight:bold;">登录</td>
-        </th>
-        <tr>
-          <td align="right" style="width:100px">用户名</td>
-          <td align="left"><input id="passport" name="passport" style="width:200px;"/><font color="#FF0000">*</font></td>
-        </tr>
-        <tr>
-          <td align="right">密码</td>
-          <td align="left"><input id="password" name="password" style="width:200px;"/><font color="#FF0000">*</font>
-          </td>
-        </tr>
-         <tr>
-          <td colspan="2" align="center"><input type="submit" value="提交"/></td>          
-        </tr>
-      </table>
-     </center>
-</form>
-</body>
+</SCRIPT>
+</HEAD>
+<BODY scroll='no' style='background-color:#444444;overflow:hidden;' onload='_load()'>
+<TABLE width='100%' height='100%' border='0px'>
+   <TR height='20px'>
+      <TD>
+         <TABLE width='100%' height='100%'>
+            <TR height='20px' style='color:#FFFFFF'>
+               <TD width='300'><IMG src='../script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:4px;'></TD>
+               <TD align='center'>
+                  项目 - <jh:write source='&project.label'/> (<jh:write source='&project.code'/>)
+               </TD>
+               <TD width='300' align='right'>
+                  用户空间 (<jh:write source='&user.label'/>)
+                  |
+                  <A href='Project.wa' style='color:#FFFFFF'>项目管理</A>
+                  |
+                  <A href='Resource.wa' style='color:#FFFFFF'>资源管理</A>
+                  |
+                  发布管理
+               </TD>
+            </TR>
+         </TABLE>
+      </TD>
+   </TR>
+   <TR>
+      <TD id='id_workspace'></TD>
+   </TR>
+</TABLE>
+</BODY>
 </HTML>

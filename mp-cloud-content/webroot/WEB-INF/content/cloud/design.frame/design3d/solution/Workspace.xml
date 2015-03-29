@@ -22,8 +22,7 @@
                <FramePage name='previewFrame' label='预览区' size='320,0' scroll_cd='VA'>
                   <FrameSet name='previewFrameSet' direction_cd='V' label='预览布局'>
                      <FramePage name='previewToolbarFrame' label='预览工具栏' size='0,24'/>
-                     <FramePage name='previewContentFrame' label='预览内容区'/>
-                     <FramePage name='previewPropertyFrame' label='预览属性区' size='0,60'/>
+                     <FramePage name='previewPropertyFrame' label='预览属性区'/>
                   </FrameSet>
                </FramePage>
             </FrameSet>

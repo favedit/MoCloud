@@ -1,9 +1,8 @@
 package org.mo.content.service.solution;
 
-import org.mo.cloud.logic.system.FGcSessionInfo;
-
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import com.cyou.gccloud.data.data.FDataSolutionProjectUnit;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -77,6 +76,28 @@ public class FProjectService
    }
 
    //============================================================
+   // <T>查询数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult query(IWebContext context,
+                        ILogicContext logicContext,
+                        IWebInput input,
+                        IWebOutput output){
+      FXmlNode xinput = input.config();
+      String guid = xinput.get("guid");
+      FDataSolutionProjectUnit unit = _projectConsole.query(logicContext, guid);
+      FXmlNode xproject = output.config().createNode("Project");
+      xproject.set("code", unit.code());
+      xproject.set("label", unit.label());
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>新建数据处理。</T>
    //
    // @param context 网络环境
@@ -131,6 +152,10 @@ public class FProjectService
                          ILogicContext logicContext,
                          IWebInput input,
                          IWebOutput output){
+      String guid = input.config().get("guid");
+      FDataSolutionProjectLogic logic = logicContext.findLogic(FDataSolutionProjectLogic.class);
+      FDataSolutionProjectUnit unit = logic.findByGuid(guid);
+      logic.doDelete(unit);
       return EResult.Success;
    }
 }

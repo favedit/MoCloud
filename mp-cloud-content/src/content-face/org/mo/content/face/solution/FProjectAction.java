@@ -1,9 +1,10 @@
 package org.mo.content.face.solution;
 
-import org.mo.cloud.logic.system.FGcSessionInfo;
-
 import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.cloud.logic.person.IGcUserConsole;
+import org.mo.cloud.logic.solution.FGcProjectInfo;
+import org.mo.cloud.logic.solution.IGcProjectConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
@@ -23,6 +24,10 @@ public class FProjectAction
    @ALink
    protected IGcUserConsole _userConsole;
 
+   //用户控制台
+   @ALink
+   protected IGcProjectConsole _projectConsole;
+
    //============================================================
    // <T>列表页面</T>
    //
@@ -37,7 +42,6 @@ public class FProjectAction
                            FGcSessionInfo sessionInfo,
                            FProjectPage page){
       FGcUserInfo user = _userConsole.find(logicContext, sessionInfo.userId());
-      page.setUserLabel(user.label());
       page.setUser(user);
       return "project/List";
    }
@@ -54,6 +58,9 @@ public class FProjectAction
    public String detail(IWebContext context,
                         ILogicContext logicContext,
                         @AContainer(name = "page") FProjectPage page){
+      String guid = context.parameter("guid");
+      FGcProjectInfo project = _projectConsole.findByGuid(logicContext, guid);
+      page.setProject(project);
       return "project/Detail";
    }
 }

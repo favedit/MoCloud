@@ -2,39 +2,24 @@ package org.mo.content.core.solution.project;
 
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import com.cyou.gccloud.data.data.FDataSolutionProjectUnit;
-import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.solution.IGcProjectConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.resource3d.animation.IC3dAnimationConsole;
-import org.mo.content.core.resource3d.skeleton.IC3dSkeletonConsole;
-import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
-// <T>内容模型控制台。</T>
+// <T>方案项目控制台。</T>
 //============================================================
 public class FC3dProjectConsole
       implements
          IC3dProjectConsole
 {
-   // 存储管理接口
+   // 方案项目接口
    @ALink
-   protected IGcStorageConsole _storageConsole;
-
-   // 数据流管理接口
-   @ALink
-   protected IRs3StreamConsole _streamConsole;
-
-   // 骨骼管理接口
-   @ALink
-   protected IC3dSkeletonConsole _skeletonConsole;
-
-   // 动画管理接口
-   @ALink
-   protected IC3dAnimationConsole _animationConsole;
+   protected IGcProjectConsole _projectConsole;
 
    //============================================================
    // <T>获取数据处理。</T>
@@ -73,5 +58,18 @@ public class FC3dProjectConsole
          xitem.set("label", unit.label());
       }
       return EResult.Success;
+   }
+
+   //============================================================
+   // <T>查询数据处理。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public FDataSolutionProjectUnit query(ILogicContext context,
+                                         String guid){
+      return _projectConsole.findByGuid(context, guid);
    }
 }
