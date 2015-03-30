@@ -25,7 +25,7 @@
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' >
       <Property name='enable'>Y</Property>
-      <Property name='storage_host'>127.0.0.1</Property>
+      <Property name='storage_host'>10.127.3.11</Property>
       <Property name='storage_port'>27017</Property>
       <Property name='storage_name'>content</Property>
       <Initialize name='initialize'/>

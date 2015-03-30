@@ -22,6 +22,7 @@ public class XAopActions
    protected String _uri;
 
    public String buildFace(String uri){
+      // 使用*/*结尾
       if(_uri.endsWith("/*/*")){
          String pre = _uri.substring(0, _uri.length() - "/*/*".length());
          if(uri.startsWith(pre)){
@@ -34,8 +35,22 @@ public class XAopActions
             String end = uri.substring(uri.lastIndexOf('/') + 1);
             return faces[0] + first + faces[1] + end + faces[2];
          }
-      }else if(_uri.endsWith("/*")){
+      }
+      // 使用*结尾
+      else if(_uri.endsWith("/*")){
          String pre = _uri.substring(0, _uri.length() - "/*".length());
+         if(uri.startsWith(pre)){
+            uri = uri.substring(pre.length());
+         }
+         if(uri.indexOf('/') == uri.lastIndexOf('/')){
+            String[] faces = RString.split(_face, '*');
+            String mid = uri.substring(uri.indexOf('/') + 1);
+            return faces[0] + mid + faces[1];
+         }
+      }
+      // 为*内容
+      else if(_uri.equals("*")){
+         String pre = _uri.substring(0, _uri.length() - "*".length());
          if(uri.startsWith(pre)){
             uri = uri.substring(pre.length());
          }

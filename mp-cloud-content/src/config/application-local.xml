@@ -32,8 +32,8 @@
 
    <!-- 包含：内容设定 -->
    <Include>${application.config}/content/core.xml</Include>
-   <Include>${application.config}/content/service.xml</Include>
    <Include>${application.config}/content/servlet.xml</Include>
+   <Include>${application.config}/content/service.xml</Include>
    <Include>${application.config}/content/face.xml</Include>
 
    <!-- 包含：环境设定 -->

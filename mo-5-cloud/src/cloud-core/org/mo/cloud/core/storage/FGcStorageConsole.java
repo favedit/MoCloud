@@ -7,6 +7,7 @@ import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteFile;
+import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -241,13 +242,19 @@ public class FGcStorageConsole
       DBObject search = new BasicDBObject("guid", guid);
       // 获得数据
       DBObject item = collection.findOne(search);
-      String type = (String)item.get("type");
-      byte[] data = (byte[])item.get("data");
-      // 存储内容
-      String fileName = path + "/" + guid + "." + type;
-      try(FByteFile file = new FByteFile()){
-         file.assign(data, 0, data.length);
-         file.saveToFile(fileName);
+      if(item == null){
+         _logger.warn(this, "exportFile", "Data is not found. (catalog={1}, guid={2})", catalog, guid);
+      }else{
+         // 存储内容
+         String type = (String)item.get("type");
+         byte[] data = (byte[])item.get("data");
+         if(data != null){
+            String fileName = path + "/" + guid + "." + type;
+            try(FByteFile file = new FByteFile()){
+               file.assign(data, 0, data.length);
+               file.saveToFile(fileName);
+            }
+         }
       }
       return EResult.Success;
    }
@@ -268,14 +275,18 @@ public class FGcStorageConsole
       // 查找内容
       DBObject search = new BasicDBObject("guid", guid);
       // 存储内容
-      try(FByteFile file = new FByteFile(fileName)){
-         // 新建数据
-         DBObject item = new BasicDBObject();
-         item.put("guid", guid);
-         item.put("type", type);
-         item.put("data", file.toArray());
-         // 更新处理
-         collection.update(search, item, true, false);
+      if(RFile.exists(fileName)){
+         try(FByteFile file = new FByteFile(fileName)){
+            // 新建数据
+            DBObject item = new BasicDBObject();
+            item.put("guid", guid);
+            item.put("type", type);
+            item.put("data", file.toArray());
+            // 更新处理
+            collection.update(search, item, true, false);
+         }
+      }else{
+         _logger.warn(this, "importFile", "Data file is not found. (catalog={1}, guid={2}, file_name={3})", catalog, guid, fileName);
       }
       return EResult.Success;
    }
