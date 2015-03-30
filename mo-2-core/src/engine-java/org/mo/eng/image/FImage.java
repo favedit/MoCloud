@@ -125,11 +125,15 @@ public class FImage
          throw new FFatalError("Rect size is invalid. (x={1}, y={2},width={3}, height={4})", x, y, width, height);
       }
       // 创建目标
-      int imageType = _image.getType();
+      int imageType = _image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : _image.getType();
       BufferedImage image = new BufferedImage(width, height, imageType);
       Graphics2D graphics = null;
       try{
          graphics = image.createGraphics();
+         graphics.setComposite(AlphaComposite.Src);
+         graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
          graphics.drawImage(_image, 0, 0, width, height, x, y, x + width, y + height, null);
       }finally{
          if(graphics != null){

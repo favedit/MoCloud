@@ -126,7 +126,7 @@ public class FC3dBitmapConsole
                           String guid){
       //............................................................
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.ResourceCacheBitmap, guid);
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache3dBitmapPreview, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -134,7 +134,7 @@ public class FC3dBitmapConsole
       // 生成模型
       byte[] data = makePreview(logicContext, guid);
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.ResourceCacheBitmap, guid, "bin");
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache3dBitmapPreview, guid, "bin");
       storage.setData(data);
       _storageConsole.store(storage);
       // 返回数据

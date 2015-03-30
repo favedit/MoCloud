@@ -253,7 +253,7 @@ public class FRs3TemplateConsole
    public byte[] makeTemplateData(ILogicContext logicContext,
                                   String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTemplate, guid);
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache3dTemplate, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -270,7 +270,7 @@ public class FRs3TemplateConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTemplate, guid, EMime.Bin.type());
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache3dTemplate, guid, EMime.Bin.type());
       storage.setCode(template.code());
       storage.setData(data);
       _storageConsole.store(storage);

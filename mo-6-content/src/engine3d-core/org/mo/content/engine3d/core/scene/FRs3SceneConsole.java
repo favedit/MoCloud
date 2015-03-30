@@ -182,7 +182,7 @@ public class FRs3SceneConsole
    public byte[] makeThemeData(ILogicContext logicContext,
                                String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dSceneTheme, guid);
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache3dSceneTheme, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -199,7 +199,7 @@ public class FRs3SceneConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dSceneTheme, guid, EMime.Bin.type());
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache3dSceneTheme, guid, EMime.Bin.type());
       storage.setCode(scene.code());
       storage.setData(data);
       _storageConsole.store(storage);

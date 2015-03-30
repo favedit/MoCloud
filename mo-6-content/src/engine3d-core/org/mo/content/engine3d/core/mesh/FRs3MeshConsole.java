@@ -142,7 +142,7 @@ public class FRs3MeshConsole
       meshLogic.doUpdate(meshUnit);
       //............................................................
       // 废弃临时数据
-      _storageConsole.delete(EGcStorageCatalog.Resource3dMesh, guid);
+      _storageConsole.delete(EGcStorageCatalog.Cache3dMesh, guid);
       // 返回网格单元
       return meshLogic.find(meshUnit.ouid());
    }
@@ -190,7 +190,7 @@ public class FRs3MeshConsole
    public byte[] makeMeshData(ILogicContext logicContext,
                               String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dMesh, guid);
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache3dMesh, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -207,7 +207,7 @@ public class FRs3MeshConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dMesh, guid, EMime.Bin.type());
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache3dMesh, guid, EMime.Bin.type());
       storage.setCode(mesh.code());
       storage.setData(data);
       _storageConsole.store(storage);

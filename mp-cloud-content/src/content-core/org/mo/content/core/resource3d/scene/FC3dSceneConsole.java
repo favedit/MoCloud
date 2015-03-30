@@ -171,7 +171,7 @@ public class FC3dSceneConsole
       themeLogic.doUpdate(themeUnit);
       //............................................................
       // 废弃临时数据
-      _storageConsole.delete(EGcStorageCatalog.Resource3dSceneTheme, themeGuid);
+      _storageConsole.delete(EGcStorageCatalog.Cache3dSceneTheme, themeGuid);
       // 返回结果
       return EResult.Success;
    }

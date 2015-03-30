@@ -199,7 +199,7 @@ public class FRs3ModelConsole
    public byte[] makeModelData(ILogicContext logicContext,
                                String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dModel, guid);
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache3dModel, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -216,7 +216,7 @@ public class FRs3ModelConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dModel, guid, EMime.Bin.type());
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache3dModel, guid, EMime.Bin.type());
       storage.setCode(model.code());
       storage.setData(data);
       _storageConsole.store(storage);

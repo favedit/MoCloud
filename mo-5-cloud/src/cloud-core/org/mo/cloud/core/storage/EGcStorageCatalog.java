@@ -14,27 +14,27 @@ public class EGcStorageCatalog
    // 资源3D跟踪
    public final static String Resource3dTrack = "resource3d.track";
 
+   // 资源位图预览
+   public final static String Cache3dBitmapPreview = "cache.bitmap.preview";
+
    // 资源3D纹理
-   public final static String Resource3dTexture = "resource3d.texture";
+   public final static String Cache3dTexture = "cache3d.texture";
 
    // 资源3D压缩纹理
-   public final static String Resource3dTextureCompress = "resource3d.texture.compress";
+   public final static String Cache3dTextureCompress = "cache3d.texture.compress";
 
    // 资源3D纹理位图
-   public final static String Resource3dTextureBitmap = "resource3d.texture.bitmap";
+   public final static String Cache3dTextureBitmap = "cache3d.texture.bitmap";
 
    // 资源3D网格
-   public final static String Resource3dMesh = "resource3d.mesh";
+   public final static String Cache3dMesh = "cache3d.mesh";
 
    // 资源3D模型
-   public final static String Resource3dModel = "resource3d.model";
+   public final static String Cache3dModel = "cache3d.model";
 
    // 资源3D模板
-   public final static String Resource3dTemplate = "resource3d.template";
+   public final static String Cache3dTemplate = "cache3d.template";
 
    // 资源3D场景
-   public final static String Resource3dSceneTheme = "resource3d.scene.theme";
-
-   // 资源位图预览
-   public final static String ResourceCacheBitmap = "cache.bitmap.preview";
+   public final static String Cache3dSceneTheme = "cache3d.scene.theme";
 }

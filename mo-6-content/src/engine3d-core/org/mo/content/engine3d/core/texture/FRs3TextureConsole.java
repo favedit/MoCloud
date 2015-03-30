@@ -140,7 +140,7 @@ public class FRs3TextureConsole
    public byte[] makeTextureData(ILogicContext logicContext,
                                  String guid,
                                  boolean compress){
-      String catalog = compress ? EGcStorageCatalog.Resource3dTextureCompress : EGcStorageCatalog.Resource3dTexture;
+      String catalog = compress ? EGcStorageCatalog.Cache3dTextureCompress : EGcStorageCatalog.Cache3dTexture;
       //............................................................
       // 查找数据
       SGcStorage findStorage = _storageConsole.find(catalog, guid);
@@ -149,11 +149,11 @@ public class FRs3TextureConsole
       }
       //............................................................
       // 生成模型
+      byte[] data = null;
       FRs3Texture texture = makeTexture(logicContext, guid);
       // 获得数据
       FByteStream stream = new FByteStream();
       texture.serialize(stream);
-      byte[] data = null;
       if(compress){
          // 压缩数据
          try(FCompressStream file = new FCompressStream(stream.toArray())){
@@ -242,7 +242,7 @@ public class FRs3TextureConsole
          SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
          data = resource.data();
          if(imageUnit.formatCode().equals("jpg")){
-            // 对大于256K的数据进行降低画质压缩处理
+            // 对大于128K的数据进行降低画质压缩处理
             if(data.length > 1024 * 128){
                compress = true;
             }
@@ -290,7 +290,7 @@ public class FRs3TextureConsole
       String uniqueCode = guid + "|" + code;
       //............................................................
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Resource3dTextureBitmap, uniqueCode);
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache3dTextureBitmap, uniqueCode);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -298,7 +298,7 @@ public class FRs3TextureConsole
       // 生成模型
       byte[] data = makeBitmap(logicContext, guid, code);
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Resource3dTextureBitmap, uniqueCode, "bin");
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache3dTextureBitmap, uniqueCode, "bin");
       storage.setCode(uniqueCode);
       storage.setData(data);
       _storageConsole.store(storage);
