@@ -4,10 +4,18 @@ import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.awt.image.DirectColorModel;
+import java.awt.image.PixelGrabber;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +40,12 @@ public class FImage
 {
    // 日志输出接口
    private final static ILogger _logger = RLogger.find(FImage.class);
+
+   // 颜色位
+   private static final int[] RGB_MASKS = {0xFF0000, 0xFF00, 0xFF};
+
+   // 颜色模式
+   private static final ColorModel RGB_OPAQUE = new DirectColorModel(32, RGB_MASKS[0], RGB_MASKS[1], RGB_MASKS[2]);
 
    // 位图
    protected BufferedImage _image;
@@ -152,7 +166,15 @@ public class FImage
    public void loadData(byte[] data){
       try{
          _logger.debug(this, "loadFile", "Load image data. (data={1}, length={2})", data, data.length);
-         _image = ImageIO.read(new ByteArrayInputStream(data));
+         //_image = ImageIO.read(new ByteArrayInputStream(data));
+         Image image = Toolkit.getDefaultToolkit().createImage(data);
+         PixelGrabber pixelGrabber = new PixelGrabber(image, 0, 0, -1, -1, true);
+         pixelGrabber.grabPixels();
+         int width = pixelGrabber.getWidth();
+         int height = pixelGrabber.getHeight();
+         DataBuffer buffer = new DataBufferInt((int[])pixelGrabber.getPixels(), width * height);
+         WritableRaster raster = Raster.createPackedRaster(buffer, width, height, width, RGB_MASKS, null);
+         _image = new BufferedImage(RGB_OPAQUE, raster, false, null);
       }catch(Exception e){
          _logger.error(this, "loadFile", e, "Load image data failure. (data={1}, length={2})", data, data.length);
          throw new FFatalError(e);
@@ -167,7 +189,15 @@ public class FImage
    public void loadFile(String fileName){
       try{
          _logger.debug(this, "loadFile", "Load image file. (file_name={1})", fileName);
-         _image = ImageIO.read(new File(fileName));
+         //_image = ImageIO.read(new File(fileName));
+         Image image = Toolkit.getDefaultToolkit().createImage(fileName);
+         PixelGrabber pixelGrabber = new PixelGrabber(image, 0, 0, -1, -1, true);
+         pixelGrabber.grabPixels();
+         int width = pixelGrabber.getWidth();
+         int height = pixelGrabber.getHeight();
+         DataBuffer buffer = new DataBufferInt((int[])pixelGrabber.getPixels(), width * height);
+         WritableRaster raster = Raster.createPackedRaster(buffer, width, height, width, RGB_MASKS, null);
+         _image = new BufferedImage(RGB_OPAQUE, raster, false, null);
       }catch(Exception e){
          _logger.error(this, "loadFile", e, "Load image file failure. (file_name={1})", fileName);
          throw new FFatalError(e);
