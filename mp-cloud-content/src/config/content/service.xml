@@ -30,12 +30,12 @@
    <!-- 设计：资源数据服务                             -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content.resource'
-         face  = 'org.mo.content.service.solution.IResourceService'/>
+         name  = 'cloud.content3d.resource'
+         face  = 'org.mo.content.service.resource3d.IResourceService'/>
 
    <Component
-         face  = 'org.mo.content.service.solution.IResourceService'
-         class = 'org.mo.content.service.solution.FResourceService'
+         face  = 'org.mo.content.service.resource3d.IResourceService'
+         class = 'org.mo.content.service.resource3d.FResourceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->

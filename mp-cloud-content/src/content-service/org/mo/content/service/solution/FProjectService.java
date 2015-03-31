@@ -138,12 +138,12 @@ public class FProjectService
                          IWebInput input,
                          IWebOutput output){
       // 获得参数
-      FXmlNode xinput = input.config();
-      String code = xinput.nodeText("Code");
+      FXmlNode xproject = input.config().findNode("Project");
+      String code = xproject.get("code", null);
       if(RString.isEmpty(code)){
          throw new FFatalError("Code is empty.");
       }
-      String label = xinput.nodeText("Label");
+      String label = xproject.get("label", null);
       if(RString.isEmpty(label)){
          throw new FFatalError("Label is empty.");
       }

@@ -29,11 +29,11 @@ public class FGcServiceConsole
 
    // 消息控制台
    @ALink
-   protected IGcMessageConsole _messageConsole;
+   protected IGcMessageConsole _gcMessageConsole;
 
    // 会话控制台
    @ALink
-   protected IGcSessionConsole _sessionConsole;
+   protected IGcSessionConsole _gcSessionConsole;
 
    //============================================================
    // <T>构造服务命令处理控制台。</T>
@@ -71,13 +71,13 @@ public class FGcServiceConsole
          }
       }
       // 验证会话存在
-      FGcSessionInfo session = _sessionConsole.findByGuid(logicContext, sessionGuid);
+      FGcSessionInfo session = _gcSessionConsole.findByGuid(logicContext, sessionGuid);
       // 检查会话信息
       if(session == null){
-         _messageConsole.pushError(context, "E00103", sessionGuid);
+         _gcMessageConsole.pushError(context, "E00103", sessionGuid);
          return EResult.Failure;
       }else if(!session.ovld()){
-         _messageConsole.pushError(context, "E00104", sessionGuid);
+         _gcMessageConsole.pushError(context, "E00104", sessionGuid);
          return EResult.Failure;
       }
       // 绑定数据
@@ -115,19 +115,19 @@ public class FGcServiceConsole
          }
       }
       // 验证会话存在
-      FGcSessionInfo sessionInfo = _sessionConsole.findByGuid(logicContext, sessionGuid);
+      FGcSessionInfo sessionInfo = _gcSessionConsole.findByGuid(logicContext, sessionGuid);
       // 检查会话信息
       if(sessionInfo == null){
          // 会话不存在
-         _messageConsole.pushError(context, "E00103", sessionGuid);
+         _gcMessageConsole.pushError(context, "E00103", sessionGuid);
          return EResult.Failure;
       }else if(!sessionInfo.ovld()){
          // 会话已经失效
-         _messageConsole.pushError(context, "E00104", sessionGuid);
+         _gcMessageConsole.pushError(context, "E00104", sessionGuid);
          return EResult.Failure;
       }else if(sessionInfo.userId() == 0){
          // 会话用户未登录
-         _messageConsole.pushError(context, "E00105", sessionGuid);
+         _gcMessageConsole.pushError(context, "E00105", sessionGuid);
          return EResult.Failure;
       }
       // 绑定会话数据

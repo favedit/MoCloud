@@ -14,21 +14,19 @@
 <SCRIPT language='javascript' src='../script/ajs/mo.js'></SCRIPT>
 <SCRIPT language='javascript' src='../script/ajs/context_cn.js'></SCRIPT>
 
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionProjectProperty.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectCatalogToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectCatalogContent.js'></SCRIPT>
 
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogContent.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectSearchToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectSearchItem.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectSearchContent.js'></SCRIPT>
 
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchItem.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchContent.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectPreviewToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectPreviewContent.js'></SCRIPT>
 
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPreviewToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPreviewContent.js'></SCRIPT>
-
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionMenuBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionTabBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionWorkspace.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectMenuBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectTabBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.2-design-project/FDsProjectWorkspace.js'></SCRIPT>
 
 <SCRIPT>
 function _load(){
@@ -36,12 +34,12 @@ function _load(){
    RApplication.initialize();
    RBrowser.setContentPath('../script');
    // 加载工作区
-   var w = RApplication.findWorkspace(FDsSolutionWorkspace);
-   w.buildDefine(id_workspace);
-   w.setPanel(id_workspace);
-   w.psResize();
-   w.load();
-   RConsole.find(FUiWorkspaceConsole).active(w);
+   var workspace = RApplication.findWorkspace(FDsProjectWorkspace);
+   workspace.buildDefine(id_workspace);
+   workspace.setPanel(id_workspace);
+   workspace.psResize();
+   workspace.load();
+   RConsole.find(FUiWorkspaceConsole).active(workspace);
 }
 </SCRIPT>
 </HEAD>

@@ -1,4 +1,4 @@
-package org.mo.content.service.solution;
+package org.mo.content.service.resource3d;
 
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;

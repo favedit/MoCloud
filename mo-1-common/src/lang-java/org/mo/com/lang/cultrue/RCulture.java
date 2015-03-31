@@ -42,8 +42,10 @@ public class RCulture
       int count = _cultures.count();
       for(int n = 0; n < count; n++){
          FCulture culture = _cultures.get(n);
-         if(culture.threadId() == threadId){
-            return culture;
+         if(culture != null){
+            if(culture.threadId() == threadId){
+               return culture;
+            }
          }
       }
       return null;
@@ -79,13 +81,13 @@ public class RCulture
    //============================================================
    public static void link(FCulture culture){
       // 检查参数
-      if(null == culture){
+      if(culture == null){
          throw new FFatalError("Culture is null.");
       }
       // 检查存在性
       long threadId = Thread.currentThread().getId();
       FCulture findCulture = findThreadCulture(threadId);
-      if(null != findCulture){
+      if(findCulture != null){
          throw new FFatalError("Culture is already exists.");
       }
       // 放入集合

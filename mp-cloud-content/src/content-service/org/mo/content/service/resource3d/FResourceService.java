@@ -1,4 +1,4 @@
-package org.mo.content.service.solution;
+package org.mo.content.service.resource3d;
 
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
@@ -80,12 +80,11 @@ public class FResourceService
                        IWebInput input,
                        IWebOutput output){
       // 检查参数
-      FXmlNode xinput = input.config();
-      String typeCd = xinput.nodeText("type_cd");
-      String serach = xinput.nodeText("serach");
-      String order = xinput.nodeText("order");
-      int pageSize = RInteger.toRange(xinput.nodeTextAsInt("page_size", 20), 0, 200);
-      int page = xinput.nodeTextAsInt("page", 0);
+      String typeCd = context.parameter("type_cd");
+      String serach = context.parameter("serach");
+      String order = context.parameter("order");
+      int pageSize = RInteger.toRange(context.parameterAsInteger("page_size", 20), 0, 200);
+      int page = context.parameterAsInteger("page", 0);
       // 设置输出节点
       FXmlNode xresources = output.config().createNode("ResourceCollection");
       xresources.set("total", 0);

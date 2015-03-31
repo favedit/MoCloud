@@ -94,7 +94,7 @@ public class FAccountConsole
          throw new FFatalError("User is not exists.");
       }
       // 检查密码是否相等
-      if(!passwordMd5.equals(user.passport())){
+      if(!passwordMd5.equals(user.password())){
          throw new FFatalError("User password is invalid.");
       }
       // 打开用户会话
