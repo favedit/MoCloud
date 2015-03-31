@@ -1,8 +1,11 @@
 package org.mo.content.service.solution;
 
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource3d.material.IC3dMaterialConsole;
 import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
@@ -12,6 +15,8 @@ import org.mo.content.core.resource3d.template.IC3dTemplateConsole;
 import org.mo.content.core.resource3d.texture.IC3dBitmapConsole;
 import org.mo.content.core.resource3d.texture.IC3dTextureConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
+import org.mo.data.logic.FLogicUnit;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
@@ -64,29 +69,43 @@ public class FResourceService
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
    @Override
-   public EResult fetch(IWebContext context,
-                        ILogicContext logicContext,
-                        IWebInput input,
-                        IWebOutput output){
-      String typeCd = context.parameter("type_cd");
-      String serach = context.parameter("serach");
-      int pageSize = context.parameterAsInteger("page_size", 20);
-      int page = context.parameterAsInteger("page", 0);
+   public EResult list(IWebContext context,
+                       ILogicContext logicContext,
+                       FGcSessionInfo session,
+                       IWebInput input,
+                       IWebOutput output){
+      // 检查参数
+      FXmlNode xinput = input.config();
+      String typeCd = xinput.nodeText("type_cd");
+      String serach = xinput.nodeText("serach");
+      String order = xinput.nodeText("order");
+      int pageSize = RInteger.toRange(xinput.nodeTextAsInt("page_size", 20), 0, 200);
+      int page = xinput.nodeTextAsInt("page", 0);
       // 设置输出节点
-      FXmlNode xoutput = output.config().createNode("ItemCollection");
-      xoutput.set("page_count", 0);
-      xoutput.set("page_size", pageSize);
-      xoutput.set("page", page);
+      FXmlNode xresources = output.config().createNode("ResourceCollection");
+      xresources.set("total", 0);
+      xresources.set("count", 0);
+      xresources.set("page_count", 0);
+      xresources.set("page_size", pageSize);
+      xresources.set("page", page);
+      //............................................................
+      // 生成查询脚本
+      String whereSql = "(USER_ID=" + session.userId() + ")";
+      if(!RString.isEmpty(serach)){
+         whereSql += " AND (LABEL LIKE '%" + serach + "%')";
+      }
       //............................................................
       // 查询数据
+      FLogicDataset<FLogicUnit> dataset = null;
       switch(typeCd){
          case "picture":
             // 查找位图
-            _bitmapConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
             break;
          case "sound":
             // 查找声音
@@ -96,30 +115,46 @@ public class FResourceService
             break;
          case "texture":
             // 查找纹理
-            _textureConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            //_textureConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
          case "material":
             // 查找材质
-            _materialConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
          case "mesh":
             // 查找网格
-            _meshConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            dataset = _meshConsole.list(logicContext, whereSql, order, pageSize, page);
             break;
          case "model":
             // 查找网格
-            _modelConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            //_modelConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
          case "template":
             // 查找模板
-            _templateConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
          case "scene":
             // 查找网格
-            _sceneConsole.fetch(logicContext, xoutput, serach, pageSize, page);
+            //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
          default:
             throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
+      }
+      //............................................................
+      // 生成输出内容
+      if(dataset != null){
+         xresources.set("total", dataset.total());
+         xresources.set("count", dataset.count());
+         xresources.set("page_size", dataset.pageSize());
+         xresources.set("page_count", dataset.pageCount());
+         xresources.set("page", dataset.page());
+         for(FLogicUnit unit : dataset){
+            FXmlNode xresource = xresources.createNode("Resource");
+            xresource.set("guid", unit.get("guid"));
+            xresource.set("type_cd", typeCd);
+            xresource.set("code", unit.get("full_code"));
+            xresource.set("label", unit.get("label"));
+         }
       }
       return EResult.Success;
    }

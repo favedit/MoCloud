@@ -10,10 +10,10 @@ package com.cyou.gccloud.define.enums.core;
 //
 // @enum
 //============================================================
-public class EGcAccountSource
+public class EGcAccountFrom
 {
    // 枚举名称
-   public final static String DefineName = "GcAccountSource";
+   public final static String DefineName = "GcAccountFrom";
 
    // 未知
    public final static int Unknown = 0;
@@ -24,32 +24,32 @@ public class EGcAccountSource
    // 未知标签
    public final static String UnknownLabel = "未知";
 
-   // 游戏学院
-   public final static int GameCollege = 1;
+   // 服务
+   public final static int Service = 1;
 
-   // 游戏学院字符串
-   public final static String GameCollegeString = "GameCollege";
+   // 服务字符串
+   public final static String ServiceString = "Service";
 
-   // 游戏学院标签
-   public final static String GameCollegeLabel = "游戏学院";
+   // 服务标签
+   public final static String ServiceLabel = "服务";
 
-   // GameMei
-   public final static int GameMei = 2;
+   // 网页站点
+   public final static int Web = 2;
 
-   // GameMei字符串
-   public final static String GameMeiString = "GameMei";
+   // 网页站点字符串
+   public final static String WebString = "Web";
 
-   // GameMei标签
-   public final static String GameMeiLabel = "GameMei";
+   // 网页站点标签
+   public final static String WebLabel = "网页站点";
 
-   // 游戏学院XMPP用户
-   public final static int GameCollegeXmpp = 3;
+   // 移动设备
+   public final static int Mobile = 3;
 
-   // 游戏学院XMPP用户字符串
-   public final static String GameCollegeXmppString = "GameCollegeXmpp";
+   // 移动设备字符串
+   public final static String MobileString = "Mobile";
 
-   // 游戏学院XMPP用户标签
-   public final static String GameCollegeXmppLabel = "游戏学院XMPP用户";
+   // 移动设备标签
+   public final static String MobileLabel = "移动设备";
 
    //============================================================
    // <T>是否含有指定内容</T>
@@ -83,12 +83,12 @@ public class EGcAccountSource
       switch(value){
          case Unknown:
             return UnknownString;
-         case GameCollege:
-            return GameCollegeString;
-         case GameMei:
-            return GameMeiString;
-         case GameCollegeXmpp:
-            return GameCollegeXmppString;
+         case Service:
+            return ServiceString;
+         case Web:
+            return WebString;
+         case Mobile:
+            return MobileString;
          default:
             return "Unknown";
       }
@@ -104,12 +104,12 @@ public class EGcAccountSource
       switch(value){
          case Unknown:
             return UnknownLabel;
-         case GameCollege:
-            return GameCollegeLabel;
-         case GameMei:
-            return GameMeiLabel;
-         case GameCollegeXmpp:
-            return GameCollegeXmppLabel;
+         case Service:
+            return ServiceLabel;
+         case Web:
+            return WebLabel;
+         case Mobile:
+            return MobileLabel;
          default:
             return "Unknown";
       }
@@ -125,12 +125,12 @@ public class EGcAccountSource
       switch(value){
          case UnknownString:
             return Unknown;
-         case GameCollegeString:
-            return GameCollege;
-         case GameMeiString:
-            return GameMei;
-         case GameCollegeXmppString:
-            return GameCollegeXmpp;
+         case ServiceString:
+            return Service;
+         case WebString:
+            return Web;
+         case MobileString:
+            return Mobile;
          default:
             return 0;
       }

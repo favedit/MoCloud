@@ -1,12 +1,12 @@
-package org.mo.cloud.logic.resource3d.mesh;
+package org.mo.cloud.logic.resource.bitmap;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 
 //============================================================
-// <T>3D资源网格数据流控制台接口。</T>
+// <T>资源位图信息控制台接口。</T>
 //============================================================
-public interface IGcRs3MeshStreamConsole
+public interface IGcResBitmapConsole
       extends
-         IAbstractLogicUnitConsole<FGcRs3MeshStreamInfo>
+         IAbstractLogicUnitConsole<FGcResBitmapInfo>
 {
 }

@@ -13,10 +13,10 @@ public interface IGcUserConsole
    //============================================================
    // <T>根据通行证查找用户信息。</T>
    //
-   // @param context 逻辑环境
+   // @param logicContext 逻辑环境
    // @param passport 通行证
    // @return 用户信息
    //============================================================
-   FGcUserInfo findByPassport(ILogicContext context,
+   FGcUserInfo findByPassport(ILogicContext logicContext,
                               String passport);
 }

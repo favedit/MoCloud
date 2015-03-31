@@ -1,4 +1,4 @@
-package org.mo.cloud.core.service;
+package org.mo.cloud.core.common;
 
 import org.mo.data.logic.FLogicContext;
 

@@ -1,6 +1,6 @@
 package org.mo.content.engine3d.core.mesh;
 
-import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshUnit;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
@@ -228,7 +228,7 @@ public class FRs3MeshConsole
                                 String code,
                                 String fileName){
       // 删除已经存在的数据网格
-      FGcRs3MeshUnit findMeshUnit = _dataMeshConsole.findByCode(logicContext, code);
+      FGcRs3MeshInfo findMeshUnit = _dataMeshConsole.findByCode(logicContext, code);
       if(findMeshUnit != null){
          _dataMeshConsole.doDelete(logicContext, findMeshUnit);
       }

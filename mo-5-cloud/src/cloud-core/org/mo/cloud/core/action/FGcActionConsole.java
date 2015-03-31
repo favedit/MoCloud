@@ -1,9 +1,8 @@
 package org.mo.cloud.core.action;
 
+import org.mo.cloud.core.message.IGcMessageConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.cloud.logic.system.IGcSessionConsole;
-
-import org.mo.cloud.core.message.IGcMessageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;

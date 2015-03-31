@@ -1,9 +1,8 @@
 package org.mo.cloud.logic.resource3d.mesh;
 
-import org.mo.cloud.logic.resource3d.stream.IGcRs3StreamConsole;
-
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.logic.resource3d.stream.IGcRs3StreamConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -12,7 +11,7 @@ import org.mo.data.logic.ILogicContext;
 // <T>3D资源网格数据流控制台。</T>
 //============================================================
 public class FGcRs3MeshStreamConsole
-      extends FAbstractLogicUnitConsole<FDataResource3dMeshStreamLogic, FGcRs3MeshStreamUnit>
+      extends FAbstractLogicUnitConsole<FDataResource3dMeshStreamLogic, FGcRs3MeshStreamInfo>
       implements
          IGcRs3MeshStreamConsole
 {
@@ -24,7 +23,7 @@ public class FGcRs3MeshStreamConsole
    // <T>构造3D资源网格数据流控制台。</T>
    //============================================================
    public FGcRs3MeshStreamConsole(){
-      super(FDataResource3dMeshStreamLogic.class, FGcRs3MeshStreamUnit.class);
+      super(FDataResource3dMeshStreamLogic.class, FGcRs3MeshStreamInfo.class);
    }
 
    //============================================================
@@ -36,7 +35,7 @@ public class FGcRs3MeshStreamConsole
    //============================================================
    @Override
    public EResult onDeleteAfter(ILogicContext logicContext,
-                                FGcRs3MeshStreamUnit unit){
+                                FGcRs3MeshStreamInfo unit){
       // 删除数据流
       long streamId = unit.streamId();
       _streamConsole.doDelete(logicContext, streamId);

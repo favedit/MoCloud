@@ -9,6 +9,8 @@ CREATE TABLE `CC_SYS_SESSION`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT NOT NULL, 
    `PROJECT_ID`                    BIGINT, 
+   `FROM_CD`                       INTEGER, 
+   `FROM_CODE`                     VARCHAR(40), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 

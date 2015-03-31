@@ -1417,6 +1417,23 @@ public class FXmlNode
    }
 
    //============================================================
+   // <T>获得节点列表中指定节点的整数。</T>
+   //
+   // @param name 节点名称
+   // @param defaultValue 默认内容
+   // @return 整数
+   //============================================================
+   public int nodeTextAsInt(String name,
+                            int defaultValue){
+      int result = defaultValue;
+      String text = nodeText(name);
+      if(text != null){
+         result = RInteger.parse(text, defaultValue);
+      }
+      return result;
+   }
+
+   //============================================================
    // <T>获得节点列表中指定节点的长整数。</T>
    //
    // @param name 节点名称
@@ -1427,6 +1444,23 @@ public class FXmlNode
       String text = nodeText(name);
       if(text != null){
          result = RLong.parse(text);
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>获得节点列表中指定节点的长整数。</T>
+   //
+   // @param name 节点名称
+   // @param defaultValue 默认内容
+   // @return 长整数
+   //============================================================
+   public long nodeTextAsLong(String name,
+                              long defaultValue){
+      long result = defaultValue;
+      String text = nodeText(name);
+      if(text != null){
+         result = RLong.parse(text, defaultValue);
       }
       return result;
    }
@@ -1447,6 +1481,23 @@ public class FXmlNode
    }
 
    //============================================================
+   // <T>获得节点列表中指定节点的浮点数整数。</T>
+   //
+   // @param name 节点名称
+   // @param defaultValue 默认内容
+   // @return 浮点数整数
+   //============================================================
+   public float nodeTextAsFloat(String name,
+                                float defaultValue){
+      float result = defaultValue;
+      String text = nodeText(name);
+      if(text != null){
+         result = RFloat.parse(text, defaultValue);
+      }
+      return result;
+   }
+
+   //============================================================
    // <T>获得节点列表中指定节点的双精度浮点数整数。</T>
    //
    // @param name 节点名称
@@ -1457,6 +1508,23 @@ public class FXmlNode
       String text = nodeText(name);
       if(text != null){
          result = RDouble.parse(text);
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>获得节点列表中指定节点的双精度浮点数整数。</T>
+   //
+   // @param name 节点名称
+   // @param defaultValue 默认内容
+   // @return 双精度浮点数整数
+   //============================================================
+   public double nodeTextAsDouble(String name,
+                                  double defaultValue){
+      double result = defaultValue;
+      String text = nodeText(name);
+      if(text != null){
+         result = RDouble.parse(text, defaultValue);
       }
       return result;
    }

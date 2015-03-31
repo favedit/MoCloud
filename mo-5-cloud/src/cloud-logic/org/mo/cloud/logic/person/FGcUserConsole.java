@@ -23,15 +23,15 @@ public class FGcUserConsole
    //============================================================
    // <T>根据通行证查找用户信息。</T>
    //
-   // @param context 逻辑环境
+   // @param logicContext 逻辑环境
    // @param passport 通行证
    // @return 用户信息
    //============================================================
    @Override
-   public FGcUserInfo findByPassport(ILogicContext context,
+   public FGcUserInfo findByPassport(ILogicContext logicContext,
                                      String passport){
       String whereSql = FDataPersonUserLogic.PASSPORT + "='" + RSql.formatValue(passport) + "'";
-      FDataPersonUserLogic logic = findLogic(context);
+      FDataPersonUserLogic logic = findLogic(logicContext);
       FGcUserInfo user = logic.search(FGcUserInfo.class, whereSql);
       return user;
    }

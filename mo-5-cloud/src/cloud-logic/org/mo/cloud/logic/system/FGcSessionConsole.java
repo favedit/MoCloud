@@ -69,8 +69,9 @@ public class FGcSessionConsole
       // 新建记录
       FGcSessionInfo session = logic.doPrepare(FGcSessionInfo.class);
       session.setUserId(userId);
+      session.setFromCd(fromCd);
       logic.doInsert(session);
-      _logger.debug(this, "open", "Open session. (guid={1}, user_id={2})", session.guid(), userId);
+      _logger.debug(this, "open", "Open session. (guid={1}, user_id={2}, from_cd={3})", session.guid(), userId, fromCd);
       // 绑定数据
       _bindConsole.bind(FGcSessionInfo.class, session);
       // 返回结果

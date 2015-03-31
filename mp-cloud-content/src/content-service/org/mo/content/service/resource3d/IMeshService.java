@@ -1,4 +1,4 @@
-package org.mo.content.service.solution;
+package org.mo.content.service.resource3d;
 
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
@@ -9,10 +9,10 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>资源3D服务接口。</T>
+// <T>资源3D网格服务接口。</T>
 //============================================================
 @AWebLogin
-public interface IProjectService
+public interface IMeshService
 {
    //============================================================
    // <T>获取数据处理。</T>

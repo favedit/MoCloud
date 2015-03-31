@@ -2,7 +2,6 @@ package org.mo.content.core.person;
 
 import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.cloud.logic.person.IGcUserConsole;
-
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
 
@@ -29,9 +28,11 @@ public interface IAccountConsole
    // @param context 逻辑环境
    // @param passport 账号
    // @param password 密码
+   // @param fromCd 来源方式
    // @return 用户信息
    //============================================================
    FGcUserInfo doLogin(ILogicContext context,
                        String passport,
-                       String password);
+                       String password,
+                       int fromCd);
 }

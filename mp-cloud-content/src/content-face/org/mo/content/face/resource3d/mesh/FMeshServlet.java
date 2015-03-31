@@ -1,6 +1,6 @@
 package org.mo.content.face.resource3d.mesh;
 
-import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshUnit;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 
 import javax.servlet.http.HttpServletResponse;
@@ -69,7 +69,7 @@ public class FMeshServlet
       }
       // 获得唯一编号
       if(RString.isEmpty(guid)){
-         FGcRs3MeshUnit unit = _dataMeshConsole.findByFullCode(logicContext, code);
+         FGcRs3MeshInfo unit = _dataMeshConsole.findByFullCode(logicContext, code);
          if(unit == null){
             unit = _dataMeshConsole.findByCode(logicContext, code);
          }

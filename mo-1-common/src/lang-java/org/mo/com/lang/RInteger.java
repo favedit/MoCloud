@@ -289,6 +289,26 @@ public class RInteger
    }
 
    //============================================================
+   // <T>将一个整数转换为范围内整数。</T>
+   //
+   // @param value 整数
+   // @param minValue 最小值
+   // @param maxValue 最大值
+   // @return 整数
+   //============================================================
+   public final static int toRange(int value,
+                                   int minValue,
+                                   int maxValue){
+      if(value < minValue){
+         value = minValue;
+      }
+      if(value > maxValue){
+         value = maxValue;
+      }
+      return value;
+   }
+
+   //============================================================
    // <T>将一个整数转换为字节数组。</T>
    //
    // @param value 整数

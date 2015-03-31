@@ -7,13 +7,12 @@ import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.com.console.FConsole;
-import org.mo.com.lang.EResult;
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapConsole;
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
-import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
+import org.mo.data.logic.FLogicUnit;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
 
@@ -21,11 +20,10 @@ import org.mo.eng.image.FImage;
 // <T>内容图片控制台。</T>
 //============================================================
 public class FC3dBitmapConsole
-      extends FConsole
+      extends FGcResBitmapConsole
       implements
          IC3dBitmapConsole
 {
-
    // 存储控制台
    @ALink
    protected IGcStorageConsole _storageConsole;
@@ -39,40 +37,24 @@ public class FC3dBitmapConsole
    //============================================================
    // <T>获取数据处理。</T>
    //
-   // @param context 逻辑环境
-   // @param xoutput 输出内容
-   // @param serach 搜索内容
+   // @param logicContext 逻辑环境
+   // @param whereSql 搜索内容
+   // @param orderSql 排序内容
    // @param pageSize 页面大小
    // @param page 页面编号
    // @return 处理结果
    //============================================================
    @Override
-   public EResult fetch(ILogicContext context,
-                        FXmlNode xoutput,
-                        String serach,
-                        int pageSize,
-                        int page){
-      // 生成查询脚本
-      String whereSql = null;
-      if(!RString.isEmpty(serach)){
-         whereSql = FDataResourceBitmapLogic.FULL_CODE + " LIKE '%" + serach + "%'";
-      }
-      // 查询数据
-      FDataResourceBitmapLogic logic = context.findLogic(FDataResourceBitmapLogic.class);
-      FLogicDataset<FDataResourceBitmapUnit> dataset = logic.fetch(whereSql, pageSize, page);
-      xoutput.set("total", dataset.total());
-      xoutput.set("count", dataset.count());
-      xoutput.set("page_size", dataset.pageSize());
-      xoutput.set("page_count", dataset.pageCount());
-      xoutput.set("page", dataset.page());
-      for(FDataResourceBitmapUnit unit : dataset){
-         FXmlNode xitem = xoutput.createNode("Item");
-         xitem.set("guid", unit.guid());
-         xitem.set("type", "picture");
-         xitem.set("code", unit.fullCode());
-         xitem.set("label", unit.label());
-      }
-      return EResult.Success;
+   public FLogicDataset<FLogicUnit> list(ILogicContext logicContext,
+                                         String whereSql,
+                                         String orderSql,
+                                         int pageSize,
+                                         int page){
+      FLogicDataset<FGcResBitmapInfo> bitmaps = fetch(logicContext, whereSql, orderSql, pageSize, page);
+      // 转换结果
+      FLogicDataset<FLogicUnit> dataset = new FLogicDataset<FLogicUnit>(FLogicUnit.class);
+      dataset.loadDataset(bitmaps);
+      return dataset;
    }
 
    //============================================================

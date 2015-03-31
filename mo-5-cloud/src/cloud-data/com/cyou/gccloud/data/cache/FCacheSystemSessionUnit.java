@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -46,6 +47,18 @@ public class FCacheSystemSessionUnit
 
    // 字段项目编号的定义。
    protected long _projectId;
+
+   // 存储字段来源方式的定义。
+   private int __fromCd;
+
+   // 字段来源方式的定义。
+   protected int _fromCd;
+
+   // 存储字段来源代码的定义。
+   private String __fromCode;
+
+   // 字段来源代码的定义。
+   protected String _fromCode;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -213,6 +226,60 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
+   // <T>判断来源方式的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFromCdChanged(){
+      return __fromCd != _fromCd;
+   }
+
+   //============================================================
+   // <T>获得来源方式的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int fromCd(){
+      return _fromCd;
+   }
+
+   //============================================================
+   // <T>设置来源方式的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFromCd(int value){
+      _fromCd = value;
+   }
+
+   //============================================================
+   // <T>判断来源代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFromCodeChanged(){
+      return !RString.equals(__fromCode, _fromCode);
+   }
+
+   //============================================================
+   // <T>获得来源代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fromCode(){
+      return _fromCode;
+   }
+
+   //============================================================
+   // <T>设置来源代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFromCode(String value){
+      _fromCode = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -339,6 +406,10 @@ public class FCacheSystemSessionUnit
             return Long.toString(_userId);
          case "project_id":
             return Long.toString(_projectId);
+         case "from_cd":
+            return RInteger.toString(_fromCd);
+         case "from_code":
+            return _fromCode;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -375,6 +446,12 @@ public class FCacheSystemSessionUnit
             break;
          case "project_id":
             _projectId = RLong.parse(value);
+            break;
+         case "from_cd":
+            _fromCd = RInteger.parse(value);
+            break;
+         case "from_code":
+            _fromCode = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -423,6 +500,14 @@ public class FCacheSystemSessionUnit
                __projectId = RLong.parse(value);
                _projectId = __projectId;
                break;
+            case "from_cd":
+               __fromCd = RInteger.parse(value);
+               _fromCd = __fromCd;
+               break;
+            case "from_code":
+               __fromCode = value;
+               _fromCode = __fromCode;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -456,6 +541,8 @@ public class FCacheSystemSessionUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("projectId", _projectId);
+      row.set("fromCd", _fromCd);
+      row.set("fromCode", _fromCode);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -475,6 +562,8 @@ public class FCacheSystemSessionUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
+      map.put("fromCd", RInteger.toString(_fromCd));
+      map.put("fromCode", _fromCode);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

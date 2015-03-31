@@ -230,6 +230,26 @@ public class FLogicDataset<T extends FLogicUnit>
    }
 
    //============================================================
+   // <T>加载数据集合。</T>
+   //
+   // @param dataset 数据集合
+   //============================================================
+   @SuppressWarnings("unchecked")
+   public <U extends FLogicUnit> void loadDataset(FLogicDataset<U> dataset){
+      // 设置属性
+      _total = dataset.total();
+      _pageSize = dataset.pageSize();
+      _pageCount = dataset.pageCount();
+      _page = dataset.page();
+      // 设置数据
+      int count = dataset.count();
+      for(int n = 0; n < count; n++){
+         U unit = dataset.get(n);
+         push((T)unit);
+      }
+   }
+
+   //============================================================
    // <T>创建页码数据集。</T>
    //
    // @param dataset 数据集合

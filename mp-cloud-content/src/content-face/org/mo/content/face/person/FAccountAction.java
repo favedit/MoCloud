@@ -1,7 +1,7 @@
 package org.mo.content.face.person;
 
+import com.cyou.gccloud.define.enums.core.EGcAccountFrom;
 import org.mo.cloud.logic.person.FGcUserInfo;
-
 import org.mo.com.lang.EResult;
 import org.mo.content.core.person.IAccountConsole;
 import org.mo.core.aop.face.ALink;
@@ -70,7 +70,7 @@ public class FAccountAction
       String passport = context.parameter("passport");
       String password = context.parameter("password");
       // 新建记录
-      FGcUserInfo user = _accountConsole.doLogin(logicContext, passport, password);
+      FGcUserInfo user = _accountConsole.doLogin(logicContext, passport, password, EGcAccountFrom.Web);
       if(user == null){
          page.setResult("用户不存在。");
       }

@@ -3,6 +3,18 @@
 <Config>
 
    <!-- ==================================================== -->
+   <!-- 设计：用户账号数据服务                               -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.person.account'
+         face  = 'org.mo.content.service.person.IAccountService'/>
+
+   <Component
+         face  = 'org.mo.content.service.person.IAccountService'
+         class = 'org.mo.content.service.person.FAccountService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
    <!-- 设计：方案项目数据服务                               -->
    <!-- ==================================================== -->
    <WebService
@@ -15,7 +27,7 @@
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源3D数据服务                             -->
+   <!-- 设计：资源数据服务                             -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.content.resource'
@@ -24,6 +36,18 @@
    <Component
          face  = 'org.mo.content.service.solution.IResourceService'
          class = 'org.mo.content.service.solution.FResourceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：资源3D网格数据服务                             -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content3d.mesh'
+         face  = 'org.mo.content.service.resource3d.IMeshService'/>
+
+   <Component
+         face  = 'org.mo.content.service.resource3d.IMeshService'
+         class = 'org.mo.content.service.resource3d.FMeshService'
          scope = 'global'/>
 
    <!-- ==================================================== -->

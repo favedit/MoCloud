@@ -1,8 +1,7 @@
-package org.mo.content.service.solution;
+package org.mo.content.service.resource3d;
 
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
-import com.cyou.gccloud.data.data.FDataSolutionProjectUnit;
-import org.mo.cloud.logic.solution.FGcProjectInfo;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
@@ -11,7 +10,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.solution.project.IC3dProjectConsole;
+import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -20,21 +19,21 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>资源3D服务。</T>
+// <T>资源3D网格服务。</T>
 //============================================================
-public class FProjectService
+public class FMeshService
       extends FObject
       implements
-         IProjectService
+         IMeshService
 {
    // 项目控制台接口
    @ALink
-   protected IC3dProjectConsole _projectConsole;
+   protected IC3dMeshConsole _meshConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
    //============================================================
-   public FProjectService(){
+   public FMeshService(){
    }
 
    //============================================================
@@ -58,7 +57,7 @@ public class FProjectService
       int pageSize = RInteger.toRange(xinput.nodeTextAsInt("PageSize", 20), 0, 200);
       int page = xinput.nodeTextAsInt("Page", 0);
       // 设置输出节点
-      FXmlNode xoutput = output.config().createNode("ProjectCollection");
+      FXmlNode xoutput = output.config().createNode("MeshCollection");
       xoutput.set("page_count", 0);
       xoutput.set("page_size", pageSize);
       xoutput.set("page", page);
@@ -69,17 +68,17 @@ public class FProjectService
          whereSql += " AND (" + FDataSolutionProjectLogic.CODE + " LIKE '%" + RSql.formatValue(search) + "%')";
       }
       // 查询数据
-      FLogicDataset<FGcProjectInfo> dataset = _projectConsole.fetch(logicContext, whereSql, order, pageSize, page);
+      FLogicDataset<FGcRs3MeshInfo> dataset = _meshConsole.fetch(logicContext, whereSql, order, pageSize, page);
       xoutput.set("total", dataset.total());
       xoutput.set("count", dataset.count());
       xoutput.set("page_size", dataset.pageSize());
       xoutput.set("page_count", dataset.pageCount());
       xoutput.set("page", dataset.page());
-      for(FGcProjectInfo unit : dataset){
+      for(FGcRs3MeshInfo mesh : dataset){
          FXmlNode xitem = xoutput.createNode("Project");
-         xitem.set("guid", unit.guid());
-         xitem.set("code", unit.code());
-         xitem.set("label", unit.label());
+         xitem.set("guid", mesh.guid());
+         xitem.set("code", mesh.code());
+         xitem.set("label", mesh.label());
       }
       return EResult.Success;
    }
@@ -106,19 +105,19 @@ public class FProjectService
          throw new FFatalError("Guid is empty.");
       }
       // 获得数据
-      FDataSolutionProjectUnit project = _projectConsole.findByGuid(logicContext, guid);
-      if(project == null){
+      FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      if(mesh == null){
          return EResult.Failure;
       }
       // 检查用户
-      if(project.userId() != session.userId()){
-         throw new FFatalError("Project user is invalid. (project_user_id={1}, session_user_id={2})", project.userId(), session.userId());
+      if(mesh.userId() != session.userId()){
+         throw new FFatalError("Resource3d mesh user is invalid. (project_user_id={1}, session_user_id={2})", mesh.userId(), session.userId());
       }
       // 设置输出
       FXmlNode xproject = output.config().createNode("Project");
-      xproject.set("guid", project.guid());
-      xproject.set("code", project.code());
-      xproject.set("label", project.label());
+      xproject.set("guid", mesh.guid());
+      xproject.set("code", mesh.code());
+      xproject.set("label", mesh.label());
       return EResult.Success;
    }
 
@@ -148,16 +147,16 @@ public class FProjectService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcProjectInfo findProject = _projectConsole.findByUserCode(logicContext, session.userId(), code);
-      if(findProject != null){
-         throw new FFatalError("Project code is duplicate. (user_id={1}, code={2})", session.userId(), code);
+      FGcRs3MeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
+      if(findMesh != null){
+         throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
       }
       // 新建处理
-      FGcProjectInfo project = _projectConsole.doPrepare(logicContext);
-      project.setUserId(session.userId());
-      project.setCode(code);
-      project.setLabel(label);
-      _projectConsole.doInsert(logicContext, project);
+      FGcRs3MeshInfo mesh = _meshConsole.doPrepare(logicContext);
+      mesh.setUserId(session.userId());
+      mesh.setCode(code);
+      mesh.setLabel(label);
+      _meshConsole.doInsert(logicContext, mesh);
       return EResult.Success;
    }
 
@@ -180,7 +179,7 @@ public class FProjectService
       FXmlNode xinput = input.config();
       String guid = xinput.nodeText("guid");
       if(RString.isEmpty(guid)){
-         throw new FFatalError("Project guid is empty.");
+         throw new FFatalError("Guid is empty.");
       }
       String code = xinput.nodeText("Code");
       if(RString.isEmpty(code)){
@@ -191,22 +190,22 @@ public class FProjectService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcProjectInfo project = _projectConsole.findByGuid(logicContext, guid);
-      if(project == null){
-         throw new FFatalError("Project is not exists. (guid={1})", guid);
+      FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      if(mesh == null){
+         throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }
       // 检查用户有效
-      if(project.userId() != session.userId()){
-         throw new FFatalError("Project user is invalid. (project_user_id={1}, session_user_id={2})", project.userId(), session.userId());
+      if(mesh.userId() != session.userId()){
+         throw new FFatalError("Resource3d mesh user is invalid. (project_user_id={1}, session_user_id={2})", mesh.userId(), session.userId());
       }
       // 更新数据
       if(code != null){
-         project.setCode(code);
+         mesh.setCode(code);
       }
       if(label != null){
-         project.setLabel(label);
+         mesh.setLabel(label);
       }
-      _projectConsole.doUpdate(logicContext, project);
+      _meshConsole.doUpdate(logicContext, mesh);
       return EResult.Success;
    }
 
@@ -229,19 +228,19 @@ public class FProjectService
       FXmlNode xinput = input.config();
       String guid = xinput.nodeText("guid");
       if(RString.isEmpty(guid)){
-         throw new FFatalError("Project guid is empty.");
+         throw new FFatalError("Resource3d mesh guid is empty.");
       }
       // 查找数据
-      FGcProjectInfo project = _projectConsole.findByGuid(logicContext, guid);
-      if(project == null){
-         throw new FFatalError("Project is not exists. (guid={1})", guid);
+      FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      if(mesh == null){
+         throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }
       // 检查用户有效
-      if(project.userId() != session.userId()){
-         throw new FFatalError("Project user is invalid. (project_user_id={1}, session_user_id={2})", project.userId(), session.userId());
+      if(mesh.userId() != session.userId()){
+         throw new FFatalError("Resource3d mesh user is invalid. (project_user_id={1}, session_user_id={2})", mesh.userId(), session.userId());
       }
       // 删除数据
-      _projectConsole.doDelete(logicContext, project);
+      _meshConsole.doDelete(logicContext, mesh);
       return EResult.Success;
    }
 }
