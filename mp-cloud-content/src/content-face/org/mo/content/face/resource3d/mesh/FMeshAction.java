@@ -1,8 +1,9 @@
-package org.mo.content.face;
+package org.mo.content.face.resource3d.mesh;
 
 import org.mo.content.core.person.IAccountConsole;
 import org.mo.core.aop.face.ALink;
-import org.mo.eng.data.common.ISqlContext;
+import org.mo.web.protocol.common.FWebUploadFile;
+import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 //<P>用户逻辑实现类</P>
@@ -13,17 +14,21 @@ import org.mo.eng.data.common.ISqlContext;
 //@version 1.0.0
 //============================================================
 
-public class FIndexAction
+public class FMeshAction
       implements
-         IIndexAction
+         IMeshAction
 {
    //用户控制台
    @ALink
    protected IAccountConsole _personConsole;
 
    @Override
-   public String construct(ISqlContext context,
-                           FIndexPage areaPage){
-      return "/Index";
+   public String importData(IWebContext context){
+      System.out.println("begin");
+      for(FWebUploadFile file : context.files()){
+         System.out.println(file.dump());
+      }
+      System.out.println("end");
+      return null;
    }
 }

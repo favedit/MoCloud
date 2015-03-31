@@ -1,0 +1,114 @@
+<HTML>
+  <HEAD>
+    <TITLE>FileAPI Drag and Drop Sample</TITLE>
+    <style type="text/css">
+			#container{
+				min-width: 400px;
+				min-height: 280px;
+				border: 2px dotted #000;
+				-moz-border-radius: 8px;
+			}
+			.progressBar{
+				width: 200px;
+				height: 20px;
+				border: 1px solid #000;
+				-moz-border-radius: 8px;
+				margin-bottom: 10px;
+			}
+			.progressBar p{
+				margin: 0px;
+				width: 20px;
+				height: 20px;
+				-moz-border-radius: 8px;
+				background-color: #00FF00;
+			}
+		</style>
+    <script type="text/javascript">
+    	function addDNDListeners(){
+    		var container = document.getElementById("container");
+				var fileList = document.getElementById("fileList");
+				container.addEventListener("dragenter", function(event){
+					fileList.innerHTML ='';
+					event.stopPropagation();
+					event.preventDefault();
+					}, false);
+				container.addEventListener("dragover", function(event){
+					event.stopPropagation();
+					event.preventDefault();
+					}, false);
+				container.addEventListener("drop", handleDrop, false);
+    	}
+    	function handleDrop(event){
+    		var files = event.dataTransfer.files;
+				event.stopPropagation();
+				event.preventDefault();
+				
+				var fileList = document.getElementById("fileList");
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					var li = document.createElement('li');
+					var progressbar = document.createElement('div');
+					var img = document.createElement('img');
+					var name = document.createElement('span');
+					
+					progressbar.className = "progressBar";
+					img.src = files[i].getAsDataURL();
+					img.width = 32;
+					img.height = 32;					
+					name.innerHTML = file.name;
+					li.appendChild(img);			
+					li.appendChild(name);
+					li.appendChild(progressbar);
+										
+					fileList.appendChild(li);
+					uploadFile(file, progressbar)
+				}
+    	}
+    	function uploadFile(file, progressbar) {
+				var xhr = new XMLHttpRequest();
+				var	upload = xhr.upload;
+				
+				var p = document.createElement('p');
+				p.textContent = "0%";
+				progressbar.appendChild(p);
+							
+				upload.progressbar = progressbar;				
+				upload.addEventListener("progress", uploadProgress, false);
+				upload.addEventListener("load", uploadSucceed, false);
+				upload.addEventListener("error", uploadError, false);
+
+				xhr.open("POST", "upload.jsp?fileName="+file.name);
+				xhr.overrideMimeType("application/octet-stream");
+				xhr.sendAsBinary(file.getAsBinary());
+			}
+			function uploadProgress(event){				
+				if (event.lengthComputable) {
+					var percentage = Math.round((event.loaded * 100) / event.total);
+					console.log("percentage:" + percentage);
+					if (percentage < 100) {
+						event.target.progressbar.firstChild.style.width = (percentage*2) + "px";
+						event.target.progressbar.firstChild.textContent = percentage + "%";
+					}
+				}
+			}
+			function uploadSucceed(event) {
+				event.target.progressbar.firstChild.style.width = "200px";
+				event.target.progressbar.firstChild.textContent = "100%";
+			}			
+			function uploadError(error) {
+				alert("error: " + error);
+			}
+    	window.addEventListener("load", addDNDListeners, false);
+    </script>
+    
+  </HEAD> 
+  <BODY>
+  	
+		<div id="container">
+			<div style="text-align:center">Drag and drop files here to upload.</div>
+			<ul id="fileList"></ul>
+		</div>
+
+  </BODY>
+</HTML>
+</HTML>

@@ -21,4 +21,16 @@ public interface IMeshServlet
                        ILogicContext logicContext,
                        IWebServletRequest request,
                        IWebServletResponse response);
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param context 环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   public void importData(IWebContext context,
+                          ILogicContext logicContext,
+                          IWebServletRequest request,
+                          IWebServletResponse response);
 }

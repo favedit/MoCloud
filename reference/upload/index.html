@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <title>File API Demo</title>
+	 </script>
+	 
+	 <script type="text/javascript">
+	 <!--
+		function uploadAndSubmit() {
+			var form = document.forms["demoForm"];
+			
+			if (form["file"].files.length > 0)
+			{
+				var file = form["file"].files[0];
+				
+				// try sending
+				var reader = new FileReader();
+				
+				reader.onloadstart = function() {
+					console.log("onloadstart");
+					
+	            document.getElementById("bytesTotal").textContent = file.size;
+				}
+				
+				reader.onprogress = function(p) {
+					console.log("onprogress");
+					document.getElementById("bytesRead").textContent = p.loaded;
+				}
+				
+				reader.onload = function() {
+					console.log("load complete");
+				}
+				
+				reader.onloadend = function() {
+					if (reader.error) {
+						console.log(reader.error);
+					} else {
+						document.getElementById("bytesRead").textContent = file.size;
+						var xhr = new XMLHttpRequest();
+						xhr.open(/* method */ "POST", /* target url */ "upload.jsp?fileName=" + file.name /*, async, default to true */);
+                  xhr.overrideMimeType("application/octet-stream");
+						xhr.sendAsBinary(reader.result);
+						
+						xhr.onreadystatechange = function() {
+							if (xhr.readyState == 4) {
+								if (xhr.status == 200) {
+									console.log("upload complete");
+									console.log("response: " + xhr.responseText);
+								}
+							}
+						}
+					}
+					
+				}
+				
+				
+				reader.readAsBinaryString(file);
+			}
+			else
+			{
+				alert ("Please choose a file.");
+			}
+		}
+		
+	  // -->
+	 </script>
+</head>
+
+<body>
+<h1>File API Demo</h1>
+<p>
+	<form name="demoForm" id="demoForm" method="post" enctype="multipart/form-data" action="javascript: uploadAndSubmit();">
+		<p>Upload File: <input type="file" name="file" /></p>
+		<p><input type="submit" value="Submit" /></p>
+	</form>
+	<div>Progessing (in Bytes): <span id="bytesRead"></span> / <span id="bytesTotal"></span></div>
+</p>
+
+</body>
+</html>
