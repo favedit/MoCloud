@@ -1,25 +1,31 @@
-package org.mo.cloud.core.action;
+package org.mo.cloud.core.web;
 
 import org.mo.cloud.core.message.IGcMessageConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
+import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.FDataOperator;
-import org.mo.web.core.action.FActionConsole;
+import org.mo.web.core.service.FServiceConsole;
 import org.mo.web.protocol.context.IWebContext;
+import org.mo.web.protocol.context.IWebInput;
+import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
 // <T>服务命令处理控制台。</T>
 // <P>根据访问的地址，对页面服务执行分发处理。</P>
 //============================================================
-public class FGcActionConsole
-      extends FActionConsole
+public class FGcServiceConsole
+      extends FServiceConsole
 {
    // 头标志
-   public final static String HeadSession = "session_guid";
+   public final static String SessionGuid = "session_guid";
+
+   // 头标志
+   public final static String NodeSessionGuid = "SessionGuid";
 
    // 消息控制台
    @ALink
@@ -32,11 +38,11 @@ public class FGcActionConsole
    //============================================================
    // <T>构造服务命令处理控制台。</T>
    //============================================================
-   public FGcActionConsole(){
+   public FGcServiceConsole(){
    }
 
    //============================================================
-   // <T>检查会话是否有效。</T>
+   // <T>检查会话是否有效。</T>  
    //
    // @param context 页面环境
    // @param logicContext 逻辑环境
@@ -46,14 +52,23 @@ public class FGcActionConsole
    //============================================================
    @Override
    public EResult checkSession(IWebContext context,
-                               ILogicContext logicContext){
+                               ILogicContext logicContext,
+                               IWebInput input,
+                               IWebOutput output){
       // 获得会话代码
-      String sessionGuid = context.head(HeadSession);
+      String sessionGuid = context.head(SessionGuid);
       if(RString.isEmpty(sessionGuid)){
-         sessionGuid = context.parameter("session_guid");
+         sessionGuid = context.parameter(SessionGuid);
       }
       if(RString.isEmpty(sessionGuid)){
-         sessionGuid = context.cookie("session_guid");
+         sessionGuid = context.cookie(SessionGuid);
+      }
+      if(RString.isEmpty(sessionGuid)){
+         FXmlNode xinput = input.config();
+         sessionGuid = xinput.get(SessionGuid, null);
+         if(RString.isEmpty(sessionGuid)){
+            sessionGuid = xinput.nodeText(NodeSessionGuid);
+         }
       }
       // 验证会话存在
       FGcSessionInfo session = _gcSessionConsole.findByGuid(logicContext, sessionGuid);
@@ -74,21 +89,30 @@ public class FGcActionConsole
    // <T>检查会话是否登录。</T>
    //
    // @param context 页面环境
-   // @param logicContext 逻辑环境
+   // @param sqlContext 数据环境
    // @param input 输入信息
    // @param output 输出信息
    // @return 处理结果
    //============================================================
    @Override
    public EResult checkLogin(IWebContext context,
-                             ILogicContext logicContext){
+                             ILogicContext logicContext,
+                             IWebInput input,
+                             IWebOutput output){
       // 获得会话代码
-      String sessionGuid = context.head(HeadSession);
+      String sessionGuid = context.head(SessionGuid);
       if(RString.isEmpty(sessionGuid)){
-         sessionGuid = context.parameter("session_guid");
+         sessionGuid = context.parameter(SessionGuid);
       }
       if(RString.isEmpty(sessionGuid)){
-         sessionGuid = context.cookie("session_guid");
+         sessionGuid = context.cookie(SessionGuid);
+      }
+      if(RString.isEmpty(sessionGuid)){
+         FXmlNode xinput = input.config();
+         sessionGuid = xinput.get(SessionGuid, null);
+         if(RString.isEmpty(sessionGuid)){
+            sessionGuid = xinput.nodeText(NodeSessionGuid);
+         }
       }
       // 验证会话存在
       FGcSessionInfo sessionInfo = _gcSessionConsole.findByGuid(logicContext, sessionGuid);

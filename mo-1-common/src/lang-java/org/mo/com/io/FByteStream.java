@@ -1,6 +1,10 @@
 package org.mo.com.io;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import org.mo.com.io.base.MByteStream;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 
 //============================================================
@@ -21,6 +25,15 @@ public class FByteStream
    // <T>构造字节数据流。</T>
    //============================================================
    public FByteStream(){
+   }
+
+   //============================================================
+   // <T>构造字节数据流。</T>
+   //
+   // @param capacity 容量
+   //============================================================
+   public FByteStream(int capacity){
+      super(capacity);
    }
 
    //============================================================
@@ -524,6 +537,29 @@ public class FByteStream
          for(int n = 0; n < length; n++){
             writeUint16(value.charAt(n));
          }
+      }
+   }
+
+   //============================================================
+   // <T>加载输入数据流。</T>
+   //
+   // @param input 输入数据流
+   //============================================================
+   public void loadStream(InputStream input){
+      int bufferLength = RInteger.SIZE_16K;
+      byte[] buffer = new byte[bufferLength];
+      try{
+         BufferedInputStream inputStream = new BufferedInputStream(input);
+         while(true){
+            int readed = inputStream.read(buffer, 0, bufferLength);
+            if(readed != -1){
+               append(buffer, 0, readed);
+            }else{
+               break;
+            }
+         }
+      }catch(Exception e){
+         throw new FFatalError(e);
       }
    }
 

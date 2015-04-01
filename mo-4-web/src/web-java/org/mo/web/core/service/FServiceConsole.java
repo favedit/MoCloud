@@ -151,12 +151,13 @@ public class FServiceConsole
    //============================================================
    public FServiceMethodDescriptor findMethod(FClass<?> clazz,
                                               String name){
+      // 查找类描述器
       FServiceDescriptor descriptor = _descriptors.find(clazz.nativeObject());
       if(descriptor == null){
          descriptor = new FServiceDescriptor(clazz.nativeObject());
          _descriptors.set(clazz.nativeObject(), descriptor);
       }
-      // Find Method Descriptor 
+      // 查找函数描述器
       name = (name != null) ? name.toLowerCase() : "process";
       FServiceMethodDescriptor methodDescriptor = descriptor.find(name);
       if(methodDescriptor == null){

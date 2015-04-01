@@ -95,11 +95,19 @@ public class FPlyFile
       }
       // 检查属性
       if(code.equals("property")){
+         // 设置属性
+         String propertyCode = items[2];
+         if(propertyCode.equals("x") || propertyCode.equals("y") || propertyCode.equals("z")){
+            _vertexPosition = true;
+         }
+         if(propertyCode.equals("red") || propertyCode.equals("green") || propertyCode.equals("blue")){
+            _vertexColor = true;
+         }
          // Type: char uchar short ushort int uint float double
          // Type: int8 uint8 int16 uint16 int32 uint32 float32 float64
          SPlyProperty property = new SPlyProperty();
          property.typeCd = items[1];
-         property.code = items[2];
+         property.code = propertyCode;
          property.index = _parseProperties.count();
          _parseProperties.push(property);
          return;
@@ -118,13 +126,31 @@ public class FPlyFile
    //============================================================
    public void parseVertex(String line){
       String[] items = RString.split(line, ' ');
-      int count = items.length;
+      int position = 0;
       SPlyVertex vertex = new SPlyVertex();
-      float[] data = new float[count];
-      for(int n = 0; n < count; n++){
-         data[n] = RFloat.parse(items[n]);
+      for(SPlyProperty property : _vertexProperties){
+         String value = items[position++];
+         switch(property.code){
+            case "x":
+               vertex.x = RFloat.parse(value);
+               break;
+            case "y":
+               vertex.y = RFloat.parse(value);
+               break;
+            case "z":
+               vertex.z = RFloat.parse(value);
+               break;
+            case "red":
+               vertex.red = RInteger.parse(value);
+               break;
+            case "green":
+               vertex.green = RInteger.parse(value);
+               break;
+            case "blue":
+               vertex.blue = RInteger.parse(value);
+               break;
+         }
       }
-      vertex.data = data;
       _vertexs.push(vertex);
    }
 
@@ -185,7 +211,6 @@ public class FPlyFile
          // 二进制小头读取方式
          else if(_formatCd.equals("binary_little_endian")){
             FByteFile stream = new FByteFile(fileName);
-            //stream.setEndianCd(EByteEndian.Little);
             byte[] find = "end_header".getBytes();
             int index = RByte.search(stream.memory(), find);
             if(index == -1){
@@ -208,11 +233,11 @@ public class FPlyFile
                      }
                   }else if(property.typeCd.equals("uchar")){
                      if(property.code.equals("red")){
-                        vertex.r = stream.readUint8();
+                        vertex.red = stream.readUint8();
                      }else if(property.code.equals("green")){
-                        vertex.g = stream.readUint8();
+                        vertex.green = stream.readUint8();
                      }else if(property.code.equals("blue")){
-                        vertex.b = stream.readUint8();
+                        vertex.blue = stream.readUint8();
                      }else{
                         throw new FFatalError("Unknown code.");
                      }

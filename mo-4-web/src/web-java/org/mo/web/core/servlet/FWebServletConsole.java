@@ -1,5 +1,6 @@
 package org.mo.web.core.servlet;
 
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FMap;
 import org.mo.com.lang.IRelease;
@@ -27,6 +28,7 @@ import org.mo.web.core.servlet.common.FWebServletMap;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.core.servlet.common.XAopServlet;
+import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -56,6 +58,13 @@ public class FWebServletConsole
    @AProperty
    protected String _encoding;
 
+   // 数据环境类名称
+   @AProperty(name = "logic_context")
+   protected String _logicContextClassName;
+
+   // 逻辑环境类对象
+   protected Class<FLogicContext> _logicContextClass;
+
    // 描述器集合
    @SuppressWarnings("rawtypes")
    protected FMap<Class, FServletDescriptor> _descriptors = new FMap<Class, FServletDescriptor>(Class.class, FServletDescriptor.class);
@@ -81,26 +90,29 @@ public class FWebServletConsole
    //============================================================
    public FServletMethodDescriptor findMethod(FClass<?> clazz,
                                               String name){
+      // 查找类描述器
       FServletDescriptor descriptor = _descriptors.get(clazz.nativeObject(), null);
       if(descriptor == null){
-         descriptor = new FServletDescriptor();
+         descriptor = new FServletDescriptor(clazz.nativeObject());
          _descriptors.set(clazz.nativeObject(), descriptor);
       }
-      // Find Method Descriptor 
+      // 查找函数描述器
       name = (name != null) ? name.toLowerCase() : "process";
-      FServletMethodDescriptor methodDsp = null;
+      FServletMethodDescriptor methodDescriptor = null;
       if(descriptor.contains(name)){
-         methodDsp = descriptor.find(name);
+         methodDescriptor = descriptor.find(name);
       }else{
          for(FMethod method : clazz.methods(false)){
             if(name.equalsIgnoreCase(method.name())){
-               methodDsp = new FServletMethodDescriptor(method.nativeObject());
+               methodDescriptor = new FServletMethodDescriptor();
+               methodDescriptor.setServletDescriptor(descriptor);
+               methodDescriptor.build(method.nativeObject());
                break;
             }
          }
-         descriptor.push(name, methodDsp);
+         descriptor.push(name, methodDescriptor);
       }
-      return methodDsp;
+      return methodDescriptor;
    }
 
    //============================================================
@@ -149,44 +161,130 @@ public class FWebServletConsole
    }
 
    //============================================================
+   // <T>检查会话是否有效。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param input 输入信息
+   // @param output 输出信息
+   // @return 处理结果
+   //============================================================
+   public EResult checkSession(IWebContext context,
+                               ILogicContext logicContext,
+                               IWebServletRequest request,
+                               IWebServletResponse response){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>检查会话是否登录。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param input 输入信息
+   // @param output 输出信息
+   // @return 处理结果
+   //============================================================
+   public EResult checkLogin(IWebContext context,
+                             ILogicContext logicContext,
+                             IWebServletRequest request,
+                             IWebServletResponse response){
+      IWebSession session = context.session();
+      if(!session.user().isLogin()){
+         // 返回用户未登录画面
+         return null;
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>执行后处理。</T>
+   //
+   // @return 处理结果
+   //============================================================
+   public EResult executeBefore(){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>执行后处理。</T>
+   //
+   // @return 处理结果
+   //============================================================
+   public EResult executeAfter(Object result){
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>逻辑处理。</T>
    //
    // @param name 名称
    // @param context 环境
    // @param request 请求
    // @param response 应答
+   // @return 处理结果
    //============================================================
    @Override
-   public void execute(String name,
-                       IWebContext context,
-                       IWebServletRequest request,
-                       IWebServletResponse response){
+   public Object execute(String name,
+                         IWebContext context,
+                         IWebServletRequest request,
+                         IWebServletResponse response){
       Throwable throwable = null;
       FWebServlet servlet = findServlet(name);
       if(servlet == null){
          _logger.warn(this, "execute", "Can't find servlet config [{1} -> {2}]", name, servlet);
-         return;
+         return null;
       }
       Object instance = findInstance(name);
       if(instance == null){
          _logger.warn(this, "execute", "Can't find servlet instance [{1} -> {2}]", name, instance);
-         return;
+         return null;
       }
       // find invoke method
       String action = RString.nvl(context.parameter("do"), "process");
-      FServletMethodDescriptor methodDsp = findMethod(servlet.faceClass(), action);
-      if(methodDsp == null){
+      FServletMethodDescriptor methodDescriptor = findMethod(servlet.faceClass(), action);
+      if(methodDescriptor == null){
          _logger.warn(this, "execute", "Can't find method in servlet. [{1}.{2}]", instance, action);
-         return;
+         return null;
       }
       _logger.debug(this, "execute", "Process servlet. {1}:{2}->{3}", name, instance, action);
-      // Invoke method
-      Class<?>[] types = methodDsp.types();
-      AContainer[] aforms = methodDsp.forms();
+      //............................................................
+      // 建立数据环境
+      ILogicContext logicContext = null;
+      if(_logicContextClass != null){
+         try{
+            FLogicContext newLogicContext = _logicContextClass.newInstance();
+            newLogicContext.linkDatabaseConsole(_databaseConsole);
+            logicContext = newLogicContext;
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
+      }else{
+         logicContext = new FLogicContext(_databaseConsole);
+      }
+      // 检查当前处理是否需要会话
+      if(methodDescriptor.sessionRequire()){
+         EResult resultCd = checkSession(context, logicContext, request, response);
+         if(resultCd != EResult.Success){
+            //buildMessages(context, response);
+            return null;
+         }
+      }
+      // 检查当前处理是否需要登录
+      if(methodDescriptor.loginRequire()){
+         EResult resultCd = checkLogin(context, logicContext, request, response);
+         if(resultCd != EResult.Success){
+            //buildMessages(context, response);
+            return null;
+         }
+      }
+      //............................................................
+      Object result = null;
+      Class<?>[] types = methodDescriptor.types();
+      AContainer[] aforms = methodDescriptor.forms();
       int count = types.length;
       FWebContainerItem[] forms = new FWebContainerItem[count];
       Object[] params = new Object[count];
-      FLogicContext logicContext = new FLogicContext(_databaseConsole);
       try{
          for(int n = 0; n < count; n++){
             Class<?> type = types[n];
@@ -208,17 +306,23 @@ public class FWebServletConsole
                value = forms[n].container();
                context.define(aforms[n].name(), value);
             }else{
-               throw new FFatalError("Build param error. {1}", type);
+               // 未知参数时
+               Object bindObject = _bindConsole.find(type);
+               if(bindObject != null){
+                  value = bindObject;
+               }else{
+                  throw new FFatalError("Unknown param type. (type={1})", type);
+               }
             }
             params[n] = value;
          }
-         methodDsp.invoke(instance, params);
-      }catch(Exception t){
-         throwable = t;
-         context.messages().push(new FFatalMessage(t));
+         result = methodDescriptor.invoke(instance, params);
+      }catch(Exception exception){
+         throwable = exception;
+         context.messages().push(new FFatalMessage(exception));
       }finally{
          // 释放参数
-         if(null != params){
+         if(params != null){
             for(Object param : params){
                if((param != logicContext) && (param instanceof IRelease)){
                   try{
@@ -244,6 +348,7 @@ public class FWebServletConsole
             logicContext = null;
          }
       }
+      return result;
    }
 
    //============================================================
@@ -253,21 +358,22 @@ public class FWebServletConsole
    // @param context 环境
    // @param request 请求
    // @param response 应答
+   // @return 处理结果
    //============================================================
    @Override
-   public void executeUri(String uri,
-                          IWebContext context,
-                          IWebServletRequest request,
-                          IWebServletResponse response){
+   public Object executeUri(String uri,
+                            IWebContext context,
+                            IWebServletRequest request,
+                            IWebServletResponse response){
       // 分解地址
       int index = uri.indexOf('/', 1);
       if(index == -1){
-         return;
+         return null;
       }
       String name = uri.substring(0, index);
       String parameter = uri.substring(index);
       context.parameters().set(IWebServletConstant.PARAMETER_URI, parameter);
       // 执行处理
-      execute(name, context, request, response);
+      return execute(name, context, request, response);
    }
 }

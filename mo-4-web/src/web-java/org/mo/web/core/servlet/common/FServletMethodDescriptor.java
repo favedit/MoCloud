@@ -4,14 +4,31 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import org.mo.com.lang.FFatalError;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.core.face.AWebLogin;
+import org.mo.web.core.face.AWebSession;
 
 //============================================================
 // <T>网页处理函数描述器。</T>
 //============================================================
 public class FServletMethodDescriptor
 {
+   // 服务描述器
+   protected FServletDescriptor _servletDescriptor;
+
    // 函数
    protected Method _method;
+
+   // 会话的描述器
+   protected AWebSession _sessionDescriptor;
+
+   // 是否需要会话
+   protected boolean _sessionRequire;
+
+   // 登录的描述器
+   protected AWebLogin _loginDescriptor;
+
+   // 是否需要登录
+   protected boolean _loginRequire;
 
    // 表单信息集合
    protected AContainer[] _forms;
@@ -24,17 +41,35 @@ public class FServletMethodDescriptor
    //
    // @param method 函数
    //============================================================
-   public FServletMethodDescriptor(Method method){
-      _method = method;
-      build();
+   public FServletMethodDescriptor(){
    }
 
    //============================================================
-   // <T>建立处理。</T>
+   // <T>建立内部信息。</T>
+   //
+   // @param method 函数
    //============================================================
-   protected void build(){
+   public void build(Method method){
+      _method = method;
+      _sessionRequire = _servletDescriptor.sessionRequire();
+      _loginRequire = _servletDescriptor.loginRequire();
+      // 获得函数的描述器
+      Annotation[] methodAnnotations = _method.getAnnotations();
+      if(methodAnnotations != null){
+         for(Annotation annotation : methodAnnotations){
+            if(annotation instanceof AWebSession){
+               _sessionDescriptor = (AWebSession)annotation;
+               _sessionRequire = _sessionDescriptor.require();
+            }else if(annotation instanceof AWebLogin){
+               _loginDescriptor = (AWebLogin)annotation;
+               _loginRequire = _loginDescriptor.require();
+            }
+         }
+      }
+      // 获得函数的参数信息
       _types = _method.getParameterTypes();
       _forms = new AContainer[_types.length];
+      // 获得函数的参数描述器
       Annotation[][] annos = _method.getParameterAnnotations();
       for(int n = 0; n < _types.length; n++){
          for(Annotation anno : annos[n]){
@@ -44,6 +79,60 @@ public class FServletMethodDescriptor
             }
          }
       }
+   }
+
+   //============================================================
+   // <T>获得处理描述器。</T>
+   //
+   // @return 处理描述器
+   //============================================================
+   public FServletDescriptor servletDescriptor(){
+      return _servletDescriptor;
+   }
+
+   //============================================================
+   // <T>设置处理描述器。</T>
+   //
+   // @param servletDescriptor 处理描述器
+   //============================================================
+   public void setServletDescriptor(FServletDescriptor servletDescriptor){
+      _servletDescriptor = servletDescriptor;
+   }
+
+   //============================================================
+   // <T>获得会话描述器。</T>
+   //
+   // @return 会话描述器
+   //============================================================
+   public AWebSession sessionDescriptor(){
+      return _sessionDescriptor;
+   }
+
+   //============================================================
+   // <T>获得是否需要会话。</T>
+   //
+   // @return 是否需要
+   //============================================================
+   public boolean sessionRequire(){
+      return _sessionRequire;
+   }
+
+   //============================================================
+   // <T>获得登录描述器。</T>
+   //
+   // @return 登录描述器
+   //============================================================
+   public AWebLogin loginDescriptor(){
+      return _loginDescriptor;
+   }
+
+   //============================================================
+   // <T>获得是否需要登录。</T>
+   //
+   // @return 是否需要
+   //============================================================
+   public boolean loginRequire(){
+      return _loginRequire;
    }
 
    //============================================================

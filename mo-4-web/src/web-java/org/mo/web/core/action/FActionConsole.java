@@ -555,7 +555,7 @@ public class FActionConsole
             logicContext = null;
          }
          if(sqlSessionContext != null){
-            if(null == throwable){
+            if(throwable == null){
                sqlSessionContext.unlink();
                FMessages messages = sqlSessionContext.messages();
                if(null != messages){

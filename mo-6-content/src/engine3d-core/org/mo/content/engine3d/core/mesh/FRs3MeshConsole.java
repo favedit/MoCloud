@@ -1,17 +1,17 @@
 package org.mo.content.engine3d.core.mesh;
 
-import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
-import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
-
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamUnit;
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
-import com.cyou.gccloud.define.enums.common.EGcData;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshStreamInfo;
+import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
+import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshStreamConsole;
 import org.mo.com.console.FConsole;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
@@ -20,8 +20,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
 import org.mo.content.mime.phy.FPlyFile;
-import org.mo.content.mime.phy.SPlyFace;
-import org.mo.content.mime.phy.SPlyVertex;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.mesh.FRs3Mesh;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
@@ -50,6 +48,10 @@ public class FRs3MeshConsole
    // 数据网格控制台
    @ALink
    protected IGcRs3MeshConsole _dataMeshConsole;
+
+   // 数据网格数据流控制台
+   @ALink
+   protected IGcRs3MeshStreamConsole _dataMeshStreamConsole;
 
    //============================================================
    // <T>根据代码查找网格单元。</T>
@@ -114,6 +116,70 @@ public class FRs3MeshConsole
       }
       // 返回网格单元
       return meshLogic.find(meshUnit.ouid());
+   }
+
+   //============================================================
+   // <T>更新网格。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param mesh 网格
+   //============================================================
+   @Override
+   public FDataResource3dMeshUnit update(ILogicContext logicContext,
+                                         long meshId,
+                                         FRs3Mesh mesh){
+      // 检查网格存在性
+      FGcRs3MeshInfo meshInfo = _dataMeshConsole.find(logicContext, meshId);
+      if(meshInfo == null){
+         throw new FFatalError("Mesh is not exists. (mesh_id={1})", meshId);
+      }
+      String meshGuid = meshInfo.guid();
+      //............................................................
+      // 删除不存在的数据流
+      FLogicDataset<FGcRs3MeshStreamInfo> meshStreams = _dataMeshStreamConsole.fetchByMeshId(logicContext, meshId);
+      for(FGcRs3MeshStreamInfo meshStream : meshStreams){
+         String streamCode = meshStream.code();
+         FRs3Stream stream = mesh.findStream(streamCode);
+         if(stream != null){
+            int index = mesh.streams().indexOf(stream);
+            if(meshStream.index() != index){
+               meshStream.setIndex(index);
+               _dataMeshStreamConsole.doUpdate(logicContext, meshStream);
+            }
+         }else{
+            _dataMeshStreamConsole.doDelete(logicContext, meshStream);
+         }
+      }
+      //............................................................
+      // 更新所有数据流
+      int streamCount = mesh.streams().count();
+      for(int n = 0; n < streamCount; n++){
+         FRs3Stream stream = mesh.streams().get(n);
+         String streamCode = stream.code();
+         FGcRs3MeshStreamInfo meshStream = _dataMeshStreamConsole.findByCode(logicContext, meshId, streamCode);
+         if(meshStream == null){
+            FDataResource3dStreamUnit streamUnit = _streamConsole.insert(logicContext, stream);
+            // 建立数据关联
+            FGcRs3MeshStreamInfo meshStreamInfo = _dataMeshStreamConsole.doPrepare(logicContext);
+            meshStreamInfo.setMeshId(meshId);
+            meshStreamInfo.setStreamId(streamUnit.ouid());
+            meshStreamInfo.setIndex(n);
+            meshStreamInfo.setCode(streamCode);
+            _dataMeshStreamConsole.doInsert(logicContext, meshStreamInfo);
+         }else{
+            stream.setOuid(meshStream.streamId());
+            _streamConsole.update(logicContext, stream);
+         }
+      }
+      // 更新网格
+      mesh.saveUnit(meshInfo);
+      _dataMeshConsole.doUpdate(logicContext, meshInfo);
+      //............................................................
+      // 废弃临时数据
+      _storageConsole.delete(EGcStorageCatalog.Cache3dMesh, meshGuid);
+      //............................................................
+      // 返回网格单元
+      return meshInfo;
    }
 
    //============================================================
@@ -237,54 +303,7 @@ public class FRs3MeshConsole
       FRs3Mesh mesh = new FRs3Mesh();
       // 导入数据流
       FPlyFile file = new FPlyFile(fileName);
-      int vertexCount = file.vertexs().count();
-      int faceCount = file.faces().count();
-      //............................................................
-      FRs3Stream vertexPositionStream = new FRs3Stream();
-      vertexPositionStream.setCode("position");
-      vertexPositionStream.setElementDataCd(EGcData.Float32);
-      vertexPositionStream.setElementCount(3);
-      vertexPositionStream.setDataStride(4 * 3);
-      vertexPositionStream.setDataCount(vertexCount);
-      FByteStream positionStream = new FByteStream();
-      for(SPlyVertex vertex : file.vertexs()){
-         positionStream.writeFloat(vertex.x);
-         positionStream.writeFloat(vertex.y);
-         positionStream.writeFloat(vertex.z);
-      }
-      vertexPositionStream.setData(positionStream.toArray());
-      mesh.streams().push(vertexPositionStream);
-      //............................................................
-      FRs3Stream vertexColorStream = new FRs3Stream();
-      vertexColorStream.setCode("color");
-      vertexColorStream.setElementDataCd(EGcData.Uint8);
-      vertexColorStream.setElementCount(4);
-      vertexColorStream.setDataStride(4);
-      vertexColorStream.setDataCount(vertexCount);
-      FByteStream colorStream = new FByteStream();
-      for(SPlyVertex vertex : file.vertexs()){
-         colorStream.writeUint8((short)vertex.r);
-         colorStream.writeUint8((short)vertex.g);
-         colorStream.writeUint8((short)vertex.b);
-         colorStream.writeUint8((short)255);
-      }
-      vertexColorStream.setData(colorStream.toArray());
-      mesh.streams().push(vertexColorStream);
-      //............................................................
-      FRs3Stream indexStream = new FRs3Stream();
-      indexStream.setCode("index32");
-      indexStream.setElementDataCd(EGcData.Int32);
-      indexStream.setElementCount(3);
-      indexStream.setDataStride(4 * 3);
-      indexStream.setDataCount(faceCount);
-      FByteStream faceStream = new FByteStream();
-      for(SPlyFace face : file.faces()){
-         faceStream.writeUint32(face.data[0]);
-         faceStream.writeUint32(face.data[1]);
-         faceStream.writeUint32(face.data[2]);
-      }
-      indexStream.setData(faceStream.toArray());
-      mesh.streams().push(indexStream);
+      file.buildMesh(mesh);
       //............................................................
       // 新建模型
       FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
@@ -306,6 +325,33 @@ public class FRs3MeshConsole
          meshStreamUnit.setCode(stream.code());
          meshStreamLogic.doInsert(meshStreamUnit);
       }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导入PLY模型。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param file 文件
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importMeshPly(ILogicContext logicContext,
+                                String guid,
+                                FPlyFile file){
+      // 删除已经存在的数据网格
+      FGcRs3MeshInfo meshInfo = _dataMeshConsole.findByGuid(logicContext, guid);
+      if(meshInfo == null){
+         throw new FFatalError("Mesh is not exists.");
+      }
+      //............................................................
+      // 加载模型资源
+      FRs3Mesh mesh = new FRs3Mesh();
+      file.buildMesh(mesh);
+      //............................................................
+      // 新建模型
+      update(logicContext, meshInfo.ouid(), mesh);
       return EResult.Success;
    }
 }

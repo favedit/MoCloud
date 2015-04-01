@@ -7,21 +7,26 @@ import org.mo.com.lang.FString;
 //============================================================
 public class SPlyVertex
 {
-   // 数据
+   // 数据集合
    public float[] data;
 
-   // 数据
+   // 坐标X
    public float x;
 
+   // 坐标Y
    public float y;
 
+   // 坐标Z
    public float z;
 
-   public int r;
+   // 红色
+   public int red;
 
-   public int g;
+   // 绿色
+   public int green;
 
-   public int b;
+   // 蓝色
+   public int blue;
 
    //============================================================
    // <T>获得字符串信息。</T>

@@ -5,17 +5,13 @@ import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.FObject;
 
 //============================================================
 // <T>资源模型数据流。</T>
 //============================================================
 public class FRs3Stream
-      extends FObject
+      extends FRs3Object
 {
-   // 代码
-   protected String _code;
-
    // 元素类型
    protected int _elementDataCd;
 
@@ -42,26 +38,9 @@ public class FRs3Stream
    //
    // @return 全代码
    //============================================================
+   @Override
    public String fullCode(){
       return _code;
-   }
-
-   //============================================================
-   // <T>获得代码。</T>
-   //
-   // @return 代码
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码。</T>
-   //
-   // @param 代码
-   //============================================================
-   public void setCode(String code){
-      _code = code;
    }
 
    //============================================================
@@ -432,6 +411,7 @@ public class FRs3Stream
    //
    // @param output 输出流
    //============================================================
+   @Override
    public void serialize(IDataOutput output){
       switch(_code){
          case "position":

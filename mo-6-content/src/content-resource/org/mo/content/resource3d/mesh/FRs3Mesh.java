@@ -42,6 +42,36 @@ public class FRs3Mesh
    }
 
    //============================================================
+   // <T>根据代码判断是否存在数据流。</T>
+   //
+   // @param code 代码
+   // @return 是否含有
+   //============================================================
+   public boolean containsStream(String code){
+      for(FRs3Stream stream : _streams){
+         if(code.equals(stream.code())){
+            return true;
+         }
+      }
+      return false;
+   }
+
+   //============================================================
+   // <T>根据代码获得数据流。</T>
+   //
+   // @param code 代码
+   // @return 数据流
+   //============================================================
+   public FRs3Stream findStream(String code){
+      for(FRs3Stream stream : _streams){
+         if(code.equals(stream.code())){
+            return stream;
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得网格集合。</T>
    //
    // @return 网格集合

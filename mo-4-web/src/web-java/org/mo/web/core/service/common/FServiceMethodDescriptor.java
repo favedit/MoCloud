@@ -22,12 +22,6 @@ public class FServiceMethodDescriptor
    // 调用函数对象
    protected Method _method;
 
-   // 表单描述器数组
-   protected AContainer[] _forms;
-
-   // 类描述对象
-   protected Class<?>[] _types;
-
    // 会话的描述器
    protected AWebSession _sessionDescriptor;
 
@@ -39,6 +33,12 @@ public class FServiceMethodDescriptor
 
    // 是否需要登录
    protected boolean _loginRequire;
+
+   // 表单描述器数组
+   protected AContainer[] _forms;
+
+   // 类描述对象
+   protected Class<?>[] _types;
 
    //============================================================
    // <T>构造服务函数描述器。</T>
@@ -102,24 +102,6 @@ public class FServiceMethodDescriptor
    }
 
    //============================================================
-   // <T>获得类型描述器集合。</T>
-   //
-   // @return 类型描述器集合
-   //============================================================
-   public Class<?>[] types(){
-      return _types;
-   }
-
-   //============================================================
-   // <T>获得表单描述器集合。</T>
-   //
-   // @return 表单描述器集合
-   //============================================================
-   public AContainer[] forms(){
-      return _forms;
-   }
-
-   //============================================================
    // <T>获得会话描述器。</T>
    //
    // @return 会话描述器
@@ -153,6 +135,24 @@ public class FServiceMethodDescriptor
    //============================================================
    public boolean loginRequire(){
       return _loginRequire;
+   }
+
+   //============================================================
+   // <T>获得类型描述器集合。</T>
+   //
+   // @return 类型描述器集合
+   //============================================================
+   public Class<?>[] types(){
+      return _types;
+   }
+
+   //============================================================
+   // <T>获得表单描述器集合。</T>
+   //
+   // @return 表单描述器集合
+   //============================================================
+   public AContainer[] forms(){
+      return _forms;
    }
 
    //============================================================

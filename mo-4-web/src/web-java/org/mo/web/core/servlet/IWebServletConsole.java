@@ -24,11 +24,12 @@ public interface IWebServletConsole
    // @param context 环境
    // @param request 请求
    // @param response 应答
+   // @return 处理结果
    //============================================================
-   void execute(String name,
-                IWebContext context,
-                IWebServletRequest request,
-                IWebServletResponse response);
+   Object execute(String name,
+                  IWebContext context,
+                  IWebServletRequest request,
+                  IWebServletResponse response);
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -37,9 +38,10 @@ public interface IWebServletConsole
    // @param context 环境
    // @param request 请求
    // @param response 应答
+   // @return 处理结果
    //============================================================
-   void executeUri(String uri,
-                   IWebContext context,
-                   IWebServletRequest request,
-                   IWebServletResponse response);
+   Object executeUri(String uri,
+                     IWebContext context,
+                     IWebServletRequest request,
+                     IWebServletResponse response);
 }

@@ -1,20 +1,20 @@
 package org.mo.content.face.resource3d.mesh;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
+import org.mo.com.io.FByteFile;
+import org.mo.com.io.RFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
+import org.mo.content.mime.phy.FPlyFile;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -45,6 +45,10 @@ public class FMeshServlet
    // 资源网格接口
    @ALink
    protected IRs3MeshConsole _meshConsole;
+
+   // 资源网格接口
+   @ALink
+   protected IGcRs3MeshConsole _rs3MeshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -123,49 +127,60 @@ public class FMeshServlet
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
-      String guid = context.parameter("guid");
       String code = context.parameter("code");
-      if(RString.isEmpty(guid) && RString.isEmpty(code)){
-         throw new FFatalError("Mesh guid and code is empty.");
+      if(RString.isEmpty(code)){
+         throw new FFatalError("Mesh code is empty.");
       }
-      // 获得唯一编号
+      String label = context.parameter("label");
+      if(RString.isEmpty(label)){
+         throw new FFatalError("Mesh label is empty.");
+      }
       int dataLength = context.parameterAsInteger("data_length");
-      //FByteFile file = new FByteFile();
-      //file.setLength(dataLength);
-      try{
-         BufferedInputStream fileIn = new BufferedInputStream(request.inputStream());
-         byte[] buf = new byte[1024];
-         File file = new File("E:/test.jpg");
-
-         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(file));
-
-         while(true){
-            int bytesIn = fileIn.read(buf, 0, 1024);
-            if(bytesIn == -1){
-               break;
-            }else{
-               fileOut.write(buf, 0, bytesIn);
-            }
-         }
-
-         fileOut.flush();
-         fileOut.close();
-
-         //         IWebUploadConsole uploadConsole = RAop.find(IWebUploadConsole.class);
-         //         FAttributes parameters = new FAttributes();
-         //         FWebUploadFiles files = new FWebUploadFiles();
-         //         uploadConsole.parse(request, parameters, files);
-
-         //         int readed = request.inputStream().read(file.memory(), 0, dataLength);
-         //         if(readed != dataLength){
-         //            file.close();
-         //            throw new FFatalError("Read failure.");
-         //         }
-      }catch(IOException e){
-         e.printStackTrace();
+      if((dataLength <= 0) || (dataLength > RInteger.SIZE_64M)){
+         throw new FFatalError("Mesh data length is invalid.");
       }
-      //file.saveToFile("E:/test.jpg");
-      //file.close();
+      String fileName = context.parameter("file_name");
+      if(RString.isEmpty(fileName)){
+         throw new FFatalError("Mesh file name is empty.");
+      }
+      String extension = RFile.extension(fileName);
+      // 导入数据
+      if("ply".equals(extension)){
+      }else{
+         throw new FFatalError("Unknown file format.");
+      }
+      // 读取数据
+      FByteFile file = new FByteFile(dataLength);
+      file.loadStream(request.inputStream());
+      // 导入数据
+      File tempFile = null;
+      try{
+         // 生成临时文件
+         tempFile = File.createTempFile("rs3_msh_", ".bin");
+         file.saveToFile(tempFile.getAbsolutePath());
+         // 加载PHY模型文件
+         if("ply".equals(extension)){
+            FPlyFile plyFile = new FPlyFile();
+            plyFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
+            // 创建模型
+            FGcRs3MeshInfo mesh = _rs3MeshConsole.doPrepare(logicContext);
+            mesh.setCode(code);
+            mesh.setLabel(label);
+            _rs3MeshConsole.doInsert(logicContext, mesh);
+            // 导入模型
+            _meshConsole.importMeshPly(logicContext, mesh.guid(), plyFile);
+         }else{
+            throw new FFatalError("Unknown file format.");
+         }
+      }catch(Exception e){
+         throw new FFatalError(e);
+      }finally{
+         // 删除临时文件
+         if(tempFile != null){
+            tempFile.delete();
+         }
+         file.close();
+      }
       //............................................................
       // 发送数据
       _logger.debug(this, "process", "Send model data. (length={1})", dataLength);

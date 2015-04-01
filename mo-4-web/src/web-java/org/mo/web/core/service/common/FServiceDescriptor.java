@@ -7,7 +7,7 @@ import org.mo.web.core.face.AWebLogin;
 import org.mo.web.core.face.AWebSession;
 
 //============================================================
-// <T>服务描述器。</T>
+// <T>网络服务描述器。</T>
 //============================================================
 public class FServiceDescriptor
       extends FObject
@@ -124,9 +124,7 @@ public class FServiceDescriptor
    //============================================================
    public void push(String methodName,
                     FServiceMethodDescriptor methodDescriptor){
-      if(methodDescriptor != null){
-         methodDescriptor.setServiceDescriptor(this);
-         _methods.set(methodName, methodDescriptor);
-      }
+      methodDescriptor.setServiceDescriptor(this);
+      _methods.set(methodName, methodDescriptor);
    }
 }

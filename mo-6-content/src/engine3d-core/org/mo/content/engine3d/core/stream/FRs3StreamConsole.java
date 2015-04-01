@@ -6,6 +6,8 @@ import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.console.FConsole;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.net.EMime;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.core.aop.face.ALink;
@@ -50,6 +52,41 @@ public class FRs3StreamConsole
       _storageConsole.store(resource);
       // 返回内容
       return streamLogic.find(streamUnit.ouid());
+   }
+
+   //============================================================
+   // <T>更新一个数据流。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param stream 数据流
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult update(ILogicContext logicContext,
+                         FRs3Stream stream){
+      // 获得编号
+      long streamId = stream.ouid();
+      if(streamId == 0){
+         throw new FFatalError("Stream id is invalid.");
+      }
+      // 获得数据单元
+      FDataResource3dStreamLogic streamLogic = logicContext.findLogic(FDataResource3dStreamLogic.class);
+      // 设置数据
+      FDataResource3dStreamUnit streamUnit = streamLogic.find(streamId);
+      streamUnit.setCode(stream.code());
+      streamUnit.setFullCode(stream.fullCode());
+      streamUnit.setElementDataCd(stream.elementDataCd());
+      streamUnit.setElementCount(stream.elementCount());
+      streamUnit.setDataStride(stream.dataStride());
+      streamUnit.setDataCount(stream.dataCount());
+      streamUnit.setDataLength(stream.dataLength());
+      streamLogic.doUpdate(streamUnit);
+      // 存储数据
+      SGcStorage resource = new SGcStorage(EGcStorageCatalog.Resource3dStream, streamUnit.guid(), EMime.Bin.type());
+      resource.setData(stream.data());
+      _storageConsole.store(resource);
+      // 返回结果
+      return EResult.Success;
    }
 
    //============================================================
