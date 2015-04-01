@@ -4,6 +4,7 @@ import java.io.File;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FFatalError;
@@ -45,10 +46,6 @@ public class FMeshServlet
    // 资源网格接口
    @ALink
    protected IRs3MeshConsole _meshConsole;
-
-   // 资源网格接口
-   @ALink
-   protected IGcRs3MeshConsole _rs3MeshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -109,21 +106,17 @@ public class FMeshServlet
 
    //============================================================
    // <T>逻辑处理。</T>
-   // <P>catalog:分类</P>
-   // <P>date:日期</P>
-   // <P>code:代码</P>
-   // <P>version:版本</P>
-   // <P>type:类型，没有的话，存储为 bin</P>
-   // <P>size:大小</P>
-   // <P>存储位置：\{catalog}\{date:yyyymmdd}\{code}\{version}.{type}</P>
    //
-   // @param context 环境
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话
    // @param request 请求
    // @param response 应答
    //============================================================
    @Override
    public void importData(IWebContext context,
                           ILogicContext logicContext,
+                          FGcSessionInfo session,
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
@@ -158,15 +151,16 @@ public class FMeshServlet
          // 生成临时文件
          tempFile = File.createTempFile("rs3_msh_", ".bin");
          file.saveToFile(tempFile.getAbsolutePath());
-         // 加载PHY模型文件
+         // 加载PHY模型文件 
          if("ply".equals(extension)){
             FPlyFile plyFile = new FPlyFile();
             plyFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
             // 创建模型
-            FGcRs3MeshInfo mesh = _rs3MeshConsole.doPrepare(logicContext);
+            FGcRs3MeshInfo mesh = _dataMeshConsole.doPrepare(logicContext);
+            mesh.setUserId(session.userId());
             mesh.setCode(code);
             mesh.setLabel(label);
-            _rs3MeshConsole.doInsert(logicContext, mesh);
+            _dataMeshConsole.doInsert(logicContext, mesh);
             // 导入模型
             _meshConsole.importMeshPly(logicContext, mesh.guid(), plyFile);
          }else{

@@ -348,6 +348,7 @@ public class FRs3MeshConsole
       //............................................................
       // 加载模型资源
       FRs3Mesh mesh = new FRs3Mesh();
+      mesh.loadUnit(meshInfo);
       file.buildMesh(mesh);
       //............................................................
       // 新建模型
