@@ -29,12 +29,12 @@ public interface IC3dBitmapConsole
                                   int page);
 
    //============================================================
-   // <T>生成位图数据。</T>
+   // <T>生成位图预览数据。</T>
    //
    // @param context 逻辑环境
    // @param guid 唯一编号
    // @return 数据
    //============================================================
-   byte[] makeData(ILogicContext context,
-                   String guid);
+   byte[] makePreviewData(ILogicContext context,
+                          String guid);
 }

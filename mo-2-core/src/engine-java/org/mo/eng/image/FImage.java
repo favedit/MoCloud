@@ -77,6 +77,19 @@ public class FImage
    //============================================================
    // <T>构造图形对象。</T>
    //
+   // @param data 数据
+   // @param offset 位置
+   // @param length 长度
+   //============================================================
+   public FImage(byte[] data,
+                 int offset,
+                 int length){
+      loadData(data, offset, length);
+   }
+
+   //============================================================
+   // <T>构造图形对象。</T>
+   //
    // @param fileName 文件名称
    //============================================================
    public FImage(String fileName){
@@ -164,10 +177,23 @@ public class FImage
    // @param data 数据
    //============================================================
    public void loadData(byte[] data){
+      loadData(data, 0, data.length);
+   }
+
+   //============================================================
+   // <T>加载数据。</T>
+   //
+   // @param data 数据
+   // @param offset 位置
+   // @param length 长度
+   //============================================================
+   public void loadData(byte[] data,
+                        int offset,
+                        int length){
       try{
          _logger.debug(this, "loadFile", "Load image data. (data={1}, length={2})", data, data.length);
          //_image = ImageIO.read(new ByteArrayInputStream(data));
-         Image image = Toolkit.getDefaultToolkit().createImage(data);
+         Image image = Toolkit.getDefaultToolkit().createImage(data, offset, length);
          PixelGrabber pixelGrabber = new PixelGrabber(image, 0, 0, -1, -1, true);
          pixelGrabber.grabPixels();
          int width = pixelGrabber.getWidth();

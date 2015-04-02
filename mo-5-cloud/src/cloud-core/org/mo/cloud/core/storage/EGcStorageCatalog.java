@@ -5,6 +5,9 @@ package org.mo.cloud.core.storage;
 //============================================================
 public class EGcStorageCatalog
 {
+   // 资源预览
+   public final static String ResourcePreview = "resource.preview";
+
    // 资源位图图片
    public final static String ResourceBitmapImage = "resource.bitmap.image";
 

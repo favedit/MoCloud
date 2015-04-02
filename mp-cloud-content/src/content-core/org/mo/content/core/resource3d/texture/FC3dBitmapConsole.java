@@ -104,7 +104,7 @@ public class FC3dBitmapConsole
    // @return 数据
    //============================================================
    @Override
-   public byte[] makeData(ILogicContext logicContext,
+   public byte[] makePreviewData(ILogicContext logicContext,
                           String guid){
       //............................................................
       // 查找数据
