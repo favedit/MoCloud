@@ -234,6 +234,17 @@ public class FDataResource3dSkeletonUnit
    }
 
    //============================================================
+   // <T>获得项目编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataSolutionProjectUnit project(){
+      FDataSolutionProjectLogic logic = _logicContext.findLogic(FDataSolutionProjectLogic.class);
+      FDataSolutionProjectUnit unit = logic.find(_projectId);
+      return unit;
+   }
+
+   //============================================================
    // <T>设置项目编号的数据内容。</T>
    //
    // @param value 数据内容

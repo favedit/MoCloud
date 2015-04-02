@@ -50,7 +50,7 @@ public class FRs3Material
    protected float _colorRate = 1.0f;
 
    // 颜色融合
-   protected float _colorMerge = 0.5f;
+   protected float _colorMerge = 1.0f;
 
    // 配置透明
    protected boolean _optionAlpha = false;
@@ -65,7 +65,7 @@ public class FRs3Material
    protected boolean _optionAmbient = true;
 
    // 环境颜色
-   protected SFloatColor4 _ambientColor = new SFloatColor4(0.5f, 0.5f, 0.5f, 1.0f);
+   protected SFloatColor4 _ambientColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 配置散射
    protected boolean _optionDiffuse = true;
@@ -113,7 +113,7 @@ public class FRs3Material
    protected float _reflectMerge = 0.5f;
 
    // 配置折射
-   protected boolean _optionRefract = true;
+   protected boolean _optionRefract = false;
 
    // 前折射颜色
    protected SFloatColor4 _refractFrontColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);

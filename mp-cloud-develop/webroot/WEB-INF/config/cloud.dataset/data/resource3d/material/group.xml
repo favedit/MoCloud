@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="1a0d802d-518e-46b2-9510-a32a3ed86015" name="data.resource3d.material.group" label="M#12cn18资源3D材质组表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Material.Group" data_name="DT_RS3_MATERIAL_GROUP" data_alias="DT_RS3_MTL_GRP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldInteger _uuid="1fc73215-2877-4854-bfa0-7e597e16126b" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldRecordId _uuid="b4f34176-235a-4fb8-8b0b-1d3cc2cf492c" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
+  <FieldRecordId _uuid="2a4f6646-2fbb-4a79-af83-5a55a2e2522f" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="b4f34176-235a-4fb8-8b0b-1d3cc2cf492c" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
   <FieldString _uuid="68dfc9af-80f3-410e-8f66-32f9efe25bec" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="1eafc0bf-4b92-43e6-93ae-309c3fed6979" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="f9f7fc51-9456-43ec-a56f-676c2233e83f" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />

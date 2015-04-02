@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="d0952311-86e3-4cf3-a039-8f8466d0cec4" name="data.resource3d.model.mesh" label="M#12cn19资源3D模型网格表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Model.Mesh" data_name="DT_RS3_MODEL_MESH" data_alias="DT_RS3_MOD_MSH" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="9ff49b12-c1ae-4c91-871d-2becd5c6c3c2" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldRecordId _uuid="61b739e2-1caa-43a9-bdf3-dd32f8dfbbeb" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
+  <FieldRecordId _uuid="9ff49b12-c1ae-4c91-871d-2becd5c6c3c2" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="61b739e2-1caa-43a9-bdf3-dd32f8dfbbeb" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
   <FieldRecordId _uuid="dcdf4d49-b922-428f-86ff-77d523018b6d" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource3d.model" />
   <FieldRecordId _uuid="1b422278-d900-48ce-9df7-eb8316febdc4" name="mesh_id" label="M#12cn14网格编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MESH_ID" data_alias="MSH" data_refer="data.resource3d.mesh" />
   <FieldInteger _uuid="7914d607-a926-4d68-9607-06f66953fb79" name="index" label="M#12cn12索引" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INDEX" />

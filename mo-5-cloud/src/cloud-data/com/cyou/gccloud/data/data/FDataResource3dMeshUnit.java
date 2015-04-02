@@ -47,6 +47,12 @@ public class FDataResource3dMeshUnit
    // 字段项目编号的定义。
    protected long _projectId;
 
+   // 存储字段资源编号的定义。
+   private long __resourceId;
+
+   // 字段资源编号的定义。
+   protected long _resourceId;
+
    // 存储字段代码的定义。
    private String __code;
 
@@ -225,6 +231,17 @@ public class FDataResource3dMeshUnit
    }
 
    //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
+   }
+
+   //============================================================
    // <T>设置用户编号的数据内容。</T>
    //
    // @param value 数据内容
@@ -252,12 +269,61 @@ public class FDataResource3dMeshUnit
    }
 
    //============================================================
+   // <T>获得项目编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataSolutionProjectUnit project(){
+      FDataSolutionProjectLogic logic = _logicContext.findLogic(FDataSolutionProjectLogic.class);
+      FDataSolutionProjectUnit unit = logic.find(_projectId);
+      return unit;
+   }
+
+   //============================================================
    // <T>设置项目编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setProjectId(long value){
       _projectId = value;
+   }
+
+   //============================================================
+   // <T>判断资源编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isResourceIdChanged(){
+      return __resourceId != _resourceId;
+   }
+
+   //============================================================
+   // <T>获得资源编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long resourceId(){
+      return _resourceId;
+   }
+
+   //============================================================
+   // <T>获得资源编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceResourceUnit resource(){
+      FDataResourceResourceLogic logic = _logicContext.findLogic(FDataResourceResourceLogic.class);
+      FDataResourceResourceUnit unit = logic.find(_resourceId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置资源编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setResourceId(long value){
+      _resourceId = value;
    }
 
    //============================================================
@@ -603,6 +669,8 @@ public class FDataResource3dMeshUnit
             return Long.toString(_userId);
          case "project_id":
             return Long.toString(_projectId);
+         case "resource_id":
+            return Long.toString(_resourceId);
          case "code":
             return _code;
          case "full_code":
@@ -655,6 +723,9 @@ public class FDataResource3dMeshUnit
             break;
          case "project_id":
             _projectId = RLong.parse(value);
+            break;
+         case "resource_id":
+            _resourceId = RLong.parse(value);
             break;
          case "code":
             _code = value;
@@ -727,6 +798,10 @@ public class FDataResource3dMeshUnit
                __projectId = RLong.parse(value);
                _projectId = __projectId;
                break;
+            case "resource_id":
+               __resourceId = RLong.parse(value);
+               _resourceId = __resourceId;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -792,6 +867,7 @@ public class FDataResource3dMeshUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("projectId", _projectId);
+      row.set("resourceId", _resourceId);
       row.set("code", _code);
       row.set("fullCode", _fullCode);
       row.set("label", _label);
@@ -819,6 +895,7 @@ public class FDataResource3dMeshUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
+      map.put("resourceId", RLong.toString(_resourceId));
       map.put("code", _code);
       map.put("fullCode", _fullCode);
       map.put("label", _label);

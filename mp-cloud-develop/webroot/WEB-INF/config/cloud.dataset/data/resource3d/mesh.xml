@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="9cbcfdd1-e0ac-4a54-a93b-e884dab3114c" name="data.resource3d.mesh" label="M#12cn17资源3D网格表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Mesh" data_name="DT_RS3_MESH" data_alias="DT_RS3_MSH" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="32b5d273-4773-427f-b1dc-4cec8f3802f0" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldRecordId _uuid="36977267-a626-4047-8e95-ff22c80710c9" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
+  <FieldRecordId _uuid="32b5d273-4773-427f-b1dc-4cec8f3802f0" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="36977267-a626-4047-8e95-ff22c80710c9" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
+  <FieldRecordId _uuid="62bde678-04c9-441f-a42d-630df714bbc0" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_alias="RES" data_refer="data.resource.resource" />
   <FieldString _uuid="18e7edba-48fc-4916-beea-1b2c69e37d1b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="4db98db8-7735-4e81-b765-bf7845686984" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="28e257a6-eb8b-4b5c-96f0-9fbb011fdaff" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />

@@ -220,6 +220,17 @@ public class FDataResource3dTrackUnit
    }
 
    //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
+   }
+
+   //============================================================
    // <T>设置用户编号的数据内容。</T>
    //
    // @param value 数据内容
@@ -244,6 +255,17 @@ public class FDataResource3dTrackUnit
    //============================================================
    public long projectId(){
       return _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataSolutionProjectUnit project(){
+      FDataSolutionProjectLogic logic = _logicContext.findLogic(FDataSolutionProjectLogic.class);
+      FDataSolutionProjectUnit unit = logic.find(_projectId);
+      return unit;
    }
 
    //============================================================

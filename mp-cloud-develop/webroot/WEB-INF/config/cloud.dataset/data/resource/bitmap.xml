@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="922bc6c0-9b1b-4eac-b67a-915454960f9a" name="data.resource.bitmap" label="M#12cn15资源位图表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-RS-BP-DAT" data_name="DT_RES_BITMAP" data_alias="DT_RES_BMP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="1af63173-fe14-49d1-a2f0-eec8c3396e9b" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldRecordId _uuid="5be0f992-a729-4390-b08d-3a8898167e8d" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
+  <FieldRecordId _uuid="1af63173-fe14-49d1-a2f0-eec8c3396e9b" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="5be0f992-a729-4390-b08d-3a8898167e8d" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
   <FieldString _uuid="69da983e-0f53-48cc-94fc-2536ddd9e8c0" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="4b15513f-1567-4f63-b7e3-f9aadac48654" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="55b375ba-7334-4e01-805a-604c117eaee5" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />

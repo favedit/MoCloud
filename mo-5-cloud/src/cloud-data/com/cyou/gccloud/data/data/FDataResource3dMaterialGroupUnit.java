@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -37,10 +36,10 @@ public class FDataResource3dMaterialGroupUnit
    protected String _guid;
 
    // 存储字段用户编号的定义。
-   private int __userId;
+   private long __userId;
 
    // 字段用户编号的定义。
-   protected int _userId;
+   protected long _userId;
 
    // 存储字段项目编号的定义。
    private long __projectId;
@@ -191,8 +190,19 @@ public class FDataResource3dMaterialGroupUnit
    //
    // @return 数据内容
    //============================================================
-   public int userId(){
+   public long userId(){
       return _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
    }
 
    //============================================================
@@ -200,7 +210,7 @@ public class FDataResource3dMaterialGroupUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setUserId(int value){
+   public void setUserId(long value){
       _userId = value;
    }
 
@@ -220,6 +230,17 @@ public class FDataResource3dMaterialGroupUnit
    //============================================================
    public long projectId(){
       return _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataSolutionProjectUnit project(){
+      FDataSolutionProjectLogic logic = _logicContext.findLogic(FDataSolutionProjectLogic.class);
+      FDataSolutionProjectUnit unit = logic.find(_projectId);
+      return unit;
    }
 
    //============================================================
@@ -436,7 +457,7 @@ public class FDataResource3dMaterialGroupUnit
          case "guid":
             return _guid;
          case "user_id":
-            return RInteger.toString(_userId);
+            return Long.toString(_userId);
          case "project_id":
             return Long.toString(_projectId);
          case "code":
@@ -477,7 +498,7 @@ public class FDataResource3dMaterialGroupUnit
             _guid = value;
             break;
          case "user_id":
-            _userId = RInteger.parse(value);
+            _userId = RLong.parse(value);
             break;
          case "project_id":
             _projectId = RLong.parse(value);
@@ -531,7 +552,7 @@ public class FDataResource3dMaterialGroupUnit
                _guid = __guid;
                break;
             case "user_id":
-               __userId = RInteger.parse(value);
+               __userId = RLong.parse(value);
                _userId = __userId;
                break;
             case "project_id":
@@ -603,7 +624,7 @@ public class FDataResource3dMaterialGroupUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("userId", RInteger.toString(_userId));
+      map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
       map.put("code", _code);
       map.put("fullCode", _fullCode);

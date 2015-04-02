@@ -661,7 +661,12 @@ public class FDataResource3dMaterialGroupLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      cmd.append(unit.userId());
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
       cmd.append(',');
       long projectId = unit.projectId();
       if(projectId == 0){
@@ -772,7 +777,12 @@ public class FDataResource3dMaterialGroupLogic
       cmd.append(unit.ovld());
       if(unit.isUserIdChanged()){
          cmd.append(",`USER_ID`=");
-         cmd.append(unit.userId());
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
       }
       if(unit.isProjectIdChanged()){
          cmd.append(",`PROJECT_ID`=");

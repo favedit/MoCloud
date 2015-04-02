@@ -1,5 +1,6 @@
 package org.mo.content.core.resource3d.mesh;
 
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicUnit;
@@ -27,4 +28,16 @@ public interface IC3dMeshConsole
                                   String orderSql,
                                   int pageSize,
                                   int page);
+
+   //============================================================
+   // <T>创建网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @return 网格信息
+   //============================================================
+   FGcRs3MeshInfo createMesh(ILogicContext logicContext,
+                             long userId,
+                             long projectId,
+                             String code,
+                             String label);
 }

@@ -14,6 +14,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
+import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.core.aop.face.ALink;
@@ -46,6 +47,10 @@ public class FMeshServlet
    // 资源网格接口
    @ALink
    protected IRs3MeshConsole _meshConsole;
+
+   // 资源网格接口
+   @ALink
+   protected IC3dMeshConsole _c3MeshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -137,6 +142,8 @@ public class FMeshServlet
          throw new FFatalError("Mesh file name is empty.");
       }
       String extension = RFile.extension(fileName);
+      long userId = session.userId();
+      long projectId = session.projectId();
       // 导入数据
       if("ply".equals(extension)){
       }else{
@@ -156,11 +163,10 @@ public class FMeshServlet
             FPlyFile plyFile = new FPlyFile();
             plyFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
             // 创建模型
-            FGcRs3MeshInfo mesh = _dataMeshConsole.doPrepare(logicContext);
-            mesh.setUserId(session.userId());
-            mesh.setCode(code);
-            mesh.setLabel(label);
-            _dataMeshConsole.doInsert(logicContext, mesh);
+            FGcRs3MeshInfo mesh = _c3MeshConsole.createMesh(logicContext, userId, projectId, code, label);
+            //FGcRs3MeshInfo mesh = _dataMeshConsole.doPrepare(logicContext);
+            //mesh.setUserId(session.userId());
+            //_dataMeshConsole.doInsert(logicContext, mesh);
             // 导入模型
             _meshConsole.importMeshPly(logicContext, mesh.guid(), plyFile);
          }else{
