@@ -7,6 +7,7 @@
   <FieldString _uuid="8b208eb1-bc27-409a-b294-533d91ecb897" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="d3a58afc-7b89-436f-9992-3f0df527024b" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
   <FieldString _uuid="83e348a3-2154-4ee7-b91d-b4a65d19af4f" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldBoolean _uuid="302aec6c-8e9f-48fc-9792-ffa55f777825" name="has_preview" label="M#12cn15是否有预览" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HAS_PREVIEW" />
   <FieldString _uuid="14abfd50-cbfd-450f-8c95-4261a4c3e591" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
   <FieldTemplate _uuid="83cd950d-dfee-4e90-9779-c3a3031bbd38" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
 </DataStore>

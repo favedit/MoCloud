@@ -62,6 +62,9 @@ public class FDataResourceResourceLogic
    // 字段图标地址的定义。
    public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
 
+   // 字段是否有预览的定义。
+   public final static SLogicFieldInfo HAS_PREVIEW = new SLogicFieldInfo("HAS_PREVIEW");
+
    // 字段描述的定义。
    public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
 
@@ -81,7 +84,7 @@ public class FDataResourceResourceLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TYPE_ID`,`CATALOG_ID`,`CODE`,`LABEL`,`ICON_URL`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TYPE_ID`,`CATALOG_ID`,`CODE`,`LABEL`,`ICON_URL`,`HAS_PREVIEW`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源信息表逻辑单元。</T>
@@ -660,6 +663,7 @@ public class FDataResourceResourceLogic
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`ICON_URL`");
+      cmd.append(",`HAS_PREVIEW`");
       cmd.append(",`DESCRIPTION`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
@@ -731,6 +735,8 @@ public class FDataResourceResourceLogic
          cmd.append(RSql.formatValue(iconUrl));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.hasPreview());
       cmd.append(',');
       String description = unit.description();
       if(RString.isEmpty(description)){
@@ -891,6 +897,10 @@ public class FDataResourceResourceLogic
             cmd.append(RSql.formatValue(iconUrl));
             cmd.append('\'');
          }
+      }
+      if(unit.isHasPreviewChanged()){
+         cmd.append(",`HAS_PREVIEW`=");
+         cmd.append(unit.hasPreview());
       }
       if(unit.isDescriptionChanged()){
          cmd.append(",`DESCRIPTION`=");

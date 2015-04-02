@@ -77,6 +77,12 @@ public class FDataResourceResourceUnit
    // 字段图标地址的定义。
    protected String _iconUrl;
 
+   // 存储字段是否有预览的定义。
+   private boolean __hasPreview;
+
+   // 字段是否有预览的定义。
+   protected boolean _hasPreview;
+
    // 存储字段描述的定义。
    private String __description;
 
@@ -434,6 +440,33 @@ public class FDataResourceResourceUnit
    }
 
    //============================================================
+   // <T>判断是否有预览的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHasPreviewChanged(){
+      return __hasPreview != _hasPreview;
+   }
+
+   //============================================================
+   // <T>获得是否有预览的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean hasPreview(){
+      return _hasPreview;
+   }
+
+   //============================================================
+   // <T>设置是否有预览的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHasPreview(boolean value){
+      _hasPreview = value;
+   }
+
+   //============================================================
    // <T>判断描述的数据是否改变。</T>
    //
    // @return 数据内容
@@ -624,6 +657,8 @@ public class FDataResourceResourceUnit
             return _label;
          case "icon_url":
             return _iconUrl;
+         case "has_preview":
+            return RBoolean.toString(_hasPreview);
          case "description":
             return _description;
          case "note":
@@ -679,6 +714,9 @@ public class FDataResourceResourceUnit
             break;
          case "icon_url":
             _iconUrl = value;
+            break;
+         case "has_preview":
+            _hasPreview = RBoolean.parse(value);
             break;
          case "description":
             _description = value;
@@ -753,6 +791,10 @@ public class FDataResourceResourceUnit
                __iconUrl = value;
                _iconUrl = __iconUrl;
                break;
+            case "has_preview":
+               __hasPreview = RBoolean.parse(value);
+               _hasPreview = __hasPreview;
+               break;
             case "description":
                __description = value;
                _description = __description;
@@ -799,6 +841,7 @@ public class FDataResourceResourceUnit
       row.set("code", _code);
       row.set("label", _label);
       row.set("iconUrl", _iconUrl);
+      row.set("hasPreview", _hasPreview);
       row.set("description", _description);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
@@ -825,6 +868,7 @@ public class FDataResourceResourceUnit
       map.put("code", _code);
       map.put("label", _label);
       map.put("iconUrl", _iconUrl);
+      map.put("hasPreview", RBoolean.toString(_hasPreview));
       map.put("description", _description);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));

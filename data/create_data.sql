@@ -122,6 +122,7 @@ CREATE TABLE `DT_RES_RESOURCE`
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `ICON_URL`                      VARCHAR(200), 
+   `HAS_PREVIEW`                   TINYINT, 
    `DESCRIPTION`                   VARCHAR(2000), 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 

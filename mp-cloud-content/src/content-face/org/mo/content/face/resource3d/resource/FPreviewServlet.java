@@ -115,20 +115,29 @@ public class FPreviewServlet
          throw new FFatalError("Parameter size is invalid. (width={1}, height={2})", width, height);
       }
       //............................................................
-      // 读取数据
+      // 读取数据（数据需要上下颠倒）
       FByteStream stream = new FByteStream(Integer.BYTES * width * height);
       stream.loadStream(request.inputStream());
+      byte[] uploadData = stream.memory();
       int[] pixelData = new int[width * height];
       int position = 0;
       for(int y = 0; y < height; y++){
+         int index = 4 * width * (height - y - 1);
          for(int x = 0; x < width; x++){
-            pixelData[position++] = stream.readInt32();
+            int r = (uploadData[index++] & 0xFF);
+            int g = (uploadData[index++] & 0xFF);
+            int b = (uploadData[index++] & 0xFF);
+            index++;
+            pixelData[position++] = 0xFF000000 | (r << 16) | (g << 8) | b;
          }
       }
-      byte[] data = null;
-      BufferedImage bufferImage = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
+      // 生成图像
+      BufferedImage bufferImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
       bufferImage.setRGB(0, 0, width, height, pixelData, 0, width);
+      // 获得数据
+      byte[] data = null;
       try(FImage image = new FImage(bufferImage)){
+         //image.resize(200, 150, false);
          data = image.toBytes("jpg");
       }catch(Exception e){
          throw new FFatalError(e);
