@@ -157,4 +157,72 @@ public class FResourceService
       }
       return EResult.Success;
    }
+
+   //============================================================
+   // <T>删除数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult delete(IWebContext context,
+                         ILogicContext logicContext,
+                         FGcSessionInfo session,
+                         IWebInput input,
+                         IWebOutput output){
+      // 检查参数
+      String typeCd = context.parameter("type_cd");
+      if(RString.isEmpty(typeCd)){
+         throw new FFatalError("Resource type is empty.");
+      }
+      String guid = context.parameter("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Resource guid is empty.");
+      }
+      //............................................................
+      long userId = session.userId();
+      // 查询数据
+      switch(typeCd){
+         case "picture":
+            // 查找位图
+            //dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
+            break;
+         case "sound":
+            // 查找声音
+            break;
+         case "video":
+            // 查找视频
+            break;
+         case "texture":
+            // 查找纹理
+            //_textureConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            break;
+         case "material":
+            // 查找材质
+            //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            break;
+         case "mesh":
+            // 删除网格
+            _meshConsole.doDeleteByGuid(logicContext, userId, guid);
+            break;
+         case "model":
+            // 查找网格
+            //_modelConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            break;
+         case "template":
+            // 查找模板
+            //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            break;
+         case "scene":
+            // 查找网格
+            //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            break;
+         default:
+            throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
+      }
+      return EResult.Success;
+   }
 }

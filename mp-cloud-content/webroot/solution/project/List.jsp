@@ -18,12 +18,12 @@
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogToolBar.js'></SCRIPT>
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogContent.js'></SCRIPT>
 
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchItem.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionSearchContent.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionListToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionListItem.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionListContent.js'></SCRIPT>
 
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPreviewToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPreviewContent.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPropertyToolBar.js'></SCRIPT>
+<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPropertyContent.js'></SCRIPT>
 
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionMenuBar.js'></SCRIPT>
 <SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionTabBar.js'></SCRIPT>

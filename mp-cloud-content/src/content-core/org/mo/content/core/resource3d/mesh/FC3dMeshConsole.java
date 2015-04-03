@@ -4,6 +4,8 @@ import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshConsole;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicUnit;
@@ -52,22 +54,38 @@ public class FC3dMeshConsole
    //============================================================
    @Override
    public FGcRs3MeshInfo createMesh(ILogicContext logicContext,
-                                    long userId,
-                                    long projectId,
-                                    String code,
-                                    String label){
+                                    FGcRs3MeshInfo mesh){
       // 创建资源对象
       FGcResourceInfo resource = _resourceConsole.doPrepare(logicContext);
-      resource.setUserId(userId);
-      resource.setProjectId(projectId);
+      resource.setUserId(mesh.userId());
+      resource.setProjectId(mesh.projectId());
       //resource.setTypeId(value);
+      resource.setCode(mesh.code());
+      resource.setLabel(mesh.label());
       _resourceConsole.doInsert(logicContext, resource);
       // 创建网格对象
-      FGcRs3MeshInfo mesh = doPrepare(logicContext);
-      mesh.setUserId(userId);
-      //mesh.setCode(code);
-      //mesh.setLabel(label);
+      mesh.setResourceId(resource.ouid());
       doInsert(logicContext, mesh);
       return mesh;
+   }
+
+   //============================================================
+   // <T>删除网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 逻辑环境
+   // @param guid 逻辑环境
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult doDeleteByGuid(ILogicContext logicContext,
+                                 long userId,
+                                 String guid){
+      FGcRs3MeshInfo mesh = findByGuid(logicContext, guid);
+      if(mesh.userId() != userId){
+         throw new FFatalError("Mesh user is not same. (user_id={1}, mesh_user_id={2})", userId, mesh.userId());
+      }
+      doDelete(logicContext, mesh);
+      return EResult.Success;
    }
 }

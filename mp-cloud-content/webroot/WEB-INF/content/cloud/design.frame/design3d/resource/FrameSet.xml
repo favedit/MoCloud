@@ -8,18 +8,18 @@
          </FrameSet>
       </FramePage>
       <FrameSpliter name='catalogSpliter'/>
-      <FramePage name='searchFrame' label='工作区'>
-         <FrameSet name='searchFrameSet' direction_cd='V' label='搜索布局'>
-            <FramePage name='searchToolbarFrame' label='搜索工具栏' size='0,24'/>
-            <FramePage name='searchContentFrame' label='搜索内容区'/>
+      <FramePage name='listFrame' label='工作区'>
+         <FrameSet name='listFrameSet' direction_cd='V' label='列表布局'>
+            <FramePage name='listToolbarFrame' label='列表工具栏' size='0,24'/>
+            <FramePage name='listContentFrame' label='列表内容区'/>
          </FrameSet>
       </FramePage>
-      <FrameSpliter name='previewSpliter'/>
-      <FramePage name='previewFrame' label='预览区' size='320,0' scroll_cd='VA'>
-         <FrameSet name='previewFrameSet' direction_cd='V' label='预览布局'>
-            <FramePage name='previewToolbarFrame' label='预览工具栏' size='0,24'/>
-            <FramePage name='previewContentFrame' label='预览内容区'/>
-            <FramePage name='previewPropertyFrame' label='预览属性区' size='0,60'/>
+      <FrameSpliter name='propertySpliter'/>
+      <FramePage name='propertyFrame' label='属性区' size='320,0' scroll_cd='VA'>
+         <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
+            <FramePage name='propertyToolbarFrame' label='属性工具栏' size='0,24'/>
+            <FramePage name='propertyContentFrame' label='属性内容区'/>
+            <FramePage name='propertyPropertyFrame' label='属性预览区' size='0,60'/>
          </FrameSet>
       </FramePage>
    </FrameSet>

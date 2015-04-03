@@ -348,13 +348,13 @@ public class FServiceConsole
       // 找到服务对象的定义
       FWebService service = findService(name);
       if(service == null){
-         // _logger.warn(this, "execute", "not find service. (name={1}, service={1})", name, service);
+         _logger.warn(this, "execute", "not find service. (name={1}, service={1})", name, service);
          throwError(context, "error.service.notexists", name);
       }
       // 找到服务对象的实例
       Object instance = findInstance(name);
       if(instance == null){
-         // _logger.warn(this, "execute", "not find service method (name={1}, instance={2})", name, instance);
+         _logger.warn(this, "execute", "not find service method (name={1}, instance={2})", name, instance);
          throwError(context, "error.service.notexists", name);
       }
       // 找到服务对象实例对应的默认处理函数
@@ -367,7 +367,7 @@ public class FServiceConsole
       }
       FServiceMethodDescriptor methodDescriptor = findMethod(service.faceClass(), action);
       if(methodDescriptor == null){
-         // _logger.warn(this, "execute", "Can't find method in service. (instance={1}, action={2})", instance, action);
+         _logger.warn(this, "execute", "Can't find method in service. (instance={1}, action={2})", instance, action);
          throwError(context, "error.method.notexists", name);
       }
       _logger.debug(this, "execute", "Process service. (name={1}, instance={2}, action={3})", name, instance, action);

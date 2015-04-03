@@ -87,7 +87,9 @@ public class FPreviewServlet
       response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
       response.setContentType(EMime.Jpg.mime());
       response.setContentLength(dataLength);
-      response.write(data, 0, dataLength);
+      if(data != null){
+         response.write(data, 0, dataLength);
+      }
    }
 
    //============================================================

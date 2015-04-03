@@ -163,10 +163,12 @@ public class FMeshServlet
             FPlyFile plyFile = new FPlyFile();
             plyFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
             // 创建模型
-            FGcRs3MeshInfo mesh = _c3MeshConsole.createMesh(logicContext, userId, projectId, code, label);
-            //FGcRs3MeshInfo mesh = _dataMeshConsole.doPrepare(logicContext);
-            //mesh.setUserId(session.userId());
-            //_dataMeshConsole.doInsert(logicContext, mesh);
+            FGcRs3MeshInfo mesh = _c3MeshConsole.doPrepare(logicContext);
+            mesh.setUserId(userId);
+            mesh.setProjectId(projectId);
+            mesh.setCode(code);
+            mesh.setLabel(label);
+            _c3MeshConsole.createMesh(logicContext, mesh);
             // 导入模型
             _meshConsole.importMeshPly(logicContext, mesh.guid(), plyFile);
          }else{

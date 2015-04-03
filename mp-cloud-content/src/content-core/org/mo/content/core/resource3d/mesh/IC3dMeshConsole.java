@@ -2,6 +2,7 @@ package org.mo.content.core.resource3d.mesh;
 
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
+import org.mo.com.lang.EResult;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicUnit;
 import org.mo.data.logic.ILogicContext;
@@ -36,8 +37,17 @@ public interface IC3dMeshConsole
    // @return 网格信息
    //============================================================
    FGcRs3MeshInfo createMesh(ILogicContext logicContext,
-                             long userId,
-                             long projectId,
-                             String code,
-                             String label);
+                             FGcRs3MeshInfo mesh);
+
+   //============================================================
+   // <T>删除网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 逻辑环境
+   // @param guid 逻辑环境
+   // @return 处理结果
+   //============================================================
+   EResult doDeleteByGuid(ILogicContext logicContext,
+                          long userId,
+                          String guid);
 }
