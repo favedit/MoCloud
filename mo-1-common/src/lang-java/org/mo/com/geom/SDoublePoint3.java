@@ -1,4 +1,4 @@
-package org.mo.content.geom.common;
+package org.mo.com.geom;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -40,6 +40,17 @@ public class SDoublePoint3
       this.x = x;
       this.y = y;
       this.z = z;
+   }
+
+   //============================================================
+   // <T>接收数据。</T>
+   //
+   // @param value 数据
+   //============================================================
+   public void assign(SDoublePoint3 value){
+      this.x = value.x;
+      this.y = value.y;
+      this.z = value.z;
    }
 
    //============================================================

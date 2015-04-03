@@ -1,13 +1,12 @@
 package org.mo.content.resource3d.common;
 
-import org.mo.content.geom.common.SFloatColor4;
-
 import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.geom.common.SFloatColor4;
 
 //============================================================
 // <T>资源模型。</T>

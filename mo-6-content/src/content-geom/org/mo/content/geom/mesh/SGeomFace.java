@@ -6,7 +6,10 @@ package org.mo.content.geom.mesh;
 public class SGeomFace
 {
    // 位置索引
-   public int[] vertexIndexs;
+   public int[] positionIndexs;
+
+   // 颜色索引
+   public int[] colorIndexs;
 
    // 纹理索引
    public int[] coordIndexs;
@@ -25,9 +28,9 @@ public class SGeomFace
    //============================================================
    public void set(int[] indexs){
       int count = indexs.length;
-      vertexIndexs = new int[count];
+      positionIndexs = new int[count];
       for(int n = 0; n < count; n++){
-         vertexIndexs[n] = indexs[n];
+         positionIndexs[n] = indexs[n];
       }
    }
 }

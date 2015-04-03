@@ -1,10 +1,9 @@
 package org.mo.content.resource3d.common;
 
-import org.mo.content.geom.common.SFloatColor4;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.geom.common.SFloatColor4;
 
 //============================================================
 // <T>资源3D区域。</T>

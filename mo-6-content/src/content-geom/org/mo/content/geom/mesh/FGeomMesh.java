@@ -1,15 +1,15 @@
 package org.mo.content.geom.mesh;
 
 import com.cyou.gccloud.define.enums.common.EGcData;
+import org.mo.com.geom.SDoubleOutline3;
+import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.geom.SFloatPoint2;
+import org.mo.com.geom.SFloatVector3;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
-import org.mo.content.geom.common.SDoubleOutline3;
-import org.mo.content.geom.common.SDoublePoint3;
 import org.mo.content.geom.common.SFloatColor4;
-import org.mo.content.geom.common.SFloatVector3;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.mesh.FRs3Mesh;
 
@@ -30,6 +30,9 @@ public class FGeomMesh
 
    // 顶点法线集合
    protected FObjects<SDoublePoint3> _vertexPositions = new FObjects<SDoublePoint3>(SDoublePoint3.class);
+
+   // 顶点颜色集合
+   protected FObjects<SFloatColor4> _vertexColors = new FObjects<SFloatColor4>(SFloatColor4.class);
 
    // 顶点纹理集合
    protected FObjects<SFloatPoint2> _vertexCoords = new FObjects<SFloatPoint2>(SFloatPoint2.class);
@@ -110,6 +113,15 @@ public class FGeomMesh
    //============================================================
    protected FObjects<SFloatPoint2> vertexCoords(){
       return _vertexCoords;
+   }
+
+   //============================================================
+   // <T>获得顶点颜色集合。</T>
+   //
+   // @return 顶点颜色集合
+   //============================================================
+   protected FObjects<SFloatColor4> vertexColors(){
+      return _vertexColors;
    }
 
    //============================================================
@@ -232,12 +244,12 @@ public class FGeomMesh
    //============================================================
    // <T>根据代码获得唯一顶点。</T>
    //============================================================
-   public SGeomVertex syncVertex(int faceIndex,
-                                 int vertexId,
+   public SGeomVertex syncVertex(int vertexId,
                                  int coordId,
                                  int normalId,
+                                 int binormalId,
                                  int tangentId){
-      String code = faceIndex + "," + vertexId + "," + coordId + "," + normalId + "," + tangentId;
+      String code = vertexId + "-" + coordId + "-" + normalId + "-" + binormalId + "-" + tangentId;
       SGeomVertex vertex = _adjustVertexs.find(code);
       if(vertex == null){
          vertex = new SGeomVertex();
@@ -252,6 +264,72 @@ public class FGeomMesh
    // <T>更新处理。</T>
    //============================================================
    public void update(){
+      // 根据面信息调整节点信息
+      int faceIndex = -1;
+      for(SGeomFace face : _faces){
+         faceIndex++;
+         for(int n = 0; n < 3; n++){
+            // 获得索引
+            int positionIndex = face.positionIndexs[n];
+            int coordIndex = face.coordIndexs[n];
+            int normalIndex = face.normalIndexs[n];
+            int binormalIndex = face.binormalIndexs[n];
+            int tangentIndex = face.tangentIndexs[n];
+            // 设置内容
+            SGeomVertex vertex = syncVertex(positionIndex, coordIndex, normalIndex, binormalIndex, tangentIndex);
+            // 设置顶点信息
+            if(!vertex.calculate){
+               //vertex.merged = _vertexList[vertexIndex].merged;
+               vertex.position.assign(_vertexPositions.get(positionIndex));
+               vertex.pushFaceId(faceIndex);
+               vertex.pushFace(face);
+               if(!_vertexColors.isEmpty()){
+                  int colorIndex = face.colorIndexs[n];
+                  SFloatColor4 color = _vertexColors.get(colorIndex);
+                  vertex.color = new SFloatColor4(color.red, color.green, color.blue, 1.0f);
+               }
+               //               if(!_alphaList.IsEmpty){
+               //                  int alphaIndex = face.AlphaIndex[n];
+               //                  vertex.Alpha = _alphaList[alphaIndex];
+               //                  vertex.Color.A = vertex.Alpha;
+               //               }
+               if(!_vertexCoords.isEmpty()){
+                  vertex.coord.assign(_vertexCoords.get(coordIndex));
+               }
+               if(!_vertexNormals.isEmpty()){
+                  vertex.normal.assign(_vertexNormals.get(normalIndex));
+                  vertex.normal.normalize();
+               }
+               if(!_vertexBinormals.isEmpty()){
+                  vertex.binormal.assign(_vertexBinormals.get(binormalIndex));
+                  vertex.binormal.normalize();
+               }
+               if(!_vertexTangents.isEmpty()){
+                  vertex.tangent.assign(_vertexTangents.get(tangentIndex));
+                  vertex.tangent.normalize();
+               }
+               //               if(!_illumList.IsEmpty){
+               //                  int illumIndex = face.IllumIndex[n];
+               //                  vertex.Illum = _illumList[illumIndex];
+               //               }
+               //               if(_weightMaxCount > 0){
+               //                  vertex.Weights.Assign(_vertexList[vertexIndex].Weights);
+               //               }
+               //               if(_channels.Count > 2){
+               //                  FDrChannelFace channelFace = _channels[2].Indexs[face.Index];
+               //                  SFloatPoint3 channelPoint = channelFace.Points[n];
+               //                  vertex.LightCoord.X = channelPoint.X;
+               //                  vertex.LightCoord.Y = channelPoint.Y;
+               //                  if((vertex.LightCoord.X != vertex.Coord.X) || (vertex.LightCoord.Y != -vertex.Coord.Y)){
+               //                     vertex.LightCoord.X = channelPoint.X;
+               //                     vertex.LightCoord.Y = channelPoint.Y;
+               //                  }
+               //               }
+               vertex.calculate = true;
+            }
+            //face.AdjustVertexIndex.Set(n, vertex.AdjuestId);
+         }
+      }
    }
 
    //============================================================
@@ -314,9 +392,9 @@ public class FGeomMesh
       indexStream.setDataCount(faceCount);
       FByteStream faceStream = new FByteStream();
       for(SGeomFace face : _faces){
-         faceStream.writeUint32(face.vertexIndexs[0]);
-         faceStream.writeUint32(face.vertexIndexs[1]);
-         faceStream.writeUint32(face.vertexIndexs[2]);
+         faceStream.writeUint32(face.positionIndexs[0]);
+         faceStream.writeUint32(face.positionIndexs[1]);
+         faceStream.writeUint32(face.positionIndexs[2]);
       }
       indexStream.setData(faceStream.toArray());
       mesh.streams().push(indexStream);

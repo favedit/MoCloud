@@ -1,4 +1,4 @@
-package org.mo.content.geom.common;
+package org.mo.com.geom;
 
 //============================================================
 // <T>三维双浮点轮廓。</T>

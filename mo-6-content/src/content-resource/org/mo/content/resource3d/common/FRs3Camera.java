@@ -1,8 +1,7 @@
 package org.mo.content.resource3d.common;
 
-import org.mo.content.geom.common.SFloatPoint3;
-import org.mo.content.geom.common.SFloatVector3;
-
+import org.mo.com.geom.SFloatPoint3;
+import org.mo.com.geom.SFloatVector3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;

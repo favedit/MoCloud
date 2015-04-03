@@ -1,9 +1,8 @@
 package org.mo.content.resource3d.common;
 
-import org.mo.content.geom.common.SIntSize2;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.geom.common.SIntSize2;
 
 //============================================================
 // <T>场景技术过程。</T>

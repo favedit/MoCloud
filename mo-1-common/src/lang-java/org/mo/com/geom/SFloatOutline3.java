@@ -1,5 +1,6 @@
-package org.mo.content.geom.common;
+package org.mo.com.geom;
 
+import org.mo.com.geom.SFloatPoint3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;

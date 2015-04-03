@@ -1,9 +1,8 @@
 package org.mo.content.resource3d.mesh;
 
-import org.mo.content.geom.common.SFloatMatrix3d;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.geom.common.SFloatMatrix3d;
 import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================

@@ -1,10 +1,9 @@
 package org.mo.content.resource3d.common;
 
-import org.mo.content.geom.common.SFloatMatrixQuat;
-
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
+import org.mo.content.geom.common.SFloatMatrixQuat;
 
 //============================================================
 // <T>资源精灵。</T>

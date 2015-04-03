@@ -1,12 +1,11 @@
 package org.mo.content.resource3d.common;
 
-import org.mo.content.geom.common.SFloatMatrix3d;
-
 import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.content.geom.common.SFloatMatrix3d;
 
 //============================================================
 // <T>资源精灵。</T>
