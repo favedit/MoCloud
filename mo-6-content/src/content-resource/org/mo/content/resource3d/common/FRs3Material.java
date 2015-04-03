@@ -1,5 +1,7 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.content.geom.common.SFloatColor4;
+
 import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;

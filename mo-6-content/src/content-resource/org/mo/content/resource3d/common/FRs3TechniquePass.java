@@ -1,5 +1,7 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.content.geom.common.SIntSize2;
+
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
 

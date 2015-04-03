@@ -1,5 +1,7 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.content.geom.common.SFloatMatrix3d;
+
 import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;

@@ -1,4 +1,4 @@
-package org.mo.content.resource3d.common;
+package org.mo.content.geom.common;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -8,18 +8,45 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
-// <T>三维浮点坐标。</T>
+// <T>浮点颜色。</T>
 //============================================================
-public class SFloatPoint3
+public class SFloatColor4
 {
-   // X坐标
-   public float x;
+   // 红色
+   public float red;
 
-   // Y坐标
-   public float y;
+   // 绿色
+   public float green;
 
-   // Z坐标
-   public float z;
+   // 蓝色
+   public float blue;
+
+   // 强度
+   public float alpha;
+
+   //============================================================
+   // <T>构造浮点颜色。</T>
+   //============================================================
+   public SFloatColor4(){
+   }
+
+   //============================================================
+   // <T>构造浮点颜色。</T>
+   //
+   // @param red 红色
+   // @param green 绿色
+   // @param blue 蓝色
+   // @param alpha 透明色
+   //============================================================
+   public SFloatColor4(float redValue,
+                       float greenValue,
+                       float blueValue,
+                       float alphaValue){
+      red = redValue;
+      green = greenValue;
+      blue = blueValue;
+      alpha = alphaValue;
+   }
 
    //============================================================
    // <T>序列化数据到输出流。</T>
@@ -27,9 +54,10 @@ public class SFloatPoint3
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      output.writeFloat(x);
-      output.writeFloat(y);
-      output.writeFloat(z);
+      output.writeFloat(red);
+      output.writeFloat(green);
+      output.writeFloat(blue);
+      output.writeFloat(alpha);
    }
 
    //============================================================
@@ -38,9 +66,10 @@ public class SFloatPoint3
    // @param input 输入流
    //============================================================
    public void unserialize(IDataInput input){
-      x = input.readFloat();
-      y = input.readFloat();
-      z = input.readFloat();
+      red = input.readFloat();
+      green = input.readFloat();
+      blue = input.readFloat();
+      alpha = input.readFloat();
    }
 
    //============================================================
@@ -49,9 +78,10 @@ public class SFloatPoint3
    // @param xconfig 配置信息
    //============================================================
    public void loadConfig(FXmlNode xconfig){
-      x = xconfig.getFloat("x");
-      y = xconfig.getFloat("y");
-      z = xconfig.getFloat("z");
+      red = xconfig.getFloat("r");
+      green = xconfig.getFloat("g");
+      blue = xconfig.getFloat("b");
+      alpha = xconfig.getFloat("power");
    }
 
    //============================================================
@@ -60,9 +90,10 @@ public class SFloatPoint3
    // @param xconfig 配置信息
    //============================================================
    public void saveConfig(FXmlNode xconfig){
-      xconfig.set("x", x);
-      xconfig.set("y", y);
-      xconfig.set("z", z);
+      xconfig.set("r", red);
+      xconfig.set("g", green);
+      xconfig.set("b", blue);
+      xconfig.set("power", alpha);
    }
 
    //============================================================
@@ -71,9 +102,10 @@ public class SFloatPoint3
    // @param xconfig 配置信息
    //============================================================
    public void importConfig(FXmlNode xconfig){
-      x = xconfig.getFloat("x");
-      y = xconfig.getFloat("y");
-      z = xconfig.getFloat("z");
+      red = xconfig.getFloat("r");
+      green = xconfig.getFloat("g");
+      blue = xconfig.getFloat("b");
+      alpha = xconfig.getFloat("power", 1.0f);
    }
 
    //============================================================
@@ -82,15 +114,14 @@ public class SFloatPoint3
    // @param xconfig 配置信息
    //============================================================
    public void parse(String value){
-      if(!RString.isEmpty(value)){
-         String[] items = RString.split(value, ',');
-         if(items.length != 3){
-            throw new FFatalError("Parse failure.");
-         }
-         x = (float)RDouble.parse(items[0]);
-         y = (float)RDouble.parse(items[1]);
-         z = (float)RDouble.parse(items[2]);
+      String[] items = RString.split(value, ',');
+      if(items.length != 4){
+         throw new FFatalError("Parse failure.");
       }
+      red = (float)RDouble.parse(items[0]);
+      green = (float)RDouble.parse(items[1]);
+      blue = (float)RDouble.parse(items[2]);
+      alpha = (float)RDouble.parse(items[3]);
    }
 
    //============================================================
@@ -100,6 +131,6 @@ public class SFloatPoint3
    //============================================================
    @Override
    public String toString(){
-      return x + "," + y + "," + z;
+      return red + "," + green + "," + blue + "," + alpha;
    }
 }

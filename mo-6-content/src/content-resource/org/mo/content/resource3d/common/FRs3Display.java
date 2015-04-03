@@ -1,5 +1,7 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.content.geom.common.SFloatMatrix3d;
+
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RUuid;

@@ -82,9 +82,16 @@ public class FC3dMeshConsole
                                  long userId,
                                  String guid){
       FGcRs3MeshInfo mesh = findByGuid(logicContext, guid);
+      // 网格存在检查
+      if(mesh == null){
+         throw new FFatalError("Mesh is not exists. (guid={1})", guid);
+      }
+      // 检查用户
       if(mesh.userId() != userId){
          throw new FFatalError("Mesh user is not same. (user_id={1}, mesh_user_id={2})", userId, mesh.userId());
       }
+      // 删除关联资源对象
+      _resourceConsole.doDelete(logicContext, mesh.resourceId());
       doDelete(logicContext, mesh);
       return EResult.Success;
    }

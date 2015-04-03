@@ -1,5 +1,7 @@
 package org.mo.content.resource3d.scene;
 
+import org.mo.content.geom.common.SFloatMatrix3d;
+
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
@@ -7,7 +9,6 @@ import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
-import org.mo.content.resource3d.common.SFloatMatrix3d;
 
 //============================================================
 // <T>场景显示。</T>

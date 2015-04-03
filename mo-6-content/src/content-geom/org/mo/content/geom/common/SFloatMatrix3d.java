@@ -1,4 +1,4 @@
-package org.mo.content.resource3d.common;
+package org.mo.content.geom.common;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;

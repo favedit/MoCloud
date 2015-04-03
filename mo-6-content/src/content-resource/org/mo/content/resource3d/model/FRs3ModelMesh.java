@@ -1,12 +1,13 @@
 package org.mo.content.resource3d.model;
 
+import org.mo.content.geom.common.SFloatOutline3;
+
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.content.resource3d.common.FRs3Object;
 import org.mo.content.resource3d.common.FRs3Stream;
-import org.mo.content.resource3d.common.SFloatOutline3;
 
 //============================================================
 // <T>资源模型网格。</T>

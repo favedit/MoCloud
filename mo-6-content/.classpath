@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/content-geom"/>
 	<classpathentry kind="src" path="src/content-mime"/>
 	<classpathentry kind="src" path="src/content-design"/>
 	<classpathentry kind="src" path="src/content-resource"/>
