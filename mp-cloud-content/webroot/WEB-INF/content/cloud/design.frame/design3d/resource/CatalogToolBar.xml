@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.CanvasToolBar">
    <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButtonCheck name='create' icon='design3d.tools.catalog-create' label='新建目录' hint='场景旋转播放开关'/>
-      <ToolButtonCheck name='delete' icon='design3d.tools.catalog-delete' label='删除目录' hint='场景旋转播放开关'/>
+      <ToolButton name='create' icon='design3d.tools.catalog-create' label='新建目录' hint='场景旋转播放开关'/>
+      <ToolButton name='delete' icon='design3d.tools.catalog-delete' label='删除目录' hint='场景旋转播放开关'/>
       <ToolButtonSplit/>
       <ToolButton name='open' icon='design3d.tools.open' hint='展开选中节点'/>
       <ToolButton name='close' icon='design3d.tools.close' hint='收起选中节点'/>

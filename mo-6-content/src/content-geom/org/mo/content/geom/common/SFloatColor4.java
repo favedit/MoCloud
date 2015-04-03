@@ -49,6 +49,42 @@ public class SFloatColor4
    }
 
    //============================================================
+   // <T>设置数据。</T>
+   //
+   // @param red 红色
+   // @param green 绿色
+   // @param blue 蓝色
+   // @param alpha 透明色
+   //============================================================
+   public void set(float redValue,
+                   float greenValue,
+                   float blueValue,
+                   float alphaValue){
+      red = redValue;
+      green = greenValue;
+      blue = blueValue;
+      alpha = alphaValue;
+   }
+
+   //============================================================
+   // <T>设置数据。</T>
+   //
+   // @param red 红色
+   // @param green 绿色
+   // @param blue 蓝色
+   // @param alpha 透明色
+   //============================================================
+   public void setInt(int redValue,
+                      int greenValue,
+                      int blueValue,
+                      int alphaValue){
+      red = redValue / 255.0f;
+      green = greenValue / 255.0f;
+      blue = blueValue / 255.0f;
+      alpha = alphaValue / 255.0f;
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流

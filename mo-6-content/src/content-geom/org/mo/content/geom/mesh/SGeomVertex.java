@@ -8,20 +8,23 @@ import org.mo.content.geom.common.SFloatColor4;
 //============================================================
 public class SGeomVertex
 {
+   // 调整编号
+   public int adjuestId;
+
    // 坐标
-   public SDoublePoint3 _position;
+   public SDoublePoint3 position;
 
    // 颜色
-   public SFloatColor4 _color;
+   public SFloatColor4 color;
 
    // 法线
-   public SFloatColor4 _normal;
+   public SFloatColor4 normal;
 
    // 副法线
-   public SFloatColor4 _binormal;
+   public SFloatColor4 binormal;
 
    // 切线
-   public SFloatColor4 _tangent;
+   public SFloatColor4 tangent;
 
    // 骨头索引
    public int[] boneIds;
