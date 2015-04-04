@@ -193,6 +193,14 @@ public abstract class XBaseColumnEdit
    @AContentField
    public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
 
+   // 编辑长度的定义
+   @AContentField
+   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑对齐方式的定义
+   @AContentField
+   public final static FContentField EDIT_ALIGN_CD = new FContentField("editAlignCd", "edit_align_cd", EContentData.String, "", "", "", "YYNY");
+
    // 编辑大小写类型的定义
    @AContentField
    public final static FContentField EDIT_CASE_CD = new FContentField("editCaseCd", "edit_case_cd", EContentData.String, "", "", "", "YYNY");
@@ -200,10 +208,6 @@ public abstract class XBaseColumnEdit
    // 编辑模板的定义
    @AContentField
    public final static FContentField EDIT_PATTERN = new FContentField("editPattern", "edit_pattern", EContentData.String, "", "", "", "YYNY");
-
-   // 编辑长度的定义
-   @AContentField
-   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String, "", "", "", "YYNY");
 
    // 编辑自动完成的定义
    @AContentField
@@ -411,6 +415,14 @@ public abstract class XBaseColumnEdit
    @AName("lov_order")
    protected String _lovOrder;
 
+   // 编辑长度
+   @AName("edit_length")
+   protected String _editLength;
+
+   // 编辑对齐方式
+   @AName("edit_align_cd")
+   protected String _editAlignCd;
+
    // 编辑大小写类型
    @AName("edit_case_cd")
    protected String _editCaseCd;
@@ -418,10 +430,6 @@ public abstract class XBaseColumnEdit
    // 编辑模板
    @AName("edit_pattern")
    protected String _editPattern;
-
-   // 编辑长度
-   @AName("edit_length")
-   protected String _editLength;
 
    // 编辑自动完成
    @AName("edit_complete")
@@ -1228,6 +1236,42 @@ public abstract class XBaseColumnEdit
    }
 
    //============================================================
+   // <T>获得编辑长度的内容。</T>
+   //
+   // @return 编辑长度
+   //============================================================
+   public String getEditLength(){
+      return _editLength;
+   }
+
+   //============================================================
+   // <T>设置编辑长度的内容。</T>
+   //
+   // @param value 编辑长度
+   //============================================================
+   public void setEditLength(String value){
+      _editLength = value;
+   }
+
+   //============================================================
+   // <T>获得编辑对齐方式的内容。</T>
+   //
+   // @return 编辑对齐方式
+   //============================================================
+   public String getEditAlignCd(){
+      return _editAlignCd;
+   }
+
+   //============================================================
+   // <T>设置编辑对齐方式的内容。</T>
+   //
+   // @param value 编辑对齐方式
+   //============================================================
+   public void setEditAlignCd(String value){
+      _editAlignCd = value;
+   }
+
+   //============================================================
    // <T>获得编辑大小写类型的内容。</T>
    //
    // @return 编辑大小写类型
@@ -1261,24 +1305,6 @@ public abstract class XBaseColumnEdit
    //============================================================
    public void setEditPattern(String value){
       _editPattern = value;
-   }
-
-   //============================================================
-   // <T>获得编辑长度的内容。</T>
-   //
-   // @return 编辑长度
-   //============================================================
-   public String getEditLength(){
-      return _editLength;
-   }
-
-   //============================================================
-   // <T>设置编辑长度的内容。</T>
-   //
-   // @param value 编辑长度
-   //============================================================
-   public void setEditLength(String value){
-      _editLength = value;
    }
 
    //============================================================

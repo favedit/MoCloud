@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.CanvasToolBar">
    <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButtonCheck name='dropButton' linker='_controlDrop' icon='design3d.canvas.hand' group_name='mode' group_default='dropButton' hint='观察模式'/>
+      <ToolButtonCheck name='drop' linker='_controlDrop' icon='design3d.canvas.hand' group_name='mode' group_default='dropButton' hint='观察模式'/>
       <ToolButtonSplit/>
-      <ToolButtonMenu name='sizeButton' icon='tools.size' label='屏幕大小' hint='场景旋转播放开关'>
+      <ToolButtonMenu name='size' icon='tools.size' label='屏幕大小' hint='场景旋转播放开关'>
          <MenuButton name='sizeAuto' linker='_controlSize1' label='自动适应'/>
+         <MenuButtonSplit/>
          <MenuButton name='size200x150' linker='_controlSize2' label='200x150' hint='屏幕尺寸：宽200 x 高150'/>
          <MenuButton name='size640x480' linker='_controlSize3' label='640x480' hint='屏幕尺寸：宽640 x 高480'/>
          <MenuButton name='size1280x720' linker='_controlSize4' label='1280x720' hint='屏幕尺寸：宽1280 x 高720'/>
@@ -12,6 +13,21 @@
       <ToolButtonEdit name='sizeWidth' linker='_controlSizeWidth' edit_size='40,0'/>
       <ToolButtonEdit name='sizeHeight ' linker='_controlSizeHeight' edit_size='40,0'/>
       <ToolButtonSplit/>
-      <ToolButtonCheck name='viewButton' linker='_controlView' icon='design3d.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='dimensionalVisible' linker='_controlDimensionalVisible' icon='design3d.tools.dimensional' label='坐标系' hint='是否显示坐标系'/>
+      <ToolButtonEdit name='dimensionalWidth' linker='_controlDimensionalWidth' edit_size='40,0' hint='网格的宽度'/>
+      <ToolButtonEdit name='dimensionalHeight' linker='_controlDimensionalHeight' edit_size='40,0' hint='网格的高度'/>
+      <ToolButtonMenu name='dimensionalMenu' icon='design3d.tools.autosize' label='自动调整' hint='自动调整物件适合坐标'>
+         <MenuButton name='dimensionalAuto' linker='_controlDimensionalAuto' label='自动适应'/>
+         <MenuButtonSplit/>
+         <MenuButton name='dimensionalFlipX' linker='_controlDimensionalFlipX' label='左右翻转'/>
+         <MenuButton name='dimensionalFlipY' linker='_controlDimensionalFlipY' label='上下翻转'/>
+         <MenuButton name='dimensionalFlipZ' linker='_controlDimensionalFlipZ' label='前后反转'/>
+         <MenuButtonSplit/>
+         <MenuButton name='dimensionalX' linker='_controlDimensionalX' label='X轴旋转90度'/>
+         <MenuButton name='dimensionalY' linker='_controlDimensionalY' label='Y轴旋转90度'/>
+         <MenuButton name='dimensionalZ' linker='_controlDimensionalZ' label='Z轴旋转90度'/>
+      </ToolButtonMenu>
+      <ToolButtonSplit/>
+      <ToolButtonCheck name='rotation' linker='_controlRotation' icon='design3d.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
    </ToolBar>
 </Content>
