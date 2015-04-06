@@ -2,6 +2,14 @@
 <Configuration>
    <!-- 数据库传输 -->
    <Database type='mysql'>
+      <Dataset data_name='DT_PSN_USER'/>
+
+      <Dataset data_name='DT_SOL_PROJECT'/>
+
+      <Dataset data_name='DT_RES_TYPE'/>
+      <Dataset data_name='DT_RES_CATALOG'/>
+      <Dataset data_name='DT_RES_RESOURCE'/>
+
       <Dataset data_name='DT_RES_BITMAP'/>
       <Dataset data_name='DT_RES_BITMAP_IMAGE'/>
 

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>CoolLight Designer</TITLE>
+<META http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<LINK rel="stylesheet" href='acs/control.css' type="text/css" media="all"/>
+<LINK rel="stylesheet" href='acs/design.css' type="text/css" media="all"/>
+<LINK rel="stylesheet" href='acs/lang_cn.css' type="text/css" media="all"/>
+<LINK rel="stylesheet" href='acs/mobile.css' type="text/css" media="all"/>
+
+<SCRIPT language='javascript' src='ajs/lzma.js'></SCRIPT>
+<SCRIPT language='javascript' src='ajs/lzma-d.js'></SCRIPT>
+<SCRIPT language='javascript' src='ajs/mo.js'></SCRIPT>
+<SCRIPT language='javascript' src='ajs/context_cn.js'></SCRIPT>
+
+<SCRIPT>
+function _load(){
+   RRuntime.setProcessCd(EProcess.Release);
+   RApplication.initialize();
+   RBrowser.setContentPath('.');
+   // 获得代码
+   var u = window.location.toString();
+   var i = u.indexOf('code=');
+   var c = null;
+   if(i != -1){
+      c = u.substring(i + 5);
+   }
+   if(RString.isEmpty(c)){
+      c = 'person-02';
+   }
+   // 加载工作区
+   var w = RApplication.findWorkspace(FDsMeshWorkspace);
+   w.buildDefine(document.body);
+   w.psResize();
+   w.loadMeshByCode(c);
+   RConsole.find(FUiWorkspaceConsole).active(w);
+}
+</SCRIPT>
+</HEAD>
+<BODY scroll='no' style='background-color:#444444;overflow:hidden;' onload='_load()'></BODY>
+</HTML>

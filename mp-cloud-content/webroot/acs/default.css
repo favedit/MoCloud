@@ -1,0 +1,83 @@
+/* ------------------------------------------------------ */
+/* Html                                                   */
+/* ------------------------------------------------------ */
+html{
+   width:100%;
+   height:100%;
+}
+
+/* ------------------------------------------------------ */
+/* Body                                                   */
+/* ------------------------------------------------------ */
+body {
+   margin: 0px;
+   width: 100%;
+   height: 100%;
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9eadc', endColorstr='#adaca2',GradientType=1);
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   font-family: "微软雅黑", Arial;
+   text-align: center;
+   font-size:12px;
+   color: #47473c;
+   background-color:#5e5e5e
+}
+
+.head_background{
+   background:url(../ars/headbg.png) no-repeat; background-size:100% 60px;
+   text-align:center;
+}
+
+.head_logo{
+   border: 0px;
+   position:absolute; left:50%; top:50%; margin-left:-80px; margin-top:-25px; float:left; width:160px; height:50px; background:url(../ars/logo.png) no-repeat center; background-size:contain;
+}
+
+.logo a{ display:block; width:140px; height:40px;}
+.ch_title{
+	 position:absolute; left:30%; top:30%;  float:left; height:80%; 
+	}
+
+a {
+  color: #47473c;
+  font-family: Lobster;
+  font-style: normal;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-family: Lobster;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* ------------------------------------------------------ */
+/* ListItem                                               */
+/* ------------------------------------------------------ */
+.ListItem_Panel{
+   width: 200px;
+   height: 150px;
+   display: inline-block;
+   position: relative;
+   vertical-align: top;
+   margin: 1em;
+   cursor: pointer;
+   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
+}
+
+.ListItem_Label{
+   text-align: left;
+   position: absolute;
+   color: #fff;
+   width: 90px;
+   padding: 5px 15px 7px;
+   left: -10px;
+   bottom: 10px;
+   z-index: 1;
+   background: rgba(0,0,0,0.6);
+}
