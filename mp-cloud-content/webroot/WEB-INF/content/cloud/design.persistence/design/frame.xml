@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150405211155">
+<Content name="design.frame" update_date="20150407215630">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -158,7 +158,9 @@
     <Component is_valid="Y" name="IconPicker" label="图标选择框" class_name="org.mo.cloud.content.design.frame.common.XIconPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseIconPicker" inherits="IControl" note="" />
     <Component is_valid="Y" name="ProgressBar" label="进度条" class_name="org.mo.cloud.content.design.frame.common.XProgressBar" base_name="org.mo.cloud.content.design.frame.base.XBaseProgressBar" inherits="IControl" note="" />
     <Component is_valid="Y" name="Picture" label="图片选择框" class_name="org.mo.cloud.content.design.frame.common.XPicture" base_name="org.mo.cloud.content.design.frame.base.XBasePicture" inherits="IEditControl,MPropertyPicture" note="" />
-    <Component is_valid="Y" name="File" label="文件输入框" class_name="org.mo.cloud.content.design.frame.common.XFile" base_name="org.mo.cloud.content.design.frame.base.XBaseFile" inherits="IEditControl" note="" />
+    <Component is_valid="Y" name="File" label="文件输入框" class_name="org.mo.cloud.content.design.frame.common.XFile" base_name="org.mo.cloud.content.design.frame.base.XBaseFile" inherits="IEditControl" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="ListItem" label="列表项目" class_name="org.mo.cloud.content.design.frame.common.XListItem" base_name="org.mo.cloud.content.design.frame.base.XBaseListItem" inherits="IControl" note="" />
     <Component is_valid="Y" name="ListBox" label="列表控件" class_name="org.mo.cloud.content.design.frame.common.XListBox" base_name="org.mo.cloud.content.design.frame.base.XBaseListBox" inherits="IContainer" note="" />
     <Component is_valid="Y" name="ListView" label="列表视图" class_name="org.mo.cloud.content.design.frame.common.XListView" base_name="org.mo.cloud.content.design.frame.base.XBaseListView" inherits="IContainer" note="" />
