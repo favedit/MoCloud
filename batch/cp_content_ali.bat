@@ -2,7 +2,7 @@
 
 @SET HOME=E:\Microbject
 @SET SOURCE=%HOME%\MoCloud
-@SET TARGET=%HOME%\AliSvn-Microbject
+@SET TARGET=%HOME%\Aliyun-Svn
 
 xcopy /E /I /Y %SOURCE%\mp-cloud-content\webroot %TARGET%\cloud.content\webroot
 
