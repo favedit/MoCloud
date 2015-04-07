@@ -8,6 +8,7 @@ import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.geom.mesh.FGeomMesh;
 import org.mo.content.resource3d.common.FRs3Space;
 import org.mo.content.resource3d.common.FRs3Stream;
 
@@ -30,6 +31,15 @@ public class FRs3Mesh
    // <T>构造资源模型网格。</T>
    //============================================================
    public FRs3Mesh(){
+   }
+
+   //============================================================
+   // <T>从FGeomMesh构造资源模型网格。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public FRs3Mesh(FGeomMesh geoMesh){
+      //TODO:
    }
 
    //============================================================
@@ -219,4 +229,5 @@ public class FRs3Mesh
          _streams.push(stream);
       }
    }
+
 }

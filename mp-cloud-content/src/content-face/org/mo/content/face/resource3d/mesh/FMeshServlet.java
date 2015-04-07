@@ -16,6 +16,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
+import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -146,6 +147,7 @@ public class FMeshServlet
       long projectId = session.projectId();
       // 导入数据
       if("ply".equals(extension)){
+      }else if("obj".equals(extension)){
       }else{
          throw new FFatalError("Unknown file format.");
       }
@@ -171,6 +173,19 @@ public class FMeshServlet
             _c3MeshConsole.createMesh(logicContext, mesh);
             // 导入模型
             _meshConsole.importMeshPly(logicContext, mesh.guid(), plyFile);
+         }else // 加载OBJ模型文件 
+         if("obj".equals(extension)){
+            FObjFile objFile = new FObjFile();
+            objFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
+            // 创建模型
+            FGcRs3MeshInfo mesh = _c3MeshConsole.doPrepare(logicContext);
+            mesh.setUserId(userId);
+            mesh.setProjectId(projectId);
+            mesh.setCode(code);
+            mesh.setLabel(label);
+            _c3MeshConsole.createMesh(logicContext, mesh);
+            // 导入模型
+            _meshConsole.importMeshObj(logicContext, mesh.guid(), objFile);
          }else{
             throw new FFatalError("Unknown file format.");
          }

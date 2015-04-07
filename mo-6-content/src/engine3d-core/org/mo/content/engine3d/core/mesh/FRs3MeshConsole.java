@@ -19,6 +19,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
+import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.mesh.FRs3Mesh;
@@ -353,6 +354,33 @@ public class FRs3MeshConsole
       //............................................................
       // 新建模型
       update(logicContext, meshInfo.ouid(), mesh);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导入OBJ模型。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param file 文件
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importMeshObj(ILogicContext logicContext,
+                                String guid,
+                                FObjFile file){
+      // 删除已经存在的数据网格
+      FGcRs3MeshInfo meshInfo = _dataMeshConsole.findByGuid(logicContext, guid);
+      if(meshInfo == null){
+         throw new FFatalError("Mesh is not exists.");
+      }
+      //............................................................
+      // 加载模型资源
+      //TODO:Create FRs3Mesh From FGeomModel
+      //      FGeomModel geoModel = file.CreateGeomModel();
+      //............................................................
+      // 新建模型
+      //      update(logicContext, meshInfo.ouid(), mesh);
       return EResult.Success;
    }
 }

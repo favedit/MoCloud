@@ -2,6 +2,7 @@ package org.mo.content.engine3d.core.mesh;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import org.mo.com.lang.EResult;
+import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.resource3d.mesh.FRs3Mesh;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
@@ -106,4 +107,16 @@ public interface IRs3MeshConsole
    EResult importMeshPly(ILogicContext logicContext,
                          String guid,
                          FPlyFile file);
+
+   //============================================================
+   // <T>导入OBJ模型。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param file 文件
+   // @return 处理结果
+   //============================================================
+   EResult importMeshObj(ILogicContext logicContext,
+                         String guid,
+                         FObjFile file);
 }

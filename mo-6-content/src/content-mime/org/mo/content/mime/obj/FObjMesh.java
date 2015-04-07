@@ -1,7 +1,11 @@
 package org.mo.content.mime.obj;
 
+import org.mo.com.geom.SDoublePoint3;
+import org.mo.com.geom.SFloatPoint2;
+import org.mo.com.geom.SFloatVector3;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.content.geom.mesh.SGeomFace;
 
 //============================================================
 //<T>OBJ网格。</T>
@@ -11,13 +15,16 @@ public class FObjMesh
 {
 
    // 顶点集合
-   protected FObjects<SObjVertex> _vertexs = new FObjects<SObjVertex>(SObjVertex.class);
+   protected FObjects<SDoublePoint3> _vertexs = new FObjects<SDoublePoint3>(SDoublePoint3.class);
+
+   // 顶点纹理集合
+   protected FObjects<SFloatPoint2> _textureCoords = new FObjects<SFloatPoint2>(SFloatPoint2.class);
 
    // 法线集合
-   protected FObjects<SObjNormal> _normals = new FObjects<SObjNormal>(SObjNormal.class);
+   protected FObjects<SFloatVector3> _normals = new FObjects<SFloatVector3>(SFloatVector3.class);
 
    // 面集合
-   protected FObjects<SObjFace> _faces = new FObjects<SObjFace>(SObjFace.class);
+   protected FObjects<SGeomFace> _faces = new FObjects<SGeomFace>(SGeomFace.class);
 
    //============================================================
    // <T>构造PLY网格。</T>
@@ -30,8 +37,17 @@ public class FObjMesh
    //
    // @return 顶点集合
    //============================================================
-   public FObjects<SObjVertex> vertexs(){
+   public FObjects<SDoublePoint3> vertexs(){
       return _vertexs;
+   }
+
+   //============================================================
+   // <T>获得uv集合。</T>
+   //
+   // @return 顶点集合
+   //============================================================
+   public FObjects<SFloatPoint2> textureCoords(){
+      return _textureCoords;
    }
 
    //============================================================
@@ -39,7 +55,7 @@ public class FObjMesh
    //
    // @return 顶点集合
    //============================================================
-   public FObjects<SObjNormal> normals(){
+   public FObjects<SFloatVector3> normals(){
       return _normals;
    }
 
@@ -48,7 +64,7 @@ public class FObjMesh
    //
    // @return 面集合
    //============================================================
-   public FObjects<SObjFace> faces(){
+   public FObjects<SGeomFace> faces(){
       return _faces;
    }
 }
