@@ -53,6 +53,9 @@ public class FDataResourceResourceLogic
    // 字段目录编号的定义。
    public final static SLogicFieldInfo CATALOG_ID = new SLogicFieldInfo("CATALOG_ID");
 
+   // 字段资源类型的定义。
+   public final static SLogicFieldInfo RESOURCE_CD = new SLogicFieldInfo("RESOURCE_CD");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
@@ -84,7 +87,7 @@ public class FDataResourceResourceLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TYPE_ID`,`CATALOG_ID`,`CODE`,`LABEL`,`ICON_URL`,`HAS_PREVIEW`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TYPE_ID`,`CATALOG_ID`,`RESOURCE_CD`,`CODE`,`LABEL`,`ICON_URL`,`HAS_PREVIEW`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源信息表逻辑单元。</T>
@@ -660,6 +663,7 @@ public class FDataResourceResourceLogic
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`TYPE_ID`");
       cmd.append(",`CATALOG_ID`");
+      cmd.append(",`RESOURCE_CD`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`ICON_URL`");
@@ -708,6 +712,8 @@ public class FDataResourceResourceLogic
       }else{
          cmd.append(catalogId);
       }
+      cmd.append(',');
+      cmd.append(unit.resourceCd());
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -864,6 +870,10 @@ public class FDataResourceResourceLogic
          }else{
             cmd.append(catalogId);
          }
+      }
+      if(unit.isResourceCdChanged()){
+         cmd.append(",`RESOURCE_CD`=");
+         cmd.append(unit.resourceCd());
       }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");

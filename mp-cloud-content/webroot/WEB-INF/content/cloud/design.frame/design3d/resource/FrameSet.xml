@@ -14,13 +14,13 @@
             <FramePage name='listContentFrame' label='列表内容区'/>
          </FrameSet>
       </FramePage>
-      <FrameSpliter name='propertySpliter'/>
+      <!-- <FrameSpliter name='propertySpliter'/>
       <FramePage name='propertyFrame' label='属性区' size='320,0' scroll_cd='VA'>
          <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
             <FramePage name='propertyToolbarFrame' label='属性工具栏' size='0,24'/>
             <FramePage name='propertyContentFrame' label='属性内容区'/>
             <FramePage name='propertyPropertyFrame' label='属性预览区' size='0,60'/>
          </FrameSet>
-      </FramePage>
+      </FramePage> -->
    </FrameSet>
 </Content>

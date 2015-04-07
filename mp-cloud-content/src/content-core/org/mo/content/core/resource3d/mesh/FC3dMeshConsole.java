@@ -1,9 +1,10 @@
 package org.mo.content.core.resource3d.mesh;
 
+import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
-import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshConsole;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
+import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
@@ -19,9 +20,9 @@ public class FC3dMeshConsole
       implements
          IC3dMeshConsole
 {
-   // 资源控制台接口
+   // 网格控制台接口
    @ALink
-   protected IGcResourceConsole _resourceConsole;
+   protected IGcRs3MeshConsole _meshConsole;
 
    //============================================================
    // <T>获取数据处理。</T>
@@ -59,7 +60,7 @@ public class FC3dMeshConsole
       FGcResourceInfo resource = _resourceConsole.doPrepare(logicContext);
       resource.setUserId(mesh.userId());
       resource.setProjectId(mesh.projectId());
-      //resource.setTypeId(value);
+      resource.setResourceCd(EGcResource.Mesh3d);
       resource.setCode(mesh.code());
       resource.setLabel(mesh.label());
       _resourceConsole.doInsert(logicContext, resource);
@@ -91,7 +92,7 @@ public class FC3dMeshConsole
          throw new FFatalError("Mesh user is not same. (user_id={1}, mesh_user_id={2})", userId, mesh.userId());
       }
       // 删除关联资源对象
-      _resourceConsole.doDelete(logicContext, mesh.resourceId());
+      _meshConsole.doDelete(logicContext, mesh);
       doDelete(logicContext, mesh);
       return EResult.Success;
    }

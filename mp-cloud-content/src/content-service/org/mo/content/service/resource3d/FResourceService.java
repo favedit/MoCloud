@@ -153,6 +153,7 @@ public class FResourceService
             xresource.set("type_cd", typeCd);
             xresource.set("code", unit.get("full_code"));
             xresource.set("label", unit.get("label"));
+            xresource.set("update_date", unit.get("update_date"));
          }
       }
       return EResult.Success;

@@ -59,6 +59,7 @@ public class FC3dResourceConsole
                                     String typeCd,
                                     String guid,
                                     byte[] data){
+      // 修改预览图
       String catalog = EGcStorageCatalog.ResourcePreview + "." + typeCd;
       SGcStorage storage = new SGcStorage(catalog, guid, "jpg");
       storage.setData(data);

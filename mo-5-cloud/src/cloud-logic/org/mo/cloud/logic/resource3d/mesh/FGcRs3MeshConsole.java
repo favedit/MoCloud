@@ -3,6 +3,7 @@ package org.mo.cloud.logic.resource3d.mesh;
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource3d.stream.IGcRs3StreamConsole;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
@@ -25,6 +26,10 @@ public class FGcRs3MeshConsole
    // 数据流管理器
    @ALink
    protected IGcRs3MeshStreamConsole _meshStreamConsole;
+
+   // 资源管理器
+   @ALink
+   protected IGcResourceConsole _resourceConsole;
 
    //============================================================
    // <T>构造3D资源网格控制台。</T>
@@ -102,6 +107,23 @@ public class FGcRs3MeshConsole
             _meshStreamConsole.doDelete(logicContext, meshStreamUnit);
          }
       }
+      // 返回结果
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除记录后处理</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult onDeleteAfter(ILogicContext logicContext,
+                                FGcRs3MeshInfo unit){
+      // 删除关联资源
+      long resourceId = unit.resourceId();
+      _resourceConsole.doDelete(logicContext, resourceId);
       // 返回结果
       return EResult.Success;
    }

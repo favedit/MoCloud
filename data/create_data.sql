@@ -119,6 +119,7 @@ CREATE TABLE `DT_RES_RESOURCE`
    `PROJECT_ID`                    BIGINT, 
    `TYPE_ID`                       BIGINT, 
    `CATALOG_ID`                    BIGINT, 
+   `RESOURCE_CD`                   INTEGER, 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `ICON_URL`                      VARCHAR(200), 

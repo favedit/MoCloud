@@ -2,6 +2,7 @@ package org.mo.content.face.resource3d.resource;
 
 import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletResponse;
+import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -9,6 +10,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
+import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.content.core.resource3d.resource.IC3dResourceConsole;
 import org.mo.content.core.resource3d.texture.IC3dBitmapConsole;
 import org.mo.core.aop.face.ALink;
@@ -42,6 +44,10 @@ public class FPreviewServlet
    // 资源模型接口
    @ALink
    protected IC3dResourceConsole _resourceConsole;
+
+   // 网格模型接口
+   @ALink
+   protected IC3dMeshConsole _meshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -148,6 +154,11 @@ public class FPreviewServlet
       // 上传预览数据
       switch(typeCd){
          case "mesh":
+            FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+            if(mesh == null){
+               throw new FFatalError("Mesh is empty. (guid={1})", guid);
+            }
+            _meshConsole.doUpdate(logicContext, mesh);
             _resourceConsole.uploadPreviewData(logicContext, typeCd, guid, data);
             break;
          default:

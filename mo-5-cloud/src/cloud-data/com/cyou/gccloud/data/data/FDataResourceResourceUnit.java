@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -58,6 +59,12 @@ public class FDataResourceResourceUnit
 
    // 字段目录编号的定义。
    protected long _catalogId;
+
+   // 存储字段资源类型的定义。
+   private int __resourceCd;
+
+   // 字段资源类型的定义。
+   protected int _resourceCd;
 
    // 存储字段代码的定义。
    private String __code;
@@ -359,6 +366,33 @@ public class FDataResourceResourceUnit
    }
 
    //============================================================
+   // <T>判断资源类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isResourceCdChanged(){
+      return __resourceCd != _resourceCd;
+   }
+
+   //============================================================
+   // <T>获得资源类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int resourceCd(){
+      return _resourceCd;
+   }
+
+   //============================================================
+   // <T>设置资源类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setResourceCd(int value){
+      _resourceCd = value;
+   }
+
+   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -651,6 +685,8 @@ public class FDataResourceResourceUnit
             return Long.toString(_typeId);
          case "catalog_id":
             return Long.toString(_catalogId);
+         case "resource_cd":
+            return RInteger.toString(_resourceCd);
          case "code":
             return _code;
          case "label":
@@ -705,6 +741,9 @@ public class FDataResourceResourceUnit
             break;
          case "catalog_id":
             _catalogId = RLong.parse(value);
+            break;
+         case "resource_cd":
+            _resourceCd = RInteger.parse(value);
             break;
          case "code":
             _code = value;
@@ -779,6 +818,10 @@ public class FDataResourceResourceUnit
                __catalogId = RLong.parse(value);
                _catalogId = __catalogId;
                break;
+            case "resource_cd":
+               __resourceCd = RInteger.parse(value);
+               _resourceCd = __resourceCd;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -838,6 +881,7 @@ public class FDataResourceResourceUnit
       row.set("projectId", _projectId);
       row.set("typeId", _typeId);
       row.set("catalogId", _catalogId);
+      row.set("resourceCd", _resourceCd);
       row.set("code", _code);
       row.set("label", _label);
       row.set("iconUrl", _iconUrl);
@@ -865,6 +909,7 @@ public class FDataResourceResourceUnit
       map.put("projectId", RLong.toString(_projectId));
       map.put("typeId", RLong.toString(_typeId));
       map.put("catalogId", RLong.toString(_catalogId));
+      map.put("resourceCd", RInteger.toString(_resourceCd));
       map.put("code", _code);
       map.put("label", _label);
       map.put("iconUrl", _iconUrl);

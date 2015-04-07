@@ -6,4 +6,16 @@
     <Item _uuid="d8dd9468-f93d-4f90-b212-4c5bfc2e3920" name="Web" label="网页站点" is_valid="Y" note="M#" />
     <Item _uuid="3031a829-2132-4577-899d-ca7560011bd2" name="Mobile" label="移动设备" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="4d520cb9-8467-4e5c-8ca5-8bd37243ff3f" name="GcResource" label="资源类型" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="cebc9933-9102-4288-8113-fa72737abd7c" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="8964a09a-4668-4a4e-98a5-f1a65ac4ee4e" name="Project" label="项目" is_valid="Y" note="M#" />
+    <Item _uuid="eae45691-3607-499b-8a67-eef193232a62" name="Bitmap" label="位图" is_valid="Y" note="M#" />
+    <Item _uuid="4d3b5c57-6b94-48b9-b4a7-a44542a09ed0" name="Texture3d" label="纹理3D" is_valid="Y" note="M#" />
+    <Item _uuid="de45cf73-4a0f-41de-96d7-dfa4f2ac7631" name="Material3d" label="材质3D" is_valid="Y" note="M#" />
+    <Item _uuid="c47a68e2-a945-4756-82ad-8106a31df45a" name="Theme3d" label="主题3D" is_valid="Y" note="M#" />
+    <Item _uuid="f88b31cd-e67b-4c75-b1b6-4765ee22bcc9" name="Mesh3d" label="网格3d" is_valid="Y" note="M#" />
+    <Item _uuid="dbd3b6e7-5bbf-48f1-b5ab-f5d0751d2714" name="Model3d" label="模型3D" is_valid="Y" note="M#" />
+    <Item _uuid="aece1325-369a-4fe7-8c95-6d2e056b8912" name="Template3d" label="模板3D" is_valid="Y" note="M#" />
+    <Item _uuid="9d61372b-acde-408b-b87d-dce581cd8150" name="Scene3d" label="场景3D" is_valid="Y" note="M#" />
+  </Enum>
 </Group>
