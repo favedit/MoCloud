@@ -78,12 +78,12 @@ function doLoad(){
 <BODY onload='doLoad()'>
    <TABLE width='100%' height='100%' class='head_background'>
       <TR>
-         <TD height=60>
+         <TD height='60px'>
             <TABLE width='100%' height='60px' class='head_background'>
                <TR>
-                  <TD width='200px'></TD>
+                  <TD width='300px'></TD>
                   <TD><IMG src='ars/logo.png' style='width:240px;height:34px;'>v0.1.0</TD>
-                  <TD width='200px'>
+                  <TD width='300px' align='right' style='padding-right:20px'>
                      <A href='/person/account/Register.wp' style='color:#999999'>注册</A>
                      |
                      <A href='/person/account/Login.wp' style='color:#999999'>登录</A>
@@ -120,5 +120,5 @@ function doLoad(){
          </TD>
       </TR>
    </TABLE>
-</body>
+</BODY>
 </HTML>

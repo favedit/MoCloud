@@ -51,17 +51,15 @@ function _load(){
          <TABLE width='100%' height='100%'>
             <TR height='20px' style='color:#FFFFFF'>
                <TD width='300'><IMG src='../script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:4px;'></TD>
-               <TD align='center'>
-                  项目管理 - <jh:write source='&user.label'/> (<jh:write source='&user.guid'/>)
-               </TD>
+               <TD align='center' style='font-size'>项目管理</TD>
                <TD width='300' align='right'>
-                  用户空间
+                  <A href='javascript:alert("暂未开放")' style='color:#FFFFFF'>用户空间(<jh:write source='&user.label'/>)</A>
                   |
                   <A href='Project.wa' style='color:#FFFFFF'>项目管理</A>
                   |
-                  <A href='Resource.wa' style='color:#FFFFFF'>资源管理</A>
+                  <A href='javascript:alert("暂未开放")' style='color:#FFFFFF'>资源管理</A>
                   |
-                  发布管理
+                  <A href='/Index.wa' style='color:#FFFFFF'>返回首页</A>
                </TD>
             </TR>
          </TABLE>

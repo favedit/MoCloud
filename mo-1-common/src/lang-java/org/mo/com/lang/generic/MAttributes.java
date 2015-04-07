@@ -486,9 +486,13 @@ public abstract class MAttributes
    @Override
    public void unpack(String pack,
                       boolean merge){
+      // 合并处理
       if(!merge){
          clear();
       }
+      // 去除尾回车
+      pack = RString.trimRightLine(pack);
+      // 分解内容
       if((pack != null) && !pack.isEmpty()){
          try{
             String name;

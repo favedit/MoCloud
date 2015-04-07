@@ -102,7 +102,7 @@ public class FGeomMesh
    //
    // @return 顶点法线集合
    //============================================================
-   protected FObjects<SDoublePoint3> vertexPositions(){
+   public FObjects<SDoublePoint3> vertexPositions(){
       return _vertexPositions;
    }
 
@@ -111,7 +111,7 @@ public class FGeomMesh
    //
    // @return 顶点纹理集合
    //============================================================
-   protected FObjects<SFloatPoint2> vertexCoords(){
+   public FObjects<SFloatPoint2> vertexCoords(){
       return _vertexCoords;
    }
 
@@ -120,7 +120,7 @@ public class FGeomMesh
    //
    // @return 顶点颜色集合
    //============================================================
-   protected FObjects<SFloatColor4> vertexColors(){
+   public FObjects<SFloatColor4> vertexColors(){
       return _vertexColors;
    }
 
@@ -129,7 +129,7 @@ public class FGeomMesh
    //
    // @return 顶点法线集合
    //============================================================
-   protected FObjects<SFloatVector3> vertexNormals(){
+   public FObjects<SFloatVector3> vertexNormals(){
       return _vertexNormals;
    }
 
@@ -138,7 +138,7 @@ public class FGeomMesh
    //
    // @return 顶点副法线集合
    //============================================================
-   protected FObjects<SFloatVector3> vertexBinormals(){
+   public FObjects<SFloatVector3> vertexBinormals(){
       return _vertexBinormals;
    }
 
@@ -147,7 +147,7 @@ public class FGeomMesh
    //
    // @return 顶点切线集合
    //============================================================
-   protected FObjects<SFloatVector3> vertexTangents(){
+   public FObjects<SFloatVector3> vertexTangents(){
       return _vertexTangents;
    }
 

@@ -1106,6 +1106,32 @@ public class RString
    }
 
    //============================================================
+   // <T>截掉指定字符串右边的换行。</T>
+   //
+   // @param source 指定字符串
+   // @return 截掉后的字符串
+   //============================================================
+   public static String trimRightLine(String source){
+      if(source != null){
+         int length = source.length();
+         if(length > 0){
+            int position = length - 1;
+            for(int n = length - 1; n >= 0; n--){
+               char value = source.charAt(n);
+               if((value != '\n') && (value != '\r')){
+                  position = n;
+                  break;
+               }
+            }
+            if(position != (length - 1)){
+               return source.substring(0, position + 1);
+            }
+         }
+      }
+      return source;
+   }
+
+   //============================================================
    // <T>截掉指定字符串两边的空格。</T>
    //
    // @param value 字符串

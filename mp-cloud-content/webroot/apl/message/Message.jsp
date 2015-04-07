@@ -26,7 +26,7 @@ function displayDetails(){
 </SCRIPT>
 
 <!-- Body Initialize -------------------------------------->
-<jh:body style='bodyMain'>
+<jh:body>
 <jh:form name='frmConsole'>
 
 <TABLE width='100%' cellspacing='8' border='0'>
@@ -36,8 +36,6 @@ function displayDetails(){
          <jh:img src='/ars/icon/sys/msg/lerror.gif' align='absmiddle'/>
          <jh:img src='/ars/icon/n.gif' width='8'/>
          <jh:write source='trs:sys|message.error.title|Error'/>
-         <BR><BR>
-         <FONT color='red'><B><jh:write source='trs:sys|message.error.info|Information'/></B></FONT>
       </TD></TR>
    </TABLE>
 </TD></TR>
@@ -46,7 +44,7 @@ function displayDetails(){
 
 <TABLE width='100%' bgcolor='#94B6FF' border='0' cellspacing='1' cellpadding='0'>
 <TR bgcolor='#FFFFFF'><TD>
-   <TABLE width='100%' border='0' cellspacing='4' cellpadding='0'>
+   <TABLE width='100%' border='0' cellspacing='4' cellpadding='0' bgcolor='yellow'>
    <TR>
       <TD width='20px'><jh:img src='/ars/icon/sys/msg/error.gif' align='absmiddle'/></TD>
       <TD><FONT color='red'><jh:write source='&message.code'/></FONT></TD>
@@ -56,8 +54,8 @@ function displayDetails(){
 </TABLE><BR>
 
 <TABLE width='100%' bgcolor='#94B6FF' border='0' cellspacing='1' cellpadding='0'>
-<TR bgcolor='#FFFFFF'><TD>
-   <TABLE width='100%' border='0' cellspacing='4' cellpadding='0'>
+<TR><TD>
+   <TABLE width='100%' border='0' cellspacing='4' cellpadding='0' bgcolor='#F0F0F0'>
    <TR>
       <TD width='20px' valign='top'><jh:img src='/ars/icon/sys/msg/info.gif' align='absmiddle' style='cursor:hand'/></TD>
       <TD nowrap>
