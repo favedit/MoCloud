@@ -13,6 +13,7 @@ import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eng.image.FImage;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -70,12 +71,24 @@ public class FBitmapServlet
       if(textureUnit == null){
          throw new FFatalError("Texture is not exists. (guid={1})", guid);
       }
-      byte[] data = _textureConsole.makeBitmapData(logicContext, guid, code);
       String formatCode = "jpg";
-      if(code.contains("_")){
-         String[] items = RString.split(code, '_');
-         if(items.length == 2){
-            formatCode = "png";
+      byte[] data = _textureConsole.makeBitmapData(logicContext, guid, code);
+      if("environment".equals(code)){
+         int index = context.parameterAsInteger("index", 0);
+         try(FImage image = new FImage(data)){
+            int height = image.height();
+            try(FImage faceImage = image.imageRectangle(height * index, 0, height, height)){
+               data = faceImage.toBytes("jpg");
+            }
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
+      }else{
+         if(code.contains("_")){
+            String[] items = RString.split(code, '_');
+            if(items.length == 2){
+               formatCode = "png";
+            }
          }
       }
       int dataLength = data.length;
