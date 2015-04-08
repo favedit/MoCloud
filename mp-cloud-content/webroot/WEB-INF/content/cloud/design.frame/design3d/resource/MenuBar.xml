@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.resource.MenuBar">
    <MenuBar name="design3d.resource.MenuBar" type='FDsResourceMenuBar' label="菜单">
-      <MenuButton name='importPictureButton' linker='_controlImportPictureButton' icon='design3d.tools.save' label='导入图片'/>
       <MenuButton name='importMeshButton' linker='_controlImportMeshButton' icon='design3d.tools.save' label='导入模型'/>
       <MenuButton name='deleteButton' linker='_controlDeleteButton' icon='design3d.tools.delete' label='删除资源'/>
    </MenuBar>
