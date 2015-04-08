@@ -19,6 +19,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.net.EMime;
 import org.mo.content.engine3d.core.stream.IRs3StreamConsole;
+import org.mo.content.geom.mesh.FGeomModel;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.resource3d.common.FRs3Stream;
@@ -376,11 +377,12 @@ public class FRs3MeshConsole
       }
       //............................................................
       // 加载模型资源
-      //TODO:Create FRs3Mesh From FGeomModel
-      //      FGeomModel geoModel = file.CreateGeomModel();
+      FGeomModel geoModel = file.CreateGeomModel();
+      FRs3Mesh mesh = new FRs3Mesh(geoModel.meshs().first());
+      mesh.loadUnit(meshInfo);
       //............................................................
       // 新建模型
-      //      update(logicContext, meshInfo.ouid(), mesh);
+      update(logicContext, meshInfo.ouid(), mesh);
       return EResult.Success;
    }
 }

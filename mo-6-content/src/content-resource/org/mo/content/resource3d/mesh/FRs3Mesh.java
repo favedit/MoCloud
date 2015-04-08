@@ -1,7 +1,12 @@
 package org.mo.content.resource3d.mesh;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
+import com.cyou.gccloud.define.enums.common.EGcData;
+import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.geom.SFloatOutline3;
+import org.mo.com.geom.SFloatPoint2;
+import org.mo.com.geom.SFloatVector3;
+import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
@@ -9,6 +14,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.mesh.FGeomMesh;
+import org.mo.content.geom.mesh.SGeomFace;
 import org.mo.content.resource3d.common.FRs3Space;
 import org.mo.content.resource3d.common.FRs3Stream;
 
@@ -39,7 +45,108 @@ public class FRs3Mesh
    // @param input 输入流
    //============================================================
    public FRs3Mesh(FGeomMesh geoMesh){
-      //TODO:
+      // 顶点坐标流
+      FRs3Stream vertexPositionStream = new FRs3Stream();
+      vertexPositionStream.setCode("position");
+      vertexPositionStream.setElementDataCd(EGcData.Float64);
+      vertexPositionStream.setElementCount(3);
+      vertexPositionStream.setDataStride(8 * 3);
+      vertexPositionStream.setDataCount(geoMesh.vertexPositions().count());
+      FByteStream positionStream = new FByteStream();
+      for(SDoublePoint3 vertex : geoMesh.vertexPositions()){
+         positionStream.writeDouble(vertex.x);
+         positionStream.writeDouble(vertex.y);
+         positionStream.writeDouble(vertex.z);
+      }
+      vertexPositionStream.setData(positionStream.toArray());
+      _streams.push(vertexPositionStream);
+      // 贴图uv流
+      if(geoMesh.vertexCoords().count() > 0){
+         FRs3Stream vertexCoordStream = new FRs3Stream();
+         vertexCoordStream.setCode("textureCoord");
+         vertexCoordStream.setElementDataCd(EGcData.Float32);
+         vertexCoordStream.setElementCount(2);
+         vertexCoordStream.setDataStride(4 * 2);
+         vertexCoordStream.setDataCount(geoMesh.vertexCoords().count());
+         FByteStream coordStream = new FByteStream();
+         for(SFloatPoint2 coord : geoMesh.vertexCoords()){
+            coordStream.writeFloat(coord.x);
+            coordStream.writeFloat(coord.y);
+         }
+         vertexCoordStream.setData(coordStream.toArray());
+         _streams.push(vertexCoordStream);
+      }
+      // 法线流
+      if(geoMesh.vertexNormals().count() > 0){
+         FRs3Stream vertexNormalStream = new FRs3Stream();
+         vertexNormalStream.setCode("normal");
+         vertexNormalStream.setElementDataCd(EGcData.Float32);
+         vertexNormalStream.setElementCount(3);
+         vertexNormalStream.setDataStride(4 * 3);
+         vertexNormalStream.setDataCount(geoMesh.vertexNormals().count());
+         FByteStream normalStream = new FByteStream();
+         for(SFloatVector3 normal : geoMesh.vertexNormals()){
+            normalStream.writeFloat(normal.x);
+            normalStream.writeFloat(normal.y);
+            normalStream.writeFloat(normal.z);
+         }
+         vertexNormalStream.setData(normalStream.toArray());
+         _streams.push(vertexNormalStream);
+      }
+      // 索引流
+      FRs3Stream positionIndexStream = new FRs3Stream();
+      positionIndexStream.setCode("positionIndex");
+      positionIndexStream.setElementDataCd(EGcData.Int32);
+      positionIndexStream.setElementCount(3);
+      positionIndexStream.setDataStride(4 * 3);
+      positionIndexStream.setDataCount(geoMesh.faces().count());
+
+      FRs3Stream textureCoordIndexStream = new FRs3Stream();
+      textureCoordIndexStream.setCode("textureCoordIndex");
+      textureCoordIndexStream.setElementDataCd(EGcData.Int32);
+      textureCoordIndexStream.setElementCount(3);
+      textureCoordIndexStream.setDataStride(4 * 3);
+      textureCoordIndexStream.setDataCount(geoMesh.faces().count());
+
+      FRs3Stream normalIndexStream = new FRs3Stream();
+      normalIndexStream.setCode("normalIndex");
+      normalIndexStream.setElementDataCd(EGcData.Int32);
+      normalIndexStream.setElementCount(3);
+      normalIndexStream.setDataStride(4 * 3);
+      normalIndexStream.setDataCount(geoMesh.faces().count());
+
+      FByteStream positionIdxStream = new FByteStream();
+      FByteStream textureCoordIdxStream = new FByteStream();
+      FByteStream normalIdxStream = new FByteStream();
+
+      for(SGeomFace face : geoMesh.faces()){
+         positionIdxStream.writeUint32(face.positionIndexs[0]);
+         positionIdxStream.writeUint32(face.positionIndexs[1]);
+         positionIdxStream.writeUint32(face.positionIndexs[2]);
+         if(face.coordIndexs != null){
+            textureCoordIdxStream.writeUint32(face.coordIndexs[0]);
+            textureCoordIdxStream.writeUint32(face.coordIndexs[1]);
+            textureCoordIdxStream.writeUint32(face.coordIndexs[2]);
+         }
+         if(face.normalIndexs != null){
+            normalIdxStream.writeUint32(face.normalIndexs[0]);
+            normalIdxStream.writeUint32(face.normalIndexs[1]);
+            normalIdxStream.writeUint32(face.normalIndexs[2]);
+         }
+      }
+
+      positionIndexStream.setData(positionIdxStream.toArray());
+      _streams.push(positionIndexStream);
+
+      if(textureCoordIdxStream.length() > 0){
+         textureCoordIndexStream.setData(textureCoordIdxStream.toArray());
+         _streams.push(textureCoordIndexStream);
+      }
+
+      if(normalIdxStream.length() > 0){
+         normalIndexStream.setData(normalIdxStream.toArray());
+         _streams.push(normalIndexStream);
+      }
    }
 
    //============================================================

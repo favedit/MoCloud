@@ -40,7 +40,6 @@ public class FObjFile
    // @param fileName 文件名称
    // @param encoding 文本编码
    //============================================================
-   @SuppressWarnings("resource")
    public void loadFile(String fileName,
                         String encoding){
       try(FFileLineReader reader = new FFileLineReader(fileName, encoding)){
