@@ -47,11 +47,23 @@ public class FDataResourceCatalogLogic
    // 字段项目编号的定义。
    public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
 
+   // 字段父编号的定义。
+   public final static SLogicFieldInfo PARENT_ID = new SLogicFieldInfo("PARENT_ID");
+
+   // 字段全代码的定义。
+   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
+   // 字段全标签的定义。
+   public final static SLogicFieldInfo FULL_LABEL = new SLogicFieldInfo("FULL_LABEL");
+
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段关键字的定义。
+   public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
 
    // 字段图标地址的定义。
    public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
@@ -75,7 +87,7 @@ public class FDataResourceCatalogLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`CODE`,`LABEL`,`ICON_URL`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`PARENT_ID`,`FULL_CODE`,`CODE`,`FULL_LABEL`,`LABEL`,`KEYWORDS`,`ICON_URL`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源目录表逻辑单元。</T>
@@ -649,8 +661,12 @@ public class FDataResourceCatalogLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
+      cmd.append(",`PARENT_ID`");
+      cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
+      cmd.append(",`FULL_LABEL`");
       cmd.append(",`LABEL`");
+      cmd.append(",`KEYWORDS`");
       cmd.append(",`ICON_URL`");
       cmd.append(",`DESCRIPTION`");
       cmd.append(",`NOTE`");
@@ -683,6 +699,22 @@ public class FDataResourceCatalogLogic
          cmd.append(projectId);
       }
       cmd.append(',');
+      long parentId = unit.parentId();
+      if(parentId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(parentId);
+      }
+      cmd.append(',');
+      String fullCode = unit.fullCode();
+      if(RString.isEmpty(fullCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(fullCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
          cmd.append("NULL");
@@ -692,12 +724,30 @@ public class FDataResourceCatalogLogic
          cmd.append('\'');
       }
       cmd.append(',');
+      String fullLabel = unit.fullLabel();
+      if(RString.isEmpty(fullLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(fullLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       String label = unit.label();
       if(RString.isEmpty(label)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String keywords = unit.keywords();
+      if(RString.isEmpty(keywords)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(keywords));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -819,6 +869,26 @@ public class FDataResourceCatalogLogic
             cmd.append(projectId);
          }
       }
+      if(unit.isParentIdChanged()){
+         cmd.append(",`PARENT_ID`=");
+         long parentId = unit.parentId();
+         if(parentId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(parentId);
+         }
+      }
+      if(unit.isFullCodeChanged()){
+         cmd.append(",`FULL_CODE`=");
+         String fullCode = unit.fullCode();
+         if(RString.isEmpty(fullCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(fullCode));
+            cmd.append('\'');
+         }
+      }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
          String code = unit.code();
@@ -830,6 +900,17 @@ public class FDataResourceCatalogLogic
             cmd.append('\'');
          }
       }
+      if(unit.isFullLabelChanged()){
+         cmd.append(",`FULL_LABEL`=");
+         String fullLabel = unit.fullLabel();
+         if(RString.isEmpty(fullLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(fullLabel));
+            cmd.append('\'');
+         }
+      }
       if(unit.isLabelChanged()){
          cmd.append(",`LABEL`=");
          String label = unit.label();
@@ -838,6 +919,17 @@ public class FDataResourceCatalogLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isKeywordsChanged()){
+         cmd.append(",`KEYWORDS`=");
+         String keywords = unit.keywords();
+         if(RString.isEmpty(keywords)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(keywords));
             cmd.append('\'');
          }
       }

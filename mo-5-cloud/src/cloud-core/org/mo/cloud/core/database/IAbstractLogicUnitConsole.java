@@ -11,22 +11,6 @@ import org.mo.data.logic.ILogicContext;
 public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
 {
    //============================================================
-   // <T>获取数据处理。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param whereSql 搜索内容
-   // @param orderSql 查询内容
-   // @param pageSize 页面大小
-   // @param page 页面编号
-   // @return 数据集合
-   //============================================================
-   FLogicDataset<U> fetch(ILogicContext logicContext,
-                          String whereSql,
-                          String orderSql,
-                          int pageSize,
-                          int page);
-
-   //============================================================
    // <T>根据编号获得一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
@@ -91,6 +75,44 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    U search(ILogicContext logicContext,
             Class<U> clazz,
             String whereSql);
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param whereSql 搜索内容
+   // @return 数据集合
+   //============================================================
+   FLogicDataset<U> fetch(ILogicContext logicContext,
+                          String whereSql);
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param whereSql 搜索内容
+   // @param orderSql 查询内容
+   // @return 数据集合
+   //============================================================
+   FLogicDataset<U> fetch(ILogicContext logicContext,
+                          String whereSql,
+                          String orderSql);
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param whereSql 搜索内容
+   // @param orderSql 查询内容
+   // @param pageSize 页面大小
+   // @param page 页面编号
+   // @return 数据集合
+   //============================================================
+   FLogicDataset<U> fetch(ILogicContext logicContext,
+                          String whereSql,
+                          String orderSql,
+                          int pageSize,
+                          int page);
 
    //============================================================
    // <T>准备记录</T>

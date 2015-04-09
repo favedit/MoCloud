@@ -27,7 +27,7 @@
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源数据服务                             -->
+   <!-- 设计：资源数据服务                                   -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.content3d.resource'
@@ -36,6 +36,18 @@
    <Component
          face  = 'org.mo.content.service.resource3d.IResourceService'
          class = 'org.mo.content.service.resource3d.FResourceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：资源数据目录服务                               -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content3d.resource.catalog'
+         face  = 'org.mo.content.service.resource3d.ICatalogService'/>
+
+   <Component
+         face  = 'org.mo.content.service.resource3d.ICatalogService'
+         class = 'org.mo.content.service.resource3d.FCatalogService'
          scope = 'global'/>
 
    <!-- ==================================================== -->

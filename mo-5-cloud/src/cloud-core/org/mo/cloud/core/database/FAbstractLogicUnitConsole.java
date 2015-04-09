@@ -150,6 +150,36 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //
    // @param logicContext 逻辑环境
    // @param whereSql 搜索内容
+   // @return 数据集合
+   //============================================================
+   @Override
+   public FLogicDataset<U> fetch(ILogicContext logicContext,
+                                 String whereSql){
+      T logic = findLogic(logicContext);
+      return logic.fetchClass(_classUnit, null, whereSql, null, null, 0, 0);
+   }
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param whereSql 搜索内容
+   // @param orderSql 查询内容
+   // @return 数据集合
+   //============================================================
+   @Override
+   public FLogicDataset<U> fetch(ILogicContext logicContext,
+                                 String whereSql,
+                                 String orderSql){
+      T logic = findLogic(logicContext);
+      return logic.fetchClass(_classUnit, null, whereSql, null, orderSql, 0, 0);
+   }
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param whereSql 搜索内容
    // @param orderSql 查询内容
    // @param pageSize 页面大小
    // @param page 页面编号

@@ -47,17 +47,41 @@ public class FDataResourceCatalogUnit
    // 字段项目编号的定义。
    protected long _projectId;
 
+   // 存储字段父编号的定义。
+   private long __parentId;
+
+   // 字段父编号的定义。
+   protected long _parentId;
+
+   // 存储字段全代码的定义。
+   private String __fullCode;
+
+   // 字段全代码的定义。
+   protected String _fullCode;
+
    // 存储字段代码的定义。
    private String __code;
 
    // 字段代码的定义。
    protected String _code;
 
+   // 存储字段全标签的定义。
+   private String __fullLabel;
+
+   // 字段全标签的定义。
+   protected String _fullLabel;
+
    // 存储字段名称的定义。
    private String __label;
 
    // 字段名称的定义。
    protected String _label;
+
+   // 存储字段关键字的定义。
+   private String __keywords;
+
+   // 字段关键字的定义。
+   protected String _keywords;
 
    // 存储字段图标地址的定义。
    private String __iconUrl;
@@ -265,6 +289,60 @@ public class FDataResourceCatalogUnit
    }
 
    //============================================================
+   // <T>判断父编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isParentIdChanged(){
+      return __parentId != _parentId;
+   }
+
+   //============================================================
+   // <T>获得父编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long parentId(){
+      return _parentId;
+   }
+
+   //============================================================
+   // <T>设置父编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setParentId(long value){
+      _parentId = value;
+   }
+
+   //============================================================
+   // <T>判断全代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullCodeChanged(){
+      return !RString.equals(__fullCode, _fullCode);
+   }
+
+   //============================================================
+   // <T>获得全代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullCode(){
+      return _fullCode;
+   }
+
+   //============================================================
+   // <T>设置全代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullCode(String value){
+      _fullCode = value;
+   }
+
+   //============================================================
    // <T>判断代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -292,6 +370,33 @@ public class FDataResourceCatalogUnit
    }
 
    //============================================================
+   // <T>判断全标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFullLabelChanged(){
+      return !RString.equals(__fullLabel, _fullLabel);
+   }
+
+   //============================================================
+   // <T>获得全标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String fullLabel(){
+      return _fullLabel;
+   }
+
+   //============================================================
+   // <T>设置全标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFullLabel(String value){
+      _fullLabel = value;
+   }
+
+   //============================================================
    // <T>判断名称的数据是否改变。</T>
    //
    // @return 数据内容
@@ -316,6 +421,33 @@ public class FDataResourceCatalogUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断关键字的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isKeywordsChanged(){
+      return !RString.equals(__keywords, _keywords);
+   }
+
+   //============================================================
+   // <T>获得关键字的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String keywords(){
+      return _keywords;
+   }
+
+   //============================================================
+   // <T>设置关键字的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setKeywords(String value){
+      _keywords = value;
    }
 
    //============================================================
@@ -526,10 +658,18 @@ public class FDataResourceCatalogUnit
             return Long.toString(_userId);
          case "project_id":
             return Long.toString(_projectId);
+         case "parent_id":
+            return Long.toString(_parentId);
+         case "full_code":
+            return _fullCode;
          case "code":
             return _code;
+         case "full_label":
+            return _fullLabel;
          case "label":
             return _label;
+         case "keywords":
+            return _keywords;
          case "icon_url":
             return _iconUrl;
          case "description":
@@ -573,11 +713,23 @@ public class FDataResourceCatalogUnit
          case "project_id":
             _projectId = RLong.parse(value);
             break;
+         case "parent_id":
+            _parentId = RLong.parse(value);
+            break;
+         case "full_code":
+            _fullCode = value;
+            break;
          case "code":
             _code = value;
             break;
+         case "full_label":
+            _fullLabel = value;
+            break;
          case "label":
             _label = value;
+            break;
+         case "keywords":
+            _keywords = value;
             break;
          case "icon_url":
             _iconUrl = value;
@@ -635,13 +787,29 @@ public class FDataResourceCatalogUnit
                __projectId = RLong.parse(value);
                _projectId = __projectId;
                break;
+            case "parent_id":
+               __parentId = RLong.parse(value);
+               _parentId = __parentId;
+               break;
+            case "full_code":
+               __fullCode = value;
+               _fullCode = __fullCode;
+               break;
             case "code":
                __code = value;
                _code = __code;
                break;
+            case "full_label":
+               __fullLabel = value;
+               _fullLabel = __fullLabel;
+               break;
             case "label":
                __label = value;
                _label = __label;
+               break;
+            case "keywords":
+               __keywords = value;
+               _keywords = __keywords;
                break;
             case "icon_url":
                __iconUrl = value;
@@ -688,8 +856,12 @@ public class FDataResourceCatalogUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("projectId", _projectId);
+      row.set("parentId", _parentId);
+      row.set("fullCode", _fullCode);
       row.set("code", _code);
+      row.set("fullLabel", _fullLabel);
       row.set("label", _label);
+      row.set("keywords", _keywords);
       row.set("iconUrl", _iconUrl);
       row.set("description", _description);
       row.set("note", _note);
@@ -712,8 +884,12 @@ public class FDataResourceCatalogUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
+      map.put("parentId", RLong.toString(_parentId));
+      map.put("fullCode", _fullCode);
       map.put("code", _code);
+      map.put("fullLabel", _fullLabel);
       map.put("label", _label);
+      map.put("keywords", _keywords);
       map.put("iconUrl", _iconUrl);
       map.put("description", _description);
       map.put("note", _note);
