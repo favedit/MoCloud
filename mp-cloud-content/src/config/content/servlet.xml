@@ -15,6 +15,18 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
+   <!-- 设计：图片数据处理                                           -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content.picture'
+         face  = 'org.mo.content.face.resource3d.texture.IPictureServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource3d.texture.IPictureServlet'
+         class = 'org.mo.content.face.resource3d.texture.FPictureServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
    <!-- 设计：纹理位图数据获取处理                                   -->
    <!-- ============================================================ -->
    <WebServlet

@@ -47,6 +47,9 @@ public class FDataResourceBitmapLogic
    // 字段项目编号的定义。
    public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
 
+   // 字段资源编号的定义。
+   public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
+
    // 字段代码的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
@@ -75,7 +78,7 @@ public class FDataResourceBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`CODE`,`FULL_CODE`,`LABEL`,`KEYWORDS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`RESOURCE_ID`,`CODE`,`FULL_CODE`,`LABEL`,`KEYWORDS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源位图表逻辑单元。</T>
@@ -649,6 +652,7 @@ public class FDataResourceBitmapLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
+      cmd.append(",`RESOURCE_ID`");
       cmd.append(",`CODE`");
       cmd.append(",`FULL_CODE`");
       cmd.append(",`LABEL`");
@@ -681,6 +685,13 @@ public class FDataResourceBitmapLogic
          cmd.append("NULL");
       }else{
          cmd.append(projectId);
+      }
+      cmd.append(',');
+      long resourceId = unit.resourceId();
+      if(resourceId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(resourceId);
       }
       cmd.append(',');
       String code = unit.code();
@@ -817,6 +828,15 @@ public class FDataResourceBitmapLogic
             cmd.append("NULL");
          }else{
             cmd.append(projectId);
+         }
+      }
+      if(unit.isResourceIdChanged()){
+         cmd.append(",`RESOURCE_ID`=");
+         long resourceId = unit.resourceId();
+         if(resourceId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(resourceId);
          }
       }
       if(unit.isCodeChanged()){

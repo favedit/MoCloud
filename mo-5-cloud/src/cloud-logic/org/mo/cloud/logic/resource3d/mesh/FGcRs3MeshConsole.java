@@ -19,6 +19,10 @@ public class FGcRs3MeshConsole
       implements
          IGcRs3MeshConsole
 {
+   // 资源管理器
+   @ALink
+   protected IGcResourceConsole _resourceConsole;
+
    // 数据流管理器
    @ALink
    protected IGcRs3StreamConsole _streamConsole;
@@ -26,10 +30,6 @@ public class FGcRs3MeshConsole
    // 数据流管理器
    @ALink
    protected IGcRs3MeshStreamConsole _meshStreamConsole;
-
-   // 资源管理器
-   @ALink
-   protected IGcResourceConsole _resourceConsole;
 
    //============================================================
    // <T>构造3D资源网格控制台。</T>
@@ -123,7 +123,9 @@ public class FGcRs3MeshConsole
                                 FGcRs3MeshInfo unit){
       // 删除关联资源
       long resourceId = unit.resourceId();
-      _resourceConsole.doDelete(logicContext, resourceId);
+      if(resourceId > 0){
+         _resourceConsole.doDelete(logicContext, resourceId);
+      }
       // 返回结果
       return EResult.Success;
    }

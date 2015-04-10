@@ -60,6 +60,7 @@ public class FC3dMeshConsole
       FGcResourceInfo resource = _resourceConsole.doPrepare(logicContext);
       resource.setUserId(mesh.userId());
       resource.setProjectId(mesh.projectId());
+      resource.setCatalogId(mesh.catalogId());
       resource.setResourceCd(EGcResource.Mesh3d);
       resource.setCode(mesh.code());
       resource.setLabel(mesh.label());

@@ -1,20 +1,77 @@
 package org.mo.cloud.logic.resource.bitmap;
 
-import com.cyou.gccloud.data.data.FDataResource3dStreamLogic;
+import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
+import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.logic.resource.IGcResourceConsole;
+import org.mo.com.lang.EResult;
+import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
+import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>资源位图信息控制台。</T>
 //============================================================
 public class FGcResBitmapConsole
-      extends FAbstractLogicUnitConsole<FDataResource3dStreamLogic, FGcResBitmapInfo>
+      extends FAbstractLogicUnitConsole<FDataResourceBitmapLogic, FGcResBitmapInfo>
       implements
          IGcResBitmapConsole
 {
+   // 资源管理器
+   @ALink
+   protected IGcResourceConsole _resourceConsole;
+
+   // 位图图像管理器
+   @ALink
+   protected IGcResBitmapImageConsole _dataBitmapImageConsole;
+
    //============================================================
    // <T>构造资源位图信息控制台。</T>
    //============================================================
    public FGcResBitmapConsole(){
-      super(FDataResource3dStreamLogic.class, FGcResBitmapInfo.class);
+      super(FDataResourceBitmapLogic.class, FGcResBitmapInfo.class);
+   }
+
+   //============================================================
+   // <T>删除记录前处理</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult onDeleteBefore(ILogicContext logicContext,
+                                 FGcResBitmapInfo unit){
+      long bitmapId = unit.ouid();
+      // 删除网格数据流集合
+      FDataResourceBitmapImageLogic bitmapImageLogic = logicContext.findLogic(FDataResourceBitmapImageLogic.class);
+      String whereSql = FDataResourceBitmapImageLogic.BITMAP_ID + "=" + bitmapId;
+      FLogicDataset<FGcResBitmapImageInfo> bitmapImageDataset = bitmapImageLogic.fetchClass(FGcResBitmapImageInfo.class, whereSql);
+      if(bitmapImageDataset != null){
+         for(FGcResBitmapImageInfo bitmapImageUnit : bitmapImageDataset){
+            _dataBitmapImageConsole.doDelete(logicContext, bitmapImageUnit);
+         }
+      }
+      // 返回结果
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除记录后处理</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult onDeleteAfter(ILogicContext logicContext,
+                                FGcResBitmapInfo unit){
+      // 删除关联资源
+      long resourceId = unit.resourceId();
+      if(resourceId > 0){
+         _resourceConsole.doDelete(logicContext, resourceId);
+      }
+      // 返回结果
+      return EResult.Success;
    }
 }

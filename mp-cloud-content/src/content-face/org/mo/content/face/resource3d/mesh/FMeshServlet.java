@@ -2,6 +2,8 @@ package org.mo.content.face.resource3d.mesh;
 
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
+import org.mo.cloud.logic.resource.FGcResourceCatalogInfo;
+import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
@@ -40,6 +42,10 @@ public class FMeshServlet
 
    // 缓冲时间
    protected static long CacheTimeout = 3600 * 24 * 7 * 4;
+
+   // 数据网格控制台
+   @ALink
+   protected IGcResourceCatalogConsole _dataCatalogConsole;
 
    // 数据网格控制台
    @ALink
@@ -126,6 +132,7 @@ public class FMeshServlet
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
+      String nodeGuid = context.parameter("node_guid");
       String code = context.parameter("code");
       if(RString.isEmpty(code)){
          throw new FFatalError("Mesh code is empty.");
@@ -145,9 +152,19 @@ public class FMeshServlet
       String extension = RFile.extension(fileName);
       long userId = session.userId();
       long projectId = session.projectId();
+      // 获得节点编号
+      long catalogId = 0;
+      if(!RString.isEmpty(nodeGuid)){
+         FGcResourceCatalogInfo catalog = _dataCatalogConsole.findByGuid(logicContext, nodeGuid);
+         if(catalog == null){
+            throw new FFatalError("Catalog is not exists.");
+         }
+         catalogId = catalog.ouid();
+      }
       // 导入数据
       if("ply".equals(extension)){
       }else if("obj".equals(extension)){
+      }else if("stl".equals(extension)){
       }else{
          throw new FFatalError("Unknown file format.");
       }
@@ -168,24 +185,42 @@ public class FMeshServlet
             FGcRs3MeshInfo mesh = _c3MeshConsole.doPrepare(logicContext);
             mesh.setUserId(userId);
             mesh.setProjectId(projectId);
+            mesh.setCatalogId(catalogId);
             mesh.setCode(code);
             mesh.setLabel(label);
             _c3MeshConsole.createMesh(logicContext, mesh);
             // 导入模型
             _meshConsole.importMeshPly(logicContext, mesh.guid(), plyFile);
-         }else // 加载OBJ模型文件 
-         if("obj".equals(extension)){
+         }
+         // 加载OBJ模型文件 
+         else if("obj".equals(extension)){
             FObjFile objFile = new FObjFile();
             objFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
             // 创建模型
             FGcRs3MeshInfo mesh = _c3MeshConsole.doPrepare(logicContext);
             mesh.setUserId(userId);
             mesh.setProjectId(projectId);
+            mesh.setCatalogId(catalogId);
             mesh.setCode(code);
             mesh.setLabel(label);
             _c3MeshConsole.createMesh(logicContext, mesh);
             // 导入模型
             _meshConsole.importMeshObj(logicContext, mesh.guid(), objFile);
+         }
+         // 加载STL模型文件 
+         else if("stl".equals(extension)){
+            //            FStlFile stlFile = new FStlFile();
+            //            stlFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
+            //            // 创建模型
+            //            FGcRs3MeshInfo mesh = _c3MeshConsole.doPrepare(logicContext);
+            //            mesh.setUserId(userId);
+            //            mesh.setProjectId(projectId);
+            //            mesh.setCatalogId(catalogId);
+            //            mesh.setCode(code);
+            //            mesh.setLabel(label);
+            //            _c3MeshConsole.createMesh(logicContext, mesh);
+            //            // 导入模型
+            //            _meshConsole.importMeshObj(logicContext, mesh.guid(), stlFile);
          }else{
             throw new FFatalError("Unknown file format.");
          }
@@ -208,6 +243,5 @@ public class FMeshServlet
       response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
       response.setContentType(EMime.Bin.mime());
       response.setContentLength(0);
-      //response.write(data, 0, dataLength);
    }
 }
