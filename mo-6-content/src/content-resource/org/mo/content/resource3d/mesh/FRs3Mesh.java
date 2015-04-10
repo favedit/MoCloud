@@ -2,10 +2,7 @@ package org.mo.content.resource3d.mesh;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
 import com.cyou.gccloud.define.enums.common.EGcData;
-import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.geom.SFloatOutline3;
-import org.mo.com.geom.SFloatPoint2;
-import org.mo.com.geom.SFloatVector3;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -15,6 +12,7 @@ import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.mesh.FGeomMesh;
 import org.mo.content.geom.mesh.SGeomFace;
+import org.mo.content.geom.mesh.SGeomVertex;
 import org.mo.content.resource3d.common.FRs3Space;
 import org.mo.content.resource3d.common.FRs3Stream;
 
@@ -45,39 +43,60 @@ public class FRs3Mesh
    // @param input 输入流
    //============================================================
    public FRs3Mesh(FGeomMesh geoMesh){
+      int vertexCount = geoMesh.vertexs().count();
       // 顶点坐标流
-      FRs3Stream vertexPositionStream = new FRs3Stream();
-      vertexPositionStream.setCode("position");
-      vertexPositionStream.setElementDataCd(EGcData.Float64);
-      vertexPositionStream.setElementCount(3);
-      vertexPositionStream.setDataStride(8 * 3);
-      vertexPositionStream.setDataCount(geoMesh.vertexPositions().count());
-      FByteStream positionStream = new FByteStream();
-      for(SDoublePoint3 vertex : geoMesh.vertexPositions()){
-         positionStream.writeDouble(vertex.x);
-         positionStream.writeDouble(vertex.y);
-         positionStream.writeDouble(vertex.z);
+      if(geoMesh.optionVertexPosition()){
+         FRs3Stream vertexPositionStream = new FRs3Stream();
+         vertexPositionStream.setCode("position");
+         vertexPositionStream.setElementDataCd(EGcData.Float32);
+         vertexPositionStream.setElementCount(3);
+         vertexPositionStream.setDataStride(4 * 3);
+         vertexPositionStream.setDataCount(vertexCount);
+         FByteStream positionStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            positionStream.writeFloat((float)vertex.position.x);
+            positionStream.writeFloat((float)vertex.position.y);
+            positionStream.writeFloat((float)vertex.position.z);
+         }
+         vertexPositionStream.setData(positionStream.toArray());
+         _streams.push(vertexPositionStream);
       }
-      vertexPositionStream.setData(positionStream.toArray());
-      _streams.push(vertexPositionStream);
+      // 顶点颜色流
+      if(geoMesh.optionVertexColor()){
+         FRs3Stream vertexColorStream = new FRs3Stream();
+         vertexColorStream.setCode("color");
+         vertexColorStream.setElementDataCd(EGcData.Uint8);
+         vertexColorStream.setElementCount(4);
+         vertexColorStream.setDataStride(4);
+         vertexColorStream.setDataCount(vertexCount);
+         FByteStream colorStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            colorStream.writeUint8((short)(vertex.color.red * 255.0));
+            colorStream.writeUint8((short)(vertex.color.green * 255.0));
+            colorStream.writeUint8((short)(vertex.color.blue * 255.0));
+            colorStream.writeUint8((short)(vertex.color.alpha * 255.0));
+         }
+         vertexColorStream.setData(colorStream.toArray());
+         _streams.push(vertexColorStream);
+      }
       // 贴图uv流
-      if(geoMesh.vertexCoords().count() > 0){
+      if(geoMesh.optionVertexCoord()){
          FRs3Stream vertexCoordStream = new FRs3Stream();
-         vertexCoordStream.setCode("textureCoord");
+         vertexCoordStream.setCode("coord");
          vertexCoordStream.setElementDataCd(EGcData.Float32);
          vertexCoordStream.setElementCount(2);
          vertexCoordStream.setDataStride(4 * 2);
-         vertexCoordStream.setDataCount(geoMesh.vertexCoords().count());
+         vertexCoordStream.setDataCount(vertexCount);
          FByteStream coordStream = new FByteStream();
-         for(SFloatPoint2 coord : geoMesh.vertexCoords()){
-            coordStream.writeFloat(coord.x);
-            coordStream.writeFloat(coord.y);
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            coordStream.writeFloat(vertex.coord.x);
+            coordStream.writeFloat(vertex.coord.y);
          }
          vertexCoordStream.setData(coordStream.toArray());
          _streams.push(vertexCoordStream);
       }
       // 法线流
-      if(geoMesh.vertexNormals().count() > 0){
+      if(geoMesh.optionVertexNormal()){
          FRs3Stream vertexNormalStream = new FRs3Stream();
          vertexNormalStream.setCode("normal");
          vertexNormalStream.setElementDataCd(EGcData.Float32);
@@ -85,68 +104,63 @@ public class FRs3Mesh
          vertexNormalStream.setDataStride(4 * 3);
          vertexNormalStream.setDataCount(geoMesh.vertexNormals().count());
          FByteStream normalStream = new FByteStream();
-         for(SFloatVector3 normal : geoMesh.vertexNormals()){
-            normalStream.writeFloat(normal.x);
-            normalStream.writeFloat(normal.y);
-            normalStream.writeFloat(normal.z);
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            normalStream.writeFloat(vertex.normal.x);
+            normalStream.writeFloat(vertex.normal.y);
+            normalStream.writeFloat(vertex.normal.z);
          }
          vertexNormalStream.setData(normalStream.toArray());
          _streams.push(vertexNormalStream);
       }
-      // 索引流
-      FRs3Stream positionIndexStream = new FRs3Stream();
-      positionIndexStream.setCode("positionIndex");
-      positionIndexStream.setElementDataCd(EGcData.Int32);
-      positionIndexStream.setElementCount(3);
-      positionIndexStream.setDataStride(4 * 3);
-      positionIndexStream.setDataCount(geoMesh.faces().count());
+      // 副法线流
+      if(geoMesh.optionVertexBinormal()){
+         FRs3Stream vertexBinormalStream = new FRs3Stream();
+         vertexBinormalStream.setCode("binormal");
+         vertexBinormalStream.setElementDataCd(EGcData.Float32);
+         vertexBinormalStream.setElementCount(3);
+         vertexBinormalStream.setDataStride(4 * 3);
+         vertexBinormalStream.setDataCount(geoMesh.vertexNormals().count());
+         FByteStream binormalStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            binormalStream.writeFloat(vertex.binormal.x);
+            binormalStream.writeFloat(vertex.binormal.y);
+            binormalStream.writeFloat(vertex.binormal.z);
+         }
+         vertexBinormalStream.setData(binormalStream.toArray());
+         _streams.push(vertexBinormalStream);
+      }
+      // 切线流
+      if(geoMesh.optionVertexTangent()){
+         FRs3Stream vertexTangentStream = new FRs3Stream();
+         vertexTangentStream.setCode("tangent");
+         vertexTangentStream.setElementDataCd(EGcData.Float32);
+         vertexTangentStream.setElementCount(3);
+         vertexTangentStream.setDataStride(4 * 3);
+         vertexTangentStream.setDataCount(geoMesh.vertexNormals().count());
+         FByteStream tangentStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            tangentStream.writeFloat(vertex.tangent.x);
+            tangentStream.writeFloat(vertex.tangent.y);
+            tangentStream.writeFloat(vertex.tangent.z);
+         }
+         vertexTangentStream.setData(tangentStream.toArray());
+         _streams.push(vertexTangentStream);
+      }
 
-      FRs3Stream textureCoordIndexStream = new FRs3Stream();
-      textureCoordIndexStream.setCode("textureCoordIndex");
-      textureCoordIndexStream.setElementDataCd(EGcData.Int32);
-      textureCoordIndexStream.setElementCount(3);
-      textureCoordIndexStream.setDataStride(4 * 3);
-      textureCoordIndexStream.setDataCount(geoMesh.faces().count());
-
-      FRs3Stream normalIndexStream = new FRs3Stream();
-      normalIndexStream.setCode("normalIndex");
-      normalIndexStream.setElementDataCd(EGcData.Int32);
-      normalIndexStream.setElementCount(3);
-      normalIndexStream.setDataStride(4 * 3);
-      normalIndexStream.setDataCount(geoMesh.faces().count());
-
-      FByteStream positionIdxStream = new FByteStream();
-      FByteStream textureCoordIdxStream = new FByteStream();
-      FByteStream normalIdxStream = new FByteStream();
-
+      FRs3Stream indexStream = new FRs3Stream();
+      indexStream.setCode("index32");
+      indexStream.setElementDataCd(EGcData.Int32);
+      indexStream.setElementCount(3);
+      indexStream.setDataStride(4 * 3);
+      indexStream.setDataCount(geoMesh.faces().count());
+      FByteStream faceStream = new FByteStream();
       for(SGeomFace face : geoMesh.faces()){
-         positionIdxStream.writeUint32(face.positionIndexs[0]);
-         positionIdxStream.writeUint32(face.positionIndexs[1]);
-         positionIdxStream.writeUint32(face.positionIndexs[2]);
-         if(face.coordIndexs != null){
-            textureCoordIdxStream.writeUint32(face.coordIndexs[0]);
-            textureCoordIdxStream.writeUint32(face.coordIndexs[1]);
-            textureCoordIdxStream.writeUint32(face.coordIndexs[2]);
-         }
-         if(face.normalIndexs != null){
-            normalIdxStream.writeUint32(face.normalIndexs[0]);
-            normalIdxStream.writeUint32(face.normalIndexs[1]);
-            normalIdxStream.writeUint32(face.normalIndexs[2]);
-         }
+         faceStream.writeUint32(face.positionIndexs[0]);
+         faceStream.writeUint32(face.positionIndexs[1]);
+         faceStream.writeUint32(face.positionIndexs[2]);
       }
-
-      positionIndexStream.setData(positionIdxStream.toArray());
-      _streams.push(positionIndexStream);
-
-      if(textureCoordIdxStream.length() > 0){
-         textureCoordIndexStream.setData(textureCoordIdxStream.toArray());
-         _streams.push(textureCoordIndexStream);
-      }
-
-      if(normalIdxStream.length() > 0){
-         normalIndexStream.setData(normalIdxStream.toArray());
-         _streams.push(normalIndexStream);
-      }
+      indexStream.setData(faceStream.toArray());
+      _streams.push(indexStream);
    }
 
    //============================================================

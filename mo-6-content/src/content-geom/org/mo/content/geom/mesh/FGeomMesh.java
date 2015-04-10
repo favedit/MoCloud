@@ -25,6 +25,18 @@ public class FGeomMesh
    // 顶点颜色配置
    protected boolean _optionVertexColor;
 
+   // 顶点uv配置
+   protected boolean _optionVertexCoord;
+
+   // 顶点法线配置
+   protected boolean _optionVertexNormal;
+
+   // 顶点副法线配置
+   protected boolean _optionVertexBinormal;
+
+   // 顶点切线配置
+   protected boolean _optionVertexTangent;
+
    // 轮廓
    protected SDoubleOutline3 _outline = new SDoubleOutline3();
 
@@ -95,6 +107,78 @@ public class FGeomMesh
    //============================================================
    public void setOptionVertexColor(boolean value){
       _optionVertexColor = value;
+   }
+
+   //============================================================
+   // <T>获得顶点uv配置。</T>
+   //
+   // @return 顶点位置配置
+   //============================================================
+   public boolean optionVertexCoord(){
+      return _optionVertexCoord;
+   }
+
+   //============================================================
+   // <T>设置顶点uv配置。</T>
+   //
+   // @param value 顶点位置配置
+   //============================================================
+   public void setOptionVertexCoord(boolean value){
+      _optionVertexCoord = value;
+   }
+
+   //============================================================
+   // <T>获得顶点法线配置。</T>
+   //
+   // @return 顶点位置配置
+   //============================================================
+   public boolean optionVertexNormal(){
+      return _optionVertexNormal;
+   }
+
+   //============================================================
+   // <T>设置顶点法线配置。</T>
+   //
+   // @param value 顶点位置配置
+   //============================================================
+   public void setOptionVertexNormal(boolean value){
+      _optionVertexNormal = value;
+   }
+
+   //============================================================
+   // <T>获得顶点副法线配置。</T>
+   //
+   // @return 顶点位置配置
+   //============================================================
+   public boolean optionVertexBinormal(){
+      return _optionVertexBinormal;
+   }
+
+   //============================================================
+   // <T>设置顶点副法线配置。</T>
+   //
+   // @param value 顶点位置配置
+   //============================================================
+   public void setOptionVertexBinormal(boolean value){
+      _optionVertexBinormal = value;
+   }
+
+   //============================================================
+   // <T>获得顶点切线配置。</T>
+   //
+   // @return 顶点位置配置
+   //============================================================
+   public boolean optionVertexTangent(){
+      return _optionVertexTangent;
+   }
+
+   //============================================================
+   // <T>设置顶点切线配置。</T>
+   //
+   // @param value 顶点位置配置
+   //============================================================
+   public void setOptionVertexTangent(boolean value){
+      _optionVertexTangent = value;
    }
 
    //============================================================
@@ -271,19 +355,19 @@ public class FGeomMesh
          for(int n = 0; n < 3; n++){
             // 获得索引
             int positionIndex = face.positionIndexs[n];
-            int coordIndex = face.coordIndexs[n];
-            int normalIndex = face.normalIndexs[n];
-            int binormalIndex = face.binormalIndexs[n];
-            int tangentIndex = face.tangentIndexs[n];
+            int coordIndex = face.coordIndexs == null ? 0 : face.coordIndexs[n];
+            int normalIndex = face.normalIndexs == null ? 0 : face.normalIndexs[n];
+            int binormalIndex = face.binormalIndexs == null ? 0 : face.binormalIndexs[n];
+            int tangentIndex = face.tangentIndexs == null ? 0 : face.tangentIndexs[n];
             // 设置内容
             SGeomVertex vertex = syncVertex(positionIndex, coordIndex, normalIndex, binormalIndex, tangentIndex);
             // 设置顶点信息
             if(!vertex.calculate){
                //vertex.merged = _vertexList[vertexIndex].merged;
-               vertex.position.assign(_vertexPositions.get(positionIndex));
+               vertex.position = _vertexPositions.get(positionIndex);
                vertex.pushFaceId(faceIndex);
                vertex.pushFace(face);
-               if(!_vertexColors.isEmpty()){
+               if(_optionVertexColor){
                   int colorIndex = face.colorIndexs[n];
                   SFloatColor4 color = _vertexColors.get(colorIndex);
                   vertex.color = new SFloatColor4(color.red, color.green, color.blue, 1.0f);
@@ -293,19 +377,19 @@ public class FGeomMesh
                //                  vertex.Alpha = _alphaList[alphaIndex];
                //                  vertex.Color.A = vertex.Alpha;
                //               }
-               if(!_vertexCoords.isEmpty()){
-                  vertex.coord.assign(_vertexCoords.get(coordIndex));
+               if(_optionVertexCoord){
+                  vertex.coord = _vertexCoords.get(coordIndex);
                }
-               if(!_vertexNormals.isEmpty()){
-                  vertex.normal.assign(_vertexNormals.get(normalIndex));
+               if(_optionVertexNormal){
+                  vertex.normal = _vertexNormals.get(normalIndex);
                   vertex.normal.normalize();
                }
-               if(!_vertexBinormals.isEmpty()){
-                  vertex.binormal.assign(_vertexBinormals.get(binormalIndex));
+               if(_optionVertexBinormal){
+                  vertex.binormal = _vertexBinormals.get(binormalIndex);
                   vertex.binormal.normalize();
                }
-               if(!_vertexTangents.isEmpty()){
-                  vertex.tangent.assign(_vertexTangents.get(tangentIndex));
+               if(_optionVertexTangent){
+                  vertex.tangent = _vertexTangents.get(tangentIndex);
                   vertex.tangent.normalize();
                }
                //               if(!_illumList.IsEmpty){

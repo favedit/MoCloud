@@ -113,16 +113,17 @@ public class FObjFile
       face.coordIndexs = new int[data.length - 1];
       face.normalIndexs = new int[data.length - 1];
 
+      //OBJ Index从1开始，放入数组后Index需要减1
       for(int i = 1; i < data.length; i++){
          String[] idxs = data[i].split("/");
-         if(RString.isBlank(idxs[0])){
-            face.positionIndexs[i] = Integer.parseInt(idxs[0]);
+         if(!RString.isBlank(idxs[0])){
+            face.positionIndexs[i - 1] = Integer.parseInt(idxs[0]) - 1;
          }
-         if(RString.isBlank(idxs[1])){
-            face.coordIndexs[i] = Integer.parseInt(idxs[1]);
+         if(!RString.isBlank(idxs[1])){
+            face.coordIndexs[i - 1] = Integer.parseInt(idxs[1]) - 1;
          }
-         if(RString.isBlank(idxs[2])){
-            face.normalIndexs[i] = Integer.parseInt(idxs[2]);
+         if(!RString.isBlank(idxs[2])){
+            face.normalIndexs[i - 1] = Integer.parseInt(idxs[2]) - 1;
          }
       }
       _faces.push(face);
@@ -136,8 +137,23 @@ public class FObjFile
    public FGeomModel CreateGeomModel(){
       FGeomModel model = new FGeomModel();
       FGeomMesh mesh = new FGeomMesh();
+      mesh.setOptionVertexPosition(true);
       mesh.vertexPositions().assign(_vertexs);
-      mesh.vertexNormals().assign(_normals);
+      mesh.setOptionVertexColor(false);
+      if(_textureCoords.count() > 0){
+         mesh.setOptionVertexCoord(true);
+         mesh.vertexCoords().assign(_textureCoords);
+      }else{
+         mesh.setOptionVertexCoord(false);
+      }
+      if(_normals.count() > 0){
+         mesh.setOptionVertexNormal(true);
+         mesh.vertexNormals().assign(_normals);
+      }else{
+         mesh.setOptionVertexNormal(false);
+      }
+      mesh.setOptionVertexBinormal(false);
+      mesh.setOptionVertexTangent(false);
       mesh.faces().assign(_faces);
       mesh.update();
       model.meshs().push(mesh);
