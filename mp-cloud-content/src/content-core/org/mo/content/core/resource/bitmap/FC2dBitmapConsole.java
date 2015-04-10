@@ -1,5 +1,9 @@
 package org.mo.content.core.resource.bitmap;
 
+import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
+import com.cyou.gccloud.data.data.FDataResourceBitmapImageUnit;
+import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
+import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
@@ -11,8 +15,10 @@ import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.content.core.resource3d.texture.FC3dBitmapConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eng.image.FImage;
 
 //============================================================
 // <T>内容图片控制台。</T>
@@ -59,6 +65,72 @@ public class FC2dBitmapConsole
       bitmap.setResourceId(resource.ouid());
       doInsert(logicContext, bitmap);
       return bitmap;
+   }
+
+   //============================================================
+   // <T>生成位图数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   public byte[] makePreview(ILogicContext context,
+                             String guid){
+      // 查找图片单元
+      FDataResourceBitmapLogic bitmapLogic = context.findLogic(FDataResourceBitmapLogic.class);
+      FDataResourceBitmapUnit bitmapUnit = bitmapLogic.findByGuid(guid);
+      if(bitmapUnit == null){
+         throw new FFatalError("Bitmap is not exists. (guid={1})", guid);
+      }
+      // 查找位图单元
+      String whereSql = FDataResourceBitmapImageLogic.BITMAP_ID + "=" + bitmapUnit.ouid();
+      FDataResourceBitmapImageLogic imageLogic = context.findLogic(FDataResourceBitmapImageLogic.class);
+      FDataResourceBitmapImageUnit imageUnit = imageLogic.search(whereSql);
+      if(imageUnit == null){
+         throw new FFatalError("Bitmap image is not exists. (guid={1})", guid);
+      }
+      // 获得数据
+      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, imageUnit.guid());
+      byte[] imageData = resource.data();
+      // 生成预览图
+      byte[] data = null;
+      synchronized(FC3dBitmapConsole.class){
+         try(FImage image = new FImage(imageData)){
+            image.resizeScale(200, 150, true);
+            data = image.toBytes("jpg");
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
+      }
+      // 返回数据
+      return data;
+   }
+
+   //============================================================
+   // <T>生成位图数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   @Override
+   public byte[] makePreviewData(ILogicContext logicContext,
+                                 String guid){
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache2dBitmapPreview, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      byte[] data = makePreview(logicContext, guid);
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache2dBitmapPreview, guid, "bin");
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 
    //============================================================

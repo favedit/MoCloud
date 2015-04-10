@@ -33,6 +33,21 @@ public class FGcResBitmapConsole
    }
 
    //============================================================
+   // <T>根据资源编号查找位图信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 位图信息
+   //============================================================
+   @Override
+   public FGcResBitmapInfo findByResourceId(ILogicContext logicContext,
+                                            long resourceId){
+      String whereSql = FDataResourceBitmapLogic.RESOURCE_ID + "=" + resourceId;
+      FGcResBitmapInfo bitmap = search(logicContext, whereSql);
+      return bitmap;
+   }
+
+   //============================================================
    // <T>删除记录前处理</T>
    //
    // @param logicContext 逻辑环境

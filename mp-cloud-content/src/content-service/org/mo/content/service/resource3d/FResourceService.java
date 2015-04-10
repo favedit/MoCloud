@@ -1,5 +1,7 @@
 package org.mo.content.service.resource3d;
 
+import com.cyou.gccloud.define.enums.core.EGcResource;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
@@ -11,13 +13,13 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource3d.material.IC3dMaterialConsole;
 import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.content.core.resource3d.model.IC3dModelConsole;
+import org.mo.content.core.resource3d.resource.IC3dResourceConsole;
 import org.mo.content.core.resource3d.scene.IC3dSceneConsole;
 import org.mo.content.core.resource3d.template.IC3dTemplateConsole;
 import org.mo.content.core.resource3d.texture.IC3dBitmapConsole;
 import org.mo.content.core.resource3d.texture.IC3dTextureConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
-import org.mo.data.logic.FLogicUnit;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
@@ -63,6 +65,10 @@ public class FResourceService
    @ALink
    protected IGcResourceCatalogConsole _resourceCatalogConsole;
 
+   // 资源控制台接口
+   @ALink
+   protected IC3dResourceConsole _resourceConsole;
+
    //============================================================
    // <T>构造资源3D服务。</T>
    //============================================================
@@ -85,7 +91,7 @@ public class FResourceService
                        IWebInput input,
                        IWebOutput output){
       // 检查参数
-      String typeCd = context.parameter("type_cd");
+      //String typeCd = context.parameter("type_cd");
       String serach = context.parameter("serach");
       String order = context.parameter("order");
       int pageSize = RInteger.toRange(context.parameterAsInteger("page_size", 20), 0, 200);
@@ -105,45 +111,46 @@ public class FResourceService
       }
       //............................................................
       // 查询数据
-      FLogicDataset<FLogicUnit> dataset = null;
-      switch(typeCd){
-         case "picture":
-            // 查找位图
-            dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
-            break;
-         case "sound":
-            // 查找声音
-            break;
-         case "video":
-            // 查找视频
-            break;
-         case "texture":
-            // 查找纹理
-            //_textureConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-            break;
-         case "material":
-            // 查找材质
-            //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-            break;
-         case "mesh":
-            // 查找网格
-            dataset = _meshConsole.list(logicContext, whereSql, order, pageSize, page);
-            break;
-         case "model":
-            // 查找网格
-            //_modelConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-            break;
-         case "template":
-            // 查找模板
-            //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-            break;
-         case "scene":
-            // 查找网格
-            //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-            break;
-         default:
-            throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
-      }
+      FLogicDataset<FGcResourceInfo> dataset = _resourceConsole.fetch(logicContext, whereSql, order, pageSize, page);
+      //      FLogicDataset<FLogicUnit> dataset = null;
+      //      switch(typeCd){
+      //         case "picture":
+      //            // 查找位图
+      //            dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
+      //            break;
+      //         case "sound":
+      //            // 查找声音
+      //            break;
+      //         case "video":
+      //            // 查找视频
+      //            break;
+      //         case "texture":
+      //            // 查找纹理
+      //            //_textureConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+      //            break;
+      //         case "material":
+      //            // 查找材质
+      //            //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+      //            break;
+      //         case "mesh":
+      //            // 查找网格
+      //            dataset = _meshConsole.list(logicContext, whereSql, order, pageSize, page);
+      //            break;
+      //         case "model":
+      //            // 查找网格
+      //            //_modelConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+      //            break;
+      //         case "template":
+      //            // 查找模板
+      //            //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+      //            break;
+      //         case "scene":
+      //            // 查找网格
+      //            //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+      //            break;
+      //         default:
+      //            throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
+      //      }
       //............................................................
       // 生成输出内容
       if(dataset != null){
@@ -152,13 +159,13 @@ public class FResourceService
          xresources.set("page_size", dataset.pageSize());
          xresources.set("page_count", dataset.pageCount());
          xresources.set("page", dataset.page());
-         for(FLogicUnit unit : dataset){
+         for(FGcResourceInfo resource : dataset){
             FXmlNode xresource = xresources.createNode("Resource");
-            xresource.set("guid", unit.get("guid"));
-            xresource.set("type_cd", typeCd);
-            xresource.set("code", unit.get("full_code"));
-            xresource.set("label", unit.get("label"));
-            xresource.set("update_date", unit.get("update_date"));
+            xresource.set("guid", resource.get("guid"));
+            xresource.set("type_cd", EGcResource.format(resource.resourceCd()));
+            xresource.set("code", resource.get("full_code"));
+            xresource.set("label", resource.get("label"));
+            xresource.set("update_date", resource.get("update_date"));
          }
       }
       return EResult.Success;

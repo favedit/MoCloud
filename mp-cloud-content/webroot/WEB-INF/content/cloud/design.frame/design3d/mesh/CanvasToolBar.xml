@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.CanvasToolBar">
    <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButtonCheck name='drop' linker='_controlDrop' icon='design3d.canvas.hand' group_name='mode' group_default='dropButton' hint='观察模式'/>
+      <ToolButtonCheck name='drop' linker='_controlDrop' icon='design3d.canvas.hand' group_name='mode' group_default='drop' hint='观察模式'/>
       <ToolButtonSplit/>
       <ToolButtonMenu name='size' icon='tools.size' label='屏幕大小' hint='场景旋转播放开关'>
          <MenuButton name='sizeAuto' linker='_controlSize1' label='自动适应'/>

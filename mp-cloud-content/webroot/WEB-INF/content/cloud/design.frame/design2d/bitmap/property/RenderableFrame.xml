@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.mesh.property.RenderableFrame" update_date="20141210134046">
+   <Frame name="design3d.mesh.property.RenderableFrame" type='FDsMeshRenderablePropertyFrame' label="显示属性" is_valid="Y" note="">
+      <Panel name='infoPanel' icon='design.panel.icon' label='显示属性'>
+         <Edit name="guid" linker='_controlGuid' label="标识:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='N' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称:" label_size='70,0' valid="Y" edit_size='200,0' edit_view='Y' input_size='200,0' note="" />
+      </Panel>
+      <PageControl name='propertyPageControl' icon='design.panel.icon' label='信息页面'>
+         <PageSheet name='renderableFrame' icon='design.panel.icon' label='渲染信息' frame_source='design3d.mesh.RenderableFrame'/>
+      </PageControl>
+   </Frame>
+</Content>

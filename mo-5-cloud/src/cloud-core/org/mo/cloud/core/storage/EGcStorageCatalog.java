@@ -17,8 +17,11 @@ public class EGcStorageCatalog
    // 资源3D跟踪
    public final static String Resource3dTrack = "resource3d.track";
 
-   // 资源位图预览
-   public final static String Cache3dBitmapPreview = "cache.bitmap.preview";
+   // 资源2D位图预览
+   public final static String Cache2dBitmapPreview = "cache2d.bitmap.preview";
+
+   // 资源3D位图预览
+   public final static String Cache3dBitmapPreview = "cache3d.bitmap.preview";
 
    // 资源3D纹理
    public final static String Cache3dTexture = "cache3d.texture";

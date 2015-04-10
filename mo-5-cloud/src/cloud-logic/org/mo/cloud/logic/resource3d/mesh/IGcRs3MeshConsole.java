@@ -11,6 +11,16 @@ public interface IGcRs3MeshConsole
          IAbstractLogicUnitConsole<FGcRs3MeshInfo>
 {
    //============================================================
+   // <T>根据资源编号查找网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 网格信息
+   //============================================================
+   FGcRs3MeshInfo findByResourceId(ILogicContext logicContext,
+                                   long resourceId);
+
+   //============================================================
    // <T>根据代码查找网格单元。</T>
    //
    // @param logicContext 逻辑环境

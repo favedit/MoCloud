@@ -2,6 +2,7 @@ package org.mo.cloud.logic.resource3d.mesh;
 
 import com.cyou.gccloud.data.data.FDataResource3dMeshLogic;
 import com.cyou.gccloud.data.data.FDataResource3dMeshStreamLogic;
+import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource3d.stream.IGcRs3StreamConsole;
@@ -39,6 +40,21 @@ public class FGcRs3MeshConsole
    }
 
    //============================================================
+   // <T>根据资源编号查找网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 网格信息
+   //============================================================
+   @Override
+   public FGcRs3MeshInfo findByResourceId(ILogicContext logicContext,
+                                          long resourceId){
+      String whereSql = FDataResourceBitmapLogic.RESOURCE_ID + "=" + resourceId;
+      FGcRs3MeshInfo mesh = search(logicContext, whereSql);
+      return mesh;
+   }
+
+   //============================================================
    // <T>根据代码查找网格单元。</T>
    //
    // @param logicContext 逻辑环境
@@ -48,9 +64,8 @@ public class FGcRs3MeshConsole
    @Override
    public FGcRs3MeshInfo findByCode(ILogicContext logicContext,
                                     String code){
-      String searchSql = FDataResource3dMeshLogic.CODE + "='" + code + "'";
-      FDataResource3dMeshLogic logic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-      FGcRs3MeshInfo mesh = logic.search(FGcRs3MeshInfo.class, searchSql);
+      String whereSql = FDataResource3dMeshLogic.CODE + "='" + code + "'";
+      FGcRs3MeshInfo mesh = search(logicContext, whereSql);
       return mesh;
    }
 
@@ -64,9 +79,8 @@ public class FGcRs3MeshConsole
    @Override
    public FGcRs3MeshInfo findByFullCode(ILogicContext logicContext,
                                         String code){
-      String searchSql = FDataResource3dMeshLogic.FULL_CODE + "='" + code + "'";
-      FDataResource3dMeshLogic logic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-      FGcRs3MeshInfo mesh = logic.search(FGcRs3MeshInfo.class, searchSql);
+      String whereSql = FDataResource3dMeshLogic.FULL_CODE + "='" + code + "'";
+      FGcRs3MeshInfo mesh = search(logicContext, whereSql);
       return mesh;
    }
 
@@ -82,7 +96,8 @@ public class FGcRs3MeshConsole
    public FGcRs3MeshInfo findByUserCode(ILogicContext logicContext,
                                         long userId,
                                         String code){
-      String whereSql = "(" + FDataResource3dMeshLogic.USER_ID + "=" + userId + ") AND (" + FDataResource3dMeshLogic.CODE + "='" + RSql.formatValue(code) + "')";
+      String whereSql = "(" + FDataResource3dMeshLogic.USER_ID + "=" + userId + ")";
+      whereSql += " AND (" + FDataResource3dMeshLogic.CODE + "='" + RSql.formatValue(code) + "')";
       FGcRs3MeshInfo mesh = search(logicContext, whereSql);
       return mesh;
    }

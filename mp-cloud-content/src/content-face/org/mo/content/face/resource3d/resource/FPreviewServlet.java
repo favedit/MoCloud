@@ -1,7 +1,10 @@
 package org.mo.content.face.resource3d.resource;
 
+import com.cyou.gccloud.define.enums.core.EGcResource;
 import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletResponse;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
@@ -10,9 +13,9 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
+import org.mo.content.core.resource.bitmap.IC2dBitmapConsole;
 import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.content.core.resource3d.resource.IC3dResourceConsole;
-import org.mo.content.core.resource3d.texture.IC3dBitmapConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
@@ -39,7 +42,7 @@ public class FPreviewServlet
 
    // 位图模型接口
    @ALink
-   protected IC3dBitmapConsole _bitmapConsole;
+   protected IC2dBitmapConsole _bitmapConsole;
 
    // 资源模型接口
    @ALink
@@ -69,15 +72,27 @@ public class FPreviewServlet
          throw new FFatalError("Parameter is invalid.");
       }
       //............................................................
-      // 查找场景
-      byte[] data = new byte[0];
-      switch(typeCd){
-         case "picture":
-            data = _bitmapConsole.makePreviewData(logicContext, guid);
-            break;
-         case "mesh":
-            data = _resourceConsole.findPreviewData(logicContext, typeCd, guid);
-            break;
+      byte[] data = _resourceConsole.findPreviewData(logicContext, guid);
+      // 生成预览
+      if(data == null){
+         // 获得资源
+         FGcResourceInfo resource = _resourceConsole.findByGuid(logicContext, guid);
+         if(resource == null){
+            throw new FFatalError("Resource is not exists. (guid={1})", guid);
+         }
+         long resourceId = resource.ouid();
+         // 生成数据
+         switch(typeCd){
+            case EGcResource.BitmapString:
+               FGcResBitmapInfo bitmap = _bitmapConsole.findByResourceId(logicContext, resourceId);
+               String bitmapGuid = bitmap.guid();
+               data = _bitmapConsole.makePreviewData(logicContext, bitmapGuid);
+               _resourceConsole.uploadPreviewData(logicContext, bitmapGuid, data);
+               break;
+            case EGcResource.Mesh3dString:
+               //data = _resourceConsole.findPreviewData(logicContext, typeCd, guid);
+               break;
+         }
       }
       int dataLength = 0;
       if(data != null){
@@ -93,9 +108,7 @@ public class FPreviewServlet
       response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
       response.setContentType(EMime.Jpg.mime());
       response.setContentLength(dataLength);
-      if(data != null){
-         response.write(data, 0, dataLength);
-      }
+      response.write(data, 0, dataLength);
    }
 
    //============================================================
@@ -154,12 +167,16 @@ public class FPreviewServlet
       // 上传预览数据
       switch(typeCd){
          case "mesh":
+            // 获得网格信息
             FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
             if(mesh == null){
                throw new FFatalError("Mesh is empty. (guid={1})", guid);
             }
-            _meshConsole.doUpdate(logicContext, mesh);
-            _resourceConsole.uploadPreviewData(logicContext, typeCd, guid, data);
+            // 修改更新时间，预览图才能重新显示
+            FGcResourceInfo resource = _resourceConsole.find(logicContext, mesh.resourceId());
+            _resourceConsole.doUpdate(logicContext, resource);
+            // 上传数据
+            _resourceConsole.uploadPreviewData(logicContext, resource.guid(), data);
             break;
          default:
             throw new FFatalError("Upload preview type failure. (type_cd={1})", typeCd);

@@ -3,7 +3,9 @@ package org.mo.content.face.resource3d.mesh;
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource.FGcResourceCatalogInfo;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
+import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource3d.mesh.FGcRs3MeshInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
@@ -47,6 +49,10 @@ public class FMeshServlet
    @ALink
    protected IGcResourceCatalogConsole _dataCatalogConsole;
 
+   // 数据资源控制台
+   @ALink
+   protected IGcResourceConsole _dataResourceConsole;
+
    // 数据网格控制台
    @ALink
    protected IGcRs3MeshConsole _dataMeshConsole;
@@ -85,20 +91,25 @@ public class FMeshServlet
          throw new FFatalError("Mesh guid and code is empty.");
       }
       // 获得唯一编号
+      String meshGuid = null;
       if(RString.isEmpty(guid)){
          FGcRs3MeshInfo unit = _dataMeshConsole.findByFullCode(logicContext, code);
          if(unit == null){
             unit = _dataMeshConsole.findByCode(logicContext, code);
          }
          if(unit != null){
-            guid = unit.guid();
+            meshGuid = unit.guid();
          }else{
             throw new FFatalError("process", "Model guid is not exists. (code={1})", code);
          }
+      }else{
+         FGcResourceInfo resource = _dataResourceConsole.findByGuid(logicContext, guid);
+         FGcRs3MeshInfo mesh = _dataMeshConsole.findByResourceId(logicContext, resource.ouid());
+         meshGuid = mesh.guid();
       }
       //............................................................
       // 生成数据
-      byte[] data = _meshConsole.makeMeshData(logicContext, guid);
+      byte[] data = _meshConsole.makeMeshData(logicContext, meshGuid);
       if(data == null){
          throw new FFatalError("process", "Model is not exists. (guid={1}, code={2})", guid, code);
       }

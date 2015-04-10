@@ -159,10 +159,12 @@ public class FWebServletResponse
    public void write(byte[] data,
                      int offset,
                      int length){
-      try{
-         _response.getOutputStream().write(data, offset, length);
-      }catch(Exception e){
-         throw new FFatalError(e);
+      if((data != null) && (length > 0)){
+         try{
+            _response.getOutputStream().write(data, offset, length);
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
       }
    }
 
