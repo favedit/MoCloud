@@ -1,4 +1,4 @@
-package org.mo.content.face.resource3d.texture;
+package org.mo.content.face.resource2d.bitmap;
 
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.data.logic.ILogicContext;
@@ -11,7 +11,7 @@ import org.mo.web.protocol.context.IWebContext;
 // <T>图片数据接口。</T>
 //============================================================
 @AWebLogin
-public interface IPictureServlet
+public interface IBitmapServlet
 {
    //============================================================
    // <T>导入数据处理。</T>

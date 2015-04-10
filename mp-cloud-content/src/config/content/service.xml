@@ -51,6 +51,30 @@
          scope = 'global'/>
 
    <!-- ==================================================== -->
+   <!-- 设计：资源位图服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content2d.bitmap'
+         face  = 'org.mo.content.service.resource2d.IBitmapService'/>
+
+   <Component
+         face  = 'org.mo.content.service.resource2d.IBitmapService'
+         class = 'org.mo.content.service.resource2d.FBitmapService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：资源位图图像服务                               -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.content2d.bitmap.image'
+         face  = 'org.mo.content.service.resource2d.IBitmapImageService'/>
+
+   <Component
+         face  = 'org.mo.content.service.resource2d.IBitmapImageService'
+         class = 'org.mo.content.service.resource2d.FBitmapImageService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
    <!-- 设计：资源3D网格数据服务                             -->
    <!-- ==================================================== -->
    <WebService

@@ -15,7 +15,6 @@ import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.content.core.resource3d.texture.FC3dBitmapConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
@@ -94,7 +93,7 @@ public class FC2dBitmapConsole
       byte[] imageData = resource.data();
       // 生成预览图
       byte[] data = null;
-      synchronized(FC3dBitmapConsole.class){
+      synchronized(FImage.class){
          try(FImage image = new FImage(imageData)){
             image.resizeScale(200, 150, true);
             data = image.toBytes("jpg");
@@ -137,24 +136,21 @@ public class FC2dBitmapConsole
    // <T>导入位图信息。</T>
    //
    // @param logicContext 逻辑环境
-   // @param guid 唯一编号
+   // @param bitmapImage 位图图片
    // @param stream 数据流
    // @return 处理结果
    //============================================================
    @Override
    public EResult importBitmap(ILogicContext logicContext,
-                               String guid,
+                               FGcResBitmapImageInfo bitmapImage,
                                FByteStream stream){
-      // 查找位图
-      FGcResBitmapInfo bitmap = findByGuid(logicContext, guid);
-      if(bitmap == null){
+      // 检查参数
+      if(bitmapImage == null){
          throw new FFatalError("Bitmap is not exists.");
       }
-      //............................................................
-      // 新建图像
-      FGcResBitmapImageInfo bitmapImage = _bitmapImageConsole.doPrepare(logicContext);
-      bitmapImage.setBitmapId(bitmap.ouid());
-      _bitmapImageConsole.doInsert(logicContext, bitmapImage);
+      if(stream == null){
+         throw new FFatalError("Stream is not exists.");
+      }
       //............................................................
       // 存储数据
       String imageGuid = bitmapImage.guid();

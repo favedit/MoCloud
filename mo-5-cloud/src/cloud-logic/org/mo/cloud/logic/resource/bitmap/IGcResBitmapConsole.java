@@ -19,4 +19,14 @@ public interface IGcResBitmapConsole
    //============================================================
    FGcResBitmapInfo findByResourceId(ILogicContext logicContext,
                                      long resourceId);
+
+   //============================================================
+   // <T>根据资源唯一编号查找位图信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceGuid 资源唯一编号
+   // @return 位图信息
+   //============================================================
+   FGcResBitmapInfo findByResourceGuid(ILogicContext logicContext,
+                                       String resourceGuid);
 }

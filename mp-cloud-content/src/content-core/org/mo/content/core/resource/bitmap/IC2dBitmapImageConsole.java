@@ -1,8 +1,6 @@
 package org.mo.content.core.resource.bitmap;
 
 import org.mo.cloud.logic.resource.bitmap.IGcResBitmapImageConsole;
-import org.mo.com.lang.EResult;
-import org.mo.com.xml.FXmlNode;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -13,18 +11,22 @@ public interface IC2dBitmapImageConsole
          IGcResBitmapImageConsole
 {
    //============================================================
-   // <T>获取数据处理。</T>
+   // <T>生成位图预览数据。</T>
    //
    // @param context 逻辑环境
-   // @param xoutput 输出内容
-   // @param serach 搜索内容
-   // @param pageSize 页面大小
-   // @param page 页面编号
-   // @return 处理结果
+   // @param guid 唯一编号
+   // @return 数据
    //============================================================
-   EResult fetch(ILogicContext context,
-                 FXmlNode xoutput,
-                 String serach,
-                 int pageSize,
-                 int page);
+   byte[] makeViewData(ILogicContext context,
+                       String guid);
+
+   //============================================================
+   // <T>生成位图预览数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   byte[] makePreviewData(ILogicContext context,
+                          String guid);
 }

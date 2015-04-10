@@ -3,6 +3,7 @@ package org.mo.cloud.logic.resource.bitmap;
 import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
@@ -44,6 +45,25 @@ public class FGcResBitmapConsole
                                             long resourceId){
       String whereSql = FDataResourceBitmapLogic.RESOURCE_ID + "=" + resourceId;
       FGcResBitmapInfo bitmap = search(logicContext, whereSql);
+      return bitmap;
+   }
+
+   //============================================================
+   // <T>根据资源唯一编号查找位图信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceGuid 资源唯一编号
+   // @return 位图信息
+   //============================================================
+   @Override
+   public FGcResBitmapInfo findByResourceGuid(ILogicContext logicContext,
+                                              String resourceGuid){
+      FGcResBitmapInfo bitmap = null;
+      FGcResourceInfo resource = _resourceConsole.findByGuid(logicContext, resourceGuid);
+      if(resource != null){
+         long resourceId = resource.ouid();
+         bitmap = findByResourceId(logicContext, resourceId);
+      }
       return bitmap;
    }
 

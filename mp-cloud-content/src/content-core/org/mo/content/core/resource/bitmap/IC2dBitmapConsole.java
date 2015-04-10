@@ -1,5 +1,6 @@
 package org.mo.content.core.resource.bitmap;
 
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapImageInfo;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource.bitmap.IGcResBitmapConsole;
 import org.mo.com.io.FByteStream;
@@ -37,11 +38,11 @@ public interface IC2dBitmapConsole
    // <T>导入位图信息。</T>
    //
    // @param logicContext 逻辑环境
-   // @param guid 唯一编号
+   // @param bitmapImage 位图图片
    // @param stream 数据流
    // @return 处理结果
    //============================================================
    EResult importBitmap(ILogicContext logicContext,
-                        String guid,
+                        FGcResBitmapImageInfo bitmapImage,
                         FByteStream stream);
 }

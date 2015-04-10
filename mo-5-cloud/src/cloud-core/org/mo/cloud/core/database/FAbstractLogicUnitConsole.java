@@ -48,7 +48,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    }
 
    //============================================================
-   // <T>根据编号获得一个数据单元。</T>
+   // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param objectId 对象编号
@@ -61,7 +61,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    }
 
    //============================================================
-   // <T>根据编号获得一个数据单元。</T>
+   // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param clazz 类对象
@@ -79,7 +79,43 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    }
 
    //============================================================
-   // <T>根据唯一码获得一个数据单元。</T>
+   // <T>根据编号获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param objectId 对象编号
+   // @return 数据单元
+   //============================================================
+   @Override
+   public U get(ILogicContext logicContext,
+                long objectId){
+      U unit = find(logicContext, objectId);
+      if(unit == null){
+         throw new FFatalError("Record is not exists. (id={1})", objectId);
+      }
+      return unit;
+   }
+
+   //============================================================
+   // <T>根据编号获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param clazz 类对象
+   // @param objectId 对象编号
+   // @return 数据单元
+   //============================================================
+   @Override
+   public U get(ILogicContext logicContext,
+                Class<U> clazz,
+                long objectId){
+      U unit = find(logicContext, objectId);
+      if(unit == null){
+         throw new FFatalError("Record is not exists. (id={1})", objectId);
+      }
+      return unit;
+   }
+
+   //============================================================
+   // <T>根据唯一码查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param uniqueCode 唯一码
@@ -92,7 +128,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    }
 
    //============================================================
-   // <T>根据编号获得一个数据单元。</T>
+   // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param clazz 类对象
@@ -109,6 +145,42 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
       // 查询内容
       FLogicTable logic = findLogic(logicContext);
       U unit = logic.search(classUnit, whereSql);
+      return unit;
+   }
+
+   //============================================================
+   // <T>根据唯一码获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param uniqueCode 唯一码
+   // @return 数据单元
+   //============================================================
+   @Override
+   public U getByGuid(ILogicContext logicContext,
+                      String uniqueCode){
+      U unit = findByGuid(logicContext, uniqueCode);
+      if(unit == null){
+         throw new FFatalError("Record is not exists. (guid={1})", uniqueCode);
+      }
+      return unit;
+   }
+
+   //============================================================
+   // <T>根据编号获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param clazz 类对象
+   // @param uniqueCode 唯一码
+   // @return 数据单元
+   //============================================================
+   @Override
+   public U getByGuid(ILogicContext logicContext,
+                      Class<U> clazz,
+                      String uniqueCode){
+      U unit = findByGuid(logicContext, clazz, uniqueCode);
+      if(unit == null){
+         throw new FFatalError("Record is not exists. (guid={1})", uniqueCode);
+      }
       return unit;
    }
 

@@ -15,15 +15,27 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：图片数据处理                                           -->
+   <!-- 设计：位图数据处理                                           -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content.picture'
-         face  = 'org.mo.content.face.resource3d.texture.IPictureServlet'/>
+         name  = 'cloud.content2d.bitmap'
+         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.texture.IPictureServlet'
-         class = 'org.mo.content.face.resource3d.texture.FPictureServlet'
+         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapServlet'
+         class = 'org.mo.content.face.resource2d.bitmap.FBitmapServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 设计：位图图像数据处理                                       -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.content2d.bitmap.image'
+         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapImageServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapImageServlet'
+         class = 'org.mo.content.face.resource2d.bitmap.FBitmapImageServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->

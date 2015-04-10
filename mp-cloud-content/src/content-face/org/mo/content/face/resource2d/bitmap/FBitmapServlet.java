@@ -1,8 +1,9 @@
-package org.mo.content.face.resource3d.texture;
+package org.mo.content.face.resource2d.bitmap;
 
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource.FGcResourceCatalogInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapImageInfo;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource3d.mesh.IGcRs3MeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
@@ -16,6 +17,7 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource.bitmap.IC2dBitmapConsole;
+import org.mo.content.core.resource.bitmap.IC2dBitmapImageConsole;
 import org.mo.content.core.resource3d.mesh.IC3dMeshConsole;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.core.aop.face.ALink;
@@ -27,13 +29,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>纹理数据。</T>
 //============================================================
-public class FPictureServlet
+public class FBitmapServlet
       extends FObject
       implements
-         IPictureServlet
+         IBitmapServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FPictureServlet.class);
+   private static ILogger _logger = RLogger.find(FBitmapServlet.class);
 
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;
@@ -53,9 +55,13 @@ public class FPictureServlet
    @ALink
    protected IGcRs3MeshConsole _dataMeshConsole;
 
-   // 资源网格接口
+   // 资源位图接口
    @ALink
    protected IC2dBitmapConsole _bitmapConsole;
+
+   // 资源位图图像接口
+   @ALink
+   protected IC2dBitmapImageConsole _bitmapImageConsole;
 
    // 资源网格接口
    @ALink
@@ -125,8 +131,16 @@ public class FPictureServlet
          bitmap.setCode(code);
          bitmap.setLabel(label);
          _bitmapConsole.createBitmap(logicContext, bitmap);
-         // 导入模型
-         _bitmapConsole.importBitmap(logicContext, bitmap.guid(), file);
+         // 新建图像
+         FGcResBitmapImageInfo bitmapImage = _bitmapImageConsole.doPrepare(logicContext);
+         bitmapImage.setUserId(userId);
+         bitmapImage.setProjectId(projectId);
+         bitmapImage.setBitmapId(bitmap.ouid());
+         bitmapImage.setCode("default");
+         bitmapImage.setLabel("默认");
+         _bitmapImageConsole.doInsert(logicContext, bitmapImage);
+         // 上传图像数据
+         _bitmapConsole.importBitmap(logicContext, bitmapImage, file);
       }catch(Exception e){
          throw new FFatalError(e);
       }finally{

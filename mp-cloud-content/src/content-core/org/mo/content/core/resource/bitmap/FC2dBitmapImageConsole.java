@@ -1,13 +1,13 @@
 package org.mo.content.core.resource.bitmap;
 
-import com.cyou.gccloud.data.data.FDataResource3dTextureLogic;
-import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
+import org.mo.cloud.core.storage.EGcStorageCatalog;
+import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapImageConsole;
-import org.mo.com.lang.EResult;
-import org.mo.com.lang.RString;
-import org.mo.com.xml.FXmlNode;
-import org.mo.data.logic.FLogicDataset;
+import org.mo.com.lang.FFatalError;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eng.image.FImage;
 
 //============================================================
 // <T>内容纹理控制台。</T>
@@ -17,42 +17,75 @@ public class FC2dBitmapImageConsole
       implements
          IC2dBitmapImageConsole
 {
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _storageConsole;
+
    //============================================================
-   // <T>获取数据处理。</T>
+   // <T>生成位图数据。</T>
    //
    // @param context 逻辑环境
-   // @param xoutput 输出内容
-   // @param serach 搜索内容
-   // @param pageSize 页面大小
-   // @param page 页面编号
-   // @return 处理结果
+   // @param guid 唯一编号
+   // @return 数据
    //============================================================
    @Override
-   public EResult fetch(ILogicContext context,
-                        FXmlNode xoutput,
-                        String serach,
-                        int pageSize,
-                        int page){
-      // 生成查询脚本
-      String whereSql = null;
-      if(!RString.isEmpty(serach)){
-         whereSql = FDataResource3dTextureLogic.FULL_CODE + " LIKE '%" + serach + "%'";
+   public byte[] makeViewData(ILogicContext logicContext,
+                              String guid){
+      // 获得数据
+      SGcStorage storage = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, guid);
+      return storage.data();
+   }
+
+   //============================================================
+   // <T>生成位图数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   public byte[] makePreview(ILogicContext context,
+                             String guid){
+      // 获得数据
+      SGcStorage storage = _storageConsole.find(EGcStorageCatalog.ResourceBitmapImage, guid);
+      byte[] imageData = storage.data();
+      // 生成预览图
+      byte[] data = null;
+      synchronized(FImage.class){
+         try(FImage image = new FImage(imageData)){
+            image.resizeScale(200, 150, true);
+            data = image.toBytes("jpg");
+         }catch(Exception e){
+            throw new FFatalError(e);
+         }
       }
-      // 查询数据
-      FDataResource3dTextureLogic logic = context.findLogic(FDataResource3dTextureLogic.class);
-      FLogicDataset<FDataResource3dTextureUnit> dataset = logic.fetch(whereSql, pageSize, page);
-      xoutput.set("total", dataset.total());
-      xoutput.set("count", dataset.count());
-      xoutput.set("page_size", dataset.pageSize());
-      xoutput.set("page_count", dataset.pageCount());
-      xoutput.set("page", dataset.page());
-      for(FDataResource3dTextureUnit unit : dataset){
-         FXmlNode xitem = xoutput.createNode("Item");
-         xitem.set("guid", unit.guid());
-         xitem.set("type", "texture");
-         xitem.set("code", unit.fullCode());
-         xitem.set("label", unit.label());
+      // 返回数据
+      return data;
+   }
+
+   //============================================================
+   // <T>生成位图数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   @Override
+   public byte[] makePreviewData(ILogicContext logicContext,
+                                 String guid){
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.Cache2dBitmapImagePreview, guid);
+      if(findStorage != null){
+         return findStorage.data();
       }
-      return EResult.Success;
+      //............................................................
+      // 生成模型
+      byte[] data = makePreview(logicContext, guid);
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.Cache2dBitmapImagePreview, guid, "bin");
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
    }
 }

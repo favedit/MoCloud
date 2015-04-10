@@ -11,7 +11,7 @@ import org.mo.data.logic.ILogicContext;
 public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
 {
    //============================================================
-   // <T>根据编号获得一个数据单元。</T>
+   // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param objectId 对象编号
@@ -21,7 +21,7 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
           long objectId);
 
    //============================================================
-   // <T>根据编号获得一个数据单元。</T>
+   // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param clazz 类对象
@@ -33,7 +33,29 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
           long objectId);
 
    //============================================================
-   // <T>根据唯一码获得一个数据单元。</T>
+   // <T>根据编号获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param objectId 对象编号
+   // @return 数据单元
+   //============================================================
+   U get(ILogicContext logicContext,
+         long objectId);
+
+   //============================================================
+   // <T>根据编号获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param clazz 类对象
+   // @param objectId 对象编号
+   // @return 数据单元
+   //============================================================
+   U get(ILogicContext logicContext,
+         Class<U> clazz,
+         long objectId);
+
+   //============================================================
+   // <T>根据唯一码查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param uniqueCode 唯一码
@@ -43,7 +65,7 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
                 String uniqueCode);
 
    //============================================================
-   // <T>根据编号获得一个数据单元。</T>
+   // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境
    // @param clazz 类对象
@@ -53,6 +75,28 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    U findByGuid(ILogicContext logicContext,
                 Class<U> clazz,
                 String uniqueCode);
+
+   //============================================================
+   // <T>根据唯一码获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param uniqueCode 唯一码
+   // @return 数据单元
+   //============================================================
+   U getByGuid(ILogicContext logicContext,
+               String uniqueCode);
+
+   //============================================================
+   // <T>根据编号获得一个数据单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param clazz 类对象
+   // @param uniqueCode 唯一码
+   // @return 数据单元
+   //============================================================
+   U getByGuid(ILogicContext logicContext,
+               Class<U> clazz,
+               String uniqueCode);
 
    //============================================================
    // <T>根据条件查找一个数据单元。</T>
