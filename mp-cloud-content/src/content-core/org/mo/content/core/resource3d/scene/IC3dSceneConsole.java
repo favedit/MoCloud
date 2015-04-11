@@ -1,9 +1,8 @@
 package org.mo.content.core.resource3d.scene;
 
-import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
-import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.engine3d.core.scene.IRs3SceneConsole;
 import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.data.logic.ILogicContext;
 
@@ -12,9 +11,8 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 public interface IC3dSceneConsole
       extends
-         IAbstractLogicUnitConsole<FDataResource3dSceneUnit>
+         IRs3SceneConsole
 {
-
    //============================================================
    // <T>获取数据处理。</T>
    //

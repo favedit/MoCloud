@@ -127,11 +127,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.content.scene'
-         face  = 'org.mo.content.face.resource3d.scene.ISceneService'/>
+         face  = 'org.mo.content.service.resource3d.ISceneService'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.scene.ISceneService'
-         class = 'org.mo.content.face.resource3d.scene.FSceneService'
+         face  = 'org.mo.content.service.resource3d.ISceneService'
+         class = 'org.mo.content.service.resource3d.FSceneService'
          scope = 'global'/>
 
 </Config>

@@ -7,6 +7,6 @@ import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 //============================================================
 public interface IGcRs3StreamConsole
       extends
-         IAbstractLogicUnitConsole<FGcRs3StreamUnit>
+         IAbstractLogicUnitConsole<FGcRs3StreamInfo>
 {
 }

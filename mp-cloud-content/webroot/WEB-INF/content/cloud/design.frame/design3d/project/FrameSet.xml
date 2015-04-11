@@ -2,38 +2,66 @@
 <Content name="design3d.solution.Workspace">
    <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
       <FramePage name='catalogFrame' label='目录区' size='300,0'>
-         <PageControl name='catalogPageControl' icon='design.panel.icon' label='信息页面'>
-            <PageSheet name='material1Frame' icon='design.panel.icon' label='场景列表'>
-               <FrameSet name='catalogFrameSet' direction_cd='V' label='目录布局'>
-                  <FramePage name='catalogToolbarFrame' label='目录工具栏' size='0,24'/>
-                  <FramePage name='catalogContentFrame' label='目录内容区'/>
+         <PageControl name='catalogPageControl' icon='design.panel.icon' label='目录页面'>
+            <PageSheet name='sceneListSheet' icon='design.panel.icon' label='场景列表'>
+               <FrameSet name='sceneListFrameSet' direction_cd='V' label='场景列表布局'>
+                  <FramePage name='sceneListToolbarFrame' label='场景列表工具栏' size='0,24'/>
+                  <FramePage name='sceneListContentFrame' label='场景列表内容区'/>
                </FrameSet>
             </PageSheet>
-            <PageSheet name='material2Frame' icon='design.panel.icon' label='场景详细'/>
+            <PageSheet name='sceneCatalogFrame' icon='design.panel.icon' label='场景目录'>
+               <FrameSet name='sceneCatalogFrameSet' direction_cd='V' label='场景目录布局'>
+                  <FramePage name='sceneCatalogToolbarFrame' label='场景目录工具栏' size='0,24'/>
+                  <FramePage name='sceneCatalogContentFrame' label='场景目录内容区'/>
+               </FrameSet>
+            </PageSheet>
+            <PageSheet name='projectSpriteFrame' icon='design.panel.icon' label='精灵列表'/>
          </PageControl>
       </FramePage>
       <FrameSpliter name='catalogSpliter'/>
       <FramePage name='canvasFrame' label='画板区'>
          <PageControl name='canvasPageControl' icon='design.panel.icon' label='信息页面'>
-            <PageSheet name='material1Frame' icon='design.panel.icon' label='画板区域'>
-               <FrameSet name='canvasFrameSet' direction_cd='V' label='画板布局'>
-                  <FramePage name='canvasToolbarFrame' label='画板工具栏' size='0,24'/>
-                  <FramePage name='canvasContentFrame' label='画板内容区'/>
+            <PageSheet name='canvasSpaceFrame' icon='design.panel.icon' label='工作区域'>
+               <FrameSet name='canvasSpaceFrameSet' direction_cd='V' label='画板空间布局'>
+                  <FramePage name='canvasSpaceToolbarFrame' label='画板空间工具栏' size='0,24'/>
+                  <FramePage name='canvasSpaceContentFrame' label='画板空间内容区'/>
                </FrameSet>
             </PageSheet>
-            <PageSheet name='material2Frame' icon='design.panel.icon' label='运行效果'/>
+            <PageSheet name='canvasPreviewFrame' icon='design.panel.icon' label='预览效果'>
+               <FrameSet name='canvasPreviewFrameSet' direction_cd='V' label='画板预览布局'>
+                  <FramePage name='canvasPreviewToolbarFrame' label='画板预览工具栏' size='0,24'/>
+                  <FramePage name='canvasPreviewContentFrame' label='画板预览内容区'/>
+               </FrameSet>
+            </PageSheet>
          </PageControl>
       </FramePage>
       <FrameSpliter name='propertySpliter'/>
       <FramePage name='propertyFrame' label='属性区' size='320,0' scroll_cd='VA'>
          <PageControl name='propertyPageControl' icon='design.panel.icon' label='信息页面'>
-            <PageSheet name='material1Frame' icon='design.panel.icon' label='属性配置'>
-               <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
-                  <FramePage name='propertyToolbarFrame' label='属性工具栏' size='0,24'/>
-                  <FramePage name='propertyContentFrame' label='属性内容区'/>
+            <PageSheet name='propertyAttributeFrame' icon='design.panel.icon' label='属性'>
+               <FrameSet name='propertyAttributeFrameSet' direction_cd='V' label='属性布局'>
+                  <FramePage name='propertyAttributeToolbarFrame' label='属性工具栏' size='0,24'/>
+                  <FramePage name='propertyAttributeContentFrame' label='属性内容区'/>
                </FrameSet>
             </PageSheet>
-            <PageSheet name='material2Frame' icon='design.panel.icon' label='事件配置'/>
+            <PageSheet name='propertyEventFrame' icon='design.panel.icon' label='事件'>
+               <FrameSet name='propertyEventFrameSet' direction_cd='V' label='属性事件区域'>
+                  <FramePage name='propertyEventToolbarFrame' label='属性事件工具栏' size='0,24'/>
+                  <FramePage name='propertyEventContentFrame' label='属性事件内容区'/>
+               </FrameSet>
+            </PageSheet>
+            <PageSheet name='propertyActionEventFrame' icon='design.panel.icon' label='动画'>
+               <FrameSet name='propertyActionFrameSet' direction_cd='V' label='属性动画区域'>
+                  <FramePage name='propertyActionToolbarFrame' label='属性动画工具栏' size='0,24'/>
+                  <FramePage name='propertyActionContentFrame' label='属性动画内容区'/>
+               </FrameSet>
+            </PageSheet>
+            <PageSheet name='propertyScriptFrame' icon='design.panel.icon' label='脚本'>
+               <FrameSet name='propertyScriptFrameSet' direction_cd='V' label='属性脚本区域'>
+                  <FramePage name='propertyScriptToolbarFrame' label='属性脚本工具栏' size='0,24'/>
+                  <FramePage name='propertyScriptContentFrame' label='属性脚本内容区'/>
+               </FrameSet>
+            </PageSheet>
          </PageControl>
       </FramePage>
    </FrameSet>

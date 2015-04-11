@@ -8,9 +8,8 @@ import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
 import java.io.File;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.com.console.FConsole;
+import org.mo.cloud.logic.resource3d.scene.FGcRs3SceneConsole;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
@@ -38,14 +37,10 @@ import org.mo.mime.compress.FCompressStream;
 // <T>资源场景控制台。</T>
 //============================================================
 public class FRs3SceneConsole
-      extends FConsole
+      extends FGcRs3SceneConsole
       implements
          IRs3SceneConsole
 {
-   // 存储控制台
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
    // 资源纹理控制台
    @ALink
    protected IRs3TextureConsole _textureConsole;

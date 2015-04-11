@@ -5,7 +5,7 @@ import com.cyou.gccloud.data.data.FDataResource3dStreamUnit;
 //============================================================
 // <T>3D资源数据流。</T>
 //============================================================
-public class FGcRs3StreamUnit
+public class FGcRs3StreamInfo
       extends FDataResource3dStreamUnit
 {
 }

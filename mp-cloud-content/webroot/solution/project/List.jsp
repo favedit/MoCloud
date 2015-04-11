@@ -8,27 +8,9 @@
 <LINK rel="stylesheet" href='../script/acs/control.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='../script/acs/design.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='../script/acs/lang_cn.css' type="text/css" media="all"/>
-
 <SCRIPT language='javascript' src='../script/ajs/lzma.js'></SCRIPT>
 <SCRIPT language='javascript' src='../script/ajs/mo.js'></SCRIPT>
 <SCRIPT language='javascript' src='../script/ajs/context_cn.js'></SCRIPT>
-
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionProjectProperty.js'></SCRIPT>
-
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionCatalogContent.js'></SCRIPT>
-
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionListToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionListItem.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionListContent.js'></SCRIPT>
-
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPropertyToolBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionPropertyContent.js'></SCRIPT>
-
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionMenuBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionTabBar.js'></SCRIPT>
-<SCRIPT language='javascript' src='../script/6.2.1-design-solution/FDsSolutionWorkspace.js'></SCRIPT>
-
 <SCRIPT>
 function _load(){
    RRuntime.setProcessCd(EProcess.Debug);

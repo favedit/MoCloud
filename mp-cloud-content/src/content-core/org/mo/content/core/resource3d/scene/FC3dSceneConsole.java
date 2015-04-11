@@ -5,18 +5,15 @@ import com.cyou.gccloud.data.data.FDataResource3dSceneThemeLogic;
 import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
 import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
-import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
+import org.mo.content.engine3d.core.scene.FRs3SceneConsole;
 import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.content.resource3d.scene.FRs3SceneDisplay;
-import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -24,23 +21,14 @@ import org.mo.data.logic.ILogicContext;
 // <T>内容场景控制台。</T>
 //============================================================
 public class FC3dSceneConsole
-      extends FAbstractLogicUnitConsole<FDataResource3dSceneLogic, FDataResource3dSceneUnit>
+      extends FRs3SceneConsole
       implements
          IC3dSceneConsole
 {
-   // 存储控制台
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
-   // 模板控制台
-   @ALink
-   protected IRs3TemplateConsole _templateConsole;
-
    //============================================================
    // <T>构造场景控制台。</T>
    //============================================================
    public FC3dSceneConsole(){
-      super(FDataResource3dSceneLogic.class, FDataResource3dSceneUnit.class);
    }
 
    //============================================================
@@ -50,6 +38,7 @@ public class FC3dSceneConsole
    // @param code 代码
    // @return 模板单元
    //============================================================
+   @Override
    public FDataResource3dSceneUnit findByCode(ILogicContext logicContext,
                                               String code){
       String sql = FDataResource3dSceneLogic.CODE + "='" + code + "'";

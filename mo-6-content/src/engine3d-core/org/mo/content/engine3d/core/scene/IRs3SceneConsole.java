@@ -2,6 +2,7 @@ package org.mo.content.engine3d.core.scene;
 
 import com.cyou.gccloud.data.data.FDataResource3dSceneThemeUnit;
 import com.cyou.gccloud.data.data.FDataResource3dSceneUnit;
+import org.mo.cloud.logic.resource3d.scene.IGcRs3SceneConsole;
 import org.mo.com.lang.EResult;
 import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.data.logic.ILogicContext;
@@ -10,6 +11,8 @@ import org.mo.data.logic.ILogicContext;
 // <T>资源场景控制台接口。</T>
 //============================================================
 public interface IRs3SceneConsole
+      extends
+         IGcRs3SceneConsole
 {
    //============================================================
    // <T>根据代码查找资源场景单元。</T>

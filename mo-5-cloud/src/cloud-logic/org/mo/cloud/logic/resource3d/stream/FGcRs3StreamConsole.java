@@ -12,7 +12,7 @@ import org.mo.data.logic.ILogicContext;
 // <T>3D资源数据流控制台。</T>
 //============================================================
 public class FGcRs3StreamConsole
-      extends FAbstractLogicUnitConsole<FDataResource3dStreamLogic, FGcRs3StreamUnit>
+      extends FAbstractLogicUnitConsole<FDataResource3dStreamLogic, FGcRs3StreamInfo>
       implements
          IGcRs3StreamConsole
 {
@@ -24,7 +24,7 @@ public class FGcRs3StreamConsole
    // <T>构造3D资源数据流控制台。</T>
    //============================================================
    public FGcRs3StreamConsole(){
-      super(FDataResource3dStreamLogic.class, FGcRs3StreamUnit.class);
+      super(FDataResource3dStreamLogic.class, FGcRs3StreamInfo.class);
    }
 
    //============================================================
@@ -36,7 +36,7 @@ public class FGcRs3StreamConsole
    //============================================================
    @Override
    public EResult onDeleteBefore(ILogicContext logicContext,
-                                 FGcRs3StreamUnit unit){
+                                 FGcRs3StreamInfo unit){
       // 删除关联数据
       String guid = unit.guid();
       _storageConsole.delete(EGcStorageCatalog.Resource3dStream, guid);
