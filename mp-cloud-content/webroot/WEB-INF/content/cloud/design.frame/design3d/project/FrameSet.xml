@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.solution.Workspace">
+   <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
+      <FramePage name='catalogFrame' label='目录区' size='300,0'>
+         <PageControl name='catalogPageControl' icon='design.panel.icon' label='信息页面'>
+            <PageSheet name='material1Frame' icon='design.panel.icon' label='场景列表'>
+               <FrameSet name='catalogFrameSet' direction_cd='V' label='目录布局'>
+                  <FramePage name='catalogToolbarFrame' label='目录工具栏' size='0,24'/>
+                  <FramePage name='catalogContentFrame' label='目录内容区'/>
+               </FrameSet>
+            </PageSheet>
+            <PageSheet name='material2Frame' icon='design.panel.icon' label='场景详细'/>
+         </PageControl>
+      </FramePage>
+      <FrameSpliter name='catalogSpliter'/>
+      <FramePage name='canvasFrame' label='画板区'>
+         <PageControl name='canvasPageControl' icon='design.panel.icon' label='信息页面'>
+            <PageSheet name='material1Frame' icon='design.panel.icon' label='画板区域'>
+               <FrameSet name='canvasFrameSet' direction_cd='V' label='画板布局'>
+                  <FramePage name='canvasToolbarFrame' label='画板工具栏' size='0,24'/>
+                  <FramePage name='canvasContentFrame' label='画板内容区'/>
+               </FrameSet>
+            </PageSheet>
+            <PageSheet name='material2Frame' icon='design.panel.icon' label='运行效果'/>
+         </PageControl>
+      </FramePage>
+      <FrameSpliter name='propertySpliter'/>
+      <FramePage name='propertyFrame' label='属性区' size='320,0' scroll_cd='VA'>
+         <PageControl name='propertyPageControl' icon='design.panel.icon' label='信息页面'>
+            <PageSheet name='material1Frame' icon='design.panel.icon' label='属性配置'>
+               <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
+                  <FramePage name='propertyToolbarFrame' label='属性工具栏' size='0,24'/>
+                  <FramePage name='propertyContentFrame' label='属性内容区'/>
+               </FrameSet>
+            </PageSheet>
+            <PageSheet name='material2Frame' icon='design.panel.icon' label='事件配置'/>
+         </PageControl>
+      </FramePage>
+   </FrameSet>
+</Content>
