@@ -146,7 +146,7 @@ public class FRs3Mesh
          vertexTangentStream.setData(tangentStream.toArray());
          _streams.push(vertexTangentStream);
       }
-
+      //顶点索引流
       FRs3Stream indexStream = new FRs3Stream();
       indexStream.setCode("index32");
       indexStream.setElementDataCd(EGcData.Int32);
@@ -155,9 +155,9 @@ public class FRs3Mesh
       indexStream.setDataCount(geoMesh.faces().count());
       FByteStream faceStream = new FByteStream();
       for(SGeomFace face : geoMesh.faces()){
-         faceStream.writeUint32(face.positionIndexs[0]);
-         faceStream.writeUint32(face.positionIndexs[1]);
-         faceStream.writeUint32(face.positionIndexs[2]);
+         faceStream.writeUint32(face.indexs[0]);
+         faceStream.writeUint32(face.indexs[1]);
+         faceStream.writeUint32(face.indexs[2]);
       }
       indexStream.setData(faceStream.toArray());
       _streams.push(indexStream);
