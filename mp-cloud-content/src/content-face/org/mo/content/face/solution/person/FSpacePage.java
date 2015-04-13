@@ -1,13 +1,13 @@
-package org.mo.content.face.solution;
+package org.mo.content.face.solution.person;
 
 import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.cloud.logic.solution.FGcProjectInfo;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-// <P>项目页面。</P>
+// <P>私人页面。</P>
 //============================================================
-public class FProjectPage
+public class FSpacePage
       extends FObjectId
 {
    // 用户信息
