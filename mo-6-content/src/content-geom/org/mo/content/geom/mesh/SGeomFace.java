@@ -5,6 +5,9 @@ package org.mo.content.geom.mesh;
 //============================================================
 public class SGeomFace
 {
+   // 顶点索引
+   public int[] indexs;
+
    // 位置索引
    public int[] positionIndexs;
 

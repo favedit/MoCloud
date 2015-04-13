@@ -354,6 +354,7 @@ public class FGeomMesh
          faceIndex++;
          for(int n = 0; n < 3; n++){
             // 获得索引
+            face.indexs = new int[3];
             int positionIndex = face.positionIndexs[n];
             int coordIndex = face.coordIndexs == null ? 0 : face.coordIndexs[n];
             int normalIndex = face.normalIndexs == null ? 0 : face.normalIndexs[n];
@@ -361,6 +362,7 @@ public class FGeomMesh
             int tangentIndex = face.tangentIndexs == null ? 0 : face.tangentIndexs[n];
             // 设置内容
             SGeomVertex vertex = syncVertex(positionIndex, coordIndex, normalIndex, binormalIndex, tangentIndex);
+            face.indexs[n] = vertex.adjuestId;
             // 设置顶点信息
             if(!vertex.calculate){
                //vertex.merged = _vertexList[vertexIndex].merged;
