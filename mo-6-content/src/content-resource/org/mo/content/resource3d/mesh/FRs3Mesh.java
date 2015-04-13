@@ -102,7 +102,7 @@ public class FRs3Mesh
          vertexNormalStream.setElementDataCd(EGcData.Float32);
          vertexNormalStream.setElementCount(3);
          vertexNormalStream.setDataStride(4 * 3);
-         vertexNormalStream.setDataCount(geoMesh.vertexNormals().count());
+         vertexNormalStream.setDataCount(vertexCount);
          FByteStream normalStream = new FByteStream();
          for(SGeomVertex vertex : geoMesh.vertexs()){
             normalStream.writeFloat(vertex.normal.x);
@@ -119,7 +119,7 @@ public class FRs3Mesh
          vertexBinormalStream.setElementDataCd(EGcData.Float32);
          vertexBinormalStream.setElementCount(3);
          vertexBinormalStream.setDataStride(4 * 3);
-         vertexBinormalStream.setDataCount(geoMesh.vertexNormals().count());
+         vertexBinormalStream.setDataCount(vertexCount);
          FByteStream binormalStream = new FByteStream();
          for(SGeomVertex vertex : geoMesh.vertexs()){
             binormalStream.writeFloat(vertex.binormal.x);
@@ -136,7 +136,7 @@ public class FRs3Mesh
          vertexTangentStream.setElementDataCd(EGcData.Float32);
          vertexTangentStream.setElementCount(3);
          vertexTangentStream.setDataStride(4 * 3);
-         vertexTangentStream.setDataCount(geoMesh.vertexNormals().count());
+         vertexTangentStream.setDataCount(vertexCount);
          FByteStream tangentStream = new FByteStream();
          for(SGeomVertex vertex : geoMesh.vertexs()){
             tangentStream.writeFloat(vertex.tangent.x);

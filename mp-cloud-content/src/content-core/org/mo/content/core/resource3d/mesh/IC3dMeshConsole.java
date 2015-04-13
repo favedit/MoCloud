@@ -50,4 +50,16 @@ public interface IC3dMeshConsole
    EResult doDeleteByGuid(ILogicContext logicContext,
                           long userId,
                           String guid);
+
+   //============================================================
+   // <T>删除网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param resourceId 资源编号
+   // @return 处理结果
+   //============================================================
+   EResult doDeleteByResourceId(ILogicContext logicContext,
+                                long userId,
+                                long resourceId);
 }

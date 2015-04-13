@@ -1,6 +1,9 @@
 package org.mo.com.geom;
 
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.RInteger;
+import org.mo.com.xml.FXmlNode;
 
 //============================================================
 // <T>二维整数大小。</T>
@@ -94,6 +97,56 @@ public class SIntSize2
    }
 
    //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
+      output.writeInt32(width);
+      output.writeInt32(height);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize16(IDataOutput output){
+      output.writeUint16(width);
+      output.writeUint16(height);
+   }
+
+   //============================================================
+   // <T>从输入流反序列化数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void unserialize(IDataInput input){
+      width = input.readInt32();
+      height = input.readInt32();
+   }
+
+   //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void loadConfig(FXmlNode xconfig){
+      width = xconfig.getInt("width");
+      height = xconfig.getInt("height");
+   }
+
+   //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   public void saveConfig(FXmlNode xconfig){
+      xconfig.set("width", width);
+      xconfig.set("height", height);
+   }
+
+   //============================================================
    // <T>解析字符串。</T>
    //
    // @param value 字符串
@@ -121,10 +174,11 @@ public class SIntSize2
    }
 
    //============================================================
-   // <T>获得字符串信息</T>
+   // <T>获得内容字符串。</T>
    //
-   // @return 字符串信息
+   // @return 字符串
    //============================================================
+   @Override
    public String toString(){
       return width + "," + height;
    }

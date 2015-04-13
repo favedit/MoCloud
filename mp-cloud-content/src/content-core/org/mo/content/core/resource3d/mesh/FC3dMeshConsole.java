@@ -97,4 +97,31 @@ public class FC3dMeshConsole
       doDelete(logicContext, mesh);
       return EResult.Success;
    }
+
+   //============================================================
+   // <T>删除网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param resourceId 资源编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult doDeleteByResourceId(ILogicContext logicContext,
+                                       long userId,
+                                       long resourceId){
+      FGcRs3MeshInfo mesh = findByResourceId(logicContext, resourceId);
+      // 网格存在检查
+      if(mesh == null){
+         throw new FFatalError("Mesh is not exists. (resource_id={1})", resourceId);
+      }
+      // 检查用户
+      if(mesh.userId() != userId){
+         throw new FFatalError("Mesh user is not same. (user_id={1}, mesh_user_id={2})", userId, mesh.userId());
+      }
+      // 删除关联资源对象
+      _meshConsole.doDelete(logicContext, mesh);
+      doDelete(logicContext, mesh);
+      return EResult.Success;
+   }
 }

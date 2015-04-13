@@ -196,10 +196,14 @@ public class FResourceService
          throw new FFatalError("Resource guid is empty.");
       }
       //............................................................
+      // 查找资源
+      FGcResourceInfo resource = _resourceConsole.getByGuid(logicContext, guid);
+      long resourceId = resource.ouid();
+      //............................................................
       long userId = session.userId();
       // 查询数据
       switch(typeCd){
-         case "picture":
+         case EGcResource.BitmapString:
             // 查找位图
             //dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
             break;
@@ -217,9 +221,9 @@ public class FResourceService
             // 查找材质
             //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
-         case "mesh":
+         case EGcResource.Mesh3dString:
             // 删除网格
-            _meshConsole.doDeleteByGuid(logicContext, userId, guid);
+            _meshConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
          case "model":
             // 查找网格

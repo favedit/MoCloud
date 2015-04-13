@@ -3,7 +3,6 @@ package org.mo.content.geom.mesh;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.geom.SFloatPoint2;
 import org.mo.com.geom.SFloatVector3;
-import org.mo.com.lang.FInts;
 import org.mo.com.lang.FObjects;
 import org.mo.content.geom.common.SFloatColor4;
 
@@ -42,23 +41,8 @@ public class SGeomVertex
    // 骨头权重
    public float[] weights;
 
-   // 面编号集合
-   public FInts faceIds;
-
    // 面集合
    public FObjects<SGeomFace> faces;
-
-   //============================================================
-   // <T>增加一个面索引。</T>
-   //
-   // @param faceId 面索引
-   //============================================================
-   public void pushFaceId(int faceId){
-      if(faceIds == null){
-         faceIds = new FInts();
-      }
-      faceIds.append(faceId);
-   }
 
    //============================================================
    // <T>增加一个面。</T>

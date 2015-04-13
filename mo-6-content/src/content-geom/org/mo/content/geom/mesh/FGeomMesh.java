@@ -351,10 +351,10 @@ public class FGeomMesh
       // 根据面信息调整节点信息
       int faceIndex = -1;
       for(SGeomFace face : _faces){
-         faceIndex++;
+         face.index = ++faceIndex;
+         face.indexs = new int[3];
          for(int n = 0; n < 3; n++){
             // 获得索引
-            face.indexs = new int[3];
             int positionIndex = face.positionIndexs[n];
             int coordIndex = face.coordIndexs == null ? 0 : face.coordIndexs[n];
             int normalIndex = face.normalIndexs == null ? 0 : face.normalIndexs[n];
@@ -367,7 +367,6 @@ public class FGeomMesh
             if(!vertex.calculate){
                //vertex.merged = _vertexList[vertexIndex].merged;
                vertex.position = _vertexPositions.get(positionIndex);
-               vertex.pushFaceId(faceIndex);
                vertex.pushFace(face);
                if(_optionVertexColor){
                   int colorIndex = face.colorIndexs[n];
