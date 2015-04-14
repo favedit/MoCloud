@@ -8,10 +8,10 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源显示集合。</T>
 //============================================================
 public class FRs3DisplayContainer
-      extends FRs3Spatial
+      extends FRs3Display
 {
    // 显示集合
-   protected FObjects<FRs3Spatial> _displays = new FObjects<FRs3Spatial>(FRs3Spatial.class);
+   protected FObjects<FRs3Display> _displays = new FObjects<FRs3Display>(FRs3Display.class);
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -20,16 +20,25 @@ public class FRs3DisplayContainer
    }
 
    //============================================================
+   // <T>判断是否含有显示对象。</T>
+   //
+   // @return 是否含有显示对象
+   //============================================================
+   public boolean hasDisplay(){
+      return (_displays != null) ? !_displays.isEmpty() : false;
+   }
+
+   //============================================================
    // <T>获得显示集合。</T>
    //
    // @return 显示集合
    //============================================================
-   public FRs3Spatial createChild(FXmlNode xconfig){
-      String name = xconfig.name();
-      switch(name){
+   public FRs3Display createChild(FXmlNode xconfig){
+      String typeName = xconfig.get("type");
+      switch(typeName){
+         case "Spatial":
+            return new FRs3Spatial();
          case "Sprite":
-            return new FRs3Sprite();
-         case "Display":
             return new FRs3Sprite();
       }
       throw new FFatalError("Invalid type.");
@@ -40,7 +49,7 @@ public class FRs3DisplayContainer
    //
    // @return 显示集合
    //============================================================
-   public FObjects<FRs3Spatial> displays(){
+   public FObjects<FRs3Display> displays(){
       return _displays;
    }
 
@@ -57,7 +66,7 @@ public class FRs3DisplayContainer
       if(xdisplays != null){
          for(FXmlNode xdisplay : xdisplays){
             if(xdisplay.isName("Display")){
-               FRs3Spatial display = createChild(xdisplay);
+               FRs3Display display = createChild(xdisplay);
                display.loadConfig(xdisplay);
                _displays.push(display);
             }else{
@@ -78,7 +87,7 @@ public class FRs3DisplayContainer
       // 存储显示集合
       if(!_displays.isEmpty()){
          FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
-         for(FRs3Spatial display : _displays){
+         for(FRs3Display display : _displays){
             display.saveConfig(xdisplays.createNode("Display"));
          }
       }
@@ -89,15 +98,14 @@ public class FRs3DisplayContainer
    //
    // @param xconfig 配置信息
    //============================================================
-   @Override
    public void importConfig(FXmlNode xconfig){
-      super.importConfig(xconfig);
+      //super.importConfig(xconfig);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("DisplayCollection")){
             for(FXmlNode xchild : xnode){
-               FRs3Spatial display = createChild(xchild);
-               display.importConfig(xchild);
+               FRs3Display display = createChild(xchild);
+               //display.importConfig(xchild);
                _displays.push(display);
             }
          }

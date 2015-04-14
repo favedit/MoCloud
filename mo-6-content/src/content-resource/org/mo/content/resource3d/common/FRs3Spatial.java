@@ -2,108 +2,33 @@ package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.geom.common.SFloatMatrix3d;
 
 //============================================================
 // <T>资源显示对象。</T>
 //============================================================
 public class FRs3Spatial
-      extends FRs3Object
+      extends FRs3DisplayContainer
 {
    // 类型名称
-   protected String _typeName = "Display";
+   protected String _typeName = "Spatial";
 
-   // 唯一编号
-   protected String _guid;
-
-   // 模型代码
-   protected String _modelCode;
-
-   // 模型唯一编号
-   protected String _modelGuid;
-
-   // 网格代码
-   protected String _meshCode;
-
-   // 网格唯一编号
-   protected String _meshGuid;
-
-   // 空间矩阵
-   protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
-
-   // 网格集合
-   protected FObjects<FRs3DisplayMaterial> _materials = new FObjects<FRs3DisplayMaterial>(FRs3DisplayMaterial.class);
+   // 材质集合
+   protected FObjects<FRs3Material> _materials;
 
    //============================================================
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3Spatial(){
-      _guid = RUuid.makeUniqueId();
    }
 
    //============================================================
-   // <T>获得模型代码。</T>
+   // <T>判断是否含有材质。</T>
    //
-   // @return 模型代码
+   // @return 是否含有
    //============================================================
-   public String modelCode(){
-      return _modelCode;
-   }
-
-   //============================================================
-   // <T>获得模型唯一编号。</T>
-   //
-   // @return 模型唯一编号
-   //============================================================
-   public String modelGuid(){
-      return _modelGuid;
-   }
-
-   //============================================================
-   // <T>设置模型唯一编号。</T>
-   //
-   // @return 模型唯一编号
-   //============================================================
-   public void setModelGuid(String modelGuid){
-      _modelGuid = modelGuid;
-   }
-
-   //============================================================
-   // <T>获得网格代码。</T>
-   //
-   // @return 网格代码
-   //============================================================
-   public String meshCode(){
-      return _meshCode;
-   }
-
-   //============================================================
-   // <T>获得网格唯一编号。</T>
-   //
-   // @return 网格唯一编号
-   //============================================================
-   public String meshGuid(){
-      return _meshGuid;
-   }
-
-   //============================================================
-   // <T>设置网格唯一编号。</T>
-   //
-   // @return 网格唯一编号
-   //============================================================
-   public void setMeshGuid(String meshGuid){
-      _meshGuid = meshGuid;
-   }
-
-   //============================================================
-   // <T>获得矩阵。</T>
-   //
-   // @return 矩阵
-   //============================================================
-   public SFloatMatrix3d matrix(){
-      return _matrix;
+   public boolean hasMaterial(){
+      return (_materials != null) ? !_materials.isEmpty() : false;
    }
 
    //============================================================
@@ -111,8 +36,20 @@ public class FRs3Spatial
    //
    // @return 材质集合
    //============================================================
-   public FObjects<FRs3DisplayMaterial> materials(){
+   public FObjects<FRs3Material> materials(){
       return _materials;
+   }
+
+   //============================================================
+   // <T>增加一个材质。</T>
+   //
+   // @param material 材质
+   //============================================================
+   public void pushMaterial(FRs3Material material){
+      if(_materials == null){
+         _materials = new FObjects<FRs3Material>(FRs3Material.class);
+      }
+      _materials.push(material);
    }
 
    //============================================================
@@ -122,16 +59,12 @@ public class FRs3Spatial
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      // 输出属性
-      output.writeString(_typeName);
-      output.writeString(_modelGuid);
-      output.writeString(_meshGuid);
-      _matrix.serialize(output);
+      super.serialize(output);
       // 输出网格集合
       int materialCount = _materials.count();
       output.writeInt16((short)materialCount);
       for(int i = 0; i < materialCount; i++){
-         FRs3DisplayMaterial material = _materials.get(i);
+         FRs3Material material = _materials.get(i);
          material.serialize(output);
       }
    }
@@ -143,18 +76,13 @@ public class FRs3Spatial
    //============================================================
    @Override
    public void loadConfig(FXmlNode xconfig){
-      // 读取属性
-      _guid = xconfig.get("guid");
-      _modelGuid = xconfig.get("model_guid");
-      _meshGuid = xconfig.get("mesh_guid");
+      super.loadConfig(xconfig);
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Matrix")){
-            _matrix.loadConfig(xnode);
-         }else if(xnode.isName("MaterialCollection")){
+         if(xnode.isName("MaterialCollection")){
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Material")){
-                  FRs3DisplayMaterial material = new FRs3DisplayMaterial();
+                  FRs3Material material = new FRs3Material();
                   material.loadConfig(xchild);
                   _materials.push(material);
                }
@@ -170,17 +98,13 @@ public class FRs3Spatial
    //============================================================
    @Override
    public void saveConfig(FXmlNode xconfig){
-      xconfig.setName(_typeName);
-      // 存储属性
-      xconfig.set("guid", _guid);
-      xconfig.set("model_guid", _modelGuid);
-      xconfig.set("mesh_guid", _meshGuid);
-      // 存储矩阵
-      _matrix.saveConfig(xconfig.createNode("Matrix"));
+      super.saveConfig(xconfig);
       // 存储材质集合
-      FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
-      for(FRs3DisplayMaterial material : _materials){
-         material.saveConfig(xmaterials.createNode("Material"));
+      if(hasMaterial()){
+         FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
+         for(FRs3Material material : _materials){
+            material.saveConfig(xmaterials.createNode("Material"));
+         }
       }
    }
 
@@ -189,18 +113,15 @@ public class FRs3Spatial
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void importConfig(FXmlNode xconfig){
-      // 读取属性
-      _modelCode = xconfig.get("model_code");
-      _meshCode = xconfig.get("mesh_code");
+      super.importConfig(xconfig);
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Matrix")){
-            _matrix.loadConfig(xnode);
-         }else if(xnode.isName("MaterialCollection")){
+         if(xnode.isName("MaterialCollection")){
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Material")){
-                  FRs3DisplayMaterial material = new FRs3DisplayMaterial();
+                  FRs3Material material = new FRs3Material();
                   material.importConfig(xchild);
                   _materials.push(material);
                }

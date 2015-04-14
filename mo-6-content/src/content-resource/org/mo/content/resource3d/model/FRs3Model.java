@@ -1,7 +1,5 @@
 package org.mo.content.resource3d.model;
 
-import org.mo.content.resource3d.mesh.FRs3MeshDisplay;
-
 import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -12,6 +10,7 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Skeleton;
 import org.mo.content.resource3d.common.FRs3Space;
+import org.mo.content.resource3d.common.FRs3Spatial;
 
 //============================================================
 // <T>资源模型。</T>
@@ -29,7 +28,7 @@ public class FRs3Model
    protected FObjects<FRs3Animation> _animations;
 
    // 显示对象
-   protected FRs3MeshDisplay _display = new FRs3MeshDisplay();
+   protected FRs3Spatial _display = new FRs3Spatial();
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -132,6 +131,8 @@ public class FRs3Model
       }else{
          output.writeInt16((short)0);
       }
+      // 输出显示对象
+      _display.serialize(output);
    }
 
    //============================================================

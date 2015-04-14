@@ -23,6 +23,9 @@ public class FRs3Region
    // 颜色
    protected SFloatColor4 _color = new SFloatColor4();
 
+   // 材质（Space内默认材质）
+   protected FRs3Material _material = new FRs3Material();
+
    // 相机
    protected FRs3Camera _camera = new FRs3Camera();
 
@@ -33,6 +36,15 @@ public class FRs3Region
    // <T>构造场景区域。</T>
    //============================================================
    public FRs3Region(){
+   }
+
+   //============================================================
+   // <T>获得材质。</T>
+   //
+   // @return 材质
+   //============================================================
+   public FRs3Material material(){
+      return _material;
    }
 
    //============================================================
@@ -66,6 +78,8 @@ public class FRs3Region
       output.writeFloat(_moveSpeed);
       output.writeFloat(_rotationKeySpeed);
       output.writeFloat(_rotationMouseSpeed);
+      // 存储材质
+      _material.serialize(output);
       // 存储相机
       _camera.serialize(output);
       // 存储光源
@@ -87,7 +101,9 @@ public class FRs3Region
       _rotationMouseSpeed = xconfig.getFloat("rotation_mouse_speed", _rotationMouseSpeed);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Camera")){
+         if(xnode.isName("Material")){
+            _material.loadConfig(xnode);
+         }else if(xnode.isName("Camera")){
             _camera.loadConfig(xnode);
          }else if(xnode.isName("Light")){
             _light.loadConfig(xnode);
@@ -110,6 +126,8 @@ public class FRs3Region
       xconfig.set("move_speed", _moveSpeed);
       xconfig.set("rotation_key_speed", _rotationKeySpeed);
       xconfig.set("rotation_mouse_speed", _rotationMouseSpeed);
+      // 存储材质
+      _material.saveConfig(xconfig.createNode("Material"));
       // 存储相机
       _camera.saveConfig(xconfig.createNode("Camera"));
       // 存储光源
@@ -131,7 +149,9 @@ public class FRs3Region
       _rotationMouseSpeed = xconfig.getFloat("rotation_mouse_speed", _rotationMouseSpeed);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Camera")){
+         if(xnode.isName("Material")){
+            _material.mergeConfig(xnode);
+         }else if(xnode.isName("Camera")){
             _camera.mergeConfig(xnode);
          }else if(xnode.isName("Light")){
             _light.mergeConfig(xnode);

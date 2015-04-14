@@ -12,6 +12,9 @@ import org.mo.com.xml.FXmlNode;
 public class FRs3Object
       extends FObject
 {
+   // 类型名称
+   protected String _typeName;
+
    // 编号
    protected long _ouid;
 
@@ -34,6 +37,15 @@ public class FRs3Object
    // <T>构造资源对象。</T>
    //============================================================
    public FRs3Object(){
+   }
+
+   //============================================================
+   // <T>获得类型名称。</T>
+   //
+   // @return 类型名称
+   //============================================================
+   public String typeName(){
+      return _typeName;
    }
 
    //============================================================
@@ -162,6 +174,7 @@ public class FRs3Object
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      output.writeString(_typeName);
       output.writeString(_guid);
       output.writeString(_code);
       output.writeString(_label);
