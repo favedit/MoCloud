@@ -8,10 +8,10 @@ import org.mo.com.xml.FXmlNode;
 // <T>资源显示集合。</T>
 //============================================================
 public class FRs3DisplayContainer
-      extends FRs3Display
+      extends FRs3Spatial
 {
    // 显示集合
-   protected FObjects<FRs3Display> _displays = new FObjects<FRs3Display>(FRs3Display.class);
+   protected FObjects<FRs3Spatial> _displays = new FObjects<FRs3Spatial>(FRs3Spatial.class);
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -24,7 +24,7 @@ public class FRs3DisplayContainer
    //
    // @return 显示集合
    //============================================================
-   public FRs3Display createChild(FXmlNode xconfig){
+   public FRs3Spatial createChild(FXmlNode xconfig){
       String name = xconfig.name();
       switch(name){
          case "Sprite":
@@ -40,7 +40,7 @@ public class FRs3DisplayContainer
    //
    // @return 显示集合
    //============================================================
-   public FObjects<FRs3Display> displays(){
+   public FObjects<FRs3Spatial> displays(){
       return _displays;
    }
 
@@ -57,7 +57,7 @@ public class FRs3DisplayContainer
       if(xdisplays != null){
          for(FXmlNode xdisplay : xdisplays){
             if(xdisplay.isName("Display")){
-               FRs3Display display = createChild(xdisplay);
+               FRs3Spatial display = createChild(xdisplay);
                display.loadConfig(xdisplay);
                _displays.push(display);
             }else{
@@ -78,7 +78,7 @@ public class FRs3DisplayContainer
       // 存储显示集合
       if(!_displays.isEmpty()){
          FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
-         for(FRs3Display display : _displays){
+         for(FRs3Spatial display : _displays){
             display.saveConfig(xdisplays.createNode("Display"));
          }
       }
@@ -96,7 +96,7 @@ public class FRs3DisplayContainer
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("DisplayCollection")){
             for(FXmlNode xchild : xnode){
-               FRs3Display display = createChild(xchild);
+               FRs3Spatial display = createChild(xchild);
                display.importConfig(xchild);
                _displays.push(display);
             }

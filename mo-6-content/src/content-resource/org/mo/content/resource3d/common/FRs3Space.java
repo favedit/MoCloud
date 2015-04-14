@@ -75,8 +75,8 @@ public class FRs3Space
    //
    // @return 场景显示集合
    //============================================================
-   public FObjects<FRs3Display> filterDisplays(){
-      FObjects<FRs3Display> displays = new FObjects<FRs3Display>(FRs3Display.class);
+   public FObjects<FRs3Spatial> filterDisplays(){
+      FObjects<FRs3Spatial> displays = new FObjects<FRs3Spatial>(FRs3Spatial.class);
       if(_layers != null){
          for(FRs3DisplayLayer layer : _layers){
             layer.filterDisplays(displays);

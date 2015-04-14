@@ -1,30 +1,28 @@
 package org.mo.content.resource3d.mesh;
 
+import org.mo.content.resource3d.common.FRs3Component;
+import org.mo.content.resource3d.common.FRs3Material;
+import org.mo.content.resource3d.common.FRs3Renderable;
+
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.FObjects;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.common.SFloatMatrix3d;
-import org.mo.content.resource3d.common.FRs3Material;
-import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================
 // <T>场景渲染。</T>
 //============================================================
 public class FRs3MeshDisplay
-      extends FRs3Object
+      extends FRs3Component
 {
    // 矩阵
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
-
-   // 材质集合
-   protected FObjects<FRs3Material> _materials = new FObjects<FRs3Material>(FRs3Material.class);
 
    // 材质
    protected FRs3Material _material = new FRs3Material();
 
    // 渲染对象
-   protected FRs3MeshRenderable _renderable = new FRs3MeshRenderable();
+   protected FRs3Renderable _renderable = new FRs3Renderable();
 
    //============================================================
    // <T>构造场景渲染。</T>

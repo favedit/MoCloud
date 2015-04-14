@@ -1,9 +1,14 @@
 package org.mo.content.resource3d.model;
 
+import org.mo.content.resource3d.mesh.FRs3MeshDisplay;
+
 import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
+import org.mo.com.xml.FXmlDocument;
+import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Skeleton;
 import org.mo.content.resource3d.common.FRs3Space;
@@ -22,6 +27,9 @@ public class FRs3Model
 
    // 动画集合
    protected FObjects<FRs3Animation> _animations;
+
+   // 显示对象
+   protected FRs3MeshDisplay _display = new FRs3MeshDisplay();
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -132,6 +140,13 @@ public class FRs3Model
    // @param unit 数据单元
    //============================================================
    public void loadUnit(FDataResourceModelUnit unit){
+      // 读取配置
+      if(!RString.isEmpty(unit.content())){
+         FXmlDocument xdocument = new FXmlDocument();
+         xdocument.loadString(unit.content());
+         loadConfig(xdocument.root());
+      }
+      // 读取属性
       _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
@@ -144,9 +159,14 @@ public class FRs3Model
    // @param unit 数据单元
    //============================================================
    public void saveUnit(FDataResourceModelUnit unit){
+      // 存储属性
       unit.setFullCode(fullCode());
       unit.setCode(_code);
       unit.setLabel(_label);
+      // 存储配置
+      FXmlNode xconfig = new FXmlNode("Model");
+      saveConfig(xconfig);
+      unit.setContent(xconfig.xml().toString());
    }
 
    //============================================================

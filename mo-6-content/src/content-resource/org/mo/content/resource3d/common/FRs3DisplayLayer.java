@@ -19,7 +19,7 @@ public class FRs3DisplayLayer
    protected String _typeCd;
 
    // 场景技术过程集合
-   protected FObjects<FRs3Display> _displays;
+   protected FObjects<FRs3Spatial> _displays;
 
    //============================================================
    // <T>构造场景层。</T>
@@ -33,9 +33,9 @@ public class FRs3DisplayLayer
    // @param guid 唯一编号
    // @return 显示对象
    //============================================================
-   public FRs3Display findDisplayByGuid(String guid){
+   public FRs3Spatial findDisplayByGuid(String guid){
       if(!RString.isEmpty(guid) && (_displays != null)){
-         for(FRs3Display display : _displays){
+         for(FRs3Spatial display : _displays){
             if(guid.equals(display.guid())){
                return display;
             }
@@ -49,7 +49,7 @@ public class FRs3DisplayLayer
    //
    // @return 显示集合
    //============================================================
-   public FObjects<FRs3Display> displays(){
+   public FObjects<FRs3Spatial> displays(){
       return _displays;
    }
 
@@ -58,9 +58,9 @@ public class FRs3DisplayLayer
    //
    // @param display 显示对象
    //============================================================
-   public void pushDisplay(FRs3Display display){
+   public void pushDisplay(FRs3Spatial display){
       if(_displays == null){
-         _displays = new FObjects<FRs3Display>(FRs3Display.class);
+         _displays = new FObjects<FRs3Spatial>(FRs3Spatial.class);
       }
       _displays.push(display);
    }
@@ -70,9 +70,9 @@ public class FRs3DisplayLayer
    //
    // @return 场景显示集合
    //============================================================
-   public void filterDisplays(FObjects<FRs3Display> displays){
+   public void filterDisplays(FObjects<FRs3Spatial> displays){
       if(_displays != null){
-         for(FRs3Display display : _displays){
+         for(FRs3Spatial display : _displays){
             displays.push(display);
          }
       }
@@ -93,7 +93,7 @@ public class FRs3DisplayLayer
       if(_displays != null){
          int count = _displays.count();
          output.writeInt16((short)count);
-         for(FRs3Display display : _displays){
+         for(FRs3Spatial display : _displays){
             display.serialize(output);
          }
       }else{
@@ -117,7 +117,7 @@ public class FRs3DisplayLayer
          if(xnode.isName("DisplayCollection")){
             // 读取显示集合
             for(FXmlNode xdisplay : xnode){
-               FRs3Display display = new FRs3Display();
+               FRs3Spatial display = new FRs3Spatial();
                display.loadConfig(xdisplay);
                pushDisplay(display);
             }
@@ -144,7 +144,7 @@ public class FRs3DisplayLayer
             // 读取显示集合
             for(FXmlNode xdisplay : xnode){
                String displayGuid = xdisplay.get("guid");
-               FRs3Display display = findDisplayByGuid(displayGuid);
+               FRs3Spatial display = findDisplayByGuid(displayGuid);
                display.mergeConfig(xdisplay);
             }
          }else{
@@ -167,7 +167,7 @@ public class FRs3DisplayLayer
       // 存储层集合
       if(_displays != null){
          FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
-         for(FRs3Display display : _displays){
+         for(FRs3Spatial display : _displays){
             display.saveConfig(xdisplays.createNode("Display"));
          }
       }

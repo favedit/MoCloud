@@ -8,7 +8,7 @@ import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.resource3d.common.FRs3Display;
+import org.mo.content.resource3d.common.FRs3Spatial;
 import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.common.FRs3MaterialGroup;
 import org.mo.content.resource3d.common.FRs3Resource;
@@ -28,7 +28,7 @@ public class FRs3Template
    protected FObjects<FRs3Theme> _themes = new FObjects<FRs3Theme>(FRs3Theme.class);
 
    // 网格集合
-   protected FObjects<FRs3Display> _displays = new FObjects<FRs3Display>(FRs3Display.class);
+   protected FObjects<FRs3Spatial> _displays = new FObjects<FRs3Spatial>(FRs3Spatial.class);
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -75,7 +75,7 @@ public class FRs3Template
    //
    // @return 网格集合
    //============================================================
-   public FObjects<FRs3Display> displays(){
+   public FObjects<FRs3Spatial> displays(){
       return _displays;
    }
 
@@ -106,7 +106,7 @@ public class FRs3Template
       int displayCount = _displays.count();
       output.writeInt16((short)displayCount);
       for(int i = 0; i < displayCount; i++){
-         FRs3Display display = _displays.get(i);
+         FRs3Spatial display = _displays.get(i);
          display.serialize(output);
       }
    }
@@ -183,7 +183,7 @@ public class FRs3Template
       }
       // 存储显示集合
       FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
-      for(FRs3Display display : _displays){
+      for(FRs3Spatial display : _displays){
          display.saveConfig(xdisplays.createNode("Display"));
       }
    }

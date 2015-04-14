@@ -88,6 +88,16 @@ public interface IRs3ModelConsole
                         String guid);
 
    //============================================================
+   // <T>更新模型信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param model 模型
+   // @return 模型信息
+   //============================================================
+   FGcResModelInfo updateModel(ILogicContext logicContext,
+                               FRs3Model model);
+
+   //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境

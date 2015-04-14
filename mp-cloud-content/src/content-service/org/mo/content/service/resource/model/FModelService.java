@@ -1,14 +1,14 @@
 package org.mo.content.service.resource.model;
 
-import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
-
+import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
+import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -25,7 +25,7 @@ public class FModelService
 {
    // 项目控制台接口
    @ALink
-   protected ICntMeshConsole _meshConsole;
+   protected ICntModelConsole _modelConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -104,27 +104,27 @@ public class FModelService
                          FGcSessionInfo session,
                          IWebInput input,
                          IWebOutput output){
-      // 获得参数
-      FXmlNode xinput = input.config();
-      String code = xinput.nodeText("Code");
-      if(RString.isEmpty(code)){
-         throw new FFatalError("Code is empty.");
-      }
-      String label = xinput.nodeText("Label");
-      if(RString.isEmpty(label)){
-         throw new FFatalError("Label is empty.");
-      }
-      // 查找数据
-      FGcResModelMeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
-      if(findMesh != null){
-         throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
-      }
-      // 新建处理
-      FGcResModelMeshInfo mesh = _meshConsole.doPrepare(logicContext);
-      mesh.setUserId(session.userId());
-      mesh.setCode(code);
-      mesh.setLabel(label);
-      _meshConsole.doInsert(logicContext, mesh);
+      //      // 获得参数
+      //      FXmlNode xinput = input.config();
+      //      String code = xinput.nodeText("Code");
+      //      if(RString.isEmpty(code)){
+      //         throw new FFatalError("Code is empty.");
+      //      }
+      //      String label = xinput.nodeText("Label");
+      //      if(RString.isEmpty(label)){
+      //         throw new FFatalError("Label is empty.");
+      //      }
+      //      // 查找数据
+      //      FGcResModelInfo findMesh = _modelConsole.find .findByUserCode(logicContext, session.userId(), code);
+      //      if(findMesh != null){
+      //         throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
+      //      }
+      //      // 新建处理
+      //      FGcResModelInfo mesh = _modelConsole.doPrepare(logicContext);
+      //      mesh.setUserId(session.userId());
+      //      mesh.setCode(code);
+      //      mesh.setLabel(label);
+      //      _modelConsole.doInsert(logicContext, mesh);
       return EResult.Success;
    }
 
@@ -158,7 +158,7 @@ public class FModelService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      FGcResModelInfo mesh = _modelConsole.findByGuid(logicContext, guid);
       if(mesh == null){
          throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }
@@ -173,7 +173,41 @@ public class FModelService
       if(label != null){
          mesh.setLabel(label);
       }
-      _meshConsole.doUpdate(logicContext, mesh);
+      _modelConsole.doUpdate(logicContext, mesh);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult updateContent(IWebContext context,
+                                ILogicContext logicContext,
+                                FGcSessionInfo session,
+                                IWebInput input,
+                                IWebOutput output){
+      // 检查输入
+      FXmlNode xmodel = input.config();
+      if(!xmodel.isName("Model")){
+         throw new FFatalError("Invalid config code.");
+      }
+      // 获得唯一编号
+      String guid = xmodel.get("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Parameter guid is empty. (guid={1})", guid);
+      }
+      // 合并场景
+      FGcResModelInfo modelInfo = _modelConsole.getByGuid(logicContext, guid);
+      FRs3Model model = _modelConsole.makeModel(logicContext, modelInfo);
+      model.mergeConfig(xmodel);
+      // 更新场景
+      _modelConsole.updateModel(logicContext, model);
       return EResult.Success;
    }
 
@@ -196,19 +230,19 @@ public class FModelService
       FXmlNode xinput = input.config();
       String guid = xinput.nodeText("guid");
       if(RString.isEmpty(guid)){
-         throw new FFatalError("Resource3d mesh guid is empty.");
+         throw new FFatalError("Resource model guid is empty.");
       }
       // 查找数据
-      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
-      if(mesh == null){
-         throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
+      FGcResModelInfo model = _modelConsole.findByGuid(logicContext, guid);
+      if(model == null){
+         throw new FFatalError("Resource model is not exists. (guid={1})", guid);
       }
       // 检查用户有效
-      if(mesh.userId() != session.userId()){
-         throw new FFatalError("Resource3d mesh user is invalid. (project_user_id={1}, session_user_id={2})", mesh.userId(), session.userId());
+      if(model.userId() != session.userId()){
+         throw new FFatalError("Resource model user is invalid. (project_user_id={1}, session_user_id={2})", model.userId(), session.userId());
       }
       // 删除数据
-      _meshConsole.doDelete(logicContext, mesh);
+      _modelConsole.doDelete(logicContext, model);
       return EResult.Success;
    }
 }

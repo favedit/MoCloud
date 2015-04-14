@@ -1,24 +1,17 @@
-package org.mo.content.resource3d.mesh;
+package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.common.SFloatMatrix3d;
-import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================
-// <T>场景渲染。</T>
+// <T>资源可绘制对象。</T>
 //============================================================
-public class FRs3MeshRenderable
-      extends FRs3Object
+public class FRs3Drawable
+      extends FRs3Component
 {
-   // 矩阵
+   // 坐标矩阵
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
-
-   //============================================================
-   // <T>构造场景渲染。</T>
-   //============================================================
-   public FRs3MeshRenderable(){
-   }
 
    //============================================================
    // <T>序列化数据到输出流。</T>

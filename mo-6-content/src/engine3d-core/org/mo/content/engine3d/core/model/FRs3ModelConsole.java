@@ -10,6 +10,9 @@ import org.mo.cloud.logic.resource.model.FGcResModelMeshStreamInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
+import org.mo.content.geom.mesh.FGeomMesh;
+import org.mo.content.geom.mesh.FGeomModel;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.resource3d.common.FRs3Stream;
@@ -357,6 +360,37 @@ public class FRs3ModelConsole
    }
 
    //============================================================
+   // <T>更新模型信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param model 模型
+   // @return 模型信息
+   //============================================================
+   @Override
+   public FGcResModelInfo updateModel(ILogicContext logicContext,
+                                      FRs3Model model){
+      // 检查参数
+      String guid = model.guid();
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Model guid is null.");
+      }
+      // 查找数据
+      FGcResModelInfo modelInfo = findByGuid(logicContext, guid);
+      if(modelInfo == null){
+         throw new FFatalError("Mesh is not exists. (guid={1}})", guid);
+      }
+      // 创建场景
+      model.saveUnit(modelInfo);
+      // 更新数据
+      doUpdate(logicContext, modelInfo);
+      //............................................................
+      // 废弃临时数据
+      _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, guid);
+      // 返回网格单元
+      return modelInfo;
+   }
+
+   //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
@@ -440,15 +474,17 @@ public class FRs3ModelConsole
    public EResult updateResourceObj(ILogicContext logicContext,
                                     FGcResModelInfo modelInfo,
                                     FObjFile file){
-      //      // 加载模型资源
-      //      FGeomModel geomModel = file.CreateGeomModel();
-      //      FRs3Mesh mesh = new FRs3Mesh(geomModel.meshs().first());
-      //      //mesh.loadUnit(meshInfo);
-      //      FRs3Model model = new FRs3Model();
-      //      //model.meshs().push(mesh);
-      //      //............................................................
-      //      // 新建模型
-      //      updateResource(logicContext, modelInfo, model);
+      // 加载模型资源
+      FRs3Model model = new FRs3Model();
+      FGeomModel geomModel = file.CreateGeomModel();
+      for(FGeomMesh geomMesh : geomModel.meshs()){
+         FRs3ModelMesh mesh = new FRs3ModelMesh();
+         mesh.loadGeometry(geomMesh);
+         model.pushMesh(mesh);
+      }
+      //............................................................
+      // 新建模型
+      updateResource(logicContext, modelInfo, model);
       return EResult.Success;
    }
 }
