@@ -1,6 +1,5 @@
 package org.mo.content.resource3d.texture;
 
-import com.cyou.gccloud.data.data.FDataResource3dTextureBitmapUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Object;
@@ -83,17 +82,17 @@ public class FRs3TextureBitmap
       _data = data;
    }
 
-   //============================================================
-   // <T>从数据单元中导入配置。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void loadUnit(FDataResource3dTextureBitmapUnit unit){
-      _ouid = unit.ouid();
-      _guid = unit.guid();
-      _code = unit.code();
-      _label = unit.label();
-   }
+   //   //============================================================
+   //   // <T>从数据单元中导入配置。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void loadUnit(FDataResource3dTextureBitmapUnit unit){
+   //      _ouid = unit.ouid();
+   //      _guid = unit.guid();
+   //      _code = unit.code();
+   //      _label = unit.label();
+   //   }
 
    //============================================================
    // <T>序列化数据到输出流。</T>

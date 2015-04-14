@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.template;
 
-import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
+import com.cyou.gccloud.data.data.FDataResourceTemplateUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
@@ -193,7 +193,7 @@ public class FRs3Template
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dTemplateUnit unit){
+   public void loadUnit(FDataResourceTemplateUnit unit){
       // 加载属性
       _guid = unit.guid();
       _code = unit.code();

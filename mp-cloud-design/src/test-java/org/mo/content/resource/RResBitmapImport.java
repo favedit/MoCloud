@@ -1,7 +1,6 @@
 package org.mo.content.resource;
 
 import org.mo.com.logging.RLogger;
-import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -21,8 +20,8 @@ public class RResBitmapImport
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3TextureConsole textureConsole = RAop.find(IRs3TextureConsole.class);
-         textureConsole.importTexture(logicContext, filePath);
+         //         IRs3TextureConsole textureConsole = RAop.find(IRs3TextureConsole.class);
+         //         textureConsole.importTexture(logicContext, filePath);
       }catch(Exception e){
          RLogger.find(RResBitmapImport.class).error(null, "main", e);
       }

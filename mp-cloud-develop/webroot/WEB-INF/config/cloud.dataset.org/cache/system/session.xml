@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="7d20ffab-7d3a-429c-af91-c82c6744bab4" name="cache.system.session" label="M#12cn15系统会话表" is_valid="Y" note="M#" data_engine="HEAP" data_group="cache" data_factory="Cache.System.Session" data_name="CC_SYS_SESSION" data_alias="CC_SYS_SES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="4b47f4e4-fd73-4374-bece-29292e1312e3" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldRecordId _uuid="288f243c-2c60-4f91-a83f-8dca95623963" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
+  <FieldInteger _uuid="c38b2e0f-dfe4-4af9-a9dd-9ca6307b6653" name="from_cd" label="M#12cn14来源方式" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FROM_CD" />
+  <FieldString _uuid="1a8568b4-9a82-4d81-8f07-bc74ce556cd9" name="from_code" label="M#12cn14来源代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FROM_CODE" data_size="40" />
+  <FieldTemplate _uuid="cc9e30ab-7ccd-4271-b9a2-6fb26b82a71c" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

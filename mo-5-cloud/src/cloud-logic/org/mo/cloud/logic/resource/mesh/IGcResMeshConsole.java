@@ -1,0 +1,54 @@
+package org.mo.cloud.logic.resource.mesh;
+
+import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.data.logic.ILogicContext;
+
+//============================================================
+// <T>3D资源网格控制台接口。</T>
+//============================================================
+public interface IGcResMeshConsole
+      extends
+         IAbstractLogicUnitConsole<FGcResMeshInfo>
+{
+   //============================================================
+   // <T>根据资源编号查找网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 网格信息
+   //============================================================
+   FGcResMeshInfo findByResourceId(ILogicContext logicContext,
+                                   long resourceId);
+
+   //============================================================
+   // <T>根据代码查找网格单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 网格信息
+   //============================================================
+   FGcResMeshInfo findByCode(ILogicContext logicContext,
+                             String code);
+
+   //============================================================
+   // <T>根据全代码查找网格单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param fullCode 全代码
+   // @return 网格信息
+   //============================================================
+   FGcResMeshInfo findByFullCode(ILogicContext logicContext,
+                                 String fullCode);
+
+   //============================================================
+   // <T>根据用户编号和代码查找网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param code 项目代码
+   // @return 网格信息
+   //============================================================
+   FGcResMeshInfo findByUserCode(ILogicContext logicContext,
+                                 long userId,
+                                 String code);
+}

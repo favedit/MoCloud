@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.model;
 
-import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
+import com.cyou.gccloud.data.data.FDataResourceModelMeshUnit;
 import org.mo.com.geom.SFloatOutline3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -120,7 +120,7 @@ public class FRs3ModelMesh
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dMeshUnit unit){
+   public void loadUnit(FDataResourceModelMeshUnit unit){
       _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
@@ -134,7 +134,7 @@ public class FRs3ModelMesh
    //
    // @param unit 数据单元
    //============================================================
-   public void saveUnit(FDataResource3dMeshUnit unit){
+   public void saveUnit(FDataResourceModelMeshUnit unit){
       unit.setFullCode(fullCode());
       unit.setCode(_code);
       unit.setLabel(_label);

@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.mesh;
 
-import com.cyou.gccloud.data.data.FDataResource3dMeshUnit;
+import com.cyou.gccloud.data.data.FDataResourceModelMeshUnit;
 import com.cyou.gccloud.define.enums.common.EGcData;
 import org.mo.com.geom.SFloatOutline3;
 import org.mo.com.io.FByteStream;
@@ -275,7 +275,7 @@ public class FRs3Mesh
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dMeshUnit unit){
+   public void loadUnit(FDataResourceModelMeshUnit unit){
       // 读取配置
       if(!RString.isEmpty(unit.content())){
          FXmlDocument xdocument = new FXmlDocument();
@@ -298,7 +298,7 @@ public class FRs3Mesh
    //
    // @param unit 数据单元
    //============================================================
-   public void saveUnit(FDataResource3dMeshUnit unit){
+   public void saveUnit(FDataResourceModelMeshUnit unit){
       // 存储属性
       unit.setCode(_code);
       unit.setFullCode(_fullCode);

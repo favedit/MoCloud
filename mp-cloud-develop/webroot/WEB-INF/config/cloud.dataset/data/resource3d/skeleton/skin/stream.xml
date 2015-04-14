@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="3818b5d4-ad3b-400d-9eb5-d47a769cf7a8" name="data.resource3d.skeleton.skin.stream" label="M#12cn212资源3D骨骼蒙皮数据流表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-SK-KSM" data_name="DT_RS3_SKELETON_SKIN_STREAM" data_alias="DT_RS3_SKT_SKN_STM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="ae784977-ea0e-4ddb-ba34-ef2ac9b195f5" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldRecordId _uuid="d656c474-666d-45eb-a90c-0a163e0e6a15" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
-  <FieldRecordId _uuid="d2308952-55d2-4882-af0f-33a6a44462a4" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource3d.skeleton" />
-  <FieldRecordId _uuid="df9f4cc1-748e-4ac3-8143-7d3d27a6a8f6" name="skeleton_skin_id" label="M#12cn14蒙皮编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKELETON_SKIN_ID" data_alias="SKN" data_refer="data.resource3d.skeleton.skin" />
-  <FieldRecordId _uuid="278917f3-5d80-48a8-997e-f748e840c1d3" name="stream_id" label="M#12cn15数据流编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="STREAM_ID" data_alias="STM" data_refer="data.resource3d.stream" />
-  <FieldTemplate _uuid="81156694-4890-4262-b197-1d52fce6af86" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
-</DataStore>

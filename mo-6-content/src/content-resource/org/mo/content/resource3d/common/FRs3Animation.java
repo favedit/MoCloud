@@ -1,6 +1,5 @@
 package org.mo.content.resource3d.common;
 
-import com.cyou.gccloud.data.data.FDataResource3dAnimationUnit;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -110,34 +109,34 @@ public class FRs3Animation
    //   public void importData(IDataInput input){
    //   }
 
-   //============================================================
-   // <T>从数据单元中导入配置。</T>
+   //   //============================================================
+   //   // <T>从数据单元中导入配置。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void loadUnit(FDataResource3dAnimationUnit unit){
+   //      // 加载属性
+   //      _ouid = unit.ouid();
+   //      _guid = unit.guid();
+   //      _code = unit.code();
+   //      _label = unit.label();
+   //      _frameCount = unit.frameCount();
+   //      _frameTick = unit.frameTick();
+   //      _frameSpan = unit.frameSpan();
+   //   }
    //
-   // @param unit 数据单元
-   //============================================================
-   public void loadUnit(FDataResource3dAnimationUnit unit){
-      // 加载属性
-      _ouid = unit.ouid();
-      _guid = unit.guid();
-      _code = unit.code();
-      _label = unit.label();
-      _frameCount = unit.frameCount();
-      _frameTick = unit.frameTick();
-      _frameSpan = unit.frameSpan();
-   }
-
-   //============================================================
-   // <T>将配置信息存入数据单元中。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void saveUnit(FDataResource3dAnimationUnit unit){
-      unit.setCode(_code);
-      unit.setLabel(_label);
-      unit.setFrameCount(_frameCount);
-      unit.setFrameTick(_frameTick);
-      unit.setFrameSpan(_frameSpan);
-   }
+   //   //============================================================
+   //   // <T>将配置信息存入数据单元中。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void saveUnit(FDataResource3dAnimationUnit unit){
+   //      unit.setCode(_code);
+   //      unit.setLabel(_label);
+   //      unit.setFrameCount(_frameCount);
+   //      unit.setFrameTick(_frameTick);
+   //      unit.setFrameSpan(_frameSpan);
+   //   }
 
    //============================================================
    // <T>从输入流中导入数据。</T>

@@ -5,23 +5,20 @@ package org.mo.cloud.core.storage;
 //============================================================
 public class EGcStorageCatalog
 {
-   // 资源预览
+   // 资源预览数据
    public final static String ResourcePreview = "resource.preview";
 
-   // 资源位图图片
-   public final static String ResourceBitmapImage = "resource.bitmap.image";
+   // 资源位图数据
+   public final static String ResourceBitmap = "resource.bitmap";
 
-   // 资源3D数据流
-   public final static String Resource3dStream = "resource3d.stream";
+   // 资源模型网格数据
+   public final static String ResourceModelMeshStream = "resource.model.mesh.stream";
 
-   // 资源3D跟踪
-   public final static String Resource3dTrack = "resource3d.track";
+   // 资源模型网格跟踪
+   public final static String ResourceModelMeshTrack = "resource.model.mesh.track";
 
-   // 资源2D位图预览
-   public final static String Cache2dBitmapPreview = "cache2d.bitmap.preview";
-
-   // 资源2D位图图像预览
-   public final static String Cache2dBitmapImagePreview = "cache2d.bitmap.image.preview";
+   // 资源位图预览数据
+   public final static String CacheBitmapPreview = "cache.bitmap.preview";
 
    // 资源3D位图预览
    public final static String Cache3dBitmapPreview = "cache3d.bitmap.preview";

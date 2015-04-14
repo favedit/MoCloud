@@ -3,111 +3,87 @@
 <Config>
 
    <!-- ============================================================ -->
-   <!-- 设计：资源预览数据获取处理                                   -->
+   <!-- 资源内容数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content.resource.preview'
-         face  = 'org.mo.content.face.resource3d.resource.IPreviewServlet'/>
+         name  = 'cloud.resource'
+         face  = 'org.mo.content.face.resource.IPreviewServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.resource.IPreviewServlet'
-         class = 'org.mo.content.face.resource3d.resource.FPreviewServlet'
+         face  = 'org.mo.content.face.resource.IPreviewServlet'
+         class = 'org.mo.content.face.resource.FPreviewServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：位图数据处理                                           -->
+   <!-- 资源位图数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content2d.bitmap'
-         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapServlet'/>
+         name  = 'cloud.resource.bitmap'
+         face  = 'org.mo.content.face.resource.bitmap.IBitmapServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapServlet'
-         class = 'org.mo.content.face.resource2d.bitmap.FBitmapServlet'
+         face  = 'org.mo.content.face.resource.bitmap.IBitmapServlet'
+         class = 'org.mo.content.face.resource.bitmap.FBitmapServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：位图图像数据处理                                       -->
+   <!-- 资源材质数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content2d.bitmap.image'
-         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapImageServlet'/>
+         name  = 'cloud.resource.material'
+         face  = 'org.mo.content.face.resource.material.IMaterialServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource2d.bitmap.IBitmapImageServlet'
-         class = 'org.mo.content.face.resource2d.bitmap.FBitmapImageServlet'
+         face  = 'org.mo.content.face.resource.material.IMaterialServlet'
+         class = 'org.mo.content.face.resource.material.FMaterialServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：纹理位图数据获取处理                                   -->
+   <!-- 资源网格数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content.texture.bitmap'
-         face  = 'org.mo.content.face.resource3d.texture.IBitmapServlet'/>
+         name  = 'cloud.resource.mesh'
+         face  = 'org.mo.content.face.resource.mesh.IMeshServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.texture.IBitmapServlet'
-         class = 'org.mo.content.face.resource3d.texture.FBitmapServlet'
+         face  = 'org.mo.content.face.resource.mesh.IMeshServlet'
+         class = 'org.mo.content.face.resource.mesh.FMeshServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：纹理数据获取处理                                       -->
+   <!-- 资源模型数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content.texture'
-         face  = 'org.mo.content.face.resource3d.texture.ITextureServlet'/>
+         name  = 'cloud.resource.model'
+         face  = 'org.mo.content.face.resource.model.IModelServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.texture.ITextureServlet'
-         class = 'org.mo.content.face.resource3d.texture.FTextureServlet'
+         face  = 'org.mo.content.face.resource.model.IModelServlet'
+         class = 'org.mo.content.face.resource.model.FModelServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：网格资源获取处理                                       -->
+   <!-- 资源模板获取处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content.mesh'
-         face  = 'org.mo.content.face.resource3d.mesh.IMeshServlet'/>
+         name  = 'cloud.resource.template'
+         face  = 'org.mo.content.face.resource.template.ITemplateServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.mesh.IMeshServlet'
-         class = 'org.mo.content.face.resource3d.mesh.FMeshServlet'
+         face  = 'org.mo.content.face.resource.template.ITemplateServlet'
+         class = 'org.mo.content.face.resource.template.FTemplateServlet'
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 设计：模型资源获取处理                                       -->
+   <!-- 资源场景数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.content.model'
-         face  = 'org.mo.content.face.resource3d.model.IModelServlet'/>
+         name  = 'cloud.resource.scene'
+         face  = 'org.mo.content.face.resource.scene.ISceneServlet'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.model.IModelServlet'
-         class = 'org.mo.content.face.resource3d.model.FModelServlet'
-         scope = 'global'/>
-
-   <!-- ============================================================ -->
-   <!-- 设计：模板获取处理                                           -->
-   <!-- ============================================================ -->
-   <WebServlet
-         name  = 'cloud.content.template'
-         face  = 'org.mo.content.face.resource3d.template.ITemplateServlet'/>
-
-   <Component
-         face  = 'org.mo.content.face.resource3d.template.ITemplateServlet'
-         class = 'org.mo.content.face.resource3d.template.FTemplateServlet'
-         scope = 'global'/>
-
-   <!-- ============================================================ -->
-   <!-- 设计：场景获取处理                                           -->
-   <!-- ============================================================ -->
-   <WebServlet
-         name  = 'cloud.content.scene'
-         face  = 'org.mo.content.face.resource3d.scene.ISceneServlet'/>
-
-   <Component
-         face  = 'org.mo.content.face.resource3d.scene.ISceneServlet'
-         class = 'org.mo.content.face.resource3d.scene.FSceneServlet'
+         face  = 'org.mo.content.face.resource.scene.ISceneServlet'
+         class = 'org.mo.content.face.resource.scene.FSceneServlet'
          scope = 'global'/>
 
 </Config>

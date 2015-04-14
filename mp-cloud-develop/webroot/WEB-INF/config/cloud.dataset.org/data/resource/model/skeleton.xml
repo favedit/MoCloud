@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="569b7768-6238-44fb-a915-26e28d6bdc85" name="data.resource.model.skeleton" label="M#12cn19资源3D模型骨骼表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Model.Skeleton" data_name="DT_RES_MODEL_SKELETON" data_alias="DT_RES_MOD_SKT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="e411c6e6-6ecf-4c26-b461-7f863f38a5ba" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="4b5bdf3f-3f3f-4e10-87cc-731114482e4f" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
+  <FieldRecordId _uuid="bcf54965-56fc-4af3-8d8f-6c5dcf1766b1" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource3d.model" />
+  <FieldRecordId _uuid="a9dabe1a-e5d4-4e6d-b46e-64eed61fca16" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource3d.skeleton" />
+  <FieldTemplate _uuid="035e968c-cab6-4eed-94d5-58ca46d2c2db" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

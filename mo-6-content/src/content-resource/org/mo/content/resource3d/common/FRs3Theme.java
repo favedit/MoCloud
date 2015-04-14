@@ -1,6 +1,5 @@
 package org.mo.content.resource3d.common;
 
-import com.cyou.gccloud.data.data.FDataResource3dThemeUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.com.xml.FXmlNode;
@@ -105,16 +104,16 @@ public class FRs3Theme
       }
    }
 
-   //============================================================
-   // <T>从数据单元中导入配置。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void loadUnit(FDataResource3dThemeUnit unit){
-      // 加载属性
-      _guid = unit.guid();
-      _code = unit.code();
-   }
+   //   //============================================================
+   //   // <T>从数据单元中导入配置。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void loadUnit(FDataResource3dThemeUnit unit){
+   //      // 加载属性
+   //      _guid = unit.guid();
+   //      _code = unit.code();
+   //   }
 
    //============================================================
    // <T>从配置信息中导入配置。</T>

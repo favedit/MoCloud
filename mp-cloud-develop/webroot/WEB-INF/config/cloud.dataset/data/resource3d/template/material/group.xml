@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="e1ac2802-1ec5-463a-8c80-fbb42e6b39d9" name="data.resource3d.template.material.group" label="M#12cn210资源3D模板材质组表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-R3-TP-MTL" data_name="DT_RS3_TEMPLATE_MATERIAL_GROUP" data_alias="DT_RS3_TPL_MTL_GRP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
-  <FieldRecordId _uuid="143f6cfd-93c4-4f2c-9b33-f24791c3949a" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
-  <FieldRecordId _uuid="f159bfc4-a888-4b2b-82c2-f1d6fc0f1330" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
-  <FieldRecordId _uuid="6b1dee63-a675-4210-ab3f-3f11e60f4163" name="template_id" label="M#12cn14模板编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="TEMPLATE_ID" data_alias="TPL" data_refer="data.resource3d.template" />
-  <FieldRecordId _uuid="80496a27-ea6a-4f6d-ab1d-560f48695e96" name="material_group_id" label="M#12cn14材质编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MATERIAL_GROUP_ID" data_alias="MTL_GRP" data_refer="data.resource3d.material.group" />
-  <FieldTemplate _uuid="24156666-689b-4615-9052-bad52cda54c8" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
-</DataStore>

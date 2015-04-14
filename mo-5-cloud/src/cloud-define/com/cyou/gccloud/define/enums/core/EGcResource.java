@@ -24,17 +24,8 @@ public class EGcResource
    // 未知标签
    public final static String UnknownLabel = "未知";
 
-   // 项目
-   public final static int Project = 1;
-
-   // 项目字符串
-   public final static String ProjectString = "Project";
-
-   // 项目标签
-   public final static String ProjectLabel = "项目";
-
    // 位图
-   public final static int Bitmap = 2;
+   public final static int Bitmap = 1;
 
    // 位图字符串
    public final static String BitmapString = "Bitmap";
@@ -42,68 +33,59 @@ public class EGcResource
    // 位图标签
    public final static String BitmapLabel = "位图";
 
-   // 纹理3D
-   public final static int Texture3d = 3;
+   // 材质
+   public final static int Material = 2;
 
-   // 纹理3D字符串
-   public final static String Texture3dString = "Texture3d";
+   // 材质字符串
+   public final static String MaterialString = "Material";
 
-   // 纹理3D标签
-   public final static String Texture3dLabel = "纹理3D";
+   // 材质标签
+   public final static String MaterialLabel = "材质";
 
-   // 材质3D
-   public final static int Material3d = 4;
+   // 网格
+   public final static int Mesh = 3;
 
-   // 材质3D字符串
-   public final static String Material3dString = "Material3d";
+   // 网格字符串
+   public final static String MeshString = "Mesh";
 
-   // 材质3D标签
-   public final static String Material3dLabel = "材质3D";
+   // 网格标签
+   public final static String MeshLabel = "网格";
 
-   // 主题3D
-   public final static int Theme3d = 5;
+   // 模型
+   public final static int Model = 4;
 
-   // 主题3D字符串
-   public final static String Theme3dString = "Theme3d";
+   // 模型字符串
+   public final static String ModelString = "Model";
 
-   // 主题3D标签
-   public final static String Theme3dLabel = "主题3D";
+   // 模型标签
+   public final static String ModelLabel = "模型";
 
-   // 网格3d
-   public final static int Mesh3d = 6;
+   // 模板
+   public final static int Template = 5;
 
-   // 网格3d字符串
-   public final static String Mesh3dString = "Mesh3d";
+   // 模板字符串
+   public final static String TemplateString = "Template";
 
-   // 网格3d标签
-   public final static String Mesh3dLabel = "网格3d";
+   // 模板标签
+   public final static String TemplateLabel = "模板";
 
-   // 模型3D
-   public final static int Model3d = 7;
+   // 场景
+   public final static int Scene = 6;
 
-   // 模型3D字符串
-   public final static String Model3dString = "Model3d";
+   // 场景字符串
+   public final static String SceneString = "Scene";
 
-   // 模型3D标签
-   public final static String Model3dLabel = "模型3D";
+   // 场景标签
+   public final static String SceneLabel = "场景";
 
-   // 模板3D
-   public final static int Template3d = 8;
+   // 项目
+   public final static int Project = 7;
 
-   // 模板3D字符串
-   public final static String Template3dString = "Template3d";
+   // 项目字符串
+   public final static String ProjectString = "Project";
 
-   // 模板3D标签
-   public final static String Template3dLabel = "模板3D";
-
-   // 场景3D
-   public final static int Scene3d = 9;
-
-   // 场景3D字符串
-   public final static String Scene3dString = "Scene3d";
-
-   // 场景3D标签
-   public final static String Scene3dLabel = "场景3D";
+   // 项目标签
+   public final static String ProjectLabel = "项目";
 
    //============================================================
    // <T>是否含有指定内容</T>
@@ -137,24 +119,20 @@ public class EGcResource
       switch(value){
          case Unknown:
             return UnknownString;
-         case Project:
-            return ProjectString;
          case Bitmap:
             return BitmapString;
-         case Texture3d:
-            return Texture3dString;
-         case Material3d:
-            return Material3dString;
-         case Theme3d:
-            return Theme3dString;
-         case Mesh3d:
-            return Mesh3dString;
-         case Model3d:
-            return Model3dString;
-         case Template3d:
-            return Template3dString;
-         case Scene3d:
-            return Scene3dString;
+         case Material:
+            return MaterialString;
+         case Mesh:
+            return MeshString;
+         case Model:
+            return ModelString;
+         case Template:
+            return TemplateString;
+         case Scene:
+            return SceneString;
+         case Project:
+            return ProjectString;
          default:
             return "Unknown";
       }
@@ -170,24 +148,20 @@ public class EGcResource
       switch(value){
          case Unknown:
             return UnknownLabel;
-         case Project:
-            return ProjectLabel;
          case Bitmap:
             return BitmapLabel;
-         case Texture3d:
-            return Texture3dLabel;
-         case Material3d:
-            return Material3dLabel;
-         case Theme3d:
-            return Theme3dLabel;
-         case Mesh3d:
-            return Mesh3dLabel;
-         case Model3d:
-            return Model3dLabel;
-         case Template3d:
-            return Template3dLabel;
-         case Scene3d:
-            return Scene3dLabel;
+         case Material:
+            return MaterialLabel;
+         case Mesh:
+            return MeshLabel;
+         case Model:
+            return ModelLabel;
+         case Template:
+            return TemplateLabel;
+         case Scene:
+            return SceneLabel;
+         case Project:
+            return ProjectLabel;
          default:
             return "Unknown";
       }
@@ -203,24 +177,20 @@ public class EGcResource
       switch(value){
          case UnknownString:
             return Unknown;
-         case ProjectString:
-            return Project;
          case BitmapString:
             return Bitmap;
-         case Texture3dString:
-            return Texture3d;
-         case Material3dString:
-            return Material3d;
-         case Theme3dString:
-            return Theme3d;
-         case Mesh3dString:
-            return Mesh3d;
-         case Model3dString:
-            return Model3d;
-         case Template3dString:
-            return Template3d;
-         case Scene3dString:
-            return Scene3d;
+         case MaterialString:
+            return Material;
+         case MeshString:
+            return Mesh;
+         case ModelString:
+            return Model;
+         case TemplateString:
+            return Template;
+         case SceneString:
+            return Scene;
+         case ProjectString:
+            return Project;
          default:
             return 0;
       }

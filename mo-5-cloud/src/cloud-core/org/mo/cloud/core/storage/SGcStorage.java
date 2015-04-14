@@ -18,7 +18,7 @@ public class SGcStorage
    protected String _date;
 
    // 类型
-   protected String _type;
+   protected String _type = "bin";
 
    // 数据来源（文件名称）
    protected String _dataSource;
@@ -30,6 +30,18 @@ public class SGcStorage
    // <T>构造资源信息。</T>
    //============================================================
    public SGcStorage(){
+   }
+
+   //============================================================
+   // <T>构造资源信息。</T>
+   //
+   // @param catalog 分类
+   // @param guid 类型
+   //============================================================
+   public SGcStorage(String catalog,
+                     String guid){
+      _catalog = catalog;
+      _guid = guid;
    }
 
    //============================================================

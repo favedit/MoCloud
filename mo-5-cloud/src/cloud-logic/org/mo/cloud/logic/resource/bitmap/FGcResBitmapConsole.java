@@ -1,13 +1,13 @@
 package org.mo.cloud.logic.resource.bitmap;
 
-import com.cyou.gccloud.data.data.FDataResourceBitmapImageLogic;
 import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
+import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
-import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -21,10 +21,6 @@ public class FGcResBitmapConsole
    // 资源管理器
    @ALink
    protected IGcResourceConsole _resourceConsole;
-
-   // 位图图像管理器
-   @ALink
-   protected IGcResBitmapImageConsole _dataBitmapImageConsole;
 
    //============================================================
    // <T>构造资源位图信息控制台。</T>
@@ -68,26 +64,32 @@ public class FGcResBitmapConsole
    }
 
    //============================================================
-   // <T>删除记录前处理</T>
+   // <T>新建记录前处理</T>
    //
    // @param logicContext 逻辑环境
    // @param unit 数据单元
+   // @param oldUnit 原始数据单元
    // @return 处理结果
    //============================================================
    @Override
-   public EResult onDeleteBefore(ILogicContext logicContext,
-                                 FGcResBitmapInfo unit){
-      long bitmapId = unit.ouid();
-      // 删除网格数据流集合
-      FDataResourceBitmapImageLogic bitmapImageLogic = logicContext.findLogic(FDataResourceBitmapImageLogic.class);
-      String whereSql = FDataResourceBitmapImageLogic.BITMAP_ID + "=" + bitmapId;
-      FLogicDataset<FGcResBitmapImageInfo> bitmapImageDataset = bitmapImageLogic.fetchClass(FGcResBitmapImageInfo.class, whereSql);
-      if(bitmapImageDataset != null){
-         for(FGcResBitmapImageInfo bitmapImageUnit : bitmapImageDataset){
-            _dataBitmapImageConsole.doDelete(logicContext, bitmapImageUnit);
-         }
+   protected EResult onInsertBefore(ILogicContext logicContext,
+                                    FGcResBitmapInfo bitmap){
+      // 检查用户编号
+      long userId = bitmap.userId();
+      if(userId == 0){
+         throw new FFatalError("User id is empty.");
       }
-      // 返回结果
+      // 创建资源对象
+      FGcResourceInfo resource = _resourceConsole.doPrepare(logicContext);
+      resource.setUserId(userId);
+      resource.setProjectId(bitmap.projectId());
+      resource.setCatalogId(bitmap.catalogId());
+      resource.setResourceCd(EGcResource.Bitmap);
+      resource.setCode(bitmap.code());
+      resource.setLabel(bitmap.label());
+      _resourceConsole.doInsert(logicContext, resource);
+      // 设置资源信息
+      bitmap.setResourceId(resource.ouid());
       return EResult.Success;
    }
 

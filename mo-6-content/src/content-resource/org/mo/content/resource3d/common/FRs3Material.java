@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.common;
 
-import com.cyou.gccloud.data.data.FDataResource3dMaterialUnit;
+import com.cyou.gccloud.data.data.FDataResourceMaterialUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RUuid;
@@ -643,7 +643,7 @@ public class FRs3Material
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dMaterialUnit unit){
+   public void loadUnit(FDataResourceMaterialUnit unit){
       // 加载配置
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadString(unit.content());
@@ -660,7 +660,7 @@ public class FRs3Material
    //
    // @param unit 数据单元
    //============================================================
-   public void saveUnit(FDataResource3dMaterialUnit unit){
+   public void saveUnit(FDataResourceMaterialUnit unit){
       unit.setCode(_code);
       unit.setLabel(_label);
       unit.setContent(toXml());

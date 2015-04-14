@@ -59,6 +59,15 @@ public class FDataResourceBitmapLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段格式的定义。
+   public final static SLogicFieldInfo FORMAT_CODE = new SLogicFieldInfo("FORMAT_CODE");
+
+   // 字段大小宽度的定义。
+   public final static SLogicFieldInfo SIZE_WIDTH = new SLogicFieldInfo("SIZE_WIDTH");
+
+   // 字段大小高度的定义。
+   public final static SLogicFieldInfo SIZE_HEIGHT = new SLogicFieldInfo("SIZE_HEIGHT");
+
    // 字段关键字的定义。
    public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
 
@@ -78,7 +87,7 @@ public class FDataResourceBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`RESOURCE_ID`,`CODE`,`FULL_CODE`,`LABEL`,`KEYWORDS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`RESOURCE_ID`,`CODE`,`FULL_CODE`,`LABEL`,`FORMAT_CODE`,`SIZE_WIDTH`,`SIZE_HEIGHT`,`KEYWORDS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源位图表逻辑单元。</T>
@@ -656,6 +665,9 @@ public class FDataResourceBitmapLogic
       cmd.append(",`CODE`");
       cmd.append(",`FULL_CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`FORMAT_CODE`");
+      cmd.append(",`SIZE_WIDTH`");
+      cmd.append(",`SIZE_HEIGHT`");
       cmd.append(",`KEYWORDS`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
@@ -720,6 +732,19 @@ public class FDataResourceBitmapLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
+      cmd.append(',');
+      String formatCode = unit.formatCode();
+      if(RString.isEmpty(formatCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(formatCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.sizeWidth());
+      cmd.append(',');
+      cmd.append(unit.sizeHeight());
       cmd.append(',');
       String keywords = unit.keywords();
       if(RString.isEmpty(keywords)){
@@ -871,6 +896,25 @@ public class FDataResourceBitmapLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
+      }
+      if(unit.isFormatCodeChanged()){
+         cmd.append(",`FORMAT_CODE`=");
+         String formatCode = unit.formatCode();
+         if(RString.isEmpty(formatCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(formatCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isSizeWidthChanged()){
+         cmd.append(",`SIZE_WIDTH`=");
+         cmd.append(unit.sizeWidth());
+      }
+      if(unit.isSizeHeightChanged()){
+         cmd.append(",`SIZE_HEIGHT`=");
+         cmd.append(unit.sizeHeight());
       }
       if(unit.isKeywordsChanged()){
          cmd.append(",`KEYWORDS`=");

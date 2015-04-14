@@ -3,7 +3,7 @@
 <Config>
 
    <!-- ==================================================== -->
-   <!-- 设计：用户账号数据服务                               -->
+   <!-- 用户账号数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.person.account'
@@ -15,7 +15,7 @@
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：方案项目数据服务                               -->
+   <!-- 方案项目数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.solution.project'
@@ -27,111 +27,99 @@
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源数据服务                                   -->
+   <!-- 资源内容数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content3d.resource'
-         face  = 'org.mo.content.service.resource3d.IResourceService'/>
+         name  = 'cloud.resource'
+         face  = 'org.mo.content.service.resource.IResourceService'/>
 
    <Component
-         face  = 'org.mo.content.service.resource3d.IResourceService'
-         class = 'org.mo.content.service.resource3d.FResourceService'
+         face  = 'org.mo.content.service.resource.IResourceService'
+         class = 'org.mo.content.service.resource.FResourceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源数据目录服务                               -->
+   <!-- 资源目录数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content3d.resource.catalog'
-         face  = 'org.mo.content.service.resource3d.ICatalogService'/>
+         name  = 'cloud.resource.catalog'
+         face  = 'org.mo.content.service.resource.ICatalogService'/>
 
    <Component
-         face  = 'org.mo.content.service.resource3d.ICatalogService'
-         class = 'org.mo.content.service.resource3d.FCatalogService'
+         face  = 'org.mo.content.service.resource.ICatalogService'
+         class = 'org.mo.content.service.resource.FCatalogService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源位图服务                                   -->
+   <!-- 资源位图数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content2d.bitmap'
-         face  = 'org.mo.content.service.resource2d.IBitmapService'/>
+         name  = 'cloud.resource.bitmap'
+         face  = 'org.mo.content.service.resource.bitmap.IBitmapService'/>
 
    <Component
-         face  = 'org.mo.content.service.resource2d.IBitmapService'
-         class = 'org.mo.content.service.resource2d.FBitmapService'
+         face  = 'org.mo.content.service.resource.bitmap.IBitmapService'
+         class = 'org.mo.content.service.resource.bitmap.FBitmapService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源位图图像服务                               -->
+   <!-- 资源材质数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content2d.bitmap.image'
-         face  = 'org.mo.content.service.resource2d.IBitmapImageService'/>
+         name  = 'cloud.resource.material'
+         face  = 'org.mo.content.service.resource.material.IMaterialService'/>
 
    <Component
-         face  = 'org.mo.content.service.resource2d.IBitmapImageService'
-         class = 'org.mo.content.service.resource2d.FBitmapImageService'
+         face  = 'org.mo.content.service.resource.material.IMaterialService'
+         class = 'org.mo.content.service.resource.material.FMaterialService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源3D网格数据服务                             -->
+   <!-- 资源网格数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content3d.mesh'
-         face  = 'org.mo.content.service.resource3d.IMeshService'/>
+         name  = 'cloud.resource.mesh'
+         face  = 'org.mo.content.service.resource.mesh.IMeshService'/>
 
    <Component
-         face  = 'org.mo.content.service.resource3d.IMeshService'
-         class = 'org.mo.content.service.resource3d.FMeshService'
+         face  = 'org.mo.content.service.resource.mesh.IMeshService'
+         class = 'org.mo.content.service.resource.mesh.FMeshService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源3D网格数据服务                             -->
+   <!-- 资源模型数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content.mesh'
-         face  = 'org.mo.content.face.resource3d.mesh.IMeshService'/>
+         name  = 'cloud.resource.model'
+         face  = 'org.mo.content.service.resource.model.IModelService'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.mesh.IMeshService'
-         class = 'org.mo.content.face.resource3d.mesh.FMeshService'
+         face  = 'org.mo.content.service.resource.model.IModelService'
+         class = 'org.mo.content.service.resource.model.FModelService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源3D模型数据服务                             -->
+   <!-- 资源模板数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content.model'
-         face  = 'org.mo.content.face.resource3d.model.IModelService'/>
+         name  = 'cloud.resource.template'
+         face  = 'org.mo.content.service.resource.template.ITemplateService'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.model.IModelService'
-         class = 'org.mo.content.face.resource3d.model.FModelService'
+         face  = 'org.mo.content.service.resource.template.ITemplateService'
+         class = 'org.mo.content.service.resource.template.FTemplateService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
-   <!-- 设计：资源3D模板数据服务                             -->
+   <!-- 资源场景数据服务                                     -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'cloud.content.template'
-         face  = 'org.mo.content.face.resource3d.template.ITemplateService'/>
+         name  = 'cloud.resource.scene'
+         face  = 'org.mo.content.service.resource.scene.ISceneService'/>
 
    <Component
-         face  = 'org.mo.content.face.resource3d.template.ITemplateService'
-         class = 'org.mo.content.face.resource3d.template.FTemplateService'
-         scope = 'global'/>
-
-   <!-- ==================================================== -->
-   <!-- 设计：资源3D场景数据服务                             -->
-   <!-- ==================================================== -->
-   <WebService
-         name  = 'cloud.content.scene'
-         face  = 'org.mo.content.service.resource3d.ISceneService'/>
-
-   <Component
-         face  = 'org.mo.content.service.resource3d.ISceneService'
-         class = 'org.mo.content.service.resource3d.FSceneService'
+         face  = 'org.mo.content.service.resource.scene.ISceneService'
+         class = 'org.mo.content.service.resource.scene.FSceneService'
          scope = 'global'/>
 
 </Config>

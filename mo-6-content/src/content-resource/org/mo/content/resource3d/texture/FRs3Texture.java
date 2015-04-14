@@ -1,10 +1,7 @@
 package org.mo.content.resource3d.texture;
 
-import com.cyou.gccloud.data.data.FDataResource3dTemplateUnit;
-import com.cyou.gccloud.data.data.FDataResource3dTextureUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Resource;
 
@@ -49,13 +46,13 @@ public class FRs3Texture
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dTextureUnit unit){
-      // 加载属性
-      _ouid = unit.ouid();
-      _guid = unit.guid();
-      _code = unit.code();
-      _label = unit.label();
-   }
+   //   public void loadUnit(FDataResource3dTextureUnit unit){
+   //      // 加载属性
+   //      _ouid = unit.ouid();
+   //      _guid = unit.guid();
+   //      _code = unit.code();
+   //      _label = unit.label();
+   //   }
 
    //============================================================
    // <T>从数据单元中导入配置。</T>
@@ -312,15 +309,15 @@ public class FRs3Texture
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dTemplateUnit unit){
-      // 加载属性
-      _guid = unit.guid();
-      _code = unit.code();
-      // 读取配置
-      FXmlDocument xdocument = new FXmlDocument();
-      xdocument.loadString(unit.content());
-      loadConfig(xdocument.root());
-   }
+   //   public void loadUnit(FDataResource3dTemplateUnit unit){
+   //      // 加载属性
+   //      _guid = unit.guid();
+   //      _code = unit.code();
+   //      // 读取配置
+   //      FXmlDocument xdocument = new FXmlDocument();
+   //      xdocument.loadString(unit.content());
+   //      loadConfig(xdocument.root());
+   //   }
 
    //============================================================
    // <T>从配置节点中导入数据信息。</T>

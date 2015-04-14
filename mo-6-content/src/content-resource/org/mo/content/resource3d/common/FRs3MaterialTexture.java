@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.common;
 
-import com.cyou.gccloud.data.data.FDataResource3dMaterialTextureUnit;
+import com.cyou.gccloud.data.data.FDataResourceMaterialBitmapUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
@@ -58,6 +58,7 @@ public class FRs3MaterialTexture
    //
    // @return 全代码
    //============================================================
+   @Override
    public String fullCode(){
       return _material.fullCode() + "|" + _textureCode;
    }
@@ -160,7 +161,7 @@ public class FRs3MaterialTexture
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FDataResource3dMaterialTextureUnit unit){
+   public void loadUnit(FDataResourceMaterialBitmapUnit unit){
       // 加载属性
       _ouid = unit.ouid();
       _guid = unit.guid();

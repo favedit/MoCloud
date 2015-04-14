@@ -1,6 +1,5 @@
 package org.mo.content.core.resource.bitmap;
 
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapImageInfo;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource.bitmap.IGcResBitmapConsole;
 import org.mo.com.io.FByteStream;
@@ -15,14 +14,14 @@ public interface IC2dBitmapConsole
          IGcResBitmapConsole
 {
    //============================================================
-   // <T>创建位图信息。</T>
+   // <T>生成位图数据。</T>
    //
-   // @param logicContext 逻辑环境
-   // @param bitmap 位图
-   // @return 网格信息
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
    //============================================================
-   FGcResBitmapInfo createBitmap(ILogicContext logicContext,
-                                 FGcResBitmapInfo bitmap);
+   byte[] makeViewData(ILogicContext context,
+                       String guid);
 
    //============================================================
    // <T>生成位图预览数据。</T>
@@ -35,14 +34,14 @@ public interface IC2dBitmapConsole
                           String guid);
 
    //============================================================
-   // <T>导入位图信息。</T>
+   // <T>更新位图数据。</T>
    //
    // @param logicContext 逻辑环境
-   // @param bitmapImage 位图图片
+   // @param bitmap 位图信息
    // @param stream 数据流
    // @return 处理结果
    //============================================================
-   EResult importBitmap(ILogicContext logicContext,
-                        FGcResBitmapImageInfo bitmapImage,
-                        FByteStream stream);
+   EResult updateData(ILogicContext logicContext,
+                      FGcResBitmapInfo bitmap,
+                      FByteStream stream);
 }

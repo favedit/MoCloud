@@ -1,6 +1,5 @@
 package org.mo.content.resource3d.common;
 
-import com.cyou.gccloud.data.data.FDataResource3dTrackUnit;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -151,31 +150,31 @@ public class FRs3Track
       }
    }
 
-   //============================================================
-   // <T>从数据单元中导入配置。</T>
+   //   //============================================================
+   //   // <T>从数据单元中导入配置。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void loadUnit(FDataResource3dTrackUnit unit){
+   //      // 加载属性
+   //      _ouid = unit.ouid();
+   //      _guid = unit.guid();
+   //      _code = unit.code();
+   //      _label = unit.label();
+   //   }
    //
-   // @param unit 数据单元
-   //============================================================
-   public void loadUnit(FDataResource3dTrackUnit unit){
-      // 加载属性
-      _ouid = unit.ouid();
-      _guid = unit.guid();
-      _code = unit.code();
-      _label = unit.label();
-   }
-
-   //============================================================
-   // <T>将配置信息存入数据单元中。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void saveUnit(FDataResource3dTrackUnit unit){
-      unit.setCode(_code);
-      unit.setLabel(_label);
-      unit.setFrameCount(_frames.count());
-      unit.setFrameTick(_frameTick);
-      unit.setFrameTotal(_frameTick * _frames.count());
-   }
+   //   //============================================================
+   //   // <T>将配置信息存入数据单元中。</T>
+   //   //
+   //   // @param unit 数据单元
+   //   //============================================================
+   //   public void saveUnit(FDataResource3dTrackUnit unit){
+   //      unit.setCode(_code);
+   //      unit.setLabel(_label);
+   //      unit.setFrameCount(_frames.count());
+   //      unit.setFrameTick(_frameTick);
+   //      unit.setFrameTotal(_frameTick * _frames.count());
+   //   }
 
    //============================================================
    // <T>获得数据。</T>

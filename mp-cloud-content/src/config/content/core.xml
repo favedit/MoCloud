@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
-
-   <!-- ============================================================ -->
-   <!-- ContentConfigurationConsole:内容配置控制台                   -->
-   <!--  P:config_path - 配置文件路径                                -->
-   <!--  I:initializeConfig - 增加配置信息                           -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.content.core.resource3d.model.IC3dModelConsole'
-         class = 'org.mo.content.core.resource3d.model.FC3dModelConsole'
-         scope = 'global'>
-   </Component>
    
 </Config>
