@@ -1,19 +1,14 @@
 package org.mo.content.face.resource.mesh;
 
-import org.mo.content.core.resource.mesh.IC3dMeshConsole;
-
-import org.mo.cloud.logic.resource.mesh.FGcResMeshInfo;
-import org.mo.cloud.logic.resource.mesh.IGcResMeshConsole;
-import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
+import org.mo.cloud.logic.resource.model.IGcResModelMeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
-import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
+import org.mo.content.core.resource.mesh.ICntMeshConsole;
+import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -47,15 +42,15 @@ public class FMeshServlet
 
    // 数据网格控制台
    @ALink
-   protected IGcResMeshConsole _dataMeshConsole;
+   protected IGcResModelMeshConsole _dataMeshConsole;
 
    // 资源网格接口
    @ALink
-   protected IRs3MeshConsole _meshConsole;
+   protected IRs3ModelMeshConsole _meshConsole;
 
    // 资源网格接口
    @ALink
-   protected IC3dMeshConsole _c3MeshConsole;
+   protected ICntMeshConsole _c3MeshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -76,29 +71,29 @@ public class FMeshServlet
                        ILogicContext logicContext,
                        IWebServletRequest request,
                        IWebServletResponse response){
-      // 检查参数
-      String guid = context.parameter("guid");
-      String code = context.parameter("code");
-      if(RString.isEmpty(guid) && RString.isEmpty(code)){
-         throw new FFatalError("Mesh guid and code is empty.");
-      }
-      // 获得唯一编号
-      String meshGuid = null;
-      if(RString.isEmpty(guid)){
-         FGcResMeshInfo unit = _dataMeshConsole.findByFullCode(logicContext, code);
-         if(unit == null){
-            unit = _dataMeshConsole.findByCode(logicContext, code);
-         }
-         if(unit != null){
-            meshGuid = unit.guid();
-         }else{
-            throw new FFatalError("process", "Model guid is not exists. (code={1})", code);
-         }
-      }else{
-         FGcResourceInfo resource = _dataResourceConsole.findByGuid(logicContext, guid);
-         FGcResMeshInfo mesh = _dataMeshConsole.findByResourceId(logicContext, resource.ouid());
-         meshGuid = mesh.guid();
-      }
+      //      // 检查参数
+      //      String guid = context.parameter("guid");
+      //      String code = context.parameter("code");
+      //      if(RString.isEmpty(guid) && RString.isEmpty(code)){
+      //         throw new FFatalError("Mesh guid and code is empty.");
+      //      }
+      //      // 获得唯一编号
+      //      String meshGuid = null;
+      //      if(RString.isEmpty(guid)){
+      //         FGcResModelMeshInfo unit = _dataMeshConsole.findByFullCode(logicContext, code);
+      //         if(unit == null){
+      //            unit = _dataMeshConsole.findByCode(logicContext, code);
+      //         }
+      //         if(unit != null){
+      //            meshGuid = unit.guid();
+      //         }else{
+      //            throw new FFatalError("process", "Model guid is not exists. (code={1})", code);
+      //         }
+      //      }else{
+      //         FGcResourceInfo resource = _dataResourceConsole.findByGuid(logicContext, guid);
+      //         FGcResModelMeshInfo mesh = _dataMeshConsole.findByResourceId(logicContext, resource.ouid());
+      //         meshGuid = mesh.guid();
+      //      }
       //............................................................
       //      // 生成数据
       //      byte[] data = _meshConsole.makeMeshData(logicContext, meshGuid);

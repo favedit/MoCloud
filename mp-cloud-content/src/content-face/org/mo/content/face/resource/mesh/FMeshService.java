@@ -1,9 +1,10 @@
 package org.mo.content.face.resource.mesh;
 
+import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
+
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.engine3d.core.mesh.IRs3MeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -20,7 +21,7 @@ public class FMeshService
 {
    // 网格控制台
    @ALink
-   protected IRs3MeshConsole _meshConsole;
+   protected IRs3ModelMeshConsole _meshConsole;
 
    //============================================================
    // <T>构造内容表单服务。</T>

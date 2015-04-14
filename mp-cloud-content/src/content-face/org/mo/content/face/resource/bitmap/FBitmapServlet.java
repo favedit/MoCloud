@@ -14,7 +14,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.core.resource.bitmap.IC2dBitmapConsole;
+import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -44,7 +44,7 @@ public class FBitmapServlet
 
    // 资源位图控制台
    @ALink
-   protected IC2dBitmapConsole _bitmapConsole;
+   protected ICntBitmapConsole _bitmapConsole;
 
    //============================================================
    // <T>获得预览数据处理。</T>

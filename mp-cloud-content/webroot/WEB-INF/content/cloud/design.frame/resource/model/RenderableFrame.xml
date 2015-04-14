@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.mesh.RenderableFrame" update_date="20141210134046">
+   <Frame name="design3d.mesh.RenderableFrame" type='FDsMeshRenderableFrame' linker='_frameRenderable' label="渲染属性" note="">
+      <Panel name='matrixPanel' icon='design.panel.icon' label='位置参数'>
+         <Number3 name="translate" linker='_controlTranslate' label="位置" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number3 name="rotation" linker='_controlRotation' label="旋转" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number3 name="scale" linker='_controlScale' label="缩放" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='effectPanel' icon='design.panel.icon' label='渲染信息'>
+         <ListBox name="effectBox" linker='_controlEffects' label="效果器" label_size='70,0' valid="Y" edit_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

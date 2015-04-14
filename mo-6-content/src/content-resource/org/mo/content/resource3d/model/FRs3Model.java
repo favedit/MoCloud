@@ -1,17 +1,18 @@
 package org.mo.content.resource3d.model;
 
+import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.content.resource3d.common.FRs3Animation;
-import org.mo.content.resource3d.common.FRs3Resource;
 import org.mo.content.resource3d.common.FRs3Skeleton;
+import org.mo.content.resource3d.common.FRs3Space;
 
 //============================================================
 // <T>资源模型。</T>
 //============================================================
 public class FRs3Model
-      extends FRs3Resource
+      extends FRs3Space
 {
    // 网格集合
    protected FObjects<FRs3ModelMesh> _meshs;
@@ -29,15 +30,33 @@ public class FRs3Model
    }
 
    //============================================================
+   // <T>判断时候含有网格。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasMesh(){
+      return (_meshs != null) ? !_meshs.isEmpty() : false;
+   }
+
+   //============================================================
    // <T>获得网格集合。</T>
    //
    // @return 网格集合
    //============================================================
    public FObjects<FRs3ModelMesh> meshs(){
+      return _meshs;
+   }
+
+   //============================================================
+   // <T>增加一个网格。</T>
+   //
+   // @param mesh 网格
+   //============================================================
+   public void pushMesh(FRs3ModelMesh mesh){
       if(_meshs == null){
          _meshs = new FObjects<FRs3ModelMesh>(FRs3ModelMesh.class);
       }
-      return _meshs;
+      _meshs.push(mesh);
    }
 
    //============================================================
@@ -105,6 +124,29 @@ public class FRs3Model
       }else{
          output.writeInt16((short)0);
       }
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FDataResourceModelUnit unit){
+      _ouid = unit.ouid();
+      _guid = unit.guid();
+      _code = unit.code();
+      _label = unit.label();
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FDataResourceModelUnit unit){
+      unit.setFullCode(fullCode());
+      unit.setCode(_code);
+      unit.setLabel(_label);
    }
 
    //============================================================

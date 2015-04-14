@@ -26,7 +26,7 @@ public class FRs3Mesh
    protected SFloatOutline3 _outline = new SFloatOutline3();
 
    // 数据流集合
-   protected FObjects<FRs3Stream> _streams = new FObjects<FRs3Stream>(FRs3Stream.class);
+   protected FObjects<FRs3Stream> _streams;
 
    // 显示对象
    protected FRs3MeshDisplay _display = new FRs3MeshDisplay();
@@ -35,132 +35,6 @@ public class FRs3Mesh
    // <T>构造资源模型网格。</T>
    //============================================================
    public FRs3Mesh(){
-   }
-
-   //============================================================
-   // <T>从FGeomMesh构造资源模型网格。</T>
-   //
-   // @param input 输入流
-   //============================================================
-   public FRs3Mesh(FGeomMesh geoMesh){
-      int vertexCount = geoMesh.vertexs().count();
-      // 顶点坐标流
-      if(geoMesh.optionVertexPosition()){
-         FRs3Stream vertexPositionStream = new FRs3Stream();
-         vertexPositionStream.setCode("position");
-         vertexPositionStream.setElementDataCd(EGcData.Float32);
-         vertexPositionStream.setElementCount(3);
-         vertexPositionStream.setDataStride(4 * 3);
-         vertexPositionStream.setDataCount(vertexCount);
-         FByteStream positionStream = new FByteStream();
-         for(SGeomVertex vertex : geoMesh.vertexs()){
-            positionStream.writeFloat((float)vertex.position.x);
-            positionStream.writeFloat((float)vertex.position.y);
-            positionStream.writeFloat((float)vertex.position.z);
-         }
-         vertexPositionStream.setData(positionStream.toArray());
-         _streams.push(vertexPositionStream);
-      }
-      // 顶点颜色流
-      if(geoMesh.optionVertexColor()){
-         FRs3Stream vertexColorStream = new FRs3Stream();
-         vertexColorStream.setCode("color");
-         vertexColorStream.setElementDataCd(EGcData.Uint8);
-         vertexColorStream.setElementCount(4);
-         vertexColorStream.setDataStride(4);
-         vertexColorStream.setDataCount(vertexCount);
-         FByteStream colorStream = new FByteStream();
-         for(SGeomVertex vertex : geoMesh.vertexs()){
-            colorStream.writeUint8((short)(vertex.color.red * 255.0));
-            colorStream.writeUint8((short)(vertex.color.green * 255.0));
-            colorStream.writeUint8((short)(vertex.color.blue * 255.0));
-            colorStream.writeUint8((short)(vertex.color.alpha * 255.0));
-         }
-         vertexColorStream.setData(colorStream.toArray());
-         _streams.push(vertexColorStream);
-      }
-      // 贴图uv流
-      if(geoMesh.optionVertexCoord()){
-         FRs3Stream vertexCoordStream = new FRs3Stream();
-         vertexCoordStream.setCode("coord");
-         vertexCoordStream.setElementDataCd(EGcData.Float32);
-         vertexCoordStream.setElementCount(2);
-         vertexCoordStream.setDataStride(4 * 2);
-         vertexCoordStream.setDataCount(vertexCount);
-         FByteStream coordStream = new FByteStream();
-         for(SGeomVertex vertex : geoMesh.vertexs()){
-            coordStream.writeFloat(vertex.coord.x);
-            coordStream.writeFloat(vertex.coord.y);
-         }
-         vertexCoordStream.setData(coordStream.toArray());
-         _streams.push(vertexCoordStream);
-      }
-      // 法线流
-      if(geoMesh.optionVertexNormal()){
-         FRs3Stream vertexNormalStream = new FRs3Stream();
-         vertexNormalStream.setCode("normal");
-         vertexNormalStream.setElementDataCd(EGcData.Float32);
-         vertexNormalStream.setElementCount(3);
-         vertexNormalStream.setDataStride(4 * 3);
-         vertexNormalStream.setDataCount(vertexCount);
-         FByteStream normalStream = new FByteStream();
-         for(SGeomVertex vertex : geoMesh.vertexs()){
-            normalStream.writeFloat(vertex.normal.x);
-            normalStream.writeFloat(vertex.normal.y);
-            normalStream.writeFloat(vertex.normal.z);
-         }
-         vertexNormalStream.setData(normalStream.toArray());
-         _streams.push(vertexNormalStream);
-      }
-      // 副法线流
-      if(geoMesh.optionVertexBinormal()){
-         FRs3Stream vertexBinormalStream = new FRs3Stream();
-         vertexBinormalStream.setCode("binormal");
-         vertexBinormalStream.setElementDataCd(EGcData.Float32);
-         vertexBinormalStream.setElementCount(3);
-         vertexBinormalStream.setDataStride(4 * 3);
-         vertexBinormalStream.setDataCount(vertexCount);
-         FByteStream binormalStream = new FByteStream();
-         for(SGeomVertex vertex : geoMesh.vertexs()){
-            binormalStream.writeFloat(vertex.binormal.x);
-            binormalStream.writeFloat(vertex.binormal.y);
-            binormalStream.writeFloat(vertex.binormal.z);
-         }
-         vertexBinormalStream.setData(binormalStream.toArray());
-         _streams.push(vertexBinormalStream);
-      }
-      // 切线流
-      if(geoMesh.optionVertexTangent()){
-         FRs3Stream vertexTangentStream = new FRs3Stream();
-         vertexTangentStream.setCode("tangent");
-         vertexTangentStream.setElementDataCd(EGcData.Float32);
-         vertexTangentStream.setElementCount(3);
-         vertexTangentStream.setDataStride(4 * 3);
-         vertexTangentStream.setDataCount(vertexCount);
-         FByteStream tangentStream = new FByteStream();
-         for(SGeomVertex vertex : geoMesh.vertexs()){
-            tangentStream.writeFloat(vertex.tangent.x);
-            tangentStream.writeFloat(vertex.tangent.y);
-            tangentStream.writeFloat(vertex.tangent.z);
-         }
-         vertexTangentStream.setData(tangentStream.toArray());
-         _streams.push(vertexTangentStream);
-      }
-      //顶点索引流
-      FRs3Stream indexStream = new FRs3Stream();
-      indexStream.setCode("index32");
-      indexStream.setElementDataCd(EGcData.Int32);
-      indexStream.setElementCount(3);
-      indexStream.setDataStride(4 * 3);
-      indexStream.setDataCount(geoMesh.faces().count());
-      FByteStream faceStream = new FByteStream();
-      for(SGeomFace face : geoMesh.faces()){
-         faceStream.writeUint32(face.indexs[0]);
-         faceStream.writeUint32(face.indexs[1]);
-         faceStream.writeUint32(face.indexs[2]);
-      }
-      indexStream.setData(faceStream.toArray());
-      _streams.push(indexStream);
    }
 
    //============================================================
@@ -209,6 +83,18 @@ public class FRs3Mesh
    //============================================================
    public FObjects<FRs3Stream> streams(){
       return _streams;
+   }
+
+   //============================================================
+   // <T>增加一个数据流。</T>
+   //
+   // @param stream 数据流
+   //============================================================
+   public void pushStream(FRs3Stream stream){
+      if(_streams == null){
+         _streams = new FObjects<FRs3Stream>(FRs3Stream.class);
+      }
+      _streams.push(stream);
    }
 
    //============================================================
@@ -351,4 +237,129 @@ public class FRs3Mesh
       }
    }
 
+   //============================================================
+   // <T>从FGeomMesh构造资源模型网格。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void loadGeometry(FGeomMesh geoMesh){
+      int vertexCount = geoMesh.vertexs().count();
+      // 顶点坐标流
+      if(geoMesh.optionVertexPosition()){
+         FRs3Stream vertexPositionStream = new FRs3Stream();
+         vertexPositionStream.setCode("position");
+         vertexPositionStream.setElementDataCd(EGcData.Float32);
+         vertexPositionStream.setElementCount(3);
+         vertexPositionStream.setDataStride(4 * 3);
+         vertexPositionStream.setDataCount(vertexCount);
+         FByteStream positionStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            positionStream.writeFloat((float)vertex.position.x);
+            positionStream.writeFloat((float)vertex.position.y);
+            positionStream.writeFloat((float)vertex.position.z);
+         }
+         vertexPositionStream.setData(positionStream.toArray());
+         pushStream(vertexPositionStream);
+      }
+      // 顶点颜色流
+      if(geoMesh.optionVertexColor()){
+         FRs3Stream vertexColorStream = new FRs3Stream();
+         vertexColorStream.setCode("color");
+         vertexColorStream.setElementDataCd(EGcData.Uint8);
+         vertexColorStream.setElementCount(4);
+         vertexColorStream.setDataStride(4);
+         vertexColorStream.setDataCount(vertexCount);
+         FByteStream colorStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            colorStream.writeUint8((short)(vertex.color.red * 255.0));
+            colorStream.writeUint8((short)(vertex.color.green * 255.0));
+            colorStream.writeUint8((short)(vertex.color.blue * 255.0));
+            colorStream.writeUint8((short)(vertex.color.alpha * 255.0));
+         }
+         vertexColorStream.setData(colorStream.toArray());
+         pushStream(vertexColorStream);
+      }
+      // 贴图uv流
+      if(geoMesh.optionVertexCoord()){
+         FRs3Stream vertexCoordStream = new FRs3Stream();
+         vertexCoordStream.setCode("coord");
+         vertexCoordStream.setElementDataCd(EGcData.Float32);
+         vertexCoordStream.setElementCount(2);
+         vertexCoordStream.setDataStride(4 * 2);
+         vertexCoordStream.setDataCount(vertexCount);
+         FByteStream coordStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            coordStream.writeFloat(vertex.coord.x);
+            coordStream.writeFloat(vertex.coord.y);
+         }
+         vertexCoordStream.setData(coordStream.toArray());
+         pushStream(vertexCoordStream);
+      }
+      // 法线流
+      if(geoMesh.optionVertexNormal()){
+         FRs3Stream vertexNormalStream = new FRs3Stream();
+         vertexNormalStream.setCode("normal");
+         vertexNormalStream.setElementDataCd(EGcData.Float32);
+         vertexNormalStream.setElementCount(3);
+         vertexNormalStream.setDataStride(4 * 3);
+         vertexNormalStream.setDataCount(vertexCount);
+         FByteStream normalStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            normalStream.writeFloat(vertex.normal.x);
+            normalStream.writeFloat(vertex.normal.y);
+            normalStream.writeFloat(vertex.normal.z);
+         }
+         vertexNormalStream.setData(normalStream.toArray());
+         pushStream(vertexNormalStream);
+      }
+      // 副法线流
+      if(geoMesh.optionVertexBinormal()){
+         FRs3Stream vertexBinormalStream = new FRs3Stream();
+         vertexBinormalStream.setCode("binormal");
+         vertexBinormalStream.setElementDataCd(EGcData.Float32);
+         vertexBinormalStream.setElementCount(3);
+         vertexBinormalStream.setDataStride(4 * 3);
+         vertexBinormalStream.setDataCount(vertexCount);
+         FByteStream binormalStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            binormalStream.writeFloat(vertex.binormal.x);
+            binormalStream.writeFloat(vertex.binormal.y);
+            binormalStream.writeFloat(vertex.binormal.z);
+         }
+         vertexBinormalStream.setData(binormalStream.toArray());
+         pushStream(vertexBinormalStream);
+      }
+      // 切线流
+      if(geoMesh.optionVertexTangent()){
+         FRs3Stream vertexTangentStream = new FRs3Stream();
+         vertexTangentStream.setCode("tangent");
+         vertexTangentStream.setElementDataCd(EGcData.Float32);
+         vertexTangentStream.setElementCount(3);
+         vertexTangentStream.setDataStride(4 * 3);
+         vertexTangentStream.setDataCount(vertexCount);
+         FByteStream tangentStream = new FByteStream();
+         for(SGeomVertex vertex : geoMesh.vertexs()){
+            tangentStream.writeFloat(vertex.tangent.x);
+            tangentStream.writeFloat(vertex.tangent.y);
+            tangentStream.writeFloat(vertex.tangent.z);
+         }
+         vertexTangentStream.setData(tangentStream.toArray());
+         pushStream(vertexTangentStream);
+      }
+      //顶点索引流
+      FRs3Stream indexStream = new FRs3Stream();
+      indexStream.setCode("index32");
+      indexStream.setElementDataCd(EGcData.Int32);
+      indexStream.setElementCount(3);
+      indexStream.setDataStride(4 * 3);
+      indexStream.setDataCount(geoMesh.faces().count());
+      FByteStream faceStream = new FByteStream();
+      for(SGeomFace face : geoMesh.faces()){
+         faceStream.writeUint32(face.indexs[0]);
+         faceStream.writeUint32(face.indexs[1]);
+         faceStream.writeUint32(face.indexs[2]);
+      }
+      indexStream.setData(faceStream.toArray());
+      pushStream(indexStream);
+   }
 }

@@ -1,27 +1,19 @@
 package org.mo.content.resource3d.model;
 
 import com.cyou.gccloud.data.data.FDataResourceModelMeshUnit;
-import org.mo.com.geom.SFloatOutline3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FObjects;
-import org.mo.content.resource3d.common.FRs3Object;
 import org.mo.content.resource3d.common.FRs3Stream;
+import org.mo.content.resource3d.mesh.FRs3Mesh;
 
 //============================================================
 // <T>资源模型网格。</T>
 //============================================================
 public class FRs3ModelMesh
-      extends FRs3Object
+      extends FRs3Mesh
 {
    // 模型
    protected FRs3Model _model;
-
-   // 轮廓
-   protected SFloatOutline3 _outline = new SFloatOutline3();
-
-   // 数据流集合
-   protected FObjects<FRs3Stream> _streams = new FObjects<FRs3Stream>(FRs3Stream.class);
 
    //============================================================
    // <T>构造资源模型网格。</T>
@@ -54,25 +46,10 @@ public class FRs3ModelMesh
    //============================================================
    @Override
    public String fullCode(){
-      return _model.code() + "|" + _code;
-   }
-
-   //============================================================
-   // <T>获得轮廓。</T>
-   //
-   // @return 轮廓
-   //============================================================
-   public SFloatOutline3 outline(){
-      return _outline;
-   }
-
-   //============================================================
-   // <T>获得网格集合。</T>
-   //
-   // @return 网格集合
-   //============================================================
-   public FObjects<FRs3Stream> streams(){
-      return _streams;
+      if(_model != null){
+         return _model.code() + "|" + _code;
+      }
+      return _code;
    }
 
    //============================================================
@@ -83,7 +60,9 @@ public class FRs3ModelMesh
    @Override
    public void serialize(IDataOutput output){
       // 输出属性
-      super.serialize(output);
+      output.writeString(_guid);
+      output.writeString(_code);
+      output.writeString(_label);
       // 输出轮廓
       _outline.serialize(output);
       // 输出数据流集合
@@ -100,6 +79,7 @@ public class FRs3ModelMesh
    //
    // @param input 输入流
    //============================================================
+   @Override
    public void importData(IDataInput input){
       // 读取属性
       _code = input.readString();
@@ -120,6 +100,7 @@ public class FRs3ModelMesh
    //
    // @param unit 数据单元
    //============================================================
+   @Override
    public void loadUnit(FDataResourceModelMeshUnit unit){
       _ouid = unit.ouid();
       _guid = unit.guid();
@@ -134,6 +115,7 @@ public class FRs3ModelMesh
    //
    // @param unit 数据单元
    //============================================================
+   @Override
    public void saveUnit(FDataResourceModelMeshUnit unit){
       unit.setFullCode(fullCode());
       unit.setCode(_code);

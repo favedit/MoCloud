@@ -1,19 +1,15 @@
 package org.mo.content.service.resource.model;
 
-import org.mo.content.core.resource.mesh.IC3dMeshConsole;
+import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
 
-import org.mo.cloud.logic.resource.mesh.FGcResMeshInfo;
-import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import org.mo.cloud.logic.system.FGcSessionInfo;
-import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.core.aop.face.ALink;
-import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
@@ -29,7 +25,7 @@ public class FModelService
 {
    // 项目控制台接口
    @ALink
-   protected IC3dMeshConsole _meshConsole;
+   protected ICntMeshConsole _meshConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -38,11 +34,10 @@ public class FModelService
    }
 
    //============================================================
-   // <T>获取数据处理。</T>
+   // <T>获得模型列表。</T>
    //
    // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param session 会话信息
+   // @param logicContext 逻辑网络环境
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
@@ -52,44 +47,24 @@ public class FModelService
                        FGcSessionInfo session,
                        IWebInput input,
                        IWebOutput output){
-      FXmlNode xinput = input.config();
-      String search = xinput.nodeText("Search");
-      String order = xinput.nodeText("Order");
-      int pageSize = RInteger.toRange(xinput.nodeTextAsInt("PageSize", 20), 0, 200);
-      int page = xinput.nodeTextAsInt("Page", 0);
-      // 设置输出节点
-      FXmlNode xoutput = output.config().createNode("MeshCollection");
-      xoutput.set("page_count", 0);
-      xoutput.set("page_size", pageSize);
-      xoutput.set("page", page);
-      //............................................................
-      // 生成查询脚本
-      String whereSql = "(" + FDataSolutionProjectLogic.USER_ID + "=" + session.userId() + ")";
-      if(!RString.isEmpty(search)){
-         whereSql += " AND (" + FDataSolutionProjectLogic.CODE + " LIKE '%" + RSql.formatValue(search) + "%')";
-      }
-      // 查询数据
-      FLogicDataset<FGcResMeshInfo> dataset = _meshConsole.fetch(logicContext, whereSql, order, pageSize, page);
-      xoutput.set("total", dataset.total());
-      xoutput.set("count", dataset.count());
-      xoutput.set("page_size", dataset.pageSize());
-      xoutput.set("page_count", dataset.pageCount());
-      xoutput.set("page", dataset.page());
-      for(FGcResMeshInfo mesh : dataset){
-         FXmlNode xitem = xoutput.createNode("Project");
-         xitem.set("guid", mesh.guid());
-         xitem.set("code", mesh.code());
-         xitem.set("label", mesh.label());
-      }
+      //      FXmlNode xoutput = output.config();
+      //      // 获得模型信息
+      //      FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
+      //      FLogicDataset<FDataResource3dModelUnit> modelUnits = modelLogic.fetchAll();
+      //      for(FDataResource3dModelUnit modelUnit : modelUnits){
+      //         // 创建树节点
+      //         FXmlNode xnode = xoutput.createNode("TreeNode");
+      //         xnode.set("name", modelUnit.code());
+      //         xnode.set("label", modelUnit.code());
+      //         xnode.set("type", "Model");
+      //      }
       return EResult.Success;
    }
 
    //============================================================
-   // <T>查询数据处理。</T>
+   // <T>查询配置处理。</T>
    //
    // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param session 会话信息
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
@@ -99,26 +74,18 @@ public class FModelService
                         FGcSessionInfo session,
                         IWebInput input,
                         IWebOutput output){
-      // 检查参数
-      FXmlNode xinput = input.config();
-      String guid = xinput.nodeText("Guid");
-      if(RString.isEmpty(guid)){
-         throw new FFatalError("Guid is empty.");
-      }
-      // 获得数据
-      FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
-      if(mesh == null){
-         return EResult.Failure;
-      }
-      // 检查用户
-      if(mesh.userId() != session.userId()){
-         throw new FFatalError("Resource3d mesh user is invalid. (project_user_id={1}, session_user_id={2})", mesh.userId(), session.userId());
-      }
-      // 设置输出
-      FXmlNode xproject = output.config().createNode("Project");
-      xproject.set("guid", mesh.guid());
-      xproject.set("code", mesh.code());
-      xproject.set("label", mesh.label());
+      //      String code = context.parameter("code");
+      //      // 查找目录定义
+      //      XTreeView xtree = _treeConsole.find(_storageName, code);
+      //      if(xtree == null){
+      //         return EResult.Failure;
+      //      }
+      //      // 转换数据
+      //      FXmlNode xconfig = output.config().createNode();
+      //      FPersistence persistence = _persistenceConsole.findPersistence(_storageName, "design.tree");
+      //      FContentObject content = persistence.convertConfig(xtree);
+      //      // 存储输出
+      //      content.saveConfig(xconfig);
       return EResult.Success;
    }
 
@@ -148,12 +115,12 @@ public class FModelService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcResMeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
+      FGcResModelMeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
       if(findMesh != null){
          throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
       }
       // 新建处理
-      FGcResMeshInfo mesh = _meshConsole.doPrepare(logicContext);
+      FGcResModelMeshInfo mesh = _meshConsole.doPrepare(logicContext);
       mesh.setUserId(session.userId());
       mesh.setCode(code);
       mesh.setLabel(label);
@@ -191,7 +158,7 @@ public class FModelService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
       if(mesh == null){
          throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }
@@ -232,7 +199,7 @@ public class FModelService
          throw new FFatalError("Resource3d mesh guid is empty.");
       }
       // 查找数据
-      FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
       if(mesh == null){
          throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }

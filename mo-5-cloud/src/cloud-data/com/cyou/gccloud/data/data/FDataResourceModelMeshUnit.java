@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -52,6 +53,12 @@ public class FDataResourceModelMeshUnit
 
    // 字段模型编号的定义。
    protected long _modelId;
+
+   // 存储字段排序索引的定义。
+   private int __sortIndex;
+
+   // 字段排序索引的定义。
+   protected int _sortIndex;
 
    // 存储字段全代码的定义。
    private String __fullCode;
@@ -324,6 +331,33 @@ public class FDataResourceModelMeshUnit
    //============================================================
    public void setModelId(long value){
       _modelId = value;
+   }
+
+   //============================================================
+   // <T>判断排序索引的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSortIndexChanged(){
+      return __sortIndex != _sortIndex;
+   }
+
+   //============================================================
+   // <T>获得排序索引的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int sortIndex(){
+      return _sortIndex;
+   }
+
+   //============================================================
+   // <T>设置排序索引的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSortIndex(int value){
+      _sortIndex = value;
    }
 
    //============================================================
@@ -671,6 +705,8 @@ public class FDataResourceModelMeshUnit
             return Long.toString(_projectId);
          case "model_id":
             return Long.toString(_modelId);
+         case "sort_index":
+            return RInteger.toString(_sortIndex);
          case "full_code":
             return _fullCode;
          case "code":
@@ -726,6 +762,9 @@ public class FDataResourceModelMeshUnit
             break;
          case "model_id":
             _modelId = RLong.parse(value);
+            break;
+         case "sort_index":
+            _sortIndex = RInteger.parse(value);
             break;
          case "full_code":
             _fullCode = value;
@@ -802,6 +841,10 @@ public class FDataResourceModelMeshUnit
                __modelId = RLong.parse(value);
                _modelId = __modelId;
                break;
+            case "sort_index":
+               __sortIndex = RInteger.parse(value);
+               _sortIndex = __sortIndex;
+               break;
             case "full_code":
                __fullCode = value;
                _fullCode = __fullCode;
@@ -868,6 +911,7 @@ public class FDataResourceModelMeshUnit
       row.set("userId", _userId);
       row.set("projectId", _projectId);
       row.set("modelId", _modelId);
+      row.set("sortIndex", _sortIndex);
       row.set("fullCode", _fullCode);
       row.set("code", _code);
       row.set("label", _label);
@@ -896,6 +940,7 @@ public class FDataResourceModelMeshUnit
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
+      map.put("sortIndex", RInteger.toString(_sortIndex));
       map.put("fullCode", _fullCode);
       map.put("code", _code);
       map.put("label", _label);

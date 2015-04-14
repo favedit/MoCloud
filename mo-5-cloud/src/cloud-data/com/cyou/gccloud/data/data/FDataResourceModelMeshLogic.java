@@ -50,6 +50,9 @@ public class FDataResourceModelMeshLogic
    // 字段模型编号的定义。
    public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
 
+   // 字段排序索引的定义。
+   public final static SLogicFieldInfo SORT_INDEX = new SLogicFieldInfo("SORT_INDEX");
+
    // 字段全代码的定义。
    public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
 
@@ -87,7 +90,7 @@ public class FDataResourceModelMeshLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`FULL_CODE`,`CODE`,`LABEL`,`KEYWORDS`,`OUTLINE_MIN`,`OUTLINE_MAX`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`SORT_INDEX`,`FULL_CODE`,`CODE`,`LABEL`,`KEYWORDS`,`OUTLINE_MIN`,`OUTLINE_MAX`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源模型网格表逻辑单元。</T>
@@ -477,6 +480,26 @@ public class FDataResourceModelMeshLogic
    //============================================================
    public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
                                                              CharSequence whereSql,
+                                                             CharSequence orderSql){
+      // 生成命令
+      String code = innerMemcacheKey(null, whereSql, null, orderSql);
+      String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
+      // 获得数据
+      return fetchSql(clazz, code, sql, 0, 0);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param clazz 单元类型
+   // @param whereSql 条件命令
+   // @param orderSql 排序命令
+   // @param pageSize 分页大小
+   // @param page 分页号码
+   // @return 数据单元集合
+   //============================================================
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
                                                              CharSequence orderSql,
                                                              int pageSize,
                                                              int page){
@@ -662,6 +685,7 @@ public class FDataResourceModelMeshLogic
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`MODEL_ID`");
+      cmd.append(",`SORT_INDEX`");
       cmd.append(",`FULL_CODE`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
@@ -705,6 +729,8 @@ public class FDataResourceModelMeshLogic
       }else{
          cmd.append(modelId);
       }
+      cmd.append(',');
+      cmd.append(unit.sortIndex());
       cmd.append(',');
       String fullCode = unit.fullCode();
       if(RString.isEmpty(fullCode)){
@@ -877,6 +903,10 @@ public class FDataResourceModelMeshLogic
          }else{
             cmd.append(modelId);
          }
+      }
+      if(unit.isSortIndexChanged()){
+         cmd.append(",`SORT_INDEX`=");
+         cmd.append(unit.sortIndex());
       }
       if(unit.isFullCodeChanged()){
          cmd.append(",`FULL_CODE`=");

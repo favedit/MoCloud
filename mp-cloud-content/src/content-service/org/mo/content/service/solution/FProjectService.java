@@ -11,7 +11,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.solution.project.IC3dProjectConsole;
+import org.mo.content.core.solution.project.ICntProjectConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -29,7 +29,7 @@ public class FProjectService
 {
    // 项目控制台接口
    @ALink
-   protected IC3dProjectConsole _projectConsole;
+   protected ICntProjectConsole _projectConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>

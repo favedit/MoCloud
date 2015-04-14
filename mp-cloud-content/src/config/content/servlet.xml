@@ -6,7 +6,7 @@
    <!-- 资源内容数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.resource'
+         name  = 'cloud.resource.preview'
          face  = 'org.mo.content.face.resource.IPreviewServlet'/>
 
    <Component

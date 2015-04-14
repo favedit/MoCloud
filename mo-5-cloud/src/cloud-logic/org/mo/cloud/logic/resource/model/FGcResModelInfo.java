@@ -1,12 +1,12 @@
 package org.mo.cloud.logic.resource.model;
 
-import com.cyou.gccloud.data.data.FDataResourceBitmapUnit;
+import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 
 //============================================================
 // <T>资源位图信息。</T>
 //============================================================
 public class FGcResModelInfo
-      extends FDataResourceBitmapUnit
+      extends FDataResourceModelUnit
 {
    // 目录编号
    private long _catalogId;

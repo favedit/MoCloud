@@ -1,6 +1,6 @@
 package org.mo.content.service.resource.scene;
 
-import org.mo.content.core.resource.scene.IC3dSceneConsole;
+import org.mo.content.core.resource.scene.ICntSceneConsole;
 
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
@@ -11,7 +11,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.solution.project.IC3dProjectConsole;
+import org.mo.content.core.solution.project.ICntProjectConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -29,11 +29,11 @@ public class FSceneService
 {
    // 项目控制台接口
    @ALink
-   protected IC3dProjectConsole _projectConsole;
+   protected ICntProjectConsole _projectConsole;
 
    // 场景控制台接口
    @ALink
-   protected IC3dSceneConsole _sceneConsole;
+   protected ICntSceneConsole _sceneConsole;
 
    //============================================================
    // <T>构造资源3D场景服务。</T>

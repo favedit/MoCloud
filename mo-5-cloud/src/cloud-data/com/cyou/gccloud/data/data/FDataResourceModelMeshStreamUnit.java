@@ -60,17 +60,23 @@ public class FDataResourceModelMeshStreamUnit
    // 字段网格编号的定义。
    protected long _meshId;
 
-   // 存储字段代码的定义。
-   private String __code;
+   // 存储字段排序索引的定义。
+   private int __sortIndex;
 
-   // 字段代码的定义。
-   protected String _code;
+   // 字段排序索引的定义。
+   protected int _sortIndex;
 
    // 存储字段全代码的定义。
    private String __fullCode;
 
    // 字段全代码的定义。
    protected String _fullCode;
+
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
 
    // 存储字段元素数据类型的定义。
    private int __elementDataCd;
@@ -372,30 +378,30 @@ public class FDataResourceModelMeshStreamUnit
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断排序索引的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isSortIndexChanged(){
+      return __sortIndex != _sortIndex;
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得排序索引的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public int sortIndex(){
+      return _sortIndex;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
+   // <T>设置排序索引的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
+   public void setSortIndex(int value){
+      _sortIndex = value;
    }
 
    //============================================================
@@ -423,6 +429,33 @@ public class FDataResourceModelMeshStreamUnit
    //============================================================
    public void setFullCode(String value){
       _fullCode = value;
+   }
+
+   //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================
@@ -718,10 +751,12 @@ public class FDataResourceModelMeshStreamUnit
             return Long.toString(_modelId);
          case "mesh_id":
             return Long.toString(_meshId);
-         case "code":
-            return _code;
+         case "sort_index":
+            return RInteger.toString(_sortIndex);
          case "full_code":
             return _fullCode;
+         case "code":
+            return _code;
          case "element_data_cd":
             return RInteger.toString(_elementDataCd);
          case "element_count":
@@ -777,11 +812,14 @@ public class FDataResourceModelMeshStreamUnit
          case "mesh_id":
             _meshId = RLong.parse(value);
             break;
-         case "code":
-            _code = value;
+         case "sort_index":
+            _sortIndex = RInteger.parse(value);
             break;
          case "full_code":
             _fullCode = value;
+            break;
+         case "code":
+            _code = value;
             break;
          case "element_data_cd":
             _elementDataCd = RInteger.parse(value);
@@ -856,13 +894,17 @@ public class FDataResourceModelMeshStreamUnit
                __meshId = RLong.parse(value);
                _meshId = __meshId;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
+            case "sort_index":
+               __sortIndex = RInteger.parse(value);
+               _sortIndex = __sortIndex;
                break;
             case "full_code":
                __fullCode = value;
                _fullCode = __fullCode;
+               break;
+            case "code":
+               __code = value;
+               _code = __code;
                break;
             case "element_data_cd":
                __elementDataCd = RInteger.parse(value);
@@ -923,8 +965,9 @@ public class FDataResourceModelMeshStreamUnit
       row.set("projectId", _projectId);
       row.set("modelId", _modelId);
       row.set("meshId", _meshId);
-      row.set("code", _code);
+      row.set("sortIndex", _sortIndex);
       row.set("fullCode", _fullCode);
+      row.set("code", _code);
       row.set("elementDataCd", _elementDataCd);
       row.set("elementCount", _elementCount);
       row.set("dataStride", _dataStride);
@@ -952,8 +995,9 @@ public class FDataResourceModelMeshStreamUnit
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
       map.put("meshId", RLong.toString(_meshId));
-      map.put("code", _code);
+      map.put("sortIndex", RInteger.toString(_sortIndex));
       map.put("fullCode", _fullCode);
+      map.put("code", _code);
       map.put("elementDataCd", RInteger.toString(_elementDataCd));
       map.put("elementCount", RInteger.toString(_elementCount));
       map.put("dataStride", RInteger.toString(_dataStride));

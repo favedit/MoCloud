@@ -48,6 +48,34 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    }
 
    //============================================================
+   // <T>判断编号是否存在。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param objectId 对象编号
+   // @return 是否存在
+   //============================================================
+   @Override
+   public boolean exists(ILogicContext logicContext,
+                         long objectId){
+      U unit = find(logicContext, _classUnit, objectId);
+      return (unit != null);
+   }
+
+   //============================================================
+   // <T>判断唯一编号是否存在。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param uniqueCode 唯一编号
+   // @return 是否存在
+   //============================================================
+   @Override
+   public boolean existsByGuid(ILogicContext logicContext,
+                               String uniqueCode){
+      U unit = findByGuid(logicContext, _classUnit, uniqueCode);
+      return (unit != null);
+   }
+
+   //============================================================
    // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境

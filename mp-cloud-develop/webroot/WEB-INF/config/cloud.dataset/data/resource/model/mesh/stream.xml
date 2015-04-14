@@ -4,8 +4,9 @@
   <FieldRecordId _uuid="91a9f255-6ae8-46a4-93fc-73aa36138cb8" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
   <FieldRecordId _uuid="39c0863a-a59f-4852-a2fa-855a60d1fe6a" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource.model" />
   <FieldRecordId _uuid="5bf3b687-8e2b-40f9-80ca-7c01b26c4245" name="mesh_id" label="M#12cn14网格编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MESH_ID" data_alias="MSH" data_refer="data.resource.model.mesh" />
-  <FieldString _uuid="16190ae4-64d9-49c3-bdd1-ff7548f46b5f" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldInteger _uuid="3bac81f0-3978-463a-a380-b9300ba014b4" name="sort_index" label="M#12cn14排序索引" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SORT_INDEX" />
   <FieldString _uuid="eeed2f4c-35b9-4219-bf8d-05dbbd6f6256" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
+  <FieldString _uuid="16190ae4-64d9-49c3-bdd1-ff7548f46b5f" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldInteger _uuid="88ea0837-3c2c-47ad-b06f-c6cbc5fd11d2" name="element_data_cd" label="M#12cn16元素数据类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_DATA_CD" />
   <FieldInteger _uuid="2b1f1389-c46b-45e1-a30a-9f0ddedace7b" name="element_count" label="M#12cn14元素个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_COUNT" />
   <FieldInteger _uuid="531c32fe-4334-4a3b-ab1e-f6bdf59b70a7" name="data_stride" label="M#12cn14数据宽度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_STRIDE" />

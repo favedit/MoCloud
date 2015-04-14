@@ -101,8 +101,8 @@ public class FGcResBitmapConsole
    // @return 处理结果
    //============================================================
    @Override
-   public EResult onDeleteAfter(ILogicContext logicContext,
-                                FGcResBitmapInfo unit){
+   protected EResult onDeleteAfter(ILogicContext logicContext,
+                                   FGcResBitmapInfo unit){
       // 删除关联资源
       long resourceId = unit.resourceId();
       if(resourceId > 0){

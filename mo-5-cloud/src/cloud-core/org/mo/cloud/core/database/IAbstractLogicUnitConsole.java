@@ -11,6 +11,26 @@ import org.mo.data.logic.ILogicContext;
 public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
 {
    //============================================================
+   // <T>判断编号是否存在。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param objectId 对象编号
+   // @return 是否存在
+   //============================================================
+   boolean exists(ILogicContext logicContext,
+                  long objectId);
+
+   //============================================================
+   // <T>判断唯一编号是否存在。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param uniqueCode 唯一编号
+   // @return 是否存在
+   //============================================================
+   boolean existsByGuid(ILogicContext logicContext,
+                        String uniqueCode);
+
+   //============================================================
    // <T>根据编号查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境

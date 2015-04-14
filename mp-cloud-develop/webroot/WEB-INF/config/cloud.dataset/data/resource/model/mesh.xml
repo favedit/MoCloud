@@ -3,6 +3,7 @@
   <FieldRecordId _uuid="32b5d273-4773-427f-b1dc-4cec8f3802f0" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
   <FieldRecordId _uuid="36977267-a626-4047-8e95-ff22c80710c9" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
   <FieldRecordId _uuid="b6b4b3bd-9bcd-4369-9ba0-347d734110af" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource.model" />
+  <FieldInteger _uuid="52a80f7e-25c8-4d3f-a3ed-5e74b24518db" name="sort_index" label="M#12cn14排序索引" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SORT_INDEX" />
   <FieldString _uuid="4db98db8-7735-4e81-b765-bf7845686984" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="18e7edba-48fc-4916-beea-1b2c69e37d1b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="28e257a6-eb8b-4b5c-96f0-9fbb011fdaff" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />

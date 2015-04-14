@@ -1,8 +1,8 @@
 package org.mo.content.service.resource.bitmap;
 
-import org.mo.content.core.resource.mesh.IC3dMeshConsole;
+import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
 
-import org.mo.cloud.logic.resource.mesh.FGcResMeshInfo;
+import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.data.RSql;
@@ -29,7 +29,7 @@ public class FBitmapService
 {
    // 项目控制台接口
    @ALink
-   protected IC3dMeshConsole _meshConsole;
+   protected ICntMeshConsole _meshConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -69,13 +69,13 @@ public class FBitmapService
          whereSql += " AND (" + FDataSolutionProjectLogic.CODE + " LIKE '%" + RSql.formatValue(search) + "%')";
       }
       // 查询数据
-      FLogicDataset<FGcResMeshInfo> dataset = _meshConsole.fetch(logicContext, whereSql, order, pageSize, page);
+      FLogicDataset<FGcResModelMeshInfo> dataset = _meshConsole.fetch(logicContext, whereSql, order, pageSize, page);
       xoutput.set("total", dataset.total());
       xoutput.set("count", dataset.count());
       xoutput.set("page_size", dataset.pageSize());
       xoutput.set("page_count", dataset.pageCount());
       xoutput.set("page", dataset.page());
-      for(FGcResMeshInfo mesh : dataset){
+      for(FGcResModelMeshInfo mesh : dataset){
          FXmlNode xitem = xoutput.createNode("Project");
          xitem.set("guid", mesh.guid());
          xitem.set("code", mesh.code());
@@ -106,7 +106,7 @@ public class FBitmapService
          throw new FFatalError("Guid is empty.");
       }
       // 获得数据
-      FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
       if(mesh == null){
          return EResult.Failure;
       }
@@ -148,12 +148,12 @@ public class FBitmapService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcResMeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
+      FGcResModelMeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
       if(findMesh != null){
          throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
       }
       // 新建处理
-      FGcResMeshInfo mesh = _meshConsole.doPrepare(logicContext);
+      FGcResModelMeshInfo mesh = _meshConsole.doPrepare(logicContext);
       mesh.setUserId(session.userId());
       mesh.setCode(code);
       mesh.setLabel(label);
@@ -191,7 +191,7 @@ public class FBitmapService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
       if(mesh == null){
          throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }
@@ -232,7 +232,7 @@ public class FBitmapService
          throw new FFatalError("Resource3d mesh guid is empty.");
       }
       // 查找数据
-      FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+      FGcResModelMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
       if(mesh == null){
          throw new FFatalError("Resource3d mesh is not exists. (guid={1})", guid);
       }

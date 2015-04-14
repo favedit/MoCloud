@@ -1,14 +1,5 @@
 package org.mo.content.service.resource;
 
-import org.mo.content.core.resource.texture.IC3dBitmapConsole;
-import org.mo.content.core.resource.texture.IC3dTextureConsole;
-
-import org.mo.content.core.resource.template.IC3dTemplateConsole;
-import org.mo.content.core.resource.scene.IC3dSceneConsole;
-import org.mo.content.core.resource.IC3dResourceConsole;
-import org.mo.content.core.resource.model.IC3dModelConsole;
-import org.mo.content.core.resource.mesh.IC3dMeshConsole;
-import org.mo.content.core.resource.material.IC3dMaterialConsole;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
@@ -19,6 +10,13 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.resource.ICntResourceConsole;
+import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
+import org.mo.content.core.resource.material.ICntMaterialConsole;
+import org.mo.content.core.resource.mesh.ICntMeshConsole;
+import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.core.resource.scene.ICntSceneConsole;
+import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -36,31 +34,27 @@ public class FResourceService
 {
    // 内容图片控制台接口
    @ALink
-   protected IC3dBitmapConsole _bitmapConsole;
-
-   // 内容纹理控制台接口
-   @ALink
-   protected IC3dTextureConsole _textureConsole;
+   protected ICntBitmapConsole _bitmapConsole;
 
    // 内容材质控制台接口
    @ALink
-   protected IC3dMaterialConsole _materialConsole;
+   protected ICntMaterialConsole _materialConsole;
 
    // 内容网格控制台接口
    @ALink
-   protected IC3dMeshConsole _meshConsole;
+   protected ICntMeshConsole _meshConsole;
 
    // 内容模型控制台接口
    @ALink
-   protected IC3dModelConsole _modelConsole;
+   protected ICntModelConsole _modelConsole;
 
    // 内容模板控制台接口
    @ALink
-   protected IC3dTemplateConsole _templateConsole;
+   protected ICntTemplateConsole _templateConsole;
 
    // 内容场景控制台接口
    @ALink
-   protected IC3dSceneConsole _sceneConsole;
+   protected ICntSceneConsole _sceneConsole;
 
    // 资源目录控制台接口
    @ALink
@@ -68,7 +62,7 @@ public class FResourceService
 
    // 资源控制台接口
    @ALink
-   protected IC3dResourceConsole _resourceConsole;
+   protected ICntResourceConsole _resourceConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -113,45 +107,6 @@ public class FResourceService
       //............................................................
       // 查询数据
       FLogicDataset<FGcResourceInfo> dataset = _resourceConsole.fetch(logicContext, whereSql, order, pageSize, page);
-      //      FLogicDataset<FLogicUnit> dataset = null;
-      //      switch(typeCd){
-      //         case "picture":
-      //            // 查找位图
-      //            dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
-      //            break;
-      //         case "sound":
-      //            // 查找声音
-      //            break;
-      //         case "video":
-      //            // 查找视频
-      //            break;
-      //         case "texture":
-      //            // 查找纹理
-      //            //_textureConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-      //            break;
-      //         case "material":
-      //            // 查找材质
-      //            //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-      //            break;
-      //         case "mesh":
-      //            // 查找网格
-      //            dataset = _meshConsole.list(logicContext, whereSql, order, pageSize, page);
-      //            break;
-      //         case "model":
-      //            // 查找网格
-      //            //_modelConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-      //            break;
-      //         case "template":
-      //            // 查找模板
-      //            //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-      //            break;
-      //         case "scene":
-      //            // 查找网格
-      //            //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-      //            break;
-      //         default:
-      //            throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);
-      //      }
       //............................................................
       // 生成输出内容
       if(dataset != null){
@@ -205,8 +160,8 @@ public class FResourceService
       // 查询数据
       switch(typeCd){
          case EGcResource.BitmapString:
-            // 查找位图
-            //dataset = _bitmapConsole.list(logicContext, whereSql, order, pageSize, page);
+            // 删除位图
+            _bitmapConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
          case "sound":
             // 查找声音
@@ -214,11 +169,7 @@ public class FResourceService
          case "video":
             // 查找视频
             break;
-         case "texture":
-            // 查找纹理
-            //_textureConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
-            break;
-         case "material":
+         case EGcResource.MaterialString:
             // 查找材质
             //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
@@ -226,15 +177,15 @@ public class FResourceService
             // 删除网格
             _meshConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
-         case "model":
-            // 查找网格
-            //_modelConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+         case EGcResource.ModelString:
+            // 删除模型
+            _modelConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
-         case "template":
+         case EGcResource.TemplateString:
             // 查找模板
             //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;
-         case "scene":
+         case EGcResource.SceneString:
             // 查找网格
             //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
             break;

@@ -1,8 +1,5 @@
 package org.mo.content.face.resource;
 
-import org.mo.content.core.resource.IC3dResourceConsole;
-
-import org.mo.content.core.resource.mesh.IC3dMeshConsole;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +12,9 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.core.resource.bitmap.IC2dBitmapConsole;
+import org.mo.content.core.resource.ICntResourceConsole;
+import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
+import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
@@ -42,15 +41,15 @@ public class FPreviewServlet
 
    // 位图模型接口
    @ALink
-   protected IC2dBitmapConsole _bitmapConsole;
+   protected ICntBitmapConsole _bitmapConsole;
 
    // 资源模型接口
    @ALink
-   protected IC3dResourceConsole _resourceConsole;
+   protected ICntResourceConsole _resourceConsole;
 
    // 网格模型接口
    @ALink
-   protected IC3dMeshConsole _meshConsole;
+   protected ICntMeshConsole _meshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -163,35 +162,35 @@ public class FPreviewServlet
       }catch(Exception e){
          throw new FFatalError(e);
       }
-      //      //............................................................
-      //      // 上传预览数据
-      //      switch(typeCd){
-      //         case "mesh":
-      //            // 获得网格信息
-      //            FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
-      //            if(mesh == null){
-      //               throw new FFatalError("Mesh is empty. (guid={1})", guid);
-      //            }
-      //            // 修改更新时间，预览图才能重新显示
-      //            FGcResourceInfo resource = _resourceConsole.find(logicContext, mesh.resourceId());
-      //            _resourceConsole.doUpdate(logicContext, resource);
-      //            // 上传数据
-      //            _resourceConsole.uploadPreviewData(logicContext, resource.guid(), data);
-      //            break;
-      //         default:
-      //            throw new FFatalError("Upload preview type failure. (type_cd={1})", typeCd);
-      //      }
-      //      int dataLength = data.length;
-      //      //............................................................
-      //      // 发送数据
-      //      _logger.debug(this, "process", "Send resource preview data. (type_cd={1}, guid={2}, length={3})", typeCd, guid, dataLength);
-      //      response.setCharacterEncoding("utf-8");
-      //      response.setStatus(HttpServletResponse.SC_OK);
-      //      response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
-      //      response.addHeader("Last-Modified", System.currentTimeMillis());
-      //      response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
-      //      response.setContentType(EMime.Jpg.mime());
-      //      response.setContentLength(dataLength);
-      //      response.write(data, 0, dataLength);
+      int dataLength = data.length;
+      //............................................................
+      // 上传预览数据
+      switch(typeCd){
+         case EGcResource.MeshString:
+            // 获得网格信息
+            //FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
+            //if(mesh == null){
+            //   throw new FFatalError("Mesh is empty. (guid={1})", guid);
+            //}
+            // 修改更新时间，预览图才能重新显示
+            //FGcResourceInfo resource = _resourceConsole.find(logicContext, mesh.resourceId());
+            //_resourceConsole.doUpdate(logicContext, resource);
+            // 上传数据
+            //_resourceConsole.uploadPreviewData(logicContext, resource.guid(), data);
+            break;
+         default:
+            throw new FFatalError("Upload preview type failure. (type_cd={1})", typeCd);
+      }
+      //............................................................
+      // 发送数据
+      _logger.debug(this, "process", "Send resource preview data. (type_cd={1}, guid={2}, length={3})", typeCd, guid, dataLength);
+      response.setCharacterEncoding("utf-8");
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
+      response.addHeader("Last-Modified", System.currentTimeMillis());
+      response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
+      response.setContentType(EMime.Jpg.mime());
+      response.setContentLength(dataLength);
+      response.write(data, 0, dataLength);
    }
 }

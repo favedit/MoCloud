@@ -17,10 +17,10 @@ public class RDbMongoDrop
       console.drop(EGcStorageCatalog.Cache3dTextureBitmap);
       console.drop(EGcStorageCatalog.Cache3dTexture);
       console.drop(EGcStorageCatalog.Cache3dTextureCompress);
-      console.drop(EGcStorageCatalog.Cache3dMesh);
-      console.drop(EGcStorageCatalog.Cache3dModel);
-      console.drop(EGcStorageCatalog.Cache3dTemplate);
-      console.drop(EGcStorageCatalog.Cache3dSceneTheme);
+      console.drop(EGcStorageCatalog.CacheResourceMesh);
+      console.drop(EGcStorageCatalog.CacheResourceModel);
+      console.drop(EGcStorageCatalog.CacheResourceTemplate);
+      console.drop(EGcStorageCatalog.CacheResourceScene);
    }
 
    //============================================================

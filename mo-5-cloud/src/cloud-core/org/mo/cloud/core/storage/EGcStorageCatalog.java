@@ -33,14 +33,14 @@ public class EGcStorageCatalog
    public final static String Cache3dTextureBitmap = "cache3d.texture.bitmap";
 
    // 资源3D网格
-   public final static String Cache3dMesh = "cache3d.mesh";
+   public final static String CacheResourceMesh = "cache3d.resource.mesh";
 
    // 资源3D模型
-   public final static String Cache3dModel = "cache3d.model";
+   public final static String CacheResourceModel = "cache.resource.model";
 
    // 资源3D模板
-   public final static String Cache3dTemplate = "cache3d.template";
+   public final static String CacheResourceTemplate = "cache.resource.template";
 
    // 资源3D场景
-   public final static String Cache3dSceneTheme = "cache3d.scene.theme";
+   public final static String CacheResourceScene = "cache3d.resource.scene";
 }
