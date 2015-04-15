@@ -1,11 +1,17 @@
 package org.mo.cloud.logic.resource.model;
 
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
+
+import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelMeshLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
+import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
+import org.mo.cloud.logic.resource.model.animation.IGcResModelAnimationConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
@@ -27,6 +33,10 @@ public class FGcResModelConsole
    // 资源模型网格管理器
    @ALink
    protected IGcResModelMeshConsole _modelMeshConsole;
+
+   // 资源模型动画管理器
+   @ALink
+   protected IGcResModelAnimationConsole _modelAnimationConsole;
 
    //============================================================
    // <T>构造资源位图信息控制台。</T>
@@ -67,6 +77,21 @@ public class FGcResModelConsole
          model = findByResourceId(logicContext, resourceId);
       }
       return model;
+   }
+
+   //============================================================
+   // <T>根据代码查找模型单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   @Override
+   public FGcResModelInfo findByCode(ILogicContext logicContext,
+                                     String code){
+      String searchSql = FDataResourceModelLogic.CODE + "='" + code + "'";
+      FGcResModelInfo modelInfo = search(logicContext, searchSql);
+      return modelInfo;
    }
 
    //============================================================
@@ -111,12 +136,19 @@ public class FGcResModelConsole
                                     FGcResModelInfo unit){
       long modelId = unit.ouid();
       // 删除网格集合
-      FDataResourceModelMeshLogic modelMeshLogic = logicContext.findLogic(FDataResourceModelMeshLogic.class);
-      String whereSql = FDataResourceModelMeshLogic.MODEL_ID + "=" + modelId;
-      FLogicDataset<FGcResModelMeshInfo> modelMeshDataset = modelMeshLogic.fetchClass(FGcResModelMeshInfo.class, whereSql);
+      String meshWhereSql = FDataResourceModelMeshLogic.MODEL_ID + "=" + modelId;
+      FLogicDataset<FGcResModelMeshInfo> modelMeshDataset = _modelMeshConsole.fetch(logicContext, meshWhereSql);
       if(modelMeshDataset != null){
-         for(FGcResModelMeshInfo modelMesh : modelMeshDataset){
-            _modelMeshConsole.doDelete(logicContext, modelMesh);
+         for(FGcResModelMeshInfo mesh : modelMeshDataset){
+            _modelMeshConsole.doDelete(logicContext, mesh);
+         }
+      }
+      // 删除动画集合
+      String animationWhereSql = FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId;
+      FLogicDataset<FGcResModelAnimationInfo> animationDataset1 = _modelAnimationConsole.fetch(logicContext, animationWhereSql);
+      if(animationDataset1 != null){
+         for(FGcResModelAnimationInfo animation : animationDataset1){
+            _modelAnimationConsole.doDelete(logicContext, animation);
          }
       }
       // 返回结果

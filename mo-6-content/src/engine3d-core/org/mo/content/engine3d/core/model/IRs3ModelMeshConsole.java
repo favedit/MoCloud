@@ -1,7 +1,8 @@
 package org.mo.content.engine3d.core.model;
 
-import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.IGcResModelMeshConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
+
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.data.logic.ILogicContext;
 
@@ -33,16 +34,6 @@ public interface IRs3ModelMeshConsole
    //                                      String code);
    //
    //   //============================================================
-   //   // <T>新建网格。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param mesh 网格
-   //   // @return 网格单元
-   //   //============================================================
-   //   FDataResource3dMeshUnit insert(ILogicContext logicContext,
-   //                                  FRs3ModelMesh mesh);
-   //
-   //   //============================================================
    //   // <T>更新网格。</T>
    //   //
    //   // @param logicContext 逻辑环境
@@ -72,15 +63,26 @@ public interface IRs3ModelMeshConsole
    //   byte[] makeMeshData(ILogicContext logicContext,
    //                       String guid);
    //
+
+   //
+   //   //============================================================
+   //   // <T>新建网格。</T>
+   //   //
+   //   // @param logicContext 逻辑环境
+   //   // @param mesh 网格
+   //   // @return 网格单元
+   //   //============================================================
+   //   FDataResource3dMeshUnit insert(ILogicContext logicContext,
+   //                                  FRs3ModelMesh mesh);
    //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
-   // @param meshId 网格编号
+   // @param meshInfo 网格信息
    // @param mesh 网格数据
    // @return 网格信息
    //============================================================
    FGcResModelMeshInfo updateResource(ILogicContext logicContext,
-                                      long meshId,
+                                      FGcResModelMeshInfo meshInfo,
                                       FRs3ModelMesh mesh);
 }

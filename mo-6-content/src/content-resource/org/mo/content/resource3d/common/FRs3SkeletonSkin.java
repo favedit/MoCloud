@@ -1,8 +1,10 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinInfo;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -169,33 +171,33 @@ public class FRs3SkeletonSkin
       }
    }
 
-   //   //============================================================
-   //   // <T>从数据单元中导入配置。</T>
-   //   //
-   //   // @param unit 数据单元
-   //   //============================================================
-   //   public void loadUnit(FDataResource3dSkeletonSkinUnit unit){
-   //      // 加载属性
-   //      _ouid = unit.ouid();
-   //      _guid = unit.guid();
-   //      _code = unit.code();
-   //      _label = unit.label();
-   //      // 加载配置
-   //      FXmlDocument xdocument = new FXmlDocument();
-   //      xdocument.loadString(unit.content());
-   //      this.loadConfig(xdocument.root());
-   //   }
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
    //
-   //   //============================================================
-   //   // <T>将配置信息存入数据单元中。</T>
-   //   //
-   //   // @param unit 数据单元
-   //   //============================================================
-   //   public void saveUnit(FDataResource3dSkeletonSkinUnit unit){
-   //      unit.setCode(_code);
-   //      unit.setLabel(_label);
-   //      unit.setContent(toXml());
-   //   }
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FGcResModelSkeletonSkinInfo unit){
+      // 加载属性
+      _ouid = unit.ouid();
+      _guid = unit.guid();
+      _code = unit.code();
+      _label = unit.label();
+      // 加载配置
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadString(unit.content());
+      this.loadConfig(xdocument.root());
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FGcResModelSkeletonSkinInfo unit){
+      unit.setCode(_code);
+      unit.setLabel(_label);
+      unit.setContent(toXml());
+   }
 
    //============================================================
    // <T>从配置信息中导入配置。</T>

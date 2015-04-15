@@ -221,8 +221,9 @@ public class FRs3Model
    //
    // @param input 输入流
    //============================================================
+   @Override
    public void importData(IDataInput input){
-      //super.importData(input);
+      super.importData(input);
       _fullCode = input.readString();
       _label = input.readString();
       _keywords = input.readString();
@@ -232,8 +233,10 @@ public class FRs3Model
          FRs3ModelMesh mesh = new FRs3ModelMesh();
          mesh.setModel(this);
          mesh.importData(input);
-         meshs().push(mesh);
+         pushMesh(mesh);
       }
+      // 构件内部信息
+      build();
    }
 
    //============================================================

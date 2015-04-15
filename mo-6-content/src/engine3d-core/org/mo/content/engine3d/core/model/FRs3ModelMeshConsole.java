@@ -2,9 +2,10 @@ package org.mo.content.engine3d.core.model;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshConsole;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
+import org.mo.com.lang.FFatalError;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.core.aop.face.ALink;
@@ -96,18 +97,21 @@ public class FRs3ModelMeshConsole
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
-   // @param meshId 网格编号
+   // @param meshInfo 网格信息
    // @param mesh 网格数据
    // @return 网格信息
    //============================================================
    @Override
    public FGcResModelMeshInfo updateResource(ILogicContext logicContext,
-                                             long meshId,
+                                             FGcResModelMeshInfo meshInfo,
                                              FRs3ModelMesh mesh){
       // 获得网格信息
-      FGcResModelMeshInfo meshInfo = get(logicContext, meshId);
-      String modelMeshGuid = meshInfo.guid();
+      if(meshInfo == null){
+         throw new FFatalError("Mesh info is empty.");
+      }
       long modelId = meshInfo.modelId();
+      long meshId = meshInfo.ouid();
+      String meshGuid = meshInfo.guid();
       //............................................................
       // 删除不存在的数据流
       _streamConsole.doDeleteByMeshId(logicContext, meshId);
@@ -120,17 +124,17 @@ public class FRs3ModelMeshConsole
          FGcResModelMeshStreamInfo streamInfo = _streamConsole.doPrepare(logicContext);
          streamInfo.setModelId(modelId);
          streamInfo.setMeshId(meshId);
+         streamInfo.setSortIndex(n);
          _streamConsole.doInsert(logicContext, streamInfo);
-         long streamId = streamInfo.ouid();
          // 更新资源
-         _streamConsole.updateResource(logicContext, streamId, stream);
+         _streamConsole.updateResource(logicContext, streamInfo, stream);
       }
       // 更新网格
-      //mesh.saveUnit(modelMeshInfo);
+      //mesh.saveUnit(meshInfo);
       doUpdate(logicContext, meshInfo);
       //............................................................
       // 废弃临时数据
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceMesh, modelMeshGuid);
+      _storageConsole.delete(EGcStorageCatalog.CacheResourceMesh, meshGuid);
       //............................................................
       // 返回网格单元
       return meshInfo;

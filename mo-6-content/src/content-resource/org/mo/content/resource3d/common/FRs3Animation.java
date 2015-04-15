@@ -1,5 +1,6 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -56,9 +57,6 @@ public class FRs3Animation
    // @return 跟踪集合
    //============================================================
    public FObjects<FRs3Track> tracks(){
-      if(_tracks == null){
-         _tracks = new FObjects<FRs3Track>(FRs3Track.class);
-      }
       return _tracks;
    }
 
@@ -68,7 +66,10 @@ public class FRs3Animation
    // @param track 跟踪
    //============================================================
    public void pushTrack(FRs3Track track){
-      tracks().push(track);
+      if(_tracks == null){
+         _tracks = new FObjects<FRs3Track>(FRs3Track.class);
+      }
+      _tracks.push(track);
    }
 
    //============================================================
@@ -109,34 +110,34 @@ public class FRs3Animation
    //   public void importData(IDataInput input){
    //   }
 
-   //   //============================================================
-   //   // <T>从数据单元中导入配置。</T>
-   //   //
-   //   // @param unit 数据单元
-   //   //============================================================
-   //   public void loadUnit(FDataResource3dAnimationUnit unit){
-   //      // 加载属性
-   //      _ouid = unit.ouid();
-   //      _guid = unit.guid();
-   //      _code = unit.code();
-   //      _label = unit.label();
-   //      _frameCount = unit.frameCount();
-   //      _frameTick = unit.frameTick();
-   //      _frameSpan = unit.frameSpan();
-   //   }
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
    //
-   //   //============================================================
-   //   // <T>将配置信息存入数据单元中。</T>
-   //   //
-   //   // @param unit 数据单元
-   //   //============================================================
-   //   public void saveUnit(FDataResource3dAnimationUnit unit){
-   //      unit.setCode(_code);
-   //      unit.setLabel(_label);
-   //      unit.setFrameCount(_frameCount);
-   //      unit.setFrameTick(_frameTick);
-   //      unit.setFrameSpan(_frameSpan);
-   //   }
+   // @param unit 数据单元
+   //============================================================
+   public void loadUnit(FGcResModelAnimationInfo info){
+      // 加载属性
+      _ouid = info.ouid();
+      _guid = info.guid();
+      _code = info.code();
+      _label = info.label();
+      _frameCount = info.frameCount();
+      _frameTick = info.frameTick();
+      _frameSpan = info.frameSpan();
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FGcResModelAnimationInfo info){
+      info.setCode(_code);
+      info.setLabel(_label);
+      info.setFrameCount(_frameCount);
+      info.setFrameTick(_frameTick);
+      info.setFrameSpan(_frameSpan);
+   }
 
    //============================================================
    // <T>从输入流中导入数据。</T>

@@ -1,8 +1,8 @@
 package org.mo.content.core.resource.animation;
 
-import org.mo.content.engine3d.core.model.IRs3ModelMeshStreamConsole;
+import org.mo.content.engine3d.core.model.animation.IRs3ModelAnimationConsole;
 
-import org.mo.content.engine3d.core.animation.IRs3AnimationConsole;
+import org.mo.content.engine3d.core.model.IRs3ModelMeshStreamConsole;
 import org.mo.core.aop.face.ALink;
 
 //============================================================
@@ -18,5 +18,5 @@ public class FCntAnimationConsole
 
    // 动画管理接口
    @ALink
-   protected IRs3AnimationConsole _animationConsole;
+   protected IRs3ModelAnimationConsole _animationConsole;
 }

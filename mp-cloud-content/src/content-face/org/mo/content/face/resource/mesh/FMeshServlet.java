@@ -1,8 +1,9 @@
 package org.mo.content.face.resource.mesh;
 
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
+
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
-import org.mo.cloud.logic.resource.model.IGcResModelMeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;

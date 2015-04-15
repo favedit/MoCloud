@@ -14,8 +14,14 @@ public class EGcStorageCatalog
    // 资源模型网格数据
    public final static String ResourceModelMeshStream = "resource.model.mesh.stream";
 
-   // 资源模型网格跟踪
+   // 资源模型网格轨迹数据
    public final static String ResourceModelMeshTrack = "resource.model.mesh.track";
+
+   // 资源模型骨骼蒙皮数据流数据
+   public final static String ResourceModelSkeletonSkinStream = "resource.model.skeleton.skin.stream";
+
+   // 资源模型动画轨迹数据
+   public final static String ResourceModelAnimationTrack = "resource.model.animation.track";
 
    // 资源位图预览数据
    public final static String CacheBitmapPreview = "cache.bitmap.preview";

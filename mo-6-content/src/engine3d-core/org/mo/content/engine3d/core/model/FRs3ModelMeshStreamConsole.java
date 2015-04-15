@@ -2,8 +2,8 @@ package org.mo.content.engine3d.core.model;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshStreamConsole;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.data.logic.ILogicContext;
 
@@ -57,16 +57,15 @@ public class FRs3ModelMeshStreamConsole
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
-   // @param streamId 数据流编号
+   // @param streamInfo 数据流信息
    // @param stream 数据流
    // @return 数据流信息
    //============================================================
    @Override
    public FGcResModelMeshStreamInfo updateResource(ILogicContext logicContext,
-                                                   long streamId,
+                                                   FGcResModelMeshStreamInfo streamInfo,
                                                    FRs3Stream stream){
       // 获得信息
-      FGcResModelMeshStreamInfo streamInfo = get(logicContext, streamId);
       String guid = streamInfo.guid();
       // 设置数据
       streamInfo.setFullCode(stream.fullCode());

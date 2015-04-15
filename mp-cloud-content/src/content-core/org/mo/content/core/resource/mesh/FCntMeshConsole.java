@@ -1,8 +1,9 @@
 package org.mo.content.core.resource.mesh;
 
-import org.mo.cloud.logic.resource.model.FGcResModelMeshConsole;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.IGcResModelMeshConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
+
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;

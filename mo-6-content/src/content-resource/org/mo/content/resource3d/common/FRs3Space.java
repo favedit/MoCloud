@@ -9,7 +9,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>场景。</T>
 //============================================================
 public class FRs3Space
-      extends FRs3Component
+      extends FRs3Resource
 {
    // 场景技术
    protected FRs3Technique _technique = new FRs3Technique();

@@ -18,7 +18,7 @@ public interface IGcResModelConsole
    // @return 位图信息
    //============================================================
    FGcResModelInfo findByResourceId(ILogicContext logicContext,
-                                     long resourceId);
+                                    long resourceId);
 
    //============================================================
    // <T>根据资源唯一编号查找位图信息。</T>
@@ -28,5 +28,15 @@ public interface IGcResModelConsole
    // @return 位图信息
    //============================================================
    FGcResModelInfo findByResourceGuid(ILogicContext logicContext,
-                                       String resourceGuid);
+                                      String resourceGuid);
+
+   //============================================================
+   // <T>根据代码查找模型单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   FGcResModelInfo findByCode(ILogicContext logicContext,
+                              String code);
 }

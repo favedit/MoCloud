@@ -1,6 +1,6 @@
 package org.mo.content.service.resource.template;
 
-import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;

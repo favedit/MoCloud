@@ -2,6 +2,7 @@ package org.mo.content.engine3d.core.model;
 
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.resource.model.IGcResModelConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
@@ -16,57 +17,41 @@ public interface IRs3ModelConsole
       extends
          IGcResModelConsole
 {
-   //   //============================================================
-   //   // <T>根据代码查找模型单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param code 代码
-   //   // @return 处理结果
-   //   //============================================================
-   //   FGcResModelInfo findByCode(ILogicContext logicContext,
-   //                              String code);
+   //============================================================
+   // <T>导入模型。</T>
    //
-   //   //============================================================
-   //   // <T>根据代码查找模型网格单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param code 代码
-   //   // @return 模型网格单元
-   //   //============================================================
-   //   FGcResModelInfo findMeshByCode(ILogicContext logicContext,
-   //                                  long modelId,
-   //                                  String code);
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param fileName 文件名称
+   // @return 处理结果
+   //============================================================
+   EResult importModel(ILogicContext logicContext,
+                       FGcSessionInfo session,
+                       String fileName);
 
+   //============================================================
+   // <T>导入骨骼。</T>
    //
-   //   //============================================================
-   //   // <T>导入模型。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param fileName 文件名称
-   //   // @return 处理结果
-   //   //============================================================
-   //   EResult importModel(ILogicContext logicContext,
-   //                       String fileName);
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param fileName 文件名称
+   // @return 处理结果
+   //============================================================
+   EResult importSkeleton(ILogicContext logicContext,
+                          FGcSessionInfo session,
+                          String fileName);
+
+   //============================================================
+   // <T>导入动画。</T>
    //
-   //   //============================================================
-   //   // <T>导入骨骼。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param fileName 文件名称
-   //   // @return 处理结果
-   //   //============================================================
-   //   EResult importSkeleton(ILogicContext logicContext,
-   //                          String fileName);
-   //
-   //   //============================================================
-   //   // <T>导入动画。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param fileName 文件名称
-   //   // @return 处理结果
-   //   //============================================================
-   //   EResult importAnimation(ILogicContext logicContext,
-   //                           String fileName);
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param fileName 文件名称
+   // @return 处理结果
+   //============================================================
+   EResult importAnimation(ILogicContext logicContext,
+                           FGcSessionInfo session,
+                           String fileName);
 
    //============================================================
    // <T>生成资源模型。</T>

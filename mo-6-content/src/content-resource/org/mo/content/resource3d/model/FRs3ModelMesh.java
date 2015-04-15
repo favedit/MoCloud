@@ -105,7 +105,7 @@ public class FRs3ModelMesh
          FRs3ModelStream stream = new FRs3ModelStream();
          stream.setMesh(this);
          stream.importData(input);
-         _streams.push(stream);
+         pushStream(stream);
       }
    }
 }

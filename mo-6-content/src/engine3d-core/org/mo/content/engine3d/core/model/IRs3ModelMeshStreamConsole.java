@@ -1,7 +1,7 @@
 package org.mo.content.engine3d.core.model;
 
-import org.mo.cloud.logic.resource.model.FGcResModelMeshStreamInfo;
-import org.mo.cloud.logic.resource.model.IGcResModelMeshStreamConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshStreamConsole;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.data.logic.ILogicContext;
 
@@ -36,11 +36,11 @@ public interface IRs3ModelMeshStreamConsole
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
-   // @param streamId 数据流编号
+   // @param streamInfo 数据流信息
    // @param stream 数据流
    // @return 数据流信息
    //============================================================
    FGcResModelMeshStreamInfo updateResource(ILogicContext logicContext,
-                                            long streamId,
+                                            FGcResModelMeshStreamInfo streamInfo,
                                             FRs3Stream stream);
 }
