@@ -1,23 +1,36 @@
 package org.mo.content.engine3d.core.model;
 
+import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.model.FGcResModelConsole;
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
+import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationTrackInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonInfo;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.content.engine3d.core.model.animation.IRs3ModelAnimationConsole;
+import org.mo.content.engine3d.core.model.animation.IRs3ModelAnimationTrackConsole;
+import org.mo.content.engine3d.core.model.skeleton.IRs3SkeletonConsole;
+import org.mo.content.engine3d.core.model.skeleton.IRs3SkeletonSkinStreamConsole;
 import org.mo.content.geom.mesh.FGeomMesh;
 import org.mo.content.geom.mesh.FGeomModel;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.mime.stl.FStlFile;
+import org.mo.content.resource3d.common.FRs3Animation;
+import org.mo.content.resource3d.common.FRs3Skeleton;
+import org.mo.content.resource3d.common.FRs3SkeletonSkin;
 import org.mo.content.resource3d.common.FRs3Stream;
+import org.mo.content.resource3d.common.FRs3Track;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
 import org.mo.core.aop.face.ALink;
@@ -46,6 +59,22 @@ public class FRs3ModelConsole
    @ALink
    protected IRs3ModelMeshStreamConsole _streamConsole;
 
+   // 资源模型网格控制台
+   @ALink
+   protected IRs3ModelAnimationConsole _modelAnimationConsole;
+
+   // 资源模型网格控制台
+   @ALink
+   protected IRs3ModelAnimationTrackConsole _modelAnimationTrackConsole;
+
+   // 资源模型网格控制台
+   @ALink
+   protected IRs3SkeletonConsole _modelSkeletonConsole;
+
+   // 资源模型网格控制台
+   @ALink
+   protected IRs3SkeletonSkinStreamConsole _skeletonSkinStreamConsole;
+
    //   // 网格控制台
    //   @ALink
    //   protected IRs3MeshConsole _meshConsole;
@@ -57,6 +86,9 @@ public class FRs3ModelConsole
    //   // 动画控制台
    //   @ALink
    //   protected IRs3AnimationConsole _animationConsole;
+
+   //============================================================
+   // <T>导入模型。</T>
    //
    //   //============================================================
    //   // <T>根据代码查找模型单元。</T>
@@ -73,6 +105,48 @@ public class FRs3ModelConsole
    //      FDataResource3dModelUnit unit = logic.search(searchSql);
    //      return unit;
    //   }
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 输入流
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importModel(ILogicContext logicContext,
+                              FGcSessionInfo session,
+                              String fileName){
+      // 加载模型资源
+      FRs3Model model = new FRs3Model();
+      model.loadFile(fileName);
+      //............................................................
+      // 新建模型
+      FGcResModelInfo modelInfo = doPrepare(logicContext);
+      modelInfo.setUserId(session.userId());
+      modelInfo.setProjectId(session.projectId());
+      modelInfo.setCode(model.code());
+      modelInfo.setFullCode(model.fullCode());
+      modelInfo.setLabel(model.label());
+      modelInfo.setKeywords(model.keywords());
+      doInsert(logicContext, modelInfo);
+      //............................................................
+      // 新建网格集合
+      int meshCount = model.meshs().count();
+      for(int n = 0; n < meshCount; n++){
+         FRs3ModelMesh mesh = model.meshs().get(n);
+         String meshCode = mesh.code();
+         // 新建网格
+         FGcResModelMeshInfo meshInfo = _meshConsole.doPrepare(logicContext);
+         meshInfo.setModelId(modelInfo.ouid());
+         meshInfo.setSortIndex(n);
+         meshInfo.setCode(meshCode);
+         _meshConsole.doInsert(logicContext, meshInfo);
+         // 更新网格数据
+         _meshConsole.updateResource(logicContext, meshInfo, mesh);
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导入蒙皮。</T>
    //
    //   //============================================================
    //   // <T>根据代码查找模型网格单元。</T>
@@ -90,6 +164,44 @@ public class FRs3ModelConsole
    //      FDataResource3dModelMeshUnit modelMeshUnit = modelMeshLogic.search(whereSql);
    //      return modelMeshUnit.mesh();
    //   }
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param fileName 文件名称
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importSkeleton(ILogicContext logicContext,
+                                 FGcSessionInfo session,
+                                 String fileName){
+      // 加载骨骼资源
+      FRs3Skeleton skeleton = new FRs3Skeleton();
+      skeleton.importFile(fileName);
+      String skeletonCode = skeleton.code();
+      //............................................................
+      // 查找模型信息
+      FDataResourceModelUnit modelInfo = findByCode(logicContext, skeletonCode);
+      long modelId = modelInfo.ouid();
+      //............................................................
+      // 新建骨骼信息
+      FGcResModelSkeletonInfo skeletonInfo = _modelSkeletonConsole.doPrepare(logicContext);
+      skeletonInfo.setUserId(session.userId());
+      skeletonInfo.setProjectId(session.projectId());
+      skeletonInfo.setModelId(modelInfo.ouid());
+      skeleton.saveUnit(skeletonInfo);
+      _modelSkeletonConsole.doInsert(logicContext, skeletonInfo);
+      //............................................................
+      // 新建蒙皮集合
+      for(FRs3SkeletonSkin skin : skeleton.skins()){
+         // 查找网格
+         FGcResModelMeshInfo meshInfo = _meshConsole.findByModelCode(logicContext, modelId, skin.code());
+         // 新建蒙皮
+         _modelSkeletonConsole.insertSkin(logicContext, meshInfo, skeletonInfo, skin);
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导入动画。</T>
    //
    //   //============================================================
    //   // <T>导入模型。</T>
@@ -248,6 +360,69 @@ public class FRs3ModelConsole
    //      }
    //      return EResult.Success;
    //   }
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param fileName 文件名称
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importAnimation(ILogicContext logicContext,
+                                  FGcSessionInfo session,
+                                  String fileName){
+      // 加载骨骼资源
+      FRs3Animation animation = new FRs3Animation();
+      animation.importFile(fileName);
+      String modelCode = animation.code();
+      //............................................................
+      // 查找模型信息
+      FGcResModelInfo modelInfo = findByCode(logicContext, modelCode);
+      if(modelInfo == null){
+         throw new FFatalError("Model is not exists. (code={1})", modelCode);
+      }
+      long modelId = modelInfo.ouid();
+      //............................................................
+      // 查找骨骼信息
+      long skeletonId = 0;
+      FGcResModelSkeletonInfo skeletonInfo = _modelSkeletonConsole.findByCode(logicContext, modelCode);
+      if(skeletonInfo != null){
+         skeletonId = skeletonInfo.ouid();
+      }
+      //............................................................
+      // 新建动画信息
+      FGcResModelAnimationInfo animationInfo = _modelAnimationConsole.doPrepare(logicContext);
+      animationInfo.setUserId(session.userId());
+      animationInfo.setProjectId(session.projectId());
+      animationInfo.setModelId(modelId);
+      animationInfo.setSkeletonId(skeletonId);
+      animation.saveUnit(animationInfo);
+      _modelAnimationConsole.doInsert(logicContext, animationInfo);
+      long animationId = animationInfo.ouid();
+      //............................................................
+      // 新建蒙皮集合
+      for(FRs3Track track : animation.tracks()){
+         // 查找关联网格信息
+         long meshId = 0;
+         String meshCode = track.meshCode();
+         if(!RString.isEmpty(meshCode)){
+            FGcResModelMeshInfo meshInfo = _meshConsole.findByModelCode(logicContext, modelId, meshCode);
+            if(meshInfo == null){
+               throw new FFatalError("Model mesh is not found. (model={1}, mesh={2})", modelCode, meshCode);
+            }
+            meshId = meshInfo.ouid();
+         }
+         // 新建轨迹信息
+         FGcResModelAnimationTrackInfo trackInfo = _modelAnimationTrackConsole.doPrepare(logicContext);
+         trackInfo.setUserId(session.userId());
+         trackInfo.setProjectId(session.projectId());
+         trackInfo.setModelId(modelId);
+         trackInfo.setMeshId(meshId);
+         trackInfo.setAnimationId(animationId);
+         _modelAnimationTrackConsole.doInsert(logicContext, trackInfo);
+         // 更新轨迹数据
+         _modelAnimationTrackConsole.updateResource(logicContext, trackInfo, track);
+      }
+      return EResult.Success;
+   }
 
    //============================================================
    // <T>生成资源模型。</T>
@@ -289,6 +464,9 @@ public class FRs3ModelConsole
       //      FDataResource3dModelSkeletonLogic modelSkeletonLogic = logicContext.findLogic(FDataResource3dModelSkeletonLogic.class);
       //      FLogicDataset<FDataResource3dModelSkeletonUnit> modelSkeletonUnits = modelSkeletonLogic.fetch(FDataResource3dModelSkeletonLogic.MODEL_ID + "=" + modelId);
       //      for(FDataResource3dModelSkeletonUnit modelSkeletonUnit : modelSkeletonUnits){
+      //      FDataResourceModelSkeletonLogic modelSkeletonLogic = logicContext.findLogic(FDataResourceModelSkeletonLogic.class);
+      //      FLogicDataset<FDataResourceModelSkeletonUnit> modelSkeletonUnits = modelSkeletonLogic.fetch(FDataResourceModelSkeletonLogic.MODEL_ID + "=" + modelId);
+      //      for(FDataResourceModelSkeletonUnit modelSkeletonUnit : modelSkeletonUnits){
       //         long skeletonId = modelSkeletonUnit.skeletonId();
       //         // 获得骨骼
       //         FRs3Skeleton skeleton = _skeletonConsole.makeSkeleton(logicContext, modelId, skeletonId);
@@ -299,6 +477,9 @@ public class FRs3ModelConsole
       //      FDataResource3dModelAnimationLogic modelAnimationLogic = logicContext.findLogic(FDataResource3dModelAnimationLogic.class);
       //      FLogicDataset<FDataResource3dModelAnimationUnit> modelAnimationUnits = modelAnimationLogic.fetch(FDataResource3dModelAnimationLogic.MODEL_ID + "=" + modelId);
       //      for(FDataResource3dModelAnimationUnit modelAnimationUnit : modelAnimationUnits){
+      //      FDataResourceModelAnimationLogic modelAnimationLogic = logicContext.findLogic(FDataResourceModelAnimationLogic.class);
+      //      FLogicDataset<FDataResourceModelAnimationUnit> modelAnimationUnits = modelAnimationLogic.fetch(FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId);
+      //      for(FDataResourceModelAnimationUnit modelAnimationUnit : modelAnimationUnits){
       //         long animationId = modelAnimationUnit.animationId();
       //         // 获得动画
       //         FRs3Animation animation = _animationConsole.makeAnimation(logicContext, animationId);
@@ -306,12 +487,16 @@ public class FRs3ModelConsole
       //         // 查找动画关联骨骼
       //         FDataResource3dSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResource3dSkeletonAnimationLogic.class);
       //         FLogicDataset<FDataResource3dSkeletonAnimationUnit> skeletonAnimationUnits = skeletonAnimationLogic.fetch(FDataResource3dSkeletonAnimationLogic.ANIMATION_ID + "=" + animationId);
+      //         FDataResourceSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResourceSkeletonAnimationLogic.class);
+      //         FLogicDataset<FDataResourceSkeletonAnimationUnit> skeletonAnimationUnits = skeletonAnimationLogic.fetch(FDataResourceSkeletonAnimationLogic.ANIMATION_ID + "=" + animationId);
       //         if(!skeletonAnimationUnits.isEmpty()){
       //            if(skeletonAnimationUnits.count() > 1){
       //               throw new FFatalError("Animation skeleton is too many.");
       //            }
       //            FDataResource3dSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationUnits.first();
       //            FDataResource3dSkeletonUnit skeletonUnit = skeletonAnimationUnit.skeleton();
+      //            FDataResourceSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationUnits.first();
+      //            FDataResourceSkeletonUnit skeletonUnit = skeletonAnimationUnit.skeleton();
       //            animation.setSkeletonGuid(skeletonUnit.guid());
       //         }
       //      }
@@ -333,6 +518,8 @@ public class FRs3ModelConsole
       SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceModel, guid);
       if(findStorage != null){
          return findStorage.data();
+         //TODO：测试
+         //return findStorage.data();
       }
       // 获得唯一编号
       FGcResModelInfo modelInfo = findByResourceGuid(logicContext, guid);
@@ -421,18 +608,18 @@ public class FRs3ModelConsole
       _meshConsole.doDeleteByModelId(logicContext, modelId);
       //............................................................
       // 更新所有数据流
+      // 新建所有网格信息
       int meshCount = model.meshs().count();
       for(int n = 0; n < meshCount; n++){
          FRs3ModelMesh modelMesh = model.meshs().get(n);
-         // 新建模型网格
-         FGcResModelMeshInfo modelMeshInfo = _meshConsole.doPrepare(logicContext);
-         modelMeshInfo.setModelId(modelId);
-         modelMesh.setGuid(modelMeshInfo.guid());
-         modelMesh.saveUnit(modelMeshInfo);
-         _meshConsole.doInsert(logicContext, modelMeshInfo);
-         long modelMeshId = modelMeshInfo.ouid();
-         // 更新模型网格数据
-         _meshConsole.updateResource(logicContext, modelMeshId, modelMesh);
+         // 新建网格信息
+         FGcResModelMeshInfo meshInfo = _meshConsole.doPrepare(logicContext);
+         meshInfo.setModelId(modelId);
+         modelMesh.setGuid(meshInfo.guid());
+         modelMesh.saveUnit(meshInfo);
+         _meshConsole.doInsert(logicContext, meshInfo);
+         // 更新网格数据
+         _meshConsole.updateResource(logicContext, meshInfo, modelMesh);
       }
       // 更新网格
       model.build();
