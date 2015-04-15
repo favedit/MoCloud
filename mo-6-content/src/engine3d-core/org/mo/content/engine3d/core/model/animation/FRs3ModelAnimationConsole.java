@@ -2,15 +2,12 @@ package org.mo.content.engine3d.core.model.animation;
 
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationTrackLogic;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationConsole;
 import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
 import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationTrackInfo;
-import org.mo.cloud.logic.resource.model.animation.IGcResModelAnimationTrackConsole;
 import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Track;
-import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -22,14 +19,6 @@ public class FRs3ModelAnimationConsole
       implements
          IRs3ModelAnimationConsole
 {
-   // 存储控制台
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
-   // 存储控制台
-   @ALink
-   protected IGcResModelAnimationTrackConsole _trackConsole;
-
    //============================================================
    // <T>新建一个跟踪。</T>
    //
@@ -42,7 +31,7 @@ public class FRs3ModelAnimationConsole
                                                     FGcResModelAnimationInfo animationInfo,
                                                     FRs3Track track){
       // 新建跟踪
-      FGcResModelAnimationTrackInfo trackInfo = _trackConsole.doPrepare(logicContext);
+      FGcResModelAnimationTrackInfo trackInfo = _dataModelAnimationTrackConsole.doPrepare(logicContext);
       trackInfo.setUserId(animationInfo.userId());
       trackInfo.setProjectId(animationInfo.projectId());
       trackInfo.setModelId(animationInfo.modelId());
@@ -50,11 +39,11 @@ public class FRs3ModelAnimationConsole
       trackInfo.setFrameTick(track.frameTick());
       trackInfo.setFrameCount(track.frameCount());
       trackInfo.setFrameTotal(track.frameTick() * track.frameCount());
-      _trackConsole.doInsert(logicContext, trackInfo);
+      _dataModelAnimationTrackConsole.doInsert(logicContext, trackInfo);
       // 存储数据
       SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelAnimationTrack, trackInfo.guid());
       resource.setData(track.toArray());
-      _storageConsole.store(resource);
+      _dataStorageConsole.store(resource);
       // 返回跟踪单元
       return trackInfo;
    }
@@ -70,12 +59,12 @@ public class FRs3ModelAnimationConsole
    public FRs3Track makeTrack(ILogicContext logicContext,
                               long trackId){
       // 获得跟踪单元
-      FGcResModelAnimationTrackInfo trackInfo = _trackConsole.get(logicContext, trackId);
+      FGcResModelAnimationTrackInfo trackInfo = _dataModelAnimationTrackConsole.get(logicContext, trackId);
       // 设置属性
       FRs3Track track = new FRs3Track();
       track.loadUnit(trackInfo);
       // 读取数据
-      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceModelAnimationTrack, trackInfo.guid());
+      SGcStorage resource = _dataStorageConsole.find(EGcStorageCatalog.ResourceModelAnimationTrack, trackInfo.guid());
       track.setData(resource.data());
       return track;
    }
@@ -98,7 +87,8 @@ public class FRs3ModelAnimationConsole
       }
       animation.loadUnit(animationInfo);
       // 获得跟踪集合
-      FLogicDataset<FGcResModelAnimationTrackInfo> trackInfos = _trackConsole.fetch(logicContext, FDataResourceModelAnimationTrackLogic.ANIMATION_ID + "=" + animationId);
+      String whereSql = FDataResourceModelAnimationTrackLogic.ANIMATION_ID + "=" + animationId;
+      FLogicDataset<FGcResModelAnimationTrackInfo> trackInfos = _dataModelAnimationTrackConsole.fetch(logicContext, whereSql);
       if(!trackInfos.isEmpty()){
          for(FGcResModelAnimationTrackInfo trackInfo : trackInfos){
             FRs3Track track = makeTrack(logicContext, trackInfo.ouid());

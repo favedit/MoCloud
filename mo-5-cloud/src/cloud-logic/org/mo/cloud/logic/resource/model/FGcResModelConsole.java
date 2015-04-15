@@ -1,8 +1,5 @@
 package org.mo.cloud.logic.resource.model;
 
-import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
-
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelMeshLogic;
@@ -12,6 +9,8 @@ import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
 import org.mo.cloud.logic.resource.model.animation.IGcResModelAnimationConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
@@ -28,15 +27,15 @@ public class FGcResModelConsole
 {
    // 资源管理器
    @ALink
-   protected IGcResourceConsole _resourceConsole;
+   protected IGcResourceConsole _dataResourceConsole;
 
    // 资源模型网格管理器
    @ALink
-   protected IGcResModelMeshConsole _modelMeshConsole;
+   protected IGcResModelMeshConsole _dataModelMeshConsole;
 
    // 资源模型动画管理器
    @ALink
-   protected IGcResModelAnimationConsole _modelAnimationConsole;
+   protected IGcResModelAnimationConsole _dataModelAnimationConsole;
 
    //============================================================
    // <T>构造资源位图信息控制台。</T>
@@ -71,7 +70,7 @@ public class FGcResModelConsole
    public FGcResModelInfo findByResourceGuid(ILogicContext logicContext,
                                              String resourceGuid){
       FGcResModelInfo model = null;
-      FGcResourceInfo resource = _resourceConsole.findByGuid(logicContext, resourceGuid);
+      FGcResourceInfo resource = _dataResourceConsole.findByGuid(logicContext, resourceGuid);
       if(resource != null){
          long resourceId = resource.ouid();
          model = findByResourceId(logicContext, resourceId);
@@ -111,14 +110,14 @@ public class FGcResModelConsole
          throw new FFatalError("User id is empty.");
       }
       // 创建资源对象
-      FGcResourceInfo resource = _resourceConsole.doPrepare(logicContext);
+      FGcResourceInfo resource = _dataResourceConsole.doPrepare(logicContext);
       resource.setUserId(userId);
       resource.setProjectId(model.projectId());
       resource.setCatalogId(model.catalogId());
       resource.setResourceCd(EGcResource.Model);
       resource.setCode(model.code());
       resource.setLabel(model.label());
-      _resourceConsole.doInsert(logicContext, resource);
+      _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
       model.setResourceId(resource.ouid());
       return EResult.Success;
@@ -137,18 +136,18 @@ public class FGcResModelConsole
       long modelId = unit.ouid();
       // 删除网格集合
       String meshWhereSql = FDataResourceModelMeshLogic.MODEL_ID + "=" + modelId;
-      FLogicDataset<FGcResModelMeshInfo> modelMeshDataset = _modelMeshConsole.fetch(logicContext, meshWhereSql);
+      FLogicDataset<FGcResModelMeshInfo> modelMeshDataset = _dataModelMeshConsole.fetch(logicContext, meshWhereSql);
       if(modelMeshDataset != null){
          for(FGcResModelMeshInfo mesh : modelMeshDataset){
-            _modelMeshConsole.doDelete(logicContext, mesh);
+            _dataModelMeshConsole.doDelete(logicContext, mesh);
          }
       }
       // 删除动画集合
       String animationWhereSql = FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId;
-      FLogicDataset<FGcResModelAnimationInfo> animationDataset1 = _modelAnimationConsole.fetch(logicContext, animationWhereSql);
+      FLogicDataset<FGcResModelAnimationInfo> animationDataset1 = _dataModelAnimationConsole.fetch(logicContext, animationWhereSql);
       if(animationDataset1 != null){
          for(FGcResModelAnimationInfo animation : animationDataset1){
-            _modelAnimationConsole.doDelete(logicContext, animation);
+            _dataModelAnimationConsole.doDelete(logicContext, animation);
          }
       }
       // 返回结果
@@ -168,7 +167,7 @@ public class FGcResModelConsole
       // 删除关联资源
       long resourceId = unit.resourceId();
       if(resourceId > 0){
-         _resourceConsole.doDelete(logicContext, resourceId);
+         _dataResourceConsole.doDelete(logicContext, resourceId);
       }
       // 返回结果
       return EResult.Success;

@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataResourceModelAnimationActionLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationTrackLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -17,13 +18,17 @@ public class FGcResModelAnimationConsole
       implements
          IGcResModelAnimationConsole
 {
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _dataStorageConsole;
+
    // 资源模型动画轨迹管理器
    @ALink
-   protected IGcResModelAnimationTrackConsole _modelAnimationTrackConsole;
+   protected IGcResModelAnimationTrackConsole _dataModelAnimationTrackConsole;
 
    // 资源模型动画动作管理器
    @ALink
-   protected IGcResModelAnimationMovieConsole _modelAnimationMovieConsole;
+   protected IGcResModelAnimationMovieConsole _dataModelAnimationMovieConsole;
 
    //============================================================
    // <T>构造资源模型动画控制台。</T>
@@ -45,18 +50,18 @@ public class FGcResModelAnimationConsole
       long animationId = animation.ouid();
       // 删除轨迹集合
       String trackWhereSql = FDataResourceModelAnimationTrackLogic.ANIMATION_ID + "=" + animationId;
-      FLogicDataset<FGcResModelAnimationTrackInfo> trackDataset = _modelAnimationTrackConsole.fetch(logicContext, trackWhereSql);
+      FLogicDataset<FGcResModelAnimationTrackInfo> trackDataset = _dataModelAnimationTrackConsole.fetch(logicContext, trackWhereSql);
       if(trackDataset != null){
          for(FGcResModelAnimationTrackInfo track : trackDataset){
-            _modelAnimationTrackConsole.doDelete(logicContext, track);
+            _dataModelAnimationTrackConsole.doDelete(logicContext, track);
          }
       }
       // 删除动作集合
       String actionWhereSql = FDataResourceModelAnimationActionLogic.ANIMATION_ID + "=" + animationId;
-      FLogicDataset<FGcResModelAnimationActionInfo> actionDataset = _modelAnimationMovieConsole.fetch(logicContext, actionWhereSql);
+      FLogicDataset<FGcResModelAnimationActionInfo> actionDataset = _dataModelAnimationMovieConsole.fetch(logicContext, actionWhereSql);
       if(actionDataset != null){
          for(FGcResModelAnimationActionInfo action : actionDataset){
-            _modelAnimationMovieConsole.doDelete(logicContext, action);
+            _dataModelAnimationMovieConsole.doDelete(logicContext, action);
          }
       }
       // 返回结果
