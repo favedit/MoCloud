@@ -9,7 +9,7 @@ import org.mo.com.xml.FXmlNode;
 // <T>场景。</T>
 //============================================================
 public class FRs3Space
-      extends FRs3Resource
+      extends FRs3Component
 {
    // 场景技术
    protected FRs3Technique _technique = new FRs3Technique();
@@ -186,10 +186,9 @@ public class FRs3Space
    //============================================================
    @Override
    public void loadConfig(FXmlNode xconfig){
+      super.loadConfig(xconfig);
       // 读取属性
-      _code = xconfig.get("code", _code);
       _fullCode = xconfig.get("full_code", _fullCode);
-      _label = xconfig.get("label", _label);
       _keywords = xconfig.get("keywords", _keywords);
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
@@ -256,8 +255,7 @@ public class FRs3Space
    //============================================================
    @Override
    public void mergeConfig(FXmlNode xconfig){
-      // 读取属性
-      _label = xconfig.get("label");
+      super.mergeConfig(xconfig);
       // 读取节点集合
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Technique")){

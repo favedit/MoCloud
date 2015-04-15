@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
+import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -15,6 +16,7 @@ import org.mo.com.net.EMime;
 import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
+import org.mo.content.core.resource.model.ICntModelConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
@@ -47,9 +49,13 @@ public class FPreviewServlet
    @ALink
    protected ICntResourceConsole _resourceConsole;
 
-   // 网格模型接口
+   // 网格数据接口
    @ALink
    protected ICntMeshConsole _meshConsole;
+
+   // 模型数据接口
+   @ALink
+   protected ICntModelConsole _modelConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -88,9 +94,10 @@ public class FPreviewServlet
                data = _bitmapConsole.makePreviewData(logicContext, bitmapGuid);
                _resourceConsole.uploadPreviewData(logicContext, bitmapGuid, data);
                break;
-            case EGcResource.MeshString:
-               //data = _resourceConsole.findPreviewData(logicContext, typeCd, guid);
+            case EGcResource.ModelString:
                break;
+            default:
+               throw new FFatalError("Unknown preview type. (type_cd={1})", typeCd);
          }
       }
       int dataLength = 0;
@@ -166,17 +173,17 @@ public class FPreviewServlet
       //............................................................
       // 上传预览数据
       switch(typeCd){
-         case EGcResource.MeshString:
-            // 获得网格信息
-            //FGcResMeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
-            //if(mesh == null){
-            //   throw new FFatalError("Mesh is empty. (guid={1})", guid);
-            //}
+         case EGcResource.ModelString:
+            // 获得模型信息
+            FGcResModelInfo model = _modelConsole.findByGuid(logicContext, guid);
+            if(model == null){
+               throw new FFatalError("Model is empty. (guid={1})", guid);
+            }
             // 修改更新时间，预览图才能重新显示
-            //FGcResourceInfo resource = _resourceConsole.find(logicContext, mesh.resourceId());
-            //_resourceConsole.doUpdate(logicContext, resource);
+            FGcResourceInfo resource = _resourceConsole.find(logicContext, model.resourceId());
+            _resourceConsole.doUpdate(logicContext, resource);
             // 上传数据
-            //_resourceConsole.uploadPreviewData(logicContext, resource.guid(), data);
+            _resourceConsole.uploadPreviewData(logicContext, resource.guid(), data);
             break;
          default:
             throw new FFatalError("Upload preview type failure. (type_cd={1})", typeCd);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.mesh.DisplayFrame" update_date="20141210134046">
-   <Frame name="design3d.mesh.DisplayFrame" type='FDsMeshDisplayFrame' linker='_frameDisplay' label="显示属性" note="">
+   <Frame name="design3d.mesh.DisplayFrame" type='FDsModelDisplayFrame' linker='_frameDisplay' label="显示属性" note="">
       <Panel name='matrixPanel' icon='design.panel.icon' label='位置参数'>
          <Number3 name="translate" linker='_controlTranslate' label="位置" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Number3 name="rotation" linker='_controlRotation' label="旋转" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />

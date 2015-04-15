@@ -3,14 +3,13 @@ package org.mo.content.resource3d.model;
 import com.cyou.gccloud.data.data.FDataResourceModelMeshUnit;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
-import org.mo.content.resource3d.common.FRs3Stream;
-import org.mo.content.resource3d.mesh.FRs3Mesh;
+import org.mo.content.resource3d.common.FRs3Geometry;
 
 //============================================================
 // <T>资源模型网格。</T>
 //============================================================
 public class FRs3ModelMesh
-      extends FRs3Mesh
+      extends FRs3Geometry
 {
    // 模型
    protected FRs3Model _model;
@@ -19,6 +18,7 @@ public class FRs3ModelMesh
    // <T>构造资源模型网格。</T>
    //============================================================
    public FRs3ModelMesh(){
+      _typeName = "ModelMesh";
    }
 
    //============================================================
@@ -59,40 +59,7 @@ public class FRs3ModelMesh
    //============================================================
    @Override
    public void serialize(IDataOutput output){
-      // 输出属性
-      output.writeString(_guid);
-      output.writeString(_code);
-      output.writeString(_label);
-      // 输出轮廓
-      _outline.serialize(output);
-      // 输出数据流集合
-      int streamCount = _streams.count();
-      output.writeInt8((byte)streamCount);
-      for(int i = 0; i < streamCount; i++){
-         FRs3Stream stream = _streams.get(i);
-         stream.serialize(output);
-      }
-   }
-
-   //============================================================
-   // <T>从输入流反序列化数据。</T>
-   //
-   // @param input 输入流
-   //============================================================
-   @Override
-   public void importData(IDataInput input){
-      // 读取属性
-      _code = input.readString();
-      // 读取轮廓
-      _outline.unserialize(input);
-      // 读取数据流集合
-      int count = input.readInt32();
-      for(int n = 0; n < count; n++){
-         FRs3ModelStream stream = new FRs3ModelStream();
-         stream.setMesh(this);
-         stream.importData(input);
-         _streams.push(stream);
-      }
+      super.serialize(output);
    }
 
    //============================================================
@@ -100,7 +67,6 @@ public class FRs3ModelMesh
    //
    // @param unit 数据单元
    //============================================================
-   @Override
    public void loadUnit(FDataResourceModelMeshUnit unit){
       _ouid = unit.ouid();
       _guid = unit.guid();
@@ -115,12 +81,31 @@ public class FRs3ModelMesh
    //
    // @param unit 数据单元
    //============================================================
-   @Override
    public void saveUnit(FDataResourceModelMeshUnit unit){
       unit.setFullCode(fullCode());
       unit.setCode(_code);
       unit.setLabel(_label);
       unit.setOutlineMin(_outline.min.toString());
       unit.setOutlineMax(_outline.max.toString());
+   }
+
+   //============================================================
+   // <T>从输入流反序列化数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void importData(IDataInput input){
+      // 读取属性
+      _code = input.readString();
+      // 读取轮廓
+      _outline.unserialize(input);
+      // 读取数据流集合
+      int count = input.readInt32();
+      for(int n = 0; n < count; n++){
+         FRs3ModelStream stream = new FRs3ModelStream();
+         stream.setMesh(this);
+         stream.importData(input);
+         _streams.push(stream);
+      }
    }
 }

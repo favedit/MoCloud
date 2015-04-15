@@ -156,6 +156,7 @@ public class FRs3Material
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3Material(){
+      _typeName = "Material";
       _guid = RUuid.makeUniqueId();
    }
 

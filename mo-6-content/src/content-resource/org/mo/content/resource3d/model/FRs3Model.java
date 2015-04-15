@@ -10,7 +10,6 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Animation;
 import org.mo.content.resource3d.common.FRs3Skeleton;
 import org.mo.content.resource3d.common.FRs3Space;
-import org.mo.content.resource3d.common.FRs3Spatial;
 
 //============================================================
 // <T>资源模型。</T>
@@ -28,12 +27,13 @@ public class FRs3Model
    protected FObjects<FRs3Animation> _animations;
 
    // 显示对象
-   protected FRs3Spatial _display = new FRs3Spatial();
+   protected FRs3ModelDisplay _display = new FRs3ModelDisplay();
 
    //============================================================
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3Model(){
+      _typeName = "Model";
    }
 
    //============================================================
@@ -136,6 +136,33 @@ public class FRs3Model
    }
 
    //============================================================
+   // <T>从配置信息中加载配置。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void loadConfig(FXmlNode xconfig){
+      super.loadConfig(xconfig);
+      // 存储显示对象
+      FXmlNode xdisplay = xconfig.findNode("Display");
+      if(xdisplay != null){
+         _display.loadConfig(xdisplay);
+      }
+   }
+
+   //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
+      // 存储显示对象
+      _display.saveConfig(xconfig.createNode("Display"));
+   }
+
+   //============================================================
    // <T>从数据单元中导入配置。</T>
    //
    // @param unit 数据单元
@@ -150,6 +177,7 @@ public class FRs3Model
       // 读取属性
       _ouid = unit.ouid();
       _guid = unit.guid();
+      _fullCode = unit.fullCode();
       _code = unit.code();
       _label = unit.label();
    }
@@ -171,13 +199,30 @@ public class FRs3Model
    }
 
    //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void build(){
+      if(_display.hasRenderable()){
+         _display.renderables().clear();
+      }
+      if(hasMesh()){
+         for(FRs3ModelMesh mesh : _meshs){
+            FRs3ModelRenderable renderable = new FRs3ModelRenderable();
+            renderable.setMeshGuid(mesh.guid());
+            _display.pushRenderable(renderable);
+         }
+      }
+   }
+
+   //============================================================
    // <T>从输入流反序列化数据。</T>
    //
    // @param input 输入流
    //============================================================
-   @Override
    public void importData(IDataInput input){
-      super.importData(input);
+      //super.importData(input);
       _fullCode = input.readString();
       _label = input.readString();
       _keywords = input.readString();
@@ -188,6 +233,21 @@ public class FRs3Model
          mesh.setModel(this);
          mesh.importData(input);
          meshs().push(mesh);
+      }
+   }
+
+   //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 读取节点集合
+      FXmlNode xdisplay = xconfig.findNode("Display");
+      if(xdisplay != null){
+         _display.mergeConfig(xdisplay);
       }
    }
 }

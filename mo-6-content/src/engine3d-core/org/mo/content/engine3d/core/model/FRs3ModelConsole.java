@@ -3,6 +3,7 @@ package org.mo.content.engine3d.core.model;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.model.FGcResModelConsole;
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.resource.model.FGcResModelMeshInfo;
@@ -265,8 +266,7 @@ public class FRs3ModelConsole
       //............................................................
       // 生成数据
       FRs3Model model = new FRs3Model();
-      model.setGuid(modelInfo.guid());
-      model.setCode(modelInfo.code());
+      model.loadUnit(modelInfo);
       // 获得网格信息
       FLogicDataset<FGcResModelMeshInfo> meshInfos = _meshConsole.fetchByModelId(logicContext, modelId);
       for(FGcResModelMeshInfo meshInfo : meshInfos){
@@ -379,13 +379,16 @@ public class FRs3ModelConsole
       if(modelInfo == null){
          throw new FFatalError("Mesh is not exists. (guid={1}})", guid);
       }
+      long resourceId = modelInfo.resourceId();
       // 创建场景
       model.saveUnit(modelInfo);
       // 更新数据
       doUpdate(logicContext, modelInfo);
       //............................................................
       // 废弃临时数据
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, guid);
+      FGcResourceInfo resource = _resourceConsole.get(logicContext, resourceId);
+      _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, resource.guid());
+      _resourceConsole.doUpdate(logicContext, resource);
       // 返回网格单元
       return modelInfo;
    }
@@ -411,6 +414,7 @@ public class FRs3ModelConsole
       }
       long modelId = modelInfo.ouid();
       String modelGuid = modelInfo.guid();
+      model.loadUnit(modelInfo);
       //............................................................
       // 删除模型内所有网格
       _meshConsole.doDeleteByModelId(logicContext, modelId);
@@ -422,6 +426,7 @@ public class FRs3ModelConsole
          // 新建模型网格
          FGcResModelMeshInfo modelMeshInfo = _meshConsole.doPrepare(logicContext);
          modelMeshInfo.setModelId(modelId);
+         modelMesh.setGuid(modelMeshInfo.guid());
          modelMesh.saveUnit(modelMeshInfo);
          _meshConsole.doInsert(logicContext, modelMeshInfo);
          long modelMeshId = modelMeshInfo.ouid();
@@ -429,7 +434,8 @@ public class FRs3ModelConsole
          _meshConsole.updateResource(logicContext, modelMeshId, modelMesh);
       }
       // 更新网格
-      // model.saveUnit(modelInfo);
+      model.build();
+      model.saveUnit(modelInfo);
       doUpdate(logicContext, modelInfo);
       //............................................................
       // 废弃临时数据
@@ -455,8 +461,7 @@ public class FRs3ModelConsole
       file.buildMesh(mesh);
       // 创建模型
       FRs3Model model = new FRs3Model();
-      model.loadUnit(modelInfo);
-      model.meshs().push(mesh);
+      model.pushMesh(mesh);
       //............................................................
       // 新建模型
       return updateResource(logicContext, modelInfo, model);

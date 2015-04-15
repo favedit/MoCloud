@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.mesh.property.TechniqueFrame" update_date="20141210134046">
-   <Frame type='FDsMeshTechniquePropertyFrame' name="design3d.mesh.property.TechniqueFrame" label="技术属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y">
+<Content>
+   <Frame name="resource.common.property.TechniqueFrame" type='FDsCommonTechniquePropertyFrame' label="技术属性" is_valid="Y" note="" style_refer="design.list.ControlType" edit_insert="Y" edit_update="Y">
       <Panel name='infoPanel' icon='design.panel.icon' label='渲染模式'>
          <ListBox name="renderModesBox" linker='_controlRenderModes' label="渲染模式" label_size='70,0' valid="Y" edit_size='200,0' note="" />
       </Panel>

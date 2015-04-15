@@ -1,26 +1,20 @@
-package org.mo.content.resource3d.mesh;
+package org.mo.content.resource3d.common;
 
-import com.cyou.gccloud.data.data.FDataResourceModelMeshUnit;
 import com.cyou.gccloud.define.enums.common.EGcData;
 import org.mo.com.geom.SFloatOutline3;
 import org.mo.com.io.FByteStream;
-import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RString;
-import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.mesh.FGeomMesh;
 import org.mo.content.geom.mesh.SGeomFace;
 import org.mo.content.geom.mesh.SGeomVertex;
-import org.mo.content.resource3d.common.FRs3Space;
-import org.mo.content.resource3d.common.FRs3Stream;
 
 //============================================================
 // <T>资源模型网格。</T>
 //============================================================
-public class FRs3Mesh
-      extends FRs3Space
+public class FRs3Geometry
+      extends FRs3Renderable
 {
    // 轮廓
    protected SFloatOutline3 _outline = new SFloatOutline3();
@@ -28,13 +22,10 @@ public class FRs3Mesh
    // 数据流集合
    protected FObjects<FRs3Stream> _streams;
 
-   // 显示对象
-   protected FRs3MeshDisplay _display = new FRs3MeshDisplay();
-
    //============================================================
    // <T>构造资源模型网格。</T>
    //============================================================
-   public FRs3Mesh(){
+   public FRs3Geometry(){
    }
 
    //============================================================
@@ -98,12 +89,12 @@ public class FRs3Mesh
    }
 
    //============================================================
-   // <T>获得显示对象。</T>
-   //
-   // @return 显示对象
+   // <T>清空数据流。</T>
    //============================================================
-   public FRs3MeshDisplay display(){
-      return _display;
+   public void clearStreams(){
+      if(_streams != null){
+         _streams.clear();
+      }
    }
 
    //============================================================
@@ -124,8 +115,6 @@ public class FRs3Mesh
          FRs3Stream stream = _streams.get(i);
          stream.serialize(output);
       }
-      // 输出渲染信息
-      _display.serialize(output);
    }
 
    //============================================================
@@ -136,12 +125,6 @@ public class FRs3Mesh
    @Override
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
-      // 读取节点集合
-      for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Display")){
-            _display.loadConfig(xnode);
-         }
-      }
    }
 
    //============================================================
@@ -152,50 +135,6 @@ public class FRs3Mesh
    @Override
    public void saveConfig(FXmlNode xconfig){
       super.saveConfig(xconfig);
-      // 存储渲染对象
-      _display.saveConfig(xconfig.createNode("Display"));
-   }
-
-   //============================================================
-   // <T>从数据单元中导入配置。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void loadUnit(FDataResourceModelMeshUnit unit){
-      // 读取配置
-      if(!RString.isEmpty(unit.content())){
-         FXmlDocument xdocument = new FXmlDocument();
-         xdocument.loadString(unit.content());
-         loadConfig(xdocument.root());
-      }
-      // 读取属性
-      _ouid = unit.ouid();
-      _guid = unit.guid();
-      _code = unit.code();
-      _fullCode = unit.fullCode();
-      _label = unit.label();
-      // 读取轮廓
-      _outline.min.parse(unit.outlineMin());
-      _outline.max.parse(unit.outlineMax());
-   }
-
-   //============================================================
-   // <T>将配置信息存入数据单元中。</T>
-   //
-   // @param unit 数据单元
-   //============================================================
-   public void saveUnit(FDataResourceModelMeshUnit unit){
-      // 存储属性
-      unit.setCode(_code);
-      unit.setFullCode(_fullCode);
-      unit.setLabel(_label);
-      // 存储轮廓
-      unit.setOutlineMin(_outline.min.toString());
-      unit.setOutlineMax(_outline.max.toString());
-      // 存储配置
-      FXmlNode xconfig = new FXmlNode("Mesh");
-      saveConfig(xconfig);
-      unit.setContent(xconfig.xml().toString());
    }
 
    //============================================================
@@ -206,34 +145,6 @@ public class FRs3Mesh
    @Override
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
-      // 读取属性
-      _label = xconfig.get("label");
-      // 读取节点集合
-      for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Display")){
-            _display.mergeConfig(xnode);
-         }
-      }
-   }
-
-   //============================================================
-   // <T>从输入流反序列化数据。</T>
-   //
-   // @param input 输入流
-   //============================================================
-   public void importData(IDataInput input){
-      // 读取属性
-      _code = input.readString();
-      // 读取轮廓
-      _outline.unserialize(input);
-      // 读取数据流集合
-      int count = input.readInt32();
-      for(int n = 0; n < count; n++){
-         FRs3MeshStream stream = new FRs3MeshStream();
-         stream.setMesh(this);
-         stream.importData(input);
-         _streams.push(stream);
-      }
    }
 
    //============================================================
