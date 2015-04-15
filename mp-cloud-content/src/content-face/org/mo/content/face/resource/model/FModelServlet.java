@@ -22,6 +22,7 @@ import org.mo.content.core.resource.model.ICntModelConsole;
 import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
+import org.mo.content.mime.stl.FStlFile;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -206,8 +207,8 @@ public class FModelServlet
          }
          // 加载STL模型文件 
          else if("stl".equals(extension)){
-            //FStlFile stlFile = new FStlFile();
-            //stlFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
+            FStlFile stlFile = new FStlFile();
+            stlFile.loadFile(tempFile.getAbsolutePath(), "utf-8");
             // 创建模型
             FGcResModelInfo modelInfo = _modelConsole.doPrepare(logicContext);
             modelInfo.setUserId(userId);
@@ -217,7 +218,7 @@ public class FModelServlet
             modelInfo.setLabel(label);
             _modelConsole.doInsert(logicContext, modelInfo);
             // 导入模型
-            //_meshConsole.updateResourceStl(logicContext, mesh.guid(), stlFile);
+            _modelConsole.updateResourceStl(logicContext, modelInfo, stlFile);
          }else{
             throw new FFatalError("Unknown file format.");
          }

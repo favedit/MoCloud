@@ -16,6 +16,7 @@ import org.mo.content.geom.mesh.FGeomMesh;
 import org.mo.content.geom.mesh.FGeomModel;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
+import org.mo.content.mime.stl.FStlFile;
 import org.mo.content.resource3d.common.FRs3Stream;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.content.resource3d.model.FRs3ModelMesh;
@@ -479,6 +480,32 @@ public class FRs3ModelConsole
    public EResult updateResourceObj(ILogicContext logicContext,
                                     FGcResModelInfo modelInfo,
                                     FObjFile file){
+      // 加载模型资源
+      FRs3Model model = new FRs3Model();
+      FGeomModel geomModel = file.CreateGeomModel();
+      for(FGeomMesh geomMesh : geomModel.meshs()){
+         FRs3ModelMesh mesh = new FRs3ModelMesh();
+         mesh.loadGeometry(geomMesh);
+         model.pushMesh(mesh);
+      }
+      //............................................................
+      // 新建模型
+      updateResource(logicContext, modelInfo, model);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新STL资源。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param modelInfo 模型信息
+   // @param file 文件
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult updateResourceStl(ILogicContext logicContext,
+                                    FGcResModelInfo modelInfo,
+                                    FStlFile file){
       // 加载模型资源
       FRs3Model model = new FRs3Model();
       FGeomModel geomModel = file.CreateGeomModel();

@@ -5,6 +5,7 @@ import org.mo.cloud.logic.resource.model.IGcResModelConsole;
 import org.mo.com.lang.EResult;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
+import org.mo.content.mime.stl.FStlFile;
 import org.mo.content.resource3d.model.FRs3Model;
 import org.mo.data.logic.ILogicContext;
 
@@ -132,4 +133,16 @@ public interface IRs3ModelConsole
    EResult updateResourceObj(ILogicContext logicContext,
                              FGcResModelInfo modelInfo,
                              FObjFile file);
+
+   //============================================================
+   // <T>更新STL资源。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param modelInfo 模型信息
+   // @param file 文件
+   // @return 处理结果
+   //============================================================
+   EResult updateResourceStl(ILogicContext logicContext,
+                             FGcResModelInfo modelInfo,
+                             FStlFile file);
 }
