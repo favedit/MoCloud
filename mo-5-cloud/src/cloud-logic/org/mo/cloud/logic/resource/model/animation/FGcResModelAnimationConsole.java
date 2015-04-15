@@ -52,16 +52,16 @@ public class FGcResModelAnimationConsole
       String trackWhereSql = FDataResourceModelAnimationTrackLogic.ANIMATION_ID + "=" + animationId;
       FLogicDataset<FGcResModelAnimationTrackInfo> trackDataset = _dataModelAnimationTrackConsole.fetch(logicContext, trackWhereSql);
       if(trackDataset != null){
-         for(FGcResModelAnimationTrackInfo track : trackDataset){
-            _dataModelAnimationTrackConsole.doDelete(logicContext, track);
+         for(FGcResModelAnimationTrackInfo trackInfo : trackDataset){
+            _dataModelAnimationTrackConsole.doDelete(logicContext, trackInfo);
          }
       }
       // 删除动作集合
       String actionWhereSql = FDataResourceModelAnimationActionLogic.ANIMATION_ID + "=" + animationId;
       FLogicDataset<FGcResModelAnimationActionInfo> actionDataset = _dataModelAnimationMovieConsole.fetch(logicContext, actionWhereSql);
       if(actionDataset != null){
-         for(FGcResModelAnimationActionInfo action : actionDataset){
-            _dataModelAnimationMovieConsole.doDelete(logicContext, action);
+         for(FGcResModelAnimationActionInfo actionInfo : actionDataset){
+            _dataModelAnimationMovieConsole.doDelete(logicContext, actionInfo);
          }
       }
       // 返回结果

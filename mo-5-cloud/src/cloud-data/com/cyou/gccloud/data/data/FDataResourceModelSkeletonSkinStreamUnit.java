@@ -60,6 +60,12 @@ public class FDataResourceModelSkeletonSkinStreamUnit
    // 字段网格编号的定义。
    protected long _meshId;
 
+   // 存储字段骨骼编号的定义。
+   private int __skeletonId;
+
+   // 字段骨骼编号的定义。
+   protected int _skeletonId;
+
    // 存储字段蒙皮编号的定义。
    private long __skinId;
 
@@ -381,6 +387,44 @@ public class FDataResourceModelSkeletonSkinStreamUnit
    //============================================================
    public void setMeshId(long value){
       _meshId = value;
+   }
+
+   //============================================================
+   // <T>判断骨骼编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int skeletonId(){
+      return _skeletonId;
+   }
+
+   //============================================================
+   // <T>获得骨骼编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceModelSkeletonUnit skeleton(){
+      FDataResourceModelSkeletonLogic logic = _logicContext.findLogic(FDataResourceModelSkeletonLogic.class);
+      FDataResourceModelSkeletonUnit unit = logic.find(_skeletonId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置骨骼编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSkeletonId(int value){
+      _skeletonId = value;
    }
 
    //============================================================
@@ -795,6 +839,8 @@ public class FDataResourceModelSkeletonSkinStreamUnit
             return Long.toString(_modelId);
          case "mesh_id":
             return Long.toString(_meshId);
+         case "skeleton_id":
+            return RInteger.toString(_skeletonId);
          case "skin_id":
             return Long.toString(_skinId);
          case "sort_index":
@@ -857,6 +903,9 @@ public class FDataResourceModelSkeletonSkinStreamUnit
             break;
          case "mesh_id":
             _meshId = RLong.parse(value);
+            break;
+         case "skeleton_id":
+            _skeletonId = RInteger.parse(value);
             break;
          case "skin_id":
             _skinId = RLong.parse(value);
@@ -943,6 +992,10 @@ public class FDataResourceModelSkeletonSkinStreamUnit
                __meshId = RLong.parse(value);
                _meshId = __meshId;
                break;
+            case "skeleton_id":
+               __skeletonId = RInteger.parse(value);
+               _skeletonId = __skeletonId;
+               break;
             case "skin_id":
                __skinId = RLong.parse(value);
                _skinId = __skinId;
@@ -1018,6 +1071,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
       row.set("projectId", _projectId);
       row.set("modelId", _modelId);
       row.set("meshId", _meshId);
+      row.set("skeletonId", _skeletonId);
       row.set("skinId", _skinId);
       row.set("sortIndex", _sortIndex);
       row.set("fullCode", _fullCode);
@@ -1049,6 +1103,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
       map.put("meshId", RLong.toString(_meshId));
+      map.put("skeletonId", RInteger.toString(_skeletonId));
       map.put("skinId", RLong.toString(_skinId));
       map.put("sortIndex", RInteger.toString(_sortIndex));
       map.put("fullCode", _fullCode);

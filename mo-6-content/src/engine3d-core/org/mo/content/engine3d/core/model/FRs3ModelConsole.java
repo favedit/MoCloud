@@ -1,8 +1,9 @@
 package org.mo.content.engine3d.core.model;
 
+import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
+import com.cyou.gccloud.data.data.FDataResourceModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.model.FGcResModelConsole;
@@ -47,10 +48,6 @@ public class FRs3ModelConsole
       implements
          IRs3ModelConsole
 {
-   // 存储管理接口
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
    // 资源模型网格控制台
    @ALink
    protected IRs3ModelMeshConsole _meshConsole;
@@ -105,6 +102,7 @@ public class FRs3ModelConsole
       // 加载模型资源
       FRs3Model model = new FRs3Model();
       model.loadFile(fileName);
+      model.build();
       //............................................................
       // 新建模型
       FGcResModelInfo modelInfo = doPrepare(logicContext);
@@ -447,47 +445,24 @@ public class FRs3ModelConsole
          }
          model.pushMesh(mesh);
       }
-      //      //............................................................
-      //      // 获得骨骼集合
-      //      FDataResource3dModelSkeletonLogic modelSkeletonLogic = logicContext.findLogic(FDataResource3dModelSkeletonLogic.class);
-      //      FLogicDataset<FDataResource3dModelSkeletonUnit> modelSkeletonUnits = modelSkeletonLogic.fetch(FDataResource3dModelSkeletonLogic.MODEL_ID + "=" + modelId);
-      //      for(FDataResource3dModelSkeletonUnit modelSkeletonUnit : modelSkeletonUnits){
-      //      FDataResourceModelSkeletonLogic modelSkeletonLogic = logicContext.findLogic(FDataResourceModelSkeletonLogic.class);
-      //      FLogicDataset<FDataResourceModelSkeletonUnit> modelSkeletonUnits = modelSkeletonLogic.fetch(FDataResourceModelSkeletonLogic.MODEL_ID + "=" + modelId);
-      //      for(FDataResourceModelSkeletonUnit modelSkeletonUnit : modelSkeletonUnits){
-      //         long skeletonId = modelSkeletonUnit.skeletonId();
-      //         // 获得骨骼
-      //         FRs3Skeleton skeleton = _skeletonConsole.makeSkeleton(logicContext, modelId, skeletonId);
-      //         model.skeletons().push(skeleton);
-      //      }
-      //      //............................................................
-      //      // 获得动画集合
-      //      FDataResource3dModelAnimationLogic modelAnimationLogic = logicContext.findLogic(FDataResource3dModelAnimationLogic.class);
-      //      FLogicDataset<FDataResource3dModelAnimationUnit> modelAnimationUnits = modelAnimationLogic.fetch(FDataResource3dModelAnimationLogic.MODEL_ID + "=" + modelId);
-      //      for(FDataResource3dModelAnimationUnit modelAnimationUnit : modelAnimationUnits){
-      //      FDataResourceModelAnimationLogic modelAnimationLogic = logicContext.findLogic(FDataResourceModelAnimationLogic.class);
-      //      FLogicDataset<FDataResourceModelAnimationUnit> modelAnimationUnits = modelAnimationLogic.fetch(FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId);
-      //      for(FDataResourceModelAnimationUnit modelAnimationUnit : modelAnimationUnits){
-      //         long animationId = modelAnimationUnit.animationId();
-      //         // 获得动画
-      //         FRs3Animation animation = _animationConsole.makeAnimation(logicContext, animationId);
-      //         model.animations().push(animation);
-      //         // 查找动画关联骨骼
-      //         FDataResource3dSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResource3dSkeletonAnimationLogic.class);
-      //         FLogicDataset<FDataResource3dSkeletonAnimationUnit> skeletonAnimationUnits = skeletonAnimationLogic.fetch(FDataResource3dSkeletonAnimationLogic.ANIMATION_ID + "=" + animationId);
-      //         FDataResourceSkeletonAnimationLogic skeletonAnimationLogic = logicContext.findLogic(FDataResourceSkeletonAnimationLogic.class);
-      //         FLogicDataset<FDataResourceSkeletonAnimationUnit> skeletonAnimationUnits = skeletonAnimationLogic.fetch(FDataResourceSkeletonAnimationLogic.ANIMATION_ID + "=" + animationId);
-      //         if(!skeletonAnimationUnits.isEmpty()){
-      //            if(skeletonAnimationUnits.count() > 1){
-      //               throw new FFatalError("Animation skeleton is too many.");
-      //            }
-      //            FDataResource3dSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationUnits.first();
-      //            FDataResource3dSkeletonUnit skeletonUnit = skeletonAnimationUnit.skeleton();
-      //            FDataResourceSkeletonAnimationUnit skeletonAnimationUnit = skeletonAnimationUnits.first();
-      //            FDataResourceSkeletonUnit skeletonUnit = skeletonAnimationUnit.skeleton();
-      //            animation.setSkeletonGuid(skeletonUnit.guid());
-      //         }
-      //      }
+      //............................................................
+      // 获得骨骼集合
+      FLogicDataset<FGcResModelSkeletonInfo> skeletonInfos = _skeletonConsole.fetch(logicContext, FDataResourceModelSkeletonLogic.MODEL_ID + "=" + modelId);
+      for(FGcResModelSkeletonInfo skeletonInfo : skeletonInfos){
+         long skeletonId = skeletonInfo.ouid();
+         // 生成骨骼数据
+         FRs3Skeleton skeleton = _skeletonConsole.makeSkeleton(logicContext, modelId, skeletonId);
+         model.pushSkeleton(skeleton);
+      }
+      //............................................................
+      // 获得动画集合
+      FLogicDataset<FGcResModelAnimationInfo> animationInfos = _animationConsole.fetch(logicContext, FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId);
+      for(FGcResModelAnimationInfo animationInfo : animationInfos){
+         long animationId = animationInfo.ouid();
+         // 获得动画
+         FRs3Animation animation = _animationConsole.makeAnimation(logicContext, animationId);
+         model.pushAnimation(animation);
+      }
       // 返回模型
       return model;
    }
@@ -506,8 +481,6 @@ public class FRs3ModelConsole
       SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceModel, guid);
       if(findStorage != null){
          return findStorage.data();
-         //TODO：测试
-         //return findStorage.data();
       }
       // 获得唯一编号
       FGcResModelInfo modelInfo = findByResourceGuid(logicContext, guid);

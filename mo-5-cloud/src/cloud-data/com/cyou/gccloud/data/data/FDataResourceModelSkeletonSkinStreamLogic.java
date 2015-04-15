@@ -53,6 +53,9 @@ public class FDataResourceModelSkeletonSkinStreamLogic
    // 字段网格编号的定义。
    public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
 
+   // 字段骨骼编号的定义。
+   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
+
    // 字段蒙皮编号的定义。
    public final static SLogicFieldInfo SKIN_ID = new SLogicFieldInfo("SKIN_ID");
 
@@ -96,7 +99,7 @@ public class FDataResourceModelSkeletonSkinStreamLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`MESH_ID`,`SKIN_ID`,`SORT_INDEX`,`FULL_CODE`,`CODE`,`ELEMENT_DATA_CD`,`ELEMENT_COUNT`,`DATA_STRIDE`,`DATA_COUNT`,`DATA_LENGTH`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`MESH_ID`,`SKELETON_ID`,`SKIN_ID`,`SORT_INDEX`,`FULL_CODE`,`CODE`,`ELEMENT_DATA_CD`,`ELEMENT_COUNT`,`DATA_STRIDE`,`DATA_COUNT`,`DATA_LENGTH`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源模型骨骼蒙皮数据流表逻辑单元。</T>
@@ -692,6 +695,7 @@ public class FDataResourceModelSkeletonSkinStreamLogic
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`MODEL_ID`");
       cmd.append(",`MESH_ID`");
+      cmd.append(",`SKELETON_ID`");
       cmd.append(",`SKIN_ID`");
       cmd.append(",`SORT_INDEX`");
       cmd.append(",`FULL_CODE`");
@@ -744,6 +748,8 @@ public class FDataResourceModelSkeletonSkinStreamLogic
       }else{
          cmd.append(meshId);
       }
+      cmd.append(',');
+      cmd.append(unit.skeletonId());
       cmd.append(',');
       long skinId = unit.skinId();
       if(skinId == 0){
@@ -899,6 +905,10 @@ public class FDataResourceModelSkeletonSkinStreamLogic
          }else{
             cmd.append(meshId);
          }
+      }
+      if(unit.isSkeletonIdChanged()){
+         cmd.append(",`SKELETON_ID`=");
+         cmd.append(unit.skeletonId());
       }
       if(unit.isSkinIdChanged()){
          cmd.append(",`SKIN_ID`=");

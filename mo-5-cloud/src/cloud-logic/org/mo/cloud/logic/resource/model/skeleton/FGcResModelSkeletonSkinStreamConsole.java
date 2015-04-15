@@ -36,9 +36,9 @@ public class FGcResModelSkeletonSkinStreamConsole
    //============================================================
    @Override
    public EResult onDeleteBefore(ILogicContext logicContext,
-                                 FGcResModelSkeletonSkinStreamInfo unit){
+                                 FGcResModelSkeletonSkinStreamInfo streamInfo){
       // 删除关联数据
-      String guid = unit.guid();
+      String guid = streamInfo.guid();
       _storageConsole.delete(EGcStorageCatalog.ResourceModelSkeletonSkinStream, guid);
       // 返回结果
       return EResult.Success;

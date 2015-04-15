@@ -72,10 +72,19 @@ public class FRs3Model
    // @return 骨骼集合
    //============================================================
    public FObjects<FRs3Skeleton> skeletons(){
+      return _skeletons;
+   }
+
+   //============================================================
+   // <T>增加一个骨骼。</T>
+   //
+   // @param skeleton 骨骼
+   //============================================================
+   public void pushSkeleton(FRs3Skeleton skeleton){
       if(_skeletons == null){
          _skeletons = new FObjects<FRs3Skeleton>(FRs3Skeleton.class);
       }
-      return _skeletons;
+      _skeletons.push(skeleton);
    }
 
    //============================================================
@@ -84,10 +93,19 @@ public class FRs3Model
    // @return 动画集合
    //============================================================
    public FObjects<FRs3Animation> animations(){
+      return _animations;
+   }
+
+   //============================================================
+   // <T>增加一个动画。</T>
+   //
+   // @param animation 动画
+   //============================================================
+   public void pushAnimation(FRs3Animation animation){
       if(_animations == null){
          _animations = new FObjects<FRs3Animation>(FRs3Animation.class);
       }
-      return _animations;
+      _animations.push(animation);
    }
 
    //============================================================
