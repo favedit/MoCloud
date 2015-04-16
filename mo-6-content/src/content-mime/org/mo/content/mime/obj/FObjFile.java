@@ -121,9 +121,13 @@ public class FObjFile
          }
          if(!RString.isBlank(idxs[1])){
             face.coordIndexs[i - 1] = Integer.parseInt(idxs[1]) - 1;
+         }else{
+            face.coordIndexs = null;
          }
          if(!RString.isBlank(idxs[2])){
             face.normalIndexs[i - 1] = Integer.parseInt(idxs[2]) - 1;
+         }else{
+            face.normalIndexs = null;
          }
       }
       _faces.push(face);
