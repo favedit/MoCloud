@@ -1,6 +1,7 @@
 package org.mo.cloud.logic.resource.scene;
 
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
+import com.cyou.gccloud.data.data.FDataResourceTemplateLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
@@ -13,7 +14,7 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
-// <T>3D资源场景控制台。</T>
+// <T>资源场景控制台。</T>
 //============================================================
 public class FGcResSceneConsole
       extends FAbstractLogicUnitConsole<FDataResourceSceneLogic, FGcResSceneInfo>
@@ -33,6 +34,40 @@ public class FGcResSceneConsole
    //============================================================
    public FGcResSceneConsole(){
       super(FDataResourceSceneLogic.class, FGcResSceneInfo.class);
+   }
+
+   //============================================================
+   // <T>根据资源编号查找场景信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 场景信息
+   //============================================================
+   @Override
+   public FGcResSceneInfo findByResourceId(ILogicContext logicContext,
+                                           long resourceId){
+      String whereSql = FDataResourceTemplateLogic.RESOURCE_ID + "=" + resourceId;
+      FGcResSceneInfo sceneInfo = search(logicContext, whereSql);
+      return sceneInfo;
+   }
+
+   //============================================================
+   // <T>根据资源唯一编号查找场景信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceGuid 资源唯一编号
+   // @return 场景信息
+   //============================================================
+   @Override
+   public FGcResSceneInfo findByResourceGuid(ILogicContext logicContext,
+                                             String resourceGuid){
+      FGcResSceneInfo sceneInfo = null;
+      FGcResourceInfo resource = _dataResourceConsole.findByGuid(logicContext, resourceGuid);
+      if(resource != null){
+         long resourceId = resource.ouid();
+         sceneInfo = findByResourceId(logicContext, resourceId);
+      }
+      return sceneInfo;
    }
 
    //============================================================
@@ -82,6 +117,7 @@ public class FGcResSceneConsole
       resource.setLabel(sceneInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
+      sceneInfo.setGuid(resource.guid());
       sceneInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }

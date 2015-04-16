@@ -133,23 +133,24 @@ public class FGcResModelConsole
    //============================================================
    @Override
    protected EResult onInsertBefore(ILogicContext logicContext,
-                                    FGcResModelInfo model){
+                                    FGcResModelInfo modelInfo){
       // 检查用户编号
-      long userId = model.userId();
+      long userId = modelInfo.userId();
       if(userId == 0){
          throw new FFatalError("User id is empty.");
       }
       // 创建资源对象
       FGcResourceInfo resource = _dataResourceConsole.doPrepare(logicContext);
       resource.setUserId(userId);
-      resource.setProjectId(model.projectId());
-      resource.setCatalogId(model.catalogId());
+      resource.setProjectId(modelInfo.projectId());
+      resource.setCatalogId(modelInfo.catalogId());
       resource.setResourceCd(EGcResource.Model);
-      resource.setCode(model.code());
-      resource.setLabel(model.label());
+      resource.setCode(modelInfo.code());
+      resource.setLabel(modelInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
-      model.setResourceId(resource.ouid());
+      modelInfo.setGuid(resource.guid());
+      modelInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }
 

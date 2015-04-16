@@ -38,15 +38,18 @@ public class EGcStorageCatalog
    // 资源3D纹理位图
    public final static String Cache3dTextureBitmap = "cache3d.texture.bitmap";
 
-   // 资源3D网格
-   public final static String CacheResourceMesh = "cache3d.resource.mesh";
+   // 资源材质位图打包
+   public final static String CacheResourceMaterialBitmapPack = "cache.resourcee.material.bitmap.pack";
 
-   // 资源3D模型
+   // 资源网格
+   public final static String CacheResourceMesh = "cache.resource.mesh";
+
+   // 资源模型
    public final static String CacheResourceModel = "cache.resource.model";
 
-   // 资源3D模板
+   // 资源模板
    public final static String CacheResourceTemplate = "cache.resource.template";
 
-   // 资源3D场景
-   public final static String CacheResourceScene = "cache3d.resource.scene";
+   // 资源场景
+   public final static String CacheResourceScene = "cache.resource.scene";
 }

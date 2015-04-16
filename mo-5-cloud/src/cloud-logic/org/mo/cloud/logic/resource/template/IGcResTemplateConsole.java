@@ -11,6 +11,26 @@ public interface IGcResTemplateConsole
          IAbstractLogicUnitConsole<FGcResTemplateInfo>
 {
    //============================================================
+   // <T>根据资源编号查找模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 模板信息
+   //============================================================
+   FGcResTemplateInfo findByResourceId(ILogicContext logicContext,
+                                       long resourceId);
+
+   //============================================================
+   // <T>根据资源唯一编号查找模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceGuid 资源唯一编号
+   // @return 模板信息
+   //============================================================
+   FGcResTemplateInfo findByResourceGuid(ILogicContext logicContext,
+                                         String resourceGuid);
+
+   //============================================================
    // <T>根据用户编号和项目编号和代码查找模板信息。</T>
    //
    // @param logicContext 逻辑环境

@@ -1,5 +1,6 @@
 package org.mo.content.engine3d.core.template;
 
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
 import org.mo.cloud.logic.resource.template.IGcResTemplateConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
@@ -68,6 +69,16 @@ public interface IRs3TemplateConsole
    //============================================================
    byte[] makeTemplateData(ILogicContext logicContext,
                            String guid);
+
+   //============================================================
+   // <T>更新模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param template 模板
+   // @return 模板信息
+   //============================================================
+   FGcResTemplateInfo updateTemplate(ILogicContext logicContext,
+                                     FRs3Template template);
 
    //============================================================
    // <T>导入模板。</T>

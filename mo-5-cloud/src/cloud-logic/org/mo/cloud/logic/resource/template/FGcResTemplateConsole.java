@@ -1,6 +1,7 @@
 package org.mo.cloud.logic.resource.template;
 
 import com.cyou.gccloud.data.data.FDataResourceTemplateLogic;
+import com.cyou.gccloud.data.data.FDataResourceTemplateMaterialLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
@@ -10,6 +11,7 @@ import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -28,11 +30,49 @@ public class FGcResTemplateConsole
    @ALink
    protected IGcResourceConsole _dataResourceConsole;
 
+   // 资源模板材质管理器
+   @ALink
+   protected IGcResTemplateMaterialConsole _dataTemplateMaterialConsole;
+
    //============================================================
    // <T>构造3D资源数据流控制台。</T>
    //============================================================
    public FGcResTemplateConsole(){
       super(FDataResourceTemplateLogic.class, FGcResTemplateInfo.class);
+   }
+
+   //============================================================
+   // <T>根据资源编号查找模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceId 资源编号
+   // @return 模板信息
+   //============================================================
+   @Override
+   public FGcResTemplateInfo findByResourceId(ILogicContext logicContext,
+                                              long resourceId){
+      String whereSql = FDataResourceTemplateLogic.RESOURCE_ID + "=" + resourceId;
+      FGcResTemplateInfo templateInfo = search(logicContext, whereSql);
+      return templateInfo;
+   }
+
+   //============================================================
+   // <T>根据资源唯一编号查找模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param resourceGuid 资源唯一编号
+   // @return 模板信息
+   //============================================================
+   @Override
+   public FGcResTemplateInfo findByResourceGuid(ILogicContext logicContext,
+                                                String resourceGuid){
+      FGcResTemplateInfo templateInfo = null;
+      FGcResourceInfo resource = _dataResourceConsole.findByGuid(logicContext, resourceGuid);
+      if(resource != null){
+         long resourceId = resource.ouid();
+         templateInfo = findByResourceId(logicContext, resourceId);
+      }
+      return templateInfo;
    }
 
    //============================================================
@@ -102,6 +142,29 @@ public class FGcResTemplateConsole
       // 设置资源信息
       templateInfo.setGuid(resource.guid());
       templateInfo.setResourceId(resource.ouid());
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除记录前处理</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult onDeleteBefore(ILogicContext logicContext,
+                                 FGcResTemplateInfo templateInfo){
+      long templateId = templateInfo.ouid();
+      // 删除模板材质集合
+      String whereSql = FDataResourceTemplateMaterialLogic.TEMPLATE_ID + "=" + templateId;
+      FLogicDataset<FGcResTemplateMaterialInfo> templateMaterialDataset = _dataTemplateMaterialConsole.fetch(logicContext, whereSql);
+      if(templateMaterialDataset != null){
+         for(FGcResTemplateMaterialInfo templateMaterialInfo : templateMaterialDataset){
+            _dataTemplateMaterialConsole.doDelete(logicContext, templateMaterialInfo);
+         }
+      }
+      // 返回结果
       return EResult.Success;
    }
 

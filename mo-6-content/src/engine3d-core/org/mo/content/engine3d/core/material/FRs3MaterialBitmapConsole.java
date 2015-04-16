@@ -1,14 +1,14 @@
 package org.mo.content.engine3d.core.material;
 
-import org.mo.com.console.FConsole;
+import org.mo.cloud.logic.resource.material.FGcResMaterialBitmapConsole;
 
 //============================================================
-// <T>资源模型控制台。</T>
+// <T>资源材质位图控制台。</T>
 //============================================================
-public class FRs3MaterialGroupConsole
-      extends FConsole
+public class FRs3MaterialBitmapConsole
+      extends FGcResMaterialBitmapConsole
       implements
-         IRs3MaterialGroupConsole
+         IRs3MaterialBitmapConsole
 {
    //   // 纹理控制台
    //   @ALink

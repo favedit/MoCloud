@@ -189,7 +189,7 @@ public class FResourceService
             break;
          case EGcResource.MaterialString:
             // 查找材质
-            //_materialConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            _materialConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
          case EGcResource.MeshString:
             // 删除网格
@@ -201,11 +201,11 @@ public class FResourceService
             break;
          case EGcResource.TemplateString:
             // 查找模板
-            //_templateConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            _templateConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
          case EGcResource.SceneString:
             // 查找网格
-            //_sceneConsole.fetch(logicContext, xoutput, whereSql, pageSize, page);
+            _sceneConsole.doDeleteByResourceId(logicContext, userId, resourceId);
             break;
          default:
             throw new FFatalError("Unknown resource type. (type_cd={1})", typeCd);

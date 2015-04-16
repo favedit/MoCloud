@@ -14,6 +14,9 @@ public class FRs3MaterialBitmap
    // 材质
    protected FRs3Material _material;
 
+   // 位图打包
+   protected FRs3MaterialBitmapPack _materialBitmapPack;
+
    // 纹理代码
    protected String _textureCode;
 
@@ -52,6 +55,24 @@ public class FRs3MaterialBitmap
    //============================================================
    public void setMaterial(FRs3Material material){
       _material = material;
+   }
+
+   //============================================================
+   // <T>获得位图打包。</T>
+   //
+   // @return 位图打包
+   //============================================================
+   public FRs3MaterialBitmapPack materialBitmapPack(){
+      return _materialBitmapPack;
+   }
+
+   //============================================================
+   // <T>设置位图打包。</T>
+   //
+   // @param bitmapPack 位图打包
+   //============================================================
+   public void setMaterialBitmapPack(FRs3MaterialBitmapPack materialBitmapPack){
+      _materialBitmapPack = materialBitmapPack;
    }
 
    //============================================================
@@ -126,8 +147,13 @@ public class FRs3MaterialBitmap
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
-      output.writeString(_textureGuid);
+      if(_materialBitmapPack != null){
+         output.writeString(_materialBitmapPack.guid());
+      }else{
+         output.writeString("");
+      }
       output.writeString(_bitmapGuid);
+      output.writeUint16(_index);
    }
 
    //============================================================
@@ -137,8 +163,7 @@ public class FRs3MaterialBitmap
    //============================================================
    @Override
    public void loadConfig(FXmlNode xconfig){
-      _guid = xconfig.get("guid");
-      _code = xconfig.get("code");
+      super.loadConfig(xconfig);
       _bitmapGuid = xconfig.get("bitmap_guid");
       _index = xconfig.getInt("index");
    }
@@ -150,9 +175,8 @@ public class FRs3MaterialBitmap
    //============================================================
    @Override
    public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("guid", makeGuid());
-      xconfig.set("code", _code);
       xconfig.set("bitmap_guid", _bitmapGuid);
       xconfig.set("index", _index);
    }
@@ -167,6 +191,16 @@ public class FRs3MaterialBitmap
       _ouid = unit.ouid();
       _guid = unit.guid();
       _code = unit.code();
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FDataResourceMaterialBitmapUnit unit){
+      unit.setFullCode(_code);
+      unit.setCode(_code);
    }
 
    //============================================================

@@ -1,9 +1,8 @@
 package org.mo.content.service.resource.template;
 
-import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
-
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
@@ -12,6 +11,9 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.resource.mesh.ICntMeshConsole;
+import org.mo.content.core.resource.template.ICntTemplateConsole;
+import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -30,6 +32,10 @@ public class FTemplateService
    // 项目控制台接口
    @ALink
    protected ICntMeshConsole _meshConsole;
+
+   // 项目控制台接口
+   @ALink
+   protected ICntTemplateConsole _templateConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -207,6 +213,40 @@ public class FTemplateService
          mesh.setLabel(label);
       }
       _meshConsole.doUpdate(logicContext, mesh);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult updateContent(IWebContext context,
+                                ILogicContext logicContext,
+                                FGcSessionInfo session,
+                                IWebInput input,
+                                IWebOutput output){
+      // 检查输入
+      FXmlNode xtemplate = input.config();
+      if(!xtemplate.isName("Template")){
+         throw new FFatalError("Invalid config code.");
+      }
+      // 获得唯一编号
+      String guid = xtemplate.get("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Parameter guid is empty. (guid={1})", guid);
+      }
+      // 合并场景
+      FGcResTemplateInfo modelInfo = _templateConsole.getByGuid(logicContext, guid);
+      FRs3Template template = _templateConsole.makeTemplate(logicContext, guid);
+      template.mergeConfig(xtemplate);
+      // 更新场景
+      _templateConsole.updateTemplate(logicContext, template);
       return EResult.Success;
    }
 

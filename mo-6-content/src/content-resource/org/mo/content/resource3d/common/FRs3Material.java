@@ -3,7 +3,6 @@ package org.mo.content.resource3d.common;
 import com.cyou.gccloud.data.data.FDataResourceMaterialUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.common.SFloatColor4;
@@ -141,14 +140,17 @@ public class FRs3Material
    protected SFloatColor4 _emissiveColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 位图集合
-   protected FObjects<FRs3MaterialBitmap> _bitmaps = new FObjects<FRs3MaterialBitmap>(FRs3MaterialBitmap.class);
+   protected FObjects<FRs3MaterialBitmap> _bitmaps;
+
+   // 资源位图打包集合
+   protected FObjects<FRs3MaterialBitmapPack> _bitmapPacks;
 
    //============================================================
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3Material(){
       _typeName = "Material";
-      _guid = RUuid.makeUniqueId();
+      makeGuid();
    }
 
    //============================================================
@@ -325,6 +327,25 @@ public class FRs3Material
    }
 
    //============================================================
+   // <T>根据代码查找材质位图。</T>
+   //
+   // @param code 代码
+   //============================================================
+   public FRs3MaterialBitmap findBitmapByCode(String code){
+      // 输出纹理位图集合
+      if(_bitmaps != null){
+         int bitmapCount = _bitmaps.count();
+         for(int i = 0; i < bitmapCount; i++){
+            FRs3MaterialBitmap bitmap = _bitmaps.get(i);
+            if(code.equals(bitmap.code())){
+               return bitmap;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得位图集合。</T>
    //
    // @return 位图集合
@@ -343,6 +364,36 @@ public class FRs3Material
          _bitmaps = new FObjects<FRs3MaterialBitmap>(FRs3MaterialBitmap.class);
       }
       _bitmaps.push(bitmap);
+   }
+
+   //============================================================
+   // <T>判断是否含有位图打包。</T>
+   //
+   // @return 是否含有打包
+   //============================================================
+   public boolean hasBitmapPack(){
+      return (_bitmapPacks != null) ? !_bitmapPacks.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>获得资源位图打包集合。</T>
+   //
+   // @return 资源位图打包集合
+   //============================================================
+   public FObjects<FRs3MaterialBitmapPack> bitmapPacks(){
+      return _bitmapPacks;
+   }
+
+   //============================================================
+   // <T>增加一个位图。</T>
+   //
+   // @param bitmap 位图
+   //============================================================
+   public void pushBitmapPack(FRs3MaterialBitmapPack bitmapPack){
+      if(_bitmapPacks == null){
+         _bitmapPacks = new FObjects<FRs3MaterialBitmapPack>(FRs3MaterialBitmapPack.class);
+      }
+      _bitmapPacks.push(bitmapPack);
    }
 
    //============================================================
@@ -406,12 +457,21 @@ public class FRs3Material
       // 输出颜色
       output.writeBoolean(_optionEmissive);
       _emissiveColor.serialize(output);
+      // 输出纹理打包集合
+      if(hasBitmapPack()){
+         int count = _bitmapPacks.count();
+         output.writeUint16(count);
+         for(FRs3MaterialBitmapPack bitmapPack : _bitmapPacks){
+            bitmapPack.serialize(output);
+         }
+      }else{
+         output.writeUint16(0);
+      }
       // 输出纹理集合
       if(hasBitmap()){
          int count = _bitmaps.count();
          output.writeUint16(count);
-         for(int i = 0; i < count; i++){
-            FRs3MaterialBitmap bitmap = _bitmaps.get(i);
+         for(FRs3MaterialBitmap bitmap : _bitmaps){
             bitmap.serialize(output);
          }
       }else{
@@ -487,6 +547,17 @@ public class FRs3Material
          }else if(xnode.isName("Emissive")){
             _optionEmissive = xnode.getBoolean("valid", _optionEmissive);
             _emissiveColor.loadConfig(xnode);
+         }else if(xnode.isName("BitmapCollection")){
+            // 读取位图集合
+            for(FXmlNode xbitmap : xnode.nodes()){
+               if(xbitmap.isName("MaterialBitmap")){
+                  FRs3MaterialBitmap bitmap = new FRs3MaterialBitmap();
+                  bitmap.loadConfig(xbitmap);
+                  pushBitmap(bitmap);
+               }
+            }
+            // 打包处理
+            pack();
          }
       }
    }
@@ -599,7 +670,7 @@ public class FRs3Material
       if(hasBitmap()){
          FXmlNode xbitmaps = xconfig.createNode("BitmapCollection");
          for(FRs3MaterialBitmap bitmap : _bitmaps){
-            bitmap.saveConfig(xbitmaps.createNode("Bitmap"));
+            bitmap.saveConfig(xbitmaps.createNode("MaterialBitmap"));
          }
       }
    }
@@ -624,7 +695,7 @@ public class FRs3Material
       // 加载配置
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadString(unit.content());
-      this.loadConfig(xdocument.root());
+      loadConfig(xdocument.root());
       // 加载属性
       _ouid = unit.ouid();
       _guid = unit.guid();
@@ -638,9 +709,179 @@ public class FRs3Material
    // @param unit 数据单元
    //============================================================
    public void saveUnit(FDataResourceMaterialUnit unit){
+      unit.setFullCode(_code);
       unit.setCode(_code);
       unit.setLabel(_label);
       unit.setContent(toXml());
+   }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   // <P>移动平台上透明通道会预乘处理，暂时无法解决，先全部使用JPG的RGB通道。</P>
+   // <P>颜色文理diffuse可以使用透明PNG通道。</P>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void pack(){
+      // 清空打包
+      if(_bitmapPacks != null){
+         _bitmapPacks.clear();
+      }
+      if(!hasBitmap()){
+         return;
+      }
+      // 合并颜色纹理和透明纹理
+      FRs3MaterialBitmap diffuseBitmap = findBitmapByCode("diffuse");
+      FRs3MaterialBitmap alphaBitmap = findBitmapByCode("alpha");
+      if((diffuseBitmap != null) || (alphaBitmap != null)){
+         FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+         if((diffuseBitmap != null) && (alphaBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
+            bitmapPack.setCode("diffuse-alpha");
+            diffuseBitmap.setMaterialBitmapPack(bitmapPack);
+            alphaBitmap.setMaterialBitmapPack(bitmapPack);
+         }else if((diffuseBitmap != null) && (alphaBitmap == null)){
+            bitmapPack.setCode("diffuse");
+            diffuseBitmap.setMaterialBitmapPack(bitmapPack);
+         }else if((diffuseBitmap == null) && (alphaBitmap != null)){
+            bitmapPack.setOptionAlpha(true);
+            bitmapPack.setCode("alpha");
+            alphaBitmap.setMaterialBitmapPack(bitmapPack);
+         }
+         pushBitmapPack(bitmapPack);
+      }
+      //............................................................
+      // 合并法线纹理和高光级别纹理
+      //      FRs3MaterialBitmap normalBitmap = findBitmapByCode("normal");
+      //      FRs3MaterialBitmap specularLevelBitmap = findBitmapByCode("specular.level");
+      //      if((normalBitmap != null) || (specularLevelBitmap != null)){
+      //         FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+      //         if((normalBitmap != null) && (specularLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("normal|specular.level");
+      //            bitmapPack.mergeRgb(normalBitmap, 0xFF);
+      //            // bitmapPack.mergeAlpha(specularLevelBitmap);
+      //         }else if((normalBitmap != null) && (specularLevelBitmap == null)){
+      //            bitmapPack.setCode("normal");
+      //            bitmapPack.mergeRgb(normalBitmap, 0xFF);
+      //         }else if((normalBitmap == null) && (specularLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("specular.level");
+      //            bitmapPack.mergeAlpha(specularLevelBitmap, 0xFFFFFF);
+      //         }
+      //         _bitmapPacks.push(bitmapPack);
+      //      }
+      //      //............................................................
+      //      // 合并高光纹理和高度纹理
+      //      FRs3MaterialBitmap specularBitmap = findBitmapByCode("specular");
+      //      FRs3MaterialBitmap heightBitmap = findBitmapByCode("height");
+      //      if((specularBitmap != null) || (heightBitmap != null)){
+      //         FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+      //         if((specularBitmap != null) && (heightBitmap != null)){
+      //            bitmapPack.setCode("specular|height");
+      //            bitmapPack.mergeRgb(specularBitmap);
+      //            bitmapPack.mergeAlpha(heightBitmap);
+      //         }else if((specularBitmap != null) && (heightBitmap == null)){
+      //            bitmapPack.setCode("specular");
+      //            bitmapPack.mergeRgb(specularBitmap, 0xFF);
+      //         }else if((specularBitmap == null) && (heightBitmap != null)){
+      //            bitmapPack.setCode("height");
+      //            bitmapPack.mergeAlpha(heightBitmap, 0xFFFFFF);
+      //         }
+      //         _bitmapPacks.push(bitmapPack);
+      //      }
+      //............................................................
+      // 合并高光强度，反射强度，高度纹理
+      FRs3MaterialBitmap specularLevelBitmap = findBitmapByCode("specular.level");
+      FRs3MaterialBitmap reflectBitmap = findBitmapByCode("reflect");
+      FRs3MaterialBitmap heightBitmap = findBitmapByCode("height");
+      if((specularLevelBitmap != null) || (reflectBitmap != null) || (heightBitmap != null)){
+         FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+         String code = "";
+         if(specularLevelBitmap != null){
+            code += "-specular.level";
+            specularLevelBitmap.setMaterialBitmapPack(bitmapPack);
+         }else{
+            code += "-";
+         }
+         if(reflectBitmap != null){
+            code += "-reflect";
+            reflectBitmap.setMaterialBitmapPack(bitmapPack);
+         }else{
+            code += "-";
+         }
+         if(heightBitmap != null){
+            code += "-height";
+            heightBitmap.setMaterialBitmapPack(bitmapPack);
+         }else{
+            code += "-";
+         }
+         bitmapPack.setCode(code.substring(1));
+         pushBitmapPack(bitmapPack);
+      }
+      //............................................................
+      // 合并光照纹理
+      FRs3MaterialBitmap lightBitmap = findBitmapByCode("light");
+      FRs3MaterialBitmap refractBitmap = findBitmapByCode("refract");
+      FRs3MaterialBitmap emissiveBitmap = findBitmapByCode("emissive");
+      if((lightBitmap != null) || (refractBitmap != null) || (emissiveBitmap != null)){
+         FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+         String code = "";
+         if(lightBitmap != null){
+            code += "-light";
+            lightBitmap.setMaterialBitmapPack(bitmapPack);
+         }else{
+            code += "-";
+         }
+         if(refractBitmap != null){
+            code += "-refract";
+            refractBitmap.setMaterialBitmapPack(bitmapPack);
+         }else{
+            code += "-";
+         }
+         if(emissiveBitmap != null){
+            code += "-emissive";
+            emissiveBitmap.setMaterialBitmapPack(bitmapPack);
+         }else{
+            code += "-";
+         }
+         bitmapPack.setCode(code.substring(1));
+         pushBitmapPack(bitmapPack);
+      }
+      //............................................................
+      // 合并透明纹理和透明级别纹理
+      //      FRs3MaterialBitmap transmittanceColorBitmap = findBitmapByCode("transmittance.color");
+      //      FRs3MaterialBitmap transmittanceLevelBitmap = findBitmapByCode("transmittance.level");
+      //      if((transmittanceColorBitmap != null) || (transmittanceLevelBitmap != null)){
+      //         FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+      //         if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("transmittance.color|transmittance.level");
+      //            bitmapPack.mergeRgb(transmittanceColorBitmap);
+      //            bitmapPack.mergeAlpha(transmittanceLevelBitmap);
+      //         }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+      //            bitmapPack.setCode("transmittance.color");
+      //            bitmapPack.mergeRgb(transmittanceColorBitmap, 0xFF);
+      //         }else if((transmittanceColorBitmap != null) && (transmittanceLevelBitmap != null)){
+      //            bitmapPack.setOptionAlpha(true);
+      //            bitmapPack.setCode("transmittance.level");
+      //            bitmapPack.mergeAlpha(transmittanceLevelBitmap, 0xFFFFFF);
+      //         }
+      //         _bitmapPacks.push(bitmapPack);
+      //      }
+      //............................................................
+      // 输出其余纹理集合
+      int bitmapCount = _bitmaps.count();
+      for(int i = 0; i < bitmapCount; i++){
+         FRs3MaterialBitmap bitmap = _bitmaps.get(i);
+         if(bitmap.materialBitmapPack() == null){
+            FRs3MaterialBitmapPack bitmapPack = new FRs3MaterialBitmapPack();
+            bitmapPack.setCode(bitmap.code());
+            bitmapPack.setTextureBitmap(bitmap);
+            bitmap.setMaterialBitmapPack(bitmapPack);
+            _bitmapPacks.push(bitmapPack);
+         }
+      }
    }
 
    //============================================================

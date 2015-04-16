@@ -189,7 +189,7 @@ public class FRs3Object
       // 读取属性
       _guid = xconfig.get("guid");
       _code = xconfig.get("code");
-      _label = xconfig.get("label");
+      _label = xconfig.get("label", null);
    }
 
    //============================================================

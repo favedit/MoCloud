@@ -1,19 +1,16 @@
 package org.mo.content.core.resource.template;
 
-import com.cyou.gccloud.data.data.FDataResourceTemplateLogic;
-import com.cyou.gccloud.data.data.FDataResourceTemplateUnit;
-import org.mo.com.console.FConsole;
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.RString;
-import org.mo.com.xml.FXmlNode;
-import org.mo.data.logic.FLogicDataset;
+import org.mo.com.lang.FFatalError;
+import org.mo.content.engine3d.core.template.FRs3TemplateConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>内容模板控制台。</T>
 //============================================================
 public class FCntTemplateConsole
-      extends FConsole
+      extends FRs3TemplateConsole
       implements
          ICntTemplateConsole
 {
@@ -24,41 +21,28 @@ public class FCntTemplateConsole
    }
 
    //============================================================
-   // <T>获取数据处理。</T>
+   // <T>根据资源编号删除模型信息。</T>
    //
-   // @param context 逻辑环境
-   // @param xoutput 输出内容
-   // @param serach 搜索内容
-   // @param pageSize 页面大小
-   // @param page 页面编号
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param resourceId 资源编号
    // @return 处理结果
    //============================================================
    @Override
-   public EResult fetch(ILogicContext context,
-                        FXmlNode xoutput,
-                        String serach,
-                        int pageSize,
-                        int page){
-      // 生成查询脚本
-      String whereSql = null;
-      if(!RString.isEmpty(serach)){
-         whereSql = FDataResourceTemplateLogic.FULL_CODE + " LIKE '%" + serach + "%'";
+   public EResult doDeleteByResourceId(ILogicContext logicContext,
+                                       long userId,
+                                       long resourceId){
+      // 获得模型
+      FGcResTemplateInfo templateInfo = findByResourceId(logicContext, resourceId);
+      if(templateInfo == null){
+         throw new FFatalError("Template is not exists. (resource_id={1})", resourceId);
       }
-      // 查询数据
-      FDataResourceTemplateLogic logic = context.findLogic(FDataResourceTemplateLogic.class);
-      FLogicDataset<FDataResourceTemplateUnit> dataset = logic.fetch(whereSql, pageSize, page);
-      xoutput.set("total", dataset.total());
-      xoutput.set("count", dataset.count());
-      xoutput.set("page_size", dataset.pageSize());
-      xoutput.set("page_count", dataset.pageCount());
-      xoutput.set("page", dataset.page());
-      for(FDataResourceTemplateUnit unit : dataset){
-         FXmlNode xitem = xoutput.createNode("Item");
-         xitem.set("guid", unit.guid());
-         xitem.set("type", "template");
-         xitem.set("code", unit.fullCode());
-         xitem.set("label", unit.label());
+      // 检查用户
+      if(templateInfo.userId() != userId){
+         throw new FFatalError("Template user is not same. (model_user_id={1}, session_user_id={2})", templateInfo.userId(), userId);
       }
+      // 删除关联资源对象
+      doDelete(logicContext, templateInfo);
       return EResult.Success;
    }
 }

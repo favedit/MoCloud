@@ -95,6 +95,7 @@ public class FGcResMaterialConsole
       resource.setLabel(materialInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
+      materialInfo.setGuid(resource.guid());
       materialInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }
@@ -111,10 +112,10 @@ public class FGcResMaterialConsole
                                     FGcResMaterialInfo materialInfo){
       long materialId = materialInfo.ouid();
       // 删除位图集合
-      String materialWhereSql = FDataResourceMaterialBitmapLogic.MATERIAL_ID + "=" + materialId;
-      FLogicDataset<FGcResMaterialBitmapInfo> materialDataset = _dataMaterialBitmapConsole.fetch(logicContext, materialWhereSql);
-      if(materialDataset != null){
-         for(FGcResMaterialBitmapInfo bitmapInfo : materialDataset){
+      String bitmapWhereSql = FDataResourceMaterialBitmapLogic.MATERIAL_ID + "=" + materialId;
+      FLogicDataset<FGcResMaterialBitmapInfo> bitmapDataset = _dataMaterialBitmapConsole.fetch(logicContext, bitmapWhereSql);
+      if(bitmapDataset != null){
+         for(FGcResMaterialBitmapInfo bitmapInfo : bitmapDataset){
             _dataMaterialBitmapConsole.doDelete(logicContext, bitmapInfo);
          }
       }

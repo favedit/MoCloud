@@ -1,27 +1,49 @@
 package org.mo.content.core.resource.material;
 
 import org.mo.com.lang.EResult;
-import org.mo.com.xml.FXmlNode;
+import org.mo.content.engine3d.core.material.IRs3MaterialConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>内容材质控制台接口。</T>
 //============================================================
 public interface ICntMaterialConsole
+      extends
+         IRs3MaterialConsole
 {
    //============================================================
-   // <T>获取数据处理。</T>
+   // <T>生成纹理位图。</T>
    //
-   // @param context 逻辑环境
-   // @param xoutput 输出内容
-   // @param serach 搜索内容
-   // @param pageSize 页面大小
-   // @param page 页面编号
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param code 代码
    // @return 处理结果
    //============================================================
-   EResult fetch(ILogicContext context,
-                 FXmlNode xoutput,
-                 String serach,
-                 int pageSize,
-                 int page);
+   byte[] makeBitmap(ILogicContext logicContext,
+                     String guid,
+                     String code);
+
+   //============================================================
+   // <T>生成纹理位图。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   byte[] makeBitmapData(ILogicContext logicContext,
+                         String guid,
+                         String code);
+
+   //============================================================
+   // <T>根据资源编号删除材质信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param resourceId 资源编号
+   // @return 处理结果
+   //============================================================
+   EResult doDeleteByResourceId(ILogicContext logicContext,
+                                long userId,
+                                long resourceId);
 }

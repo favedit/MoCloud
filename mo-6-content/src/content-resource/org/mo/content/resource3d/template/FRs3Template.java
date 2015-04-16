@@ -40,6 +40,19 @@ public class FRs3Template
    }
 
    //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FGcResTemplateInfo unit){
+      // 存储属性
+      unit.setFullCode(fullCode());
+      unit.setCode(_code);
+      unit.setLabel(_label);
+      unit.setContent(toXml());
+   }
+
+   //============================================================
    // <T>从配置节点中导入数据信息。</T>
    //
    // @param xconfig 配置节点

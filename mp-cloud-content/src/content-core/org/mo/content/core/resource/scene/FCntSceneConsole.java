@@ -1,6 +1,10 @@
 package org.mo.content.core.resource.scene;
 
+import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.content.engine3d.core.scene.FRs3SceneConsole;
+import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>内容场景控制台。</T>
@@ -14,6 +18,32 @@ public class FCntSceneConsole
    // <T>构造场景控制台。</T>
    //============================================================
    public FCntSceneConsole(){
+   }
+
+   //============================================================
+   // <T>根据资源编号删除场景信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param resourceId 资源编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult doDeleteByResourceId(ILogicContext logicContext,
+                                       long userId,
+                                       long resourceId){
+      // 获得场景
+      FGcResSceneInfo sceneInfo = findByResourceId(logicContext, resourceId);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (resource_id={1})", resourceId);
+      }
+      // 检查用户
+      if(sceneInfo.userId() != userId){
+         throw new FFatalError("Scene user is not same. (model_user_id={1}, session_user_id={2})", sceneInfo.userId(), userId);
+      }
+      // 删除关联资源对象
+      doDelete(logicContext, sceneInfo);
+      return EResult.Success;
    }
 
    //   //============================================================

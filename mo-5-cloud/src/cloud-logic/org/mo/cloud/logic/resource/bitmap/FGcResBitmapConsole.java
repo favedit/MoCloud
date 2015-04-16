@@ -112,6 +112,7 @@ public class FGcResBitmapConsole
       resource.setLabel(bitmapInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
+      bitmapInfo.setGuid(resource.guid());
       bitmapInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }

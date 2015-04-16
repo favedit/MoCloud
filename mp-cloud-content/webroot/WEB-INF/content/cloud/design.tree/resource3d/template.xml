@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="resource3d.template" update_date="20141209154356">
-   <TreeView name="resource3d.template" label="模板列表" is_valid="Y" note="" is_config="N" disp_checked="N">
-     <TreeNodeType name="model" linker="Model" label="模型" is_valid="Y" note="" icon="resource3d.model.model" service="list@cloud.design.persistence" attributes="type=collection;form_name=content.persistence.PersistenceForm" />
-     <TreeNodeType name="mesh" linker="Mesh" label="网格" is_valid="Y" note="" icon="resource3d.model.mesh" service="list@cloud.design.persistence" attributes="type=component;form_name=content.persistence.ComponentForm" />
-   </TreeView>
-</Content>
