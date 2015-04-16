@@ -1,4 +1,4 @@
-package org.mo.content.resource3d;
+package org.mo.content.resource;
 
 import java.io.File;
 import org.mo.cloud.logic.system.FGcSessionInfo;
@@ -12,7 +12,7 @@ import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 
-public class RRs3ModelImport
+public class RResModelImport
 {
    //============================================================
    // <T>导入处理。</T>
@@ -28,9 +28,8 @@ public class RRs3ModelImport
             filePaths.push(name);
          }
       }
-      // 创建会话信息
-      FGcSessionInfo session = new FGcSessionInfo();
-      session.setUserId(1);
+      // 创建会话
+      FGcSessionInfo session = RRs3Configuration.makeSession();
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
@@ -58,7 +57,7 @@ public class RRs3ModelImport
       try{
          importProcess();
       }catch(Exception e){
-         RLogger.find(RRs3ModelImport.class).error(null, "main", e);
+         RLogger.find(RResModelImport.class).error(null, "main", e);
       }
       RAop.release();
    }

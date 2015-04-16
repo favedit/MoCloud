@@ -1,6 +1,5 @@
 package org.mo.content.engine3d.core.texture;
 
-
 //============================================================
 // <T>资源纹理控制台接口。</T>
 //============================================================
@@ -71,14 +70,4 @@ public interface IRs3TextureConsole
    //   byte[] makeBitmapData(ILogicContext logicContext,
    //                         String guid,
    //                         String code);
-   //
-   //   //============================================================
-   //   // <T>导入纹理。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param path 路径
-   //   // @return 处理结果
-   //   //============================================================
-   //   EResult importTexture(ILogicContext logicContext,
-   //                         String path);
 }

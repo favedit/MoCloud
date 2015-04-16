@@ -29,4 +29,16 @@ public interface IGcResBitmapConsole
    //============================================================
    FGcResBitmapInfo findByResourceGuid(ILogicContext logicContext,
                                        String resourceGuid);
+
+   //============================================================
+   // <T>根据用户编号和全代码编号查找位图信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param fullCode 全代码
+   // @return 位图信息
+   //============================================================
+   FGcResBitmapInfo findByUserFullCode(ILogicContext logicContext,
+                                       long userId,
+                                       String fullCode);
 }

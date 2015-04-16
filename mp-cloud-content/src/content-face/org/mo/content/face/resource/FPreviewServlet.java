@@ -94,7 +94,13 @@ public class FPreviewServlet
                data = _bitmapConsole.makePreviewData(logicContext, bitmapGuid);
                _resourceConsole.uploadPreviewData(logicContext, bitmapGuid, data);
                break;
+            case EGcResource.MaterialString:
+               break;
             case EGcResource.ModelString:
+               break;
+            case EGcResource.TemplateString:
+               break;
+            case EGcResource.SceneString:
                break;
             default:
                throw new FFatalError("Unknown preview type. (type_cd={1})", typeCd);

@@ -99,6 +99,8 @@ public class FRs3ModelConsole
    public EResult importModel(ILogicContext logicContext,
                               FGcSessionInfo session,
                               String fileName){
+      long userId = session.userId();
+      long projectId = session.projectId();
       // 加载模型资源
       FRs3Model model = new FRs3Model();
       model.loadFile(fileName);
@@ -106,8 +108,8 @@ public class FRs3ModelConsole
       //............................................................
       // 新建模型
       FGcResModelInfo modelInfo = doPrepare(logicContext);
-      modelInfo.setUserId(session.userId());
-      modelInfo.setProjectId(session.projectId());
+      modelInfo.setUserId(userId);
+      modelInfo.setProjectId(projectId);
       modelInfo.setCode(model.code());
       modelInfo.setFullCode(model.fullCode());
       modelInfo.setLabel(model.label());
@@ -121,6 +123,8 @@ public class FRs3ModelConsole
          String meshCode = mesh.code();
          // 新建网格
          FGcResModelMeshInfo meshInfo = _meshConsole.doPrepare(logicContext);
+         meshInfo.setUserId(userId);
+         meshInfo.setProjectId(projectId);
          meshInfo.setModelId(modelInfo.ouid());
          meshInfo.setSortIndex(n);
          meshInfo.setCode(meshCode);

@@ -53,11 +53,14 @@ public class FRs3SkeletonConsole
       skinInfo.setUserId(userId);
       skinInfo.setProjectId(projectId);
       skinInfo.setModelId(modelId);
+      skinInfo.setMeshId(meshId);
       skinInfo.setSkeletonId(skeletonInfo.ouid());
       skin.saveUnit(skinInfo);
       _skeletonSkinConsole.doInsert(logicContext, skinInfo);
       // 新建数据流集合
-      for(FRs3Stream stream : skin.streams()){
+      int streamCount = skin.streams().count();
+      for(int n = 0; n < streamCount; n++){
+         FRs3Stream stream = skin.streams().get(n);
          // 新建蒙皮数据流
          FGcResModelSkeletonSkinStreamInfo streamInfo = _skeletonSkinStreamConsole.doPrepare(logicContext);
          streamInfo.setUserId(userId);
@@ -65,6 +68,7 @@ public class FRs3SkeletonConsole
          streamInfo.setModelId(modelId);
          streamInfo.setMeshId(meshId);
          streamInfo.setSkinId(skinInfo.ouid());
+         streamInfo.setSortIndex(n);
          _skeletonSkinStreamConsole.doInsert(logicContext, streamInfo);
          // 更新蒙皮数据
          _skeletonSkinStreamConsole.updateResource(logicContext, streamInfo, stream);

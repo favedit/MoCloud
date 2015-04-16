@@ -82,6 +82,27 @@ public class FGcResModelMeshConsole
    }
 
    //============================================================
+   // <T>根据用户编号和代码查找网格信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param modelId 模型编号
+   // @param code 项目代码
+   // @return 网格信息
+   //============================================================
+   @Override
+   public FGcResModelMeshInfo findByUserModelCode(ILogicContext logicContext,
+                                                  long userId,
+                                                  long modelId,
+                                                  String code){
+      String whereSql = "(" + FDataResourceModelMeshLogic.USER_ID + "=" + userId + ")";
+      whereSql += " AND (" + FDataResourceModelMeshLogic.MODEL_ID + "='" + modelId + "')";
+      whereSql += " AND (" + FDataResourceModelMeshLogic.CODE + "='" + RSql.formatValue(code) + "')";
+      FGcResModelMeshInfo meshInfo = search(logicContext, whereSql);
+      return meshInfo;
+   }
+
+   //============================================================
    // <T>根据代码查找模型网格单元。</T>
    //
    // @param logicContext 逻辑环境

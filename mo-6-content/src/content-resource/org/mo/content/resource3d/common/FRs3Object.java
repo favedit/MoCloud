@@ -209,6 +209,10 @@ public class FRs3Object
    // @param xconfig 配置信息
    //============================================================
    public void saveConfig(FXmlNode xconfig){
+      // 设置名称
+      if(!RString.isEmpty(_typeName)){
+         xconfig.setName(_typeName);
+      }
       // 存储属性
       xconfig.set("guid", makeGuid());
       xconfig.set("code", _code);

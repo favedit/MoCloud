@@ -1,10 +1,15 @@
 package org.mo.content.engine3d.core.material;
 
+import org.mo.cloud.logic.resource.material.IGcResMaterialConsole;
+import org.mo.com.lang.EResult;
+import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>资源模型控制台接口。</T>
 //============================================================
 public interface IRs3MaterialConsole
+      extends
+         IGcResMaterialConsole
 {
    //   //============================================================
    //   // <T>根据唯一编号查找材质。</T>
@@ -48,4 +53,14 @@ public interface IRs3MaterialConsole
    //   FDataResourceMaterialBitmapUnit insertMaterialTexture(ILogicContext logicContext,
    //                                                         long materialId,
    //                                                         FRs3MaterialTexture materialTexture);
+
+   //============================================================
+   // <T>导入纹理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   EResult importTexture(ILogicContext logicContext,
+                         String path);
 }

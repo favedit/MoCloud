@@ -729,7 +729,12 @@ public class FDataResourceModelSkeletonSkinLogic
          cmd.append(skeletonId);
       }
       cmd.append(',');
-      cmd.append(unit.meshId());
+      long meshId = unit.meshId();
+      if(meshId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(meshId);
+      }
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -887,7 +892,12 @@ public class FDataResourceModelSkeletonSkinLogic
       }
       if(unit.isMeshIdChanged()){
          cmd.append(",`MESH_ID`=");
-         cmd.append(unit.meshId());
+         long meshId = unit.meshId();
+         if(meshId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(meshId);
+         }
       }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");

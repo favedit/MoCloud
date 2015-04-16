@@ -7,6 +7,7 @@ import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.FString;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -86,7 +87,7 @@ public class FResourceService
                        IWebInput input,
                        IWebOutput output){
       // 检查参数
-      //String typeCd = context.parameter("type_cd");
+      String typeCd = context.parameter("type_cd");
       String serach = context.parameter("serach");
       String order = context.parameter("order");
       int pageSize = RInteger.toRange(context.parameterAsInteger("page_size", 20), 0, 200);
@@ -100,13 +101,30 @@ public class FResourceService
       xresources.set("page", page);
       //............................................................
       // 生成查询脚本
-      String whereSql = "(USER_ID=" + session.userId() + ")";
+      FString whereSql = new FString();
+      whereSql.append("(USER_ID=" + session.userId() + ")");
       if(!RString.isEmpty(serach)){
-         whereSql += " AND (LABEL LIKE '%" + serach + "%')";
+         whereSql.append(" AND (LABEL LIKE '%" + serach + "%')");
+      }
+      if(!RString.isEmpty(typeCd)){
+         if(!typeCd.contains("All")){
+            String[] types = RString.split(typeCd, '|');
+            whereSql.append(" AND (RESOURCE_CD IN (");
+            int count = types.length;
+            for(int n = 0; n < count; n++){
+               String type = types[n];
+               int typeCode = EGcResource.parse(type);
+               if(n > 0){
+                  whereSql.append(",");
+               }
+               whereSql.append(typeCode);
+            }
+            whereSql.append("))");
+         }
       }
       //............................................................
       // 查询数据
-      FLogicDataset<FGcResourceInfo> dataset = _resourceConsole.fetch(logicContext, whereSql, order, pageSize, page);
+      FLogicDataset<FGcResourceInfo> dataset = _resourceConsole.fetch(logicContext, whereSql.toString(), order, pageSize, page);
       //............................................................
       // 生成输出内容
       if(dataset != null){

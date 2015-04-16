@@ -61,10 +61,10 @@ public class FDataResourceModelSkeletonSkinStreamUnit
    protected long _meshId;
 
    // 存储字段骨骼编号的定义。
-   private int __skeletonId;
+   private long __skeletonId;
 
    // 字段骨骼编号的定义。
-   protected int _skeletonId;
+   protected long _skeletonId;
 
    // 存储字段蒙皮编号的定义。
    private long __skinId;
@@ -403,7 +403,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
    //
    // @return 数据内容
    //============================================================
-   public int skeletonId(){
+   public long skeletonId(){
       return _skeletonId;
    }
 
@@ -423,7 +423,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setSkeletonId(int value){
+   public void setSkeletonId(long value){
       _skeletonId = value;
    }
 
@@ -840,7 +840,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
          case "mesh_id":
             return Long.toString(_meshId);
          case "skeleton_id":
-            return RInteger.toString(_skeletonId);
+            return Long.toString(_skeletonId);
          case "skin_id":
             return Long.toString(_skinId);
          case "sort_index":
@@ -905,7 +905,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
             _meshId = RLong.parse(value);
             break;
          case "skeleton_id":
-            _skeletonId = RInteger.parse(value);
+            _skeletonId = RLong.parse(value);
             break;
          case "skin_id":
             _skinId = RLong.parse(value);
@@ -993,7 +993,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
                _meshId = __meshId;
                break;
             case "skeleton_id":
-               __skeletonId = RInteger.parse(value);
+               __skeletonId = RLong.parse(value);
                _skeletonId = __skeletonId;
                break;
             case "skin_id":
@@ -1103,7 +1103,7 @@ public class FDataResourceModelSkeletonSkinStreamUnit
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
       map.put("meshId", RLong.toString(_meshId));
-      map.put("skeletonId", RInteger.toString(_skeletonId));
+      map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("skinId", RLong.toString(_skinId));
       map.put("sortIndex", RInteger.toString(_sortIndex));
       map.put("fullCode", _fullCode);

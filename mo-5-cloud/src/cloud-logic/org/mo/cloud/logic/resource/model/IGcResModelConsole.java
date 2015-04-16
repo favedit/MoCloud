@@ -39,4 +39,16 @@ public interface IGcResModelConsole
    //============================================================
    FGcResModelInfo findByCode(ILogicContext logicContext,
                               String code);
+
+   //============================================================
+   // <T>根据用户和代码查找模型单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   FGcResModelInfo findByUserCode(ILogicContext logicContext,
+                                  long userId,
+                                  String code);
 }

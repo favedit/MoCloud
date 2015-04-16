@@ -1,18 +1,18 @@
-package org.mo.content.resource3d;
+package org.mo.content.resource;
 
 import org.mo.content.common.RRs3Configuration;
 import org.mo.core.aop.RAop;
 
-public class RRs3ImportLocal
+public class RResAllImport
 {
-   public static String Config = "application-local.xml";
+   public static String Config = "application-home.xml";
 
    //============================================================
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
       // 设置变量
-      RRs3Configuration.Config = RRs3ImportLocal.Config;
+      RRs3Configuration.Config = RResAllImport.Config;
       // 设置环境
       String configPath = RRs3Configuration.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);

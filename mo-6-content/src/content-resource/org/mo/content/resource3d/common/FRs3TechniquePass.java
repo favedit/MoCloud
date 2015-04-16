@@ -17,6 +17,7 @@ public class FRs3TechniquePass
    // <T>构造场景技术过程。</T>
    //============================================================
    public FRs3TechniquePass(){
+      _typeName = "TechniquePass";
    }
 
    //============================================================

@@ -4,7 +4,6 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -61,10 +60,10 @@ public class FDataResourceModelSkeletonSkinUnit
    protected long _skeletonId;
 
    // 存储字段网格编号的定义。
-   private int __meshId;
+   private long __meshId;
 
    // 字段网格编号的定义。
-   protected int _meshId;
+   protected long _meshId;
 
    // 存储字段代码的定义。
    private String __code;
@@ -373,7 +372,7 @@ public class FDataResourceModelSkeletonSkinUnit
    //
    // @return 数据内容
    //============================================================
-   public int meshId(){
+   public long meshId(){
       return _meshId;
    }
 
@@ -393,7 +392,7 @@ public class FDataResourceModelSkeletonSkinUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setMeshId(int value){
+   public void setMeshId(long value){
       _meshId = value;
    }
 
@@ -664,7 +663,7 @@ public class FDataResourceModelSkeletonSkinUnit
          case "skeleton_id":
             return Long.toString(_skeletonId);
          case "mesh_id":
-            return RInteger.toString(_meshId);
+            return Long.toString(_meshId);
          case "code":
             return _code;
          case "full_code":
@@ -719,7 +718,7 @@ public class FDataResourceModelSkeletonSkinUnit
             _skeletonId = RLong.parse(value);
             break;
          case "mesh_id":
-            _meshId = RInteger.parse(value);
+            _meshId = RLong.parse(value);
             break;
          case "code":
             _code = value;
@@ -792,7 +791,7 @@ public class FDataResourceModelSkeletonSkinUnit
                _skeletonId = __skeletonId;
                break;
             case "mesh_id":
-               __meshId = RInteger.parse(value);
+               __meshId = RLong.parse(value);
                _meshId = __meshId;
                break;
             case "code":
@@ -877,7 +876,7 @@ public class FDataResourceModelSkeletonSkinUnit
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
       map.put("skeletonId", RLong.toString(_skeletonId));
-      map.put("meshId", RInteger.toString(_meshId));
+      map.put("meshId", RLong.toString(_meshId));
       map.put("code", _code);
       map.put("fullCode", _fullCode);
       map.put("label", _label);

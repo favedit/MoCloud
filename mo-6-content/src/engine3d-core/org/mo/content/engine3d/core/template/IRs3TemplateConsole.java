@@ -1,14 +1,17 @@
 package org.mo.content.engine3d.core.template;
 
-import com.cyou.gccloud.data.data.FDataResourceTemplateUnit;
-import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.cloud.logic.resource.template.IGcResTemplateConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.com.lang.EResult;
+import org.mo.content.resource3d.template.FRs3Template;
+import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>资源模板控制台接口。</T>
 //============================================================
 public interface IRs3TemplateConsole
       extends
-         IAbstractLogicUnitConsole<FDataResourceTemplateUnit>
+         IGcResTemplateConsole
 {
    //   //============================================================
    //   // <T>根据代码查找资源模板单元。</T>
@@ -45,34 +48,36 @@ public interface IRs3TemplateConsole
    //                             String guid,
    //                             String code,
    //                             String version);
+
+   //============================================================
+   // <T>查找资源模板。</T>
    //
-   //   //============================================================
-   //   // <T>查找资源模板。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param guid 唯一编号
-   //   // @return 处理结果
-   //   //============================================================
-   //   FRs3Template makeTemplate(ILogicContext logicContext,
-   //                             String guid);
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   FRs3Template makeTemplate(ILogicContext logicContext,
+                             String guid);
+
+   //============================================================
+   // <T>查找资源模板。</T>
    //
-   //   //============================================================
-   //   // <T>查找资源模板。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param guid 唯一编号
-   //   // @return 处理结果
-   //   //============================================================
-   //   byte[] makeTemplateData(ILogicContext logicContext,
-   //                           String guid);
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   byte[] makeTemplateData(ILogicContext logicContext,
+                           String guid);
+
+   //============================================================
+   // <T>导入模板。</T>
    //
-   //   //============================================================
-   //   // <T>导入模板。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param fileName 文件名称
-   //   // @return 处理结果
-   //   //============================================================
-   //   EResult importTemplate(ILogicContext logicContext,
-   //                          String fileName);
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param fileName 文件名称
+   // @return 处理结果
+   //============================================================
+   EResult importResource(ILogicContext logicContext,
+                          FGcSessionInfo session,
+                          String fileName);
 }

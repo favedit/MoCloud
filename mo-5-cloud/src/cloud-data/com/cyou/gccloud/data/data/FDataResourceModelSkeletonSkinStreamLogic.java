@@ -749,7 +749,12 @@ public class FDataResourceModelSkeletonSkinStreamLogic
          cmd.append(meshId);
       }
       cmd.append(',');
-      cmd.append(unit.skeletonId());
+      long skeletonId = unit.skeletonId();
+      if(skeletonId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(skeletonId);
+      }
       cmd.append(',');
       long skinId = unit.skinId();
       if(skinId == 0){
@@ -908,7 +913,12 @@ public class FDataResourceModelSkeletonSkinStreamLogic
       }
       if(unit.isSkeletonIdChanged()){
          cmd.append(",`SKELETON_ID`=");
-         cmd.append(unit.skeletonId());
+         long skeletonId = unit.skeletonId();
+         if(skeletonId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(skeletonId);
+         }
       }
       if(unit.isSkinIdChanged()){
          cmd.append(",`SKIN_ID`=");

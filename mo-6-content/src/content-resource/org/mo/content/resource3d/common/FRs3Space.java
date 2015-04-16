@@ -1,6 +1,7 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -19,6 +20,9 @@ public class FRs3Space
 
    // 材质集合
    protected FObjects<FRs3Material> _materials;
+
+   // 显示集合
+   protected FObjects<FRs3Display> _displays;
 
    // 显示层集合
    protected FObjects<FRs3DisplayLayer> _layers;
@@ -74,6 +78,23 @@ public class FRs3Space
    }
 
    //============================================================
+   // <T>根据代码查找材质。</T>
+   //
+   // @param code 代码
+   // @return 材质
+   //============================================================
+   public FRs3Material findMaterialByCode(String code){
+      if(!RString.isEmpty(code)){
+         for(FRs3Material material : _materials){
+            if(code.equals(material.code())){
+               return material;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得材质集合。</T>
    //
    // @return 材质集合
@@ -92,6 +113,53 @@ public class FRs3Space
          _materials = new FObjects<FRs3Material>(FRs3Material.class);
       }
       _materials.push(material);
+   }
+
+   //============================================================
+   // <T>判断是否含有显示对象。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasDisplay(){
+      return (_displays != null) ? !_displays.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找显示对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 显示对象
+   //============================================================
+   public FRs3Display findDisplayByGuid(String guid){
+      if(!RString.isEmpty(guid)){
+         for(FRs3Display display : _displays){
+            if(guid.equals(display.guid())){
+               return display;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>获得显示集合。</T>
+   //
+   // @return 显示集合
+   //============================================================
+   public FObjects<FRs3Display> displays(){
+      return _displays;
+   }
+
+   //============================================================
+   // <T>增加一个显示对象。</T>
+   //
+   // @param display 显示对象
+   //============================================================
+   public void pushDisplay(FRs3Display display){
+      if(_displays == null){
+         _displays = new FObjects<FRs3Display>(FRs3Display.class);
+      }
+      _displays.push(display);
    }
 
    //============================================================
@@ -146,8 +214,8 @@ public class FRs3Space
    //
    // @return 场景显示集合
    //============================================================
-   public FObjects<FRs3Spatial> filterDisplays(){
-      FObjects<FRs3Spatial> displays = new FObjects<FRs3Spatial>(FRs3Spatial.class);
+   public FObjects<FRs3Sprite> filterDisplays(){
+      FObjects<FRs3Sprite> displays = new FObjects<FRs3Sprite>(FRs3Sprite.class);
       if(_layers != null){
          for(FRs3DisplayLayer layer : _layers){
             layer.filterDisplays(displays);
@@ -167,15 +235,35 @@ public class FRs3Space
       // 存储属性
       _technique.serialize(output);
       _region.serialize(output);
+      // 存储材质集合
+      if(hasMaterial()){
+         int count = _materials.count();
+         output.writeUint16(count);
+         for(FRs3Material material : _materials){
+            material.serialize(output);
+         }
+      }else{
+         output.writeUint16(0);
+      }
+      // 存储材质集合
+      if(hasDisplay()){
+         int count = _displays.count();
+         output.writeUint16(count);
+         for(FRs3Display display : _displays){
+            display.serialize(output);
+         }
+      }else{
+         output.writeUint16(0);
+      }
       // 存储场景层集合
-      if(_layers != null){
+      if(hasLayer()){
          int count = _layers.count();
-         output.writeInt16((short)count);
+         output.writeUint16(count);
          for(FRs3DisplayLayer layer : _layers){
             layer.serialize(output);
          }
       }else{
-         output.writeInt16((short)0);
+         output.writeUint16(0);
       }
    }
 
@@ -199,11 +287,23 @@ public class FRs3Space
             // 读取区域
             _region.loadConfig(xnode);
          }else if(xnode.isName("MaterialCollection")){
-            // 读取层集合
+            // 读取材质集合
             for(FXmlNode xmaterial : xnode){
                FRs3Material material = new FRs3Material();
                material.loadConfig(xmaterial);
                pushMaterial(material);
+            }
+         }else if(xnode.isName("DisplayCollection")){
+            // 读取层集合
+            for(FXmlNode xdisplay : xnode){
+               FRs3Display display = null;
+               if(xdisplay.isName("Sprite")){
+                  display = new FRs3Sprite();
+               }else{
+                  throw new FFatalError("Unknown display type");
+               }
+               display.loadConfig(xdisplay);
+               pushDisplay(display);
             }
          }else if(xnode.isName("LayerCollection")){
             // 读取层集合
@@ -223,23 +323,29 @@ public class FRs3Space
    //============================================================
    @Override
    public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("guid", _guid);
-      xconfig.set("code", _code);
       xconfig.set("full_code", _fullCode);
-      xconfig.set("label", _label);
       xconfig.set("keywords", _keywords);
       // 存储技术
       _technique.saveConfig(xconfig.createNode("Technique"));
       // 存储区域
       _region.saveConfig(xconfig.createNode("Region"));
-      // 存储层集合
+      // 存储材质集合
       if(hasMaterial()){
          FXmlNode xmaterial = xconfig.createNode("MaterialCollection");
          for(FRs3Material material : _materials){
             material.saveConfig(xmaterial.createNode("Material"));
          }
       }
+      // 存储显示集合
+      if(hasDisplay()){
+         FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
+         for(FRs3Display display : _displays){
+            display.saveConfig(xdisplays.createNode("Display"));
+         }
+      }
+      // 存储层集合
       if(hasLayer()){
          FXmlNode xlayers = xconfig.createNode("LayerCollection");
          for(FRs3DisplayLayer layer : _layers){

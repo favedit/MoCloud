@@ -107,6 +107,23 @@ public class FGcResModelConsole
    }
 
    //============================================================
+   // <T>根据用户和代码查找模型单元。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param code 代码
+   // @return 处理结果
+   //============================================================
+   @Override
+   public FGcResModelInfo findByUserCode(ILogicContext logicContext,
+                                         long userId,
+                                         String code){
+      String searchSql = "(" + FDataResourceModelLogic.USER_ID + "=" + userId + ") AND (" + FDataResourceModelLogic.CODE + "='" + code + "')";
+      FGcResModelInfo modelInfo = search(logicContext, searchSql);
+      return modelInfo;
+   }
+
+   //============================================================
    // <T>新建记录前处理</T>
    //
    // @param logicContext 逻辑环境
@@ -154,9 +171,9 @@ public class FGcResModelConsole
       _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, resourceGuid);
       // 删除动画集合
       String animationWhereSql = FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId;
-      FLogicDataset<FGcResModelAnimationInfo> animationDataset1 = _dataModelAnimationConsole.fetch(logicContext, animationWhereSql);
-      if(animationDataset1 != null){
-         for(FGcResModelAnimationInfo animation : animationDataset1){
+      FLogicDataset<FGcResModelAnimationInfo> animationDataset = _dataModelAnimationConsole.fetch(logicContext, animationWhereSql);
+      if(animationDataset != null){
+         for(FGcResModelAnimationInfo animation : animationDataset){
             _dataModelAnimationConsole.doDelete(logicContext, animation);
          }
       }
@@ -192,9 +209,7 @@ public class FGcResModelConsole
                                    FGcResModelInfo unit){
       // 删除关联资源
       long resourceId = unit.resourceId();
-      if(resourceId > 0){
-         _dataResourceConsole.doDelete(logicContext, resourceId);
-      }
+      _dataResourceConsole.doDelete(logicContext, resourceId);
       // 返回结果
       return EResult.Success;
    }

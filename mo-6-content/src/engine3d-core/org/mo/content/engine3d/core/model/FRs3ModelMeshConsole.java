@@ -122,6 +122,8 @@ public class FRs3ModelMeshConsole
          FRs3Stream stream = mesh.streams().get(n);
          // 新建数据流
          FGcResModelMeshStreamInfo streamInfo = _streamConsole.doPrepare(logicContext);
+         streamInfo.setUserId(meshInfo.userId());
+         streamInfo.setProjectId(meshInfo.projectId());
          streamInfo.setModelId(modelId);
          streamInfo.setMeshId(meshId);
          streamInfo.setSortIndex(n);

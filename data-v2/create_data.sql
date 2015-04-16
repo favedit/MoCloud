@@ -163,13 +163,13 @@ CREATE TABLE `DT_RES_BITMAP`
    `USER_ID`                       BIGINT, 
    `PROJECT_ID`                    BIGINT, 
    `RESOURCE_ID`                   BIGINT, 
-   `CODE`                          VARCHAR(80), 
    `FULL_CODE`                     VARCHAR(200), 
+   `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
+   `KEYWORDS`                      VARCHAR(2000), 
    `FORMAT_CODE`                   VARCHAR(80), 
    `SIZE_WIDTH`                    INTEGER, 
    `SIZE_HEIGHT`                   INTEGER, 
-   `KEYWORDS`                      VARCHAR(2000), 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -425,6 +425,7 @@ CREATE TABLE `DT_RES_MODEL_SKELETON_SKIN`
    `PROJECT_ID`                    BIGINT, 
    `MODEL_ID`                      BIGINT, 
    `SKELETON_ID`                   BIGINT NOT NULL, 
+   `MESH_ID`                       BIGINT, 
    `CODE`                          VARCHAR(80), 
    `FULL_CODE`                     VARCHAR(200), 
    `LABEL`                         VARCHAR(200), 
@@ -450,6 +451,9 @@ ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_MOD
 
 ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_SKT 
       FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RES_MODEL_SKELETON(`OUID`); 
+
+ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_MSH 
+      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RES_MODEL_MESH(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource.Model.Skeleton.Skin.Stream]

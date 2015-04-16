@@ -1,14 +1,12 @@
 package org.mo.content.core.resource.bitmap;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapConsole;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
 
@@ -20,10 +18,6 @@ public class FCntBitmapConsole
       implements
          ICntBitmapConsole
 {
-   // 存储控制台
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
    //============================================================
    // <T>构造资源位图控制台。</T>
    //============================================================

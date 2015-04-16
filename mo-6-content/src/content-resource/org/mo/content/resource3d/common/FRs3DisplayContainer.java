@@ -33,11 +33,12 @@ public class FRs3DisplayContainer
    //
    // @return 显示集合
    //============================================================
-   public FRs3Display createChild(FXmlNode xconfig){
-      String typeName = xconfig.get("type");
+   @Override
+   public FRs3Object createChild(FXmlNode xconfig){
+      String typeName = xconfig.name();
       switch(typeName){
-         case "Spatial":
-            return new FRs3Spatial();
+         case "Shape":
+            return new FRs3Shape();
          case "Sprite":
             return new FRs3Sprite();
       }
@@ -66,7 +67,7 @@ public class FRs3DisplayContainer
       if(xdisplays != null){
          for(FXmlNode xdisplay : xdisplays){
             if(xdisplay.isName("Display")){
-               FRs3Display display = createChild(xdisplay);
+               FRs3Display display = (FRs3Display)createChild(xdisplay);
                display.loadConfig(xdisplay);
                _displays.push(display);
             }else{
@@ -99,12 +100,11 @@ public class FRs3DisplayContainer
    // @param xconfig 配置信息
    //============================================================
    public void importConfig(FXmlNode xconfig){
-      //super.importConfig(xconfig);
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("DisplayCollection")){
             for(FXmlNode xchild : xnode){
-               FRs3Display display = createChild(xchild);
+               FRs3Display display = (FRs3Display)createChild(xchild);
                //display.importConfig(xchild);
                _displays.push(display);
             }

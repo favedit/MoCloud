@@ -1,7 +1,7 @@
-package org.mo.content.resource3d;
+package org.mo.content.resource;
 
 
-public class RRs3SceneImport
+public class RResSceneImport
 {
    //   //============================================================
    //   // <T>导入处理。</T>

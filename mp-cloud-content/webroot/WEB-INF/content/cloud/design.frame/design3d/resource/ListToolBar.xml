@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.CanvasToolBar">
    <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
+      <ToolButton name='typeAll' linker='_controlTypeAll' label='全选' hint='场景旋转播放开关'/>
+      <ToolButton name='typeNone' linker='_controlTypeNone' label='不选' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='typeBitmap' linker='_controlTypeBitmap' label='位图' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='typeMaterial' linker='_controlTypeMaterial' label='材质' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='typeModel' linker='_controlTypeModel' label='模型' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='typeTemplate' linker='_controlTypeTemplate' label='模板' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='typeScene' linker='_controlTypeScene' label='场景' hint='场景旋转播放开关'/>
+      <ToolButtonSplit/>
       <ToolButtonEdit name='searchEdit' linker='_controlSearchEdit' icon='design3d.tools.search' label='搜索' edit_size='200,0'/>
       <ToolButtonSplit/>
       <ToolButton name='firstButton' linker='_controlFirstButton' icon='design3d.tools.first' label='首页' hint='场景旋转播放开关'/>

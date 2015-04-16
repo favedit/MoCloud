@@ -14,12 +14,6 @@ import org.mo.content.geom.common.SFloatColor4;
 public class FRs3Material
       extends FRs3Object
 {
-   // 主题
-   protected FRs3Theme _theme;
-
-   // 分组唯一代码
-   protected String _groupGuid;
-
    // 效果代码
    protected String _effectCode = "automatic";
 
@@ -146,11 +140,8 @@ public class FRs3Material
    // 发光颜色
    protected SFloatColor4 _emissiveColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
-   // 网格集合
+   // 位图集合
    protected FObjects<FRs3MaterialBitmap> _bitmaps = new FObjects<FRs3MaterialBitmap>(FRs3MaterialBitmap.class);
-
-   // 网格集合
-   protected FObjects<FRs3MaterialTexture> _textures = new FObjects<FRs3MaterialTexture>(FRs3MaterialTexture.class);
 
    //============================================================
    // <T>构造资源模型。</T>
@@ -161,49 +152,14 @@ public class FRs3Material
    }
 
    //============================================================
-   // <T>获得主题。</T>
-   //
-   // @return 主题
-   //============================================================
-   public FRs3Theme theme(){
-      return _theme;
-   }
-
-   //============================================================
-   // <T>设置主题。</T>
-   //
-   // @param theme 主题
-   //============================================================
-   public void setTheme(FRs3Theme theme){
-      _theme = theme;
-   }
-
-   //============================================================
    // <T>获得全代码。</T>
    //
    // @return 全代码
    //============================================================
    @Override
    public String fullCode(){
-      return _theme.code() + "|" + _code;
-   }
-
-   //============================================================
-   // <T>获得分组唯一代码。</T>
-   //
-   // @return 分组唯一代码
-   //============================================================
-   public String groupGuid(){
-      return _groupGuid;
-   }
-
-   //============================================================
-   // <T>设置分组唯一代码。</T>
-   //
-   // @param groupGuid 分组唯一代码
-   //============================================================
-   public void setGroupGuid(String groupGuid){
-      _groupGuid = groupGuid;
+      //return _theme.code() + "|" + _code;
+      return _code;
    }
 
    //============================================================
@@ -360,21 +316,33 @@ public class FRs3Material
    }
 
    //============================================================
-   // <T>获得网格集合。</T>
+   // <T>判断是否含有位图。</T>
    //
-   // @return 网格集合
+   // @return 是否含有
+   //============================================================
+   public boolean hasBitmap(){
+      return (_bitmaps != null) ? !_bitmaps.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>获得位图集合。</T>
+   //
+   // @return 位图集合
    //============================================================
    public FObjects<FRs3MaterialBitmap> bitmaps(){
       return _bitmaps;
    }
 
    //============================================================
-   // <T>获得纹理集合。</T>
+   // <T>增加一个位图。</T>
    //
-   // @return 纹理集合
+   // @param bitmap 位图
    //============================================================
-   public FObjects<FRs3MaterialTexture> textures(){
-      return _textures;
+   public void pushBitmap(FRs3MaterialBitmap bitmap){
+      if(_bitmaps == null){
+         _bitmaps = new FObjects<FRs3MaterialBitmap>(FRs3MaterialBitmap.class);
+      }
+      _bitmaps.push(bitmap);
    }
 
    //============================================================
@@ -385,7 +353,6 @@ public class FRs3Material
    @Override
    public void serialize(IDataOutput output){
       super.serialize(output);
-      output.writeString(_groupGuid);
       // 输出属性
       output.writeString(_effectCode);
       // 输出配置
@@ -440,11 +407,15 @@ public class FRs3Material
       output.writeBoolean(_optionEmissive);
       _emissiveColor.serialize(output);
       // 输出纹理集合
-      int textureCount = _textures.count();
-      output.writeInt16((short)textureCount);
-      for(int i = 0; i < textureCount; i++){
-         FRs3MaterialTexture texture = _textures.get(i);
-         texture.serialize(output);
+      if(hasBitmap()){
+         int count = _bitmaps.count();
+         output.writeUint16(count);
+         for(int i = 0; i < count; i++){
+            FRs3MaterialBitmap bitmap = _bitmaps.get(i);
+            bitmap.serialize(output);
+         }
+      }else{
+         output.writeUint16(0);
       }
    }
 
@@ -529,7 +500,6 @@ public class FRs3Material
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
       // 读取属性
-      _groupGuid = xconfig.get("group_guid");
       _effectCode = xconfig.get("effect_code");
       // 处理所有节点
       loadConfigInfo(xconfig);
@@ -558,7 +528,6 @@ public class FRs3Material
    public void saveConfig(FXmlNode xconfig){
       super.saveConfig(xconfig);
       // 存储属性
-      xconfig.set("group_guid", _groupGuid);
       xconfig.set("effect_code", _effectCode);
       // 存储配置
       xconfig.set("option_depth", _optionDepth);
@@ -626,6 +595,13 @@ public class FRs3Material
       FXmlNode xemissive = xconfig.createNode("Emissive");
       xemissive.set("valid", _optionEmissive);
       _emissiveColor.saveConfig(xemissive);
+      // 存储位图集合
+      if(hasBitmap()){
+         FXmlNode xbitmaps = xconfig.createNode("BitmapCollection");
+         for(FRs3MaterialBitmap bitmap : _bitmaps){
+            bitmap.saveConfig(xbitmaps.createNode("Bitmap"));
+         }
+      }
    }
 
    //============================================================
@@ -714,10 +690,10 @@ public class FRs3Material
          }else if(xnode.isName("TextureCollection")){
             for(FXmlNode xchild : xnode){
                if(xchild.isName("Texture")){
-                  FRs3MaterialTexture texture = new FRs3MaterialTexture();
-                  texture.setMaterial(this);
-                  texture.importConfig(xchild);
-                  _textures.push(texture);
+                  FRs3MaterialBitmap bitmap = new FRs3MaterialBitmap();
+                  bitmap.setMaterial(this);
+                  bitmap.importConfig(xchild);
+                  pushBitmap(bitmap);
                }
             }
          }

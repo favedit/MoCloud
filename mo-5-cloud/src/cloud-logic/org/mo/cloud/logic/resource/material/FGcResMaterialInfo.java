@@ -1,12 +1,12 @@
-package org.mo.cloud.logic.resource.template;
+package org.mo.cloud.logic.resource.material;
 
-import com.cyou.gccloud.data.data.FDataResourceTemplateUnit;
+import com.cyou.gccloud.data.data.FDataResourceMaterialUnit;
 
 //============================================================
-// <T>资源模板。</T>
+// <T>资源材质信息。</T>
 //============================================================
-public class FGcResTemplateInfo
-      extends FDataResourceTemplateUnit
+public class FGcResMaterialInfo
+      extends FDataResourceMaterialUnit
 {
    // 目录编号
    private long _catalogId;

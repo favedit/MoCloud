@@ -1,9 +1,14 @@
 package org.mo.cloud.logic.resource.scene;
 
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
+import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
+import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.com.data.RSql;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 
@@ -18,6 +23,10 @@ public class FGcResSceneConsole
    // 存储控制台
    @ALink
    protected IGcStorageConsole _storageConsole;
+
+   // 资源管理器
+   @ALink
+   protected IGcResourceConsole _dataResourceConsole;
 
    //============================================================
    // <T>构造3D资源数据流控制台。</T>
@@ -45,5 +54,52 @@ public class FGcResSceneConsole
       whereSql += " AND (" + FDataResourceSceneLogic.CODE + "='" + RSql.formatValue(code) + "')";
       FGcResSceneInfo scene = search(logicContext, whereSql);
       return scene;
+   }
+
+   //============================================================
+   // <T>新建记录前处理</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @param oldUnit 原始数据单元
+   // @return 处理结果
+   //============================================================
+   @Override
+   protected EResult onInsertBefore(ILogicContext logicContext,
+                                    FGcResSceneInfo sceneInfo){
+      // 检查用户编号
+      long userId = sceneInfo.userId();
+      if(userId == 0){
+         throw new FFatalError("User id is empty.");
+      }
+      // 创建资源对象
+      FGcResourceInfo resource = _dataResourceConsole.doPrepare(logicContext);
+      resource.setUserId(userId);
+      resource.setProjectId(sceneInfo.projectId());
+      resource.setCatalogId(sceneInfo.catalogId());
+      resource.setResourceCd(EGcResource.Scene);
+      resource.setCode(sceneInfo.code());
+      resource.setLabel(sceneInfo.label());
+      _dataResourceConsole.doInsert(logicContext, resource);
+      // 设置资源信息
+      sceneInfo.setResourceId(resource.ouid());
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除记录后处理</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param unit 数据单元
+   // @return 处理结果
+   //============================================================
+   @Override
+   protected EResult onDeleteAfter(ILogicContext logicContext,
+                                   FGcResSceneInfo sceneInfo){
+      // 删除关联资源
+      long resourceId = sceneInfo.resourceId();
+      _dataResourceConsole.doDelete(logicContext, resourceId);
+      // 返回结果
+      return EResult.Success;
    }
 }

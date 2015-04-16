@@ -292,7 +292,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
                                  int pageSize,
                                  int page){
       T logic = findLogic(logicContext);
-      return logic.fetchClass(_classUnit, null, whereSql, null, orderSql, pageSize, pageSize * page);
+      return logic.fetchClass(_classUnit, null, whereSql, null, orderSql, pageSize, page);
    }
 
    //============================================================

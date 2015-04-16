@@ -1,13 +1,11 @@
 package org.mo.content.core.resource;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.FGcResourceConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -18,10 +16,6 @@ public class FCntResourceConsole
       implements
          ICntResourceConsole
 {
-   // 存储控制台
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
    //============================================================
    // <T>构造内容图片控制台。</T>
    //============================================================

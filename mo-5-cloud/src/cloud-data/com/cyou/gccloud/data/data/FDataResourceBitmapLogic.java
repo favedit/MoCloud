@@ -50,14 +50,17 @@ public class FDataResourceBitmapLogic
    // 字段资源编号的定义。
    public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
 
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
-
    // 字段全代码的定义。
    public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
 
+   // 字段代码的定义。
+   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段关键字的定义。
+   public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
 
    // 字段格式的定义。
    public final static SLogicFieldInfo FORMAT_CODE = new SLogicFieldInfo("FORMAT_CODE");
@@ -67,9 +70,6 @@ public class FDataResourceBitmapLogic
 
    // 字段大小高度的定义。
    public final static SLogicFieldInfo SIZE_HEIGHT = new SLogicFieldInfo("SIZE_HEIGHT");
-
-   // 字段关键字的定义。
-   public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -87,7 +87,7 @@ public class FDataResourceBitmapLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`RESOURCE_ID`,`CODE`,`FULL_CODE`,`LABEL`,`FORMAT_CODE`,`SIZE_WIDTH`,`SIZE_HEIGHT`,`KEYWORDS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`RESOURCE_ID`,`FULL_CODE`,`CODE`,`LABEL`,`KEYWORDS`,`FORMAT_CODE`,`SIZE_WIDTH`,`SIZE_HEIGHT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源位图表逻辑单元。</T>
@@ -682,13 +682,13 @@ public class FDataResourceBitmapLogic
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`RESOURCE_ID`");
-      cmd.append(",`CODE`");
       cmd.append(",`FULL_CODE`");
+      cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`KEYWORDS`");
       cmd.append(",`FORMAT_CODE`");
       cmd.append(",`SIZE_WIDTH`");
       cmd.append(",`SIZE_HEIGHT`");
-      cmd.append(",`KEYWORDS`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -726,15 +726,6 @@ public class FDataResourceBitmapLogic
          cmd.append(resourceId);
       }
       cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
-      }
-      cmd.append(',');
       String fullCode = unit.fullCode();
       if(RString.isEmpty(fullCode)){
          cmd.append("NULL");
@@ -744,12 +735,30 @@ public class FDataResourceBitmapLogic
          cmd.append('\'');
       }
       cmd.append(',');
+      String code = unit.code();
+      if(RString.isEmpty(code)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(code));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       String label = unit.label();
       if(RString.isEmpty(label)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String keywords = unit.keywords();
+      if(RString.isEmpty(keywords)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(keywords));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -765,15 +774,6 @@ public class FDataResourceBitmapLogic
       cmd.append(unit.sizeWidth());
       cmd.append(',');
       cmd.append(unit.sizeHeight());
-      cmd.append(',');
-      String keywords = unit.keywords();
-      if(RString.isEmpty(keywords)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(keywords));
-         cmd.append('\'');
-      }
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -884,17 +884,6 @@ public class FDataResourceBitmapLogic
             cmd.append(resourceId);
          }
       }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
-         }
-      }
       if(unit.isFullCodeChanged()){
          cmd.append(",`FULL_CODE`=");
          String fullCode = unit.fullCode();
@@ -906,6 +895,17 @@ public class FDataResourceBitmapLogic
             cmd.append('\'');
          }
       }
+      if(unit.isCodeChanged()){
+         cmd.append(",`CODE`=");
+         String code = unit.code();
+         if(RString.isEmpty(code)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(code));
+            cmd.append('\'');
+         }
+      }
       if(unit.isLabelChanged()){
          cmd.append(",`LABEL`=");
          String label = unit.label();
@@ -914,6 +914,17 @@ public class FDataResourceBitmapLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isKeywordsChanged()){
+         cmd.append(",`KEYWORDS`=");
+         String keywords = unit.keywords();
+         if(RString.isEmpty(keywords)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(keywords));
             cmd.append('\'');
          }
       }
@@ -935,17 +946,6 @@ public class FDataResourceBitmapLogic
       if(unit.isSizeHeightChanged()){
          cmd.append(",`SIZE_HEIGHT`=");
          cmd.append(unit.sizeHeight());
-      }
-      if(unit.isKeywordsChanged()){
-         cmd.append(",`KEYWORDS`=");
-         String keywords = unit.keywords();
-         if(RString.isEmpty(keywords)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(keywords));
-            cmd.append('\'');
-         }
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
