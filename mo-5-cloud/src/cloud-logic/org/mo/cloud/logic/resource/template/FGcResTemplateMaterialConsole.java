@@ -5,6 +5,7 @@ import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource.material.IGcResMaterialConsole;
+import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -34,6 +35,27 @@ public class FGcResTemplateMaterialConsole
    //============================================================
    public FGcResTemplateMaterialConsole(){
       super(FDataResourceTemplateMaterialLogic.class, FGcResTemplateMaterialInfo.class);
+   }
+
+   //============================================================
+   // <T>根据用户编号和模板编号和代码查找模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param templateId 模板编号
+   // @param code 代码
+   // @return 模板信息
+   //============================================================
+   @Override
+   public FGcResTemplateMaterialInfo findByCode(ILogicContext logicContext,
+                                                long userId,
+                                                long templateId,
+                                                String code){
+      String whereSql = "(" + FDataResourceTemplateMaterialLogic.USER_ID + "=" + userId + ")";
+      whereSql += " AND (" + FDataResourceTemplateMaterialLogic.TEMPLATE_ID + "=" + templateId + ")";
+      whereSql += " AND (" + FDataResourceTemplateMaterialLogic.CODE + "='" + RSql.formatValue(code) + "')";
+      FGcResTemplateMaterialInfo templateMaterialInfo = search(logicContext, whereSql);
+      return templateMaterialInfo;
    }
 
    //============================================================

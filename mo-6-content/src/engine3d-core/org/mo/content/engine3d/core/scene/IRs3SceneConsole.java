@@ -14,40 +14,6 @@ public interface IRs3SceneConsole
       extends
          IGcResSceneConsole
 {
-   //   //============================================================
-   //   // <T>根据代码查找资源场景单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param code 代码
-   //   // @return 处理结果
-   //   //============================================================
-   //   FDataResource3dSceneUnit findByCode(ILogicContext logicContext,
-   //                                       String code);
-   //
-   //   //============================================================
-   //   // <T>查找场景单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param guid 场景唯一编码
-   //   // @param code 场景代码
-   //   // @return 场景单元
-   //   //============================================================
-   //   FDataResource3dSceneUnit findSceneUnit(ILogicContext logicContext,
-   //                                          String guid,
-   //                                          String code);
-   //
-   //   //============================================================
-   //   // <T>查找场景主题单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param sceneId 场景编码
-   //   // @param themeCode 主题代码
-   //   // @return 场景主题单元
-   //   //============================================================
-   //   FDataResource3dSceneThemeUnit findThemeUnit(ILogicContext logicContext,
-   //                                               long sceneId,
-   //                                               String themeCode);
-
    //============================================================
    // <T>生成场景。</T>
    //

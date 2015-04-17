@@ -62,8 +62,11 @@ public class FSceneServlet
       // 获得场景信息
       if(RString.isEmpty(guid)){
          FGcResSceneInfo sceneInfo = _sceneConsole.findByCode(logicContext, session.userId(), code);
-         guid = sceneInfo.guid();
-      }else{
+         if(sceneInfo != null){
+            guid = sceneInfo.guid();
+         }
+      }
+      if(RString.isEmpty(guid)){
          throw new FFatalError("process", "Scene is not exists. (guid={1}, code={2})", guid, code);
       }
       //............................................................
@@ -75,7 +78,7 @@ public class FSceneServlet
       int dataLength = data.length;
       //............................................................
       // 发送数据
-      _logger.debug(this, "process", "Send scene theme data. (guid={1}, code={2}, length={3})", guid, code, dataLength);
+      _logger.debug(this, "process", "Send scene data. (guid={1}, code={2}, length={3})", guid, code, dataLength);
       response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=" + CacheTimeout);

@@ -5,13 +5,22 @@ import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.scene.FGcResSceneConsole;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
+import org.mo.cloud.logic.resource.template.FGcResTemplateMaterialInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
+import org.mo.content.engine3d.core.template.IRs3TemplateMaterialConsole;
+import org.mo.content.resource3d.common.FRs3Display;
+import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.scene.FRs3Scene;
+import org.mo.content.resource3d.scene.FRs3SceneDisplay;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.mime.compress.ECompressMode;
 import org.mo.mime.compress.FCompressStream;
@@ -24,72 +33,13 @@ public class FRs3SceneConsole
       implements
          IRs3SceneConsole
 {
-   //   // 资源纹理控制台
-   //   @ALink
-   //   protected IRs3TextureConsole _textureConsole;
-   //
-   //   // 资源模板控制台
-   //   @ALink
-   //   protected IRs3TemplateConsole _templateConsole;
-   //
-   //   //============================================================
-   //   // <T>根据代码查找场景单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param code 代码
-   //   // @return 处理结果
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dSceneUnit findByCode(ILogicContext logicContext,
-   //                                              String code){
-   //      String searchSql = FDataResource3dSceneLogic.CODE + "='" + code + "'";
-   //      FDataResource3dSceneLogic logic = logicContext.findLogic(FDataResource3dSceneLogic.class);
-   //      FDataResource3dSceneUnit unit = logic.search(searchSql);
-   //      return unit;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>查找场景单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param guid 场景唯一编码
-   //   // @param code 场景代码
-   //   // @return 场景单元
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dSceneUnit findSceneUnit(ILogicContext logicContext,
-   //                                                 String guid,
-   //                                                 String code){
-   //      FDataResource3dSceneUnit unit = null;
-   //      // 根据唯一编号查找
-   //      if(!RString.isEmpty(guid)){
-   //         FDataResource3dSceneLogic logic = logicContext.findLogic(FDataResource3dSceneLogic.class);
-   //         unit = logic.findByGuid(guid);
-   //      }
-   //      // 根据唯一编号查找
-   //      else if(!RString.isEmpty(code)){
-   //         unit = findByCode(logicContext, code);
-   //      }
-   //      return unit;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>查找场景主题单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param sceneId 场景编码
-   //   // @param themeCode 主题代码
-   //   // @return 场景主题单元
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dSceneThemeUnit findThemeUnit(ILogicContext logicContext,
-   //                                                      long sceneId,
-   //                                                      String themeCode){
-   //      String sql = "(" + FDataResource3dSceneThemeLogic.SCENE_ID + "=" + sceneId + ") AND (" + FDataResource3dSceneThemeLogic.CODE + "='" + themeCode + "')";
-   //      FDataResource3dSceneThemeLogic logic = logicContext.findLogic(FDataResource3dSceneThemeLogic.class);
-   //      FDataResource3dSceneThemeUnit unit = logic.search(sql);
-   //      return unit;
-   //   }
+   // 资源模板控制台
+   @ALink
+   protected IRs3TemplateConsole _templateConsole;
+
+   // 资源模板材质控制台
+   @ALink
+   protected IRs3TemplateMaterialConsole _templateMaterialConsole;
 
    //============================================================
    // <T>生成场景。</T>
@@ -215,51 +165,59 @@ public class FRs3SceneConsole
             break;
          }
       }
-      String themeCode = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
-      themeCode = themeCode.substring(0, themeCode.length() - 4);
       //............................................................
       // 加载模型资源
       FRs3Scene scene = new FRs3Scene();
       scene.loadFile(fileName);
       //............................................................
       // 新建场景
-      FGcResSceneInfo sceneInfo = findByCode(logicContext, userId, code);
-      if(sceneInfo == null){
+      FGcResSceneInfo sceneInfo = null;
+      FGcResSceneInfo findSceneInfo = findByCode(logicContext, userId, code);
+      if(findSceneInfo == null){
          sceneInfo = doPrepare(logicContext);
-         sceneInfo.setUserId(userId);
-         sceneInfo.setProjectId(session.projectId());
-         sceneInfo.setCode(code);
+      }else{
+         sceneInfo = findSceneInfo;
+      }
+      sceneInfo.setUserId(userId);
+      sceneInfo.setProjectId(session.projectId());
+      sceneInfo.setFullCode(scene.fullCode());
+      sceneInfo.setCode(code);
+      sceneInfo.setLabel(scene.label());
+      sceneInfo.setKeywords(scene.keywords());
+      if(findSceneInfo == null){
          doInsert(logicContext, sceneInfo);
+         scene.setGuid(sceneInfo.guid());
       }
       //............................................................
       // 关联显示集合
-      //      FObjects<FRs3SceneDisplay> displays = scene.filterDisplays();
-      //      for(FRs3SceneDisplay display : displays){
-      //         String displayCode = display.code();
-      //         FDataResource3dTemplateUnit templateUnit = _templateConsole.findByCode(logicContext, displayCode);
-      //         if(templateUnit == null){
-      //            throw new FFatalError("Template unit is not exists. (code={1})", displayCode);
-      //         }
-      //         display.setTemplateGuid(templateUnit.guid());
-      //         // 关联材质集合
-      //         if(display.hasMaterial()){
-      //            for(FRs3SceneMaterial material : display.materials()){
-      //               FDataResource3dMaterialGroupUnit materialGroupUnit = _templateConsole.findMaterialGroupByCode(logicContext, templateUnit.ouid(), material.code());
-      //               if(materialGroupUnit == null){
-      //                  throw new FFatalError("Material group is not exists. (code={1})", material.code());
-      //               }
-      //               material.setGroupGuid(materialGroupUnit.guid());
-      //            }
-      //         }
-      //      }
+      FObjects<FRs3Display> displays = scene.filterDisplays();
+      for(FRs3Display display : displays){
+         if(display instanceof FRs3SceneDisplay){
+            FRs3SceneDisplay sceneDisplay = (FRs3SceneDisplay)display;
+            String displayCode = sceneDisplay.code();
+            FGcResTemplateInfo templateInfo = _templateConsole.findByCode(logicContext, userId, displayCode);
+            if(templateInfo == null){
+               throw new FFatalError("Template info is not exists. (code={1})", displayCode);
+            }
+            long templateId = templateInfo.ouid();
+            sceneDisplay.setTemplateGuid(templateInfo.guid());
+            // 关联材质集合
+            if(sceneDisplay.hasMaterial()){
+               for(FRs3Material material : sceneDisplay.materials()){
+                  String materialCode = material.code();
+                  FGcResTemplateMaterialInfo templateMaterialInfo = _templateMaterialConsole.findByCode(logicContext, userId, templateId, materialCode);
+                  if(templateMaterialInfo == null){
+                     throw new FFatalError("Template material is not exists. (code={1})", materialCode);
+                  }
+                  material.setGuid(templateMaterialInfo.guid());
+               }
+            }
+         }
+      }
       //............................................................
       // 新建场景主题
-      scene.setGuid(sceneInfo.guid());
       scene.saveUnit(sceneInfo);
       // 设置信息
-      sceneInfo.setFullCode(scene.fullCode());
-      sceneInfo.setLabel(scene.label());
-      sceneInfo.setKeywords(scene.keywords());
       doUpdate(logicContext, sceneInfo);
       return EResult.Success;
    }

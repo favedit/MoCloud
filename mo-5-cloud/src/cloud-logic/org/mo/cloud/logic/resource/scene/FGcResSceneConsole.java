@@ -84,8 +84,8 @@ public class FGcResSceneConsole
                                      String code){
       String whereSql = "(" + FDataResourceSceneLogic.USER_ID + "=" + userId + ")";
       whereSql += " AND (" + FDataResourceSceneLogic.CODE + "='" + RSql.formatValue(code) + "')";
-      FGcResSceneInfo scene = search(logicContext, whereSql);
-      return scene;
+      FGcResSceneInfo sceneInfo = search(logicContext, whereSql);
+      return sceneInfo;
    }
 
    //============================================================

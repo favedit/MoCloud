@@ -34,6 +34,23 @@ public class FRs3Space
    }
 
    //============================================================
+   // <T>创建子对象。</T>
+   //
+   // @param xconfig 配置信息
+   // @return 子对象
+   //============================================================
+   public FRs3Object createChild(FXmlNode xconfig){
+      String typeName = xconfig.name();
+      switch(typeName){
+         case "Sprite":
+            return new FRs3Sprite();
+         case "Layer":
+            return new FRs3DisplayLayer();
+      }
+      throw new FFatalError("Invalid config type. (type_name={1})", typeName);
+   }
+
+   //============================================================
    // <T>获得场景技术。</T>
    //
    // @return 场景技术
@@ -214,8 +231,8 @@ public class FRs3Space
    //
    // @return 场景显示集合
    //============================================================
-   public FObjects<FRs3Sprite> filterDisplays(){
-      FObjects<FRs3Sprite> displays = new FObjects<FRs3Sprite>(FRs3Sprite.class);
+   public FObjects<FRs3Display> filterDisplays(){
+      FObjects<FRs3Display> displays = new FObjects<FRs3Display>(FRs3Display.class);
       if(_layers != null){
          for(FRs3DisplayLayer layer : _layers){
             layer.filterDisplays(displays);
@@ -296,19 +313,14 @@ public class FRs3Space
          }else if(xnode.isName("DisplayCollection")){
             // 读取层集合
             for(FXmlNode xdisplay : xnode){
-               FRs3Display display = null;
-               if(xdisplay.isName("Sprite")){
-                  display = new FRs3Sprite();
-               }else{
-                  throw new FFatalError("Unknown display type");
-               }
+               FRs3Display display = (FRs3Display)createChild(xdisplay);
                display.loadConfig(xdisplay);
                pushDisplay(display);
             }
          }else if(xnode.isName("LayerCollection")){
             // 读取层集合
             for(FXmlNode xlayer : xnode){
-               FRs3DisplayLayer layer = new FRs3DisplayLayer();
+               FRs3DisplayLayer layer = (FRs3DisplayLayer)createChild(xlayer);
                layer.loadConfig(xlayer);
                pushLayer(layer);
             }

@@ -1,6 +1,7 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -27,7 +28,12 @@ public class FRs3Display
    // @return 子对象
    //============================================================
    public FRs3Object createChild(FXmlNode xconfig){
-      return new FRs3Renderable();
+      String typeName = xconfig.name();
+      switch(typeName){
+         case "Renderable":
+            return new FRs3Renderable();
+      }
+      throw new FFatalError("Invalid config type. (type_name={1})", typeName);
    }
 
    //============================================================

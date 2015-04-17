@@ -286,6 +286,7 @@ public class FRs3TemplateConsole
             templateMaterialInfo.setProjectId(projectId);
             templateMaterialInfo.setTemplateId(templateInfo.ouid());
             templateMaterialInfo.setMaterialId(materialInfo.ouid());
+            templateMaterialInfo.setCode(materialInfo.code());
             _templateMaterialConsole.doInsert(logicContext, templateMaterialInfo);
          }
       }

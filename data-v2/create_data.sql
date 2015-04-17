@@ -684,6 +684,7 @@ CREATE TABLE `DT_RES_TEMPLATE_MATERIAL`
    `PROJECT_ID`                    BIGINT, 
    `TEMPLATE_ID`                   BIGINT NOT NULL, 
    `MATERIAL_ID`                   BIGINT NOT NULL, 
+   `CODE`                          VARCHAR(80), 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 

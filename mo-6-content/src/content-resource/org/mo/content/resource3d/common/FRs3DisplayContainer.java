@@ -34,7 +34,7 @@ public class FRs3DisplayContainer
          case "Sprite":
             return new FRs3Sprite();
       }
-      throw new FFatalError("Invalid type.");
+      return super.createChild(xconfig);
    }
 
    //============================================================
@@ -149,6 +149,7 @@ public class FRs3DisplayContainer
    //
    // @param xconfig 配置信息
    //============================================================
+   @Override
    public void importConfig(FXmlNode xconfig){
       // 处理所有节点
       for(FXmlNode xnode : xconfig){

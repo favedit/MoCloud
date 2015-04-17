@@ -33,6 +33,7 @@ public class RResSceneImport
          IRs3SceneConsole sceneConsole = RAop.find(IRs3SceneConsole.class);
          for(String fileName : filePaths){
             sceneConsole.importResource(logicContext, session, RFile.format(path + fileName));
+            break;
          }
       }
    }

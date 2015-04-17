@@ -1,5 +1,6 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
@@ -102,6 +103,23 @@ public class FRs3Technique
          for(FRs3TechniquePass pass : _passes){
             pass.saveConfig(xpasses.createNode("Pass"));
          }
+      }
+   }
+
+   //============================================================
+   // <T>从输入流反序列化数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void importData(IDataInput input){
+      // 读取属性
+      _code = input.readString();
+      // 读取网格集合
+      int passCount = input.readInt32();
+      for(int n = 0; n < passCount; n++){
+         FRs3TechniquePass pass = new FRs3TechniquePass();
+         pass.importData(input);
+         pushPass(pass);
       }
    }
 }

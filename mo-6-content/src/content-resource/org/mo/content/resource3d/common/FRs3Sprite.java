@@ -87,7 +87,7 @@ public class FRs3Sprite
                if(xchild.isName("Material")){
                   FRs3Material material = new FRs3Material();
                   material.loadConfig(xchild);
-                  _materials.push(material);
+                  pushMaterial(material);
                }
             }
          }

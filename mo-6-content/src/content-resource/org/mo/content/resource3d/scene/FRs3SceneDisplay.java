@@ -9,18 +9,16 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.common.SFloatMatrix3d;
 import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.common.FRs3Object;
+import org.mo.content.resource3d.common.FRs3Sprite;
 
 //============================================================
 // <T>场景显示。</T>
 //============================================================
 public class FRs3SceneDisplay
-      extends FRs3Object
+      extends FRs3Sprite
 {
    // 模板唯一编号
    protected String _templateGuid;
-
-   // 矩阵
-   protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
 
    // 场景动画集合
    protected FObjects<FRs3SceneAnimation> _animations;
@@ -28,16 +26,28 @@ public class FRs3SceneDisplay
    // 场景剪辑集合
    protected FObjects<FRs3SceneMovie> _movies;
 
-   // 场景材质集合
-   protected FObjects<FRs3Material> _materials;
-
-   // 场景渲染集合
-   protected FObjects<FRs3SceneRenderable> _renderables;
-
    //============================================================
    // <T>构造场景显示。</T>
    //============================================================
    public FRs3SceneDisplay(){
+      _typeName = "SceneDisplay";
+   }
+
+   //============================================================
+   // <T>获得显示集合。</T>
+   //
+   // @return 显示集合
+   //============================================================
+   @Override
+   public FRs3Object createChild(FXmlNode xconfig){
+      String typeName = xconfig.name();
+      switch(typeName){
+         case "SceneDisplay":
+            return new FRs3SceneDisplay();
+         case "SceneRenderable":
+            return new FRs3SceneRenderable();
+      }
+      return super.createChild(xconfig);
    }
 
    //============================================================
@@ -178,91 +188,6 @@ public class FRs3SceneDisplay
    }
 
    //============================================================
-   // <T>判断是否含有材质。</T>
-   //
-   // @return 是否含有
-   //============================================================
-   public boolean hasMaterial(){
-      return (_materials != null) ? !_materials.isEmpty() : false;
-   }
-
-   //============================================================
-   // <T>根据唯一编号查找材质对象。</T>
-   //
-   // @param guid 唯一编号
-   // @return 材质对象
-   //============================================================
-   public FRs3Material findMaterialByGuid(String guid){
-      if(!RString.isEmpty(guid) && (_materials != null)){
-         for(FRs3Material material : _materials){
-            if(guid.equals(material.guid())){
-               return material;
-            }
-         }
-      }
-      return null;
-   }
-
-   //============================================================
-   // <T>获得场景材质集合。</T>
-   //
-   // @return 场景材质集合
-   //============================================================
-   public FObjects<FRs3Material> materials(){
-      return _materials;
-   }
-
-   //============================================================
-   // <T>增加一个场景材质。</T>
-   //
-   // @param material 场景材质
-   //============================================================
-   public void pushMaterial(FRs3Material material){
-      if(_materials == null){
-         _materials = new FObjects<FRs3Material>(FRs3Material.class);
-      }
-      _materials.push(material);
-   }
-
-   //============================================================
-   // <T>根据唯一编号查找渲染对象。</T>
-   //
-   // @param guid 唯一编号
-   // @return 渲染对象
-   //============================================================
-   public FRs3SceneRenderable findRenderableByGuid(String guid){
-      if(!RString.isEmpty(guid) && (_renderables != null)){
-         for(FRs3SceneRenderable renderable : _renderables){
-            if(guid.equals(renderable.guid())){
-               return renderable;
-            }
-         }
-      }
-      return null;
-   }
-
-   //============================================================
-   // <T>获得场景渲染集合。</T>
-   //
-   // @return 场景渲染集合
-   //============================================================
-   public FObjects<FRs3SceneRenderable> renderables(){
-      return _renderables;
-   }
-
-   //============================================================
-   // <T>增加一个场景渲染。</T>
-   //
-   // @param renderable 场景渲染
-   //============================================================
-   public void pushRenderable(FRs3SceneRenderable renderable){
-      if(_renderables == null){
-         _renderables = new FObjects<FRs3SceneRenderable>(FRs3SceneRenderable.class);
-      }
-      _renderables.push(renderable);
-   }
-
-   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -289,26 +214,6 @@ public class FRs3SceneDisplay
          output.writeUint16(count);
          for(FRs3SceneMovie movie : _movies){
             movie.serialize(output);
-         }
-      }else{
-         output.writeUint16(0);
-      }
-      // 存储材质集合
-      if(_materials != null){
-         int count = _materials.count();
-         output.writeUint16(count);
-         for(FRs3Material material : _materials){
-            material.serialize(output);
-         }
-      }else{
-         output.writeUint16(0);
-      }
-      // 存储渲染集合
-      if(_renderables != null){
-         int count = _renderables.count();
-         output.writeUint16(count);
-         for(FRs3SceneRenderable renderable : _renderables){
-            renderable.serialize(output);
          }
       }else{
          output.writeUint16(0);
@@ -344,22 +249,6 @@ public class FRs3SceneDisplay
                movie.loadConfig(xmovie);
                pushMovie(movie);
             }
-         }else if(xnode.isName("MaterialCollection")){
-            // 读取材质集合
-            for(FXmlNode xmaterial : xnode){
-               FRs3Material material = new FRs3Material();
-               material.loadConfig(xmaterial);
-               pushMaterial(material);
-            }
-         }else if(xnode.isName("RenderableCollection")){
-            // 读取渲染集合
-            for(FXmlNode xrenderable : xnode){
-               FRs3SceneRenderable renderable = new FRs3SceneRenderable();
-               renderable.loadConfig(xrenderable);
-               pushRenderable(renderable);
-            }
-         }else{
-            throw new FFatalError("Unknown node type.");
          }
       }
    }
@@ -391,20 +280,6 @@ public class FRs3SceneDisplay
                FRs3SceneMovie movie = findMovieByGuid(movieGuid);
                movie.mergeConfig(xmovie);
             }
-         }else if(xnode.isName("MaterialCollection")){
-            // 读取材质集合
-            for(FXmlNode xmaterial : xnode){
-               String materialGuid = xmaterial.get("guid");
-               FRs3Material material = findMaterialByGuid(materialGuid);
-               material.mergeConfig(xmaterial);
-            }
-         }else if(xnode.isName("RenderableCollection")){
-            // 读取渲染集合
-            for(FXmlNode xrenderable : xnode){
-               String renderableGuid = xrenderable.get("guid");
-               FRs3SceneRenderable renderable = findRenderableByGuid(renderableGuid);
-               renderable.mergeConfig(xrenderable);
-            }
          }else{
             throw new FFatalError("Unknown node type.");
          }
@@ -434,20 +309,6 @@ public class FRs3SceneDisplay
          FXmlNode xmovies = xconfig.createNode("MovieCollection");
          for(FRs3SceneMovie movie : _movies){
             movie.saveConfig(xmovies.createNode("Movie"));
-         }
-      }
-      // 存储材质集合
-      if(_materials != null){
-         FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
-         for(FRs3Material material : _materials){
-            material.saveConfig(xmaterials.createNode("Material"));
-         }
-      }
-      // 存储渲染集合
-      if(_renderables != null){
-         FXmlNode xrenderables = xconfig.createNode("RenderableCollection");
-         for(FRs3SceneRenderable renderable : _renderables){
-            renderable.saveConfig(xrenderables.createNode("Renderable"));
          }
       }
    }

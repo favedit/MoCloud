@@ -53,6 +53,9 @@ public class FDataResourceTemplateMaterialLogic
    // 字段材质编号的定义。
    public final static SLogicFieldInfo MATERIAL_ID = new SLogicFieldInfo("MATERIAL_ID");
 
+   // 字段代码的定义。
+   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
@@ -69,7 +72,7 @@ public class FDataResourceTemplateMaterialLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TEMPLATE_ID`,`MATERIAL_ID`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TEMPLATE_ID`,`MATERIAL_ID`,`CODE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源模板材质表逻辑单元。</T>
@@ -665,6 +668,7 @@ public class FDataResourceTemplateMaterialLogic
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`TEMPLATE_ID`");
       cmd.append(",`MATERIAL_ID`");
+      cmd.append(",`CODE`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -707,6 +711,15 @@ public class FDataResourceTemplateMaterialLogic
          cmd.append("NULL");
       }else{
          cmd.append(materialId);
+      }
+      cmd.append(',');
+      String code = unit.code();
+      if(RString.isEmpty(code)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(code));
+         cmd.append('\'');
       }
       cmd.append(',');
       String note = unit.note();
@@ -825,6 +838,17 @@ public class FDataResourceTemplateMaterialLogic
             cmd.append("NULL");
          }else{
             cmd.append(materialId);
+         }
+      }
+      if(unit.isCodeChanged()){
+         cmd.append(",`CODE`=");
+         String code = unit.code();
+         if(RString.isEmpty(code)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(code));
+            cmd.append('\'');
          }
       }
       if(unit.isNoteChanged()){

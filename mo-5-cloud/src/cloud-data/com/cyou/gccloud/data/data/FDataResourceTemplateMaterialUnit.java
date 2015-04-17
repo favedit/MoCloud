@@ -59,6 +59,12 @@ public class FDataResourceTemplateMaterialUnit
    // 字段材质编号的定义。
    protected long _materialId;
 
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
+
    // 存储字段备注的定义。
    private String __note;
 
@@ -329,6 +335,33 @@ public class FDataResourceTemplateMaterialUnit
    }
 
    //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
+   }
+
+   //============================================================
    // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
@@ -486,6 +519,8 @@ public class FDataResourceTemplateMaterialUnit
             return Long.toString(_templateId);
          case "material_id":
             return Long.toString(_materialId);
+         case "code":
+            return _code;
          case "note":
             return _note;
          case "create_user_id":
@@ -530,6 +565,9 @@ public class FDataResourceTemplateMaterialUnit
             break;
          case "material_id":
             _materialId = RLong.parse(value);
+            break;
+         case "code":
+            _code = value;
             break;
          case "note":
             _note = value;
@@ -589,6 +627,10 @@ public class FDataResourceTemplateMaterialUnit
                __materialId = RLong.parse(value);
                _materialId = __materialId;
                break;
+            case "code":
+               __code = value;
+               _code = __code;
+               break;
             case "note":
                __note = value;
                _note = __note;
@@ -628,6 +670,7 @@ public class FDataResourceTemplateMaterialUnit
       row.set("projectId", _projectId);
       row.set("templateId", _templateId);
       row.set("materialId", _materialId);
+      row.set("code", _code);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -650,6 +693,7 @@ public class FDataResourceTemplateMaterialUnit
       map.put("projectId", RLong.toString(_projectId));
       map.put("templateId", RLong.toString(_templateId));
       map.put("materialId", RLong.toString(_materialId));
+      map.put("code", _code);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

@@ -3,18 +3,19 @@ package org.mo.content.resource3d.scene;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.resource3d.common.FRs3Object;
+import org.mo.content.resource3d.common.FRs3Renderable;
 
 //============================================================
 // <T>场景渲染。</T>
 //============================================================
 public class FRs3SceneRenderable
-      extends FRs3Object
+      extends FRs3Renderable
 {
    //============================================================
    // <T>构造场景渲染。</T>
    //============================================================
    public FRs3SceneRenderable(){
+      _typeName = "SceneRenderable";
    }
 
    //============================================================

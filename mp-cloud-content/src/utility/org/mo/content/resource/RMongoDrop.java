@@ -6,7 +6,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
 import org.mo.core.aop.RAop;
 
-public class RResMongoDrop
+public class RMongoDrop
 {
    //============================================================
    // <T>导入处理。</T>
@@ -35,7 +35,7 @@ public class RResMongoDrop
       try{
          process();
       }catch(Exception e){
-         RLogger.find(RResMongoDrop.class).error(null, "main", e);
+         RLogger.find(RMongoDrop.class).error(null, "main", e);
       }
       RAop.release();
    }

@@ -18,6 +18,7 @@ public class FRs3SceneAnimation
    // <T>构造场景显示。</T>
    //============================================================
    public FRs3SceneAnimation(){
+      _typeName = "SceneAnimation";
    }
 
    //============================================================

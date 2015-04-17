@@ -1,6 +1,7 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.geom.SIntSize2;
+import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
 
@@ -64,5 +65,16 @@ public class FRs3TechniquePass
       xconfig.set("guid", makeGuid());
       xconfig.set("code", _code);
       xconfig.set("target_size", _targetSize);
+   }
+
+   //============================================================
+   // <T>从输入流反序列化数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void importData(IDataInput input){
+      // 读取属性
+      _code = input.readString();
+      _targetSize.unserialize(input);
    }
 }

@@ -1,10 +1,12 @@
 package org.mo.content.resource3d.common;
 
+import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource3d.scene.FRs3SceneDisplay;
 
 //============================================================
 // <T>场景层。</T>
@@ -19,7 +21,7 @@ public class FRs3DisplayLayer
    protected String _typeCd;
 
    // 场景技术过程集合
-   protected FObjects<FRs3Sprite> _displays;
+   protected FObjects<FRs3Display> _displays;
 
    //============================================================
    // <T>构造场景层。</T>
@@ -28,14 +30,29 @@ public class FRs3DisplayLayer
    }
 
    //============================================================
+   // <T>创建子对象。</T>
+   //
+   // @param xconfig 配置信息
+   // @return 子对象
+   //============================================================
+   public FRs3Object createChild(FXmlNode xconfig){
+      String typeName = xconfig.name();
+      switch(typeName){
+         case "Sprite":
+            return new FRs3Sprite();
+      }
+      throw new FFatalError("Invalid config type. (type_name={1})", typeName);
+   }
+
+   //============================================================
    // <T>根据唯一编号查找显示对象。</T>
    //
    // @param guid 唯一编号
    // @return 显示对象
    //============================================================
-   public FRs3Sprite findDisplayByGuid(String guid){
+   public FRs3Display findDisplayByGuid(String guid){
       if(!RString.isEmpty(guid) && (_displays != null)){
-         for(FRs3Sprite display : _displays){
+         for(FRs3Display display : _displays){
             if(guid.equals(display.guid())){
                return display;
             }
@@ -49,7 +66,7 @@ public class FRs3DisplayLayer
    //
    // @return 显示集合
    //============================================================
-   public FObjects<FRs3Sprite> displays(){
+   public FObjects<FRs3Display> displays(){
       return _displays;
    }
 
@@ -58,9 +75,9 @@ public class FRs3DisplayLayer
    //
    // @param display 显示对象
    //============================================================
-   public void pushDisplay(FRs3Sprite display){
+   public void pushDisplay(FRs3Display display){
       if(_displays == null){
-         _displays = new FObjects<FRs3Sprite>(FRs3Sprite.class);
+         _displays = new FObjects<FRs3Display>(FRs3Display.class);
       }
       _displays.push(display);
    }
@@ -70,9 +87,9 @@ public class FRs3DisplayLayer
    //
    // @return 场景显示集合
    //============================================================
-   public void filterDisplays(FObjects<FRs3Sprite> displays){
+   public void filterDisplays(FObjects<FRs3Display> displays){
       if(_displays != null){
-         for(FRs3Sprite display : _displays){
+         for(FRs3Display display : _displays){
             displays.push(display);
          }
       }
@@ -93,7 +110,7 @@ public class FRs3DisplayLayer
       if(_displays != null){
          int count = _displays.count();
          output.writeInt16((short)count);
-         for(FRs3Sprite display : _displays){
+         for(FRs3Display display : _displays){
             display.serialize(output);
          }
       }else{
@@ -117,7 +134,7 @@ public class FRs3DisplayLayer
          if(xnode.isName("DisplayCollection")){
             // 读取显示集合
             for(FXmlNode xdisplay : xnode){
-               FRs3Sprite display = new FRs3Sprite();
+               FRs3Display display = (FRs3Display)createChild(xdisplay);
                display.loadConfig(xdisplay);
                pushDisplay(display);
             }
@@ -144,7 +161,7 @@ public class FRs3DisplayLayer
             // 读取显示集合
             for(FXmlNode xdisplay : xnode){
                String displayGuid = xdisplay.get("guid");
-               FRs3Sprite display = findDisplayByGuid(displayGuid);
+               FRs3Display display = findDisplayByGuid(displayGuid);
                display.mergeConfig(xdisplay);
             }
          }else{
@@ -167,9 +184,27 @@ public class FRs3DisplayLayer
       // 存储层集合
       if(_displays != null){
          FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
-         for(FRs3Sprite display : _displays){
+         for(FRs3Display display : _displays){
             display.saveConfig(xdisplays.createNode("Display"));
          }
+      }
+   }
+
+   //============================================================
+   // <T>从输入流反序列化数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void importData(IDataInput input){
+      // 读取属性
+      _code = input.readString();
+      _typeCd = input.readString();
+      // 读取显示集合
+      int displayCount = input.readInt32();
+      for(int n = 0; n < displayCount; n++){
+         FRs3SceneDisplay display = new FRs3SceneDisplay();
+         display.importData(input);
+         pushDisplay(display);
       }
    }
 }
