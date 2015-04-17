@@ -17,6 +17,9 @@ public class FRs3Material
    // 效果代码
    protected String _effectCode = "automatic";
 
+   // 父材质唯一编号
+   protected String _parentGuid = null;
+
    // 配置深度
    protected boolean _optionDepth = true;
 
@@ -152,6 +155,24 @@ public class FRs3Material
    public FRs3Material(){
       _typeName = "Material";
       makeGuid();
+   }
+
+   //============================================================
+   // <T>获得父材质唯一编号。</T>
+   //
+   // @return 唯一编号
+   //============================================================
+   public String parentGuid(){
+      return _parentGuid;
+   }
+
+   //============================================================
+   // <T>设置父材质唯一编号。</T>
+   //
+   // @param guid 唯一编号
+   //============================================================
+   public void setParentGuid(String guid){
+      _parentGuid = guid;
    }
 
    //============================================================
@@ -406,6 +427,7 @@ public class FRs3Material
    public void serialize(IDataOutput output){
       super.serialize(output);
       // 输出属性
+      output.writeString(_parentGuid);
       output.writeString(_effectCode);
       // 输出配置
       output.writeBoolean(_optionDepth);
@@ -487,6 +509,7 @@ public class FRs3Material
    //============================================================
    public void loadConfigInfo(FXmlNode xconfig){
       // 加载配置
+      _parentGuid = xconfig.get("parent_guid", _parentGuid);
       _optionDepth = xconfig.getBoolean("option_depth", _optionDepth);
       _optionAlpha = xconfig.getBoolean("option_alpha", _optionAlpha);
       _optionDouble = xconfig.getBoolean("option_double", _optionDouble);
@@ -600,6 +623,7 @@ public class FRs3Material
    public void saveConfig(FXmlNode xconfig){
       super.saveConfig(xconfig);
       // 存储属性
+      xconfig.set("parent_guid", _parentGuid);
       xconfig.set("effect_code", _effectCode);
       // 存储配置
       xconfig.set("option_depth", _optionDepth);

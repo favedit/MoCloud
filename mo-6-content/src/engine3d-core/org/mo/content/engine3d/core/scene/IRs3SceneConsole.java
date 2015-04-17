@@ -45,6 +45,16 @@ public interface IRs3SceneConsole
                         String guid);
 
    //============================================================
+   // <T>更新场景信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param scene 场景
+   // @return 场景信息
+   //============================================================
+   FGcResSceneInfo updateResource(ILogicContext logicContext,
+                                  FRs3Scene scene);
+
+   //============================================================
    // <T>导入资源。</T>
    //
    // @param logicContext 逻辑环境

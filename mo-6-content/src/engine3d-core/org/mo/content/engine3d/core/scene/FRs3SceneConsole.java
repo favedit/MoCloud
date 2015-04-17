@@ -3,6 +3,7 @@ package org.mo.content.engine3d.core.scene;
 import java.io.File;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.scene.FGcResSceneConsole;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -142,6 +143,40 @@ public class FRs3SceneConsole
    }
 
    //============================================================
+   // <T>更新场景信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param scene 场景
+   // @return 场景信息
+   //============================================================
+   @Override
+   public FGcResSceneInfo updateResource(ILogicContext logicContext,
+                                         FRs3Scene scene){
+      // 检查参数
+      String guid = scene.guid();
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Scene guid is null.");
+      }
+      // 查找数据
+      FGcResSceneInfo sceneInfo = findByGuid(logicContext, guid);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (guid={1}})", guid);
+      }
+      long resourceId = sceneInfo.resourceId();
+      // 创建场景
+      scene.saveUnit(sceneInfo);
+      // 更新数据
+      doUpdate(logicContext, sceneInfo);
+      //............................................................
+      // 废弃临时数据
+      FGcResourceInfo resource = _dataResourceConsole.get(logicContext, resourceId);
+      _storageConsole.delete(EGcStorageCatalog.CacheResourceScene, resource.guid());
+      _dataResourceConsole.doUpdate(logicContext, resource);
+      // 返回场景信息
+      return sceneInfo;
+   }
+
+   //============================================================
    // <T>导入资源。</T>
    //
    // @param logicContext 逻辑环境
@@ -170,25 +205,6 @@ public class FRs3SceneConsole
       FRs3Scene scene = new FRs3Scene();
       scene.loadFile(fileName);
       //............................................................
-      // 新建场景
-      FGcResSceneInfo sceneInfo = null;
-      FGcResSceneInfo findSceneInfo = findByCode(logicContext, userId, code);
-      if(findSceneInfo == null){
-         sceneInfo = doPrepare(logicContext);
-      }else{
-         sceneInfo = findSceneInfo;
-      }
-      sceneInfo.setUserId(userId);
-      sceneInfo.setProjectId(session.projectId());
-      sceneInfo.setFullCode(scene.fullCode());
-      sceneInfo.setCode(code);
-      sceneInfo.setLabel(scene.label());
-      sceneInfo.setKeywords(scene.keywords());
-      if(findSceneInfo == null){
-         doInsert(logicContext, sceneInfo);
-         scene.setGuid(sceneInfo.guid());
-      }
-      //............................................................
       // 关联显示集合
       FObjects<FRs3Display> displays = scene.filterDisplays();
       for(FRs3Display display : displays){
@@ -209,10 +225,30 @@ public class FRs3SceneConsole
                   if(templateMaterialInfo == null){
                      throw new FFatalError("Template material is not exists. (code={1})", materialCode);
                   }
-                  material.setGuid(templateMaterialInfo.guid());
+                  String materialGuid = templateMaterialInfo.material().guid();
+                  material.setParentGuid(materialGuid);
                }
             }
          }
+      }
+      //............................................................
+      // 新建场景
+      FGcResSceneInfo sceneInfo = null;
+      FGcResSceneInfo findSceneInfo = findByCode(logicContext, userId, code);
+      if(findSceneInfo == null){
+         sceneInfo = doPrepare(logicContext);
+      }else{
+         sceneInfo = findSceneInfo;
+      }
+      sceneInfo.setUserId(userId);
+      sceneInfo.setProjectId(session.projectId());
+      sceneInfo.setFullCode(scene.fullCode());
+      sceneInfo.setCode(code);
+      sceneInfo.setLabel(scene.label());
+      sceneInfo.setKeywords(scene.keywords());
+      if(findSceneInfo == null){
+         doInsert(logicContext, sceneInfo);
+         scene.setGuid(sceneInfo.guid());
       }
       //............................................................
       // 新建场景主题

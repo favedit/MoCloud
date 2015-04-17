@@ -79,13 +79,15 @@ public interface ISceneService
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   EResult updateTheme(IWebContext context,
-                       ILogicContext logicContext,
-                       IWebInput input,
-                       IWebOutput output);
+   EResult updateContent(IWebContext context,
+                         ILogicContext logicContext,
+                         FGcSessionInfo session,
+                         IWebInput input,
+                         IWebOutput output);
 
    //============================================================
    // <T>删除数据处理。</T>

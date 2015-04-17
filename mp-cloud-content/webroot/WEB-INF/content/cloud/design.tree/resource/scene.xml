@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="resource3d.template" update_date="20141209154356">
-   <TreeView name="resource3d.template" label="模板列表" is_valid="Y" note="" is_config="N" disp_checked="N">
-     <TreeNodeType name="model" linker="Model" label="模型" is_valid="Y" note="" icon="resource3d.model.model" service="list@cloud.design.persistence" attributes="type=collection;form_name=content.persistence.PersistenceForm" />
-     <TreeNodeType name="mesh" linker="Mesh" label="网格" is_valid="Y" note="" icon="resource3d.model.mesh" service="list@cloud.design.persistence" attributes="type=component;form_name=content.persistence.ComponentForm" />
+<Content name="design3d.scene" update_date="20141209154356">
+   <TreeView name="design3d.scene" label="模板列表" is_valid="Y" note="" is_config="N" disp_checked="N">
+     <TreeNodeType name="scene" code="Scene" label="场景" is_valid="Y" note="" icon="design3d.scene.scene"/>
+     <TreeNodeType name="technique" code="Technique" label="技术" is_valid="Y" note="" icon="design3d.scene.technique"/>
+     <TreeNodeType name="region" code="Region" label="区域" is_valid="Y" note="" icon="design3d.scene.region"/>
+     <TreeNodeType name="camera" code="Camera" label="相机" is_valid="Y" note="" icon="design3d.scene.camera"/>
+     <TreeNodeType name="light" code="Light" label="光源" is_valid="Y" note="" icon="design3d.scene.light"/>
+     <TreeNodeType name="layers" code="Layers" label="显示层集合" is_valid="Y" note="" icon="design3d.scene.layers"/>
+     <TreeNodeType name="layer" code="Layer" label="显示层" is_valid="Y" note="" icon="design3d.scene.layer"/>
+     <TreeNodeType name="display" code="Display" label="显示对象" is_valid="Y" note="" icon="design3d.scene.display"/>
+     <TreeNodeType name="material" code="Material" label="渲染材质" is_valid="Y" note="" icon="design3d.scene.material"/>
+     <TreeNodeType name="animation" code="Animation" label="动画对象" is_valid="Y" note="" icon="design3d.scene.animation"/>
+     <TreeNodeType name="movie" code="Movie" label="剪辑对象" is_valid="Y" note="" icon="design3d.scene.movie"/>
+     <TreeNodeType name="renderable" code="Renderable" label="渲染对象" is_valid="Y" note="" icon="design3d.scene.renderable"/>
    </TreeView>
 </Content>

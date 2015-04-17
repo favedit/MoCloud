@@ -2,7 +2,6 @@ package org.mo.content.resource3d.scene;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -197,7 +196,6 @@ public class FRs3SceneDisplay
       super.serialize(output);
       // 存储属性
       output.writeString(_templateGuid);
-      _matrix.serialize(output);
       // 存储动画集合
       if(_animations != null){
          int count = _animations.count();
@@ -280,8 +278,6 @@ public class FRs3SceneDisplay
                FRs3SceneMovie movie = findMovieByGuid(movieGuid);
                movie.mergeConfig(xmovie);
             }
-         }else{
-            throw new FFatalError("Unknown node type.");
          }
       }
    }

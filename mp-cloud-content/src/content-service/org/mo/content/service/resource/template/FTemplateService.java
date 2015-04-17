@@ -246,7 +246,7 @@ public class FTemplateService
       FRs3Template template = _templateConsole.makeTemplate(logicContext, templateInfo);
       template.mergeConfig(xtemplate);
       template.saveUnit(templateInfo);
-      _templateConsole.updateTemplate(logicContext, template);
+      _templateConsole.updateResource(logicContext, template);
       return EResult.Success;
    }
 

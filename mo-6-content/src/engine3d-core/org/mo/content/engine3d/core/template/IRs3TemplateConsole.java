@@ -87,7 +87,7 @@ public interface IRs3TemplateConsole
    // @param template 模板
    // @return 模板信息
    //============================================================
-   FGcResTemplateInfo updateTemplate(ILogicContext logicContext,
+   FGcResTemplateInfo updateResource(ILogicContext logicContext,
                                      FRs3Template template);
 
    //============================================================

@@ -187,7 +187,7 @@ public class FRs3TemplateConsole
    // @return 模板信息
    //============================================================
    @Override
-   public FGcResTemplateInfo updateTemplate(ILogicContext logicContext,
+   public FGcResTemplateInfo updateResource(ILogicContext logicContext,
                                             FRs3Template template){
       // 检查参数
       String guid = template.guid();
