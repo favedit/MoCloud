@@ -51,11 +51,21 @@ public interface IRs3TemplateConsole
    //                             String version);
 
    //============================================================
-   // <T>查找资源模板。</T>
+   // <T>生成资源模板。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param templateInfo 模板信息
+   // @return 资源模板
+   //============================================================
+   FRs3Template makeTemplate(ILogicContext logicContext,
+                             FGcResTemplateInfo templateInfo);
+
+   //============================================================
+   // <T>生成资源模板。</T>
    //
    // @param logicContext 逻辑环境
    // @param guid 唯一编号
-   // @return 处理结果
+   // @return 资源模板
    //============================================================
    FRs3Template makeTemplate(ILogicContext logicContext,
                              String guid);

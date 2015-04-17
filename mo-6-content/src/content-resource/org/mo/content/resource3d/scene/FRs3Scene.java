@@ -1,6 +1,6 @@
 package org.mo.content.resource3d.scene;
 
-import com.cyou.gccloud.data.data.FDataResourceSceneUnit;
+import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
@@ -8,6 +8,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
+import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3Region;
 import org.mo.content.resource3d.common.FRs3Resource;
@@ -292,7 +293,7 @@ public class FRs3Scene
       // 导入技术
       _technique.importData(input);
       // 导入区域
-      ((FRs3SceneRegion)_region).importData(input);
+      _region.importData(input);
       // 读取层集合
       FRs3SceneLayer skyLayer = new FRs3SceneLayer();
       skyLayer.importData(input);
@@ -310,7 +311,11 @@ public class FRs3Scene
    //
    // @param unit 数据单元
    //============================================================
-   public void loadSceneUnit(FDataResourceSceneUnit unit){
+   public void loadUnit(FGcResSceneInfo unit){
+      // 读取配置
+      FXmlDocument xdocument = new FXmlDocument();
+      xdocument.loadString(unit.content());
+      loadConfig(xdocument.root());
       // 加载属性
       _ouid = unit.ouid();
       _guid = unit.guid();
@@ -318,35 +323,20 @@ public class FRs3Scene
       _label = unit.label();
    }
 
-   //   //============================================================
-   //   // <T>从数据单元中导入配置。</T>
-   //   //
-   //   // @param unit 数据单元
-   //   //============================================================
-   //   public void loadThemeUnit(FDataResourceSceneThemeUnit unit){
-   //      // 读取配置
-   //      FXmlDocument xdocument = new FXmlDocument();
-   //      xdocument.loadString(unit.content());
-   //      loadConfig(xdocument.root());
-   //      // 加载属性
-   //      _themeGuid = unit.guid();
-   //      _themeCode = unit.code();
-   //   }
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
    //
-   //   //============================================================
-   //   // <T>将配置信息存入数据单元中。</T>
-   //   //
-   //   // @param unit 数据单元
-   //   //============================================================
-   //   public void saveThemeUnit(FDataResourceSceneThemeUnit unit){
-   //      // 存储属性
-   //      //unit.setCode(_code);
-   //      //unit.setFullCode(_fullCode);
-   //      unit.setLabel(_label);
-   //      //unit.setKeywords(_keywords);
-   //      // 存储配置
-   //      FXmlNode xconfig = new FXmlNode("Scene");
-   //      saveConfig(xconfig);
-   //      unit.setContent(xconfig.xml().toString());
-   //   }
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FGcResSceneInfo unit){
+      // 存储属性
+      unit.setCode(_code);
+      unit.setFullCode(_fullCode);
+      unit.setLabel(_label);
+      unit.setKeywords(_keywords);
+      // 存储配置
+      FXmlNode xconfig = new FXmlNode("Scene");
+      saveConfig(xconfig);
+      unit.setContent(xconfig.xml().toString());
+   }
 }

@@ -377,6 +377,13 @@ public class FRs3Space
                FRs3Material material = findMaterialByGuid(materialGuid);
                material.mergeConfig(xmaterial);
             }
+         }else if(xnode.isName("DisplayCollection")){
+            // 读取显示集合
+            for(FXmlNode xdisplay : xnode){
+               String displayGuid = xdisplay.get("guid");
+               FRs3Display display = findDisplayByGuid(displayGuid);
+               display.mergeConfig(xdisplay);
+            }
          }else if(xnode.isName("LayerCollection")){
             // 读取显示层集合
             for(FXmlNode xlayer : xnode){

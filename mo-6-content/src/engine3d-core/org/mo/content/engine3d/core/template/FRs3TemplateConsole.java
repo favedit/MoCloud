@@ -75,17 +75,12 @@ public class FRs3TemplateConsole
    // <T>生成资源模板。</T>
    //
    // @param logicContext 逻辑环境
-   // @param guid 唯一编号
-   // @return 处理结果
+   // @param templateInfo 模板信息
+   // @return 资源模板
    //============================================================
    @Override
    public FRs3Template makeTemplate(ILogicContext logicContext,
-                                    String guid){
-      // 查找数据单元
-      FGcResTemplateInfo templateInfo = findByGuid(logicContext, guid);
-      if(templateInfo == null){
-         return null;
-      }
+                                    FGcResTemplateInfo templateInfo){
       // 读取内容
       FRs3Template template = new FRs3Template();
       template.loadUnit(templateInfo);
@@ -127,6 +122,25 @@ public class FRs3TemplateConsole
       //         }
       //      }
       return template;
+   }
+
+   //============================================================
+   // <T>生成资源模板。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 资源模板
+   //============================================================
+   @Override
+   public FRs3Template makeTemplate(ILogicContext logicContext,
+                                    String guid){
+      // 查找数据单元
+      FGcResTemplateInfo templateInfo = findByGuid(logicContext, guid);
+      if(templateInfo == null){
+         return null;
+      }
+      // 读取内容
+      return makeTemplate(logicContext, templateInfo);
    }
 
    //============================================================

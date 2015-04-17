@@ -2,6 +2,7 @@ package org.mo.content.resource3d.common;
 
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -17,15 +18,6 @@ public class FRs3DisplayContainer
    // <T>构造资源模型。</T>
    //============================================================
    public FRs3DisplayContainer(){
-   }
-
-   //============================================================
-   // <T>判断是否含有显示对象。</T>
-   //
-   // @return 是否含有显示对象
-   //============================================================
-   public boolean hasDisplay(){
-      return (_displays != null) ? !_displays.isEmpty() : false;
    }
 
    //============================================================
@@ -46,12 +38,51 @@ public class FRs3DisplayContainer
    }
 
    //============================================================
+   // <T>判断是否含有显示对象。</T>
+   //
+   // @return 是否含有
+   //============================================================
+   public boolean hasDisplay(){
+      return (_displays != null) ? !_displays.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找显示对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 显示对象
+   //============================================================
+   public FRs3Display findDisplayByGuid(String guid){
+      if(!RString.isEmpty(guid)){
+         for(FRs3Display display : _displays){
+            if(guid.equals(display.guid())){
+               return display;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得显示集合。</T>
    //
    // @return 显示集合
    //============================================================
    public FObjects<FRs3Display> displays(){
       return _displays;
+   }
+
+   //============================================================
+   // <T>增加一个显示对象。</T>
+   //
+   // @param renderable 显示对象
+   //============================================================
+   public void pushDisplay(FRs3Display display){
+      display.setParent(this);
+      if(_displays == null){
+         _displays = new FObjects<FRs3Display>(FRs3Display.class);
+      }
+      _displays.push(display);
    }
 
    //============================================================
@@ -95,6 +126,25 @@ public class FRs3DisplayContainer
    }
 
    //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 处理所有节点
+      FXmlNode xdisplays = xconfig.findNode("DisplayCollection");
+      if(xdisplays != null){
+         for(FXmlNode xdisplay : xdisplays){
+            String guid = xdisplay.get("guid");
+            FRs3Display display = findDisplayByGuid(guid);
+            display.mergeConfig(xdisplay);
+         }
+      }
+   }
+
+   //============================================================
    // <T>从配置信息中导入配置。</T>
    //
    // @param xconfig 配置信息
@@ -105,7 +155,7 @@ public class FRs3DisplayContainer
          if(xnode.isName("DisplayCollection")){
             for(FXmlNode xchild : xnode){
                FRs3Display display = (FRs3Display)createChild(xchild);
-               //display.importConfig(xchild);
+               display.importConfig(xchild);
                _displays.push(display);
             }
          }

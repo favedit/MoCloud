@@ -18,7 +18,7 @@ public class RResBitmapImport
    // <T>导入处理。</T>
    //============================================================
    public static void importProcess() throws Exception{
-      String path = RRs3Configuration.RootPath + "/MoResource/Export/bitmap/";
+      String path = RRs3Configuration.RootPath + "/MoResource/Export/texture/";
       // 设置数据
       FStrings filePaths = new FStrings();
       for(String fileName : RFile.listFiles(path)){

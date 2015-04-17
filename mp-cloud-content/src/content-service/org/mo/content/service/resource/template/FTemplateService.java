@@ -242,10 +242,10 @@ public class FTemplateService
          throw new FFatalError("Parameter guid is empty. (guid={1})", guid);
       }
       // 合并场景
-      FGcResTemplateInfo modelInfo = _templateConsole.getByGuid(logicContext, guid);
-      FRs3Template template = _templateConsole.makeTemplate(logicContext, guid);
+      FGcResTemplateInfo templateInfo = _templateConsole.getByGuid(logicContext, guid);
+      FRs3Template template = _templateConsole.makeTemplate(logicContext, templateInfo);
       template.mergeConfig(xtemplate);
-      // 更新场景
+      template.saveUnit(templateInfo);
       _templateConsole.updateTemplate(logicContext, template);
       return EResult.Success;
    }

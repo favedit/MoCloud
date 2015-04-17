@@ -7,6 +7,7 @@ import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.common.SFloatMatrix3d;
+import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.common.FRs3Object;
 
 //============================================================
@@ -28,7 +29,7 @@ public class FRs3SceneDisplay
    protected FObjects<FRs3SceneMovie> _movies;
 
    // 场景材质集合
-   protected FObjects<FRs3SceneMaterial> _materials;
+   protected FObjects<FRs3Material> _materials;
 
    // 场景渲染集合
    protected FObjects<FRs3SceneRenderable> _renderables;
@@ -191,9 +192,9 @@ public class FRs3SceneDisplay
    // @param guid 唯一编号
    // @return 材质对象
    //============================================================
-   public FRs3SceneMaterial findMaterialByGuid(String guid){
+   public FRs3Material findMaterialByGuid(String guid){
       if(!RString.isEmpty(guid) && (_materials != null)){
-         for(FRs3SceneMaterial material : _materials){
+         for(FRs3Material material : _materials){
             if(guid.equals(material.guid())){
                return material;
             }
@@ -207,7 +208,7 @@ public class FRs3SceneDisplay
    //
    // @return 场景材质集合
    //============================================================
-   public FObjects<FRs3SceneMaterial> materials(){
+   public FObjects<FRs3Material> materials(){
       return _materials;
    }
 
@@ -216,9 +217,9 @@ public class FRs3SceneDisplay
    //
    // @param material 场景材质
    //============================================================
-   public void pushMaterial(FRs3SceneMaterial material){
+   public void pushMaterial(FRs3Material material){
       if(_materials == null){
-         _materials = new FObjects<FRs3SceneMaterial>(FRs3SceneMaterial.class);
+         _materials = new FObjects<FRs3Material>(FRs3Material.class);
       }
       _materials.push(material);
    }
@@ -296,7 +297,7 @@ public class FRs3SceneDisplay
       if(_materials != null){
          int count = _materials.count();
          output.writeUint16(count);
-         for(FRs3SceneMaterial material : _materials){
+         for(FRs3Material material : _materials){
             material.serialize(output);
          }
       }else{
@@ -346,7 +347,7 @@ public class FRs3SceneDisplay
          }else if(xnode.isName("MaterialCollection")){
             // 读取材质集合
             for(FXmlNode xmaterial : xnode){
-               FRs3SceneMaterial material = new FRs3SceneMaterial();
+               FRs3Material material = new FRs3Material();
                material.loadConfig(xmaterial);
                pushMaterial(material);
             }
@@ -394,7 +395,7 @@ public class FRs3SceneDisplay
             // 读取材质集合
             for(FXmlNode xmaterial : xnode){
                String materialGuid = xmaterial.get("guid");
-               FRs3SceneMaterial material = findMaterialByGuid(materialGuid);
+               FRs3Material material = findMaterialByGuid(materialGuid);
                material.mergeConfig(xmaterial);
             }
          }else if(xnode.isName("RenderableCollection")){
@@ -438,7 +439,7 @@ public class FRs3SceneDisplay
       // 存储材质集合
       if(_materials != null){
          FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
-         for(FRs3SceneMaterial material : _materials){
+         for(FRs3Material material : _materials){
             material.saveConfig(xmaterials.createNode("Material"));
          }
       }
@@ -470,7 +471,7 @@ public class FRs3SceneDisplay
       // 读取材质集合
       int materialCount = input.readInt32();
       for(int n = 0; n < materialCount; n++){
-         FRs3SceneMaterial material = new FRs3SceneMaterial();
+         FRs3Material material = new FRs3Material();
          material.importData(input);
          pushMaterial(material);
       }

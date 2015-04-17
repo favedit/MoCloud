@@ -2,6 +2,7 @@ package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -36,6 +37,23 @@ public class FRs3Display
    //============================================================
    public boolean hasRenderable(){
       return (_renderables != null) ? !_renderables.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找渲染对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 渲染对象
+   //============================================================
+   public FRs3Renderable findRenderableByGuid(String guid){
+      if(!RString.isEmpty(guid)){
+         for(FRs3Renderable renderable : _renderables){
+            if(guid.equals(renderable.guid())){
+               return renderable;
+            }
+         }
+      }
+      return null;
    }
 
    //============================================================
@@ -112,6 +130,25 @@ public class FRs3Display
          FXmlNode xrenderables = xconfig.createNode("RenderableCollection");
          for(FRs3Renderable renderable : _renderables){
             renderable.saveConfig(xrenderables.createNode("Renderable"));
+         }
+      }
+   }
+
+   //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 处理所有节点
+      FXmlNode xrenderables = xconfig.findNode("RenderableCollection");
+      if(xrenderables != null){
+         for(FXmlNode xrenderable : xrenderables){
+            String guid = xrenderable.get("guid");
+            FRs3Renderable renderable = findRenderableByGuid(guid);
+            renderable.mergeConfig(xrenderable);
          }
       }
    }
