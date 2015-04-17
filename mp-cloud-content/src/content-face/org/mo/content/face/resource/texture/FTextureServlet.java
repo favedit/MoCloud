@@ -1,8 +1,6 @@
 package org.mo.content.face.resource.texture;
 
 import org.mo.com.lang.FObject;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -19,7 +17,7 @@ public class FTextureServlet
          ITextureServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FTextureServlet.class);
+   //private static ILogger _logger = RLogger.find(FTextureServlet.class);
 
    // 缓冲时间
    protected static long CacheTimeout = 3600 * 24 * 7 * 4;

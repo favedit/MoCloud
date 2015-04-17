@@ -1,13 +1,10 @@
 package org.mo.content.face.resource.mesh;
 
-import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
-
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.FObject;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
 import org.mo.core.aop.face.ALink;
@@ -25,7 +22,7 @@ public class FMeshServlet
          IMeshServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FMeshServlet.class);
+   //private static ILogger _logger = RLogger.find(FMeshServlet.class);
 
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;

@@ -16,7 +16,7 @@ public class RResBitmapImport
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-cloud-design/src/config/application-local.xml");
 
-      String filePath = "E:/Microbject/MoScript/source/assets/texture/pvw.show.001.01";
+      //String filePath = "E:/Microbject/MoScript/source/assets/texture/pvw.show.001.01";
 
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){

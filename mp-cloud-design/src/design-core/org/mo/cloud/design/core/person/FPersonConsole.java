@@ -89,7 +89,7 @@ public class FPersonConsole
       }
       FDataPersonUserLogic personLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       //条件
-      StringBuffer sqlString = new StringBuffer();
+      //StringBuffer sqlString = new StringBuffer();
 
       FLogicDataset<FDataPersonUserUnit> userList = personLogic.fetch(null, _pageSize, pageNum);
       return userList;

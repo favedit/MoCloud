@@ -1,10 +1,8 @@
 package org.mo.content.face.resource.mesh;
 
-import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
-
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
-import org.mo.com.xml.FXmlNode;
+import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -42,7 +40,7 @@ public class FMeshService
                        ILogicContext logicContext,
                        IWebInput input,
                        IWebOutput output){
-      FXmlNode xoutput = output.config();
+      //FXmlNode xoutput = output.config();
       //      // 获得模型信息
       //      FDataResource3dModelLogic modelLogic = logicContext.findLogic(FDataResource3dModelLogic.class);
       //      FLogicDataset<FDataResource3dModelUnit> modelUnits = modelLogic.fetchAll();

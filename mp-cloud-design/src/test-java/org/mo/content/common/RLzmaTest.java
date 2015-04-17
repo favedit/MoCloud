@@ -16,5 +16,6 @@ public class RLzmaTest
       //file.saveLzmaFile("E:\\Genesis3D-功能模块地图.lzma");
       float rate = (float)data.length / (float)file.length();
       System.out.println("Compress data. " + file.length() + " -> " + data.length + " rate=" + rate);
+      file.close();
    }
 }

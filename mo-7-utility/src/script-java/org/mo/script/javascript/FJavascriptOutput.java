@@ -123,6 +123,7 @@ public class FJavascriptOutput
    //
    // @param fJavascriptClass 类对象
    //============================================================
+   @SuppressWarnings("unused")
    private void createMethod(BufferedWriter bw,
                              FJavascriptClass fJavascriptClass) throws IOException{
       //创建方法xml
