@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.mesh.FrameSet">
+<Content name="resource.model.FrameSet">
    <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
       <FramePage name='catalogFrame' label='目录区' size='300,0'/>
       <FrameSpliter name='catalogSpliter'/>

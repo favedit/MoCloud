@@ -252,37 +252,6 @@ public class FRs3SceneDisplay
    }
 
    //============================================================
-   // <T>从配置节点中合并数据信息。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   @Override
-   public void mergeConfig(FXmlNode xconfig){
-      super.mergeConfig(xconfig);
-      // 读取节点集合
-      for(FXmlNode xnode : xconfig.nodes()){
-         if(xnode.isName("Matrix")){
-            // 读取矩阵
-            _matrix.loadConfig(xnode);
-         }else if(xnode.isName("AnimationCollection")){
-            // 读取动画集合
-            for(FXmlNode xanimation : xnode){
-               String animationGuid = xanimation.get("guid");
-               FRs3SceneAnimation animation = syncAnimationByGuid(animationGuid);
-               animation.mergeConfig(xanimation);
-            }
-         }else if(xnode.isName("MovieCollection")){
-            // 读取剪辑集合
-            for(FXmlNode xmovie : xnode){
-               String movieGuid = xmovie.get("guid");
-               FRs3SceneMovie movie = findMovieByGuid(movieGuid);
-               movie.mergeConfig(xmovie);
-            }
-         }
-      }
-   }
-
-   //============================================================
    // <T>存储数据信息到配置节点中。</T>
    //
    // @param xconfig 配置信息
@@ -305,6 +274,34 @@ public class FRs3SceneDisplay
          FXmlNode xmovies = xconfig.createNode("MovieCollection");
          for(FRs3SceneMovie movie : _movies){
             movie.saveConfig(xmovies.createNode("Movie"));
+         }
+      }
+   }
+
+   //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 读取节点集合
+      for(FXmlNode xnode : xconfig.nodes()){
+         if(xnode.isName("AnimationCollection")){
+            // 读取动画集合
+            for(FXmlNode xanimation : xnode){
+               String animationGuid = xanimation.get("guid");
+               FRs3SceneAnimation animation = syncAnimationByGuid(animationGuid);
+               animation.mergeConfig(xanimation);
+            }
+         }else if(xnode.isName("MovieCollection")){
+            // 读取剪辑集合
+            for(FXmlNode xmovie : xnode){
+               String movieGuid = xmovie.get("guid");
+               FRs3SceneMovie movie = findMovieByGuid(movieGuid);
+               movie.mergeConfig(xmovie);
+            }
          }
       }
    }

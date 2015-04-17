@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.MenuBar">
+   <MenuBar name="design3d.scene.MenuBar" type='FDsSceneMenuBar' label="菜单">
+      <MenuButton name='save' linker='_controlSave' icon='design3d.tools.save' label='保存'/>
+      <MenuButton name='capture' linker='_controlCapture' icon='design3d.tools.save' label='生成预览'/>
+      <MenuButton name='execute' linker='_controlExecute' icon='design3d.tools.run' label='运行'/>
+   </MenuBar>
+</Content>

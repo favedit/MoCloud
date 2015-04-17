@@ -162,7 +162,7 @@ public class FRs3Model
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
       // 存储显示对象
-      FXmlNode xdisplay = xconfig.findNode("Display");
+      FXmlNode xdisplay = xconfig.findNode("ModelDisplay");
       if(xdisplay != null){
          _display.loadConfig(xdisplay);
       }
@@ -177,7 +177,7 @@ public class FRs3Model
    public void saveConfig(FXmlNode xconfig){
       super.saveConfig(xconfig);
       // 存储显示对象
-      _display.saveConfig(xconfig.createNode("Display"));
+      _display.saveConfig(xconfig.createNode("ModelDisplay"));
    }
 
    //============================================================
@@ -266,7 +266,7 @@ public class FRs3Model
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
       // 读取节点集合
-      FXmlNode xdisplay = xconfig.findNode("Display");
+      FXmlNode xdisplay = xconfig.findNode("ModelDisplay");
       if(xdisplay != null){
          _display.mergeConfig(xdisplay);
       }

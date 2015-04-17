@@ -95,35 +95,6 @@ public class FRs3Scene
    }
 
    //============================================================
-   // <T>从配置节点中合并数据信息。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   @Override
-   public void mergeConfig(FXmlNode xconfig){
-      // 读取属性
-      //_code = xconfig.get("code");
-      _label = xconfig.get("label");
-      // 读取节点集合
-      for(FXmlNode xnode : xconfig){
-         if(xnode.isName("Technique")){
-            // 读取技术
-            _technique.mergeConfig(xnode);
-         }else if(xnode.isName("Region")){
-            // 读取区域
-            _region.mergeConfig(xnode);
-         }else if(xnode.isName("LayerCollection")){
-            // 读取层集合
-            for(FXmlNode xlayer : xnode){
-               String layerGuid = xlayer.get("guid");
-               FRs3DisplayLayer layer = findLayerByGuid(layerGuid);
-               layer.mergeConfig(xlayer);
-            }
-         }
-      }
-   }
-
-   //============================================================
    // <T>存储数据信息到配置节点中。</T>
    //
    // @param xconfig 配置信息
@@ -181,6 +152,35 @@ public class FRs3Scene
       FXmlNode xconfig = new FXmlNode("Scene");
       saveConfig(xconfig);
       unit.setContent(xconfig.xml().toString());
+   }
+
+   //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      // 读取属性
+      _code = xconfig.get("code");
+      _label = xconfig.get("label");
+      // 读取节点集合
+      for(FXmlNode xnode : xconfig){
+         if(xnode.isName("Technique")){
+            // 读取技术
+            _technique.mergeConfig(xnode);
+         }else if(xnode.isName("Region")){
+            // 读取区域
+            _region.mergeConfig(xnode);
+         }else if(xnode.isName("LayerCollection")){
+            // 读取层集合
+            for(FXmlNode xlayer : xnode){
+               String layerGuid = xlayer.get("guid");
+               FRs3DisplayLayer layer = findLayerByGuid(layerGuid);
+               layer.mergeConfig(xlayer);
+            }
+         }
+      }
    }
 
    //============================================================

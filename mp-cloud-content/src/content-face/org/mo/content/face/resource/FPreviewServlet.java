@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
+import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -17,6 +19,8 @@ import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.core.resource.scene.ICntSceneConsole;
+import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
@@ -56,6 +60,14 @@ public class FPreviewServlet
    // 模型数据接口
    @ALink
    protected ICntModelConsole _modelConsole;
+
+   // 模板数据接口
+   @ALink
+   protected ICntTemplateConsole _templateConsole;
+
+   // 场景数据接口
+   @ALink
+   protected ICntSceneConsole _sceneConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -178,18 +190,43 @@ public class FPreviewServlet
       int dataLength = data.length;
       //............................................................
       // 上传预览数据
+      FGcResourceInfo resourceInfo = null;
       switch(typeCd){
          case EGcResource.ModelString:
             // 获得模型信息
-            FGcResModelInfo model = _modelConsole.findByGuid(logicContext, guid);
-            if(model == null){
+            FGcResModelInfo modelInfo = _modelConsole.findByGuid(logicContext, guid);
+            if(modelInfo == null){
                throw new FFatalError("Model is empty. (guid={1})", guid);
             }
             // 修改更新时间，预览图才能重新显示
-            FGcResourceInfo resource = _resourceConsole.find(logicContext, model.resourceId());
-            _resourceConsole.doUpdate(logicContext, resource);
+            resourceInfo = _resourceConsole.find(logicContext, modelInfo.resourceId());
+            _resourceConsole.doUpdate(logicContext, resourceInfo);
             // 上传数据
-            _resourceConsole.uploadPreviewData(logicContext, resource.guid(), data);
+            _resourceConsole.uploadPreviewData(logicContext, resourceInfo.guid(), data);
+            break;
+         case EGcResource.TemplateString:
+            // 获得模型信息
+            FGcResTemplateInfo templateInfo = _templateConsole.findByGuid(logicContext, guid);
+            if(templateInfo == null){
+               throw new FFatalError("Template is empty. (guid={1})", guid);
+            }
+            // 修改更新时间，预览图才能重新显示
+            resourceInfo = _resourceConsole.find(logicContext, templateInfo.resourceId());
+            _resourceConsole.doUpdate(logicContext, resourceInfo);
+            // 上传数据
+            _resourceConsole.uploadPreviewData(logicContext, resourceInfo.guid(), data);
+            break;
+         case EGcResource.SceneString:
+            // 获得模型信息
+            FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, guid);
+            if(sceneInfo == null){
+               throw new FFatalError("Scene is empty. (guid={1})", guid);
+            }
+            // 修改更新时间，预览图才能重新显示
+            resourceInfo = _resourceConsole.find(logicContext, sceneInfo.resourceId());
+            _resourceConsole.doUpdate(logicContext, resourceInfo);
+            // 上传数据
+            _resourceConsole.uploadPreviewData(logicContext, resourceInfo.guid(), data);
             break;
          default:
             throw new FFatalError("Upload preview type failure. (type_cd={1})", typeCd);

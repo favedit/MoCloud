@@ -145,6 +145,26 @@ public class FRs3DisplayLayer
    }
 
    //============================================================
+   // <T>存储数据信息到配置节点中。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void saveConfig(FXmlNode xconfig){
+      super.saveConfig(xconfig);
+      // 存储属性
+      xconfig.set("type_cd", _typeCd);
+      xconfig.set("transform_cd", _transformCd);
+      // 存储层集合
+      if(_displays != null){
+         FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
+         for(FRs3Display display : _displays){
+            display.saveConfig(xdisplays.createNode("Display"));
+         }
+      }
+   }
+
+   //============================================================
    // <T>从配置节点中合并数据信息。</T>
    //
    // @param xconfig 配置信息
@@ -166,26 +186,6 @@ public class FRs3DisplayLayer
             }
          }else{
             throw new FFatalError("Invalid config node.");
-         }
-      }
-   }
-
-   //============================================================
-   // <T>存储数据信息到配置节点中。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   @Override
-   public void saveConfig(FXmlNode xconfig){
-      super.saveConfig(xconfig);
-      // 存储属性
-      xconfig.set("type_cd", _typeCd);
-      xconfig.set("transform_cd", _transformCd);
-      // 存储层集合
-      if(_displays != null){
-         FXmlNode xdisplays = xconfig.createNode("DisplayCollection");
-         for(FRs3Display display : _displays){
-            display.saveConfig(xdisplays.createNode("Display"));
          }
       }
    }

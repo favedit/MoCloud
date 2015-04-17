@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.MenuBar">
-   <MenuBar name="design3d.scene.MenuBar" type='FDsSceneMenuBar' label="菜单">
-      <MenuButton name='refreshButton' linker='_refreshButton' icon='design3d.tools.refresh' label='刷新'/>
-      <MenuButton name='saveButton' linker='_saveButton' icon='design3d.tools.save' label='保存'/>
-      <MenuButton name='runButton' linker='_runButton' icon='design3d.tools.run' label='运行'/>
-   </MenuBar>
-</Content>

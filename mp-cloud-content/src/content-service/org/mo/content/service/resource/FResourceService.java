@@ -137,7 +137,7 @@ public class FResourceService
             FXmlNode xresource = xresources.createNode("Resource");
             xresource.set("guid", resource.get("guid"));
             xresource.set("type_cd", EGcResource.format(resource.resourceCd()));
-            xresource.set("code", resource.get("full_code"));
+            xresource.set("code", resource.get("code"));
             xresource.set("label", resource.get("label"));
             xresource.set("update_date", resource.get("update_date"));
          }

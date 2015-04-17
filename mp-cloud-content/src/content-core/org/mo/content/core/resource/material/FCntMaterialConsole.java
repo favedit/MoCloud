@@ -153,10 +153,7 @@ public class FCntMaterialConsole
       }
       //............................................................
       // 生成模型
-      byte[] data = null;
-      synchronized(FImage.class){
-         data = makeBitmap(logicContext, guid, code);
-      }
+      byte[] data = makeBitmap(logicContext, guid, code);
       // 存储数据
       SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheResourceMaterialBitmapPack, flag, "bin");
       storage.setCode(flag);

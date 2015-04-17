@@ -2,6 +2,7 @@ package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -28,6 +29,23 @@ public class FRs3Sprite
    //============================================================
    public boolean hasMaterial(){
       return (_materials != null) ? !_materials.isEmpty() : false;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找材质对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 材质对象
+   //============================================================
+   public FRs3Material findMaterialByGuid(String guid){
+      if(!RString.isEmpty(guid) && (_materials != null)){
+         for(FRs3Material material : _materials){
+            if(guid.equals(material.guid())){
+               return material;
+            }
+         }
+      }
+      return null;
    }
 
    //============================================================
@@ -107,6 +125,27 @@ public class FRs3Sprite
          FXmlNode xmaterials = xconfig.createNode("MaterialCollection");
          for(FRs3Material material : _materials){
             material.saveConfig(xmaterials.createNode("Material"));
+         }
+      }
+   }
+
+   //============================================================
+   // <T>从配置节点中合并数据信息。</T>
+   //
+   // @param xconfig 配置信息
+   //============================================================
+   @Override
+   public void mergeConfig(FXmlNode xconfig){
+      super.mergeConfig(xconfig);
+      // 读取节点集合
+      for(FXmlNode xnode : xconfig.nodes()){
+         if(xnode.isName("MaterialCollection")){
+            // 读取动画集合
+            for(FXmlNode xmaterial : xnode){
+               String materialGuid = xmaterial.get("guid");
+               FRs3Material material = findMaterialByGuid(materialGuid);
+               material.mergeConfig(xmaterial);
+            }
          }
       }
    }

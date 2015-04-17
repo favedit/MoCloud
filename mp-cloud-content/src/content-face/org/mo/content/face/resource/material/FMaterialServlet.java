@@ -87,6 +87,9 @@ public class FMaterialServlet
          }
       }
       int dataLength = data.length;
+      if(dataLength == 0){
+         throw new FFatalError("Make bitmap data failure.");
+      }
       // 发送数据
       _logger.debug(this, "process", "Send data. (length={1})", dataLength);
       response.setCharacterEncoding("utf-8");
