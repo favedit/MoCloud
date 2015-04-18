@@ -1,7 +1,7 @@
 package org.mo.content.core.resource.material;
 
 import org.mo.com.lang.EResult;
-import org.mo.content.engine3d.core.material.IRs3MaterialConsole;
+import org.mo.content.engine3d.core.material.IResMaterialConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -9,7 +9,7 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 public interface ICntMaterialConsole
       extends
-         IRs3MaterialConsole
+         IResMaterialConsole
 {
    //============================================================
    // <T>生成纹理位图。</T>

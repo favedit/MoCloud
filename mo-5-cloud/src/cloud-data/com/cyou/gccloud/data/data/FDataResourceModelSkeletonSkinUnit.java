@@ -53,29 +53,29 @@ public class FDataResourceModelSkeletonSkinUnit
    // 字段模型编号的定义。
    protected long _modelId;
 
-   // 存储字段骨骼编号的定义。
-   private long __skeletonId;
-
-   // 字段骨骼编号的定义。
-   protected long _skeletonId;
-
    // 存储字段网格编号的定义。
    private long __meshId;
 
    // 字段网格编号的定义。
    protected long _meshId;
 
-   // 存储字段代码的定义。
-   private String __code;
+   // 存储字段骨骼编号的定义。
+   private long __skeletonId;
 
-   // 字段代码的定义。
-   protected String _code;
+   // 字段骨骼编号的定义。
+   protected long _skeletonId;
 
    // 存储字段全代码的定义。
    private String __fullCode;
 
    // 字段全代码的定义。
    protected String _fullCode;
+
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
 
    // 存储字段标签的定义。
    private String __label;
@@ -321,44 +321,6 @@ public class FDataResourceModelSkeletonSkinUnit
    }
 
    //============================================================
-   // <T>判断骨骼编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isSkeletonIdChanged(){
-      return __skeletonId != _skeletonId;
-   }
-
-   //============================================================
-   // <T>获得骨骼编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long skeletonId(){
-      return _skeletonId;
-   }
-
-   //============================================================
-   // <T>获得骨骼编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelSkeletonUnit skeleton(){
-      FDataResourceModelSkeletonLogic logic = _logicContext.findLogic(FDataResourceModelSkeletonLogic.class);
-      FDataResourceModelSkeletonUnit unit = logic.find(_skeletonId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置骨骼编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setSkeletonId(long value){
-      _skeletonId = value;
-   }
-
-   //============================================================
    // <T>判断网格编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -397,30 +359,41 @@ public class FDataResourceModelSkeletonSkinUnit
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断骨骼编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isSkeletonIdChanged(){
+      return __skeletonId != _skeletonId;
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得骨骼编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public long skeletonId(){
+      return _skeletonId;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
+   // <T>获得骨骼编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceModelSkeletonUnit skeleton(){
+      FDataResourceModelSkeletonLogic logic = _logicContext.findLogic(FDataResourceModelSkeletonLogic.class);
+      FDataResourceModelSkeletonUnit unit = logic.find(_skeletonId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置骨骼编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
+   public void setSkeletonId(long value){
+      _skeletonId = value;
    }
 
    //============================================================
@@ -448,6 +421,33 @@ public class FDataResourceModelSkeletonSkinUnit
    //============================================================
    public void setFullCode(String value){
       _fullCode = value;
+   }
+
+   //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================
@@ -660,14 +660,14 @@ public class FDataResourceModelSkeletonSkinUnit
             return Long.toString(_projectId);
          case "model_id":
             return Long.toString(_modelId);
-         case "skeleton_id":
-            return Long.toString(_skeletonId);
          case "mesh_id":
             return Long.toString(_meshId);
-         case "code":
-            return _code;
+         case "skeleton_id":
+            return Long.toString(_skeletonId);
          case "full_code":
             return _fullCode;
+         case "code":
+            return _code;
          case "label":
             return _label;
          case "content":
@@ -714,17 +714,17 @@ public class FDataResourceModelSkeletonSkinUnit
          case "model_id":
             _modelId = RLong.parse(value);
             break;
-         case "skeleton_id":
-            _skeletonId = RLong.parse(value);
-            break;
          case "mesh_id":
             _meshId = RLong.parse(value);
             break;
-         case "code":
-            _code = value;
+         case "skeleton_id":
+            _skeletonId = RLong.parse(value);
             break;
          case "full_code":
             _fullCode = value;
+            break;
+         case "code":
+            _code = value;
             break;
          case "label":
             _label = value;
@@ -786,21 +786,21 @@ public class FDataResourceModelSkeletonSkinUnit
                __modelId = RLong.parse(value);
                _modelId = __modelId;
                break;
-            case "skeleton_id":
-               __skeletonId = RLong.parse(value);
-               _skeletonId = __skeletonId;
-               break;
             case "mesh_id":
                __meshId = RLong.parse(value);
                _meshId = __meshId;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
+            case "skeleton_id":
+               __skeletonId = RLong.parse(value);
+               _skeletonId = __skeletonId;
                break;
             case "full_code":
                __fullCode = value;
                _fullCode = __fullCode;
+               break;
+            case "code":
+               __code = value;
+               _code = __code;
                break;
             case "label":
                __label = value;
@@ -848,10 +848,10 @@ public class FDataResourceModelSkeletonSkinUnit
       row.set("userId", _userId);
       row.set("projectId", _projectId);
       row.set("modelId", _modelId);
-      row.set("skeletonId", _skeletonId);
       row.set("meshId", _meshId);
-      row.set("code", _code);
+      row.set("skeletonId", _skeletonId);
       row.set("fullCode", _fullCode);
+      row.set("code", _code);
       row.set("label", _label);
       row.set("content", _content);
       row.set("note", _note);
@@ -875,10 +875,10 @@ public class FDataResourceModelSkeletonSkinUnit
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
-      map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("meshId", RLong.toString(_meshId));
-      map.put("code", _code);
+      map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("fullCode", _fullCode);
+      map.put("code", _code);
       map.put("label", _label);
       map.put("content", _content);
       map.put("note", _note);

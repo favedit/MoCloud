@@ -75,6 +75,16 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
          long objectId);
 
    //============================================================
+   // <T>根据编号查找唯一编号。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param objectId 对象编号
+   // @return 唯一编号
+   //============================================================
+   String findGuid(ILogicContext logicContext,
+                   long objectId);
+
+   //============================================================
    // <T>根据唯一码查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境

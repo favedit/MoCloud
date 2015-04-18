@@ -10,7 +10,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
+import org.mo.content.engine3d.core.template.IResTemplateConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -37,7 +37,7 @@ public class FTemplateServlet
 
    // 资源模板接口
    @ALink
-   protected IRs3TemplateConsole _templateConsole;
+   protected IResTemplateConsole _templateConsole;
 
    //============================================================
    // <T>逻辑处理。</T>

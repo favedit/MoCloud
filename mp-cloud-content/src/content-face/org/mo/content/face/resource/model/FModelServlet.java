@@ -20,7 +20,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
-import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
+import org.mo.content.engine3d.core.model.IResModelMeshConsole;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.mime.stl.FStlFile;
@@ -61,7 +61,7 @@ public class FModelServlet
 
    // 资源网格接口
    @ALink
-   protected IRs3ModelMeshConsole _meshConsole;
+   protected IResModelMeshConsole _meshConsole;
 
    // 资源网格接口
    @ALink

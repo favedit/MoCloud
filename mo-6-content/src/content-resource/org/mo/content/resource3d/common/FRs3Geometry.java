@@ -272,4 +272,24 @@ public class FRs3Geometry
       indexStream.setData(faceStream.toArray());
       pushStream(indexStream);
    }
+
+   //============================================================
+   // <T>从数据单元中导入配置。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void build(){
+      FRs3Stream stream = findStream("position");
+      if(stream != null){
+         _outline.setMin();
+         FByteStream data = new FByteStream(stream.data());
+         int count = stream.dataCount();
+         for(int n = 0; n < count; n++){
+            float x = data.readFloat();
+            float y = data.readFloat();
+            float z = data.readFloat();
+            _outline.merge(x, y, z);
+         }
+      }
+   }
 }

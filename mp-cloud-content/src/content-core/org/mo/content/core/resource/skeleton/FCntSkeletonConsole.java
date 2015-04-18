@@ -1,6 +1,6 @@
 package org.mo.content.core.resource.skeleton;
 
-import org.mo.content.engine3d.core.model.IRs3ModelMeshStreamConsole;
+import org.mo.content.engine3d.core.model.IResModelMeshStreamConsole;
 
 import org.mo.core.aop.face.ALink;
 
@@ -13,5 +13,5 @@ public class FCntSkeletonConsole
 {
    // 存储管理接口
    @ALink
-   protected IRs3ModelMeshStreamConsole _streamConsole;
+   protected IResModelMeshStreamConsole _streamConsole;
 }

@@ -161,7 +161,7 @@ public class FPreviewServlet
       }
       //............................................................
       // 读取数据（数据需要上下颠倒）
-      FByteStream stream = new FByteStream(Integer.BYTES * width * height);
+      FByteStream stream = new FByteStream(4 * width * height);
       stream.loadStream(request.inputStream());
       byte[] uploadData = stream.memory();
       int[] pixelData = new int[width * height];

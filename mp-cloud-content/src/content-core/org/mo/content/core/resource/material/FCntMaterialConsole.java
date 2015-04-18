@@ -9,9 +9,9 @@ import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.content.engine3d.core.bitmap.IRs3BitmapConsole;
-import org.mo.content.engine3d.core.material.FRs3MaterialConsole;
-import org.mo.content.engine3d.core.material.IRs3MaterialBitmapConsole;
+import org.mo.content.engine3d.core.bitmap.IResBitmapConsole;
+import org.mo.content.engine3d.core.material.FResMaterialConsole;
+import org.mo.content.engine3d.core.material.IResMaterialBitmapConsole;
 import org.mo.content.resource3d.texture.FRs3TextureBitmapPack;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -21,7 +21,7 @@ import org.mo.eng.image.FImage;
 // <T>内容材质控制台。</T>
 //============================================================
 public class FCntMaterialConsole
-      extends FRs3MaterialConsole
+      extends FResMaterialConsole
       implements
          ICntMaterialConsole
 {
@@ -31,11 +31,11 @@ public class FCntMaterialConsole
 
    // 资源纹理控制台
    @ALink
-   protected IRs3BitmapConsole _bitmapConsole;
+   protected IResBitmapConsole _bitmapConsole;
 
    // 资源材质纹理控制台
    @ALink
-   protected IRs3MaterialBitmapConsole _materialBitmapConsole;
+   protected IResMaterialBitmapConsole _materialBitmapConsole;
 
    //============================================================
    // <T>生成纹理位图。</T>

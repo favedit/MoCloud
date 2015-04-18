@@ -6,7 +6,7 @@ import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.FObject;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
-import org.mo.content.engine3d.core.model.IRs3ModelMeshConsole;
+import org.mo.content.engine3d.core.model.IResModelMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -44,7 +44,7 @@ public class FMeshServlet
 
    // 资源网格接口
    @ALink
-   protected IRs3ModelMeshConsole _meshConsole;
+   protected IResModelMeshConsole _meshConsole;
 
    // 资源网格接口
    @ALink

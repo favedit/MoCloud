@@ -50,14 +50,14 @@ public class FDataResourceModelAnimationTrackLogic
    // 字段模型编号的定义。
    public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
 
+   // 字段网格编号的定义。
+   public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
+
    // 字段骨骼编号的定义。
    public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
 
    // 字段动画编号的定义。
    public final static SLogicFieldInfo ANIMATION_ID = new SLogicFieldInfo("ANIMATION_ID");
-
-   // 字段网格编号的定义。
-   public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
 
    // 字段骨头索引的定义。
    public final static SLogicFieldInfo BONE_INDEX = new SLogicFieldInfo("BONE_INDEX");
@@ -93,7 +93,7 @@ public class FDataResourceModelAnimationTrackLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`SKELETON_ID`,`ANIMATION_ID`,`MESH_ID`,`BONE_INDEX`,`CODE`,`LABEL`,`FRAME_TICK`,`FRAME_COUNT`,`FRAME_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`MESH_ID`,`SKELETON_ID`,`ANIMATION_ID`,`BONE_INDEX`,`CODE`,`LABEL`,`FRAME_TICK`,`FRAME_COUNT`,`FRAME_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源模型动画跟踪表逻辑单元。</T>
@@ -688,9 +688,9 @@ public class FDataResourceModelAnimationTrackLogic
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`MODEL_ID`");
+      cmd.append(",`MESH_ID`");
       cmd.append(",`SKELETON_ID`");
       cmd.append(",`ANIMATION_ID`");
-      cmd.append(",`MESH_ID`");
       cmd.append(",`BONE_INDEX`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
@@ -734,6 +734,13 @@ public class FDataResourceModelAnimationTrackLogic
          cmd.append(modelId);
       }
       cmd.append(',');
+      long meshId = unit.meshId();
+      if(meshId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(meshId);
+      }
+      cmd.append(',');
       long skeletonId = unit.skeletonId();
       if(skeletonId == 0){
          cmd.append("NULL");
@@ -746,13 +753,6 @@ public class FDataResourceModelAnimationTrackLogic
          cmd.append("NULL");
       }else{
          cmd.append(animationId);
-      }
-      cmd.append(',');
-      long meshId = unit.meshId();
-      if(meshId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(meshId);
       }
       cmd.append(',');
       cmd.append(unit.boneIndex());
@@ -890,6 +890,15 @@ public class FDataResourceModelAnimationTrackLogic
             cmd.append(modelId);
          }
       }
+      if(unit.isMeshIdChanged()){
+         cmd.append(",`MESH_ID`=");
+         long meshId = unit.meshId();
+         if(meshId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(meshId);
+         }
+      }
       if(unit.isSkeletonIdChanged()){
          cmd.append(",`SKELETON_ID`=");
          long skeletonId = unit.skeletonId();
@@ -906,15 +915,6 @@ public class FDataResourceModelAnimationTrackLogic
             cmd.append("NULL");
          }else{
             cmd.append(animationId);
-         }
-      }
-      if(unit.isMeshIdChanged()){
-         cmd.append(",`MESH_ID`=");
-         long meshId = unit.meshId();
-         if(meshId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(meshId);
          }
       }
       if(unit.isBoneIndexChanged()){

@@ -54,6 +54,12 @@ public class FDataResourceModelAnimationTrackUnit
    // 字段模型编号的定义。
    protected long _modelId;
 
+   // 存储字段网格编号的定义。
+   private long __meshId;
+
+   // 字段网格编号的定义。
+   protected long _meshId;
+
    // 存储字段骨骼编号的定义。
    private long __skeletonId;
 
@@ -65,12 +71,6 @@ public class FDataResourceModelAnimationTrackUnit
 
    // 字段动画编号的定义。
    protected long _animationId;
-
-   // 存储字段网格编号的定义。
-   private long __meshId;
-
-   // 字段网格编号的定义。
-   protected long _meshId;
 
    // 存储字段骨头索引的定义。
    private int __boneIndex;
@@ -340,6 +340,44 @@ public class FDataResourceModelAnimationTrackUnit
    }
 
    //============================================================
+   // <T>判断网格编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMeshIdChanged(){
+      return __meshId != _meshId;
+   }
+
+   //============================================================
+   // <T>获得网格编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long meshId(){
+      return _meshId;
+   }
+
+   //============================================================
+   // <T>获得网格编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataResourceModelMeshUnit mesh(){
+      FDataResourceModelMeshLogic logic = _logicContext.findLogic(FDataResourceModelMeshLogic.class);
+      FDataResourceModelMeshUnit unit = logic.find(_meshId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置网格编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMeshId(long value){
+      _meshId = value;
+   }
+
+   //============================================================
    // <T>判断骨骼编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -413,44 +451,6 @@ public class FDataResourceModelAnimationTrackUnit
    //============================================================
    public void setAnimationId(long value){
       _animationId = value;
-   }
-
-   //============================================================
-   // <T>判断网格编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isMeshIdChanged(){
-      return __meshId != _meshId;
-   }
-
-   //============================================================
-   // <T>获得网格编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long meshId(){
-      return _meshId;
-   }
-
-   //============================================================
-   // <T>获得网格编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelMeshUnit mesh(){
-      FDataResourceModelMeshLogic logic = _logicContext.findLogic(FDataResourceModelMeshLogic.class);
-      FDataResourceModelMeshUnit unit = logic.find(_meshId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置网格编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setMeshId(long value){
-      _meshId = value;
    }
 
    //============================================================
@@ -771,12 +771,12 @@ public class FDataResourceModelAnimationTrackUnit
             return Long.toString(_projectId);
          case "model_id":
             return Long.toString(_modelId);
+         case "mesh_id":
+            return Long.toString(_meshId);
          case "skeleton_id":
             return Long.toString(_skeletonId);
          case "animation_id":
             return Long.toString(_animationId);
-         case "mesh_id":
-            return Long.toString(_meshId);
          case "bone_index":
             return RInteger.toString(_boneIndex);
          case "code":
@@ -831,14 +831,14 @@ public class FDataResourceModelAnimationTrackUnit
          case "model_id":
             _modelId = RLong.parse(value);
             break;
+         case "mesh_id":
+            _meshId = RLong.parse(value);
+            break;
          case "skeleton_id":
             _skeletonId = RLong.parse(value);
             break;
          case "animation_id":
             _animationId = RLong.parse(value);
-            break;
-         case "mesh_id":
-            _meshId = RLong.parse(value);
             break;
          case "bone_index":
             _boneIndex = RInteger.parse(value);
@@ -912,6 +912,10 @@ public class FDataResourceModelAnimationTrackUnit
                __modelId = RLong.parse(value);
                _modelId = __modelId;
                break;
+            case "mesh_id":
+               __meshId = RLong.parse(value);
+               _meshId = __meshId;
+               break;
             case "skeleton_id":
                __skeletonId = RLong.parse(value);
                _skeletonId = __skeletonId;
@@ -919,10 +923,6 @@ public class FDataResourceModelAnimationTrackUnit
             case "animation_id":
                __animationId = RLong.parse(value);
                _animationId = __animationId;
-               break;
-            case "mesh_id":
-               __meshId = RLong.parse(value);
-               _meshId = __meshId;
                break;
             case "bone_index":
                __boneIndex = RInteger.parse(value);
@@ -986,9 +986,9 @@ public class FDataResourceModelAnimationTrackUnit
       row.set("userId", _userId);
       row.set("projectId", _projectId);
       row.set("modelId", _modelId);
+      row.set("meshId", _meshId);
       row.set("skeletonId", _skeletonId);
       row.set("animationId", _animationId);
-      row.set("meshId", _meshId);
       row.set("boneIndex", _boneIndex);
       row.set("code", _code);
       row.set("label", _label);
@@ -1016,9 +1016,9 @@ public class FDataResourceModelAnimationTrackUnit
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
+      map.put("meshId", RLong.toString(_meshId));
       map.put("skeletonId", RLong.toString(_skeletonId));
       map.put("animationId", RLong.toString(_animationId));
-      map.put("meshId", RLong.toString(_meshId));
       map.put("boneIndex", RInteger.toString(_boneIndex));
       map.put("code", _code);
       map.put("label", _label);

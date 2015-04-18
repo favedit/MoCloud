@@ -6,7 +6,7 @@ import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
-import org.mo.content.engine3d.core.model.IRs3ModelConsole;
+import org.mo.content.engine3d.core.model.IResModelConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -18,7 +18,8 @@ public class RResModelImport
    // <T>导入处理。</T>
    //============================================================
    public static void importProcess() throws Exception{
-      String path = RRs3Configuration.RootPath + "/MoResource/Export/model/";
+      //String path = RRs3Configuration.RootPath + "/MoResource/Export/model/";
+      String path = RRs3Configuration.RootPath + "/MoScript/source/assets/model/";
       // 设置数据
       FStrings filePaths = new FStrings();
       for(String fileName : RFile.listFiles(path)){
@@ -33,7 +34,7 @@ public class RResModelImport
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3ModelConsole modelConsole = RAop.find(IRs3ModelConsole.class);
+         IResModelConsole modelConsole = RAop.find(IResModelConsole.class);
          for(String fileName : filePaths){
             String fullName = path + fileName;
             modelConsole.importModel(logicContext, session, fullName + ".msh");

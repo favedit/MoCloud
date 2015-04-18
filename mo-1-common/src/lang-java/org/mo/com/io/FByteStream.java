@@ -40,6 +40,15 @@ public class FByteStream
    // <T>构造字节数据流。</T>
    //
    // @param memory 内存
+   //============================================================
+   public FByteStream(byte[] memory){
+      super(memory, memory.length);
+   }
+
+   //============================================================
+   // <T>构造字节数据流。</T>
+   //
+   // @param memory 内存
    // @param length 长度
    //============================================================
    public FByteStream(byte[] memory,

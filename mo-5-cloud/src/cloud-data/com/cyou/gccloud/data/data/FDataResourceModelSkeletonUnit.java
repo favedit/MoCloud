@@ -53,17 +53,17 @@ public class FDataResourceModelSkeletonUnit
    // 字段模型编号的定义。
    protected long _modelId;
 
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
    // 存储字段全代码的定义。
    private String __fullCode;
 
    // 字段全代码的定义。
    protected String _fullCode;
+
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
 
    // 存储字段名称的定义。
    private String __label;
@@ -298,33 +298,6 @@ public class FDataResourceModelSkeletonUnit
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
-   }
-
-   //============================================================
-   // <T>获得代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
    // <T>判断全代码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -349,6 +322,33 @@ public class FDataResourceModelSkeletonUnit
    //============================================================
    public void setFullCode(String value){
       _fullCode = value;
+   }
+
+   //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================
@@ -561,10 +561,10 @@ public class FDataResourceModelSkeletonUnit
             return Long.toString(_projectId);
          case "model_id":
             return Long.toString(_modelId);
-         case "code":
-            return _code;
          case "full_code":
             return _fullCode;
+         case "code":
+            return _code;
          case "label":
             return _label;
          case "content":
@@ -611,11 +611,11 @@ public class FDataResourceModelSkeletonUnit
          case "model_id":
             _modelId = RLong.parse(value);
             break;
-         case "code":
-            _code = value;
-            break;
          case "full_code":
             _fullCode = value;
+            break;
+         case "code":
+            _code = value;
             break;
          case "label":
             _label = value;
@@ -677,13 +677,13 @@ public class FDataResourceModelSkeletonUnit
                __modelId = RLong.parse(value);
                _modelId = __modelId;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
             case "full_code":
                __fullCode = value;
                _fullCode = __fullCode;
+               break;
+            case "code":
+               __code = value;
+               _code = __code;
                break;
             case "label":
                __label = value;
@@ -731,8 +731,8 @@ public class FDataResourceModelSkeletonUnit
       row.set("userId", _userId);
       row.set("projectId", _projectId);
       row.set("modelId", _modelId);
-      row.set("code", _code);
       row.set("fullCode", _fullCode);
+      row.set("code", _code);
       row.set("label", _label);
       row.set("content", _content);
       row.set("note", _note);
@@ -756,8 +756,8 @@ public class FDataResourceModelSkeletonUnit
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
       map.put("modelId", RLong.toString(_modelId));
-      map.put("code", _code);
       map.put("fullCode", _fullCode);
+      map.put("code", _code);
       map.put("label", _label);
       map.put("content", _content);
       map.put("note", _note);

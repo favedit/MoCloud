@@ -23,6 +23,13 @@ public class RMongoDrop
       console.drop(EGcStorageCatalog.CacheResourceModel);
       console.drop(EGcStorageCatalog.CacheResourceTemplate);
       console.drop(EGcStorageCatalog.CacheResourceScene);
+      //
+      console.drop(EGcStorageCatalog.ResourcePreview);
+      console.drop(EGcStorageCatalog.ResourceBitmap);
+      console.drop(EGcStorageCatalog.ResourceModelMeshStream);
+      console.drop(EGcStorageCatalog.ResourceModelMeshTrack);
+      console.drop(EGcStorageCatalog.ResourceModelSkeletonSkinStream);
+      console.drop(EGcStorageCatalog.ResourceModelAnimationTrack);
    }
 
    //============================================================

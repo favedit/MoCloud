@@ -143,6 +143,23 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    }
 
    //============================================================
+   // <T>根据编号查找唯一编号。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param objectId 对象编号
+   // @return 唯一编号
+   //============================================================
+   @Override
+   public String findGuid(ILogicContext logicContext,
+                          long objectId){
+      U unit = find(logicContext, objectId);
+      if(unit != null){
+         return unit.get("guid");
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>根据唯一码查找一个数据单元。</T>
    //
    // @param logicContext 逻辑环境

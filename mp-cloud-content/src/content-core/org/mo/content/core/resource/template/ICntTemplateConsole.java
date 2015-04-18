@@ -1,7 +1,7 @@
 package org.mo.content.core.resource.template;
 
 import org.mo.com.lang.EResult;
-import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
+import org.mo.content.engine3d.core.template.IResTemplateConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -9,7 +9,7 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 public interface ICntTemplateConsole
       extends
-         IRs3TemplateConsole
+         IResTemplateConsole
 {
 
    //============================================================

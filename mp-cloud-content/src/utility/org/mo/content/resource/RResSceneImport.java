@@ -6,7 +6,7 @@ import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
-import org.mo.content.engine3d.core.scene.IRs3SceneConsole;
+import org.mo.content.engine3d.core.scene.IResSceneConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -30,7 +30,7 @@ public class RResSceneImport
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3SceneConsole sceneConsole = RAop.find(IRs3SceneConsole.class);
+         IResSceneConsole sceneConsole = RAop.find(IResSceneConsole.class);
          for(String fileName : filePaths){
             sceneConsole.importResource(logicContext, session, RFile.format(path + fileName));
          }

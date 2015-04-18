@@ -4,6 +4,7 @@
   <FieldRecordId _uuid="5291e3b3-c07f-40d7-88c6-f78c1eefd8de" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
   <FieldRecordId _uuid="e70f4f1b-a992-425b-bb22-f1a4983bb084" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource.model" />
   <FieldRecordId _uuid="64e8814d-6746-4006-a3bd-06d14b0c293e" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource.model.skeleton" />
+  <FieldString _uuid="0ab7be50-1dcf-468c-8314-4f5bb4005201" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
   <FieldString _uuid="95149283-9964-4a2e-b008-719dec973317" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="64613cd1-e2a5-418e-888d-32bf78b107cd" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
   <FieldInteger _uuid="865d1dbf-68ee-4329-a9ad-1212e905b4b7" name="frame_count" label="M#12cn13帧总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FRAME_COUNT" />

@@ -50,17 +50,17 @@ public class FDataResourceModelSkeletonSkinLogic
    // 字段模型编号的定义。
    public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
 
-   // 字段骨骼编号的定义。
-   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
-
    // 字段网格编号的定义。
    public final static SLogicFieldInfo MESH_ID = new SLogicFieldInfo("MESH_ID");
 
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+   // 字段骨骼编号的定义。
+   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
 
    // 字段全代码的定义。
    public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
+
+   // 字段代码的定义。
+   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
@@ -84,7 +84,7 @@ public class FDataResourceModelSkeletonSkinLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`SKELETON_ID`,`MESH_ID`,`CODE`,`FULL_CODE`,`LABEL`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`MESH_ID`,`SKELETON_ID`,`FULL_CODE`,`CODE`,`LABEL`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造资源网格骨骼蒙皮表逻辑单元。</T>
@@ -679,10 +679,10 @@ public class FDataResourceModelSkeletonSkinLogic
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`MODEL_ID`");
-      cmd.append(",`SKELETON_ID`");
       cmd.append(",`MESH_ID`");
-      cmd.append(",`CODE`");
+      cmd.append(",`SKELETON_ID`");
       cmd.append(",`FULL_CODE`");
+      cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
@@ -722,13 +722,6 @@ public class FDataResourceModelSkeletonSkinLogic
          cmd.append(modelId);
       }
       cmd.append(',');
-      long skeletonId = unit.skeletonId();
-      if(skeletonId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(skeletonId);
-      }
-      cmd.append(',');
       long meshId = unit.meshId();
       if(meshId == 0){
          cmd.append("NULL");
@@ -736,13 +729,11 @@ public class FDataResourceModelSkeletonSkinLogic
          cmd.append(meshId);
       }
       cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
+      long skeletonId = unit.skeletonId();
+      if(skeletonId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
+         cmd.append(skeletonId);
       }
       cmd.append(',');
       String fullCode = unit.fullCode();
@@ -751,6 +742,15 @@ public class FDataResourceModelSkeletonSkinLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(fullCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String code = unit.code();
+      if(RString.isEmpty(code)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(code));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -881,15 +881,6 @@ public class FDataResourceModelSkeletonSkinLogic
             cmd.append(modelId);
          }
       }
-      if(unit.isSkeletonIdChanged()){
-         cmd.append(",`SKELETON_ID`=");
-         long skeletonId = unit.skeletonId();
-         if(skeletonId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(skeletonId);
-         }
-      }
       if(unit.isMeshIdChanged()){
          cmd.append(",`MESH_ID`=");
          long meshId = unit.meshId();
@@ -899,15 +890,13 @@ public class FDataResourceModelSkeletonSkinLogic
             cmd.append(meshId);
          }
       }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
+      if(unit.isSkeletonIdChanged()){
+         cmd.append(",`SKELETON_ID`=");
+         long skeletonId = unit.skeletonId();
+         if(skeletonId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
+            cmd.append(skeletonId);
          }
       }
       if(unit.isFullCodeChanged()){
@@ -918,6 +907,17 @@ public class FDataResourceModelSkeletonSkinLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(fullCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCodeChanged()){
+         cmd.append(",`CODE`=");
+         String code = unit.code();
+         if(RString.isEmpty(code)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(code));
             cmd.append('\'');
          }
       }

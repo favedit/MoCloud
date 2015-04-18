@@ -63,6 +63,7 @@ public class FRs3Model
       if(_meshs == null){
          _meshs = new FObjects<FRs3ModelMesh>(FRs3ModelMesh.class);
       }
+      mesh.setModel(this);
       _meshs.push(mesh);
    }
 
@@ -227,6 +228,9 @@ public class FRs3Model
       }
       if(hasMesh()){
          for(FRs3ModelMesh mesh : _meshs){
+            // 构建处理
+            mesh.build();
+            // 建立渲染信息
             FRs3ModelRenderable renderable = new FRs3ModelRenderable();
             renderable.setMeshGuid(mesh.guid());
             _display.pushRenderable(renderable);
@@ -253,7 +257,7 @@ public class FRs3Model
          mesh.importData(input);
          pushMesh(mesh);
       }
-      // 构件内部信息
+      // 构建处理
       build();
    }
 

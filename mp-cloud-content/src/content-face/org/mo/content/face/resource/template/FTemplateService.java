@@ -3,7 +3,7 @@ package org.mo.content.face.resource.template;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.engine3d.core.material.IRs3MaterialConsole;
+import org.mo.content.engine3d.core.material.IResMaterialConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -19,7 +19,7 @@ public class FTemplateService
          ITemplateService
 {
    @ALink
-   protected IRs3MaterialConsole _materialConsole;
+   protected IResMaterialConsole _materialConsole;
 
    //============================================================
    // <T>构造资源3D模板服务。</T>

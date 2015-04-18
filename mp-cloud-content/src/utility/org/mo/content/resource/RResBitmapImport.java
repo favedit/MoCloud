@@ -6,7 +6,7 @@ import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
-import org.mo.content.engine3d.core.bitmap.IRs3BitmapConsole;
+import org.mo.content.engine3d.core.bitmap.IResBitmapConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -30,7 +30,7 @@ public class RResBitmapImport
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3BitmapConsole bitmapConsole = RAop.find(IRs3BitmapConsole.class);
+         IResBitmapConsole bitmapConsole = RAop.find(IResBitmapConsole.class);
          for(String fileName : filePaths){
             bitmapConsole.importResource(logicContext, session, path + fileName);
          }

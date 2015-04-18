@@ -6,7 +6,7 @@ import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
-import org.mo.content.engine3d.core.template.IRs3TemplateConsole;
+import org.mo.content.engine3d.core.template.IResTemplateConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -33,7 +33,7 @@ public class RResTemplateImport
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3TemplateConsole templateConsole = RAop.find(IRs3TemplateConsole.class);
+         IResTemplateConsole templateConsole = RAop.find(IResTemplateConsole.class);
          for(String fileName : filePaths){
             templateConsole.importResource(logicContext, session, path + fileName + ".xml");
          }

@@ -1,6 +1,5 @@
 package org.mo.com.geom;
 
-import org.mo.com.geom.SFloatPoint3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
@@ -15,6 +14,36 @@ public class SFloatOutline3
 
    // 最大顶点
    public SFloatPoint3 max = new SFloatPoint3();
+
+   //============================================================
+   // <T>设置为最小值。</T>
+   //============================================================
+   public void setMin(){
+      max.setMin();
+      min.setMax();
+   }
+
+   //============================================================
+   // <T>设置为最大值。</T>
+   //============================================================
+   public void setMax(){
+      min.setMin();
+      max.setMax();
+   }
+
+   //============================================================
+   // <T>合并轮廓。</T>
+   //
+   // @param x X坐标
+   // @param y Y坐标
+   // @param z Z坐标
+   //============================================================
+   public void merge(float x,
+                     float y,
+                     float z){
+      min.mergeMin(x, y, z);
+      max.mergeMax(x, y, z);
+   }
 
    //============================================================
    // <T>序列化数据到输出流。</T>
@@ -50,22 +79,6 @@ public class SFloatOutline3
    // @param xconfig 配置信息
    //============================================================
    public void saveConfig(FXmlNode xconfig){
-   }
-
-   //============================================================
-   // <T>从配置信息中导入配置。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   public void importConfig(FXmlNode xconfig){
-   }
-
-   //============================================================
-   // <T>从配置信息中导入配置。</T>
-   //
-   // @param xconfig 配置信息
-   //============================================================
-   public void parse(String value){
    }
 
    //============================================================

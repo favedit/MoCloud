@@ -2,7 +2,7 @@ package org.mo.content.dbexport;
 
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
-import org.mo.content.engine3d.core.storage.IRs3StorageConsole;
+import org.mo.content.engine3d.core.storage.IResStorageConsole;
 import org.mo.content.resource3d.RRs3TextureImport;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
@@ -20,7 +20,7 @@ public class RDbExportData
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
-         IRs3StorageConsole storageConsole = RAop.find(IRs3StorageConsole.class);
+         IResStorageConsole storageConsole = RAop.find(IResStorageConsole.class);
          storageConsole.exportData(logicContext, path);
          //storageConsole.exportStorage(logicContext, path);
       }

@@ -2,7 +2,7 @@ package org.mo.content.face.resource.texture;
 
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.FObject;
-import org.mo.content.engine3d.core.texture.IRs3TextureConsole;
+import org.mo.content.engine3d.core.texture.IResTextureConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -29,7 +29,7 @@ public class FBitmapServlet
 
    // 纹理位图接口
    @ALink
-   protected IRs3TextureConsole _textureConsole;
+   protected IResTextureConsole _textureConsole;
 
    //============================================================
    // <T>逻辑处理。</T>

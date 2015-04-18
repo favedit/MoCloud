@@ -3,14 +3,14 @@ package org.mo.content.core.resource.template;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.content.engine3d.core.template.FRs3TemplateConsole;
+import org.mo.content.engine3d.core.template.FResTemplateConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>内容模板控制台。</T>
 //============================================================
 public class FCntTemplateConsole
-      extends FRs3TemplateConsole
+      extends FResTemplateConsole
       implements
          ICntTemplateConsole
 {

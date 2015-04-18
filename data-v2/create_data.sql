@@ -392,8 +392,8 @@ CREATE TABLE `DT_RES_MODEL_SKELETON`
    `USER_ID`                       BIGINT, 
    `PROJECT_ID`                    BIGINT, 
    `MODEL_ID`                      BIGINT, 
-   `CODE`                          VARCHAR(80), 
    `FULL_CODE`                     VARCHAR(200), 
+   `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `CONTENT`                       TEXT, 
    `NOTE`                          VARCHAR(2000), 
@@ -424,10 +424,10 @@ CREATE TABLE `DT_RES_MODEL_SKELETON_SKIN`
    `USER_ID`                       BIGINT, 
    `PROJECT_ID`                    BIGINT, 
    `MODEL_ID`                      BIGINT, 
-   `SKELETON_ID`                   BIGINT NOT NULL, 
    `MESH_ID`                       BIGINT, 
-   `CODE`                          VARCHAR(80), 
+   `SKELETON_ID`                   BIGINT NOT NULL, 
    `FULL_CODE`                     VARCHAR(200), 
+   `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `CONTENT`                       TEXT, 
    `NOTE`                          VARCHAR(2000), 
@@ -449,11 +449,11 @@ ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_PRJ
 ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_MOD 
       FOREIGN KEY (`MODEL_ID`) REFERENCES DT_RES_MODEL(`OUID`); 
 
-ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_SKT 
-      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RES_MODEL_SKELETON(`OUID`); 
-
 ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_MSH 
       FOREIGN KEY (`MESH_ID`) REFERENCES DT_RES_MODEL_MESH(`OUID`); 
+
+ALTER TABLE DT_RES_MODEL_SKELETON_SKIN ADD CONSTRAINT DT_RES_MOD_SKT_SKN_FK_SKT 
+      FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RES_MODEL_SKELETON(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource.Model.Skeleton.Skin.Stream]
@@ -519,6 +519,7 @@ CREATE TABLE `DT_RES_MODEL_ANIMATION`
    `PROJECT_ID`                    BIGINT, 
    `MODEL_ID`                      BIGINT, 
    `SKELETON_ID`                   BIGINT, 
+   `FULL_CODE`                     VARCHAR(200), 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
    `FRAME_COUNT`                   INTEGER, 
@@ -558,9 +559,9 @@ CREATE TABLE `DT_RES_MODEL_ANIMATION_TRACK`
    `USER_ID`                       BIGINT, 
    `PROJECT_ID`                    BIGINT, 
    `MODEL_ID`                      BIGINT, 
+   `MESH_ID`                       BIGINT, 
    `SKELETON_ID`                   BIGINT, 
    `ANIMATION_ID`                  BIGINT NOT NULL, 
-   `MESH_ID`                       BIGINT, 
    `BONE_INDEX`                    INTEGER, 
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(200), 
@@ -586,14 +587,14 @@ ALTER TABLE DT_RES_MODEL_ANIMATION_TRACK ADD CONSTRAINT DT_RES_MOD_ANM_TCK_FK_PR
 ALTER TABLE DT_RES_MODEL_ANIMATION_TRACK ADD CONSTRAINT DT_RES_MOD_ANM_TCK_FK_MOD 
       FOREIGN KEY (`MODEL_ID`) REFERENCES DT_RES_MODEL(`OUID`); 
 
+ALTER TABLE DT_RES_MODEL_ANIMATION_TRACK ADD CONSTRAINT DT_RES_MOD_ANM_TCK_FK_MSH 
+      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RES_MODEL_MESH(`OUID`); 
+
 ALTER TABLE DT_RES_MODEL_ANIMATION_TRACK ADD CONSTRAINT DT_RES_MOD_ANM_TCK_FK_SKT 
       FOREIGN KEY (`SKELETON_ID`) REFERENCES DT_RES_MODEL_SKELETON(`OUID`); 
 
 ALTER TABLE DT_RES_MODEL_ANIMATION_TRACK ADD CONSTRAINT DT_RES_MOD_ANM_TCK_FK_ANM 
       FOREIGN KEY (`ANIMATION_ID`) REFERENCES DT_RES_MODEL_ANIMATION(`OUID`); 
-
-ALTER TABLE DT_RES_MODEL_ANIMATION_TRACK ADD CONSTRAINT DT_RES_MOD_ANM_TCK_FK_MSH 
-      FOREIGN KEY (`MESH_ID`) REFERENCES DT_RES_MODEL_MESH(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Resource.Model.Animation.Action]

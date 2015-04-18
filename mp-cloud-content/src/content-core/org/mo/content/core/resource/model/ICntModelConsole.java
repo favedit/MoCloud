@@ -1,7 +1,7 @@
 package org.mo.content.core.resource.model;
 
 import org.mo.com.lang.EResult;
-import org.mo.content.engine3d.core.model.IRs3ModelConsole;
+import org.mo.content.engine3d.core.model.IResModelConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -9,7 +9,7 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 public interface ICntModelConsole
       extends
-         IRs3ModelConsole
+         IResModelConsole
 {
    //============================================================
    // <T>根据资源编号删除模型信息。</T>

@@ -3,14 +3,14 @@ package org.mo.content.core.resource.model;
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.content.engine3d.core.model.FRs3ModelConsole;
+import org.mo.content.engine3d.core.model.FResModelConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
 // <T>内容模型控制台。</T>
 //============================================================
 public class FCntModelConsole
-      extends FRs3ModelConsole
+      extends FResModelConsole
       implements
          ICntModelConsole
 {
