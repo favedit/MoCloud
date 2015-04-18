@@ -16,12 +16,12 @@ public class RResAllImport
       // 设置环境
       String configPath = RRs3Configuration.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Configuration.Config);
+      RAop.initialize(configPath + "/mp-cloud-content/src/config/" + RRs3Configuration.Config);
       // 导入处理
-      //      RRs3TextureImport.importProcess();
-      //      RRs3ModelImport.importProcess();
-      //      RRs3TemplateImport.importProcess();
-      //      RRs3SceneImport.importProcess();
+      RResBitmapImport.importProcess();
+      RResModelImport.importProcess();
+      RResTemplateImport.importProcess();
+      RResSceneImport.importProcess();
       // 释放环境
       RAop.release();
    }
