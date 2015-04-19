@@ -7,7 +7,6 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.data.ISqlDatasetReader;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
@@ -102,11 +101,12 @@ public class FResStorageConsole
          String name = xcollection.get("name");
          String storagePath = path + "/" + name;
          String dataName = xcollection.get("data_name");
+         String formatName = xcollection.get("format_name", "bin");
          String sql = "SELECT GUID FROM " + dataName;
          ISqlDatasetReader reader = connection.fetchReader(sql);
          for(FRow row : reader){
             String guid = row.get("guid");
-            _storageConsole.exportFile(name, guid, storagePath);
+            _storageConsole.exportFile(name, guid, formatName, storagePath);
          }
          reader.close();
          _logger.debug(this, "exportData", "Export dataset. (name={1}, data_name={2}, path={3})", name, dataName, storagePath);
@@ -150,22 +150,22 @@ public class FResStorageConsole
          String name = xcollection.get("name");
          String storagePath = path + "/" + name;
          String dataName = xcollection.get("data_name");
-         String fieldType = xcollection.get("field_type", null);
-         String fieldTypeLower = null;
+         String formatName = xcollection.get("format_name", "bin");
+         //String fieldTypeLower = null;
          String sql = "SELECT GUID FROM " + dataName;
-         if(!RString.isEmpty(fieldType)){
-            sql = "SELECT GUID," + fieldType + " FROM " + dataName;
-            fieldTypeLower = fieldType.toLowerCase();
-         }
+         //if(!RString.isEmpty(fieldType)){
+         //   sql = "SELECT GUID," + fieldType + " FROM " + dataName;
+         //   fieldTypeLower = fieldType.toLowerCase();
+         //}
          ISqlDatasetReader reader = connection.fetchReader(sql);
          for(FRow row : reader){
             String guid = row.get("guid");
-            String type = "bin";
-            if(!RString.isEmpty(fieldType)){
-               type = row.get(fieldTypeLower);
-            }
-            String fileName = storagePath + "/" + guid + "." + type;
-            _storageConsole.importFile(name, guid, type, fileName);
+            //String type = "bin";
+            //if(!RString.isEmpty(fieldType)){
+            //   type = row.get(fieldTypeLower);
+            //}
+            String fileName = storagePath + "/" + guid + "." + formatName;
+            _storageConsole.importFile(name, guid, formatName, fileName);
          }
          reader.close();
          _logger.debug(this, "exportData", "Export dataset. (name={1}, data_name={2}, path={3})", name, dataName, storagePath);

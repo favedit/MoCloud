@@ -44,23 +44,30 @@ public interface IGcStorageConsole
    boolean drop(String catalog);
 
    //============================================================
-   // <T>保存一个存储信息。</T>
+   // <T>导出一个存储内容为文件。</T>
    //
-   // @param storage 存储信息
+   // @param catalog 分类名称
+   // @param guid 唯一编号
+   // @param formatName 格式名称
+   // @param path 存储路径
    // @return 处理结果
    //============================================================
    EResult exportFile(String catalog,
                       String guid,
+                      String formatName,
                       String path);
 
    //============================================================
-   // <T>保存一个存储信息。</T>
+   // <T>导入一个文件为存储内容。</T>
    //
-   // @param storage 存储信息
+   // @param catalog 分类名称
+   // @param guid 唯一编号
+   // @param formatName 格式名称
+   // @param fileName 文件名称
    // @return 处理结果
    //============================================================
    EResult importFile(String catalog,
                       String guid,
-                      String type,
+                      String formatName,
                       String fileName);
 }

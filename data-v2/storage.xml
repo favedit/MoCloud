@@ -34,8 +34,8 @@
    </Database>
    <!-- 数据库传输 -->
    <Database type='mongodb'>
-      <Collection name='resource.preview' data_name='DT_RES_RESOURCE'/>
-      <Collection name='resource.bitmap' data_name='DT_RES_BITMAP'/>
+      <Collection name='resource.preview' data_name='DT_RES_RESOURCE' format_name='jpg'/>
+      <Collection name='resource.bitmap' data_name='DT_RES_BITMAP' format_name='jpg'/>
       <Collection name='resource.model.mesh.stream' data_name='DT_RES_MODEL_MESH_STREAM'/>
       <Collection name='resource.model.skeleton.skin.stream' data_name='DT_RES_MODEL_SKELETON_SKIN_STREAM'/>
       <Collection name='resource.model.animation.track' data_name='DT_RES_MODEL_ANIMATION_TRACK'/>

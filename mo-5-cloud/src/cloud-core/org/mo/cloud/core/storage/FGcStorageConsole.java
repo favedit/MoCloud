@@ -227,14 +227,18 @@ public class FGcStorageConsole
    }
 
    //============================================================
-   // <T>保存一个存储信息。</T>
+   // <T>导出一个存储内容为文件。</T>
    //
-   // @param storage 存储信息
+   // @param catalog 分类名称
+   // @param guid 唯一编号
+   // @param formatName 格式名称
+   // @param path 存储路径
    // @return 处理结果
    //============================================================
    @Override
    public EResult exportFile(String catalog,
                              String guid,
+                             String formatName,
                              String path){
       // 获得集合
       DBCollection collection = _database.getCollection(catalog);
@@ -246,10 +250,9 @@ public class FGcStorageConsole
          _logger.warn(this, "exportFile", "Data is not found. (catalog={1}, guid={2})", catalog, guid);
       }else{
          // 存储内容
-         String type = (String)item.get("type");
          byte[] data = (byte[])item.get("data");
          if(data != null){
-            String fileName = path + "/" + guid + "." + type;
+            String fileName = path + "/" + guid + "." + formatName;
             try(FByteFile file = new FByteFile()){
                file.assign(data, 0, data.length);
                file.saveToFile(fileName);
@@ -260,15 +263,18 @@ public class FGcStorageConsole
    }
 
    //============================================================
-   // <T>保存一个存储信息。</T>
+   // <T>导入一个文件为存储内容。</T>
    //
-   // @param storage 存储信息
+   // @param catalog 分类名称
+   // @param guid 唯一编号
+   // @param formatName 格式名称
+   // @param path 存储路径
    // @return 处理结果
    //============================================================
    @Override
    public EResult importFile(String catalog,
                              String guid,
-                             String type,
+                             String formatName,
                              String fileName){
       // 获得集合
       DBCollection collection = _database.getCollection(catalog);
@@ -280,7 +286,7 @@ public class FGcStorageConsole
             // 新建数据
             DBObject item = new BasicDBObject();
             item.put("guid", guid);
-            item.put("type", type);
+            item.put("type", formatName);
             item.put("data", file.toArray());
             // 更新处理
             collection.update(search, item, true, false);
