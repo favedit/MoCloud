@@ -9,7 +9,7 @@
          face  = 'org.mo.content.engine3d.core.storage.IResStorageConsole'
          class = 'org.mo.content.engine3d.core.storage.FResStorageConsole'
          scope = 'global'>
-      <Property name='config_file_name'>${application}/data-v2/storage.xml</Property>
+      <Property name='config_file_name'>${application}/data/storage.xml</Property>
       <Initialize name='initialize'/>
    </Component>
    

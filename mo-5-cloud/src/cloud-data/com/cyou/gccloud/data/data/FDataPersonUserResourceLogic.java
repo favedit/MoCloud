@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源信息表逻辑。</T>
+// <T>用户资源表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceResourceLogic
+public class FDataPersonUserResourceLogic
       extends FLogicTable
 {
-   // 资源信息表的定义。
+   // 用户资源表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源信息表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource.resource", "DT_RES_RESOURCE");
+   // 用户资源表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.user.resource", "DT_PSN_USER_RESOURCE");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -44,35 +44,8 @@ public class FDataResourceResourceLogic
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
-   // 字段项目编号的定义。
-   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
-
-   // 字段类型编号的定义。
-   public final static SLogicFieldInfo TYPE_ID = new SLogicFieldInfo("TYPE_ID");
-
-   // 字段目录编号的定义。
-   public final static SLogicFieldInfo CATALOG_ID = new SLogicFieldInfo("CATALOG_ID");
-
-   // 字段资源类型的定义。
-   public final static SLogicFieldInfo RESOURCE_CD = new SLogicFieldInfo("RESOURCE_CD");
-
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
-
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
-
-   // 字段分享类型的定义。
-   public final static SLogicFieldInfo SHARE_CD = new SLogicFieldInfo("SHARE_CD");
-
-   // 字段图标地址的定义。
-   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
-
-   // 字段是否有预览的定义。
-   public final static SLogicFieldInfo HAS_PREVIEW = new SLogicFieldInfo("HAS_PREVIEW");
-
-   // 字段描述的定义。
-   public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
+   // 字段资源编号的定义。
+   public final static SLogicFieldInfo RESOURCE_ID = new SLogicFieldInfo("RESOURCE_ID");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -90,25 +63,25 @@ public class FDataResourceResourceLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`TYPE_ID`,`CATALOG_ID`,`RESOURCE_CD`,`CODE`,`LABEL`,`SHARE_CD`,`ICON_URL`,`HAS_PREVIEW`,`DESCRIPTION`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`RESOURCE_ID`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造资源信息表逻辑单元。</T>
+   // <T>构造用户资源表逻辑单元。</T>
    //============================================================
-   public FDataResourceResourceLogic(){
+   public FDataPersonUserResourceLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResourceResourceUnit.class;
+      _classUnit = FDataPersonUserResourceUnit.class;
    }
 
    //============================================================
-   // <T>构造资源信息表逻辑单元。</T>
+   // <T>构造用户资源表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResourceResourceLogic(ILogicContext context){
+   public FDataPersonUserResourceLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResourceResourceUnit.class;
+      _classUnit = FDataPersonUserResourceUnit.class;
    }
 
    //============================================================
@@ -242,7 +215,7 @@ public class FDataResourceResourceLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResourceResourceUnit());
+            unit = (T)(new FDataPersonUserResourceUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -258,8 +231,8 @@ public class FDataResourceResourceLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResourceResourceUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResourceResourceUnit.class, guid);
+   public FDataPersonUserResourceUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataPersonUserResourceUnit.class, guid);
    }
 
    //============================================================
@@ -297,8 +270,8 @@ public class FDataResourceResourceLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResourceResourceUnit search(CharSequence whereSql){
-      return search(null, FDataResourceResourceUnit.class, whereSql);
+   public FDataPersonUserResourceUnit search(CharSequence whereSql){
+      return search(null, FDataPersonUserResourceUnit.class, whereSql);
    }
 
    //============================================================
@@ -335,7 +308,7 @@ public class FDataResourceResourceLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -346,8 +319,8 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(int pageSize,
+                                                           int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -359,9 +332,9 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(CharSequence whereSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(CharSequence whereSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -374,8 +347,8 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(CharSequence whereSql,
-                                                         CharSequence orderSql){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(CharSequence whereSql,
+                                                           CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -388,10 +361,10 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(CharSequence whereSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(CharSequence whereSql,
+                                                           CharSequence orderSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -405,11 +378,11 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(CharSequence fields,
-                                                         CharSequence whereSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(CharSequence fields,
+                                                           CharSequence whereSql,
+                                                           CharSequence orderSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -423,12 +396,12 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetch(CharSequence fields,
-                                                         CharSequence whereSql,
-                                                         CharSequence groupSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetch(CharSequence fields,
+                                                           CharSequence whereSql,
+                                                           CharSequence groupSql,
+                                                           CharSequence orderSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -569,10 +542,10 @@ public class FDataResourceResourceLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetchSql(CharSequence code,
-                                                            CharSequence sql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetchSql(CharSequence code,
+                                                              CharSequence sql,
+                                                              int pageSize,
+                                                              int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -597,7 +570,7 @@ public class FDataResourceResourceLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResourceResourceUnit>(FDataResourceResourceUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonUserResourceUnit>(FDataPersonUserResourceUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -610,7 +583,7 @@ public class FDataResourceResourceLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceResourceUnit> fetchAll(){
+   public FLogicDataset<FDataPersonUserResourceUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -623,8 +596,8 @@ public class FDataResourceResourceLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataResourceResourceUnit doPrepare(){
-      FDataResourceResourceUnit unit = new FDataResourceResourceUnit();
+   public FDataPersonUserResourceUnit doPrepare(){
+      FDataPersonUserResourceUnit unit = new FDataPersonUserResourceUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -651,7 +624,7 @@ public class FDataResourceResourceLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResourceResourceUnit unit = (FDataResourceResourceUnit)logicUnit;
+      FDataPersonUserResourceUnit unit = (FDataPersonUserResourceUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -665,7 +638,7 @@ public class FDataResourceResourceLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResourceResourceUnit unit = (FDataResourceResourceUnit)logicUnit;
+      FDataPersonUserResourceUnit unit = (FDataPersonUserResourceUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -683,16 +656,7 @@ public class FDataResourceResourceLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
-      cmd.append(",`PROJECT_ID`");
-      cmd.append(",`TYPE_ID`");
-      cmd.append(",`CATALOG_ID`");
-      cmd.append(",`RESOURCE_CD`");
-      cmd.append(",`CODE`");
-      cmd.append(",`LABEL`");
-      cmd.append(",`SHARE_CD`");
-      cmd.append(",`ICON_URL`");
-      cmd.append(",`HAS_PREVIEW`");
-      cmd.append(",`DESCRIPTION`");
+      cmd.append(",`RESOURCE_ID`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -716,67 +680,11 @@ public class FDataResourceResourceLogic
          cmd.append(userId);
       }
       cmd.append(',');
-      long projectId = unit.projectId();
-      if(projectId == 0){
+      long resourceId = unit.resourceId();
+      if(resourceId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(projectId);
-      }
-      cmd.append(',');
-      long typeId = unit.typeId();
-      if(typeId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(typeId);
-      }
-      cmd.append(',');
-      long catalogId = unit.catalogId();
-      if(catalogId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(catalogId);
-      }
-      cmd.append(',');
-      cmd.append(unit.resourceCd());
-      cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.shareCd());
-      cmd.append(',');
-      String iconUrl = unit.iconUrl();
-      if(RString.isEmpty(iconUrl)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(iconUrl));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.hasPreview());
-      cmd.append(',');
-      String description = unit.description();
-      if(RString.isEmpty(description)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(description));
-         cmd.append('\'');
+         cmd.append(resourceId);
       }
       cmd.append(',');
       String note = unit.note();
@@ -822,7 +730,7 @@ public class FDataResourceResourceLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResourceResourceUnit unit = (FDataResourceResourceUnit)logicUnit;
+      FDataPersonUserResourceUnit unit = (FDataPersonUserResourceUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -841,7 +749,7 @@ public class FDataResourceResourceLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResourceResourceUnit unit = (FDataResourceResourceUnit)logicUnit;
+      FDataPersonUserResourceUnit unit = (FDataPersonUserResourceUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -870,87 +778,13 @@ public class FDataResourceResourceLogic
             cmd.append(userId);
          }
       }
-      if(unit.isProjectIdChanged()){
-         cmd.append(",`PROJECT_ID`=");
-         long projectId = unit.projectId();
-         if(projectId == 0){
+      if(unit.isResourceIdChanged()){
+         cmd.append(",`RESOURCE_ID`=");
+         long resourceId = unit.resourceId();
+         if(resourceId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(projectId);
-         }
-      }
-      if(unit.isTypeIdChanged()){
-         cmd.append(",`TYPE_ID`=");
-         long typeId = unit.typeId();
-         if(typeId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(typeId);
-         }
-      }
-      if(unit.isCatalogIdChanged()){
-         cmd.append(",`CATALOG_ID`=");
-         long catalogId = unit.catalogId();
-         if(catalogId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(catalogId);
-         }
-      }
-      if(unit.isResourceCdChanged()){
-         cmd.append(",`RESOURCE_CD`=");
-         cmd.append(unit.resourceCd());
-      }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isShareCdChanged()){
-         cmd.append(",`SHARE_CD`=");
-         cmd.append(unit.shareCd());
-      }
-      if(unit.isIconUrlChanged()){
-         cmd.append(",`ICON_URL`=");
-         String iconUrl = unit.iconUrl();
-         if(RString.isEmpty(iconUrl)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(iconUrl));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isHasPreviewChanged()){
-         cmd.append(",`HAS_PREVIEW`=");
-         cmd.append(unit.hasPreview());
-      }
-      if(unit.isDescriptionChanged()){
-         cmd.append(",`DESCRIPTION`=");
-         String description = unit.description();
-         if(RString.isEmpty(description)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(description));
-            cmd.append('\'');
+            cmd.append(resourceId);
          }
       }
       if(unit.isNoteChanged()){
@@ -984,7 +818,7 @@ public class FDataResourceResourceLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResourceResourceUnit unit = (FDataResourceResourceUnit)logicUnit;
+      FDataPersonUserResourceUnit unit = (FDataPersonUserResourceUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
