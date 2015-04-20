@@ -90,7 +90,7 @@ public class FResourceService
       String typeCd = context.parameter("type_cd");
       String serach = context.parameter("serach");
       String order = context.parameter("order");
-      int pageSize = RInteger.toRange(context.parameterAsInteger("page_size", 20), 0, 200);
+      int pageSize = RInteger.toRange(context.parameterAsInteger("page_size", 40), 0, 100);
       int page = context.parameterAsInteger("page", 0);
       // 设置输出节点
       FXmlNode xresources = output.config().createNode("ResourceCollection");

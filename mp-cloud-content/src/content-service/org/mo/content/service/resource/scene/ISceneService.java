@@ -45,7 +45,7 @@ public interface ISceneService
                  IWebOutput output);
 
    //============================================================
-   // <T>新建数据处理。</T>
+   // <T>创建数据处理。</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -58,6 +58,66 @@ public interface ISceneService
                   FGcSessionInfo session,
                   IWebInput input,
                   IWebOutput output);
+
+   //============================================================
+   // <T>创建相机处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult createCamera(IWebContext context,
+                        ILogicContext logicContext,
+                        FGcSessionInfo session,
+                        IWebInput input,
+                        IWebOutput output);
+
+   //============================================================
+   // <T>创建显示层处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult createLayer(IWebContext context,
+                       ILogicContext logicContext,
+                       FGcSessionInfo session,
+                       IWebInput input,
+                       IWebOutput output);
+
+   //============================================================
+   // <T>创建精灵处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult createSprite(IWebContext context,
+                        ILogicContext logicContext,
+                        FGcSessionInfo session,
+                        IWebInput input,
+                        IWebOutput output);
+
+   //============================================================
+   // <T>复制场景节点处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult copyNode(IWebContext context,
+                    ILogicContext logicContext,
+                    FGcSessionInfo session,
+                    IWebInput input,
+                    IWebOutput output);
 
    //============================================================
    // <T>修改数据处理。</T>
@@ -103,4 +163,19 @@ public interface ISceneService
                   FGcSessionInfo session,
                   IWebInput input,
                   IWebOutput output);
+
+   //============================================================
+   // <T>删除场景节点处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult deleteNode(IWebContext context,
+                      ILogicContext logicContext,
+                      FGcSessionInfo session,
+                      IWebInput input,
+                      IWebOutput output);
 }

@@ -49,6 +49,20 @@ public class FRs3SceneMovie
    }
 
    //============================================================
+   // <T>增加一个场景动画。</T>
+   //
+   // @param movie 场景动画
+   //============================================================
+   @Override
+   public void assignInfo(FRs3Object resource){
+      super.assignInfo(resource);
+      FRs3SceneMovie movie = (FRs3SceneMovie)resource;
+      _typeCode = movie._typeCode;
+      _interval = movie._interval;
+      _rotation.assign(movie._rotation);
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流

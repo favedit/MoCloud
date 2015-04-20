@@ -187,6 +187,41 @@ public class FRs3SceneDisplay
    }
 
    //============================================================
+   // <T>接收资源数据。</T>
+   //
+   // @param resource 资源
+   //============================================================
+   @Override
+   public void assignInfo(FRs3Object resource){
+      super.assignInfo(resource);
+      FRs3SceneDisplay display = (FRs3SceneDisplay)resource;
+      // 复制属性
+      _templateGuid = display._templateGuid;
+      //      // 复制动画集合
+      //      if(_movies != null){
+      //         _movies.clear();
+      //      }
+      //      if(display.hasMovie()){
+      //         for(FRs3SceneMovie movie : display.movies()){
+      //            FRs3SceneMovie createMovie = new FRs3SceneMovie();
+      //            createMovie.assignInfo(movie);
+      //            pushMovie(createMovie);
+      //         }
+      //      }
+      // 复制动画集合
+      if(_movies != null){
+         _movies.clear();
+      }
+      if(display.hasMovie()){
+         for(FRs3SceneMovie movie : display.movies()){
+            FRs3SceneMovie createMovie = new FRs3SceneMovie();
+            createMovie.assignInfo(movie);
+            pushMovie(createMovie);
+         }
+      }
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -261,7 +296,6 @@ public class FRs3SceneDisplay
       super.saveConfig(xconfig);
       // 存储属性
       xconfig.set("template_guid", _templateGuid);
-      _matrix.saveConfig(xconfig.createNode("Matrix"));
       // 存储动画集合
       if(_animations != null){
          FXmlNode xanimation = xconfig.createNode("AnimationCollection");

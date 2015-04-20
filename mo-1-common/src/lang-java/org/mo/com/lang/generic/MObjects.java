@@ -371,11 +371,16 @@ public abstract class MObjects<T>
    //============================================================
    public void insert(T value,
                       int index){
+      if(index < 0){
+         index = 0;
+      }
       if(index >= 0 && index < _count){
          ensureSize(_count + 1);
          System.arraycopy(_items, index, _items, index + 1, _count - index);
          _count++;
          _items[index] = value;
+      }else if(index >= _count){
+         push(value);
       }
    }
 

@@ -169,6 +169,18 @@ public class FRs3Object
    }
 
    //============================================================
+   // <T>接收资源数据。</T>
+   //
+   // @param resource 资源
+   //============================================================
+   public void assignInfo(FRs3Object resrouce){
+      _code = resrouce._code;
+      _fullCode = resrouce._fullCode;
+      _label = resrouce._label;
+      _keywords = resrouce._keywords;
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流

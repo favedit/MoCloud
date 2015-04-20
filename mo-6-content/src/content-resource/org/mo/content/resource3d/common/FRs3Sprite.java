@@ -70,6 +70,42 @@ public class FRs3Sprite
    }
 
    //============================================================
+   // <T>设置材质集合。</T>
+   //
+   // @param materials 材质集合
+   //============================================================
+   public void setMaterials(FObjects<FRs3Material> materials){
+      if(_materials == null){
+         _materials = new FObjects<FRs3Material>(FRs3Material.class);
+      }else{
+         _materials.clear();
+      }
+      _materials.assign(materials);
+   }
+
+   //============================================================
+   // <T>接收资源数据。</T>
+   //
+   // @param resource 资源
+   //============================================================
+   @Override
+   public void assignInfo(FRs3Object resource){
+      super.assignInfo(resource);
+      FRs3Sprite sprite = (FRs3Sprite)resource;
+      // 复制材质集合
+      if(_materials != null){
+         _materials.clear();
+      }
+      if(sprite.hasMaterial()){
+         for(FRs3Material material : sprite.materials()){
+            FRs3Material createMaterial = new FRs3Material();
+            createMaterial.assignInfo(material);
+            pushMaterial(createMaterial);
+         }
+      }
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -144,7 +180,9 @@ public class FRs3Sprite
             for(FXmlNode xmaterial : xnode){
                String materialGuid = xmaterial.get("guid");
                FRs3Material material = findMaterialByGuid(materialGuid);
-               material.mergeConfig(xmaterial);
+               if(material != null){
+                  material.mergeConfig(xmaterial);
+               }
             }
          }
       }

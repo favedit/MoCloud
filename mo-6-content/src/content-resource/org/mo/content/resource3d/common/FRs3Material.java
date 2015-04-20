@@ -419,6 +419,71 @@ public class FRs3Material
    }
 
    //============================================================
+   // <T>接收数据。</T>
+   //
+   // @param material 材质
+   //============================================================
+   public void assignInfo(FRs3Material material){
+      _parentGuid = material._parentGuid;
+      _code = material._code;
+      _label = material._label;
+      // 设置配置
+      _optionDepth = material._optionDepth;
+      _optionAlpha = material._optionAlpha;
+      _optionDouble = material._optionDouble;
+      _optionNormalInvert = material._optionNormalInvert;
+      _optionShadow = material._optionShadow;
+      _optionShadowSelf = material._optionShadowSelf;
+      // 设置透明信息
+      _optionAlpha = material._optionAlpha;
+      _alphaBase = material._alphaBase;
+      _alphaRate = material._alphaRate;
+      // 设置颜色信息
+      _optionColor = material._optionColor;
+      _colorMin = material._colorMin;
+      _colorMax = material._colorMax;
+      _colorRate = material._colorRate;
+      _colorMerge = material._colorMerge;
+      // 设置颜色信息
+      _optionAmbient = material._optionAmbient;
+      _ambientColor.assign(material._ambientColor);
+      // 设置颜色信息
+      _optionDiffuse = material._optionDiffuse;
+      _diffuseColor.assign(material._diffuseColor);
+      // 设置颜色信息
+      _optionDiffuseView = material._optionDiffuseView;
+      _diffuseViewColor.assign(material._diffuseViewColor);
+      // 设置颜色信息
+      _optionSpecular = material._optionSpecular;
+      _specularColor.assign(material._specularColor);
+      _specularBase = material._specularBase;
+      _specularLevel = material._specularLevel;
+      // 设置颜色信息
+      _optionSpecularView = material._optionSpecularView;
+      _specularViewColor.assign(material._specularViewColor);
+      _specularViewBase = material._specularViewBase;
+      _specularViewLevel = material._specularViewLevel;
+      // 设置颜色信息
+      _optionReflect = material._optionReflect;
+      _reflectColor.assign(material._reflectColor);
+      _reflectMerge = material._reflectMerge;
+      // 设置颜色信息
+      _optionRefract = material._optionRefract;
+      _refractFrontColor.assign(material._refractFrontColor);
+      _refractBackColor.assign(material._refractBackColor);
+      // 设置颜色信息
+      _optionOpacity = material._optionOpacity;
+      _opacityColor.assign(material._opacityColor);
+      _opacityRate = material._opacityRate;
+      _opacityAlpha = material._opacityAlpha;
+      _opacityDepth = material._opacityDepth;
+      _opacityTransmittance = material._opacityTransmittance;
+      // 设置颜色信息
+      _optionEmissive = material._optionEmissive;
+      _emissiveColor.assign(material._emissiveColor);
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -522,12 +587,18 @@ public class FRs3Material
             _optionAlpha = xnode.getBoolean("valid", _optionAlpha);
             _alphaBase = xnode.getFloat("base", 0.1f);
             _alphaRate = xnode.getFloat("rate", 1.0f);
+            if(_alphaRate == 0){
+               _alphaRate = 1;
+            }
          }else if(xnode.isName("Color")){
             _optionColor = xnode.getBoolean("valid", _optionColor);
             _colorMin = xnode.getFloat("min", 0.0f);
             _colorMax = xnode.getFloat("max", 1.0f);
             _colorRate = xnode.getFloat("rate", 2.0f);
             _colorMerge = xnode.getFloat("merge", 0.5f);
+            if(_colorMerge == 0){
+               _colorMerge = 1;
+            }
          }else if(xnode.isName("Ambient")){
             _optionAmbient = xnode.getBoolean("valid", _optionAmbient);
             _ambientColor.loadConfig(xnode);
@@ -542,11 +613,17 @@ public class FRs3Material
             _specularColor.loadConfig(xnode);
             _specularBase = xnode.getFloat("base", 0.0f);
             _specularLevel = xnode.getFloat("level", 16.0f);
+            if(_specularLevel == 0){
+               _specularLevel = 1;
+            }
          }else if(xnode.isName("SpecularView")){
             _optionSpecularView = xnode.getBoolean("valid", _optionSpecularView);
             _specularViewColor.loadConfig(xnode);
             _specularViewBase = xnode.getFloat("base", 0.0f);
             _specularViewLevel = xnode.getFloat("level", 16.0f);
+            if(_specularViewLevel == 0){
+               _specularViewLevel = 1;
+            }
          }else if(xnode.isName("Reflect")){
             _optionReflect = xnode.getBoolean("valid", _optionReflect);
             _reflectColor.loadConfig(xnode);

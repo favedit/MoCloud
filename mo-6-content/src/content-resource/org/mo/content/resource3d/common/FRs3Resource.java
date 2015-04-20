@@ -7,7 +7,7 @@ import org.mo.com.io.IDataInput;
 // <T>资源基类。</T>
 //============================================================
 public class FRs3Resource
-      extends FRs3Object
+      extends FRs3Component
 {
    // 数据
    protected byte[] _data;

@@ -2,6 +2,7 @@ package org.mo.content.service.resource.scene;
 
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
 import org.mo.cloud.logic.solution.FGcProjectInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
@@ -10,8 +11,16 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
+import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.content.core.solution.project.ICntProjectConsole;
+import org.mo.content.resource3d.common.FRs3Component;
+import org.mo.content.resource3d.common.FRs3Display;
+import org.mo.content.resource3d.common.FRs3DisplayContainer;
+import org.mo.content.resource3d.common.FRs3DisplayLayer;
+import org.mo.content.resource3d.common.FRs3Object;
+import org.mo.content.resource3d.common.FRs3Sprite;
 import org.mo.content.resource3d.scene.FRs3Scene;
+import org.mo.content.resource3d.scene.FRs3SceneDisplay;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -27,13 +36,17 @@ public class FSceneService
       implements
          ISceneService
 {
-   // 项目控制台接口
+   // 模板控制台接口
    @ALink
-   protected ICntProjectConsole _projectConsole;
+   protected ICntTemplateConsole _templateConsole;
 
    // 场景控制台接口
    @ALink
    protected ICntSceneConsole _sceneConsole;
+
+   // 项目控制台接口
+   @ALink
+   protected ICntProjectConsole _projectConsole;
 
    //============================================================
    // <T>构造资源3D场景服务。</T>
@@ -122,7 +135,7 @@ public class FSceneService
    }
 
    //============================================================
-   // <T>新建数据处理。</T>
+   // <T>创建数据处理。</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -169,6 +182,174 @@ public class FSceneService
       scene.setCode(code);
       scene.setLabel(label);
       _sceneConsole.doInsert(logicContext, scene);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>创建相机处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult createCamera(IWebContext context,
+                               ILogicContext logicContext,
+                               FGcSessionInfo session,
+                               IWebInput input,
+                               IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>创建显示层处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult createLayer(IWebContext context,
+                              ILogicContext logicContext,
+                              FGcSessionInfo session,
+                              IWebInput input,
+                              IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>创建精灵处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult createSprite(IWebContext context,
+                               ILogicContext logicContext,
+                               FGcSessionInfo session,
+                               IWebInput input,
+                               IWebOutput output){
+      long userId = session.userId();
+      // 获得参数
+      FXmlNode xsprite = input.config().findNode("Sprite");
+      if(xsprite == null){
+         throw new FFatalError("Sprite is empty.");
+      }
+      String spaceGuid = xsprite.get("space_guid", null);
+      if(RString.isEmpty(spaceGuid)){
+         throw new FFatalError("Space guid is empty.");
+      }
+      String layerGuid = xsprite.get("layer_guid", null);
+      if(RString.isEmpty(layerGuid)){
+         throw new FFatalError("Layer guid is empty.");
+      }
+      String displayGuid = xsprite.get("display_guid", null);
+      String code = xsprite.get("code", null);
+      if(RString.isEmpty(code)){
+         throw new FFatalError("Code is empty.");
+      }
+      String label = xsprite.get("label", null);
+      if(RString.isEmpty(label)){
+         throw new FFatalError("Label is empty.");
+      }
+      String templateCode = xsprite.get("template_code", null);
+      if(RString.isEmpty(templateCode)){
+         throw new FFatalError("Template code is empty.");
+      }
+      //............................................................
+      // 查找项目
+      FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, spaceGuid);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (guid={1})", sceneInfo);
+      }
+      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      // 查找模板
+      FGcResTemplateInfo templateInfo = _templateConsole.findByCode(logicContext, userId, templateCode);
+      if(templateInfo == null){
+         throw new FFatalError("Template is not exists. (code={1})", templateCode);
+      }
+      // 创建显示对象
+      FRs3SceneDisplay sprite = new FRs3SceneDisplay();
+      sprite.setCode(code);
+      sprite.setLabel(label);
+      sprite.setTemplateGuid(templateInfo.guid());
+      // 增加显示对象
+      FRs3DisplayLayer layer = scene.findLayerByGuid(layerGuid);
+      if(RString.isEmpty(displayGuid)){
+         layer.pushDisplay(sprite);
+      }else{
+         FRs3Display display = layer.searchDisplayByGuid(displayGuid);
+         if(display instanceof FRs3Sprite){
+            ((FRs3Sprite)display).pushDisplay(sprite);
+         }
+      }
+      //............................................................
+      // 更新处理
+      _sceneConsole.updateResource(logicContext, scene);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>复制场景节点处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult copyNode(IWebContext context,
+                           ILogicContext logicContext,
+                           FGcSessionInfo session,
+                           IWebInput input,
+                           IWebOutput output){
+      // 获得参数
+      String spaceGuid = context.parameter("space_guid");
+      if(RString.isEmpty(spaceGuid)){
+         throw new FFatalError("Space guid is empty.");
+      }
+      String nodeGuid = context.parameter("node_guid");
+      if(RString.isEmpty(nodeGuid)){
+         throw new FFatalError("Node guid is empty.");
+      }
+      //............................................................
+      // 查找项目
+      FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, spaceGuid);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (guid={1})", spaceGuid);
+      }
+      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      // 查找模板
+      FRs3Object findObject = scene.searchByGuid(nodeGuid);
+      if(findObject == null){
+         throw new FFatalError("Node guid is not found. (code={1})", nodeGuid);
+      }
+      if(findObject instanceof FRs3SceneDisplay){
+         FRs3SceneDisplay display = (FRs3SceneDisplay)findObject;
+         FRs3Component parent = display.parent();
+         if(parent instanceof FRs3DisplayContainer){
+            FRs3DisplayContainer container = (FRs3DisplayContainer)parent;
+            int index = container.displays().indexOf(display);
+            FRs3SceneDisplay createDisplay = new FRs3SceneDisplay();
+            createDisplay.assignInfo(display);
+            container.displays().insert(createDisplay, index + 1);
+         }else{
+            throw new FFatalError("Unknown node parent.");
+         }
+      }else{
+         throw new FFatalError("Unknown node type.");
+      }
+      //............................................................
+      // 更新处理
+      _sceneConsole.updateResource(logicContext, scene);
       return EResult.Success;
    }
 
@@ -283,6 +464,60 @@ public class FSceneService
       }
       // 删除数据
       _sceneConsole.doDelete(logicContext, scene);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除场景节点处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult deleteNode(IWebContext context,
+                             ILogicContext logicContext,
+                             FGcSessionInfo session,
+                             IWebInput input,
+                             IWebOutput output){
+      // 获得参数
+      String spaceGuid = context.parameter("space_guid");
+      if(RString.isEmpty(spaceGuid)){
+         throw new FFatalError("Space guid is empty.");
+      }
+      String nodeGuid = context.parameter("node_guid");
+      if(RString.isEmpty(nodeGuid)){
+         throw new FFatalError("Node guid is empty.");
+      }
+      //............................................................
+      // 查找项目
+      FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, spaceGuid);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (guid={1})", spaceGuid);
+      }
+      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      // 查找模板
+      FRs3Object findObject = scene.searchByGuid(nodeGuid);
+      if(findObject == null){
+         throw new FFatalError("Node guid is not found. (code={1})", nodeGuid);
+      }
+      if(findObject instanceof FRs3SceneDisplay){
+         FRs3SceneDisplay display = (FRs3SceneDisplay)findObject;
+         FRs3Component parent = display.parent();
+         if(parent instanceof FRs3DisplayContainer){
+            FRs3DisplayContainer container = (FRs3DisplayContainer)parent;
+            container.removeDisplay(display);
+         }else{
+            throw new FFatalError("Unknown node parent.");
+         }
+      }else{
+         throw new FFatalError("Unknown node type.");
+      }
+      //............................................................
+      // 更新处理
+      _sceneConsole.updateResource(logicContext, scene);
       return EResult.Success;
    }
 }

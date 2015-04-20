@@ -13,16 +13,18 @@
 <SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
 <SCRIPT>
 function _load(){
+   // 设置环境
    RRuntime.setProcessCd(EProcess.Debug);
    RApplication.initialize();
    RBrowser.setContentPath('/script');
    // 加载工作区
-   var w = RApplication.findWorkspace(FDsSolutionWorkspace);
-   w.buildDefine(id_workspace);
-   w.setPanel(id_workspace);
-   w.psResize();
-   w.load();
-   RConsole.find(FUiWorkspaceConsole).active(w);
+   var workspace = RApplication.findWorkspace(FDsSolutionWorkspace);
+   workspace.buildDefine(id_workspace);
+   workspace.setPanel(id_workspace);
+   workspace.psResize();
+   workspace.load();
+   // 激活工作区
+   RConsole.find(FUiWorkspaceConsole).active(workspace);
 }
 </SCRIPT>
 </HEAD>

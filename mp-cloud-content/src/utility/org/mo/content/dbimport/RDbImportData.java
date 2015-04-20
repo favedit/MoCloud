@@ -22,8 +22,8 @@ public class RDbImportData
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IResStorageConsole storageConsole = RAop.find(IResStorageConsole.class);
          //storageConsole.clearData(logicContext);
-         storageConsole.importData(logicContext, path);
-         //storageConsole.importStorage(logicContext, path);
+         //storageConsole.importData(logicContext, path);
+         storageConsole.importStorage(logicContext, path);
       }
    }
 

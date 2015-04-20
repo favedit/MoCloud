@@ -51,6 +51,18 @@ public class SFloatColor4
    //============================================================
    // <T>设置数据。</T>
    //
+   // @param value 数据
+   //============================================================
+   public void assign(SFloatColor4 value){
+      red = value.red;
+      green = value.green;
+      blue = value.blue;
+      alpha = value.alpha;
+   }
+
+   //============================================================
+   // <T>设置数据。</T>
+   //
    // @param red 红色
    // @param green 绿色
    // @param blue 蓝色

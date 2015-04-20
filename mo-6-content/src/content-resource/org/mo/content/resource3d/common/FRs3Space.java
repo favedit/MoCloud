@@ -51,6 +51,36 @@ public class FRs3Space
    }
 
    //============================================================
+   // <T>根据唯一编号查找资源对象。</T>
+   //
+   // @param guid 唯一编号
+   // @return 资源对象
+   //============================================================
+   public FRs3Object searchByGuid(String guid){
+      FRs3Object result = null;
+      if(!RString.isEmpty(guid)){
+         // 查找显示对象
+         result = findDisplayByGuid(guid);
+         if(result != null){
+            return result;
+         }
+         // 查找显示层
+         result = findLayerByGuid(guid);
+         if(result != null){
+            return result;
+         }
+         // 查找显示层集合
+         for(FRs3DisplayLayer layer : _layers){
+            result = layer.searchDisplayByGuid(guid);
+            if(result != null){
+               return result;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得场景技术。</T>
    //
    // @return 场景技术
@@ -148,7 +178,7 @@ public class FRs3Space
    // @return 显示对象
    //============================================================
    public FRs3Display findDisplayByGuid(String guid){
-      if(!RString.isEmpty(guid)){
+      if(!RString.isEmpty(guid) && (_displays != null)){
          for(FRs3Display display : _displays){
             if(guid.equals(display.guid())){
                return display;
@@ -176,6 +206,7 @@ public class FRs3Space
       if(_displays == null){
          _displays = new FObjects<FRs3Display>(FRs3Display.class);
       }
+      display.setParent(this);
       _displays.push(display);
    }
 
@@ -195,7 +226,7 @@ public class FRs3Space
    // @return 场景层
    //============================================================
    public FRs3DisplayLayer findLayerByGuid(String guid){
-      if(!RString.isEmpty(guid)){
+      if(!RString.isEmpty(guid) && (_layers != null)){
          for(FRs3DisplayLayer layer : _layers){
             if(guid.equals(layer.guid())){
                return layer;

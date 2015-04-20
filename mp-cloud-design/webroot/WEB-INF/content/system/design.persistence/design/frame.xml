@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150413214917">
+<Content name="design.frame" update_date="20150420114854">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -169,6 +169,8 @@
       <Attribute is_valid="Y" type="String" name="style_cd" label="样式类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
+    <Component is_valid="Y" name="FUiPanelHorizontal" label="横向面板" class_name="org.mo.cloud.content.design.frame.common.XPanelHorizontal" base_name="org.mo.cloud.content.design.frame.base.XBasePanelHorizontal" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="FUiPanelVertical" label="纵向面板" class_name="org.mo.cloud.content.design.frame.common.XPanelVertical" base_name="org.mo.cloud.content.design.frame.base.XBasePanelVertical" inherits="IContainer" note="" />
     <Component is_valid="Y" name="PageSheet" label="页面表单" class_name="org.mo.cloud.content.design.frame.common.XPageSheet" base_name="org.mo.cloud.content.design.frame.base.XBasePageSheet" inherits="IContainer" note="">
       <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>

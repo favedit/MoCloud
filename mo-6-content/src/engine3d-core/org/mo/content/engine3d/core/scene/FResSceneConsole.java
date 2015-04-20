@@ -4,6 +4,7 @@ import java.io.File;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
+import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.cloud.logic.resource.scene.FGcResSceneConsole;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -15,12 +16,14 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.content.engine3d.core.material.IResMaterialConsole;
 import org.mo.content.engine3d.core.template.IResTemplateConsole;
 import org.mo.content.engine3d.core.template.IResTemplateMaterialConsole;
 import org.mo.content.resource3d.common.FRs3Display;
 import org.mo.content.resource3d.common.FRs3Material;
 import org.mo.content.resource3d.scene.FRs3Scene;
 import org.mo.content.resource3d.scene.FRs3SceneDisplay;
+import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.mime.compress.ECompressMode;
@@ -34,6 +37,10 @@ public class FResSceneConsole
       implements
          IResSceneConsole
 {
+   // 材质模板控制台
+   @ALink
+   protected IResMaterialConsole _materialConsole;
+
    // 资源模板控制台
    @ALink
    protected IResTemplateConsole _templateConsole;
@@ -55,32 +62,6 @@ public class FResSceneConsole
       // 创建场景
       FRs3Scene scene = new FRs3Scene();
       scene.loadUnit(sceneLogic);
-      //      // 生成纹理数据
-      //      FDictionary<FRs3Texture> textures = scene.textures();
-      //      FDictionary<FRs3Template> templates = scene.templates();
-      //      FObjects<FRs3SceneDisplay> displays = scene.filterDisplays();
-      //      for(FRs3SceneDisplay display : displays){
-      //         String templateGuid = display.templateGuid();
-      //         // 查找模板
-      //         FRs3Template template = _templateConsole.makeTemplate(logicContext, templateGuid);
-      //         templates.set(template.guid(), template);
-      //         // 查找材质
-      //         FRs3Theme theme = template.themes().first();
-      //         for(FRs3SceneMaterial sceneMaterial : display.materials()){
-      //            String materialGroupGuid = sceneMaterial.groupGuid();
-      //            FRs3Material material = theme.findMaterialByGroupGuid(materialGroupGuid);
-      //            // 查找纹理
-      //            for(FRs3MaterialTexture materialTexture : material.textures()){
-      //               String textureGuid = materialTexture.textureGuid();
-      //               if(!textures.contains(textureGuid)){
-      //                  byte[] data = _textureConsole.makeTextureData(logicContext, textureGuid, false);
-      //                  FRs3Texture texture = new FRs3Texture();
-      //                  texture.setData(data);
-      //                  textures.set(textureGuid, texture);
-      //               }
-      //            }
-      //         }
-      //      }
       return scene;
    }
 
@@ -163,9 +144,57 @@ public class FResSceneConsole
          throw new FFatalError("Scene is not exists. (guid={1}})", guid);
       }
       long resourceId = sceneInfo.resourceId();
-      // 创建场景
-      scene.saveUnit(sceneInfo);
+      //............................................................
+      // 矫正材质
+      FObjects<FRs3Display> displays = scene.filterDisplays();
+      for(FRs3Display display : displays){
+         if(display instanceof FRs3SceneDisplay){
+            FRs3SceneDisplay sceneDisplay = (FRs3SceneDisplay)display;
+            String templateGuid = sceneDisplay.templateGuid();
+            if(RString.isEmpty(templateGuid)){
+               continue;
+            }
+            // 查找模板
+            FRs3Template template = _templateConsole.makeTemplate(logicContext, templateGuid);
+            if(template == null){
+               throw new FFatalError("Template is not exists.");
+            }
+            // 检查材质
+            if(template.hasMaterial()){
+               FObjects<FRs3Material> materials = new FObjects<FRs3Material>(FRs3Material.class);
+               for(FRs3Material material : template.materials()){
+                  String materialGuid = material.makeGuid();
+                  FRs3Material displayMaterial = sceneDisplay.findMaterialByGuid(materialGuid);
+                  if(displayMaterial == null){
+                     displayMaterial = new FRs3Material();
+                     displayMaterial.setParentGuid(materialGuid);
+                     displayMaterial.assignInfo(material);
+                     materials.push(displayMaterial);
+                  }else{
+                     materials.push(displayMaterial);
+                  }
+                  // 修正材质
+                  if(RString.isEmpty(displayMaterial.code()) || RString.isEmpty(displayMaterial.label())){
+                     FGcResMaterialInfo materialInfo = _materialConsole.findByGuid(logicContext, materialGuid);
+                     if(RString.isEmpty(displayMaterial.code())){
+                        displayMaterial.setCode(materialInfo.code());
+                     }
+                     if(RString.isEmpty(displayMaterial.label())){
+                        displayMaterial.setLabel(materialInfo.label());
+                     }
+                  }
+               }
+               sceneDisplay.setMaterials(materials);
+            }else{
+               if(sceneDisplay.hasMaterial()){
+                  sceneDisplay.materials().clear();
+               }
+            }
+         }
+      }
+      //............................................................
       // 更新数据
+      scene.saveUnit(sceneInfo);
       doUpdate(logicContext, sceneInfo);
       //............................................................
       // 废弃临时数据
