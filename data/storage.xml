@@ -2,7 +2,37 @@
 <Configuration>
    <!-- 数据库传输 -->
    <Database type='mysql'>
+      <Dataset data_name='DT_PSN_USER'/>
+
+      <Dataset data_name='DT_SOL_PROJECT'/>
+
+      <Dataset data_name='DT_RES_TYPE'/>
+      <Dataset data_name='DT_RES_CATALOG'/>
+      <Dataset data_name='DT_RES_RESOURCE'/>
+
+      <Dataset data_name='DT_RES_BITMAP'/>
+
+      <Dataset data_name='DT_RES_MATERIAL'/>
+      <Dataset data_name='DT_RES_MATERIAL_BITMAP'/>
+
+      <Dataset data_name='DT_RES_MODEL'/>
+      <Dataset data_name='DT_RES_MODEL_MESH'/>
+      <Dataset data_name='DT_RES_MODEL_MESH_STREAM'/>
+
+      <Dataset data_name='DT_RES_MODEL_SKELETON'/>
+      <Dataset data_name='DT_RES_MODEL_SKELETON_SKIN'/>
+      <Dataset data_name='DT_RES_MODEL_SKELETON_SKIN_STREAM'/>
+
+      <Dataset data_name='DT_RES_MODEL_ANIMATION'/>
+      <Dataset data_name='DT_RES_MODEL_ANIMATION_TRACK'/>
+      <Dataset data_name='DT_RES_MODEL_ANIMATION_ACTION'/>
+
+      <Dataset data_name='DT_RES_TEMPLATE'/>
+      <Dataset data_name='DT_RES_TEMPLATE_MATERIAL'/>
+
       <Dataset data_name='DT_RES_SCENE'/>
+
+      <Dataset data_name='DT_PSN_USER_RESOURCE'/>
    </Database>
    <!-- 数据库传输 -->
    <Database type='mongodb'>
