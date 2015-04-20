@@ -3,6 +3,7 @@ package org.mo.content.resource3d.common;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -49,6 +50,23 @@ public class FRs3Sprite
    }
 
    //============================================================
+   // <T>根据父唯一编号查找材质对象。</T>
+   //
+   // @param guid 父唯一编号
+   // @return 材质对象
+   //============================================================
+   public FRs3Material findMaterialByParentGuid(String guid){
+      if(!RString.isEmpty(guid) && (_materials != null)){
+         for(FRs3Material material : _materials){
+            if(guid.equals(material.parentGuid())){
+               return material;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得材质集合。</T>
    //
    // @return 材质集合
@@ -81,6 +99,15 @@ public class FRs3Sprite
          _materials.clear();
       }
       _materials.assign(materials);
+   }
+
+   //============================================================
+   // <T>清空材质集合。</T>
+   //============================================================
+   public void clearMaterials(){
+      if(_materials != null){
+         _materials.clear();
+      }
    }
 
    //============================================================
@@ -178,11 +205,20 @@ public class FRs3Sprite
          if(xnode.isName("MaterialCollection")){
             // 读取动画集合
             for(FXmlNode xmaterial : xnode){
+               boolean isClone = xmaterial.getBoolean("is_clone", false);
+               if(isClone){
+                  xmaterial.set("guid", RUuid.makeUniqueId());
+               }
                String materialGuid = xmaterial.get("guid");
                FRs3Material material = findMaterialByGuid(materialGuid);
-               if(material != null){
-                  material.mergeConfig(xmaterial);
+               if(material == null){
+                  String materialParentGuid = xmaterial.get("parent_guid");
+                  material = new FRs3Material();
+                  material.setGuid(materialGuid);
+                  material.setParentGuid(materialParentGuid);
+                  pushMaterial(material);
                }
+               material.mergeConfig(xmaterial);
             }
          }
       }

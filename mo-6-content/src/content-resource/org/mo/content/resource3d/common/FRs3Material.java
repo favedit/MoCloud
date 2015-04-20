@@ -574,7 +574,6 @@ public class FRs3Material
    //============================================================
    public void loadConfigInfo(FXmlNode xconfig){
       // 加载配置
-      _parentGuid = xconfig.get("parent_guid", _parentGuid);
       _optionDepth = xconfig.getBoolean("option_depth", _optionDepth);
       _optionAlpha = xconfig.getBoolean("option_alpha", _optionAlpha);
       _optionDouble = xconfig.getBoolean("option_double", _optionDouble);
@@ -672,6 +671,7 @@ public class FRs3Material
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
       // 读取属性
+      _parentGuid = xconfig.get("parent_guid", _parentGuid);
       _effectCode = xconfig.get("effect_code");
       // 处理所有节点
       loadConfigInfo(xconfig);

@@ -4,6 +4,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.scene.FRs3SceneDisplay;
 
@@ -208,8 +209,16 @@ public class FRs3DisplayContainer
       FXmlNode xdisplays = xconfig.findNode("DisplayCollection");
       if(xdisplays != null){
          for(FXmlNode xdisplay : xdisplays){
+            boolean isClone = xdisplay.getBoolean("is_clone", false);
+            if(isClone){
+               xdisplay.set("guid", RUuid.makeUniqueId());
+            }
             String guid = xdisplay.get("guid");
             FRs3Display display = findDisplayByGuid(guid);
+            if(display == null){
+               display = (FRs3Display)createChild(xdisplay);
+               pushDisplay(display);
+            }
             display.mergeConfig(xdisplay);
          }
       }

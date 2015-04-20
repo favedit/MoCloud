@@ -29,7 +29,7 @@ public class RDbMongoDrop
    public static void main(String[] args) throws Exception{
       String configPath = RRs3Configuration.RootPath + "/MoCloud";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
-      RAop.initialize(configPath + "/mp-cloud-design/src/config/" + RRs3Configuration.Config);
+      RAop.initialize(configPath + "/mp-cloud-content/src/config/" + RRs3Configuration.Config);
       try{
          process();
       }catch(Exception e){

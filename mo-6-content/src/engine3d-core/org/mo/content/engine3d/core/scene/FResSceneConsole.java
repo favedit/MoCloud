@@ -150,11 +150,11 @@ public class FResSceneConsole
       for(FRs3Display display : displays){
          if(display instanceof FRs3SceneDisplay){
             FRs3SceneDisplay sceneDisplay = (FRs3SceneDisplay)display;
+            // 查找模板
             String templateGuid = sceneDisplay.templateGuid();
             if(RString.isEmpty(templateGuid)){
                continue;
             }
-            // 查找模板
             FRs3Template template = _templateConsole.makeTemplate(logicContext, templateGuid);
             if(template == null){
                throw new FFatalError("Template is not exists.");
@@ -163,8 +163,9 @@ public class FResSceneConsole
             if(template.hasMaterial()){
                FObjects<FRs3Material> materials = new FObjects<FRs3Material>(FRs3Material.class);
                for(FRs3Material material : template.materials()){
+                  // 根据模板修正材质列表
                   String materialGuid = material.makeGuid();
-                  FRs3Material displayMaterial = sceneDisplay.findMaterialByGuid(materialGuid);
+                  FRs3Material displayMaterial = sceneDisplay.findMaterialByParentGuid(materialGuid);
                   if(displayMaterial == null){
                      displayMaterial = new FRs3Material();
                      displayMaterial.setParentGuid(materialGuid);
@@ -173,7 +174,7 @@ public class FResSceneConsole
                   }else{
                      materials.push(displayMaterial);
                   }
-                  // 修正材质
+                  // 修正材质参数
                   if(RString.isEmpty(displayMaterial.code()) || RString.isEmpty(displayMaterial.label())){
                      FGcResMaterialInfo materialInfo = _materialConsole.findByGuid(logicContext, materialGuid);
                      if(RString.isEmpty(displayMaterial.code())){
@@ -186,9 +187,7 @@ public class FResSceneConsole
                }
                sceneDisplay.setMaterials(materials);
             }else{
-               if(sceneDisplay.hasMaterial()){
-                  sceneDisplay.materials().clear();
-               }
+               sceneDisplay.clearMaterials();
             }
          }
       }
