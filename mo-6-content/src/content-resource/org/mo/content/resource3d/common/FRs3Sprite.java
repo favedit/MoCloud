@@ -1,6 +1,7 @@
 package org.mo.content.resource3d.common;
 
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
@@ -213,6 +214,9 @@ public class FRs3Sprite
                FRs3Material material = findMaterialByGuid(materialGuid);
                if(material == null){
                   String materialParentGuid = xmaterial.get("parent_guid");
+                  if(RString.isEmpty(materialParentGuid)){
+                     throw new FFatalError("Parent material guid is empty.");
+                  }
                   material = new FRs3Material();
                   material.setGuid(materialGuid);
                   material.setParentGuid(materialParentGuid);

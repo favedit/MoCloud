@@ -5,6 +5,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.INamePair;
+import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource3d.common.FRs3DisplayLayer;
@@ -175,8 +176,17 @@ public class FRs3Scene
          }else if(xnode.isName("LayerCollection")){
             // 读取层集合
             for(FXmlNode xlayer : xnode){
+               boolean isClone = xlayer.getBoolean("is_clone", false);
+               if(isClone){
+                  xlayer.set("guid", RUuid.makeUniqueId());
+               }
                String layerGuid = xlayer.get("guid");
                FRs3DisplayLayer layer = findLayerByGuid(layerGuid);
+               if(layer == null){
+                  layer = new FRs3DisplayLayer();
+                  layer.setGuid(layerGuid);
+                  this.pushLayer(layer);
+               }
                layer.mergeConfig(xlayer);
             }
          }

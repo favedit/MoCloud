@@ -14,9 +14,6 @@ public class RDbMongoDrop
    public static void process() throws Exception{
       // 导入处理
       IGcStorageConsole console = RAop.find(IGcStorageConsole.class);
-      console.drop(EGcStorageCatalog.Cache3dTextureBitmap);
-      console.drop(EGcStorageCatalog.Cache3dTexture);
-      console.drop(EGcStorageCatalog.Cache3dTextureCompress);
       console.drop(EGcStorageCatalog.CacheResourceMesh);
       console.drop(EGcStorageCatalog.CacheResourceModel);
       console.drop(EGcStorageCatalog.CacheResourceTemplate);

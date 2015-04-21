@@ -16,9 +16,6 @@ public class RMongoDrop
       IGcStorageConsole console = RAop.find(IGcStorageConsole.class);
       console.drop(EGcStorageCatalog.CacheBitmapPreview);
       console.drop(EGcStorageCatalog.CacheResourceMaterialBitmapPack);
-      console.drop(EGcStorageCatalog.Cache3dTextureBitmap);
-      console.drop(EGcStorageCatalog.Cache3dTexture);
-      console.drop(EGcStorageCatalog.Cache3dTextureCompress);
       console.drop(EGcStorageCatalog.CacheResourceMesh);
       console.drop(EGcStorageCatalog.CacheResourceModel);
       console.drop(EGcStorageCatalog.CacheResourceTemplate);

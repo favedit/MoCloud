@@ -5,6 +5,24 @@ package org.mo.cloud.core.storage;
 //============================================================
 public class EGcStorageCatalog
 {
+   // 资源位图预览数据
+   public final static String CacheBitmapPreview = "cache.bitmap.preview";
+
+   // 资源材质位图打包
+   public final static String CacheResourceMaterialBitmapPack = "cache.resourcee.material.bitmap.pack";
+
+   // 资源网格
+   public final static String CacheResourceMesh = "cache.resource.mesh";
+
+   // 资源模型
+   public final static String CacheResourceModel = "cache.resource.model";
+
+   // 资源模板
+   public final static String CacheResourceTemplate = "cache.resource.template";
+
+   // 资源场景
+   public final static String CacheResourceScene = "cache.resource.scene";
+
    // 资源预览数据
    public final static String ResourcePreview = "resource.preview";
 
@@ -22,34 +40,4 @@ public class EGcStorageCatalog
 
    // 资源模型动画轨迹数据
    public final static String ResourceModelAnimationTrack = "resource.model.animation.track";
-
-   // 资源位图预览数据
-   public final static String CacheBitmapPreview = "cache.bitmap.preview";
-
-   // 资源3D位图预览
-   public final static String Cache3dBitmapPreview = "cache3d.bitmap.preview";
-
-   // 资源3D纹理
-   public final static String Cache3dTexture = "cache3d.texture";
-
-   // 资源3D压缩纹理
-   public final static String Cache3dTextureCompress = "cache3d.texture.compress";
-
-   // 资源3D纹理位图
-   public final static String Cache3dTextureBitmap = "cache3d.texture.bitmap";
-
-   // 资源材质位图打包
-   public final static String CacheResourceMaterialBitmapPack = "cache.resourcee.material.bitmap.pack";
-
-   // 资源网格
-   public final static String CacheResourceMesh = "cache.resource.mesh";
-
-   // 资源模型
-   public final static String CacheResourceModel = "cache.resource.model";
-
-   // 资源模板
-   public final static String CacheResourceTemplate = "cache.resource.template";
-
-   // 资源场景
-   public final static String CacheResourceScene = "cache.resource.scene";
 }

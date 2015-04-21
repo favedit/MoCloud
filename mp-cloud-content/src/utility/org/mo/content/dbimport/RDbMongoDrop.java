@@ -12,15 +12,20 @@ public class RDbMongoDrop
    // <T>导入处理。</T>
    //============================================================
    public static void process() throws Exception{
-      // 导入处理
       IGcStorageConsole console = RAop.find(IGcStorageConsole.class);
-      console.drop(EGcStorageCatalog.Cache3dTextureBitmap);
-      console.drop(EGcStorageCatalog.Cache3dTexture);
-      console.drop(EGcStorageCatalog.Cache3dTextureCompress);
+      // 删除缓冲
+      console.drop(EGcStorageCatalog.CacheResourceMaterialBitmapPack);
       console.drop(EGcStorageCatalog.CacheResourceMesh);
       console.drop(EGcStorageCatalog.CacheResourceModel);
       console.drop(EGcStorageCatalog.CacheResourceTemplate);
       console.drop(EGcStorageCatalog.CacheResourceScene);
+      // 删除数据
+      console.drop(EGcStorageCatalog.ResourcePreview);
+      console.drop(EGcStorageCatalog.ResourceBitmap);
+      console.drop(EGcStorageCatalog.ResourceModelMeshStream);
+      console.drop(EGcStorageCatalog.ResourceModelMeshTrack);
+      console.drop(EGcStorageCatalog.ResourceModelSkeletonSkinStream);
+      console.drop(EGcStorageCatalog.ResourceModelAnimationTrack);
    }
 
    //============================================================

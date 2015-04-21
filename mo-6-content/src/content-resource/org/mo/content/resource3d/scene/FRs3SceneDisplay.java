@@ -2,6 +2,7 @@ package org.mo.content.resource3d.scene;
 
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -320,6 +321,11 @@ public class FRs3SceneDisplay
    @Override
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
+      // 合并属性
+      _templateGuid = xconfig.get("template_guid", null);
+      if(RString.isEmpty(_templateGuid)){
+         throw new FFatalError("Template guid is empty.");
+      }
       // 读取节点集合
       for(FXmlNode xnode : xconfig.nodes()){
          if(xnode.isName("AnimationCollection")){
