@@ -18,7 +18,7 @@ function _load(){
    RApplication.initialize();
    RBrowser.setContentPath('/script');
    // 加载工作区
-   var workspace = RApplication.findWorkspace(FDsSolutionWorkspace);
+   var workspace = RApplication.findWorkspace(FDsPrivateWorkspace);
    workspace.buildDefine(id_workspace);
    workspace.setPanel(id_workspace);
    workspace.psResize();
