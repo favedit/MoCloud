@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <ToolBar name="resource.share.resource.CanvasToolBar" label="画板工具栏">
+      <ToolButton name='folderOpen' linker='_controlFolderOpen' icon='resource.tools.open' hint='展开选中节点'/>
+      <ToolButton name='folderClose' linker='_controlFolderClose' icon='resource.tools.close' hint='收起选中节点'/>
+   </ToolBar>
+</Content>

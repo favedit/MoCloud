@@ -1,6 +1,8 @@
 package org.mo.content.service.resource;
 
+import com.cyou.gccloud.data.data.FDataResourceResourceLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
+import com.cyou.gccloud.define.enums.core.EGcResourceShare;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
@@ -137,11 +139,129 @@ public class FResourceService
             FXmlNode xresource = xresources.createNode("Resource");
             xresource.set("guid", resource.get("guid"));
             xresource.set("type_cd", EGcResource.format(resource.resourceCd()));
+            xresource.set("share_cd", EGcResourceShare.format(resource.shareCd()));
             xresource.set("code", resource.get("code"));
             xresource.set("label", resource.get("label"));
             xresource.set("update_date", resource.get("update_date"));
          }
       }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>获取共享数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult listShare(IWebContext context,
+                            ILogicContext logicContext,
+                            FGcSessionInfo session,
+                            IWebInput input,
+                            IWebOutput output){
+      // 检查参数
+      String typeCd = context.parameter("type_cd");
+      String serach = context.parameter("serach");
+      String order = context.parameter("order");
+      int pageSize = RInteger.toRange(context.parameterAsInteger("page_size", 40), 0, 100);
+      int page = context.parameterAsInteger("page", 0);
+      // 设置输出节点
+      FXmlNode xresources = output.config().createNode("ResourceCollection");
+      xresources.set("total", 0);
+      xresources.set("count", 0);
+      xresources.set("page_count", 0);
+      xresources.set("page_size", pageSize);
+      xresources.set("page", page);
+      //............................................................
+      // 生成查询脚本
+      FString whereSql = new FString();
+      whereSql.append(FDataResourceResourceLogic.SHARE_CD + "=" + EGcResourceShare.Public);
+      if(!RString.isEmpty(serach)){
+         whereSql.append(" AND (" + FDataResourceResourceLogic.LABEL + " LIKE '%" + serach + "%')");
+      }
+      if(!RString.isEmpty(typeCd)){
+         if(!typeCd.contains("All")){
+            String[] types = RString.split(typeCd, '|');
+            whereSql.append(" AND (RESOURCE_CD IN (");
+            int count = types.length;
+            for(int n = 0; n < count; n++){
+               String type = types[n];
+               int typeCode = EGcResource.parse(type);
+               if(n > 0){
+                  whereSql.append(",");
+               }
+               whereSql.append(typeCode);
+            }
+            whereSql.append("))");
+         }
+      }
+      //............................................................
+      // 查询数据
+      FLogicDataset<FGcResourceInfo> dataset = _resourceConsole.fetch(logicContext, whereSql.toString(), order, pageSize, page);
+      //............................................................
+      // 生成输出内容
+      if(dataset != null){
+         xresources.set("total", dataset.total());
+         xresources.set("count", dataset.count());
+         xresources.set("page_size", dataset.pageSize());
+         xresources.set("page_count", dataset.pageCount());
+         xresources.set("page", dataset.page());
+         for(FGcResourceInfo resource : dataset){
+            FXmlNode xresource = xresources.createNode("Resource");
+            xresource.set("guid", resource.get("guid"));
+            xresource.set("type_cd", EGcResource.format(resource.resourceCd()));
+            xresource.set("share_cd", EGcResourceShare.format(resource.shareCd()));
+            xresource.set("code", resource.get("code"));
+            xresource.set("label", resource.get("label"));
+            xresource.set("update_date", resource.get("update_date"));
+         }
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>分享数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult share(IWebContext context,
+                        ILogicContext logicContext,
+                        FGcSessionInfo session,
+                        IWebInput input,
+                        IWebOutput output){
+      // 检查参数
+      String guid = context.parameter("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Resource guid is empty.");
+      }
+      String shareCode = context.parameter("share_cd");
+      if(RString.isEmpty(shareCode)){
+         throw new FFatalError("Resource share type is empty.");
+      }
+      int shareCd = EGcResourceShare.parse(shareCode);
+      //............................................................
+      // 获得会话信息
+      long userId = session.userId();
+      //............................................................
+      // 查找资源
+      FGcResourceInfo resourceInfo = _resourceConsole.getByGuid(logicContext, guid);
+      if(resourceInfo.userId() != userId){
+         throw new FFatalError("Session user is not resource user.");
+      }
+      if(resourceInfo.shareCd() != shareCd){
+         resourceInfo.setShareCd(shareCd);
+         _resourceConsole.doUpdate(logicContext, resourceInfo);
+      }
+      // 返回结果
       return EResult.Success;
    }
 
