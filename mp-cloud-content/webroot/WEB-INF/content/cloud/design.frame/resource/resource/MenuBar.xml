@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.resource.MenuBar">
    <MenuBar name="design3d.resource.MenuBar" type='FDsResourceMenuBar' label="菜单">
-      <MenuButton name='importPictureButton' linker='_controlImportPictureButton' icon='design3d.tools.import' label='导入图片'/>
-      <MenuButton name='importMeshButton' linker='_controlImportMeshButton' icon='design3d.tools.import' label='导入模型'/>
-      <MenuButton name='deleteButton' linker='_controlDeleteButton' icon='design3d.tools.delete' label='删除资源'/>
+      <MenuButton name='importPicture' linker='_controlImportPicture' icon='resource.tools.import' label='导入图片'/>
+      <MenuButton name='importMesh' linker='_controlImportMesh' icon='resource.tools.import' label='导入模型'/>
+      <MenuButton name='delete' linker='_controlDelete' icon='resource.tools.delete' label='删除资源'/>
+      <MenuButtonSplit/>
+      <MenuButton name='shareOpen' linker='_controlShareOpen' icon='resource.resource.share-open' label='用户共享'/>
+      <MenuButton name='shareClose' linker='_controlShareClose' icon='resource.resource.share-close' label='取消共享'/>
    </MenuBar>
 </Content>

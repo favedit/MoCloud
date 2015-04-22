@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.resource" update_date="20141209154356">
    <TreeView name="design3d.resource" label="资源目录" is_valid="Y" note="" is_config="N" disp_checked="N">
-     <TreeNodeType name="space" code="Space" label="空间" is_valid="Y" note="" icon="design3d.mesh.scene"/>
-     <TreeNodeType name="technique" code="Technique" label="技术" is_valid="Y" note="" icon="design3d.mesh.technique"/>
-     <TreeNodeType name="region" code="Region" label="区域" is_valid="Y" note="" icon="design3d.mesh.region"/>
-     <TreeNodeType name="camera" code="Camera" label="相机" is_valid="Y" note="" icon="design3d.mesh.camera"/>
-     <TreeNodeType name="light" code="Light" label="光源" is_valid="Y" note="" icon="design3d.mesh.light"/>
-     <TreeNodeType name="layers" code="Layers" label="显示层集合" is_valid="Y" note="" icon="design3d.mesh.layers"/>
-     <TreeNodeType name="layer" code="Layer" label="显示层" is_valid="Y" note="" icon="design3d.mesh.layer"/>
-     <TreeNodeType name="display" code="Display" label="显示对象" is_valid="Y" note="" icon="design3d.mesh.display"/>
-     <TreeNodeType name="material" code="Material" label="渲染材质" is_valid="Y" note="" icon="design3d.mesh.material"/>
-     <TreeNodeType name="renderable" code="Renderable" label="渲染对象" is_valid="Y" note="" icon="design3d.mesh.renderable"/>
+     <TreeNodeType name="space" code="Space" label="空间" is_valid="Y" note="" icon="resource.mesh.scene"/>
+     <TreeNodeType name="technique" code="Technique" label="技术" is_valid="Y" note="" icon="resource.mesh.technique"/>
+     <TreeNodeType name="region" code="Region" label="区域" is_valid="Y" note="" icon="resource.mesh.region"/>
+     <TreeNodeType name="camera" code="Camera" label="相机" is_valid="Y" note="" icon="resource.mesh.camera"/>
+     <TreeNodeType name="light" code="Light" label="光源" is_valid="Y" note="" icon="resource.mesh.light"/>
+     <TreeNodeType name="layers" code="Layers" label="显示层集合" is_valid="Y" note="" icon="resource.mesh.layers"/>
+     <TreeNodeType name="layer" code="Layer" label="显示层" is_valid="Y" note="" icon="resource.mesh.layer"/>
+     <TreeNodeType name="display" code="Display" label="显示对象" is_valid="Y" note="" icon="resource.mesh.display"/>
+     <TreeNodeType name="material" code="Material" label="渲染材质" is_valid="Y" note="" icon="resource.mesh.material"/>
+     <TreeNodeType name="renderable" code="Renderable" label="渲染对象" is_valid="Y" note="" icon="resource.mesh.renderable"/>
    </TreeView>
 </Content>

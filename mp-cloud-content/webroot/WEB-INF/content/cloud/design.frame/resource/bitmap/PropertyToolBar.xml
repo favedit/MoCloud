@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design2d.bitmap.PropertyToolBar">
    <ToolBar name="design2d.bitmap.PropertyToolBar" label="画板工具栏">
-      <ToolButton name='select' linker='_controlDrop' icon='design3d.canvas.hand' label='选中' hint='观察模式'/>
-      <ToolButton name='up' linker='_controlUp' icon='design3d.canvas.hand' label='不选' hint='观察模式'/>
+      <ToolButton name='select' linker='_controlDrop' icon='resource.canvas.hand' label='选中' hint='观察模式'/>
+      <ToolButton name='up' linker='_controlUp' icon='resource.canvas.hand' label='不选' hint='观察模式'/>
    </ToolBar>
 </Content>

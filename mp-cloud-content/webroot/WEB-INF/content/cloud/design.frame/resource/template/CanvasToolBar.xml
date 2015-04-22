@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.CanvasToolBar">
-   <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
+<Content>
+   <ToolBar name="design3d.scene.CanvasToolBar" type='FDsTemplateCanvasToolBar' label="画板工具栏">
       <ToolButtonCheck name='mode.drop' linker='_controlModeDrop' icon='resource.canvas.hand' group_name='mode' group_default='dropButton' hint='观察模式'/>
       <ToolButtonCheck name='mode.select' linker='_controlModeSelect' icon='resource.canvas.pointer' group_name='mode' group_default='dropButton' hint='选取模式'/>
       <ToolButtonSplit/>
-      <ToolButtonCheck name='translate' linker='_controlTranslate' icon='resource.canvas.translate' group_name='mode' group_default='dropButton' hint='移动选中物件'/>
-      <ToolButtonCheck name='rotation' linker='_controlRotation' icon='resource.canvas.rotation' group_name='mode' group_default='dropButton' hint='旋转选中物件'/>
-      <ToolButtonCheck name='scale' linker='_controlScale' icon='resource.canvas.scale' group_name='mode' group_default='dropButton' hint='缩放选中物件'/>
+      <ToolButtonCheck name='translate' linker='_controlTranslate' icon='resource.canvas.translate' label='移动' group_name='mode' group_default='dropButton' hint='移动选中物件'/>
+      <ToolButtonCheck name='rotation' linker='_controlRotation' icon='resource.canvas.rotation' label='旋转' group_name='mode' group_default='dropButton' hint='旋转选中物件'/>
+      <ToolButtonCheck name='scale' linker='_controlScale' icon='resource.canvas.scale' label='缩放' group_name='mode' group_default='dropButton' hint='缩放选中物件'/>
       <ToolButtonSplit/>
       <ToolButtonCheck name='look.front' linker='_controlLookFront' group_name='look' group_default='lookFrontButton' label='前' hint='从前向后侧观察场景'/>
       <ToolButtonCheck name='look.up' linker='_controlLookUp' group_name='look' group_default='lookFrontButton' label='上' hint='从上向下侧观察场景'/>

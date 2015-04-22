@@ -2,7 +2,7 @@
 
 @SET APP_ROOT=%cd%\..
 
-@SET JAVA_HOME=C:\Program Files\Java\jdk1.7.0_79
+@SET JAVA_HOME=C:\Program Files\Java\jdk1.7.0_67
 @SET CATALINA_OPTS=-Xms512m -Xmx2048m
 @SET CATALINA_HOME=%APP_ROOT%\mt-server\tomcat-cloud.content
 @SET MOBJ_MODE=Logic

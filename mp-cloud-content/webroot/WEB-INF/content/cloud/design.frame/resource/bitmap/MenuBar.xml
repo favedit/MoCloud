@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design2d.bitmap.MenuBar">
    <MenuBar name="design2d.bitmap.MenuBar" type='FDsBitmapMenuBar' label="菜单">
-      <MenuButton name='saveButton' linker='_controlSaveButton' icon='design3d.tools.save' label='保存'/>
-      <MenuButton name='import' linker='_controlImportButton' icon='design3d.tools.import' label='导入'/>
+      <MenuButton name='saveButton' linker='_controlSaveButton' icon='resource.tools.save' label='保存'/>
+      <MenuButton name='import' linker='_controlImportButton' icon='resource.tools.import' label='导入'/>
    </MenuBar>
 </Content>

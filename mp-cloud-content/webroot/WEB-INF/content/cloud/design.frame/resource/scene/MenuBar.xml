@@ -5,6 +5,6 @@
       <MenuButton name='capture' linker='_controlCapture' icon='resource.scene.capture' label='生成预览'/>
       <MenuButton name='execute' linker='_controlExecute' icon='resource.scene.execute' label='运行测试'/>
       <MenuButtonSplit/>
-      <MenuButton name='importTemplate' linker='_controlInsertTemplate' icon='design3d.tools.import' label='导入模板'/>
+      <MenuButton name='importTemplate' linker='_controlInsertTemplate' icon='resource.tools.import' label='导入模板'/>
    </MenuBar>
 </Content>
