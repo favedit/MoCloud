@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="resource.scene.FrameSet">
+<Content name="resource.share.model.FrameSet">
    <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
       <FramePage name='catalogFrame' linker='_frameCatalog' label='目录区' size='340,0'>
          <FrameSet name='canvasFrameSet' direction_cd='V' label='目录布局'>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.mesh.MenuBar">
-   <MenuBar name="design3d.mesh.MenuBar" type='FDsSceneMenuBar' label="菜单">
-      <MenuButton name='saveButton' linker='_controlSaveButton' icon='resource.tools.save' label='保存'/>
-      <MenuButton name='captureButton' linker='_controlCaptureButton' icon='resource.tools.save' label='生成预览'/>
+<Content>
+   <MenuBar name="resource.share.template.MenuBar" type='FDsShareTemplateMenuBar' label="菜单">
+      <MenuButton name='refresh' linker='_controlRefresh' icon='tools.refresh' label='刷新'/>
    </MenuBar>
 </Content>
