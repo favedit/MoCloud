@@ -15,7 +15,7 @@ import org.mo.web.protocol.context.IWebOutput;
 public interface IMaterialService
 {
    //============================================================
-   // <T>获取图像列表。</T>
+   // <T>获取材质列表。</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -28,6 +28,21 @@ public interface IMaterialService
                 FGcSessionInfo session,
                 IWebInput input,
                 IWebOutput output);
+
+   //============================================================
+   // <T>获取材质位图列表。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult listBitmap(IWebContext context,
+                      ILogicContext logicContext,
+                      FGcSessionInfo session,
+                      IWebInput input,
+                      IWebOutput output);
 
    //============================================================
    // <T>查询数据处理。</T>

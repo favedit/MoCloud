@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.mesh.MenuBar">
-   <MenuBar name="design3d.mesh.MenuBar" type='FDsSceneMenuBar' label="菜单">
-      <MenuButton name='saveButton' linker='_controlSaveButton' icon='design3d.tools.save' label='保存'/>
-      <MenuButton name='captureButton' linker='_controlCaptureButton' icon='design3d.tools.save' label='生成预览'/>
+<Content>
+   <MenuBar name="resource.share.material.MenuBar" type='FDsShareMaterialMenuBar' label="菜单">
+      <MenuButton name='back' linker='_controlBack' icon='tools.back' label='返回上页'/>
    </MenuBar>
 </Content>

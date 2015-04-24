@@ -1,11 +1,21 @@
 package org.mo.content.service.resource.material;
 
+import com.cyou.gccloud.data.data.FDataResourceMaterialBitmapLogic;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource.bitmap.IGcResBitmapConsole;
+import org.mo.cloud.logic.resource.material.FGcResMaterialBitmapInfo;
+import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
+import org.mo.cloud.logic.resource.material.IGcResMaterialBitmapConsole;
+import org.mo.cloud.logic.resource.material.IGcResMaterialConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
+import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
@@ -27,9 +37,13 @@ public class FMaterialService
    @ALink
    protected IGcResBitmapConsole _bitmapConsole;
 
-   // 位图图像控制台接口
-   //   @ALink
-   //   protected IGcResBitmapImageConsole _bitmapImageConsole;
+   // 材质控制台接口
+   @ALink
+   protected IGcResMaterialConsole _materialConsole;
+
+   // 材质位图控制台接口
+   @ALink
+   protected IGcResMaterialBitmapConsole _materialBitmapConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -80,6 +94,58 @@ public class FMaterialService
    }
 
    //============================================================
+   // <T>获取材质位图列表。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult listBitmap(IWebContext context,
+                             ILogicContext logicContext,
+                             FGcSessionInfo session,
+                             IWebInput input,
+                             IWebOutput output){
+      // 检查参数
+      String guid = context.parameter("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Material guid is empty. (guid={1})", guid);
+      }
+      //............................................................
+      // 获得材质信息
+      FGcResMaterialInfo materialInfo = _materialConsole.getByGuid(logicContext, guid);
+      long materialId = materialInfo.ouid();
+      //............................................................
+      // 生成查询脚本
+      String whereSql = "(" + FDataResourceMaterialBitmapLogic.USER_ID + "=" + session.userId() + ")";
+      whereSql += " AND (" + FDataResourceMaterialBitmapLogic.MATERIAL_ID + "=" + materialId + ")";
+      String orderSql = FDataResourceMaterialBitmapLogic.CODE + " ASC";
+      // 查询数据
+      FLogicDataset<FGcResMaterialBitmapInfo> dataset = _materialBitmapConsole.fetch(logicContext, whereSql, orderSql);
+      // 设置输出节点
+      FXmlNode xoutput = output.config().createNode("BitmapCollection");
+      xoutput.set("total", dataset.total());
+      xoutput.set("count", dataset.count());
+      xoutput.set("page_size", dataset.pageSize());
+      xoutput.set("page_count", dataset.pageCount());
+      xoutput.set("page", dataset.page());
+      for(FGcResMaterialBitmapInfo materialBitmapInfo : dataset){
+         // 查找位图信息
+         long bitmapId = materialBitmapInfo.bitmapId();
+         FGcResBitmapInfo bitmapInfo = _bitmapConsole.find(logicContext, bitmapId);
+         // 创建位图节点
+         FXmlNode xitem = xoutput.createNode("Bitmap");
+         xitem.set("guid", bitmapInfo.guid());
+         xitem.set("code", bitmapInfo.code());
+         xitem.set("label", bitmapInfo.label());
+         xitem.set("update_date", bitmapInfo.updateDate());
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>查询数据处理。</T>
    //
    // @param context 网络环境
@@ -94,26 +160,26 @@ public class FMaterialService
                         FGcSessionInfo session,
                         IWebInput input,
                         IWebOutput output){
-      //      // 检查参数
-      //      FXmlNode xinput = input.config();
-      //      String guid = xinput.nodeText("Guid");
-      //      if(RString.isEmpty(guid)){
-      //         throw new FFatalError("Guid is empty.");
-      //      }
-      //      // 获得数据
-      //      FGcRs3MeshInfo mesh = _meshConsole.findByGuid(logicContext, guid);
-      //      if(mesh == null){
-      //         return EResult.Failure;
-      //      }
-      //      // 检查用户
-      //      if(mesh.userId() != session.userId()){
-      //         throw new FFatalError("Resource3d mesh user is invalid. (project_user_id={1}, session_user_id={2})", mesh.userId(), session.userId());
-      //      }
-      //      // 设置输出
-      //      FXmlNode xproject = output.config().createNode("Project");
-      //      xproject.set("guid", mesh.guid());
-      //      xproject.set("code", mesh.code());
-      //      xproject.set("label", mesh.label());
+      // 检查参数
+      FXmlNode xinput = input.config();
+      String guid = xinput.nodeText("Guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Guid is empty.");
+      }
+      // 获得数据
+      FGcResMaterialInfo materialInfo = _materialConsole.findByGuid(logicContext, guid);
+      if(materialInfo == null){
+         throw new FFatalError("Resource material is not exists. (guid={1})", guid);
+      }
+      // 检查用户
+      if(materialInfo.userId() != session.userId()){
+         throw new FFatalError("Resource material user is invalid. (project_user_id={1}, session_user_id={2})", materialInfo.userId(), session.userId());
+      }
+      // 设置输出
+      FXmlNode xbitmap = output.config().createNode("Material");
+      xbitmap.set("guid", materialInfo.guid());
+      xbitmap.set("code", materialInfo.code());
+      xbitmap.set("label", materialInfo.label());
       return EResult.Success;
    }
 
