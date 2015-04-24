@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.mesh.Workspace">
-   <Workspace name="design3d.mesh.Workspace" label="场景工作区">
+<Content>
+   <Workspace name="resource.private.material.Workspace" label="场景工作区">
       <FrameSet name='mainFrameSet' direction_cd='V' label='页面布局'>
          <FramePage name='toolbarFrame' label='工具栏区' size='0,24'/>
          <FramePage name='bodyFrame' label='工作区'/>

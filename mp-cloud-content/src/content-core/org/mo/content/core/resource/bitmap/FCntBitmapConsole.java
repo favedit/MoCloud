@@ -96,27 +96,30 @@ public class FCntBitmapConsole
    // <T>更新位图数据。</T>
    //
    // @param logicContext 逻辑环境
-   // @param bitmap 位图信息
+   // @param bitmapInfo 位图信息
    // @param stream 数据流
    // @return 处理结果
    //============================================================
    @Override
    public EResult updateData(ILogicContext logicContext,
-                             FGcResBitmapInfo bitmap,
+                             FGcResBitmapInfo bitmapInfo,
                              FByteStream stream){
       // 检查参数
-      if(bitmap == null){
+      if(bitmapInfo == null){
          throw new FFatalError("Bitmap is not exists.");
       }
       if(stream == null){
          throw new FFatalError("Stream is not exists.");
       }
+      String guid = bitmapInfo.guid();
       //............................................................
       // 存储数据
-      String imageGuid = bitmap.guid();
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.ResourceBitmap, imageGuid);
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.ResourceBitmap, guid);
       storage.setData(stream.toArray());
       _storageConsole.store(storage);
+      //............................................................
+      // 删除缓冲数据
+      _storageConsole.delete(EGcStorageCatalog.CacheBitmapPreview, guid);
       return EResult.Success;
    }
 

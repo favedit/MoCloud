@@ -68,11 +68,11 @@ public interface IBitmapService
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   EResult upate(IWebContext context,
-                 ILogicContext logicContext,
-                 FGcSessionInfo session,
-                 IWebInput input,
-                 IWebOutput output);
+   EResult update(IWebContext context,
+                  ILogicContext logicContext,
+                  FGcSessionInfo session,
+                  IWebInput input,
+                  IWebOutput output);
 
    //============================================================
    // <T>删除数据处理。</T>

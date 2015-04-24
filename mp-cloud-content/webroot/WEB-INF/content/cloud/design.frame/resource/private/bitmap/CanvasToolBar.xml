@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.CanvasToolBar">
-   <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButtonCheck name='drop' linker='_controlDrop' icon='resource.canvas.hand' group_name='mode' group_default='drop' hint='观察模式'/>
-      <ToolButtonSplit/>
-      <ToolButtonMenu name='size' icon='tools.size' label='图片大小' hint='修改图片的尺寸'>
+<Content>
+   <ToolBar name="resource.private.bitmap.CanvasToolBar" label="画板工具栏">
+      <ToolButtonMenu name='size' icon='tools.size' label='缩放' hint='缩小或放大图像'>
          <MenuButton name='sizeAuto' linker='_controlSize1' label='自动适应'/>
          <MenuButtonSplit/>
-         <MenuButton name='size200x150' linker='_controlSize2' label='200x150' hint='屏幕尺寸：宽200 x 高150'/>
-         <MenuButton name='size640x480' linker='_controlSize3' label='640x480' hint='屏幕尺寸：宽640 x 高480'/>
-         <MenuButton name='size1280x720' linker='_controlSize4' label='1280x720' hint='屏幕尺寸：宽1280 x 高720'/>
+         <MenuButton name='size2' linker='_controlSize2' label='放大2倍' hint='放大当前图像的2倍'/>
+         <MenuButton name='size4' linker='_controlSize3' label='放大4倍' hint='放大当前图像的4倍'/>
+         <MenuButton name='size8' linker='_controlSize4' label='放大8倍' hint='放大当前图像的8倍'/>
       </ToolButtonMenu>
       <ToolButtonEdit name='sizeWidth' linker='_controlSizeWidth' edit_size='40,0'/>
       <ToolButtonEdit name='sizeHeight ' linker='_controlSizeHeight' edit_size='40,0'/>
-      <ToolButtonSplit/>
-      <ToolButtonMenu name='rotationMenu' icon='resource.tools.autosize' label='旋转调整' hint='自动调整物件适合坐标'>
-         <MenuButton name='rotationFlipX' linker='_controlRotationFlipX' label='左右翻转'/>
-         <MenuButton name='rotationFlipY' linker='_controlRotationFlipY' label='上下翻转'/>
-         <MenuButtonSplit/>
-         <MenuButton name='rotationRight' linker='_controlRotationRight' label='向右旋转90度'/>
-         <MenuButton name='rotationLeft' linker='_controlRotationLeft' label='向左旋转90度'/>
-      </ToolButtonMenu>
    </ToolBar>
 </Content>

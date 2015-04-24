@@ -37,12 +37,12 @@ public interface ICntBitmapConsole
    // <T>更新位图数据。</T>
    //
    // @param logicContext 逻辑环境
-   // @param bitmap 位图信息
+   // @param bitmapInfo 位图信息
    // @param stream 数据流
    // @return 处理结果
    //============================================================
    EResult updateData(ILogicContext logicContext,
-                      FGcResBitmapInfo bitmap,
+                      FGcResBitmapInfo bitmapInfo,
                       FByteStream stream);
 
    //============================================================

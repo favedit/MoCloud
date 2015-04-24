@@ -47,6 +47,78 @@ public class FBitmapServlet
    protected ICntBitmapConsole _bitmapConsole;
 
    //============================================================
+   // <T>逻辑处理。</T>
+   // <P>catalog:分类</P>
+   // <P>date:日期</P>
+   // <P>code:代码</P>
+   // <P>version:版本</P>
+   // <P>type:类型，没有的话，存储为 bin</P>
+   // <P>size:大小</P>
+   // <P>存储位置：\{catalog}\{date:yyyymmdd}\{code}\{version}.{type}</P>
+   //
+   // @param context 环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   //   public void process(IWebContext context,
+   //                       ILogicContext logicContext,
+   //                       IWebServletRequest request,
+   //                       IWebServletResponse response){
+   //               // 检查代码
+   //               String guid = context.parameter("guid");
+   //               String code = context.parameter("code");
+   //               if(RString.isEmpty(guid) || RString.isEmpty(code)){
+   //                  throw new FFatalError("Texture parameter is invalid. (guid={1}, code={2})", guid, code);
+   //               }
+   //               // 查找纹理
+   //               FDataResource3dTextureLogic textureLogic = logicContext.findLogic(FDataResource3dTextureLogic.class);
+   //               FDataResource3dTextureUnit textureUnit = textureLogic.findByGuid(guid);
+   //               if(textureUnit == null){
+   //                  throw new FFatalError("Texture is not exists. (guid={1})", guid);
+   //               }
+   //               String formatCode = "jpg";
+   //               byte[] data = _textureConsole.makeBitmapData(logicContext, guid, code);
+   //               if("environment".equals(code)){
+   //                  int index = context.parameterAsInteger("index", 0);
+   //                  try(FImage image = new FImage(data)){
+   //                     int height = image.height();
+   //                     try(FImage faceImage = image.imageRectangle(height * index, 0, height, height)){
+   //                        data = faceImage.toBytes("jpg");
+   //                     }
+   //                  }catch(Exception e){
+   //                     throw new FFatalError(e);
+   //                  }
+   //               }else{
+   //                  if(code.contains("_")){
+   //                     String[] items = RString.split(code, '_');
+   //                     if(items.length == 2){
+   //                        formatCode = "png";
+   //                     }
+   //                  }
+   //               }
+   //               int dataLength = data.length;
+   //               // 发送数据
+   //               _logger.debug(this, "process", "Send data. (length={1})", dataLength);
+   //               response.setCharacterEncoding("utf-8");
+   //               response.setStatus(HttpServletResponse.SC_OK);
+   //               response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
+   //               response.addHeader("Last-Modified", System.currentTimeMillis());
+   //               response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
+   //               switch(formatCode){
+   //                  case "jpg":
+   //                     response.setContentType(EMime.Jpg.mime());
+   //                     break;
+   //                  case "png":
+   //                     response.setContentType(EMime.Png.mime());
+   //                     break;
+   //                  default:
+   //                     response.setContentType(EMime.Bin.mime());
+   //               }
+   //               response.setContentLength(dataLength);
+   //               response.write(data, 0, dataLength);
+   //   }
+
+   //============================================================
    // <T>获得预览数据处理。</T>
    //
    // @param context 环境
@@ -69,10 +141,10 @@ public class FBitmapServlet
       //............................................................
       // 生成预览
       byte[] data = _bitmapConsole.makeViewData(logicContext, guid);
-      int dataLength = 0;
-      if(data != null){
-         dataLength = data.length;
+      if(data == null){
+         throw new FFatalError("Bitmap is not exists. (guid={1})", guid);
       }
+      int dataLength = data.length;
       //............................................................
       // 发送数据
       _logger.debug(this, "process", "Send bitmap image view data. (guid={1}, length={2})", guid, dataLength);
@@ -192,6 +264,72 @@ public class FBitmapServlet
          _bitmapConsole.doInsert(logicContext, bitmap);
          // 上传图像数据
          _bitmapConsole.updateData(logicContext, bitmap, file);
+      }catch(Exception e){
+         throw new FFatalError(e);
+      }finally{
+         file.close();
+      }
+      //............................................................
+      // 发送数据
+      _logger.debug(this, "process", "Send model data. (length={1})", dataLength);
+      response.setCharacterEncoding("utf-8");
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
+      response.addHeader("Last-Modified", System.currentTimeMillis());
+      response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
+      response.setContentType(EMime.Bin.mime());
+      response.setContentLength(0);
+   }
+
+   //============================================================
+   // <T>更新数据处理。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param session 会话
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public void updateData(IWebContext context,
+                          ILogicContext logicContext,
+                          FGcSessionInfo session,
+                          IWebServletRequest request,
+                          IWebServletResponse response){
+      // 检查参数
+      String guid = context.parameter("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Bitmap guid is empty.");
+      }
+      int dataLength = context.parameterAsInteger("data_length");
+      if((dataLength <= 0) || (dataLength > RInteger.SIZE_64M)){
+         throw new FFatalError("Bitmap data length is invalid.");
+      }
+      String fileName = context.parameter("file_name");
+      if(RString.isEmpty(fileName)){
+         throw new FFatalError("Bitmap file name is empty.");
+      }
+      String extension = RFile.extension(fileName);
+      if("jpg".equals(extension)){
+      }else if("png".equals(extension)){
+      }else{
+         throw new FFatalError("Unknown file format.");
+      }
+      // 获得位图信息
+      FGcResBitmapInfo bitmapInfo = _bitmapConsole.getByGuid(logicContext, guid);
+      if(bitmapInfo == null){
+         throw new FFatalError("Bitmap is notformat.");
+      }
+      // 检查用户有效
+      long userId = session.userId();
+      if(bitmapInfo.userId() != userId){
+         throw new FFatalError("Resource bitmap user is invalid. (project_user_id={1}, session_user_id={2})", bitmapInfo.userId(), userId);
+      }
+      // 上传图像数据
+      FByteFile file = new FByteFile(dataLength);
+      file.loadStream(request.inputStream());
+      try{
+         _bitmapConsole.updateData(logicContext, bitmapInfo, file);
       }catch(Exception e){
          throw new FFatalError(e);
       }finally{

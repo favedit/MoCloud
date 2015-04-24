@@ -367,7 +367,7 @@ public class FServiceConsole
       }
       FServiceMethodDescriptor methodDescriptor = findMethod(service.faceClass(), action);
       if(methodDescriptor == null){
-         _logger.warn(this, "execute", "Can't find method in service. (instance={1}, action={2})", instance, action);
+         _logger.warn(this, "execute", "Can't find method in service. (instance={1}, action={2}, class={3})", instance, action, instance.getClass().getName());
          throwError(context, "error.method.notexists", name);
       }
       _logger.debug(this, "execute", "Process service. (name={1}, instance={2}, action={3})", name, instance, action);
