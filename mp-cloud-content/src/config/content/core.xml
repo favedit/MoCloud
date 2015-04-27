@@ -6,8 +6,8 @@
    <!-- StorageConsole:资源存储控制台                        -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.content.engine3d.core.storage.IResStorageConsole'
-         class = 'org.mo.content.engine3d.core.storage.FResStorageConsole'
+         face  = 'org.mo.content.engine.core.storage.IResStorageConsole'
+         class = 'org.mo.content.engine.core.storage.FResStorageConsole'
          scope = 'global'>
       <Property name='config_file_name'>${application}/data/storage.xml</Property>
       <Initialize name='initialize'/>
