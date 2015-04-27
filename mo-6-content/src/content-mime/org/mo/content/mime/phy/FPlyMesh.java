@@ -1,5 +1,9 @@
 package org.mo.content.mime.phy;
 
+import org.mo.content.resource.mesh.FResMesh;
+
+import org.mo.content.resource.common.FResGeometry;
+import org.mo.content.resource.common.FResStream;
 import com.cyou.gccloud.define.enums.common.EGcData;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FObject;
@@ -7,9 +11,6 @@ import org.mo.com.lang.FObjects;
 import org.mo.content.geom.mesh.FGeomMesh;
 import org.mo.content.geom.mesh.SGeomFace;
 import org.mo.content.geom.mesh.SGeomVertex;
-import org.mo.content.resource3d.common.FRs3Geometry;
-import org.mo.content.resource3d.common.FRs3Stream;
-import org.mo.content.resource3d.mesh.FRs3Mesh;
 
 //============================================================
 // <T>PLY网格。</T>
@@ -119,7 +120,7 @@ public class FPlyMesh
    //
    // @return 面集合
    //============================================================
-   public void buildMesh(FRs3Mesh mesh){
+   public void buildMesh(FResMesh mesh){
       mesh.streams().clear();
       // 导入数据流
       int vertexCount = _vertexs.count();
@@ -127,7 +128,7 @@ public class FPlyMesh
       //............................................................
       // 建立顶点坐标流
       if(_vertexPosition){
-         FRs3Stream vertexPositionStream = new FRs3Stream();
+         FResStream vertexPositionStream = new FResStream();
          vertexPositionStream.setCode("position");
          vertexPositionStream.setElementDataCd(EGcData.Float32);
          vertexPositionStream.setElementCount(3);
@@ -145,7 +146,7 @@ public class FPlyMesh
       //............................................................
       // 建立顶点颜色流
       if(_vertexColor){
-         FRs3Stream vertexColorStream = new FRs3Stream();
+         FResStream vertexColorStream = new FResStream();
          vertexColorStream.setCode("color");
          vertexColorStream.setElementDataCd(EGcData.Uint8);
          vertexColorStream.setElementCount(4);
@@ -162,7 +163,7 @@ public class FPlyMesh
          mesh.streams().push(vertexColorStream);
       }
       //............................................................
-      FRs3Stream indexStream = new FRs3Stream();
+      FResStream indexStream = new FResStream();
       indexStream.setCode("index32");
       indexStream.setElementDataCd(EGcData.Int32);
       indexStream.setElementCount(3);
@@ -183,7 +184,7 @@ public class FPlyMesh
    //
    // @return 面集合
    //============================================================
-   public void buildMesh(FRs3Geometry mesh){
+   public void buildMesh(FResGeometry mesh){
       mesh.clearStreams();
       // 导入数据流
       int vertexCount = _vertexs.count();
@@ -191,7 +192,7 @@ public class FPlyMesh
       //............................................................
       // 建立顶点坐标流
       if(_vertexPosition){
-         FRs3Stream vertexPositionStream = new FRs3Stream();
+         FResStream vertexPositionStream = new FResStream();
          vertexPositionStream.setCode("position");
          vertexPositionStream.setElementDataCd(EGcData.Float32);
          vertexPositionStream.setElementCount(3);
@@ -209,7 +210,7 @@ public class FPlyMesh
       //............................................................
       // 建立顶点颜色流
       if(_vertexColor){
-         FRs3Stream vertexColorStream = new FRs3Stream();
+         FResStream vertexColorStream = new FResStream();
          vertexColorStream.setCode("color");
          vertexColorStream.setElementDataCd(EGcData.Uint8);
          vertexColorStream.setElementCount(4);
@@ -226,7 +227,7 @@ public class FPlyMesh
          mesh.pushStream(vertexColorStream);
       }
       //............................................................
-      FRs3Stream indexStream = new FRs3Stream();
+      FResStream indexStream = new FResStream();
       indexStream.setCode("index32");
       indexStream.setElementDataCd(EGcData.Int32);
       indexStream.setElementCount(3);

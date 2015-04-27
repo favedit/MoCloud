@@ -1,5 +1,7 @@
 package org.mo.content.face.resource.template;
 
+import org.mo.content.engine.core.template.IResTemplateConsole;
+
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -10,7 +12,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.engine3d.core.template.IResTemplateConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;

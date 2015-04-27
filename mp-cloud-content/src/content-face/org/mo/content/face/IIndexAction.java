@@ -4,15 +4,19 @@ import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.core.container.AContainer;
 
 //============================================================
-//<P>用户逻辑接口</P>
+// <P>首页接口。</P>
 //
-//@class IPersonAction
-//@author Sunhr
-//@Date 2012.11.05  
-//@version 1.0.0
+// @author maocy
+// @version 150427
 //============================================================
 public interface IIndexAction
 {
+   //============================================================
+   // <T>默认逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param page 页面
+   //============================================================
    String construct(ISqlContext context,
                     @AContainer(name = "page") FIndexPage page);
 }

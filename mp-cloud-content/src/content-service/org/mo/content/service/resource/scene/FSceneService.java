@@ -1,5 +1,14 @@
 package org.mo.content.service.resource.scene;
 
+import org.mo.content.resource.scene.FResScene;
+import org.mo.content.resource.scene.FResSceneDisplay;
+
+import org.mo.content.resource.common.FResComponent;
+import org.mo.content.resource.common.FResDisplay;
+import org.mo.content.resource.common.FResDisplayContainer;
+import org.mo.content.resource.common.FResDisplayLayer;
+import org.mo.content.resource.common.FResObject;
+import org.mo.content.resource.common.FResSprite;
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -13,14 +22,6 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.content.core.solution.project.ICntProjectConsole;
-import org.mo.content.resource3d.common.FRs3Component;
-import org.mo.content.resource3d.common.FRs3Display;
-import org.mo.content.resource3d.common.FRs3DisplayContainer;
-import org.mo.content.resource3d.common.FRs3DisplayLayer;
-import org.mo.content.resource3d.common.FRs3Object;
-import org.mo.content.resource3d.common.FRs3Sprite;
-import org.mo.content.resource3d.scene.FRs3Scene;
-import org.mo.content.resource3d.scene.FRs3SceneDisplay;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -269,25 +270,25 @@ public class FSceneService
       if(sceneInfo == null){
          throw new FFatalError("Scene is not exists. (guid={1})", sceneInfo);
       }
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
       // 查找模板
       FGcResTemplateInfo templateInfo = _templateConsole.findByCode(logicContext, userId, templateCode);
       if(templateInfo == null){
          throw new FFatalError("Template is not exists. (code={1})", templateCode);
       }
       // 创建显示对象
-      FRs3SceneDisplay sprite = new FRs3SceneDisplay();
+      FResSceneDisplay sprite = new FResSceneDisplay();
       sprite.setCode(code);
       sprite.setLabel(label);
       sprite.setTemplateGuid(templateInfo.guid());
       // 增加显示对象
-      FRs3DisplayLayer layer = scene.findLayerByGuid(layerGuid);
+      FResDisplayLayer layer = scene.findLayerByGuid(layerGuid);
       if(RString.isEmpty(displayGuid)){
          layer.pushDisplay(sprite);
       }else{
-         FRs3Display display = layer.searchDisplayByGuid(displayGuid);
-         if(display instanceof FRs3Sprite){
-            ((FRs3Sprite)display).pushDisplay(sprite);
+         FResDisplay display = layer.searchDisplayByGuid(displayGuid);
+         if(display instanceof FResSprite){
+            ((FResSprite)display).pushDisplay(sprite);
          }
       }
       //............................................................
@@ -326,19 +327,19 @@ public class FSceneService
       if(sceneInfo == null){
          throw new FFatalError("Scene is not exists. (guid={1})", spaceGuid);
       }
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
       // 查找模板
-      FRs3Object findObject = scene.searchByGuid(nodeGuid);
+      FResObject findObject = scene.searchByGuid(nodeGuid);
       if(findObject == null){
          throw new FFatalError("Node guid is not found. (code={1})", nodeGuid);
       }
-      if(findObject instanceof FRs3SceneDisplay){
-         FRs3SceneDisplay display = (FRs3SceneDisplay)findObject;
-         FRs3Component parent = display.parent();
-         if(parent instanceof FRs3DisplayContainer){
-            FRs3DisplayContainer container = (FRs3DisplayContainer)parent;
+      if(findObject instanceof FResSceneDisplay){
+         FResSceneDisplay display = (FResSceneDisplay)findObject;
+         FResComponent parent = display.parent();
+         if(parent instanceof FResDisplayContainer){
+            FResDisplayContainer container = (FResDisplayContainer)parent;
             int index = container.displays().indexOf(display);
-            FRs3SceneDisplay createDisplay = new FRs3SceneDisplay();
+            FResSceneDisplay createDisplay = new FResSceneDisplay();
             createDisplay.assignInfo(display);
             container.displays().insert(createDisplay, index + 1);
          }else{
@@ -424,7 +425,7 @@ public class FSceneService
       }
       // 获得场景
       String guid = xscene.get("guid");
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, guid);
+      FResScene scene = _sceneConsole.makeScene(logicContext, guid);
       // 合并场景
       scene.mergeConfig(xscene);
       // 更新场景
@@ -497,17 +498,17 @@ public class FSceneService
       if(sceneInfo == null){
          throw new FFatalError("Scene is not exists. (guid={1})", spaceGuid);
       }
-      FRs3Scene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
       // 查找模板
-      FRs3Object findObject = scene.searchByGuid(nodeGuid);
+      FResObject findObject = scene.searchByGuid(nodeGuid);
       if(findObject == null){
          throw new FFatalError("Node guid is not found. (code={1})", nodeGuid);
       }
-      if(findObject instanceof FRs3SceneDisplay){
-         FRs3SceneDisplay display = (FRs3SceneDisplay)findObject;
-         FRs3Component parent = display.parent();
-         if(parent instanceof FRs3DisplayContainer){
-            FRs3DisplayContainer container = (FRs3DisplayContainer)parent;
+      if(findObject instanceof FResSceneDisplay){
+         FResSceneDisplay display = (FResSceneDisplay)findObject;
+         FResComponent parent = display.parent();
+         if(parent instanceof FResDisplayContainer){
+            FResDisplayContainer container = (FResDisplayContainer)parent;
             container.removeDisplay(display);
          }else{
             throw new FFatalError("Unknown node parent.");

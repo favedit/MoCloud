@@ -1,8 +1,9 @@
 package org.mo.content.dbexport;
 
+import org.mo.content.engine.core.storage.IResStorageConsole;
+
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
-import org.mo.content.engine3d.core.storage.IResStorageConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;

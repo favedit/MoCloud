@@ -1,7 +1,8 @@
 package org.mo.content.core.resource.material;
 
+import org.mo.content.engine.core.material.IResMaterialConsole;
+
 import org.mo.com.lang.EResult;
-import org.mo.content.engine3d.core.material.IResMaterialConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

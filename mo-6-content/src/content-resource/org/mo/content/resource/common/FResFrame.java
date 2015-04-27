@@ -1,0 +1,53 @@
+package org.mo.content.resource.common;
+
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FObject;
+import org.mo.content.geom.common.SFloatMatrixQuat;
+
+//============================================================
+// <T>资源精灵。</T>
+//============================================================
+public class FResFrame
+      extends FObject
+{
+   protected int _tick;
+
+   protected SFloatMatrixQuat _matrix = new SFloatMatrixQuat();
+
+   //============================================================
+   // <T>构造资源精灵。</T>
+   //============================================================
+   public FResFrame(){
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
+      output.writeUint16(_tick);
+      _matrix.serialize(output);
+   }
+
+   //============================================================
+   // <T>从输入流反序列化数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void unserialize(IDataInput input){
+      _tick = input.readInt32();
+      _matrix.unserialize(input);
+   }
+
+   //============================================================
+   // <T>从输入流中导入数据。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void importData(IDataInput input){
+      _tick = input.readInt32();
+      _matrix.unserialize(input);
+   }
+}

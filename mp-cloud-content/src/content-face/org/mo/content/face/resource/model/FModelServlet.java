@@ -1,7 +1,8 @@
 package org.mo.content.face.resource.model;
 
-import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
+import org.mo.content.engine.core.model.IResModelMeshConsole;
 
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource.FGcResourceCatalogInfo;
@@ -20,7 +21,6 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
-import org.mo.content.engine3d.core.model.IResModelMeshConsole;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.mime.stl.FStlFile;

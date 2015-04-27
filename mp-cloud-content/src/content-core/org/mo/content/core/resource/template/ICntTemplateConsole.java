@@ -1,7 +1,8 @@
 package org.mo.content.core.resource.template;
 
+import org.mo.content.engine.core.template.IResTemplateConsole;
+
 import org.mo.com.lang.EResult;
-import org.mo.content.engine3d.core.template.IResTemplateConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

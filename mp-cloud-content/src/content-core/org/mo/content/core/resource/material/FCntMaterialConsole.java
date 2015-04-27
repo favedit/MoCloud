@@ -1,5 +1,10 @@
 package org.mo.content.core.resource.material;
 
+import org.mo.content.engine.core.material.FResMaterialConsole;
+import org.mo.content.engine.core.material.IResMaterialBitmapConsole;
+
+import org.mo.content.engine.core.bitmap.IResBitmapConsole;
+import org.mo.content.resource.texture.FResTextureBitmapPack;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
@@ -9,10 +14,6 @@ import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.content.engine3d.core.bitmap.IResBitmapConsole;
-import org.mo.content.engine3d.core.material.FResMaterialConsole;
-import org.mo.content.engine3d.core.material.IResMaterialBitmapConsole;
-import org.mo.content.resource3d.texture.FRs3TextureBitmapPack;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
@@ -78,7 +79,7 @@ public class FCntMaterialConsole
                itemDatas[n] = resource.data();
             }
          }
-         try(FRs3TextureBitmapPack pack = new FRs3TextureBitmapPack()){
+         try(FResTextureBitmapPack pack = new FResTextureBitmapPack()){
             if(count == 2){
                // Merge rgb + a
                pack.mergeRgba((byte[])itemDatas[0], (byte[])itemDatas[1]);

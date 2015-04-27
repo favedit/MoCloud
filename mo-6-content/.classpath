@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src/content-mime"/>
 	<classpathentry kind="src" path="src/content-design"/>
 	<classpathentry kind="src" path="src/content-resource"/>
-	<classpathentry kind="src" path="src/engine3d-core"/>
+	<classpathentry kind="src" path="src/content-console"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>

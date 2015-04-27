@@ -5,14 +5,11 @@ import org.mo.core.aop.face.ALink;
 import org.mo.eng.data.common.ISqlContext;
 
 //============================================================
-//<P>用户逻辑实现类</P>
+// <P>首页。</P>
 //
-//@class FPersonAction
-//@author Sunhr
-//@Date 2012.11.05  
-//@version 1.0.0
+// @author maocy
+// @version 150427
 //============================================================
-
 public class FIndexAction
       implements
          IIndexAction
@@ -21,9 +18,15 @@ public class FIndexAction
    @ALink
    protected IAccountConsole _personConsole;
 
+   //============================================================
+   // <T>默认逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param page 页面
+   //============================================================
    @Override
    public String construct(ISqlContext context,
                            FIndexPage areaPage){
-      return "/Index";
+      return "Index";
    }
 }

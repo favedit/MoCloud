@@ -1,5 +1,7 @@
 package org.mo.content.service.resource.template;
 
+import org.mo.content.resource.template.FResTemplate;
+
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -13,7 +15,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
-import org.mo.content.resource3d.template.FRs3Template;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -243,7 +244,7 @@ public class FTemplateService
       }
       // 合并场景
       FGcResTemplateInfo templateInfo = _templateConsole.getByGuid(logicContext, guid);
-      FRs3Template template = _templateConsole.makeTemplate(logicContext, templateInfo);
+      FResTemplate template = _templateConsole.makeTemplate(logicContext, templateInfo);
       template.mergeConfig(xtemplate);
       template.saveUnit(templateInfo);
       _templateConsole.updateResource(logicContext, template);

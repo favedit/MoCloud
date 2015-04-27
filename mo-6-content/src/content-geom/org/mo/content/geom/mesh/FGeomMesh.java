@@ -1,5 +1,8 @@
 package org.mo.content.geom.mesh;
 
+import org.mo.content.resource.mesh.FResMesh;
+
+import org.mo.content.resource.common.FResStream;
 import com.cyou.gccloud.define.enums.common.EGcData;
 import org.mo.com.geom.SDoubleOutline3;
 import org.mo.com.geom.SDoublePoint3;
@@ -10,8 +13,6 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.content.geom.common.SFloatColor4;
-import org.mo.content.resource3d.common.FRs3Stream;
-import org.mo.content.resource3d.mesh.FRs3Mesh;
 
 //============================================================
 // <T>空间网格。</T>
@@ -422,7 +423,7 @@ public class FGeomMesh
    //
    // @return 面集合
    //============================================================
-   public void buildResource(FRs3Mesh mesh){
+   public void buildResource(FResMesh mesh){
       mesh.streams().clear();
       mesh.outline().min.set((float)_outline.min.x, (float)_outline.min.y, (float)_outline.min.z);
       mesh.outline().max.set((float)_outline.max.x, (float)_outline.max.y, (float)_outline.max.z);
@@ -432,7 +433,7 @@ public class FGeomMesh
       //............................................................
       // 建立顶点坐标流
       if(_optionVertexPosition){
-         FRs3Stream stream = new FRs3Stream();
+         FResStream stream = new FResStream();
          stream.setCode("position");
          stream.setElementDataCd(EGcData.Float32);
          stream.setElementCount(3);
@@ -451,7 +452,7 @@ public class FGeomMesh
       //............................................................
       // 建立顶点颜色流
       if(_optionVertexColor){
-         FRs3Stream stream = new FRs3Stream();
+         FResStream stream = new FResStream();
          stream.setCode("color");
          stream.setElementDataCd(EGcData.Uint8);
          stream.setElementCount(4);
@@ -469,7 +470,7 @@ public class FGeomMesh
          mesh.streams().push(stream);
       }
       //............................................................
-      FRs3Stream indexStream = new FRs3Stream();
+      FResStream indexStream = new FResStream();
       indexStream.setCode("index32");
       indexStream.setElementDataCd(EGcData.Int32);
       indexStream.setElementCount(3);

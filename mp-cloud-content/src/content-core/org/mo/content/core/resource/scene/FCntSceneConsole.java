@@ -1,9 +1,10 @@
 package org.mo.content.core.resource.scene;
 
+import org.mo.content.engine.core.scene.FResSceneConsole;
+
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.content.engine3d.core.scene.FResSceneConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

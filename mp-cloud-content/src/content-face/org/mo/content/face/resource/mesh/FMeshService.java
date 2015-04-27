@@ -1,8 +1,9 @@
 package org.mo.content.face.resource.mesh;
 
+import org.mo.content.engine.core.model.IResModelMeshConsole;
+
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
-import org.mo.content.engine3d.core.model.IResModelMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
