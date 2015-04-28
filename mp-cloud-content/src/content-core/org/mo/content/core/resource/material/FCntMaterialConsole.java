@@ -1,7 +1,6 @@
 package org.mo.content.core.resource.material;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.resource.material.FGcResMaterialBitmapInfo;
@@ -27,10 +26,6 @@ public class FCntMaterialConsole
       implements
          ICntMaterialConsole
 {
-   // 存储控制台
-   @ALink
-   protected IGcStorageConsole _storageConsole;
-
    // 资源纹理控制台
    @ALink
    protected IResBitmapConsole _bitmapConsole;

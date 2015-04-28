@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="resource.material.ImportDialog" type='FDsMaterialImportDialog' label="导入位图" is_valid="Y" size='520,240' note="">
+   <Frame name="resource.material.ImportDialog" type='FDsMaterialImportDialog' label="选择位图" is_valid="Y" size='520,240' note="">
       <Panel name='infoPanel' label='文件信息'>
          <File name="file" linker='_controlFile' label="文件" label_size='70,0' valid="Y" edit_size='400,0' input_size='400,0' note="" />
       </Panel>

@@ -1,8 +1,16 @@
 package org.mo.content.engine.core.material;
 
+import org.mo.cloud.core.storage.EGcStorageCatalog;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.material.FGcResMaterialConsole;
+import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
+import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.content.resource.common.FResMaterial;
+import org.mo.content.resource.material.FResMaterialResource;
 import org.mo.data.logic.ILogicContext;
+import org.mo.mime.compress.ECompressMode;
+import org.mo.mime.compress.FCompressStream;
 
 //============================================================
 // <T>资源模型控制台。</T>
@@ -12,6 +20,83 @@ public class FResMaterialConsole
       implements
          IResMaterialConsole
 {
+   //============================================================
+   // <T>生成资源。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param templateInfo 模板信息
+   // @return 资源模板
+   //============================================================
+   @Override
+   public FResMaterialResource makeResource(ILogicContext logicContext,
+                                            FGcResMaterialInfo materialInfo){
+      // 创建材质
+      FResMaterial material = new FResMaterial();
+      material.loadUnit(materialInfo);
+      // 创建资源
+      FResMaterialResource resource = new FResMaterialResource();
+      resource.setGuid(materialInfo.guid());
+      resource.setCode(materialInfo.code());
+      resource.setLabel(materialInfo.label());
+      resource.setMaterial(material);
+      return resource;
+   }
+
+   //============================================================
+   // <T>生成资源。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 资源模板
+   //============================================================
+   @Override
+   public FResMaterialResource makeResource(ILogicContext logicContext,
+                                            String guid){
+      // 查找数据单元
+      FGcResMaterialInfo materialInfo = findByGuid(logicContext, guid);
+      if(materialInfo == null){
+         return null;
+      }
+      // 读取内容
+      return makeResource(logicContext, materialInfo);
+   }
+
+   //============================================================
+   // <T>查找资源数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   @Override
+   public byte[] makeResourceData(ILogicContext logicContext,
+                                  String guid){
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceMaterial, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      FResMaterialResource resource = makeResource(logicContext, guid);
+      // 获得数据
+      FByteStream stream = new FByteStream();
+      resource.serialize(stream);
+      // 压缩数据
+      byte[] data = null;
+      try(FCompressStream file = new FCompressStream(stream.toArray())){
+         data = file.toCompressArray(ECompressMode.Lzma);
+      }
+      //............................................................
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheResourceMaterial, guid);
+      storage.setCode(resource.code());
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
+   }
+
    //   // 纹理控制台
    //   @ALink
    //   protected IRs3TextureConsole _textureConsole;

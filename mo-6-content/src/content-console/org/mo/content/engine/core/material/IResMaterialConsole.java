@@ -1,7 +1,9 @@
 package org.mo.content.engine.core.material;
 
+import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.cloud.logic.resource.material.IGcResMaterialConsole;
 import org.mo.com.lang.EResult;
+import org.mo.content.resource.material.FResMaterialResource;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -11,48 +13,35 @@ public interface IResMaterialConsole
       extends
          IGcResMaterialConsole
 {
-   //   //============================================================
-   //   // <T>根据唯一编号查找材质。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param guid 唯一编号
-   //   // @return 处理结果
-   //   //============================================================
-   //   FRs3Material findMaterial(ILogicContext logicContext,
-   //                             String guid);
+   //============================================================
+   // <T>生成资源。</T>
    //
-   //   //============================================================
-   //   // <T>更新材质。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param material 材质
-   //   //============================================================
-   //   void updateMaterial(ILogicContext logicContext,
-   //                       FRs3Material material);
+   // @param logicContext 逻辑环境
+   // @param templateInfo 模板信息
+   // @return 资源模板
+   //============================================================
+   FResMaterialResource makeResource(ILogicContext logicContext,
+                                     FGcResMaterialInfo materialInfo);
+
+   //============================================================
+   // <T>生成资源。</T>
    //
-   //   //============================================================
-   //   // <T>新建一个材质。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param material 材质
-   //   // @return 材质单元
-   //   //============================================================
-   //   FDataResourceMaterialUnit insertMaterial(ILogicContext logicContext,
-   //                                            long themeId,
-   //                                            long materialGroupId,
-   //                                            FRs3Material material);
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 资源模板
+   //============================================================
+   FResMaterialResource makeResource(ILogicContext logicContext,
+                                     String guid);
+
+   //============================================================
+   // <T>查找资源数据。</T>
    //
-   //   //============================================================
-   //   // <T>新建一个材质纹理。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param materialId 材质编号
-   //   // @param materialTexture 材质纹理
-   //   // @return 材质纹理单元
-   //   //============================================================
-   //   FDataResourceMaterialBitmapUnit insertMaterialTexture(ILogicContext logicContext,
-   //                                                         long materialId,
-   //                                                         FRs3MaterialTexture materialTexture);
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 处理结果
+   //============================================================
+   byte[] makeResourceData(ILogicContext logicContext,
+                           String guid);
 
    //============================================================
    // <T>导入纹理。</T>

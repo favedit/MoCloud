@@ -14,6 +14,9 @@ public class EGcStorageCatalog
    // 资源材质位图打包
    public final static String CacheResourceMaterialBitmapPack = "cache.resourcee.material.bitmap.pack";
 
+   // 资源材质
+   public final static String CacheResourceMaterial = "cache.resource.material";
+
    // 资源网格
    public final static String CacheResourceMesh = "cache.resource.mesh";
 

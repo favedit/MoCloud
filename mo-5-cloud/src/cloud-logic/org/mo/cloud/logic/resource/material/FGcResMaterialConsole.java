@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataResourceMaterialBitmapLogic;
 import com.cyou.gccloud.data.data.FDataResourceMaterialLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.com.lang.EResult;
@@ -20,6 +21,10 @@ public class FGcResMaterialConsole
       implements
          IGcResMaterialConsole
 {
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _storageConsole;
+
    // 资源控制台
    @ALink
    protected IGcResourceConsole _dataResourceConsole;

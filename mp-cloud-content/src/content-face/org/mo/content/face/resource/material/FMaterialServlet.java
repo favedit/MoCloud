@@ -59,7 +59,7 @@ public class FMaterialServlet
       String guid = context.parameter("guid");
       String code = context.parameter("code");
       if(RString.isEmpty(guid) || RString.isEmpty(code)){
-         throw new FFatalError("Texture parameter is invalid. (guid={1}, code={2})", guid, code);
+         throw new FFatalError("Material parameter is invalid. (guid={1}, code={2})", guid, code);
       }
       // 查找纹理
       FGcResMaterialInfo materialInfo = _materialConsole.findByGuid(logicContext, guid);
@@ -107,6 +107,47 @@ public class FMaterialServlet
          default:
             response.setContentType(EMime.Bin.mime());
       }
+      response.setContentLength(dataLength);
+      response.write(data, 0, dataLength);
+   }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param request 页面请求
+   // @param response 页面应答
+   //============================================================
+   @Override
+   public void data(IWebContext context,
+                    ILogicContext logicContext,
+                    FGcSessionInfo session,
+                    IWebServletRequest request,
+                    IWebServletResponse response){
+      // 检查代码
+      String guid = context.parameter("guid");
+      String code = context.parameter("code");
+      if(RString.isEmpty(guid) && RString.isEmpty(code)){
+         throw new FFatalError("Material parameter is invalid. (guid={1}, code={2})", guid, code);
+      }
+      // 查找材质
+      FGcResMaterialInfo materialInfo = _materialConsole.findByGuid(logicContext, guid);
+      if(materialInfo == null){
+         throw new FFatalError("Material is not exists. (guid={1})", guid);
+      }
+      // 获得数据
+      byte[] data = _materialConsole.makeResourceData(logicContext, guid);
+      int dataLength = data.length;
+      // 发送数据
+      _logger.debug(this, "process", "Send data. (length={1})", dataLength);
+      response.setCharacterEncoding("utf-8");
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
+      response.addHeader("Last-Modified", System.currentTimeMillis());
+      response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
+      response.setContentType(EMime.Bin.mime());
       response.setContentLength(dataLength);
       response.write(data, 0, dataLength);
    }
