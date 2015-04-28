@@ -1,10 +1,5 @@
 package org.mo.content.core.resource.material;
 
-import org.mo.content.engine.core.material.FResMaterialConsole;
-import org.mo.content.engine.core.material.IResMaterialBitmapConsole;
-
-import org.mo.content.engine.core.bitmap.IResBitmapConsole;
-import org.mo.content.resource.texture.FResTextureBitmapPack;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
@@ -14,7 +9,13 @@ import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.content.engine.core.bitmap.IResBitmapConsole;
+import org.mo.content.engine.core.material.FResMaterialConsole;
+import org.mo.content.engine.core.material.IResMaterialBitmapConsole;
+import org.mo.content.engine.core.material.IResMaterialConsole;
+import org.mo.content.resource.texture.FResTextureBitmapPack;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;
 
@@ -34,9 +35,71 @@ public class FCntMaterialConsole
    @ALink
    protected IResBitmapConsole _bitmapConsole;
 
+   // 资源材质控制台
+   @ALink
+   protected IResMaterialConsole _materialConsole;
+
    // 资源材质纹理控制台
    @ALink
    protected IResMaterialBitmapConsole _materialBitmapConsole;
+
+   //============================================================
+   // <T>生成材质预览数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   public byte[] makePreview(ILogicContext logicContext,
+                             String guid){
+      // 查找材质信息
+      FGcResMaterialInfo materialInfo = _materialConsole.getByGuid(logicContext, guid);
+      long materialId = materialInfo.ouid();
+      // 查找位图信息
+      long bitmapId = 0;
+      FGcResMaterialBitmapInfo materialDiffuseInfo = _materialBitmapConsole.findByMaterialCode(logicContext, materialId, "diffuse");
+      if(materialDiffuseInfo != null){
+         bitmapId = materialDiffuseInfo.bitmapId();
+      }else{
+         FLogicDataset<FGcResMaterialBitmapInfo> dataset = _materialBitmapConsole.fetchByMaterialId(logicContext, materialId);
+         for(FGcResMaterialBitmapInfo materialBitmapInfo : dataset){
+            bitmapId = materialBitmapInfo.bitmapId();
+            break;
+         }
+      }
+      // 获得位图数据
+      FGcResBitmapInfo bitmapInfo = _bitmapConsole.get(logicContext, bitmapId);
+      byte[] data = _bitmapConsole.makePreviewData(logicContext, bitmapInfo.guid());
+      // 返回数据
+      return data;
+   }
+
+   //============================================================
+   // <T>生成材质预览数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   @Override
+   public byte[] makePreviewData(ILogicContext logicContext,
+                                 String guid){
+      //............................................................
+      // 查找数据
+      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheMaterialPreview, guid);
+      if(findStorage != null){
+         return findStorage.data();
+      }
+      //............................................................
+      // 生成模型
+      byte[] data = makePreview(logicContext, guid);
+      // 存储数据
+      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheMaterialPreview, guid);
+      storage.setData(data);
+      _storageConsole.store(storage);
+      // 返回数据
+      return data;
+   }
 
    //============================================================
    // <T>生成纹理位图。</T>

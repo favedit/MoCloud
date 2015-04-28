@@ -17,6 +17,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
+import org.mo.content.core.resource.material.ICntMaterialConsole;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
@@ -45,13 +46,17 @@ public class FPreviewServlet
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;
 
-   // 位图模型接口
+   // 资源数据接口
+   @ALink
+   protected ICntResourceConsole _resourceConsole;
+
+   // 位图数据接口
    @ALink
    protected ICntBitmapConsole _bitmapConsole;
 
-   // 资源模型接口
+   // 材质数据接口
    @ALink
-   protected ICntResourceConsole _resourceConsole;
+   protected ICntMaterialConsole _materialConsole;
 
    // 网格数据接口
    @ALink
@@ -107,6 +112,7 @@ public class FPreviewServlet
                _resourceConsole.uploadPreviewData(logicContext, bitmapGuid, data);
                break;
             case EGcResource.MaterialString:
+               data = _materialConsole.makePreviewData(logicContext, guid);
                break;
             case EGcResource.ModelString:
                break;

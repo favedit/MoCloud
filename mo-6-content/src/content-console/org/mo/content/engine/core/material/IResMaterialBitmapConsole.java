@@ -9,16 +9,7 @@ public interface IResMaterialBitmapConsole
       extends
          IGcResMaterialBitmapConsole
 {
-   //   //============================================================
-   //   // <T>根据代码查找模型单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param code 代码
-   //   // @return 处理结果
-   //   //============================================================
-   //   FDataResource3dModelUnit findByCode(ILogicContext logicContext,
-   //                                       String code);
-   //
+
    //   //============================================================
    //   // <T>新建一个材质组。</T>
    //   //

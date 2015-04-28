@@ -1,6 +1,7 @@
 package org.mo.cloud.logic.resource.material;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -21,4 +22,14 @@ public interface IGcResMaterialBitmapConsole
    FGcResMaterialBitmapInfo findByMaterialCode(ILogicContext logicContext,
                                                long materialId,
                                                String code);
+
+   //============================================================
+   // <T>根据材质编号查找位图信息集合。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param materialId 材质编号
+   // @return 位图信息集合
+   //============================================================
+   FLogicDataset<FGcResMaterialBitmapInfo> fetchByMaterialId(ILogicContext logicContext,
+                                                             long materialId);
 }

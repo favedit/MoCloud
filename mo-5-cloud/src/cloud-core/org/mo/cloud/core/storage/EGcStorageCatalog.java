@@ -8,6 +8,9 @@ public class EGcStorageCatalog
    // 资源位图预览数据
    public final static String CacheBitmapPreview = "cache.bitmap.preview";
 
+   // 资源材质预览数据
+   public final static String CacheMaterialPreview = "cache.material.preview";
+
    // 资源材质位图打包
    public final static String CacheResourceMaterialBitmapPack = "cache.resourcee.material.bitmap.pack";
 
@@ -31,9 +34,6 @@ public class EGcStorageCatalog
 
    // 资源模型网格数据
    public final static String ResourceModelMeshStream = "resource.model.mesh.stream";
-
-   // 资源模型网格轨迹数据
-   public final static String ResourceModelMeshTrack = "resource.model.mesh.track";
 
    // 资源模型骨骼蒙皮数据流数据
    public final static String ResourceModelSkeletonSkinStream = "resource.model.skeleton.skin.stream";

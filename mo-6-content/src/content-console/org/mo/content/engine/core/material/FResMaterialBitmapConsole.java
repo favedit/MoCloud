@@ -10,14 +10,6 @@ public class FResMaterialBitmapConsole
       implements
          IResMaterialBitmapConsole
 {
-   //   // 纹理控制台
-   //   @ALink
-   //   protected IRs3TextureConsole _textureConsole;
-   //
-   //   // 纹理位图控制台
-   //   @ALink
-   //   protected IRs3TextureBitmapConsole _textureBitmapConsole;
-   //
    //   //============================================================
    //   // <T>根据代码查找模型单元。</T>
    //   //

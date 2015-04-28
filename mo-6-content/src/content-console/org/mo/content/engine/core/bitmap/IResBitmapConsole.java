@@ -15,6 +15,26 @@ public interface IResBitmapConsole
          IGcResBitmapConsole
 {
    //============================================================
+   // <T>生成位图数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   byte[] makeViewData(ILogicContext logicContext,
+                       String guid);
+
+   //============================================================
+   // <T>生成位图预览数据。</T>
+   //
+   // @param context 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   byte[] makePreviewData(ILogicContext context,
+                          String guid);
+
+   //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境

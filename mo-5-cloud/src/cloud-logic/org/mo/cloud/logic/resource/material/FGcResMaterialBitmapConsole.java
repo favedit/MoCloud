@@ -2,6 +2,7 @@ package org.mo.cloud.logic.resource.material;
 
 import com.cyou.gccloud.data.data.FDataResourceMaterialBitmapLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -35,5 +36,21 @@ public class FGcResMaterialBitmapConsole
       whereSql += " AND (" + FDataResourceMaterialBitmapLogic.CODE + "='" + code + "')";
       FGcResMaterialBitmapInfo bitmapInfo = search(logicContext, whereSql);
       return bitmapInfo;
+   }
+
+   //============================================================
+   // <T>根据材质编号查找位图信息集合。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param materialId 材质编号
+   // @return 位图信息集合
+   //============================================================
+   @Override
+   public FLogicDataset<FGcResMaterialBitmapInfo> fetchByMaterialId(ILogicContext logicContext,
+                                                                    long materialId){
+      String whereSql = FDataResourceMaterialBitmapLogic.MATERIAL_ID + "='" + materialId + "'";
+      String orderSql = FDataResourceMaterialBitmapLogic.CODE + " ASC";
+      FLogicDataset<FGcResMaterialBitmapInfo> dataset = fetch(logicContext, whereSql, orderSql);
+      return dataset;
    }
 }

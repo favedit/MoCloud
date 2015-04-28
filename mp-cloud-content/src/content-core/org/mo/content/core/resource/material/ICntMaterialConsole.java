@@ -1,8 +1,7 @@
 package org.mo.content.core.resource.material;
 
-import org.mo.content.engine.core.material.IResMaterialConsole;
-
 import org.mo.com.lang.EResult;
+import org.mo.content.engine.core.material.IResMaterialConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -12,6 +11,16 @@ public interface ICntMaterialConsole
       extends
          IResMaterialConsole
 {
+   //============================================================
+   // <T>生成位图预览数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 数据
+   //============================================================
+   byte[] makePreviewData(ILogicContext logicContext,
+                          String guid);
+
    //============================================================
    // <T>生成纹理位图。</T>
    //
