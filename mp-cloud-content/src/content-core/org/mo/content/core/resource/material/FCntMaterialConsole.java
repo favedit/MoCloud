@@ -63,8 +63,11 @@ public class FCntMaterialConsole
          }
       }
       // 获得位图数据
-      FGcResBitmapInfo bitmapInfo = _bitmapConsole.get(logicContext, bitmapId);
-      byte[] data = _bitmapConsole.makePreviewData(logicContext, bitmapInfo.guid());
+      byte[] data = null;
+      if(bitmapId > 0){
+         FGcResBitmapInfo bitmapInfo = _bitmapConsole.get(logicContext, bitmapId);
+         data = _bitmapConsole.makePreviewData(logicContext, bitmapInfo.guid());
+      }
       // 返回数据
       return data;
    }
@@ -89,9 +92,11 @@ public class FCntMaterialConsole
       // 生成模型
       byte[] data = makePreview(logicContext, guid);
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheMaterialPreview, guid);
-      storage.setData(data);
-      _storageConsole.store(storage);
+      if(data != null){
+         SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheMaterialPreview, guid);
+         storage.setData(data);
+         _storageConsole.store(storage);
+      }
       // 返回数据
       return data;
    }
