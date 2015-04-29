@@ -297,13 +297,7 @@ public class FTemplateService
          throw new FFatalError("Space guid is empty.");
       }
       String code = xdisplay.get("code", null);
-      if(RString.isEmpty(code)){
-         throw new FFatalError("Code is empty.");
-      }
       String label = xdisplay.get("label", null);
-      if(RString.isEmpty(label)){
-         throw new FFatalError("Label is empty.");
-      }
       String modelGuid = xdisplay.get("model_guid", null);
       String modelCode = xdisplay.get("model_code", null);
       if(RString.isEmpty(modelGuid) && RString.isEmpty(modelCode)){
@@ -325,6 +319,12 @@ public class FTemplateService
       }
       if(modelInfo == null){
          throw new FFatalError("Model is not exists. (guid={1}, code={2})", modelGuid, modelCode);
+      }
+      if(RString.isEmpty(code)){
+         code = modelInfo.code();
+      }
+      if(RString.isEmpty(label)){
+         label = modelInfo.label();
       }
       long modelId = modelInfo.ouid();
       // 创建显示对象
