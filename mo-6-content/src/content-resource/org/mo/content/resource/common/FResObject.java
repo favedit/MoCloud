@@ -200,7 +200,7 @@ public class FResObject
    public void loadConfig(FXmlNode xconfig){
       // 读取属性
       _guid = xconfig.get("guid");
-      _code = xconfig.get("code");
+      _code = xconfig.get("code", null);
       _label = xconfig.get("label", null);
    }
 

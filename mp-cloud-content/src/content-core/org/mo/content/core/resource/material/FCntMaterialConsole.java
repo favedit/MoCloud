@@ -8,9 +8,7 @@ import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.content.engine.core.bitmap.IResBitmapConsole;
 import org.mo.content.engine.core.material.FResMaterialConsole;
-import org.mo.content.engine.core.material.IResMaterialBitmapConsole;
 import org.mo.content.engine.core.material.IResMaterialConsole;
 import org.mo.content.resource.texture.FResTextureBitmapPack;
 import org.mo.core.aop.face.ALink;
@@ -26,17 +24,9 @@ public class FCntMaterialConsole
       implements
          ICntMaterialConsole
 {
-   // 资源纹理控制台
-   @ALink
-   protected IResBitmapConsole _bitmapConsole;
-
    // 资源材质控制台
    @ALink
    protected IResMaterialConsole _materialConsole;
-
-   // 资源材质纹理控制台
-   @ALink
-   protected IResMaterialBitmapConsole _materialBitmapConsole;
 
    //============================================================
    // <T>生成材质预览数据。</T>

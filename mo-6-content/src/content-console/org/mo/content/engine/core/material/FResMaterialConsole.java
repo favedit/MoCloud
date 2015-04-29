@@ -2,12 +2,18 @@ package org.mo.content.engine.core.material;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
+import org.mo.cloud.logic.resource.material.FGcResMaterialBitmapInfo;
 import org.mo.cloud.logic.resource.material.FGcResMaterialConsole;
 import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.content.engine.core.bitmap.IResBitmapConsole;
 import org.mo.content.resource.common.FResMaterial;
+import org.mo.content.resource.common.FResMaterialBitmap;
 import org.mo.content.resource.material.FResMaterialResource;
+import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.mime.compress.ECompressMode;
 import org.mo.mime.compress.FCompressStream;
@@ -20,6 +26,12 @@ public class FResMaterialConsole
       implements
          IResMaterialConsole
 {
+   @ALink
+   protected IResBitmapConsole _bitmapConsole;
+
+   @ALink
+   protected IResMaterialBitmapConsole _materialBitmapConsole;
+
    //============================================================
    // <T>生成材质。</T>
    //
@@ -30,8 +42,22 @@ public class FResMaterialConsole
    @Override
    public FResMaterial makeMaterial(ILogicContext logicContext,
                                     FGcResMaterialInfo materialInfo){
+      // 获得材质信息
       FResMaterial material = new FResMaterial();
       material.loadUnit(materialInfo);
+      long materialId = materialInfo.ouid();
+      // 获得位图信息
+      material.clearBitmaps();
+      FLogicDataset<FGcResMaterialBitmapInfo> bitmapDataset = _materialBitmapConsole.fetchByMaterialId(logicContext, materialId);
+      for(FGcResMaterialBitmapInfo materialBitmapInfo : bitmapDataset){
+         FGcResBitmapInfo bitmapInfo = _bitmapConsole.find(logicContext, materialBitmapInfo.bitmapId());
+         FResMaterialBitmap bitmap = new FResMaterialBitmap();
+         bitmap.setGuid(materialBitmapInfo.guid());
+         bitmap.setCode(materialBitmapInfo.code());
+         bitmap.setLabel(bitmapInfo.label());
+         bitmap.setBitmapGuid(bitmapInfo.guid());
+         material.pushBitmap(bitmap);
+      }
       return material;
    }
 

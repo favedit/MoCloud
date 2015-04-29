@@ -377,6 +377,20 @@ public class FResMaterial
    }
 
    //============================================================
+   // <T>获得位图集合。</T>
+   //
+   // @return 位图集合
+   //============================================================
+   public FObjects<FResMaterialBitmap> bitmaps(boolean force){
+      if(force){
+         if(_bitmaps == null){
+            _bitmaps = new FObjects<FResMaterialBitmap>(FResMaterialBitmap.class);
+         }
+      }
+      return _bitmaps;
+   }
+
+   //============================================================
    // <T>增加一个位图。</T>
    //
    // @param bitmap 位图
@@ -386,6 +400,15 @@ public class FResMaterial
          _bitmaps = new FObjects<FResMaterialBitmap>(FResMaterialBitmap.class);
       }
       _bitmaps.push(bitmap);
+   }
+
+   //============================================================
+   // <T>清空位图集合。</T>
+   //============================================================
+   public void clearBitmaps(){
+      if(_bitmaps != null){
+         _bitmaps.clear();
+      }
    }
 
    //============================================================

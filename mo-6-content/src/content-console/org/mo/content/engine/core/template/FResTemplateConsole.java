@@ -200,6 +200,17 @@ public class FResTemplateConsole
          throw new FFatalError("Template is not exists. (guid={1}})", guid);
       }
       long resourceId = templateInfo.resourceId();
+      //............................................................
+      // 检查材质
+      for(FResMaterial material : template.materials()){
+         String materialGuid = material.guid();
+         FResMaterial findMaterial = _materialConsole.makeMaterial(logicContext, materialGuid);
+         if(findMaterial == null){
+            throw new FFatalError("Material is not exists. (guid={1})", materialGuid);
+         }
+         material.bitmaps(true).assign(findMaterial.bitmaps(true));
+      }
+      //............................................................
       // 创建场景
       template.saveUnit(templateInfo);
       // 更新数据
