@@ -79,9 +79,9 @@ public class FGcResSceneConsole
    // @return 场景信息
    //============================================================
    @Override
-   public FGcResSceneInfo findByCode(ILogicContext logicContext,
-                                     long userId,
-                                     String code){
+   public FGcResSceneInfo findByUserCode(ILogicContext logicContext,
+                                         long userId,
+                                         String code){
       String whereSql = "(" + FDataResourceSceneLogic.USER_ID + "=" + userId + ")";
       whereSql += " AND (" + FDataResourceSceneLogic.CODE + "='" + RSql.formatValue(code) + "')";
       FGcResSceneInfo sceneInfo = search(logicContext, whereSql);
@@ -98,10 +98,10 @@ public class FGcResSceneConsole
    // @return 场景信息
    //============================================================
    @Override
-   public FGcResSceneInfo findByCode(ILogicContext logicContext,
-                                     long userId,
-                                     long projectId,
-                                     String code){
+   public FGcResSceneInfo findByUserCode(ILogicContext logicContext,
+                                         long userId,
+                                         long projectId,
+                                         String code){
       String whereSql = "(" + FDataResourceSceneLogic.USER_ID + "=" + userId + ")";
       whereSql += " AND (" + FDataResourceSceneLogic.PROJECT_ID + "=" + projectId + ")";
       whereSql += " AND (" + FDataResourceSceneLogic.CODE + "='" + RSql.formatValue(code) + "')";

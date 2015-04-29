@@ -65,7 +65,7 @@ public class FTemplateServlet
       }
       // 获得唯一编号
       if(RString.isEmpty(guid)){
-         FGcResTemplateInfo templateInfo = _templateConsole.findByCode(logicContext, userId, code);
+         FGcResTemplateInfo templateInfo = _templateConsole.findByUserCode(logicContext, userId, code);
          guid = templateInfo.guid();
       }
       //............................................................

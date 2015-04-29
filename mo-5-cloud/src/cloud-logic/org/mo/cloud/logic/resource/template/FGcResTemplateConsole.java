@@ -84,9 +84,9 @@ public class FGcResTemplateConsole
    // @return 模板信息
    //============================================================
    @Override
-   public FGcResTemplateInfo findByCode(ILogicContext logicContext,
-                                        long userId,
-                                        String code){
+   public FGcResTemplateInfo findByUserCode(ILogicContext logicContext,
+                                            long userId,
+                                            String code){
       String whereSql = "(" + FDataResourceTemplateLogic.USER_ID + "=" + userId + ")";
       whereSql += " AND (" + FDataResourceTemplateLogic.CODE + "='" + RSql.formatValue(code) + "')";
       FGcResTemplateInfo template = search(logicContext, whereSql);
@@ -103,10 +103,10 @@ public class FGcResTemplateConsole
    // @return 模板信息
    //============================================================
    @Override
-   public FGcResTemplateInfo findByCode(ILogicContext logicContext,
-                                        long userId,
-                                        long projectId,
-                                        String code){
+   public FGcResTemplateInfo findByUserCode(ILogicContext logicContext,
+                                            long userId,
+                                            long projectId,
+                                            String code){
       String whereSql = "(" + FDataResourceTemplateLogic.USER_ID + "=" + userId + ")";
       whereSql += " AND (" + FDataResourceTemplateLogic.PROJECT_ID + "=" + projectId + ")";
       whereSql += " AND (" + FDataResourceTemplateLogic.CODE + "='" + RSql.formatValue(code) + "')";

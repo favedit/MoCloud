@@ -1,7 +1,5 @@
 package org.mo.content.service.resource.template;
 
-import org.mo.content.resource.template.FResTemplate;
-
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -15,6 +13,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
+import org.mo.content.resource.template.FResTemplate;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -145,26 +144,34 @@ public class FTemplateService
                          IWebInput input,
                          IWebOutput output){
       // 获得参数
-      FXmlNode xinput = input.config();
-      String code = xinput.nodeText("Code");
+      FXmlNode xtemplate = input.config().findNode("Template");
+      if(xtemplate == null){
+         throw new FFatalError("Template config is not exists.");
+      }
+      String code = xtemplate.get("code", null);
       if(RString.isEmpty(code)){
          throw new FFatalError("Code is empty.");
       }
-      String label = xinput.nodeText("Label");
+      String label = xtemplate.get("label", null);
       if(RString.isEmpty(label)){
          throw new FFatalError("Label is empty.");
       }
+      // 获得会话信息
+      long userId = session.userId();
       // 查找数据
-      FGcResModelMeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
-      if(findMesh != null){
-         throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
+      FGcResTemplateInfo findTemplateInfo = _templateConsole.findByUserCode(logicContext, userId, code);
+      if(findTemplateInfo != null){
+         throw new FFatalError("Resource template code is duplicate. (user_id={1}, code={2})", userId, code);
       }
-      // 新建处理
-      FGcResModelMeshInfo mesh = _meshConsole.doPrepare(logicContext);
-      mesh.setUserId(session.userId());
-      mesh.setCode(code);
-      mesh.setLabel(label);
-      _meshConsole.doInsert(logicContext, mesh);
+      // 新建材质
+      FResTemplate template = new FResTemplate();
+      template.setCode(code);
+      template.setLabel(label);
+      // 新建数据
+      FGcResTemplateInfo templateInfo = _templateConsole.doPrepare(logicContext);
+      templateInfo.setUserId(userId);
+      template.saveUnit(templateInfo);
+      _templateConsole.doInsert(logicContext, templateInfo);
       return EResult.Success;
    }
 

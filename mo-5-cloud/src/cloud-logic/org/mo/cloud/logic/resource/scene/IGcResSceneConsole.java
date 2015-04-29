@@ -38,9 +38,9 @@ public interface IGcResSceneConsole
    // @param code 场景代码
    // @return 场景信息
    //============================================================
-   FGcResSceneInfo findByCode(ILogicContext logicContext,
-                              long userId,
-                              String code);
+   FGcResSceneInfo findByUserCode(ILogicContext logicContext,
+                                  long userId,
+                                  String code);
 
    //============================================================
    // <T>根据用户编号和项目编号和代码查找场景信息。</T>
@@ -51,8 +51,8 @@ public interface IGcResSceneConsole
    // @param code 场景代码
    // @return 场景信息
    //============================================================
-   FGcResSceneInfo findByCode(ILogicContext logicContext,
-                              long userId,
-                              long projectId,
-                              String code);
+   FGcResSceneInfo findByUserCode(ILogicContext logicContext,
+                                  long userId,
+                                  long projectId,
+                                  String code);
 }

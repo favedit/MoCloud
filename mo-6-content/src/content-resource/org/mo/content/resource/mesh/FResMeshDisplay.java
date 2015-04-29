@@ -1,13 +1,12 @@
 package org.mo.content.resource.mesh;
 
-import org.mo.content.resource.common.FResComponent;
-import org.mo.content.resource.common.FResMaterial;
-import org.mo.content.resource.common.FResRenderable;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.geom.common.SFloatMatrix3d;
+import org.mo.content.resource.common.FResComponent;
+import org.mo.content.resource.common.FResMaterial;
+import org.mo.content.resource.common.FResRenderable;
 
 //============================================================
 // <T>场景渲染。</T>

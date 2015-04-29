@@ -1,13 +1,12 @@
 package org.mo.content.resource.scene;
 
-import org.mo.content.resource.common.FResObject;
-
 import org.mo.com.geom.SFloatVector3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.common.FResObject;
 
 //============================================================
 // <T>场景动画。</T>

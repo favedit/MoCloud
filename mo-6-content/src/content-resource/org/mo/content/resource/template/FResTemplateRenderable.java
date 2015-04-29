@@ -1,11 +1,10 @@
 package org.mo.content.resource.template;
 
-import org.mo.content.resource.common.FResDisplay;
-import org.mo.content.resource.common.FResMaterial;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.common.FResDisplay;
+import org.mo.content.resource.common.FResMaterial;
 
 //============================================================
 // <T>资源显示对象。</T>

@@ -11,22 +11,34 @@ public interface IGcResMaterialConsole
          IAbstractLogicUnitConsole<FGcResMaterialInfo>
 {
    //============================================================
-   // <T>根据资源编号查找位图信息。</T>
+   // <T>根据资源编号查找材质信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param resourceId 资源编号
-   // @return 位图信息
+   // @return 材质信息
    //============================================================
    FGcResMaterialInfo findByResourceId(ILogicContext logicContext,
                                        long resourceId);
 
    //============================================================
-   // <T>根据资源唯一编号查找位图信息。</T>
+   // <T>根据资源唯一编号查找材质信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param resourceGuid 资源唯一编号
-   // @return 位图信息
+   // @return 材质信息
    //============================================================
    FGcResMaterialInfo findByResourceGuid(ILogicContext logicContext,
                                          String resourceGuid);
+
+   //============================================================
+   // <T>根据用户编号和代码查找材质信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param code 代码
+   // @return 材质信息
+   //============================================================
+   FGcResMaterialInfo findByUserCode(ILogicContext logicContext,
+                                     long userId,
+                                     String code);
 }

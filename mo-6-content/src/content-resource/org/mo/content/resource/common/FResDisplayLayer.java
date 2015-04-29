@@ -1,11 +1,10 @@
 package org.mo.content.resource.common;
 
-import org.mo.content.resource.scene.FResSceneDisplay;
-
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.scene.FResSceneDisplay;
 
 //============================================================
 // <T>场景层。</T>

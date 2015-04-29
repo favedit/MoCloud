@@ -1,11 +1,10 @@
 package org.mo.content.resource.texture;
 
-import org.mo.content.resource.common.FResObject;
-
 import java.awt.image.BufferedImage;
 import org.mo.com.geom.SIntSize2;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
+import org.mo.content.resource.common.FResObject;
 import org.mo.eng.image.FImage;
 
 //============================================================

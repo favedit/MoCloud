@@ -1,13 +1,12 @@
 package org.mo.content.resource.common;
 
-import org.mo.content.resource.scene.FResSceneDisplay;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.scene.FResSceneDisplay;
 
 //============================================================
 // <T>资源显示集合。</T>

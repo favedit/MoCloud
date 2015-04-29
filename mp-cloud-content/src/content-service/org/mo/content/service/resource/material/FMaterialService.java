@@ -14,6 +14,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.common.FResMaterial;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -138,6 +139,7 @@ public class FMaterialService
          // 创建位图节点
          FXmlNode xitem = xoutput.createNode("Bitmap");
          xitem.set("guid", bitmapInfo.guid());
+         xitem.set("link_guid", materialBitmapInfo.guid());
          xitem.set("code", bitmapInfo.code());
          xitem.set("label", bitmapInfo.label());
          xitem.set("update_date", bitmapInfo.updateDate());
@@ -198,27 +200,35 @@ public class FMaterialService
                          FGcSessionInfo session,
                          IWebInput input,
                          IWebOutput output){
-      //      // 获得参数
-      //      FXmlNode xinput = input.config();
-      //      String code = xinput.nodeText("Code");
-      //      if(RString.isEmpty(code)){
-      //         throw new FFatalError("Code is empty.");
-      //      }
-      //      String label = xinput.nodeText("Label");
-      //      if(RString.isEmpty(label)){
-      //         throw new FFatalError("Label is empty.");
-      //      }
-      //      // 查找数据
-      //      FGcRs3MeshInfo findMesh = _meshConsole.findByUserCode(logicContext, session.userId(), code);
-      //      if(findMesh != null){
-      //         throw new FFatalError("Resource3d mesh code is duplicate. (user_id={1}, code={2})", session.userId(), code);
-      //      }
-      //      // 新建处理
-      //      FGcRs3MeshInfo mesh = _meshConsole.doPrepare(logicContext);
-      //      mesh.setUserId(session.userId());
-      //      mesh.setCode(code);
-      //      mesh.setLabel(label);
-      //      _meshConsole.doInsert(logicContext, mesh);
+      // 获得参数
+      FXmlNode xmaterial = input.config().findNode("Material");
+      if(xmaterial == null){
+         throw new FFatalError("Material config is not exists.");
+      }
+      String code = xmaterial.get("code", null);
+      if(RString.isEmpty(code)){
+         throw new FFatalError("Code is empty.");
+      }
+      String label = xmaterial.get("label", null);
+      if(RString.isEmpty(label)){
+         throw new FFatalError("Label is empty.");
+      }
+      // 获得会话信息
+      long userId = session.userId();
+      // 查找数据
+      FGcResMaterialInfo findMaterialInfo = _materialConsole.findByUserCode(logicContext, userId, code);
+      if(findMaterialInfo != null){
+         throw new FFatalError("Resource material code is duplicate. (user_id={1}, code={2})", userId, code);
+      }
+      // 新建材质
+      FResMaterial material = new FResMaterial();
+      material.setCode(code);
+      material.setLabel(label);
+      // 新建数据
+      FGcResMaterialInfo materialInfo = _materialConsole.doPrepare(logicContext);
+      materialInfo.setUserId(userId);
+      material.saveUnit(materialInfo);
+      _materialConsole.doInsert(logicContext, materialInfo);
       return EResult.Success;
    }
 
@@ -303,6 +313,39 @@ public class FMaterialService
       //      }
       //      // 删除数据
       //      _meshConsole.doDelete(logicContext, mesh);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>删除数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult deleteBitmap(IWebContext context,
+                               ILogicContext logicContext,
+                               FGcSessionInfo session,
+                               IWebInput input,
+                               IWebOutput output){
+      // 获得参数
+      String guid = context.parameter("guid");
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("Resource material bitmap guid is empty.");
+      }
+      // 查找数据
+      FGcResMaterialBitmapInfo materialBitmapInfo = _materialBitmapConsole.getByGuid(logicContext, guid);
+      // 检查用户有效
+      if(materialBitmapInfo.userId() != session.userId()){
+         throw new FFatalError("Resource material bitmap user is invalid. (user_id={1}, session_user_id={2})", materialBitmapInfo.userId(), session.userId());
+      }
+      // 删除关联
+      _materialBitmapConsole.doDelete(logicContext, materialBitmapInfo);
+      // 删除位图
+      _bitmapConsole.doDelete(logicContext, materialBitmapInfo.bitmapId());
       return EResult.Success;
    }
 }

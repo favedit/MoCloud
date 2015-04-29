@@ -61,7 +61,7 @@ public class FSceneServlet
       //............................................................
       // 获得场景信息
       if(RString.isEmpty(guid)){
-         FGcResSceneInfo sceneInfo = _sceneConsole.findByCode(logicContext, session.userId(), code);
+         FGcResSceneInfo sceneInfo = _sceneConsole.findByUserCode(logicContext, session.userId(), code);
          if(sceneInfo != null){
             guid = sceneInfo.guid();
          }

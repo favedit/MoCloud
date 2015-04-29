@@ -1,17 +1,5 @@
 package org.mo.content.engine.core.template;
 
-import org.mo.content.engine.core.model.IResModelConsole;
-import org.mo.content.engine.core.model.IResModelMeshConsole;
-
-import org.mo.content.engine.core.material.IResMaterialBitmapConsole;
-import org.mo.content.engine.core.material.IResMaterialConsole;
-import org.mo.content.engine.core.bitmap.IResBitmapConsole;
-import org.mo.content.resource.template.FResTemplate;
-import org.mo.content.resource.common.FResDisplay;
-import org.mo.content.resource.common.FResMaterial;
-import org.mo.content.resource.common.FResMaterialBitmap;
-import org.mo.content.resource.common.FResRenderable;
-import org.mo.content.resource.common.FResShape;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
@@ -32,6 +20,17 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.engine.core.bitmap.IResBitmapConsole;
+import org.mo.content.engine.core.material.IResMaterialBitmapConsole;
+import org.mo.content.engine.core.material.IResMaterialConsole;
+import org.mo.content.engine.core.model.IResModelConsole;
+import org.mo.content.engine.core.model.IResModelMeshConsole;
+import org.mo.content.resource.common.FResDisplay;
+import org.mo.content.resource.common.FResMaterial;
+import org.mo.content.resource.common.FResMaterialBitmap;
+import org.mo.content.resource.common.FResRenderable;
+import org.mo.content.resource.common.FResShape;
+import org.mo.content.resource.template.FResTemplate;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.mime.compress.ECompressMode;
@@ -239,7 +238,7 @@ public class FResTemplateConsole
       String templateCode = template.code();
       //............................................................
       // 删除旧数据
-      FGcResTemplateInfo templateInfo = findByCode(logicContext, userId, templateCode);
+      FGcResTemplateInfo templateInfo = findByUserCode(logicContext, userId, templateCode);
       if(templateInfo != null){
          doDelete(logicContext, templateInfo);
       }

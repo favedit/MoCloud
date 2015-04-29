@@ -1,9 +1,8 @@
 package org.mo.content.resource.texture;
 
-import org.mo.content.resource.common.FResObject;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.common.FResObject;
 
 //============================================================
 // <T>资源纹理图片。</T>

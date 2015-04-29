@@ -1,11 +1,10 @@
 package org.mo.content.resource.model;
 
+import org.mo.com.io.IDataOutput;
+import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource.common.FResDisplay;
 import org.mo.content.resource.common.FResMaterial;
 import org.mo.content.resource.common.FResObject;
-
-import org.mo.com.io.IDataOutput;
-import org.mo.com.xml.FXmlNode;
 
 //============================================================
 // <T>场景渲染。</T>

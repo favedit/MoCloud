@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="resource.material.ImportDialog" type='FDsMaterialImportDialog' label="导入位图" is_valid="Y" size='520,240' note="">
+   <Frame name="resource.material.ImportDialog" type='FDsMaterialImportDialog' label="导入位图" is_valid="Y" size='520,340' note="">
+      <Panel name='infoPanel' label='基本信息'>
+         <Select name="typeCode" linker='_controlTypeCode' label="类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
+            <SelectItem name="diffuse" label="颜色图" data_value='diffuse'/>
+            <SelectItem name="alpha" label="透明图" data_value='alpha'/>
+            <SelectItem name="normal" label="法线图" data_value='normal'/>
+            <SelectItem name="illumination" label="光照图" data_value='illumination'/>
+            <SelectItem name="specular.color" label="高光颜色图" data_value='specular.color'/>
+            <SelectItem name="specular.level" label="高光级别图" data_value='specular.level'/>
+            <SelectItem name="height" label="高度图" data_value='height'/>
+         </Select>
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
       <Panel name='infoPanel' label='文件信息'>
          <File name="file" linker='_controlFile' label="文件" label_size='70,0' valid="Y" edit_size='400,0' input_size='400,0' note="" />
       </Panel>

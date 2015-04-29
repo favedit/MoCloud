@@ -28,4 +28,31 @@ public class FGcResBitmapInfo
    public void setCatalogId(long catalogId){
       _catalogId = catalogId;
    }
+
+   //============================================================
+   // <T>测试尺寸是否有效。</T>
+   //
+   // @return 是否有效
+   //============================================================
+   public boolean testSizeValid(){
+      if(_sizeWidth == 0){
+         return false;
+      }
+      if(_sizeHeight == 0){
+         return false;
+      }
+      return true;
+   }
+
+   //============================================================
+   // <T>设置尺寸。</T>
+   //
+   // @param width 宽度
+   // @param height 高度
+   //============================================================
+   public void setSize(int width,
+                       int height){
+      _sizeWidth = width;
+      _sizeHeight = height;
+   }
 }

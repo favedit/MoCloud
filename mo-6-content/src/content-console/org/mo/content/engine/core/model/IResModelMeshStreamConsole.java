@@ -1,9 +1,8 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.content.resource.common.FResStream;
-
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
 import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshStreamConsole;
+import org.mo.content.resource.common.FResStream;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

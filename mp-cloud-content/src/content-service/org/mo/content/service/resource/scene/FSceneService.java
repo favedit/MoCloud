@@ -1,14 +1,5 @@
 package org.mo.content.service.resource.scene;
 
-import org.mo.content.resource.scene.FResScene;
-import org.mo.content.resource.scene.FResSceneDisplay;
-
-import org.mo.content.resource.common.FResComponent;
-import org.mo.content.resource.common.FResDisplay;
-import org.mo.content.resource.common.FResDisplayContainer;
-import org.mo.content.resource.common.FResDisplayLayer;
-import org.mo.content.resource.common.FResObject;
-import org.mo.content.resource.common.FResSprite;
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
@@ -22,6 +13,14 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.content.core.solution.project.ICntProjectConsole;
+import org.mo.content.resource.common.FResComponent;
+import org.mo.content.resource.common.FResDisplay;
+import org.mo.content.resource.common.FResDisplayContainer;
+import org.mo.content.resource.common.FResDisplayLayer;
+import org.mo.content.resource.common.FResObject;
+import org.mo.content.resource.common.FResSprite;
+import org.mo.content.resource.scene.FResScene;
+import org.mo.content.resource.scene.FResSceneDisplay;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -152,10 +151,13 @@ public class FSceneService
                          IWebOutput output){
       // 获得参数
       FXmlNode xscene = input.config().findNode("Scene");
-      String projectGuid = xscene.get("project_guid", null);
-      if(RString.isEmpty(projectGuid)){
-         throw new FFatalError("Project guid is empty.");
+      if(xscene == null){
+         throw new FFatalError("Scene config is not exists.");
       }
+      String projectGuid = xscene.get("project_guid", null);
+      //if(RString.isEmpty(projectGuid)){
+      //throw new FFatalError("Project guid is empty.");
+      //}
       String code = xscene.get("code", null);
       if(RString.isEmpty(code)){
          throw new FFatalError("Code is empty.");
@@ -165,24 +167,30 @@ public class FSceneService
          throw new FFatalError("Label is empty.");
       }
       // 查找项目
-      FGcProjectInfo findProject = _projectConsole.findByGuid(logicContext, projectGuid);
-      if(findProject == null){
-         throw new FFatalError("Project is not exists. (guid={1})", projectGuid);
+      long projectId = 0;
+      if(!RString.isEmpty(projectGuid)){
+         FGcProjectInfo findProject = _projectConsole.findByGuid(logicContext, projectGuid);
+         if(findProject == null){
+            throw new FFatalError("Project is not exists. (guid={1})", projectGuid);
+         }
+         projectId = findProject.ouid();
       }
-      long projectId = findProject.ouid();
       // 查找场景
       long userId = session.userId();
-      FGcResSceneInfo findScene = _sceneConsole.findByCode(logicContext, userId, projectId, code);
-      if(findScene != null){
+      FGcResSceneInfo findSceneInfo = _sceneConsole.findByUserCode(logicContext, userId, projectId, code);
+      if(findSceneInfo != null){
          throw new FFatalError("Scene code is duplicate. (user_id={1}, project_id={2}, code={3})", userId, projectId, code);
       }
-      // 新建处理
-      FGcResSceneInfo scene = _sceneConsole.doPrepare(logicContext);
-      scene.setUserId(session.userId());
-      scene.setProjectId(projectId);
+      // 新建场景
+      FResScene scene = new FResScene();
       scene.setCode(code);
       scene.setLabel(label);
-      _sceneConsole.doInsert(logicContext, scene);
+      // 新建处理
+      FGcResSceneInfo sceneInfo = _sceneConsole.doPrepare(logicContext);
+      sceneInfo.setUserId(session.userId());
+      sceneInfo.setProjectId(projectId);
+      scene.saveUnit(sceneInfo);
+      _sceneConsole.doInsert(logicContext, sceneInfo);
       return EResult.Success;
    }
 
@@ -272,7 +280,7 @@ public class FSceneService
       }
       FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
       // 查找模板
-      FGcResTemplateInfo templateInfo = _templateConsole.findByCode(logicContext, userId, templateCode);
+      FGcResTemplateInfo templateInfo = _templateConsole.findByUserCode(logicContext, userId, templateCode);
       if(templateInfo == null){
          throw new FFatalError("Template is not exists. (code={1})", templateCode);
       }

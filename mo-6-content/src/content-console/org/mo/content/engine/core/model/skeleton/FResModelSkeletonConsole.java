@@ -1,10 +1,5 @@
 package org.mo.content.engine.core.model.skeleton;
 
-import org.mo.content.engine.core.model.IResModelMeshConsole;
-
-import org.mo.content.resource.common.FResSkeleton;
-import org.mo.content.resource.common.FResSkeletonSkin;
-import org.mo.content.resource.common.FResStream;
 import com.cyou.gccloud.data.data.FDataResourceModelSkeletonSkinLogic;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonConsole;
@@ -12,6 +7,10 @@ import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonInfo;
 import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinInfo;
 import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinStreamInfo;
 import org.mo.com.lang.FFatalError;
+import org.mo.content.engine.core.model.IResModelMeshConsole;
+import org.mo.content.resource.common.FResSkeleton;
+import org.mo.content.resource.common.FResSkeletonSkin;
+import org.mo.content.resource.common.FResStream;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;

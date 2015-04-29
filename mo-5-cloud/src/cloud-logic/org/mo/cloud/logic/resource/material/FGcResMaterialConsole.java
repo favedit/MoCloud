@@ -7,6 +7,7 @@ import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
+import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
@@ -41,11 +42,11 @@ public class FGcResMaterialConsole
    }
 
    //============================================================
-   // <T>根据资源编号查找位图信息。</T>
+   // <T>根据资源编号查找材质信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param resourceId 资源编号
-   // @return 位图信息
+   // @return 材质信息
    //============================================================
    @Override
    public FGcResMaterialInfo findByResourceId(ILogicContext logicContext,
@@ -56,11 +57,11 @@ public class FGcResMaterialConsole
    }
 
    //============================================================
-   // <T>根据资源唯一编号查找位图信息。</T>
+   // <T>根据资源唯一编号查找材质信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param resourceGuid 资源唯一编号
-   // @return 位图信息
+   // @return 材质信息
    //============================================================
    @Override
    public FGcResMaterialInfo findByResourceGuid(ILogicContext logicContext,
@@ -72,6 +73,24 @@ public class FGcResMaterialConsole
          bitmap = findByResourceId(logicContext, resourceId);
       }
       return bitmap;
+   }
+
+   //============================================================
+   // <T>根据用户编号和代码查找材质信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param code 代码
+   // @return 材质信息
+   //============================================================
+   @Override
+   public FGcResMaterialInfo findByUserCode(ILogicContext logicContext,
+                                            long userId,
+                                            String code){
+      String whereSql = "(" + FDataResourceMaterialLogic.USER_ID + "=" + userId + ")";
+      whereSql += " AND (" + FDataResourceMaterialLogic.CODE + "='" + RSql.formatValue(code) + "')";
+      FGcResMaterialInfo materialInfo = search(logicContext, whereSql);
+      return materialInfo;
    }
 
    //============================================================

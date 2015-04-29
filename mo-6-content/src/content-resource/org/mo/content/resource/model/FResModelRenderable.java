@@ -1,9 +1,8 @@
 package org.mo.content.resource.model;
 
-import org.mo.content.resource.common.FResRenderable;
-
 import org.mo.com.io.IDataOutput;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.common.FResRenderable;
 
 //============================================================
 // <T>资源模型渲染对象。</T>

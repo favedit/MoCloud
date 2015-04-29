@@ -1,10 +1,5 @@
 package org.mo.content.resource.scene;
 
-import org.mo.content.resource.template.FResTemplate;
-
-import org.mo.content.resource.common.FResDisplayLayer;
-import org.mo.content.resource.common.FResObject;
-import org.mo.content.resource.common.FResSpace;
 import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -13,6 +8,10 @@ import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.resource.common.FResDisplayLayer;
+import org.mo.content.resource.common.FResObject;
+import org.mo.content.resource.common.FResSpace;
+import org.mo.content.resource.template.FResTemplate;
 
 //============================================================
 // <T>场景。</T>

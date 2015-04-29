@@ -1,14 +1,5 @@
 package org.mo.content.engine.core.scene;
 
-import org.mo.content.engine.core.template.IResTemplateConsole;
-import org.mo.content.engine.core.template.IResTemplateMaterialConsole;
-
-import org.mo.content.engine.core.material.IResMaterialConsole;
-import org.mo.content.resource.template.FResTemplate;
-import org.mo.content.resource.scene.FResScene;
-import org.mo.content.resource.scene.FResSceneDisplay;
-import org.mo.content.resource.common.FResDisplay;
-import org.mo.content.resource.common.FResMaterial;
 import java.io.File;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
@@ -25,6 +16,14 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
+import org.mo.content.engine.core.material.IResMaterialConsole;
+import org.mo.content.engine.core.template.IResTemplateConsole;
+import org.mo.content.engine.core.template.IResTemplateMaterialConsole;
+import org.mo.content.resource.common.FResDisplay;
+import org.mo.content.resource.common.FResMaterial;
+import org.mo.content.resource.scene.FResScene;
+import org.mo.content.resource.scene.FResSceneDisplay;
+import org.mo.content.resource.template.FResTemplate;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.mime.compress.ECompressMode;
@@ -240,7 +239,7 @@ public class FResSceneConsole
          if(display instanceof FResSceneDisplay){
             FResSceneDisplay sceneDisplay = (FResSceneDisplay)display;
             String displayCode = sceneDisplay.code();
-            FGcResTemplateInfo templateInfo = _templateConsole.findByCode(logicContext, userId, displayCode);
+            FGcResTemplateInfo templateInfo = _templateConsole.findByUserCode(logicContext, userId, displayCode);
             if(templateInfo == null){
                throw new FFatalError("Template info is not exists. (code={1})", displayCode);
             }
@@ -263,7 +262,7 @@ public class FResSceneConsole
       //............................................................
       // 新建场景
       FGcResSceneInfo sceneInfo = null;
-      FGcResSceneInfo findSceneInfo = findByCode(logicContext, userId, code);
+      FGcResSceneInfo findSceneInfo = findByUserCode(logicContext, userId, code);
       if(findSceneInfo == null){
          sceneInfo = doPrepare(logicContext);
       }else{

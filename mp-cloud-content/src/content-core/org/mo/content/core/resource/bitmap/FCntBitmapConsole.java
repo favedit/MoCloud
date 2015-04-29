@@ -8,6 +8,7 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.content.engine.core.bitmap.FResBitmapConsole;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eng.image.FImage;
 
 //============================================================
 // <T>资源位图控制台。</T>
@@ -42,9 +43,27 @@ public class FCntBitmapConsole
       if(stream == null){
          throw new FFatalError("Stream is not exists.");
       }
-      String guid = bitmapInfo.guid();
+      //............................................................
+      // 计算图片尺寸
+      if(!bitmapInfo.testSizeValid()){
+         // 加载图片
+         int sizeWidth = 0;
+         int sizeHeight = 0;
+         try(FImage image = new FImage()){
+            image.loadData(stream.memory(), 0, stream.length());
+            sizeWidth = image.width();
+            sizeHeight = image.height();
+         }catch(Exception e){
+            throw new FFatalError("Calculate image size failure.");
+         }
+         // 存储信息
+         bitmapInfo.setSizeWidth(sizeWidth);
+         bitmapInfo.setSizeHeight(sizeHeight);
+         doUpdate(logicContext, bitmapInfo);
+      }
       //............................................................
       // 存储数据
+      String guid = bitmapInfo.guid();
       SGcStorage storage = new SGcStorage(EGcStorageCatalog.ResourceBitmap, guid);
       storage.setData(stream.toArray());
       _storageConsole.store(storage);

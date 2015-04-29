@@ -1,7 +1,5 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.content.resource.model.FResModel;
-
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.resource.model.IGcResModelConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
@@ -9,6 +7,7 @@ import org.mo.com.lang.EResult;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.mime.stl.FStlFile;
+import org.mo.content.resource.model.FResModel;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

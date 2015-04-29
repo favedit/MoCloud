@@ -1,13 +1,12 @@
 package org.mo.content.resource.template;
 
+import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
+import org.mo.com.xml.FXmlDocument;
+import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource.common.FResMaterial;
 import org.mo.content.resource.common.FResShape;
 import org.mo.content.resource.common.FResSpace;
 import org.mo.content.resource.common.FResSprite;
-
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
-import org.mo.com.xml.FXmlDocument;
-import org.mo.com.xml.FXmlNode;
 
 //============================================================
 // <T>资源模板。</T>

@@ -1,11 +1,10 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.content.resource.common.FResStream;
-
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamConsole;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
+import org.mo.content.resource.common.FResStream;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

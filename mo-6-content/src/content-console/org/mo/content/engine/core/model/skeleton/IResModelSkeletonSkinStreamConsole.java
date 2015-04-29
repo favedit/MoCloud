@@ -1,9 +1,8 @@
 package org.mo.content.engine.core.model.skeleton;
 
-import org.mo.content.resource.common.FResStream;
-
 import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinStreamInfo;
 import org.mo.cloud.logic.resource.model.skeleton.IGcResModelSkeletonSkinStreamConsole;
+import org.mo.content.resource.common.FResStream;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
