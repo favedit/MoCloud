@@ -132,6 +132,7 @@ public class FGcResTemplateConsole
       }
       // 创建资源对象
       FGcResourceInfo resource = _dataResourceConsole.doPrepare(logicContext);
+      resource.setGuid(templateInfo.guid());
       resource.setUserId(userId);
       resource.setProjectId(templateInfo.projectId());
       resource.setCatalogId(templateInfo.catalogId());
@@ -140,7 +141,6 @@ public class FGcResTemplateConsole
       resource.setLabel(templateInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
-      templateInfo.setGuid(resource.guid());
       templateInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }

@@ -1,5 +1,7 @@
 package org.mo.content.face.resource;
 
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
+
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,6 @@ import org.mo.com.net.EMime;
 import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.content.core.resource.material.ICntMaterialConsole;
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
@@ -60,7 +61,7 @@ public class FPreviewServlet
 
    // 网格数据接口
    @ALink
-   protected ICntMeshConsole _meshConsole;
+   protected ICntModelMeshConsole _meshConsole;
 
    // 模型数据接口
    @ALink

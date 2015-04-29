@@ -1,13 +1,13 @@
 package org.mo.content.face.resource.mesh;
 
-import org.mo.content.engine.core.model.IResModelMeshConsole;
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
 
+import org.mo.content.engine.core.model.IResModelMeshConsole;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.FObject;
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -49,7 +49,7 @@ public class FMeshServlet
 
    // 资源网格接口
    @ALink
-   protected ICntMeshConsole _c3MeshConsole;
+   protected ICntModelMeshConsole _c3MeshConsole;
 
    //============================================================
    // <T>逻辑处理。</T>

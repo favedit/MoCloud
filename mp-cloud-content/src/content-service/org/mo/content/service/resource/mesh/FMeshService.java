@@ -1,8 +1,8 @@
 package org.mo.content.service.resource.mesh;
 
-import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
 
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.data.RSql;
@@ -29,7 +29,7 @@ public class FMeshService
 {
    // 项目控制台接口
    @ALink
-   protected ICntMeshConsole _meshConsole;
+   protected ICntModelMeshConsole _meshConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>

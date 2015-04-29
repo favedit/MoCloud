@@ -127,6 +127,7 @@ public class FGcResSceneConsole
       }
       // 创建资源对象
       FGcResourceInfo resource = _dataResourceConsole.doPrepare(logicContext);
+      resource.setGuid(sceneInfo.guid());
       resource.setUserId(userId);
       resource.setProjectId(sceneInfo.projectId());
       resource.setCatalogId(sceneInfo.catalogId());
@@ -135,7 +136,6 @@ public class FGcResSceneConsole
       resource.setLabel(sceneInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
-      sceneInfo.setGuid(resource.guid());
       sceneInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }

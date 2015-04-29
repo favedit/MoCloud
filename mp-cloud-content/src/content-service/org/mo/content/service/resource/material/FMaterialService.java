@@ -227,6 +227,7 @@ public class FMaterialService
       // 新建数据
       FGcResMaterialInfo materialInfo = _materialConsole.doPrepare(logicContext);
       materialInfo.setUserId(userId);
+      material.setGuid(materialInfo.guid());
       material.saveUnit(materialInfo);
       _materialConsole.doInsert(logicContext, materialInfo);
       return EResult.Success;

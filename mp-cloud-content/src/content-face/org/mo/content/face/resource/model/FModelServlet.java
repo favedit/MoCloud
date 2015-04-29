@@ -1,7 +1,8 @@
 package org.mo.content.face.resource.model;
 
-import org.mo.content.engine.core.model.IResModelMeshConsole;
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
 
+import org.mo.content.engine.core.model.IResModelMeshConsole;
 import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
@@ -65,7 +65,7 @@ public class FModelServlet
 
    // 资源网格接口
    @ALink
-   protected ICntMeshConsole _c3MeshConsole;
+   protected ICntModelMeshConsole _c3MeshConsole;
 
    // 资源网格接口
    @ALink

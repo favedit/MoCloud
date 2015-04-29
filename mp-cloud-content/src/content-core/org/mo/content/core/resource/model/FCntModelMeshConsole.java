@@ -1,4 +1,4 @@
-package org.mo.content.core.resource.mesh;
+package org.mo.content.core.resource.model;
 
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshConsole;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
@@ -14,10 +14,10 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>内容网格控制台。</T>
 //============================================================
-public class FCntMeshConsole
+public class FCntModelMeshConsole
       extends FGcResModelMeshConsole
       implements
-         ICntMeshConsole
+         ICntModelMeshConsole
 {
    // 网格控制台接口
    @ALink

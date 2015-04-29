@@ -104,6 +104,7 @@ public class FGcResBitmapConsole
       }
       // 创建资源对象
       FGcResourceInfo resource = _dataResourceConsole.doPrepare(logicContext);
+      resource.setGuid(bitmapInfo.guid());
       resource.setUserId(userId);
       resource.setProjectId(bitmapInfo.projectId());
       resource.setCatalogId(bitmapInfo.catalogId());
@@ -112,7 +113,6 @@ public class FGcResBitmapConsole
       resource.setLabel(bitmapInfo.label());
       _dataResourceConsole.doInsert(logicContext, resource);
       // 设置资源信息
-      bitmapInfo.setGuid(resource.guid());
       bitmapInfo.setResourceId(resource.ouid());
       return EResult.Success;
    }

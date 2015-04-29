@@ -1,4 +1,4 @@
-package org.mo.content.core.resource.mesh;
+package org.mo.content.core.resource.model;
 
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
@@ -11,7 +11,7 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>内容网格控制台接口。</T>
 //============================================================
-public interface ICntMeshConsole
+public interface ICntModelMeshConsole
       extends
          IGcResModelMeshConsole
 {

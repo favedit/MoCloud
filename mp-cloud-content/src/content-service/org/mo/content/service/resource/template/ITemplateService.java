@@ -60,6 +60,36 @@ public interface ITemplateService
                   IWebOutput output);
 
    //============================================================
+   // <T>创建材质处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult createMaterial(IWebContext context,
+                          ILogicContext logicContext,
+                          FGcSessionInfo session,
+                          IWebInput input,
+                          IWebOutput output);
+
+   //============================================================
+   // <T>创建显示对象处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult createDisplay(IWebContext context,
+                         ILogicContext logicContext,
+                         FGcSessionInfo session,
+                         IWebInput input,
+                         IWebOutput output);
+
+   //============================================================
    // <T>修改数据处理。</T>
    //
    // @param context 网络环境

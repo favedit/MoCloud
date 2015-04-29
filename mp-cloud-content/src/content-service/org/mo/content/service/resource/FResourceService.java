@@ -1,5 +1,7 @@
 package org.mo.content.service.resource;
 
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceResourceLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import com.cyou.gccloud.define.enums.core.EGcResourceShare;
@@ -16,7 +18,6 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.content.core.resource.material.ICntMaterialConsole;
-import org.mo.content.core.resource.mesh.ICntMeshConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
@@ -45,7 +46,7 @@ public class FResourceService
 
    // 内容网格控制台接口
    @ALink
-   protected ICntMeshConsole _meshConsole;
+   protected ICntModelMeshConsole _meshConsole;
 
    // 内容模型控制台接口
    @ALink

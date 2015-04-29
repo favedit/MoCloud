@@ -21,6 +21,40 @@ public class FResMaterialConsole
          IResMaterialConsole
 {
    //============================================================
+   // <T>生成材质。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param templateInfo 模板信息
+   // @return 材质
+   //============================================================
+   @Override
+   public FResMaterial makeMaterial(ILogicContext logicContext,
+                                    FGcResMaterialInfo materialInfo){
+      FResMaterial material = new FResMaterial();
+      material.loadUnit(materialInfo);
+      return material;
+   }
+
+   //============================================================
+   // <T>生成材质。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param guid 唯一编号
+   // @return 材质
+   //============================================================
+   @Override
+   public FResMaterial makeMaterial(ILogicContext logicContext,
+                                    String guid){
+      // 查找数据单元
+      FGcResMaterialInfo materialInfo = findByGuid(logicContext, guid);
+      if(materialInfo == null){
+         return null;
+      }
+      // 读取内容
+      return makeMaterial(logicContext, materialInfo);
+   }
+
+   //============================================================
    // <T>生成资源。</T>
    //
    // @param logicContext 逻辑环境
