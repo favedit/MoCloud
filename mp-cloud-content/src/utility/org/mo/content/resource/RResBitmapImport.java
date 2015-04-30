@@ -1,13 +1,12 @@
 package org.mo.content.resource;
 
-import org.mo.content.engine.core.bitmap.IResBitmapConsole;
-
 import java.io.File;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
+import org.mo.content.engine.core.bitmap.IResBitmapConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -19,7 +18,7 @@ public class RResBitmapImport
    // <T>导入处理。</T>
    //============================================================
    public static void importProcess() throws Exception{
-      String path = RRs3Configuration.RootPath + "/MoResource/Export/texture/";
+      String path = RRs3Configuration.RootPath + "/MoResource/Export/bitmap/";
       // 设置数据
       FStrings filePaths = new FStrings();
       for(String fileName : RFile.listFiles(path)){
