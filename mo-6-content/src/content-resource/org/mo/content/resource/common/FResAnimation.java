@@ -1,10 +1,14 @@
 package org.mo.content.resource.common;
 
+import java.text.DecimalFormat;
 import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RInteger;
+import org.mo.content.geom.common.SFloatMatrixQuat;
 
 //============================================================
 // <T>资源3D动画精灵。</T>
@@ -12,6 +16,15 @@ import org.mo.com.lang.FObjects;
 public class FResAnimation
       extends FResResource
 {
+   // 位置格式器
+   public static DecimalFormat FormatTranslate = new DecimalFormat("0.0000");
+
+   // 旋转格式器
+   public static DecimalFormat FormatRotation = new DecimalFormat("0.00");
+
+   // 缩放格式器
+   public static DecimalFormat FormatScale = new DecimalFormat("0.00");
+
    // 骨骼唯一编号
    protected String _skeletonGuid;
 
@@ -27,10 +40,20 @@ public class FResAnimation
    // 跟踪集合
    protected FObjects<FResTrack> _tracks;
 
+   // 帧缩放字典
+   protected FDictionary<FResFrameTranslate> _frameTranslates = new FDictionary<FResFrameTranslate>(FResFrameTranslate.class);
+
+   // 帧旋转字典
+   protected FDictionary<FResFrameRotation> _frameRotations = new FDictionary<FResFrameRotation>(FResFrameRotation.class);
+
+   // 帧缩放字典
+   protected FDictionary<FResFrameScale> _frameScales = new FDictionary<FResFrameScale>(FResFrameScale.class);
+
    //============================================================
    // <T>构造资源精灵。</T>
    //============================================================
    public FResAnimation(){
+      _typeName = "Animation";
    }
 
    //============================================================
@@ -85,16 +108,37 @@ public class FResAnimation
       output.writeUint16(_frameCount);
       output.writeUint16(_frameTick);
       output.writeInt32(_frameSpan);
+      //............................................................
+      // 存储所有帧平移信息
+      int translateCount = _frameTranslates.count();
+      int translateBytes = RInteger.strideByte(translateCount);
+      output.writeUint32(translateCount);
+      for(int n = 0; n < translateCount; n++){
+         FResFrameTranslate translate = _frameTranslates.value(n);
+         translate.serialize(output);
+      }
+      // 存储所有帧旋转信息
+      int rotationCount = _frameRotations.count();
+      int rotationBytes = RInteger.strideByte(rotationCount);
+      output.writeUint32(rotationCount);
+      for(int n = 0; n < rotationCount; n++){
+         FResFrameRotation rotation = _frameRotations.value(n);
+         rotation.serialize(output);
+      }
+      // 存储所有帧缩放信息
+      int scaleCount = _frameScales.count();
+      int scaleBytes = RInteger.strideByte(scaleCount);
+      output.writeUint32(scaleCount);
+      for(int n = 0; n < scaleCount; n++){
+         FResFrameScale scale = _frameScales.value(n);
+         scale.serialize(output);
+      }
+      //............................................................
       // 输出跟踪集合
       if(_tracks != null){
          output.writeInt16((short)_tracks.count());
          for(FResTrack track : _tracks){
-            byte[] trackData = track.data();
-            if(trackData != null){
-               output.write(trackData, 0, trackData.length);
-            }else{
-               track.serialize(output);
-            }
+            track.serialize2(output, translateBytes, rotationBytes, scaleBytes);
          }
       }else{
          output.writeInt16((short)0);
@@ -128,6 +172,52 @@ public class FResAnimation
       info.setFrameCount(_frameCount);
       info.setFrameTick(_frameTick);
       info.setFrameSpan(_frameSpan);
+   }
+
+   //============================================================
+   // <T>打包数据。</T>
+   //============================================================
+   public void pack(){
+      // 清空字典
+      _frameTranslates.clear();
+      _frameRotations.clear();
+      _frameScales.clear();
+      for(FResTrack track : _tracks){
+         // 建立帧
+         for(FResFrame frame : track.frames()){
+            SFloatMatrixQuat matrix = frame.matrix();
+            // 设置帧平移
+            String translateFlag = FormatTranslate.format(matrix.tx) + "|" + FormatTranslate.format(matrix.ty) + "|" + FormatTranslate.format(matrix.tz);
+            FResFrameTranslate translate = _frameTranslates.find(translateFlag);
+            if(translate == null){
+               translate = new FResFrameTranslate();
+               translate.setIndex(_frameTranslates.count());
+               translate.data().set(matrix.tx, matrix.ty, matrix.tz);
+               _frameTranslates.set(translateFlag, translate);
+            }
+            frame.setFrameTranslate(translate);
+            // 设置帧平移
+            String rotationFlag = FormatRotation.format(matrix.qx) + "|" + FormatRotation.format(matrix.qy) + "|" + FormatRotation.format(matrix.qz) + "|" + FormatRotation.format(matrix.qw);
+            FResFrameRotation rotation = _frameRotations.find(rotationFlag);
+            if(rotation == null){
+               rotation = new FResFrameRotation();
+               rotation.setIndex(_frameRotations.count());
+               rotation.data().set(matrix.qx, matrix.qy, matrix.qz, matrix.qw);
+               _frameRotations.set(rotationFlag, rotation);
+            }
+            frame.setFrameRotation(rotation);
+            // 设置帧缩放 
+            String scaleFlag = FormatScale.format(matrix.sx) + "|" + FormatScale.format(matrix.sy) + "|" + FormatScale.format(matrix.sz);
+            FResFrameScale scale = _frameScales.find(scaleFlag);
+            if(scale == null){
+               scale = new FResFrameScale();
+               scale.setIndex(_frameScales.count());
+               scale.data().set(matrix.sx, matrix.sy, matrix.sz);
+               _frameScales.set(scaleFlag, scale);
+            }
+            frame.setFrameScale(scale);
+         }
+      }
    }
 
    //============================================================

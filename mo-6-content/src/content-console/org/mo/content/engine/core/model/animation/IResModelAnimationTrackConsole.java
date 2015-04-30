@@ -14,18 +14,6 @@ public interface IResModelAnimationTrackConsole
          IGcResModelAnimationTrackConsole
 {
    //============================================================
-   // <T>更新轨迹数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param trackInfo 轨迹信息
-   // @param track 轨迹
-   // @return 跟踪单元
-   //============================================================
-   EResult updateResource(ILogicContext logicContext,
-                          FGcResModelAnimationTrackInfo trackInfo,
-                          FResTrack track);
-
-   //============================================================
    // <T>构建轨迹数据。</T>
    //
    // @param logicContext 逻辑环境
@@ -44,4 +32,16 @@ public interface IResModelAnimationTrackConsole
    //============================================================
    FResTrack makeTrack(ILogicContext logicContext,
                        long trackId);
+
+   //============================================================
+   // <T>更新轨迹数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param trackInfo 轨迹信息
+   // @param track 轨迹
+   // @return 跟踪单元
+   //============================================================
+   EResult updateResource(ILogicContext logicContext,
+                          FGcResModelAnimationTrackInfo trackInfo,
+                          FResTrack track);
 }

@@ -25,9 +25,7 @@ public class FResTrack
    // 矩阵
    protected SFloatMatrix3d _matrix = new SFloatMatrix3d();
 
-   // 数据长度
-   protected byte[] _data;
-
+   // 帧集合
    protected FObjects<FResFrame> _frames = new FObjects<FResFrame>(FResFrame.class);
 
    //============================================================
@@ -73,21 +71,12 @@ public class FResTrack
    }
 
    //============================================================
-   // <T>获得数据。</T>
+   // <T>获得帧集合。</T>
    //
-   // @return 数据
+   // @return 帧集合
    //============================================================
-   public byte[] data(){
-      return _data;
-   }
-
-   //============================================================
-   // <T>设置数据。</T>
-   //
-   // @param data 代码
-   //============================================================
-   public void setData(byte[] data){
-      _data = data;
+   public FObjects<FResFrame> frames(){
+      return _frames;
    }
 
    //============================================================
@@ -102,21 +91,73 @@ public class FResTrack
       output.writeUint8((short)_boneIndex);
       output.writeUint16(_frameTick);
       _matrix.serialize(output);
-      // 读取所有帧信息
+      // 存储所有帧索引信息
       int frameCount = _frames.count();
       output.writeUint16(frameCount);
       for(int n = 0; n < frameCount; n++){
          FResFrame frame = _frames.get(n);
-         frame.serialize(output);
+         //frame.serialize(output);
+         output.writeUint16(frame.frameTranslate().index());
+         output.writeUint16(frame.frameRotation().index());
+         output.writeUint16(frame.frameScale().index());
       }
    }
 
    //============================================================
-   // <T>从输入流反序列化数据。</T>
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize2(IDataOutput output,
+                          int translateBytes,
+                          int rotationBytes,
+                          int scaleBytes){
+      // 读取属性
+      output.writeString(_meshCode);
+      output.writeUint16(_boneIndex);
+      output.writeUint16(_frameTick);
+      _matrix.serialize(output);
+      // 存储所有帧索引信息
+      int frameCount = _frames.count();
+      output.writeUint16(frameCount);
+      for(int n = 0; n < frameCount; n++){
+         FResFrame frame = _frames.get(n);
+         // 输出位移索引
+         int translateIndex = frame.frameTranslate().index();
+         if(translateBytes == 4){
+            output.writeUint32(translateIndex);
+         }else if(translateBytes == 2){
+            output.writeUint16(translateIndex);
+         }else{
+            output.writeUint8((short)translateIndex);
+         }
+         // 输出旋转索引
+         int rotationIndex = frame.frameRotation().index();
+         if(rotationBytes == 4){
+            output.writeUint32(rotationIndex);
+         }else if(rotationBytes == 2){
+            output.writeUint16(rotationIndex);
+         }else{
+            output.writeUint8((short)rotationIndex);
+         }
+         // 输出缩放索引
+         int scaleIndex = frame.frameScale().index();
+         if(scaleBytes == 4){
+            output.writeUint32(scaleIndex);
+         }else if(scaleBytes == 2){
+            output.writeUint16(scaleIndex);
+         }else{
+            output.writeUint8((short)scaleIndex);
+         }
+      }
+   }
+
+   //============================================================
+   // <T>加载数据。</T>
    //
    // @param input 输入流
    //============================================================
-   public void unserialize(IDataInput input){
+   public void loadData(IDataInput input){
       // 读取属性
       _meshCode = input.readString();
       _boneIndex = input.readInt32();
@@ -126,29 +167,49 @@ public class FResTrack
       int frameCount = input.readInt32();
       for(int n = 0; n < frameCount; n++){
          FResFrame frame = new FResFrame();
-         frame.unserialize(input);
+         frame.loadData(input);
          _frames.push(frame);
       }
    }
 
    //============================================================
-   // <T>从输入流中导入数据。</T>
+   // <T>加载数据。</T>
    //
-   // @param input 输入流
+   // @param data 数据 
    //============================================================
-   public void importData(IDataInput input){
+   public void loadData(byte[] data){
+      loadData(new FByteStream(data));
+   }
+
+   //============================================================
+   // <T>保存数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void saveData(IDataOutput output){
       // 读取属性
-      _meshCode = input.readString();
-      _boneIndex = input.readInt32();
-      _frameTick = input.readInt32();
-      _matrix.unserialize(input);
+      output.writeString(_meshCode);
+      output.writeInt32(_boneIndex);
+      output.writeInt32(_frameTick);
+      _matrix.serialize(output);
       // 读取所有帧信息
-      int frameCount = input.readInt32();
+      int frameCount = _frames.count();
+      output.writeInt32(frameCount);
       for(int n = 0; n < frameCount; n++){
-         FResFrame frame = new FResFrame();
-         frame.importData(input);
-         _frames.push(frame);
+         FResFrame frame = _frames.get(n);
+         frame.saveData(output);
       }
+   }
+
+   //============================================================
+   // <T>保存数据。</T>
+   //
+   // @return 数据 
+   //============================================================
+   public byte[] saveData(){
+      FByteStream stream = new FByteStream();
+      saveData(stream);
+      return stream.toArray();
    }
 
    //============================================================
@@ -178,13 +239,22 @@ public class FResTrack
    }
 
    //============================================================
-   // <T>获得数据。</T>
+   // <T>从输入流中导入数据。</T>
    //
-   // @return 数据
+   // @param input 输入流
    //============================================================
-   public byte[] toArray(){
-      FByteStream stream = new FByteStream();
-      serialize(stream);
-      return stream.toArray();
+   public void importData(IDataInput input){
+      // 读取属性
+      _meshCode = input.readString();
+      _boneIndex = input.readInt32();
+      _frameTick = input.readInt32();
+      _matrix.unserialize(input);
+      // 读取所有帧信息
+      int frameCount = input.readInt32();
+      for(int n = 0; n < frameCount; n++){
+         FResFrame frame = new FResFrame();
+         frame.importData(input);
+         _frames.push(frame);
+      }
    }
 }

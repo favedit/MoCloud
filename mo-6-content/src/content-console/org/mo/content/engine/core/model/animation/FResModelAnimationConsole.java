@@ -57,6 +57,8 @@ public class FResModelAnimationConsole
             animation.pushTrack(track);
          }
       }
+      // 打包数据
+      animation.pack();
       return animation;
    }
 
@@ -70,10 +72,7 @@ public class FResModelAnimationConsole
    @Override
    public FResAnimation makeAnimation(ILogicContext logicContext,
                                       long animationId){
-      FGcResModelAnimationInfo animationInfo = find(logicContext, animationId);
-      if(animationInfo != null){
-         return makeAnimation(logicContext, animationInfo);
-      }
-      return null;
+      FGcResModelAnimationInfo animationInfo = get(logicContext, animationId);
+      return makeAnimation(logicContext, animationInfo);
    }
 }

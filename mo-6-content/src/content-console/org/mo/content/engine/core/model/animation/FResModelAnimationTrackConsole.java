@@ -16,6 +16,41 @@ public class FResModelAnimationTrackConsole
       implements
          IResModelAnimationTrackConsole
 {
+
+   //============================================================
+   // <T>构建轨迹数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param trackInfo 轨迹信息
+   // @return 轨迹
+   //============================================================
+   @Override
+   public FResTrack makeTrack(ILogicContext logicContext,
+                              FGcResModelAnimationTrackInfo trackInfo){
+      String guid = trackInfo.guid();
+      // 设置属性
+      FResTrack track = new FResTrack();
+      track.loadUnit(trackInfo);
+      // 读取数据
+      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceModelAnimationTrack, guid);
+      track.loadData(resource.data());
+      return track;
+   }
+
+   //============================================================
+   // <T>构建轨迹数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param trackId 轨迹编号
+   // @return 轨迹
+   //============================================================
+   @Override
+   public FResTrack makeTrack(ILogicContext logicContext,
+                              long trackId){
+      FGcResModelAnimationTrackInfo trackInfo = get(logicContext, trackId);
+      return makeTrack(logicContext, trackInfo);
+   }
+
    //============================================================
    // <T>更新轨迹数据。</T>
    //
@@ -36,43 +71,9 @@ public class FResModelAnimationTrackConsole
       doUpdate(logicContext, trackInfo);
       // 存储数据
       SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelAnimationTrack, guid);
-      resource.setData(track.toArray());
+      resource.setData(track.saveData());
       _storageConsole.store(resource);
       // 返回结果
       return EResult.Success;
-   }
-
-   //============================================================
-   // <T>构建轨迹数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param trackInfo 轨迹信息
-   // @return 轨迹
-   //============================================================
-   @Override
-   public FResTrack makeTrack(ILogicContext logicContext,
-                              FGcResModelAnimationTrackInfo trackInfo){
-      String guid = trackInfo.guid();
-      // 设置属性
-      FResTrack track = new FResTrack();
-      track.loadUnit(trackInfo);
-      // 读取数据
-      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceModelAnimationTrack, guid);
-      track.setData(resource.data());
-      return track;
-   }
-
-   //============================================================
-   // <T>构建轨迹数据。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param trackId 轨迹编号
-   // @return 轨迹
-   //============================================================
-   @Override
-   public FResTrack makeTrack(ILogicContext logicContext,
-                              long trackId){
-      FGcResModelAnimationTrackInfo trackInfo = get(logicContext, trackId);
-      return makeTrack(logicContext, trackInfo);
    }
 }
