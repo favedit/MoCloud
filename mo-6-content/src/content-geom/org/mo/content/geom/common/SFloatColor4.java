@@ -126,10 +126,10 @@ public class SFloatColor4
    // @param xconfig 配置信息
    //============================================================
    public void loadConfig(FXmlNode xconfig){
-      red = xconfig.getFloat("r");
-      green = xconfig.getFloat("g");
-      blue = xconfig.getFloat("b");
-      alpha = xconfig.getFloat("power");
+      red = xconfig.getFloat("r", red);
+      green = xconfig.getFloat("g", green);
+      blue = xconfig.getFloat("b", blue);
+      alpha = xconfig.getFloat("power", alpha);
    }
 
    //============================================================

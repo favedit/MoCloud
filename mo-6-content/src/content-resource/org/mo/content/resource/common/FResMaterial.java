@@ -44,11 +44,11 @@ public class FResMaterial
    // 颜色最大
    protected float _colorMax = 1.0f;
 
+   // 颜色平衡
+   protected float _colorBalance = 0.5f;
+
    // 颜色比率
    protected float _colorRate = 1.0f;
-
-   // 颜色融合
-   protected float _colorMerge = 1.0f;
 
    // 配置透明
    protected boolean _optionAlpha = false;
@@ -58,6 +58,12 @@ public class FResMaterial
 
    // 透明比率
    protected float _alphaRate = 1.0f;
+
+   // 配置顶点色
+   protected boolean _optionVertexColor = true;
+
+   // 顶点颜色
+   protected SFloatColor4 _vertexColor = new SFloatColor4(1.0f, 1.0f, 1.0f, 1.0f);
 
    // 配置环境
    protected boolean _optionAmbient = true;
@@ -87,7 +93,7 @@ public class FResMaterial
    protected float _specularBase = 0.0f;
 
    // 高光级别
-   protected float _specularLevel = 1.0f;
+   protected float _specularLevel = 16.0f;
 
    // 配置视角高光
    protected boolean _optionSpecularView = false;
@@ -465,8 +471,11 @@ public class FResMaterial
       _optionColor = material._optionColor;
       _colorMin = material._colorMin;
       _colorMax = material._colorMax;
+      _colorBalance = material._colorBalance;
       _colorRate = material._colorRate;
-      _colorMerge = material._colorMerge;
+      // 设置颜色信息
+      _optionVertexColor = material._optionVertexColor;
+      _vertexColor.assign(material._vertexColor);
       // 设置颜色信息
       _optionAmbient = material._optionAmbient;
       _ambientColor.assign(material._ambientColor);
@@ -531,8 +540,11 @@ public class FResMaterial
       output.writeBoolean(_optionColor);
       output.writeFloat(_colorMin);
       output.writeFloat(_colorMax);
+      output.writeFloat(_colorBalance);
       output.writeFloat(_colorRate);
-      output.writeFloat(_colorMerge);
+      // 输出颜色
+      output.writeBoolean(_optionVertexColor);
+      _vertexColor.serialize(output);
       // 输出颜色
       output.writeBoolean(_optionAmbient);
       _ambientColor.serialize(output);
@@ -616,11 +628,11 @@ public class FResMaterial
             _optionColor = xnode.getBoolean("valid", _optionColor);
             _colorMin = xnode.getFloat("min", 0.0f);
             _colorMax = xnode.getFloat("max", 1.0f);
-            _colorRate = xnode.getFloat("rate", 2.0f);
-            _colorMerge = xnode.getFloat("merge", 0.5f);
-            if(_colorMerge == 0){
-               _colorMerge = 1;
-            }
+            _colorBalance = xnode.getFloat("balance", 0.5f);
+            _colorRate = xnode.getFloat("rate", 1.0f);
+         }else if(xnode.isName("Vertex")){
+            _optionVertexColor = xnode.getBoolean("valid", _optionVertexColor);
+            _vertexColor.loadConfig(xnode);
          }else if(xnode.isName("Ambient")){
             _optionAmbient = xnode.getBoolean("valid", _optionAmbient);
             _ambientColor.loadConfig(xnode);
@@ -741,8 +753,12 @@ public class FResMaterial
       xcolor.set("valid", _optionColor);
       xcolor.set("min", _colorMin);
       xcolor.set("max", _colorMax);
+      xcolor.set("balance", _colorBalance);
       xcolor.set("rate", _colorRate);
-      xcolor.set("merge", _colorMerge);
+      // 存储顶点色
+      FXmlNode xvertex = xconfig.createNode("Vertex");
+      xvertex.set("valid", _optionVertexColor);
+      _vertexColor.saveConfig(xvertex);
       // 存储环境
       FXmlNode xambient = xconfig.createNode("Ambient");
       xambient.set("valid", _optionAmbient);
@@ -1027,10 +1043,12 @@ public class FResMaterial
             _alphaBase = xnode.getFloat("base");
             _alphaRate = xnode.getFloat("rate");
          }else if(xnode.isName("Color")){
-            _colorMin = xnode.getFloat("min");
-            _colorMax = xnode.getFloat("max");
-            _colorRate = xnode.getFloat("rate");
-            _colorMerge = xnode.getFloat("merge");
+            _colorMin = xnode.getFloat("min", _colorMin);
+            _colorMax = xnode.getFloat("max", _colorMax);
+            _colorBalance = xnode.getFloat("balance", _colorBalance);
+            _colorRate = xnode.getFloat("rate", _colorRate);
+         }else if(xnode.isName("Vertex")){
+            _vertexColor.importConfig(xnode);
          }else if(xnode.isName("Ambient")){
             _ambientColor.importConfig(xnode);
          }else if(xnode.isName("Diffuse")){

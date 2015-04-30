@@ -1,9 +1,8 @@
 package org.mo.content.dbimport;
 
-import org.mo.content.engine.core.storage.IResStorageConsole;
-
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
+import org.mo.content.engine.core.storage.IResStorageConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
@@ -16,7 +15,6 @@ public class RDbImportData
    //============================================================
    public static void importProcess() throws Exception{
       // 设置数据
-      //String path = RRs3Configuration.RootPath + "/Database/Assest";
       String path = RRs3Configuration.RootPath + "/MoResource/Assest";
       // 导入处理
       IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
@@ -24,7 +22,7 @@ public class RDbImportData
          IResStorageConsole storageConsole = RAop.find(IResStorageConsole.class);
          //storageConsole.clearData(logicContext);
          storageConsole.importData(logicContext, path);
-         //storageConsole.importStorage(logicContext, path);
+         storageConsole.importStorage(logicContext, path);
       }
    }
 

@@ -40,7 +40,7 @@ public class RFloat
    // @return 浮点数
    //============================================================
    public static float parse(String value){
-      if(null != value){
+      if(value != null){
          return parse(value, DEFAULT);
       }
       return DEFAULT;
@@ -56,9 +56,14 @@ public class RFloat
    //============================================================
    public static float parse(String value,
                              float defaultValue){
+      // 检查错误
+      if("NaN".equals(value)){
+         return defaultValue;
+      }
+      // 解析浮点数
       try{
          return Float.parseFloat(value);
-      }catch(Exception oException){
+      }catch(Exception exception){
       }
       return defaultValue;
    }
@@ -102,7 +107,7 @@ public class RFloat
    //============================================================
    public static float parse(Object item,
                              float defaultValue){
-      if(null != item){
+      if(item != null){
          return parse(item.toString(), defaultValue);
       }
       return defaultValue;

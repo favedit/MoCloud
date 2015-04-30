@@ -18,8 +18,12 @@
          <Check name="optionColor" linker='_controlOptionColor' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <SlideNumber name="colorMin" linker='_controlColorMin' label="下限" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
          <SlideNumber name="colorMax" linker='_controlColorMax' label="上限" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+         <SlideNumber name="colorBalance" linker='_controlColorBalance' label="平衡" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
          <SlideNumber name="colorRate" linker='_controlColorRate' label="比率" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='2' value_step='0.01' note="" />
-         <SlideNumber name="colorMerge" linker='_controlColorMerge' label="合并" label_size='70,0' valid="Y" edit_size='200,0' input_size='40,0' value_min='0' value_max='1' value_step='0.01' note="" />
+      </Panel>
+      <Panel name='vertexPanel' icon='design.panel.icon' label='顶点颜色'>
+         <Check name="optionVertex" linker='_controlOptionVertex' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <ColorPower name="vertexColor" linker='_controlVertexColor' label="颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' value_min='0' value_max='4' note="" />
       </Panel>
       <Panel name='ambientPanel' icon='design.panel.icon' label='环境参数'>
          <Check name="optionAmbient" linker='_controlOptionAmbient' label="有效" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />

@@ -41,7 +41,7 @@ public class RDouble
    // @return 双精度数
    //============================================================
    public static double parse(String value){
-      if(null != value){
+      if(value != null){
          return parse(value, DEFAULT);
       }
       return DEFAULT;
@@ -57,9 +57,14 @@ public class RDouble
    //============================================================
    public static double parse(String value,
                               double defaultValue){
+      // 检查错误
+      if("NaN".equals(value)){
+         return defaultValue;
+      }
+      // 解析浮点数
       try{
          return Double.parseDouble(value);
-      }catch(Exception oException){
+      }catch(Exception exception){
       }
       return defaultValue;
    }
@@ -72,7 +77,7 @@ public class RDouble
    // @return 双精度数
    //============================================================
    public static double parse(Object item){
-      if(null != item){
+      if(item != null){
          // 是否为数字
          if(item instanceof Double){
             return ((Double)item).doubleValue();

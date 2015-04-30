@@ -1040,7 +1040,8 @@ public class FXmlNode
    public int getInt(String name,
                      int defaultValue){
       if(hasAttribute(name)){
-         return getInt(name);
+         String value = get(name);
+         return RInteger.parse(value, defaultValue);
       }
       return defaultValue;
    }
@@ -1066,7 +1067,8 @@ public class FXmlNode
    public long getLong(String name,
                        int defaultValue){
       if(hasAttribute(name)){
-         return getLong(name);
+         String value = get(name);
+         return RLong.parse(value, defaultValue);
       }
       return defaultValue;
    }
@@ -1092,7 +1094,8 @@ public class FXmlNode
    public float getFloat(String name,
                          float defaultValue){
       if(hasAttribute(name)){
-         return getFloat(name);
+         String value = get(name);
+         return RFloat.parse(value, defaultValue);
       }
       return defaultValue;
    }
@@ -1118,7 +1121,8 @@ public class FXmlNode
    public double getDouble(String name,
                            double defaultValue){
       if(hasAttribute(name)){
-         return getDouble(name);
+         String value = get(name);
+         return RDouble.parse(value, defaultValue);
       }
       return defaultValue;
    }
