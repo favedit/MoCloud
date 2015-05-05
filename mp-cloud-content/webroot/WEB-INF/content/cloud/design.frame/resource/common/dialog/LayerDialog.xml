@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="resource.common.dialog.LayerDialog" type='FDsCommonLayerDialog' label="新建显示层" is_valid="Y" size='600,400' note="">
+   <Frame name="resource.common.dialog.LayerDialog" type='FDsCommonLayerDialog' label="新建显示层" is_valid="Y" size='600,300' note="">
       <Panel name='spacePanel' icon='design.panel.icon' label='空间信息'>
          <Edit name="spaceGuid" linker='_controlSpaceGuid' label="唯一编号" label_size='70,0' valid="Y" edit_size='300,0' input_size='400,0' note="" />
          <Edit name="spaceLabel" linker='_controlSpaceLabel' label="名称" label_size='70,0' valid="Y" edit_size='300,0' input_size='400,0' note="" />

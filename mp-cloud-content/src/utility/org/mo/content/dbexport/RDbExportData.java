@@ -21,7 +21,7 @@ public class RDbExportData
       try(ILogicContext logicContext = new FLogicContext(dbConsole)){
          IResStorageConsole storageConsole = RAop.find(IResStorageConsole.class);
          storageConsole.exportData(logicContext, path);
-         //storageConsole.exportStorage(logicContext, path);
+         storageConsole.exportStorage(logicContext, path);
       }
    }
 

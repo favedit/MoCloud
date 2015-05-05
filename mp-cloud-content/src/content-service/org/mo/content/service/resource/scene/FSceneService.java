@@ -21,6 +21,7 @@ import org.mo.content.resource.common.FResObject;
 import org.mo.content.resource.common.FResSprite;
 import org.mo.content.resource.scene.FResScene;
 import org.mo.content.resource.scene.FResSceneDisplay;
+import org.mo.content.resource.scene.FResSceneLayer;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -227,6 +228,43 @@ public class FSceneService
                               FGcSessionInfo session,
                               IWebInput input,
                               IWebOutput output){
+      long userId = session.userId();
+      // 获得参数
+      FXmlNode xlayer = input.config().findNode("Layer");
+      if(xlayer == null){
+         throw new FFatalError("Layer is empty.");
+      }
+      String spaceGuid = xlayer.get("space_guid", null);
+      if(RString.isEmpty(spaceGuid)){
+         throw new FFatalError("Space guid is empty.");
+      }
+      String code = xlayer.get("code", null);
+      if(RString.isEmpty(code)){
+         throw new FFatalError("Code is empty.");
+      }
+      String label = xlayer.get("label", null);
+      if(RString.isEmpty(label)){
+         throw new FFatalError("Label is empty.");
+      }
+      //............................................................
+      // 查找项目
+      FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, spaceGuid);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (guid={1})", sceneInfo);
+      }
+      // 检查用户有效
+      if(sceneInfo.userId() != userId){
+         throw new FFatalError("Scene user is invalid. (scene_user_id={1}, session_user_id={2})", sceneInfo.userId(), userId);
+      }
+      FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      // 创建显示层
+      FResSceneLayer layer = new FResSceneLayer();
+      layer.setCode(code);
+      layer.setLabel(label);
+      scene.pushLayer(layer);
+      //............................................................
+      // 更新处理
+      _sceneConsole.updateResource(logicContext, scene);
       return EResult.Success;
    }
 
@@ -261,16 +299,11 @@ public class FSceneService
       }
       String displayGuid = xsprite.get("display_guid", null);
       String code = xsprite.get("code", null);
-      if(RString.isEmpty(code)){
-         throw new FFatalError("Code is empty.");
-      }
       String label = xsprite.get("label", null);
-      if(RString.isEmpty(label)){
-         throw new FFatalError("Label is empty.");
-      }
+      String templateGuid = xsprite.get("template_guid", null);
       String templateCode = xsprite.get("template_code", null);
-      if(RString.isEmpty(templateCode)){
-         throw new FFatalError("Template code is empty.");
+      if(RString.isEmpty(templateGuid) && RString.isEmpty(templateCode)){
+         throw new FFatalError("Template guid and code is empty.");
       }
       //............................................................
       // 查找项目
@@ -280,9 +313,20 @@ public class FSceneService
       }
       FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
       // 查找模板
-      FGcResTemplateInfo templateInfo = _templateConsole.findByUserCode(logicContext, userId, templateCode);
+      FGcResTemplateInfo templateInfo = null;
+      if(!RString.isEmpty(templateGuid)){
+         templateInfo = _templateConsole.findByGuid(logicContext, templateGuid);
+      }else{
+         templateInfo = _templateConsole.findByUserCode(logicContext, userId, templateCode);
+      }
       if(templateInfo == null){
          throw new FFatalError("Template is not exists. (code={1})", templateCode);
+      }
+      if(RString.isEmpty(code)){
+         code = templateInfo.code();
+      }
+      if(RString.isEmpty(label)){
+         label = templateInfo.label();
       }
       // 创建显示对象
       FResSceneDisplay sprite = new FResSceneDisplay();
@@ -392,22 +436,22 @@ public class FSceneService
          throw new FFatalError("Label is empty.");
       }
       // 查找数据
-      FGcResSceneInfo scene = _sceneConsole.findByGuid(logicContext, guid);
-      if(scene == null){
+      FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, guid);
+      if(sceneInfo == null){
          throw new FFatalError("Scene is not exists. (guid={1})", guid);
       }
       // 检查用户有效
-      if(scene.userId() != session.userId()){
-         throw new FFatalError("Scene user is invalid. (scene_user_id={1}, session_user_id={2})", scene.userId(), session.userId());
+      if(sceneInfo.userId() != session.userId()){
+         throw new FFatalError("Scene user is invalid. (scene_user_id={1}, session_user_id={2})", sceneInfo.userId(), session.userId());
       }
       // 更新数据
       if(code != null){
-         scene.setCode(code);
+         sceneInfo.setCode(code);
       }
       if(label != null){
-         scene.setLabel(label);
+         sceneInfo.setLabel(label);
       }
-      _sceneConsole.doUpdate(logicContext, scene);
+      _sceneConsole.doUpdate(logicContext, sceneInfo);
       return EResult.Success;
    }
 

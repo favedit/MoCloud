@@ -5,7 +5,7 @@
       <MenuButton name='capture' linker='_controlCapture' icon='resource.scene.capture' label='生成预览'/>
       <MenuButtonSplit/>
       <MenuButton name='createDisplayLayer' linker='_controlCreateLayer' icon='tools.create' label='新建显示层'/>
-      <MenuButton name='importTemplate' linker='_controlInsertTemplate' icon='resource.tools.import' label='导入模板'/>
+      <MenuButton name='importTemplate' linker='_controlImportTemplate' icon='resource.tools.import' label='导入模板'/>
       <MenuButtonSplit/>
       <MenuButton name='execute' linker='_controlExecute' icon='resource.scene.execute' label='运行测试'/>
    </MenuBar>
