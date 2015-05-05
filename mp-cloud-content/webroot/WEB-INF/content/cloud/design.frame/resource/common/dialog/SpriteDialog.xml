@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="resource.common.dialog.SpriteDialog" type='FDsCommonSpriteDialog' label="创建精灵" is_valid="Y" size='600,400' note="">
+   <Frame name="resource.common.dialog.SpriteDialog" type='FDsCommonSpriteDialog' label="创建精灵" is_valid="Y" size='460,340' note="">
       <Panel name='structPanel' icon='design.panel.icon' label='结构信息'>
          <Edit name="layerLabel" linker='_controlLayerLabel' label="层名称" label_size='70,0' valid="Y" edit_size='300,0' input_size='400,0' note="" />
          <Edit name="displayLabel" linker='_controlDisplayLabel' label="父名称" label_size='70,0' valid="Y" edit_size='300,0' input_size='400,0' note="" />

@@ -5,6 +5,7 @@ import org.mo.com.geom.SFloatVector3;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -60,6 +61,11 @@ public class FResCamera
       _typeCd = xconfig.get("type_cd");
       _position.parse(xconfig.get("position"));
       _direction.parse(xconfig.get("direction"));
+      // 重新设置默认视角
+      if(_direction.isEmpty()){
+         _position.set(0, 0, -10);
+         _direction.set(0, 0, 1);
+      }
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Projection")){
@@ -93,6 +99,20 @@ public class FResCamera
    @Override
    public void mergeConfig(FXmlNode xconfig){
       super.mergeConfig(xconfig);
+      // 读取坐标属性
+      if(xconfig.contains("position")){
+         String position = xconfig.get("position");
+         if(!RString.isEmpty(position)){
+            _position.parse(position);
+         }
+      }
+      // 读取方向属性
+      if(xconfig.contains("direction")){
+         String direction = xconfig.get("direction");
+         if(!RString.isEmpty(direction)){
+            _direction.parse(direction);
+         }
+      }
       // 处理所有节点
       for(FXmlNode xnode : xconfig){
          if(xnode.isName("Projection")){

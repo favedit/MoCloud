@@ -39,4 +39,19 @@ public class FSpaceAction
       page.setUser(user);
       return "Space";
    }
+
+   //============================================================
+   // <T>运行页面处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+   @Override
+   public String run(IWebContext context,
+                     ILogicContext logicContext,
+                     FSpacePage page){
+      return "Run";
+   }
 }

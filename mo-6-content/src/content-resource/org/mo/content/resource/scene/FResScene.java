@@ -83,16 +83,16 @@ public class FResScene
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
       // 读取节点集合
-      for(FXmlNode xnode : xconfig){
-         if(xnode.isName("TemplateCollection")){
-            // 读取层集合
-            //            for(FXmlNode xlayer : xnode){
-            //               FRs3SceneLayer layer = new FRs3SceneLayer();
-            //               layer.loadConfig(xlayer);
-            //               _layers.push(layer);
-            //            }
-         }
-      }
+      //for(FXmlNode xnode : xconfig){
+      //if(xnode.isName("TemplateCollection")){
+      // 读取层集合
+      //            for(FXmlNode xlayer : xnode){
+      //               FRs3SceneLayer layer = new FRs3SceneLayer();
+      //               layer.loadConfig(xlayer);
+      //               _layers.push(layer);
+      //            }
+      //}
+      //}
    }
 
    //============================================================
