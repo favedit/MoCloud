@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.Deflater;
 import lzma.streams.LzmaOutputStream;
 import org.mo.com.io.FByteFile;
+import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
 
 //============================================================
@@ -101,6 +102,46 @@ public class FCompressStream
    }
 
    //============================================================
+   // <T>存储DEFLATE数据。</T>
+   //
+   // @param fileName 文件名称
+   //============================================================
+   public byte[] toLzmaArray(int blockSize){
+      // 计算分块数量
+      int blockCount = _length / blockSize;
+      if(_length % blockSize != 0){
+         blockCount++;
+      }
+      // 分块压缩
+      FByteStream stream = new FByteStream();
+      try{
+         stream.writeString("lzma");
+         stream.writeInt32(_length);
+         stream.writeInt32(blockSize);
+         stream.writeInt32(blockCount);
+         for(int block = 0; block < blockCount; block++){
+            // 计算位置
+            int position = blockSize * block;
+            int remain = _length - position;
+            int size = Math.min(remain, blockSize);
+            // 压缩数据
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+            LzmaOutputStream lzmaOutputStream = new LzmaOutputStream.Builder(bufferedOutputStream).build();
+            lzmaOutputStream.write(_memory, position, size);
+            lzmaOutputStream.close();
+            byte[] data = outputStream.toByteArray();
+            // 输出数据
+            stream.writeUint32(data.length);
+            stream.write(data);
+         }
+         return stream.toArray();
+      }catch(Exception e){
+         throw new FFatalError(e);
+      }
+   }
+
+   //============================================================
    // <T>存储压缩数据。</T>
    //
    // @param modeCd 压缩模式
@@ -110,6 +151,23 @@ public class FCompressStream
          return toDeflateArray();
       }else if(modeCd == ECompressMode.Lzma){
          return toLzmaArray();
+      }else{
+         throw new FFatalError("Unknown mode.");
+      }
+   }
+
+   //============================================================
+   // <T>存储压缩数据。</T>
+   //
+   // @param modeCd 压缩模式
+   // @param blockSize 分块大小
+   //============================================================
+   public byte[] toCompressArray(ECompressMode modeCd,
+                                 int blockSize){
+      if(modeCd == ECompressMode.Deflate){
+         return toDeflateArray();
+      }else if(modeCd == ECompressMode.Lzma){
+         return toLzmaArray(blockSize);
       }else{
          throw new FFatalError("Unknown mode.");
       }

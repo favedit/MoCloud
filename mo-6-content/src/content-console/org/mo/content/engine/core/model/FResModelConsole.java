@@ -17,6 +17,7 @@ import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.content.engine.core.model.animation.IResModelAnimationConsole;
 import org.mo.content.engine.core.model.animation.IResModelAnimationTrackConsole;
@@ -158,7 +159,8 @@ public class FResModelConsole
       // 压缩数据
       byte[] data = null;
       try(FCompressStream compressStream = new FCompressStream(stream.memory(), 0, stream.length())){
-         data = compressStream.toCompressArray(ECompressMode.Lzma);
+         data = compressStream.toCompressArray(ECompressMode.Lzma, RInteger.SIZE_1M);
+         //data = compressStream.toCompressArray(ECompressMode.Lzma);
       }
       //............................................................
       // 存储数据
