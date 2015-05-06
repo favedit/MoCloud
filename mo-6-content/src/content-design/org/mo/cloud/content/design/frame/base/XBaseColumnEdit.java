@@ -41,6 +41,10 @@ public abstract class XBaseColumnEdit
    @AContentField
    public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 停靠类型的定义
+   @AContentField
+   public final static FContentField DOCK_CD = new FContentField("dockCd", "dock_cd", EContentData.String, "", "", "", "YYNY");
+
    // 位置的定义
    @AContentField
    public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
@@ -262,6 +266,10 @@ public abstract class XBaseColumnEdit
    // 回行类型
    @AName("wrap_cd")
    protected String _wrapCd;
+
+   // 停靠类型
+   @AName("dock_cd")
+   protected String _dockCd;
 
    // 位置
    @AName("location")
@@ -549,6 +557,24 @@ public abstract class XBaseColumnEdit
    //============================================================
    public void setWrapCd(String value){
       _wrapCd = value;
+   }
+
+   //============================================================
+   // <T>获得停靠类型的内容。</T>
+   //
+   // @return 停靠类型
+   //============================================================
+   public String getDockCd(){
+      return _dockCd;
+   }
+
+   //============================================================
+   // <T>设置停靠类型的内容。</T>
+   //
+   // @param value 停靠类型
+   //============================================================
+   public void setDockCd(String value){
+      _dockCd = value;
    }
 
    //============================================================

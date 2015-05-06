@@ -16,6 +16,7 @@ public class RMongoDrop
       // 删除缓冲
       console.drop(EGcStorageCatalog.CacheBitmapPreview);
       console.drop(EGcStorageCatalog.CacheMaterialPreview);
+      console.drop(EGcStorageCatalog.CacheResourceMaterial);
       console.drop(EGcStorageCatalog.CacheResourceMaterialBitmapPack);
       console.drop(EGcStorageCatalog.CacheResourceMesh);
       console.drop(EGcStorageCatalog.CacheResourceModel);
