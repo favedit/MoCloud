@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.resource.FolderDialog" update_date="20141210134046">
-   <Frame name="design3d.resource.FolderDialog" type='FDsResourceFolderDialog' label="新建目录" is_valid="Y" size='400,200' note="">
-      <Panel name='infoPanel' icon='design.panel.icon' label='基本信息'>
-         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
-      <Button name="confirmButton" linker='_controlConfirmButton' label="确认" size='80,20' margin='4,0,4,0' wrap_cd='1'/>
-      <Button name="cancelButton" linker='_controlCancelButton' label="取消" size='80,20' margin='4,0,4,0' />
+<Content>
+   <Frame name="system.dialog.ErrorDialog" type='FUiErrorDialog' label="错误信息" is_valid="Y" size='780,400' note="">
+      <Edit name="code" linker='_controlCode' margin='0,6,0,0' label="代码" label_size='70,0' valid="Y" edit_size='700,0' input_size='700,0' note="" />
+      <Memo name="description" linker='_controlDescription' label="描述" label_size='70,0' edit_size='700,0' input_size='700,280' valid="Y" note="" />
+      <PanelHorizontal size='100%,0'>
+         <Button name="confirm" linker='_controlConfirm' margin='4,0,4,6' label="确认" dock_cd='center' size='80,20' wrap_cd='1'/>
+      </PanelHorizontal>
    </Frame>
 </Content>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.SceneCatalogToolBar">
-   <ToolBar name="design3d.scene.SceneCatalogToolBar" label="画板工具栏">
-      <ToolButtonCheck name='open' icon='design3d.tools.folder-create' label='新建元素' hint='新建一个场景'/>
-      <ToolButtonCheck name='close' icon='design3d.tools.folder-delete' label='删除元素' hint='删除一个场景'/>
-   </ToolBar>
-</Content>

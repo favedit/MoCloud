@@ -3,6 +3,5 @@
    <MenuBar name="design3d.solution.MenuBar" type='FDsSolutionMenuBar' label="菜单">
       <MenuButton name='createButton' linker='_controlCreateButton' icon='resource.tools.insert' label='新建项目'/>
       <MenuButton name='deleteButton' linker='_controlDeleteButton' icon='resource.tools.delete' label='删除项目'/>
-      <MenuButton name='refreshButton' linker='_controlRefreshButton' icon='resource.tools.refresh' label='刷新内容'/>
    </MenuBar>
 </Content>

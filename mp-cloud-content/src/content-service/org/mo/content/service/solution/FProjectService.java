@@ -1,7 +1,9 @@
 package org.mo.content.service.solution;
 
+import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
 import com.cyou.gccloud.data.data.FDataSolutionProjectUnit;
+import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
 import org.mo.cloud.logic.solution.FGcProjectInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.data.RSql;
@@ -11,6 +13,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.solution.project.ICntProjectConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -30,6 +33,10 @@ public class FProjectService
    // 项目控制台接口
    @ALink
    protected ICntProjectConsole _projectConsole;
+
+   // 场景控制台接口
+   @ALink
+   protected ICntSceneConsole _sceneConsole;
 
    //============================================================
    // <T>构造资源3D服务。</T>
@@ -80,6 +87,50 @@ public class FProjectService
          xitem.set("guid", unit.guid());
          xitem.set("code", unit.code());
          xitem.set("label", unit.label());
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult listProject(IWebContext context,
+                              ILogicContext logicContext,
+                              FGcSessionInfo session,
+                              IWebInput input,
+                              IWebOutput output){
+      // 检查参数
+      String projectGuid = context.parameter("project_guid");
+      if(RString.isEmpty(projectGuid)){
+         throw new FFatalError("Project guid is empty.");
+      }
+      long userId = session.userId();
+      //............................................................
+      // 获得项目
+      FGcProjectInfo project = _projectConsole.getByGuid(logicContext, projectGuid);
+      long projectId = project.ouid();
+      //............................................................
+      // 生成查询脚本
+      String whereSql = "(" + FDataResourceSceneLogic.USER_ID + "=" + userId + ")";
+      whereSql += " AND (" + FDataResourceSceneLogic.PROJECT_ID + "=" + projectId + ")";
+      String orderBy = FDataResourceSceneLogic.CODE + " ASC";
+      // 查询数据
+      FLogicDataset<FGcResSceneInfo> dataset = _sceneConsole.fetch(logicContext, whereSql, orderBy);
+      // 设置输出节点
+      FXmlNode xoutput = output.config().createNode("SceneCollection");
+      for(FGcResSceneInfo scene : dataset){
+         FXmlNode xscene = xoutput.createNode("Scene");
+         xscene.set("guid", scene.guid());
+         xscene.set("code", scene.code());
+         xscene.set("label", scene.label());
+         xscene.set("update_date", scene.updateDate());
       }
       return EResult.Success;
    }

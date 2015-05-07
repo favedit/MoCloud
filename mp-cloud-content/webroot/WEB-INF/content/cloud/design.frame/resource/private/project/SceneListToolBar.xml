@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.CanvasToolBar">
-   <ToolBar name="design3d.scene.SceneListToolBar" label="画板工具栏">
-      <ToolButton name='sceneCreate' linker='_controlSceneCreate' icon='design3d.tools.folder-create' label='新建场景' hint='新建一个空的场景'/>
-      <ToolButton name='sceneDelete' linker='_controlSceneDelete' icon='design3d.tools.folder-delete' label='删除场景' hint='删除一个选中的场景'/>
-   </ToolBar>
-</Content>

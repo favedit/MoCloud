@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="design3d.scene.CanvasToolBar">
    <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButton name='insertButton' linker='_controlInsertButton' icon='design3d.tools.save' label='保存' />
+      <ToolButton name='insertButton' linker='_controlInsertButton' icon='resource.tools.save' label='保存' />
    </ToolBar>
 </Content>
