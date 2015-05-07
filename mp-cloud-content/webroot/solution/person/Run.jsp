@@ -8,6 +8,7 @@
 <META content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
 <LINK rel="stylesheet" href='/script/acs/mobile.css' type="text/css" media="all"/>
 <SCRIPT language='javascript' src='/script/ajs/lzma.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/lzma_worker.js'></SCRIPT>
 <SCRIPT language='javascript' src='/script/ajs/mo.js'></SCRIPT>
 <SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
 <SCRIPT>

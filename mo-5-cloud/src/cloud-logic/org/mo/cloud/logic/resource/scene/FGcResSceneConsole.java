@@ -74,6 +74,21 @@ public class FGcResSceneConsole
    // <T>根据用户编号和代码查找场景信息。</T>
    //
    // @param logicContext 逻辑环境
+   // @param code 场景代码
+   // @return 场景信息
+   //============================================================
+   @Override
+   public FGcResSceneInfo findByCode(ILogicContext logicContext,
+                                     String code){
+      String whereSql = FDataResourceSceneLogic.CODE + "='" + RSql.formatValue(code) + "'";
+      FGcResSceneInfo sceneInfo = search(logicContext, whereSql);
+      return sceneInfo;
+   }
+
+   //============================================================
+   // <T>根据用户编号和代码查找场景信息。</T>
+   //
+   // @param logicContext 逻辑环境
    // @param userId 用户编号
    // @param code 场景代码
    // @return 场景信息

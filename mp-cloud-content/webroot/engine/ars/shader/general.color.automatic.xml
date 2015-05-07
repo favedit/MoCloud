@@ -20,15 +20,16 @@
    <Parameter name='fc_camera_position'     format='Float3'/>
    <Parameter name='fc_light_direction'     format='Float3'/>
    <Parameter name='fc_materials'           format='Float4'/>
-   <Parameter name='fc_color'               format='Float4' define='fc_materials[0]'/>
-   <Parameter name='fc_alpha'               format='Float4' define='fc_materials[1]'/>
-   <Parameter name='fc_ambient_color'       format='Float4' define='fc_materials[2]'/>
-   <Parameter name='fc_diffuse_color'       format='Float4' define='fc_materials[3]'/>
-   <Parameter name='fc_specular_color'      format='Float4' define='fc_materials[4]'/>
-   <Parameter name='fc_specular'            format='Float4' define='fc_materials[5]'/>
-   <Parameter name='fc_reflect_color'       format='Float4' define='fc_materials[6]'/>
-   <Parameter name='fc_reflect'             format='Float4' define='fc_materials[7]'/>
-   <Parameter name='fc_emissive_color'      format='Float4' define='fc_materials[8]'/>
+   <Parameter name='fc_alpha'               format='Float4' define='fc_materials[0]'/>
+   <Parameter name='fc_color'               format='Float4' define='fc_materials[1]'/>
+   <Parameter name='fc_vertex_color'        format='Float4' define='fc_materials[2]'/>
+   <Parameter name='fc_ambient_color'       format='Float4' define='fc_materials[3]'/>
+   <Parameter name='fc_diffuse_color'       format='Float4' define='fc_materials[4]'/>
+   <Parameter name='fc_specular_color'      format='Float4' define='fc_materials[5]'/>
+   <Parameter name='fc_specular'            format='Float4' define='fc_materials[6]'/>
+   <Parameter name='fc_reflect_color'       format='Float4' define='fc_materials[7]'/>
+   <Parameter name='fc_reflect'             format='Float4' define='fc_materials[8]'/>
+   <Parameter name='fc_emissive_color'      format='Float4' define='fc_materials[9]'/>
    <!--=====================================================-->
    <Attribute name='va_instance'    linker='instance'    format='Float1'/>
    <Attribute name='va_position'    linker='position'    format='Float4'/>
@@ -117,12 +118,23 @@
          // 设置法线
          <shader:true source='vertex.attribute.normal'>
             mat3 modelMatrix3 = mat3(modelMatrix);
+            <shader:true source='vertex.attribute.normal.compress'>
             vec3 normal = normalize((va_normal.xyz - 0.470588) * 2.125 * modelMatrix3);
+            </shader:true>
+            <shader:false source='vertex.attribute.normal.compress'>
+            vec3 normal = normalize(va_normal.xyz * modelMatrix3);
+            </shader:false>
             v_normal = normal;
             // 设置法线空间
             <shader:true source='support.dump'>
+               <shader:true source='vertex.attribute.normal.compress'>
                vec3 binormal = normalize((va_binormal - 0.470588) * 2.125 * modelMatrix3);
                vec3 tangent = normalize((va_tangent - 0.470588) * 2.125 * modelMatrix3);
+               </shader:true>
+               <shader:false source='vertex.attribute.normal.compress'>
+               vec3 binormal = normalize(va_binormal * modelMatrix3);
+               vec3 tangent = normalize(va_tangent * modelMatrix3);
+               </shader:false>
                mat3 matrixTs = mat3(tangent, binormal, normal);
                v_camera_ts = normalize((vc_camera_position - modelPosition.xyz) * matrixTs);
                v_light_ts = normalize(vc_light_direction * matrixTs);
@@ -316,13 +328,14 @@
             </shader:true>
          </shader:true>
          //............................................................
-         // 计算颜色
+         // 计算顶点颜色
          <shader:true source='option.color'>
             <shader:true source='vertex.attribute.color'>
                vec4 vertexColor = max(min(v_color, fc_color.y) - fc_color.x, 0.0);
                vertexColor = vertexColor / (fc_color.y - fc_color.x);
-               vertexColor = (vertexColor - fc_color.w) * fc_color.z + 1.0;
-               result.rgb *= vertexColor.rgb;
+               vertexColor = (vertexColor - fc_color.z) * fc_color.w + fc_color.z;
+               result = result * vertexColor;
+               result.rgb *= v_color.rgb * fc_vertex_color.rgb;
             </shader:true>
          </shader:true>
          //............................................................

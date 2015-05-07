@@ -76,6 +76,21 @@ public class FGcResTemplateConsole
    }
 
    //============================================================
+   // <T>根据代码查找模板信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 模板信息
+   //============================================================
+   @Override
+   public FGcResTemplateInfo findByCode(ILogicContext logicContext,
+                                        String code){
+      String whereSql = FDataResourceTemplateLogic.CODE + "='" + RSql.formatValue(code) + "'";
+      FGcResTemplateInfo template = search(logicContext, whereSql);
+      return template;
+   }
+
+   //============================================================
    // <T>根据用户编号和项目编号和代码查找模板信息。</T>
    //
    // @param logicContext 逻辑环境

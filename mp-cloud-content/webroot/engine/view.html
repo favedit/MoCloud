@@ -6,10 +6,10 @@
 <META content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
 <LINK rel="stylesheet" href='acs/mobile.css' type="text/css" media="all"/>
 
-<SCRIPT language='javascript' src='ajs/lzma.js'></SCRIPT>
-<SCRIPT language='javascript' src='ajs/lzma-d.js'></SCRIPT>
-<SCRIPT language='javascript' src='ajs/mo-engine.js'></SCRIPT>
-<SCRIPT language='javascript' src='ajs/context_cn.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/lzma.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/lzma_worker.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/me.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
 <SCRIPT>
 var canvas = null;
 var display = null;
@@ -72,6 +72,7 @@ function onLoad(){
 </SCRIPT>
 </HEAD>
 <BODY scroll='no' style='background-color:#000000;overflow:hidden;' onload='onLoad()' onkeydown='onKeydown()'>
+   <DIV id='_dump'></DIV>
    <DIV style='position:absolute; left:1em; top:1em;'>
       <IMG src='ars/picture/fullscreen.png' style='width:5em; height:5em;' onmousedown='doCanvasAction("fullscreen")' ontouchstart='doCanvasAction("fullscreen")'>
    </DIV>

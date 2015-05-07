@@ -329,6 +329,79 @@
 }
 
 /* ------------------------------------------------------ */
+/* FUiMemo                                                */
+/* ------------------------------------------------------ */
+.FUiMemo_ValuePanel{
+   padding:0px 3px 0px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.FUiMemo_InputPanel{
+   padding:0px 2px 0px 2px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.FUiMemo_Input{
+   width: 100%;
+   height: 100%;
+   border: 0;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
+/* FUiFile                                                */
+/* ------------------------------------------------------ */
+.FUiFile_ValuePanel{
+   padding:0px 3px 0px 0px;
+   border-left:1px solid #333333;
+   border-top:1px solid #333333;
+   border-right:1px solid #666666;
+   border-bottom:1px solid #666666;
+   border-radius:3px;
+   background-color: #777777;
+}
+
+.FUiFile_InputPanel{
+   position: relative;
+}
+
+.FUiFile_Input{
+   width: 100%;
+   height: 14px;
+   border: 0;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+.FUiFile_File{
+   position:absolute;
+   left:0px;
+   top:0px;
+   width: 100%;
+   filter:alpha(opacity:0);
+   opacity: 0;
+}
+
+.FUiFile_Browser{
+   width: 70px;
+   height: 16px;
+   border: 0;
+   color: #E0E0E0;
+   background-color: #777777;
+}
+
+/* ------------------------------------------------------ */
 /* FUiSelectItem                                          */
 /* ------------------------------------------------------ */
 .FUiSelectItem_Normal{
@@ -424,6 +497,99 @@
 }
 
 /* ------------------------------------------------------ */
+/* FUiListViewItem                                        */
+/* ------------------------------------------------------ */
+.FUiListViewItem_Panel{
+   float: left;
+   padding: 6px;
+}
+
+.FUiListViewItem_Normal{
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   border:1px solid #CCCCCC;
+   padding: 2px;
+}
+
+.FUiListViewItem_Hover{
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   border:1px solid #CCCCCC;
+   box-shadow: 0px 0px 4px #000000;
+}
+
+.FUiListViewItem_Select{
+   width: 100%;
+   height: 100%;
+   cursor: pointer;
+   border:1px solid #0066FF;
+   box-shadow: 0px 0px 4px #000000;
+}
+
+.FUiListViewItem_Form{
+   width: 100%;
+   height: 100%;
+}
+
+.FUiListViewItem_Content{
+   width: 100%;
+   height: 100%;
+   background:rgba(255, 255, 255, 0.7);
+}
+
+.FUiListViewItem_IconPanel{
+   padding-left:8px;
+   width: 24px;
+}
+
+.FUiListViewItem_Icon{
+   width: 16px;
+}
+
+.FUiListViewItem_Label{
+   padding: 2px 4px;
+   color: #333333;
+   text-align: right;
+   white-space:nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+/* ------------------------------------------------------ */
+/* FUiListView                                            */
+/* ------------------------------------------------------ */
+.FUiListView_Panel{
+   width: 100%;
+   height: 100%;
+   overflow-y: auto;
+}
+
+/* ------------------------------------------------------ */
+/* FUiButton                                              */
+/* ------------------------------------------------------ */
+.FUiButton_Panel{
+   border-radius:3px;
+   color: #333333;
+   background-color: #999999;
+   cursor: pointer;
+}
+
+.FUiButton_Form{
+   width: 100%;
+   height: 100%;
+}
+
+.FUiButton_Icon{
+}
+
+.FUiButton_Label{
+   font-family: "Microsoft YaHei"; 
+   font-size: 9pt;
+}
+
+/* ------------------------------------------------------ */
 /* FUiCanvas                                              */
 /* ------------------------------------------------------ */
 .FUiCanvas_Canvas{
@@ -468,6 +634,8 @@
 /* FUiPageSheet                                           */
 /* ------------------------------------------------------ */
 .FUiPageSheet_Panel{
+   width: 100%;
+   height: 100%;
 }
 
 .FUiPageSheet_Sheet{
@@ -544,6 +712,7 @@
 .FUiPageSheet_BottomSelect{
    height:1px;
    background-color:#FFFFFF;
+}
 
 /* ------------------------------------------------------ */
 /* FUiPageControl                                         */
@@ -553,7 +722,7 @@
 }
 
 .FUiPageControl_TitlePanel{
-   height:1;
+   height: 1px;
 }
 
 .FUiPageControl_TitleForm{
@@ -562,8 +731,10 @@
 
 .FUiPageControl_SheetPanel{
    vertical-align: top;
-   border-left:1 solid #29bad5; border-right:1 solid #29bad5; border-bottom:1 solid #29bad5;
-   padding:6;
+   border-left: 1px solid #29BAD5;
+   border-right: 1px solid #29BAD5;
+   border-bottom: 1px solid #29BAD5;
+   padding: 6px;
 }
 
 .FUiPageControl_Sheets{
@@ -572,16 +743,136 @@
 }
 
 .FUiPageControl_RightP{
-   width:1px; border-top:1 solid #29bad5;
+   width:1px; border-top:1 solid #29BAD5;
    filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#29bad7);
 }
 }
 
 .FUiPageControl_SheetLeft{
-   width:1px; background-color:#29bad5;
+   width:1px; background-color:#29BAD5;
 }
 
 .FUiPageControl_SheetRight{
+   width:1px; background-color:#29BAD5;
+}
+
+/* ------------------------------------------------------ */
+/* FUiTabButton                                           */
+/* ------------------------------------------------------ */
+.FUiTabButton_Panel{
+}
+
+.FUiTabButton_Sheet{
+   padding:10px;
+}
+
+.FUiTabButton_Button{
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #EEEEEE, #999999);
+   background: -moz-linear-gradient(top, #EEEEEE, #999999); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#BBBBBB), to(#CCCCCC)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#EEEEEE, endcolorstr=#999999);
+}
+
+.FUiTabButton_ButtonHover{
+   cursor:pointer;
+   border-top:1 solid #EEEEEE;
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #FFFFFF, #DDDDDD);
+   background: -moz-linear-gradient(top, #FFFFFF, #DDDDDD); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#DDDDDD);
+}
+
+.FUiTabButton_ButtonSelect{
+   cursor:pointer;
+   padding-left:10px; padding-top:3px; padding-right:10px; padding-bottom:2px;
+   background: -ms-linear-gradient(top, #BBBBBB, #EEEEEE);
+   background: -moz-linear-gradient(top, #BBBBBB, #EEEEEE); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#EEEEEE)); 
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#BBBBBB, endcolorstr=#EEEEEE);
+}
+
+.FUiTabButton_ButtonText{
+   white-space:nowrap;
+}
+
+.FUiTabButton_Top{
+   height: 2px;
+   background-color:#666666;
+}
+
+.FUiTabButton_TopSelect{
+   height:1px;
+   background-color:#999999;
+}
+
+.FUiTabButton_Left{
+   width: 1px;
+   background-color:#999999;
+}
+
+.FUiTabButton_LeftSelect{
+   width: 1px;
+   background-color:#999999;
+}
+
+.FUiTabButton_Right{
+   width:1px;
+   background-color:#CCCCCC;
+}
+
+.FUiTabButton_RightSelect{
+   width:1px;
+   background-color:#CCCCCC;
+}
+
+.FUiTabButton_Bottom{
+   height:1px;
+   background-color:#CCCCCC;
+}
+
+.FUiTabButton_BottomSelect{
+   height:1px;
+   background-color:#EEEEEE;
+}
+
+/* ------------------------------------------------------ */
+/* FUiTabBar                                         */
+/* ------------------------------------------------------ */
+.FUiTabBar_Panel{
+   width: 100%;
+}
+
+.FUiTabBar_TitlePanel{
+}
+
+.FUiTabBar_TitleForm{
+   width: 100%;
+}
+
+.FUiTabBar_SheetPanel{
+   vertical-align: top;
+   border-left:1 solid #29bad5; border-right:1 solid #29bad5; border-bottom:1 solid #29bad5;
+   padding:6;
+}
+
+.FUiTabBar_Sheets{
+   border:1 solid blue;
+   width:100%; height:100;
+}
+
+.FUiTabBar_RightP{
+   width:1px; border-top:1 solid #29bad5;
+   filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=0, startcolorstr=#FFFFFF, endcolorstr=#29bad7);
+}
+}
+
+.FUiTabBar_SheetLeft{
+   width:1px; background-color:#29bad5;
+}
+
+.FUiTabBar_SheetRight{
    width:1px; background-color:#29bad5;
 }
 
@@ -724,7 +1015,7 @@
 /* FUiMenuBar                                             */
 /* ------------------------------------------------------ */
 .FUiMenuBar_Panel{
-   padding:2px 0px 2px 0px;
+   padding:2px 4px 2px 4px;
 }
 
 .FUiMenuBar_ButtonPanel{
@@ -735,30 +1026,30 @@
 /* ------------------------------------------------------ */
 .FUiMenuButton_Normal{
    margin:0px 2px 0px 2px;
-   padding:2px 8px 2px 8px;
-   color: #EEEEEE;
-   border-radius:2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
    cursor: pointer;
 }
 
 .FUiMenuButton_Hover{
+   background-color: #FFFFFF;
    margin:0px 2px 0px 2px;
-   padding:2px 8px 2px 8px;
-   border-radius:2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
    cursor: pointer;
 }
 
 .FUiMenuButton_Press{
    margin:0px 2px 0px 2px;
-   padding:2px 8px 2px 8px;
+   padding:1px 4px 1px 4px;
    border-radius:2px;
    cursor: pointer;
 }
 
 .FUiMenuButton_Disable{
    margin:0px 2px 0px 2px;
-   padding:2px 8px 2px 8px;
-   border-radius:2px;
+   padding:1px 4px 1px 4px;
+   border-radius:3px;
    cursor: pointer;
 }
 
@@ -767,15 +1058,43 @@
 }
 
 .FUiMenuButton_LabelPanel{
+   color: #333333;
    white-space: nowrap;
 }
 
 /* ------------------------------------------------------ */
 /* FUiMenuButtonSplit                                     */
 /* ------------------------------------------------------ */
-.FUiMenuButtonSplit_Panel{
-   width: 4px;
-   height: 4px;
+.FUiMenuButtonSplit_PanelHorizontal{
+   width: 100%;
+   border-top:1px solid #666666;
+   border-bottom:1px solid #CCCCCC;
+}
+
+.FUiMenuButtonSplit_PanelVertical{
+   height: 20px;
+   border-left: 1px solid #999999;
+   border-right: 1px solid #EEEEEE;
+}
+
+/* ------------------------------------------------------ */
+/* FUiPopupMenu                                           */
+/* ------------------------------------------------------ */
+.FUiPopupMenu_Panel{
+   position: absolute;
+}
+
+.FUiPopupMenu_Form{
+   width: 100%;
+   border-radius:3px;
+   background:#CCCCCC;
+   box-shadow:2px 2px 5px #333333;
+   -webkit-box-shadow:2px 2px 5px #333333;
+   -moz-box-shadow:2px 2px 5px #333333;
+}
+
+.FUiPopupMenu_Container{
+   width: 100%;
 }
 
 /* ------------------------------------------------------ */
@@ -786,39 +1105,40 @@
 }
 
 .FUiToolBar_ButtonPanel{
+   position: relative;
 }
 
 /* ------------------------------------------------------ */
 /* FUiToolButton                                          */
 /* ------------------------------------------------------ */
 .FUiToolButton_Normal{
-   margin:0px 2px 0px 2px;
+   margin:0px 1px 0px 1px;
    padding:1px 4px 1px 4px;
    cursor: pointer;
-   border-radius: 2px;
-   border:1px solid #CCCCCC;
+   border-radius: 3px;
+   border:1px solid #999999;
    background-color: #DDDDDD;
-   background: -ms-linear-gradient(top, #FFFFFF, #CCCCCC);
-   background: -moz-linear-gradient(top, #FFFFFF, #CCCCCC); 
-   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#CCCCCC)); 
-   filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#FFFFFF, endColorStr=#CCCCCC);
+   background: -ms-linear-gradient(top, #FFFFFF, #BBBBBB);
+   background: -moz-linear-gradient(top, #FFFFFF, #BBBBBB); 
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#BBBBBB)); 
+   filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#FFFFFF, endColorStr=#BBBBBB);
 }
 
 .FUiToolButton_Hover{
-   margin:0px 2px 0px 2px;
+   margin:0px 1px 0px 1px;
    padding:1px 4px 1px 4px;
-   border-radius:2px;
-   border:1px solid #CCCCCC;
+   border-radius:3px;
+   border:1px solid #999999;
    background-color: #FFFFF0;
    cursor: pointer;
 }
 
 .FUiToolButton_Press{
-   margin:0px 2px 0px 2px;
+   margin:0px 1px 0px 1px;
    padding:1px 4px 1px 4px;
    cursor: pointer;
-   border-radius:2px;
-   border:1px solid #CCCCCC;
+   border-radius:3px;
+   border:1px solid #999999;
    background-color: #999999;
    background: -ms-linear-gradient(top, #999999, #FFFFFF);
    background: -moz-linear-gradient(top, #999999, #FFFFFF); 
@@ -851,6 +1171,12 @@
 /* ------------------------------------------------------ */
 .FUiToolButtonSplit_Panel{
    width: 4px;
+}
+
+/* ------------------------------------------------------ */
+/* FUiToolButtonMenu                                      */
+/* ------------------------------------------------------ */
+.FUiToolButtonMenu_Panel{
 }
 
 /* ------------------------------------------------------ */
@@ -944,7 +1270,79 @@
 }
 
 /* ------------------------------------------------------ */
-/* RWindow
+/* FUiWindow                                              */
+/* ------------------------------------------------------ */
+.FUiWindow_Panel{
+   position: absolute;
+   padding: 3px;
+   border-radius:4px;
+   background:rgba(90, 90, 90, 0.4);
+   box-shadow: 0px 0px 8px #000000;
+}
+
+.FUiWindow_BodyForm{
+   width:100%;
+   height:100%;
+}
+
+.FUiWindow_TitleForm{
+   width:100%;
+}
+
+.FUiWindow_TitlePanel{
+   height:24px;
+   border-radius:4px 4px 0px 0px;
+   background:#999999;
+}
+
+.FUiWindow_BodyPanel{
+   background: #666666;
+   border:1px solid #333333;
+}
+
+.FUiWindow_StatusPanel{
+   height:24px;
+   border-radius:0px 0px 4px 4px;
+   background:#999999;
+}
+
+/* ------------------------------------------------------ */
+/* FUiInfoDialog                                          */
+/* ------------------------------------------------------ */
+.FUiInfoDialog_Text{
+   padding: 6px 12px;
+   color: #000000;
+}
+
+/* ------------------------------------------------------ */
+/* FUiConfirmDialog                                       */
+/* ------------------------------------------------------ */
+.FUiConfirmDialog_Text{
+   padding: 6px 12px;
+   color: #000000;
+}
+
+/* ------------------------------------------------------ */
+/* FUiWorkspace                                           */
+/* ------------------------------------------------------ */
+.FUiWorkspace_Panel{
+   width: 100%;
+   height: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* FUiDesktopConsole                                      */
+/* ------------------------------------------------------ */
+.FUiDesktopConsole_MaskPanel{
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   background-color: rgba(210, 210, 210, 0.6);
+   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20, style=0);
+}
+
+/* ------------------------------------------------------ */
+/* RWindow                                                */
 /* ------------------------------------------------------ */
 .RWindow_Disable{
    width: 100%;

@@ -10,9 +10,21 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>材质数据处理接口。</T>
 //============================================================
-@AWebLogin
 public interface IMaterialServlet
 {
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param request 页面请求
+   // @param response 页面应答
+   //============================================================
+   public void process(IWebContext context,
+                       ILogicContext logicContext,
+                       IWebServletRequest request,
+                       IWebServletResponse response);
+
    //============================================================
    // <T>逻辑处理。</T>
    //
@@ -22,11 +34,12 @@ public interface IMaterialServlet
    // @param request 页面请求
    // @param response 页面应答
    //============================================================
-   public void process(IWebContext context,
-                       ILogicContext logicContext,
-                       FGcSessionInfo session,
-                       IWebServletRequest request,
-                       IWebServletResponse response);
+   @AWebLogin
+   public void query(IWebContext context,
+                     ILogicContext logicContext,
+                     FGcSessionInfo session,
+                     IWebServletRequest request,
+                     IWebServletResponse response);
 
    //============================================================
    // <T>获得数据处理。</T>
@@ -37,6 +50,7 @@ public interface IMaterialServlet
    // @param request 页面请求
    // @param response 页面应答
    //============================================================
+   @AWebLogin
    public void data(IWebContext context,
                     ILogicContext logicContext,
                     FGcSessionInfo session,
@@ -52,6 +66,7 @@ public interface IMaterialServlet
    // @param request 请求
    // @param response 应答
    //============================================================
+   @AWebLogin
    public void importData(IWebContext context,
                           ILogicContext logicContext,
                           FGcSessionInfo session,
@@ -67,6 +82,7 @@ public interface IMaterialServlet
    // @param request 请求
    // @param response 应答
    //============================================================
+   @AWebLogin
    public void replaceData(IWebContext context,
                            ILogicContext logicContext,
                            FGcSessionInfo session,

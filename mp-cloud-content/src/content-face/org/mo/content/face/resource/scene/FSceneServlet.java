@@ -42,16 +42,66 @@ public class FSceneServlet
    //
    // @param context 页面环境
    // @param logicContext 逻辑环境
-   // @param session 会话信息
    // @param request 页面请求
    // @param response 页面应答
    //============================================================
    @Override
    public void process(IWebContext context,
                        ILogicContext logicContext,
-                       FGcSessionInfo session,
                        IWebServletRequest request,
                        IWebServletResponse response){
+      // 检查参数
+      String guid = context.parameter("guid");
+      String code = context.parameter("code");
+      if(RString.isEmpty(guid) && RString.isEmpty(code)){
+         throw new FFatalError("Scene is empty.");
+      }
+      //............................................................
+      // 获得场景信息
+      if(RString.isEmpty(guid)){
+         FGcResSceneInfo sceneInfo = _sceneConsole.findByCode(logicContext, code);
+         if(sceneInfo != null){
+            guid = sceneInfo.guid();
+         }
+      }
+      if(RString.isEmpty(guid)){
+         throw new FFatalError("process", "Scene is not exists. (guid={1}, code={2})", guid, code);
+      }
+      //............................................................
+      // 生成数据
+      byte[] data = _sceneConsole.makeSceneData(logicContext, guid);
+      if(data == null){
+         throw new FFatalError("process", "Scene is not exists. (guid={1}, code={2})", guid, code);
+      }
+      int dataLength = data.length;
+      //............................................................
+      // 发送数据
+      _logger.debug(this, "process", "Send scene data. (guid={1}, code={2}, length={3})", guid, code, dataLength);
+      response.setCharacterEncoding("utf-8");
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.setHeader("Cache-Control", "max-age=" + CacheTimeout);
+      response.addHeader("Last-Modified", System.currentTimeMillis());
+      response.addHeader("Expires", System.currentTimeMillis() + CacheTimeout * 1000);
+      response.setContentType(EMime.Bin.mime());
+      response.setContentLength(dataLength);
+      response.write(data, 0, dataLength);
+   }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param request 页面请求
+   // @param response 页面应答
+   //============================================================
+   @Override
+   public void query(IWebContext context,
+                     ILogicContext logicContext,
+                     FGcSessionInfo session,
+                     IWebServletRequest request,
+                     IWebServletResponse response){
       // 检查参数
       String guid = context.parameter("guid");
       String code = context.parameter("code");
