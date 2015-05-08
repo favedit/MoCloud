@@ -8,6 +8,7 @@ import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
@@ -17,6 +18,7 @@ import org.mo.content.resource.common.FResComponent;
 import org.mo.content.resource.common.FResDisplay;
 import org.mo.content.resource.common.FResDisplayContainer;
 import org.mo.content.resource.common.FResDisplayLayer;
+import org.mo.content.resource.common.FResMovie;
 import org.mo.content.resource.common.FResObject;
 import org.mo.content.resource.common.FResSprite;
 import org.mo.content.resource.scene.FResScene;
@@ -343,6 +345,68 @@ public class FSceneService
             ((FResSprite)display).pushDisplay(sprite);
          }
       }
+      //............................................................
+      // 更新处理
+      _sceneConsole.updateResource(logicContext, scene);
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>创建动画处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult createMovie(IWebContext context,
+                              ILogicContext logicContext,
+                              FGcSessionInfo session,
+                              IWebInput input,
+                              IWebOutput output){
+      // 获得参数
+      FXmlNode xsprite = input.config().findNode("Movie");
+      if(xsprite == null){
+         throw new FFatalError("Sprite is empty.");
+      }
+      String spaceGuid = xsprite.get("space_guid", null);
+      if(RString.isEmpty(spaceGuid)){
+         throw new FFatalError("Space guid is empty.");
+      }
+      String layerGuid = xsprite.get("layer_guid", null);
+      if(RString.isEmpty(layerGuid)){
+         throw new FFatalError("Layer guid is empty.");
+      }
+      String displayGuid = xsprite.get("display_guid", null);
+      String code = xsprite.get("code", null);
+      String label = xsprite.get("label", null);
+      String interval = xsprite.get("interval", null);
+      String rotation = xsprite.get("rotation", null);
+      if(RString.isEmpty(interval) || RString.isEmpty(rotation)){
+         throw new FFatalError("Interval or rotation is empty.");
+      }
+      //............................................................
+      // 查找项目
+      FGcResSceneInfo sceneInfo = _sceneConsole.findByGuid(logicContext, spaceGuid);
+      if(sceneInfo == null){
+         throw new FFatalError("Scene is not exists. (guid={1})", sceneInfo);
+      }
+      FResScene scene = _sceneConsole.makeScene(logicContext, sceneInfo);
+      FResDisplayLayer layer = scene.findLayerByGuid(layerGuid);
+      FResDisplay display = layer.searchDisplayByGuid(displayGuid);
+      if(display == null){
+         throw new FFatalError("Display is not exists.");
+      }
+      FResSceneDisplay sprite = (FResSceneDisplay)display;
+      // 创建动画对象
+      FResMovie movie = new FResMovie();
+      movie.setCode(code);
+      movie.setLabel(label);
+      movie.setInterval(RInteger.parse(interval));
+      movie.rotation().parse(rotation);
+      sprite.pushMovie(movie);
       //............................................................
       // 更新处理
       _sceneConsole.updateResource(logicContext, scene);

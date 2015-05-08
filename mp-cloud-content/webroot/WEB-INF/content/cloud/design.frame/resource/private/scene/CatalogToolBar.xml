@@ -5,6 +5,7 @@
          <MenuButton name='createCamera' linker='_controlCreateCamera' label='新建 - 相机'/>
          <MenuButton name='createLayer' linker='_controlCreateLayer' label='新建 - 显示层'/>
          <MenuButton name='createSprite' linker='_controlCreateSprite' label='新建 - 精灵'/>
+         <MenuButton name='createMovie' linker='_controlCreateMovie' label='新建 - 动画'/>
       </ToolButtonMenu>
       <ToolButton name='copy' linker='_controlCopy' icon='tools.copy' hint='复制选中的节点'/>
       <ToolButton name='delete' linker='_controlDelete' icon='tools.delete' hint='删除选中的节点'/>

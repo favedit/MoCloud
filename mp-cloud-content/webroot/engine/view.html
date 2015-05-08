@@ -6,8 +6,8 @@
 <META content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
 <LINK rel="stylesheet" href='acs/mobile.css' type="text/css" media="all"/>
 
-<SCRIPT language='javascript' src='/script/ajs/lzma.js'></SCRIPT>
-<SCRIPT language='javascript' src='/script/ajs/lzma_worker.js'></SCRIPT>
+<SCRIPT language='javascript' src='ajs/lzma-d.js'></SCRIPT>
+<SCRIPT language='javascript' src='ajs/lzma.js'></SCRIPT>
 <SCRIPT language='javascript' src='/script/ajs/me.js'></SCRIPT>
 <SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
 <SCRIPT>
@@ -17,9 +17,9 @@ var movie = false;
 //------------------------------------------------------------
 function onEnterFrame(){
    if(display){
-      var m = display.matrix();
-      m.ry -= 0.004;
-      m.updateForce();
+      var matrix = display.matrix();
+      matrix.ry -= 0.004;
+      matrix.updateForce();
    }
 }
 //------------------------------------------------------------

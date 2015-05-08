@@ -1,5 +1,7 @@
 package org.mo.content.resource.scene;
 
+import org.mo.content.resource.common.FResMovie;
+
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
@@ -24,7 +26,7 @@ public class FResSceneDisplay
    protected FObjects<FResSceneAnimation> _animations;
 
    // 场景剪辑集合
-   protected FObjects<FResSceneMovie> _movies;
+   protected FObjects<FResMovie> _movies;
 
    //============================================================
    // <T>构造场景显示。</T>
@@ -155,9 +157,9 @@ public class FResSceneDisplay
    // @param guid 唯一编号
    // @return 动画对象
    //============================================================
-   public FResSceneMovie findMovieByGuid(String guid){
+   public FResMovie findMovieByGuid(String guid){
       if(!RString.isEmpty(guid) && (_movies != null)){
-         for(FResSceneMovie movie : _movies){
+         for(FResMovie movie : _movies){
             if(guid.equals(movie.guid())){
                return movie;
             }
@@ -171,7 +173,7 @@ public class FResSceneDisplay
    //
    // @return 场景动画集合
    //============================================================
-   public FObjects<FResSceneMovie> movies(){
+   public FObjects<FResMovie> movies(){
       return _movies;
    }
 
@@ -180,9 +182,9 @@ public class FResSceneDisplay
    //
    // @param movie 场景动画
    //============================================================
-   public void pushMovie(FResSceneMovie movie){
+   public void pushMovie(FResMovie movie){
       if(_movies == null){
-         _movies = new FObjects<FResSceneMovie>(FResSceneMovie.class);
+         _movies = new FObjects<FResMovie>(FResMovie.class);
       }
       _movies.push(movie);
    }
@@ -214,8 +216,8 @@ public class FResSceneDisplay
          _movies.clear();
       }
       if(display.hasMovie()){
-         for(FResSceneMovie movie : display.movies()){
-            FResSceneMovie createMovie = new FResSceneMovie();
+         for(FResMovie movie : display.movies()){
+            FResMovie createMovie = new FResMovie();
             createMovie.assignInfo(movie);
             pushMovie(createMovie);
          }
@@ -246,7 +248,7 @@ public class FResSceneDisplay
       if(_movies != null){
          int count = _movies.count();
          output.writeUint16(count);
-         for(FResSceneMovie movie : _movies){
+         for(FResMovie movie : _movies){
             movie.serialize(output);
          }
       }else{
@@ -279,7 +281,7 @@ public class FResSceneDisplay
          }else if(xnode.isName("MovieCollection")){
             // 读取剪辑集合
             for(FXmlNode xmovie : xnode){
-               FResSceneMovie movie = new FResSceneMovie();
+               FResMovie movie = new FResMovie();
                movie.loadConfig(xmovie);
                pushMovie(movie);
             }
@@ -307,7 +309,7 @@ public class FResSceneDisplay
       // 存储剪辑集合
       if(_movies != null){
          FXmlNode xmovies = xconfig.createNode("MovieCollection");
-         for(FResSceneMovie movie : _movies){
+         for(FResMovie movie : _movies){
             movie.saveConfig(xmovies.createNode("Movie"));
          }
       }
@@ -339,7 +341,7 @@ public class FResSceneDisplay
             // 读取剪辑集合
             for(FXmlNode xmovie : xnode){
                String movieGuid = xmovie.get("guid");
-               FResSceneMovie movie = findMovieByGuid(movieGuid);
+               FResMovie movie = findMovieByGuid(movieGuid);
                movie.mergeConfig(xmovie);
             }
          }
@@ -358,7 +360,7 @@ public class FResSceneDisplay
       // 读取剪辑集合
       int movieCount = input.readInt32();
       for(int n = 0; n < movieCount; n++){
-         FResSceneMovie movie = new FResSceneMovie();
+         FResMovie movie = new FResMovie();
          movie.importData(input);
          pushMovie(movie);
       }

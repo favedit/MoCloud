@@ -1,4 +1,4 @@
-package org.mo.content.resource.scene;
+package org.mo.content.resource.common;
 
 import org.mo.com.geom.SFloatVector3;
 import org.mo.com.io.IDataInput;
@@ -6,12 +6,11 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.resource.common.FResObject;
 
 //============================================================
 // <T>场景动画。</T>
 //============================================================
-public class FResSceneMovie
+public class FResMovie
       extends FResObject
 {
    // 类型代码
@@ -26,7 +25,7 @@ public class FResSceneMovie
    //============================================================
    // <T>构造场景动画。</T>
    //============================================================
-   public FResSceneMovie(){
+   public FResMovie(){
       _typeName = "SceneMovie";
    }
 
@@ -49,6 +48,33 @@ public class FResSceneMovie
    }
 
    //============================================================
+   // <T>获得间隔。</T>
+   //
+   // @return 间隔
+   //============================================================
+   public int interval(){
+      return _interval;
+   }
+
+   //============================================================
+   // <T>设置间隔。</T>
+   //
+   // @param interval 间隔
+   //============================================================
+   public void setInterval(int interval){
+      _interval = interval;
+   }
+
+   //============================================================
+   // <T>获得旋转信息。</T>
+   //
+   // @return 旋转信息
+   //============================================================
+   public SFloatVector3 rotation(){
+      return _rotation;
+   }
+
+   //============================================================
    // <T>增加一个场景动画。</T>
    //
    // @param movie 场景动画
@@ -56,7 +82,7 @@ public class FResSceneMovie
    @Override
    public void assignInfo(FResObject resource){
       super.assignInfo(resource);
-      FResSceneMovie movie = (FResSceneMovie)resource;
+      FResMovie movie = (FResMovie)resource;
       _typeCode = movie._typeCode;
       _interval = movie._interval;
       _rotation.assign(movie._rotation);

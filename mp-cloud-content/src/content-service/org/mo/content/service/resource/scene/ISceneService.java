@@ -105,6 +105,21 @@ public interface ISceneService
                         IWebOutput output);
 
    //============================================================
+   // <T>创建动画处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult createMovie(IWebContext context,
+                       ILogicContext logicContext,
+                       FGcSessionInfo session,
+                       IWebInput input,
+                       IWebOutput output);
+
+   //============================================================
    // <T>复制场景节点处理。</T>
    //
    // @param context 网络环境

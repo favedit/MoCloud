@@ -160,7 +160,6 @@ public class FResModelConsole
       byte[] data = null;
       try(FCompressStream compressStream = new FCompressStream(stream.memory(), 0, stream.length())){
          data = compressStream.toCompressArray(ECompressMode.Lzma, RInteger.SIZE_2M);
-         //data = compressStream.toCompressArray(ECompressMode.Lzma);
       }
       //............................................................
       // 存储数据
