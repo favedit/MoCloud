@@ -1,13 +1,15 @@
 //! © 2015 Nathan Rugg <nmrugg@gmail.com> | MIT
 /// See LICENSE for more details.
 
+// jshint bitwise:true, curly:true, eqeqeq:true, forin:true, immed:true, latedef:true, newcap:true, noarg:true, noempty:true, nonew:true, onevar:true, plusplus:true, quotmark:double, undef:true, unused:strict, browser: true, node: true
+
 /// Does the environment support web workers?  If not, let's load the worker manually (without polluting the global scope).
 if (typeof Worker === "undefined" || (typeof location !== "undefined" && location.protocol === "file:")) {
     /// Is this Node.js?
     if (typeof global !== "undefined" && typeof require !== "undefined") {
         this.LZMA = function (lzma_path) {
             return require(lzma_path || "./lzma_worker-min.js").LZMA;
-        }
+        };
     /// Is this a browser?
     } else if (typeof window !== "undefined" && window.document) {
         (function ()
@@ -39,14 +41,14 @@ if (typeof Worker === "undefined" || (typeof location !== "undefined" && locatio
                 req(path);
                 
                 fake_lzma = {
-                    compress: function compress(string, mode, on_finish, on_progress) {
+                    compress: function compress(mixed, mode, on_finish, on_progress) {
                         if (global_var.LZMA_WORKER) {
-                            global_var.LZMA_WORKER.compress(string, mode, on_finish, on_progress);
+                            global_var.LZMA_WORKER.compress(mixed, mode, on_finish, on_progress);
                         } else {
                             /// Wait
                             setTimeout(function ()
                             {
-                                fake_lzma.compress(string, mode, on_finish, on_progress);
+                                fake_lzma.compress(mixed, mode, on_finish, on_progress);
                             }, 50);
                         }
                     },
@@ -64,7 +66,7 @@ if (typeof Worker === "undefined" || (typeof location !== "undefined" && locatio
                 };
                 
                 return fake_lzma;
-            };
+            }
             
             that.LZMA = non_worker_lzma;
         }());
@@ -76,7 +78,7 @@ if (typeof Worker === "undefined" || (typeof location !== "undefined" && locatio
     /// Let's use Web Workers.
     ///NOTE: The "this" keyword is the global context ("window" variable) if loaded via a <script> tag
     ///      or the function context if loaded as a module (e.g., in Node.js).
-    this.LZMA = function (lzma_path) {
+    this.LZMA_WORKER = function (lzma_path) {
         var action_compress   = 1,
             action_decompress = 2,
             action_progress   = 3,
@@ -88,15 +90,15 @@ if (typeof Worker === "undefined" || (typeof location !== "undefined" && locatio
         
         lzma_worker.onmessage = function (e) {
             if (e.data.action === action_progress) {
-                if (callback_obj[e.data.callback_num] && typeof callback_obj[e.data.callback_num].on_progress === "function") {
-                    callback_obj[e.data.callback_num].on_progress(e.data.result);
+                if (callback_obj[e.data.cbn] && typeof callback_obj[e.data.cbn].on_progress === "function") {
+                    callback_obj[e.data.cbn].on_progress(e.data.result);
                 }
             } else {
-                if (callback_obj[e.data.callback_num] && typeof callback_obj[e.data.callback_num].on_finish === "function") {
-                    callback_obj[e.data.callback_num].on_finish(e.data.result);
+                if (callback_obj[e.data.cbn] && typeof callback_obj[e.data.cbn].on_finish === "function") {
+                    callback_obj[e.data.cbn].on_finish(e.data.result);
                     
                     /// Since the (de)compression is complete, the callbacks are no longer needed.
-                    delete callback_obj[e.data.callback_num];
+                    delete callback_obj[e.data.cbn];
                 }
             }
         };
@@ -109,28 +111,28 @@ if (typeof Worker === "undefined" || (typeof location !== "undefined" && locatio
         return (function () {
             
             function send_to_worker(action, data, mode, on_finish, on_progress) {
-                var callback_num;
+                var cbn;
                 
                 do {
-                    callback_num = Math.floor(Math.random() * (10000000));
-                } while(typeof callback_obj[callback_num] !== "undefined");
+                    cbn = Math.floor(Math.random() * (10000000));
+                } while(typeof callback_obj[cbn] !== "undefined");
                 
-                callback_obj[callback_num] = {
+                callback_obj[cbn] = {
                     on_finish:   on_finish,
                     on_progress: on_progress
                 };
                 
                 lzma_worker.postMessage({
-                    action:       action,
-                    callback_num: callback_num,
-                    data:         data,
-                    mode:         mode
+                    action: action, /// action_compress = 1, action_decompress = 2, action_progress = 3
+                    cbn:    cbn,    /// callback number
+                    data:   new Uint8Array(data),
+                    mode:   mode
                 });
             }
             
             return {
-                compress: function compress(string, mode, on_finish, on_progress) {
-                    send_to_worker(action_compress, String(string), mode, on_finish, on_progress);
+                compress: function compress(mixed, mode, on_finish, on_progress) {
+                    send_to_worker(action_compress, mixed, mode, on_finish, on_progress);
                 },
                 decompress: function decompress(byte_arr, on_finish, on_progress) {
                     send_to_worker(action_decompress, byte_arr, false, on_finish, on_progress);

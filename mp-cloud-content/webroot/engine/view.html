@@ -23,10 +23,13 @@ function onEnterFrame(){
    }
 }
 //------------------------------------------------------------
-function onSceneLoad(c, s){
-   //s.addEnterFrameListener(null, onEnterFrame);
-   //canvas.switchPlay(true);
-   //canvas.switchMovie(true);
+function onSceneLoad(event){
+   // 监听时间
+   var space = event.space;
+   space.addEnterFrameListener(null, onEnterFrame);
+   // 打开播放
+   canvas.switchPlay(true);
+   canvas.switchMovie(true);
 }
 //------------------------------------------------------------
 function onKeydown(p){
@@ -60,19 +63,17 @@ function onLoad(){
    // 设置资源获取方式
    RConsole.find(FE3sVendorConsole).setup('net');
    // 创建场景画板
-   var canvas = canvas = RClass.create(FE3dSceneCanvas);
+   canvas = canvas = RClass.create(FE3dSceneCanvas);
    canvas._scaleRate = 1;
    canvas._optionAlpha = false;
    canvas.build(document);
    canvas.setPanel(document.body);
    canvas.loadByCode(code);
    canvas.addLoadListener(null, onSceneLoad);
-   //RDump.dump(w, document.body);
 }
 </SCRIPT>
 </HEAD>
 <BODY scroll='no' style='background-color:#000000;overflow:hidden;' onload='onLoad()' onkeydown='onKeydown()'>
-   <DIV id='_dump'></DIV>
    <DIV style='position:absolute; left:1em; top:1em;'>
       <IMG src='ars/picture/fullscreen.png' style='width:5em; height:5em;' onmousedown='doCanvasAction("fullscreen")' ontouchstart='doCanvasAction("fullscreen")'>
    </DIV>
@@ -95,7 +96,7 @@ function onLoad(){
    <DIV style='position:absolute; right:1em; bottom:1em;'>
       <TABLE>
          <TR>
-            <TD><IMG src='ars/picture/arrow_up.png' style='width:5em; height:5em;'onmousedown='doCanvasAction("forward", true)' onmouseup='doCanvasAction("forward", false)' ontouchstart='doCanvasAction("forward", true)' ontouchend='doCanvasAction("forward", false)'></TD>
+            <TD><IMG src='ars/picture/arrow_up.png' style='width:5em; height:5em;' onmousedown='doCanvasAction("forward", true)' onmouseup='doCanvasAction("forward", false)' ontouchstart='doCanvasAction("forward", true)' ontouchend='doCanvasAction("forward", false)'></TD>
          </TR>
          <TR>
             <TD height='0.5em'></TD>
