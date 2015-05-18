@@ -25,23 +25,25 @@ function onEnterFrame(){
    }
 }
 //------------------------------------------------------------
-function onLoadStarImage(p){
+function onLoadStarImage(event){
+   var image = event.sender;
    var t = context.createFlatTexture();
    t._name = 'diffuse';
-   t.upload(p.image());
+   t.upload(image.image());
    galaxy.pushTexture(t);
    stage.spriteLayer().pushRenderable(galaxy);
 }
 //------------------------------------------------------------
-function onLoadImage(p){
-   var s = p.size();
+function onLoadImage(event){
+   var image = event.sender;
+   var s = image.size();
    // 创建画布
    var cvs = RClass.create(FE2dCanvas);
    cvs.size().assign(s);
    cvs.build(document);
    // 获得数据
    var c2d = cvs.context();
-   c2d.drawImage(p);
+   c2d.drawImage(image);
    var d = c2d.toBytes();
    // 创建渲染对象
    galaxy = RClass.create(FE3dGalaxy);
@@ -76,7 +78,7 @@ function onLoad(){
    // 创建舞台
    stage = RClass.create(FE3dSimpleStage);
    stage.linkGraphicContext(context);
-   stage.selectTechnique(context, FG3dControlTechnique);
+   stage.selectTechnique(context, FE3dControlTechnique);
    stage.addEnterFrameListener(null, onEnterFrame);
    RStage.register('stage3d', stage);
    canvas._activeStage = stage;

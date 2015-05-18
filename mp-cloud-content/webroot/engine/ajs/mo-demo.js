@@ -1,10 +1,169 @@
-function FE3dGalaxy(a){a=RClass.inherits(this,a,FE3dRenderable);a._seed=0;a._cellSize=null;a._size=null;a._lineColor=null;a._lineCenterColor=null;a._radius=0;a._vertexSpecialBuffer=null;a._vertexPositionBuffer=null;a._vertexCoordBuffer=null;a._vertexColorBuffer=null;a._vertexSpecialData=null;a._vertexPositionData=null;a._vertexCoordData=null;a._vertexColorData=null;a._indexData=null;a.construct=FE3dGalaxy_construct;a.generatePixel=FE3dGalaxy_generatePixel;a.setup=FE3dGalaxy_setup;return a}
-function FE3dGalaxy_construct(){this.__base.FE3dRenderable.construct.call(this);this._cellSize=new SSize2;this._cellSize.set(2,2);this._size=new SSize2;this._size.set(16,16)}
-function FE3dGalaxy_generatePixel(a,b,h,d,f,g){var e=4*(this._size.width*h+b);b=g[e++];h=g[e++];g=g[e++];for(var e=1-Math.sqrt(d*d+f*f)/this._radius,l=0;1>l;l++){var c=[d,0,f,e,d,0,f,e,d,0,f,e,d,0,f,e];RFloat.copy(this._vertexSpecialData,16*a,c,0,16);c=[d-.5,0,f+.5,d+.5,0,f+.5,d+.5,0,f-.5,d-.5,0,f-.5];RFloat.copy(this._vertexPositionData,12*a,c,0,12);c=[0,1,1,1,1,0,0,0];RFloat.copy(this._vertexCoordData,8*a,c,0,8);c=[b,h,g,1,b,h,g,1,b,h,g,1,b,h,g,1];RFloat.copy(this._vertexColorData,16*a,c,0,16);
-c=4*a;RInteger.copy(this._indexData,6*a,[c+0,c+1,c+2,c+0,c+2,c+3],0,6)}}
-function FE3dGalaxy_setup(a){var b=this._graphicContext,h=this._size.width,d=h/2,f=this._size.height,g=f/2,e=this._cellSize.width,l=this._cellSize.height;this._radius=Math.sqrt(d*d+g*g);var c=h/e*(f/l),k=4*c;this._vertexCount=k;this._vertexSpecialData=new Float32Array(4*k);this._vertexPositionData=new Float32Array(3*k);this._vertexCoordData=new Float32Array(2*k);this._vertexColorData=new Uint8Array(4*k);this._indexData=Array(6*c);for(var p=0,m=0;m<f;m+=l)for(var n=0;n<h;n+=e)this.generatePixel(p++,
-n,m,n-d,m-g,a);a=this._vertexSpecialBuffer=b.createVertexBuffer();a._name="special";a._formatCd=EG3dAttributeFormat.Float4;a.upload(this._vertexSpecialData,16,k);this._vertexBuffers.set(a._name,a);a=this._vertexPositionBuffer=b.createVertexBuffer();a._name="position";a._formatCd=EG3dAttributeFormat.Float3;a.upload(this._vertexPositionData,12,k);this._vertexBuffers.set(a._name,a);a=this._vertexCoordBuffer=b.createVertexBuffer();a._name="coord";a._formatCd=EG3dAttributeFormat.Float2;a.upload(this._vertexCoordData,
-8,k);this._vertexBuffers.set(a._name,a);a=this._vertexColorBuffer=b.createVertexBuffer();a._name="color";a._formatCd=EG3dAttributeFormat.Byte4Normal;a.upload(this._vertexColorData,4,k);this._vertexBuffers.set(a._name,a);b=this._indexBuffer=b.createIndexBuffer();context.capability().optionIndex32?(b._strideCd=EG3dIndexStride.Uint32,b.upload(new Uint32Array(this._indexData),6*c)):(b._strideCd=EG3dIndexStride.Uint16,b.upload(new Uint16Array(this._indexData),6*c));c=this.material().info();c.effectCode=
-"galaxy";c.ambientColor.set(1,1,1,1)}function FE3dGalaxyEffect(a){a=RClass.inherits(this,a,FG3dAutomaticEffect);a._code="galaxy.automatic";a.drawRenderable=FE3dGalaxyEffect_drawRenderable;return a}
-function FE3dGalaxyEffect_drawRenderable(a,b){var h=this._graphicContext,d=this._program,f=a.calculate(EG3dRegionParameter.CameraPosition),g=b.material(),e=g.info();this.bindMaterial(g);d.setParameter4("vc_rotation",b._seed,0,0,0);d.setParameter("vc_model_matrix",b.currentMatrix());d.setParameter("vc_vp_matrix",a.calculate(EG3dRegionParameter.CameraViewProjectionMatrix));d.setParameter("vc_camera_position",f);d.setParameter4("fc_alpha",e.alphaBase,e.alphaRate,e.alphaLevel,e.alphaMerge);d.setParameter("fc_ambient_color",
-e.ambientColor);this.bindAttributes(b);this.bindSamplers(b);h.drawTriangles(b.indexBuffer())}var RE3dDemo=new function(){this._setuped=!1;this.onSetup=RE3dDemo_onSetup;this.setup=RE3dDemo_setup;return this};function RE3dDemo_onSetup(){RConsole.find(FG3dEffectConsole).register("control.control.galaxy",FE3dGalaxyEffect)}function RE3dDemo_setup(){this._setuped||(this.onSetup(),this._setuped=!0)};
+function FE3dGalaxy(o){
+   o = RClass.inherits(this, o, FE3dRenderable);
+   o._seed                 = 0;
+   o._cellSize             = null;
+   o._size                 = null;
+   o._lineColor            = null;
+   o._lineCenterColor      = null;
+   o._radius               = 0;
+   o._vertexSpecialBuffer  = null;
+   o._vertexPositionBuffer = null;
+   o._vertexCoordBuffer    = null;
+   o._vertexColorBuffer    = null;
+   o._vertexSpecialData    = null;
+   o._vertexPositionData   = null;
+   o._vertexCoordData      = null;
+   o._vertexColorData      = null;
+   o._indexData            = null;
+   o.construct             = FE3dGalaxy_construct;
+   o.generatePixel         = FE3dGalaxy_generatePixel;
+   o.setup                 = FE3dGalaxy_setup;
+   return o;
+}
+function FE3dGalaxy_construct(){
+   var o = this;
+   o.__base.FE3dRenderable.construct.call(o);
+   o._material = RClass.create(FE3dMaterial);
+   o._cellSize = new SSize2();
+   o._cellSize.set(2, 2);
+   o._size = new SSize2();
+   o._size.set(16, 16);
+}
+function FE3dGalaxy_generatePixel(i, ix, iy, x, y, d){
+   var o = this;
+   var di = (o._size.width * iy + ix) * 4;
+   var cr = d[di++];
+   var cg = d[di++];
+   var cb = d[di++];
+   var r = 1 - Math.sqrt(x * x + y * y) / o._radius;
+   for(var ci = 0; ci < 1; ci++){
+      var vd = [
+         x, 0, y, r,
+         x, 0, y, r,
+         x, 0, y, r,
+         x, 0, y, r];
+      RFloat.copy(o._vertexSpecialData, 16 * i, vd, 0, 16);
+      var s = 0.5;
+      var vd = [
+         x - s, 0, y + s,
+         x + s, 0, y + s,
+         x + s, 0, y - s,
+         x - s, 0, y - s];
+      RFloat.copy(o._vertexPositionData, 12 * i, vd, 0, 12);
+      var vd = [
+         0, 1,
+         1, 1,
+         1, 0,
+         0, 0];
+      RFloat.copy(o._vertexCoordData, 8 * i, vd, 0, 8);
+      var vd = [
+         cr, cg, cb, 1,
+         cr, cg, cb, 1,
+         cr, cg, cb, 1,
+         cr, cg, cb, 1];
+      RFloat.copy(o._vertexColorData, 16 * i, vd, 0, 16);
+      var ib = i * 4;
+      var id = [ib + 0, ib + 1, ib + 2, ib + 0, ib + 2, ib + 3];
+      RInteger.copy(o._indexData, 6 * i, id, 0, 6);
+   }
+}
+function FE3dGalaxy_setup(p){
+   var o = this;
+   var c = o._graphicContext;
+   var dw = o._size.width;
+   var dw2 = dw / 2;
+   var dh = o._size.height;
+   var dh2 = dh / 2;
+   var sw = o._cellSize.width;
+   var sh = o._cellSize.height;
+   o._radius = Math.sqrt(dw2 * dw2 + dh2 * dh2);
+   var tc = (dw / sw) * (dh / sh);
+   var vc = 4 * tc;
+   o._vertexCount = vc;
+   o._vertexSpecialData = new Float32Array(4 * vc);
+   o._vertexPositionData = new Float32Array(3 * vc);
+   o._vertexCoordData = new Float32Array(2 * vc);
+   o._vertexColorData = new Uint8Array(4 * vc);
+   o._indexData = new Array(6 * tc);
+   var i = 0;
+   for(var y = 0; y < dh; y += sh){
+      for(var x = 0; x < dw; x += sw){
+         o.generatePixel(i++, x, y, x - dw2, y - dh2, p);
+      }
+   }
+   var vb = o._vertexSpecialBuffer = c.createVertexBuffer();
+   vb.setCode('special');
+   vb._formatCd = EG3dAttributeFormat.Float4;
+   vb.upload(o._vertexSpecialData, 4 * 4, vc);
+   o.pushVertexBuffer(vb);
+   var vb = o._vertexPositionBuffer = c.createVertexBuffer();
+   vb.setCode('position');
+   vb._formatCd = EG3dAttributeFormat.Float3;
+   vb.upload(o._vertexPositionData, 4 * 3, vc);
+   o.pushVertexBuffer(vb);
+   var vb = o._vertexCoordBuffer = c.createVertexBuffer();
+   vb.setCode('coord');
+   vb._formatCd = EG3dAttributeFormat.Float2;
+   vb.upload(o._vertexCoordData, 4 * 2, vc);
+   o.pushVertexBuffer(vb);
+   var vb = o._vertexColorBuffer = c.createVertexBuffer();
+   vb.setCode('color');
+   vb._formatCd = EG3dAttributeFormat.Byte4Normal;
+   vb.upload(o._vertexColorData, 4, vc);
+   o.pushVertexBuffer(vb);
+   var ib = o._indexBuffer = c.createIndexBuffer();
+   var i32 = context.capability().optionIndex32;
+   if(i32){
+      ib._strideCd = EG3dIndexStride.Uint32;
+      ib.upload(new Uint32Array(o._indexData), 6 * tc);
+   }else{
+      ib._strideCd = EG3dIndexStride.Uint16;
+      ib.upload(new Uint16Array(o._indexData), 6 * tc);
+   }
+   var mi = o.material().info();
+   mi.effectCode = 'galaxy';
+   mi.ambientColor.set(1, 1, 1, 1);
+}
+function FE3dGalaxyEffect(o){
+   o = RClass.inherits(this, o, FG3dAutomaticEffect);
+   o._code          = 'galaxy.automatic';
+   o.drawRenderable = FE3dGalaxyEffect_drawRenderable;
+   return o;
+}
+function FE3dGalaxyEffect_drawRenderable(pg, pr){
+   var o = this;
+   var c = o._graphicContext;
+   var g = c._native;
+   var p = o._program;
+   var vp = pg.calculate(EG3dRegionParameter.CameraPosition);
+   var m = pr.material();
+   var mi = m.info();
+   o.bindMaterial(m);
+   p.setParameter4('vc_rotation', pr._seed, 0, 0, 0);
+   p.setParameter('vc_model_matrix', pr.currentMatrix());
+   p.setParameter('vc_vp_matrix', pg.calculate(EG3dRegionParameter.CameraViewProjectionMatrix));
+   p.setParameter('vc_camera_position', vp);
+   p.setParameter4('fc_alpha', mi.alphaBase, mi.alphaRate, mi.alphaLevel, mi.alphaMerge);
+   p.setParameter('fc_ambient_color', mi.ambientColor);
+   o.bindAttributes(pr);
+   o.bindSamplers(pr);
+   c.drawTriangles(pr.indexBuffer());
+}
+var RE3dDemo = new function RE3dDemo(){
+   var o = this;
+   o._setuped = false;
+   o.onSetup  = RE3dDemo_onSetup;
+   o.setup    = RE3dDemo_setup;
+   return o;
+}
+function RE3dDemo_onSetup(){
+   var ec = RConsole.find(FG3dEffectConsole);
+   ec.register('control.control.galaxy', FE3dGalaxyEffect);
+}
+function RE3dDemo_setup(){
+   var o = this;
+   if(!o._setuped){
+      o.onSetup();
+      o._setuped = true;
+   }
+}
