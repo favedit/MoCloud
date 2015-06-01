@@ -27,7 +27,7 @@
       <Property name='enable'>Y</Property>
       <Property name='storage_host'>127.0.0.1</Property>
       <Property name='storage_port'>27017</Property>
-      <Property name='storage_name'>content</Property>
+      <Property name='storage_name'>eai</Property>
       <Initialize name='initialize'/>
    </Component>
    
@@ -61,7 +61,7 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://localhost:3306/cd_cache</Property>
+               <Property name='url'>jdbc:mysql://localhost:3306/ai_cache</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -86,7 +86,7 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://localhost:3306/cd_data</Property>
+               <Property name='url'>jdbc:mysql://localhost:3306/ai_data</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>

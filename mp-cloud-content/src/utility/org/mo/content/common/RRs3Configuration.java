@@ -4,7 +4,7 @@ import org.mo.cloud.logic.system.FGcSessionInfo;
 
 public class RRs3Configuration
 {
-   public static String RootPath = "E:/Microbject";
+   public static String RootPath = "D:/Microbject";
 
    public static String Config = "application-home.xml";
 
