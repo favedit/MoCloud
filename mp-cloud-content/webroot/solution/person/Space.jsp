@@ -17,7 +17,7 @@
 function _load(){
    with(MO){
       // 设置环境
-      RRuntime.setProcessCd(EProcess.Debug);
+      MO.Runtime.setProcessCd(EProcess.Debug);
       RApplication.initialize();
       RBrowser.setContentPath('/script');
       // 加载工作区
