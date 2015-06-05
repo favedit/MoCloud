@@ -6,6 +6,7 @@ import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -30,18 +31,48 @@ public class FGcResModelMeshStreamConsole
    }
 
    //============================================================
-   // <T>根据网格编号和代码查找数据流。</T>
+   // <T>根据网格编号和代码查找数据流信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param meshId 网格编号
    // @param code 代码
-   // @return 网格数据流
+   // @return 数据流信息
    //============================================================
    @Override
    public FGcResModelMeshStreamInfo findByCode(ILogicContext logicContext,
                                                long meshId,
                                                String code){
       String whereSql = "(" + FDataResourceModelMeshStreamLogic.MESH_ID + "=" + meshId + ") AND (" + FDataResourceModelMeshStreamLogic.CODE + "='" + RSql.formatValue(code) + "')";
+      // 查询数据流
+      FDataResourceModelMeshStreamLogic logic = findLogic(logicContext);
+      FGcResModelMeshStreamInfo stream = logic.search(FGcResModelMeshStreamInfo.class, whereSql);
+      return stream;
+   }
+
+   //============================================================
+   // <T>根据用户编号和模型编号和网格编号和代码查找数据流信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param modelId 模型编号
+   // @param meshId 网格编号
+   // @param code 代码
+   // @return 数据流信息
+   //============================================================
+   @Override
+   public FGcResModelMeshStreamInfo findByCode(ILogicContext logicContext,
+                                               long userId,
+                                               long modelId,
+                                               long meshId,
+                                               String code){
+      FString whereSql = new FString();
+      whereSql.append("(", FDataResourceModelMeshStreamLogic.USER_ID, "=", userId, ")");
+      whereSql.append(" AND ");
+      whereSql.append("(", FDataResourceModelMeshStreamLogic.MODEL_ID, "=", modelId, ")");
+      whereSql.append(" AND ");
+      whereSql.append("(", FDataResourceModelMeshStreamLogic.MESH_ID, "=", meshId, ")");
+      whereSql.append(" AND ");
+      whereSql.append("(", FDataResourceModelMeshStreamLogic.CODE, "='", RSql.formatValue(code), "')");
       // 查询数据流
       FDataResourceModelMeshStreamLogic logic = findLogic(logicContext);
       FGcResModelMeshStreamInfo stream = logic.search(FGcResModelMeshStreamInfo.class, whereSql);

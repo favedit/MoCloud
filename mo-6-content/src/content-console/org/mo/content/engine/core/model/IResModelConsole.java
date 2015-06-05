@@ -38,24 +38,28 @@ public interface IResModelConsole
                         String guid);
 
    //============================================================
-   // <T>更新模型信息。</T>
+   // <T>新建模型信息。</T>
    //
    // @param logicContext 逻辑环境
-   // @param model 模型
+   // @param session 会话信息
+   // @param model 模型数据
    // @return 模型信息
    //============================================================
-   FGcResModelInfo updateModel(ILogicContext logicContext,
-                               FResModel model);
+   FGcResModelInfo insertResource(ILogicContext logicContext,
+                                  FGcSessionInfo session,
+                                  FResModel model);
 
    //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param model 模型
    // @return 模型信息
    //============================================================
    EResult updateResource(ILogicContext logicContext,
+                          FGcSessionInfo session,
                           FGcResModelInfo modelInfo,
                           FResModel model);
 
@@ -63,11 +67,13 @@ public interface IResModelConsole
    // <T>更新PLY资源。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param file 文件
    // @return 处理结果
    //============================================================
    EResult updateResourcePly(ILogicContext logicContext,
+                             FGcSessionInfo session,
                              FGcResModelInfo modelInfo,
                              FPlyFile file);
 
@@ -75,11 +81,13 @@ public interface IResModelConsole
    // <T>更新OBJ资源。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param file 文件
    // @return 处理结果
    //============================================================
    EResult updateResourceObj(ILogicContext logicContext,
+                             FGcSessionInfo session,
                              FGcResModelInfo modelInfo,
                              FObjFile file);
 
@@ -87,11 +95,13 @@ public interface IResModelConsole
    // <T>更新STL资源。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param file 文件
    // @return 处理结果
    //============================================================
    EResult updateResourceStl(ILogicContext logicContext,
+                             FGcSessionInfo session,
                              FGcResModelInfo modelInfo,
                              FStlFile file);
 

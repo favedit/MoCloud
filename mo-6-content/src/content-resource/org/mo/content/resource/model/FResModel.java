@@ -46,6 +46,40 @@ public class FResModel
    }
 
    //============================================================
+   // <T>根据代码查找网格。</T>
+   //
+   // @param code 代码
+   // @return 网格
+   //============================================================
+   public FResModelMesh findMeshByCode(String code){
+      if((_meshs != null) && !RString.isEmpty(code)){
+         for(FResModelMesh mesh : _meshs){
+            if(code.equals(mesh.code())){
+               return mesh;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>根据唯一编号查找网格。</T>
+   //
+   // @param guid 唯一编号
+   // @return 网格
+   //============================================================
+   public FResModelMesh findMeshByGuid(String guid){
+      if((_meshs != null) && !RString.isEmpty(guid)){
+         for(FResModelMesh mesh : _meshs){
+            if(guid.equals(mesh.guid())){
+               return mesh;
+            }
+         }
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>获得网格集合。</T>
    //
    // @return 网格集合
@@ -211,6 +245,7 @@ public class FResModel
       unit.setFullCode(fullCode());
       unit.setCode(_code);
       unit.setLabel(_label);
+      unit.setKeywords(_keywords);
       // 存储配置
       FXmlNode xconfig = new FXmlNode("Model");
       saveConfig(xconfig);
@@ -254,6 +289,7 @@ public class FResModel
       for(int n = 0; n < meshCount; n++){
          FResModelMesh mesh = new FResModelMesh();
          mesh.setModel(this);
+         mesh.setIndex(n);
          mesh.importData(input);
          pushMesh(mesh);
       }

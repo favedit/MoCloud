@@ -13,14 +13,30 @@ public interface IGcResModelMeshStreamConsole
          IAbstractLogicUnitConsole<FGcResModelMeshStreamInfo>
 {
    //============================================================
-   // <T>根据网格编号和代码查找数据流。</T>
+   // <T>根据网格编号和代码查找数据流信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param meshId 网格编号
    // @param code 代码
-   // @return 网格数据流
+   // @return 数据流信息
    //============================================================
    FGcResModelMeshStreamInfo findByCode(ILogicContext logicContext,
+                                        long meshId,
+                                        String code);
+
+   //============================================================
+   // <T>根据用户编号和模型编号和网格编号和代码查找数据流信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param userId 用户编号
+   // @param modelId 模型编号
+   // @param meshId 网格编号
+   // @param code 代码
+   // @return 数据流信息
+   //============================================================
+   FGcResModelMeshStreamInfo findByCode(ILogicContext logicContext,
+                                        long userId,
+                                        long modelId,
                                         long meshId,
                                         String code);
 

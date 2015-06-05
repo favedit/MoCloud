@@ -5,7 +5,6 @@ import com.cyou.gccloud.data.data.FDataResourceModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelUnit;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.cloud.logic.resource.FGcResourceInfo;
 import org.mo.cloud.logic.resource.model.FGcResModelConsole;
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
@@ -172,36 +171,27 @@ public class FResModelConsole
    }
 
    //============================================================
-   // <T>更新模型信息。</T>
+   // <T>新建模型信息。</T>
    //
    // @param logicContext 逻辑环境
-   // @param model 模型
+   // @param session 会话信息
+   // @param model 模型数据
    // @return 模型信息
    //============================================================
    @Override
-   public FGcResModelInfo updateModel(ILogicContext logicContext,
-                                      FResModel model){
-      // 检查参数
-      String guid = model.guid();
-      if(RString.isEmpty(guid)){
-         throw new FFatalError("Model guid is null.");
-      }
-      // 查找数据
-      FGcResModelInfo modelInfo = findByGuid(logicContext, guid);
-      if(modelInfo == null){
-         throw new FFatalError("Mesh is not exists. (guid={1}})", guid);
-      }
-      long resourceId = modelInfo.resourceId();
-      // 创建场景
-      model.saveUnit(modelInfo);
-      // 更新数据
-      doUpdate(logicContext, modelInfo);
+   public FGcResModelInfo insertResource(ILogicContext logicContext,
+                                         FGcSessionInfo session,
+                                         FResModel model){
+      // 获得参数
+      long userId = session.userId();
+      long projectId = session.projectId();
       //............................................................
-      // 废弃临时数据
-      FGcResourceInfo resource = _dataResourceConsole.get(logicContext, resourceId);
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, resource.guid());
-      _dataResourceConsole.doUpdate(logicContext, resource);
-      // 返回网格单元
+      // 新建模型
+      FGcResModelInfo modelInfo = doPrepare(logicContext);
+      modelInfo.setUserId(userId);
+      modelInfo.setProjectId(projectId);
+      model.saveUnit(modelInfo);
+      doInsert(logicContext, modelInfo);
       return modelInfo;
    }
 
@@ -209,12 +199,14 @@ public class FResModelConsole
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param model 模型
    // @return 模型信息
    //============================================================
    @Override
    public EResult updateResource(ILogicContext logicContext,
+                                 FGcSessionInfo session,
                                  FGcResModelInfo modelInfo,
                                  FResModel model){
       // 检查参数
@@ -228,22 +220,23 @@ public class FResModelConsole
       String modelGuid = modelInfo.guid();
       model.loadUnit(modelInfo);
       //............................................................
-      // 删除模型内所有网格
-      _meshConsole.doDeleteByModelId(logicContext, modelId);
+      // 删除未使用的网格信息
+      FLogicDataset<FGcResModelMeshInfo> meshInfos = _meshConsole.fetchByModelId(logicContext, modelId);
+      if(meshInfos != null){
+         for(FGcResModelMeshInfo meshInfo : meshInfos){
+            String meshCode = meshInfo.code();
+            FResModelMesh mesh = model.findMeshByCode(meshCode);
+            if(mesh == null){
+               _meshConsole.doDelete(logicContext, meshInfo);
+            }
+         }
+      }
       //............................................................
-      // 更新所有数据流
-      // 新建所有网格信息
+      // 更新所有网格信息
       int meshCount = model.meshs().count();
       for(int n = 0; n < meshCount; n++){
-         FResModelMesh modelMesh = model.meshs().get(n);
-         // 新建网格信息
-         FGcResModelMeshInfo meshInfo = _meshConsole.doPrepare(logicContext);
-         meshInfo.setModelId(modelId);
-         modelMesh.setGuid(meshInfo.guid());
-         modelMesh.saveUnit(meshInfo);
-         _meshConsole.doInsert(logicContext, meshInfo);
-         // 更新网格数据
-         _meshConsole.updateResource(logicContext, meshInfo, modelMesh);
+         FResModelMesh mesh = model.meshs().get(n);
+         _meshConsole.importResource(logicContext, session, modelInfo, mesh);
       }
       // 更新网格
       model.saveUnit(modelInfo);
@@ -259,12 +252,14 @@ public class FResModelConsole
    // <T>更新PLY资源。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param file 文件
    // @return 处理结果
    //============================================================
    @Override
    public EResult updateResourcePly(ILogicContext logicContext,
+                                    FGcSessionInfo session,
                                     FGcResModelInfo modelInfo,
                                     FPlyFile file){
       // 加载网格
@@ -275,19 +270,21 @@ public class FResModelConsole
       model.pushMesh(mesh);
       //............................................................
       // 新建模型
-      return updateResource(logicContext, modelInfo, model);
+      return updateResource(logicContext, session, modelInfo, model);
    }
 
    //============================================================
    // <T>更新OBJ资源。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param file 文件
    // @return 处理结果
    //============================================================
    @Override
    public EResult updateResourceObj(ILogicContext logicContext,
+                                    FGcSessionInfo session,
                                     FGcResModelInfo modelInfo,
                                     FObjFile file){
       // 加载模型资源
@@ -300,7 +297,7 @@ public class FResModelConsole
       }
       //............................................................
       // 新建模型
-      updateResource(logicContext, modelInfo, model);
+      updateResource(logicContext, session, modelInfo, model);
       return EResult.Success;
    }
 
@@ -308,12 +305,14 @@ public class FResModelConsole
    // <T>更新STL资源。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
    // @param modelInfo 模型信息
    // @param file 文件
    // @return 处理结果
    //============================================================
    @Override
    public EResult updateResourceStl(ILogicContext logicContext,
+                                    FGcSessionInfo session,
                                     FGcResModelInfo modelInfo,
                                     FStlFile file){
       // 加载模型资源
@@ -326,7 +325,7 @@ public class FResModelConsole
       }
       //............................................................
       // 新建模型
-      updateResource(logicContext, modelInfo, model);
+      updateResource(logicContext, session, modelInfo, model);
       return EResult.Success;
    }
 
@@ -342,37 +341,20 @@ public class FResModelConsole
    public EResult importModel(ILogicContext logicContext,
                               FGcSessionInfo session,
                               String fileName){
-      long userId = session.userId();
-      long projectId = session.projectId();
       // 加载模型资源
       FResModel model = new FResModel();
       model.loadFile(fileName);
       //............................................................
-      // 新建模型
-      FGcResModelInfo modelInfo = doPrepare(logicContext);
-      modelInfo.setUserId(userId);
-      modelInfo.setProjectId(projectId);
-      modelInfo.setFullCode(model.fullCode());
-      modelInfo.setCode(model.code());
-      modelInfo.setLabel(model.label());
-      modelInfo.setKeywords(model.keywords());
-      doInsert(logicContext, modelInfo);
+      // 获得参数
+      long userId = session.userId();
+      String code = model.code();
       //............................................................
-      // 新建网格集合
-      int meshCount = model.meshs().count();
-      for(int n = 0; n < meshCount; n++){
-         FResModelMesh mesh = model.meshs().get(n);
-         String meshCode = mesh.code();
-         // 新建网格
-         FGcResModelMeshInfo meshInfo = _meshConsole.doPrepare(logicContext);
-         meshInfo.setUserId(userId);
-         meshInfo.setProjectId(projectId);
-         meshInfo.setModelId(modelInfo.ouid());
-         meshInfo.setSortIndex(n);
-         meshInfo.setCode(meshCode);
-         _meshConsole.doInsert(logicContext, meshInfo);
-         // 更新网格数据
-         _meshConsole.updateResource(logicContext, meshInfo, mesh);
+      // 导入模型信息
+      FGcResModelInfo modelInfo = findByUserCode(logicContext, userId, code);
+      if(modelInfo == null){
+         modelInfo = insertResource(logicContext, session, model);
+      }else{
+         updateResource(logicContext, session, modelInfo, model);
       }
       return EResult.Success;
    }

@@ -2,13 +2,16 @@ package org.mo.content.engine.core.model;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshConsole;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.FFatalError;
 import org.mo.content.resource.common.FResStream;
 import org.mo.content.resource.model.FResModelMesh;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -27,109 +30,84 @@ public class FResModelMeshConsole
    @ALink
    protected IResModelMeshStreamConsole _streamConsole;
 
-   //   //============================================================
-   //   // <T>根据代码查找网格单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param guid 唯一编号
-   //   // @return 网格单元
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dMeshUnit findByGuid(ILogicContext logicContext,
-   //                                             String guid){
-   //      FDataResource3dMeshLogic logic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-   //      FDataResource3dMeshUnit unit = logic.findByGuid(guid);
-   //      return unit;
-   //   }
+   //============================================================
+   // <T>新建资源处理。</T>
    //
-   //   //============================================================
-   //   // <T>根据代码查找网格单元。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param code 代码
-   //   // @return 网格单元
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dMeshUnit findByCode(ILogicContext logicContext,
-   //                                             String code){
-   //      String searchSql = FDataResource3dMeshLogic.CODE + "='" + code + "'";
-   //      FDataResource3dMeshLogic logic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-   //      FDataResource3dMeshUnit unit = logic.search(searchSql);
-   //      return unit;
-   //   }
-   //
-   //   //============================================================
-   //   // <T>新建一个网格。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param mesh 网格
-   //   // @return 网格单元
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dMeshUnit insert(ILogicContext logicContext,
-   //                                         FRs3ModelMesh mesh){
-   //      // 新建模型
-   //      FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-   //      FDataResource3dMeshUnit meshUnit = meshLogic.doPrepare();
-   //      mesh.saveUnit(meshUnit);
-   //      meshLogic.doInsert(meshUnit);
-   //      // 新建数据流
-   //      int streamCount = mesh.streams().count();
-   //      for(int n = 0; n < streamCount; n++){
-   //         FRs3Stream stream = mesh.streams().get(n);
-   //         // 新建数据流
-   //         FDataResource3dStreamUnit streamUnit = _streamConsole.insert(logicContext, stream);
-   //         // 建立网格和数据流关联
-   //         FDataResource3dMeshStreamLogic meshStreamLogic = logicContext.findLogic(FDataResource3dMeshStreamLogic.class);
-   //         FDataResource3dMeshStreamUnit meshStreamUnit = meshStreamLogic.doPrepare();
-   //         meshStreamUnit.setMeshId(meshUnit.ouid());
-   //         meshStreamUnit.setStreamId(streamUnit.ouid());
-   //         meshStreamUnit.setIndex(n);
-   //         meshStreamUnit.setCode(stream.code());
-   //         meshStreamLogic.doInsert(meshStreamUnit);
-   //      }
-   //      // 返回网格单元
-   //      return meshLogic.find(meshUnit.ouid());
-   //   }
-   //
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
+   // @param mesh 网格数据
+   // @return 网格信息
+   //============================================================
+   @Override
+   public FGcResModelMeshInfo insertResource(ILogicContext logicContext,
+                                             FGcSessionInfo session,
+                                             FGcResModelInfo modelInfo,
+                                             FResModelMesh mesh){
+      // 获得参数
+      long userId = session.userId();
+      long projectId = session.projectId();
+      long modelId = modelInfo.ouid();
+      //............................................................
+      // 新建网格
+      FGcResModelMeshInfo meshInfo = doPrepare(logicContext);
+      meshInfo.setUserId(userId);
+      meshInfo.setProjectId(projectId);
+      meshInfo.setModelId(modelId);
+      mesh.saveUnit(meshInfo);
+      doInsert(logicContext, meshInfo);
+      //............................................................
+      // 新建数据流集合
+      int streamCount = mesh.streams().count();
+      for(int n = 0; n < streamCount; n++){
+         FResStream stream = mesh.streams().get(n);
+         _streamConsole.insertResource(logicContext, session, modelInfo, meshInfo, stream);
+      }
+      //............................................................
+      // 返回网格信息
+      return meshInfo;
+   }
 
    //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
    // @param meshInfo 网格信息
    // @param mesh 网格数据
    // @return 网格信息
    //============================================================
    @Override
    public FGcResModelMeshInfo updateResource(ILogicContext logicContext,
+                                             FGcSessionInfo session,
+                                             FGcResModelInfo modelInfo,
                                              FGcResModelMeshInfo meshInfo,
                                              FResModelMesh mesh){
       // 获得网格信息
       if(meshInfo == null){
          throw new FFatalError("Mesh info is empty.");
       }
-      long modelId = meshInfo.modelId();
       long meshId = meshInfo.ouid();
       String meshGuid = meshInfo.guid();
       //............................................................
-      // 删除不存在的数据流
-      _streamConsole.doDeleteByMeshId(logicContext, meshId);
+      // 删除未使用的数据流信息
+      FLogicDataset<FGcResModelMeshStreamInfo> streamInfos = _streamConsole.fetchByMeshId(logicContext, meshId);
+      if(streamInfos != null){
+         for(FGcResModelMeshStreamInfo streamInfo : streamInfos){
+            String streamCode = streamInfo.code();
+            FResStream stream = mesh.findStream(streamCode);
+            if(stream == null){
+               _streamConsole.doDelete(logicContext, streamInfo);
+            }
+         }
+      }
       //............................................................
-      // 更新所有数据流
+      // 新建数据流集合
       int streamCount = mesh.streams().count();
       for(int n = 0; n < streamCount; n++){
          FResStream stream = mesh.streams().get(n);
-         // 新建数据流
-         FGcResModelMeshStreamInfo streamInfo = _streamConsole.doPrepare(logicContext);
-         streamInfo.setUserId(meshInfo.userId());
-         streamInfo.setProjectId(meshInfo.projectId());
-         streamInfo.setModelId(modelId);
-         streamInfo.setMeshId(meshId);
-         streamInfo.setSortIndex(n);
-         _streamConsole.doInsert(logicContext, streamInfo);
-         // 更新资源
-         _streamConsole.updateResource(logicContext, streamInfo, stream);
+         _streamConsole.importResource(logicContext, session, modelInfo, meshInfo, stream);
       }
       // 更新网格
       mesh.saveUnit(meshInfo);
@@ -141,38 +119,40 @@ public class FResModelMeshConsole
       // 返回网格单元
       return meshInfo;
    }
+
+   //============================================================
+   // <T>导入资源处理。</T>
    //
-   //   //============================================================
-   //   // <T>更新网格。</T>
-   //   //
-   //   // @param logicContext 逻辑环境
-   //   // @param mesh 网格
-   //   //============================================================
-   //   @Override
-   //   public FDataResource3dMeshUnit updateMesh(ILogicContext logicContext,
-   //                                             FRs3Mesh mesh){
-   //      // 检查参数
-   //      String guid = mesh.guid();
-   //      if(RString.isEmpty(guid)){
-   //         throw new FFatalError("Mesh guid is null.");
-   //      }
-   //      // 查找数据
-   //      FDataResource3dMeshLogic meshLogic = logicContext.findLogic(FDataResource3dMeshLogic.class);
-   //      FDataResource3dMeshUnit meshUnit = meshLogic.findByGuid(guid);
-   //      if(meshUnit == null){
-   //         throw new FFatalError("Mesh is not exists. (guid={1}})", meshUnit);
-   //      }
-   //      // 创建场景
-   //      mesh.saveUnit(meshUnit);
-   //      // 更新数据
-   //      meshLogic.doUpdate(meshUnit);
-   //      //............................................................
-   //      // 废弃临时数据
-   //      _storageConsole.delete(EGcStorageCatalog.Cache3dMesh, guid);
-   //      // 返回网格单元
-   //      return meshLogic.find(meshUnit.ouid());
-   //   }
-   //
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
+   // @param mesh 网格数据
+   // @return 网格信息
+   //============================================================
+   @Override
+   public FGcResModelMeshInfo importResource(ILogicContext logicContext,
+                                             FGcSessionInfo session,
+                                             FGcResModelInfo modelInfo,
+                                             FResModelMesh mesh){
+      // 获得参数
+      long userId = session.userId();
+      long modelId = modelInfo.ouid();
+      String code = mesh.code();
+      //............................................................
+      // 查找网格信息
+      FGcResModelMeshInfo meshInfo = findByUserModelCode(logicContext, userId, modelId, code);
+      if(meshInfo == null){
+         // 新建网格信息
+         insertResource(logicContext, session, modelInfo, mesh);
+      }else{
+         // 更新网格信息
+         updateResource(logicContext, session, modelInfo, meshInfo, mesh);
+      }
+      //............................................................
+      // 返回网格单元
+      return meshInfo;
+   }
+
    //   //============================================================
    //   // <T>生成资源网格。</T>
    //   //

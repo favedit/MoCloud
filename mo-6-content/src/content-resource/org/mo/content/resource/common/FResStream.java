@@ -1,6 +1,7 @@
 package org.mo.content.resource.common;
 
 import com.cyou.gccloud.define.enums.common.EGcData;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
@@ -12,6 +13,9 @@ import org.mo.com.lang.FFatalError;
 public class FResStream
       extends FResObject
 {
+   // 索引
+   protected int _index;
+
    // 元素类型
    protected int _elementDataCd;
 
@@ -41,6 +45,24 @@ public class FResStream
    @Override
    public String fullCode(){
       return _code;
+   }
+
+   //============================================================
+   // <T>获得索引。</T>
+   //
+   // @return 索引
+   //============================================================
+   public int index(){
+      return _index;
+   }
+
+   //============================================================
+   // <T>设置索引。</T>
+   //
+   // @return 索引
+   //============================================================
+   public void setIndex(int index){
+      _index = index;
    }
 
    //============================================================
@@ -468,6 +490,22 @@ public class FResStream
       int size = _dataStride * _dataCount;
       _data = new byte[size];
       input.read(_data, 0, size);
+   }
+
+   //============================================================
+   // <T>将配置信息存入数据单元中。</T>
+   //
+   // @param unit 数据单元
+   //============================================================
+   public void saveUnit(FGcResModelMeshStreamInfo unit){
+      unit.setFullCode(fullCode());
+      unit.setCode(_code);
+      unit.setSortIndex(_index);
+      unit.setElementDataCd(_elementDataCd);
+      unit.setElementCount(_elementCount);
+      unit.setDataStride(_dataStride);
+      unit.setDataCount(_dataCount);
+      unit.setDataLength(dataLength());
    }
 
    //============================================================

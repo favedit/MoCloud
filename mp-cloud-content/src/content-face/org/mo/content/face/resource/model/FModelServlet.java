@@ -1,15 +1,12 @@
 package org.mo.content.face.resource.model;
 
-import org.mo.content.core.resource.model.ICntModelMeshConsole;
-
-import org.mo.content.engine.core.model.IResModelMeshConsole;
-import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.logic.resource.FGcResourceCatalogInfo;
 import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
 import org.mo.cloud.logic.resource.IGcResourceConsole;
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
+import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.RFile;
@@ -21,6 +18,8 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
+import org.mo.content.engine.core.model.IResModelMeshConsole;
 import org.mo.content.mime.obj.FObjFile;
 import org.mo.content.mime.phy.FPlyFile;
 import org.mo.content.mime.stl.FStlFile;
@@ -189,7 +188,7 @@ public class FModelServlet
             modelInfo.setLabel(label);
             _modelConsole.doInsert(logicContext, modelInfo);
             // 导入模型
-            _modelConsole.updateResourcePly(logicContext, modelInfo, plyFile);
+            _modelConsole.updateResourcePly(logicContext, session, modelInfo, plyFile);
          }
          // 加载OBJ模型文件 
          else if("obj".equals(extension)){
@@ -204,7 +203,7 @@ public class FModelServlet
             modelInfo.setLabel(label);
             _modelConsole.doInsert(logicContext, modelInfo);
             // 导入模型
-            _modelConsole.updateResourceObj(logicContext, modelInfo, objFile);
+            _modelConsole.updateResourceObj(logicContext, session, modelInfo, objFile);
          }
          // 加载STL模型文件 
          else if("stl".equals(extension)){
@@ -219,7 +218,7 @@ public class FModelServlet
             modelInfo.setLabel(label);
             _modelConsole.doInsert(logicContext, modelInfo);
             // 导入模型
-            _modelConsole.updateResourceStl(logicContext, modelInfo, stlFile);
+            _modelConsole.updateResourceStl(logicContext, session, modelInfo, stlFile);
          }else{
             throw new FFatalError("Unknown file format.");
          }

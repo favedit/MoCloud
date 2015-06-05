@@ -1,7 +1,9 @@
 package org.mo.content.engine.core.model;
 
+import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.content.resource.model.FResModelMesh;
 import org.mo.data.logic.ILogicContext;
 
@@ -73,15 +75,48 @@ public interface IResModelMeshConsole
    //   //============================================================
    //   FDataResource3dMeshUnit insert(ILogicContext logicContext,
    //                                  FRs3ModelMesh mesh);
+
+   //============================================================
+   // <T>新建资源处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
+   // @param mesh 网格数据
+   // @return 网格信息
+   //============================================================
+   FGcResModelMeshInfo insertResource(ILogicContext logicContext,
+                                      FGcSessionInfo session,
+                                      FGcResModelInfo modelInfo,
+                                      FResModelMesh mesh);
+
    //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
    // @param meshInfo 网格信息
    // @param mesh 网格数据
    // @return 网格信息
    //============================================================
    FGcResModelMeshInfo updateResource(ILogicContext logicContext,
+                                      FGcSessionInfo session,
+                                      FGcResModelInfo modelInfo,
                                       FGcResModelMeshInfo meshInfo,
+                                      FResModelMesh mesh);
+
+   //============================================================
+   // <T>导入资源处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
+   // @param mesh 网格数据
+   // @return 网格信息
+   //============================================================
+   FGcResModelMeshInfo importResource(ILogicContext logicContext,
+                                      FGcSessionInfo session,
+                                      FGcResModelInfo modelInfo,
                                       FResModelMesh mesh);
 }

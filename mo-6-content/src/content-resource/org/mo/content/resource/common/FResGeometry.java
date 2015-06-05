@@ -16,6 +16,9 @@ import org.mo.content.geom.mesh.SGeomVertex;
 public class FResGeometry
       extends FResRenderable
 {
+   // 索引
+   protected int _index;
+
    // 轮廓
    protected SFloatOutline3 _outline = new SFloatOutline3();
 
@@ -26,6 +29,24 @@ public class FResGeometry
    // <T>构造资源模型网格。</T>
    //============================================================
    public FResGeometry(){
+   }
+
+   //============================================================
+   // <T>获得索引。</T>
+   //
+   // @return 索引
+   //============================================================
+   public int index(){
+      return _index;
+   }
+
+   //============================================================
+   // <T>设置索引。</T>
+   //
+   // @return 索引
+   //============================================================
+   public void setIndex(int index){
+      _index = index;
    }
 
    //============================================================

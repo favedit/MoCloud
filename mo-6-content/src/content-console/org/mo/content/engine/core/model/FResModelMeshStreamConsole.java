@@ -2,8 +2,11 @@ package org.mo.content.engine.core.model;
 
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.logic.resource.model.FGcResModelInfo;
+import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamConsole;
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshStreamInfo;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.content.resource.common.FResStream;
 import org.mo.data.logic.ILogicContext;
 
@@ -54,32 +57,105 @@ public class FResModelMeshStreamConsole
    }
 
    //============================================================
+   // <T>新建资源处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
+   // @param meshInfo 网格信息
+   // @param stream 数据流
+   // @return 数据流信息
+   //============================================================
+   @Override
+   public FGcResModelMeshStreamInfo insertResource(ILogicContext logicContext,
+                                                   FGcSessionInfo session,
+                                                   FGcResModelInfo modelInfo,
+                                                   FGcResModelMeshInfo meshInfo,
+                                                   FResStream stream){
+      // 获得信息
+      long userId = session.ouid();
+      long projectId = session.projectId();
+      long modelId = modelInfo.ouid();
+      long meshId = meshInfo.ouid();
+      //............................................................
+      // 新建信息
+      FGcResModelMeshStreamInfo streamInfo = doPrepare(logicContext);
+      streamInfo.setUserId(userId);
+      streamInfo.setProjectId(projectId);
+      streamInfo.setModelId(modelId);
+      streamInfo.setMeshId(meshId);
+      stream.saveUnit(streamInfo);
+      doInsert(logicContext, streamInfo);
+      //............................................................
+      // 存储数据
+      String guid = streamInfo.guid();
+      SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelMeshStream, guid);
+      resource.setData(stream.data());
+      _storageConsole.store(resource);
+      //............................................................
+      // 返回内容
+      return streamInfo;
+   }
+
+   //============================================================
    // <T>更新资源处理。</T>
    //
    // @param logicContext 逻辑环境
+   // @param session 会话信息
+   // @param modelInfo 模型信息
+   // @param meshInfo 网格信息
    // @param streamInfo 数据流信息
    // @param stream 数据流
    // @return 数据流信息
    //============================================================
    @Override
    public FGcResModelMeshStreamInfo updateResource(ILogicContext logicContext,
+                                                   FGcSessionInfo session,
+                                                   FGcResModelInfo modelInfo,
+                                                   FGcResModelMeshInfo meshInfo,
                                                    FGcResModelMeshStreamInfo streamInfo,
                                                    FResStream stream){
-      // 获得信息
-      String guid = streamInfo.guid();
-      // 设置数据
-      streamInfo.setFullCode(stream.fullCode());
-      streamInfo.setCode(stream.code());
-      streamInfo.setElementDataCd(stream.elementDataCd());
-      streamInfo.setElementCount(stream.elementCount());
-      streamInfo.setDataStride(stream.dataStride());
-      streamInfo.setDataCount(stream.dataCount());
-      streamInfo.setDataLength(stream.dataLength());
+      // 设置信息
+      stream.saveUnit(streamInfo);
       doUpdate(logicContext, streamInfo);
+      //............................................................
       // 存储数据
+      String guid = streamInfo.guid();
       SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelMeshStream, guid);
       resource.setData(stream.data());
       _storageConsole.store(resource);
+      //............................................................
+      // 返回内容
+      return streamInfo;
+   }
+
+   //============================================================
+   // <T>导入资源处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param modelInfo 模型信息
+   // @param meshInfo 网格信息
+   // @param stream 数据流
+   // @return 数据流信息
+   //============================================================
+   @Override
+   public FGcResModelMeshStreamInfo importResource(ILogicContext logicContext,
+                                                   FGcSessionInfo session,
+                                                   FGcResModelInfo modelInfo,
+                                                   FGcResModelMeshInfo meshInfo,
+                                                   FResStream stream){
+      // 获得信息
+      long userId = session.userId();
+      long modelId = modelInfo.ouid();
+      long meshId = meshInfo.ouid();
+      String code = stream.code();
+      // 设置数据
+      FGcResModelMeshStreamInfo streamInfo = findByCode(logicContext, userId, modelId, meshId, code);
+      if(streamInfo == null){
+         insertResource(logicContext, session, modelInfo, meshInfo, stream);
+      }else{
+         updateResource(logicContext, session, modelInfo, meshInfo, streamInfo, stream);
+      }
       // 返回内容
       return streamInfo;
    }

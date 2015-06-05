@@ -85,6 +85,7 @@ public class FResModelMesh
       unit.setFullCode(fullCode());
       unit.setCode(_code);
       unit.setLabel(_label);
+      unit.setSortIndex(_index);
       unit.setOutlineMin(_outline.min.toString());
       unit.setOutlineMax(_outline.max.toString());
    }
@@ -104,6 +105,7 @@ public class FResModelMesh
       for(int n = 0; n < count; n++){
          FResModelStream stream = new FResModelStream();
          stream.setMesh(this);
+         stream.setIndex(n);
          stream.importData(input);
          pushStream(stream);
       }

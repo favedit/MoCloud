@@ -1,7 +1,5 @@
 package org.mo.content.service.resource.model;
 
-import org.mo.content.resource.model.FResModel;
-
 import org.mo.cloud.logic.resource.model.FGcResModelInfo;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
@@ -10,6 +8,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.resource.model.FResModel;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -208,7 +207,7 @@ public class FModelService
       FResModel model = _modelConsole.makeModel(logicContext, modelInfo);
       model.mergeConfig(xmodel);
       // 更新场景
-      _modelConsole.updateModel(logicContext, model);
+      _modelConsole.updateResource(logicContext, session, modelInfo, model);
       return EResult.Success;
    }
 
