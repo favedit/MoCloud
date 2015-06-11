@@ -153,6 +153,10 @@ public abstract class XBasePicture
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
+   // 来源的定义
+   @AContentField
+   public final static FContentField SOURCE = new FContentField("source", "source", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -306,6 +310,10 @@ public abstract class XBasePicture
    // 编辑尺寸
    @AName("edit_size")
    protected String _editSize;
+
+   // 来源
+   @AName("source")
+   protected String _source;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -917,6 +925,24 @@ public abstract class XBasePicture
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
+   }
+
+   //============================================================
+   // <T>获得来源的内容。</T>
+   //
+   // @return 来源
+   //============================================================
+   public String getSource(){
+      return _source;
+   }
+
+   //============================================================
+   // <T>设置来源的内容。</T>
+   //
+   // @param value 来源
+   //============================================================
+   public void setSource(String value){
+      _source = value;
    }
 
 }
