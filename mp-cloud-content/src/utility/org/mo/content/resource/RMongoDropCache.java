@@ -14,6 +14,8 @@ public class RMongoDropCache
    public static void process() throws Exception{
       IGcStorageConsole console = RAop.find(IGcStorageConsole.class);
       // 删除缓冲
+      console.drop(EGcStorageCatalog.CacheBitmapPreview);
+      console.drop(EGcStorageCatalog.CacheMaterialPreview);
       console.drop(EGcStorageCatalog.CacheResourceMaterialBitmapPack);
       console.drop(EGcStorageCatalog.CacheResourceMesh);
       console.drop(EGcStorageCatalog.CacheResourceModel);

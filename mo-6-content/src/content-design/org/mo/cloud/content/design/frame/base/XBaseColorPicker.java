@@ -69,6 +69,14 @@ public abstract class XBaseColorPicker
    @AContentField
    public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
 
+   // 背景颜色的定义
+   @AContentField
+   public final static FContentField STYLE_BACKCOLOR = new FContentField("styleBackcolor", "style_backcolor", EContentData.String, "", "", "", "YYNY");
+
+   // 前景颜色的定义
+   @AContentField
+   public final static FContentField STYLE_FORECOLOR = new FContentField("styleForecolor", "style_forecolor", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -138,6 +146,14 @@ public abstract class XBaseColorPicker
    // 提示信息
    @AName("hint")
    protected String _hint;
+
+   // 背景颜色
+   @AName("style_backcolor")
+   protected String _styleBackcolor;
+
+   // 前景颜色
+   @AName("style_forecolor")
+   protected String _styleForecolor;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -371,6 +387,42 @@ public abstract class XBaseColorPicker
    //============================================================
    public void setHint(String value){
       _hint = value;
+   }
+
+   //============================================================
+   // <T>获得背景颜色的内容。</T>
+   //
+   // @return 背景颜色
+   //============================================================
+   public String getStyleBackcolor(){
+      return _styleBackcolor;
+   }
+
+   //============================================================
+   // <T>设置背景颜色的内容。</T>
+   //
+   // @param value 背景颜色
+   //============================================================
+   public void setStyleBackcolor(String value){
+      _styleBackcolor = value;
+   }
+
+   //============================================================
+   // <T>获得前景颜色的内容。</T>
+   //
+   // @return 前景颜色
+   //============================================================
+   public String getStyleForecolor(){
+      return _styleForecolor;
+   }
+
+   //============================================================
+   // <T>设置前景颜色的内容。</T>
+   //
+   // @param value 前景颜色
+   //============================================================
+   public void setStyleForecolor(String value){
+      _styleForecolor = value;
    }
 
 }

@@ -318,7 +318,7 @@ public class FBitmapServlet
       // 获得位图信息
       FGcResBitmapInfo bitmapInfo = _bitmapConsole.getByGuid(logicContext, guid);
       if(bitmapInfo == null){
-         throw new FFatalError("Bitmap is notformat.");
+         throw new FFatalError("Bitmap is not format.");
       }
       // 检查用户有效
       long userId = session.userId();
@@ -337,7 +337,7 @@ public class FBitmapServlet
       }
       //............................................................
       // 发送数据
-      _logger.debug(this, "process", "Send model data. (length={1})", dataLength);
+      _logger.debug(this, "process", "Upload bitmap data success. (guid={1}, length={2}, file_name={3})", guid, dataLength, fileName);
       response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=" + CacheTimeout);

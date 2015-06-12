@@ -45,22 +45,19 @@ public class FCntBitmapConsole
       }
       //............................................................
       // 计算图片尺寸
-      if(!bitmapInfo.testSizeValid()){
-         // 加载图片
-         int sizeWidth = 0;
-         int sizeHeight = 0;
-         try(FImage image = new FImage()){
-            image.loadData(stream.memory(), 0, stream.length());
-            sizeWidth = image.width();
-            sizeHeight = image.height();
-         }catch(Exception e){
-            throw new FFatalError("Calculate image size failure.");
-         }
-         // 存储信息
-         bitmapInfo.setSizeWidth(sizeWidth);
-         bitmapInfo.setSizeHeight(sizeHeight);
-         doUpdate(logicContext, bitmapInfo);
+      int sizeWidth = 0;
+      int sizeHeight = 0;
+      try(FImage image = new FImage()){
+         image.loadData(stream.memory(), 0, stream.length());
+         sizeWidth = image.width();
+         sizeHeight = image.height();
+      }catch(Exception e){
+         throw new FFatalError("Calculate image size failure.");
       }
+      // 存储信息
+      bitmapInfo.setSizeWidth(sizeWidth);
+      bitmapInfo.setSizeHeight(sizeHeight);
+      doUpdate(logicContext, bitmapInfo);
       //............................................................
       // 存储数据
       String guid = bitmapInfo.guid();

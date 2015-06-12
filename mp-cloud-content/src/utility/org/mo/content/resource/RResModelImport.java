@@ -19,7 +19,7 @@ public class RResModelImport
    //============================================================
    public static void importProcess() throws Exception{
       //String path = RRs3Configuration.RootPath + "/MoResource/Export/model/";
-      String path = RRs3Configuration.RootPath + "/MoScript/source/assets/model/";
+      String path = RRs3Configuration.RootPath + "/MoExport/model/";
       // 设置数据
       FStrings filePaths = new FStrings();
       for(String fileName : RFile.listFiles(path)){
