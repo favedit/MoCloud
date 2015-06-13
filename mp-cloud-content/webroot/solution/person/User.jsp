@@ -9,10 +9,10 @@
 <LINK rel="stylesheet" href='/script/acs/control.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='/script/acs/design.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='/script/acs/lang_cn.css' type="text/css" media="all"/>
-<SCRIPT language='javascript' src='/script/ajs/mo-core.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/me.js'></SCRIPT>
 <SCRIPT>
 function checkInfo(){
-   var label = RString.trim(document.getElementById("label").value);
+   var label = MO.RString.trim(document.getElementById("label").value);
 	if(label == ''){
 		alert("标‘*’是必输项！");
 		return false;
@@ -33,14 +33,16 @@ function _load(){
       <TD>
          <TABLE width='100%' cellspacing='0' cellpadding='0'>
             <TR style='color:#FFFFFF'>
-               <TD width='300'><IMG src='/script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:3px;'></TD>
+               <TD width='400'><IMG src='/script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:3px;'></TD>
                <TD align='center' class='Workspace_Title'>我 的 信 息</TD>
-               <TD width='300' align='right' style='padding-right:8px;'>
+               <TD width='400' align='right' style='padding-right:8px;'>
                   <A href='/solution/person/User.wa' style='color:#FFADA0'>我的信息 (<jh:write source='&user.label'/>)</A>
                   |
                   <A href='/solution/person/Space.wa' style='color:#FFFFFF'>我的空间</A>
                   |
                   <A href='/solution/share/Space.wa' style='color:#FFFFFF'>共享空间</A>
+                  |
+                  <A href='/system/design/Space.wa' style='color:#FFFFFF'>系统设计</A>
                   |
                   <A href='/Index.wa' style='color:#FFFFFF'>返回首页</A>
                </TD>

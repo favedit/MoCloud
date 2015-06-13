@@ -17,17 +17,17 @@
 function _load(){
    with(MO){
       // 设置环境
-      MO.Runtime.setProcessCd(EProcess.Debug);
-      RApplication.initialize();
-      RBrowser.setContentPath('/script');
+      MO.Runtime.setProcessCd(MO.EProcess.Debug);
+      MO.RApplication.initialize();
+      MO.RBrowser.setContentPath('/script');
       // 加载工作区
-      var workspace = RApplication.findWorkspace(FDsPrivateWorkspace);
+      var workspace = MO.RApplication.findWorkspace(MO.FDsPrivateWorkspace);
       workspace.buildDefine(id_workspace);
       workspace.setPanel(id_workspace);
       workspace.psResize();
       workspace.load();
       // 激活工作区
-      RConsole.find(FUiWorkspaceConsole).active(workspace);
+      MO.RConsole.find(MO.FUiWorkspaceConsole).active(workspace);
    }
 }
 </SCRIPT>
@@ -43,11 +43,11 @@ function _load(){
                <TD width='400' align='right' style='padding-right:8px;'>
                   <A href='/solution/person/User.wa' style='color:#FFFFFF'>我的信息 (<jh:write source='&user.label'/>)</A>
                   |
-                  <A href='/solution/person/Space.wa' style='color:#FFADA0'>我的空间</A>
+                  <A href='/solution/person/Space.wa' style='color:#FFFFFF'>我的空间</A>
                   |
                   <A href='/solution/share/Space.wa' style='color:#FFFFFF'>共享空间</A>
                   |
-                  <A href='/system/design/Space.wa' style='color:#FFFFFF'>系统设计</A>
+                  <A href='/system/design/Space.wa' style='color:#FFADA0'>系统设计</A>
                   |
                   <A href='/Index.wa' style='color:#FFFFFF'>返回首页</A>
                </TD>

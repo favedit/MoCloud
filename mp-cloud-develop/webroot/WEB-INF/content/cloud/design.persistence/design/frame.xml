@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150611171500">
+<Content name="design.frame" update_date="20150613162032">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -17,10 +17,14 @@
       <Attribute is_valid="Y" type="String" name="size" label="尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="padding" label="内空白" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="margin" label="外空白" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="border_inner" label="内边框" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="border_outer" label="外边框" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="fore_color" label="前景颜色" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="back_color" label="背景颜色" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="back_resource" label="背景资源" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="back_grid" label="背景分割" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="linker" label="关联属性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="hint" label="提示信息" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="style_backcolor" label="背景颜色" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="style_forecolor" label="前景颜色" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="IContainer" label="容器接口" class_name="org.mo.cloud.content.design.frame.common.XContainer" inherits="IControl" note="">
       <Attribute is_valid="Y" type="String" name="frame_source" label="页面来源" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />

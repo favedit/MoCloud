@@ -15,17 +15,17 @@
 <SCRIPT>
 function _load(){
    // 设置环境
-   RRuntime.setProcessCd(EProcess.Debug);
-   RApplication.initialize();
-   RBrowser.setContentPath('/script');
+   MO.Runtime.setProcessCd(MO.EProcess.Debug);
+   MO.RApplication.initialize();
+   MO.RBrowser.setContentPath('/script');
    // 加载工作区
-   var workspace = RApplication.findWorkspace(FDsShareWorkspace);
+   var workspace = MO.RApplication.findWorkspace(MO.FDsShareWorkspace);
    workspace.buildDefine(id_workspace);
    workspace.setPanel(id_workspace);
    workspace.psResize();
    workspace.load();
    // 激活工作区
-   RConsole.find(FUiWorkspaceConsole).active(workspace);
+   MO.RConsole.find(MO.FUiWorkspaceConsole).active(workspace);
 }
 </SCRIPT>
 </HEAD>
@@ -35,14 +35,16 @@ function _load(){
       <TD>
          <TABLE width='100%' cellspacing='0' cellpadding='0'>
             <TR style='color:#FFFFFF'>
-               <TD width='300'><IMG src='/script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:3px;'></TD>
+               <TD width='400'><IMG src='/script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:3px;'></TD>
                <TD align='center' class='Workspace_Title'>共 享 空 间</TD>
-               <TD width='300' align='right' style='padding-right:8px;'>
+               <TD width='400' align='right' style='padding-right:8px;'>
                   <A href='/solution/person/User.wa' style='color:#FFFFFF'>我的信息 (<jh:write source='&user.label'/>)</A>
                   |
                   <A href='/solution/person/Space.wa' style='color:#FFFFFF'>我的空间</A>
                   |
                   <A href='/solution/share/Space.wa' style='color:#FFADA0'>共享空间</A>
+                  |
+                  <A href='/system/design/Space.wa' style='color:#FFFFFF'>系统设计</A>
                   |
                   <A href='/Index.wa' style='color:#FFFFFF'>返回首页</A>
                </TD>

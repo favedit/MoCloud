@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
    <Bar name="eai.country.LogoBar" label="标志栏" size='400,100' style_backcolor='#FF0099'>
-      <Picture name="optionDouble1" label="双面效果" location='10,10' size='80,80' style_backcolor='#00FF99' source='url:/script/ars/picture/grid.jpg'/>
-      <Picture name="optionDouble2" label="双面效果" location='100,20' size='80,60' style_backcolor='#0099FF' source='url:/script/ars/picture/grid.jpg'/>
-      <Picture name="optionDouble3" label="双面效果" location='200,30' size='60,40' style_backcolor='#0099FF' source='url:/script/ars/picture/grid.jpg'/>
+      <Picture name="optionDouble1" label="双面效果" location='10,10' size='80,80' back_color='#00FF99' back_resource='url:/script/ars/picture/grid.png' back_grid='6,6,6,6'/>
+      <Picture name="optionDouble2" label="双面效果" location='100,20' size='80,60' back_color='#0099FF' back_resource='url:/script/ars/picture/grid.png' back_grid='6,6,6,6'/>
+      <Picture name="optionDouble3" label="双面效果" location='200,30' size='60,40' back_color='#0099FF' back_resource='url:/script/ars/picture/grid.png' back_grid='6,6,6,6'/>
    </Bar>
 </Content>

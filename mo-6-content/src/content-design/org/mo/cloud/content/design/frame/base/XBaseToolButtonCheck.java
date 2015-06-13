@@ -61,6 +61,30 @@ public abstract class XBaseToolButtonCheck
    @AContentField
    public final static FContentField MARGIN = new FContentField("margin", "margin", EContentData.String, "", "", "", "YYNY");
 
+   // 内边框的定义
+   @AContentField
+   public final static FContentField BORDER_INNER = new FContentField("borderInner", "border_inner", EContentData.String, "", "", "", "YYNY");
+
+   // 外边框的定义
+   @AContentField
+   public final static FContentField BORDER_OUTER = new FContentField("borderOuter", "border_outer", EContentData.String, "", "", "", "YYNY");
+
+   // 前景颜色的定义
+   @AContentField
+   public final static FContentField FORE_COLOR = new FContentField("foreColor", "fore_color", EContentData.String, "", "", "", "YYNY");
+
+   // 背景颜色的定义
+   @AContentField
+   public final static FContentField BACK_COLOR = new FContentField("backColor", "back_color", EContentData.String, "", "", "", "YYNY");
+
+   // 背景资源的定义
+   @AContentField
+   public final static FContentField BACK_RESOURCE = new FContentField("backResource", "back_resource", EContentData.String, "", "", "", "YYNY");
+
+   // 背景分割的定义
+   @AContentField
+   public final static FContentField BACK_GRID = new FContentField("backGrid", "back_grid", EContentData.String, "", "", "", "YYNY");
+
    // 关联属性的定义
    @AContentField
    public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
@@ -68,14 +92,6 @@ public abstract class XBaseToolButtonCheck
    // 提示信息的定义
    @AContentField
    public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
-
-   // 背景颜色的定义
-   @AContentField
-   public final static FContentField STYLE_BACKCOLOR = new FContentField("styleBackcolor", "style_backcolor", EContentData.String, "", "", "", "YYNY");
-
-   // 前景颜色的定义
-   @AContentField
-   public final static FContentField STYLE_FORECOLOR = new FContentField("styleForecolor", "style_forecolor", EContentData.String, "", "", "", "YYNY");
 
    // 图标的定义
    @AContentField
@@ -167,6 +183,30 @@ public abstract class XBaseToolButtonCheck
    @AName("margin")
    protected String _margin;
 
+   // 内边框
+   @AName("border_inner")
+   protected String _borderInner;
+
+   // 外边框
+   @AName("border_outer")
+   protected String _borderOuter;
+
+   // 前景颜色
+   @AName("fore_color")
+   protected String _foreColor;
+
+   // 背景颜色
+   @AName("back_color")
+   protected String _backColor;
+
+   // 背景资源
+   @AName("back_resource")
+   protected String _backResource;
+
+   // 背景分割
+   @AName("back_grid")
+   protected String _backGrid;
+
    // 关联属性
    @AName("linker")
    protected String _linker;
@@ -174,14 +214,6 @@ public abstract class XBaseToolButtonCheck
    // 提示信息
    @AName("hint")
    protected String _hint;
-
-   // 背景颜色
-   @AName("style_backcolor")
-   protected String _styleBackcolor;
-
-   // 前景颜色
-   @AName("style_forecolor")
-   protected String _styleForecolor;
 
    // 图标
    @AName("icon")
@@ -410,6 +442,114 @@ public abstract class XBaseToolButtonCheck
    }
 
    //============================================================
+   // <T>获得内边框的内容。</T>
+   //
+   // @return 内边框
+   //============================================================
+   public String getBorderInner(){
+      return _borderInner;
+   }
+
+   //============================================================
+   // <T>设置内边框的内容。</T>
+   //
+   // @param value 内边框
+   //============================================================
+   public void setBorderInner(String value){
+      _borderInner = value;
+   }
+
+   //============================================================
+   // <T>获得外边框的内容。</T>
+   //
+   // @return 外边框
+   //============================================================
+   public String getBorderOuter(){
+      return _borderOuter;
+   }
+
+   //============================================================
+   // <T>设置外边框的内容。</T>
+   //
+   // @param value 外边框
+   //============================================================
+   public void setBorderOuter(String value){
+      _borderOuter = value;
+   }
+
+   //============================================================
+   // <T>获得前景颜色的内容。</T>
+   //
+   // @return 前景颜色
+   //============================================================
+   public String getForeColor(){
+      return _foreColor;
+   }
+
+   //============================================================
+   // <T>设置前景颜色的内容。</T>
+   //
+   // @param value 前景颜色
+   //============================================================
+   public void setForeColor(String value){
+      _foreColor = value;
+   }
+
+   //============================================================
+   // <T>获得背景颜色的内容。</T>
+   //
+   // @return 背景颜色
+   //============================================================
+   public String getBackColor(){
+      return _backColor;
+   }
+
+   //============================================================
+   // <T>设置背景颜色的内容。</T>
+   //
+   // @param value 背景颜色
+   //============================================================
+   public void setBackColor(String value){
+      _backColor = value;
+   }
+
+   //============================================================
+   // <T>获得背景资源的内容。</T>
+   //
+   // @return 背景资源
+   //============================================================
+   public String getBackResource(){
+      return _backResource;
+   }
+
+   //============================================================
+   // <T>设置背景资源的内容。</T>
+   //
+   // @param value 背景资源
+   //============================================================
+   public void setBackResource(String value){
+      _backResource = value;
+   }
+
+   //============================================================
+   // <T>获得背景分割的内容。</T>
+   //
+   // @return 背景分割
+   //============================================================
+   public String getBackGrid(){
+      return _backGrid;
+   }
+
+   //============================================================
+   // <T>设置背景分割的内容。</T>
+   //
+   // @param value 背景分割
+   //============================================================
+   public void setBackGrid(String value){
+      _backGrid = value;
+   }
+
+   //============================================================
    // <T>获得关联属性的内容。</T>
    //
    // @return 关联属性
@@ -443,42 +583,6 @@ public abstract class XBaseToolButtonCheck
    //============================================================
    public void setHint(String value){
       _hint = value;
-   }
-
-   //============================================================
-   // <T>获得背景颜色的内容。</T>
-   //
-   // @return 背景颜色
-   //============================================================
-   public String getStyleBackcolor(){
-      return _styleBackcolor;
-   }
-
-   //============================================================
-   // <T>设置背景颜色的内容。</T>
-   //
-   // @param value 背景颜色
-   //============================================================
-   public void setStyleBackcolor(String value){
-      _styleBackcolor = value;
-   }
-
-   //============================================================
-   // <T>获得前景颜色的内容。</T>
-   //
-   // @return 前景颜色
-   //============================================================
-   public String getStyleForecolor(){
-      return _styleForecolor;
-   }
-
-   //============================================================
-   // <T>设置前景颜色的内容。</T>
-   //
-   // @param value 前景颜色
-   //============================================================
-   public void setStyleForecolor(String value){
-      _styleForecolor = value;
    }
 
    //============================================================
