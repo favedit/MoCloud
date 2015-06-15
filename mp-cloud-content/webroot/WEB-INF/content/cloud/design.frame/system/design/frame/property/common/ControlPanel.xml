@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="system.design.frame.property.common.ControlPanel" inherit_frames='system.design.frame.property.common.ComponentPanel' type='FDsSystemFrameBarProperty' label="停靠栏属性" is_valid="Y" note="">
+      <Panel name='controlPanel' icon='design.panel.icon' label='控件属性'>
+         <Number2 name="location" linker='_controlLocation' label="坐标" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Number2 name="size" linker='_controlSize' label="大小" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

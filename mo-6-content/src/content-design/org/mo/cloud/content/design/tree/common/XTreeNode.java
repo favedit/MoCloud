@@ -15,14 +15,14 @@ public class XTreeNode
    // @param xconfig 配置节点
    //============================================================
    public void saveConfig(FXmlNode xconfig){
-      xconfig.set(IS_VALID.linkName(), _isValid);
-      xconfig.set(TYPE_CODE.linkName(), _typeCode);
-      xconfig.set(GUID.linkName(), _guid);
-      xconfig.set(CODE.linkName(), _code);
-      xconfig.set(LABEL.linkName(), _label);
-      xconfig.set(HAS_CHILD.linkName(), _hasChild);
-      xconfig.set(NOTE.linkName(), _note);
-      xconfig.set(ATTRIBUTES.linkName(), _attributes);
+      xconfig.setNvl(IS_VALID.linkName(), _isValid);
+      xconfig.setNvl(TYPE_CODE.linkName(), _typeCode);
+      xconfig.setNvl(GUID.linkName(), _guid);
+      xconfig.setNvl(CODE.linkName(), _code);
+      xconfig.setNvl(LABEL.linkName(), _label);
+      xconfig.setNvl(HAS_CHILD.linkName(), _hasChild);
+      xconfig.setNvl(NOTE.linkName(), _note);
+      xconfig.setNvl(ATTRIBUTES.linkName(), _attributes);
    }
 
    //============================================================

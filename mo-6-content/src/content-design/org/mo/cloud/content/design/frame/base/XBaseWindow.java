@@ -101,6 +101,10 @@ public abstract class XBaseWindow
    @AContentField
    public final static FContentField SCROLL_CD = new FContentField("scrollCd", "scroll_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 继承页面集合的定义
+   @AContentField
+   public final static FContentField INHERIT_FRAMES = new FContentField("inheritFrames", "inherit_frames", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -202,6 +206,10 @@ public abstract class XBaseWindow
    // 滚动类型
    @AName("scroll_cd")
    protected String _scrollCd;
+
+   // 继承页面集合
+   @AName("inherit_frames")
+   protected String _inheritFrames;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -579,6 +587,24 @@ public abstract class XBaseWindow
    //============================================================
    public void setScrollCd(String value){
       _scrollCd = value;
+   }
+
+   //============================================================
+   // <T>获得继承页面集合的内容。</T>
+   //
+   // @return 继承页面集合
+   //============================================================
+   public String getInheritFrames(){
+      return _inheritFrames;
+   }
+
+   //============================================================
+   // <T>设置继承页面集合的内容。</T>
+   //
+   // @param value 继承页面集合
+   //============================================================
+   public void setInheritFrames(String value){
+      _inheritFrames = value;
    }
 
 }

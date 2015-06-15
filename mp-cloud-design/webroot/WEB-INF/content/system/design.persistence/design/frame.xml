@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150613162032">
+<Content name="design.frame" update_date="20150615143714">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -237,14 +237,16 @@
     <Component is_valid="Y" name="DataSelect" label="数据选择框" class_name="org.mo.cloud.content.design.frame.common.XDataSelect" base_name="org.mo.cloud.content.design.frame.base.XBaseDataSelect" inherits="Select,MDataField" note="" />
     <Component is_valid="Y" name="DataColorPicker" label="数据颜色选择框" class_name="org.mo.cloud.content.design.frame.common.XDataColorPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseDataColorPicker" inherits="ColorPicker,MDataField" note="" />
     <Component is_valid="Y" name="DataIconPicker" label="数据图标选取框" class_name="org.mo.cloud.content.design.frame.common.XDataIconPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseDataIconPicker" inherits="IconPicker,MDataField" note="" />
-    <Component is_valid="Y" name="Frame" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFrame" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="Frame" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFrame" inherits="IContainer" note="">
+      <Attribute is_valid="Y" type="String" name="inherit_frames" label="继承页面集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="FrameTemplate" label="模板页面" class_name="org.mo.cloud.content.design.frame.common.XFrameTemplate" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameTemplate" inherits="Frame" note="" />
     <Component is_valid="Y" name="FrameForm" label="表单页面" class_name="org.mo.cloud.content.design.frame.common.XFrameForm" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameForm" inherits="Frame" note="" />
     <Component is_valid="Y" name="FrameTable" label="表格页面" class_name="org.mo.cloud.content.design.frame.common.XFrameTable" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameTable" inherits="Frame" note="" />
     <Component is_valid="Y" name="FramePicker" label="拾取页面" class_name="org.mo.cloud.content.design.frame.common.XFramePicker" base_name="org.mo.cloud.content.design.frame.base.XBaseFramePicker" inherits="Frame" note="" />
     <Component is_valid="Y" name="FrameDialog" label="对话页面" class_name="org.mo.cloud.content.design.frame.common.XFrameDialog" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameDialog" inherits="Frame" note="" />
-    <Component is_valid="Y" name="Bar" label="停靠栏" class_name="org.mo.cloud.content.design.frame.common.XBar" base_name="org.mo.cloud.content.design.frame.base.XBaseBar" inherits="IContainer" note="" />
-    <Component is_valid="Y" name="Window" label="窗口" class_name="org.mo.cloud.content.design.frame.common.XWindow" base_name="org.mo.cloud.content.design.frame.base.XBaseWindow" inherits="IContainer" note="" />
+    <Component is_valid="Y" name="Bar" label="停靠栏" class_name="org.mo.cloud.content.design.frame.common.XBar" base_name="org.mo.cloud.content.design.frame.base.XBaseBar" inherits="Frame" note="" />
+    <Component is_valid="Y" name="Window" label="窗口" class_name="org.mo.cloud.content.design.frame.common.XWindow" base_name="org.mo.cloud.content.design.frame.base.XBaseWindow" inherits="Frame" note="" />
     <Component is_valid="Y" name="FramePage" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFramePage" base_name="org.mo.cloud.content.design.frame.base.XBaseFramePage" inherits="IContainer" note="" />
     <Component is_valid="Y" name="FrameSpliter" label="页面分割" class_name="org.mo.cloud.content.design.frame.common.XFrameSpliter" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameSpliter" inherits="IControl" note="" />
     <Component is_valid="Y" name="FrameSet" label="页面集合" class_name="org.mo.cloud.content.design.frame.common.XFrameSet" base_name="org.mo.cloud.content.design.frame.base.XBaseFrameSet" inherits="IContainer" note="">

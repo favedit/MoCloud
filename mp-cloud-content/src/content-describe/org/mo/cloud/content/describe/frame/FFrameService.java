@@ -5,6 +5,7 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
+import org.mo.cloud.content.design.tree.common.XTreeNode;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.REnum;
@@ -45,9 +46,29 @@ public class FFrameService
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
-   //========================================================
+   //============================================================
    public void buildFrame(FContentObject control,
                           EPersistenceMode modeCd){
+      // 处理当前节点
+      String inheritFrames = control.get("inherit_frames", null);
+      if(!RString.isEmpty(inheritFrames)){
+         String[] items = RString.split(inheritFrames, ",");
+         for(String item : items){
+            String frameName = RString.trim(item);
+            if(!RString.isEmpty(frameName)){
+               // 查找定义
+               FContentObject frame = findBuildFrame(frameName, modeCd);
+               if(frame == null){
+                  throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
+               }
+               // 嵌入节点
+               for(FContentObject node : frame.nodes()){
+                  control.push(node);
+               }
+            }
+         }
+      }
+      //..........................................................
       // 处理当前节点
       String frameSource = control.get("frame_source", null);
       if(!RString.isEmpty(frameSource)){
@@ -63,7 +84,7 @@ public class FFrameService
             frameName = items[1];
          }
          // 查找定义
-         FContentObject frame = _frameConsole.findDefine(_storageName, frameName, modeCd);
+         FContentObject frame = findBuildFrame(frameName, modeCd);
          if(frame == null){
             throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
          }
@@ -78,12 +99,55 @@ public class FFrameService
             throw new FFatalError("Frame include type is invalid. (frame_name={1}, include_cd={2})", frameName, includeCd);
          }
       }
+      //..........................................................
       // 处理所有子节点
       if(control.hasNode()){
          for(FContentObject xchild : control.nodes()){
             buildFrame(xchild, modeCd);
          }
       }
+   }
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   public FContentObject findBuildFrame(String frameName,
+                                        EPersistenceMode modeCd){
+      FContentObject content = _frameConsole.findDefine(_storageName, frameName, modeCd);
+      content.set("name", frameName);
+      buildFrame(content, modeCd);
+      return content;
+
+   }
+
+   //============================================================
+   // <T>从配置文件中加载树目录节点。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult catalog(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
+      XContentObject[] xframes = _frameConsole.list(_storageName);
+      FXmlNode xconfig = output.config();
+      for(XContentObject xframe : xframes){
+         XTreeNode xnode = new XTreeNode();
+         xnode.setIsValid(true);
+         xnode.setTypeCode(xframe.name());
+         xnode.setHasChild(xframe.hasChild());
+         xnode.setGuid(xframe.getString("guid"));
+         xnode.setLabel(xframe.getString("name"));
+         xnode.setNote(xframe.getString("label"));
+         xnode.saveConfig(xconfig.createNode("TreeNode"));
+      }
+      return EResult.Success;
    }
 
    //============================================================
@@ -97,13 +161,19 @@ public class FFrameService
    public EResult list(IWebContext context,
                        IWebInput input,
                        IWebOutput output){
-      XContentObject[] xwindows = _frameConsole.list(_storageName);
+      FXmlNode treeNode = input.config().findNode("TreeNode");
+      String code = treeNode.get("label");
+      FContentObject xframe = _frameConsole.findDefine(_storageName, code, EPersistenceMode.Config);
       FXmlNode xconfig = output.config();
-      for(XContentObject xwindow : xwindows){
-         FXmlNode xnode = xconfig.createNode("TreeNode");
-         xnode.set("type_code", xwindow.name());
-         xnode.set("label", xwindow.get("name"));
-         xnode.set("note", xwindow.get("label"));
+      for(FContentObject xcontrol : xframe.nodes()){
+         XTreeNode xnode = new XTreeNode();
+         xnode.setIsValid(true);
+         xnode.setTypeCode(xcontrol.name());
+         xnode.setHasChild(xcontrol.hasNode());
+         xnode.setGuid(xcontrol.objectId());
+         xnode.setLabel(xcontrol.get("name"));
+         xnode.setNote(xcontrol.get("label"));
+         xnode.saveConfig(xconfig.createNode("TreeNode"));
       }
       return EResult.Success;
    }
