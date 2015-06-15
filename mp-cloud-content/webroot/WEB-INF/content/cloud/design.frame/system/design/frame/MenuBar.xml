@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
    <MenuBar name="system.design.frame.MenuBar" type='FDsResourceMenuBar' label="菜单">
-      <MenuButton name='createFrame' linker='_controlCreateMaterial' icon='tools.create' label='创建页面'/>
-      <MenuButtonSplit/>
+      <MenuButton name='create' linker='_controlCreate' icon='tools.create' label='创建页面'/>
+      <MenuButton name='update' linker='_controlUpdate' icon='tools.save' label='保存页面'/>
       <MenuButton name='delete' linker='_controlDelete' icon='tools.delete' label='删除页面'/>
       <MenuButtonSplit/>
       <MenuButton name='preview' linker='_controlPreview' icon='tools.preview' label='预览页面'/>

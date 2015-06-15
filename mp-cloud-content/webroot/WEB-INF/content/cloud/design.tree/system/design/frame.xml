@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.design.frame" update_date="20141209154356">
+   <TreeView _uuid2="71202174-098f-48b0-ad14-024064f85750" name="content.design.frame" label="M#12cn18内容-设计-页面" is_valid="Y" note="M#" is_config="N" disp_checked="N" service="list@cloud.describe.frame">
+      <TreeNodeType name="workspace" code="Workspace" label="工作空间" is_valid="Y" note="" icon="system.design.frame.workspace"/>
+      <TreeNodeType name="frameSet" code="FrameSet" label="页面布局" is_valid="Y" note="" icon="system.design.frame.frameset"/>
+      <TreeNodeType name="frame" code="Frame" label="页面" is_valid="Y" note="" icon="system.design.frame.frame"/>
+      <TreeNodeType name="form" code="Form" label="表单" is_valid="Y" note="" icon="system.design.frame.form"/>
+      <TreeNodeType name="table" code="Table" label="表格" is_valid="Y" note="" icon="system.design.frame.table"/>
+      <TreeNodeType name="bar" code="Bar" label="停靠栏" is_valid="Y" note="" icon="system.design.frame.bar"/>
+      <TreeNodeType name="window" code="Window" label="窗口" is_valid="Y" note="" icon="system.design.frame.window"/>
+      <TreeNodeType name="toolBar" code="ToolBar" label="工具栏" is_valid="Y" note="" icon="system.design.frame.toolbar"/>
+      <TreeNodeType name="menuBar" code="MenuBar" label="菜单栏" is_valid="Y" note="" icon="system.design.frame.menubar"/>
+      <TreeNodeType name="tabBar" code="TabBar" label="分页栏" is_valid="Y" note="" icon="system.design.frame.tabbar"/>
+   </TreeView>
+</Content>

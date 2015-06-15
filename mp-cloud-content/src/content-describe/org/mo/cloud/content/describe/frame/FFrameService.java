@@ -100,10 +100,10 @@ public class FFrameService
       XContentObject[] xwindows = _frameConsole.list(_storageName);
       FXmlNode xconfig = output.config();
       for(XContentObject xwindow : xwindows){
-         FXmlNode xnode = xconfig.createNode("Window");
-         xnode.set("type", xwindow.name());
-         xnode.set("name", xwindow.get("name"));
-         xnode.set("label", xwindow.get("label"));
+         FXmlNode xnode = xconfig.createNode("TreeNode");
+         xnode.set("type_code", xwindow.name());
+         xnode.set("label", xwindow.get("name"));
+         xnode.set("note", xwindow.get("label"));
       }
       return EResult.Success;
    }
