@@ -39,7 +39,7 @@ function _load(){
          <TABLE width='100%' cellspacing='0' cellpadding='0'>
             <TR height='20px' style='color:#FFFFFF'>
                <TD width='400'><IMG src='/script/ars/picture/logo.png' style='width:140px;height:18px;padding-top:3px;'></TD>
-               <TD align='center' class='Workspace_Title'>我 的 空 间</TD>
+               <TD align='center' class='Workspace_Title'>系 统 设 计</TD>
                <TD width='400' align='right' style='padding-right:8px;'>
                   <A href='/solution/person/User.wa' style='color:#FFFFFF'>我的信息 (<jh:write source='&user.label'/>)</A>
                   |

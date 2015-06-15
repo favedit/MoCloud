@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.CanvasToolBar">
+<Content>
    <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
-      <ToolButton name='updateButton' linker='_controlUpdateButton' icon='design3d.tools.update' label='编辑' />
-      <ToolButtonSplit/>
-      <ToolButtonCheck name='rotationButton' linker='_controlRotationButton' icon='design3d.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
+      <ToolButton name='insertButton' linker='_controlInsertButton' icon='resource.tools.save' label='保存' />
    </ToolBar>
 </Content>
