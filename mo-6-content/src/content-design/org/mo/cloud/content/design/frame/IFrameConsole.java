@@ -53,4 +53,12 @@ public interface IFrameConsole
    FXmlNode buildConfig(String storgeName,
                         String frameName,
                         EPersistenceMode modeCd);
+
+   //============================================================
+   // <T>更新表单配置。</T>
+   //
+   // @param frame 页面
+   //============================================================
+   void update(String storgeName,
+               FContentObject frame);
 }

@@ -163,4 +163,18 @@ public class FFrameConsole
       content.saveConfig(xconfig);
       return xconfig;
    }
+
+   //============================================================
+   // <T>更新表单配置。</T>
+   //
+   // @param frame 页面
+   //============================================================
+   @Override
+   public void update(String storgeName,
+                      FContentObject frame){
+      String nodeName = frame.get("name");
+      FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
+      //node.loadConfig(xconfig);
+      node.store();
+   }
 }

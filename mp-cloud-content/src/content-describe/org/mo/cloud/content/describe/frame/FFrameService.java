@@ -251,6 +251,15 @@ public class FFrameService
    public EResult update(IWebContext context,
                          IWebInput input,
                          IWebOutput output){
+      FXmlNode xframe = input.config().findNode("Frame");
+      String name = xframe.get("name");
+      // 查找目录定义
+      FContentObject content = _frameConsole.findDefine(_storageName, name, EPersistenceMode.Config);
+      content.loadConfig(xframe);
+      //_frameConsole.
+      //content.set("name", name);
+      //buildFrame(content, EPersistenceMode.Config);
+      //xframe
       return EResult.Success;
    }
 
