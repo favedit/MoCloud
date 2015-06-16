@@ -41,7 +41,6 @@ public class FContentObject
    // <T>构造内容对象。</T>
    //============================================================
    public FContentObject(){
-      _objectId = RUuid.makeUniqueIdLower();
    }
 
    //============================================================
@@ -68,7 +67,22 @@ public class FContentObject
    // @param 对象编号
    //============================================================
    public String objectId(){
+      if(_objectId == null){
+         _objectId = RUuid.makeUuidUpper();
+      }
       return _objectId;
+   }
+
+   //============================================================
+   // <T>设置对象编号。</T>
+   //
+   // @param objectId 对象编号
+   //============================================================
+   public void setObjectId(String objectId){
+      if(RString.isEmpty(objectId)){
+         throw new FFatalError("Object id is empty.");
+      }
+      _objectId = objectId;
    }
 
    //============================================================
@@ -676,7 +690,10 @@ public class FContentObject
    public FXmlNode simpleNode(){
       FXmlNode xnode = new FXmlNode(_name);
       if(hasAttribute()){
-         xnode.attributes().assign(_attributes);
+         FAttributes attributes = xnode.attributes();
+         attributes.clear();
+         attributes.set("guid", _objectId);
+         attributes.assign(_attributes);
       }
       return xnode;
    }
@@ -702,7 +719,10 @@ public class FContentObject
       xconfig.setName(_name);
       // 设置属性集合
       if(hasAttribute()){
-         xconfig.attributes().assign(_attributes);
+         FAttributes attributes = xconfig.attributes();
+         attributes.clear();
+         attributes.set("guid", objectId());
+         attributes.append(_attributes);
       }
       // 设置节点集合
       if(deep && hasNode()){
@@ -724,6 +744,7 @@ public class FContentObject
       }
       // 设置属性
       setName(xconfig.name());
+      _objectId = xconfig.get("guid", null);
       // 设置属性集合
       if(xconfig.hasAttribute()){
          attributes().assign(xconfig.attributes());
@@ -756,8 +777,8 @@ public class FContentObject
       // 合并节点集合
       if(hasNode()){
          for(FContentObject node : _nodes){
-            String nodeName = node.name();
-            FXmlNode xnode = xconfig.findNode("name", nodeName);
+            String objectId = node.objectId();
+            FXmlNode xnode = xconfig.findNode("guid", objectId);
             if(xnode != null){
                node.mergeConfig(xnode);
             }

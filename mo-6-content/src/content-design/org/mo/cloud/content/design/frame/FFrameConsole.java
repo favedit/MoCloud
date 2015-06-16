@@ -180,5 +180,7 @@ public class FFrameConsole
       persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);
       // 保存处理
       node.store();
+      // 清空缓冲
+      _frames.clear();
    }
 }

@@ -183,7 +183,9 @@ public class FContentNode
       xdocument.loadFile(_fileName);
       FXmlNode xroot = xdocument.root();
       loadConfig(xroot);
-      _config.loadConfig(xroot.nodes().first());
+      // 加载配置信息
+      FXmlNode xcontent = xroot.nodes().first();
+      _config.loadConfig(xcontent);
       _statusOpen = true;
       return EResult.Success;
    }

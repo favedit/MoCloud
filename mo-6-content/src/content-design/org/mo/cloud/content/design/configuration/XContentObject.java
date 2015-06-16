@@ -13,6 +13,9 @@ public class XContentObject
    // 类对象
    protected FContentClass _contentClass;
 
+   // 唯一编码
+   private String _contentGuid;
+
    // 子节点集合
    protected XContentObjects _children;
 
@@ -41,6 +44,24 @@ public class XContentObject
    //============================================================
    public FContentClass contentClass(){
       return _contentClass;
+   }
+
+   //============================================================
+   // <T>获得内容唯一编码。</T>
+   //
+   // @return 内容唯一编码
+   //============================================================
+   public String contentGuid(){
+      return _contentGuid;
+   }
+
+   //============================================================
+   // <T>设置内容唯一编码。</T>
+   //
+   // @return 内容唯一编码
+   //============================================================
+   public void setContentGuid(String contentGuid){
+      _contentGuid = contentGuid;
    }
 
    //============================================================

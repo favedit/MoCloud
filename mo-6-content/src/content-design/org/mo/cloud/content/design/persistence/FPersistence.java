@@ -256,6 +256,7 @@ public class FPersistence
                                                        EPersistenceMode modeCd){
       String name = xconfig.name();
       T xinstance = createInstance(name);
+      xinstance.setContentGuid(xconfig.objectId());
       if(xconfig.hasAttribute()){
          setAttributes(xinstance, xconfig.attributes(), modeCd);
       }
@@ -288,8 +289,10 @@ public class FPersistence
          for(INamePair<FContentField> pair : clazz.fields()){
             FContentField field = pair.value();
             String name = field.name();
-            String value = xconfig.get(name);
-            xinstance.set(name, value);
+            String value = xconfig.get(name, null);
+            if(!RString.isEmpty(value)){
+               xinstance.set(name, value);
+            }
          }
       }
       // 合并节点
@@ -323,7 +326,9 @@ public class FPersistence
                                                                   EPersistenceMode modeCd){
       FContentObject content = new FContentObject();
       content.setName(instance.name());
-      setAttributes(content.attributes(), instance, modeCd);
+      content.setObjectId(instance.contentGuid());
+      FAttributes attributes = content.attributes();
+      setAttributes(attributes, instance, modeCd);
       if(instance.hasChild()){
          for(XContentObject xchildren : instance.children()){
             content.push(convertConfig(xchildren, modeCd));
