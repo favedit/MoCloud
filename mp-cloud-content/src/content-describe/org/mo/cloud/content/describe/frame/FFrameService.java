@@ -7,7 +7,9 @@ import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.cloud.content.design.tree.common.XTreeNode;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.REnum;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
@@ -137,14 +139,21 @@ public class FFrameService
                           IWebOutput output){
       XContentObject[] xframes = _frameConsole.list(_storageName);
       FXmlNode xconfig = output.config();
+      FAttributes packages = new FAttributes();
       for(XContentObject xframe : xframes){
+         String name = xframe.getString("name");
+         String packageName = RString.leftLast(name, ".");
+         packages.set(packageName, packageName);
+      }
+      for(IStringPair pair : packages){
+         String packageName = pair.name();
          XTreeNode xnode = new XTreeNode();
          xnode.setIsValid(true);
-         xnode.setTypeCode(xframe.name());
-         xnode.setHasChild(xframe.hasChild());
-         xnode.setGuid(xframe.getString("guid"));
-         xnode.setLabel(xframe.getString("name"));
-         xnode.setNote(xframe.getString("label"));
+         xnode.setTypeGroup(ETypeGroup.Package);
+         xnode.setTypeCode("Package");
+         xnode.setHasChild(true);
+         xnode.setLabel(packageName);
+         //xnode.setNote(xframe.getString("label"));
          xnode.saveConfig(xconfig.createNode("TreeNode"));
       }
       return EResult.Success;
@@ -162,18 +171,40 @@ public class FFrameService
                        IWebInput input,
                        IWebOutput output){
       FXmlNode treeNode = input.config().findNode("TreeNode");
-      String code = treeNode.get("label");
-      FContentObject xframe = _frameConsole.findDefine(_storageName, code, EPersistenceMode.Config);
       FXmlNode xconfig = output.config();
-      for(FContentObject xcontrol : xframe.nodes()){
-         XTreeNode xnode = new XTreeNode();
-         xnode.setIsValid(true);
-         xnode.setTypeCode(xcontrol.name());
-         xnode.setHasChild(xcontrol.hasNode());
-         xnode.setGuid(xcontrol.objectId());
-         xnode.setLabel(xcontrol.get("name"));
-         xnode.setNote(xcontrol.get("label"));
-         xnode.saveConfig(xconfig.createNode("TreeNode"));
+      String typeGroup = treeNode.get("type_group");
+      String code = treeNode.get("label");
+      if(ETypeGroup.Package.equals(typeGroup)){
+         // 显示包内表单集合
+         XContentObject[] xframes = _frameConsole.list(_storageName);
+         for(XContentObject xframe : xframes){
+            String name = xframe.getString("name");
+            String packageName = RString.leftLast(name, ".");
+            if(packageName.equals(code)){
+               XTreeNode xnode = new XTreeNode();
+               xnode.setIsValid(true);
+               xnode.setTypeGroup(ETypeGroup.Container);
+               xnode.setTypeCode(xframe.name());
+               xnode.setHasChild(xframe.hasChild());
+               xnode.setLabel(xframe.getString("name"));
+               xnode.setNote(xframe.getString("label"));
+               xnode.saveConfig(xconfig.createNode("TreeNode"));
+            }
+         }
+      }else if(ETypeGroup.Container.equals(typeGroup)){
+         // 显示表单内控件集合
+         FContentObject xframe = _frameConsole.findDefine(_storageName, code, EPersistenceMode.Config);
+         for(FContentObject xcontrol : xframe.nodes()){
+            XTreeNode xnode = new XTreeNode();
+            xnode.setIsValid(true);
+            xnode.setTypeGroup(ETypeGroup.Item);
+            xnode.setTypeCode(xcontrol.name());
+            xnode.setHasChild(xcontrol.hasNode());
+            xnode.setGuid(xcontrol.objectId());
+            xnode.setLabel(xcontrol.get("name"));
+            xnode.setNote(xcontrol.get("label"));
+            xnode.saveConfig(xconfig.createNode("TreeNode"));
+         }
       }
       return EResult.Success;
    }
@@ -255,11 +286,8 @@ public class FFrameService
       String name = xframe.get("name");
       // 查找目录定义
       FContentObject content = _frameConsole.findDefine(_storageName, name, EPersistenceMode.Config);
-      content.loadConfig(xframe);
-      //_frameConsole.
-      //content.set("name", name);
-      //buildFrame(content, EPersistenceMode.Config);
-      //xframe
+      content.mergeConfig(xframe);
+      _frameConsole.update(_storageName, content);
       return EResult.Success;
    }
 

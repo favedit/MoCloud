@@ -739,6 +739,33 @@ public class FContentObject
    }
 
    //============================================================
+   // <T>加载配置节点。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   public void mergeConfig(FXmlNode xconfig){
+      if(xconfig == null){
+         throw new FFatalError("Config is null.");
+      }
+      // 设置名称
+      setName(xconfig.name());
+      // 合并属性集合
+      if(xconfig.hasAttribute()){
+         attributes().append(xconfig.attributes());
+      }
+      // 合并节点集合
+      if(hasNode()){
+         for(FContentObject node : _nodes){
+            String nodeName = node.name();
+            FXmlNode xnode = xconfig.findNode("name", nodeName);
+            if(xnode != null){
+               node.mergeConfig(xnode);
+            }
+         }
+      }
+   }
+
+   //============================================================
    // <T>根据配置信息排序。</T>
    //
    // @param xconfig 配置节点

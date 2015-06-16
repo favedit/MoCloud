@@ -16,6 +16,7 @@ public class XTreeNode
    //============================================================
    public void saveConfig(FXmlNode xconfig){
       xconfig.setNvl(IS_VALID.linkName(), _isValid);
+      xconfig.setNvl(TYPE_GROUP.linkName(), _typeGroup);
       xconfig.setNvl(TYPE_CODE.linkName(), _typeCode);
       xconfig.setNvl(GUID.linkName(), _guid);
       xconfig.setNvl(CODE.linkName(), _code);

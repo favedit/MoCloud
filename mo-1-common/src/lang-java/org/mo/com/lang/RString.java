@@ -443,7 +443,7 @@ public class RString
    //============================================================
    public final static boolean equalsIgnoreCase(Object source,
                                                 Object target){
-      return ((null != source) && (null != target)) ? source.toString().equalsIgnoreCase(target.toString()) : false;
+      return ((source != null) && (target != null)) ? source.toString().equalsIgnoreCase(target.toString()) : false;
    }
 
    //============================================================
@@ -467,7 +467,7 @@ public class RString
    //============================================================
    public final static boolean endsWith(String source,
                                         String value){
-      return (null != source) && source.endsWith(value);
+      return (source != null) && source.endsWith(value);
    }
 
    //============================================================
@@ -479,7 +479,7 @@ public class RString
    //============================================================
    public static boolean contains(String value,
                                   char search){
-      return (null == value) ? false : (-1 != value.indexOf(search));
+      return (value == null) ? false : (-1 != value.indexOf(search));
    }
 
    //============================================================
@@ -569,7 +569,7 @@ public class RString
    public static boolean inRange(String value,
                                  String range,
                                  char splitter){
-      if(null != value){
+      if(value != null){
          String[] ranges = split(range, splitter);
          for(String item : ranges){
             if(value.equals(item)){
@@ -591,7 +591,7 @@ public class RString
    public static boolean inRangeIgnoreCase(String value,
                                            String range,
                                            char splitter){
-      if(null != value){
+      if(value != null){
          String[] ranges = split(range, splitter);
          for(String item : ranges){
             if(value.equalsIgnoreCase(item)){
@@ -611,7 +611,7 @@ public class RString
    //============================================================
    public final static boolean hasChar(String value,
                                        String chars){
-      if((null != value) && (null != chars)){
+      if((value != null) && (chars != null)){
          char[] charArray = value.toCharArray();
          int length = charArray.length;
          for(int n = 0; n < length; n++){
@@ -632,7 +632,7 @@ public class RString
    //============================================================
    public final static boolean hasChars(String value,
                                         String chars){
-      if((null != value) && (null != chars)){
+      if((value != null) && (chars != null)){
          char[] charArray = value.toCharArray();
          int length = charArray.length;
          for(int n = 0; n < length; n++){
@@ -654,7 +654,7 @@ public class RString
    public static int count(String value,
                            char splitter){
       int count = 0;
-      if(null != value){
+      if(value != null){
          int length = value.length();
          for(int n = 0; n < length; n++){
             if(splitter == value.charAt(n)){
@@ -676,7 +676,7 @@ public class RString
    public static int compare(String source,
                              String target,
                              boolean careCase){
-      if((null == source) && (null == target)){
+      if((source == null) && (target == null)){
          return 0;
       }else if((null != source) && (null == target)){
          return 1;
@@ -695,7 +695,7 @@ public class RString
    //============================================================
    public static boolean matchString(String value,
                                      String search){
-      if(null != value && null != search){
+      if((value != null) && (search != null)){
          boolean start = search.startsWith("*");
          boolean end = search.endsWith("*");
          if(start && end){
@@ -783,7 +783,7 @@ public class RString
    // @return 字符串
    //============================================================
    public static String nvl(String... values){
-      if(null != values){
+      if(values != null){
          int count = values.length;
          for(int n = 0; n < count; n++){
             String value = values[n];
@@ -845,7 +845,7 @@ public class RString
    // @return 字符串
    //============================================================
    public static FString nvlStr(FString value){
-      return (null != value) ? value : new FString();
+      return (value != null) ? value : new FString();
    }
 
    //============================================================
@@ -855,7 +855,7 @@ public class RString
    // @return 首字母为小写字符的字符串
    //============================================================
    public final static String firstLower(String source){
-      if(null != source){
+      if(source != null){
          if(source.length() > 1){
             return source.substring(0, 1).toLowerCase() + source.substring(1);
          }
@@ -871,7 +871,7 @@ public class RString
    // @return 首字母为大写字符的字符串
    //============================================================
    public final static String firstUpper(String source){
-      if(null != source){
+      if(source != null){
          if(source.length() > 1){
             return source.substring(0, 1).toUpperCase() + source.substring(1);
          }
@@ -888,7 +888,7 @@ public class RString
    // @return 小写字符串
    //============================================================
    public static String toLower(String value){
-      return (null != value) ? value.toLowerCase() : null;
+      return (value != null) ? value.toLowerCase() : null;
    }
 
    //============================================================
@@ -898,7 +898,7 @@ public class RString
    // @return 小写字符串
    //============================================================
    public static String toNvlLower(String value){
-      return (null != value) ? value.toLowerCase() : EMPTY;
+      return (value != null) ? value.toLowerCase() : EMPTY;
    }
 
    //============================================================
@@ -909,7 +909,7 @@ public class RString
    // @return 大写字符串
    //============================================================
    public static String toUpper(String value){
-      return (null != value) ? value.toUpperCase() : null;
+      return (value != null) ? value.toUpperCase() : null;
    }
 
    //============================================================
@@ -942,7 +942,7 @@ public class RString
    //============================================================
    public static String trimLeft(String source,
                                  char... trims){
-      if(null != source){
+      if(source != null){
          int length = source.length();
          if(length > 0){
             for(int n = 0; n < length; n++){
@@ -965,7 +965,7 @@ public class RString
    //============================================================
    public static String trimLeft(String source,
                                  String partten){
-      if(null != source){
+      if(source != null){
          int nLength = source.length();
          if(nLength > 0){
             int nPosition = 0;
@@ -988,7 +988,7 @@ public class RString
    // @return 截掉后的字符串
    //============================================================
    public static String[] trimLeft(String[] values){
-      if(null != values){
+      if(values != null){
          return trimLeft(values, 0, values.length);
       }
       return values;
@@ -1004,7 +1004,7 @@ public class RString
    public static String[] trimLeft(String[] values,
                                    int offset,
                                    int count){
-      if(null != values){
+      if(values != null){
          int n = offset - 1;
          int loop = offset + count;
          while(n < loop){
@@ -1045,7 +1045,7 @@ public class RString
    //============================================================
    public static String trimRight(String value,
                                   String partten){
-      if(null != value){
+      if(value != null){
          int length = value.length();
          if(length > 0){
             int position = length - 1;
@@ -1081,7 +1081,7 @@ public class RString
    public static String[] trimRight(String[] values,
                                     int offset,
                                     int count){
-      if(null != values){
+      if(values != null){
          int n = offset - 1;
          int loop = offset + count;
          while(++n < loop){
@@ -1138,7 +1138,7 @@ public class RString
    // @return 字符串
    //============================================================
    public static String trim(String value){
-      return (null != value) ? value.trim() : null;
+      return (value != null) ? value.trim() : null;
    }
 
    //============================================================
@@ -1148,7 +1148,7 @@ public class RString
    // @return 字符串集合
    //============================================================
    public static String[] trim(String[] value){
-      if(null != value){
+      if(value != null){
          int count = value.length;
          for(int n = 0; n < count; ++n){
             String line = value[n];
@@ -1172,7 +1172,7 @@ public class RString
    public static String[] trim(String[] value,
                                int offset,
                                int count){
-      if(null != value){
+      if(value != null){
          int loop = offset + count;
          while(offset++ < loop){
             String line = value[offset];
@@ -1193,7 +1193,7 @@ public class RString
    public static String[] trimNoEmpty(String[] values){
       FStrings results = new FStrings();
       for(String value : values){
-         if(null != value){
+         if(value != null){
             value = value.trim();
             int length = value.length();
             if(length > 0){
@@ -1230,7 +1230,7 @@ public class RString
    // @return 字符串
    //============================================================
    public static String trimFirstEnter(String value){
-      if(null != value){
+      if(value != null){
          if(value.startsWith("\n")){
             value = value.substring(1);
          }else if(value.startsWith("\r\n")){
@@ -1265,7 +1265,7 @@ public class RString
    public final static String leftPad(String value,
                                       int length,
                                       char pad){
-      if(null != value){
+      if(value != null){
          int loop = length - value.length();
          if(loop > 0){
             int n = -1;
@@ -1291,7 +1291,7 @@ public class RString
    public final static String leftPad(String value,
                                       int length,
                                       String pad){
-      if(null != value){
+      if(value != null){
          int loop = length - value.length();
          if(loop > 0){
             int n = -1;
@@ -1329,7 +1329,7 @@ public class RString
    public final static String leftBytePad(String value,
                                           int length,
                                           String chars){
-      if(null == value){
+      if(value == null){
          return "";
       }
       int loop = length - value.getBytes().length;
@@ -1367,7 +1367,7 @@ public class RString
    public final static String rightPad(String value,
                                        int length,
                                        char pad){
-      if(value != null && length > 0){
+      if((null != value) && (length > 0)){
          int vl = value.length();
          int loop = length - vl;
          if(loop > 0){
@@ -1391,7 +1391,7 @@ public class RString
    public final static String rightPad(String value,
                                        int length,
                                        String pad){
-      if(null == value){
+      if(value == null){
          value = "";
       }
       int loop = length - value.length();
@@ -1429,7 +1429,7 @@ public class RString
    public final static String rightBytePad(String value,
                                            int length,
                                            String chars){
-      if(null == value){
+      if(value == null){
          value = EMPTY;
       }
       int loop = length - value.getBytes().length;
@@ -1453,7 +1453,7 @@ public class RString
    //============================================================
    public final static String left(String value,
                                    int length){
-      if(null != value){
+      if(value != null){
          if(value.length() > length){
             return value.substring(0, length);
          }
@@ -1472,7 +1472,7 @@ public class RString
    //============================================================
    public final static String left(String value,
                                    String search){
-      if(null != value){
+      if(value != null){
          int index = value.indexOf(search);
          if(index >= 0){
             return value.substring(0, index);
@@ -1512,6 +1512,26 @@ public class RString
    }
 
    //============================================================
+   // <T>截取指定字符串左面到倒序搜索字符串之间的字符串。</T>
+   // <P>如果没有找到，则返回原先字符串。</P>
+   //
+   // @param value 指定字符串
+   // @param search 搜索字符串
+   // @return 截取后的字符串
+   //============================================================
+   public final static String leftLast(String value,
+                                       String search){
+      if(value != null){
+         int index = value.lastIndexOf(search);
+         if(index >= 0){
+            return value.substring(0, index);
+         }
+         return value;
+      }
+      return null;
+   }
+
+   //============================================================
    // <T>截取指定字符串右面定长的字符串。</T>
    //
    // @param value 指定字符串
@@ -1520,7 +1540,7 @@ public class RString
    //============================================================
    public final static String right(String value,
                                     int length){
-      if(null != value){
+      if(value != null){
          int valueLength = value.length();
          if(valueLength > length){
             return value.substring(valueLength - length);
@@ -1540,7 +1560,7 @@ public class RString
    //============================================================
    public final static String right(String value,
                                     String search){
-      if(null != value){
+      if(value != null){
          int index = value.lastIndexOf(search);
          if(index >= 0){
             return value.substring(index + search.length());
@@ -1577,6 +1597,26 @@ public class RString
       }catch(UnsupportedEncodingException ex){
       }
       return EMPTY;
+   }
+
+   //============================================================
+   // <T>截取指定字符串右面到搜索字符串之间的字符串。</T>
+   // <P>如果没有找到，则返回原先字符串。</P>
+   //
+   // @param value 指定字符串
+   // @param search 搜索字符串
+   // @return 截取后的字符串
+   //============================================================
+   public final static String rightFirst(String value,
+                                         String search){
+      if(value != null){
+         int index = value.indexOf(search);
+         if(index >= 0){
+            return value.substring(index + search.length());
+         }
+         return value;
+      }
+      return null;
    }
 
    //============================================================

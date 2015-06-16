@@ -1,18 +1,17 @@
 package org.mo.cloud.content.design.frame.base;
 
+import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
-import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>数据颜色选择框对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseDataColorPicker
-      extends XContentObject
+public abstract class XBaseDataColorPicker extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "DataColorPicker";

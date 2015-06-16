@@ -272,6 +272,42 @@ public class FPersistence
    // <T>加载配置信息。</T>
    //
    // @param xconfig 配置节点
+   // @param modeCd 模式类型
+   //============================================================
+   public void mergeConfig(FContentObject xinstance,
+                           FContentObject xconfig,
+                           EPersistenceMode modeCd){
+      // 查找内容类对象
+      String className = xconfig.name();
+      FContentClass clazz = findClass(className);
+      if(clazz == null){
+         throw new FFatalError("Content class is not exists. (class_name={1})", className);
+      }
+      // 合并属性
+      if(xconfig.hasAttribute()){
+         for(INamePair<FContentField> pair : clazz.fields()){
+            FContentField field = pair.value();
+            String name = field.name();
+            String value = xconfig.get(name);
+            xinstance.set(name, value);
+         }
+      }
+      // 合并节点
+      if(xinstance.hasNode()){
+         for(FContentObject xchild : xinstance.nodes()){
+            String obejctId = xchild.objectId();
+            FContentObject xnode = xconfig.find(obejctId);
+            if(xnode != null){
+               mergeConfig(xchild, xnode, modeCd);
+            }
+         }
+      }
+   }
+
+   //============================================================
+   // <T>加载配置信息。</T>
+   //
+   // @param xconfig 配置节点
    //============================================================
    public <T extends XContentObject> FContentObject convertConfig(T instance){
       return convertConfig(instance, EPersistenceMode.Config);

@@ -1,18 +1,17 @@
 package org.mo.cloud.content.design.tree.base;
 
+import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
-import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>节点对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseTreeNode
-      extends XContentObject
+public abstract class XBaseTreeNode extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "TreeNode";
@@ -36,6 +35,10 @@ public abstract class XBaseTreeNode
    // 备注的定义
    @AContentField
    public final static FContentField NOTE = new FContentField("note", "note", EContentData.String, "", "", "", "YYNY");
+
+   // 类型分组的定义
+   @AContentField
+   public final static FContentField TYPE_GROUP = new FContentField("typeGroup", "type_group", EContentData.String, "", "", "", "YYNY");
 
    // 类型代码的定义
    @AContentField
@@ -106,6 +109,10 @@ public abstract class XBaseTreeNode
    // 备注
    @AName("note")
    protected String _note;
+
+   // 类型分组
+   @AName("type_group")
+   protected String _typeGroup;
 
    // 类型代码
    @AName("type_code")
@@ -227,6 +234,24 @@ public abstract class XBaseTreeNode
    //============================================================
    public void setNote(String value){
       _note = value;
+   }
+
+   //============================================================
+   // <T>获得类型分组的内容。</T>
+   //
+   // @return 类型分组
+   //============================================================
+   public String getTypeGroup(){
+      return _typeGroup;
+   }
+
+   //============================================================
+   // <T>设置类型分组的内容。</T>
+   //
+   // @param value 类型分组
+   //============================================================
+   public void setTypeGroup(String value){
+      _typeGroup = value;
    }
 
    //============================================================

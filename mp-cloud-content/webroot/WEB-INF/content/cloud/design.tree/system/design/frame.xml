@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="system.design.frame" update_date="20141209154356">
    <TreeView _uuid2="71202174-098f-48b0-ad14-024064f85750" name="content.design.frame" label="M#12cn18内容-设计-页面" is_valid="Y" note="M#" is_config="N" disp_checked="N" service="catalog@cloud.describe.frame">
+      <TreeNodeType name="package" code="Package" label="包" is_valid="Y" note="" icon="system.design.frame.package" action="list"/>
       <TreeNodeType name="workspace" code="Workspace" label="工作空间" is_valid="Y" note="" icon="system.design.frame.workspace" action="list"/>
       <TreeNodeType name="frameSet" code="FrameSet" label="页面布局" is_valid="Y" note="" icon="system.design.frame.frameset" action="list"/>
       <TreeNodeType name="frame" code="Frame" label="页面" is_valid="Y" note="" icon="system.design.frame.frame" action="list"/>

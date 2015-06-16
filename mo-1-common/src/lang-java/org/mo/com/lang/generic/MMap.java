@@ -304,7 +304,9 @@ public class MMap<P extends IPair<N, V>, N, V>
       if(map != null){
          int loop = offset + count;
          for(int n = offset; n < loop; n++){
-            set(map.name(n), map.value(n));
+            N name = map.name(n);
+            V value = map.value(n);
+            set(name, value);
          }
       }
    }

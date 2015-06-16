@@ -174,7 +174,11 @@ public class FFrameConsole
                       FContentObject frame){
       String nodeName = frame.get("name");
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
-      //node.loadConfig(xconfig);
+      FContentObject xinstance = node.config();
+      // 获得转换器
+      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
+      persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);
+      // 保存处理
       node.store();
    }
 }
