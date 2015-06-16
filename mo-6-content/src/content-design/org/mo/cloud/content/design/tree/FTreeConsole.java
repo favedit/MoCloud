@@ -4,6 +4,8 @@ import org.mo.cloud.content.design.configuration.FContentNode;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.cloud.content.design.tree.common.XTreeView;
@@ -55,7 +57,7 @@ public class FTreeConsole
       for(INamePair<FContentNode> pair : space.contents()){
          FContentNode node = pair.value();
          String treeName = node.name();
-         XTreeView xtree = find(storgeName, treeName);
+         XTreeView xtree = find(storgeName, treeName, EPersistenceMode.Config);
          results.push(xtree);
       }
       return results.toObjects();
@@ -70,16 +72,39 @@ public class FTreeConsole
    //============================================================
    @Override
    public XTreeView find(String storgeName,
-                         String treeName){
-      String code = storgeName + "|" + treeName;
+                         String treeName,
+                         EPersistenceMode modeCd){
+      String code = storgeName + "|" + treeName + "|" + modeCd;
       XTreeView xtree = _treeDictionary.find(code);
       if(xtree == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, treeName);
-         xtree = persistence.convertInstance(node.config());
+         xtree = persistence.convertInstance(node.config(), modeCd);
          _treeDictionary.set(code, xtree);
       }
       return xtree;
+   }
+
+   //============================================================
+   // <T>根据名称获得表单定义。</T>
+   //
+   // @param storgeName 存储名称
+   // @param treeName 表单名称
+   // @param modeCd 模式类型
+   // @return 表单
+   //============================================================
+   @Override
+   public FContentObject findDefine(String storgeName,
+                                    String treeName,
+                                    EPersistenceMode modeCd){
+      XContentObject xobject = find(storgeName, treeName, modeCd);
+      if(xobject != null){
+         // 获得转换器
+         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.tree");
+         // 转换对象
+         return persistence.convertConfig(xobject, modeCd);
+      }
+      return null;
    }
 
    //============================================================
@@ -93,7 +118,7 @@ public class FTreeConsole
    public FXmlNode buildConfig(String storgeName,
                                String treeName){
       // 查找目录定义
-      XTreeView xtree = find(storgeName, treeName);
+      XTreeView xtree = find(storgeName, treeName, EPersistenceMode.Config);
       // 转换数据
       FXmlNode xconfig = new FXmlNode();
       FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.tree");

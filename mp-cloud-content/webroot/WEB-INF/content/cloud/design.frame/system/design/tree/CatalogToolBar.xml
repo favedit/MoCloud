@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <ToolBar name="resource.scene.CatalogToolBar" type='FDsSceneCatalogToolBar' label="画板工具栏">
-      <ToolButtonMenu name='create' icon='resource.scene.create' label='新建' hint='在当前节点下新建内容'>
-         <MenuButton name='createCamera' linker='_controlCreateCamera' label='新建 - 相机'/>
-         <MenuButton name='createLayer' linker='_controlCreateLayer' label='新建 - 显示层'/>
-         <MenuButton name='createSprite' linker='_controlCreateSprite' label='新建 - 精灵'/>
-         <MenuButton name='createMovie' linker='_controlCreateMovie' label='新建 - 动画'/>
-      </ToolButtonMenu>
-      <ToolButton name='copy' linker='_controlCopy' icon='tools.copy' hint='复制选中的节点'/>
-      <ToolButton name='delete' linker='_controlDelete' icon='tools.delete' hint='删除选中的节点'/>
+   <ToolBar name="system.design.frame.CatalogToolBar" label="目录工具栏">
+      <ToolButtonEdit name='search' linker='_controlSearch' edit_size='200,0' icon='tools.search' hint='搜索内容'/>
       <ToolButtonSplit/>
-      <ToolButton name='folderOpen' linker='_controlFolderOpen' icon='resource.scene.open' hint='展开选中节点'/>
-      <ToolButton name='folderClose' linker='_controlFolderClose' icon='resource.scene.close' hint='收起选中节点'/>
+      <ToolButton name='folderProperty' linker='_controlFolderProperty' icon='tools.property' label='属性' hint='修改当前目录的内容'/>
       <ToolButtonSplit/>
-      <ToolButton name='moveUp' linker='_controlMoveUp' icon='resource.scene.node-up' hint='将选中节点向下移动'/>
-      <ToolButton name='moveDown' linker='_controlMoveDown' icon='resource.scene.node-down' hint='将选中节点向上移动'/>
+      <ToolButton name='folderOpen' linker='_controlFolderOpen' icon='resource.tools.open' hint='展开选中节点'/>
+      <ToolButton name='folderClose' linker='_controlFolderClose' icon='resource.tools.close' hint='收起选中节点'/>
    </ToolBar>
 </Content>

@@ -1,6 +1,7 @@
 package org.mo.cloud.content.design.persistence;
 
 import org.mo.cloud.content.design.configuration.FContentNode;
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.persistence.common.XPersistence;
 import org.mo.com.lang.EResult;
 
@@ -22,10 +23,12 @@ public interface IPersistenceConsole
    //
    // @param storgeName 存储名称
    // @param listName 列表名称
+   // @param modeCd 模式类型
    // @return 列表
    //============================================================
    XPersistence find(String storgeName,
-                     String listName);
+                     String listName,
+                     EPersistenceMode modeCd);
 
    //============================================================
    // <T>查找持久对象。</T>
@@ -36,6 +39,18 @@ public interface IPersistenceConsole
    //============================================================
    FPersistence findPersistence(String storageName,
                                 String persistenceName);
+
+   //============================================================
+   // <T>根据名称获得持久化定义。</T>
+   //
+   // @param storgeName 存储名称
+   // @param persistenceName 表单名称
+   // @param modeCd 模式类型
+   // @return 持久化定义
+   //============================================================
+   FContentObject findDefine(String storgeName,
+                             String persistenceName,
+                             EPersistenceMode modeCd);
 
    //============================================================
    // <T>根据节点名称获得内容节点。</T>
@@ -52,4 +67,12 @@ public interface IPersistenceConsole
    // @return 处理结果
    //============================================================
    EResult build(SPersistenceBuildArgs builder);
+
+   //============================================================
+   // <T>更新表单配置。</T>
+   //
+   // @param frame 页面
+   //============================================================
+   void update(String storgeName,
+               FContentObject frame);
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.tree" update_date="20150616085940">
-  <Persistence is_valid="Y" name="conent.list" label="目录定义" template="" source="${output.design}/src/content-design" note="">
+<Content>
+  <Persistence is_valid="Y" name="design.tree" label="目录定义" template="" source="${output.design}/src/content-design" note="">
     <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.tree.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="code" label="代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />

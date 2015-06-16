@@ -1,8 +1,8 @@
-package org.mo.cloud.content.describe.frame;
+package org.mo.cloud.content.describe.persistence;
 
+import org.mo.cloud.content.describe.frame.ETypeGroup;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
-import org.mo.cloud.content.design.frame.IFrameConsole;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.cloud.content.design.tree.common.XTreeNode;
@@ -19,11 +19,11 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>内容表单服务。</T>
+// <T>内容持久化服务。</T>
 //============================================================
-public class FFrameService
+public class FPersistenceService
       implements
-         IFrameService
+         IPersistenceService
 {
    // 存储名称
    protected String _storageName = "cloud";
@@ -32,14 +32,10 @@ public class FFrameService
    @ALink
    protected IPersistenceConsole _persistenceConsole;
 
-   // 内容表单控制台接口
-   @ALink
-   protected IFrameConsole _frameConsole;
-
    //============================================================
    // <T>构造内容表单服务。</T>
    //============================================================
-   public FFrameService(){
+   public FPersistenceService(){
    }
 
    //============================================================
@@ -119,10 +115,11 @@ public class FFrameService
    //============================================================
    public FContentObject findBuildFrame(String frameName,
                                         EPersistenceMode modeCd){
-      FContentObject content = _frameConsole.findDefine(_storageName, frameName, modeCd);
+      FContentObject content = _persistenceConsole.findDefine(_storageName, frameName, modeCd);
       content.set("name", frameName);
       buildFrame(content, modeCd);
       return content;
+
    }
 
    //============================================================
@@ -136,7 +133,7 @@ public class FFrameService
    public EResult catalog(IWebContext context,
                           IWebInput input,
                           IWebOutput output){
-      XContentObject[] xframes = _frameConsole.list(_storageName);
+      XContentObject[] xframes = _persistenceConsole.list(_storageName);
       FXmlNode xconfig = output.config();
       FAttributes packages = new FAttributes();
       for(XContentObject xframe : xframes){
@@ -175,7 +172,7 @@ public class FFrameService
       String code = treeNode.get("label");
       if(ETypeGroup.Package.equals(typeGroup)){
          // 显示包内表单集合
-         XContentObject[] xframes = _frameConsole.list(_storageName);
+         XContentObject[] xframes = _persistenceConsole.list(_storageName);
          for(XContentObject xframe : xframes){
             String name = xframe.getString("name");
             String packageName = RString.leftLast(name, ".");
@@ -192,7 +189,7 @@ public class FFrameService
          }
       }else if(ETypeGroup.Container.equals(typeGroup)){
          // 显示表单内控件集合
-         FContentObject xframe = _frameConsole.findDefine(_storageName, code, EPersistenceMode.Config);
+         FContentObject xframe = _persistenceConsole.findDefine(_storageName, code, EPersistenceMode.Config);
          for(FContentObject xcontrol : xframe.nodes()){
             XTreeNode xnode = new XTreeNode();
             xnode.setIsValid(true);
@@ -231,7 +228,7 @@ public class FFrameService
          if(!RString.isEmpty(mode)){
             modeCd = REnum.parse(EPersistenceMode.class, mode);
          }
-         FContentObject content = _frameConsole.findDefine(_storageName, frameName, modeCd);
+         FContentObject content = _persistenceConsole.findDefine(_storageName, frameName, modeCd);
          content.set("name", frameName);
          buildFrame(content, modeCd);
          // 转换数据
@@ -245,7 +242,7 @@ public class FFrameService
          if(xframe.isName("Frame")){
             String name = xframe.get("name");
             // 查找目录定义
-            FContentObject content = _frameConsole.findDefine(_storageName, name, EPersistenceMode.Config);
+            FContentObject content = _persistenceConsole.findDefine(_storageName, name, EPersistenceMode.Config);
             content.set("name", name);
             buildFrame(content, EPersistenceMode.Config);
             // 转换数据
@@ -284,9 +281,9 @@ public class FFrameService
       FXmlNode xframe = input.config().findNode("Frame");
       String name = xframe.get("name");
       // 查找目录定义
-      FContentObject content = _frameConsole.findDefine(_storageName, name, EPersistenceMode.Config);
+      FContentObject content = _persistenceConsole.findDefine(_storageName, name, EPersistenceMode.Config);
       content.mergeConfig(xframe);
-      _frameConsole.update(_storageName, content);
+      _persistenceConsole.update(_storageName, content);
       return EResult.Success;
    }
 

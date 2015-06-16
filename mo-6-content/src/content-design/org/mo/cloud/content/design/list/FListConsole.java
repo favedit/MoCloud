@@ -1,9 +1,12 @@
 package org.mo.cloud.content.design.list;
 
 import org.mo.cloud.content.design.configuration.FContentNode;
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.list.common.XList;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.com.lang.FDictionary;
@@ -51,7 +54,7 @@ public class FListConsole
       for(INamePair<FContentNode> pair : space.contents()){
          FContentNode node = pair.value();
          String listName = node.name();
-         XList xlist = find(storgeName, listName);
+         XList xlist = find(storgeName, listName, EPersistenceMode.Config);
          results.push(xlist);
       }
       return results.toObjects();
@@ -66,15 +69,38 @@ public class FListConsole
    //============================================================
    @Override
    public XList find(String storgeName,
-                     String listName){
-      String code = storgeName + "|" + listName;
+                     String listName,
+                     EPersistenceMode modeCd){
+      String code = storgeName + "|" + listName + "|" + modeCd;
       XList xlist = _list.find(code);
       if(xlist == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, listName);
-         xlist = persistence.convertInstance(node.config());
+         xlist = persistence.convertInstance(node.config(), modeCd);
          _list.set(code, xlist);
       }
       return xlist;
+   }
+
+   //============================================================
+   // <T>根据名称获得表单定义。</T>
+   //
+   // @param storgeName 存储名称
+   // @param listName 表单名称
+   // @param modeCd 模式类型
+   // @return 表单
+   //============================================================
+   @Override
+   public FContentObject findDefine(String storgeName,
+                                    String listName,
+                                    EPersistenceMode modeCd){
+      XContentObject xobject = find(storgeName, listName, modeCd);
+      if(xobject != null){
+         // 获得转换器
+         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.list");
+         // 转换对象
+         return persistence.convertConfig(xobject, modeCd);
+      }
+      return null;
    }
 }

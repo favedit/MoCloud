@@ -5,6 +5,7 @@ import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.common.XPersistence;
 import org.mo.com.io.FStringFile;
 import org.mo.com.io.RFile;
@@ -68,7 +69,7 @@ public class FPersistenceConsole
       for(INamePair<FContentNode> pair : space.contents()){
          FContentNode node = pair.value();
          String listName = node.name();
-         XPersistence xlist = find(storgeName, listName);
+         XPersistence xlist = find(storgeName, listName, EPersistenceMode.Store);
          results.push(xlist);
       }
       return results.toObjects();
@@ -83,13 +84,14 @@ public class FPersistenceConsole
    //============================================================
    @Override
    public XPersistence find(String storgeName,
-                            String listName){
-      String code = storgeName + "|" + listName;
+                            String persistenceName,
+                            EPersistenceMode modeCd){
+      String code = storgeName + "|" + persistenceName + "|" + modeCd;
       XPersistence xpersistence = _contents.find(code);
       if(xpersistence == null){
          FPersistence persistence = findPersistence(storgeName, _spaceName);
-         FContentNode node = _configurationConsole.getNode(storgeName, _spaceName, listName);
-         xpersistence = persistence.convertInstance(node.config());
+         FContentNode node = _configurationConsole.getNode(storgeName, _spaceName, persistenceName);
+         xpersistence = persistence.convertInstance(node.config(), modeCd);
          _contents.set(code, xpersistence);
       }
       return xpersistence;
@@ -116,6 +118,28 @@ public class FPersistenceConsole
          _persistences.set(code, persistence);
       }
       return persistence;
+   }
+
+   //============================================================
+   // <T>根据名称获得持久化定义。</T>
+   //
+   // @param storgeName 存储名称
+   // @param persistenceName 表单名称
+   // @param modeCd 模式类型
+   // @return 持久化定义
+   //============================================================
+   @Override
+   public FContentObject findDefine(String storgeName,
+                                    String persistenceName,
+                                    EPersistenceMode modeCd){
+      XContentObject xobject = find(storgeName, persistenceName, modeCd);
+      if(xobject != null){
+         // 获得转换器
+         FPersistence persistence = findPersistence(storgeName, "design.persistence");
+         // 转换对象
+         return persistence.convertConfig(xobject, modeCd);
+      }
+      return null;
    }
 
    //============================================================
@@ -312,5 +336,25 @@ public class FPersistenceConsole
          return EResult.Failure;
       }
       return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新表单配置。</T>
+   //
+   // @param frame 页面
+   //============================================================
+   @Override
+   public void update(String storgeName,
+                      FContentObject frame){
+      String nodeName = frame.get("name");
+      FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
+      FContentObject xinstance = node.config();
+      // 获得转换器
+      FPersistence persistence = findPersistence(storgeName, "design.persistence");
+      persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);
+      // 保存处理
+      node.store();
+      // 清空缓冲
+      _contents.clear();
    }
 }

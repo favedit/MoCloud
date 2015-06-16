@@ -3,6 +3,18 @@
 <Config>
 
    <!-- ==================================================== -->
+   <!-- 设计：持久化描述服务                                 -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.describe.persistence'
+         face  = 'org.mo.cloud.content.describe.persistence.IPersistenceService'/>
+
+   <Component
+         face  = 'org.mo.cloud.content.describe.persistence.IPersistenceService'
+         class = 'org.mo.cloud.content.describe.persistence.FPersistenceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
    <!-- 设计：列表描述服务                                   -->
    <!-- ==================================================== -->
    <WebService

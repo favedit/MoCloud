@@ -1,8 +1,15 @@
 package org.mo.cloud.content.describe.list;
 
-import org.mo.cloud.content.design.list.common.XList;
-
+import org.mo.cloud.content.describe.frame.ETypeGroup;
+import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.list.IListConsole;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
+import org.mo.cloud.content.design.tree.common.XTreeNode;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.IStringPair;
+import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.web.protocol.context.IWebContext;
@@ -39,15 +46,79 @@ public class FListService
    // @param output 网络输出
    //============================================================
    @Override
-   public void list(IWebContext context,
-                    IWebInput input,
-                    IWebOutput output){
-      XList[] xlists = _listConsole.list(_storageName);
+   public EResult catalog(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
+      XContentObject[] xframes = _listConsole.list(_storageName);
       FXmlNode xconfig = output.config();
-      for(XList xlist : xlists){
-         FXmlNode xnode = xconfig.createNode("Node");
-         xnode.set("name", xlist.getName());
+      FAttributes packages = new FAttributes();
+      for(XContentObject xframe : xframes){
+         String name = xframe.getString("name");
+         String packageName = RString.leftLast(name, ".");
+         packages.set(packageName, packageName);
       }
+      for(IStringPair pair : packages){
+         String packageName = pair.name();
+         XTreeNode xnode = new XTreeNode();
+         xnode.setIsValid(true);
+         xnode.setTypeGroup(ETypeGroup.Package);
+         xnode.setTypeCode("Package");
+         xnode.setHasChild(true);
+         xnode.setLabel(packageName);
+         //xnode.setNote(xframe.getString("label"));
+         xnode.saveConfig(xconfig.createNode("TreeNode"));
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>从配置文件中加载树目录节点。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult list(IWebContext context,
+                       IWebInput input,
+                       IWebOutput output){
+      FXmlNode treeNode = input.config().findNode("TreeNode");
+      FXmlNode xconfig = output.config();
+      String typeGroup = treeNode.get("type_group");
+      String code = treeNode.get("label");
+      if(ETypeGroup.Package.equals(typeGroup)){
+         // 显示包内表单集合
+         XContentObject[] xframes = _listConsole.list(_storageName);
+         for(XContentObject xframe : xframes){
+            String name = xframe.getString("name");
+            String packageName = RString.leftLast(name, ".");
+            if(packageName.equals(code)){
+               XTreeNode xnode = new XTreeNode();
+               xnode.setIsValid(true);
+               xnode.setTypeGroup(ETypeGroup.Container);
+               xnode.setTypeCode(xframe.name());
+               xnode.setHasChild(xframe.hasChild());
+               xnode.setLabel(xframe.getString("name"));
+               xnode.setNote(xframe.getString("label"));
+               xnode.saveConfig(xconfig.createNode("TreeNode"));
+            }
+         }
+      }else if(ETypeGroup.Container.equals(typeGroup)){
+         // 显示表单内控件集合
+         FContentObject xframe = _listConsole.findDefine(_storageName, code, EPersistenceMode.Config);
+         for(FContentObject xcontrol : xframe.nodes()){
+            XTreeNode xnode = new XTreeNode();
+            xnode.setIsValid(true);
+            xnode.setTypeGroup(ETypeGroup.Item);
+            xnode.setTypeCode(xcontrol.name());
+            xnode.setHasChild(xcontrol.hasNode());
+            xnode.setGuid(xcontrol.objectId());
+            xnode.setLabel(xcontrol.get("name"));
+            xnode.setNote(xcontrol.get("label"));
+            xnode.saveConfig(xconfig.createNode("TreeNode"));
+         }
+      }
+      return EResult.Success;
    }
 
    //============================================================
