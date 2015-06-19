@@ -8,11 +8,13 @@ import org.mo.com.lang.RString;
 
 public class FProvinceTemplate
 {
-
    protected String _fileName = "D:/Microbject/MoScript/data/province.csv";
 
    protected FObjects<FProvinceResource> _provinces = new FObjects<FProvinceResource>(FProvinceResource.class);
 
+   //============================================================
+   // <T>解析数据。</T>
+   //============================================================
    public void parser(){
       // 打开文件
       FLinesFile file = new FLinesFile();
@@ -30,6 +32,7 @@ public class FProvinceTemplate
             province.setCode(RString.trim(items[0]));
             province.setName(RString.trim(items[1]));
             province.setLabel(RString.trim(items[2]));
+            _provinces.push(province);
             System.out.println(items[0] + " - " + items[1] + " - " + items[2]);
          }
       }
@@ -42,8 +45,8 @@ public class FProvinceTemplate
    //============================================================
    public void serialize(IDataOutput output){
       output.writeInt32(_provinces.count());
-      for(FProvinceResource city : _provinces){
-         city.serialize(output);
+      for(FProvinceResource province : _provinces){
+         province.serialize(output);
       }
    }
 }

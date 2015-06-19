@@ -13,9 +13,9 @@ public class RTemplateExport
       provinceTemplate.parser();
       provinceTemplate.serialize(file);
       // 输出城市信息集合
-      FCityTemplate template = new FCityTemplate();
-      template.parser();
-      template.serialize(file);
+      FCityTemplate cityTemplate = new FCityTemplate();
+      cityTemplate.parser();
+      cityTemplate.serialize(file);
       // 增加内容
       FByteFile investmentFile = new FByteFile();
       investmentFile.loadFile("D:/Microbject/MoScript/source/ars/eai/investment.dat");

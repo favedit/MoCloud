@@ -4,6 +4,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RInteger;
 import org.mo.eai.template.city.FCityResource;
 import org.mo.eai.template.city.FCityTemplate;
 
@@ -65,6 +66,7 @@ public class FHistoryDateData
             FHistoryProvinceData province = provinces.get(provinceCode, null);
             if(province == null){
                province = new FHistoryProvinceData();
+               province.setCode(RInteger.parse(provinceCode));
                provinces.set(provinceCode, province);
             }
             province.setInvestmentDay(province.investmentDay() + city.investmentDay());
