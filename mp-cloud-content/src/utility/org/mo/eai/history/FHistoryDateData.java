@@ -1,8 +1,11 @@
 package org.mo.eai.history;
 
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.eai.template.city.FCityResource;
+import org.mo.eai.template.city.FCityTemplate;
 
 //============================================================
 // <T>历史日期数据。</T>
@@ -48,8 +51,36 @@ public class FHistoryDateData
    //
    // @param output 输出流
    //============================================================
-   public void serialize(IDataOutput output){
+   public void serialize(IDataOutput output,
+                         FCityTemplate template){
+      FDictionary<FHistoryProvinceData> provinces = new FDictionary<FHistoryProvinceData>(FHistoryProvinceData.class);
+      // 计算数据
+      float investmentDay = 0;
+      float investmentTotal = 0;
+      for(FHistoryCityData city : _citys){
+         String code = city.code() + "";
+         FCityResource cityResource = template.cards().get(code, null);
+         if(cityResource != null){
+            String provinceCode = cityResource.provinceCode();
+            FHistoryProvinceData province = provinces.get(provinceCode, null);
+            if(province == null){
+               province = new FHistoryProvinceData();
+               provinces.set(provinceCode, province);
+            }
+            province.setInvestmentDay(province.investmentDay() + city.investmentDay());
+            province.setInvestmentTotal(province.investmentTotal() + city.investmentTotal());
+         }
+         investmentDay += city.investmentDay();
+         investmentTotal += city.investmentTotal();
+      }
+      // 写入数据
       output.writeString(_code);
+      output.writeFloat(investmentDay);
+      output.writeFloat(investmentTotal);
+      output.writeInt32(provinces.count());
+      for(FHistoryProvinceData province : provinces.toObjects()){
+         province.serialize(output);
+      }
       output.writeInt32(_citys.count());
       for(FHistoryCityData city : _citys){
          city.serialize(output);

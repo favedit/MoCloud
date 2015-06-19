@@ -4,6 +4,7 @@ import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
+import org.mo.eai.template.city.FCityTemplate;
 
 //============================================================
 // <T>历史数据。</T>
@@ -46,10 +47,11 @@ public class FHistoryData
    //
    // @param output 输出流
    //============================================================
-   public void serialize(IDataOutput output){
+   public void serialize(IDataOutput output,
+                         FCityTemplate template){
       output.writeInt32(_dates.count());
       for(FHistoryDateData date : _dates.toObjects()){
-         date.serialize(output);
+         date.serialize(output, template);
       }
    }
 
@@ -58,9 +60,10 @@ public class FHistoryData
    //
    // @param fileName 文件名称
    //============================================================
-   public void serializeFile(String fileName){
+   public void serializeFile(String fileName,
+                             FCityTemplate template){
       FByteFile file = new FByteFile();
-      serialize(file);
+      serialize(file, template);
       file.saveToFile(fileName);
    }
 }

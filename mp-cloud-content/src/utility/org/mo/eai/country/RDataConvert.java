@@ -9,7 +9,7 @@ public class RDataConvert
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String fileName = "D:/Microbject/MoScript/source/test/baidu/data.txt";
+      String fileName = "D:/Microbject/MoScript/data/country_boundary.txt";
       FLinesFile file = new FLinesFile(fileName);
       int count = file.count();
       int n = -1;

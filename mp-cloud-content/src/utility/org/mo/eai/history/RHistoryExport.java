@@ -1,16 +1,19 @@
-package org.mo.eai;
+package org.mo.eai.history;
 
 import org.mo.com.io.FLinesFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
-import org.mo.eai.history.FHistoryCityData;
-import org.mo.eai.history.FHistoryData;
+import org.mo.eai.template.city.FCityTemplate;
 
-public class RJsonExport
+public class RHistoryExport
 {
    public static void main(String[] args){
+      // 加载城市数据
+      FCityTemplate template = new FCityTemplate();
+      template.parser();
+      // 加载历史数据
       FHistoryData history = new FHistoryData();
       FLinesFile file = new FLinesFile();
       file.loadFile("D:/Microbject/MoScript/data/investment.txt");
@@ -29,6 +32,6 @@ public class RJsonExport
             System.out.println(items[0]);
          }
       }
-      history.serializeFile("D:/Microbject/MoScript/source/ars/eai/investment.dat");
+      history.serializeFile("D:/Microbject/MoScript/source/ars/eai/investment.dat", template);
    }
 }

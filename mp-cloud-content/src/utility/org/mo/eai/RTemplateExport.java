@@ -2,11 +2,16 @@ package org.mo.eai;
 
 import org.mo.com.io.FByteFile;
 import org.mo.eai.template.city.FCityTemplate;
+import org.mo.eai.template.province.FProvinceTemplate;
 
 public class RTemplateExport
 {
    public static void main(String[] args){
       FByteFile file = new FByteFile();
+      // 输出城市信息集合
+      FProvinceTemplate provinceTemplate = new FProvinceTemplate();
+      provinceTemplate.parser();
+      provinceTemplate.serialize(file);
       // 输出城市信息集合
       FCityTemplate template = new FCityTemplate();
       template.parser();
