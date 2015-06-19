@@ -1,6 +1,7 @@
 package org.mo.cloud.design.describe.persistence;
 
 import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
 import org.mo.cloud.content.design.persistence.common.XPersistence;
@@ -64,7 +65,7 @@ public class FPersistenceService
                         IWebOutput output){
       String code = context.parameter("code");
       // 查找目录定义
-      XPersistence xtree = _persistenceConsole.find(_storageName, code);
+      XPersistence xtree = _persistenceConsole.find(_storageName, code, EPersistenceMode.Config);
       if(xtree == null){
          return EResult.Failure;
       }
