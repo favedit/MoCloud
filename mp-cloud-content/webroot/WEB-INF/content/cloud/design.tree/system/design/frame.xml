@@ -12,6 +12,7 @@
       <TreeNodeType name="toolBar" code="ToolBar" label="工具栏" is_valid="Y" note="" icon="system.design.frame.toolbar" action="list"/>
       <TreeNodeType name="menuBar" code="MenuBar" label="菜单栏" is_valid="Y" note="" icon="system.design.frame.menubar" action="list"/>
       <TreeNodeType name="tabBar" code="TabBar" label="分页栏" is_valid="Y" note="" icon="system.design.frame.tabbar" action="list"/>
+      <TreeNodeType name="label" code="Label" label="标签" is_valid="Y" note="" icon="system.design.frame.label" attributes="property_frame=system.design.frame.property.LabelFrame"/>
       <TreeNodeType name="button" code="Button" label="按键" is_valid="Y" note="" icon="system.design.frame.button" attributes="property_frame=system.design.frame.property.ButtonFrame"/>
       <TreeNodeType name="picture" code="Picture" label="图片" is_valid="Y" note="" icon="system.design.frame.picture" attributes="property_frame=system.design.frame.property.PictureFrame"/>
    </TreeView>

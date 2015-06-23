@@ -1,17 +1,18 @@
 package org.mo.cloud.content.design.frame.base;
 
-import org.mo.com.lang.face.AName;
 import org.mo.cloud.content.design.configuration.AContentField;
 import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.com.lang.face.AName;
 
 //============================================================
 // <T>列表控件对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseListBox extends XContentObject
+public abstract class XBaseListBox
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "ListBox";
@@ -44,6 +45,10 @@ public abstract class XBaseListBox extends XContentObject
    @AContentField
    public final static FContentField DOCK_CD = new FContentField("dockCd", "dock_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 对齐方式的定义
+   @AContentField
+   public final static FContentField ALIGN_CD = new FContentField("alignCd", "align_cd", EContentData.String, "", "", "", "YYNY");
+
    // 位置的定义
    @AContentField
    public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
@@ -71,6 +76,10 @@ public abstract class XBaseListBox extends XContentObject
    // 前景颜色的定义
    @AContentField
    public final static FContentField FORE_COLOR = new FContentField("foreColor", "fore_color", EContentData.String, "", "", "", "YYNY");
+
+   // 前景字体的定义
+   @AContentField
+   public final static FContentField FORE_FONT = new FContentField("foreFont", "fore_font", EContentData.String, "", "", "", "YYNY");
 
    // 背景颜色的定义
    @AContentField
@@ -146,6 +155,10 @@ public abstract class XBaseListBox extends XContentObject
    @AName("dock_cd")
    protected String _dockCd;
 
+   // 对齐方式
+   @AName("align_cd")
+   protected String _alignCd;
+
    // 位置
    @AName("location")
    protected String _location;
@@ -173,6 +186,10 @@ public abstract class XBaseListBox extends XContentObject
    // 前景颜色
    @AName("fore_color")
    protected String _foreColor;
+
+   // 前景字体
+   @AName("fore_font")
+   protected String _foreFont;
 
    // 背景颜色
    @AName("back_color")
@@ -329,6 +346,24 @@ public abstract class XBaseListBox extends XContentObject
    }
 
    //============================================================
+   // <T>获得对齐方式的内容。</T>
+   //
+   // @return 对齐方式
+   //============================================================
+   public String getAlignCd(){
+      return _alignCd;
+   }
+
+   //============================================================
+   // <T>设置对齐方式的内容。</T>
+   //
+   // @param value 对齐方式
+   //============================================================
+   public void setAlignCd(String value){
+      _alignCd = value;
+   }
+
+   //============================================================
    // <T>获得位置的内容。</T>
    //
    // @return 位置
@@ -452,6 +487,24 @@ public abstract class XBaseListBox extends XContentObject
    //============================================================
    public void setForeColor(String value){
       _foreColor = value;
+   }
+
+   //============================================================
+   // <T>获得前景字体的内容。</T>
+   //
+   // @return 前景字体
+   //============================================================
+   public String getForeFont(){
+      return _foreFont;
+   }
+
+   //============================================================
+   // <T>设置前景字体的内容。</T>
+   //
+   // @param value 前景字体
+   //============================================================
+   public void setForeFont(String value){
+      _foreFont = value;
    }
 
    //============================================================
