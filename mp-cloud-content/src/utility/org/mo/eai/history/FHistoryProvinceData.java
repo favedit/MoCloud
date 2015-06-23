@@ -8,6 +8,8 @@ import org.mo.com.lang.FObject;
 //============================================================
 public class FHistoryProvinceData
       extends FObject
+      implements
+         Comparable<FHistoryProvinceData>
 {
    // 代码
    protected int _code;
@@ -76,6 +78,16 @@ public class FHistoryProvinceData
    //============================================================
    public void setInvestmentTotal(float investmentTotal){
       _investmentTotal = investmentTotal;
+   }
+
+   //============================================================
+   // <T>比较对象。</T>
+   //
+   // @method
+   //============================================================
+   @Override
+   public int compareTo(FHistoryProvinceData item){
+      return (int)(item._investmentTotal - _investmentTotal);
    }
 
    //============================================================

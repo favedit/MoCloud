@@ -21,12 +21,6 @@ public class FBoundaryData
    // 索引集合
    protected FInts _indexes = new FInts();
 
-   // 几何体顶点集合
-   protected FObjects<SDoublePoint3> _geometryPoints = new FObjects<SDoublePoint3>(SDoublePoint3.class);
-
-   // 几何体索引集合
-   protected FInts _geometryIndexes = new FInts();
-
    //============================================================
    // <T>构造边界数据。</T>
    //============================================================
@@ -78,85 +72,24 @@ public class FBoundaryData
    }
 
    //============================================================
-   // <T>解析索引字符串。</T>
-   //
-   // @param source 字符串
-   //============================================================
-   public void makeGeometry(){
-      // 生成上表面点集合
-      //int pointCount = _points.count();
-      for(SDoublePoint3 point : _points){
-         _geometryPoints.push(new SDoublePoint3(point.x, point.y, 0));
-      }
-      //      // 生成下表面点集合
-      //      for(SDoublePoint3 point : _points){
-      //         _geometryPoints.push(new SDoublePoint3(point.x, point.y, 20));
-      //      }
-      // 生成上表面索引
-      int count = _indexes.length();
-      for(int n = 0; n < count; n++){
-         _geometryIndexes.append(_indexes.get(n));
-      }
-      //      // 生成下表面索引
-      //      for(int n = 0; n < count; n++){
-      //         _geometryIndexes.append(pointCount + _indexes.get(n));
-      //      }
-      //      // 生成边缘索引
-      //      for(int n = 0; n < pointCount; n++){
-      //         if(n != count - 1){
-      //            _geometryIndexes.append(n);
-      //            _geometryIndexes.append(n + 1);
-      //            _geometryIndexes.append(pointCount);
-      //            _geometryIndexes.append(n + 1);
-      //            _geometryIndexes.append(pointCount + 1);
-      //            _geometryIndexes.append(pointCount);
-      //         }else{
-      //            _geometryIndexes.append(n);
-      //            _geometryIndexes.append(n + 1);
-      //            _geometryIndexes.append(0);
-      //            _geometryIndexes.append(n + 1);
-      //            _geometryIndexes.append(1);
-      //            _geometryIndexes.append(0);
-      //         }
-      //      }
-   }
-
-   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
    //============================================================
-   public void serializeOld(IDataOutput output){
+   public void serialize(IDataOutput output){
       // 输出顶点集合
-      output.writeInt32(_points.count());
+      int pointCount = _points.count();
+      output.writeInt32(pointCount);
       for(SDoublePoint3 point : _points){
-         point.serializeFloat3(output);
+         //point.serializeFloat3(output);
+         output.writeFloat((float)point.x);
+         output.writeFloat((float)point.y);
       }
       // 输出顶点集合
       int count = _indexes.length();
       output.writeInt32(count);
       for(int i = 0; i < count; i++){
          output.writeUint16(_indexes.get(i));
-      }
-   }
-
-   //============================================================
-   // <T>序列化数据到输出流。</T>
-   //
-   // @param output 输出流
-   //============================================================
-   public void serialize(IDataOutput output){
-      makeGeometry();
-      // 输出顶点集合
-      output.writeInt32(_geometryPoints.count());
-      for(SDoublePoint3 point : _geometryPoints){
-         point.serializeFloat3(output);
-      }
-      // 输出顶点集合
-      int count = _geometryIndexes.length();
-      output.writeInt32(count);
-      for(int i = 0; i < count; i++){
-         output.writeUint16(_geometryIndexes.get(i));
       }
    }
 

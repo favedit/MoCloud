@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150623115443">
+  <Bar name="eai.chart.LogoBar" label="标志栏" size="443,206" back_resource="url:/script/ars/eai/logo.png" >
+    <Label name="day" label="2015-01-01" location="300,20" size="100,40" fore_color="#00FF99"/>
+    <Label name="time" label="00:00" location="300,40" size="100,40" fore_color="#00FF99"/>
+  </Bar>
+</Content>

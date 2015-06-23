@@ -1,5 +1,6 @@
 package org.mo.eai.history;
 
+import java.util.Arrays;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
@@ -80,7 +81,9 @@ public class FHistoryDateData
       output.writeFloat(investmentDay);
       output.writeFloat(investmentTotal);
       output.writeInt32(provinces.count());
-      for(FHistoryProvinceData province : provinces.toObjects()){
+      FHistoryProvinceData[] provinceArray = provinces.toObjects();
+      Arrays.sort(provinceArray);
+      for(FHistoryProvinceData province : provinceArray){
          province.serialize(output);
       }
       output.writeInt32(_citys.count());
