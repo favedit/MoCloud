@@ -3,11 +3,16 @@ package org.mo.eai;
 import org.mo.com.io.FByteFile;
 import org.mo.eai.template.city.FCityTemplate;
 import org.mo.eai.template.province.FProvinceTemplate;
+import org.mo.eai.template.rate.FRateTemplate;
 
 public class RTemplateExport
 {
    public static void main(String[] args){
       FByteFile file = new FByteFile();
+      // 输出比率信息集合
+      FRateTemplate rateTemplate = new FRateTemplate();
+      rateTemplate.parser();
+      rateTemplate.serialize(file);
       // 输出城市信息集合
       FProvinceTemplate provinceTemplate = new FProvinceTemplate();
       provinceTemplate.parser();

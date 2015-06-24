@@ -61,7 +61,14 @@ public class FHistoryDateData
       float investmentTotal = 0;
       for(FHistoryCityData city : _citys){
          String code = city.code() + "";
-         FCityResource cityResource = template.cards().get(code, null);
+         FCityResource cityResource = null;
+         if(code.length() > 1){
+            cityResource = template.cards().get(code, null);
+            if(cityResource == null){
+               String cityCode = code.substring(0, 2);
+               cityResource = template.cards().get(cityCode, null);
+            }
+         }
          if(cityResource != null){
             String provinceCode = cityResource.provinceCode();
             FHistoryProvinceData province = provinces.get(provinceCode, null);
@@ -72,6 +79,9 @@ public class FHistoryDateData
             }
             province.setInvestmentDay(province.investmentDay() + city.investmentDay());
             province.setInvestmentTotal(province.investmentTotal() + city.investmentTotal());
+         }else{
+            System.out.println("Invalid city code: " + code);
+            //throw new FFatalError("Invalid city code.");
          }
          investmentDay += city.investmentDay();
          investmentTotal += city.investmentTotal();

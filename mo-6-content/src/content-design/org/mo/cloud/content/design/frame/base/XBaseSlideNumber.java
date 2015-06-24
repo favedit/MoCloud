@@ -93,6 +93,18 @@ public abstract class XBaseSlideNumber
    @AContentField
    public final static FContentField BACK_GRID = new FContentField("backGrid", "back_grid", EContentData.String, "", "", "", "YYNY");
 
+   // 背景活动颜色的定义
+   @AContentField
+   public final static FContentField BACK_HOVER_COLOR = new FContentField("backHoverColor", "back_hover_color", EContentData.String, "", "", "", "YYNY");
+
+   // 背景活动资源的定义
+   @AContentField
+   public final static FContentField BACK_HOVER_RESOURCE = new FContentField("backHoverResource", "back_hover_resource", EContentData.String, "", "", "", "YYNY");
+
+   // 背景获得分割的定义
+   @AContentField
+   public final static FContentField BACK_HOVER_GRID = new FContentField("backHoverGrid", "back_hover_grid", EContentData.String, "", "", "", "YYNY");
+
    // 关联属性的定义
    @AContentField
    public final static FContentField LINKER = new FContentField("linker", "linker", EContentData.String, "", "", "", "YYNY");
@@ -342,6 +354,18 @@ public abstract class XBaseSlideNumber
    // 背景分割
    @AName("back_grid")
    protected String _backGrid;
+
+   // 背景活动颜色
+   @AName("back_hover_color")
+   protected String _backHoverColor;
+
+   // 背景活动资源
+   @AName("back_hover_resource")
+   protected String _backHoverResource;
+
+   // 背景获得分割
+   @AName("back_hover_grid")
+   protected String _backHoverGrid;
 
    // 关联属性
    @AName("linker")
@@ -839,6 +863,60 @@ public abstract class XBaseSlideNumber
    //============================================================
    public void setBackGrid(String value){
       _backGrid = value;
+   }
+
+   //============================================================
+   // <T>获得背景活动颜色的内容。</T>
+   //
+   // @return 背景活动颜色
+   //============================================================
+   public String getBackHoverColor(){
+      return _backHoverColor;
+   }
+
+   //============================================================
+   // <T>设置背景活动颜色的内容。</T>
+   //
+   // @param value 背景活动颜色
+   //============================================================
+   public void setBackHoverColor(String value){
+      _backHoverColor = value;
+   }
+
+   //============================================================
+   // <T>获得背景活动资源的内容。</T>
+   //
+   // @return 背景活动资源
+   //============================================================
+   public String getBackHoverResource(){
+      return _backHoverResource;
+   }
+
+   //============================================================
+   // <T>设置背景活动资源的内容。</T>
+   //
+   // @param value 背景活动资源
+   //============================================================
+   public void setBackHoverResource(String value){
+      _backHoverResource = value;
+   }
+
+   //============================================================
+   // <T>获得背景获得分割的内容。</T>
+   //
+   // @return 背景获得分割
+   //============================================================
+   public String getBackHoverGrid(){
+      return _backHoverGrid;
+   }
+
+   //============================================================
+   // <T>设置背景获得分割的内容。</T>
+   //
+   // @param value 背景获得分割
+   //============================================================
+   public void setBackHoverGrid(String value){
+      _backHoverGrid = value;
    }
 
    //============================================================

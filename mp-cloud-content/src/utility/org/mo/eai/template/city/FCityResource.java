@@ -11,7 +11,6 @@ import org.mo.com.lang.RInteger;
 public class FCityResource
       extends FObject
 {
-
    // 省份代码
    protected String _provinceCode;
 
@@ -23,6 +22,9 @@ public class FCityResource
 
    // 标签
    protected String _label;
+
+   // 级别
+   protected int _level;
 
    // 卡片代码
    protected String _cardCode;
@@ -109,6 +111,24 @@ public class FCityResource
    }
 
    //============================================================
+   // <T>获得级别。</T>
+   //
+   // @return 级别
+   //============================================================
+   public int level(){
+      return _level;
+   }
+
+   //============================================================
+   // <T>设置级别。</T>
+   //
+   // @param level 级别
+   //============================================================
+   public void setLevel(int level){
+      _level = level;
+   }
+
+   //============================================================
    // <T>获得卡片代码。</T>
    //
    // @return 卡片代码
@@ -144,6 +164,7 @@ public class FCityResource
       output.writeUint16(RInteger.parse(_provinceCode));
       output.writeUint16(RInteger.parse(_cardCode));
       output.writeString(_label);
+      output.writeUint16(_level);
       _location.serializeFloat3(output);
    }
 }
