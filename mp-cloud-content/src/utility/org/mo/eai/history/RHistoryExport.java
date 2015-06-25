@@ -5,14 +5,10 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
-import org.mo.eai.template.city.FCityTemplate;
 
 public class RHistoryExport
 {
    public static void main(String[] args){
-      // 加载城市数据
-      FCityTemplate template = new FCityTemplate();
-      template.parser();
       // 加载历史数据
       FHistoryData history = new FHistoryData();
       FLinesFile file = new FLinesFile();
@@ -32,6 +28,9 @@ public class RHistoryExport
             System.out.println(items[0]);
          }
       }
-      history.serializeFile("D:/Microbject/MoScript/source/ars/eai/investment.dat", template);
+      // 计算数据
+      history.calculate();
+      // 存储文件
+      history.serializeFile("D:/Microbject/MoScript/source/ars/eai/investment.dat");
    }
 }

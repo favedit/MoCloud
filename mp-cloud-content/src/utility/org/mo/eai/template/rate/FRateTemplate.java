@@ -1,13 +1,7 @@
 package org.mo.eai.template.rate;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.FInts;
-import org.mo.com.lang.RHex;
+import org.mo.com.lang.FObjects;
 
 //============================================================
 // <T>城市模板。</T>
@@ -17,28 +11,20 @@ public class FRateTemplate
    // 文件名称
    protected String _fileName = "D:/Microbject/MoScript/data/rate.png";
 
-   protected FInts _data = new FInts();
+   protected FObjects<FRateResource> _rates = new FObjects<FRateResource>(FRateResource.class);
 
    //============================================================
    // <T>解析处理。</T>
    //============================================================
    public void parser(){
-      try{
-         // 打开文件
-         BufferedImage image = ImageIO.read(new File(_fileName));
-         int width = image.getWidth();
-         int height = image.getHeight();
-         int y = height / 2;
-         for(int x = 0; x < width; x++){
-            int rgb = image.getRGB(x, y);
-            _data.append(rgb);
-            rgb = rgb & 0xFFFFFF;
-            System.out.println(RHex.toString(rgb, 8));
-         }
-         System.out.println("Image - " + width + "x" + height);
-      }catch(IOException e){
-         throw new FFatalError(e);
-      }
+      // 增加比率1
+      FRateResource rate01 = new FRateResource();
+      rate01.parser("D:/Microbject/MoScript/data/rate01.png");
+      _rates.push(rate01);
+      // 增加比率2
+      FRateResource rate02 = new FRateResource();
+      rate02.parser("D:/Microbject/MoScript/data/rate02.png");
+      _rates.push(rate02);
    }
 
    //============================================================
@@ -47,10 +33,10 @@ public class FRateTemplate
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      int count = _data.length();
+      int count = _rates.count();
       output.writeInt32(count);
-      for(int n = 0; n < count; n++){
-         output.writeUint32(_data.get(n));
+      for(FRateResource rate : _rates){
+         rate.serialize(output);
       }
    }
 

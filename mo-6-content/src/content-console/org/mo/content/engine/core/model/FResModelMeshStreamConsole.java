@@ -73,7 +73,7 @@ public class FResModelMeshStreamConsole
                                                    FGcResModelMeshInfo meshInfo,
                                                    FResStream stream){
       // 获得信息
-      long userId = session.ouid();
+      long userId = session.userId();
       long projectId = session.projectId();
       long modelId = modelInfo.ouid();
       long meshId = meshInfo.ouid();

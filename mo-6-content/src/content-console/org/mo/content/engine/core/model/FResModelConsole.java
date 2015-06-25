@@ -192,6 +192,13 @@ public class FResModelConsole
       modelInfo.setProjectId(projectId);
       model.saveUnit(modelInfo);
       doInsert(logicContext, modelInfo);
+      //............................................................
+      // 更新所有网格信息
+      int meshCount = model.meshs().count();
+      for(int n = 0; n < meshCount; n++){
+         FResModelMesh mesh = model.meshs().get(n);
+         _meshConsole.importResource(logicContext, session, modelInfo, mesh);
+      }
       return modelInfo;
    }
 

@@ -119,26 +119,30 @@ public class RArray
       }
       return alloc;
    }
-   //   @SuppressWarnings("unchecked")
-   //   public static <V> V[] compress(Class<V> clazz, V[] memory, int offset, int length){
-   //      V[] alloc = (V[])Array.newInstance(clazz, length);
-   //      int index = 0;
-   //      int total = offset + length;
-   //      for(int n = offset; n < total; n++){
-   //         //if(!RObject.isEmpty(memory[n])){
-   //         //   alloc[index] = memory[n];
-   //         //}
-   //      }
-   //      V[] result = (V[])Array.newInstance(clazz, index);
-   //      System.arraycopy(alloc, 0, result, 0, index);
-   //      return result;
-   //   }
+
+   //============================================================
+   // <T>压缩数组中空内容，生成一个新数据组。</T>
    //
-   //   public static boolean inRange(int index, int count){
-   //      return (index >= 0 && index < count);
-   //   }
-   //
-   //   public static boolean inRange(int index, int offset, int count){
-   //      return (index >= offset && index < count);
-   //   }
+   // @param clazz 类对象
+   // @param memory 数组
+   // @param offset 数组位置
+   // @param length 数组长度
+   //============================================================
+   @SuppressWarnings("unchecked")
+   public static <V> V[] compress(Class<V> clazz,
+                                  V[] memory,
+                                  int offset,
+                                  int length){
+      V[] alloc = (V[])Array.newInstance(clazz, length);
+      int index = 0;
+      int total = offset + length;
+      for(int n = offset; n < total; n++){
+         if(memory[n] != null){
+            alloc[index] = memory[n];
+         }
+      }
+      V[] result = (V[])Array.newInstance(clazz, index);
+      System.arraycopy(alloc, 0, result, 0, index);
+      return result;
+   }
 }
