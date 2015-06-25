@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150623152404">
-  <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="354,164" back_resource="url:/script/ars/eai/logo.png">
-    <Label guid="D00475A508AD493382D426265D64DB15" name="date" label="2015-01-01" location="236,19" size="100,40" align_cd='left' fore_color="#1A9BD0" fore_font="bold 14px Microsoft YaHei" />
-    <Label guid="30194472174A47F1A302B4559169638A" name="time" label="00:00" location="215,60" size="100,40" align_cd='left' fore_color="#1A9BD0" fore_font="bold 14px Microsoft YaHei" />
+<Content>
+  <Bar name="eai.chart.TotalBar" label="总计栏" size="360,70" back_resource="url:/script/ars/eai/total.png">
+    <Label name="total" label="2015-01-01" location="136,19" size="200,55" align_cd='left' fore_color="#FFE951" fore_font="bold 24px Microsoft YaHei" />
   </Bar>
 </Content>
