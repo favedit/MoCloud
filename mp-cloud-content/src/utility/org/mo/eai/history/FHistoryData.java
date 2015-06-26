@@ -4,7 +4,9 @@ import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.FObjects;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -41,11 +43,29 @@ public class FHistoryData
    // 城市集合
    protected FDictionary<FHistoryCityData> _citys = new FDictionary<FHistoryCityData>(FHistoryCityData.class);
 
+   // 里程碑集合
+   protected FObjects<FHistoryMilestoneData> _milestones = new FObjects<FHistoryMilestoneData>(FHistoryMilestoneData.class);
+
    // 日期数据
    protected FDictionary<FHistoryDateData> _dates = new FDictionary<FHistoryDateData>(FHistoryDateData.class);
 
    // 非法代码
    protected FAttributes _invalidCodes = new FAttributes();
+
+   //============================================================
+   // <T>构造历史数据。</T>
+   //============================================================
+   public FHistoryData(){
+   }
+
+   //============================================================
+   // <T>获得里程碑集合。</T>
+   //
+   // @return 里程碑集合
+   //============================================================
+   public FObjects<FHistoryMilestoneData> milestones(){
+      return _milestones;
+   }
 
    //============================================================
    // <T>获得日期集合。</T>
@@ -63,6 +83,24 @@ public class FHistoryData
    //============================================================
    public FAttributes invalidCodes(){
       return _invalidCodes;
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public String findDate(float total){
+      int count = _dates.count();
+      for(int n = count - 1; n >= 0; n--){
+         FHistoryDateData date = _dates.value(n);
+         if(total > date.investmentTotal()){
+            String code = date.code();
+            System.out.println("date " + code);
+            return code;
+         }
+      }
+      throw new FFatalError("Can't find date.");
    }
 
    //============================================================
@@ -158,6 +196,18 @@ public class FHistoryData
       for(String code : _invalidCodes.toObjects()){
          _logger.debug(this, "calculate", "Invalid city code. (code={1})", code);
       }
+      // 计算里程碑
+      _milestones.push(new FHistoryMilestoneData("20141130", 1, 133));
+      _milestones.push(new FHistoryMilestoneData("20150206", 10, 201));
+      _milestones.push(new FHistoryMilestoneData("20150310", 20, 235));
+      _milestones.push(new FHistoryMilestoneData("20150403", 30, 259));
+      _milestones.push(new FHistoryMilestoneData("20150424", 40, 280));
+      _milestones.push(new FHistoryMilestoneData("20150512", 50, 298));
+      _milestones.push(new FHistoryMilestoneData("20150525", 60, 311));
+      _milestones.push(new FHistoryMilestoneData("20150602", 70, 319));
+      _milestones.push(new FHistoryMilestoneData("20150610", 80, 327));
+      _milestones.push(new FHistoryMilestoneData("20150618", 90, 335));
+      _milestones.push(new FHistoryMilestoneData("20150625", 100, 342));
    }
 
    //============================================================
@@ -184,6 +234,12 @@ public class FHistoryData
       output.writeInt32(cityCount);
       for(FHistoryCityData city : _citys.toObjects()){
          city.serialize(output);
+      }
+      // 写入里程碑数据
+      int milestoneCount = _milestones.count();
+      output.writeInt32(milestoneCount);
+      for(FHistoryMilestoneData milestone : _milestones){
+         milestone.serialize(output);
       }
       // 写入日期数据
       int dayCount = _dates.count();
