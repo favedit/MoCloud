@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-  <Bar name="eai.chart.MilestoneBar" label="总计栏" size="400,80" back_resource="url:/script/ars/eai/milestone.png">
+  <Bar name="eai.chart.MilestoneBar" label="总计栏" size="360,80" dock_cd='RightTop' back_resource="url:/script/ars/eai/milestone.png">
     <Label name="date" label="2015/01/01" location="55,15" size="120,45" align_cd='left' fore_color="#FFE849" fore_font="bold 20px Microsoft YaHei" />
     <Label name="total" label="20亿" location="180,25" size="100,45" align_cd='left' fore_color="#FFA800" fore_font="bold 28px Microsoft YaHei" />
   </Bar>

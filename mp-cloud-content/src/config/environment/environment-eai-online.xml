@@ -25,7 +25,7 @@
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' >
       <Property name='enable'>Y</Property>
-      <Property name='storage_host'>115.28.82.149</Property>
+      <Property name='storage_host'>127.0.0.1</Property>
       <Property name='storage_port'>27017</Property>
       <Property name='storage_name'>eai</Property>
       <Initialize name='initialize'/>
@@ -61,7 +61,7 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.82.149:3306/AI_CACHE</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/AI_CACHE</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -86,7 +86,7 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.82.149:3306/AI_DATA</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/AI_DATA</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
