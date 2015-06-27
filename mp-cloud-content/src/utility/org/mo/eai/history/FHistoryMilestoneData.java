@@ -29,7 +29,7 @@ public class FHistoryMilestoneData
                                 float investmentTotal,
                                 int dayCount){
       _code = code;
-      _investmentTotal = investmentTotal * 100000000;
+      _investmentTotal = investmentTotal;
       _dayCount = dayCount;
    }
 
