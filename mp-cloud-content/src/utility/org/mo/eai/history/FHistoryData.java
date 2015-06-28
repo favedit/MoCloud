@@ -59,6 +59,24 @@ public class FHistoryData
    }
 
    //============================================================
+   // <T>获得省份集合。</T>
+   //
+   // @return 省份集合
+   //============================================================
+   public FDictionary<FHistoryProvinceData> provinces(){
+      return _provinces;
+   }
+
+   //============================================================
+   // <T>获得城市集合。</T>
+   //
+   // @return 城市集合
+   //============================================================
+   public FDictionary<FHistoryCityData> citys(){
+      return _citys;
+   }
+
+   //============================================================
    // <T>获得里程碑集合。</T>
    //
    // @return 里程碑集合
@@ -83,24 +101,6 @@ public class FHistoryData
    //============================================================
    public FAttributes invalidCodes(){
       return _invalidCodes;
-   }
-
-   //============================================================
-   // <T>序列化数据到输出流。</T>
-   //
-   // @param output 输出流
-   //============================================================
-   public String findDate(float total){
-      int count = _dates.count();
-      for(int n = count - 1; n >= 0; n--){
-         FHistoryDateData date = _dates.value(n);
-         if(total > date.investmentTotal()){
-            String code = date.code();
-            System.out.println("date " + code);
-            return code;
-         }
-      }
-      throw new FFatalError("Can't find date.");
    }
 
    //============================================================
@@ -133,6 +133,7 @@ public class FHistoryData
       // 计算数据
       _investmentDay = 0;
       _investmentTotal = 0;
+      int dateCityCount = 0;
       for(FHistoryDateData date : _dates.toObjects()){
          // 计算省份最大值
          for(FHistoryProvinceData provinceDate : date.provinces().toObjects()){
@@ -159,6 +160,11 @@ public class FHistoryData
             }
          }
          // 计算城市最大值
+         if(dateCityCount > date.citys().count()){
+            throw new FFatalError("City error.");
+         }
+         dateCityCount = date.citys().count();
+         System.out.println(date.code() + " - " + dateCityCount);
          for(FHistoryCityData cityData : date.citys()){
             String cityCode = cityData.code() + "";
             float investmentDay = cityData.investmentDay();
@@ -174,6 +180,8 @@ public class FHistoryData
             }
             if(investmentTotal > city.investmentTotal()){
                city.setInvestmentDay(investmentTotal);
+            }else{
+               throw new FFatalError("Invalid total.");
             }
             if(investmentDay > _investmentCityDay){
                _investmentCityDay = investmentDay;

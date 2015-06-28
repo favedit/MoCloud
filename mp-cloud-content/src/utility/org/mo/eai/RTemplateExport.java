@@ -7,6 +7,12 @@ import org.mo.eai.template.rate.FRateTemplate;
 
 public class RTemplateExport
 {
+   public static String HomeScript = "D:/Microbject/MoScript";
+
+   public static String HomeData = HomeScript + "/data";
+
+   public static String HomeResource = HomeScript + "/source/ars/eai";
+
    protected static FCityTemplate _cityTemplate;
 
    //============================================================

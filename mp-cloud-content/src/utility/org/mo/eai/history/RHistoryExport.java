@@ -5,6 +5,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
+import org.mo.eai.RTemplateExport;
 
 public class RHistoryExport
 {
@@ -12,7 +13,7 @@ public class RHistoryExport
       // 加载历史数据
       FHistoryData history = new FHistoryData();
       FLinesFile file = new FLinesFile();
-      file.loadFile("D:/Microbject/MoScript/data/investment.txt");
+      file.loadFile(RTemplateExport.HomeData + "/investment.txt");
       for(String line : file.lines()){
          if(!RString.isEmpty(line)){
             String[] items = RString.split(line, ' ');
@@ -25,12 +26,15 @@ public class RHistoryExport
             city.setInvestmentDay(RFloat.parse(items[2]));
             city.setInvestmentTotal(RFloat.parse(items[3]));
             history.push(dateValue, city);
-            System.out.println(items[0]);
+            // System.out.println(items[0]);
          }
       }
+      FHistoryDateData startDate = history.dates().value(0);
+      FHistoryDateData endDate = history.dates().value(history.dates().count() - 1);
+      System.out.println(startDate.code() + " - " + endDate.code());
       // 计算数据
       history.calculate();
       // 存储文件
-      history.serializeFile("D:/Microbject/MoScript/source/ars/eai/investment.dat");
+      history.serializeFile(RTemplateExport.HomeResource + "/investment.dat");
    }
 }
