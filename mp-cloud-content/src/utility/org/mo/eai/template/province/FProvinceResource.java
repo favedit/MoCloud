@@ -19,6 +19,9 @@ public class FProvinceResource
    // 标签
    protected String _label;
 
+   // 显示顺序
+   protected int _displayOrder;
+
    //============================================================
    // <T>构造省份数据。</T>
    //============================================================
@@ -80,6 +83,24 @@ public class FProvinceResource
    }
 
    //============================================================
+   // <T>获得显示顺序。</T>
+   //
+   // @return 显示顺序
+   //============================================================
+   public int displayOrder(){
+      return _displayOrder;
+   }
+
+   //============================================================
+   // <T>设置显示顺序。</T>
+   //
+   // @param displayOrder 显示顺序
+   //============================================================
+   public void setDisplayOrder(int displayOrder){
+      _displayOrder = displayOrder;
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
@@ -88,5 +109,6 @@ public class FProvinceResource
       output.writeUint16(RInteger.parse(_code));
       output.writeString(_name);
       output.writeString(_label);
+      output.writeUint16(_displayOrder);
    }
 }

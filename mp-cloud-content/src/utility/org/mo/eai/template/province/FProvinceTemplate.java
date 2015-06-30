@@ -4,6 +4,7 @@ import org.mo.com.io.FLinesFile;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 
 public class FProvinceTemplate
@@ -25,13 +26,14 @@ public class FProvinceTemplate
          String line = file.line(n);
          if(!RString.isEmpty(line)){
             String[] items = RString.split(line.trim(), ',');
-            if(items.length != 3){
+            if(items.length != 4){
                throw new FFatalError("Format is invalid.");
             }
             FProvinceResource province = new FProvinceResource();
             province.setCode(RString.trim(items[0]));
             province.setName(RString.trim(items[1]));
             province.setLabel(RString.trim(items[2]));
+            province.setDisplayOrder(RInteger.parse(items[3]));
             _provinces.push(province);
             System.out.println(items[0] + " - " + items[1] + " - " + items[2]);
          }
