@@ -1,1 +1,3 @@
 chrome://flags/#enable-devtools-experiments
+chrome://inspect/#devices
+

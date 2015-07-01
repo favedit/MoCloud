@@ -37,6 +37,10 @@ public abstract class XBaseNumber2
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
+   // 锚点类型的定义
+   @AContentField
+   public final static FContentField ANCHOR_CD = new FContentField("anchorCd", "anchor_cd", EContentData.String, "", "", "", "YYNY");
+
    // 回行类型的定义
    @AContentField
    public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
@@ -274,6 +278,10 @@ public abstract class XBaseNumber2
    // 属性集合
    @AName("attributes")
    protected String _attributes;
+
+   // 锚点类型
+   @AName("anchor_cd")
+   protected String _anchorCd;
 
    // 回行类型
    @AName("wrap_cd")
@@ -563,6 +571,24 @@ public abstract class XBaseNumber2
    //============================================================
    public void setAttributes(String value){
       _attributes = value;
+   }
+
+   //============================================================
+   // <T>获得锚点类型的内容。</T>
+   //
+   // @return 锚点类型
+   //============================================================
+   public String getAnchorCd(){
+      return _anchorCd;
+   }
+
+   //============================================================
+   // <T>设置锚点类型的内容。</T>
+   //
+   // @param value 锚点类型
+   //============================================================
+   public void setAnchorCd(String value){
+      _anchorCd = value;
    }
 
    //============================================================

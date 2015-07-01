@@ -25,6 +25,10 @@ public class FRateTemplate
       FRateResource rate02 = new FRateResource();
       rate02.parser("D:/Microbject/MoScript/data/rate02.png");
       _rates.push(rate02);
+      // 增加比率3
+      FRateResource rate03 = new FRateResource();
+      rate03.parser("D:/Microbject/MoScript/data/rate03.png");
+      _rates.push(rate03);
    }
 
    //============================================================
