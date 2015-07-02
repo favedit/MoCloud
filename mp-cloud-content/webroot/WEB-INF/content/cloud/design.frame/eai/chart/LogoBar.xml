@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content update_date="20150623152404">
-  <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="443,206" back_resource="url:/script/ars/eai/logo.png">
-    <Label guid="D00475A508AD493382D426265D64DB15" name="date" label="2015-01-01" location="310,30" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 17px Microsoft YaHei" />
-    <Label guid="30194472174A47F1A302B4559169638A" name="time" label="00:00" location="282,82" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 17px Microsoft YaHei" />
+  <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="1218,239" back_resource="url:/script/ars/eai/logo.png">
+    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="355,48" size="370,36" align_cd="right" fore_color="#f30212" fore_font="bold 36px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="investmentDay" label="0" location="980,53" size="220,26" align_cd="right" fore_color="#FFE951" fore_font="bold 24px Microsoft YaHei"/>
+    <Label name="date" label="2015-01-01" location="340,120" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 24px Microsoft YaHei" />
+    <Label name="time" label="00:00" location="610,120" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 24px Microsoft YaHei" />
   </Bar>
 </Content>
