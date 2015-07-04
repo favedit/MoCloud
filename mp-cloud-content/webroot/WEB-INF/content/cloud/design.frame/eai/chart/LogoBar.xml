@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content update_date="20150623152404">
-  <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="1218,239" back_resource="url:/script/ars/eai/logo.png">
-    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="360,43" size="370,36" align_cd="right" fore_color="#f30212" fore_font="bold 36px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="investmentDay" label="0" location="980,45" size="220,26" align_cd="right" fore_color="#FFE951" fore_font="bold 24px Microsoft YaHei"/>
-    <Label name="date" label="2015-01-01" location="320,116" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
-    <Label name="time" label="00:00" location="590,116" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
+  <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="1249,232" back_resource="url:/script/ars/eai/logo.png">
+    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="360,40" size="370,36" align_cd="right" fore_color="#f30212" fore_font="bold 38px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="investmentDay" label="0" location="965,45" size="220,26" align_cd="right" fore_color="#FFE951" fore_font="bold 31px Microsoft YaHei"/>
+    <Label name="date" label="2015-01-01" location="322,112" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
+    <Label name="time" label="00:00" location="596,112" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
   </Bar>
 </Content>
