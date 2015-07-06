@@ -164,7 +164,7 @@ public class FHistoryData
             throw new FFatalError("City error.");
          }
          dateCityCount = date.citys().count();
-         System.out.println(date.code() + " - " + dateCityCount);
+         //System.out.println(date.code() + " - " + dateCityCount);
          for(FHistoryCityData cityData : date.citys()){
             String cityCode = cityData.code() + "";
             float investmentDay = cityData.investmentDay();
@@ -201,19 +201,18 @@ public class FHistoryData
          }
       }
       // 显示代码
-      for(String code : _invalidCodes.toObjects()){
-         _logger.debug(this, "calculate", "Invalid city code. (code={1})", code);
-      }
+      //for(String code : _invalidCodes.toObjects()){
+      //   _logger.debug(this, "calculate", "Invalid city code. (code={1})", code);
+      //}
       // 计算里程碑
-      _milestones.push(new FHistoryMilestoneData("20140627", 1000, 14, 14));
-      _milestones.push(new FHistoryMilestoneData("20140724", 5000, 41, 27));
-      _milestones.push(new FHistoryMilestoneData("20140804", 10000, 52, 11));
-      _milestones.push(new FHistoryMilestoneData("20141113", 50000, 153, 101));
-      _milestones.push(new FHistoryMilestoneData("20141231", 100000, 201, 48));
-      _milestones.push(new FHistoryMilestoneData("20150308", 300000, 268, 57));
-      _milestones.push(new FHistoryMilestoneData("20150421", 500000, 312, 44));
-      _milestones.push(new FHistoryMilestoneData("20150529", 800000, 350, 38));
-      _milestones.push(new FHistoryMilestoneData("20150615", 1000000, 367, 17));
+      _milestones.push(new FHistoryMilestoneData("20140809", 1000, 14, 14));
+      _milestones.push(new FHistoryMilestoneData("20141028", 5000, 41, 27));
+      _milestones.push(new FHistoryMilestoneData("20141129", 10000, 52, 11));
+      _milestones.push(new FHistoryMilestoneData("20150116", 50000, 153, 101));
+      _milestones.push(new FHistoryMilestoneData("20150206", 100000, 201, 48));
+      _milestones.push(new FHistoryMilestoneData("20150310", 200000, 268, 57));
+      _milestones.push(new FHistoryMilestoneData("20150512", 500000, 312, 44));
+      _milestones.push(new FHistoryMilestoneData("20150625", 1000000, 367, 17));
    }
 
    //============================================================
@@ -251,6 +250,7 @@ public class FHistoryData
       int dayCount = _dates.count();
       output.writeInt32(dayCount);
       for(FHistoryDateData date : _dates.toObjects()){
+         System.out.println(date.code() + " - " + (int)(date.investmentTotal() / 10000));
          date.serialize(output);
       }
    }

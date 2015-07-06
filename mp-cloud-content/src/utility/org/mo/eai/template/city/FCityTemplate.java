@@ -76,7 +76,7 @@ public class FCityTemplate
                _citys.push(city);
                _cards.set(city.cardCode(), city);
             }
-            System.out.println(items[0] + " - " + items[1] + " - " + items[2] + " - " + items[3] + " - " + items[4] + " - " + items[5] + " - " + items[6]);
+            //System.out.println(items[0] + " - " + items[1] + " - " + items[2] + " - " + items[3] + " - " + items[4] + " - " + items[5] + " - " + items[6]);
          }
       }
    }
