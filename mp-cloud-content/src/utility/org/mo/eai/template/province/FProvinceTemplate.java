@@ -6,20 +6,48 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
+import org.mo.eai.RResourceConfiguration;
 
+//============================================================
+// <T>省份模板。</T>
+//============================================================
 public class FProvinceTemplate
 {
-   protected String _fileName = "D:/Microbject/MoScript/data/province.csv";
-
+   // 省份集合
    protected FObjects<FProvinceResource> _provinces = new FObjects<FProvinceResource>(FProvinceResource.class);
+
+   //============================================================
+   // <T>获得省份集合。</T>
+   //
+   // @return 省份集合
+   //============================================================
+   public FObjects<FProvinceResource> provinces(){
+      return _provinces;
+   }
+
+   //============================================================
+   // <T>根据代码查找省份。</T>
+   //
+   // @param code 代码
+   // @return 省份
+   //============================================================
+   public FProvinceResource findByCode(String code){
+      for(FProvinceResource province : _provinces){
+         if(code.equals(province.code())){
+            return province;
+         }
+      }
+      throw new FFatalError("Province is not exists.");
+   }
 
    //============================================================
    // <T>解析数据。</T>
    //============================================================
    public void parser(){
+      String fileName = RResourceConfiguration.HomeData + "/province.csv";
       // 打开文件
       FLinesFile file = new FLinesFile();
-      file.loadFile(_fileName, "GB2312");
+      file.loadFile(fileName, "GB2312");
       // 读取所有行
       int count = file.count();
       for(int n = 1; n < count; n++){

@@ -123,15 +123,13 @@ public class SDoublePoint3
    // @param xconfig 配置信息
    //============================================================
    public void parse(String value){
-      if(!RString.isEmpty(value)){
-         String[] items = RString.split(value, ',');
-         if(items.length != 3){
-            throw new FFatalError("Parse failure.");
-         }
-         x = RDouble.parse(items[0]);
-         y = RDouble.parse(items[1]);
-         z = RDouble.parse(items[2]);
+      String[] items = RString.split(value, ',');
+      if(items.length != 3){
+         throw new FFatalError("Parse failure.");
       }
+      x = RDouble.parse(items[0]);
+      y = RDouble.parse(items[1]);
+      z = RDouble.parse(items[2]);
    }
 
    //============================================================

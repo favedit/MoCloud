@@ -27,7 +27,8 @@ public class FHistoryMilestoneData
    //============================================================
    public FHistoryMilestoneData(String code,
                                 float investmentTotal,
-                                int dayCount){
+                                int dayCount,
+                                int dayCost){
       _code = code;
       _investmentTotal = investmentTotal;
       _dayCount = dayCount;

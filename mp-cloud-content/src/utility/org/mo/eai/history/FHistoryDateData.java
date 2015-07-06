@@ -6,7 +6,7 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RInteger;
-import org.mo.eai.RTemplateExport;
+import org.mo.eai.RResourceExportor;
 import org.mo.eai.template.city.FCityResource;
 import org.mo.eai.template.city.FCityTemplate;
 
@@ -137,7 +137,7 @@ public class FHistoryDateData
    // <T>计算数据。</T>
    //============================================================
    public void calculate(){
-      FCityTemplate cityTemplate = RTemplateExport.cityTemplate();
+      FCityTemplate cityTemplate = RResourceExportor.cityTemplate();
       FDictionary<FCityResource> cards = cityTemplate.cards();
       // 计算数据
       _investmentDay = 0;

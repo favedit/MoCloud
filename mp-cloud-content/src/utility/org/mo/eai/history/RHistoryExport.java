@@ -5,7 +5,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
-import org.mo.eai.RTemplateExport;
+import org.mo.eai.RResourceConfiguration;
 
 public class RHistoryExport
 {
@@ -13,7 +13,7 @@ public class RHistoryExport
       // 加载历史数据
       FHistoryData history = new FHistoryData();
       FLinesFile file = new FLinesFile();
-      file.loadFile(RTemplateExport.HomeData + "/investment.txt");
+      file.loadFile(RResourceConfiguration.HomeData + "/history/investment.txt");
       for(String line : file.lines()){
          if(!RString.isEmpty(line)){
             String[] items = RString.split(line, ' ');
@@ -35,6 +35,6 @@ public class RHistoryExport
       // 计算数据
       history.calculate();
       // 存储文件
-      history.serializeFile(RTemplateExport.HomeResource + "/investment.dat");
+      history.serializeFile(RResourceConfiguration.HomeResource + "/investment.dat");
    }
 }
