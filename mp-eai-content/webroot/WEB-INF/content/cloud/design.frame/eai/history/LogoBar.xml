@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150623152404">
+  <Bar name="eai.history.LogoBar" label="标志栏" size="1249,232" back_resource="url:/script/ars/eai/history/logo.png">
+    <Label type="FEaiStatisticsDate" name="date" label="0" location="370,28" size="400,40" align_cd="right" fore_color="#f30212" fore_font="bold 34px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="investment" label="0" location="880,28" size="400,40" align_cd="right" fore_color="#FFE951" fore_font="bold 34px Microsoft YaHei"/>
+  </Bar>
+</Content>
