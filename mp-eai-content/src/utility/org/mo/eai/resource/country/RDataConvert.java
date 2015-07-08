@@ -12,7 +12,6 @@ public class RDataConvert
    //============================================================
    public static void main(String[] args) throws Exception{
       FProvinceTemplate provinceTemplate = RResourceExportor.provinceTemplate();
-
       String filePath = "D:/Microbject/MoScript/data/country";
       FCountryData countryData = new FCountryData();
       for(String fileName : RFile.listFiles(filePath)){

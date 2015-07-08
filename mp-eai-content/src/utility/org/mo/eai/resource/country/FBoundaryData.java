@@ -1,5 +1,7 @@
 package org.mo.eai.resource.country;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FInts;
@@ -9,8 +11,10 @@ import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.poly2tri.Poly2Tri;
-import org.poly2tri.triangulation.sets.PointSet;
-import org.poly2tri.triangulation.util.PointGenerator;
+import org.poly2tri.geometry.polygon.Polygon;
+import org.poly2tri.geometry.polygon.PolygonPoint;
+import org.poly2tri.triangulation.TriangulationPoint;
+import org.poly2tri.triangulation.delaunay.DelaunayTriangle;
 
 //============================================================
 // <T>边界数据。</T>
@@ -78,14 +82,24 @@ public class FBoundaryData
    // <T>计算数据。</T>
    //============================================================
    public void calculate(){
-      //      List<PolygonPoint> polygonPoints = new List<PolygonPoint>();
-      //      PointSet points = new PointSet();
-      //      for(SDoublePoint3 point : _points){
-      //         PolygonPoint polygonPoint = new PolygonPoint(point.x, point.y, point.z);
-      //      }
-      //      Polygon a = new Polygon();
-      PointSet points = new PointSet(PointGenerator.uniformDistribution(50, 500000));
-      Poly2Tri.triangulate(points);
+      // 转换数据
+      List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
+      int count = _points.count();
+      for(int n = 0; n < count - 1; n++){
+         SDoublePoint3 point = _points.get(n);
+         PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y);
+         polygonPoints.add(polygonPoint);
+      }
+      Polygon polygon = new Polygon(polygonPoints);
+      Poly2Tri.triangulate(polygon);
+      // 获得索引
+      _indexes.clear();
+      for(DelaunayTriangle triangle : polygon.getTriangles()){
+         TriangulationPoint[] points = triangle.points;
+         _indexes.append(((FPolygonPoint)points[0]).index());
+         _indexes.append(((FPolygonPoint)points[1]).index());
+         _indexes.append(((FPolygonPoint)points[2]).index());
+      }
    }
 
    //============================================================
