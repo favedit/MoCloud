@@ -41,6 +41,21 @@ public class FProvinceTemplate
    }
 
    //============================================================
+   // <T>根据名称查找省份。</T>
+   //
+   // @param name 名称
+   // @return 省份
+   //============================================================
+   public FProvinceResource findByName(String name){
+      for(FProvinceResource province : _provinces){
+         if(name.equals(province.name())){
+            return province;
+         }
+      }
+      throw new FFatalError("Province is not exists.");
+   }
+
+   //============================================================
    // <T>根据标签查找省份。</T>
    //
    // @param label 标签

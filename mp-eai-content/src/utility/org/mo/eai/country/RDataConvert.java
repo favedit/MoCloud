@@ -2,6 +2,9 @@ package org.mo.eai.country;
 
 import org.mo.com.io.FLinesFile;
 import org.mo.com.lang.RString;
+import org.mo.eai.RResourceExportor;
+import org.mo.eai.template.province.FProvinceResource;
+import org.mo.eai.template.province.FProvinceTemplate;
 
 public class RDataConvert
 {
@@ -9,7 +12,8 @@ public class RDataConvert
    // <T>主函数。</T>
    //============================================================
    public static void main(String[] args) throws Exception{
-      String fileName = "D:/Microbject/MoScript/data/country_boundary.txt";
+      String fileName = "D:/Microbject/MoScript/data/country/boundary.txt";
+      FProvinceTemplate provinceTemplate = RResourceExportor.provinceTemplate();
       FLinesFile file = new FLinesFile(fileName);
       int count = file.count();
       int n = -1;
@@ -19,8 +23,10 @@ public class RDataConvert
       while(++n < count){
          String line = file.line(n);
          if(RString.startsWith(line, "province:")){
+            String name = line.substring(9);
+            FProvinceResource provinceResource = provinceTemplate.findByName(name);
             activeProvince = new FProvinceData();
-            activeProvince.setName(line.substring(9));
+            activeProvince.setCode(provinceResource.code());
             activeCountry.pushBoundary(activeProvince);
          }
          if(RString.startsWith(line, "color:")){

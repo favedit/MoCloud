@@ -3,6 +3,7 @@ package org.mo.eai.country;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.generic.TDumpInfo;
 
 //============================================================
@@ -11,8 +12,8 @@ import org.mo.com.lang.generic.TDumpInfo;
 public class FProvinceData
       extends FObject
 {
-   // 名称
-   protected String _name;
+   // 代码
+   protected String _code;
 
    // 颜色
    protected int _color;
@@ -27,21 +28,21 @@ public class FProvinceData
    }
 
    //============================================================
-   // <T>获得名称。</T>
+   // <T>获得代码。</T>
    //
-   // @return 名称
+   // @return 代码
    //============================================================
-   public String name(){
-      return _name;
+   public String code(){
+      return _code;
    }
 
    //============================================================
-   // <T>设置名称。</T>
+   // <T>设置代码。</T>
    //
-   // @param name 名称
+   // @param code 代码
    //============================================================
-   public void setName(String name){
-      _name = name;
+   public void setCode(String code){
+      _code = code;
    }
 
    //============================================================
@@ -95,8 +96,7 @@ public class FProvinceData
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      output.writeString(_name);
-      output.writeUint32(_color);
+      output.writeUint16(RInteger.parse(_code));
       output.writeInt32(_boundaries.count());
       for(FBoundaryData boundary : _boundaries){
          boundary.serialize(output);
@@ -111,7 +111,7 @@ public class FProvinceData
    //============================================================
    @Override
    public TDumpInfo dump(TDumpInfo info){
-      info.append(_name);
+      info.append(_code);
       info.appendLine();
       for(FBoundaryData boundary : _boundaries){
          boundary.dump(info);
