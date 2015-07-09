@@ -1,5 +1,7 @@
 package org.mo.eai.country;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FInts;
@@ -8,6 +10,12 @@ import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
+import org.mo.eai.resource.country.FPolygonPoint;
+import org.poly2tri.Poly2Tri;
+import org.poly2tri.geometry.polygon.Polygon;
+import org.poly2tri.geometry.polygon.PolygonPoint;
+import org.poly2tri.triangulation.TriangulationPoint;
+import org.poly2tri.triangulation.delaunay.DelaunayTriangle;
 
 //============================================================
 // <T>边界数据。</T>
@@ -68,6 +76,31 @@ public class FBoundaryData
       String[] indexValues = RString.split(source, ',');
       for(String indexValue : indexValues){
          _indexes.append(RInteger.parse(indexValue));
+      }
+   }
+
+   //============================================================
+   // <T>计算数据。</T>
+   //============================================================
+   public void calculate(){
+      // 填充数据
+      List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
+      int count = _points.count();
+      for(int n = 0; n < count - 1; n++){
+         SDoublePoint3 point = _points.get(n);
+         PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
+         polygonPoints.add(polygonPoint);
+      }
+      Polygon polygon = new Polygon(polygonPoints);
+      // 转换数据
+      Poly2Tri.triangulate(polygon);
+      // 获得索引
+      _indexes.clear();
+      for(DelaunayTriangle triangle : polygon.getTriangles()){
+         TriangulationPoint[] points = triangle.points;
+         _indexes.append(((FPolygonPoint)points[0]).index());
+         _indexes.append(((FPolygonPoint)points[1]).index());
+         _indexes.append(((FPolygonPoint)points[2]).index());
       }
    }
 

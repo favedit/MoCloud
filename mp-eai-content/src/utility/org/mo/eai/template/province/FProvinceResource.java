@@ -19,6 +19,9 @@ public class FProvinceResource
    // 标签
    protected String _label;
 
+   // 类型
+   protected String _typeCd;
+
    // 显示顺序
    protected int _displayOrder;
 
@@ -83,6 +86,24 @@ public class FProvinceResource
    }
 
    //============================================================
+   // <T>获得类型。</T>
+   //
+   // @return 类型
+   //============================================================
+   public String typeCd(){
+      return _typeCd;
+   }
+
+   //============================================================
+   // <T>设置类型。</T>
+   //
+   // @param typeCd 类型
+   //============================================================
+   public void setTypeCd(String typeCd){
+      _typeCd = typeCd;
+   }
+
+   //============================================================
    // <T>获得显示顺序。</T>
    //
    // @return 显示顺序
@@ -109,6 +130,7 @@ public class FProvinceResource
       output.writeUint16(RInteger.parse(_code));
       output.writeString(_name);
       output.writeString(_label);
+      output.writeString(_typeCd);
       output.writeUint16(_displayOrder);
    }
 }

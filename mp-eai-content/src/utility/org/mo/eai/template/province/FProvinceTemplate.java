@@ -41,6 +41,21 @@ public class FProvinceTemplate
    }
 
    //============================================================
+   // <T>根据标签查找省份。</T>
+   //
+   // @param label 标签
+   // @return 省份
+   //============================================================
+   public FProvinceResource findByLabel(String label){
+      for(FProvinceResource province : _provinces){
+         if(label.equals(province.label())){
+            return province;
+         }
+      }
+      throw new FFatalError("Province is not exists.");
+   }
+
+   //============================================================
    // <T>解析数据。</T>
    //============================================================
    public void parser(){
@@ -54,16 +69,17 @@ public class FProvinceTemplate
          String line = file.line(n);
          if(!RString.isEmpty(line)){
             String[] items = RString.split(line.trim(), ',');
-            if(items.length != 4){
+            if(items.length != 5){
                throw new FFatalError("Format is invalid.");
             }
             FProvinceResource province = new FProvinceResource();
             province.setCode(RString.trim(items[0]));
             province.setName(RString.trim(items[1]));
             province.setLabel(RString.trim(items[2]));
-            province.setDisplayOrder(RInteger.parse(items[3]));
+            province.setTypeCd(RString.trim(items[3]));
+            province.setDisplayOrder(RInteger.parse(items[4]));
             _provinces.push(province);
-            System.out.println(items[0] + " - " + items[1] + " - " + items[2]);
+            System.out.println(items[0] + " - " + items[1] + " - " + items[2] + " - " + items[3]);
          }
       }
    }

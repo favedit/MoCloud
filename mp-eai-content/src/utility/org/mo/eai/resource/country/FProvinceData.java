@@ -4,8 +4,10 @@ import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.geom.SIntPoint3;
 import org.mo.com.io.FLinesFile;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 
@@ -16,7 +18,7 @@ public class FProvinceData
       extends FObject
 {
    // 名称
-   protected String _name;
+   protected String _code;
 
    // 颜色
    protected int _color;
@@ -31,21 +33,21 @@ public class FProvinceData
    }
 
    //============================================================
-   // <T>获得名称。</T>
+   // <T>获得代码。</T>
    //
-   // @return 名称
+   // @return 代码
    //============================================================
-   public String name(){
-      return _name;
+   public String code(){
+      return _code;
    }
 
    //============================================================
-   // <T>设置名称。</T>
+   // <T>设置代码。</T>
    //
-   // @param name 名称
+   // @param code 代码
    //============================================================
-   public void setName(String name){
-      _name = name;
+   public void setCode(String code){
+      _code = code;
    }
 
    //============================================================
@@ -90,7 +92,7 @@ public class FProvinceData
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
-      output.writeString(_name);
+      output.writeString(_code);
       output.writeUint32(_color);
       output.writeInt32(_boundaries.count());
       for(FBoundaryData boundary : _boundaries){
@@ -105,6 +107,27 @@ public class FProvinceData
       for(FBoundaryData boundary : _boundaries){
          boundary.calculate();
       }
+   }
+
+   //============================================================
+   // <T>加载定义文件。</T>
+   //
+   // @param fileName 文件名称
+   //============================================================
+   public void parse(String source){
+      FBoundaryData boundary = new FBoundaryData();
+      String[] itemValues = RString.split(source, ';');
+      for(String itemValue : itemValues){
+         String[] items = RString.split(itemValue, ',');
+         if(items.length != 2){
+            throw new FFatalError("Invalid");
+         }
+         SDoublePoint3 point = new SDoublePoint3();
+         point.x = RDouble.parse(items[0].trim());
+         point.y = RDouble.parse(items[1].trim());
+         boundary.points().push(point);
+      }
+      pushBoundary(boundary);
    }
 
    //============================================================
@@ -144,7 +167,7 @@ public class FProvinceData
    //============================================================
    @Override
    public TDumpInfo dump(TDumpInfo info){
-      info.append(_name);
+      info.append(_code);
       info.appendLine();
       for(FBoundaryData boundary : _boundaries){
          boundary.dump(info);

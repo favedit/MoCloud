@@ -205,15 +205,15 @@ public class FHistoryData
       //   _logger.debug(this, "calculate", "Invalid city code. (code={1})", code);
       //}
       // 计算里程碑
-      _milestones.push(new FHistoryMilestoneData("20140809", 1000, 57, 57, 2, 48));
-      _milestones.push(new FHistoryMilestoneData("20140925", 2000, 104, 47, 4, 97));
-      _milestones.push(new FHistoryMilestoneData("20141028", 5000, 137, 80, 6, 143));
-      _milestones.push(new FHistoryMilestoneData("20141129", 10000, 169, 32, 9, 215));
-      _milestones.push(new FHistoryMilestoneData("20150116", 50000, 217, 48, 71, 2912));
-      _milestones.push(new FHistoryMilestoneData("20150206", 100000, 238, 21, 87, 5028));
-      _milestones.push(new FHistoryMilestoneData("20150310", 200000, 270, 32, 120, 10249));
-      _milestones.push(new FHistoryMilestoneData("20150512", 500000, 333, 63, 259, 17023));
-      _milestones.push(new FHistoryMilestoneData("20150625", 1000000, 377, 44, 405, 23029));
+      _milestones.push(new FHistoryMilestoneData("20140809", 1000, 19, 19, 2, 48));
+      _milestones.push(new FHistoryMilestoneData("20140925", 2000, 66, 47, 4, 97));
+      _milestones.push(new FHistoryMilestoneData("20141028", 5000, 99, 33, 6, 143));
+      _milestones.push(new FHistoryMilestoneData("20141129", 10000, 131, 32, 9, 215));
+      _milestones.push(new FHistoryMilestoneData("20150116", 50000, 179, 48, 71, 2912));
+      _milestones.push(new FHistoryMilestoneData("20150206", 100000, 200, 21, 87, 5028));
+      _milestones.push(new FHistoryMilestoneData("20150310", 200000, 232, 32, 120, 10249));
+      _milestones.push(new FHistoryMilestoneData("20150512", 500000, 295, 63, 259, 17023));
+      _milestones.push(new FHistoryMilestoneData("20150625", 1000000, 339, 44, 405, 23029));
    }
 
    //============================================================
