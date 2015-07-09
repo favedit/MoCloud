@@ -82,15 +82,16 @@ public class FBoundaryData
    // <T>计算数据。</T>
    //============================================================
    public void calculate(){
-      // 转换数据
+      // 填充数据
       List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
       int count = _points.count();
       for(int n = 0; n < count - 1; n++){
          SDoublePoint3 point = _points.get(n);
-         PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y);
+         PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
          polygonPoints.add(polygonPoint);
       }
       Polygon polygon = new Polygon(polygonPoints);
+      // 转换数据
       Poly2Tri.triangulate(polygon);
       // 获得索引
       _indexes.clear();
