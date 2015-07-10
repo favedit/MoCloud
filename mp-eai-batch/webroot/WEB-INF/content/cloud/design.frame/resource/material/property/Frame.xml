@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="resource.material.property.Frame" type='FDsMaterialPropertyFrame' label="材质属性" is_valid="Y" note="" edit_insert="Y" edit_update="Y">
+      <Panel name='infoPanel' icon='design.panel.icon' label='基本信息'>
+         <Edit name="guid" linker='_controlGuid' edit_view='N' label="标识" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="code" linker='_controlCode' edit_view='N' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' edit_view='Y' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

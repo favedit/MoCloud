@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 资源内容数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.preview'
+         face  = 'org.mo.content.face.resource.IPreviewServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.IPreviewServlet'
+         class = 'org.mo.content.face.resource.FPreviewServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 资源位图数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.bitmap'
+         face  = 'org.mo.content.face.resource.bitmap.IBitmapServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.bitmap.IBitmapServlet'
+         class = 'org.mo.content.face.resource.bitmap.FBitmapServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 资源材质数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.material'
+         face  = 'org.mo.content.face.resource.material.IMaterialServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.material.IMaterialServlet'
+         class = 'org.mo.content.face.resource.material.FMaterialServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 资源网格数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.mesh'
+         face  = 'org.mo.content.face.resource.mesh.IMeshServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.mesh.IMeshServlet'
+         class = 'org.mo.content.face.resource.mesh.FMeshServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 资源模型数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.model'
+         face  = 'org.mo.content.face.resource.model.IModelServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.model.IModelServlet'
+         class = 'org.mo.content.face.resource.model.FModelServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 资源模板获取处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.template'
+         face  = 'org.mo.content.face.resource.template.ITemplateServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.template.ITemplateServlet'
+         class = 'org.mo.content.face.resource.template.FTemplateServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 资源场景数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.resource.scene'
+         face  = 'org.mo.content.face.resource.scene.ISceneServlet'/>
+
+   <Component
+         face  = 'org.mo.content.face.resource.scene.ISceneServlet'
+         class = 'org.mo.content.face.resource.scene.FSceneServlet'
+         scope = 'global'/>
+
+</Config>

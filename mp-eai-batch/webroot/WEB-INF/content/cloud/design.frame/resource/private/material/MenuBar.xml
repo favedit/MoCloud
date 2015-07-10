@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <MenuBar name="resource.private.material.MenuBar" type='FDsPrivateMaterialMenuBar' label="菜单">
+      <MenuButton name='back' linker='_controlBack' icon='tools.back' label='返回上页'/>
+      <MenuButton name='save' linker='_controlSave' icon='tools.save' label='保存配置'/>
+      <MenuButtonSplit/>
+      <MenuButton name='property' linker='_controlProperty' icon='tools.property' label='材质信息'/>
+      <MenuButtonSplit/>
+      <MenuButton name='select' linker='_controlSelect' icon='resource.tools.import' label='选择图片'/>
+      <MenuButton name='import' linker='_controlImport' icon='resource.tools.import' label='导入图片'/>
+      <MenuButton name='delete' linker='_controlDelete' icon='tools.delete' label='删除图片'/>
+      <MenuButtonSplit/>
+      <MenuButton name='capture' linker='_controlCapture' icon='tools.capture' label='生成预览'/>
+   </MenuBar>
+</Content>

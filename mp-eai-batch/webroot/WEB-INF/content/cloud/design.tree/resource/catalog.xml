@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="resource.catalog" update_date="20141209154356">
+   <TreeView name="resource.catalog" label="资源目录" is_valid="Y" note="" is_config="N" disp_checked="N" service="list@cloud.resource.catalog" >
+     <TreeNodeType name="folder" code="Folder" label="目录" is_valid="Y" note="" icon="resource.tools.folder"/>
+   </TreeView>
+</Content>
