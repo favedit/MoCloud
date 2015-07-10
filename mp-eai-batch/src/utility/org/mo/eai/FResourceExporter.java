@@ -26,7 +26,7 @@ public class FResourceExporter
    public void serializeFile(String fileName,
                              String code){
       FByteFile file = new FByteFile();
-      file.writeString(code);
+      //file.writeString(code);
       serialize(file);
       file.saveToFile(fileName);
    }

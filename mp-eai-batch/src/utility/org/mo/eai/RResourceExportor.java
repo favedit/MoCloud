@@ -45,12 +45,13 @@ public class RResourceExportor
    //============================================================
    public static void main(String[] args){
       // 输出应用资源
-      String resourceFileName = "D:/Microbject/MoScript/source/ars/eai/chart-live.dat";
+      //String resourceFileName = "D:/Microbject/MoScript/source/ars/eai/chart-live.dat";
+      String resourceFileName = "D:/Microbject/MoScript/source/ars/eai/resource.dat";
       FApplicationResourceExporter resourceExporter = new FApplicationResourceExporter();
-      resourceExporter.serializeFile(resourceFileName, "chart-live");
+      resourceExporter.serializeFile(resourceFileName, "resource");
       // 输出应用资源
-      resourceFileName = "D:/Microbject/MoScript/source/ars/eai/chart-history.dat";
-      FHistoryResourceExporter historyExporter = new FHistoryResourceExporter();
-      historyExporter.serializeFile(resourceFileName, "chart-history");
+      //resourceFileName = "D:/Microbject/MoScript/source/ars/eai/chart-history.dat";
+      //FHistoryResourceExporter historyExporter = new FHistoryResourceExporter();
+      //historyExporter.serializeFile(resourceFileName, "chart-history");
    }
 }

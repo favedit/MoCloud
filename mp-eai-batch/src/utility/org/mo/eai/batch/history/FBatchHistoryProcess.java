@@ -7,7 +7,6 @@ import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.system.FThread;
-import org.mo.eai.RResourceConfiguration;
 import org.mo.eai.resource.history.FHistoryCityData;
 import org.mo.eai.resource.history.FHistoryData;
 import org.mo.eai.resource.history.FHistoryDateData;
@@ -29,7 +28,8 @@ public class FBatchHistoryProcess
    // @return 处理结果
    //============================================================
    public void makeHistoryData(){
-      String path = "D:/Temp/history";
+      //String path = "D:/Temp/history";
+      String path = "/data/eai/history";
       FHistoryData history = new FHistoryData();
       // 加载历史数据
       FStrings fileNames = RFile.listFiles(path);
@@ -74,8 +74,8 @@ public class FBatchHistoryProcess
       // 计算数据
       history.calculate();
       // 存储文件
-      //history.serializeFile("D:/Temp/history/investment.dat");
-      history.serializeFile(RResourceConfiguration.HomeResource + "/investment.dat");
+      history.serializeFile("/data/eai/script/ars/eai/investment.dat");
+      //history.serializeFile(RResourceConfiguration.HomeResource + "/investment.dat");
    }
 
    public static void main(String[] args){
