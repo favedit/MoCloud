@@ -59,7 +59,7 @@ COPY /Y %HOME_SOURCE%\mo-web.jar      %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-cloud.jar    %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-content.jar  %HOME_TARGET%
 
-@SET HOME_TARGET=%HOME%\mp-eai-batch\webroot\WEB-INF\lib\
+@SET HOME_TARGET=%HOME%\mp-eai-batch\lib\
 MKDIR %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-common.jar   %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-lib-lzma.jar %HOME_TARGET%

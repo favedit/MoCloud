@@ -8,15 +8,13 @@ import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
+import org.mo.eai.RResourceConfiguration;
 
 //============================================================
 // <T>城市模板。</T>
 //============================================================
 public class FCityTemplate
 {
-   // 文件名称
-   protected String _fileName = "D:/Microbject/MoScript/data/citys.csv";
-
    // 城市资源集合
    protected FObjects<FCityResource> _citys = new FObjects<FCityResource>(FCityResource.class);
 
@@ -45,9 +43,10 @@ public class FCityTemplate
    // <T>解析处理。</T>
    //============================================================
    public void parser(){
+      String fielName = RResourceConfiguration.HomeData + "/citys.csv";
       // 打开文件
       FLinesFile file = new FLinesFile();
-      file.loadFile(_fileName, "GB2312");
+      file.loadFile(fielName, "GB2312");
       // 读取所有行
       int count = file.count();
       for(int n = 1; n < count; n++){

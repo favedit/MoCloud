@@ -7,6 +7,7 @@ import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.system.FThread;
+import org.mo.eai.RResourceConfiguration;
 import org.mo.eai.resource.history.FHistoryCityData;
 import org.mo.eai.resource.history.FHistoryData;
 import org.mo.eai.resource.history.FHistoryDateData;
@@ -22,17 +23,57 @@ public class FBatchHistoryProcess
    // 间隔(5分钟)
    protected int _interval = 1000 * 60 * 5;
 
+   // 输入目录
+   private String _dataPath;
+
+   // 输出目录
+   private String _outputFileName;
+
+   //============================================================
+   // <T>获得数据路径。</T>
+   //
+   // @return 数据路径
+   //============================================================
+   public String dataPath(){
+      return _dataPath;
+   }
+
+   //============================================================
+   // <T>设置数据路径。</T>
+   //
+   // @param dataPath 数据路径
+   //============================================================
+   public void setDataPath(String dataPath){
+      _dataPath = dataPath;
+   }
+
+   //============================================================
+   // <T>获得输出文件名称。</T>
+   //
+   // @return 输出文件名称
+   //============================================================
+   public String outputFileName(){
+      return _outputFileName;
+   }
+
+   //============================================================
+   // <T>设置输出文件名称。</T>
+   //
+   // @param outputFileName 输出文件名称
+   //============================================================
+   public void setOutputFileName(String outputFileName){
+      _outputFileName = outputFileName;
+   }
+
    //============================================================
    // <T>逻辑处理。</T>
    //
    // @return 处理结果
    //============================================================
    public void makeHistoryData(){
-      //String path = "D:/Temp/history";
-      String path = "/data/eai/history";
       FHistoryData history = new FHistoryData();
       // 加载历史数据
-      FStrings fileNames = RFile.listFiles(path);
+      FStrings fileNames = RFile.listFiles(_dataPath);
       fileNames.sort();
       for(String fileName : fileNames){
          // 检查文件
@@ -74,12 +115,19 @@ public class FBatchHistoryProcess
       // 计算数据
       history.calculate();
       // 存储文件
-      history.serializeFile("/data/eai/script/ars/eai/investment.dat");
-      //history.serializeFile(RResourceConfiguration.HomeResource + "/investment.dat");
+      history.serializeFile(_outputFileName);
    }
 
+   //============================================================
+   // <T>本地测试处理。</T>
+   //
+   // @param args 参数集合
+   //============================================================
    public static void main(String[] args){
-      new FBatchHistoryProcess().makeHistoryData();
+      FBatchHistoryProcess process = new FBatchHistoryProcess();
+      process.setDataPath("D:/Temp/history");
+      process.setOutputFileName(RResourceConfiguration.HomeResource + "/investment.dat");
+      process.makeHistoryData();
    }
 
    //============================================================
@@ -97,5 +145,4 @@ public class FBatchHistoryProcess
       }
       return true;
    }
-
 }
