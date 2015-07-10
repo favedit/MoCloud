@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.scene.MenuBar">
-   <MenuBar name="design3d.scene.MenuBar" type='FDsShareSceneMenuBar' label="菜单">
-      <MenuButton name='execute' linker='_controlExecute' icon='resource.scene.execute' label='运行测试'/>
-   </MenuBar>
-</Content>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <ToolBar name="system.design.frame.PropertyToolBar" label="属性工具栏">
-      <ToolButton name='refresh' linker='_controlRefresh' icon='tools.refresh' label='刷新' />
-   </ToolBar>
-</Content>

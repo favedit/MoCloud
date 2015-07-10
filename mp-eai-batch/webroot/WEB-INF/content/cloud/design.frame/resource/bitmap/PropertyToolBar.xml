@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <ToolBar name="resource.private.bitmap.PropertyToolBar" label="画板工具栏">
-      <ToolButton name='refresh' linker='_controlRefresh' icon='tools.refresh' label='刷新' hint='重新加载数据'/>
-   </ToolBar>
-</Content>
