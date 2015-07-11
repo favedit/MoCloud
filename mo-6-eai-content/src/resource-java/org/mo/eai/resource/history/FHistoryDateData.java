@@ -4,8 +4,9 @@ import java.util.Arrays;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.FObjects;
+import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RString;
 import org.mo.eai.RResourceExportor;
 import org.mo.eai.template.card.FCardTemplate;
 import org.mo.eai.template.city.FCityResource;
@@ -36,7 +37,7 @@ public class FHistoryDateData
    protected FDictionary<FHistoryProvinceData> _provinces = new FDictionary<FHistoryProvinceData>(FHistoryProvinceData.class);
 
    // 城市集合
-   protected FObjects<FHistoryCityData> _citys = new FObjects<FHistoryCityData>(FHistoryCityData.class);
+   protected FDictionary<FHistoryCityData> _citys = new FDictionary<FHistoryCityData>(FHistoryCityData.class);
 
    //============================================================
    // <T>构造历史日期数据。</T>
@@ -130,8 +131,17 @@ public class FHistoryDateData
    //
    // @return 城市集合
    //============================================================
-   public FObjects<FHistoryCityData> citys(){
+   public FDictionary<FHistoryCityData> citys(){
       return _citys;
+   }
+
+   //============================================================
+   // <T>获得城市集合。</T>
+   //
+   // @return 城市集合
+   //============================================================
+   public FHistoryCityData findCity(String code){
+      return _citys.get(code, null);
    }
 
    //============================================================
@@ -143,12 +153,12 @@ public class FHistoryDateData
       // 计算数据
       _investmentDay = 0;
       _investmentTotal = 0;
-      for(FHistoryCityData city : _citys){
-         String code = city.code() + "";
+      for(INamePair<FHistoryCityData> pair : _citys){
+         FHistoryCityData city = pair.value();
+         String code = String.valueOf(city.code());
          FCityResource cityResource = null;
-         if(code.length() > 1){
-            String cityCode = cardTemplate.findCityCode(code);
-            cityResource = cityTemplate.findCity(cityCode);
+         if(!RString.isEmpty(code)){
+            cityResource = cityTemplate.findCity(code);
             // 查找城市
             //if(cityResource == null){
             //   String cityCode = code.substring(0, 2);
@@ -201,8 +211,8 @@ public class FHistoryDateData
       }
       // 写入城市数据
       output.writeInt32(_citys.count());
-      for(FHistoryCityData city : _citys){
-         city.serialize(output);
+      for(INamePair<FHistoryCityData> pair : _citys){
+         pair.value().serialize(output);
       }
    }
 }

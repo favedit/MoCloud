@@ -3,7 +3,6 @@ package org.mo.eai.resource.history;
 import org.mo.com.io.FLinesFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RFloat;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.eai.RResourceConfiguration;
 
@@ -22,7 +21,7 @@ public class RHistoryExport
             }
             String dateValue = RString.removeChar(items[0], '-');
             FHistoryCityData city = new FHistoryCityData();
-            city.setCode(RInteger.parse(items[1]));
+            city.setCode(items[1]);
             city.setInvestmentDay(RFloat.parse(items[2]));
             city.setInvestmentTotal(RFloat.parse(items[3]));
             history.push(dateValue, city);

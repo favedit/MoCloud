@@ -7,6 +7,7 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.INamePair;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -108,6 +109,21 @@ public class FHistoryData
    //
    // @param output 输出流
    //============================================================
+   public FHistoryCityData findCity(String dateValue,
+                                    String cityCode){
+      // 获得时间
+      FHistoryDateData date = _dates.get(dateValue, null);
+      if(date != null){
+         return date.findCity(cityCode);
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
    public void push(String dateValue,
                     FHistoryCityData city){
       // 获得时间
@@ -119,7 +135,7 @@ public class FHistoryData
          _dates.set(dateValue, date);
       }
       // 增加数据
-      date.citys().push(city);
+      date.citys().set(String.valueOf(city.code()), city);
    }
 
    //============================================================
@@ -161,11 +177,12 @@ public class FHistoryData
          }
          // 计算城市最大值
          if(dateCityCount > date.citys().count()){
-            throw new FFatalError("City error.");
+            // throw new FFatalError("City error.");
          }
          dateCityCount = date.citys().count();
          //System.out.println(date.code() + " - " + dateCityCount);
-         for(FHistoryCityData cityData : date.citys()){
+         for(INamePair<FHistoryCityData> pair : date.citys()){
+            FHistoryCityData cityData = pair.value();
             String cityCode = cityData.code() + "";
             float investmentDay = cityData.investmentDay();
             float investmentTotal = cityData.investmentTotal();

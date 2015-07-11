@@ -4,13 +4,14 @@ import org.mo.com.io.FLinesFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
 import org.mo.com.lang.RFloat;
-import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.system.FThread;
 import org.mo.eai.RResourceConfiguration;
+import org.mo.eai.RResourceExportor;
 import org.mo.eai.resource.history.FHistoryCityData;
 import org.mo.eai.resource.history.FHistoryData;
 import org.mo.eai.resource.history.FHistoryDateData;
+import org.mo.eai.template.card.FCardTemplate;
 
 //============================================================
 // <T>历史数据打包处理。</T>
@@ -71,6 +72,7 @@ public class FBatchHistoryProcess
    // @return 处理结果
    //============================================================
    public void makeHistoryData(){
+      FCardTemplate cardTemplate = RResourceExportor.cardTemplate();
       FHistoryData history = new FHistoryData();
       // 加载历史数据
       FStrings fileNames = RFile.listFiles(_dataPath);
@@ -85,13 +87,17 @@ public class FBatchHistoryProcess
          for(String line : file.lines()){
             if(!RString.isEmpty(line)){
                String[] items = RString.split(line, ' ');
+               if(items.length != 4){
+                  String lineValue = line.replace("  ", " ").trim();
+                  items = RString.split(lineValue, ' ');
+               }
                String dateValue = null;
-               int card = 0;
+               String card = null;
                float investmentDay = 0;
                float investmentTotal = 0;
                if(items.length == 4){
                   dateValue = items[0];
-                  card = RInteger.parse(items[1]);
+                  card = items[1];
                   investmentDay = RFloat.parse(items[2]);
                   investmentTotal = RFloat.parse(items[3]);
                }else{
@@ -100,11 +106,15 @@ public class FBatchHistoryProcess
                   continue;
                }
                // 创建数据项
-               FHistoryCityData city = new FHistoryCityData();
-               city.setCode(card);
-               city.setInvestmentDay(investmentDay);
-               city.setInvestmentTotal(investmentTotal);
-               history.push(dateValue, city);
+               String cityCode = cardTemplate.findCityCode(card);
+               FHistoryCityData city = history.findCity(dateValue, cityCode);
+               if(city == null){
+                  city = new FHistoryCityData();
+                  city.setCode(cityCode);
+                  history.push(dateValue, city);
+               }
+               city.addInvestmentDay(investmentDay);
+               city.addInvestmentTotal(investmentTotal);
             }
          }
       }
