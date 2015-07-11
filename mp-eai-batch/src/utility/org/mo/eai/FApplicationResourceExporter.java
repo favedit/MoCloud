@@ -24,14 +24,15 @@ public class FApplicationResourceExporter
       rateTemplate.parser();
       rateTemplate.serialize(output);
       // 输出城市信息集合
-      FProvinceTemplate provinceTemplate = RResourceExportor.provinceTemplate();
+      FProvinceTemplate provinceTemplate = RBatchResourceExportor.provinceTemplate();
       provinceTemplate.parser();
       provinceTemplate.serialize(output);
       // 输出城市信息集合
-      FCityTemplate cityTemplate = RResourceExportor.cityTemplate();
+      FCityTemplate cityTemplate = RBatchResourceExportor.cityTemplate();
       cityTemplate.serialize(output);
       // 输出卡片信息集合
       FCardTemplate cardTemplate = new FCardTemplate();
+      cardTemplate.parser();
       cardTemplate.serialize(output);
    }
 }

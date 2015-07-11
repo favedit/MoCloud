@@ -1,5 +1,6 @@
 package org.mo.eai;
 
+import org.mo.eai.template.card.FCardTemplate;
 import org.mo.eai.template.city.FCityTemplate;
 import org.mo.eai.template.province.FProvinceTemplate;
 
@@ -13,6 +14,9 @@ public class RResourceExportor
 
    // 城市模板
    protected static FCityTemplate _cityTemplate;
+
+   // 卡片模板
+   protected static FCardTemplate _cardTemplate;
 
    //============================================================
    // <T>获得城市模板。</T>
@@ -41,17 +45,15 @@ public class RResourceExportor
    }
 
    //============================================================
-   // <T>主函数。</T>
+   // <T>获得卡片模板。</T>
+   //
+   // @return 卡片模板
    //============================================================
-   public static void main(String[] args){
-      // 输出应用资源
-      //String resourceFileName = "D:/Microbject/MoScript/source/ars/eai/chart-live.dat";
-      String resourceFileName = "D:/Microbject/MoScript/source/ars/eai/resource.dat";
-      FApplicationResourceExporter resourceExporter = new FApplicationResourceExporter();
-      resourceExporter.serializeFile(resourceFileName, "resource");
-      // 输出应用资源
-      //resourceFileName = "D:/Microbject/MoScript/source/ars/eai/chart-history.dat";
-      //FHistoryResourceExporter historyExporter = new FHistoryResourceExporter();
-      //historyExporter.serializeFile(resourceFileName, "chart-history");
+   public static FCardTemplate cardTemplate(){
+      if(_cardTemplate == null){
+         _cardTemplate = new FCardTemplate();
+         _cardTemplate.parser();
+      }
+      return _cardTemplate;
    }
 }

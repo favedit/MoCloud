@@ -25,5 +25,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-6-content"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/poly2tri-core.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-6-eai-content"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

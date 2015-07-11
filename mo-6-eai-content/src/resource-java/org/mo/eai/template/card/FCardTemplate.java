@@ -26,6 +26,20 @@ public class FCardTemplate
    }
 
    //============================================================
+   // <T>获得卡片。</T>
+   //
+   // @return 卡片
+   //============================================================
+   public String findCityCode(String card){
+      String cityCode = null;
+      FCardResource cardResource = _cards.find(card);
+      if(cardResource != null){
+         cityCode = cardResource.cityCode();
+      }
+      return cityCode;
+   }
+
+   //============================================================
    // <T>解析处理。</T>
    //============================================================
    public void parser(){
@@ -38,13 +52,15 @@ public class FCardTemplate
          String line = file.line(n);
          if(!RString.isEmpty(line)){
             String[] items = RString.split(line.trim(), ',');
-            if(items.length != 2){
+            if(items.length != 3){
                throw new FFatalError("Line is invalid.");
             }
+            // 创建卡片
             FCardResource city = new FCardResource();
             city.setCardCode(RString.trim(items[0]));
             city.setCityCode(RString.trim(items[1]));
-            System.out.println(items[0] + " - " + items[1] + " - " + items[2] + " - " + items[3] + " - " + items[4] + " - " + items[5] + " - " + items[6]);
+            _cards.set(city.cardCode(), city);
+            System.out.println("Card: " + items[0] + " - " + items[1]);
          }
       }
    }

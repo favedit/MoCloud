@@ -137,6 +137,16 @@ public class SDoublePoint3
    //
    // @param output 输出流
    //============================================================
+   public void serializeFloat2(IDataOutput output){
+      output.writeFloat((float)x);
+      output.writeFloat((float)y);
+   }
+
+   //============================================================
+   // <T>序列化数据到输出流。</T>
+   //
+   // @param output 输出流
+   //============================================================
    public void serializeFloat3(IDataOutput output){
       output.writeFloat((float)x);
       output.writeFloat((float)y);

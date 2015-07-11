@@ -7,6 +7,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RInteger;
 import org.mo.eai.RResourceExportor;
+import org.mo.eai.template.card.FCardTemplate;
 import org.mo.eai.template.city.FCityResource;
 import org.mo.eai.template.city.FCityTemplate;
 
@@ -138,7 +139,7 @@ public class FHistoryDateData
    //============================================================
    public void calculate(){
       FCityTemplate cityTemplate = RResourceExportor.cityTemplate();
-      FDictionary<FCityResource> cards = cityTemplate.cards();
+      FCardTemplate cardTemplate = RResourceExportor.cardTemplate();
       // 计算数据
       _investmentDay = 0;
       _investmentTotal = 0;
@@ -146,17 +147,18 @@ public class FHistoryDateData
          String code = city.code() + "";
          FCityResource cityResource = null;
          if(code.length() > 1){
-            cityResource = cards.get(code, null);
+            String cityCode = cardTemplate.findCityCode(code);
+            cityResource = cityTemplate.findCity(cityCode);
             // 查找城市
-            if(cityResource == null){
-               String cityCode = code.substring(0, 2);
-               cityResource = cards.get(cityCode, null);
-            }
+            //if(cityResource == null){
+            //   String cityCode = code.substring(0, 2);
+            //   cityResource = cards.get(cityCode, null);
+            //}
             // 查找省会
-            if(cityResource == null){
-               String cityCode = code.substring(0, 2) + "01";
-               cityResource = cards.get(cityCode, null);
-            }
+            //if(cityResource == null){
+            //   String cityCode = code.substring(0, 2) + "01";
+            //   cityResource = cards.get(cityCode, null);
+            //}
          }
          if(cityResource != null){
             String provinceCode = cityResource.provinceCode();
@@ -169,8 +171,11 @@ public class FHistoryDateData
             province.setInvestmentDay(province.investmentDay() + city.investmentDay());
             province.setInvestmentTotal(province.investmentTotal() + city.investmentTotal());
          }else{
-            _history.invalidCodes().set(code, code);
-            //_logger.debug(this, "calculate", "Invalid city code. (code={1})", code);
+            if(!_history.invalidCodes().contains(code)){
+               _history.invalidCodes().set(code, code);
+               System.out.println("Invalid city code. (code=" + code + ")");
+               //_logger.debug(this, "calculate", "Invalid city code. (code={1})", code);
+            }
          }
          _investmentDay += city.investmentDay();
          _investmentTotal += city.investmentTotal();

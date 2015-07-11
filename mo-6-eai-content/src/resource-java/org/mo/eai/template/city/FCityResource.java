@@ -162,9 +162,10 @@ public class FCityResource
    //============================================================
    public void serialize(IDataOutput output){
       output.writeUint16(RInteger.parse(_provinceCode));
-      output.writeUint16(RInteger.parse(_cardCode));
+      //output.writeUint16(RInteger.parse(_cardCode));
+      output.writeUint16(RInteger.parse(_code));
       output.writeString(_label);
       output.writeUint16(_level);
-      _location.serializeFloat3(output);
+      _location.serializeFloat2(output);
    }
 }
