@@ -2,6 +2,7 @@ package org.mo.eai.batch.history;
 
 import org.mo.com.io.FLinesFile;
 import org.mo.com.io.RFile;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FStrings;
 import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RString;
@@ -25,10 +26,13 @@ public class FBatchHistoryProcess
    protected int _interval = 1000 * 60 * 5;
 
    // 输入目录
-   private String _dataPath;
+   protected String _dataPath;
 
    // 输出目录
-   private String _outputFileName;
+   protected String _outputFileName;
+
+   // 数据路径
+   protected FStrings _invalidCards = new FStrings();
 
    //============================================================
    // <T>获得数据路径。</T>
@@ -101,12 +105,18 @@ public class FBatchHistoryProcess
                   investmentDay = RFloat.parse(items[2]);
                   investmentTotal = RFloat.parse(items[3]);
                }else{
-                  // 检查非法行
-                  System.out.println("Invalid line:" + fileName + " [" + line + "]");
-                  continue;
+                  throw new FFatalError("Invalid line: file_name={1}, line={2}", fileName, line);
                }
                // 创建数据项
                String cityCode = cardTemplate.findCityCode(card);
+               if(RString.isEmpty(cityCode)){
+                  if(!_invalidCards.contains(card)){
+                     if(!card.startsWith("0")){
+                        System.out.println("Invalid card: " + card + " - " + dateValue);
+                     }
+                     _invalidCards.push(card);
+                  }
+               }
                FHistoryCityData city = history.findCity(dateValue, cityCode);
                if(city == null){
                   city = new FHistoryCityData();
