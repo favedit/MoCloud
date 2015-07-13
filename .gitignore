@@ -28,3 +28,5 @@
 /mt-database
 /mt-storage
 /mt-temp
+/mt-server/tomcat-eai.content/logs
+/mt-server/tomcat-eai.content/webapps

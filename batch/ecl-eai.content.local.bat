@@ -10,3 +10,4 @@
 @SET JAVA_OPTS=-Duser.mobj.application=%APP_ROOT% -Duser.mobj.mode=%MOBJ_MODE% -Duser.mobj.js=%MOBJ_JS% -Duser.mobj.config=%MOBJ_CONFIG%
 
 @"%CATALINA_HOME%\bin\catalina.bat" run
+
