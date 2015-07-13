@@ -16,7 +16,16 @@ SHOW VARIABLES LIKE 'character%';
 ============================================================
 CREATE DATABASE `CD_CACHE` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `CD_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-x
+
+CREATE DATABASE `EAI_DP_CACHE` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_DP_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
+CREATE DATABASE `EAI_TS_CACHE` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_TS_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
+CREATE DATABASE `EAI_OL_CACHE` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_OL_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
 创建用户：
 ============================================================
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';

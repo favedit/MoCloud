@@ -37,5 +37,5 @@
    <Include>${application.config}/content/face.xml</Include>
 
    <!-- 包含：环境设定 -->
-   <Include>${application.config}/environment/environment-local.xml</Include>
+   <Include>${application.config}/environment/environment-work.xml</Include>
 </Configuration>

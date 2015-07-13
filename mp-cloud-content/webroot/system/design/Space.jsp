@@ -9,10 +9,7 @@
 <LINK rel="stylesheet" href='/script/acs/control.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='/script/acs/design.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='/script/acs/lang_cn.css' type="text/css" media="all"/>
-<SCRIPT language='javascript' src='/script/ajs/lzma-d.js'></SCRIPT>
-<SCRIPT language='javascript' src='/script/ajs/lzma.js'></SCRIPT>
-<SCRIPT language='javascript' src='/script/ajs/mo.js'></SCRIPT>
-<SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/mp.js'></SCRIPT>
 <SCRIPT>
 function _load(){
    with(MO){
