@@ -4,7 +4,6 @@ import java.io.File;
 import org.mo.com.io.FLinesFile;
 import org.mo.com.io.FStringFile;
 import org.mo.com.lang.FString;
-import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.RLogger;
 
@@ -20,11 +19,11 @@ public class FJsPathMerger
    // <T>格式化文件。</T>
    //
    // @param source 来源
-   // @param commont 注释
+   // @param commont 环境 debug | release
    // @param file 文件
    //============================================================
    public static void formatFile(FString source,
-                                 boolean comment,
+                                 String comment,
                                  File file){
       FLinesFile fileLines = new FLinesFile(file, CHARSET);
       int count = fileLines.count();
@@ -33,7 +32,7 @@ public class FJsPathMerger
          if(!RString.isBlank(line)){
             line = RString.trimRight(line);
             line = RString.removeChars(line, '\r');
-            if(comment){
+            if(comment.equals("debug")){
                //............................................................
                // 追加含有注释的代码内容
                source.appendLine(line);
@@ -54,6 +53,22 @@ public class FJsPathMerger
                   // 删除行注释
                   continue;
                }
+               //............................................................
+               // 追加去除debug的代码
+               if(trim.startsWith("MO.Assert.debug")){
+                  // 删除debug模式
+                  continue;
+               }else if(trim.startsWith("MO.Assert.debugBegin")){
+                  // 删除块代码
+                  for(n++; n < count; n++){
+                     line = fileLines.line(n);
+                     if(line.trim().endsWith("MO.Assert.debugEnd")){
+                        break;
+                     }
+                  }
+                  continue;
+               }
+
                source.appendLine(line);
             }
          }
@@ -68,17 +83,17 @@ public class FJsPathMerger
    public static void main(String[] params){
       String path = null;
       String target = null;
-      boolean comment = false;
+      String comment = "debug";
       // 检查参数
       if(params.length == 3){
          path = params[0];
          target = params[1];
-         comment = RBoolean.parse(params[2]);
+         comment = params[2];
       }else{
          System.out.println("Param count is invalid.");
          System.out.println("   1 - path");
          System.out.println("   2 - target");
-         System.out.println("   3 - comment (Y/N)");
+         System.out.println("   3 - comment (debug/release)");
          return;
       }
       try{
