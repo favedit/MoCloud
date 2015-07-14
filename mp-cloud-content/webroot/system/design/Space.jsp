@@ -12,20 +12,24 @@
 <SCRIPT language='javascript' src='/script/ajs/mp.js'></SCRIPT>
 <SCRIPT>
 function _load(){
-   with(MO){
-      // 设置环境
-      MO.Runtime.setProcessCd(MO.EProcess.Debug);
-      MO.RApplication.initialize();
-      MO.RBrowser.setContentPath('/script');
-      // 加载工作区
-      var workspace = MO.RApplication.findWorkspace(MO.FDsSystemWorkspace);
-      workspace.buildDefine(id_workspace);
-      workspace.setPanel(id_workspace);
-      workspace.psResize();
-      workspace.load();
-      // 激活工作区
-      MO.RConsole.find(MO.FUiWorkspaceConsole).active(workspace);
-   }
+   // 设置环境
+   MO.initialize();
+   MO.Window.Browser.setContentPath('/script');
+   // 设置环境
+   MO.Console.find(MO.FE3sVendorConsole).setup('net');
+   MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '115.28.82.149');
+   MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/script/ars/eai');
+   // 加载工作区
+   //MO.RApplication.initialize();
+   //var workspace = MO.RApplication.findWorkspace(MO.FDsSystemWorkspace);
+   var application = MO.Desktop.initialize(MO.FUiWorkspaceApplication);
+   var workspace = application.selectWorkspace(MO.FDsSystemWorkspace);
+   workspace.buildDefine(id_workspace);
+   workspace.setPanel(id_workspace);
+   workspace.psResize();
+   workspace.load();
+   // 激活工作区
+   //MO.Console.find(MO.FUiWorkspaceConsole).active(workspace);
 }
 </SCRIPT>
 </HEAD>
