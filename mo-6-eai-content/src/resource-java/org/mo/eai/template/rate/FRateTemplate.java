@@ -31,6 +31,10 @@ public class FRateTemplate
       FRateResource rate03 = new FRateResource();
       rate03.parser(path + "/03.png");
       _rates.push(rate03);
+      // 增加比率4
+      FRateResource rate04 = new FRateResource();
+      rate04.parser(path + "/04.png");
+      _rates.push(rate04);
    }
 
    //============================================================
