@@ -20,16 +20,12 @@ function _load(){
    MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '115.28.82.149');
    MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/script/ars/eai');
    // 加载工作区
-   //MO.RApplication.initialize();
-   //var workspace = MO.RApplication.findWorkspace(MO.FDsSystemWorkspace);
-   var application = MO.Desktop.initialize(MO.FUiWorkspaceApplication);
+   var application = MO.Desktop.initialize(MO.FDuiWorkspaceApplication);
    var workspace = application.selectWorkspace(MO.FDsSystemWorkspace);
    workspace.buildDefine(id_workspace);
    workspace.setPanel(id_workspace);
    workspace.psResize();
    workspace.load();
-   // 激活工作区
-   //MO.Console.find(MO.FUiWorkspaceConsole).active(workspace);
 }
 </SCRIPT>
 </HEAD>

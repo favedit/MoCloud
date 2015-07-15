@@ -15,20 +15,18 @@
 <SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
 <SCRIPT>
 function _load(){
-   with(MO){
-      // 设置环境
-      MO.Runtime.setProcessCd(EProcess.Debug);
-      RApplication.initialize();
-      RBrowser.setContentPath('/script');
-      // 加载工作区
-      var workspace = RApplication.findWorkspace(FDsPrivateWorkspace);
-      workspace.buildDefine(id_workspace);
-      workspace.setPanel(id_workspace);
-      workspace.psResize();
-      workspace.load();
-      // 激活工作区
-      RConsole.find(FUiWorkspaceConsole).active(workspace);
-   }
+   // 设置环境
+   MO.Runtime.setProcessCd(MO.EProcess.Debug);
+   MO.RApplication.initialize();
+   MO.RBrowser.setContentPath('/script');
+   // 加载工作区
+   var workspace = MO.RApplication.findWorkspace(MO.FDsPrivateWorkspace);
+   workspace.buildDefine(id_workspace);
+   workspace.setPanel(id_workspace);
+   workspace.psResize();
+   workspace.load();
+   // 激活工作区
+   MO.Console.find(MO.FDuiWorkspaceApplication).active(workspace);
 }
 </SCRIPT>
 </HEAD>
