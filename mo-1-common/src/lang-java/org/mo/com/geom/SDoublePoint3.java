@@ -118,6 +118,18 @@ public class SDoublePoint3
    }
 
    //============================================================
+   // <T>计算到另外一点的长度。</T>
+   //
+   // @param value 坐标点
+   //============================================================
+   public double length(SDoublePoint3 value){
+      double cx = x - value.x;
+      double cy = y - value.y;
+      double cz = z - value.z;
+      return Math.sqrt(cx * cx + cy * cy + cz * cz);
+   }
+
+   //============================================================
    // <T>从配置信息中导入配置。</T>
    //
    // @param xconfig 配置信息

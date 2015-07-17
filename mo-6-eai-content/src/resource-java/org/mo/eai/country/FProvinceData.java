@@ -97,9 +97,17 @@ public class FProvinceData
    //============================================================
    public void serialize(IDataOutput output){
       output.writeUint16(RInteger.parse(_code));
-      output.writeInt32(_boundaries.count());
+      int validCount = 0;
       for(FBoundaryData boundary : _boundaries){
-         boundary.serialize(output);
+         if(boundary.valid){
+            validCount++;
+         }
+      }
+      output.writeInt32(validCount);
+      for(FBoundaryData boundary : _boundaries){
+         if(boundary.valid){
+            boundary.serialize(output);
+         }
       }
    }
 

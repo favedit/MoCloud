@@ -21,9 +21,9 @@ public class RDataConvert
       FProvinceData activeProvince = null;
       FBoundaryData activeBoundary = null;
       while(++n < count){
-         String line = file.line(n);
+         String line = RString.trim(file.line(n));
          if(RString.startsWith(line, "province:")){
-            String name = line.substring(9);
+            String name = line.substring(9).trim();
             FProvinceResource provinceResource = provinceTemplate.findByName(name);
             activeProvince = new FProvinceData();
             activeProvince.setCode(provinceResource.code());
@@ -48,6 +48,8 @@ public class RDataConvert
          }
       }
       System.out.println(activeCountry.dump());
+      activeCountry.optimize();
       activeCountry.serializeFile("D:/Microbject/MoScript/source/ars/eai/country.dat");
+      System.out.println("Success");
    }
 }

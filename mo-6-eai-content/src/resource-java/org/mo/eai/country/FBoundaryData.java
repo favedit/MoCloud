@@ -1,6 +1,7 @@
 package org.mo.eai.country;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.IDataOutput;
@@ -23,8 +24,13 @@ import org.poly2tri.triangulation.delaunay.DelaunayTriangle;
 public class FBoundaryData
       extends FObject
 {
+   public boolean valid = true;
+
    // 点集合
-   protected FObjects<SDoublePoint3> _points = new FObjects<SDoublePoint3>(SDoublePoint3.class);
+   protected FObjects<SBoundaryPoint> _points = new FObjects<SBoundaryPoint>(SBoundaryPoint.class);
+
+   // 点集合
+   protected FObjects<SBoundaryPoint> _optimizePoints = new FObjects<SBoundaryPoint>(SBoundaryPoint.class);
 
    // 索引集合
    protected FInts _indexes = new FInts();
@@ -40,8 +46,17 @@ public class FBoundaryData
    //
    // @return 顶点集合
    //============================================================
-   public FObjects<SDoublePoint3> points(){
+   public FObjects<SBoundaryPoint> points(){
       return _points;
+   }
+
+   //============================================================
+   // <T>获得优化顶点集合。</T>
+   //
+   // @return 顶点集合
+   //============================================================
+   public FObjects<SBoundaryPoint> optimizePoints(){
+      return _optimizePoints;
    }
 
    //============================================================
@@ -61,7 +76,7 @@ public class FBoundaryData
    public void parseVertexSource(String source){
       String[] pointValues = RString.split(source, ';');
       for(String pointValue : pointValues){
-         SDoublePoint3 point = new SDoublePoint3();
+         SBoundaryPoint point = new SBoundaryPoint();
          point.parse(pointValue);
          _points.push(point);
       }
@@ -105,19 +120,94 @@ public class FBoundaryData
    }
 
    //============================================================
+   // <T>计算数据。</T>
+   //============================================================
+   public void calculate2(){
+      // 填充数据
+      List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
+      int count = _optimizePoints.count();
+      for(int n = 0; n < count - 1; n++){
+         SBoundaryPoint point = _optimizePoints.get(n);
+         if(point.valid){
+            PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
+            polygonPoints.add(polygonPoint);
+         }
+      }
+      if(polygonPoints.size() < 3){
+         valid = false;
+         return;
+      }
+      Polygon polygon = new Polygon(polygonPoints);
+      // 转换数据
+      try{
+         Poly2Tri.triangulate(polygon);
+      }catch(Exception e){
+         valid = false;
+         return;
+      }
+      // 获得索引
+      _indexes.clear();
+      for(DelaunayTriangle triangle : polygon.getTriangles()){
+         TriangulationPoint[] points = triangle.points;
+         _indexes.append(((FPolygonPoint)points[0]).index());
+         _indexes.append(((FPolygonPoint)points[1]).index());
+         _indexes.append(((FPolygonPoint)points[2]).index());
+      }
+   }
+
+   //============================================================
+   // <T>计算数据。</T>
+   //============================================================
+   public void optimize(){
+      // 计算所有点关联线的平均长度
+      SBoundaryPoint[] points = _optimizePoints.toObjects();
+      Arrays.sort(points, 0, points.length, new SBoundaryPointComparator());
+      // 优化掉百分比点
+      float rate = 1;
+      if(points.length > 1000){
+         rate = 0.4f;
+      }else if(points.length > 500){
+         rate = 0.3f;
+      }else if(points.length > 200){
+         rate = 0.2f;
+      }else if(points.length > 100){
+         rate = 0.1f;
+      }else{
+         rate = 0.0f;
+      }
+      int optimizeCount = (int)(points.length * rate);
+      for(int n = 0; n < optimizeCount; n++){
+         points[n].valid = false;
+      }
+      calculate2();
+   }
+
+   //============================================================
    // <T>序列化数据到输出流。</T>
    //
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
       // 输出顶点集合
-      int pointCount = _points.count();
-      output.writeInt32(pointCount);
-      for(SDoublePoint3 point : _points){
-         //point.serializeFloat3(output);
-         output.writeFloat((float)point.x);
-         output.writeFloat((float)point.y);
+      int pointCount = 0;
+      for(SBoundaryPoint point : _optimizePoints){
+         if(point.valid){
+            pointCount++;
+         }
       }
+      output.writeInt32(pointCount);
+      for(SBoundaryPoint point : _optimizePoints){
+         if(point.valid){
+            output.writeFloat((float)point.x);
+            output.writeFloat((float)point.y);
+         }
+      }
+      //      int pointCount = _points.count();
+      //      output.writeInt32(pointCount);
+      //      for(SDoublePoint3 point : _points){
+      //         output.writeFloat((float)point.x);
+      //         output.writeFloat((float)point.y);
+      //      }
       // 输出顶点集合
       int count = _indexes.length();
       output.writeInt32(count);

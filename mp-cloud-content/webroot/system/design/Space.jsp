@@ -13,6 +13,7 @@
 <SCRIPT>
 function _load(){
    // 设置环境
+   MO.Runtime.setProcessCd(MO.EProcess.Debug);
    MO.initialize();
    MO.Window.Browser.setContentPath('/script');
    // 设置环境

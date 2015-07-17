@@ -9,23 +9,24 @@
 <LINK rel="stylesheet" href='/script/acs/control.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='/script/acs/design.css' type="text/css" media="all"/>
 <LINK rel="stylesheet" href='/script/acs/lang_cn.css' type="text/css" media="all"/>
-<SCRIPT language='javascript' src='/script/ajs/lzma.js'></SCRIPT>
-<SCRIPT language='javascript' src='/script/ajs/mo.js'></SCRIPT>
-<SCRIPT language='javascript' src='/script/ajs/context_cn.js'></SCRIPT>
+<SCRIPT language='javascript' src='/script/ajs/mp.js'></SCRIPT>
 <SCRIPT>
 function _load(){
    // 设置环境
    MO.Runtime.setProcessCd(MO.EProcess.Debug);
-   MO.RApplication.initialize();
-   MO.RBrowser.setContentPath('/script');
+   MO.initialize();
+   MO.Window.Browser.setContentPath('/script');
+   // 设置环境
+   MO.Console.find(MO.FE3sVendorConsole).setup('net');
+   MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '115.28.82.149');
+   MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/script/ars/eai');
    // 加载工作区
-   var workspace = MO.RApplication.findWorkspace(MO.FDsShareWorkspace);
+   var application = MO.Desktop.initialize(MO.FDuiWorkspaceApplication);
+   var workspace = application.selectWorkspace(MO.FDsShareWorkspace);
    workspace.buildDefine(id_workspace);
    workspace.setPanel(id_workspace);
    workspace.psResize();
    workspace.load();
-   // 激活工作区
-   MO.RConsole.find(MO.FUiWorkspaceConsole).active(workspace);
 }
 </SCRIPT>
 </HEAD>
