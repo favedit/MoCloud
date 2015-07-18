@@ -1,4 +1,4 @@
-package org.mo.eai.country;
+package org.mo.eai.resource.world;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,6 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FInts;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RInteger;
-import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.mo.content.geom.boundary.FBoundary;
 import org.mo.content.geom.boundary.SBoundaryPoint;
@@ -25,12 +23,12 @@ import org.poly2tri.triangulation.delaunay.DelaunayTriangle;
 public class FBoundaryData
       extends FObject
 {
-   public boolean valid = true;
+   private FCountryData _country;
 
    private FBoundary _boundary;
 
    // 点集合
-   protected FObjects<SBoundaryPoint> _points = new FObjects<SBoundaryPoint>(SBoundaryPoint.class);
+   protected FObjects<SDoublePoint3> _points = new FObjects<SDoublePoint3>(SDoublePoint3.class);
 
    // 点集合
    protected FObjects<SBoundaryPoint> _optimizePoints = new FObjects<SBoundaryPoint>(SBoundaryPoint.class);
@@ -49,26 +47,16 @@ public class FBoundaryData
    //
    // @return 顶点集合
    //============================================================
-   public FObjects<SBoundaryPoint> points(){
+   public FObjects<SDoublePoint3> points(){
       return _points;
    }
 
-   //============================================================
-   // <T>获得优化顶点集合。</T>
-   //
-   // @return 顶点集合
-   //============================================================
-   public FObjects<SBoundaryPoint> optimizePoints(){
-      return _optimizePoints;
+   public FCountryData country(){
+      return _country;
    }
 
-   //============================================================
-   // <T>获得索引集合。</T>
-   //
-   // @return 索引集合
-   //============================================================
-   public FInts indexes(){
-      return _indexes;
+   public void setCountry(FCountryData country){
+      _country = country;
    }
 
    public FBoundary boundary(){
@@ -80,29 +68,21 @@ public class FBoundaryData
    }
 
    //============================================================
-   // <T>解析顶点字符串。</T>
+   // <T>增加一个坐标。</T>
    //
-   // @param source 字符串
+   // @param point 坐标
    //============================================================
-   public void parseVertexSource(String source){
-      String[] pointValues = RString.split(source, ';');
-      for(String pointValue : pointValues){
-         SBoundaryPoint point = new SBoundaryPoint();
-         point.parse(pointValue);
-         _points.push(point);
-      }
+   public void parsePoint(SDoublePoint3 point){
+      _points.push(point);
    }
 
    //============================================================
-   // <T>解析索引字符串。</T>
+   // <T>获得索引集合。</T>
    //
-   // @param source 字符串
+   // @return 索引集合
    //============================================================
-   public void parseIndexSource(String source){
-      String[] indexValues = RString.split(source, ',');
-      for(String indexValue : indexValues){
-         _indexes.append(RInteger.parse(indexValue));
-      }
+   public FInts indexes(){
+      return _indexes;
    }
 
    //============================================================
@@ -137,19 +117,34 @@ public class FBoundaryData
       // 填充数据
       List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
       int count = _optimizePoints.count();
+      //int firstIndex = 0;
+      //SBoundaryPoint firstPoint = null;
+      //SBoundaryPoint lastPoint = null;
       for(int n = 0; n < count - 1; n++){
          SBoundaryPoint point = _optimizePoints.get(n);
          if(point.valid){
+            //            if(firstPoint == null){
+            //               firstIndex = n;
+            //               firstPoint = point;
+            //            }
+            //            lastPoint = point;
             PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
             polygonPoints.add(polygonPoint);
          }
+      }
+      //if(!firstPoint.equals(lastPoint)){
+      //   PolygonPoint polygonPoint = new FPolygonPoint(firstIndex, firstPoint.x, firstPoint.y, firstPoint.z);
+      //   polygonPoints.add(polygonPoint);
+      //}
+      if(polygonPoints.size() < 3){
+         return;
       }
       Polygon polygon = new Polygon(polygonPoints);
       // 转换数据
       try{
          Poly2Tri.triangulate(polygon);
       }catch(Exception e){
-         System.out.println(e.getMessage());
+         System.out.println(_country.code() + ": " + e.getMessage());
          //valid = false;
          return;
       }
@@ -167,14 +162,9 @@ public class FBoundaryData
    // <T>计算数据。</T>
    //============================================================
    public void optimize(){
-      _optimizePoints.clear();
       for(SBoundaryPoint point : _boundary.optimizePoints()){
          _optimizePoints.push(point);
       }
-      //      _optimizePoints.clear();
-      //      for(SBoundaryPoint point : _points){
-      //         _optimizePoints.push(point);
-      //      }
       calculate2();
    }
 
@@ -185,26 +175,12 @@ public class FBoundaryData
    //============================================================
    public void serialize(IDataOutput output){
       // 输出顶点集合
-      int pointCount = 0;
-      for(SBoundaryPoint point : _optimizePoints){
-         if(point.valid){
-            pointCount++;
-         }
-      }
-      System.out.println("Write point " + pointCount);
+      int pointCount = _points.count();
       output.writeInt32(pointCount);
-      for(SBoundaryPoint point : _optimizePoints){
-         if(point.valid){
-            output.writeFloat((float)point.x);
-            output.writeFloat((float)point.y);
-         }
+      for(SDoublePoint3 point : _points){
+         output.writeFloat((float)point.x);
+         output.writeFloat((float)point.y);
       }
-      //      int pointCount = _points.count();
-      //      output.writeInt32(pointCount);
-      //      for(SDoublePoint3 point : _points){
-      //         output.writeFloat((float)point.x);
-      //         output.writeFloat((float)point.y);
-      //      }
       // 输出顶点集合
       int count = _indexes.length();
       output.writeInt32(count);

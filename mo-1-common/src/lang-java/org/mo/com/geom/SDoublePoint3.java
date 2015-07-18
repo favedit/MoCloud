@@ -51,6 +51,19 @@ public class SDoublePoint3
       this.z = z;
    }
 
+   public boolean equals(SDoublePoint3 value){
+      if(x != value.x){
+         return false;
+      }
+      if(y != value.y){
+         return false;
+      }
+      if(z != value.z){
+         return false;
+      }
+      return true;
+   }
+
    //============================================================
    // <T>接收数据。</T>
    //

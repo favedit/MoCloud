@@ -2,11 +2,12 @@ package org.mo.eai.country;
 
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.INamePair;
 import org.mo.com.lang.generic.TDumpInfo;
+import org.mo.content.geom.boundary.FBoundary;
+import org.mo.content.geom.boundary.FBoundaryOptimizer;
+import org.mo.content.geom.boundary.SBoundaryPoint;
 
 //============================================================
 // <T>国家数据。</T>
@@ -53,80 +54,32 @@ public class FCountryData
    //============================================================
    // <T>计算数据。</T>
    //============================================================
-   public void optimize(){
-      // 建立顶点字典
+   public void optimize(double rate){
+      // 建立边界优化器
       int pointTotal = 0;
-      FDictionary<SBoundaryPoint> boundaryPoints = new FDictionary<SBoundaryPoint>(SBoundaryPoint.class);
+      FBoundaryOptimizer optimizer = new FBoundaryOptimizer(rate);
       for(FProvinceData province : _provinces){
-         for(FBoundaryData boundary : province.boundaries()){
-            for(SBoundaryPoint point : boundary.points()){
-               String code = point.toString();
-               SBoundaryPoint find = boundaryPoints.find(code);
-               if(find == null){
-                  find = new SBoundaryPoint(point);
-                  find.index = boundaryPoints.count();
-                  boundaryPoints.set(code, find);
-               }
-               boundary.optimizePoints().push(find);
+         for(FBoundaryData boundaryData : province.boundaries()){
+            FBoundary boundary = new FBoundary();
+            for(SBoundaryPoint value : boundaryData.points()){
+               boundary.pushPoint(optimizer.syncPoint(value));
                pointTotal++;
             }
+            optimizer.pushBoundary(boundary);
+            boundaryData.setBoundary(boundary);
          }
       }
-      System.out.println("Point total=" + pointTotal + " count=" + boundaryPoints.count());
-      // 计算所有点在边界上的长度
-      int lineTotal = 0;
-      FDictionary<SBoundaryLine> boundaryLines = new FDictionary<SBoundaryLine>(SBoundaryLine.class);
+      // 优化处理
+      optimizer.calculate();
+      // 读取数据
+      int optimizeTotal = 0;
       for(FProvinceData province : _provinces){
-         for(FBoundaryData boundary : province.boundaries()){
-            FObjects<SBoundaryPoint> points = boundary.optimizePoints();
-            int count = points.count();
-            for(int i = 0; i < count; i++){
-               SBoundaryPoint point1 = null;
-               SBoundaryPoint point2 = null;
-               if(i != count - 1){
-                  // 中间点
-                  point1 = points.get(i);
-                  point2 = points.get(i + 1);
-               }else{
-                  // 结尾点
-                  point1 = points.get(i);
-                  point2 = points.get(0);
-               }
-               lineTotal++;
-               // 查找线段
-               String code = point1.toString() + "|" + point2.toString();
-               SBoundaryLine find = boundaryLines.find(code);
-               if(find == null){
-                  code = point2.toString() + "|" + point2.toString();
-                  find = boundaryLines.find(code);
-               }
-               if(find == null){
-                  find = new SBoundaryLine(point1, point2);
-                  boundaryLines.set(code, find);
-               }
-               point1.pushLine(find);
-               point2.pushLine(find);
-            }
+         for(FBoundaryData boundaryData : province.boundaries()){
+            boundaryData.optimize();
+            optimizeTotal += boundaryData.optimizePoints().count();
          }
       }
-      System.out.println("Line total=" + lineTotal + " count=" + boundaryLines.count());
-      // 计算所有点关联线的平均长度
-      for(INamePair<SBoundaryPoint> pair : boundaryPoints){
-         pair.value().calculateLength();
-      }
-      //SBoundaryPoint[] points = boundaryPoints.toObjects();
-      //Arrays.sort(points, 0, points.length, new SBoundaryPointComparator());
-      // 优化掉百分比点
-      //int optimizeCount = (int)(points.length * 0.0);
-      //for(int n = 0; n < optimizeCount; n++){
-      //   points[n].valid = false;
-      //}
-      // 重新计算三角面
-      for(FProvinceData province : _provinces){
-         for(FBoundaryData boundary : province.boundaries()){
-            boundary.optimize();
-         }
-      }
+      System.out.println("Optimize country: " + pointTotal + " -> " + optimizeTotal);
    }
 
    //============================================================
