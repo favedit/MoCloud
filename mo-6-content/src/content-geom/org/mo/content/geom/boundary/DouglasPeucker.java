@@ -3,6 +3,7 @@ package org.mo.content.geom.boundary;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -81,7 +82,7 @@ public class DouglasPeucker
    /// <returns></returns>
    public static List<SBoundaryPoint> DouglasPeuckerReduction(List<SBoundaryPoint> Points,
                                                               double Tolerance){
-      if(Points == null || Points.size() < 3)
+      if(Points == null || Points.size() < 5)
          return Points;
 
       Integer firstPoint = 0;
@@ -101,14 +102,18 @@ public class DouglasPeucker
       DouglasPeuckerReduction(Points, firstPoint, lastPoint, Tolerance, pointIndexsToKeep);
 
       List<SBoundaryPoint> returnPoints = new ArrayList<SBoundaryPoint>();
-      Collections.sort(pointIndexsToKeep, new Comparator<Integer>(){
+      if(pointIndexsToKeep.size()<=3){
+    	  pointIndexsToKeep.add(1);
+      }
+      List<Integer> listWithoutDup = new ArrayList<Integer>(new HashSet<Integer>(pointIndexsToKeep));
+      Collections.sort(listWithoutDup, new Comparator<Integer>(){
          @Override
          public int compare(Integer arg0,
                             Integer arg1){
             return arg0.compareTo(arg1);
          }
       });
-      for(Integer index : pointIndexsToKeep){
+      for(Integer index : listWithoutDup){
          returnPoints.add(Points.get(index));
       }
 
