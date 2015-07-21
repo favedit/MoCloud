@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="54ef2f12-a357-46a1-83c8-b0f7eb4c1139" name="data.info.device.browser" label="M#12cn18信息设备浏览器表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Info.Device.Browser" data_name="DT_INF_DEVICE_BROWSER" data_alias="DT_INF_DEV_BRW" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="b249c95c-e527-4e62-bf16-85aeb9afd01f" name="device_id" label="M#12cn14设备编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEVICE_ID" data_alias="DEV" data_refer="data.info.device" />
+  <FieldString _uuid="1c864277-5479-49ed-bee1-6d1805fc9460" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="1024" />
+  <FieldString _uuid="f80a5eaf-6cb9-44f5-a455-7dab9181956f" name="label" label="M#12cn14真实名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldContent _uuid="0f77fd5d-720d-40ba-abf9-58a996f32722" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldString _uuid="1e5b2cfa-fcd6-4fe3-98bf-7fc42694c1f8" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="92a16f98-660e-469b-9295-1f0fc54d4707" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
