@@ -1,6 +1,7 @@
 package org.mo.content.geom.boundary;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import org.mo.com.lang.FObjects;
 
 public class FBoundaryBorder
@@ -42,33 +43,33 @@ public class FBoundaryBorder
    // <T>计算数据。</T>
    //============================================================
    public void optimize(double rate){
-      // 计算所有点关联线的平均长度
-      SBoundaryPoint[] points = _points.toObjects();
-      Arrays.sort(points, 0, points.length, new SBoundaryPointComparator());
-      // 优化掉百分比点
-      int count = points.length;
-      if(count > 16){
-         int start = (int)(count * rate);
-         double length = points[start].length;
-         for(int i = 0; i < count; i++){
-            SBoundaryPoint point = _points.get(i);
-            if((i == 0) || (i == count - 1)){
-               _optimizePoints.push(point);
-            }else if(point.length > length){
-               _optimizePoints.push(point);
-            }
-         }
-      }else{
-         _optimizePoints.assign(_points);
+      //      // 计算所有点关联线的平均长度
+      //      SBoundaryPoint[] points = _points.toObjects();
+      //      Arrays.sort(points, 0, points.length, new SBoundaryPointComparator());
+      //      // 优化掉百分比点
+      //      int count = points.length;
+      //      if(count > 16){
+      //         int start = (int)(count * rate);
+      //         double length = points[start].length;
+      //         for(int i = 0; i < count; i++){
+      //            SBoundaryPoint point = _points.get(i);
+      //            if((i == 0) || (i == count - 1)){
+      //               _optimizePoints.push(point);
+      //            }else if(point.length > length){
+      //               _optimizePoints.push(point);
+      //            }
+      //         }
+      //      }else{
+      //         _optimizePoints.assign(_points);
+      //      }
+      List<SBoundaryPoint> pointsReduce = new ArrayList<SBoundaryPoint>();
+      for(SBoundaryPoint point : _points){
+         pointsReduce.add(point);
       }
-      //      List<SBoundaryPoint> pointsReduce = new ArrayList<SBoundaryPoint>();
-      //      for(SBoundaryPoint point : _points){
-      //         pointsReduce.add(point);
-      //      }
-      //      List<SBoundaryPoint> newPoints = DouglasPeucker.DouglasPeuckerReduction(pointsReduce, rate);
-      //      for(SBoundaryPoint point : newPoints){
-      //         _optimizePoints.push(point);
-      //      }
-      //      System.out.println("Optimize " + pointsReduce.size() + " -> " + newPoints.size());
+      List<SBoundaryPoint> newPoints = DouglasPeucker.DouglasPeuckerReduction(pointsReduce, rate);
+      for(SBoundaryPoint point : newPoints){
+         _optimizePoints.push(point);
+      }
+      System.out.println("Optimize " + pointsReduce.size() + " -> " + newPoints.size());
    }
 }
