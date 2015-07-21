@@ -41,11 +41,17 @@ public class FDataInfoDeviceBrowserUnit
    // 字段设备编号的定义。
    protected long _deviceId;
 
-   // 存储字段代码的定义。
-   private String __code;
+   // 存储字段代理代码的定义。
+   private String __agentCode;
 
-   // 字段代码的定义。
-   protected String _code;
+   // 字段代理代码的定义。
+   protected String _agentCode;
+
+   // 存储字段鉴定代码的定义。
+   private String __identityCode;
+
+   // 字段鉴定代码的定义。
+   protected String _identityCode;
 
    // 存储字段真实名称的定义。
    private String __label;
@@ -215,30 +221,57 @@ public class FDataInfoDeviceBrowserUnit
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断代理代码的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isAgentCodeChanged(){
+      return !RString.equals(__agentCode, _agentCode);
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得代理代码的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public String agentCode(){
+      return _agentCode;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
+   // <T>设置代理代码的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
+   public void setAgentCode(String value){
+      _agentCode = value;
+   }
+
+   //============================================================
+   // <T>判断鉴定代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIdentityCodeChanged(){
+      return !RString.equals(__identityCode, _identityCode);
+   }
+
+   //============================================================
+   // <T>获得鉴定代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String identityCode(){
+      return _identityCode;
+   }
+
+   //============================================================
+   // <T>设置鉴定代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIdentityCode(String value){
+      _identityCode = value;
    }
 
    //============================================================
@@ -447,8 +480,10 @@ public class FDataInfoDeviceBrowserUnit
             return _guid;
          case "device_id":
             return Long.toString(_deviceId);
-         case "code":
-            return _code;
+         case "agent_code":
+            return _agentCode;
+         case "identity_code":
+            return _identityCode;
          case "label":
             return _label;
          case "content":
@@ -489,8 +524,11 @@ public class FDataInfoDeviceBrowserUnit
          case "device_id":
             _deviceId = RLong.parse(value);
             break;
-         case "code":
-            _code = value;
+         case "agent_code":
+            _agentCode = value;
+            break;
+         case "identity_code":
+            _identityCode = value;
             break;
          case "label":
             _label = value;
@@ -544,9 +582,13 @@ public class FDataInfoDeviceBrowserUnit
                __deviceId = RLong.parse(value);
                _deviceId = __deviceId;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
+            case "agent_code":
+               __agentCode = value;
+               _agentCode = __agentCode;
+               break;
+            case "identity_code":
+               __identityCode = value;
+               _identityCode = __identityCode;
                break;
             case "label":
                __label = value;
@@ -592,7 +634,8 @@ public class FDataInfoDeviceBrowserUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("deviceId", _deviceId);
-      row.set("code", _code);
+      row.set("agentCode", _agentCode);
+      row.set("identityCode", _identityCode);
       row.set("label", _label);
       row.set("content", _content);
       row.set("note", _note);
@@ -614,7 +657,8 @@ public class FDataInfoDeviceBrowserUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("deviceId", RLong.toString(_deviceId));
-      map.put("code", _code);
+      map.put("agentCode", _agentCode);
+      map.put("identityCode", _identityCode);
       map.put("label", _label);
       map.put("content", _content);
       map.put("note", _note);

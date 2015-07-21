@@ -44,8 +44,11 @@ public class FDataInfoDeviceBrowserLogic
    // 字段设备编号的定义。
    public final static SLogicFieldInfo DEVICE_ID = new SLogicFieldInfo("DEVICE_ID");
 
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+   // 字段代理代码的定义。
+   public final static SLogicFieldInfo AGENT_CODE = new SLogicFieldInfo("AGENT_CODE");
+
+   // 字段鉴定代码的定义。
+   public final static SLogicFieldInfo IDENTITY_CODE = new SLogicFieldInfo("IDENTITY_CODE");
 
    // 字段真实名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
@@ -69,7 +72,7 @@ public class FDataInfoDeviceBrowserLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`DEVICE_ID`,`CODE`,`LABEL`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`DEVICE_ID`,`AGENT_CODE`,`IDENTITY_CODE`,`LABEL`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造信息设备浏览器表逻辑单元。</T>
@@ -662,7 +665,8 @@ public class FDataInfoDeviceBrowserLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`DEVICE_ID`");
-      cmd.append(",`CODE`");
+      cmd.append(",`AGENT_CODE`");
+      cmd.append(",`IDENTITY_CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
@@ -688,12 +692,21 @@ public class FDataInfoDeviceBrowserLogic
          cmd.append(deviceId);
       }
       cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
+      String agentCode = unit.agentCode();
+      if(RString.isEmpty(agentCode)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
+         cmd.append(RSql.formatValue(agentCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String identityCode = unit.identityCode();
+      if(RString.isEmpty(identityCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(identityCode));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -806,14 +819,25 @@ public class FDataInfoDeviceBrowserLogic
             cmd.append(deviceId);
          }
       }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
+      if(unit.isAgentCodeChanged()){
+         cmd.append(",`AGENT_CODE`=");
+         String agentCode = unit.agentCode();
+         if(RString.isEmpty(agentCode)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
+            cmd.append(RSql.formatValue(agentCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isIdentityCodeChanged()){
+         cmd.append(",`IDENTITY_CODE`=");
+         String identityCode = unit.identityCode();
+         if(RString.isEmpty(identityCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(identityCode));
             cmd.append('\'');
          }
       }
