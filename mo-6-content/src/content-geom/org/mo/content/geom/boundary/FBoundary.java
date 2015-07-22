@@ -1,10 +1,15 @@
 package org.mo.content.geom.boundary;
 
-import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
 
+//============================================================
+// <T>边界。</T>
+//============================================================
 public class FBoundary
 {
+   // 优化器
+   protected FBoundaryOptimizer _optimizer;
+
    // 点集合
    protected FObjects<SBoundaryPoint> _points = new FObjects<SBoundaryPoint>(SBoundaryPoint.class);
 
@@ -14,7 +19,28 @@ public class FBoundary
    // 边集合
    protected FObjects<FBoundaryBorder> _borders = new FObjects<FBoundaryBorder>(FBoundaryBorder.class);
 
+   //============================================================
+   // <T>构造边界。</T>
+   //============================================================
    public FBoundary(){
+   }
+
+   //============================================================
+   // <T>获得优化器。</T>
+   //
+   // @return 优化器
+   //============================================================
+   public FBoundaryOptimizer optimizer(){
+      return _optimizer;
+   }
+
+   //============================================================
+   // <T>设置优化器。</T>
+   //
+   // @param optimizer 优化器
+   //============================================================
+   public void setOptimizer(FBoundaryOptimizer optimizer){
+      _optimizer = optimizer;
    }
 
    //============================================================
@@ -32,7 +58,10 @@ public class FBoundary
    // @param point 顶点
    //============================================================
    public void pushPoint(SBoundaryPoint point){
-      _points.push(point);
+      //_points.push(point);
+      if(!_points.contains(point)){
+         _points.push(point);
+      }
    }
 
    //============================================================
@@ -59,6 +88,8 @@ public class FBoundary
    // @param point 顶点
    //============================================================
    public void pushBorder(FBoundaryBorder border){
+      border.setOptimizer(_optimizer);
+      border.setBoundary(this);
       _borders.push(border);
    }
 
@@ -66,13 +97,18 @@ public class FBoundary
    // <T>计算数据。</T>
    //============================================================
    public void optimize(){
-      FDictionary<SBoundaryPoint> points = new FDictionary<SBoundaryPoint>(SBoundaryPoint.class);
-      for(FBoundaryBorder border : _borders){
-         for(SBoundaryPoint point : border.optimizePoints()){
-            String code = point.toString();
-            if(!points.contains(code)){
+      int count = _borders.count();
+      for(int n = 0; n < count; n++){
+         FBoundaryBorder border = _borders.get(n);
+         int pointCount = border.optimizePoints().count();
+         for(int i = 0; i < pointCount; i++){
+            SBoundaryPoint point = border.optimizePoints().get(i);
+            if(n == 0){
                _optimizePoints.push(point);
-               points.set(code, point);
+            }else{
+               if(i != 0){
+                  _optimizePoints.push(point);
+               }
             }
          }
       }

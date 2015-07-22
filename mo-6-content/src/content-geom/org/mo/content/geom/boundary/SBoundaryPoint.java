@@ -4,17 +4,21 @@ import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IComparable;
 
+//============================================================
+// <T>边界三维双浮点坐标。</T>
+//============================================================
 public class SBoundaryPoint
       extends SDoublePoint3
       implements
          IComparable<SBoundaryPoint>
 {
-   public boolean valid = true;
-
+   // 索引位置
    public int index;
 
+   // 长度
    public double length;
 
+   // 边线集合
    public FObjects<SBoundaryLine> lines;
 
    //============================================================
@@ -59,19 +63,20 @@ public class SBoundaryPoint
    }
 
    public int lineCount(){
-      return (lines != null) ? lines.count() : 0;
+      return lines.count();
    }
 
    public void pushLine(SBoundaryLine line){
       if(lines == null){
          lines = new FObjects<SBoundaryLine>(SBoundaryLine.class);
       }
-      if(!lines.contains(line)){
-         lines.push(line);
-      }
+      lines.pushUnique(line);
    }
 
-   public double calculateLength(){
+   //============================================================
+   // <T>计算当前点关联线的平均长度。</T>
+   //============================================================
+   public double calculate(){
       double total = 0;
       for(SBoundaryLine line : lines){
          total += line.length;

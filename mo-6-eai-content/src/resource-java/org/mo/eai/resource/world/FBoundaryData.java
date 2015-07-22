@@ -117,27 +117,10 @@ public class FBoundaryData
       // 填充数据
       List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
       int count = _optimizePoints.count();
-      //int firstIndex = 0;
-      //SBoundaryPoint firstPoint = null;
-      //SBoundaryPoint lastPoint = null;
-      for(int n = 0; n < count - 1; n++){
+      for(int n = 0; n < count; n++){
          SBoundaryPoint point = _optimizePoints.get(n);
-         if(point.valid){
-            //            if(firstPoint == null){
-            //               firstIndex = n;
-            //               firstPoint = point;
-            //            }
-            //            lastPoint = point;
-            PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
-            polygonPoints.add(polygonPoint);
-         }
-      }
-      //if(!firstPoint.equals(lastPoint)){
-      //   PolygonPoint polygonPoint = new FPolygonPoint(firstIndex, firstPoint.x, firstPoint.y, firstPoint.z);
-      //   polygonPoints.add(polygonPoint);
-      //}
-      if(polygonPoints.size() < 3){
-         return;
+         PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
+         polygonPoints.add(polygonPoint);
       }
       Polygon polygon = new Polygon(polygonPoints);
       // 转换数据

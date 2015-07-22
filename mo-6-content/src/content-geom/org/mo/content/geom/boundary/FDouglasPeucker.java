@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-
+import org.mo.com.lang.FObjects;
 
 /**
  * 
@@ -15,7 +15,7 @@ import java.util.List;
  * @author linlixin
  *
  */
-public class DouglasPeucker
+public class FDouglasPeucker
 {
 
    /**
@@ -23,7 +23,6 @@ public class DouglasPeucker
     */
    public static void main(String[] args){
       // TODO Auto-generated method stub
-
       /**
        * 
        * 117.396814,40.233095,0;117.360068,40.242128,0;117.348757,40.25027,0;117.343034,40.283717,0;117.30242,40.284012,0;117.300909,40.298824,0;117.294971,40.307248,0;117.280908,40.31483,0;117.277872,40.331475,0;117.281586,40.338248,0;117.268763,40.343838,0;117.248206,40.376793,0;117.233105,40.375358,0;117.230104,40.381682,0;117.235062,40.392322,0;117.241661,40.395752,0;117.243127,40.400548,0;117.246722,40.40068,0;117.24604,40.405045,0;117.238857,40.410209,0;117.240581,40.42306,0;117.256385,40.435421,0;117.263364,40.436067,0;117.26993,40.447321,0;117.241196,40.464298,0;117.242267,40.475311,0;117.232341,40.484311,0;117.234676,40.48752,0;117.223574,40.501212,0;117.215835,40.502724,0;117.21653,40.512643,0;117.220225,40.518656,0;117.239555,40.519506,0;117.245336,40.523751,0;117.253813,40.518445,0;117.266702,40.525486,0;117.256848,40.54366,0;117.259649,40.547985,0;117.256124,40.554638,0;117.272602,40.564079,0;117.302711,40.572713,0;117.317146,40.582207,0;117.340905,40.582418,0;117.356706,40.586185,0;117.372601,40.582034,0;117.382658,40.572888,0;117.395929,40.567374,0;117.410574,40.579774,0;117.426571,40.574504,0;117.436606,40.584657,0;117.42995,40.58783,0;117.420328,40.612091,0;117.429118,40.643382,0;117.478347,40.653361,0;117.485398,40.64184,0;117.507621,40.642461,0;117.509516,40.659031,0;117.513171,40.660949,0;117.512283,40.673448,0;117.501618,40.68091,0;117.486462,40.683865,0;117.471233,40.679811,0;117.427458,40.691901,0;117.413032,40.691963,0;117.368422,40.681015,0;117.352677,40.680053,0;117.343188,40.672822,0;117.343163,40.669474,0;117.332062,40.666479,0;117.298595,40.665641,0;117.284975,40.672219,0;117.267992,40.687306,0;117.248559,40.682887,0;117.237938,40.691027,0;117.21279,40.700633,0;117.189813,40.703272,0;117.185509,40.699216,0;117.173492,40.704884,0;117.159189,40.703082,0;117.123309,40.706232,0;117.11851,40.713341,0;117.090641,40.708002,0;117.056273,40.706007,0;117.037346,40.698128,0;117.010825,40.702995,0;116.971399,40.715332,0;116.972824,40.719631,0;116.951579,40.733725,0;116.947612,40.745358,0;116.933105,40.750454,0;116.929846,40.757856,0;116.934815,40.762214,0;116.930179,40.779446,0;116.904581,40.783162,0;116.901081,40.788008,0;116.9026,40.800071,0;116.88808,40.809295,0;116.888235,40.820112,0;116.881718,40.827765,0;116.867501,40.831665,0;116.862506,40.841264,0;116.844057,40.847245,0;116.829961,40.848436,0;116.827445,40.853933,0;116.819235,40.853821,0;116.812193,40.846273,0;116.80869,40.85693,0;116.789081,40.879637,0;116.77733,40.887135,0;116.764859,40.889985,0;116.765735,40.896678,0;116.743541,40.903681,0;116.737051,40.903223,0;116.732415,40.909594,0;116.720191,40.915779,0;116.722334,40.924405,0;116.73105,40.935302,0;116.724433,40.941791,0;116.712821,40.939941,0;116.697791,40.956023,0;116.693814,40.967528,0;116.684172,40.977679,0;116.684106,40.982014,0;116.691199,40.988235,0;116.691729,41.007364,0;116.698209,41.014096,0;116.697524,41.018573,0;116.702854,41.021883,0;116.704409,41.031402,0;116.696054,41.050272,0;116.690283,41.047187,0;116.665317,41.056873,0;116.655365,41.063919,0;116.637532,41.066884,0;116.632524,41.061892,0;116.622608,41.059055,0;116.624713,41.054896,0;116.620421,41.04299,0;116.628376,41.0337,0;116.62829,41.022061,0;116.622062,41.0105,0;116.621672,40.992318,0;116.606371,40.981254,0;116.592437,40.985128,0;116.580618,40.993771,0;116.566631,40.998804,0;116.56466,40.994409,0;116.554092,40.993979,0;116.547776,40.996659,0;116.525911,40.987794,0;116.523141,40.981751,0;116.499718,40.984453,0;116.492126,40.988346,0;116.480946,40.983933,0;116.470491,40.990227,0;116.462585,40.984177,0;116.454523,40.960213,0;116.468624,40.938999,0;116.474211,40.93707,0;116.481905,40.917902,0;116.483361,40.905498,0;116.480853,40.903074,0;116.443685,40.90498,0;116.437039,40.909232,0;116.421842,40.906839,0;116.408434,40.911863,0;116.398376,40.92057,0;116.377851,40.949215,0;116.372863,40.949316,0;116.366048,40.941941,0;116.347659,40.936639,0;116.341021,40.9254,0;116.340967,40.91152,0;116.388424,40.869752,0;116.396076,40.868438,0;116.397954,40.861524,0;116.411794,40.847151,0;116.412806,40.839748,0;116.444768,40.824186,0;116.449148,40.812842,0;116.458652,40.803974,0;116.465447,40.802591,0;116.472163,40.77826,0;116.460539,40.771806,0;116.445402,40.772914,0;116.422367,40.768351,0;116.416833,40.785757,0;116.401677,40.78488,0;116.373736,40.776837,0;116.328394,40.778196,0;116.320514,40.77693,0;116.314111,40.769582,0;116.317666,40.760475,0;116.314075,40.758484,0;116.294132,40.770103,0;116.280562,40.769739,0;116.275753,40.781289,0;116.254416,40.797832,0;116.241679,40.789088,0;116.242438,40.781394,0;116.236838,40.768522,0;116.240245,40.764807,0;116.221101,40.750547,0;116.219936,40.746062,0;116.226137,40.739108,0;116.216877,40.727078,0;116.209974,40.72149,0;116.193057,40.724782,0;116.18734,40.718765,0;116.177616,40.702363,0;116.180134,40.699151,0;116.171808,40.674123,0;116.164609,40.669972,0;116.148927,40.673475,0;116.138716,40.661807,0;116.120445,40.654743,0;116.118173,40.649776,0;116.126964,40.631189,0;116.117788,40.62193,0;116.068027,40.615224,0;116.037281,40.603575,0;116.026374,40.604705,0;116.01256,40.594188,0;116.00943,40.581671,0;115.988979,40.584777,0;115.979101,40.607208,0;115.96029,40.607401,0;115.950341,40.617487,0;115.934286,40.619091,0;115.916134,40.624756,0;115.894762,40.602501,0;115.834129,40.593641,0;115.82805,40.569572,0;115.820068,40.563255,0;115.805593,40.563806,0;115.797891,40.567662,0;115.767764,40.545073,0;115.761164,40.545717,0;115.742637,40.510394,0;115.752305,40.498003,0;115.783837,40.492361,0;115.775733,40.468534,0;115.778708,40.455699,0;115.788186,40.444804,0;115.803563,40.436957,0;115.811505,40.426348,0;115.824703,40.392614,0;115.839213,40.384772,0;115.855604,40.38265,0;115.87134,40.368466,0;115.882848,40.364071,0;115.895453,40.367279,0;115.910131,40.366321,0;115.91565,40.373277,0;115.92271,40.373176,0;115.930506,40.348471,0;115.929014,40.342954,0;115.93938,40.324907,0;115.949202,40.320196,0;115.950679,40.31592,0;115.946689,40.310072,0;115.952985,40.294974,0;115.95687,40.293726,0;115.962316,40.28308,0;115.967807,40.28117,0;115.967703,40.276763,0;115.974803,40.269453,0;115.96956,40.263582,0;115.939616,40.261757,0;115.925633,40.254556,0;115.917889,40.241488,0;115.905256,40.241696,0;115.890773,40.22004,0;115.894544,40.215076,0;115.878751,40.193072,0;115.86747,40.19034,0;115.850978,40.173889,0;115.859884,40.154416,0;115.813286,40.159262,0;115.800328,40.174545,0;115.796151,40.18475,0;115.779416,40.182207,0;115.774742,40.172296,0;115.763447,40.169641,0;115.756972,40.159365,0;115.761798,40.150631,0;115.754547,40.140404,0;115.731648,40.134635,0;115.693943,40.144939,0;115.661502,40.133591,0;115.657429,40.123404,0;115.618554,40.122766,0;115.61325,40.120591,0;115.61212,40.109824,0;115.607844,40.10545,0;115.610083,40.099374,0;115.587407,40.101838,0;115.582502,40.108779,0;115.559105,40.087639,0;115.549021,40.082009,0;115.534603,40.082349,0;115.516148,40.071128,0;115.513656,40.063479,0;115.49734,40.056354,0;115.479551,40.039915,0;115.462648,40.033699,0;115.459211,40.029466,0;115.454533,39.999598,0;115.450072,40.000977,0;115.440883,39.995542,0;115.43257,39.985449,0;115.430282,39.961629,0;115.433244,39.956319,0;115.448393,39.958579,0;115.482655,39.943021,0;115.496416,39.927586,0;115.513516,39.919226,0;115.527724,39.907377,0;115.529448,39.904259,0;115.51576,39.889913,0;115.517443,39.886911,0;115.535997,39.882121,0;115.530323,39.874847,0;115.527983,39.86375,0;115.517405,39.850512,0;115.532551,39.836925,0;115.551154,39.832822,0;115.575643,39.819741,0;115.57307,39.811205,0;115.558665,39.801297,0;115.550738,39.802418,0;115.519505,39.794138,0;115.513357,39.788984,0;115.498847,39.802132,0;115.490144,39.804462,0;115.466597,39.789538,0;115.446208,39.789696,0;115.443016,39.782414,0;115.4537,39.755596,0;115.475508,39.746881,0;115.489207,39.748202,0;115.498946,39.744467,0;115.494841,39.737957,0;115.498926,39.707306,0;115.506367,39.69717,0;115.495458,39.687104,0;115.49821,39.674617,0;115.485294,39.661638,0;115.485203,39.656314,0;115.513505,39.65776,0;115.522393,39.648146,0;115.528856,39.645963,0;115.525992,39.618943,0;115.539326,39.617612,0;115.552049,39.625147,0;115.575098,39.604458,0;115.580881,39.602542,0;115.57802,39.598252,0;115.580937,39.597404,0;115.592675,39.595736,0;115.606081,39.605443,0;115.624996,39.609891,0;115.640839,39.603874,0;115.640124,39.60979,0;115.648167,39.609304,0;115.650382,39.605047,0;115.664199,39.607415,0;115.677061,39.614593,0;115.687469,39.602859,0;115.6977,39.597042,0;115.700636,39.58446,0;115.698616,39.572297,0;115.724345,39.567191,0;115.733957,39.55403,0;115.744881,39.549176,0;115.750469,39.530171,0;115.758146,39.518671,0;115.769417,39.52097,0;115.774597,39.513389,0;115.77468,39.521173,0;115.803517,39.516067,0;115.833646,39.518631,0;115.834908,39.547445,0;115.852755,39.549069,0;115.853237,39.557078,0;115.859607,39.558462,0;115.872222,39.553433,0;115.893877,39.55684,0;115.893426,39.562061,0;115.89959,39.562647,0;115.900299,39.57279,0;115.914709,39.575423,0;115.918661,39.579418,0;115.92096,39.5894,0;115.91514,39.59102,0;115.913687,39.602606,0;115.919764,39.605797,0;115.927621,39.603682,0;115.927525,39.600123,0;115.93517,39.59979,0;115.936548,39.590961,0;115.950787,39.582123,0;115.956732,39.572271,0;115.964618,39.57154,0;115.983172,39.576154,0;115.983491,39.600071,0;115.991092,39.600501,0;115.998195,39.599442,0;115.999942,39.589146,0;116.003687,39.588679,0;116.001695,39.582687,0;116.014635,39.583917,0;116.022136,39.593854,0;116.043035,39.57876,0;116.07333,39.577713,0;116.110362,39.580779,0;116.111984,39.576795,0;116.153802,39.575452,0;116.16104,39.586423,0;116.200314,39.588234,0;116.207352,39.58384,0;116.227953,39.584402,0;116.245105,39.556047,0;116.250727,39.552413,0;116.251984,39.521643,0;116.258316,39.516687,0;116.261105,39.50889,0;116.282528,39.501232,0;116.285552,39.497833,0;116.310498,39.493163,0;116.325583,39.480138,0;116.332267,39.468477,0;116.349029,39.458592,0;116.351422,39.453985,0;116.371229,39.453886,0;116.372291,39.457582,0;116.383324,39.459122,0;116.394203,39.456088,0;116.399532,39.458963,0;116.425853,39.454582,0;116.436799,39.445587,0;116.444783,39.448582,0;116.448654,39.447369,0;116.458375,39.453186,0;116.462321,39.46309,0;116.456546,39.468347,0;116.454885,39.482176,0;116.44748,39.492161,0;116.427339,39.502878,0;116.413425,39.529626,0;116.425291,39.528906,0;116.432281,39.522346,0;116.441316,39.522359,0;116.446318,39.524486,0;116.449053,39.535027,0;116.483584,39.545471,0;116.484288,39.555351,0;116.51236,39.561538,0;116.533535,39.579411,0;116.530868,39.603113,0;116.561077,39.604456,0;116.575397,39.60992,0;116.574035,39.615511,0;116.578352,39.625892,0;116.597606,39.62995,0;116.608882,39.627922,0;116.60958,39.617675,0;116.618347,39.614326,0;116.63956,39.598435,0;116.649575,39.602253,0;116.65341,39.612935,0;116.701393,39.602494,0;116.710341,39.59463,0;116.735224,39.599557,0;116.712803,39.615639,0;116.712707,39.620278,0;116.732272,39.622677,0;116.770397,39.621126,0;116.781618,39.611405,0;116.786732,39.600158,0;116.794329,39.602738,0;116.792869,39.609761,0;116.798272,39.610925,0;116.798806,39.616774,0;116.835365,39.623318,0;116.847796,39.629981,0;116.837352,39.642124,0;116.837919,39.648702,0;116.857622,39.661133,0;116.858348,39.670383,0;116.862345,39.673679,0;116.890055,39.681869,0;116.899041,39.67916,0;116.913065,39.682652,0;116.912129,39.692889,0;116.895367,39.709769,0;116.889375,39.722799,0;116.896226,39.731878,0;116.905895,39.732316,0;116.918338,39.737685,0;116.915713,39.755851,0;116.905956,39.765245,0;116.917067,39.769397,0;116.926504,39.785708,0;116.954922,39.787312,0;116.958916,39.788953,0;116.957802,39.793369,0;116.947889,39.802187,0;116.942966,39.801267,0;116.941163,39.807497,0;116.944047,39.811272,0;116.934897,39.8194,0;116.934864,39.836027,0;116.921582,39.8546,0;116.914208,39.858458,0;116.910419,39.856768,0;116.908704,39.849417,0;116.914744,39.836888,0;116.906097,39.838156,0;116.892248,39.85166,0;116.865868,39.864936,0;116.858785,39.876295,0;116.826594,39.895721,0;116.810909,39.894968,0;116.798184,39.891052,0;116.790891,39.904278,0;116.787847,39.924116,0;116.790425,39.947352,0;116.784383,39.957745,0;116.785533,39.962352,0;116.781118,39.966493,0;116.778104,39.962551,0;116.768888,39.965436,0;116.766651,39.963757,0;116.763082,39.967772,0;116.774479,39.991807,0;116.782163,39.999264,0;116.777743,40.020054,0;116.79169,40.04063,0;116.808115,40.035326,0;116.812623,40.039475,0;116.829879,40.034153,0;116.830104,40.053132,0;116.856134,40.058213,0;116.856655,40.06071,0;116.862424,40.059915,0;116.879125,40.046781,0;116.887003,40.052001,0;116.897445,40.05203,0;116.91645,40.058756,0;116.921103,40.058581,0;116.924633,40.052961,0;116.929155,40.052608,0;116.937167,40.060357,0;116.945078,40.053844,0;116.949071,40.054797,0;116.953609,40.047448,0;116.968858,40.057487,0;116.97638,40.054388,0;116.979592,40.047527,0;116.9842,40.045447,0;117.01239,40.038834,0;117.03162,40.038702,0;117.045767,40.055848,0;117.060658,40.061359,0;117.062142,40.064898,0;117.088476,40.070829,0;117.095952,40.076216,0;117.119763,40.078627,0;117.142575,40.070338,0;117.16233,40.075069,0;117.167983,40.081988,0;117.183281,40.07842,0;117.191574,40.091165,0;117.219451,40.102784,0;117.230842,40.100735,0;117.230798,40.104818,0;117.256558,40.125811,0;117.264635,40.118738,0;117.282491,40.119351,0;117.294419,40.127966,0;117.305696,40.128324,0;117.318401,40.145199,0;117.351763,40.148592,0;117.364739,40.166702,0;117.360039,40.179331,0;117.371849,40.184583,0;117.39733,40.184087,0;117.411835,40.190451,0;117.413853,40.193758,0;117.410394,40.194931,0;117.402432,40.192313,0;117.386786,40.198355,0;117.387165,40.205991,0;117.394824,40.209093,0;117.395258,40.212225,0;117.385567,40.214483,0;117.38483,40.223684,0;117.399491,40.227136,0;117.396814,40.233095,0
@@ -41,38 +40,37 @@ public class DouglasPeucker
          pointsReduce.add(new SBoundaryPoint(Double.parseDouble(inputTwo[0]), Double.parseDouble(inputTwo[1])));
       }
 
-      List<SBoundaryPoint> newPoints = DouglasPeuckerReduction(pointsReduce, 0.05);
+      List<SBoundaryPoint> newPoints = DouglasPeuckerReduction(null, pointsReduce, 0.05);
       for(SBoundaryPoint point : newPoints){
          System.out.println(point.x + "   " + point.y);
       }
       System.out.println("压缩后：" + newPoints.size());
       //calculate2(newPoints);
    }
-   
-   
+
    /*public static void calculate2(List<SBoundaryPoint> newPoints ){
-	      // 填充数据
-	      List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
-	      int count = newPoints.size();
-	      for(int n = 0; n < count - 1; n++){
-	         SBoundaryPoint point = newPoints.get(n);
-	         if(point.valid){
-	            PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
-	            polygonPoints.add(polygonPoint);
-	         }
-	      }
-	      Polygon polygon = new Polygon(polygonPoints);
-	      // 转换数据
-	      try{
-	         Poly2Tri.triangulate(polygon);
-	      }catch(Exception e){
-	    	  System.out.println("daf");
-	         System.out.println(e.getMessage());
-	         //valid = false;
-	         return;
-	      }
-	      
-	   }*/
+         // 填充数据
+         List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
+         int count = newPoints.size();
+         for(int n = 0; n < count - 1; n++){
+            SBoundaryPoint point = newPoints.get(n);
+            if(point.valid){
+               PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
+               polygonPoints.add(polygonPoint);
+            }
+         }
+         Polygon polygon = new Polygon(polygonPoints);
+         // 转换数据
+         try{
+            Poly2Tri.triangulate(polygon);
+         }catch(Exception e){
+       	  System.out.println("daf");
+            System.out.println(e.getMessage());
+            //valid = false;
+            return;
+         }
+         
+      }*/
 
    /// <summary>
    /// Uses the Douglas Peucker algorithm to reduce the number of points.
@@ -80,30 +78,30 @@ public class DouglasPeucker
    /// <param name="Points">The points.</param>
    /// <param name="Tolerance">The tolerance.</param>
    /// <returns></returns>
-   public static List<SBoundaryPoint> DouglasPeuckerReduction(List<SBoundaryPoint> Points,
-                                                              double Tolerance){
-      if(Points == null || Points.size() < 5)
-         return Points;
-
-      Integer firstPoint = 0;
-      Integer lastPoint = Points.size() - 1;
+   public static List<SBoundaryPoint> DouglasPeuckerReduction(FObjects<FBoundaryBorder> borders,
+                                                              List<SBoundaryPoint> points,
+                                                              double tolerance){
+      if(points == null || points.size() < 3){
+         return points;
+      }
+      int firstPoint = 0;
+      int lastPoint = points.size() - 1;
       List<Integer> pointIndexsToKeep = new ArrayList<Integer>();
-
       //Add the first and last index to the keepers
       pointIndexsToKeep.add(firstPoint);
       pointIndexsToKeep.add(lastPoint);
 
       //The first and the last point cannot be the same
-      while(Points.get(firstPoint).equals(Points.get(lastPoint))){
+      while(points.get(firstPoint).equals(points.get(lastPoint))){
          lastPoint--;
          pointIndexsToKeep.add(lastPoint);
       }
 
-      DouglasPeuckerReduction(Points, firstPoint, lastPoint, Tolerance, pointIndexsToKeep);
+      douglasPeuckerReduction(borders, points, firstPoint, lastPoint, tolerance, pointIndexsToKeep);
 
       List<SBoundaryPoint> returnPoints = new ArrayList<SBoundaryPoint>();
-      if(pointIndexsToKeep.size()<=3){
-    	  pointIndexsToKeep.add(1);
+      if(pointIndexsToKeep.size() <= 3){
+         pointIndexsToKeep.add(1);
       }
       List<Integer> listWithoutDup = new ArrayList<Integer>(new HashSet<Integer>(pointIndexsToKeep));
       Collections.sort(listWithoutDup, new Comparator<Integer>(){
@@ -114,7 +112,7 @@ public class DouglasPeucker
          }
       });
       for(Integer index : listWithoutDup){
-         returnPoints.add(Points.get(index));
+         returnPoints.add(points.get(index));
       }
 
       return returnPoints;
@@ -128,35 +126,42 @@ public class DouglasPeucker
    /// <param name="lastPoint">The last point.</param>
    /// <param name="tolerance">The tolerance.</param>
    /// <param name="pointIndexsToKeep">The point index to keep.</param>
-   private static void DouglasPeuckerReduction(List<SBoundaryPoint> points,
-                                               Integer firstPoint,
-                                               Integer lastPoint,
-                                               Double tolerance,
+   private static void douglasPeuckerReduction(FObjects<FBoundaryBorder> borders,
+                                               List<SBoundaryPoint> points,
+                                               int firstIndex,
+                                               int lastIndex,
+                                               double tolerance,
                                                List<Integer> pointIndexsToKeep){
-      Double maxDistance = 0.0;
-      Integer indexFarthest = 0;
-
-      for(Integer index = firstPoint; index < lastPoint; index++){
-         Double distance = PerpendicularDistance(points.get(firstPoint), points.get(lastPoint), points.get(index));
+      //      if(lastIndex - firstIndex < 2){
+      //         return;
+      //      }
+      double maxDistance = 0.0;
+      int farthestIndex = 0;
+      for(int index = firstIndex + 1; index < lastIndex; index++){
+         double distance = PerpendicularDistance(points.get(firstIndex), points.get(lastIndex), points.get(index));
          if(distance > maxDistance){
             maxDistance = distance;
-            indexFarthest = index;
+            farthestIndex = index;
          }
       }
-      //当最大长度大于设定阈值时保留该点
-      if(maxDistance > tolerance && indexFarthest != 0){
-         //Add the largest point that exceeds the tolerance
-         pointIndexsToKeep.add(indexFarthest);
-
-         DouglasPeuckerReduction(points, firstPoint, indexFarthest, tolerance, pointIndexsToKeep);
-         DouglasPeuckerReduction(points, indexFarthest, lastPoint, tolerance, pointIndexsToKeep);
-      }
-      //当删减后出现与原曲线相交时保留该点
-      else if( isIntersert(points,firstPoint,lastPoint) && indexFarthest != 0 ){
-    	  pointIndexsToKeep.add(indexFarthest);
-
-          DouglasPeuckerReduction(points, firstPoint, indexFarthest, tolerance, pointIndexsToKeep);
-          DouglasPeuckerReduction(points, indexFarthest, lastPoint, tolerance, pointIndexsToKeep);
+      // 当最大长度大于设定阈值时保留该点
+      if(farthestIndex != 0){
+         if(maxDistance > tolerance){
+            //Add the largest point that exceeds the tolerance
+            pointIndexsToKeep.add(farthestIndex);
+            douglasPeuckerReduction(borders, points, firstIndex, farthestIndex, tolerance, pointIndexsToKeep);
+            douglasPeuckerReduction(borders, points, farthestIndex, lastIndex, tolerance, pointIndexsToKeep);
+         }else if(isIntersert2(borders, points.get(firstIndex), points.get(lastIndex))){
+            // 当删减后出现与其他曲线相交时保留该点
+            pointIndexsToKeep.add(farthestIndex);
+            douglasPeuckerReduction(borders, points, firstIndex, farthestIndex, tolerance, pointIndexsToKeep);
+            douglasPeuckerReduction(borders, points, farthestIndex, lastIndex, tolerance, pointIndexsToKeep);
+         }else if(isIntersert(points, firstIndex, lastIndex)){
+            // 当删减后出现与原曲线相交时保留该点
+            pointIndexsToKeep.add(farthestIndex);
+            douglasPeuckerReduction(borders, points, firstIndex, farthestIndex, tolerance, pointIndexsToKeep);
+            douglasPeuckerReduction(borders, points, farthestIndex, lastIndex, tolerance, pointIndexsToKeep);
+         }
       }
    }
 
@@ -167,9 +172,9 @@ public class DouglasPeucker
    /// <param name="pt2">The PT2.</param>
    /// <param name="p">The p.</param>
    /// <returns></returns>
-   public static Double PerpendicularDistance(SBoundaryPoint Point1,
-                                              SBoundaryPoint Point2,
-                                              SBoundaryPoint Point){
+   public static Double PerpendicularDistance(SBoundaryPoint point1,
+                                              SBoundaryPoint point2,
+                                              SBoundaryPoint point){
       //Area = |(1/2)(x1y2 + x2y3 + x3y1 - x2y1 - x3y2 - x1y3)|   *Area of triangle
       //Base = v((x1-x2)²+(x1-x2)²)                               *Base of Triangle*
       //Area = .5*Base*H                                          *Solve for height
@@ -179,11 +184,9 @@ public class DouglasPeucker
       Point.Y + Point.X * Point1.Y - Point2.X * Point1.Y - Point.X * 
       Point2.Y - Point1.X * Point.Y));*/
 
-      Double area = Math.abs(.5 * (Point1.x * Point2.y + Point2.x * Point.y + Point.x * Point1.y - Point2.x * Point1.y - Point.x * Point2.y - Point1.x * Point.y));
-
-      Double bottom = Math.sqrt(Math.pow(Point1.x - Point2.x, 2) + Math.pow(Point1.y - Point2.y, 2));
-      Double height = area / bottom * 2;
-
+      double area = Math.abs(0.5 * (point1.x * point2.y + point2.x * point.y + point.x * point1.y - point2.x * point1.y - point.x * point2.y - point1.x * point.y));
+      double bottom = Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2));
+      double height = area / bottom * 2;
       return height;
 
       //Another option
@@ -217,59 +220,80 @@ public class DouglasPeucker
       //Double d = DistanceBetweenOn2DPlane(Point, new Point(xx, yy));
    }
 
+   public static boolean isIntersert2(FObjects<FBoundaryBorder> borders,
+                                      SBoundaryPoint firstPoint,
+                                      SBoundaryPoint lastPoint){
+      for(FBoundaryBorder border : borders){
+         FObjects<SBoundaryPoint> points = border.points();
+         int count = points.count();
+         for(int i = 0; i < count - 1; i++){
+            if(segments_intersert(points.get(i), points.get(i + 1), firstPoint, lastPoint)){
+               return true;
+            }
+         }
+      }
+      return false;
+   }
+
    public static boolean isIntersert(List<SBoundaryPoint> points,
-           Integer firstPoint,
-           Integer lastPoint){
-	   if(firstPoint<2&&lastPoint>=points.size()-2)//当开始和结束是端点的时候不可能相交
-		   return false;
-	   else{
-		   for(Integer index=0; index<firstPoint-1; index++){
-			   if(segments_intersert(points.get(index), points.get(index+1), points.get(firstPoint), points.get(lastPoint))){
-				   return true;
-			   }
-		   }
-		   for(Integer index=lastPoint+1;index<points.size()-1;index++){
-			   if(segments_intersert(points.get(index), points.get(index+1), points.get(firstPoint), points.get(lastPoint))){
-				   return true;
-			   }
-		   }
-		   return false;
-	   }
-   }
-   public static double direction( SBoundaryPoint p1,SBoundaryPoint p2,SBoundaryPoint p )//利用叉积计算点p相对线段p1p2的方位
-   {
-   	return ( p.x -p1.x )*( p2.y-p1.y) -  ( p2.x -p1.x )*( p.y-p1.y)   ;
+                                     int firstPoint,
+                                     int lastPoint){
+      int count = points.size();
+      if(firstPoint < 1 && lastPoint >= count - 1)//当开始和结束是端点的时候不可能相交
+         return false;
+      else{
+         for(int index = 0; index < firstPoint - 1; index++){
+            if(segments_intersert(points.get(index), points.get(index + 1), points.get(firstPoint), points.get(lastPoint))){
+               return true;
+            }
+         }
+         for(int index = lastPoint + 1; index < count - 1; index++){
+            if(segments_intersert(points.get(index), points.get(index + 1), points.get(firstPoint), points.get(lastPoint))){
+               return true;
+            }
+         }
+         return false;
+      }
    }
 
-   public static int on_segment( SBoundaryPoint p1,SBoundaryPoint p2 ,SBoundaryPoint p )//确定与线段p1p2共线的点p是否在线段p1p2上
+   public static double direction(SBoundaryPoint p1,
+                                  SBoundaryPoint p2,
+                                  SBoundaryPoint p)//利用叉积计算点p相对线段p1p2的方位
    {
-   	double max=p1.x > p2.x ? p1.x : p2.x ;
-   	double min =p1.x < p2.x ? p1.x : p2.x ;
-       double max1=p1.y > p2.y ? p1.y : p2.y ;
-   	double min1=p1.y < p2.y ? p1.y : p2.y ;
-   	if( p.x >=min && p.x <=max &&p.y >=min1 && p.y <=max1)
-   		return 1;
-   	else
-   		return 0;
+      return (p.x - p1.x) * (p2.y - p1.y) - (p2.x - p1.x) * (p.y - p1.y);
    }
 
-   public static boolean segments_intersert( SBoundaryPoint p1,SBoundaryPoint p2,SBoundaryPoint p3,SBoundaryPoint p4 )//判断线段p1p2与线段p3p4是否相交的主函数
+   public static boolean on_segment(SBoundaryPoint p1,
+                                    SBoundaryPoint p2,
+                                    SBoundaryPoint p)//确定与线段p1p2共线的点p是否在线段p1p2上
    {
-   	double d1,d2,d3,d4;
-   	d1 = direction ( p3,p4,p1 );
-   	d2 = direction ( p3,p4,p2 );
-   	d3 = direction ( p1,p2,p3 );
-   	d4 = direction ( p1,p2,p4 );
-   	if( d1*d2<0 && d3*d4<0 )
-   		return true;
-   	else if( d1==0 && on_segment( p3,p4,p1 )==1 )
-   		return true;
-   	else if( d2==0 && on_segment( p3,p4,p2 )==1 )
-   		return true;
-   	else if( d3==0 && on_segment( p1,p2,p3 )==1 )
-   		return true;
-   	else if( d4==0 && on_segment( p1,p2,p4 )==1 )
-   		return true;
-   	return false;
+      double max = p1.x > p2.x ? p1.x : p2.x;
+      double min = p1.x < p2.x ? p1.x : p2.x;
+      double max1 = p1.y > p2.y ? p1.y : p2.y;
+      double min1 = p1.y < p2.y ? p1.y : p2.y;
+      return (p.x >= min && p.x <= max && p.y >= min1 && p.y <= max1);
+   }
+
+   public static boolean segments_intersert(SBoundaryPoint p1,
+                                            SBoundaryPoint p2,
+                                            SBoundaryPoint p3,
+                                            SBoundaryPoint p4)//判断线段p1p2与线段p3p4是否相交的主函数
+   {
+      double d1 = direction(p3, p4, p1);
+      double d2 = direction(p3, p4, p2);
+      double d3 = direction(p1, p2, p3);
+      double d4 = direction(p1, p2, p4);
+      if(d1 * d2 < 0 && d3 * d4 < 0){
+         return true;
+      }else if(d1 == 0 && on_segment(p3, p4, p1)){
+         return true;
+      }else if(d2 == 0 && on_segment(p3, p4, p2)){
+         return true;
+      }else if(d3 == 0 && on_segment(p1, p2, p3)){
+         return true;
+      }else if(d4 == 0 && on_segment(p1, p2, p4)){
+         return true;
+      }
+      return false;
    }
 }

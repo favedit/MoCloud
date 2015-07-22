@@ -48,8 +48,12 @@ public class FWorldData
       for(FCountryData country : _countrys){
          for(FBoundaryData boundaryData : country.boundaries()){
             FBoundary boundary = new FBoundary();
-            for(SDoublePoint3 value : boundaryData.points()){
-               boundary.pushPoint(optimizer.syncPoint(value));
+            int pointCount = boundaryData.points().count();
+            for(int n = 0; n < pointCount; n++){
+               SDoublePoint3 value = boundaryData.points().get(n);
+               if(n != pointCount - 1){
+                  boundary.pushPoint(optimizer.syncPoint(value));
+               }
             }
             optimizer.pushBoundary(boundary);
             boundaryData.setBoundary(boundary);

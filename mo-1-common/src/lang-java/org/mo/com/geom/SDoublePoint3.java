@@ -218,6 +218,6 @@ public class SDoublePoint3
    //============================================================
    @Override
    public String toString(){
-      return x + "," + y + "," + z;
+      return Double.toString(x) + "," + Double.toString(y) + "," + Double.toString(z);
    }
 }

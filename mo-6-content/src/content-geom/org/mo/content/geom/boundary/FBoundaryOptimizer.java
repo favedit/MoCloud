@@ -2,8 +2,8 @@ package org.mo.content.geom.boundary;
 
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.INamePair;
 
 //============================================================
 // <T>边界数据优化器。</T>
@@ -24,17 +24,35 @@ public class FBoundaryOptimizer
    // 边界集合
    protected FObjects<FBoundary> _boundaries = new FObjects<FBoundary>(FBoundary.class);
 
+   //============================================================
+   // <T>构造边界数据优化器。</T>
+   //============================================================
    public FBoundaryOptimizer(){
    }
 
+   //============================================================
+   // <T>构造边界数据优化器。</T>
+   //
+   // @param rate 优化比率
+   //============================================================
    public FBoundaryOptimizer(double rate){
       _rate = rate;
    }
 
+   //============================================================
+   // <T>获得优化比率。</T>
+   //
+   // @return 优化比率
+   //============================================================
    public double rate(){
       return _rate;
    }
 
+   //============================================================
+   // <T>设置优化比率。</T>
+   //
+   // @param rate 优化比率
+   //============================================================
    public void setRate(double rate){
       _rate = rate;
    }
@@ -56,17 +74,18 @@ public class FBoundaryOptimizer
    }
 
    //============================================================
-   // <T>根据点获得要给数据点。</T>
+   // <T>根据点获得要给数据线。</T>
    //
-   // @param value 点
-   // @return 数据点
+   // @param point1 点1
+   // @param point2 点2
+   // @return 数据线
    //============================================================
    public SBoundaryLine syncLine(SBoundaryPoint point1,
                                  SBoundaryPoint point2){
-      String code = point1.toString() + "|" + point2.toString();
+      String code = point1 + "|" + point2;
       SBoundaryLine line = _lines.find(code);
       if(line == null){
-         code = point2.toString() + "|" + point1.toString();
+         code = point2 + "|" + point1;
          line = _lines.find(code);
       }
       if(line == null){
@@ -91,7 +110,17 @@ public class FBoundaryOptimizer
    // @param boundary 边界
    //============================================================
    public void pushBoundary(FBoundary boundary){
+      boundary.setOptimizer(this);
       _boundaries.push(boundary);
+   }
+
+   //============================================================
+   // <T>获得边界边线集合。</T>
+   //
+   // @return 边线集合
+   //============================================================
+   public FObjects<FBoundaryBorder> borders(){
+      return _borders;
    }
 
    //============================================================
@@ -104,16 +133,12 @@ public class FBoundaryOptimizer
          int count = points.count();
          for(int i = 0; i < count; i++){
             // 获得端点
-            SBoundaryPoint point1 = null;
+            SBoundaryPoint point1 = points.get(i);
             SBoundaryPoint point2 = null;
-            if(i != count - 1){
-               // 中间点
-               point1 = points.get(i);
-               point2 = points.get(i + 1);
-            }else{
-               // 结尾点
-               point1 = points.get(i);
+            if(i == count - 1){
                point2 = points.get(0);
+            }else{
+               point2 = points.get(i + 1);
             }
             // 生成线段
             SBoundaryLine line = syncLine(point1, point2);
@@ -122,15 +147,18 @@ public class FBoundaryOptimizer
          }
       }
       // 计算点平均长度
-      for(INamePair<SBoundaryPoint> pair : _points){
-         pair.value().calculateLength();
-      }
+      //      for(INamePair<SBoundaryPoint> pair : _points){
+      //         pair.value().calculate();
+      //      }
       // 分解边线
       for(FBoundary boundary : _boundaries){
          FBoundaryBorder border = null;
          FObjects<SBoundaryPoint> points = boundary.points();
          for(SBoundaryPoint point : points){
-            if(point.lineCount() > 2){
+            int lineCount = point.lines.count();
+            //boundary.optimizePoints().push(point);
+            if(lineCount > 2){
+               // 新起点
                if(border != null){
                   border.pushPoint(point);
                }
@@ -138,13 +166,15 @@ public class FBoundaryOptimizer
                border.pushPoint(point);
                boundary.pushBorder(border);
                _borders.push(border);
-            }else{
+            }else if(lineCount == 2){
                if(border == null){
                   border = new FBoundaryBorder();
                   boundary.pushBorder(border);
                   _borders.push(border);
                }
                border.pushPoint(point);
+            }else{
+               throw new FFatalError("Invlaid point.");
             }
          }
       }

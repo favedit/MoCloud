@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FInts;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
@@ -12,7 +13,10 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.mo.content.geom.boundary.FBoundary;
 import org.mo.content.geom.boundary.SBoundaryPoint;
+import org.mo.eai.RResourceExportor;
 import org.mo.eai.resource.country.FPolygonPoint;
+import org.mo.eai.template.province.FProvinceResource;
+import org.mo.eai.template.province.FProvinceTemplate;
 import org.poly2tri.Poly2Tri;
 import org.poly2tri.geometry.polygon.Polygon;
 import org.poly2tri.geometry.polygon.PolygonPoint;
@@ -27,7 +31,11 @@ public class FBoundaryData
 {
    public boolean valid = true;
 
-   private FBoundary _boundary;
+   // 省份信息
+   protected FProvinceData _province;
+
+   // 边界信息
+   protected FBoundary _boundary;
 
    // 点集合
    protected FObjects<SBoundaryPoint> _points = new FObjects<SBoundaryPoint>(SBoundaryPoint.class);
@@ -42,6 +50,24 @@ public class FBoundaryData
    // <T>构造边界数据。</T>
    //============================================================
    public FBoundaryData(){
+   }
+
+   //============================================================
+   // <T>获得省份数据。</T>
+   //
+   // @return 省份数据
+   //============================================================
+   public FProvinceData province(){
+      return _province;
+   }
+
+   //============================================================
+   // <T>设置省份数据。</T>
+   //
+   // @param province 省份数据
+   //============================================================
+   public void setProvince(FProvinceData province){
+      _province = province;
    }
 
    //============================================================
@@ -106,6 +132,39 @@ public class FBoundaryData
    }
 
    //============================================================
+   // <T>检查内容。</T>
+   //============================================================
+   public int calculatePointCount(SBoundaryPoint find){
+      int count = 0;
+      for(SBoundaryPoint point : _points){
+         if(point.equals(find)){
+            count++;
+         }
+      }
+      return count;
+   }
+
+   //============================================================
+   // <T>检查内容。</T>
+   //============================================================
+   public void check(){
+      int count = _points.count();
+      for(int n = 0; n < count; n++){
+         SBoundaryPoint point = _points.get(n);
+         int pointCount = calculatePointCount(point);
+         if(pointCount > 1){
+            if(n == 0){
+               continue;
+            }
+            if(n == count - 1){
+               continue;
+            }
+            throw new FFatalError("Data invalid.");
+         }
+      }
+   }
+
+   //============================================================
    // <T>计算数据。</T>
    //============================================================
    public void calculate(){
@@ -137,20 +196,19 @@ public class FBoundaryData
       // 填充数据
       List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
       int count = _optimizePoints.count();
-      for(int n = 0; n < count - 1; n++){
-         SBoundaryPoint point = _optimizePoints.get(n);
-         if(point.valid){
-            PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
-            polygonPoints.add(polygonPoint);
-         }
+      for(int i = 0; i < count; i++){
+         SBoundaryPoint point = _optimizePoints.get(i);
+         PolygonPoint polygonPoint = new FPolygonPoint(i, point.x, point.y, point.z);
+         polygonPoints.add(polygonPoint);
       }
-      Polygon polygon = new Polygon(polygonPoints);
       // 转换数据
+      Polygon polygon = new Polygon(polygonPoints);
       try{
          Poly2Tri.triangulate(polygon);
-      }catch(Exception e){
-         System.out.println(e.getMessage());
-         //valid = false;
+      }catch(Exception error){
+         System.out.println(_province.code() + ": " + error.getMessage());
+         //throw new FFatalError("Point is invalid.");
+         valid = false;
          return;
       }
       // 获得索引
@@ -185,32 +243,28 @@ public class FBoundaryData
    //============================================================
    public void serialize(IDataOutput output){
       // 输出顶点集合
-      int pointCount = 0;
-      for(SBoundaryPoint point : _optimizePoints){
-         if(point.valid){
-            pointCount++;
-         }
-      }
-      System.out.println("Write point " + pointCount);
+      int pointCount = _optimizePoints.count();
       output.writeInt32(pointCount);
       for(SBoundaryPoint point : _optimizePoints){
-         if(point.valid){
-            output.writeFloat((float)point.x);
-            output.writeFloat((float)point.y);
-         }
+         output.writeFloat((float)point.x);
+         output.writeFloat((float)point.y);
+         //      int pointCount = _points.count();
+         //      output.writeInt32(pointCount);
+         //      for(SDoublePoint3 point : _points){
+         //         output.writeFloat((float)point.x);
+         //         output.writeFloat((float)point.y);
+         //      }
       }
-      //      int pointCount = _points.count();
-      //      output.writeInt32(pointCount);
-      //      for(SDoublePoint3 point : _points){
-      //         output.writeFloat((float)point.x);
-      //         output.writeFloat((float)point.y);
-      //      }
       // 输出顶点集合
-      int count = _indexes.length();
-      output.writeInt32(count);
-      for(int i = 0; i < count; i++){
+      int indexCount = _indexes.length();
+      output.writeInt32(indexCount);
+      for(int i = 0; i < indexCount; i++){
          output.writeUint16(_indexes.get(i));
       }
+      String provinceCode = _province.code();
+      FProvinceTemplate provinceTemplate = RResourceExportor.provinceTemplate();
+      FProvinceResource provinceResource = provinceTemplate.findByCode(provinceCode);
+      System.out.println("Write boundary. (province=" + _province.code() + ":" + provinceResource.label() + ", point= " + RInteger.format(_points.count(), 4, ' ') + " -> " + RInteger.format(pointCount, 4, ' ') + ", index=" + indexCount + ")");
    }
 
    //============================================================

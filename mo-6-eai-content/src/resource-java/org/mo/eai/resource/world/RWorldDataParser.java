@@ -90,7 +90,7 @@ public class RWorldDataParser
          e.printStackTrace();
       }
       // 优化数据
-      world.optimize(0.1);
+      world.optimize(0.01);
       // 存储文件
       world.serializeFile("D:/Microbject/MoScript/source/ars/eai/data/world.dat");
       System.out.println("Success");

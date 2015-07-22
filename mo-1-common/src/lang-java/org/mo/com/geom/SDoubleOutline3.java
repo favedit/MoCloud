@@ -18,11 +18,34 @@ public class SDoubleOutline3
    }
 
    //============================================================
+   // <T>测试矩形是否相交。</T>
+   //============================================================
+   public boolean testRectangle(SDoubleOutline3 value){
+      double left = min.x;
+      double top = min.y;
+      double width = max.x - min.x;
+      double height = max.y - min.y;
+      double valueLeft = value.min.x;
+      double valueTop = value.min.y;
+      double valueWidth = value.max.x - value.min.x;
+      double valueHeight = value.max.y - value.min.y;
+      return (left < valueLeft + valueWidth && left + width > valueLeft && top < valueTop + valueHeight && top + height > valueTop);
+   }
+
+   //============================================================
    // <T>重置处理。</T>
    //============================================================
    public void reset(){
       min.max();
       max.min();
+   }
+
+   //============================================================
+   // <T>合并处理。</T>
+   //============================================================
+   public void merge(SDoublePoint3 point){
+      min.min(point);
+      max.max(point);
    }
 
    //============================================================

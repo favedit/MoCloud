@@ -255,6 +255,19 @@ public class RInteger
    }
 
    //============================================================
+   // <T>将一个整数数值格式化为字符串。</T>
+   //
+   // @param value 整数数值
+   // @param length 格式化长度
+   // @return 字符串
+   //============================================================
+   public static String format(int value,
+                               int length,
+                               char pad){
+      return RString.leftPad(Integer.toString(value), length, pad);
+   }
+
+   //============================================================
    // <T>将一个整数字符串格式化为字符串。</T>
    //
    // @param value 整数字符串

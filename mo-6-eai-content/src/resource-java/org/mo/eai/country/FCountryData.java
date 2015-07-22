@@ -60,10 +60,15 @@ public class FCountryData
       FBoundaryOptimizer optimizer = new FBoundaryOptimizer(rate);
       for(FProvinceData province : _provinces){
          for(FBoundaryData boundaryData : province.boundaries()){
+            boundaryData.check();
             FBoundary boundary = new FBoundary();
-            for(SBoundaryPoint value : boundaryData.points()){
-               boundary.pushPoint(optimizer.syncPoint(value));
-               pointTotal++;
+            int pointCount = boundaryData.points().count();
+            for(int n = 0; n < pointCount; n++){
+               SBoundaryPoint value = boundaryData.points().get(n);
+               if(n != pointCount - 1){
+                  boundary.pushPoint(optimizer.syncPoint(value));
+                  pointTotal++;
+               }
             }
             optimizer.pushBoundary(boundary);
             boundaryData.setBoundary(boundary);

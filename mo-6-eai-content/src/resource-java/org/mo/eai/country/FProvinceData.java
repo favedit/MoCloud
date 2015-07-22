@@ -78,6 +78,7 @@ public class FProvinceData
    // @param boundary 边界
    //============================================================
    public void pushBoundary(FBoundaryData boundary){
+      boundary.setProvince(this);
       _boundaries.push(boundary);
    }
 

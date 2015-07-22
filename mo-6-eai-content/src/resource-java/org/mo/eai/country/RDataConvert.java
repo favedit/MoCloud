@@ -48,7 +48,7 @@ public class RDataConvert
          }
       }
       System.out.println(activeCountry.dump());
-      activeCountry.optimize(0.00001);
+      activeCountry.optimize(0.01);
       activeCountry.serializeFile("D:/Microbject/MoScript/source/ars/eai/country.dat");
       System.out.println("Success");
    }
