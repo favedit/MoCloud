@@ -8,8 +8,6 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 
 //============================================================
 // <T>历史数据。</T>
@@ -18,7 +16,7 @@ public class FHistoryData
       extends FObject
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FHistoryDateData.class);
+   //private static ILogger _logger = RLogger.find(FHistoryDateData.class);
 
    // 投资当天数据
    protected float _investmentDay = 0;

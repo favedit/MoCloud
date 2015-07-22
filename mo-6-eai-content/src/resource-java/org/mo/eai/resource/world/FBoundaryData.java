@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FInts;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.generic.TDumpInfo;
 import org.mo.content.geom.boundary.FBoundary;
 import org.mo.content.geom.boundary.SBoundaryPoint;
@@ -127,9 +129,10 @@ public class FBoundaryData
       try{
          Poly2Tri.triangulate(polygon);
       }catch(Exception e){
-         System.out.println(_country.code() + ": " + e.getMessage());
+         throw new FFatalError("Invalid point.");
+         //System.out.println(_country.code() + ": " + e.getMessage());
          //valid = false;
-         return;
+         //return;
       }
       // 获得索引
       _indexes.clear();
@@ -158,18 +161,19 @@ public class FBoundaryData
    //============================================================
    public void serialize(IDataOutput output){
       // 输出顶点集合
-      int pointCount = _points.count();
+      int pointCount = _optimizePoints.count();
       output.writeInt32(pointCount);
-      for(SDoublePoint3 point : _points){
+      for(SDoublePoint3 point : _optimizePoints){
          output.writeFloat((float)point.x);
          output.writeFloat((float)point.y);
       }
       // 输出顶点集合
-      int count = _indexes.length();
-      output.writeInt32(count);
-      for(int i = 0; i < count; i++){
+      int indexCount = _indexes.length();
+      output.writeInt32(indexCount);
+      for(int i = 0; i < indexCount; i++){
          output.writeUint16(_indexes.get(i));
       }
+      System.out.println("Write boundary. (point= " + RInteger.format(_points.count(), 4, ' ') + " -> " + RInteger.format(pointCount, 4, ' ') + ", index=" + indexCount + ")");
    }
 
    //============================================================

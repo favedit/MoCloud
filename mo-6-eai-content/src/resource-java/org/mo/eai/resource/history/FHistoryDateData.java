@@ -8,7 +8,6 @@ import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.eai.RResourceExportor;
-import org.mo.eai.template.card.FCardTemplate;
 import org.mo.eai.template.city.FCityResource;
 import org.mo.eai.template.city.FCityTemplate;
 
@@ -149,7 +148,7 @@ public class FHistoryDateData
    //============================================================
    public void calculate(){
       FCityTemplate cityTemplate = RResourceExportor.cityTemplate();
-      FCardTemplate cardTemplate = RResourceExportor.cardTemplate();
+      //FCardTemplate cardTemplate = RResourceExportor.cardTemplate();
       // 计算数据
       _investmentDay = 0;
       _investmentTotal = 0;

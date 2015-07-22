@@ -3,6 +3,7 @@ package org.mo.eai.resource.world;
 import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.content.geom.boundary.FBoundary;
 import org.mo.content.geom.boundary.FBoundaryOptimizer;
@@ -49,10 +50,15 @@ public class FWorldData
          for(FBoundaryData boundaryData : country.boundaries()){
             FBoundary boundary = new FBoundary();
             int pointCount = boundaryData.points().count();
+            SDoublePoint3 lastPoint = boundaryData.points().last();
             for(int n = 0; n < pointCount; n++){
                SDoublePoint3 value = boundaryData.points().get(n);
                if(n != pointCount - 1){
                   boundary.pushPoint(optimizer.syncPoint(value));
+               }else{
+                  if(!value.equals(lastPoint)){
+                     throw new FFatalError("Invalid point.");
+                  }
                }
             }
             optimizer.pushBoundary(boundary);

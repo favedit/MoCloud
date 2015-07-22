@@ -81,48 +81,34 @@ public class FDouglasPeucker
    public static List<SBoundaryPoint> DouglasPeuckerReduction(FObjects<FBoundaryBorder> borders,
                                                               List<SBoundaryPoint> points,
                                                               double tolerance){
-      if(points == null || points.size() < 3){
+      if(points == null || points.size() < 5){
          return points;
       }
       int firstPoint = 0;
       int lastPoint = points.size() - 1;
-      boolean isCircle = false;//标志位，是否是圆
       List<Integer> pointIndexsToKeep = new ArrayList<Integer>();
       //Add the first and last index to the keepers
       pointIndexsToKeep.add(firstPoint);
       pointIndexsToKeep.add(lastPoint);
-      
-
-      //The first and the last point cannot be the same
-      while(points.get(firstPoint).equals(points.get(lastPoint))){
-         lastPoint--;
-         isCircle = true;
-         pointIndexsToKeep.add(lastPoint);
-      }
-
       douglasPeuckerReduction(borders, points, firstPoint, lastPoint, tolerance, pointIndexsToKeep);
-
       List<SBoundaryPoint> returnPoints = new ArrayList<SBoundaryPoint>();
-      if(isCircle){
-    	  if(pointIndexsToKeep.size() <= 3){
-    	         double maxDistance = 0.0;
-    	         int farthestIndex = 0;
-    	         for(int index = firstPoint; index < lastPoint; index++){
-    	             double distance = PerpendicularDistance(points.get(firstPoint), points.get(lastPoint), points.get(index));
-    	             if(distance > maxDistance){
-    	                maxDistance = distance;
-    	                farthestIndex = index;
-    	             }
-    	          }
-    	         if(farthestIndex != 0){
-    	        	 pointIndexsToKeep.add(farthestIndex);
-    	         }else{
-    	        	 pointIndexsToKeep.add(1);
-    	         }
-    	         
-    	      }
+      if(pointIndexsToKeep.size() <= 3){
+         double maxDistance = 0.0;
+         int farthestIndex = 0;
+         for(int index = firstPoint; index < lastPoint; index++){
+            double distance = PerpendicularDistance(points.get(firstPoint), points.get(lastPoint), points.get(index));
+            if(distance > maxDistance){
+               maxDistance = distance;
+               farthestIndex = index;
+            }
+         }
+         if(farthestIndex != 0){
+            pointIndexsToKeep.add(farthestIndex);
+         }else{
+            pointIndexsToKeep.add(1);
+         }
+
       }
-      
       List<Integer> listWithoutDup = new ArrayList<Integer>(new HashSet<Integer>(pointIndexsToKeep));
       Collections.sort(listWithoutDup, new Comparator<Integer>(){
          @Override
