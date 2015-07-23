@@ -1,4 +1,4 @@
-package org.mo.content.face.mobile;
+package org.mo.content.face.device;
 
 import org.mo.com.lang.FObjectId;
 
@@ -11,7 +11,7 @@ import org.mo.com.lang.FObjectId;
 //@version 1.0.0
 //============================================================
 
-public class FIndexPage
+public class FDevicePage
       extends FObjectId
 {
    // 当前页
