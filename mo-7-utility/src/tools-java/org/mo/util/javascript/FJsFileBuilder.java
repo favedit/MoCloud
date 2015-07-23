@@ -1,12 +1,10 @@
 package org.mo.util.javascript;
 
 import java.io.File;
-import org.mo.com.io.FLinesFile;
 import org.mo.com.io.FStringFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.FStrings;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlDocument;
@@ -17,54 +15,7 @@ import org.mo.com.xml.FXmlNode;
 //============================================================
 public class FJsFileBuilder
 {
-   // 字符编码
-   private static String CHARSET = "UTF-8";
-
    private static ILogger _logger = RLogger.find(FJsFileBuilder.class);
-
-   //============================================================
-   // <T>格式化文件。</T>
-   //
-   // @param source 来源
-   // @param commont 注释
-   // @param file 文件
-   //============================================================
-   public static void formatFile(FString source,
-                                 boolean comment,
-                                 File file){
-      FLinesFile fileLines = new FLinesFile(file, CHARSET);
-      int count = fileLines.count();
-      for(int n = 0; n < count; n++){
-         String line = fileLines.line(n);
-         if(!RString.isBlank(line)){
-            line = RString.trimRight(line);
-            line = RString.removeChars(line, '\r');
-            if(comment){
-               //............................................................
-               // 追加含有注释的代码内容
-               source.appendLine(line);
-            }else{
-               //............................................................
-               // 追加去除注释的代码内容
-               String trim = line.trim();
-               if(trim.startsWith("/*")){
-                  // 删除块注释
-                  for(n++; n < count; n++){
-                     line = fileLines.line(n);
-                     if(line.trim().endsWith("*/")){
-                        break;
-                     }
-                  }
-                  continue;
-               }else if(trim.startsWith("//")){
-                  // 删除行注释
-                  continue;
-               }
-               source.appendLine(line);
-            }
-         }
-      }
-   }
 
    //============================================================
    // <T>启动处理。</T>
@@ -72,8 +23,8 @@ public class FJsFileBuilder
    // @param params 参数集合
    //============================================================
    public static void mergePath(String sourcePath,
-                                String targetFile){
-      boolean comment = false;
+                                String targetFile,
+                                String modeCd){
       try{
          // 链接目录下内容
          FString sourceS = new FString();
@@ -87,15 +38,15 @@ public class FJsFileBuilder
                if(file.isFile()){
                   String fileName = file.getName();
                   if(fileName.startsWith("S")){
-                     formatFile(sourceS, comment, file);
+                     RJsSourceUtil.formatFile(sourceS, modeCd, file);
                   }else if(fileName.startsWith("T")){
-                     formatFile(sourceT, comment, file);
+                     RJsSourceUtil.formatFile(sourceT, modeCd, file);
                   }else if(fileName.startsWith("F")){
-                     formatFile(sourceF, comment, file);
+                     RJsSourceUtil.formatFile(sourceF, modeCd, file);
                   }else if(fileName.startsWith("R")){
-                     formatFile(sourceR, comment, file);
+                     RJsSourceUtil.formatFile(sourceR, modeCd, file);
                   }else{
-                     formatFile(sourceA, comment, file);
+                     RJsSourceUtil.formatFile(sourceA, modeCd, file);
                   }
                }
             }
@@ -108,7 +59,7 @@ public class FJsFileBuilder
          result.append(sourceF);
          result.append(sourceR);
          // 存储文件
-         result.saveFile(targetFile, CHARSET);
+         result.saveFile(targetFile, RJsSourceUtil.CHARSET);
          System.out.println("Merge javascript path file. (file_name=" + targetFile + ")");
       }catch(Throwable t){
          _logger.error(null, "mergePath", t);
@@ -123,12 +74,12 @@ public class FJsFileBuilder
    public static void mergeFiles(FStrings sourceFiles,
                                  String targetFile){
       try{
-         FStringFile file = new FStringFile(targetFile, CHARSET, false);
+         FStringFile file = new FStringFile(targetFile, RJsSourceUtil.CHARSET, false);
          for(String sourceFile : sourceFiles){
-            FStringFile item = new FStringFile(sourceFile, CHARSET);
+            FStringFile item = new FStringFile(sourceFile, RJsSourceUtil.CHARSET);
             file.append(item);
          }
-         file.store(CHARSET);
+         file.store(RJsSourceUtil.CHARSET);
          System.out.println("Merge javascript files. (file_name=" + targetFile + ")");
       }catch(Exception e){
          _logger.error(null, "main", e);
@@ -144,6 +95,7 @@ public class FJsFileBuilder
       try{
          // 检查路径
          String path = params[0];
+         String modeCd = params[1];
          if(!RFile.isDirectory(path)){
             System.out.println("Unknown directory. (parameter=" + path + ")");
             return;
@@ -159,7 +111,7 @@ public class FJsFileBuilder
                if(xmerger.isName("PathMerger")){
                   String sourcePath = RFile.makeFilename(path, xmerger.get("source"));
                   String targetFile = RFile.makeFilename(path, xmerger.get("target"));
-                  mergePath(sourcePath, targetFile);
+                  mergePath(sourcePath, targetFile, modeCd);
                }
             }
          }

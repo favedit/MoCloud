@@ -172,6 +172,11 @@ public class FBoundaryOptimizer
                   boundary.pushBorder(border);
                   _borders.push(border);
                }
+               //               if(border.points().count() > 64){
+               //                  border = new FBoundaryBorder();
+               //                  boundary.pushBorder(border);
+               //                  _borders.push(border);
+               //               }
                border.pushPoint(point);
             }else{
                throw new FFatalError("Invlaid point.");
