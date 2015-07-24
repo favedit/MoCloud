@@ -130,9 +130,9 @@
 
 }  
 /*横屏时*/
-@media all and (orientation : landscape) { 
+/*@media all and (orientation : landscape) { 
 	body{
 		height: 500px;
 	}
-} 
+} */
 
