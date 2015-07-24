@@ -23,6 +23,16 @@ public class FAccessPage
 
    protected FLogicDataset<FDataPersonAccessAuthorityUnit> unitList;
 
+   protected FDataPersonAccessAuthorityUnit unit;
+
+   public FDataPersonAccessAuthorityUnit unit(){
+      return unit;
+   }
+
+   public void setUnit(FDataPersonAccessAuthorityUnit unit){
+      this.unit = unit;
+   }
+
    public FLogicDataset<FDataPersonAccessAuthorityUnit> unitList(){
       return unitList;
    }

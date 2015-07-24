@@ -1,47 +1,52 @@
 <%@ include file='/apl/public.inc' %>
    <HTML>
+
    <HEAD>
    </HEAD>
 
-   <body bgcolor="#198bc9">
-      <table border="1">
+   <body>
+         <a href="InsertUser.jsp">增加用户</a>
+         <table border="1">
             <tr>
-               <th>编号</th>
-               <th>国家名称</th>
-               <th>地区名称</th>
-               <th>排序</th>
-               <th>国家名称</th>
-               <th>地区名称</th>
-               <th>排序</th>
+               <th>ip地址</th>
+               <th>帐号</th>
+               <th>密码</th>
+               <th>权限状态</th>
+               <th>是否永久</th>
+               <th>开始时间</th>
+               <th>结束时间</th>
                <th>操作</th>
             </tr>
-            <jh:write source='&page.result'>
             <jh:loop source="&page.unitList" alias="node">
                <tr>
                   <td>
-                     <jh:write source='&node.userId'>
+                     <jh:write source='&node.hostAddress' />
                   </td>
                   <td>
-                     <jh:write source='&node.host'>
+                     <jh:write source='&node.passport' />
                   </td>
                   <td>
-                     <jh:write source='&node.passport'>
+                     <jh:write source='&node.password' />
                   </td>
                   <td>
-                     <jh:write source='&node.password'>
+                     <jh:write source='&node.accessCd' />
                   </td>
                   <td>
-                     <jh:write source='&node.accessCd'>
+                     <jh:write source='&node.typeCd' />
                   </td>
                   <td>
-                     <jh:write source='&node.beginDate'>
+                     <jh:write source='&node.beginDate' format="YYYY-MM-DD HH24:mi:ss" />
                   </td>
                   <td>
-                     <jh:write source='&node.endDate'>
+                     <jh:write source='&node.endDate' format="YYYY-MM-DD HH24:mi:ss" />
+                  </td>
+                  <td>
+                     <a href="/person/user/Access.wa?do=updateBefore&id=<jh:write source='&node.ouid' />">修改</a>
+                     <a href="/person/user/Access.wa?do=delete&id=<jh:write source='&node.ouid' />">删除</a>
                   </td>
                </tr>
             </jh:loop>
-      </table>
+         </table>
    </body>
 
    </HTML>

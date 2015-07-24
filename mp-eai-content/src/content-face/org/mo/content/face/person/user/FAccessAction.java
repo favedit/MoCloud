@@ -1,6 +1,7 @@
 package org.mo.content.face.person.user;
 
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.content.core.person.user.IAccessConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -30,29 +31,101 @@ public class FAccessAction
    // @return 页面
    //============================================================
    @Override
-   public String select(IWebContext context,
-                        ILogicContext logicContext,
-                        FAccessPage page){
+   public String construct(IWebContext context,
+                           ILogicContext logicContext,
+                           FAccessPage page){
+      System.out.println("------------eai----------------select");
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
       for(FDataPersonAccessAuthorityUnit unit : unitlist){
          System.out.println(unit.beginDate() + "--------------------------");
       }
-      page.setResult("123");
       page.setUnitList(unitlist);
       return "/person/user/Access";
    }
 
-   //============================================================
-   // <T>默认逻辑处理。</T>
-   //
-   // @param context 页面环境
-   // @param page 页面
-   //============================================================
    @Override
-   public String construct(IWebContext context,
-                           ILogicContext logicContext,
-                           FAccessPage page){
-      System.out.println("------------eai----------------");
-      return "Index";
+   public String delete(IWebContext context,
+                        ILogicContext logicContext,
+                        FAccessPage page){
+      long id = context.parameterAsLong("id");
+      FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
+      unit.setOuid(id);
+      _accessConsole.doDelete(logicContext, unit);
+      return "/person/user/Access";
+   }
+
+   @Override
+   public String insertBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FAccessPage page){
+
+      return null;
+   }
+
+   @Override
+   public String insert(IWebContext context,
+                        ILogicContext logicContext,
+                        FAccessPage page){
+      FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
+      unit.setHostAddress(context.parameter("host_address"));
+      unit.setHostPort(context.parameterAsInteger("host_port"));
+      unit.setPassport(context.parameter("passport"));
+      unit.setPassword(context.parameter("password"));
+      unit.setAccessCd(context.parameterAsInteger("access_cd"));
+      unit.setTypeCd(context.parameterAsInteger("type_cd"));
+      //时间处理
+      String beginDateStr = context.parameter("begin_date");
+      TDateTime beginDate = new TDateTime();
+      beginDate.parse(beginDateStr, "YYYY-MM-DD HH24:mi:ss");
+      unit.setBeginDate(beginDate);
+      //结束时间
+      String endDateStr = context.parameter("end_date");
+      TDateTime endDate = new TDateTime();
+      endDate.parse(endDateStr, "YYYY-MM-DD HH24:mi:ss");
+      unit.setEndDate(endDate);
+      //.....................................
+      unit.setNote(context.parameter("note"));
+      _accessConsole.doInsert(logicContext, unit);
+      return "/person/user/Access";
+   }
+
+   @Override
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FAccessPage page){
+      long id = context.parameterAsLong("id");
+      FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
+      page.setUnit(unit);
+      return "/person/user/UpdateUser";
+   }
+
+   @Override
+   public String update(IWebContext context,
+                        ILogicContext logicContext,
+                        FAccessPage page){
+      long id = context.parameterAsLong("id");
+      FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
+      unit.setHostAddress(context.parameter("host_address"));
+      unit.setHostPort(context.parameterAsInteger("host_port"));
+      unit.setPassport(context.parameter("passport"));
+      unit.setPassword(context.parameter("password"));
+      unit.setAccessCd(context.parameterAsInteger("access_cd"));
+      unit.setTypeCd(context.parameterAsInteger("type_cd"));
+      //时间处理
+      String beginDateStr = context.parameter("begin_date");
+      System.out.println(beginDateStr);
+      TDateTime beginDate = new TDateTime();
+      beginDate.parse(beginDateStr, "YYYY-MM-DD HH24:mi:ss");
+      unit.setBeginDate(beginDate);
+      //结束时间
+      String endDateStr = context.parameter("end_date");
+      System.out.println(endDateStr);
+      TDateTime endDate = new TDateTime();
+      endDate.parse(endDateStr, "YYYY-MM-DD HH24:mi:ss");
+      unit.setEndDate(endDate);
+      //.....................................
+      unit.setNote(context.parameter("note"));
+      _accessConsole.doUpdate(logicContext, unit);
+      return "/person/user/Access";
    }
 }
