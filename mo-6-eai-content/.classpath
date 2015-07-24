@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/resource-java"/>
+	<classpathentry kind="src" path="src/eai-resource"/>
+	<classpathentry kind="src" path="src/eai-logic"/>
+	<classpathentry kind="src" path="src/eai-console"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/poly2tri-core.jar"/>
@@ -11,5 +13,8 @@
 	<classpathentry kind="lib" path="lib/slf4j-simple-1.6.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-6-content"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-3-logic"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-4-web"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mo-5-cloud"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

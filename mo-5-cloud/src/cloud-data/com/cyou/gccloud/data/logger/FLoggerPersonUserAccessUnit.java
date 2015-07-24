@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -41,11 +42,35 @@ public class FLoggerPersonUserAccessUnit
    // 字段用户编号的定义。
    protected long _userId;
 
-   // 存储字段主机地址的定义。
-   private String __host;
+   // 存储字段逻辑代码的定义。
+   private String __logicCode;
 
-   // 字段主机地址的定义。
-   protected String _host;
+   // 字段逻辑代码的定义。
+   protected String _logicCode;
+
+   // 存储字段逻辑结果的定义。
+   private String __logicResult;
+
+   // 字段逻辑结果的定义。
+   protected String _logicResult;
+
+   // 存储字段逻辑消息的定义。
+   private String __logicMessage;
+
+   // 字段逻辑消息的定义。
+   protected String _logicMessage;
+
+   // 存储字段登录地址的定义。
+   private String __hostAddress;
+
+   // 字段登录地址的定义。
+   protected String _hostAddress;
+
+   // 存储字段登录端口的定义。
+   private int __hostPort;
+
+   // 字段登录端口的定义。
+   protected int _hostPort;
 
    // 存储字段登录名称的定义。
    private String __passport;
@@ -210,30 +235,138 @@ public class FLoggerPersonUserAccessUnit
    }
 
    //============================================================
-   // <T>判断主机地址的数据是否改变。</T>
+   // <T>判断逻辑代码的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isHostChanged(){
-      return !RString.equals(__host, _host);
+   public boolean isLogicCodeChanged(){
+      return !RString.equals(__logicCode, _logicCode);
    }
 
    //============================================================
-   // <T>获得主机地址的数据内容。</T>
+   // <T>获得逻辑代码的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String host(){
-      return _host;
+   public String logicCode(){
+      return _logicCode;
    }
 
    //============================================================
-   // <T>设置主机地址的数据内容。</T>
+   // <T>设置逻辑代码的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setHost(String value){
-      _host = value;
+   public void setLogicCode(String value){
+      _logicCode = value;
+   }
+
+   //============================================================
+   // <T>判断逻辑结果的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLogicResultChanged(){
+      return !RString.equals(__logicResult, _logicResult);
+   }
+
+   //============================================================
+   // <T>获得逻辑结果的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String logicResult(){
+      return _logicResult;
+   }
+
+   //============================================================
+   // <T>设置逻辑结果的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLogicResult(String value){
+      _logicResult = value;
+   }
+
+   //============================================================
+   // <T>判断逻辑消息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLogicMessageChanged(){
+      return !RString.equals(__logicMessage, _logicMessage);
+   }
+
+   //============================================================
+   // <T>获得逻辑消息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String logicMessage(){
+      return _logicMessage;
+   }
+
+   //============================================================
+   // <T>设置逻辑消息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLogicMessage(String value){
+      _logicMessage = value;
+   }
+
+   //============================================================
+   // <T>判断登录地址的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHostAddressChanged(){
+      return !RString.equals(__hostAddress, _hostAddress);
+   }
+
+   //============================================================
+   // <T>获得登录地址的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String hostAddress(){
+      return _hostAddress;
+   }
+
+   //============================================================
+   // <T>设置登录地址的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHostAddress(String value){
+      _hostAddress = value;
+   }
+
+   //============================================================
+   // <T>判断登录端口的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHostPortChanged(){
+      return __hostPort != _hostPort;
+   }
+
+   //============================================================
+   // <T>获得登录端口的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int hostPort(){
+      return _hostPort;
+   }
+
+   //============================================================
+   // <T>设置登录端口的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHostPort(int value){
+      _hostPort = value;
    }
 
    //============================================================
@@ -469,8 +602,16 @@ public class FLoggerPersonUserAccessUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
-         case "host":
-            return _host;
+         case "logic_code":
+            return _logicCode;
+         case "logic_result":
+            return _logicResult;
+         case "logic_message":
+            return _logicMessage;
+         case "host_address":
+            return _hostAddress;
+         case "host_port":
+            return RInteger.toString(_hostPort);
          case "passport":
             return _passport;
          case "password":
@@ -513,8 +654,20 @@ public class FLoggerPersonUserAccessUnit
          case "user_id":
             _userId = RLong.parse(value);
             break;
-         case "host":
-            _host = value;
+         case "logic_code":
+            _logicCode = value;
+            break;
+         case "logic_result":
+            _logicResult = value;
+            break;
+         case "logic_message":
+            _logicMessage = value;
+            break;
+         case "host_address":
+            _hostAddress = value;
+            break;
+         case "host_port":
+            _hostPort = RInteger.parse(value);
             break;
          case "passport":
             _passport = value;
@@ -571,9 +724,25 @@ public class FLoggerPersonUserAccessUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
-            case "host":
-               __host = value;
-               _host = __host;
+            case "logic_code":
+               __logicCode = value;
+               _logicCode = __logicCode;
+               break;
+            case "logic_result":
+               __logicResult = value;
+               _logicResult = __logicResult;
+               break;
+            case "logic_message":
+               __logicMessage = value;
+               _logicMessage = __logicMessage;
+               break;
+            case "host_address":
+               __hostAddress = value;
+               _hostAddress = __hostAddress;
+               break;
+            case "host_port":
+               __hostPort = RInteger.parse(value);
+               _hostPort = __hostPort;
                break;
             case "passport":
                __passport = value;
@@ -623,7 +792,11 @@ public class FLoggerPersonUserAccessUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
-      row.set("host", _host);
+      row.set("logicCode", _logicCode);
+      row.set("logicResult", _logicResult);
+      row.set("logicMessage", _logicMessage);
+      row.set("hostAddress", _hostAddress);
+      row.set("hostPort", _hostPort);
       row.set("passport", _passport);
       row.set("password", _password);
       row.set("browserUri", _browserUri);
@@ -646,7 +819,11 @@ public class FLoggerPersonUserAccessUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
-      map.put("host", _host);
+      map.put("logicCode", _logicCode);
+      map.put("logicResult", _logicResult);
+      map.put("logicMessage", _logicMessage);
+      map.put("hostAddress", _hostAddress);
+      map.put("hostPort", RInteger.toString(_hostPort));
       map.put("passport", _passport);
       map.put("password", _password);
       map.put("browserUri", _browserUri);

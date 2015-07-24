@@ -44,8 +44,20 @@ public class FLoggerPersonUserAccessLogic
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
-   // 字段主机地址的定义。
-   public final static SLogicFieldInfo HOST = new SLogicFieldInfo("HOST");
+   // 字段逻辑代码的定义。
+   public final static SLogicFieldInfo LOGIC_CODE = new SLogicFieldInfo("LOGIC_CODE");
+
+   // 字段逻辑结果的定义。
+   public final static SLogicFieldInfo LOGIC_RESULT = new SLogicFieldInfo("LOGIC_RESULT");
+
+   // 字段逻辑消息的定义。
+   public final static SLogicFieldInfo LOGIC_MESSAGE = new SLogicFieldInfo("LOGIC_MESSAGE");
+
+   // 字段登录地址的定义。
+   public final static SLogicFieldInfo HOST_ADDRESS = new SLogicFieldInfo("HOST_ADDRESS");
+
+   // 字段登录端口的定义。
+   public final static SLogicFieldInfo HOST_PORT = new SLogicFieldInfo("HOST_PORT");
 
    // 字段登录名称的定义。
    public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
@@ -72,7 +84,7 @@ public class FLoggerPersonUserAccessLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`HOST`,`PASSPORT`,`PASSWORD`,`BROWSER_URI`,`PAGE_INFO`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LOGIC_CODE`,`LOGIC_RESULT`,`LOGIC_MESSAGE`,`HOST_ADDRESS`,`HOST_PORT`,`PASSPORT`,`PASSWORD`,`BROWSER_URI`,`PAGE_INFO`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造人员用户访问逻辑单元。</T>
@@ -665,7 +677,11 @@ public class FLoggerPersonUserAccessLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
-      cmd.append(",`HOST`");
+      cmd.append(",`LOGIC_CODE`");
+      cmd.append(",`LOGIC_RESULT`");
+      cmd.append(",`LOGIC_MESSAGE`");
+      cmd.append(",`HOST_ADDRESS`");
+      cmd.append(",`HOST_PORT`");
       cmd.append(",`PASSPORT`");
       cmd.append(",`PASSWORD`");
       cmd.append(",`BROWSER_URI`");
@@ -692,14 +708,43 @@ public class FLoggerPersonUserAccessLogic
          cmd.append(userId);
       }
       cmd.append(',');
-      String host = unit.host();
-      if(RString.isEmpty(host)){
+      String logicCode = unit.logicCode();
+      if(RString.isEmpty(logicCode)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(host));
+         cmd.append(RSql.formatValue(logicCode));
          cmd.append('\'');
       }
+      cmd.append(',');
+      String logicResult = unit.logicResult();
+      if(RString.isEmpty(logicResult)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(logicResult));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String logicMessage = unit.logicMessage();
+      if(RString.isEmpty(logicMessage)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(logicMessage));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String hostAddress = unit.hostAddress();
+      if(RString.isEmpty(hostAddress)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(hostAddress));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.hostPort());
       cmd.append(',');
       String passport = unit.passport();
       if(RString.isEmpty(passport)){
@@ -819,16 +864,53 @@ public class FLoggerPersonUserAccessLogic
             cmd.append(userId);
          }
       }
-      if(unit.isHostChanged()){
-         cmd.append(",`HOST`=");
-         String host = unit.host();
-         if(RString.isEmpty(host)){
+      if(unit.isLogicCodeChanged()){
+         cmd.append(",`LOGIC_CODE`=");
+         String logicCode = unit.logicCode();
+         if(RString.isEmpty(logicCode)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(host));
+            cmd.append(RSql.formatValue(logicCode));
             cmd.append('\'');
          }
+      }
+      if(unit.isLogicResultChanged()){
+         cmd.append(",`LOGIC_RESULT`=");
+         String logicResult = unit.logicResult();
+         if(RString.isEmpty(logicResult)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(logicResult));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isLogicMessageChanged()){
+         cmd.append(",`LOGIC_MESSAGE`=");
+         String logicMessage = unit.logicMessage();
+         if(RString.isEmpty(logicMessage)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(logicMessage));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isHostAddressChanged()){
+         cmd.append(",`HOST_ADDRESS`=");
+         String hostAddress = unit.hostAddress();
+         if(RString.isEmpty(hostAddress)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(hostAddress));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isHostPortChanged()){
+         cmd.append(",`HOST_PORT`=");
+         cmd.append(unit.hostPort());
       }
       if(unit.isPassportChanged()){
          cmd.append(",`PASSPORT`=");

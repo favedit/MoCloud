@@ -1,14 +1,12 @@
 package org.mo.content.face.chart;
 
-import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityLogic;
-import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
-import com.cyou.gccloud.define.enums.core.EGcAuthorityType;
-import com.cyou.gccloud.define.enums.core.EGcHostAccess;
-import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RDateTime;
+import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import org.mo.com.lang.RString;
-import org.mo.data.logic.FLogicDataset;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
+import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
+import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -21,6 +19,12 @@ public class FLiveAction
       implements
          ILiveAction
 {
+   @ALink
+   protected IDataPersonAccessAuthorityConsole _personAccessAuthorityConsole;
+
+   @ALink
+   protected ILoggerPersonUserAccessConsole _loggerPersonUserAccessConsole;
+
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -46,50 +50,42 @@ public class FLiveAction
       // 获得参数
       String passport = page.passport();
       String password = page.password();
-      String address = context.head("x-real-ip");
-      if(RString.isEmpty(address)){
-         address = context.head("x-forwarded-for");
-         if(RString.isEmpty(address)){
-            address = context.remoteAddress();
+      String hostAddress = context.head("x-real-ip");
+      if(RString.isEmpty(hostAddress)){
+         hostAddress = context.head("x-forwarded-for");
+         if(RString.isEmpty(hostAddress)){
+            hostAddress = context.remoteAddress();
          }
       }
-      // 获得数据
-      FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
-      FLogicDataset<FDataPersonAccessAuthorityUnit> dataset = logic.fetch(FDataPersonAccessAuthorityLogic.HOST_ADDRESS + "='" + address + "'");
-      if(dataset.isEmpty()){
-         page.setMessage("Invalid host.");
-         return "Login";
-      }else if(dataset.count() > 1){
-         throw new FFatalError("Host count is too many. (count={1})", dataset.count());
+      // 登录处理
+      String message = null;
+      int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
+      switch(resultCd){
+         case EGcAuthorityResult.PassportInvalid:
+            message = "账号不存在。";
+            break;
+         case EGcAuthorityResult.PasswordInvalid:
+            message = "密码错误。";
+            break;
+         case EGcAuthorityResult.DateInvalid:
+            message = "时间已失效。";
+            break;
+         case EGcAuthorityResult.Success:
+            message = "登录成功。";
+            break;
       }
-      // 检查设置
-      FDataPersonAccessAuthorityUnit unit = dataset.first();
-      if(unit.accessCd() == EGcHostAccess.Allow){
-         return "Live";
-      }else{
-         FDataPersonAccessAuthorityUnit passportUnit = logic.search(FDataPersonAccessAuthorityLogic.PASSPORT + "='" + passport + "'");
-         if(passportUnit != null){
-            if(password.equals(passportUnit.password())){
-               int typeCd = passportUnit.typeCd();
-               if(typeCd == EGcAuthorityType.Permanent){
-                  return "Live";
-               }
-               if(typeCd == EGcAuthorityType.Temporary){
-                  long current = RDateTime.currentDate().get();
-                  long begin = passportUnit.beginDate().get();
-                  long end = passportUnit.endDate().get();
-                  if((current >= begin) && (current < end)){
-                     return "Live";
-                  }else{
-                     page.setMessage("Period is invliad.");
-                     return "Login";
-                  }
-               }
-            }
-         }
-      }
+      // 增加日志
+      FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
+      logger.setHostAddress(hostAddress);
+      logger.setLogicMessage(message);
+      logger.setPassport(passport);
+      logger.setPassword(password);
+      _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 非法设置
-      page.setMessage("Host is forbid.");
+      page.setMessage(message);
+      if(resultCd == EGcAuthorityResult.Success){
+         return "Live";
+      }
       return "Login";
    }
 }

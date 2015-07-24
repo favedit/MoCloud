@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="46ae6899-3198-4f54-a43a-e04cc865ec7c" name="logger.person.user.access" label="M#12cn16人员用户访问" is_valid="Y" note="M#" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Access" data_name="LG_PSN_USER_ACCESS" data_alias="LG_PSN_USR_ACS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
   <FieldRecordId _uuid="87292e50-d0c5-44ec-a4d6-d0d6d533de9b" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
-  <FieldString _uuid="7cbefbbb-6978-41ff-8847-b9b0dcf5cb72" name="host" label="M#12cn14主机地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST" data_size="40" />
+  <FieldString _uuid="5c14f7da-399a-4a6a-95a6-d9fb8b3b8211" name="logic_code" label="M#12cn14逻辑代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_CODE" data_size="40" />
+  <FieldString _uuid="72749ba5-c0d1-4695-80d2-184aa6c5a0d7" name="logic_result" label="M#12cn14逻辑结果" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_RESULT" data_size="40" />
+  <FieldString _uuid="8d098af9-8178-45aa-b8af-b0c2672fca97" name="logic_message" label="M#12cn14逻辑消息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_MESSAGE" data_size="800" />
+  <FieldString _uuid="7cbefbbb-6978-41ff-8847-b9b0dcf5cb72" name="host_address" label="M#12cn14登录地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST_ADDRESS" data_size="40" />
+  <FieldInteger _uuid="ff9a997a-8ddb-4b6a-95e4-74e70d10cd83" name="host_port" label="M#12cn14登录端口" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST_PORT" />
   <FieldString _uuid="1bc53e52-531e-4b30-9214-167e2b6a5057" name="passport" label="M#12cn14登录名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
   <FieldString _uuid="cd385e3a-ee10-4601-9119-389765c51954" name="password" label="M#12cn14登录密码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="40" />
   <FieldString _uuid="3ffc395a-449e-46b2-b4c7-68563ac9d2e3" name="browser_uri" label="M#12cn14浏览地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BROWSER_URI" data_size="800" />
