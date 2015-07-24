@@ -27,6 +27,7 @@ public class FIndexAction
    @Override
    public String construct(ISqlContext context,
                            FIndexPage areaPage){
+      System.out.println("------------eai----------------");
       return "Index";
    }
 }
