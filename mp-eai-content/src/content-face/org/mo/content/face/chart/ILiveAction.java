@@ -32,5 +32,5 @@ public interface ILiveAction
    //============================================================
    String login(IWebContext context,
                 ILogicContext logicContext,
-                @AContainer(name = "page") FLivePage page);
+                @AContainer(name = "page", fill = true) FLivePage page);
 }

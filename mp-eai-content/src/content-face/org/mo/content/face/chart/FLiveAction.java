@@ -38,6 +38,10 @@ public class FLiveAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FLivePage page){
+      // 清空参数
+      page.setPassport(null);
+      page.setPassword(null);
+      page.setMessage(null);
       // 获得参数
       String hostAddress = context.head("x-real-ip");
       if(RString.isEmpty(hostAddress)){

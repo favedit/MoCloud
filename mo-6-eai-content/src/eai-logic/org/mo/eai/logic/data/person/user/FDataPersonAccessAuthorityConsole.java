@@ -8,6 +8,8 @@ import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -18,6 +20,8 @@ public class FDataPersonAccessAuthorityConsole
       implements
          IDataPersonAccessAuthorityConsole
 {
+   private static ILogger _logger = RLogger.find(FDataPersonAccessAuthorityConsole.class);
+
    //============================================================
    // <T>构造资源位图信息控制台。</T>
    //============================================================
@@ -91,9 +95,10 @@ public class FDataPersonAccessAuthorityConsole
       if(typeCd == EGcAuthorityType.Permanent){
          return EGcAuthorityResult.Success;
       }else if(typeCd == EGcAuthorityType.Temporary){
-         long current = RDateTime.currentDate().get();
+         long current = RDateTime.currentDateTime().get();
          long begin = passportAuthority.beginDate().get();
          long end = passportAuthority.endDate().get();
+         _logger.debug(this, "doLogin", "Date span check. (current={1}, begin={2}, end={3})", current, begin, end);
          if((current >= begin) && (current < end)){
             return EGcAuthorityResult.Success;
          }else{

@@ -61,7 +61,7 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_CACHE</Property>
+               <Property name='url'>jdbc:mysql://10.169.23.66:3306/EAI_CACHE</Property>
                <Property name='passport'>eai</Property>
                <Property name='password'>IAmCloudEaiOnline1507</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -86,7 +86,7 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DATA</Property>
+               <Property name='url'>jdbc:mysql://10.169.23.66:3306/EAI_DATA</Property>
                <Property name='passport'>eai</Property>
                <Property name='password'>IAmCloudEaiOnline1507</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -111,7 +111,7 @@
                <Property name='name'>logger</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_LOGGER</Property>
+               <Property name='url'>jdbc:mysql://10.169.23.66:3306/EAI_LOGGER</Property>
                <Property name='passport'>eai</Property>
                <Property name='password'>IAmCloudEaiOnline1507</Property>
                <Property name='initConnectionNumber'>1</Property>

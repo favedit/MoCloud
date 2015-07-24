@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <HTML>
+
 <HEAD>
    <TITLE>e租宝-全球实时投资数据展示中心(中国)</TITLE>
    <META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
@@ -37,11 +38,28 @@
          MO.Window.Html.visibleSet(hError, true);
       }
 
+      function oniOSStart(event) {
+          var hLoading = document.getElementById("id_ios_play")
+          document.body.removeChild(hLoading);
+          var liveScene = MO.Desktop.application().activeChapter().activeScene();
+          liveScene._statusLayerLevel = -1;
+          liveScene._groundAutio.play();
+          liveScene._mapEntity._countryEntity._audioMapEnter._hAudio.play();
+          liveScene._investment._autios[1].play();
+          liveScene._investment._autios[1].pause();
+          liveScene._investment._autios[2].play();
+          liveScene._investment._autios[2].pause();
+          liveScene._investment._autios[3].play();
+          liveScene._investment._autios[3].pause();
+          liveScene._investment._autios[4].play();
+          liveScene._investment._autios[4].pause();
+      }
+
       function onLoaded(event) {
          clearInterval(g_loadingHandle);
       }
 
-      function onLoad(){
+      function onLoad() {
          // 设置变量
          MO.initialize();
          MO.Window.Browser.setContentPath('..');
@@ -61,6 +79,15 @@
 </HEAD>
 
 <body scroll='no' style='position:relative;overflow:hidden;background-color:#000000;background-size:100% 100%;' onload='onLoad()'>
+   <table id='id_ios_play' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background-size:100% 100%;display:none' onclick="oniOSStart()">
+       <tr>
+           <td align='center'>
+               <div id="ios_play_img">
+                   <img src='..//ars/eai/player.png'>
+               </div>
+           </td>
+       </tr>
+   </table>
    <table id='id_loading' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background:url("/ars/eai/loading/background.jpg");background-size:100% 100%;'>
       <tr>
          <td align='center'>
@@ -88,6 +115,9 @@
          </td>
       </tr>
    </table>
+   <script>
+      doLoading();
+   </script>
 </body>
-<SCRIPT>doLoading();</SCRIPT>
+
 </html>
