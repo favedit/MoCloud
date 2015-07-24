@@ -14,11 +14,6 @@
                </td>
             </tr>
             <tr>
-               <td align="left">ip地址端口</td>
-               <td align="left">
-                  <input name="host_port" style="width:400px;text-align:left;"  value="" />
-            </tr>
-            <tr>
                <td align="left">帐号</td>
                <td align="left">
                   <input name="passport" style="width:400px;text-align:left;"  value="" />
@@ -34,7 +29,6 @@
                <td align="left">权限状态</td>
                <td align="left">
                   <select name="access_cd">
-                     <option value="0">未知</option>
                      <option value="1">允许</option>
                      <option value="2">禁止</option>
                   </select>
@@ -44,7 +38,6 @@
                <td align="left">是否永久</td>
                <td align="left">
                   <select name="type_cd">
-                     <option value="0">未知</option>
                      <option value="1">永久</option>
                      <option value="2">临时</option>
                   </select>

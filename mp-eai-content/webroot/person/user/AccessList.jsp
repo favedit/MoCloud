@@ -3,9 +3,8 @@
 
    <HEAD>
    </HEAD>
-
    <body>
-         <a href="InsertUser.jsp">增加用户</a>
+         <a href="InsertUser.jsp">增加</a>
          <table border="1">
             <tr>
                <th>ip地址</th>

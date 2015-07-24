@@ -36,8 +36,13 @@ public class FAccessAction
                            FAccessPage page){
       System.out.println("------------eai----------------select");
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
+      //      for(FDataPersonAccessAuthorityUnit unit : unitlist){
+      //         TDateTime beginDate = new TDateTime();
+      //         beginDate.parse(unit.beginDate().toString(), "YYYY-MM-DD HH24:mi:ss");
+      //         unit.setBeginDate(beginDate);
+      //      }
       page.setUnitList(unitlist);
-      return "/person/user/Access";
+      return "AccessList";
    }
 
    @Override
@@ -48,15 +53,7 @@ public class FAccessAction
       FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
       unit.setOuid(id);
       _accessConsole.doDelete(logicContext, unit);
-      return "/person/user/Access";
-   }
-
-   @Override
-   public String insertBefore(IWebContext context,
-                              ILogicContext logicContext,
-                              FAccessPage page){
-
-      return null;
+      return "AccessList";
    }
 
    @Override
@@ -83,7 +80,7 @@ public class FAccessAction
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doInsert(logicContext, unit);
-      return "/person/user/Access";
+      return "AccessList";
    }
 
    @Override
@@ -93,7 +90,7 @@ public class FAccessAction
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
       page.setUnit(unit);
-      return "/person/user/UpdateUser";
+      return "UpdateUser";
    }
 
    @Override
@@ -121,6 +118,6 @@ public class FAccessAction
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doUpdate(logicContext, unit);
-      return "/person/user/Access";
+      return "AccessList";
    }
 }

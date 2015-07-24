@@ -37,10 +37,6 @@ public interface IAccessAction
                  ILogicContext logicContext,
                  @AContainer(name = "page") FAccessPage page);
 
-   String insertBefore(IWebContext context,
-                       ILogicContext logicContext,
-                       @AContainer(name = "page") FAccessPage page);
-
    String insert(IWebContext context,
                  ILogicContext logicContext,
                  @AContainer(name = "page") FAccessPage page);
