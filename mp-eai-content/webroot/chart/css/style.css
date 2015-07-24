@@ -13,7 +13,7 @@
 .login_box{
 	width: 600px;
 	height: 500px;
-	background:url(../images/lodingbg.png);
+	background:url(../images/loding.png);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -22,6 +22,14 @@
 	top:50%;
 	margin-left:-300px;
 	margin-top: -250px;
+}
+.login_box h1{
+	color:#43e2ff;
+	font-size: 30px;
+	padding-left:50px;
+	padding-right: 50px;
+	padding-top: 50px;
+	text-align:  center;
 }
 .error{
 	color: red;
@@ -84,4 +92,30 @@
 	background-position:  center center;
 	background-size: 100%;
 }
+@media screen and (max-width: 660px) {  
+	.login_box{
+		width: 300px;
+		/*height:250px; */
+		margin-left: -150px;
+		/*margin-top: -175px;*/
+		/*background-position: cover;*/
+		background-size: 320px 500px;
 
+	}
+	.container p{
+		width: 255px;
+	}
+	.login_box h1{
+		font-size: 20px;
+	}
+	.login_box .test{
+		font-size: 14px;
+	}
+	.container input{
+		width: 185px;
+	}
+	#btn{
+		width: 255px;
+	}
+
+}  
