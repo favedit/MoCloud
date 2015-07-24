@@ -59,19 +59,31 @@
 	background-repeat: no-repeat;
 	background-position:  center center;
 	background-size: 100%;
+	height: 46px;
+	line-height: 46px;
+	position: relative;
 }
+
 .container p span{
 	padding-left: 14px;
 	color:#fff;
 }
 .container input{
-	width: 231px;
-	height: 46px;
-	line-height: 46px;
+	width: 250px;
+	height: 36px;
+	line-height: 36px;
 	border:none;
-	background:transparent;
+	background:none;
 	display: inline-block;
 	color:#fff;
+	top:5px;
+	right: 10px;
+	position: absolute;
+}
+#btn{
+	position: none;
+	top:0px;
+	right: 0px;
 }
 .prompt{
 	color:#fff;
@@ -95,12 +107,8 @@
 @media screen and (max-width: 660px) {  
 	.login_box{
 		width: 300px;
-		/*height:250px; */
 		margin-left: -150px;
-		/*margin-top: -175px;*/
-		/*background-position: cover;*/
 		background-size: 320px 500px;
-
 	}
 	.container p{
 		width: 255px;
@@ -113,9 +121,18 @@
 	}
 	.container input{
 		width: 185px;
+		height: 30px;
+		top:8px;
 	}
 	#btn{
 		width: 255px;
 	}
 
 }  
+/*横屏时*/
+@media all and (orientation : landscape) { 
+	body{
+		height: 500px;
+	}
+} 
+

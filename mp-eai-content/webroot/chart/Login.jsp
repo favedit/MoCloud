@@ -22,10 +22,9 @@ function onLogin(){
             <p class="test">我们需要您输入用户名和密码，谢谢。</p>
             <p class="error"><jh:write source='&page.message' /></p>
             <div class="container">
-               <p ><span>用户名：</span><input type="text" name="username" id="username" placeholder="" /></p>
+               <p><span>用户名：</span><input type="text" name="username" id="username" placeholder="" /></p>
                <p><span>密码：</span><input type="password" id="password" name="password" /></p>
-               <p style="background:none;"><input type="button" id="btn" value=""   onclick='onLogin()' /></p>
-               <!-- onclick='onLogin()' -->
+               <p style="background:none;"><input style="height: 46px;" type="button" id="btn" value=""/></p>
             </div>
             <p class="prompt" style="padding-top: 25px;">如果需要使用，请联系 钰诚智慧企业推进中心</p>
             <p class="prompt">联系电话：010-65499299</p>
@@ -33,25 +32,16 @@ function onLogin(){
    </div>
 </FORM>
 <script type="text/javascript">
-  // var $username=document.getElementById('username'),
-  //     $password=document.getElementById('password'),
-  //     $btn=document.getElementById('btn');
-  //     $btn.onclick=function  () {
-  //        // if($username.value !=" " && $password.value !=""){
-  //        //    alert(4)
-  //        // }else{
-
-  //        // }
-  //        if($username.value != " " || $password.value !=" " ){
-  //           onLogin();
-  //        }else{
-  //           alert("用户名密码不能为空");
-  //        }
-  //        console.log($username.value)
-         
-
-  //     }
-
+  var $username=document.getElementById('username'),
+      $password=document.getElementById('password'),
+      $btn=document.getElementById('btn');
+      $btn.onclick=function() {
+         if($username.value != "" && $password.value !="" ){
+            onLogin();
+         }else{
+            alert("用户名或密码不能为空");
+         }
+      }
 </script>
 </BODY>
 </HTML>
