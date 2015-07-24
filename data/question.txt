@@ -17,6 +17,10 @@ SHOW VARIABLES LIKE 'character%';
 CREATE DATABASE `CD_CACHE` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `CD_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
+CREATE DATABASE `EAI_CACHE`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_DATA`   CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_LOGGER` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
 CREATE DATABASE `EAI_DP_CACHE`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_DP_DATA`   CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_DP_LOGGER` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
@@ -32,6 +36,14 @@ CREATE DATABASE `EAI_OL_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
+
+CREATE USER 'eai'@'%' IDENTIFIED BY 'IAmCloudEaiTest1507';
+GRANT ALL PRIVILEGES ON *.* TO 'eai'@'%';
+DROP USER 'eai'@'%';
+
+CREATE USER 'eai'@'%' IDENTIFIED BY 'IAmCloudEaiOnline1507';
+GRANT ALL PRIVILEGES ON *.* TO 'eai'@'%';
+DROP USER 'eai'@'%';
 
 用户授权：
 ============================================================

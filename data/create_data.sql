@@ -25,17 +25,21 @@ ALTER TABLE DT_PSN_USER
    ADD CONSTRAINT DT_PSN_USR_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
--- Create table [Data.Person.User.Access.Host]
+-- Create table [Data.Person.User.Access.Authority]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_PSN_USER_ACCESS_HOST`;
-CREATE TABLE `DT_PSN_USER_ACCESS_HOST` 
+DROP TABLE IF EXISTS `DT_PSN_USER_ACCESS_AUTHORITY`;
+CREATE TABLE `DT_PSN_USER_ACCESS_AUTHORITY` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
    `HOST`                          VARCHAR(40), 
+   `PASSPORT`                      VARCHAR(80), 
+   `PASSWORD`                      VARCHAR(80), 
    `ACCESS_CD`                     INTEGER, 
+   `BEGIN_DATE`                    DATETIME, 
+   `END_DATE`                      DATETIME, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -43,10 +47,10 @@ CREATE TABLE `DT_PSN_USER_ACCESS_HOST`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_PSN_USER_ACCESS_HOST 
-   ADD CONSTRAINT DT_PSN_USR_ACS_HOS_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY 
+   ADD CONSTRAINT DT_PSN_USR_ACS_AUT_UK_GID UNIQUE ( GUID ); 
 
-ALTER TABLE DT_PSN_USER_ACCESS_HOST ADD CONSTRAINT DT_PSN_USR_ACS_HOS_FK_USR 
+ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY ADD CONSTRAINT DT_PSN_USR_ACS_AUT_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
 
 -- ------------------------------------------------------------

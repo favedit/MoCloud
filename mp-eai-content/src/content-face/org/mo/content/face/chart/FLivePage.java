@@ -11,6 +11,12 @@ public class FLivePage
    // 主机地址
    protected String _host;
 
+   // 账号
+   protected String _passport;
+
+   // 密码
+   protected String _password;
+
    // 消息
    protected String _message;
 
@@ -26,6 +32,34 @@ public class FLivePage
    //============================================================
    public void setHost(String host){
       _host = host;
+   }
+
+   //============================================================
+   // <P>获得账号。</P>
+   //============================================================
+   public String passport(){
+      return _passport;
+   }
+
+   //============================================================
+   // <P>设置账号。</P>
+   //============================================================
+   public void setPassport(String passport){
+      _passport = passport;
+   }
+
+   //============================================================
+   // <P>获得密码。</P>
+   //============================================================
+   public String password(){
+      return _password;
+   }
+
+   //============================================================
+   // <P>设置密码。</P>
+   //============================================================
+   public void setPassword(String password){
+      _password = password;
    }
 
    //============================================================

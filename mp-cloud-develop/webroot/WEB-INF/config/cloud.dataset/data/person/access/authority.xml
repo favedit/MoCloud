@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="3d69c694-6051-47f1-b385-25d8344fa49a" name="data.person.access.authority" label="M#12cn17用户访问授权表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-RS-RES" data_name="DT_PSN_USER_ACCESS_AUTHORITY" data_alias="DT_PSN_USR_ACS_AUT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="be135bcb-bc69-4603-8d4c-28ca8a968ffe" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldString _uuid="c2d68809-f5a3-4659-a3c4-1f9cff014128" name="host" label="M#12cn14主机地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST" data_size="40" />
+  <FieldString _uuid="80abcf76-818d-4c14-a50b-7e90563b641d" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="80" />
+  <FieldString _uuid="cf305fac-b518-4c57-8a85-8ee811c91380" name="password" label="M#12cn12密码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="80" />
+  <FieldInteger _uuid="1512d6d4-5bca-4db6-9ca7-291cc66c9569" name="access_cd" label="M#12cn14访问类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACCESS_CD" />
+  <FieldDateTime _uuid="f84f6dbb-d6ee-4521-9b11-3e4a2213066b" name="begin_date" label="M#12cn14开始日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BEGIN_DATE" />
+  <FieldDateTime _uuid="d73f451b-1384-41dd-857e-a0f6d9ef4aeb" name="end_date" label="M#12cn14结束日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="END_DATE" />
+  <FieldTemplate _uuid="508bb43a-2a84-43bf-b1c5-fe3c8a8c91ef" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

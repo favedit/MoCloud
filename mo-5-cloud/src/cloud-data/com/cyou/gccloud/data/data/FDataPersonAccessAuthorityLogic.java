@@ -10,6 +10,7 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -20,17 +21,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>用户访问主机表逻辑。</T>
+// <T>用户访问授权表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataPersonAccessHostLogic
+public class FDataPersonAccessAuthorityLogic
       extends FLogicTable
 {
-   // 用户访问主机表的定义。
+   // 用户访问授权表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 用户访问主机表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.access.host", "DT_PSN_USER_ACCESS_HOST");
+   // 用户访问授权表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.access.authority", "DT_PSN_USER_ACCESS_AUTHORITY");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -47,8 +48,20 @@ public class FDataPersonAccessHostLogic
    // 字段主机地址的定义。
    public final static SLogicFieldInfo HOST = new SLogicFieldInfo("HOST");
 
+   // 字段账号的定义。
+   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
+
+   // 字段密码的定义。
+   public final static SLogicFieldInfo PASSWORD = new SLogicFieldInfo("PASSWORD");
+
    // 字段访问类型的定义。
    public final static SLogicFieldInfo ACCESS_CD = new SLogicFieldInfo("ACCESS_CD");
+
+   // 字段开始日期的定义。
+   public final static SLogicFieldInfo BEGIN_DATE = new SLogicFieldInfo("BEGIN_DATE");
+
+   // 字段结束日期的定义。
+   public final static SLogicFieldInfo END_DATE = new SLogicFieldInfo("END_DATE");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -66,25 +79,25 @@ public class FDataPersonAccessHostLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`HOST`,`ACCESS_CD`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`HOST`,`PASSPORT`,`PASSWORD`,`ACCESS_CD`,`BEGIN_DATE`,`END_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造用户访问主机表逻辑单元。</T>
+   // <T>构造用户访问授权表逻辑单元。</T>
    //============================================================
-   public FDataPersonAccessHostLogic(){
+   public FDataPersonAccessAuthorityLogic(){
       _name = TABLE.name();
-      _classUnit = FDataPersonAccessHostUnit.class;
+      _classUnit = FDataPersonAccessAuthorityUnit.class;
    }
 
    //============================================================
-   // <T>构造用户访问主机表逻辑单元。</T>
+   // <T>构造用户访问授权表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataPersonAccessHostLogic(ILogicContext context){
+   public FDataPersonAccessAuthorityLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataPersonAccessHostUnit.class;
+      _classUnit = FDataPersonAccessAuthorityUnit.class;
    }
 
    //============================================================
@@ -218,7 +231,7 @@ public class FDataPersonAccessHostLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataPersonAccessHostUnit());
+            unit = (T)(new FDataPersonAccessAuthorityUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -234,8 +247,8 @@ public class FDataPersonAccessHostLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataPersonAccessHostUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataPersonAccessHostUnit.class, guid);
+   public FDataPersonAccessAuthorityUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataPersonAccessAuthorityUnit.class, guid);
    }
 
    //============================================================
@@ -273,8 +286,8 @@ public class FDataPersonAccessHostLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataPersonAccessHostUnit search(CharSequence whereSql){
-      return search(null, FDataPersonAccessHostUnit.class, whereSql);
+   public FDataPersonAccessAuthorityUnit search(CharSequence whereSql){
+      return search(null, FDataPersonAccessAuthorityUnit.class, whereSql);
    }
 
    //============================================================
@@ -311,7 +324,7 @@ public class FDataPersonAccessHostLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -322,8 +335,8 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(int pageSize,
+                                                              int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -335,9 +348,9 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(CharSequence whereSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(CharSequence whereSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -350,8 +363,8 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(CharSequence whereSql,
-                                                         CharSequence orderSql){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(CharSequence whereSql,
+                                                              CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -364,10 +377,10 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(CharSequence whereSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(CharSequence whereSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -381,11 +394,11 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(CharSequence fields,
-                                                         CharSequence whereSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(CharSequence fields,
+                                                              CharSequence whereSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -399,12 +412,12 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetch(CharSequence fields,
-                                                         CharSequence whereSql,
-                                                         CharSequence groupSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetch(CharSequence fields,
+                                                              CharSequence whereSql,
+                                                              CharSequence groupSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -545,10 +558,10 @@ public class FDataPersonAccessHostLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetchSql(CharSequence code,
-                                                            CharSequence sql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetchSql(CharSequence code,
+                                                                 CharSequence sql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -573,7 +586,7 @@ public class FDataPersonAccessHostLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonAccessHostUnit>(FDataPersonAccessHostUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonAccessAuthorityUnit>(FDataPersonAccessAuthorityUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -586,7 +599,7 @@ public class FDataPersonAccessHostLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonAccessHostUnit> fetchAll(){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -599,8 +612,8 @@ public class FDataPersonAccessHostLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataPersonAccessHostUnit doPrepare(){
-      FDataPersonAccessHostUnit unit = new FDataPersonAccessHostUnit();
+   public FDataPersonAccessAuthorityUnit doPrepare(){
+      FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -627,7 +640,7 @@ public class FDataPersonAccessHostLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataPersonAccessHostUnit unit = (FDataPersonAccessHostUnit)logicUnit;
+      FDataPersonAccessAuthorityUnit unit = (FDataPersonAccessAuthorityUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -641,7 +654,7 @@ public class FDataPersonAccessHostLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataPersonAccessHostUnit unit = (FDataPersonAccessHostUnit)logicUnit;
+      FDataPersonAccessAuthorityUnit unit = (FDataPersonAccessAuthorityUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -660,7 +673,11 @@ public class FDataPersonAccessHostLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`HOST`");
+      cmd.append(",`PASSPORT`");
+      cmd.append(",`PASSWORD`");
       cmd.append(",`ACCESS_CD`");
+      cmd.append(",`BEGIN_DATE`");
+      cmd.append(",`END_DATE`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -693,7 +710,47 @@ public class FDataPersonAccessHostLogic
          cmd.append('\'');
       }
       cmd.append(',');
+      String passport = unit.passport();
+      if(RString.isEmpty(passport)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(passport));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String password = unit.password();
+      if(RString.isEmpty(password)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(password));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       cmd.append(unit.accessCd());
+      cmd.append(',');
+      TDateTime beginDate = unit.beginDate();
+      if(beginDate == null){
+         cmd.append("NULL");
+      }else if(beginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(beginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime endDate = unit.endDate();
+      if(endDate == null){
+         cmd.append("NULL");
+      }else if(endDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(endDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -738,7 +795,7 @@ public class FDataPersonAccessHostLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataPersonAccessHostUnit unit = (FDataPersonAccessHostUnit)logicUnit;
+      FDataPersonAccessAuthorityUnit unit = (FDataPersonAccessAuthorityUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -757,7 +814,7 @@ public class FDataPersonAccessHostLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataPersonAccessHostUnit unit = (FDataPersonAccessHostUnit)logicUnit;
+      FDataPersonAccessAuthorityUnit unit = (FDataPersonAccessAuthorityUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -797,9 +854,57 @@ public class FDataPersonAccessHostLogic
             cmd.append('\'');
          }
       }
+      if(unit.isPassportChanged()){
+         cmd.append(",`PASSPORT`=");
+         String passport = unit.passport();
+         if(RString.isEmpty(passport)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(passport));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isPasswordChanged()){
+         cmd.append(",`PASSWORD`=");
+         String password = unit.password();
+         if(RString.isEmpty(password)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(password));
+            cmd.append('\'');
+         }
+      }
       if(unit.isAccessCdChanged()){
          cmd.append(",`ACCESS_CD`=");
          cmd.append(unit.accessCd());
+      }
+      if(unit.isBeginDateChanged()){
+         cmd.append(",`BEGIN_DATE`=");
+         TDateTime beginDate = unit.beginDate();
+         if(beginDate == null){
+            cmd.append("NULL");
+         }else if(beginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(beginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isEndDateChanged()){
+         cmd.append(",`END_DATE`=");
+         TDateTime endDate = unit.endDate();
+         if(endDate == null){
+            cmd.append("NULL");
+         }else if(endDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(endDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
@@ -832,7 +937,7 @@ public class FDataPersonAccessHostLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataPersonAccessHostUnit unit = (FDataPersonAccessHostUnit)logicUnit;
+      FDataPersonAccessAuthorityUnit unit = (FDataPersonAccessAuthorityUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

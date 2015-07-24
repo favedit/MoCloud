@@ -12,10 +12,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>资源网格数据流表逻辑单元。</T>
+// <T>用户访问授权表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceModelMeshStreamUnit
+public class FDataPersonAccessAuthorityUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -42,71 +42,41 @@ public class FDataResourceModelMeshStreamUnit
    // 字段用户编号的定义。
    protected long _userId;
 
-   // 存储字段项目编号的定义。
-   private long __projectId;
+   // 存储字段主机地址的定义。
+   private String __host;
 
-   // 字段项目编号的定义。
-   protected long _projectId;
+   // 字段主机地址的定义。
+   protected String _host;
 
-   // 存储字段模型编号的定义。
-   private long __modelId;
+   // 存储字段账号的定义。
+   private String __passport;
 
-   // 字段模型编号的定义。
-   protected long _modelId;
+   // 字段账号的定义。
+   protected String _passport;
 
-   // 存储字段网格编号的定义。
-   private long __meshId;
+   // 存储字段密码的定义。
+   private String __password;
 
-   // 字段网格编号的定义。
-   protected long _meshId;
+   // 字段密码的定义。
+   protected String _password;
 
-   // 存储字段排序索引的定义。
-   private int __sortIndex;
+   // 存储字段访问类型的定义。
+   private int __accessCd;
 
-   // 字段排序索引的定义。
-   protected int _sortIndex;
+   // 字段访问类型的定义。
+   protected int _accessCd;
 
-   // 存储字段全代码的定义。
-   private String __fullCode;
+   // 存储字段开始日期的定义。
+   private TDateTime __beginDate = new TDateTime();
 
-   // 字段全代码的定义。
-   protected String _fullCode;
+   // 字段开始日期的定义。
+   protected TDateTime _beginDate = new TDateTime();
 
-   // 存储字段代码的定义。
-   private String __code;
+   // 存储字段结束日期的定义。
+   private TDateTime __endDate = new TDateTime();
 
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段元素数据类型的定义。
-   private int __elementDataCd;
-
-   // 字段元素数据类型的定义。
-   protected int _elementDataCd;
-
-   // 存储字段元素个数的定义。
-   private int __elementCount;
-
-   // 字段元素个数的定义。
-   protected int _elementCount;
-
-   // 存储字段数据宽度的定义。
-   private int __dataStride;
-
-   // 字段数据宽度的定义。
-   protected int _dataStride;
-
-   // 存储字段数据个数的定义。
-   private int __dataCount;
-
-   // 字段数据个数的定义。
-   protected int _dataCount;
-
-   // 存储字段数据长度的定义。
-   private int __dataLength;
-
-   // 字段数据长度的定义。
-   protected int _dataLength;
+   // 字段结束日期的定义。
+   protected TDateTime _endDate = new TDateTime();
 
    // 存储字段备注的定义。
    private String __note;
@@ -139,9 +109,9 @@ public class FDataResourceModelMeshStreamUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源网格数据流表逻辑单元。</T>
+   // <T>构造用户访问授权表逻辑单元。</T>
    //============================================================
-   public FDataResourceModelMeshStreamUnit(){
+   public FDataPersonAccessAuthorityUnit(){
    }
 
    //============================================================
@@ -264,333 +234,165 @@ public class FDataResourceModelMeshStreamUnit
    }
 
    //============================================================
-   // <T>判断项目编号的数据是否改变。</T>
+   // <T>判断主机地址的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isProjectIdChanged(){
-      return __projectId != _projectId;
+   public boolean isHostChanged(){
+      return !RString.equals(__host, _host);
    }
 
    //============================================================
-   // <T>获得项目编号的数据内容。</T>
+   // <T>获得主机地址的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long projectId(){
-      return _projectId;
+   public String host(){
+      return _host;
    }
 
    //============================================================
-   // <T>获得项目编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataSolutionProjectUnit project(){
-      FDataSolutionProjectLogic logic = _logicContext.findLogic(FDataSolutionProjectLogic.class);
-      FDataSolutionProjectUnit unit = logic.find(_projectId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置项目编号的数据内容。</T>
+   // <T>设置主机地址的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setProjectId(long value){
-      _projectId = value;
+   public void setHost(String value){
+      _host = value;
    }
 
    //============================================================
-   // <T>判断模型编号的数据是否改变。</T>
+   // <T>判断账号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isModelIdChanged(){
-      return __modelId != _modelId;
+   public boolean isPassportChanged(){
+      return !RString.equals(__passport, _passport);
    }
 
    //============================================================
-   // <T>获得模型编号的数据内容。</T>
+   // <T>获得账号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long modelId(){
-      return _modelId;
+   public String passport(){
+      return _passport;
    }
 
    //============================================================
-   // <T>获得模型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelUnit model(){
-      FDataResourceModelLogic logic = _logicContext.findLogic(FDataResourceModelLogic.class);
-      FDataResourceModelUnit unit = logic.find(_modelId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置模型编号的数据内容。</T>
+   // <T>设置账号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setModelId(long value){
-      _modelId = value;
+   public void setPassport(String value){
+      _passport = value;
    }
 
    //============================================================
-   // <T>判断网格编号的数据是否改变。</T>
+   // <T>判断密码的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMeshIdChanged(){
-      return __meshId != _meshId;
+   public boolean isPasswordChanged(){
+      return !RString.equals(__password, _password);
    }
 
    //============================================================
-   // <T>获得网格编号的数据内容。</T>
+   // <T>获得密码的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long meshId(){
-      return _meshId;
+   public String password(){
+      return _password;
    }
 
    //============================================================
-   // <T>获得网格编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelMeshUnit mesh(){
-      FDataResourceModelMeshLogic logic = _logicContext.findLogic(FDataResourceModelMeshLogic.class);
-      FDataResourceModelMeshUnit unit = logic.find(_meshId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置网格编号的数据内容。</T>
+   // <T>设置密码的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMeshId(long value){
-      _meshId = value;
+   public void setPassword(String value){
+      _password = value;
    }
 
    //============================================================
-   // <T>判断排序索引的数据是否改变。</T>
+   // <T>判断访问类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isSortIndexChanged(){
-      return __sortIndex != _sortIndex;
+   public boolean isAccessCdChanged(){
+      return __accessCd != _accessCd;
    }
 
    //============================================================
-   // <T>获得排序索引的数据内容。</T>
+   // <T>获得访问类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int sortIndex(){
-      return _sortIndex;
+   public int accessCd(){
+      return _accessCd;
    }
 
    //============================================================
-   // <T>设置排序索引的数据内容。</T>
+   // <T>设置访问类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setSortIndex(int value){
-      _sortIndex = value;
+   public void setAccessCd(int value){
+      _accessCd = value;
    }
 
    //============================================================
-   // <T>判断全代码的数据是否改变。</T>
+   // <T>判断开始日期的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
+   public boolean isBeginDateChanged(){
+      return !__beginDate.equals(_beginDate);
    }
 
    //============================================================
-   // <T>获得全代码的数据内容。</T>
+   // <T>获得开始日期的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String fullCode(){
-      return _fullCode;
+   public TDateTime beginDate(){
+      return _beginDate;
    }
 
    //============================================================
-   // <T>设置全代码的数据内容。</T>
+   // <T>设置开始日期的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
+   public void setBeginDate(TDateTime value){
+      _beginDate = value;
    }
 
    //============================================================
-   // <T>判断代码的数据是否改变。</T>
+   // <T>判断结束日期的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isEndDateChanged(){
+      return !__endDate.equals(_endDate);
    }
 
    //============================================================
-   // <T>获得代码的数据内容。</T>
+   // <T>获得结束日期的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public TDateTime endDate(){
+      return _endDate;
    }
 
    //============================================================
-   // <T>设置代码的数据内容。</T>
+   // <T>设置结束日期的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断元素数据类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isElementDataCdChanged(){
-      return __elementDataCd != _elementDataCd;
-   }
-
-   //============================================================
-   // <T>获得元素数据类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int elementDataCd(){
-      return _elementDataCd;
-   }
-
-   //============================================================
-   // <T>设置元素数据类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setElementDataCd(int value){
-      _elementDataCd = value;
-   }
-
-   //============================================================
-   // <T>判断元素个数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isElementCountChanged(){
-      return __elementCount != _elementCount;
-   }
-
-   //============================================================
-   // <T>获得元素个数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int elementCount(){
-      return _elementCount;
-   }
-
-   //============================================================
-   // <T>设置元素个数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setElementCount(int value){
-      _elementCount = value;
-   }
-
-   //============================================================
-   // <T>判断数据宽度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDataStrideChanged(){
-      return __dataStride != _dataStride;
-   }
-
-   //============================================================
-   // <T>获得数据宽度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int dataStride(){
-      return _dataStride;
-   }
-
-   //============================================================
-   // <T>设置数据宽度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataStride(int value){
-      _dataStride = value;
-   }
-
-   //============================================================
-   // <T>判断数据个数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDataCountChanged(){
-      return __dataCount != _dataCount;
-   }
-
-   //============================================================
-   // <T>获得数据个数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int dataCount(){
-      return _dataCount;
-   }
-
-   //============================================================
-   // <T>设置数据个数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataCount(int value){
-      _dataCount = value;
-   }
-
-   //============================================================
-   // <T>判断数据长度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDataLengthChanged(){
-      return __dataLength != _dataLength;
-   }
-
-   //============================================================
-   // <T>获得数据长度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int dataLength(){
-      return _dataLength;
-   }
-
-   //============================================================
-   // <T>设置数据长度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataLength(int value){
-      _dataLength = value;
+   public void setEndDate(TDateTime value){
+      _endDate = value;
    }
 
    //============================================================
@@ -745,28 +547,18 @@ public class FDataResourceModelMeshStreamUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
-         case "project_id":
-            return Long.toString(_projectId);
-         case "model_id":
-            return Long.toString(_modelId);
-         case "mesh_id":
-            return Long.toString(_meshId);
-         case "sort_index":
-            return RInteger.toString(_sortIndex);
-         case "full_code":
-            return _fullCode;
-         case "code":
-            return _code;
-         case "element_data_cd":
-            return RInteger.toString(_elementDataCd);
-         case "element_count":
-            return RInteger.toString(_elementCount);
-         case "data_stride":
-            return RInteger.toString(_dataStride);
-         case "data_count":
-            return RInteger.toString(_dataCount);
-         case "data_length":
-            return RInteger.toString(_dataLength);
+         case "host":
+            return _host;
+         case "passport":
+            return _passport;
+         case "password":
+            return _password;
+         case "access_cd":
+            return RInteger.toString(_accessCd);
+         case "begin_date":
+            return _beginDate.toString();
+         case "end_date":
+            return _endDate.toString();
          case "note":
             return _note;
          case "create_user_id":
@@ -803,38 +595,23 @@ public class FDataResourceModelMeshStreamUnit
          case "user_id":
             _userId = RLong.parse(value);
             break;
-         case "project_id":
-            _projectId = RLong.parse(value);
+         case "host":
+            _host = value;
             break;
-         case "model_id":
-            _modelId = RLong.parse(value);
+         case "passport":
+            _passport = value;
             break;
-         case "mesh_id":
-            _meshId = RLong.parse(value);
+         case "password":
+            _password = value;
             break;
-         case "sort_index":
-            _sortIndex = RInteger.parse(value);
+         case "access_cd":
+            _accessCd = RInteger.parse(value);
             break;
-         case "full_code":
-            _fullCode = value;
+         case "begin_date":
+            _beginDate.parse(value);
             break;
-         case "code":
-            _code = value;
-            break;
-         case "element_data_cd":
-            _elementDataCd = RInteger.parse(value);
-            break;
-         case "element_count":
-            _elementCount = RInteger.parse(value);
-            break;
-         case "data_stride":
-            _dataStride = RInteger.parse(value);
-            break;
-         case "data_count":
-            _dataCount = RInteger.parse(value);
-            break;
-         case "data_length":
-            _dataLength = RInteger.parse(value);
+         case "end_date":
+            _endDate.parse(value);
             break;
          case "note":
             _note = value;
@@ -882,49 +659,29 @@ public class FDataResourceModelMeshStreamUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
-            case "project_id":
-               __projectId = RLong.parse(value);
-               _projectId = __projectId;
+            case "host":
+               __host = value;
+               _host = __host;
                break;
-            case "model_id":
-               __modelId = RLong.parse(value);
-               _modelId = __modelId;
+            case "passport":
+               __passport = value;
+               _passport = __passport;
                break;
-            case "mesh_id":
-               __meshId = RLong.parse(value);
-               _meshId = __meshId;
+            case "password":
+               __password = value;
+               _password = __password;
                break;
-            case "sort_index":
-               __sortIndex = RInteger.parse(value);
-               _sortIndex = __sortIndex;
+            case "access_cd":
+               __accessCd = RInteger.parse(value);
+               _accessCd = __accessCd;
                break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
+            case "begin_date":
+               __beginDate.parse(value);
+               _beginDate.assign(__beginDate);
                break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "element_data_cd":
-               __elementDataCd = RInteger.parse(value);
-               _elementDataCd = __elementDataCd;
-               break;
-            case "element_count":
-               __elementCount = RInteger.parse(value);
-               _elementCount = __elementCount;
-               break;
-            case "data_stride":
-               __dataStride = RInteger.parse(value);
-               _dataStride = __dataStride;
-               break;
-            case "data_count":
-               __dataCount = RInteger.parse(value);
-               _dataCount = __dataCount;
-               break;
-            case "data_length":
-               __dataLength = RInteger.parse(value);
-               _dataLength = __dataLength;
+            case "end_date":
+               __endDate.parse(value);
+               _endDate.assign(__endDate);
                break;
             case "note":
                __note = value;
@@ -962,17 +719,12 @@ public class FDataResourceModelMeshStreamUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
-      row.set("projectId", _projectId);
-      row.set("modelId", _modelId);
-      row.set("meshId", _meshId);
-      row.set("sortIndex", _sortIndex);
-      row.set("fullCode", _fullCode);
-      row.set("code", _code);
-      row.set("elementDataCd", _elementDataCd);
-      row.set("elementCount", _elementCount);
-      row.set("dataStride", _dataStride);
-      row.set("dataCount", _dataCount);
-      row.set("dataLength", _dataLength);
+      row.set("host", _host);
+      row.set("passport", _passport);
+      row.set("password", _password);
+      row.set("accessCd", _accessCd);
+      row.set("beginDate", _beginDate);
+      row.set("endDate", _endDate);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -992,17 +744,12 @@ public class FDataResourceModelMeshStreamUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
-      map.put("projectId", RLong.toString(_projectId));
-      map.put("modelId", RLong.toString(_modelId));
-      map.put("meshId", RLong.toString(_meshId));
-      map.put("sortIndex", RInteger.toString(_sortIndex));
-      map.put("fullCode", _fullCode);
-      map.put("code", _code);
-      map.put("elementDataCd", RInteger.toString(_elementDataCd));
-      map.put("elementCount", RInteger.toString(_elementCount));
-      map.put("dataStride", RInteger.toString(_dataStride));
-      map.put("dataCount", RInteger.toString(_dataCount));
-      map.put("dataLength", RInteger.toString(_dataLength));
+      map.put("host", _host);
+      map.put("passport", _passport);
+      map.put("password", _password);
+      map.put("accessCd", RInteger.toString(_accessCd));
+      map.put("beginDate", _beginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("endDate", _endDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

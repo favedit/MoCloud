@@ -23,8 +23,8 @@ function onLogin(){
    <TR>
    <TR>
       <TD align='center'>
-			<INPUT type="text" id="username" placeholder="用户名" style='width:200px;margin-top:8px'/><BR>
-			<INPUT type="password" id="password" style='width:200px;margin-top:8px'/><BR>
+			<INPUT type="text" name="username" placeholder="用户名" style='width:200px;margin-top:8px'/><BR>
+			<INPUT type="password" name="password" style='width:200px;margin-top:8px'/><BR>
 			<INPUT type="button" id="btn" value="登录" onclick='onLogin()' style='width:200px;margin-top:8px'/><BR>
       <TD>
    <TR>

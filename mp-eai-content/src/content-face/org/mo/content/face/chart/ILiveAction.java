@@ -1,12 +1,14 @@
 package org.mo.content.face.chart;
 
+import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>首页接口。</P>
+// <P>动态页面接口。</P>
 //
 // @author maocy
-// @version 150427
+// @version 150724
 //============================================================
 public interface ILiveAction
 {
@@ -22,7 +24,10 @@ public interface ILiveAction
    // <T>登录逻辑处理。</T>
    //
    // @param context 页面环境
+   // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   String login(@AContainer(name = "page") FLivePage page);
+   String login(IWebContext context,
+                ILogicContext logicContext,
+                @AContainer(name = "page") FLivePage page);
 }
