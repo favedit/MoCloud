@@ -25,6 +25,31 @@ ALTER TABLE DT_PSN_USER
    ADD CONSTRAINT DT_PSN_USR_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Person.User.Access.Host]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_PSN_USER_ACCESS_HOST`;
+CREATE TABLE `DT_PSN_USER_ACCESS_HOST` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `HOST`                          VARCHAR(40), 
+   `ACCESS_CD`                     INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_PSN_USER_ACCESS_HOST 
+   ADD CONSTRAINT DT_PSN_USR_ACS_HOS_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER_ACCESS_HOST ADD CONSTRAINT DT_PSN_USR_ACS_HOS_FK_USR 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Solution.Project]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_SOL_PROJECT`;

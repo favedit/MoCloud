@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.data;
+package com.cyou.gccloud.data.logger;
 
 import java.util.Map;
 import org.mo.com.lang.*;
@@ -8,10 +8,10 @@ import org.mo.core.aop.face.*;
 import org.mo.data.logic.*;
 
 //============================================================
-// <T>资源网格骨骼蒙皮表逻辑单元。</T>
+// <T>人员用户访问逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
+public class FLoggerPersonUserAccessUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -37,59 +37,35 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
    // 字段用户编号的定义。
    protected long _userId;
 
-   // 存储字段项目编号的定义。
-   private long __projectId;
+   // 存储字段主机地址的定义。
+   private String __host;
 
-   // 字段项目编号的定义。
-   protected long _projectId;
+   // 字段主机地址的定义。
+   protected String _host;
 
-   // 存储字段模型编号的定义。
-   private long __modelId;
+   // 存储字段登录名称的定义。
+   private String __passport;
 
-   // 字段模型编号的定义。
-   protected long _modelId;
+   // 字段登录名称的定义。
+   protected String _passport;
 
-   // 存储字段网格编号的定义。
-   private long __meshId;
+   // 存储字段登录密码的定义。
+   private String __password;
 
-   // 字段网格编号的定义。
-   protected long _meshId;
+   // 字段登录密码的定义。
+   protected String _password;
 
-   // 存储字段骨骼编号的定义。
-   private long __skeletonId;
+   // 存储字段浏览地址的定义。
+   private String __browserUri;
 
-   // 字段骨骼编号的定义。
-   protected long _skeletonId;
+   // 字段浏览地址的定义。
+   protected String _browserUri;
 
-   // 存储字段全代码的定义。
-   private String __fullCode;
+   // 存储字段页面信息的定义。
+   private String __pageInfo;
 
-   // 字段全代码的定义。
-   protected String _fullCode;
-
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段标签的定义。
-   private String __label;
-
-   // 字段标签的定义。
-   protected String _label;
-
-   // 存储字段内容的定义。
-   private String __content;
-
-   // 字段内容的定义。
-   protected String _content;
-
-   // 存储字段备注的定义。
-   private String __note;
-
-   // 字段备注的定义。
-   protected String _note;
+   // 字段页面信息的定义。
+   protected String _pageInfo;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -116,9 +92,9 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造资源网格骨骼蒙皮表逻辑单元。</T>
+   // <T>构造人员用户访问逻辑单元。</T>
    //============================================================
-   public FDataResourceModelSkeletonSkinUnit(){
+   public FLoggerPersonUserAccessUnit(){
    }
 
    //============================================================
@@ -221,17 +197,6 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
    }
 
    //============================================================
-   // <T>获得用户编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataPersonUserUnit user(){
-      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
-      FDataPersonUserUnit unit = logic.find(_userId);
-      return unit;
-   }
-
-   //============================================================
    // <T>设置用户编号的数据内容。</T>
    //
    // @param value 数据内容
@@ -241,290 +206,138 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
    }
 
    //============================================================
-   // <T>判断项目编号的数据是否改变。</T>
+   // <T>判断主机地址的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isProjectIdChanged(){
-      return __projectId != _projectId;
+   public boolean isHostChanged(){
+      return !RString.equals(__host, _host);
    }
 
    //============================================================
-   // <T>获得项目编号的数据内容。</T>
+   // <T>获得主机地址的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long projectId(){
-      return _projectId;
+   public String host(){
+      return _host;
    }
 
    //============================================================
-   // <T>获得项目编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataSolutionProjectUnit project(){
-      FDataSolutionProjectLogic logic = _logicContext.findLogic(FDataSolutionProjectLogic.class);
-      FDataSolutionProjectUnit unit = logic.find(_projectId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置项目编号的数据内容。</T>
+   // <T>设置主机地址的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setProjectId(long value){
-      _projectId = value;
+   public void setHost(String value){
+      _host = value;
    }
 
    //============================================================
-   // <T>判断模型编号的数据是否改变。</T>
+   // <T>判断登录名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isModelIdChanged(){
-      return __modelId != _modelId;
+   public boolean isPassportChanged(){
+      return !RString.equals(__passport, _passport);
    }
 
    //============================================================
-   // <T>获得模型编号的数据内容。</T>
+   // <T>获得登录名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long modelId(){
-      return _modelId;
+   public String passport(){
+      return _passport;
    }
 
    //============================================================
-   // <T>获得模型编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelUnit model(){
-      FDataResourceModelLogic logic = _logicContext.findLogic(FDataResourceModelLogic.class);
-      FDataResourceModelUnit unit = logic.find(_modelId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置模型编号的数据内容。</T>
+   // <T>设置登录名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setModelId(long value){
-      _modelId = value;
+   public void setPassport(String value){
+      _passport = value;
    }
 
    //============================================================
-   // <T>判断网格编号的数据是否改变。</T>
+   // <T>判断登录密码的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMeshIdChanged(){
-      return __meshId != _meshId;
+   public boolean isPasswordChanged(){
+      return !RString.equals(__password, _password);
    }
 
    //============================================================
-   // <T>获得网格编号的数据内容。</T>
+   // <T>获得登录密码的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long meshId(){
-      return _meshId;
+   public String password(){
+      return _password;
    }
 
    //============================================================
-   // <T>获得网格编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelMeshUnit mesh(){
-      FDataResourceModelMeshLogic logic = _logicContext.findLogic(FDataResourceModelMeshLogic.class);
-      FDataResourceModelMeshUnit unit = logic.find(_meshId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置网格编号的数据内容。</T>
+   // <T>设置登录密码的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMeshId(long value){
-      _meshId = value;
+   public void setPassword(String value){
+      _password = value;
    }
 
    //============================================================
-   // <T>判断骨骼编号的数据是否改变。</T>
+   // <T>判断浏览地址的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isSkeletonIdChanged(){
-      return __skeletonId != _skeletonId;
+   public boolean isBrowserUriChanged(){
+      return !RString.equals(__browserUri, _browserUri);
    }
 
    //============================================================
-   // <T>获得骨骼编号的数据内容。</T>
+   // <T>获得浏览地址的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long skeletonId(){
-      return _skeletonId;
+   public String browserUri(){
+      return _browserUri;
    }
 
    //============================================================
-   // <T>获得骨骼编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataResourceModelSkeletonUnit skeleton(){
-      FDataResourceModelSkeletonLogic logic = _logicContext.findLogic(FDataResourceModelSkeletonLogic.class);
-      FDataResourceModelSkeletonUnit unit = logic.find(_skeletonId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置骨骼编号的数据内容。</T>
+   // <T>设置浏览地址的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setSkeletonId(long value){
-      _skeletonId = value;
+   public void setBrowserUri(String value){
+      _browserUri = value;
    }
 
    //============================================================
-   // <T>判断全代码的数据是否改变。</T>
+   // <T>判断页面信息的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isFullCodeChanged(){
-      return !RString.equals(__fullCode, _fullCode);
+   public boolean isPageInfoChanged(){
+      return !RString.equals(__pageInfo, _pageInfo);
    }
 
    //============================================================
-   // <T>获得全代码的数据内容。</T>
+   // <T>获得页面信息的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String fullCode(){
-      return _fullCode;
+   public String pageInfo(){
+      return _pageInfo;
    }
 
    //============================================================
-   // <T>设置全代码的数据内容。</T>
+   // <T>设置页面信息的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setFullCode(String value){
-      _fullCode = value;
-   }
-
-   //============================================================
-   // <T>判断代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
-   }
-
-   //============================================================
-   // <T>获得代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断标签的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得标签的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置标签的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
-   }
-
-   //============================================================
-   // <T>判断内容的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContentChanged(){
-      return !RString.equals(__content, _content);
-   }
-
-   //============================================================
-   // <T>获得内容的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String content(){
-      return _content;
-   }
-
-   //============================================================
-   // <T>设置内容的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContent(String value){
-      _content = value;
-   }
-
-   //============================================================
-   // <T>判断备注的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isNoteChanged(){
-      return !RString.equals(__note, _note);
-   }
-
-   //============================================================
-   // <T>获得备注的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String note(){
-      return _note;
-   }
-
-   //============================================================
-   // <T>设置备注的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setNote(String value){
-      _note = value;
+   public void setPageInfo(String value){
+      _pageInfo = value;
    }
 
    //============================================================
@@ -652,24 +465,16 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
-         case "project_id":
-            return Long.toString(_projectId);
-         case "model_id":
-            return Long.toString(_modelId);
-         case "mesh_id":
-            return Long.toString(_meshId);
-         case "skeleton_id":
-            return Long.toString(_skeletonId);
-         case "full_code":
-            return _fullCode;
-         case "code":
-            return _code;
-         case "label":
-            return _label;
-         case "content":
-            return _content;
-         case "note":
-            return _note;
+         case "host":
+            return _host;
+         case "passport":
+            return _passport;
+         case "password":
+            return _password;
+         case "browser_uri":
+            return _browserUri;
+         case "page_info":
+            return _pageInfo;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -704,32 +509,20 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
          case "user_id":
             _userId = RLong.parse(value);
             break;
-         case "project_id":
-            _projectId = RLong.parse(value);
+         case "host":
+            _host = value;
             break;
-         case "model_id":
-            _modelId = RLong.parse(value);
+         case "passport":
+            _passport = value;
             break;
-         case "mesh_id":
-            _meshId = RLong.parse(value);
+         case "password":
+            _password = value;
             break;
-         case "skeleton_id":
-            _skeletonId = RLong.parse(value);
+         case "browser_uri":
+            _browserUri = value;
             break;
-         case "full_code":
-            _fullCode = value;
-            break;
-         case "code":
-            _code = value;
-            break;
-         case "label":
-            _label = value;
-            break;
-         case "content":
-            _content = value;
-            break;
-         case "note":
-            _note = value;
+         case "page_info":
+            _pageInfo = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -774,41 +567,25 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
-            case "project_id":
-               __projectId = RLong.parse(value);
-               _projectId = __projectId;
+            case "host":
+               __host = value;
+               _host = __host;
                break;
-            case "model_id":
-               __modelId = RLong.parse(value);
-               _modelId = __modelId;
+            case "passport":
+               __passport = value;
+               _passport = __passport;
                break;
-            case "mesh_id":
-               __meshId = RLong.parse(value);
-               _meshId = __meshId;
+            case "password":
+               __password = value;
+               _password = __password;
                break;
-            case "skeleton_id":
-               __skeletonId = RLong.parse(value);
-               _skeletonId = __skeletonId;
+            case "browser_uri":
+               __browserUri = value;
+               _browserUri = __browserUri;
                break;
-            case "full_code":
-               __fullCode = value;
-               _fullCode = __fullCode;
-               break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
-               break;
-            case "content":
-               __content = value;
-               _content = __content;
-               break;
-            case "note":
-               __note = value;
-               _note = __note;
+            case "page_info":
+               __pageInfo = value;
+               _pageInfo = __pageInfo;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -842,15 +619,11 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
-      row.set("projectId", _projectId);
-      row.set("modelId", _modelId);
-      row.set("meshId", _meshId);
-      row.set("skeletonId", _skeletonId);
-      row.set("fullCode", _fullCode);
-      row.set("code", _code);
-      row.set("label", _label);
-      row.set("content", _content);
-      row.set("note", _note);
+      row.set("host", _host);
+      row.set("passport", _passport);
+      row.set("password", _password);
+      row.set("browserUri", _browserUri);
+      row.set("pageInfo", _pageInfo);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -869,15 +642,11 @@ public class FDataResourceModelSkeletonSkinUnit extends FLogicUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
-      map.put("projectId", RLong.toString(_projectId));
-      map.put("modelId", RLong.toString(_modelId));
-      map.put("meshId", RLong.toString(_meshId));
-      map.put("skeletonId", RLong.toString(_skeletonId));
-      map.put("fullCode", _fullCode);
-      map.put("code", _code);
-      map.put("label", _label);
-      map.put("content", _content);
-      map.put("note", _note);
+      map.put("host", _host);
+      map.put("passport", _passport);
+      map.put("password", _password);
+      map.put("browserUri", _browserUri);
+      map.put("pageInfo", _pageInfo);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

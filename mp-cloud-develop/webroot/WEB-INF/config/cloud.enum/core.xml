@@ -16,4 +16,9 @@
     <Item _uuid="9d61372b-acde-408b-b87d-dce581cd8150" name="Scene" label="场景" is_valid="Y" note="M#" />
     <Item _uuid="8964a09a-4668-4a4e-98a5-f1a65ac4ee4e" name="Project" label="项目" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="d3fdc3b1-22ff-45ea-a13d-95d89a45aff4" name="GcHostAccess" label="主机访问" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="c2a7d283-5bb0-473b-a098-361495caac66" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="ae860254-6fcf-4491-8fb5-893e8d4f4041" name="Allow" label="允许" is_valid="Y" note="M#" />
+    <Item _uuid="26128942-ea61-45e7-9096-a83f2e438626" name="Forbid" label="禁止" is_valid="Y" note="M#" />
+  </Enum>
 </Group>
