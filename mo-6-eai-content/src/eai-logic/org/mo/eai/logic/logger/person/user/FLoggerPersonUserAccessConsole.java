@@ -1,13 +1,13 @@
 package org.mo.eai.logic.logger.person.user;
 
-import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityLogic;
+import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 
 //============================================================
 // <T>用户访问控制台。</T>
 //============================================================
 public class FLoggerPersonUserAccessConsole
-      extends FAbstractLogicUnitConsole<FDataPersonAccessAuthorityLogic, FLoggerPersonUserAccess>
+      extends FAbstractLogicUnitConsole<FLoggerPersonUserAccessLogic, FLoggerPersonUserAccess>
       implements
          ILoggerPersonUserAccessConsole
 {
@@ -15,6 +15,6 @@ public class FLoggerPersonUserAccessConsole
    // <T>构造用户访问控制台。</T>
    //============================================================
    public FLoggerPersonUserAccessConsole(){
-      super(FDataPersonAccessAuthorityLogic.class, FLoggerPersonUserAccess.class);
+      super(FLoggerPersonUserAccessLogic.class, FLoggerPersonUserAccess.class);
    }
 }

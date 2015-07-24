@@ -42,6 +42,12 @@ public class FDataPersonAccessAuthorityUnit
    // 字段用户编号的定义。
    protected long _userId;
 
+   // 存储字段标签的定义。
+   private String __label;
+
+   // 字段标签的定义。
+   protected String _label;
+
    // 存储字段类型枚举的定义。
    private int __typeCd;
 
@@ -243,6 +249,33 @@ public class FDataPersonAccessAuthorityUnit
    //============================================================
    public void setUserId(long value){
       _userId = value;
+   }
+
+   //============================================================
+   // <T>判断标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
+   }
+
+   //============================================================
+   // <T>获得标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>设置标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabel(String value){
+      _label = value;
    }
 
    //============================================================
@@ -613,6 +646,8 @@ public class FDataPersonAccessAuthorityUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
+         case "label":
+            return _label;
          case "type_cd":
             return RInteger.toString(_typeCd);
          case "host_address":
@@ -664,6 +699,9 @@ public class FDataPersonAccessAuthorityUnit
             break;
          case "user_id":
             _userId = RLong.parse(value);
+            break;
+         case "label":
+            _label = value;
             break;
          case "type_cd":
             _typeCd = RInteger.parse(value);
@@ -735,6 +773,10 @@ public class FDataPersonAccessAuthorityUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
+            case "label":
+               __label = value;
+               _label = __label;
+               break;
             case "type_cd":
                __typeCd = RInteger.parse(value);
                _typeCd = __typeCd;
@@ -803,6 +845,7 @@ public class FDataPersonAccessAuthorityUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
+      row.set("label", _label);
       row.set("typeCd", _typeCd);
       row.set("hostAddress", _hostAddress);
       row.set("hostPort", _hostPort);
@@ -830,6 +873,7 @@ public class FDataPersonAccessAuthorityUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
+      map.put("label", _label);
       map.put("typeCd", RInteger.toString(_typeCd));
       map.put("hostAddress", _hostAddress);
       map.put("hostPort", RInteger.toString(_hostPort));

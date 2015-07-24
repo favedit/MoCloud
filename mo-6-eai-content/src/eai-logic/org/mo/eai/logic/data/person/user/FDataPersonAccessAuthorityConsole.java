@@ -35,7 +35,7 @@ public class FDataPersonAccessAuthorityConsole
    @Override
    public FDataPersonAccessAuthority findByHostAddress(ILogicContext logicContext,
                                                        String hostAddress){
-      String whereSql = FDataPersonAccessAuthorityLogic.HOST_ADDRESS + "=" + RSql.formatValue(hostAddress) + "'";
+      String whereSql = FDataPersonAccessAuthorityLogic.HOST_ADDRESS + "='" + RSql.formatValue(hostAddress) + "'";
       FDataPersonAccessAuthority authority = search(logicContext, whereSql);
       return authority;
    }
@@ -50,7 +50,7 @@ public class FDataPersonAccessAuthorityConsole
    @Override
    public FDataPersonAccessAuthority findByPassport(ILogicContext logicContext,
                                                     String passport){
-      String whereSql = FDataPersonAccessAuthorityLogic.PASSPORT + "=" + RSql.formatValue(passport) + "'";
+      String whereSql = FDataPersonAccessAuthorityLogic.PASSPORT + "='" + RSql.formatValue(passport) + "'";
       FDataPersonAccessAuthority authority = search(logicContext, whereSql);
       return authority;
    }

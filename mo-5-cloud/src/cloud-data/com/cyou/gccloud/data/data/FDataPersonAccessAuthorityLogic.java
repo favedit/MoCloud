@@ -45,6 +45,9 @@ public class FDataPersonAccessAuthorityLogic
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
+   // 字段标签的定义。
+   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
    // 字段类型枚举的定义。
    public final static SLogicFieldInfo TYPE_CD = new SLogicFieldInfo("TYPE_CD");
 
@@ -85,7 +88,7 @@ public class FDataPersonAccessAuthorityLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`TYPE_CD`,`HOST_ADDRESS`,`HOST_PORT`,`PASSPORT`,`PASSWORD`,`ACCESS_CD`,`BEGIN_DATE`,`END_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LABEL`,`TYPE_CD`,`HOST_ADDRESS`,`HOST_PORT`,`PASSPORT`,`PASSWORD`,`ACCESS_CD`,`BEGIN_DATE`,`END_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户访问授权表逻辑单元。</T>
@@ -678,6 +681,7 @@ public class FDataPersonAccessAuthorityLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
+      cmd.append(",`LABEL`");
       cmd.append(",`TYPE_CD`");
       cmd.append(",`HOST_ADDRESS`");
       cmd.append(",`HOST_PORT`");
@@ -707,6 +711,15 @@ public class FDataPersonAccessAuthorityLogic
          cmd.append("NULL");
       }else{
          cmd.append(userId);
+      }
+      cmd.append(',');
+      String label = unit.label();
+      if(RString.isEmpty(label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
       }
       cmd.append(',');
       cmd.append(unit.typeCd());
@@ -853,6 +866,17 @@ public class FDataPersonAccessAuthorityLogic
             cmd.append("NULL");
          }else{
             cmd.append(userId);
+         }
+      }
+      if(unit.isLabelChanged()){
+         cmd.append(",`LABEL`=");
+         String label = unit.label();
+         if(RString.isEmpty(label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
          }
       }
       if(unit.isTypeCdChanged()){

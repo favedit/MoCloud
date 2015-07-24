@@ -34,6 +34,7 @@ CREATE TABLE `DT_PSN_USER_ACCESS_AUTHORITY`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
+   `LABEL`                         VARCHAR(200), 
    `TYPE_CD`                       INTEGER, 
    `HOST_ADDRESS`                  VARCHAR(40), 
    `HOST_PORT`                     INTEGER, 

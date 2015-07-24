@@ -1,9 +1,11 @@
 package org.mo.content.face.chart;
 
+import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
@@ -29,10 +31,35 @@ public class FLiveAction
    // <T>默认逻辑处理。</T>
    //
    // @param context 页面环境
+   // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
    @Override
-   public String construct(FLivePage page){
+   public String construct(IWebContext context,
+                           ILogicContext logicContext,
+                           FLivePage page){
+      // 获得参数
+      String hostAddress = context.head("x-real-ip");
+      if(RString.isEmpty(hostAddress)){
+         hostAddress = context.head("x-forwarded-for");
+         if(RString.isEmpty(hostAddress)){
+            hostAddress = context.remoteAddress();
+         }
+      }
+      // 登录处理
+      FDataPersonAccessAuthority authority = _personAccessAuthorityConsole.findByHostAddress(logicContext, hostAddress);
+      if(authority != null){
+         int accessCd = authority.accessCd();
+         if(accessCd == EGcAuthorityAccess.Allow){
+            // 增加日志
+            FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
+            logger.setHostAddress(hostAddress);
+            logger.setLogicMessage("主机地址为白名单。");
+            _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
+            return "Live";
+         }
+      }
+      // 非法设置
       return "Login";
    }
 

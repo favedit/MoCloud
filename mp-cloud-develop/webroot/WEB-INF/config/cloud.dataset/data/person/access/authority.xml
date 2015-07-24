@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="3d69c694-6051-47f1-b385-25d8344fa49a" name="data.person.access.authority" label="M#12cn17用户访问授权表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-RS-RES" data_name="DT_PSN_USER_ACCESS_AUTHORITY" data_alias="DT_PSN_USR_ACS_AUT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
   <FieldRecordId _uuid="be135bcb-bc69-4603-8d4c-28ca8a968ffe" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldString _uuid="997369d0-547d-4d06-9ca1-56544a9900bf" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
   <FieldInteger _uuid="25028023-5502-47d1-8cfc-ed3a551c01de" name="type_cd" label="M#12cn14类型枚举" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TYPE_CD" />
   <FieldString _uuid="c2d68809-f5a3-4659-a3c4-1f9cff014128" name="host_address" label="M#12cn14主机地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST_ADDRESS" data_size="40" />
   <FieldInteger _uuid="42d27b95-134e-4b14-a5eb-ba85887301fb" name="host_port" label="M#12cn14主机端口" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST_PORT" />
