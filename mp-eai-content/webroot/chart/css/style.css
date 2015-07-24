@@ -1,0 +1,77 @@
+*{
+	padding: 0; margin: 0px;
+}
+.bg{
+	width: 100%;
+	height: 100%;
+	background: url(../images/bg1.jpg) no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+.login_box{
+	width: 600px;
+	height: 500px;
+	background:url(../images/lodingbg.png) no-repeat center center;
+	background-size: 100%;
+	position: absolute;
+	left: 50%;
+	top:50%;
+	margin-left:-300px;
+	margin-top: -250px;
+}
+.error{
+	color: red;
+	text-align: center;
+	height: 30px;
+	display: block;
+	line-height: 30px;
+}
+.login_box .test{
+	text-align: center;
+	color:#fff043;
+	font-size: 18px;
+}
+.container{
+	text-align: center;
+	width: 100%;
+}
+.container p{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 5px;
+	width: 330px;
+	margin-top:10px;
+	text-align: left;
+	background: url(../images/test.png) no-repeat center center;
+	background-size: cover;
+}
+.container p span{
+	padding-left: 14px;
+	color:#fff;
+}
+.container input{
+	width: 231px;
+	height: 46px;
+	line-height: 46px;
+	border:none;
+	background:transparent;
+	display: inline-block;
+	color:#fff;
+}
+.prompt{
+	color:#fff;
+	padding-top: 10px;
+	text-align: center;
+}
+#btn{
+	width: 330px;
+	display: block;
+	background: url(../images/btn.png) no-repeat center center;
+	background-size: cover;
+}
+#btn:hover{
+	background: url(../images/btnhover.png) no-repeat center center;
+	background-size: cover;
+}
+
