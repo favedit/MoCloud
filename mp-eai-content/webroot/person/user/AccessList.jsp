@@ -32,10 +32,20 @@
                      <jh:write source='&node.password' />
                   </td>
                   <td>
-                     <jh:write source='&node.accessCd' />
+                     <jh:equals source="&node.accessCd" value="1">
+                         允许
+                     </jh:equals>
+                     <jh:equals source="&node.accessCd" value="2">
+                         禁止
+                     </jh:equals>
                   </td>
                   <td>
-                     <jh:write source='&node.typeCd' />
+                      <jh:equals source="&node.typeCd" value="1">
+                         永久
+                     </jh:equals>
+                     <jh:equals source="&node.typeCd" value="2">
+                         临时
+                     </jh:equals>
                   </td>                  
                   <td>
                      <jh:write source='&node.beginDate' format="YYYY-MM-DD HH24:mi:ss" />

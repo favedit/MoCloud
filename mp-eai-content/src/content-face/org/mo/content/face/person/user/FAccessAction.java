@@ -41,6 +41,7 @@ public class FAccessAction
       //         beginDate.parse(unit.beginDate().toString(), "YYYY-MM-DD HH24:mi:ss");
       //         unit.setBeginDate(beginDate);
       //      }      
+
       page.setUnitList(unitlist);
       return "AccessList";
    }
