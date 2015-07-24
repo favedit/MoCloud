@@ -1,6 +1,7 @@
 package org.mo.content.face.device;
 
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.content.core.device.FDeviceBrowserInfo;
 import org.mo.content.core.device.IDeviceBrowserConsole;
@@ -33,7 +34,6 @@ public class FDeviceAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FDevicePage areaPage){
-      System.out.println("--------------------------------------------------index");
       return "/Index";
    }
 
@@ -41,14 +41,15 @@ public class FDeviceAction
    public String putMobileInfo(IWebContext context,
                                ILogicContext logicContext,
                                FDevicePage page){
-      System.out.println("--------------------------------------------------");
       String agentCode = context.parameter("agentCode");
       if(RString.isEmpty(agentCode)){
-         page.setResult("userAgent is empty!");
+         throw new FFatalError("agentCode is empty.");
+         //         page.setResult("userAgent is empty!");
       }
       String capability = context.parameter("capability");
       if(RString.isEmpty(capability)){
-         page.setResult("deviceBrowserInfo is empty!");
+         throw new FFatalError("deviceBrowserInfo is empty.");
+         //         page.setResult("deviceBrowserInfo is empty!");
       }
       FDeviceBrowserInfo deviceBrowserInfo = _deviceBrowserConsole.doPrepare(logicContext);
       deviceBrowserInfo.setAgentCode(agentCode);
@@ -57,9 +58,10 @@ public class FDeviceAction
       if(result.equals(EResult.Success)){
          page.setResult("Success");
       }else{
-         page.setResult("Failure");
+         throw new FFatalError("insert Failure.");
+         //         page.setResult("Failure");
       }
 
-      return "/index";
+      return "/";
    }
 }
