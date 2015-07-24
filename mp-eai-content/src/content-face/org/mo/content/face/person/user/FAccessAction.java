@@ -40,7 +40,7 @@ public class FAccessAction
       //         TDateTime beginDate = new TDateTime();
       //         beginDate.parse(unit.beginDate().toString(), "YYYY-MM-DD HH24:mi:ss");
       //         unit.setBeginDate(beginDate);
-      //      }
+      //      }      
       page.setUnitList(unitlist);
       return "AccessList";
    }
@@ -53,7 +53,7 @@ public class FAccessAction
       FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
       unit.setOuid(id);
       _accessConsole.doDelete(logicContext, unit);
-      return "AccessList";
+      return "Success";
    }
 
    @Override
@@ -81,7 +81,7 @@ public class FAccessAction
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doInsert(logicContext, unit);
-      return "AccessList";
+      return "Success";
    }
 
    @Override
@@ -120,6 +120,6 @@ public class FAccessAction
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doUpdate(logicContext, unit);
-      return "AccessList";
+      return "Success";
    }
 }
