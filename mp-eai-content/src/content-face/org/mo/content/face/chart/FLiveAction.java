@@ -90,25 +90,28 @@ public class FLiveAction
       }
       // 登录处理
       String message = null;
+      String logggerMessage = null;
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.PassportInvalid:
-            message = "账号不存在。";
+            logggerMessage = "账号不存在。";
+            message = "用户名或密码错误。";
             break;
          case EGcAuthorityResult.PasswordInvalid:
-            message = "密码错误。";
+            logggerMessage = "密码错误。";
+            message = "用户名或密码错误。";
             break;
          case EGcAuthorityResult.DateInvalid:
             message = "时间已失效。";
             break;
          case EGcAuthorityResult.Success:
-            message = "登录成功。";
+            logggerMessage = "登录成功。";
             break;
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
       logger.setHostAddress(hostAddress);
-      logger.setLogicMessage(message);
+      logger.setLogicMessage(logggerMessage);
       logger.setPassport(passport);
       logger.setPassword(password);
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);

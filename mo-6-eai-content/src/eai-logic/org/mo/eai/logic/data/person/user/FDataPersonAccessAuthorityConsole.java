@@ -90,6 +90,10 @@ public class FDataPersonAccessAuthorityConsole
       if(!password.equals(passportAuthority.password())){
          return EGcAuthorityResult.PasswordInvalid;
       }
+      // 检查权限
+      if(passportAuthority.accessCd() != EGcAuthorityAccess.Allow){
+         return EGcAuthorityResult.PasswordInvalid;
+      }
       // 检查类型
       int typeCd = passportAuthority.typeCd();
       if(typeCd == EGcAuthorityType.Permanent){
