@@ -1,19 +1,19 @@
 //============================================================
-// <T>主机访问。</T>
+// <T>授权数据。</T>
 //
 // @version 1.0.1
 //============================================================
 package com.cyou.gccloud.define.enums.core;
 
 //============================================================
-// <T>主机访问枚举定义。</T>
+// <T>授权数据枚举定义。</T>
 //
 // @enum
 //============================================================
-public class EGcHostAccess
+public class EGcAuthorityAccess
 {
    // 枚举名称
-   public final static String DefineName = "GcHostAccess";
+   public final static String DefineName = "GcAuthorityAccess";
 
    // 未知
    public final static int Unknown = 0;

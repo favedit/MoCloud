@@ -21,4 +21,14 @@
     <Item _uuid="ae860254-6fcf-4491-8fb5-893e8d4f4041" name="Allow" label="允许" is_valid="Y" note="M#" />
     <Item _uuid="26128942-ea61-45e7-9096-a83f2e438626" name="Forbid" label="禁止" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="401c9ff6-d80d-4e82-ac3f-cbea199bcf17" name="GcAuthorityType" label="授权方式" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="449bded5-efaa-4cc9-9e89-e3acf92f7d2f" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="72e6c248-e522-4bd4-a98e-53d1c39494c5" name="Permanent" label="永久" is_valid="Y" note="M#" />
+    <Item _uuid="4037927c-4195-4232-b810-114217b29307" name="Temporary" label="临时" is_valid="Y" note="M#" />
+  </Enum>
+  <Enum _uuid="2c63cc75-9d1c-4012-a95d-fa0ac8a7d224" name="GcAuthorityAccess" label="授权数据" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="d42ec571-4ef6-48f5-8423-f5a47645b387" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="15890d67-47fc-4833-b21b-e2d091ea1215" name="Allow" label="允许" is_valid="Y" note="M#" />
+    <Item _uuid="062b4c99-d882-401b-a128-b87548a51bd8" name="Forbid" label="禁止" is_valid="Y" note="M#" />
+  </Enum>
 </Group>

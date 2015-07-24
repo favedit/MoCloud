@@ -1,9 +1,11 @@
 package org.mo.content.face.chart;
 
-import com.cyou.gccloud.data.data.FDataPersonAccessHostLogic;
-import com.cyou.gccloud.data.data.FDataPersonAccessHostUnit;
+import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityLogic;
+import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
+import com.cyou.gccloud.define.enums.core.EGcAuthorityType;
 import com.cyou.gccloud.define.enums.core.EGcHostAccess;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDateTime;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -46,8 +48,8 @@ public class FLiveAction
       String host = context.remoteAddress();
       System.out.println(passport + " - " + password + " - " + host);
       // 获得数据
-      FDataPersonAccessHostLogic logic = logicContext.findLogic(FDataPersonAccessHostLogic.class);
-      FLogicDataset<FDataPersonAccessHostUnit> dataset = logic.fetch(FDataPersonAccessHostLogic.HOST + "='" + host + "'");
+      FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
+      FLogicDataset<FDataPersonAccessAuthorityUnit> dataset = logic.fetch(FDataPersonAccessAuthorityLogic.HOST + "='" + host + "'");
       if(dataset.isEmpty()){
          page.setMessage("Invalid host.");
          return "Login";
@@ -55,9 +57,30 @@ public class FLiveAction
          throw new FFatalError("Host count is too many. (count={1})", dataset.count());
       }
       // 检查设置
-      FDataPersonAccessHostUnit unit = dataset.first();
+      FDataPersonAccessAuthorityUnit unit = dataset.first();
       if(unit.accessCd() == EGcHostAccess.Allow){
-         return "Live2";
+         return "Live";
+      }else{
+         FDataPersonAccessAuthorityUnit passportUnit = logic.search(FDataPersonAccessAuthorityLogic.PASSPORT + "='" + passport + "'");
+         if(passportUnit != null){
+            if(password.equals(passportUnit.password())){
+               int typeCd = passportUnit.typeCd();
+               if(typeCd == EGcAuthorityType.Permanent){
+                  return "Live";
+               }
+               if(typeCd == EGcAuthorityType.Temporary){
+                  long current = RDateTime.currentDate().get();
+                  long begin = passportUnit.beginDate().get();
+                  long end = passportUnit.endDate().get();
+                  if((current >= begin) && (current < end)){
+                     return "Live";
+                  }else{
+                     page.setMessage("Period is invliad.");
+                     return "Login";
+                  }
+               }
+            }
+         }
       }
       // 非法设置
       page.setMessage("Host is forbid.");

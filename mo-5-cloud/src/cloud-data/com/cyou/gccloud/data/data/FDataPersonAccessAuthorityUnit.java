@@ -42,6 +42,12 @@ public class FDataPersonAccessAuthorityUnit
    // 字段用户编号的定义。
    protected long _userId;
 
+   // 存储字段类型枚举的定义。
+   private int __typeCd;
+
+   // 字段类型枚举的定义。
+   protected int _typeCd;
+
    // 存储字段主机地址的定义。
    private String __host;
 
@@ -231,6 +237,33 @@ public class FDataPersonAccessAuthorityUnit
    //============================================================
    public void setUserId(long value){
       _userId = value;
+   }
+
+   //============================================================
+   // <T>判断类型枚举的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTypeCdChanged(){
+      return __typeCd != _typeCd;
+   }
+
+   //============================================================
+   // <T>获得类型枚举的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int typeCd(){
+      return _typeCd;
+   }
+
+   //============================================================
+   // <T>设置类型枚举的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTypeCd(int value){
+      _typeCd = value;
    }
 
    //============================================================
@@ -547,6 +580,8 @@ public class FDataPersonAccessAuthorityUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
+         case "type_cd":
+            return RInteger.toString(_typeCd);
          case "host":
             return _host;
          case "passport":
@@ -594,6 +629,9 @@ public class FDataPersonAccessAuthorityUnit
             break;
          case "user_id":
             _userId = RLong.parse(value);
+            break;
+         case "type_cd":
+            _typeCd = RInteger.parse(value);
             break;
          case "host":
             _host = value;
@@ -659,6 +697,10 @@ public class FDataPersonAccessAuthorityUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
+            case "type_cd":
+               __typeCd = RInteger.parse(value);
+               _typeCd = __typeCd;
+               break;
             case "host":
                __host = value;
                _host = __host;
@@ -719,6 +761,7 @@ public class FDataPersonAccessAuthorityUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
+      row.set("typeCd", _typeCd);
       row.set("host", _host);
       row.set("passport", _passport);
       row.set("password", _password);
@@ -744,6 +787,7 @@ public class FDataPersonAccessAuthorityUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
+      map.put("typeCd", RInteger.toString(_typeCd));
       map.put("host", _host);
       map.put("passport", _passport);
       map.put("password", _password);
