@@ -35,6 +35,12 @@
                   <input name="host_address" style="width:400px;text-align:left;" value="<jh:write source='&unit.hostAddress' />" />
                </td>
             </tr>
+             <tr>
+               <td align="left" style="width:60px">说明</td>
+               <td align="left">
+                  <input name="label" style="width:400px;text-align:left;"  value="<jh:write source='&unit.label' />" />
+               </td>
+            </tr>
             <tr>
                <td align="left">帐号</td>
                <td align="left">

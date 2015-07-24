@@ -14,6 +14,12 @@
                </td>
             </tr>
             <tr>
+               <td align="left" style="width:60px">说明</td>
+               <td align="left">
+                  <input name="label" style="width:400px;text-align:left;"  value="" />
+               </td>
+            </tr>
+            <tr>
                <td align="left">帐号</td>
                <td align="left">
                   <input name="passport" style="width:400px;text-align:left;"  value="" />
@@ -64,7 +70,9 @@
                </td>
             </tr>
             <tr>
-               <td align="center" colspan="2"><button style="width:50px;heigt:10px" type="submit" value="提交" />提交</td>
+               <td align="center" colspan="2">
+                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交&nbsp;
+               <button onclick="javascript:location.href:'Access.do'" style="width:50px;heigt:10px" type="submit" value="返回" />返回</td>
             </tr>
          </table>
       </form>

@@ -34,7 +34,7 @@ public class FAccessAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FAccessPage page){
-      System.out.println("------------eai----------------select");
+      System.out.println("------------eai----------------construct");
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
       //      for(FDataPersonAccessAuthorityUnit unit : unitlist){
       //         TDateTime beginDate = new TDateTime();
@@ -62,6 +62,7 @@ public class FAccessAction
                         FAccessPage page){
       FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
       unit.setHostAddress(context.parameter("host_address"));
+      unit.setLabel(context.parameter("label"));
       unit.setHostPort(context.parameterAsInteger("host_port"));
       unit.setPassport(context.parameter("passport"));
       unit.setPassword(context.parameter("password"));
@@ -100,6 +101,7 @@ public class FAccessAction
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
       unit.setHostAddress(context.parameter("host_address"));
+      unit.setLabel(context.parameter("label"));
       unit.setHostPort(context.parameterAsInteger("host_port"));
       unit.setPassport(context.parameter("passport"));
       unit.setPassword(context.parameter("password"));
