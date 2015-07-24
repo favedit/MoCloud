@@ -36,9 +36,6 @@ public class FAccessAction
                            FAccessPage page){
       System.out.println("------------eai----------------select");
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
-      for(FDataPersonAccessAuthorityUnit unit : unitlist){
-         System.out.println(unit.beginDate() + "--------------------------");
-      }
       page.setUnitList(unitlist);
       return "/person/user/Access";
    }
@@ -113,13 +110,11 @@ public class FAccessAction
       unit.setTypeCd(context.parameterAsInteger("type_cd"));
       //时间处理
       String beginDateStr = context.parameter("begin_date");
-      System.out.println(beginDateStr);
       TDateTime beginDate = new TDateTime();
       beginDate.parse(beginDateStr, "YYYY-MM-DD HH24:mi:ss");
       unit.setBeginDate(beginDate);
       //结束时间
       String endDateStr = context.parameter("end_date");
-      System.out.println(endDateStr);
       TDateTime endDate = new TDateTime();
       endDate.parse(endDateStr, "YYYY-MM-DD HH24:mi:ss");
       unit.setEndDate(endDate);
