@@ -1,6 +1,6 @@
 package org.mo.content.face.person.user;
 
-import com.cyou.gccloud.data.data.FDataPersonAccessHostUnit;
+import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
 import org.mo.com.lang.FObjectId;
 import org.mo.data.logic.FLogicDataset;
 
@@ -21,13 +21,13 @@ public class FAccessPage
 
    protected String result;
 
-   protected FLogicDataset<FDataPersonAccessHostUnit> unitList;
+   protected FLogicDataset<FDataPersonAccessAuthorityUnit> unitList;
 
-   public FLogicDataset<FDataPersonAccessHostUnit> getUnitList(){
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> unitList(){
       return unitList;
    }
 
-   public void setUnitList(FLogicDataset<FDataPersonAccessHostUnit> unitList){
+   public void setUnitList(FLogicDataset<FDataPersonAccessAuthorityUnit> unitList){
       this.unitList = unitList;
    }
 

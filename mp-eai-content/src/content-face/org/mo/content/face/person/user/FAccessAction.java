@@ -1,6 +1,6 @@
 package org.mo.content.face.person.user;
 
-import com.cyou.gccloud.data.data.FDataPersonAccessHostUnit;
+import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
 import org.mo.content.core.person.user.IAccessConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -33,12 +33,13 @@ public class FAccessAction
    public String select(IWebContext context,
                         ILogicContext logicContext,
                         FAccessPage page){
-      FLogicDataset<FDataPersonAccessHostUnit> unitlist = _accessConsole.select(logicContext);
-      for(FDataPersonAccessHostUnit unit : unitlist){
-         System.out.println(unit.host() + "--------------------------");
+      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
+      for(FDataPersonAccessAuthorityUnit unit : unitlist){
+         System.out.println(unit.beginDate() + "--------------------------");
       }
+      page.setResult("123");
       page.setUnitList(unitlist);
-      return "/person/user/access";
+      return "/person/user/Access";
    }
 
    //============================================================

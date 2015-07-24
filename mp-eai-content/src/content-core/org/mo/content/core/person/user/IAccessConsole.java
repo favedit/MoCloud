@@ -1,6 +1,6 @@
 package org.mo.content.core.person.user;
 
-import com.cyou.gccloud.data.data.FDataPersonAccessHostUnit;
+import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -10,8 +10,8 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 public interface IAccessConsole
       extends
-         IAbstractLogicUnitConsole<FDataPersonAccessHostUnit>
+         IAbstractLogicUnitConsole<FDataPersonAccessAuthorityUnit>
 {
 
-   FLogicDataset<FDataPersonAccessHostUnit> select(ILogicContext logicContext);
+   FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext);
 }
