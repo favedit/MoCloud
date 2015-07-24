@@ -4,7 +4,7 @@
    <HEAD>
       
    </HEAD>
-   <body>
+   <body style="margin-left:20px;margin-top:20px">
       <form id="form" method="post" action="/person/user/Access.wa?do=insert" >
          <table align="left" border="0">
             <tr>
@@ -71,7 +71,9 @@
             </tr>
             <tr>
                <td align="center" colspan="2">
-                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交</td>
+                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交
+                  <button onclick="javascript:history.back(-1);" style="width:50px;heigt:10px" type="submit" value="返回" />返回
+               </td>
             </tr>
          </table>
       </form>

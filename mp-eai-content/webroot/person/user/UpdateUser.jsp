@@ -8,16 +8,14 @@
             var access_cd = document.getElementById("access_cd_temp").value;
             var accessList = document.getElementById("access_cd").options;
             for (i = 0; i < accessList.length; i++) {
-               if (accessList[i].id == access_cd) 
-               {
+               if (accessList[i].id == access_cd) {
                   accessList[i].selected = true;
                }
             }
             var type_cd = document.getElementById("type_cd_temp").value;
             var typeList = document.getElementById("type_cd").options;
             for (i = 0; i < typeList.length; i++) {
-               if (typeList[i].id == type_cd) 
-               {
+               if (typeList[i].id == type_cd) {
                   typeList[i].selected = true;
                }
             }
@@ -25,7 +23,7 @@
       </script>
    </HEAD>
 
-   <body onload="_onload();">
+   <body onload="_onload();" style="margin-left:20px;margin-top:20px">
       <form id="form" method="post" action="/person/user/Access.wa?do=update">
          <table align="left" border="0">
             <tr>
@@ -35,10 +33,10 @@
                   <input name="host_address" style="width:400px;text-align:left;" value="<jh:write source='&unit.hostAddress' />" />
                </td>
             </tr>
-             <tr>
+            <tr>
                <td align="left" style="width:60px">说明</td>
                <td align="left">
-                  <input name="label" style="width:400px;text-align:left;"  value="<jh:write source='&unit.label' />" />
+                  <input name="label" style="width:400px;text-align:left;" value="<jh:write source='&unit.label' />" />
                </td>
             </tr>
             <tr>
@@ -90,12 +88,16 @@
             <tr>
                <td align="left">备注</td>
                <td align="left">
-                  <textarea name="note" cols="50" rows="10"><jh:write source='&unit.note' /></textarea>
+                  <textarea name="note" cols="50" rows="10">
+                     <jh:write source='&unit.note' />
+                  </textarea>
                </td>
             </tr>
             <tr>
                <td align="center" colspan="2">
-                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交</td>
+                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交
+                  <button onclick="javascript:history.back(-1);" style="width:50px;heigt:10px" type="submit" value="返回" />返回
+               </td>
             </tr>
          </table>
       </form>

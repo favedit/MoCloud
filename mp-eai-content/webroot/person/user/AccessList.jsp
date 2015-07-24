@@ -3,10 +3,10 @@
 
    <HEAD>
    </HEAD>
-   <body>
+   <body style="margin-left:20px;margin-top:20px">
          <a href="InsertUser.jsp">增加</a>
-         <table border="1">
-            <tr>
+         <table border="0" cellpadding="3" cellspacing="1"  style="background-color: #b9d8f3;">
+            <tr style="text-align: center; COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
                <th>ip地址</th>
                <th>说明</th>
                <th>帐号</th>
@@ -18,7 +18,7 @@
                <th>操作</th>
             </tr>
             <jh:loop source="&page.unitList" alias="node">
-               <tr>
+               <tr bgcolor='#F4FAFF'>
                   <td>
                      <jh:write source='&node.hostAddress' />
                   </td>
