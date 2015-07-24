@@ -71,8 +71,7 @@
             </tr>
             <tr>
                <td align="center" colspan="2">
-                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交&nbsp;
-               <button onclick="javascript:location.href:'Access.do'" style="width:50px;heigt:10px" type="submit" value="返回" />返回</td>
+                  <button style="width:50px;heigt:10px" type="submit" value="提交" />提交</td>
             </tr>
          </table>
       </form>
