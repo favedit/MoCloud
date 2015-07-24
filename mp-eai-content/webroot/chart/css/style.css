@@ -4,15 +4,19 @@
 .bg{
 	width: 100%;
 	height: 100%;
-	background: url(../images/bg1.jpg) no-repeat center center;
+	background: url(../images/bg1.jpg);
 	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 	position: relative;
 }
 .login_box{
 	width: 600px;
 	height: 500px;
-	background:url(../images/lodingbg.png) no-repeat center center;
+	background:url(../images/lodingbg.png);
 	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
 	position: absolute;
 	left: 50%;
 	top:50%;
@@ -43,8 +47,10 @@
 	width: 330px;
 	margin-top:10px;
 	text-align: left;
-	background: url(../images/test.png) no-repeat center center;
-	background-size: cover;
+	background: url(../images/test.png);
+	background-repeat: no-repeat;
+	background-position:  center center;
+	background-size: 100%;
 }
 .container p span{
 	padding-left: 14px;
@@ -67,11 +73,15 @@
 #btn{
 	width: 330px;
 	display: block;
-	background: url(../images/btn.png) no-repeat center center;
-	background-size: cover;
+	background: url(../images/btn.png) ;
+	background-repeat: no-repeat;
+	background-position:  center center;
+	background-size: 100%;
 }
 #btn:hover{
-	background: url(../images/btnhover.png) no-repeat center center;
-	background-size: cover;
+	background: url(../images/btnhover.png) ;
+	background-repeat: no-repeat;
+	background-position:  center center;
+	background-size: 100%;
 }
 
