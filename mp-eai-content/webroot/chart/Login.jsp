@@ -40,6 +40,7 @@ function onLogin(){
             onLogin();
          }else{
             alert("用户名或密码不能为空");
+            
          }
       }
 </script>
