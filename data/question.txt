@@ -37,6 +37,9 @@ CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
 
+CREATE USER 'eai'@'127.0.0.1' IDENTIFIED BY 'IAmCloudEaiTest1507';
+GRANT ALL PRIVILEGES ON *.* TO 'eai'@'127.0.0.1';
+
 CREATE USER 'eai'@'%' IDENTIFIED BY 'IAmCloudEaiTest1507';
 GRANT ALL PRIVILEGES ON *.* TO 'eai'@'%';
 DROP USER 'eai'@'%';

@@ -49,7 +49,10 @@ public class FDataPersonAccessAuthorityLogic
    public final static SLogicFieldInfo TYPE_CD = new SLogicFieldInfo("TYPE_CD");
 
    // 字段主机地址的定义。
-   public final static SLogicFieldInfo HOST = new SLogicFieldInfo("HOST");
+   public final static SLogicFieldInfo HOST_ADDRESS = new SLogicFieldInfo("HOST_ADDRESS");
+
+   // 字段主机端口的定义。
+   public final static SLogicFieldInfo HOST_PORT = new SLogicFieldInfo("HOST_PORT");
 
    // 字段账号的定义。
    public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
@@ -82,7 +85,7 @@ public class FDataPersonAccessAuthorityLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`TYPE_CD`,`HOST`,`PASSPORT`,`PASSWORD`,`ACCESS_CD`,`BEGIN_DATE`,`END_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`TYPE_CD`,`HOST_ADDRESS`,`HOST_PORT`,`PASSPORT`,`PASSWORD`,`ACCESS_CD`,`BEGIN_DATE`,`END_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户访问授权表逻辑单元。</T>
@@ -676,7 +679,8 @@ public class FDataPersonAccessAuthorityLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`TYPE_CD`");
-      cmd.append(",`HOST`");
+      cmd.append(",`HOST_ADDRESS`");
+      cmd.append(",`HOST_PORT`");
       cmd.append(",`PASSPORT`");
       cmd.append(",`PASSWORD`");
       cmd.append(",`ACCESS_CD`");
@@ -707,14 +711,16 @@ public class FDataPersonAccessAuthorityLogic
       cmd.append(',');
       cmd.append(unit.typeCd());
       cmd.append(',');
-      String host = unit.host();
-      if(RString.isEmpty(host)){
+      String hostAddress = unit.hostAddress();
+      if(RString.isEmpty(hostAddress)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(host));
+         cmd.append(RSql.formatValue(hostAddress));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.hostPort());
       cmd.append(',');
       String passport = unit.passport();
       if(RString.isEmpty(passport)){
@@ -853,16 +859,20 @@ public class FDataPersonAccessAuthorityLogic
          cmd.append(",`TYPE_CD`=");
          cmd.append(unit.typeCd());
       }
-      if(unit.isHostChanged()){
-         cmd.append(",`HOST`=");
-         String host = unit.host();
-         if(RString.isEmpty(host)){
+      if(unit.isHostAddressChanged()){
+         cmd.append(",`HOST_ADDRESS`=");
+         String hostAddress = unit.hostAddress();
+         if(RString.isEmpty(hostAddress)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(host));
+            cmd.append(RSql.formatValue(hostAddress));
             cmd.append('\'');
          }
+      }
+      if(unit.isHostPortChanged()){
+         cmd.append(",`HOST_PORT`=");
+         cmd.append(unit.hostPort());
       }
       if(unit.isPassportChanged()){
          cmd.append(",`PASSPORT`=");

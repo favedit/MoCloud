@@ -49,10 +49,16 @@ public class FDataPersonAccessAuthorityUnit
    protected int _typeCd;
 
    // 存储字段主机地址的定义。
-   private String __host;
+   private String __hostAddress;
 
    // 字段主机地址的定义。
-   protected String _host;
+   protected String _hostAddress;
+
+   // 存储字段主机端口的定义。
+   private int __hostPort;
+
+   // 字段主机端口的定义。
+   protected int _hostPort;
 
    // 存储字段账号的定义。
    private String __passport;
@@ -271,8 +277,8 @@ public class FDataPersonAccessAuthorityUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isHostChanged(){
-      return !RString.equals(__host, _host);
+   public boolean isHostAddressChanged(){
+      return !RString.equals(__hostAddress, _hostAddress);
    }
 
    //============================================================
@@ -280,8 +286,8 @@ public class FDataPersonAccessAuthorityUnit
    //
    // @return 数据内容
    //============================================================
-   public String host(){
-      return _host;
+   public String hostAddress(){
+      return _hostAddress;
    }
 
    //============================================================
@@ -289,8 +295,35 @@ public class FDataPersonAccessAuthorityUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setHost(String value){
-      _host = value;
+   public void setHostAddress(String value){
+      _hostAddress = value;
+   }
+
+   //============================================================
+   // <T>判断主机端口的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHostPortChanged(){
+      return __hostPort != _hostPort;
+   }
+
+   //============================================================
+   // <T>获得主机端口的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int hostPort(){
+      return _hostPort;
+   }
+
+   //============================================================
+   // <T>设置主机端口的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHostPort(int value){
+      _hostPort = value;
    }
 
    //============================================================
@@ -582,8 +615,10 @@ public class FDataPersonAccessAuthorityUnit
             return Long.toString(_userId);
          case "type_cd":
             return RInteger.toString(_typeCd);
-         case "host":
-            return _host;
+         case "host_address":
+            return _hostAddress;
+         case "host_port":
+            return RInteger.toString(_hostPort);
          case "passport":
             return _passport;
          case "password":
@@ -633,8 +668,11 @@ public class FDataPersonAccessAuthorityUnit
          case "type_cd":
             _typeCd = RInteger.parse(value);
             break;
-         case "host":
-            _host = value;
+         case "host_address":
+            _hostAddress = value;
+            break;
+         case "host_port":
+            _hostPort = RInteger.parse(value);
             break;
          case "passport":
             _passport = value;
@@ -701,9 +739,13 @@ public class FDataPersonAccessAuthorityUnit
                __typeCd = RInteger.parse(value);
                _typeCd = __typeCd;
                break;
-            case "host":
-               __host = value;
-               _host = __host;
+            case "host_address":
+               __hostAddress = value;
+               _hostAddress = __hostAddress;
+               break;
+            case "host_port":
+               __hostPort = RInteger.parse(value);
+               _hostPort = __hostPort;
                break;
             case "passport":
                __passport = value;
@@ -762,7 +804,8 @@ public class FDataPersonAccessAuthorityUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("typeCd", _typeCd);
-      row.set("host", _host);
+      row.set("hostAddress", _hostAddress);
+      row.set("hostPort", _hostPort);
       row.set("passport", _passport);
       row.set("password", _password);
       row.set("accessCd", _accessCd);
@@ -788,7 +831,8 @@ public class FDataPersonAccessAuthorityUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("typeCd", RInteger.toString(_typeCd));
-      map.put("host", _host);
+      map.put("hostAddress", _hostAddress);
+      map.put("hostPort", RInteger.toString(_hostPort));
       map.put("passport", _passport);
       map.put("password", _password);
       map.put("accessCd", RInteger.toString(_accessCd));

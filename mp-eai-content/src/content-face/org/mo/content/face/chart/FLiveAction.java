@@ -6,6 +6,7 @@ import com.cyou.gccloud.define.enums.core.EGcAuthorityType;
 import com.cyou.gccloud.define.enums.core.EGcHostAccess;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -45,11 +46,16 @@ public class FLiveAction
       // 获得参数
       String passport = page.passport();
       String password = page.password();
-      String host = context.remoteAddress();
-      System.out.println(passport + " - " + password + " - " + host);
+      String address = context.head("x-real-ip");
+      if(RString.isEmpty(address)){
+         address = context.head("x-forwarded-for");
+         if(RString.isEmpty(address)){
+            address = context.remoteAddress();
+         }
+      }
       // 获得数据
       FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
-      FLogicDataset<FDataPersonAccessAuthorityUnit> dataset = logic.fetch(FDataPersonAccessAuthorityLogic.HOST + "='" + host + "'");
+      FLogicDataset<FDataPersonAccessAuthorityUnit> dataset = logic.fetch(FDataPersonAccessAuthorityLogic.HOST_ADDRESS + "='" + address + "'");
       if(dataset.isEmpty()){
          page.setMessage("Invalid host.");
          return "Login";
