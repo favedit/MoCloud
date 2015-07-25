@@ -40,14 +40,12 @@ public class FAccessConsole
       }
       FDataPersonAccessAuthorityLogic logic = new FDataPersonAccessAuthorityLogic(logicContext);
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetch(whereSql);
-
       return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
    }
 
    @Override
    public EResult passportExists(ILogicContext logicContext,
                                  String passport){
-
       StringBuffer whereSql = new StringBuffer();
       if(!passport.isEmpty()){
          whereSql.append(FDataPersonAccessAuthorityLogic.PASSPORT).append(" = '").append(passport).append("'");

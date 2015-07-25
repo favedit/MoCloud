@@ -2,7 +2,7 @@
    <HTML>
 
    <HEAD>
-      
+      <jsp:include page="/person/common/jeui.jsp"></jsp:include>
    </HEAD>
    <body style="margin-left:20px;margin-top:20px">
       <form id="form" method="post" action="/person/user/Access.wa?do=insert" >
@@ -52,15 +52,13 @@
             <tr>
                <td align="left">开始时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="begin_date" data-options="required:true,showSeconds:false" style="width:150px">
-                  <font color="red">格式：2015-07-24 12:12:12</font>
+                  <input class="easyui-datetimebox" name="begin_date" data-options="showSeconds:false" style="width:150px">
                </td>
             </tr>
             <tr>
                <td align="left">结束时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="end_date" data-options="required:true,showSeconds:false" style="width:150px">
-                  <font color="red">格式：2015-07-24 12:12:12</font>
+                  <input class="easyui-datetimebox" name="end_date" data-options="showSeconds:false" style="width:150px">
                </td>
             </tr>
             <tr>

@@ -3,6 +3,7 @@
    <HTML>
 
    <HEAD>
+      <jsp:include page="/person/common/jeui.jsp"></jsp:include>
       <script>
          function _onload() {
             var access_cd = document.getElementById("access_cd_temp").value;
@@ -19,6 +20,20 @@
                   typeList[i].selected = true;
                }
             }
+            var oriBeginDate = $("#oriBeginDate").html();
+            oriBeginDate = replaceNbsp(oriBeginDate);
+            $('#begin_date').datetimebox({
+               value: oriBeginDate,
+               required: true,
+               showSeconds: false
+            });
+            var oriEndDate = $("#oriEndDate").html();
+            oriBeginDate = replaceNbsp(oriBeginDate);
+            $('#end_date').datetimebox({
+               value: oriEndDate,
+               required: true,
+               showSeconds: false
+            });
          }
       </script>
    </HEAD>
@@ -74,15 +89,13 @@
             <tr>
                <td align="left">开始时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="begin_date" data-options="required:true,showSeconds:false" style="width:150px" value="<jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss" />">
-                  <font color="red">格式：2015-07-24 12:12:12</font>
+                  <input class="easyui-datetimebox" name="begin_date" id="begin_date" data-options="showSeconds:false" style="width:150px" value="<jh:date source='&unit.beginDate'/>"><span id="oriBeginDate" style="display:"><jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
                </td>
             </tr>
             <tr>
                <td align="left">结束时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="end_date" data-options="required:true,showSeconds:false" style="width:150px" value="<jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss" />">
-                  <font color="red">格式：2015-07-24 12:12:12</font>
+                  <input class="easyui-datetimebox" name="end_date" id="end_date" data-options="showSeconds:false" style="width:150px" value="<jh:date source='&unit.endDate'/>"><span id="oriEndDate" style="display:none"><jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
                </td>
             </tr>
             <tr>
