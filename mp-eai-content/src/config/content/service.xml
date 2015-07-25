@@ -15,6 +15,18 @@
          scope = 'global'/>
 
    <!-- ==================================================== -->
+   <!-- 用户信息设备服务                                     -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.info.device'
+         face  = 'org.mo.content.service.info.device.IDeviceService'/>
+
+   <Component
+         face  = 'org.mo.content.service.info.device.IDeviceService'
+         class = 'org.mo.content.service.info.device.FDeviceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
    <!-- 方案项目数据服务                                     -->
    <!-- ==================================================== -->
    <WebService

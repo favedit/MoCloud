@@ -4,7 +4,7 @@ import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
-// <T>用户授权信息控制台接口。</T>
+// <T>数据人员访问授权信息控制台接口。</T>
 //============================================================
 public interface IDataPersonAccessAuthorityConsole
       extends
@@ -18,7 +18,7 @@ public interface IDataPersonAccessAuthorityConsole
    // @return 授权信息
    //============================================================
    FDataPersonAccessAuthority findByHostAddress(ILogicContext logicContext,
-                                              String hostAddress);
+                                                String hostAddress);
 
    //============================================================
    // <T>根据登录账号信息查找授权信息。</T>
@@ -28,7 +28,7 @@ public interface IDataPersonAccessAuthorityConsole
    // @return 授权信息
    //============================================================
    FDataPersonAccessAuthority findByPassport(ILogicContext logicContext,
-                                           String passport);
+                                             String passport);
 
    //============================================================
    // <T>根据登录账号信息登录。</T>

@@ -13,7 +13,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
-// <T>用户授权信息控制台。</T>
+// <T>数据人员访问授权信息控制台。</T>
 //============================================================
 public class FDataPersonAccessAuthorityConsole
       extends FAbstractLogicUnitConsole<FDataPersonAccessAuthorityLogic, FDataPersonAccessAuthority>
@@ -23,7 +23,7 @@ public class FDataPersonAccessAuthorityConsole
    private static ILogger _logger = RLogger.find(FDataPersonAccessAuthorityConsole.class);
 
    //============================================================
-   // <T>构造资源位图信息控制台。</T>
+   // <T>构造数据人员访问授权信息控制台。</T>
    //============================================================
    public FDataPersonAccessAuthorityConsole(){
       super(FDataPersonAccessAuthorityLogic.class, FDataPersonAccessAuthority.class);
