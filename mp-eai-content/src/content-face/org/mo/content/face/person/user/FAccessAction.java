@@ -1,6 +1,7 @@
 package org.mo.content.face.person.user;
 
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.content.core.person.user.IAccessConsole;
 import org.mo.core.aop.face.ALink;
@@ -23,7 +24,7 @@ public class FAccessAction
    protected IAccessConsole _accessConsole;
 
    //============================================================
-   // <T>注册用户</T>
+   // <T>用户</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -36,12 +37,6 @@ public class FAccessAction
                            FAccessPage page){
       System.out.println("------------eai----------------construct");
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
-      //      for(FDataPersonAccessAuthorityUnit unit : unitlist){
-      //         TDateTime beginDate = new TDateTime();
-      //         beginDate.parse(unit.beginDate().toString(), "YYYY-MM-DD HH24:mi:ss");
-      //         unit.setBeginDate(beginDate);
-      //      }      
-
       page.setUnitList(unitlist);
       return "AccessList";
    }
@@ -61,11 +56,22 @@ public class FAccessAction
    public String insert(IWebContext context,
                         ILogicContext logicContext,
                         FAccessPage page){
+      String host = context.parameter("host_address");
+      String passport = context.parameter("passport");
+      EResult hostExist = _accessConsole.hostExists(logicContext, host);
+      if(hostExist == EResult.Success){
+         page.setResult("此IP[" + host + "]已在白名单中，请勿重复操作！");
+         return "Failure";
+      }
+      EResult passportExist = _accessConsole.passportExists(logicContext, passport);
+      if(passportExist == EResult.Success){
+         page.setResult("此帐号[" + passport + "]已在白名单中，请勿重复操作！");
+         return "Failure";
+      }
       FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
-      unit.setHostAddress(context.parameter("host_address"));
+      unit.setHostAddress(host);
       unit.setLabel(context.parameter("label"));
-      unit.setHostPort(context.parameterAsInteger("host_port"));
-      unit.setPassport(context.parameter("passport"));
+      unit.setPassport(passport);
       unit.setPassword(context.parameter("password"));
       unit.setAccessCd(context.parameterAsInteger("access_cd"));
       unit.setTypeCd(context.parameterAsInteger("type_cd"));
@@ -91,6 +97,9 @@ public class FAccessAction
                               FAccessPage page){
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
+      TDateTime beginDate = new TDateTime(unit.beginDate());
+      beginDate.format("YYYY-MM-DD HH24:mi:ss");
+      unit.setBeginDate(beginDate);
       page.setUnit(unit);
       return "UpdateUser";
    }
@@ -99,28 +108,44 @@ public class FAccessAction
    public String update(IWebContext context,
                         ILogicContext logicContext,
                         FAccessPage page){
+      String host = context.parameter("host_address");
+      String passport = context.parameter("passport");
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
-      unit.setHostAddress(context.parameter("host_address"));
+      unit.setHostAddress(host);
+      if(unit.isHostPortChanged()){
+         EResult hostExist = _accessConsole.hostExists(logicContext, host);
+         if(hostExist == EResult.Success){
+            page.setResult("此IP[" + host + "]已在白名单中，请勿重复操作！");
+            return "Failure";
+         }
+      }
+      unit.setPassport(passport);
+      if(unit.isPassportChanged()){
+         EResult passportExist = _accessConsole.passportExists(logicContext, passport);
+         if(passportExist == EResult.Success){
+            page.setResult("此帐号[" + passport + "]已在白名单中，请勿重复操作！");
+            return "Failure";
+         }
+      }
       unit.setLabel(context.parameter("label"));
-      unit.setHostPort(context.parameterAsInteger("host_port"));
-      unit.setPassport(context.parameter("passport"));
       unit.setPassword(context.parameter("password"));
       unit.setAccessCd(context.parameterAsInteger("access_cd"));
       unit.setTypeCd(context.parameterAsInteger("type_cd"));
       //时间处理
       String beginDateStr = context.parameter("begin_date");
-      TDateTime beginDate = new TDateTime();
-      beginDate.parse(beginDateStr, "YYYY-MM-DD HH24:mi:ss");
+      TDateTime beginDate = new TDateTime(beginDateStr);
+      beginDate.format("YYYY-MM-DD HH24:mi:ss");
       unit.setBeginDate(beginDate);
       //结束时间
       String endDateStr = context.parameter("end_date");
-      TDateTime endDate = new TDateTime();
-      endDate.parse(endDateStr, "YYYY-MM-DD HH24:mi:ss");
+      TDateTime endDate = new TDateTime(endDateStr);
+      endDate.format("YYYY-MM-DD HH24:mi:ss");
       unit.setEndDate(endDate);
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doUpdate(logicContext, unit);
       return "Success";
    }
+
 }

@@ -48,10 +48,10 @@
                      </jh:equals>
                   </td>                  
                   <td>
-                     <jh:write source='&node.beginDate' format="YYYY-MM-DD HH24:mi:ss" />
+                     <jh:date source='&node.beginDate' format="YYYY-MM-DD HH24:mi:ss" />
                   </td>
                   <td>
-                     <jh:write source='&node.endDate' format="YYYY-MM-DD HH24:mi:ss" />
+                     <jh:date source='&node.endDate' format="YYYY-MM-DD HH24:mi:ss" />
                   </td>
                   <td>
                      <a href="/person/user/Access.wa?do=updateBefore&id=<jh:write source='&node.ouid' />">修改</a>

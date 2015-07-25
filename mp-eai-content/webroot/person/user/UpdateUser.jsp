@@ -74,23 +74,21 @@
             <tr>
                <td align="left">开始时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="begin_date" data-options="required:true,showSeconds:false" style="width:150px" value="<jh:write source='&unit.beginDate' />">
+                  <input class="easyui-datetimebox" name="begin_date" data-options="required:true,showSeconds:false" style="width:150px" value="<jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss" />">
                   <font color="red">格式：2015-07-24 12:12:12</font>
                </td>
             </tr>
             <tr>
                <td align="left">结束时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="end_date" data-options="required:true,showSeconds:false" style="width:150px" value="<jh:write source='&unit.endDate' />">
+                  <input class="easyui-datetimebox" name="end_date" data-options="required:true,showSeconds:false" style="width:150px" value="<jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss" />">
                   <font color="red">格式：2015-07-24 12:12:12</font>
                </td>
             </tr>
             <tr>
                <td align="left">备注</td>
                <td align="left">
-                  <textarea name="note" cols="50" rows="10">
-                     <jh:write source='&unit.note' />
-                  </textarea>
+                  <textarea name="note" cols="50" rows="10"><jh:write source='&unit.note' /></textarea>
                </td>
             </tr>
             <tr>
