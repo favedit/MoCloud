@@ -1,5 +1,6 @@
 package org.mo.content.face.device;
 
+import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
@@ -20,7 +21,33 @@ public interface IDeviceAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
-                    @AContainer(name = "page") FDevicePage page);
+                    @AContainer(name = "page") FBasePage page);
+
+   //============================================================
+   // <T></T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+   String select(IWebContext context,
+                 ILogicContext logicContext,
+                 @AContainer(name = "devicePage") FDevicePage devicePage,
+                 @AContainer(name = "basePage") FBasePage basePage);
+
+   //============================================================
+   // <T></T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+   String updateBefore(IWebContext context,
+                       ILogicContext logicContext,
+                       @AContainer(name = "devicePage") FDevicePage devicePage,
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    String putMobileInfo(IWebContext context,
                         ILogicContext logicContext,

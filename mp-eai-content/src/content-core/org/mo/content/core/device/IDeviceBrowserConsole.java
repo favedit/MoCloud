@@ -1,7 +1,9 @@
 package org.mo.content.core.device;
 
+import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -9,7 +11,7 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 public interface IDeviceBrowserConsole
       extends
-         IAbstractLogicUnitConsole<FDeviceBrowserInfo>
+         IAbstractLogicUnitConsole<FDataInfoDeviceBrowserUnit>
 {
    //============================================================
    // <T>插入设备信息。</T>
@@ -19,5 +21,8 @@ public interface IDeviceBrowserConsole
    // @return 插入结果
    //============================================================
    EResult insert(ILogicContext logicContext,
-                  FDeviceBrowserInfo deviceBrowserInfo);
+                  FDataInfoDeviceBrowserUnit deviceBrowserInfo);
+
+   FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext,
+                                                    int pageNum);
 }

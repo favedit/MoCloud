@@ -1,7 +1,7 @@
-package org.mo.content.face.logger.user;
+package org.mo.content.face.logger.browser;
 
-import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
-import org.mo.content.core.logger.user.IAccessConsole;
+import com.cyou.gccloud.data.logger.FLoggerInfoBrowserAccessUnit;
+import org.mo.content.core.logger.browser.IAccessConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -26,7 +26,7 @@ public class FAccessAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
-      return "/eai/logger/AccessList";
+      return "/eai/logger/BrowserAccessList";
    }
 
    @Override
@@ -34,14 +34,14 @@ public class FAccessAction
                         ILogicContext logicContext,
                         FAccessPage accessPage,
                         FBasePage basePage){
-      System.out.println("------------eai.logger----------------construct");
+      System.out.println("------------eai.logger.browser.access----------------construct");
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          accessPage.setPageCurrent(Integer.parseInt(num));
       }else{
          accessPage.setPageCurrent(0);
       }
-      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = _accessConsole.select(logicContext, accessPage.pageCurrent() - 1);
+      FLogicDataset<FLoggerInfoBrowserAccessUnit> unitlist = _accessConsole.select(logicContext, accessPage.pageCurrent() - 1);
       basePage.setJson(unitlist.toJsonListString());
       return "/eai/common/ajax";
    }

@@ -1,6 +1,5 @@
-package org.mo.content.face.device;
+package org.mo.content.face.logger.browser;
 
-import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
@@ -12,23 +11,13 @@ import org.mo.com.lang.FObjectId;
 //@version 1.0.0
 //============================================================
 
-public class FDevicePage
+public class FAccessPage
       extends FObjectId
 {
    // 当前页
    protected int _pageCurrent;
 
    protected String result;
-
-   protected FDataInfoDeviceBrowserUnit unit;
-
-   public FDataInfoDeviceBrowserUnit unit(){
-      return unit;
-   }
-
-   public void setUnit(FDataInfoDeviceBrowserUnit unit){
-      this.unit = unit;
-   }
 
    public String result(){
       return result;

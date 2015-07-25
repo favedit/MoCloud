@@ -1,4 +1,4 @@
-package org.mo.content.face.logger.user;
+package org.mo.content.face.logger.browser;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

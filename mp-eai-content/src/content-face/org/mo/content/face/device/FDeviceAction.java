@@ -1,11 +1,13 @@
 package org.mo.content.face.device;
 
+import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.content.core.device.FDeviceBrowserInfo;
 import org.mo.content.core.device.IDeviceBrowserConsole;
+import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -33,8 +35,24 @@ public class FDeviceAction
    @Override
    public String construct(IWebContext context,
                            ILogicContext logicContext,
-                           FDevicePage areaPage){
-      return "/Index";
+                           FBasePage basePage){
+      return "/eai/device/BrowserAccessList";
+   }
+
+   @Override
+   public String select(IWebContext context,
+                        ILogicContext logicContext,
+                        FDevicePage devicePage,
+                        FBasePage basePage){
+      if(null != context.parameter("page")){
+         String num = context.parameter("page");
+         devicePage.setPageCurrent(Integer.parseInt(num));
+      }else{
+         devicePage.setPageCurrent(0);
+      }
+      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext, devicePage.pageCurrent() - 1);
+      basePage.setJson(unitlist.toJsonListString());
+      return "/eai/common/ajax";
    }
 
    @Override
@@ -51,7 +69,7 @@ public class FDeviceAction
          throw new FFatalError("deviceBrowserInfo is empty.");
          //         page.setResult("deviceBrowserInfo is empty!");
       }
-      FDeviceBrowserInfo deviceBrowserInfo = _deviceBrowserConsole.doPrepare(logicContext);
+      FDataInfoDeviceBrowserUnit deviceBrowserInfo = _deviceBrowserConsole.doPrepare(logicContext);
       deviceBrowserInfo.setAgentCode(agentCode);
       deviceBrowserInfo.setContent(capability);
       EResult result = _deviceBrowserConsole.insert(logicContext, deviceBrowserInfo);
@@ -61,7 +79,16 @@ public class FDeviceAction
          throw new FFatalError("insert Failure.");
          //         page.setResult("Failure");
       }
-
       return "/";
+   }
+
+   @Override
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FDevicePage devicePage,
+                              FBasePage basePage){
+      long id = context.parameterAsLong("ouid");
+      devicePage.setUnit(_deviceBrowserConsole.find(logicContext, id));
+      return "/eai/device/BrowserAccessInfo";
    }
 }
