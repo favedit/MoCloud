@@ -24,14 +24,14 @@
             oriBeginDate = replaceNbsp(oriBeginDate);
             $('#begin_date').datetimebox({
                value: oriBeginDate,
-               required: true,
+               required: false,
                showSeconds: false
             });
             var oriEndDate = $("#oriEndDate").html();
             oriBeginDate = replaceNbsp(oriBeginDate);
             $('#end_date').datetimebox({
                value: oriEndDate,
-               required: true,
+               required: false,
                showSeconds: false
             });
          }
@@ -89,13 +89,13 @@
             <tr>
                <td align="left">开始时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="begin_date" id="begin_date" data-options="showSeconds:false" style="width:150px" value="<jh:date source='&unit.beginDate'/>"><span id="oriBeginDate" style="display:"><jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
+                  <input class="easyui-datetimebox" name="begin_date" id="begin_date" data-options="showSeconds:false" style="width:150px" value=""><span id="oriBeginDate" style="display:none"><jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
                </td>
             </tr>
             <tr>
                <td align="left">结束时间</td>
                <td align="left">
-                  <input class="easyui-datetimebox" name="end_date" id="end_date" data-options="showSeconds:false" style="width:150px" value="<jh:date source='&unit.endDate'/>"><span id="oriEndDate" style="display:none"><jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
+                  <input class="easyui-datetimebox" name="end_date" id="end_date" data-options="showSeconds:false" style="width:150px" value=""><span id="oriEndDate" style="display:none"><jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
                </td>
             </tr>
             <tr>

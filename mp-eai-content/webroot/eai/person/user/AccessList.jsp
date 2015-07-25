@@ -4,7 +4,7 @@
    <HEAD>
    </HEAD>
    <body style="margin-left:20px;margin-top:20px">
-         <a href="InsertUser.jsp">增加</a>
+         <a href="/eai/person/user/InsertUser.jsp">增加</a>
          <table border="0" cellpadding="3" cellspacing="1"  style="background-color: #b9d8f3;">
             <tr style="text-align: center; COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
                <th>ip地址</th>
