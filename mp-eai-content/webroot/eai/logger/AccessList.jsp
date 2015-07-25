@@ -15,6 +15,7 @@
                }
             });
          });
+
          function doSubmit(page) {
             progress();
             var url = null;
@@ -44,13 +45,18 @@
          }
       </script>
    </HEAD>
+
    <body>
       <div id="cy_right" style="">
          <div class="right_title">
             <span>用户白名单记录表</span>
          </div>
          <div class="btn_bar">
-            <div class="nav_btn"></div>
+            <div class="nav_btn">
+               <button onclick="javascript:location.href='/device/Device.wa'" value="test" />设备信息
+               <button onclick="javascript:location.href='/logger/user/Access.wa'" value="test" />用户日志
+               <button onclick="javascript:location.href='/person/user/Access.wa'" value="test" />白名单
+            </div>
             <div class="nav_search"></div>
          </div>
       </div>
