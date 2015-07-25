@@ -38,7 +38,7 @@ public class FAccessAction
       System.out.println("------------eai----------------construct");
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
       page.setUnitList(unitlist);
-      return "AccessList";
+      return "/eai/person/user/AccessList";
    }
 
    @Override
@@ -62,14 +62,14 @@ public class FAccessAction
          EResult hostExist = _accessConsole.hostExists(logicContext, host);
          if(hostExist == EResult.Success){
             page.setResult("此IP[" + host + "]已在白名单中，请勿重复操作！");
-            return "Failure";
+            return "/eai/person/user/Failure";
          }
       }
       if(!passport.isEmpty()){
          EResult passportExist = _accessConsole.passportExists(logicContext, passport);
          if(passportExist == EResult.Success){
             page.setResult("此帐号[" + passport + "]已在白名单中，请勿重复操作！");
-            return "Failure";
+            return "/eai/person/user/Failure";
          }
       }
       FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
@@ -92,7 +92,7 @@ public class FAccessAction
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doInsert(logicContext, unit);
-      return "Success";
+      return "/eai/person/user/Success";
    }
 
    @Override
@@ -102,7 +102,7 @@ public class FAccessAction
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
       page.setUnit(unit);
-      return "UpdateUser";
+      return "/eai/person/user/UpdateUser";
    }
 
    @Override
@@ -119,7 +119,7 @@ public class FAccessAction
             EResult hostExist = _accessConsole.hostExists(logicContext, host);
             if(hostExist == EResult.Success){
                page.setResult("此IP[" + host + "]已在白名单中，请勿重复操作！");
-               return "Failure";
+               return "/eai/person/user/Failure";
             }
          }
       }
@@ -129,7 +129,7 @@ public class FAccessAction
             EResult passportExist = _accessConsole.passportExists(logicContext, passport);
             if(passportExist == EResult.Success){
                page.setResult("此帐号[" + passport + "]已在白名单中，请勿重复操作！");
-               return "Failure";
+               return "/eai/person/user/Failure";
             }
          }
       }
@@ -147,12 +147,10 @@ public class FAccessAction
       TDateTime endDate = new TDateTime(endDateStr);
       endDate.parse(endDateStr, "YYYY-MM-DD HH24:MI");
       unit.setEndDate(endDate);
-      System.out.println(beginDateStr + "-----------------" + endDateStr + "******************");
-      System.out.println(unit.beginDate() + "=============" + unit.endDate() + "===============");
       //.....................................
       unit.setNote(context.parameter("note"));
       _accessConsole.doUpdate(logicContext, unit);
-      return "Success";
+      return "/eai/person/user/Success";
    }
 
 }

@@ -3,7 +3,7 @@
    <HTML>
 
    <HEAD>
-      <jsp:include page="/person/common/jeui.jsp"></jsp:include>
+      <jsp:include page="/eai/common/jeui.jsp"></jsp:include>
       <script>
          function _onload() {
             var access_cd = document.getElementById("access_cd_temp").value;

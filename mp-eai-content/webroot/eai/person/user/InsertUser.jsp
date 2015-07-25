@@ -2,7 +2,7 @@
    <HTML>
 
    <HEAD>
-      <jsp:include page="/person/common/jeui.jsp"></jsp:include>
+      <jsp:include page="/eai/common/jeui.jsp"></jsp:include>
    </HEAD>
    <body style="margin-left:20px;margin-top:20px">
       <form id="form" method="post" action="/person/user/Access.wa?do=insert" >

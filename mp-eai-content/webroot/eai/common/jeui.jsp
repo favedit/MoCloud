@@ -1,11 +1,11 @@
-<link rel="stylesheet" type="text/css" href="../ajs/jquery/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="../ajs/jquery/themes/icon.css"/>
-<link rel="stylesheet" type="text/css" href="../ajs/jquery/themes/euiStyle.css"/>
-<script type="text/javascript" src="../ajs/jquery/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="../ajs/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="../ajs/jquery/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../ajs/jquery/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../ajs/jquery/myselfJs.js"></script>
+<link rel="stylesheet" type="text/css" href="/eai/ajs/jquery/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/eai/ajs/jquery/themes/icon.css"/>
+<link rel="stylesheet" type="text/css" href="/eai/ajs/jquery/themes/euiStyle.css"/>
+<script type="text/javascript" src="/eai/ajs/jquery/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/eai/ajs/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/eai/ajs/jquery/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/eai/ajs/jquery/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/eai/ajs/jquery/myselfJs.js"></script>
 <script>
 	function msg(m){
 		$.messager.show({
