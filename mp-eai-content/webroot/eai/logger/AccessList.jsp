@@ -49,7 +49,7 @@
    <body>
       <div id="cy_right" style="">
          <div class="right_title">
-            <span>用户白名单记录表</span>
+            <span>用户登录信息表</span>
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
@@ -63,16 +63,15 @@
       <table id="access" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,rownumbers:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
          <thead>
             <tr>
-               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
-               <th data-options="field:'label',halign:'center',align:'center'" width="40px">说明</th>
-               <th data-options="field:'hostAddress',halign:'center',align:'center'" width="80px">ip地址</th>
-               <th data-options="field:'passport',halign:'center',align:'right',sortable:true" width="60px">账号</th>
-               <th data-options="field:'password',halign:'center',align:'center',sortable:true" width="140px">密码</th>
-               <th data-options="field:'accessCd',halign:'center',align:'center',sortable:true" width="140px">权限状态</th>
-               <th data-options="field:'typeCd',halign:'center',align:'left',sortable:true" width="400px">是否永久</th>
-               <th data-options="field:'beginDate',halign:'center',align:'center',sortable:true" width="80px">开始时间</th>
-               <th data-options="field:'endDate',halign:'center',align:'center',sortable:true" width="140px">结束时间</th>
-               <th data-options="field:'updateDate',halign:'center',align:'center'" width="140px">更新时间</th>
+               <th data-options="field:'ouid',halign:'center',align:'left'" width="60px">编号</th>
+               <th data-options="field:'logicCode',halign:'center',align:'left'" width="100px">logicCode</th>
+               <th data-options="field:'logicResult',halign:'center',align:'left'" width="100px">logicResult</th>
+               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="100px">logicMessage</th>
+               <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="300px">ip地址</th>
+               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">账号</th>
+               <th data-options="field:'password',halign:'center',align:'left',sortable:true" width="100px">密码</th>
+               <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">浏览器uri</th>
+               <th data-options="field:'pageInfo',halign:'center',align:'left'" width="300px">页面信息</th>
             </tr>
          </thead>
       </table>
