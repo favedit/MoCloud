@@ -1,4 +1,4 @@
-package org.mo.content.core.device;
+package org.mo.content.core.manage.device;
 
 import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserLogic;
 import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;

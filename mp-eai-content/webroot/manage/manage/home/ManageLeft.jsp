@@ -1,12 +1,14 @@
 <!doctype html>
-<%@ include file='/cloud/apl/public.inc'%>
-<jh:define source="&basePage.user" alias="base"></jh:define>
+<%@ include file='/apl/public.inc'%>
+<!--<jh:define source="&basePage.user" alias="base"></jh:define>-->
 <html>
 <head>
     <meta charset="utf-8">
     <title>17173游戏学院 - 后台管理系统</title>
-<jsp:include page="/cloud/manage/common/newIncloud.jsp"></jsp:include>
-<script type="text/javascript" src="/cloud/ajs/myselfJs.js" ></script>
+      <link rel="stylesheet" href="/manage/acs/style.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="/manage/acs/main.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="/manage/acs/lrtk.css" type="text/css" media="screen" />
+      <script src="/manage/ajs/jquery/jquery-1.8.0.min.js" type="text/javascript"></script>
 </head>
 <script>
 var flag = "<jh:write source='&base.ouid' />";
@@ -14,43 +16,43 @@ if(flag == ""){
 	 alert("连接超时！");
 	 parent.parent.location.href="/cloud/home/Frame.wa";	
 }
-function checkHtml(){
-	var menu = replaceNbsp($("#one").children(".sub-menu").html());
-	if(menu == ''){$("#one").hide();}
-	menu = replaceNbsp($("#two").children(".sub-menu").html());
-	if(menu == ''){$("#two").hide();}
-	menu = replaceNbsp($("#three").children(".sub-menu").html());
-	if(menu == ''){$("#three").hide();}
-	menu = replaceNbsp($("#four").children(".sub-menu").html());
-	if(menu == ''){$("#four").hide();}
-	menu = replaceNbsp($("#five").children(".sub-menu").html());
-	if(menu == ''){$("#five").hide();}
-	menu = replaceNbsp($("#six").children(".sub-menu").html());
-	if(menu == ''){$("#six").hide();}
-	menu = replaceNbsp($("#seven").children(".sub-menu").html());
-	if(menu == ''){$("#seven").hide();}
-	getAllAuditNumber();
-}
-setInterval(function() { 
-	getAllAuditNumber();
-},1000*60);
-function getAllAuditNumber(){
-        var url = "/cloud/product/home/Home.wa?do=selectManageAuditNumber&date="+new Date().valueOf();
-		$.ajax({
-		   type: "POST",
-		   url:url,
-		   success: function(msg){
-			   var audit = toJsonObject(msg);	
-			   var versionAudit =parseInt(audit.versionAuditNumber);
-			   $("#versionAudit").html(versionAudit);
-			   var allNumber = versionAudit;
-			   $("#allNumber").html(allNumber);
-		   },
-		   fail:function(){
-			 alert("error");
-		   }
-		});
-}
+//function checkHtml(){
+//	var menu = replaceNbsp($("#one").children(".sub-menu").html());
+//	if(menu == ''){$("#one").hide();}
+//	menu = replaceNbsp($("#two").children(".sub-menu").html());
+//	if(menu == ''){$("#two").hide();}
+//	menu = replaceNbsp($("#three").children(".sub-menu").html());
+//	if(menu == ''){$("#three").hide();}
+//	menu = replaceNbsp($("#four").children(".sub-menu").html());
+//	if(menu == ''){$("#four").hide();}
+//	menu = replaceNbsp($("#five").children(".sub-menu").html());
+//	if(menu == ''){$("#five").hide();}
+//	menu = replaceNbsp($("#six").children(".sub-menu").html());
+//	if(menu == ''){$("#six").hide();}
+//	menu = replaceNbsp($("#seven").children(".sub-menu").html());
+//	if(menu == ''){$("#seven").hide();}
+//	getAllAuditNumber();
+//}
+//setInterval(function() { 
+//	getAllAuditNumber();
+//},1000*60);
+//function getAllAuditNumber(){
+//        var url = "/cloud/product/home/Home.wa?do=selectManageAuditNumber&date="+new Date().valueOf();
+//		$.ajax({
+//		   type: "POST",
+//		   url:url,
+//		   success: function(msg){
+//			   var audit = toJsonObject(msg);	
+//			   var versionAudit =parseInt(audit.versionAuditNumber);
+//			   $("#versionAudit").html(versionAudit);
+//			   var allNumber = versionAudit;
+//			   $("#allNumber").html(allNumber);
+//		   },
+//		   fail:function(){
+//			 alert("error");
+//		   }
+//		});
+//}
 </script>
 <body bgcolor="#198bc9" onLoad="checkHtml()">
 <div id="cy_left">

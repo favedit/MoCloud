@@ -1,4 +1,4 @@
-package org.mo.content.core.person.user;
+package org.mo.content.core.manage.person.user;
 
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityLogic;
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;

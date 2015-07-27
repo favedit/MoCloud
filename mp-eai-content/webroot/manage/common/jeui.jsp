@@ -2,7 +2,6 @@
 <link rel="stylesheet" type="text/css" href="/manage/ajs/jquery/themes/icon.css"/>
 <link rel="stylesheet" type="text/css" href="/manage/ajs/jquery/themes/euiStyle.css"/>
 <script type="text/javascript" src="/manage/ajs/jquery/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="/manage/ajs/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/manage/ajs/jquery/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/manage/ajs/jquery/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="/manage/ajs/jquery/myselfJs.js"></script>

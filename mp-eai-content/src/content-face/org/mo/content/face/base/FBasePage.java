@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import org.mo.com.lang.FObjectId;
+import org.mo.com.lang.RString;
 
 //============================================================
 //<P>公共容器</P>
@@ -71,7 +72,15 @@ public class FBasePage
       this._json = _json;
    }
 
-   public void ajax(String json){
+   public void ajax(int status,
+                    String url){
+      StringBuffer sb = new StringBuffer();
+      sb.append("{");
+      sb.append("\"status\":\"").append(status + "\"");
+      if(!RString.isEmpty(url))
+         sb.append(",\"url\":\"").append(url + "\"");
+      sb.append("}");
+      String json = sb.toString();
       this._json = json;
    }
 

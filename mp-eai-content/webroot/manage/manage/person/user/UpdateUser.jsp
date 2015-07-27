@@ -84,6 +84,7 @@
                      <option id="1" value="1">永久</option>
                      <option id="2" value="2">临时</option>
                   </select>
+                  <font color="red">当权限禁止时，此下拉框的临时选项无效。</font>
                </td>
             </tr>
             <tr>

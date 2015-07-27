@@ -1,7 +1,8 @@
 package org.mo.content.face.manage.logger.user;
 
+import org.mo.content.core.manage.logger.user.IAccessConsole;
+
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
-import org.mo.content.core.logger.user.IAccessConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;

@@ -1,12 +1,11 @@
 <!doctype html>
-<%@ include file='/cloud/apl/public.inc'%>
+<%@ include file='/apl/public.inc'%>
 <jh:define source="&basePage.user" alias="base"></jh:define>
 <html>
 <head>
     <meta charset="utf-8">
     <title>17173游戏学院 - 后台管理系统</title>
-<jsp:include page="/cloud/manage/common/newIncloud.jsp"></jsp:include>
-<script type="text/javascript" src="/cloud/ajs/myselfJs.js" ></script>
+   
 <script>
 var flag = "<jh:write source='&base.ouid' />";
 if(flag == ""){
@@ -28,36 +27,36 @@ function checkHtml(){
 	if(menu == ''){$("#six").hide();}
 	getAllAuditNumber();
 }
-setInterval(function() { 
-	getAllAuditNumber();
-},1000*60);
-function getAllAuditNumber(){
-        var url = "/cloud/product/home/Home.wa?do=selectProductAuditNumber&date="+new Date().valueOf();
-		$.ajax({
-		   type: "POST",
-		   url:url,
-		   success: function(msg){
-			   var audit = toJsonObject(msg);	
-			   var gameAuditNumber =parseInt(audit.gameAuditNumber);
-			   var lessonAuditNumber = 	parseInt(audit.lessonAuditNumber);
-			   var newsAuditNumber = parseInt(audit.newsAuditNumber);
-			   var taskAuditNumber = parseInt(audit.taskAuditNumber);
-			   var userTaskAuditNumber = parseInt(audit.userTaskAuditNumber);
-			   var goodsAuditNumber = parseInt(audit.goodsAuditNumber);
-			   $("#auditGame").html(gameAuditNumber);
-			   $("#auditLesson").html(lessonAuditNumber);
-			   $("#auditNews").html(newsAuditNumber);
-			   $("#auditTask").html(taskAuditNumber);
-			   $("#auditUserTask").html(userTaskAuditNumber);
-			   $("#auditGoods").html(goodsAuditNumber);
-			   var allNumber = gameAuditNumber+lessonAuditNumber+newsAuditNumber+taskAuditNumber+userTaskAuditNumber+goodsAuditNumber;
-			   $("#allNumber").html(allNumber);
-		   },
-		   fail:function(){
-			 alert("error");
-		   }
-		});
-}
+//setInterval(function() { 
+//	getAllAuditNumber();
+//},1000*60);
+//function getAllAuditNumber(){
+//        var url = "/cloud/product/home/Home.wa?do=selectProductAuditNumber&date="+new Date().valueOf();
+//		$.ajax({
+//		   type: "POST",
+//		   url:url,
+//		   success: function(msg){
+//			   var audit = toJsonObject(msg);	
+//			   var gameAuditNumber =parseInt(audit.gameAuditNumber);
+//			   var lessonAuditNumber = 	parseInt(audit.lessonAuditNumber);
+//			   var newsAuditNumber = parseInt(audit.newsAuditNumber);
+//			   var taskAuditNumber = parseInt(audit.taskAuditNumber);
+//			   var userTaskAuditNumber = parseInt(audit.userTaskAuditNumber);
+//			   var goodsAuditNumber = parseInt(audit.goodsAuditNumber);
+//			   $("#auditGame").html(gameAuditNumber);
+//			   $("#auditLesson").html(lessonAuditNumber);
+//			   $("#auditNews").html(newsAuditNumber);
+//			   $("#auditTask").html(taskAuditNumber);
+//			   $("#auditUserTask").html(userTaskAuditNumber);
+//			   $("#auditGoods").html(goodsAuditNumber);
+//			   var allNumber = gameAuditNumber+lessonAuditNumber+newsAuditNumber+taskAuditNumber+userTaskAuditNumber+goodsAuditNumber;
+//			   $("#allNumber").html(allNumber);
+//		   },
+//		   fail:function(){
+//			 alert("error");
+//		   }
+//		});
+//}
 </script>
 </head>
 <body bgcolor="#198bc9" onLoad="checkHtml()">

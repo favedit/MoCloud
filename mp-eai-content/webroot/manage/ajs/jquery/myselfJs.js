@@ -5,13 +5,15 @@
 String.prototype.replaceAll = function(s1,s2) { 
     return this.replace(new RegExp(s1,"gm"),s2); 
 }
-function toJsonObject(str) {
-	var temp = $.trim(str).replaceAll("&nbsp;"," ");
-    return  $.parseJSON($.trim(temp).replaceAll("&quot;","\""));
-}
 function replaceNbsp(temp){
 	return $.trim(temp).replaceAll("&nbsp;"," ");
 }
+
+function toJsonObject(str) {
+	var temp = replaceNbsp(str);
+    return  $.parseJSON($.trim(temp).replaceAll("&quot;","\""));
+}
+
 function imgNotfind(){
 	var img=event.srcElement; 
     img.src="/cloud/images/noPicture.gif"; 

@@ -3,7 +3,7 @@ package org.mo.content.face.manage.person.user;
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.type.TDateTime;
-import org.mo.content.core.person.user.IAccessConsole;
+import org.mo.content.core.manage.person.user.IAccessConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -57,8 +57,8 @@ public class FAccessAction
    public String insert(IWebContext context,
                         ILogicContext logicContext,
                         FAccessPage page){
-      String host = context.parameter("host_address");
-      String passport = context.parameter("passport");
+      String host = context.parameter("host_address").replaceAll(" ", "");
+      String passport = context.parameter("passport").replaceAll(" ", "");
       if(!host.isEmpty()){
          EResult hostExist = _accessConsole.hostExists(logicContext, host);
          if(hostExist == EResult.Success){
@@ -111,8 +111,8 @@ public class FAccessAction
    public String update(IWebContext context,
                         ILogicContext logicContext,
                         FAccessPage page){
-      String host = context.parameter("host_address");
-      String passport = context.parameter("passport");
+      String host = context.parameter("host_address").replaceAll(" ", "");
+      String passport = context.parameter("passport").replaceAll(" ", "");
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
       unit.setHostAddress(host);
