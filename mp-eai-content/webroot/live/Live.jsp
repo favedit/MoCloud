@@ -12,7 +12,6 @@
    <SCRIPT language='javascript' src='/ajs/context_cn.js'></SCRIPT>
    <SCRIPT>
       var g_loadingHandle;
-
       function doLoading() {
          var htmlBody = document.body;
          htmlBody.style.backgroundImage = 'url(/ars/eai/background.jpg)';
@@ -28,7 +27,6 @@
             }
          }, 80);
       }
-
       function onDeviceError(event) {
          var hLoading = document.getElementById("id_loading")
          document.body.removeChild(hLoading);
@@ -37,7 +35,6 @@
          document.getElementById("error_img").src = "/ars/eai/loading/error.png";
          MO.Window.Html.visibleSet(hError, true);
       }
-
       function oniOSStart(event) {
           var hLoading = document.getElementById("id_ios_play")
           document.body.removeChild(hLoading);
@@ -54,11 +51,9 @@
           liveScene._investment._autios[4].play();
           liveScene._investment._autios[4].pause();
       }
-
       function onLoaded(event) {
          clearInterval(g_loadingHandle);
       }
-
       function onLoad() {
          // 设置变量
          MO.initialize();
@@ -77,47 +72,43 @@
       }
    </SCRIPT>
 </HEAD>
-
-<body scroll='no' style='position:relative;overflow:hidden;background-color:#000000;background-size:100% 100%;' onload='onLoad()'>
-   <table id='id_ios_play' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background-size:100% 100%;display:none' onclick="oniOSStart()">
-       <tr>
-           <td align='center'>
-               <div id="ios_play_img">
-                   <img src='..//ars/eai/player.png'>
-               </div>
-           </td>
-       </tr>
-   </table>
-   <table id='id_loading' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background:url("/ars/eai/loading/background.jpg");background-size:100% 100%;'>
-      <tr>
-         <td align='center'>
-            <div id="loading_img">
-               <div id="loading_img_div" style="position:relative;width:128px;">
-                  <img style="position:absolute;opacity:0.8;width:127;height:127;" src="/ars/eai/loading/loading7.png">
-                  <img style="position:absolute;opacity:0.7;width:127;height:127;" src="/ars/eai/loading/loading6.png">
-                  <img style="position:absolute;opacity:0.6;width:127;height:127;" src="/ars/eai/loading/loading5.png">
-                  <img style="position:absolute;opacity:0.5;width:127;height:127;" src="/ars/eai/loading/loading4.png">
-                  <img style="position:absolute;opacity:0.4;width:127;height:127;" src="/ars/eai/loading/loading3.png">
-                  <img style="position:absolute;opacity:0.3;width:127;height:127;" src="/ars/eai/loading/loading2.png">
-                  <img style="position:absolute;opacity:0.2;width:127;height:127;" src="/ars/eai/loading/loading1.png">
-                  <img style="opacity:0.1;width:127;height:127;" src="/ars/eai/loading/loading8.png">
-               </div>
-               <img src='/ars/eai/loading/loading.png' style='padding-top:30px;padding-left:20px;width:196;height:36'>
-            </div>
-         </td>
-      </tr>
-   </table>
-   <table id='id_error' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background-size:100% 100%;display:none;'>
-      <tr>
-         <td align='center'>
-            <img style="width:100%;" id="error_img">
-            <br>
-         </td>
-      </tr>
-   </table>
-   <script>
-      doLoading();
-   </script>
-</body>
-
-</html>
+<BODY scroll='no' style='position:relative;overflow:hidden;background-color:#000000;background-size:100% 100%;' onload='onLoad()'>
+   <TABLE id='id_ios_play' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background-size:100% 100%;display:none' onclick="oniOSStart()">
+       <TR>
+           <TD align='center'>
+               <DIV id="ios_play_img">
+                   <IMG src='/ars/eai/player.png'>
+               </DIV>
+           </TD>
+       </TR>
+   </TABLE>
+   <TABLE id='id_loading' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background:url("/ars/eai/loading/background.jpg");background-size:100% 100%;'>
+      <TR>
+         <TD align='center'>
+            <DIV id="loading_img">
+               <DIV id="loading_img_div" style="position:relative;width:128px;">
+                  <IMG style="position:absolute;opacity:0.8;width:127;height:127;" src="/ars/eai/loading/loading7.png">
+                  <IMG style="position:absolute;opacity:0.7;width:127;height:127;" src="/ars/eai/loading/loading6.png">
+                  <IMG style="position:absolute;opacity:0.6;width:127;height:127;" src="/ars/eai/loading/loading5.png">
+                  <IMG style="position:absolute;opacity:0.5;width:127;height:127;" src="/ars/eai/loading/loading4.png">
+                  <IMG style="position:absolute;opacity:0.4;width:127;height:127;" src="/ars/eai/loading/loading3.png">
+                  <IMG style="position:absolute;opacity:0.3;width:127;height:127;" src="/ars/eai/loading/loading2.png">
+                  <IMG style="position:absolute;opacity:0.2;width:127;height:127;" src="/ars/eai/loading/loading1.png">
+                  <IMG style="opacity:0.1;width:127;height:127;" src="/ars/eai/loading/loading8.png">
+               </DIV>
+               <IMG src='/ars/eai/loading/loading.png' style='padding-top:30px;padding-left:20px;width:196;height:36'>
+            </DIV>
+         </TD>
+      </TR>
+   </TABLE>
+   <TABLE id='id_error' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background-size:100% 100%;display:none;'>
+      <TR>
+         <TD align='center'>
+            <IMG style="width:100%;" id="error_img">
+            <BR>
+         </TD>
+      </TR>
+   </TABLE>
+   <SCRIPT>doLoading();</SCRIPT>
+</BODY>
+</HTML>

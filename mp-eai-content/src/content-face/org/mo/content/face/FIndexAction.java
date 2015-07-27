@@ -1,7 +1,5 @@
 package org.mo.content.face;
 
-import org.mo.content.core.person.IAccountConsole;
-import org.mo.core.aop.face.ALink;
 import org.mo.eng.data.common.ISqlContext;
 
 //============================================================
@@ -14,10 +12,6 @@ public class FIndexAction
       implements
          IIndexAction
 {
-   //用户控制台
-   @ALink
-   protected IAccountConsole _personConsole;
-
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -27,7 +21,6 @@ public class FIndexAction
    @Override
    public String construct(ISqlContext context,
                            FIndexPage areaPage){
-      System.out.println("------------eai----------------");
       return "Index";
    }
 }
