@@ -6,6 +6,7 @@
    <META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
    <META name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
    <LINK rel="stylesheet" href='/acs/mobile.css' type="text/css" media="all" />
+   <SCRIPT language='javascript' src='/ajs/md5.js'></SCRIPT>
    <SCRIPT language='javascript' src='/ajs/lzma.js'></SCRIPT>
    <SCRIPT language='javascript' src='/ajs/me.js'></SCRIPT>
    <SCRIPT language='javascript' src='/ajs/eai.js'></SCRIPT>

@@ -8,6 +8,7 @@ import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.data.logic.ILogicContext;
@@ -39,6 +40,9 @@ public class FDataPersonAccessAuthorityConsole
    @Override
    public FDataPersonAccessAuthority findByHostAddress(ILogicContext logicContext,
                                                        String hostAddress){
+      if(RString.isEmpty(hostAddress)){
+         return null;
+      }
       String whereSql = FDataPersonAccessAuthorityLogic.HOST_ADDRESS + "='" + RSql.formatValue(hostAddress) + "'";
       FDataPersonAccessAuthority authority = search(logicContext, whereSql);
       return authority;

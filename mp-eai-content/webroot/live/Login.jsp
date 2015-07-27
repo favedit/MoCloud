@@ -14,7 +14,7 @@ function onLogin(){
 </SCRIPT>
 </HEAD>
 <BODY scroll='no' style='overflow:hidden;'>
-<FORM name='frmMain' style="height:100%;" method='post' action='Live.wa?do=login'>
+<FORM name='frmMain' style="height:100%;" method='post' action='Chart.wa?do=login'>
    <div id='id_login' class="bg">
          <div class="login_box">
             <h1>钰诚-e租宝-全球实时投资数据展示中心中国区</h1>

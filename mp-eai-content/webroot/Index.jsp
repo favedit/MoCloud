@@ -11,7 +11,7 @@ function onLoad(){
    var application = MO.Desktop.initialize(MO.FTestApplication);
    application.setup(document.body);
    // 页面跳转
-   window.open('/live/Chart.wa', '_self');
+   window.location = '/live/Chart.wa';
 }
 </SCRIPT>
 <BODY style='background-color:#000000;' onload='onLoad()'>
