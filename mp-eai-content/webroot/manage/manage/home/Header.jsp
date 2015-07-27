@@ -18,9 +18,9 @@
             parent.parent.location.href = "/manage/home/Frame.wp";
          }
 
-         if ($('#passport').val() == "admin") {
-            $("#databaseLI").show();
-         }
+//         if ($('#passport').val() == "admin") {
+//            $("#databaseLI").show();
+//         }
       });
 
       function loginout() {
