@@ -1,4 +1,4 @@
-package org.mo.content.face.chart;
+package org.mo.content.face.live;
 
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
@@ -10,7 +10,7 @@ import org.mo.web.protocol.context.IWebContext;
 // @author maocy
 // @version 150724
 //============================================================
-public interface ILiveAction
+public interface IChartAction
 {
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -21,7 +21,7 @@ public interface ILiveAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
-                    @AContainer(name = "page") FLivePage page);
+                    @AContainer(name = "page") FChartPage page);
 
    //============================================================
    // <T>登录逻辑处理。</T>
@@ -32,5 +32,5 @@ public interface ILiveAction
    //============================================================
    String login(IWebContext context,
                 ILogicContext logicContext,
-                @AContainer(name = "page", fill = true) FLivePage page);
+                @AContainer(name = "page", fill = true) FChartPage page);
 }

@@ -1,4 +1,4 @@
-package org.mo.content.face.chart;
+package org.mo.content.face.live;
 
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
@@ -17,9 +17,9 @@ import org.mo.web.protocol.context.IWebContext;
 // @author maocy
 // @version 150427
 //============================================================
-public class FLiveAction
+public class FChartAction
       implements
-         ILiveAction
+         IChartAction
 {
    @ALink
    protected IDataPersonAccessAuthorityConsole _personAccessAuthorityConsole;
@@ -37,7 +37,7 @@ public class FLiveAction
    @Override
    public String construct(IWebContext context,
                            ILogicContext logicContext,
-                           FLivePage page){
+                           FChartPage page){
       // 清空参数
       page.setPassport(null);
       page.setPassword(null);
@@ -77,7 +77,7 @@ public class FLiveAction
    @Override
    public String login(IWebContext context,
                        ILogicContext logicContext,
-                       FLivePage page){
+                       FChartPage page){
       // 获得参数
       String passport = page.passport();
       String password = page.password();

@@ -1,11 +1,11 @@
-package org.mo.content.face.chart;
+package org.mo.content.face.live;
 
 import org.mo.com.lang.FObjectId;
 
 //============================================================
 // <P>页面容器</P>
 //============================================================
-public class FLivePage
+public class FChartPage
       extends FObjectId
 {
    // 主机地址
