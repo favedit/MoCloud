@@ -107,6 +107,9 @@ public class FChartAction
          case EGcAuthorityResult.Success:
             logggerMessage = "登录成功。";
             break;
+         case EGcAuthorityResult.HostAddressInvalid:
+            logggerMessage = "IP不在白名单中。";
+            break;
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);

@@ -16,5 +16,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-3-logic"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-4-web"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-5-cloud"/>
+	<classpathentry kind="lib" path="D:/Microbject/MoCloud/mo-6-eai-content/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="D:/Microbject/MoCloud/mo-6-eai-content/lib/ycjt3des-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

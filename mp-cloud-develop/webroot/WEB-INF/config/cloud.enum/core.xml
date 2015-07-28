@@ -37,5 +37,6 @@
     <Item _uuid="2866c487-ace4-48ea-b437-78a4e42b6806" name="PasswordInvalid" label="密码错误" is_valid="Y" note="M#" />
     <Item _uuid="0473899f-1bdb-41d5-9538-297a7f368974" name="DateInvalid" label="日期错误" is_valid="Y" note="M#" />
     <Item _uuid="2d2886e4-b3a8-42f8-9bed-6140d9d29051" name="Success" label="成功" is_valid="Y" note="M#" />
+    <Item _uuid="9950c964-068f-4d30-aa05-80397d562334" name="HostAddressInvalid" label="ip地址不在白名单中" is_valid="Y" note="M#" />
   </Enum>
 </Group>

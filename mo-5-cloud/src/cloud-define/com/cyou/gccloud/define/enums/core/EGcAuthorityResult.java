@@ -60,6 +60,15 @@ public class EGcAuthorityResult
    // 成功标签
    public final static String SuccessLabel = "成功";
 
+   // ip地址不在白名单中
+   public final static int HostAddressInvalid = 5;
+
+   // ip地址不在白名单中字符串
+   public final static String HostAddressInvalidString = "HostAddressInvalid";
+
+   // ip地址不在白名单中标签
+   public final static String HostAddressInvalidLabel = "ip地址不在白名单中";
+
    //============================================================
    // <T>是否含有指定内容</T>
    //
@@ -100,6 +109,8 @@ public class EGcAuthorityResult
             return DateInvalidString;
          case Success:
             return SuccessString;
+         case HostAddressInvalid:
+            return HostAddressInvalidString;
          default:
             return "Unknown";
       }
@@ -123,6 +134,8 @@ public class EGcAuthorityResult
             return DateInvalidLabel;
          case Success:
             return SuccessLabel;
+         case HostAddressInvalid:
+            return HostAddressInvalidLabel;
          default:
             return "Unknown";
       }
@@ -146,6 +159,8 @@ public class EGcAuthorityResult
             return DateInvalid;
          case SuccessString:
             return Success;
+         case HostAddressInvalidString:
+            return HostAddressInvalid;
          default:
             return 0;
       }

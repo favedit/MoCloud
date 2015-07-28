@@ -77,6 +77,17 @@ public class FDataPersonAccessAuthorityConsole
                       String hostAddress,
                       String passport,
                       String password){
+      //OA检测
+      String url = "http://10.21.0.141:6666/ycjt/auth/auth.jsp";
+      String oaLoginResult = ROALoginUnit.oaLogin(url, passport, password);
+      //3：用户名或密码错误，98：IP不在白名单中
+      if(oaLoginResult.equals("0")){
+         return EGcAuthorityResult.Success;
+      }else if(oaLoginResult.equals("3")){
+         return EGcAuthorityResult.PassportInvalid;
+      }else if(oaLoginResult.equals("98")){
+         return EGcAuthorityResult.HostAddressInvalid;
+      }
       // 根据主机地址检查设置
       FDataPersonAccessAuthority hostAuthority = findByHostAddress(logicContext, hostAddress);
       if(hostAuthority != null){
