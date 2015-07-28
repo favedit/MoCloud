@@ -16,33 +16,33 @@
          //	 alert("连接超时！");
          //	 parent.parent.location.href="/cloud/home/Frame.wa";	
          //}
-         function checkHtml() {
-            var menu = replaceNbsp($("#one").children(".sub-menu").html());
-            if (menu == '') {
-               $("#one").hide();
-            }
-            menu = replaceNbsp($("#two").children(".sub-menu").html());
-            if (menu == '') {
-               $("#two").hide();
-            }
-            menu = replaceNbsp($("#three").children(".sub-menu").html());
-            if (menu == '') {
-               $("#three").hide();
-            }
-            menu = replaceNbsp($("#four").children(".sub-menu").html());
-            if (menu == '') {
-               $("#four").hide();
-            }
-            menu = replaceNbsp($("#five").children(".sub-menu").html());
-            if (menu == '') {
-               $("#five").hide();
-            }
-            menu = replaceNbsp($("#six").children(".sub-menu").html());
-            if (menu == '') {
-               $("#six").hide();
-            }
-            getAllAuditNumber();
-         }
+//         function checkHtml() {
+//            var menu = replaceNbsp($("#one").children(".sub-menu").html());
+//            if (menu == '') {
+//               $("#one").hide();
+//            }
+//            menu = replaceNbsp($("#two").children(".sub-menu").html());
+//            if (menu == '') {
+//               $("#two").hide();
+//            }
+//            menu = replaceNbsp($("#three").children(".sub-menu").html());
+//            if (menu == '') {
+//               $("#three").hide();
+//            }
+//            menu = replaceNbsp($("#four").children(".sub-menu").html());
+//            if (menu == '') {
+//               $("#four").hide();
+//            }
+//            menu = replaceNbsp($("#five").children(".sub-menu").html());
+//            if (menu == '') {
+//               $("#five").hide();
+//            }
+//            menu = replaceNbsp($("#six").children(".sub-menu").html());
+//            if (menu == '') {
+//               $("#six").hide();
+//            }
+//            getAllAuditNumber();
+//         }
          //setInterval(function() { 
          //	getAllAuditNumber();
          //},1000*60);
@@ -76,7 +76,7 @@
       </script>
    </head>
 
-   <body bgcolor="#198bc9" onLoad="checkHtml()">
+   <body bgcolor="#198bc9">
       <div id="cy_left">
          <!-- 导航 开始 -->
          <ul class="accordion">

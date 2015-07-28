@@ -19,6 +19,7 @@ function imgNotfind(){
     img.src="/cloud/images/noPicture.gif"; 
 	img.onerror=null; // 防止noPicture.gif不存在或者网络环境太循环出发onerror事件
 }
+
 function checkNumberBox(){
 		var txts=$(".checkNBox");
 		for(var i=0;i<txts.length;i++){
@@ -102,24 +103,6 @@ function insert_editAndDelButton(value,row,index){
 	var del='<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="del(\''+row.ouid+'\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-cancel l-btn-icon-left">删除</span></span></a>';
 	return edit +"&nbsp;|&nbsp;"+ del;
 }
-
-function insert_chapter_editAndDelButton(value,row,index){
-	var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="editChapter(\''+row.ouid+'\')"><span class="l-btn-text icon-edit l-btn-icon-left">编辑</span></span></a>';
-	var del='<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="delChapter(\''+row.lessonId+'\',\''+row.ouid+'\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-cancel l-btn-icon-left">删除</span></span></a>';
-	return edit +"&nbsp;|&nbsp;"+ del;
-}
-
-function insert_descriptionInfoButton(value,row,index){
-  	var phone = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left"sizset="false" onClick="phoneInfo(\''+row.ouid+'\')"><span class="l-btn-text icon-search l-btn-icon-left">手机</span></span></a>';
-	return phone;
-
-}
-function insert_lessonDescription(value,row,index){
-  	var phone = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left"sizset="false" onClick="phoneInfo(\''+row.lessonId+'\')"><span class="l-btn-text icon-search l-btn-icon-left">手机</span></span></a>';
-	return phone;
-
-}
-
 function insert_admin_editButton(value,row,index){
 	var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="edit(\''+row.ouid+'\')"><span class="l-btn-text icon-edit l-btn-icon-left">编辑</span></span></a>';
 	if(row.passport != 'admin'){

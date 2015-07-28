@@ -1,5 +1,6 @@
 package org.mo.content.face.manage.person.user;
 
+import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
@@ -24,6 +25,11 @@ public interface IAccessAction
    String construct(IWebContext context,
                     ILogicContext logicContext,
                     @AContainer(name = "page") FAccessPage page);
+
+   String select(IWebContext context,
+                 ILogicContext logicContext,
+                 @AContainer(name = "page") FAccessPage page,
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
    // <T></T>

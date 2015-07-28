@@ -1,12 +1,14 @@
 package org.mo.content.face.manage.device;
 
-import org.mo.content.core.manage.device.IDeviceBrowserConsole;
-
 import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
+import org.mo.content.core.manage.device.IDeviceBrowserConsole;
 import org.mo.content.face.base.FBasePage;
+import org.mo.content.face.manage.home.FFrameAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -22,6 +24,8 @@ public class FDeviceAction
       implements
          IDeviceAction
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FFrameAction.class);
 
    //用户控制台
    @ALink
@@ -37,6 +41,11 @@ public class FDeviceAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
+      _logger.debug(this, "Construct", "Construct begin. (user={1})", basePage.user());
+      //      if(basePage.user() == null){
+      //         return "/manage/home/Frame.wp";
+      //      }
+
       return "/manage/manage/device/BrowserAccessList";
    }
 

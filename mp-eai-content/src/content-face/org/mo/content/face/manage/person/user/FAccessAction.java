@@ -3,7 +3,11 @@ package org.mo.content.face.manage.person.user;
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.type.TDateTime;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.person.user.IAccessConsole;
+import org.mo.content.face.base.FBasePage;
+import org.mo.content.face.manage.home.FFrameAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -19,6 +23,9 @@ public class FAccessAction
       implements
          IAccessAction
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FFrameAction.class);
+
    //用户控制台
    @ALink
    protected IAccessConsole _accessConsole;
@@ -35,10 +42,27 @@ public class FAccessAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FAccessPage page){
-      System.out.println("------------eai----------------construct");
-      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
-      page.setUnitList(unitlist);
+      //      System.out.println("------------eai----------------construct");
+      //      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
+      //      page.setUnitList(unitlist);
       return "/manage/manage/person/user/AccessList";
+   }
+
+   @Override
+   public String select(IWebContext context,
+                        ILogicContext logicContext,
+                        FAccessPage page,
+                        FBasePage basePage){
+      _logger.debug(this, "LoginUser", "LoginUser begin. (page={1})", context.parameter("page"));
+      if(null != context.parameter("page")){
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      }else{
+         page.setPageCurrent(0);
+      }
+      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext, page.pageCurrent() - 1);
+      basePage.setJson(unitlist.toJsonListString());
+      return "/manage/common/ajax";
    }
 
    @Override
@@ -155,4 +179,5 @@ public class FAccessAction
       page.setResult("/manage/person/user/Access.wa");
       return "/manage/manage/person/user/Success";
    }
+
 }

@@ -1,9 +1,17 @@
 <%@ include file='/apl/public.inc' %>
+   <jh:define source="&basePage.user" alias="base"></jh:define>
    <HTML>
+
    <HEAD>
+      <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <script>
          $(function() {
+            var flag = "<jh:write source='&base.ouid' />";
+            if (flag == "") {
+               alert("连接超时！");
+               parent.parent.location.href = "/manage/home/Frame.wp";
+            }
             doSubmit(null);
             var pager = $('#browserAccess').datagrid().datagrid('getPager');
             pager.pagination({
@@ -47,23 +55,20 @@
             var edit = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="rowInfo(\'' + row.ouid + '\')"><span class="l-btn-text icon-tip l-btn-icon-left">详情</span></span></a>';
             return edit;
          }
-         function rowInfo(id){
-            location.href = "/manage/device/Device.wa?do=updateBefore&ouid="+id+"&date="+new Date().valueOf();
+
+         function rowInfo(id) {
+            location.href = "/manage/device/Device.wa?do=updateBefore&ouid=" + id + "&date=" + new Date().valueOf();
          }
       </script>
    </HEAD>
 
    <body>
-      <div id="cy_right" style="">
+      <div id="cy_right" style="width:100%">
          <div class="right_title">
             <span>设备信息</span>
          </div>
          <div class="btn_bar">
-            <div class="nav_btn">
-               <button onclick="javascript:location.href='/manage/device/Device.wa'" value="test"/>设备信息
-               <button onclick="javascript:location.href='/manage/logger/user/Access.wa'" value="test"/>用户日志
-               <button onclick="javascript:location.href='/manage/person/user/Access.wa'" value="test"/>白名单
-            </div>
+            <div class="nav_btn"></div>
             <div class="nav_search"></div>
          </div>
       </div>

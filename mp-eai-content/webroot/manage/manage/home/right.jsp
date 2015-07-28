@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>17173网络学院后台管理系统</title>
+    <title>后台管理系统</title>
 	<link rel="stylesheet" href="/manage/acs/style.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/manage/acs/main.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/manage/acs/lrtk.css" type="text/css" media="screen" />

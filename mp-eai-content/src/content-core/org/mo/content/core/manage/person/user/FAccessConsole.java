@@ -15,6 +15,8 @@ public class FAccessConsole
       implements
          IAccessConsole
 {
+   // 每页条数
+   static final int _pageSize = 20;
 
    //============================================================
    // <T>构造设备控制台。</T>
@@ -24,10 +26,13 @@ public class FAccessConsole
    }
 
    @Override
-   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext){
-
-      FDataPersonAccessAuthorityLogic logic = new FDataPersonAccessAuthorityLogic(logicContext);
-      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetchClass(FDataPersonAccessAuthorityUnit.class, null);
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext,
+                                                               int pageNum){
+      if(0 > pageNum){
+         pageNum = 0;
+      }
+      FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
+      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetchClass(FDataPersonAccessAuthorityUnit.class, null, null, _pageSize, pageNum);
       return unitlist;
    }
 
@@ -38,7 +43,7 @@ public class FAccessConsole
       if(!host.isEmpty()){
          whereSql.append(FDataPersonAccessAuthorityLogic.HOST_ADDRESS).append(" = '").append(host).append("'");
       }
-      FDataPersonAccessAuthorityLogic logic = new FDataPersonAccessAuthorityLogic(logicContext);
+      FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetch(whereSql);
       return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
    }
@@ -50,7 +55,7 @@ public class FAccessConsole
       if(!passport.isEmpty()){
          whereSql.append(FDataPersonAccessAuthorityLogic.PASSPORT).append(" = '").append(passport).append("'");
       }
-      FDataPersonAccessAuthorityLogic logic = new FDataPersonAccessAuthorityLogic(logicContext);
+      FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
       FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetch(whereSql);
       return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
    }

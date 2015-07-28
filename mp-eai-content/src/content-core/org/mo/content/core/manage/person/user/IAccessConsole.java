@@ -14,7 +14,8 @@ public interface IAccessConsole
          IAbstractLogicUnitConsole<FDataPersonAccessAuthorityUnit>
 {
 
-   FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext);
+   FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext,
+                                                        int pageNum);
 
    EResult hostExists(ILogicContext logicContext,
                       String host);

@@ -56,7 +56,7 @@ public class FBasePage
       this._description = _description;
    }
 
-   public FDataPersonUserUnit getUser(){
+   public FDataPersonUserUnit user(){
       return user;
    }
 

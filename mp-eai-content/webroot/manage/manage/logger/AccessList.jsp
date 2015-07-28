@@ -2,6 +2,7 @@
    <HTML>
 
    <HEAD>
+      <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <script>
          $(function() {
@@ -47,16 +48,12 @@
    </HEAD>
 
    <body>
-      <div id="cy_right" style="">
+      <div id="cy_right">
          <div class="right_title">
             <span>用户登录信息表</span>
          </div>
          <div class="btn_bar">
-            <div class="nav_btn">
-               <button onclick="javascript:location.href='/manage/device/Device.wa'" value="test" />设备信息
-               <button onclick="javascript:location.href='/manage/logger/user/Access.wa'" value="test" />用户日志
-               <button onclick="javascript:location.href='/manage/person/user/Access.wa'" value="test" />白名单
-            </div>
+            <div class="nav_btn"></div>
             <div class="nav_search"></div>
          </div>
       </div>
@@ -69,7 +66,6 @@
                <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="100px">logicMessage</th>
                <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="300px">ip地址</th>
                <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">账号</th>
-               <th data-options="field:'password',halign:'center',align:'left',sortable:true" width="100px">密码</th>
                <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">浏览器uri</th>
                <th data-options="field:'pageInfo',halign:'center',align:'left'" width="300px">页面信息</th>
             </tr>

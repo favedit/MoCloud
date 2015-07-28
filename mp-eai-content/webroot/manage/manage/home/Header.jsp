@@ -40,7 +40,7 @@
          <div id="top_left">
             <div class="welcom">
                欢迎 <span style="color:#F90"><jh:write source="&base.label"/></span> 登录 &nbsp;&nbsp;&nbsp;
-               <a href="/cloud/manage/home/Frame.wa?do=changePwdPrepare" target="right">[修改密码]</a>&nbsp;&nbsp;&nbsp;
+<!--               <a href="/cloud/manage/home/Frame.wa?do=changePwdPrepare" target="right">[修改密码]</a>&nbsp;&nbsp;&nbsp;-->
                <!--            <span style="color:#666">V.<jh:write source="&basePage.version"/></span>-->
             </div>
          </div>
@@ -49,6 +49,7 @@
                <li class="tb_01">
                   <a id="product" class="btn1" href="/manage/home/Header.wa?do=productLeft" target="left">产品管理</a>
                </li>
+<!--
                <li class="tb_02">
                   <a class="btn2" href="/cloud/manage/home/Header.wa?do=analysisLeft" target="left">产品分析</a>
                </li>
@@ -58,6 +59,7 @@
                <li class="tb_04" id="databaseLI" hidden="true">
                   <a class="btn2" href="/cloud/manage/home/Header.wa?do=databaseLeft" target="left">数据管理</a>
                </li>
+-->
             </ul>
             <div class="closebtn">
                <a href="#" onClick="loginout();"></a>
