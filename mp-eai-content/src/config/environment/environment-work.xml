@@ -49,8 +49,8 @@
          class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
          scope = 'global' >
       <Property name='enable'>N</Property>
-      <Property name='code'>CC</Property>
-      <Property name='servers'>10.30.101.11:11311</Property>
+      <Property name='code'>WK</Property>
+      <Property name='servers'>10.21.0.250:11211</Property>
       <Initialize name='initialize'/>
    </Component>
    

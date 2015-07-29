@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid2="31dd1764-7ed9-44dd-9b8d-4c1021b2b15d" name="data.person.user" label="M#12cn16人员用户信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User" data_name="DT_PSN_USER" data_alias="DT_PSN_USR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid2="e048fe10-881c-4cdb-b83d-538cbc74b6d4" name="passport" label="M#12cn12帐号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+  <FieldString _uuid2="6c2509ae-7d63-43d1-a54b-6944f81ffc8e" name="password" label="M#12cn12密码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="40" />
+  <FieldString _uuid2="f0e2b945-2950-4200-aa8f-b1fc8635aa37" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid2="8df535cf-7dcb-4faf-acd7-a7d8f0f09537" name="label" label="M#12cn14真实名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldString _uuid2="d022bf9d-b971-4b94-87a1-a65737343405" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+  <FieldString _uuid2="a6439357-3de7-4fe6-aed4-3f8032158ace" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldContent _uuid2="c6dfe0dc-e9db-4ce6-90ea-9fcad0a105ba" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldString _uuid2="b7b85bbe-cfa2-44d5-930f-fb150cc84cd4" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid2="92544e34-7cb5-4450-8bfa-116f5956bb37" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

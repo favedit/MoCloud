@@ -64,6 +64,8 @@ public class FChartAction
             logger.setHostAddress(hostAddress);
             logger.setLogicMessage("主机地址为白名单。");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
+            // 设置服务主机
+            page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
             return "Live";
          }
       }

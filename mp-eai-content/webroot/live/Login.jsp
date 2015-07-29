@@ -17,16 +17,16 @@ function onLogin(){
 <FORM name='frmMain' style="height:100%;" method='post' action='Chart.wa?do=login'>
    <div id='id_login' class="bg">
          <div class="login_box">
-            <h1>钰诚-e租宝-全球实时投资数据展示中心中国区</h1>
-            <p class="test" style="padding-top:20px;">为保证全球实时投资数据展示中心展示的安全性，</p>
-            <p class="test">我们需要您输入用户名和密码，谢谢。</p>
+            <h1>钰诚-e租宝<BR>全球实时投资数据展示中心(中国)</h1>
+            <p class="test" style="padding-top:20px;">为保证实时数据的安全性，</p>
+            <p class="test">我们需要您输入用户名和密码。</p>
             <p class="error"><jh:write source='&page.message' /></p>
             <div class="container">
                <p><span>用户名：</span><input type="text" name="passport" id="passport" placeholder="" /></p>
                <p><span>密码：</span><input type="password" id="password" name="password" /></p>
                <p style="background:none;"><input style="height: 46px;" type="button" id="btn" value=""/></p>
             </div>
-            <p class="prompt" style="padding-top: 25px;">如果需要使用，请联系 钰诚智慧企业推进中心</p>
+            <p class="prompt" style="padding-top: 15px;">如果需要使用，请联系【钰诚智慧企业推进中心】</p>
             <p class="prompt">联系电话：010-65499299</p>
          </div>
    </div>
