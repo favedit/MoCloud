@@ -1,5 +1,4 @@
 <%@ include file='/apl/public.inc' %>
-   <jh:define source="&basePage.user" alias="base"></jh:define>
    <HTML>
 
    <HEAD>
@@ -7,11 +6,6 @@
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <script>
          $(function() {
-            var flag = "<jh:write source='&base.ouid' />";
-            if (flag == "") {
-               alert("连接超时！");
-               parent.parent.location.href = "/manage/home/Frame.wp";
-            }
             doSubmit(null);
             var pager = $('#browserAccess').datagrid().datagrid('getPager');
             pager.pagination({

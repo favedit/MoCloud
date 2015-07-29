@@ -110,7 +110,7 @@
                   <tr>
                      <td align="left">备注</td>
                      <td align="left">
-                        <textarea name="note" cols="60" rows="10"><jh:write source='&unit.note' /></textarea>
+                        <textarea name="note" cols="60" rows="10"><jh:write source='&unit.note' format="text" /></textarea>
                      </td>
                   </tr>
                </table>

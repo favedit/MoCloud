@@ -47,7 +47,6 @@ public class FDeviceBrowserConsole
       }
       FDataInfoDeviceBrowserLogic logic = new FDataInfoDeviceBrowserLogic(logicContext);
       FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = logic.fetchClass(FDataInfoDeviceBrowserUnit.class, null, null, _pageSize, pageNum);
-
       return unitlist;
    }
 

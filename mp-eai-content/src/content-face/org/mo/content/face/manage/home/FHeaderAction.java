@@ -38,6 +38,7 @@ public class FHeaderAction
                            FBasePage basePage){
       //      _logger.debug(this, "construct", "construct begin. (currentVersion={1})", _versonConsole.currentVersion());
       //      basePage.setVersion(_versonConsole.currentVersion());
+
       return "#/manage/home/Header";
    }
 

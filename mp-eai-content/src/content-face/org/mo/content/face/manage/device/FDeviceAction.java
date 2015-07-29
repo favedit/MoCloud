@@ -44,8 +44,8 @@ public class FDeviceAction
       _logger.debug(this, "Construct", "Construct begin. (user={1})", basePage.user());
       //      if(basePage.user() == null){
       //         return "/manage/home/Frame.wp";
-      //      }
-
+      //            }
+      //      System.out.println(basePage.user().ouid() + "---------------");
       return "/manage/manage/device/BrowserAccessList";
    }
 
