@@ -20,6 +20,8 @@
 /mp-cloud-storage/webroot/WEB-INF/lib
 /mp-cloud-logger/webroot/WEB-INF/classes
 /mp-cloud-logger/webroot/WEB-INF/lib
+/mp-develop-logger/webroot/WEB-INF/classes
+/mp-develop-logger/webroot/WEB-INF/lib
 /mp-eai-content/webroot/WEB-INF/classes
 /mp-eai-content/webroot/WEB-INF/lib
 /mp-eai-batch/bin
@@ -28,6 +30,7 @@
 /mt-server/tomcat-cloud.content/logs
 /mt-server/tomcat-cloud.storage/logs
 /mt-server/tomcat-cloud.logger/logs
+/mt-server/tomcat-develop.logger/logs
 /mt-server/tomcat-eai.content/logs
 /mt-database
 /mt-storage

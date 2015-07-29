@@ -3547,6 +3547,7 @@ MO.FGuiLiveTable = function FGuiLiveTable(o) {
    o._columnWidths         = null;
    o._tableCount           = 0;
    o._entities             = null;
+   o._lineLimit            = 0;
    o._lineScroll           = 0;
    o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
    o.onImageLoad           = MO.FGuiLiveTable_onImageLoad;
@@ -3639,12 +3640,14 @@ MO.FGuiLiveTable_oeUpdate = function FGuiLiveTable_oeUpdate(event){
    o.__base.FGuiControl.oeUpdate.call(o, event);
    if(event.isBefore()){
       if(o._lineScroll < 0){
-         o._lineScroll++;
-         if(o._lineScroll == 0){
+         var scrollStep = Math.max(parseInt(o._lineScroll / o._rowHeight), 1)
+         o._lineScroll += scrollStep;
+         if(o._lineScroll >= 0){
             var entities = o._entities;
             if(entities.count() > o._tableCount){
                entities.pop();
             }
+            o._lineScroll = 0;
          }
          o.dirty();
       }
@@ -3885,6 +3888,7 @@ MO.FEaiStatisticsInvestment = function FEaiStatisticsInvestment(o){
    o._dataTicker              = null;
    o._entityPool              = null;
    o._autios                  = null;
+   o._eventDataChanged        = null;
    o._listenersDataChanged    = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
    o.onInvestment             = MO.FEaiStatisticsInvestment_onInvestment;
    o.construct                = MO.FEaiStatisticsInvestment_construct;
@@ -3932,13 +3936,11 @@ MO.FEaiStatisticsInvestment_onInvestment = function FEaiStatisticsInvestment_onI
       }
    }
    o.calculateCurrent();
-   var dsEvent = MO.Memory.alloc(MO.SEvent);
-   dsEvent.sender = o;
+   var dsEvent = o._eventDataChanged;
    dsEvent.entity = null;
    dsEvent.rank = o._rankEntities;
    dsEvent.data = o._tableEntities;
    o.processDataChangedListener(dsEvent);
-   MO.Memory.free(dsEvent);
    var entityCount = entities.count();
    o._tableInterval = 1000 * 60 * o._intervalMinute / entityCount;
    o._tableTick = 0;
@@ -3955,6 +3957,7 @@ MO.FEaiStatisticsInvestment_construct = function FEaiStatisticsInvestment_constr
    o._dataTicker = new MO.TTicker(1000 * 60 * o._intervalMinute);
    o._rankEntities = new MO.TObjects();
    o._entityPool = MO.Class.create(MO.FObjectPool);
+   o._eventDataChanged = new MO.SEvent(o);
 }
 MO.FEaiStatisticsInvestment_allocEntity = function FEaiStatisticsInvestment_allocEntity(){
    var o = this;
@@ -4023,13 +4026,11 @@ MO.FEaiStatisticsInvestment_focusEntity = function FEaiStatisticsInvestment_focu
          autio.play(0);
       }
    }
-   var dsEvent = MO.Memory.alloc(MO.SEvent);
-   dsEvent.sender = o;
+   var dsEvent = o._eventDataChanged;
    dsEvent.entity = entity;
    dsEvent.rank = o._rankEntities;
    dsEvent.data = o._tableEntities;
    o.processDataChangedListener(dsEvent);
-   MO.Memory.free(dsEvent);
 }
 MO.FEaiStatisticsInvestment_process = function FEaiStatisticsInvestment_process(){
    var o = this;
@@ -4077,8 +4078,9 @@ MO.FEaiStatisticsInvestment_process = function FEaiStatisticsInvestment_process(
 }
 MO.FEaiStatisticsInvestment_dispose = function FEaiStatisticsInvestment_dispose(){
    var o = this;
-   o._entities = MO.RObject.dispose(o._entities);
-   o._dataTicker = MO.RObject.dispose(o._dataTicker);
+   o._entities = MO.Lang.Object.dispose(o._entities);
+   o._dataTicker = MO.Lang.Object.dispose(o._dataTicker);
+   o._eventDataChanged = MO.Lang.Object.dispose(o._eventDataChanged);
    o.__base.FObject.dispose.call(o);
 }
 with(MO){
@@ -5201,7 +5203,7 @@ MO.FEaiChartLiveScene_onProcess = function FEaiChartLiveScene_onProcess() {
    var o = this;
    o.__base.FEaiChartScene.onProcess.call(o);
    if(!o._statusStart){
-      if (MO.Window.Browser.isBrowser(MO.EBrowser.Safari)) {
+      if(MO.Window.Browser.capability().soundConfirm){
          var iosPlay = document.getElementById('id_ios_play');
          if (iosPlay) {
             MO.Window.Html.visibleSet(iosPlay, true);
@@ -5752,7 +5754,6 @@ MO.FEaiChartWorldScene_onProcess = function FEaiChartWorldScene_onProcess() {
    }
    if (o._playing) {
       if (!o._mapReady) {
-         o._guiManager.show();
          o._southSea.setVisible(false);
          var alphaAction = MO.Class.create(MO.FGuiActionAlpha);
          alphaAction.setAlphaBegin(0);
