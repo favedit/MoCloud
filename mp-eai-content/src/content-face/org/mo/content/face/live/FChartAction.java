@@ -92,8 +92,10 @@ public class FChartAction
       String message = null;
       String logggerMessage = null;
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
-      System.out.println(resultCd + "-------------------------------------");
       switch(resultCd){
+         case EGcAuthorityResult.Success:
+            logggerMessage = "登录成功。";
+            break;
          case EGcAuthorityResult.PassportInvalid:
             logggerMessage = "账号不存在。";
             message = "用户名或密码错误。";
@@ -105,11 +107,16 @@ public class FChartAction
          case EGcAuthorityResult.DateInvalid:
             message = "时间已失效。";
             break;
-         case EGcAuthorityResult.Success:
-            logggerMessage = "登录成功。";
+         case EGcAuthorityResult.OaSuccess:
+            logggerMessage = "OA登录成功。";
             break;
-         case EGcAuthorityResult.HostAddressInvalid:
-            logggerMessage = "IP不在白名单中。";
+         case EGcAuthorityResult.OaPasswordInvald:
+            logggerMessage = "OA用户或密码错误。";
+            message = "用户名或密码错误。";
+            break;
+         case EGcAuthorityResult.OaHostInvalid:
+            logggerMessage = "OA主机非法。";
+            message = "用户名或密码错误。";
             break;
       }
       // 增加日志

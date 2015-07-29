@@ -3,14 +3,14 @@ package org.mo.eai.logic.data.person.user;
 import com.ycjt.ead.ThreeDes;
 import java.util.Date;
 import org.mo.com.encoding.RMd5;
+import org.mo.com.lang.RString;
 import org.mo.com.net.http.FHttpConnection;
-//============================================================
-//<T>OA接口工具类。</T>
-//============================================================
 
+//============================================================
+// <T>OA接口工具类。</T>
+//============================================================
 public class ROALoginUnit
 {
-
    //============================================================
    // <T>请求OA登录接口</T>
    //
@@ -24,24 +24,18 @@ public class ROALoginUnit
                                 String password){
       //设置参数
       String key = "ycjt*&^%$3fyg";
-
       String encodePassport = ThreeDes.encode(key, passport);
       String encodePassword = ThreeDes.encode(key, password);
       String appDate = String.valueOf(new Date().getTime());
       String from = "H5";
       String validate = RMd5.encode(encodePassport + encodePassword + appDate + from + key);
-      //拼装参数
+      // 拼装参数
       String parem = "?username=" + encodePassport + "&pwd=" + encodePassword + "&appDate=" + appDate + "&from=" + from + "&validate=" + validate;
-      System.out.println("==========================OALogin  OAlogin  url. url=" + url + parem);
-      //发送http请求
-      FHttpConnection connection = new FHttpConnection(url + parem);
-      connection.connect();
-      connection.request().send();
-      connection.response().receive();
-      connection.disconnect();
-      //获取结果并关闭请求
-      String result = connection.response().content();
-      connection.close();
-      return result.trim();
+      // 发送请求
+      String result = null;
+      try(FHttpConnection connection = new FHttpConnection(url + parem)){
+         result = connection.fetch();
+      }
+      return RString.trim(result);
    }
 }

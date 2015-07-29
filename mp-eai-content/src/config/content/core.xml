@@ -13,4 +13,14 @@
       <Initialize name='initialize'/>
    </Component>
    
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole'
+         class = 'org.mo.eai.logic.data.person.user.FDataPersonAccessAuthorityConsole'
+         scope = 'global'>
+      <Property name='urlOaLogin'>"http://10.21.0.141:6666/ycjt/auth/auth.jsp"</Property>
+   </Component>
+   
 </Config>

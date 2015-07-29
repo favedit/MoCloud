@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityLogic;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityType;
-import java.io.UnsupportedEncodingException;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.FFatalError;
@@ -12,6 +11,7 @@ import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -23,6 +23,9 @@ public class FDataPersonAccessAuthorityConsole
          IDataPersonAccessAuthorityConsole
 {
    private static ILogger _logger = RLogger.find(FDataPersonAccessAuthorityConsole.class);
+
+   @AProperty
+   protected String _urlOaLogin;
 
    //============================================================
    // <T>构造数据人员访问授权信息控制台。</T>
@@ -78,19 +81,6 @@ public class FDataPersonAccessAuthorityConsole
                       String hostAddress,
                       String passport,
                       String password){
-      //OA检测
-      String url = "http://10.21.0.141:6666/ycjt/auth/auth.jsp";
-      System.out.println(passport + "----------------------");
-      String oaLoginResult = ROALoginUnit.oaLogin(url, passport, password);
-      _logger.debug(this, "doLogin", "OA login result. (result={1})", oaLoginResult);
-      //0：验证成功，1：签名不通过，3：用户名或密码错误，98：IP不在白名单中
-      if(oaLoginResult.equals("0")){
-         return EGcAuthorityResult.Success;
-      }else if(oaLoginResult.equals("3")){
-         return EGcAuthorityResult.PassportInvalid;
-      }else if(oaLoginResult.equals("98")){
-         return EGcAuthorityResult.HostAddressInvalid;
-      }
       // 根据主机地址检查设置
       FDataPersonAccessAuthority hostAuthority = findByHostAddress(logicContext, hostAddress);
       if(hostAuthority != null){
@@ -99,9 +89,21 @@ public class FDataPersonAccessAuthorityConsole
             return EGcAuthorityResult.Success;
          }
       }
+      //............................................................
       // 根据账号密码检查设置
       FDataPersonAccessAuthority passportAuthority = findByPassport(logicContext, passport);
       if(passportAuthority == null){
+         // OA用户检测
+         String oaLoginResult = ROALoginUnit.oaLogin(_urlOaLogin, passport, password);
+         _logger.debug(this, "doLogin", "OA login. (passport={1}, result={2})", passport, oaLoginResult);
+         // 0:验证成功，1:签名不通过，3:用户名或密码错误，98:IP不在白名单中
+         if(oaLoginResult.equals("0")){
+            return EGcAuthorityResult.OaSuccess;
+         }else if(oaLoginResult.equals("3")){
+            return EGcAuthorityResult.OaPasswordInvald;
+         }else if(oaLoginResult.equals("98")){
+            return EGcAuthorityResult.OaHostInvalid;
+         }
          return EGcAuthorityResult.PassportInvalid;
       }
       // 检查密码
@@ -129,12 +131,5 @@ public class FDataPersonAccessAuthorityConsole
       }else{
          throw new FFatalError("Invalid type.");
       }
-   }
-
-   public static void main(String[] args) throws UnsupportedEncodingException{
-      //http://10.21.0.141:6666/ycjt/auth/auth.jsp?username=MalbaEMOq7k=&pwd=/d9YFVc/3m0=&appDate=1438074458625&from=H5&validate=CD9C9CFFBF15A425DDA8821550316EA0
-      //http://10.21.0.141:6666/ycjt/auth/auth.jsp?username=WiIlo5U+hQw=&pwd=/d9YFVc/3m0=&appDate=1438074403112&from=H5&validate=45BB6136682E21876C2D3D92DCB3CCB1
-      //http://10.21.0.141:6666/ycjt/auth/auth.jsp?username=k14KIGhlPgc=&pwd=/d9YFVc/3m0=&appDate=1438078198255&from=H5&validate=DC6C1AAB5A82445BC071FAE6E555BCB7
-      //      String response = ROALoginUnit.oaLogin("http://10.21.0.141:6666/ycjt/auth/auth.jsp", "丁甸", "1");
    }
 }

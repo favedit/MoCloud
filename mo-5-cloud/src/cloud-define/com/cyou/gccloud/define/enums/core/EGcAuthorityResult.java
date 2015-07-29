@@ -24,8 +24,17 @@ public class EGcAuthorityResult
    // 未知标签
    public final static String UnknownLabel = "未知";
 
+   // 成功
+   public final static int Success = 1;
+
+   // 成功字符串
+   public final static String SuccessString = "Success";
+
+   // 成功标签
+   public final static String SuccessLabel = "成功";
+
    // 账号错误
-   public final static int PassportInvalid = 1;
+   public final static int PassportInvalid = 2;
 
    // 账号错误字符串
    public final static String PassportInvalidString = "PassportInvalid";
@@ -34,7 +43,7 @@ public class EGcAuthorityResult
    public final static String PassportInvalidLabel = "账号错误";
 
    // 密码错误
-   public final static int PasswordInvalid = 2;
+   public final static int PasswordInvalid = 3;
 
    // 密码错误字符串
    public final static String PasswordInvalidString = "PasswordInvalid";
@@ -43,7 +52,7 @@ public class EGcAuthorityResult
    public final static String PasswordInvalidLabel = "密码错误";
 
    // 日期错误
-   public final static int DateInvalid = 3;
+   public final static int DateInvalid = 4;
 
    // 日期错误字符串
    public final static String DateInvalidString = "DateInvalid";
@@ -51,23 +60,32 @@ public class EGcAuthorityResult
    // 日期错误标签
    public final static String DateInvalidLabel = "日期错误";
 
-   // 成功
-   public final static int Success = 4;
+   // OA系统登录成功
+   public final static int OaSuccess = 5;
 
-   // 成功字符串
-   public final static String SuccessString = "Success";
+   // OA系统登录成功字符串
+   public final static String OaSuccessString = "OaSuccess";
 
-   // 成功标签
-   public final static String SuccessLabel = "成功";
+   // OA系统登录成功标签
+   public final static String OaSuccessLabel = "OA系统登录成功";
 
-   // ip地址不在白名单中
-   public final static int HostAddressInvalid = 5;
+   // OA密码错误
+   public final static int OaPasswordInvald = 6;
 
-   // ip地址不在白名单中字符串
-   public final static String HostAddressInvalidString = "HostAddressInvalid";
+   // OA密码错误字符串
+   public final static String OaPasswordInvaldString = "OaPasswordInvald";
 
-   // ip地址不在白名单中标签
-   public final static String HostAddressInvalidLabel = "ip地址不在白名单中";
+   // OA密码错误标签
+   public final static String OaPasswordInvaldLabel = "OA密码错误";
+
+   // OA主机非法
+   public final static int OaHostInvalid = 7;
+
+   // OA主机非法字符串
+   public final static String OaHostInvalidString = "OaHostInvalid";
+
+   // OA主机非法标签
+   public final static String OaHostInvalidLabel = "OA主机非法";
 
    //============================================================
    // <T>是否含有指定内容</T>
@@ -101,16 +119,20 @@ public class EGcAuthorityResult
       switch(value){
          case Unknown:
             return UnknownString;
+         case Success:
+            return SuccessString;
          case PassportInvalid:
             return PassportInvalidString;
          case PasswordInvalid:
             return PasswordInvalidString;
          case DateInvalid:
             return DateInvalidString;
-         case Success:
-            return SuccessString;
-         case HostAddressInvalid:
-            return HostAddressInvalidString;
+         case OaSuccess:
+            return OaSuccessString;
+         case OaPasswordInvald:
+            return OaPasswordInvaldString;
+         case OaHostInvalid:
+            return OaHostInvalidString;
          default:
             return "Unknown";
       }
@@ -126,16 +148,20 @@ public class EGcAuthorityResult
       switch(value){
          case Unknown:
             return UnknownLabel;
+         case Success:
+            return SuccessLabel;
          case PassportInvalid:
             return PassportInvalidLabel;
          case PasswordInvalid:
             return PasswordInvalidLabel;
          case DateInvalid:
             return DateInvalidLabel;
-         case Success:
-            return SuccessLabel;
-         case HostAddressInvalid:
-            return HostAddressInvalidLabel;
+         case OaSuccess:
+            return OaSuccessLabel;
+         case OaPasswordInvald:
+            return OaPasswordInvaldLabel;
+         case OaHostInvalid:
+            return OaHostInvalidLabel;
          default:
             return "Unknown";
       }
@@ -151,16 +177,20 @@ public class EGcAuthorityResult
       switch(value){
          case UnknownString:
             return Unknown;
+         case SuccessString:
+            return Success;
          case PassportInvalidString:
             return PassportInvalid;
          case PasswordInvalidString:
             return PasswordInvalid;
          case DateInvalidString:
             return DateInvalid;
-         case SuccessString:
-            return Success;
-         case HostAddressInvalidString:
-            return HostAddressInvalid;
+         case OaSuccessString:
+            return OaSuccess;
+         case OaPasswordInvaldString:
+            return OaPasswordInvald;
+         case OaHostInvalidString:
+            return OaHostInvalid;
          default:
             return 0;
       }

@@ -175,11 +175,13 @@ public class FHttpConnection
    //============================================================
    // <T>获取数据。</T>
    //============================================================
-   public void fetch(){
+   public String fetch(){
       connect();
       request().send();
       response().receive();
       disconnect();
+      // 返回内容
+      return response().content();
    }
 
    //============================================================
