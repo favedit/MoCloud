@@ -1,6 +1,8 @@
+<!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>登录验证</TITLE>
+<META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
+<TITLE>登录中</TITLE>
 <SCRIPT language='javascript' src='/ajs/me.js'></SCRIPT>
 <SCRIPT>
 function onLoad(){

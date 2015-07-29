@@ -1266,12 +1266,13 @@ MO.FEaiCityEntity_dispose = function FEaiCityEntity_dispose(){
 MO.FEaiCityEntityModule = function FEaiCityEntityModule(o){
    o = MO.Class.inherits(this, o, MO.FEaiEntityModule);
    o._citys     = MO.Class.register(o, new MO.AGetter('_citys'));
-   o.construct  = MO.FEaiCityEntityModule_construct;
-   o.findByCode = MO.FEaiCityEntityModule_findByCode;
-   o.findByCard = MO.FEaiCityEntityModule_findByCard;
-   o.push       = MO.FEaiCityEntityModule_push;
-   o.build      = MO.FEaiCityEntityModule_build;
-   o.dispose    = MO.FEaiCityEntityModule_dispose;
+   o.construct     = MO.FEaiCityEntityModule_construct;
+   o.findByCode    = MO.FEaiCityEntityModule_findByCode;
+   o.findByCard    = MO.FEaiCityEntityModule_findByCard;
+   o.push          = MO.FEaiCityEntityModule_push;
+   o.build         = MO.FEaiCityEntityModule_build;
+   o.linkProvinces = MO.FEaiCityEntityModule_linkProvinces;
+   o.dispose       = MO.FEaiCityEntityModule_dispose;
    return o;
 }
 MO.FEaiCityEntityModule_construct = function FEaiCityEntityModule_construct(){
@@ -1307,6 +1308,18 @@ MO.FEaiCityEntityModule_build = function FEaiCityEntityModule_build(context){
       cityEntity.setData(city);
       cityEntity.build(o);
       cityEntities.set(code, cityEntity);
+   }
+}
+MO.FEaiCityEntityModule_linkProvinces = function FEaiCityEntityModule_linkProvinces(){
+   var o = this;
+   var provinceModule = MO.Console.find(MO.FEaiEntityConsole).provinceModule();
+   var cityEntities = o._citys;
+   var cityCount = cityEntities.count();
+   for(var i = 0; i < cityCount; i++){
+      var cityEntity = cityEntities.at(i);
+      var provinceCode = cityEntity.data().provinceCode();
+      var provinceEntity = provinceModule.findByCode(provinceCode);
+      cityEntity.setProvinceEntity(provinceEntity);
    }
 }
 MO.FEaiCityEntityModule_dispose = function FEaiCityEntityModule_dispose(monitor){
@@ -1454,6 +1467,7 @@ MO.FEaiCountryEntity_loadResource = function FEaiCountryEntity_loadResource(reso
    faceShape.build();
    borderShape.build();
    o.setupProvinces(provinceEntities);
+   MO.Console.find(MO.FEaiEntityConsole).cityModule().linkProvinces();
 }
 MO.FEaiCountryEntity_isReady = function FEaiCountryEntity_isReady() {
    var o = this;
@@ -2196,7 +2210,7 @@ MO.FEaiProvinceEntityModule = function FEaiProvinceEntityModule(o){
 MO.FEaiProvinceEntityModule_construct = function FEaiProvinceEntityModule_construct(){
    var o = this;
    o.__base.FEaiEntityModule.construct.call(o);
-   o._provinces = MO.TDictionary();
+   o._provinces = new MO.TDictionary();
 }
 MO.FEaiProvinceEntityModule_findByCode = function FEaiProvinceEntityModule_findByCode(code){
    return this._provinces.get(code);
@@ -5220,6 +5234,7 @@ MO.FEaiChartLiveScene_onProcess = function FEaiChartLiveScene_onProcess() {
       var countryEntity = o._countryEntity;
       if(!countryEntity.introAnimeDone()){
          countryEntity.process();
+         return;
       }
       if (!o._mapReady) {
          o._guiManager.show();

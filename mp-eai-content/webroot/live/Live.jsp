@@ -1,78 +1,76 @@
 <%@ include file='/apl/public.inc' %>
 <!DOCTYPE HTML>
 <HTML>
-
 <HEAD>
-   <TITLE>e租宝-全球实时投资数据展示中心(中国)</TITLE>
-   <META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
-   <META name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-   <LINK rel="stylesheet" href='/acs/mobile.css' type="text/css" media="all" />
-   <SCRIPT language='javascript' src='/ajs/md5.js'></SCRIPT>
-   <SCRIPT language='javascript' src='/ajs/lzma.js'></SCRIPT>
-   <SCRIPT language='javascript' src='/ajs/me.js'></SCRIPT>
-   <SCRIPT language='javascript' src='/ajs/eai.js'></SCRIPT>
-   <SCRIPT language='javascript' src='/ajs/context_cn.js'></SCRIPT>
-   <SCRIPT>
-      var g_loadingHandle;
-      function doLoading() {
-         var htmlBody = document.body;
-         htmlBody.style.backgroundImage = 'url(/ars/eai/background.jpg)';
-         var hImages = document.getElementById("loading_img_div").getElementsByTagName("img");
-         var index = [7, 6, 5, 4, 3, 2, 1, 0];
-         g_loadingHandle = setInterval(function() {
-            for (var i = 0; i < index.length; i++) {
-               hImages[index[i]].style.opacity = 0.1 + (0.1 * i);
-               if (i == index.length - 1) {
-                  index.push(index[0]);
-                  index.splice(0, 1);
-               }
+<TITLE>e租宝-全球实时投资数据展示中心(中国)</TITLE>
+<META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
+<META name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<LINK rel="stylesheet" href='/acs/mobile.css' type="text/css" media="all" />
+<SCRIPT language='javascript' src='/ajs/extension.js'></SCRIPT>
+<SCRIPT language='javascript' src='/ajs/me.js'></SCRIPT>
+<SCRIPT language='javascript' src='/ajs/eai.js'></SCRIPT>
+<SCRIPT language='javascript' src='/ajs/context_cn.js'></SCRIPT>
+<SCRIPT>
+   var g_loadingHandle;
+   function doLoading() {
+      var htmlBody = document.body;
+      htmlBody.style.backgroundImage = 'url(/ars/eai/background.jpg)';
+      var hImages = document.getElementById("loading_img_div").getElementsByTagName("img");
+      var index = [7, 6, 5, 4, 3, 2, 1, 0];
+      g_loadingHandle = setInterval(function() {
+         for (var i = 0; i < index.length; i++) {
+            hImages[index[i]].style.opacity = 0.1 + (0.1 * i);
+            if (i == index.length - 1) {
+               index.push(index[0]);
+               index.splice(0, 1);
             }
-         }, 80);
-      }
-      function onDeviceError(event) {
-         var hLoading = document.getElementById("id_loading")
-         document.body.removeChild(hLoading);
-         var hError = document.getElementById("id_error");
-         hError.style.backgroundImage = 'url(/ars/eai/loading/background.jpg)';
-         document.getElementById("error_img").src = "/ars/eai/loading/error.png";
-         MO.Window.Html.visibleSet(hError, true);
-      }
-      function oniOSStart(event) {
-          var hLoading = document.getElementById("id_ios_play")
-          document.body.removeChild(hLoading);
-          var liveScene = MO.Desktop.application().activeChapter().activeScene();
-          liveScene._statusLayerLevel = -1;
-          liveScene._groundAutio.play();
-          liveScene._mapEntity._countryEntity._audioMapEnter._hAudio.play();
-          liveScene._investment._autios[1].play();
-          liveScene._investment._autios[1].pause();
-          liveScene._investment._autios[2].play();
-          liveScene._investment._autios[2].pause();
-          liveScene._investment._autios[3].play();
-          liveScene._investment._autios[3].pause();
-          liveScene._investment._autios[4].play();
-          liveScene._investment._autios[4].pause();
-      }
-      function onLoaded(event) {
-         clearInterval(g_loadingHandle);
-      }
-      function onLoad() {
-         // 设置变量
-         MO.initialize();
-         MO.Window.Browser.setContentPath('..');
-         MO.Window.Browser.fullscreen(window, true);
-         MO.Window.lsnsLoaded.register(null, onLoaded);
-         MO.Window.lsnsDeviceError.register(null, onDeviceError);
-         // 设置环境
-         MO.Console.find(MO.FE3sVendorConsole).setup('net');
-         MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
-         MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
-         // 设置应用
-         var application = MO.Desktop.initialize(MO.FEaiChartApplication);
-         application.setSceneCode(MO.EEaiScene.ChartLive);
-         application.setup(document.body);
-      }
-   </SCRIPT>
+         }
+      }, 80);
+   }
+   function onDeviceError(event) {
+      var hLoading = document.getElementById("id_loading")
+      document.body.removeChild(hLoading);
+      var hError = document.getElementById("id_error");
+      hError.style.backgroundImage = 'url(/ars/eai/loading/background.jpg)';
+      document.getElementById("error_img").src = "/ars/eai/loading/error.png";
+      MO.Window.Html.visibleSet(hError, true);
+   }
+   function oniOSStart(event) {
+       var hLoading = document.getElementById("id_ios_play")
+       document.body.removeChild(hLoading);
+       var liveScene = MO.Desktop.application().activeChapter().activeScene();
+       liveScene._statusLayerLevel = -1;
+       liveScene._groundAutio.play();
+       liveScene._mapEntity._countryEntity._audioMapEnter._hAudio.play();
+       liveScene._investment._autios[1].play();
+       liveScene._investment._autios[1].pause();
+       liveScene._investment._autios[2].play();
+       liveScene._investment._autios[2].pause();
+       liveScene._investment._autios[3].play();
+       liveScene._investment._autios[3].pause();
+       liveScene._investment._autios[4].play();
+       liveScene._investment._autios[4].pause();
+   }
+   function onLoaded(event) {
+      clearInterval(g_loadingHandle);
+   }
+   function onLoad() {
+      // 设置变量
+      MO.initialize();
+      MO.Window.Browser.setContentPath('..');
+      MO.Window.Browser.fullscreen(window, true);
+      MO.Window.lsnsLoaded.register(null, onLoaded);
+      MO.Window.lsnsDeviceError.register(null, onDeviceError);
+      // 设置环境
+      MO.Console.find(MO.FE3sVendorConsole).setup('net');
+      MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
+      MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
+      // 设置应用
+      var application = MO.Desktop.initialize(MO.FEaiChartApplication);
+      application.setSceneCode(MO.EEaiScene.ChartLive);
+      application.setup(document.body);
+   }
+</SCRIPT>
 </HEAD>
 <BODY scroll='no' style='position:relative;overflow:hidden;background-color:#000000;background-size:100% 100%;' onload='onLoad()'>
    <TABLE id='id_ios_play' style='position:absolute;left:0px;top:0px;width:100%;height:100%;background-size:100% 100%;display:none' onclick="oniOSStart()">
