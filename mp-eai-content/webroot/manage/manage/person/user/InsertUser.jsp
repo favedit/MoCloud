@@ -5,11 +5,11 @@
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <script>
-         function doSubmit(){
-            console.log("123");
-            var beginTime = $("begin_date").val();
-            alert(beginTime);
-         }
+//         function doSubmit(){
+//            
+//            var beginTime = $("begin_date").val();
+//            
+//         }
       </script>
    </HEAD>
    <body>
@@ -19,7 +19,7 @@
                <div class="right_title"> <span>增加用户</span> </div>
                <div class="btn_bar">
                   <div class="nav_btn">
-                     <a href="javascript:doSubmit();" class="sub_btn"></a>
+                     <a href="javascript:form.submit();" class="sub_btn"></a>
                      <a href="javascript:history.back(-1);" class="back_btn"></a>
                   </div>
                   <div class="nav_search"></div>
