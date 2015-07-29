@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
-   
    <!-- ==================================================== -->
    <!-- StorageConsole:资源存储控制台                        -->
    <!-- ==================================================== -->
@@ -20,7 +19,8 @@
          face  = 'org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole'
          class = 'org.mo.eai.logic.data.person.user.FDataPersonAccessAuthorityConsole'
          scope = 'global'>
-      <Property name='urlOaLogin'>"http://10.21.0.141:6666/ycjt/auth/auth.jsp"</Property>
+      <Property name='oaLoginEnable'>N</Property>
+      <Property name='oaLoginUrl'>http://10.21.0.141:6666/ycjt/auth/auth.jsp</Property>
    </Component>
    
 </Config>

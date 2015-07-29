@@ -25,7 +25,10 @@ public class FDataPersonAccessAuthorityConsole
    private static ILogger _logger = RLogger.find(FDataPersonAccessAuthorityConsole.class);
 
    @AProperty
-   protected String _urlOaLogin;
+   protected boolean _oaLoginEnable;
+
+   @AProperty
+   protected String _oaLoginUrl;
 
    //============================================================
    // <T>构造数据人员访问授权信息控制台。</T>
@@ -93,16 +96,18 @@ public class FDataPersonAccessAuthorityConsole
       // 根据账号密码检查设置
       FDataPersonAccessAuthority passportAuthority = findByPassport(logicContext, passport);
       if(passportAuthority == null){
-         // OA用户检测
-         String oaLoginResult = ROALoginUnit.oaLogin(_urlOaLogin, passport, password);
-         _logger.debug(this, "doLogin", "OA login. (passport={1}, result={2})", passport, oaLoginResult);
-         // 0:验证成功，1:签名不通过，3:用户名或密码错误，98:IP不在白名单中
-         if(oaLoginResult.equals("0")){
-            return EGcAuthorityResult.OaSuccess;
-         }else if(oaLoginResult.equals("3")){
-            return EGcAuthorityResult.OaPasswordInvald;
-         }else if(oaLoginResult.equals("98")){
-            return EGcAuthorityResult.OaHostInvalid;
+         if(_oaLoginEnable){
+            // OA用户检测
+            String oaLoginResult = ROALoginUnit.oaLogin(_oaLoginUrl, passport, password);
+            _logger.debug(this, "doLogin", "OA login. (passport={1}, result={2})", passport, oaLoginResult);
+            // 0:验证成功，1:签名不通过，3:用户名或密码错误，98:IP不在白名单中
+            if(oaLoginResult.equals("0")){
+               return EGcAuthorityResult.OaSuccess;
+            }else if(oaLoginResult.equals("3")){
+               return EGcAuthorityResult.OaPasswordInvald;
+            }else if(oaLoginResult.equals("98")){
+               return EGcAuthorityResult.OaHostInvalid;
+            }
          }
          return EGcAuthorityResult.PassportInvalid;
       }

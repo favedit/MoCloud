@@ -9,6 +9,7 @@ import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
+import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -26,6 +27,9 @@ public class FChartAction
 
    @ALink
    protected ILoggerPersonUserAccessConsole _loggerPersonUserAccessConsole;
+
+   @ALink
+   protected ILogicServiceInfoConsole _loggerServiceInfoConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -126,11 +130,13 @@ public class FChartAction
       logger.setPassport(passport);
       logger.setPassword(password);
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
-      // 非法设置
-      page.setMessage(message);
-      if(resultCd == EGcAuthorityResult.Success){
+      // 画面跳转
+      if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
+         page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
          return "Live";
+      }else{
+         page.setMessage(message);
+         return "Login";
       }
-      return "Login";
    }
 }

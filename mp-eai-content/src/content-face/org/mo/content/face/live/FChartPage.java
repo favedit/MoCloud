@@ -20,6 +20,9 @@ public class FChartPage
    // 消息
    protected String _message;
 
+   // 服务地址
+   protected String _serviceHost;
+
    //============================================================
    // <P>获得主机地址。</P>
    //============================================================
@@ -76,4 +79,17 @@ public class FChartPage
       _message = message;
    }
 
+   //============================================================
+   // <P>获得服务地址。</P>
+   //============================================================
+   public String serviceHost(){
+      return _serviceHost;
+   }
+
+   //============================================================
+   // <P>设置服务地址。</P>
+   //============================================================
+   public void setServiceHost(String serviceHost){
+      _serviceHost = serviceHost;
+   }
 }
