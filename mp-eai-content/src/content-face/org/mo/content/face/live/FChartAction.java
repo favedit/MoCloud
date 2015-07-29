@@ -92,6 +92,7 @@ public class FChartAction
       String message = null;
       String logggerMessage = null;
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
+      System.out.println(resultCd + "-------------------------------------");
       switch(resultCd){
          case EGcAuthorityResult.PassportInvalid:
             logggerMessage = "账号不存在。";

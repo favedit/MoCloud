@@ -10,6 +10,7 @@ import org.mo.com.net.http.FHttpConnection;
 
 public class ROALoginUnit
 {
+
    //============================================================
    // <T>请求OA登录接口</T>
    //
@@ -23,6 +24,7 @@ public class ROALoginUnit
                                 String password){
       //设置参数
       String key = "ycjt*&^%$3fyg";
+
       String encodePassport = ThreeDes.encode(key, passport);
       String encodePassword = ThreeDes.encode(key, password);
       String appDate = String.valueOf(new Date().getTime());
@@ -30,6 +32,7 @@ public class ROALoginUnit
       String validate = RMd5.encode(encodePassport + encodePassword + appDate + from + key);
       //拼装参数
       String parem = "?username=" + encodePassport + "&pwd=" + encodePassword + "&appDate=" + appDate + "&from=" + from + "&validate=" + validate;
+      System.out.println("==========================OALogin  OAlogin  url. url=" + url + parem);
       //发送http请求
       FHttpConnection connection = new FHttpConnection(url + parem);
       connection.connect();
@@ -39,6 +42,6 @@ public class ROALoginUnit
       //获取结果并关闭请求
       String result = connection.response().content();
       connection.close();
-      return result;
+      return result.trim();
    }
 }
