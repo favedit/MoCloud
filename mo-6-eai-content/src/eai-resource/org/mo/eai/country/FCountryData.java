@@ -55,6 +55,7 @@ public class FCountryData
    // <T>计算数据。</T>
    //============================================================
    public void optimize(double rate){
+      boolean optimized = rate > 0;
       // 建立边界优化器
       int pointTotal = 0;
       FBoundaryOptimizer optimizer = new FBoundaryOptimizer(rate);
@@ -75,12 +76,14 @@ public class FCountryData
          }
       }
       // 优化处理
-      optimizer.calculate();
+      if(optimized){
+         optimizer.calculate();
+      }
       // 读取数据
       int optimizeTotal = 0;
       for(FProvinceData province : _provinces){
          for(FBoundaryData boundaryData : province.boundaries()){
-            boundaryData.optimize();
+            boundaryData.optimize(optimized);
             optimizeTotal += boundaryData.optimizePoints().count();
          }
       }

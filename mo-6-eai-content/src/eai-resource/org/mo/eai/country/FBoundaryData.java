@@ -2,7 +2,6 @@ package org.mo.eai.country;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.mo.com.geom.SDoublePoint3;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FInts;
@@ -170,31 +169,6 @@ public class FBoundaryData
    public void calculate(){
       // 填充数据
       List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
-      int count = _points.count();
-      for(int n = 0; n < count - 1; n++){
-         SDoublePoint3 point = _points.get(n);
-         PolygonPoint polygonPoint = new FPolygonPoint(n, point.x, point.y, point.z);
-         polygonPoints.add(polygonPoint);
-      }
-      Polygon polygon = new Polygon(polygonPoints);
-      // 转换数据
-      Poly2Tri.triangulate(polygon);
-      // 获得索引
-      _indexes.clear();
-      for(DelaunayTriangle triangle : polygon.getTriangles()){
-         TriangulationPoint[] points = triangle.points;
-         _indexes.append(((FPolygonPoint)points[0]).index());
-         _indexes.append(((FPolygonPoint)points[1]).index());
-         _indexes.append(((FPolygonPoint)points[2]).index());
-      }
-   }
-
-   //============================================================
-   // <T>计算数据。</T>
-   //============================================================
-   public void calculate2(){
-      // 填充数据
-      List<PolygonPoint> polygonPoints = new ArrayList<PolygonPoint>();
       int count = _optimizePoints.count();
       for(int i = 0; i < count; i++){
          SBoundaryPoint point = _optimizePoints.get(i);
@@ -206,10 +180,9 @@ public class FBoundaryData
       try{
          Poly2Tri.triangulate(polygon);
       }catch(Exception error){
-         System.out.println(_province.code() + ": " + error.getMessage());
-         //throw new FFatalError("Point is invalid.");
          valid = false;
-         return;
+         System.out.println(_province.code() + ": " + error.getMessage());
+         throw new FFatalError("Point is invalid.");
       }
       // 获得索引
       _indexes.clear();
@@ -224,16 +197,19 @@ public class FBoundaryData
    //============================================================
    // <T>计算数据。</T>
    //============================================================
-   public void optimize(){
-      _optimizePoints.clear();
-      for(SBoundaryPoint point : _boundary.optimizePoints()){
-         _optimizePoints.push(point);
+   public void optimize(boolean optimized){
+      if(optimized){
+         _optimizePoints.clear();
+         for(SBoundaryPoint point : _boundary.optimizePoints()){
+            _optimizePoints.push(point);
+         }
+      }else{
+         _optimizePoints.clear();
+         for(SBoundaryPoint point : _points){
+            _optimizePoints.push(point);
+         }
       }
-      //      _optimizePoints.clear();
-      //      for(SBoundaryPoint point : _points){
-      //         _optimizePoints.push(point);
-      //      }
-      calculate2();
+      calculate();
    }
 
    //============================================================
@@ -248,12 +224,6 @@ public class FBoundaryData
       for(SBoundaryPoint point : _optimizePoints){
          output.writeFloat((float)point.x);
          output.writeFloat((float)point.y);
-         //      int pointCount = _points.count();
-         //      output.writeInt32(pointCount);
-         //      for(SDoublePoint3 point : _points){
-         //         output.writeFloat((float)point.x);
-         //         output.writeFloat((float)point.y);
-         //      }
       }
       // 输出顶点集合
       int indexCount = _indexes.length();
@@ -261,6 +231,7 @@ public class FBoundaryData
       for(int i = 0; i < indexCount; i++){
          output.writeUint16(_indexes.get(i));
       }
+      // 查找省份定义
       String provinceCode = _province.code();
       FProvinceTemplate provinceTemplate = RResourceExportor.provinceTemplate();
       FProvinceResource provinceResource = provinceTemplate.findByCode(provinceCode);

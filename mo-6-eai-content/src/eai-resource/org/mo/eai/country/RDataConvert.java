@@ -48,8 +48,10 @@ public class RDataConvert
          }
       }
       System.out.println(activeCountry.dump());
-      activeCountry.optimize(0.01);
-      activeCountry.serializeFile("D:/Microbject/MoScript/source/ars/eai/country.dat");
+      //activeCountry.optimize(0);
+      //activeCountry.serializeFile("D:/Microbject/MoScript/source/ars/eai-pc/map/country/china.dat");
+      activeCountry.optimize(0.02);
+      activeCountry.serializeFile("D:/Microbject/MoScript/source/ars/eai-mb/map/country/china.dat");
       System.out.println("Success");
    }
 }
