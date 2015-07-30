@@ -58,8 +58,6 @@
       MO.Console.find(MO.FE3sVendorConsole).setup('net');
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
-      // 设置日志
-      // MO.Console.find(MO.FLoggerConsole).connect('ws://10.21.0.128:8080/logger');
       // 设置应用
       var application = MO.Desktop.initialize(MO.FEaiChartApplication);
       application.setSceneCode(MO.EEaiScene.ChartLive);
