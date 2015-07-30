@@ -144,7 +144,7 @@ public class FDeviceAction
          String filePath = "d:/deviceList_" + RDateTime.currentDateTime() + ".xls";
          //新建文件输出流  
          FileOutputStream fOut = new FileOutputStream(filePath);
-         //将数据写入Excel  
+         //将数据写入Excel
          workbook.write(fOut);
          fOut.close();
          basePage.ajax(1, filePath);
