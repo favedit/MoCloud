@@ -22,6 +22,16 @@ public class FDevicePage
 
    protected FDataInfoDeviceBrowserUnit unit;
 
+   protected String dataInfo;
+
+   public String dataInfo(){
+      return dataInfo;
+   }
+
+   public void setDataInfo(String dataInfo){
+      this.dataInfo = dataInfo;
+   }
+
    public FDataInfoDeviceBrowserUnit unit(){
       return unit;
    }

@@ -40,13 +40,9 @@ public class FDeviceBrowserConsole
    }
 
    @Override
-   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext,
-                                                           int pageNum){
-      if(0 > pageNum){
-         pageNum = 0;
-      }
+   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext){
       FDataInfoDeviceBrowserLogic logic = new FDataInfoDeviceBrowserLogic(logicContext);
-      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = logic.fetchClass(FDataInfoDeviceBrowserUnit.class, null, null, _pageSize, pageNum);
+      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = logic.fetchClass(FDataInfoDeviceBrowserUnit.class, null, null);
       return unitlist;
    }
 

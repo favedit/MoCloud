@@ -11,11 +11,11 @@
       <link rel="stylesheet" href="/manage/acs/lrtk.css" type="text/css" media="screen" />
       <script src="/manage/ajs/jquery/jquery-1.8.0.min.js" type="text/javascript"></script>
       <script>
-         var flag = "<jh:write source='&base.ouid' />";
-         if(flag == ""){
-         	 alert("连接超时！");
-         	 parent.parent.location.href="/manage/home/Frame.wp";	
-         }
+//         var flag = "<jh:write source='&base.ouid' />";
+//         if(flag == ""){
+//         	 alert("连接超时！");
+//         	 parent.parent.location.href="/manage/home/Frame.wp";	
+//         }
 //         function checkHtml() {
 //            var menu = replaceNbsp($("#one").children(".sub-menu").html());
 //            if (menu == '') {

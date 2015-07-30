@@ -1,14 +1,20 @@
 package org.mo.content.face.manage.device;
 
 import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;
+import java.io.FileOutputStream;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.device.IDeviceBrowserConsole;
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.face.manage.home.FFrameAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -25,7 +31,7 @@ public class FDeviceAction
          IDeviceAction
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FFrameAction.class);
+   private static ILogger _logger = RLogger.find(FDeviceAction.class);
 
    //用户控制台
    @ALink
@@ -54,14 +60,10 @@ public class FDeviceAction
                         ILogicContext logicContext,
                         FDevicePage devicePage,
                         FBasePage basePage){
-      if(null != context.parameter("page")){
-         String num = context.parameter("page");
-         devicePage.setPageCurrent(Integer.parseInt(num));
-      }else{
-         devicePage.setPageCurrent(0);
-      }
-      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext, devicePage.pageCurrent() - 1);
+
+      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext);
       basePage.setJson(unitlist.toJsonListString());
+      System.out.println(basePage.json());
       return "/manage/common/ajax";
    }
 
@@ -97,8 +99,61 @@ public class FDeviceAction
                               ILogicContext logicContext,
                               FDevicePage devicePage,
                               FBasePage basePage){
-      long id = context.parameterAsLong("ouid");
-      devicePage.setUnit(_deviceBrowserConsole.find(logicContext, id));
-      return "//manage/manage/device/BrowserAccessInfo";
+      long id = context.parameterAsLong("id");
+      FDataInfoDeviceBrowserUnit unit = _deviceBrowserConsole.find(logicContext, id);
+      devicePage.setUnit(unit);
+      return "/manage/manage/device/BrowserAccessInfo";
+   }
+
+   @Override
+   public String expend(IWebContext context,
+                        ILogicContext logicContext,
+                        FDevicePage page,
+                        FBasePage basePage){
+      _logger.debug(this, "Expend", "Expend begin.");
+      try{
+         FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext);
+         //创建新的Excel工作薄 
+         HSSFWorkbook workbook = new HSSFWorkbook();
+         HSSFSheet sheet = workbook.createSheet("sheet1");
+         //在索引0的位置创建行（最顶端的行）  
+         String[] headers = new String[]{"头信息", "设备信息"};
+         HSSFRow headerRow = sheet.createRow(0);
+         HSSFCell cell = headerRow.createCell(0);
+         cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+         cell.setCellValue(headers[0]);
+         HSSFCell cell0 = headerRow.createCell(1);
+         cell0.setCellType(XSSFCell.CELL_TYPE_STRING);
+         cell0.setCellValue(headers[1]);
+
+         int index = 0;
+         for(FDataInfoDeviceBrowserUnit unit : unitlist){
+            index++;
+            HSSFRow row = sheet.createRow(index);
+            HSSFCell cell1 = row.createCell(0);
+            //定义单元格为字符串类型  
+            cell1.setCellType(XSSFCell.CELL_TYPE_STRING);
+            //在单元格中输入一些内容  
+            cell1.setCellValue(unit.agentCode());
+            HSSFCell cell2 = row.createCell(1);
+            //定义单元格为字符串类型  
+            cell2.setCellType(XSSFCell.CELL_TYPE_STRING);
+            //在单元格中输入一些内容  
+            cell2.setCellValue(unit.content());
+         }
+         String filePath = "d:/deviceList_" + RDateTime.currentDateTime() + ".xls";
+         //新建文件输出流  
+         FileOutputStream fOut = new FileOutputStream(filePath);
+         //将数据写入Excel  
+         workbook.write(fOut);
+         fOut.close();
+         basePage.ajax(1, filePath);
+         _logger.debug(this, "Expend", "Expend succeed. (path={1})", filePath);
+      }catch(Exception e){
+         e.printStackTrace();
+         basePage.ajax(0, e.getMessage());
+         _logger.debug(this, "Expend", "Expend fail. (message={1})", e);
+      }
+      return "/manage/common/ajax";
    }
 }

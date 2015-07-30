@@ -23,6 +23,5 @@ public interface IDeviceBrowserConsole
    EResult insert(ILogicContext logicContext,
                   FDataInfoDeviceBrowserUnit deviceBrowserInfo);
 
-   FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext,
-                                                    int pageNum);
+   FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext);
 }

@@ -52,4 +52,9 @@ public interface IDeviceAction
    String putMobileInfo(IWebContext context,
                         ILogicContext logicContext,
                         @AContainer(name = "page") FDevicePage page);
+
+   String expend(IWebContext context,
+                 ILogicContext logicContext,
+                 @AContainer(name = "page") FDevicePage page,
+                 @AContainer(name = "basePage") FBasePage basePage);
 }
