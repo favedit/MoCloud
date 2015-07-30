@@ -38,18 +38,11 @@
    function oniOSStart(event) {
        var hLoading = document.getElementById("id_ios_play")
        document.body.removeChild(hLoading);
+       MO.Console.find(MO.FAudioConsole).select();
        var liveScene = MO.Desktop.application().activeChapter().activeScene();
        liveScene._statusLayerLevel = -1;
-       liveScene._groundAutio.play();
-       liveScene._mapEntity._countryEntity._audioMapEnter._hAudio.play();
-       liveScene._investment._autios[1].play();
-       liveScene._investment._autios[1].pause();
-       liveScene._investment._autios[2].play();
-       liveScene._investment._autios[2].pause();
-       liveScene._investment._autios[3].play();
-       liveScene._investment._autios[3].pause();
-       liveScene._investment._autios[4].play();
-       liveScene._investment._autios[4].pause();
+       liveScene._groundAutio.play(0);
+       liveScene._countryEntity._audioMapEnter.play(0);
    }
    function onLoaded(event) {
       clearInterval(g_loadingHandle);
@@ -65,6 +58,8 @@
       MO.Console.find(MO.FE3sVendorConsole).setup('net');
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
+      // 设置日志
+      MO.Console.find(MO.FLoggerConsole).connect('ws://10.21.0.128:8080/logger');
       // 设置应用
       var application = MO.Desktop.initialize(MO.FEaiChartApplication);
       application.setSceneCode(MO.EEaiScene.ChartLive);

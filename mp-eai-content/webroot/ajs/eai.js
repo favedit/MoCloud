@@ -2798,6 +2798,104 @@ MO.FEaiWorldFaceEffect_drawRenderable = function FEaiWorldFaceEffect_drawRendera
    var indexBuffer = renderable.indexBuffers().first();
    context.drawTriangles(indexBuffer);
 }
+MO.FEaiDynamicInfo = function FEaiDynamicInfo(o){
+   o = MO.Class.inherits(this, o, MO.FGuiControl);
+   o._lastTick    = 0;
+   o._name        = 'EngineInfo';
+   o._stage       = MO.Class.register(o, new MO.AGetSet('_stage'));
+   o._guiManager  = MO.Class.register(o, new MO.AGetSet('_guiManager'));
+   o._context     = MO.Class.register(o, new MO.AGetSet('_context'));
+   o._ticker      = null;
+   o.onPaintBegin = MO.FEaiDynamicInfo_onPaintBegin;
+   o.oeUpdate     = MO.FEaiDynamicInfo_oeUpdate;
+   o.construct    = MO.FEaiDynamicInfo_construct;
+   return o;
+}
+MO.FEaiDynamicInfo_onPaintBegin = function FEaiDynamicInfo_onPaintBegin(event){
+   var o = this;
+   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   if(o._stage == null){
+      return;
+   }
+   if(o._context == null){
+      return;
+   }
+   var graphic = event.graphic;
+   var rectangle = event.rectangle;
+   var timer = o._stage.timer();
+   var stageStatistics = o._stage.statistics();
+   var statistics = o._context.statistics();
+   var line = 20;
+   var locationX = 10;
+   var locationY = rectangle.top + line;
+   graphic.setFont('16px sans-serif');
+   var browser = MO.Window.Browser;
+   var browserCapability = browser.capability();
+   graphic.drawText(MO.Lang.String.format('Agent         : {1}', browser.code), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Browser    : type={1}, orientation={2}, canvas_scale={3}', browser.typeCd(), browser.orientationCd(), browserCapability.canvasScale), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   var desktop = o._guiManager.desktop();
+   var canvas2d = desktop.canvas2d();
+   var canvas3d = desktop.canvas3d();
+   var pixelRatio = MO.Window.Browser.capability().pixelRatio;
+   graphic.drawText(MO.Lang.String.format('Screen        : ratio={1}, screen_size={2}, size={3}', pixelRatio, desktop.screenSize().toDisplay(), desktop.size().toDisplay()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   var hCanvas2d = canvas2d._hCanvas;
+   graphic.drawText(MO.Lang.String.format(' - Canvas2d   : size={1}x{2}, inner_size={3}x{4}', hCanvas2d.offsetWidth, hCanvas2d.offsetHeight, hCanvas2d.width, hCanvas2d.height), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   var hCanvas3d = canvas3d._hCanvas;
+   graphic.drawText(MO.Lang.String.format(' - Canvas3d   : size={1}x{2}, inner_size={3}x{4}', hCanvas3d.offsetWidth, hCanvas3d.offsetHeight, hCanvas3d.width, hCanvas3d.height), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   var context3d = canvas3d.graphicContext();
+   graphic.drawText(MO.Lang.String.format('   - Context  : {1}', context3d.size().toDisplay()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format('   - Viewport : {1}', context3d.viewportRectangle()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   var camera = o._stage.camera();
+   var projection = camera.projection();
+   graphic.drawText(MO.Lang.String.format('Stage         : ={1}, size={2}x{3}', camera.position()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Camera     : position={1}', camera.position()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Projection : size={1}, znear={2}, zfar={3}', projection.size(), projection.znear(), projection.zfar()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format('Frame         : rate={1}, span=[{2}]', MO.Timer.rate(), stageStatistics._frame), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Process    : {1}', stageStatistics._frameProcess), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Draw       : draw={1}, sort={2}', stageStatistics._frameDraw, stageStatistics._frameDrawSort), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format('Draw          : count={1}, triangle={2}', statistics.frameDrawCount(), statistics.frameTriangleCount()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Const      : count={1}, length={2}', statistics.frameConstCount(), statistics.frameConstLength()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Alloc      : buffer={1}, texture={2}', statistics.frameBufferCount(), statistics.frameTextureCount()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format(' - Total      : program={1}, layout={2}, vertex={3}, index={4}', statistics.programTotal(), statistics.layoutTotal(), statistics.vertexBufferTotal(), statistics.indexBufferTotal()), locationX, locationY, '#FFFFFF');
+   var entityConsole = MO.Console.find(MO.FEaiEntityConsole);
+   var mapEntity = entityConsole.mapEntity();
+   var provinceEntities = mapEntity.provinceEntities();
+   var cityEntities = mapEntity.cityEntities();
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format('Entity        : province={1} city={2}', provinceEntities.count(), cityEntities.count()), locationX, locationY, '#FFFFFF');
+   locationY += line;
+   graphic.drawText(MO.Lang.String.format('Investment    : entity={1}, table={2}, pool_item={3}, pool_free={4}', o._investmentEntityCount, o._investmentTableEntityCount, o._investmentPoolItemCount, o._investmentPoolFreeCount), locationX, locationY, '#FFFFFF');
+   desktop.resize();
+}
+MO.FEaiDynamicInfo_oeUpdate = function FEaiDynamicInfo_oeUpdate(event){
+   var o = this;
+   if(o._ticker.process()){
+      o.dirty();
+   }
+   return MO.EEventStatus.Stop;
+}
+MO.FEaiDynamicInfo_construct = function FEaiDynamicInfo_construct(){
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o._size.set(1024, 512);
+   o._ticker = new MO.TTicker(1000);
+}
 with (MO) {
    MO.FGui24HTimeline = function FGui24HTimeline(o) {
       o = RClass.inherits(this, o, FGuiControl);
@@ -3639,12 +3737,16 @@ MO.FGuiLiveTable_oeUpdate = function FGuiLiveTable_oeUpdate(event){
    o.__base.FGuiControl.oeUpdate.call(o, event);
    if(event.isBefore()){
       if(o._lineScroll < 0){
-         o._lineScroll++;
-         if(o._lineScroll == 0){
+         o._lineScroll += 1;
+         if(o._lineScroll < -o._rowHeight){
+            o._lineScroll = 0;
+         }
+         if(o._lineScroll >= 0){
             var entities = o._entities;
             if(entities.count() > o._tableCount){
                entities.pop();
             }
+            o._lineScroll = 0;
          }
          o.dirty();
       }
@@ -3727,7 +3829,7 @@ MO.FGuiLiveTable_pushEntity = function FGuiLiveTable_pushEntity(entity){
    var entities = o._entities;
    entities.unshift(entity);
    o._lineScroll -= o._rowHeight;
-   if(entities.count() >= o._tableCount){
+   if(entities.count() > o._tableCount){
       entities.pop();
    }
 }
@@ -3885,6 +3987,7 @@ MO.FEaiStatisticsInvestment = function FEaiStatisticsInvestment(o){
    o._dataTicker              = null;
    o._entityPool              = null;
    o._autios                  = null;
+   o._eventDataChanged        = null;
    o._listenersDataChanged    = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
    o.onInvestment             = MO.FEaiStatisticsInvestment_onInvestment;
    o.construct                = MO.FEaiStatisticsInvestment_construct;
@@ -3932,13 +4035,11 @@ MO.FEaiStatisticsInvestment_onInvestment = function FEaiStatisticsInvestment_onI
       }
    }
    o.calculateCurrent();
-   var dsEvent = MO.Memory.alloc(MO.SEvent);
-   dsEvent.sender = o;
+   var dsEvent = o._eventDataChanged;
    dsEvent.entity = null;
    dsEvent.rank = o._rankEntities;
    dsEvent.data = o._tableEntities;
    o.processDataChangedListener(dsEvent);
-   MO.Memory.free(dsEvent);
    var entityCount = entities.count();
    o._tableInterval = 1000 * 60 * o._intervalMinute / entityCount;
    o._tableTick = 0;
@@ -3955,6 +4056,7 @@ MO.FEaiStatisticsInvestment_construct = function FEaiStatisticsInvestment_constr
    o._dataTicker = new MO.TTicker(1000 * 60 * o._intervalMinute);
    o._rankEntities = new MO.TObjects();
    o._entityPool = MO.Class.create(MO.FObjectPool);
+   o._eventDataChanged = new MO.SEvent(o);
 }
 MO.FEaiStatisticsInvestment_allocEntity = function FEaiStatisticsInvestment_allocEntity(){
    var o = this;
@@ -4023,13 +4125,11 @@ MO.FEaiStatisticsInvestment_focusEntity = function FEaiStatisticsInvestment_focu
          autio.play(0);
       }
    }
-   var dsEvent = MO.Memory.alloc(MO.SEvent);
-   dsEvent.sender = o;
+   var dsEvent = o._eventDataChanged;
    dsEvent.entity = entity;
    dsEvent.rank = o._rankEntities;
    dsEvent.data = o._tableEntities;
    o.processDataChangedListener(dsEvent);
-   MO.Memory.free(dsEvent);
 }
 MO.FEaiStatisticsInvestment_process = function FEaiStatisticsInvestment_process(){
    var o = this;
@@ -4077,8 +4177,9 @@ MO.FEaiStatisticsInvestment_process = function FEaiStatisticsInvestment_process(
 }
 MO.FEaiStatisticsInvestment_dispose = function FEaiStatisticsInvestment_dispose(){
    var o = this;
-   o._entities = MO.RObject.dispose(o._entities);
-   o._dataTicker = MO.RObject.dispose(o._dataTicker);
+   o._entities = MO.Lang.Object.dispose(o._entities);
+   o._dataTicker = MO.Lang.Object.dispose(o._dataTicker);
+   o._eventDataChanged = MO.Lang.Object.dispose(o._eventDataChanged);
    o.__base.FObject.dispose.call(o);
 }
 with(MO){
@@ -5201,7 +5302,7 @@ MO.FEaiChartLiveScene_onProcess = function FEaiChartLiveScene_onProcess() {
    var o = this;
    o.__base.FEaiChartScene.onProcess.call(o);
    if(!o._statusStart){
-      if (MO.Window.Browser.isBrowser(MO.EBrowser.Safari)) {
+      if(MO.Window.Browser.capability().soundConfirm){
          var iosPlay = document.getElementById('id_ios_play');
          if (iosPlay) {
             MO.Window.Html.visibleSet(iosPlay, true);
@@ -6030,104 +6131,6 @@ MO.FEaiCountryScene_deactive = function FEaiCountryScene_deactive(){
    var frame = o._countryLogoBar
    layer.removeRenderable(frame.renderable());
 }
-MO.FEaiDynamicInfo = function FEaiDynamicInfo(o){
-   o = MO.Class.inherits(this, o, MO.FGuiControl);
-   o._lastTick    = 0;
-   o._name        = 'EngineInfo';
-   o._stage       = MO.Class.register(o, new MO.AGetSet('_stage'));
-   o._guiManager  = MO.Class.register(o, new MO.AGetSet('_guiManager'));
-   o._context     = MO.Class.register(o, new MO.AGetSet('_context'));
-   o._ticker      = null;
-   o.onPaintBegin = MO.FEaiDynamicInfo_onPaintBegin;
-   o.oeUpdate     = MO.FEaiDynamicInfo_oeUpdate;
-   o.construct    = MO.FEaiDynamicInfo_construct;
-   return o;
-}
-MO.FEaiDynamicInfo_onPaintBegin = function FEaiDynamicInfo_onPaintBegin(event){
-   var o = this;
-   o.__base.FGuiControl.onPaintBegin.call(o, event);
-   if(o._stage == null){
-      return;
-   }
-   if(o._context == null){
-      return;
-   }
-   var graphic = event.graphic;
-   var rectangle = event.rectangle;
-   var timer = o._stage.timer();
-   var stageStatistics = o._stage.statistics();
-   var statistics = o._context.statistics();
-   var line = 20;
-   var locationX = 10;
-   var locationY = rectangle.top + line;
-   graphic.setFont('16px sans-serif');
-   var browser = MO.Window.Browser;
-   var browserCapability = browser.capability();
-   graphic.drawText(MO.Lang.String.format('Agent         : {1}', browser.code), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Browser    : type={1}, orientation={2}, canvas_scale={3}', browser.typeCd(), browser.orientationCd(), browserCapability.canvasAutoScale), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   var desktop = o._guiManager.desktop();
-   var canvas2d = desktop.canvas2d();
-   var canvas3d = desktop.canvas3d();
-   var pixelRatio = MO.Window.Browser.capability().pixelRatio;
-   graphic.drawText(MO.Lang.String.format('Screen        : ratio={1}, screen_size={2}, size={3}', pixelRatio, desktop.screenSize().toDisplay(), desktop.size().toDisplay()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   var hCanvas2d = canvas2d._hCanvas;
-   graphic.drawText(MO.Lang.String.format(' - Canvas2d   : size={1}x{2}, inner_size={3}x{4}', hCanvas2d.offsetWidth, hCanvas2d.offsetHeight, hCanvas2d.width, hCanvas2d.height), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   var hCanvas3d = canvas3d._hCanvas;
-   graphic.drawText(MO.Lang.String.format(' - Canvas3d   : size={1}x{2}, inner_size={3}x{4}', hCanvas3d.offsetWidth, hCanvas3d.offsetHeight, hCanvas3d.width, hCanvas3d.height), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   var context3d = canvas3d.graphicContext();
-   graphic.drawText(MO.Lang.String.format('   - Context  : {1}', context3d.size().toDisplay()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format('   - Viewport : {1}', context3d.viewportRectangle()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   var camera = o._stage.camera();
-   var projection = camera.projection();
-   graphic.drawText(MO.Lang.String.format('Stage         : ={1}, size={2}x{3}', camera.position()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Camera     : position={1}', camera.position()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Projection : size={1}, znear={2}, zfar={3}', projection.size(), projection.znear(), projection.zfar()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format('Frame         : rate={1}, span=[{2}]', MO.Timer.rate(), stageStatistics._frame), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Process    : {1}', stageStatistics._frameProcess), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Draw       : draw={1}, sort={2}', stageStatistics._frameDraw, stageStatistics._frameDrawSort), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format('Draw          : count={1}, triangle={2}', statistics.frameDrawCount(), statistics.frameTriangleCount()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Const      : count={1}, length={2}', statistics.frameConstCount(), statistics.frameConstLength()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Alloc      : buffer={1}, texture={2}', statistics.frameBufferCount(), statistics.frameTextureCount()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format(' - Total      : program={1}, layout={2}, vertex={3}, index={4}', statistics.programTotal(), statistics.layoutTotal(), statistics.vertexBufferTotal(), statistics.indexBufferTotal()), locationX, locationY, '#FFFFFF');
-   var entityConsole = MO.Console.find(MO.FEaiEntityConsole);
-   var mapEntity = entityConsole.mapEntity();
-   var provinceEntities = mapEntity.provinceEntities();
-   var cityEntities = mapEntity.cityEntities();
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format('Entity        : province={1} city={2}', provinceEntities.count(), cityEntities.count()), locationX, locationY, '#FFFFFF');
-   locationY += line;
-   graphic.drawText(MO.Lang.String.format('Investment    : entity={1}, table={2}, pool_item={3}, pool_free={4}', o._investmentEntityCount, o._investmentTableEntityCount, o._investmentPoolItemCount, o._investmentPoolFreeCount), locationX, locationY, '#FFFFFF');
-   desktop.resize();
-}
-MO.FEaiDynamicInfo_oeUpdate = function FEaiDynamicInfo_oeUpdate(event){
-   var o = this;
-   if(o._ticker.process()){
-      o.dirty();
-   }
-   return MO.EEventStatus.Stop;
-}
-MO.FEaiDynamicInfo_construct = function FEaiDynamicInfo_construct(){
-   var o = this;
-   o.__base.FGuiControl.construct.call(o);
-   o._size.set(1024, 512);
-   o._ticker = new MO.TTicker(1000);
-}
 MO.FEaiGroupReportScene = function FEaiGroupReportScene(o){
    o = MO.RClass.inherits(this, o, MO.FEaiScene);
    o._code = MO.EEaiScene.GroupReport;
@@ -6594,25 +6597,18 @@ MO.FEaiChartDesktop_resize = function FEaiChartDesktop_resize(targetWidth, targe
    }else{
       o._calculateRate.set(1, 1);
    }
-   MO.Logger.info(o, 'Change screen size. (orientation={1}, ratio={2}, screen_size={3}, size={4}, rate={5}, calculate_rate={6})', browser.orientationCd(), pixelRatio, o._screenSize.toDisplay(), o._size.toDisplay(), sizeRate, o._calculateRate.toDisplay());
-   var isMobile = MO.Runtime.isPlatformMobile();
+   MO.Logger.debug(o, 'Change screen size. (orientation={1}, ratio={2}, screen_size={3}, size={4}, rate={5}, calculate_rate={6})', browser.orientationCd(), pixelRatio, o._screenSize.toDisplay(), o._size.toDisplay(), sizeRate, o._calculateRate.toDisplay());
    var canvas3d = o._canvas3d;
-   canvas3d.resize(width, height);
-   var context3d = canvas3d.graphicContext();
-   if(isMobile){
-      var hCanvas3d = canvas3d._hCanvas;
-      hCanvas3d.style.width = sourceWidth + 'px';
-      hCanvas3d.style.height = sourceHeight + 'px';
+   if(browser.capability().canvasScale){
+      canvas3d.resize(width, height);
+   }else{
+      canvas3d.resize(sourceWidth, sourceHeight);
    }
+   var context3d = canvas3d.graphicContext();
    context3d.setViewport(0, 0, width, height)
    var canvas2d = o._canvas2d;
    canvas2d.resize(width, height);
    canvas2d.graphicContext().setGlobalScale(sizeRate, sizeRate);
-   if(isMobile){
-      var hCanvas2d = canvas2d._hCanvas;
-      hCanvas2d.style.width = sourceWidth + 'px';
-      hCanvas2d.style.height = sourceHeight + 'px';
-   }
    var stage = o._canvas3d.activeStage();
    o.selectStage(stage);
 }
