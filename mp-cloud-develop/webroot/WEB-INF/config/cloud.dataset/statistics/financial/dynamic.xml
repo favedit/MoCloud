@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="e15e1c74-13ba-4d37-910f-f0691795a36d" name="statistics.financial.dynamic" label="M#12cn15动态统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Dynamic" data_name="ST_FIN_DYNAMIC" data_alias="ST_FIN_DYN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldDateTime _uuid="531f8557-7d4b-4116-bf88-223c51c9c3c2" name="record_date" label="M#12cn14记录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECORD_DATE" />
+  <FieldRecordId _uuid="0619dfb6-b1f2-409b-b82d-7fc53ce8f3c5" name="company_id" label="M#12cn14公司编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_ID" />
+  <FieldString _uuid="b52f7a96-6459-4b2f-b9b1-aee74b30389a" name="company_label" label="M#12cn14公司名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_LABEL" data_size="40" />
+  <FieldRecordId _uuid="ceb583b5-9222-4712-a499-5e979110d5ee" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
+  <FieldString _uuid="21e6a5af-bc67-4d42-9541-616683b67051" name="marketer_label" label="M#12cn15理财师名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_LABEL" data_size="40" />
+  <FieldRecordId _uuid="d32adc70-c7a1-4c8e-910a-101a15f134a0" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" />
+  <FieldString _uuid="7042298a-3118-470a-ae32-da98d32a7a1e" name="customer_label" label="M#12cn14客户名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LABEL" data_size="40" />
+  <FieldInteger _uuid="8eff9e61-b49a-440c-9a29-21d904b12693" name="customer_investment" label="M#12cn14客户投资" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_INVESTMENT" />
+  <FieldInteger _uuid="c4da6b5c-ceb8-4d7b-a26d-d53a92be4caa" name="customer_redemption" label="M#12cn14客户赎回" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_REDEMPTION" />
+  <FieldString _uuid="0d66475f-2dca-43fe-9103-bd5911867b4d" name="customer_phone" label="M#12cn14客户电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_PHONE" data_size="20" />
+  <FieldString _uuid="d1ec5263-31da-4ae9-bc34-319226e50966" name="customer_card" label="M#12cn15用户身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_CARD" data_size="20" />
+  <FieldTemplate _uuid="020e481a-5782-4612-9616-da0a22df408a" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

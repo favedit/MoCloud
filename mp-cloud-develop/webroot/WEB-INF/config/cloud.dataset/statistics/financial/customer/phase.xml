@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="ac445a15-2a98-4523-b371-a144dc941e61" name="statistics.financial.customer.phase" label="M#12cn17客户阶段统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Customer.Phase" data_name="ST_FIN_CUSTOMER_PHASE" data_alias="ST_FIN_CST_PHS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics" data_type="D">
+  <FieldRecordId _uuid="7d1d5163-8662-4133-826a-796be5ae7646" name="customer_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" />
+  <FieldString _uuid="cb535609-8047-4974-8343-61a9751a9d17" name="customer_label" label="M#12cn14用户名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LABEL" data_size="40" />
+  <FieldInteger _uuid="f6b29f2f-8c59-417b-9f26-d390f1797f9b" name="investment" label="M#12cn12投资" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT" />
+  <FieldInteger _uuid="779b1d2d-99c1-4625-9e53-881eaba877c9" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="6c4b7ade-59f5-410c-9175-a56dd93882da" name="redemption" label="M#12cn12赎回" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION" />
+  <FieldInteger _uuid="db38e2e5-0bcf-4337-a624-334a05573225" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldInteger _uuid="905f0e4b-6f86-4980-aefc-6e89597e002b" name="netinvestment" label="M#12cn12净投" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
+  <FieldInteger _uuid="64ac07ed-5a59-4458-a4e6-53abf514e735" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldInteger _uuid="b2b3a870-06f1-48a9-a9bd-cb775bf0a38b" name="performance" label="M#12cn12绩效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE" />
+  <FieldInteger _uuid="c081f13f-ea2d-463f-aeff-9c251fd6cda2" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldTemplate _uuid="4a1fd558-c98a-4642-98a8-cb3990215864" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

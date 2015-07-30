@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="90c02690-ae8c-4754-b3e1-39be8c056add" name="statistics.financial.company.amount" label="M#12cn17公司数据统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Company.Amount" data_name="ST_FIN_COMPANY_AMOUNT" data_alias="ST_FIN_COMPANY_AMOUNT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics" data_type="D">
+  <FieldRecordId _uuid="87d29453-e573-45e5-8560-e8f0206c8c5c" name="company_id" label="M#12cn14公司编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_ID" />
+  <FieldString _uuid="f70b2de9-8e67-48c8-8053-7182c22a728e" name="company_label" label="M#12cn14公司名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_LABEL" data_size="40" />
+  <FieldInteger _uuid="f1ea1d8b-3599-4b17-9e6c-aa856ceb8259" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="1affdf18-3d64-4cae-a913-d3295ce897c4" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldInteger _uuid="6e854c32-486d-4925-8d32-bff807691f95" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldInteger _uuid="d7bc7c66-44ac-430f-a1cc-13ba2e411f44" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldInteger _uuid="866b32ae-133f-4998-b5ae-17f1c96d4308" name="marketer_total" label="M#12cn15理财师总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_TOTAL" />
+  <FieldInteger _uuid="9d9a33ff-711d-46e9-be67-c537aa01dc8b" name="customer_total" label="M#12cn14客户总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_TOTAL" />
+  <FieldTemplate _uuid="8c4b7469-22ba-4211-9a0c-891553f73818" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
