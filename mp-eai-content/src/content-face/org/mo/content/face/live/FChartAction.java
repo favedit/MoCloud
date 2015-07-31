@@ -95,7 +95,6 @@ public class FChartAction
             hostAddress = context.remoteAddress();
          }
       }
-
       // 登录处理
       String message = null;
       String logggerMessage = null;
