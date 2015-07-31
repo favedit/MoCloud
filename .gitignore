@@ -24,7 +24,8 @@
 /mp-develop-logger/webroot/WEB-INF/lib
 /mp-eai-content/webroot/WEB-INF/classes
 /mp-eai-content/webroot/WEB-INF/lib
-/mp-eai-batch/bin
+/mp-eai-batch/webroot/WEB-INF/classes
+/mp-eai-batch/webroot/WEB-INF/lib
 /mt-server/tomcat-cloud.develop/logs
 /mt-server/tomcat-cloud.design/logs
 /mt-server/tomcat-cloud.content/logs

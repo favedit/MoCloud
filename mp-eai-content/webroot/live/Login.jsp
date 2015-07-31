@@ -19,29 +19,29 @@ function onLogin(){
          <div class="login_box">
             <h1>钰诚-e租宝<BR>全球实时投资数据展示中心(中国)</h1>
             <p class="test" style="padding-top:20px;">为保证实时数据的安全性，</p>
-            <p class="test">请输入OA用户名和密码.</p>
+            <p class="test">请使用OA系统的账号和密码登录。</p>
             <p class="error"><jh:write source='&page.message' /></p>
             <div class="container">
-               <p><span>用户名：</span><input type="text" name="passport" id="passport" placeholder="" /></p>
-               <p><span>密码：</span><input type="password" id="password" name="password" /></p>
+               <p><span>用户名：</span><input type="text" name="passport" id="passport" placeholder=""/></p>
+               <p><span>密码：</span><input type="password" id="password" name="password"/></p>
                <p style="background:none;"><input style="height: 46px;" type="button" id="btn" value=""/></p>
             </div>
-            <p class="prompt" style="padding-top: 15px;"> 如果需要使用，请联系【钰诚智慧企业推进中心】</p>
-            <p class="prompt">本机IP:【<jh:write source='&page.host' />】 | 联系电话：010-65499299</p>
+            <p class="prompt" style="padding-top: 15px;">如果登录有问题，请联系【钰诚智慧企业推进中心】</p>
+            <p class="prompt">电话：010-65499299 | IP：<jh:write source='&page.host'/></p>
          </div>
    </div>
 </FORM>
 <script type="text/javascript">
-  var $username=document.getElementById('passport'),
-      $password=document.getElementById('password'),
-      $btn=document.getElementById('btn');
-      $btn.onclick=function() {
-         if($username.value != "" && $password.value !="" ){
-            onLogin();
-         }else{
-            alert("用户名或密码不能为空");
-         }
-      }
+var $username = document.getElementById('passport');
+var $password = document.getElementById('password');
+var $btn = document.getElementById('btn');
+$btn.onclick=function() {
+   if($username.value != "" && $password.value != ""){
+      onLogin();
+   }else{
+      alert("用户名或密码不能为空");
+   }
+}
 </script>
 </BODY>
 </HTML>

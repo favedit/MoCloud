@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -36,11 +37,17 @@ public class FStatisticsFinancialDynamicUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段关联编号的定义。
+   private long __linkId;
+
+   // 字段关联编号的定义。
+   protected long _linkId;
+
    // 存储字段记录时间的定义。
-   private TDateTime __recordDate = new TDateTime();
+   private TDateTime __linkDate = new TDateTime();
 
    // 字段记录时间的定义。
-   protected TDateTime _recordDate = new TDateTime();
+   protected TDateTime _linkDate = new TDateTime();
 
    // 存储字段公司编号的定义。
    private long __companyId;
@@ -78,18 +85,6 @@ public class FStatisticsFinancialDynamicUnit
    // 字段客户名称的定义。
    protected String _customerLabel;
 
-   // 存储字段客户投资的定义。
-   private int __customerInvestment;
-
-   // 字段客户投资的定义。
-   protected int _customerInvestment;
-
-   // 存储字段客户赎回的定义。
-   private int __customerRedemption;
-
-   // 字段客户赎回的定义。
-   protected int _customerRedemption;
-
    // 存储字段客户电话的定义。
    private String __customerPhone;
 
@@ -101,6 +96,18 @@ public class FStatisticsFinancialDynamicUnit
 
    // 字段用户身份证的定义。
    protected String _customerCard;
+
+   // 存储字段客户命令类型的定义。
+   private int __customerActionCd;
+
+   // 字段客户命令类型的定义。
+   protected int _customerActionCd;
+
+   // 存储字段客户数值的定义。
+   private double __customerAmount;
+
+   // 字段客户数值的定义。
+   protected double _customerAmount;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -214,12 +221,39 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
+   // <T>判断关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkIdChanged(){
+      return __linkId != _linkId;
+   }
+
+   //============================================================
+   // <T>获得关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkId(){
+      return _linkId;
+   }
+
+   //============================================================
+   // <T>设置关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkId(long value){
+      _linkId = value;
+   }
+
+   //============================================================
    // <T>判断记录时间的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRecordDateChanged(){
-      return !__recordDate.equals(_recordDate);
+   public boolean isLinkDateChanged(){
+      return !__linkDate.equals(_linkDate);
    }
 
    //============================================================
@@ -227,8 +261,8 @@ public class FStatisticsFinancialDynamicUnit
    //
    // @return 数据内容
    //============================================================
-   public TDateTime recordDate(){
-      return _recordDate;
+   public TDateTime linkDate(){
+      return _linkDate;
    }
 
    //============================================================
@@ -236,8 +270,8 @@ public class FStatisticsFinancialDynamicUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setRecordDate(TDateTime value){
-      _recordDate = value;
+   public void setLinkDate(TDateTime value){
+      _linkDate = value;
    }
 
    //============================================================
@@ -403,60 +437,6 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
-   // <T>判断客户投资的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCustomerInvestmentChanged(){
-      return __customerInvestment != _customerInvestment;
-   }
-
-   //============================================================
-   // <T>获得客户投资的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int customerInvestment(){
-      return _customerInvestment;
-   }
-
-   //============================================================
-   // <T>设置客户投资的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCustomerInvestment(int value){
-      _customerInvestment = value;
-   }
-
-   //============================================================
-   // <T>判断客户赎回的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCustomerRedemptionChanged(){
-      return __customerRedemption != _customerRedemption;
-   }
-
-   //============================================================
-   // <T>获得客户赎回的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int customerRedemption(){
-      return _customerRedemption;
-   }
-
-   //============================================================
-   // <T>设置客户赎回的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCustomerRedemption(int value){
-      _customerRedemption = value;
-   }
-
-   //============================================================
    // <T>判断客户电话的数据是否改变。</T>
    //
    // @return 数据内容
@@ -508,6 +488,60 @@ public class FStatisticsFinancialDynamicUnit
    //============================================================
    public void setCustomerCard(String value){
       _customerCard = value;
+   }
+
+   //============================================================
+   // <T>判断客户命令类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerActionCdChanged(){
+      return __customerActionCd != _customerActionCd;
+   }
+
+   //============================================================
+   // <T>获得客户命令类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int customerActionCd(){
+      return _customerActionCd;
+   }
+
+   //============================================================
+   // <T>设置客户命令类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerActionCd(int value){
+      _customerActionCd = value;
+   }
+
+   //============================================================
+   // <T>判断客户数值的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerAmountChanged(){
+      return __customerAmount != _customerAmount;
+   }
+
+   //============================================================
+   // <T>获得客户数值的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double customerAmount(){
+      return _customerAmount;
+   }
+
+   //============================================================
+   // <T>设置客户数值的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerAmount(double value){
+      _customerAmount = value;
    }
 
    //============================================================
@@ -633,8 +667,10 @@ public class FStatisticsFinancialDynamicUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "record_date":
-            return _recordDate.toString();
+         case "link_id":
+            return Long.toString(_linkId);
+         case "link_date":
+            return _linkDate.toString();
          case "company_id":
             return Long.toString(_companyId);
          case "company_label":
@@ -647,14 +683,14 @@ public class FStatisticsFinancialDynamicUnit
             return Long.toString(_customerId);
          case "customer_label":
             return _customerLabel;
-         case "customer_investment":
-            return RInteger.toString(_customerInvestment);
-         case "customer_redemption":
-            return RInteger.toString(_customerRedemption);
          case "customer_phone":
             return _customerPhone;
          case "customer_card":
             return _customerCard;
+         case "customer_action_cd":
+            return RInteger.toString(_customerActionCd);
+         case "customer_amount":
+            return RDouble.toString(_customerAmount);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -686,8 +722,11 @@ public class FStatisticsFinancialDynamicUnit
          case "guid":
             _guid = value;
             break;
-         case "record_date":
-            _recordDate.parse(value);
+         case "link_id":
+            _linkId = RLong.parse(value);
+            break;
+         case "link_date":
+            _linkDate.parse(value);
             break;
          case "company_id":
             _companyId = RLong.parse(value);
@@ -707,17 +746,17 @@ public class FStatisticsFinancialDynamicUnit
          case "customer_label":
             _customerLabel = value;
             break;
-         case "customer_investment":
-            _customerInvestment = RInteger.parse(value);
-            break;
-         case "customer_redemption":
-            _customerRedemption = RInteger.parse(value);
-            break;
          case "customer_phone":
             _customerPhone = value;
             break;
          case "customer_card":
             _customerCard = value;
+            break;
+         case "customer_action_cd":
+            _customerActionCd = RInteger.parse(value);
+            break;
+         case "customer_amount":
+            _customerAmount = RDouble.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -758,9 +797,13 @@ public class FStatisticsFinancialDynamicUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "record_date":
-               __recordDate.parse(value);
-               _recordDate.assign(__recordDate);
+            case "link_id":
+               __linkId = RLong.parse(value);
+               _linkId = __linkId;
+               break;
+            case "link_date":
+               __linkDate.parse(value);
+               _linkDate.assign(__linkDate);
                break;
             case "company_id":
                __companyId = RLong.parse(value);
@@ -786,14 +829,6 @@ public class FStatisticsFinancialDynamicUnit
                __customerLabel = value;
                _customerLabel = __customerLabel;
                break;
-            case "customer_investment":
-               __customerInvestment = RInteger.parse(value);
-               _customerInvestment = __customerInvestment;
-               break;
-            case "customer_redemption":
-               __customerRedemption = RInteger.parse(value);
-               _customerRedemption = __customerRedemption;
-               break;
             case "customer_phone":
                __customerPhone = value;
                _customerPhone = __customerPhone;
@@ -801,6 +836,14 @@ public class FStatisticsFinancialDynamicUnit
             case "customer_card":
                __customerCard = value;
                _customerCard = __customerCard;
+               break;
+            case "customer_action_cd":
+               __customerActionCd = RInteger.parse(value);
+               _customerActionCd = __customerActionCd;
+               break;
+            case "customer_amount":
+               __customerAmount = RDouble.parse(value);
+               _customerAmount = __customerAmount;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -833,17 +876,18 @@ public class FStatisticsFinancialDynamicUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("recordDate", _recordDate);
+      row.set("linkId", _linkId);
+      row.set("linkDate", _linkDate);
       row.set("companyId", _companyId);
       row.set("companyLabel", _companyLabel);
       row.set("marketerId", _marketerId);
       row.set("marketerLabel", _marketerLabel);
       row.set("customerId", _customerId);
       row.set("customerLabel", _customerLabel);
-      row.set("customerInvestment", _customerInvestment);
-      row.set("customerRedemption", _customerRedemption);
       row.set("customerPhone", _customerPhone);
       row.set("customerCard", _customerCard);
+      row.set("customerActionCd", _customerActionCd);
+      row.set("customerAmount", _customerAmount);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -861,17 +905,18 @@ public class FStatisticsFinancialDynamicUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("recordDate", _recordDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkId", RLong.toString(_linkId));
+      map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("companyId", RLong.toString(_companyId));
       map.put("companyLabel", _companyLabel);
       map.put("marketerId", RLong.toString(_marketerId));
       map.put("marketerLabel", _marketerLabel);
       map.put("customerId", RLong.toString(_customerId));
       map.put("customerLabel", _customerLabel);
-      map.put("customerInvestment", RInteger.toString(_customerInvestment));
-      map.put("customerRedemption", RInteger.toString(_customerRedemption));
       map.put("customerPhone", _customerPhone);
       map.put("customerCard", _customerCard);
+      map.put("customerActionCd", RInteger.toString(_customerActionCd));
+      map.put("customerAmount", RDouble.toString(_customerAmount));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

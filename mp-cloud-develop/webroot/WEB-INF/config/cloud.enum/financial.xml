@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group _uuid="39311855-cf93-4686-858a-fd9ade2ca2fb" name="financial" label="金融常量" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="MoMgEnumConstant" code="Egr" code_name="GmConstant" full_code="EnumConstant" display_index="24" project_name="/Common/MoMessage" project_code="Mg" is_include="Y">
+  <Enum _uuid="2bce7b28-e48d-4e71-8b56-480db3a1fe8f" name="GcFinancialCustomerAction" label="客户命令" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="4a7538dd-7c42-4112-bcbd-2bee5a768f81" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="8a555725-3b22-4e27-8563-13527603db83" name="Investment" label="投资" is_valid="Y" note="M#" />
+    <Item _uuid="9d2db97a-e1b0-47a0-ba4f-2d779d7ab72b" name="Redemption" label="赎回" is_valid="Y" note="M#" />
+  </Enum>
+</Group>

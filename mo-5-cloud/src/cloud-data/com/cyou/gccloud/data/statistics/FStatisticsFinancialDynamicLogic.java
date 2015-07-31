@@ -42,8 +42,11 @@ public class FStatisticsFinancialDynamicLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段关联编号的定义。
+   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
+
    // 字段记录时间的定义。
-   public final static SLogicFieldInfo RECORD_DATE = new SLogicFieldInfo("RECORD_DATE");
+   public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
 
    // 字段公司编号的定义。
    public final static SLogicFieldInfo COMPANY_ID = new SLogicFieldInfo("COMPANY_ID");
@@ -63,17 +66,17 @@ public class FStatisticsFinancialDynamicLogic
    // 字段客户名称的定义。
    public final static SLogicFieldInfo CUSTOMER_LABEL = new SLogicFieldInfo("CUSTOMER_LABEL");
 
-   // 字段客户投资的定义。
-   public final static SLogicFieldInfo CUSTOMER_INVESTMENT = new SLogicFieldInfo("CUSTOMER_INVESTMENT");
-
-   // 字段客户赎回的定义。
-   public final static SLogicFieldInfo CUSTOMER_REDEMPTION = new SLogicFieldInfo("CUSTOMER_REDEMPTION");
-
    // 字段客户电话的定义。
    public final static SLogicFieldInfo CUSTOMER_PHONE = new SLogicFieldInfo("CUSTOMER_PHONE");
 
    // 字段用户身份证的定义。
    public final static SLogicFieldInfo CUSTOMER_CARD = new SLogicFieldInfo("CUSTOMER_CARD");
+
+   // 字段客户命令类型的定义。
+   public final static SLogicFieldInfo CUSTOMER_ACTION_CD = new SLogicFieldInfo("CUSTOMER_ACTION_CD");
+
+   // 字段客户数值的定义。
+   public final static SLogicFieldInfo CUSTOMER_AMOUNT = new SLogicFieldInfo("CUSTOMER_AMOUNT");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -88,7 +91,7 @@ public class FStatisticsFinancialDynamicLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_DATE`,`COMPANY_ID`,`COMPANY_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_INVESTMENT`,`CUSTOMER_REDEMPTION`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`COMPANY_ID`,`COMPANY_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CUSTOMER_ACTION_CD`,`CUSTOMER_AMOUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态统计表逻辑单元。</T>
@@ -680,17 +683,18 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`RECORD_DATE`");
+      cmd.append(",`LINK_ID`");
+      cmd.append(",`LINK_DATE`");
       cmd.append(",`COMPANY_ID`");
       cmd.append(",`COMPANY_LABEL`");
       cmd.append(",`MARKETER_ID`");
       cmd.append(",`MARKETER_LABEL`");
       cmd.append(",`CUSTOMER_ID`");
       cmd.append(",`CUSTOMER_LABEL`");
-      cmd.append(",`CUSTOMER_INVESTMENT`");
-      cmd.append(",`CUSTOMER_REDEMPTION`");
       cmd.append(",`CUSTOMER_PHONE`");
       cmd.append(",`CUSTOMER_CARD`");
+      cmd.append(",`CUSTOMER_ACTION_CD`");
+      cmd.append(",`CUSTOMER_AMOUNT`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -706,14 +710,21 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      TDateTime recordDate = unit.recordDate();
-      if(recordDate == null){
+      long linkId = unit.linkId();
+      if(linkId == 0){
          cmd.append("NULL");
-      }else if(recordDate.isEmpty()){
+      }else{
+         cmd.append(linkId);
+      }
+      cmd.append(',');
+      TDateTime linkDate = unit.linkDate();
+      if(linkDate == null){
+         cmd.append("NULL");
+      }else if(linkDate.isEmpty()){
          cmd.append("NULL");
       }else{
          cmd.append("STR_TO_DATE('");
-         cmd.append(recordDate.format());
+         cmd.append(linkDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
@@ -765,10 +776,6 @@ public class FStatisticsFinancialDynamicLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.customerInvestment());
-      cmd.append(',');
-      cmd.append(unit.customerRedemption());
-      cmd.append(',');
       String customerPhone = unit.customerPhone();
       if(RString.isEmpty(customerPhone)){
          cmd.append("NULL");
@@ -786,6 +793,10 @@ public class FStatisticsFinancialDynamicLogic
          cmd.append(RSql.formatValue(customerCard));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.customerActionCd());
+      cmd.append(',');
+      cmd.append(unit.customerAmount());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -860,16 +871,25 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isRecordDateChanged()){
-         cmd.append(",`RECORD_DATE`=");
-         TDateTime recordDate = unit.recordDate();
-         if(recordDate == null){
+      if(unit.isLinkIdChanged()){
+         cmd.append(",`LINK_ID`=");
+         long linkId = unit.linkId();
+         if(linkId == 0){
             cmd.append("NULL");
-         }else if(recordDate.isEmpty()){
+         }else{
+            cmd.append(linkId);
+         }
+      }
+      if(unit.isLinkDateChanged()){
+         cmd.append(",`LINK_DATE`=");
+         TDateTime linkDate = unit.linkDate();
+         if(linkDate == null){
+            cmd.append("NULL");
+         }else if(linkDate.isEmpty()){
             cmd.append("NULL");
          }else{
             cmd.append("STR_TO_DATE('");
-            cmd.append(recordDate.format());
+            cmd.append(linkDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
@@ -933,14 +953,6 @@ public class FStatisticsFinancialDynamicLogic
             cmd.append('\'');
          }
       }
-      if(unit.isCustomerInvestmentChanged()){
-         cmd.append(",`CUSTOMER_INVESTMENT`=");
-         cmd.append(unit.customerInvestment());
-      }
-      if(unit.isCustomerRedemptionChanged()){
-         cmd.append(",`CUSTOMER_REDEMPTION`=");
-         cmd.append(unit.customerRedemption());
-      }
       if(unit.isCustomerPhoneChanged()){
          cmd.append(",`CUSTOMER_PHONE`=");
          String customerPhone = unit.customerPhone();
@@ -962,6 +974,14 @@ public class FStatisticsFinancialDynamicLogic
             cmd.append(RSql.formatValue(customerCard));
             cmd.append('\'');
          }
+      }
+      if(unit.isCustomerActionCdChanged()){
+         cmd.append(",`CUSTOMER_ACTION_CD`=");
+         cmd.append(unit.customerActionCd());
+      }
+      if(unit.isCustomerAmountChanged()){
+         cmd.append(",`CUSTOMER_AMOUNT`=");
+         cmd.append(unit.customerAmount());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
