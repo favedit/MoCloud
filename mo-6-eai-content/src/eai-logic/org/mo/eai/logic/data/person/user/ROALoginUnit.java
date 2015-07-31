@@ -30,20 +30,21 @@ public class ROALoginUnit
                                 String password){
       //设置参数
       String key = "ycjt*&^%$3fyg";
-      String encodePassport = null;
-      String encodePassword = null;
-      try{
-         encodePassport = URLEncoder.encode(ThreeDes.encode(key, passport), "utf-8");
-         encodePassword = URLEncoder.encode(ThreeDes.encode(key, password), "utf-8");
-      }catch(UnsupportedEncodingException e){
-         e.printStackTrace();
-         _logger.debug(null, "ROALoginUnit oaLogin", "OA login fail. (message={1})", e.getMessage());
-      }
+      String encodePassport = ThreeDes.encode(key, passport);
+      String encodePassword = ThreeDes.encode(key, password);
+
       String appDate = String.valueOf(new Date().getTime());
       String from = "H5";
       String validate = RMd5.encode(encodePassport + encodePassword + appDate + from + key);
       // 拼装参数
-      String parem = "?username=" + encodePassport + "&pwd=" + encodePassword + "&appDate=" + appDate + "&from=" + from + "&validate=" + validate;
+      String parem = null;
+      try{
+         parem = "?username=" + URLEncoder.encode(encodePassport, "utf-8") + "&pwd=" + URLEncoder.encode(encodePassword, "utf-8") + "&appDate=" + appDate + "&from=" + from + "&validate=" + validate;
+      }catch(UnsupportedEncodingException e){
+         e.printStackTrace();
+         _logger.debug(null, "ROALoginUnit oaLogin", "OA login fail. (message={1})", e.getMessage());
+      }
+
       _logger.debug(null, "ROALoginUnit oaLogin", "OA login. (url={1})", url + parem);
       // 发送请求
       String result = null;
