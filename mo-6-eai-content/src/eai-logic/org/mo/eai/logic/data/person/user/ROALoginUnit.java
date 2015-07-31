@@ -1,6 +1,8 @@
 package org.mo.eai.logic.data.person.user;
 
 import com.ycjt.ead.ThreeDes;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import org.mo.com.encoding.RMd5;
 import org.mo.com.lang.RString;
@@ -38,7 +40,14 @@ public class ROALoginUnit
       _logger.debug(null, "ROALoginUnit oaLogin", "OA login. (url={1})", url + parem);
       // 发送请求
       String result = null;
-      try(FHttpConnection connection = new FHttpConnection(url + parem)){
+      try{
+         url = URLEncoder.encode(url + parem, "utf-8");
+
+      }catch(UnsupportedEncodingException e){
+         e.printStackTrace();
+         _logger.debug(null, "ROALoginUnit oaLogin", "OA login fail. (message={1})", e.getMessage());
+      }
+      try(FHttpConnection connection = new FHttpConnection(url)){
          result = connection.fetch();
       }
       return RString.trim(result);
