@@ -41,13 +41,12 @@ public class ROALoginUnit
       // 发送请求
       String result = null;
       try{
-         url = URLEncoder.encode(url + parem, "utf-8");
-
+         parem = URLEncoder.encode(parem, "utf-8");
       }catch(UnsupportedEncodingException e){
          e.printStackTrace();
          _logger.debug(null, "ROALoginUnit oaLogin", "OA login fail. (message={1})", e.getMessage());
       }
-      try(FHttpConnection connection = new FHttpConnection(url)){
+      try(FHttpConnection connection = new FHttpConnection(url + parem)){
          result = connection.fetch();
       }
       return RString.trim(result);
