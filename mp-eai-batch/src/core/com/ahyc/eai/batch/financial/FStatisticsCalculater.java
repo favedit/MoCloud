@@ -25,7 +25,7 @@ public class FStatisticsCalculater
                                       long beginId,
                                       long endId){
       // 代码修正
-      ISqlConnection sourceConnection = logicContext.activeConnection("ezubo");
+      ISqlConnection sourceConnection = logicContext.activeConnection("ezubao");
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
       String selectSql = RString.format("SELECT id,investor_uid,investor_capital,from_unixtime(add_time, '%Y%m%d%H%i%s') as add_time FROM lzh_borrow_investor WHERE (id>{1}) AND (id<{2})", beginId, endId);
@@ -75,7 +75,7 @@ public class FStatisticsCalculater
    // <T>投资数据处理。</T>
    //============================================================
    public void processInvestment(FLogicContext logicContext){
-      ISqlConnection sourceConnection = logicContext.activeConnection("ezubo");
+      ISqlConnection sourceConnection = logicContext.activeConnection("ezubao");
       ISqlConnection targetConnection = logicContext.activeConnection("statistics");
       // 获得最大编号
       long sourceMaxId = sourceConnection.executeLong("SELECT MAX(id) FROM lzh_borrow_investor");

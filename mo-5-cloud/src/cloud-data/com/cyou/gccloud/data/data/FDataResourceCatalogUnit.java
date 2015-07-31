@@ -1,17 +1,21 @@
 package com.cyou.gccloud.data.data;
 
 import java.util.Map;
-import org.mo.com.lang.*;
-import org.mo.com.lang.type.*;
-import org.mo.com.collections.*;
-import org.mo.core.aop.face.*;
-import org.mo.data.logic.*;
+import org.mo.com.collections.FRow;
+import org.mo.com.lang.IStringPair;
+import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RLong;
+import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
+import org.mo.core.aop.face.ASourceMachine;
+import org.mo.data.logic.FLogicUnit;
 
 //============================================================
 // <T>资源目录表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceCatalogUnit extends FLogicUnit
+public class FDataResourceCatalogUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

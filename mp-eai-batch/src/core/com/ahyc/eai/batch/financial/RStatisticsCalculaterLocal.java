@@ -11,28 +11,29 @@ import org.mo.eng.data.IDatabaseConsole;
 //============================================================
 // <T>统计计算器。</T>
 //============================================================
-public class RStatisticsCalculater
+public class RStatisticsCalculaterLocal
       extends FObject
 {
    // 日志输出接口
-   protected static ILogger _logger = RLogger.find(RStatisticsCalculater.class);
+   protected static ILogger _logger = RLogger.find(RStatisticsCalculaterLocal.class);
 
    //============================================================
    // <T>投资阶段处理。</T>
    //============================================================
    public static void main(String[] args){
+      String configFileName = "D:/Microbject/MoCloud/mp-eai-batch/webroot/WEB-INF/classes/application-work.xml";
       // 设置属性
       FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-      attributes.set("application", "/data/eai/eai.batch");
+      attributes.set("application", "D:/Microbject/MoCloud");
       // 加载配置
-      RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-test.xml");
+      RAop.initialize(configFileName);
       // 逻辑处理
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
       try(FLogicContext logicContext = new FLogicContext(databaseConsole)){
          FStatisticsCalculater calculater = new FStatisticsCalculater();
          calculater.process(logicContext);
       }catch(Exception exception){
-         _logger.error(null, "main", exception);
+         _logger.fatal(null, "main", exception);
       }
       RAop.release();
    }

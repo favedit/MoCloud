@@ -4,7 +4,7 @@
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
    <Define name='application.name'>mp-eai-batch</Define>
-   <Define name='application.root'>${application}/${application.name}</Define>
+   <Define name='application.root'>${application}</Define>
    <Define name='application.deploy'>${application.root}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
    <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
@@ -25,16 +25,6 @@
    <Include>${application.config}/common/data.xml</Include>
    <Include>${application.config}/common/web.xml</Include>
    <Include>${application.config}/common/web-face.xml</Include>
-
-   <!-- 包含：设计设定 -->
-   <Include>${application.config}/design/core.xml</Include>
-   <Include>${application.config}/design/describe.xml</Include>
-
-   <!-- 包含：内容设定 -->
-   <Include>${application.config}/content/core.xml</Include>
-   <Include>${application.config}/content/servlet.xml</Include>
-   <Include>${application.config}/content/service.xml</Include>
-   <Include>${application.config}/content/face.xml</Include>
 
    <!-- 包含：环境设定 -->
    <Include>${application.config}/environment/environment-test.xml</Include>
