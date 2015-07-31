@@ -30,8 +30,15 @@ public class ROALoginUnit
                                 String password){
       //设置参数
       String key = "ycjt*&^%$3fyg";
-      String encodePassport = ThreeDes.encode(key, passport);
-      String encodePassword = ThreeDes.encode(key, password);
+      String encodePassport = null;
+      String encodePassword = null;
+      try{
+         encodePassport = URLEncoder.encode(ThreeDes.encode(key, passport), "utf-8");
+         encodePassword = URLEncoder.encode(ThreeDes.encode(key, password), "utf-8");
+      }catch(UnsupportedEncodingException e){
+         e.printStackTrace();
+         _logger.debug(null, "ROALoginUnit oaLogin", "OA login fail. (message={1})", e.getMessage());
+      }
       String appDate = String.valueOf(new Date().getTime());
       String from = "H5";
       String validate = RMd5.encode(encodePassport + encodePassword + appDate + from + key);
@@ -40,12 +47,6 @@ public class ROALoginUnit
       _logger.debug(null, "ROALoginUnit oaLogin", "OA login. (url={1})", url + parem);
       // 发送请求
       String result = null;
-      try{
-         parem = URLEncoder.encode(parem, "utf-8");
-      }catch(UnsupportedEncodingException e){
-         e.printStackTrace();
-         _logger.debug(null, "ROALoginUnit oaLogin", "OA login fail. (message={1})", e.getMessage());
-      }
       try(FHttpConnection connection = new FHttpConnection(url + parem)){
          result = connection.fetch();
       }
