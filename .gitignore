@@ -32,6 +32,7 @@
 /mt-server/tomcat-cloud.storage/logs
 /mt-server/tomcat-cloud.logger/logs
 /mt-server/tomcat-develop.logger/logs
+/mt-server/tomcat-eai.batch/logs
 /mt-server/tomcat-eai.content/logs
 /mt-database
 /mt-storage
