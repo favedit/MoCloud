@@ -36,6 +36,15 @@
                showSeconds: false
             });
          }
+
+         function doSubmit() {
+            var passport = $("#passport").val();
+            if (!ischinese(passport)) {
+               alert("账号由字母及数字或下划线组成！");
+            } else {
+               form.submit();
+            }
+         }
       </script>
    </HEAD>
 
@@ -46,7 +55,7 @@
                <div class="right_title"> <span>增加用户</span> </div>
                <div class="btn_bar">
                   <div class="nav_btn">
-                     <a href="javascript:form.submit();" class="sub_btn"></a>
+                     <a href="javascript:doSubmit();" class="sub_btn"></a>
                      <a href="javascript:history.back(-1);" class="back_btn"></a>
                   </div>
                   <div class="nav_search"></div>
@@ -70,13 +79,15 @@
                   <tr>
                      <td align="left">帐号</td>
                      <td align="left">
-                        <input name="passport" style="width:400px;text-align:left;" value="<jh:write source='&unit.passport' />" />
+                        <input id="passport" name="passport" style="width:200px;text-align:left;" value="<jh:write source='&unit.passport' />" />
+                        <font color="red">只支持英文、数字和下划线
+</font>
                      </td>
                   </tr>
                   <tr>
                      <td align="left">密码</td>
                      <td align="left">
-                        <input name="password" style="width:400px;text-align:left;" value="<jh:write source='&unit.password' />" />
+                        <input name="password" style="width:200px;text-align:left;" value="<jh:write source='&unit.password' />" />
                      </td>
                   </tr>
                   <tr>
@@ -103,14 +114,16 @@
                   <tr>
                      <td align="left">开始时间</td>
                      <td align="left">
-                        <input class="easyui-datetimebox" name="begin_date" id="begin_date" data-options="showSeconds:false" style="width:150px" value=""><span id="oriBeginDate" style="display:none"><jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss"/></span> - 
-                         <input class="easyui-datetimebox" name="end_date" id="end_date" data-options="showSeconds:false" style="width:150px" value=""><span id="oriEndDate" style="display:none"><jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
+                        <input class="easyui-datetimebox" name="begin_date" id="begin_date" data-options="showSeconds:false" style="width:150px" value=""><span id="oriBeginDate" style="display:none"><jh:date source='&unit.beginDate' format="YYYY-MM-DD HH24:mi:ss"/></span> -
+                        <input class="easyui-datetimebox" name="end_date" id="end_date" data-options="showSeconds:false" style="width:150px" value=""><span id="oriEndDate" style="display:none"><jh:date source='&unit.endDate' format="YYYY-MM-DD HH24:mi:ss"/></span>
                      </td>
                   </tr>
                   <tr>
                      <td align="left">备注</td>
                      <td align="left">
-                        <textarea name="note" cols="60" rows="10"><jh:write source='&unit.note' format="text" /></textarea>
+                        <textarea name="note" cols="60" rows="10">
+                           <jh:write source='&unit.note' format="text" />
+                        </textarea>
                      </td>
                   </tr>
                </table>

@@ -54,6 +54,7 @@ public class FChartAction
             hostAddress = context.remoteAddress();
          }
       }
+      page.setHost(hostAddress);
       // 登录处理
       FDataPersonAccessAuthority authority = _personAccessAuthorityConsole.findByHostAddress(logicContext, hostAddress);
       if(authority != null){
@@ -94,6 +95,7 @@ public class FChartAction
             hostAddress = context.remoteAddress();
          }
       }
+
       // 登录处理
       String message = null;
       String logggerMessage = null;

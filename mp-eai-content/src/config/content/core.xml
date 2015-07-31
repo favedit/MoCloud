@@ -19,8 +19,8 @@
          face  = 'org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole'
          class = 'org.mo.eai.logic.data.person.user.FDataPersonAccessAuthorityConsole'
          scope = 'global'>
-      <Property name='oaLoginEnable'>N</Property>
+      <Property name='oaLoginEnable'>Y</Property>
+      <!--<Property name='oaLoginUrl'>http://10.21.0.141:6666/ycjt/auth/auth.jsp</Property>-->
       <Property name='oaLoginUrl'>http://115.182.232.150:8181/oauser</Property>
    </Component>
-   
 </Config>

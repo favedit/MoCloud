@@ -43,4 +43,16 @@ public interface IDataPersonAccessAuthorityConsole
                String hostAddress,
                String passport,
                String password);
+
+   //============================================================
+   // <T>根据OA账号信息登录。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 登录账号
+   // @param password 登录密码
+   // @return 登录结果
+   //============================================================
+   String oaLogin(ILogicContext logicContext,
+                  String passport,
+                  String password);
 }

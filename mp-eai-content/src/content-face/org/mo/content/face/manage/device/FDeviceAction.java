@@ -63,7 +63,6 @@ public class FDeviceAction
 
       FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext);
       basePage.setJson(unitlist.toJsonListString());
-      System.out.println(basePage.json());
       return "/manage/common/ajax";
    }
 

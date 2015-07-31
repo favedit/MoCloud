@@ -137,4 +137,21 @@ public class FDataPersonAccessAuthorityConsole
          throw new FFatalError("Invalid type.");
       }
    }
+
+   //============================================================
+   // <T>根据OA账号信息登录。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 登录账号
+   // @param password 登录密码
+   // @return 登录结果
+   //============================================================
+   @Override
+   public String oaLogin(ILogicContext logicContext,
+                         String passport,
+                         String password){
+      String oaLoginResult = ROALoginUnit.oaLogin(_oaLoginUrl, passport, password);
+      _logger.debug(this, "doLogin", "OA login. (passport={1}, result={2})", passport, oaLoginResult);
+      return oaLoginResult;
+   }
 }

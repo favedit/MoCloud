@@ -11,6 +11,7 @@ import org.mo.content.face.manage.home.FFrameAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -29,6 +30,10 @@ public class FAccessAction
    //用户控制台
    @ALink
    protected IAccessConsole _accessConsole;
+
+   //用户权限控制台
+   @ALink
+   protected IDataPersonAccessAuthorityConsole _authorityConsole;
 
    //============================================================
    // <T>用户</T>

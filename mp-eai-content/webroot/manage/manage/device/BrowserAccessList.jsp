@@ -76,8 +76,8 @@
             <span>设备信息</span>
          </div>
          <div class="btn_bar">
-            <div class="nav_btn"></div>
-            <div class="nav_search"><a href="#" onclick="expend();">导出所有</a></div>
+            <div class="nav_btn"><input type="button" onclick="expend();" value="导出所有"/></div>
+            <div class="nav_search"></div>
          </div>
       </div>
       <table id="browserAccess" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',rownumbers:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">

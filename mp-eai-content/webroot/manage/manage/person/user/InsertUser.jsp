@@ -5,13 +5,17 @@
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <script>
-//         function doSubmit(){
-//            
-//            var beginTime = $("begin_date").val();
-//            
-//         }
+         function doSubmit() {
+            var passport = $("#passport").val();
+            if (!ischinese(passport)) {
+               alert("账号由字母及数字或下划线组成！");
+            } else {
+               form.submit();
+            }
+         }
       </script>
    </HEAD>
+
    <body>
       <div class="easyui-panel" fit='true'>
          <form id="form" method="post" action="/manage/person/user/Access.wa?do=insert" onsubmit="">
@@ -19,7 +23,7 @@
                <div class="right_title"> <span>增加用户</span> </div>
                <div class="btn_bar">
                   <div class="nav_btn">
-                     <a href="javascript:form.submit();" class="sub_btn"></a>
+                     <a href="javascript:doSubmit();" class="sub_btn"></a>
                      <a href="javascript:history.back(-1);" class="back_btn"></a>
                   </div>
                   <div class="nav_search"></div>
@@ -42,13 +46,15 @@
                   <tr>
                      <td align="left">帐号</td>
                      <td align="left">
-                        <input name="passport" style="width:400px;text-align:left;" value="" />
+                        <input id="passport" name="passport" style="width:200px;text-align:left;" value="" />
+                        <font color="red">只支持英文、数字和下划线
+</font>
                      </td>
                   </tr>
                   <tr>
                      <td align="left">密码</td>
                      <td align="left">
-                        <input name="password" style="width:400px;text-align:left;" value="" />
+                        <input name="password" style="width:200px;text-align:left;" value="" />
                      </td>
                   </tr>
                   <tr>
@@ -73,7 +79,7 @@
                   <tr>
                      <td align="left">开始时间</td>
                      <td align="left">
-                        <input class="easyui-datetimebox" id="begin_date" name="begin_date" data-options="showSeconds:false" style="width:150px">   -   
+                        <input class="easyui-datetimebox" id="begin_date" name="begin_date" data-options="showSeconds:false" style="width:150px"> -
                         <input class="easyui-datetimebox" id="end_date" name="end_date" data-options="showSeconds:false" style="width:150px">
                      </td>
                   </tr>
