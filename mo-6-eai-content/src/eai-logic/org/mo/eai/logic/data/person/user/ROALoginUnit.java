@@ -4,6 +4,8 @@ import com.ycjt.ead.ThreeDes;
 import java.util.Date;
 import org.mo.com.encoding.RMd5;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.com.net.http.FHttpConnection;
 
 //============================================================
@@ -11,6 +13,8 @@ import org.mo.com.net.http.FHttpConnection;
 //============================================================
 public class ROALoginUnit
 {
+   private static ILogger _logger = RLogger.find(ROALoginUnit.class);
+
    //============================================================
    // <T>请求OA登录接口</T>
    //
@@ -31,6 +35,7 @@ public class ROALoginUnit
       String validate = RMd5.encode(encodePassport + encodePassword + appDate + from + key);
       // 拼装参数
       String parem = "?username=" + encodePassport + "&pwd=" + encodePassword + "&appDate=" + appDate + "&from=" + from + "&validate=" + validate;
+      _logger.debug(null, "ROALoginUnit oaLogin", "OA login. (url={1})", url + parem);
       // 发送请求
       String result = null;
       try(FHttpConnection connection = new FHttpConnection(url + parem)){
