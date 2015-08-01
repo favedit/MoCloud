@@ -4,7 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -72,6 +72,18 @@ public class FStatisticsFinancialCustomerPhaseUnit
    // 字段记录日期的定义。
    protected TDateTime _recordDate = new TDateTime();
 
+   // 存储字段关联编号的定义。
+   private long __linkId;
+
+   // 字段关联编号的定义。
+   protected long _linkId;
+
+   // 存储字段关联日期的定义。
+   private TDateTime __linkDate = new TDateTime();
+
+   // 字段关联日期的定义。
+   protected TDateTime _linkDate = new TDateTime();
+
    // 存储字段用户编号的定义。
    private long __customerId;
 
@@ -85,52 +97,52 @@ public class FStatisticsFinancialCustomerPhaseUnit
    protected String _customerLabel;
 
    // 存储字段投资的定义。
-   private int __investment;
+   private double __investment;
 
    // 字段投资的定义。
-   protected int _investment;
+   protected double _investment;
 
    // 存储字段投资总计的定义。
-   private int __investmentTotal;
+   private double __investmentTotal;
 
    // 字段投资总计的定义。
-   protected int _investmentTotal;
+   protected double _investmentTotal;
 
    // 存储字段赎回的定义。
-   private int __redemption;
+   private double __redemption;
 
    // 字段赎回的定义。
-   protected int _redemption;
+   protected double _redemption;
 
    // 存储字段赎回总计的定义。
-   private int __redemptionTotal;
+   private double __redemptionTotal;
 
    // 字段赎回总计的定义。
-   protected int _redemptionTotal;
+   protected double _redemptionTotal;
 
    // 存储字段净投的定义。
-   private int __netinvestment;
+   private double __netinvestment;
 
    // 字段净投的定义。
-   protected int _netinvestment;
+   protected double _netinvestment;
 
    // 存储字段净投总计的定义。
-   private int __netinvestmentTotal;
+   private double __netinvestmentTotal;
 
    // 字段净投总计的定义。
-   protected int _netinvestmentTotal;
+   protected double _netinvestmentTotal;
 
    // 存储字段绩效的定义。
-   private int __performance;
+   private double __performance;
 
    // 字段绩效的定义。
-   protected int _performance;
+   protected double _performance;
 
    // 存储字段绩效总计的定义。
-   private int __performanceTotal;
+   private double __performanceTotal;
 
    // 字段绩效总计的定义。
-   protected int _performanceTotal;
+   protected double _performanceTotal;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -406,6 +418,60 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
+   // <T>判断关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkIdChanged(){
+      return __linkId != _linkId;
+   }
+
+   //============================================================
+   // <T>获得关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkId(){
+      return _linkId;
+   }
+
+   //============================================================
+   // <T>设置关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkId(long value){
+      _linkId = value;
+   }
+
+   //============================================================
+   // <T>判断关联日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkDateChanged(){
+      return !__linkDate.equals(_linkDate);
+   }
+
+   //============================================================
+   // <T>获得关联日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime linkDate(){
+      return _linkDate;
+   }
+
+   //============================================================
+   // <T>设置关联日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkDate(TDateTime value){
+      _linkDate = value;
+   }
+
+   //============================================================
    // <T>判断用户编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -473,7 +539,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int investment(){
+   public double investment(){
       return _investment;
    }
 
@@ -482,7 +548,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setInvestment(int value){
+   public void setInvestment(double value){
       _investment = value;
    }
 
@@ -500,7 +566,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int investmentTotal(){
+   public double investmentTotal(){
       return _investmentTotal;
    }
 
@@ -509,7 +575,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setInvestmentTotal(int value){
+   public void setInvestmentTotal(double value){
       _investmentTotal = value;
    }
 
@@ -527,7 +593,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int redemption(){
+   public double redemption(){
       return _redemption;
    }
 
@@ -536,7 +602,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setRedemption(int value){
+   public void setRedemption(double value){
       _redemption = value;
    }
 
@@ -554,7 +620,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int redemptionTotal(){
+   public double redemptionTotal(){
       return _redemptionTotal;
    }
 
@@ -563,7 +629,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setRedemptionTotal(int value){
+   public void setRedemptionTotal(double value){
       _redemptionTotal = value;
    }
 
@@ -581,7 +647,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int netinvestment(){
+   public double netinvestment(){
       return _netinvestment;
    }
 
@@ -590,7 +656,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setNetinvestment(int value){
+   public void setNetinvestment(double value){
       _netinvestment = value;
    }
 
@@ -608,7 +674,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int netinvestmentTotal(){
+   public double netinvestmentTotal(){
       return _netinvestmentTotal;
    }
 
@@ -617,7 +683,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setNetinvestmentTotal(int value){
+   public void setNetinvestmentTotal(double value){
       _netinvestmentTotal = value;
    }
 
@@ -635,7 +701,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int performance(){
+   public double performance(){
       return _performance;
    }
 
@@ -644,7 +710,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setPerformance(int value){
+   public void setPerformance(double value){
       _performance = value;
    }
 
@@ -662,7 +728,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int performanceTotal(){
+   public double performanceTotal(){
       return _performanceTotal;
    }
 
@@ -671,7 +737,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setPerformanceTotal(int value){
+   public void setPerformanceTotal(double value){
       _performanceTotal = value;
    }
 
@@ -810,26 +876,30 @@ public class FStatisticsFinancialCustomerPhaseUnit
             return _recordHour.toString();
          case "record_date":
             return _recordDate.toString();
+         case "link_id":
+            return Long.toString(_linkId);
+         case "link_date":
+            return _linkDate.toString();
          case "customer_id":
             return Long.toString(_customerId);
          case "customer_label":
             return _customerLabel;
          case "investment":
-            return RInteger.toString(_investment);
+            return RDouble.toString(_investment);
          case "investment_total":
-            return RInteger.toString(_investmentTotal);
+            return RDouble.toString(_investmentTotal);
          case "redemption":
-            return RInteger.toString(_redemption);
+            return RDouble.toString(_redemption);
          case "redemption_total":
-            return RInteger.toString(_redemptionTotal);
+            return RDouble.toString(_redemptionTotal);
          case "netinvestment":
-            return RInteger.toString(_netinvestment);
+            return RDouble.toString(_netinvestment);
          case "netinvestment_total":
-            return RInteger.toString(_netinvestmentTotal);
+            return RDouble.toString(_netinvestmentTotal);
          case "performance":
-            return RInteger.toString(_performance);
+            return RDouble.toString(_performance);
          case "performance_total":
-            return RInteger.toString(_performanceTotal);
+            return RDouble.toString(_performanceTotal);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -879,6 +949,12 @@ public class FStatisticsFinancialCustomerPhaseUnit
          case "record_date":
             _recordDate.parse(value);
             break;
+         case "link_id":
+            _linkId = RLong.parse(value);
+            break;
+         case "link_date":
+            _linkDate.parse(value);
+            break;
          case "customer_id":
             _customerId = RLong.parse(value);
             break;
@@ -886,28 +962,28 @@ public class FStatisticsFinancialCustomerPhaseUnit
             _customerLabel = value;
             break;
          case "investment":
-            _investment = RInteger.parse(value);
+            _investment = RDouble.parse(value);
             break;
          case "investment_total":
-            _investmentTotal = RInteger.parse(value);
+            _investmentTotal = RDouble.parse(value);
             break;
          case "redemption":
-            _redemption = RInteger.parse(value);
+            _redemption = RDouble.parse(value);
             break;
          case "redemption_total":
-            _redemptionTotal = RInteger.parse(value);
+            _redemptionTotal = RDouble.parse(value);
             break;
          case "netinvestment":
-            _netinvestment = RInteger.parse(value);
+            _netinvestment = RDouble.parse(value);
             break;
          case "netinvestment_total":
-            _netinvestmentTotal = RInteger.parse(value);
+            _netinvestmentTotal = RDouble.parse(value);
             break;
          case "performance":
-            _performance = RInteger.parse(value);
+            _performance = RDouble.parse(value);
             break;
          case "performance_total":
-            _performanceTotal = RInteger.parse(value);
+            _performanceTotal = RDouble.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -972,6 +1048,14 @@ public class FStatisticsFinancialCustomerPhaseUnit
                __recordDate.parse(value);
                _recordDate.assign(__recordDate);
                break;
+            case "link_id":
+               __linkId = RLong.parse(value);
+               _linkId = __linkId;
+               break;
+            case "link_date":
+               __linkDate.parse(value);
+               _linkDate.assign(__linkDate);
+               break;
             case "customer_id":
                __customerId = RLong.parse(value);
                _customerId = __customerId;
@@ -981,35 +1065,35 @@ public class FStatisticsFinancialCustomerPhaseUnit
                _customerLabel = __customerLabel;
                break;
             case "investment":
-               __investment = RInteger.parse(value);
+               __investment = RDouble.parse(value);
                _investment = __investment;
                break;
             case "investment_total":
-               __investmentTotal = RInteger.parse(value);
+               __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
                break;
             case "redemption":
-               __redemption = RInteger.parse(value);
+               __redemption = RDouble.parse(value);
                _redemption = __redemption;
                break;
             case "redemption_total":
-               __redemptionTotal = RInteger.parse(value);
+               __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
                break;
             case "netinvestment":
-               __netinvestment = RInteger.parse(value);
+               __netinvestment = RDouble.parse(value);
                _netinvestment = __netinvestment;
                break;
             case "netinvestment_total":
-               __netinvestmentTotal = RInteger.parse(value);
+               __netinvestmentTotal = RDouble.parse(value);
                _netinvestmentTotal = __netinvestmentTotal;
                break;
             case "performance":
-               __performance = RInteger.parse(value);
+               __performance = RDouble.parse(value);
                _performance = __performance;
                break;
             case "performance_total":
-               __performanceTotal = RInteger.parse(value);
+               __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
                break;
             case "create_user_id":
@@ -1049,6 +1133,8 @@ public class FStatisticsFinancialCustomerPhaseUnit
       row.set("recordDay", _recordDay);
       row.set("recordHour", _recordHour);
       row.set("recordDate", _recordDate);
+      row.set("linkId", _linkId);
+      row.set("linkDate", _linkDate);
       row.set("customerId", _customerId);
       row.set("customerLabel", _customerLabel);
       row.set("investment", _investment);
@@ -1082,16 +1168,18 @@ public class FStatisticsFinancialCustomerPhaseUnit
       map.put("recordDay", _recordDay.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("recordHour", _recordHour.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("recordDate", _recordDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkId", RLong.toString(_linkId));
+      map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerId", RLong.toString(_customerId));
       map.put("customerLabel", _customerLabel);
-      map.put("investment", RInteger.toString(_investment));
-      map.put("investmentTotal", RInteger.toString(_investmentTotal));
-      map.put("redemption", RInteger.toString(_redemption));
-      map.put("redemptionTotal", RInteger.toString(_redemptionTotal));
-      map.put("netinvestment", RInteger.toString(_netinvestment));
-      map.put("netinvestmentTotal", RInteger.toString(_netinvestmentTotal));
-      map.put("performance", RInteger.toString(_performance));
-      map.put("performanceTotal", RInteger.toString(_performanceTotal));
+      map.put("investment", RDouble.toString(_investment));
+      map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("redemption", RDouble.toString(_redemption));
+      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("netinvestment", RDouble.toString(_netinvestment));
+      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("performance", RDouble.toString(_performance));
+      map.put("performanceTotal", RDouble.toString(_performanceTotal));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

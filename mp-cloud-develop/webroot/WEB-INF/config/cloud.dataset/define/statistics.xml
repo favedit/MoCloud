@@ -8,5 +8,5 @@
   <FieldDateTime _uuid="6fafa491-a690-429b-b59d-d8dbcd21ff5f" name="record_week" label="M#12cn13记录周" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_WEEK" />
   <FieldDateTime _uuid="7d68fd5c-1388-4f3c-aec2-704f61458938" name="record_day" label="M#12cn13记录日" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_DAY" />
   <FieldDateTime _uuid="c2f8397c-fec2-4cf8-b5b2-11789533a615" name="record_hour" label="M#12cn14记录小时" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_HOUR" />
-  <FieldDateTime _uuid="b19a7f33-1811-4b14-a3c2-1beded1b026b" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_DATE" data_alias="RDT" data_uniques="DATE" />
+  <FieldDateTime _uuid="b19a7f33-1811-4b14-a3c2-1beded1b026b" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_DATE" data_alias="RDT" data_uniques="DAT" />
 </DataTemplate>

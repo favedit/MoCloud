@@ -59,9 +59,6 @@ public class FStatisticsFinancialCustomerAmountLogic
    // 字段绩效总计的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
-   // 字段客户数量的定义。
-   public final static SLogicFieldInfo CUSTOMER_COUNT = new SLogicFieldInfo("CUSTOMER_COUNT");
-
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -75,7 +72,7 @@ public class FStatisticsFinancialCustomerAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`CUSTOMER_COUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户数据统计表逻辑单元。</T>
@@ -673,7 +670,6 @@ public class FStatisticsFinancialCustomerAmountLogic
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
-      cmd.append(",`CUSTOMER_COUNT`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -712,8 +708,6 @@ public class FStatisticsFinancialCustomerAmountLogic
       cmd.append(unit.netinvestmentTotal());
       cmd.append(',');
       cmd.append(unit.performanceTotal());
-      cmd.append(',');
-      cmd.append(unit.customerCount());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -823,10 +817,6 @@ public class FStatisticsFinancialCustomerAmountLogic
       if(unit.isPerformanceTotalChanged()){
          cmd.append(",`PERFORMANCE_TOTAL`=");
          cmd.append(unit.performanceTotal());
-      }
-      if(unit.isCustomerCountChanged()){
-         cmd.append(",`CUSTOMER_COUNT`=");
-         cmd.append(unit.customerCount());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

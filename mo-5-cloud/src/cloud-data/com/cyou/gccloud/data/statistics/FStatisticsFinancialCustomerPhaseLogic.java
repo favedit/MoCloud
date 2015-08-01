@@ -60,6 +60,12 @@ public class FStatisticsFinancialCustomerPhaseLogic
    // 字段记录日期的定义。
    public final static SLogicFieldInfo RECORD_DATE = new SLogicFieldInfo("RECORD_DATE");
 
+   // 字段关联编号的定义。
+   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
+
+   // 字段关联日期的定义。
+   public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
+
    // 字段用户编号的定义。
    public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
 
@@ -103,7 +109,7 @@ public class FStatisticsFinancialCustomerPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户阶段统计表逻辑单元。</T>
@@ -701,6 +707,8 @@ public class FStatisticsFinancialCustomerPhaseLogic
       cmd.append(",`RECORD_DAY`");
       cmd.append(",`RECORD_HOUR`");
       cmd.append(",`RECORD_DATE`");
+      cmd.append(",`LINK_ID`");
+      cmd.append(",`LINK_DATE`");
       cmd.append(",`CUSTOMER_ID`");
       cmd.append(",`CUSTOMER_LABEL`");
       cmd.append(",`INVESTMENT`");
@@ -789,6 +797,24 @@ public class FStatisticsFinancialCustomerPhaseLogic
       }else{
          cmd.append("STR_TO_DATE('");
          cmd.append(recordDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      long linkId = unit.linkId();
+      if(linkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(linkId);
+      }
+      cmd.append(',');
+      TDateTime linkDate = unit.linkDate();
+      if(linkDate == null){
+         cmd.append("NULL");
+      }else if(linkDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(linkDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
@@ -972,6 +998,28 @@ public class FStatisticsFinancialCustomerPhaseLogic
          }else{
             cmd.append("STR_TO_DATE('");
             cmd.append(recordDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isLinkIdChanged()){
+         cmd.append(",`LINK_ID`=");
+         long linkId = unit.linkId();
+         if(linkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(linkId);
+         }
+      }
+      if(unit.isLinkDateChanged()){
+         cmd.append(",`LINK_DATE`=");
+         TDateTime linkDate = unit.linkDate();
+         if(linkDate == null){
+            cmd.append("NULL");
+         }else if(linkDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(linkDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }

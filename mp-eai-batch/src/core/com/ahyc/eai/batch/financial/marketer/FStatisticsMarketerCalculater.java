@@ -1,5 +1,6 @@
-package com.ahyc.eai.batch.financial;
+package com.ahyc.eai.batch.financial.marketer;
 
+import com.ahyc.eai.batch.financial.FStatisticsCalculater;
 import com.ahyc.eai.batch.financial.department.FDepartmentInfo;
 import com.ahyc.eai.batch.financial.department.IDepartmentInfoConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
@@ -8,7 +9,6 @@ import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.ISqlConnection;
-import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
@@ -16,14 +16,11 @@ import org.mo.data.logic.FLogicContext;
 //============================================================
 // <T>统计计算器。</T>
 //============================================================
-public class FStatisticsRedemptionCalculater
+public class FStatisticsMarketerCalculater
       extends FStatisticsCalculater
 {
    // 同步总数
    protected long _intervalCount = 1000;
-
-   // 部门信息字典
-   protected FDictionary<FDepartmentInfo> _departments = new FDictionary<FDepartmentInfo>(FDepartmentInfo.class);
 
    //============================================================
    // <T>投资阶段处理。</T>
@@ -36,15 +33,15 @@ public class FStatisticsRedemptionCalculater
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       IDepartmentInfoConsole departmentInfoConsole = RAop.find(IDepartmentInfoConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      String selectSql = RString.format("SELECT id,sell_uid,FROM_UNIXTIME(addtime, '%Y%m%d%H%i%s') as action_date,transfer_price,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_invest_detb WHERE id>={1} AND id<={2}", beginId, endId);
+      String selectSql = RString.format("SELECT id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<{2}", beginId, endId);
       FDataset dataset = sourceConnection.fetchDataset(selectSql);
       for(FRow row : dataset){
          long recordId = row.getLong("id");
-         long customerUid = row.getLong("sell_uid");
+         long investorUid = row.getLong("investor_uid");
          // 查找客户信息：名称/电话号码/身份证号
-         FRow memberInfoRow = sourceConnection.find("SELECT real_name,cell_phone,idcard FROM lzh_member_info where uid=" + customerUid);
+         FRow memberInfoRow = sourceConnection.find("SELECT real_name,cell_phone,idcard FROM lzh_member_info where uid=" + investorUid);
          // 查找理财师编号
-         long recommentId = sourceConnection.executeLong("select recommend_id from lzh_members where id=" + customerUid);
+         long recommentId = sourceConnection.executeLong("select recommend_id from lzh_members where id=" + investorUid);
          // 查找理财师信息：编号/真实名称/等级/部门编号
          long managerId = 0;
          long departmentId = 0;
@@ -72,13 +69,13 @@ public class FStatisticsRedemptionCalculater
             dynamicUnit.setMarketerLabel(managerInfo.get("real_name"));
             dynamicUnit.setMarketerRank(managerInfo.get("rank"));
          }
-         dynamicUnit.setCustomerId(customerUid);
+         dynamicUnit.setCustomerId(investorUid);
          dynamicUnit.setCustomerLabel(memberInfoRow.get("real_name"));
          dynamicUnit.setCustomerPhone(memberInfoRow.get("cell_phone"));
          dynamicUnit.setCustomerCard(memberInfoRow.get("idcard"));
-         dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Redemption);
-         dynamicUnit.customerActionDate().parse(row.get("action_date"));
-         dynamicUnit.setCustomerActionAmount(row.getDouble("transfer_price"));
+         dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Investment);
+         dynamicUnit.customerActionDate().parse(row.get("investor_date"));
+         dynamicUnit.setCustomerActionAmount(row.getDouble("investor_capital"));
          dynamicLogic.doInsert(dynamicUnit);
          // 统计处理
          _processTotal++;
@@ -94,10 +91,10 @@ public class FStatisticsRedemptionCalculater
       ISqlConnection sourceConnection = logicContext.activeConnection("ezubao");
       ISqlConnection targetConnection = logicContext.activeConnection("statistics");
       // 获得最大编号
-      long sourceMaxId = sourceConnection.executeLong("SELECT MAX(id) FROM lzh_invest_detb");
-      long targetMaxId = targetConnection.executeLong("SELECT MAX(LINK_ID) FROM ST_FIN_DYNAMIC WHERE CUSTOMER_ACTION_CD=" + EGcFinancialCustomerAction.Redemption);
+      long sourceMaxId = sourceConnection.executeLong("SELECT MAX(id) FROM lzh_borrow_investor");
+      long targetMaxId = targetConnection.executeLong("SELECT MAX(LINK_ID) FROM ST_FIN_DYNAMIC WHERE CUSTOMER_ACTION_CD=" + EGcFinancialCustomerAction.Investment);
       if(targetMaxId == 0){
-         targetMaxId = sourceConnection.executeLong("SELECT MIN(id) FROM lzh_invest_detb");
+         targetMaxId = sourceConnection.executeLong("SELECT MIN(id) FROM lzh_borrow_investor");
       }
       // 每次同步数量
       long beginId = targetMaxId;

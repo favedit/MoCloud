@@ -720,6 +720,7 @@ public class TDateTime
       format = format.replaceAll("yyyy", RString.leftPad(Integer.toString(nYear), 4, split));
       format = format.replaceAll("yy", RString.leftPad(RString.right(Integer.toString(nYear), 2), 2, split));
       format = format.replaceAll("mm", RString.leftPad(Integer.toString(calendar.get(Calendar.MONTH) + 1), 2, split));
+      format = format.replaceAll("wk", RString.leftPad(Integer.toString(calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH)), 2, split));
       format = format.replaceAll("dd", RString.leftPad(Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)), 2, split));
       format = format.replaceAll("hh24", RString.leftPad(Integer.toString(calendar.get(Calendar.HOUR_OF_DAY)), 2, split));
       format = format.replaceAll("hh", RString.leftPad(Integer.toString(calendar.get(Calendar.HOUR_OF_DAY)), 2, split));

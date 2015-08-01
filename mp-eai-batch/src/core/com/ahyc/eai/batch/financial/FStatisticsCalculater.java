@@ -43,6 +43,16 @@ public class FStatisticsCalculater
    //
    // @param logicContext 逻辑环境
    //============================================================
+   public void processOnce(){
+      _processTotal++;
+      _processCount++;
+   }
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param logicContext 逻辑环境
+   //============================================================
    public void processLogic(FLogicContext logicContext){
    }
 

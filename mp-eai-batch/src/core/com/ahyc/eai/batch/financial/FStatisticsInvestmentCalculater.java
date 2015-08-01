@@ -32,7 +32,8 @@ public class FStatisticsInvestmentCalculater
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       IDepartmentInfoConsole departmentInfoConsole = RAop.find(IDepartmentInfoConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      String selectSql = RString.format("SELECT id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<{2}", beginId, endId);
+      String selectSql = RString.format("SELECT id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>={1} AND id<={2}", beginId,
+            endId);
       FDataset dataset = sourceConnection.fetchDataset(selectSql);
       for(FRow row : dataset){
          long recordId = row.getLong("id");
