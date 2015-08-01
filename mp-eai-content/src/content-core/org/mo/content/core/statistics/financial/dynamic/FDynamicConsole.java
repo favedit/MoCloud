@@ -51,8 +51,8 @@ public class FDynamicConsole
       }
       StringBuffer where = new StringBuffer();
       if(!beginDate.isEmpty() && !endDate.isEmpty()){
-         where.append(FStatisticsFinancialDynamicLogic.LINK_DATE).append(" >= ").append(beginDate);
-         where.append(" AND ").append(FStatisticsFinancialDynamicLogic.RECORD_DATE).append(" <= ").append(endDate);
+         where.append(FStatisticsFinancialDynamicLogic.CUSTOMER_ACTION_DATE).append(" >= ").append(beginDate);
+         where.append(" AND ").append(FStatisticsFinancialDynamicLogic.CUSTOMER_ACTION_DATE).append(" <= ").append(endDate);
       }
       _logger.debug(this, "Select", "Select finish. (whereSql={1})", where.toString());
       FStatisticsFinancialDynamicLogic logic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
