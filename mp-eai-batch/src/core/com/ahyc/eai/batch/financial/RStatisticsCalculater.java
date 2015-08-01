@@ -29,7 +29,9 @@ public class RStatisticsCalculater
       // 逻辑处理
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
       try(FLogicContext logicContext = new FLogicContext(databaseConsole)){
-         FStatisticsCalculater calculater = new FStatisticsCalculater();
+         //         FStatisticsInvestmentCalculater calculater = new FStatisticsInvestmentCalculater();
+         //         calculater.process(logicContext);
+         FStatisticsRedemptionCalculater calculater = new FStatisticsRedemptionCalculater();
          calculater.process(logicContext);
       }catch(Exception exception){
          _logger.error(null, "main", exception);

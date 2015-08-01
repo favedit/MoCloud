@@ -1,24 +1,30 @@
 ﻿-- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Dynamic]
 -- ------------------------------------------------------------
+-- DELETE FROM ST_FIN_DYNAMIC;
 DROP TABLE IF EXISTS `ST_FIN_DYNAMIC`;
 CREATE TABLE `ST_FIN_DYNAMIC` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `RECORD_ID`                     INTEGER, 
-   `RECORD_DATE`                   DATETIME, 
-   `COMPANY_ID`                    BIGINT, 
-   `COMPANY_LABEL`                 VARCHAR(40), 
+   `LINK_ID`                       BIGINT, 
+   `LINK_DATE`                     DATETIME, 
+   `DEPARTMENT_ID`                 BIGINT, 
+   `DEPARTMENT_LABEL`              VARCHAR(40), 
+   `DEPARTMENT_IDS`                VARCHAR(200), 
+   `DEPARTMENT_LABELS`             VARCHAR(400), 
    `MARKETER_ID`                   BIGINT, 
    `MARKETER_LABEL`                VARCHAR(40), 
+   `MARKETER_STATUS_CD`            INTEGER, 
+   `MARKETER_RANK`                 VARCHAR(40), 
    `CUSTOMER_ID`                   BIGINT, 
    `CUSTOMER_LABEL`                VARCHAR(40), 
    `CUSTOMER_PHONE`                VARCHAR(20), 
    `CUSTOMER_CARD`                 VARCHAR(20), 
    `CUSTOMER_ACTION_CD`            INTEGER, 
-   `CUSTOMER_AMOUNT`               DOUBLE, 
+   `CUSTOMER_ACTION_DATE`          DATETIME, 
+   `CUSTOMER_ACTION_AMOUNT`        DOUBLE, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 

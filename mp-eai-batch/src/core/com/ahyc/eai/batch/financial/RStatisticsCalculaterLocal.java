@@ -30,7 +30,7 @@ public class RStatisticsCalculaterLocal
       // 逻辑处理
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
       try(FLogicContext logicContext = new FLogicContext(databaseConsole)){
-         FStatisticsCalculater calculater = new FStatisticsCalculater();
+         FStatisticsInvestmentCalculater calculater = new FStatisticsInvestmentCalculater();
          calculater.process(logicContext);
       }catch(Exception exception){
          _logger.fatal(null, "main", exception);

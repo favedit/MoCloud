@@ -49,17 +49,29 @@ public class FStatisticsFinancialDynamicUnit
    // 字段记录时间的定义。
    protected TDateTime _linkDate = new TDateTime();
 
-   // 存储字段公司编号的定义。
-   private long __companyId;
+   // 存储字段部门编号的定义。
+   private long __departmentId;
 
-   // 字段公司编号的定义。
-   protected long _companyId;
+   // 字段部门编号的定义。
+   protected long _departmentId;
 
-   // 存储字段公司名称的定义。
-   private String __companyLabel;
+   // 存储字段部门名称的定义。
+   private String __departmentLabel;
 
-   // 字段公司名称的定义。
-   protected String _companyLabel;
+   // 字段部门名称的定义。
+   protected String _departmentLabel;
+
+   // 存储字段部门编号集合的定义。
+   private String __departmentIds;
+
+   // 字段部门编号集合的定义。
+   protected String _departmentIds;
+
+   // 存储字段部门标签集合的定义。
+   private String __departmentLabels;
+
+   // 字段部门标签集合的定义。
+   protected String _departmentLabels;
 
    // 存储字段理财师编号的定义。
    private long __marketerId;
@@ -72,6 +84,18 @@ public class FStatisticsFinancialDynamicUnit
 
    // 字段理财师名称的定义。
    protected String _marketerLabel;
+
+   // 存储字段理财师状态的定义。
+   private int __marketerStatusCd;
+
+   // 字段理财师状态的定义。
+   protected int _marketerStatusCd;
+
+   // 存储字段理财师等级的定义。
+   private String __marketerRank;
+
+   // 字段理财师等级的定义。
+   protected String _marketerRank;
 
    // 存储字段客户编号的定义。
    private long __customerId;
@@ -103,11 +127,17 @@ public class FStatisticsFinancialDynamicUnit
    // 字段客户命令类型的定义。
    protected int _customerActionCd;
 
-   // 存储字段客户数值的定义。
-   private double __customerAmount;
+   // 存储字段客户命令时间的定义。
+   private TDateTime __customerActionDate = new TDateTime();
 
-   // 字段客户数值的定义。
-   protected double _customerAmount;
+   // 字段客户命令时间的定义。
+   protected TDateTime _customerActionDate = new TDateTime();
+
+   // 存储字段客户命令数值的定义。
+   private double __customerActionAmount;
+
+   // 字段客户命令数值的定义。
+   protected double _customerActionAmount;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -275,57 +305,111 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
-   // <T>判断公司编号的数据是否改变。</T>
+   // <T>判断部门编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCompanyIdChanged(){
-      return __companyId != _companyId;
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
    }
 
    //============================================================
-   // <T>获得公司编号的数据内容。</T>
+   // <T>获得部门编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long companyId(){
-      return _companyId;
+   public long departmentId(){
+      return _departmentId;
    }
 
    //============================================================
-   // <T>设置公司编号的数据内容。</T>
+   // <T>设置部门编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyId(long value){
-      _companyId = value;
+   public void setDepartmentId(long value){
+      _departmentId = value;
    }
 
    //============================================================
-   // <T>判断公司名称的数据是否改变。</T>
+   // <T>判断部门名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCompanyLabelChanged(){
-      return !RString.equals(__companyLabel, _companyLabel);
+   public boolean isDepartmentLabelChanged(){
+      return !RString.equals(__departmentLabel, _departmentLabel);
    }
 
    //============================================================
-   // <T>获得公司名称的数据内容。</T>
+   // <T>获得部门名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String companyLabel(){
-      return _companyLabel;
+   public String departmentLabel(){
+      return _departmentLabel;
    }
 
    //============================================================
-   // <T>设置公司名称的数据内容。</T>
+   // <T>设置部门名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyLabel(String value){
-      _companyLabel = value;
+   public void setDepartmentLabel(String value){
+      _departmentLabel = value;
+   }
+
+   //============================================================
+   // <T>判断部门编号集合的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentIdsChanged(){
+      return !RString.equals(__departmentIds, _departmentIds);
+   }
+
+   //============================================================
+   // <T>获得部门编号集合的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentIds(){
+      return _departmentIds;
+   }
+
+   //============================================================
+   // <T>设置部门编号集合的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentIds(String value){
+      _departmentIds = value;
+   }
+
+   //============================================================
+   // <T>判断部门标签集合的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLabelsChanged(){
+      return !RString.equals(__departmentLabels, _departmentLabels);
+   }
+
+   //============================================================
+   // <T>获得部门标签集合的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLabels(){
+      return _departmentLabels;
+   }
+
+   //============================================================
+   // <T>设置部门标签集合的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLabels(String value){
+      _departmentLabels = value;
    }
 
    //============================================================
@@ -380,6 +464,60 @@ public class FStatisticsFinancialDynamicUnit
    //============================================================
    public void setMarketerLabel(String value){
       _marketerLabel = value;
+   }
+
+   //============================================================
+   // <T>判断理财师状态的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerStatusCdChanged(){
+      return __marketerStatusCd != _marketerStatusCd;
+   }
+
+   //============================================================
+   // <T>获得理财师状态的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int marketerStatusCd(){
+      return _marketerStatusCd;
+   }
+
+   //============================================================
+   // <T>设置理财师状态的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerStatusCd(int value){
+      _marketerStatusCd = value;
+   }
+
+   //============================================================
+   // <T>判断理财师等级的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerRankChanged(){
+      return !RString.equals(__marketerRank, _marketerRank);
+   }
+
+   //============================================================
+   // <T>获得理财师等级的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String marketerRank(){
+      return _marketerRank;
+   }
+
+   //============================================================
+   // <T>设置理财师等级的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerRank(String value){
+      _marketerRank = value;
    }
 
    //============================================================
@@ -518,30 +656,57 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
-   // <T>判断客户数值的数据是否改变。</T>
+   // <T>判断客户命令时间的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerAmountChanged(){
-      return __customerAmount != _customerAmount;
+   public boolean isCustomerActionDateChanged(){
+      return !__customerActionDate.equals(_customerActionDate);
    }
 
    //============================================================
-   // <T>获得客户数值的数据内容。</T>
+   // <T>获得客户命令时间的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double customerAmount(){
-      return _customerAmount;
+   public TDateTime customerActionDate(){
+      return _customerActionDate;
    }
 
    //============================================================
-   // <T>设置客户数值的数据内容。</T>
+   // <T>设置客户命令时间的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerAmount(double value){
-      _customerAmount = value;
+   public void setCustomerActionDate(TDateTime value){
+      _customerActionDate = value;
+   }
+
+   //============================================================
+   // <T>判断客户命令数值的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerActionAmountChanged(){
+      return __customerActionAmount != _customerActionAmount;
+   }
+
+   //============================================================
+   // <T>获得客户命令数值的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double customerActionAmount(){
+      return _customerActionAmount;
+   }
+
+   //============================================================
+   // <T>设置客户命令数值的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerActionAmount(double value){
+      _customerActionAmount = value;
    }
 
    //============================================================
@@ -671,14 +836,22 @@ public class FStatisticsFinancialDynamicUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
-         case "company_id":
-            return Long.toString(_companyId);
-         case "company_label":
-            return _companyLabel;
+         case "department_id":
+            return Long.toString(_departmentId);
+         case "department_label":
+            return _departmentLabel;
+         case "department_ids":
+            return _departmentIds;
+         case "department_labels":
+            return _departmentLabels;
          case "marketer_id":
             return Long.toString(_marketerId);
          case "marketer_label":
             return _marketerLabel;
+         case "marketer_status_cd":
+            return RInteger.toString(_marketerStatusCd);
+         case "marketer_rank":
+            return _marketerRank;
          case "customer_id":
             return Long.toString(_customerId);
          case "customer_label":
@@ -689,8 +862,10 @@ public class FStatisticsFinancialDynamicUnit
             return _customerCard;
          case "customer_action_cd":
             return RInteger.toString(_customerActionCd);
-         case "customer_amount":
-            return RDouble.toString(_customerAmount);
+         case "customer_action_date":
+            return _customerActionDate.toString();
+         case "customer_action_amount":
+            return RDouble.toString(_customerActionAmount);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -728,17 +903,29 @@ public class FStatisticsFinancialDynamicUnit
          case "link_date":
             _linkDate.parse(value);
             break;
-         case "company_id":
-            _companyId = RLong.parse(value);
+         case "department_id":
+            _departmentId = RLong.parse(value);
             break;
-         case "company_label":
-            _companyLabel = value;
+         case "department_label":
+            _departmentLabel = value;
+            break;
+         case "department_ids":
+            _departmentIds = value;
+            break;
+         case "department_labels":
+            _departmentLabels = value;
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
          case "marketer_label":
             _marketerLabel = value;
+            break;
+         case "marketer_status_cd":
+            _marketerStatusCd = RInteger.parse(value);
+            break;
+         case "marketer_rank":
+            _marketerRank = value;
             break;
          case "customer_id":
             _customerId = RLong.parse(value);
@@ -755,8 +942,11 @@ public class FStatisticsFinancialDynamicUnit
          case "customer_action_cd":
             _customerActionCd = RInteger.parse(value);
             break;
-         case "customer_amount":
-            _customerAmount = RDouble.parse(value);
+         case "customer_action_date":
+            _customerActionDate.parse(value);
+            break;
+         case "customer_action_amount":
+            _customerActionAmount = RDouble.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -805,13 +995,21 @@ public class FStatisticsFinancialDynamicUnit
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
                break;
-            case "company_id":
-               __companyId = RLong.parse(value);
-               _companyId = __companyId;
+            case "department_id":
+               __departmentId = RLong.parse(value);
+               _departmentId = __departmentId;
                break;
-            case "company_label":
-               __companyLabel = value;
-               _companyLabel = __companyLabel;
+            case "department_label":
+               __departmentLabel = value;
+               _departmentLabel = __departmentLabel;
+               break;
+            case "department_ids":
+               __departmentIds = value;
+               _departmentIds = __departmentIds;
+               break;
+            case "department_labels":
+               __departmentLabels = value;
+               _departmentLabels = __departmentLabels;
                break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
@@ -820,6 +1018,14 @@ public class FStatisticsFinancialDynamicUnit
             case "marketer_label":
                __marketerLabel = value;
                _marketerLabel = __marketerLabel;
+               break;
+            case "marketer_status_cd":
+               __marketerStatusCd = RInteger.parse(value);
+               _marketerStatusCd = __marketerStatusCd;
+               break;
+            case "marketer_rank":
+               __marketerRank = value;
+               _marketerRank = __marketerRank;
                break;
             case "customer_id":
                __customerId = RLong.parse(value);
@@ -841,9 +1047,13 @@ public class FStatisticsFinancialDynamicUnit
                __customerActionCd = RInteger.parse(value);
                _customerActionCd = __customerActionCd;
                break;
-            case "customer_amount":
-               __customerAmount = RDouble.parse(value);
-               _customerAmount = __customerAmount;
+            case "customer_action_date":
+               __customerActionDate.parse(value);
+               _customerActionDate.assign(__customerActionDate);
+               break;
+            case "customer_action_amount":
+               __customerActionAmount = RDouble.parse(value);
+               _customerActionAmount = __customerActionAmount;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -878,16 +1088,21 @@ public class FStatisticsFinancialDynamicUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
-      row.set("companyId", _companyId);
-      row.set("companyLabel", _companyLabel);
+      row.set("departmentId", _departmentId);
+      row.set("departmentLabel", _departmentLabel);
+      row.set("departmentIds", _departmentIds);
+      row.set("departmentLabels", _departmentLabels);
       row.set("marketerId", _marketerId);
       row.set("marketerLabel", _marketerLabel);
+      row.set("marketerStatusCd", _marketerStatusCd);
+      row.set("marketerRank", _marketerRank);
       row.set("customerId", _customerId);
       row.set("customerLabel", _customerLabel);
       row.set("customerPhone", _customerPhone);
       row.set("customerCard", _customerCard);
       row.set("customerActionCd", _customerActionCd);
-      row.set("customerAmount", _customerAmount);
+      row.set("customerActionDate", _customerActionDate);
+      row.set("customerActionAmount", _customerActionAmount);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -907,16 +1122,21 @@ public class FStatisticsFinancialDynamicUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("companyId", RLong.toString(_companyId));
-      map.put("companyLabel", _companyLabel);
+      map.put("departmentId", RLong.toString(_departmentId));
+      map.put("departmentLabel", _departmentLabel);
+      map.put("departmentIds", _departmentIds);
+      map.put("departmentLabels", _departmentLabels);
       map.put("marketerId", RLong.toString(_marketerId));
       map.put("marketerLabel", _marketerLabel);
+      map.put("marketerStatusCd", RInteger.toString(_marketerStatusCd));
+      map.put("marketerRank", _marketerRank);
       map.put("customerId", RLong.toString(_customerId));
       map.put("customerLabel", _customerLabel);
       map.put("customerPhone", _customerPhone);
       map.put("customerCard", _customerCard);
       map.put("customerActionCd", RInteger.toString(_customerActionCd));
-      map.put("customerAmount", RDouble.toString(_customerAmount));
+      map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("customerActionAmount", RDouble.toString(_customerActionAmount));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

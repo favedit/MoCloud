@@ -48,17 +48,29 @@ public class FStatisticsFinancialDynamicLogic
    // 字段记录时间的定义。
    public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
 
-   // 字段公司编号的定义。
-   public final static SLogicFieldInfo COMPANY_ID = new SLogicFieldInfo("COMPANY_ID");
+   // 字段部门编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
 
-   // 字段公司名称的定义。
-   public final static SLogicFieldInfo COMPANY_LABEL = new SLogicFieldInfo("COMPANY_LABEL");
+   // 字段部门名称的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
+
+   // 字段部门编号集合的定义。
+   public final static SLogicFieldInfo DEPARTMENT_IDS = new SLogicFieldInfo("DEPARTMENT_IDS");
+
+   // 字段部门标签集合的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
 
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
    // 字段理财师名称的定义。
    public final static SLogicFieldInfo MARKETER_LABEL = new SLogicFieldInfo("MARKETER_LABEL");
+
+   // 字段理财师状态的定义。
+   public final static SLogicFieldInfo MARKETER_STATUS_CD = new SLogicFieldInfo("MARKETER_STATUS_CD");
+
+   // 字段理财师等级的定义。
+   public final static SLogicFieldInfo MARKETER_RANK = new SLogicFieldInfo("MARKETER_RANK");
 
    // 字段客户编号的定义。
    public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
@@ -75,8 +87,11 @@ public class FStatisticsFinancialDynamicLogic
    // 字段客户命令类型的定义。
    public final static SLogicFieldInfo CUSTOMER_ACTION_CD = new SLogicFieldInfo("CUSTOMER_ACTION_CD");
 
-   // 字段客户数值的定义。
-   public final static SLogicFieldInfo CUSTOMER_AMOUNT = new SLogicFieldInfo("CUSTOMER_AMOUNT");
+   // 字段客户命令时间的定义。
+   public final static SLogicFieldInfo CUSTOMER_ACTION_DATE = new SLogicFieldInfo("CUSTOMER_ACTION_DATE");
+
+   // 字段客户命令数值的定义。
+   public final static SLogicFieldInfo CUSTOMER_ACTION_AMOUNT = new SLogicFieldInfo("CUSTOMER_ACTION_AMOUNT");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -91,7 +106,7 @@ public class FStatisticsFinancialDynamicLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`COMPANY_ID`,`COMPANY_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CUSTOMER_ACTION_CD`,`CUSTOMER_AMOUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_IDS`,`DEPARTMENT_LABELS`,`MARKETER_ID`,`MARKETER_LABEL`,`MARKETER_STATUS_CD`,`MARKETER_RANK`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CUSTOMER_ACTION_CD`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_ACTION_AMOUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态统计表逻辑单元。</T>
@@ -685,16 +700,21 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(",`GUID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
-      cmd.append(",`COMPANY_ID`");
-      cmd.append(",`COMPANY_LABEL`");
+      cmd.append(",`DEPARTMENT_ID`");
+      cmd.append(",`DEPARTMENT_LABEL`");
+      cmd.append(",`DEPARTMENT_IDS`");
+      cmd.append(",`DEPARTMENT_LABELS`");
       cmd.append(",`MARKETER_ID`");
       cmd.append(",`MARKETER_LABEL`");
+      cmd.append(",`MARKETER_STATUS_CD`");
+      cmd.append(",`MARKETER_RANK`");
       cmd.append(",`CUSTOMER_ID`");
       cmd.append(",`CUSTOMER_LABEL`");
       cmd.append(",`CUSTOMER_PHONE`");
       cmd.append(",`CUSTOMER_CARD`");
       cmd.append(",`CUSTOMER_ACTION_CD`");
-      cmd.append(",`CUSTOMER_AMOUNT`");
+      cmd.append(",`CUSTOMER_ACTION_DATE`");
+      cmd.append(",`CUSTOMER_ACTION_AMOUNT`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -728,19 +748,37 @@ public class FStatisticsFinancialDynamicLogic
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      long companyId = unit.companyId();
-      if(companyId == 0){
+      long departmentId = unit.departmentId();
+      if(departmentId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(companyId);
+         cmd.append(departmentId);
       }
       cmd.append(',');
-      String companyLabel = unit.companyLabel();
-      if(RString.isEmpty(companyLabel)){
+      String departmentLabel = unit.departmentLabel();
+      if(RString.isEmpty(departmentLabel)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(companyLabel));
+         cmd.append(RSql.formatValue(departmentLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String departmentIds = unit.departmentIds();
+      if(RString.isEmpty(departmentIds)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentIds));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String departmentLabels = unit.departmentLabels();
+      if(RString.isEmpty(departmentLabels)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLabels));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -757,6 +795,17 @@ public class FStatisticsFinancialDynamicLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(marketerLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.marketerStatusCd());
+      cmd.append(',');
+      String marketerRank = unit.marketerRank();
+      if(RString.isEmpty(marketerRank)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(marketerRank));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -796,7 +845,18 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(',');
       cmd.append(unit.customerActionCd());
       cmd.append(',');
-      cmd.append(unit.customerAmount());
+      TDateTime customerActionDate = unit.customerActionDate();
+      if(customerActionDate == null){
+         cmd.append("NULL");
+      }else if(customerActionDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(customerActionDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.customerActionAmount());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -893,23 +953,45 @@ public class FStatisticsFinancialDynamicLogic
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isCompanyIdChanged()){
-         cmd.append(",`COMPANY_ID`=");
-         long companyId = unit.companyId();
-         if(companyId == 0){
+      if(unit.isDepartmentIdChanged()){
+         cmd.append(",`DEPARTMENT_ID`=");
+         long departmentId = unit.departmentId();
+         if(departmentId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(companyId);
+            cmd.append(departmentId);
          }
       }
-      if(unit.isCompanyLabelChanged()){
-         cmd.append(",`COMPANY_LABEL`=");
-         String companyLabel = unit.companyLabel();
-         if(RString.isEmpty(companyLabel)){
+      if(unit.isDepartmentLabelChanged()){
+         cmd.append(",`DEPARTMENT_LABEL`=");
+         String departmentLabel = unit.departmentLabel();
+         if(RString.isEmpty(departmentLabel)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(companyLabel));
+            cmd.append(RSql.formatValue(departmentLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentIdsChanged()){
+         cmd.append(",`DEPARTMENT_IDS`=");
+         String departmentIds = unit.departmentIds();
+         if(RString.isEmpty(departmentIds)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentIds));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLabelsChanged()){
+         cmd.append(",`DEPARTMENT_LABELS`=");
+         String departmentLabels = unit.departmentLabels();
+         if(RString.isEmpty(departmentLabels)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLabels));
             cmd.append('\'');
          }
       }
@@ -930,6 +1012,21 @@ public class FStatisticsFinancialDynamicLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(marketerLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isMarketerStatusCdChanged()){
+         cmd.append(",`MARKETER_STATUS_CD`=");
+         cmd.append(unit.marketerStatusCd());
+      }
+      if(unit.isMarketerRankChanged()){
+         cmd.append(",`MARKETER_RANK`=");
+         String marketerRank = unit.marketerRank();
+         if(RString.isEmpty(marketerRank)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(marketerRank));
             cmd.append('\'');
          }
       }
@@ -979,9 +1076,22 @@ public class FStatisticsFinancialDynamicLogic
          cmd.append(",`CUSTOMER_ACTION_CD`=");
          cmd.append(unit.customerActionCd());
       }
-      if(unit.isCustomerAmountChanged()){
-         cmd.append(",`CUSTOMER_AMOUNT`=");
-         cmd.append(unit.customerAmount());
+      if(unit.isCustomerActionDateChanged()){
+         cmd.append(",`CUSTOMER_ACTION_DATE`=");
+         TDateTime customerActionDate = unit.customerActionDate();
+         if(customerActionDate == null){
+            cmd.append("NULL");
+         }else if(customerActionDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(customerActionDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isCustomerActionAmountChanged()){
+         cmd.append(",`CUSTOMER_ACTION_AMOUNT`=");
+         cmd.append(unit.customerActionAmount());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
