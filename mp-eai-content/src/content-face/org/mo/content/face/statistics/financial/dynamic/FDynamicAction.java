@@ -39,7 +39,7 @@ public class FDynamicAction
                            ILogicContext logicContext,
                            FBasePage basePage){
       _logger.debug(this, "Construct", "Construct begin. (user={1})", basePage.user());
-      return "/manage/manage/device/BrowserAccessList";
+      return "/";
    }
 
    //============================================================
