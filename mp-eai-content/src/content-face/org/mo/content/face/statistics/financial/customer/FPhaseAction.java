@@ -50,7 +50,7 @@ public class FPhaseAction
       TDateTime beginDate = new TDateTime();
       beginDate.parse(beginDateStr, "YYYY-MM-DD HH24:MI");
 
-      String endDateStr = context.parameter("beginDate");
+      String endDateStr = context.parameter("endDate");
       TDateTime endDate = new TDateTime();
       endDate.parse(endDateStr, "YYYY-MM-DD HH24:MI");
 
