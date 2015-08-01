@@ -10,7 +10,6 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -41,24 +40,6 @@ public class FStatisticsFinancialCompanyAmountLogic
 
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
-
-   // 字段记录年的定义。
-   public final static SLogicFieldInfo RECORD_YEAR = new SLogicFieldInfo("RECORD_YEAR");
-
-   // 字段记录月的定义。
-   public final static SLogicFieldInfo RECORD_MONTH = new SLogicFieldInfo("RECORD_MONTH");
-
-   // 字段记录周的定义。
-   public final static SLogicFieldInfo RECORD_WEEK = new SLogicFieldInfo("RECORD_WEEK");
-
-   // 字段记录日的定义。
-   public final static SLogicFieldInfo RECORD_DAY = new SLogicFieldInfo("RECORD_DAY");
-
-   // 字段记录小时的定义。
-   public final static SLogicFieldInfo RECORD_HOUR = new SLogicFieldInfo("RECORD_HOUR");
-
-   // 字段记录日期的定义。
-   public final static SLogicFieldInfo RECORD_DATE = new SLogicFieldInfo("RECORD_DATE");
 
    // 字段公司编号的定义。
    public final static SLogicFieldInfo COMPANY_ID = new SLogicFieldInfo("COMPANY_ID");
@@ -97,7 +78,7 @@ public class FStatisticsFinancialCompanyAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`COMPANY_ID`,`COMPANY_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`MARKETER_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`COMPANY_ID`,`COMPANY_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`MARKETER_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造公司数据统计表逻辑单元。</T>
@@ -689,12 +670,6 @@ public class FStatisticsFinancialCompanyAmountLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`RECORD_YEAR`");
-      cmd.append(",`RECORD_MONTH`");
-      cmd.append(",`RECORD_WEEK`");
-      cmd.append(",`RECORD_DAY`");
-      cmd.append(",`RECORD_HOUR`");
-      cmd.append(",`RECORD_DATE`");
       cmd.append(",`COMPANY_ID`");
       cmd.append(",`COMPANY_LABEL`");
       cmd.append(",`INVESTMENT_TOTAL`");
@@ -717,72 +692,6 @@ public class FStatisticsFinancialCompanyAmountLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      cmd.append(',');
-      TDateTime recordYear = unit.recordYear();
-      if(recordYear == null){
-         cmd.append("NULL");
-      }else if(recordYear.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordYear.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordMonth = unit.recordMonth();
-      if(recordMonth == null){
-         cmd.append("NULL");
-      }else if(recordMonth.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordMonth.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordWeek = unit.recordWeek();
-      if(recordWeek == null){
-         cmd.append("NULL");
-      }else if(recordWeek.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordWeek.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordDay = unit.recordDay();
-      if(recordDay == null){
-         cmd.append("NULL");
-      }else if(recordDay.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordDay.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordHour = unit.recordHour();
-      if(recordHour == null){
-         cmd.append("NULL");
-      }else if(recordHour.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordHour.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordDate = unit.recordDate();
-      if(recordDate == null){
-         cmd.append("NULL");
-      }else if(recordDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
       cmd.append(',');
       long companyId = unit.companyId();
       if(companyId == 0){
@@ -885,84 +794,6 @@ public class FStatisticsFinancialCompanyAmountLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isRecordYearChanged()){
-         cmd.append(",`RECORD_YEAR`=");
-         TDateTime recordYear = unit.recordYear();
-         if(recordYear == null){
-            cmd.append("NULL");
-         }else if(recordYear.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordYear.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordMonthChanged()){
-         cmd.append(",`RECORD_MONTH`=");
-         TDateTime recordMonth = unit.recordMonth();
-         if(recordMonth == null){
-            cmd.append("NULL");
-         }else if(recordMonth.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordMonth.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordWeekChanged()){
-         cmd.append(",`RECORD_WEEK`=");
-         TDateTime recordWeek = unit.recordWeek();
-         if(recordWeek == null){
-            cmd.append("NULL");
-         }else if(recordWeek.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordWeek.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordDayChanged()){
-         cmd.append(",`RECORD_DAY`=");
-         TDateTime recordDay = unit.recordDay();
-         if(recordDay == null){
-            cmd.append("NULL");
-         }else if(recordDay.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordDay.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordHourChanged()){
-         cmd.append(",`RECORD_HOUR`=");
-         TDateTime recordHour = unit.recordHour();
-         if(recordHour == null){
-            cmd.append("NULL");
-         }else if(recordHour.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordHour.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordDateChanged()){
-         cmd.append(",`RECORD_DATE`=");
-         TDateTime recordDate = unit.recordDate();
-         if(recordDate == null){
-            cmd.append("NULL");
-         }else if(recordDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
       if(unit.isCompanyIdChanged()){
          cmd.append(",`COMPANY_ID`=");
          long companyId = unit.companyId();

@@ -13,10 +13,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>理财师阶段统计表逻辑单元。</T>
+// <T>部门阶段统计表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialMarketerPhaseUnit
+public class FStatisticsFinancialDepartmentPhaseUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -97,65 +97,65 @@ public class FStatisticsFinancialMarketerPhaseUnit
    // 字段部门名称的定义。
    protected String _departmentLabel;
 
-   // 存储字段理财师编号的定义。
-   private long __marketerId;
+   // 存储字段部门投资的定义。
+   private double __departmentInvestment;
 
-   // 字段理财师编号的定义。
-   protected long _marketerId;
+   // 字段部门投资的定义。
+   protected double _departmentInvestment;
 
-   // 存储字段理财师名称的定义。
-   private String __marketerLabel;
+   // 存储字段部门投资总计的定义。
+   private double __departmentInvestmentTotal;
 
-   // 字段理财师名称的定义。
-   protected String _marketerLabel;
+   // 字段部门投资总计的定义。
+   protected double _departmentInvestmentTotal;
 
-   // 存储字段理财师投资的定义。
-   private double __marketerInvestment;
+   // 存储字段部门赎回的定义。
+   private double __departmentRedemption;
 
-   // 字段理财师投资的定义。
-   protected double _marketerInvestment;
+   // 字段部门赎回的定义。
+   protected double _departmentRedemption;
 
-   // 存储字段理财师投资总计的定义。
-   private double __marketerInvestmentTotal;
+   // 存储字段部门赎回总计的定义。
+   private double __departmentRedemptionTotal;
 
-   // 字段理财师投资总计的定义。
-   protected double _marketerInvestmentTotal;
+   // 字段部门赎回总计的定义。
+   protected double _departmentRedemptionTotal;
 
-   // 存储字段理财师赎回的定义。
-   private double __marketerRedemption;
+   // 存储字段部门净投的定义。
+   private double __departmentNetinvestment;
 
-   // 字段理财师赎回的定义。
-   protected double _marketerRedemption;
+   // 字段部门净投的定义。
+   protected double _departmentNetinvestment;
 
-   // 存储字段理财师赎回总计的定义。
-   private double __marketerRedemptionTotal;
+   // 存储字段部门净投总计的定义。
+   private double __departmentNetinvestmentTotal;
 
-   // 字段理财师赎回总计的定义。
-   protected double _marketerRedemptionTotal;
+   // 字段部门净投总计的定义。
+   protected double _departmentNetinvestmentTotal;
 
-   // 存储字段理财师净投的定义。
-   private double __marketerNetinvestment;
+   // 存储字段部门绩效的定义。
+   private double __departmentPerformance;
 
-   // 字段理财师净投的定义。
-   protected double _marketerNetinvestment;
+   // 字段部门绩效的定义。
+   protected double _departmentPerformance;
 
-   // 存储字段理财师净投总计的定义。
-   private double __marketerNetinvestmentTotal;
+   // 存储字段部门绩效总计的定义。
+   private double __departmentPerformanceTotal;
 
-   // 字段理财师净投总计的定义。
-   protected double _marketerNetinvestmentTotal;
+   // 字段部门绩效总计的定义。
+   protected double _departmentPerformanceTotal;
 
-   // 存储字段理财师绩效的定义。
-   private double __marketerPerformance;
+   // 存储字段理财师注册数的定义。
+   private int __marketerRegister;
 
-   // 字段理财师绩效的定义。
-   protected double _marketerPerformance;
+   // 字段理财师注册数的定义。
+   protected int _marketerRegister;
 
-   // 存储字段理财师绩效总计的定义。
-   private double __marketerPerformanceTotal;
+   // 存储字段理财师总数的定义。
+   private long __marketerTotal;
 
-   // 字段理财师绩效总计的定义。
-   protected double _marketerPerformanceTotal;
+   // 字段理财师总数的定义。
+   protected long _marketerTotal;
 
    // 存储字段客户注册数的定义。
    private int __customerRegister;
@@ -194,9 +194,9 @@ public class FStatisticsFinancialMarketerPhaseUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造理财师阶段统计表逻辑单元。</T>
+   // <T>构造部门阶段统计表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialMarketerPhaseUnit(){
+   public FStatisticsFinancialDepartmentPhaseUnit(){
    }
 
    //============================================================
@@ -551,273 +551,273 @@ public class FStatisticsFinancialMarketerPhaseUnit
    }
 
    //============================================================
-   // <T>判断理财师编号的数据是否改变。</T>
+   // <T>判断部门投资的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerIdChanged(){
-      return __marketerId != _marketerId;
+   public boolean isDepartmentInvestmentChanged(){
+      return __departmentInvestment != _departmentInvestment;
    }
 
    //============================================================
-   // <T>获得理财师编号的数据内容。</T>
+   // <T>获得部门投资的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long marketerId(){
-      return _marketerId;
+   public double departmentInvestment(){
+      return _departmentInvestment;
    }
 
    //============================================================
-   // <T>设置理财师编号的数据内容。</T>
+   // <T>设置部门投资的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerId(long value){
-      _marketerId = value;
+   public void setDepartmentInvestment(double value){
+      _departmentInvestment = value;
    }
 
    //============================================================
-   // <T>判断理财师名称的数据是否改变。</T>
+   // <T>判断部门投资总计的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerLabelChanged(){
-      return !RString.equals(__marketerLabel, _marketerLabel);
+   public boolean isDepartmentInvestmentTotalChanged(){
+      return __departmentInvestmentTotal != _departmentInvestmentTotal;
    }
 
    //============================================================
-   // <T>获得理财师名称的数据内容。</T>
+   // <T>获得部门投资总计的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String marketerLabel(){
-      return _marketerLabel;
+   public double departmentInvestmentTotal(){
+      return _departmentInvestmentTotal;
    }
 
    //============================================================
-   // <T>设置理财师名称的数据内容。</T>
+   // <T>设置部门投资总计的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerLabel(String value){
-      _marketerLabel = value;
+   public void setDepartmentInvestmentTotal(double value){
+      _departmentInvestmentTotal = value;
    }
 
    //============================================================
-   // <T>判断理财师投资的数据是否改变。</T>
+   // <T>判断部门赎回的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerInvestmentChanged(){
-      return __marketerInvestment != _marketerInvestment;
+   public boolean isDepartmentRedemptionChanged(){
+      return __departmentRedemption != _departmentRedemption;
    }
 
    //============================================================
-   // <T>获得理财师投资的数据内容。</T>
+   // <T>获得部门赎回的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerInvestment(){
-      return _marketerInvestment;
+   public double departmentRedemption(){
+      return _departmentRedemption;
    }
 
    //============================================================
-   // <T>设置理财师投资的数据内容。</T>
+   // <T>设置部门赎回的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerInvestment(double value){
-      _marketerInvestment = value;
+   public void setDepartmentRedemption(double value){
+      _departmentRedemption = value;
    }
 
    //============================================================
-   // <T>判断理财师投资总计的数据是否改变。</T>
+   // <T>判断部门赎回总计的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerInvestmentTotalChanged(){
-      return __marketerInvestmentTotal != _marketerInvestmentTotal;
+   public boolean isDepartmentRedemptionTotalChanged(){
+      return __departmentRedemptionTotal != _departmentRedemptionTotal;
    }
 
    //============================================================
-   // <T>获得理财师投资总计的数据内容。</T>
+   // <T>获得部门赎回总计的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerInvestmentTotal(){
-      return _marketerInvestmentTotal;
+   public double departmentRedemptionTotal(){
+      return _departmentRedemptionTotal;
    }
 
    //============================================================
-   // <T>设置理财师投资总计的数据内容。</T>
+   // <T>设置部门赎回总计的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerInvestmentTotal(double value){
-      _marketerInvestmentTotal = value;
+   public void setDepartmentRedemptionTotal(double value){
+      _departmentRedemptionTotal = value;
    }
 
    //============================================================
-   // <T>判断理财师赎回的数据是否改变。</T>
+   // <T>判断部门净投的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerRedemptionChanged(){
-      return __marketerRedemption != _marketerRedemption;
+   public boolean isDepartmentNetinvestmentChanged(){
+      return __departmentNetinvestment != _departmentNetinvestment;
    }
 
    //============================================================
-   // <T>获得理财师赎回的数据内容。</T>
+   // <T>获得部门净投的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerRedemption(){
-      return _marketerRedemption;
+   public double departmentNetinvestment(){
+      return _departmentNetinvestment;
    }
 
    //============================================================
-   // <T>设置理财师赎回的数据内容。</T>
+   // <T>设置部门净投的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerRedemption(double value){
-      _marketerRedemption = value;
+   public void setDepartmentNetinvestment(double value){
+      _departmentNetinvestment = value;
    }
 
    //============================================================
-   // <T>判断理财师赎回总计的数据是否改变。</T>
+   // <T>判断部门净投总计的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerRedemptionTotalChanged(){
-      return __marketerRedemptionTotal != _marketerRedemptionTotal;
+   public boolean isDepartmentNetinvestmentTotalChanged(){
+      return __departmentNetinvestmentTotal != _departmentNetinvestmentTotal;
    }
 
    //============================================================
-   // <T>获得理财师赎回总计的数据内容。</T>
+   // <T>获得部门净投总计的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerRedemptionTotal(){
-      return _marketerRedemptionTotal;
+   public double departmentNetinvestmentTotal(){
+      return _departmentNetinvestmentTotal;
    }
 
    //============================================================
-   // <T>设置理财师赎回总计的数据内容。</T>
+   // <T>设置部门净投总计的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerRedemptionTotal(double value){
-      _marketerRedemptionTotal = value;
+   public void setDepartmentNetinvestmentTotal(double value){
+      _departmentNetinvestmentTotal = value;
    }
 
    //============================================================
-   // <T>判断理财师净投的数据是否改变。</T>
+   // <T>判断部门绩效的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerNetinvestmentChanged(){
-      return __marketerNetinvestment != _marketerNetinvestment;
+   public boolean isDepartmentPerformanceChanged(){
+      return __departmentPerformance != _departmentPerformance;
    }
 
    //============================================================
-   // <T>获得理财师净投的数据内容。</T>
+   // <T>获得部门绩效的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerNetinvestment(){
-      return _marketerNetinvestment;
+   public double departmentPerformance(){
+      return _departmentPerformance;
    }
 
    //============================================================
-   // <T>设置理财师净投的数据内容。</T>
+   // <T>设置部门绩效的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerNetinvestment(double value){
-      _marketerNetinvestment = value;
+   public void setDepartmentPerformance(double value){
+      _departmentPerformance = value;
    }
 
    //============================================================
-   // <T>判断理财师净投总计的数据是否改变。</T>
+   // <T>判断部门绩效总计的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerNetinvestmentTotalChanged(){
-      return __marketerNetinvestmentTotal != _marketerNetinvestmentTotal;
+   public boolean isDepartmentPerformanceTotalChanged(){
+      return __departmentPerformanceTotal != _departmentPerformanceTotal;
    }
 
    //============================================================
-   // <T>获得理财师净投总计的数据内容。</T>
+   // <T>获得部门绩效总计的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerNetinvestmentTotal(){
-      return _marketerNetinvestmentTotal;
+   public double departmentPerformanceTotal(){
+      return _departmentPerformanceTotal;
    }
 
    //============================================================
-   // <T>设置理财师净投总计的数据内容。</T>
+   // <T>设置部门绩效总计的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerNetinvestmentTotal(double value){
-      _marketerNetinvestmentTotal = value;
+   public void setDepartmentPerformanceTotal(double value){
+      _departmentPerformanceTotal = value;
    }
 
    //============================================================
-   // <T>判断理财师绩效的数据是否改变。</T>
+   // <T>判断理财师注册数的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerPerformanceChanged(){
-      return __marketerPerformance != _marketerPerformance;
+   public boolean isMarketerRegisterChanged(){
+      return __marketerRegister != _marketerRegister;
    }
 
    //============================================================
-   // <T>获得理财师绩效的数据内容。</T>
+   // <T>获得理财师注册数的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerPerformance(){
-      return _marketerPerformance;
+   public int marketerRegister(){
+      return _marketerRegister;
    }
 
    //============================================================
-   // <T>设置理财师绩效的数据内容。</T>
+   // <T>设置理财师注册数的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerPerformance(double value){
-      _marketerPerformance = value;
+   public void setMarketerRegister(int value){
+      _marketerRegister = value;
    }
 
    //============================================================
-   // <T>判断理财师绩效总计的数据是否改变。</T>
+   // <T>判断理财师总数的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerPerformanceTotalChanged(){
-      return __marketerPerformanceTotal != _marketerPerformanceTotal;
+   public boolean isMarketerTotalChanged(){
+      return __marketerTotal != _marketerTotal;
    }
 
    //============================================================
-   // <T>获得理财师绩效总计的数据内容。</T>
+   // <T>获得理财师总数的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double marketerPerformanceTotal(){
-      return _marketerPerformanceTotal;
+   public long marketerTotal(){
+      return _marketerTotal;
    }
 
    //============================================================
-   // <T>设置理财师绩效总计的数据内容。</T>
+   // <T>设置理财师总数的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerPerformanceTotal(double value){
-      _marketerPerformanceTotal = value;
+   public void setMarketerTotal(long value){
+      _marketerTotal = value;
    }
 
    //============================================================
@@ -1017,26 +1017,26 @@ public class FStatisticsFinancialMarketerPhaseUnit
             return Long.toString(_departmentId);
          case "department_label":
             return _departmentLabel;
-         case "marketer_id":
-            return Long.toString(_marketerId);
-         case "marketer_label":
-            return _marketerLabel;
-         case "marketer_investment":
-            return RDouble.toString(_marketerInvestment);
-         case "marketer_investment_total":
-            return RDouble.toString(_marketerInvestmentTotal);
-         case "marketer_redemption":
-            return RDouble.toString(_marketerRedemption);
-         case "marketer_redemption_total":
-            return RDouble.toString(_marketerRedemptionTotal);
-         case "marketer_netinvestment":
-            return RDouble.toString(_marketerNetinvestment);
-         case "marketer_netinvestment_total":
-            return RDouble.toString(_marketerNetinvestmentTotal);
-         case "marketer_performance":
-            return RDouble.toString(_marketerPerformance);
-         case "marketer_performance_total":
-            return RDouble.toString(_marketerPerformanceTotal);
+         case "department_investment":
+            return RDouble.toString(_departmentInvestment);
+         case "department_investment_total":
+            return RDouble.toString(_departmentInvestmentTotal);
+         case "department_redemption":
+            return RDouble.toString(_departmentRedemption);
+         case "department_redemption_total":
+            return RDouble.toString(_departmentRedemptionTotal);
+         case "department_netinvestment":
+            return RDouble.toString(_departmentNetinvestment);
+         case "department_netinvestment_total":
+            return RDouble.toString(_departmentNetinvestmentTotal);
+         case "department_performance":
+            return RDouble.toString(_departmentPerformance);
+         case "department_performance_total":
+            return RDouble.toString(_departmentPerformanceTotal);
+         case "marketer_register":
+            return RInteger.toString(_marketerRegister);
+         case "marketer_total":
+            return Long.toString(_marketerTotal);
          case "customer_register":
             return RInteger.toString(_customerRegister);
          case "customer_total":
@@ -1102,35 +1102,35 @@ public class FStatisticsFinancialMarketerPhaseUnit
          case "department_label":
             _departmentLabel = value;
             break;
-         case "marketer_id":
-            _marketerId = RLong.parse(value);
+         case "department_investment":
+            _departmentInvestment = RDouble.parse(value);
             break;
-         case "marketer_label":
-            _marketerLabel = value;
+         case "department_investment_total":
+            _departmentInvestmentTotal = RDouble.parse(value);
             break;
-         case "marketer_investment":
-            _marketerInvestment = RDouble.parse(value);
+         case "department_redemption":
+            _departmentRedemption = RDouble.parse(value);
             break;
-         case "marketer_investment_total":
-            _marketerInvestmentTotal = RDouble.parse(value);
+         case "department_redemption_total":
+            _departmentRedemptionTotal = RDouble.parse(value);
             break;
-         case "marketer_redemption":
-            _marketerRedemption = RDouble.parse(value);
+         case "department_netinvestment":
+            _departmentNetinvestment = RDouble.parse(value);
             break;
-         case "marketer_redemption_total":
-            _marketerRedemptionTotal = RDouble.parse(value);
+         case "department_netinvestment_total":
+            _departmentNetinvestmentTotal = RDouble.parse(value);
             break;
-         case "marketer_netinvestment":
-            _marketerNetinvestment = RDouble.parse(value);
+         case "department_performance":
+            _departmentPerformance = RDouble.parse(value);
             break;
-         case "marketer_netinvestment_total":
-            _marketerNetinvestmentTotal = RDouble.parse(value);
+         case "department_performance_total":
+            _departmentPerformanceTotal = RDouble.parse(value);
             break;
-         case "marketer_performance":
-            _marketerPerformance = RDouble.parse(value);
+         case "marketer_register":
+            _marketerRegister = RInteger.parse(value);
             break;
-         case "marketer_performance_total":
-            _marketerPerformanceTotal = RDouble.parse(value);
+         case "marketer_total":
+            _marketerTotal = RLong.parse(value);
             break;
          case "customer_register":
             _customerRegister = RInteger.parse(value);
@@ -1217,45 +1217,45 @@ public class FStatisticsFinancialMarketerPhaseUnit
                __departmentLabel = value;
                _departmentLabel = __departmentLabel;
                break;
-            case "marketer_id":
-               __marketerId = RLong.parse(value);
-               _marketerId = __marketerId;
+            case "department_investment":
+               __departmentInvestment = RDouble.parse(value);
+               _departmentInvestment = __departmentInvestment;
                break;
-            case "marketer_label":
-               __marketerLabel = value;
-               _marketerLabel = __marketerLabel;
+            case "department_investment_total":
+               __departmentInvestmentTotal = RDouble.parse(value);
+               _departmentInvestmentTotal = __departmentInvestmentTotal;
                break;
-            case "marketer_investment":
-               __marketerInvestment = RDouble.parse(value);
-               _marketerInvestment = __marketerInvestment;
+            case "department_redemption":
+               __departmentRedemption = RDouble.parse(value);
+               _departmentRedemption = __departmentRedemption;
                break;
-            case "marketer_investment_total":
-               __marketerInvestmentTotal = RDouble.parse(value);
-               _marketerInvestmentTotal = __marketerInvestmentTotal;
+            case "department_redemption_total":
+               __departmentRedemptionTotal = RDouble.parse(value);
+               _departmentRedemptionTotal = __departmentRedemptionTotal;
                break;
-            case "marketer_redemption":
-               __marketerRedemption = RDouble.parse(value);
-               _marketerRedemption = __marketerRedemption;
+            case "department_netinvestment":
+               __departmentNetinvestment = RDouble.parse(value);
+               _departmentNetinvestment = __departmentNetinvestment;
                break;
-            case "marketer_redemption_total":
-               __marketerRedemptionTotal = RDouble.parse(value);
-               _marketerRedemptionTotal = __marketerRedemptionTotal;
+            case "department_netinvestment_total":
+               __departmentNetinvestmentTotal = RDouble.parse(value);
+               _departmentNetinvestmentTotal = __departmentNetinvestmentTotal;
                break;
-            case "marketer_netinvestment":
-               __marketerNetinvestment = RDouble.parse(value);
-               _marketerNetinvestment = __marketerNetinvestment;
+            case "department_performance":
+               __departmentPerformance = RDouble.parse(value);
+               _departmentPerformance = __departmentPerformance;
                break;
-            case "marketer_netinvestment_total":
-               __marketerNetinvestmentTotal = RDouble.parse(value);
-               _marketerNetinvestmentTotal = __marketerNetinvestmentTotal;
+            case "department_performance_total":
+               __departmentPerformanceTotal = RDouble.parse(value);
+               _departmentPerformanceTotal = __departmentPerformanceTotal;
                break;
-            case "marketer_performance":
-               __marketerPerformance = RDouble.parse(value);
-               _marketerPerformance = __marketerPerformance;
+            case "marketer_register":
+               __marketerRegister = RInteger.parse(value);
+               _marketerRegister = __marketerRegister;
                break;
-            case "marketer_performance_total":
-               __marketerPerformanceTotal = RDouble.parse(value);
-               _marketerPerformanceTotal = __marketerPerformanceTotal;
+            case "marketer_total":
+               __marketerTotal = RLong.parse(value);
+               _marketerTotal = __marketerTotal;
                break;
             case "customer_register":
                __customerRegister = RInteger.parse(value);
@@ -1306,16 +1306,16 @@ public class FStatisticsFinancialMarketerPhaseUnit
       row.set("linkDate", _linkDate);
       row.set("departmentId", _departmentId);
       row.set("departmentLabel", _departmentLabel);
-      row.set("marketerId", _marketerId);
-      row.set("marketerLabel", _marketerLabel);
-      row.set("marketerInvestment", _marketerInvestment);
-      row.set("marketerInvestmentTotal", _marketerInvestmentTotal);
-      row.set("marketerRedemption", _marketerRedemption);
-      row.set("marketerRedemptionTotal", _marketerRedemptionTotal);
-      row.set("marketerNetinvestment", _marketerNetinvestment);
-      row.set("marketerNetinvestmentTotal", _marketerNetinvestmentTotal);
-      row.set("marketerPerformance", _marketerPerformance);
-      row.set("marketerPerformanceTotal", _marketerPerformanceTotal);
+      row.set("departmentInvestment", _departmentInvestment);
+      row.set("departmentInvestmentTotal", _departmentInvestmentTotal);
+      row.set("departmentRedemption", _departmentRedemption);
+      row.set("departmentRedemptionTotal", _departmentRedemptionTotal);
+      row.set("departmentNetinvestment", _departmentNetinvestment);
+      row.set("departmentNetinvestmentTotal", _departmentNetinvestmentTotal);
+      row.set("departmentPerformance", _departmentPerformance);
+      row.set("departmentPerformanceTotal", _departmentPerformanceTotal);
+      row.set("marketerRegister", _marketerRegister);
+      row.set("marketerTotal", _marketerTotal);
       row.set("customerRegister", _customerRegister);
       row.set("customerTotal", _customerTotal);
       row.set("createUserId", _createUserId);
@@ -1345,16 +1345,16 @@ public class FStatisticsFinancialMarketerPhaseUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("departmentId", RLong.toString(_departmentId));
       map.put("departmentLabel", _departmentLabel);
-      map.put("marketerId", RLong.toString(_marketerId));
-      map.put("marketerLabel", _marketerLabel);
-      map.put("marketerInvestment", RDouble.toString(_marketerInvestment));
-      map.put("marketerInvestmentTotal", RDouble.toString(_marketerInvestmentTotal));
-      map.put("marketerRedemption", RDouble.toString(_marketerRedemption));
-      map.put("marketerRedemptionTotal", RDouble.toString(_marketerRedemptionTotal));
-      map.put("marketerNetinvestment", RDouble.toString(_marketerNetinvestment));
-      map.put("marketerNetinvestmentTotal", RDouble.toString(_marketerNetinvestmentTotal));
-      map.put("marketerPerformance", RDouble.toString(_marketerPerformance));
-      map.put("marketerPerformanceTotal", RDouble.toString(_marketerPerformanceTotal));
+      map.put("departmentInvestment", RDouble.toString(_departmentInvestment));
+      map.put("departmentInvestmentTotal", RDouble.toString(_departmentInvestmentTotal));
+      map.put("departmentRedemption", RDouble.toString(_departmentRedemption));
+      map.put("departmentRedemptionTotal", RDouble.toString(_departmentRedemptionTotal));
+      map.put("departmentNetinvestment", RDouble.toString(_departmentNetinvestment));
+      map.put("departmentNetinvestmentTotal", RDouble.toString(_departmentNetinvestmentTotal));
+      map.put("departmentPerformance", RDouble.toString(_departmentPerformance));
+      map.put("departmentPerformanceTotal", RDouble.toString(_departmentPerformanceTotal));
+      map.put("marketerRegister", RInteger.toString(_marketerRegister));
+      map.put("marketerTotal", RLong.toString(_marketerTotal));
       map.put("customerRegister", RInteger.toString(_customerRegister));
       map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("createUserId", RLong.toString(_createUserId));

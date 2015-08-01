@@ -41,6 +41,12 @@ public class FStatisticsFinancialMarketerAmountLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段部门编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
+
+   // 字段部门标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
+
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
@@ -75,7 +81,7 @@ public class FStatisticsFinancialMarketerAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`MARKETER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师数据统计表逻辑单元。</T>
@@ -667,6 +673,8 @@ public class FStatisticsFinancialMarketerAmountLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`DEPARTMENT_ID`");
+      cmd.append(",`DEPARTMENT_LABEL`");
       cmd.append(",`MARKETER_ID`");
       cmd.append(",`MARKETER_LABEL`");
       cmd.append(",`INVESTMENT_TOTAL`");
@@ -688,6 +696,17 @@ public class FStatisticsFinancialMarketerAmountLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      cmd.append(unit.departmentId());
+      cmd.append(',');
+      String departmentLabel = unit.departmentLabel();
+      if(RString.isEmpty(departmentLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLabel));
+         cmd.append('\'');
+      }
       cmd.append(',');
       long marketerId = unit.marketerId();
       if(marketerId == 0){
@@ -788,6 +807,21 @@ public class FStatisticsFinancialMarketerAmountLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isDepartmentIdChanged()){
+         cmd.append(",`DEPARTMENT_ID`=");
+         cmd.append(unit.departmentId());
+      }
+      if(unit.isDepartmentLabelChanged()){
+         cmd.append(",`DEPARTMENT_LABEL`=");
+         String departmentLabel = unit.departmentLabel();
+         if(RString.isEmpty(departmentLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLabel));
+            cmd.append('\'');
+         }
+      }
       if(unit.isMarketerIdChanged()){
          cmd.append(",`MARKETER_ID`=");
          long marketerId = unit.marketerId();

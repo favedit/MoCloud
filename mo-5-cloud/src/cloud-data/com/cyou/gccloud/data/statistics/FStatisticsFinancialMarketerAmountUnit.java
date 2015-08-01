@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -36,6 +37,18 @@ public class FStatisticsFinancialMarketerAmountUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段部门编号的定义。
+   private int __departmentId;
+
+   // 字段部门编号的定义。
+   protected int _departmentId;
+
+   // 存储字段部门标签的定义。
+   private String __departmentLabel;
+
+   // 字段部门标签的定义。
+   protected String _departmentLabel;
+
    // 存储字段理财师编号的定义。
    private long __marketerId;
 
@@ -49,28 +62,28 @@ public class FStatisticsFinancialMarketerAmountUnit
    protected String _marketerLabel;
 
    // 存储字段投资总计的定义。
-   private int __investmentTotal;
+   private double __investmentTotal;
 
    // 字段投资总计的定义。
-   protected int _investmentTotal;
+   protected double _investmentTotal;
 
    // 存储字段赎回总计的定义。
-   private int __redemptionTotal;
+   private double __redemptionTotal;
 
    // 字段赎回总计的定义。
-   protected int _redemptionTotal;
+   protected double _redemptionTotal;
 
    // 存储字段净投总计的定义。
-   private int __netinvestmentTotal;
+   private double __netinvestmentTotal;
 
    // 字段净投总计的定义。
-   protected int _netinvestmentTotal;
+   protected double _netinvestmentTotal;
 
    // 存储字段绩效总计的定义。
-   private int __performanceTotal;
+   private double __performanceTotal;
 
    // 字段绩效总计的定义。
-   protected int _performanceTotal;
+   protected double _performanceTotal;
 
    // 存储字段客户总计的定义。
    private int __customerTotal;
@@ -190,6 +203,60 @@ public class FStatisticsFinancialMarketerAmountUnit
    }
 
    //============================================================
+   // <T>判断部门编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
+   }
+
+   //============================================================
+   // <T>获得部门编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int departmentId(){
+      return _departmentId;
+   }
+
+   //============================================================
+   // <T>设置部门编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentId(int value){
+      _departmentId = value;
+   }
+
+   //============================================================
+   // <T>判断部门标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLabelChanged(){
+      return !RString.equals(__departmentLabel, _departmentLabel);
+   }
+
+   //============================================================
+   // <T>获得部门标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLabel(){
+      return _departmentLabel;
+   }
+
+   //============================================================
+   // <T>设置部门标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLabel(String value){
+      _departmentLabel = value;
+   }
+
+   //============================================================
    // <T>判断理财师编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -257,7 +324,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @return 数据内容
    //============================================================
-   public int investmentTotal(){
+   public double investmentTotal(){
       return _investmentTotal;
    }
 
@@ -266,7 +333,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setInvestmentTotal(int value){
+   public void setInvestmentTotal(double value){
       _investmentTotal = value;
    }
 
@@ -284,7 +351,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @return 数据内容
    //============================================================
-   public int redemptionTotal(){
+   public double redemptionTotal(){
       return _redemptionTotal;
    }
 
@@ -293,7 +360,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setRedemptionTotal(int value){
+   public void setRedemptionTotal(double value){
       _redemptionTotal = value;
    }
 
@@ -311,7 +378,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @return 数据内容
    //============================================================
-   public int netinvestmentTotal(){
+   public double netinvestmentTotal(){
       return _netinvestmentTotal;
    }
 
@@ -320,7 +387,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setNetinvestmentTotal(int value){
+   public void setNetinvestmentTotal(double value){
       _netinvestmentTotal = value;
    }
 
@@ -338,7 +405,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @return 数据内容
    //============================================================
-   public int performanceTotal(){
+   public double performanceTotal(){
       return _performanceTotal;
    }
 
@@ -347,7 +414,7 @@ public class FStatisticsFinancialMarketerAmountUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setPerformanceTotal(int value){
+   public void setPerformanceTotal(double value){
       _performanceTotal = value;
    }
 
@@ -501,18 +568,22 @@ public class FStatisticsFinancialMarketerAmountUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "department_id":
+            return RInteger.toString(_departmentId);
+         case "department_label":
+            return _departmentLabel;
          case "marketer_id":
             return Long.toString(_marketerId);
          case "marketer_label":
             return _marketerLabel;
          case "investment_total":
-            return RInteger.toString(_investmentTotal);
+            return RDouble.toString(_investmentTotal);
          case "redemption_total":
-            return RInteger.toString(_redemptionTotal);
+            return RDouble.toString(_redemptionTotal);
          case "netinvestment_total":
-            return RInteger.toString(_netinvestmentTotal);
+            return RDouble.toString(_netinvestmentTotal);
          case "performance_total":
-            return RInteger.toString(_performanceTotal);
+            return RDouble.toString(_performanceTotal);
          case "customer_total":
             return RInteger.toString(_customerTotal);
          case "create_user_id":
@@ -546,6 +617,12 @@ public class FStatisticsFinancialMarketerAmountUnit
          case "guid":
             _guid = value;
             break;
+         case "department_id":
+            _departmentId = RInteger.parse(value);
+            break;
+         case "department_label":
+            _departmentLabel = value;
+            break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
@@ -553,16 +630,16 @@ public class FStatisticsFinancialMarketerAmountUnit
             _marketerLabel = value;
             break;
          case "investment_total":
-            _investmentTotal = RInteger.parse(value);
+            _investmentTotal = RDouble.parse(value);
             break;
          case "redemption_total":
-            _redemptionTotal = RInteger.parse(value);
+            _redemptionTotal = RDouble.parse(value);
             break;
          case "netinvestment_total":
-            _netinvestmentTotal = RInteger.parse(value);
+            _netinvestmentTotal = RDouble.parse(value);
             break;
          case "performance_total":
-            _performanceTotal = RInteger.parse(value);
+            _performanceTotal = RDouble.parse(value);
             break;
          case "customer_total":
             _customerTotal = RInteger.parse(value);
@@ -606,6 +683,14 @@ public class FStatisticsFinancialMarketerAmountUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "department_id":
+               __departmentId = RInteger.parse(value);
+               _departmentId = __departmentId;
+               break;
+            case "department_label":
+               __departmentLabel = value;
+               _departmentLabel = __departmentLabel;
+               break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
@@ -615,19 +700,19 @@ public class FStatisticsFinancialMarketerAmountUnit
                _marketerLabel = __marketerLabel;
                break;
             case "investment_total":
-               __investmentTotal = RInteger.parse(value);
+               __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
                break;
             case "redemption_total":
-               __redemptionTotal = RInteger.parse(value);
+               __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
                break;
             case "netinvestment_total":
-               __netinvestmentTotal = RInteger.parse(value);
+               __netinvestmentTotal = RDouble.parse(value);
                _netinvestmentTotal = __netinvestmentTotal;
                break;
             case "performance_total":
-               __performanceTotal = RInteger.parse(value);
+               __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
                break;
             case "customer_total":
@@ -665,6 +750,8 @@ public class FStatisticsFinancialMarketerAmountUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("departmentId", _departmentId);
+      row.set("departmentLabel", _departmentLabel);
       row.set("marketerId", _marketerId);
       row.set("marketerLabel", _marketerLabel);
       row.set("investmentTotal", _investmentTotal);
@@ -689,12 +776,14 @@ public class FStatisticsFinancialMarketerAmountUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("departmentId", RInteger.toString(_departmentId));
+      map.put("departmentLabel", _departmentLabel);
       map.put("marketerId", RLong.toString(_marketerId));
       map.put("marketerLabel", _marketerLabel);
-      map.put("investmentTotal", RInteger.toString(_investmentTotal));
-      map.put("redemptionTotal", RInteger.toString(_redemptionTotal));
-      map.put("netinvestmentTotal", RInteger.toString(_netinvestmentTotal));
-      map.put("performanceTotal", RInteger.toString(_performanceTotal));
+      map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("performanceTotal", RDouble.toString(_performanceTotal));
       map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));

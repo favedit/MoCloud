@@ -13,10 +13,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>公司数据统计表逻辑单元。</T>
+// <T>部门数据统计表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialCompanyAmountUnit
+public class FStatisticsFinancialDepartmentAmountUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -37,17 +37,17 @@ public class FStatisticsFinancialCompanyAmountUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段公司编号的定义。
-   private long __companyId;
+   // 存储字段部门编号的定义。
+   private long __departmentId;
 
-   // 字段公司编号的定义。
-   protected long _companyId;
+   // 字段部门编号的定义。
+   protected long _departmentId;
 
-   // 存储字段公司名称的定义。
-   private String __companyLabel;
+   // 存储字段部门名称的定义。
+   private String __departmentLabel;
 
-   // 字段公司名称的定义。
-   protected String _companyLabel;
+   // 字段部门名称的定义。
+   protected String _departmentLabel;
 
    // 存储字段投资总计的定义。
    private double __investmentTotal;
@@ -110,9 +110,9 @@ public class FStatisticsFinancialCompanyAmountUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造公司数据统计表逻辑单元。</T>
+   // <T>构造部门数据统计表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialCompanyAmountUnit(){
+   public FStatisticsFinancialDepartmentAmountUnit(){
    }
 
    //============================================================
@@ -197,57 +197,57 @@ public class FStatisticsFinancialCompanyAmountUnit
    }
 
    //============================================================
-   // <T>判断公司编号的数据是否改变。</T>
+   // <T>判断部门编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCompanyIdChanged(){
-      return __companyId != _companyId;
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
    }
 
    //============================================================
-   // <T>获得公司编号的数据内容。</T>
+   // <T>获得部门编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long companyId(){
-      return _companyId;
+   public long departmentId(){
+      return _departmentId;
    }
 
    //============================================================
-   // <T>设置公司编号的数据内容。</T>
+   // <T>设置部门编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyId(long value){
-      _companyId = value;
+   public void setDepartmentId(long value){
+      _departmentId = value;
    }
 
    //============================================================
-   // <T>判断公司名称的数据是否改变。</T>
+   // <T>判断部门名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCompanyLabelChanged(){
-      return !RString.equals(__companyLabel, _companyLabel);
+   public boolean isDepartmentLabelChanged(){
+      return !RString.equals(__departmentLabel, _departmentLabel);
    }
 
    //============================================================
-   // <T>获得公司名称的数据内容。</T>
+   // <T>获得部门名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String companyLabel(){
-      return _companyLabel;
+   public String departmentLabel(){
+      return _departmentLabel;
    }
 
    //============================================================
-   // <T>设置公司名称的数据内容。</T>
+   // <T>设置部门名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyLabel(String value){
-      _companyLabel = value;
+   public void setDepartmentLabel(String value){
+      _departmentLabel = value;
    }
 
    //============================================================
@@ -535,10 +535,10 @@ public class FStatisticsFinancialCompanyAmountUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "company_id":
-            return Long.toString(_companyId);
-         case "company_label":
-            return _companyLabel;
+         case "department_id":
+            return Long.toString(_departmentId);
+         case "department_label":
+            return _departmentLabel;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -582,11 +582,11 @@ public class FStatisticsFinancialCompanyAmountUnit
          case "guid":
             _guid = value;
             break;
-         case "company_id":
-            _companyId = RLong.parse(value);
+         case "department_id":
+            _departmentId = RLong.parse(value);
             break;
-         case "company_label":
-            _companyLabel = value;
+         case "department_label":
+            _departmentLabel = value;
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -645,13 +645,13 @@ public class FStatisticsFinancialCompanyAmountUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "company_id":
-               __companyId = RLong.parse(value);
-               _companyId = __companyId;
+            case "department_id":
+               __departmentId = RLong.parse(value);
+               _departmentId = __departmentId;
                break;
-            case "company_label":
-               __companyLabel = value;
-               _companyLabel = __companyLabel;
+            case "department_label":
+               __departmentLabel = value;
+               _departmentLabel = __departmentLabel;
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -708,8 +708,8 @@ public class FStatisticsFinancialCompanyAmountUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("companyId", _companyId);
-      row.set("companyLabel", _companyLabel);
+      row.set("departmentId", _departmentId);
+      row.set("departmentLabel", _departmentLabel);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
@@ -733,8 +733,8 @@ public class FStatisticsFinancialCompanyAmountUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("companyId", RLong.toString(_companyId));
-      map.put("companyLabel", _companyLabel);
+      map.put("departmentId", RLong.toString(_departmentId));
+      map.put("departmentLabel", _departmentLabel);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));

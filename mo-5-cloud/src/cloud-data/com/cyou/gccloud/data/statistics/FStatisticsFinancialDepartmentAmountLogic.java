@@ -10,7 +10,6 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -21,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>理财师阶段统计表逻辑。</T>
+// <T>部门数据统计表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialMarketerPhaseLogic
+public class FStatisticsFinancialDepartmentAmountLogic
       extends FLogicTable
 {
-   // 理财师阶段统计表的定义。
+   // 部门数据统计表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("statistics");
 
-   // 理财师阶段统计表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("statistics.financial.marketer.phase", "ST_FIN_MARKETER_PHASE");
+   // 部门数据统计表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("statistics.financial.department.amount", "ST_FIN_DEPARTMENT_AMOUNT");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -42,70 +41,28 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段记录年的定义。
-   public final static SLogicFieldInfo RECORD_YEAR = new SLogicFieldInfo("RECORD_YEAR");
-
-   // 字段记录月的定义。
-   public final static SLogicFieldInfo RECORD_MONTH = new SLogicFieldInfo("RECORD_MONTH");
-
-   // 字段记录周的定义。
-   public final static SLogicFieldInfo RECORD_WEEK = new SLogicFieldInfo("RECORD_WEEK");
-
-   // 字段记录日的定义。
-   public final static SLogicFieldInfo RECORD_DAY = new SLogicFieldInfo("RECORD_DAY");
-
-   // 字段记录小时的定义。
-   public final static SLogicFieldInfo RECORD_HOUR = new SLogicFieldInfo("RECORD_HOUR");
-
-   // 字段记录日期的定义。
-   public final static SLogicFieldInfo RECORD_DATE = new SLogicFieldInfo("RECORD_DATE");
-
-   // 字段关联编号的定义。
-   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
-
-   // 字段关联日期的定义。
-   public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
-
    // 字段部门编号的定义。
    public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
 
    // 字段部门名称的定义。
    public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
 
-   // 字段理财师编号的定义。
-   public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
+   // 字段投资总计的定义。
+   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
-   // 字段理财师名称的定义。
-   public final static SLogicFieldInfo MARKETER_LABEL = new SLogicFieldInfo("MARKETER_LABEL");
+   // 字段赎回总计的定义。
+   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
 
-   // 字段理财师投资的定义。
-   public final static SLogicFieldInfo MARKETER_INVESTMENT = new SLogicFieldInfo("MARKETER_INVESTMENT");
+   // 字段净投总计的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
-   // 字段理财师投资总计的定义。
-   public final static SLogicFieldInfo MARKETER_INVESTMENT_TOTAL = new SLogicFieldInfo("MARKETER_INVESTMENT_TOTAL");
+   // 字段绩效总计的定义。
+   public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
-   // 字段理财师赎回的定义。
-   public final static SLogicFieldInfo MARKETER_REDEMPTION = new SLogicFieldInfo("MARKETER_REDEMPTION");
+   // 字段理财师总计的定义。
+   public final static SLogicFieldInfo MARKETER_TOTAL = new SLogicFieldInfo("MARKETER_TOTAL");
 
-   // 字段理财师赎回总计的定义。
-   public final static SLogicFieldInfo MARKETER_REDEMPTION_TOTAL = new SLogicFieldInfo("MARKETER_REDEMPTION_TOTAL");
-
-   // 字段理财师净投的定义。
-   public final static SLogicFieldInfo MARKETER_NETINVESTMENT = new SLogicFieldInfo("MARKETER_NETINVESTMENT");
-
-   // 字段理财师净投总计的定义。
-   public final static SLogicFieldInfo MARKETER_NETINVESTMENT_TOTAL = new SLogicFieldInfo("MARKETER_NETINVESTMENT_TOTAL");
-
-   // 字段理财师绩效的定义。
-   public final static SLogicFieldInfo MARKETER_PERFORMANCE = new SLogicFieldInfo("MARKETER_PERFORMANCE");
-
-   // 字段理财师绩效总计的定义。
-   public final static SLogicFieldInfo MARKETER_PERFORMANCE_TOTAL = new SLogicFieldInfo("MARKETER_PERFORMANCE_TOTAL");
-
-   // 字段客户注册数的定义。
-   public final static SLogicFieldInfo CUSTOMER_REGISTER = new SLogicFieldInfo("CUSTOMER_REGISTER");
-
-   // 字段客户总数的定义。
+   // 字段客户总计的定义。
    public final static SLogicFieldInfo CUSTOMER_TOTAL = new SLogicFieldInfo("CUSTOMER_TOTAL");
 
    // 字段创建用户标识的定义。
@@ -121,25 +78,25 @@ public class FStatisticsFinancialMarketerPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`MARKETER_INVESTMENT`,`MARKETER_INVESTMENT_TOTAL`,`MARKETER_REDEMPTION`,`MARKETER_REDEMPTION_TOTAL`,`MARKETER_NETINVESTMENT`,`MARKETER_NETINVESTMENT_TOTAL`,`MARKETER_PERFORMANCE`,`MARKETER_PERFORMANCE_TOTAL`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`MARKETER_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造理财师阶段统计表逻辑单元。</T>
+   // <T>构造部门数据统计表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialMarketerPhaseLogic(){
+   public FStatisticsFinancialDepartmentAmountLogic(){
       _name = TABLE.name();
-      _classUnit = FStatisticsFinancialMarketerPhaseUnit.class;
+      _classUnit = FStatisticsFinancialDepartmentAmountUnit.class;
    }
 
    //============================================================
-   // <T>构造理财师阶段统计表逻辑单元。</T>
+   // <T>构造部门数据统计表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FStatisticsFinancialMarketerPhaseLogic(ILogicContext context){
+   public FStatisticsFinancialDepartmentAmountLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FStatisticsFinancialMarketerPhaseUnit.class;
+      _classUnit = FStatisticsFinancialDepartmentAmountUnit.class;
    }
 
    //============================================================
@@ -273,7 +230,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FStatisticsFinancialMarketerPhaseUnit());
+            unit = (T)(new FStatisticsFinancialDepartmentAmountUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -289,8 +246,8 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FStatisticsFinancialMarketerPhaseUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FStatisticsFinancialMarketerPhaseUnit.class, guid);
+   public FStatisticsFinancialDepartmentAmountUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FStatisticsFinancialDepartmentAmountUnit.class, guid);
    }
 
    //============================================================
@@ -328,8 +285,8 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FStatisticsFinancialMarketerPhaseUnit search(CharSequence whereSql){
-      return search(null, FStatisticsFinancialMarketerPhaseUnit.class, whereSql);
+   public FStatisticsFinancialDepartmentAmountUnit search(CharSequence whereSql){
+      return search(null, FStatisticsFinancialDepartmentAmountUnit.class, whereSql);
    }
 
    //============================================================
@@ -366,7 +323,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -377,8 +334,8 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(int pageSize,
-                                                                     int page){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(int pageSize,
+                                                                        int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -390,9 +347,9 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(CharSequence whereSql,
-                                                                     int pageSize,
-                                                                     int page){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(CharSequence whereSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -405,8 +362,8 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(CharSequence whereSql,
-                                                                     CharSequence orderSql){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(CharSequence whereSql,
+                                                                        CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -419,10 +376,10 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(CharSequence whereSql,
-                                                                     CharSequence orderSql,
-                                                                     int pageSize,
-                                                                     int page){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(CharSequence whereSql,
+                                                                        CharSequence orderSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -436,11 +393,11 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(CharSequence fields,
-                                                                     CharSequence whereSql,
-                                                                     CharSequence orderSql,
-                                                                     int pageSize,
-                                                                     int page){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(CharSequence fields,
+                                                                        CharSequence whereSql,
+                                                                        CharSequence orderSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -454,12 +411,12 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetch(CharSequence fields,
-                                                                     CharSequence whereSql,
-                                                                     CharSequence groupSql,
-                                                                     CharSequence orderSql,
-                                                                     int pageSize,
-                                                                     int page){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetch(CharSequence fields,
+                                                                        CharSequence whereSql,
+                                                                        CharSequence groupSql,
+                                                                        CharSequence orderSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -600,10 +557,10 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetchSql(CharSequence code,
-                                                                        CharSequence sql,
-                                                                        int pageSize,
-                                                                        int page){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetchSql(CharSequence code,
+                                                                           CharSequence sql,
+                                                                           int pageSize,
+                                                                           int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -628,7 +585,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FStatisticsFinancialMarketerPhaseUnit>(FStatisticsFinancialMarketerPhaseUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FStatisticsFinancialDepartmentAmountUnit>(FStatisticsFinancialDepartmentAmountUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -641,7 +598,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialMarketerPhaseUnit> fetchAll(){
+   public FLogicDataset<FStatisticsFinancialDepartmentAmountUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -654,8 +611,8 @@ public class FStatisticsFinancialMarketerPhaseLogic
    //
    // @return 数据单元
    //============================================================
-   public FStatisticsFinancialMarketerPhaseUnit doPrepare(){
-      FStatisticsFinancialMarketerPhaseUnit unit = new FStatisticsFinancialMarketerPhaseUnit();
+   public FStatisticsFinancialDepartmentAmountUnit doPrepare(){
+      FStatisticsFinancialDepartmentAmountUnit unit = new FStatisticsFinancialDepartmentAmountUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -682,7 +639,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FStatisticsFinancialMarketerPhaseUnit unit = (FStatisticsFinancialMarketerPhaseUnit)logicUnit;
+      FStatisticsFinancialDepartmentAmountUnit unit = (FStatisticsFinancialDepartmentAmountUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -696,7 +653,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FStatisticsFinancialMarketerPhaseUnit unit = (FStatisticsFinancialMarketerPhaseUnit)logicUnit;
+      FStatisticsFinancialDepartmentAmountUnit unit = (FStatisticsFinancialDepartmentAmountUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -713,27 +670,13 @@ public class FStatisticsFinancialMarketerPhaseLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`RECORD_YEAR`");
-      cmd.append(",`RECORD_MONTH`");
-      cmd.append(",`RECORD_WEEK`");
-      cmd.append(",`RECORD_DAY`");
-      cmd.append(",`RECORD_HOUR`");
-      cmd.append(",`RECORD_DATE`");
-      cmd.append(",`LINK_ID`");
-      cmd.append(",`LINK_DATE`");
       cmd.append(",`DEPARTMENT_ID`");
       cmd.append(",`DEPARTMENT_LABEL`");
-      cmd.append(",`MARKETER_ID`");
-      cmd.append(",`MARKETER_LABEL`");
-      cmd.append(",`MARKETER_INVESTMENT`");
-      cmd.append(",`MARKETER_INVESTMENT_TOTAL`");
-      cmd.append(",`MARKETER_REDEMPTION`");
-      cmd.append(",`MARKETER_REDEMPTION_TOTAL`");
-      cmd.append(",`MARKETER_NETINVESTMENT`");
-      cmd.append(",`MARKETER_NETINVESTMENT_TOTAL`");
-      cmd.append(",`MARKETER_PERFORMANCE`");
-      cmd.append(",`MARKETER_PERFORMANCE_TOTAL`");
-      cmd.append(",`CUSTOMER_REGISTER`");
+      cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`PERFORMANCE_TOTAL`");
+      cmd.append(",`MARKETER_TOTAL`");
       cmd.append(",`CUSTOMER_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -749,90 +692,6 @@ public class FStatisticsFinancialMarketerPhaseLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
-      cmd.append(',');
-      TDateTime recordYear = unit.recordYear();
-      if(recordYear == null){
-         cmd.append("NULL");
-      }else if(recordYear.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordYear.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordMonth = unit.recordMonth();
-      if(recordMonth == null){
-         cmd.append("NULL");
-      }else if(recordMonth.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordMonth.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordWeek = unit.recordWeek();
-      if(recordWeek == null){
-         cmd.append("NULL");
-      }else if(recordWeek.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordWeek.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordDay = unit.recordDay();
-      if(recordDay == null){
-         cmd.append("NULL");
-      }else if(recordDay.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordDay.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordHour = unit.recordHour();
-      if(recordHour == null){
-         cmd.append("NULL");
-      }else if(recordHour.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordHour.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      TDateTime recordDate = unit.recordDate();
-      if(recordDate == null){
-         cmd.append("NULL");
-      }else if(recordDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(recordDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      long linkId = unit.linkId();
-      if(linkId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(linkId);
-      }
-      cmd.append(',');
-      TDateTime linkDate = unit.linkDate();
-      if(linkDate == null){
-         cmd.append("NULL");
-      }else if(linkDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(linkDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
       cmd.append(',');
       long departmentId = unit.departmentId();
       if(departmentId == 0){
@@ -850,39 +709,15 @@ public class FStatisticsFinancialMarketerPhaseLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      long marketerId = unit.marketerId();
-      if(marketerId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(marketerId);
-      }
+      cmd.append(unit.investmentTotal());
       cmd.append(',');
-      String marketerLabel = unit.marketerLabel();
-      if(RString.isEmpty(marketerLabel)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(marketerLabel));
-         cmd.append('\'');
-      }
+      cmd.append(unit.redemptionTotal());
       cmd.append(',');
-      cmd.append(unit.marketerInvestment());
+      cmd.append(unit.netinvestmentTotal());
       cmd.append(',');
-      cmd.append(unit.marketerInvestmentTotal());
+      cmd.append(unit.performanceTotal());
       cmd.append(',');
-      cmd.append(unit.marketerRedemption());
-      cmd.append(',');
-      cmd.append(unit.marketerRedemptionTotal());
-      cmd.append(',');
-      cmd.append(unit.marketerNetinvestment());
-      cmd.append(',');
-      cmd.append(unit.marketerNetinvestmentTotal());
-      cmd.append(',');
-      cmd.append(unit.marketerPerformance());
-      cmd.append(',');
-      cmd.append(unit.marketerPerformanceTotal());
-      cmd.append(',');
-      cmd.append(unit.customerRegister());
+      cmd.append(unit.marketerTotal());
       cmd.append(',');
       cmd.append(unit.customerTotal());
       // 设置更新信息
@@ -920,7 +755,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FStatisticsFinancialMarketerPhaseUnit unit = (FStatisticsFinancialMarketerPhaseUnit)logicUnit;
+      FStatisticsFinancialDepartmentAmountUnit unit = (FStatisticsFinancialDepartmentAmountUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -939,7 +774,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FStatisticsFinancialMarketerPhaseUnit unit = (FStatisticsFinancialMarketerPhaseUnit)logicUnit;
+      FStatisticsFinancialDepartmentAmountUnit unit = (FStatisticsFinancialDepartmentAmountUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -959,106 +794,6 @@ public class FStatisticsFinancialMarketerPhaseLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isRecordYearChanged()){
-         cmd.append(",`RECORD_YEAR`=");
-         TDateTime recordYear = unit.recordYear();
-         if(recordYear == null){
-            cmd.append("NULL");
-         }else if(recordYear.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordYear.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordMonthChanged()){
-         cmd.append(",`RECORD_MONTH`=");
-         TDateTime recordMonth = unit.recordMonth();
-         if(recordMonth == null){
-            cmd.append("NULL");
-         }else if(recordMonth.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordMonth.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordWeekChanged()){
-         cmd.append(",`RECORD_WEEK`=");
-         TDateTime recordWeek = unit.recordWeek();
-         if(recordWeek == null){
-            cmd.append("NULL");
-         }else if(recordWeek.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordWeek.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordDayChanged()){
-         cmd.append(",`RECORD_DAY`=");
-         TDateTime recordDay = unit.recordDay();
-         if(recordDay == null){
-            cmd.append("NULL");
-         }else if(recordDay.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordDay.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordHourChanged()){
-         cmd.append(",`RECORD_HOUR`=");
-         TDateTime recordHour = unit.recordHour();
-         if(recordHour == null){
-            cmd.append("NULL");
-         }else if(recordHour.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordHour.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRecordDateChanged()){
-         cmd.append(",`RECORD_DATE`=");
-         TDateTime recordDate = unit.recordDate();
-         if(recordDate == null){
-            cmd.append("NULL");
-         }else if(recordDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(recordDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isLinkIdChanged()){
-         cmd.append(",`LINK_ID`=");
-         long linkId = unit.linkId();
-         if(linkId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(linkId);
-         }
-      }
-      if(unit.isLinkDateChanged()){
-         cmd.append(",`LINK_DATE`=");
-         TDateTime linkDate = unit.linkDate();
-         if(linkDate == null){
-            cmd.append("NULL");
-         }else if(linkDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(linkDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
       if(unit.isDepartmentIdChanged()){
          cmd.append(",`DEPARTMENT_ID`=");
          long departmentId = unit.departmentId();
@@ -1079,61 +814,25 @@ public class FStatisticsFinancialMarketerPhaseLogic
             cmd.append('\'');
          }
       }
-      if(unit.isMarketerIdChanged()){
-         cmd.append(",`MARKETER_ID`=");
-         long marketerId = unit.marketerId();
-         if(marketerId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(marketerId);
-         }
+      if(unit.isInvestmentTotalChanged()){
+         cmd.append(",`INVESTMENT_TOTAL`=");
+         cmd.append(unit.investmentTotal());
       }
-      if(unit.isMarketerLabelChanged()){
-         cmd.append(",`MARKETER_LABEL`=");
-         String marketerLabel = unit.marketerLabel();
-         if(RString.isEmpty(marketerLabel)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(marketerLabel));
-            cmd.append('\'');
-         }
+      if(unit.isRedemptionTotalChanged()){
+         cmd.append(",`REDEMPTION_TOTAL`=");
+         cmd.append(unit.redemptionTotal());
       }
-      if(unit.isMarketerInvestmentChanged()){
-         cmd.append(",`MARKETER_INVESTMENT`=");
-         cmd.append(unit.marketerInvestment());
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
       }
-      if(unit.isMarketerInvestmentTotalChanged()){
-         cmd.append(",`MARKETER_INVESTMENT_TOTAL`=");
-         cmd.append(unit.marketerInvestmentTotal());
+      if(unit.isPerformanceTotalChanged()){
+         cmd.append(",`PERFORMANCE_TOTAL`=");
+         cmd.append(unit.performanceTotal());
       }
-      if(unit.isMarketerRedemptionChanged()){
-         cmd.append(",`MARKETER_REDEMPTION`=");
-         cmd.append(unit.marketerRedemption());
-      }
-      if(unit.isMarketerRedemptionTotalChanged()){
-         cmd.append(",`MARKETER_REDEMPTION_TOTAL`=");
-         cmd.append(unit.marketerRedemptionTotal());
-      }
-      if(unit.isMarketerNetinvestmentChanged()){
-         cmd.append(",`MARKETER_NETINVESTMENT`=");
-         cmd.append(unit.marketerNetinvestment());
-      }
-      if(unit.isMarketerNetinvestmentTotalChanged()){
-         cmd.append(",`MARKETER_NETINVESTMENT_TOTAL`=");
-         cmd.append(unit.marketerNetinvestmentTotal());
-      }
-      if(unit.isMarketerPerformanceChanged()){
-         cmd.append(",`MARKETER_PERFORMANCE`=");
-         cmd.append(unit.marketerPerformance());
-      }
-      if(unit.isMarketerPerformanceTotalChanged()){
-         cmd.append(",`MARKETER_PERFORMANCE_TOTAL`=");
-         cmd.append(unit.marketerPerformanceTotal());
-      }
-      if(unit.isCustomerRegisterChanged()){
-         cmd.append(",`CUSTOMER_REGISTER`=");
-         cmd.append(unit.customerRegister());
+      if(unit.isMarketerTotalChanged()){
+         cmd.append(",`MARKETER_TOTAL`=");
+         cmd.append(unit.marketerTotal());
       }
       if(unit.isCustomerTotalChanged()){
          cmd.append(",`CUSTOMER_TOTAL`=");
@@ -1159,7 +858,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FStatisticsFinancialMarketerPhaseUnit unit = (FStatisticsFinancialMarketerPhaseUnit)logicUnit;
+      FStatisticsFinancialDepartmentAmountUnit unit = (FStatisticsFinancialDepartmentAmountUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

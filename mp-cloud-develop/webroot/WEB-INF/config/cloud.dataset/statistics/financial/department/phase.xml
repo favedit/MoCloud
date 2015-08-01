@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="1104b028-cad8-42bd-83d7-4dfcf2c2598b" name="statistics.financial.department.phase" label="M#12cn17部门阶段统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Department.Phase" data_name="ST_FIN_DEPARTMENT_PHASE" data_alias="ST_FIN_DEP_PHS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics" data_type="D">
+  <FieldRecordId _uuid="1b6d6398-aa7a-43d4-a08b-e931987fcbb7" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="24ede102-6467-43df-8f5b-42d76a08da8a" name="link_date" label="M#12cn14关联日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldRecordId _uuid="af047379-dd92-4a5e-9b79-18bb27608abc" name="department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_ID" data_uniques="DAT" />
+  <FieldString _uuid="3e9baf7c-da46-4eba-b558-09f66bf1c4c0" name="department_label" label="M#12cn14部门名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABEL" data_size="40" />
+  <FieldDouble _uuid="a65b1032-a6dc-4575-b493-da0a8f2d35ec" name="department_investment" label="M#12cn14部门投资" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_INVESTMENT" />
+  <FieldDouble _uuid="f7f55a52-0a21-4284-82cb-dd2e19bbc73d" name="department_investment_total" label="M#12cn16部门投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_INVESTMENT_TOTAL" />
+  <FieldDouble _uuid="1f875e81-4c0e-46a1-afe6-2558fa5d0d56" name="department_redemption" label="M#12cn14部门赎回" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_REDEMPTION" />
+  <FieldDouble _uuid="7b224145-5e3a-4f0f-90b1-0cec86ef78f1" name="department_redemption_total" label="M#12cn16部门赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="fc078db2-51a1-44b1-9207-016e06008365" name="department_netinvestment" label="M#12cn14部门净投" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_NETINVESTMENT" />
+  <FieldDouble _uuid="b3b89d0f-7d62-4b64-b8a1-e6d6b6d26cde" name="department_netinvestment_total" label="M#12cn16部门净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="f8717a0d-db61-4fe5-89ae-e33aba56bfa7" name="department_performance" label="M#12cn14部门绩效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PERFORMANCE" />
+  <FieldDouble _uuid="b6cdb045-76dd-4d08-987e-41b7a4e4c489" name="department_performance_total" label="M#12cn16部门绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PERFORMANCE_TOTAL" />
+  <FieldInteger _uuid="fca9ad2e-3ab2-4c79-b202-a6bdd120deeb" name="marketer_register" label="M#12cn16理财师注册数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_REGISTER" />
+  <FieldRecordId _uuid="dd44ba85-036d-46dd-b3fd-656f08ec21ed" name="marketer_total" label="M#12cn15理财师总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_TOTAL" />
+  <FieldInteger _uuid="7b18edbf-5bcc-412c-b7fd-47b675427b58" name="customer_register" label="M#12cn15客户注册数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_REGISTER" />
+  <FieldInteger _uuid="37fca880-9682-4f3b-874a-446e5ffaa424" name="customer_total" label="M#12cn14客户总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_TOTAL" />
+  <FieldTemplate _uuid="3fb61ba9-0800-4c09-a747-f22ee64ca42d" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

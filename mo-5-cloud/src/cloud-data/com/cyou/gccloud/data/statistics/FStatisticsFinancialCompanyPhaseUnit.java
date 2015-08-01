@@ -4,6 +4,7 @@ import java.util.Map;
 import org.mo.com.collections.FRow;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -72,6 +73,18 @@ public class FStatisticsFinancialCompanyPhaseUnit
    // 字段记录日期的定义。
    protected TDateTime _recordDate = new TDateTime();
 
+   // 存储字段关联编号的定义。
+   private long __linkId;
+
+   // 字段关联编号的定义。
+   protected long _linkId;
+
+   // 存储字段关联日期的定义。
+   private TDateTime __linkDate = new TDateTime();
+
+   // 字段关联日期的定义。
+   protected TDateTime _linkDate = new TDateTime();
+
    // 存储字段公司编号的定义。
    private long __companyId;
 
@@ -85,52 +98,52 @@ public class FStatisticsFinancialCompanyPhaseUnit
    protected String _companyLabel;
 
    // 存储字段公司投资的定义。
-   private int __companyInvestment;
+   private double __companyInvestment;
 
    // 字段公司投资的定义。
-   protected int _companyInvestment;
+   protected double _companyInvestment;
 
    // 存储字段公司投资总计的定义。
-   private int __companyInvestmentTotal;
+   private double __companyInvestmentTotal;
 
    // 字段公司投资总计的定义。
-   protected int _companyInvestmentTotal;
+   protected double _companyInvestmentTotal;
 
    // 存储字段公司赎回的定义。
-   private int __companyRedemption;
+   private double __companyRedemption;
 
    // 字段公司赎回的定义。
-   protected int _companyRedemption;
+   protected double _companyRedemption;
 
    // 存储字段公司赎回总计的定义。
-   private int __companyRedemptionTotal;
+   private double __companyRedemptionTotal;
 
    // 字段公司赎回总计的定义。
-   protected int _companyRedemptionTotal;
+   protected double _companyRedemptionTotal;
 
    // 存储字段公司净投的定义。
-   private int __companyNetinvestment;
+   private double __companyNetinvestment;
 
    // 字段公司净投的定义。
-   protected int _companyNetinvestment;
+   protected double _companyNetinvestment;
 
    // 存储字段公司净投总计的定义。
-   private int __companyNetinvestmentTotal;
+   private double __companyNetinvestmentTotal;
 
    // 字段公司净投总计的定义。
-   protected int _companyNetinvestmentTotal;
+   protected double _companyNetinvestmentTotal;
 
    // 存储字段公司绩效的定义。
-   private int __companyPerformance;
+   private double __companyPerformance;
 
    // 字段公司绩效的定义。
-   protected int _companyPerformance;
+   protected double _companyPerformance;
 
    // 存储字段公司绩效总计的定义。
-   private int __companyPerformanceTotal;
+   private double __companyPerformanceTotal;
 
    // 字段公司绩效总计的定义。
-   protected int _companyPerformanceTotal;
+   protected double _companyPerformanceTotal;
 
    // 存储字段理财师注册数的定义。
    private int __marketerRegister;
@@ -430,6 +443,60 @@ public class FStatisticsFinancialCompanyPhaseUnit
    }
 
    //============================================================
+   // <T>判断关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkIdChanged(){
+      return __linkId != _linkId;
+   }
+
+   //============================================================
+   // <T>获得关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkId(){
+      return _linkId;
+   }
+
+   //============================================================
+   // <T>设置关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkId(long value){
+      _linkId = value;
+   }
+
+   //============================================================
+   // <T>判断关联日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkDateChanged(){
+      return !__linkDate.equals(_linkDate);
+   }
+
+   //============================================================
+   // <T>获得关联日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime linkDate(){
+      return _linkDate;
+   }
+
+   //============================================================
+   // <T>设置关联日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkDate(TDateTime value){
+      _linkDate = value;
+   }
+
+   //============================================================
    // <T>判断公司编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -497,7 +564,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyInvestment(){
+   public double companyInvestment(){
       return _companyInvestment;
    }
 
@@ -506,7 +573,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyInvestment(int value){
+   public void setCompanyInvestment(double value){
       _companyInvestment = value;
    }
 
@@ -524,7 +591,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyInvestmentTotal(){
+   public double companyInvestmentTotal(){
       return _companyInvestmentTotal;
    }
 
@@ -533,7 +600,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyInvestmentTotal(int value){
+   public void setCompanyInvestmentTotal(double value){
       _companyInvestmentTotal = value;
    }
 
@@ -551,7 +618,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyRedemption(){
+   public double companyRedemption(){
       return _companyRedemption;
    }
 
@@ -560,7 +627,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyRedemption(int value){
+   public void setCompanyRedemption(double value){
       _companyRedemption = value;
    }
 
@@ -578,7 +645,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyRedemptionTotal(){
+   public double companyRedemptionTotal(){
       return _companyRedemptionTotal;
    }
 
@@ -587,7 +654,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyRedemptionTotal(int value){
+   public void setCompanyRedemptionTotal(double value){
       _companyRedemptionTotal = value;
    }
 
@@ -605,7 +672,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyNetinvestment(){
+   public double companyNetinvestment(){
       return _companyNetinvestment;
    }
 
@@ -614,7 +681,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyNetinvestment(int value){
+   public void setCompanyNetinvestment(double value){
       _companyNetinvestment = value;
    }
 
@@ -632,7 +699,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyNetinvestmentTotal(){
+   public double companyNetinvestmentTotal(){
       return _companyNetinvestmentTotal;
    }
 
@@ -641,7 +708,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyNetinvestmentTotal(int value){
+   public void setCompanyNetinvestmentTotal(double value){
       _companyNetinvestmentTotal = value;
    }
 
@@ -659,7 +726,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyPerformance(){
+   public double companyPerformance(){
       return _companyPerformance;
    }
 
@@ -668,7 +735,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyPerformance(int value){
+   public void setCompanyPerformance(double value){
       _companyPerformance = value;
    }
 
@@ -686,7 +753,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @return 数据内容
    //============================================================
-   public int companyPerformanceTotal(){
+   public double companyPerformanceTotal(){
       return _companyPerformanceTotal;
    }
 
@@ -695,7 +762,7 @@ public class FStatisticsFinancialCompanyPhaseUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCompanyPerformanceTotal(int value){
+   public void setCompanyPerformanceTotal(double value){
       _companyPerformanceTotal = value;
    }
 
@@ -942,26 +1009,30 @@ public class FStatisticsFinancialCompanyPhaseUnit
             return _recordHour.toString();
          case "record_date":
             return _recordDate.toString();
+         case "link_id":
+            return Long.toString(_linkId);
+         case "link_date":
+            return _linkDate.toString();
          case "company_id":
             return Long.toString(_companyId);
          case "company_label":
             return _companyLabel;
          case "company_investment":
-            return RInteger.toString(_companyInvestment);
+            return RDouble.toString(_companyInvestment);
          case "company_investment_total":
-            return RInteger.toString(_companyInvestmentTotal);
+            return RDouble.toString(_companyInvestmentTotal);
          case "company_redemption":
-            return RInteger.toString(_companyRedemption);
+            return RDouble.toString(_companyRedemption);
          case "company_redemption_total":
-            return RInteger.toString(_companyRedemptionTotal);
+            return RDouble.toString(_companyRedemptionTotal);
          case "company_netinvestment":
-            return RInteger.toString(_companyNetinvestment);
+            return RDouble.toString(_companyNetinvestment);
          case "company_netinvestment_total":
-            return RInteger.toString(_companyNetinvestmentTotal);
+            return RDouble.toString(_companyNetinvestmentTotal);
          case "company_performance":
-            return RInteger.toString(_companyPerformance);
+            return RDouble.toString(_companyPerformance);
          case "company_performance_total":
-            return RInteger.toString(_companyPerformanceTotal);
+            return RDouble.toString(_companyPerformanceTotal);
          case "marketer_register":
             return RInteger.toString(_marketerRegister);
          case "marketer_total":
@@ -1019,6 +1090,12 @@ public class FStatisticsFinancialCompanyPhaseUnit
          case "record_date":
             _recordDate.parse(value);
             break;
+         case "link_id":
+            _linkId = RLong.parse(value);
+            break;
+         case "link_date":
+            _linkDate.parse(value);
+            break;
          case "company_id":
             _companyId = RLong.parse(value);
             break;
@@ -1026,28 +1103,28 @@ public class FStatisticsFinancialCompanyPhaseUnit
             _companyLabel = value;
             break;
          case "company_investment":
-            _companyInvestment = RInteger.parse(value);
+            _companyInvestment = RDouble.parse(value);
             break;
          case "company_investment_total":
-            _companyInvestmentTotal = RInteger.parse(value);
+            _companyInvestmentTotal = RDouble.parse(value);
             break;
          case "company_redemption":
-            _companyRedemption = RInteger.parse(value);
+            _companyRedemption = RDouble.parse(value);
             break;
          case "company_redemption_total":
-            _companyRedemptionTotal = RInteger.parse(value);
+            _companyRedemptionTotal = RDouble.parse(value);
             break;
          case "company_netinvestment":
-            _companyNetinvestment = RInteger.parse(value);
+            _companyNetinvestment = RDouble.parse(value);
             break;
          case "company_netinvestment_total":
-            _companyNetinvestmentTotal = RInteger.parse(value);
+            _companyNetinvestmentTotal = RDouble.parse(value);
             break;
          case "company_performance":
-            _companyPerformance = RInteger.parse(value);
+            _companyPerformance = RDouble.parse(value);
             break;
          case "company_performance_total":
-            _companyPerformanceTotal = RInteger.parse(value);
+            _companyPerformanceTotal = RDouble.parse(value);
             break;
          case "marketer_register":
             _marketerRegister = RInteger.parse(value);
@@ -1124,6 +1201,14 @@ public class FStatisticsFinancialCompanyPhaseUnit
                __recordDate.parse(value);
                _recordDate.assign(__recordDate);
                break;
+            case "link_id":
+               __linkId = RLong.parse(value);
+               _linkId = __linkId;
+               break;
+            case "link_date":
+               __linkDate.parse(value);
+               _linkDate.assign(__linkDate);
+               break;
             case "company_id":
                __companyId = RLong.parse(value);
                _companyId = __companyId;
@@ -1133,35 +1218,35 @@ public class FStatisticsFinancialCompanyPhaseUnit
                _companyLabel = __companyLabel;
                break;
             case "company_investment":
-               __companyInvestment = RInteger.parse(value);
+               __companyInvestment = RDouble.parse(value);
                _companyInvestment = __companyInvestment;
                break;
             case "company_investment_total":
-               __companyInvestmentTotal = RInteger.parse(value);
+               __companyInvestmentTotal = RDouble.parse(value);
                _companyInvestmentTotal = __companyInvestmentTotal;
                break;
             case "company_redemption":
-               __companyRedemption = RInteger.parse(value);
+               __companyRedemption = RDouble.parse(value);
                _companyRedemption = __companyRedemption;
                break;
             case "company_redemption_total":
-               __companyRedemptionTotal = RInteger.parse(value);
+               __companyRedemptionTotal = RDouble.parse(value);
                _companyRedemptionTotal = __companyRedemptionTotal;
                break;
             case "company_netinvestment":
-               __companyNetinvestment = RInteger.parse(value);
+               __companyNetinvestment = RDouble.parse(value);
                _companyNetinvestment = __companyNetinvestment;
                break;
             case "company_netinvestment_total":
-               __companyNetinvestmentTotal = RInteger.parse(value);
+               __companyNetinvestmentTotal = RDouble.parse(value);
                _companyNetinvestmentTotal = __companyNetinvestmentTotal;
                break;
             case "company_performance":
-               __companyPerformance = RInteger.parse(value);
+               __companyPerformance = RDouble.parse(value);
                _companyPerformance = __companyPerformance;
                break;
             case "company_performance_total":
-               __companyPerformanceTotal = RInteger.parse(value);
+               __companyPerformanceTotal = RDouble.parse(value);
                _companyPerformanceTotal = __companyPerformanceTotal;
                break;
             case "marketer_register":
@@ -1217,6 +1302,8 @@ public class FStatisticsFinancialCompanyPhaseUnit
       row.set("recordDay", _recordDay);
       row.set("recordHour", _recordHour);
       row.set("recordDate", _recordDate);
+      row.set("linkId", _linkId);
+      row.set("linkDate", _linkDate);
       row.set("companyId", _companyId);
       row.set("companyLabel", _companyLabel);
       row.set("companyInvestment", _companyInvestment);
@@ -1254,16 +1341,18 @@ public class FStatisticsFinancialCompanyPhaseUnit
       map.put("recordDay", _recordDay.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("recordHour", _recordHour.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("recordDate", _recordDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkId", RLong.toString(_linkId));
+      map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("companyId", RLong.toString(_companyId));
       map.put("companyLabel", _companyLabel);
-      map.put("companyInvestment", RInteger.toString(_companyInvestment));
-      map.put("companyInvestmentTotal", RInteger.toString(_companyInvestmentTotal));
-      map.put("companyRedemption", RInteger.toString(_companyRedemption));
-      map.put("companyRedemptionTotal", RInteger.toString(_companyRedemptionTotal));
-      map.put("companyNetinvestment", RInteger.toString(_companyNetinvestment));
-      map.put("companyNetinvestmentTotal", RInteger.toString(_companyNetinvestmentTotal));
-      map.put("companyPerformance", RInteger.toString(_companyPerformance));
-      map.put("companyPerformanceTotal", RInteger.toString(_companyPerformanceTotal));
+      map.put("companyInvestment", RDouble.toString(_companyInvestment));
+      map.put("companyInvestmentTotal", RDouble.toString(_companyInvestmentTotal));
+      map.put("companyRedemption", RDouble.toString(_companyRedemption));
+      map.put("companyRedemptionTotal", RDouble.toString(_companyRedemptionTotal));
+      map.put("companyNetinvestment", RDouble.toString(_companyNetinvestment));
+      map.put("companyNetinvestmentTotal", RDouble.toString(_companyNetinvestmentTotal));
+      map.put("companyPerformance", RDouble.toString(_companyPerformance));
+      map.put("companyPerformanceTotal", RDouble.toString(_companyPerformanceTotal));
       map.put("marketerRegister", RInteger.toString(_marketerRegister));
       map.put("marketerTotal", RLong.toString(_marketerTotal));
       map.put("customerRegister", RInteger.toString(_customerRegister));
