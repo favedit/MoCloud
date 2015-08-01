@@ -1,12 +1,12 @@
-package com.ahyc.eai.batch.financial.department;
+package com.ahyc.eai.batch.financial.marketer;
 
 import com.ahyc.eai.batch.financial.FStatisticsCalculater;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentAmountLogic;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentAmountUnit;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentPhaseLogic;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentPhaseUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerAmountLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerAmountUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerPhaseLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerPhaseUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FFatalError;
@@ -18,7 +18,7 @@ import org.mo.data.logic.FLogicDataset;
 //============================================================
 // <T>统计计算器。</T>
 //============================================================
-public class FStatisticsDepartmentCalculater
+public class FStatisticsMarketerCalculater
       extends FStatisticsCalculater
 {
    // 同步时间(1小时)
@@ -35,25 +35,25 @@ public class FStatisticsDepartmentCalculater
                             String endDate){
       // 代码修正
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
-      FStatisticsFinancialDepartmentAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialDepartmentAmountLogic.class);
-      FStatisticsFinancialDepartmentPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialDepartmentPhaseLogic.class);
+      FStatisticsFinancialMarketerAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialMarketerAmountLogic.class);
+      FStatisticsFinancialMarketerPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialMarketerPhaseLogic.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("DEPARTMENT_ID IS NOT NULL AND CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endDate
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("MARKETER_ID IS NOT NULL AND CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endDate
             + "','%Y%m%d%H%i%s')", "CUSTOMER_ACTION_DATE");
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
          long recordId = dynamicUnit.ouid();
-         long departmentId = dynamicUnit.departmentId();
-         String departmentLabel = dynamicUnit.departmentLabel();
+         long marketerId = dynamicUnit.marketerId();
+         String marketerLabel = dynamicUnit.marketerLabel();
          int customerActionCd = dynamicUnit.customerActionCd();
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
          // 统计合计信息
-         FStatisticsFinancialDepartmentAmountUnit amountUnit = amountLogic.search("DEPARTMENT_ID=" + departmentId);
+         FStatisticsFinancialMarketerAmountUnit amountUnit = amountLogic.search("MARKETER_ID=" + marketerId);
          boolean amountExist = (amountUnit != null);
          if(!amountExist){
             amountUnit = amountLogic.doPrepare();
-            amountUnit.setDepartmentId(departmentId);
-            amountUnit.setDepartmentLabel(departmentLabel);
+            amountUnit.setMarketerId(marketerId);
+            amountUnit.setMarketerLabel(marketerLabel);
          }
          double investmentTotal = amountUnit.investmentTotal();
          double redemptionTotal = amountUnit.redemptionTotal();
@@ -66,7 +66,7 @@ public class FStatisticsDepartmentCalculater
             redemptionTotal += customerActionAmount;
             amountUnit.setRedemptionTotal(redemptionTotal);
          }else{
-            throw new FFatalError("Department action invalid.");
+            throw new FFatalError("Marketer action invalid.");
          }
          amountUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
          if(amountExist){
@@ -77,7 +77,7 @@ public class FStatisticsDepartmentCalculater
          // 插入用户数据
          TDateTime spanDate = new TDateTime(customerActionDate.get());
          spanDate.truncate(_recordSpan);
-         FStatisticsFinancialDepartmentPhaseUnit phaseUnit = phaseLogic.search("DEPARTMENT_ID=" + departmentId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
+         FStatisticsFinancialMarketerPhaseUnit phaseUnit = phaseLogic.search("MARKETER_ID=" + marketerId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
          boolean phaseExist = (phaseUnit != null);
          if(!phaseExist){
             phaseUnit = phaseLogic.doPrepare();
@@ -89,23 +89,23 @@ public class FStatisticsDepartmentCalculater
             phaseUnit.recordDate().assign(spanDate);
             phaseUnit.setDepartmentId(dynamicUnit.departmentId());
             phaseUnit.setDepartmentLabel(dynamicUnit.departmentLabel());
-            phaseUnit.setDepartmentId(departmentId);
-            phaseUnit.setDepartmentLabel(departmentLabel);
+            phaseUnit.setMarketerId(marketerId);
+            phaseUnit.setMarketerLabel(marketerLabel);
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());
          phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
-            phaseUnit.setDepartmentInvestment(phaseUnit.departmentInvestment() + customerActionAmount);
+            phaseUnit.setMarketerInvestment(phaseUnit.marketerInvestment() + customerActionAmount);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
-            phaseUnit.setDepartmentRedemption(phaseUnit.departmentRedemption() + customerActionAmount);
+            phaseUnit.setMarketerRedemption(phaseUnit.marketerRedemption() + customerActionAmount);
          }else{
-            throw new FFatalError("Department action invalid.");
+            throw new FFatalError("Marketer action invalid.");
          }
-         phaseUnit.setDepartmentInvestmentTotal(investmentTotal);
-         phaseUnit.setDepartmentRedemptionTotal(redemptionTotal);
-         phaseUnit.setDepartmentNetinvestment(phaseUnit.departmentInvestment() - phaseUnit.departmentRedemption());
-         phaseUnit.setDepartmentNetinvestmentTotal(investmentTotal - redemptionTotal);
+         phaseUnit.setMarketerInvestmentTotal(investmentTotal);
+         phaseUnit.setMarketerRedemptionTotal(redemptionTotal);
+         phaseUnit.setMarketerNetinvestment(phaseUnit.marketerInvestment() - phaseUnit.marketerRedemption());
+         phaseUnit.setMarketerNetinvestmentTotal(investmentTotal - redemptionTotal);
          if(phaseExist){
             phaseLogic.doUpdate(phaseUnit);
          }else{
@@ -125,7 +125,7 @@ public class FStatisticsDepartmentCalculater
       // 获得最大编号
       String currentDate = connection.executeScalar("SELECT DATE_FORMAT(SYSDATE(),'%Y%m%d%H%i%s') AS `CURRENT_DATE` FROM DUAL");
       String sourceMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_DYNAMIC");
-      String targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_DEPARTMENT_PHASE");
+      String targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_MARKETER_PHASE");
       if(RString.isEmpty(targetMaxDate)){
          targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MIN(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS ACTION_DATE FROM ST_FIN_DYNAMIC");
       }
@@ -141,7 +141,7 @@ public class FStatisticsDepartmentCalculater
       while(endTick < currentTick){
          String beginTime = new TDateTime(beginTick).format();
          String endTime = new TDateTime(endTick).format();
-         int count = connection.executeInteger("SELECT COUNT(*) FROM ST_FIN_DYNAMIC WHERE DEPARTMENT_ID IS NOT NULL AND CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginTime + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endTime
+         int count = connection.executeInteger("SELECT COUNT(*) FROM ST_FIN_DYNAMIC WHERE MARKETER_ID IS NOT NULL AND CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginTime + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endTime
                + "','%Y%m%d%H%i%s')");
          if(count > 0){
             break;

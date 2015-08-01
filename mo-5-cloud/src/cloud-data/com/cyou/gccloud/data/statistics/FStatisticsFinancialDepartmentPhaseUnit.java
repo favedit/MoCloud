@@ -157,6 +157,12 @@ public class FStatisticsFinancialDepartmentPhaseUnit
    // 字段理财师总数的定义。
    protected long _marketerTotal;
 
+   // 存储字段客户命令日期的定义。
+   private TDateTime __customerActionDate = new TDateTime();
+
+   // 字段客户命令日期的定义。
+   protected TDateTime _customerActionDate = new TDateTime();
+
    // 存储字段客户注册数的定义。
    private int __customerRegister;
 
@@ -821,6 +827,33 @@ public class FStatisticsFinancialDepartmentPhaseUnit
    }
 
    //============================================================
+   // <T>判断客户命令日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerActionDateChanged(){
+      return !__customerActionDate.equals(_customerActionDate);
+   }
+
+   //============================================================
+   // <T>获得客户命令日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime customerActionDate(){
+      return _customerActionDate;
+   }
+
+   //============================================================
+   // <T>设置客户命令日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerActionDate(TDateTime value){
+      _customerActionDate = value;
+   }
+
+   //============================================================
    // <T>判断客户注册数的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1037,6 +1070,8 @@ public class FStatisticsFinancialDepartmentPhaseUnit
             return RInteger.toString(_marketerRegister);
          case "marketer_total":
             return Long.toString(_marketerTotal);
+         case "customer_action_date":
+            return _customerActionDate.toString();
          case "customer_register":
             return RInteger.toString(_customerRegister);
          case "customer_total":
@@ -1131,6 +1166,9 @@ public class FStatisticsFinancialDepartmentPhaseUnit
             break;
          case "marketer_total":
             _marketerTotal = RLong.parse(value);
+            break;
+         case "customer_action_date":
+            _customerActionDate.parse(value);
             break;
          case "customer_register":
             _customerRegister = RInteger.parse(value);
@@ -1257,6 +1295,10 @@ public class FStatisticsFinancialDepartmentPhaseUnit
                __marketerTotal = RLong.parse(value);
                _marketerTotal = __marketerTotal;
                break;
+            case "customer_action_date":
+               __customerActionDate.parse(value);
+               _customerActionDate.assign(__customerActionDate);
+               break;
             case "customer_register":
                __customerRegister = RInteger.parse(value);
                _customerRegister = __customerRegister;
@@ -1316,6 +1358,7 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       row.set("departmentPerformanceTotal", _departmentPerformanceTotal);
       row.set("marketerRegister", _marketerRegister);
       row.set("marketerTotal", _marketerTotal);
+      row.set("customerActionDate", _customerActionDate);
       row.set("customerRegister", _customerRegister);
       row.set("customerTotal", _customerTotal);
       row.set("createUserId", _createUserId);
@@ -1355,6 +1398,7 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       map.put("departmentPerformanceTotal", RDouble.toString(_departmentPerformanceTotal));
       map.put("marketerRegister", RInteger.toString(_marketerRegister));
       map.put("marketerTotal", RLong.toString(_marketerTotal));
+      map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerRegister", RInteger.toString(_customerRegister));
       map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("createUserId", RLong.toString(_createUserId));

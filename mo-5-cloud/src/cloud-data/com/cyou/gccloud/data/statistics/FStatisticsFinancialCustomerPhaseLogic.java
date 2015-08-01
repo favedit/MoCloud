@@ -72,6 +72,9 @@ public class FStatisticsFinancialCustomerPhaseLogic
    // 字段用户名称的定义。
    public final static SLogicFieldInfo CUSTOMER_LABEL = new SLogicFieldInfo("CUSTOMER_LABEL");
 
+   // 字段客户命令时间的定义。
+   public final static SLogicFieldInfo CUSTOMER_ACTION_DATE = new SLogicFieldInfo("CUSTOMER_ACTION_DATE");
+
    // 字段投资的定义。
    public final static SLogicFieldInfo INVESTMENT = new SLogicFieldInfo("INVESTMENT");
 
@@ -109,7 +112,7 @@ public class FStatisticsFinancialCustomerPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_ACTION_DATE`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户阶段统计表逻辑单元。</T>
@@ -711,6 +714,7 @@ public class FStatisticsFinancialCustomerPhaseLogic
       cmd.append(",`LINK_DATE`");
       cmd.append(",`CUSTOMER_ID`");
       cmd.append(",`CUSTOMER_LABEL`");
+      cmd.append(",`CUSTOMER_ACTION_DATE`");
       cmd.append(",`INVESTMENT`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION`");
@@ -832,6 +836,17 @@ public class FStatisticsFinancialCustomerPhaseLogic
          cmd.append('\'');
          cmd.append(RSql.formatValue(customerLabel));
          cmd.append('\'');
+      }
+      cmd.append(',');
+      TDateTime customerActionDate = unit.customerActionDate();
+      if(customerActionDate == null){
+         cmd.append("NULL");
+      }else if(customerActionDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(customerActionDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
       cmd.append(unit.investment());
@@ -1041,6 +1056,19 @@ public class FStatisticsFinancialCustomerPhaseLogic
             cmd.append('\'');
             cmd.append(RSql.formatValue(customerLabel));
             cmd.append('\'');
+         }
+      }
+      if(unit.isCustomerActionDateChanged()){
+         cmd.append(",`CUSTOMER_ACTION_DATE`=");
+         TDateTime customerActionDate = unit.customerActionDate();
+         if(customerActionDate == null){
+            cmd.append("NULL");
+         }else if(customerActionDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(customerActionDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
       if(unit.isInvestmentChanged()){

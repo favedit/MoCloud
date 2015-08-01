@@ -102,6 +102,9 @@ public class FStatisticsFinancialDepartmentPhaseLogic
    // 字段理财师总数的定义。
    public final static SLogicFieldInfo MARKETER_TOTAL = new SLogicFieldInfo("MARKETER_TOTAL");
 
+   // 字段客户命令日期的定义。
+   public final static SLogicFieldInfo CUSTOMER_ACTION_DATE = new SLogicFieldInfo("CUSTOMER_ACTION_DATE");
+
    // 字段客户注册数的定义。
    public final static SLogicFieldInfo CUSTOMER_REGISTER = new SLogicFieldInfo("CUSTOMER_REGISTER");
 
@@ -121,7 +124,7 @@ public class FStatisticsFinancialDepartmentPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_INVESTMENT`,`DEPARTMENT_INVESTMENT_TOTAL`,`DEPARTMENT_REDEMPTION`,`DEPARTMENT_REDEMPTION_TOTAL`,`DEPARTMENT_NETINVESTMENT`,`DEPARTMENT_NETINVESTMENT_TOTAL`,`DEPARTMENT_PERFORMANCE`,`DEPARTMENT_PERFORMANCE_TOTAL`,`MARKETER_REGISTER`,`MARKETER_TOTAL`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_INVESTMENT`,`DEPARTMENT_INVESTMENT_TOTAL`,`DEPARTMENT_REDEMPTION`,`DEPARTMENT_REDEMPTION_TOTAL`,`DEPARTMENT_NETINVESTMENT`,`DEPARTMENT_NETINVESTMENT_TOTAL`,`DEPARTMENT_PERFORMANCE`,`DEPARTMENT_PERFORMANCE_TOTAL`,`MARKETER_REGISTER`,`MARKETER_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造部门阶段统计表逻辑单元。</T>
@@ -733,6 +736,7 @@ public class FStatisticsFinancialDepartmentPhaseLogic
       cmd.append(",`DEPARTMENT_PERFORMANCE_TOTAL`");
       cmd.append(",`MARKETER_REGISTER`");
       cmd.append(",`MARKETER_TOTAL`");
+      cmd.append(",`CUSTOMER_ACTION_DATE`");
       cmd.append(",`CUSTOMER_REGISTER`");
       cmd.append(",`CUSTOMER_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
@@ -873,6 +877,17 @@ public class FStatisticsFinancialDepartmentPhaseLogic
          cmd.append("NULL");
       }else{
          cmd.append(marketerTotal);
+      }
+      cmd.append(',');
+      TDateTime customerActionDate = unit.customerActionDate();
+      if(customerActionDate == null){
+         cmd.append("NULL");
+      }else if(customerActionDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(customerActionDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
       cmd.append(unit.customerRegister());
@@ -1115,6 +1130,19 @@ public class FStatisticsFinancialDepartmentPhaseLogic
             cmd.append("NULL");
          }else{
             cmd.append(marketerTotal);
+         }
+      }
+      if(unit.isCustomerActionDateChanged()){
+         cmd.append(",`CUSTOMER_ACTION_DATE`=");
+         TDateTime customerActionDate = unit.customerActionDate();
+         if(customerActionDate == null){
+            cmd.append("NULL");
+         }else if(customerActionDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(customerActionDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
       if(unit.isCustomerRegisterChanged()){

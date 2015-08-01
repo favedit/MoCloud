@@ -38,7 +38,7 @@ public class FStatisticsCustomerCalculater
       FStatisticsFinancialCustomerAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialCustomerAmountLogic.class);
       FStatisticsFinancialCustomerPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialCustomerPhaseLogic.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("CUSTOMER_ACTION_DATE >= STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE('" + endDate + "','%Y%m%d%H%i%s')",
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endDate + "','%Y%m%d%H%i%s')",
             "CUSTOMER_ACTION_DATE");
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
          long recordId = dynamicUnit.ouid();
@@ -66,29 +66,31 @@ public class FStatisticsCustomerCalculater
          }else{
             throw new FFatalError("Customer action invalid.");
          }
-         amountUnit.setNetinvestmentTotal(redemptionTotal - investmentTotal);
+         amountUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
          if(amountExist){
             amountLogic.doUpdate(amountUnit);
          }else{
             amountLogic.doInsert(amountUnit);
          }
          // 插入用户数据
-         customerActionDate.truncate(_recordSpan);
-         FStatisticsFinancialCustomerPhaseUnit phaseUnit = phaseLogic.search("CUSTOMER_ID=" + customerId + " AND RECORD_DATE=STR_TO_DATE('" + customerActionDate.format() + "','%Y%m%d%H%i%s')");
+         TDateTime spanDate = new TDateTime(customerActionDate.get());
+         spanDate.truncate(_recordSpan);
+         FStatisticsFinancialCustomerPhaseUnit phaseUnit = phaseLogic.search("CUSTOMER_ID=" + customerId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
          boolean phaseExist = (phaseUnit != null);
          if(!phaseExist){
             phaseUnit = phaseLogic.doPrepare();
-            phaseUnit.recordYear().parse(customerActionDate.format("YYYY0101000000"));
-            phaseUnit.recordMonth().parse(customerActionDate.format("YYYYMM01000000"));
-            phaseUnit.recordWeek().parse(customerActionDate.format("YYYYMMWK000000"));
-            phaseUnit.recordDay().parse(customerActionDate.format("YYYYMMDD000000"));
-            phaseUnit.recordHour().parse(customerActionDate.format("YYYYMMDDHH240000"));
-            phaseUnit.recordDate().assign(customerActionDate);
+            phaseUnit.recordYear().parse(spanDate.format("YYYY0101000000"));
+            phaseUnit.recordMonth().parse(spanDate.format("YYYYMM01000000"));
+            phaseUnit.recordWeek().parse(spanDate.format("YYYYMMWK000000"));
+            phaseUnit.recordDay().parse(spanDate.format("YYYYMMDD000000"));
+            phaseUnit.recordHour().parse(spanDate.format("YYYYMMDDHH240000"));
+            phaseUnit.recordDate().assign(spanDate);
             phaseUnit.setCustomerId(customerId);
             phaseUnit.setCustomerLabel(customerLabel);
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());
+         phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
             phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
@@ -117,9 +119,9 @@ public class FStatisticsCustomerCalculater
    public void processLogic(FLogicContext logicContext){
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 获得最大编号
-      String currentDate = connection.executeScalar("SELECT DATE_FORMAT(SYSDATE,'%Y%m%d%H%i%s') AS `CURRENT_DATE` FROM DUAL");
+      String currentDate = connection.executeScalar("SELECT DATE_FORMAT(SYSDATE(),'%Y%m%d%H%i%s') AS `CURRENT_DATE` FROM DUAL");
       String sourceMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_DYNAMIC");
-      String targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(LINK_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_CUSTOMER_PHASE");
+      String targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_CUSTOMER_PHASE");
       if(RString.isEmpty(targetMaxDate)){
          targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MIN(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS ACTION_DATE FROM ST_FIN_DYNAMIC");
       }
@@ -135,7 +137,7 @@ public class FStatisticsCustomerCalculater
       while(endTick < currentTick){
          String beginTime = new TDateTime(beginTick).format();
          String endTime = new TDateTime(endTick).format();
-         int count = connection.executeInteger("SELECT COUNT(*) FROM ST_FIN_DYNAMIC WHERE CUSTOMER_ACTION_DATE >= STR_TO_DATE('" + beginTime + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE('" + endTime + "','%Y%m%d%H%i%s')");
+         int count = connection.executeInteger("SELECT COUNT(*) FROM ST_FIN_DYNAMIC WHERE CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginTime + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endTime + "','%Y%m%d%H%i%s')");
          if(count > 0){
             break;
          }

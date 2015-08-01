@@ -96,6 +96,12 @@ public class FStatisticsFinancialCustomerPhaseUnit
    // 字段用户名称的定义。
    protected String _customerLabel;
 
+   // 存储字段客户命令时间的定义。
+   private TDateTime __customerActionDate = new TDateTime();
+
+   // 字段客户命令时间的定义。
+   protected TDateTime _customerActionDate = new TDateTime();
+
    // 存储字段投资的定义。
    private double __investment;
 
@@ -526,6 +532,33 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
+   // <T>判断客户命令时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerActionDateChanged(){
+      return !__customerActionDate.equals(_customerActionDate);
+   }
+
+   //============================================================
+   // <T>获得客户命令时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime customerActionDate(){
+      return _customerActionDate;
+   }
+
+   //============================================================
+   // <T>设置客户命令时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerActionDate(TDateTime value){
+      _customerActionDate = value;
+   }
+
+   //============================================================
    // <T>判断投资的数据是否改变。</T>
    //
    // @return 数据内容
@@ -884,6 +917,8 @@ public class FStatisticsFinancialCustomerPhaseUnit
             return Long.toString(_customerId);
          case "customer_label":
             return _customerLabel;
+         case "customer_action_date":
+            return _customerActionDate.toString();
          case "investment":
             return RDouble.toString(_investment);
          case "investment_total":
@@ -960,6 +995,9 @@ public class FStatisticsFinancialCustomerPhaseUnit
             break;
          case "customer_label":
             _customerLabel = value;
+            break;
+         case "customer_action_date":
+            _customerActionDate.parse(value);
             break;
          case "investment":
             _investment = RDouble.parse(value);
@@ -1064,6 +1102,10 @@ public class FStatisticsFinancialCustomerPhaseUnit
                __customerLabel = value;
                _customerLabel = __customerLabel;
                break;
+            case "customer_action_date":
+               __customerActionDate.parse(value);
+               _customerActionDate.assign(__customerActionDate);
+               break;
             case "investment":
                __investment = RDouble.parse(value);
                _investment = __investment;
@@ -1137,6 +1179,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
       row.set("linkDate", _linkDate);
       row.set("customerId", _customerId);
       row.set("customerLabel", _customerLabel);
+      row.set("customerActionDate", _customerActionDate);
       row.set("investment", _investment);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemption", _redemption);
@@ -1172,6 +1215,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerId", RLong.toString(_customerId));
       map.put("customerLabel", _customerLabel);
+      map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investment", RDouble.toString(_investment));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemption", RDouble.toString(_redemption));
