@@ -5,7 +5,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
-import org.mo.data.logic.FLogicContext;
+import org.mo.core.monitor.IMonitorConsole;
 import org.mo.eng.data.IDatabaseConsole;
 
 //============================================================
@@ -28,14 +28,12 @@ public class RStatisticsCalculater
       RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-test.xml");
       // 逻辑处理
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
-      try(FLogicContext logicContext = new FLogicContext(databaseConsole)){
-         //         FStatisticsInvestmentCalculater calculater = new FStatisticsInvestmentCalculater();
-         //         calculater.process(logicContext);
-         FStatisticsRedemptionCalculater calculater = new FStatisticsRedemptionCalculater();
-         calculater.process(logicContext);
-      }catch(Exception exception){
-         _logger.error(null, "main", exception);
-      }
+      // 启动监视器
+      FStatisticsMonitor monitor = new FStatisticsMonitor(databaseConsole);
+      IMonitorConsole monitorConsole = RAop.find(IMonitorConsole.class);
+      monitorConsole.start(monitor);
+      monitorConsole.waitStop();
+      // 结束处理
       RAop.release();
    }
 }

@@ -90,7 +90,8 @@ public class FMonitorThreadPool
    //============================================================
    public void waitStop(){
       try{
-         for(FMonitorThread thread : _threads.toObjects()){
+         FMonitorThread[] threads = _threads.toObjects();
+         for(FMonitorThread thread : threads){
             thread.join();
          }
       }catch(InterruptedException e){

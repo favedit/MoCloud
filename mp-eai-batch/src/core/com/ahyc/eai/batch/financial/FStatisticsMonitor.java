@@ -1,10 +1,11 @@
 package com.ahyc.eai.batch.financial;
 
-import org.mo.com.data.FSqlProcedure;
-import org.mo.com.data.ISqlConnection;
+import com.ahyc.eai.batch.financial.department.IDepartmentInfoConsole;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.core.aop.RAop;
 import org.mo.core.monitor.common.FAbstractMonitor;
+import org.mo.data.logic.FLogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 
 //============================================================
@@ -16,14 +17,15 @@ public class FStatisticsMonitor
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FStatisticsMonitor.class);
 
+   // 默认间隔
+   protected long _defaultInterval = 1000 * 10;
+
+   // 数据库控制台
    protected IDatabaseConsole _databaseConsole;
 
-   protected int _defaultInterval = 1000 * 60 * 60;
-
-   protected FSqlProcedure _countProc = new FSqlProcedure("AccountActivityJoinSubmitCount");
-
-   protected FSqlProcedure _totalProc = new FSqlProcedure("AccountActivityJoinSubmitTotal");
-
+   //============================================================
+   // <T>统计监视器。</T>
+   //============================================================
    public FStatisticsMonitor(IDatabaseConsole databaseConsole){
       _name = "analysis.activity";
       _valid = true;
@@ -31,20 +33,34 @@ public class FStatisticsMonitor
       _databaseConsole = databaseConsole;
    }
 
+   //============================================================
+   // <T>执行处理。</T>
+   //============================================================
    @Override
    public boolean onExecute(){
-      ISqlConnection connection = null;
-      try{
-         connection = _databaseConsole.alloc("CD_STATISTICS");
-         connection.execute(_countProc);
-         connection.execute(_totalProc);
-      }catch(Exception e){
-         _logger.error(this, "process", e);
-         return false;
-      }finally{
-         _databaseConsole.free(connection);
+      long processCount = 0;
+      // 逻辑处理
+      try(FLogicContext logicContext = new FLogicContext(_databaseConsole)){
+         // 清空部门控制台
+         IDepartmentInfoConsole departmentInfoConsole = RAop.find(IDepartmentInfoConsole.class);
+         departmentInfoConsole.clear();
+         // 计算投资
+         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
+         investmentCalculater.process(logicContext);
+         processCount += investmentCalculater.processCount();
+         // 计算赎回
+         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
+         redemptionCalculater.process(logicContext);
+         processCount += redemptionCalculater.processCount();
+      }catch(Exception exception){
+         _logger.error(null, "main", exception);
       }
-      System.out.println("==========================================FActivityMonitor.onExecute");
+      _logger.debug(this, "onExecute", "Process statistics. (count={1})", processCount);
+      if(processCount > 0){
+         _interval = 0;
+      }else{
+         _interval = _defaultInterval;
+      }
       return true;
    }
 }
