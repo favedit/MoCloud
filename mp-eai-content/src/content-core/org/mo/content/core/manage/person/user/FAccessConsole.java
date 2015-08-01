@@ -39,6 +39,7 @@ public class FAccessConsole
    @Override
    public EResult hostExists(ILogicContext logicContext,
                              String host){
+
       StringBuffer whereSql = new StringBuffer();
       if(!host.isEmpty()){
          whereSql.append(FDataPersonAccessAuthorityLogic.HOST_ADDRESS).append(" = '").append(host).append("'");
