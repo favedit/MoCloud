@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="cfac038e-fa1e-45cb-95ae-a16c9ca9a130" name="data.resource3d.material.texture" label="M#12cn19资源3D材质纹理表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Material.Texture" data_name="DT_RS3_MATERIAL_TEXTURE" data_alias="DT_RS3_MTL_TXT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="77c26f1b-cad7-4854-b366-011974be2aa3" name="material_id" label="M#12cn14材质编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MATERIAL_ID" data_alias="MTL" data_refer="data.resource3d.material" />
+  <FieldString _uuid="ceaf59be-112b-4a7b-90ec-4039d8dd254d" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldRecordId _uuid="f27896ae-16e3-4c52-bf79-cba2d02d306f" name="texture_id" label="M#12cn14纹理编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TEXTURE_ID" data_alias="TXT" data_refer="data.resource3d.texture" />
+  <FieldRecordId _uuid="be1a83b2-3414-4110-aa96-9340adf39ece" name="texture_bitmap_id" label="M#12cn14位图编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TEXTURE_BITMAP_ID" data_alias="TXT_BMP" data_refer="data.resource3d.texture.bitmap" />
+  <FieldString _uuid="618e450f-c890-439b-af15-c67b30a91af5" name="note" label="M#12cn14注释内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="800" />
+  <FieldTemplate _uuid="137852c6-6476-422f-90e1-81b8b6cc6ad3" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

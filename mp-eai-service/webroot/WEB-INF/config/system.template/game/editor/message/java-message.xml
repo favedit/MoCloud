@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Template ads="nEBb4EhA2r2RfQR7XSlSug" name="design.persistence.xmlobject" is_valid="Y" note="M#">
+  <Define ads="]E[MIOeUo79dXfu13d2wsA" name="package" is_valid="Y" note="M#" value="org.mobj.mylife.data.base" />
+  <Source ads="WkcEiMRQuJETYp5z2XC0pg" is_valid="Y" note="M#"><![CDATA[//============================================================
+// <T><jt:item source='$group.label'/>消息定义。</T>
+//
+// @version 1.0
+// @auto 代码器管理的代码，如需修改请在手动修改标出的地方修改。
+//============================================================
+package com.cyou.gccloud.define.message.<jt:item source='$group.full_code' format='lower'/>;
+
+import org.mo.com.message.*;
+import org.mo.com.xml.*;
+import com.cyou.gccloud.common.*;
+import com.cyou.gccloud.common.message.*;
+import com.cyou.gccloud.define.entity.*;
+
+//============================================================
+// <T><jt:item source='$message.label'/>消息。</T>
+//============================================================
+public class F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/> extends FNetMessage implements INetObject
+{
+   // 名称
+   public final static String NAME = "<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>";
+
+   // 类型
+   public final static int TYPE = ENetMessageType.<jt:item source='$message.message_type'/>;
+
+   // 代码
+   public final static int CODE = ENetMessageGroup.<jt:item source='$group.full_code'/> + <jt:item source='$message.code_value'/>;
+
+   // 版本
+   public final static int VERSION = <jt:item source='$message.version'/>;
+
+<jt:loop source='$message' alias='enum' filter='$enum:name=Enum'>
+<jt:loop source='$enum' alias='field'>
+   public final static int <jt:item source='$enum.name'/>_<jt:item source='$field.name'/> = <jt:item source='$field-position'/>;
+
+</jt:loop>
+</jt:loop>
+<jt:loop source='$message' alias='struct' filter='$struct:name=Struct'>
+   //============================================================
+   // <T><jt:item source='$struct.label'/>定义。</T>
+   //============================================================
+   public final static class <jt:item source='$struct.name'/> implements INetObject
+   {
+      // 代码
+      public final static String CODE = "<jt:item source='$struct.code'/>";
+
+<jt:loop source='$struct' alias='field' filter='$field:name=Item'>
+      // <jt:item source='$field.label'/>
+<jt:true source='$field.is_collection'>
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Enum|Bool|Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record|String'>
+      protected <jt:item source='$field.data_type_java'/> _<jt:item source='$field.name'/>;
+</jt:equals>
+</jt:false>
+
+</jt:loop>
+      //============================================================
+      // <T>构造<jt:item source='$struct.label'/>定义。</T>
+      //============================================================
+      public <jt:item source='$struct.name'/>(){
+      }
+<jt:loop source='$struct' alias='field' filter='$field:name=Item'>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Enum|Bool|Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record|String'>
+
+      //============================================================
+      // <T>获得<jt:item source='$field.label'/>。</T>
+      //
+      // @return 个数
+      //============================================================
+      public <jt:item source='$field.data_type_java'/> <jt:item source='$field.name'/>(){
+         return _<jt:item source='$field.name'/>;
+      }
+</jt:equals>
+<jt:equals source='$field.type' value='Enum|Bool|Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record|String'>
+
+      //============================================================
+      // <T>设置<jt:item source='$field.label'/>。</T>
+      //
+      // @param value 内容
+      // @return 对象
+      //============================================================
+      public void set<jt:item source='$field.name' format='upper.first'/>(<jt:item source='$field.data_type_java'/> value){
+         _<jt:item source='$field.name'/> = value;
+      }
+</jt:equals>
+</jt:false>
+</jt:loop>
+
+      //============================================================
+      // <T>从配置节点中读取数据。</T>
+      //
+      // @param xconfig 配置节点
+      //============================================================
+      public void loadConfig(FXmlNode xconfig){
+<jt:loop source='$struct' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+         _<jt:item source='$field.name'/>.loadConfig(input);
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Bool|Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double'>
+         _<jt:item source='$field.name'/> = xconfig.getInt("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:equals>
+<jt:equals source='$field.type' value='Record'>
+         _<jt:item source='$field.name'/> = xconfig.getLong("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:equals>
+<jt:equals source='$field.type' value='String'>
+         _<jt:item source='$field.name'/> = xconfig.get("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:equals>
+<jt:equals source='$field.type' value='Type|Set|Struct|Object'>
+         FXmlNode x<jt:item source='$field.name'/> = xconfig.findNode(<jt:item source='$field.type_name'/>.CODE);
+         if(x<jt:item source='$field.name'/> != null){
+            _<jt:item source='$field.name'/>.loadConfig(x<jt:item source='$field.name'/>);
+         }
+</jt:equals>
+</jt:false>
+</jt:loop>
+      }
+
+      //============================================================
+      // <T>保存数据到配置节点中。</T>
+      //
+      // @param xconfig 配置节点
+      //============================================================
+      public void saveConfig(FXmlNode xconfig){
+<jt:loop source='$struct' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+         _<jt:item source='$field.name'/>.saveConfig(output);
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Bool|Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record|String'>
+         xconfig.set("<jt:item source='$field.name' format='db.func.lower'/>", _<jt:item source='$field.name'/>);
+</jt:equals>
+<jt:equals source='$field.type' value='Type|Set|Struct|Object'>
+         if(_<jt:item source='$field.name'/> != null){
+            FXmlNode x<jt:item source='$field.name'/> = xconfig.createNode(<jt:item source='$field.type_name'/>.CODE);
+            _<jt:item source='$field.name'/>.saveConfig(x<jt:item source='$field.name'/>);
+         }
+</jt:equals>
+</jt:false>
+</jt:loop>
+      }
+
+      //============================================================
+      // <T>重置内容。</T>
+      //============================================================
+      public void reset(){
+<jt:loop source='$struct' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+         _<jt:item source='$field.name'/>.reset();
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record'>
+         _<jt:item source='$field.name'/> = 0;
+</jt:equals>
+<jt:equals source='$field.type' value='String'>
+         _<jt:item source='$field.name'/> = null;
+</jt:equals>
+</jt:false>
+</jt:loop>
+      }
+   }
+
+</jt:loop>
+<jt:loop source='$message' alias='field' filter='$field:name=Item'>
+   // <jt:item source='$field.label'/>
+<jt:true source='$field.is_collection'>
+   protected FNetObjects<<jt:item source='$field.type_name'/>> _<jt:item source='$field.name'/> = new FNetObjects<<jt:item source='$field.type_name'/>>(<jt:item source='$field.type_name'/>.class, <jt:item source='$field.type_name'/>.CODE);
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Enum|Boolean|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record|String'>
+   protected <jt:item source='$field.data_type_java'/> _<jt:item source='$field.name'/>;
+</jt:equals>
+<jt:equals source='$field.type' value='Type|Set|Struct|Object'>
+   protected <jt:item source='$field.type_name'/> _<jt:item source='$field.name'/> = new <jt:item source='$field.type_name'/>();
+</jt:equals>
+</jt:false>
+
+</jt:loop>
+   //============================================================
+   // <T>构造消息的实例对象。</T>
+   //
+   // @return 实例对象
+   //============================================================
+   public F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>(){
+      _head.name = NAME;
+      _head.type = TYPE;
+      _head.code = CODE;
+      _head.version = VERSION;
+   }
+
+   //============================================================
+   // <T>构造消息的实例对象。</T>
+   //
+   // @param xconfig 配置节点
+   // @return 实例对象
+   //============================================================
+   public F<jt:item source='$group.code'/><jt:item source='$message.code'/><jt:item source='$message.message_type'/>(FXmlNode xconfig){
+      this();
+      loadConfig(xconfig);
+   }
+<jt:loop source='$message' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+
+   //============================================================
+   // <T>获得<jt:item source='$field.label'/>。</T>
+   //
+   // @return <jt:item source='$field.label'/>
+   //============================================================
+   public FNetObjects<<jt:item source='$field.type_name'/>> <jt:item source='$field.name'/>(){
+      return _<jt:item source='$field.name'/>;
+   }
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Enum|String|Object'>
+
+   //============================================================
+   // <T>获得<jt:item source='$field.label'/>。</T>
+   //
+   // @return <jt:item source='$field.label'/>
+   //============================================================
+   public <jt:item source='$field.data_type_java'/> <jt:item source='$field.name'/>(){
+      return _<jt:item source='$field.name'/>;
+   }
+</jt:equals>
+<jt:equals source='$field.type' value='Enum|String'>
+
+   //============================================================
+   // <T>设置<jt:item source='$field.label'/>。</T>
+   //
+   // @param <jt:item source='$field.name'/> <jt:item source='$field.label'/>
+   //============================================================
+   public void set<jt:item source='$field.name' format='upper.first'/>(<jt:item source='$field.data_type_java'/> <jt:item source='$field.name'/>){
+      _<jt:item source='$field.name'/> = <jt:item source='$field.name'/>;
+   }
+</jt:equals>
+</jt:false>
+</jt:loop>
+
+   //============================================================
+   // <T>从配置节点中读取数据。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   public void loadConfig(FXmlNode xconfig){
+<jt:loop source='$message' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+      _<jt:item source='$field.name'/>.loadConfig(xconfig);
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Bool|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double'>
+      _<jt:item source='$field.name'/> = xconfig.getInt("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:equals>
+<jt:equals source='$field.type' value='Enum'>
+<jt:true source='$field.is_node'>
+      _<jt:item source='$field.name'/> = xconfig.nodeTextAsInt("<jt:item source='$field.name' format='upper.first'/>");
+</jt:true>
+<jt:false source='$field.is_node'>
+      _<jt:item source='$field.name'/> = xconfig.getInt("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:false>
+</jt:equals>
+<jt:equals source='$field.type' value='Record'>
+<jt:true source='$field.is_node'>
+      _<jt:item source='$field.name'/> = xconfig.nodeTextAsLong("<jt:item source='$field.name' format='upper.first'/>");
+</jt:true>
+<jt:false source='$field.is_node'>
+      _<jt:item source='$field.name'/> = xconfig.getLong("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:false>
+</jt:equals>
+<jt:equals source='$field.type' value='String'>
+<jt:true source='$field.is_node'>
+      _<jt:item source='$field.name'/> = xconfig.nodeText("<jt:item source='$field.name' format='upper.first'/>");
+</jt:true>
+<jt:false source='$field.is_node'>
+      _<jt:item source='$field.name'/> = xconfig.get("<jt:item source='$field.name' format='db.func.lower'/>");
+</jt:false>
+</jt:equals>
+<jt:equals source='$field.type' value='Type|Set|Struct|Object'>
+      FXmlNode x<jt:item source='$field.name'/> = xconfig.findNode(<jt:item source='$field.type_name'/>.CODE);
+      if(x<jt:item source='$field.name'/> != null){
+         _<jt:item source='$field.name'/>.loadConfig(x<jt:item source='$field.name'/>);
+      }
+</jt:equals>
+</jt:false>
+</jt:loop>
+   }
+
+   //============================================================
+   // <T>保存数据到配置节点中。</T>
+   //
+   // @param xconfig 配置节点
+   //============================================================
+   public void saveConfig(FXmlNode xconfig){
+<jt:loop source='$message' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+      _<jt:item source='$field.name'/>.saveConfig(xconfig);
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Bool|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double|Record'>
+<jt:true source='$field.is_node'>
+      xconfig.createNode("<jt:item source='$field.name' format='db.func.lower'/>").setText(_<jt:item source='$field.name'/>);
+</jt:true>
+<jt:false source='$field.is_node'>
+      xconfig.set("<jt:item source='$field.name' format='db.func.lower'/>", _<jt:item source='$field.name'/>);
+</jt:false>
+</jt:equals>
+<jt:equals source='$field.type' value='Enum|String'>
+<jt:true source='$field.is_node'>
+      xconfig.createNode("<jt:item source='$field.name' format='db.func.lower'/>").setText(_<jt:item source='$field.name'/>);
+</jt:true>
+<jt:false source='$field.is_node'>
+      xconfig.set("<jt:item source='$field.name' format='db.func.lower'/>", _<jt:item source='$field.name'/>);
+</jt:false>
+</jt:equals>
+<jt:equals source='$field.type' value='Type|Set|Struct|Object'>
+      FXmlNode x<jt:item source='$field.name'/> = xconfig.syncNode(<jt:item source='$field.type_name'/>.CODE);
+      _<jt:item source='$field.name'/>.saveConfig(x<jt:item source='$field.name'/>);
+</jt:equals>
+</jt:false>
+</jt:loop>
+   }
+
+   //============================================================
+   // <T>重置内容。</T>
+   //============================================================
+   @Override
+   public void reset(){
+      super.reset();
+<jt:loop source='$message' alias='field' filter='$field:name=Item'>
+<jt:true source='$field.is_collection'>
+      _<jt:item source='$field.name'/>.reset();
+</jt:true>
+<jt:false source='$field.is_collection'>
+<jt:equals source='$field.type' value='Enum|Int8|Int16|Int32|Int64|Uint8|Uint16|Uint32|Uint64|Float|Double'>
+      _<jt:item source='$field.name'/> = 0;
+</jt:equals>
+<jt:equals source='$field.type' value='String'>
+      _<jt:item source='$field.name'/> = null;
+</jt:equals>
+<jt:equals source='$field.type' value='Type|Set|Struct|Object'>
+      _<jt:item source='$field.name'/>.reset();
+</jt:equals>
+</jt:false>
+</jt:loop>
+   }
+}
+]]></Source>
+</Template>

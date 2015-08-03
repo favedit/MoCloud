@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.solution.CanvasToolBar">
+   <ToolBar name="design3d.solution.CanvasToolBar" label="画板工具栏">
+      <ToolButton name='updateButton' linker='_controlUpdateButton' icon='resource.tools.update' label='编辑项目' />
+      <ToolButtonSplit/>
+      <ToolButtonCheck name='rotationButton' linker='_controlRotationButton' icon='resource.tools.rotation' label='旋转' hint='场景旋转播放开关'/>
+   </ToolBar>
+</Content>

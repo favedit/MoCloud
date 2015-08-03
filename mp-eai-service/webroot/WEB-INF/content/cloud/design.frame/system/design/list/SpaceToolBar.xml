@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <ToolBar name="system.design.frame.SpaceToolBar" label="空间工具栏">
+      <ToolButton name='align1' linker='_controlSearchEdit' icon='resource.tools.search' label='左对齐' edit_size='200,0'/>
+      <ToolButton name='align2' linker='_controlSearchEdit' icon='resource.tools.search' label='右对齐' edit_size='200,0'/>
+      <ToolButton name='align3' linker='_controlSearchEdit' icon='resource.tools.search' label='上对齐' edit_size='200,0'/>
+      <ToolButton name='align4' linker='_controlSearchEdit' icon='resource.tools.search' label='下对齐' edit_size='200,0'/>
+      <ToolButtonSplit/>
+      <ToolButton name='firstButton' linker='_controlFirstButton' icon='resource.tools.first' label='首页' hint='场景旋转播放开关'/>
+      <ToolButton name='priorButton' linker='_controlPriorButton' icon='resource.tools.prior' label='上页' hint='场景旋转播放开关'/>
+      <ToolButtonEdit name='pageEdit' linker='_controlPageEdit' edit_size='60,0'/>
+      <ToolButton name='nextButton' linker='_controlNextButton' icon='resource.tools.next' label='下页' hint='场景旋转播放开关'/>
+      <ToolButton name='lastButton' linker='_controlLastButton' icon='resource.tools.last' label='尾页' hint='场景旋转播放开关'/>
+   </ToolBar>
+</Content>

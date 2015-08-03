@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="resource.common.dialog.TemplateDialog" type='FDsResourceFolderDialog' label="导入模板" is_valid="Y" size='600,400' note="">
+      <Panel name='spacePanel' icon='design.panel.icon' label='空间信息'>
+         <Edit name="spaceGuid" linker='_controlSpaceGuid' label="唯一编号" label_size='70,0' valid="Y" edit_size='300,0' input_size='400,0' note="" />
+         <Edit name="spaceLabel" linker='_controlSpaceLabel' label="名称" label_size='70,0' valid="Y" edit_size='300,0' input_size='400,0' note="" />
+      </Panel>
+      <Panel name='layerPanel' icon='design.panel.icon' label='显示层信息'>
+         <Edit name="layerCode" linker='_controlLayerCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='300,0' note="" />
+         <Edit name="layerLabel" linker='_controlLayerLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='300,0' note="" />
+      </Panel>
+      <Panel name='infoPanel' icon='design.panel.icon' label='模板信息'>
+         <Edit name="guid" linker='_controlGuid' label="唯一编号" label_size='70,0' valid="Y" edit_size='200,0' input_size='300,0' note="" />
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='300,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='300,0' note="" />
+      </Panel>
+      <Button name="confirmButton" linker='_controlConfirm' label="确认" size='80,20' margin='4,0,4,0' wrap_cd='1'/>
+      <Button name="cancelButton" linker='_controlCancel' label="取消" size='80,20' margin='4,0,4,0' />
+   </Frame>
+</Content>
