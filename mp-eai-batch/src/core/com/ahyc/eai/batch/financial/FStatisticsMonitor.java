@@ -47,14 +47,14 @@ public class FStatisticsMonitor
          // 清空部门控制台
          IStatisticsDepartmentInfoConsole departmentInfoConsole = RAop.find(IStatisticsDepartmentInfoConsole.class);
          departmentInfoConsole.clear();
-         //         // 计算投资
-         //         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
-         //         investmentCalculater.process(logicContext);
-         //         processCount += investmentCalculater.processCount();
-         //         // 计算赎回
-         //         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
-         //         redemptionCalculater.process(logicContext);
-         //         processCount += redemptionCalculater.processCount();
+         // 计算投资
+         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
+         investmentCalculater.process(logicContext);
+         processCount += investmentCalculater.processCount();
+         // 计算赎回
+         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
+         redemptionCalculater.process(logicContext);
+         processCount += redemptionCalculater.processCount();
          // 统计客户信息
          FStatisticsCustomerCalculater customerCalculater = new FStatisticsCustomerCalculater();
          customerCalculater.process(logicContext);

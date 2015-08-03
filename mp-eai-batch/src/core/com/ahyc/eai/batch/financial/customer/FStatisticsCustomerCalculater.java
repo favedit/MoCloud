@@ -24,6 +24,9 @@ public class FStatisticsCustomerCalculater
    // 同步时间(1小时)
    protected long _intervalSpan = 1000 * 60 * 60;
 
+   // 合计延迟(10秒)
+   protected long _recordDelay = 1000 * 10;
+
    // 合计间隔(1小时)
    protected long _recordSpan = 1000 * 60 * 60;
 
@@ -132,7 +135,7 @@ public class FStatisticsCustomerCalculater
          targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MIN(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS ACTION_DATE FROM ST_FIN_DYNAMIC");
       }
       // 每次同步数量
-      long currentTick = new TDateTime(currentDate).get();
+      long currentTick = new TDateTime(currentDate).get() - _recordDelay;
       long sourceMaxTick = new TDateTime(sourceMaxDate).get();
       long targetMaxTick = new TDateTime(targetMaxDate).get();
       long beginTick = targetMaxTick;
