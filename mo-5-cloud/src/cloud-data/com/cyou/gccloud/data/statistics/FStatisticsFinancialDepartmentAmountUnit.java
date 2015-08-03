@@ -67,6 +67,12 @@ public class FStatisticsFinancialDepartmentAmountUnit
    // 字段净投总计的定义。
    protected double _netinvestmentTotal;
 
+   // 存储字段利息总计的定义。
+   private double __interestTotal;
+
+   // 字段利息总计的定义。
+   protected double _interestTotal;
+
    // 存储字段绩效总计的定义。
    private double __performanceTotal;
 
@@ -332,6 +338,33 @@ public class FStatisticsFinancialDepartmentAmountUnit
    }
 
    //============================================================
+   // <T>判断利息总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestTotalChanged(){
+      return __interestTotal != _interestTotal;
+   }
+
+   //============================================================
+   // <T>获得利息总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double interestTotal(){
+      return _interestTotal;
+   }
+
+   //============================================================
+   // <T>设置利息总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterestTotal(double value){
+      _interestTotal = value;
+   }
+
+   //============================================================
    // <T>判断绩效总计的数据是否改变。</T>
    //
    // @return 数据内容
@@ -545,6 +578,8 @@ public class FStatisticsFinancialDepartmentAmountUnit
             return RDouble.toString(_redemptionTotal);
          case "netinvestment_total":
             return RDouble.toString(_netinvestmentTotal);
+         case "interest_total":
+            return RDouble.toString(_interestTotal);
          case "performance_total":
             return RDouble.toString(_performanceTotal);
          case "marketer_total":
@@ -596,6 +631,9 @@ public class FStatisticsFinancialDepartmentAmountUnit
             break;
          case "netinvestment_total":
             _netinvestmentTotal = RDouble.parse(value);
+            break;
+         case "interest_total":
+            _interestTotal = RDouble.parse(value);
             break;
          case "performance_total":
             _performanceTotal = RDouble.parse(value);
@@ -665,6 +703,10 @@ public class FStatisticsFinancialDepartmentAmountUnit
                __netinvestmentTotal = RDouble.parse(value);
                _netinvestmentTotal = __netinvestmentTotal;
                break;
+            case "interest_total":
+               __interestTotal = RDouble.parse(value);
+               _interestTotal = __interestTotal;
+               break;
             case "performance_total":
                __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
@@ -713,6 +755,7 @@ public class FStatisticsFinancialDepartmentAmountUnit
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
+      row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
       row.set("marketerTotal", _marketerTotal);
       row.set("customerTotal", _customerTotal);
@@ -738,6 +781,7 @@ public class FStatisticsFinancialDepartmentAmountUnit
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
       map.put("marketerTotal", RInteger.toString(_marketerTotal));
       map.put("customerTotal", RInteger.toString(_customerTotal));

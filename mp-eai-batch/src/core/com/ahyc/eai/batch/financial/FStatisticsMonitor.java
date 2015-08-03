@@ -2,7 +2,7 @@ package com.ahyc.eai.batch.financial;
 
 import com.ahyc.eai.batch.financial.customer.FStatisticsCustomerCalculater;
 import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentCalculater;
-import com.ahyc.eai.batch.financial.department.IDepartmentInfoConsole;
+import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
 import com.ahyc.eai.batch.financial.marketer.FStatisticsMarketerCalculater;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -45,16 +45,16 @@ public class FStatisticsMonitor
       // 逻辑处理
       try(FLogicContext logicContext = new FLogicContext(_databaseConsole)){
          // 清空部门控制台
-         IDepartmentInfoConsole departmentInfoConsole = RAop.find(IDepartmentInfoConsole.class);
+         IStatisticsDepartmentInfoConsole departmentInfoConsole = RAop.find(IStatisticsDepartmentInfoConsole.class);
          departmentInfoConsole.clear();
-         // 计算投资
-         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
-         investmentCalculater.process(logicContext);
-         processCount += investmentCalculater.processCount();
-         // 计算赎回
-         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
-         redemptionCalculater.process(logicContext);
-         processCount += redemptionCalculater.processCount();
+         //         // 计算投资
+         //         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
+         //         investmentCalculater.process(logicContext);
+         //         processCount += investmentCalculater.processCount();
+         //         // 计算赎回
+         //         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
+         //         redemptionCalculater.process(logicContext);
+         //         processCount += redemptionCalculater.processCount();
          // 统计客户信息
          FStatisticsCustomerCalculater customerCalculater = new FStatisticsCustomerCalculater();
          customerCalculater.process(logicContext);

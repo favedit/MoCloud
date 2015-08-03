@@ -62,6 +62,9 @@ public class FStatisticsFinancialMarketerAmountLogic
    // 字段净投总计的定义。
    public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
+   // 字段利息总计的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
    // 字段绩效总计的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
@@ -81,7 +84,7 @@ public class FStatisticsFinancialMarketerAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师数据统计表逻辑单元。</T>
@@ -680,6 +683,7 @@ public class FStatisticsFinancialMarketerAmountLogic
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
       cmd.append(",`CUSTOMER_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
@@ -729,6 +733,8 @@ public class FStatisticsFinancialMarketerAmountLogic
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
       cmd.append(unit.netinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
       cmd.append(',');
       cmd.append(unit.performanceTotal());
       cmd.append(',');
@@ -853,6 +859,10 @@ public class FStatisticsFinancialMarketerAmountLogic
       if(unit.isNetinvestmentTotalChanged()){
          cmd.append(",`NETINVESTMENT_TOTAL`=");
          cmd.append(unit.netinvestmentTotal());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
       }
       if(unit.isPerformanceTotalChanged()){
          cmd.append(",`PERFORMANCE_TOTAL`=");

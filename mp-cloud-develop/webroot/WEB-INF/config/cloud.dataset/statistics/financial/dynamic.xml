@@ -17,5 +17,6 @@
   <FieldInteger _uuid="41df12c9-22ba-4a33-99a3-d0f74c1d0e4b" name="customer_action_cd" label="M#12cn16客户命令类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_CD" />
   <FieldDateTime _uuid="a3dd51c2-0176-4d95-91c5-aca8982d0737" name="customer_action_date" label="M#12cn16客户命令时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />
   <FieldDouble _uuid="46532028-c8ba-4a15-a797-41ed04c345c7" name="customer_action_amount" label="M#12cn16客户命令数值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_AMOUNT" />
+  <FieldDouble _uuid="f59e6178-41df-4edb-ae86-c893f1be9aeb" name="customer_action_interest" label="M#12cn16客户命令利息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_INTEREST" />
   <FieldTemplate _uuid="020e481a-5782-4612-9616-da0a22df408a" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

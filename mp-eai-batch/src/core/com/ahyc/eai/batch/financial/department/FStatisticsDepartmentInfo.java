@@ -5,7 +5,7 @@ import org.mo.com.lang.FObject;
 //============================================================
 // <T>部门信息。</T>
 //============================================================
-public class FDepartmentInfo
+public class FStatisticsDepartmentInfo
       extends FObject
 {
    // 编号

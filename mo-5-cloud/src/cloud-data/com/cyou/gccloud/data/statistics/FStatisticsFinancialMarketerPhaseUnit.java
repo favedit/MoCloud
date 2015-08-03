@@ -145,6 +145,18 @@ public class FStatisticsFinancialMarketerPhaseUnit
    // 字段理财师净投总计的定义。
    protected double _marketerNetinvestmentTotal;
 
+   // 存储字段理财师利息的定义。
+   private double __marketerInterest;
+
+   // 字段理财师利息的定义。
+   protected double _marketerInterest;
+
+   // 存储字段理财师利息总计的定义。
+   private double __marketerInterestTotal;
+
+   // 字段理财师利息总计的定义。
+   protected double _marketerInterestTotal;
+
    // 存储字段理财师绩效的定义。
    private double __marketerPerformance;
 
@@ -773,6 +785,60 @@ public class FStatisticsFinancialMarketerPhaseUnit
    }
 
    //============================================================
+   // <T>判断理财师利息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerInterestChanged(){
+      return __marketerInterest != _marketerInterest;
+   }
+
+   //============================================================
+   // <T>获得理财师利息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double marketerInterest(){
+      return _marketerInterest;
+   }
+
+   //============================================================
+   // <T>设置理财师利息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerInterest(double value){
+      _marketerInterest = value;
+   }
+
+   //============================================================
+   // <T>判断理财师利息总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerInterestTotalChanged(){
+      return __marketerInterestTotal != _marketerInterestTotal;
+   }
+
+   //============================================================
+   // <T>获得理财师利息总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double marketerInterestTotal(){
+      return _marketerInterestTotal;
+   }
+
+   //============================================================
+   // <T>设置理财师利息总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerInterestTotal(double value){
+      _marketerInterestTotal = value;
+   }
+
+   //============================================================
    // <T>判断理财师绩效的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1066,6 +1132,10 @@ public class FStatisticsFinancialMarketerPhaseUnit
             return RDouble.toString(_marketerNetinvestment);
          case "marketer_netinvestment_total":
             return RDouble.toString(_marketerNetinvestmentTotal);
+         case "marketer_interest":
+            return RDouble.toString(_marketerInterest);
+         case "marketer_interest_total":
+            return RDouble.toString(_marketerInterestTotal);
          case "marketer_performance":
             return RDouble.toString(_marketerPerformance);
          case "marketer_performance_total":
@@ -1160,6 +1230,12 @@ public class FStatisticsFinancialMarketerPhaseUnit
             break;
          case "marketer_netinvestment_total":
             _marketerNetinvestmentTotal = RDouble.parse(value);
+            break;
+         case "marketer_interest":
+            _marketerInterest = RDouble.parse(value);
+            break;
+         case "marketer_interest_total":
+            _marketerInterestTotal = RDouble.parse(value);
             break;
          case "marketer_performance":
             _marketerPerformance = RDouble.parse(value);
@@ -1287,6 +1363,14 @@ public class FStatisticsFinancialMarketerPhaseUnit
                __marketerNetinvestmentTotal = RDouble.parse(value);
                _marketerNetinvestmentTotal = __marketerNetinvestmentTotal;
                break;
+            case "marketer_interest":
+               __marketerInterest = RDouble.parse(value);
+               _marketerInterest = __marketerInterest;
+               break;
+            case "marketer_interest_total":
+               __marketerInterestTotal = RDouble.parse(value);
+               _marketerInterestTotal = __marketerInterestTotal;
+               break;
             case "marketer_performance":
                __marketerPerformance = RDouble.parse(value);
                _marketerPerformance = __marketerPerformance;
@@ -1356,6 +1440,8 @@ public class FStatisticsFinancialMarketerPhaseUnit
       row.set("marketerRedemptionTotal", _marketerRedemptionTotal);
       row.set("marketerNetinvestment", _marketerNetinvestment);
       row.set("marketerNetinvestmentTotal", _marketerNetinvestmentTotal);
+      row.set("marketerInterest", _marketerInterest);
+      row.set("marketerInterestTotal", _marketerInterestTotal);
       row.set("marketerPerformance", _marketerPerformance);
       row.set("marketerPerformanceTotal", _marketerPerformanceTotal);
       row.set("customerActionDate", _customerActionDate);
@@ -1396,6 +1482,8 @@ public class FStatisticsFinancialMarketerPhaseUnit
       map.put("marketerRedemptionTotal", RDouble.toString(_marketerRedemptionTotal));
       map.put("marketerNetinvestment", RDouble.toString(_marketerNetinvestment));
       map.put("marketerNetinvestmentTotal", RDouble.toString(_marketerNetinvestmentTotal));
+      map.put("marketerInterest", RDouble.toString(_marketerInterest));
+      map.put("marketerInterestTotal", RDouble.toString(_marketerInterestTotal));
       map.put("marketerPerformance", RDouble.toString(_marketerPerformance));
       map.put("marketerPerformanceTotal", RDouble.toString(_marketerPerformanceTotal));
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));

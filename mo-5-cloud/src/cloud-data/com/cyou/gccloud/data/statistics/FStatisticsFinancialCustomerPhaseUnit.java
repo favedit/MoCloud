@@ -138,6 +138,18 @@ public class FStatisticsFinancialCustomerPhaseUnit
    // 字段净投总计的定义。
    protected double _netinvestmentTotal;
 
+   // 存储字段利息的定义。
+   private double __interest;
+
+   // 字段利息的定义。
+   protected double _interest;
+
+   // 存储字段利息总计的定义。
+   private double __interestTotal;
+
+   // 字段利息总计的定义。
+   protected double _interestTotal;
+
    // 存储字段绩效的定义。
    private double __performance;
 
@@ -721,6 +733,60 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
+   // <T>判断利息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestChanged(){
+      return __interest != _interest;
+   }
+
+   //============================================================
+   // <T>获得利息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double interest(){
+      return _interest;
+   }
+
+   //============================================================
+   // <T>设置利息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterest(double value){
+      _interest = value;
+   }
+
+   //============================================================
+   // <T>判断利息总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestTotalChanged(){
+      return __interestTotal != _interestTotal;
+   }
+
+   //============================================================
+   // <T>获得利息总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double interestTotal(){
+      return _interestTotal;
+   }
+
+   //============================================================
+   // <T>设置利息总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterestTotal(double value){
+      _interestTotal = value;
+   }
+
+   //============================================================
    // <T>判断绩效的数据是否改变。</T>
    //
    // @return 数据内容
@@ -931,6 +997,10 @@ public class FStatisticsFinancialCustomerPhaseUnit
             return RDouble.toString(_netinvestment);
          case "netinvestment_total":
             return RDouble.toString(_netinvestmentTotal);
+         case "interest":
+            return RDouble.toString(_interest);
+         case "interest_total":
+            return RDouble.toString(_interestTotal);
          case "performance":
             return RDouble.toString(_performance);
          case "performance_total":
@@ -1016,6 +1086,12 @@ public class FStatisticsFinancialCustomerPhaseUnit
             break;
          case "netinvestment_total":
             _netinvestmentTotal = RDouble.parse(value);
+            break;
+         case "interest":
+            _interest = RDouble.parse(value);
+            break;
+         case "interest_total":
+            _interestTotal = RDouble.parse(value);
             break;
          case "performance":
             _performance = RDouble.parse(value);
@@ -1130,6 +1206,14 @@ public class FStatisticsFinancialCustomerPhaseUnit
                __netinvestmentTotal = RDouble.parse(value);
                _netinvestmentTotal = __netinvestmentTotal;
                break;
+            case "interest":
+               __interest = RDouble.parse(value);
+               _interest = __interest;
+               break;
+            case "interest_total":
+               __interestTotal = RDouble.parse(value);
+               _interestTotal = __interestTotal;
+               break;
             case "performance":
                __performance = RDouble.parse(value);
                _performance = __performance;
@@ -1186,6 +1270,8 @@ public class FStatisticsFinancialCustomerPhaseUnit
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestment", _netinvestment);
       row.set("netinvestmentTotal", _netinvestmentTotal);
+      row.set("interest", _interest);
+      row.set("interestTotal", _interestTotal);
       row.set("performance", _performance);
       row.set("performanceTotal", _performanceTotal);
       row.set("createUserId", _createUserId);
@@ -1222,6 +1308,8 @@ public class FStatisticsFinancialCustomerPhaseUnit
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestment", RDouble.toString(_netinvestment));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("interest", RDouble.toString(_interest));
+      map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performance", RDouble.toString(_performance));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
       map.put("createUserId", RLong.toString(_createUserId));

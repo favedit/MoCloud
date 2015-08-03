@@ -1,7 +1,7 @@
 package com.ahyc.eai.batch.financial;
 
-import com.ahyc.eai.batch.financial.department.FDepartmentInfo;
-import com.ahyc.eai.batch.financial.department.IDepartmentInfoConsole;
+import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentInfo;
+import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
@@ -30,7 +30,7 @@ public class FStatisticsInvestmentCalculater
       // 代码修正
       ISqlConnection sourceConnection = logicContext.activeConnection("ezubao");
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
-      IDepartmentInfoConsole departmentInfoConsole = RAop.find(IDepartmentInfoConsole.class);
+      IStatisticsDepartmentInfoConsole departmentInfoConsole = RAop.find(IStatisticsDepartmentInfoConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
       String selectSql = RString.format("SELECT id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>={1} AND id<={2}", beginId,
             endId);
@@ -54,7 +54,7 @@ public class FStatisticsInvestmentCalculater
             }
          }
          // 查找公司信息
-         FDepartmentInfo departmentInfo = departmentInfoConsole.find(logicContext, departmentId);
+         FStatisticsDepartmentInfo departmentInfo = departmentInfoConsole.find(logicContext, departmentId);
          FStatisticsFinancialDynamicUnit dynamicUnit = dynamicLogic.doPrepare();
          dynamicUnit.setLinkId(recordId);
          dynamicUnit.linkDate().parse(row.get("update_date"));

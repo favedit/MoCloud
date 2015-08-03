@@ -22,6 +22,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -517,7 +518,7 @@ public abstract class MSqlConnection
    //============================================================ 
    @Override
    public boolean executeExist(CharSequence sql){
-      return null != find(sql);
+      return find(sql) != null;
    }
 
    //============================================================
@@ -530,7 +531,7 @@ public abstract class MSqlConnection
    @Override
    public String executeScalar(CharSequence sql){
       FRow row = find(sql);
-      return (null != row) ? row.value(0) : null;
+      return (row != null) ? row.value(0) : null;
    }
 
    //============================================================
@@ -542,9 +543,8 @@ public abstract class MSqlConnection
    //============================================================ 
    @Override
    public int executeInteger(CharSequence sql){
-      FRow row = find(sql);
-      String value = (null != row) ? row.value(0) : null;
-      return (null != value) ? RInteger.parse(value) : 0;
+      String value = executeScalar(sql);
+      return (value != null) ? RInteger.parse(value) : 0;
    }
 
    //============================================================
@@ -556,9 +556,21 @@ public abstract class MSqlConnection
    //============================================================ 
    @Override
    public long executeLong(CharSequence sql){
-      FRow row = find(sql);
-      String value = (null != row) ? row.value(0) : null;
-      return (null != value) ? RLong.parse(value) : 0;
+      String value = executeScalar(sql);
+      return (value != null) ? RLong.parse(value) : 0;
+   }
+
+   //============================================================
+   // <T>执行查询，并返回查询所返回的结果集中第一行的第一列的长整数</T>
+   // <P>忽略其他列或行。</P>
+   //
+   // @param sql 命令
+   // @return 双精度浮点数
+   //============================================================ 
+   @Override
+   public double executeDouble(CharSequence sql){
+      String value = executeScalar(sql);
+      return (value != null) ? RDouble.parse(value) : 0;
    }
 
    //============================================================

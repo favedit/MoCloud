@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="4fd6e50d-1957-4596-bd3e-e7bb3faad5b8" name="statistics.financial.marketer.customer" label="M#12cn16理财师客户表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Marketer.Customer" data_name="ST_FIN_MARKETER_CUSTOMER" data_alias="ST_FIN_MKT_CUSTOMER" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="626b5d38-33d5-42e6-82c6-ed137d15d32a" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" data_uniques="CUS" />
+  <FieldRecordId _uuid="1cbeff5d-d147-45a3-8c82-237b05278e17" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_uniques="CUS" />
+  <FieldDateTime _uuid="f8cd29f1-39b8-496b-a9c8-faf309b0d7b9" name="link_date" label="M#12cn14关联日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldDouble _uuid="72319646-5f24-490f-a03d-29d8af4546c4" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldDouble _uuid="fd0053ed-2871-4ecb-9478-aa763e57372c" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="e93e6d06-60b2-45d1-8961-9cc21ee02339" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="ae6bd614-7ec0-4ade-82f7-fd666c1c83bc" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldDouble _uuid="f7c255f7-0088-4ea4-83d3-002553bfae8c" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldTemplate _uuid="824d691e-c61a-4a76-9b7a-95f1b5f1969d" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

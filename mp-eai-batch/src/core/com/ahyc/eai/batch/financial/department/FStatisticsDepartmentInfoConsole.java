@@ -9,13 +9,13 @@ import org.mo.data.logic.FLogicContext;
 //============================================================
 // <T>部门信息控制台。</T>
 //============================================================
-public class FDepartmentInfoConsole
+public class FStatisticsDepartmentInfoConsole
       extends FConsole
       implements
-         IDepartmentInfoConsole
+         IStatisticsDepartmentInfoConsole
 {
    // 部门信息字典
-   protected FDictionary<FDepartmentInfo> _departments = new FDictionary<FDepartmentInfo>(FDepartmentInfo.class);
+   protected FDictionary<FStatisticsDepartmentInfo> _departments = new FDictionary<FStatisticsDepartmentInfo>(FStatisticsDepartmentInfo.class);
 
    //============================================================
    // <T>查找部门信息。</T>
@@ -24,7 +24,7 @@ public class FDepartmentInfoConsole
    // @param id 编号
    //============================================================
    @Override
-   public FDepartmentInfo find(FLogicContext logicContext,
+   public FStatisticsDepartmentInfo find(FLogicContext logicContext,
                                long id){
       // 检查参数
       if(id == 0){
@@ -32,11 +32,11 @@ public class FDepartmentInfoConsole
       }
       // 查询信息
       String code = Long.toString(id);
-      FDepartmentInfo info = _departments.find(code);
+      FStatisticsDepartmentInfo info = _departments.find(code);
       if(info != null){
          return info;
       }
-      info = new FDepartmentInfo();
+      info = new FStatisticsDepartmentInfo();
       _departments.set(code, info);
       // 生成信息
       ISqlConnection sourceConnection = logicContext.activeConnection("ezubao");

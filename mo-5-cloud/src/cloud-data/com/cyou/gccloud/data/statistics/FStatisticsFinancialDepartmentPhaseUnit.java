@@ -133,6 +133,18 @@ public class FStatisticsFinancialDepartmentPhaseUnit
    // 字段部门净投总计的定义。
    protected double _departmentNetinvestmentTotal;
 
+   // 存储字段部门利息的定义。
+   private double __departmentInterest;
+
+   // 字段部门利息的定义。
+   protected double _departmentInterest;
+
+   // 存储字段部门利息总计的定义。
+   private double __departmentInterestTotal;
+
+   // 字段部门利息总计的定义。
+   protected double _departmentInterestTotal;
+
    // 存储字段部门绩效的定义。
    private double __departmentPerformance;
 
@@ -719,6 +731,60 @@ public class FStatisticsFinancialDepartmentPhaseUnit
    }
 
    //============================================================
+   // <T>判断部门利息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentInterestChanged(){
+      return __departmentInterest != _departmentInterest;
+   }
+
+   //============================================================
+   // <T>获得部门利息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double departmentInterest(){
+      return _departmentInterest;
+   }
+
+   //============================================================
+   // <T>设置部门利息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentInterest(double value){
+      _departmentInterest = value;
+   }
+
+   //============================================================
+   // <T>判断部门利息总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentInterestTotalChanged(){
+      return __departmentInterestTotal != _departmentInterestTotal;
+   }
+
+   //============================================================
+   // <T>获得部门利息总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double departmentInterestTotal(){
+      return _departmentInterestTotal;
+   }
+
+   //============================================================
+   // <T>设置部门利息总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentInterestTotal(double value){
+      _departmentInterestTotal = value;
+   }
+
+   //============================================================
    // <T>判断部门绩效的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1062,6 +1128,10 @@ public class FStatisticsFinancialDepartmentPhaseUnit
             return RDouble.toString(_departmentNetinvestment);
          case "department_netinvestment_total":
             return RDouble.toString(_departmentNetinvestmentTotal);
+         case "department_interest":
+            return RDouble.toString(_departmentInterest);
+         case "department_interest_total":
+            return RDouble.toString(_departmentInterestTotal);
          case "department_performance":
             return RDouble.toString(_departmentPerformance);
          case "department_performance_total":
@@ -1154,6 +1224,12 @@ public class FStatisticsFinancialDepartmentPhaseUnit
             break;
          case "department_netinvestment_total":
             _departmentNetinvestmentTotal = RDouble.parse(value);
+            break;
+         case "department_interest":
+            _departmentInterest = RDouble.parse(value);
+            break;
+         case "department_interest_total":
+            _departmentInterestTotal = RDouble.parse(value);
             break;
          case "department_performance":
             _departmentPerformance = RDouble.parse(value);
@@ -1279,6 +1355,14 @@ public class FStatisticsFinancialDepartmentPhaseUnit
                __departmentNetinvestmentTotal = RDouble.parse(value);
                _departmentNetinvestmentTotal = __departmentNetinvestmentTotal;
                break;
+            case "department_interest":
+               __departmentInterest = RDouble.parse(value);
+               _departmentInterest = __departmentInterest;
+               break;
+            case "department_interest_total":
+               __departmentInterestTotal = RDouble.parse(value);
+               _departmentInterestTotal = __departmentInterestTotal;
+               break;
             case "department_performance":
                __departmentPerformance = RDouble.parse(value);
                _departmentPerformance = __departmentPerformance;
@@ -1354,6 +1438,8 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       row.set("departmentRedemptionTotal", _departmentRedemptionTotal);
       row.set("departmentNetinvestment", _departmentNetinvestment);
       row.set("departmentNetinvestmentTotal", _departmentNetinvestmentTotal);
+      row.set("departmentInterest", _departmentInterest);
+      row.set("departmentInterestTotal", _departmentInterestTotal);
       row.set("departmentPerformance", _departmentPerformance);
       row.set("departmentPerformanceTotal", _departmentPerformanceTotal);
       row.set("marketerRegister", _marketerRegister);
@@ -1394,6 +1480,8 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       map.put("departmentRedemptionTotal", RDouble.toString(_departmentRedemptionTotal));
       map.put("departmentNetinvestment", RDouble.toString(_departmentNetinvestment));
       map.put("departmentNetinvestmentTotal", RDouble.toString(_departmentNetinvestmentTotal));
+      map.put("departmentInterest", RDouble.toString(_departmentInterest));
+      map.put("departmentInterestTotal", RDouble.toString(_departmentInterestTotal));
       map.put("departmentPerformance", RDouble.toString(_departmentPerformance));
       map.put("departmentPerformanceTotal", RDouble.toString(_departmentPerformanceTotal));
       map.put("marketerRegister", RInteger.toString(_marketerRegister));

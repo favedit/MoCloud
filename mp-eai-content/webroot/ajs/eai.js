@@ -3108,6 +3108,7 @@ MO.FGui2DMap = function FGui2DMap(o) {
    o._countryRes    = MO.Class.register(o, new MO.AGetSet('_countryRes'));
    o.construct      = MO.FGui2DMap_construct;
    o.onPaintBegin   = MO.FGui2DMap_onPaintBegin;
+   o.onPaintCity    = MO.FGui2DMap_onPaintCity;
    o.dispose        = MO.FGui2DMap_dispose;
    return o;
 }
@@ -3125,6 +3126,40 @@ MO.FGui2DMap_onPaintBegin = function FGui2DMap_onPaintBegin(event) {
    var rectangle = event.rectangle;
    var countryRes = o._countryRes;
    graphic.drawRectangle(rectangle.left, rectangle.top, rectangle.width, rectangle.height, '#FF0000', 2);
+   var ctx = graphic._handle;
+       ctx.lineCap = 'round';
+   var provinces = countryRes.data().provinces(),
+      count = provinces.count(),
+      province,boundaries,boundary,positions,items,panX,panY,x,y,scale;
+   for(var n = 0 ;  n < count ; n++){
+      province = provinces.at(n);
+      boundaries = province.boundaries();
+     for(var i = 0 ; i < boundaries._count ; i++){
+        items         = boundaries.items()[i];
+        positionCount = items._positionCount;
+        position      = items._positions;
+        panX          = -1000;
+        panY          = -400;
+        scale         = 14;
+        ctx.moveTo(position[0] * scale + panX,(90-position[1])*scale + panY);
+        for(var j=0; j < positionCount; j++){
+              x = position [0+j*2] * scale + panX;
+              y = (90-position[1+j*2]) * scale + panY;
+              ctx.lineTo( x , y );
+        }
+     }
+   }
+   ctx.strokeStyle = "rgb(1, 127, 156)";
+   ctx.lineWidth = 1;
+   ctx.stroke();
+}
+MO.FGui2DMap_onPaintCity = function FGui2DMap_onPaintCity(card){
+   var o = this;
+   var cityConsole = MO.Console.find(MO.FEaiResourceConsole).cityModule();
+   var cityData =  cityConsole.findByCard("1410"),
+       x=cityData._location.x,
+       y=cityData._location.y;
+   console.log(x+"..."+y);
 }
 MO.FGui2DMap_dispose = function FGui2DMap_dispose(){
    var o = this;

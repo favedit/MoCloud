@@ -139,6 +139,12 @@ public class FStatisticsFinancialDynamicUnit
    // 字段客户命令数值的定义。
    protected double _customerActionAmount;
 
+   // 存储字段客户命令利息的定义。
+   private double __customerActionInterest;
+
+   // 字段客户命令利息的定义。
+   protected double _customerActionInterest;
+
    // 存储字段创建用户标识的定义。
    private long __createUserId;
 
@@ -710,6 +716,33 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
+   // <T>判断客户命令利息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerActionInterestChanged(){
+      return __customerActionInterest != _customerActionInterest;
+   }
+
+   //============================================================
+   // <T>获得客户命令利息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double customerActionInterest(){
+      return _customerActionInterest;
+   }
+
+   //============================================================
+   // <T>设置客户命令利息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerActionInterest(double value){
+      _customerActionInterest = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -866,6 +899,8 @@ public class FStatisticsFinancialDynamicUnit
             return _customerActionDate.toString();
          case "customer_action_amount":
             return RDouble.toString(_customerActionAmount);
+         case "customer_action_interest":
+            return RDouble.toString(_customerActionInterest);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -947,6 +982,9 @@ public class FStatisticsFinancialDynamicUnit
             break;
          case "customer_action_amount":
             _customerActionAmount = RDouble.parse(value);
+            break;
+         case "customer_action_interest":
+            _customerActionInterest = RDouble.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -1055,6 +1093,10 @@ public class FStatisticsFinancialDynamicUnit
                __customerActionAmount = RDouble.parse(value);
                _customerActionAmount = __customerActionAmount;
                break;
+            case "customer_action_interest":
+               __customerActionInterest = RDouble.parse(value);
+               _customerActionInterest = __customerActionInterest;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -1103,6 +1145,7 @@ public class FStatisticsFinancialDynamicUnit
       row.set("customerActionCd", _customerActionCd);
       row.set("customerActionDate", _customerActionDate);
       row.set("customerActionAmount", _customerActionAmount);
+      row.set("customerActionInterest", _customerActionInterest);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1137,6 +1180,7 @@ public class FStatisticsFinancialDynamicUnit
       map.put("customerActionCd", RInteger.toString(_customerActionCd));
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerActionAmount", RDouble.toString(_customerActionAmount));
+      map.put("customerActionInterest", RDouble.toString(_customerActionInterest));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

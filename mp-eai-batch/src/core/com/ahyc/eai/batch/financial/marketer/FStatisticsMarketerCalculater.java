@@ -5,6 +5,8 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerAmountLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerAmountUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerCustomerLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerCustomerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerPhaseLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerPhaseUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
@@ -35,6 +37,7 @@ public class FStatisticsMarketerCalculater
                             String endDate){
       // 代码修正
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
+      FStatisticsFinancialMarketerCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialMarketerCustomerLogic.class);
       FStatisticsFinancialMarketerAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialMarketerAmountLogic.class);
       FStatisticsFinancialMarketerPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialMarketerPhaseLogic.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
@@ -44,9 +47,41 @@ public class FStatisticsMarketerCalculater
          long recordId = dynamicUnit.ouid();
          long marketerId = dynamicUnit.marketerId();
          String marketerLabel = dynamicUnit.marketerLabel();
+         long customerId = dynamicUnit.customerId();
          int customerActionCd = dynamicUnit.customerActionCd();
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
+         double customerActionInterest = dynamicUnit.customerActionInterest();
+         //............................................................
+         // 统计客户信息
+         FStatisticsFinancialMarketerCustomerUnit customerUnit = customerLogic.search("MARKETER_ID=" + marketerId + " AND CUSTOMER_ID=" + customerId);
+         boolean customerExist = (customerUnit != null);
+         if(!customerExist){
+            customerUnit = customerLogic.doPrepare();
+            customerUnit.setMarketerId(marketerId);
+            customerUnit.setCustomerId(customerId);
+         }
+         double customerInvestmentTotal = customerUnit.investmentTotal();
+         double customerRedemptionTotal = customerUnit.redemptionTotal();
+         double customerInterestTotal = customerUnit.interestTotal();
+         if(customerActionCd == EGcFinancialCustomerAction.Investment){
+            customerInvestmentTotal += customerActionAmount;
+            customerUnit.setInvestmentTotal(customerInvestmentTotal);
+         }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+            customerRedemptionTotal += customerActionAmount;
+            customerUnit.setRedemptionTotal(customerRedemptionTotal);
+            customerInterestTotal += customerActionInterest;
+            customerUnit.setInterestTotal(customerInterestTotal);
+         }else{
+            throw new FFatalError("Marketer action invalid.");
+         }
+         customerUnit.setNetinvestmentTotal(customerInvestmentTotal - customerRedemptionTotal);
+         if(customerExist){
+            customerLogic.doUpdate(customerUnit);
+         }else{
+            customerLogic.doInsert(customerUnit);
+         }
+         //............................................................
          // 统计合计信息
          FStatisticsFinancialMarketerAmountUnit amountUnit = amountLogic.search("MARKETER_ID=" + marketerId);
          boolean amountExist = (amountUnit != null);
@@ -55,25 +90,34 @@ public class FStatisticsMarketerCalculater
             amountUnit.setMarketerId(marketerId);
             amountUnit.setMarketerLabel(marketerLabel);
          }
-         double investmentTotal = amountUnit.investmentTotal();
-         double redemptionTotal = amountUnit.redemptionTotal();
-         //double customerTotal = amountUnit.customerTotal();
+         // 计算资金信息
+         double marketerInvestmentTotal = amountUnit.investmentTotal();
+         double marketerRedemptionTotal = amountUnit.redemptionTotal();
+         double marketerInterestTotal = amountUnit.interestTotal();
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
-            investmentTotal += customerActionAmount;
-            amountUnit.setInvestmentTotal(investmentTotal);
-            //amountUnit.setCustomerTotal(customerTotal);
+            marketerInvestmentTotal += customerActionAmount;
+            amountUnit.setInvestmentTotal(marketerInvestmentTotal);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
-            redemptionTotal += customerActionAmount;
-            amountUnit.setRedemptionTotal(redemptionTotal);
+            marketerRedemptionTotal += customerActionAmount;
+            amountUnit.setRedemptionTotal(marketerRedemptionTotal);
+            marketerInterestTotal += customerActionInterest;
+            amountUnit.setInterestTotal(marketerInterestTotal);
          }else{
             throw new FFatalError("Marketer action invalid.");
          }
-         amountUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
+         amountUnit.setNetinvestmentTotal(marketerInvestmentTotal - marketerRedemptionTotal);
+         // 计算客户信息
+         int customerTotal = amountUnit.customerTotal();
+         if(!customerExist){
+            customerTotal += 1;
+            amountUnit.setCustomerTotal(customerTotal);
+         }
          if(amountExist){
             amountLogic.doUpdate(amountUnit);
          }else{
             amountLogic.doInsert(amountUnit);
          }
+         //............................................................
          // 插入用户数据
          TDateTime spanDate = new TDateTime(customerActionDate.get());
          spanDate.truncate(_recordSpan);
@@ -94,18 +138,26 @@ public class FStatisticsMarketerCalculater
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());
-         phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
+         // 计算资金信息
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
             phaseUnit.setMarketerInvestment(phaseUnit.marketerInvestment() + customerActionAmount);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
             phaseUnit.setMarketerRedemption(phaseUnit.marketerRedemption() + customerActionAmount);
+            phaseUnit.setMarketerInterest(phaseUnit.marketerInterest() + customerActionInterest);
          }else{
             throw new FFatalError("Marketer action invalid.");
          }
-         phaseUnit.setMarketerInvestmentTotal(investmentTotal);
-         phaseUnit.setMarketerRedemptionTotal(redemptionTotal);
+         phaseUnit.setMarketerInvestmentTotal(marketerInvestmentTotal);
+         phaseUnit.setMarketerRedemptionTotal(marketerRedemptionTotal);
          phaseUnit.setMarketerNetinvestment(phaseUnit.marketerInvestment() - phaseUnit.marketerRedemption());
-         phaseUnit.setMarketerNetinvestmentTotal(investmentTotal - redemptionTotal);
+         phaseUnit.setMarketerNetinvestmentTotal(marketerInvestmentTotal - marketerRedemptionTotal);
+         phaseUnit.setMarketerInterestTotal(marketerInterestTotal);
+         // 计算客户信息
+         phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
+         if(!customerExist){
+            phaseUnit.setCustomerRegister(phaseUnit.customerRegister() + 1);
+         }
+         phaseUnit.setCustomerTotal(customerTotal);
          if(phaseExist){
             phaseLogic.doUpdate(phaseUnit);
          }else{

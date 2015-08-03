@@ -90,6 +90,12 @@ public class FStatisticsFinancialDepartmentPhaseLogic
    // 字段部门净投总计的定义。
    public final static SLogicFieldInfo DEPARTMENT_NETINVESTMENT_TOTAL = new SLogicFieldInfo("DEPARTMENT_NETINVESTMENT_TOTAL");
 
+   // 字段部门利息的定义。
+   public final static SLogicFieldInfo DEPARTMENT_INTEREST = new SLogicFieldInfo("DEPARTMENT_INTEREST");
+
+   // 字段部门利息总计的定义。
+   public final static SLogicFieldInfo DEPARTMENT_INTEREST_TOTAL = new SLogicFieldInfo("DEPARTMENT_INTEREST_TOTAL");
+
    // 字段部门绩效的定义。
    public final static SLogicFieldInfo DEPARTMENT_PERFORMANCE = new SLogicFieldInfo("DEPARTMENT_PERFORMANCE");
 
@@ -124,7 +130,7 @@ public class FStatisticsFinancialDepartmentPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_INVESTMENT`,`DEPARTMENT_INVESTMENT_TOTAL`,`DEPARTMENT_REDEMPTION`,`DEPARTMENT_REDEMPTION_TOTAL`,`DEPARTMENT_NETINVESTMENT`,`DEPARTMENT_NETINVESTMENT_TOTAL`,`DEPARTMENT_PERFORMANCE`,`DEPARTMENT_PERFORMANCE_TOTAL`,`MARKETER_REGISTER`,`MARKETER_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_INVESTMENT`,`DEPARTMENT_INVESTMENT_TOTAL`,`DEPARTMENT_REDEMPTION`,`DEPARTMENT_REDEMPTION_TOTAL`,`DEPARTMENT_NETINVESTMENT`,`DEPARTMENT_NETINVESTMENT_TOTAL`,`DEPARTMENT_INTEREST`,`DEPARTMENT_INTEREST_TOTAL`,`DEPARTMENT_PERFORMANCE`,`DEPARTMENT_PERFORMANCE_TOTAL`,`MARKETER_REGISTER`,`MARKETER_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造部门阶段统计表逻辑单元。</T>
@@ -732,6 +738,8 @@ public class FStatisticsFinancialDepartmentPhaseLogic
       cmd.append(",`DEPARTMENT_REDEMPTION_TOTAL`");
       cmd.append(",`DEPARTMENT_NETINVESTMENT`");
       cmd.append(",`DEPARTMENT_NETINVESTMENT_TOTAL`");
+      cmd.append(",`DEPARTMENT_INTEREST`");
+      cmd.append(",`DEPARTMENT_INTEREST_TOTAL`");
       cmd.append(",`DEPARTMENT_PERFORMANCE`");
       cmd.append(",`DEPARTMENT_PERFORMANCE_TOTAL`");
       cmd.append(",`MARKETER_REGISTER`");
@@ -865,6 +873,10 @@ public class FStatisticsFinancialDepartmentPhaseLogic
       cmd.append(unit.departmentNetinvestment());
       cmd.append(',');
       cmd.append(unit.departmentNetinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.departmentInterest());
+      cmd.append(',');
+      cmd.append(unit.departmentInterestTotal());
       cmd.append(',');
       cmd.append(unit.departmentPerformance());
       cmd.append(',');
@@ -1110,6 +1122,14 @@ public class FStatisticsFinancialDepartmentPhaseLogic
       if(unit.isDepartmentNetinvestmentTotalChanged()){
          cmd.append(",`DEPARTMENT_NETINVESTMENT_TOTAL`=");
          cmd.append(unit.departmentNetinvestmentTotal());
+      }
+      if(unit.isDepartmentInterestChanged()){
+         cmd.append(",`DEPARTMENT_INTEREST`=");
+         cmd.append(unit.departmentInterest());
+      }
+      if(unit.isDepartmentInterestTotalChanged()){
+         cmd.append(",`DEPARTMENT_INTEREST_TOTAL`=");
+         cmd.append(unit.departmentInterestTotal());
       }
       if(unit.isDepartmentPerformanceChanged()){
          cmd.append(",`DEPARTMENT_PERFORMANCE`=");

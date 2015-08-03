@@ -12,6 +12,8 @@
   <FieldDouble _uuid="6ed78b60-12fa-4dd8-94d5-a3d10edda249" name="marketer_redemption_total" label="M#12cn17理财师赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_REDEMPTION_TOTAL" />
   <FieldDouble _uuid="e6a3cc38-4c7a-41b1-8ac0-7c81deaac2da" name="marketer_netinvestment" label="M#12cn15理财师净投" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_NETINVESTMENT" />
   <FieldDouble _uuid="2fa24025-df45-41ea-8dff-92e529a3ec67" name="marketer_netinvestment_total" label="M#12cn17理财师净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="a5557925-0a4a-4bad-abe9-60aa929cff21" name="marketer_interest" label="M#12cn15理财师利息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_INTEREST" />
+  <FieldDouble _uuid="31512b8b-3c76-469a-8ccd-52212757cb4b" name="marketer_interest_total" label="M#12cn17理财师利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_INTEREST_TOTAL" />
   <FieldDouble _uuid="f933df0e-f18f-424c-8227-ed017507bbf2" name="marketer_performance" label="M#12cn15理财师绩效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_PERFORMANCE" />
   <FieldDouble _uuid="ee212b9a-378e-4005-bfa3-fbca201c736d" name="marketer_performance_total" label="M#12cn17理财师绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_PERFORMANCE_TOTAL" />
   <FieldDateTime _uuid="9afe5e87-2440-4142-98a4-4d21ef9323c6" name="customer_action_date" label="M#12cn16客户命令日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />

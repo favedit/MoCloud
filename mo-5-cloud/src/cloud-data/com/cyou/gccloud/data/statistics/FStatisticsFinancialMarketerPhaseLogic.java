@@ -96,6 +96,12 @@ public class FStatisticsFinancialMarketerPhaseLogic
    // 字段理财师净投总计的定义。
    public final static SLogicFieldInfo MARKETER_NETINVESTMENT_TOTAL = new SLogicFieldInfo("MARKETER_NETINVESTMENT_TOTAL");
 
+   // 字段理财师利息的定义。
+   public final static SLogicFieldInfo MARKETER_INTEREST = new SLogicFieldInfo("MARKETER_INTEREST");
+
+   // 字段理财师利息总计的定义。
+   public final static SLogicFieldInfo MARKETER_INTEREST_TOTAL = new SLogicFieldInfo("MARKETER_INTEREST_TOTAL");
+
    // 字段理财师绩效的定义。
    public final static SLogicFieldInfo MARKETER_PERFORMANCE = new SLogicFieldInfo("MARKETER_PERFORMANCE");
 
@@ -124,7 +130,7 @@ public class FStatisticsFinancialMarketerPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`MARKETER_INVESTMENT`,`MARKETER_INVESTMENT_TOTAL`,`MARKETER_REDEMPTION`,`MARKETER_REDEMPTION_TOTAL`,`MARKETER_NETINVESTMENT`,`MARKETER_NETINVESTMENT_TOTAL`,`MARKETER_PERFORMANCE`,`MARKETER_PERFORMANCE_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`MARKETER_ID`,`MARKETER_LABEL`,`MARKETER_INVESTMENT`,`MARKETER_INVESTMENT_TOTAL`,`MARKETER_REDEMPTION`,`MARKETER_REDEMPTION_TOTAL`,`MARKETER_NETINVESTMENT`,`MARKETER_NETINVESTMENT_TOTAL`,`MARKETER_INTEREST`,`MARKETER_INTEREST_TOTAL`,`MARKETER_PERFORMANCE`,`MARKETER_PERFORMANCE_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_REGISTER`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师阶段统计表逻辑单元。</T>
@@ -734,6 +740,8 @@ public class FStatisticsFinancialMarketerPhaseLogic
       cmd.append(",`MARKETER_REDEMPTION_TOTAL`");
       cmd.append(",`MARKETER_NETINVESTMENT`");
       cmd.append(",`MARKETER_NETINVESTMENT_TOTAL`");
+      cmd.append(",`MARKETER_INTEREST`");
+      cmd.append(",`MARKETER_INTEREST_TOTAL`");
       cmd.append(",`MARKETER_PERFORMANCE`");
       cmd.append(",`MARKETER_PERFORMANCE_TOTAL`");
       cmd.append(",`CUSTOMER_ACTION_DATE`");
@@ -881,6 +889,10 @@ public class FStatisticsFinancialMarketerPhaseLogic
       cmd.append(unit.marketerNetinvestment());
       cmd.append(',');
       cmd.append(unit.marketerNetinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.marketerInterest());
+      cmd.append(',');
+      cmd.append(unit.marketerInterestTotal());
       cmd.append(',');
       cmd.append(unit.marketerPerformance());
       cmd.append(',');
@@ -1137,6 +1149,14 @@ public class FStatisticsFinancialMarketerPhaseLogic
       if(unit.isMarketerNetinvestmentTotalChanged()){
          cmd.append(",`MARKETER_NETINVESTMENT_TOTAL`=");
          cmd.append(unit.marketerNetinvestmentTotal());
+      }
+      if(unit.isMarketerInterestChanged()){
+         cmd.append(",`MARKETER_INTEREST`=");
+         cmd.append(unit.marketerInterest());
+      }
+      if(unit.isMarketerInterestTotalChanged()){
+         cmd.append(",`MARKETER_INTEREST_TOTAL`=");
+         cmd.append(unit.marketerInterestTotal());
       }
       if(unit.isMarketerPerformanceChanged()){
          cmd.append(",`MARKETER_PERFORMANCE`=");

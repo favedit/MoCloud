@@ -47,6 +47,7 @@ public class FStatisticsCustomerCalculater
          int customerActionCd = dynamicUnit.customerActionCd();
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
+         double customerActionInterest = dynamicUnit.customerActionInterest();
          // 统计合计信息
          FStatisticsFinancialCustomerAmountUnit amountUnit = amountLogic.search("CUSTOMER_ID=" + customerId);
          boolean amountExist = (amountUnit != null);
@@ -57,12 +58,15 @@ public class FStatisticsCustomerCalculater
          }
          double investmentTotal = amountUnit.investmentTotal();
          double redemptionTotal = amountUnit.redemptionTotal();
+         double interestTotal = amountUnit.interestTotal();
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
             investmentTotal += customerActionAmount;
             amountUnit.setInvestmentTotal(investmentTotal);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
             redemptionTotal += customerActionAmount;
             amountUnit.setRedemptionTotal(redemptionTotal);
+            interestTotal += customerActionInterest;
+            amountUnit.setInterestTotal(interestTotal);
          }else{
             throw new FFatalError("Customer action invalid.");
          }
@@ -95,6 +99,7 @@ public class FStatisticsCustomerCalculater
             phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
             phaseUnit.setRedemption(phaseUnit.redemption() + customerActionAmount);
+            phaseUnit.setInterest(phaseUnit.interest() + customerActionInterest);
          }else{
             throw new FFatalError("Customer action invalid.");
          }
@@ -102,6 +107,7 @@ public class FStatisticsCustomerCalculater
          phaseUnit.setRedemptionTotal(redemptionTotal);
          phaseUnit.setNetinvestment(phaseUnit.investment() - phaseUnit.redemption());
          phaseUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
+         phaseUnit.setInterestTotal(interestTotal);
          if(phaseExist){
             phaseLogic.doUpdate(phaseUnit);
          }else{

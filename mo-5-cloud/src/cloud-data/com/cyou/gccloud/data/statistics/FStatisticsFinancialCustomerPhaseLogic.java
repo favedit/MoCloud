@@ -93,6 +93,12 @@ public class FStatisticsFinancialCustomerPhaseLogic
    // 字段净投总计的定义。
    public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
+   // 字段利息的定义。
+   public final static SLogicFieldInfo INTEREST = new SLogicFieldInfo("INTEREST");
+
+   // 字段利息总计的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
    // 字段绩效的定义。
    public final static SLogicFieldInfo PERFORMANCE = new SLogicFieldInfo("PERFORMANCE");
 
@@ -112,7 +118,7 @@ public class FStatisticsFinancialCustomerPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_ACTION_DATE`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_ACTION_DATE`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`INTEREST`,`INTEREST_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户阶段统计表逻辑单元。</T>
@@ -721,6 +727,8 @@ public class FStatisticsFinancialCustomerPhaseLogic
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`NETINVESTMENT`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`INTEREST`");
+      cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE`");
       cmd.append(",`PERFORMANCE_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
@@ -860,6 +868,10 @@ public class FStatisticsFinancialCustomerPhaseLogic
       cmd.append(unit.netinvestment());
       cmd.append(',');
       cmd.append(unit.netinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.interest());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
       cmd.append(',');
       cmd.append(unit.performance());
       cmd.append(',');
@@ -1094,6 +1106,14 @@ public class FStatisticsFinancialCustomerPhaseLogic
       if(unit.isNetinvestmentTotalChanged()){
          cmd.append(",`NETINVESTMENT_TOTAL`=");
          cmd.append(unit.netinvestmentTotal());
+      }
+      if(unit.isInterestChanged()){
+         cmd.append(",`INTEREST`=");
+         cmd.append(unit.interest());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
       }
       if(unit.isPerformanceChanged()){
          cmd.append(",`PERFORMANCE`=");

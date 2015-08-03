@@ -10,6 +10,8 @@
   <FieldDouble _uuid="7b224145-5e3a-4f0f-90b1-0cec86ef78f1" name="department_redemption_total" label="M#12cn16部门赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_REDEMPTION_TOTAL" />
   <FieldDouble _uuid="fc078db2-51a1-44b1-9207-016e06008365" name="department_netinvestment" label="M#12cn14部门净投" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_NETINVESTMENT" />
   <FieldDouble _uuid="b3b89d0f-7d62-4b64-b8a1-e6d6b6d26cde" name="department_netinvestment_total" label="M#12cn16部门净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="c3250364-9b5f-4ddc-87df-028aee40c74e" name="department_interest" label="M#12cn14部门利息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_INTEREST" />
+  <FieldDouble _uuid="5751fa50-6ef8-4468-84c6-8141191a5e95" name="department_interest_total" label="M#12cn16部门利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_INTEREST_TOTAL" />
   <FieldDouble _uuid="f8717a0d-db61-4fe5-89ae-e33aba56bfa7" name="department_performance" label="M#12cn14部门绩效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PERFORMANCE" />
   <FieldDouble _uuid="b6cdb045-76dd-4d08-987e-41b7a4e4c489" name="department_performance_total" label="M#12cn16部门绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PERFORMANCE_TOTAL" />
   <FieldInteger _uuid="fca9ad2e-3ab2-4c79-b202-a6bdd120deeb" name="marketer_register" label="M#12cn16理财师注册数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_REGISTER" />

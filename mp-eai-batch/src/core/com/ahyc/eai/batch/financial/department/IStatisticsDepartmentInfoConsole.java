@@ -5,7 +5,7 @@ import org.mo.data.logic.FLogicContext;
 //============================================================
 // <T>部门信息控制台接口。</T>
 //============================================================
-public interface IDepartmentInfoConsole
+public interface IStatisticsDepartmentInfoConsole
 {
    //============================================================
    // <T>查找部门信息。</T>
@@ -13,7 +13,7 @@ public interface IDepartmentInfoConsole
    // @param logicContext 逻辑环境
    // @param id 编号
    //============================================================
-   FDepartmentInfo find(FLogicContext logicContext,
+   FStatisticsDepartmentInfo find(FLogicContext logicContext,
                         long id);
 
    //============================================================

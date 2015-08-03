@@ -7,6 +7,7 @@
   <FieldDouble _uuid="b697ccee-c780-4be9-844c-105371310adf" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldDouble _uuid="acd32c8a-cf8f-48a4-a510-3013fe8772b9" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
   <FieldDouble _uuid="e750676b-e625-4fee-9952-779ef5a4ed68" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="2c12fded-8ff7-42a6-83bf-c588e5ee994f" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="ea8e0f1e-1315-444a-b6b5-e67317da30a1" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
   <FieldInteger _uuid="cb7703ee-77d8-4801-81ac-cf857d229ec4" name="customer_total" label="M#12cn14客户总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_TOTAL" />
   <FieldTemplate _uuid="bfa95880-da9e-41e3-8403-d4877e4852ff" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
