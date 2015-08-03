@@ -32,7 +32,7 @@ public class FAccessConsole
          pageNum = 0;
       }
       FDataPersonAccessAuthorityLogic logic = logicContext.findLogic(FDataPersonAccessAuthorityLogic.class);
-      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetchClass(FDataPersonAccessAuthorityUnit.class, null, null, _pageSize, pageNum);
+      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = logic.fetchClass(FDataPersonAccessAuthorityUnit.class, null, "CREATE_DATE DESC", _pageSize, pageNum);
       return unitlist;
    }
 

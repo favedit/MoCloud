@@ -57,17 +57,18 @@
             <div class="nav_search"></div>
          </div>
       </div>
-      <table id="access" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,rownumbers:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
+      <table id="access" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
          <thead>
             <tr>
                <th data-options="field:'ouid',halign:'center',align:'left'" width="60px">编号</th>
-               <th data-options="field:'logicCode',halign:'center',align:'left'" width="100px">logicCode</th>
-               <th data-options="field:'logicResult',halign:'center',align:'left'" width="100px">logicResult</th>
-               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="100px">logicMessage</th>
-               <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="300px">ip地址</th>
+               <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="120px">ip地址</th>
                <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">账号</th>
+               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="160px">操作信息</th>
+               <th data-options="field:'logicCode',halign:'center',align:'left'" width="140px">logicCode</th>
+               <th data-options="field:'logicResult',halign:'center',align:'left'" width="140px">logicResult</th>               
                <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">浏览器uri</th>
                <th data-options="field:'pageInfo',halign:'center',align:'left'" width="300px">页面信息</th>
+               <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
             </tr>
          </thead>
       </table>

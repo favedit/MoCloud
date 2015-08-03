@@ -73,17 +73,18 @@
             <div class="nav_search"></div>
          </div>
       </div>
-      <table id="userAccess" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,rownumbers:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
+      <table id="userAccess" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
          <thead>
             <tr>
-               <th data-options="field:'ouid',halign:'center',align:'left'" width="60px">编号</th>
-               <th data-options="field:'hostAddress',halign:'center',align:'left'" width="100px">IP地址</th>
-               <th data-options="field:'label',halign:'center',align:'left'" width="150px">说明</th>
-               <th data-options="field:'passport',halign:'center',align:'left'" width="100px">帐号</th>
-               <th data-options="field:'accessCd',halign:'center',align:'left',sortable:true,formatter:formatAccess" width="80px">权限</th>
-               <th data-options="field:'typeCd',halign:'center',align:'left',sortable:true,formatter:formatType" width="80px">是否永久</th>
-               <th data-options="field:'beginDate',halign:'center',align:'left',sortable:true" width="140px">开始时间</th>
-               <th data-options="field:'endDate',halign:'center',align:'left',sortable:true" width="140px">结束时间</th>
+               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
+               <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="120px">IP地址</th>
+               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">帐号</th>
+               <th data-options="field:'accessCd',halign:'center',align:'center',sortable:true,formatter:formatAccess" width="60px">权限</th>
+               <th data-options="field:'typeCd',halign:'center',align:'center',sortable:true,formatter:formatType" width="60px">是否永久</th>
+               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="400px">说明</th>
+               <th data-options="field:'beginDate',halign:'center',align:'center',sortable:true" width="140px">开始时间</th>
+               <th data-options="field:'endDate',halign:'center',align:'center',sortable:true" width="140px">结束时间</th>
+               <th data-options="field:'createDate',halign:'center',align:'left',sortable:true" width="140px">创建时间</th>
                <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton" width="140px">操作</th>
             </tr>
          </thead>
