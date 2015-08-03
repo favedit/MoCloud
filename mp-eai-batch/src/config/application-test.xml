@@ -12,11 +12,6 @@
    <Define name='application.content'>${application.web}/WEB-INF/content</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
-
-   <!-- 服务器设定 -->
-   <Define name='cloud.server.storage.local'>http://localhost:93</Define>
-   <Define name='cloud.server.storage.remote'>http://localhost:93</Define>
-   <Define name='cloud.server.logger.local'>http://localhost:94</Define>
    
    <!-- 包含：系统设定 -->
    <Include>${application.config}/common/define.xml</Include>
