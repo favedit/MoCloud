@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/content-core"/>
 	<classpathentry kind="src" path="src/content-describe"/>
+	<classpathentry kind="src" path="src/content-servlet"/>
 	<classpathentry kind="src" path="src/content-service"/>
 	<classpathentry kind="src" path="src/content-face"/>
 	<classpathentry kind="src" path="src/config"/>

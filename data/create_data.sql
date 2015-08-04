@@ -1,4 +1,29 @@
 ﻿-- ------------------------------------------------------------
+-- Create table [Data.System.Access.Authority]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_SYS_ACCESS_AUTHORITY`;
+CREATE TABLE `DT_SYS_ACCESS_AUTHORITY` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LABEL`                         VARCHAR(200), 
+   `HOST_ADDRESS`                  VARCHAR(40), 
+   `HOST_PORT`                     INTEGER, 
+   `ACCESS_CD`                     INTEGER, 
+   `BEGIN_DATE`                    DATETIME, 
+   `END_DATE`                      DATETIME, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_SYS_ACCESS_AUTHORITY 
+   ADD CONSTRAINT DT_SYS_ACS_AUT_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Person.User]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_PSN_USER`;

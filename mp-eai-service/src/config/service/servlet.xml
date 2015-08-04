@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 统计动态数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.dynamic'
+         face  = 'com.ahyc.eai.service.financial.IStatisticsDynamicServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.IStatisticsDynamicServlet'
+         class = 'com.ahyc.eai.service.financial.FStatisticsDynamicServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 统计客户数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.customer'
+         face  = 'com.ahyc.eai.service.financial.customer.IStatisticsCustomerServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.customer.IStatisticsCustomerServlet'
+         class = 'com.ahyc.eai.service.financial.customer.FStatisticsCustomerServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 统计理财师数据处理                                           -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.marketer'
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'
+         class = 'com.ahyc.eai.service.financial.marketer.FStatisticsMarketerServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 统计部门数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.department'
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'
+         class = 'com.ahyc.eai.service.financial.department.FStatisticsDepartmentServlet'
+         scope = 'global'/>
+
+</Config>

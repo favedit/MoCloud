@@ -50,17 +50,17 @@ public class RSql
       if(!RString.isEmpty(value)){
          StringBuffer buffer = new StringBuffer();
          for(char ch : value.toCharArray()){
-            if('\'' == ch){
+            if(ch == '\''){
                buffer.append("\\'");
-            }else if('"' == ch){
+            }else if(ch == '"'){
                buffer.append("\\\"");
-            }else if('\\' == ch){
+            }else if(ch == '\\'){
                buffer.append("\\\\");
-            }else if('\t' == ch){
+            }else if(ch == '\t'){
                buffer.append("\\t");
-            }else if('\r' == ch){
+            }else if(ch == '\r'){
                continue;
-            }else if('\n' == ch){
+            }else if(ch == '\n'){
                buffer.append("\\n");
             }else{
                buffer.append(ch);

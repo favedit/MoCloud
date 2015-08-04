@@ -3,9 +3,9 @@
 <Configuration>
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
-   <Define name='application.name'>eai.service</Define>
+   <Define name='application.name'>mp-eai-service</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
-   <Define name='application.deploy'>${application}/deploy</Define>
+   <Define name='application.deploy'>${application.root}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
    <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
    <Define name='application.space'>${application.web}/WEB-INF/config</Define>
@@ -33,5 +33,5 @@
    <Include>${application.config}/service/face.xml</Include>
 
    <!-- 包含：环境设定 -->
-   <Include>${application.config}/environment/environment-test.xml</Include>
+   <Include>${application.config}/environment/environment-home.xml</Include>
 </Configuration>

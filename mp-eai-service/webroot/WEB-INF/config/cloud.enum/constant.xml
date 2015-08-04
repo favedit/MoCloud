@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Group _uuid="c0ffcc58-5bc3-44b8-beac-b90ca14fde62" name="constant" label="逻辑常量" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="MoMgEnumConstant" code="Egr" code_name="GmConstant" full_code="EnumConstant" display_index="21" project_name="/Common/MoMessage" project_code="Mg" is_include="Y">
-  <Constant _uuid="k0VrT3laDfbJJXNlgWM1oQ" name="common.guid.max-length" label="链接唯一编号最大长度" is_valid="Y" note="M#" is_server_cpp="Y" is_server_java="N" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="N" type_cd="Uint32" code="MO_GM_COMMON_GUID_MAXLEN" value="64" />
-  <Constant _uuid="CES1rV]xnBCRVh4CCqBPhg" name="template.note.max-length" label="模板内容最大长度" is_valid="Y" note="M#" is_server="N" is_server_cpp="Y" is_server_java="N" is_client="N" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="N" type_cd="Uint32" code="MO_GM_TPL_NOTE_MAXLEN" value="1024" />
-</Group>
-
