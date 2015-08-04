@@ -73,7 +73,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_CACHE</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiTest1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B81D804E5CB416219</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -98,7 +98,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DATA</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiTest1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B81D804E5CB416219</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -113,7 +113,32 @@
          </Parameter>
       </Initialize>
       <!-- ============================================================ -->
-      <!-- 数据链接控制台                                               -->
+      <!-- 统计链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>statictics</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_STATICTICS</Property>
+               <Property name='passport'>eai</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B81D804E5CB416219</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 日志链接控制台                                               -->
       <!-- ============================================================ -->
       <Initialize name='add'>
          <Parameter>
@@ -123,7 +148,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_LOGGER</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiTest1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B81D804E5CB416219</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>

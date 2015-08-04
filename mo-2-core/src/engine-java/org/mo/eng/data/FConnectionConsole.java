@@ -9,6 +9,7 @@ import org.mo.com.collections.FSlots;
 import org.mo.com.console.FConsole;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.data.MSqlConnection;
+import org.mo.com.encoding.REncryption;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
@@ -71,9 +72,13 @@ public class FConnectionConsole
    @AProperty
    protected String _passport;
 
-   // 登录密码
+   // 登录密码[未加密]
    @AProperty
    protected String _password;
+
+   // 登录密码[加密]
+   @AProperty
+   protected String _encryptPassword;
 
    // 是否支持事务
    @AProperty
@@ -173,6 +178,7 @@ public class FConnectionConsole
    //
    // @return 驱动类名称
    //============================================================ 
+   @Override
    public String driverClass(){
       return _driverClass;
    }
@@ -191,6 +197,7 @@ public class FConnectionConsole
    //
    // @return 驱动名称
    //============================================================ 
+   @Override
    public String driverName(){
       return _driverName;
    }
@@ -209,6 +216,7 @@ public class FConnectionConsole
    //
    // @return 链接地址
    //============================================================ 
+   @Override
    public String url(){
       return _url;
    }
@@ -227,6 +235,7 @@ public class FConnectionConsole
    //
    // @return 登录名称
    //============================================================ 
+   @Override
    public String passport(){
       return _passport;
    }
@@ -263,6 +272,7 @@ public class FConnectionConsole
    //
    // @return 链接初始化个数
    //============================================================ 
+   @Override
    public int initConnectionNumber(){
       return _initConnectionNumber;
    }
@@ -281,6 +291,7 @@ public class FConnectionConsole
    //
    // @return 链接最大个数
    //============================================================ 
+   @Override
    public int maxConnectionNumber(){
       return _maxConnectionNumber;
    }
@@ -362,10 +373,16 @@ public class FConnectionConsole
                break;
             }
             try{
-               if(RString.isEmpty(_passport, _password)){
+               if(RString.isEmpty(_passport)){
+                  // 使用URL登录
                   sqlConnection = DriverManager.getConnection(url);
                }else{
-                  sqlConnection = DriverManager.getConnection(url, _passport, _password);
+                  // 使用用户名和密码登录
+                  String password = _password;
+                  if(!RString.isEmpty(_encryptPassword)){
+                     password = REncryption.decodeString(_passport, _encryptPassword);
+                  }
+                  sqlConnection = DriverManager.getConnection(url, _passport, password);
                }
                if(sqlConnection != null){
                   isClosed = sqlConnection.isClosed();

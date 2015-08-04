@@ -25,20 +25,10 @@
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' >
       <Property name='enable'>Y</Property>
-      <Property name='storage_host'>10.127.3.11</Property>
+      <Property name='storage_host'>127.0.0.1</Property>
       <Property name='storage_port'>27017</Property>
-      <Property name='storage_name'>content</Property>
+      <Property name='storage_name'>eai</Property>
       <Initialize name='initialize'/>
-   </Component>
-   
-   <!-- ==================================================== -->
-   <!-- LogicServiceInfoConsole:逻辑服务信息控制台           -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.eai.logic.service.info.ILogicServiceInfoConsole'
-         class = 'org.mo.eai.logic.service.info.FLogicServiceInfoConsole'
-         scope = 'global'>
-      <Property name='serviceHost'>115.28.136.134</Property>
    </Component>
    
    <!-- ============================================================ -->
@@ -71,9 +61,9 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DP_CACHE</Property>
-               <Property name='passport'>cloud</Property>
-               <Property name='password'>cloud</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_CACHE</Property>
+               <Property name='passport'>eai</Property>
+               <Property name='password'>IAmCloudEaiTest1507</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -96,9 +86,9 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DP_DATA</Property>
-               <Property name='passport'>cloud</Property>
-               <Property name='password'>cloud</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DATA</Property>
+               <Property name='passport'>eai</Property>
+               <Property name='password'>IAmCloudEaiTest1507</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -113,7 +103,7 @@
          </Parameter>
       </Initialize>
       <!-- ============================================================ -->
-      <!-- 日志链接控制台                                               -->
+      <!-- 数据链接控制台                                               -->
       <!-- ============================================================ -->
       <Initialize name='add'>
          <Parameter>
@@ -121,9 +111,9 @@
                <Property name='name'>logger</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DP_LOGGER</Property>
-               <Property name='passport'>cloud</Property>
-               <Property name='password'>cloud</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_LOGGER</Property>
+               <Property name='passport'>eai</Property>
+               <Property name='password'>IAmCloudEaiTest1507</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>

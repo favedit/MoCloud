@@ -63,7 +63,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://rdsrmtuowdhu37dfpth41.mysql.rds.aliyuncs.com:3306/ezubao_php</Property>
                <Property name='passport'>ezubao_ai</Property>
-               <Property name='password'>c20c1fc7158f77oBb6d</Property>
+               <Property name='encryptPassword'>8E4934AF399382530728E65583CF7DBB5663D0</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -88,7 +88,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_CACHE</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiOnline1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B9AD31BF89411631B138D</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -113,7 +113,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DATA</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiOnline1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B9AD31BF89411631B138D</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -138,7 +138,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_STATISTICS</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiOnline1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B9AD31BF89411631B138D</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
@@ -163,7 +163,7 @@
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_LOGGER</Property>
                <Property name='passport'>eai</Property>
-               <Property name='password'>IAmCloudEaiOnline1507</Property>
+               <Property name='encryptPassword'>F3ABCDCF6E1A0DAD294F7B9AD31BF89411631B138D</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
