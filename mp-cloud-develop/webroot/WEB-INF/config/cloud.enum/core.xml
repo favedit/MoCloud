@@ -40,5 +40,7 @@
     <Item _uuid="d402954c-bfb4-498d-b3dd-fae844ba3408" name="OaSuccess" label="OA系统登录成功" is_valid="Y" note="M#" />
     <Item _uuid="107d9be3-45c7-4b63-a57c-52f7924520e9" name="OaPasswordInvald" label="OA密码错误" is_valid="Y" note="M#" />
     <Item _uuid="9950c964-068f-4d30-aa05-80397d562334" name="OaHostInvalid" label="OA主机非法" is_valid="Y" note="M#" />
+    <Item _uuid="7cedd56a-0c9a-4f3b-a7e4-498c3d63ee2c" name="PassportIllegal" label="用户名非法" is_valid="Y" note="M#" />
+    <Item _uuid="01a9d0c0-778a-454d-b31a-cb137410e876" name="PasswordIllegal" label="密码非法" is_valid="Y" note="M#" />
   </Enum>
 </Group>

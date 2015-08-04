@@ -87,6 +87,24 @@ public class EGcAuthorityResult
    // OA主机非法标签
    public final static String OaHostInvalidLabel = "OA主机非法";
 
+   // 用户名非法
+   public final static int PassportIllegal = 8;
+
+   // 用户名非法字符串
+   public final static String PassportIllegalString = "PassportIllegal";
+
+   // 用户名非法标签
+   public final static String PassportIllegalLabel = "用户名非法";
+
+   // 密码非法
+   public final static int PasswordIllegal = 9;
+
+   // 密码非法字符串
+   public final static String PasswordIllegalString = "PasswordIllegal";
+
+   // 密码非法标签
+   public final static String PasswordIllegalLabel = "密码非法";
+
    //============================================================
    // <T>是否含有指定内容</T>
    //
@@ -133,6 +151,10 @@ public class EGcAuthorityResult
             return OaPasswordInvaldString;
          case OaHostInvalid:
             return OaHostInvalidString;
+         case PassportIllegal:
+            return PassportIllegalString;
+         case PasswordIllegal:
+            return PasswordIllegalString;
          default:
             return "Unknown";
       }
@@ -162,6 +184,10 @@ public class EGcAuthorityResult
             return OaPasswordInvaldLabel;
          case OaHostInvalid:
             return OaHostInvalidLabel;
+         case PassportIllegal:
+            return PassportIllegalLabel;
+         case PasswordIllegal:
+            return PasswordIllegalLabel;
          default:
             return "Unknown";
       }
@@ -191,6 +217,10 @@ public class EGcAuthorityResult
             return OaPasswordInvald;
          case OaHostInvalidString:
             return OaHostInvalid;
+         case PassportIllegalString:
+            return PassportIllegal;
+         case PasswordIllegalString:
+            return PasswordIllegal;
          default:
             return 0;
       }

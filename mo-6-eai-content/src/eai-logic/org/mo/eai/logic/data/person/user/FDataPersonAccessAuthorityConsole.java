@@ -84,6 +84,15 @@ public class FDataPersonAccessAuthorityConsole
                       String hostAddress,
                       String passport,
                       String password){
+      _logger.debug(this, "doLogin", "OA login begin. (passport={1},password={2})", passport, password);
+      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
+         _logger.debug(this, "doLogin", "OA login , the passport illegal. (passport={1})", passport);
+         return EGcAuthorityResult.PassportIllegal;
+      }
+      if(password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.length() > 18){
+         _logger.debug(this, "doLogin", "OA login , the password illegal. (password={1})", password);
+         return EGcAuthorityResult.PasswordIllegal;
+      }
       // 根据主机地址检查设置
       FDataPersonAccessAuthority hostAuthority = findByHostAddress(logicContext, hostAddress);
       if(hostAuthority != null){

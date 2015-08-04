@@ -85,9 +85,11 @@ public class FChartAction
    public String login(IWebContext context,
                        ILogicContext logicContext,
                        FChartPage page){
+
       // 获得参数
       String passport = page.passport();
       String password = page.password();
+
       String hostAddress = context.head("x-real-ip");
       if(RString.isEmpty(hostAddress)){
          hostAddress = context.head("x-forwarded-for");
@@ -95,6 +97,7 @@ public class FChartAction
             hostAddress = context.remoteAddress();
          }
       }
+
       // 登录处理
       String message = null;
       String logggerMessage = null;
@@ -124,6 +127,14 @@ public class FChartAction
          case EGcAuthorityResult.OaHostInvalid:
             logggerMessage = "OA主机非法。";
             message = "用户名或密码错误。";
+            break;
+         case EGcAuthorityResult.PassportIllegal:
+            logggerMessage = "用户名非法特殊字符。";
+            message = "用户名非法或含有特殊字符。";
+            break;
+         case EGcAuthorityResult.PasswordIllegal:
+            logggerMessage = "密码非法特殊字符。";
+            message = "密码非法或含有特殊字符。";
             break;
       }
       // 增加日志
