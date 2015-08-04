@@ -1,6 +1,6 @@
 package com.ahyc.eai.batch.financial.customer;
 
-import com.ahyc.eai.batch.financial.FStatisticsCalculater;
+import com.ahyc.eai.batch.common.FStatisticsPeriodCalculater;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerAmountLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerAmountUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerPhaseLogic;
@@ -8,31 +8,33 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerPhaseUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
-import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
 
 //============================================================
-// <T>统计计算器。</T>
+// <T>金融客户统计计算器。</T>
 //============================================================
 public class FStatisticsCustomerCalculater
-      extends FStatisticsCalculater
+      extends FStatisticsPeriodCalculater
 {
-   // 同步时间(1小时)
-   protected long _intervalSpan = 1000 * 60 * 60;
-
-   // 合计延迟(10秒)
-   protected long _recordDelay = 1000 * 10;
-
    // 合计间隔(1小时)
    protected long _recordSpan = 1000 * 60 * 60;
 
    //============================================================
+   // <T>构造金融客户统计计算器。</T>
+   //============================================================
+   public FStatisticsCustomerCalculater(){
+      _processCode = "financial.customer";
+      _periodField = "CUSTOMER_ACTION_DATE";
+      _periodTable = "ST_FIN_DYNAMIC";
+   }
+
+   //============================================================
    // <T>投资阶段处理。</T>
    //============================================================
+   @Override
    public void processPhase(FLogicContext logicContext,
                             String beginDate,
                             String endDate){
@@ -118,43 +120,6 @@ public class FStatisticsCustomerCalculater
          }
          // 统计处理
          processOnce();
-      }
-   }
-
-   //============================================================
-   // <T>逻辑处理。</T>
-   //============================================================
-   @Override
-   public void processLogic(FLogicContext logicContext){
-      ISqlConnection connection = logicContext.activeConnection("statistics");
-      // 获得最大编号
-      String currentDate = connection.executeScalar("SELECT DATE_FORMAT(SYSDATE(),'%Y%m%d%H%i%s') AS `CURRENT_DATE` FROM DUAL");
-      String sourceMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_DYNAMIC");
-      String targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MAX(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM ST_FIN_CUSTOMER_PHASE");
-      if(RString.isEmpty(targetMaxDate)){
-         targetMaxDate = connection.executeScalar("SELECT DATE_FORMAT(MIN(CUSTOMER_ACTION_DATE),'%Y%m%d%H%i%s') AS ACTION_DATE FROM ST_FIN_DYNAMIC");
-      }
-      // 每次同步数量
-      long currentTick = new TDateTime(currentDate).get() - _recordDelay;
-      long sourceMaxTick = new TDateTime(sourceMaxDate).get();
-      long targetMaxTick = new TDateTime(targetMaxDate).get();
-      long beginTick = targetMaxTick;
-      long endTick = targetMaxTick + _intervalSpan;
-      if(endTick > sourceMaxTick){
-         endTick = sourceMaxTick;
-      }
-      while(endTick < currentTick){
-         String beginTime = new TDateTime(beginTick).format();
-         String endTime = new TDateTime(endTick).format();
-         int count = connection.executeInteger("SELECT COUNT(*) FROM ST_FIN_DYNAMIC WHERE CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginTime + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endTime + "','%Y%m%d%H%i%s')");
-         if(count > 0){
-            break;
-         }
-         endTick += _intervalSpan;
-      }
-      // 同步阶段内数据
-      if(endTick > beginTick){
-         processPhase(logicContext, new TDateTime(beginTick).format(), new TDateTime(endTick).format());
       }
    }
 }

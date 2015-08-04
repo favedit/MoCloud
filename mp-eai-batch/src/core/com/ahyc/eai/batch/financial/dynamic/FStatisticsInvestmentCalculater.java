@@ -1,7 +1,8 @@
 package com.ahyc.eai.batch.financial.dynamic;
 
+import com.ahyc.eai.batch.common.FStatisticsCalculater;
+
 import com.ahyc.eai.batch.common.EDataConnection;
-import com.ahyc.eai.batch.financial.FStatisticsCalculater;
 import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentInfo;
 import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;

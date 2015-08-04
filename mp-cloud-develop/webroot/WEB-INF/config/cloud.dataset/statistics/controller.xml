@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="6529f157-0e9a-45cf-bbb1-a848160a818c" name="statistics.controller" label="M#12cn15统计控制表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Controller" data_name="ST_CONTROLLER" data_alias="ST_CTL" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="006eefc0-83db-4f66-83d4-7b0730efe4e8" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
+  <FieldBoolean _uuid="55e3d10c-c456-4ed8-ac8a-e4e28f810ab1" name="is_valid" label="M#12cn12有效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="IS_VALID" />
+  <FieldRecordId _uuid="18c10e2e-0ebc-49f7-8936-0f723c80427d" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="8e0a6b85-acf9-4d91-8c54-dac06e31d3e5" name="link_date" label="M#12cn14记录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldString _uuid="20c30a3e-247d-4a43-9c31-54f25fecbff1" name="process_class" label="M#12cn13处理类" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_CLASS" data_size="200" />
+  <FieldString _uuid="51246a95-5118-4c47-bfb8-5393f2b45ff6" name="process_parameters" label="M#12cn16处理参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_PARAMETERS" data_size="400" />
+  <FieldInteger _uuid="d91bbb62-9b74-4106-b6b3-a9af28e7fa3d" name="process_count" label="M#12cn14处理次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_COUNT" />
+  <FieldInteger _uuid="127e2339-fd48-4cd8-a6e3-eef00664d686" name="process_unit_total" label="M#12cn16处理单元总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_UNIT_TOTAL" />
+  <FieldInteger _uuid="fe14a11e-d7b1-407a-a7d2-f7d8c3407ec4" name="process_unit_count" label="M#12cn15处理单元数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_UNIT_COUNT" />
+  <FieldString _uuid="199795d5-026c-45fe-8614-4124bc753a7c" name="process_result" label="M#12cn14处理结果" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROCESS_RESULT" data_size="200" />
+  <FieldTemplate _uuid="7491d997-4a0a-4863-be24-c4db7ce6e2f2" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

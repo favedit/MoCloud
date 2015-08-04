@@ -1,12 +1,8 @@
 package com.ahyc.eai.batch.financial;
 
+import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
 import com.ahyc.eai.batch.financial.dynamic.FStatisticsInvestmentCalculater;
 import com.ahyc.eai.batch.financial.dynamic.FStatisticsRedemptionCalculater;
-
-import com.ahyc.eai.batch.financial.customer.FStatisticsCustomerCalculater;
-import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentCalculater;
-import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
-import com.ahyc.eai.batch.financial.marketer.FStatisticsMarketerCalculater;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
@@ -50,6 +46,7 @@ public class FStatisticsMonitor
          // 清空部门控制台
          IStatisticsDepartmentInfoConsole departmentInfoConsole = RAop.find(IStatisticsDepartmentInfoConsole.class);
          departmentInfoConsole.clear();
+         //............................................................
          // 计算投资
          FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
          investmentCalculater.process(logicContext);
@@ -58,18 +55,23 @@ public class FStatisticsMonitor
          FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
          redemptionCalculater.process(logicContext);
          processCount += redemptionCalculater.processCount();
-         // 统计客户信息
-         FStatisticsCustomerCalculater customerCalculater = new FStatisticsCustomerCalculater();
-         customerCalculater.process(logicContext);
-         processCount += customerCalculater.processCount();
-         // 统计理财师信息
-         FStatisticsMarketerCalculater marketerCalculater = new FStatisticsMarketerCalculater();
-         marketerCalculater.process(logicContext);
-         processCount += marketerCalculater.processCount();
-         // 统计部门信息
-         FStatisticsDepartmentCalculater departmentCalculater = new FStatisticsDepartmentCalculater();
-         departmentCalculater.process(logicContext);
-         processCount += departmentCalculater.processCount();
+         //         // 计算动态数据
+         //         FStatisticsDynamicCalculater dynamicCalculater = new FStatisticsDynamicCalculater();
+         //         dynamicCalculater.process(logicContext);
+         //         processCount += dynamicCalculater.processCount();
+         //         //............................................................
+         //         // 统计客户信息
+         //         FStatisticsCustomerCalculater customerCalculater = new FStatisticsCustomerCalculater();
+         //         customerCalculater.process(logicContext);
+         //         processCount += customerCalculater.processCount();
+         //         // 统计理财师信息
+         //         FStatisticsMarketerCalculater marketerCalculater = new FStatisticsMarketerCalculater();
+         //         marketerCalculater.process(logicContext);
+         //         processCount += marketerCalculater.processCount();
+         //         // 统计部门信息
+         //         FStatisticsDepartmentCalculater departmentCalculater = new FStatisticsDepartmentCalculater();
+         //         departmentCalculater.process(logicContext);
+         //         processCount += departmentCalculater.processCount();
       }catch(Exception exception){
          _logger.error(null, "main", exception);
       }

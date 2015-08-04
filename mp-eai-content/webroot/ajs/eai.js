@@ -7834,28 +7834,36 @@ MO.FEaiChartMarketerTable_drawRow = function FEaiChartMarketerTable_drawRow(grap
    textWidth = graphic.textWidth(text);
    graphic.drawText(text, x + widths[3] * 0.5 - textWidth * 0.5, y, fontColor);
    x += widths[3];
-   text = unit.customerLabel() + ' - ' + unit.customerPhone() + ' - ' + unit.customerActionCd();
+   text = unit.customerLabel() + ' - ' + unit.customerPhone();
    textWidth = graphic.textWidth(text);
    graphic.drawText(text, x + widths[4] * 0.5 - textWidth * 0.5, y, fontColor);
    x += widths[4];
-   var investment = MO.Lang.Float.format(unit.customerActionAmount(), null, null, 2, '0');
-   var investmentRight = x + widths[5] - 15;
-   if (investment.length > 7) {
-      var highColor = null;
-      if(investment.length > 9){
-         highColor = '#FDEF01';
+   var amount = MO.Lang.Float.format(unit.customerActionAmount(), null, null, 2, '0');
+   var amountRight = x + widths[5] - 15;
+   if(unit.customerActionCd() == 1){
+      if (amount.length > 7) {
+         var highColor = null;
+         if(amount.length > 9){
+            highColor = '#FDEF01';
+         }else{
+            highColor = '#EB6C03';
+         }
+         var high = amount.substring(0, amount.length - 7);
+         var low = amount.substring(amount.length - 7, amount.length);
+         var highWidth = graphic.textWidth(high);
+         var lowWidth = graphic.textWidth(low);
+         graphic.drawText(high, amountRight - lowWidth - highWidth, y, highColor);
+         graphic.drawText(low, amountRight - lowWidth, y, '#59FDE9');
       }else{
-         highColor = '#EB6C03';
+         textWidth = graphic.textWidth(amount);
+         graphic.drawText(amount, amountRight - textWidth, y, fontColor);
       }
-      var high = investment.substring(0, investment.length - 7);
-      var low = investment.substring(investment.length - 7, investment.length);
-      var highWidth = graphic.textWidth(high);
-      var lowWidth = graphic.textWidth(low);
-      graphic.drawText(high, investmentRight - lowWidth - highWidth, y, highColor);
-      graphic.drawText(low, investmentRight - lowWidth, y, '#59FDE9');
-   } else {
-      textWidth = graphic.textWidth(investment);
-      graphic.drawText(investment, investmentRight - textWidth, y, fontColor);
+   }else if(unit.customerActionCd() == 2){
+      var text = '-' + amount;
+      textWidth = graphic.textWidth(text);
+      graphic.drawText(text, amountRight - textWidth, y, '#FF0000');
+   }else{
+      throw new TError('Invalid action code.');
    }
 }
 MO.FEaiChartMarketerTable_dispose = function FEaiChartMarketerTable_dispose(){
