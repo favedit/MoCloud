@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="design3d.resource.MenuBar">
-   <MenuBar name="design3d.resource.MenuBar" type='FDsResourceMenuBar' label="菜单">
-      <MenuButton name='save' linker='_controlSave' icon='tools.save' label='保存'/>
-      <MenuButton name='refresh' linker='_controlRefresh' icon='tools.refresh' label='刷新'/>
-   </MenuBar>
-</Content>

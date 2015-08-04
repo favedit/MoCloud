@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <MenuBar name="resource.share.resource.MenuBar" type='FDsShareResourceMenuBar' label="菜单">
-      <MenuButton name='refresh' linker='_controlRefresh' icon='tools.refresh' label='刷新'/>
-   </MenuBar>
-</Content>

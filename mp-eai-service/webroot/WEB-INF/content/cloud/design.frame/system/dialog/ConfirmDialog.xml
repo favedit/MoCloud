@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="system.dialog.ConfirmDialog" update_date="20141210134046">
-   <Frame name="system.dialog.ConfirmDialog" type='FUiConfirmDialog' label="确认窗口" is_valid="Y" size='400,200' note="">
-      <Label name="text" linker='_controlText' label="内容" valid="Y" note="" />
-      <Button name="confirmButton" linker='_controlConfirmButton' label="确认" size='80,20' margin='4,0,4,0' wrap_cd='1'/>
-      <Button name="cancelButton" linker='_controlCancelButton' label="取消" size='80,20' margin='4,0,4,0' />
-   </Frame>
-</Content>

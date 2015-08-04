@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150623151632">
-  <Bar guid="9DA20697174544D492167C9C6A5ADABE" name="eai.chart.TitleBar" label="标题栏" size="1000,48">
-    <Button guid="00A7EC8887024876956F8677D1521F03" name="history" label="发展历程" location="0,0" size="212,48" fore_color="#1A9BD0" fore_font="bold 20px Microsoft YaHei" back_resource="url:{eai.resource}/button.png" back_hover_resource="url:{eai.resource}/button_hover.png"/>
-    <Button guid="FB6E647B4A2F4E7984BC4F0FF5542F41" name="industry" label="行业历史" location="240,0" size="212,48" fore_color="#1A9BD0" fore_font="bold 20px Microsoft YaHei" back_resource="url:{eai.resource}/button.png" back_hover_resource="url:{eai.resource}/button_hover.png"/>
-    <Button guid="F65EDF17AEDC404C8CED0214D153DD99" name="investment" label="投资历史" location="480,0" size="212,48" fore_color="#1A9BD0" fore_font="bold 20px Microsoft YaHei" back_resource="url:{eai.resource}/button.png" back_hover_resource="url:{eai.resource}/button_hover.png"/>
-    <Button guid="70AA230FF0DF4960BA62FB36F8DFCCDB" name="customer" label="用户历史" location="720,0" size="212,48" fore_color="#1A9BD0" fore_font="bold 20px Microsoft YaHei" back_resource="url:{eai.resource}/button.png" back_hover_resource="url:{eai.resource}/button_hover.png"/>
-  </Bar>
-</Content>

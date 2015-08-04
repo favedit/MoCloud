@@ -1,5 +1,8 @@
 package com.ahyc.eai.batch.financial;
 
+import com.ahyc.eai.batch.financial.dynamic.FStatisticsInvestmentCalculater;
+import com.ahyc.eai.batch.financial.dynamic.FStatisticsRedemptionCalculater;
+
 import com.ahyc.eai.batch.financial.customer.FStatisticsCustomerCalculater;
 import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentCalculater;
 import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;

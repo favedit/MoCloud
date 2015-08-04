@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content name="system.culture.Language" update_date="20141209154356">
-  <List _type="List" is_valid="Y" name="system.culture.Language" label="语言设置" cache="N" note="" _status="I">
-    <Item is_valid="Y" type="I" hotkey="" name="english" label="英文" value="" icon="" note="" />
-    <Item is_valid="Y" type="I" hotkey="" name="chinese" label="中文" value="" icon="" note="" />
-    <Item is_valid="Y" type="I" hotkey="" name="japanese" label="日文" value="" icon="" note="" />
-  </List>
-</Content>
