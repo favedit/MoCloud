@@ -36,10 +36,10 @@ public class FHeaderAction
    @Override
    public String construct(IWebContext context,
                            FBasePage basePage){
-      //      _logger.debug(this, "construct", "construct begin. (currentVersion={1})", _versonConsole.currentVersion());
+      _logger.debug(this, "construct", "construct begin. ");
       //      basePage.setVersion(_versonConsole.currentVersion());
 
-      return "#/manage/home/Header";
+      return "#/product/home/Header";
    }
 
    //============================================================
@@ -55,7 +55,7 @@ public class FHeaderAction
                              FBasePage basePage){
       _logger.debug(this, "Header", "Header productLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       //      tackAuthority(context, sqlContext, basePage);
-      return "/manage/manage/home/ProductLeft";
+      return "/manage/product/home/ProductLeft";
    }
 
    //============================================================
@@ -86,8 +86,8 @@ public class FHeaderAction
                             ISqlContext sqlContext,
                             FBasePage basePage){
       _logger.debug(this, "Header", "Header manageLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
-      tackAuthority(context, sqlContext, basePage);
-      return "#/manage/home/ManageLeft";
+      //      tackAuthority(context, sqlContext, basePage);
+      return "/manage/product/home/ManageLeft";
    }
 
    //============================================================

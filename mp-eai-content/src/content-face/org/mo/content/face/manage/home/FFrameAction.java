@@ -42,7 +42,7 @@ public class FFrameAction
                            FFramePage formPage,
                            FBasePage basePage){
       _logger.debug(this, "construct", "construct begin.");
-      return "/manage/manage/home/Frame";
+      return "/manage/product/home/Frame";
    }
 
    // ============================================================
