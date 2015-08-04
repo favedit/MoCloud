@@ -3,6 +3,8 @@ package com.ahyc.eai.service.financial.marketer;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseUnit;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -54,10 +56,37 @@ public class FStatisticsMarketerServlet
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
+      // 设置输出流
+      FByteStream stream = new FByteStream();
+      // 输出总计数据
+      FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
+      TDateTime phaseBeginDate = endDate.clone();
+      phaseBeginDate.addHour(-1);
+      String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
+      FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(RString.format(phaseWhereSql, phaseBeginDate.format(), endDate.format()), "ACTION_DATE DESC");
+      double investmentTotal = 0;
+      double redemptionTotal = 0;
+      double netinvestmentTotal = 0;
+      double performanceTotal = 0;
+      double interestTotal = 0;
+      if(!phaseDataset.isEmpty()){
+         FStatisticsFinancialPhaseUnit phaseUnit = phaseDataset.first();
+         investmentTotal = phaseUnit.investmentTotal();
+         redemptionTotal = phaseUnit.redemptionTotal();
+         netinvestmentTotal = phaseUnit.netinvestmentTotal();
+         interestTotal = phaseUnit.interestTotal();
+         performanceTotal = phaseUnit.performanceTotal();
+      }
+      stream.writeDouble(investmentTotal);
+      stream.writeDouble(redemptionTotal);
+      stream.writeDouble(netinvestmentTotal);
+      stream.writeDouble(interestTotal);
+      stream.writeDouble(performanceTotal);
+      //............................................................
+      // 输出即时数据
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       String whereSql = "CUSTOMER_ACTION_DATE >= STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
       FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(RString.format(whereSql, beginDate.format(), endDate.format()), "CUSTOMER_ACTION_DATE");
-      FByteStream stream = new FByteStream();
       int count = dynamicDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
@@ -69,7 +98,6 @@ public class FStatisticsMarketerServlet
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeUint8((byte)dynamicUnit.customerActionCd());
          stream.writeDouble(dynamicUnit.customerActionAmount());
-         System.out.println(dynamicUnit.customerActionDate().format() + " - " + dynamicUnit.customerLabel() + " - " + dynamicUnit.customerActionAmount());
       }
       int dataLength = stream.length();
       _logger.debug(this, "process", "Send statistics marketer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
@@ -92,9 +120,8 @@ public class FStatisticsMarketerServlet
                         IWebServletRequest request,
                         IWebServletResponse response){
       // 检查参数
-      String beginSource = context.parameter("begin_date");
-      String endSource = context.parameter("end_date");
-      //String span = context.parameter("span");
+      String beginSource = context.parameter("begin");
+      String endSource = context.parameter("end");
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
@@ -102,11 +129,28 @@ public class FStatisticsMarketerServlet
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long dateSpan = endDate.get() - beginDate.get();
-      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24)){
+      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24 * 7)){
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
+      // 设置输出流
       FByteStream stream = new FByteStream();
+      // 输出总计数据
+      FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
+      String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
+      FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(RString.format(phaseWhereSql, beginDate.format(), endDate.format()), "RECORD_DATE ASC");
+      int count = phaseDataset.count();
+      stream.writeInt32(count);
+      for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
+         stream.writeString(phaseUnit.recordDate().format());
+         stream.writeDouble(phaseUnit.investment());
+         stream.writeDouble(phaseUnit.redemption());
+         stream.writeDouble(phaseUnit.netinvestment());
+         stream.writeDouble(phaseUnit.interest());
+         stream.writeDouble(phaseUnit.performance());
+      }
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       //............................................................
       // 发送数据
       return sendStream(context, request, response, stream);

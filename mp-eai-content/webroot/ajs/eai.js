@@ -1135,9 +1135,9 @@ MO.FEaiLogicStatistics_doMarketerDynamic = function FEaiLogicStatistics_doMarket
    connection.addLoadListener(owner, callback);
    return connection;
 }
-MO.FEaiLogicStatistics_doMarketerTrend = function FEaiLogicStatistics_doMarketerTrend(owner, callback, startDate, endDate, interval){
+MO.FEaiLogicStatistics_doMarketerTrend = function FEaiLogicStatistics_doMarketerTrend(owner, callback, startDate, endDate){
    var o = this;
-   var url = 'http://localhost:8099/eai.financial.marketer.wv?do=trend&begin=' + startDate + '&end=' + endDate + '&interval=' + interval;
+   var url = 'http://localhost:8099/eai.financial.marketer.wv?do=trend&begin=' + startDate + '&end=' + endDate;
    var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
    connection.addLoadListener(owner, callback);
    return connection;
@@ -7136,6 +7136,34 @@ MO.FEaiStatisticsDate_dispose = function FEaiStatisticsDate_dispose(){
    o._value = MO.Lang.Object.dispose(o._value);
    o.__base.FGuiLabel.dispose.call(o);
 }
+MO.FEaiChartMarketerDynamic = function FEaiChartMarketerDynamic(o){
+   o = MO.Class.inherits(this, o, MO.FObject);
+   o._investmentTotal    = MO.Class.register(o, new MO.AGetter('_investmentTotal'));
+   o._redemptionTotal    = MO.Class.register(o, new MO.AGetter('_redemptionTotal'));
+   o._netinvestmentTotal = MO.Class.register(o, new MO.AGetter('_netinvestmentTotal'));
+   o._interestTotal      = MO.Class.register(o, new MO.AGetter('_interestTotal'));
+   o._performanceTotal   = MO.Class.register(o, new MO.AGetter('_performanceTotal'));
+   o.construct           = MO.FEaiChartMarketerDynamic_construct;
+   o.unserialize         = MO.FEaiChartMarketerDynamic_unserialize;
+   o.dispose             = MO.FEaiChartMarketerDynamic_dispose;
+   return o;
+}
+MO.FEaiChartMarketerDynamic_construct = function FEaiChartMarketerDynamic_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+}
+MO.FEaiChartMarketerDynamic_unserialize = function FEaiChartMarketerDynamic_unserialize(input){
+   var o = this;
+   o._investmentTotal = input.readDouble();
+   o._redemptionTotal = input.readDouble();
+   o._netinvestmentTotal = input.readDouble();
+   o._interestTotal = input.readDouble();
+   o._performanceTotal = input.readDouble();
+}
+MO.FEaiChartMarketerDynamic_dispose = function FEaiChartMarketerDynamic_dispose(){
+   var o = this;
+   o.__base.FObject.dispose.call(o);
+}
 MO.FEaiChartMarketerProcessor = function FEaiChartMarketerProcessor(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MGraphicObject, MO.MListener);
    o._dateSetup               = false;
@@ -7177,6 +7205,8 @@ MO.FEaiChartMarketerProcessor_onDynamicData = function FEaiChartMarketerProcesso
    var view = MO.Class.create(MO.FDataView);
    view.setEndianCd(true);
    view.link(event.content);
+   var dynamicInfo = o._dynamicInfo;
+   dynamicInfo.unserialize(view);
    var units = o._units;
    var count = view.readInt32();
    for(var i = 0; i < count; i++){
@@ -7204,6 +7234,7 @@ MO.FEaiChartMarketerProcessor_construct = function FEaiChartMarketerProcessor_co
    o._tableTicker = new MO.TTicker(1000 * o._tableInterval);
    o._autios = new Object();
    o._dataTicker = new MO.TTicker(1000 * 60 * o._intervalMinute);
+   o._dynamicInfo = MO.Class.create(MO.FEaiChartMarketerDynamic);
    o._rankUnits = new MO.TObjects();
    o._unitPool = MO.Class.create(MO.FObjectPool);
    o._eventDataChanged = new MO.SEvent(o);
@@ -7284,7 +7315,7 @@ MO.FEaiChartMarketerProcessor_process = function FEaiChartMarketerProcessor_proc
       statistics.doMarketerDynamic(o, o.onDynamicData, beginDate.format(), endDate.format());
       beginDate.assign(endDate);
    }
-   var currentTick = MO.RTimer.current();
+   var currentTick = MO.Timer.current();
    if(currentTick - o._tableTick > o._tableInterval){
       if(o._tableUnits.count() >= o._tableCount){
          var unit = o._tableUnits.pop();
@@ -7462,7 +7493,7 @@ MO.FEaiChartMarketerScene_setup = function FEaiChartMarketerScene_setup() {
    o.fixMatrix(display.matrix());
    dataLayer.push(display);
    var stage = o.activeStage();
-   var timeline = o._timeline = MO.Class.create(MO.FGui24HTimeline);
+   var timeline = o._timeline = MO.Class.create(MO.FEaiChartMarketerTimeline);
    timeline.setName('Timeline');
    timeline.linkGraphicContext(o);
    timeline.sync();
@@ -7871,6 +7902,288 @@ MO.FEaiChartMarketerTable_dispose = function FEaiChartMarketerTable_dispose(){
    o._units = MO.Lang.Object.dispose(o._units);
    o._backgroundPadding = MO.Lang.Object.dispose(o._backgroundPadding);
    o.__base.FGuiControl.dispose.call(o);
+}
+MO.FEaiChartMarketerTimeline = function FEaiChartMarketerTimeline(o) {
+   o = MO.Class.inherits(this, o, MO.FGuiControl);
+   o._startTime        = MO.Class.register(o, new MO.AGetSet('_startTime'));
+   o._endTime          = MO.Class.register(o, new MO.AGetSet('_endTime'));
+   o._ready            = false;
+   o._investmentTotal  = 0;
+   o._intervalMiniute  = 10;
+   o._baseHeight = 5;
+   o._degreeLineHeight = MO.Class.register(o, new MO.AGetSet('_degreeLineHeight'), 10);
+   o._triangleWidth    = MO.Class.register(o, new MO.AGetSet('_triangleWidth'), 10);
+   o._triangleHeight   = MO.Class.register(o, new MO.AGetSet('_triangleHeight'), 12);
+   o._decoLineGap      = MO.Class.register(o, new MO.AGetSet('_decoLineGap'), 10);
+   o._decoLineWidth    = MO.Class.register(o, new MO.AGetSet('_decoLineWidth'), 30);
+   o.oeUpdate          = MO.FEaiChartMarketerTimeline_oeUpdate;
+   o.construct         = MO.FEaiChartMarketerTimeline_construct;
+   o.sync              = MO.FEaiChartMarketerTimeline_sync;
+   o.drawTrend         = MO.FEaiChartMarketerTimeline_drawTrend;
+   o.onPaintBegin      = MO.FEaiChartMarketerTimeline_onPaintBegin;
+   o.on24HDataFetch    = MO.FEaiChartMarketerTimeline_on24HDataFetch;
+   return o;
+}
+MO.FEaiChartMarketerTimeline_construct = function FEaiChartMarketerTimeline_construct() {
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o._startTime = new MO.TDate();
+   o._endTime = new MO.TDate();
+   o._trendInfo = MO.Class.create(MO.FEaiChartMarketerTrendInfo);
+}
+MO.FEaiChartMarketerTimeline_sync = function FEaiChartMarketerTimeline_sync() {
+   var o = this;
+   if (!o._ready) {
+      return;
+   }
+   var systemLogic = MO.Console.find(MO.FEaiLogicConsole).system();
+   if(!systemLogic.testReady()){
+      return;
+   }
+   var currentDate = systemLogic.currentDate();
+   currentDate.truncMinute(o._intervalMiniute);
+   var startTime = o._startTime;
+   startTime.assign(currentDate);
+   startTime.addDay(-1);
+   var endTime = o._endTime;
+   endTime.assign(currentDate);
+   var statisticsLogic = MO.Console.find(MO.FEaiLogicConsole).statistics();
+   statisticsLogic.doMarketerTrend(o, o.on24HDataFetch, startTime.format(), endTime.format());
+}
+MO.FEaiChartMarketerTimeline_on24HDataFetch = function FEaiChartMarketerTimeline_on24HDataFetch(event) {
+   var o = this;   var content = event.content;
+   var view = MO.Class.create(MO.FDataView);
+   view.setEndianCd(true);
+   view.link(event.content);
+   var trendInfo = o._trendInfo;
+   trendInfo.unserialize(view);
+   view.dispose();
+   o.dirty();
+}
+MO.FEaiChartMarketerTimeline_oeUpdate = function FEaiChartMarketerTimeline_oeUpdate(event) {
+   var o = this;
+   o.__base.FGuiControl.oeUpdate.call(o, event);
+   if (o._ready) {
+      return;
+   }
+   var systemLogic = MO.Console.find(MO.FEaiLogicConsole).system();
+   if (systemLogic.testReady()) {
+      o._ready = true;
+      o.sync();
+   }
+   return MO.EEventStatus.Stop;
+}
+MO.FEaiChartMarketerTimeline_drawTrend = function FEaiChartMarketerTimeline_drawTrend(graphic, propertyName, dataLeft, dataTop, dataRight, dataBottom, dataHeight, bakTime, timeSpan, maxAmount, lineColor){
+   var o = this;
+   var startTime = o._startTime;
+   var trendInfo = o._trendInfo;
+   var units = trendInfo.trendUints();
+   var count = units.count();
+   var unitFirst = units.first();
+   var handle = graphic._handle;
+   handle.lineCap = 'round';
+   var pixPer10k = dataHeight * 10000 / maxAmount;
+   var amount = unitFirst[propertyName];
+   var lastX = dataLeft;
+   var lastY = dataBottom - amount / 10000 * pixPer10k;
+   handle.beginPath();
+   handle.moveTo(lastX, lastY);
+   var rateResource = MO.Console.find(MO.FEaiResourceConsole).rateModule().find(MO.EEaiRate.Investment);
+   for(var i = 1; i < count; i++){
+      var unit = units.get(i);
+      var value = unit[propertyName];
+      startTime.parseAuto(unit.recordDate());
+      startTime.refresh();
+      var degreeSpan = startTime.date.getTime() - bakTime;
+      var x = dataLeft + (dataRight - dataLeft) * (degreeSpan / timeSpan);
+      var y = dataBottom - value / 10000 * pixPer10k;
+      y -= o._baseHeight;
+      handle.lineTo(x, y);
+   }
+   var hexColor = MO.Lang.Hex.format(rateResource.findRate(0));
+   var bottomColor = '#' + hexColor.substring(2);
+   var opBottomColor = 'rgba(' + MO.Lang.Hex.parse(hexColor.substring(2, 4)) + ',' + MO.Lang.Hex.parse(hexColor.substring(4, 6)) + ',' + MO.Lang.Hex.parse(hexColor.substring(6, 8)) + ',' + '0.5)';
+   var hexColor = MO.Lang.Hex.format(rateResource.findRate(1));
+   var opTopColor = 'rgba(' + MO.Lang.Hex.parse(hexColor.substring(2, 4)) + ',' + MO.Lang.Hex.parse(hexColor.substring(4, 6)) + ',' + MO.Lang.Hex.parse(hexColor.substring(6, 8)) + ',' + '0.5)';
+   var gradient = graphic.createLinearGradient(0, dataBottom, 0, dataTop);
+   gradient.addColorStop('0', bottomColor);
+   gradient.addColorStop('1', lineColor);
+   var opGradient = graphic.createLinearGradient(0, dataBottom, 0, dataTop);
+   opGradient.addColorStop('0', opBottomColor);
+   opGradient.addColorStop('1', opTopColor);
+   handle.strokeStyle = gradient;
+   handle.lineWidth = 4;
+   handle.stroke();
+}
+MO.FEaiChartMarketerTimeline_onPaintBegin = function FEaiChartMarketerTimeline_onPaintBegin(event) {
+   var o = this;
+   if (!o._ready) {
+      return;
+   }
+   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   var graphic = event.graphic;
+   var rectangle = event.rectangle;
+   var top = rectangle.top;
+   var bottom = rectangle.top + rectangle.height;
+   var middle = bottom - 30;
+   var decoLeft = rectangle.left + 5;
+   var decoRight = rectangle.left + rectangle.width - 5;
+   var decoLineMargin = o.triangleWidth() + o.decoLineGap();
+   graphic.drawTriangle(decoLeft, middle, decoLeft + o.triangleWidth(), middle + o.triangleHeight() / 2, decoLeft + o.triangleWidth(), middle - o.triangleHeight() / 2, 1, '#F8CB3D', '#F8CB3D');
+   graphic.drawTriangle(decoRight, middle, decoRight - o.triangleWidth(), middle + o.triangleHeight() / 2, decoRight - o.triangleWidth(), middle - o.triangleHeight() / 2, 1, '#F8CB3D', '#F8CB3D');
+   graphic.drawLine(decoLeft + decoLineMargin, middle, decoLeft + decoLineMargin + o.decoLineWidth(), middle, '#F8CB3D', 3);
+   graphic.drawLine(decoRight - decoLineMargin, middle, decoRight - decoLineMargin - o.decoLineWidth(), middle, '#F8CB3D', 3);
+   var dataLeft = decoLeft + decoLineMargin + o.decoLineWidth();
+   var dataRight = decoRight - decoLineMargin - o.decoLineWidth();
+   var dataTop = top + 60;
+   var dataBottom = bottom - 30;
+   var dataHeight = dataBottom - dataTop;
+   graphic.drawLine(dataLeft, middle, dataRight, middle, '#F8CB3D', 3);
+   var startTime = o.startTime();
+   var endTime = o.endTime();
+   var timeSpan = endTime.date.getTime() - startTime.date.getTime();
+   var bakTime = startTime.date.getTime();
+   var text;
+   var drawText = false;
+   var textWidth = 0;
+   while (!startTime.isAfter(endTime)) {
+      var span = startTime.date.getTime() - bakTime;
+      var x = dataLeft + (dataRight - dataLeft) * (span / timeSpan);
+      graphic.drawLine(x, middle - o.degreeLineHeight(), x, middle, '#FFFFFF', 1);
+      text = startTime.format('HH24:00');
+      startTime.addHour(1);
+      drawText = !drawText;
+      if (drawText) {
+         graphic.setFont('bold 20px Microsoft YaHei');
+         textWidth = graphic.textWidth(text);
+         graphic.drawText(text, x - textWidth / 2, middle + 20, '#59FDE9');
+      }
+   }
+   startTime.date.setTime(bakTime);
+   startTime.refresh();
+   var trendInfo = o._trendInfo;
+   var units = trendInfo.trendUints();
+   if (units.isEmpty()){
+      return;
+   }
+   var unitFirst = units.first();
+   var maxAmount = 0;
+   var count = units.count();
+   for (var i = 0; i < count; i++) {
+      var unit = units.get(i);
+      var investment = unit.investment();
+      if (investment > maxAmount) {
+         maxAmount = investment;
+      }
+      var redemption = unit.redemption();
+      if (redemption > maxAmount) {
+         maxAmount = redemption;
+      }
+   }
+   o.drawTrend(graphic, '_investment', dataLeft, dataTop, dataRight, dataBottom, dataHeight, bakTime, timeSpan, maxAmount, '#FF0000');
+   o.drawTrend(graphic, '_redemption', dataLeft, dataTop, dataRight, dataBottom, dataHeight, bakTime, timeSpan, maxAmount, '#0000FF');
+   startTime.date.setTime(bakTime);
+   startTime.refresh();
+   var lastHour = -1;
+   var hourInves = 0;
+   var maxHourInves = 0;
+   startTime.parseAuto(unitFirst.recordDate());
+   startTime.refresh();
+   lastHour = startTime.date.getHours();
+   for (var i = 0; i < count; i++) {
+      var unit = units.get(i);
+      startTime.parseAuto(unit.recordDate());
+      startTime.refresh();
+      var hour = startTime.date.getHours();
+      if (lastHour == hour) {
+         hourInves += unit.redemption();
+      }else{
+         if(hourInves > maxHourInves){
+            maxHourInves = hourInves;
+            hourInves = 0;
+         }
+         lastHour = hour;
+      }
+   }
+   graphic.setFont('bold 24px Microsoft YaHei');
+   graphic.drawText("24小时投资曲线", decoLeft, top, '#54F0FF');
+   graphic.setFont('22px Microsoft YaHei');
+   var rowStart = top + 30;
+   var rowHeight = 22;
+   var textWidth = graphic.textWidth('小时峰值：');
+   var textHourPeakValue = MO.Lang.Float.unitFormat(maxHourInves, 0, 0, 2, 0, 10000, '万');
+   var textHourPeakWidth = graphic.textWidth(textHourPeakValue);
+   var textDayTotalValue = MO.Lang.Float.unitFormat(o._investmentTotal, 0, 0, 2, 0, 10000, '万');
+   var textDayTotalWidth = graphic.textWidth(textDayTotalValue);
+   var textHourAvrgValue = MO.Lang.Float.unitFormat(o._investmentTotal / 24, 0, 0, 2, 0, 10000, '万');
+   var textHourAvrgWidth = graphic.textWidth(textHourAvrgValue);
+   var textValueWidth = Math.max(Math.max(textHourPeakWidth, textDayTotalWidth), textHourAvrgWidth);
+   graphic.drawText('24H总额：', decoLeft, rowStart + rowHeight * 0, '#00CFFF');
+   graphic.drawText(textDayTotalValue, decoLeft + textWidth + textValueWidth - textDayTotalWidth, rowStart + rowHeight * 0, '#00B5F6');
+   graphic.drawText('小时峰值：', decoLeft, rowStart + rowHeight * 1 + 5, '#00CFFF');
+   graphic.drawText(textHourPeakValue, decoLeft + textWidth + textValueWidth - textHourPeakWidth, rowStart + rowHeight * 1 + 5, '#00B5F6');
+   graphic.drawText('小时均值：', decoLeft, rowStart + rowHeight * 2 + 10, '#00CFFF');
+   graphic.drawText(textHourAvrgValue, decoLeft + textWidth + textValueWidth - textHourAvrgWidth, rowStart + rowHeight * 2 + 10, '#00B5F6');
+   startTime.date.setTime(bakTime);
+   startTime.refresh();
+}
+MO.FEaiChartMarketerTrendInfo = function FEaiChartMarketerTrendInfo(o){
+   o = MO.Class.inherits(this, o, MO.FObject);
+   o._trendUints    = MO.Class.register(o, new MO.AGetter('_trendUints'));
+   o.construct      = MO.FEaiChartMarketerTrendInfo_construct;
+   o.unserialize    = MO.FEaiChartMarketerTrendInfo_unserialize;
+   o.dispose        = MO.FEaiChartMarketerTrendInfo_dispose;
+   return o;
+}
+MO.FEaiChartMarketerTrendInfo_construct = function FEaiChartMarketerTrendInfo_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+   o._trendUints = new MO.TObjects();
+}
+MO.FEaiChartMarketerTrendInfo_unserialize = function FEaiChartMarketerTrendInfo_unserialize(input){
+   var o = this;
+   var units = o._trendUints;
+   units.clear();
+   var count = input.readInt32();
+   for(var i = 0; i < count; i++){
+      var unit = MO.Class.create(MO.FEaiChartMarketerTrendUnit);
+      unit.unserialize(input);
+      units.push(unit);
+   }
+}
+MO.FEaiChartMarketerTrendInfo_dispose = function FEaiChartMarketerTrendInfo_dispose(){
+   var o = this;
+   o.__base.FObject.dispose.call(o);
+}
+MO.FEaiChartMarketerTrendUnit = function FEaiChartMarketerTrendUnit(o){
+   o = MO.Class.inherits(this, o, MO.FObject);
+   o._recordDate    = MO.Class.register(o, new MO.AGetter('_recordDate'));
+   o._investment    = MO.Class.register(o, new MO.AGetter('_investment'));
+   o._redemption    = MO.Class.register(o, new MO.AGetter('_redemption'));
+   o._netinvestment = MO.Class.register(o, new MO.AGetter('_netinvestment'));
+   o._interest      = MO.Class.register(o, new MO.AGetter('_interest'));
+   o._performance   = MO.Class.register(o, new MO.AGetter('_performance'));
+   o.construct      = MO.FEaiChartMarketerTrendUnit_construct;
+   o.unserialize    = MO.FEaiChartMarketerTrendUnit_unserialize;
+   o.dispose        = MO.FEaiChartMarketerTrendUnit_dispose;
+   return o;
+}
+MO.FEaiChartMarketerTrendUnit_construct = function FEaiChartMarketerTrendUnit_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+}
+MO.FEaiChartMarketerTrendUnit_unserialize = function FEaiChartMarketerTrendUnit_unserialize(input){
+   var o = this;
+   o._recordDate = input.readString();
+   o._investment = input.readDouble();
+   o._redemption = input.readDouble();
+   o._netinvestment = input.readDouble();
+   o._interest = input.readDouble();
+   o._performance = input.readDouble();
+}
+MO.FEaiChartMarketerTrendUnit_dispose = function FEaiChartMarketerTrendUnit_dispose(){
+   var o = this;
+   o.__base.FObject.dispose.call(o);
 }
 MO.FEaiChartMarketerUnit = function FEaiChartMarketerUnit(o){
    o = MO.Class.inherits(this, o, MO.FObject);
