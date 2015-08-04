@@ -2,6 +2,7 @@ package org.mo.content.core.manage.user;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.com.lang.EResult;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
@@ -46,8 +47,8 @@ public interface IUserConsole
    // @param passport 帐号
    // @return 模块数据
    // ============================================================
-   FLogicDataset<FDataPersonUserUnit> checkPassportIsExist(ILogicContext logicContext,
-                                                           String passport);
+   EResult passportExists(ILogicContext logicContext,
+                          String passport);
 
    // ============================================================
    // <T>根据ouid修改用户</T>

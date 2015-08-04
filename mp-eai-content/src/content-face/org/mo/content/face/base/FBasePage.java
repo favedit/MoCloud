@@ -21,7 +21,7 @@ public class FBasePage
    protected String _json;
 
    //用户
-   protected FDataPersonUserUnit user;
+   public FDataPersonUserUnit user;
 
    //详情
    protected String _description;

@@ -1,6 +1,8 @@
 package org.mo.content.face.manage.user;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import org.mo.com.encoding.RMd5;
+import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.user.IUserConsole;
@@ -40,9 +42,8 @@ public class FUserAction
    public String construct(IWebContext context,
                            FUserPage userPage,
                            FBasePage basePage){
-      System.out.println("-------------------------------------------------");
       _logger.debug(this, "construct", "construct begin.");
-      return "/manage/manage/user/UserList";
+      return "#/manage/user/UserList";
    }
 
    // ============================================================
@@ -69,6 +70,18 @@ public class FUserAction
       return "/manage/common/ajax";
    }
 
+   @Override
+   public String insertBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FUserPage formPage,
+                              FBasePage basePage){
+      _logger.debug(this, "InsertBefore", "User InsertBefore. (user={1})", basePage.user());
+      //      if(basePage.user() == null){
+      //         return "#/manage/home/Frame";
+      //      }
+      return "#/manage/user/InsertUser";
+   }
+
    // ============================================================
    // <T>用户增加</T>
    //
@@ -82,8 +95,35 @@ public class FUserAction
                         ILogicContext logicContext,
                         FUserPage formPage,
                         FBasePage basePage){
-      // TODO Auto-generated method stub
-      return null;
+      _logger.debug(this, "InsertUser", "InsertUser Begin.(passport={1})", context.parameter("passport"));
+      EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
+      if(result == EResult.Success){
+         _logger.debug(this, "InsertUser", "InsertUser fail,This user already exists.(passport={1})", context.parameter("passport"));
+         basePage.setJson("0");
+         return "/manage/common/ajax";
+      }
+      FDataPersonUserUnit unit = new FDataPersonUserUnit();
+      unit.setPassport(context.parameter("passport"));
+      unit.setPassword(RMd5.encode(context.parameter("password")));
+      unit.setLabel(context.parameter("label"));
+      unit.setOvld(true);
+      unit.setCreateUserId(context.parameterAsLong("adminId"));
+      _userConsole.doInsert(logicContext, unit);
+      basePage.setJson("1");
+      _logger.debug(this, "InsertUser", "InsertUser succeed.");
+      return "/manage/common/ajax";
+   }
+
+   @Override
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FUserPage userPage,
+                              FBasePage basePage){
+      long id = context.parameterAsLong("id");
+      _logger.debug(this, "UpdateBefore", "UpdateBefore Begin.(id={1})", id);
+      FDataPersonUserUnit unit = _userConsole.find(logicContext, id);
+      userPage.setUser(unit);
+      return "#/manage/user/UpdateUser";
    }
 
    // ============================================================
@@ -97,9 +137,40 @@ public class FUserAction
    @Override
    public String update(IWebContext context,
                         ILogicContext logicContext,
+                        FUserPage formPage,
                         FBasePage basePage){
-      // TODO Auto-generated method stub
-      return null;
+      long id = context.parameterAsLong("id");
+      _logger.debug(this, "Update", "Update Begin.(id={1})", id);
+      FDataPersonUserUnit unit = _userConsole.find(logicContext, id);
+      unit.setPassport(context.parameter("passport"));
+      if(unit.isPassportChanged()){
+         EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
+         if(result == EResult.Success){
+            _logger.debug(this, "updateUser", "updateUser fail,This user already exists.(passport={1})", context.parameter("passport"));
+            basePage.setJson("0");
+            return "/manage/common/ajax";
+         }
+      }
+      unit.setPassword(context.parameter("password"));
+      if(unit.isPasswordChanged()){
+         unit.setPassword(RMd5.encode(unit.password()));
+      }
+      unit.setLabel(context.parameter("label"));
+      unit.setUpdateUserId(context.parameterAsLong("adminId"));
+      _userConsole.doUpdate(logicContext, unit);
+      basePage.setJson("1");
+      return "/manage/common/ajax";
+   }
+
+   @Override
+   public String del(IWebContext context,
+                     ILogicContext logicContext,
+                     FUserPage formPage,
+                     FBasePage basePage){
+      long id = context.parameterAsLong("id");
+      EResult result = _userConsole.doDelete(logicContext, id);
+      _logger.debug(this, "Del", " Del finish.(id={1})", id);
+      return "#/manage/user/UserList";
    }
 
 }

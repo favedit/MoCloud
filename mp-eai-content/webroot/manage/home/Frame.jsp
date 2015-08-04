@@ -22,14 +22,14 @@
          });
 
          function submitForm() {
-            if ($("#passport").val().length == 0) {
-               alertx("请输入用户名", "'warning'");
-               return;
-            }
-            if ($("#password").val().length == 0) {
-               alertx("请输入密码", "'warning'");
-               return;
-            }
+//            if ($("#passport").val().length == 0) {
+//               alertx("请输入用户名", "'warning'");
+//               return;
+//            }
+//            if ($("#password").val().length == 0) {
+//               alertx("请输入密码", "'warning'");
+//               return;
+//            }
 
             var data = {
                "passport": $("#passport").val(),
@@ -81,10 +81,10 @@
                   </dl>
                   <dl class="inp_2">
                      <dt>
-                	<input id="passport" name="" class="inp_txt_01" type="text">
+                	<input id="passport" class="inp_txt_01" type="text" value="admin">
                 </dt>
                      <dd>
-                        <input id="password" name="" class="inp_txt_02" type="password">
+                        <input id="password" class="inp_txt_02" type="password" value="admin_123">
                      </dd>
                   </dl>
                   <div class="loginbtn">

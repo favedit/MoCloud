@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -69,14 +70,15 @@ public class FUserConsole
    // @return 模块数据
    // ============================================================
    @Override
-   public FLogicDataset<FDataPersonUserUnit> checkPassportIsExist(ILogicContext logicContext,
-                                                                  String passport){
-      FDataPersonUserLogic userUnitLogic = logicContext.findLogic(FDataPersonUserLogic.class);
+   public EResult passportExists(ILogicContext logicContext,
+                                 String passport){
+      FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
-      //      whereSB.append(FDataPersonUserLogic.FieldRoleCd).append("= ").append(EGcPersonRole.Admin);
+      whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
       if(!RString.isEmpty(passport))
          whereSB.append(" AND ").append(FDataPersonUserLogic.PASSPORT).append(" = '").append(passport).append("'");
-      return userUnitLogic.fetch(whereSB.toString(), -1, -1);
+      FLogicDataset<FDataPersonUserUnit> unitlist = logic.fetch(whereSB);
+      return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
    }
 
    // ============================================================
