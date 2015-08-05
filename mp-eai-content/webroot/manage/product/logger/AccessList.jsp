@@ -50,7 +50,7 @@
    <body>
       <div id="cy_right">
          <div class="right_title">
-            <span>用户登录信息表</span>
+            <span>用户日志</span>
          </div>
          <div class="btn_bar">
             <div class="nav_btn"></div>
@@ -65,9 +65,7 @@
                <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">账号</th>
                <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="160px">操作信息</th>
                <th data-options="field:'logicCode',halign:'center',align:'left'" width="140px">logicCode</th>
-               <th data-options="field:'logicResult',halign:'center',align:'left'" width="140px">logicResult</th>               
-               <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">浏览器uri</th>
-               <th data-options="field:'pageInfo',halign:'center',align:'left'" width="300px">页面信息</th>
+               <th data-options="field:'logicResult',halign:'center',align:'left'" width="140px">logicResult</th>     
                <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
             </tr>
          </thead>

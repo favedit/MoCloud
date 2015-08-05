@@ -89,7 +89,7 @@ public class FDataPersonAccessAuthorityConsole
          _logger.debug(this, "doLogin", "OA login , the passport illegal. (passport={1})", passport);
          return EGcAuthorityResult.PassportIllegal;
       }
-      if(password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.length() > 18){
+      if(password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.indexOf(";") > -1){
          _logger.debug(this, "doLogin", "OA login , the password illegal. (password={1})", password);
          return EGcAuthorityResult.PasswordIllegal;
       }

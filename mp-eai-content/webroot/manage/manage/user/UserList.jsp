@@ -56,14 +56,13 @@
    <body bgcolor="#198bc9">
       <div id="cy_right" style="width:100%">
          <div class="right_title">
-            <span>后台用户列表</span>
+            <span>用户列表</span>
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="/manage/user/User.wa?do=insertBefore" class="add_btn"></a>
             </div>
             <div class="nav_search">
-
             </div>
          </div>
       </div>
@@ -73,8 +72,6 @@
                <th data-options="field:'guid',halign:'center',align:'right',hidden:'true'" width="60px">编号</th>
                <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">帐号</th>
                <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">名称</th>
-               <th data-options="field:'description',halign:'center',align:'left',sortable:true" width="160px">描述</th>
-               <th data-options="field:'content',halign:'center',align:'left'" width="160px">内容</th>
                <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
                <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">修改时间</th>
                <th data-options="field:'operation',halign:'center',align:'left',formatter:insert_admin_editButton" width="140px">操作</th>

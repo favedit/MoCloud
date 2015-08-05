@@ -101,9 +101,15 @@ public class FUserAction
                         ILogicContext logicContext,
                         FUserPage formPage,
                         FBasePage basePage){
-      _logger.debug(this, "InsertUser", "InsertUser Begin.(passport={1})", context.parameter("passport"));
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
+      }
+      _logger.debug(this, "InsertUser", "InsertUser Begin.(passport={1})", context.parameter("passport"));
+      String passport = context.parameter("passport").replaceAll(" ", "");
+      String password = RMd5.encode(context.parameter("password").trim());
+      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
+         basePage.setJson("-1");
+         return "/manage/common/ajax";
       }
       EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
       if(result == EResult.Success){
@@ -112,8 +118,8 @@ public class FUserAction
          return "/manage/common/ajax";
       }
       FDataPersonUserUnit unit = new FDataPersonUserUnit();
-      unit.setPassport(context.parameter("passport"));
-      unit.setPassword(RMd5.encode(context.parameter("password")));
+      unit.setPassport(passport);
+      unit.setPassword(password);
       unit.setLabel(context.parameter("label"));
       unit.setOvld(true);
       //      unit.setCreateUserId(context.parameterAsLong("adminId"));
@@ -156,8 +162,14 @@ public class FUserAction
       }
       String id = context.parameter("id");
       _logger.debug(this, "Update", "Update Begin.(id={1})", id);
+      String passport = context.parameter("passport").replaceAll(" ", "");
+      String password = RMd5.encode(context.parameter("password").trim());
+      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
+         basePage.setJson("-1");
+         return "/manage/common/ajax";
+      }
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
-      unit.setPassport(context.parameter("passport"));
+      unit.setPassport(passport);
       if(unit.isPassportChanged()){
          EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
          if(result == EResult.Success){
@@ -166,7 +178,7 @@ public class FUserAction
             return "/manage/common/ajax";
          }
       }
-      unit.setPassword(context.parameter("password"));
+      unit.setPassword(password);
       if(unit.isPasswordChanged()){
          unit.setPassword(RMd5.encode(unit.password()));
       }

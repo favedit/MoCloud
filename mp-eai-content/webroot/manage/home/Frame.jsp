@@ -12,6 +12,14 @@
       </head>
       <script type="text/javascript">
          function submitForm() {
+            if ($("#passport").val().length == 0) {
+               alertx("请输入用户名", "'warning'");
+               return;
+            }
+            if ($("#password").val().length == 0) {
+               alertx("请输入密码", "'warning'");
+               return;
+            }
             var data = {
                "passport": $("#passport").val(),
                "password": $("#password").val()
@@ -25,12 +33,9 @@
                   if (result.status == '0') {
                      $("#passport").val("");
                      $("#password").val("");
-                     alertx("无此用户", "warning");
+                     alertx("用户名或密码错误", "warning");
                   } else if (result.status == '1') {
                      location.href = result.url;
-                  } else if (result.status == '2') {
-                     alertx("密码不正确", "'warning'");
-                     $("#password").val("");
                   } else {
                      alertx("系统异常", "'error'");
                   }

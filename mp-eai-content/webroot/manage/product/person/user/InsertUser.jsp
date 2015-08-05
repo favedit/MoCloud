@@ -47,14 +47,14 @@
                      <td align="left">帐号</td>
                      <td align="left">
                         <input id="passport" name="passport" style="width:200px;text-align:left;" value="" />
-                        <font color="red">只支持英文、数字和下划线
-</font>
+                        <font color="red">只支持英文、数字和下划线</font>
                      </td>
                   </tr>
                   <tr>
                      <td align="left">密码</td>
                      <td align="left">
                         <input name="password" style="width:200px;text-align:left;" value="" />
+                        <font color="red">不支持单引号'分号;百分号%</font>
                      </td>
                   </tr>
                   <tr>

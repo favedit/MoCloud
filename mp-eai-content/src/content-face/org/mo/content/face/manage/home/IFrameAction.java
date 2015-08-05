@@ -1,7 +1,6 @@
 package org.mo.content.face.manage.home;
 
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.face.solution.person.FUserPage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
@@ -74,6 +73,6 @@ public interface IFrameAction
    // ============================================================
    String changePwd(IWebContext context,
                     ILogicContext logicContext,
-                    @AContainer(name = "userPage") FUserPage userPage,
+                    @AContainer(name = "userPage") FFramePage formPage,
                     @AContainer(name = "basePage") FBasePage basePage);
 }

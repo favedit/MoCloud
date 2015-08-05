@@ -32,6 +32,16 @@ public class FBasePage
 
    protected String _userName;
 
+   protected String _passport;
+
+   public String passport(){
+      return _passport;
+   }
+
+   public void setPassport(String _passport){
+      this._passport = _passport;
+   }
+
    public String userName(){
       return _userName;
    }

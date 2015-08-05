@@ -8,13 +8,14 @@
    <script>
       function submitForm() {
          if (!isValid()) return;
+         if(!confirmpwd()) return;
          progress();
          var url = "/manage/user/User.wa?do=insert&date=" + new Date().valueOf();
          var data = {
             "passport": $('#passport').val(),
             "password": $('#pwd2').val(),
             "label": $('#label').val(),
-            "adminId":$('#adminId').val()
+            "adminId": $('#adminId').val()
          };
          $.ajax({
             type: "POST",
@@ -23,6 +24,12 @@
             success: function(msg) {
                closeProgress();
                var result = toJsonObject(msg);
+               if (result == '-1') {
+                  alertx("帐号请勿输入特殊字符。", "wrning", function() {
+                     $('#passport').val("");
+                     $('#passport').focus();
+                  });
+               } else
                if (result == '0') {
                   alertx("此帐号已被使用！", "wrning", function() {
                      $('#passport').val("");
@@ -38,16 +45,19 @@
             }
          });
       }
-      function confirmpwd() {
-         var pwd1 = $("#pwd1").val();
-         var pwd2 = $("#pwd2").val();
-         if (pwd1 != pwd2) {
-            msg("两次密码不一致！");
-            $("#pwd1").val("");
-            $("#pwd2").val("");
-            $("#pwd1").focus();
+
+       function confirmpwd() {
+            var pwd1 = $("#pwd1").val();
+            var pwd2 = $("#pwd2").val();
+            if (pwd1 != pwd2) {
+               msg("两次密码不一致！");
+               $("#pwd1").val("");
+               $("#pwd2").val("");
+               $("#pwd1").focus();
+               return false;
+            }
+            return true;
          }
-      }
    </script>
 
    <body bgcolor="#198bc9">
@@ -58,7 +68,7 @@
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="#" onClick="submitForm()" class="add_btn"></a>
-               <a href="#" onClick="history.go(-1);" class="back_btn"></a>
+               <a href="/manage/user/User.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>
@@ -75,13 +85,13 @@
             <tr>
                <td align="left">密码</td>
                <td align="left">
-                  <input id="pwd1" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[6,20]'" type="password" name="pwd1" value="" />
+                  <input id="pwd1" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[6,20]'" type="password" name="pwd1" />
                </td>
             </tr>
             <tr>
                <td align="left">确认密码</td>
                <td align="left">
-                  <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[6,20]'" type="password" name="password" value="" onBlur="confirmpwd()" /> </td>
+                  <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[6,20]'" type="password" name="password"/> </td>
             </tr>
             <tr>
                <td align="left">真实名称</td>

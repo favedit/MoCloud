@@ -11,7 +11,6 @@ import org.mo.content.face.manage.home.FFrameAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -32,8 +31,8 @@ public class FAccessAction
    protected IAccessConsole _accessConsole;
 
    //用户权限控制台
-   @ALink
-   protected IDataPersonAccessAuthorityConsole _authorityConsole;
+   //   @ALink
+   //   protected IDataPersonAccessAuthorityConsole _authorityConsole;
 
    //============================================================
    // <T>用户</T>
@@ -47,9 +46,6 @@ public class FAccessAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
-      //      System.out.println("------------eai----------------construct");
-      //      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
-      //      page.setUnitList(unitlist);
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
@@ -112,6 +108,11 @@ public class FAccessAction
       }
       String host = context.parameter("host_address").replaceAll(" ", "");
       String passport = context.parameter("passport").replaceAll(" ", "");
+      String password = context.parameter("password").trim();
+      if(password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.indexOf(";") > -1){
+         page.setResult("密码请勿输入特殊字符。");
+         return "/manage/product/person/user/Failure";
+      }
       if(!host.isEmpty()){
          EResult hostExist = _accessConsole.hostExists(logicContext, host);
          if(hostExist == EResult.Success){
@@ -130,7 +131,7 @@ public class FAccessAction
       unit.setHostAddress(host);
       unit.setLabel(context.parameter("label"));
       unit.setPassport(passport);
-      unit.setPassword(context.parameter("password"));
+      unit.setPassword(password);
       unit.setAccessCd(context.parameterAsInteger("access_cd"));
       unit.setTypeCd(context.parameterAsInteger("type_cd"));
       //时间处理
@@ -174,6 +175,11 @@ public class FAccessAction
       }
       String host = context.parameter("host_address").replaceAll(" ", "");
       String passport = context.parameter("passport").replaceAll(" ", "");
+      String password = context.parameter("password").trim();
+      if(password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.indexOf(";") > -1){
+         page.setResult("密码请勿输入特殊字符。");
+         return "/manage/product/person/user/Failure";
+      }
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
       unit.setHostAddress(host);
@@ -197,7 +203,7 @@ public class FAccessAction
          }
       }
       unit.setLabel(context.parameter("label"));
-      unit.setPassword(context.parameter("password"));
+      unit.setPassword(password);
       unit.setAccessCd(context.parameterAsInteger("access_cd"));
       unit.setTypeCd(context.parameterAsInteger("type_cd"));
       //时间处理

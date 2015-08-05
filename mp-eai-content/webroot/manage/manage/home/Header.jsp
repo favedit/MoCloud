@@ -29,7 +29,7 @@
          <div id="top_left">
             <div class="welcom">
                欢迎 <span style="color:#F90"><jh:write source="&basePage.userName"/></span> 登录 &nbsp;&nbsp;&nbsp;
-               <!--               <a href="/cloud/manage/home/Frame.wa?do=changePwdPrepare" target="right">[修改密码]</a>&nbsp;&nbsp;&nbsp;-->
+                              <a href="/manage/home/Frame.wa?do=changePwdPrepare" target="right">[修改密码]</a>&nbsp;&nbsp;&nbsp;
                <!--            <span style="color:#666">V.<jh:write source="&basePage.version"/></span>-->
             </div>
          </div>
@@ -39,11 +39,11 @@
                   <a id="product" class="btn1" href="/manage/home/Header.wa?do=productLeft" target="left">产品管理</a>
                </li>
 
-               
+               <jh:equals source="admin" value="&basePage.passport">
                <li class="tb_02">
                   <a class="btn2" href="/manage/home/Header.wa?do=manageLeft" target="left">后台管理</a>
                </li>
-
+               </jh:equals>
 <!--
                <li class="tb_03">
                   <a class="btn3" href="/cloud/manage/home/Header.wa?do=manageLeft" target="left">后台管理</a>

@@ -6,7 +6,6 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.face.solution.person.FUserPage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -82,6 +81,7 @@ public class FFrameAction
          formPage.setUser(userUnit);
          basePage.setUserId(userUnit.guid());
          basePage.setUserName(userUnit.label());
+         basePage.setPassport(userUnit.passport());
          basePage.ajax(1, "/manage/home/Frame.wa");
          _logger.debug(this, "LoginUser", "LoginUser first user login Sueeccd.");
       }
@@ -97,10 +97,11 @@ public class FFrameAction
             formPage.setUser(unit);
             basePage.setUserId(unit.guid());
             basePage.setUserName(unit.label());
+            basePage.setPassport(unit.passport());
             basePage.ajax(1, "/manage/home/Frame.wa");
             _logger.debug(this, "LoginUser", "LoginUser Sueeccd.");
          }else{//密码不正确
-            basePage.ajax(2, null);
+            basePage.ajax(0, null);
             _logger.debug(this, "LoginUser", "LoginUser fail,Password is not currect.");
          }
       }else if(userUnitList.count() > 1){//有多个相同用户
@@ -122,7 +123,10 @@ public class FFrameAction
    public String changePwdPrepare(IWebContext context,
                                   ILogicContext logicContext,
                                   FBasePage basePage){
-      return "#/manage/manage/user/ChangePwd";
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      return "/manage/manage/user/ChangePwd";
    }
 
    // ============================================================
@@ -135,16 +139,28 @@ public class FFrameAction
    @Override
    public String changePwd(IWebContext context,
                            ILogicContext logicContext,
-                           FUserPage userPage,
+                           FFramePage formPage,
                            FBasePage basePage){
-      _logger.debug(this, "ChangePwd", "ChangePwd begin.(userId={1})", context.parameter("ouid"));
-      //修改用户信息
-      long ouid = context.parameterAsLong("ouid");
-      //      FDataPersonUserUnit unit = _userConsole.find(sqlContext, ouid);
-      //      unit.setPassport(context.parameter("passport"));
-      //      unit.setPassword(context.parameter("password"));
-      //      _userConsole.update(sqlContext, unit, ouid);
-      return "#/manage/common/ajax";
+      _logger.debug(this, "ChangePwd", "ChangePwd begin.(userId={1})", context.parameter("id"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      String id = context.parameter("id");
+
+      String password = RMd5.encode(context.parameter("password").trim());
+      String oldpwd = RMd5.encode(context.parameter("oldpwd").trim());
+
+      FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
+      unit.setPassword(oldpwd);
+      if(unit.isPasswordChanged()){
+         basePage.setJson("0");
+         return "/manage/common/ajax";
+      }else{
+         unit.setPassword(password);
+         _userConsole.doUpdate(logicContext, unit);
+         basePage.setJson("1");
+         return "/manage/common/ajax";
+      }
    }
 
    // ============================================================
@@ -164,8 +180,10 @@ public class FFrameAction
       //清空basePage
       formPage.setUser(null);
       basePage.setMenuString(null);
-      //      basePage.setUser(null);
+      basePage.setUserId(null);
+      basePage.setUserName(null);
+      basePage.setPassport(null);
       basePage.setJson(null);
-      return "/manage/home/Frame.wp";
+      return "/manage/home/Frame";
    }
 }

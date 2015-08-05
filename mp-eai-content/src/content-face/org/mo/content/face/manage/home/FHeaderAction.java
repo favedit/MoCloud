@@ -39,9 +39,8 @@ public class FHeaderAction
       _logger.debug(this, "construct", "construct begin. ");
       //      basePage.setVersion(_versonConsole.currentVersion());
       if(!basePage.userExists()){
-         return "/manage/home/Frame";
+         return "/manage/common/ConnectTimeout";
       }
-
       return "/manage/manage/home/Header";
    }
 
@@ -58,7 +57,7 @@ public class FHeaderAction
                              FBasePage basePage){
       _logger.debug(this, "Header", "Header productLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       if(!basePage.userExists()){
-         return "/manage/home/Frame";
+         return "/manage/common/ConnectTimeout";
       }
       //      tackAuthority(context, sqlContext, basePage);
       return "/manage/manage/home/ProductLeft";
@@ -93,7 +92,7 @@ public class FHeaderAction
                             FBasePage basePage){
       _logger.debug(this, "Header", "Header manageLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       if(!basePage.userExists()){
-         return "/manage/home/Frame";
+         return "/manage/common/ConnectTimeout";
       }
       //      tackAuthority(context, sqlContext, basePage);
       return "/manage/manage/home/ManageLeft";

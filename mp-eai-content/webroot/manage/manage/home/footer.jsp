@@ -14,7 +14,7 @@
 	<div class="f_left">
     <a href="#">关于我们</a> | <a href="#">使用帮助</a> </div>
     <div class="f_right">
-    	&copy; 2011－2015 Cyou-inc.com, All Rights Reserved
+    	&copy; 2011－2015 , All Rights Reserved
     </div>
 </div>
 </body>
