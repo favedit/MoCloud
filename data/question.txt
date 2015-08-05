@@ -43,16 +43,13 @@ CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
 
-CREATE USER 'eai'@'127.0.0.1' IDENTIFIED BY 'IAmCloudEaiTest1507';
-GRANT ALL PRIVILEGES ON *.* TO 'eai'@'127.0.0.1';
+CREATE USER 'eai_online'@'%' IDENTIFIED BY '123';
+GRANT ALL PRIVILEGES ON *.* TO 'eai_online'@'%';
+FLUSH PRIVILEGES;
 
-CREATE USER 'eai'@'%' IDENTIFIED BY 'IAmCloudEaiTest1507';
-GRANT ALL PRIVILEGES ON *.* TO 'eai'@'%';
-DROP USER 'eai'@'%';
-
-CREATE USER 'eai'@'%' IDENTIFIED BY 'IAmCloudEaiOnline1507';
-GRANT ALL PRIVILEGES ON *.* TO 'eai'@'%';
-DROP USER 'eai'@'%';
+CREATE USER 'eai_test'@'%' IDENTIFIED BY '123';
+GRANT ALL PRIVILEGES ON *.* TO 'eai_test'@'%';
+FLUSH PRIVILEGES;
 
 用户授权：
 ============================================================
@@ -60,6 +57,11 @@ GRANT ALL PRIVILEGES ON *.* TO 'cloud'@'%';
 GRANT ALL ON *.* TO 'cloud'@'%' IDENTIFIED BY "cloud";
 GRANT ALL ON *.* TO 'cloud'@'%' IDENTIFIED BY "Iamcloud1503";
 GRANT ALL ON *.* TO 'cloud'@'localhost' IDENTIFIED BY "Iamcloud1503";
+
+修改密码：
+============================================================
+UPDATE user SET password=PASSWORD('123456') WHERE user='root';
+FLUSH PRIVILEGES;
 
 修改最大链接数：
 ============================================================
