@@ -26,6 +26,9 @@ public class FAccessAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       return "/manage/product/logger/AccessList";
    }
 
@@ -34,6 +37,9 @@ public class FAccessAction
                         ILogicContext logicContext,
                         FAccessPage accessPage,
                         FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          accessPage.setPageCurrent(Integer.parseInt(num));

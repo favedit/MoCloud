@@ -47,11 +47,11 @@ public class FDeviceAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
-      _logger.debug(this, "Construct", "Construct begin. (user={1})", basePage.user());
-      //      if(basePage.user() == null){
-      //         return "/manage/home/Frame.wp";
-      //            }
-      //      System.out.println(basePage.user().ouid() + "---------------");
+      _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+
       return "/manage/product/device/BrowserAccessList";
    }
 
@@ -60,7 +60,9 @@ public class FDeviceAction
                         ILogicContext logicContext,
                         FDevicePage devicePage,
                         FBasePage basePage){
-
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext);
       basePage.setJson(unitlist.toJsonListString());
       return "/manage/common/ajax";
@@ -98,6 +100,9 @@ public class FDeviceAction
                               ILogicContext logicContext,
                               FDevicePage devicePage,
                               FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       long id = context.parameterAsLong("id");
       FDataInfoDeviceBrowserUnit unit = _deviceBrowserConsole.find(logicContext, id);
       devicePage.setUnit(unit);

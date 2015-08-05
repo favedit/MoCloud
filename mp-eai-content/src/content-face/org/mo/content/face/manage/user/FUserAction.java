@@ -43,6 +43,9 @@ public class FUserAction
                            FUserPage userPage,
                            FBasePage basePage){
       _logger.debug(this, "construct", "construct begin.");
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       return "#/manage/user/UserList";
    }
 
@@ -59,6 +62,9 @@ public class FUserAction
                         FUserPage userPage,
                         FBasePage basePage){
       _logger.debug(this, "Select", "User Select. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          userPage.setPageCurrent(Integer.parseInt(num));
@@ -75,10 +81,10 @@ public class FUserAction
                               ILogicContext logicContext,
                               FUserPage formPage,
                               FBasePage basePage){
-      _logger.debug(this, "InsertBefore", "User InsertBefore. (user={1})", basePage.user());
-      //      if(basePage.user() == null){
-      //         return "#/manage/home/Frame";
-      //      }
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      _logger.debug(this, "InsertBefore", "User InsertBefore. (user={1})", basePage.userId());
       return "#/manage/user/InsertUser";
    }
 
@@ -96,6 +102,9 @@ public class FUserAction
                         FUserPage formPage,
                         FBasePage basePage){
       _logger.debug(this, "InsertUser", "InsertUser Begin.(passport={1})", context.parameter("passport"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
       if(result == EResult.Success){
          _logger.debug(this, "InsertUser", "InsertUser fail,This user already exists.(passport={1})", context.parameter("passport"));
@@ -107,7 +116,7 @@ public class FUserAction
       unit.setPassword(RMd5.encode(context.parameter("password")));
       unit.setLabel(context.parameter("label"));
       unit.setOvld(true);
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
+      //      unit.setCreateUserId(context.parameterAsLong("adminId"));
       _userConsole.doInsert(logicContext, unit);
       basePage.setJson("1");
       _logger.debug(this, "InsertUser", "InsertUser succeed.");
@@ -119,9 +128,12 @@ public class FUserAction
                               ILogicContext logicContext,
                               FUserPage userPage,
                               FBasePage basePage){
-      long id = context.parameterAsLong("id");
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      String id = context.parameter("id");
       _logger.debug(this, "UpdateBefore", "UpdateBefore Begin.(id={1})", id);
-      FDataPersonUserUnit unit = _userConsole.find(logicContext, id);
+      FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
       userPage.setUser(unit);
       return "#/manage/user/UpdateUser";
    }
@@ -139,9 +151,12 @@ public class FUserAction
                         ILogicContext logicContext,
                         FUserPage formPage,
                         FBasePage basePage){
-      long id = context.parameterAsLong("id");
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      String id = context.parameter("id");
       _logger.debug(this, "Update", "Update Begin.(id={1})", id);
-      FDataPersonUserUnit unit = _userConsole.find(logicContext, id);
+      FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
       unit.setPassport(context.parameter("passport"));
       if(unit.isPassportChanged()){
          EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
@@ -167,9 +182,15 @@ public class FUserAction
                      ILogicContext logicContext,
                      FUserPage formPage,
                      FBasePage basePage){
-      long id = context.parameterAsLong("id");
-      EResult result = _userConsole.doDelete(logicContext, id);
-      _logger.debug(this, "Del", " Del finish.(id={1})", id);
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      String id = context.parameter("id");
+      FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
+      if(unit != null){
+         EResult result = _userConsole.doDelete(logicContext, unit);
+         _logger.debug(this, "Del", " Del finish.(guid={1})", id);
+      }
       return "#/manage/user/UserList";
    }
 

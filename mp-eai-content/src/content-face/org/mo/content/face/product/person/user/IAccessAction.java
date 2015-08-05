@@ -24,7 +24,7 @@ public interface IAccessAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
-                    @AContainer(name = "page") FAccessPage page);
+                    @AContainer(name = "basePage") FBasePage basePage);
 
    String select(IWebContext context,
                  ILogicContext logicContext,
@@ -41,18 +41,26 @@ public interface IAccessAction
    //============================================================
    String delete(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FAccessPage page);
+                 @AContainer(name = "page") FAccessPage page,
+                 @AContainer(name = "basePage") FBasePage basePage);
+
+   String insertBefore(IWebContext context,
+                       ILogicContext logicContext,
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    String insert(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FAccessPage page);
+                 @AContainer(name = "page") FAccessPage page,
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    String updateBefore(IWebContext context,
                        ILogicContext logicContext,
-                       @AContainer(name = "page") FAccessPage page);
+                       @AContainer(name = "page") FAccessPage page,
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    String update(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FAccessPage page);
+                 @AContainer(name = "page") FAccessPage page,
+                 @AContainer(name = "basePage") FBasePage basePage);
 
 }

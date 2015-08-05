@@ -46,10 +46,13 @@ public class FAccessAction
    @Override
    public String construct(IWebContext context,
                            ILogicContext logicContext,
-                           FAccessPage page){
+                           FBasePage basePage){
       //      System.out.println("------------eai----------------construct");
       //      FLogicDataset<FDataPersonAccessAuthorityUnit> unitlist = _accessConsole.select(logicContext);
       //      page.setUnitList(unitlist);
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       return "/manage/product/person/user/AccessList";
    }
 
@@ -59,6 +62,9 @@ public class FAccessAction
                         FAccessPage page,
                         FBasePage basePage){
       _logger.debug(this, "LoginUser", "LoginUser begin. (page={1})", context.parameter("page"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
@@ -73,7 +79,11 @@ public class FAccessAction
    @Override
    public String delete(IWebContext context,
                         ILogicContext logicContext,
-                        FAccessPage page){
+                        FAccessPage page,
+                        FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = new FDataPersonAccessAuthorityUnit();
       unit.setOuid(id);
@@ -83,9 +93,23 @@ public class FAccessAction
    }
 
    @Override
+   public String insertBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      return "/manage/product/person/user/InsertUser";
+   }
+
+   @Override
    public String insert(IWebContext context,
                         ILogicContext logicContext,
-                        FAccessPage page){
+                        FAccessPage page,
+                        FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       String host = context.parameter("host_address").replaceAll(" ", "");
       String passport = context.parameter("passport").replaceAll(" ", "");
       if(!host.isEmpty()){
@@ -129,7 +153,11 @@ public class FAccessAction
    @Override
    public String updateBefore(IWebContext context,
                               ILogicContext logicContext,
-                              FAccessPage page){
+                              FAccessPage page,
+                              FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       long id = context.parameterAsLong("id");
       FDataPersonAccessAuthorityUnit unit = _accessConsole.find(logicContext, id);
       page.setUnit(unit);
@@ -139,7 +167,11 @@ public class FAccessAction
    @Override
    public String update(IWebContext context,
                         ILogicContext logicContext,
-                        FAccessPage page){
+                        FAccessPage page,
+                        FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       String host = context.parameter("host_address").replaceAll(" ", "");
       String passport = context.parameter("passport").replaceAll(" ", "");
       long id = context.parameterAsLong("id");

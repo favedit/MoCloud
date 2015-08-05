@@ -43,7 +43,10 @@ public class FFrameAction
                            FFramePage formPage,
                            FBasePage basePage){
       _logger.debug(this, "construct", "construct begin.");
-      return "/manage/product/home/Frame";
+      if(!basePage.userExists()){
+         return "/manage/home/Frame";
+      }
+      return "/manage/manage/home/Frame";
    }
 
    // ============================================================
@@ -59,15 +62,30 @@ public class FFrameAction
                            FFramePage formPage,
                            FBasePage basePage){
       _logger.debug(this, "LoginUser", "LoginUser begin. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
-      //      TDateTime datetime = new TDateTime(RDateTime.currentDateTime());
       String passport = context.parameter("passport");
+      String password = RMd5.encode(context.parameter("password"));
+
       if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
          _logger.debug(this, "LoginUser", "LoginUser , the passport illegal. (passport={1})", passport);
          basePage.ajax(0, null);
          return "/manage/common/ajax";
       }
-      String password = RMd5.encode(context.parameter("password"));
+      //初始用户处理
+      FLogicDataset<FDataPersonUserUnit> unitList = _userConsole.fetch(logicContext, null);
       FDataPersonUserUnit userUnit = new FDataPersonUserUnit();
+      if(unitList.count() <= 0){
+         userUnit.setOvld(true);
+         userUnit.setPassport(passport);
+         userUnit.setPassword(password);
+         userUnit.setLabel("初始用户");
+         _userConsole.doInsert(logicContext, userUnit);
+         formPage.setUser(userUnit);
+         basePage.setUserId(userUnit.guid());
+         basePage.setUserName(userUnit.label());
+         basePage.ajax(1, "/manage/home/Frame.wa");
+         _logger.debug(this, "LoginUser", "LoginUser first user login Sueeccd.");
+      }
+
       userUnit.setPassport(passport);
       FLogicDataset<FDataPersonUserUnit> userUnitList = _userConsole.loginUser(logicContext, userUnit);
       if(userUnitList.count() == 0){//无此用户
@@ -75,12 +93,11 @@ public class FFrameAction
          _logger.debug(this, "LoginUser", "LoginUser fail,Without this user.");
       }else if(userUnitList.count() == 1){//有此用户
          if(userUnitList.first().password().equals(password)){//密码正确
-            basePage.ajax(1, "/manage/home/Frame.wa");
             FDataPersonUserUnit unit = userUnitList.first();
-            //            unit.setPassportLoginDate(datetime);
-            //            _userConsole.updateByOuid(sqlContext, unit);
             formPage.setUser(unit);
-            basePage.setUser(unit);
+            basePage.setUserId(unit.guid());
+            basePage.setUserName(unit.label());
+            basePage.ajax(1, "/manage/home/Frame.wa");
             _logger.debug(this, "LoginUser", "LoginUser Sueeccd.");
          }else{//密码不正确
             basePage.ajax(2, null);
@@ -147,7 +164,7 @@ public class FFrameAction
       //清空basePage
       formPage.setUser(null);
       basePage.setMenuString(null);
-      basePage.setUser(null);
+      //      basePage.setUser(null);
       basePage.setJson(null);
       return "/manage/home/Frame.wp";
    }

@@ -1,6 +1,5 @@
 <!doctype html>
 <%@ include file='/apl/public.inc' %>
-   <jh:define source="&basePage.user" alias="base"></jh:define>
    <html>
 
    <head>
@@ -12,18 +11,6 @@
       <script src="/manage/ajs/jquery/jquery-1.8.0.min.js" type="text/javascript"></script>
    </head>
    <script>
-      $(function() {
-         var flag = "<jh:write source='&base.ouid' />";
-         if (flag == "") {
-            alert("连接超时！");
-            parent.parent.location.href = "/manage/home/Frame.wp";
-         }
-
-         //         if ($('#passport').val() == "admin") {
-         //            $("#databaseLI").show();
-         //         }
-      });
-
       function loginout() {
          top.location.href = "/manage/home/Frame.wa?do=loginOut";
       }
@@ -41,7 +28,7 @@
       <div id="cy_header">
          <div id="top_left">
             <div class="welcom">
-               欢迎 <span style="color:#F90"><jh:write source="&base.label"/></span> 登录 &nbsp;&nbsp;&nbsp;
+               欢迎 <span style="color:#F90"><jh:write source="&basePage.userName"/></span> 登录 &nbsp;&nbsp;&nbsp;
                <!--               <a href="/cloud/manage/home/Frame.wa?do=changePwdPrepare" target="right">[修改密码]</a>&nbsp;&nbsp;&nbsp;-->
                <!--            <span style="color:#666">V.<jh:write source="&basePage.version"/></span>-->
             </div>

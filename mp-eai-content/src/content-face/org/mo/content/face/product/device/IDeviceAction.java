@@ -21,7 +21,7 @@ public interface IDeviceAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
-                    @AContainer(name = "page") FBasePage page);
+                    @AContainer(name = "basePage") FBasePage page);
 
    //============================================================
    // <T></T>

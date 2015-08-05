@@ -38,7 +38,7 @@ public class FDynamicAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
-      _logger.debug(this, "Construct", "Construct begin. (user={1})", basePage.user());
+      _logger.debug(this, "Construct", "Construct begin. (user={1})", basePage.userId());
       return "/";
    }
 

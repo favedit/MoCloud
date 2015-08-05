@@ -1,5 +1,4 @@
 <%@ include file='/apl/public.inc' %>
-   <jh:define source="&basePage.user" alias="base"></jh:define>
    <HTML>
 
    <HEAD>
@@ -7,27 +6,6 @@
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
    </HEAD>
    <script>
-//      $(function() {
-//         var flag = "<jh:write source='&base.ouid' />";
-//         if (flag == "") {
-//            alert("连接超时~！");
-//            parent.parent.location.href = "/manage/home/Frame.wa";
-//         }
-//         var url = "/manage/role/Role.wa?do=selectAll&date=" + new Date().valueOf();
-//         $.ajax({
-//            type: "POST",
-//            url: url,
-//            success: function(msg) {
-//               closeProgress();
-//               $('#role').combobox('loadData', toJsonObject(msg));
-//            },
-//            fail: function() {
-//               closeProgress();
-//               alert("error");
-//            }
-//         });
-//      });
-
       function submitForm() {
          if (!isValid()) return;
          progress();
@@ -91,7 +69,7 @@
                <td align="left" width="48">帐号</td>
                <td align="left" width="660">
                   <input id="passport" name="passport" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[1,16]'" value="" />
-                  <input id="adminId" name="adminId" style="display:none" value="<jh:write source='&base.ouid'/>" />
+                  <input id="adminId" name="adminId" style="display:none" value="<jh:write source='&basePage.userId'/>" />
                </td>
             </tr>
             <tr>

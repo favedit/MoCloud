@@ -1,6 +1,5 @@
 package org.mo.content.face.base;
 
-import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import org.mo.com.lang.FObjectId;
@@ -20,9 +19,6 @@ public class FBasePage
    //ajax
    protected String _json;
 
-   //用户
-   public FDataPersonUserUnit user;
-
    //详情
    protected String _description;
 
@@ -31,6 +27,26 @@ public class FBasePage
 
    //版本号
    protected String _version;
+
+   protected String _userId;
+
+   protected String _userName;
+
+   public String userName(){
+      return _userName;
+   }
+
+   public void setUserName(String _userName){
+      this._userName = _userName;
+   }
+
+   public String userId(){
+      return _userId;
+   }
+
+   public void setUserId(String _userId){
+      this._userId = _userId;
+   }
 
    public String version(){
       return _version;
@@ -54,14 +70,6 @@ public class FBasePage
 
    public void setDescription(String _description){
       this._description = _description;
-   }
-
-   public FDataPersonUserUnit user(){
-      return user;
-   }
-
-   public void setUser(FDataPersonUserUnit user){
-      this.user = user;
    }
 
    public String json(){
@@ -94,5 +102,12 @@ public class FBasePage
          e.printStackTrace();
          this._json = "{}";
       }
+   }
+
+   public boolean userExists(){
+      if(RString.isEmpty(userId())){
+         return false;
+      }
+      return true;
    }
 }

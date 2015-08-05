@@ -21,7 +21,7 @@ public interface IDynamicAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
-                    @AContainer(name = "page") FBasePage page);
+                    @AContainer(name = "basePage") FBasePage page);
 
    //============================================================
    // <T>动态统计获取</T>

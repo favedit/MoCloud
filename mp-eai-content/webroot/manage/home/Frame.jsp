@@ -11,26 +11,7 @@
          <jsp:include page="../common/jeui.jsp"></jsp:include>
       </head>
       <script type="text/javascript">
-         $(function() {
-            //	var passport = getCookieValue("passport");
-            //	if(passport != ""){
-            //		$("#savePass").attr("checked",true);
-            //	}
-            //	$("#passport").val(passport);
-            //	
-            //	$("#password").val(getCookieValue("password"));
-         });
-
          function submitForm() {
-//            if ($("#passport").val().length == 0) {
-//               alertx("请输入用户名", "'warning'");
-//               return;
-//            }
-//            if ($("#password").val().length == 0) {
-//               alertx("请输入密码", "'warning'");
-//               return;
-//            }
-
             var data = {
                "passport": $("#passport").val(),
                "password": $("#password").val()
@@ -56,15 +37,6 @@
                }
             });
          }
-         //function saveCookie(o){
-         //	if(o.checked){
-         //		setCookie("passport",$("#passport").val(),24,"/");
-         //		setCookie("password",$("#password").val(),24,"/");
-         //	}else{
-         //		deleteCookie("passport","/");
-         //		deleteCookie("password","/")
-         //	}
-         //}
       </script>
 
       <body>
@@ -81,22 +53,15 @@
                   </dl>
                   <dl class="inp_2">
                      <dt>
-                	<input id="passport" class="inp_txt_01" type="text" value="admin">
+                	<input id="passport" class="inp_txt_01" type="text">
                 </dt>
                      <dd>
-                        <input id="password" class="inp_txt_02" type="password" value="admin_123">
+                        <input id="password" class="inp_txt_02" type="password">
                      </dd>
                   </dl>
                   <div class="loginbtn">
                      <input name="" onclick="submitForm()" type="image" src="../images/loginbtn.png">
                   </div>
-                  <!--
-        	<dl class="inp_3">
-            	<dd>
-                	<input id="savePass" onclick="saveCookie(this)" type="checkbox" value=""> 记住密码
-                </dd>
-            </dl>
--->
                </div>
             </div>
          </center>

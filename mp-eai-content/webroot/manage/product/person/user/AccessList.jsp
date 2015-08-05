@@ -68,7 +68,7 @@
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
-               <a href="/manage/product/person/user/InsertUser.wp" class="add_btn"></a>
+               <a href="/product/person/user/Access.wa?do=insertBefore" class="add_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>

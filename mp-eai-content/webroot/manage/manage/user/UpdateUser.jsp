@@ -72,7 +72,7 @@
                <td align="left" width="66">帐号</td>
                <td align="left" width="572">
                   <input id="passport" name="passport" readonly class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true" value="<jh:write source='&user.passport'/>" />
-                  <input id="id" name="id" style="display:none" value="<jh:write source='&user.ouid'/>" />
+                  <input id="id" name="id" style="display:none" value="<jh:write source='&user.guid'/>" />
                </td>
             </tr>
             <tr>

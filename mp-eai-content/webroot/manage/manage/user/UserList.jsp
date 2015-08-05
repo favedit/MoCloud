@@ -70,7 +70,7 @@
       <table id="user" fit='true' class="easyui-datagrid" style="width:100%;height:100%;text-align:center;align:true " data-options="toolbar:'#cy_right',pagination:true,collapsible:true">
          <thead>
             <tr>
-               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
+               <th data-options="field:'guid',halign:'center',align:'right',hidden:'true'" width="60px">编号</th>
                <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">帐号</th>
                <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">名称</th>
                <th data-options="field:'description',halign:'center',align:'left',sortable:true" width="160px">描述</th>
