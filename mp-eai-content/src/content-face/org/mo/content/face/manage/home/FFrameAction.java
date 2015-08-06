@@ -149,7 +149,6 @@ public class FFrameAction
 
       String password = RMd5.encode(context.parameter("password").trim());
       String oldpwd = RMd5.encode(context.parameter("oldpwd").trim());
-
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
       unit.setPassword(oldpwd);
       if(unit.isPasswordChanged()){

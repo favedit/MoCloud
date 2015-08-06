@@ -96,7 +96,7 @@
             <tr>
                <td align="left">真实名称</td>
                <td align="left">
-                  <input id="label" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" name="label" value="" />
+                  <input id="label" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[1,16]'" name="label" value="" />
                </td>
             </tr>
 

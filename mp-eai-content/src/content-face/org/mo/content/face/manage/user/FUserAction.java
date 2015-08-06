@@ -122,7 +122,6 @@ public class FUserAction
       unit.setPassword(password);
       unit.setLabel(context.parameter("label"));
       unit.setOvld(true);
-      //      unit.setCreateUserId(context.parameterAsLong("adminId"));
       _userConsole.doInsert(logicContext, unit);
       basePage.setJson("1");
       _logger.debug(this, "InsertUser", "InsertUser succeed.");

@@ -30,7 +30,7 @@
                         $('#oldpwd').focus();
                      });
                   } else {
-                     top.location.href = "/manage/home/Frame.wa?do=loginOut";
+                      window.parent.parent.location.reload();
                   }
                },
                fail: function() {
@@ -63,7 +63,6 @@
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="#" onClick="submitForm()" class="sub_btn"></a>
-               <a href="/manage/user/User.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>

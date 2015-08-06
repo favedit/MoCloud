@@ -45,14 +45,15 @@
             });
          }
 
-         function edit(id) {
-            location.href = "/manage/user/User.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
-         }
          function del(id) {
-            location.href = "/manage/user/User.wa?do=del&id=" + id + "&date=" + new Date().valueOf();
+            return confirmx('确定将此用户删除?',
+               function() {
+                  location.href = "/manage/user/User.wa?do=del&id=" + id + "&date=" + new Date().valueOf();
+               });
          }
       </script>
    </HEAD>
+
    <body bgcolor="#198bc9">
       <div id="cy_right" style="width:100%">
          <div class="right_title">
@@ -74,7 +75,7 @@
                <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">名称</th>
                <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
                <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">修改时间</th>
-               <th data-options="field:'operation',halign:'center',align:'left',formatter:insert_admin_editButton" width="140px">操作</th>
+               <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_admin_editButton" width="80px">操作</th>
             </tr>
          </thead>
       </table>
