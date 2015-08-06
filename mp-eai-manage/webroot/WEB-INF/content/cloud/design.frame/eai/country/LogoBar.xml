@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150616151654">
+  <Bar guid="CD35AB66136242D1A4210A4DB499B17A" name="eai.country.LogoBar" label="标志栏" size="400,100" back_color="#FF0099">
+    <Button guid="B05D06450DC842528C5F1954A741B23E" name="optionDouble1" label="轻轻点我" location="4,5" size="100,80" back_color="#00FF99" back_resource="url:/script/ars/picture/grid.png" back_grid="6,6,6,6" />
+    <Picture guid="D2D727D830F448E6A6A9DBBA2FA3B0BA" name="optionDouble2" label="双面效果" location="100,20" size="80,60" back_color="#0099FF" back_resource="url:/script/ars/picture/grid.png" back_grid="6,6,6,6" />
+    <Picture guid="2443B45AE1FB4342BC1519B4FDCEE550" name="optionDouble3" label="双面效果" location="200,30" size="60,40" back_color="#0099FF" back_resource="url:/script/ars/picture/grid.png" back_grid="6,6,6,6" />
+  </Bar>
+</Content>

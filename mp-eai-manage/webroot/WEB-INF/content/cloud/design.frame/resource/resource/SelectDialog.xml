@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="resource.resource.SelectDialog" type='FDsResourceSelectDialog' label="资源选取窗口" is_valid="Y" size='1000,500' note="">
+      <PanelVertical dock_cd='fill' size='100%,100%'>
+         <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
+            <FramePage name='catalogFrame' linker='_frameCatalog' label='目录区' size='240,0'>
+               <FrameSet name='catalogFrameSet' direction_cd='V' label='目录布局'>
+                  <FramePage name='catalogToolbarFrame' linker='_frameCatalogToolBar' label='目录工具栏' size='0,24'/>
+                  <FramePage name='catalogContentFrame' linker='_frameCatalogContent' label='目录内容区'/>
+               </FrameSet>
+            </FramePage>
+            <FrameSpliter name='catalogSpliter'/>
+            <FramePage name='listFrame' label='工作区'>
+               <FrameSet name='listFrameSet' direction_cd='V' label='列表布局'>
+                  <FramePage name='listToolbarFrame' linker='_frameListToolBar' label='列表工具栏' size='0,24'/>
+                  <FramePage name='listContentFrame' linker='_frameListContent' label='列表内容区'/>
+               </FrameSet>
+            </FramePage>
+         </FrameSet>
+         <PanelHorizontal size='100%,30'>
+            <Button name="confirm" linker='_controlConfirm' label="确认" size='80,20' margin='4,0,4,0' wrap_cd='1'/>
+            <Button name="cancel" linker='_controlCancel' label="取消" size='80,20' margin='4,0,4,0' />
+         </PanelHorizontal>
+      </PanelVertical>
+   </Frame>
+</Content>

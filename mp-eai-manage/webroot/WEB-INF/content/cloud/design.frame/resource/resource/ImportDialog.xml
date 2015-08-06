@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="resource.resource.ImportDialog" type='FDsResourceImportDialog' label="导入对话框" is_valid="Y" size='640,400' note="">
+      <Panel name='catalogPanel' label='目录信息'>
+         <Edit name="label" linker='_controlNodeLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='infoPanel' label='基本信息'>
+         <Edit name="code" linker='_controlCode' label="代码" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='matrixPanel' label='文件信息'>
+         <File name="file" linker='_controlFile' label="文件" label_size='70,0' valid="Y" edit_size='400,0' input_size='400,0' note="" />
+      </Panel>
+      <Button name="confirmButton" linker='_controlConfirmButton' label="确认" size='80,20' margin='4,0,4,0' wrap_cd='1'/>
+      <Button name="cancelButton" linker='_controlCancelButton' label="取消" size='80,20' margin='4,0,4,0' />
+   </Frame>
+</Content>
