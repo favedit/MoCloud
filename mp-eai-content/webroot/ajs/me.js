@@ -1502,8 +1502,12 @@ MO.AAnnotation = function AAnnotation(name){
    o._annotationCd = null;
    o._inherit      = false;
    o._duplicate    = false;
+   o._ordered      = false;
    o._name         = name;
    o.annotationCd  = MO.AAnnotation_annotationCd;
+   o.isInherit     = MO.AAnnotation_isInherit;
+   o.isDuplicate   = MO.AAnnotation_isDuplicate;
+   o.isOrdered     = MO.AAnnotation_isOrdered;
    o.name          = MO.AAnnotation_name;
    o.code          = MO.AAnnotation_code;
    o.value         = MO.AAnnotation_value;
@@ -1511,6 +1515,15 @@ MO.AAnnotation = function AAnnotation(name){
 }
 MO.AAnnotation_annotationCd = function AAnnotation_annotationCd(){
    return this._annotationCd;
+}
+MO.AAnnotation_isInherit = function AAnnotation_isInherit(){
+   return this._inherit;
+}
+MO.AAnnotation_isDuplicate = function AAnnotation_isDuplicate(){
+   return this._duplicate;
+}
+MO.AAnnotation_isOrdered = function AAnnotation_isOrdered(){
+   return this._ordered;
 }
 MO.AAnnotation_name = function AAnnotation_name(){
    return this._name;
@@ -1656,6 +1669,7 @@ MO.EAnnotation = new function EAnnotation(){
    var o = this;
    o.Source    = 'source';
    o.Property  = 'property';
+   o.Persistence  = 'persistence';
    o.Event     = 'enum';
    o.Event     = 'event';
    o.Linker    = 'linker';
@@ -1688,9 +1702,13 @@ MO.EDataType = new function EDataType(){
    o.Uint32 = 7;
    o.Uint64 = 8;
    o.Float16 = 9;
-   o.Float32 = 10;
-   o.Float64 = 11;
+   o.Float32 = o.Float = 10;
+   o.Float64 = o.Double = 11;
    o.String = 12;
+   o.Object = 13;
+   o.Array = 14;
+   o.Objects = 15;
+   o.Dictionary = 16;
    return o;
 }
 MO.EEndian = new function EEndian(){
@@ -1808,43 +1826,57 @@ MO.TClass = function TClass(){
    o.alloc          = MO.TClass_alloc;
    return o;
 }
-MO.TClass_register = function TClass_register(p){
+MO.TClass_register = function TClass_register(annotation){
    var o = this;
-   var a = p.annotationCd();
-   var n = p.name();
-   var c = p.code();
-   if(!a || !c){
-      throw new MO.TError(o, "Unknown annotation. (class={1},annotation={2},name={3},code={4})", MO.Class.dump(o), a, n, c);
+   var annotationCd = annotation.annotationCd();
+   var ordered = annotation.isOrdered();
+   var name = annotation.name();
+   var code = annotation.code();
+   if(!annotationCd || !code){
+      throw new MO.TError(o, "Unknown annotation. (class={1}, annotation={2}, name={3}, code={4})", MO.Class.dump(o), annotation, name, code);
    }
-   var as = o._annotations[a];
-   if(!as){
-      as = o._annotations[a] = new Object();
+   var annotations = o._annotations[annotationCd];
+   if(!annotations){
+      if(ordered){
+         annotations = new MO.TObjects();
+      }else{
+         annotations = new Object();
+      }
+      o._annotations[annotationCd] = annotations;
    }
-   if(!p._duplicate){
-      if(as[c]){
-         throw new MO.TError(o, "Duplicate annotation. (class={1},annotation={2},name={3},code={4},value={5})", MO.Class.dump(o), a, n, c, p.toString());
+   if(!annotation._duplicate){
+      if(annotations[code]){
+         throw new MO.TError(o, "Duplicate annotation. (class={1}, annotation={2}, name={3}, code={4}, value={5})", MO.Class.dump(o), annotation, name, code, annotation.toString());
       }
    }
-   as[c] = p;
-   o._attributes[n] = p;
+   if(ordered){
+      annotations.push(annotation);
+   }else{
+      annotations[code] = annotation;
+   }
+   o._attributes[name] = annotation;
 }
 MO.TClass_assign = function TClass_assign(clazz){
    var o = this;
    for(var annotationName in clazz._annotations){
+      var clazzAnnotations = clazz._annotations[annotationName];
       var annotations = o._annotations[annotationName];
       if(!annotations){
-         annotations = o._annotations[annotationName] = new Object();
+         annotations = o._annotations[annotationName] = new clazzAnnotations.constructor();
       }
-      var clazzAnnotations = clazz._annotations[annotationName];
-      for(var name in clazzAnnotations){
-         var annotation = clazzAnnotations[name];
-         if(!annotation._duplicate){
-            if(annotations[name]){
-               throw new MO.TError(o, "Duplicate annotation. (annotation={1}, {2}.{3}={4}.{5}, source={6})", an, o.name, n, clazz.name, n, annotation.toString());
+      if(clazzAnnotations.constructor == MO.TObjects){
+         annotations.append(clazzAnnotations);
+      }else{
+         for(var name in clazzAnnotations){
+            var annotation = clazzAnnotations[name];
+            if(!annotation.isDuplicate()){
+               if(annotations[name]){
+                  throw new MO.TError(o, "Duplicate annotation. (annotation={1}, {2}.{3}={4}.{5}, source={6})", an, o.name, n, clazz.name, n, annotation.toString());
+               }
             }
-         }
-         if(annotation._inherit){
-            annotations[name] = annotation;
+            if(annotation._inherit){
+               annotations[name] = annotation;
+            }
          }
       }
    }
@@ -3795,12 +3827,12 @@ MO.RClass.prototype.typeOf = function RClass_typeOf(o){
    }
    return 'Null';
 }
-MO.RClass.prototype.safeTypeOf = function RClass_safeTypeOf(v, safe){
-   if(v == null){
+MO.RClass.prototype.safeTypeOf = function RClass_safeTypeOf(value, safe){
+   if(value == null){
       return 'Null';
    }
    try{
-      var c = v.constructor;
+      var c = value.constructor;
       if(c == Boolean){
          return 'Boolean';
       }
@@ -3816,13 +3848,13 @@ MO.RClass.prototype.safeTypeOf = function RClass_safeTypeOf(v, safe){
       if(c.constructor == Function){
          return MO.Lang.String.mid(c.toString(), 'function ', '(');
       }
-      if(v.__class){
-         return v.__class.name;
+      if(value.__class){
+         return value.__class.name;
       }
-      if(v.tagName){
+      if(value.tagName){
          return 'Html';
       }
-      for(var n in v){
+      for(var name in value){
          return 'Object';
       }
    }catch(e){
@@ -3845,20 +3877,20 @@ MO.RClass.prototype.code = function RClass_code(v){
    c[l] = v;
    return l;
 }
-MO.RClass.prototype.name = function RClass_name(v){
-   if(v){
-      if(v.__name){
-         return v.__name;
+MO.RClass.prototype.name = function RClass_name(value){
+   if(value){
+      if(value.__name){
+         return value.__name;
       }
-      if(v.__class){
-         return v.__class.name;
+      if(value.__class){
+         return value.__class.name;
       }
-      if(typeof(v) == 'function'){
-         return MO.Method.name(v);
+      if(typeof(value) == 'function'){
+         return MO.Method.name(value);
       }
-      var c = v.constructor;
-      if(c){
-         return MO.Lang.String.mid(c.toString(), 'function ', '(');
+      var method = value.constructor;
+      if(method){
+         return MO.Lang.String.mid(method.toString(), 'function ', '(');
       }
    }
    return null;
@@ -3954,44 +3986,44 @@ MO.RClass.prototype.createByName = function RClass_createByName(className){
    }
    return clazz.newInstance();
 }
-MO.RClass.prototype.innerCopy = function RClass_innerCopy(s, t){
-   if((s != null) && (t != null)){
-      for(var n in s){
-         var v = s[n];
-         if(v != null){
-            var p = typeof(v)
-            if(p == 'function'){
-               var f = t[n];
-               if(f == null){
-                  t[n] = v;
-               }else if(MO.Method.isVirtual(f)){
-                  t[n] = v;
-               }else if(!MO.Method.isVirtual(v) && MO.Method.isEmpty(f)){
-                  t[n] = v;
-               }else if(!MO.Method.isVirtual(v) && !MO.Method.isEmpty(v)){
-                  t[n] = v;
+MO.RClass.prototype.innerCopy = function RClass_innerCopy(source, target){
+   if((source != null) && (target != null)){
+      for(var n in source){
+         var value = source[n];
+         if(value != null){
+            var typeName = typeof(value)
+            if(typeName == 'function'){
+               var targetValue = target[n];
+               if(targetValue == null){
+                  target[n] = value;
+               }else if(MO.Method.isVirtual(targetValue)){
+                  target[n] = value;
+               }else if(!MO.Method.isVirtual(value) && MO.Method.isEmpty(targetValue)){
+                  target[n] = value;
+               }else if(!MO.Method.isVirtual(value) && !MO.Method.isEmpty(value)){
+                  target[n] = value;
                }
                continue;
-            }else if(!MO.Class.isBaseName(p)){
-               if(t[n] == null){
-                  t[n] = new v.constructor();
+            }else if(!MO.Class.isBaseName(typeName)){
+               if(target[n] == null){
+                  target[n] = new value.constructor();
                }
-               this.innerCopy(v, t[n]);
+               this.innerCopy(value, target[n]);
                continue;
             }
          }
-         t[n] = v;
+         target[n] = value;
       }
    }
 }
 MO.RClass.prototype.build = function RClass_build(clazz){
    var o = this;
-   var sbs = clazz.clazz.__inherits;
-   if(sbs && (sbs.constructor == Array)){
+   var inherits = clazz.clazz.__inherits;
+   if(inherits && (inherits.constructor == Array)){
       var finded = false;
-      var sbl = sbs.length;
-      for(var i = 0; i < sbl; i++){
-         var name = sbs[i];
+      var inheritCount = inherits.length;
+      for(var i = 0; i < inheritCount; i++){
+         var name = inherits[i];
          if(MO.Lang.String.startsWith(name, 'F')){
             if(finded){
                MO.Logger.fatal(o, null, 'Parent class is too many. (name={1})', name);
@@ -4002,17 +4034,17 @@ MO.RClass.prototype.build = function RClass_build(clazz){
       }
    }
    var instance = clazz.instance = new clazz.base.constructor();
-   if(sbs && (sbs.constructor == Array)){
-      var sbl = sbs.length;
-      for(var i = 0; i < sbl; i++){
-         var name = sbs[i];
+   if(inherits && (inherits.constructor == Array)){
+      var inheritCount = inherits.length;
+      for(var i = 0; i < inheritCount; i++){
+         var name = inherits[i];
          if(!MO.Lang.String.startsWith(name, 'F')){
-            var m = MO.Class.forName(name);
-            if(m == null){
+            var findClass = MO.Class.forName(name);
+            if(findClass == null){
                MO.Logger.fatal(o, null, 'Parent class is not exists. (name={1})', name);
             }
-            MO.Class.innerCopy(m.instance, instance);
-            clazz.assign(m);
+            MO.Class.innerCopy(findClass.instance, instance);
+            clazz.assign(findClass);
          }
       }
    }
@@ -4036,20 +4068,20 @@ MO.RClass.prototype.build = function RClass_build(clazz){
          }
       }
    }
-   if(sbs && (sbs.constructor == Array)){
-      var sbl = sbs.length;
-      for(var i = 0; i < sbl; i++){
-         var name = sbs[i];
-         var bcls = MO.Class.forName(name);
-         var base = instance.__base[name] = new bcls.base.constructor();
-         var cf = bcls.instance;
-         for(var name in cf){
+   if(inherits && (inherits.constructor == Array)){
+      var inheritCount = inherits.length;
+      for(var i = 0; i < inheritCount; i++){
+         var name = inherits[i];
+         var baseClass = MO.Class.forName(name);
+         var base = instance.__base[name] = new baseClass.base.constructor();
+         var baseInstance = baseClass.instance;
+         for(var name in baseInstance){
             if(name != '__base'){
-               var cfn = cf[name];
+               var cfn = baseInstance[name];
                var ofn = instance[name];
                if((cfn != null) && (ofn != null) && (cfn != ofn)){
                   if((cfn.constructor == Function) && (ofn.constructor == Function)){
-                     base[name] = cf[name];
+                     base[name] = baseInstance[name];
                   }
                }
             }
@@ -8986,6 +9018,32 @@ MO.AListener_build = function AListener_build(clazz, instance){
    var processListener = 'process' + o._linker + 'Listener';
    instance[processListener] = MO.RListener.makeProcessListener(processListener, o._linker);
 }
+MO.APersistence = function APersistence(name, dataCd, dataClass){
+   var o = this;
+   MO.AAnnotation.call(o, name);
+   o._annotationCd = MO.EAnnotation.Persistence;
+   o._inherit      = true;
+   o._ordered      = true;
+   o._dataCd       = dataCd;
+   o._dataClass    = dataClass;
+   o.dataCd        = MO.APersistence_dataCd;
+   o.dataClass     = MO.APersistence_dataClass;
+   o.newInstance   = MO.APersistence_newInstance;
+   o.toString      = MO.APersistence_toString;
+   return o;
+}
+MO.APersistence_dataCd = function APersistence_dataCd(){
+   return this._dataCd;
+}
+MO.APersistence_dataClass = function APersistence_dataClass(){
+   return this._dataClass;
+}
+MO.APersistence_newInstance = function APersistence_newInstance(){
+   return MO.Class.create(this._dataClass);
+}
+MO.APersistence_toString = function APersistence_toString(){
+   return '<' + this._annotationCd + ',name=' + this._name + '>';
+}
 MO.AStyle = function AStyle(name, style){
    var o = this;
    MO.AAnnotation.call(o, name);
@@ -9284,8 +9342,8 @@ MO.MDataStream = function MDataStream(o){
    o.readFloat    = MO.MDataStream_readFloat;
    o.readDouble   = MO.MDataStream_readDouble;
    o.readString   = MO.MDataStream_readString;
-   o.readData     = MO.MDataStream_readData;
    o.readBytes    = MO.MDataStream_readBytes;
+   o.readData     = MO.MDataStream_readData;
    o.writeBoolean = MO.MDataStream_writeBoolean;
    o.writeInt8    = MO.MDataStream_writeInt8;
    o.writeInt16   = MO.MDataStream_writeInt16;
@@ -9299,6 +9357,7 @@ MO.MDataStream = function MDataStream(o){
    o.writeDouble  = MO.MDataStream_writeDouble;
    o.writeString  = MO.MDataStream_writeString;
    o.writeBytes   = MO.MDataStream_writeBytes;
+   o.writeData    = MO.MDataStream_writeData;
    return o;
 }
 MO.MDataStream_testString = function MDataStream_testString(){
@@ -9396,34 +9455,6 @@ MO.MDataStream_readString = function MDataStream_readString(){
    o._position = position;
    return value.flush();
 }
-MO.MDataStream_readData = function MDataStream_readData(dataCd){
-   var o = this;
-   switch(dataCd){
-      case EDataType.Int8:
-         return o.readInt8();
-      case EDataType.Int16:
-         return o.readInt16();
-      case EDataType.Int32:
-         return o.readInt32();
-      case EDataType.Int64:
-         return o.readInt64();
-      case EDataType.Uint8:
-         return o.readUint8();
-      case EDataType.Uint16:
-         return o.readUint16();
-      case EDataType.Uint32:
-         return o.readUint32();
-      case EDataType.Uint64:
-         return o.readUint64();
-      case EDataType.Float32:
-         return o.readFloat();
-      case EDataType.Float64:
-         return o.readDouble();
-      case EDataType.String:
-         return o.readString();
-   }
-   throw new TError(o, 'Unknown data cd. (data_cd={1})', dataCd);
-}
 MO.MDataStream_readBytes = function MDataStream_readBytes(data, offset, length){
    var o = this;
    var viewer = o._viewer;
@@ -9470,6 +9501,34 @@ MO.MDataStream_readBytes = function MDataStream_readBytes(data, offset, length){
       array[i] = viewer.getUint8(position++, endianCd);
    }
    o._position = position;
+}
+MO.MDataStream_readData = function MDataStream_readData(dataCd){
+   var o = this;
+   switch(dataCd){
+      case MO.EDataType.Int8:
+         return o.readInt8();
+      case MO.EDataType.Int16:
+         return o.readInt16();
+      case MO.EDataType.Int32:
+         return o.readInt32();
+      case MO.EDataType.Int64:
+         return o.readInt64();
+      case MO.EDataType.Uint8:
+         return o.readUint8();
+      case MO.EDataType.Uint16:
+         return o.readUint16();
+      case MO.EDataType.Uint32:
+         return o.readUint32();
+      case MO.EDataType.Uint64:
+         return o.readUint64();
+      case MO.EDataType.Float32:
+         return o.readFloat();
+      case MO.EDataType.Float64:
+         return o.readDouble();
+      case MO.EDataType.String:
+         return o.readString();
+   }
+   throw new TError(o, 'Unknown data cd. (data_cd={1})', dataCd);
 }
 MO.MDataStream_writeBoolean = function MDataStream_writeBoolean(value){
    var o = this;
@@ -9586,6 +9645,34 @@ MO.MDataStream_writeBytes = function MDataStream_writeBytes(data, offset, length
       viewer.setUint8(position++, array[i], endianCd);
    }
    o._position = position;
+}
+MO.MDataStream_writeData = function MDataStream_writeData(dataCd, value){
+   var o = this;
+   switch(dataCd){
+      case MO.EDataType.Int8:
+         return o.writeInt8(value);
+      case MO.EDataType.Int16:
+         return o.writeInt16(value);
+      case MO.EDataType.Int32:
+         return o.writeInt32(value);
+      case MO.EDataType.Int64:
+         return o.writeInt64(value);
+      case MO.EDataType.Uint8:
+         return o.writeUint8(value);
+      case MO.EDataType.Uint16:
+         return o.writeUint16(value);
+      case MO.EDataType.Uint32:
+         return o.writeUint32(value);
+      case MO.EDataType.Uint64:
+         return o.writeUint64(value);
+      case MO.EDataType.Float32:
+         return o.writeFloat(value);
+      case MO.EDataType.Float64:
+         return o.writeDouble(value);
+      case MO.EDataType.String:
+         return o.writeString(value);
+   }
+   throw new TError(o, 'Unknown data cd. (data_cd={1})', dataCd);
 }
 MO.MDataView = function MDataView(o){
    o = MO.Class.inherits(this, o);
@@ -9884,6 +9971,106 @@ MO.MParent_findParent = function MParent_findParent(clazz){
 MO.MParent_dispose = function MParent_dispose(){
    var o = this;
    o._parent = null;
+}
+MO.MPersistence = function MPersistence(o){
+   o = MO.Class.inherits(this, o);
+   o.unserialize       = MO.MPersistence_unserialize;
+   o.unserializeBuffer = MO.MPersistence_unserializeBuffer;
+   o.serialize         = MO.MPersistence_serialize;
+   o.serializeBuffer   = MO.MPersistence_serializeBuffer;
+   return o;
+}
+MO.MPersistence_unserialize = function MPersistence_unserialize(input){
+   var o = this;
+   var clazz = MO.Class.find(o.constructor);
+   var annotations = clazz.annotations(MO.EAnnotation.Persistence);
+   var count = annotations.count();
+   for(var n = 0; n < count; n++){
+      var annotation = annotations.at(n);
+      var dateCd = annotation.dataCd();
+      var name = annotation.name();
+      if(dateCd == MO.EDataType.Object){
+         var items = o[name];
+         if(!items){
+            items = o[name] = annotation.newInstance();
+         }
+         item.unserialize(input);
+      }else if(dateCd == MO.EDataType.Objects){
+         var items = o[name];
+         if(!items){
+            items = o[name] = new MO.TObjects();
+         }
+         items.clear();
+         var itemCount = input.readInt32();
+         for(var i = 0; i < itemCount; i++){
+            var item = annotation.newInstance();
+            item.unserialize(input);
+            items.push(item);
+         }
+      }else if(dateCd == MO.EDataType.Dictionary){
+         var items = o[name];
+         if(!items){
+            items = o[name] = new MO.TDictionary();
+         }
+         items.clear();
+         var itemCount = input.readInt32();
+         for(var i = 0; i < itemCount; i++){
+            var item = annotation.newInstance();
+            item.unserialize(input);
+            items.set(item.code(), item);
+         }
+      }else{
+         o[name] = input.readData(dateCd);
+      }
+   }
+}
+MO.MPersistence_unserializeBuffer = function MPersistence_unserializeBuffer(buffer, endianCd){
+   var o = this;
+   var view = MO.Class.create(MO.FDataView);
+   view.setEndianCd(endianCd);
+   view.link(buffer);
+   o.unserialize(view);
+   view.dispose();
+}
+MO.MPersistence_serialize = function MPersistence_serialize(output){
+   var o = this;
+   var clazz = MO.Class.find(o.constructor);
+   var annotations = clazz.annotations(MO.EAnnotation.Persistence);
+   var count = annotations.count();
+   for(var i = 0; i < count; i++){
+      var annotation = annotations.at(i);
+      var dateCd = annotation.dataCd();
+      var name = annotation.name();
+      var value = o[name];
+      if(dateCd == MO.EDataType.Object){
+         value.unserialize(input);
+      }else if(dateCd == MO.EDataType.Objects){
+         var itemCount = value.count();
+         input.writeInt32(itemCount);
+         for(var i = 0; i < itemCount; i++){
+            var item = value.at(i);
+            item.serialize(input);
+         }
+      }else if(dateCd == MO.EDataType.Dictionary){
+         var items = o[name];
+         var itemCount = value.count();
+         input.writeInt32(itemCount);
+         for(var i = 0; i < itemCount; i++){
+            var item = value.at(i);
+            item.serialize(input);
+         }
+      }else{
+         input.writeData(dateCd, value);
+      }
+   }
+}
+MO.MPersistence_serializeBuffer = function MPersistence_serializeBuffer(buffer, endianCd){
+   var o = this;
+   var view = MO.Class.create(MO.FDataView);
+   view.setEndianCd(endianCd);
+   view.link(buffer);
+   o.serialize(view);
+   view.dispose();
 }
 MO.MProperty = function MProperty(o){
    o = MO.Class.inherits(this, o);
@@ -22657,19 +22844,20 @@ MO.FEntityConsole_dispose = function FEntityConsole_dispose(){
 }
 MO.FE2dCanvas = function FE2dCanvas(o){
    o = MO.Class.inherits(this, o, MO.FCanvas, MO.MCanvasObject, MO.MGraphicObject);
-   o._size      = MO.Class.register(o, new MO.AGetter('_size'));
-   o._hCanvas   = null;
-   o.onResize   = MO.FE2dCanvas_onResize;
-   o.construct  = MO.FE2dCanvas_construct;
-   o.htmlCanvas = MO.FE2dCanvas_htmlCanvas;
-   o.build      = MO.FE2dCanvas_build;
-   o.setPanel   = MO.FE2dCanvas_setPanel;
-   o.resize     = MO.FE2dCanvas_resize;
-   o.show       = MO.FE2dCanvas_show;
-   o.hide       = MO.FE2dCanvas_hide;
-   o.setVisible = MO.FE2dCanvas_setVisible;
-   o.reset      = MO.FE2dCanvas_reset;
-   o.dispose    = MO.FE2dCanvas_dispose;
+   o._size         = MO.Class.register(o, new MO.AGetter('_size'));
+   o._hCanvas      = null;
+   o.onResize      = MO.FE2dCanvas_onResize;
+   o.construct     = MO.FE2dCanvas_construct;
+   o.createContext = MO.FE2dCanvas_createContext;
+   o.htmlCanvas    = MO.FE2dCanvas_htmlCanvas;
+   o.build         = MO.FE2dCanvas_build;
+   o.setPanel      = MO.FE2dCanvas_setPanel;
+   o.resize        = MO.FE2dCanvas_resize;
+   o.show          = MO.FE2dCanvas_show;
+   o.hide          = MO.FE2dCanvas_hide;
+   o.setVisible    = MO.FE2dCanvas_setVisible;
+   o.reset         = MO.FE2dCanvas_reset;
+   o.dispose       = MO.FE2dCanvas_dispose;
    return o;
 }
 MO.FE2dCanvas_onResize = function FE2dCanvas_onResize(p){
@@ -22679,6 +22867,9 @@ MO.FE2dCanvas_construct = function FE2dCanvas_construct(){
    var o = this;
    o.__base.FCanvas.construct.call(o);
    o._size = new MO.SSize2(1280, 720);
+}
+MO.FE2dCanvas_createContext = function FE2dCanvas_createContext(){
+   return MO.Class.create(MO.FG2dCanvasContext);
 }
 MO.FE2dCanvas_htmlCanvas = function FE2dCanvas_htmlCanvas(){
    return this._hCanvas;
@@ -22695,7 +22886,7 @@ MO.FE2dCanvas_build = function FE2dCanvas_build(hDocument){
    hStyle.top = '0px';
    hStyle.width = '100%';
    hStyle.height = '100%';
-   var context = o._graphicContext = MO.Class.create(MO.FG2dCanvasContext);
+   var context = o._graphicContext = o.createContext();
    context.linkCanvas(hCanvas);
    o.resize(width, height);
 }
@@ -35522,134 +35713,421 @@ MO.SUiDispatchEvent_dump = function SUiDispatchEvent_dump(){
    var o = this;
    return MO.Class.dump(o) + ':owner=' + o.owner + ',type=' + o.type + '.invoke=' + MO.Method.name(o.invoke);
 }
-MO.FUiGridCell = function FUiGridCell(o){
-   o = MO.Class.inherits(this, o, MO.FObject);
-   o._grid      = MO.Class.register(o, new AGetSet('_grid'));
-   o._column    = MO.Class.register(o, new AGetSet('_column'));
-   o._row       = MO.Class.register(o, new AGetSet('_row'));
-   o._value     = MO.Class.register(o, new AGetSet('_value'));
-   o.text       = MO.FUiGridCell_text;
-   o.setText    = MO.FUiGridCell_setText;
-   o.dispose    = MO.FUiGridCell_dispose;
+MO.SUiFont = function SUiFont(){
+   var o = this;
+   o.font     = null;
+   o.size     = 16;
+   o.bold     = false;
+   o.color    = '#FFFFFF';
+   o.assign   = MO.SUiFont_assign;
+   o.parse    = MO.SUiFont_parse;
+   o.toString = MO.SUiFont_toString;
+   o.dispose  = MO.SUiFont_dispose;
    return o;
 }
-MO.FUiGridCell_text = function FUiGridCell_text(){
+MO.SUiFont_assign = function SUiFont_assign(value){
+   var o = this;
+   o.font = value.font;
+   o.size = value.size;
+   o.bold = value.bold;
+   o.color = value.color;
+}
+MO.SUiFont_parse = function SUiFont_parse(source){
+   var o = this;
+   throw new MO.TError('Unsupport.');
+}
+MO.SUiFont_toString = function SUiFont_toString(){
+   var o = this;
+   var result = '';
+   if(o.bold){
+      result += 'bold';
+   }
+   if(o.size){
+      if(result != ''){
+         result += ' ';
+      }
+      result += o.size + 'px';
+   }
+   if(o.font){
+      if(result != ''){
+         result += ' ';
+      }
+      result += o.font;
+   }
+   return result;
+}
+MO.SUiFont_dispose = function SUiFont_dispose(){
+   var o = this;
+   o.font = null;
+   o.size = null;
+   o.bold = null;
+}
+MO.FUiCanvas = function FUiCanvas(o){
+   o = MO.Class.inherits(this, o, MO.FE2dCanvas);
+   o.createContext = MO.FUiCanvas_createContext;
+   return o;
+}
+MO.FUiCanvas_createContext = function FUiCanvas_createContext(){
+   return MO.Class.create(MO.FUiCanvasContext);
+}
+MO.FUiCanvasContext = function FUiCanvasContext(o) {
+   o = MO.Class.inherits(this, o, MO.FG2dCanvasContext);
+   o.construct    = MO.FUiCanvasContext_construct;
+   o.drawFontText = MO.FUiCanvasContext_drawFontText;
+   o.dispose      = MO.FUiCanvasContext_dispose;
+   return o;
+}
+MO.FUiCanvasContext_construct = function FUiCanvasContext_construct() {
+   var o = this;
+   o.__base.FG2dCanvasContext.construct.call(o);
+}
+MO.FUiCanvasContext_drawFontText = function FUiCanvasContext_drawFontText(text, font, x, y, width, height, alignCd){
+   var o = this;
+   if(MO.Lang.String.isEmpty(text)){
+      return;
+   }
+   var handle = o._handle;
+   handle.font = font.toString();
+   handle.fillStyle = font.color;
+   var textWidth = o.textWidth(text);
+   var cx = x + (width - textWidth) * 0.5;
+   var cy = y + (height - font.size) * 0.5 + font.size;
+   if(alignCd == MO.EUiAlign.Left){
+      handle.fillText(text, x, cy);
+   }else if(alignCd == MO.EUiAlign.Right){
+      handle.fillText(text, x + (width - textWidth), cy);
+   }else if(alignCd == MO.EUiAlign.Center){
+      handle.fillText(text, cx, cy);
+   }else{
+      throw new MO.TError('Invalid align type.');
+   }
+}
+MO.FUiCanvasContext_dispose = function FUiCanvasContext_dispose() {
+   var o = this;
+   o.__base.FG2dCanvasContext.dispose.call(o);
+}
+MO.MUiGridCell = function MUiGridCell(o){
+   o = MO.Class.inherits(this, o, MO.FObject);
+   o._grid      = MO.Class.register(o, new MO.AGetSet('_grid'));
+   o._column    = MO.Class.register(o, new MO.AGetSet('_column'));
+   o._row       = MO.Class.register(o, new MO.AGetSet('_row'));
+   o._font      = MO.Class.register(o, new MO.AGetSet('_font'));
+   o._value     = MO.Class.register(o, new MO.AGetSet('_value'));
+   o.findFont   = MO.MUiGridCell_findFont;
+   o.text       = MO.MUiGridCell_text;
+   o.setText    = MO.MUiGridCell_setText;
+   o.dispose    = MO.MUiGridCell_dispose;
+   return o;
+}
+MO.MUiGridCell_findFont = function MUiGridCell_findFont(){
+   var o = this;
+   var font = o._font;
+   if(font){
+      font = o._row.font();
+   }
+   if(!font){
+      font = o._column.font();
+   }
+   if(!font){
+      font = o._grid.rowFont();
+   }
+   return font;
+}
+MO.MUiGridCell_text = function MUiGridCell_text(){
    var o = this;
    var text = o._column.formatText(o._value);
    return text;
 }
-MO.FUiGridCell_setText = function FUiGridCell_setText(text){
+MO.MUiGridCell_setText = function MUiGridCell_setText(text){
    var o = this;
    var value = o._column.formatValue(text);
    o.setValue(value);
 }
-MO.FUiGridCell_dispose = function FUiGridCell_dispose(){
+MO.MUiGridCell_dispose = function MUiGridCell_dispose(){
    var o = this;
    o._grid = null;
    o._column = null;
    o._row = null;
    o.__base.FObject.dispose.call(o);
 }
-MO.FUiGridCellText = function FUiGridCellText(o){
-   o = MO.Class.inherits(this, o, MO.FUiGridCell);
-   o.dispose    = MO.FUiGridCellText_dispose;
+MO.MUiGridCellCurrency = function MUiGridCellCurrency(o){
+   o = MO.Class.inherits(this, o, MO.MUiGridCell);
+   o.construct = MO.MUiGridCellCurrency_construct;
+   o.dispose   = MO.MUiGridCellCurrency_dispose;
    return o;
 }
-MO.FUiGridCellText_dispose = function FUiGridCellText_dispose(){
+MO.MUiGridCellCurrency_construct = function MUiGridCellCurrency_construct(){
    var o = this;
-   o.__base.FUiGridCell.dispose.call(o);
+   o.__base.MUiGridCell.construct.call(o);
 }
-MO.FUiGridColumn = function FUiGridColumn(o){
-   o = MO.Class.inherits(this, o, MO.FObject, MO.MUiComponent, MO.MUiTextFormator);
-   o._grid      = MO.Class.register(o, new AGetSet('_grid'));
-   o._index     = MO.Class.register(o, new AGetSet('_index'), -1);
-   o._width     = MO.Class.register(o, new AGetSet('_width'), 100);
-   o._cellClass = MO.FUiGridCell;
-   o.createCell = MO.FUiGridColumn_createCell;
-   o.dispose    = MO.FUiGridColumn_dispose;
+MO.MUiGridCellCurrency_dispose = function MUiGridCellCurrency_dispose(){
+   var o = this;
+   o.__base.MUiGridCell.dispose.call(o);
+}
+MO.MUiGridCellDate = function MUiGridCellDate(o){
+   o = MO.Class.inherits(this, o, MO.MUiGridCell);
+   o.construct = MO.MUiGridCellDate_construct;
+   o.dispose   = MO.MUiGridCellDate_dispose;
    return o;
 }
-MO.FUiGridColumn_createCell = function FUiGridColumn_createCell(clazz){
+MO.MUiGridCellDate_construct = function MUiGridCellDate_construct(){
+   var o = this;
+   o.__base.MUiGridCell.construct.call(o);
+}
+MO.MUiGridCellDate_dispose = function MUiGridCellDate_dispose(){
+   var o = this;
+   o.__base.MUiGridCell.dispose.call(o);
+}
+MO.MUiGridCellText = function MUiGridCellText(o){
+   o = MO.Class.inherits(this, o, MO.MUiGridCell);
+   o.construct = MO.MUiGridCellText_construct;
+   o.dispose   = MO.MUiGridCellText_dispose;
+   return o;
+}
+MO.MUiGridCellText_construct = function MUiGridCellText_construct(){
+   var o = this;
+   o.__base.MUiGridCell.construct.call(o);
+}
+MO.MUiGridCellText_dispose = function MUiGridCellText_dispose(){
+   var o = this;
+   o.__base.MUiGridCell.dispose.call(o);
+}
+MO.MUiGridColumn = function MUiGridColumn(o){
+   o = MO.Class.inherits(this, o, MO.MUiPadding, MO.MUiMargin, MO.MUiTextFormator);
+   o._grid        = MO.Class.register(o, new MO.AGetSet('_grid'));
+   o._index       = MO.Class.register(o, new MO.AGetSet('_index'), -1);
+   o._name        = MO.Class.register(o, new MO.AGetSet('_name'));
+   o._label       = MO.Class.register(o, new MO.AGetSet('_label'));
+   o._dataName    = MO.Class.register(o, new MO.AGetSet('_dataName'));
+   o._backColor   = MO.Class.register(o, new MO.AGetSet('_backColor'));
+   o._font        = MO.Class.register(o, new MO.AGetter('_font'));
+   o._width       = MO.Class.register(o, new MO.AGetSet('_width'), 100);
+   o._realWidth   = MO.Class.register(o, new MO.AGetSet('_realWidth'), 100);
+   o._alignCd     = MO.Class.register(o, new MO.AGetSet('_alignCd'), MO.EUiAlign.Left);
+   o._cellPadding = MO.Class.register(o, new MO.AGetter('_cellPadding'));
+   o._cellClass   = null;
+   o.construct    = MO.MUiGridColumn_construct;
+   o.createCell   = MO.MUiGridColumn_createCell;
+   o.findFont     = MO.MUiGridColumn_findFont;
+   o.dispose      = MO.MUiGridColumn_dispose;
+   return o;
+}
+MO.MUiGridColumn_construct = function MUiGridColumn_construct(){
+   var o = this;
+   o.__base.MUiPadding.construct.call(o);
+   o.__base.MUiMargin.construct.call(o);
+   o._cellPadding = new MO.SPadding();
+}
+MO.MUiGridColumn_createCell = function MUiGridColumn_createCell(clazz){
    var o = this;
    var cell = MO.Class.create(MO.Runtime.nvl(clazz, o._cellClass));
    cell.setGrid(o._grid);
    cell.setColumn(o);
    return cell;
 }
-MO.FUiGridColumn_dispose = function FUiGridColumn_dispose(){
+MO.MUiGridColumn_findFont = function MUiGridColumn_findFont(){
+   var o = this;
+   var font = o._font;
+   if(!font){
+      font = o._grid.headFont();
+   }
+   return font;
+}
+MO.MUiGridColumn_dispose = function MUiGridColumn_dispose(){
    var o = this;
    o._grid = null;
-   o._cellClass = null;
-   o.__base.FObject.dispose.call(o);
+   o._cellPadding = MO.Lang.Object.dispose(o._cellPadding);
+   o.__base.MUiMargin.dispose.call(o);
+   o.__base.MUiPadding.dispose.call(o);
 }
-MO.FUiGridColumnText = function FUiGridColumnText(o){
-   o = MO.Class.inherits(this, o, MO.FUiGridColumn);
-   o.dispose = MO.FUiGridColumnText_dispose;
+MO.MUiGridColumnCurrency = function MUiGridColumnCurrency(o){
+   o = MO.Class.inherits(this, o);
+   o._currencyPercent = MO.Class.register(o, new MO.AGetSet('_currencyPercent'), 2);
+   o._normalColor     = MO.Class.register(o, new MO.AGetSet('_normalColor'), '#000000');
+   o._highColor       = MO.Class.register(o, new MO.AGetSet('_highColor'), '#000000');
+   o._lowerColor      = MO.Class.register(o, new MO.AGetSet('_lowerColor'), '#000000');
+   o._negativeColor   = MO.Class.register(o, new MO.AGetSet('_negativeColor'), '#000000');
+   o.construct        = MO.MUiGridColumnCurrency_construct;
+   o.formatText       = MO.MUiGridColumnCurrency_formatText;
+   o.dispose          = MO.MUiGridColumnCurrency_dispose;
    return o;
 }
-MO.FUiGridColumnText_dispose = function FUiGridColumnText_dispose(){
+MO.MUiGridColumnCurrency_construct = function MUiGridColumnCurrency_construct(){
    var o = this;
-   o.__base.FUiGridColumn.dispose.call(o);
 }
-MO.FUiGridControl = function FUiGridControl(o){
-   o = MO.Class.inherits(this, o, MO.FObject);
-   o._displayCount = MO.Class.register(o, new MO.APtyInteger('_displayCount'), 20);
-   o._rowHeight    = MO.Class.register(o, new MO.APtyInteger('rowHeight'), 0);
-   o._columns      = MO.Class.register(o, new AGetter('_columns'));
-   o._rowClass     = MO.FUiGridRow;
-   o._rows         = MO.Class.register(o, new AGetter('_rows'));
-   o._focusRow     = null;
-   o._focusCell    = null;
-   o.construct    = FUiGridControl_construct;
-   o.createRow    = FUiGridControl_createRow;
-   o.pushColumn   = FUiGridControl_pushColumn;
-   o.pushRow      = FUiGridControl_pushRow;
-   o.dispose      = FUiGridControl_dispose;
+MO.MUiGridColumnCurrency_formatText = function MUiGridColumnCurrency_formatText(value){
+   var o = this;
+   var text = MO.Lang.Float.format(MO.Runtime.nvl(value, 0), null, null, o._currencyPercent, '0');
+   return text;
+}
+MO.MUiGridColumnCurrency_dispose = function MUiGridColumnCurrency_dispose(){
+   var o = this;
+}
+MO.MUiGridColumnDate = function MUiGridColumnDate(o){
+   o = MO.Class.inherits(this, o);
+   o._dateFormat = MO.Class.register(o, new MO.AGetSet('_dateFormat'), 'YYYY/MM/DD HH24:MI:SS');
+   o._dateValue  = null;
+   o.construct   = MO.MUiGridColumnDate_construct;
+   o.formatText  = MO.MUiGridColumnDate_formatText;
+   o.dispose     = MO.MUiGridColumnDate_dispose;
    return o;
 }
-MO.FUiGridControl_construct = function FUiGridControl_construct(){
+MO.MUiGridColumnDate_construct = function MUiGridColumnDate_construct(){
    var o = this;
-   o.__base.FObject.construct.call(o);
+   o._dateValue = new MO.TDate();
+}
+MO.MUiGridColumnDate_formatText = function MUiGridColumnDate_formatText(value){
+   var o = this;
+   var date = o._dateValue;
+   date.parse(value);
+   return date.format(o._dateFormat);
+}
+MO.MUiGridColumnDate_dispose = function MUiGridColumnDate_dispose(){
+   var o = this;
+   o._dateValue = MO.Lang.Object.dispose(o._dateValue);
+}
+MO.MUiGridColumnText = function MUiGridColumnText(o){
+   o = MO.Class.inherits(this, o);
+   o.construct = MO.MUiGridColumnText_construct;
+   o.dispose   = MO.MUiGridColumnText_dispose;
+   return o;
+}
+MO.MUiGridColumnText_construct = function MUiGridColumnText_construct(){
+   var o = this;
+}
+MO.MUiGridColumnText_dispose = function MUiGridColumnText_dispose(){
+   var o = this;
+}
+MO.MUiGridControl = function MUiGridControl(o){
+   o = MO.Class.inherits(this, o);
+   o._displayHead   = MO.Class.register(o, new MO.AGetSet('_displayHead'), true);
+   o._displayFooter = MO.Class.register(o, new MO.AGetSet('_displayFooter'), true);
+   o._displayCount  = MO.Class.register(o, new MO.AGetSet('_displayCount'), 20);
+   o._columns       = MO.Class.register(o, new MO.AGetter('_columns'));
+   o._headFont      = MO.Class.register(o, new MO.AGetter('_headFont'));
+   o._headBackColor = MO.Class.register(o, new MO.AGetSet('_headBackColor'), '#000000');
+   o._headHeight    = MO.Class.register(o, new MO.AGetSet('_headHeight'), 32);
+   o._rowClass      = MO.FUiGridRow;
+   o._rowFont       = MO.Class.register(o, new MO.AGetter('_rowFont'));
+   o._rowHeight     = MO.Class.register(o, new MO.AGetSet('_rowHeight'), 28);
+   o._rowLimitCount = MO.Class.register(o, new MO.AGetter('_rowLimitCount'), 0);
+   o._rows          = MO.Class.register(o, new MO.AGetter('_rows'));
+   o._rowPool       = null;
+   o._focusRow      = null;
+   o._focusCell     = null;
+   o.construct      = MO.MUiGridControl_construct;
+   o.createRow      = MO.MUiGridControl_createRow;
+   o.allocRow       = MO.MUiGridControl_allocRow;
+   o.freeRow        = MO.MUiGridControl_freeRow;
+   o.pushColumn     = MO.MUiGridControl_pushColumn;
+   o.pushRow        = MO.MUiGridControl_pushRow;
+   o.clearRows      = MO.MUiGridControl_clearRows;
+   o.dispose        = MO.MUiGridControl_dispose;
+   return o;
+}
+MO.MUiGridControl_construct = function MUiGridControl_construct(){
+   var o = this;
    o._columns = new MO.TDictionary();
+   o._headFont = new MO.SUiFont();
    o._rows = new MO.TObjects();
+   o._rowFont = new MO.SUiFont();
+   o._rowPool = MO.Class.create(MO.FObjectPool);
 }
-MO.FUiGridControl_createRow = function FUiGridControl_createRow(clazz){
+MO.MUiGridControl_createRow = function MUiGridControl_createRow(clazz){
    var o = this;
    var row = MO.Class.create(MO.Runtime.nvl(clazz, o._rowClass));
-   row.setTable(o);
+   row.setGrid(o);
+   var columns = o._columns;
+   var count = columns.count();
+   for(var i = 0; i < count; i++){
+      var column = columns.at(i);
+      var cell = column.createCell();
+      row.pushCell(cell);
+   }
    return row;
 }
-MO.FUiGridControl_pushColumn = function FUiGridControl_pushColumn(column){
+MO.MUiGridControl_allocRow = function MUiGridControl_allocRow(clazz){
    var o = this;
-   var name = column.name();
-   o._columns.set(name, column);
+   var row = null;
+   var pool = o._rowPool;
+   if(pool.hasFree()){
+      row = pool.alloc();
+   }else{
+      row = o.createRow(clazz);
+   }
+   return row;
 }
-MO.FUiGridControl_pushRow = function FUiGridControl_pushRow(row){
+MO.MUiGridControl_freeRow = function MUiGridControl_freeRow(row){
+   this._rowPool.free(row);
+}
+MO.MUiGridControl_pushColumn = function MUiGridControl_pushColumn(column){
    var o = this;
+   var columns = o._columns;
+   var name = column.name();
+   column.setGrid(o);
+   column.setIndex(columns.count());
+   columns.set(name, column);
+}
+MO.MUiGridControl_pushRow = function MUiGridControl_pushRow(row){
+   var o = this;
+   row.setGrid(o);
    o._rows.push(row);
 }
-MO.FUiGridControl_dispose = function FUiGridControl_dispose(){
+MO.MUiGridControl_clearRows = function MUiGridControl_clearRows(){
+   var o = this;
+   var rows = o._rows;
+   var count = rows.count();
+   for(var i = 0; i < count; i++){
+      var row = rows.at(i);
+      o.freeRow(row);
+   }
+   rows.clear();
+}
+MO.MUiGridControl_dispose = function MUiGridControl_dispose(){
    var o = this;
    o._columns = MO.Lang.Object.dispose(o._columns);
    o._rowClass = null;
+   o._rowPool = MO.Lang.Object.dispose(o._rowPool);
    o._rows = MO.Lang.Object.dispose(o._rows);
    o._focusRow = null;
    o._focusCell = null;
-   o.__base.FObject.dispose.call(o);
+   o._rowFont = null;
 }
-MO.FUiGridRow = function FUiGridRow(o){
+MO.MUiGridRow = function MUiGridRow(o){
    o = MO.Class.inherits(this, o, MO.FObject);
-   o._grid    = MO.Class.register(o, new AGetSet('_grid'));
-   o._cells    = MO.Class.register(o, new AGetter('_cells'));
-   o.construct = FUiGridRow_construct;
-   o.dispose   = FUiGridRow_dispose;
+   o._grid     = MO.Class.register(o, new MO.AGetSet('_grid'));
+   o._cells    = MO.Class.register(o, new MO.AGetter('_cells'));
+   o._font     = MO.Class.register(o, new MO.AGetSet('_font'));
+   o._height   = MO.Class.register(o, new MO.AGetSet('_height'), 28);
+   o.construct = MO.MUiGridRow_construct;
+   o.pushCell  = MO.MUiGridRow_pushCell;
+   o.get       = MO.MUiGridRow_get;
+   o.set       = MO.MUiGridRow_set;
+   o.dispose   = MO.MUiGridRow_dispose;
 }
-MO.FUiGridRow_construct = function FUiGridRow_construct(){
+MO.MUiGridRow_construct = function MUiGridRow_construct(){
    var o = this;
    o.__base.FObject.construct.call(o);
-   o._cells = new MO.TObjects();
+   o._cells = new MO.TDictionary();
 }
-MO.FUiGridRow_dispose = function FUiGridRow_dispose(){
+MO.MUiGridRow_pushCell = function MUiGridRow_pushCell(cell){
+   var o = this;
+   cell.setRow(o)
+   var column = cell.column();
+   var dataName = column.dataName();
+   o._cells.set(dataName, cell);
+}
+MO.MUiGridRow_get = function MUiGridRow_get(name, value){
+   var o = this;
+   var cell = o._cells.get(name);
+   return cell.value(value);
+}
+MO.MUiGridRow_set = function MUiGridRow_set(name, value){
+   var o = this;
+   var cell = o._cells.get(name);
+   return cell.setValue(value);
+}
+MO.MUiGridRow_dispose = function MUiGridRow_dispose(){
    var o = this;
    o._grid = null;
    o._cells = MO.Lang.Object.dispose(o._cells);
@@ -36609,6 +37087,7 @@ MO.FGuiControl = function FGuiControl(o){
    o._backImage              = null;
    o._backHoverResource      = null;
    o._clientRectangle        = MO.Class.register(o, new MO.AGetter('_clientRectangle'));
+   o._parentRectangle        = MO.Class.register(o, new MO.AGetter('_parentRectangle'));
    o._eventRectangle         = null;
    o._operationDownListeners = MO.Class.register(o, new MO.AListener('_operationDownListeners', MO.EEvent.OperationDown));
    o._operationMoveListeners = MO.Class.register(o, new MO.AListener('_operationMoveListeners', MO.EEvent.OperationMove));
@@ -36758,6 +37237,7 @@ MO.FGuiControl_construct = function FGuiControl_construct(){
    o.__base.MUiMargin.construct.call(o);
    o.__base.MUiPadding.construct.call(o);
    o.__base.MGuiBorder.construct.call(o);
+   o._parentRectangle = new MO.SRectangle();
    o._clientRectangle = new MO.SRectangle();
    o._eventRectangle = new MO.SRectangle();
 }
@@ -36828,6 +37308,7 @@ MO.FGuiControl_paint = function FGuiControl_paint(event){
    var parentRectangle = event.parentRectangle;
    var calculateRate = event.calculateRate;
    var rectangle = event.rectangle;
+   o._parentRectangle.assign(parentRectangle);
    o._eventRectangle.assign(rectangle);
    var dockCd = o._dockCd;
    var anchorCd = o._anchorCd;
@@ -36868,6 +37349,7 @@ MO.FGuiControl_paint = function FGuiControl_paint(event){
    event.optionContainer = false;
    graphic.store();
    rectangle.set(left, top, Math.max(width, 0), Math.max(height, 0));
+   parentRectangle.assign(rectangle);
    var sacle = graphic.scale();
    o._clientRectangle.assign(rectangle);
    graphic.setScale(o._scale.width, o._scale.height);
@@ -36885,6 +37367,7 @@ MO.FGuiControl_paint = function FGuiControl_paint(event){
    o.onPaintEnd(event);
    graphic.restore();
    rectangle.assign(o._eventRectangle);
+   parentRectangle.assign(o._parentRectangle);
    o._statusDirty = false;
 }
 MO.FGuiControl_update = function FGuiControl_update(){
@@ -37972,47 +38455,349 @@ MO.FGuiTimeline_onOperationDown = function FGuiTimeline_onOperationDown(event) {
       }
    }
 }
+MO.FGuiGridCellCurrency = function FGuiGridCellCurrency(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MUiGridCellDate);
+   o._fontColor  = null;
+   o._numberFont = null;
+   o.construct   = MO.FGuiGridCellCurrency_construct;
+   o.formatText  = MO.FGuiGridCellCurrency_formatText;
+   o.draw        = MO.FGuiGridCellCurrency_draw;
+   o.dispose     = MO.FGuiGridCellCurrency_dispose;
+   return o;
+}
+MO.FGuiGridCellCurrency_construct = function FGuiGridCellCurrency_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+   o.__base.MUiGridCellDate.construct.call(o);
+   o._numberFont = new MO.SUiFont();
+}
+MO.FGuiGridCellCurrency_formatText = function FGuiGridCellCurrency_formatText(value){
+   return this.__base.MUiGridColumnDate.formatText.call(this, value)
+}
+MO.FGuiGridCellCurrency_draw = function FGuiGridCellCurrency_draw(graphic, x, y, width, height){
+   var o = this;
+   var column = o._column;
+   var cellPadding = column.cellPadding();
+   var value = o.value();
+   var text = o.text();
+   var textLength = text.length;
+   var font = o.findFont();
+   var numberFont = o._numberFont;
+   numberFont.assign(font);
+   var contentWidth = width - cellPadding.right;
+   if(value >= 0){
+      if(textLength > 7){
+         var fontColor = null;
+         if(textLength > 9){
+            fontColor = column.highColor();
+         }else{
+            fontColor = column.lowerColor();
+         }
+         var high = text.substring(0, text.length - 7);
+         var low = text.substring(text.length - 7, text.length);
+         var highWidth = graphic.textWidth(high);
+         var lowWidth = graphic.textWidth(low);
+         numberFont.color = fontColor;
+         graphic.drawFontText(high, numberFont, x, y, contentWidth - lowWidth, height, MO.EUiAlign.Right);
+         numberFont.color = column.normalColor();
+         graphic.drawFontText(low, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+      }else{
+         numberFont.color = column.normalColor();
+         graphic.drawFontText(text, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+      }
+   }else if(value < 0){
+      numberFont.color = column.negativeColor();
+      graphic.drawFontText(text, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+   }
+}
+MO.FGuiGridCellCurrency_dispose = function FGuiGridCellCurrency_dispose(){
+   var o = this;
+   o._numberFont = MO.Lang.Object.dispose(o._numberFont);
+   o.__base.MUiGridCellDate.dispose.call(o);
+   o.__base.FObject.dispose.call(o);
+}
+MO.FGuiGridCellDate = function FGuiGridCellDate(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MUiGridCellDate);
+   o.construct = MO.FGuiGridCellDate_construct;
+   o.draw      = MO.FGuiGridCellDate_draw;
+   o.dispose   = MO.FGuiGridCellDate_dispose;
+   return o;
+}
+MO.FGuiGridCellDate_construct = function FGuiGridCellDate_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+   o.__base.MUiGridCellDate.construct.call(o);
+}
+MO.FGuiGridCellDate_draw = function FGuiGridCellDate_draw(graphic, x, y, width, height){
+   var o = this;
+   var text = o.text();
+   var font = o.findFont();
+   graphic.drawFontText(text, font, x, y, width, height, MO.EUiAlign.Center);
+}
+MO.FGuiGridCellDate_dispose = function FGuiGridCellDate_dispose(){
+   var o = this;
+   o.__base.MUiGridCellDate.dispose.call(o);
+   o.__base.FObject.dispose.call(o);
+}
 MO.FGuiGridCellText = function FGuiGridCellText(o){
-   o = MO.Class.inherits(this, o, MO.FUiGridCellText);
-   o.onPaint = MO.FGuiGridCellText_onPaint;
-   o.paint   = MO.FGuiGridCellText_paint;
-   o.dispose = MO.FGuiGridCellText_dispose;
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MUiGridCellText);
+   o.onPaint   = MO.FGuiGridCellText_onPaint;
+   o.construct = MO.FGuiGridCellText_construct;
+   o.draw      = MO.FGuiGridCellText_draw;
+   o.dispose   = MO.FGuiGridCellText_dispose;
    return o;
 }
 MO.FGuiGridCellText_onPaint = function FGuiGridCellText_onPaint(event){
    var o = this;
 }
-MO.FGuiGridCellText_paint = function FGuiGridCellText_paint(){
+MO.FGuiGridCellText_construct = function FGuiGridCellText_construct(){
    var o = this;
+   o.__base.FObject.construct.call(o);
+   o.__base.MUiGridCellText.construct.call(o);
+}
+MO.FGuiGridCellText_draw = function FGuiGridCellText_draw(graphic, x, y, width, height){
+   var o = this;
+   var text = o.text();
+   var font = o.findFont();
+   graphic.drawFontText(text, font, x, y, width, height, MO.EUiAlign.Center);
 }
 MO.FGuiGridCellText_dispose = function FGuiGridCellText_dispose(){
    var o = this;
-   o._grid = null;
-   o._column = null;
-   o._row = null;
-   o.__base.FUiGridCellText.dispose.call(o);
+   o.__base.MUiGridCellText.dispose.call(o);
+   o.__base.FObject.dispose.call(o);
+}
+MO.FGuiGridColumn = function FGuiGridColumn(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MUiGridColumn);
+   o.construct = MO.FGuiGridColumn_construct;
+   o.draw      = MO.FGuiGridColumn_draw;
+   o.dispose   = MO.FGuiGridColumn_dispose;
+   return o;
+}
+MO.FGuiGridColumn_construct = function FGuiGridColumn_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+   o.__base.MUiGridColumn.construct.call(o);
+}
+MO.FGuiGridColumn_draw = function FGuiGridColumn_draw(graphic, x, y, width, height){
+   var o = this;
+   var padding = o._padding;
+   var contentX = x + padding.left;
+   var contentY = y + padding.top;
+   var contentWidth = width - padding.left - padding.right;
+   var contentHeight = height - padding.top - padding.bottom;
+   var backColor = o._backColor;
+   if(!backColor){
+      backColor = o._grid.headBackColor();
+   }
+   graphic.fillRectangle(contentX, contentY, contentWidth, contentHeight, backColor);
+   var font = o.findFont();
+   graphic.drawFontText(o._label, font, contentX, contentY - 3, contentWidth, contentHeight, MO.EUiAlign.Center);
+}
+MO.FGuiGridColumn_dispose = function FGuiGridColumn_dispose(){
+   var o = this;
+   o.__base.MUiGridColumn.dispose.call(o);
+   o.__base.FObject.dispose.call(o);
+}
+MO.FGuiGridColumnCurrency = function FGuiGridColumnCurrency(o){
+   o = MO.Class.inherits(this, o, MO.FGuiGridColumn, MO.MUiGridColumnCurrency);
+   o.construct  = MO.FGuiGridColumnCurrency_construct;
+   o.formatText = MO.FGuiGridColumnCurrency_formatText;
+   o.dispose    = MO.FGuiGridColumnCurrency_dispose;
+   return o;
+}
+MO.FGuiGridColumnCurrency_construct = function FGuiGridColumnCurrency_construct(){
+   var o = this;
+   o.__base.FGuiGridColumn.construct.call(o);
+   o.__base.MUiGridColumnCurrency.construct.call(o);
+   o._cellClass = MO.FGuiGridCellCurrency;
+}
+MO.FGuiGridColumnCurrency_formatText = function FGuiGridColumnCurrency_formatText(value){
+   return this.__base.MUiGridColumnCurrency.formatText.call(this, value)
+}
+MO.FGuiGridColumnCurrency_dispose = function FGuiGridColumnCurrency_dispose(){
+   var o = this;
+   o.__base.MUiGridColumnCurrency.dispose.call(o);
+   o.__base.FGuiGridColumn.dispose.call(o);
+}
+MO.FGuiGridColumnDate = function FGuiGridColumnDate(o){
+   o = MO.Class.inherits(this, o, MO.FGuiGridColumn, MO.MUiGridColumnDate);
+   o.construct  = MO.FGuiGridColumnDate_construct;
+   o.formatText = MO.FGuiGridColumnDate_formatText;
+   o.dispose    = MO.FGuiGridColumnDate_dispose;
+   return o;
+}
+MO.FGuiGridColumnDate_construct = function FGuiGridColumnDate_construct(){
+   var o = this;
+   o.__base.FGuiGridColumn.construct.call(o);
+   o.__base.MUiGridColumnDate.construct.call(o);
+   o._cellClass = MO.FGuiGridCellDate;
+}
+MO.FGuiGridColumnDate_formatText = function FGuiGridColumnDate_formatText(value){
+   return this.__base.MUiGridColumnDate.formatText.call(this, value)
+}
+MO.FGuiGridColumnDate_dispose = function FGuiGridColumnDate_dispose(){
+   var o = this;
+   o.__base.MUiGridColumnDate.dispose.call(o);
+   o.__base.FGuiGridColumn.dispose.call(o);
 }
 MO.FGuiGridColumnText = function FGuiGridColumnText(o){
-   o = MO.Class.inherits(this, o, MO.FUiGridColumn);
-   o._cellClass = MO.FGuiGridCellText;
-   o.dispose    = MO.FGuiGridColumnText_dispose;
+   o = MO.Class.inherits(this, o, MO.FGuiGridColumn, MO.MUiGridColumnText);
+   o.construct = MO.FGuiGridColumnText_construct;
+   o.dispose   = MO.FGuiGridColumnText_dispose;
    return o;
+}
+MO.FGuiGridColumnText_construct = function FGuiGridColumnText_construct(){
+   var o = this;
+   o.__base.FGuiGridColumn.construct.call(o);
+   o.__base.MUiGridColumnText.construct.call(o);
+   o._cellClass = MO.FGuiGridCellText;
 }
 MO.FGuiGridColumnText_dispose = function FGuiGridColumnText_dispose(){
    var o = this;
-   o.__base.FUiGridColumn.dispose.call(o);
+   o.__base.MUiGridColumnText.dispose.call(o);
+   o.__base.FGuiGridColumn.dispose.call(o);
 }
 MO.FGuiGridControl = function FGuiGridControl(o){
-   o = MO.Class.inherits(this, o, MO.FGuiControl);
-   o.onPaintBegin  = MO.FGuiGridControl_onPaintBegin;
+   o = MO.Class.inherits(this, o, MO.FGuiControl, MO.MUiGridControl);
+   o._rowScroll      = 0;
+   o._rowScrollSpeed = 1;
+   o.onPaintBegin = MO.FGuiGridControl_onPaintBegin;
+   o.construct    = MO.FGuiGridControl_construct;
+   o.dispose      = MO.FGuiGridControl_dispose;
    return o;
 }
 MO.FGuiGridControl_onPaintBegin = function FGuiGridControl_onPaintBegin(event){
    var o = this;
-   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   var padding = o._padding;
    var graphic = event.graphic;
    var rectangle = event.rectangle;
-   graphic.drawRectangle(rectangle.left, rectangle.top, rectangle.width, rectangle.height, '#FF0000', 1);
+   var left = rectangle.left + padding.left;
+   var top = rectangle.top + padding.top;
+   var bottom = rectangle.bottom() - padding.bottom;
+   var width = rectangle.width - padding.left - padding.right;
+   var height = rectangle.height - padding.top - padding.bottom;
+   var drawX = left;
+   var drawY = top;
+   var gridWidth = width;
+   var columnWidthTotal = 0;
+   var columns = o._columns;
+   var columnCount = columns.count();
+   for(var i = 0; i < columnCount; i++){
+      var column = columns.at(i);
+      columnWidthTotal += column.width();
+   }
+   if(o._displayHead){
+      var columnX = drawX;
+      var columnY = top;
+      var headTextTop = columnY + 0;
+      var headHeight = o._headHeight;
+      for(var i = 0; i < columnCount; i++){
+         var column = columns.at(i);
+         var columnWidth = gridWidth * column.width() / columnWidthTotal;
+         column.draw(graphic, columnX, columnY, columnWidth, headHeight);
+         columnX += columnWidth;
+      }
+      drawY += headHeight;
+   }
+   var rowsHeight = bottom - drawY;
+   var rowHeight = o._rowHeight;
+   graphic.clip(drawX, drawY, gridWidth, rowsHeight);
+   var rows = o._rows;
+   var rowCount = rows.count();
+   drawY += o._rowScroll;
+   for(var rowIndex = 0; rowIndex < rowCount; rowIndex++){
+      var columnX = drawX;
+      if(drawY > -rowHeight){
+         var row = rows.at(rowIndex);
+         for(var i = 0; i < columnCount; i++){
+            var column = columns.at(i);
+            var dataName = column.dataName();
+            var columnWidth = gridWidth * column.width() / columnWidthTotal;
+            var cell = row.cells().get(dataName);
+            cell.draw(graphic, columnX, drawY, columnWidth, rowHeight);
+            columnX += columnWidth;
+         }
+      }
+      drawY += rowHeight;
+      if(drawY > bottom){
+         break;
+      }
+   }
+}
+MO.FGuiGridControl_construct = function FGuiGridControl_construct(){
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o.__base.MUiGridControl.construct.call(o);
+   o._rowClass = MO.FGuiGridRow;
+}
+MO.FGuiGridControl_dispose = function FGuiGridControl_dispose(){
+   var o = this;
+   o.__base.MUiGridControl.dispose.call(o);
+   o.__base.FGuiControl.dispose.call(o);
+}
+MO.FGuiGridRow = function FGuiGridRow(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MUiGridRow);
+   o.construct = MO.FGuiGridRow_construct;
+   o.dispose   = MO.FGuiGridRow_dispose;
+   return o;
+}
+MO.FGuiGridRow_construct = function FGuiGridRow_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+   o.__base.MUiGridRow.construct.call(o);
+}
+MO.FGuiGridRow_dispose = function FGuiGridRow_dispose(){
+   var o = this;
+   o.__base.MUiGridRow.dispose.call(o);
+   o.__base.FObject.dispose.call(o);
+}
+MO.FGuiTable = function FGuiTable(o){
+   o = MO.Class.inherits(this, o, MO.FGuiGridControl);
+   o.oeUpdate        = MO.FGuiTable_oeUpdate;
+   o.construct       = MO.FGuiTable_construct;
+   o.insertRow       = MO.FGuiTable_insertRow;
+   o.dispose         = MO.FGuiTable_dispose;
+   return o;
+}
+MO.FGuiTable_oeUpdate = function FGuiTable_oeUpdate(event){
+   var o = this;
+   o.__base.FGuiGridControl.oeUpdate.call(o, event);
+   if(event.isBefore()){
+      if(o._rowScroll < 0){
+         var rows = o._rows;
+         var scrollSpeed = Math.max(parseInt(-o._rowScroll / o._rowHeight), o._rowScrollSpeed);
+         o._rowScroll += scrollSpeed;
+         if(o._rowScroll >= 0){
+            var limitCount = o._rowLimitCount;
+            if(limitCount != 0){
+               if(rows.count() > limitCount){
+                  var row = rows.pop();
+                  o.freeRow(row);
+               }
+            }
+            o._rowScroll = 0;
+         }
+         o.dirty();
+      }
+   }
+}
+MO.FGuiTable_construct = function FGuiTable_construct(){
+   var o = this;
+   o.__base.FGuiGridControl.construct.call(o);
+   o.__base.MUiGridControl.construct.call(o);
+   o._rowClass = MO.FGuiGridRow;
+}
+MO.FGuiTable_insertRow = function FGuiTable_insertRow(row){
+   var o = this;
+   MO.Assert.debugNotNull(row);
+   o._rows.unshift(row);
+   o._rowScroll -= o._rowHeight;
+   o.dirty();
+}
+MO.FGuiTable_dispose = function FGuiTable_dispose(){
+   var o = this;
+   o.__base.MUiGridControl.dispose.call(o);
+   o.__base.FGuiGridControl.dispose.call(o);
 }
 MO.FGuiBar = function FGuiBar(o){
    o = MO.Class.inherits(this, o, MO.FGuiFrame);

@@ -9,7 +9,8 @@ MO.EEaiChapter = new function EEaiChapter(){
 MO.EEaiConstant = new function EEaiConstant(){
    var o = this;
    o.DefaultCountry = "china";
-   o.ServiceHost    = "eai.logic.service";
+   o.LogicService   = "eai.logic.service";
+   o.ServiceHost    = "eai.host.service";
    o.Resource       = "eai.resource";
    return o;
 }
@@ -932,17 +933,27 @@ MO.FEaiFinancialMarketerDynamic_dispose = function FEaiFinancialMarketerDynamic_
 MO.FEaiLogic = function FEaiLogic(o){
    o = MO.Class.inherits(this, o, MO.FObject);
    o._code          = null;
+   o._parameters    = null;
    o._urlParameters = null;
    o.construct      = MO.FEaiLogic_construct;
    o.makeUrl        = MO.FEaiLogic_makeUrl;
+   o.prepareParemeters = MO.FEaiLogic_prepareParemeters;
    o.send           = MO.FEaiLogic_send;
+   o.sendService    = MO.FEaiLogic_sendService;
    o.dispose        = MO.FEaiLogic_dispose;
    return o;
 }
 MO.FEaiLogic_construct = function FEaiLogic_construct(){
    var o = this;
    o.__base.FObject.construct.call(o);
+   o._parameters    = new MO.TAttributes();
    o._urlParameters = new MO.TAttributes();
+}
+MO.FEaiLogic_prepareParemeters = function FEaiLogic_prepareParemeters(){
+   var o = this;
+   var parameters = o._parameters;
+   parameters.clear();
+   return parameters;
 }
 MO.FEaiLogic_makeUrl = function FEaiLogic_makeUrl(method, parameters){
    var o = this;
@@ -968,6 +979,21 @@ MO.FEaiLogic_send = function FEaiLogic_send(method, parameters, owner, callback)
    var o = this;
    var url = o.makeUrl(method, parameters);
    var connection = MO.Console.find(MO.FJsonConsole).sendAsync(url);
+   connection.addLoadListener(owner, callback);
+   return connection;
+}
+MO.FEaiLogic_sendService = function FEaiLogic_sendService(uri, parameters, owner, callback){
+   var o = this;
+   var url = MO.Console.find(MO.FEnvironmentConsole).parse(uri);
+   var count = parameters.count();
+   for(var i = 0; i < count; i++){
+      var name = parameters.name(i);
+      var value = parameters.value(i);
+      url += '&' + name + '=' + value;
+   }
+   url = '&tick=' + MO.Timer.current();
+   url = '&token=' + MO.Timer.current();
+   var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
    connection.addLoadListener(owner, callback);
    return connection;
 }
@@ -1110,12 +1136,32 @@ MO.FEaiLogicSchedule_doFetch = function FEaiLogicSchedule_doFetch(owner, callbac
 }
 MO.FEaiLogicStatistics = function FEaiLogicStatistics(o){
    o = MO.Class.inherits(this, o, MO.FEaiLogic);
-   o._code               = 'statistics';
-   o.doInvestmentDynamic = MO.FEaiLogicStatistics_doInvestmentDynamic;
-   o.doInvestmentTrend   = MO.FEaiLogicStatistics_doInvestmentTrend;
-   o.doMarketerDynamic   = MO.FEaiLogicStatistics_doMarketerDynamic;
-   o.doMarketerTrend     = MO.FEaiLogicStatistics_doMarketerTrend;
+   o._code                = 'statistics';
+   o.calculateAmountLevel = MO.FEaiLogicStatistics_calculateAmountLevel;
+   o.doInvestmentDynamic  = MO.FEaiLogicStatistics_doInvestmentDynamic;
+   o.doInvestmentTrend    = MO.FEaiLogicStatistics_doInvestmentTrend;
+   o.doCustomerDynamic    = MO.FEaiLogicStatistics_doCustomerDynamic;
+   o.doCustomerTrend      = MO.FEaiLogicStatistics_doCustomerTrend;
+   o.doMarketerDynamic    = MO.FEaiLogicStatistics_doMarketerDynamic;
+   o.doMarketerTrend      = MO.FEaiLogicStatistics_doMarketerTrend;
+   o.doDepartmentDynamic  = MO.FEaiLogicStatistics_doDepartmentDynamic;
+   o.doDepartmentTrend    = MO.FEaiLogicStatistics_doDepartmentTrend;
    return o;
+}
+MO.FEaiLogicStatistics_calculateAmountLevel = function FEaiLogicStatistics_calculateAmountLevel(amount){
+   var o = this;
+   if(amount >= 5000000){
+      return 5;
+   }else if(amount >= 1000000){
+      return 4;
+   }else if(amount >= 100000){
+      return 3;
+   }else if(amount >= 10000){
+      return 2;
+   }else if(amount >= 1000){
+      return 1;
+   }
+   return 0;
 }
 MO.FEaiLogicStatistics_doInvestmentDynamic = function FEaiLogicStatistics_doInvestmentDynamic(owner, callback, startDate, endDate){
    var parameters = 'begin=' + startDate + '&end=' + endDate;
@@ -1128,19 +1174,49 @@ MO.FEaiLogicStatistics_doInvestmentTrend = function FEaiLogicStatistics_doInvest
    var parameters = 'begin=' + startDate + '&end=' + endDate + '&interval=' + interval;
    return this.send('investment_trend', parameters, owner, callback);
 }
+MO.FEaiLogicStatistics_doCustomerDynamic = function FEaiLogicStatistics_doCustomerDynamic(owner, callback, startDate, endDate){
+   var o = this;
+   var parameters = o.prepareParemeters();
+   parameters.set('begin', startDate);
+   parameters.set('end', endDate);
+   o.sendService('{eai.logic.service}/eai.financial.customer.wv?do=dynamic', parameters, owner, callback);
+}
+MO.FEaiLogicStatistics_doCustomerTrend = function FEaiLogicStatistics_doCustomerTrend(owner, callback, startDate, endDate){
+   var o = this;
+   var parameters = o.prepareParemeters();
+   parameters.set('begin', startDate);
+   parameters.set('end', endDate);
+   o.sendService('{eai.logic.service}/eai.financial.customer.wv?do=trend', parameters, owner, callback);
+}
 MO.FEaiLogicStatistics_doMarketerDynamic = function FEaiLogicStatistics_doMarketerDynamic(owner, callback, startDate, endDate){
    var o = this;
-   var url = 'http://localhost:8099/eai.financial.marketer.wv?do=dynamic&begin=' + startDate + '&end=' + endDate;
+   var uri = '{eai.logic.service}/eai.financial.marketer.wv?do=dynamic&begin=' + startDate + '&end=' + endDate;
+   var url = MO.Console.find(MO.FEnvironmentConsole).parse(uri);
    var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
    connection.addLoadListener(owner, callback);
    return connection;
 }
 MO.FEaiLogicStatistics_doMarketerTrend = function FEaiLogicStatistics_doMarketerTrend(owner, callback, startDate, endDate){
    var o = this;
-   var url = 'http://localhost:8099/eai.financial.marketer.wv?do=trend&begin=' + startDate + '&end=' + endDate;
+   var uri = '{eai.logic.service}/eai.financial.marketer.wv?do=trend&begin=' + startDate + '&end=' + endDate;
+   var url = MO.Console.find(MO.FEnvironmentConsole).parse(uri);
    var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
    connection.addLoadListener(owner, callback);
    return connection;
+}
+MO.FEaiLogicStatistics_doDepartmentDynamic = function FEaiLogicStatistics_doDepartmentDynamic(owner, callback, startDate, endDate){
+   var o = this;
+   var parameters = o.prepareParemeters();
+   parameters.set('begin', startDate);
+   parameters.set('end', endDate);
+   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=dynamic', parameters, owner, callback);
+}
+MO.FEaiLogicStatistics_doDepartmentTrend = function FEaiLogicStatistics_doDepartmentTrend(owner, callback, startDate, endDate){
+   var o = this;
+   var parameters = o.prepareParemeters();
+   parameters.set('begin', startDate);
+   parameters.set('end', endDate);
+   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=trend', parameters, owner, callback);
 }
 MO.FEaiLogicSystem = function FEaiLogicSystem(o) {
    o = MO.Class.inherits(this, o, MO.FEaiLogic);
@@ -5427,290 +5503,6 @@ MO.FEaiChartLiveScene_processResize = function FEaiChartLiveScene_processResize(
       liveTable.setWidth(650);
    }
 }
-MO.FEaiChartSalesScene = function FEaiChartSalesScene(o){
-   o = MO.RClass.inherits(this, o, MO.FEaiChartScene);
-   o._code                   = MO.EEaiScene.ChartSales;
-   o._investment             = MO.Class.register(o, new MO.AGetter('_investment'));
-   o._investmentCurrent      = 0;
-   o._ready                  = false;
-   o._mapReady               = false;
-   o._playing                = false;
-   o._lastTick               = 0;
-   o._interval               = 10;
-   o._24HLastTick            = 0;
-   o._24HTrendInterval       = 1000 * 60 * 5;
-   o._logoBar                = null;
-   o._timeline               = null;
-   o._liveTable              = null;
-   o._livePop                = null;
-   o._statusStart            = false;
-   o._statusLayerCount       = 100;
-   o._statusLayerLevel       = 100;
-   o._groundAutioUrl         = '{eai.resource}/music/statistics.mp3';
-   o.onInvestmentDataChanged = MO.FEaiChartSalesScene_onInvestmentDataChanged;
-   o.onOperationVisibility   = MO.FEaiChartSalesScene_onOperationVisibility;
-   o.onProcessReady          = MO.FEaiChartSalesScene_onProcessReady;
-   o.onProcess               = MO.FEaiChartSalesScene_onProcess;
-   o.onSwitchProcess         = MO.FEaiChartSalesScene_onSwitchProcess;
-   o.onSwitchComplete        = MO.FEaiChartSalesScene_onSwitchComplete;
-   o.setup                   = MO.FEaiChartSalesScene_setup;
-   o.showParticle            = MO.FEaiChartSalesScene_showParticle;
-   o.showFace                = MO.FEaiChartSalesScene_showFace;
-   o.fixMatrix               = MO.FEaiChartSalesScene_fixMatrix;
-   o.processResize           = MO.FEaiChartSalesScene_processResize;
-   return o;
-}
-MO.FEaiChartSalesScene_onInvestmentDataChanged = function FEaiChartSalesScene_onInvestmentDataChanged(event) {
-   var o = this;
-   var entity = event.entity;
-   var table = o._liveTable;
-   table.setRank(event.rank);
-   table.pushEntity(entity);
-   table.dirty();
-   if(entity){
-      var pop = o._livePop;
-      pop.setData(entity);
-   }
-}
-MO.FEaiChartSalesScene_onOperationVisibility = function FEaiChartSalesScene_onOperationVisibility(event){
-   var o = this;
-   o.__base.FEaiChartScene.onOperationVisibility.call(o, event);
-   if(event.visibility){
-      o._groundAutio.play();
-      o._countryEntity._audioMapEnter._hAudio.muted = false;
-   }else{
-      o._groundAutio.pause();
-      o._countryEntity._audioMapEnter._hAudio.muted = true;
-   }
-}
-MO.FEaiChartSalesScene_onProcessReady = function FEaiChartSalesScene_onProcessReady() {
-   var o = this;
-   o.__base.FEaiChartScene.onProcessReady.call(o);
-   o._mapEntity.showCity();
-}
-MO.FEaiChartSalesScene_onProcess = function FEaiChartSalesScene_onProcess() {
-   var o = this;
-   o.__base.FEaiChartScene.onProcess.call(o);
-   if(!o._statusStart){
-      if(MO.Window.Browser.capability().soundConfirm){
-         var iosPlay = document.getElementById('id_ios_play');
-         if (iosPlay) {
-            MO.Window.Html.visibleSet(iosPlay, true);
-         }
-         var hLoading = document.getElementById('id_loading');
-         if (hLoading) {
-            document.body.removeChild(hLoading);
-         }
-      }else{
-         var hLoading = document.getElementById('id_loading');
-         if (hLoading) {
-            hLoading.style.opacity = o._statusLayerLevel / o._statusLayerCount;
-            o._statusLayerLevel--;
-         }
-         o._statusLayerLevel--;
-      }
-      if (o._statusLayerLevel <= 0) {
-         if (hLoading) {
-            document.body.removeChild(hLoading);
-         }
-         var countryEntity = o._countryEntity;
-         countryEntity.start();
-         o._mapEntity.showCountry(countryEntity);
-         o.processLoaded();
-         o._playing = true;
-         o._statusStart = true;
-      }
-   }
-   if (o._playing) {
-      var countryEntity = o._countryEntity;
-      if(!countryEntity.introAnimeDone()){
-         countryEntity.process();
-         return;
-      }
-      if (!o._mapReady) {
-         o._guiManager.show();
-         var alphaAction = MO.Class.create(MO.FGuiActionAlpha);
-         alphaAction.setAlphaBegin(0);
-         alphaAction.setAlphaEnd(1);
-         alphaAction.setAlphaInterval(0.01);
-         alphaAction.push(o._guiManager);
-         o._guiManager.mainTimeline().pushAction(alphaAction);
-         o._mapReady = true;
-      }
-      var currentTick = MO.Timer.current();
-      if (currentTick - o._24HLastTick > o._24HTrendInterval) {
-         o._timeline.sync();
-         o._24HLastTick = currentTick;
-      }
-      o._investment.process();
-      var logoBar = o._logoBar;
-      var investmentTotal = logoBar.findComponent('investmentTotal');
-      var invementTotalCurrent = o._investment.invementTotalCurrent();
-      investmentTotal.setValue(parseInt(invementTotalCurrent).toString());
-      var investmentDay = logoBar.findComponent('investmentDay');
-      var invementDayCurrent = o._investment.invementDayCurrent();
-      investmentDay.setValue(parseInt(invementDayCurrent).toString());
-      if(o._nowTicker.process()){
-         var bar = o._logoBar;
-         var date = o._nowDate;
-         date.setNow();
-         var dateControl = bar.findComponent('date');
-         dateControl.setLabel(date.format('YYYY/MM/DD'));
-         var timeControl = bar.findComponent('time');
-         timeControl.setLabel(date.format('HH24:MI'));
-      }
-   }
-   if (o._livePop.visible()) {
-      o._livePop.dirty();
-   }
-}
-MO.FEaiChartSalesScene_onSwitchProcess = function FEaiChartSalesScene_onSwitchProcess(event){
-   var o = this;
-}
-MO.FEaiChartSalesScene_onSwitchComplete = function FEaiChartSalesScene_onSwitchComplete(event){
-   var o = this;
-}
-MO.FEaiChartSalesScene_setup = function FEaiChartSalesScene_setup() {
-   var o = this;
-   o.__base.FEaiChartScene.setup.call(o);
-   var dataLayer = o._activeStage.dataLayer();
-   var frame = o._logoBar = MO.Console.find(MO.FGuiFrameConsole).get(o, 'eai.chart.LogoBar');
-   o._guiManager.register(frame);
-   var invement = o._investment = MO.Class.create(MO.FEaiStatisticsInvestment);
-   invement.linkGraphicContext(o);
-   invement.setMapEntity(o._mapEntity);
-   invement.setup();
-   invement.addDataChangedListener(o, o.onInvestmentDataChanged);
-   var display = invement.display();
-   o.fixMatrix(display.matrix());
-   dataLayer.push(display);
-   var stage = o.activeStage();
-   var timeline = o._timeline = MO.Class.create(MO.FGui24HTimeline);
-   timeline.setName('Timeline');
-   timeline.linkGraphicContext(o);
-   timeline.sync();
-   timeline.build();
-   o._guiManager.register(timeline);
-   var liveTable = o._liveTable = MO.Class.create(MO.FGuiFPCCTable);
-   liveTable.setName('LiveTable');
-   liveTable.linkGraphicContext(o);
-   liveTable.setup();
-   liveTable.build();
-   o._guiManager.register(liveTable);
-   var livePop = o._livePop = MO.Class.create(MO.FGuiLivePop);
-   livePop.setName('LivePop');
-   livePop.linkGraphicContext(o);
-   livePop.setup();
-   livePop.build();
-   o._guiManager.register(livePop);
-   o._guiManager.hide();
-   var entityConsole = MO.Console.find(MO.FEaiEntityConsole);
-   entityConsole.cityModule().build(o);
-   var countryEntity = o._countryEntity = entityConsole.mapModule().loadCountry(o, MO.EEaiConstant.DefaultCountry);
-   o._readyLoader.push(countryEntity);
-}
-MO.FEaiChartSalesScene_showParticle = function FEaiChartSalesScene_showParticle(provinceEntity, cityResource){
-   var o = this;
-   var particle = o._particle;
-   var location = cityResource.location();
-   var count = 4;
-   particle.color().set(1, 1, 0, 1);
-   for(var i = 0; i < count; i++){
-      var itemCount = parseInt(Math.random() * 100);
-      var attenuation = Math.random();
-      particle.setItemCount(itemCount);
-      particle.position().assign(location);
-      particle.position().z = provinceEntity.currentZ();
-      particle.setDelay(10 * i);
-      particle.setSpeed(4 + 0.4 * i);
-      particle.setAcceleration(0);
-      particle.setAttenuation(0.8);
-      particle.start();
-   }
-}
-MO.FEaiChartSalesScene_showFace = function FEaiChartSalesScene_showFace(){
-   var o = this;
-   o._statusStart = true;
-   o._playing = true;
-   o._mapReady = false;
-   o._mapEntity.reset();
-   var desktop = o._application.desktop();
-   desktop.show();
-   o.processResize();
-}
-MO.FEaiChartSalesScene_fixMatrix = function FEaiChartSalesScene_fixMatrix(matrix){
-   var o = this;
-   var isVertical = MO.Window.Browser.isOrientationVertical()
-   if(isVertical){
-      matrix.tx = -14.58;
-      matrix.ty = -1.9;
-      matrix.tz = 0;
-      matrix.setScale(0.14, 0.16, 0.14);
-   }else{
-      matrix.tx = -38.6;
-      matrix.ty = -12.8;
-      matrix.tz = 0;
-      matrix.setScale(0.32, 0.36, 0.32);
-   }
-   matrix.update();
-}
-MO.FEaiChartSalesScene_processResize = function FEaiChartSalesScene_processResize(){
-   var o = this;
-   o.__base.FEaiChartScene.processResize.call(o);
-   var isVertical = MO.Window.Browser.isOrientationVertical()
-   o.fixMatrix(o._investment.display().matrix());
-   var logoBar = o._logoBar;
-   if(isVertical){
-      logoBar.setLocation(8, 8);
-      logoBar.setScale(0.85, 0.85);
-   }else{
-      logoBar.setLocation(5, 5);
-      logoBar.setScale(1, 1);
-   }
-   var control = o._southSea;
-   if(isVertical){
-      control.setDockCd(MO.EUiDock.RightTop);
-      control.setTop(570);
-      control.setRight(100);
-   }else{
-      control.setDockCd(MO.EUiDock.RightBottom);
-      control.setRight(710);
-      control.setBottom(260);
-   }
-   var timeline = o._timeline;
-   if(isVertical){
-      timeline.setDockCd(MO.EUiDock.Bottom);
-      timeline.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
-      timeline.setLeft(10);
-      timeline.setRight(10);
-      timeline.setBottom(920);
-      timeline.setHeight(250);
-   }else{
-      timeline.setDockCd(MO.EUiDock.Bottom);
-      timeline.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
-      timeline.setLeft(20);
-      timeline.setBottom(30);
-      timeline.setRight(680);
-      timeline.setHeight(250);
-   }
-   var liveTable = o._liveTable;
-   if(isVertical){
-      liveTable.setDockCd(MO.EUiDock.Bottom);
-      liveTable.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Right);
-      liveTable.setLeft(10);
-      liveTable.setRight(10);
-      liveTable.setBottom(10);
-      liveTable.setWidth(1060);
-      liveTable.setHeight(900);
-   }else{
-      liveTable.setDockCd(MO.EUiDock.Right);
-      liveTable.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Bottom);
-      liveTable.setTop(10);
-      liveTable.setRight(0);
-      liveTable.setBottom(10);
-      liveTable.setWidth(650);
-   }
-}
 MO.FEaiChartScene = function FEaiChartScene(o){
    o = MO.Class.inherits(this, o, MO.FEaiScene);
    o._optionMapCountry     = true;
@@ -7074,125 +6866,89 @@ MO.FEaiChartCustomerScene_processResize = function FEaiChartCustomerScene_proces
    }
 }
 MO.FEaiChartMarketerDynamicInfo = function FEaiChartMarketerDynamicInfo(o){
-   o = MO.Class.inherits(this, o, MO.FObject);
-   o._investmentTotal    = MO.Class.register(o, new MO.AGetter('_investmentTotal'));
-   o._redemptionTotal    = MO.Class.register(o, new MO.AGetter('_redemptionTotal'));
-   o._netinvestmentTotal = MO.Class.register(o, new MO.AGetter('_netinvestmentTotal'));
-   o._interestTotal      = MO.Class.register(o, new MO.AGetter('_interestTotal'));
-   o._performanceTotal   = MO.Class.register(o, new MO.AGetter('_performanceTotal'));
-   o.construct           = MO.FEaiChartMarketerDynamicInfo_construct;
-   o.unserialize         = MO.FEaiChartMarketerDynamicInfo_unserialize;
-   o.dispose             = MO.FEaiChartMarketerDynamicInfo_dispose;
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._investmentTotal    = MO.Class.register(o, [new MO.AGetter('_investmentTotal'), new MO.APersistence('_investmentTotal', MO.EDataType.Double)]);
+   o._redemptionTotal    = MO.Class.register(o, [new MO.AGetter('_redemptionTotal'), new MO.APersistence('_redemptionTotal', MO.EDataType.Double)]);
+   o._netinvestmentTotal = MO.Class.register(o, [new MO.AGetter('_netinvestmentTotal'), new MO.APersistence('_netinvestmentTotal', MO.EDataType.Double)]);
+   o._interestTotal      = MO.Class.register(o, [new MO.AGetter('_interestTotal'), new MO.APersistence('_interestTotal', MO.EDataType.Double)]);
+   o._performanceTotal   = MO.Class.register(o, [new MO.AGetter('_performanceTotal'), new MO.APersistence('_interestTotal', MO.EDataType.Double)]);
+   o._rankUnits          = MO.Class.register(o, [new MO.AGetter('_rankUnits'), new MO.APersistence('_rankUnits', MO.EDataType.Objects, MO.FEaiChartMarketerDynamicRankUnit)]);
+   o._units              = MO.Class.register(o, [new MO.AGetter('_units'), new MO.APersistence('_units', MO.EDataType.Objects, MO.FEaiChartMarketerDynamicUnit)]);
    return o;
 }
-MO.FEaiChartMarketerDynamicInfo_construct = function FEaiChartMarketerDynamicInfo_construct(){
-   var o = this;
-   o.__base.FObject.construct.call(o);
-}
-MO.FEaiChartMarketerDynamicInfo_unserialize = function FEaiChartMarketerDynamicInfo_unserialize(input){
-   var o = this;
-   o._investmentTotal = input.readDouble();
-   o._redemptionTotal = input.readDouble();
-   o._netinvestmentTotal = input.readDouble();
-   o._interestTotal = input.readDouble();
-   o._performanceTotal = input.readDouble();
-}
-MO.FEaiChartMarketerDynamicInfo_dispose = function FEaiChartMarketerDynamicInfo_dispose(){
-   var o = this;
-   o.__base.FObject.dispose.call(o);
+MO.FEaiChartMarketerDynamicRankUnit = function FEaiChartMarketerDynamicRankUnit(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._departmentLabel    = MO.Class.register(o, [new MO.AGetter('_departmentLabel'), new MO.APersistence('_departmentLabel', MO.EDataType.String)]);
+   o._marketerLabel      = MO.Class.register(o, [new MO.AGetter('_marketerLabel'), new MO.APersistence('_marketerLabel', MO.EDataType.String)]);
+   o._investmentTotal    = MO.Class.register(o, [new MO.AGetter('_investmentTotal'), new MO.APersistence('_investmentTotal', MO.EDataType.Double)]);
+   o._redemptionTotal    = MO.Class.register(o, [new MO.AGetter('_redemptionTotal'), new MO.APersistence('_redemptionTotal', MO.EDataType.Double)]);
+   o._netinvestmentTotal = MO.Class.register(o, [new MO.AGetter('_netinvestmentTotal'), new MO.APersistence('_netinvestmentTotal', MO.EDataType.Double)]);
+   o._interestTotal      = MO.Class.register(o, [new MO.AGetter('_interestTotal'), new MO.APersistence('_interestTotal', MO.EDataType.Double)]);
+   o._performanceTotal   = MO.Class.register(o, [new MO.AGetter('_performanceTotal'), new MO.APersistence('_performanceTotal', MO.EDataType.Double)]);
+   o._customerRegister   = MO.Class.register(o, [new MO.AGetter('_customerRegister'), new MO.APersistence('_customerRegister', MO.EDataType.Int32)]);
+   o._customerTotal      = MO.Class.register(o, [new MO.AGetter('_customerTotal'), new MO.APersistence('_customerTotal', MO.EDataType.Int32)]);
+   return o;
 }
 MO.FEaiChartMarketerDynamicUnit = function FEaiChartMarketerDynamicUnit(o){
-   o = MO.Class.inherits(this, o, MO.FObject);
-   o._recordDate           = MO.Class.register(o, new MO.AGetter('_recordDate'));
-   o._departmentLabel      = MO.Class.register(o, new MO.AGetter('_departmentLabel'));
-   o._marketerLabel        = MO.Class.register(o, new MO.AGetter('_marketerLabel'));
-   o._customerLabel        = MO.Class.register(o, new MO.AGetter('_customerLabel'));
-   o._customerCard         = MO.Class.register(o, new MO.AGetter('_customerCard'));
-   o._customerPhone        = MO.Class.register(o, new MO.AGetter('_customerPhone'));
-   o._customerActionCd     = MO.Class.register(o, new MO.AGetter('_customerActionCd'));
-   o._customerActionAmount = MO.Class.register(o, new MO.AGetter('_customerActionAmount'));
-   o.construct             = MO.FEaiChartMarketerDynamicUnit_construct;
-   o.unserialize           = MO.FEaiChartMarketerDynamicUnit_unserialize;
-   o.dispose               = MO.FEaiChartMarketerDynamicUnit_dispose;
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._recordDate           = MO.Class.register(o, [new MO.AGetter('_recordDate'), new MO.APersistence('_recordDate', MO.EDataType.String)]);
+   o._departmentLabel      = MO.Class.register(o, [new MO.AGetter('_departmentLabel'), new MO.APersistence('_departmentLabel', MO.EDataType.String)]);
+   o._marketerLabel        = MO.Class.register(o, [new MO.AGetter('_marketerLabel'), new MO.APersistence('_marketerLabel', MO.EDataType.String)]);
+   o._customerLabel        = MO.Class.register(o, [new MO.AGetter('_customerLabel'), new MO.APersistence('_customerLabel', MO.EDataType.String)]);
+   o._customerCard         = MO.Class.register(o, [new MO.AGetter('_customerCard'), new MO.APersistence('_customerCard', MO.EDataType.String)]);
+   o._customerPhone        = MO.Class.register(o, [new MO.AGetter('_customerPhone'), new MO.APersistence('_customerPhone', MO.EDataType.String)]);
+   o._customerActionCd     = MO.Class.register(o, [new MO.AGetter('_customerActionCd'), new MO.APersistence('_customerActionCd', MO.EDataType.Uint8)]);
+   o._customerActionAmount = MO.Class.register(o, [new MO.AGetter('_customerActionAmount'), new MO.APersistence('_customerActionAmount', MO.EDataType.Double)]);
    return o;
-}
-MO.FEaiChartMarketerDynamicUnit_construct = function FEaiChartMarketerDynamicUnit_construct(){
-   var o = this;
-   o.__base.FObject.construct.call(o);
-}
-MO.FEaiChartMarketerDynamicUnit_unserialize = function FEaiChartMarketerDynamicUnit_unserialize(input){
-   var o = this;
-   o._recordDate = input.readString();
-   o._departmentLabel = input.readString();
-   o._marketerLabel = input.readString();
-   o._customerLabel = input.readString();
-   o._customerCard = input.readString();
-   o._customerPhone = input.readString();
-   o._customerActionCd = input.readUint8();
-   o._customerActionAmount = input.readDouble();
-}
-MO.FEaiChartMarketerDynamicUnit_dispose = function FEaiChartMarketerDynamicUnit_dispose(){
-   var o = this;
-   o.__base.FObject.dispose.call(o);
 }
 MO.FEaiChartMarketerProcessor = function FEaiChartMarketerProcessor(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MGraphicObject, MO.MListener);
-   o._dateSetup               = false;
-   o._beginDate               = MO.Class.register(o, new MO.AGetter('_beginDate'));
-   o._endDate                 = MO.Class.register(o, new MO.AGetter('_endDate'));
-   o._invementDayCurrent      = MO.Class.register(o, new MO.AGetter('_invementDayCurrent'), 0);
-   o._invementDay             = MO.Class.register(o, new MO.AGetter('_invementDay'), 0);
-   o._invementTotalCurrent    = MO.Class.register(o, new MO.AGetter('_invementTotalCurrent'), 0);
-   o._invementTotal           = MO.Class.register(o, new MO.AGetter('_invementTotal'), 0);
-   o._intervalMinute          = 1;
-   o._mapEntity               = MO.Class.register(o, new MO.AGetSet('_mapEntity'));
-   o._display                 = MO.Class.register(o, new MO.AGetter('_display'));
-   o._rankUnits               = MO.Class.register(o, new MO.AGetter('_rankUnits'));
-   o._units                   = MO.Class.register(o, new MO.AGetter('_units'));
-   o._tableUnits              = MO.Class.register(o, new MO.AGetter('_tableUnits'));
-   o._tableCount              = 40;
-   o._tableInterval           = 1000;
-   o._tableTick               = 1;
-   o._dataTicker              = null;
-   o._unitPool                = null;
-   o._autios                  = null;
-   o._eventDataChanged        = null;
-   o._listenersDataChanged    = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
-   o.onDynamicData             = MO.FEaiChartMarketerProcessor_onDynamicData;
-   o.construct                = MO.FEaiChartMarketerProcessor_construct;
-   o.allocUnit                = MO.FEaiChartMarketerProcessor_allocUnit;
-   o.allocShape               = MO.FEaiChartMarketerProcessor_allocShape;
-   o.setup                    = MO.FEaiChartMarketerProcessor_setup;
-   o.calculateInvestmentLevel = MO.FEaiChartMarketerProcessor_calculateInvestmentLevel;
-   o.calculateCurrent         = MO.FEaiChartMarketerProcessor_calculateCurrent;
-   o.focusEntity              = MO.FEaiChartMarketerProcessor_focusEntity;
-   o.process                  = MO.FEaiChartMarketerProcessor_process;
-   o.dispose                  = MO.FEaiChartMarketerProcessor_dispose;
+   o._dateSetup            = false;
+   o._beginDate            = MO.Class.register(o, new MO.AGetter('_beginDate'));
+   o._endDate              = MO.Class.register(o, new MO.AGetter('_endDate'));
+   o._invementDayCurrent   = MO.Class.register(o, new MO.AGetter('_invementDayCurrent'), 0);
+   o._invementDay          = MO.Class.register(o, new MO.AGetter('_invementDay'), 0);
+   o._invementTotalCurrent = MO.Class.register(o, new MO.AGetter('_invementTotalCurrent'), 0);
+   o._invementTotal        = MO.Class.register(o, new MO.AGetter('_invementTotal'), 0);
+   o._intervalMinute       = 1;
+   o._mapEntity            = MO.Class.register(o, new MO.AGetSet('_mapEntity'));
+   o._display              = MO.Class.register(o, new MO.AGetter('_display'));
+   o._rankUnits            = MO.Class.register(o, new MO.AGetter('_rankUnits'));
+   o._units                = MO.Class.register(o, new MO.AGetter('_units'));
+   o._tableCount           = 40;
+   o._tableInterval        = 1000;
+   o._tableTick            = 1;
+   o._dataTicker           = null;
+   o._unitPool             = null;
+   o._autios               = null;
+   o._eventDataChanged     = null;
+   o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
+   o.onDynamicData         = MO.FEaiChartMarketerProcessor_onDynamicData;
+   o.construct             = MO.FEaiChartMarketerProcessor_construct;
+   o.allocUnit             = MO.FEaiChartMarketerProcessor_allocUnit;
+   o.allocShape            = MO.FEaiChartMarketerProcessor_allocShape;
+   o.setup                 = MO.FEaiChartMarketerProcessor_setup;
+   o.calculateCurrent      = MO.FEaiChartMarketerProcessor_calculateCurrent;
+   o.focusEntity           = MO.FEaiChartMarketerProcessor_focusEntity;
+   o.process               = MO.FEaiChartMarketerProcessor_process;
+   o.dispose               = MO.FEaiChartMarketerProcessor_dispose;
    return o;
 }
 MO.FEaiChartMarketerProcessor_onDynamicData = function FEaiChartMarketerProcessor_onDynamicData(event){
    var o = this;
    var content = event.content;
-   var view = MO.Class.create(MO.FDataView);
-   view.setEndianCd(true);
-   view.link(event.content);
    var dynamicInfo = o._dynamicInfo;
-   dynamicInfo.unserialize(view);
+   dynamicInfo.unserializeBuffer(event.content, true);
+   var rankUnits = o._rankUnits;
+   rankUnits.assign(dynamicInfo.rankUnits());
    var units = o._units;
-   var count = view.readInt32();
-   for(var i = 0; i < count; i++){
-      var unit = o.allocUnit();
-      unit.unserialize(view);
-      units.push(unit);
-   }
-   view.dispose();
+   units.append(dynamicInfo.units());
    var unitCount = units.count();
    o._tableInterval = 1000 * 60 * o._intervalMinute / unitCount;
    o._tableTick = 0;
    var changeEvent = o._eventDataChanged;
+   changeEvent.rankUnits = rankUnits;
    changeEvent.unit = null;
-   changeEvent.rank = o._rankUnits;
-   changeEvent.data = o._tableUnits;
    o.processDataChangedListener(changeEvent);
 }
 MO.FEaiChartMarketerProcessor_construct = function FEaiChartMarketerProcessor_construct(){
@@ -7201,7 +6957,6 @@ MO.FEaiChartMarketerProcessor_construct = function FEaiChartMarketerProcessor_co
    o._beginDate = new MO.TDate();
    o._endDate = new MO.TDate();
    o._units = new MO.TObjects();
-   o._tableUnits = new MO.TObjects();
    o._tableTicker = new MO.TTicker(1000 * o._tableInterval);
    o._autios = new Object();
    o._dataTicker = new MO.TTicker(1000 * 60 * o._intervalMinute);
@@ -7227,21 +6982,6 @@ MO.FEaiChartMarketerProcessor_setup = function FEaiChartMarketerProcessor_setup(
    var display = o._display = MO.Class.create(MO.FE3dDisplay);
    display.linkGraphicContext(o);
 }
-MO.FEaiChartMarketerProcessor_calculateInvestmentLevel = function FEaiChartMarketerProcessor_calculateInvestmentLevel(investment){
-   var o = this;
-   if(investment >= 5000000){
-      return 5;
-   }else if(investment >= 1000000){
-      return 4;
-   }else if(investment >= 100000){
-      return 3;
-   }else if(investment >= 10000){
-      return 2;
-   }else if(investment >= 1000){
-      return 1;
-   }
-   return 0;
-}
 MO.FEaiChartMarketerProcessor_calculateCurrent = function FEaiChartMarketerProcessor_calculateCurrent(){
    var o = this;
    var units = o._units;
@@ -7254,14 +6994,29 @@ MO.FEaiChartMarketerProcessor_calculateCurrent = function FEaiChartMarketerProce
 MO.FEaiChartMarketerProcessor_focusEntity = function FEaiChartMarketerProcessor_focusEntity(unit){
    var o = this;
    var mapEntity = o._mapEntity;
-   var card = unit.customerCard();
-   var cityEntity = MO.Console.find(MO.FEaiEntityConsole).cityModule().findByCard(card);
-   if(cityEntity){
+   var actionCd = unit.customerActionCd();
+   if(actionCd == 1){
+      var card = unit.customerCard();
+      var cityEntity = MO.Console.find(MO.FEaiEntityConsole).cityModule().findByCard(card);
+      if(cityEntity){
+         var amount = unit.customerActionAmount();
+         var level = MO.Console.find(MO.FEaiLogicConsole).statistics().calculateAmountLevel(amount);
+         var provinceCode = cityEntity.data().provinceCode();
+         var provinceEntity = MO.Console.find(MO.FEaiEntityConsole).provinceModule().findByCode(provinceCode);
+         if(provinceEntity){
+            provinceEntity.doInvestment(level, amount);
+         }
+         cityEntity.addInvestmentTotal(level, amount);
+         o._mapEntity.upload();
+         var autio = o._autios[level];
+         if(autio){
+            autio.play(0);
+         }
+      }
    }
    var changedEvent = o._eventDataChanged;
+   changedEvent.rankUnits = o._rankUnits;
    changedEvent.unit = unit;
-   changedEvent.rank = o._rankUnits;
-   changedEvent.data = o._tableUnits;
    o.processDataChangedListener(changedEvent);
 }
 MO.FEaiChartMarketerProcessor_process = function FEaiChartMarketerProcessor_process(){
@@ -7288,14 +7043,9 @@ MO.FEaiChartMarketerProcessor_process = function FEaiChartMarketerProcessor_proc
    }
    var currentTick = MO.Timer.current();
    if(currentTick - o._tableTick > o._tableInterval){
-      if(o._tableUnits.count() >= o._tableCount){
-         var unit = o._tableUnits.pop();
-         o._unitPool.free(unit);
-      }
       var units = o._units;
       if(!units.isEmpty()){
          var unit = units.shift();
-         o._tableUnits.unshift(unit);
          o.focusEntity(unit);
       }
       o.calculateCurrent();
@@ -7304,7 +7054,6 @@ MO.FEaiChartMarketerProcessor_process = function FEaiChartMarketerProcessor_proc
    o._mapEntity.process();
    var dynamicInfo = MO.Desktop.application().dynamicInfo();
    dynamicInfo._investmentEntityCount = o._units.count();
-   dynamicInfo._investmentTableEntityCount = o._tableUnits.count();
    dynamicInfo._investmentPoolItemCount = o._unitPool.items().count();
    dynamicInfo._investmentPoolFreeCount = o._unitPool.frees().count();
 }
@@ -7351,7 +7100,7 @@ MO.FEaiChartMarketerScene_onInvestmentDataChanged = function FEaiChartMarketerSc
    var o = this;
    var unit = event.unit;
    var table = o._liveTable;
-   table.setRank(event.rank);
+   table.setRankUnits(event.rankUnits);
    table.pushUnit(unit);
    table.dirty();
 }
@@ -7453,7 +7202,7 @@ MO.FEaiChartMarketerScene_setup = function FEaiChartMarketerScene_setup() {
    var o = this;
    o.__base.FEaiChartScene.setup.call(o);
    var dataLayer = o._activeStage.dataLayer();
-   var frame = o._logoBar = MO.Console.find(MO.FGuiFrameConsole).get(o, 'eai.chart.LogoBar');
+   var frame = o._logoBar = MO.Console.find(MO.FGuiFrameConsole).get(o, 'eai.chart.marketer.LogoBar');
    o._guiManager.register(frame);
    var invement = o._processor = MO.Class.create(MO.FEaiChartMarketerProcessor);
    invement.linkGraphicContext(o);
@@ -7587,7 +7336,7 @@ MO.FEaiChartMarketerScene_processResize = function FEaiChartMarketerScene_proces
 MO.FEaiChartMarketerTable = function FEaiChartMarketerTable(o) {
    o = MO.Class.inherits(this, o, MO.FGuiControl);
    o._currentDate          = null;
-   o._rank                 = MO.Class.register(o, new MO.AGetSet('_rank'));
+   o._rank                 = MO.Class.register(o, new MO.AGetter('_rank'));
    o._rankLogoImage        = null;
    o._rankTitleImage       = null;
    o._rankLineImage        = null;
@@ -7597,27 +7346,24 @@ MO.FEaiChartMarketerTable = function FEaiChartMarketerTable(o) {
    o._rank3Image           = null;
    o._backgroundImage      = null;
    o._backgroundPadding    = null;
-   o._columnLabels         = null;
-   o._columnDefines        = null;
-   o._columnWidths         = null;
    o._tableCount           = 0;
    o._units                = null;
    o._lineScroll           = 0;
    o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
    o.onImageLoad           = MO.FEaiChartMarketerTable_onImageLoad;
    o.onPaintBegin          = MO.FEaiChartMarketerTable_onPaintBegin;
-   o.oeUpdate              = MO.FEaiChartMarketerTable_oeUpdate;
    o.construct             = MO.FEaiChartMarketerTable_construct;
    o.setup                 = MO.FEaiChartMarketerTable_setup;
-   o.pushUnit            = MO.FEaiChartMarketerTable_pushUnit;
+   o.setRankUnits          = MO.FEaiChartMarketerTable_setRankUnits;
+   o.pushUnit              = MO.FEaiChartMarketerTable_pushUnit;
    o.drawRow               = MO.FEaiChartMarketerTable_drawRow;
    o.dispose               = MO.FEaiChartMarketerTable_dispose;
    return o;
 }
-MO.FEaiChartMarketerTable_onImageLoad = function FEaiChartMarketerTable_onImageLoad() {
+MO.FEaiChartMarketerTable_onImageLoad = function FEaiChartMarketerTable_onImageLoad(){
    this.dirty();
 }
-MO.FEaiChartMarketerTable_onPaintBegin = function FEaiChartMarketerTable_onPaintBegin(event) {
+MO.FEaiChartMarketerTable_onPaintBegin = function FEaiChartMarketerTable_onPaintBegin(event){
    var o = this;
    o.__base.FGuiControl.onPaintBegin.call(o, event);
    var graphic = event.graphic;
@@ -7633,14 +7379,6 @@ MO.FEaiChartMarketerTable_onPaintBegin = function FEaiChartMarketerTable_onPaint
    var drawLeft = left + 12;
    var drawRight = right - 12;
    var drawWidth = right - left;
-   var columnCount = o._columnCount;
-   var widthDefine = 0;
-   for(var i = 0; i < columnCount; i++){
-      widthDefine += o._columnDefines[i];
-   }
-   for(var i = 0; i < columnCount; i++){
-      o._columnWidths[i] = (o._columnDefines[i] / widthDefine * drawWidth) - 7;
-   }
    graphic.drawGridImage(o._backgroundImage, left, top, width, height, o._backgroundPadding);
    var titleText = '全球实时投资数据展示中心(中国)';
    graphic.setFont(o._headFontStyle);
@@ -7651,9 +7389,9 @@ MO.FEaiChartMarketerTable_onPaintBegin = function FEaiChartMarketerTable_onPaint
    graphic.setFont(o._rowFontStyle);
    var tableTop = top + o._rankStart;
    graphic.drawGridImage(o._rankLineImage, left + 6, tableTop + o._rankTitleStart, width - 22, o._rankHeight, o._rankLinePadding);
-   graphic.drawImage(o._rankTitleImage, left + (width - 167) * 0.5, tableTop + 3, 167, 40);
-   var rankUnit = o._rank;
-   if(rankUnit){
+   graphic.drawImage(o._rankTitleImage, left + (width - 167) * 0.5, tableTop + 3, 198, 40);
+   var rankUnits = o._rank;
+   if(rankUnits){
       var tableText = '';
       var tableTextWidth = 0;
       var count = rankUnit.count();
@@ -7661,51 +7399,6 @@ MO.FEaiChartMarketerTable_onPaintBegin = function FEaiChartMarketerTable_onPaint
       for(var i = 0; i < count; i++) {
          var unit = rankUnit.at(i);
          o.drawRow(graphic, unit, true, i, drawLeft, tableTop + o._rankRowHeight * i, drawWidth);
-      }
-   }
-   var headText = '';
-   var headTextWidth = 0;
-   var headLeft = drawLeft;
-   var headTop = top + o._headStart;
-   var headTextTop = headTop + o._headTextTop;
-   for(var i = 0; i < columnCount; i++){
-      var headText = o._columnLabels[i];
-      var headTextWidth = graphic.textWidth(headText);
-      graphic.fillRectangle(headLeft, headTop, o._columnWidths[i] - 4, o._headHeight, '#122A46');
-      graphic.drawText(headText, headLeft + (o._columnWidths[i] - headTextWidth - 4) * 0.5, headTextTop, '#00B2F2');
-      headLeft += o._columnWidths[i];
-   }
-   var entities = o._units;
-   if(!entities.isEmpty()){
-      var tableTop = top + o._rowStart;
-      var tableText = '';
-      var tableTextWidth = 0;
-      graphic.clip(drawLeft, tableTop, drawWidth - 38, o._rowHeight * (o._tableCount - 1));
-      tableTop += 24;
-      var count = entities.count();
-      for(var i = 0; i < count; i++) {
-         var unit = entities.at(i);
-         o.drawRow(graphic, unit, false, i, drawLeft, tableTop + o._rowHeight * i + o._lineScroll, drawWidth);
-      }
-   }
-}
-MO.FEaiChartMarketerTable_oeUpdate = function FEaiChartMarketerTable_oeUpdate(event){
-   var o = this;
-   o.__base.FGuiControl.oeUpdate.call(o, event);
-   if(event.isBefore()){
-      if(o._lineScroll < 0){
-         o._lineScroll += 1;
-         if(o._lineScroll < -o._rowHeight){
-            o._lineScroll = 0;
-         }
-         if(o._lineScroll >= 0){
-            var entities = o._units;
-            if(entities.count() > o._tableCount){
-               entities.pop();
-            }
-            o._lineScroll = 0;
-         }
-         o.dirty();
       }
    }
 }
@@ -7716,10 +7409,6 @@ MO.FEaiChartMarketerTable_construct = function FEaiChartMarketerTable_construct(
    o._currentDate = new MO.TDate();
    o._rankLinePadding = new MO.SPadding(40, 0, 40, 0);
    o._backgroundPadding = new MO.SPadding(20, 20, 90, 20);
-   o._columnLabels = new Array('时间', '公司', '理财师', '城市', '用户-手机', '投资额(元)');
-      o._columnDefines = new Array(110, 120, 120, 100, 160, 120);
-   o._columnWidths = new Array();
-   o._columnCount = o._columnLabels.length;
 }
 MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    var o = this;
@@ -7728,7 +7417,7 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    image.addLoadListener(o, o.onImageLoad);
    var image = o._backgroundImage = imageConsole.load('{eai.resource}/live/grid.png');
    image.addLoadListener(o, o.onImageLoad);
-   var image = o._rankTitleImage = imageConsole.load('{eai.resource}/live/tank-title.png');
+   var image = o._rankTitleImage = imageConsole.load('{eai.resource}/marketer/title.png');
    image.addLoadListener(o, o.onImageLoad);
    var image = o._rankLineImage = imageConsole.load('{eai.resource}/live/rank.png');
    image.addLoadListener(o, o.onImageLoad);
@@ -7738,10 +7427,143 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    image.addLoadListener(o, o.onImageLoad);
    var image = o._rank3Image = imageConsole.load('{eai.resource}/live/3.png');
    image.addLoadListener(o, o.onImageLoad);
-   var control = o._gridControl = MO.Class.create(MO.FGuiGridControl);
-   control.setLocation(100, 100);
-   control.setSize(600, 500);
-   o.push(control);
+   var grid = o._gridRank = MO.Class.create(MO.FGuiGridControl);
+   grid.setLocation(50, 170);
+   grid.setSize(800, 700);
+   grid.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
+   grid.setLeft(9);
+   grid.setRight(19);
+   grid.setHeadHeight(32);
+   grid.setHeadBackColor('#122A46');
+   grid.headFont().font = 'Microsoft YaHei';
+   grid.headFont().size = 22;
+   grid.headFont().color = '#00B2F2';
+   grid.setRowHeight(30);
+   grid.rowFont().font = 'Microsoft YaHei';
+   grid.rowFont().size = 20;
+   grid.rowFont().color = '#59FDE9';
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('departmentLabel');
+   column.setLabel('公司');
+   column.setDataName('department_label');
+   column.setWidth(140);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('marketerLabel');
+   column.setLabel('理财师');
+   column.setDataName('marketer_label');
+   column.setWidth(110);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investmentTotal');
+   column.setLabel('投资');
+   column.setDataName('investment_total');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.cellPadding().right = 10;
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('redemptionTotal');
+   column.setLabel('赎回');
+   column.setDataName('redemption_total');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.cellPadding().right = 10;
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('netinvestmentTotal');
+   column.setLabel('净投');
+   column.setDataName('netinvestment_total');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.cellPadding().right = 10;
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerCount');
+   column.setLabel('客户数');
+   column.setDataName('customer_count');
+   column.setWidth(110);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   o.push(grid);
+   var grid = o._gridControl = MO.Class.create(MO.FGuiTable);
+   grid.setLocation(50, 332);
+   grid.setSize(800, 700);
+   grid.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
+   grid.setLeft(9);
+   grid.setRight(19);
+   grid.setHeadHeight(32);
+   grid.setHeadBackColor('#122A46');
+   grid.headFont().font = 'Microsoft YaHei';
+   grid.headFont().size = 22;
+   grid.headFont().color = '#00B2F2';
+   grid.setRowHeight(30);
+   grid.rowFont().font = 'Microsoft YaHei';
+   grid.rowFont().size = 20;
+   grid.rowFont().color = '#59FDE9';
+   var column = MO.Class.create(MO.FGuiGridColumnDate);
+   column.setName('recordDate');
+   column.setLabel('时间');
+   column.setDataName('record_date');
+   column.setDateFormat('HH24:MI:SS');
+   column.setWidth(110);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('departmentLabel');
+   column.setLabel('公司');
+   column.setDataName('department_label');
+   column.setWidth(140);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('marketerLabel');
+   column.setLabel('理财师');
+   column.setDataName('marketer_label');
+   column.setWidth(110);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerCard');
+   column.setLabel('城市');
+   column.setDataName('customer_city');
+   column.setWidth(100);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerInfo');
+   column.setLabel('用户-手机');
+   column.setDataName('customer_info');
+   column.setWidth(140);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('customerAmount');
+   column.setLabel('投资额(元)');
+   column.setDataName('customer_amount');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.cellPadding().right = 10;
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   o.push(grid);
    o._headFontStyle = 'bold 32px Microsoft YaHei';
    var isVertical = MO.Window.Browser.isOrientationVertical()
    if(isVertical){
@@ -7760,7 +7582,6 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
       o._rowStart = 418;
       o._rowTextTop = 0;
       o._rowFontStyle = '36px Microsoft YaHei';
-      o._rowHeight = 46;
    }else{
       o._tableCount = 19;
       o._rankStart = 110;
@@ -7776,7 +7597,23 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
       o._headHeight = 40;
       o._rowFontStyle = '22px Microsoft YaHei';
       o._rowStart = 384;
-      o._rowHeight = 36;
+   }
+}
+MO.FEaiChartMarketerTable_setRankUnits = function FEaiChartMarketerTable_setRankUnits(units){
+   var o = this;
+   var grid = o._gridRank;
+   grid.clearRows();
+   var count = units.count();
+   for(var i = 0; i < count; i++){
+      var unit = units.at(i);
+      var row = grid.allocRow();
+      row.set('department_label', unit.departmentLabel());
+      row.set('marketer_label', unit.marketerLabel());
+      row.set('investment_total', unit.investmentTotal());
+      row.set('redemption_total', unit.redemptionTotal());
+      row.set('netinvestment_total', unit.netinvestmentTotal());
+      row.set('customer_count', unit.customerTotal());
+      grid.pushRow(row);
    }
 }
 MO.FEaiChartMarketerTable_pushUnit = function FEaiChartMarketerTable_pushUnit(unit){
@@ -7784,91 +7621,24 @@ MO.FEaiChartMarketerTable_pushUnit = function FEaiChartMarketerTable_pushUnit(un
    if(!unit){
       return null;
    }
+   var grid = o._gridControl;
+   var row = grid.allocRow();
+   row.set('record_date', unit.recordDate());
+   row.set('department_label', unit.departmentLabel());
+   row.set('marketer_label', unit.marketerLabel());
+   row.set('customer_city', unit.customerCard());
+   row.set('customer_info', unit.customerLabel() + ' - ' + unit.customerPhone());
+   if(unit.customerActionCd() == 1){
+      row.set('customer_amount', unit.customerActionAmount());
+   }else{
+      row.set('customer_amount', -unit.customerActionAmount());
+   }
+   grid.insertRow(row);
    var entities = o._units;
    entities.unshift(unit);
    o._lineScroll -= o._rowHeight;
    if(entities.count() > o._tableCount){
       entities.pop();
-   }
-}
-MO.FEaiChartMarketerTable_drawRow = function FEaiChartMarketerTable_drawRow(graphic, unit, flag, index, x, y, width){
-   var o = this;
-   var widths = o._columnWidths;
-   var fontColor = null;
-   if(flag){
-      fontColor = '#E5BD1D';
-   }else{
-      fontColor = '#59FDE9';
-   }
-   if(flag){
-      var columnWidth = widths[0];
-      var imageX = x + (columnWidth * 0.5) - 23;
-      var imageY = y - o._rankIconStart;
-      if((index == 0) && o._rank1Image.testReady()){
-         graphic.drawImage(o._rank1Image, imageX - 6, imageY - 28, 58, 65);
-      }
-      if((index == 1) && o._rank2Image.testReady()){
-         graphic.drawImage(o._rank2Image, imageX, imageY, 46, 37);
-      }
-      if((index == 2) && o._rank3Image.testReady()){
-         graphic.drawImage(o._rank3Image, imageX, imageY, 46, 37);
-      }
-   }
-   y += o._rankTextStart;
-   var textWidth = 0;
-   if(!flag){
-      o._currentDate.parse(unit.recordDate());
-      var text = o._currentDate.format('HH24:MI:SS');
-      textWidth = graphic.textWidth(text);
-      graphic.drawText(text, x + widths[0] * 0.5 - textWidth * 0.5, y, fontColor);
-   }
-   x += widths[0];
-   text = unit.departmentLabel();
-   textWidth = graphic.textWidth(text);
-   graphic.drawText(text, x + widths[1] * 0.5 - textWidth * 0.5, y, fontColor);
-   x += widths[1];
-   text = unit.marketerLabel();
-   textWidth = graphic.textWidth(text);
-   graphic.drawText(text, x + widths[2] * 0.5 - textWidth * 0.5, y, fontColor);
-   x += widths[2];
-   var cityResource = MO.Console.find(MO.FEaiResourceConsole).cityModule().findByCard(unit.customerCard());
-   text = '';
-   if(cityResource){
-      text = cityResource.label();
-   }
-   textWidth = graphic.textWidth(text);
-   graphic.drawText(text, x + widths[3] * 0.5 - textWidth * 0.5, y, fontColor);
-   x += widths[3];
-   text = unit.customerLabel() + ' - ' + unit.customerPhone();
-   textWidth = graphic.textWidth(text);
-   graphic.drawText(text, x + widths[4] * 0.5 - textWidth * 0.5, y, fontColor);
-   x += widths[4];
-   var amount = MO.Lang.Float.format(unit.customerActionAmount(), null, null, 2, '0');
-   var amountRight = x + widths[5] - 15;
-   if(unit.customerActionCd() == 1){
-      if (amount.length > 7) {
-         var highColor = null;
-         if(amount.length > 9){
-            highColor = '#FDEF01';
-         }else{
-            highColor = '#EB6C03';
-         }
-         var high = amount.substring(0, amount.length - 7);
-         var low = amount.substring(amount.length - 7, amount.length);
-         var highWidth = graphic.textWidth(high);
-         var lowWidth = graphic.textWidth(low);
-         graphic.drawText(high, amountRight - lowWidth - highWidth, y, highColor);
-         graphic.drawText(low, amountRight - lowWidth, y, '#59FDE9');
-      }else{
-         textWidth = graphic.textWidth(amount);
-         graphic.drawText(amount, amountRight - textWidth, y, fontColor);
-      }
-   }else if(unit.customerActionCd() == 2){
-      var text = '-' + amount;
-      textWidth = graphic.textWidth(text);
-      graphic.drawText(text, amountRight - textWidth, y, '#FF0000');
-   }else{
-      throw new TError('Invalid action code.');
    }
 }
 MO.FEaiChartMarketerTable_dispose = function FEaiChartMarketerTable_dispose(){
@@ -7925,13 +7695,8 @@ MO.FEaiChartMarketerTimeline_sync = function FEaiChartMarketerTimeline_sync() {
    statisticsLogic.doMarketerTrend(o, o.on24HDataFetch, startTime.format(), endTime.format());
 }
 MO.FEaiChartMarketerTimeline_on24HDataFetch = function FEaiChartMarketerTimeline_on24HDataFetch(event) {
-   var o = this;   var content = event.content;
-   var view = MO.Class.create(MO.FDataView);
-   view.setEndianCd(true);
-   view.link(event.content);
-   var trendInfo = o._trendInfo;
-   trendInfo.unserialize(view);
-   view.dispose();
+   var o = this;
+   o._trendInfo.unserializeBuffer(event.content, true);
    o.dirty();
 }
 MO.FEaiChartMarketerTimeline_oeUpdate = function FEaiChartMarketerTimeline_oeUpdate(event) {
@@ -7950,8 +7715,7 @@ MO.FEaiChartMarketerTimeline_oeUpdate = function FEaiChartMarketerTimeline_oeUpd
 MO.FEaiChartMarketerTimeline_drawTrend = function FEaiChartMarketerTimeline_drawTrend(graphic, propertyName, dataLeft, dataTop, dataRight, dataBottom, dataHeight, bakTime, timeSpan, maxAmount, lineColor){
    var o = this;
    var startTime = o._startTime;
-   var trendInfo = o._trendInfo;
-   var units = trendInfo.trendUints();
+   var units = o._trendInfo.units();
    var count = units.count();
    var unitFirst = units.first();
    var handle = graphic._handle;
@@ -8036,8 +7800,11 @@ MO.FEaiChartMarketerTimeline_onPaintBegin = function FEaiChartMarketerTimeline_o
    startTime.date.setTime(bakTime);
    startTime.refresh();
    var trendInfo = o._trendInfo;
-   var units = trendInfo.trendUints();
-   if (units.isEmpty()){
+   var units = trendInfo.units();
+   if(!units){
+      return;
+   }
+   if(units.isEmpty()){
       return;
    }
    var unitFirst = units.first();
@@ -8079,85 +7846,51 @@ MO.FEaiChartMarketerTimeline_onPaintBegin = function FEaiChartMarketerTimeline_o
          lastHour = hour;
       }
    }
-   graphic.setFont('bold 24px Microsoft YaHei');
-   graphic.drawText("24小时投资曲线", decoLeft, top, '#54F0FF');
+   graphic.setFont('24px Microsoft YaHei');
+   graphic.drawText("24H数据曲线", decoLeft, top, '#54F0FF');
    graphic.setFont('22px Microsoft YaHei');
    var rowStart = top + 30;
    var rowHeight = 22;
-   var textWidth = graphic.textWidth('小时峰值：');
-   var textHourPeakValue = MO.Lang.Float.unitFormat(maxHourInves, 0, 0, 2, 0, 10000, '万');
-   var textHourPeakWidth = graphic.textWidth(textHourPeakValue);
-   var textDayTotalValue = MO.Lang.Float.unitFormat(o._investmentTotal, 0, 0, 2, 0, 10000, '万');
-   var textDayTotalWidth = graphic.textWidth(textDayTotalValue);
-   var textHourAvrgValue = MO.Lang.Float.unitFormat(o._investmentTotal / 24, 0, 0, 2, 0, 10000, '万');
-   var textHourAvrgWidth = graphic.textWidth(textHourAvrgValue);
-   var textValueWidth = Math.max(Math.max(textHourPeakWidth, textDayTotalWidth), textHourAvrgWidth);
-   graphic.drawText('24H总额：', decoLeft, rowStart + rowHeight * 0, '#00CFFF');
-   graphic.drawText(textDayTotalValue, decoLeft + textWidth + textValueWidth - textDayTotalWidth, rowStart + rowHeight * 0, '#00B5F6');
-   graphic.drawText('小时峰值：', decoLeft, rowStart + rowHeight * 1 + 5, '#00CFFF');
-   graphic.drawText(textHourPeakValue, decoLeft + textWidth + textValueWidth - textHourPeakWidth, rowStart + rowHeight * 1 + 5, '#00B5F6');
-   graphic.drawText('小时均值：', decoLeft, rowStart + rowHeight * 2 + 10, '#00CFFF');
-   graphic.drawText(textHourAvrgValue, decoLeft + textWidth + textValueWidth - textHourAvrgWidth, rowStart + rowHeight * 2 + 10, '#00B5F6');
+   var textWidth = graphic.textWidth('投资总计：');
+   var investmentTotalText = MO.Lang.Float.unitFormat(trendInfo.investmentTotal(), 0, 0, 2, 0, 10000, '万');
+   var investmentTotalWidth = graphic.textWidth(investmentTotalText);
+   var redemptionTotalText = MO.Lang.Float.unitFormat(trendInfo.redemptionTotal(), 0, 0, 2, 0, 10000, '万');
+   var redemptionTotalWidth = graphic.textWidth(redemptionTotalText);
+   var netinvestmentTotalText = MO.Lang.Float.unitFormat(trendInfo.netinvestmentTotal(), 0, 0, 2, 0, 10000, '万');
+   var netinvestmentTotalWidth = graphic.textWidth(netinvestmentTotalText);
+   var interestTotalText = MO.Lang.Float.unitFormat(trendInfo.interestTotal(), 0, 0, 2, 0, 10000, '万');
+   var interestTotalWidth = graphic.textWidth(interestTotalText);
+   var maxWidth = Math.max(Math.max(Math.max(investmentTotalWidth, redemptionTotalWidth), netinvestmentTotalWidth), interestTotalWidth);
+   graphic.drawText('投资总额：', decoLeft, rowStart + rowHeight * 0, '#00CFFF');
+   graphic.drawText(investmentTotalText, decoLeft + textWidth + maxWidth - investmentTotalWidth, rowStart + rowHeight * 0, '#00B5F6');
+   graphic.drawText('赎回总额：', decoLeft, rowStart + rowHeight * 1 + 5, '#00CFFF');
+   graphic.drawText(redemptionTotalText, decoLeft + textWidth + maxWidth - redemptionTotalWidth, rowStart + rowHeight * 1 + 5, '#00B5F6');
+   graphic.drawText('净投总额：', decoLeft, rowStart + rowHeight * 2 + 10, '#00CFFF');
+   graphic.drawText(netinvestmentTotalText, decoLeft + textWidth + maxWidth - netinvestmentTotalWidth, rowStart + rowHeight * 2 + 10, '#00B5F6');
+   graphic.drawText('利息总额：', decoLeft, rowStart + rowHeight * 3 + 15, '#00CFFF');
+   graphic.drawText(interestTotalText, decoLeft + textWidth + maxWidth - interestTotalWidth, rowStart + rowHeight * 3 + 15, '#00B5F6');
    startTime.date.setTime(bakTime);
    startTime.refresh();
 }
 MO.FEaiChartMarketerTrendInfo = function FEaiChartMarketerTrendInfo(o){
-   o = MO.Class.inherits(this, o, MO.FObject);
-   o._trendUints    = MO.Class.register(o, new MO.AGetter('_trendUints'));
-   o.construct      = MO.FEaiChartMarketerTrendInfo_construct;
-   o.unserialize    = MO.FEaiChartMarketerTrendInfo_unserialize;
-   o.dispose        = MO.FEaiChartMarketerTrendInfo_dispose;
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._investmentTotal    = MO.Class.register(o, [new MO.AGetter('_investmentTotal'), new MO.APersistence('_investmentTotal', MO.EDataType.Double)]);
+   o._redemptionTotal    = MO.Class.register(o, [new MO.AGetter('_redemptionTotal'), new MO.APersistence('_redemptionTotal', MO.EDataType.Double)]);
+   o._netinvestmentTotal = MO.Class.register(o, [new MO.AGetter('_netinvestmentTotal'), new MO.APersistence('_netinvestmentTotal', MO.EDataType.Double)]);
+   o._interestTotal      = MO.Class.register(o, [new MO.AGetter('_interestTotal'), new MO.APersistence('_interestTotal', MO.EDataType.Double)]);
+   o._performanceTotal   = MO.Class.register(o, [new MO.AGetter('_performanceTotal'), new MO.APersistence('_performanceTotal', MO.EDataType.Double)]);
+   o._units = MO.Class.register(o, [new MO.AGetter('_units'), new MO.APersistence('_units', MO.EDataType.Objects, MO.FEaiChartMarketerTrendUnit)]);
    return o;
-}
-MO.FEaiChartMarketerTrendInfo_construct = function FEaiChartMarketerTrendInfo_construct(){
-   var o = this;
-   o.__base.FObject.construct.call(o);
-   o._trendUints = new MO.TObjects();
-}
-MO.FEaiChartMarketerTrendInfo_unserialize = function FEaiChartMarketerTrendInfo_unserialize(input){
-   var o = this;
-   var units = o._trendUints;
-   units.clear();
-   var count = input.readInt32();
-   for(var i = 0; i < count; i++){
-      var unit = MO.Class.create(MO.FEaiChartMarketerTrendUnit);
-      unit.unserialize(input);
-      units.push(unit);
-   }
-}
-MO.FEaiChartMarketerTrendInfo_dispose = function FEaiChartMarketerTrendInfo_dispose(){
-   var o = this;
-   o.__base.FObject.dispose.call(o);
 }
 MO.FEaiChartMarketerTrendUnit = function FEaiChartMarketerTrendUnit(o){
-   o = MO.Class.inherits(this, o, MO.FObject);
-   o._recordDate    = MO.Class.register(o, new MO.AGetter('_recordDate'));
-   o._investment    = MO.Class.register(o, new MO.AGetter('_investment'));
-   o._redemption    = MO.Class.register(o, new MO.AGetter('_redemption'));
-   o._netinvestment = MO.Class.register(o, new MO.AGetter('_netinvestment'));
-   o._interest      = MO.Class.register(o, new MO.AGetter('_interest'));
-   o._performance   = MO.Class.register(o, new MO.AGetter('_performance'));
-   o.construct      = MO.FEaiChartMarketerTrendUnit_construct;
-   o.unserialize    = MO.FEaiChartMarketerTrendUnit_unserialize;
-   o.dispose        = MO.FEaiChartMarketerTrendUnit_dispose;
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._recordDate    = MO.Class.register(o, [new MO.AGetter('_recordDate'), new MO.APersistence('_recordDate', MO.EDataType.String)]);
+   o._investment    = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._redemption    = MO.Class.register(o, [new MO.AGetter('_redemption'), new MO.APersistence('_redemption', MO.EDataType.Double)]);
+   o._netinvestment = MO.Class.register(o, [new MO.AGetter('_netinvestment'), new MO.APersistence('_netinvestment', MO.EDataType.Double)]);
+   o._interest      = MO.Class.register(o, [new MO.AGetter('_interest'), new MO.APersistence('_interest', MO.EDataType.Double)]);
+   o._performance   = MO.Class.register(o, [new MO.AGetter('_performance'), new MO.APersistence('_performance', MO.EDataType.Double)]);
    return o;
-}
-MO.FEaiChartMarketerTrendUnit_construct = function FEaiChartMarketerTrendUnit_construct(){
-   var o = this;
-   o.__base.FObject.construct.call(o);
-}
-MO.FEaiChartMarketerTrendUnit_unserialize = function FEaiChartMarketerTrendUnit_unserialize(input){
-   var o = this;
-   o._recordDate = input.readString();
-   o._investment = input.readDouble();
-   o._redemption = input.readDouble();
-   o._netinvestment = input.readDouble();
-   o._interest = input.readDouble();
-   o._performance = input.readDouble();
-}
-MO.FEaiChartMarketerTrendUnit_dispose = function FEaiChartMarketerTrendUnit_dispose(){
-   var o = this;
-   o.__base.FObject.dispose.call(o);
 }
 MO.FEaiChartDepartmentScene = function FEaiChartDepartmentScene(o){
    o = MO.Class.inherits(this, o, MO.FEaiChartScene);
@@ -8491,9 +8224,6 @@ MO.FEaiChartChapter_setup = function FEaiChartChapter_setup(){
    var scene = o._sceneWorld = MO.Class.create(MO.FEaiChartWorldScene);
    scene.linkGraphicContext(o);
    o.registerScene(scene);
-   var scene = o._sceneSales = MO.Class.create(MO.FEaiChartSalesScene);
-   scene.linkGraphicContext(o);
-   o.registerScene(scene);
 }
 MO.FEaiChartChapter_process = function FEaiChartChapter_process(){
    var o = this;
@@ -8770,7 +8500,7 @@ MO.FEaiChartDesktop_build = function FEaiChartDesktop_build(hPanel){
    canvas3d.build(hPanel);
    canvas3d.setPanel(hPanel);
    o.canvasRegister(canvas3d);
-   var canvas2d = o._canvas2d = MO.RClass.create(MO.FE2dCanvas);
+   var canvas2d = o._canvas2d = MO.RClass.create(MO.FUiCanvas);
    canvas2d.setDesktop(o);
    canvas2d.build(hPanel);
    canvas2d.setPanel(hPanel);
