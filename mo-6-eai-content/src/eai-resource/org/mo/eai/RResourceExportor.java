@@ -2,6 +2,7 @@ package org.mo.eai;
 
 import org.mo.eai.template.card.FCardTemplate;
 import org.mo.eai.template.city.FCityTemplate;
+import org.mo.eai.template.department.FDepartmentTemplate;
 import org.mo.eai.template.province.FProvinceTemplate;
 
 //============================================================
@@ -17,6 +18,9 @@ public class RResourceExportor
 
    // 卡片模板
    protected static FCardTemplate _cardTemplate;
+
+   // 部门模板
+   protected static FDepartmentTemplate _departmentTemplate;
 
    //============================================================
    // <T>获得城市模板。</T>
@@ -55,5 +59,18 @@ public class RResourceExportor
          _cardTemplate.parser();
       }
       return _cardTemplate;
+   }
+
+   //============================================================
+   // <T>获得卡片模板。</T>
+   //
+   // @return 卡片模板
+   //============================================================
+   public static FDepartmentTemplate departmentTemplate(){
+      if(_departmentTemplate == null){
+         _departmentTemplate = new FDepartmentTemplate();
+         _departmentTemplate.parser();
+      }
+      return _departmentTemplate;
    }
 }
