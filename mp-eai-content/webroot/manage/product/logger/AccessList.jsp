@@ -60,13 +60,11 @@
       <table id="access" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
          <thead>
             <tr>
-               <th data-options="field:'ouid',halign:'center',align:'left'" width="60px">编号</th>
-               <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="120px">ip地址</th>
-               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">账号</th>
-               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="160px">操作信息</th>
-               <th data-options="field:'logicCode',halign:'center',align:'left'" width="140px">logicCode</th>
-               <th data-options="field:'logicResult',halign:'center',align:'left'" width="140px">logicResult</th>     
-               <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
+               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
+               <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="150px">ip地址</th>
+               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="400px">账号</th>
+               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="450px">操作信息</th>   
+               <th data-options="field:'updateDate',halign:'center',align:'left'" width="160px">更新时间</th>
             </tr>
          </thead>
       </table>

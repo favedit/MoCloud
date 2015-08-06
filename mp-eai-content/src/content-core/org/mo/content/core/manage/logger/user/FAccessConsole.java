@@ -31,7 +31,7 @@ public class FAccessConsole
          pageNum = 0;
       }
       FLoggerPersonUserAccessLogic logic = new FLoggerPersonUserAccessLogic(logicContext);
-      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = logic.fetchClass(FLoggerPersonUserAccessUnit.class, null, "CREATE_DATE DESC", _pageSize, pageNum);
+      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = logic.fetchClass(FLoggerPersonUserAccessUnit.class, null, "UPDATE_DATE DESC", _pageSize, pageNum);
       return unitlist;
    }
 }

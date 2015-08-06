@@ -70,9 +70,10 @@
       <table id="user" fit='true' class="easyui-datagrid" style="width:100%;height:100%;text-align:center;align:true " data-options="toolbar:'#cy_right',pagination:true,collapsible:true">
          <thead>
             <tr>
+               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
                <th data-options="field:'guid',halign:'center',align:'right',hidden:'true'" width="60px">编号</th>
-               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">帐号</th>
-               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">名称</th>
+               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="200px">帐号</th>
+               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="200px">名称</th>
                <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
                <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">修改时间</th>
                <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_admin_editButton" width="80px">操作</th>

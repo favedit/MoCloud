@@ -42,7 +42,7 @@ public class FDeviceBrowserConsole
    @Override
    public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext){
       FDataInfoDeviceBrowserLogic logic = new FDataInfoDeviceBrowserLogic(logicContext);
-      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = logic.fetchClass(FDataInfoDeviceBrowserUnit.class, null, "CREATE_DATE DESC");
+      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = logic.fetchClass(FDataInfoDeviceBrowserUnit.class, null, "CONTENT");
       return unitlist;
    }
 
