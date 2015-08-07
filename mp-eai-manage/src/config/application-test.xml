@@ -3,7 +3,7 @@
 <Configuration>
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
-   <Define name='application.name'>eai.content</Define>
+   <Define name='application.name'>eai.manage</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
