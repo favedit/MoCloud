@@ -5,7 +5,7 @@ import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.cloud.logic.person.IGcUserConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.cloud.logic.system.IGcSessionConsole;
-import org.mo.com.encoding.RMd5;
+import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -57,10 +57,10 @@ public class FAccountConsole
          throw new FFatalError("User is already exists. (passport={1})", passport);
       }
       // 新建用户
-      String passwordMd5 = RMd5.encode(user.password());
+      String encodePassword = RSha1.encode(user.password());
       FGcUserInfo insertUser = doPrepare(logicContext);
       insertUser.setPassport(passport);
-      insertUser.setPassword(passwordMd5);
+      insertUser.setPassword(encodePassword);
       insertUser.setLabel(label);
       EResult resultCd = doInsert(logicContext, insertUser);
       return resultCd;
@@ -87,14 +87,14 @@ public class FAccountConsole
       if(RString.isEmpty(password)){
          throw new FFatalError("User password is empty.");
       }
-      String passwordMd5 = RMd5.encode(password);
+      String encodePassword = RSha1.encode(password);
       // 获得用户是否存在
       FGcUserInfo user = findByPassport(logicContext, passport);
       if(user == null){
          throw new FFatalError("User is not exists.");
       }
       // 检查密码是否相等
-      if(!passwordMd5.equals(user.password())){
+      if(!encodePassword.equals(user.password())){
          throw new FFatalError("User password is invalid.");
       }
       // 打开用户会话

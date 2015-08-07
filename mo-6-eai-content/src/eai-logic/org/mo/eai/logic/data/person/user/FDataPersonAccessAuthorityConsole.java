@@ -84,15 +84,15 @@ public class FDataPersonAccessAuthorityConsole
                       String hostAddress,
                       String passport,
                       String password){
-      _logger.debug(this, "doLogin", "OA login begin. (passport={1},password={2})", passport, password);
-      passport = passport.trim();
-      password = password.trim();
-      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18 || RString.isEmpty(password)){
-         _logger.debug(this, "doLogin", "OA login , the passport illegal. (passport={1})", passport);
+      _logger.debug(this, "doLogin", "Login process. (passport={1}, password={2})", passport, password);
+      passport = RString.trim(passport);
+      password = RString.trim(password);
+      if(RString.isEmpty(passport) || passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
+         _logger.debug(this, "doLogin", "Login passport illegal. (passport={1})", passport);
          return EGcAuthorityResult.PassportIllegal;
       }
-      if(password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.indexOf(";") > -1 || RString.isEmpty(password)){
-         _logger.debug(this, "doLogin", "OA login , the password illegal. (password={1})", password);
+      if(RString.isEmpty(password) || password.indexOf("'") > -1 || password.indexOf("%") > -1 || password.indexOf(";") > -1 || passport.length() > 32){
+         _logger.debug(this, "doLogin", "Login password illegal. (password={1})", password);
          return EGcAuthorityResult.PasswordIllegal;
       }
       // 根据主机地址检查设置

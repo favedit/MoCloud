@@ -85,7 +85,6 @@ public class FChartAction
    public String login(IWebContext context,
                        ILogicContext logicContext,
                        FChartPage page){
-
       // 获得参数
       String passport = page.passport();
       String password = page.password();
