@@ -3,6 +3,7 @@ package org.mo.content.face.manage.user;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.user.IUserConsole;
@@ -106,11 +107,12 @@ public class FUserAction
       }
       _logger.debug(this, "InsertUser", "InsertUser Begin.(passport={1})", context.parameter("passport"));
       String passport = context.parameter("passport").replaceAll(" ", "");
-      String password = RSha1.encode(context.parameter("password").trim());
-      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
+      String password = context.parameter("password").trim();
+      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17 || RString.isEmpty(passport) || RString.isEmpty(password)){
          basePage.setJson("-1");
          return "/manage/common/ajax";
       }
+      password = RSha1.encode(password);
       EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
       if(result == EResult.Success){
          _logger.debug(this, "InsertUser", "InsertUser fail,This user already exists.(passport={1})", context.parameter("passport"));

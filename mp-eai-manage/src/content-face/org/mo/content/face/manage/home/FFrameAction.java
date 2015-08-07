@@ -2,6 +2,7 @@ package org.mo.content.face.manage.home;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.com.encoding.RSha1;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.user.IUserConsole;
@@ -61,14 +62,15 @@ public class FFrameAction
                            FFramePage formPage,
                            FBasePage basePage){
       _logger.debug(this, "LoginUser", "LoginUser begin. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
-      String passport = context.parameter("passport");
-      String password = RSha1.encode(context.parameter("password"));
+      String passport = context.parameter("passport").trim();
+      String password = context.parameter("password").trim();
 
-      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
+      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18 || RString.isEmpty(passport) || RString.isEmpty(password)){
          _logger.debug(this, "LoginUser", "LoginUser , the passport illegal. (passport={1})", passport);
          basePage.ajax(0, null);
          return "/manage/common/ajax";
       }
+      password = RSha1.encode(password);
       //初始用户处理
       FLogicDataset<FDataPersonUserUnit> unitList = _userConsole.fetch(logicContext, null);
       FDataPersonUserUnit userUnit = new FDataPersonUserUnit();
