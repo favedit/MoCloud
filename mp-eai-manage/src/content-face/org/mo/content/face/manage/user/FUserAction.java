@@ -1,7 +1,7 @@
 package org.mo.content.face.manage.user;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
-import org.mo.com.encoding.RMd5;
+import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -106,7 +106,7 @@ public class FUserAction
       }
       _logger.debug(this, "InsertUser", "InsertUser Begin.(passport={1})", context.parameter("passport"));
       String passport = context.parameter("passport").replaceAll(" ", "");
-      String password = RMd5.encode(context.parameter("password").trim());
+      String password = RSha1.encode(context.parameter("password").trim());
       if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
          basePage.setJson("-1");
          return "/manage/common/ajax";
@@ -162,7 +162,7 @@ public class FUserAction
       String id = context.parameter("id");
       _logger.debug(this, "Update", "Update Begin.(id={1})", id);
       String passport = context.parameter("passport").replaceAll(" ", "");
-      String password = RMd5.encode(context.parameter("password").trim());
+      String password = RSha1.encode(context.parameter("password").trim());
       if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
          basePage.setJson("-1");
          return "/manage/common/ajax";
@@ -179,7 +179,7 @@ public class FUserAction
       }
       unit.setPassword(password);
       if(unit.isPasswordChanged()){
-         unit.setPassword(RMd5.encode(unit.password()));
+         unit.setPassword(RSha1.encode(unit.password()));
       }
       unit.setLabel(context.parameter("label"));
       unit.setUpdateUserId(context.parameterAsLong("adminId"));

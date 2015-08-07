@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content update_date="20150623152404">
   <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="1255,227" back_resource="url:{eai.resource}/marketer/logo.png">
-    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="250,36" size="400,36" align_cd="right"/>
-    <Label type="FEaiStatisticsLabel" name="redemptionTotal" label="0" location="650,36" size="400,36" align_cd="right"/>
-    <Label type="FEaiStatisticsLabel" name="netinvestmentTotal" label="0" location="1050,36" size="400,36" align_cd="right"/>
-	 <Label type="FEaiStatisticsLabel" name="interestTotal" label="0" location="1450,36" size="400,36" align_cd="right"/>
+    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="200,36" size="380,36" align_cd="right" fore_font="bold 26px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="redemptionTotal" label="0" location="550,36" size="380,36" align_cd="right" fore_font="bold 26px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="netinvestmentTotal" label="0" location="900,36" size="380,36" align_cd="right" fore_font="bold 26px Microsoft YaHei"/>
+	 <Label type="FEaiStatisticsLabel" name="interestTotal" label="0" location="1250,36" size="380,36" align_cd="right" fore_font="bold 26px Microsoft YaHei"/>
     <Label name="date" label="2015/01/01" location="322,109" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
     <Label name="time" label="00:00" location="596,109" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
   </Bar>

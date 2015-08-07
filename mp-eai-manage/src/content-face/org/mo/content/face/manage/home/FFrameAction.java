@@ -1,7 +1,7 @@
 package org.mo.content.face.manage.home;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
-import org.mo.com.encoding.RMd5;
+import org.mo.com.encoding.RSha1;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.user.IUserConsole;
@@ -62,7 +62,7 @@ public class FFrameAction
                            FBasePage basePage){
       _logger.debug(this, "LoginUser", "LoginUser begin. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
       String passport = context.parameter("passport");
-      String password = RMd5.encode(context.parameter("password"));
+      String password = RSha1.encode(context.parameter("password"));
 
       if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
          _logger.debug(this, "LoginUser", "LoginUser , the passport illegal. (passport={1})", passport);
@@ -147,8 +147,8 @@ public class FFrameAction
       }
       String id = context.parameter("id");
 
-      String password = RMd5.encode(context.parameter("password").trim());
-      String oldpwd = RMd5.encode(context.parameter("oldpwd").trim());
+      String password = RSha1.encode(context.parameter("password").trim());
+      String oldpwd = RSha1.encode(context.parameter("oldpwd").trim());
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
       unit.setPassword(oldpwd);
       if(unit.isPasswordChanged()){
