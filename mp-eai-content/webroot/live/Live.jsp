@@ -60,7 +60,7 @@
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
       // 设置应用
       var application = MO.Desktop.initialize(MO.FEaiChartApplication);
-      application.setSceneCode(MO.EEaiScene.ChartLive);
+      application.setSceneCode(MO.EEaiScene.<jh:write source='&page.sceneCode'/>);
       application.setup(document.body);
    }
 </SCRIPT>

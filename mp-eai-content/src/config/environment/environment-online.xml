@@ -38,7 +38,7 @@
          face  = 'org.mo.eai.logic.service.info.ILogicServiceInfoConsole'
          class = 'org.mo.eai.logic.service.info.FLogicServiceInfoConsole'
          scope = 'global'>
-      <Property name='serviceHost'>115.28.201.170</Property>
+      <Property name='serviceHost'>http://115.28.201.170</Property>
    </Component>
    
    <!-- ============================================================ -->

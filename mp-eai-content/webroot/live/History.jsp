@@ -52,7 +52,7 @@
          MO.Window.lsnsDeviceError.register(null, onDeviceError);
          // 设置环境
          MO.Console.find(MO.FE3sVendorConsole).setup('net');
-         MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '115.28.201.170');
+         MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, 'http://115.28.201.170');
          MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
          // 设置应用
          var application = MO.Desktop.initialize(MO.FEaiChartApplication);

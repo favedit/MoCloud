@@ -67,6 +67,7 @@ public class FChartAction
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             // 设置服务主机
             page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
+            page.setSceneCode("ChartLive");
             return "Live";
          }
       }
@@ -86,9 +87,8 @@ public class FChartAction
                        ILogicContext logicContext,
                        FChartPage page){
       // 获得参数
-      String passport = page.passport();
-      String password = page.password();
-
+      String passport = RString.trim(page.passport());
+      String password = RString.trim(page.password());
       String hostAddress = context.head("x-real-ip");
       if(RString.isEmpty(hostAddress)){
          hostAddress = context.head("x-forwarded-for");
@@ -96,7 +96,6 @@ public class FChartAction
             hostAddress = context.remoteAddress();
          }
       }
-
       // 登录处理
       String message = null;
       String logggerMessage = null;
@@ -142,10 +141,13 @@ public class FChartAction
       logger.setLogicMessage(logggerMessage);
       logger.setPassport(passport);
       logger.setPassword(password);
+      logger.setBrowserUri(context.requestUrl());
+      logger.setPageInfo(context.parameters().dump());
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
+         page.setSceneCode("ChartLive");
          return "Live";
       }else{
          page.setMessage(message);

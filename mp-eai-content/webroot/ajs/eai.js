@@ -815,7 +815,6 @@ MO.FEaiResourceConsole_unserialize = function FEaiResourceConsole_unserialize(in
    o._provinceModule.unserialize(input);
    o._cityModule.unserialize(input);
    o._cardModule.unserialize(input);
-   o._departmentModule.unserialize(input);
 }
 MO.FEaiResourceConsole_load = function FEaiResourceConsole_load(uri){
    var o = this;

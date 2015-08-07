@@ -23,6 +23,9 @@ public class FChartPage
    // 服务地址
    protected String _serviceHost;
 
+   // 场景代码
+   protected String _sceneCode;
+
    //============================================================
    // <P>获得主机地址。</P>
    //============================================================
@@ -91,5 +94,19 @@ public class FChartPage
    //============================================================
    public void setServiceHost(String serviceHost){
       _serviceHost = serviceHost;
+   }
+
+   //============================================================
+   // <P>获得场景代码。</P>
+   //============================================================
+   public String sceneCode(){
+      return _sceneCode;
+   }
+
+   //============================================================
+   // <P>设置场景代码。</P>
+   //============================================================
+   public void setSceneCode(String sceneCode){
+      _sceneCode = sceneCode;
    }
 }
