@@ -22,7 +22,7 @@ function _load(){
    MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/script/ars/eai');
    // 加载工作区
    var application = MO.Desktop.initialize(MO.FDuiWorkspaceApplication);
-   var workspace = application.selectWorkspace(MO.FDsSystemWorkspace);
+   var workspace = application.selectWorkspace(MO.FEditorDsWorkspace);
    workspace.buildDefine(id_workspace);
    workspace.setPanel(id_workspace);
    workspace.psResize();
