@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>17173网络学院后台管理系统</title>
+    <title>后台管理系统</title>
 <jsp:include page="/cloud/manage/common/newIncloud.jsp"></jsp:include>
 <script type="text/javascript" src="/cloud/ajs/myselfJs.js" ></script>
 <script>

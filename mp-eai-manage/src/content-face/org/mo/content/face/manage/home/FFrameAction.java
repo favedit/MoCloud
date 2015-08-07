@@ -64,7 +64,6 @@ public class FFrameAction
       _logger.debug(this, "LoginUser", "LoginUser begin. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
       String passport = context.parameter("passport").trim();
       String password = context.parameter("password").trim();
-
       if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18 || RString.isEmpty(passport) || RString.isEmpty(password)){
          _logger.debug(this, "LoginUser", "LoginUser , the passport illegal. (passport={1})", passport);
          basePage.ajax(0, null);
