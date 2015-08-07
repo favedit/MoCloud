@@ -4745,6 +4745,43 @@ MO.RFloat.prototype.format = function RFloat_format(v, l, lp, r, rp){
    var fr = MO.Lang.String.rpad(sr, r, rp);
    return fl + '.' + fr;
 }
+MO.RString.prototype.formatParttern = function RString_formatParttern(value, parttern){
+   var floatVal = parseFloat(value);
+   if (!isNaN(floatVal) && isFinite(value)) {
+      var partternStr = parttern.toString();
+      var partternLe = partternStr.length;
+      var indexOf = partternStr.indexOf(".");
+      var after = partternLe - indexOf - 1;
+      var str = '';
+      var string = null;
+      var round = Math.round(floatVal * Math.pow(10, after)) / Math.pow(10, after);
+      var roundStr = round.toString();
+      var roundLe = roundStr.length;
+      var roundIndex = roundStr.indexOf(".");
+      var roundAfter = roundLe - roundIndex - 1;
+      var poor = after - roundAfter;
+      if(indexOf != -1){
+         if(roundIndex == -1){
+            for(var i = 0; i < after; i++){
+               str += '0';
+            }
+            string = round + '.' + str;
+         }else{
+            if(after == roundAfter){
+               string = round;
+            }else{
+               for(var i = 0; i < poor; i++){
+                  str += '0';
+               }
+               string = round + str;
+            }
+         }
+      }else{
+         string = Math.round(round);
+      }
+      return string;
+   }
+}
 MO.RFloat.prototype.unitFormat = function RFloat_unitFormat(v, l, lp, r, rp, divide, unit) {
    var o = this;
    if (l == null) {
@@ -5569,23 +5606,23 @@ MO.RString = function RString(){
    o.CodeUpperZ = 'Z'.charCodeAt(0);
    return o;
 }
-MO.RString.prototype.isEmpty = function RString_isEmpty(v){
-   if(v != null){
-      return (v.length == 0);
+MO.RString.prototype.isEmpty = function RString_isEmpty(value){
+   if(value != null){
+      return (value.length == 0);
    }
    return true;
 }
-MO.RString.prototype.isBlank = function RString_isBlank(v){
-   if(v != null){
-      return (v.trim().length == 0);
+MO.RString.prototype.isBlank = function RString_isBlank(value){
+   if(value != null){
+      return (value.trim().length == 0);
    }
    return true;
 }
-MO.RString.prototype.isAnsi = function RString_isAnsi(v){
-   if(v != null){
-      var c = v.length;
-      for(var n = 0; n < c; n++){
-         if(v.charCodeAt(n) > 255){
+MO.RString.prototype.isAnsi = function RString_isAnsi(value){
+   if(value != null){
+      var count = value.length;
+      for(var i = 0; i < count; i++){
+         if(value.charCodeAt(i) > 255){
             return false;
          }
       }
@@ -5593,11 +5630,11 @@ MO.RString.prototype.isAnsi = function RString_isAnsi(v){
    }
    return false;
 }
-MO.RString.prototype.isDbcs = function RString_isDbcs(v){
-   if(v == null){
-      var c = v.length;
-      for(var n = 0; n < c; n++){
-         if(value.charCodeAt(n) < 256){
+MO.RString.prototype.isDbcs = function RString_isDbcs(value){
+   if(value == null){
+      var count = value.length;
+      for(var i = 0; i < count; i++){
+         if(value.charCodeAt(i) < 256){
             return false;
          }
       }
@@ -5605,19 +5642,17 @@ MO.RString.prototype.isDbcs = function RString_isDbcs(v){
    }
    return false;
 }
-MO.RString.prototype.isPattern = function RString_isPattern(v, p){
-   if(v != null){
+MO.RString.prototype.isPattern = function RString_isPattern(value, parttern){
+   if(value != null){
       var o = this;
-      if(p == null){
-         p = '$a$A$f';
-      }
-      p = p.replace(/\a/g, o.LOWER);
-      p = p.replace(/\A/g, o.UPPER);
-      p = p.replace(/\f/g, MO.Lang.Float.NUMBER);
-      p = p.replace(/\n/g, MO.Lang.Integer.NUMBER);
-      var c = v.length;
-      for(var n = 0; n < c; n++){
-         if(p.indexOf(v.charAt(n)) == -1){
+      var source = (parttern == null) ? '$a$A$f' : parttern;
+      source = source.replace(/\a/g, o.LOWER);
+      source = source.replace(/\A/g, o.UPPER);
+      source = source.replace(/\f/g, MO.Lang.Float.NUMBER);
+      source = source.replace(/\n/g, MO.Lang.Integer.NUMBER);
+      var count = value.length;
+      for(var i = 0; i < count; i++){
+         if(source.indexOf(value.charAt(i)) == -1){
             return false;
          }
       }
@@ -5625,9 +5660,9 @@ MO.RString.prototype.isPattern = function RString_isPattern(v, p){
    }
    return false;
 }
-MO.RString.prototype.inChars = function RString_inChars(v, p){
+MO.RString.prototype.inChars = function RString_inChars(value, parttern){
    var o = this;
-   var b = o.findChars(p, v);
+   var b = o.findChars(parttern, value);
    if(b != -1){
       return true;
    }
