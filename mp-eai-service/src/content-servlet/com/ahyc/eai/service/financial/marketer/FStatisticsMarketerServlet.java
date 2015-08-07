@@ -100,8 +100,7 @@ public class FStatisticsMarketerServlet
       fetchSql.append(",SUM(MARKETER_PERFORMANCE) PERFORMANCE_TOTAL");
       fetchSql.append(",SUM(CUSTOMER_REGISTER) CUSTOMER_REGISTER");
       fetchSql.append(",MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL");
-      //fetchSql.append(" FROM ST_FIN_MARKETER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
-      fetchSql.append(" FROM ST_FIN_MARKETER_PHASE WHERE RECORD_DAY = STR_TO_DATE('20140911','%Y%m%d')");
+      fetchSql.append(" FROM ST_FIN_MARKETER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
       fetchSql.append("GROUP BY MARKETER_ID");
       fetchSql.append(") t ORDER BY NETINVESTMENT_TOTAL DESC LIMIT 3");
       FDataset rankDataset = connection.fetchDataset(fetchSql);

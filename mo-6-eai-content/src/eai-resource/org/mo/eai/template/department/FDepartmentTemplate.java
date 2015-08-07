@@ -2,9 +2,8 @@ package org.mo.eai.template.department;
 
 import org.mo.com.io.FLinesFile;
 import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.INamePair;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RString;
 import org.mo.eai.RResourceConfiguration;
 
@@ -14,24 +13,15 @@ import org.mo.eai.RResourceConfiguration;
 public class FDepartmentTemplate
 {
    // 部门资源集合
-   protected FDictionary<FDepartmentResource> _departments = new FDictionary<FDepartmentResource>(FDepartmentResource.class);
+   protected FObjects<FDepartmentResource> _departments = new FObjects<FDepartmentResource>(FDepartmentResource.class);
 
    //============================================================
    // <T>获得部门集合。</T>
    //
    // @return 部门集合
    //============================================================
-   public FDictionary<FDepartmentResource> departments(){
+   public FObjects<FDepartmentResource> departments(){
       return _departments;
-   }
-
-   //============================================================
-   // <T>获得城市集合。</T>
-   //
-   // @return 城市集合
-   //============================================================
-   public FDepartmentResource findDepartment(String code){
-      return _departments.find(code);
    }
 
    //============================================================
@@ -51,10 +41,11 @@ public class FDepartmentTemplate
             if(items.length != 3){
                throw new FFatalError("Line is invalid.");
             }
-            FDepartmentResource city = new FDepartmentResource();
-            city.setCode(RString.trim(items[0]));
-            city.setLabel(RString.trim(items[1]));
-            city.setFullLabel(RString.trim(items[2]));
+            FDepartmentResource department = new FDepartmentResource();
+            department.setCode(RString.trim(items[0]));
+            department.setLabel(RString.trim(items[1]));
+            department.setFullLabel(RString.trim(items[2]));
+            _departments.push(department);
             //System.out.println(items[0] + " - " + items[1] + " - " + items[2] + " - " + items[3] + " - " + items[4] + " - " + items[5] + " - " + items[6]);
          }
       }
@@ -67,8 +58,8 @@ public class FDepartmentTemplate
    //============================================================
    public void serialize(IDataOutput output){
       output.writeInt32(_departments.count());
-      for(INamePair<FDepartmentResource> pair : _departments){
-         pair.value().serialize(output);
+      for(FDepartmentResource department : _departments){
+         department.serialize(output);
       }
    }
 }

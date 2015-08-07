@@ -84,6 +84,7 @@ public class FDepartmentResource
    // @param output 输出流
    //============================================================
    public void serialize(IDataOutput output){
+      output.writeString(_code);
       output.writeString(_label);
       output.writeString(_fullLabel);
    }
