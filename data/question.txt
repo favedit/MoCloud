@@ -14,8 +14,9 @@ SHOW VARIABLES LIKE 'character%';
 
 创建数据库：
 ============================================================
-CREATE DATABASE `CD_CACHE` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `CD_DATA`  CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `CD_CACHE`          CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `CD_DATA`           CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `CD_LOGGER`         CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
 CREATE DATABASE `EAI_CACHE`         CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_DATA`          CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
