@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.solution.TabBar">
+   <TabBar name="design3d.solution.TabBar" type='FDsSolutionTabBar' label="菜单">
+      <TabButton name='solution' linker='_controlProjectButton' icon='design3d.tools.save' label='我的项目'/>
+      <TabButton name='resource' linker='_controlResourceButton' icon='design3d.tools.save' label='我的资源'/>
+      <TabButton name='team' linker='_controlTeamButton' icon='design3d.tools.save' label='我的团队'/>
+      <TabButton name='publish' linker='_controlPublishButton' icon='design3d.tools.save' label='我的发布'/>
+   </TabBar>
+</Content>

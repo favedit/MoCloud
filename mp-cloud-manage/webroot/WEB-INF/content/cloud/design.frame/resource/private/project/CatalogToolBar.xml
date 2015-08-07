@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.scene.CanvasToolBar">
+   <ToolBar name="design3d.scene.CanvasToolBar" label="画板工具栏">
+      <ToolButtonCheck name='open' icon='design3d.tools.rotation' label='展开' hint='场景旋转播放开关'/>
+      <ToolButtonCheck name='close' icon='design3d.tools.rotation' label='折叠' hint='场景旋转播放开关'/>
+   </ToolBar>
+</Content>

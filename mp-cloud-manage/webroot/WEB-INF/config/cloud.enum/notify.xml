@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group _uuid="4a8047c0-5932-4441-a192-0cdb670c027a" name="notify" label="逻辑通知" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="N" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="MoMgEnumNotify" code="Egn" code_name="GmNotify" full_code="EnumNotify" display_index="27" project_name="/Common/MoMessage" project_code="Mg" is_include="Y" code_prefix="Gn" code_group="EGmMessageLevel" include_heads="game.common">
+  <Enum _uuid="f7c9e6fd-2612-4b7a-a0ab-4af1e5d40da9" name="GnSystem" label="系统" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" is_set="N" is_code="N">
+    <Item _uuid="f2bee627-e41b-490e-9745-456c5a162901" name="Unknown" label="未知" is_valid="Y" note="M#" level_cd="5" value="1" />
+  </Enum>
+  <Enum _uuid="9472ea51-13fd-41ca-bc75-e37559964daf" name="GnValid" label="校验消息" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="82a93e0d-1269-4016-984a-307251663b8d" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="176bf5e7-c594-459a-92d5-b09cc56695ed" name="Empty" label="内容为空" is_valid="Y" note="M#" />
+    <Item _uuid="1f678eda-5157-4e0f-ad96-f44883747165" name="LengthMin" label="小于最小长度" is_valid="Y" note="M#" />
+    <Item _uuid="ec5aa3fd-884a-4fda-b993-477874af6a6f" name="LengthMax" label="大于最大长度" is_valid="Y" note="M#" />
+    <Item _uuid="801ce811-35c0-4826-bcdb-d8ce33fd4cad" name="LengthRange" label="长度不在指定范围内" is_valid="Y" note="M#" />
+    <Item _uuid="ed124e68-89a4-42c3-9adf-48e4ac6963dc" name="ValueMin" label="小于最小数据" is_valid="Y" note="M#" />
+    <Item _uuid="500f22ad-4a8c-4cbc-91e2-f2a0f5482cff" name="ValueMax" label="大于最大数据" is_valid="Y" note="M#" />
+    <Item _uuid="99980d91-dd36-4aa8-b166-950e1ab96312" name="ValueRange" label="数据不在指定范围内" is_valid="Y" note="M#" />
+    <Item _uuid="4b04c128-787c-4b3f-9f2e-f254cb9d0afa" name="Email" label="非法的Email格式" is_valid="Y" note="M#" />
+    <Item _uuid="5cdad007-c3df-41a3-b4ca-2fab6fec8f0f" name="Phone" label="非法的电话号码格式" is_valid="Y" note="M#" />
+  </Enum>
+  <Enum _uuid="e1777c13-63ed-4894-92b8-f0c43a23b715" name="GnPerson" label="用户" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" is_set="N" is_code="N">
+    <Item _uuid="db8c11e5-ee2c-42bc-bef8-4b0884b6b4dc" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="5a7769f7-1245-4b2c-afe1-9e86d8685344" name="Exists" label="用户已存在" is_valid="Y" note="M#" />
+    <Item _uuid="49910256-fc0d-4869-8900-8f9ca8bb48e9" name="NotExists" label="用户不存在" is_valid="Y" note="M#" />
+    <Item _uuid="8530e958-9a37-40ba-8055-ab3eecccbd0a" name="Lock" label="用户已经被锁定" is_valid="Y" note="M#" />
+  </Enum>
+</Group>
+

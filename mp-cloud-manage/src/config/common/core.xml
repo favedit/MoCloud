@@ -37,17 +37,6 @@
    </Component>
 
    <!-- ============================================================ -->
-   <!-- LogicUnitCacheConsole:逻辑单元缓冲控制台                     -->
-   <!--  P:enable - 开启                                             -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.data.logic.cache.ILogicCacheConsole'
-         class = 'org.mo.data.logic.cache.FLogicCacheConsole'
-         scope = 'global'>
-      <Property name='enable'>Y</Property>
-   </Component>
-
-   <!-- ============================================================ -->
    <!-- BindConsole:线程绑定控制台                                   -->
    <!-- ============================================================ -->
    <!-- <Component

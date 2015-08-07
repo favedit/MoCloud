@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <TabBar name="resource.share.TabBar" type='FDsShareTabBar' label="共享分页栏">
+      <TabButton name='resource' linker='_controlResource' icon='design3d.tools.save' label='共享资源'/>
+   </TabBar>
+</Content>

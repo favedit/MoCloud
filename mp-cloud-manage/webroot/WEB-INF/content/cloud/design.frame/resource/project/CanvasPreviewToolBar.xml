@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design3d.project.CanvasPreviewToolBar">
+   <ToolBar name="design3d.project.CanvasPreviewToolBar" label="画板工具栏">
+      <ToolButton name='run' linker='_controlRun' icon='resource.tools.process' label='运行' hint='场景旋转播放开关'/>
+      <ToolButton name='pause' linker='_controlPause' icon='resource.tools.pause' label='暂停' hint='场景旋转播放开关'/>
+      <ToolButtonSplit/>
+      <ToolButton name='publish' linker='_controlPublish' icon='resource.tools.publish' label='发布' hint='场景旋转播放开关'/>
+   </ToolBar>
+</Content>

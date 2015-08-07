@@ -18,7 +18,6 @@
          face  = 'org.mo.web.core.session.IWebSessionConsole'
          class = 'org.mo.web.core.session.FWebSessionConsole'
          scope = 'global' >
-      <Property name='valid'>N</Property>
       <Property name='sessionClassName'>org.mo.web.core.session.FWebSession</Property>
       <Property name='interval'>10000</Property>
       <Property name='timeout'>36000000</Property>
@@ -163,27 +162,23 @@
    <!-- ==================================================== -->
    <Component
          face      = 'org.mo.web.core.action.IActionConsole'
-         class     = 'org.mo.web.core.action.FActionConsole'
+         class     = 'org.mo.cloud.core.web.FGcActionConsole'
          scope     = 'global' >
       <Initialize name='addContext'>
-         <Parameter>/psn</Parameter>
-         <Parameter>/psn</Parameter>
+         <Parameter>/content</Parameter>
+         <Parameter>/content</Parameter>
       </Initialize>
       <Initialize name='addContext'>
-         <Parameter>/ent</Parameter>
-         <Parameter>/ent</Parameter>
+         <Parameter>/cloud</Parameter>
+         <Parameter>/cloud</Parameter>
       </Initialize>
       <Initialize name='addContext'>
-         <Parameter>/game</Parameter>
-         <Parameter>/game</Parameter>
+         <Parameter>/manage</Parameter>
+         <Parameter>/manage</Parameter>
       </Initialize>
       <Initialize name='addContext'>
          <Parameter>/system</Parameter>
          <Parameter>/system</Parameter>
-      </Initialize>
-      <Initialize name='addContext'>
-         <Parameter>/platform</Parameter>
-         <Parameter>/platform</Parameter>
       </Initialize>
    </Component>
 
@@ -192,7 +187,7 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.service.IServiceConsole'
-         class = 'org.mo.web.core.service.FServiceConsole'
+         class = 'org.mo.cloud.core.web.FGcServiceConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
       <Initialize name='initializeConfig'/>
@@ -203,7 +198,7 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.servlet.IWebServletConsole'
-         class = 'org.mo.web.core.servlet.FWebServletConsole'
+         class = 'org.mo.cloud.core.web.FGcServletConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
    </Component>
