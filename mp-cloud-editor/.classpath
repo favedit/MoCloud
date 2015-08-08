@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/content-core"/>
-	<classpathentry kind="src" path="src/content-describe"/>
-	<classpathentry kind="src" path="src/content-service"/>
-	<classpathentry kind="src" path="src/content-face"/>
+	<classpathentry kind="src" path="src/editor-core"/>
+	<classpathentry kind="src" path="src/editor-design"/>
+	<classpathentry kind="src" path="src/editor-service"/>
+	<classpathentry kind="src" path="src/editor-face"/>
+	<classpathentry kind="src" path="src/content-define"/>
 	<classpathentry kind="src" path="src/utility"/>
 	<classpathentry kind="src" path="src/config"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>

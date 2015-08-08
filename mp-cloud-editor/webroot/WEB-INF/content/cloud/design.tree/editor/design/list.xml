@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <TreeView _uuid2="60a5be39-d052-4de4-ba49-79f8cc7a3639" name="editor.design.list" label="内容-设计-列表" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.list">
+     <TreeNodeType _uuid2="14288e3d-b106-41c1-a180-04f730f15ec9" name="package" code="Package" label="包" is_valid="Y" note="" icon="editor.design.list.package" action="list" />
+     <TreeNodeType _uuid2="8c926fe1-e24b-4141-987e-1ded9e5ef1e7" name="list" code="List" label="列表" is_valid="Y" note="" type="collection" icon="editor.design.list.list" action="list" attributes="property_frame=editor.design.list.property.ListForm" />
+     <TreeNodeType _uuid2="70be50dd-5602-4c5a-ac46-71600911947d" name="item" code="Item" label="项目" is_valid="Y" note="" type="component" icon="editor.design.list.item" attributes="property_frame=editor.design.list.property.ItemForm" />
+   </TreeView>
+</Content>

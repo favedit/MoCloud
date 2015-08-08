@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="editor.design.list.property.ListForm" type='FEditorDsListListProperty' label="按键属性" is_valid="Y" note="">
+      <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
+         <Check name="valid" linker='_controlValid' label="有效性" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="type" linker='_controlType' label="类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="name" linker='_controlName' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

@@ -6,60 +6,60 @@
    <!-- 设计：持久化描述服务                                 -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'content.define.persistence'
-         face  = 'org.mo.cloud.content.define.persistence.IPersistenceService'/>
+         name  = 'editor.design.persistence'
+         face  = 'org.mo.cloud.editor.design.persistence.IPersistenceService'/>
 
    <Component
-         face  = 'org.mo.cloud.content.define.persistence.IPersistenceService'
-         class = 'org.mo.cloud.content.define.persistence.FPersistenceService'
+         face  = 'org.mo.cloud.editor.design.persistence.IPersistenceService'
+         class = 'org.mo.cloud.editor.design.persistence.FPersistenceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
    <!-- 设计：列表描述服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'content.define.list'
-         face  = 'org.mo.cloud.content.define.list.IListService'/>
+         name  = 'editor.design.list'
+         face  = 'org.mo.cloud.editor.design.list.IListService'/>
 
    <Component
-         face  = 'org.mo.cloud.content.define.list.IListService'
-         class = 'org.mo.cloud.content.define.list.FListService'
+         face  = 'org.mo.cloud.editor.design.list.IListService'
+         class = 'org.mo.cloud.editor.design.list.FListService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
    <!-- 设计：目录描述服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'content.define.tree'
-         face  = 'org.mo.cloud.content.define.tree.ITreeService'/>
+         name  = 'editor.design.tree'
+         face  = 'org.mo.cloud.editor.design.tree.ITreeService'/>
 
    <Component
-         face  = 'org.mo.cloud.content.define.tree.ITreeService'
-         class = 'org.mo.cloud.content.define.tree.FTreeService'
+         face  = 'org.mo.cloud.editor.design.tree.ITreeService'
+         class = 'org.mo.cloud.editor.design.tree.FTreeService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
    <!-- 设计：数据描述服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'content.define.dataset'
-         face  = 'org.mo.cloud.content.define.dataset.IDatasetService'/>
+         name  = 'editor.design.dataset'
+         face  = 'org.mo.cloud.editor.design.dataset.IDatasetService'/>
 
    <Component
-         face  = 'org.mo.cloud.content.define.dataset.IDatasetService'
-         class = 'org.mo.cloud.content.define.dataset.FDatasetService'
+         face  = 'org.mo.cloud.editor.design.dataset.IDatasetService'
+         class = 'org.mo.cloud.editor.design.dataset.FDatasetService'
          scope = 'global'/>
 
    <!-- ==================================================== -->
    <!-- 设计：表单描述服务                                   -->
    <!-- ==================================================== -->
    <WebService
-         name  = 'content.define.frame'
-         face  = 'org.mo.cloud.content.define.frame.IFrameService'/>
+         name  = 'editor.design.frame'
+         face  = 'org.mo.cloud.editor.design.frame.IFrameService'/>
 
    <Component
-         face  = 'org.mo.cloud.content.define.frame.IFrameService'
-         class = 'org.mo.cloud.content.define.frame.FFrameService'
+         face  = 'org.mo.cloud.editor.design.frame.IFrameService'
+         class = 'org.mo.cloud.editor.design.frame.FFrameService'
          scope = 'global'/>
 
 </Config>

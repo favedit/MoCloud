@@ -26,15 +26,18 @@
    <Include>${application.config}/common/web.xml</Include>
    <Include>${application.config}/common/web-face.xml</Include>
 
-   <!-- 包含：设计设定 -->
-   <Include>${application.config}/design/core.xml</Include>
-   <Include>${application.config}/design/describe.xml</Include>
-
    <!-- 包含：内容设定 -->
    <Include>${application.config}/content/core.xml</Include>
-   <Include>${application.config}/content/servlet.xml</Include>
    <Include>${application.config}/content/service.xml</Include>
-   <Include>${application.config}/content/face.xml</Include>
+
+   <!-- 包含：编辑设定 -->
+   <Include>${application.config}/editor/core.xml</Include>
+   <Include>${application.config}/editor/servlet.xml</Include>
+   <Include>${application.config}/editor/service.xml</Include>
+   <Include>${application.config}/editor/face.xml</Include>
+
+   <!-- 包含：编辑设计设定 -->
+   <Include>${application.config}/editor/design/service.xml</Include>
 
    <!-- 包含：环境设定 -->
    <Include>${application.config}/environment/environment-home.xml</Include>
