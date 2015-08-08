@@ -23,6 +23,7 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.com.xml.FXmlNodes;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
+import org.mo.core.aop.face.AProperty;
 import org.mo.eng.template.ITemplateConsole;
 import org.mo.eng.template.ITemplateParser;
 
@@ -37,10 +38,16 @@ public class FPersistenceConsole
    private static ILogger _logger = RLogger.find(FPersistenceConsole.class);
 
    // 存储名称
-   protected String _storageName = "cloud";
+   @AProperty
+   protected String _storageName;
 
    // 空间名称
-   protected String _spaceName = "design.persistence";
+   @AProperty
+   protected String _spaceName;
+
+   // 持久化名称
+   @AProperty
+   protected String _persistenceName;
 
    // 配置控制台接口
    @ALink
@@ -135,7 +142,7 @@ public class FPersistenceConsole
       XContentObject xobject = find(storgeName, persistenceName, modeCd);
       if(xobject != null){
          // 获得转换器
-         FPersistence persistence = findPersistence(storgeName, "design.persistence");
+         FPersistence persistence = findPersistence(storgeName, _persistenceName);
          // 转换对象
          return persistence.convertConfig(xobject, modeCd);
       }
@@ -350,7 +357,7 @@ public class FPersistenceConsole
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
       FContentObject xinstance = node.config();
       // 获得转换器
-      FPersistence persistence = findPersistence(storgeName, "design.persistence");
+      FPersistence persistence = findPersistence(storgeName, _persistenceName);
       persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);
       // 保存处理
       node.store();

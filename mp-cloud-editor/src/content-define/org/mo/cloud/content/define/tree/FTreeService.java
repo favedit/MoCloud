@@ -1,6 +1,7 @@
 package org.mo.cloud.content.define.tree;
 
-import org.mo.cloud.content.define.frame.ETypeGroup;
+import org.mo.content.core.common.ECatalogNodeGroup;
+
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
@@ -66,7 +67,7 @@ public class FTreeService
          String packageName = pair.name();
          XTreeNode xnode = new XTreeNode();
          xnode.setIsValid(true);
-         xnode.setTypeGroup(ETypeGroup.Package);
+         xnode.setTypeGroup(ECatalogNodeGroup.Package);
          xnode.setTypeCode("Package");
          xnode.setHasChild(true);
          xnode.setLabel(packageName);
@@ -91,7 +92,7 @@ public class FTreeService
       FXmlNode xconfig = output.config();
       String typeGroup = treeNode.get("type_group");
       String code = treeNode.get("label");
-      if(ETypeGroup.Package.equals(typeGroup)){
+      if(ECatalogNodeGroup.Package.equals(typeGroup)){
          // 显示包内表单集合
          XContentObject[] xframes = _treeConsole.list(_storageName);
          for(XContentObject xframe : xframes){
@@ -100,7 +101,7 @@ public class FTreeService
             if(packageName.equals(code)){
                XTreeNode xnode = new XTreeNode();
                xnode.setIsValid(true);
-               xnode.setTypeGroup(ETypeGroup.Container);
+               xnode.setTypeGroup(ECatalogNodeGroup.Container);
                xnode.setTypeCode(xframe.name());
                xnode.setHasChild(xframe.hasChild());
                xnode.setLabel(xframe.getString("name"));
@@ -108,13 +109,13 @@ public class FTreeService
                xnode.saveConfig(xconfig.createNode("TreeNode"));
             }
          }
-      }else if(ETypeGroup.Container.equals(typeGroup)){
+      }else if(ECatalogNodeGroup.Container.equals(typeGroup)){
          // 显示表单内控件集合
          FContentObject xframe = _treeConsole.findDefine(_storageName, code, EPersistenceMode.Config);
          for(FContentObject xcontrol : xframe.nodes()){
             XTreeNode xnode = new XTreeNode();
             xnode.setIsValid(true);
-            xnode.setTypeGroup(ETypeGroup.Item);
+            xnode.setTypeGroup(ECatalogNodeGroup.Item);
             xnode.setTypeCode(xcontrol.name());
             xnode.setHasChild(xcontrol.hasNode());
             xnode.setGuid(xcontrol.objectId());

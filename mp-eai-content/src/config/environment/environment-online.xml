@@ -39,6 +39,7 @@
          class = 'org.mo.eai.logic.service.info.FLogicServiceInfoConsole'
          scope = 'global'>
       <Property name='serviceHost'>http://115.28.201.170</Property>
+      <Property name='serviceLogic'>http://service.eai.ezubo.com</Property>
    </Component>
    
    <!-- ============================================================ -->

@@ -1,6 +1,5 @@
 package org.mo.cloud.editor.design.list;
 
-import org.mo.cloud.content.define.frame.ETypeGroup;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.list.IListConsole;
@@ -11,6 +10,7 @@ import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.common.ECatalogNodeGroup;
 import org.mo.core.aop.face.ALink;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
@@ -61,7 +61,7 @@ public class FListService
          String packageName = pair.name();
          XTreeNode xnode = new XTreeNode();
          xnode.setIsValid(true);
-         xnode.setTypeGroup(ETypeGroup.Package);
+         xnode.setTypeGroup(ECatalogNodeGroup.Package);
          xnode.setTypeCode("package");
          xnode.setHasChild(true);
          xnode.setLabel(packageName);
@@ -86,7 +86,7 @@ public class FListService
       FXmlNode xconfig = output.config();
       String typeGroup = treeNode.get("type_group");
       String code = treeNode.get("label");
-      if(ETypeGroup.Package.equals(typeGroup)){
+      if(ECatalogNodeGroup.Package.equals(typeGroup)){
          // 显示包内表单集合
          XContentObject[] xframes = _listConsole.list(_storageName);
          for(XContentObject xframe : xframes){
@@ -95,7 +95,7 @@ public class FListService
             if(packageName.equals(code)){
                XTreeNode xnode = new XTreeNode();
                xnode.setIsValid(true);
-               xnode.setTypeGroup(ETypeGroup.Container);
+               xnode.setTypeGroup(ECatalogNodeGroup.Container);
                xnode.setTypeCode(xframe.name());
                xnode.setHasChild(xframe.hasChild());
                xnode.setLabel(xframe.getString("name"));
@@ -103,13 +103,13 @@ public class FListService
                xnode.saveConfig(xconfig.createNode("TreeNode"));
             }
          }
-      }else if(ETypeGroup.Container.equals(typeGroup)){
+      }else if(ECatalogNodeGroup.Container.equals(typeGroup)){
          // 显示表单内控件集合
          FContentObject xframe = _listConsole.findDefine(_storageName, code, EPersistenceMode.Config);
          for(FContentObject xcontrol : xframe.nodes()){
             XTreeNode xnode = new XTreeNode();
             xnode.setIsValid(true);
-            xnode.setTypeGroup(ETypeGroup.Item);
+            xnode.setTypeGroup(ECatalogNodeGroup.Item);
             xnode.setTypeCode(xcontrol.name());
             xnode.setHasChild(xcontrol.hasNode());
             xnode.setGuid(xcontrol.objectId());
@@ -142,9 +142,10 @@ public class FListService
    // @param output 网络输出
    //============================================================
    @Override
-   public void insert(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult insert(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
+      return EResult.Success;
    }
 
    //============================================================
@@ -155,9 +156,16 @@ public class FListService
    // @param output 网络输出
    //============================================================
    @Override
-   public void update(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult update(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
+      FXmlNode xlist = input.config().findNode("List");
+      String name = xlist.get("name");
+      // 查找目录定义
+      FContentObject content = _listConsole.findDefine(_storageName, name, EPersistenceMode.Config);
+      content.mergeConfig(xlist);
+      _listConsole.update(_storageName, content);
+      return EResult.Success;
    }
 
    //============================================================
@@ -168,8 +176,9 @@ public class FListService
    // @param output 网络输出
    //============================================================
    @Override
-   public void delete(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult delete(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output){
+      return EResult.Success;
    }
 }

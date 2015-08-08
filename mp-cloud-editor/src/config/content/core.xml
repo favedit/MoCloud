@@ -22,6 +22,9 @@
          face  = 'org.mo.cloud.content.design.persistence.IPersistenceConsole'
          class = 'org.mo.cloud.content.design.persistence.FPersistenceConsole'
          scope = 'global'>
+      <Property name='space_name'>design.persistence</Property>
+      <Property name='path_name'>design.persistence</Property>
+      <Property name='persistence_name'>design.persistence</Property>
    </Component>
    
    <!-- ==================================================== -->
@@ -35,6 +38,7 @@
          scope = 'global'>
       <Property name='space_name'>design.list</Property>
       <Property name='path_name'>design.list</Property>
+      <Property name='persistence_name'>design.list</Property>
    </Component>
    
    <!-- ==================================================== -->
@@ -48,6 +52,7 @@
          scope = 'global'>
       <Property name='space_name'>design.tree</Property>
       <Property name='path_name'>design.tree</Property>
+      <Property name='persistence_name'>design.tree</Property>
    </Component>
 
    <!-- ==================================================== -->
@@ -61,6 +66,7 @@
          scope = 'global'>
       <Property name='space_name'>design.frame</Property>
       <Property name='path_name'>design.frame</Property>
+      <Property name='persistence_name'>design.frame</Property>
    </Component>
 
 </Config>

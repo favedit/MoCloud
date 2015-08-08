@@ -5,7 +5,7 @@ import org.mo.cloud.content.design.list.common.XList;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 
 //============================================================
-// <T>内容列表控制台接口。</T>
+// <T>列表控制台接口。</T>
 //============================================================
 public interface IListConsole
 {
@@ -29,7 +29,7 @@ public interface IListConsole
               EPersistenceMode modeCd);
 
    //============================================================
-   // <T>根据名称获得表单定义。</T>
+   // <T>根据名称获得列表定义。</T>
    //
    // @param storgeName 存储名称
    // @param listName 表单名称
@@ -39,4 +39,13 @@ public interface IListConsole
    FContentObject findDefine(String storgeName,
                              String listName,
                              EPersistenceMode modeCd);
+
+   //============================================================
+   // <T>更新列表配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   void update(String storgeName,
+               FContentObject contentObject);
 }

@@ -49,10 +49,11 @@ public interface IListService
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
+   // @return 处理结果
    //============================================================
-   void insert(IWebContext context,
-               IWebInput input,
-               IWebOutput output);
+   EResult insert(IWebContext context,
+                  IWebInput input,
+                  IWebOutput output);
 
    //============================================================
    // <T>更新配置处理。</T>
@@ -60,10 +61,11 @@ public interface IListService
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
+   // @return 处理结果
    //============================================================
-   void update(IWebContext context,
-               IWebInput input,
-               IWebOutput output);
+   EResult update(IWebContext context,
+                  IWebInput input,
+                  IWebOutput output);
 
    //============================================================
    // <T>删除配置处理。</T>
@@ -71,8 +73,9 @@ public interface IListService
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
+   // @return 处理结果
    //============================================================
-   void delete(IWebContext context,
-               IWebInput input,
-               IWebOutput output);
+   EResult delete(IWebContext context,
+                  IWebInput input,
+                  IWebOutput output);
 }

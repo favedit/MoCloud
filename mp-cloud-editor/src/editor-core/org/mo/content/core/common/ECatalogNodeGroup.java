@@ -1,6 +1,6 @@
-package org.mo.cloud.content.define.frame;
+package org.mo.content.core.common;
 
-public class ETypeGroup
+public class ECatalogNodeGroup
 {
    public static String Package = "package";
 

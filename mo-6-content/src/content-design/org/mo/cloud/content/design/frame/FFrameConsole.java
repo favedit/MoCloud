@@ -32,6 +32,10 @@ public class FFrameConsole
    @AProperty
    protected String _pathName;
 
+   // 持久化名称
+   @AProperty
+   protected String _persistenceName;
+
    // 内容配置控制台接口
    @ALink
    protected IConfigurationConsole _configurationConsole;
@@ -102,7 +106,7 @@ public class FFrameConsole
       XContentObject xobject = find(storgeName, formName, modeCd);
       if(xobject != null){
          // 获得转换器
-         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
+         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
          // 转换对象
          return persistence.convertConfig(xobject, modeCd);
       }
@@ -176,7 +180,7 @@ public class FFrameConsole
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
       FContentObject xinstance = node.config();
       // 获得转换器
-      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.frame");
+      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
       persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);
       // 保存处理
       node.store();
