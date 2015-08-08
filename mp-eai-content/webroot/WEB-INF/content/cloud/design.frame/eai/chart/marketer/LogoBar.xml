@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content update_date="20150623152404">
   <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="标志栏" size="1255,227" back_resource="url:{eai.resource}/marketer/logo.png">
-    <Label name="investmentLabel" label="当日投资" location="100,32" size="380,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="200,55" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
-    <Label name="redemptionLabel" label="当日赎回" location="400,32" size="380,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="redemptionTotal" label="0" location="500,55" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
-    <Label name="netinvestmentLabel" label="当日净投" location="700,32" size="380,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="netinvestmentTotal" label="0" location="800,55" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
-    <Label name="interestLabel" label="当日利息" location="1000,32" size="380,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="interestTotal" label="0" location="1100,55" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
+    <Label name="investmentLabel" label="当日投资" location="150,48" size="200,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="305,40" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
+    <Label name="redemptionLabel" label="当日赎回" location="500,48" size="200,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="redemptionTotal" label="0" location="655,40" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
+    <Label name="netinvestmentLabel" label="当日净投" location="850,48" size="200,28" align_cd="right" fore_color='#FFFF00' fore_font="bold 24px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="netinvestmentTotal" label="0" location="1005,40" size="300,28" align_cd="right" fore_font="bold 24px Microsoft YaHei" back_font="bold 18px Microsoft YaHei"/>
     <Label name="date" label="2015/01/01" location="322,109" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
     <Label name="time" label="00:00" location="596,109" size="100,40" align_cd='left' fore_color="#54F0FF" fore_font="bold 25px Microsoft YaHei" />
   </Bar>
