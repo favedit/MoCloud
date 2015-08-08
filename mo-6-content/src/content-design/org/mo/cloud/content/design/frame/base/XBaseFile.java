@@ -85,9 +85,17 @@ public abstract class XBaseFile
    @AContentField
    public final static FContentField FORE_FONT = new FContentField("foreFont", "fore_font", EContentData.String, "", "", "", "YYNY");
 
+   // 前景资源的定义
+   @AContentField
+   public final static FContentField FORE_RESOURCE = new FContentField("foreResource", "fore_resource", EContentData.String, "", "", "", "YYNY");
+
    // 背景颜色的定义
    @AContentField
    public final static FContentField BACK_COLOR = new FContentField("backColor", "back_color", EContentData.String, "", "", "", "YYNY");
+
+   // 背景字体的定义
+   @AContentField
+   public final static FContentField BACK_FONT = new FContentField("backFont", "back_font", EContentData.String, "", "", "", "YYNY");
 
    // 背景资源的定义
    @AContentField
@@ -291,9 +299,17 @@ public abstract class XBaseFile
    @AName("fore_font")
    protected String _foreFont;
 
+   // 前景资源
+   @AName("fore_resource")
+   protected String _foreResource;
+
    // 背景颜色
    @AName("back_color")
    protected String _backColor;
+
+   // 背景字体
+   @AName("back_font")
+   protected String _backFont;
 
    // 背景资源
    @AName("back_resource")
@@ -718,6 +734,24 @@ public abstract class XBaseFile
    }
 
    //============================================================
+   // <T>获得前景资源的内容。</T>
+   //
+   // @return 前景资源
+   //============================================================
+   public String getForeResource(){
+      return _foreResource;
+   }
+
+   //============================================================
+   // <T>设置前景资源的内容。</T>
+   //
+   // @param value 前景资源
+   //============================================================
+   public void setForeResource(String value){
+      _foreResource = value;
+   }
+
+   //============================================================
    // <T>获得背景颜色的内容。</T>
    //
    // @return 背景颜色
@@ -733,6 +767,24 @@ public abstract class XBaseFile
    //============================================================
    public void setBackColor(String value){
       _backColor = value;
+   }
+
+   //============================================================
+   // <T>获得背景字体的内容。</T>
+   //
+   // @return 背景字体
+   //============================================================
+   public String getBackFont(){
+      return _backFont;
+   }
+
+   //============================================================
+   // <T>设置背景字体的内容。</T>
+   //
+   // @param value 背景字体
+   //============================================================
+   public void setBackFont(String value){
+      _backFont = value;
    }
 
    //============================================================
