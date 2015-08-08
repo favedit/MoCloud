@@ -118,10 +118,10 @@
       <Initialize name='add'>
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>statictics</Property>
+               <Property name='name'>statistics</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.169.23.66:3306/EAI_STATICTICS</Property>
+               <Property name='url'>jdbc:mysql://10.169.23.66:3306/EAI_STATISTICS</Property>
                <Property name='passport'>eai_online</Property>
                <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
                <Property name='initConnectionNumber'>1</Property>
