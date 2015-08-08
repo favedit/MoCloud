@@ -10,10 +10,10 @@
 /mo-6-eai-content/bin
 /mo-7-utility/bin
 /mo-lib-lzma/bin
-/mp-cloud-manage/webroot/WEB-INF/classes
-/mp-cloud-manage/webroot/WEB-INF/lib
 /mp-cloud-develop/webroot/WEB-INF/classes
 /mp-cloud-develop/webroot/WEB-INF/lib
+/mp-cloud-editor/webroot/WEB-INF/classes
+/mp-cloud-editor/webroot/WEB-INF/lib
 /mp-cloud-design/webroot/WEB-INF/classes
 /mp-cloud-design/webroot/WEB-INF/lib
 /mp-cloud-content/webroot/WEB-INF/classes
@@ -32,8 +32,8 @@
 /mp-eai-manage/webroot/WEB-INF/lib
 /mp-eai-service/webroot/WEB-INF/classes
 /mp-eai-service/webroot/WEB-INF/lib
-/mt-server/tomcat-cloud.manage/logs
 /mt-server/tomcat-cloud.develop/logs
+/mt-server/tomcat-cloud.editor/logs
 /mt-server/tomcat-cloud.design/logs
 /mt-server/tomcat-cloud.content/logs
 /mt-server/tomcat-cloud.storage/logs
