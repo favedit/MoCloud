@@ -63,31 +63,35 @@ public class FStatisticsMarketerServlet
       // 设置输出流
       FByteStream stream = new FByteStream();
       ISqlConnection connection = logicContext.activeConnection("statistics");
-      //............................................................
-      // 输出总计数据
-      FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
-      TDateTime phaseBeginDate = endDate.clone();
-      phaseBeginDate.addHour(-1);
-      String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
-      FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(RString.format(phaseWhereSql, phaseBeginDate.format(), endDate.format()), "ACTION_DATE DESC");
-      double investmentTotal = 0;
-      double redemptionTotal = 0;
-      double netinvestmentTotal = 0;
-      double performanceTotal = 0;
-      double interestTotal = 0;
-      if(!phaseDataset.isEmpty()){
-         FStatisticsFinancialPhaseUnit phaseUnit = phaseDataset.first();
-         investmentTotal = phaseUnit.investmentTotal();
-         redemptionTotal = phaseUnit.redemptionTotal();
-         netinvestmentTotal = phaseUnit.netinvestmentTotal();
-         interestTotal = phaseUnit.interestTotal();
-         performanceTotal = phaseUnit.performanceTotal();
-      }
-      stream.writeDouble(investmentTotal);
-      stream.writeDouble(redemptionTotal);
-      stream.writeDouble(netinvestmentTotal);
-      stream.writeDouble(interestTotal);
-      stream.writeDouble(performanceTotal);
+      // 输出当日合计数据
+      FSql statisticsSql = new FSql();
+      statisticsSql.append("SELECT");
+      statisticsSql.append(" SUM(INVESTMENT) INVESTMENT_COUNT");
+      statisticsSql.append(",MAX(INVESTMENT_TOTAL) INVESTMENT_TOTAL");
+      statisticsSql.append(",SUM(REDEMPTION) REDEMPTION_COUNT");
+      statisticsSql.append(",MAX(REDEMPTION_TOTAL) REDEMPTION_TOTAL");
+      statisticsSql.append(",SUM(NETINVESTMENT) NETINVESTMENT_COUNT");
+      statisticsSql.append(",MAX(NETINVESTMENT_TOTAL) NETINVESTMENT_TOTAL");
+      statisticsSql.append(",SUM(INTEREST) INTEREST_COUNT");
+      statisticsSql.append(",MAX(INTEREST_TOTAL) INTEREST_TOTAL");
+      statisticsSql.append(",SUM(PERFORMANCE) PERFORMANCE_COUNT");
+      statisticsSql.append(",MAX(PERFORMANCE_TOTAL) PERFORMANCE_TOTAL");
+      statisticsSql.append(",SUM(CUSTOMER_COUNT) CUSTOMER_COUNT");
+      statisticsSql.append(",MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL");
+      statisticsSql.append(" FROM ST_FIN_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
+      FRow statisticsRow = connection.find(statisticsSql);
+      stream.writeDouble(statisticsRow.getDouble("investment_count"));
+      stream.writeDouble(statisticsRow.getDouble("investment_total"));
+      stream.writeDouble(statisticsRow.getDouble("redemption_count"));
+      stream.writeDouble(statisticsRow.getDouble("redemption_total"));
+      stream.writeDouble(statisticsRow.getDouble("netinvestment_count"));
+      stream.writeDouble(statisticsRow.getDouble("netinvestment_total"));
+      stream.writeDouble(statisticsRow.getDouble("interest_count"));
+      stream.writeDouble(statisticsRow.getDouble("interest_total"));
+      stream.writeDouble(statisticsRow.getDouble("performance_count"));
+      stream.writeDouble(statisticsRow.getDouble("performance_total"));
+      stream.writeInt32(statisticsRow.getInt("customer_count"));
+      stream.writeInt32(statisticsRow.getInt("customer_total"));
       //............................................................
       // 输出排行数据
       FSql fetchSql = new FSql();
@@ -133,6 +137,7 @@ public class FStatisticsMarketerServlet
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeUint8((byte)dynamicUnit.customerActionCd());
          stream.writeDouble(dynamicUnit.customerActionAmount());
+         stream.writeDouble(dynamicUnit.customerActionInterest());
       }
       //............................................................
       // 发送数据
