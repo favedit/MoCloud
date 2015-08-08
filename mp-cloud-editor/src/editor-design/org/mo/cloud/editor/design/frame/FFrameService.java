@@ -1,8 +1,5 @@
 package org.mo.cloud.editor.design.frame;
 
-import org.mo.cloud.content.define.frame.ETypeGroup;
-import org.mo.cloud.content.define.frame.IFrameService;
-
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;

@@ -151,46 +151,4 @@ public class FTreeService
       content.saveConfig(xconfig);
       return EResult.Success;
    }
-
-   //============================================================
-   // <T>新建配置处理。</T>
-   //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
-   //============================================================
-   @Override
-   public EResult insert(IWebContext context,
-                         IWebInput input,
-                         IWebOutput output){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>更新配置处理。</T>
-   //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
-   //============================================================
-   @Override
-   public EResult update(IWebContext context,
-                         IWebInput input,
-                         IWebOutput output){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>删除配置处理。</T>
-   //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
-   //============================================================
-   @Override
-   public EResult delete(IWebContext context,
-                         IWebInput input,
-                         IWebOutput output){
-      return EResult.Success;
-   }
 }

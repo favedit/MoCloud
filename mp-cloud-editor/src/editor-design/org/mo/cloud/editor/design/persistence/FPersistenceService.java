@@ -1,8 +1,6 @@
 package org.mo.cloud.editor.design.persistence;
 
-import org.mo.cloud.content.define.persistence.IPersistenceService;
-
-import org.mo.cloud.editor.design.frame.ETypeGroup;
+import org.mo.cloud.content.define.frame.ETypeGroup;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;

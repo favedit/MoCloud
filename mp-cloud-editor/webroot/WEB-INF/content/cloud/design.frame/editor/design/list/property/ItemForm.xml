@@ -2,18 +2,17 @@
 <Content>
    <Frame name="editor.design.list.property.ItemForm" type='FEditorDsListItemProperty' label="图片属性" is_valid="Y" note="">
       <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
-         <Check name="valid" linker='_controlValid' label="有效性" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="type" linker='_controlType' label="类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="componentType" linker='_controlComponentType' label="组件类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="isValid" linker='_controlIsValid' label="有效性" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
          <Edit name="name" linker='_controlName' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="标签" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
-      <Panel name='controlPanel' icon='design.panel.icon' label='控件属性'>
-         <Number2 name="location" linker='_controlLocation' label="坐标" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Number2 name="size" linker='_controlSize' label="大小" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="foreColor" linker='_controlForeColor' label="前景颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="backColor" linker='_controlBackColor' label="背景颜色" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="backResource" linker='_controlBackResource' label="背景资源" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="backGrid" linker='_controlBackGrid' label="背景分格" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      <Panel name='controlPanel' icon='design.panel.icon' label='数据属性'>
+         <Edit name="value" linker='_controlValue' label="内容" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="icon" linker='_controlIcon' label="图标" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='notePanel' icon='design.panel.icon' label='备注信息'>
+         <Edit name="note" linker='_controlNote' label="备注" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
    </Frame>
 </Content>
