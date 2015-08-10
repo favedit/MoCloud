@@ -107,6 +107,14 @@ public abstract class FAbstractHttpServlet
       if(_sessionValid){
          // 获得会话编号
          String sessionCode = httpRequest.getHeader(EWebConstants.SessionId);
+         Cookie[] cookies = httpRequest.getCookies();
+         if(cookies != null){
+            for(Cookie cookie : cookies){
+               if(EWebConstants.SessionId.equals(cookie.getName())){
+                  sessionCode = cookie.getValue();
+               }
+            }
+         }
          if(RString.isEmpty(sessionCode)){
             HttpSession httpSession = httpRequest.getSession();
             sessionCode = httpSession.getId();

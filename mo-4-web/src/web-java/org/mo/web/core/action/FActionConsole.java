@@ -479,6 +479,11 @@ public class FActionConsole
                   sqlSessionContext = new FSqlSessionContext(_databaseConsole);
                }
                value = sqlSessionContext;
+            }else if(acontainer != null){
+               // 参数为表单对象时
+               containers[n] = _formConsole.findContainer(context, acontainer, type);
+               value = containers[n].container();
+               context.define(acontainers[n].name(), value);
             }else if(type.isInterface()){
                String name = RClass.shortName(type);
                if(name.startsWith("I") && name.endsWith("Di")){
@@ -495,11 +500,6 @@ public class FActionConsole
                   // 如果为配置的接口对象时
                   value = RAop.find(type);
                }
-            }else if(acontainer != null){
-               // 参数为表单对象时
-               containers[n] = _formConsole.findContainer(context, acontainer, type);
-               value = containers[n].container();
-               context.define(acontainers[n].name(), value);
             }else{
                // 未知参数时
                Object bindObject = _bindConsole.find(type);

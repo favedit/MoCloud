@@ -92,15 +92,6 @@ public abstract class FAbstractServiceServlet
             _logger.debug(this, "process", "Do{1} begin. (method={2}, language={3}, charset={4}, uri={5})", type, language, encoding, httpRequest.getRequestURI());
          }
          //............................................................
-         // 建立环境
-         httpRequest.setCharacterEncoding(encoding);
-         context = new FWebContext(session, httpRequest, httpResponse);
-         httpResponse.setCharacterEncoding(encoding);
-         if(_logger.debugAble()){
-            _logger.debug(this, "process", "Build context: {1}", context.dump());
-         }
-         _bindConsole.bind(IWebContext.class, context);
-         //............................................................
          // 获取传入内容
          inputDoc = new FXmlDocument();
          inputDoc.setOptionAttributeCareCase(false);
@@ -112,7 +103,8 @@ public abstract class FAbstractServiceServlet
                _logger.debugFull(this, "process", "Build input xml.\n{1}", inputDoc.xml());
             }
          }
-         // 建立网络线程信息
+         //............................................................
+         // 建立环境
          context = new FWebContext(session, httpRequest, httpResponse);
          String format = context.parameter(RWebService.PtyFormatCd);
          formatCd = EWebServiceFormat.parse(format);
@@ -120,9 +112,6 @@ public abstract class FAbstractServiceServlet
             _logger.debug(this, "process", "Build context: {1}", context.dump());
          }
          _bindConsole.bind(IWebContext.class, context);
-         if(session != null){
-            _bindConsole.bind(IWebSession.class, session);
-         }
          // 设置输出信息
          if(formatCd == EWebServiceFormat.Json){
             httpResponse.setContentType(IWebContentType.JSON);

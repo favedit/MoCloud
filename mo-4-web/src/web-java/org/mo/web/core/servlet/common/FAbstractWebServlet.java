@@ -84,7 +84,7 @@ public abstract class FAbstractWebServlet
             RCulture.link(session.culture());
          }
          if(_logger.debugAble()){
-            _logger.debug(this, "process", "Do{1} begin. (method={2}, language={3}, charset={4}, uri={5})", type, language, encoding, httpRequest.getRequestURI());
+            _logger.debug(this, "process", "Do{1} begin. (language={2}, charset={3}, uri={4})", type, language, encoding, httpRequest.getRequestURI());
          }
          //............................................................
          // 建立环境

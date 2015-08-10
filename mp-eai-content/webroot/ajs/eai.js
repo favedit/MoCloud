@@ -1000,17 +1000,21 @@ MO.FEaiLogic_sendService = function FEaiLogic_sendService(uri, parameters, owner
       url += '&' + name + '=' + value;
    }
    var systemLogic = MO.Console.find(MO.FEaiLogicConsole).system();
-   var signCode = systemLogic.sign();
-   var tick = systemLogic.currentDate().get();
+   var token = systemLogic.token();
+   var tick = systemLogic.currentDate().daySecond();
    parameters.set('tick', tick);
    url += '&tick=' + tick;
    parameters.sortByName();
    var signSource = parameters.joinValue();
-   var sign = MO.Lang.String.calculateHash(signSource, signCode);
+   var sign = MO.Lang.String.calculateHash(signSource, token);
    url += '&sign=' + sign;
-   var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
+   var logicConsole = MO.Console.find(MO.FEaiLogicConsole);
+   var sessionId = logicConsole.sessionId();
+   var connection = MO.Console.find(MO.FHttpConsole).alloc();
+   connection.setAsynchronous(true);
+   connection.setHeader('mo-session-id', sessionId);
    connection.addLoadListener(owner, callback);
-   return connection;
+   connection.send(url);
 }
 MO.FEaiLogic_dispose = function FEaiLogic_dispose(){
    var o = this;
@@ -1036,6 +1040,7 @@ MO.FEaiLogicAchievement_doQuery = function FEaiLogicAchievement_doQuery(owner, c
 }
 MO.FEaiLogicConsole = function FEaiLogicConsole(o){
    o = MO.Class.inherits(this, o, MO.FConsole);
+   o._sessionId    = MO.Class.register(o, new MO.AGetSet('_sessionId'), '')
    o._system       = MO.Class.register(o, new MO.AGetter('_system'));
    o._organization = MO.Class.register(o, new MO.AGetter('_organization'));
    o._achievement  = MO.Class.register(o, new MO.AGetter('_achievement'));
@@ -1067,11 +1072,11 @@ MO.FEaiLogicConsole_construct = function FEaiLogicConsole_construct(){
 }
 MO.FEaiLogicConsole_dispose = function FEaiLogicConsole_dispose(){
    var o = this;
-   o._system = MO.RObject.dispose(o._system);
-   o._organization = MO.RObject.dispose(o._organization);
-   o._achievement = MO.RObject.dispose(o._achievement);
-   o._schedule = MO.RObject.dispose(o._schedule);
-   o._statistics = MO.RObject.dispose(o._statistics);
+   o._system = MO.Lang.Object.dispose(o._system);
+   o._organization = MO.Lang.Object.dispose(o._organization);
+   o._achievement = MO.Lang.Object.dispose(o._achievement);
+   o._schedule = MO.Lang.Object.dispose(o._schedule);
+   o._statistics = MO.Lang.Object.dispose(o._statistics);
    o.__base.FConsole.dispose.call(o);
 }
 MO.FEaiLogicOrganization = function FEaiLogicOrganization(o){
@@ -1235,10 +1240,11 @@ MO.FEaiLogicSystem = function FEaiLogicSystem(o) {
    o = MO.Class.inherits(this, o, MO.FEaiLogic);
    o._code          = 'system';
    o._ready         = false;
-   o._sign          = MO.Class.register(o, new MO.AGetter('_sign'), '')
+   o._info          = null;
+   o._token          = MO.Class.register(o, new MO.AGetter('_token'), 0);
    o._currentDate   = null;
    o._localDate     = null;
-   o._systemDate    = MO.Class.register(o, new MO.AGetter('_systemDate'))
+   o._systemDate    = MO.Class.register(o, new MO.AGetter('_systemDate'));
    o.onInfo         = MO.FEaiLogicSystem_onInfo;
    o.construct      = MO.FEaiLogicSystem_construct;
    o.doInfo         = MO.FEaiLogicSystem_doInfo;
@@ -1251,21 +1257,28 @@ MO.FEaiLogicSystem = function FEaiLogicSystem(o) {
 }
 MO.FEaiLogicSystem_onInfo = function FEaiLogicSystem_onInfo(event){
    var o = this;
-   var content = event.content;
-   o._sign = content.sign;
+   var info = o._info;
+   info.unserializeBuffer(event.content, true);
+   o._token = info.token();
    o._localDate.setNow();
-   o._systemDate.parse(content.date);
+   o._systemDate.parse(info.date());
+   var sessionId = info.sessionId();
+   var logicConsole = MO.Console.find(MO.FEaiLogicConsole);
+   logicConsole.setSessionId(sessionId);
    o._ready = true;
 }
 MO.FEaiLogicSystem_construct = function FEaiLogicSystem_construct(){
    var o = this;
    o.__base.FEaiLogic.construct.call(o);
+   o._info = MO.Class.create(MO.FEaiLogicSystemInfo);
    o._currentDate = new MO.TDate();
    o._localDate = new MO.TDate();
    o._systemDate = new MO.TDate();
 }
 MO.FEaiLogicSystem_doInfo = function FEaiLogicSystem_doInfo(owner, callback){
-   return this.send('info', null, owner, callback);
+   var o = this;
+   var parameters = o.prepareParemeters();
+   this.sendService('{eai.logic.service}/eai.system.wv?do=info', parameters, owner, callback);
 }
 MO.FEailogicSystem_doDeviceAccess = function FEailogicSystem_doDeviceAccess(){
    var xroot = new MO.TXmlNode('Configuration');
@@ -1307,9 +1320,10 @@ MO.FEaiLogicSystem_testReady = function FEaiLogicSystem_testReady(){
 }
 MO.FEaiLogicSystem_currentDate = function FEaiLogicSystem_currentDate(){
    var o = this;
+   var date = o._currentDate;
    var span = o._systemDate.get() - o._localDate.get();
-   o._currentDate.set(MO.Timer.current() + span);
-   return o._currentDate;
+   date.set(MO.Timer.current() + span);
+   return date;
 }
 MO.FEaiLogicSystem_refresh = function FEaiLogicSystem_refresh(){
    var o = this;
@@ -1317,9 +1331,17 @@ MO.FEaiLogicSystem_refresh = function FEaiLogicSystem_refresh(){
 }
 MO.FEaiLogicSystem_dispose = function FEaiLogicSystem_dispose() {
    var o = this;
+   o._info = MO.Lang.Object.dispose(o._info);
    o._localDate = MO.Lang.Object.dispose(o._localDate);
    o._systemDate = MO.Lang.Object.dispose(o._systemDate);
    o.__base.FEaiLogic.consturct.call(o);
+}
+MO.FEaiLogicSystemInfo = function FEaiLogicSystemInfo(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._sessionId = MO.Class.register(o, [new MO.AGetter('_sessionId'), new MO.APersistence('_sessionId', MO.EDataType.String)]);
+   o._date      = MO.Class.register(o, [new MO.AGetter('_date'), new MO.APersistence('_date', MO.EDataType.String)]);
+   o._token     = MO.Class.register(o, [new MO.AGetter('_token'), new MO.APersistence('_token', MO.EDataType.Uint32)]);
+   return o;
 }
 MO.FEaiCityEntity = function FEaiCityEntity(o){
    o = MO.Class.inherits(this, o, MO.FEaiEntity);
@@ -8481,8 +8503,6 @@ MO.FEaiChartApplication_setup = function FEaiChartApplication_setup(hPanel){
    var chapter = o._chapterChart = MO.Class.create(MO.FEaiChartChapter);
    chapter.linkGraphicContext(o);
    o.registerChapter(chapter);
-   var system = MO.Console.find(MO.FEaiLogicConsole).system();
-   system.doDeviceAccess();
    var resourceConsole = MO.Console.find(MO.FEaiResourceConsole);
    resourceConsole.addLoadListener(o, o.onLoadResource);
    resourceConsole.load('{eai.resource}/resource.dat');

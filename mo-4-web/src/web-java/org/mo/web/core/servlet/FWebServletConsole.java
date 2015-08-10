@@ -291,6 +291,8 @@ public class FWebServletConsole
             Object value = null;
             if(type == IWebContext.class){
                value = context;
+            }else if(type == IWebSession.class){
+               value = context.session();
             }else if(type == ISqlContext.class){
                value = logicContext;
             }else if(type == ILogicContext.class){
@@ -299,8 +301,6 @@ public class FWebServletConsole
                value = request;
             }else if(type == IWebServletResponse.class){
                value = response;
-            }else if(type.isInterface()){
-               value = RAop.find(type);
             }else if(aforms[n] != null){
                forms[n] = _formConsole.findContainer(context, aforms[n], type);
                value = forms[n].container();
@@ -310,6 +310,8 @@ public class FWebServletConsole
                Object bindObject = _bindConsole.find(type);
                if(bindObject != null){
                   value = bindObject;
+               }else if(type.isInterface()){
+                  value = RAop.find(type);
                }else{
                   throw new FFatalError("Unknown param type. (type={1})", type);
                }

@@ -41,11 +41,16 @@ public class FGcSessionConsole
    public <V extends ISession> V find(String sessionCode){
       FGcSession session = null;
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
+         // 根据唯一编号查找
          FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
-         FCacheSystemSessionUnit unit = logic.search("(LOGIC_CODE='" + _logicCode + "') AND (SESSION_CODE='" + sessionCode + "')");
+         FCacheSystemSessionUnit unit = logic.findByGuid(sessionCode);
+         if(unit == null){
+            unit = logic.search("(LOGIC_CODE='" + _logicCode + "') AND (SESSION_CODE='" + sessionCode + "')");
+         }
+         // 创建会话
          if(unit != null){
             session = new FGcSession();
-            session.setId(unit.guid());
+            session.loadUnit(unit);
          }
       }catch(Exception e){
          throw new FFatalError(e);

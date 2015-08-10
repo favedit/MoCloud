@@ -39,10 +39,10 @@
    <!-- ============================================================ -->
    <!-- BindConsole:线程绑定控制台                                   -->
    <!-- ============================================================ -->
-   <!-- <Component
-         face  = 'org.mobj.core.bind.IBindConsole'
-         class = 'org.mobj.core.bind.FBindConsole'
-         scope = 'global' /> -->
+   <Component
+         face  = 'org.mo.core.bind.IBindConsole'
+         class = 'org.mo.core.bind.FBindConsole'
+         scope = 'global' />
 
    <!-- ============================================================ -->
    <!-- VersionConsole:线程版本控制台                                -->

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
+   <!-- ============================================================ -->
+   <!-- 统计动态数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.system'
+         face  = 'com.ahyc.eai.service.system.ISystemServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.system.ISystemServlet'
+         class = 'com.ahyc.eai.service.system.FSystemServlet'
+         scope = 'global'/>
 
    <!-- ============================================================ -->
    <!-- 统计动态数据处理                                             -->
