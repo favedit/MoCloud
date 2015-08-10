@@ -117,7 +117,7 @@ public class RCulture
    //============================================================
    public static void unlink(FCulture culture){
       // 检查参数
-      if(null == culture){
+      if(culture == null){
          throw new FFatalError("Culture is null.");
       }
       culture.setThreadId(0);

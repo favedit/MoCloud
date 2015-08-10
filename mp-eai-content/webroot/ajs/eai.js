@@ -999,8 +999,15 @@ MO.FEaiLogic_sendService = function FEaiLogic_sendService(uri, parameters, owner
       var value = parameters.value(i);
       url += '&' + name + '=' + value;
    }
-   url = '&tick=' + MO.Timer.current();
-   url = '&token=' + MO.Timer.current();
+   var systemLogic = MO.Console.find(MO.FEaiLogicConsole).system();
+   var signCode = systemLogic.sign();
+   var tick = systemLogic.currentDate().get();
+   parameters.set('tick', tick);
+   url += '&tick=' + tick;
+   parameters.sortByName();
+   var signSource = parameters.joinValue();
+   var sign = MO.Lang.String.calculateHash(signSource, signCode);
+   url += '&sign=' + sign;
    var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
    connection.addLoadListener(owner, callback);
    return connection;
@@ -1198,19 +1205,17 @@ MO.FEaiLogicStatistics_doCustomerTrend = function FEaiLogicStatistics_doCustomer
 }
 MO.FEaiLogicStatistics_doMarketerDynamic = function FEaiLogicStatistics_doMarketerDynamic(owner, callback, startDate, endDate){
    var o = this;
-   var uri = '{eai.logic.service}/eai.financial.marketer.wv?do=dynamic&begin=' + startDate + '&end=' + endDate;
-   var url = MO.Console.find(MO.FEnvironmentConsole).parse(uri);
-   var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
-   connection.addLoadListener(owner, callback);
-   return connection;
+   var parameters = o.prepareParemeters();
+   parameters.set('begin', startDate);
+   parameters.set('end', endDate);
+   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=dynamic', parameters, owner, callback);
 }
 MO.FEaiLogicStatistics_doMarketerTrend = function FEaiLogicStatistics_doMarketerTrend(owner, callback, startDate, endDate){
    var o = this;
-   var uri = '{eai.logic.service}/eai.financial.marketer.wv?do=trend&begin=' + startDate + '&end=' + endDate;
-   var url = MO.Console.find(MO.FEnvironmentConsole).parse(uri);
-   var connection = MO.Console.find(MO.FHttpConsole).sendAsync(url);
-   connection.addLoadListener(owner, callback);
-   return connection;
+   var parameters = o.prepareParemeters();
+   parameters.set('begin', startDate);
+   parameters.set('end', endDate);
+   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=trend', parameters, owner, callback);
 }
 MO.FEaiLogicStatistics_doDepartmentDynamic = function FEaiLogicStatistics_doDepartmentDynamic(owner, callback, startDate, endDate){
    var o = this;

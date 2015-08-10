@@ -13,11 +13,13 @@ import org.mo.mime.lzma.FLzmaFile;
 public class RJavascriptUtil
 {
    // 日志输出接口
+   @SuppressWarnings("unused")
    private final static ILogger _logger = RLogger.find(RJavascriptUtil.class);
 
    //============================================================
    // <T>启动处理。</T>
    //============================================================
+   @SuppressWarnings("resource")
    public static void main(String[] args){
       FByteStream stream = new FByteStream();
       FStringFile sourceFile = new FStringFile();

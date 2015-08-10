@@ -41,6 +41,15 @@ public class FCacheSystemSessionLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段服务器代码的定义。
+   public final static SLogicFieldInfo SERVER_CODE = new SLogicFieldInfo("SERVER_CODE");
+
+   // 字段逻辑代码的定义。
+   public final static SLogicFieldInfo LOGIC_CODE = new SLogicFieldInfo("LOGIC_CODE");
+
+   // 字段会话代码的定义。
+   public final static SLogicFieldInfo SESSION_CODE = new SLogicFieldInfo("SESSION_CODE");
+
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
@@ -66,7 +75,7 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`FROM_CD`,`FROM_CODE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`SERVER_CODE`,`LOGIC_CODE`,`SESSION_CODE`,`USER_ID`,`PROJECT_ID`,`FROM_CD`,`FROM_CODE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
@@ -658,6 +667,9 @@ public class FCacheSystemSessionLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`SERVER_CODE`");
+      cmd.append(",`LOGIC_CODE`");
+      cmd.append(",`SESSION_CODE`");
       cmd.append(",`USER_ID`");
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`FROM_CD`");
@@ -676,6 +688,33 @@ public class FCacheSystemSessionLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      String serverCode = unit.serverCode();
+      if(RString.isEmpty(serverCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(serverCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String logicCode = unit.logicCode();
+      if(RString.isEmpty(logicCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(logicCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String sessionCode = unit.sessionCode();
+      if(RString.isEmpty(sessionCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(sessionCode));
+         cmd.append('\'');
+      }
       cmd.append(',');
       long userId = unit.userId();
       if(userId == 0){
@@ -775,6 +814,39 @@ public class FCacheSystemSessionLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isServerCodeChanged()){
+         cmd.append(",`SERVER_CODE`=");
+         String serverCode = unit.serverCode();
+         if(RString.isEmpty(serverCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(serverCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isLogicCodeChanged()){
+         cmd.append(",`LOGIC_CODE`=");
+         String logicCode = unit.logicCode();
+         if(RString.isEmpty(logicCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(logicCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isSessionCodeChanged()){
+         cmd.append(",`SESSION_CODE`=");
+         String sessionCode = unit.sessionCode();
+         if(RString.isEmpty(sessionCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(sessionCode));
+            cmd.append('\'');
+         }
+      }
       if(unit.isUserIdChanged()){
          cmd.append(",`USER_ID`=");
          long userId = unit.userId();

@@ -1,21 +1,17 @@
 package org.mo.web.core.servlet.common;
 
-import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
-import org.mo.core.bind.IBindConsole;
+import org.mo.web.core.common.FAbstractHttpServlet;
 import org.mo.web.core.servlet.IWebServletConsole;
 import org.mo.web.core.servlet.IWebServletConstant;
 import org.mo.web.core.session.IWebSession;
-import org.mo.web.core.session.IWebSessionConsole;
-import org.mo.web.protocol.common.IWebServlet;
 import org.mo.web.protocol.context.FWebContext;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -25,7 +21,7 @@ import org.mo.web.protocol.context.IWebContext;
 // <P>2. 根据页面请求，执行相应业务处理。</P>
 //============================================================
 public abstract class FAbstractWebServlet
-      extends HttpServlet
+      extends FAbstractHttpServlet
 {
    // 序列化编号
    private static final long serialVersionUID = 1L;
@@ -33,49 +29,8 @@ public abstract class FAbstractWebServlet
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FAbstractWebServlet.class);
 
-   // 绑定控制台
-   protected IBindConsole _bindConsole;
-
-   // 网页会话控制台
-   protected IWebSessionConsole _sessionConsole;
-
    // 网页处理控制台
    protected IWebServletConsole _servletConsole;
-
-   // 会话允许
-   protected boolean _sessionVaild;
-
-   //============================================================
-   // <T>响应网页的Get请求。</T>
-   //
-   // @param request 网络请求对象
-   // @param response 网络响应对象
-   //============================================================
-   @Override
-   protected void doGet(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException{
-      process(IWebServlet.METHOD_GET, request, response);
-   }
-
-   //============================================================
-   // <T>响应网页的Post请求。</T>
-   //
-   // @param request 网络请求对象
-   // @param response 网络响应对象
-   //============================================================
-   @Override
-   protected void doPost(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException{
-      process(IWebServlet.METHOD_POST, request, response);
-   }
-
-   //============================================================
-   // <T>初始化网络应用程序。</T>
-   //
-   // @param config 网络设置对象
-   //============================================================
-   public void initialize(ServletConfig config){
-   }
 
    //============================================================
    // <T>初始化网络应用程序。</T>
@@ -85,15 +40,8 @@ public abstract class FAbstractWebServlet
    @Override
    public void init(ServletConfig config) throws ServletException{
       super.init(config);
-      try{
-         _bindConsole = RAop.find(IBindConsole.class);
-         _sessionConsole = RAop.find(IWebSessionConsole.class);
-         _servletConsole = RAop.find(IWebServletConsole.class);
-         _sessionVaild = _sessionConsole.isValid();
-         initialize(config);
-      }catch(Exception e){
-         _logger.error(this, "init", e);
-      }
+      // 获得控制台
+      _servletConsole = RAop.find(IWebServletConsole.class);
    }
 
    //============================================================
@@ -115,19 +63,20 @@ public abstract class FAbstractWebServlet
    // @param httpRequest 网络请求对象
    // @param httpResponse 网络响应对象
    //============================================================
+   @Override
    public void process(String type,
                        HttpServletRequest httpRequest,
                        HttpServletResponse httpResponse){
       String redirect = null;
       FWebContext context = null;
       IWebSession session = null;
-      long startTime = System.currentTimeMillis();
+      long startTime = System.nanoTime();
       try{
-         String language = "cn";
-         String encoding = "utf-8";
+         String language = _sessionLanguage;
+         String encoding = _sessionEncoding;
          // 建立会话
-         if(_sessionVaild){
-            session = _sessionConsole.build(httpRequest.getSession().getId());
+         session = makeSession(httpRequest, httpResponse);
+         if(session != null){
             session.referIncrease();
             // 设置语言编码
             language = session.culture().countryLanguage();
@@ -135,9 +84,10 @@ public abstract class FAbstractWebServlet
             RCulture.link(session.culture());
          }
          if(_logger.debugAble()){
-            _logger.debug(this, "process", "Do{1} Begin - [{2}] (lang={3}, charset={4})", type, httpRequest.getRequestURI(), language, encoding);
+            _logger.debug(this, "process", "Do{1} begin. (method={2}, language={3}, charset={4}, uri={5})", type, language, encoding, httpRequest.getRequestURI());
          }
-         // Build context
+         //............................................................
+         // 建立环境
          httpRequest.setCharacterEncoding(encoding);
          context = new FWebContext(session, httpRequest, httpResponse);
          httpResponse.setCharacterEncoding(encoding);
@@ -145,9 +95,7 @@ public abstract class FAbstractWebServlet
             _logger.debug(this, "process", "Build context: {1}", context.dump());
          }
          _bindConsole.bind(IWebContext.class, context);
-         if(session != null){
-            _bindConsole.bind(IWebSession.class, session);
-         }
+         //............................................................
          // 查找服务类型
          boolean process = false;
          String uri = context.requestUri();
@@ -164,26 +112,22 @@ public abstract class FAbstractWebServlet
          }
          // 执行逻辑过程
          if(process){
-            FWebServletRequest webRequest = new FWebServletRequest(httpRequest);
-            FWebServletResponse webResponse = new FWebServletResponse(httpResponse);
-            process(uri, context, webRequest, webResponse);
+            FWebServletRequest request = new FWebServletRequest(httpRequest);
+            FWebServletResponse response = new FWebServletResponse(httpResponse);
+            process(uri, context, request, response);
             httpResponse.flushBuffer();
          }
       }catch(Exception e){
          _logger.error(this, "process", e);
       }finally{
          if(session != null){
+            RCulture.unlink();
             session.referDecrease();
          }
-         try{
-            RCulture.unlink();
-            _bindConsole.clear();
-         }catch(Exception e){
-            _logger.error(this, "process", e);
-         }
-         long endTime = System.currentTimeMillis();
+         _bindConsole.clear();
+         long endTime = System.nanoTime();
          if(_logger.debugAble()){
-            _logger.debug(this, "process", "Do{1} End - [{2}ms] {3}", type, endTime - startTime, redirect);
+            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (redirect={2})", type, redirect);
          }
       }
    }

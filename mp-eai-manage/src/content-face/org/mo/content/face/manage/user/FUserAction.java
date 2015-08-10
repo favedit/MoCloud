@@ -201,7 +201,7 @@ public class FUserAction
       String id = context.parameter("id");
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
       if(unit != null){
-         EResult result = _userConsole.doDelete(logicContext, unit);
+         @SuppressWarnings("unused") EResult result = _userConsole.doDelete(logicContext, unit);
          _logger.debug(this, "Del", " Del finish.(guid={1})", id);
       }
       return "#/manage/user/UserList";

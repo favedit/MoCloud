@@ -36,6 +36,24 @@ public class FCacheSystemSessionUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段服务器代码的定义。
+   private String __serverCode;
+
+   // 字段服务器代码的定义。
+   protected String _serverCode;
+
+   // 存储字段逻辑代码的定义。
+   private String __logicCode;
+
+   // 字段逻辑代码的定义。
+   protected String _logicCode;
+
+   // 存储字段会话代码的定义。
+   private String __sessionCode;
+
+   // 字段会话代码的定义。
+   protected String _sessionCode;
+
    // 存储字段用户编号的定义。
    private long __userId;
 
@@ -169,6 +187,87 @@ public class FCacheSystemSessionUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断服务器代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isServerCodeChanged(){
+      return !RString.equals(__serverCode, _serverCode);
+   }
+
+   //============================================================
+   // <T>获得服务器代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String serverCode(){
+      return _serverCode;
+   }
+
+   //============================================================
+   // <T>设置服务器代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setServerCode(String value){
+      _serverCode = value;
+   }
+
+   //============================================================
+   // <T>判断逻辑代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLogicCodeChanged(){
+      return !RString.equals(__logicCode, _logicCode);
+   }
+
+   //============================================================
+   // <T>获得逻辑代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String logicCode(){
+      return _logicCode;
+   }
+
+   //============================================================
+   // <T>设置逻辑代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLogicCode(String value){
+      _logicCode = value;
+   }
+
+   //============================================================
+   // <T>判断会话代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSessionCodeChanged(){
+      return !RString.equals(__sessionCode, _sessionCode);
+   }
+
+   //============================================================
+   // <T>获得会话代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String sessionCode(){
+      return _sessionCode;
+   }
+
+   //============================================================
+   // <T>设置会话代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSessionCode(String value){
+      _sessionCode = value;
    }
 
    //============================================================
@@ -402,6 +501,12 @@ public class FCacheSystemSessionUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "server_code":
+            return _serverCode;
+         case "logic_code":
+            return _logicCode;
+         case "session_code":
+            return _sessionCode;
          case "user_id":
             return Long.toString(_userId);
          case "project_id":
@@ -440,6 +545,15 @@ public class FCacheSystemSessionUnit
             break;
          case "guid":
             _guid = value;
+            break;
+         case "server_code":
+            _serverCode = value;
+            break;
+         case "logic_code":
+            _logicCode = value;
+            break;
+         case "session_code":
+            _sessionCode = value;
             break;
          case "user_id":
             _userId = RLong.parse(value);
@@ -492,6 +606,18 @@ public class FCacheSystemSessionUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "server_code":
+               __serverCode = value;
+               _serverCode = __serverCode;
+               break;
+            case "logic_code":
+               __logicCode = value;
+               _logicCode = __logicCode;
+               break;
+            case "session_code":
+               __sessionCode = value;
+               _sessionCode = __sessionCode;
+               break;
             case "user_id":
                __userId = RLong.parse(value);
                _userId = __userId;
@@ -539,6 +665,9 @@ public class FCacheSystemSessionUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("serverCode", _serverCode);
+      row.set("logicCode", _logicCode);
+      row.set("sessionCode", _sessionCode);
       row.set("userId", _userId);
       row.set("projectId", _projectId);
       row.set("fromCd", _fromCd);
@@ -560,6 +689,9 @@ public class FCacheSystemSessionUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("serverCode", _serverCode);
+      map.put("logicCode", _logicCode);
+      map.put("sessionCode", _sessionCode);
       map.put("userId", RLong.toString(_userId));
       map.put("projectId", RLong.toString(_projectId));
       map.put("fromCd", RInteger.toString(_fromCd));

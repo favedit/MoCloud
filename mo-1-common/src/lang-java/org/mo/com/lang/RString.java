@@ -848,6 +848,25 @@ public class RString
       return (value != null) ? value : new FString();
    }
 
+   //==========================================================
+   //<T>计算字符串的哈希值。</T>
+   //
+   //@method
+   //@param source 字符串
+   //@param code 参照码
+   //@return Integer 哈希值
+   //==========================================================
+   public static int calculateHash(String source,
+                                   int code){
+      int hash = code;
+      int length = source.length();
+      for(int i = 0; i < length; i++){
+         char value = source.charAt(i);
+         hash = 31 * hash + value;
+      }
+      return hash;
+   }
+
    //============================================================
    // <T>获得首字母为小写字符的字符串。</T>
    //

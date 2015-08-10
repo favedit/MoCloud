@@ -35,7 +35,7 @@ public class FSession
    protected FObjectDictionary _componments;
 
    // 环境信息
-   protected FCulture _culture;
+   protected FCulture _culture = new FCulture();
 
    // 权限对象
    protected IPermission _permission;
@@ -172,9 +172,6 @@ public class FSession
    //============================================================
    @Override
    public FCulture culture(){
-      if(null == _culture){
-         _culture = new FCulture();
-      }
       return _culture;
    }
 
@@ -185,7 +182,7 @@ public class FSession
    //============================================================
    @Override
    public boolean referTest(){
-      return (_referCount > 0);
+      return _referCount > 0;
    }
 
    //============================================================

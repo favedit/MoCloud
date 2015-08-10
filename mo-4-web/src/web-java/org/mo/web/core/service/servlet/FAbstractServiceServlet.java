@@ -1,16 +1,13 @@
 package org.mo.web.core.service.servlet;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RString;
-import org.mo.com.lang.cultrue.FCulture;
 import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -19,12 +16,11 @@ import org.mo.com.text.RDatabaseFormat;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.RAop;
-import org.mo.core.bind.IBindConsole;
+import org.mo.web.core.common.FAbstractHttpServlet;
 import org.mo.web.core.service.IServiceConsole;
 import org.mo.web.core.service.common.EWebServiceFormat;
 import org.mo.web.core.service.common.RWebService;
 import org.mo.web.core.session.IWebSession;
-import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.common.IWebContentType;
 import org.mo.web.protocol.common.IWebHeaderType;
 import org.mo.web.protocol.common.IWebServlet;
@@ -39,7 +35,7 @@ import org.mo.web.protocol.context.IWebContext;
 // <P>2. 根据页面请求，执行相应业务处理。</P>
 //============================================================
 public abstract class FAbstractServiceServlet
-      extends HttpServlet
+      extends FAbstractHttpServlet
       implements
          IWebServlet
 {
@@ -52,15 +48,6 @@ public abstract class FAbstractServiceServlet
    // 服务控制台接口
    protected IServiceConsole _serviceConsole;
 
-   // 绑定控制台接口
-   protected IBindConsole _bindConsole;
-
-   // 会话控制台接口
-   protected IWebSessionConsole _sessionConsole;
-
-   // 会话允许
-   protected boolean _sessionVaild;
-
    //============================================================
    // <T>初始化网络应用程序。</T>
    //
@@ -69,39 +56,7 @@ public abstract class FAbstractServiceServlet
    @Override
    public void init(ServletConfig config) throws ServletException{
       super.init(config);
-      try{
-         _bindConsole = RAop.find(IBindConsole.class);
-         _sessionConsole = RAop.find(IWebSessionConsole.class);
-         _serviceConsole = RAop.find(IServiceConsole.class);
-         _sessionVaild = _sessionConsole.isValid();
-         initialize(config);
-      }catch(Exception e){
-         _logger.error(this, "init", e);
-      }
-   }
-
-   //============================================================
-   // <T>响应网页的Get访问请求。</T>
-   //
-   // @param request 页面请求对象
-   // @param response 页面响应对象
-   //============================================================
-   @Override
-   protected void doGet(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException{
-      process(IWebServlet.METHOD_GET, request, response);
-   }
-
-   //============================================================
-   // <T>响应网页的Post访问请求。</T>
-   //
-   // @param request 页面请求对象
-   // @param response 页面响应对象
-   //============================================================
-   @Override
-   protected void doPost(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException{
-      process(IWebServlet.METHOD_POST, request, response);
+      _serviceConsole = RAop.find(IServiceConsole.class);
    }
 
    //============================================================
@@ -110,6 +65,7 @@ public abstract class FAbstractServiceServlet
    // @param httpRequest 页面请求对象
    // @param httpResponse 页面响应对象
    //============================================================
+   @Override
    public void process(String type,
                        HttpServletRequest httpRequest,
                        HttpServletResponse httpResponse){
@@ -117,30 +73,34 @@ public abstract class FAbstractServiceServlet
       String uri = null;
       FWebContext context = null;
       IWebSession session = null;
-      FCulture culture = null;
       FXmlDocument inputDoc = null;
       FXmlDocument outputDoc = null;
       int formatCd = EWebServiceFormat.Xml;
       try{
-         String language = "cn";
-         String encoding = "utf-8";
+         String language = _sessionLanguage;
+         String encoding = _sessionEncoding;
          // 建立会话
-         if(_sessionVaild){
-            session = _sessionConsole.build(httpRequest.getSession().getId());
+         session = makeSession(httpRequest, httpResponse);
+         if(session != null){
             session.referIncrease();
             // 设置语言编码
-            culture = session.culture();
-            language = culture.countryLanguage();
-            encoding = culture.countryEncoding();
-            RCulture.link(culture);
+            language = session.culture().countryLanguage();
+            encoding = session.culture().countryEncoding();
+            RCulture.link(session.culture());
          }
          if(_logger.debugAble()){
-            _logger.debug(this, "process", "Do{1} - [{2}] (lang={3}, charset={4})", type, httpRequest.getRequestURI(), language, encoding);
+            _logger.debug(this, "process", "Do{1} begin. (method={2}, language={3}, charset={4}, uri={5})", type, language, encoding, httpRequest.getRequestURI());
          }
-         // 设置语言编码
-         String serviceEncoding = _serviceConsole.encoding();
-         httpRequest.setCharacterEncoding(serviceEncoding);
-         httpResponse.setCharacterEncoding(serviceEncoding);
+         //............................................................
+         // 建立环境
+         httpRequest.setCharacterEncoding(encoding);
+         context = new FWebContext(session, httpRequest, httpResponse);
+         httpResponse.setCharacterEncoding(encoding);
+         if(_logger.debugAble()){
+            _logger.debug(this, "process", "Build context: {1}", context.dump());
+         }
+         _bindConsole.bind(IWebContext.class, context);
+         //............................................................
          // 获取传入内容
          inputDoc = new FXmlDocument();
          inputDoc.setOptionAttributeCareCase(false);
@@ -222,16 +182,14 @@ public abstract class FAbstractServiceServlet
       }catch(Exception e){
          _logger.error(this, "process", e);
       }finally{
-         // 清空关联信息
-         _bindConsole.clear();
-         // 释放线程绑定对象
-         if(culture != null){
-            RCulture.unlink(culture);
-         }
          // 释放会话引用
          if(session != null){
+            RCulture.unlink();
             session.referDecrease();
          }
+         // 清空关联信息
+         _bindConsole.clear();
+         // 释放输出内容
          if(outputDoc != null){
             try{
                // 输出服务结果
@@ -253,7 +211,7 @@ public abstract class FAbstractServiceServlet
          }
          long endTime = System.currentTimeMillis();
          if(_logger.debugAble()){
-            _logger.debug(this, "process", endTime - startTime, "Do{1} for {2}", type, uri);
+            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (uri={2})", type, uri);
          }
       }
    }

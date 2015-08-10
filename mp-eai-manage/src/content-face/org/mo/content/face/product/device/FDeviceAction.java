@@ -109,6 +109,7 @@ public class FDeviceAction
       return "/manage/product/device/BrowserAccessInfo";
    }
 
+   @SuppressWarnings("resource")
    @Override
    public String expend(IWebContext context,
                         ILogicContext logicContext,
