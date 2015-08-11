@@ -6622,19 +6622,19 @@ MO.FEaiChartCustomerDynamicInfo = function FEaiChartCustomerDynamicInfo(o){
 }
 MO.FEaiChartCustomerDynamicRankUnit = function FEaiChartCustomerDynamicRankUnit(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
-   o._customerLabel   = MO.Class.register(o, [new MO.AGetter('_customerLabel'), new MO.APersistence('_customerLabel', MO.EDataType.String)]);
-   o._customerCard    = MO.Class.register(o, [new MO.AGetter('_customerCard'), new MO.APersistence('_customerCard', MO.EDataType.String)]);
-   o._customerPhone   = MO.Class.register(o, [new MO.AGetter('_customerPhone'), new MO.APersistence('_customerPhone', MO.EDataType.String)]);
-   o._investmentTotal = MO.Class.register(o, [new MO.AGetter('_investmentTotal'), new MO.APersistence('_investmentTotal', MO.EDataType.Double)]);
+   o._label      = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
+   o._card       = MO.Class.register(o, [new MO.AGetter('_card'), new MO.APersistence('_card', MO.EDataType.String)]);
+   o._phone      = MO.Class.register(o, [new MO.AGetter('_phone'), new MO.APersistence('_phone', MO.EDataType.String)]);
+   o._investment = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
    return o;
 }
 MO.FEaiChartCustomerDynamicUnit = function FEaiChartCustomerDynamicUnit(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
-   o._recordDate         = MO.Class.register(o, [new MO.AGetter('_recordDate'), new MO.APersistence('_recordDate', MO.EDataType.String)]);
-   o._customerLabel      = MO.Class.register(o, [new MO.AGetter('_customerLabel'), new MO.APersistence('_customerLabel', MO.EDataType.String)]);
-   o._customerCard       = MO.Class.register(o, [new MO.AGetter('_customerCard'), new MO.APersistence('_customerCard', MO.EDataType.String)]);
-   o._customerPhone      = MO.Class.register(o, [new MO.AGetter('_customerPhone'), new MO.APersistence('_customerPhone', MO.EDataType.String)]);
-   o._customerInvestment = MO.Class.register(o, [new MO.AGetter('_customerInvestment'), new MO.APersistence('_customerInvestment', MO.EDataType.Double)]);
+   o._recordDate = MO.Class.register(o, [new MO.AGetter('_recordDate'), new MO.APersistence('_recordDate', MO.EDataType.String)]);
+   o._label      = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
+   o._card       = MO.Class.register(o, [new MO.AGetter('_card'), new MO.APersistence('_card', MO.EDataType.String)]);
+   o._phone      = MO.Class.register(o, [new MO.AGetter('_phone'), new MO.APersistence('_phone', MO.EDataType.String)]);
+   o._investment = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
    return o;
 }
 MO.FEaiChartCustomerProcessor = function FEaiChartCustomerProcessor(o){
@@ -6732,51 +6732,32 @@ MO.FEaiChartCustomerProcessor_calculateCurrent = function FEaiChartCustomerProce
    var o = this;
    var info = o._dynamicInfo;
    var investmentCurrent = info.investmentCount();
-   var redemptionCurrent = info.redemptionCount();
-   var interestCount = info.interestCount();
-   var performanceCurrent = info.performanceCount();
    var units = o._units;
    var count = units.count();
    for(var i = 0; i < count; i++){
       var unit = units.at(i);
-      var actionCd = unit.customerActionCd();
-      var amount = unit.customerActionAmount();
-      var interest = unit.customerActionInterest();
-      if(actionCd == 1){
-         investmentCurrent -= amount;
-         performanceCurrent -= amount;
-      }else if(actionCd == 2){
-         redemptionCurrent -= amount;
-         interestCount -= interest;
-      }
+      investmentCurrent -= unit.customerInvestment();
    }
    o._invementDayCurrent = investmentCurrent;
-   o._redemptionDayCurrent = redemptionCurrent;
-   o._netinvestmentDayCurrent = investmentCurrent - redemptionCurrent;
-   o._interestDayCurrent = interestCount;
-   o._performanceDayCurrent = performanceCurrent;
 }
 MO.FEaiChartCustomerProcessor_focusEntity = function FEaiChartCustomerProcessor_focusEntity(unit){
    var o = this;
    var mapEntity = o._mapEntity;
-   var actionCd = unit.customerActionCd();
-   if(actionCd == 1){
-      var card = unit.customerCard();
-      var cityEntity = MO.Console.find(MO.FEaiEntityConsole).cityModule().findByCard(card);
-      if(cityEntity){
-         var amount = unit.customerActionAmount();
-         var level = MO.Console.find(MO.FEaiLogicConsole).statistics().calculateAmountLevel(amount);
-         var provinceCode = cityEntity.data().provinceCode();
-         var provinceEntity = MO.Console.find(MO.FEaiEntityConsole).provinceModule().findByCode(provinceCode);
-         if(provinceEntity){
-            provinceEntity.doInvestment(level, amount);
-         }
-         cityEntity.addInvestmentTotal(level, amount);
-         o._mapEntity.upload();
-         var autio = o._autios[level];
-         if(autio){
-            autio.play(0);
-         }
+   var card = unit.customerCard();
+   var cityEntity = MO.Console.find(MO.FEaiEntityConsole).cityModule().findByCard(card);
+   if(cityEntity){
+      var investment = unit.investment();
+      var level = MO.Console.find(MO.FEaiLogicConsole).statistics().calculateAmountLevel(investment);
+      var provinceCode = cityEntity.data().provinceCode();
+      var provinceEntity = MO.Console.find(MO.FEaiEntityConsole).provinceModule().findByCode(provinceCode);
+      if(provinceEntity){
+         provinceEntity.doInvestment(level, investment);
+      }
+      cityEntity.addInvestmentTotal(level, investment);
+      o._mapEntity.upload();
+      var autio = o._autios[level];
+      if(autio){
+         autio.play(0);
       }
    }
    var changedEvent = o._eventDataChanged;
@@ -6922,7 +6903,6 @@ MO.FEaiChartCustomerScene_onProcess = function FEaiChartCustomerScene_onProcess(
       var countryEntity = o._countryEntity;
       if (!countryEntity.introAnimeDone()) {
          countryEntity.process();
-         return;
       }
       if (!o._mapReady) {
          o._guiManager.show();
@@ -6945,10 +6925,6 @@ MO.FEaiChartCustomerScene_onProcess = function FEaiChartCustomerScene_onProcess(
       if(processor.invementDayCurrent() > 0){
          var investmentTotal = logoBar.findComponent('investmentTotal');
          investmentTotal.setValue(parseInt(processor.invementDayCurrent()).toString());
-         var redemptionTotal = logoBar.findComponent('redemptionTotal');
-         redemptionTotal.setValue(parseInt(processor.redemptionDayCurrent()).toString());
-         var netinvestmentTotal = logoBar.findComponent('netinvestmentTotal');
-         netinvestmentTotal.setValue(parseInt(processor.netinvestmentDayCurrent()).toString());
       }
       if (o._nowTicker.process()) {
          var bar = o._logoBar;
@@ -7376,17 +7352,8 @@ MO.FEaiChartCustomerTable_setRankUnits = function FEaiChartCustomerTable_setRank
    for(var i = 0; i < count; i++){
       var unit = units.at(i);
       var row = grid.allocRow();
-      var departmentLabel = unit.departmentLabel();
-      var department = MO.Console.find(MO.FEaiResourceConsole).departmentModule().findByFullLabel(departmentLabel);
-      if(department){
-         departmentLabel = department.label();
-      }
-      row.set('department_label', departmentLabel);
-      row.set('marketer_label', unit.marketerLabel());
-      row.set('investment_total', unit.investmentTotal());
-      row.set('redemption_total', unit.redemptionTotal());
-      row.set('netinvestment_total', unit.netinvestmentTotal());
-      row.set('customer_count', unit.customerTotal());
+      row.set('department_label', unit.label());
+      row.set('investment_total', unit.investment());
       grid.pushRow(row);
    }
 }
@@ -7394,11 +7361,6 @@ MO.FEaiChartCustomerTable_pushUnit = function FEaiChartCustomerTable_pushUnit(un
    var o = this;
    if(!unit){
       return null;
-   }
-   var departmentLabel = unit.departmentLabel();
-   var department = MO.Console.find(MO.FEaiResourceConsole).departmentModule().findByFullLabel(departmentLabel);
-   if(department){
-      departmentLabel = department.label();
    }
    var card = unit.customerCard();
    var city = MO.Console.find(MO.FEaiResourceConsole).cityModule().findByCard(card);
@@ -7409,15 +7371,11 @@ MO.FEaiChartCustomerTable_pushUnit = function FEaiChartCustomerTable_pushUnit(un
    var grid = o._gridControl;
    var row = grid.allocRow();
    row.set('record_date', unit.recordDate());
-   row.set('department_label', departmentLabel);
-   row.set('marketer_label', unit.marketerLabel());
+   row.set('department_label', unit.label());
+   row.set('marketer_label', unit.label());
    row.set('customer_city', cityLabel);
-   row.set('customer_info', unit.customerLabel() + ' - ' + unit.customerPhone());
-   if(unit.customerActionCd() == 1){
-      row.set('customer_amount', unit.customerActionAmount());
-   }else{
-      row.set('customer_amount', -unit.customerActionAmount());
-   }
+   row.set('customer_info', unit.label() + ' - ' + unit.phone());
+   row.set('customer_amount', unit.investment());
    grid.insertRow(row);
    var entities = o._units;
    entities.unshift(unit);
@@ -7600,13 +7558,8 @@ MO.FEaiChartCustomerTimeline_onPaintBegin = function FEaiChartCustomerTimeline_o
       if (investment > maxAmount) {
          maxAmount = investment;
       }
-      var redemption = unit.redemption();
-      if (redemption > maxAmount) {
-         maxAmount = redemption;
-      }
    }
    o.drawTrend(graphic, '_investment', dataLeft, dataTop, dataRight, dataBottom, dataHeight, bakTime, timeSpan, maxAmount, '#FF8800', '#FF0000');
-   o.drawTrend(graphic, '_redemption', dataLeft, dataTop, dataRight, dataBottom, dataHeight, bakTime, timeSpan, maxAmount, '#0088FF', '#0000FF');
    startTime.date.setTime(bakTime);
    startTime.refresh();
    var lastHour = -1;
@@ -7621,7 +7574,7 @@ MO.FEaiChartCustomerTimeline_onPaintBegin = function FEaiChartCustomerTimeline_o
       startTime.refresh();
       var hour = startTime.date.getHours();
       if (lastHour == hour) {
-         hourInves += unit.redemption();
+         hourInves += unit.investment();
       }else{
          if(hourInves > maxHourInves){
             maxHourInves = hourInves;
@@ -7638,21 +7591,9 @@ MO.FEaiChartCustomerTimeline_onPaintBegin = function FEaiChartCustomerTimeline_o
    var textWidth = graphic.textWidth('投资总计：');
    var investmentTotalText = MO.Lang.Float.unitFormat(trendInfo.investmentTotal(), 0, 0, 2, 0, 10000, '万');
    var investmentTotalWidth = graphic.textWidth(investmentTotalText);
-   var redemptionTotalText = MO.Lang.Float.unitFormat(trendInfo.redemptionTotal(), 0, 0, 2, 0, 10000, '万');
-   var redemptionTotalWidth = graphic.textWidth(redemptionTotalText);
-   var netinvestmentTotalText = MO.Lang.Float.unitFormat(trendInfo.netinvestmentTotal(), 0, 0, 2, 0, 10000, '万');
-   var netinvestmentTotalWidth = graphic.textWidth(netinvestmentTotalText);
-   var interestTotalText = MO.Lang.Float.unitFormat(trendInfo.interestTotal(), 0, 0, 2, 0, 10000, '万');
-   var interestTotalWidth = graphic.textWidth(interestTotalText);
-   var maxWidth = Math.max(Math.max(Math.max(investmentTotalWidth, redemptionTotalWidth), netinvestmentTotalWidth), interestTotalWidth);
+   var maxWidth = investmentTotalWidth;
    graphic.drawText('投资总额：', decoLeft, rowStart + rowHeight * 0, '#00CFFF');
    graphic.drawText(investmentTotalText, decoLeft + textWidth + maxWidth - investmentTotalWidth, rowStart + rowHeight * 0, '#00B5F6');
-   graphic.drawText('赎回总额：', decoLeft, rowStart + rowHeight * 1 + 5, '#00CFFF');
-   graphic.drawText(redemptionTotalText, decoLeft + textWidth + maxWidth - redemptionTotalWidth, rowStart + rowHeight * 1 + 5, '#00B5F6');
-   graphic.drawText('净投总额：', decoLeft, rowStart + rowHeight * 2 + 10, '#00CFFF');
-   graphic.drawText(netinvestmentTotalText, decoLeft + textWidth + maxWidth - netinvestmentTotalWidth, rowStart + rowHeight * 2 + 10, '#00B5F6');
-   graphic.drawText('利息总额：', decoLeft, rowStart + rowHeight * 3 + 15, '#00CFFF');
-   graphic.drawText(interestTotalText, decoLeft + textWidth + maxWidth - interestTotalWidth, rowStart + rowHeight * 3 + 15, '#00B5F6');
    startTime.date.setTime(bakTime);
    startTime.refresh();
 }

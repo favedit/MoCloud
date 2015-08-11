@@ -85,9 +85,9 @@ public class FStatisticsCustomerServlet
       FSql fetchSql = new FSql();
       fetchSql.append("SELECT * FROM (");
       fetchSql.append("SELECT CUSTOMER_ID,CUSTOMER_LABEL");
-      fetchSql.append(",SUM(MARKETER_INVESTMENT) INVESTMENT_TOTAL");
+      fetchSql.append(",SUM(INVESTMENT) INVESTMENT_TOTAL");
       fetchSql.append(" FROM ST_FIN_CUSTOMER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
-      fetchSql.append("GROUP BY MARKETER_ID");
+      fetchSql.append("GROUP BY CUSTOMER_ID");
       fetchSql.append(") t ORDER BY INVESTMENT_TOTAL DESC LIMIT 3");
       FDataset rankDataset = connection.fetchDataset(fetchSql);
       int rankCount = rankDataset.count();
