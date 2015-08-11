@@ -6,7 +6,7 @@ import org.mo.web.core.session.FWebSession;
 //============================================================
 // <T>会话信息。</T>
 //============================================================
-public class FGcSession
+public class FGcWebSession
       extends FWebSession
 {
    // 序列化编号

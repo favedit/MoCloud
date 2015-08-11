@@ -1,13 +1,16 @@
 package org.mo.web.core.servlet.common;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
+import org.mo.web.core.action.common.FWebCookie;
+import org.mo.web.core.common.EWebConstants;
 import org.mo.web.core.common.FAbstractHttpServlet;
 import org.mo.web.core.servlet.IWebServletConsole;
 import org.mo.web.core.servlet.IWebServletConstant;
@@ -38,9 +41,8 @@ public abstract class FAbstractWebServlet
    // @param config 网络设置对象
    //============================================================
    @Override
-   public void init(ServletConfig config) throws ServletException{
-      super.init(config);
-      // 获得控制台
+   public void initialize(ServletConfig config){
+      super.initialize(config);
       _servletConsole = RAop.find(IWebServletConsole.class);
    }
 
@@ -67,7 +69,7 @@ public abstract class FAbstractWebServlet
    public void process(String type,
                        HttpServletRequest httpRequest,
                        HttpServletResponse httpResponse){
-      String redirect = null;
+      String uri = null;
       FWebContext context = null;
       IWebSession session = null;
       long startTime = System.nanoTime();
@@ -75,7 +77,13 @@ public abstract class FAbstractWebServlet
          String language = _sessionLanguage;
          String encoding = _sessionEncoding;
          // 建立会话
-         session = makeSession(httpRequest, httpResponse);
+         String sessionCode = findSessionId(httpRequest);
+         boolean sessionExist = !RString.isEmpty(sessionCode);
+         if(sessionExist){
+            session = _sessionConsole.find(sessionCode);
+         }else{
+            sessionCode = RUuid.makeUniqueIdLower();
+         }
          if(session != null){
             session.referIncrease();
             // 设置语言编码
@@ -90,15 +98,15 @@ public abstract class FAbstractWebServlet
          // 建立环境
          httpRequest.setCharacterEncoding(encoding);
          context = new FWebContext(session, httpRequest, httpResponse);
-         httpResponse.setCharacterEncoding(encoding);
          if(_logger.debugAble()){
             _logger.debug(this, "process", "Build context: {1}", context.dump());
          }
          _bindConsole.bind(IWebContext.class, context);
+         _bindConsole.bind(IWebSession.class, session);
          //............................................................
          // 查找服务类型
          boolean process = false;
-         String uri = context.requestUri();
+         uri = context.requestUri();
          if(uri.startsWith(IWebServletConstant.WEB_SERVLET_URL)){
             uri = uri.substring(IWebServletConstant.WEB_SERVLET_URL_LEN);
             process = true;
@@ -115,6 +123,13 @@ public abstract class FAbstractWebServlet
             FWebServletRequest request = new FWebServletRequest(httpRequest);
             FWebServletResponse response = new FWebServletResponse(httpResponse);
             process(uri, context, request, response);
+            // 更新输出
+            response.setCharacterEncoding(encoding);
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            if(!sessionExist){
+               context.outputCookies().push(new FWebCookie(EWebConstants.SessionId, sessionCode));
+            }
+            updateResponse(context, httpRequest, httpResponse);
             httpResponse.flushBuffer();
          }
       }catch(Exception e){
@@ -127,7 +142,7 @@ public abstract class FAbstractWebServlet
          _bindConsole.clear();
          long endTime = System.nanoTime();
          if(_logger.debugAble()){
-            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (redirect={2})", type, redirect);
+            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (redirect={2})", type, uri);
          }
       }
    }

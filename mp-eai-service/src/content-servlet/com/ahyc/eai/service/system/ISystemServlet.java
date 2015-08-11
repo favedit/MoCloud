@@ -1,6 +1,7 @@
 package com.ahyc.eai.service.system;
 
 import org.mo.com.lang.EResult;
+import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.core.session.IWebSession;
@@ -21,6 +22,7 @@ public interface ISystemServlet
    //============================================================
    EResult info(IWebContext context,
                 IWebSession session,
+                ILogicContext logicContext,
                 IWebServletRequest request,
                 IWebServletResponse response);
 }

@@ -2,26 +2,22 @@ package org.mo.web.core.action.servlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.mo.com.lang.FAttributes;
-import org.mo.com.lang.FObjects;
-import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
 import org.mo.web.core.action.IActionConsole;
-import org.mo.web.core.action.common.IWebCookie;
+import org.mo.web.core.action.common.FWebCookie;
+import org.mo.web.core.common.EWebConstants;
 import org.mo.web.core.common.FAbstractHttpServlet;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.common.IWebServlet;
 import org.mo.web.protocol.context.FWebContext;
 import org.mo.web.protocol.context.IWebContext;
-import org.mo.web.protocol.context.IWebResponse;
 
 //============================================================
 // <T>页面处理模块。</T>
@@ -33,7 +29,6 @@ public abstract class FAbstractActionServlet
       implements
          IWebServlet
 {
-
    // 序列化标识
    private static final long serialVersionUID = 1L;
 
@@ -46,12 +41,11 @@ public abstract class FAbstractActionServlet
    //============================================================
    // <T>初始化网络应用程序。</T>
    //
-   // @param config 页面设置对象
+   // @param config 网络设置对象
    //============================================================
    @Override
-   public void init(ServletConfig config) throws ServletException{
-      super.init(config);
-      // 设置关联
+   public void initialize(ServletConfig config){
+      super.initialize(config);
       _actionConsole = RAop.find(IActionConsole.class);
    }
 
@@ -74,7 +68,13 @@ public abstract class FAbstractActionServlet
          String language = _sessionLanguage;
          String encoding = _sessionEncoding;
          // 建立会话
-         session = makeSession(httpRequest, httpResponse);
+         String sessionCode = findSessionId(httpRequest);
+         boolean sessionExist = !RString.isEmpty(sessionCode);
+         if(sessionExist){
+            session = _sessionConsole.find(sessionCode);
+         }else{
+            sessionCode = RUuid.makeUniqueIdLower();
+         }
          if(session != null){
             session.referIncrease();
             // 设置语言编码
@@ -89,44 +89,21 @@ public abstract class FAbstractActionServlet
          // 建立环境
          httpRequest.setCharacterEncoding(encoding);
          context = new FWebContext(session, httpRequest, httpResponse);
-         httpResponse.setCharacterEncoding(encoding);
-         httpResponse.setContentType("text/html; charset=" + encoding);
          if(_logger.debugAble()){
             _logger.debug(this, "process", "Build context: {1}", context.dump());
          }
          _bindConsole.bind(IWebContext.class, context);
+         _bindConsole.bind(IWebSession.class, session);
          //............................................................
          // 逻辑处理
          redirect = process(context);
-         // 建立输出内容
-         IWebResponse response = context.response();
-         FAttributes heads = response.heads();
-         int count = heads.count();
-         for(int n = 0; n < count; n++){
-            httpResponse.setHeader(heads.name(n), heads.value(n));
+         // 更新输出
+         httpResponse.setContentType("text/html; charset=" + encoding);
+         httpResponse.setCharacterEncoding(encoding);
+         if(!sessionExist){
+            context.outputCookies().push(new FWebCookie(EWebConstants.SessionId, sessionCode));
          }
-         // 设置Cookie
-         if(context.testCookieChanged()){
-            IAttributes cookies = context.cookies();
-            if(_logger.debugAble()){
-               _logger.debug(this, "process", "Set cookies. {cookies={1}}", cookies.dump());
-            }
-            Cookie cookie = new Cookie("MOCK", cookies.pack().toString());
-            cookie.setMaxAge(60 * 60 * 24 * 365);
-            httpResponse.addCookie(cookie);
-         }
-         if(context.hasOutputCookies()){
-            FObjects<IWebCookie> webCookies = context.outputCookies();
-            for(IWebCookie webCookie : webCookies){
-               if(_logger.debugAble()){
-                  _logger.debug(this, "process", "Set cookie. {name={1}, value={2}}", webCookie.name(), webCookie.value());
-               }
-               Cookie cookie = new Cookie(webCookie.name(), webCookie.value());
-               cookie.setPath("/");
-               cookie.setMaxAge(60 * 60 * 24 * 365);
-               httpResponse.addCookie(cookie);
-            }
-         }
+         updateResponse(context, httpRequest, httpResponse);
          // 画面转向
          if(!IActionResult.NO_REDIRECT.equals(redirect)){
             String uri = RString.nvl(redirect, context.requestUri());

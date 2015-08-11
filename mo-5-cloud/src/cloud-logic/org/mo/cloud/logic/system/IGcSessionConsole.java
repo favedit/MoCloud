@@ -25,6 +25,16 @@ public interface IGcSessionConsole
    // <T>打开一个会话。</T>
    //
    // @param context 逻辑环境
+   // @param sessionId 会话编号
+   // @return 会话信息
+   //============================================================
+   FGcSessionInfo open(ILogicContext context,
+                       String sessionId);
+
+   //============================================================
+   // <T>打开一个会话。</T>
+   //
+   // @param context 逻辑环境
    // @param userId 用户编号
    // @param fromCd 来源类型
    // @return 会话信息

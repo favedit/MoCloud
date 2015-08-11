@@ -14,6 +14,9 @@ public interface IWebServlet
    // 提交方法
    String METHOD_POST = "Post";
 
+   // 提交方法
+   String METHOD_OPTIONS = "Options";
+
    //============================================================
    // <T>初始化数据，创建全局应用管理对象。</T>
    //

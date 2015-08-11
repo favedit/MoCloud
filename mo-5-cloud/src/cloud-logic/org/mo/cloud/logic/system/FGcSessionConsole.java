@@ -63,6 +63,32 @@ public class FGcSessionConsole
    //============================================================
    @Override
    public FGcSessionInfo open(ILogicContext context,
+                              String sessionId){
+      FCacheSystemSessionLogic logic = findLogic(context);
+      // 新建记录
+      FGcSessionInfo session = logic.findByGuid(FGcSessionInfo.class, sessionId);
+      if(session == null){
+         session = logic.doPrepare(FGcSessionInfo.class);
+         session.setGuid(sessionId);
+         logic.doInsert(session);
+      }else{
+         logic.doUpdate(session);
+      }
+      _logger.debug(this, "open", "Open session. (guid={1})", session.guid());
+      // 返回结果
+      return session;
+   }
+
+   //============================================================
+   // <T>打开一个会话。</T>
+   //
+   // @param context 逻辑环境
+   // @param userId 用户编号
+   // @param fromCd 来源类型
+   // @return 会话信息
+   //============================================================
+   @Override
+   public FGcSessionInfo open(ILogicContext context,
                               long userId,
                               int fromCd){
       FCacheSystemSessionLogic logic = findLogic(context);

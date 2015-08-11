@@ -1,13 +1,14 @@
 package org.mo.web.core.service.servlet;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.com.lang.cultrue.RCulture;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -16,6 +17,8 @@ import org.mo.com.text.RDatabaseFormat;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.RAop;
+import org.mo.web.core.action.common.FWebCookie;
+import org.mo.web.core.common.EWebConstants;
 import org.mo.web.core.common.FAbstractHttpServlet;
 import org.mo.web.core.service.IServiceConsole;
 import org.mo.web.core.service.common.EWebServiceFormat;
@@ -51,11 +54,11 @@ public abstract class FAbstractServiceServlet
    //============================================================
    // <T>初始化网络应用程序。</T>
    //
-   // @param config 页面设置对象
+   // @param config 网络设置对象
    //============================================================
    @Override
-   public void init(ServletConfig config) throws ServletException{
-      super.init(config);
+   public void initialize(ServletConfig config){
+      super.initialize(config);
       _serviceConsole = RAop.find(IServiceConsole.class);
    }
 
@@ -73,14 +76,21 @@ public abstract class FAbstractServiceServlet
       String uri = null;
       FWebContext context = null;
       IWebSession session = null;
-      FXmlDocument inputDoc = null;
-      FXmlDocument outputDoc = null;
+      FXmlDocument inputDocument = null;
+      FXmlDocument outputDocument = null;
       int formatCd = EWebServiceFormat.Xml;
       try{
          String language = _sessionLanguage;
          String encoding = _sessionEncoding;
+         InputStream inputStream = httpRequest.getInputStream();
          // 建立会话
-         session = makeSession(httpRequest, httpResponse);
+         String sessionCode = findSessionId(httpRequest);
+         boolean sessionExist = !RString.isEmpty(sessionCode);
+         if(sessionExist){
+            session = _sessionConsole.find(sessionCode);
+         }else{
+            sessionCode = RUuid.makeUniqueIdLower();
+         }
          if(session != null){
             session.referIncrease();
             // 设置语言编码
@@ -93,14 +103,14 @@ public abstract class FAbstractServiceServlet
          }
          //............................................................
          // 获取传入内容
-         inputDoc = new FXmlDocument();
-         inputDoc.setOptionAttributeCareCase(false);
+         inputDocument = new FXmlDocument();
+         inputDocument.setOptionAttributeCareCase(false);
          int contentLength = httpRequest.getContentLength();
          if(contentLength > 0){
             // 按照XML解析
-            inputDoc.loadStream(httpRequest.getInputStream());
+            inputDocument.loadStream(inputStream);
             if(_logger.debugAble()){
-               _logger.debugFull(this, "process", "Build input xml.\n{1}", inputDoc.xml());
+               _logger.debugFull(this, "process", "Build input xml.\n{1}", inputDocument.xml());
             }
          }
          //............................................................
@@ -112,7 +122,8 @@ public abstract class FAbstractServiceServlet
             _logger.debug(this, "process", "Build context: {1}", context.dump());
          }
          _bindConsole.bind(IWebContext.class, context);
-         // 设置输出信息
+         _bindConsole.bind(IWebSession.class, session);
+         // 更新输出
          if(formatCd == EWebServiceFormat.Json){
             httpResponse.setContentType(IWebContentType.JSON);
          }else{
@@ -120,11 +131,17 @@ public abstract class FAbstractServiceServlet
          }
          httpResponse.setHeader(IWebHeaderType.PRAGMA, IWebHeaderType.NO_CACHE);
          httpResponse.setHeader(IWebHeaderType.CACHE_CONTROL, IWebHeaderType.NO_CACHE);
+         httpResponse.setHeader("Access-Control-Allow-Origin", "*");
          httpResponse.setDateHeader(IWebHeaderType.EXPIRES, 1);
+         if(!sessionExist){
+            context.outputCookies().push(new FWebCookie(EWebConstants.SessionId, sessionCode));
+         }
+         updateResponse(context, httpRequest, httpResponse);
+         //............................................................
          // 设置输出内容
-         outputDoc = new FXmlDocument();
-         outputDoc.setOptionAttributeCareCase(false);
-         outputDoc.setOptionAttributeReturn(false);
+         outputDocument = new FXmlDocument();
+         outputDocument.setOptionAttributeCareCase(false);
+         outputDocument.setOptionAttributeReturn(false);
          // 查找服务类型
          uri = context.requestUri();
          if(uri.endsWith(".ws")){
@@ -134,7 +151,7 @@ public abstract class FAbstractServiceServlet
                uri = uri.substring(find + 1);
             }
             // 设置URL参数到输入节点内
-            FXmlNode inputNode = inputDoc.root();
+            FXmlNode inputNode = inputDocument.root();
             for(IStringPair pair : context.parameters()){
                String paramName = RDatabaseFormat.toJavaClassName(pair.name());
                String paramValue = pair.value();
@@ -144,7 +161,7 @@ public abstract class FAbstractServiceServlet
             }
             // 执行逻辑过程
             FWebXmlInput input = new FWebXmlInput(inputNode);
-            FXmlNode outputNode = outputDoc.root();
+            FXmlNode outputNode = outputDocument.root();
             outputNode.setName("Service");
             // 设置函数
             String action = context.parameter("action");
@@ -179,20 +196,20 @@ public abstract class FAbstractServiceServlet
          // 清空关联信息
          _bindConsole.clear();
          // 释放输出内容
-         if(outputDoc != null){
+         if(outputDocument != null){
             try{
                // 输出服务结果
                if(_logger.debugAble()){
-                  _logger.debugFull(this, "process", "Build output xml.\n{1}", outputDoc.xml());
+                  _logger.debugFull(this, "process", "Build output xml.\n{1}", outputDocument.xml());
                }
                // 转换格式
                OutputStream outputStream = httpResponse.getOutputStream();
                if(formatCd == EWebServiceFormat.Json){
-                  byte[] jsonData = RWebService.xml2json(outputDoc);
+                  byte[] jsonData = RWebService.xml2json(outputDocument);
                   outputStream.write(jsonData);
                }else{
                   // 输出XML格式格式
-                  outputDoc.saveStream(outputStream);
+                  outputDocument.saveStream(outputStream);
                }
             }catch(Exception e){
                _logger.error(this, "process", e);

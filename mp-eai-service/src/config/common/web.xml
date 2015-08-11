@@ -16,10 +16,10 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.session.IWebSessionConsole'
-         class = 'org.mo.cloud.core.web.FGcSessionConsole'
+         class = 'org.mo.cloud.core.web.FGcWebSessionConsole'
          scope = 'global' >
       <Property name='valid'>Y</Property>
-      <Property name='sessionClassName'>org.mo.cloud.core.web.FGcSession</Property>
+      <Property name='sessionClassName'>org.mo.cloud.core.web.FGcWebSession</Property>
       <Property name='server_code'>eai.service.logic</Property>
       <Property name='logic_code'>eai.service</Property>
       <Property name='interval'>10000</Property>

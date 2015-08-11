@@ -32,7 +32,6 @@ public class FAbstractStatisticsServlet
       byte[] data = stream.memory();
       //............................................................
       // 发送数据
-      response.setCharacterEncoding("utf-8");
       response.setStatus(HttpServletResponse.SC_OK);
       response.setHeader("Cache-Control", "max-age=0");
       response.addHeader("Access-Control-Allow-Origin", "*");

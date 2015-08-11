@@ -1,6 +1,5 @@
 package org.mo.web.core.service.servlet;
 
-import javax.servlet.ServletConfig;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -11,15 +10,6 @@ public class FServiceServlet
 {
    // 序列化标志
    private static final long serialVersionUID = 1L;
-
-   //============================================================
-   // <T>初始化数据，创建全局应用管理对象。</T>
-   //
-   // @param config 页面设置对象
-   //============================================================
-   @Override
-   public void initialize(ServletConfig config){
-   }
 
    //============================================================
    // <T>网页逻辑处理。</T>

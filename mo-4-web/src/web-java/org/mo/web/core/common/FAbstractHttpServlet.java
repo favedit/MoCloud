@@ -7,15 +7,20 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FObjects;
+import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
 import org.mo.core.bind.IBindConsole;
+import org.mo.web.core.action.common.IWebCookie;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.common.IWebServlet;
+import org.mo.web.protocol.context.FWebContext;
+import org.mo.web.protocol.context.IWebResponse;
 
 //============================================================
 // <T>网络处理。</T>
@@ -52,18 +57,26 @@ public abstract class FAbstractHttpServlet
    //============================================================
    // <T>初始化网络应用程序。</T>
    //
+   // @param config 网络设置对象
+   //============================================================
+   @Override
+   public void initialize(ServletConfig config){
+      _bindConsole = RAop.find(IBindConsole.class);
+      _sessionConsole = RAop.find(IWebSessionConsole.class);
+      _sessionValid = _sessionConsole.isValid();
+      _sessionTimeout = (int)(_sessionConsole.timeout() / 1000);
+   }
+
+   //============================================================
+   // <T>初始化网络应用程序。</T>
+   //
    // @param config 页面设置对象
    //============================================================
    @Override
    public void init(ServletConfig config) throws ServletException{
       super.init(config);
-      // 设置关联
-      _bindConsole = RAop.find(IBindConsole.class);
-      _sessionConsole = RAop.find(IWebSessionConsole.class);
-      _sessionValid = _sessionConsole.isValid();
-      _sessionTimeout = (int)(_sessionConsole.timeout() / 1000);
+      // 初始化设置
       try{
-         // 初始化设置
          initialize(config);
       }catch(Exception e){
          _logger.error(this, "init", e);
@@ -95,6 +108,52 @@ public abstract class FAbstractHttpServlet
    }
 
    //============================================================
+   // <T>响应网页的Post访问请求。</T>
+   //
+   // @param request 页面请求对象
+   // @param response 页面响应对象
+   //============================================================
+   @Override
+   protected void doOptions(HttpServletRequest request,
+                            HttpServletResponse response) throws ServletException, IOException{
+      process(IWebServlet.METHOD_OPTIONS, request, response);
+   }
+
+   //============================================================
+   // <T>获得会话信息。</T>
+   //
+   // @param httpRequest 页面请求对象
+   // @return 会话编号
+   //============================================================
+   public String findSessionId(HttpServletRequest httpRequest){
+      String sessionCode = null;
+      // 检查有效性
+      if(_sessionValid){
+         // 从请求信息中获得会话编号
+         String url = httpRequest.getQueryString();
+         if((url != null) && url.contains("&sid=")){
+            sessionCode = RString.mid(url, "&sid=", "&");
+         }
+         // 从头信息中获得会话编号
+         if(RString.isEmpty(sessionCode)){
+            sessionCode = httpRequest.getHeader(EWebConstants.SessionId);
+         }
+         // 从COOKIE中获得会话编号
+         if(RString.isEmpty(sessionCode)){
+            Cookie[] cookies = httpRequest.getCookies();
+            if(cookies != null){
+               for(Cookie cookie : cookies){
+                  if(EWebConstants.SessionId.equals(cookie.getName())){
+                     sessionCode = cookie.getValue();
+                  }
+               }
+            }
+         }
+      }
+      return sessionCode;
+   }
+
+   //============================================================
    // <T>生成会话信息。</T>
    //
    // @param httpRequest 页面请求对象
@@ -103,39 +162,73 @@ public abstract class FAbstractHttpServlet
    public IWebSession makeSession(HttpServletRequest httpRequest,
                                   HttpServletResponse httpResponse){
       IWebSession session = null;
-      // 建立会话
-      if(_sessionValid){
-         // 获得会话编号
-         String sessionCode = httpRequest.getHeader(EWebConstants.SessionId);
-         Cookie[] cookies = httpRequest.getCookies();
-         if(cookies != null){
-            for(Cookie cookie : cookies){
-               if(EWebConstants.SessionId.equals(cookie.getName())){
-                  sessionCode = cookie.getValue();
-               }
-            }
-         }
-         if(RString.isEmpty(sessionCode)){
-            HttpSession httpSession = httpRequest.getSession();
-            sessionCode = httpSession.getId();
-            int inactiveInterval = httpSession.getMaxInactiveInterval();
-            if(inactiveInterval != _sessionTimeout){
-               httpSession.setMaxInactiveInterval(_sessionTimeout);
-            }
-         }
+      // 查找会话编号
+      String sessionCode = findSessionId(httpRequest);
+      if(!RString.isEmpty(sessionCode)){
          session = _sessionConsole.find(sessionCode);
-         if(session == null){
-            // 建立会话内容
-            session = _sessionConsole.build(sessionCode);
-            // 设置会话信息
-            Cookie cookie = new Cookie(EWebConstants.SessionId, session.id());
-            cookie.setPath("/");
-            cookie.setMaxAge((int)(_sessionConsole.timeout() / 1000));
-            httpResponse.addCookie(cookie);
-         }
-         // 绑定会话内容
+      }
+      //      // 查找会话对象
+      //      if(session == null){
+      //         // 建立会话内容
+      //         session = _sessionConsole.build(sessionCode);
+      //         // 设置会话信息
+      //         Cookie cookie = new Cookie(EWebConstants.SessionId, session.id());
+      //         cookie.setPath("/");
+      //         cookie.setMaxAge((int)(_sessionConsole.timeout() / 1000));
+      //         httpResponse.addCookie(cookie);
+      //      }
+      // 绑定会话内容
+      if(session != null){
          _bindConsole.bind(IWebSession.class, session);
       }
       return session;
+   }
+
+   //============================================================
+   // <T>更新输出内容。</T>
+   //
+   // @param context 页面环境
+   // @param httpRequest 页面请求对象
+   // @param httpResponse 页面响应对象
+   //============================================================
+   public void updateResponse(FWebContext context,
+                              HttpServletRequest httpRequest,
+                              HttpServletResponse httpResponse){
+      // 建立输出头信息
+      IWebResponse response = context.response();
+      FAttributes heads = response.heads();
+      if(!heads.isEmpty()){
+         int count = heads.count();
+         for(int i = 0; i < count; i++){
+            String headName = heads.name(i);
+            String headValue = heads.value(i);
+            httpResponse.setHeader(headName, headValue);
+         }
+      }
+      // 设置默认COOKIE
+      if(context.testCookieChanged()){
+         IAttributes cookies = context.cookies();
+         if(_logger.debugAble()){
+            _logger.debug(this, "process", "Set cookies. {cookies={1}}", cookies.dump());
+         }
+         Cookie cookie = new Cookie("MOCK", cookies.pack().toString());
+         cookie.setMaxAge(60 * 60 * 24 * 365);
+         httpResponse.addCookie(cookie);
+      }
+      // 更新输出COOKIE
+      if(context.hasOutputCookies()){
+         FObjects<IWebCookie> webCookies = context.outputCookies();
+         for(IWebCookie webCookie : webCookies){
+            String cookieName = webCookie.name();
+            String cookieValue = webCookie.value();
+            if(_logger.debugAble()){
+               _logger.debug(this, "process", "Set cookie. {name={1}, value={2}}", cookieName, cookieValue);
+            }
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            cookie.setPath("/");
+            cookie.setMaxAge(-1);
+            httpResponse.addCookie(cookie);
+         }
+      }
    }
 }

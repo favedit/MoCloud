@@ -1,6 +1,5 @@
 package org.mo.web.core.servlet;
 
-import javax.servlet.ServletConfig;
 import org.mo.web.core.servlet.common.FAbstractWebServlet;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
@@ -14,15 +13,6 @@ public class FWebServletProcess
 {
    // 序列化标志
    private static final long serialVersionUID = 1L;
-
-   //============================================================
-   // <T>初始化网络应用程序。</T>
-   //
-   // @param config 网络设置对象
-   //============================================================
-   @Override
-   public void initialize(ServletConfig config){
-   }
 
    //============================================================
    // <T>网页请求逻辑对象执行开始。</T>

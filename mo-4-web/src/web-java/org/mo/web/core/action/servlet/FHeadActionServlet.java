@@ -35,7 +35,9 @@ public class FHeadActionServlet
     *
     * @param config 网络设置对象
     */
+   @Override
    public void initialize(ServletConfig config){
+      super.initialize(config);
       _console = RAop.find(IActionConsole.class);
    }
 
@@ -45,6 +47,7 @@ public class FHeadActionServlet
     * @param request 网络请求对象
     * @param response 网络响应对象
     */
+   @Override
    public String process(IWebContext context){
       String redirect = null;
       String action = context.head(HEAD_ACTION);

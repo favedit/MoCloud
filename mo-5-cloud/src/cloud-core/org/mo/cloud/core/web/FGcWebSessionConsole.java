@@ -15,7 +15,7 @@ import org.mo.web.core.session.IWebSession;
 // <T>服务命令处理控制台。</T>
 // <P>根据访问的地址，对页面服务执行分发处理。</P>
 //============================================================
-public class FGcSessionConsole
+public class FGcWebSessionConsole
       extends FWebSessionConsole
 {
    // 服务代码
@@ -39,18 +39,16 @@ public class FGcSessionConsole
    @Override
    @SuppressWarnings("unchecked")
    public <V extends ISession> V find(String sessionCode){
-      FGcSession session = null;
+      FGcWebSession session = new FGcWebSession();
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 根据唯一编号查找
          FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
          FCacheSystemSessionUnit unit = logic.findByGuid(sessionCode);
-         if(unit == null){
-            unit = logic.search("(LOGIC_CODE='" + _logicCode + "') AND (SESSION_CODE='" + sessionCode + "')");
-         }
          // 创建会话
          if(unit != null){
-            session = new FGcSession();
             session.loadUnit(unit);
+         }else{
+            session.setId(sessionCode);
          }
       }catch(Exception e){
          throw new FFatalError(e);
@@ -66,7 +64,7 @@ public class FGcSessionConsole
    //============================================================
    @Override
    public IWebSession build(String sessionId){
-      FGcSession session = null;
+      FGcWebSession session = null;
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 新建会话
          FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
@@ -76,7 +74,7 @@ public class FGcSessionConsole
          unit.setSessionCode(sessionId);
          logic.doInsert(unit);
          // 加载会话
-         session = new FGcSession();
+         session = new FGcWebSession();
          session.loadUnit(unit);
       }catch(Exception e){
          throw new FFatalError(e);
