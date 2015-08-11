@@ -864,7 +864,7 @@ public class RString
          char value = source.charAt(i);
          hash = 31 * hash + value;
       }
-      return hash;
+      return Math.abs(hash);
    }
 
    //============================================================

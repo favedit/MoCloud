@@ -41,6 +41,10 @@ public class FStatisticsCustomerServlet
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      // 检查参数
       String beginSource = context.parameter("begin_date");
       String endSource = context.parameter("end_date");
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
@@ -88,6 +92,10 @@ public class FStatisticsCustomerServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
+      // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
       // 检查参数
       String beginSource = context.parameter("begin_date");
       String endSource = context.parameter("end_date");

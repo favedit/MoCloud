@@ -3,8 +3,14 @@ package com.ahyc.eai.service.common;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.IStringPair;
+import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RString;
 import org.mo.com.net.EMime;
+import org.mo.content.core.system.ISystemInfoConsole;
+import org.mo.core.aop.face.ALink;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -15,6 +21,53 @@ import org.mo.web.protocol.context.IWebContext;
 public class FAbstractStatisticsServlet
       extends FObject
 {
+   @ALink
+   protected ISystemInfoConsole _infoConsole;
+
+   //============================================================
+   // <T>逻辑处理。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   public boolean checkParameters(IWebContext context,
+                                  IWebServletRequest request,
+                                  IWebServletResponse response){
+      // 获得参数
+      int parameterHash = 0;
+      FAttributes parameters = new FAttributes();
+      for(IStringPair pair : context.parameters()){
+         String name = pair.name();
+         if("do".equals(name)){
+            continue;
+         }
+         if("sid".equals(name)){
+            continue;
+         }
+         if("sign".equals(name)){
+            parameterHash = RInteger.parse(pair.value());
+            continue;
+         }
+         parameters.set(name, pair.value());
+      }
+      // 参数排序
+      parameters.sortByName();
+      // 计算代码
+      int token = _infoConsole.token();
+      String pack = parameters.joinValue("");
+      int hash = RString.calculateHash(pack, token);
+      if(parameterHash != hash){
+         // 校验错误
+         FByteStream stream = new FByteStream();
+         stream.write(new String("Sign is invalid.").getBytes());
+         sendStream(context, request, response, stream);
+         return false;
+      }
+      return true;
+   }
+
    //============================================================
    // <T>逻辑处理。</T>
    //

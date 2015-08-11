@@ -5,7 +5,6 @@ import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
-import org.mo.content.core.system.ISystemInfoConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -21,8 +20,6 @@ public class FSystemServlet
       implements
          ISystemServlet
 {
-   @ALink
-   protected ISystemInfoConsole _infoConsole;
 
    // 会话控制台
    @ALink

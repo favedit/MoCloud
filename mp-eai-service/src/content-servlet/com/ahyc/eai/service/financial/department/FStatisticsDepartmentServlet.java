@@ -41,6 +41,10 @@ public class FStatisticsDepartmentServlet
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      // 检查参数
       String beginSource = context.parameter("begin");
       String endSource = context.parameter("end");
       System.out.println(beginSource);
@@ -93,6 +97,10 @@ public class FStatisticsDepartmentServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
+      // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
       // 检查参数
       String beginSource = context.parameter("begin_date");
       String endSource = context.parameter("end_date");

@@ -3,10 +3,12 @@ package org.mo.com.lang.generic;
 import java.util.Iterator;
 import org.mo.com.lang.EStringCase;
 import org.mo.com.lang.FString;
+import org.mo.com.lang.FStringComparable;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.ICopyable;
 import org.mo.com.lang.IPack;
 import org.mo.com.lang.IStringPair;
+import org.mo.com.lang.RArray;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RDump;
@@ -288,6 +290,33 @@ public abstract class MAttributes
    public void set(String name,
                    double value){
       set(name, Double.toString(value));
+   }
+
+   //==========================================================
+   // <T>将内部所有内容目关联成一个字符串。</T>
+   //
+   // @method
+   // @param split:String 分隔符
+   // @return String 字符串
+   //==========================================================
+   public String joinValue(String split){
+      FString source = new FString();
+      for(int i = 0; i < _count; i++){
+         if(i > 0){
+            source.append(split);
+         }
+         source.append(_values[i]);
+      }
+      return source.toString();
+   }
+
+   //==========================================================
+   // <T>按照名称排序。</T>
+   //
+   // @method
+   //==========================================================
+   public void sortByName(){
+      RArray.pairSort(_names, _values, 0, _count, new FStringComparable(), null);
    }
 
    //============================================================

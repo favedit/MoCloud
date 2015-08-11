@@ -145,4 +145,95 @@ public class RArray
       System.arraycopy(alloc, 0, result, 0, index);
       return result;
    }
+
+   //==========================================================
+   // <T>对值对快速排序。</T>
+   //
+   // @method
+   // @param names:Array 名称数组
+   // @param values:Array 内容数组
+   // @param begin:Integer 开始位置
+   // @param end:Integer 结束位置
+   // @param comparer:Function 比较器
+   // @param parameters:Object 参数
+   //==========================================================
+   public static <N, V> int pairSortMid(N[] names,
+                                        V[] values,
+                                        int begin,
+                                        int end,
+                                        IObjectComparable<N> comparer,
+                                        Object parameters){
+      N name = names[begin];
+      V value = null;
+      if(values != null){
+         value = values[begin];
+      }
+      while(begin < end){
+         while((begin < end) && comparer.compare(names[end], name, parameters) >= 0){
+            end--;
+         }
+         names[begin] = names[end];
+         if(values != null){
+            values[begin] = values[end];
+         }
+         while((begin < end) && comparer.compare(names[begin], name, parameters) <= 0){
+            begin++;
+         }
+         names[end] = names[begin];
+         if(values != null){
+            values[end] = values[begin];
+         }
+      }
+      names[begin] = name;
+      if(values != null){
+         values[begin] = value;
+      }
+      return begin;
+   }
+
+   //==========================================================
+   // <T>对值对快速排序。</T>
+   //
+   // @method
+   // @param names:Array 名称数组
+   // @param values:Array 内容数组
+   // @param begin:Integer 开始位置
+   // @param end:Integer 结束位置
+   // @param comparer:Function 比较器
+   // @param parameters:Object 参数
+   //==========================================================
+   public static <N, V> void pairSortSub(N[] names,
+                                         V[] values,
+                                         int begin,
+                                         int end,
+                                         IObjectComparable<N> comparer,
+                                         Object parameters){
+      if(begin < end){
+         int mid = pairSortMid(names, values, begin, end, comparer, parameters);
+         pairSortSub(names, values, begin, mid - 1, comparer, parameters);
+         pairSortSub(names, values, mid + 1, end, comparer, parameters);
+      }
+   }
+
+   //==========================================================
+   // <T>对值对快速排序。</T>
+   //
+   // @method
+   // @param names:Array 名称数组
+   // @param values:Array 内容数组
+   // @param offset:Integer 位置
+   // @param count:Integer 总数
+   // @param comparer:Function 比较器
+   // @param parameters:Object 参数
+   //==========================================================
+   public static <N, V> void pairSort(N[] names,
+                                      V[] values,
+                                      int offset,
+                                      int count,
+                                      IObjectComparable<N> comparer,
+                                      Object parameters){
+      int begin = offset;
+      int end = offset + count - 1;
+      pairSortSub(names, values, begin, end, comparer, parameters);
+   }
 }
