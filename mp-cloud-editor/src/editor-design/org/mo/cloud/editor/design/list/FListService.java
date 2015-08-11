@@ -129,9 +129,48 @@ public class FListService
    // @param output 网络输出
    //============================================================
    @Override
-   public void query(IWebContext context,
-                     IWebInput input,
-                     IWebOutput output){
+   public EResult query(IWebContext context,
+                        IWebInput input,
+                        IWebOutput output){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult queryContainer(IWebContext context,
+                                 IWebInput input,
+                                 IWebOutput output){
+      String containerName = context.parameter("container");
+      FContentObject xframe = _listConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
+      FXmlNode xconfig = output.config().createNode(xframe.name());
+      xconfig.attributes().assign(xframe.attributes());
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult queryItem(IWebContext context,
+                            IWebInput input,
+                            IWebOutput output){
+      String containerName = context.parameter("container");
+      String itemName = context.parameter("item");
+      FContentObject xframe = _listConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
+      FContentObject xitem = xframe.search(itemName);
+      FXmlNode xconfig = output.config().createNode(xitem.name());
+      xconfig.attributes().assign(xitem.attributes());
+      return EResult.Success;
    }
 
    //============================================================

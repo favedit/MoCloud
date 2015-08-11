@@ -39,9 +39,31 @@ public interface IListService
    // @param input 网络输入
    // @param output 网络输出
    //============================================================
-   void query(IWebContext context,
-              IWebInput input,
-              IWebOutput output);
+   EResult query(IWebContext context,
+                 IWebInput input,
+                 IWebOutput output);
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult queryContainer(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output);
+
+   //============================================================
+   // <T>查询配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   EResult queryItem(IWebContext context,
+                     IWebInput input,
+                     IWebOutput output);
 
    //============================================================
    // <T>新建配置处理。</T>

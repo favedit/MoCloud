@@ -164,14 +164,14 @@ public class FStatisticsCustomerServlet
          customerTotal += phaseUnit.customerCount();
       }
       stream.writeDouble(investmentTotal);
-      stream.writeDouble(customerTotal);
+      stream.writeUint32(customerTotal);
       // 输出数据集合
       int count = phaseDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          stream.writeString(phaseUnit.recordDate().format());
          stream.writeDouble(phaseUnit.investment());
-         stream.writeDouble(phaseUnit.customerCount());
+         stream.writeUint32(phaseUnit.customerCount());
       }
       int dataLength = stream.length();
       _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);

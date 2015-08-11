@@ -53,8 +53,6 @@ function checkInfo(){
                   <TD><IMG src='/ars/logo.png' style='width:240px;height:34px;'>v0.1.0</TD>
                   <TD width='300px' align='right' style='padding-right:20px'>
                      <A href='/Index.wa' style='color:#999999'>返回首页</A>
-                     |
-                     <A href='bbs' style='color:#999999'>论坛</A>
                   </TD>
                </TR>
             </TABLE>
