@@ -198,12 +198,15 @@ public class FListService
    public EResult update(IWebContext context,
                          IWebInput input,
                          IWebOutput output){
-      FXmlNode xlist = input.config().findNode("List");
-      String name = xlist.get("name");
-      // 查找目录定义
-      FContentObject content = _listConsole.findDefine(_storageName, name, EPersistenceMode.Config);
-      content.mergeConfig(xlist);
-      _listConsole.update(_storageName, content);
+      //String groupCd = context.parameter("group");
+      String containerName = context.parameter("container");
+      FXmlNode xcontent = input.config().findNode("Content");
+      // 获得定义
+      FContentObject xlist = _listConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
+      for(IStringPair pair : xcontent.attributes()){
+         xlist.set(pair.name(), pair.value());
+      }
+      _listConsole.update(_storageName, xlist);
       return EResult.Success;
    }
 
