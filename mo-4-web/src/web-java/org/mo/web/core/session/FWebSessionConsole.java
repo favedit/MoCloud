@@ -6,6 +6,7 @@ import org.mo.eng.security.IPermissionConsole;
 import org.mo.eng.session.FSessionConsole;
 import org.mo.eng.session.common.FSession;
 import org.mo.eng.session.common.FSessionWorker;
+import org.mo.eng.session.common.ISession;
 import org.mo.web.core.container.IWebContainerConsole;
 
 //============================================================
@@ -46,6 +47,18 @@ public class FWebSessionConsole
       session.setPermission(_permissionConsole.createPermission());
       session.culture().assign(_cultureConsole.culture());
       return session;
+   }
+
+   //============================================================
+   // <T>根据代码查找会话对象。</T>
+   //
+   // @param code 代码
+   // @return 会话对象
+   //============================================================
+   @Override
+   @SuppressWarnings("unchecked")
+   public <V extends ISession> V find(String sessionCode){
+      return (V)sync(IWebSession.class, sessionCode);
    }
 
    //============================================================

@@ -3,6 +3,12 @@ package com.ahyc.eai.service.financial.customer;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseUnit;
+import org.mo.com.collections.FDataset;
+import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -45,8 +51,8 @@ public class FStatisticsCustomerServlet
          return EResult.Failure;
       }
       // 检查参数
-      String beginSource = context.parameter("begin_date");
-      String endSource = context.parameter("end_date");
+      String beginSource = context.parameter("begin");
+      String endSource = context.parameter("end");
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
@@ -58,24 +64,58 @@ public class FStatisticsCustomerServlet
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
-      FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
-      String whereSql = "CUSTOMER_ACTION_DATE >= STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(RString.format(whereSql, beginDate.format(), endDate.format()), "CUSTOMER_ACTION_DATE");
+      // 设置输出流
       FByteStream stream = new FByteStream();
+      ISqlConnection connection = logicContext.activeConnection("statistics");
+      // 输出当日合计数据
+      FSql statisticsSql = new FSql();
+      statisticsSql.append("SELECT");
+      statisticsSql.append(" SUM(INVESTMENT) INVESTMENT_COUNT");
+      statisticsSql.append(",MAX(INVESTMENT_TOTAL) INVESTMENT_TOTAL");
+      statisticsSql.append(",SUM(CUSTOMER_COUNT) CUSTOMER_COUNT");
+      statisticsSql.append(",MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL");
+      statisticsSql.append(" FROM ST_FIN_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
+      FRow statisticsRow = connection.find(statisticsSql);
+      stream.writeDouble(statisticsRow.getDouble("investment_count"));
+      stream.writeDouble(statisticsRow.getDouble("investment_total"));
+      stream.writeInt32(statisticsRow.getInt("customer_count"));
+      stream.writeInt32(statisticsRow.getInt("customer_total"));
+      //............................................................
+      // 输出排行数据
+      FSql fetchSql = new FSql();
+      fetchSql.append("SELECT * FROM (");
+      fetchSql.append("SELECT CUSTOMER_ID,CUSTOMER_LABEL");
+      fetchSql.append(",SUM(MARKETER_INVESTMENT) INVESTMENT_TOTAL");
+      fetchSql.append(" FROM ST_FIN_CUSTOMER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
+      fetchSql.append("GROUP BY MARKETER_ID");
+      fetchSql.append(") t ORDER BY INVESTMENT_TOTAL DESC LIMIT 3");
+      FDataset rankDataset = connection.fetchDataset(fetchSql);
+      int rankCount = rankDataset.count();
+      stream.writeInt32(rankCount);
+      for(FRow row : rankDataset){
+         stream.writeString(RString.left(row.get("customer_label"), 1));
+         stream.writeString("0000");
+         stream.writeString("0000");
+         stream.writeDouble(row.getDouble("investment_total"));
+      }
+      //............................................................
+      // 输出即时数据
+      FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
+      String whereSql = "CUSTOMER_ACTION_CD=1 AND CUSTOMER_ACTION_DATE >= STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(RString.format(whereSql, beginDate.format(), endDate.format()), "CUSTOMER_ACTION_DATE");
       int count = dynamicDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
-         stream.writeString(dynamicUnit.departmentLabel());
-         stream.writeString(dynamicUnit.marketerLabel());
-         stream.writeInt32(dynamicUnit.customerActionCd());
-         stream.writeString(dynamicUnit.customerLabel());
+         stream.writeString(dynamicUnit.customerActionDate().format());
+         stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
+         stream.writeDouble(dynamicUnit.customerActionAmount());
       }
-      int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics marketer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       //............................................................
       // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics marketer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 
@@ -97,9 +137,8 @@ public class FStatisticsCustomerServlet
          return EResult.Failure;
       }
       // 检查参数
-      String beginSource = context.parameter("begin_date");
-      String endSource = context.parameter("end_date");
-      //String span = context.parameter("span");
+      String beginSource = context.parameter("begin");
+      String endSource = context.parameter("end");
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
@@ -107,11 +146,35 @@ public class FStatisticsCustomerServlet
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long dateSpan = endDate.get() - beginDate.get();
-      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24)){
+      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24 * 7)){
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
+      // 设置输出流
       FByteStream stream = new FByteStream();
+      // 输出总计数据
+      FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
+      String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
+      FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(RString.format(phaseWhereSql, beginDate.format(), endDate.format()), "RECORD_DATE ASC");
+      // 计算阶段统计
+      double investmentTotal = 0;
+      int customerTotal = 0;
+      for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
+         investmentTotal += phaseUnit.investment();
+         customerTotal += phaseUnit.customerCount();
+      }
+      stream.writeDouble(investmentTotal);
+      stream.writeDouble(customerTotal);
+      // 输出数据集合
+      int count = phaseDataset.count();
+      stream.writeInt32(count);
+      for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
+         stream.writeString(phaseUnit.recordDate().format());
+         stream.writeDouble(phaseUnit.investment());
+         stream.writeDouble(phaseUnit.customerCount());
+      }
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       //............................................................
       // 发送数据
       return sendStream(context, request, response, stream);
