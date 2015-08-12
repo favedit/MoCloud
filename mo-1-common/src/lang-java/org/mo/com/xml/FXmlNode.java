@@ -6,6 +6,7 @@ import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjectId;
 import org.mo.com.lang.FString;
+import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.IComparable;
 import org.mo.com.lang.ICopyable;
 import org.mo.com.lang.INameValue;
@@ -632,7 +633,7 @@ public class FXmlNode
    public FXmlNode search(){
       FXmlNode find = this;
       while(find.hasNode()){
-         find = find.node(0);
+         find = find.nodes().first();
       }
       return find;
    }
@@ -917,6 +918,23 @@ public class FXmlNode
       FXmlNode node = new FXmlNode(name, text, attributes);
       nodes().push(node);
       return node;
+   }
+
+   //============================================================
+   // <T>创建一个子节点。</T>
+   //
+   // @param name 节点名称
+   // @param attributes 属性集合
+   // @return 子节点
+   //============================================================
+   public FXmlNode createNode(String name,
+                              IAttributes attributes){
+      if(RString.isEmpty(name)){
+         throw new NullPointerException("name");
+      }
+      FXmlNode xnode = nodes().create(name);
+      xnode.attributes().assign(attributes);
+      return xnode;
    }
 
    //============================================================

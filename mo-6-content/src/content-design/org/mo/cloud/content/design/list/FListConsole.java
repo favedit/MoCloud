@@ -9,6 +9,7 @@ import org.mo.cloud.content.design.list.common.XList;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.cloud.content.design.persistence.FPersistence;
 import org.mo.cloud.content.design.persistence.IPersistenceConsole;
+import org.mo.com.console.FConsole;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
@@ -19,6 +20,7 @@ import org.mo.core.aop.face.AProperty;
 // <T>内容列表控制台。</T>
 //============================================================
 public class FListConsole
+      extends FConsole
       implements
          IListConsole
 {

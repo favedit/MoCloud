@@ -185,6 +185,7 @@ public class FContentNode
       loadConfig(xroot);
       // 加载配置信息
       FXmlNode xcontent = xroot.nodes().first();
+      xcontent.set("name", _name);
       _config.loadConfig(xcontent);
       _statusOpen = true;
       return EResult.Success;

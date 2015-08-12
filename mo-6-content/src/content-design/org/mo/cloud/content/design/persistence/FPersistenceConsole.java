@@ -7,6 +7,7 @@ import org.mo.cloud.content.design.configuration.FContentSpace;
 import org.mo.cloud.content.design.configuration.IConfigurationConsole;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.common.XPersistence;
+import org.mo.com.console.FConsole;
 import org.mo.com.io.FStringFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
@@ -31,6 +32,7 @@ import org.mo.eng.template.ITemplateParser;
 // <T>内容持久化控制台。</T>
 //============================================================
 public class FPersistenceConsole
+      extends FConsole
       implements
          IPersistenceConsole
 {

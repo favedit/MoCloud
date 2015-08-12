@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
    <TreeView _uuid2="71202174-098f-48b0-ad14-024064f85750" name="content.design.frame" label="M#12cn18内容-设计-页面" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.frame">
-     <TreeNodeType _uuid2="14288e3d-b106-41c1-a180-04f730f15ec9" name="package" label="M#12cn11包" is_valid="Y" note="" code="package" icon="editor.design.frame.package" />
+     <TreeNodeType _uuid2="14288e3d-b106-41c1-a180-04f730f15ec9" name="package" label="M#12cn11包" is_valid="Y" note="" code="package" action="list" icon="editor.design.frame.package" />
      <TreeNodeType _uuid2="520fd726-4b6d-4aea-8d0d-e8e5a8a0fe70" name="formFrame" label="M#12cn14表单页面" is_valid="Y" note="" type="collection" code="FormFrame" icon="editor.design.frame.webform" action="list" attributes="form_name=content.frame.FormFrameForm" />
      <TreeNodeType _uuid2="7b4d7bb1-b3a1-4f91-bf28-7d7319181191" name="tableFrame" label="M#12cn14列表页面" is_valid="Y" note="" type="collection" code="TableFrame" icon="editor.design.frame.webtable" action="list" attributes="form_name=content.frame.TableFrameForm" />
      <TreeNodeType _uuid2="41b0de9b-63ec-4b9b-a02b-25db52d271f0" name="dialogFrame" label="M#12cn14对话页面" is_valid="Y" note="" type="collection" code="dialogFrame" icon="editor.design.frame.webdialog" action="list" attributes="form_name=content.frame.DialogFrameForm" />

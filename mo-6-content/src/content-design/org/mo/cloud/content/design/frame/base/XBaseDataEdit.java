@@ -265,10 +265,6 @@ public abstract class XBaseDataEdit
    @AContentField
    public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String, "", "", "", "YYNY");
 
-   // 输入尺寸的定义
-   @AContentField
-   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
-
    // 数据必须的定义
    @AContentField
    public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
@@ -288,6 +284,10 @@ public abstract class XBaseDataEdit
    // 数据默认的定义
    @AContentField
    public final static FContentField DATA_DEFAULT = new FContentField("dataDefault", "data_default", EContentData.String, "", "", "", "YYNY");
+
+   // 输入尺寸的定义
+   @AContentField
+   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -555,10 +555,6 @@ public abstract class XBaseDataEdit
    @AName("valid_length_max")
    protected String _validLengthMax;
 
-   // 输入尺寸
-   @AName("input_size")
-   protected String _inputSize;
-
    // 数据必须
    @AName("data_require")
    protected boolean _dataRequire;
@@ -578,6 +574,10 @@ public abstract class XBaseDataEdit
    // 数据默认
    @AName("data_default")
    protected String _dataDefault;
+
+   // 输入尺寸
+   @AName("input_size")
+   protected String _inputSize;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -1696,24 +1696,6 @@ public abstract class XBaseDataEdit
    }
 
    //============================================================
-   // <T>获得输入尺寸的内容。</T>
-   //
-   // @return 输入尺寸
-   //============================================================
-   public String getInputSize(){
-      return _inputSize;
-   }
-
-   //============================================================
-   // <T>设置输入尺寸的内容。</T>
-   //
-   // @param value 输入尺寸
-   //============================================================
-   public void setInputSize(String value){
-      _inputSize = value;
-   }
-
-   //============================================================
    // <T>获得数据必须的内容。</T>
    //
    // @return 数据必须
@@ -1801,6 +1783,24 @@ public abstract class XBaseDataEdit
    //============================================================
    public void setDataDefault(String value){
       _dataDefault = value;
+   }
+
+   //============================================================
+   // <T>获得输入尺寸的内容。</T>
+   //
+   // @return 输入尺寸
+   //============================================================
+   public String getInputSize(){
+      return _inputSize;
+   }
+
+   //============================================================
+   // <T>设置输入尺寸的内容。</T>
+   //
+   // @param value 输入尺寸
+   //============================================================
+   public void setInputSize(String value){
+      _inputSize = value;
    }
 
 }
