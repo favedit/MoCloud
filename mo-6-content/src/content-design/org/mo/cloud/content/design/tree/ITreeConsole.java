@@ -50,4 +50,13 @@ public interface ITreeConsole
    //============================================================
    FXmlNode buildConfig(String storgeName,
                         String treeName);
+
+   //============================================================
+   // <T>更新配置处理。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   void update(String storgeName,
+               FContentObject contentObject);
 }

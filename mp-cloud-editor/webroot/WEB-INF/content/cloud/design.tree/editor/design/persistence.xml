@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <TreeView name="design.persistence" label="设计-持久化-定义" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.persistence">
-     <TreeNodeType name="package" code="Package" label="包" is_valid="Y" note="" icon="editor.design.list.package" action="list" />
-     <TreeNodeType name="persistence" code="Persistence" label="持久化" is_valid="Y" note="" icon="editor.design.persistence.persistence" type="collection" action="list" attributes="property_frame=content.persistence.PersistenceForm" />
-     <TreeNodeType name="component" code="Component" label="组件" is_valid="Y" note="" icon="editor.design.persistence.component" type="component" action="list" attributes="property_frame=content.persistence.ComponentForm" />
-     <TreeNodeType name="interface" code="Interface" label="接口" is_valid="Y" note="" icon="editor.design.persistence.interface" type="component" action="list" attributes="property_frame=content.persistence.InterfaceForm" />
-     <TreeNodeType name="attribute" code="Attribute" label="属性" is_valid="Y" note="" icon="editor.design.persistence.attribute" type="component" attributes="property_frame=content.persistence.AttributeForm" />
-   </TreeView>
+<Content update_date="20150812151544">
+  <TreeView guid="2DE2BAB2A19D40AD8BAD2B849DB49BC9" name="editor.design.persistence" label="编辑设计持久化" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.persistence">
+    <TreeNodeType guid="BD987F59225C451CB29F0D320A0E0D1B" name="package" code="Package" label="包" is_valid="Y" note="" icon="editor.design.list.package" action="list" />
+    <TreeNodeType guid="EFCD2418A6FE45D4858BC0B3044C7120" name="persistence" code="Persistence" label="持久化" is_valid="Y" note="" icon="editor.design.persistence.persistence" type="collection" action="list" attributes="property_frame=editor.design.persistence.property.PersistenceForm" />
+    <TreeNodeType guid="F045C60F8F8D4D69BDE34C65022FBFFD" name="component" code="Component" label="组件" is_valid="Y" note="" icon="editor.design.persistence.component" type="component" action="list" attributes="property_frame=editor.design.persistence.property.ComponentForm" />
+    <TreeNodeType guid="BEB2ECB95D36436F9A5AD2B96BD5914F" name="interface" code="Interface" label="接口" is_valid="Y" note="" icon="editor.design.persistence.interface" type="component" action="list" attributes="property_frame=editor.design.persistence.property.InterfaceForm" />
+    <TreeNodeType guid="3EB920E978F948EFA0C23C600BF47ACC" name="attribute" code="Attribute" label="属性" is_valid="Y" note="" icon="editor.design.persistence.attribute" type="component" attributes="property_frame=editor.design.persistence.property.AttributeForm" />
+  </TreeView>
 </Content>

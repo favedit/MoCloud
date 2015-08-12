@@ -150,7 +150,6 @@ public class FPersistenceService
       content.set("name", frameName);
       buildFrame(content, modeCd);
       return content;
-
    }
 
    //============================================================
@@ -176,7 +175,7 @@ public class FPersistenceService
    // @param output 网络输出
    //============================================================
    @Override
-   public EResult query(IWebContext context,
+   public EResult fetch(IWebContext context,
                         IWebInput input,
                         IWebOutput output){
       // 获得输入

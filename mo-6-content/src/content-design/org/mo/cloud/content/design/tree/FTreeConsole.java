@@ -33,6 +33,10 @@ public class FTreeConsole
    @AProperty
    protected String _pathName;
 
+   // 持久化名称
+   @AProperty
+   protected String _persistenceName;
+
    // 内容配置控制台接口
    @ALink
    protected IConfigurationConsole _configurationConsole;
@@ -42,7 +46,7 @@ public class FTreeConsole
    protected IPersistenceConsole _persistenceConsole;
 
    // 列表
-   protected FDictionary<XTreeView> _treeDictionary = new FDictionary<XTreeView>(XTreeView.class);
+   protected FDictionary<XTreeView> _trees = new FDictionary<XTreeView>(XTreeView.class);
 
    //============================================================
    // <T>获得目录集合。</T>
@@ -75,12 +79,12 @@ public class FTreeConsole
                          String treeName,
                          EPersistenceMode modeCd){
       String code = storgeName + "|" + treeName + "|" + modeCd;
-      XTreeView xtree = _treeDictionary.find(code);
+      XTreeView xtree = _trees.find(code);
       if(xtree == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, treeName);
          xtree = persistence.convertInstance(node.config(), modeCd);
-         _treeDictionary.set(code, xtree);
+         _trees.set(code, xtree);
       }
       return xtree;
    }
@@ -100,7 +104,7 @@ public class FTreeConsole
       XContentObject xobject = find(storgeName, treeName, modeCd);
       if(xobject != null){
          // 获得转换器
-         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.tree");
+         FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
          // 转换对象
          return persistence.convertConfig(xobject, modeCd);
       }
@@ -121,10 +125,31 @@ public class FTreeConsole
       XTreeView xtree = find(storgeName, treeName, EPersistenceMode.Config);
       // 转换数据
       FXmlNode xconfig = new FXmlNode();
-      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, "design.tree");
+      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
       FContentObject content = persistence.convertConfig(xtree);
       // 存储输出
       content.saveConfig(xconfig);
       return xconfig;
+   }
+
+   //============================================================
+   // <T>更新配置处理。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   @Override
+   public void update(String storgeName,
+                      FContentObject contentObject){
+      String nodeName = contentObject.get("name");
+      FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
+      FContentObject xinstance = node.config();
+      // 获得转换器
+      FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
+      persistence.mergeConfig(xinstance, contentObject, EPersistenceMode.Config);
+      // 保存处理
+      node.store();
+      // 清空缓冲
+      _trees.clear();
    }
 }

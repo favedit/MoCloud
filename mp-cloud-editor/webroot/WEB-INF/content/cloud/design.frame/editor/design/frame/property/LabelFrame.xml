@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <Frame name="system.design.frame.property.LabelFrame" inherit_frames='system.design.frame.property.common.ControlPanel' type='FDsSystemFrameButtonProperty' label="标签属性" is_valid="Y" note="">
-      <Panel name='buttonPanel' icon='design.panel.icon' label='按键属性'>
-         <Edit name="clickSource" linker='_controlClickSource' label="停靠" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
-   </Frame>
-</Content>

@@ -543,13 +543,36 @@ public class FContentObject
    //============================================================
    // <T>获得属性列表。</T>
    //
-   // @return 属性列表
+   // @param attributes 属性列表
    //============================================================
    public void assignAttributes(IAttributes attributes){
       for(IStringPair pair : attributes){
          String name = pair.name();
          if(name.startsWith("_")){
             continue;
+         }
+         set(name, pair.value());
+      }
+   }
+
+   //============================================================
+   // <T>合并属性列表。</T>
+   //
+   // @param attributes 属性列表
+   //============================================================
+   public void mergeAttributes(IAttributes attributes){
+      for(IStringPair pair : attributes){
+         String name = pair.name();
+         // 检查名称
+         if(name.startsWith("_")){
+            continue;
+         }
+         // 禁止覆盖有内容的项目
+         if(_attributes != null){
+            String value = _attributes.get(name, null);
+            if(!RString.isEmpty(value)){
+               continue;
+            }
          }
          set(name, pair.value());
       }
@@ -600,6 +623,19 @@ public class FContentObject
    //============================================================
    public void push(FContentObject node){
       nodes().push(node);
+   }
+
+   //============================================================
+   // <T>合并节点。</T>
+   //
+   // @param content 内容节点
+   //============================================================
+   public void merge(FContentObject content){
+      _objectId = content._objectId;
+      _name = content._name;
+      if(content.hasAttribute()){
+         mergeAttributes(content.attributes());
+      }
    }
 
    //============================================================
@@ -722,7 +758,14 @@ public class FContentObject
          FAttributes attributes = xconfig.attributes();
          attributes.clear();
          attributes.set("guid", objectId());
-         attributes.append(_attributes);
+         for(IStringPair pair : _attributes){
+            String attributeName = pair.name();
+            String attributeValue = pair.value();
+            if(RString.startsWith(attributeName, "_")){
+               continue;
+            }
+            attributes.set(attributeName, attributeValue);
+         }
       }
       // 设置节点集合
       if(deep && hasNode()){

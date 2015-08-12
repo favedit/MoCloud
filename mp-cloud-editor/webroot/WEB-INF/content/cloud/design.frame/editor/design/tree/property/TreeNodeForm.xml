@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Frame name="system.design.frame.property.PictureFrame" type='FEditorDsTreePropertyTreeNodeForm' label="图片属性" is_valid="Y" note="">
+      <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
+         <Edit name="componentType" linker='_controlComponentType' label="组件类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="isValid" linker='_controlIsValid' label="有效性" label_size='70,0' valid="Y" data_name='is_valid' edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="name" linker='_controlName' label="名称" label_size='70,0' valid="Y" data_name='name' edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="标签" label_size='70,0' valid="Y" data_name='label' edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+      <Panel name='notePanel' icon='design.panel.icon' label='备注信息'>
+         <Edit name="note" linker='_controlNote' label="备注" label_size='70,0' valid="Y" data_name='note' edit_size='200,0' input_size='200,0' note="" />
+      </Panel>
+   </Frame>
+</Content>

@@ -1,6 +1,7 @@
 package org.mo.cloud.content.design.configuration;
 
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
 
 //============================================================
 // <T>内容对象。</T>
@@ -99,6 +100,25 @@ public class XContentObject
          return value.toString();
       }
       return null;
+   }
+
+   //============================================================
+   // <T>根据名称获得内容。</T>
+   //
+   // @param name 名称
+   // @param defaultValue 默认内容
+   // @return 内容
+   //============================================================
+   public String getString(String name,
+                           String defaultValue){
+      Object value = get(name);
+      if(value != null){
+         String valueString = value.toString();
+         if(!RString.isEmpty(valueString)){
+            return valueString;
+         }
+      }
+      return defaultValue;
    }
 
    //============================================================

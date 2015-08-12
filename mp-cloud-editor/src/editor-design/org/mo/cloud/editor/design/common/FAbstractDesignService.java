@@ -71,7 +71,7 @@ public abstract class FAbstractDesignService
       xnode.setHasChild(xcontent.hasChild());
       xnode.setGuid(xcontent.contentGuid());
       xnode.setLabel(xcontent.getString("name"));
-      xnode.setNote(xcontent.getString("label"));
+      xnode.setNote(xcontent.getString("label", ""));
       xnode.saveConfig(xconfig.createNode("TreeNode"));
       return xnode;
    }
@@ -94,7 +94,7 @@ public abstract class FAbstractDesignService
       xnode.setHasChild(xcontent.hasNode());
       xnode.setGuid(xcontent.objectId());
       xnode.setLabel(xcontent.get("name"));
-      xnode.setNote(xcontent.get("label"));
+      xnode.setNote(xcontent.get("label", ""));
       xnode.saveConfig(xconfig.createNode("TreeNode"));
       return xnode;
    }

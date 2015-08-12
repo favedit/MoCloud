@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="system.design.frame.property.common.ComponentPanel" label="停靠栏属性" is_valid="Y" note="">
+   <Frame name="editor.design.frame.property.common.ComponentPanel" label="停靠栏属性" is_valid="Y" note="">
       <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
-         <Check name="valid" linker='_controlValid' label="有效性" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="type" linker='_controlType' label="类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="name" linker='_controlName' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+         <Check name="valid" linker='_controlValid' label="有效性" label_size='70,0' valid="Y" data_name='valid' edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="type" linker='_controlType' label="类型" label_size='70,0' valid="Y" data_name='_type' edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="name" linker='_controlName' label="名称" label_size='70,0' valid="Y" data_name='name' edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="label" linker='_controlLabel' label="名称" label_size='70,0' valid="Y" data_name='label' edit_size='200,0' input_size='200,0' note="" />
       </Panel>
    </Frame>
 </Content>
