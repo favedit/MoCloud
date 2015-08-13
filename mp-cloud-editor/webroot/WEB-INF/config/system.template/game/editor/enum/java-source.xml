@@ -6,7 +6,7 @@
 //
 // @version 1.0.1
 //============================================================
-package org.mo.cloud.content.data.define.enums.<jt:item source='$enum.group_name'/>;
+package com.cyou.gccloud.define.enums.<jt:item source='$enum.group_name'/>;
 
 //============================================================
 // <T><jt:item source='$enum.label'/>枚举定义。</T>

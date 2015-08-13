@@ -2,13 +2,13 @@
 <Content>
    <Frame name="system.design.frame.property.ButtonFrame" type='FEditorDsPersistencePropertyPersistenceForm' label="持久化属性" is_valid="Y" note="">
       <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
-         <Edit name="componentType" label="组件类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-         <Check name="isValid" label="有效性" label_size='70,0' valid="Y" data_name='is_valid' edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="name" label="名称" label_size='70,0' valid="Y" data_name='name' edit_size='200,0' input_size='200,0' note="" />
-         <Edit name="label" label="标签" label_size='70,0' valid="Y" data_name='label' edit_size='200,0' input_size='200,0' note="" />
+         <Select name="componentType" label="组件类型" label_size='80,0' valid="Y" data_name='_type' edit_size='600,0' input_size='500,0' edit_refer='editor.design.persistence.ComponentType' note="" />
+         <Check name="isValid" label="有效性" label_size='80,0' valid="Y" data_name='is_valid' edit_size='600,0' input_size='500,0' note="" />
+         <Edit name="name" label="名称" label_size='80,0' valid="Y" data_name='name' edit_size='600,0' input_size='500,0' note="" />
+         <Edit name="label" label="标签" label_size='80,0' valid="Y" data_name='label' edit_size='600,0' input_size='500,0' note="" />
       </Panel>
       <Panel name='notePanel' icon='design.panel.icon' label='备注信息'>
-         <Edit name="note" label="备注" label_size='70,0' valid="Y" data_name='note' edit_size='200,0' input_size='200,0' note="" />
+         <Edit name="note" label="备注" label_size='80,0' valid="Y" data_name='note' edit_size='600,0' input_size='500,0' note="" />
       </Panel>
    </Frame>
 </Content>

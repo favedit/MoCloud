@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.list" update_date="20150319213701">
-  <Persistence is_valid="Y" name="conent.list" label="列表定义" template="" source="${output.design}/src/content-design" note="">
-    <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.list.common.XObject" inherits="" note="">
-      <Attribute is_valid="Y" type="Boolean" name="is_valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="code" label="代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+<Content update_date="20150813132538">
+  <Persistence guid="861F5E7FD59946368F01D09BAE59F0A6" is_valid="Y" name="design.list" label="列表定义" template="" source="${output.design}/src/content-design" note="">
+    <Interface guid="4177A069AA36411AA06454FDB22B3813" is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.list.common.XObject" inherits="" note="">
+      <Attribute guid="EE640C0E2E1940BFAF85D248022E95B6" is_valid="Y" data_type_cd="Boolean" name="is_valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="C79CFF4E6AA54BE7A4AB3FD2E5DEC027" is_valid="Y" data_type_cd="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="F89E7D6C899B46A1A0BB30C7EEB49ED3" is_valid="Y" data_type_cd="String" name="code" label="代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="F74026E3C37E4DEC89C764F2998EE111" is_valid="Y" data_type_cd="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="F1BA650E47D640B894CCD546DABD8C16" is_valid="Y" data_type_cd="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
-    <Component is_valid="Y" name="List" label="列表" class_name="org.mo.cloud.content.design.list.common.XList" base_name="org.mo.cloud.content.design.list.base.XBaseList" inherits="IObject" note="" />
-    <Component is_valid="Y" name="Item" label="项目" class_name="org.mo.cloud.content.design.list.common.XItem" base_name="org.mo.cloud.content.design.list.base.XBaseItem" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="type_cd" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="value" label="内容" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    <Component guid="7FFD85698BD84CBABA3E1D90459DC3B0" is_valid="Y" name="List" label="列表" class_name="org.mo.cloud.content.design.list.common.XList" base_name="org.mo.cloud.content.design.list.base.XBaseList" inherits="IObject" note="" />
+    <Component guid="02F7A28486214DCC86C3AB2B43B10A90" is_valid="Y" name="Item" label="项目" class_name="org.mo.cloud.content.design.list.common.XItem" base_name="org.mo.cloud.content.design.list.base.XBaseItem" inherits="IObject" note="">
+      <Attribute guid="304DE3F906504CFF8065EAB2FDDB10F3" is_valid="Y" data_type_cd="String" name="type_cd" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="218A3BF0FBF74A3D953C09083F17B523" is_valid="Y" data_type_cd="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="A751CD696D514710B6264F2EF866B7D4" is_valid="Y" data_type_cd="String" name="value" label="内容" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
   </Persistence>
 </Content>

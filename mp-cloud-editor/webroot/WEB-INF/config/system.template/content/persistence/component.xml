@@ -4,8 +4,10 @@
   <Source _uuid="fUbHjVep9[tdB6xKnW30rA" is_valid="Y" note="M#"><![CDATA[package <jt:item source='$component.class' format='class.package'/>;
 
 import org.mo.com.lang.face.AName;
-import org.mo.content.core.configuration.FContentField;
-import org.mo.content.core.configuration.XContentObject;
+import org.mo.cloud.content.design.configuration.AContentField;
+import org.mo.cloud.content.design.configuration.EContentData;
+import org.mo.cloud.content.design.configuration.FContentField;
+import org.mo.cloud.content.design.configuration.XContentObject;
 
 //============================================================
 // <T><jt:item source='$component.label'/>对象的内容基类。</T>
@@ -14,9 +16,15 @@ import org.mo.content.core.configuration.XContentObject;
 //============================================================
 public abstract class <jt:item source='$component.class' format='class.name'/> extends XContentObject
 {
-   // 组件名称
-   public static final String NAME = "<jt:item source='$component.name'/>";
+   // 类名称
+   public static final String CONTENT_NAME = "<jt:item source='$component.name'/>";
 
+<jt:loop source='$attributes' order='asc' alias='attribute'>
+   // <jt:item source="$attribute.label"/>的定义
+   @AContentField
+   public final static FContentField <jt:item source='$attribute.name' format='upper'/> = new FContentField("<jt:item source='$attribute.name' format='method'/>", "<jt:item source='$attribute.name' format='lower'/>", EContentData.<jt:item source='$attribute.type'/>, "<jt:item source='$attribute.data_group'/>", "<jt:item source='$attribute.data_code'/>", "<jt:item source='$attribute.data_default'/>", "<jt:item source='$attribute.is_store'/><jt:item source='$attribute.is_config'/><jt:item source='$attribute.is_abstract'/><jt:item source='$attribute.is_default'/>");
+
+</jt:loop>
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -36,14 +44,9 @@ public abstract class <jt:item source='$component.class' format='class.name'/> e
    }
 
 <jt:loop source='$attributes' order='asc' alias='attribute'>
-   // <jt:item source="$attribute.label"/>的定义
-   public final static FContentField Field<jt:item source='$attribute.name' format='class'/> = new FContentField("<jt:item source='$attribute.name'/>");
-
-</jt:loop>
-<jt:loop source='$attributes' order='asc' alias='attribute'>
 <jt:false source='$attribute.is_abstract'>
    // <jt:item source="$attribute.label"/>
-   @AName("<jt:item format='lower' source='$attribute.name'/>")
+   @AName("<jt:item source='$attribute.name' format='lower'/>")
 <jt:Equals source='$attribute.type' value="Boolean">
    protected boolean _<jt:item source='$attribute.name' format='method'/>;
 </jt:Equals>

@@ -22,6 +22,7 @@
          face  = 'org.mo.cloud.content.design.persistence.IPersistenceConsole'
          class = 'org.mo.cloud.content.design.persistence.FPersistenceConsole'
          scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
       <Property name='space_name'>design.persistence</Property>
       <Property name='path_name'>design.persistence</Property>
       <Property name='persistence_name'>design.persistence</Property>
@@ -36,6 +37,7 @@
          face  = 'org.mo.cloud.content.design.list.IListConsole'
          class = 'org.mo.cloud.content.design.list.FListConsole'
          scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
       <Property name='space_name'>design.list</Property>
       <Property name='path_name'>design.list</Property>
       <Property name='persistence_name'>design.list</Property>
@@ -50,6 +52,7 @@
          face  = 'org.mo.cloud.content.design.tree.ITreeConsole'
          class = 'org.mo.cloud.content.design.tree.FTreeConsole'
          scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
       <Property name='space_name'>design.tree</Property>
       <Property name='path_name'>design.tree</Property>
       <Property name='persistence_name'>design.tree</Property>
@@ -64,6 +67,7 @@
          face  = 'org.mo.cloud.content.design.frame.IFrameConsole'
          class = 'org.mo.cloud.content.design.frame.FFrameConsole'
          scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
       <Property name='space_name'>design.frame</Property>
       <Property name='path_name'>design.frame</Property>
       <Property name='persistence_name'>design.frame</Property>

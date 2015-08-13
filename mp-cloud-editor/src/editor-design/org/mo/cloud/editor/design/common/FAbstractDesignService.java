@@ -63,14 +63,23 @@ public abstract class FAbstractDesignService
    //============================================================
    public XTreeNode buildTreeNode(FXmlNode xconfig,
                                   XContentObject xcontent,
-                                  String groupCd){
+                                  String groupCd,
+                                  boolean shortFlag){
+      String name = xcontent.getString("name");
+      String shortName = null;
+      if(shortFlag){
+         shortName = RString.right(name, ".");
+      }else{
+         shortName = name;
+      }
       XTreeNode xnode = new XTreeNode();
       xnode.setIsValid(true);
       xnode.setTypeGroup(groupCd);
       xnode.setTypeCode(xcontent.name());
       xnode.setHasChild(xcontent.hasChild());
       xnode.setGuid(xcontent.contentGuid());
-      xnode.setLabel(xcontent.getString("name"));
+      xnode.setLabel(shortName);
+      xnode.setCode(name);
       xnode.setNote(xcontent.getString("label", ""));
       xnode.saveConfig(xconfig.createNode("TreeNode"));
       return xnode;
@@ -128,6 +137,7 @@ public abstract class FAbstractDesignService
          xnode.setTypeCode("package");
          xnode.setHasChild(true);
          xnode.setLabel(packageName);
+         xnode.setCode(packageName);
          xnode.saveConfig(xconfig.createNode("TreeNode"));
       }
       return EResult.Success;
@@ -148,7 +158,7 @@ public abstract class FAbstractDesignService
       FXmlNode xconfig = output.config();
       // 生成列表
       for(XContentObject xcontainer : xcontainers){
-         buildTreeNode(xconfig, xcontainer, ECatalogNodeGroup.Container);
+         buildTreeNode(xconfig, xcontainer, ECatalogNodeGroup.Container, false);
       }
       return EResult.Success;
    }
@@ -170,7 +180,7 @@ public abstract class FAbstractDesignService
          throw new FFatalError("Select tree node is empty.");
       }
       String typeGroup = treeNode.get("type_group");
-      String code = treeNode.get("label");
+      String code = treeNode.get("code", null);
       FXmlNode containerNode = treeNode;
       while(containerNode.hasNode()){
          if(ECatalogNodeGroup.Container.equals(containerNode.get("type_group"))){
@@ -178,7 +188,7 @@ public abstract class FAbstractDesignService
          }
          containerNode = containerNode.nodes().first();
       }
-      String containerName = containerNode.get("label");
+      String containerName = containerNode.get("code");
       if(RString.isEmpty(containerName)){
          throw new FFatalError("Container name is empty.");
       }
@@ -191,7 +201,7 @@ public abstract class FAbstractDesignService
             String name = xcontainer.getString("name");
             String packageName = RString.leftLast(name, ".");
             if(packageName.equals(code)){
-               buildTreeNode(xconfig, xcontainer, ECatalogNodeGroup.Container);
+               buildTreeNode(xconfig, xcontainer, ECatalogNodeGroup.Container, true);
             }
          }
       }else if(ECatalogNodeGroup.Container.equals(typeGroup)){
@@ -256,14 +266,15 @@ public abstract class FAbstractDesignService
       }
       //............................................................
       // 加载配置
-      FContentObject xlist = contentFindDefine(containerName, EPersistenceMode.Config);
-      if(xlist == null){
+      FContentObject xcontainer = contentFindDefine(containerName, EPersistenceMode.Config);
+      if(xcontainer == null){
          throw new FFatalError("Container is not exists. (container_name={1})", containerName);
       }
       if(ECatalogNodeGroup.Container.equals(groupName)){
          // 设置容器配置
          FXmlNode xconfig = output.config().createNode(EContentConstants.Content);
-         xconfig.attributes().assign(xlist.attributes());
+         xconfig.set("_type", xcontainer.name());
+         xconfig.attributes().append(xcontainer.attributes());
       }else if(ECatalogNodeGroup.Item.equals(groupName)){
          // 检查参数
          String itemName = context.parameter("item");
@@ -271,12 +282,13 @@ public abstract class FAbstractDesignService
             throw new FFatalError("Container item name is empty.");
          }
          // 设置项目配置
-         FContentObject xitem = xlist.search(itemName);
+         FContentObject xitem = xcontainer.search(itemName);
          if(xitem == null){
             throw new FFatalError("Container item name is not exists. (item_name={1})", itemName);
          }
          FXmlNode xconfig = output.config().createNode(EContentConstants.Content);
-         xconfig.attributes().assign(xitem.attributes());
+         xconfig.set("_type", xcontainer.name());
+         xconfig.attributes().append(xitem.attributes());
       }else{
          throw new FFatalError("Group is invalid. (group={1})", groupName);
       }
@@ -321,13 +333,13 @@ public abstract class FAbstractDesignService
       }
       //............................................................
       // 加载配置
-      FContentObject xlist = contentFindDefine(containerName, EPersistenceMode.Config);
-      if(xlist == null){
+      FContentObject xcontainer = contentFindDefine(containerName, EPersistenceMode.Config);
+      if(xcontainer == null){
          throw new FFatalError("Container is not exists. (container_name={1})", containerName);
       }
       if(ECatalogNodeGroup.Container.equals(groupName)){
          // 设置容器配置
-         xlist.assignAttributes(xcontent.attributes());
+         xcontainer.assignAttributes(xcontent.attributes());
       }else if(ECatalogNodeGroup.Item.equals(groupName)){
          // 检查参数
          String itemName = context.parameter("item");
@@ -335,7 +347,7 @@ public abstract class FAbstractDesignService
             throw new FFatalError("Container item name is empty.");
          }
          // 设置项目配置
-         FContentObject xitem = xlist.search(itemName);
+         FContentObject xitem = xcontainer.search(itemName);
          if(xitem == null){
             throw new FFatalError("Container item name is not exists. (item_name={1})", itemName);
          }
@@ -344,7 +356,7 @@ public abstract class FAbstractDesignService
          throw new FFatalError("Group is invalid. (group={1})", groupName);
       }
       // 更新处理
-      contentUpdate(xlist);
+      contentUpdate(xcontainer);
       return EResult.Success;
    }
 

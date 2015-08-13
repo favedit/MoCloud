@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.dataset" update_date="20150610135414">
-  <Persistence is_valid="Y" name="conent.list" label="数据定义" template="" source="${output.design}/src/content-design" note="">
-    <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.list.common.XObject" inherits="" note="">
-      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+<Content update_date="20150813132526">
+  <Persistence guid="B7539EC98E4B4F5BB246A505A8412FB1" is_valid="Y" name="design.dataset" label="数据定义" template="" source="${output.design}/src/content-design" note="">
+    <Interface guid="D5B8B75736D44108AEED693D7A7844BD" is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.list.common.XObject" inherits="" note="">
+      <Attribute guid="BBB98F7E53394ACFBF197B24CB287903" is_valid="Y" data_type_cd="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="B841F86748004E69915444ACC07F0D23" is_valid="Y" data_type_cd="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>
-    <Component is_valid="Y" name="Dataset" label="数据集合" class_name="org.mo.cloud.content.design.dataset.common.XDataset" base_name="org.mo.cloud.content.design.dataset.base.XBaseDataset" inherits="IObject" note="" />
-    <Component is_valid="Y" name="FieldString" label="字符串字段" class_name="org.mo.cloud.content.design.dataset.common.XFieldString" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldString" inherits="IObject" note="" />
+    <Component guid="ECC6D68468F64A658424427297947819" is_valid="Y" name="Dataset" label="数据集合" class_name="org.mo.cloud.content.design.dataset.common.XDataset" base_name="org.mo.cloud.content.design.dataset.base.XBaseDataset" inherits="IObject" note="" />
+    <Component guid="C3AD2E5BABE24EDC8F56D90BEA8D60AE" is_valid="Y" name="FieldString" label="字符串字段" class_name="org.mo.cloud.content.design.dataset.common.XFieldString" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldString" inherits="IObject" note="" />
   </Persistence>
 </Content>

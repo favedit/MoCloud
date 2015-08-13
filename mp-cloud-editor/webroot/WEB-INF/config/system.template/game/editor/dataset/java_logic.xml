@@ -28,7 +28,7 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
 
 </jt:loop>
    // 字段集合的定义。
-   public final static String FIELDS = "<jt:loop source='$fields' alias='field'><jt:position source='$field' type='middle' value=','/><jt:Item source='$field.data_name'/></jt:loop>";
+   public final static String FIELDS = "<jt:loop source='$fields' alias='field'><jt:position source='$field' type='middle' value=','/>`<jt:Item source='$field.data_name'/>`</jt:loop>";
 
    //============================================================
    // <T>构造<jt:item source='$dataset.label'/>逻辑单元。</T>
@@ -194,6 +194,43 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
    }
 
    //============================================================
+   // <T>根据唯一编号获得一个数据单元。</T>
+   //
+   // @param guid 唯一编号
+   // @return 数据单元
+   //============================================================
+   public <jt:item source='$dataset.source_class_name'/>Unit findByGuid(CharSequence guid){
+      return findByGuid(null, <jt:item source='$dataset.source_class_name'/>Unit.class, guid);
+   }
+
+   //============================================================
+   // <T>根据唯一编号获得一个数据单元。</T>
+   //
+   // @param unit 数据单元
+   // @param clazz 类对象
+   // @param guid 唯一编号
+   // @return 是否获得
+   //============================================================
+   @Override
+   public <T extends FLogicUnit> T findByGuid(T unit, Class<T> clazz, CharSequence guid){
+      // 检查条件
+      if(RString.isEmpty(guid)){
+         return null;
+      }
+      // 生成命令
+      FSql cmd = new FSql("SELECT ");
+      cmd.append(FIELDS);
+      cmd.append(" FROM ");
+      cmd.append(_name);
+      cmd.append(" WHERE GUID='");
+      cmd.append(guid);
+      cmd.append("'");
+      String sql = cmd.toString();
+      // 获得数据
+      return searchSql(unit, clazz, guid, sql);
+   }
+
+   //============================================================
    // <T>根据条件获得一个数据单元。</T>
    //
    // @param whereSql 条件
@@ -232,6 +269,16 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
    //============================================================
    // <T>根据条件获得数据单元集合。</T>
    //
+   // @param whereSql 条件
+   // @return 数据单元集合
+   //============================================================
+   public FLogicDataset<<jt:item source='$dataset.source_class_name'/>Unit> fetch(CharSequence whereSql){
+      return fetchClass(null, null, whereSql, null, null, -1, 0);
+   }
+
+   //============================================================
+   // <T>获得数据单元集合。</T>
+   //
    // @param pageSize 分页大小
    // @param page 分页号码
    // @return 数据单元集合
@@ -250,6 +297,19 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
    //============================================================
    public FLogicDataset<<jt:item source='$dataset.source_class_name'/>Unit> fetch(CharSequence whereSql, int pageSize, int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param whereSql 条件命令
+   // @param orderSql 排序命令
+   // @param pageSize 分页大小
+   // @param page 分页号码
+   // @return 数据单元集合
+   //============================================================
+   public FLogicDataset<<jt:item source='$dataset.source_class_name'/>Unit> fetch(CharSequence whereSql, CharSequence orderSql){
+      return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
    //============================================================
@@ -298,6 +358,21 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
    //
    // @param clazz 单元类型
    // @param whereSql 条件命令
+   // @return 数据单元集合
+   //============================================================
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql){
+      // 生成命令
+      String code = innerMemcacheKey(null, whereSql, null, null);
+      String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
+      // 获得数据
+      return fetchSql(clazz, code, sql, 0, 0);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param clazz 单元类型
+   // @param whereSql 条件命令
    // @param pageSize 分页大小
    // @param page 分页号码
    // @return 数据单元集合
@@ -308,6 +383,24 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
       // 获得数据
       return fetchSql(clazz, code, sql, pageSize, page);
+   }
+
+   //============================================================
+   // <T>根据条件获得数据单元集合。</T>
+   //
+   // @param clazz 单元类型
+   // @param whereSql 条件命令
+   // @param orderSql 排序命令
+   // @param pageSize 分页大小
+   // @param page 分页号码
+   // @return 数据单元集合
+   //============================================================
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql){
+      // 生成命令
+      String code = innerMemcacheKey(null, whereSql, null, orderSql);
+      String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
+      // 获得数据
+      return fetchSql(clazz, code, sql, 0, 0);
    }
 
    //============================================================
@@ -489,16 +582,32 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
 </jt:loop>
       cmd.append(") VALUES(");
       cmd.append(unit.ovld());
-      cmd.append(',');
+<jt:loop source='$fields' alias='field'>
+<jt:equals source='$field.data_name' value='GUID'>
       String guid = unit.guid();
       if(RString.isEmpty(guid)){
          guid = RUuid.makeUniqueId();
       }
+      cmd.append(',');
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+</jt:equals>
+</jt:loop>
 <jt:loop source='$fields' alias='field'>
-<jt:notEquals source='$field.data_name' value='OUID|OVLD|GUID|CREATE_USER_ID|CREATE_DATE|UPDATE_USER_ID|UPDATE_DATE'>
+<jt:equals source='$field.data_name' value='GVID'>
+      String gvid = unit.gvid();
+      if(RString.isEmpty(gvid)){
+         gvid = RUuid.makeUniqueId();
+      }
+      cmd.append(',');
+      cmd.append('\'');
+      cmd.append(gvid);
+      cmd.append('\'');
+</jt:equals>
+</jt:loop>
+<jt:loop source='$fields' alias='field'>
+<jt:notEquals source='$field.data_name' value='OUID|OVLD|GUID|GVID|CREATE_USER_ID|CREATE_DATE|UPDATE_USER_ID|UPDATE_DATE'>
       cmd.append(',');
 <jt:equals source='$field.type' value='RecordId'>
       long <jt:Item source='$field.data_name' format='method'/> = unit.<jt:item source='$field.data_name' format='method'/>();

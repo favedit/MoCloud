@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.persistence" update_date="20150813091706">
-  <Persistence _type="Persistence" is_valid="Y" name="content.persistence" label="持久定义" template="" source="${output.design}/src/content-design" note="" _status="I">
-    <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.persistence.common.XObject" inherits="" note="">
-      <Attribute is_valid="Y" type="String" name="is_valid" label="有效" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+<Content update_date="20150813132537">
+  <Persistence guid="77653A0CEF214D75BA27E988F7C18F39" is_valid="Y" name="design.persistence" label="持久定义" template="" source="${output.design}/src/content-design" note="">
+    <Interface guid="D53316F40A7B403583D2C8A32C2764FF" is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.persistence.common.XObject" inherits="" note="">
+      <Attribute guid="78304B3D15C748DE9CA85F7857AE3E6E" is_valid="Y" data_type_cd="String" name="is_valid" label="有效" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="B26C1FE3009044189C24AF0D33383261" is_valid="Y" data_type_cd="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="16FAE58FD4AD47D7806FBF77078D08A5" is_valid="Y" data_type_cd="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="6338ED9D7EDC4CDB8D34FD027355E8E6" is_valid="Y" data_type_cd="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>
-    <Component is_valid="Y" name="Attribute" label="属性" class_name="org.mo.cloud.content.design.persistence.common.XAttribute" base_name="org.mo.cloud.content.design.persistence.base.XBaseAttribute" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="data_group" label="数据分组" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="data_code" label="数据代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="data_default" label="数据默认值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Component guid="E0D6AC1CDDC949AAB5CD06F70CE457A7" is_valid="Y" name="Attribute" label="属性" class_name="org.mo.cloud.content.design.persistence.common.XAttribute" base_name="org.mo.cloud.content.design.persistence.base.XBaseAttribute" inherits="IObject" note="">
+      <Attribute guid="A2CBFF0C010F4A0BA993F6CB1B13C049" is_valid="Y" data_type_cd="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="61E4D44C2E154982A4EC57529CE2C6C5" is_valid="Y" data_type_cd="String" name="data_group" label="数据分组" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="3FAC1780BCA5442EBD06C025FC42A0BF" is_valid="Y" data_type_cd="String" name="data_code" label="数据代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="1F0A3975ED6C40229F5B1432B289FCCA" is_valid="Y" data_type_cd="String" name="data_default" label="数据默认值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="Interface" label="接口" class_name="org.mo.cloud.content.design.persistence.common.XInterface" base_name="org.mo.cloud.content.design.persistence.base.XBaseInterface" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="class_name" label="实装类名" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="source_path" label="代码路径" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    <Component guid="02ADE06A6ECD44A78F1B74343FBB9C49" is_valid="Y" name="Interface" label="接口" class_name="org.mo.cloud.content.design.persistence.common.XInterface" base_name="org.mo.cloud.content.design.persistence.base.XBaseInterface" inherits="IObject" note="">
+      <Attribute guid="517A394925134AE1B99212F656265896" is_valid="Y" data_type_cd="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="641B420A7AC24372A320BC497BB99669" is_valid="Y" data_type_cd="String" name="class_name" label="实装类名" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="81123F67B27A40D89BBDD49A43BC2D3D" is_valid="Y" data_type_cd="String" name="source_path" label="代码路径" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="Component" label="组件" class_name="org.mo.cloud.content.design.persistence.common.XComponent" base_name="org.mo.cloud.content.design.persistence.base.XBaseComponent" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="class_name" label="类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="base_name" label="基类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="source_path" label="代码路径" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+    <Component guid="289B5C9F12C247ABB49F428E407F7D51" is_valid="Y" name="Component" label="组件" class_name="org.mo.cloud.content.design.persistence.common.XComponent" base_name="org.mo.cloud.content.design.persistence.base.XBaseComponent" inherits="IObject" note="">
+      <Attribute guid="1D7ADEFAC0664414A66F6BB24DB926CF" is_valid="Y" data_type_cd="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="F911B1B7836144939BAA86FFD0210F62" is_valid="Y" data_type_cd="String" name="class_name" label="类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="0D98ADC22EA44268A592D1F2E0DBA488" is_valid="Y" data_type_cd="String" name="base_name" label="基类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="2CEC0CC274594AE784A3BEDF477D04BA" is_valid="Y" data_type_cd="String" name="source_path" label="代码路径" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
-    <Component is_valid="Y" name="Persistence" label="持久化对象" class_name="org.mo.cloud.content.design.persistence.common.XPersistence" base_name="org.mo.cloud.content.design.persistence.base.XBasePersistence" inherits="IObject" note="" />
-    <Component is_valid="Y" name="Package" label="持久化分组" class_name="org.mo.cloud.content.design.persistence.common.XPackage" base_name="org.mo.cloud.content.design.persistence.base.XBasePackage" inherits="IObject" note="" />
+    <Component guid="65A7AEDB88B048A3B68DECF6F3F87692" is_valid="Y" name="Persistence" label="持久化对象" class_name="org.mo.cloud.content.design.persistence.common.XPersistence" base_name="org.mo.cloud.content.design.persistence.base.XBasePersistence" inherits="IObject" note="" />
+    <Component guid="C4342AF6862049458F0D73E058A500C8" is_valid="Y" name="Package" label="持久化分组" class_name="org.mo.cloud.content.design.persistence.common.XPackage" base_name="org.mo.cloud.content.design.persistence.base.XBasePackage" inherits="IObject" note="" />
   </Persistence>
 </Content>

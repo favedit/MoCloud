@@ -238,6 +238,13 @@ public class FPersistenceConsole
       }catch(Exception e){
          throw new FFatalError(e, "Build attributes error. (persistence={1}, component={2})", xpersistence.get("name"), xcomponent.get("name"));
       }
+      // TODO：临时设置数据类型
+      for(FContentObject xattribute : xattributes){
+         String typeCd = xattribute.get("type", null);
+         if(RString.isEmpty(typeCd)){
+            xattribute.set("type", xattribute.get("data_type_cd", ""));
+         }
+      }
       // 生成配置
       FXmlNode xcomponentConfig = xcomponent.makeConfig();
       xcomponentConfig.set("class", className);

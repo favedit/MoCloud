@@ -93,4 +93,16 @@ public interface IPersistenceService
    EResult delete(IWebContext context,
                   IWebInput input,
                   IWebOutput output);
+
+   //============================================================
+   // <T>编译配置处理。</T>
+   //
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
+   // @return 处理结果
+   //============================================================
+   EResult build(IWebContext context,
+                 IWebInput input,
+                 IWebOutput output);
 }

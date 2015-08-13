@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.tree" update_date="20150616085940">
-  <Persistence is_valid="Y" name="conent.list" label="目录定义" template="" source="${output.design}/src/content-design" note="">
-    <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.tree.common.XObject" inherits="" note="">
-      <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="code" label="代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="Boolean" name="is_valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
-      <Attribute is_valid="Y" type="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+<Content update_date="20150813132536">
+  <Persistence guid="AB5106D8852246D2A38B6050D6488994" is_valid="Y" name="design.tree" label="目录定义" template="" source="${output.design}/src/content-design" note="">
+    <Interface guid="2D1480663757447697852A0252BA3B6E" is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.tree.common.XObject" inherits="" note="">
+      <Attribute guid="F383E8256A544F4BB3845E4E267E5ECF" is_valid="Y" data_type_cd="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="9C54755A4C7441D8BD29EA10ABA3CFDF" is_valid="Y" data_type_cd="String" name="code" label="代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="18AF3A4853A446B189F38716EB68D872" is_valid="Y" data_type_cd="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="B590A12A0F12493E91EC16E0068A99FC" is_valid="Y" data_type_cd="Boolean" name="is_valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+      <Attribute guid="DFA4C43F6089463D94D94A47CAD7A3DE" is_valid="Y" data_type_cd="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>
-    <Component is_valid="Y" name="TreeColumn" label="目录分列" class_name="org.mo.cloud.content.design.tree.common.XTreeColumn" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeColumn" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="data_name" label="数据名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="width" label="宽度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Component guid="5E87AA974E864A21B2D911E8BC109508" is_valid="Y" name="TreeColumn" label="目录分列" class_name="org.mo.cloud.content.design.tree.common.XTreeColumn" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeColumn" inherits="IObject" note="">
+      <Attribute guid="0C47673CB00D4A5CA948F4713815ACD8" is_valid="Y" data_type_cd="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="584C422846174609A7FD70181BAABA75" is_valid="Y" data_type_cd="String" name="data_name" label="数据名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="46F4D267B08C426184A04B94B6D87283" is_valid="Y" data_type_cd="String" name="width" label="宽度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="TreeLevel" label="目录层级" class_name="org.mo.cloud.content.design.tree.common.XTreeLevel" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeLevel" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="id" label="编号" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Component guid="C1B5908FDBA9489EB98227C62CC87B9C" is_valid="Y" name="TreeLevel" label="目录层级" class_name="org.mo.cloud.content.design.tree.common.XTreeLevel" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeLevel" inherits="IObject" note="">
+      <Attribute guid="09F515A7E073472387C5FC6A9F18A906" is_valid="Y" data_type_cd="String" name="id" label="编号" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="TreeNodeType" label="节点类型" class_name="org.mo.cloud.content.design.tree.common.XTreeNodeType" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNodeType" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="storage" label="存储" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="service" label="服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="attributes" label="属性集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Component guid="C66B99CFC99146F6BC8F9C5881DBCE92" is_valid="Y" name="TreeNodeType" label="节点类型" class_name="org.mo.cloud.content.design.tree.common.XTreeNodeType" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNodeType" inherits="IObject" note="">
+      <Attribute guid="1597AF01E4AC4810AA28F9BB54FEBE8B" is_valid="Y" data_type_cd="String" name="storage" label="存储" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="878DF01A41B342379851EBC764CD7575" is_valid="Y" data_type_cd="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="ACD63D00595F4F97963162CBEDF0D64C" is_valid="Y" data_type_cd="String" name="service" label="服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="62F6998D5B13466C8FF82928565D0A75" is_valid="Y" data_type_cd="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="081BE9B7C4BB40C58FDE4EB276EDA6B4" is_valid="Y" data_type_cd="String" name="attributes" label="属性集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="TreeNodeGroup" label="节点分组" class_name="org.mo.cloud.content.design.tree.common.XTreeNodeGroup" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNodeGroup" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    <Component guid="FEE45EDE5E65457C977FD55F6F756779" is_valid="Y" name="TreeNodeGroup" label="节点分组" class_name="org.mo.cloud.content.design.tree.common.XTreeNodeGroup" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNodeGroup" inherits="IObject" note="">
+      <Attribute guid="B1AFC5855E40486686309697BBF8DB6F" is_valid="Y" data_type_cd="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="TreeNode" label="节点" class_name="org.mo.cloud.content.design.tree.common.XTreeNode" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNode" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="type_group" label="类型分组" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="type_code" label="类型代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="Boolean" name="has_child" label="含有子节点" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
-      <Attribute is_valid="Y" type="String" name="guid" label="唯一编号" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="Boolean" name="color" label="颜色" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="checked" label="是否选中" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="extended" label="是否展开" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="attributes" label="属性集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Component guid="B6CBAF96FA514D2CAD4AF4C3A132B39D" is_valid="Y" name="TreeNode" label="节点" class_name="org.mo.cloud.content.design.tree.common.XTreeNode" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNode" inherits="IObject" note="">
+      <Attribute guid="243FB14E664245FCAA66B55A56E2A0FE" is_valid="Y" data_type_cd="String" name="type_group" label="类型分组" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="D08A15DDD31B45A883C5F3D227C9221D" is_valid="Y" data_type_cd="String" name="type_code" label="类型代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="0C530DA5B9AC419D8BFD1B0078F3034B" is_valid="Y" data_type_cd="Boolean" name="has_child" label="含有子节点" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+      <Attribute guid="33F8A006600943C28C056703EB1E61DB" is_valid="Y" data_type_cd="String" name="guid" label="唯一编号" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="B1B028B4F308445094E4115C90B97788" is_valid="Y" data_type_cd="String" name="icon" label="图标" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute guid="4E42D54CD6C34514988815F81C25EB47" is_valid="Y" data_type_cd="Boolean" name="color" label="颜色" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="39FD1501F61E478D82432E9DC682E348" is_valid="Y" data_type_cd="String" name="checked" label="是否选中" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="12F2717452474108AE7BB2B6FCA57A5E" is_valid="Y" data_type_cd="String" name="extended" label="是否展开" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute guid="2E2537D93BEA4E3CAE644A15D50CAF71" is_valid="Y" data_type_cd="String" name="attributes" label="属性集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="TreeNodeCell" label="节点格子" class_name="org.mo.cloud.content.design.tree.common.XTreeNodeCell" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNodeCell" inherits="IObject" note="" />
-    <Component is_valid="Y" name="TreeView" label="目录树" class_name="org.mo.cloud.content.design.tree.common.XTreeView" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeView" inherits="IObject" note="">
-      <Attribute is_valid="Y" type="String" name="service" label="服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Component guid="BD94DDA8F809427594F077B5F2B4D3FC" is_valid="Y" name="TreeNodeCell" label="节点格子" class_name="org.mo.cloud.content.design.tree.common.XTreeNodeCell" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeNodeCell" inherits="IObject" note="" />
+    <Component guid="2FAB5611DB2B4204BF34FC13BB003C1B" is_valid="Y" name="TreeView" label="目录树" class_name="org.mo.cloud.content.design.tree.common.XTreeView" base_name="org.mo.cloud.content.design.tree.base.XBaseTreeView" inherits="IObject" note="">
+      <Attribute guid="3FEAAB30BCBB48B7A1B3D42459DE76A6" is_valid="Y" data_type_cd="String" name="service" label="服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
   </Persistence>
 </Content>
