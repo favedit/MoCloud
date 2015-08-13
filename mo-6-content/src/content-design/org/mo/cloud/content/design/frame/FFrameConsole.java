@@ -153,6 +153,37 @@ public class FFrameConsole
    //   }
 
    //============================================================
+   // <T>根据名称建立目录配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param frameName 页面名称
+   // @return 目录配置
+   //============================================================
+   protected void buildSelect(String storgeName,
+                              FContentObject xcontent,
+                              EPersistenceMode modeCd){
+      // 获得编辑引用
+      String editRefer = xcontent.get("edit_refer", null);
+      if(RString.isEmpty(editRefer)){
+         return;
+      }
+      // 获得列表定义
+      FContentObject xlist = _listConsole.findDefine(storgeName, editRefer, modeCd);
+      if(xlist.hasNode()){
+         for(FContentObject xitem : xlist.nodes()){
+            if(xitem.getBoolean("is_valid")){
+               FContentObject xselectitem = new FContentObject();
+               xselectitem.setName("SelectItem");
+               xselectitem.set("name", xitem.get("name"));
+               xselectitem.set("label", xitem.get("label"));
+               xselectitem.set("data_value", xitem.get("value"));
+               xcontent.push(xselectitem);
+            }
+         }
+      }
+   }
+
+   //============================================================
    // <T>查询配置处理。</T>
    //
    // @param context 网络环境
@@ -184,18 +215,7 @@ public class FFrameConsole
       //..........................................................
       // 处理模板
       if(content.isName("Select")){
-         //         FContentObject contentParent = content.parent();
-         //         int index = contentParent.nodes().indexOf(content);
-         //         contentParent.nodes().remove(content);
-         //         // 查找引用内容
-         //         String frameSource = content.get("frame_source");
-         //         FContentObject contentTemplate = findDefine(storgeName, frameSource, modeCd);
-         //         buildContentConfig(storgeName, contentTemplate, modeCd);
-         //         if(contentTemplate.hasNode()){
-         //            for(FContentObject contentNode : contentTemplate.nodes()){
-         //               contentParent.nodes().insert(contentNode, index++);
-         //            }
-         //         }
+         buildSelect(storgeName, content, modeCd);
       }
       //..........................................................
       // 处理父继承
