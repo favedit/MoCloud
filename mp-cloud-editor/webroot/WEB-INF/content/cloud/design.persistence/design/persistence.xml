@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.persistence" update_date="20150203091345">
+<Content name="design.persistence" update_date="20150813091706">
   <Persistence _type="Persistence" is_valid="Y" name="content.persistence" label="持久定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象" class_name="org.mo.cloud.content.design.persistence.common.XObject" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="is_valid" label="有效" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="name" label="名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="label" label="标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="note" label="备注" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>
     <Component is_valid="Y" name="Attribute" label="属性" class_name="org.mo.cloud.content.design.persistence.common.XAttribute" base_name="org.mo.cloud.content.design.persistence.base.XBaseAttribute" inherits="IObject" note="">
       <Attribute is_valid="Y" type="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="data_group" label="数据分组" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="data_code" label="数据代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_default" label="数据默认值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="Interface" label="接口" class_name="org.mo.cloud.content.design.persistence.common.XInterface" base_name="org.mo.cloud.content.design.persistence.base.XBaseInterface" inherits="IObject" note="">
       <Attribute is_valid="Y" type="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="class_name" label="实装类名" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="source_path" label="代码路径" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="Component" label="组件" class_name="org.mo.cloud.content.design.persistence.common.XComponent" base_name="org.mo.cloud.content.design.persistence.base.XBaseComponent" inherits="IObject" note="">
+      <Attribute is_valid="Y" type="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="class_name" label="类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="base_name" label="基类名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="inherits" label="继承集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="source" label="代码位置" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="source_path" label="代码路径" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
     <Component is_valid="Y" name="Persistence" label="持久化对象" class_name="org.mo.cloud.content.design.persistence.common.XPersistence" base_name="org.mo.cloud.content.design.persistence.base.XBasePersistence" inherits="IObject" note="" />
     <Component is_valid="Y" name="Package" label="持久化分组" class_name="org.mo.cloud.content.design.persistence.common.XPackage" base_name="org.mo.cloud.content.design.persistence.base.XBasePackage" inherits="IObject" note="" />

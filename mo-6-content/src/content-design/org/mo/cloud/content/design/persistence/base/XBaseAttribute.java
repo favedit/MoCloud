@@ -17,6 +17,10 @@ public abstract class XBaseAttribute
    // 类名称
    public static final String CONTENT_NAME = "Attribute";
 
+   // 有效的定义
+   @AContentField
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
+
    // 名称的定义
    @AContentField
    public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
@@ -32,6 +36,14 @@ public abstract class XBaseAttribute
    // 数据类型的定义
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 数据分组的定义
+   @AContentField
+   public final static FContentField DATA_GROUP = new FContentField("dataGroup", "data_group", EContentData.String, "", "", "", "YYNY");
+
+   // 数据代码的定义
+   @AContentField
+   public final static FContentField DATA_CODE = new FContentField("dataCode", "data_code", EContentData.String, "", "", "", "YYNY");
 
    // 数据默认值的定义
    @AContentField
@@ -55,6 +67,10 @@ public abstract class XBaseAttribute
       return NAME.equals(xinstance.contentClass().name());
    }
 
+   // 有效
+   @AName("is_valid")
+   protected String _isValid;
+
    // 名称
    @AName("name")
    protected String _name;
@@ -71,9 +87,35 @@ public abstract class XBaseAttribute
    @AName("data_type_cd")
    protected String _dataTypeCd;
 
+   // 数据分组
+   @AName("data_group")
+   protected String _dataGroup;
+
+   // 数据代码
+   @AName("data_code")
+   protected String _dataCode;
+
    // 数据默认值
    @AName("data_default")
    protected String _dataDefault;
+
+   //============================================================
+   // <T>获得有效的内容。</T>
+   //
+   // @return 有效
+   //============================================================
+   public String getIsValid(){
+      return _isValid;
+   }
+
+   //============================================================
+   // <T>设置有效的内容。</T>
+   //
+   // @param value 有效
+   //============================================================
+   public void setIsValid(String value){
+      _isValid = value;
+   }
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -145,6 +187,42 @@ public abstract class XBaseAttribute
    //============================================================
    public void setDataTypeCd(String value){
       _dataTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得数据分组的内容。</T>
+   //
+   // @return 数据分组
+   //============================================================
+   public String getDataGroup(){
+      return _dataGroup;
+   }
+
+   //============================================================
+   // <T>设置数据分组的内容。</T>
+   //
+   // @param value 数据分组
+   //============================================================
+   public void setDataGroup(String value){
+      _dataGroup = value;
+   }
+
+   //============================================================
+   // <T>获得数据代码的内容。</T>
+   //
+   // @return 数据代码
+   //============================================================
+   public String getDataCode(){
+      return _dataCode;
+   }
+
+   //============================================================
+   // <T>设置数据代码的内容。</T>
+   //
+   // @param value 数据代码
+   //============================================================
+   public void setDataCode(String value){
+      _dataCode = value;
    }
 
    //============================================================

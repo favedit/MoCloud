@@ -1,5 +1,6 @@
 package org.mo.cloud.design.web.tag;
 
+import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 import org.mo.com.lang.FFatalError;
@@ -29,10 +30,12 @@ public class FFrameTag
       }
       // 获得定义
       IFrameConsole console = RAop.find(IFrameConsole.class);
-      FXmlNode xframe = console.buildConfig("system", frameName, EPersistenceMode.Config);
-      if(xframe == null){
+      FContentObject xcontent = console.buildDefine("cloud", frameName, EPersistenceMode.Config);
+      if(xcontent == null){
          throw new FFatalError("Form is not exists. (source={1}, form_name={2})", _source, frameName);
       }
+      FXmlNode xframe = new FXmlNode();
+      xcontent.saveConfig(xframe, true);
       // 输出内容
       _writer.appendLine("<SCRIPT id='", name, "' type='application/xml'>");
       _writer.appendLine(xframe.xml());

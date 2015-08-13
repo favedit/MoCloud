@@ -17,6 +17,10 @@ public abstract class XBaseComponent
    // 类名称
    public static final String CONTENT_NAME = "Component";
 
+   // 有效的定义
+   @AContentField
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
+
    // 名称的定义
    @AContentField
    public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
@@ -29,6 +33,10 @@ public abstract class XBaseComponent
    @AContentField
    public final static FContentField NOTE = new FContentField("note", "note", EContentData.String, "", "", "", "YYNY");
 
+   // 继承集合的定义
+   @AContentField
+   public final static FContentField INHERITS = new FContentField("inherits", "inherits", EContentData.String, "", "", "", "YYNY");
+
    // 类名称的定义
    @AContentField
    public final static FContentField CLASS_NAME = new FContentField("className", "class_name", EContentData.String, "", "", "", "YYNY");
@@ -37,13 +45,9 @@ public abstract class XBaseComponent
    @AContentField
    public final static FContentField BASE_NAME = new FContentField("baseName", "base_name", EContentData.String, "", "", "", "YYNY");
 
-   // 继承集合的定义
+   // 代码路径的定义
    @AContentField
-   public final static FContentField INHERITS = new FContentField("inherits", "inherits", EContentData.String, "", "", "", "YYNY");
-
-   // 代码位置的定义
-   @AContentField
-   public final static FContentField SOURCE = new FContentField("source", "source", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField SOURCE_PATH = new FContentField("sourcePath", "source_path", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -63,6 +67,10 @@ public abstract class XBaseComponent
       return NAME.equals(xinstance.contentClass().name());
    }
 
+   // 有效
+   @AName("is_valid")
+   protected String _isValid;
+
    // 名称
    @AName("name")
    protected String _name;
@@ -75,6 +83,10 @@ public abstract class XBaseComponent
    @AName("note")
    protected String _note;
 
+   // 继承集合
+   @AName("inherits")
+   protected String _inherits;
+
    // 类名称
    @AName("class_name")
    protected String _className;
@@ -83,13 +95,27 @@ public abstract class XBaseComponent
    @AName("base_name")
    protected String _baseName;
 
-   // 继承集合
-   @AName("inherits")
-   protected String _inherits;
+   // 代码路径
+   @AName("source_path")
+   protected String _sourcePath;
 
-   // 代码位置
-   @AName("source")
-   protected String _source;
+   //============================================================
+   // <T>获得有效的内容。</T>
+   //
+   // @return 有效
+   //============================================================
+   public String getIsValid(){
+      return _isValid;
+   }
+
+   //============================================================
+   // <T>设置有效的内容。</T>
+   //
+   // @param value 有效
+   //============================================================
+   public void setIsValid(String value){
+      _isValid = value;
+   }
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -146,6 +172,24 @@ public abstract class XBaseComponent
    }
 
    //============================================================
+   // <T>获得继承集合的内容。</T>
+   //
+   // @return 继承集合
+   //============================================================
+   public String getInherits(){
+      return _inherits;
+   }
+
+   //============================================================
+   // <T>设置继承集合的内容。</T>
+   //
+   // @param value 继承集合
+   //============================================================
+   public void setInherits(String value){
+      _inherits = value;
+   }
+
+   //============================================================
    // <T>获得类名称的内容。</T>
    //
    // @return 类名称
@@ -182,39 +226,21 @@ public abstract class XBaseComponent
    }
 
    //============================================================
-   // <T>获得继承集合的内容。</T>
+   // <T>获得代码路径的内容。</T>
    //
-   // @return 继承集合
+   // @return 代码路径
    //============================================================
-   public String getInherits(){
-      return _inherits;
+   public String getSourcePath(){
+      return _sourcePath;
    }
 
    //============================================================
-   // <T>设置继承集合的内容。</T>
+   // <T>设置代码路径的内容。</T>
    //
-   // @param value 继承集合
+   // @param value 代码路径
    //============================================================
-   public void setInherits(String value){
-      _inherits = value;
-   }
-
-   //============================================================
-   // <T>获得代码位置的内容。</T>
-   //
-   // @return 代码位置
-   //============================================================
-   public String getSource(){
-      return _source;
-   }
-
-   //============================================================
-   // <T>设置代码位置的内容。</T>
-   //
-   // @param value 代码位置
-   //============================================================
-   public void setSource(String value){
-      _source = value;
+   public void setSourcePath(String value){
+      _sourcePath = value;
    }
 
 }

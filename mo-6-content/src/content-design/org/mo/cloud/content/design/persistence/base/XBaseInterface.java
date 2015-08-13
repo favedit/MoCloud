@@ -17,6 +17,10 @@ public abstract class XBaseInterface
    // 类名称
    public static final String CONTENT_NAME = "Interface";
 
+   // 有效的定义
+   @AContentField
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
+
    // 名称的定义
    @AContentField
    public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
@@ -32,6 +36,14 @@ public abstract class XBaseInterface
    // 继承集合的定义
    @AContentField
    public final static FContentField INHERITS = new FContentField("inherits", "inherits", EContentData.String, "", "", "", "YYNY");
+
+   // 实装类名的定义
+   @AContentField
+   public final static FContentField CLASS_NAME = new FContentField("className", "class_name", EContentData.String, "", "", "", "YYNY");
+
+   // 代码路径的定义
+   @AContentField
+   public final static FContentField SOURCE_PATH = new FContentField("sourcePath", "source_path", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -51,6 +63,10 @@ public abstract class XBaseInterface
       return NAME.equals(xinstance.contentClass().name());
    }
 
+   // 有效
+   @AName("is_valid")
+   protected String _isValid;
+
    // 名称
    @AName("name")
    protected String _name;
@@ -66,6 +82,32 @@ public abstract class XBaseInterface
    // 继承集合
    @AName("inherits")
    protected String _inherits;
+
+   // 实装类名
+   @AName("class_name")
+   protected String _className;
+
+   // 代码路径
+   @AName("source_path")
+   protected String _sourcePath;
+
+   //============================================================
+   // <T>获得有效的内容。</T>
+   //
+   // @return 有效
+   //============================================================
+   public String getIsValid(){
+      return _isValid;
+   }
+
+   //============================================================
+   // <T>设置有效的内容。</T>
+   //
+   // @param value 有效
+   //============================================================
+   public void setIsValid(String value){
+      _isValid = value;
+   }
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -137,6 +179,42 @@ public abstract class XBaseInterface
    //============================================================
    public void setInherits(String value){
       _inherits = value;
+   }
+
+   //============================================================
+   // <T>获得实装类名的内容。</T>
+   //
+   // @return 实装类名
+   //============================================================
+   public String getClassName(){
+      return _className;
+   }
+
+   //============================================================
+   // <T>设置实装类名的内容。</T>
+   //
+   // @param value 实装类名
+   //============================================================
+   public void setClassName(String value){
+      _className = value;
+   }
+
+   //============================================================
+   // <T>获得代码路径的内容。</T>
+   //
+   // @return 代码路径
+   //============================================================
+   public String getSourcePath(){
+      return _sourcePath;
+   }
+
+   //============================================================
+   // <T>设置代码路径的内容。</T>
+   //
+   // @param value 代码路径
+   //============================================================
+   public void setSourcePath(String value){
+      _sourcePath = value;
    }
 
 }

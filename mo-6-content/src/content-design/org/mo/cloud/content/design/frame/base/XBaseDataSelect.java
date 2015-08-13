@@ -209,6 +209,38 @@ public abstract class XBaseDataSelect
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
+   // 数据必须的定义
+   @AContentField
+   public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
+
+   // 数据类型的定义
+   @AContentField
+   public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 数据名称的定义
+   @AContentField
+   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
+
+   // 数据别称的定义
+   @AContentField
+   public final static FContentField DATA_ALIAS = new FContentField("dataAlias", "data_alias", EContentData.String, "", "", "", "YYNY");
+
+   // 数据内容的定义
+   @AContentField
+   public final static FContentField DATA_VALUE = new FContentField("dataValue", "data_value", EContentData.String, "", "", "", "YYNY");
+
+   // 数据默认的定义
+   @AContentField
+   public final static FContentField DATA_DEFAULT = new FContentField("dataDefault", "data_default", EContentData.String, "", "", "", "YYNY");
+
+   // 数据来源的定义
+   @AContentField
+   public final static FContentField DATA_SOURCE = new FContentField("dataSource", "data_source", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑引用的定义
+   @AContentField
+   public final static FContentField EDIT_REFER = new FContentField("editRefer", "edit_refer", EContentData.String, "", "", "", "YYNY");
+
    // 输入尺寸的定义
    @AContentField
    public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
@@ -422,6 +454,38 @@ public abstract class XBaseDataSelect
    // 编辑尺寸
    @AName("edit_size")
    protected String _editSize;
+
+   // 数据必须
+   @AName("data_require")
+   protected boolean _dataRequire;
+
+   // 数据类型
+   @AName("data_type_cd")
+   protected String _dataTypeCd;
+
+   // 数据名称
+   @AName("data_name")
+   protected String _dataName;
+
+   // 数据别称
+   @AName("data_alias")
+   protected String _dataAlias;
+
+   // 数据内容
+   @AName("data_value")
+   protected String _dataValue;
+
+   // 数据默认
+   @AName("data_default")
+   protected String _dataDefault;
+
+   // 数据来源
+   @AName("data_source")
+   protected String _dataSource;
+
+   // 编辑引用
+   @AName("edit_refer")
+   protected String _editRefer;
 
    // 输入尺寸
    @AName("input_size")
@@ -1289,6 +1353,150 @@ public abstract class XBaseDataSelect
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据必须的内容。</T>
+   //
+   // @return 数据必须
+   //============================================================
+   public Boolean getDataRequire(){
+      return _dataRequire;
+   }
+
+   //============================================================
+   // <T>设置数据必须的内容。</T>
+   //
+   // @param value 数据必须
+   //============================================================
+   public void setDataRequire(Boolean value){
+      _dataRequire = value;
+   }
+
+   //============================================================
+   // <T>获得数据类型的内容。</T>
+   //
+   // @return 数据类型
+   //============================================================
+   public String getDataTypeCd(){
+      return _dataTypeCd;
+   }
+
+   //============================================================
+   // <T>设置数据类型的内容。</T>
+   //
+   // @param value 数据类型
+   //============================================================
+   public void setDataTypeCd(String value){
+      _dataTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDataName(){
+      return _dataName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDataName(String value){
+      _dataName = value;
+   }
+
+   //============================================================
+   // <T>获得数据别称的内容。</T>
+   //
+   // @return 数据别称
+   //============================================================
+   public String getDataAlias(){
+      return _dataAlias;
+   }
+
+   //============================================================
+   // <T>设置数据别称的内容。</T>
+   //
+   // @param value 数据别称
+   //============================================================
+   public void setDataAlias(String value){
+      _dataAlias = value;
+   }
+
+   //============================================================
+   // <T>获得数据内容的内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String getDataValue(){
+      return _dataValue;
+   }
+
+   //============================================================
+   // <T>设置数据内容的内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDataValue(String value){
+      _dataValue = value;
+   }
+
+   //============================================================
+   // <T>获得数据默认的内容。</T>
+   //
+   // @return 数据默认
+   //============================================================
+   public String getDataDefault(){
+      return _dataDefault;
+   }
+
+   //============================================================
+   // <T>设置数据默认的内容。</T>
+   //
+   // @param value 数据默认
+   //============================================================
+   public void setDataDefault(String value){
+      _dataDefault = value;
+   }
+
+   //============================================================
+   // <T>获得数据来源的内容。</T>
+   //
+   // @return 数据来源
+   //============================================================
+   public String getDataSource(){
+      return _dataSource;
+   }
+
+   //============================================================
+   // <T>设置数据来源的内容。</T>
+   //
+   // @param value 数据来源
+   //============================================================
+   public void setDataSource(String value){
+      _dataSource = value;
+   }
+
+   //============================================================
+   // <T>获得编辑引用的内容。</T>
+   //
+   // @return 编辑引用
+   //============================================================
+   public String getEditRefer(){
+      return _editRefer;
+   }
+
+   //============================================================
+   // <T>设置编辑引用的内容。</T>
+   //
+   // @param value 编辑引用
+   //============================================================
+   public void setEditRefer(String value){
+      _editRefer = value;
    }
 
    //============================================================

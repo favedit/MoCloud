@@ -213,13 +213,17 @@ public abstract class XBaseColor
    @AContentField
    public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
 
+   // 数据类型的定义
+   @AContentField
+   public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
+
    // 数据名称的定义
    @AContentField
    public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
 
-   // 数据类型的定义
+   // 数据别称的定义
    @AContentField
-   public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField DATA_ALIAS = new FContentField("dataAlias", "data_alias", EContentData.String, "", "", "", "YYNY");
 
    // 数据内容的定义
    @AContentField
@@ -228,6 +232,10 @@ public abstract class XBaseColor
    // 数据默认的定义
    @AContentField
    public final static FContentField DATA_DEFAULT = new FContentField("dataDefault", "data_default", EContentData.String, "", "", "", "YYNY");
+
+   // 数据来源的定义
+   @AContentField
+   public final static FContentField DATA_SOURCE = new FContentField("dataSource", "data_source", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -443,13 +451,17 @@ public abstract class XBaseColor
    @AName("data_require")
    protected boolean _dataRequire;
 
+   // 数据类型
+   @AName("data_type_cd")
+   protected String _dataTypeCd;
+
    // 数据名称
    @AName("data_name")
    protected String _dataName;
 
-   // 数据类型
-   @AName("data_type_cd")
-   protected String _dataTypeCd;
+   // 数据别称
+   @AName("data_alias")
+   protected String _dataAlias;
 
    // 数据内容
    @AName("data_value")
@@ -458,6 +470,10 @@ public abstract class XBaseColor
    // 数据默认
    @AName("data_default")
    protected String _dataDefault;
+
+   // 数据来源
+   @AName("data_source")
+   protected String _dataSource;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -1342,6 +1358,24 @@ public abstract class XBaseColor
    }
 
    //============================================================
+   // <T>获得数据类型的内容。</T>
+   //
+   // @return 数据类型
+   //============================================================
+   public String getDataTypeCd(){
+      return _dataTypeCd;
+   }
+
+   //============================================================
+   // <T>设置数据类型的内容。</T>
+   //
+   // @param value 数据类型
+   //============================================================
+   public void setDataTypeCd(String value){
+      _dataTypeCd = value;
+   }
+
+   //============================================================
    // <T>获得数据名称的内容。</T>
    //
    // @return 数据名称
@@ -1360,21 +1394,21 @@ public abstract class XBaseColor
    }
 
    //============================================================
-   // <T>获得数据类型的内容。</T>
+   // <T>获得数据别称的内容。</T>
    //
-   // @return 数据类型
+   // @return 数据别称
    //============================================================
-   public String getDataTypeCd(){
-      return _dataTypeCd;
+   public String getDataAlias(){
+      return _dataAlias;
    }
 
    //============================================================
-   // <T>设置数据类型的内容。</T>
+   // <T>设置数据别称的内容。</T>
    //
-   // @param value 数据类型
+   // @param value 数据别称
    //============================================================
-   public void setDataTypeCd(String value){
-      _dataTypeCd = value;
+   public void setDataAlias(String value){
+      _dataAlias = value;
    }
 
    //============================================================
@@ -1411,6 +1445,24 @@ public abstract class XBaseColor
    //============================================================
    public void setDataDefault(String value){
       _dataDefault = value;
+   }
+
+   //============================================================
+   // <T>获得数据来源的内容。</T>
+   //
+   // @return 数据来源
+   //============================================================
+   public String getDataSource(){
+      return _dataSource;
+   }
+
+   //============================================================
+   // <T>设置数据来源的内容。</T>
+   //
+   // @param value 数据来源
+   //============================================================
+   public void setDataSource(String value){
+      _dataSource = value;
    }
 
 }

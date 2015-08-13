@@ -17,6 +17,10 @@ public abstract class XBasePersistence
    // 类名称
    public static final String CONTENT_NAME = "Persistence";
 
+   // 有效的定义
+   @AContentField
+   public final static FContentField IS_VALID = new FContentField("isValid", "is_valid", EContentData.String, "", "", "", "YYNY");
+
    // 名称的定义
    @AContentField
    public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
@@ -47,6 +51,10 @@ public abstract class XBasePersistence
       return NAME.equals(xinstance.contentClass().name());
    }
 
+   // 有效
+   @AName("is_valid")
+   protected String _isValid;
+
    // 名称
    @AName("name")
    protected String _name;
@@ -58,6 +66,24 @@ public abstract class XBasePersistence
    // 备注
    @AName("note")
    protected String _note;
+
+   //============================================================
+   // <T>获得有效的内容。</T>
+   //
+   // @return 有效
+   //============================================================
+   public String getIsValid(){
+      return _isValid;
+   }
+
+   //============================================================
+   // <T>设置有效的内容。</T>
+   //
+   // @param value 有效
+   //============================================================
+   public void setIsValid(String value){
+      _isValid = value;
+   }
 
    //============================================================
    // <T>获得名称的内容。</T>

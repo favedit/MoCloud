@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150813092240">
+  <List guid="305D37A2029D426D9FDFEB4AEBD1B226" name="editor.design.persistence.AttributeType" label="属性类型" is_valid="Y" note="" cache="Y">
+    <Item guid="1C1B0B0AB6C141B9B815DE00764D3A66" name="bool" label="布尔值" is_valid="Y" note="" type="I" value="Boolean" />
+    <Item guid="3CD88BA4DD0D465A8A21071CE5F36D61" name="integer" label="整数" is_valid="Y" note="" type="I" value="Integer" />
+    <Item guid="48AA44CF11FA4A4986B36A1522363146" name="long" label="长整数" is_valid="Y" note="" type="I" value="Long" />
+    <Item guid="2DDF91A1112B4D47B21F26E9A86C7528" name="float" label="浮点数" is_valid="Y" note="" type="I" value="Float" />
+    <Item guid="7A93195556FA4451A74C74C4A24CBCEF" name="double" label="双精度浮点数" is_valid="Y" note="" type="I" value="Double" />
+    <Item guid="F707AD076E8944B0AF1F53AE326BF4B0" name="string" label="字符串" is_valid="Y" note="" type="I" value="String" />
+    <Item guid="0C86DDC5B9324D5F9499C72848929692" name="datetime" label="时间" is_valid="Y" note="" type="I" value="DateTime" />
+  </List>
+</Content>

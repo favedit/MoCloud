@@ -3,7 +3,6 @@ package org.mo.cloud.content.design.frame;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
-import org.mo.com.xml.FXmlNode;
 
 //============================================================
 // <T>内容表单控制台接口。</T>
@@ -43,16 +42,15 @@ public interface IFrameConsole
                              EPersistenceMode modeCd);
 
    //============================================================
-   // <T>根据名称建立目录配置。</T>
+   // <T>查询配置处理。</T>
    //
-   // @param storgeName 存储名称
-   // @param frameName 页面名称
-   // @param modeCd 模式类型
-   // @return 目录配置
+   // @param context 网络环境
+   // @param input 网络输入
+   // @param output 网络输出
    //============================================================
-   FXmlNode buildConfig(String storgeName,
-                        String frameName,
-                        EPersistenceMode modeCd);
+   FContentObject buildDefine(String storgeName,
+                              String frameName,
+                              EPersistenceMode modeCd);
 
    //============================================================
    // <T>更新表单配置。</T>

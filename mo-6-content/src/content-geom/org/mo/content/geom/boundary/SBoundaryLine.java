@@ -1,6 +1,5 @@
 package org.mo.content.geom.boundary;
 
-
 public class SBoundaryLine
 {
    public double length;
