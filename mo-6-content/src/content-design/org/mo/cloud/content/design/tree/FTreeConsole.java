@@ -132,6 +132,11 @@ public class FTreeConsole
       return xconfig;
    }
 
+   @Override
+   public void insert(String storgeName,
+                      FContentObject contentObject){
+   }
+
    //============================================================
    // <T>更新配置处理。</T>
    //
@@ -151,5 +156,10 @@ public class FTreeConsole
       node.store();
       // 清空缓冲
       _trees.clear();
+   }
+
+   @Override
+   public void delete(String storgeName,
+                      FContentObject contentObject){
    }
 }

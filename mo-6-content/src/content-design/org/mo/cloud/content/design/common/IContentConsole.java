@@ -1,46 +1,23 @@
-package org.mo.cloud.content.design.list;
+package org.mo.cloud.content.design.common;
 
-import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
-import org.mo.cloud.content.design.list.common.XList;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
 
 //============================================================
-// <T>列表控制台接口。</T>
+// <T>内容控制台接口。</T>
 //============================================================
-public interface IListConsole
-      extends
-         IContentConsole
+public interface IContentConsole
 {
    //============================================================
-   // <T>获得列表集合。</T>
+   // <T>根据名称获得容器定义。</T>
    //
    // @param storgeName 存储名称
-   // @return 列表集合
-   //============================================================
-   XList[] list(String storgeName);
-
-   //============================================================
-   // <T>根据名称获得列表。</T>
-   //
-   // @param storgeName 存储名称
-   // @param listName 列表名称
-   // @return 列表
-   //============================================================
-   XList find(String storgeName,
-              String listName,
-              EPersistenceMode modeCd);
-
-   //============================================================
-   // <T>根据名称获得列表定义。</T>
-   //
-   // @param storgeName 存储名称
-   // @param listName 表单名称
+   // @param containerName 容器名称
    // @param modeCd 模式类型
-   // @return 表单
+   // @return 容器定义
    //============================================================
    FContentObject findDefine(String storgeName,
-                             String listName,
+                             String containerName,
                              EPersistenceMode modeCd);
 
    //============================================================

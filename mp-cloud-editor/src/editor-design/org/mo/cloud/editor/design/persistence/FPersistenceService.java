@@ -1,5 +1,6 @@
 package org.mo.cloud.editor.design.persistence;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceAction;
@@ -33,6 +34,16 @@ public class FPersistenceService
    // <T>构造设计持久服务。</T>
    //============================================================
    public FPersistenceService(){
+   }
+
+   //============================================================
+   // <T>获得内容管理器。</T>
+   //
+   // @return 内容管理器
+   //============================================================
+   @Override
+   protected IContentConsole contentConsole(){
+      return _persistenceConsole;
    }
 
    //============================================================

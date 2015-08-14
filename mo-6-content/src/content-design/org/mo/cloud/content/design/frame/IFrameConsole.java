@@ -1,5 +1,6 @@
 package org.mo.cloud.content.design.frame;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
@@ -8,6 +9,8 @@ import org.mo.cloud.content.design.persistence.EPersistenceMode;
 // <T>内容表单控制台接口。</T>
 //============================================================
 public interface IFrameConsole
+      extends
+         IContentConsole
 {
    //============================================================
    // <T>获得表单集合。</T>
@@ -30,18 +33,6 @@ public interface IFrameConsole
                        EPersistenceMode modeCd);
 
    //============================================================
-   // <T>根据名称获得表单定义。</T>
-   //
-   // @param storgeName 存储名称
-   // @param frameName 页面名称
-   // @param modeCd 模式类型
-   // @return 表单定义
-   //============================================================
-   FContentObject findDefine(String storgeName,
-                             String frameName,
-                             EPersistenceMode modeCd);
-
-   //============================================================
    // <T>查询配置处理。</T>
    //
    // @param context 网络环境
@@ -51,12 +42,4 @@ public interface IFrameConsole
    FContentObject buildDefine(String storgeName,
                               String frameName,
                               EPersistenceMode modeCd);
-
-   //============================================================
-   // <T>更新表单配置。</T>
-   //
-   // @param frame 页面
-   //============================================================
-   void update(String storgeName,
-               FContentObject frame);
 }

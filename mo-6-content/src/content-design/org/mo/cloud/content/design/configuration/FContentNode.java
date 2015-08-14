@@ -120,6 +120,15 @@ public class FContentNode
    }
 
    //============================================================
+   // <T>设置配置节点。</T>
+   //
+   // @param contentObject 配置节点
+   //============================================================
+   public void setConfig(FContentObject contentObject){
+      _config = contentObject;
+   }
+
+   //============================================================
    // <T>递归查询指定编号的内容节点。</T>
    //
    // @param objectId 对象编号

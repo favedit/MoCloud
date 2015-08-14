@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="59111db0-2176-4a68-8070-8ceb67ba0ca4" name="statistics.financial.tender" label="M#12cn15动态投标表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Tender" data_name="ST_FIN_TENDER" data_alias="ST_FIN_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="b20b3017-481c-4fa1-af9e-af4637cc90cd" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="7846b062-ee68-474f-8722-220d4a3f9bf9" name="link_date" label="M#12cn14记录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldString _uuid="fbf02124-d675-4055-94ad-d77bcf39754b" name="label" label="M#12cn12标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="800" />
+  <FieldString _uuid="b607c8e5-9740-4082-be84-7318987f0c03" name="borrow_model" label="M#12cn14借款类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MODEL" data_size="20" />
+  <FieldInteger _uuid="a44d2ffd-fcc5-499d-851d-9e85d81cf762" name="borrow_duration" label="M#12cn14借款期限" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_DURATION" />
+  <FieldDouble _uuid="bdb3da0b-a72e-45e0-825f-4694415804da" name="borrow_money" label="M#12cn14借款金额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MONEY" />
+  <FieldDouble _uuid="9c8d7bba-81ec-45b7-86eb-5875c924c067" name="borrow_inerest" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST" />
+  <FieldFloat _uuid="1db45be6-dcf0-4126-b23a-5b6cde5ec2f2" name="borrow_inerest_rate" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST_RATE" />
+  <FieldString _uuid="1cef4242-66e3-4fc4-a3f2-a97e00be41d0" name="info" label="M#12cn12信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INFO" data_size="2000" />
+  <FieldTemplate _uuid="bfaf984a-071f-412e-b4bc-eb28b98adcd8" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

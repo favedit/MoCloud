@@ -117,6 +117,24 @@ public class FListConsole
    // @param contentObject 配置对象
    //============================================================
    @Override
+   public void insert(String storgeName,
+                      FContentObject contentObject){
+      String nodeName = contentObject.get("name");
+      FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
+      FContentNode contentNode = space.create(nodeName);
+      contentNode.setConfig(contentObject);
+      contentNode.store();
+      // 清空缓冲
+      _lists.clear();
+   }
+
+   //============================================================
+   // <T>更新列表配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   @Override
    public void update(String storgeName,
                       FContentObject contentObject){
       String nodeName = contentObject.get("name");
@@ -127,6 +145,22 @@ public class FListConsole
       persistence.mergeConfig(xinstance, contentObject, EPersistenceMode.Config);
       // 保存处理
       node.store();
+      // 清空缓冲
+      _lists.clear();
+   }
+
+   //============================================================
+   // <T>删除列表配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   @Override
+   public void delete(String storgeName,
+                      FContentObject contentObject){
+      String nodeName = contentObject.get("name");
+      FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
+      node.remove();
       // 清空缓冲
       _lists.clear();
    }

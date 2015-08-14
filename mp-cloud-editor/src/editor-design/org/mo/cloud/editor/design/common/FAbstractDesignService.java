@@ -1,5 +1,6 @@
 package org.mo.cloud.editor.design.common;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
@@ -23,11 +24,21 @@ import org.mo.web.protocol.context.IWebOutput;
 public abstract class FAbstractDesignService
       extends FObject
 {
+   // 存储名称
+   protected String _storageName = "cloud";
+
    //============================================================
    // <T>构造设计基础服务。</T>
    //============================================================
    public FAbstractDesignService(){
    }
+
+   //============================================================
+   // <T>获得内容管理器。</T>
+   //
+   // @return 内容管理器
+   //============================================================
+   protected abstract IContentConsole contentConsole();
 
    //============================================================
    // <T>获得内容列表处理。</T>
@@ -192,7 +203,9 @@ public abstract class FAbstractDesignService
       if(RString.isEmpty(containerName)){
          throw new FFatalError("Container name is empty.");
       }
+      //............................................................
       // 生成输出
+      IContentConsole contentConsole = contentConsole();
       FXmlNode xconfig = output.config();
       if(ECatalogNodeGroup.Package.equals(typeGroup)){
          // 显示包内表单集合
@@ -206,7 +219,7 @@ public abstract class FAbstractDesignService
          }
       }else if(ECatalogNodeGroup.Container.equals(typeGroup)){
          // 显示表单内控件集合
-         FContentObject xcontainer = contentFindDefine(containerName, EPersistenceMode.Config);
+         FContentObject xcontainer = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
          for(FContentObject xcontrol : xcontainer.nodes()){
             buildTreeNode(xconfig, xcontrol, ECatalogNodeGroup.Item);
          }
@@ -217,7 +230,7 @@ public abstract class FAbstractDesignService
             throw new FFatalError("Container item guid is empty.");
          }
          // 显示表单内控件集合
-         FContentObject xcontainer = contentFindDefine(containerName, EPersistenceMode.Config);
+         FContentObject xcontainer = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
          FContentObject xitem = xcontainer.search(itemGuid);
          if(xitem == null){
             throw new FFatalError("Container item guid is not exists.");
@@ -266,7 +279,8 @@ public abstract class FAbstractDesignService
       }
       //............................................................
       // 加载配置
-      FContentObject xcontainer = contentFindDefine(containerName, EPersistenceMode.Config);
+      IContentConsole contentConsole = contentConsole();
+      FContentObject xcontainer = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
       if(xcontainer == null){
          throw new FFatalError("Container is not exists. (container_name={1})", containerName);
       }
@@ -305,6 +319,24 @@ public abstract class FAbstractDesignService
    public EResult insert(IWebContext context,
                          IWebInput input,
                          IWebOutput output){
+      // 检查参数
+      FXmlNode xcontent = input.config().findNode(EContentConstants.Content);
+      if(xcontent == null){
+         throw new FFatalError("Content config is empty.");
+      }
+      String typeName = xcontent.get("_type");
+      if(RString.isEmpty(typeName)){
+         throw new FFatalError("Content name is empty.");
+      }
+      //............................................................
+      // 创建内容对象
+      FContentObject content = new FContentObject();
+      content.setName(typeName);
+      content.mergeAttributes(xcontent.attributes());
+      // 新建内容
+      IContentConsole contentConsole = contentConsole();
+      contentConsole.insert(_storageName, content);
+      //............................................................
       return EResult.Success;
    }
 
@@ -356,7 +388,8 @@ public abstract class FAbstractDesignService
          throw new FFatalError("Group is invalid. (group={1})", groupName);
       }
       // 更新处理
-      contentUpdate(xcontainer);
+      IContentConsole contentConsole = contentConsole();
+      contentConsole.update(_storageName, xcontainer);
       return EResult.Success;
    }
 
@@ -370,6 +403,20 @@ public abstract class FAbstractDesignService
    public EResult delete(IWebContext context,
                          IWebInput input,
                          IWebOutput output){
+      // 检查参数
+      String containerName = context.parameter("container");
+      if(RString.isEmpty(containerName)){
+         throw new FFatalError("Container name is empty.");
+      }
+      //............................................................
+      IContentConsole contentConsole = contentConsole();
+      // 查找容器
+      FContentObject container = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
+      if(container == null){
+         throw new FFatalError("Container item name is not exists. (container_name={1})", containerName);
+      }
+      // 删除容器
+      contentConsole.delete(_storageName, container);
       return EResult.Success;
    }
 }

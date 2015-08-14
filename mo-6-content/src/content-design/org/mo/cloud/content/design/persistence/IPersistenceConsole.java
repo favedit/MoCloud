@@ -1,5 +1,6 @@
 package org.mo.cloud.content.design.persistence;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentNode;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.persistence.common.XPersistence;
@@ -9,6 +10,8 @@ import org.mo.com.lang.EResult;
 // <T>内容持久控制台。</T>
 //============================================================
 public interface IPersistenceConsole
+      extends
+         IContentConsole
 {
    //============================================================
    // <T>获得列表集合。</T>
@@ -48,6 +51,7 @@ public interface IPersistenceConsole
    // @param modeCd 模式类型
    // @return 持久化定义
    //============================================================
+   @Override
    FContentObject findDefine(String storgeName,
                              String persistenceName,
                              EPersistenceMode modeCd);
@@ -67,12 +71,4 @@ public interface IPersistenceConsole
    // @return 处理结果
    //============================================================
    EResult build(SPersistenceBuildArgs builder);
-
-   //============================================================
-   // <T>更新表单配置。</T>
-   //
-   // @param frame 页面
-   //============================================================
-   void update(String storgeName,
-               FContentObject frame);
 }

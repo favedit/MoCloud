@@ -1,5 +1,6 @@
 package org.mo.cloud.editor.design.tree;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
@@ -35,6 +36,16 @@ public class FTreeService
    // <T>构造设计目录服务。</T>
    //============================================================
    public FTreeService(){
+   }
+
+   //============================================================
+   // <T>获得内容管理器。</T>
+   //
+   // @return 内容管理器
+   //============================================================
+   @Override
+   protected IContentConsole contentConsole(){
+      return _treeConsole;
    }
 
    //============================================================

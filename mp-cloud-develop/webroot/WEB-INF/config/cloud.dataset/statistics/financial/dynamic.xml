@@ -2,6 +2,7 @@
 <DataStore _uuid="e15e1c74-13ba-4d37-910f-f0691795a36d" name="statistics.financial.dynamic" label="M#12cn15动态统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Dynamic" data_name="ST_FIN_DYNAMIC" data_alias="ST_FIN_DYN" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
   <FieldRecordId _uuid="0b5f4a1a-a25d-4de0-8548-f518c85421ed" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldDateTime _uuid="531f8557-7d4b-4116-bf88-223c51c9c3c2" name="link_date" label="M#12cn14记录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldRecordId _uuid="04043116-cc36-4250-bb62-86173cad26c9" name="link_borrow_id" label="M#12cn16关联借款编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_BORROW_ID" />
   <FieldRecordId _uuid="0619dfb6-b1f2-409b-b82d-7fc53ce8f3c5" name="department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_ID" />
   <FieldString _uuid="b52f7a96-6459-4b2f-b9b1-aee74b30389a" name="department_label" label="M#12cn14部门名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABEL" data_size="40" />
   <FieldString _uuid="9c9bbe85-6d83-40f8-92f6-feb471051917" name="department_ids" label="M#12cn16部门编号集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_IDS" data_size="200" />
@@ -18,5 +19,7 @@
   <FieldDateTime _uuid="a3dd51c2-0176-4d95-91c5-aca8982d0737" name="customer_action_date" label="M#12cn16客户命令时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />
   <FieldDouble _uuid="46532028-c8ba-4a15-a797-41ed04c345c7" name="customer_action_amount" label="M#12cn16客户命令数值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_AMOUNT" />
   <FieldDouble _uuid="f59e6178-41df-4edb-ae86-c893f1be9aeb" name="customer_action_interest" label="M#12cn16客户命令利息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_INTEREST" />
+  <FieldRecordId _uuid="09bbec58-10c7-4f14-9570-fcb59148327e" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" />
+  <FieldString _uuid="2d1902c6-5769-41e5-838c-a057ee2d8cff" name="tender_model" label="M#12cn14投标类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_MODEL" data_size="20" />
   <FieldTemplate _uuid="020e481a-5782-4612-9616-da0a22df408a" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

@@ -48,6 +48,9 @@ public class FStatisticsFinancialDynamicLogic
    // 字段记录时间的定义。
    public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
 
+   // 字段关联借款编号的定义。
+   public final static SLogicFieldInfo LINK_BORROW_ID = new SLogicFieldInfo("LINK_BORROW_ID");
+
    // 字段部门编号的定义。
    public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
 
@@ -96,6 +99,12 @@ public class FStatisticsFinancialDynamicLogic
    // 字段客户命令利息的定义。
    public final static SLogicFieldInfo CUSTOMER_ACTION_INTEREST = new SLogicFieldInfo("CUSTOMER_ACTION_INTEREST");
 
+   // 字段投标编号的定义。
+   public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
+
+   // 字段投标类型的定义。
+   public final static SLogicFieldInfo TENDER_MODEL = new SLogicFieldInfo("TENDER_MODEL");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -109,7 +118,7 @@ public class FStatisticsFinancialDynamicLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_IDS`,`DEPARTMENT_LABELS`,`MARKETER_ID`,`MARKETER_LABEL`,`MARKETER_STATUS_CD`,`MARKETER_RANK`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CUSTOMER_ACTION_CD`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_ACTION_AMOUNT`,`CUSTOMER_ACTION_INTEREST`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_BORROW_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_IDS`,`DEPARTMENT_LABELS`,`MARKETER_ID`,`MARKETER_LABEL`,`MARKETER_STATUS_CD`,`MARKETER_RANK`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CUSTOMER_ACTION_CD`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_ACTION_AMOUNT`,`CUSTOMER_ACTION_INTEREST`,`TENDER_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态统计表逻辑单元。</T>
@@ -703,6 +712,7 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(",`GUID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
+      cmd.append(",`LINK_BORROW_ID`");
       cmd.append(",`DEPARTMENT_ID`");
       cmd.append(",`DEPARTMENT_LABEL`");
       cmd.append(",`DEPARTMENT_IDS`");
@@ -719,6 +729,8 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(",`CUSTOMER_ACTION_DATE`");
       cmd.append(",`CUSTOMER_ACTION_AMOUNT`");
       cmd.append(",`CUSTOMER_ACTION_INTEREST`");
+      cmd.append(",`TENDER_ID`");
+      cmd.append(",`TENDER_MODEL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -750,6 +762,13 @@ public class FStatisticsFinancialDynamicLogic
          cmd.append("STR_TO_DATE('");
          cmd.append(linkDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      long linkBorrowId = unit.linkBorrowId();
+      if(linkBorrowId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(linkBorrowId);
       }
       cmd.append(',');
       long departmentId = unit.departmentId();
@@ -863,6 +882,22 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(unit.customerActionAmount());
       cmd.append(',');
       cmd.append(unit.customerActionInterest());
+      cmd.append(',');
+      long tenderId = unit.tenderId();
+      if(tenderId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderId);
+      }
+      cmd.append(',');
+      String tenderModel = unit.tenderModel();
+      if(RString.isEmpty(tenderModel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenderModel));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -957,6 +992,15 @@ public class FStatisticsFinancialDynamicLogic
             cmd.append("STR_TO_DATE('");
             cmd.append(linkDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isLinkBorrowIdChanged()){
+         cmd.append(",`LINK_BORROW_ID`=");
+         long linkBorrowId = unit.linkBorrowId();
+         if(linkBorrowId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(linkBorrowId);
          }
       }
       if(unit.isDepartmentIdChanged()){
@@ -1102,6 +1146,26 @@ public class FStatisticsFinancialDynamicLogic
       if(unit.isCustomerActionInterestChanged()){
          cmd.append(",`CUSTOMER_ACTION_INTEREST`=");
          cmd.append(unit.customerActionInterest());
+      }
+      if(unit.isTenderIdChanged()){
+         cmd.append(",`TENDER_ID`=");
+         long tenderId = unit.tenderId();
+         if(tenderId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderId);
+         }
+      }
+      if(unit.isTenderModelChanged()){
+         cmd.append(",`TENDER_MODEL`=");
+         String tenderModel = unit.tenderModel();
+         if(RString.isEmpty(tenderModel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenderModel));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

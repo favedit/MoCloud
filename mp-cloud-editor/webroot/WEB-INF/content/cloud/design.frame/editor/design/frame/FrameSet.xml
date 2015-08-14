@@ -15,7 +15,7 @@
          </FrameSet>
       </FramePage>
       <FrameSpliter name='propertySpliter'/>
-      <FramePage name='propertyFrame' linker='_frameProperty' label='属性区' size='320,0' scroll_cd='VA'>
+      <FramePage name='propertyFrame' linker='_frameProperty' label='属性区' size='600,0' scroll_cd='VA'>
          <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
             <FramePage name='propertyToolbarFrame' linker='_framePropertyToolBar' label='属性工具栏' size='0,24'/>
             <FramePage name='propertyContentFrame' linker='_framePropertyContent' label='属性内容区'/>

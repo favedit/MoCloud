@@ -373,4 +373,18 @@ public class FPersistenceConsole
       // 清空缓冲
       _contents.clear();
    }
+
+   @Override
+   public void insert(String storgeName,
+                      FContentObject contentObject){
+      // TODO Auto-generated method stub
+
+   }
+
+   @Override
+   public void delete(String storgeName,
+                      FContentObject contentObject){
+      // TODO Auto-generated method stub
+
+   }
 }

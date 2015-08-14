@@ -49,6 +49,12 @@ public class FStatisticsFinancialDynamicUnit
    // 字段记录时间的定义。
    protected TDateTime _linkDate = new TDateTime();
 
+   // 存储字段关联借款编号的定义。
+   private long __linkBorrowId;
+
+   // 字段关联借款编号的定义。
+   protected long _linkBorrowId;
+
    // 存储字段部门编号的定义。
    private long __departmentId;
 
@@ -144,6 +150,18 @@ public class FStatisticsFinancialDynamicUnit
 
    // 字段客户命令利息的定义。
    protected double _customerActionInterest;
+
+   // 存储字段投标编号的定义。
+   private long __tenderId;
+
+   // 字段投标编号的定义。
+   protected long _tenderId;
+
+   // 存储字段投标类型的定义。
+   private String __tenderModel;
+
+   // 字段投标类型的定义。
+   protected String _tenderModel;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -308,6 +326,33 @@ public class FStatisticsFinancialDynamicUnit
    //============================================================
    public void setLinkDate(TDateTime value){
       _linkDate = value;
+   }
+
+   //============================================================
+   // <T>判断关联借款编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkBorrowIdChanged(){
+      return __linkBorrowId != _linkBorrowId;
+   }
+
+   //============================================================
+   // <T>获得关联借款编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkBorrowId(){
+      return _linkBorrowId;
+   }
+
+   //============================================================
+   // <T>设置关联借款编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkBorrowId(long value){
+      _linkBorrowId = value;
    }
 
    //============================================================
@@ -743,6 +788,60 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
+   // <T>判断投标编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderIdChanged(){
+      return __tenderId != _tenderId;
+   }
+
+   //============================================================
+   // <T>获得投标编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderId(){
+      return _tenderId;
+   }
+
+   //============================================================
+   // <T>设置投标编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderId(long value){
+      _tenderId = value;
+   }
+
+   //============================================================
+   // <T>判断投标类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderModelChanged(){
+      return !RString.equals(__tenderModel, _tenderModel);
+   }
+
+   //============================================================
+   // <T>获得投标类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String tenderModel(){
+      return _tenderModel;
+   }
+
+   //============================================================
+   // <T>设置投标类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderModel(String value){
+      _tenderModel = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -869,6 +968,8 @@ public class FStatisticsFinancialDynamicUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "link_borrow_id":
+            return Long.toString(_linkBorrowId);
          case "department_id":
             return Long.toString(_departmentId);
          case "department_label":
@@ -901,6 +1002,10 @@ public class FStatisticsFinancialDynamicUnit
             return RDouble.toString(_customerActionAmount);
          case "customer_action_interest":
             return RDouble.toString(_customerActionInterest);
+         case "tender_id":
+            return Long.toString(_tenderId);
+         case "tender_model":
+            return _tenderModel;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -937,6 +1042,9 @@ public class FStatisticsFinancialDynamicUnit
             break;
          case "link_date":
             _linkDate.parse(value);
+            break;
+         case "link_borrow_id":
+            _linkBorrowId = RLong.parse(value);
             break;
          case "department_id":
             _departmentId = RLong.parse(value);
@@ -986,6 +1094,12 @@ public class FStatisticsFinancialDynamicUnit
          case "customer_action_interest":
             _customerActionInterest = RDouble.parse(value);
             break;
+         case "tender_id":
+            _tenderId = RLong.parse(value);
+            break;
+         case "tender_model":
+            _tenderModel = value;
+            break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
             break;
@@ -1032,6 +1146,10 @@ public class FStatisticsFinancialDynamicUnit
             case "link_date":
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
+               break;
+            case "link_borrow_id":
+               __linkBorrowId = RLong.parse(value);
+               _linkBorrowId = __linkBorrowId;
                break;
             case "department_id":
                __departmentId = RLong.parse(value);
@@ -1097,6 +1215,14 @@ public class FStatisticsFinancialDynamicUnit
                __customerActionInterest = RDouble.parse(value);
                _customerActionInterest = __customerActionInterest;
                break;
+            case "tender_id":
+               __tenderId = RLong.parse(value);
+               _tenderId = __tenderId;
+               break;
+            case "tender_model":
+               __tenderModel = value;
+               _tenderModel = __tenderModel;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -1130,6 +1256,7 @@ public class FStatisticsFinancialDynamicUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("linkBorrowId", _linkBorrowId);
       row.set("departmentId", _departmentId);
       row.set("departmentLabel", _departmentLabel);
       row.set("departmentIds", _departmentIds);
@@ -1146,6 +1273,8 @@ public class FStatisticsFinancialDynamicUnit
       row.set("customerActionDate", _customerActionDate);
       row.set("customerActionAmount", _customerActionAmount);
       row.set("customerActionInterest", _customerActionInterest);
+      row.set("tenderId", _tenderId);
+      row.set("tenderModel", _tenderModel);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1165,6 +1294,7 @@ public class FStatisticsFinancialDynamicUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkBorrowId", RLong.toString(_linkBorrowId));
       map.put("departmentId", RLong.toString(_departmentId));
       map.put("departmentLabel", _departmentLabel);
       map.put("departmentIds", _departmentIds);
@@ -1181,6 +1311,8 @@ public class FStatisticsFinancialDynamicUnit
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerActionAmount", RDouble.toString(_customerActionAmount));
       map.put("customerActionInterest", RDouble.toString(_customerActionInterest));
+      map.put("tenderId", RLong.toString(_tenderId));
+      map.put("tenderModel", _tenderModel);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

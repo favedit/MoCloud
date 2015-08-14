@@ -318,4 +318,18 @@ public class FFrameConsole
       // 清空缓冲
       _frames.clear();
    }
+
+   @Override
+   public void insert(String storgeName,
+                      FContentObject contentObject){
+      // TODO Auto-generated method stub
+
+   }
+
+   @Override
+   public void delete(String storgeName,
+                      FContentObject contentObject){
+      // TODO Auto-generated method stub
+
+   }
 }

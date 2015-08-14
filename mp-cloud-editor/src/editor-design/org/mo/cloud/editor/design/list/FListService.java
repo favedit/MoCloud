@@ -1,5 +1,6 @@
 package org.mo.cloud.editor.design.list;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.list.IListConsole;
@@ -30,6 +31,16 @@ public class FListService
    // <T>构造设计列表服务。</T>
    //============================================================
    public FListService(){
+   }
+
+   //============================================================
+   // <T>获得内容管理器。</T>
+   //
+   // @return 内容管理器
+   //============================================================
+   @Override
+   protected IContentConsole contentConsole(){
+      return _listConsole;
    }
 
    //============================================================

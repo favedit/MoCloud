@@ -1,12 +1,13 @@
 package com.ahyc.eai.batch.financial.dynamic;
 
-import com.ahyc.eai.batch.common.FStatisticsCalculater;
-
 import com.ahyc.eai.batch.common.EDataConnection;
+import com.ahyc.eai.batch.common.FStatisticsCalculater;
 import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentInfo;
 import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -32,15 +33,21 @@ public class FStatisticsInvestmentCalculater
                             long endId){
       // 代码修正
       ISqlConnection sourceConnection = logicContext.activeConnection(EDataConnection.EZUBAO);
+      FStatisticsFinancialTenderLogic tenderLogic = logicContext.findLogic(FStatisticsFinancialTenderLogic.class);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       IStatisticsDepartmentInfoConsole departmentInfoConsole = RAop.find(IStatisticsDepartmentInfoConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      String selectSql = RString
-            .format("SELECT id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<={2}", beginId, endId);
+      String selectSql = RString.format("SELECT id,borrow_id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<={2}",
+            beginId, endId);
       FDataset dataset = sourceConnection.fetchDataset(selectSql);
       for(FRow row : dataset){
          long recordId = row.getLong("id");
+         long borrowId = row.getLong("borrow_id");
          long investorUid = row.getLong("investor_uid");
+         // 查找投标信息：名称/类型/注释
+         FRow borrowInfoRow = sourceConnection.find("SELECT borrow_name,borrow_model,borrow_duration,borrow_money,borrow_interest,borrow_interest_rate,borrow_info, FROM_UNIXTIME(`add_time`,'%Y%m%d%H%i%s') as borrow_date FROM lzh_borrow_info where id="
+               + borrowId);
+         String borrowModel = borrowInfoRow.get("borrow_model");
          // 查找客户信息：名称/电话号码/身份证号
          FRow memberInfoRow = sourceConnection.find("SELECT real_name,cell_phone,idcard FROM lzh_member_info where uid=" + investorUid);
          // 查找理财师编号
@@ -58,9 +65,33 @@ public class FStatisticsInvestmentCalculater
          }
          // 查找公司信息
          FStatisticsDepartmentInfo departmentInfo = departmentInfoConsole.find(logicContext, departmentId);
+         //............................................................
+         long borrowRecordId = 0;
+         if(borrowInfoRow != null){
+            FStatisticsFinancialTenderUnit tenderUnit = tenderLogic.search("link_id=" + borrowId);
+            if(tenderUnit == null){
+               tenderUnit = tenderLogic.doPrepare();
+               tenderUnit.setLinkId(borrowId);
+               tenderUnit.setLabel(borrowInfoRow.get("borrow_name"));
+               tenderUnit.setBorrowModel(borrowInfoRow.get("borrow_model"));
+               tenderUnit.setBorrowDuration(borrowInfoRow.getInt("borrow_duration"));
+               tenderUnit.setBorrowMoney(borrowInfoRow.getDouble("borrow_money"));
+               tenderUnit.setBorrowInerest(borrowInfoRow.getDouble("borrow_interest"));
+               tenderUnit.setBorrowInerestRate(borrowInfoRow.getFloat("borrow_interest_rate"));
+               tenderUnit.setInfo(borrowInfoRow.get("borrow_info"));
+               tenderUnit.linkDate().parse(borrowInfoRow.get("borrow_date"));
+               tenderLogic.doPrepare(tenderUnit);
+            }
+            borrowRecordId = tenderUnit.ouid();
+         }
+         //............................................................
+         // 新建记录
          FStatisticsFinancialDynamicUnit dynamicUnit = dynamicLogic.doPrepare();
          dynamicUnit.setLinkId(recordId);
+         dynamicUnit.setTenderId(borrowRecordId);
+         dynamicUnit.setTenderModel(borrowModel);
          dynamicUnit.linkDate().parse(row.get("update_date"));
+         dynamicUnit.setLinkBorrowId(borrowId);
          if(departmentInfo != null){
             dynamicUnit.setDepartmentId(departmentInfo.id());
             dynamicUnit.setDepartmentLabel(departmentInfo.label());

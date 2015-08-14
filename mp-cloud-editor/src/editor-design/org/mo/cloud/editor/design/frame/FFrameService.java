@@ -1,5 +1,6 @@
 package org.mo.cloud.editor.design.frame;
 
+import org.mo.cloud.content.design.common.IContentConsole;
 import org.mo.cloud.content.design.configuration.FContentObject;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.cloud.content.design.frame.IFrameConsole;
@@ -35,6 +36,16 @@ public class FFrameService
    // <T>构造设计表单服务。</T>
    //============================================================
    public FFrameService(){
+   }
+
+   //============================================================
+   // <T>获得内容管理器。</T>
+   //
+   // @return 内容管理器
+   //============================================================
+   @Override
+   protected IContentConsole contentConsole(){
+      return _frameConsole;
    }
 
    //============================================================
