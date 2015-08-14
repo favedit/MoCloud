@@ -3,7 +3,6 @@
   <TreeView _guid="C38F32323BD246A0AE8E754494165F74" name="editor.design.frame" label="编辑设计页面" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.frame">
     <TreeNodeType _guid="A2AA76F374404396BD5531FBC8FB2281" name="package" label="M#12cn11包" is_valid="Y" note="" code="Package" action="list" icon="editor.design.frame.package" />
 
-    <TreeNodeType _guid="B1EB0C7899D545098DAA81402E272624" name="frame" label="页面" is_valid="Y" note="" type="collection" code="Frame" icon="editor.design.frame.frame" action="list" attributes="property_frame=editor.design.frame.property.FrameForm" />
     <TreeNodeType _guid="26FFA6B9CBE34F90884D321B1F2104C0" name="formFrame" label="表单页面" is_valid="Y" note="" type="collection" code="Form" icon="editor.design.frame.formframe" action="list" attributes="property_frame=editor.design.frame.property.FormFrameForm" />
     <TreeNodeType _guid="FEA6E20460F741D6998593220BE8B06E" name="tableFrame" label="表格页面" is_valid="Y" note="" type="collection" code="Table" icon="editor.design.frame.tableframe" action="list" attributes="property_frame=editor.design.frame.property.TableFrameForm" />
     <TreeNodeType _guid="50A817D684FB4DD6B94401E1EABEE681" name="dialogFrame" label="对话页面" is_valid="Y" note="" type="collection" code="dialogFrame" icon="editor.design.frame.dialogframe" action="list" attributes="property_frame=editor.design.frame.property.DialogFrameForm" />

@@ -72,20 +72,8 @@ public class FStatisticsFinancialTenderPhaseLogic
    // 字段投标标签的定义。
    public final static SLogicFieldInfo TENDER_LABEL = new SLogicFieldInfo("TENDER_LABEL");
 
-   // 字段用户编号的定义。
-   public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
-
-   // 字段用户名称的定义。
-   public final static SLogicFieldInfo CUSTOMER_LABEL = new SLogicFieldInfo("CUSTOMER_LABEL");
-
-   // 字段账号电话号码的定义。
-   public final static SLogicFieldInfo CUSTOMER_PHONE = new SLogicFieldInfo("CUSTOMER_PHONE");
-
-   // 字段账号身份证的定义。
-   public final static SLogicFieldInfo CUSTOMER_CARD = new SLogicFieldInfo("CUSTOMER_CARD");
-
-   // 字段客户命令时间的定义。
-   public final static SLogicFieldInfo CUSTOMER_ACTION_DATE = new SLogicFieldInfo("CUSTOMER_ACTION_DATE");
+   // 字段投标模式的定义。
+   public final static SLogicFieldInfo TENDER_MODEL = new SLogicFieldInfo("TENDER_MODEL");
 
    // 字段投资的定义。
    public final static SLogicFieldInfo INVESTMENT = new SLogicFieldInfo("INVESTMENT");
@@ -98,6 +86,27 @@ public class FStatisticsFinancialTenderPhaseLogic
 
    // 字段赎回总计的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
+
+   // 字段净投的定义。
+   public final static SLogicFieldInfo NETINVESTMENT = new SLogicFieldInfo("NETINVESTMENT");
+
+   // 字段净投总数的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
+
+   // 字段利息的定义。
+   public final static SLogicFieldInfo INTEREST = new SLogicFieldInfo("INTEREST");
+
+   // 字段利息总计的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
+   // 字段客户总数的定义。
+   public final static SLogicFieldInfo CUSTOMER_COUNT = new SLogicFieldInfo("CUSTOMER_COUNT");
+
+   // 字段客户总数的定义。
+   public final static SLogicFieldInfo CUSTOMER_TOTAL = new SLogicFieldInfo("CUSTOMER_TOTAL");
+
+   // 字段客户命令时间的定义。
+   public final static SLogicFieldInfo CUSTOMER_ACTION_DATE = new SLogicFieldInfo("CUSTOMER_ACTION_DATE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -112,7 +121,7 @@ public class FStatisticsFinancialTenderPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`TENDER_ID`,`TENDER_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_PHONE`,`CUSTOMER_CARD`,`CUSTOMER_ACTION_DATE`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`TENDER_ID`,`TENDER_LABEL`,`TENDER_MODEL`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`INTEREST`,`INTEREST_TOTAL`,`CUSTOMER_COUNT`,`CUSTOMER_TOTAL`,`CUSTOMER_ACTION_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造投标阶段统计表逻辑单元。</T>
@@ -714,15 +723,18 @@ public class FStatisticsFinancialTenderPhaseLogic
       cmd.append(",`LINK_DATE`");
       cmd.append(",`TENDER_ID`");
       cmd.append(",`TENDER_LABEL`");
-      cmd.append(",`CUSTOMER_ID`");
-      cmd.append(",`CUSTOMER_LABEL`");
-      cmd.append(",`CUSTOMER_PHONE`");
-      cmd.append(",`CUSTOMER_CARD`");
-      cmd.append(",`CUSTOMER_ACTION_DATE`");
+      cmd.append(",`TENDER_MODEL`");
       cmd.append(",`INVESTMENT`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION`");
       cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`NETINVESTMENT`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`INTEREST`");
+      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`CUSTOMER_COUNT`");
+      cmd.append(",`CUSTOMER_TOTAL`");
+      cmd.append(",`CUSTOMER_ACTION_DATE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -822,7 +834,12 @@ public class FStatisticsFinancialTenderPhaseLogic
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      cmd.append(unit.tenderId());
+      long tenderId = unit.tenderId();
+      if(tenderId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderId);
+      }
       cmd.append(',');
       String tenderLabel = unit.tenderLabel();
       if(RString.isEmpty(tenderLabel)){
@@ -833,39 +850,34 @@ public class FStatisticsFinancialTenderPhaseLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      long customerId = unit.customerId();
-      if(customerId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(customerId);
-      }
-      cmd.append(',');
-      String customerLabel = unit.customerLabel();
-      if(RString.isEmpty(customerLabel)){
+      String tenderModel = unit.tenderModel();
+      if(RString.isEmpty(tenderModel)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(customerLabel));
+         cmd.append(RSql.formatValue(tenderModel));
          cmd.append('\'');
       }
       cmd.append(',');
-      String customerPhone = unit.customerPhone();
-      if(RString.isEmpty(customerPhone)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(customerPhone));
-         cmd.append('\'');
-      }
+      cmd.append(unit.investment());
       cmd.append(',');
-      String customerCard = unit.customerCard();
-      if(RString.isEmpty(customerCard)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(customerCard));
-         cmd.append('\'');
-      }
+      cmd.append(unit.investmentTotal());
+      cmd.append(',');
+      cmd.append(unit.redemption());
+      cmd.append(',');
+      cmd.append(unit.redemptionTotal());
+      cmd.append(',');
+      cmd.append(unit.netinvestment());
+      cmd.append(',');
+      cmd.append(unit.netinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.interest());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
+      cmd.append(',');
+      cmd.append(unit.customerCount());
+      cmd.append(',');
+      cmd.append(unit.customerTotal());
       cmd.append(',');
       TDateTime customerActionDate = unit.customerActionDate();
       if(customerActionDate == null){
@@ -877,14 +889,6 @@ public class FStatisticsFinancialTenderPhaseLogic
          cmd.append(customerActionDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
-      cmd.append(',');
-      cmd.append(unit.investment());
-      cmd.append(',');
-      cmd.append(unit.investmentTotal());
-      cmd.append(',');
-      cmd.append(unit.redemption());
-      cmd.append(',');
-      cmd.append(unit.redemptionTotal());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -1061,7 +1065,12 @@ public class FStatisticsFinancialTenderPhaseLogic
       }
       if(unit.isTenderIdChanged()){
          cmd.append(",`TENDER_ID`=");
-         cmd.append(unit.tenderId());
+         long tenderId = unit.tenderId();
+         if(tenderId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderId);
+         }
       }
       if(unit.isTenderLabelChanged()){
          cmd.append(",`TENDER_LABEL`=");
@@ -1074,59 +1083,15 @@ public class FStatisticsFinancialTenderPhaseLogic
             cmd.append('\'');
          }
       }
-      if(unit.isCustomerIdChanged()){
-         cmd.append(",`CUSTOMER_ID`=");
-         long customerId = unit.customerId();
-         if(customerId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(customerId);
-         }
-      }
-      if(unit.isCustomerLabelChanged()){
-         cmd.append(",`CUSTOMER_LABEL`=");
-         String customerLabel = unit.customerLabel();
-         if(RString.isEmpty(customerLabel)){
+      if(unit.isTenderModelChanged()){
+         cmd.append(",`TENDER_MODEL`=");
+         String tenderModel = unit.tenderModel();
+         if(RString.isEmpty(tenderModel)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(customerLabel));
+            cmd.append(RSql.formatValue(tenderModel));
             cmd.append('\'');
-         }
-      }
-      if(unit.isCustomerPhoneChanged()){
-         cmd.append(",`CUSTOMER_PHONE`=");
-         String customerPhone = unit.customerPhone();
-         if(RString.isEmpty(customerPhone)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(customerPhone));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isCustomerCardChanged()){
-         cmd.append(",`CUSTOMER_CARD`=");
-         String customerCard = unit.customerCard();
-         if(RString.isEmpty(customerCard)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(customerCard));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isCustomerActionDateChanged()){
-         cmd.append(",`CUSTOMER_ACTION_DATE`=");
-         TDateTime customerActionDate = unit.customerActionDate();
-         if(customerActionDate == null){
-            cmd.append("NULL");
-         }else if(customerActionDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(customerActionDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
       if(unit.isInvestmentChanged()){
@@ -1144,6 +1109,43 @@ public class FStatisticsFinancialTenderPhaseLogic
       if(unit.isRedemptionTotalChanged()){
          cmd.append(",`REDEMPTION_TOTAL`=");
          cmd.append(unit.redemptionTotal());
+      }
+      if(unit.isNetinvestmentChanged()){
+         cmd.append(",`NETINVESTMENT`=");
+         cmd.append(unit.netinvestment());
+      }
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
+      }
+      if(unit.isInterestChanged()){
+         cmd.append(",`INTEREST`=");
+         cmd.append(unit.interest());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
+      }
+      if(unit.isCustomerCountChanged()){
+         cmd.append(",`CUSTOMER_COUNT`=");
+         cmd.append(unit.customerCount());
+      }
+      if(unit.isCustomerTotalChanged()){
+         cmd.append(",`CUSTOMER_TOTAL`=");
+         cmd.append(unit.customerTotal());
+      }
+      if(unit.isCustomerActionDateChanged()){
+         cmd.append(",`CUSTOMER_ACTION_DATE`=");
+         TDateTime customerActionDate = unit.customerActionDate();
+         if(customerActionDate == null){
+            cmd.append("NULL");
+         }else if(customerActionDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(customerActionDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

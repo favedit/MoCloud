@@ -20,7 +20,7 @@ public class FStatisticsCustomerCalculater
       extends FStatisticsPeriodCalculater
 {
    // 合计间隔(1小时)
-   protected long _recordSpan = 1000 * 60 * 60;
+   protected long _recordSpan = 1000 * 60 * 60 * 24;
 
    //============================================================
    // <T>构造金融客户统计计算器。</T>
@@ -53,6 +53,8 @@ public class FStatisticsCustomerCalculater
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
          double customerActionInterest = dynamicUnit.customerActionInterest();
+         String customerCard = dynamicUnit.customerCard();
+         String customerPhone = dynamicUnit.customerPhone();
          // 统计合计信息
          FStatisticsFinancialCustomerAmountUnit amountUnit = amountLogic.search("CUSTOMER_ID=" + customerId);
          boolean amountExist = (amountUnit != null);
@@ -96,6 +98,8 @@ public class FStatisticsCustomerCalculater
             phaseUnit.recordDate().assign(spanDate);
             phaseUnit.setCustomerId(customerId);
             phaseUnit.setCustomerLabel(customerLabel);
+            phaseUnit.setCustomerCard(customerCard);
+            phaseUnit.setCustomerPhone(customerPhone);
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());

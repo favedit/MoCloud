@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <TabBar name="system.TabBar" type='FDsSystemTabBar' label="菜单">
-      <TabButton name='persistence' linker='_controlPersistence' icon='design3d.tools.save' label='持久化'/>
-      <TabButton name='list' linker='_controlList' icon='design3d.tools.save' label='列表'/>
-      <TabButton name='tree' linker='_controlTree' icon='design3d.tools.save' label='目录'/>
-      <TabButton name='frame' linker='_controlFrame' icon='design3d.tools.save' label='表单'/>
-   </TabBar>
-</Content>

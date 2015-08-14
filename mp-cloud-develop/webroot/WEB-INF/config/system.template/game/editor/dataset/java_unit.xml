@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mo.com.lang.*;
 import org.mo.com.lang.type.*;
 import org.mo.com.collections.*;
+import org.mo.com.io.*;
 import org.mo.core.aop.face.*;
 import org.mo.data.logic.*;
 
@@ -215,6 +216,60 @@ public class <jt:item source='$dataset.source_class_name'/>Unit extends FLogicUn
 </jt:equals>
 <jt:equals source='$field.type' value='Char|String|Content'>
       map.put("<jt:item source='$field.data_name' format='method'/>", _<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+</jt:loop>
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   @Override
+   public void unserialize(IDataInput input){
+      super.unserialize(input);
+<jt:loop source='$fields' alias='field'>
+<jt:equals source='$field.type' value='RecordId|Long'>
+      _<jt:item source='$field.data_name' format='method'/> = input.readInt64();
+</jt:equals>
+<jt:equals source='$field.type' value='Boolean'>
+      _<jt:item source='$field.data_name' format='method'/> = input.read<jt:item source='$field.type'/>();
+</jt:equals>
+<jt:equals source='$field.type' value='Integer'>
+      _<jt:item source='$field.data_name' format='method'/> = input.readInt32();
+</jt:equals>
+<jt:equals source='$field.type' value='Char|String|Content'>
+      _<jt:item source='$field.data_name' format='method'/> = input.readString();
+</jt:equals>
+<jt:equals source='$field.type' value='Date|Time|DateTime'>
+      _<jt:item source='$field.data_name' format='method'/>.set(input.readInt64());
+</jt:equals>
+</jt:loop>
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   @Override
+   public void serialize(IDataOutput output){
+      super.serialize(output);
+<jt:loop source='$fields' alias='field'>
+<jt:equals source='$field.type' value='RecordId|Long'>
+      output.writeInt64(_<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+<jt:equals source='$field.type' value='Boolean'>
+      output.write<jt:item source='$field.type'/>(_<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+<jt:equals source='$field.type' value='Integer'>
+      output.writeInt32(_<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+<jt:equals source='$field.type' value='Char|String|Content'>
+      output.writeString(_<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+<jt:equals source='$field.type' value='Date|Time|DateTime'>
+      output.writeInt64(_<jt:item source='$field.data_name' format='method'/>.get());
 </jt:equals>
 </jt:loop>
    }

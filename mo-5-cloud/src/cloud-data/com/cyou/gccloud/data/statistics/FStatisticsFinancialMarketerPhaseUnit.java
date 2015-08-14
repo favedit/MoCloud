@@ -2,6 +2,8 @@ package com.cyou.gccloud.data.statistics;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
@@ -175,11 +177,11 @@ public class FStatisticsFinancialMarketerPhaseUnit
    // 字段客户命令日期的定义。
    protected TDateTime _customerActionDate = new TDateTime();
 
-   // 存储字段客户注册数的定义。
-   private int __customerRegister;
+   // 存储字段客户数量的定义。
+   private int __customerCount;
 
-   // 字段客户注册数的定义。
-   protected int _customerRegister;
+   // 字段客户数量的定义。
+   protected int _customerCount;
 
    // 存储字段客户总数的定义。
    private int __customerTotal;
@@ -920,30 +922,30 @@ public class FStatisticsFinancialMarketerPhaseUnit
    }
 
    //============================================================
-   // <T>判断客户注册数的数据是否改变。</T>
+   // <T>判断客户数量的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerRegisterChanged(){
-      return __customerRegister != _customerRegister;
+   public boolean isCustomerCountChanged(){
+      return __customerCount != _customerCount;
    }
 
    //============================================================
-   // <T>获得客户注册数的数据内容。</T>
+   // <T>获得客户数量的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int customerRegister(){
-      return _customerRegister;
+   public int customerCount(){
+      return _customerCount;
    }
 
    //============================================================
-   // <T>设置客户注册数的数据内容。</T>
+   // <T>设置客户数量的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerRegister(int value){
-      _customerRegister = value;
+   public void setCustomerCount(int value){
+      _customerCount = value;
    }
 
    //============================================================
@@ -1142,8 +1144,8 @@ public class FStatisticsFinancialMarketerPhaseUnit
             return RDouble.toString(_marketerPerformanceTotal);
          case "customer_action_date":
             return _customerActionDate.toString();
-         case "customer_register":
-            return RInteger.toString(_customerRegister);
+         case "customer_count":
+            return RInteger.toString(_customerCount);
          case "customer_total":
             return RInteger.toString(_customerTotal);
          case "create_user_id":
@@ -1246,8 +1248,8 @@ public class FStatisticsFinancialMarketerPhaseUnit
          case "customer_action_date":
             _customerActionDate.parse(value);
             break;
-         case "customer_register":
-            _customerRegister = RInteger.parse(value);
+         case "customer_count":
+            _customerCount = RInteger.parse(value);
             break;
          case "customer_total":
             _customerTotal = RInteger.parse(value);
@@ -1383,9 +1385,9 @@ public class FStatisticsFinancialMarketerPhaseUnit
                __customerActionDate.parse(value);
                _customerActionDate.assign(__customerActionDate);
                break;
-            case "customer_register":
-               __customerRegister = RInteger.parse(value);
-               _customerRegister = __customerRegister;
+            case "customer_count":
+               __customerCount = RInteger.parse(value);
+               _customerCount = __customerCount;
                break;
             case "customer_total":
                __customerTotal = RInteger.parse(value);
@@ -1445,7 +1447,7 @@ public class FStatisticsFinancialMarketerPhaseUnit
       row.set("marketerPerformance", _marketerPerformance);
       row.set("marketerPerformanceTotal", _marketerPerformanceTotal);
       row.set("customerActionDate", _customerActionDate);
-      row.set("customerRegister", _customerRegister);
+      row.set("customerCount", _customerCount);
       row.set("customerTotal", _customerTotal);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -1487,11 +1489,75 @@ public class FStatisticsFinancialMarketerPhaseUnit
       map.put("marketerPerformance", RDouble.toString(_marketerPerformance));
       map.put("marketerPerformanceTotal", RDouble.toString(_marketerPerformanceTotal));
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("customerRegister", RInteger.toString(_customerRegister));
+      map.put("customerCount", RInteger.toString(_customerCount));
       map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
       map.put("updateDate", _updateDate.format("YYYY-MM-DD HH24:MI:SS"));
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   @Override
+   public void unserialize(IDataInput input){
+      super.unserialize(input);
+      _ouid = input.readInt64();
+      _ovld = input.readBoolean();
+      _guid = input.readString();
+      _recordYear.set(input.readInt64());
+      _recordMonth.set(input.readInt64());
+      _recordWeek.set(input.readInt64());
+      _recordDay.set(input.readInt64());
+      _recordHour.set(input.readInt64());
+      _recordDate.set(input.readInt64());
+      _linkId = input.readInt64();
+      _linkDate.set(input.readInt64());
+      _departmentId = input.readInt64();
+      _departmentLabel = input.readString();
+      _marketerId = input.readInt64();
+      _marketerLabel = input.readString();
+      _customerActionDate.set(input.readInt64());
+      _customerCount = input.readInt32();
+      _customerTotal = input.readInt32();
+      _createUserId = input.readInt64();
+      _createDate.set(input.readInt64());
+      _updateUserId = input.readInt64();
+      _updateDate.set(input.readInt64());
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   @Override
+   public void serialize(IDataOutput output){
+      super.serialize(output);
+      output.writeInt64(_ouid);
+      output.writeBoolean(_ovld);
+      output.writeString(_guid);
+      output.writeInt64(_recordYear.get());
+      output.writeInt64(_recordMonth.get());
+      output.writeInt64(_recordWeek.get());
+      output.writeInt64(_recordDay.get());
+      output.writeInt64(_recordHour.get());
+      output.writeInt64(_recordDate.get());
+      output.writeInt64(_linkId);
+      output.writeInt64(_linkDate.get());
+      output.writeInt64(_departmentId);
+      output.writeString(_departmentLabel);
+      output.writeInt64(_marketerId);
+      output.writeString(_marketerLabel);
+      output.writeInt64(_customerActionDate.get());
+      output.writeInt32(_customerCount);
+      output.writeInt32(_customerTotal);
+      output.writeInt64(_createUserId);
+      output.writeInt64(_createDate.get());
+      output.writeInt64(_updateUserId);
+      output.writeInt64(_updateDate.get());
    }
 }

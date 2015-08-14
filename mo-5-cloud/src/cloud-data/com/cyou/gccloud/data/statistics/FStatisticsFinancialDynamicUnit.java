@@ -2,6 +2,8 @@ package com.cyou.gccloud.data.statistics;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
@@ -1317,5 +1319,77 @@ public class FStatisticsFinancialDynamicUnit
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
       map.put("updateDate", _updateDate.format("YYYY-MM-DD HH24:MI:SS"));
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   @Override
+   public void unserialize(IDataInput input){
+      super.unserialize(input);
+      _ouid = input.readInt64();
+      _ovld = input.readBoolean();
+      _guid = input.readString();
+      _linkId = input.readInt64();
+      _linkDate.set(input.readInt64());
+      _linkBorrowId = input.readInt64();
+      _departmentId = input.readInt64();
+      _departmentLabel = input.readString();
+      _departmentIds = input.readString();
+      _departmentLabels = input.readString();
+      _marketerId = input.readInt64();
+      _marketerLabel = input.readString();
+      _marketerStatusCd = input.readInt32();
+      _marketerRank = input.readString();
+      _customerId = input.readInt64();
+      _customerLabel = input.readString();
+      _customerPhone = input.readString();
+      _customerCard = input.readString();
+      _customerActionCd = input.readInt32();
+      _customerActionDate.set(input.readInt64());
+      _tenderId = input.readInt64();
+      _tenderModel = input.readString();
+      _createUserId = input.readInt64();
+      _createDate.set(input.readInt64());
+      _updateUserId = input.readInt64();
+      _updateDate.set(input.readInt64());
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   @Override
+   public void serialize(IDataOutput output){
+      super.serialize(output);
+      output.writeInt64(_ouid);
+      output.writeBoolean(_ovld);
+      output.writeString(_guid);
+      output.writeInt64(_linkId);
+      output.writeInt64(_linkDate.get());
+      output.writeInt64(_linkBorrowId);
+      output.writeInt64(_departmentId);
+      output.writeString(_departmentLabel);
+      output.writeString(_departmentIds);
+      output.writeString(_departmentLabels);
+      output.writeInt64(_marketerId);
+      output.writeString(_marketerLabel);
+      output.writeInt32(_marketerStatusCd);
+      output.writeString(_marketerRank);
+      output.writeInt64(_customerId);
+      output.writeString(_customerLabel);
+      output.writeString(_customerPhone);
+      output.writeString(_customerCard);
+      output.writeInt32(_customerActionCd);
+      output.writeInt64(_customerActionDate.get());
+      output.writeInt64(_tenderId);
+      output.writeString(_tenderModel);
+      output.writeInt64(_createUserId);
+      output.writeInt64(_createDate.get());
+      output.writeInt64(_updateUserId);
+      output.writeInt64(_updateDate.get());
    }
 }

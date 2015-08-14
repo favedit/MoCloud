@@ -2,6 +2,8 @@ package org.mo.data.logic;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
 
 //============================================================
@@ -73,5 +75,21 @@ public class FLogicUnit
    // @param map 对照表
    //============================================================
    public void saveMap(Map<String, String> map){
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   public void unserialize(IDataInput input){
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   public void serialize(IDataOutput output){
    }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="editor.design.frame.property.PictureFrame" inherit_frames='editor.design.frame.property.common.ControlPanel' type='FDsSystemFramePictureProperty' label="图片属性" is_valid="Y" note="">
+   <FormFrame name="editor.design.frame.property.PictureFrame" inherit_frames='editor.design.frame.property.common.ControlPanel' type='FDsSystemFramePictureProperty' label="图片属性" is_valid="Y" note="">
       <Panel name='picturePanel' icon='design.panel.icon' label='图片属性'>
          <Edit name="pictureSource" linker='_controlDockCd' label="停靠" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
       </Panel>
-   </Frame>
+   </FormFrame>
 </Content>

@@ -2,6 +2,8 @@ package com.cyou.gccloud.data.data;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RLong;
@@ -897,5 +899,61 @@ public class FDataResourceCatalogUnit
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
       map.put("updateDate", _updateDate.format("YYYY-MM-DD HH24:MI:SS"));
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   @Override
+   public void unserialize(IDataInput input){
+      super.unserialize(input);
+      _ouid = input.readInt64();
+      _ovld = input.readBoolean();
+      _guid = input.readString();
+      _userId = input.readInt64();
+      _projectId = input.readInt64();
+      _parentId = input.readInt64();
+      _fullCode = input.readString();
+      _code = input.readString();
+      _fullLabel = input.readString();
+      _label = input.readString();
+      _keywords = input.readString();
+      _iconUrl = input.readString();
+      _description = input.readString();
+      _note = input.readString();
+      _createUserId = input.readInt64();
+      _createDate.set(input.readInt64());
+      _updateUserId = input.readInt64();
+      _updateDate.set(input.readInt64());
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   @Override
+   public void serialize(IDataOutput output){
+      super.serialize(output);
+      output.writeInt64(_ouid);
+      output.writeBoolean(_ovld);
+      output.writeString(_guid);
+      output.writeInt64(_userId);
+      output.writeInt64(_projectId);
+      output.writeInt64(_parentId);
+      output.writeString(_fullCode);
+      output.writeString(_code);
+      output.writeString(_fullLabel);
+      output.writeString(_label);
+      output.writeString(_keywords);
+      output.writeString(_iconUrl);
+      output.writeString(_description);
+      output.writeString(_note);
+      output.writeInt64(_createUserId);
+      output.writeInt64(_createDate.get());
+      output.writeInt64(_updateUserId);
+      output.writeInt64(_updateDate.get());
    }
 }

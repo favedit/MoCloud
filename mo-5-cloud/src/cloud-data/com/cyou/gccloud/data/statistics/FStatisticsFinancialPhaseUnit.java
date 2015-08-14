@@ -2,6 +2,8 @@ package com.cyou.gccloud.data.statistics;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
@@ -1493,5 +1495,69 @@ public class FStatisticsFinancialPhaseUnit
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
       map.put("updateDate", _updateDate.format("YYYY-MM-DD HH24:MI:SS"));
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   @Override
+   public void unserialize(IDataInput input){
+      super.unserialize(input);
+      _ouid = input.readInt64();
+      _ovld = input.readBoolean();
+      _guid = input.readString();
+      _recordYear.set(input.readInt64());
+      _recordMonth.set(input.readInt64());
+      _recordWeek.set(input.readInt64());
+      _recordDay.set(input.readInt64());
+      _recordHour.set(input.readInt64());
+      _recordDate.set(input.readInt64());
+      _linkId = input.readInt64();
+      _linkDate.set(input.readInt64());
+      _actionDate.set(input.readInt64());
+      _departmentCount = input.readInt32();
+      _departmentTotal = input.readInt32();
+      _marketerCount = input.readInt32();
+      _marketerTotal = input.readInt32();
+      _customerCount = input.readInt32();
+      _customerTotal = input.readInt32();
+      _createUserId = input.readInt64();
+      _createDate.set(input.readInt64());
+      _updateUserId = input.readInt64();
+      _updateDate.set(input.readInt64());
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   @Override
+   public void serialize(IDataOutput output){
+      super.serialize(output);
+      output.writeInt64(_ouid);
+      output.writeBoolean(_ovld);
+      output.writeString(_guid);
+      output.writeInt64(_recordYear.get());
+      output.writeInt64(_recordMonth.get());
+      output.writeInt64(_recordWeek.get());
+      output.writeInt64(_recordDay.get());
+      output.writeInt64(_recordHour.get());
+      output.writeInt64(_recordDate.get());
+      output.writeInt64(_linkId);
+      output.writeInt64(_linkDate.get());
+      output.writeInt64(_actionDate.get());
+      output.writeInt32(_departmentCount);
+      output.writeInt32(_departmentTotal);
+      output.writeInt32(_marketerCount);
+      output.writeInt32(_marketerTotal);
+      output.writeInt32(_customerCount);
+      output.writeInt32(_customerTotal);
+      output.writeInt64(_createUserId);
+      output.writeInt64(_createDate.get());
+      output.writeInt64(_updateUserId);
+      output.writeInt64(_updateDate.get());
    }
 }

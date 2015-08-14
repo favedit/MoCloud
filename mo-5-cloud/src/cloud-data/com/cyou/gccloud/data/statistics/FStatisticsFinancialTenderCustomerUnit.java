@@ -14,10 +14,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>客户数据统计表逻辑单元。</T>
+// <T>投标客户表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialCustomerAmountUnit
+public class FStatisticsFinancialTenderCustomerUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -38,17 +38,23 @@ public class FStatisticsFinancialCustomerAmountUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段投标编号的定义。
+   private long __tenderId;
+
+   // 字段投标编号的定义。
+   protected long _tenderId;
+
    // 存储字段客户编号的定义。
    private long __customerId;
 
    // 字段客户编号的定义。
    protected long _customerId;
 
-   // 存储字段公司名称的定义。
-   private String __customerLabel;
+   // 存储字段关联日期的定义。
+   private TDateTime __linkDate = new TDateTime();
 
-   // 字段公司名称的定义。
-   protected String _customerLabel;
+   // 字段关联日期的定义。
+   protected TDateTime _linkDate = new TDateTime();
 
    // 存储字段投资总计的定义。
    private double __investmentTotal;
@@ -105,9 +111,9 @@ public class FStatisticsFinancialCustomerAmountUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造客户数据统计表逻辑单元。</T>
+   // <T>构造投标客户表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialCustomerAmountUnit(){
+   public FStatisticsFinancialTenderCustomerUnit(){
    }
 
    //============================================================
@@ -192,6 +198,33 @@ public class FStatisticsFinancialCustomerAmountUnit
    }
 
    //============================================================
+   // <T>判断投标编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderIdChanged(){
+      return __tenderId != _tenderId;
+   }
+
+   //============================================================
+   // <T>获得投标编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderId(){
+      return _tenderId;
+   }
+
+   //============================================================
+   // <T>设置投标编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderId(long value){
+      _tenderId = value;
+   }
+
+   //============================================================
    // <T>判断客户编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -219,30 +252,30 @@ public class FStatisticsFinancialCustomerAmountUnit
    }
 
    //============================================================
-   // <T>判断公司名称的数据是否改变。</T>
+   // <T>判断关联日期的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerLabelChanged(){
-      return !RString.equals(__customerLabel, _customerLabel);
+   public boolean isLinkDateChanged(){
+      return !__linkDate.equals(_linkDate);
    }
 
    //============================================================
-   // <T>获得公司名称的数据内容。</T>
+   // <T>获得关联日期的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String customerLabel(){
-      return _customerLabel;
+   public TDateTime linkDate(){
+      return _linkDate;
    }
 
    //============================================================
-   // <T>设置公司名称的数据内容。</T>
+   // <T>设置关联日期的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerLabel(String value){
-      _customerLabel = value;
+   public void setLinkDate(TDateTime value){
+      _linkDate = value;
    }
 
    //============================================================
@@ -503,10 +536,12 @@ public class FStatisticsFinancialCustomerAmountUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "tender_id":
+            return Long.toString(_tenderId);
          case "customer_id":
             return Long.toString(_customerId);
-         case "customer_label":
-            return _customerLabel;
+         case "link_date":
+            return _linkDate.toString();
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -548,11 +583,14 @@ public class FStatisticsFinancialCustomerAmountUnit
          case "guid":
             _guid = value;
             break;
+         case "tender_id":
+            _tenderId = RLong.parse(value);
+            break;
          case "customer_id":
             _customerId = RLong.parse(value);
             break;
-         case "customer_label":
-            _customerLabel = value;
+         case "link_date":
+            _linkDate.parse(value);
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -608,13 +646,17 @@ public class FStatisticsFinancialCustomerAmountUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "tender_id":
+               __tenderId = RLong.parse(value);
+               _tenderId = __tenderId;
+               break;
             case "customer_id":
                __customerId = RLong.parse(value);
                _customerId = __customerId;
                break;
-            case "customer_label":
-               __customerLabel = value;
-               _customerLabel = __customerLabel;
+            case "link_date":
+               __linkDate.parse(value);
+               _linkDate.assign(__linkDate);
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -667,8 +709,9 @@ public class FStatisticsFinancialCustomerAmountUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("tenderId", _tenderId);
       row.set("customerId", _customerId);
-      row.set("customerLabel", _customerLabel);
+      row.set("linkDate", _linkDate);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
@@ -691,8 +734,9 @@ public class FStatisticsFinancialCustomerAmountUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("tenderId", RLong.toString(_tenderId));
       map.put("customerId", RLong.toString(_customerId));
-      map.put("customerLabel", _customerLabel);
+      map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
@@ -715,8 +759,9 @@ public class FStatisticsFinancialCustomerAmountUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
+      _tenderId = input.readInt64();
       _customerId = input.readInt64();
-      _customerLabel = input.readString();
+      _linkDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -734,8 +779,9 @@ public class FStatisticsFinancialCustomerAmountUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
+      output.writeInt64(_tenderId);
       output.writeInt64(_customerId);
-      output.writeString(_customerLabel);
+      output.writeInt64(_linkDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

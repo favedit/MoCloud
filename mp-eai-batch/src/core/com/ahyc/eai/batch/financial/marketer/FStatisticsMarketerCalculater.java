@@ -160,7 +160,7 @@ public class FStatisticsMarketerCalculater
          // 计算客户信息
          phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
          if(!customerExist){
-            phaseUnit.setCustomerRegister(phaseUnit.customerRegister() + 1);
+            phaseUnit.setCustomerCount(phaseUnit.customerCount() + 1);
          }
          phaseUnit.setCustomerTotal(customerTotal);
          if(phaseExist){

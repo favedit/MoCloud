@@ -57,7 +57,7 @@ public abstract class MSqlConnection
    protected Connection _sqlConnection;
 
    // 最大获取限制
-   protected boolean _fetchMaxLimite = true;
+   protected boolean _fetchMaxLimite = false;
 
    // 最大获取总数
    protected int _fetchMaxCount = RSql.FETCH_MAX_COUNT;
@@ -824,7 +824,8 @@ public abstract class MSqlConnection
          FDataset dataset = new FDataset();
          statement = sqlConnection().createStatement();
          result = statement.executeQuery(sql.toString());
-         if(null != result){
+         if(result != null){
+            // 获得列信息
             ResultSetMetaData meta = result.getMetaData();
             int count = meta.getColumnCount();
             String[] names = new String[count];
@@ -833,8 +834,9 @@ public abstract class MSqlConnection
                names[n] = meta.getColumnName(n + 1).toLowerCase();
                types[n] = meta.getColumnType(n + 1);
             }
+            // 获得行数
             while(result.next()){
-               if(_fetchMaxLimite && _fetchMaxCount > 0 && dataset.count() >= _fetchMaxCount){
+               if(_fetchMaxLimite && (_fetchMaxCount > 0) && (dataset.count() >= _fetchMaxCount)){
                   break;
                }
                FRow row = new FRow();

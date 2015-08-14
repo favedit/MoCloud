@@ -82,7 +82,7 @@ CREATE TABLE `ST_FIN_DYNAMIC`
    `CUSTOMER_ACTION_AMOUNT`        DOUBLE, 
    `CUSTOMER_ACTION_INTEREST`      DOUBLE, 
    `TENDER_ID`                     BIGINT, 
-   `TENDER_TYPE`                   VARCHAR(20), 
+   `TENDER_MODEL`                  VARCHAR(20), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -222,6 +222,38 @@ ALTER TABLE ST_FIN_PHASE
    ADD CONSTRAINT ST_FIN_PHS_UK_DAT UNIQUE ( RECORD_DATE ); 
 
 -- ------------------------------------------------------------
+-- Create table [Statistics.Financial.Tender.Customer]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_TENDER_CUSTOMER`;
+CREATE TABLE `ST_FIN_TENDER_CUSTOMER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `TENDER_ID`                     BIGINT, 
+   `CUSTOMER_ID`                   BIGINT, 
+   `LINK_DATE`                     DATETIME, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `PERFORMANCE_TOTAL`             DOUBLE, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE ST_FIN_TENDER_CUSTOMER 
+   ADD CONSTRAINT ST_FIN_TND_CST_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_TENDER_CUSTOMER 
+   ADD CONSTRAINT ST_FIN_TND_CST_UK_TND UNIQUE ( TENDER_ID ); 
+
+ALTER TABLE ST_FIN_TENDER_CUSTOMER 
+   ADD CONSTRAINT ST_FIN_TND_CST_UK_CST UNIQUE ( CUSTOMER_ID ); 
+
+-- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Tender.Amount]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `ST_FIN_TENDER_AMOUNT`;
@@ -231,10 +263,12 @@ CREATE TABLE `ST_FIN_TENDER_AMOUNT`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `TENDER_ID`                     BIGINT NOT NULL, 
-   `LABEL`                         VARCHAR(40), 
+   `TENDER_LABEL`                  VARCHAR(40), 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `REDEMPTION_TOTAL`              DOUBLE, 
-   `CUSTOM_TOTAL`                  INTEGER, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `CUSTOMER_TOTAL`                INTEGER, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -264,17 +298,20 @@ CREATE TABLE `ST_FIN_TENDER_PHASE`
    `RECORD_DATE`                   DATETIME NOT NULL, 
    `LINK_ID`                       BIGINT, 
    `LINK_DATE`                     DATETIME, 
-   `TENDER_ID`                     INTEGER, 
+   `TENDER_ID`                     BIGINT, 
    `TENDER_LABEL`                  VARCHAR(40), 
-   `CUSTOMER_ID`                   BIGINT, 
-   `CUSTOMER_LABEL`                VARCHAR(40), 
-   `CUSTOMER_PHONE`                VARCHAR(20), 
-   `CUSTOMER_CARD`                 VARCHAR(20), 
-   `CUSTOMER_ACTION_DATE`          DATETIME, 
+   `TENDER_MODEL`                  VARCHAR(20), 
    `INVESTMENT`                    DOUBLE, 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `REDEMPTION`                    DOUBLE, 
    `REDEMPTION_TOTAL`              DOUBLE, 
+   `NETINVESTMENT`                 DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `INTEREST`                      DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `CUSTOMER_COUNT`                INTEGER, 
+   `CUSTOMER_TOTAL`                INTEGER, 
+   `CUSTOMER_ACTION_DATE`          DATETIME, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -282,44 +319,7 @@ CREATE TABLE `ST_FIN_TENDER_PHASE`
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
 
 ALTER TABLE ST_FIN_TENDER_PHASE 
-   ADD CONSTRAINT ST_FIN_TND_PHS_UK_DAT UNIQUE ( RECORD_DATE, CUSTOMER_ID ); 
-
--- ------------------------------------------------------------
--- Create table [Statistics.Financial.Customer.Phase]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `ST_FIN_CUSTOMER_PHASE`;
-CREATE TABLE `ST_FIN_CUSTOMER_PHASE` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40), 
-   `RECORD_YEAR`                   DATETIME NOT NULL, 
-   `RECORD_MONTH`                  DATETIME NOT NULL, 
-   `RECORD_WEEK`                   DATETIME NOT NULL, 
-   `RECORD_DAY`                    DATETIME NOT NULL, 
-   `RECORD_HOUR`                   DATETIME NOT NULL, 
-   `RECORD_DATE`                   DATETIME NOT NULL, 
-   `LINK_ID`                       BIGINT, 
-   `LINK_DATE`                     DATETIME, 
-   `TENDER_ID`                     INTEGER, 
-   `TENDER_LABEL`                  VARCHAR(40), 
-   `CUSTOMER_ID`                   BIGINT, 
-   `CUSTOMER_LABEL`                VARCHAR(40), 
-   `CUSTOMER_PHONE`                VARCHAR(20), 
-   `CUSTOMER_CARD`                 VARCHAR(20), 
-   `CUSTOMER_ACTION_DATE`          DATETIME, 
-   `INVESTMENT`                    DOUBLE, 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `REDEMPTION`                    DOUBLE, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
-
-ALTER TABLE ST_FIN_CUSTOMER_PHASE 
-   ADD CONSTRAINT ST_FIN_CST_PHS_UK_DAT UNIQUE ( RECORD_DATE, CUSTOMER_ID ); 
+   ADD CONSTRAINT ST_FIN_TND_PHS_UK_DAT UNIQUE ( RECORD_DATE ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Customer.Amount]
@@ -368,6 +368,8 @@ CREATE TABLE `ST_FIN_CUSTOMER_PHASE`
    `LINK_DATE`                     DATETIME, 
    `CUSTOMER_ID`                   BIGINT, 
    `CUSTOMER_LABEL`                VARCHAR(40), 
+   `CUSTOMER_PHONE`                VARCHAR(20), 
+   `CUSTOMER_CARD`                 VARCHAR(20), 
    `CUSTOMER_ACTION_DATE`          DATETIME, 
    `INVESTMENT`                    DOUBLE, 
    `INVESTMENT_TOTAL`              DOUBLE, 
@@ -412,10 +414,10 @@ CREATE TABLE `ST_FIN_MARKETER_CUSTOMER`
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
 
 ALTER TABLE ST_FIN_MARKETER_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_MKT_CUSTOMER_UK_GID UNIQUE ( GUID ); 
+   ADD CONSTRAINT ST_FIN_MKT_CST_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE ST_FIN_MARKETER_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_MKT_CUSTOMER_UK_CUS UNIQUE ( MARKETER_ID, CUSTOMER_ID ); 
+   ADD CONSTRAINT ST_FIN_MKT_CST_UK_CUS UNIQUE ( MARKETER_ID, CUSTOMER_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Marketer.Amount]
@@ -516,10 +518,10 @@ CREATE TABLE `ST_FIN_DEPARTMENT_CUSTOMER`
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
 
 ALTER TABLE ST_FIN_DEPARTMENT_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_DEP_CUS_UK_GID UNIQUE ( GUID ); 
+   ADD CONSTRAINT ST_FIN_DEP_CST_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE ST_FIN_DEPARTMENT_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_DEP_CUS_UK_CST UNIQUE ( DEPARTMENT_ID, CUSTOMER_ID ); 
+   ADD CONSTRAINT ST_FIN_DEP_CST_UK_CST UNIQUE ( DEPARTMENT_ID, CUSTOMER_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Department.Marketer]

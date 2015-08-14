@@ -2,6 +2,8 @@ package com.cyou.gccloud.data.statistics;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
@@ -43,11 +45,11 @@ public class FStatisticsFinancialTenderAmountUnit
    // 字段投标编号的定义。
    protected long _tenderId;
 
-   // 存储字段名称的定义。
-   private String __label;
+   // 存储字段竞标名称的定义。
+   private String __tenderLabel;
 
-   // 字段名称的定义。
-   protected String _label;
+   // 字段竞标名称的定义。
+   protected String _tenderLabel;
 
    // 存储字段净投总计的定义。
    private double __investmentTotal;
@@ -61,11 +63,23 @@ public class FStatisticsFinancialTenderAmountUnit
    // 字段赎回总计的定义。
    protected double _redemptionTotal;
 
+   // 存储字段利息的定义。
+   private double __interestTotal;
+
+   // 字段利息的定义。
+   protected double _interestTotal;
+
+   // 存储字段净投总数的定义。
+   private double __netinvestmentTotal;
+
+   // 字段净投总数的定义。
+   protected double _netinvestmentTotal;
+
    // 存储字段客户总数的定义。
-   private int __customTotal;
+   private int __customerTotal;
 
    // 字段客户总数的定义。
-   protected int _customTotal;
+   protected int _customerTotal;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -206,30 +220,30 @@ public class FStatisticsFinancialTenderAmountUnit
    }
 
    //============================================================
-   // <T>判断名称的数据是否改变。</T>
+   // <T>判断竞标名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
+   public boolean isTenderLabelChanged(){
+      return !RString.equals(__tenderLabel, _tenderLabel);
    }
 
    //============================================================
-   // <T>获得名称的数据内容。</T>
+   // <T>获得竞标名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String label(){
-      return _label;
+   public String tenderLabel(){
+      return _tenderLabel;
    }
 
    //============================================================
-   // <T>设置名称的数据内容。</T>
+   // <T>设置竞标名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLabel(String value){
-      _label = value;
+   public void setTenderLabel(String value){
+      _tenderLabel = value;
    }
 
    //============================================================
@@ -287,12 +301,66 @@ public class FStatisticsFinancialTenderAmountUnit
    }
 
    //============================================================
+   // <T>判断利息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestTotalChanged(){
+      return __interestTotal != _interestTotal;
+   }
+
+   //============================================================
+   // <T>获得利息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double interestTotal(){
+      return _interestTotal;
+   }
+
+   //============================================================
+   // <T>设置利息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterestTotal(double value){
+      _interestTotal = value;
+   }
+
+   //============================================================
+   // <T>判断净投总数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNetinvestmentTotalChanged(){
+      return __netinvestmentTotal != _netinvestmentTotal;
+   }
+
+   //============================================================
+   // <T>获得净投总数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double netinvestmentTotal(){
+      return _netinvestmentTotal;
+   }
+
+   //============================================================
+   // <T>设置净投总数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNetinvestmentTotal(double value){
+      _netinvestmentTotal = value;
+   }
+
+   //============================================================
    // <T>判断客户总数的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomTotalChanged(){
-      return __customTotal != _customTotal;
+   public boolean isCustomerTotalChanged(){
+      return __customerTotal != _customerTotal;
    }
 
    //============================================================
@@ -300,8 +368,8 @@ public class FStatisticsFinancialTenderAmountUnit
    //
    // @return 数据内容
    //============================================================
-   public int customTotal(){
-      return _customTotal;
+   public int customerTotal(){
+      return _customerTotal;
    }
 
    //============================================================
@@ -309,8 +377,8 @@ public class FStatisticsFinancialTenderAmountUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomTotal(int value){
-      _customTotal = value;
+   public void setCustomerTotal(int value){
+      _customerTotal = value;
    }
 
    //============================================================
@@ -438,14 +506,18 @@ public class FStatisticsFinancialTenderAmountUnit
             return _guid;
          case "tender_id":
             return Long.toString(_tenderId);
-         case "label":
-            return _label;
+         case "tender_label":
+            return _tenderLabel;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
             return RDouble.toString(_redemptionTotal);
-         case "custom_total":
-            return RInteger.toString(_customTotal);
+         case "interest_total":
+            return RDouble.toString(_interestTotal);
+         case "netinvestment_total":
+            return RDouble.toString(_netinvestmentTotal);
+         case "customer_total":
+            return RInteger.toString(_customerTotal);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -480,8 +552,8 @@ public class FStatisticsFinancialTenderAmountUnit
          case "tender_id":
             _tenderId = RLong.parse(value);
             break;
-         case "label":
-            _label = value;
+         case "tender_label":
+            _tenderLabel = value;
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -489,8 +561,14 @@ public class FStatisticsFinancialTenderAmountUnit
          case "redemption_total":
             _redemptionTotal = RDouble.parse(value);
             break;
-         case "custom_total":
-            _customTotal = RInteger.parse(value);
+         case "interest_total":
+            _interestTotal = RDouble.parse(value);
+            break;
+         case "netinvestment_total":
+            _netinvestmentTotal = RDouble.parse(value);
+            break;
+         case "customer_total":
+            _customerTotal = RInteger.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -535,9 +613,9 @@ public class FStatisticsFinancialTenderAmountUnit
                __tenderId = RLong.parse(value);
                _tenderId = __tenderId;
                break;
-            case "label":
-               __label = value;
-               _label = __label;
+            case "tender_label":
+               __tenderLabel = value;
+               _tenderLabel = __tenderLabel;
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -547,9 +625,17 @@ public class FStatisticsFinancialTenderAmountUnit
                __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
                break;
-            case "custom_total":
-               __customTotal = RInteger.parse(value);
-               _customTotal = __customTotal;
+            case "interest_total":
+               __interestTotal = RDouble.parse(value);
+               _interestTotal = __interestTotal;
+               break;
+            case "netinvestment_total":
+               __netinvestmentTotal = RDouble.parse(value);
+               _netinvestmentTotal = __netinvestmentTotal;
+               break;
+            case "customer_total":
+               __customerTotal = RInteger.parse(value);
+               _customerTotal = __customerTotal;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -583,10 +669,12 @@ public class FStatisticsFinancialTenderAmountUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("tenderId", _tenderId);
-      row.set("label", _label);
+      row.set("tenderLabel", _tenderLabel);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
-      row.set("customTotal", _customTotal);
+      row.set("interestTotal", _interestTotal);
+      row.set("netinvestmentTotal", _netinvestmentTotal);
+      row.set("customerTotal", _customerTotal);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -605,13 +693,55 @@ public class FStatisticsFinancialTenderAmountUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("tenderId", RLong.toString(_tenderId));
-      map.put("label", _label);
+      map.put("tenderLabel", _tenderLabel);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
-      map.put("customTotal", RInteger.toString(_customTotal));
+      map.put("interestTotal", RDouble.toString(_interestTotal));
+      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
       map.put("updateDate", _updateDate.format("YYYY-MM-DD HH24:MI:SS"));
+   }
+
+   //============================================================
+   // <T>反序列化数据到内容。</T>
+   //
+   // @param input 输入流
+   //============================================================
+   @Override
+   public void unserialize(IDataInput input){
+      super.unserialize(input);
+      _ouid = input.readInt64();
+      _ovld = input.readBoolean();
+      _guid = input.readString();
+      _tenderId = input.readInt64();
+      _tenderLabel = input.readString();
+      _customerTotal = input.readInt32();
+      _createUserId = input.readInt64();
+      _createDate.set(input.readInt64());
+      _updateUserId = input.readInt64();
+      _updateDate.set(input.readInt64());
+   }
+
+   //============================================================
+   // <T>序列化内容到数据。</T>
+   //
+   // @param output 输出流
+   //============================================================
+   @Override
+   public void serialize(IDataOutput output){
+      super.serialize(output);
+      output.writeInt64(_ouid);
+      output.writeBoolean(_ovld);
+      output.writeString(_guid);
+      output.writeInt64(_tenderId);
+      output.writeString(_tenderLabel);
+      output.writeInt32(_customerTotal);
+      output.writeInt64(_createUserId);
+      output.writeInt64(_createDate.get());
+      output.writeInt64(_updateUserId);
+      output.writeInt64(_updateDate.get());
    }
 }

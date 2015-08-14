@@ -44,8 +44,8 @@ public class FStatisticsFinancialTenderAmountLogic
    // 字段投标编号的定义。
    public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
 
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+   // 字段竞标名称的定义。
+   public final static SLogicFieldInfo TENDER_LABEL = new SLogicFieldInfo("TENDER_LABEL");
 
    // 字段净投总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
@@ -53,8 +53,14 @@ public class FStatisticsFinancialTenderAmountLogic
    // 字段赎回总计的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
 
+   // 字段利息的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
+   // 字段净投总数的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
+
    // 字段客户总数的定义。
-   public final static SLogicFieldInfo CUSTOM_TOTAL = new SLogicFieldInfo("CUSTOM_TOTAL");
+   public final static SLogicFieldInfo CUSTOMER_TOTAL = new SLogicFieldInfo("CUSTOMER_TOTAL");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -69,7 +75,7 @@ public class FStatisticsFinancialTenderAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`CUSTOM_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`TENDER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造投标数据统计表逻辑单元。</T>
@@ -662,10 +668,12 @@ public class FStatisticsFinancialTenderAmountLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`TENDER_ID`");
-      cmd.append(",`LABEL`");
+      cmd.append(",`TENDER_LABEL`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
-      cmd.append(",`CUSTOM_TOTAL`");
+      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`CUSTOMER_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -688,12 +696,12 @@ public class FStatisticsFinancialTenderAmountLogic
          cmd.append(tenderId);
       }
       cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
+      String tenderLabel = unit.tenderLabel();
+      if(RString.isEmpty(tenderLabel)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
+         cmd.append(RSql.formatValue(tenderLabel));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -701,7 +709,11 @@ public class FStatisticsFinancialTenderAmountLogic
       cmd.append(',');
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
-      cmd.append(unit.customTotal());
+      cmd.append(unit.interestTotal());
+      cmd.append(',');
+      cmd.append(unit.netinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.customerTotal());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -785,14 +797,14 @@ public class FStatisticsFinancialTenderAmountLogic
             cmd.append(tenderId);
          }
       }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
+      if(unit.isTenderLabelChanged()){
+         cmd.append(",`TENDER_LABEL`=");
+         String tenderLabel = unit.tenderLabel();
+         if(RString.isEmpty(tenderLabel)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
+            cmd.append(RSql.formatValue(tenderLabel));
             cmd.append('\'');
          }
       }
@@ -804,9 +816,17 @@ public class FStatisticsFinancialTenderAmountLogic
          cmd.append(",`REDEMPTION_TOTAL`=");
          cmd.append(unit.redemptionTotal());
       }
-      if(unit.isCustomTotalChanged()){
-         cmd.append(",`CUSTOM_TOTAL`=");
-         cmd.append(unit.customTotal());
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
+      }
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
+      }
+      if(unit.isCustomerTotalChanged()){
+         cmd.append(",`CUSTOMER_TOTAL`=");
+         cmd.append(unit.customerTotal());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
