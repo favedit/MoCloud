@@ -102,8 +102,8 @@ public class FStatisticsFinancialDepartmentPhaseLogic
    // 字段部门绩效总计的定义。
    public final static SLogicFieldInfo DEPARTMENT_PERFORMANCE_TOTAL = new SLogicFieldInfo("DEPARTMENT_PERFORMANCE_TOTAL");
 
-   // 字段理财师注册数的定义。
-   public final static SLogicFieldInfo MARKETER_REGISTER = new SLogicFieldInfo("MARKETER_REGISTER");
+   // 字段理财师数量的定义。
+   public final static SLogicFieldInfo MARKETER_COUNT = new SLogicFieldInfo("MARKETER_COUNT");
 
    // 字段理财师总数的定义。
    public final static SLogicFieldInfo MARKETER_TOTAL = new SLogicFieldInfo("MARKETER_TOTAL");
@@ -130,7 +130,7 @@ public class FStatisticsFinancialDepartmentPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_INVESTMENT`,`DEPARTMENT_INVESTMENT_TOTAL`,`DEPARTMENT_REDEMPTION`,`DEPARTMENT_REDEMPTION_TOTAL`,`DEPARTMENT_NETINVESTMENT`,`DEPARTMENT_NETINVESTMENT_TOTAL`,`DEPARTMENT_INTEREST`,`DEPARTMENT_INTEREST_TOTAL`,`DEPARTMENT_PERFORMANCE`,`DEPARTMENT_PERFORMANCE_TOTAL`,`MARKETER_REGISTER`,`MARKETER_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_COUNT`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_INVESTMENT`,`DEPARTMENT_INVESTMENT_TOTAL`,`DEPARTMENT_REDEMPTION`,`DEPARTMENT_REDEMPTION_TOTAL`,`DEPARTMENT_NETINVESTMENT`,`DEPARTMENT_NETINVESTMENT_TOTAL`,`DEPARTMENT_INTEREST`,`DEPARTMENT_INTEREST_TOTAL`,`DEPARTMENT_PERFORMANCE`,`DEPARTMENT_PERFORMANCE_TOTAL`,`MARKETER_COUNT`,`MARKETER_TOTAL`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_COUNT`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造部门阶段统计表逻辑单元。</T>
@@ -742,7 +742,7 @@ public class FStatisticsFinancialDepartmentPhaseLogic
       cmd.append(",`DEPARTMENT_INTEREST_TOTAL`");
       cmd.append(",`DEPARTMENT_PERFORMANCE`");
       cmd.append(",`DEPARTMENT_PERFORMANCE_TOTAL`");
-      cmd.append(",`MARKETER_REGISTER`");
+      cmd.append(",`MARKETER_COUNT`");
       cmd.append(",`MARKETER_TOTAL`");
       cmd.append(",`CUSTOMER_ACTION_DATE`");
       cmd.append(",`CUSTOMER_COUNT`");
@@ -882,7 +882,7 @@ public class FStatisticsFinancialDepartmentPhaseLogic
       cmd.append(',');
       cmd.append(unit.departmentPerformanceTotal());
       cmd.append(',');
-      cmd.append(unit.marketerRegister());
+      cmd.append(unit.marketerCount());
       cmd.append(',');
       long marketerTotal = unit.marketerTotal();
       if(marketerTotal == 0){
@@ -1139,9 +1139,9 @@ public class FStatisticsFinancialDepartmentPhaseLogic
          cmd.append(",`DEPARTMENT_PERFORMANCE_TOTAL`=");
          cmd.append(unit.departmentPerformanceTotal());
       }
-      if(unit.isMarketerRegisterChanged()){
-         cmd.append(",`MARKETER_REGISTER`=");
-         cmd.append(unit.marketerRegister());
+      if(unit.isMarketerCountChanged()){
+         cmd.append(",`MARKETER_COUNT`=");
+         cmd.append(unit.marketerCount());
       }
       if(unit.isMarketerTotalChanged()){
          cmd.append(",`MARKETER_TOTAL`=");

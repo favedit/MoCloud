@@ -14,7 +14,7 @@
   <FieldDouble _uuid="5751fa50-6ef8-4468-84c6-8141191a5e95" name="department_interest_total" label="M#12cn16部门利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_INTEREST_TOTAL" />
   <FieldDouble _uuid="f8717a0d-db61-4fe5-89ae-e33aba56bfa7" name="department_performance" label="M#12cn14部门绩效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PERFORMANCE" />
   <FieldDouble _uuid="b6cdb045-76dd-4d08-987e-41b7a4e4c489" name="department_performance_total" label="M#12cn16部门绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PERFORMANCE_TOTAL" />
-  <FieldInteger _uuid="fca9ad2e-3ab2-4c79-b202-a6bdd120deeb" name="marketer_register" label="M#12cn16理财师注册数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_REGISTER" />
+  <FieldInteger _uuid="fca9ad2e-3ab2-4c79-b202-a6bdd120deeb" name="marketer_count" label="M#12cn15理财师数量" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_COUNT" />
   <FieldRecordId _uuid="dd44ba85-036d-46dd-b3fd-656f08ec21ed" name="marketer_total" label="M#12cn15理财师总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_TOTAL" />
   <FieldDateTime _uuid="6125d6c4-ef6c-4f48-8b21-8511fe154721" name="customer_action_date" label="M#12cn16客户命令日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />
   <FieldInteger _uuid="7b18edbf-5bcc-412c-b7fd-47b675427b58" name="customer_count" label="M#12cn14客户数量" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_COUNT" />

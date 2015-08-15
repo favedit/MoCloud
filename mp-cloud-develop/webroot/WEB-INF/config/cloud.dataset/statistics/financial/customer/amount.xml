@@ -12,5 +12,7 @@
   <FieldDouble _uuid="051cb7fe-8908-4e17-8ccc-3cf9e43a7ed0" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
   <FieldDouble _uuid="ae5da744-c432-4d26-9b2d-3fc1b486fea7" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="00840296-a614-4dc3-a976-fe450c7599de" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldRecordId _uuid="151dd779-3e38-4039-9528-8b2cbf261522" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" />
+  <FieldString _uuid="7cd237e9-1182-48d9-999f-08fc0f57d269" name="tender_model" label="M#12cn14投标模式" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_MODEL" data_size="20" />
   <FieldTemplate _uuid="351d3f9a-73ae-4162-a589-0a423bef8bf7" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

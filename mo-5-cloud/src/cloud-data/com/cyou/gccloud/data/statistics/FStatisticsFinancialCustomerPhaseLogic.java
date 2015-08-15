@@ -120,6 +120,21 @@ public class FStatisticsFinancialCustomerPhaseLogic
    // 字段绩效总计的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
+   // 字段投标改变的定义。
+   public final static SLogicFieldInfo TENDER_CHANGED = new SLogicFieldInfo("TENDER_CHANGED");
+
+   // 字段前投标编号的定义。
+   public final static SLogicFieldInfo TENDER_PRIOR_ID = new SLogicFieldInfo("TENDER_PRIOR_ID");
+
+   // 字段前投标模式的定义。
+   public final static SLogicFieldInfo TENDER_PRIOR_MODEL = new SLogicFieldInfo("TENDER_PRIOR_MODEL");
+
+   // 字段投标编号的定义。
+   public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
+
+   // 字段投标模式的定义。
+   public final static SLogicFieldInfo TENDER_MODEL = new SLogicFieldInfo("TENDER_MODEL");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -133,7 +148,7 @@ public class FStatisticsFinancialCustomerPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_CARD`,`CUSTOMER_AREA`,`CUSTOMER_BIRTH`,`CUSTOMER_GENDER`,`CUSTOMER_PHONE`,`CUSTOMER_ACTION_DATE`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`INTEREST`,`INTEREST_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_CARD`,`CUSTOMER_AREA`,`CUSTOMER_BIRTH`,`CUSTOMER_GENDER`,`CUSTOMER_PHONE`,`CUSTOMER_ACTION_DATE`,`INVESTMENT`,`INVESTMENT_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`INTEREST`,`INTEREST_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`TENDER_CHANGED`,`TENDER_PRIOR_ID`,`TENDER_PRIOR_MODEL`,`TENDER_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户阶段统计表逻辑单元。</T>
@@ -751,6 +766,11 @@ public class FStatisticsFinancialCustomerPhaseLogic
       cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE`");
       cmd.append(",`PERFORMANCE_TOTAL`");
+      cmd.append(",`TENDER_CHANGED`");
+      cmd.append(",`TENDER_PRIOR_ID`");
+      cmd.append(",`TENDER_PRIOR_MODEL`");
+      cmd.append(",`TENDER_ID`");
+      cmd.append(",`TENDER_MODEL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -934,6 +954,40 @@ public class FStatisticsFinancialCustomerPhaseLogic
       cmd.append(unit.performance());
       cmd.append(',');
       cmd.append(unit.performanceTotal());
+      cmd.append(',');
+      cmd.append(unit.tenderChanged());
+      cmd.append(',');
+      long tenderPriorId = unit.tenderPriorId();
+      if(tenderPriorId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderPriorId);
+      }
+      cmd.append(',');
+      String tenderPriorModel = unit.tenderPriorModel();
+      if(RString.isEmpty(tenderPriorModel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenderPriorModel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long tenderId = unit.tenderId();
+      if(tenderId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderId);
+      }
+      cmd.append(',');
+      String tenderModel = unit.tenderModel();
+      if(RString.isEmpty(tenderModel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenderModel));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -1228,6 +1282,50 @@ public class FStatisticsFinancialCustomerPhaseLogic
       if(unit.isPerformanceTotalChanged()){
          cmd.append(",`PERFORMANCE_TOTAL`=");
          cmd.append(unit.performanceTotal());
+      }
+      if(unit.isTenderChangedChanged()){
+         cmd.append(",`TENDER_CHANGED`=");
+         cmd.append(unit.tenderChanged());
+      }
+      if(unit.isTenderPriorIdChanged()){
+         cmd.append(",`TENDER_PRIOR_ID`=");
+         long tenderPriorId = unit.tenderPriorId();
+         if(tenderPriorId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderPriorId);
+         }
+      }
+      if(unit.isTenderPriorModelChanged()){
+         cmd.append(",`TENDER_PRIOR_MODEL`=");
+         String tenderPriorModel = unit.tenderPriorModel();
+         if(RString.isEmpty(tenderPriorModel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenderPriorModel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isTenderIdChanged()){
+         cmd.append(",`TENDER_ID`=");
+         long tenderId = unit.tenderId();
+         if(tenderId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderId);
+         }
+      }
+      if(unit.isTenderModelChanged()){
+         cmd.append(",`TENDER_MODEL`=");
+         String tenderModel = unit.tenderModel();
+         if(RString.isEmpty(tenderModel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenderModel));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

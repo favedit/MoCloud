@@ -259,10 +259,7 @@ ALTER TABLE ST_FIN_TENDER_CUSTOMER
    ADD CONSTRAINT ST_FIN_TND_CST_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE ST_FIN_TENDER_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_TND_CST_UK_TND UNIQUE ( TENDER_ID ); 
-
-ALTER TABLE ST_FIN_TENDER_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_TND_CST_UK_CST UNIQUE ( CUSTOMER_ID ); 
+   ADD CONSTRAINT ST_FIN_TND_CST_UK_CST UNIQUE ( TENDER_ID, CUSTOMER_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Tender.Amount]
@@ -353,6 +350,8 @@ CREATE TABLE `ST_FIN_CUSTOMER_AMOUNT`
    `NETINVESTMENT_TOTAL`           DOUBLE, 
    `INTEREST_TOTAL`                DOUBLE, 
    `PERFORMANCE_TOTAL`             DOUBLE, 
+   `TENDER_ID`                     BIGINT, 
+   `TENDER_MODEL`                  VARCHAR(20), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -400,6 +399,11 @@ CREATE TABLE `ST_FIN_CUSTOMER_PHASE`
    `INTEREST_TOTAL`                DOUBLE, 
    `PERFORMANCE`                   DOUBLE, 
    `PERFORMANCE_TOTAL`             DOUBLE, 
+   `TENDER_CHANGED`                INTEGER, 
+   `TENDER_PRIOR_ID`               BIGINT, 
+   `TENDER_PRIOR_MODEL`            VARCHAR(20), 
+   `TENDER_ID`                     BIGINT, 
+   `TENDER_MODEL`                  VARCHAR(20), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -501,7 +505,7 @@ CREATE TABLE `ST_FIN_MARKETER_PHASE`
    `MARKETER_PERFORMANCE`          DOUBLE, 
    `MARKETER_PERFORMANCE_TOTAL`    DOUBLE, 
    `CUSTOMER_ACTION_DATE`          DATETIME, 
-   `CUSTOMER_REGISTER`             INTEGER, 
+   `CUSTOMER_COUNT`                INTEGER, 
    `CUSTOMER_TOTAL`                INTEGER, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -631,10 +635,10 @@ CREATE TABLE `ST_FIN_DEPARTMENT_PHASE`
    `DEPARTMENT_INTEREST_TOTAL`     DOUBLE, 
    `DEPARTMENT_PERFORMANCE`        DOUBLE, 
    `DEPARTMENT_PERFORMANCE_TOTAL`  DOUBLE, 
-   `MARKETER_REGISTER`             INTEGER, 
+   `MARKETER_COUNT`                INTEGER, 
    `MARKETER_TOTAL`                BIGINT, 
    `CUSTOMER_ACTION_DATE`          DATETIME, 
-   `CUSTOMER_REGISTER`             INTEGER, 
+   `CUSTOMER_COUNT`                INTEGER, 
    `CUSTOMER_TOTAL`                INTEGER, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 

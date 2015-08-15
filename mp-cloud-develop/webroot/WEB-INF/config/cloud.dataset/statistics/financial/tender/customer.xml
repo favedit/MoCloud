@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="b80f7971-ce95-4657-b089-a8dba5281af1" name="statistics.financial.tender.customer" label="M#12cn15投标客户表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Tender.Customer" data_name="ST_FIN_TENDER_CUSTOMER" data_alias="ST_FIN_TND_CST" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="38646edf-7c8d-4241-a8cc-36cc23c65949" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" data_uniques="TND" />
+  <FieldRecordId _uuid="38646edf-7c8d-4241-a8cc-36cc23c65949" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" data_uniques="CST" />
   <FieldRecordId _uuid="03eb8dd8-ac30-4830-b3d1-0cc8fa351219" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_uniques="CST" />
   <FieldDateTime _uuid="4fffbc3d-5e46-4115-bf70-d43b4ee70ce8" name="link_date" label="M#12cn14关联日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldDouble _uuid="d2cfc531-a3b3-47ff-9756-8fcd438cdea3" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />

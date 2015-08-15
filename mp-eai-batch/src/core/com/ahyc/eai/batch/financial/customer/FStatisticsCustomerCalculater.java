@@ -53,11 +53,15 @@ public class FStatisticsCustomerCalculater
          String customerArea = dynamicUnit.customerArea();
          String customerBirth = dynamicUnit.customerBirth();
          int customerGender = dynamicUnit.customerGender();
+         String customerPhone = dynamicUnit.customerPhone();
          int customerActionCd = dynamicUnit.customerActionCd();
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
          double customerActionInterest = dynamicUnit.customerActionInterest();
-         String customerPhone = dynamicUnit.customerPhone();
+         long tenderId = dynamicUnit.tenderId();
+         String tenderModel = dynamicUnit.tenderModel();
+         long tenderPriorId = 0;
+         String tenderPriorModel = null;
          // 统计合计信息
          FStatisticsFinancialCustomerAmountUnit amountUnit = amountLogic.search("CUSTOMER_ID=" + customerId);
          boolean amountExist = (amountUnit != null);
@@ -70,6 +74,13 @@ public class FStatisticsCustomerCalculater
             amountUnit.setCustomerBirth(customerBirth);
             amountUnit.setCustomerGender(customerGender);
             amountUnit.setCustomerPhone(customerPhone);
+            amountUnit.setTenderId(tenderId);
+            amountUnit.setTenderModel(tenderModel);
+         }else{
+            tenderPriorId = amountUnit.tenderId();
+            tenderPriorModel = amountUnit.tenderModel();
+            amountUnit.setTenderId(tenderId);
+            amountUnit.setTenderModel(tenderModel);
          }
          double investmentTotal = amountUnit.investmentTotal();
          double redemptionTotal = amountUnit.redemptionTotal();
@@ -128,6 +139,17 @@ public class FStatisticsCustomerCalculater
          phaseUnit.setNetinvestment(phaseUnit.investment() - phaseUnit.redemption());
          phaseUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
          phaseUnit.setInterestTotal(interestTotal);
+         // 设置投标
+         if(tenderId != tenderPriorId){
+            phaseUnit.setTenderChanged(1);
+         }
+         if(!phaseExist){
+            phaseUnit.setTenderPriorId(tenderPriorId);
+            phaseUnit.setTenderPriorModel(tenderPriorModel);
+         }
+         phaseUnit.setTenderId(tenderId);
+         phaseUnit.setTenderModel(tenderModel);
+         // 更新数据
          if(phaseExist){
             phaseLogic.doUpdate(phaseUnit);
          }else{

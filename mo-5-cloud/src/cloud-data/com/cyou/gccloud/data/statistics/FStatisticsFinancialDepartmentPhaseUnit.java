@@ -159,11 +159,11 @@ public class FStatisticsFinancialDepartmentPhaseUnit
    // 字段部门绩效总计的定义。
    protected double _departmentPerformanceTotal;
 
-   // 存储字段理财师注册数的定义。
-   private int __marketerRegister;
+   // 存储字段理财师数量的定义。
+   private int __marketerCount;
 
-   // 字段理财师注册数的定义。
-   protected int _marketerRegister;
+   // 字段理财师数量的定义。
+   protected int _marketerCount;
 
    // 存储字段理财师总数的定义。
    private long __marketerTotal;
@@ -841,30 +841,30 @@ public class FStatisticsFinancialDepartmentPhaseUnit
    }
 
    //============================================================
-   // <T>判断理财师注册数的数据是否改变。</T>
+   // <T>判断理财师数量的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerRegisterChanged(){
-      return __marketerRegister != _marketerRegister;
+   public boolean isMarketerCountChanged(){
+      return __marketerCount != _marketerCount;
    }
 
    //============================================================
-   // <T>获得理财师注册数的数据内容。</T>
+   // <T>获得理财师数量的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int marketerRegister(){
-      return _marketerRegister;
+   public int marketerCount(){
+      return _marketerCount;
    }
 
    //============================================================
-   // <T>设置理财师注册数的数据内容。</T>
+   // <T>设置理财师数量的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerRegister(int value){
-      _marketerRegister = value;
+   public void setMarketerCount(int value){
+      _marketerCount = value;
    }
 
    //============================================================
@@ -1138,8 +1138,8 @@ public class FStatisticsFinancialDepartmentPhaseUnit
             return RDouble.toString(_departmentPerformance);
          case "department_performance_total":
             return RDouble.toString(_departmentPerformanceTotal);
-         case "marketer_register":
-            return RInteger.toString(_marketerRegister);
+         case "marketer_count":
+            return RInteger.toString(_marketerCount);
          case "marketer_total":
             return Long.toString(_marketerTotal);
          case "customer_action_date":
@@ -1239,8 +1239,8 @@ public class FStatisticsFinancialDepartmentPhaseUnit
          case "department_performance_total":
             _departmentPerformanceTotal = RDouble.parse(value);
             break;
-         case "marketer_register":
-            _marketerRegister = RInteger.parse(value);
+         case "marketer_count":
+            _marketerCount = RInteger.parse(value);
             break;
          case "marketer_total":
             _marketerTotal = RLong.parse(value);
@@ -1373,9 +1373,9 @@ public class FStatisticsFinancialDepartmentPhaseUnit
                __departmentPerformanceTotal = RDouble.parse(value);
                _departmentPerformanceTotal = __departmentPerformanceTotal;
                break;
-            case "marketer_register":
-               __marketerRegister = RInteger.parse(value);
-               _marketerRegister = __marketerRegister;
+            case "marketer_count":
+               __marketerCount = RInteger.parse(value);
+               _marketerCount = __marketerCount;
                break;
             case "marketer_total":
                __marketerTotal = RLong.parse(value);
@@ -1444,7 +1444,7 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       row.set("departmentInterestTotal", _departmentInterestTotal);
       row.set("departmentPerformance", _departmentPerformance);
       row.set("departmentPerformanceTotal", _departmentPerformanceTotal);
-      row.set("marketerRegister", _marketerRegister);
+      row.set("marketerCount", _marketerCount);
       row.set("marketerTotal", _marketerTotal);
       row.set("customerActionDate", _customerActionDate);
       row.set("customerCount", _customerCount);
@@ -1486,7 +1486,7 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       map.put("departmentInterestTotal", RDouble.toString(_departmentInterestTotal));
       map.put("departmentPerformance", RDouble.toString(_departmentPerformance));
       map.put("departmentPerformanceTotal", RDouble.toString(_departmentPerformanceTotal));
-      map.put("marketerRegister", RInteger.toString(_marketerRegister));
+      map.put("marketerCount", RInteger.toString(_marketerCount));
       map.put("marketerTotal", RLong.toString(_marketerTotal));
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerCount", RInteger.toString(_customerCount));
@@ -1518,7 +1518,7 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       _linkDate.set(input.readInt64());
       _departmentId = input.readInt64();
       _departmentLabel = input.readString();
-      _marketerRegister = input.readInt32();
+      _marketerCount = input.readInt32();
       _marketerTotal = input.readInt64();
       _customerActionDate.set(input.readInt64());
       _customerCount = input.readInt32();
@@ -1550,7 +1550,7 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       output.writeInt64(_linkDate.get());
       output.writeInt64(_departmentId);
       output.writeString(_departmentLabel);
-      output.writeInt32(_marketerRegister);
+      output.writeInt32(_marketerCount);
       output.writeInt64(_marketerTotal);
       output.writeInt64(_customerActionDate.get());
       output.writeInt32(_customerCount);

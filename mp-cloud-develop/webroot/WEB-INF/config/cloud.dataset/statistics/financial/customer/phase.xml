@@ -20,5 +20,10 @@
   <FieldDouble _uuid="50625eb1-fa04-4a07-a4d0-aea9b6ce4c3c" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="e52883a7-cb20-4a9e-9571-b3cd858d848f" name="performance" label="M#12cn12绩效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE" />
   <FieldDouble _uuid="9545a51b-f104-4638-9cfd-451008588298" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldInteger _uuid="6b7dcbd9-5c62-4d5e-9e4d-410a470cfe9a" name="tender_changed" label="M#12cn14投标改变" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_CHANGED" />
+  <FieldRecordId _uuid="c071ed8f-48f5-4941-addd-faa819497f2a" name="tender_prior_id" label="M#12cn15前投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_PRIOR_ID" />
+  <FieldString _uuid="dc9b8b94-9f90-4ea5-9ad7-2679d6702077" name="tender_prior_model" label="M#12cn15前投标模式" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_PRIOR_MODEL" data_size="20" />
+  <FieldRecordId _uuid="d83a1198-3c2d-470f-bbcb-024bc457302d" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" />
+  <FieldString _uuid="b0bc470a-5f3c-4062-afb8-8cc3b523e1fc" name="tender_model" label="M#12cn14投标模式" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_MODEL" data_size="20" />
   <FieldTemplate _uuid="4a1fd558-c98a-4642-98a8-cb3990215864" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

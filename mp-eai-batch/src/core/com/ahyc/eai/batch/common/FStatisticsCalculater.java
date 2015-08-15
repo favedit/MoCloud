@@ -4,6 +4,8 @@ import com.cyou.gccloud.data.statistics.FStatisticsControllerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsControllerUnit;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.data.logic.FLogicContext;
 
 //============================================================
@@ -12,6 +14,9 @@ import org.mo.data.logic.FLogicContext;
 public class FStatisticsCalculater
       extends FObject
 {
+   // 日志输出接口
+   protected static ILogger _logger = RLogger.find(FStatisticsCalculater.class);
+
    // 处理代码
    protected String _processCode;
 
@@ -131,6 +136,7 @@ public class FStatisticsCalculater
             }catch(Exception error){
                controllerUnit.setIsValid(false);
                controllerUnit.setProcessResult(error.getMessage());
+               _logger.error(this, "process", error);
             }
             processEnd(logicContext);
             // 更新处理
