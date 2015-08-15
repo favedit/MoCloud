@@ -13,8 +13,11 @@
   <FieldString _uuid="59eae968-8842-42d9-a274-f11683bd8784" name="marketer_rank" label="M#12cn15理财师等级" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_RANK" data_size="40" />
   <FieldRecordId _uuid="d32adc70-c7a1-4c8e-910a-101a15f134a0" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" />
   <FieldString _uuid="7042298a-3118-470a-ae32-da98d32a7a1e" name="customer_label" label="M#12cn14客户名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LABEL" data_size="40" />
-  <FieldString _uuid="0d66475f-2dca-43fe-9103-bd5911867b4d" name="customer_phone" label="M#12cn14客户电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_PHONE" data_size="20" />
   <FieldString _uuid="d1ec5263-31da-4ae9-bc34-319226e50966" name="customer_card" label="M#12cn15用户身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_CARD" data_size="20" />
+  <FieldString _uuid="db7ceb60-a2e0-476e-b2ee-765ba0d07762" name="customer_area" label="M#12cn14用户地区" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_AREA" data_size="6" />
+  <FieldString _uuid="8ac39d1b-63d7-4c21-b2f6-a707a66a2246" name="customer_birth" label="M#12cn15客户生日年" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_BIRTH" data_size="8" />
+  <FieldInteger _uuid="d292549c-7907-4511-bcde-faa560d1479e" name="customer_gender" label="M#12cn14客户性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_GENDER" />
+  <FieldString _uuid="0d66475f-2dca-43fe-9103-bd5911867b4d" name="customer_phone" label="M#12cn14客户电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_PHONE" data_size="20" />
   <FieldInteger _uuid="41df12c9-22ba-4a33-99a3-d0f74c1d0e4b" name="customer_action_cd" label="M#12cn16客户命令类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_CD" />
   <FieldDateTime _uuid="a3dd51c2-0176-4d95-91c5-aca8982d0737" name="customer_action_date" label="M#12cn16客户命令时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />
   <FieldDouble _uuid="46532028-c8ba-4a15-a797-41ed04c345c7" name="customer_action_amount" label="M#12cn16客户命令数值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_AMOUNT" />

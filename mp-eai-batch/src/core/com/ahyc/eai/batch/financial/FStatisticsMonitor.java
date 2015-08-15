@@ -7,6 +7,7 @@ import com.ahyc.eai.batch.financial.dynamic.FStatisticsDynamicCalculater;
 import com.ahyc.eai.batch.financial.dynamic.FStatisticsInvestmentCalculater;
 import com.ahyc.eai.batch.financial.dynamic.FStatisticsRedemptionCalculater;
 import com.ahyc.eai.batch.financial.marketer.FStatisticsMarketerCalculater;
+import com.ahyc.eai.batch.financial.tender.FStatisticsTenderCalculater;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
@@ -64,6 +65,10 @@ public class FStatisticsMonitor
          dynamicCalculater.process(logicContext);
          processCount += dynamicCalculater.processCount();
          //............................................................
+         // 统计投标信息
+         FStatisticsTenderCalculater tenderCalculater = new FStatisticsTenderCalculater();
+         tenderCalculater.process(logicContext);
+         processCount += tenderCalculater.processCount();
          // 统计客户信息
          FStatisticsCustomerCalculater customerCalculater = new FStatisticsCustomerCalculater();
          customerCalculater.process(logicContext);
@@ -80,7 +85,7 @@ public class FStatisticsMonitor
          _logger.error(null, "main", exception);
       }
       _logger.debug(this, "onExecute", "Process statistics. (count={1})", processCount);
-      if(processCount > 0){
+      if(processCount == 0){
          _interval = 10;
       }else{
          _interval = _defaultInterval;

@@ -4,6 +4,7 @@ import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ELoggerLevel;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
@@ -42,6 +43,9 @@ public class RStatisticsCalculater
       attributes.set("application", "/data/eai/eai.batch");
       // 加载配置
       RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
+      //RAop.initialize("D:/Microbject/MoCloud/mp-eai-batch/src/config//application-work.xml");
+      // 设置日志
+      RLogger.setFlags(ELoggerLevel.NO_DEBUG.value());
       // 逻辑处理
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
       // 启动监视器

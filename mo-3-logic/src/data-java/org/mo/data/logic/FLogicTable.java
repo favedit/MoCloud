@@ -3,6 +3,7 @@ package org.mo.data.logic;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.ISqlConnection;
+import org.mo.com.data.ISqlDatasetReader;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -449,6 +450,16 @@ public abstract class FLogicTable
       boolean result = _connection.executeSql(sql);
       // 执行SQL文
       return result ? EResult.Success : EResult.Failure;
+   }
+
+   //============================================================
+   // <T>执行一个数据命令，清空所有缓存。</T>
+   //
+   // @param sql 数据命令
+   // @return 处理结果
+   //============================================================
+   public ISqlDatasetReader fetchReader(CharSequence sql){
+      return _connection.fetchReader(sql);
    }
 
    //============================================================

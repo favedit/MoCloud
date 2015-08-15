@@ -35,15 +35,22 @@ CREATE TABLE `ST_FIN_TENDER`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `LINK_ID`                       BIGINT, 
+   `LINK_ID`                       BIGINT NOT NULL, 
    `LINK_DATE`                     DATETIME, 
+   `GROUP_NUMBER`                  INTEGER, 
    `LABEL`                         VARCHAR(800), 
    `BORROW_MODEL`                  VARCHAR(20), 
    `BORROW_DURATION`               INTEGER, 
    `BORROW_MONEY`                  DOUBLE, 
    `BORROW_INEREST`                DOUBLE, 
    `BORROW_INEREST_RATE`           FLOAT, 
-   `INFO`                          VARCHAR(2000), 
+   `BORROW_INFO`                   VARCHAR(2000), 
+   `PROJECT_INFO`                  TEXT, 
+   `COMPANY_INFO`                  TEXT, 
+   `SAFEGUARD_INFO`                TEXT, 
+   `MORTGAGE_INFO`                 TEXT, 
+   `INVESTMENT_BEGIN_DATE`         DATETIME, 
+   `INVESTMENT_END_DATE`           DATETIME, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -52,6 +59,9 @@ CREATE TABLE `ST_FIN_TENDER`
 
 ALTER TABLE ST_FIN_TENDER 
    ADD CONSTRAINT ST_FIN_TDR_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_TENDER 
+   ADD CONSTRAINT ST_FIN_TDR_UK_LINK_ID UNIQUE ( LINK_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Dynamic]
@@ -75,8 +85,11 @@ CREATE TABLE `ST_FIN_DYNAMIC`
    `MARKETER_RANK`                 VARCHAR(40), 
    `CUSTOMER_ID`                   BIGINT, 
    `CUSTOMER_LABEL`                VARCHAR(40), 
-   `CUSTOMER_PHONE`                VARCHAR(20), 
    `CUSTOMER_CARD`                 VARCHAR(20), 
+   `CUSTOMER_AREA`                 VARCHAR(6), 
+   `CUSTOMER_BIRTH`                VARCHAR(8), 
+   `CUSTOMER_GENDER`               INTEGER, 
+   `CUSTOMER_PHONE`                VARCHAR(20), 
    `CUSTOMER_ACTION_CD`            INTEGER, 
    `CUSTOMER_ACTION_DATE`          DATETIME, 
    `CUSTOMER_ACTION_AMOUNT`        DOUBLE, 
@@ -91,8 +104,6 @@ CREATE TABLE `ST_FIN_DYNAMIC`
 
 ALTER TABLE ST_FIN_DYNAMIC 
    ADD CONSTRAINT ST_FIN_DYN_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE ST_FIN_DYNAMIC ADD INDEX ST_FIN_DYN_IX_CST_ACT_DAT(CUSTOMER_ACTION_DATE);
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Amount]
@@ -332,6 +343,11 @@ CREATE TABLE `ST_FIN_CUSTOMER_AMOUNT`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `CUSTOMER_ID`                   BIGINT NOT NULL, 
    `CUSTOMER_LABEL`                VARCHAR(40), 
+   `CUSTOMER_CARD`                 VARCHAR(20), 
+   `CUSTOMER_AREA`                 VARCHAR(6), 
+   `CUSTOMER_BIRTH`                VARCHAR(8), 
+   `CUSTOMER_GENDER`               INTEGER, 
+   `CUSTOMER_PHONE`                VARCHAR(20), 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `REDEMPTION_TOTAL`              DOUBLE, 
    `NETINVESTMENT_TOTAL`           DOUBLE, 
@@ -368,8 +384,11 @@ CREATE TABLE `ST_FIN_CUSTOMER_PHASE`
    `LINK_DATE`                     DATETIME, 
    `CUSTOMER_ID`                   BIGINT, 
    `CUSTOMER_LABEL`                VARCHAR(40), 
-   `CUSTOMER_PHONE`                VARCHAR(20), 
    `CUSTOMER_CARD`                 VARCHAR(20), 
+   `CUSTOMER_AREA`                 VARCHAR(6), 
+   `CUSTOMER_BIRTH`                VARCHAR(8), 
+   `CUSTOMER_GENDER`               INTEGER, 
+   `CUSTOMER_PHONE`                VARCHAR(20), 
    `CUSTOMER_ACTION_DATE`          DATETIME, 
    `INVESTMENT`                    DOUBLE, 
    `INVESTMENT_TOTAL`              DOUBLE, 

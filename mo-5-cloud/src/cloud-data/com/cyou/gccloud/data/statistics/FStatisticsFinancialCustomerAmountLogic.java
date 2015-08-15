@@ -44,8 +44,23 @@ public class FStatisticsFinancialCustomerAmountLogic
    // 字段客户编号的定义。
    public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
 
-   // 字段公司名称的定义。
+   // 字段客户名称的定义。
    public final static SLogicFieldInfo CUSTOMER_LABEL = new SLogicFieldInfo("CUSTOMER_LABEL");
+
+   // 字段客户卡片的定义。
+   public final static SLogicFieldInfo CUSTOMER_CARD = new SLogicFieldInfo("CUSTOMER_CARD");
+
+   // 字段客户地区的定义。
+   public final static SLogicFieldInfo CUSTOMER_AREA = new SLogicFieldInfo("CUSTOMER_AREA");
+
+   // 字段客户生日的定义。
+   public final static SLogicFieldInfo CUSTOMER_BIRTH = new SLogicFieldInfo("CUSTOMER_BIRTH");
+
+   // 字段客户性别的定义。
+   public final static SLogicFieldInfo CUSTOMER_GENDER = new SLogicFieldInfo("CUSTOMER_GENDER");
+
+   // 字段客户电话的定义。
+   public final static SLogicFieldInfo CUSTOMER_PHONE = new SLogicFieldInfo("CUSTOMER_PHONE");
 
    // 字段投资总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
@@ -75,7 +90,7 @@ public class FStatisticsFinancialCustomerAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`CUSTOMER_LABEL`,`CUSTOMER_CARD`,`CUSTOMER_AREA`,`CUSTOMER_BIRTH`,`CUSTOMER_GENDER`,`CUSTOMER_PHONE`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户数据统计表逻辑单元。</T>
@@ -669,6 +684,11 @@ public class FStatisticsFinancialCustomerAmountLogic
       cmd.append(",`GUID`");
       cmd.append(",`CUSTOMER_ID`");
       cmd.append(",`CUSTOMER_LABEL`");
+      cmd.append(",`CUSTOMER_CARD`");
+      cmd.append(",`CUSTOMER_AREA`");
+      cmd.append(",`CUSTOMER_BIRTH`");
+      cmd.append(",`CUSTOMER_GENDER`");
+      cmd.append(",`CUSTOMER_PHONE`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
@@ -702,6 +722,44 @@ public class FStatisticsFinancialCustomerAmountLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(customerLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String customerCard = unit.customerCard();
+      if(RString.isEmpty(customerCard)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(customerCard));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String customerArea = unit.customerArea();
+      if(RString.isEmpty(customerArea)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(customerArea));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String customerBirth = unit.customerBirth();
+      if(RString.isEmpty(customerBirth)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(customerBirth));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.customerGender());
+      cmd.append(',');
+      String customerPhone = unit.customerPhone();
+      if(RString.isEmpty(customerPhone)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(customerPhone));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -805,6 +863,54 @@ public class FStatisticsFinancialCustomerAmountLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(customerLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCustomerCardChanged()){
+         cmd.append(",`CUSTOMER_CARD`=");
+         String customerCard = unit.customerCard();
+         if(RString.isEmpty(customerCard)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(customerCard));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCustomerAreaChanged()){
+         cmd.append(",`CUSTOMER_AREA`=");
+         String customerArea = unit.customerArea();
+         if(RString.isEmpty(customerArea)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(customerArea));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCustomerBirthChanged()){
+         cmd.append(",`CUSTOMER_BIRTH`=");
+         String customerBirth = unit.customerBirth();
+         if(RString.isEmpty(customerBirth)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(customerBirth));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCustomerGenderChanged()){
+         cmd.append(",`CUSTOMER_GENDER`=");
+         cmd.append(unit.customerGender());
+      }
+      if(unit.isCustomerPhoneChanged()){
+         cmd.append(",`CUSTOMER_PHONE`=");
+         String customerPhone = unit.customerPhone();
+         if(RString.isEmpty(customerPhone)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(customerPhone));
             cmd.append('\'');
          }
       }

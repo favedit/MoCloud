@@ -3,9 +3,12 @@
   <FieldRecordId _uuid="e0cb2d20-fc69-421d-bc6e-7e4a83809eca" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldDateTime _uuid="1a6d1f9f-b214-4fe3-a941-2bcf4d0417a0" name="link_date" label="M#12cn14关联日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldRecordId _uuid="7d1d5163-8662-4133-826a-796be5ae7646" name="customer_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_uniques="DAT" />
-  <FieldString _uuid="cb535609-8047-4974-8343-61a9751a9d17" name="customer_label" label="M#12cn14用户名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LABEL" data_size="40" />
-  <FieldString _uuid="770f39e5-7149-4cc2-a26e-c1df8bffb66e" name="customer_phone" label="M#12cn16账号电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_PHONE" data_size="20" />
-  <FieldString _uuid="e4273223-60d9-4272-9cc9-7b19264b42a2" name="customer_card" label="M#12cn15账号身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_CARD" data_size="20" />
+  <FieldString _uuid="cb535609-8047-4974-8343-61a9751a9d17" name="customer_label" label="M#12cn14客户名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LABEL" data_size="40" />
+  <FieldString _uuid="e4273223-60d9-4272-9cc9-7b19264b42a2" name="customer_card" label="M#12cn15客户身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_CARD" data_size="20" />
+  <FieldString _uuid="b7dc4741-2c66-4786-9fd7-057e1fa623c1" name="customer_area" label="M#12cn14客户地区" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_AREA" data_size="6" />
+  <FieldString _uuid="5bd9de67-f409-4b1f-a917-f48fc7c6d895" name="customer_birth" label="M#12cn14客户生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_BIRTH" data_size="8" />
+  <FieldInteger _uuid="6a68208b-f980-4b88-8a6e-50add5b3f763" name="customer_gender" label="M#12cn14客户性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_GENDER" />
+  <FieldString _uuid="770f39e5-7149-4cc2-a26e-c1df8bffb66e" name="customer_phone" label="M#12cn16客户电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_PHONE" data_size="20" />
   <FieldDateTime _uuid="4133c702-306b-41b8-a27e-77f6efb9f94a" name="customer_action_date" label="M#12cn16客户命令时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />
   <FieldDouble _uuid="125e8333-afb2-4424-9504-5096f376194f" name="investment" label="M#12cn12投资" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT" />
   <FieldDouble _uuid="aa5cd7d2-dd00-4b7a-83f9-ddad551284d7" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />

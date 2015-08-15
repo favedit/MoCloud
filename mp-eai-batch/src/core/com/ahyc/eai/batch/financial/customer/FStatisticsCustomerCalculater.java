@@ -49,11 +49,14 @@ public class FStatisticsCustomerCalculater
          long recordId = dynamicUnit.ouid();
          long customerId = dynamicUnit.customerId();
          String customerLabel = dynamicUnit.customerLabel();
+         String customerCard = dynamicUnit.customerCard();
+         String customerArea = dynamicUnit.customerArea();
+         String customerBirth = dynamicUnit.customerBirth();
+         int customerGender = dynamicUnit.customerGender();
          int customerActionCd = dynamicUnit.customerActionCd();
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
          double customerActionInterest = dynamicUnit.customerActionInterest();
-         String customerCard = dynamicUnit.customerCard();
          String customerPhone = dynamicUnit.customerPhone();
          // 统计合计信息
          FStatisticsFinancialCustomerAmountUnit amountUnit = amountLogic.search("CUSTOMER_ID=" + customerId);
@@ -62,6 +65,11 @@ public class FStatisticsCustomerCalculater
             amountUnit = amountLogic.doPrepare();
             amountUnit.setCustomerId(customerId);
             amountUnit.setCustomerLabel(customerLabel);
+            amountUnit.setCustomerCard(customerCard);
+            amountUnit.setCustomerArea(customerArea);
+            amountUnit.setCustomerBirth(customerBirth);
+            amountUnit.setCustomerGender(customerGender);
+            amountUnit.setCustomerPhone(customerPhone);
          }
          double investmentTotal = amountUnit.investmentTotal();
          double redemptionTotal = amountUnit.redemptionTotal();
@@ -99,6 +107,9 @@ public class FStatisticsCustomerCalculater
             phaseUnit.setCustomerId(customerId);
             phaseUnit.setCustomerLabel(customerLabel);
             phaseUnit.setCustomerCard(customerCard);
+            phaseUnit.setCustomerArea(customerArea);
+            phaseUnit.setCustomerBirth(customerBirth);
+            phaseUnit.setCustomerGender(customerGender);
             phaseUnit.setCustomerPhone(customerPhone);
          }
          phaseUnit.setLinkId(recordId);

@@ -7,6 +7,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -92,23 +93,41 @@ public class FStatisticsFinancialCustomerPhaseUnit
    // 字段用户编号的定义。
    protected long _customerId;
 
-   // 存储字段用户名称的定义。
+   // 存储字段客户名称的定义。
    private String __customerLabel;
 
-   // 字段用户名称的定义。
+   // 字段客户名称的定义。
    protected String _customerLabel;
 
-   // 存储字段账号电话号码的定义。
-   private String __customerPhone;
-
-   // 字段账号电话号码的定义。
-   protected String _customerPhone;
-
-   // 存储字段账号身份证的定义。
+   // 存储字段客户身份证的定义。
    private String __customerCard;
 
-   // 字段账号身份证的定义。
+   // 字段客户身份证的定义。
    protected String _customerCard;
+
+   // 存储字段客户地区的定义。
+   private String __customerArea;
+
+   // 字段客户地区的定义。
+   protected String _customerArea;
+
+   // 存储字段客户生日的定义。
+   private String __customerBirth;
+
+   // 字段客户生日的定义。
+   protected String _customerBirth;
+
+   // 存储字段客户性别的定义。
+   private int __customerGender;
+
+   // 字段客户性别的定义。
+   protected int _customerGender;
+
+   // 存储字段客户电话号码的定义。
+   private String __customerPhone;
+
+   // 字段客户电话号码的定义。
+   protected String _customerPhone;
 
    // 存储字段客户命令时间的定义。
    private TDateTime __customerActionDate = new TDateTime();
@@ -531,7 +550,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
-   // <T>判断用户名称的数据是否改变。</T>
+   // <T>判断客户名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -540,7 +559,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
-   // <T>获得用户名称的数据内容。</T>
+   // <T>获得客户名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -549,7 +568,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
-   // <T>设置用户名称的数据内容。</T>
+   // <T>设置客户名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -558,34 +577,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
-   // <T>判断账号电话号码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCustomerPhoneChanged(){
-      return !RString.equals(__customerPhone, _customerPhone);
-   }
-
-   //============================================================
-   // <T>获得账号电话号码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String customerPhone(){
-      return _customerPhone;
-   }
-
-   //============================================================
-   // <T>设置账号电话号码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCustomerPhone(String value){
-      _customerPhone = value;
-   }
-
-   //============================================================
-   // <T>判断账号身份证的数据是否改变。</T>
+   // <T>判断客户身份证的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -594,7 +586,7 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
-   // <T>获得账号身份证的数据内容。</T>
+   // <T>获得客户身份证的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -603,12 +595,120 @@ public class FStatisticsFinancialCustomerPhaseUnit
    }
 
    //============================================================
-   // <T>设置账号身份证的数据内容。</T>
+   // <T>设置客户身份证的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setCustomerCard(String value){
       _customerCard = value;
+   }
+
+   //============================================================
+   // <T>判断客户地区的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerAreaChanged(){
+      return !RString.equals(__customerArea, _customerArea);
+   }
+
+   //============================================================
+   // <T>获得客户地区的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String customerArea(){
+      return _customerArea;
+   }
+
+   //============================================================
+   // <T>设置客户地区的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerArea(String value){
+      _customerArea = value;
+   }
+
+   //============================================================
+   // <T>判断客户生日的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerBirthChanged(){
+      return !RString.equals(__customerBirth, _customerBirth);
+   }
+
+   //============================================================
+   // <T>获得客户生日的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String customerBirth(){
+      return _customerBirth;
+   }
+
+   //============================================================
+   // <T>设置客户生日的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerBirth(String value){
+      _customerBirth = value;
+   }
+
+   //============================================================
+   // <T>判断客户性别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerGenderChanged(){
+      return __customerGender != _customerGender;
+   }
+
+   //============================================================
+   // <T>获得客户性别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int customerGender(){
+      return _customerGender;
+   }
+
+   //============================================================
+   // <T>设置客户性别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerGender(int value){
+      _customerGender = value;
+   }
+
+   //============================================================
+   // <T>判断客户电话号码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerPhoneChanged(){
+      return !RString.equals(__customerPhone, _customerPhone);
+   }
+
+   //============================================================
+   // <T>获得客户电话号码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String customerPhone(){
+      return _customerPhone;
+   }
+
+   //============================================================
+   // <T>设置客户电话号码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerPhone(String value){
+      _customerPhone = value;
    }
 
    //============================================================
@@ -1051,10 +1151,16 @@ public class FStatisticsFinancialCustomerPhaseUnit
             return Long.toString(_customerId);
          case "customer_label":
             return _customerLabel;
-         case "customer_phone":
-            return _customerPhone;
          case "customer_card":
             return _customerCard;
+         case "customer_area":
+            return _customerArea;
+         case "customer_birth":
+            return _customerBirth;
+         case "customer_gender":
+            return RInteger.toString(_customerGender);
+         case "customer_phone":
+            return _customerPhone;
          case "customer_action_date":
             return _customerActionDate.toString();
          case "investment":
@@ -1138,11 +1244,20 @@ public class FStatisticsFinancialCustomerPhaseUnit
          case "customer_label":
             _customerLabel = value;
             break;
-         case "customer_phone":
-            _customerPhone = value;
-            break;
          case "customer_card":
             _customerCard = value;
+            break;
+         case "customer_area":
+            _customerArea = value;
+            break;
+         case "customer_birth":
+            _customerBirth = value;
+            break;
+         case "customer_gender":
+            _customerGender = RInteger.parse(value);
+            break;
+         case "customer_phone":
+            _customerPhone = value;
             break;
          case "customer_action_date":
             _customerActionDate.parse(value);
@@ -1256,13 +1371,25 @@ public class FStatisticsFinancialCustomerPhaseUnit
                __customerLabel = value;
                _customerLabel = __customerLabel;
                break;
-            case "customer_phone":
-               __customerPhone = value;
-               _customerPhone = __customerPhone;
-               break;
             case "customer_card":
                __customerCard = value;
                _customerCard = __customerCard;
+               break;
+            case "customer_area":
+               __customerArea = value;
+               _customerArea = __customerArea;
+               break;
+            case "customer_birth":
+               __customerBirth = value;
+               _customerBirth = __customerBirth;
+               break;
+            case "customer_gender":
+               __customerGender = RInteger.parse(value);
+               _customerGender = __customerGender;
+               break;
+            case "customer_phone":
+               __customerPhone = value;
+               _customerPhone = __customerPhone;
                break;
             case "customer_action_date":
                __customerActionDate.parse(value);
@@ -1349,8 +1476,11 @@ public class FStatisticsFinancialCustomerPhaseUnit
       row.set("linkDate", _linkDate);
       row.set("customerId", _customerId);
       row.set("customerLabel", _customerLabel);
-      row.set("customerPhone", _customerPhone);
       row.set("customerCard", _customerCard);
+      row.set("customerArea", _customerArea);
+      row.set("customerBirth", _customerBirth);
+      row.set("customerGender", _customerGender);
+      row.set("customerPhone", _customerPhone);
       row.set("customerActionDate", _customerActionDate);
       row.set("investment", _investment);
       row.set("investmentTotal", _investmentTotal);
@@ -1389,8 +1519,11 @@ public class FStatisticsFinancialCustomerPhaseUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerId", RLong.toString(_customerId));
       map.put("customerLabel", _customerLabel);
-      map.put("customerPhone", _customerPhone);
       map.put("customerCard", _customerCard);
+      map.put("customerArea", _customerArea);
+      map.put("customerBirth", _customerBirth);
+      map.put("customerGender", RInteger.toString(_customerGender));
+      map.put("customerPhone", _customerPhone);
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investment", RDouble.toString(_investment));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
@@ -1429,8 +1562,11 @@ public class FStatisticsFinancialCustomerPhaseUnit
       _linkDate.set(input.readInt64());
       _customerId = input.readInt64();
       _customerLabel = input.readString();
-      _customerPhone = input.readString();
       _customerCard = input.readString();
+      _customerArea = input.readString();
+      _customerBirth = input.readString();
+      _customerGender = input.readInt32();
+      _customerPhone = input.readString();
       _customerActionDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -1459,8 +1595,11 @@ public class FStatisticsFinancialCustomerPhaseUnit
       output.writeInt64(_linkDate.get());
       output.writeInt64(_customerId);
       output.writeString(_customerLabel);
-      output.writeString(_customerPhone);
       output.writeString(_customerCard);
+      output.writeString(_customerArea);
+      output.writeString(_customerBirth);
+      output.writeInt32(_customerGender);
+      output.writeString(_customerPhone);
       output.writeInt64(_customerActionDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

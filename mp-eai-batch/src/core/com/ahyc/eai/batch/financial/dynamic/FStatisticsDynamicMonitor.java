@@ -27,8 +27,7 @@ public class FStatisticsDynamicMonitor
    public FStatisticsDynamicMonitor(IDatabaseConsole databaseConsole){
       _name = "analysis.activity";
       _valid = true;
-      //_interval = _defaultInterval;
-      _interval = 10;
+      _interval = _defaultInterval;
       _databaseConsole = databaseConsole;
    }
 
@@ -48,11 +47,11 @@ public class FStatisticsDynamicMonitor
          _logger.error(null, "main", exception);
       }
       _logger.debug(this, "onExecute", "Process statistics. (count={1})", processCount);
-      //      if(processCount > 0){
-      //         _interval = 10;
-      //      }else{
-      //         _interval = _defaultInterval;
-      //      }
+      if(processCount > 0){
+         _interval = 0;
+      }else{
+         _interval = _defaultInterval;
+      }
       return true;
    }
 }

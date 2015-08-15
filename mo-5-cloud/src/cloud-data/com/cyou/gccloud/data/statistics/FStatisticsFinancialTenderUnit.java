@@ -52,6 +52,12 @@ public class FStatisticsFinancialTenderUnit
    // 字段记录时间的定义。
    protected TDateTime _linkDate = new TDateTime();
 
+   // 存储字段分组编号的定义。
+   private int __groupNumber;
+
+   // 字段分组编号的定义。
+   protected int _groupNumber;
+
    // 存储字段标题的定义。
    private String __label;
 
@@ -88,11 +94,47 @@ public class FStatisticsFinancialTenderUnit
    // 字段借款利率的定义。
    protected float _borrowInerestRate;
 
-   // 存储字段信息的定义。
-   private String __info;
+   // 存储字段借款信息的定义。
+   private String __borrowInfo;
 
-   // 字段信息的定义。
-   protected String _info;
+   // 字段借款信息的定义。
+   protected String _borrowInfo;
+
+   // 存储字段项目信息的定义。
+   private String __projectInfo;
+
+   // 字段项目信息的定义。
+   protected String _projectInfo;
+
+   // 存储字段企业信息的定义。
+   private String __companyInfo;
+
+   // 字段企业信息的定义。
+   protected String _companyInfo;
+
+   // 存储字段保障信息的定义。
+   private String __safeguardInfo;
+
+   // 字段保障信息的定义。
+   protected String _safeguardInfo;
+
+   // 存储字段抵押信息的定义。
+   private String __mortgageInfo;
+
+   // 字段抵押信息的定义。
+   protected String _mortgageInfo;
+
+   // 存储字段投标开始日期的定义。
+   private TDateTime __investmentBeginDate = new TDateTime();
+
+   // 字段投标开始日期的定义。
+   protected TDateTime _investmentBeginDate = new TDateTime();
+
+   // 存储字段结束日期的定义。
+   private TDateTime __investmentEndDate = new TDateTime();
+
+   // 字段结束日期的定义。
+   protected TDateTime _investmentEndDate = new TDateTime();
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -260,6 +302,33 @@ public class FStatisticsFinancialTenderUnit
    }
 
    //============================================================
+   // <T>判断分组编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isGroupNumberChanged(){
+      return __groupNumber != _groupNumber;
+   }
+
+   //============================================================
+   // <T>获得分组编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int groupNumber(){
+      return _groupNumber;
+   }
+
+   //============================================================
+   // <T>设置分组编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setGroupNumber(int value){
+      _groupNumber = value;
+   }
+
+   //============================================================
    // <T>判断标题的数据是否改变。</T>
    //
    // @return 数据内容
@@ -422,30 +491,192 @@ public class FStatisticsFinancialTenderUnit
    }
 
    //============================================================
-   // <T>判断信息的数据是否改变。</T>
+   // <T>判断借款信息的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isInfoChanged(){
-      return !RString.equals(__info, _info);
+   public boolean isBorrowInfoChanged(){
+      return !RString.equals(__borrowInfo, _borrowInfo);
    }
 
    //============================================================
-   // <T>获得信息的数据内容。</T>
+   // <T>获得借款信息的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String info(){
-      return _info;
+   public String borrowInfo(){
+      return _borrowInfo;
    }
 
    //============================================================
-   // <T>设置信息的数据内容。</T>
+   // <T>设置借款信息的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setInfo(String value){
-      _info = value;
+   public void setBorrowInfo(String value){
+      _borrowInfo = value;
+   }
+
+   //============================================================
+   // <T>判断项目信息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectInfoChanged(){
+      return !RString.equals(__projectInfo, _projectInfo);
+   }
+
+   //============================================================
+   // <T>获得项目信息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String projectInfo(){
+      return _projectInfo;
+   }
+
+   //============================================================
+   // <T>设置项目信息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectInfo(String value){
+      _projectInfo = value;
+   }
+
+   //============================================================
+   // <T>判断企业信息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCompanyInfoChanged(){
+      return !RString.equals(__companyInfo, _companyInfo);
+   }
+
+   //============================================================
+   // <T>获得企业信息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String companyInfo(){
+      return _companyInfo;
+   }
+
+   //============================================================
+   // <T>设置企业信息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCompanyInfo(String value){
+      _companyInfo = value;
+   }
+
+   //============================================================
+   // <T>判断保障信息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isSafeguardInfoChanged(){
+      return !RString.equals(__safeguardInfo, _safeguardInfo);
+   }
+
+   //============================================================
+   // <T>获得保障信息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String safeguardInfo(){
+      return _safeguardInfo;
+   }
+
+   //============================================================
+   // <T>设置保障信息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setSafeguardInfo(String value){
+      _safeguardInfo = value;
+   }
+
+   //============================================================
+   // <T>判断抵押信息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMortgageInfoChanged(){
+      return !RString.equals(__mortgageInfo, _mortgageInfo);
+   }
+
+   //============================================================
+   // <T>获得抵押信息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String mortgageInfo(){
+      return _mortgageInfo;
+   }
+
+   //============================================================
+   // <T>设置抵押信息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMortgageInfo(String value){
+      _mortgageInfo = value;
+   }
+
+   //============================================================
+   // <T>判断投标开始日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentBeginDateChanged(){
+      return !__investmentBeginDate.equals(_investmentBeginDate);
+   }
+
+   //============================================================
+   // <T>获得投标开始日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime investmentBeginDate(){
+      return _investmentBeginDate;
+   }
+
+   //============================================================
+   // <T>设置投标开始日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentBeginDate(TDateTime value){
+      _investmentBeginDate = value;
+   }
+
+   //============================================================
+   // <T>判断结束日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentEndDateChanged(){
+      return !__investmentEndDate.equals(_investmentEndDate);
+   }
+
+   //============================================================
+   // <T>获得结束日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime investmentEndDate(){
+      return _investmentEndDate;
+   }
+
+   //============================================================
+   // <T>设置结束日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentEndDate(TDateTime value){
+      _investmentEndDate = value;
    }
 
    //============================================================
@@ -575,6 +806,8 @@ public class FStatisticsFinancialTenderUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "group_number":
+            return RInteger.toString(_groupNumber);
          case "label":
             return _label;
          case "borrow_model":
@@ -587,8 +820,20 @@ public class FStatisticsFinancialTenderUnit
             return RDouble.toString(_borrowInerest);
          case "borrow_inerest_rate":
             return RFloat.toString(_borrowInerestRate);
-         case "info":
-            return _info;
+         case "borrow_info":
+            return _borrowInfo;
+         case "project_info":
+            return _projectInfo;
+         case "company_info":
+            return _companyInfo;
+         case "safeguard_info":
+            return _safeguardInfo;
+         case "mortgage_info":
+            return _mortgageInfo;
+         case "investment_begin_date":
+            return _investmentBeginDate.toString();
+         case "investment_end_date":
+            return _investmentEndDate.toString();
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -626,6 +871,9 @@ public class FStatisticsFinancialTenderUnit
          case "link_date":
             _linkDate.parse(value);
             break;
+         case "group_number":
+            _groupNumber = RInteger.parse(value);
+            break;
          case "label":
             _label = value;
             break;
@@ -644,8 +892,26 @@ public class FStatisticsFinancialTenderUnit
          case "borrow_inerest_rate":
             _borrowInerestRate = RFloat.parse(value);
             break;
-         case "info":
-            _info = value;
+         case "borrow_info":
+            _borrowInfo = value;
+            break;
+         case "project_info":
+            _projectInfo = value;
+            break;
+         case "company_info":
+            _companyInfo = value;
+            break;
+         case "safeguard_info":
+            _safeguardInfo = value;
+            break;
+         case "mortgage_info":
+            _mortgageInfo = value;
+            break;
+         case "investment_begin_date":
+            _investmentBeginDate.parse(value);
+            break;
+         case "investment_end_date":
+            _investmentEndDate.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -694,6 +960,10 @@ public class FStatisticsFinancialTenderUnit
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
                break;
+            case "group_number":
+               __groupNumber = RInteger.parse(value);
+               _groupNumber = __groupNumber;
+               break;
             case "label":
                __label = value;
                _label = __label;
@@ -718,9 +988,33 @@ public class FStatisticsFinancialTenderUnit
                __borrowInerestRate = RFloat.parse(value);
                _borrowInerestRate = __borrowInerestRate;
                break;
-            case "info":
-               __info = value;
-               _info = __info;
+            case "borrow_info":
+               __borrowInfo = value;
+               _borrowInfo = __borrowInfo;
+               break;
+            case "project_info":
+               __projectInfo = value;
+               _projectInfo = __projectInfo;
+               break;
+            case "company_info":
+               __companyInfo = value;
+               _companyInfo = __companyInfo;
+               break;
+            case "safeguard_info":
+               __safeguardInfo = value;
+               _safeguardInfo = __safeguardInfo;
+               break;
+            case "mortgage_info":
+               __mortgageInfo = value;
+               _mortgageInfo = __mortgageInfo;
+               break;
+            case "investment_begin_date":
+               __investmentBeginDate.parse(value);
+               _investmentBeginDate.assign(__investmentBeginDate);
+               break;
+            case "investment_end_date":
+               __investmentEndDate.parse(value);
+               _investmentEndDate.assign(__investmentEndDate);
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -755,13 +1049,20 @@ public class FStatisticsFinancialTenderUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("groupNumber", _groupNumber);
       row.set("label", _label);
       row.set("borrowModel", _borrowModel);
       row.set("borrowDuration", _borrowDuration);
       row.set("borrowMoney", _borrowMoney);
       row.set("borrowInerest", _borrowInerest);
       row.set("borrowInerestRate", _borrowInerestRate);
-      row.set("info", _info);
+      row.set("borrowInfo", _borrowInfo);
+      row.set("projectInfo", _projectInfo);
+      row.set("companyInfo", _companyInfo);
+      row.set("safeguardInfo", _safeguardInfo);
+      row.set("mortgageInfo", _mortgageInfo);
+      row.set("investmentBeginDate", _investmentBeginDate);
+      row.set("investmentEndDate", _investmentEndDate);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -781,13 +1082,20 @@ public class FStatisticsFinancialTenderUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("groupNumber", RInteger.toString(_groupNumber));
       map.put("label", _label);
       map.put("borrowModel", _borrowModel);
       map.put("borrowDuration", RInteger.toString(_borrowDuration));
       map.put("borrowMoney", RDouble.toString(_borrowMoney));
       map.put("borrowInerest", RDouble.toString(_borrowInerest));
       map.put("borrowInerestRate", RFloat.toString(_borrowInerestRate));
-      map.put("info", _info);
+      map.put("borrowInfo", _borrowInfo);
+      map.put("projectInfo", _projectInfo);
+      map.put("companyInfo", _companyInfo);
+      map.put("safeguardInfo", _safeguardInfo);
+      map.put("mortgageInfo", _mortgageInfo);
+      map.put("investmentBeginDate", _investmentBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("investmentEndDate", _investmentEndDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -807,10 +1115,17 @@ public class FStatisticsFinancialTenderUnit
       _guid = input.readString();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
+      _groupNumber = input.readInt32();
       _label = input.readString();
       _borrowModel = input.readString();
       _borrowDuration = input.readInt32();
-      _info = input.readString();
+      _borrowInfo = input.readString();
+      _projectInfo = input.readString();
+      _companyInfo = input.readString();
+      _safeguardInfo = input.readString();
+      _mortgageInfo = input.readString();
+      _investmentBeginDate.set(input.readInt64());
+      _investmentEndDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -830,10 +1145,17 @@ public class FStatisticsFinancialTenderUnit
       output.writeString(_guid);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
+      output.writeInt32(_groupNumber);
       output.writeString(_label);
       output.writeString(_borrowModel);
       output.writeInt32(_borrowDuration);
-      output.writeString(_info);
+      output.writeString(_borrowInfo);
+      output.writeString(_projectInfo);
+      output.writeString(_companyInfo);
+      output.writeString(_safeguardInfo);
+      output.writeString(_mortgageInfo);
+      output.writeInt64(_investmentBeginDate.get());
+      output.writeInt64(_investmentEndDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

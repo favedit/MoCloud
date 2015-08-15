@@ -84,7 +84,7 @@ public class FStatisticsCustomerServlet
       // 输出排行数据
       FSql fetchSql = new FSql();
       fetchSql.append("SELECT * FROM (");
-      fetchSql.append("SELECT CUSTOMER_ID,CUSTOMER_LABEL");
+      fetchSql.append("SELECT CUSTOMER_ID,CUSTOMER_LABEL,CUSTOMER_CARD,CUSTOMER_PHONE");
       fetchSql.append(",SUM(INVESTMENT) INVESTMENT_TOTAL");
       fetchSql.append(" FROM ST_FIN_CUSTOMER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
       fetchSql.append("GROUP BY CUSTOMER_ID");
@@ -94,8 +94,8 @@ public class FStatisticsCustomerServlet
       stream.writeInt32(rankCount);
       for(FRow row : rankDataset){
          stream.writeString(RString.left(row.get("customer_label"), 1));
-         stream.writeString("0000");
-         stream.writeString("0000");
+         stream.writeString(RString.left(row.get("customer_card"), 4));
+         stream.writeString(RString.right(row.get("customer_phone"), 4));
          stream.writeDouble(row.getDouble("investment_total"));
       }
       //............................................................

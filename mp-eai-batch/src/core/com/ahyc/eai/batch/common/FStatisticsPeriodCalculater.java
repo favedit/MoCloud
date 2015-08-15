@@ -17,7 +17,7 @@ public abstract class FStatisticsPeriodCalculater
    protected String _periodTable;
 
    // 同步时间(1小时)
-   protected long _intervalSpan = 1000 * 60 * 60;
+   protected long _intervalSpan = 1000 * 60 * 60 * 6;
 
    // 合计延迟(10秒)
    protected int _recordDelaySecond = -10;

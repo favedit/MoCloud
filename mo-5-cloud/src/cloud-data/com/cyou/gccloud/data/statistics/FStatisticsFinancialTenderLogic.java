@@ -48,6 +48,9 @@ public class FStatisticsFinancialTenderLogic
    // 字段记录时间的定义。
    public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
 
+   // 字段分组编号的定义。
+   public final static SLogicFieldInfo GROUP_NUMBER = new SLogicFieldInfo("GROUP_NUMBER");
+
    // 字段标题的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
@@ -66,8 +69,26 @@ public class FStatisticsFinancialTenderLogic
    // 字段借款利率的定义。
    public final static SLogicFieldInfo BORROW_INEREST_RATE = new SLogicFieldInfo("BORROW_INEREST_RATE");
 
-   // 字段信息的定义。
-   public final static SLogicFieldInfo INFO = new SLogicFieldInfo("INFO");
+   // 字段借款信息的定义。
+   public final static SLogicFieldInfo BORROW_INFO = new SLogicFieldInfo("BORROW_INFO");
+
+   // 字段项目信息的定义。
+   public final static SLogicFieldInfo PROJECT_INFO = new SLogicFieldInfo("PROJECT_INFO");
+
+   // 字段企业信息的定义。
+   public final static SLogicFieldInfo COMPANY_INFO = new SLogicFieldInfo("COMPANY_INFO");
+
+   // 字段保障信息的定义。
+   public final static SLogicFieldInfo SAFEGUARD_INFO = new SLogicFieldInfo("SAFEGUARD_INFO");
+
+   // 字段抵押信息的定义。
+   public final static SLogicFieldInfo MORTGAGE_INFO = new SLogicFieldInfo("MORTGAGE_INFO");
+
+   // 字段投标开始日期的定义。
+   public final static SLogicFieldInfo INVESTMENT_BEGIN_DATE = new SLogicFieldInfo("INVESTMENT_BEGIN_DATE");
+
+   // 字段结束日期的定义。
+   public final static SLogicFieldInfo INVESTMENT_END_DATE = new SLogicFieldInfo("INVESTMENT_END_DATE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -82,7 +103,7 @@ public class FStatisticsFinancialTenderLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LABEL`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`INFO`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态投标表逻辑单元。</T>
@@ -676,13 +697,20 @@ public class FStatisticsFinancialTenderLogic
       cmd.append(",`GUID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
+      cmd.append(",`GROUP_NUMBER`");
       cmd.append(",`LABEL`");
       cmd.append(",`BORROW_MODEL`");
       cmd.append(",`BORROW_DURATION`");
       cmd.append(",`BORROW_MONEY`");
       cmd.append(",`BORROW_INEREST`");
       cmd.append(",`BORROW_INEREST_RATE`");
-      cmd.append(",`INFO`");
+      cmd.append(",`BORROW_INFO`");
+      cmd.append(",`PROJECT_INFO`");
+      cmd.append(",`COMPANY_INFO`");
+      cmd.append(",`SAFEGUARD_INFO`");
+      cmd.append(",`MORTGAGE_INFO`");
+      cmd.append(",`INVESTMENT_BEGIN_DATE`");
+      cmd.append(",`INVESTMENT_END_DATE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -716,6 +744,8 @@ public class FStatisticsFinancialTenderLogic
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
+      cmd.append(unit.groupNumber());
+      cmd.append(',');
       String label = unit.label();
       if(RString.isEmpty(label)){
          cmd.append("NULL");
@@ -742,13 +772,71 @@ public class FStatisticsFinancialTenderLogic
       cmd.append(',');
       cmd.append(unit.borrowInerestRate());
       cmd.append(',');
-      String info = unit.info();
-      if(RString.isEmpty(info)){
+      String borrowInfo = unit.borrowInfo();
+      if(RString.isEmpty(borrowInfo)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(info));
+         cmd.append(RSql.formatValue(borrowInfo));
          cmd.append('\'');
+      }
+      cmd.append(',');
+      String projectInfo = unit.projectInfo();
+      if(RString.isEmpty(projectInfo)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(projectInfo));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String companyInfo = unit.companyInfo();
+      if(RString.isEmpty(companyInfo)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(companyInfo));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String safeguardInfo = unit.safeguardInfo();
+      if(RString.isEmpty(safeguardInfo)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(safeguardInfo));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String mortgageInfo = unit.mortgageInfo();
+      if(RString.isEmpty(mortgageInfo)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(mortgageInfo));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      TDateTime investmentBeginDate = unit.investmentBeginDate();
+      if(investmentBeginDate == null){
+         cmd.append("NULL");
+      }else if(investmentBeginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(investmentBeginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime investmentEndDate = unit.investmentEndDate();
+      if(investmentEndDate == null){
+         cmd.append("NULL");
+      }else if(investmentEndDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(investmentEndDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
@@ -846,6 +934,10 @@ public class FStatisticsFinancialTenderLogic
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
+      if(unit.isGroupNumberChanged()){
+         cmd.append(",`GROUP_NUMBER`=");
+         cmd.append(unit.groupNumber());
+      }
       if(unit.isLabelChanged()){
          cmd.append(",`LABEL`=");
          String label = unit.label();
@@ -884,15 +976,85 @@ public class FStatisticsFinancialTenderLogic
          cmd.append(",`BORROW_INEREST_RATE`=");
          cmd.append(unit.borrowInerestRate());
       }
-      if(unit.isInfoChanged()){
-         cmd.append(",`INFO`=");
-         String info = unit.info();
-         if(RString.isEmpty(info)){
+      if(unit.isBorrowInfoChanged()){
+         cmd.append(",`BORROW_INFO`=");
+         String borrowInfo = unit.borrowInfo();
+         if(RString.isEmpty(borrowInfo)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(info));
+            cmd.append(RSql.formatValue(borrowInfo));
             cmd.append('\'');
+         }
+      }
+      if(unit.isProjectInfoChanged()){
+         cmd.append(",`PROJECT_INFO`=");
+         String projectInfo = unit.projectInfo();
+         if(RString.isEmpty(projectInfo)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(projectInfo));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCompanyInfoChanged()){
+         cmd.append(",`COMPANY_INFO`=");
+         String companyInfo = unit.companyInfo();
+         if(RString.isEmpty(companyInfo)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(companyInfo));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isSafeguardInfoChanged()){
+         cmd.append(",`SAFEGUARD_INFO`=");
+         String safeguardInfo = unit.safeguardInfo();
+         if(RString.isEmpty(safeguardInfo)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(safeguardInfo));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isMortgageInfoChanged()){
+         cmd.append(",`MORTGAGE_INFO`=");
+         String mortgageInfo = unit.mortgageInfo();
+         if(RString.isEmpty(mortgageInfo)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(mortgageInfo));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isInvestmentBeginDateChanged()){
+         cmd.append(",`INVESTMENT_BEGIN_DATE`=");
+         TDateTime investmentBeginDate = unit.investmentBeginDate();
+         if(investmentBeginDate == null){
+            cmd.append("NULL");
+         }else if(investmentBeginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(investmentBeginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isInvestmentEndDateChanged()){
+         cmd.append(",`INVESTMENT_END_DATE`=");
+         TDateTime investmentEndDate = unit.investmentEndDate();
+         if(investmentEndDate == null){
+            cmd.append("NULL");
+         }else if(investmentEndDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(investmentEndDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
