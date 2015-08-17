@@ -8,6 +8,7 @@ import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.cultrue.RCulture;
+import org.mo.com.lang.generic.IStringBuilder;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
@@ -140,6 +141,24 @@ public class FResource
       FXmlNode xconfig = _configs.get(name);
       if(xconfig != null){
          result = xconfig.text();
+      }
+      return result;
+   }
+
+   //============================================================
+   // <T>根据名称查找字符串。</T>
+   //
+   // @param clazz 类对象
+   // @param name 名称
+   // @return 字符串
+   //============================================================
+   public <T extends IStringBuilder> T findString(Class<T> clazz,
+                                                  String name){
+      T result = RClass.newInstance(clazz);
+      FXmlNode xconfig = _configs.get(name);
+      if(xconfig != null){
+         String text = xconfig.text();
+         result.assign(text);
       }
       return result;
    }

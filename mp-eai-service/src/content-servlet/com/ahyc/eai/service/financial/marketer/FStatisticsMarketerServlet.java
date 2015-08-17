@@ -16,6 +16,8 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -32,6 +34,9 @@ public class FStatisticsMarketerServlet
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FStatisticsMarketerServlet.class);
+
+   // 日志输出接口
+   private static IResource _resource = RResource.find(FStatisticsMarketerServlet.class);
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -68,21 +73,8 @@ public class FStatisticsMarketerServlet
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
-      FSql statisticsSql = new FSql();
-      statisticsSql.append("SELECT");
-      statisticsSql.append(" SUM(INVESTMENT) INVESTMENT_COUNT");
-      statisticsSql.append(",MAX(INVESTMENT_TOTAL) INVESTMENT_TOTAL");
-      statisticsSql.append(",SUM(REDEMPTION) REDEMPTION_COUNT");
-      statisticsSql.append(",MAX(REDEMPTION_TOTAL) REDEMPTION_TOTAL");
-      statisticsSql.append(",SUM(NETINVESTMENT) NETINVESTMENT_COUNT");
-      statisticsSql.append(",MAX(NETINVESTMENT_TOTAL) NETINVESTMENT_TOTAL");
-      statisticsSql.append(",SUM(INTEREST) INTEREST_COUNT");
-      statisticsSql.append(",MAX(INTEREST_TOTAL) INTEREST_TOTAL");
-      statisticsSql.append(",SUM(PERFORMANCE) PERFORMANCE_COUNT");
-      statisticsSql.append(",MAX(PERFORMANCE_TOTAL) PERFORMANCE_TOTAL");
-      statisticsSql.append(",SUM(CUSTOMER_COUNT) CUSTOMER_COUNT");
-      statisticsSql.append(",MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL");
-      statisticsSql.append(" FROM ST_FIN_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
+      FSql statisticsSql = _resource.findString(FSql.class, "sql.dynamic.sum");
+      statisticsSql.bindString("date", endDate.format("YYYYMMDD"));
       FRow statisticsRow = connection.find(statisticsSql);
       stream.writeDouble(statisticsRow.getDouble("investment_count"));
       stream.writeDouble(statisticsRow.getDouble("investment_total"));
@@ -97,24 +89,46 @@ public class FStatisticsMarketerServlet
       stream.writeInt32(statisticsRow.getInt("customer_count"));
       stream.writeInt32(statisticsRow.getInt("customer_total"));
       //............................................................
-      // 输出排行数据
-      FSql fetchSql = new FSql();
-      fetchSql.append("SELECT * FROM (");
-      fetchSql.append("SELECT DEPARTMENT_ID,DEPARTMENT_LABEL,MARKETER_ID,MARKETER_LABEL");
-      fetchSql.append(",SUM(MARKETER_INVESTMENT) INVESTMENT_TOTAL");
-      fetchSql.append(",SUM(MARKETER_REDEMPTION) REDEMPTION_TOTAL");
-      fetchSql.append(",SUM(MARKETER_NETINVESTMENT) NETINVESTMENT_TOTAL");
-      fetchSql.append(",SUM(MARKETER_INTEREST) INTEREST_TOTAL");
-      fetchSql.append(",SUM(MARKETER_PERFORMANCE) PERFORMANCE_TOTAL");
-      fetchSql.append(",SUM(CUSTOMER_COUNT) CUSTOMER_COUNT");
-      fetchSql.append(",MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL");
-      fetchSql.append(" FROM ST_FIN_MARKETER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
-      fetchSql.append("GROUP BY MARKETER_ID");
-      fetchSql.append(") t ORDER BY NETINVESTMENT_TOTAL DESC LIMIT 3");
-      FDataset rankDataset = connection.fetchDataset(fetchSql);
-      int rankCount = rankDataset.count();
-      stream.writeInt32(rankCount);
-      for(FRow row : rankDataset){
+      // 输出日排行数据
+      FSql rankDaySql = _resource.findString(FSql.class, "sql.dynamic.rank.day");
+      rankDaySql.bindString("date", endDate.format("YYYYMMDD"));
+      FDataset rankDayDataset = connection.fetchDataset(rankDaySql);
+      stream.writeInt32(rankDayDataset.count());
+      for(FRow row : rankDayDataset){
+         stream.writeString(row.get("department_label"));
+         stream.writeString(row.get("marketer_label"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(row.getDouble("interest_total"));
+         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeInt32(row.getInt("customer_count"));
+         stream.writeInt32(row.getInt("customer_total"));
+      }
+      //............................................................
+      // 输出周排行数据
+      FSql rankWeekSql = _resource.findString(FSql.class, "sql.dynamic.rank.week");
+      rankWeekSql.bindString("date", endDate.format("YYYYMMWK"));
+      FDataset rankWeekDataset = connection.fetchDataset(rankWeekSql);
+      stream.writeInt32(rankWeekDataset.count());
+      for(FRow row : rankWeekDataset){
+         stream.writeString(row.get("department_label"));
+         stream.writeString(row.get("marketer_label"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(row.getDouble("interest_total"));
+         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeInt32(row.getInt("customer_count"));
+         stream.writeInt32(row.getInt("customer_total"));
+      }
+      //............................................................
+      // 输出月排行数据
+      FSql rankMonthSql = _resource.findString(FSql.class, "sql.dynamic.rank.month");
+      rankMonthSql.bindString("date", endDate.format("YYYYMM01"));
+      FDataset rankMonthDataset = connection.fetchDataset(rankMonthSql);
+      stream.writeInt32(rankMonthDataset.count());
+      for(FRow row : rankMonthDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
          stream.writeDouble(row.getDouble("investment_total"));

@@ -12,6 +12,7 @@ import org.mo.com.lang.RString;
 public class MString
       extends MChars
       implements
+         IStringBuilder,
          CharSequence
 {
    //============================================================

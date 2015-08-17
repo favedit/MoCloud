@@ -1,6 +1,7 @@
 package org.mo.com.resource;
 
 import org.mo.com.lang.FMultiString;
+import org.mo.com.lang.generic.IStringBuilder;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -53,6 +54,16 @@ public interface IResource
    // @return 字符串
    //============================================================
    String findString(String name);
+
+   //============================================================
+   // <T>根据名称查找字符串。</T>
+   //
+   // @param clazz 类对象
+   // @param name 名称
+   // @return 字符串
+   //============================================================
+   <T extends IStringBuilder> T findString(Class<T> clazz,
+                                           String name);
 
    //============================================================
    // <T>根据名称查找字符串。</T>
