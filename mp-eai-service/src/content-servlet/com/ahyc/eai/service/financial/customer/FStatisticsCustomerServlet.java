@@ -65,7 +65,7 @@ public class FStatisticsCustomerServlet
       }
       //............................................................
       // 设置输出流
-      FByteStream stream = new FByteStream();
+      FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
       FSql statisticsSql = new FSql();
@@ -151,7 +151,7 @@ public class FStatisticsCustomerServlet
       }
       //............................................................
       // 设置输出流
-      FByteStream stream = new FByteStream();
+      FByteStream stream = createStream(context);
       // 输出总计数据
       FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
       String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";

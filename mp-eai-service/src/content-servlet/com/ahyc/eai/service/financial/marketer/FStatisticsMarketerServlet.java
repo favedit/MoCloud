@@ -65,7 +65,7 @@ public class FStatisticsMarketerServlet
       }
       //............................................................
       // 设置输出流
-      FByteStream stream = new FByteStream();
+      FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
       FSql statisticsSql = new FSql();
@@ -106,7 +106,7 @@ public class FStatisticsMarketerServlet
       fetchSql.append(",SUM(MARKETER_NETINVESTMENT) NETINVESTMENT_TOTAL");
       fetchSql.append(",SUM(MARKETER_INTEREST) INTEREST_TOTAL");
       fetchSql.append(",SUM(MARKETER_PERFORMANCE) PERFORMANCE_TOTAL");
-      fetchSql.append(",SUM(CUSTOMER_REGISTER) CUSTOMER_REGISTER");
+      fetchSql.append(",SUM(CUSTOMER_COUNT) CUSTOMER_COUNT");
       fetchSql.append(",MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL");
       fetchSql.append(" FROM ST_FIN_MARKETER_PHASE WHERE RECORD_DAY = STR_TO_DATE('" + endDate.format("YYYYMMDD") + "','%Y%m%d')");
       fetchSql.append("GROUP BY MARKETER_ID");
@@ -122,7 +122,7 @@ public class FStatisticsMarketerServlet
          stream.writeDouble(row.getDouble("netinvestment_total"));
          stream.writeDouble(row.getDouble("interest_total"));
          stream.writeDouble(row.getDouble("performance_total"));
-         stream.writeInt32(row.getInt("customer_register"));
+         stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
       //............................................................
@@ -182,7 +182,7 @@ public class FStatisticsMarketerServlet
       }
       //............................................................
       // 设置输出流
-      FByteStream stream = new FByteStream();
+      FByteStream stream = createStream(context);
       // 输出总计数据
       FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
       String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";

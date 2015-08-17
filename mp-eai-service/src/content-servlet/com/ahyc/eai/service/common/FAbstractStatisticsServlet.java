@@ -2,6 +2,7 @@ package com.ahyc.eai.service.common;
 
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.io.FByteStream;
+import org.mo.com.io.FEncryptedStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObject;
@@ -23,6 +24,20 @@ public class FAbstractStatisticsServlet
 {
    @ALink
    protected ISystemInfoConsole _infoConsole;
+
+   //============================================================
+   // <T>创建字节流。</T>
+   //
+   // @return 字节流
+   //============================================================
+   public FByteStream createStream(IWebContext context){
+      // 获得签名
+      int sign = context.parameterAsInteger("sign", 0);
+      // 创建加密流
+      FEncryptedStream stream = new FEncryptedStream();
+      stream.setIntSign(sign);
+      return stream;
+   }
 
    //============================================================
    // <T>逻辑处理。</T>
