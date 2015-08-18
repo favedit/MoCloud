@@ -10,8 +10,6 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.system.ISystemInfoConsole;
 import org.mo.core.aop.face.ALink;
@@ -28,7 +26,7 @@ public class FAbstractStatisticsServlet
       extends FObject
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FAbstractStatisticsServlet.class);
+   // private static ILogger _logger = RLogger.find(FAbstractStatisticsServlet.class);
 
    @ALink
    protected ISystemInfoConsole _infoConsole;
@@ -102,7 +100,6 @@ public class FAbstractStatisticsServlet
       if(data != null){
          FByteStream stream = new FByteStream();
          stream.append(data, 0, data.length);
-         _logger.debug(this, "findCacheStream", "Find cache stream. [code={1}, data_length={2}]", cacheCode, data.length);
          return stream;
       }
       return null;
@@ -123,7 +120,6 @@ public class FAbstractStatisticsServlet
       try(FMemoryChannel channel = _cacheConsole.alloc()){
          if(channel != null){
             channel.set(cacheCode, data);
-            _logger.debug(this, "updateCacheStream", "Update cache stream. [code={1}, data_length={2}]", cacheCode, data.length);
          }
       }catch(Exception e){
          throw new FFatalError(e, "Update cache stream failure.");

@@ -3,6 +3,9 @@ package org.mo.eng.memorycache;
 import com.danga.MemCached.MemCachedClient;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RLong;
+import org.mo.com.lang.reflect.RClass;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 
 //============================================================
 // <T>内存频道。</T>
@@ -12,6 +15,9 @@ public class FMemoryChannel
       implements
          AutoCloseable
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FMemoryChannel.class);
+
    // 控制台
    protected IMemoryCacheConsole _console;
 
@@ -61,6 +67,10 @@ public class FMemoryChannel
    //============================================================
    public Object get(String key){
       String cacheKey = _code + key;
+      Object value = _client.get(cacheKey);
+      if(value != null){
+         _logger.debug(this, "get", "Find memory cache. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+      }
       return _client.get(cacheKey);
    }
 
@@ -74,6 +84,11 @@ public class FMemoryChannel
                       Object value){
       String cacheKey = _code + key;
       boolean result = _client.set(cacheKey, value);
+      if(result){
+         _logger.debug(this, "set", "Update memory cache success. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+      }else{
+         _logger.debug(this, "set", "Update memory cache failure. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+      }
       return result;
    }
 
