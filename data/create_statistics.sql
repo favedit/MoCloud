@@ -327,7 +327,7 @@ CREATE TABLE `ST_FIN_TENDER_PHASE`
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
 
 ALTER TABLE ST_FIN_TENDER_PHASE 
-   ADD CONSTRAINT ST_FIN_TND_PHS_UK_DAT UNIQUE ( RECORD_DATE ); 
+   ADD CONSTRAINT ST_FIN_TND_PHS_UK_DAT UNIQUE ( RECORD_DATE, TENDER_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Customer.Amount]
