@@ -6,10 +6,7 @@
 <META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
 <META name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 <LINK rel="stylesheet" href='/acs/mobile.css' type="text/css" media="all" />
-<SCRIPT language='javascript' src='/ajs/extension.js'></SCRIPT>
-<SCRIPT language='javascript' src='/ajs/me.js'></SCRIPT>
-<SCRIPT language='javascript' src='/ajs/eai.js'></SCRIPT>
-<SCRIPT language='javascript' src='/ajs/context_cn.js'></SCRIPT>
+<SCRIPT language='javascript' src='/ajs/mc.js'></SCRIPT>
 <SCRIPT>
    var g_loadingHandle;
    function doLoading() {
@@ -47,7 +44,7 @@
    function onLoaded(event) {
       clearInterval(g_loadingHandle);
    }
-   function onLoad() {
+   function onLoadScript() {
       // 设置变量
       MO.initialize();
       MO.Window.Browser.setContentPath('..');
@@ -56,12 +53,16 @@
       MO.Window.lsnsDeviceError.register(null, onDeviceError);
       // 设置环境
       MO.Console.find(MO.FE3sVendorConsole).setup('net');
-      MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
+      MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
       // 设置应用
       var application = MO.Desktop.initialize(MO.FEaiChartApplication);
       application.setSceneCode(MO.EEaiScene.<jh:write source='&page.sceneCode'/>);
       application.setup(document.body);
+   }
+   function onLoad(){
+      MO.initialize();
+      RJsLoader.loadUrl('../ajs/eai.jc', onLoadScript);
    }
 </SCRIPT>
 </HEAD>
