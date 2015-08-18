@@ -71,7 +71,34 @@ public class FMemoryChannel
       if(value != null){
          _logger.debug(this, "get", "Find memory cache. [code={1}, value={2}]", cacheKey, RClass.dump(value));
       }
-      return _client.get(cacheKey);
+      return value;
+   }
+
+   //============================================================
+   // <T>获得内容。</T>
+   //
+   // @param key 主键
+   // @return 内容
+   //============================================================
+   public byte[] getBytes(String key){
+      String cacheKey = _code + key;
+      byte[] value = (byte[])_client.get(cacheKey);
+      if(value != null){
+         _logger.debug(this, "getBytes", "Find memory cache. [code={1}, value_length={2}]", cacheKey, value.length);
+      }
+      return value;
+   }
+
+   //============================================================
+   // <T>获得字符串。</T>
+   //
+   // @param key 主键
+   // @return 字符串
+   //============================================================
+   public String getAsString(String key){
+      String cacheKey = _code + key;
+      Object result = _client.get(cacheKey);
+      return (String)result;
    }
 
    //============================================================
@@ -93,15 +120,24 @@ public class FMemoryChannel
    }
 
    //============================================================
-   // <T>获得字符串。</T>
+   // <T>设置内容。</T>
    //
    // @param key 主键
-   // @return 字符串
+   // @param value 内容
    //============================================================
-   public String getAsString(String key){
-      String cacheKey = _code + key;
-      Object result = _client.get(cacheKey);
-      return (String)result;
+   public boolean setBytes(String key,
+                           byte[] value){
+      boolean result = false;
+      if(value != null){
+         String cacheKey = _code + key;
+         result = _client.set(cacheKey, value);
+         if(result){
+            _logger.debug(this, "setBytes", "Update memory cache success. [code={1}, value_length={2}]", cacheKey, value.length);
+         }else{
+            _logger.debug(this, "setBytes", "Update memory cache failure. [code={1}, value_length={2}]", cacheKey, value.length);
+         }
+      }
+      return result;
    }
 
    //============================================================

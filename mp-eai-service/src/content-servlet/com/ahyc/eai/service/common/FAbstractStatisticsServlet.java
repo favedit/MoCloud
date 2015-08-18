@@ -91,7 +91,7 @@ public class FAbstractStatisticsServlet
       byte[] data = null;
       try(FMemoryChannel channel = _cacheConsole.alloc()){
          if(channel != null){
-            data = (byte[])channel.get(cacheCode);
+            data = channel.getBytes(cacheCode);
          }
       }catch(Exception e){
          throw new FFatalError(e, "Find cache stream failure.");
@@ -119,7 +119,7 @@ public class FAbstractStatisticsServlet
       byte[] data = stream.toArray();
       try(FMemoryChannel channel = _cacheConsole.alloc()){
          if(channel != null){
-            channel.set(cacheCode, data);
+            channel.setBytes(cacheCode, data);
          }
       }catch(Exception e){
          throw new FFatalError(e, "Update cache stream failure.");
