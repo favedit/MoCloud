@@ -648,3 +648,36 @@ CREATE TABLE `ST_FIN_DEPARTMENT_PHASE`
 
 ALTER TABLE ST_FIN_DEPARTMENT_PHASE 
    ADD CONSTRAINT ST_FIN_DEP_PHS_UK_DAT UNIQUE ( RECORD_DATE, DEPARTMENT_ID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Statistics.Financial.Forecast]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_FORECAST`;
+CREATE TABLE `ST_FIN_FORECAST` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `ACTION_DATE`                   DATETIME, 
+   `INVESTMENT`                    DOUBLE, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION`                    DOUBLE, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `NETINVESTMENT`                 DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `INTEREST`                      DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `PERFORMANCE`                   DOUBLE, 
+   `PERFORMANCE_TOTAL`             DOUBLE, 
+   `CUSTOMER_COUNT`                INTEGER, 
+   `CUSTOMER_TOTAL`                INTEGER, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE ST_FIN_FORECAST 
+   ADD CONSTRAINT ST_FIN_FCT_UK_GID UNIQUE ( GUID ); 
+
+

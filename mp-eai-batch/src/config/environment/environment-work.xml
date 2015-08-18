@@ -94,14 +94,14 @@
       <Initialize name='add'>
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>logger</Property>
+               <Property name='name'>statistics</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.21.0.250:3306/EAI_DP_STATISTICS</Property>
-               <Property name='passport'>cloud</Property>
-               <Property name='password'>cloud</Property>
+               <Property name='url'>jdbc:mysql://115.28.136.134:3306/EAI_STATISTICS</Property>
+               <Property name='passport'>eai_test</Property>
+               <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
                <Property name='initConnectionNumber'>1</Property>
-               <Property name='maxConnectionNumber'>16</Property>
+               <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
                <Property name='connectionTimeLimit'>600000</Property>
                <Property name='retryCount'>10</Property>
