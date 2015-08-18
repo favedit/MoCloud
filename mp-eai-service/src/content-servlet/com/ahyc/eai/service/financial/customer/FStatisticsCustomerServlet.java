@@ -56,12 +56,22 @@ public class FStatisticsCustomerServlet
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
+      if((beginSource.length() != 14) || (endSource.length() != 14)){
+         throw new FFatalError("Parameter length is invalid.");
+      }
       // 限制查询范围最大10分钟
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long span = endDate.get() - beginDate.get();
       if((span < 0) && (span > 1000 * 600)){
          throw new FFatalError("Parameter span is invalid.");
+      }
+      //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "dynamic|" + beginSource + "-" + endSource;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
       }
       //............................................................
       // 设置输出流
@@ -113,6 +123,9 @@ public class FStatisticsCustomerServlet
          stream.writeDouble(dynamicUnit.customerActionAmount());
       }
       //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
+      //............................................................
       // 发送数据
       int dataLength = stream.length();
       _logger.debug(this, "process", "Send statistics marketer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
@@ -150,6 +163,13 @@ public class FStatisticsCustomerServlet
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "trend|" + beginSource + "-" + endSource;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
+      }
+      //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
       // 输出总计数据
@@ -173,10 +193,13 @@ public class FStatisticsCustomerServlet
          stream.writeDouble(phaseUnit.investment());
          stream.writeUint32(phaseUnit.customerCount());
       }
-      int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 }

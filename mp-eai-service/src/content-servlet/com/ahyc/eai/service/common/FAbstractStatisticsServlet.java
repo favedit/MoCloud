@@ -1,17 +1,22 @@
 package com.ahyc.eai.service.common;
 
 import javax.servlet.http.HttpServletResponse;
+import org.mo.com.encoding.REncryption;
 import org.mo.com.io.FByteStream;
-import org.mo.com.io.FEncryptedStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.system.ISystemInfoConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.eng.memorycache.FMemoryChannel;
+import org.mo.eng.memorycache.IMemoryCacheConsole;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -22,22 +27,14 @@ import org.mo.web.protocol.context.IWebContext;
 public class FAbstractStatisticsServlet
       extends FObject
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FAbstractStatisticsServlet.class);
+
    @ALink
    protected ISystemInfoConsole _infoConsole;
 
-   //============================================================
-   // <T>创建字节流。</T>
-   //
-   // @return 字节流
-   //============================================================
-   public FByteStream createStream(IWebContext context){
-      // 获得签名
-      int sign = context.parameterAsInteger("sign", 0);
-      // 创建加密流
-      FEncryptedStream stream = new FEncryptedStream();
-      stream.setIntSign(sign);
-      return stream;
-   }
+   @ALink
+   protected IMemoryCacheConsole _cacheConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -84,6 +81,71 @@ public class FAbstractStatisticsServlet
    }
 
    //============================================================
+   // <T>从缓冲中查找数据流。</T>
+   //
+   // @param code 代码
+   // @return 字节流
+   //============================================================
+   public FByteStream findCacheStream(String code){
+      // 生成代码
+      String cacheCode = getClass().getName() + "|" + code;
+      // 获取数据流
+      byte[] data = null;
+      try(FMemoryChannel channel = _cacheConsole.alloc()){
+         if(channel != null){
+            data = (byte[])channel.get(cacheCode);
+         }
+      }catch(Exception e){
+         throw new FFatalError(e, "Find cache stream failure.");
+      }
+      // 创建加密流
+      if(data != null){
+         FByteStream stream = new FByteStream();
+         stream.append(data, 0, data.length);
+         _logger.debug(this, "findCacheStream", "Find cache stream. [code={1}, data_length={2}]", cacheCode, data.length);
+         return stream;
+      }
+      return null;
+   }
+
+   //============================================================
+   // <T>更新数据到缓冲中。</T>
+   //
+   // @param code 代码
+   // @param stream 字节流
+   //============================================================
+   public void updateCacheStream(String code,
+                                 FByteStream stream){
+      // 生成代码
+      String cacheCode = getClass().getName() + "|" + code;
+      // 获取数据流
+      byte[] data = stream.toArray();
+      try(FMemoryChannel channel = _cacheConsole.alloc()){
+         if(channel != null){
+            channel.set(cacheCode, data);
+            _logger.debug(this, "updateCacheStream", "Update cache stream. [code={1}, data_length={2}]", cacheCode, data.length);
+         }
+      }catch(Exception e){
+         throw new FFatalError(e, "Update cache stream failure.");
+      }
+   }
+
+   //============================================================
+   // <T>创建字节流。</T>
+   //
+   // @return 字节流
+   //============================================================
+   public FByteStream createStream(IWebContext context){
+      // 获得签名
+      //int sign = context.parameterAsInteger("sign", 0);
+      // 创建加密流
+      //FEncryptedStream stream = new FEncryptedStream();
+      //stream.setIntSign(sign);
+      FByteStream stream = new FByteStream();
+      return stream;
+   }
+
+   //============================================================
    // <T>逻辑处理。</T>
    //
    // @param context 环境
@@ -98,6 +160,10 @@ public class FAbstractStatisticsServlet
       // 获得参数
       int dataLength = stream.length();
       byte[] data = stream.memory();
+      //............................................................
+      // 数据签名
+      int sign = context.parameterAsInteger("sign", 0);
+      REncryption.encodeBytes(data, 0, dataLength, sign);
       //............................................................
       // 发送数据
       response.setStatus(HttpServletResponse.SC_OK);

@@ -3,6 +3,7 @@ package org.mo.eng.memorycache;
 import com.danga.MemCached.SockIOPool;
 import org.mo.com.lang.FList;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.core.aop.face.AProperty;
 
 //============================================================
@@ -39,10 +40,14 @@ public class FMemoryCacheConsole
    public void initialize(){
       // 初始化服务器
       if(_enable){
+         // 获得服务器列表
          String[] servers = RString.split(_servers, ',');
+         // 初始化服务器
          SockIOPool pool = SockIOPool.getInstance();
          pool.setServers(servers);
          pool.initialize();
+         // 设置代码
+         _code += "[" + RUuid.simpleUuid() + "]";
       }
    }
 
@@ -51,6 +56,7 @@ public class FMemoryCacheConsole
    //
    // @return 是否允许
    //============================================================
+   @Override
    public boolean isEnable(){
       return _enable;
    }
@@ -85,7 +91,8 @@ public class FMemoryCacheConsole
       if(_enable){
          synchronized(_channels){
             if(_channels.isEmpty()){
-               channel = new FMemoryChannel(this);
+               channel = new FMemoryChannel();
+               channel.setConsole(this);
                channel.setup();
             }else{
                channel = _channels.pop();

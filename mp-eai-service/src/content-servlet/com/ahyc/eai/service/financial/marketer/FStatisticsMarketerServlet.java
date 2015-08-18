@@ -69,6 +69,13 @@ public class FStatisticsMarketerServlet
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "dynamic|" + beginSource + "-" + endSource;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
+      }
+      //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
@@ -158,6 +165,9 @@ public class FStatisticsMarketerServlet
          stream.writeDouble(dynamicUnit.customerActionInterest());
       }
       //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
+      //............................................................
       // 发送数据
       int dataLength = stream.length();
       _logger.debug(this, "process", "Send statistics marketer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
@@ -195,6 +205,13 @@ public class FStatisticsMarketerServlet
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "trend|" + beginSource + "-" + endSource;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
+      }
+      //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
       // 输出总计数据
@@ -230,10 +247,13 @@ public class FStatisticsMarketerServlet
          stream.writeDouble(phaseUnit.interest());
          stream.writeDouble(phaseUnit.performance());
       }
-      int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 }

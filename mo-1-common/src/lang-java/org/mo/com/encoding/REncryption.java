@@ -89,4 +89,59 @@ public class REncryption
          throw new FFatalError(e);
       }
    }
+
+   //============================================================
+   // <T>加密一个数字，XOR运算，两次运算还原数据。</T>
+   //
+   // @param key 密钥
+   // @param source 字符串
+   // @return 处理结果
+   //============================================================
+   public static boolean encodeBytes(byte[] data,
+                                     int offset,
+                                     int length,
+                                     int key){
+      // 检查参数
+      if(data == null){
+         return false;
+      }
+      byte[] sign = new byte[8];
+      sign[0] = (byte)((key >> 16) & 0xFF);
+      sign[1] = (byte)((key >> 8) & 0xFF);
+      sign[2] = (byte)((key) & 0xFF);
+      sign[3] = (byte)((key >> 24) & 0xFF);
+      sign[4] = (byte)((key) & 0xFF);
+      sign[5] = (byte)((key >> 24) & 0xFF);
+      sign[6] = (byte)((key >> 16) & 0xFF);
+      sign[7] = (byte)((key >> 8) & 0xFF);
+      // 数据运算
+      for(int i = 0; i < length; i++){
+         data[offset + i] ^= sign[i % 8];
+      }
+      return true;
+   }
+
+   //============================================================
+   // <T>加密一个数字，XOR运算，两次运算还原数据。</T>
+   //
+   // @param key 密钥
+   // @param source 字符串
+   // @return 处理结果
+   //============================================================
+   public static boolean encodeBytes(byte[] data,
+                                     int offset,
+                                     int length,
+                                     byte[] key){
+      // 检查参数
+      if((data == null) || (key == null)){
+         return false;
+      }
+      // 数据运算
+      int keyLength = key.length;
+      for(int i = 0; i < length; i++){
+         byte keyByte = key[i % keyLength];
+         data[offset + i] ^= keyByte;
+      }
+      return true;
+   }
 }
