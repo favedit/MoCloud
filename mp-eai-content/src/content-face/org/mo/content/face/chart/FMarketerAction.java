@@ -3,6 +3,7 @@ package org.mo.content.face.chart;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import org.mo.com.lang.RString;
+import org.mo.content.core.common.EChartPage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
@@ -69,7 +70,7 @@ public class FMarketerAction
             page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
             page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
             page.setSceneCode("ChartMarketer");
-            return "Marketer";
+            return EChartPage.Scene;
          }
       }
       // 非法设置
@@ -150,7 +151,7 @@ public class FMarketerAction
          page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
          page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
          page.setSceneCode("ChartMarketer");
-         return "Marketer";
+         return EChartPage.Scene;
       }else{
          page.setMessage(message);
          return "Login";

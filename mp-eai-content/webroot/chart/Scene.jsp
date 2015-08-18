@@ -54,7 +54,7 @@
       // 设置环境
       MO.Console.find(MO.FE3sVendorConsole).setup('net');
       MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
-      MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.ServiceHost, '<jh:write source='&page.serviceHost'/>');
+      MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.LogicService, '<jh:write source='&page.serviceLogic'/>');
       // 设置应用
       var application = MO.Desktop.initialize(MO.FEaiChartApplication);
       application.setSceneCode(MO.EEaiScene.<jh:write source='&page.sceneCode'/>);

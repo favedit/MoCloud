@@ -20,8 +20,8 @@ public class FChartPage
    // 消息
    protected String _message;
 
-   // 服务地址
-   protected String _serviceHost;
+   // 服务器
+   protected String _serviceLogic;
 
    // 场景代码
    protected String _sceneCode;
@@ -85,15 +85,15 @@ public class FChartPage
    //============================================================
    // <P>获得服务地址。</P>
    //============================================================
-   public String serviceHost(){
-      return _serviceHost;
+   public String serviceLogic(){
+      return _serviceLogic;
    }
 
    //============================================================
    // <P>设置服务地址。</P>
    //============================================================
-   public void setServiceHost(String serviceHost){
-      _serviceHost = serviceHost;
+   public void setServiceLogic(String serviceLogic){
+      _serviceLogic = serviceLogic;
    }
 
    //============================================================

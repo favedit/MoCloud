@@ -3,6 +3,7 @@ package org.mo.content.face.live;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import org.mo.com.lang.RString;
+import org.mo.content.core.common.EChartPage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
@@ -66,9 +67,9 @@ public class FChartAction
             logger.setLogicMessage("主机地址为白名单。");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             // 设置服务主机
-            page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
-            page.setSceneCode("ChartLive");
-            return "Live";
+            page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
+            page.setSceneCode("ChartCustomer");
+            return EChartPage.Scene;
          }
       }
       // 非法设置
@@ -146,9 +147,9 @@ public class FChartAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         page.setServiceHost(_loggerServiceInfoConsole.serviceHost());
-         page.setSceneCode("ChartLive");
-         return "Live";
+         page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
+         page.setSceneCode("ChartCustomer");
+         return EChartPage.Scene;
       }else{
          page.setMessage(message);
          return "Login";
