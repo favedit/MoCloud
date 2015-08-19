@@ -1,4 +1,122 @@
 ﻿-- ------------------------------------------------------------
+-- Create table [Data.Common.Country]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_COUNTRY`;
+CREATE TABLE `DT_COM_COUNTRY` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(8), 
+   `NAME`                          VARCHAR(20), 
+   `LABEL`                         VARCHAR(40), 
+   `PHONE_CODE`                    VARCHAR(8), 
+   `ICON_URL`                      VARCHAR(400), 
+   `DISPLAY_CODE`                  INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_COUNTRY 
+   ADD CONSTRAINT DT_COM_CTY_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Common.Area]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_AREA`;
+CREATE TABLE `DT_COM_AREA` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `COUNTRY_ID`                    BIGINT NOT NULL, 
+   `CODE`                          VARCHAR(20), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(400), 
+   `DISPLAY_ORDER`                 INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_AREA 
+   ADD CONSTRAINT DT_COM_AREA_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_COM_AREA ADD CONSTRAINT DT_COM_AREA_FK_CTY 
+      FOREIGN KEY (`COUNTRY_ID`) REFERENCES DT_COM_COUNTRY(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Common.Province]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_PROVINCE`;
+CREATE TABLE `DT_COM_PROVINCE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `COUNTRY_ID`                    BIGINT NOT NULL, 
+   `AREA_ID`                       BIGINT, 
+   `CODE`                          VARCHAR(20), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(400), 
+   `DISPLAY_ORDER`                 INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_PROVINCE 
+   ADD CONSTRAINT DT_COM_PVN_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_COM_PROVINCE ADD CONSTRAINT DT_COM_PVN_FK_CTY 
+      FOREIGN KEY (`COUNTRY_ID`) REFERENCES DT_COM_COUNTRY(`OUID`); 
+
+ALTER TABLE DT_COM_PROVINCE ADD CONSTRAINT DT_COM_PVN_FK_ARE 
+      FOREIGN KEY (`AREA_ID`) REFERENCES DT_COM_AREA(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Common.City]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_CITY`;
+CREATE TABLE `DT_COM_CITY` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `COUNTRY_ID`                    BIGINT NOT NULL, 
+   `AREA_ID`                       BIGINT, 
+   `PROVINCE_ID`                   BIGINT, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(400), 
+   `DISPLAY_ORDER`                 INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_CITY 
+   ADD CONSTRAINT DT_COM_CTY_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_CTY 
+      FOREIGN KEY (`COUNTRY_ID`) REFERENCES DT_COM_CITY(`OUID`); 
+
+ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_ARE 
+      FOREIGN KEY (`AREA_ID`) REFERENCES DT_COM_AREA(`OUID`); 
+
+ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_PVN 
+      FOREIGN KEY (`PROVINCE_ID`) REFERENCES DT_COM_PROVINCE(`OUID`); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.System.Access.Authority]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_SYS_ACCESS_AUTHORITY`;
@@ -80,6 +198,81 @@ ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY
 
 ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY ADD CONSTRAINT DT_PSN_USR_ACS_AUT_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Control.Module]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_CTL_MODULE`;
+CREATE TABLE `DT_CTL_MODULE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(200), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_CTL_MODULE 
+   ADD CONSTRAINT DT_CTL_MOD_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Control.Role]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_CTL_ROLE`;
+CREATE TABLE `DT_CTL_ROLE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(400), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_CTL_ROLE 
+   ADD CONSTRAINT DT_CTL_ROL_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Control.Role.Module]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_CTL_ROLE_MODULE`;
+CREATE TABLE `DT_CTL_ROLE_MODULE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `ROLE_ID`                       BIGINT NOT NULL, 
+   `MODULE_ID`                     BIGINT NOT NULL, 
+   `VIEW_VALID_CD`                 INTEGER, 
+   `INSERT_VALID_CD`               INTEGER, 
+   `UPDATE_VALID_CD`               INTEGER, 
+   `DELETE_VALID_CD`               INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_CTL_ROLE_MODULE 
+   ADD CONSTRAINT DT_CTL_ROL_MOD_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_CTL_ROLE_MODULE ADD CONSTRAINT DT_CTL_ROL_MOD_FK_ROL 
+      FOREIGN KEY (`ROLE_ID`) REFERENCES DT_CTL_ROLE(`OUID`); 
+
+ALTER TABLE DT_CTL_ROLE_MODULE ADD CONSTRAINT DT_CTL_ROL_MOD_FK_MOD 
+      FOREIGN KEY (`MODULE_ID`) REFERENCES DT_CTL_MODULE(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Solution.Project]

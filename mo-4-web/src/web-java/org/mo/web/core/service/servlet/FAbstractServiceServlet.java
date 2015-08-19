@@ -72,7 +72,7 @@ public abstract class FAbstractServiceServlet
    public void process(String type,
                        HttpServletRequest httpRequest,
                        HttpServletResponse httpResponse){
-      long startTime = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       String uri = null;
       FWebContext context = null;
       IWebSession session = null;
@@ -84,19 +84,24 @@ public abstract class FAbstractServiceServlet
          String encoding = _sessionEncoding;
          InputStream inputStream = httpRequest.getInputStream();
          // 建立会话
-         String sessionCode = findSessionId(httpRequest);
-         boolean sessionExist = !RString.isEmpty(sessionCode);
-         if(sessionExist){
-            session = _sessionConsole.find(sessionCode);
-         }else{
-            sessionCode = RUuid.makeUniqueIdLower();
-         }
-         if(session != null){
-            session.referIncrease();
-            // 设置语言编码
-            language = session.culture().countryLanguage();
-            encoding = session.culture().countryEncoding();
-            RCulture.link(session.culture());
+         boolean sessionExist = false;
+         String sessionCode = null;
+         if(_sessionValid){
+            sessionCode = findSessionId(httpRequest);
+            sessionExist = !RString.isEmpty(sessionCode);
+            if(sessionExist){
+               session = _sessionConsole.find(sessionCode);
+            }else{
+               sessionCode = RUuid.makeUniqueIdLower();
+               session = _sessionConsole.build(sessionCode);
+            }
+            if(session != null){
+               session.referIncrease();
+               // 设置语言编码
+               language = session.culture().countryLanguage();
+               encoding = session.culture().countryEncoding();
+               RCulture.link(session.culture());
+            }
          }
          if(_logger.debugAble()){
             _logger.debug(this, "process", "Do{1} begin. (method={2}, language={3}, charset={4}, uri={5})", type, language, encoding, httpRequest.getRequestURI());
@@ -215,9 +220,9 @@ public abstract class FAbstractServiceServlet
                _logger.error(this, "process", e);
             }
          }
-         long endTime = System.currentTimeMillis();
+         long endTick = System.nanoTime();
          if(_logger.debugAble()){
-            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (uri={2})", type, uri);
+            _logger.debug(this, "process", endTick - beginTick, "Do{1} end. (uri={2})", type, uri);
          }
       }
    }

@@ -6,7 +6,6 @@ import org.mo.eng.security.IPermissionConsole;
 import org.mo.eng.session.FSessionConsole;
 import org.mo.eng.session.common.FSession;
 import org.mo.eng.session.common.FSessionWorker;
-import org.mo.eng.session.common.ISession;
 import org.mo.web.core.container.IWebContainerConsole;
 
 //============================================================
@@ -57,8 +56,8 @@ public class FWebSessionConsole
    //============================================================
    @Override
    @SuppressWarnings("unchecked")
-   public <V extends ISession> V find(String sessionCode){
-      return (V)sync(IWebSession.class, sessionCode);
+   public IWebSession find(String sessionCode){
+      return sync(IWebSession.class, sessionCode);
    }
 
    //============================================================

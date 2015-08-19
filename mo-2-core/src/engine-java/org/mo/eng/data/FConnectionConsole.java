@@ -351,7 +351,7 @@ public class FConnectionConsole
       try{
          int count = 0;
          int cycleLimit = 4;
-         long start = System.currentTimeMillis();
+         long beginTick = System.nanoTime();
          boolean isClosed = true;
          Connection sqlConnection = null;
          // 注册数据库链接使用的类
@@ -403,8 +403,8 @@ public class FConnectionConsole
          worker.user = _user;
          worker.testSqlCmd = _testSqlCmd;
          if(_logger.debugAble()){
-            long end = System.currentTimeMillis();
-            _logger.debug(this, "createWorker", end - start, "Create sql connection success. (url={1}, connection={2}, native={3})", _url, worker.connection, sqlConnection);
+            long endTick = System.nanoTime();
+            _logger.debug(this, "createWorker", endTick - beginTick, "Create sql connection success. (url={1}, connection={2}, native={3})", _url, worker.connection, sqlConnection);
          }
          _createCount++;
          // 设置关联信息
@@ -486,15 +486,16 @@ public class FConnectionConsole
    //============================================================ 
    @Override
    public ISqlConnection alloc(){
-      long start = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       // 创建链接
       FConnectionWorker worker = allocateWorker();
       if(!worker.isConnect()){
          throw new FFatalError("Can't allocate connection");
       }
       if(_logger.debugAble()){
-         long spend = System.currentTimeMillis() - start;
-         _logger.debug(this, "alloc", spend, "Allocate sql connection. (active={1}, create={2}, alloc={3}, free={4}, release={5}, connection={6})", _createCount - _releaseCount, _createCount, _allocCount, _freeCount, _releaseCount, worker.connection);
+         long endTick = System.nanoTime();
+         _logger.debug(this, "alloc", endTick - beginTick, "Allocate sql connection. (active={1}, create={2}, alloc={3}, free={4}, release={5}, connection={6})", _createCount - _releaseCount, _createCount, _allocCount, _freeCount, _releaseCount,
+               worker.connection);
       }
       _allocCount++;
       // 激活链接
@@ -516,7 +517,7 @@ public class FConnectionConsole
          return;
       }
       // 提交之前数据
-      long start = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       connection.commit();
       // 释放工作器
       FConnectionWorker worker = (FConnectionWorker)connection.attributes().get(IDF_WORKER);
@@ -524,8 +525,8 @@ public class FConnectionConsole
       _freeCount++;
       connection.attributes().set(IDF_ACTIVE, RBoolean.FALSE_STR);
       if(_logger.debugAble()){
-         long end = System.currentTimeMillis();
-         _logger.debug(this, "free", end - start, "Free sql connection. (connection={1})", connection);
+         long endTick = System.nanoTime();
+         _logger.debug(this, "free", endTick - beginTick, "Free sql connection. (connection={1})", connection);
       }
    }
 

@@ -72,24 +72,29 @@ public abstract class FAbstractWebServlet
       String uri = null;
       FWebContext context = null;
       IWebSession session = null;
-      long startTime = System.nanoTime();
+      long beginTick = System.nanoTime();
       try{
          String language = _sessionLanguage;
          String encoding = _sessionEncoding;
          // 建立会话
-         String sessionCode = findSessionId(httpRequest);
-         boolean sessionExist = !RString.isEmpty(sessionCode);
-         if(sessionExist){
-            session = _sessionConsole.find(sessionCode);
-         }else{
-            sessionCode = RUuid.makeUniqueIdLower();
-         }
-         if(session != null){
-            session.referIncrease();
-            // 设置语言编码
-            language = session.culture().countryLanguage();
-            encoding = session.culture().countryEncoding();
-            RCulture.link(session.culture());
+         boolean sessionExist = false;
+         String sessionCode = null;
+         if(_sessionValid){
+            sessionCode = findSessionId(httpRequest);
+            sessionExist = !RString.isEmpty(sessionCode);
+            if(sessionExist){
+               session = _sessionConsole.find(sessionCode);
+            }else{
+               sessionCode = RUuid.makeUniqueIdLower();
+               session = _sessionConsole.build(sessionCode);
+            }
+            if(session != null){
+               session.referIncrease();
+               // 设置语言编码
+               language = session.culture().countryLanguage();
+               encoding = session.culture().countryEncoding();
+               RCulture.link(session.culture());
+            }
          }
          if(_logger.debugAble()){
             _logger.debug(this, "process", "Do{1} begin. (language={2}, charset={3}, uri={4})", type, language, encoding, httpRequest.getRequestURI());
@@ -140,9 +145,9 @@ public abstract class FAbstractWebServlet
             session.referDecrease();
          }
          _bindConsole.clear();
-         long endTime = System.nanoTime();
+         long endTick = System.nanoTime();
          if(_logger.debugAble()){
-            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (redirect={2})", type, uri);
+            _logger.debug(this, "process", endTick - beginTick, "Do{1} end. (redirect={2})", type, uri);
          }
       }
    }

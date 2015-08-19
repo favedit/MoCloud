@@ -11,8 +11,7 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBaseFrame
-      extends XContentObject
+public abstract class XBaseFrame extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "Frame";

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="d6a616bc-da9d-4d17-a2b0-9fff5612418f" name="data.control.role" label="M#12cn15控制角色表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Control.Role" data_name="DT_CTL_ROLE" data_alias="DT_CTL_ROL" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="2df3656a-30e2-41f3-bbf3-f67874dd8f14" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="1f24dac8-6434-442d-8b7b-a49880bc2fd9" name="label" label="M#12cn14真实名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldString _uuid="638067d3-247b-45a3-886c-44221413832f" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+  <FieldString _uuid="8a2ba77c-0fc7-4286-a061-091e17c8df41" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="0c05953b-6f7f-4bd1-a323-405f5342f9e6" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

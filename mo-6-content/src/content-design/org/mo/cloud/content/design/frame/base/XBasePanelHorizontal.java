@@ -11,8 +11,7 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBasePanelHorizontal
-      extends XContentObject
+public abstract class XBasePanelHorizontal extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "PanelHorizontal";

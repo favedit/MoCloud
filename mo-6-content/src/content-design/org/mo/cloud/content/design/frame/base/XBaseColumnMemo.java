@@ -11,8 +11,7 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBaseColumnMemo
-      extends XContentObject
+public abstract class XBaseColumnMemo extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "ColumnMemo";

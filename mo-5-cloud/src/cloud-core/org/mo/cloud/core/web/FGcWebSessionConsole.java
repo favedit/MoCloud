@@ -7,7 +7,6 @@ import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicContext;
 import org.mo.eng.data.IDatabaseConsole;
-import org.mo.eng.session.common.ISession;
 import org.mo.web.core.session.FWebSessionConsole;
 import org.mo.web.core.session.IWebSession;
 
@@ -38,7 +37,7 @@ public class FGcWebSessionConsole
    //============================================================
    @Override
    @SuppressWarnings("unchecked")
-   public <V extends ISession> V find(String sessionCode){
+   public IWebSession find(String sessionCode){
       FGcWebSession session = new FGcWebSession();
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 根据唯一编号查找
@@ -53,7 +52,7 @@ public class FGcWebSessionConsole
       }catch(Exception e){
          throw new FFatalError(e);
       }
-      return (V)session;
+      return session;
    }
 
    //============================================================

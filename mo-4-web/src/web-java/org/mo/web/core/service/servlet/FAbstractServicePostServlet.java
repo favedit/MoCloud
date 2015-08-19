@@ -48,7 +48,7 @@ public abstract class FAbstractServicePostServlet
    public void process(String type,
                        HttpServletRequest httpRequest,
                        HttpServletResponse httpResponse){
-      long startTime = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       String uri = null;
       FWebContext context = null;
       IWebSession session = null;
@@ -172,9 +172,9 @@ public abstract class FAbstractServicePostServlet
                _logger.error(this, "process", e);
             }
          }
-         long endTime = System.currentTimeMillis();
+         long endTick = System.nanoTime();
          if(_logger.debugAble()){
-            _logger.debug(this, "process", endTime - startTime, "Do{1} for {2}", type, uri);
+            _logger.debug(this, "process", endTick - beginTick, "Do{1} for {2}", type, uri);
          }
       }
    }

@@ -63,24 +63,29 @@ public abstract class FAbstractActionServlet
       FWebContext context = null;
       IWebSession session = null;
       Exception exception = null;
-      long startTime = System.nanoTime();
+      long beginTick = System.nanoTime();
       try{
          String language = _sessionLanguage;
          String encoding = _sessionEncoding;
          // 建立会话
-         String sessionCode = findSessionId(httpRequest);
-         boolean sessionExist = !RString.isEmpty(sessionCode);
-         if(sessionExist){
-            session = _sessionConsole.find(sessionCode);
-         }else{
-            sessionCode = RUuid.makeUniqueIdLower();
-         }
-         if(session != null){
-            session.referIncrease();
-            // 设置语言编码
-            language = session.culture().countryLanguage();
-            encoding = session.culture().countryEncoding();
-            RCulture.link(session.culture());
+         boolean sessionExist = false;
+         String sessionCode = null;
+         if(_sessionValid){
+            sessionCode = findSessionId(httpRequest);
+            sessionExist = !RString.isEmpty(sessionCode);
+            if(sessionExist){
+               session = _sessionConsole.find(sessionCode);
+            }else{
+               sessionCode = RUuid.makeUniqueIdLower();
+               session = _sessionConsole.build(sessionCode);
+            }
+            if(session != null){
+               session.referIncrease();
+               // 设置语言编码
+               language = session.culture().countryLanguage();
+               encoding = session.culture().countryEncoding();
+               RCulture.link(session.culture());
+            }
          }
          if(_logger.debugAble()){
             _logger.debug(this, "process", "Do{1} begin. (method={2}, language={3}, charset={4}, uri={5})", type, language, encoding, httpRequest.getRequestURI());
@@ -100,7 +105,7 @@ public abstract class FAbstractActionServlet
          // 更新输出
          httpResponse.setContentType("text/html; charset=" + encoding);
          httpResponse.setCharacterEncoding(encoding);
-         if(!sessionExist){
+         if(_sessionValid && !sessionExist){
             context.outputCookies().push(new FWebCookie(EWebConstants.SessionId, sessionCode));
          }
          updateResponse(context, httpRequest, httpResponse);
@@ -132,11 +137,11 @@ public abstract class FAbstractActionServlet
          }
          _bindConsole.clear();
          // 执行日志输出
-         long endTime = System.nanoTime();
+         long endTick = System.nanoTime();
          if(null != exception){
             _logger.error(this, "process", exception);
          }else if(_logger.debugAble()){
-            _logger.debug(this, "process", endTime - startTime, "Do{1} end. (forward={2}）", type, redirect);
+            _logger.debug(this, "process", endTick - beginTick, "Do{1} end. (forward={2}）", type, redirect);
          }
       }
    }

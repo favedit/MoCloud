@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="fe992027-0917-4bd0-9af6-6d1d17e5a4c8" name="data.control.role.module" label="M#12cn17控制角色模块表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Control.Role.Module" data_name="DT_CTL_ROLE_MODULE" data_alias="DT_CTL_ROL_MOD" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="9a012ae9-9549-4c8a-a8fe-fd99fae25ebd" name="role_id" label="M#12cn14角色编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="ROLE_ID" data_alias="ROL" data_refer="data.control.role" />
+  <FieldRecordId _uuid="e9d0ad3e-d23d-4896-b4a7-0929d288d953" name="module_id" label="M#12cn14模块编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="MODULE_ID" data_alias="MOD" data_refer="data.control.module" />
+  <FieldInteger _uuid="07c15be8-8049-4d16-8dfd-78fcdd4c0289" name="view_valid_cd" label="M#12cn16查看有效类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_VALID_CD" />
+  <FieldInteger _uuid="1010846c-b55b-4418-81f2-1cdbeec76be5" name="insert_valid_cd" label="M#12cn16新建有效类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INSERT_VALID_CD" />
+  <FieldInteger _uuid="ae4c0af2-2d92-4919-b627-95b6e2f918f2" name="update_valid_cd" label="M#12cn16修改有效类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="UPDATE_VALID_CD" />
+  <FieldInteger _uuid="6101d65a-bbfa-42bb-b14f-db90d04ca9a8" name="delete_valid_cd" label="M#12cn16删除有效类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DELETE_VALID_CD" />
+  <FieldString _uuid="d96e1d80-80b8-4fa6-b99a-4ba1aed3dc7c" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="80a9c94c-62d1-45ff-862b-d960a5d4d020" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

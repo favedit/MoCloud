@@ -11,8 +11,7 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBaseNumber3
-      extends XContentObject
+public abstract class XBaseNumber3 extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "Number3";

@@ -440,7 +440,7 @@ public abstract class MSqlConnection
    @Override
    public long executeInsertSql(CharSequence sql){
       long recordId = 0;
-      long start = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       Statement statement = null;
       FError exception = null;
       try{
@@ -455,7 +455,8 @@ public abstract class MSqlConnection
          }
          rs.close();
          if(_logger.debugAble()){
-            _logger.debug(this, "executeSql", System.currentTimeMillis() - start, "Execute insert sql. (record_id={1}, sql={2})", recordId, sql);
+            long endTick = System.nanoTime();
+            _logger.debug(this, "executeSql", endTick - beginTick, "Execute insert sql. (record_id={1}, sql={2})", recordId, sql);
          }
       }catch(Exception e){
          exception = new FFatalError(e, "Execute sql. (sql={1})", sql);
@@ -483,7 +484,7 @@ public abstract class MSqlConnection
    //============================================================ 
    @Override
    public boolean executeSql(CharSequence sql){
-      long start = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       Statement statement = null;
       FError exception = null;
       try{
@@ -491,7 +492,8 @@ public abstract class MSqlConnection
          statement.setEscapeProcessing(false);
          statement.execute(sql.toString());
          if(_logger.debugAble()){
-            _logger.debug(this, "executeSql", System.currentTimeMillis() - start, "Execute sql. (sql={1})", sql);
+            long endTick = System.nanoTime();
+            _logger.debug(this, "executeSql", endTick - beginTick, "Execute sql. (sql={1})", sql);
          }
       }catch(Exception e){
          exception = new FFatalError(e, "Execute sql. (sql={1})", sql);
@@ -759,7 +761,7 @@ public abstract class MSqlConnection
       FRow row = null;
       FSql sqlCommand = new FSql(sql.toString());
       try{
-         long start = System.currentTimeMillis();
+         long startTick = System.nanoTime();
          statement = sqlConnection().createStatement();
          result = statement.executeQuery(sqlCommand.toString());
          if(result != null){
@@ -776,13 +778,13 @@ public abstract class MSqlConnection
                fillUnit(row, columnCount, names, types, result);
             }
          }
-         long end = System.currentTimeMillis();
+         long endTick = System.nanoTime();
          if(_logger.debugAble()){
             String rowInfo = null;
             if(null != row){
                rowInfo = row.dump().toString();
             }
-            _logger.debug(this, "find", end - start, "Find row. (row={1}, sql=[{2})", rowInfo, sqlCommand);
+            _logger.debug(this, "find", endTick - startTick, "Find row. (row={1}, sql=[{2})", rowInfo, sqlCommand);
          }
       }catch(Exception e){
          exception = e;
@@ -820,7 +822,7 @@ public abstract class MSqlConnection
       ResultSet result = null;
       Exception exception = null;
       try{
-         long start = System.currentTimeMillis();
+         long beginTick = System.nanoTime();
          FDataset dataset = new FDataset();
          statement = sqlConnection().createStatement();
          result = statement.executeQuery(sql.toString());
@@ -843,9 +845,9 @@ public abstract class MSqlConnection
                fillUnit(row, count, names, types, result);
                dataset.push(row);
             }
-            long end = System.currentTimeMillis();
+            long endTick = System.nanoTime();
             if(_logger.debugAble()){
-               _logger.debug(this, "fetchDataset", end - start, "Execute sql. (count={1}, sql={2})", dataset.count(), sql);
+               _logger.debug(this, "fetchDataset", endTick - beginTick, "Execute sql. (count={1}, sql={2})", dataset.count(), sql);
             }
          }
          return dataset;

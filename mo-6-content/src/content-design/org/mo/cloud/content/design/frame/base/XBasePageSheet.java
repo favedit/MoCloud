@@ -11,8 +11,7 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBasePageSheet
-      extends XContentObject
+public abstract class XBasePageSheet extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "PageSheet";

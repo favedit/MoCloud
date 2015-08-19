@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="198c5d1b-2dc8-4017-8c9a-e379eadd9fdd" name="data.common.area" label="M#12cn15共通地区表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Area" data_name="DT_COM_AREA" data_alias="DT_COM_AREA" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="06c6b074-3b26-4669-a16d-9d1954518290" name="country_id" label="M#12cn14国家编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_size="40" data_refer="data.common.country" />
+  <FieldString _uuid="993e5f55-46af-4cad-b93c-7cbca1222433" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="20" />
+  <FieldString _uuid="d2b5af96-f1f3-4aac-a893-ca5cba40288d" name="label" label="M#12cn14真实名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldString _uuid="d0489386-61a9-413d-8288-06396155a072" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+  <FieldInteger _uuid="19d6a234-84a2-4e63-aebd-9aed44659586" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldString _uuid="5807aa19-939a-4822-8e21-c71c01e30e5c" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="ef3b82ab-73ae-48ef-b62d-facab9e38efb" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

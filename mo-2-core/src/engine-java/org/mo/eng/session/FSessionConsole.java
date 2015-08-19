@@ -387,7 +387,7 @@ public class FSessionConsole
    // <P>存储当前缓冲中所有信息对象。</P>
    //============================================================
    public void releaseInterrupt(){
-      long start = System.currentTimeMillis();
+      long beginTick = System.currentTimeMillis();
       if(_logger.debugAble()){
          _logger.debug(this, "releaseInterrupt", "Begin serialize all session.");
       }
@@ -411,8 +411,8 @@ public class FSessionConsole
          _logger.error(this, "releaseInterrupt", e);
       }
       if(_logger.debugAble()){
-         long execute = System.currentTimeMillis() - start;
-         _logger.debug(this, "releaseInterrupt", execute, "Serialize all session.");
+         long endTick = System.currentTimeMillis();
+         _logger.debug(this, "releaseInterrupt", endTick - beginTick, "Serialize all session.");
       }
    }
 

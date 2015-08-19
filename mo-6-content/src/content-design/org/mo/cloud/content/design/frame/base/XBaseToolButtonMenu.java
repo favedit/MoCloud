@@ -11,8 +11,7 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBaseToolButtonMenu
-      extends XContentObject
+public abstract class XBaseToolButtonMenu extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "ToolButtonMenu";

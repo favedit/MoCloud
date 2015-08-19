@@ -99,7 +99,7 @@ public class FBatchConsole
                           String methodName,
                           FXmlNode config,
                           IAttributes attributes){
-      long start = System.currentTimeMillis();
+      long beginTick = System.nanoTime();
       //检查是接口是否否为空
       if(RString.isEmpty(faceName)){
          _logger.debug(this, "execute", "This interface is empty.[{0}].", faceName);
@@ -139,7 +139,8 @@ public class FBatchConsole
             _databaseConsole.free(synConnection);
          }
       }
-      _logger.debug(this, "execute", System.currentTimeMillis() - start, "Process command [{0}]->{1} end", faceName, methodName);
+      long endTick = System.nanoTime();
+      _logger.debug(this, "execute", endTick - beginTick, "Process command [{0}]->{1} end", faceName, methodName);
       // 创建方法的参数
       return true;
    }

@@ -1135,16 +1135,19 @@ public class FWebContext
    //============================================================
    @Override
    public TDumpInfo dump(TDumpInfo info){
-      info.appendLine(this);
+      info.append(this);
       if((_heads != null) && !_heads.isEmpty()){
+         info.appendLine();
          info.append("Head     : ");
-         info.appendLine(_heads.dump());
+         info.append(_heads.dump());
       }
       if((_cookies != null) && !_cookies.isEmpty()){
+         info.appendLine();
          info.append("Cookies  : ");
-         info.appendLine(_cookies.dump());
+         info.append(_cookies.dump());
       }
       if((_parameters != null) && !_parameters.isEmpty()){
+         info.appendLine();
          info.append("Parameter: ");
          info.append(_parameters.dump());
       }
