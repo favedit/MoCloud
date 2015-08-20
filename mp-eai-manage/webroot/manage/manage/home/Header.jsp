@@ -20,7 +20,6 @@
             var now = (new Date()).toLocaleString();
             $('#current-time').html("日期：" + now);
          }, 1000);
-         //	document.getElementById("product").click();
       }
    </script>
 
@@ -30,7 +29,6 @@
             <div class="welcom">
                欢迎 <span style="color:#F90"><jh:write source="&basePage.userName"/></span> 登录 &nbsp;&nbsp;&nbsp;
                               <a href="/manage/home/Frame.wa?do=changePwdPrepare" target="right">[修改密码]</a>&nbsp;&nbsp;&nbsp;
-               <!--            <span style="color:#666">V.<jh:write source="&basePage.version"/></span>-->
             </div>
          </div>
          <div id="top_right">

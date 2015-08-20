@@ -34,6 +34,16 @@ public class FBasePage
 
    protected String _passport;
 
+   protected long _roleId;
+
+   public long roleId(){
+      return _roleId;
+   }
+
+   public void setRoleId(long _roleId){
+      this._roleId = _roleId;
+   }
+
    public String passport(){
       return _passport;
    }

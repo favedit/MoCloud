@@ -6,9 +6,26 @@
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <script>
+         $(function() {
+            var url = "/manage/role/Role.wa?do=selectAll&date=" + new Date().valueOf();
+            $.ajax({
+               type: "POST",
+               url: url,
+               success: function(msg) {
+                  closeProgress();
+                  $('#role').combobox('loadData', toJsonObject(msg));
+                  $('#role').combobox("select", $('#oldRoleId').val());
+               },
+               fail: function() {
+                  closeProgress();
+                  alert("error");
+               }
+            });
+         });
+
          function submitForm() {
             if (!isValid()) return;
-            if(!confirmpwd()) return;
+            if (!confirmpwd()) return;
             progress();
             var url = "/manage/user/User.wa?do=update&date=" + new Date().valueOf();
             var data = {
@@ -16,6 +33,7 @@
                "passport": $('#passport').val(),
                "password": $('#pwd2').val(),
                "label": $('#label').val(),
+               "role": $('#role').val(),
                "adminId": $('#adminId').val()
             };
             $.ajax({
@@ -93,12 +111,19 @@
             <tr>
                <td align="left">确认密码</td>
                <td align="left">
-                  <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,20]'" type="password" name="pwd2" value="<jh:write source='&user.password'/>"/> </td>
+                  <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,20]'" type="password" name="pwd2" value="<jh:write source='&user.password'/>" /> </td>
             </tr>
             <tr>
                <td align="left">真实名称</td>
                <td align="left">
                   <input id="label" class="easyui-validatebox textbox notnull" data-options="required:true" style="width:500px" name="label" value="<jh:write source='&user.label'/>" />
+               </td>
+            </tr>
+            <tr>
+               <td width="66" height="30" align="left">角色</td>
+               <td height="30" colspan="7" align="left">
+                  <input id="oldRoleId" value="<jh:write source='&user.roleId'/>" style="display:none" />
+                  <select class="easyui-combobox" id="role" name="role" style="width:500px;" data-options="valueField:'ouid',textField:'label',editable:false" />
                </td>
             </tr>
          </table>

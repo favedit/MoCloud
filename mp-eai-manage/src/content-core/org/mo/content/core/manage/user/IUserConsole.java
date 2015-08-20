@@ -60,4 +60,14 @@ public interface IUserConsole
    void updateByOuid(ILogicContext logicContext,
                      FDataPersonUserUnit user);
 
+   // ============================================================
+   // <T>根据角色查找数据</T>
+   //
+   // @param sqlContext 链接对象
+   // @param passport 帐号
+   // @return 模块数据
+   // ============================================================
+   EResult roleExists(ILogicContext logicContext,
+                      String role);
+
 }

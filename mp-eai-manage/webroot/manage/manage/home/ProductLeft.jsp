@@ -9,21 +9,47 @@
       <link rel="stylesheet" href="/manage/acs/main.css" type="text/css" media="screen" />
       <link rel="stylesheet" href="/manage/acs/lrtk.css" type="text/css" media="screen" />
       <script src="/manage/ajs/jquery/jquery-1.8.0.min.js" type="text/javascript"></script>
+      <script>
+         function checkHtml() {
+            var menu = $.trim($("#one").children(".sub-menu").html());
+            if (menu == '') {
+               $("#one").hide();
+            }
+            menu = $.trim($("#two").children(".sub-menu").html());
+            if (menu == '') {
+               $("#two").hide();
+            }
+            menu = $.trim($("#three").children(".sub-menu").html());
+            if (menu == '') {
+               $("#three").hide();
+            }
+            menu = $.trim($("#four").children(".sub-menu").html());
+            if (menu == '') {
+               $("#four").hide();
+            }
+            menu = $.trim($("#six").children(".sub-menu").html());
+            if (menu == '') {
+               $("#six").hide();
+            }
+         }
+      </script>
    </head>
 
-   <body bgcolor="#198bc9">
+   <body bgcolor="#198bc9" onLoad="checkHtml()">
       <div id="cy_left">
          <!-- 导航 开始 -->
          <ul class="accordion">
             <li id="one" class="common"> <a href="#one">设备管理</a>
                <ul class="sub-menu">
-                  <li><a href="/product/device/Device.wa" target="right">设备信息</a></li>
+                  <jh:equals source="product.device" value="&basePage.menuString">
+                     <li><a href="/product/device/Device.wa" target="right">设备信息</a></li>
+                  </jh:equals>
                </ul>
             </li>
             <li id="two" class="classify"> <a href="#two">用户管理</a>
                <ul class="sub-menu">
-                  <li><a href="/product/logger/user/Access.wa" target="right">用户日志</a></li>
-                  <li><a href="/product/person/user/Access.wa" target="right">白名单</a></li>
+                  <jh:equals source="product.user.logger" value="&basePage.menuString"><li><a href="/product/logger/user/Access.wa" target="right">用户日志</a></li></jh:equals>
+                  <jh:equals source="product.user.writelists" value="&basePage.menuString"><li><a href="/product/person/user/Access.wa" target="right">白名单</a></li></jh:equals>
                </ul>
             </li>
          </ul>

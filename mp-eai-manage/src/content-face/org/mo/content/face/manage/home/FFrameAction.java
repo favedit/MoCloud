@@ -77,12 +77,14 @@ public class FFrameAction
          userUnit.setOvld(true);
          userUnit.setPassport(passport);
          userUnit.setPassword(password);
+         userUnit.setRoleId(1);
          userUnit.setLabel("初始用户");
          _userConsole.doInsert(logicContext, userUnit);
          formPage.setUser(userUnit);
          basePage.setUserId(userUnit.guid());
          basePage.setUserName(userUnit.label());
          basePage.setPassport(userUnit.passport());
+         basePage.setRoleId(userUnit.roleId());
          basePage.ajax(1, "/manage/home/Frame.wa");
          _logger.debug(this, "LoginUser", "LoginUser first user login Sueeccd.");
       }
@@ -99,6 +101,8 @@ public class FFrameAction
             basePage.setUserId(unit.guid());
             basePage.setUserName(unit.label());
             basePage.setPassport(unit.passport());
+            basePage.setRoleId(unit.roleId());
+            System.out.println(userUnit.roleId() + "--------------------");
             basePage.ajax(1, "/manage/home/Frame.wa");
             _logger.debug(this, "LoginUser", "LoginUser Sueeccd.");
          }else{//密码不正确

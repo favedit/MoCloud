@@ -124,6 +124,7 @@ public class FUserAction
       unit.setPassword(password);
       unit.setLabel(context.parameter("label"));
       unit.setOvld(true);
+      unit.setRoleId(context.parameterAsLong("role"));
       _userConsole.doInsert(logicContext, unit);
       basePage.setJson("1");
       _logger.debug(this, "InsertUser", "InsertUser succeed.");
@@ -184,6 +185,7 @@ public class FUserAction
          unit.setPassword(RSha1.encode(unit.password()));
       }
       unit.setLabel(context.parameter("label"));
+      unit.setRoleId(context.parameterAsLong("role"));
       unit.setUpdateUserId(context.parameterAsLong("adminId"));
       _userConsole.doUpdate(logicContext, unit);
       basePage.setJson("1");

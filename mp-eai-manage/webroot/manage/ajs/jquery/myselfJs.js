@@ -22,7 +22,7 @@ function imgNotfind() {
 }
 
 function ischinese(str) {
-   var reg =  /^[A-Za-z0-9_]*$/g;//字母及数字或下划线组成
+   var reg = /^[A-Za-z0-9_]*$/g; //字母及数字或下划线组成
    return reg.test(str);
 }
 
@@ -115,13 +115,15 @@ function insert_editAndDelButton(value, row, index) {
 }
 
 function insert_admin_editButton(value, row, index) {
-//   var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="edit(\'' + row.guid + '\')"><span class="l-btn-text icon-edit l-btn-icon-left">编辑</span></span></a>';
+   var del = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="del(\'' + row.guid + '\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-cancel l-btn-icon-left">删除</span></span></a>';
+   var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="edit(\'' + row.guid + '\')"><span class="l-btn-text icon-edit l-btn-icon-left">编辑</span></span></a>';
    if (row.passport != 'admin') {
-      var del = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="del(\'' + row.guid + '\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-cancel l-btn-icon-left">删除</span></span></a>';
-//      return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;|&nbsp;" + del;
-      return del;
+      return "&nbsp;&nbsp;&nbsp;" + edit+ "&nbsp;&nbsp;";
+      //      return del;
+   } else {
+      return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;|&nbsp;" + del;
    }
-   return "&nbsp;"
+
 }
 //在教程里获取应用列表
 function getApplicationJson(page) {

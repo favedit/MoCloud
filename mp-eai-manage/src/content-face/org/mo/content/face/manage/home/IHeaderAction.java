@@ -1,8 +1,7 @@
 package org.mo.content.face.manage.home;
 
-import org.mo.com.data.ASqlConnect;
 import org.mo.content.face.base.FBasePage;
-import org.mo.eng.data.common.ISqlContext;
+import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 //============================================================
@@ -34,7 +33,8 @@ public interface IHeaderAction
    // @return 处理结果
    //============================================================
    String productLeft(IWebContext context,
-                      @ASqlConnect(name = "GCDATA") ISqlContext sqlContext,
+                      ILogicContext logicContext,
+                      @AContainer(name = "framePage") FFramePage framePage,
                       @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -45,7 +45,7 @@ public interface IHeaderAction
    // @return 处理结果
    //============================================================
    String analysisLeft(IWebContext context,
-                       @ASqlConnect(name = "GCDATA") ISqlContext sqlContext,
+                       ILogicContext logicContext,
                        @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -56,7 +56,7 @@ public interface IHeaderAction
    // @return 处理结果
    //============================================================
    String manageLeft(IWebContext context,
-                     @ASqlConnect(name = "GCDATA") ISqlContext sqlContext,
+                     ILogicContext logicContext,
                      @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -67,6 +67,6 @@ public interface IHeaderAction
    // @return 处理结果
    //============================================================
    String databaseLeft(IWebContext context,
-                       @ASqlConnect(name = "GCDATA") ISqlContext sqlContext,
+                       ILogicContext logicContext,
                        @AContainer(name = "basePage") FBasePage basePage);
 }

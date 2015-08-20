@@ -9,28 +9,52 @@
       <link rel="stylesheet" href="/manage/acs/main.css" type="text/css" media="screen" />
       <link rel="stylesheet" href="/manage/acs/lrtk.css" type="text/css" media="screen" />
       <script src="/manage/ajs/jquery/jquery-1.8.0.min.js" type="text/javascript"></script>
+      <script>
+         function checkHtml() {
+            var menu = $.trim($("#one").children(".sub-menu").html());
+            if (menu == '') {
+               $("#one").hide();
+            }
+            menu = $.trim($("#two").children(".sub-menu").html());
+            if (menu == '') {
+               $("#two").hide();
+            }
+            menu = $.trim($("#three").children(".sub-menu").html());
+            if (menu == '') {
+               $("#three").hide();
+            }
+            menu = $.trim($("#four").children(".sub-menu").html());
+            if (menu == '') {
+               $("#four").hide();
+            }
+            menu = $.trim($("#six").children(".sub-menu").html());
+            if (menu == '') {
+               $("#six").hide();
+            }
+         }
+      </script>
    </head>
 
-   <body bgcolor="#198bc9">
+   <body bgcolor="#198bc9" onload="checkHtml();">
       <div id="cy_left">
          <!-- 导航 开始 -->
          <ul id="accordion" class="accordion">
-            <!--
-    <li id="one" class="files">
-      <a href="#">权限管理</a>
-      <ul class="sub-menu">
-         <jh:equals source="manage.module" value="&basePage.menuString"><li><a href="/cloud/manage/module/Module.wa" target="right" >模块管理</a></li></jh:equals>
-         <jh:equals source="manage.role" value="&basePage.menuString"><li><a href="/cloud/manage/role/Role.wa" target="right" >角色管理</a></li>
-         </jh:equals>
-      </ul>
-    </li>
--->
+
+            <li id="one" class="files">
+               <a href="#">权限管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="product.device" value="&basePage.menuString"><li><a href="/manage/module/Module.wa" target="right">模块管理</a></li></jh:equals>
+                  <jh:equals source="product.device" value="&basePage.menuString"><li><a href="/manage/role/Role.wa" target="right">角色管理</a></li></jh:equals>
+               </ul>
+            </li>
+
             <li id="two" class="mail">
                <a href="#">用户管理</a>
                <ul class="sub-menu">
-                  <li><a href="/manage/user/User.wa" target="right">用户管理</a></li>
+                  <jh:equals source="product.device" value="&basePage.menuString"><li><a href="/manage/user/User.wa" target="right">用户管理</a></li></jh:equals>
                </ul>
             </li>
+
             <!--
     <li id="three" class="system"> <a href="#three">版本管理</a>
       <ul class="sub-menu">
@@ -57,16 +81,27 @@
          <jh:equals source="data" value="&basePage.menuString"><li><a href="#" target="right" >数据(导入/导出)</a></li></jh:equals>
       </ul>
     </li>
-    <li id="four" class="files">
-      <a href="#">后台管理</a>
-      <ul class="sub-menu">
-         <jh:equals source="manage.batchProcess" value="&basePage.menuString"><li><a href="/cloud/manage/batchProcess/BatchProcess.wa" target="right" >后台处理</a></li></jh:equals>
-         <jh:equals source="manage.system.message" value="&basePage.menuString"><li><a href="/cloud/manage/message/Message.wa" target="right" >系统消息</a></li></jh:equals>
-          <jh:equals source="manage.logic.guide" value="&basePage.menuString"><li><a href="/cloud/manage/guide/Guide.wa" target="right" >业务引导</a></li></jh:equals>
-          <jh:equals source="manage.logic.event" value="&basePage.menuString"><li><a href="/cloud/manage/event/Event.wa" target="right" >业务事件</a></li></jh:equals>
-      </ul>
-    </li>
 -->
+            <!--
+            <li id="four" class="files">
+               <a href="#">后台管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="manage.batchProcess" value="&basePage.menuString">
+                     <li><a href="/cloud/manage/batchProcess/BatchProcess.wa" target="right">后台处理</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.system.message" value="&basePage.menuString">
+                     <li><a href="/cloud/manage/message/Message.wa" target="right">系统消息</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.logic.guide" value="&basePage.menuString">
+                     <li><a href="/cloud/manage/guide/Guide.wa" target="right">业务引导</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.logic.event" value="&basePage.menuString">
+                     <li><a href="/cloud/manage/event/Event.wa" target="right">业务事件</a></li>
+                  </jh:equals>
+               </ul>
+            </li>
+-->
+
 
          </ul>
          <!-- 导航 结束 -->

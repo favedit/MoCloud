@@ -18,16 +18,6 @@ public class FFramePage
    //用户
    protected FDataPersonUserUnit user;
 
-   protected String flag;
-
-   public String getFlag(){
-      return flag;
-   }
-
-   public void setFlag(String flag){
-      this.flag = flag;
-   }
-
    public FDataPersonUserUnit getUser(){
       return user;
    }

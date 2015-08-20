@@ -82,6 +82,25 @@ public class FUserConsole
    }
 
    // ============================================================
+   // <T>根据角色查找数据</T>
+   //
+   // @param sqlContext 链接对象
+   // @param passport 帐号
+   // @return 模块数据
+   // ============================================================
+   @Override
+   public EResult roleExists(ILogicContext logicContext,
+                             String role){
+      FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
+      StringBuffer whereSB = new StringBuffer();
+      whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
+      if(!RString.isEmpty(role))
+         whereSB.append(" AND ").append(FDataPersonUserLogic.ROLE_ID).append(" = '").append(role).append("'");
+      FLogicDataset<FDataPersonUserUnit> unitlist = logic.fetch(whereSB);
+      return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
+   }
+
+   // ============================================================
    // <T>根据ouid修改用户</T>
    //
    // @param sqlContext 链接对象
