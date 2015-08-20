@@ -160,6 +160,39 @@ public class FSql
    }
 
    //============================================================
+   // <T>绑定整数。</T>
+   //
+   // @param name 名称 
+   // @param value 内容 
+   //============================================================
+   public void bindInteger(String name,
+                           int value){
+      innerReplace("{" + name + "}", Integer.toString(value));
+   }
+
+   //============================================================
+   // <T>绑定浮点数。</T>
+   //
+   // @param name 名称 
+   // @param value 内容 
+   //============================================================
+   public void bindFloat(String name,
+                         float value){
+      innerReplace("{" + name + "}", Float.toString(value));
+   }
+
+   //============================================================
+   // <T>绑定双精度浮点数。</T>
+   //
+   // @param name 名称 
+   // @param value 内容 
+   //============================================================
+   public void bindDouble(String name,
+                          double value){
+      innerReplace("{" + name + "}", Double.toString(value));
+   }
+
+   //============================================================
    // <T>绑定字符串。</T>
    //
    // @param name 名称 

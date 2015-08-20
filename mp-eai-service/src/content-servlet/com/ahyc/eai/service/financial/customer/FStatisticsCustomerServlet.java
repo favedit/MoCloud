@@ -1,5 +1,6 @@
 package com.ahyc.eai.service.financial.customer;
 
+import com.ahyc.eai.core.common.EDatabaseConnection;
 import com.ahyc.eai.core.financial.FFinancialTenderModel;
 import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
@@ -90,7 +91,7 @@ public class FStatisticsCustomerServlet
       TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
-      ISqlConnection connection = logicContext.activeConnection("statistics");
+      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
       // 输出当日合计数据
       FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
       sumSql.bindString("date", endDate.format("YYYYMMDD"));
@@ -174,6 +175,9 @@ public class FStatisticsCustomerServlet
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
+      if((beginSource.length() != 14) || (endSource.length() != 14)){
+         throw new FFatalError("Parameter length is invalid.");
+      }
       // 限制查询范围最大10分钟
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
@@ -222,6 +226,136 @@ public class FStatisticsCustomerServlet
       // 发送数据
       int dataLength = stream.length();
       _logger.debug(this, "process", "Send statistics customer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      return sendStream(context, request, response, stream);
+   }
+
+   //============================================================
+   // <T>获得省份分析数据数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public EResult province(IWebContext context,
+                           ILogicContext logicContext,
+                           IWebServletRequest request,
+                           IWebServletResponse response){
+      // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      // 检查参数
+      String beginSource = context.parameter("begin");
+      String endSource = context.parameter("end");
+      if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
+         throw new FFatalError("Parameter is invalid.");
+      }
+      if((beginSource.length() != 14) || (endSource.length() != 14)){
+         throw new FFatalError("Parameter length is invalid.");
+      }
+      // 限制查询范围最大10分钟
+      TDateTime beginDate = new TDateTime(beginSource);
+      TDateTime endDate = new TDateTime(endSource);
+      //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "province|" + beginSource + "-" + endSource;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
+      }
+      //............................................................
+      // 设置输出流
+      FByteStream stream = createStream(context);
+      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
+      // 输出排行数据
+      FSql sql = _resource.findString(FSql.class, "sql.customer.province");
+      sql.bindString("begin_date", beginDate.format());
+      sql.bindString("end_date", endDate.format());
+      FDataset dataset = connection.fetchDataset(sql);
+      int count = dataset.count();
+      stream.writeInt32(count);
+      for(FRow row : dataset){
+         stream.writeString(row.get("province_code"));
+         stream.writeInt32(row.getInteger("customer_count"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("investment_avg"));
+      }
+      //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
+      //............................................................
+      // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics customer province. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      return sendStream(context, request, response, stream);
+   }
+
+   //============================================================
+   // <T>获得年龄分析数据数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public EResult age(IWebContext context,
+                      ILogicContext logicContext,
+                      IWebServletRequest request,
+                      IWebServletResponse response){
+      // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      // 检查参数
+      String beginSource = context.parameter("begin");
+      String endSource = context.parameter("end");
+      if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
+         throw new FFatalError("Parameter is invalid.");
+      }
+      if((beginSource.length() != 14) || (endSource.length() != 14)){
+         throw new FFatalError("Parameter length is invalid.");
+      }
+      // 限制查询范围最大10分钟
+      TDateTime beginDate = new TDateTime(beginSource);
+      TDateTime endDate = new TDateTime(endSource);
+      //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "age|" + beginSource + "-" + endSource;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
+      }
+      //............................................................
+      // 设置输出流
+      FByteStream stream = createStream(context);
+      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
+      // 输出排行数据
+      FSql sql = _resource.findString(FSql.class, "sql.customer.province");
+      sql.bindInteger("year", endDate.year());
+      sql.bindString("begin_date", beginDate.format());
+      sql.bindString("end_date", endDate.format());
+      FDataset dataset = connection.fetchDataset(sql);
+      int count = dataset.count();
+      stream.writeInt32(count);
+      for(FRow row : dataset){
+         stream.writeInt32(row.getInteger("customer_age"));
+         stream.writeInt32(row.getInteger("customer_year"));
+         stream.writeInt32(row.getInteger("customer_count"));
+         stream.writeInt32(row.getInteger("male_count"));
+         stream.writeInt32(row.getInteger("female_count"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("investment_avg"));
+      }
+      //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
+      //............................................................
+      // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics customer age. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 }

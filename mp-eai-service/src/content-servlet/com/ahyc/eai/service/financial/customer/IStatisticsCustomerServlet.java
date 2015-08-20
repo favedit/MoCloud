@@ -36,4 +36,30 @@ public interface IStatisticsCustomerServlet
                  ILogicContext logicContext,
                  IWebServletRequest request,
                  IWebServletResponse response);
+
+   //============================================================
+   // <T>获得客户省份分析数据数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   EResult province(IWebContext context,
+                    ILogicContext logicContext,
+                    IWebServletRequest request,
+                    IWebServletResponse response);
+
+   //============================================================
+   // <T>获得年龄分析数据数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   EResult age(IWebContext context,
+               ILogicContext logicContext,
+               IWebServletRequest request,
+               IWebServletResponse response);
 }
