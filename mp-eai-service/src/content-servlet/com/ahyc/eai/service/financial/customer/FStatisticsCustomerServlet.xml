@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.dynamic.sum'>
+SELECT
+   SUM(INVESTMENT) INVESTMENT_COUNT,
+   MAX(INVESTMENT_TOTAL) INVESTMENT_TOTAL,
+   SUM(CUSTOMER_COUNT) CUSTOMER_COUNT,
+   MAX(CUSTOMER_TOTAL) CUSTOMER_TOTAL
+FROM ST_FIN_PHASE
+WHERE RECORD_DAY = STR_TO_DATE({date},'%Y%m%d')
+</Resource>
+
+<Resource name='sql.dynamic.rank'>
+SELECT * FROM (
+   SELECT
+      CUSTOMER_ID,
+      CUSTOMER_LABEL,
+      CUSTOMER_CARD,
+      CUSTOMER_PHONE,
+      SUM(INVESTMENT) INVESTMENT_TOTAL
+   FROM ST_FIN_CUSTOMER_PHASE
+   WHERE RECORD_DAY = STR_TO_DATE({date},'%Y%m%d')
+   GROUP BY CUSTOMER_ID
+) t
+ORDER BY INVESTMENT_TOTAL DESC
+LIMIT 3
+</Resource>
+
+</Config>

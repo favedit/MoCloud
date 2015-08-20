@@ -1,4 +1,4 @@
-package com.ahyc.eai.service.financial.customer;
+package com.ahyc.eai.service.financial.department;
 
 import com.ahyc.eai.core.financial.FFinancialTenderModel;
 import com.ahyc.eai.core.financial.IFinancialConsole;

@@ -38,22 +38,60 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 统计理财师数据处理                                           -->
+   <!-- 理财师-客户数据统计                                          -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'eai.financial.marketer'
+         name  = 'eai.financial.marketer.customer'
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsCustomerServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsCustomerServlet'
+         class = 'com.ahyc.eai.service.financial.marketer.FStatisticsCustomerServlet'
+         scope = 'global'/>
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 理财师-理财师数据统计                                        -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.marketer.marketer'
          face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'/>
 
    <Component
          face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'
          class = 'com.ahyc.eai.service.financial.marketer.FStatisticsMarketerServlet'
          scope = 'global'/>
+         scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 统计部门数据处理                                             -->
+   <!-- 部门-理财师数据统计                                          -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'eai.financial.department'
+         name  = 'eai.financial.department.customer'
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsCustomerServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsCustomerServlet'
+         class = 'com.ahyc.eai.service.financial.department.FStatisticsCustomerServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 部门-理财师数据统计                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.department.marketer'
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsMarketerServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsMarketerServlet'
+         class = 'com.ahyc.eai.service.financial.department.FStatisticsMarketerServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 公司-公司数据统计                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.department.department'
          face  = 'com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'/>
 
    <Component

@@ -1,7 +1,5 @@
-package com.ahyc.eai.service.financial.customer;
+package com.ahyc.eai.service.financial.department;
 
-import com.ahyc.eai.core.financial.FFinancialTenderModel;
-import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
@@ -14,14 +12,12 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
-import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -31,20 +27,16 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>理财师信息处理。</T>
 //============================================================
-public class FStatisticsCustomerServlet
+public class FStatisticsMarketerServlet
       extends FAbstractStatisticsServlet
       implements
-         IStatisticsCustomerServlet
+         IStatisticsMarketerServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FStatisticsCustomerServlet.class);
+   private static ILogger _logger = RLogger.find(FStatisticsMarketerServlet.class);
 
-   // 资源访问接口
-   private static IResource _resource = RResource.find(FStatisticsCustomerServlet.class);
-
-   // 金融控制台
-   @ALink
-   protected IFinancialConsole _financialConsole;
+   // 日志输出接口
+   private static IResource _resource = RResource.find(FStatisticsMarketerServlet.class);
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -69,9 +61,6 @@ public class FStatisticsCustomerServlet
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
-      if((beginSource.length() != 14) || (endSource.length() != 14)){
-         throw new FFatalError("Parameter length is invalid.");
-      }
       // 限制查询范围最大10分钟
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
@@ -87,59 +76,93 @@ public class FStatisticsCustomerServlet
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
-      TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
-      FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
-      sumSql.bindString("date", endDate.format("YYYYMMDD"));
-      FRow sumRow = connection.find(sumSql);
-      stream.writeDouble(sumRow.getDouble("investment_count"));
-      stream.writeDouble(sumRow.getDouble("investment_total"));
-      stream.writeInt32(sumRow.getInt("customer_count"));
-      stream.writeInt32(sumRow.getInt("customer_total"));
+      FSql statisticsSql = _resource.findString(FSql.class, "sql.dynamic.sum");
+      statisticsSql.bindString("date", endDate.format("YYYYMMDD"));
+      FRow statisticsRow = connection.find(statisticsSql);
+      stream.writeDouble(statisticsRow.getDouble("investment_count"));
+      stream.writeDouble(statisticsRow.getDouble("investment_total"));
+      stream.writeDouble(statisticsRow.getDouble("redemption_count"));
+      stream.writeDouble(statisticsRow.getDouble("redemption_total"));
+      stream.writeDouble(statisticsRow.getDouble("netinvestment_count"));
+      stream.writeDouble(statisticsRow.getDouble("netinvestment_total"));
+      stream.writeDouble(statisticsRow.getDouble("interest_count"));
+      stream.writeDouble(statisticsRow.getDouble("interest_total"));
+      stream.writeDouble(statisticsRow.getDouble("performance_count"));
+      stream.writeDouble(statisticsRow.getDouble("performance_total"));
+      stream.writeInt32(statisticsRow.getInt("customer_count"));
+      stream.writeInt32(statisticsRow.getInt("customer_total"));
       //............................................................
-      // 输出排行数据
-      FSql rankSql = _resource.findString(FSql.class, "sql.dynamic.rank");
-      rankSql.bindString("date", endDate.format("YYYYMMDD"));
-      FDataset rankDataset = connection.fetchDataset(rankSql);
-      int rankCount = rankDataset.count();
-      stream.writeInt32(rankCount);
-      for(FRow row : rankDataset){
-         stream.writeString(RString.left(row.get("customer_label"), 1));
-         stream.writeString(RString.left(row.get("customer_card"), 4));
-         stream.writeString(RString.right(row.get("customer_phone"), 4));
+      // 输出日排行数据
+      FSql rankDaySql = _resource.findString(FSql.class, "sql.dynamic.rank.day");
+      rankDaySql.bindString("date", endDate.format("YYYYMMDD"));
+      FDataset rankDayDataset = connection.fetchDataset(rankDaySql);
+      stream.writeInt32(rankDayDataset.count());
+      for(FRow row : rankDayDataset){
+         stream.writeString(row.get("department_label"));
+         stream.writeString(row.get("marketer_label"));
          stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(row.getDouble("interest_total"));
+         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeInt32(row.getInt("customer_count"));
+         stream.writeInt32(row.getInt("customer_total"));
+      }
+      //............................................................
+      // 输出周排行数据
+      FSql rankWeekSql = _resource.findString(FSql.class, "sql.dynamic.rank.week");
+      rankWeekSql.bindString("date", endDate.format("YYYYMMWK"));
+      FDataset rankWeekDataset = connection.fetchDataset(rankWeekSql);
+      stream.writeInt32(rankWeekDataset.count());
+      for(FRow row : rankWeekDataset){
+         stream.writeString(row.get("department_label"));
+         stream.writeString(row.get("marketer_label"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(row.getDouble("interest_total"));
+         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeInt32(row.getInt("customer_count"));
+         stream.writeInt32(row.getInt("customer_total"));
+      }
+      //............................................................
+      // 输出月排行数据
+      FSql rankMonthSql = _resource.findString(FSql.class, "sql.dynamic.rank.month");
+      rankMonthSql.bindString("date", endDate.format("YYYYMM01"));
+      FDataset rankMonthDataset = connection.fetchDataset(rankMonthSql);
+      stream.writeInt32(rankMonthDataset.count());
+      for(FRow row : rankMonthDataset){
+         stream.writeString(row.get("department_label"));
+         stream.writeString(row.get("marketer_label"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(row.getDouble("interest_total"));
+         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeInt32(row.getInt("customer_count"));
+         stream.writeInt32(row.getInt("customer_total"));
       }
       //............................................................
       // 输出即时数据
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
-      FSql whereSql = new FSql();
-      whereSql.append("CUSTOMER_ACTION_CD=1 AND CUSTOMER_ACTION_DATE >= STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
-      whereSql.bindString("begin_date", beginDate.format());
-      whereSql.bindString("end_date", endDate.format());
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE");
+      String whereSql = "CUSTOMER_ACTION_DATE >= STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(RString.format(whereSql, beginDate.format(), endDate.format()), "CUSTOMER_ACTION_DATE");
       int count = dynamicDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
-         double investmentAmount = dynamicUnit.customerActionAmount();
-         // 计算盈利
-         String tenderModelLabel = null;
-         double investmentGain = 0;
-         FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(dynamicUnit.tenderModel());
-         if(tenderModel != null){
-            tenderModelLabel = tenderModel.label();
-            investmentGain = tenderModel.calculateGain(investmentAmount, currentDate);
-         }
-         // 输出内容
          stream.writeString(dynamicUnit.customerActionDate().format());
+         stream.writeString(dynamicUnit.departmentLabel());
+         stream.writeString(dynamicUnit.marketerLabel());
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
-         stream.writeString(tenderModelLabel);
-         stream.writeDouble(investmentAmount);
-         stream.writeDouble(investmentGain);
+         stream.writeUint8((byte)dynamicUnit.customerActionCd());
+         stream.writeDouble(dynamicUnit.customerActionAmount());
+         stream.writeDouble(dynamicUnit.customerActionInterest());
       }
       //............................................................
       // 保存数据到缓冲中
@@ -147,7 +170,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send statistics marketer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 
@@ -193,27 +216,36 @@ public class FStatisticsCustomerServlet
       FByteStream stream = createStream(context);
       // 输出总计数据
       FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
-      FSql phaseWhereSql = new FSql();
-      phaseWhereSql.append("RECORD_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
-      phaseWhereSql.bindString("begin_date", beginDate.format());
-      phaseWhereSql.bindString("end_date", endDate.format());
-      FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(phaseWhereSql, "RECORD_DATE ASC");
+      String phaseWhereSql = "RECORD_DATE > STR_TO_DATE('{1}','%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE('{2}','%Y%m%d%H%i%s')";
+      FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(RString.format(phaseWhereSql, beginDate.format(), endDate.format()), "RECORD_DATE ASC");
       // 计算阶段统计
       double investmentTotal = 0;
-      int customerTotal = 0;
+      double redemptionTotal = 0;
+      double netinvestmentTotal = 0;
+      double interestTotal = 0;
+      double performanceTotal = 0;
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          investmentTotal += phaseUnit.investment();
-         customerTotal += phaseUnit.customerCount();
+         redemptionTotal += phaseUnit.redemption();
+         netinvestmentTotal += phaseUnit.netinvestment();
+         interestTotal += phaseUnit.interest();
+         performanceTotal += phaseUnit.performance();
       }
       stream.writeDouble(investmentTotal);
-      stream.writeUint32(customerTotal);
+      stream.writeDouble(redemptionTotal);
+      stream.writeDouble(netinvestmentTotal);
+      stream.writeDouble(interestTotal);
+      stream.writeDouble(performanceTotal);
       // 输出数据集合
       int count = phaseDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          stream.writeString(phaseUnit.recordDate().format());
          stream.writeDouble(phaseUnit.investment());
-         stream.writeUint32(phaseUnit.customerCount());
+         stream.writeDouble(phaseUnit.redemption());
+         stream.writeDouble(phaseUnit.netinvestment());
+         stream.writeDouble(phaseUnit.interest());
+         stream.writeDouble(phaseUnit.performance());
       }
       //............................................................
       // 保存数据到缓冲中
@@ -221,7 +253,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send statistics marketer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 }

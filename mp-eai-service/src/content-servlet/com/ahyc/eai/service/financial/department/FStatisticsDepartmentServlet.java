@@ -47,8 +47,6 @@ public class FStatisticsDepartmentServlet
       // 检查参数
       String beginSource = context.parameter("begin");
       String endSource = context.parameter("end");
-      System.out.println(beginSource);
-      System.out.println(endSource);
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
