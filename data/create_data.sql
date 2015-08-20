@@ -117,6 +117,57 @@ ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_PVN
       FOREIGN KEY (`PROVINCE_ID`) REFERENCES DT_COM_PROVINCE(`OUID`); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Info.Device]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_INF_DEVICE`;
+CREATE TABLE `DT_INF_DEVICE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(400), 
+   `DESCRIPTION`                   VARCHAR(2000), 
+   `CONTENT`                       TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_INF_DEVICE 
+   ADD CONSTRAINT DT_INF_DEV_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Info.Device.Browser]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_INF_DEVICE_BROWSER`;
+CREATE TABLE `DT_INF_DEVICE_BROWSER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `DEVICE_ID`                     BIGINT, 
+   `AGENT_CODE`                    VARCHAR(1024), 
+   `IDENTITY_CODE`                 VARCHAR(2000), 
+   `LABEL`                         VARCHAR(80), 
+   `CONTENT`                       TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_INF_DEVICE_BROWSER 
+   ADD CONSTRAINT DT_INF_DEV_BRW_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_INF_DEVICE_BROWSER ADD CONSTRAINT DT_INF_DEV_BRW_FK_DEV 
+      FOREIGN KEY (`DEVICE_ID`) REFERENCES DT_INF_DEVICE(`OUID`); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.System.Access.Authority]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_SYS_ACCESS_AUTHORITY`;
@@ -150,11 +201,18 @@ CREATE TABLE `DT_PSN_USER`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
+   `STATUS_CD`                     INTEGER, 
    `PASSPORT`                      VARCHAR(40), 
    `PASSWORD`                      VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
+   `NAME`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(80), 
    `ICON_URL`                      VARCHAR(400), 
+   `CONTACT_PHONE`                 VARCHAR(20), 
+   `CONTACT_PHONE_VERIFY_CD`       INTEGER, 
+   `CONTACT_MAIL`                  VARCHAR(40), 
+   `CONTACT_MAIL_VERIFY_CD`        INTEGER, 
+   `ROLE_ID`                       BIGINT, 
    `DESCRIPTION`                   VARCHAR(2000), 
    `CONTENT`                       TEXT, 
    `NOTE`                          VARCHAR(2000), 
@@ -166,6 +224,33 @@ CREATE TABLE `DT_PSN_USER`
 
 ALTER TABLE DT_PSN_USER 
    ADD CONSTRAINT DT_PSN_USR_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Person.User.Entry]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_PSN_USER_ENTRY`;
+CREATE TABLE `DT_PSN_USER_ENTRY` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `STATUS_CD`                     INTEGER, 
+   `ENTRY_CD`                      INTEGER, 
+   `PASSPORT`                      VARCHAR(40), 
+   `PASSWORD`                      VARCHAR(40), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_PSN_USER_ENTRY 
+   ADD CONSTRAINT DT_PSN_USR_ENT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER_ENTRY ADD CONSTRAINT DT_PSN_USR_ENT_FK_USR 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.Access.Authority]

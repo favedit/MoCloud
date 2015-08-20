@@ -14,10 +14,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>人员用户信息逻辑单元。</T>
+// <T>人员入口信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataPersonUserUnit
+public class FDataPersonUserEntryUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -38,11 +38,23 @@ public class FDataPersonUserUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段用户编号的定义。
+   private long __userId;
+
+   // 字段用户编号的定义。
+   protected long _userId;
+
    // 存储字段状态的定义。
    private int __statusCd;
 
    // 字段状态的定义。
    protected int _statusCd;
+
+   // 存储字段入口类型的定义。
+   private int __entryCd;
+
+   // 字段入口类型的定义。
+   protected int _entryCd;
 
    // 存储字段帐号的定义。
    private String __passport;
@@ -55,72 +67,6 @@ public class FDataPersonUserUnit
 
    // 字段密码的定义。
    protected String _password;
-
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段名称的定义。
-   private String __name;
-
-   // 字段名称的定义。
-   protected String _name;
-
-   // 存储字段真实名称的定义。
-   private String __label;
-
-   // 字段真实名称的定义。
-   protected String _label;
-
-   // 存储字段图标地址的定义。
-   private String __iconUrl;
-
-   // 字段图标地址的定义。
-   protected String _iconUrl;
-
-   // 存储字段联系手机的定义。
-   private String __contactPhone;
-
-   // 字段联系手机的定义。
-   protected String _contactPhone;
-
-   // 存储字段联系手机验证的定义。
-   private int __contactPhoneVerifyCd;
-
-   // 字段联系手机验证的定义。
-   protected int _contactPhoneVerifyCd;
-
-   // 存储字段联系邮件的定义。
-   private String __contactMail;
-
-   // 字段联系邮件的定义。
-   protected String _contactMail;
-
-   // 存储字段联系邮件验证的定义。
-   private int __contactMailVerifyCd;
-
-   // 字段联系邮件验证的定义。
-   protected int _contactMailVerifyCd;
-
-   // 存储字段角色编号的定义。
-   private long __roleId;
-
-   // 字段角色编号的定义。
-   protected long _roleId;
-
-   // 存储字段描述的定义。
-   private String __description;
-
-   // 字段描述的定义。
-   protected String _description;
-
-   // 存储字段内容的定义。
-   private String __content;
-
-   // 字段内容的定义。
-   protected String _content;
 
    // 存储字段备注的定义。
    private String __note;
@@ -153,9 +99,9 @@ public class FDataPersonUserUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造人员用户信息逻辑单元。</T>
+   // <T>构造人员入口信息逻辑单元。</T>
    //============================================================
-   public FDataPersonUserUnit(){
+   public FDataPersonUserEntryUnit(){
    }
 
    //============================================================
@@ -240,6 +186,44 @@ public class FDataPersonUserUnit
    }
 
    //============================================================
+   // <T>判断用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long userId(){
+      return _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserId(long value){
+      _userId = value;
+   }
+
+   //============================================================
    // <T>判断状态的数据是否改变。</T>
    //
    // @return 数据内容
@@ -264,6 +248,33 @@ public class FDataPersonUserUnit
    //============================================================
    public void setStatusCd(int value){
       _statusCd = value;
+   }
+
+   //============================================================
+   // <T>判断入口类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isEntryCdChanged(){
+      return __entryCd != _entryCd;
+   }
+
+   //============================================================
+   // <T>获得入口类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int entryCd(){
+      return _entryCd;
+   }
+
+   //============================================================
+   // <T>设置入口类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setEntryCd(int value){
+      _entryCd = value;
    }
 
    //============================================================
@@ -318,303 +329,6 @@ public class FDataPersonUserUnit
    //============================================================
    public void setPassword(String value){
       _password = value;
-   }
-
-   //============================================================
-   // <T>判断代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
-   }
-
-   //============================================================
-   // <T>获得代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isNameChanged(){
-      return !RString.equals(__name, _name);
-   }
-
-   //============================================================
-   // <T>获得名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String name(){
-      return _name;
-   }
-
-   //============================================================
-   // <T>设置名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setName(String value){
-      _name = value;
-   }
-
-   //============================================================
-   // <T>判断真实名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得真实名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置真实名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
-   }
-
-   //============================================================
-   // <T>判断图标地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIconUrlChanged(){
-      return !RString.equals(__iconUrl, _iconUrl);
-   }
-
-   //============================================================
-   // <T>获得图标地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String iconUrl(){
-      return _iconUrl;
-   }
-
-   //============================================================
-   // <T>设置图标地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIconUrl(String value){
-      _iconUrl = value;
-   }
-
-   //============================================================
-   // <T>判断联系手机的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContactPhoneChanged(){
-      return !RString.equals(__contactPhone, _contactPhone);
-   }
-
-   //============================================================
-   // <T>获得联系手机的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String contactPhone(){
-      return _contactPhone;
-   }
-
-   //============================================================
-   // <T>设置联系手机的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContactPhone(String value){
-      _contactPhone = value;
-   }
-
-   //============================================================
-   // <T>判断联系手机验证的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContactPhoneVerifyCdChanged(){
-      return __contactPhoneVerifyCd != _contactPhoneVerifyCd;
-   }
-
-   //============================================================
-   // <T>获得联系手机验证的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int contactPhoneVerifyCd(){
-      return _contactPhoneVerifyCd;
-   }
-
-   //============================================================
-   // <T>设置联系手机验证的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContactPhoneVerifyCd(int value){
-      _contactPhoneVerifyCd = value;
-   }
-
-   //============================================================
-   // <T>判断联系邮件的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContactMailChanged(){
-      return !RString.equals(__contactMail, _contactMail);
-   }
-
-   //============================================================
-   // <T>获得联系邮件的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String contactMail(){
-      return _contactMail;
-   }
-
-   //============================================================
-   // <T>设置联系邮件的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContactMail(String value){
-      _contactMail = value;
-   }
-
-   //============================================================
-   // <T>判断联系邮件验证的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContactMailVerifyCdChanged(){
-      return __contactMailVerifyCd != _contactMailVerifyCd;
-   }
-
-   //============================================================
-   // <T>获得联系邮件验证的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int contactMailVerifyCd(){
-      return _contactMailVerifyCd;
-   }
-
-   //============================================================
-   // <T>设置联系邮件验证的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContactMailVerifyCd(int value){
-      _contactMailVerifyCd = value;
-   }
-
-   //============================================================
-   // <T>判断角色编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRoleIdChanged(){
-      return __roleId != _roleId;
-   }
-
-   //============================================================
-   // <T>获得角色编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long roleId(){
-      return _roleId;
-   }
-
-   //============================================================
-   // <T>设置角色编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRoleId(long value){
-      _roleId = value;
-   }
-
-   //============================================================
-   // <T>判断描述的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDescriptionChanged(){
-      return !RString.equals(__description, _description);
-   }
-
-   //============================================================
-   // <T>获得描述的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String description(){
-      return _description;
-   }
-
-   //============================================================
-   // <T>设置描述的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDescription(String value){
-      _description = value;
-   }
-
-   //============================================================
-   // <T>判断内容的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isContentChanged(){
-      return !RString.equals(__content, _content);
-   }
-
-   //============================================================
-   // <T>获得内容的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String content(){
-      return _content;
-   }
-
-   //============================================================
-   // <T>设置内容的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setContent(String value){
-      _content = value;
    }
 
    //============================================================
@@ -767,34 +481,16 @@ public class FDataPersonUserUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "user_id":
+            return Long.toString(_userId);
          case "status_cd":
             return RInteger.toString(_statusCd);
+         case "entry_cd":
+            return RInteger.toString(_entryCd);
          case "passport":
             return _passport;
          case "password":
             return _password;
-         case "code":
-            return _code;
-         case "name":
-            return _name;
-         case "label":
-            return _label;
-         case "icon_url":
-            return _iconUrl;
-         case "contact_phone":
-            return _contactPhone;
-         case "contact_phone_verify_cd":
-            return RInteger.toString(_contactPhoneVerifyCd);
-         case "contact_mail":
-            return _contactMail;
-         case "contact_mail_verify_cd":
-            return RInteger.toString(_contactMailVerifyCd);
-         case "role_id":
-            return Long.toString(_roleId);
-         case "description":
-            return _description;
-         case "content":
-            return _content;
          case "note":
             return _note;
          case "create_user_id":
@@ -828,47 +524,20 @@ public class FDataPersonUserUnit
          case "guid":
             _guid = value;
             break;
+         case "user_id":
+            _userId = RLong.parse(value);
+            break;
          case "status_cd":
             _statusCd = RInteger.parse(value);
+            break;
+         case "entry_cd":
+            _entryCd = RInteger.parse(value);
             break;
          case "passport":
             _passport = value;
             break;
          case "password":
             _password = value;
-            break;
-         case "code":
-            _code = value;
-            break;
-         case "name":
-            _name = value;
-            break;
-         case "label":
-            _label = value;
-            break;
-         case "icon_url":
-            _iconUrl = value;
-            break;
-         case "contact_phone":
-            _contactPhone = value;
-            break;
-         case "contact_phone_verify_cd":
-            _contactPhoneVerifyCd = RInteger.parse(value);
-            break;
-         case "contact_mail":
-            _contactMail = value;
-            break;
-         case "contact_mail_verify_cd":
-            _contactMailVerifyCd = RInteger.parse(value);
-            break;
-         case "role_id":
-            _roleId = RLong.parse(value);
-            break;
-         case "description":
-            _description = value;
-            break;
-         case "content":
-            _content = value;
             break;
          case "note":
             _note = value;
@@ -912,9 +581,17 @@ public class FDataPersonUserUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "user_id":
+               __userId = RLong.parse(value);
+               _userId = __userId;
+               break;
             case "status_cd":
                __statusCd = RInteger.parse(value);
                _statusCd = __statusCd;
+               break;
+            case "entry_cd":
+               __entryCd = RInteger.parse(value);
+               _entryCd = __entryCd;
                break;
             case "passport":
                __passport = value;
@@ -923,50 +600,6 @@ public class FDataPersonUserUnit
             case "password":
                __password = value;
                _password = __password;
-               break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "name":
-               __name = value;
-               _name = __name;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
-               break;
-            case "icon_url":
-               __iconUrl = value;
-               _iconUrl = __iconUrl;
-               break;
-            case "contact_phone":
-               __contactPhone = value;
-               _contactPhone = __contactPhone;
-               break;
-            case "contact_phone_verify_cd":
-               __contactPhoneVerifyCd = RInteger.parse(value);
-               _contactPhoneVerifyCd = __contactPhoneVerifyCd;
-               break;
-            case "contact_mail":
-               __contactMail = value;
-               _contactMail = __contactMail;
-               break;
-            case "contact_mail_verify_cd":
-               __contactMailVerifyCd = RInteger.parse(value);
-               _contactMailVerifyCd = __contactMailVerifyCd;
-               break;
-            case "role_id":
-               __roleId = RLong.parse(value);
-               _roleId = __roleId;
-               break;
-            case "description":
-               __description = value;
-               _description = __description;
-               break;
-            case "content":
-               __content = value;
-               _content = __content;
                break;
             case "note":
                __note = value;
@@ -1003,20 +636,11 @@ public class FDataPersonUserUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("userId", _userId);
       row.set("statusCd", _statusCd);
+      row.set("entryCd", _entryCd);
       row.set("passport", _passport);
       row.set("password", _password);
-      row.set("code", _code);
-      row.set("name", _name);
-      row.set("label", _label);
-      row.set("iconUrl", _iconUrl);
-      row.set("contactPhone", _contactPhone);
-      row.set("contactPhoneVerifyCd", _contactPhoneVerifyCd);
-      row.set("contactMail", _contactMail);
-      row.set("contactMailVerifyCd", _contactMailVerifyCd);
-      row.set("roleId", _roleId);
-      row.set("description", _description);
-      row.set("content", _content);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -1035,20 +659,11 @@ public class FDataPersonUserUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("userId", RLong.toString(_userId));
       map.put("statusCd", RInteger.toString(_statusCd));
+      map.put("entryCd", RInteger.toString(_entryCd));
       map.put("passport", _passport);
       map.put("password", _password);
-      map.put("code", _code);
-      map.put("name", _name);
-      map.put("label", _label);
-      map.put("iconUrl", _iconUrl);
-      map.put("contactPhone", _contactPhone);
-      map.put("contactPhoneVerifyCd", RInteger.toString(_contactPhoneVerifyCd));
-      map.put("contactMail", _contactMail);
-      map.put("contactMailVerifyCd", RInteger.toString(_contactMailVerifyCd));
-      map.put("roleId", RLong.toString(_roleId));
-      map.put("description", _description);
-      map.put("content", _content);
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1067,20 +682,11 @@ public class FDataPersonUserUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
+      _userId = input.readInt64();
       _statusCd = input.readInt32();
+      _entryCd = input.readInt32();
       _passport = input.readString();
       _password = input.readString();
-      _code = input.readString();
-      _name = input.readString();
-      _label = input.readString();
-      _iconUrl = input.readString();
-      _contactPhone = input.readString();
-      _contactPhoneVerifyCd = input.readInt32();
-      _contactMail = input.readString();
-      _contactMailVerifyCd = input.readInt32();
-      _roleId = input.readInt64();
-      _description = input.readString();
-      _content = input.readString();
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -1099,20 +705,11 @@ public class FDataPersonUserUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
+      output.writeInt64(_userId);
       output.writeInt32(_statusCd);
+      output.writeInt32(_entryCd);
       output.writeString(_passport);
       output.writeString(_password);
-      output.writeString(_code);
-      output.writeString(_name);
-      output.writeString(_label);
-      output.writeString(_iconUrl);
-      output.writeString(_contactPhone);
-      output.writeInt32(_contactPhoneVerifyCd);
-      output.writeString(_contactMail);
-      output.writeInt32(_contactMailVerifyCd);
-      output.writeInt64(_roleId);
-      output.writeString(_description);
-      output.writeString(_content);
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

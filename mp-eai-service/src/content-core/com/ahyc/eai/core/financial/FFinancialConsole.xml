@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='ezubao.investment.model'>
+   <Model name='detaildh' label='e租财富' rate='13.0' closed='30' wait='10' factor='0.8'/>
+   <Model name='detailzy' label='e租稳盈' rate='8.8' closed='0' wait='0' factor='0.7'/>
+   <Model name='nianxiang' label='e租年享' rate='14.5' closed='30' wait='10' factor='1'/>
+   <Model name='yuexiang' label='e租月享' rate='13.5' closed='30' wait='10' factor='1'/>
+   <Model name='leying' label='e租乐盈' rate='10.5' closed='0' wait='20' factor='0.9'/>
+   <Model name='lexiang' label='e租乐享' rate='9.8' closed='0' wait='10' factor='0.8'/>
+</Resource>
+
+
+</Config>

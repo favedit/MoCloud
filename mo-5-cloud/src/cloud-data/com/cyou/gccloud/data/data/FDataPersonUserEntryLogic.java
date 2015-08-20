@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>人员用户信息逻辑。</T>
+// <T>人员入口信息逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataPersonUserLogic
+public class FDataPersonUserEntryLogic
       extends FLogicTable
 {
-   // 人员用户信息的定义。
+   // 人员入口信息的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 人员用户信息的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.user", "DT_PSN_USER");
+   // 人员入口信息的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.user.entry", "DT_PSN_USER_ENTRY");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -41,47 +41,20 @@ public class FDataPersonUserLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段用户编号的定义。
+   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
+
    // 字段状态的定义。
    public final static SLogicFieldInfo STATUS_CD = new SLogicFieldInfo("STATUS_CD");
+
+   // 字段入口类型的定义。
+   public final static SLogicFieldInfo ENTRY_CD = new SLogicFieldInfo("ENTRY_CD");
 
    // 字段帐号的定义。
    public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
 
    // 字段密码的定义。
    public final static SLogicFieldInfo PASSWORD = new SLogicFieldInfo("PASSWORD");
-
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
-
-   // 字段名称的定义。
-   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
-
-   // 字段真实名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
-
-   // 字段图标地址的定义。
-   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
-
-   // 字段联系手机的定义。
-   public final static SLogicFieldInfo CONTACT_PHONE = new SLogicFieldInfo("CONTACT_PHONE");
-
-   // 字段联系手机验证的定义。
-   public final static SLogicFieldInfo CONTACT_PHONE_VERIFY_CD = new SLogicFieldInfo("CONTACT_PHONE_VERIFY_CD");
-
-   // 字段联系邮件的定义。
-   public final static SLogicFieldInfo CONTACT_MAIL = new SLogicFieldInfo("CONTACT_MAIL");
-
-   // 字段联系邮件验证的定义。
-   public final static SLogicFieldInfo CONTACT_MAIL_VERIFY_CD = new SLogicFieldInfo("CONTACT_MAIL_VERIFY_CD");
-
-   // 字段角色编号的定义。
-   public final static SLogicFieldInfo ROLE_ID = new SLogicFieldInfo("ROLE_ID");
-
-   // 字段描述的定义。
-   public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
-
-   // 字段内容的定义。
-   public final static SLogicFieldInfo CONTENT = new SLogicFieldInfo("CONTENT");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -99,25 +72,25 @@ public class FDataPersonUserLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ROLE_ID`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`STATUS_CD`,`ENTRY_CD`,`PASSPORT`,`PASSWORD`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造人员用户信息逻辑单元。</T>
+   // <T>构造人员入口信息逻辑单元。</T>
    //============================================================
-   public FDataPersonUserLogic(){
+   public FDataPersonUserEntryLogic(){
       _name = TABLE.name();
-      _classUnit = FDataPersonUserUnit.class;
+      _classUnit = FDataPersonUserEntryUnit.class;
    }
 
    //============================================================
-   // <T>构造人员用户信息逻辑单元。</T>
+   // <T>构造人员入口信息逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataPersonUserLogic(ILogicContext context){
+   public FDataPersonUserEntryLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataPersonUserUnit.class;
+      _classUnit = FDataPersonUserEntryUnit.class;
    }
 
    //============================================================
@@ -251,7 +224,7 @@ public class FDataPersonUserLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataPersonUserUnit());
+            unit = (T)(new FDataPersonUserEntryUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -267,8 +240,8 @@ public class FDataPersonUserLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataPersonUserUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataPersonUserUnit.class, guid);
+   public FDataPersonUserEntryUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataPersonUserEntryUnit.class, guid);
    }
 
    //============================================================
@@ -306,8 +279,8 @@ public class FDataPersonUserLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataPersonUserUnit search(CharSequence whereSql){
-      return search(null, FDataPersonUserUnit.class, whereSql);
+   public FDataPersonUserEntryUnit search(CharSequence whereSql){
+      return search(null, FDataPersonUserEntryUnit.class, whereSql);
    }
 
    //============================================================
@@ -344,7 +317,7 @@ public class FDataPersonUserLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -355,8 +328,8 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(int pageSize,
-                                                   int page){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(int pageSize,
+                                                        int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -368,9 +341,9 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(CharSequence whereSql,
-                                                   int pageSize,
-                                                   int page){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(CharSequence whereSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -383,8 +356,8 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(CharSequence whereSql,
-                                                   CharSequence orderSql){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(CharSequence whereSql,
+                                                        CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -397,10 +370,10 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(CharSequence whereSql,
-                                                   CharSequence orderSql,
-                                                   int pageSize,
-                                                   int page){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(CharSequence whereSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -414,11 +387,11 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(CharSequence fields,
-                                                   CharSequence whereSql,
-                                                   CharSequence orderSql,
-                                                   int pageSize,
-                                                   int page){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(CharSequence fields,
+                                                        CharSequence whereSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -432,12 +405,12 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetch(CharSequence fields,
-                                                   CharSequence whereSql,
-                                                   CharSequence groupSql,
-                                                   CharSequence orderSql,
-                                                   int pageSize,
-                                                   int page){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetch(CharSequence fields,
+                                                        CharSequence whereSql,
+                                                        CharSequence groupSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -578,10 +551,10 @@ public class FDataPersonUserLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetchSql(CharSequence code,
-                                                      CharSequence sql,
-                                                      int pageSize,
-                                                      int page){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetchSql(CharSequence code,
+                                                           CharSequence sql,
+                                                           int pageSize,
+                                                           int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -606,7 +579,7 @@ public class FDataPersonUserLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonUserUnit>(FDataPersonUserUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonUserEntryUnit>(FDataPersonUserEntryUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -619,7 +592,7 @@ public class FDataPersonUserLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataPersonUserUnit> fetchAll(){
+   public FLogicDataset<FDataPersonUserEntryUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -632,8 +605,8 @@ public class FDataPersonUserLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataPersonUserUnit doPrepare(){
-      FDataPersonUserUnit unit = new FDataPersonUserUnit();
+   public FDataPersonUserEntryUnit doPrepare(){
+      FDataPersonUserEntryUnit unit = new FDataPersonUserEntryUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -660,7 +633,7 @@ public class FDataPersonUserLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataPersonUserUnit unit = (FDataPersonUserUnit)logicUnit;
+      FDataPersonUserEntryUnit unit = (FDataPersonUserEntryUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -674,7 +647,7 @@ public class FDataPersonUserLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataPersonUserUnit unit = (FDataPersonUserUnit)logicUnit;
+      FDataPersonUserEntryUnit unit = (FDataPersonUserEntryUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -691,20 +664,11 @@ public class FDataPersonUserLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`USER_ID`");
       cmd.append(",`STATUS_CD`");
+      cmd.append(",`ENTRY_CD`");
       cmd.append(",`PASSPORT`");
       cmd.append(",`PASSWORD`");
-      cmd.append(",`CODE`");
-      cmd.append(",`NAME`");
-      cmd.append(",`LABEL`");
-      cmd.append(",`ICON_URL`");
-      cmd.append(",`CONTACT_PHONE`");
-      cmd.append(",`CONTACT_PHONE_VERIFY_CD`");
-      cmd.append(",`CONTACT_MAIL`");
-      cmd.append(",`CONTACT_MAIL_VERIFY_CD`");
-      cmd.append(",`ROLE_ID`");
-      cmd.append(",`DESCRIPTION`");
-      cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -721,7 +685,16 @@ public class FDataPersonUserLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
+      cmd.append(',');
       cmd.append(unit.statusCd());
+      cmd.append(',');
+      cmd.append(unit.entryCd());
       cmd.append(',');
       String passport = unit.passport();
       if(RString.isEmpty(passport)){
@@ -738,89 +711,6 @@ public class FDataPersonUserLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(password));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String name = unit.name();
-      if(RString.isEmpty(name)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(name));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String iconUrl = unit.iconUrl();
-      if(RString.isEmpty(iconUrl)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(iconUrl));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String contactPhone = unit.contactPhone();
-      if(RString.isEmpty(contactPhone)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(contactPhone));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.contactPhoneVerifyCd());
-      cmd.append(',');
-      String contactMail = unit.contactMail();
-      if(RString.isEmpty(contactMail)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(contactMail));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.contactMailVerifyCd());
-      cmd.append(',');
-      long roleId = unit.roleId();
-      if(roleId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(roleId);
-      }
-      cmd.append(',');
-      String description = unit.description();
-      if(RString.isEmpty(description)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(description));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String content = unit.content();
-      if(RString.isEmpty(content)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(content));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -867,7 +757,7 @@ public class FDataPersonUserLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataPersonUserUnit unit = (FDataPersonUserUnit)logicUnit;
+      FDataPersonUserEntryUnit unit = (FDataPersonUserEntryUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -886,7 +776,7 @@ public class FDataPersonUserLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataPersonUserUnit unit = (FDataPersonUserUnit)logicUnit;
+      FDataPersonUserEntryUnit unit = (FDataPersonUserEntryUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -906,9 +796,22 @@ public class FDataPersonUserLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isUserIdChanged()){
+         cmd.append(",`USER_ID`=");
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
+      }
       if(unit.isStatusCdChanged()){
          cmd.append(",`STATUS_CD`=");
          cmd.append(unit.statusCd());
+      }
+      if(unit.isEntryCdChanged()){
+         cmd.append(",`ENTRY_CD`=");
+         cmd.append(unit.entryCd());
       }
       if(unit.isPassportChanged()){
          cmd.append(",`PASSPORT`=");
@@ -929,111 +832,6 @@ public class FDataPersonUserLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(password));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isNameChanged()){
-         cmd.append(",`NAME`=");
-         String name = unit.name();
-         if(RString.isEmpty(name)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(name));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isIconUrlChanged()){
-         cmd.append(",`ICON_URL`=");
-         String iconUrl = unit.iconUrl();
-         if(RString.isEmpty(iconUrl)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(iconUrl));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isContactPhoneChanged()){
-         cmd.append(",`CONTACT_PHONE`=");
-         String contactPhone = unit.contactPhone();
-         if(RString.isEmpty(contactPhone)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(contactPhone));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isContactPhoneVerifyCdChanged()){
-         cmd.append(",`CONTACT_PHONE_VERIFY_CD`=");
-         cmd.append(unit.contactPhoneVerifyCd());
-      }
-      if(unit.isContactMailChanged()){
-         cmd.append(",`CONTACT_MAIL`=");
-         String contactMail = unit.contactMail();
-         if(RString.isEmpty(contactMail)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(contactMail));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isContactMailVerifyCdChanged()){
-         cmd.append(",`CONTACT_MAIL_VERIFY_CD`=");
-         cmd.append(unit.contactMailVerifyCd());
-      }
-      if(unit.isRoleIdChanged()){
-         cmd.append(",`ROLE_ID`=");
-         long roleId = unit.roleId();
-         if(roleId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(roleId);
-         }
-      }
-      if(unit.isDescriptionChanged()){
-         cmd.append(",`DESCRIPTION`=");
-         String description = unit.description();
-         if(RString.isEmpty(description)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(description));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isContentChanged()){
-         cmd.append(",`CONTENT`=");
-         String content = unit.content();
-         if(RString.isEmpty(content)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(content));
             cmd.append('\'');
          }
       }
@@ -1068,7 +866,7 @@ public class FDataPersonUserLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataPersonUserUnit unit = (FDataPersonUserUnit)logicUnit;
+      FDataPersonUserEntryUnit unit = (FDataPersonUserEntryUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
