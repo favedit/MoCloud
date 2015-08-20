@@ -2,6 +2,8 @@ package com.ahyc.eai.core.financial;
 
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RFloat;
+import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.xml.FXmlNode;
 
@@ -19,6 +21,9 @@ public class FFinancialTenderModel
 
    // 比率
    private float _rate;
+
+   // 比率标签
+   private String _rateLabel;
 
    // 日比率
    private double _rateDay;
@@ -54,6 +59,15 @@ public class FFinancialTenderModel
    //============================================================
    public float rate(){
       return _rate;
+   }
+
+   //============================================================
+   // <T>获得比率标签。</T>
+   //
+   // @return 比率标签
+   //============================================================
+   public String rateLabel(){
+      return _rateLabel;
    }
 
    //============================================================
@@ -113,7 +127,8 @@ public class FFinancialTenderModel
       _code = xconfig.get("code");
       _label = xconfig.get("label");
       _rate = xconfig.getFloat("rate");
-      _rateDay = _rate / 365;
+      _rateDay = _rate / 100 / 365;
+      _rateLabel = RString.leftPad(RFloat.format(_rate, 1), 4, ' ');
       _horizonCount = xconfig.getInt("horizon_count");
       String horizonUnit = xconfig.get("horizon_unit");
       if(horizonUnit.equals("day")){

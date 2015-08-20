@@ -114,6 +114,24 @@ public class RFloat
    }
 
    //============================================================
+   // <T>格式化数据。</T>
+   //
+   // @param value 内容
+   // @param precision 精度
+   // @return 字符串
+   //============================================================
+   public static String format(float value,
+                               int precision){
+      String test = Float.toString(value);
+      String[] items = RString.splitTwo(test, '.');
+      if(items == null){
+         return test + "." + RString.repeat('0', precision);
+      }else{
+         return items[0] + "." + RString.rightPad(items[1], precision, '0');
+      }
+   }
+
+   //============================================================
    // <T>获得浮点数的字符串。</T>
    //
    // @param value 内容

@@ -8144,7 +8144,6 @@ MO.FEaiChartMktCustomerScene_onProcess = function FEaiChartMktCustomerScene_onPr
       var countryEntity = o._countryEntity;
       if (!countryEntity.introAnimeDone()) {
          countryEntity.process();
-         return;
       }
       if (!o._mapReady) {
          o._guiManager.show();
@@ -8472,11 +8471,11 @@ MO.FEaiChartMktCustomerTable_setup = function FEaiChartMktCustomerTable_setup() 
    grid.setHeadHeight(32);
    grid.setHeadBackColor('#122A46');
    grid.headFont().font = 'Microsoft YaHei';
-   grid.headFont().size = 22;
+   grid.headFont().size = 20;
    grid.headFont().color = '#00B2F2';
    grid.setRowHeight(30);
    grid.rowFont().font = 'Microsoft YaHei';
-   grid.rowFont().size = 22;
+   grid.rowFont().size = 20;
    grid.rowFont().color = '#59FDE9';
    var column = MO.Class.create(MO.FGuiGridColumnDate);
    column.setName('recordDate');
@@ -8500,16 +8499,35 @@ MO.FEaiChartMktCustomerTable_setup = function FEaiChartMktCustomerTable_setup() 
    column.setWidth(160);
    column.setPadding(1, 1, 1, 1);
    grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('modelLabel');
+   column.setLabel('投资产品');
+   column.setDataName('model_label');
+   column.setWidth(140);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
    var column = MO.Class.create(MO.FGuiGridColumnCurrency);
-   column.setName('customerAmount');
+   column.setName('investmentAmount');
    column.setLabel('投资额(元)');
-   column.setDataName('customer_amount');
+   column.setDataName('investment_amount');
    column.setNormalColor('#59FDE9');
    column.setHighColor('#FDEF01');
    column.setLowerColor('#EB6C03');
    column.setNegativeColor('#FF0000');
    column.cellPadding().right = 10;
    column.setWidth(160);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investmentGain');
+   column.setLabel('到期盈利(元)');
+   column.setDataName('investment_gain');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.cellPadding().right = 10;
+   column.setWidth(140);
    column.setPadding(1, 1, 1, 1);
    grid.pushColumn(column);
    o.push(grid);
@@ -8579,7 +8597,9 @@ MO.FEaiChartMktCustomerTable_pushUnit = function FEaiChartMktCustomerTable_pushU
    row.set('record_date', unit.recordDate());
    row.set('customer_city', cityLabel);
    row.set('customer_info', unit.label() + ' - ' + unit.phone());
-   row.set('customer_amount', unit.investment());
+   row.set('model_label', unit.modelLabel());
+   row.set('investment_amount', unit.investment());
+   row.set('investment_gain', unit.gain());
    grid.insertRow(row);
    var entities = o._units;
    entities.unshift(unit);

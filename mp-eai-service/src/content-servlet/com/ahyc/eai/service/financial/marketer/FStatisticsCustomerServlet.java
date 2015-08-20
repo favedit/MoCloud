@@ -140,6 +140,7 @@ public class FStatisticsCustomerServlet
          double investmentGain = 0;
          FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(dynamicUnit.tenderModel());
          if(tenderModel != null){
+            //tenderModelLabel = tenderModel.label() + "(" + tenderModel.rateLabel() + "%)";
             tenderModelLabel = tenderModel.label();
             investmentGain = tenderModel.calculateGain(investmentAmount, currentDate);
          }

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
+
+   <!-- ============================================================ -->
+   <!-- FinancialConsole:金融控制台                                  -->
+   <!--  I:initialize - 初始化                                       -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.ahyc.eai.core.financial.IFinancialConsole'
+         class = 'com.ahyc.eai.core.financial.FFinancialConsole'
+         scope = 'global'>
+      <Initialize name='initialize'/>
+   </Component>
 </Config>
