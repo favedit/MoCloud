@@ -68,7 +68,7 @@ public class FIndexAction
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             // 设置服务主机
             page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-            page.setSceneCode("ChartCustomer");
+            page.setSceneCode("ChartMarketerCustomer");
             return EChartPage.Scene;
          }
       }
@@ -148,7 +148,7 @@ public class FIndexAction
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-         page.setSceneCode("ChartCustomer");
+         page.setSceneCode("ChartMarketerCustomer");
          return EChartPage.Scene;
       }else{
          page.setMessage(message);

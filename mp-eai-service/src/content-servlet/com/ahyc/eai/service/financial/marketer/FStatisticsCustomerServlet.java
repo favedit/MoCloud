@@ -66,6 +66,7 @@ public class FStatisticsCustomerServlet
       // 检查参数
       String beginSource = context.parameter("begin");
       String endSource = context.parameter("end");
+      boolean first = context.parameterAsBoolean("first");
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
@@ -82,9 +83,11 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 从缓冲中查找数据
       String cacheCode = "dynamic|" + beginSource + "-" + endSource;
-      FByteStream cacheStream = findCacheStream(cacheCode);
-      if(cacheStream != null){
-         return sendStream(context, request, response, cacheStream);
+      if(!first){
+         FByteStream cacheStream = findCacheStream(cacheCode);
+         if(cacheStream != null){
+            return sendStream(context, request, response, cacheStream);
+         }
       }
       //............................................................
       TDateTime currentDate = RDateTime.currentDateTime();
@@ -113,16 +116,24 @@ public class FStatisticsCustomerServlet
          stream.writeDouble(row.getDouble("investment_total"));
       }
       //............................................................
-      // 输出即时数据
+      // 输出即时数据[倒序获得，正序写入]
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = null;
       FSql whereSql = new FSql();
       whereSql.append("CUSTOMER_ACTION_CD=1 AND CUSTOMER_ACTION_DATE >= STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
-      whereSql.bindString("begin_date", beginDate.format());
-      whereSql.bindString("end_date", endDate.format());
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE");
+      if(first){
+         whereSql.bindString("begin_date", beginDate.format("YYYYMMDD000000"));
+         whereSql.bindString("end_date", endDate.format());
+         dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE DESC", 30, 0);
+      }else{
+         whereSql.bindString("begin_date", beginDate.format());
+         whereSql.bindString("end_date", endDate.format());
+         dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE DESC");
+      }
       int count = dynamicDataset.count();
       stream.writeInt32(count);
-      for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
+      for(int n = count - 1; n >= 0; n--){
+         FStatisticsFinancialDynamicUnit dynamicUnit = dynamicDataset.get(n);
          double investmentAmount = dynamicUnit.customerActionAmount();
          // 计算盈利
          String tenderModelLabel = null;
@@ -143,7 +154,9 @@ public class FStatisticsCustomerServlet
       }
       //............................................................
       // 保存数据到缓冲中
-      updateCacheStream(cacheCode, stream);
+      if(!first){
+         updateCacheStream(cacheCode, stream);
+      }
       //............................................................
       // 发送数据
       int dataLength = stream.length();
