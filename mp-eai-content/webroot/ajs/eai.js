@@ -8257,8 +8257,8 @@ MO.FEaiChartMktCustomerScene_fixMatrix = function FEaiChartMktCustomerScene_fixM
       matrix.tz = 0;
       matrix.setScale(0.14, 0.16, 0.14);
    } else {
-      matrix.tx = -34.8;
-      matrix.ty = -11.0;
+      matrix.tx = -34.9;
+      matrix.ty = -10.9;
       matrix.tz = 0;
       matrix.setScale(0.28, 0.31, 0.28);
    }
@@ -8285,7 +8285,7 @@ MO.FEaiChartMktCustomerScene_processResize = function FEaiChartMktCustomerScene_
    } else {
       control.setDockCd(MO.EUiDock.RightBottom);
       control.setRight(780);
-      control.setBottom(260);
+      control.setBottom(280);
    }
    var timeline = o._timeline;
    if (isVertical) {
@@ -8318,7 +8318,7 @@ MO.FEaiChartMktCustomerScene_processResize = function FEaiChartMktCustomerScene_
       liveTable.setTop(10);
       liveTable.setRight(0);
       liveTable.setBottom(10);
-      liveTable.setWidth(750);
+      liveTable.setWidth(760);
    }
 }
 MO.FEaiChartMktCustomerTable = function FEaiChartMktCustomerTable(o) {
@@ -8471,18 +8471,18 @@ MO.FEaiChartMktCustomerTable_setup = function FEaiChartMktCustomerTable_setup() 
    grid.setHeadHeight(32);
    grid.setHeadBackColor('#122A46');
    grid.headFont().font = 'Microsoft YaHei';
-   grid.headFont().size = 20;
+   grid.headFont().size = 22;
    grid.headFont().color = '#00B2F2';
    grid.setRowHeight(30);
    grid.rowFont().font = 'Microsoft YaHei';
-   grid.rowFont().size = 20;
+   grid.rowFont().size = 21;
    grid.rowFont().color = '#59FDE9';
    var column = MO.Class.create(MO.FGuiGridColumnDate);
    column.setName('recordDate');
    column.setLabel('时间');
    column.setDataName('record_date');
    column.setDateFormat('HH24:MI:SS');
-   column.setWidth(110);
+   column.setWidth(120);
    column.setPadding(1, 1, 1, 1);
    grid.pushColumn(column);
    var column = MO.Class.create(MO.FGuiGridColumnText);
@@ -8503,7 +8503,7 @@ MO.FEaiChartMktCustomerTable_setup = function FEaiChartMktCustomerTable_setup() 
    column.setName('modelLabel');
    column.setLabel('投资产品');
    column.setDataName('model_label');
-   column.setWidth(140);
+   column.setWidth(120);
    column.setPadding(1, 1, 1, 1);
    grid.pushColumn(column);
    var column = MO.Class.create(MO.FGuiGridColumnCurrency);

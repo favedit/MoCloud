@@ -140,8 +140,8 @@ public class FIndexAction
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
       logger.setHostAddress(hostAddress);
       logger.setLogicMessage(logggerMessage);
-      logger.setPassport(passport);
-      logger.setPassword(password);
+      logger.setPassport(RString.left(passport, 40));
+      logger.setPassword(RString.left(password, 40));
       logger.setBrowserUri(context.requestUrl());
       logger.setPageInfo(context.parameters().dump());
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);

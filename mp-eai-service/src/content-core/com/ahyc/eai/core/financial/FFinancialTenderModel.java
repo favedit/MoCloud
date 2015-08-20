@@ -107,6 +107,7 @@ public class FFinancialTenderModel
    public double calculateGain(double currency,
                                TDateTime currentDate){
       double gain = 0;
+      // 计算盈利
       if(_horizonUnit == EFinancialHerizonUnit.Day){
          gain = currency * _rateDay * _horizonCount;
       }else if(_horizonUnit == EFinancialHerizonUnit.Month){
@@ -114,6 +115,10 @@ public class FFinancialTenderModel
          endDate.addMonth(_horizonCount);
          int day = (int)((double)(endDate.get() - currentDate.get()) / 1000 / 3600 / 24);
          gain = currency * _rateDay * day;
+      }
+      // 限制最小
+      if(gain < 0.01){
+         gain = 0.01;
       }
       return gain;
    }
