@@ -1,5 +1,7 @@
 package com.ahyc.eai.service.financial.customer;
 
+import com.ahyc.eai.core.financial.FFinancialTenderModel;
+import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
@@ -12,10 +14,12 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -32,6 +36,10 @@ public class FStatisticsCustomerServlet
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FStatisticsCustomerServlet.class);
+
+   // 金融控制台
+   @ALink
+   protected IFinancialConsole _financialConsole;
 
    //============================================================
    // <T>逻辑处理。</T>
@@ -74,6 +82,7 @@ public class FStatisticsCustomerServlet
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
+      TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
@@ -116,11 +125,23 @@ public class FStatisticsCustomerServlet
       int count = dynamicDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
+         double investmentAmount = dynamicUnit.customerActionAmount();
+         // 计算盈利
+         String tenderModelLabel = null;
+         double investmentGain = 0;
+         FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(dynamicUnit.tenderModel());
+         if(tenderModel != null){
+            tenderModelLabel = tenderModel.label();
+            investmentGain = tenderModel.calculateGain(investmentAmount, currentDate);
+         }
+         // 输出内容
          stream.writeString(dynamicUnit.customerActionDate().format());
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
-         stream.writeDouble(dynamicUnit.customerActionAmount());
+         stream.writeString(tenderModelLabel);
+         stream.writeDouble(investmentAmount);
+         stream.writeDouble(investmentGain);
       }
       //............................................................
       // 保存数据到缓冲中

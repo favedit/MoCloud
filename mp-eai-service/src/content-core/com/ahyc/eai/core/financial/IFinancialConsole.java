@@ -5,5 +5,11 @@ package com.ahyc.eai.core.financial;
 //============================================================
 public interface IFinancialConsole
 {
-
+   //============================================================
+   // <T>查找模式。</T>
+   //
+   // @param code 模式代码
+   // @return 模式
+   //============================================================
+   FFinancialTenderModel findTenderModel(String code);
 }

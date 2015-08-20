@@ -70,7 +70,14 @@ public class FGcSessionConsole
       if(session == null){
          session = logic.doPrepare(FGcSessionInfo.class);
          session.setGuid(sessionId);
-         logic.doInsert(session);
+         try{
+            logic.doInsert(session);
+         }catch(Exception exception){
+            session = logic.findByGuid(FGcSessionInfo.class, sessionId);
+            if(session == null){
+               throw exception;
+            }
+         }
       }else{
          logic.doUpdate(session);
       }

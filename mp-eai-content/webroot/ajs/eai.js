@@ -6735,7 +6735,9 @@ MO.FEaiChartCustomerDynamicUnit = function FEaiChartCustomerDynamicUnit(o){
    o._label      = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
    o._card       = MO.Class.register(o, [new MO.AGetter('_card'), new MO.APersistence('_card', MO.EDataType.String)]);
    o._phone      = MO.Class.register(o, [new MO.AGetter('_phone'), new MO.APersistence('_phone', MO.EDataType.String)]);
+   o._modelLabel = MO.Class.register(o, [new MO.AGetter('_modelLabel'), new MO.APersistence('_modelLabel', MO.EDataType.String)]);
    o._investment = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._gain       = MO.Class.register(o, [new MO.AGetter('_gain'), new MO.APersistence('_gain', MO.EDataType.Double)]);
    return o;
 }
 MO.FEaiChartCustomerProcessor = function FEaiChartCustomerProcessor(o){
@@ -8339,11 +8341,11 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    grid.headPadding().set(0,0,0,10);
    grid.setHeadBackColor('#122A46');
    grid.headFont().font = 'Microsoft YaHei';
-   grid.headFont().size = 22;
+   grid.headFont().size = 20;
    grid.headFont().color = '#00B2F2';
    grid.setRowHeight(40);
    grid.rowFont().font = 'Microsoft YaHei';
-   grid.rowFont().size = 20;
+   grid.rowFont().size = 18;
    grid.rowFont().color = '#59FDE9';
    var column = MO.Class.create(MO.FGuiGridColumnText);
    column.setName('');
@@ -8414,7 +8416,7 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    column.setName('monthCustomerCount');
    column.setLabel('客户数');
    column.setDataName('month_customer_count');
-   column.setWidth(82);
+   column.setWidth(80);
    column.setPadding(1, 1, 0, 1);
    grid.pushColumn(column);
    o.push(grid);
@@ -8428,11 +8430,11 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    grid.setHeadHeight(32);
    grid.setHeadBackColor('#122A46');
    grid.headFont().font = 'Microsoft YaHei';
-   grid.headFont().size = 22;
+   grid.headFont().size = 20;
    grid.headFont().color = '#00B2F2';
    grid.setRowHeight(40);
    grid.rowFont().font = 'Microsoft YaHei';
-   grid.rowFont().size = 20;
+   grid.rowFont().size = 18;
    grid.rowFont().color = '#59FDE9';
    var column = MO.Class.create(MO.FGuiGridColumnText);
    column.setName('');
@@ -8503,7 +8505,7 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    column.setName('weeksCustomerCount');
    column.setLabel('客户数');
    column.setDataName('weeks_customer_count');
-   column.setWidth(81 );
+   column.setWidth(80);
    column.setPadding(1, 1, 1, 1);
    grid.pushColumn(column);
    o.push(grid);
@@ -8517,11 +8519,11 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    grid.setHeadHeight(32);
    grid.setHeadBackColor('#122A46');
    grid.headFont().font = 'Microsoft YaHei';
-   grid.headFont().size = 22;
+   grid.headFont().size = 20;
    grid.headFont().color = '#00B2F2';
    grid.setRowHeight(40);
    grid.rowFont().font = 'Microsoft YaHei';
-   grid.rowFont().size = 20;
+   grid.rowFont().size = 18;
    grid.rowFont().color = '#59FDE9';
    var column = MO.Class.create(MO.FGuiGridColumnText);
    column.setName('');
@@ -8592,7 +8594,7 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    column.setName('customerCount');
    column.setLabel('客户数');
    column.setDataName('customer_count');
-   column.setWidth(81 );
+   column.setWidth(80);
    column.setPadding(1, 1, 1, 1);
    grid.pushColumn(column);
    o.push(grid);
@@ -8605,11 +8607,11 @@ MO.FEaiChartMarketerTable_setup = function FEaiChartMarketerTable_setup() {
    grid.setHeadHeight(32);
    grid.setHeadBackColor('#122A46');
    grid.headFont().font = 'Microsoft YaHei';
-   grid.headFont().size = 22;
+   grid.headFont().size = 20;
    grid.headFont().color = '#00B2F2';
    grid.setRowHeight(30);
    grid.rowFont().font = 'Microsoft YaHei';
-   grid.rowFont().size = 20;
+   grid.rowFont().size = 18;
    grid.rowFont().color = '#59FDE9';
    var column = MO.Class.create(MO.FGuiGridColumnDate);
    column.setName('recordDate');
