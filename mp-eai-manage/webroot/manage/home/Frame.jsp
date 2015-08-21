@@ -58,10 +58,10 @@
                   </dl>
                   <dl class="inp_2">
                      <dt>
-                	<input id="passport" class="inp_txt_01" type="text">
+                	<input id="passport" class="inp_txt_01" type="text" value="admin">
                 </dt>
                      <dd>
-                        <input id="password" class="inp_txt_02" type="password">
+                        <input id="password" class="inp_txt_02" type="password" value="123456">
                      </dd>
                   </dl>
                   <div class="loginbtn">

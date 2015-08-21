@@ -1,9 +1,15 @@
 package org.mo.content.face.live;
 
+import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import org.mo.com.lang.RString;
 import org.mo.content.core.common.EChartPage;
+import org.mo.content.core.manage.person.user.IEntryConsole;
+import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
@@ -31,6 +37,12 @@ public class FChartAction
 
    @ALink
    protected ILogicServiceInfoConsole _loggerServiceInfoConsole;
+
+   @ALink
+   protected IUserConsole _userConsole;
+
+   @ALink
+   protected IEntryConsole _entryConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -117,6 +129,19 @@ public class FChartAction
             message = "时间已失效。";
             break;
          case EGcAuthorityResult.OaSuccess:
+            passport = "OA_" + passport;
+            if(!_userConsole.passportExists(logicContext, passport)){
+               //同步OA用户
+               FDataPersonUserUnit unit = new FDataPersonUserUnit();
+               unit.setPassport(passport);
+               _userConsole.doInsert(logicContext, unit);
+               //同步用户状态
+               FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
+               entryUnit.setUserId(unit.ouid());
+               entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
+               entryUnit.setFromCd(EGcPersonUserFrom.EaiOa);
+               _entryConsole.doInsert(logicContext, entryUnit);
+            }
             logggerMessage = "OA登录成功。";
             break;
          case EGcAuthorityResult.OaPasswordInvald:

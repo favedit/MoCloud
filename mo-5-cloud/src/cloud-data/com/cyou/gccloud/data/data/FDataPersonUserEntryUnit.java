@@ -1,24 +1,18 @@
 package com.cyou.gccloud.data.data;
 
 import java.util.Map;
-import org.mo.com.collections.FRow;
-import org.mo.com.io.IDataInput;
-import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.IStringPair;
-import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
-import org.mo.com.lang.RLong;
-import org.mo.com.lang.RString;
-import org.mo.com.lang.type.TDateTime;
-import org.mo.core.aop.face.ASourceMachine;
-import org.mo.data.logic.FLogicUnit;
+import org.mo.com.lang.*;
+import org.mo.com.lang.type.*;
+import org.mo.com.collections.*;
+import org.mo.com.io.*;
+import org.mo.core.aop.face.*;
+import org.mo.data.logic.*;
 
 //============================================================
 // <T>人员入口信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataPersonUserEntryUnit
-      extends FLogicUnit
+public class FDataPersonUserEntryUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -51,10 +45,10 @@ public class FDataPersonUserEntryUnit
    protected int _statusCd;
 
    // 存储字段入口类型的定义。
-   private int __entryCd;
+   private int __fromCd;
 
    // 字段入口类型的定义。
-   protected int _entryCd;
+   protected int _fromCd;
 
    // 存储字段帐号的定义。
    private String __passport;
@@ -255,8 +249,8 @@ public class FDataPersonUserEntryUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isEntryCdChanged(){
-      return __entryCd != _entryCd;
+   public boolean isFromCdChanged(){
+      return __fromCd != _fromCd;
    }
 
    //============================================================
@@ -264,8 +258,8 @@ public class FDataPersonUserEntryUnit
    //
    // @return 数据内容
    //============================================================
-   public int entryCd(){
-      return _entryCd;
+   public int fromCd(){
+      return _fromCd;
    }
 
    //============================================================
@@ -273,8 +267,8 @@ public class FDataPersonUserEntryUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setEntryCd(int value){
-      _entryCd = value;
+   public void setFromCd(int value){
+      _fromCd = value;
    }
 
    //============================================================
@@ -485,8 +479,8 @@ public class FDataPersonUserEntryUnit
             return Long.toString(_userId);
          case "status_cd":
             return RInteger.toString(_statusCd);
-         case "entry_cd":
-            return RInteger.toString(_entryCd);
+         case "from_cd":
+            return RInteger.toString(_fromCd);
          case "passport":
             return _passport;
          case "password":
@@ -530,8 +524,8 @@ public class FDataPersonUserEntryUnit
          case "status_cd":
             _statusCd = RInteger.parse(value);
             break;
-         case "entry_cd":
-            _entryCd = RInteger.parse(value);
+         case "from_cd":
+            _fromCd = RInteger.parse(value);
             break;
          case "passport":
             _passport = value;
@@ -589,9 +583,9 @@ public class FDataPersonUserEntryUnit
                __statusCd = RInteger.parse(value);
                _statusCd = __statusCd;
                break;
-            case "entry_cd":
-               __entryCd = RInteger.parse(value);
-               _entryCd = __entryCd;
+            case "from_cd":
+               __fromCd = RInteger.parse(value);
+               _fromCd = __fromCd;
                break;
             case "passport":
                __passport = value;
@@ -638,7 +632,7 @@ public class FDataPersonUserEntryUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("statusCd", _statusCd);
-      row.set("entryCd", _entryCd);
+      row.set("fromCd", _fromCd);
       row.set("passport", _passport);
       row.set("password", _password);
       row.set("note", _note);
@@ -661,7 +655,7 @@ public class FDataPersonUserEntryUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("statusCd", RInteger.toString(_statusCd));
-      map.put("entryCd", RInteger.toString(_entryCd));
+      map.put("fromCd", RInteger.toString(_fromCd));
       map.put("passport", _passport);
       map.put("password", _password);
       map.put("note", _note);
@@ -684,7 +678,7 @@ public class FDataPersonUserEntryUnit
       _guid = input.readString();
       _userId = input.readInt64();
       _statusCd = input.readInt32();
-      _entryCd = input.readInt32();
+      _fromCd = input.readInt32();
       _passport = input.readString();
       _password = input.readString();
       _note = input.readString();
@@ -707,7 +701,7 @@ public class FDataPersonUserEntryUnit
       output.writeString(_guid);
       output.writeInt64(_userId);
       output.writeInt32(_statusCd);
-      output.writeInt32(_entryCd);
+      output.writeInt32(_fromCd);
       output.writeString(_passport);
       output.writeString(_password);
       output.writeString(_note);

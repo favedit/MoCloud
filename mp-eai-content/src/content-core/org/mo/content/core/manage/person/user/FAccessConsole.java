@@ -8,7 +8,7 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
-// <T>人员账号控制台。</T>
+// <T>人员账号权限控制台。</T>
 //============================================================
 public class FAccessConsole
       extends FAbstractLogicUnitConsole<FDataPersonAccessAuthorityLogic, FDataPersonAccessAuthorityUnit>
