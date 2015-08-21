@@ -1,24 +1,18 @@
 package com.cyou.gccloud.data.data;
 
 import java.util.Map;
-import org.mo.com.collections.FRow;
-import org.mo.com.io.IDataInput;
-import org.mo.com.io.IDataOutput;
-import org.mo.com.lang.IStringPair;
-import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RInteger;
-import org.mo.com.lang.RLong;
-import org.mo.com.lang.RString;
-import org.mo.com.lang.type.TDateTime;
-import org.mo.core.aop.face.ASourceMachine;
-import org.mo.data.logic.FLogicUnit;
+import org.mo.com.lang.*;
+import org.mo.com.lang.type.*;
+import org.mo.com.collections.*;
+import org.mo.com.io.*;
+import org.mo.core.aop.face.*;
+import org.mo.data.logic.*;
 
 //============================================================
 // <T>人员用户信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataPersonUserUnit
-      extends FLogicUnit
+public class FDataPersonUserUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -103,6 +97,12 @@ public class FDataPersonUserUnit
 
    // 字段联系邮件验证的定义。
    protected int _contactMailVerifyCd;
+
+   // 存储字段用户权限状态的定义。
+   private int __roleCd;
+
+   // 字段用户权限状态的定义。
+   protected int _roleCd;
 
    // 存储字段角色编号的定义。
    private long __roleId;
@@ -537,6 +537,33 @@ public class FDataPersonUserUnit
    }
 
    //============================================================
+   // <T>判断用户权限状态的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRoleCdChanged(){
+      return __roleCd != _roleCd;
+   }
+
+   //============================================================
+   // <T>获得用户权限状态的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int roleCd(){
+      return _roleCd;
+   }
+
+   //============================================================
+   // <T>设置用户权限状态的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRoleCd(int value){
+      _roleCd = value;
+   }
+
+   //============================================================
    // <T>判断角色编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -789,6 +816,8 @@ public class FDataPersonUserUnit
             return _contactMail;
          case "contact_mail_verify_cd":
             return RInteger.toString(_contactMailVerifyCd);
+         case "role_cd":
+            return RInteger.toString(_roleCd);
          case "role_id":
             return Long.toString(_roleId);
          case "description":
@@ -860,6 +889,9 @@ public class FDataPersonUserUnit
             break;
          case "contact_mail_verify_cd":
             _contactMailVerifyCd = RInteger.parse(value);
+            break;
+         case "role_cd":
+            _roleCd = RInteger.parse(value);
             break;
          case "role_id":
             _roleId = RLong.parse(value);
@@ -956,6 +988,10 @@ public class FDataPersonUserUnit
                __contactMailVerifyCd = RInteger.parse(value);
                _contactMailVerifyCd = __contactMailVerifyCd;
                break;
+            case "role_cd":
+               __roleCd = RInteger.parse(value);
+               _roleCd = __roleCd;
+               break;
             case "role_id":
                __roleId = RLong.parse(value);
                _roleId = __roleId;
@@ -1014,6 +1050,7 @@ public class FDataPersonUserUnit
       row.set("contactPhoneVerifyCd", _contactPhoneVerifyCd);
       row.set("contactMail", _contactMail);
       row.set("contactMailVerifyCd", _contactMailVerifyCd);
+      row.set("roleCd", _roleCd);
       row.set("roleId", _roleId);
       row.set("description", _description);
       row.set("content", _content);
@@ -1046,6 +1083,7 @@ public class FDataPersonUserUnit
       map.put("contactPhoneVerifyCd", RInteger.toString(_contactPhoneVerifyCd));
       map.put("contactMail", _contactMail);
       map.put("contactMailVerifyCd", RInteger.toString(_contactMailVerifyCd));
+      map.put("roleCd", RInteger.toString(_roleCd));
       map.put("roleId", RLong.toString(_roleId));
       map.put("description", _description);
       map.put("content", _content);
@@ -1078,6 +1116,7 @@ public class FDataPersonUserUnit
       _contactPhoneVerifyCd = input.readInt32();
       _contactMail = input.readString();
       _contactMailVerifyCd = input.readInt32();
+      _roleCd = input.readInt32();
       _roleId = input.readInt64();
       _description = input.readString();
       _content = input.readString();
@@ -1110,6 +1149,7 @@ public class FDataPersonUserUnit
       output.writeInt32(_contactPhoneVerifyCd);
       output.writeString(_contactMail);
       output.writeInt32(_contactMailVerifyCd);
+      output.writeInt32(_roleCd);
       output.writeInt64(_roleId);
       output.writeString(_description);
       output.writeString(_content);

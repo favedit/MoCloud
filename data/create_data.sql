@@ -209,9 +209,10 @@ CREATE TABLE `DT_PSN_USER`
    `LABEL`                         VARCHAR(80), 
    `ICON_URL`                      VARCHAR(400), 
    `CONTACT_PHONE`                 VARCHAR(20), 
-   `CONTACT_PHONE_VERIFY_CD`       INTEGER, 
+   `CONTACT_PHONE_VERIFY_CD`       INTEGER,
    `CONTACT_MAIL`                  VARCHAR(40), 
    `CONTACT_MAIL_VERIFY_CD`        INTEGER, 
+   `ROLE_CD`                       INTEGER, 
    `ROLE_ID`                       BIGINT, 
    `DESCRIPTION`                   VARCHAR(2000), 
    `CONTENT`                       TEXT, 
@@ -220,7 +221,7 @@ CREATE TABLE `DT_PSN_USER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_PSN_USER 
    ADD CONSTRAINT DT_PSN_USR_UK_GID UNIQUE ( GUID ); 

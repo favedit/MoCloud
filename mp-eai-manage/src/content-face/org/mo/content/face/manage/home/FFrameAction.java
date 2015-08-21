@@ -1,6 +1,7 @@
 package org.mo.content.face.manage.home;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserRole;
 import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -77,7 +78,8 @@ public class FFrameAction
          userUnit.setOvld(true);
          userUnit.setPassport(passport);
          userUnit.setPassword(password);
-         userUnit.setRoleId(1);
+         //         userUnit.setRoleId(1);
+         userUnit.setRoleCd(EGcPersonUserRole.Admin);
          userUnit.setLabel("初始用户");
          _userConsole.doInsert(logicContext, userUnit);
          formPage.setUser(userUnit);
@@ -102,7 +104,6 @@ public class FFrameAction
             basePage.setUserName(unit.label());
             basePage.setPassport(unit.passport());
             basePage.setRoleId(unit.roleId());
-            System.out.println(userUnit.roleId() + "--------------------");
             basePage.ajax(1, "/manage/home/Frame.wa");
             _logger.debug(this, "LoginUser", "LoginUser Sueeccd.");
          }else{//密码不正确

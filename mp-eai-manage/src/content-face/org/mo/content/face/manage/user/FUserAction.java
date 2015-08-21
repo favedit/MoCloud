@@ -1,6 +1,7 @@
 package org.mo.content.face.manage.user;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserRole;
 import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
@@ -125,6 +126,7 @@ public class FUserAction
       unit.setLabel(context.parameter("label"));
       unit.setOvld(true);
       unit.setRoleId(context.parameterAsLong("role"));
+      unit.setRoleCd(EGcPersonUserRole.Normal);
       _userConsole.doInsert(logicContext, unit);
       basePage.setJson("1");
       _logger.debug(this, "InsertUser", "InsertUser succeed.");
@@ -186,6 +188,7 @@ public class FUserAction
       }
       unit.setLabel(context.parameter("label"));
       unit.setRoleId(context.parameterAsLong("role"));
+      unit.setRoleCd(EGcPersonUserRole.Normal);
       unit.setUpdateUserId(context.parameterAsLong("adminId"));
       _userConsole.doUpdate(logicContext, unit);
       basePage.setJson("1");

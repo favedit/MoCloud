@@ -11,6 +11,7 @@
   <FieldInteger _uuid="77c32963-4c3d-4005-aced-f53351ee053d" name="contact_phone_verify_cd" label="M#12cn16联系手机验证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_PHONE_VERIFY_CD" />
   <FieldString _uuid="0ead71cc-48d8-4dec-8f3d-9bcfcaf7ffa9" name="contact_mail" label="M#12cn14联系邮件" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_MAIL" data_size="40" />
   <FieldInteger _uuid="75319d8a-3803-4828-a1dd-c50fd785bf33" name="contact_mail_verify_cd" label="M#12cn16联系邮件验证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_MAIL_VERIFY_CD" />
+  <FieldInteger _uuid="4ac771aa-e3bc-4724-b952-a9b569cd3c3c" name="role_cd" label="M#12cn16用户权限状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_CD" />
   <FieldRecordId _uuid="73ed5636-cb2f-4480-890b-139695c69342" name="role_id" label="M#12cn14角色编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_ID" />
   <FieldString _uuid="a6439357-3de7-4fe6-aed4-3f8032158ace" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
   <FieldContent _uuid="c6dfe0dc-e9db-4ce6-90ea-9fcad0a105ba" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />

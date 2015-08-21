@@ -2,11 +2,13 @@ package org.mo.content.face.manage.home;
 
 import com.cyou.gccloud.data.data.FDataControlModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserRole;
 import org.mo.cloud.core.version.IGcVersionConsole;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.module.IModuleConsole;
 import org.mo.content.core.manage.role.IRoleModuleConsole;
+import org.mo.content.core.manage.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -38,6 +40,9 @@ public class FHeaderAction
    //角色模块控制台
    @ALink
    protected IRoleModuleConsole _roleModuleConsole;
+
+   @ALink
+   protected IUserConsole _userConsole;
 
    //============================================================
    // <T>列出目录处理。</T>
@@ -74,7 +79,6 @@ public class FHeaderAction
          return "/manage/common/ConnectTimeout";
       }
       tackAuthority(context, logicContext, basePage);
-      System.out.println(basePage.menuString() + "---------------------");
       return "/manage/manage/home/ProductLeft";
    }
 
@@ -110,6 +114,7 @@ public class FHeaderAction
          return "/manage/common/ConnectTimeout";
       }
       tackAuthority(context, logicContext, basePage);
+      System.out.println(basePage.menuString() + "--------------------");
       return "/manage/manage/home/ManageLeft";
    }
 
@@ -137,22 +142,29 @@ public class FHeaderAction
    private void tackAuthority(IWebContext context,
                               ILogicContext logicContext,
                               FBasePage basePage){
-      _logger.debug(this, "TackAuthority", "TackAuthority begin. (roleId={1})", basePage.roleId());
-      long roleId = basePage.roleId();
-      if(roleId != 0){
-         FLogicDataset<FDataControlRoleModuleUnit> roelModuleInfoList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleId, 0);
-         StringBuffer menuStrings = new StringBuffer();
-         for(FDataControlRoleModuleUnit role : roelModuleInfoList){
-            System.out.println(role.moduleId() + "----------------");
-            FDataControlModuleUnit module = _moduleConsole.find(logicContext, role.moduleId());
-            if(module != null){
-               menuStrings.append(module.code()).append("|");
-            }
-         }
-         basePage.setMenuString(menuStrings.deleteCharAt(menuStrings.length() - 1).toString());
-         _logger.debug(this, "TackAuthority", "TackAuthority menuStrings. (menuStrings={1})", basePage.menuString());
+      _logger.debug(this, "TackAuthority", "TackAuthority begin. (userId={1})", basePage.userId());
+      StringBuffer menuStrings = new StringBuffer();
+      //初始用户单独处理
+      String guid = basePage.userId();
+      int roleCd = _userConsole.findByGuid(logicContext, guid).roleCd();
+      if(roleCd == EGcPersonUserRole.Admin){
+         menuStrings.append("manage.user.module|manage.user.role|manage.user");
+         basePage.setMenuString(menuStrings.toString());
       }else{
-         basePage.setMenuString(null);
+         long roleId = basePage.roleId();
+         if(roleId != 0){
+            FLogicDataset<FDataControlRoleModuleUnit> roelModuleInfoList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleId, 0);
+            for(FDataControlRoleModuleUnit role : roelModuleInfoList){
+               FDataControlModuleUnit module = _moduleConsole.find(logicContext, role.moduleId());
+               if(module != null){
+                  menuStrings.append(module.code()).append("|");
+               }
+            }
+            basePage.setMenuString(menuStrings.deleteCharAt(menuStrings.length() - 1).toString());
+            _logger.debug(this, "TackAuthority", "TackAuthority menuStrings. (menuStrings={1})", basePage.menuString());
+         }else{
+            basePage.setMenuString(null);
+         }
       }
    }
 }
