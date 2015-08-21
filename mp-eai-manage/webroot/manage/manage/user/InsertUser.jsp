@@ -32,7 +32,7 @@
             "passport": $('#passport').val(),
             "password": $('#pwd2').val(),
             "label": $('#label').val(),
-            "role": $('#role').val(),
+            "role":$('#role').combobox("getValue"),
             "adminId": $('#adminId').val()
          };
          $.ajax({

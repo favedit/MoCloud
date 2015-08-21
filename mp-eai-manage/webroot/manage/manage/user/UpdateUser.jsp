@@ -33,7 +33,7 @@
                "passport": $('#passport').val(),
                "password": $('#pwd2').val(),
                "label": $('#label').val(),
-               "role": $('#role').val(),
+               "role":$('#role').combobox("getValue"),
                "adminId": $('#adminId').val()
             };
             $.ajax({
@@ -105,13 +105,13 @@
             <tr>
                <td align="left">密码</td>
                <td align="left">
-                  <input id="pwd1" class="easyui-validatebox textbox" style="width:500px" data-options="validType:'length[6,20]'" type="password" name="pwd1" value="<jh:write source='&user.password'/>" />
+                  <input id="pwd1" class="easyui-validatebox textbox" style="width:500px" data-options="validType:'length[6,42]'" type="password" name="pwd1" value="<jh:write source='&user.password'/>" />
                </td>
             </tr>
             <tr>
                <td align="left">确认密码</td>
                <td align="left">
-                  <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,20]'" type="password" name="pwd2" value="<jh:write source='&user.password'/>" /> </td>
+                  <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,42]'" type="password" name="pwd2" value="<jh:write source='&user.password'/>" /> </td>
             </tr>
             <tr>
                <td align="left">真实名称</td>
@@ -131,3 +131,4 @@
    </body>
 
    </HTML>
+7C4A8D09CA3762AF61E59520943DC26494F8941B
