@@ -1,5 +1,8 @@
 package org.mo.content.face.live;
 
+import org.mo.content.core.manage.person.role.IRoleConsole;
+
+import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
@@ -40,6 +43,9 @@ public class FChartAction
 
    @ALink
    protected IUserConsole _userConsole;
+
+   @ALink
+   protected IRoleConsole _roleConsole;
 
    @ALink
    protected IEntryConsole _entryConsole;
@@ -131,9 +137,12 @@ public class FChartAction
          case EGcAuthorityResult.OaSuccess:
             passport = "OA_" + passport;
             if(!_userConsole.passportExists(logicContext, passport)){
+               //获取角色
+               FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, "eai.oa");
                //同步OA用户
                FDataPersonUserUnit unit = new FDataPersonUserUnit();
                unit.setPassport(passport);
+               unit.setRoleId(role.ouid());
                _userConsole.doInsert(logicContext, unit);
                //同步用户状态
                FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();

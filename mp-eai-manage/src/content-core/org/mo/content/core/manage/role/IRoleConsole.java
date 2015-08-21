@@ -30,4 +30,6 @@ public interface IRoleConsole
                                                                   FDataControlRoleUnit roleUnit,
                                                                   int pageNum);
 
+   FDataControlRoleUnit findByCode(ILogicContext logicContext,
+                                   String code);
 }

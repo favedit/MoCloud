@@ -43,15 +43,15 @@
             <li id="one" class="files">
                <a href="#">权限管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="product.device" value="&basePage.menuString"><li><a href="/manage/module/Module.wa" target="right">模块管理</a></li></jh:equals>
-                  <jh:equals source="product.device" value="&basePage.menuString"><li><a href="/manage/role/Role.wa" target="right">角色管理</a></li></jh:equals>
+                  <jh:equals source="manage.user.module" value="&basePage.menuString"><li><a href="/manage/module/Module.wa" target="right">模块管理</a></li></jh:equals>
+                  <jh:equals source="manage.user.role" value="&basePage.menuString"><li><a href="/manage/role/Role.wa" target="right">角色管理</a></li></jh:equals>
                </ul>
             </li>
 
             <li id="two" class="mail">
                <a href="#">用户管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="product.device" value="&basePage.menuString"><li><a href="/manage/user/User.wa" target="right">用户管理</a></li></jh:equals>
+                  <jh:equals source="manage.user" value="&basePage.menuString"><li><a href="/manage/user/User.wa" target="right">用户管理</a></li></jh:equals>
                </ul>
             </li>
 

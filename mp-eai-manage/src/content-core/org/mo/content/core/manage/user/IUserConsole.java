@@ -51,6 +51,16 @@ public interface IUserConsole
                           String passport);
 
    // ============================================================
+   // <T>根据角色查找数据</T>
+   //
+   // @param sqlContext 链接对象
+   // @param passport 帐号
+   // @return 模块数据
+   // ============================================================
+   EResult roleExists(ILogicContext logicContext,
+                      String role);
+
+   // ============================================================
    // <T>根据ouid修改用户</T>
    //
    // @param sqlContext 链接对象
@@ -61,13 +71,13 @@ public interface IUserConsole
                      FDataPersonUserUnit user);
 
    // ============================================================
-   // <T>根据角色查找数据</T>
+   // <T>删除用户</T>
    //
    // @param sqlContext 链接对象
-   // @param passport 帐号
-   // @return 模块数据
+   // @param ouid 主键
+   // @return 数据信息
    // ============================================================
-   EResult roleExists(ILogicContext logicContext,
-                      String role);
+   EResult delete(ILogicContext logicContext,
+                  long id);
 
 }

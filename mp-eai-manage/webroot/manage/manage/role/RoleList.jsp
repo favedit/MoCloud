@@ -58,7 +58,7 @@
                            location.href = "/manage/role/Role.wa";
                         });
                      } else {
-                        alertx("删除失败！", "warning", function() {
+                        alertx("删除失败,请查看是否被占用！", "warning", function() {
                            location.href = "/manage/role/Role.wa";
                         });
                      }

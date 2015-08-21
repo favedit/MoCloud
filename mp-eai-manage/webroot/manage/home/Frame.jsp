@@ -8,42 +8,9 @@
          <title>后台管理系统</title>
          <link rel="stylesheet" href="/manage/acs/style.css" type="text/css" media="screen" />
          <link rel="stylesheet" href="/manage/acs/login.css" type="text/css" media="screen" />
-         <jsp:include page="../common/jeui.jsp"></jsp:include>
+         <script type="text/javascript" src="/manage/ajs/jquery/jquery-1.8.0.min.js"></script>
+         <script type="text/javascript" src="/manage/ajs/jquery/myselfJs.js"></script>
       </head>
-      <script type="text/javascript">
-         function submitForm() {
-            if ($("#passport").val().length == 0) {
-               alertx("请输入用户名", "'warning'");
-               return;
-            }
-            if ($("#password").val().length == 0) {
-               alertx("请输入密码", "'warning'");
-               return;
-            }
-            var data = {
-               "passport": $("#passport").val(),
-               "password": $("#password").val()
-            };
-            $.ajax({
-               type: "POST",
-               url: "/manage/home/Frame.wa?do=loginUser&date=" + new Date().valueOf(),
-               data: data,
-               success: function(msg) {
-                  var result = toJsonObject(msg);
-                  if (result.status == '0') {
-                     $("#passport").val("");
-                     $("#password").val("");
-                     alertx("用户名或密码错误", "warning");
-                  } else if (result.status == '1') {
-                     location.href = result.url;
-                  } else {
-                     alertx("系统异常", "'error'");
-                  }
-               }
-            });
-         }
-      </script>
-
       <body>
          <center>
             <div id="login">
@@ -65,12 +32,50 @@
                      </dd>
                   </dl>
                   <div class="loginbtn">
-                     <input name="" onclick="submitForm()" type="image" src="../images/loginbtn.png">
+                     <input onclick="submitForm();" type="image" src="../images/loginbtn.png">
                   </div>
                </div>
             </div>
          </center>
-
+         <script type="text/javascript" language="javascript">            
+            function submitForm() {
+               if ($("#passport").val().length == 0) {
+                  alert("请输入用户名");
+                  return;
+               }
+               if ($("#password").val().length == 0) {
+                  alert("请输入密码");
+                  return;
+               }
+               var data = {
+                  "passport": $("#passport").val(),
+                  "password": $("#password").val()
+               };
+               $.ajax({
+                  type: "POST",
+                  url: "/manage/home/Frame.wa?do=loginUser&date=" + new Date().valueOf(),
+                  data: data,
+                  success: function(msg) {
+                     var result = toJsonObject(msg);
+                     if (result.status == '0') {
+                        $("#passport").val("");
+                        $("#password").val("");
+                        alertx("用户名或密码错误", "warning");
+                     } else if (result.status == '1') {
+                        location.href = result.url;
+                     } else {
+                        alertx("系统异常", "'error'");
+                     }
+                  }
+               });
+            }
+            document.onkeydown = keyEnter;
+            function keyEnter() {
+               if (event.keyCode == 13) {
+                  submitForm();
+               }
+            }
+         </script>
       </body>
 
       </html>

@@ -3,6 +3,7 @@ package org.mo.content.face.manage.role;
 import com.cyou.gccloud.data.data.FDataControlRoleLogic;
 import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
+import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -112,11 +113,17 @@ public class FRoleAction
       _logger.debug(this, "Role", "Role delete begin. (roleId={1})", context.parameter("roleId"));
       try{
          long roleId = context.parameterAsLong("roleId");
-         //删除角色所拥有的权限
-         _roleModuleConsole.deleteByRoleId(logicContext, roleId);
-         //删除此角色
-         _roleConsole.doDelete(logicContext, roleId);
-         basePage.setJson("1");
+         EResult result = _userConsole.roleExists(logicContext, String.valueOf(roleId));
+         if(!result.equals(EResult.Success)){
+            //删除角色所拥有的权限
+            _roleModuleConsole.deleteByRoleId(logicContext, roleId);
+            //删除此角色
+            _roleConsole.doDelete(logicContext, roleId);
+            basePage.setJson("1");
+         }else{
+            basePage.setJson("0");
+         }
+
       }catch(Exception e){
          e.printStackTrace();
          basePage.setJson("0");
@@ -158,6 +165,7 @@ public class FRoleAction
       _logger.debug(this, "Role", "Role insert begin.");
       FDataControlRoleUnit roleUnit = new FDataControlRoleUnit();
       roleUnit.setOvld(true);
+      roleUnit.setCode(context.parameter("code"));
       roleUnit.setLabel(context.parameter("label"));
       roleUnit.setNote(context.parameter("note"));
       String userId = context.parameter("adminId");
@@ -218,6 +226,7 @@ public class FRoleAction
       long userOuid = _userConsole.findByGuid(logicContext, adminId).ouid();
       FDataControlRoleUnit roleUnit = logicContext.findLogic(FDataControlRoleLogic.class).find(context.parameterAsLong("roleId"));
       roleUnit.setOvld(context.parameter("ovld") == null ? false : true);
+      roleUnit.setCode(context.parameter("code"));
       roleUnit.setLabel(context.parameter("label"));
       roleUnit.setNote(context.parameter("note"));
       roleUnit.setUpdateUserId(userOuid);

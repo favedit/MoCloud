@@ -112,4 +112,21 @@ public class FUserConsole
                             FDataPersonUserUnit user){
       logicContext.findLogic(FDataPersonUserLogic.class).doUpdate(user, user.ouid());
    }
+
+   // ============================================================
+   // <T>删除用户</T>
+   //
+   // @param sqlContext 链接对象
+   // @param ouid 主键
+   // @return 数据信息
+   // ============================================================
+   @Override
+   public EResult delete(ILogicContext logicContext,
+                         long id){
+      FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit user = logic.find(id);
+      user.setOvld(false);
+      EResult result = logic.doUpdate(user, id);
+      return result;
+   }
 }
