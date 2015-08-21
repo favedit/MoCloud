@@ -205,9 +205,9 @@ public class FModuleAction
                         FModulePage modulePage,
                         FBasePage basePage){
       _logger.debug(this, "Update", "Update begin. (ouid={1})", context.parameterAsLong("ouid"));
-      FDataControlModuleUnit moduleUnit = new FDataControlModuleUnit();
-      moduleUnit.setOuid(context.parameterAsLong("ouid"));
-      moduleUnit.setOvld(context.parameter("ovld") == null ? false : true);
+      long id = context.parameterAsLong("ouid");
+      FDataControlModuleUnit moduleUnit = _moduleConsole.find(logicContext, id);
+      //      moduleUnit.setOvld(context.parameter("ovld") == null ? false : true);
       moduleUnit.setCode(context.parameter("code"));
       moduleUnit.setLabel(context.parameter("label"));
       moduleUnit.setNote(context.parameter("note"));

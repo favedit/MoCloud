@@ -85,10 +85,10 @@ function edit(id){
 </div>
 <table id="module" fit='true' class="easyui-datagrid"
 style="width:100%;height:100%;text-align:center;align:true " 
-data-options="toolbar:'#cy_right',pagination:true,rownumbers:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
+data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
 	<thead>
 			<tr>
-			      <th data-options="field:'ouid',halign:'center',align:'right'" width="60px" >ID</th>
+			      <th data-options="field:'ouid',halign:'center',align:'right'" width="60px" >编号</th>
                   <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="150px" >代码</th>
                   <th data-options="field:'label',halign:'center',align:'left'" width="150px" >中文名称</th>
                   <th data-options="field:'note',halign:'center',align:'left'" width="200px" >备注</th>

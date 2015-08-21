@@ -37,31 +37,23 @@
          <form id="module" action="/manage/module/Module.wa?do=update" method="post" align="center">
             <table width="714" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
                <tr>
-                  <td width="41" align="left">编号</td>
-                  <td width="459" align="left">
-                     <input name="ouid" class="disabled" style="width:80px;" value="<jh:write source='&module.ouid' />" />
-                     <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
-                  </td>
-                  <td width="200" align="right">
-                     <input id="ovld" name="ovld" type="checkbox" />有效性
-                  </td>
-               </tr>
-               <tr>
                   <td align="left">代码</td>
                   <td align="left" colspan="2">
-                     <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:660px" data-options="required:true" value="<jh:write source='&module.code' />" />
+                     <input name="ouid" style="display:none;" value="<jh:write source='&module.ouid' />" />
+                     <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
+                     <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" value="<jh:write source='&module.code' />" />
                   </td>
                </tr>
                <tr>
                   <td align="left">标题</td>
                   <td align="left" colspan="2">
-                     <input id="label" name="label" class="easyui-validatebox textbox notnull" style="width:660px" data-options="required:true" value="<jh:write source='&module.label' />" />
+                     <input id="label" name="label" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" value="<jh:write source='&module.label' />" />
                   </td>
                </tr>
                <tr>
                   <td align="left">备注</td>
                   <td align="left" colspan="2">
-                     <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:660px" value="<jh:write source='&module.note' />" />
+                     <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:500px" value="<jh:write source='&module.note' />" />
                   </td>
                </tr>
             </table>

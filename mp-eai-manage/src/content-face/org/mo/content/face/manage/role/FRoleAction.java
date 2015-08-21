@@ -223,9 +223,10 @@ public class FRoleAction
                         FBasePage basePage){
       _logger.debug(this, "Role", "Role update begin. (ouid={1})", context.parameterAsLong("roleId"));
       String adminId = context.parameter("adminId");
+      long roleId = context.parameterAsLong("roleId");
       long userOuid = _userConsole.findByGuid(logicContext, adminId).ouid();
-      FDataControlRoleUnit roleUnit = logicContext.findLogic(FDataControlRoleLogic.class).find(context.parameterAsLong("roleId"));
-      roleUnit.setOvld(context.parameter("ovld") == null ? false : true);
+      FDataControlRoleUnit roleUnit = logicContext.findLogic(FDataControlRoleLogic.class).find(roleId);
+      //      roleUnit.setOvld(context.parameter("ovld") == null ? false : true);
       roleUnit.setCode(context.parameter("code"));
       roleUnit.setLabel(context.parameter("label"));
       roleUnit.setNote(context.parameter("note"));
