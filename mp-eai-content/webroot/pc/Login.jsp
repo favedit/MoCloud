@@ -9,7 +9,7 @@
 </head>
 <body>
    <FORM name='frmMain' style="height:100%;" method='post' action='Index.wa?do=login'>
-   <p id="error" style="display: none;"></p>
+   <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
    <div class="main">
       <div class="box">
          <div class="logo">
@@ -49,6 +49,10 @@
    <script type="text/javascript">
    var $dialogOverlay =  document.getElementById("dialog-overlay");
    var $dialogAlert = document.getElementById("dialog_alert");
+   var errorVal = document.getElementById("error").innerHTML;
+      if(errorVal != ""){
+         setPrompt(errorVal);
+      }
       function setShut(){
          $dialogOverlay.style.display = "none";
          $dialogAlert.style.display = "none";
@@ -67,13 +71,9 @@
       var $username = document.getElementById('passport');
       var $password = document.getElementById('password');
       var $btn = document.getElementById('btn');
-      
-      // setPrompt();
-
       $btn.onclick = function() {
          if ($username.value == "" || $password.value == "") {
-               // setPrompt("用户名或密码不能为空")
-               setPrompt("用户名或密码不能为空");
+            setPrompt("用户名或密码不能为空");
             return false;
          } else {
             frmMain.submit();
