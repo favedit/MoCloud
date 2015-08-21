@@ -11,7 +11,8 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBaseDataAction extends XContentObject
+public abstract class XBaseDataAction
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "DataAction";

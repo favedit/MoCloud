@@ -1,11 +1,11 @@
 package org.mo.cloud.content.design.frame.common;
 
-import org.mo.cloud.content.design.frame.base.XBaseMenuSlider;
+import org.mo.cloud.content.design.frame.base.XBaseSliderMenu;
 
 //============================================================
-// <T>菜单滑动栏。</T>
+// <T>滑动菜单栏。</T>
 //============================================================
-public class XMenuButtonGroup
-      extends XBaseMenuSlider
+public class XSliderMenu
+      extends XBaseSliderMenu
 {
 }

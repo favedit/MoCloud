@@ -11,7 +11,8 @@ import org.mo.com.lang.face.AName;
 //
 // @author autosource
 //============================================================
-public abstract class XBaseToolButtonEdit extends XContentObject
+public abstract class XBaseToolButtonEdit
+      extends XContentObject
 {
    // 类名称
    public static final String CONTENT_NAME = "ToolButtonEdit";

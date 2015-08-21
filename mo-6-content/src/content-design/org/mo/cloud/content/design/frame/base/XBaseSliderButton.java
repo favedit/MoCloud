@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>页面分割对象的内容基类。</T>
+// <T>滑动菜单按键对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseFrameSpliter
+public abstract class XBaseSliderButton
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "FrameSpliter";
+   public static final String CONTENT_NAME = "SliderButton";
 
    // 类型的定义
    @AContentField
@@ -124,6 +124,22 @@ public abstract class XBaseFrameSpliter
    // 提示信息的定义
    @AContentField
    public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
+
+   // 图标的定义
+   @AContentField
+   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
+
+   // 禁止图标的定义
+   @AContentField
+   public final static FContentField ICON_DISABLE = new FContentField("iconDisable", "icon_disable", EContentData.String, "", "", "", "YYNY");
+
+   // 热键的定义
+   @AContentField
+   public final static FContentField HOTKEY = new FContentField("hotkey", "hotkey", EContentData.String, "", "", "", "YYNY");
+
+   // 命令的定义
+   @AContentField
+   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -250,6 +266,22 @@ public abstract class XBaseFrameSpliter
    // 提示信息
    @AName("hint")
    protected String _hint;
+
+   // 图标
+   @AName("icon")
+   protected String _icon;
+
+   // 禁止图标
+   @AName("icon_disable")
+   protected String _iconDisable;
+
+   // 热键
+   @AName("hotkey")
+   protected String _hotkey;
+
+   // 命令
+   @AName("action")
+   protected String _action;
 
    //============================================================
    // <T>获得类型的内容。</T>
@@ -735,6 +767,78 @@ public abstract class XBaseFrameSpliter
    //============================================================
    public void setHint(String value){
       _hint = value;
+   }
+
+   //============================================================
+   // <T>获得图标的内容。</T>
+   //
+   // @return 图标
+   //============================================================
+   public String getIcon(){
+      return _icon;
+   }
+
+   //============================================================
+   // <T>设置图标的内容。</T>
+   //
+   // @param value 图标
+   //============================================================
+   public void setIcon(String value){
+      _icon = value;
+   }
+
+   //============================================================
+   // <T>获得禁止图标的内容。</T>
+   //
+   // @return 禁止图标
+   //============================================================
+   public String getIconDisable(){
+      return _iconDisable;
+   }
+
+   //============================================================
+   // <T>设置禁止图标的内容。</T>
+   //
+   // @param value 禁止图标
+   //============================================================
+   public void setIconDisable(String value){
+      _iconDisable = value;
+   }
+
+   //============================================================
+   // <T>获得热键的内容。</T>
+   //
+   // @return 热键
+   //============================================================
+   public String getHotkey(){
+      return _hotkey;
+   }
+
+   //============================================================
+   // <T>设置热键的内容。</T>
+   //
+   // @param value 热键
+   //============================================================
+   public void setHotkey(String value){
+      _hotkey = value;
+   }
+
+   //============================================================
+   // <T>获得命令的内容。</T>
+   //
+   // @return 命令
+   //============================================================
+   public String getAction(){
+      return _action;
+   }
+
+   //============================================================
+   // <T>设置命令的内容。</T>
+   //
+   // @param value 命令
+   //============================================================
+   public void setAction(String value){
+      _action = value;
    }
 
 }

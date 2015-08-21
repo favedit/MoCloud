@@ -7,14 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>菜单滑动栏对象的内容基类。</T>
+// <T>滑动菜单栏对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseMenuSlider extends XContentObject
+public abstract class XBaseSliderMenu
+      extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "MenuSlider";
+   public static final String CONTENT_NAME = "SliderMenu";
 
    // 类型的定义
    @AContentField

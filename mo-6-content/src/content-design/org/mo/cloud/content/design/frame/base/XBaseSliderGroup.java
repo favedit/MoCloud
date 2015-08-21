@@ -7,14 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>菜单按键组对象的内容基类。</T>
+// <T>滑动菜单组组对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseMenuButtonGroup extends XContentObject
+public abstract class XBaseSliderGroup
+      extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "MenuButtonGroup";
+   public static final String CONTENT_NAME = "SliderGroup";
 
    // 类型的定义
    @AContentField
@@ -124,21 +125,13 @@ public abstract class XBaseMenuButtonGroup extends XContentObject
    @AContentField
    public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
 
-   // 图标的定义
+   // 页面来源的定义
    @AContentField
-   public final static FContentField ICON = new FContentField("icon", "icon", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField FRAME_SOURCE = new FContentField("frameSource", "frame_source", EContentData.String, "", "", "", "YYNY");
 
-   // 禁止图标的定义
+   // 滚动类型的定义
    @AContentField
-   public final static FContentField ICON_DISABLE = new FContentField("iconDisable", "icon_disable", EContentData.String, "", "", "", "YYNY");
-
-   // 热键的定义
-   @AContentField
-   public final static FContentField HOTKEY = new FContentField("hotkey", "hotkey", EContentData.String, "", "", "", "YYNY");
-
-   // 命令的定义
-   @AContentField
-   public final static FContentField ACTION = new FContentField("action", "action", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField SCROLL_CD = new FContentField("scrollCd", "scroll_cd", EContentData.String, "", "", "", "YYNY");
 
    // 配置图片的定义
    @AContentField
@@ -270,21 +263,13 @@ public abstract class XBaseMenuButtonGroup extends XContentObject
    @AName("hint")
    protected String _hint;
 
-   // 图标
-   @AName("icon")
-   protected String _icon;
+   // 页面来源
+   @AName("frame_source")
+   protected String _frameSource;
 
-   // 禁止图标
-   @AName("icon_disable")
-   protected String _iconDisable;
-
-   // 热键
-   @AName("hotkey")
-   protected String _hotkey;
-
-   // 命令
-   @AName("action")
-   protected String _action;
+   // 滚动类型
+   @AName("scroll_cd")
+   protected String _scrollCd;
 
    // 配置图片
    @AName("icon_option")
@@ -777,75 +762,39 @@ public abstract class XBaseMenuButtonGroup extends XContentObject
    }
 
    //============================================================
-   // <T>获得图标的内容。</T>
+   // <T>获得页面来源的内容。</T>
    //
-   // @return 图标
+   // @return 页面来源
    //============================================================
-   public String getIcon(){
-      return _icon;
+   public String getFrameSource(){
+      return _frameSource;
    }
 
    //============================================================
-   // <T>设置图标的内容。</T>
+   // <T>设置页面来源的内容。</T>
    //
-   // @param value 图标
+   // @param value 页面来源
    //============================================================
-   public void setIcon(String value){
-      _icon = value;
+   public void setFrameSource(String value){
+      _frameSource = value;
    }
 
    //============================================================
-   // <T>获得禁止图标的内容。</T>
+   // <T>获得滚动类型的内容。</T>
    //
-   // @return 禁止图标
+   // @return 滚动类型
    //============================================================
-   public String getIconDisable(){
-      return _iconDisable;
+   public String getScrollCd(){
+      return _scrollCd;
    }
 
    //============================================================
-   // <T>设置禁止图标的内容。</T>
+   // <T>设置滚动类型的内容。</T>
    //
-   // @param value 禁止图标
+   // @param value 滚动类型
    //============================================================
-   public void setIconDisable(String value){
-      _iconDisable = value;
-   }
-
-   //============================================================
-   // <T>获得热键的内容。</T>
-   //
-   // @return 热键
-   //============================================================
-   public String getHotkey(){
-      return _hotkey;
-   }
-
-   //============================================================
-   // <T>设置热键的内容。</T>
-   //
-   // @param value 热键
-   //============================================================
-   public void setHotkey(String value){
-      _hotkey = value;
-   }
-
-   //============================================================
-   // <T>获得命令的内容。</T>
-   //
-   // @return 命令
-   //============================================================
-   public String getAction(){
-      return _action;
-   }
-
-   //============================================================
-   // <T>设置命令的内容。</T>
-   //
-   // @param value 命令
-   //============================================================
-   public void setAction(String value){
-      _action = value;
+   public void setScrollCd(String value){
+      _scrollCd = value;
    }
 
    //============================================================
