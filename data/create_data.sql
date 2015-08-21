@@ -236,7 +236,7 @@ CREATE TABLE `DT_PSN_USER_ENTRY`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
    `STATUS_CD`                     INTEGER, 
-   `ENTRY_CD`                      INTEGER, 
+   `FROM_CD`                       INTEGER, 
    `PASSPORT`                      VARCHAR(40), 
    `PASSWORD`                      VARCHAR(40), 
    `NOTE`                          VARCHAR(2000), 
@@ -244,7 +244,7 @@ CREATE TABLE `DT_PSN_USER_ENTRY`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_PSN_USER_ENTRY 
    ADD CONSTRAINT DT_PSN_USR_ENT_UK_GID UNIQUE ( GUID ); 
@@ -1107,28 +1107,4 @@ ALTER TABLE DT_PSN_USER_RESOURCE ADD CONSTRAINT DT_PSN_USR_RES_FK_USR
 ALTER TABLE DT_PSN_USER_RESOURCE ADD CONSTRAINT DT_PSN_USR_RES_FK_RES 
       FOREIGN KEY (`RESOURCE_ID`) REFERENCES DT_RES_RESOURCE(`OUID`); 
 	  
--- ------------------------------------------------------------
--- Create table [Data.Person.User.Entry]
--- ------------------------------------------------------------
-CREATE TABLE `DT_PSN_USER_ENTRY` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `USER_ID`                       BIGINT, 
-   `STATUS_CD`                     INTEGER, 
-   `FROM_CD`                       INTEGER, 
-   `PASSPORT`                      VARCHAR(40), 
-   `PASSWORD`                      VARCHAR(40), 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_PSN_USER_ENTRY 
-   ADD CONSTRAINT DT_PSN_USR_ENT_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_PSN_USER_ENTRY ADD CONSTRAINT DT_PSN_USR_ENT_FK_USR 
-      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
