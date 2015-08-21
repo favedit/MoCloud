@@ -67,9 +67,7 @@ public class FIndexAction
             logger.setLogicMessage("主机地址为白名单。");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             // 设置服务主机
-            page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-            page.setSceneCode("ChartMarketerCustomer");
-            return EChartPage.Scene;
+            return "Main";
          }
       }
       // 非法设置
@@ -147,12 +145,26 @@ public class FIndexAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-         page.setSceneCode("ChartMarketerCustomer");
-         return EChartPage.Scene;
+         return "Main";
       }else{
          page.setMessage(message);
          return "Login";
       }
+   }
+
+   //============================================================
+   // <T>表格逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String chart(IWebContext context,
+                       ILogicContext logicContext,
+                       FIndexPage page){
+      page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
+      page.setSceneCode("ChartMarketerCustomer");
+      return EChartPage.Scene;
    }
 }

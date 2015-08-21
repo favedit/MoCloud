@@ -7,7 +7,16 @@
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
+<script>
+function doChart(code){
+   id_code.value = code;
+   frmMain.submit();
+}
+</script>
 <body>
+<FORM name='frmMain' method='post' action='Index.wa'>
+<INPUT id='id_do' name='do' type='hidden' value='chart'>
+<INPUT id='id_code' name='code' type='hidden'>
    <header class="header">
       <div class="head-left"><span>数据中心</span><p class="pl-10">您好，兰壮壮 欢迎登陆！上次登录时间：2015-08-18 17:20:33</p></div>
       <div class="head-right">
@@ -27,23 +36,26 @@
             <div class="headers">
                <span>客<br>户</span>
             </div>
-            <ul><li><img src="images/main/bg.png"></li><li><img src="images/main/bg.png"></li><li><img src="images/main/bg.png"></li></ul>
+            <ul>
+               <li><img src="images/main/bg.png" onclick='doChart("ChartMarketerCustomer")'></li>
+            </ul>
          </div>
          <div>
             <div class="headers icon2">
                <span>理<br>财<br>师</span>
             </div>
-            <ul><li><img src="images/main/bg.png"></li><li><img src="images/main/bg.png"></li><li><img src="images/main/bg.png"></li></ul>
+            <ul><li><img src="images/main/bg.png" onclick='doChart("ChartMarketerMarketer")'></li></ul>
          </div>
          <div>
             <div class="headers icon3">
                <span>公<br>司</span>
             </div>
-            <ul><li><img src="images/main/bg.png"></li><li><img src="images/main/bg.png"></li><li><img src="images/main/bg.png"></li></ul>
+            <ul><li><img src="images/main/bg.png" onclick='doChart("ChartDepartmentCustomer")'></li></ul>
          </div>
          
       </div>
 
    </div>
+</FORM>
 </body>
 </html>

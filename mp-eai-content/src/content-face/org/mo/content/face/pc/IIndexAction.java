@@ -33,4 +33,15 @@ public interface IIndexAction
    String login(IWebContext context,
                 ILogicContext logicContext,
                 @AContainer(name = "page", fill = true) FIndexPage page);
+
+   //============================================================
+   // <T>表格逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   String chart(IWebContext context,
+                ILogicContext logicContext,
+                @AContainer(name = "page", fill = true) FIndexPage page);
 }
