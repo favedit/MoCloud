@@ -271,7 +271,7 @@ public class FRoleAction
          rolePage.setPageCurrent(0);
       }
       long roleId = context.parameterAsLong("roleId");
-      FLogicDataset<FDataControlModuleInfo> moduleInfoList = _moduleConsole.selectModule(logicContext, rolePage.pageCurrent() - 1);
+      FLogicDataset<FDataControlModuleInfo> moduleInfoList = _moduleConsole.selectModule(logicContext);
       for(FDataControlModuleInfo moduleInfo : moduleInfoList){
          FLogicDataset<FDataControlRoleModuleUnit> roleModuleUnitList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleId, moduleInfo.ouid());
          if(roleModuleUnitList.count() != 0){

@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.module;
+package org.mo.content.core.manage.person.module;
 
 import com.cyou.gccloud.data.data.FDataControlModuleUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
@@ -36,5 +36,6 @@ public interface IModuleConsole
    // @param sqlContext 链接对象
    // @param unit 更新数据
    // ============================================================
-   FLogicDataset<FDataControlModuleInfo> selectModule(ILogicContext logicContext);
+   FLogicDataset<FDataControlModuleInfo> selectModule(ILogicContext logicContext,
+                                                      int pageNum);
 }

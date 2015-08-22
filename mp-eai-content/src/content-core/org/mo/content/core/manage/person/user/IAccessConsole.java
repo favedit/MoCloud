@@ -22,4 +22,5 @@ public interface IAccessConsole
 
    EResult passportExists(ILogicContext logicContext,
                           String passport);
+
 }

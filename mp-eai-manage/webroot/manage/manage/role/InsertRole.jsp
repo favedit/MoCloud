@@ -12,7 +12,7 @@
 
       function moduleSubmit(page) {
          progress();
-         var url = "/manage/module/Module.wa?do=selectDataByPage&date=" + new Date().valueOf();
+         var url = "/manage/module/Module.wa?do=selectAll&date=" + new Date().valueOf();
          var data = null;
          $.ajax({
             type: "POST",
@@ -41,6 +41,18 @@
             $("#moduleIds").val(resourceResult);
          }
          $("#role").submit();
+      }
+      function isChecked(value, row, index) {
+         if (row.viewValidCd == '1') {
+            return '<input type="checkbox" name="DataGridCheckbox" checked="checked" onclick="clickCheck(this,' + index + ')">';
+         } else {
+            return '<input type="checkbox" name="DataGridCheckbox" onclick="clickCheck(this,' + index + ')">';
+         }
+      }
+      function clickCheck(o, i) {
+         var rows = $('#module').datagrid('getRows');
+         var row = rows[i];
+         row.viewValidCd = o.checked ? 1 : 0;
       }
    </script>
 
@@ -78,7 +90,7 @@
                <tr>
                   <td width="47" align="left">英文名称</td>
                   <td width="400" align="left" colspan="2">
-                     <input id="code" name="code" class="textbox" style="width:400px" />
+                     <input id="code" name="code"  class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" />
                      <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
                      <input id="moduleIds" name="moduleIds" style="display:none;" />
                   </td>
@@ -86,7 +98,7 @@
                <tr>
                   <td align="left">中文名称</td>
                   <td align="left" colspan="2">
-                     <input id="label" name="label" class="textbox" style="width:400px" value="" />
+                     <input id="label" name="label" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" value="" />
                   </td>
                </tr>
                <tr>
@@ -104,7 +116,8 @@
                               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
                               <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="200px">代码</th>
                               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="150px">中文名称</th>
-                              <th data-options="field:'view_valid',halign:'center',align:'center',checkbox:true,title:'查看权限'" width="60px">查看权限</th>
+                              <th data-options="field:'viewValidCd',align:'center',checkbox:true,formatter:isChecked" width="60px">查看权限</th>
+<!--                              <th data-options="field:'view_valid',halign:'center',align:'center',checkbox:true,title:'查看权限'" width="60px">查看权限</th>-->
                            </tr>
                         </thead>
                      </table>

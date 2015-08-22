@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.module;
+package org.mo.content.core.manage.person.module;
 
 import com.cyou.gccloud.data.data.FDataControlModuleLogic;
 import com.cyou.gccloud.data.data.FDataControlModuleUnit;
@@ -40,7 +40,7 @@ public class FModuleConsole
       }
       StringBuffer whereSql = new StringBuffer();
       if(!RString.isEmpty(moduleUnit.code())){
-         whereSql.append(FDataControlModuleLogic.CODE).append(" LIKE '%").append(moduleUnit.code() + "%'");
+         whereSql.append(FDataControlModuleLogic.CODE).append(" LIKE '").append(moduleUnit.code() + "%'");
       }
       String orderBy = String.format("%s %s", FDataControlModuleLogic.CODE, "ASC");
       FDataControlModuleLogic moduleLogic = logicContext.findLogic(FDataControlModuleLogic.class);
@@ -55,7 +55,11 @@ public class FModuleConsole
    // @param unit 更新数据
    // ============================================================
    @Override
-   public FLogicDataset<FDataControlModuleInfo> selectModule(ILogicContext logicContext){
+   public FLogicDataset<FDataControlModuleInfo> selectModule(ILogicContext logicContext,
+                                                             int pageNum){
+      if(pageNum < 0){
+         pageNum = 0;
+      }
       String orderBy = String.format("%s %s", FDataControlModuleLogic.CODE, " ASC ");
       FLogicDataset<FDataControlModuleInfo> moduleInfoList = logicContext.findLogic(FDataControlModuleLogic.class).fetchClass(FDataControlModuleInfo.class, null, null, orderBy, -1, -1);
       return moduleInfoList;

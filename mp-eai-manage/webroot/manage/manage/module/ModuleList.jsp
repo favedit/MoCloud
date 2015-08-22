@@ -16,12 +16,12 @@ $(function(){
 	});
 });
 function moduleSubmit(page){
-	progress();	
+	progress();
 	var url = null;
 	var data = null;
 	if(page != null){
 		url = "/manage/module/Module.wa?do=selectDataByPage&page="+page+"&date="+new Date().valueOf();
-		data ={"code":$('#code').val(),"page":page};
+		data ={"code":$.trim($('#code').val()).replaceAll("'", ""),"page":page};
 	}else{
 		url = "/manage/module/Module.wa?do=selectDataByPage&date="+new Date().valueOf();
 	}
@@ -47,13 +47,11 @@ function del(id){
 		$.getJSON(url,data,function(d){
          var result = toJsonObject(d);
 			if(result=="1"){
-				alertx("删除成功！","info",function(){
 					location.href = "/manage/module/Module.wa";
-				});			
 			}else if(result=="2"){
-				alertx("此模块正在被使用中，不可删除！","warning",function(){
+				alertx("此模块正被使用中，请先取消角色关联后再删除！","warning",function(){
 					location.href = "/manage/module/Module.wa";
-				});			
+				});		
 			}else{
 				alertx("删除失败！","warning",function(){
 					location.href = "/manage/module/Module.wa";
@@ -78,7 +76,8 @@ function edit(id){
         <a href="/manage/module/Module.wa?do=insertPrepare" class="add_btn"></a>
         </div>
         <div class="nav_search">
-            <input id="code" name="" type="text">
+            <input id="code" name="" type="text" onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';" 
+                   onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}" style="color:#ccc" value="代码">
             <a onClick="moduleSubmit(0)" href="#" class="sear_btn"></a>
         </div>
   </div>  
@@ -89,8 +88,8 @@ data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:
 	<thead>
 			<tr>
 			      <th data-options="field:'ouid',halign:'center',align:'right'" width="60px" >编号</th>
-                  <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="150px" >代码</th>
-                  <th data-options="field:'label',halign:'center',align:'left'" width="150px" >中文名称</th>
+                  <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="200px" >代码</th>
+                  <th data-options="field:'label',halign:'center',align:'left'" width="200px" >模块名称</th>
                   <th data-options="field:'note',halign:'center',align:'left'" width="200px" >备注</th>
                   <th data-options="field:'createDate',halign:'center'" width="140px" >创建时间</th>
                   <th data-options="field:'make',halign:'center',align:'right',formatter:insert_editAndDelButton" width="150px">操作</th>

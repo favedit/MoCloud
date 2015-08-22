@@ -1,10 +1,23 @@
 package org.mo.content.face.mb;
 
+import com.cyou.gccloud.data.data.FDataControlModuleUnit;
+import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
+import com.cyou.gccloud.data.data.FDataControlRoleUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
+import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import org.mo.com.lang.RString;
 import org.mo.content.core.common.EChartPage;
+import org.mo.content.core.manage.person.module.IModuleConsole;
+import org.mo.content.core.manage.person.role.IRoleConsole;
+import org.mo.content.core.manage.person.role.IRoleModuleConsole;
+import org.mo.content.core.manage.person.user.IEntryConsole;
+import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
@@ -31,6 +44,23 @@ public class FIndexAction
 
    @ALink
    protected ILogicServiceInfoConsole _loggerServiceInfoConsole;
+
+   @ALink
+   protected IUserConsole _userConsole;
+
+   @ALink
+   protected IRoleConsole _roleConsole;
+
+   //模块控制台
+   @ALink
+   protected IModuleConsole _moduleConsole;
+
+   //角色模块控制台
+   @ALink
+   protected IRoleModuleConsole _roleModuleConsole;
+
+   @ALink
+   protected IEntryConsole _entryConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -103,6 +133,8 @@ public class FIndexAction
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.Success:
+            passport = "host_" + passport;
+            synchronizeData(logicContext, page, passport);
             logggerMessage = "登录成功。";
             break;
          case EGcAuthorityResult.PassportInvalid:
@@ -117,6 +149,8 @@ public class FIndexAction
             message = "时间已失效。";
             break;
          case EGcAuthorityResult.OaSuccess:
+            passport = "oa_" + passport;
+            synchronizeData(logicContext, page, passport);
             logggerMessage = "OA登录成功。";
             break;
          case EGcAuthorityResult.OaPasswordInvald:
@@ -155,4 +189,60 @@ public class FIndexAction
          return "Login";
       }
    }
+
+   //============================================================
+   // <T>登录成功后，用户信息同步。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 账户
+   //============================================================
+   private void synchronizeData(ILogicContext logicContext,
+                                FIndexPage page,
+                                String passport){
+      if(!_userConsole.passportExists(logicContext, passport)){
+         //获取角色
+         FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, "eai.oa");
+         if(role != null){
+            //同步OA用户
+            FDataPersonUserUnit unit = new FDataPersonUserUnit();
+            unit.setPassport(passport);
+            unit.setRoleId(role.ouid());
+            _userConsole.doInsert(logicContext, unit);
+            //同步用户状态
+            FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
+            entryUnit.setUserId(unit.ouid());
+            entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
+            entryUnit.setFromCd(EGcPersonUserFrom.EaiOa);
+            _entryConsole.doInsert(logicContext, entryUnit);
+            tackAuthority(logicContext, page, role.ouid());
+         }
+      }
+   }
+
+   //============================================================
+   // <T>获取管理权限。</T>
+   //
+   // @param logicContext 环境
+   // @param page 容器
+   // @param roleid 角色编号
+   //============================================================
+   private void tackAuthority(ILogicContext logicContext,
+                              FIndexPage page,
+                              long roleid){
+      StringBuffer menuStrings = new StringBuffer();
+      long roleId = roleid;
+      if(roleId != 0){
+         FLogicDataset<FDataControlRoleModuleUnit> roelModuleInfoList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleId, 0);
+         for(FDataControlRoleModuleUnit role : roelModuleInfoList){
+            FDataControlModuleUnit module = _moduleConsole.find(logicContext, role.moduleId());
+            if(module != null){
+               menuStrings.append(module.code()).append("|");
+            }
+         }
+         page.setMenuString(menuStrings.deleteCharAt(menuStrings.length() - 1).toString());
+      }else{
+         page.setMenuString(null);
+      }
+   }
+
 }

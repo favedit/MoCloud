@@ -26,6 +26,17 @@ public class FIndexPage
    // 场景代码
    protected String _sceneCode;
 
+   //用户权限
+   protected String _menuString;
+
+   public String menuString(){
+      return _menuString;
+   }
+
+   public void setMenuString(String _menuString){
+      this._menuString = _menuString;
+   }
+
    //============================================================
    // <P>获得主机地址。</P>
    //============================================================

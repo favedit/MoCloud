@@ -8,10 +8,10 @@
    </HEAD>
    <script>
       $(function() {
-//         var ovld = "<jh:write source='&role.ovld' />";
-//         if (ovld == 'true') {
-//            $("#ovld").attr("checked", true);
-//         }
+         //         var ovld = "<jh:write source='&role.ovld' />";
+         //         if (ovld == 'true') {
+         //            $("#ovld").attr("checked", true);
+         //         }
          roleSubmit(null);
          /*var pager =	$('#module').datagrid().datagrid('getPager');
 	pager.pagination({
@@ -56,18 +56,21 @@
          });
       }
 
-      function clickCheck(o, i) {
-         var rows = $('#module').datagrid('getRows');
-         var row = rows[i];
-         row.viewValidCd = o.checked ? 1 : 0;
-      }
+
 
       function isChecked(value, row, index) {
+         console.log(row.viewValidCd);
          if (row.viewValidCd == '1') {
             return '<input type="checkbox" name="DataGridCheckbox" checked="checked" onclick="clickCheck(this,' + index + ')">';
          } else {
             return '<input type="checkbox" name="DataGridCheckbox" onclick="clickCheck(this,' + index + ')">';
          }
+      }
+
+      function clickCheck(o, i) {
+         var rows = $('#module').datagrid('getRows');
+         var row = rows[i];
+         row.viewValidCd = o.checked ? 1 : 0;
       }
 
       function submitForm() {
@@ -107,7 +110,7 @@
                <tr>
                   <td width="47" align="left">英文名称</td>
                   <td width="400" align="left" colspan="2">
-                     <input id="code" name="code" class="textbox" style="width:400px" value="<jh:write source='&role.code' />" />
+                     <input id="code" name="code" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" value="<jh:write source='&role.code' />" />
                      <input name="roleId" style="display:none;" value="<jh:write source='&role.ouid' />" />
                      <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
                      <input id="moduleIds" name="moduleIds" style="display:none;" />
@@ -116,7 +119,7 @@
                <tr>
                   <td align="left">中文名称</td>
                   <td align="left" colspan="2">
-                     <input id="label" name="label" class="textbox" style="width:400px" value="<jh:write source='&role.label' />" />
+                     <input id="label" name="label" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" value="<jh:write source='&role.label' />" />
                   </td>
                </tr>
                <tr>

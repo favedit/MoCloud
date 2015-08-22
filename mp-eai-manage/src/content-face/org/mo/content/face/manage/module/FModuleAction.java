@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataControlModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.manage.module.FDataControlModuleInfo;
 import org.mo.content.core.manage.module.IModuleConsole;
 import org.mo.content.core.manage.role.IRoleModuleConsole;
 import org.mo.content.core.manage.user.IUserConsole;
@@ -82,6 +83,28 @@ public class FModuleAction
       FDataControlModuleUnit moduleUnit = new FDataControlModuleUnit();
       moduleUnit.setCode(context.parameter("code"));
       FLogicDataset<FDataControlModuleUnit> moduleUnitList = _moduleConsole.selectDataByPageAndSomerow(logicContext, moduleUnit, modulePage.pageCurrent() - 1);
+      basePage.toJson(moduleUnitList.toJsonListString());
+      _logger.debug(this, "SelectDataByPage", "SelectDataByPage Finish. (moduleUnitList={1})", moduleUnitList.count());
+      return "#/common/ajax";
+   }
+
+   // ============================================================
+   // <T>数据分页查询</T>
+   //
+   // @param context 上下文
+   // @param logicContext 数据库连接
+   // @param modulePage 页面
+   // @return 要跳转页面
+   // ============================================================
+   @Override
+   public String selectAll(IWebContext context,
+                           ILogicContext logicContext,
+                           FBasePage basePage){
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      _logger.debug(this, "SelectDataByPage", "SelectDataByPage begin. (page={1},label={2})", context.parameter("page"), context.parameter("code"));
+      FLogicDataset<FDataControlModuleInfo> moduleUnitList = _moduleConsole.selectModule(logicContext);
       basePage.toJson(moduleUnitList.toJsonListString());
       _logger.debug(this, "SelectDataByPage", "SelectDataByPage Finish. (moduleUnitList={1})", moduleUnitList.count());
       return "#/common/ajax";
