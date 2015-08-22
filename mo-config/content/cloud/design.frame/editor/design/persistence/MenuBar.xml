@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <MenuBar name="system.design.persistence.MenuBar" type='FEditorDsPersistenceMenuBar' label="菜单">
+      <MenuButton name='create' linker='_controlCreate' icon='editor.common.create' label='新建定义'/>
+      <MenuButton name='update' linker='_controlUpdate' icon='editor.common.save' label='保存定义'/>
+      <MenuButton name='delete' linker='_controlDelete' icon='editor.common.delete' label='删除定义'/>
+      <MenuButtonSplit/>
+      <MenuButton name='order' linker='_controlOrder' icon='editor.common.order' label='项目排序'/>
+      <MenuButtonSplit/>
+      <MenuButton name='build' linker='_controlBuild' icon='editor.common.build' label='编译代码'/>
+   </MenuBar>
+</Content>

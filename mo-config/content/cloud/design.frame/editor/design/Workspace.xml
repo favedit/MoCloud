@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Workspace name="editor.design.Workspace" type='FEditorDsWorkspace' label="私有工作区">
+      <FrameSet name='mainFrameSet' direction_cd='V' label='页面布局'>
+         <FramePage name='menuFrame' linker='_frameMenuBar' label='菜单区' size='0,48'/>
+         <FramePage name='bodyFrame' linker='_frameBody' label='内容区'>
+            <FrameSet name='bodyFrameSet' direction_cd='H' label='页面布局'>
+               <FramePage name='moduleFrame' linker='_frameModule' label='菜单区' size='160,0'>
+                  <SliderMenu name='moduleMenu' label='菜单区'>
+                     <SliderGroup name='developGroup' label='功能设计'>
+                        <SliderButton name='persistenceButton' linker='_controlPersistenceButton' icon='editor.design.persistence|png' label='持久化' fore_color='#FFFFFF'/>
+                        <SliderButton name='listButton' linker='_controlListButton' icon='editor.design.list|png' label='列表' fore_color='#FFFFFF'/>
+                        <SliderButton name='treeButton' linker='_controlTreeButton' icon='editor.design.tree|png' label='目录' fore_color='#FFFFFF'/>
+                        <SliderButton name='frameButton' linker='_controlFrameButton' icon='editor.design.frame|png' label='页面' fore_color='#FFFFFF'/>
+                     </SliderGroup>
+                     <SliderGroup name='databaseGroup' label='数据设计' fore_color='#FFFFFF'>
+                        <SliderButton name='datasetGroup' linker='_controlDatasetButton' label='数据集' fore_color='#FFFFFF'/>
+                     </SliderGroup>
+                  </SliderMenu>
+               </FramePage>
+               <FramePage name='spaceFrame' linker='_frameSpace' label='工作区'/>
+            </FrameSet>
+         </FramePage>
+      </FrameSet>
+   </Workspace>
+</Content>
