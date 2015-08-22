@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebTable _uuid="55fd0379-7591-4d79-bc2a-e3ce7fa73151" name="content.persistence.PersistenceList" label="M#12cn210持久化对象-集合列表" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" edit_insert="Y" edit_update="Y" edit_delete="Y" disp_rowbar="N" panel_title="N" panel_head="N" panel_search="N" panel_hint="N" panel_total="N" query_prepare="N" form_custom="N" disp_selected="N">
+  <ToolBar _uuid="54f80604-0ca0-4b5d-8f7d-6a4541df3f11" name="toolBar" label="M#12cn13工具栏" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+    <ToolButton _uuid="d5029e86-a6ac-46ec-b505-a45c1033fb55" name="insertButton" label="M#12cn17新建持久化集合" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#design.persistence.persistenceNew" hotkey="F5" page="insert@#/design/persistence/ContentPersistence.wa" attributes="sel_type=collection\n_type=Persistence\nform_name=content.persistence.PersistenceForm" />
+    <ToolButtonSplit _uuid="8b07a5c7-6c7b-45e5-bdf1-3fe003835063" name="splitButton" label="M#12cn12分割" is_valid="Y" note="M#" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" />
+    <ToolButton _uuid="fc2ca446-0aaf-4313-a450-3ccc2350e4f4" name="buildButton" label="M#12cn14全部编译" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#tools.build" icon_disable="#tools.buildDisable" page="buildAll@#/design/persistence/ContentPersistence.wa" />
+  </ToolBar>
+  <ColumnEdit _uuid="8dc40e33-c4f0-4c11-8143-0a509e66b551" name="name" label="M#12cn12名称" is_valid="Y" note="M#" disp_search="Y" disp_list="Y" width="160" data_name="NAME" />
+  <ColumnEdit _uuid="7cd3539d-9e3a-42f7-aabb-b7be9b6cea87" name="label" label="M#12cn12标签" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="LABEL" />
+</WebTable>

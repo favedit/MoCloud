@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="7b95f8ba-317a-4c6e-b415-ecc8464d5d0f" name="data.common.country" label="M#12cn15共通国家表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Country" data_name="DT_COM_COUNTRY" data_alias="DT_COM_CTY" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="07fd082e-be0b-4d14-b87e-07fa58a6b33a" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="8" />
+  <FieldString _uuid="59b60965-e985-4d5c-97f3-b8c809bede51" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="20" />
+  <FieldString _uuid="a5adeb7e-1d62-4628-84a2-9de428338a8c" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="c26aa667-cfb2-4104-80b5-9417ea6d0554" name="phone_code" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CODE" data_size="8" />
+  <FieldString _uuid="39ef282a-4a0e-45e9-962f-8476f68901db" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+  <FieldInteger _uuid="2b954300-a3a8-4a15-8c1e-89bdba1c83c8" name="display_code" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CODE" />
+  <FieldString _uuid="1514f71b-dbb2-446b-a000-30bf5fd1042f" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="51ca4644-56bb-4bf4-80fb-d892ce9cac34" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="1f844179-42a6-4fd7-b907-cd5ed1a39e37" name="data.person.user.resource" label="M#12cn15用户资源表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="D-RS-RES" data_name="DT_PSN_USER_RESOURCE" data_alias="DT_PSN_USR_RES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="a6627bdd-3c5c-468d-9d6f-61e61c040ed4" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="c1127950-c6c7-4432-ada9-f709342db2d4" name="resource_id" label="M#12cn14资源编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RESOURCE_ID" data_alias="RES" data_refer="data.resource.resource" />
+  <FieldTemplate _uuid="21883042-d881-43e0-89e5-5c42a3a0ec01" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

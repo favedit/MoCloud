@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group _uuid="24f91b7a-d6bf-4565-a742-c4b84cb222bc" name="logic.upgrade" label="逻辑升级" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="N" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="LogicUpgrade" code="Lgu" full_code="LogicUpgrade" display_index="12">
+  <Message _uuid="665d219e-7b17-454f-baef-0d69ebe0ae6a" name="version.query.request" label="版本查询请求" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" code="VersionQuery" is_udp="N" message_type="Request" is_asynchronous="N" is_session="N" is_login="N" is_login_role="N" is_manage="N" source_type="CLT" target_type="GSC" code_value="0x0001" code_fix="N">
+    <Item _uuid="1a5a0b61-e775-4e9e-9998-ea70fe413c90" name="version" label="版本" is_valid="Y" note="M#" valid_empty="N" valid_length_max="M#" valid_length_min_eq="N" valid_length_max_eq="N" type="String" is_collection="N" is_node="Y" />
+  </Message>
+  <Message _uuid="65478466-9d3a-4610-b77e-ee10ccb21bbb" name="version.query.response" label="版本查询应答" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" code="VersionQuery" is_udp="N" message_type="Response" is_asynchronous="N" is_session="N" is_login="N" is_login_role="N" is_manage="N" source_type="GSC" target_type="CLT" code_value="0x0002" code_fix="N">
+    <Item _uuid="a992d18a-6f62-4320-9464-0937ecd1f86d" name="resultCd" label="结果类型" is_valid="Y" note="M#" valid_empty="N" valid_length_max="M#" valid_length_min_eq="N" valid_length_max_eq="N" type="String" is_collection="N" is_node="N" />
+    <Struct _uuid="2ac0514f-cdfb-41de-8a26-a9d4025e7f15" name="SVersionInfo" label="版本信息" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" />
+    <Item _uuid="0fc27f80-9605-4752-b2a8-6bf377a048e6" name="versions" label="版本集合" is_valid="Y" note="M#" valid_empty="N" valid_length_max="M#" valid_length_min_eq="N" valid_length_max_eq="N" type="Struct" type_name="SVersionInfo" is_collection="N" is_node="N" />
+  </Message>
+</Group>

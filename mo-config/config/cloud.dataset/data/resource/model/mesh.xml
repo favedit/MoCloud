@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="9cbcfdd1-e0ac-4a54-a93b-e884dab3114c" name="data.resource.model.mesh" label="M#12cn17资源模型网格表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Mesh" data_name="DT_RES_MODEL_MESH" data_alias="DT_RES_MOD_MSH" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="32b5d273-4773-427f-b1dc-4cec8f3802f0" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="36977267-a626-4047-8e95-ff22c80710c9" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
+  <FieldRecordId _uuid="b6b4b3bd-9bcd-4369-9ba0-347d734110af" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource.model" />
+  <FieldInteger _uuid="52a80f7e-25c8-4d3f-a3ed-5e74b24518db" name="sort_index" label="M#12cn14排序索引" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SORT_INDEX" />
+  <FieldString _uuid="4db98db8-7735-4e81-b765-bf7845686984" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
+  <FieldString _uuid="18e7edba-48fc-4916-beea-1b2c69e37d1b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="28e257a6-eb8b-4b5c-96f0-9fbb011fdaff" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="05d124dd-d73d-4fae-85eb-15631f3e5394" name="keywords" label="M#12cn13关键字" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORDS" data_size="2000" />
+  <FieldString _uuid="846783dd-87bc-46e4-8302-8a3343ca9334" name="outline_min" label="M#12cn15轮廓最小点" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OUTLINE_MIN" data_size="80" />
+  <FieldString _uuid="19c9a0ad-04f8-4cfa-b9b1-06475415feb8" name="outline_max" label="M#12cn15轮廓最大点" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="OUTLINE_MAX" data_size="80" />
+  <FieldContent _uuid="eee37268-28b0-48f8-aca3-f582d0ccc445" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldTemplate _uuid="8e1f7f25-c342-49d1-b7db-9b6e6a54c2f2" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>

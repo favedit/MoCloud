@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebTemplate _uuid="abc11c31-eb9f-44bc-a8c0-3e8716c5d28b" name="content.frame.FrameBasicTemplate" label="M#12cn16窗口基础模板" is_valid="Y" note="M#">
+  <DataAction _uuid="edc228ca-9a42-466f-925c-a9d2aeaa21de" name="insertAction" label="M#12cn14新建命令" is_valid="Y" note="M#" service="insert@content.design.form" />
+  <DataAction _uuid="e5a82dcf-f960-4c57-89a4-31604ba3c199" name="updateAction" label="M#12cn14保存命令" is_valid="Y" note="M#" service="update@content.design.form" />
+  <DataAction _uuid="ffb472ec-4e5f-4e35-a43a-a37d03126ead" name="deleteAction" label="M#12cn14删除命令" is_valid="Y" note="M#" service="delete@content.design.form" />
+  <DataAction _uuid="2724703e-aaee-4c7e-a053-ec9b73233f8f" name="designAction" label="M#12cn14设计命令" is_valid="Y" note="M#" service="design@content.design.form" />
+  <DataAction _uuid="8fb00fc6-f698-4b2c-ad40-a40cd292022b" name="sortAction" label="M#12cn14排序命令" is_valid="Y" note="M#" service="sort@content.design.form" />
+  <ToolBar _uuid="9cdba81a-df36-407a-8409-ff78f5ae5190" name="toolBar" label="M#12cn13工具栏" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+    <ToolButton _uuid="ce361de2-40a4-43ab-9f8c-e1e2627f5e1d" name="saveButton" label="M#12cn12保存" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="tool.save" hotkey="F8" action="doSave()" />
+    <ToolButton _uuid="29bda6bd-0148-4b74-b355-ffe82d670352" name="deleteButton" label="M#12cn12删除" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="tool.delete" hotkey="F6" action="doDelete()" />
+  </ToolBar>
+  <Select _uuid="5e848630-f80d-4f80-8cb7-6e33540cbc0a" name="componentType" label="M#12cn14表单类型" is_valid="Y" note="M#" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" data_name="_TYPE" edit_insert="Y" edit_zoom="N" valid_insert="Y" valid_update="Y" type_able="N" edit_refer="content.frame.FrameType" edit_dynamic="N" />
+  <Check _uuid="3535d472-da4a-497d-945e-fbf2a698a33a" name="isVaild" label="M#12cn13有效性" is_valid="Y" note="M#" disp_search="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="IS_VALID" data_default="Y" edit_insert="Y" edit_update="Y" edit_delete="Y" valid_insert="Y" valid_update="Y" label_position="left" />
+  <Edit _uuid="ef59de47-0fea-44b7-a9fa-c91c8479d2e4" name="name" label="M#12cn12名称" is_valid="Y" note="M#" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" label_icon="#design.webform.iconPickerNew" data_name="NAME" edit_insert="Y" valid_insert="Y" valid_update="Y" valid_require="Y" />
+  <Edit _uuid="ad829a11-e33b-450a-81d7-95f87bdb8d35" name="label" label="M#12cn12标签" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="LABEL" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" valid_require="Y" />
+  <Edit _uuid="96b98b35-a648-42d4-a4be-2cb3f24781a7" name="businessCode" label="M#12cn14业务代码" is_valid="Y" note="M#" disp_search="Y" disp_lov="Y" disp_display="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" style_edit="editMax" data_name="BUSINESS_CODE" edit_insert="Y" edit_update="Y" edit_copy="Y" valid_insert="Y" valid_update="Y" />
+</WebTemplate>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="a3b346a1-a75b-458a-8933-025a0c951dda" name="statistics.financial.tender.phase" label="M#12cn17投标阶段统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Tender.Phase" data_name="ST_FIN_TENDER_PHASE" data_alias="ST_FIN_TND_PHS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.statistics" data_type="D">
+  <FieldRecordId _uuid="4adb8235-770c-4a4c-9c8f-d3167f9ed590" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="8f131d4c-1a09-4b22-9751-88479fab137b" name="link_date" label="M#12cn14关联日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldRecordId _uuid="91cae75c-dd9e-4be6-980b-29bd191731ad" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" data_uniques="DAT" />
+  <FieldString _uuid="fd5368a4-4a6c-4f13-a341-fe8e506c2d9b" name="tender_label" label="M#12cn14投标标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_LABEL" data_size="40" />
+  <FieldString _uuid="2ff3e0cb-28f0-4295-af73-32dc5e76993e" name="tender_model" label="M#12cn14投标模式" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_MODEL" data_size="20" />
+  <FieldDouble _uuid="17d63ea4-aaae-458f-97a2-f860d2411d69" name="investment" label="M#12cn12投资" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT" />
+  <FieldDouble _uuid="526947bc-df83-4466-9bc4-532e62fc175d" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldDouble _uuid="78666654-011a-42f7-9b6a-d0e20f19578a" name="redemption" label="M#12cn12赎回" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION" />
+  <FieldDouble _uuid="53679e65-8eab-4040-9e31-9775690d42e6" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="c72cdc6a-86d1-4497-a258-208fe5081d4a" name="netinvestment" label="M#12cn12净投" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
+  <FieldDouble _uuid="d68403ce-51fc-4e70-a0f0-9f9a62b44550" name="netinvestment_total" label="M#12cn14净投总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="d3317448-2719-48ad-9a2b-53fa55d6c32a" name="interest" label="M#12cn12利息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST" />
+  <FieldDouble _uuid="06b5ad37-72a2-4ad1-8929-cf3679b37dfb" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldInteger _uuid="c3b25857-5c8a-4f1b-a345-330d822243f9" name="customer_count" label="M#12cn14客户总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_COUNT" />
+  <FieldInteger _uuid="fd7f92ca-fcbe-4fc4-a302-6f4304e70e95" name="customer_total" label="M#12cn14客户总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_TOTAL" />
+  <FieldDateTime _uuid="e533eed7-5885-4906-a3d4-87477f4f50af" name="customer_action_date" label="M#12cn16客户命令时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ACTION_DATE" />
+  <FieldTemplate _uuid="4c5106e8-6938-450c-a61b-b21a36640be5" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

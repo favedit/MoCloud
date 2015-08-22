@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="baaf7638-0080-4920-be10-aef06b381d62" name="data.resource.model.skeleton.skin.stream" label="M#12cn212资源模型骨骼蒙皮数据流表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Resource3d.Stream" data_name="DT_RES_MODEL_SKELETON_SKIN_STREAM" data_alias="DT_RES_MOD_SKT_SKN_STM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.resource" data_type="D">
+  <FieldRecordId _uuid="5cdeadc4-1e37-4526-a71e-82eae4d0f297" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldRecordId _uuid="3b6d0d31-4da1-4f5b-bd7f-d322792de5ca" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" data_alias="PRJ" data_refer="data.solution.project" />
+  <FieldRecordId _uuid="39e7819b-3f76-470a-8950-a78887fa44b7" name="model_id" label="M#12cn14模型编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODEL_ID" data_alias="MOD" data_refer="data.resource.model" />
+  <FieldRecordId _uuid="5c423d9d-d714-46fd-af2b-be8b4e3e89e3" name="mesh_id" label="M#12cn14网格编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MESH_ID" data_alias="MSH" data_refer="data.resource.model.mesh" />
+  <FieldRecordId _uuid="e36b4ed0-7103-4fec-9267-d50f20069622" name="skeleton_id" label="M#12cn14骨骼编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SKELETON_ID" data_alias="SKT" data_refer="data.resource.model.skeleton" />
+  <FieldRecordId _uuid="eff32d31-ce3d-4127-9d5b-6b02ec3187bf" name="skin_id" label="M#12cn14蒙皮编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SKIN_ID" data_alias="SKN" data_refer="data.resource.model.skeleton.skin" />
+  <FieldInteger _uuid="5976ca95-17a8-44b9-93a4-85b20b39db96" name="sort_index" label="M#12cn14排序索引" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SORT_INDEX" />
+  <FieldString _uuid="ba5d9a56-fac2-46ad-9673-2ab40afd71cf" name="full_code" label="M#12cn13全代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FULL_CODE" data_size="200" />
+  <FieldString _uuid="d3e348d9-3e0d-4dc5-8e55-12a7ec0df86d" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldInteger _uuid="19bdd708-1722-499f-86ee-422f0587f284" name="element_data_cd" label="M#12cn16元素数据类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_DATA_CD" />
+  <FieldInteger _uuid="6c446c65-6029-409a-9420-9128e909f485" name="element_count" label="M#12cn14元素个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ELEMENT_COUNT" />
+  <FieldInteger _uuid="8e115702-9abc-454b-9e56-de6a9f2b67e6" name="data_stride" label="M#12cn14数据宽度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_STRIDE" />
+  <FieldInteger _uuid="92198df1-f29a-4636-93ac-17fc93408701" name="data_count" label="M#12cn14数据个数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_COUNT" />
+  <FieldInteger _uuid="1d41c6c2-eb18-458d-aecb-6a93359c9a37" name="data_length" label="M#12cn14数据长度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_LENGTH" />
+  <FieldTemplate _uuid="a284f820-34ad-4b5d-83ca-1feacc737594" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.resource.track" />
+</DataStore>
