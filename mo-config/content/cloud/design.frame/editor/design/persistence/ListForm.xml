@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="system.design.frame.property.ButtonFrame" type='FEditorDsPropertyForm' label="持久化属性" is_valid="Y" logic_group='container' logic_service='editor.design.persistence' note="">
-      <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
-         <Select name="componentType" label="组件类型" label_size='80,0' valid="Y" data_name='_type' edit_size='600,0' input_size='500,0' edit_refer='editor.design.persistence.ComponentType' note="" />
-         <Check name="isValid" label="有效性" label_size='80,0' valid="Y" data_name='is_valid' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="name" label="名称" label_size='80,0' valid="Y" data_name='name' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="label" label="标签" label_size='80,0' valid="Y" data_name='label' edit_size='600,0' input_size='500,0' note="" />
-      </Panel>
-      <Panel name='notePanel' icon='design.panel.icon' label='备注信息'>
-         <Memo name="note" label="备注" label_size='80,0' valid="Y" data_name='note' edit_size='600,0' input_size='500,80' note="" />
-      </Panel>
+   <Frame name="system.design.frame.property.ButtonFrame" type='FEditorDsPropertyForm' label="持久化属性" is_valid="Y" note="">
+     <ToolBar name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" is_merge="N">
+       <ToolButton name="insertButton" label="新建持久化包" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.persistence" hotkey="F5" attributes="logic_group=container\nframe_name=editor.design.persistence.property.PersistenceForm\ncomponent_type=Persistence" />
+       <ToolButtonSplit name="splitButton" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" />
+       <ToolButton name="buildButton" label="全部编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" page="buildAll@#/design/persistence/Persistence.wa" />
+     </ToolBar>
    </Frame>
 </Content>

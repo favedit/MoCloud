@@ -308,6 +308,7 @@ ALTER TABLE DT_CTL_MODULE
    ADD CONSTRAINT DT_CTL_MOD_UK_GID UNIQUE ( GUID ); 
 ALTER TABLE DT_CTL_MODULE 
    ADD CONSTRAINT DT_CTL_MOD_UK_CODE UNIQUE (CODE); 
+
 -- ------------------------------------------------------------
 -- Create table [Data.Control.Role]
 -- ------------------------------------------------------------

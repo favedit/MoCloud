@@ -35556,6 +35556,34 @@ MO.APtyEnum_toString = function APtyEnum_toString(){
    var o = this;
    return 'linker=' + o._linker + ',enum=' + o._enum + ',default=' + o._default;
 }
+MO.APtyFont = function APtyFont(name, linker, font, size, bold, color) {
+   var o = this;
+   MO.AProperty.call(o, name, linker);
+   o._font  = MO.Lang.Integer.nvl(font);
+   o._size  = MO.Lang.Integer.nvl(size);
+   o._bold  = MO.Lang.Integer.nvl(bold);
+   o._color = MO.Lang.Integer.nvl(color);
+   o.load = MO.APtyFont_load;
+   o.save = MO.APtyFont_save;
+   o.toString = MO.APtyFont_toString;
+   return o;
+}
+MO.APtyFont_load = function APtyFont_load(instance, xconfig) {
+   var o = this;
+   var value = xconfig.get(o._linker);
+   instance[o._name].parse(value);
+}
+MO.APtyFont_save = function APtyFont_save(instance, xconfig) {
+   var o = this;
+   var value = instance[o._name];
+   if (!value.isEmpty()) {
+      xconfig.set(o._linker, value.toString());
+   }
+}
+MO.APtyFont_toString = function APtyFont_toString() {
+   var o = this;
+   return 'linker=' + o._linker + ',value=' + o._font + ',' + o._size + o._bold + ',' + o._color;
+}
 MO.APtyInteger = function APtyInteger(n, l, v){
    var o = this;
    MO.AProperty.call(o, n, l);
@@ -35911,6 +35939,14 @@ MO.EUiMerge = new function EUiMerge(){
    o.Disable  = 'disable';
    return o;
 }
+MO.EUiMode = new function EUiMode(){
+   var o = this;
+   MO.TEnum.call(o);
+   o.Insert = 'Insert';
+   o.Update = 'Update';
+   o.Delete = 'Delete';
+   return o;
+}
 MO.EPanel = new function EPanel(){
    var o = this;
    o.Container = 0;
@@ -35997,31 +36033,32 @@ MO.MUiBorder_dispose = function MUiBorder_dispose(){
 }
 MO.MUiComponent = function MUiComponent(o){
    o = MO.Class.inherits(this, o);
-   o._guid           = MO.Class.register(o, [new MO.APtyString('_guid'), new MO.AGetSet('_guid')]);
-   o._name           = MO.Class.register(o, [new MO.APtyString('_name'), new MO.AGetSet('_name')]);
-   o._label          = MO.Class.register(o, [new MO.APtyString('_label'), new MO.AGetSet('_label')]);
-   o._attributes     = MO.Class.register(o, [new MO.APtyAttributes('_attributes'), new MO.AGetter('_attributes')]);
-   o._components     = null;
-   o._tag            = MO.Class.register(o, new MO.AGetSet('_tag'));
-   o.oeInitialize    = MO.MUiComponent_oeInitialize;
-   o.oeRelease       = MO.MUiComponent_oeRelease;
-   o.attributeGet    = MO.MUiComponent_attributeGet;
-   o.attributeSet    = MO.MUiComponent_attributeSet;
-   o.topComponent    = MO.MUiComponent_topComponent;
-   o.hasComponent    = MO.MUiComponent_hasComponent;
-   o.findComponent   = MO.MUiComponent_findComponent;
-   o.searchComponent = MO.MUiComponent_searchComponent;
-   o.components      = MO.MUiComponent_components;
-   o.push            = MO.MUiComponent_push;
-   o.remove          = MO.MUiComponent_remove;
-   o.clear           = MO.MUiComponent_clear;
-   o.process         = MO.MUiComponent_process;
-   o.psInitialize    = MO.MUiComponent_psInitialize;
-   o.psRelease       = MO.MUiComponent_psRelease;
-   o.toString        = MO.MUiComponent_toString;
-   o.dispose         = MO.MUiComponent_dispose;
-   o.innerDumpInfo   = MO.MUiComponent_innerDumpInfo;
-   o.innerDump       = MO.MUiComponent_innerDump;
+   o._guid            = MO.Class.register(o, [new MO.APtyString('_guid'), new MO.AGetSet('_guid')]);
+   o._name            = MO.Class.register(o, [new MO.APtyString('_name'), new MO.AGetSet('_name')]);
+   o._label           = MO.Class.register(o, [new MO.APtyString('_label'), new MO.AGetSet('_label')]);
+   o._attributes      = MO.Class.register(o, [new MO.APtyAttributes('_attributes'), new MO.AGetter('_attributes')]);
+   o._components      = null;
+   o._tag             = MO.Class.register(o, new MO.AGetSet('_tag'));
+   o.oeInitialize     = MO.MUiComponent_oeInitialize;
+   o.oeRelease        = MO.MUiComponent_oeRelease;
+   o.attributeGet     = MO.MUiComponent_attributeGet;
+   o.attributeSet     = MO.MUiComponent_attributeSet;
+   o.topComponent     = MO.MUiComponent_topComponent;
+   o.hasComponent     = MO.MUiComponent_hasComponent;
+   o.findComponent    = MO.MUiComponent_findComponent;
+   o.searchComponent  = MO.MUiComponent_searchComponent;
+   o.searchComponents = MO.MUiComponent_searchComponents;
+   o.components       = MO.MUiComponent_components;
+   o.push             = MO.MUiComponent_push;
+   o.remove           = MO.MUiComponent_remove;
+   o.clear            = MO.MUiComponent_clear;
+   o.process          = MO.MUiComponent_process;
+   o.psInitialize     = MO.MUiComponent_psInitialize;
+   o.psRelease        = MO.MUiComponent_psRelease;
+   o.toString         = MO.MUiComponent_toString;
+   o.dispose          = MO.MUiComponent_dispose;
+   o.innerDumpInfo    = MO.MUiComponent_innerDumpInfo;
+   o.innerDump        = MO.MUiComponent_innerDump;
    return o;
 }
 MO.MUiComponent_oeInitialize = function MUiComponent_oeInitialize(e){
@@ -36084,6 +36121,20 @@ MO.MUiComponent_searchComponent = function MUiComponent_searchComponent(name){
       }
    }
    return findComponent;
+}
+MO.MUiComponent_searchComponents = function MUiComponent_searchComponents(findComponents, clazz){
+   var o = this;
+   var components = o._components;
+   if(components){
+      var count = components.count();
+      for(var i = 0; i < count; i++){
+         var component = components.at(i);
+         if(MO.Class.isClass(component, clazz)){
+            findComponents.push(component);
+         }
+         component.searchComponents(findComponents, clazz);
+      }
+   }
 }
 MO.MUiComponent_components = function MUiComponent_components(){
    var o = this;
@@ -36832,7 +36883,23 @@ MO.SUiFont_assign = function SUiFont_assign(value){
 }
 MO.SUiFont_parse = function SUiFont_parse(source){
    var o = this;
-   throw new MO.TError('Unsupport.');
+   var boldIndex = source.toLowerCase().indexOf('bold');
+   if (boldIndex != -1) {
+      o.bold = true;
+      source = source.replace(source.substring(boldIndex, boldIndex + 4), '');
+   }
+   var sharpIndex = source.indexOf('#');
+   if (sharpIndex != -1) {
+      o.color = source.substring(sharpIndex, sharpIndex + 7);
+      source = source.replace(o.color, '');
+   }
+   var sizeIndex = source.toLowerCase().indexOf('px');
+   if (sizeIndex != -1) {
+      var sizeString = source.substring(sizeIndex - 2, sizeIndex + 2);
+      o.size = parseInt(sizeString);
+      source = source.replace(sizeString, '');
+   }
+   o.font = MO.RString.trim(source);
 }
 MO.SUiFont_toString = function SUiFont_toString(){
    var o = this;
@@ -36903,6 +36970,10 @@ MO.FUiFrameDefineConsole_load = function FUiFrameDefineConsole_load(name){
    return xframe;
 }
 MO.MUiMenuButton = function MUiMenuButton(o){
+   o = MO.Class.inherits(this, o);
+   return o;
+}
+MO.MUiToolButton = function MUiToolButton(o){
    o = MO.Class.inherits(this, o);
    return o;
 }
@@ -38202,9 +38273,9 @@ MO.FGuiControl = function FGuiControl(o){
    o._alpha                  = MO.Class.register(o, [new MO.APtyString('_alpha'), new MO.AGetSet('_alpha')], 1);
    o._displayOrder           = MO.Class.register(o, [new MO.APtyString('_displayOrder'), new MO.AGetSet('_displayOrder')], 0);
    o._foreColor              = MO.Class.register(o, [new MO.APtyString('_foreColor'), new MO.AGetSet('_foreColor')], '#FFFFFF');
-   o._foreFont               = MO.Class.register(o, [new MO.APtyString('_foreFont'), new MO.AGetSet('_foreFont')]);
+   o._foreFont               = MO.Class.register(o, [new MO.APtyFont('_foreFont'), new MO.AGetSet('_foreFont')]);
    o._backColor              = MO.Class.register(o, [new MO.APtyString('_backColor'), new MO.AGetSet('_backColor')]);
-   o._backFont               = MO.Class.register(o, [new MO.APtyString('_backFont'), new MO.AGetSet('_backFont')]);
+   o._backFont               = MO.Class.register(o, [new MO.APtyFont('_backFont'), new MO.AGetSet('_backFont')]);
    o._backResource           = MO.Class.register(o, [new MO.APtyString('_backResource'), new MO.AGetSet('_backResource')]);
    o._backGrid               = MO.Class.register(o, [new MO.APtyPadding('_backGrid'), new MO.AGetter('_backGrid')]);
    o._backHoverColor         = MO.Class.register(o, [new MO.APtyString('_backHoverColor'), new MO.AGetSet('_backHoverColor')]);
@@ -38370,6 +38441,8 @@ MO.FGuiControl_construct = function FGuiControl_construct(){
    o._parentRectangle = new MO.SRectangle();
    o._clientRectangle = new MO.SRectangle();
    o._eventRectangle = new MO.SRectangle();
+   o._foreFont = new MO.SUiFont();
+   o._backFont = new MO.SUiFont();
 }
 MO.FGuiControl_isReady = function FGuiControl_isReady(){
    return this._statusReady;
@@ -38469,12 +38542,16 @@ MO.FGuiControl_paint = function FGuiControl_paint(event){
    }else if(o._anchorCd & MO.EUiAnchor.Left){
       left = (parentRight - width - o._right) * calculateRate.width;
       width = right - left;
+   }else if(o._anchorCd & MO.EUiAnchor.Right){
+      width = (parentRight - left - o._right) * calculateRate.width;
    }
    if((anchorCd & MO.EUiAnchor.Top) && (o._anchorCd & MO.EUiAnchor.Bottom)){
       height = bottom - top;
    }else if(o._anchorCd & MO.EUiAnchor.Top){
       top = (parentBottom - height - o._bottom) * calculateRate.height;
       height = bottom - top;
+   }else if(o._anchorCd & MO.EUiAnchor.Bottom){
+      height = (parentBottom - top - o._bottom) * calculateRate.height;
    }
    event.optionContainer = false;
    graphic.store();
@@ -39962,14 +40039,14 @@ MO.FGuiGridColumnText_dispose = function FGuiGridColumnText_dispose(){
 }
 MO.FGuiGridControl = function FGuiGridControl(o) {
    o = MO.Class.inherits(this, o, MO.FGuiControl, MO.MUiGridControl);
-   o._optionClip = MO.Class.register(o, new MO.AGetSet('_optionClip'), true);
-   o._headPadding = MO.Class.register(o, new MO.AGetter('_headPadding'));
-   o._rowScroll = 0;
+   o._optionClip     = MO.Class.register(o, new MO.AGetSet('_optionClip'), true);
+   o._headPadding    = MO.Class.register(o, new MO.AGetter('_headPadding'));
+   o._rowScroll      = 0;
    o._rowScrollSpeed = 1;
-   o._paintContext = null;
-   o.onPaintBegin = MO.FGuiGridControl_onPaintBegin;
-   o.construct = MO.FGuiGridControl_construct;
-   o.dispose = MO.FGuiGridControl_dispose;
+   o._paintContext   = null;
+   o.onPaintBegin    = MO.FGuiGridControl_onPaintBegin;
+   o.construct       = MO.FGuiGridControl_construct;
+   o.dispose         = MO.FGuiGridControl_dispose;
    return o;
 }
 MO.FGuiGridControl_onPaintBegin = function FGuiGridControl_onPaintBegin(event) {
