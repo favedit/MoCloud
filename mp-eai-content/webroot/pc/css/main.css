@@ -23,7 +23,7 @@ body{
 	 margin-top: 10px;
 }
 .header{
-	height:66px;
+	height:56px;
 	background: #fff;
 	min-width: 1024px;
 }
@@ -33,39 +33,51 @@ body{
 }
 .head-left span{
 	display:inline-block;
-	height: 66px;
+	height: 56px;
 	background:#1879bd;
 	width: 130px;
 	color:#fff;
 	font-size: 22px;
-	line-height: 66px;
+	line-height: 56px;
 	text-align: center;
 }
 .head-left p{
 	display: inline-block;
 	color:#1879bd;
-	line-height: 66px;
+	line-height: 56px;
 	font-size: 16px;
 }
 .head-right{
 	float:right;
+	font-size: 16px;
 	position: relative;
 }
 .user-details{
 	display:inline-block;
 	position: relative;
-	height: 66px;
-	line-height: 66px;
-	margin-right: 100px;
+	height: 56px;
+	line-height: 56px;
+	margin-right: 80px;
 	position: relative;
 	padding: 0px 15px;
 }
 .user-details img{
-   position: absolute;
-   top:30px;
-   right: 4px;
+	position: absolute;
+	top:24px;
+	right: 4px;
+	transition: all 500ms ease;
+	transform-style: preserve-3d;
+	-moz-transform:rotate(180deg); 
+	-webkit-transform:rotate(180deg);
+	transform:rotate(180deg)
+}
+.user-details:hover img{
+	-moz-transform:rotate(0deg); 
+	-webkit-transform:rotate(0deg);
+	transform:rotate(0deg)
 }
 .user-details i{
+	display: none;
 	width: 18px;
 	height: 18px;
 	position: absolute;
@@ -80,20 +92,25 @@ body{
 }
 .head-right .img-details{
 	position: absolute;
-	width: 44px;
-	height: 44px;
-	border-radius: 22px;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
 	overflow: hidden;
 	display: inline-block;
 	top:10px;
 	right: 10px;
+	-webkit-animation-duration: 500ms;
+	-moz-animation-duration: 500ms;
+	-o-animation-duration: 500ms;
+	animation-duration: 500ms;
 }
 .head-right .img-details img{
 	width: 100%;
 }
 .users{
 	position: absolute;
-	display: block;
+	display: none;
+	left: 10px;
 }
 .users li{
 	background-image:url(../images/main/icon4.png);
@@ -181,21 +198,25 @@ body{
 	margin-top: 30px;
 	display: block;
 	height: 220px;
-	text-align: center;
 	overflow: hidden;
 }
 .container ul li{
 	height: 220px;
-	max-width: 590px;
-	width: 31%;
+	max-width: 600px;
+	width: 32%;
 	display: inline-block;
 	overflow: hidden;
-	margin-right: 20px;
+	margin-right: 18px;
+}
+.container ul li:last-child{
+	margin-right: 0px;
 }
 .container ul li img{
 	width: 100%;
 	display: block;
 	height: 220px;
 }
+.container ul:last-child{
+	margin-bottom: 30px;
+}
 
-   

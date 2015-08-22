@@ -29,11 +29,11 @@
 	display: block;
 	background-color: #fff;
 	border-radius: 10px;
-	-webkit-box-shadow:0 0 10px rgba(98, 105, 105, 0.2);  
-    -moz-box-shadow:0 0 10px rgba(98, 105, 105, 0.2);  
-    box-shadow:0 0 10px rgba(98, 105, 105, 0.2); 
-    padding: 0px 65px;
-    padding-bottom: 40px;
+  -webkit-box-shadow:0 0 10px rgba(98, 105, 105, 0.2);  
+  -moz-box-shadow:0 0 10px rgba(98, 105, 105, 0.2);  
+  box-shadow:0 0 10px rgba(98, 105, 105, 0.2); 
+  padding: 0px 65px;
+  padding-bottom: 40px;
    
 }
 .box-container p{
@@ -202,7 +202,6 @@
       margin-right: 10px;
      
       }
-
 
     /*  .dialog-box .box-warning:before {
       content: "";
