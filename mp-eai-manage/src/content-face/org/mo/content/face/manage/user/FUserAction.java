@@ -78,6 +78,14 @@ public class FUserAction
       return "/manage/common/ajax";
    }
 
+   // ============================================================
+   // <T>用户增加之前处理</T>
+   //
+   // @param context 上下文
+   // @param sqlContext 数据库连接
+   // @param userPage 页面
+   // @return 要跳转页面
+   // ============================================================
    @Override
    public String insertBefore(IWebContext context,
                               ILogicContext logicContext,
@@ -133,6 +141,15 @@ public class FUserAction
       return "/manage/common/ajax";
    }
 
+   // ============================================================
+   // <T>用户增加</T>
+   //
+   // @param context 上下文
+   // @param sqlContext 数据库连接
+   // @param formPage 容器
+   // @param basePage 容器
+   // @return 要跳转页面
+   // ============================================================
    @Override
    public String updateBefore(IWebContext context,
                               ILogicContext logicContext,
@@ -153,7 +170,8 @@ public class FUserAction
    //
    // @param context 上下文
    // @param sqlContext 数据库连接
-   // @param basePage 页面
+   // @param formPage 容器
+   // @param basePage 容器
    // @return 要跳转页面
    // ============================================================
    @Override
@@ -195,6 +213,15 @@ public class FUserAction
       return "/manage/common/ajax";
    }
 
+   // ============================================================
+   // <T>删除用户</T>
+   //
+   // @param context 上下文
+   // @param sqlContext 数据库连接
+   // @param formPage 容器
+   // @param basePage 容器
+   // @return 要跳转页面
+   // ============================================================
    @Override
    public String del(IWebContext context,
                      ILogicContext logicContext,

@@ -14,20 +14,22 @@
          id_code.value = code;
          frmMain.submit();
       }
+      function loginOut(){
+         location.href="Index.wa?do=loginOut";
+      }
    </script>
-
    <body>
       <FORM name='frmMain' method='post' action='Index.wa'>
          <INPUT id='id_do' name='do' type='hidden' value='chart'>
          <INPUT id='id_code' name='code' type='hidden'>
          <header class="header floatBtn">
             <div class="head-left"><span>数据中心</span>
-               <p class="pl-10">您好，兰壮壮 欢迎登陆！上次登录时间：2015-08-18 17:20:33</p>
+               <p class="pl-10">您好，<jh:write source='&page.passport' /> 欢迎登陆！</p>
             </div>
             <div class="head-right">
-               <p class="user-details" id="user-details"><i>3</i>王先生<img src="images/main/icon.png"></p>
+               <p class="user-details" id="user-details"><i>3</i><jh:write source='&page.passport' /><img src="images/main/icon.png"></p>
                <ul class="users" id="users">
-                  <li>退出</li>
+                  <li onclick="loginOut();">退出</li>
                </ul>
                <span class="img-details mr-20 pulse">
             <img src='images/main/re.jpeg'>

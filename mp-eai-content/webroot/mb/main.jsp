@@ -24,7 +24,6 @@
                   <span class="btn-list" id="btn-list"></span> 全球实时数据中心
                   <div class="header-r"><img src="images/ban.jpg"></div>
                </header>
-
                <div class="banner" id="banner">
                   <div class="bd">
                      <ul>
@@ -42,7 +41,6 @@
                         </li>
                      </ul>
                   </div>
-
                   <div class="hd">
                      <ul></ul>
                   </div>
@@ -109,6 +107,10 @@
          function doChart(code) {
             id_code.value = code;
             frmMain.submit();
+         }
+
+         function loginOut() {
+            location.href = "Index.wa?do=loginOut";
          }
       </script>
    </body>

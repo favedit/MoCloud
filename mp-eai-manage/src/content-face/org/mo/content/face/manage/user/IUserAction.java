@@ -66,7 +66,7 @@ public interface IUserAction
                  @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
-   // <T>修改用户</T>
+   // <T>修改用户之前</T>
    //
    // @param context 上下文
    // @param sqlContext 数据库连接

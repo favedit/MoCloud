@@ -209,6 +209,13 @@ public class FIndexAction
       return EChartPage.Scene;
    }
 
+   @Override
+   public String loginOut(IWebContext context,
+                          ILogicContext logicContext,
+                          FIndexPage page){
+      return "Login";
+   }
+
    //============================================================
    // <T>登录成功后，用户信息同步。</T>
    //

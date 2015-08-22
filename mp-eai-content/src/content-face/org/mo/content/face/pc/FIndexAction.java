@@ -177,9 +177,9 @@ public class FIndexAction
       logger.setBrowserUri(context.requestUrl());
       logger.setPageInfo(context.parameters().dump());
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
-      System.out.println(page.menuString() + "------------------");
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
+         page.setPassport(passport.substring(passport.indexOf("_") + 1, passport.length()));
          return "/pc/main";
       }else{
          page.setMessage(message);
@@ -202,6 +202,13 @@ public class FIndexAction
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
       page.setSceneCode(code);
       return EChartPage.Scene;
+   }
+
+   @Override
+   public String loginOut(IWebContext context,
+                          ILogicContext logicContext,
+                          FIndexPage page){
+      return "Login";
    }
 
    //============================================================
@@ -263,4 +270,5 @@ public class FIndexAction
          page.setMenuString(null);
       }
    }
+
 }
