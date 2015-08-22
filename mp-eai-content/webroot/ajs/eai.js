@@ -3287,19 +3287,19 @@ MO.FEaiDynamicInfo_construct = function FEaiDynamicInfo_construct(){
 }
 with (MO) {
    MO.FGui24HTimeline = function FGui24HTimeline(o) {
-      o = RClass.inherits(this, o, FGuiControl);
-      o._startTime        = RClass.register(o, new AGetSet('_startTime'));
-      o._endTime          = RClass.register(o, new AGetSet('_endTime'));
+      o = MO.Class.inherits(this, o, FGuiControl);
+      o._startTime        = MO.Class.register(o, new AGetSet('_startTime'));
+      o._endTime          = MO.Class.register(o, new AGetSet('_endTime'));
       o._data             = null;
       o._ready            = false;
       o._investmentTotal  = 0;
       o._intervalMiniute  = 10;
       o._baseHeight = 5;
-      o._degreeLineHeight = RClass.register(o, new AGetSet('_degreeLineHeight'), 10);
-      o._triangleWidth    = RClass.register(o, new AGetSet('_triangleWidth'), 10);
-      o._triangleHeight   = RClass.register(o, new AGetSet('_triangleHeight'), 12);
-      o._decoLineGap      = RClass.register(o, new AGetSet('_decoLineGap'), 10);
-      o._decoLineWidth    = RClass.register(o, new AGetSet('_decoLineWidth'), 30);
+      o._degreeLineHeight = MO.Class.register(o, new AGetSet('_degreeLineHeight'), 10);
+      o._triangleWidth    = MO.Class.register(o, new AGetSet('_triangleWidth'), 10);
+      o._triangleHeight   = MO.Class.register(o, new AGetSet('_triangleHeight'), 12);
+      o._decoLineGap      = MO.Class.register(o, new AGetSet('_decoLineGap'), 10);
+      o._decoLineWidth    = MO.Class.register(o, new AGetSet('_decoLineWidth'), 30);
       o.oeUpdate          = FGui24HTimeline_oeUpdate;
       o.construct         = FGui24HTimeline_construct;
       o.sync              = FGui24HTimeline_sync;
@@ -3678,14 +3678,14 @@ MO.FGuiFPCCTable_drawRectangleByText = function FGuiFPCCTable_drawRectangleByTex
 }
 with (MO) {
    MO.FGuiHistoryMilestoneBar = function FGuiHistoryMilestoneBar(o) {
-      o = RClass.inherits(this, o, FGuiControl);
+      o = MO.Class.inherits(this, o, FGuiControl);
       o._bgImage = null;
       o._wanBGImage = null;
       o._yiBGImage = null;
       o._numImages = null;
       o._wanImage = null;
       o._yiImage = null;
-      o._data = RClass.register(o, new AGetSet('_data'));
+      o._data = MO.Class.register(o, new AGetSet('_data'));
       o._fullWidth = 0;
       o._fullHeight = 0;
       o.setup = FGuiHistoryMilestoneBar_setup;
@@ -3764,12 +3764,12 @@ with (MO) {
 }
 with (MO) {
    MO.FGuiHistoryMilestoneFrame = function FGuiHistoryMilestoneFrame(o) {
-      o = RClass.inherits(this, o, FGuiControl);
+      o = MO.Class.inherits(this, o, FGuiControl);
       o._bgImage              = null;
       o._numImages            = null;
       o._wanImage             = null;
       o._yiImage              = null;
-      o._data                 = RClass.register(o, new AGetSet('_data'));
+      o._data                 = MO.Class.register(o, new AGetSet('_data'));
       o._startTick            = 0;
       o._popDuration          = 400;
       o._showDuration         = 3000;
@@ -3778,7 +3778,7 @@ with (MO) {
       o._fullHeight           = 896;
       o._popupSE              = null;
       o._100yiSE              = null;
-      o._listenersDataChanged = RClass.register(o, new AListener('_listenersDataChanged', MO.EEvent.DataChanged));
+      o._listenersDataChanged = MO.Class.register(o, new AListener('_listenersDataChanged', MO.EEvent.DataChanged));
       o.setup                 = FGuiHistoryMilestoneFrame_setup;
       o.onPaintBegin          = FGuiHistoryMilestoneFrame_onPaintBegin;
       o.onImageLoad           = FGuiHistoryMilestoneFrame_onImageLoad;
@@ -4751,13 +4751,13 @@ MO.FEaiStatisticsInvestment_dispose = function FEaiStatisticsInvestment_dispose(
 }
 with(MO){
    MO.FEaiStatisticsInvestmentEntity = function FEaiStatisticsInvestmentEntity(o){
-      o = RClass.inherits(this, o, FEaiEntity);
-      o._date       = RClass.register(o, new AGetter('_date'));
-      o._customer   = RClass.register(o, new AGetter('_customer'));
-      o._phone      = RClass.register(o, new AGetter('_phone'));
-      o._card       = RClass.register(o, new AGetter('_card'));
-      o._investment = RClass.register(o, new AGetter('_investment'));
-      o._shape      = RClass.register(o, new AGetSet('_shape'));
+      o = MO.Class.inherits(this, o, FEaiEntity);
+      o._date       = MO.Class.register(o, new AGetter('_date'));
+      o._customer   = MO.Class.register(o, new AGetter('_customer'));
+      o._phone      = MO.Class.register(o, new AGetter('_phone'));
+      o._card       = MO.Class.register(o, new AGetter('_card'));
+      o._investment = MO.Class.register(o, new AGetter('_investment'));
+      o._shape      = MO.Class.register(o, new AGetSet('_shape'));
       o.construct   = FEaiStatisticsInvestmentEntity_construct;
       o.loadData    = FEaiStatisticsInvestmentEntity_loadData;
       o.update      = FEaiStatisticsInvestmentEntity_update;
@@ -4807,14 +4807,14 @@ with(MO){
 }
 with(MO){
    MO.FEaiStatisticsInvestmentShape = function FEaiStatisticsInvestmentShape(o){
-      o = RClass.inherits(this, o, FE3dShape);
+      o = MO.Class.inherits(this, o, FE3dShape);
       o._ready         = false;
       o._playing       = false;
       o._finish        = false;
       o._image         = null;
       o._statusPaint   = false;
-      o._cityEntity    = RClass.register(o, new AGetSet('_cityEntity'));
-      o._entity        = RClass.register(o, new AGetter('_entity'));
+      o._cityEntity    = MO.Class.register(o, new AGetSet('_cityEntity'));
+      o._entity        = MO.Class.register(o, new AGetter('_entity'));
       o._customerLabel = null;
       o._cityLabel     = null;
       o._investment    = null;
@@ -4841,12 +4841,12 @@ with(MO){
    MO.FEaiStatisticsInvestmentShape_setup = function FEaiStatisticsInvestmentShape_setup(){
       var o = this;
       o.__base.FE3dShape.setup.call(o);
-      var renderable = o._renderable = RClass.create(FE3dShapeData);
+      var renderable = o._renderable = MO.Class.create(FE3dShapeData);
       renderable.linkGraphicContext(o);
       renderable.setOptionCenter(true);
       renderable.size().set(128, 64);
       renderable.setup();
-      var image = o._image = RClass.create(FImage);
+      var image = o._image = MO.Class.create(FImage);
       image.addLoadListener(o, o.onImageLoad);
       image.loadUrl('/script/ars/eai/investment.png');
       o._ready = false;

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150813092244">
-  <List guid="D3B2E03B94C2463A98C6856D8C3D7568" name="editor.design.persistence.ComponentType" label="设计-持久化-组件类型" is_valid="Y" note="">
-    <Item guid="F59C1F3F1F4549349C29AE8A1AC1F337" name="persistence" label="持久化集合" is_valid="Y" note="" type="I" value="Persistence" />
-    <Item guid="CA18AFE9DD51498DA0ECA6FDE1CDDBDF" name="interface" label="接口" is_valid="Y" note="" type="I" value="Interface" />
-    <Item guid="571D83925CFA4BBD9BF63757D7395D87" name="component" label="组件" is_valid="Y" note="" type="I" value="Component" />
-    <Item guid="4342F68E493A4C09898C1073B95E0DFA" name="attribute" label="属性" is_valid="Y" note="" type="I" value="Attribute" />
-  </List>
-</Content>

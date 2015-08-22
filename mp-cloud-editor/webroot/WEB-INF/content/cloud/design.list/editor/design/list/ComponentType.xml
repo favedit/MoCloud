@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150813140300">
-  <List guid="6EE60E68909B4F50A9E0496F46E80183" name="editor.design.list.ComponentType" label="设计-列表-组件类型" is_valid="Y" note="" cache="Y">
-    <Item guid="FEDF662654F64BACB3338A6BDF8AA934" name="item" label="项目" is_valid="Y" note="" type="I" value="Item" />
-    <Item guid="4D59081216C2488795E1EC8943686D44" name="list" label="列表" is_valid="Y" note="" type="I" value="List" />
-  </List>
-</Content>

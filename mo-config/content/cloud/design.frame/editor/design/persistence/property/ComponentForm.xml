@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="system.design.frame.property.PictureFrame" type='FEditorDsPersistencePropertyComponentForm' label="组件属性" is_valid="Y" note="">
+   <Frame name="system.design.frame.property.PictureFrame" type='FEditorDsPropertyForm' label="组件属性" is_valid="Y" logic_group='item' logic_service='editor.design.persistence' note="">
+     <ToolBar name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+       <ToolButton name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" action="doSave()" />
+       <ToolButton name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" action="doDelete()" />
+       <ToolButtonSplit name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+       <ToolButton name="insertAttributeButton" label="新建属性" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.attribute" hotkey="F5" page="insert@#/design/persistence/Persistence.wa" attributes="_type=Attribute\nsel_type=component\nform_name=design.persistence.AttributeForm" />
+       <ToolButtonSplit name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+       <ToolButton name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/persistence/Persistence.wa" />
+       <ToolButton name="buildButton" label="编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" page="build@#/design/persistence/Persistence.wa" />
+     </ToolBar>
       <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
          <Select name="componentType" label="组件类型" label_size='80,0' valid="Y" data_name='_type' edit_size='600,0' input_size='500,0' edit_refer='editor.design.persistence.ComponentType' note="" />
          <Check name="isValid" label="有效性" label_size='80,0' valid="Y" data_name='is_valid' edit_size='600,0' input_size='500,0' note="" />

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="5276b754-404f-4519-9e4e-8a9116ca9bc9" name="logger.info.browser.access" label="M#12cn17信息浏览器访问" is_valid="Y" note="M#" data_engine="MyISAM" data_group="logger" data_factory="Data.Logger.browser.access" data_name="LG_INF_BROWSER_ACCESS" data_alias="LG_INF_BRW_ACS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
-  <FieldRecordId _uuid="92575dd8-034a-4434-bf6d-917fadb25192" name="browser_id" label="M#12cn15浏览器编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BROWSER_ID" />
-  <FieldString _uuid="35f5c9ba-464b-47f5-9b71-3f22253f0fe4" name="page_uri" label="M#12cn14访问页面" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PAGE_URI" data_size="800" />
-  <FieldTemplate _uuid="d267ff49-baff-4160-9e8c-2ce6b1c08e49" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
-</DataStore>

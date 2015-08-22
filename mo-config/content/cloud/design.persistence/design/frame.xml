@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150821090703">
+<Content name="design.frame" update_date="20150822133034">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IObject" label="对象接口" class_name="org.mo.cloud.content.design.frame.common.XObject" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="type" label="类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -37,6 +37,12 @@
     <Interface is_valid="Y" name="IContainer" label="容器接口" class_name="org.mo.cloud.content.design.frame.common.XContainer" inherits="IControl" note="">
       <Attribute is_valid="Y" type="String" name="frame_source" label="页面来源" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="scroll_cd" label="滚动类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Interface>
+    <Interface is_valid="Y" name="IService" label="服务接口" class_name="org.mo.cloud.content.design.frame.common.XService" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="logic_group" label="逻辑分组" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="logic_code" label="逻辑代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="logic_action" label="逻辑命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="logic_service" label="逻辑服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="IColumn" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" inherits="IControl" note="" />
     <Interface is_valid="Y" name="MDataField" label="数据字段" class_name="org.mo.cloud.content.design.frame.common.XDataField" inherits="" note="">
@@ -259,7 +265,7 @@
     <Component is_valid="Y" name="DataSelect" label="数据选择框" class_name="org.mo.cloud.content.design.frame.common.XDataSelect" base_name="org.mo.cloud.content.design.frame.base.XBaseDataSelect" inherits="Select" note="" />
     <Component is_valid="Y" name="DataColorPicker" label="数据颜色选择框" class_name="org.mo.cloud.content.design.frame.common.XDataColorPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseDataColorPicker" inherits="ColorPicker" note="" />
     <Component is_valid="Y" name="DataIconPicker" label="数据图标选取框" class_name="org.mo.cloud.content.design.frame.common.XDataIconPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseDataIconPicker" inherits="IconPicker" note="" />
-    <Component is_valid="Y" name="Frame" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFrame" inherits="IContainer" note="">
+    <Component is_valid="Y" name="Frame" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFrame" inherits="IContainer,IService" note="">
       <Attribute is_valid="Y" type="String" name="inherit_frames" label="继承页面集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="TemplateFrame" label="模板页面" class_name="org.mo.cloud.content.design.frame.common.XTemplateFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTemplateFrame" inherits="Frame" note="" />

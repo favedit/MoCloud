@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <Frame name="editor.design.frame.property.BarFrame" inherit_frames='editor.design.frame.property.common.ControlPanel' type='FDsSystemFrameBarProperty' label="停靠栏属性" is_valid="Y" note="">
-      <Panel name='barPanel' icon='design.panel.icon' label='停靠栏属性'>
-         <Edit name="dockCd" linker='_controlDockCd' label="停靠" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
-   </Frame>
-</Content>

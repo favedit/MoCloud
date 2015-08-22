@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150813135902">
-  <List guid="7261630262B74DD4AF6A7313B0390228" name="editor.design.list.ItemType" label="设计-列表-项目类型" is_valid="Y" note="" cache="Y">
-    <Item guid="FF9029A1F9774FD891B5A3E2F54817BC" name="item" label="项目" is_valid="Y" note="" type="I" value="I" />
-    <Item guid="BA8C51D835374215A1F2643CA0D17F61" name="sql" label="查询" is_valid="Y" note="" type="S" value="S" />
-  </List>
-</Content>

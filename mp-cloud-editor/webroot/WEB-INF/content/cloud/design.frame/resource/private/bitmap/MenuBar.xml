@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <MenuBar name="resource.private.bitmap.MenuBar" type='FDsPrivateBitmapMenuBar' label="菜单">
-      <MenuButton name='back' linker='_controlBack' icon='tools.back' label='返回上页'/>
-      <MenuButton name='save' linker='_controlSave' icon='tools.save' label='保存配置'/>
-      <MenuButton name='import' linker='_controlImport' icon='tools.import' label='导入位图'/>
-   </MenuBar>
-</Content>

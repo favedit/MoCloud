@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <MenuBar name="resource.share.bitmap.MenuBar" type='FDsShareBitmapMenuBar' label="菜单">
-      <MenuButton name='back' linker='_controlBack' icon='tools.back' label='返回上页'/>
-   </MenuBar>
-</Content>

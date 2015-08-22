@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<List _uuid="f31bc136-cfa1-4a1e-909d-290782da3d8b" name="content.persistence.ComponentType" label="设计-持久化-组件类型" is_valid="Y" note="M#">
-  <Item _uuid="741d3427-841b-4a95-b07f-0d46bd068c06" name="persistence" label="持久化集合" is_valid="Y" note="M#" type="I" value="Persistence" />
-  <Item _uuid="b283e341-32fd-4945-9cc2-8b57d5e49ebe" name="interface" label="接口" is_valid="Y" note="M#" type="I" value="Interface" />
-  <Item _uuid="34f7bc11-0056-476b-9217-8804f2c7eef5" name="component" label="组件" is_valid="Y" note="M#" type="I" value="Component" />
-  <Item _uuid="c07a9851-6ca8-46ed-8f26-29ee2828cae7" name="attribute" label="属性" is_valid="Y" note="M#" type="I" value="Attribute" />
-</List>

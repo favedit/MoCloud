@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="editor.design.list.property.ItemForm" type='FEditorDsListItemProperty' label="图片属性" is_valid="Y" note="">
+   <Frame name="editor.design.list.property.ItemForm" type='FEditorDsPropertyForm' label="图片属性" is_valid="Y" logic_group='item' logic_service='editor.design.list' note="">
       <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
          <Select name="componentType" label="组件类型" label_size='80,0' valid="Y" data_name='_type' edit_refer='editor.design.list.ComponentType' edit_size='600,0' input_size='500,0' note="" />
          <Check name="isValid" label="有效性" label_size='80,0' valid="Y" data_name='is_valid' edit_size='600,0' input_size='500,0' note="" />

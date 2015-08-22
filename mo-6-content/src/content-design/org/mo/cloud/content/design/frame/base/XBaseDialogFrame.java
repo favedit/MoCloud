@@ -133,6 +133,22 @@ public abstract class XBaseDialogFrame
    @AContentField
    public final static FContentField SCROLL_CD = new FContentField("scrollCd", "scroll_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 逻辑分组的定义
+   @AContentField
+   public final static FContentField LOGIC_GROUP = new FContentField("logicGroup", "logic_group", EContentData.String, "", "", "", "YYNY");
+
+   // 逻辑代码的定义
+   @AContentField
+   public final static FContentField LOGIC_CODE = new FContentField("logicCode", "logic_code", EContentData.String, "", "", "", "YYNY");
+
+   // 逻辑命令的定义
+   @AContentField
+   public final static FContentField LOGIC_ACTION = new FContentField("logicAction", "logic_action", EContentData.String, "", "", "", "YYNY");
+
+   // 逻辑服务的定义
+   @AContentField
+   public final static FContentField LOGIC_SERVICE = new FContentField("logicService", "logic_service", EContentData.String, "", "", "", "YYNY");
+
    // 继承页面集合的定义
    @AContentField
    public final static FContentField INHERIT_FRAMES = new FContentField("inheritFrames", "inherit_frames", EContentData.String, "", "", "", "YYNY");
@@ -270,6 +286,22 @@ public abstract class XBaseDialogFrame
    // 滚动类型
    @AName("scroll_cd")
    protected String _scrollCd;
+
+   // 逻辑分组
+   @AName("logic_group")
+   protected String _logicGroup;
+
+   // 逻辑代码
+   @AName("logic_code")
+   protected String _logicCode;
+
+   // 逻辑命令
+   @AName("logic_action")
+   protected String _logicAction;
+
+   // 逻辑服务
+   @AName("logic_service")
+   protected String _logicService;
 
    // 继承页面集合
    @AName("inherit_frames")
@@ -795,6 +827,78 @@ public abstract class XBaseDialogFrame
    //============================================================
    public void setScrollCd(String value){
       _scrollCd = value;
+   }
+
+   //============================================================
+   // <T>获得逻辑分组的内容。</T>
+   //
+   // @return 逻辑分组
+   //============================================================
+   public String getLogicGroup(){
+      return _logicGroup;
+   }
+
+   //============================================================
+   // <T>设置逻辑分组的内容。</T>
+   //
+   // @param value 逻辑分组
+   //============================================================
+   public void setLogicGroup(String value){
+      _logicGroup = value;
+   }
+
+   //============================================================
+   // <T>获得逻辑代码的内容。</T>
+   //
+   // @return 逻辑代码
+   //============================================================
+   public String getLogicCode(){
+      return _logicCode;
+   }
+
+   //============================================================
+   // <T>设置逻辑代码的内容。</T>
+   //
+   // @param value 逻辑代码
+   //============================================================
+   public void setLogicCode(String value){
+      _logicCode = value;
+   }
+
+   //============================================================
+   // <T>获得逻辑命令的内容。</T>
+   //
+   // @return 逻辑命令
+   //============================================================
+   public String getLogicAction(){
+      return _logicAction;
+   }
+
+   //============================================================
+   // <T>设置逻辑命令的内容。</T>
+   //
+   // @param value 逻辑命令
+   //============================================================
+   public void setLogicAction(String value){
+      _logicAction = value;
+   }
+
+   //============================================================
+   // <T>获得逻辑服务的内容。</T>
+   //
+   // @return 逻辑服务
+   //============================================================
+   public String getLogicService(){
+      return _logicService;
+   }
+
+   //============================================================
+   // <T>设置逻辑服务的内容。</T>
+   //
+   // @param value 逻辑服务
+   //============================================================
+   public void setLogicService(String value){
+      _logicService = value;
    }
 
    //============================================================

@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<WebBrowser _uuid="45962998-c796-4fc6-8fae-802c350f54b2" name="common.country.CountryList" label="M#12cn14国家列表" is_valid="Y" note="M#" disp_fetch="Y" disp_search="Y" disp_lov="Y" disp_zoom="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" disp_print="Y" edit_copy="Y" edit_fetch="Y" edit_search="Y" edit_picker="Y" edit_zoom="Y" edit_print="Y" edit_action="Y" edit_insert="Y" edit_update="Y" edit_delete="Y" disp_toolbar="Y" disp_rowbar="N" panel_title="Y" panel_head="Y" panel_search="Y" panel_hint="Y" panel_total="N" query_prepare="N" />
