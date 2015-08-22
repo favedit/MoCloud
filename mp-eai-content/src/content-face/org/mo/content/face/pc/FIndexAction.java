@@ -177,6 +177,7 @@ public class FIndexAction
       logger.setBrowserUri(context.requestUrl());
       logger.setPageInfo(context.parameters().dump());
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
+      System.out.println(page.menuString() + "------------------");
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          return "/pc/main";
@@ -197,8 +198,9 @@ public class FIndexAction
    public String chart(IWebContext context,
                        ILogicContext logicContext,
                        FIndexPage page){
+      String code = context.parameter("code");
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-      page.setSceneCode("ChartMarketerCustomer");
+      page.setSceneCode(code);
       return EChartPage.Scene;
    }
 
@@ -211,7 +213,8 @@ public class FIndexAction
    private void synchronizeData(ILogicContext logicContext,
                                 FIndexPage page,
                                 String passport){
-      if(!_userConsole.passportExists(logicContext, passport)){
+      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+      if(user == null){
          //获取角色
          FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, "eai.oa");
          if(role != null){
@@ -219,15 +222,19 @@ public class FIndexAction
             FDataPersonUserUnit unit = new FDataPersonUserUnit();
             unit.setPassport(passport);
             unit.setRoleId(role.ouid());
+            unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
+            entryUnit.setOvld(true);
             entryUnit.setUserId(unit.ouid());
             entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
             entryUnit.setFromCd(EGcPersonUserFrom.EaiOa);
             _entryConsole.doInsert(logicContext, entryUnit);
-            tackAuthority(logicContext, page, role.ouid());
+            tackAuthority(logicContext, page, unit.ouid());
          }
+      }else{
+         tackAuthority(logicContext, page, user.roleId());
       }
    }
 

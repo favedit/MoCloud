@@ -122,6 +122,7 @@ public class FDataPersonAccessAuthorityConsole
          }
          return EGcAuthorityResult.PassportInvalid;
       }
+
       // 检查密码
       if(!password.equals(passportAuthority.password())){
          return EGcAuthorityResult.PasswordInvalid;

@@ -13,4 +13,7 @@ public interface IUserConsole
 {
    boolean passportExists(ILogicContext logicContext,
                           String passport);
+
+   FDataPersonUserUnit findByPassport(ILogicContext logicContext,
+                                      String passport);
 }

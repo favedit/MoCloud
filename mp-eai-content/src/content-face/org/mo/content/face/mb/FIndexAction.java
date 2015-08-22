@@ -16,6 +16,7 @@ import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.role.IRoleModuleConsole;
 import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
+import org.mo.content.face.pc.FIndexPage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -99,7 +100,8 @@ public class FIndexAction
             // 设置服务主机
             page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
             page.setSceneCode("ChartMarketerCustomer");
-            return EChartPage.Scene;
+            //            return EChartPage.Scene;
+            return "main";
          }
       }
       // 非法设置
@@ -183,11 +185,28 @@ public class FIndexAction
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
          page.setSceneCode("ChartMarketerCustomer");
-         return EChartPage.Scene;
+         return "main";
       }else{
          page.setMessage(message);
          return "Login";
       }
+   }
+
+   //============================================================
+   // <T>表格逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String chart(IWebContext context,
+                       ILogicContext logicContext,
+                       FIndexPage page){
+      String code = context.parameter("code");
+      page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
+      page.setSceneCode(code);
+      return EChartPage.Scene;
    }
 
    //============================================================
@@ -199,23 +218,28 @@ public class FIndexAction
    private void synchronizeData(ILogicContext logicContext,
                                 FIndexPage page,
                                 String passport){
-      if(!_userConsole.passportExists(logicContext, passport)){
+      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+      if(user == null){
          //获取角色
          FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, "eai.oa");
          if(role != null){
             //同步OA用户
             FDataPersonUserUnit unit = new FDataPersonUserUnit();
+            unit.setOvld(true);
             unit.setPassport(passport);
             unit.setRoleId(role.ouid());
             _userConsole.doInsert(logicContext, unit);
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
+            entryUnit.setOvld(true);
             entryUnit.setUserId(unit.ouid());
             entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
             entryUnit.setFromCd(EGcPersonUserFrom.EaiOa);
             _entryConsole.doInsert(logicContext, entryUnit);
             tackAuthority(logicContext, page, role.ouid());
          }
+      }else{
+         tackAuthority(logicContext, page, user.roleId());
       }
    }
 

@@ -105,7 +105,7 @@
             <tr>
                <td align="left">密码</td>
                <td align="left">
-                  <input id="pwd1" class="easyui-validatebox textbox" style="width:500px" data-options="validType:'length[6,42]'" type="password" name="pwd1" value="<jh:write source='&user.password'/>" />
+                  <input id="pwd1" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,42]'" type="password" name="pwd1" value="<jh:write source='&user.password'/>" />
                </td>
             </tr>
             <tr>

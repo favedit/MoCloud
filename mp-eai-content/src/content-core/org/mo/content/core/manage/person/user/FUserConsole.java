@@ -35,4 +35,16 @@ public class FUserConsole
       FLogicDataset<FDataPersonUserUnit> unitlist = logic.fetch(whereSql);
       return unitlist.count() > 0 ? true : false;
    }
+
+   @Override
+   public FDataPersonUserUnit findByPassport(ILogicContext logicContext,
+                                             String passport){
+      StringBuffer whereSql = new StringBuffer();
+      if(!passport.isEmpty()){
+         whereSql.append(FDataPersonUserLogic.PASSPORT).append(" = '").append(passport).append("'");
+      }
+      FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
+      FLogicDataset<FDataPersonUserUnit> unitlist = logic.fetch(whereSql);
+      return unitlist.first();
+   }
 }

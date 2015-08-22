@@ -62,7 +62,7 @@
                         <span>公<br>司</span>
                      </div>
                      <ul>
-                        <li><img src="images/main/bg.png" onclick='doChart("ChartDepartmentCustomer")'></li>
+                        <li><img src="images/main/bg.png" onclick='doChart("ChartDepartmentMarketer")'></li>
                      </ul>
                   </div>
                </jh:equals>
