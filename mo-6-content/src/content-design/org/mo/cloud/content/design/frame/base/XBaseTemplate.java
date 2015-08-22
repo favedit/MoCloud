@@ -29,6 +29,10 @@ public abstract class XBaseTemplate
    @AContentField
    public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
 
+   // 代码的定义
+   @AContentField
+   public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
+
    // 标签的定义
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
@@ -70,6 +74,10 @@ public abstract class XBaseTemplate
    // 有效性
    @AName("valid")
    protected boolean _valid;
+
+   // 代码
+   @AName("code")
+   protected String _code;
 
    // 标签
    @AName("label")
@@ -135,6 +143,24 @@ public abstract class XBaseTemplate
    //============================================================
    public void setValid(Boolean value){
       _valid = value;
+   }
+
+   //============================================================
+   // <T>获得代码的内容。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String getCode(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的内容。</T>
+   //
+   // @param value 代码
+   //============================================================
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================

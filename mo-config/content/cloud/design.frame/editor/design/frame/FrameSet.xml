@@ -10,18 +10,25 @@
       </FramePage>
       <FrameSpliter name='catalogSpliter'/>
       <FramePage name='spaceFrame' label='工作区'>
-         <FrameSet name='spaceFrameSet' direction_cd='V' label='空间布局'>
-            <FramePage name='spaceTitleFrame' linker='_frameSpaceTitle' label='空间标题栏' size='0,24'/>
-            <FramePage name='spaceToolbarFrame' linker='_frameSpaceToolBar' label='空间工具栏' size='0,24'/>
-            <FramePage name='spaceContentFrame' linker='_frameSpaceContent' label='空间内容区'/>
-         </FrameSet>
-      </FramePage>
-      <FrameSpliter name='propertySpliter'/>
-      <FramePage name='propertyFrame' linker='_frameProperty' label='属性区' size='600,0' scroll_cd='VA'>
-         <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
-            <FramePage name='propertyTitleFrame' linker='_framePropertyTitle' label='属性标题栏' size='0,36' back_color='#C6CBD0'/>
-            <FramePage name='propertyToolbarFrame' linker='_framePropertyToolBar' label='属性工具栏' size='0,24'/>
-            <FramePage name='propertyContentFrame' linker='_framePropertyContent' label='属性内容区'/>
+         <FrameSet name='spaceFrameSet' direction_cd='V' label='工作布局'>
+            <FramePage name='spaceTitleFrame' linker='_frameSpaceTitle' label='标题区' size='0,36' back_color='#C6CBD0'/>
+            <FramePage name='spaceBodyFrame' label='工作区'>
+               <FrameSet name='spaceBodyFrameSet' direction_cd='H' label='工作布局'>
+                  <FramePage name='contentFrame' label='工作区'>
+                     <FrameSet name='contentFrameSet' direction_cd='V' label='空间布局'>
+                        <FramePage name='contentToolbarFrame' linker='_frameSpaceToolBar' label='空间工具栏' size='0,24'/>
+                        <FramePage name='contentContentFrame' linker='_frameSpaceContent' label='空间内容区'/>
+                     </FrameSet>
+                  </FramePage>
+                  <FrameSpliter name='propertySpliter'/>
+                  <FramePage name='propertyFrame' linker='_frameProperty' label='属性区' size='500,0' scroll_cd='VA'>
+                     <FrameSet name='propertyFrameSet' direction_cd='V' label='属性布局'>
+                        <FramePage name='propertyToolbarFrame' linker='_framePropertyToolBar' label='属性工具栏' size='0,24'/>
+                        <FramePage name='propertyContentFrame' linker='_framePropertyContent' label='属性内容区'/>
+                     </FrameSet>
+                  </FramePage>
+               </FrameSet>
+            </FramePage>
          </FrameSet>
       </FramePage>
    </FrameSet>

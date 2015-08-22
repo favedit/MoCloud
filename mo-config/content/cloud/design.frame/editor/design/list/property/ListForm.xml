@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <Frame name="editor.design.list.property.ListForm" type='FEditorDsPropertyForm' label="按键属性" is_valid="Y" logic_group='container' logic_service='editor.design.list' note="">
-      <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
-         <Select name="componentType" label="组件类型" label_size='80,0' valid="Y" data_name='_type' edit_refer='editor.design.list.ComponentType' edit_size='600,0' input_size='500,0' note="" />
-         <Check name="isValid" label="有效性" label_size='80,0' valid="Y" data_name='is_valid' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="name" label="名称" label_size='80,0' valid="Y" data_name='name' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="label" label="标签" label_size='80,0' valid="Y" data_name='label' edit_size='600,0' input_size='500,0' note="" />
-      </Panel>
-      <Panel name='notePanel' icon='design.panel.icon' label='备注信息'>
-         <Edit name="note" label="备注" label_size='80,0' valid="Y" data_name='note' edit_size='600,0' input_size='500,0' note="" />
-      </Panel>
-   </Frame>
+<Content update_date="20150822215632">
+  <FormFrame guid="17733173A1CD4F56B18F53EDE4A0B09B" name="editor.design.list.property.ListForm" type="FEditorDsPropertyForm" label="按键属性" is_valid="Y" logic_group="container" logic_service="editor.design.list" note="" valid="false">
+    <ToolBar guid="7ECCC669FAC84638A654092EF7E66737" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
+      <ToolButton guid="0C74491D2F724655BE1AE8ABBE2BFB18" code="save" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="8128A834B2D54FEF91D834A427CE7810" code="delete" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" />
+      <ToolButtonSplit guid="1FEF73581EB54D2BB10D32F300B5CA40" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="E4560C59953B4573906D1200AC3F4174" name="insertItemButton" label="新建项目" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.list.item" hotkey="F5" page="insert@#/design/list/List.wa" attributes="_type=Item\nsel_type=component\nform_name=design.list.ItemForm" />
+      <ToolButtonSplit guid="089488C04D8C4A2E95CD0C3C770224E3" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="68D191B5F64142CF8D3106D461727A97" code="sort" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" hotkey="F9" page="sort@#/design/list/List.wa" attributes="sel_type=collection" />
+    </ToolBar>
+    <Panel guid="0F5DFE1989E741299B8E238B2F978D80" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="60953C5F79D9480B81AB2150A9D88090" name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_refer="editor.design.list.ComponentType" edit_size="600,0" input_size="500,0" note="" />
+      <Check guid="1A3B83D7652147F787EDDD00D715A53E" name="isValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="261AE7E4B0654A07BDDC050A89D0B900" name="name" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="4127624F03A748E09F562054A6818A5F" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="05155851E64E4387BC395756D627F31E" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Edit guid="7CF61AACBA7549A1BCCAA6269B412DF1" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+  </FormFrame>
 </Content>

@@ -29,6 +29,10 @@ public abstract class XBaseDataMemo
    @AContentField
    public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
 
+   // 代码的定义
+   @AContentField
+   public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
+
    // 标签的定义
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
@@ -37,13 +41,45 @@ public abstract class XBaseDataMemo
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
-   // 锚点类型的定义
-   @AContentField
-   public final static FContentField ANCHOR_CD = new FContentField("anchorCd", "anchor_cd", EContentData.String, "", "", "", "YYNY");
-
    // 回行类型的定义
    @AContentField
    public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 左位置的定义
+   @AContentField
+   public final static FContentField LEFT = new FContentField("left", "left", EContentData.String, "", "", "", "YYNY");
+
+   // 上位置的定义
+   @AContentField
+   public final static FContentField TOP = new FContentField("top", "top", EContentData.String, "", "", "", "YYNY");
+
+   // 右位置的定义
+   @AContentField
+   public final static FContentField RIGHT = new FContentField("right", "right", EContentData.String, "", "", "", "YYNY");
+
+   // 下位置的定义
+   @AContentField
+   public final static FContentField BOTTOM = new FContentField("bottom", "bottom", EContentData.String, "", "", "", "YYNY");
+
+   // 位置的定义
+   @AContentField
+   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
+
+   // 宽度的定义
+   @AContentField
+   public final static FContentField WIDTH = new FContentField("width", "width", EContentData.String, "", "", "", "YYNY");
+
+   // 高度的定义
+   @AContentField
+   public final static FContentField HEIGHT = new FContentField("height", "height", EContentData.String, "", "", "", "YYNY");
+
+   // 尺寸的定义
+   @AContentField
+   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String, "", "", "", "YYNY");
+
+   // 锚点类型的定义
+   @AContentField
+   public final static FContentField ANCHOR_CD = new FContentField("anchorCd", "anchor_cd", EContentData.String, "", "", "", "YYNY");
 
    // 停靠类型的定义
    @AContentField
@@ -52,14 +88,6 @@ public abstract class XBaseDataMemo
    // 对齐方式的定义
    @AContentField
    public final static FContentField ALIGN_CD = new FContentField("alignCd", "align_cd", EContentData.String, "", "", "", "YYNY");
-
-   // 位置的定义
-   @AContentField
-   public final static FContentField LOCATION = new FContentField("location", "location", EContentData.String, "", "", "", "YYNY");
-
-   // 尺寸的定义
-   @AContentField
-   public final static FContentField SIZE = new FContentField("size", "size", EContentData.String, "", "", "", "YYNY");
 
    // 内空白的定义
    @AContentField
@@ -243,6 +271,10 @@ public abstract class XBaseDataMemo
    @AName("valid")
    protected boolean _valid;
 
+   // 代码
+   @AName("code")
+   protected String _code;
+
    // 标签
    @AName("label")
    protected String _label;
@@ -251,13 +283,45 @@ public abstract class XBaseDataMemo
    @AName("attributes")
    protected String _attributes;
 
-   // 锚点类型
-   @AName("anchor_cd")
-   protected String _anchorCd;
-
    // 回行类型
    @AName("wrap_cd")
    protected String _wrapCd;
+
+   // 左位置
+   @AName("left")
+   protected String _left;
+
+   // 上位置
+   @AName("top")
+   protected String _top;
+
+   // 右位置
+   @AName("right")
+   protected String _right;
+
+   // 下位置
+   @AName("bottom")
+   protected String _bottom;
+
+   // 位置
+   @AName("location")
+   protected String _location;
+
+   // 宽度
+   @AName("width")
+   protected String _width;
+
+   // 高度
+   @AName("height")
+   protected String _height;
+
+   // 尺寸
+   @AName("size")
+   protected String _size;
+
+   // 锚点类型
+   @AName("anchor_cd")
+   protected String _anchorCd;
 
    // 停靠类型
    @AName("dock_cd")
@@ -266,14 +330,6 @@ public abstract class XBaseDataMemo
    // 对齐方式
    @AName("align_cd")
    protected String _alignCd;
-
-   // 位置
-   @AName("location")
-   protected String _location;
-
-   // 尺寸
-   @AName("size")
-   protected String _size;
 
    // 内空白
    @AName("padding")
@@ -482,6 +538,24 @@ public abstract class XBaseDataMemo
    }
 
    //============================================================
+   // <T>获得代码的内容。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String getCode(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的内容。</T>
+   //
+   // @param value 代码
+   //============================================================
+   public void setCode(String value){
+      _code = value;
+   }
+
+   //============================================================
    // <T>获得标签的内容。</T>
    //
    // @return 标签
@@ -518,24 +592,6 @@ public abstract class XBaseDataMemo
    }
 
    //============================================================
-   // <T>获得锚点类型的内容。</T>
-   //
-   // @return 锚点类型
-   //============================================================
-   public String getAnchorCd(){
-      return _anchorCd;
-   }
-
-   //============================================================
-   // <T>设置锚点类型的内容。</T>
-   //
-   // @param value 锚点类型
-   //============================================================
-   public void setAnchorCd(String value){
-      _anchorCd = value;
-   }
-
-   //============================================================
    // <T>获得回行类型的内容。</T>
    //
    // @return 回行类型
@@ -551,6 +607,168 @@ public abstract class XBaseDataMemo
    //============================================================
    public void setWrapCd(String value){
       _wrapCd = value;
+   }
+
+   //============================================================
+   // <T>获得左位置的内容。</T>
+   //
+   // @return 左位置
+   //============================================================
+   public String getLeft(){
+      return _left;
+   }
+
+   //============================================================
+   // <T>设置左位置的内容。</T>
+   //
+   // @param value 左位置
+   //============================================================
+   public void setLeft(String value){
+      _left = value;
+   }
+
+   //============================================================
+   // <T>获得上位置的内容。</T>
+   //
+   // @return 上位置
+   //============================================================
+   public String getTop(){
+      return _top;
+   }
+
+   //============================================================
+   // <T>设置上位置的内容。</T>
+   //
+   // @param value 上位置
+   //============================================================
+   public void setTop(String value){
+      _top = value;
+   }
+
+   //============================================================
+   // <T>获得右位置的内容。</T>
+   //
+   // @return 右位置
+   //============================================================
+   public String getRight(){
+      return _right;
+   }
+
+   //============================================================
+   // <T>设置右位置的内容。</T>
+   //
+   // @param value 右位置
+   //============================================================
+   public void setRight(String value){
+      _right = value;
+   }
+
+   //============================================================
+   // <T>获得下位置的内容。</T>
+   //
+   // @return 下位置
+   //============================================================
+   public String getBottom(){
+      return _bottom;
+   }
+
+   //============================================================
+   // <T>设置下位置的内容。</T>
+   //
+   // @param value 下位置
+   //============================================================
+   public void setBottom(String value){
+      _bottom = value;
+   }
+
+   //============================================================
+   // <T>获得位置的内容。</T>
+   //
+   // @return 位置
+   //============================================================
+   public String getLocation(){
+      return _location;
+   }
+
+   //============================================================
+   // <T>设置位置的内容。</T>
+   //
+   // @param value 位置
+   //============================================================
+   public void setLocation(String value){
+      _location = value;
+   }
+
+   //============================================================
+   // <T>获得宽度的内容。</T>
+   //
+   // @return 宽度
+   //============================================================
+   public String getWidth(){
+      return _width;
+   }
+
+   //============================================================
+   // <T>设置宽度的内容。</T>
+   //
+   // @param value 宽度
+   //============================================================
+   public void setWidth(String value){
+      _width = value;
+   }
+
+   //============================================================
+   // <T>获得高度的内容。</T>
+   //
+   // @return 高度
+   //============================================================
+   public String getHeight(){
+      return _height;
+   }
+
+   //============================================================
+   // <T>设置高度的内容。</T>
+   //
+   // @param value 高度
+   //============================================================
+   public void setHeight(String value){
+      _height = value;
+   }
+
+   //============================================================
+   // <T>获得尺寸的内容。</T>
+   //
+   // @return 尺寸
+   //============================================================
+   public String getSize(){
+      return _size;
+   }
+
+   //============================================================
+   // <T>设置尺寸的内容。</T>
+   //
+   // @param value 尺寸
+   //============================================================
+   public void setSize(String value){
+      _size = value;
+   }
+
+   //============================================================
+   // <T>获得锚点类型的内容。</T>
+   //
+   // @return 锚点类型
+   //============================================================
+   public String getAnchorCd(){
+      return _anchorCd;
+   }
+
+   //============================================================
+   // <T>设置锚点类型的内容。</T>
+   //
+   // @param value 锚点类型
+   //============================================================
+   public void setAnchorCd(String value){
+      _anchorCd = value;
    }
 
    //============================================================
@@ -587,42 +805,6 @@ public abstract class XBaseDataMemo
    //============================================================
    public void setAlignCd(String value){
       _alignCd = value;
-   }
-
-   //============================================================
-   // <T>获得位置的内容。</T>
-   //
-   // @return 位置
-   //============================================================
-   public String getLocation(){
-      return _location;
-   }
-
-   //============================================================
-   // <T>设置位置的内容。</T>
-   //
-   // @param value 位置
-   //============================================================
-   public void setLocation(String value){
-      _location = value;
-   }
-
-   //============================================================
-   // <T>获得尺寸的内容。</T>
-   //
-   // @return 尺寸
-   //============================================================
-   public String getSize(){
-      return _size;
-   }
-
-   //============================================================
-   // <T>设置尺寸的内容。</T>
-   //
-   // @param value 尺寸
-   //============================================================
-   public void setSize(String value){
-      _size = value;
    }
 
    //============================================================
