@@ -185,7 +185,8 @@ public class FUserAction
       String id = context.parameter("id");
       _logger.debug(this, "Update", "Update Begin.(id={1})", id);
       String passport = context.parameter("passport").replaceAll(" ", "");
-      String password = RSha1.encode(context.parameter("password").trim());
+      String password = context.parameter("password").trim();
+      password = RSha1.encode(password);
       if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
          basePage.setJson("-1");
          return "/manage/common/ajax";
@@ -202,7 +203,7 @@ public class FUserAction
       }
       unit.setPassword(password);
       if(unit.isPasswordChanged()){
-         unit.setPassword(RSha1.encode(unit.password()));
+         unit.setPassword(unit.password());
       }
       unit.setLabel(context.parameter("label"));
       unit.setRoleId(context.parameterAsLong("role"));

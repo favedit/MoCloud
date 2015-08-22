@@ -21,10 +21,12 @@
             progress();
             var url = null;
             var data = null;
+            var code = $.trim($('#code').val()).replaceAll("'", "");
+            if (code == "代码") code = null;
             if (page != null) {
                url = "/manage/role/Role.wa?do=selectDataByPage&page=" + page + "&date=" + new Date().valueOf();
                data = {
-                  "code": $.trim($('#code').val()).replaceAll("'", ""),
+                  "code": code,
                   "page": page
                };
             } else {
@@ -91,8 +93,7 @@
                <a href="/manage/role/Role.wa?do=insertPrepare" class="add_btn"></a>
             </div>
             <div class="nav_search">
-               <input id="code" name="" type="text" onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';" 
-                   onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}" style="color:#ccc" value="代码">
+               <input id="code" name="" type="text" onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}" style="color:#ccc" value="代码">
                <a onClick="roleSubmit(0)" href="#" class="sear_btn"></a>
             </div>
          </div>

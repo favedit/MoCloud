@@ -60,11 +60,11 @@
                      if (result.status == '0') {
                         $("#passport").val("");
                         $("#password").val("");
-                        alertx("用户名或密码错误", "warning");
+                        alert("用户名或密码错误");
                      } else if (result.status == '1') {
                         location.href = result.url;
                      } else {
-                        alertx("系统异常", "'error'");
+                        alert("系统异常");
                      }
                   }
                });

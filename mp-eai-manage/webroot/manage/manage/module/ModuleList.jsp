@@ -19,9 +19,11 @@ function moduleSubmit(page){
 	progress();
 	var url = null;
 	var data = null;
+   var code = $.trim($('#code').val()).replaceAll("'", "");
+   if(code == "代码") code = null;
 	if(page != null){
 		url = "/manage/module/Module.wa?do=selectDataByPage&page="+page+"&date="+new Date().valueOf();
-		data ={"code":$.trim($('#code').val()).replaceAll("'", ""),"page":page};
+		data ={"code":code,"page":page};
 	}else{
 		url = "/manage/module/Module.wa?do=selectDataByPage&date="+new Date().valueOf();
 	}

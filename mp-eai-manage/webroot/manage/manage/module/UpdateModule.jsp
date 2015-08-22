@@ -45,7 +45,7 @@
                   </td>
                </tr>
                <tr>
-                  <td align="left">标题</td>
+                  <td align="left">模块名称</td>
                   <td align="left" colspan="2">
                      <input id="label" name="label" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" value="<jh:write source='&module.label' />" />
                   </td>

@@ -36,7 +36,7 @@
                   </td>
                </tr>
                <tr>
-                  <td align="left">标题</td>
+                  <td align="left">模块名称</td>
                   <td align="left" colspan="2">
                      <input id="label" name="label" class="easyui-validatebox textbox notnull" data-options="required:true" validtype="length[1,40]" style="width:400px" value="" />
                   </td>

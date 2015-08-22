@@ -235,16 +235,19 @@ public class FRoleAction
       //删除此角色所拥有的权限
       _roleModuleConsole.deleteByRoleId(logicContext, roleUnit.ouid());
       //为角色添加查看权限
-      String[] moduleIds = context.parameter("moduleIds").split(",");
-      FDataControlRoleModuleUnit roleModuleUnit = new FDataControlRoleModuleUnit();
-      for(int i = 0; i < moduleIds.length; i++){
-         long moduleId = Long.parseLong(moduleIds[i]);
-         roleModuleUnit.setOvld(true);
-         roleModuleUnit.setRoleId(roleUnit.ouid());
-         roleModuleUnit.setModuleId(moduleId);
-         roleModuleUnit.setViewValidCd(1);
-         roleModuleUnit.setCreateUserId(userOuid);
-         _roleModuleConsole.doInsert(logicContext, roleModuleUnit);
+      String tempModuleIds = context.parameter("moduleIds");
+      if(!RString.isEmpty(tempModuleIds)){
+         String[] moduleIds = tempModuleIds.split(",");
+         FDataControlRoleModuleUnit roleModuleUnit = new FDataControlRoleModuleUnit();
+         for(int i = 0; i < moduleIds.length; i++){
+            long moduleId = Long.parseLong(moduleIds[i]);
+            roleModuleUnit.setOvld(true);
+            roleModuleUnit.setRoleId(roleUnit.ouid());
+            roleModuleUnit.setModuleId(moduleId);
+            roleModuleUnit.setViewValidCd(1);
+            roleModuleUnit.setCreateUserId(userOuid);
+            _roleModuleConsole.doInsert(logicContext, roleModuleUnit);
+         }
       }
       _logger.debug(this, "Role", "Role update finish.");
       return "#/manage/role/RoleList";

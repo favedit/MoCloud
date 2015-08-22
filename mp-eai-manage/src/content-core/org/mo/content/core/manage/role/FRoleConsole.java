@@ -40,7 +40,7 @@ public class FRoleConsole
       }
       StringBuffer whereSql = new StringBuffer();
       if(!RString.isEmpty(roleUnit.code())){
-         whereSql.append(FDataControlRoleLogic.CODE).append(" LIKE '").append(roleUnit.code() + "%'");
+         whereSql.append(FDataControlRoleLogic.CODE).append(" LIKE '%").append(roleUnit.code() + "%'");
       }
       FDataControlRoleLogic roleLogic = logicContext.findLogic(FDataControlRoleLogic.class);
       FLogicDataset<FDataControlRoleUnit> roleList = roleLogic.fetch(whereSql.toString(), _pageSize, pageNum);

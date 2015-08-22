@@ -108,7 +108,7 @@
          <form id="role" action="/manage/role/Role.wa?do=update" method="post" align="center">
             <table width="750" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
                <tr>
-                  <td width="47" align="left">英文名称</td>
+                  <td width="47" align="left">代码</td>
                   <td width="400" align="left" colspan="2">
                      <input id="code" name="code" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" value="<jh:write source='&role.code' />" />
                      <input name="roleId" style="display:none;" value="<jh:write source='&role.ouid' />" />
@@ -117,7 +117,7 @@
                   </td>
                </tr>
                <tr>
-                  <td align="left">中文名称</td>
+                  <td align="left">角色名称</td>
                   <td align="left" colspan="2">
                      <input id="label" name="label" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" value="<jh:write source='&role.label' />" />
                   </td>
