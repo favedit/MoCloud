@@ -185,6 +185,7 @@ public class FIndexAction
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
          page.setSceneCode("ChartMarketerCustomer");
+         page.setPassport(passport.substring(passport.indexOf("_") + 1, passport.length()));
          return "main";
       }else{
          page.setMessage(message);
