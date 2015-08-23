@@ -238,7 +238,11 @@ public abstract class MObjects<T>
    // @param values 基础类型集合
    //============================================================
    public void assign(MObjects<T> values){
-      assign(values._items, 0, values._count);
+      if(values == null){
+         clear();
+      }else{
+         assign(values._items, 0, values._count);
+      }
    }
 
    //============================================================
@@ -251,7 +255,10 @@ public abstract class MObjects<T>
    public void assign(T[] values,
                       int offset,
                       int length){
-      if((null != values) && (length > 0)){
+      // 清空数据
+      clear();
+      // 接收数据
+      if((values != null) && (length > 0)){
          ensureSize(length);
          System.arraycopy(values, offset, _items, 0, length);
          _count = length;

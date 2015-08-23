@@ -4,6 +4,7 @@ import org.mo.cloud.content.design.configuration.EContentData;
 import org.mo.cloud.content.design.configuration.FContentClass;
 import org.mo.cloud.content.design.configuration.FContentField;
 import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FDictionary;
@@ -296,15 +297,24 @@ public class FPersistence
          }
       }
       // 合并节点
-      if(xinstance.hasNode()){
-         for(FContentObject xchild : xinstance.nodes()){
-            String obejctId = xchild.objectId();
-            FContentObject xnode = xconfig.find(obejctId);
-            if(xnode != null){
-               mergeConfig(xchild, xnode, modeCd);
+      FContentObjects nodes = new FContentObjects();
+      if(xconfig.hasNode()){
+         for(FContentObject xconfigChild : xconfig.nodes()){
+            String objectId = xconfigChild.objectId();
+            FContentObject xchild = xinstance.find(objectId);
+            if(xchild == null){
+               FContentObject xobject = new FContentObject();
+               xobject.setName(xconfigChild.name());
+               mergeConfig(xobject, xconfigChild, modeCd);
+               nodes.push(xobject);
+            }else{
+               xchild.setName(xconfigChild.name());
+               mergeConfig(xchild, xconfigChild, modeCd);
+               nodes.push(xchild);
             }
          }
       }
+      xinstance.nodes().assign(nodes);
    }
 
    //============================================================

@@ -2,8 +2,8 @@
 <Content update_date="20150822215539">
   <FormFrame guid="CABA128538DB4EBAB5C0A504F359ED24" name="editor.design.list.property.ItemForm" type="FEditorDsPropertyForm" label="图片属性" is_valid="Y" logic_group="item" logic_service="editor.design.list" note="" valid="false">
     <ToolBar guid="D8BD3318FAB648C492781E9737A45074" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
-      <ToolButton guid="AE97B48F9D604714A9382DB111D5481A" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" action="doSave()" />
-      <ToolButton guid="27EA488A261947BEBA9726E4CC7A64B2" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" action="doDelete()" />
+      <ToolButton guid="AE97B48F9D604714A9382DB111D5481A" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="27EA488A261947BEBA9726E4CC7A64B2" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
     </ToolBar>
     <Panel guid="B506765AFC87441E9CF45A413F248E02" name="componentPanel" icon="design.panel.icon" label="基本属性">
       <Select guid="8E25637FECA2445594693615EDD64FB0" name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_refer="editor.design.list.ComponentType" edit_size="600,0" input_size="500,0" note="" />

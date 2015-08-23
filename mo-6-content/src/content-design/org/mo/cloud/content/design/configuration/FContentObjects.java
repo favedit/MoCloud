@@ -1,5 +1,6 @@
 package org.mo.cloud.content.design.configuration;
 
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.generic.MObjects;
 import org.mo.com.xml.FXmlNodes;
@@ -72,6 +73,12 @@ public class FContentObjects
    //============================================================
    @Override
    public void push(FContentObject value){
+      // 检查编号是否重复
+      String objectId = value.objectId();
+      if(find(objectId) != null){
+         throw new FFatalError("Content object id is duplicate. (object_id={1})", objectId);
+      }
+      // 增加处理
       value.setParent(_parent);
       super.push(value);
    }

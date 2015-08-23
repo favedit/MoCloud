@@ -2,7 +2,7 @@
 <Content>
    <Frame name="system.design.frame.property.ButtonFrame" type='FEditorDsPropertyForm' label="持久化属性" is_valid="Y" note="">
      <ToolBar name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
-       <ToolButton name="insertButton" label="新建列表" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.list.list" hotkey="F5" attributes="logic_group=container\nframe_name=editor.design.list.property.ListForm\ncomponent_type=List" />
+       <ToolButton name="insertButton" label="新建列表" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.list.list" hotkey="F5" attributes="action=insert\nlogic_group=container\nframe_name=editor.design.list.property.ListForm\ncomponent_type=List" />
        <ToolButtonSplit name="splitButton" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" />
        <ToolButton name="buildButton" label="全部编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" page="buildAll@#/design/persistence/Persistence.wa" />
      </ToolBar>

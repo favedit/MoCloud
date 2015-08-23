@@ -134,10 +134,14 @@ public abstract class FAbstractDesignService
       FXmlNode xconfig = output.config();
       // 容器分组
       FAttributes packages = new FAttributes();
-      for(XContentObject xframe : xcontainers){
-         String name = xframe.getString("name");
-         String packageName = RString.leftLast(name, ".");
-         packages.set(packageName, packageName);
+      for(XContentObject xcontainer : xcontainers){
+         String name = xcontainer.getString("name");
+         if(name.contains(".")){
+            String packageName = RString.leftLast(name, ".");
+            packages.set(packageName, packageName);
+         }else{
+            buildTreeNode(xconfig, xcontainer, ECatalogNodeGroup.Container, false);
+         }
       }
       // 生成列表
       for(IStringPair pair : packages){
@@ -301,7 +305,7 @@ public abstract class FAbstractDesignService
             throw new FFatalError("Container item name is not exists. (item_name={1})", itemName);
          }
          FXmlNode xconfig = output.config().createNode(EContentConstants.Content);
-         xconfig.set("_type", xcontainer.name());
+         xconfig.set("_type", xitem.name());
          xconfig.attributes().append(xitem.attributes());
       }else{
          throw new FFatalError("Group is invalid. (group={1})", groupName);
@@ -320,6 +324,11 @@ public abstract class FAbstractDesignService
                          IWebInput input,
                          IWebOutput output){
       // 检查参数
+      String groupName = context.parameter("group");
+      if(RString.isEmpty(groupName)){
+         throw new FFatalError("Group name is empty.");
+      }
+      // 检查参数
       FXmlNode xcontent = input.config().findNode(EContentConstants.Content);
       if(xcontent == null){
          throw new FFatalError("Content config is empty.");
@@ -329,13 +338,44 @@ public abstract class FAbstractDesignService
          throw new FFatalError("Content name is empty.");
       }
       //............................................................
-      // 创建内容对象
-      FContentObject content = new FContentObject();
-      content.setName(typeName);
-      content.mergeAttributes(xcontent.attributes());
-      // 新建内容
       IContentConsole contentConsole = contentConsole();
-      contentConsole.insert(_storageName, content);
+      // 创建内容对象
+      if(ECatalogNodeGroup.Container.equals(groupName)){
+         // 新建节点
+         FContentObject content = new FContentObject();
+         content.setName(typeName);
+         content.mergeAttributes(xcontent.attributes());
+         // 新建内容
+         contentConsole.insert(_storageName, content);
+      }else if(ECatalogNodeGroup.Item.equals(groupName)){
+         // 加载配置
+         String containerName = context.parameter("container");
+         if(RString.isEmpty(containerName)){
+            throw new FFatalError("Container name is empty.");
+         }
+         FContentObject xcontainer = contentFindDefine(containerName, EPersistenceMode.Config);
+         if(xcontainer == null){
+            throw new FFatalError("Container is not exists. (container_name={1})", containerName);
+         }
+         // 新建节点
+         FContentObject content = new FContentObject();
+         content.setName(typeName);
+         content.mergeAttributes(xcontent.attributes());
+         // 检查参数
+         String itemName = context.parameter("item");
+         if(RString.isEmpty(itemName)){
+            xcontainer.push(content);
+         }else{
+            // 设置项目配置
+            FContentObject xitem = xcontainer.search(itemName);
+            if(xitem == null){
+               throw new FFatalError("Container item name is not exists. (item_name={1})", itemName);
+            }
+            xitem.push(content);
+         }
+         // 更新处理
+         contentConsole.update(_storageName, xcontainer);
+      }
       //............................................................
       return EResult.Success;
    }
@@ -404,19 +444,42 @@ public abstract class FAbstractDesignService
                          IWebInput input,
                          IWebOutput output){
       // 检查参数
+      String groupName = context.parameter("group");
+      if(RString.isEmpty(groupName)){
+         throw new FFatalError("Group name is empty.");
+      }
+      //............................................................
+      // 查找容器
       String containerName = context.parameter("container");
       if(RString.isEmpty(containerName)){
          throw new FFatalError("Container name is empty.");
       }
-      //............................................................
       IContentConsole contentConsole = contentConsole();
-      // 查找容器
-      FContentObject container = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
-      if(container == null){
+      FContentObject xcontainer = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
+      if(xcontainer == null){
          throw new FFatalError("Container item name is not exists. (container_name={1})", containerName);
       }
-      // 删除容器
-      contentConsole.delete(_storageName, container);
+      //............................................................
+      // 删除处理
+      if(ECatalogNodeGroup.Container.equals(groupName)){
+         // 删除容器
+         contentConsole.delete(_storageName, xcontainer);
+      }else if(ECatalogNodeGroup.Item.equals(groupName)){
+         // 查找节点
+         String itemName = context.parameter("item");
+         if(RString.isEmpty(itemName)){
+            throw new FFatalError("Container item name is empty.");
+         }
+         FContentObject xitem = xcontainer.search(itemName);
+         if(xitem == null){
+            throw new FFatalError("Container item name is not exists. (item_name={1})", itemName);
+         }
+         // 删除节点
+         xitem.remove();
+         // 更新处理
+         contentConsole.update(_storageName, xcontainer);
+      }
+      //............................................................
       return EResult.Success;
    }
 }

@@ -67,7 +67,7 @@ public class FContentObject
    // @param 对象编号
    //============================================================
    public String objectId(){
-      if(_objectId == null){
+      if(RString.isEmpty(_objectId)){
          _objectId = RUuid.makeUuidUpper();
       }
       return _objectId;
@@ -623,6 +623,14 @@ public class FContentObject
    //============================================================
    public void push(FContentObject node){
       nodes().push(node);
+   }
+
+   //============================================================
+   // <T>将当前节点从父节点上删除。</T>
+   //============================================================
+   public void remove(){
+      _parent.nodes().remove(this);
+      _parent = null;
    }
 
    //============================================================
