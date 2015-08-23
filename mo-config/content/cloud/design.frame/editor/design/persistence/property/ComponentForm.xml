@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <Frame name="system.design.frame.property.PictureFrame" type='FEditorDsPropertyForm' label="组件属性" is_valid="Y" logic_group='item' logic_service='editor.design.persistence' note="">
-     <ToolBar name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-       <ToolButton name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" action="doSave()" />
-       <ToolButton name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" action="doDelete()" />
-       <ToolButtonSplit name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-       <ToolButton name="insertAttributeButton" label="新建属性" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.attribute" hotkey="F5" page="insert@#/design/persistence/Persistence.wa" attributes="_type=Attribute\nsel_type=component\nform_name=design.persistence.AttributeForm" />
-       <ToolButtonSplit name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-       <ToolButton name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/persistence/Persistence.wa" />
-       <ToolButton name="buildButton" label="编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" page="build@#/design/persistence/Persistence.wa" />
-     </ToolBar>
-      <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
-         <Select name="componentType" label="组件类型" label_size='80,0' valid="Y" data_name='_type' edit_size='600,0' input_size='500,0' edit_refer='editor.design.persistence.ComponentType' note="" />
-         <Check name="isValid" label="有效性" label_size='80,0' valid="Y" data_name='is_valid' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="name" label="名称" label_size='80,0' valid="Y" data_name='name' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="label" label="标签" label_size='80,0' valid="Y" data_name='label' edit_size='600,0' input_size='500,0' note="" />
-      </Panel>
-      <Panel name='dataPanel' icon='design.panel.icon' label='数据属性'>
-         <Edit name="inherits" label="继承组件" label_size='80,0' valid="Y" data_name='inherits' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="baseName" label="基类名称" label_size='80,0' valid="Y" data_name='base_name' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="className" label="实装类名" label_size='80,0' valid="Y" data_name='class_name' edit_size='600,0' input_size='500,0' note="" />
-         <Edit name="sourcePath" label="代码路径" label_size='80,0' valid="Y" data_name='source_path' edit_size='600,0' input_size='500,0' note="" />
-      </Panel>
-      <Panel name='notePanel' icon='design.panel.icon' label='备注信息'>
-         <Edit name="note" label="备注" label_size='80,0' valid="Y" data_name='note' edit_size='600,0' input_size='500,0' note="" />
-      </Panel>
-   </Frame>
+<Content update_date="20150823212553">
+  <FormFrame guid="EB0F5EB84D6842EE8CD7C5518BFEA917" name="editor.design.persistence.property.ComponentForm" type="FEditorDsPropertyForm" label="组件属性" is_valid="Y" logic_group="item" logic_service="editor.design.persistence" note="" valid="false">
+    <ToolBar guid="4A7B0D3D612B446EA605704D15D2A5AA" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+      <ToolButton guid="590370ABE6544DB0BA4A45B9D99620B4" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="C3264798D40A4E2EA098F056DF648095" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+      <ToolButtonSplit guid="6EE4842D7A0C4629827BDE3E8CB76E66" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="BD0C591F5D95408B9217ABCF19C2AF8E" name="insertAttributeButton" label="新建属性" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.attribute" hotkey="F5" page="insert@#/design/persistence/Persistence.wa" attributes="_type=Attribute\nsel_type=component\nform_name=design.persistence.AttributeForm" />
+      <ToolButtonSplit guid="B6237B49201A41E9B28F30124454D9F5" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="AB820D4921BF4133BCC7E278F816EE1E" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/persistence/Persistence.wa" />
+      <ToolButton guid="5F39F348D1434F4B985C3173362DC370" name="buildButton" label="编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" page="build@#/design/persistence/Persistence.wa" />
+    </ToolBar>
+    <Panel guid="7EF50A5FC0B340F6A226F75673CB800B" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="C56EF3C7579244EA93FC41B564ADC91A" name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_size="600,0" input_size="500,0" edit_refer="editor.design.persistence.ComponentType" note="" />
+      <Check guid="1DA2327FB2844A989F7A8CA2B68FDCF9" name="isValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="1F7B01D2389E4EC0AA674F7B284E5672" name="name" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="8B4E90A332634FD7AA489725509C8C40" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="C798847F72124C4BBCFE2E1D08EA0BBF" name="dataPanel" icon="design.panel.icon" label="数据属性">
+      <Edit guid="4115B3ACE91749EF8C22580EB4CFC393" name="inherits" label="继承组件" label_size="80,0" valid="Y" data_name="inherits" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="F19F21873B934A3992E554DA947A526C" name="baseName" label="基类名称" label_size="80,0" valid="Y" data_name="base_name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="42F870955AAD4063881D280EF2B4EDCC" name="className" label="实装类名" label_size="80,0" valid="Y" data_name="class_name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="DCBE452B161B43D2BE709E7444D88173" name="sourcePath" label="代码路径" label_size="80,0" valid="Y" data_name="source_path" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="BC5DEAEF72354A1297BCD061B6DE8659" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Edit guid="8B4B5981BCF9475EAC06B17106486FBB" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+  </FormFrame>
 </Content>
