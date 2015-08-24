@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824154241">
+  <List guid="2332549DF88F42BAB429F9409DDFDF94" name="editor.design.tree.OrderType" label="目录排序方式" is_valid="Y" note="">
+    <Item guid="55A52AE7D19D413B9E8B9CADC301956A" name="ascend" label="升序" is_valid="Y" note="" type="I" value="ASC" />
+    <Item guid="3890EB072F4D4DBF917A089E8D59801E" name="descend" label="降序" is_valid="Y" note="" type="I" value="DESC" />
+  </List>
+</Content>

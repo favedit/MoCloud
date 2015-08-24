@@ -50,8 +50,8 @@ public class FFrameConsole
    @ALink
    protected IListConsole _listConsole;
 
-   // 表单字典
-   protected FDictionary<XContentObject> _frames = new FDictionary<XContentObject>(XContentObject.class);
+   // 内容字典
+   protected FDictionary<XContentObject> _contents = new FDictionary<XContentObject>(XContentObject.class);
 
    //============================================================
    // <T>获得表单集合。</T>
@@ -85,13 +85,13 @@ public class FFrameConsole
                               String formName,
                               EPersistenceMode modeCd){
       String code = storgeName + "|" + formName + "|" + modeCd.toString();
-      XContentObject xframe = _frames.find(code);
+      XContentObject xframe = _contents.find(code);
       if(xframe == null){
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, formName);
          if(node != null){
             FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
             xframe = persistence.convertInstance(node.config(), modeCd);
-            _frames.set(code, xframe);
+            _contents.set(code, xframe);
          }
       }
       return xframe;
@@ -300,9 +300,29 @@ public class FFrameConsole
    }
 
    //============================================================
-   // <T>更新表单配置。</T>
+   // <T>新建配置对象。</T>
    //
-   // @param frame 页面
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   @Override
+   public void insert(String storgeName,
+                      FContentObject contentObject){
+      // 新建节点
+      String nodeName = contentObject.get("name");
+      FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
+      FContentNode contentNode = space.create(nodeName);
+      contentNode.setConfig(contentObject);
+      contentNode.store();
+      // 清空缓冲
+      _contents.clear();
+   }
+
+   //============================================================
+   // <T>更新配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
    //============================================================
    @Override
    public void update(String storgeName,
@@ -316,20 +336,23 @@ public class FFrameConsole
       // 保存处理
       node.store();
       // 清空缓冲
-      _frames.clear();
+      _contents.clear();
    }
 
-   @Override
-   public void insert(String storgeName,
-                      FContentObject contentObject){
-      // TODO Auto-generated method stub
-
-   }
-
+   //============================================================
+   // <T>删除配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
    @Override
    public void delete(String storgeName,
                       FContentObject contentObject){
-      // TODO Auto-generated method stub
-
+      // 移除节点
+      String nodeName = contentObject.get("name");
+      FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
+      node.remove();
+      // 清空缓冲
+      _contents.clear();
    }
 }

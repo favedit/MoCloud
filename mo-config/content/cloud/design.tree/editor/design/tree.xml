@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150812151543">
-  <TreeView guid="8401D56EF66047BBBF7CAF5A252E6EF6" name="editor.design.tree" label="编辑设计目录" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.tree">
-    <TreeNodeType guid="69A0E04268C34E64BF28DAE0213B5BF0" name="package" label="包" is_valid="Y" note="" code="Package" icon="editor.design.tree.package" action="list" />
-    <TreeNodeType guid="725236240B4A458285C2C5C51BBBB5A0" name="treeView" label="目录" is_valid="Y" note="" type="collection" code="TreeView" icon="editor.design.tree.treeview" action="list" attributes="property_frame=editor.design.tree.property.TreeViewForm" />
-    <TreeNodeType guid="FC75CDC467FD4925898D2325598B8661" name="treeNodeType" label="节点类型" is_valid="Y" note="" type="component" code="TreeNodeType" icon="editor.design.tree.treenodetype" attributes="property_frame=editor.design.tree.property.TreeNodeTypeForm" />
-    <TreeNodeType guid="7964E864DFBF49838553364BDA31D82B" name="treeNode" label="节点" is_valid="Y" note="" type="component" code="TreeNode" icon="editor.design.tree.treenode" attributes="property_frame=editor.design.tree.property.TreeNodeForm" />
+<Content update_date="20150824135956">
+  <TreeView guid="4920CA58FA724651A16B6817D26A8169" name="editor.design.tree" label="编辑设计目录" is_valid="Y" note="" is_config="N" disp_checked="N" service="catalog@editor.design.tree">
+    <TreeNodeType guid="E553CF93DB67460985EC138196E95559" name="package" label="包" is_valid="Y" note="" code="Package" icon="editor.design.tree.package" action="list" />
+    <TreeNodeType guid="03358298BB7D46498D37FAF6580F75F9" name="treeView" label="目录" is_valid="Y" note="" type="collection" code="TreeView" icon="editor.design.tree.treeview" action="list" attributes="property_frame=editor.design.tree.property.TreeViewForm" />
+    <TreeNodeType guid="A7BB304AF27A4B32942D058EB8C9E204" name="treeColumn" label="目录列" is_valid="Y" note="" type="component" code="TreeColumn" icon="editor.design.tree.treecolumn" action="list" attributes="property_frame=editor.design.tree.property.TreeColumnForm" />
+    <TreeNodeType guid="663027A1445D4167BF7000DC98FF0B09" name="treeLevel" label="目录层" is_valid="Y" note="" type="component" code="TreeLevel" icon="editor.design.tree.treelevel" action="list" attributes="property_frame=editor.design.tree.property.TreeLevelForm" />
+    <TreeNodeType guid="8AA796D7CA3B40DFB151E4D60A7246FD" name="treeNodeType" label="目录节点类型" is_valid="Y" note="" type="component" code="TreeNodeType" icon="editor.design.tree.treenodetype" attributes="property_frame=editor.design.tree.property.TreeNodeTypeForm" />
+    <TreeNodeType guid="C3CD6B6A41C740F3B122082A1D4B7908" name="treeNode" label="目录节点" is_valid="Y" note="" type="component" code="TreeNode" icon="editor.design.tree.treenode" attributes="property_frame=editor.design.tree.property.TreeNodeForm" />
   </TreeView>
 </Content>

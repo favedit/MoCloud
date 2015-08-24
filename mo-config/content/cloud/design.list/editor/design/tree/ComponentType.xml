@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824154238">
+  <List guid="DC9DBE911E3544C3A2EE7FD34EEA87C9" name="editor.design.tree.ComponentType" label="目录组件类型" is_valid="Y" note="" cache="Y">
+    <Item guid="02281C99CC444903A6EA909EB167D764" name="column" label="目录列" is_valid="Y" note="" type="I" value="TreeColumn" />
+    <Item guid="7B2C02390DE045FCA34C5A1529898B75" name="type" label="目录节点类型" is_valid="Y" note="" type="I" value="TreeNodeType" />
+    <Item guid="BE70488A014247069A99851003A1F777" name="level" label="目录层次" is_valid="Y" note="" type="I" value="TreeLevel" />
+    <Item guid="F55DD8F2E865473DA2A4260178F4AE41" name="node" label="目录节点" is_valid="Y" note="" type="I" value="TreeNode" />
+    <Item guid="EB9E3653474A4A1A8B49F64589AC024E" name="treeView" label="目录树" is_valid="Y" note="" type="I" value="TreeView" />
+  </List>
+</Content>

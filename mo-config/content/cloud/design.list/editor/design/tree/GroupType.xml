@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824154239">
+  <List guid="1A0AE9CA28E84B199328860BE98DB2F5" name="editor.design.tree.GroupType" label="目录分组类型" is_valid="Y">
+    <Item guid="FC75D94C85484C62BCC1A4F8774353F1" name="collection" label="根节点" is_valid="Y" note="" type="I" value="collection" />
+    <Item guid="5D88E9ADEE0845E6B89A6F733CA1A757" name="component" label="子节点" is_valid="Y" note="" type="I" value="component" />
+  </List>
+</Content>

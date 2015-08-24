@@ -45,8 +45,8 @@ public class FTreeConsole
    @ALink
    protected IPersistenceConsole _persistenceConsole;
 
-   // 列表
-   protected FDictionary<XTreeView> _trees = new FDictionary<XTreeView>(XTreeView.class);
+   // 内容字典
+   protected FDictionary<XTreeView> _contents = new FDictionary<XTreeView>(XTreeView.class);
 
    //============================================================
    // <T>获得目录集合。</T>
@@ -79,12 +79,12 @@ public class FTreeConsole
                          String treeName,
                          EPersistenceMode modeCd){
       String code = storgeName + "|" + treeName + "|" + modeCd;
-      XTreeView xtree = _trees.find(code);
+      XTreeView xtree = _contents.find(code);
       if(xtree == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, treeName);
          xtree = persistence.convertInstance(node.config(), modeCd);
-         _trees.set(code, xtree);
+         _contents.set(code, xtree);
       }
       return xtree;
    }
@@ -132,13 +132,27 @@ public class FTreeConsole
       return xconfig;
    }
 
+   //============================================================
+   // <T>新建配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
    @Override
    public void insert(String storgeName,
                       FContentObject contentObject){
+      // 新建节点
+      String nodeName = contentObject.get("name");
+      FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
+      FContentNode contentNode = space.create(nodeName);
+      contentNode.setConfig(contentObject);
+      contentNode.store();
+      // 清空缓冲
+      _contents.clear();
    }
 
    //============================================================
-   // <T>更新配置处理。</T>
+   // <T>更新配置对象。</T>
    //
    // @param storgeName 存储名称
    // @param contentObject 配置对象
@@ -155,11 +169,23 @@ public class FTreeConsole
       // 保存处理
       node.store();
       // 清空缓冲
-      _trees.clear();
+      _contents.clear();
    }
 
+   //============================================================
+   // <T>删除配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
    @Override
    public void delete(String storgeName,
                       FContentObject contentObject){
+      // 移除节点
+      String nodeName = contentObject.get("name");
+      FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
+      node.remove();
+      // 清空缓冲
+      _contents.clear();
    }
 }

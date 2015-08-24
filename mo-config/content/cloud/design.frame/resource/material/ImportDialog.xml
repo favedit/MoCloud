@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
-   <Frame name="resource.material.ImportDialog" type='FDsMaterialImportDialog' label="导入位图" is_valid="Y" size='520,340' note="">
+   <DialogFrame name="resource.material.ImportDialog" type='FDsMaterialImportDialog' label="导入位图" is_valid="Y" size='520,340' note="">
       <Panel name='infoPanel' label='基本信息'>
          <Select name="typeCode" linker='_controlTypeCode' label="类型" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" >
             <SelectItem name="diffuse" label="颜色图" data_value='diffuse'/>
@@ -19,5 +19,5 @@
       </Panel>
       <Button name="confirmButton" linker='_controlConfirmButton' label="确认" size='80,20' margin='4,0,4,0' wrap_cd='1'/>
       <Button name="cancelButton" linker='_controlCancelButton' label="取消" size='80,20' margin='4,0,4,0' />
-   </Frame>
+   </DialogFrame>
 </Content>

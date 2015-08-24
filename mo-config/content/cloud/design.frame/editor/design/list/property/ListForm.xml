@@ -16,7 +16,7 @@
       <Edit guid="4127624F03A748E09F562054A6818A5F" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
     </Panel>
     <Panel guid="05155851E64E4387BC395756D627F31E" name="notePanel" icon="design.panel.icon" label="备注信息">
-      <Edit guid="7CF61AACBA7549A1BCCAA6269B412DF1" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,0" note="" />
+      <Memo guid="7CF61AACBA7549A1BCCAA6269B412DF1" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,0" note="" />
     </Panel>
   </FormFrame>
 </Content>

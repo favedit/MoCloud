@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824154108">
+  <List _guid="A38E19388CFF45878970146B50755137" name="editor.design.frame.ComponentType" label="控件类型" is_valid="Y" note="" cache="Y">
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="formFrame" label="表单页面" is_valid="Y" note="" type="I" value="FormFrame" />
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="tableFrame" label="表格页面" is_valid="Y" note="" type="I" value="TableFrame" />
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="pickerFrame" label="拾取框" is_valid="Y" note="" type="I" value="PickerFrame" />
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="dialogFrame" label="对话框" is_valid="Y" note="" type="I" value="DialogFrame" />
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="styleFrame" label="样式页面" is_valid="Y" note="" type="I" value="StyleFrame" />
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="templateFrame" label="模板页面" is_valid="Y" note="" type="I" value="TemplateFrame" />
+
+    <Item _guid="FC2F0A36FFC94CF3995C38CD940462FD" name="label" label="标签控件" is_valid="Y" note="" type="I" value="Label" />
+    <Item _guid="433548ABEE384DEAAC0E859700A31E43" name="radio" label="单选择按钮" is_valid="Y" note="" type="I" value="Radio" />
+    <Item _guid="171D26360D204ED09C05F66892047E37" name="check" label="复选框" is_valid="Y" note="" type="I" value="Check" />
+    <Item _guid="CF5A5A0FA1F54D56A1828922354F3758" name="number" label="数字编辑框" is_valid="Y" note="" type="I" value="Number" />
+    <Item _guid="FE856E4F114A4C3A93AD86E392ED3C1E" name="edit" label="文本编辑框" is_valid="Y" note="" type="I" value="Edit" />
+    <Item _guid="8B86F41DB0BD44DD918CFA406E7CD63F" name="select" label="下拉选择框" is_valid="Y" note="" type="I" value="Select" />
+    <Item _guid="F5526C0639B94262A50B3487FB4AFC36" name="calendar" label="日期时间选取框" is_valid="Y" note="" type="I" value="Calendar" />
+    <Item _guid="08A6728B3E124E9FBC4D926302151CC1" name="memo" label="多行文本编辑框" is_valid="Y" note="" type="I" value="Memo" />
+    <Item _guid="07ACF789DCCB43EE855B2A0085A9ADAC" name="picture" label="图片控件" is_valid="Y" note="" type="I" value="Picture" />
+    <Item _guid="5D2729D0D31B430E939A801D9BC036DB" name="attachment" label="上传控件" is_valid="Y" note="" type="I" value="Attachment" />
+
+    <Item _guid="EE4065D28D2F44EB9107856E0FE03AEE" name="button" label="按键" is_valid="Y" note="" type="I" value="Button" />
+    <Item _guid="1B74C352708E43BE9364A295AF73E53B" name="progressBar" label="百分比进度条" is_valid="Y" note="" type="I" value="ProgressBar" />
+    <Item _guid="0F7DB0FBA01D4EF49011870873F1AD62" name="panel" label="面板控件" is_valid="Y" note="" type="I" value="Panel" />
+    <Item _guid="DBF82CDF6E89423FA58CFB282C6B7D93" name="toolBar" label="工具栏" is_valid="Y" note="" type="I" value="ToolBar" />
+    <Item _guid="D213046B45EE48F59383BFF51984032F" name="toolButton" label="工具栏-按钮" is_valid="Y" note="" type="I" value="ToolButton" />
+    <Item _guid="737ECDC23F224D57AAC4609F80B04E70" name="toolButtonSplit" label="工具栏-分割线" is_valid="Y" note="" type="I" value="ToolButtonSplit" />
+    <Item _guid="FAC6BDC9B1DA477BABEE5B2DD80D6F16" name="toolButtonMenu" label="工具栏-菜单按钮" is_valid="Y" note="" type="I" value="ToolButtonMenu" />
+    <Item _guid="DBF82CDF6E89423FA58CFB282C6B7D93" name="menuBar" label="菜单栏" is_valid="Y" note="" type="I" value="MenuBar" />
+    <Item _guid="2330DD0E65D24420AA4A4123808317F3" name="menuButton" label="菜单按钮" is_valid="Y" note="" type="I" value="MenuButton" />
+    <Item _guid="7411A9CC5DF447959036AB6AEFC7C179" name="menuButtonSplit" label="菜单分隔" is_valid="Y" note="" type="I" value="MenuButtonSplit" />
+    <Item _guid="2A2B671BCD0841F9A6BD0924F51EA215" name="grid" label="网格控件" is_valid="Y" note="" type="I" value="Grid" />
+    <Item _guid="2AB648F1F57A41A8B4FC7D1AFEC3750C" name="table" label="表格" is_valid="Y" note="" type="I" value="Table" />
+    <Item _guid="70063827A5EF4682B2D096A547DA4E7E" name="column" label="数据列" is_valid="Y" note="" type="I" value="Column" />
+    <Item _guid="FA05601AEAF24A3E806C33D4ECD1E074" name="columnCheck" label="数据列-复选框" is_valid="Y" note="" type="I" value="ColumnCheck" />
+    <Item _guid="650B229B6B814CC6B38E443E646866B3" name="columnNumber" label="数据列-数字编辑框" is_valid="Y" note="" type="I" value="ColumnNumber" />
+    <Item _guid="3ABA9C486C51482FBA731D976146AAF9" name="columnEdit" label="数据列-文本编辑框" is_valid="Y" note="" type="I" value="ColumnEdit" />
+    <Item _guid="A0F543A671EA435F95A1B65BD8D8AE01" name="columnSelect" label="数据列-下拉列表" is_valid="Y" note="" type="I" value="ColumnSelect" />
+    <Item _guid="2C40E95AD9B840B68E3265FA0491F7EE" name="columnCalendar" label="数据列-日期时间选取框" is_valid="Y" note="" type="I" value="ColumnCalendar" />
+    <Item _guid="AA8BB0B2B4C84AB29502FA1D03971697" name="pageControl" label="分页控件" is_valid="Y" note="" type="I" value="PageControl" />
+    <Item _guid="A1CCF602D314440D984BC26582A0AA35" name="template" label="模板" is_valid="Y" note="" type="I" value="Template" />
+
+    <Item _guid="2749926F8F5248A3A8F325345B04166B" name="dataAction" label="数据处理" is_valid="Y" note="" type="I" value="DataAction" />
+    <Item _guid="FD12244CE9004A6F853AFA4029BFBEC4" name="event" label="控件事件" is_valid="Y" note="" type="I" value="Event" />
+    <Item _guid="A171446B9B78481FA1B0BD869BEF1BFD" name="split" label="分割线" is_valid="Y" note="" type="I" value="Split" />
+    <Item _guid="0678145BEF0E42B0909963CB3269C71C" name="checkPicker" label="多项选择框" is_valid="Y" note="" type="I" value="CheckPicker" />
+    <Item _guid="E3B37121EF2A40E0A3F9E3271EA173F0" name="time" label="时间编辑框" is_valid="Y" note="" type="I" value="Time" />
+    <Item _guid="8898396E54A44097B45D3A98FB4AE1A2" name="date" label="日期编辑框" is_valid="Y" note="" type="I" value="Date" />
+    <Item _guid="E5012E1F4CCD4F0D8893D2E63505D2C8" name="iconPicker" label="图标选取" is_valid="Y" note="" type="I" value="IconPicker" />
+    <Item _guid="82809C21FC1A49F8B843C3E9990A23BC" name="colorPicker" label="颜色选取框" is_valid="Y" note="" type="I" value="ColorPicker" />
+    <Item _guid="26D01CA0CFE141089D9043FC6F36684E" name="reference" label="引用编辑框" is_valid="Y" note="" type="I" value="Reference" />
+    <Item _guid="356210986D40472883765684F9A4BFE2" name="picker" label="记录选取框" is_valid="Y" note="" type="I" value="Picker" />
+    <Item _guid="4966101DE0D8438192801BE48DC8F47D" name="timer" label="时间表控件" is_valid="Y" note="" type="I" value="Timer" />
+    <Item _guid="F8EBDA5D7E2546EBA3B70D1F8CB19B75" name="chart" label="图表控件" is_valid="Y" note="" type="I" value="Chart" />
+    <Item _guid="2F10A9BD5ECA47919149177CC2B4A627" name="htmlMemo" label="HTML显示框" is_valid="Y" note="" type="I" value="HtmlMemo" />
+    <Item _guid="A2478A1592AA456CB8D4622A3E1D8B16" name="richEdit" label="格式文本输入框" is_valid="Y" note="" type="I" value="RichEdit" />
+    <Item _guid="0C71C02860C74A1A9AF9E7D5A0A879C8" name="timespanpicker" label="时间段选取框" is_valid="Y" note="" type="I" value="TimeSpanPicker" />
+    <Item _guid="5D6BAB8733CC407F88A80F66BCEEE247" name="logicUserPicker" label="用户逻辑框" is_valid="Y" note="" type="I" value="LogicUserPicker" />
+    <Item _guid="F858281C1DAE4CA9BA2A4C7732AF1BD9" name="columnRadioGroup" label="数据列-多选框" is_valid="Y" note="" type="I" value="ColumnRadioGroup" />
+    <Item _guid="9A7A817D8B154A50BCE7444B894448E7" name="columnTime" label="数据列-时间编辑框" is_valid="Y" note="" type="I" value="ColumnTime" />
+    <Item _guid="3BE0C44C48514F6D87107D418F9C0AF9" name="columnDate" label="数据列-日期编辑框" is_valid="Y" note="" type="I" value="ColumnDate" />
+    <Item _guid="B893A04512C248B19BE4FDC7E21E9649" name="columnProgress" label="数据列-进度条" is_valid="Y" note="" type="I" value="ColumnProgress" />
+    <Item _guid="0CFB462E9B5141389C88087D5ADE0F89" name="columnColorPicker" label="数据列-颜色选取列" is_valid="Y" note="" type="I" value="ColumnColorPicker" />
+    <Item _guid="F3E8F0CFC42542249C07FEEF1316EE0F" name="columnPicture" label="数据列-图片" is_valid="Y" note="" type="I" value="ColumnPicture" />
+    <Item _guid="0864BE191DD648AFAAC5213B38600D3D" name="columnProcessStatus" label="数据列-状态处理列" is_valid="Y" note="" type="I" value="ColumnProcessStatus" />
+    <Item _guid="D55CFC3516AB42798A54E414093C46D9" name="columnProgressBar" label="百分比列" is_valid="Y" note="" type="I" value="ColumnProgressBar" />
+    <Item _guid="2ACD5551F8C043FD8887FB92AA90DAB1" name="columnButton" label="按键列" is_valid="Y" note="" type="I" value="ColumnButton" />
+    <Item _guid="7E9EB0E8F4314BC291FB3C98F3AF0863" name="columnTree" label="数据树列" is_valid="Y" note="" type="I" value="ColumnTree" />
+    <Item _guid="56C640B39D1646AF8E471A8BCC63FF07" name="pageSheet" label="分页控件-页面" is_valid="Y" note="" type="I" value="PageSheet" />
+    <Item _guid="431F2C65DEF443EE9BED256403F4D58B" name="formEvent" label="表单事件" is_valid="Y" note="" type="I" value="FormEvent" />
+    <Item _guid="31B17D9B95834920893C0CEF50147A20" name="formInformationBar" label="表单信息控件" is_valid="Y" note="" type="I" value="FormInformationBar" />
+    <Item _guid="E3FEE9924015400A92AB3B93CAD824E7" name="browser" label="待定控件" is_valid="Y" note="" type="I" value="Browser" />
+    <Item _guid="9FC092B1AE1F443AB13AF7CF9F339083" name="discussion" label="讨论控件" is_valid="Y" note="" type="I" value="Discussion" />
+    <Item _guid="9453354903C449D2BC615ADF99B208FF" name="fixGrid" label="固定网格控件" is_valid="Y" note="" type="I" value="FixGrid" />
+    <Item _guid="C583ED7D2E9E4D719B2DB1AA1755382C" name="fixTable" label="固定表格" is_valid="Y" note="" type="I" value="FixTable" />
+    <Item _guid="CA4F0ED3BA9E401281FCBA68DF72660C" name="browserControl" label="流程控件" is_valid="Y" note="" type="I" value="BrowserControl" />
+    <Item _guid="D5C68FF531F443CAAA4B053E64E47E41" name="rowType" label="行类型" is_valid="Y" note="" type="I" value="RowType" />
+    <Item _guid="67C54E2CB31C4DECA180CC3D04EE9264" name="sql" label="Sql文" is_valid="Y" note="" type="I" value="Sql" />
+  </List>
+</Content>

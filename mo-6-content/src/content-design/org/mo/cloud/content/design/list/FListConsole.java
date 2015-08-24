@@ -44,8 +44,8 @@ public class FListConsole
    @ALink
    protected IPersistenceConsole _persistenceConsole;
 
-   // 列表
-   protected FDictionary<XList> _lists = new FDictionary<XList>(XList.class);
+   // 内容字典
+   protected FDictionary<XList> _contents = new FDictionary<XList>(XList.class);
 
    //============================================================
    // <T>获得列表集合。</T>
@@ -78,12 +78,12 @@ public class FListConsole
                      String listName,
                      EPersistenceMode modeCd){
       String code = storgeName + "|" + listName + "|" + modeCd;
-      XList xlist = _lists.find(code);
+      XList xlist = _contents.find(code);
       if(xlist == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, listName);
          xlist = persistence.convertInstance(node.config(), modeCd);
-         _lists.set(code, xlist);
+         _contents.set(code, xlist);
       }
       return xlist;
    }
@@ -111,7 +111,7 @@ public class FListConsole
    }
 
    //============================================================
-   // <T>更新列表配置。</T>
+   // <T>新建配置对象。</T>
    //
    // @param storgeName 存储名称
    // @param contentObject 配置对象
@@ -119,17 +119,18 @@ public class FListConsole
    @Override
    public void insert(String storgeName,
                       FContentObject contentObject){
+      // 新建节点
       String nodeName = contentObject.get("name");
       FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
       FContentNode contentNode = space.create(nodeName);
       contentNode.setConfig(contentObject);
       contentNode.store();
       // 清空缓冲
-      _lists.clear();
+      _contents.clear();
    }
 
    //============================================================
-   // <T>更新列表配置。</T>
+   // <T>更新配置对象。</T>
    //
    // @param storgeName 存储名称
    // @param contentObject 配置对象
@@ -146,11 +147,11 @@ public class FListConsole
       // 保存处理
       node.store();
       // 清空缓冲
-      _lists.clear();
+      _contents.clear();
    }
 
    //============================================================
-   // <T>删除列表配置。</T>
+   // <T>删除配置对象。</T>
    //
    // @param storgeName 存储名称
    // @param contentObject 配置对象
@@ -158,10 +159,11 @@ public class FListConsole
    @Override
    public void delete(String storgeName,
                       FContentObject contentObject){
+      // 移除节点
       String nodeName = contentObject.get("name");
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
       node.remove();
       // 清空缓冲
-      _lists.clear();
+      _contents.clear();
    }
 }

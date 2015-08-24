@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150812132914">
-  <List guid="1CA3D272FC724EF5842B4775028A1641" _type="List" is_valid="Y" name="system.culture.Language" label="语言设置" cache="N" note="" _status="I">
+<Content update_date="20150824154244">
+  <List guid="1CA3D272FC724EF5842B4775028A1641" is_valid="Y" name="system.culture.Language" label="语言设置" cache="N" note="">
     <Item guid="57D39A40CE974D10840CFF5506CBBA1B" is_valid="Y" type="I" hotkey="" name="english" label="英文" value="" icon="" note="" />
     <Item guid="694C2F2BEAA241E688160F561E8D8A3B" is_valid="Y" type="I" hotkey="" name="chinese" label="中文" value="" icon="" note="" />
     <Item guid="6BBD767A8C6B42F7A0D36E7CBBE9CE80" is_valid="Y" type="I" hotkey="" name="japanese" label="日文" value="" icon="" note="" />

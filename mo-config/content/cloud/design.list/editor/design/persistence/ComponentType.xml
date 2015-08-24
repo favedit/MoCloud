@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150822213158">
+<Content update_date="20150824154235">
   <List guid="F4A5E2B44E6445E0A2BBCE5C7E16FF39" name="editor.design.persistence.ComponentType" label="设计-持久化-组件类型" is_valid="Y" note="">
     <Item guid="F59C1F3F1F4549349C29AE8A1AC1F337" name="persistence" label="持久化集合" is_valid="Y" note="" type="I" value="Persistence" />
     <Item guid="CA18AFE9DD51498DA0ECA6FDE1CDDBDF" name="interface" label="接口" is_valid="Y" note="" type="I" value="Interface" />

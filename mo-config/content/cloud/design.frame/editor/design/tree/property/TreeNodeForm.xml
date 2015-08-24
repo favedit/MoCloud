@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150823212428">
-  <FormFrame guid="B6C89A24E5DB4E48A773CDA88EAA17D8" name="editor.design.tree.property.TreeNodeForm" type="FEditorDsPropertyForm" label="图片属性" is_valid="Y" logic_group="item" logic_service="editor.design.tree" note="" valid="false">
-    <ToolBar guid="487C30116C9946398D460D84FF7D4614" name="toolbar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%">
-      <ToolButton guid="CED1F77E4BC742A5AF2145C3080E0993" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="tool.save" icon_disable="tool.saves" hotkey="F8" action="doSave()" />
-      <ToolButton guid="1A2FD873EC4749AD9A164444FDABD712" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="tool.delete" icon_disable="tool.deleted" hotkey="F6" action="doDelete()" />
-      <ToolButtonSplit guid="9677686966004406B08C0785ED55D67E" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-      <ToolButton guid="35250A2063054E18A627E317A342CAD2" name="insertNodeButton" label="新建节点" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" icon="#design.webtree.nodeNew" icon_disable="tool.insertd" hotkey="F5" page="insert@#/design/webtree/WebTree.wa" attributes="_type=TreeNode\nsel_type=component\nform_name=design.webtree.TreeNodeForm" />
-      <ToolButtonSplit guid="02E7238737B1403AA3384220C66401F7" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-      <ToolButton guid="184EB2FA72ED4B5A819E18E5F1CD1DC8" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="tool.design" icon_disable="tool.design" hotkey="F9" page="sort@#/design/webtree/WebTree.wa" attributes="sel_type=component" />
+<Content update_date="20150824093506">
+  <FormFrame guid="F3C818A38DC34E88B69F5FFC0307BE99" name="editor.design.tree.property.TreeNodeForm" type="FEditorDsPropertyForm" label="图片属性" is_valid="Y" logic_group="item" logic_service="editor.design.tree" note="" valid="false">
+    <ToolBar guid="8289241CD0D945B282A3C000CC9DCBC5" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%">
+      <ToolButton guid="F9FBD47DAFCC43549A672509AB0257EE" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="2D9B770301904C6A8DF9A581C1744C31" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+      <ToolButtonSplit guid="BDBB172DCA1043FFAED53AE8F27707C7" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="7E6D2DAC2A89412FABCFEF7BC60145B4" name="insertNodeButton" label="新建节点" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.tree.treenode" hotkey="F5" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.tree.property.TreeNodeForm\ncomponent_type=TreeNode" />
+      <ToolButtonSplit guid="974EAEF119484396812E24574CCB552A" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="F563286E233C4A4EBAA83AAAFB969746" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.order" hotkey="F9" attributes="action=sort" />
     </ToolBar>
-    <Panel guid="DB8920C006BA4A1087F4A80132F7CF8B" name="componentPanel" icon="design.panel.icon" label="基本属性">
-      <Edit guid="99C55A4D534A4E6780009FF76F07A757" name="componentType" linker="_controlComponentType" label="组件类型" label_size="70,0" valid="Y" edit_size="200,0" input_size="200,0" note="" />
-      <Check guid="5F09238DFFA54CC6B9A1412379E87250" name="isValid" linker="_controlIsValid" label="有效性" label_size="70,0" valid="Y" data_name="is_valid" edit_size="200,0" input_size="200,0" note="" />
-      <Edit guid="B2017F76988144759A44C8DFA26A4748" name="name" linker="_controlName" label="名称" label_size="70,0" valid="Y" data_name="name" edit_size="200,0" input_size="200,0" note="" />
-      <Edit guid="A997FF2198B74B8A9AB18D820008973C" name="label" linker="_controlLabel" label="标签" label_size="70,0" valid="Y" data_name="label" edit_size="200,0" input_size="200,0" note="" />
+    <Panel guid="AD8DA2E80AE74A69B959DDC868D7174D" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="02DEE81CF4EB4E3FB8D1E96ED7D45732" name="componentType" linker="_controlComponentType" label="组件类型" label_size="80,0" valid="Y" edit_size="600,0" input_size="500,0" note="" data_name="_type" edit_refer="editor.design.tree.ComponentType" />
+      <Check guid="E0B0F1ECE70849CFA82622112FA52095" name="isValid" linker="_controlIsValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="EF0800817A744FBD9BC5499672982EE0" name="name" linker="_controlName" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="DF50EC5DBEF14A6592107FF562363ABE" name="label" linker="_controlLabel" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
     </Panel>
-    <Panel guid="421787D5409A476E88448AF4A1D0E82F" name="notePanel" icon="design.panel.icon" label="备注信息">
-      <Edit guid="D8DDCE1B9AF64043B4D4F2BD878B072F" name="note" linker="_controlNote" label="备注" label_size="70,0" valid="Y" data_name="note" edit_size="200,0" input_size="200,0" note="" />
+    <Panel guid="BB01AE5090A84BCD961727FC5CF36748" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Memo guid="96122AC6C3614B82934553EAD1320C5E" name="note" linker="_controlNote" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,80" note="" />
     </Panel>
   </FormFrame>
 </Content>
