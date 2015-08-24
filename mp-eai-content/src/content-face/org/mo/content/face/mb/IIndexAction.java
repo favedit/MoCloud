@@ -1,6 +1,5 @@
 package org.mo.content.face.mb;
 
-import org.mo.content.face.pc.FIndexPage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;

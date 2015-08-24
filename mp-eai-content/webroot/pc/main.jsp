@@ -14,27 +14,33 @@
          id_code.value = code;
          frmMain.submit();
       }
-      function loginOut(){
-         location.href="Index.wa?do=loginOut";
+
+      function loginOut() {
+         location.href = "Index.wa?do=loginOut";
       }
    </script>
+
    <body>
       <FORM name='frmMain' method='post' action='Index.wa'>
          <INPUT id='id_do' name='do' type='hidden' value='chart'>
          <INPUT id='id_code' name='code' type='hidden'>
          <header class="header floatBtn">
             <div class="head-left"><span>数据中心</span>
-               <p class="pl-10">您好，<jh:write source='&page.passport' /> 欢迎登陆！</p>
+               <p class="pl-10">您好，
+                  <jh:write source='&page.passport' /> 欢迎登录！</p>
             </div>
-            <div class="head-right">
-               <p class="user-details" id="user-details"><i>3</i><jh:write source='&page.passport' /><img src="images/main/icon.png"></p>
-               <ul class="users" id="users">
-                  <li onclick="loginOut();">退出</li>
-               </ul>
-               <span class="img-details mr-20 pulse">
-            <img src='images/main/re.jpeg'>
-         </span>
-            </div>
+            <jh:notEquals source="host" value="&page.userType">
+               <div class="head-right">
+                  <p class="user-details" id="user-details"><i>3</i>
+                     <jh:write source='&page.passport' /><img src="images/main/icon.png"></p>
+                  <ul class="users" id="users">
+                     <li onclick="loginOut();">退出</li>
+                  </ul>
+                  <span class="img-details mr-20 pulse">
+                        <img src='images/main/re.jpeg'>
+                  </span>
+               </div>
+            </jh:notEquals>
          </header>
          <div class="main">
             <div class="container">

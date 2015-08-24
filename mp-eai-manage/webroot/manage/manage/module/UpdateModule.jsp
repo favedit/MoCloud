@@ -42,6 +42,7 @@
                      <input name="ouid" style="display:none;" value="<jh:write source='&module.ouid' />" />
                      <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
                      <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" value="<jh:write source='&module.code' />" />
+                     <font color="red"><jh:write source='&basePage.message' /></font>
                   </td>
                </tr>
                <tr>

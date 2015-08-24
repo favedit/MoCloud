@@ -29,6 +29,17 @@ public class FIndexPage
    //用户权限
    protected String _menuString;
 
+   //用户类型
+   protected String _userType;
+
+   public String userType(){
+      return _userType;
+   }
+
+   public void setUserType(String _userType){
+      this._userType = _userType;
+   }
+
    public String menuString(){
       return _menuString;
    }

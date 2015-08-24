@@ -145,6 +145,10 @@ public class FRoleAction
                                ILogicContext logicContext,
                                FBasePage basePage){
       _logger.debug(this, "Role", "Role insertPrepare begin.");
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      basePage.setMessage("");
       return "#/manage/role/InsertRole";
    }
 
@@ -163,9 +167,19 @@ public class FRoleAction
                         FRolePage rolePage,
                         FBasePage basePage){
       _logger.debug(this, "Role", "Role insert begin.");
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      String code = context.parameter("code").trim();
+      FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, code);
+      System.out.println(code + "," + role + "------------------");
+      if(role != null){
+         basePage.setMessage("代码已存在！");
+         return "#/manage/role/InsertRole";
+      }
       FDataControlRoleUnit roleUnit = new FDataControlRoleUnit();
       roleUnit.setOvld(true);
-      roleUnit.setCode(context.parameter("code"));
+      roleUnit.setCode(code);
       roleUnit.setLabel(context.parameter("label"));
       roleUnit.setNote(context.parameter("note"));
       String userId = context.parameter("adminId");
@@ -204,7 +218,11 @@ public class FRoleAction
                                FRolePage rolePage,
                                FBasePage basePage){
       _logger.debug(this, "Role", "Role delete begin. (roleId={1})", context.parameter("id"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       long roleId = context.parameterAsLong("id");
+      basePage.setMessage("");
       rolePage.setRole(_roleConsole.find(logicContext, roleId));
       return "#/manage/role/UpdateRole";
    }
@@ -222,12 +240,23 @@ public class FRoleAction
                         FRolePage rolePage,
                         FBasePage basePage){
       _logger.debug(this, "Role", "Role update begin. (ouid={1})", context.parameterAsLong("roleId"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       String adminId = context.parameter("adminId");
       long roleId = context.parameterAsLong("roleId");
+      String code = context.parameter("code").trim();
       long userOuid = _userConsole.findByGuid(logicContext, adminId).ouid();
       FDataControlRoleUnit roleUnit = logicContext.findLogic(FDataControlRoleLogic.class).find(roleId);
       //      roleUnit.setOvld(context.parameter("ovld") == null ? false : true);
-      roleUnit.setCode(context.parameter("code"));
+      roleUnit.setCode(code);
+      if(roleUnit.isCodeChanged()){
+         FDataControlRoleUnit module = _roleConsole.findByCode(logicContext, code);
+         if(module != null){
+            basePage.setMessage("代码已存在！");
+            return "#/manage/role/UpdateRole";
+         }
+      }
       roleUnit.setLabel(context.parameter("label"));
       roleUnit.setNote(context.parameter("note"));
       roleUnit.setUpdateUserId(userOuid);
@@ -267,6 +296,9 @@ public class FRoleAction
                                   FRolePage rolePage,
                                   FBasePage basePage){
       _logger.debug(this, "Role", "Role selectRoleModule begin. (page={1})", context.parameter("page"));
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          rolePage.setPageCurrent(Integer.parseInt(num));
@@ -299,6 +331,9 @@ public class FRoleAction
                            ILogicContext logicContext,
                            FBasePage basePage){
       _logger.debug(this, "Role", "Role selectAll begin.");
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
       FLogicDataset<FDataControlRoleUnit> roleList = _roleConsole.selectDataByPageAndSomerow(logicContext, new FDataControlRoleUnit(), 0);
       basePage.setJson(roleList.toJsonString());
       _logger.debug(this, "Role", "Role selectAll begin. (roleList={1})", roleList.count());

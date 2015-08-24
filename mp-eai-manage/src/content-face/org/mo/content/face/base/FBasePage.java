@@ -19,8 +19,8 @@ public class FBasePage
    //ajax
    protected String _json;
 
-   //详情
-   protected String _description;
+   //临时变量
+   protected String _temp;
 
    //用户权限
    protected String _menuString;
@@ -35,6 +35,16 @@ public class FBasePage
    protected String _passport;
 
    protected long _roleId;
+
+   protected String _message;
+
+   public String message(){
+      return _message;
+   }
+
+   public void setMessage(String _message){
+      this._message = _message;
+   }
 
    public long roleId(){
       return _roleId;
@@ -84,12 +94,12 @@ public class FBasePage
       this._menuString = _menuString;
    }
 
-   public String description(){
-      return _description;
+   public String temp(){
+      return _temp;
    }
 
-   public void setDescription(String _description){
-      this._description = _description;
+   public void setTemp(String _temp){
+      this._temp = _temp;
    }
 
    public String json(){

@@ -117,12 +117,21 @@ function insert_editAndDelButton(value, row, index) {
 function insert_admin_editButton(value, row, index) {
    var del = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="del(\'' + row.guid + '\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-cancel l-btn-icon-left">删除</span></span></a>';
    var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="edit(\'' + row.guid + '\')"><span class="l-btn-text icon-edit l-btn-icon-left">编辑</span></span></a>';
-   if (row.passport == 'admin') {
-      return "&nbsp;&nbsp;&nbsp;" + edit+ "&nbsp;&nbsp;";
-      //      return del;
-   } else {
-      return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;|&nbsp;" + del;
+   var passport = row.passport;
+   var isOa = passport.indexOf(":");
+   if (isOa > 0) {
+      var userType = passport.substr(0, isOa);
+      console.log(userType);
+      if ((userType == "white-host") || (userType == "white-user") || (userType == "oa")) {
+         return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;";
+      }
    }
+   if (row.passport == 'admin') {
+      return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;";
+      //      return del;
+   }
+   return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;|&nbsp;" + del;
+
 
 }
 //在教程里获取应用列表

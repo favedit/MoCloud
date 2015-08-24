@@ -114,6 +114,7 @@
                      <input name="roleId" style="display:none;" value="<jh:write source='&role.ouid' />" />
                      <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
                      <input id="moduleIds" name="moduleIds" style="display:none;" />
+                     <font color="red"><jh:write source='&basePage.message' /></font>
                   </td>
                </tr>
                <tr>
@@ -136,7 +137,7 @@
                            <tr>
                               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
                               <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="200px">代码</th>
-                              <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="150px">中文名称</th>
+                              <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="150px">模块名称</th>
                               <th data-options="field:'viewValidCd',align:'center',formatter:isChecked" width="60px">查看权限</th>
                            </tr>
                         </thead>

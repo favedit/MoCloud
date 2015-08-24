@@ -23,15 +23,17 @@
             <section class="main-container" id="main-container">
                <header>
                   <span class="btn-list" id="btn-list"></span> 全球实时数据中心
-                  <div class="header-r"><img src="images/re.png"></div>
-                  <ul class="header-list bounceInDown">
-                     <span>当前帐号</span>
-                     <p>
-                        <jh:write source='&page.passport' />
-                     </p>
-                     <li onclick="loginOut();">退出</li>
-                  </ul>
-                  <div class="shadow"></div>
+                  <jh:notEquals source="host" value="&page.userType">
+                     <div class="header-r"><img src="images/re.png"></div>
+                     <ul class="header-list bounceInDown">
+                        <span>当前帐号</span>
+                        <p>
+                           <jh:write source='&page.passport' />
+                        </p>
+                        <li onclick="loginOut();">退出</li>
+                     </ul>
+                     <div class="shadow"></div>
+                  </jh:notEquals>
                </header>
 
                <div class="banner" id="banner">

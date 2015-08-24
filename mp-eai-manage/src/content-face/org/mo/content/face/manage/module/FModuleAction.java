@@ -160,6 +160,7 @@ public class FModuleAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
+      basePage.setMessage("");
       return "#/manage/module/InsertModule";
    }
 
@@ -181,9 +182,15 @@ public class FModuleAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
+      String code = context.parameter("code").trim();
+      FDataControlModuleUnit module = _moduleConsole.findByCode(logicContext, code);
+      if(module != null){
+         basePage.setMessage("代码已存在！");
+         return "#/manage/module/InsertModule";
+      }
       FDataControlModuleUnit moduleUnit = new FDataControlModuleUnit();
       moduleUnit.setOvld(true);
-      moduleUnit.setCode(context.parameter("code"));
+      moduleUnit.setCode(code);
       moduleUnit.setLabel(context.parameter("label"));
       moduleUnit.setNote(context.parameter("note"));
       long userouid = _userConsole.findByGuid(logicContext, context.parameter("adminId")).ouid();
@@ -209,6 +216,7 @@ public class FModuleAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
+      basePage.setMessage("");
       long id = context.parameterAsLong("id");
       modulePage.setModule(_moduleConsole.find(logicContext, id));
       _logger.debug(this, "UpdatePrepare", "UpdatePrepare finish. (module={1})", modulePage.module());
@@ -229,9 +237,17 @@ public class FModuleAction
                         FBasePage basePage){
       _logger.debug(this, "Update", "Update begin. (ouid={1})", context.parameterAsLong("ouid"));
       long id = context.parameterAsLong("ouid");
+      String code = context.parameter("code").trim();
       FDataControlModuleUnit moduleUnit = _moduleConsole.find(logicContext, id);
       //      moduleUnit.setOvld(context.parameter("ovld") == null ? false : true);
-      moduleUnit.setCode(context.parameter("code"));
+      moduleUnit.setCode(code);
+      if(moduleUnit.isCodeChanged()){
+         FDataControlModuleUnit module = _moduleConsole.findByCode(logicContext, code);
+         if(module != null){
+            basePage.setMessage("代码已存在！");
+            return "#/manage/module/UpdateModule";
+         }
+      }
       moduleUnit.setLabel(context.parameter("label"));
       moduleUnit.setNote(context.parameter("note"));
       long userouid = _userConsole.findByGuid(logicContext, context.parameter("adminId")).ouid();

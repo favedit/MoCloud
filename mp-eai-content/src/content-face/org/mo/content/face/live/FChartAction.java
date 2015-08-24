@@ -1,12 +1,7 @@
 package org.mo.content.face.live;
 
-import com.cyou.gccloud.data.data.FDataControlRoleUnit;
-import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
-import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
-import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
-import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import org.mo.com.lang.RString;
 import org.mo.content.core.common.EChartPage;
 import org.mo.content.core.manage.person.role.IRoleConsole;
@@ -120,8 +115,6 @@ public class FChartAction
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.Success:
-            passport = "host_" + passport;
-            synchronizeData(logicContext, passport);
             logggerMessage = "登录成功。";
             break;
          case EGcAuthorityResult.PassportInvalid:
@@ -136,8 +129,6 @@ public class FChartAction
             message = "时间已失效。";
             break;
          case EGcAuthorityResult.OaSuccess:
-            passport = "oa_" + passport;
-            synchronizeData(logicContext, passport);
             logggerMessage = "OA登录成功。";
             break;
          case EGcAuthorityResult.OaPasswordInvald:
@@ -177,28 +168,4 @@ public class FChartAction
       }
    }
 
-   //============================================================
-   // <T>登录成功后，用户信息同步。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param passport 账户
-   //============================================================
-   private void synchronizeData(ILogicContext logicContext,
-                                String passport){
-      if(!_userConsole.passportExists(logicContext, passport)){
-         //获取角色
-         FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, "eai.oa");
-         //同步OA用户
-         FDataPersonUserUnit unit = new FDataPersonUserUnit();
-         unit.setPassport(passport);
-         unit.setRoleId(role.ouid());
-         _userConsole.doInsert(logicContext, unit);
-         //同步用户状态
-         FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
-         entryUnit.setUserId(unit.ouid());
-         entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
-         entryUnit.setFromCd(EGcPersonUserFrom.EaiOa);
-         _entryConsole.doInsert(logicContext, entryUnit);
-      }
-   }
 }

@@ -33,6 +33,7 @@
                   <td align="left" colspan="2">
                      <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
                      <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" validtype="length[1,40]" value="" />
+                     <font color="red"><jh:write source='&basePage.message' /></font>
                   </td>
                </tr>
                <tr>

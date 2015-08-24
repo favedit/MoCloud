@@ -37,4 +37,7 @@ public interface IModuleConsole
    // @param unit 更新数据
    // ============================================================
    FLogicDataset<FDataControlModuleInfo> selectModule(ILogicContext logicContext);
+
+   FDataControlModuleUnit findByCode(ILogicContext logicContext,
+                                     String code);
 }

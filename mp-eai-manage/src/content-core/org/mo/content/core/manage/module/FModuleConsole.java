@@ -60,4 +60,16 @@ public class FModuleConsole
       FLogicDataset<FDataControlModuleInfo> moduleInfoList = logicContext.findLogic(FDataControlModuleLogic.class).fetchClass(FDataControlModuleInfo.class, null, null, orderBy, -1, -1);
       return moduleInfoList;
    }
+
+   @Override
+   public FDataControlModuleUnit findByCode(ILogicContext logicContext,
+                                            String code){
+      StringBuffer whereSql = new StringBuffer();
+      if(!RString.isEmpty(code)){
+         whereSql.append(FDataControlModuleLogic.CODE).append("='").append(code + "'");
+      }
+      FDataControlModuleLogic logic = logicContext.findLogic(FDataControlModuleLogic.class);
+      FLogicDataset<FDataControlModuleUnit> roleList = logic.fetch(whereSql.toString());
+      return roleList.first();
+   }
 }
