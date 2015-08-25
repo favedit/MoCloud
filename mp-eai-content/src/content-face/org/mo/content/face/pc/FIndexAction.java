@@ -26,6 +26,8 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
+import org.mo.eai.logic.financial.FFinancialMarketerInfo;
+import org.mo.eai.logic.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
@@ -70,6 +72,10 @@ public class FIndexAction
    //短信校验控制台
    @ALink
    protected IValidationConsole _validationConsole;
+
+   //理财师控制台
+   @ALink
+   protected IFinancialMarketerConsole _marketerConsole;
 
    //OA角色
    protected final String role_oa = "eai.oa";
@@ -255,21 +261,30 @@ public class FIndexAction
       page.setMessage(null);
       String passport = context.parameter("passport");
       //根据帐号查找用户及手机号(不是理财师：您不是理财师。)
-      page.setMessage("您无理财师权限！");
-      //      return "";
-      //..............................
-      //获取手机号码
-      String mobile = "18710555908";
+      if(RString.isEmpty(passport)){
+         page.setMessage("账户不能为空");
+         return null;
+
+      }
+      FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
+      if(marketer == null){
+         page.setMessage("您无理财师权限！");
+         return null;
+      }
+      //获取手机号码 －〉 发送验证码
+      String mobile = marketer.phone();
       String random = RRandom.getNumberRandom(4);
       int result = sendMessage(random, mobile);
-      if(result > 0){
-         //保存数据库
-         FCacheSystemValidationUnit unit = _validationConsole.doPrepare(logicContext);
-         unit.setPassport(passport);
-         unit.setCheckCode(random);
-         unit.setValidateCd(EGcValidationValidate.EaiMarketer);
-         _validationConsole.doInsert(logicContext, unit);
+      if(result < 0){
+         page.setMessage("验证码发送失败");
+         return null;
       }
+      //保存数据库
+      FCacheSystemValidationUnit unit = _validationConsole.doPrepare(logicContext);
+      unit.setPassport(passport);
+      unit.setCheckCode(random);
+      unit.setValidateCd(EGcValidationValidate.EaiMarketer);
+      _validationConsole.doInsert(logicContext, unit);
       return null;
    }
 

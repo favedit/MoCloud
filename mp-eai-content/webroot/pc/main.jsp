@@ -104,7 +104,7 @@
             <div class="box">
                <div class="box-container">
                   <h1>账号绑定</h1>
-                  <span class="box-prompt"><i></i></span>
+                  <span class="box-prompt"><i><jh:write source='&page.message' /></i></span>
                   <p class="icon mt-30"><i class=""></i><input id="mobile" class="quantico account"  type="text" placeholder="E租宝"></p>
                   <p class="validation"><input type="text" id="verification_code" placeholder="验证码"><input type="button" id="send_btn" value="发送动态密码"></p>
                   <a href="javascript:;" class="btn"><input id="btn" type="submit"  value="提交"></a>

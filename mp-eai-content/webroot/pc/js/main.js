@@ -142,6 +142,7 @@
         }else if($("#verification_code").val() == ""){
           $boxPrompt.show().text(alertTips.validationTel);
         }else{
+           
            frmMain.submit();
         }
     })
