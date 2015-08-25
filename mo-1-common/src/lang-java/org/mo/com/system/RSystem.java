@@ -17,6 +17,27 @@ public class RSystem
    // 日志输出接口
    private static ILogger _logger = RLogger.find(RSystem.class);
 
+   // 运行模式
+   protected static ESystemMode _modeCd = ESystemMode.Release;
+
+   //============================================================
+   // <T>判断是否调试模式。</T>
+   //
+   // @return 是否调试模式
+   //============================================================
+   public static boolean isDebug(){
+      return _modeCd == ESystemMode.Debug;
+   }
+
+   //============================================================
+   // <T>设置运行模式。</T>
+   //
+   // @param modeCd 运行模式
+   //============================================================
+   public static void setModeCd(ESystemMode modeCd){
+      RSystem._modeCd = modeCd;
+   }
+
    //============================================================
    // <T>获得系统运行模式。</T>
    //

@@ -101,11 +101,11 @@ public class FAbstractConfigurationService
       String type = xconfig.get(RContentConfiguration.PTY_TYPE);
       FContentNode contentNode = _configurationConsole.getNode(_storageName, _spaceName, collectionCode);
       FAttributes attributes = new FAttributes();
-      persistence.setAttributes(type, attributes, contentNode.config().attributes(), EPersistenceMode.Config);
+      persistence.setAttributes(type, attributes, contentNode.content().attributes(), EPersistenceMode.Config);
       persistence.setAttributes(type, attributes, xconfig.attributes(), EPersistenceMode.Config);
       attributes.set("name", collectionCode);
-      contentNode.config().attributes().assign(attributes);
-      persistence.format(contentNode.config(), EPersistenceMode.Config);
+      contentNode.content().attributes().assign(attributes);
+      persistence.format(contentNode.content(), EPersistenceMode.Config);
       contentNode.store();
       return EResult.Success;
    }
@@ -140,9 +140,9 @@ public class FAbstractConfigurationService
       FAttributes attributes = new FAttributes();
       if(TYPE_COLLECTION.equals(storageCode)){
          // 存储配置集合对象
-         persistence.setAttributes(type, attributes, contentNode.config().attributes(), modeCd);
+         persistence.setAttributes(type, attributes, contentNode.content().attributes(), modeCd);
          persistence.setAttributes(type, attributes, xconfig.attributes(), modeCd);
-         contentNode.config().attributes().assign(attributes);
+         contentNode.content().attributes().assign(attributes);
       }else if(TYPE_COMPONENT.equals(storageCode)){
          // 存储配置对象
          FContentObject xcomponent = contentNode.search(componentCode);
@@ -184,11 +184,11 @@ public class FAbstractConfigurationService
          // 获得属性
          FContentNode contentNode = pair.value();
          String name = contentNode.name();
-         String typeCode = contentNode.config().name();
-         String label = contentNode.config().get("label");
-         String guid = contentNode.config().objectId();
-         boolean hasChild = contentNode.config().hasNode();
-         boolean isValid = contentNode.config().getBoolean("is_valid", true);
+         String typeCode = contentNode.content().name();
+         String label = contentNode.content().get("label");
+         String guid = contentNode.content().objectId();
+         boolean hasChild = contentNode.content().hasNode();
+         boolean isValid = contentNode.content().getBoolean("is_valid", true);
          // 新建节点
          XTreeNode xnode = new XTreeNode();
          xnode.setIsValid(isValid);
@@ -234,7 +234,7 @@ public class FAbstractConfigurationService
       // 获得控件对象
       FContentObjects xcontrols = null;
       if(TYPE_COLLECTION.equals(storageCd)){
-         xcontrols = contentNode.config().nodes();
+         xcontrols = contentNode.content().nodes();
       }else{
          String objectId = selectNode.get("guid");
          FContentObject xcontrol = contentNode.search(objectId);
@@ -294,10 +294,10 @@ public class FAbstractConfigurationService
          // 新建XML数据集
          FContentSpace contentSpace = _configurationConsole.getSpace(_storageName, _spaceName);
          FContentNode contentNode = contentSpace.create(name);
-         contentNode.config().setName(type);
-         contentNode.config().attributes().assign(dataNode.attributes());
+         contentNode.content().setName(type);
+         contentNode.content().attributes().assign(dataNode.attributes());
          contentNode.store();
-         uuid = contentNode.config().objectId();
+         uuid = contentNode.content().objectId();
          // 刷新树目录
          RContentConfiguration.setTreeReload(output);
       }else if(TYPE_COMPONENT.equals(selectType)){
@@ -326,8 +326,8 @@ public class FAbstractConfigurationService
             xparent.createNode(dataNode);
             uuid = xparent.objectId();
          }else{
-            contentNode.config().createNode(dataNode);
-            uuid = contentNode.config().objectId();
+            contentNode.content().createNode(dataNode);
+            uuid = contentNode.content().objectId();
          }
          contentNode.store();
          // 刷新树目录
@@ -440,7 +440,7 @@ public class FAbstractConfigurationService
       String type = envNode.get(RContentConfiguration.PTY_STORAGE_CODE);
       FContentObject xsort = null;
       if(TYPE_COLLECTION.equals(type)){
-         xsort = contentNode.config();
+         xsort = contentNode.content();
       }else if(TYPE_COMPONENT.equals(type)){
          String component = envNode.get(RContentConfiguration.PTY_COMPONENT_CODE);
          FContentObject xcomponent = contentNode.search(component);

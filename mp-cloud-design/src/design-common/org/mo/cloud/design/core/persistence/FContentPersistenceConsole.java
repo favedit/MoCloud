@@ -67,7 +67,7 @@ public class FContentPersistenceConsole
          persistence = new FContentPersistence();
          persistence.setStorageName(_storageName);
          persistence.setPersistenceName(persistenceName);
-         persistence.load(xpersistence.config());
+         persistence.load(xpersistence.content());
          _persistences.set(code, persistence);
       }
       return persistence;
@@ -231,7 +231,7 @@ public class FContentPersistenceConsole
    // @param xpersistence 持久化节点
    //============================================================
    protected void buildContentNode(FContentNode xpersistence){
-      FContentObject xconfig = xpersistence.config();
+      FContentObject xconfig = xpersistence.content();
       for(FContentObject xobject : xconfig.nodes()){
          if(xobject.isName("Component")){
             buildComponent(xconfig, xobject);

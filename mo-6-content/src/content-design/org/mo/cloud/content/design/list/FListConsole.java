@@ -13,6 +13,7 @@ import org.mo.com.console.FConsole;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
+import org.mo.com.system.IListener;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 
@@ -46,6 +47,24 @@ public class FListConsole
 
    // 内容字典
    protected FDictionary<XList> _contents = new FDictionary<XList>(XList.class);
+
+   //============================================================
+   // <T>更新配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   public void initialize(){
+      _configurationConsole.registerFileChanged(new IListener(){
+         @Override
+         public boolean process(Object sender,
+                                int command,
+                                Object params){
+            _contents.clear();
+            return true;
+         }
+      });
+   }
 
    //============================================================
    // <T>获得列表集合。</T>
@@ -82,7 +101,7 @@ public class FListConsole
       if(xlist == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, listName);
-         xlist = persistence.convertInstance(node.config(), modeCd);
+         xlist = persistence.convertInstance(node.content(), modeCd);
          _contents.set(code, xlist);
       }
       return xlist;
@@ -123,7 +142,7 @@ public class FListConsole
       String nodeName = contentObject.get("name");
       FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
       FContentNode contentNode = space.create(nodeName);
-      contentNode.setConfig(contentObject);
+      contentNode.setContent(contentObject);
       contentNode.store();
       // 清空缓冲
       _contents.clear();
@@ -140,7 +159,7 @@ public class FListConsole
                       FContentObject contentObject){
       String nodeName = contentObject.get("name");
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
-      FContentObject xinstance = node.config();
+      FContentObject xinstance = node.content();
       // 获得转换器
       FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
       persistence.mergeConfig(xinstance, contentObject, EPersistenceMode.Config);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825155949">
+  <List guid="9F4EB68EB80B478FBE63F50F9ED3C685" name="editor.design.frame.DataType" label="数据类型" is_valid="true" note="" cache="Y">
+    <Item guid="53C7D0CE7A974152BF942D6207A3D2EC" name="bool" label="布尔值" is_valid="Y" note="" type="I" value="bool" />
+    <Item guid="432CE0E4BB4A4253AAB3BD4E58A26D9E" name="integer" label="整数" is_valid="Y" note="" type="I" value="int" />
+    <Item guid="A4B25C6157AB4A6D82FB5D5080D4A875" name="float" label="浮点数" is_valid="Y" note="" type="I" value="float" />
+    <Item guid="657FE7D9574B4A2DA386490398E81760" name="date" label="日期时间" is_valid="Y" note="" type="I" value="date" />
+    <Item guid="A0EDDFC9B26A432B84B37E9515BD3463" name="string" label="字符串" is_valid="Y" note="" type="I" value="string" />
+    <Item guid="5FBAE24520014E45AEFEFAD47AA98B4F" name="multiString" label="多国语言字符串" is_valid="Y" note="" type="I" value="mstring" />
+    <Item guid="29D4665A086542B0A3B462B3CD11C301" name="enum" label="枚举" is_valid="Y" note="" type="I" value="enum" />
+    <Item guid="AB7BD878E5FC4A65B55AA1C27B5395D8" name="set" label="集合" is_valid="Y" note="" type="I" value="set" />
+    <Item guid="2FC17626D9914CE1B6DFA1C21DA850AB" name="stream" label="数据流" is_valid="Y" note="" type="I" value="stream" />
+  </List>
+</Content>

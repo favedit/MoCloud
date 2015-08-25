@@ -1,18 +1,14 @@
-/*
- * @(#)FEnvironmentConsole.java
- *
- * Copyright 2008 microbject, All Rights Reserved.
- *
- */
 package org.mo.eng.environment;
 
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IAttributes;
+import org.mo.com.lang.REnum;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.system.ESystemMode;
 import org.mo.com.xml.IXmlObject;
 import org.mo.core.aop.face.AProperty;
 import org.mo.eng.environment.common.XEnvironment;
@@ -20,19 +16,22 @@ import org.mo.eng.environment.common.XProperty;
 import org.mo.eng.store.FXmlConfigConsole;
 import org.mo.eng.template.common.XVariable;
 
-/**
- * 全局环境配置控制台
- * 
- * @author maocy
- */
+//============================================================
+// <T>全局环境配置控制台。</T>
+//============================================================
 public class FEnvironmentConsole
       extends FXmlConfigConsole<XEnvironment>
       implements
          IEnvironmentConsole
 {
+   // 日志输出接口
    private static final ILogger _logger = RLogger.find(FEnvironmentConsole.class);
 
+   // 定义信息
    private final FAttributes _defines = new FAttributes();
+
+   @AProperty
+   protected String _processMode;
 
    @AProperty
    protected String _homepath;
@@ -44,6 +43,16 @@ public class FEnvironmentConsole
    public final String FLG_END = "}";
 
    public final char FLG_SPLITER_CHAR = '|';
+
+   //============================================================
+   // <T>获得处理模式。</T>
+   //
+   // @return 处理模式
+   //============================================================
+   @Override
+   public ESystemMode processMode(){
+      return REnum.parse(ESystemMode.class, _processMode);
+   }
 
    @Override
    protected FObjects<XEnvironment> createCollection(){

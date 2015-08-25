@@ -36,7 +36,7 @@ public class FContentNode
    protected long _lastModified;
 
    // 配置节点
-   protected FContentObject _config = new FContentObject();
+   protected FContentObject _content = new FContentObject();
 
    //============================================================
    // <T>构造内容节点。</T>
@@ -111,34 +111,6 @@ public class FContentNode
    }
 
    //============================================================
-   // <T>获得配置节点。</T>
-   //
-   // @return 配置节点
-   //============================================================
-   public FContentObject config(){
-      return _config;
-   }
-
-   //============================================================
-   // <T>设置配置节点。</T>
-   //
-   // @param contentObject 配置节点
-   //============================================================
-   public void setConfig(FContentObject contentObject){
-      _config = contentObject;
-   }
-
-   //============================================================
-   // <T>递归查询指定编号的内容节点。</T>
-   //
-   // @param objectId 对象编号
-   // @return 内容节点
-   //============================================================
-   public FContentObject search(String objectId){
-      return _config.search(objectId);
-   }
-
-   //============================================================
    // <T>获得是否打开。</T>
    //
    // @return 是否打开
@@ -148,22 +120,40 @@ public class FContentNode
    }
 
    //============================================================
-   // <T>保存配置节点。</T>
+   // <T>获得内容节点。</T>
    //
-   // @param xconfig 配置节点
-   // @param deep 支持深度 
+   // @return 内容节点
    //============================================================
-   public void saveConfig(FXmlNode xconfig){
-      xconfig.setName("Content");
-      xconfig.set("update_date", RDateTime.format());
+   public synchronized FContentObject config(){
+      return _content;
    }
 
    //============================================================
-   // <T>加载配置节点。</T>
+   // <T>获得内容节点。</T>
    //
-   // @param xconfig 配置节点
+   // @return 内容节点
    //============================================================
-   public void loadConfig(FXmlNode xconfig){
+   public synchronized FContentObject content(){
+      return _content;
+   }
+
+   //============================================================
+   // <T>设置内容节点。</T>
+   //
+   // @return 内容节点
+   //============================================================
+   public synchronized void setContent(FContentObject content){
+      _content = content;
+   }
+
+   //============================================================
+   // <T>递归查询指定编号的内容节点。</T>
+   //
+   // @param objectId 对象编号
+   // @return 内容节点
+   //============================================================
+   public synchronized FContentObject search(String objectId){
+      return _content.search(objectId);
    }
 
    //============================================================
@@ -171,7 +161,7 @@ public class FContentNode
    //
    // @return 处理结果
    //============================================================
-   public EResult open(){
+   public synchronized EResult open(){
       // 检查标志
       if(_statusOpen){
          return EResult.Failure;
@@ -191,22 +181,23 @@ public class FContentNode
       FXmlDocument xdocument = new FXmlDocument();
       xdocument.loadFile(_fileName);
       FXmlNode xroot = xdocument.root();
-      loadConfig(xroot);
       // 加载配置信息
       FXmlNode xcontent = xroot.nodes().first();
       xcontent.set("name", _name);
-      _config.loadConfig(xcontent);
+      _content.loadConfig(xcontent);
       _statusOpen = true;
+      // 输出日志
+      _logger.debug(this, "open", "Open content node. (name={1}, file_name={2})", _name, _fileName);
       return EResult.Success;
    }
 
    //============================================================
    // <T>检查处理，如果发生改变重新加载内容。</T>
-   // <P>TODO:Debug模式检查，运行模式不检查。</P>
    //
+   // @param context 检查环境
    // @return 处理结果
    //============================================================
-   public EResult check(){
+   public synchronized EResult check(SConfigurationCheckContext context){
       // 检查文件时间
       File file = new File(_fileName);
       if(file.lastModified() == _lastModified){
@@ -214,8 +205,10 @@ public class FContentNode
       }
       // 重新加载文件
       _statusOpen = false;
-      _config = new FContentObject();
+      _content = new FContentObject();
       open();
+      // 改变文件处理
+      context.listeners.process(this, 0, _fileName);
       return EResult.Success;
    }
 
@@ -224,7 +217,7 @@ public class FContentNode
    //
    // @return 处理结果
    //============================================================
-   public EResult store(){
+   public synchronized EResult store(){
       // 检查标志
       if(!_statusOpen){
          return EResult.Failure;
@@ -234,14 +227,15 @@ public class FContentNode
          return EResult.Failure;
       }
       // 检查节点存在性
-      if(_config == null){
+      if(_content == null){
          return EResult.Failure;
       }
       // 存储配置节点
       FXmlDocument xdocument = new FXmlDocument();
       FXmlNode xroot = xdocument.root();
-      saveConfig(xroot);
-      _config.saveConfig(xroot.createNode());
+      _content.saveConfig(xroot.createNode());
+      xroot.setName("Content");
+      xroot.set("update_date", RDateTime.format());
       xdocument.saveFile(_fileName);
       _logger.debug(this, "store", "Store content node. (name={1}, file_name={2})", _name, _fileName);
       _lastModified = new File(_fileName).lastModified();
@@ -253,7 +247,7 @@ public class FContentNode
    //
    // @return 处理结果
    //============================================================
-   public EResult close(){
+   public synchronized EResult close(){
       // 检查标志
       if(!_statusOpen){
          return EResult.Failure;
@@ -267,7 +261,7 @@ public class FContentNode
    //
    // @return 处理结果
    //============================================================
-   public EResult remove(){
+   public synchronized EResult remove(){
       // 关闭处理
       close();
       // 删除内容

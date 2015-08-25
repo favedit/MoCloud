@@ -130,7 +130,6 @@ public class FContentSpace
          if(!node.statusOpen()){
             node.open();
          }
-         node.check();
       }
       return node;
    }
@@ -201,6 +200,20 @@ public class FContentSpace
          _logger.debug(this, "open", "Create content node. (name={1})", name);
       }
       _statusOpen = true;
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>检查处理，如果发生改变重新加载内容。</T>
+   //
+   // @param context 检查环境
+   // @return 处理结果
+   //============================================================
+   public EResult check(SConfigurationCheckContext context){
+      for(INamePair<FContentNode> pair : _nodes){
+         FContentNode contentNode = pair.value();
+         contentNode.check(context);
+      }
       return EResult.Success;
    }
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825150717">
+  <List guid="287323AAD1464E9BB3F134E618DEE039" name="editor.design.frame.LabelPosition" label="设计-位置" is_valid="true" note="M#" cache="Y">
+    <Item guid="01FB787F3BDC4FFB9C08722FAE5D8B91" name="left" label="左方" is_valid="Y" note="M#" type="I" value="left" />
+    <Item guid="1E5047097B8D488099DC526F568C58DE" name="top" label="上方" is_valid="Y" note="M#" type="I" value="top" />
+    <Item guid="042B34A0B0EF4E8FB5FA13C7FEC887CF" name="right" label="右方" is_valid="Y" note="M#" type="I" value="right" />
+  </List>
+</Content>

@@ -15,6 +15,7 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
 import org.mo.com.lang.RString;
+import org.mo.com.system.IListener;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 
@@ -54,6 +55,24 @@ public class FFrameConsole
    protected FDictionary<XContentObject> _contents = new FDictionary<XContentObject>(XContentObject.class);
 
    //============================================================
+   // <T>更新配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   public void initialize(){
+      _configurationConsole.registerFileChanged(new IListener(){
+         @Override
+         public boolean process(Object sender,
+                                int command,
+                                Object params){
+            _contents.clear();
+            return true;
+         }
+      });
+   }
+
+   //============================================================
    // <T>获得表单集合。</T>
    //
    // @param storgeName 存储名称
@@ -90,7 +109,7 @@ public class FFrameConsole
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, formName);
          if(node != null){
             FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
-            xframe = persistence.convertInstance(node.config(), modeCd);
+            xframe = persistence.convertInstance(node.content(), modeCd);
             _contents.set(code, xframe);
          }
       }
@@ -126,39 +145,6 @@ public class FFrameConsole
    // @param frameName 页面名称
    // @return 目录配置
    //============================================================
-   //   protected void buildContentConfig(String storgeName,
-   //                                     FContentObject contentObject,
-   //                                     EPersistenceMode modeCd){
-   //      // 处理模板
-   //      if(contentObject.isName("Template")){
-   //         FContentObject contentParent = contentObject.parent();
-   //         int index = contentParent.nodes().indexOf(contentObject);
-   //         contentParent.nodes().remove(contentObject);
-   //         // 查找引用内容
-   //         String frameSource = contentObject.get("frame_source");
-   //         FContentObject contentTemplate = findDefine(storgeName, frameSource, modeCd);
-   //         buildContentConfig(storgeName, contentTemplate, modeCd);
-   //         if(contentTemplate.hasNode()){
-   //            for(FContentObject contentNode : contentTemplate.nodes()){
-   //               contentParent.nodes().insert(contentNode, index++);
-   //            }
-   //         }
-   //      }
-   //      // 处理子节点
-   //      if(contentObject.hasNode()){
-   //         for(FContentObject contentNode : contentObject.nodes()){
-   //            buildContentConfig(storgeName, contentNode, modeCd);
-   //         }
-   //      }
-   //   }
-
-   //============================================================
-   // <T>根据名称建立目录配置。</T>
-   //
-   // @param storgeName 存储名称
-   // @param frameName 页面名称
-   // @return 目录配置
-   //============================================================
    protected void buildSelect(String storgeName,
                               FContentObject xcontent,
                               EPersistenceMode modeCd){
@@ -184,6 +170,31 @@ public class FFrameConsole
    }
 
    //============================================================
+   // <T>根据名称建立目录配置。</T>
+   //
+   // @param storgeName 存储名称
+   // @param frameName 页面名称
+   // @return 目录配置
+   //============================================================
+   protected void buildTemplate(String storgeName,
+                                FContentObject content,
+                                FContentObject control,
+                                EPersistenceMode modeCd){
+      String frameSource = control.get("frame_source", null);
+      if(!RString.isEmpty(frameSource)){
+         // 查找定义
+         FContentObject frame = buildDefine(storgeName, frameSource, modeCd);
+         if(frame == null){
+            throw new FFatalError("Frame is not exists. (frame_name={1})", frameSource);
+         }
+         // 嵌入节点
+         for(FContentObject node : frame.nodes()){
+            content.push(node);
+         }
+      }
+   }
+
+   //============================================================
    // <T>查询配置处理。</T>
    //
    // @param context 网络环境
@@ -196,27 +207,6 @@ public class FFrameConsole
                           EPersistenceMode modeCd){
       // 合并属性
       content.merge(control);
-      //..........................................................
-      // 处理模板
-      if(content.isName("Template")){
-         //         FContentObject contentParent = content.parent();
-         //         int index = contentParent.nodes().indexOf(content);
-         //         contentParent.nodes().remove(content);
-         //         // 查找引用内容
-         //         String frameSource = content.get("frame_source");
-         //         FContentObject contentTemplate = findDefine(storgeName, frameSource, modeCd);
-         //         buildContentConfig(storgeName, contentTemplate, modeCd);
-         //         if(contentTemplate.hasNode()){
-         //            for(FContentObject contentNode : contentTemplate.nodes()){
-         //               contentParent.nodes().insert(contentNode, index++);
-         //            }
-         //         }
-      }
-      //..........................................................
-      // 处理模板
-      if(content.isName("Select")){
-         buildSelect(storgeName, content, modeCd);
-      }
       //..........................................................
       // 处理父继承
       String inheritFrames = control.get("inherit_frames", null);
@@ -238,43 +228,21 @@ public class FFrameConsole
          }
       }
       //..........................................................
-      // 处理页面引用
-      String frameSource = control.get("frame_source", null);
-      if(!RString.isEmpty(frameSource)){
-         // 获得嵌入方式
-         String includeCd = null;
-         String frameName = null;
-         String[] items = RString.splitTwo(frameSource, '@');
-         if(items == null){
-            includeCd = "include";
-            frameName = frameSource;
-         }else{
-            includeCd = items[0];
-            frameName = items[1];
-         }
-         // 查找定义
-         FContentObject frame = buildDefine(storgeName, frameName, modeCd);
-         if(frame == null){
-            throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
-         }
-         // 嵌入节点
-         if(includeCd.equals("include")){
-            content.push(frame);
-         }else if(includeCd.equals("children")){
-            for(FContentObject node : frame.nodes()){
-               content.push(node);
-            }
-         }else{
-            throw new FFatalError("Frame include type is invalid. (frame_name={1}, include_cd={2})", frameName, includeCd);
-         }
+      // 处理选择框
+      if(content.isName("Select")){
+         buildSelect(storgeName, content, modeCd);
       }
       //..........................................................
       // 处理所有子节点
       if(control.hasNode()){
          for(FContentObject xchild : control.nodes()){
-            FContentObject contentChild = new FContentObject();
-            buildFrame(storgeName, contentChild, xchild, modeCd);
-            content.push(contentChild);
+            if(xchild.isName("Template")){
+               buildTemplate(storgeName, content, xchild, modeCd);
+            }else{
+               FContentObject contentChild = new FContentObject();
+               buildFrame(storgeName, contentChild, xchild, modeCd);
+               content.push(contentChild);
+            }
          }
       }
    }
@@ -312,7 +280,7 @@ public class FFrameConsole
       String nodeName = contentObject.get("name");
       FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
       FContentNode contentNode = space.create(nodeName);
-      contentNode.setConfig(contentObject);
+      contentNode.setContent(contentObject);
       contentNode.store();
       // 清空缓冲
       _contents.clear();
@@ -329,7 +297,7 @@ public class FFrameConsole
                       FContentObject frame){
       String nodeName = frame.get("name");
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
-      FContentObject xinstance = node.config();
+      FContentObject xinstance = node.content();
       // 获得转换器
       FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
       persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);

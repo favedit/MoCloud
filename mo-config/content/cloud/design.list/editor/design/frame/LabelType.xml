@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825150716">
+  <List guid="BBFB2E7B42BB4FF48312FBAC6A5C8131" name="editor.design.frame.LabelType" label="设计-标签方式" is_valid="true" note="M#" cache="Y">
+    <Item guid="14EFD97DBFB54F59B82E57528880C146" name="all" label="全部显示" is_valid="Y" note="M#" type="I" value="A" />
+    <Item guid="6C7648BD64A04C4B87FF3478716049A8" name="label" label="只显示标签" is_valid="Y" note="M#" type="I" value="L" />
+    <Item guid="CA17307E63634C419B9088B2C3857217" name="hidden" label="隐藏标签" is_valid="Y" note="M#" type="I" value="H" />
+  </List>
+</Content>

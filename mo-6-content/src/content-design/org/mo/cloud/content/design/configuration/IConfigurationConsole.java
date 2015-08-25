@@ -1,6 +1,7 @@
 package org.mo.cloud.content.design.configuration;
 
 import org.mo.com.lang.FDictionary;
+import org.mo.com.system.IListener;
 
 //============================================================
 // <T>内容配置控制台接口。</T>
@@ -87,4 +88,11 @@ public interface IConfigurationConsole
                                  String spaceName,
                                  String nodeName,
                                  String typeName);
+
+   //============================================================
+   // <T>注册一个文件改变监听。</T>
+   //
+   // @param listener 监听器
+   //============================================================
+   void registerFileChanged(IListener listener);
 }

@@ -87,7 +87,7 @@ public class FAbstractConfigurationAction
          FContentNode contentNode = pair.value();
          FXmlNode rowNode = dsNode.createNode();
          rowNode.setName(FRow.NAME);
-         rowNode.attributes().assign(contentNode.config().attributes());
+         rowNode.attributes().assign(contentNode.content().attributes());
       }
       page.setPageAction("display");
       page.setFrameValue(config.xml().toString());
@@ -140,8 +140,8 @@ public class FAbstractConfigurationAction
       FXmlNode xconfig = new FXmlNode();
       if(TYPE_COLLECTION.equals(type)){
          // 存储选中的XML集合对象
-         contentNode.config().saveConfig(xconfig, false);
-         page.setFrameValue(contentNode.config().simpleXml());
+         contentNode.content().saveConfig(xconfig, false);
+         page.setFrameValue(contentNode.content().simpleXml());
       }else if(TYPE_COMPONENT.equals(type)){
          // 存储选中的XML对象
          String componentCode = page.componentCode();
@@ -230,7 +230,7 @@ public class FAbstractConfigurationAction
       String type = page.storageCode();
       FContentObjects xcomponents = null;
       if(TYPE_COLLECTION.equals(type)){
-         xcomponents = contentNode.config().nodes();
+         xcomponents = contentNode.content().nodes();
       }else if(TYPE_COMPONENT.equals(type)){
          // 存储选中的XML对象
          String component = page.componentCode();

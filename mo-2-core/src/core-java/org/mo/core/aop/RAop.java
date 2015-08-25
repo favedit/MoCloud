@@ -218,10 +218,12 @@ public class RAop
    // @param fileName 设置文件名
    //============================================================
    public static void initialize(String fileName){
+      // 启动处理
       if(_logger.debugAble()){
          _logger.debug(null, "initialize", RDump.lineString(" Start "));
          _logger.debug(null, "initialize", "Context Initialized. [{1}]", fileName);
       }
+      // 加载配置
       try{
          // 创建配置控制台
          _configConsole.loadFile(fileName);

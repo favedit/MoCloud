@@ -20,6 +20,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.cultrue.REncoding;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.system.IListener;
 import org.mo.com.xml.FXmlNode;
 import org.mo.com.xml.FXmlNodes;
 import org.mo.core.aop.RAop;
@@ -66,6 +67,24 @@ public class FPersistenceConsole
    protected FDictionary<XPersistence> _contents = new FDictionary<XPersistence>(XPersistence.class);
 
    //============================================================
+   // <T>更新配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   public void initialize(){
+      _configurationConsole.registerFileChanged(new IListener(){
+         @Override
+         public boolean process(Object sender,
+                                int command,
+                                Object params){
+            _contents.clear();
+            return true;
+         }
+      });
+   }
+
+   //============================================================
    // <T>获得列表集合。</T>
    //
    // @param storgeName 存储名称
@@ -100,7 +119,7 @@ public class FPersistenceConsole
       if(xpersistence == null){
          FPersistence persistence = findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _spaceName, persistenceName);
-         xpersistence = persistence.convertInstance(node.config(), modeCd);
+         xpersistence = persistence.convertInstance(node.content(), modeCd);
          _contents.set(code, xpersistence);
       }
       return xpersistence;
@@ -123,7 +142,7 @@ public class FPersistenceConsole
          persistence = new FPersistence();
          persistence.setStorageName(_storageName);
          persistence.setPersistenceName(persistenceName);
-         persistence.load(xpersistence.config());
+         persistence.load(xpersistence.content());
          _persistences.set(code, persistence);
       }
       return persistence;
@@ -316,7 +335,7 @@ public class FPersistenceConsole
    // @param xpersistence 持久化节点
    //============================================================
    protected void buildContentNode(FContentNode xpersistence){
-      FContentObject xconfig = xpersistence.config();
+      FContentObject xconfig = xpersistence.content();
       for(FContentObject xobject : xconfig.nodes()){
          if(xobject.isName("Component")){
             buildComponent(xconfig, xobject);
@@ -367,7 +386,7 @@ public class FPersistenceConsole
       String nodeName = contentObject.get("name");
       FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
       FContentNode contentNode = space.create(nodeName);
-      contentNode.setConfig(contentObject);
+      contentNode.setContent(contentObject);
       contentNode.store();
       // 清空缓冲
       _contents.clear();
@@ -384,7 +403,7 @@ public class FPersistenceConsole
                       FContentObject frame){
       String nodeName = frame.get("name");
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
-      FContentObject xinstance = node.config();
+      FContentObject xinstance = node.content();
       // 获得转换器
       FPersistence persistence = findPersistence(storgeName, _persistenceName);
       persistence.mergeConfig(xinstance, frame, EPersistenceMode.Config);

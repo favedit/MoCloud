@@ -4,6 +4,7 @@
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
    <Define name='application.name'>mp-cloud-editor</Define>
+   <Define name='application.mode'>debug</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application.root}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
@@ -12,7 +13,7 @@
    <Define name='application.content'>${application}/mo-config/content</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
-   
+
    <!-- 输出设定 -->
    <Define name='output.design'>${application}/mo-6-content</Define>
 

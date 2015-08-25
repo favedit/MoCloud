@@ -17,14 +17,6 @@ public abstract class XBaseColumnNumber
    // 类名称
    public static final String CONTENT_NAME = "ColumnNumber";
 
-   // 类型的定义
-   @AContentField
-   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
-
-   // 名称的定义
-   @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
-
    // 有效性的定义
    @AContentField
    public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
@@ -33,17 +25,25 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
 
+   // 名称的定义
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+
    // 标签的定义
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
+
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
 
    // 属性集合的定义
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
-   // 回行类型的定义
+   // 是否续行的定义
    @AContentField
-   public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField NOWRAP = new FContentField("nowrap", "nowrap", EContentData.Boolean, "", "", "", "YYNY");
 
    // 左位置的定义
    @AContentField
@@ -161,14 +161,6 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField DISPLAY_VIEW = new FContentField("displayView", "display_view", EContentData.Boolean, "display_mode", "V", "Y", "YNNY");
 
-   // 设计显示的定义
-   @AContentField
-   public final static FContentField DISPLAY_DESIGN = new FContentField("displayDesign", "display_design", EContentData.String, "display_mode", "G", "Y", "YNNY");
-
-   // 搜索显示的定义
-   @AContentField
-   public final static FContentField DISPLAY_SEARCH = new FContentField("displaySearch", "display_search", EContentData.String, "display_mode", "S", "Y", "YNNY");
-
    // 新建显示的定义
    @AContentField
    public final static FContentField DISPLAY_INSERT = new FContentField("displayInsert", "display_insert", EContentData.Boolean, "display_mode", "I", "Y", "YNNY");
@@ -181,13 +173,25 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField DISPLAY_DELETE = new FContentField("displayDelete", "display_delete", EContentData.Boolean, "display_mode", "D", "Y", "YNNY");
 
+   // 搜索显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_SEARCH = new FContentField("displaySearch", "display_search", EContentData.String, "display_mode", "S", "Y", "YNNY");
+
+   // 显示拾取的定义
+   @AContentField
+   public final static FContentField DISPLAY_PICKER = new FContentField("displayPicker", "display_picker", EContentData.Boolean, "display_mode", "P", "Y", "YYNY");
+
    // 缩放显示的定义
    @AContentField
    public final static FContentField DISPLAY_ZOOM = new FContentField("displayZoom", "display_zoom", EContentData.Boolean, "display_mode", "Z", "Y", "YNNY");
 
+   // 设计显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_DESIGN = new FContentField("displayDesign", "display_design", EContentData.String, "display_mode", "G", "Y", "YNNY");
+
    // 打印显示的定义
    @AContentField
-   public final static FContentField DISPLAY_PRINT = new FContentField("displayPrint", "display_print", EContentData.Boolean, "display_mode", "project_id", "Y", "YNNY");
+   public final static FContentField DISPLAY_PRINT = new FContentField("displayPrint", "display_print", EContentData.Boolean, "display_mode", "R", "Y", "YNNY");
 
    // 编辑模式的定义
    @AContentField
@@ -213,6 +217,10 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField VERIFY_MODE = new FContentField("verifyMode", "verify_mode", EContentData.String, "", "", "", "NYNN");
 
+   // 校验必须的定义
+   @AContentField
+   public final static FContentField VALID_REQUIRE = new FContentField("validRequire", "valid_require", EContentData.String, "", "", "", "YYNY");
+
    // 新建检查的定义
    @AContentField
    public final static FContentField VERIFY_INSERT = new FContentField("verifyInsert", "verify_insert", EContentData.Boolean, "verify_mode", "I", "Y", "YNNY");
@@ -225,13 +233,29 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField VERIFY_DELETE = new FContentField("verifyDelete", "verify_delete", EContentData.Boolean, "verify_mode", "D", "Y", "YNNY");
 
+   // 标签类型的定义
+   @AContentField
+   public final static FContentField LABEL_TYPE_CD = new FContentField("labelTypeCd", "label_type_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 标签位置的定义
+   @AContentField
+   public final static FContentField LABEL_POSITION_CD = new FContentField("labelPositionCd", "label_position_cd", EContentData.String, "", "", "", "YYNY");
+
    // 标签对齐的定义
    @AContentField
    public final static FContentField LABEL_ALIGN_CD = new FContentField("labelAlignCd", "label_align_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 标签图表的定义
+   @AContentField
+   public final static FContentField LABEL_ICON = new FContentField("labelIcon", "label_icon", EContentData.String, "", "", "", "YYNY");
+
    // 标签尺寸的定义
    @AContentField
    public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String, "", "", "", "YYNY");
+
+   // 标签颜色的定义
+   @AContentField
+   public final static FContentField LABEL_COLOR = new FContentField("labelColor", "label_color", EContentData.String, "", "", "", "YYNY");
 
    // 数据必须的定义
    @AContentField
@@ -319,14 +343,6 @@ public abstract class XBaseColumnNumber
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类型
-   @AName("type")
-   protected String _type;
-
-   // 名称
-   @AName("name")
-   protected String _name;
-
    // 有效性
    @AName("valid")
    protected boolean _valid;
@@ -335,17 +351,25 @@ public abstract class XBaseColumnNumber
    @AName("code")
    protected String _code;
 
+   // 名称
+   @AName("name")
+   protected String _name;
+
    // 标签
    @AName("label")
    protected String _label;
+
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 属性集合
    @AName("attributes")
    protected String _attributes;
 
-   // 回行类型
-   @AName("wrap_cd")
-   protected String _wrapCd;
+   // 是否续行
+   @AName("nowrap")
+   protected boolean _nowrap;
 
    // 左位置
    @AName("left")
@@ -463,14 +487,6 @@ public abstract class XBaseColumnNumber
    @AName("display_view")
    protected boolean _displayView;
 
-   // 设计显示
-   @AName("display_design")
-   protected String _displayDesign;
-
-   // 搜索显示
-   @AName("display_search")
-   protected String _displaySearch;
-
    // 新建显示
    @AName("display_insert")
    protected boolean _displayInsert;
@@ -483,9 +499,21 @@ public abstract class XBaseColumnNumber
    @AName("display_delete")
    protected boolean _displayDelete;
 
+   // 搜索显示
+   @AName("display_search")
+   protected String _displaySearch;
+
+   // 显示拾取
+   @AName("display_picker")
+   protected boolean _displayPicker;
+
    // 缩放显示
    @AName("display_zoom")
    protected boolean _displayZoom;
+
+   // 设计显示
+   @AName("display_design")
+   protected String _displayDesign;
 
    // 打印显示
    @AName("display_print")
@@ -515,6 +543,10 @@ public abstract class XBaseColumnNumber
    @AName("verify_mode")
    protected String _verifyMode;
 
+   // 校验必须
+   @AName("valid_require")
+   protected String _validRequire;
+
    // 新建检查
    @AName("verify_insert")
    protected boolean _verifyInsert;
@@ -527,13 +559,29 @@ public abstract class XBaseColumnNumber
    @AName("verify_delete")
    protected boolean _verifyDelete;
 
+   // 标签类型
+   @AName("label_type_cd")
+   protected String _labelTypeCd;
+
+   // 标签位置
+   @AName("label_position_cd")
+   protected String _labelPositionCd;
+
    // 标签对齐
    @AName("label_align_cd")
    protected String _labelAlignCd;
 
+   // 标签图表
+   @AName("label_icon")
+   protected String _labelIcon;
+
    // 标签尺寸
    @AName("label_size")
    protected String _labelSize;
+
+   // 标签颜色
+   @AName("label_color")
+   protected String _labelColor;
 
    // 数据必须
    @AName("data_require")
@@ -604,42 +652,6 @@ public abstract class XBaseColumnNumber
    protected String _valuePrecision;
 
    //============================================================
-   // <T>获得类型的内容。</T>
-   //
-   // @return 类型
-   //============================================================
-   public String getType(){
-      return _type;
-   }
-
-   //============================================================
-   // <T>设置类型的内容。</T>
-   //
-   // @param value 类型
-   //============================================================
-   public void setType(String value){
-      _type = value;
-   }
-
-   //============================================================
-   // <T>获得名称的内容。</T>
-   //
-   // @return 名称
-   //============================================================
-   public String getName(){
-      return _name;
-   }
-
-   //============================================================
-   // <T>设置名称的内容。</T>
-   //
-   // @param value 名称
-   //============================================================
-   public void setName(String value){
-      _name = value;
-   }
-
-   //============================================================
    // <T>获得有效性的内容。</T>
    //
    // @return 有效性
@@ -676,6 +688,24 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
+   // <T>获得名称的内容。</T>
+   //
+   // @return 名称
+   //============================================================
+   public String getName(){
+      return _name;
+   }
+
+   //============================================================
+   // <T>设置名称的内容。</T>
+   //
+   // @param value 名称
+   //============================================================
+   public void setName(String value){
+      _name = value;
+   }
+
+   //============================================================
    // <T>获得标签的内容。</T>
    //
    // @return 标签
@@ -691,6 +721,24 @@ public abstract class XBaseColumnNumber
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得类型的内容。</T>
+   //
+   // @return 类型
+   //============================================================
+   public String getType(){
+      return _type;
+   }
+
+   //============================================================
+   // <T>设置类型的内容。</T>
+   //
+   // @param value 类型
+   //============================================================
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================
@@ -712,21 +760,21 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
-   // <T>获得回行类型的内容。</T>
+   // <T>获得是否续行的内容。</T>
    //
-   // @return 回行类型
+   // @return 是否续行
    //============================================================
-   public String getWrapCd(){
-      return _wrapCd;
+   public Boolean getNowrap(){
+      return _nowrap;
    }
 
    //============================================================
-   // <T>设置回行类型的内容。</T>
+   // <T>设置是否续行的内容。</T>
    //
-   // @param value 回行类型
+   // @param value 是否续行
    //============================================================
-   public void setWrapCd(String value){
-      _wrapCd = value;
+   public void setNowrap(Boolean value){
+      _nowrap = value;
    }
 
    //============================================================
@@ -1252,42 +1300,6 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
-   // <T>获得设计显示的内容。</T>
-   //
-   // @return 设计显示
-   //============================================================
-   public String getDisplayDesign(){
-      return _displayDesign;
-   }
-
-   //============================================================
-   // <T>设置设计显示的内容。</T>
-   //
-   // @param value 设计显示
-   //============================================================
-   public void setDisplayDesign(String value){
-      _displayDesign = value;
-   }
-
-   //============================================================
-   // <T>获得搜索显示的内容。</T>
-   //
-   // @return 搜索显示
-   //============================================================
-   public String getDisplaySearch(){
-      return _displaySearch;
-   }
-
-   //============================================================
-   // <T>设置搜索显示的内容。</T>
-   //
-   // @param value 搜索显示
-   //============================================================
-   public void setDisplaySearch(String value){
-      _displaySearch = value;
-   }
-
-   //============================================================
    // <T>获得新建显示的内容。</T>
    //
    // @return 新建显示
@@ -1342,6 +1354,42 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
+   // <T>获得搜索显示的内容。</T>
+   //
+   // @return 搜索显示
+   //============================================================
+   public String getDisplaySearch(){
+      return _displaySearch;
+   }
+
+   //============================================================
+   // <T>设置搜索显示的内容。</T>
+   //
+   // @param value 搜索显示
+   //============================================================
+   public void setDisplaySearch(String value){
+      _displaySearch = value;
+   }
+
+   //============================================================
+   // <T>获得显示拾取的内容。</T>
+   //
+   // @return 显示拾取
+   //============================================================
+   public Boolean getDisplayPicker(){
+      return _displayPicker;
+   }
+
+   //============================================================
+   // <T>设置显示拾取的内容。</T>
+   //
+   // @param value 显示拾取
+   //============================================================
+   public void setDisplayPicker(Boolean value){
+      _displayPicker = value;
+   }
+
+   //============================================================
    // <T>获得缩放显示的内容。</T>
    //
    // @return 缩放显示
@@ -1357,6 +1405,24 @@ public abstract class XBaseColumnNumber
    //============================================================
    public void setDisplayZoom(Boolean value){
       _displayZoom = value;
+   }
+
+   //============================================================
+   // <T>获得设计显示的内容。</T>
+   //
+   // @return 设计显示
+   //============================================================
+   public String getDisplayDesign(){
+      return _displayDesign;
+   }
+
+   //============================================================
+   // <T>设置设计显示的内容。</T>
+   //
+   // @param value 设计显示
+   //============================================================
+   public void setDisplayDesign(String value){
+      _displayDesign = value;
    }
 
    //============================================================
@@ -1486,6 +1552,24 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
+   // <T>获得校验必须的内容。</T>
+   //
+   // @return 校验必须
+   //============================================================
+   public String getValidRequire(){
+      return _validRequire;
+   }
+
+   //============================================================
+   // <T>设置校验必须的内容。</T>
+   //
+   // @param value 校验必须
+   //============================================================
+   public void setValidRequire(String value){
+      _validRequire = value;
+   }
+
+   //============================================================
    // <T>获得新建检查的内容。</T>
    //
    // @return 新建检查
@@ -1540,6 +1624,42 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
+   // <T>获得标签类型的内容。</T>
+   //
+   // @return 标签类型
+   //============================================================
+   public String getLabelTypeCd(){
+      return _labelTypeCd;
+   }
+
+   //============================================================
+   // <T>设置标签类型的内容。</T>
+   //
+   // @param value 标签类型
+   //============================================================
+   public void setLabelTypeCd(String value){
+      _labelTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得标签位置的内容。</T>
+   //
+   // @return 标签位置
+   //============================================================
+   public String getLabelPositionCd(){
+      return _labelPositionCd;
+   }
+
+   //============================================================
+   // <T>设置标签位置的内容。</T>
+   //
+   // @param value 标签位置
+   //============================================================
+   public void setLabelPositionCd(String value){
+      _labelPositionCd = value;
+   }
+
+   //============================================================
    // <T>获得标签对齐的内容。</T>
    //
    // @return 标签对齐
@@ -1558,6 +1678,24 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
+   // <T>获得标签图表的内容。</T>
+   //
+   // @return 标签图表
+   //============================================================
+   public String getLabelIcon(){
+      return _labelIcon;
+   }
+
+   //============================================================
+   // <T>设置标签图表的内容。</T>
+   //
+   // @param value 标签图表
+   //============================================================
+   public void setLabelIcon(String value){
+      _labelIcon = value;
+   }
+
+   //============================================================
    // <T>获得标签尺寸的内容。</T>
    //
    // @return 标签尺寸
@@ -1573,6 +1711,24 @@ public abstract class XBaseColumnNumber
    //============================================================
    public void setLabelSize(String value){
       _labelSize = value;
+   }
+
+   //============================================================
+   // <T>获得标签颜色的内容。</T>
+   //
+   // @return 标签颜色
+   //============================================================
+   public String getLabelColor(){
+      return _labelColor;
+   }
+
+   //============================================================
+   // <T>设置标签颜色的内容。</T>
+   //
+   // @param value 标签颜色
+   //============================================================
+   public void setLabelColor(String value){
+      _labelColor = value;
    }
 
    //============================================================

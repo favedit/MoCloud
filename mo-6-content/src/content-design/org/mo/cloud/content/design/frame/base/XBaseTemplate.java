@@ -17,14 +17,6 @@ public abstract class XBaseTemplate
    // 类名称
    public static final String CONTENT_NAME = "Template";
 
-   // 类型的定义
-   @AContentField
-   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
-
-   // 名称的定义
-   @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
-
    // 有效性的定义
    @AContentField
    public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
@@ -33,9 +25,17 @@ public abstract class XBaseTemplate
    @AContentField
    public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
 
+   // 名称的定义
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+
    // 标签的定义
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
+
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
 
    // 属性集合的定义
    @AContentField
@@ -63,14 +63,6 @@ public abstract class XBaseTemplate
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类型
-   @AName("type")
-   protected String _type;
-
-   // 名称
-   @AName("name")
-   protected String _name;
-
    // 有效性
    @AName("valid")
    protected boolean _valid;
@@ -79,9 +71,17 @@ public abstract class XBaseTemplate
    @AName("code")
    protected String _code;
 
+   // 名称
+   @AName("name")
+   protected String _name;
+
    // 标签
    @AName("label")
    protected String _label;
+
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 属性集合
    @AName("attributes")
@@ -90,42 +90,6 @@ public abstract class XBaseTemplate
    // 页面来源
    @AName("frame_source")
    protected String _frameSource;
-
-   //============================================================
-   // <T>获得类型的内容。</T>
-   //
-   // @return 类型
-   //============================================================
-   public String getType(){
-      return _type;
-   }
-
-   //============================================================
-   // <T>设置类型的内容。</T>
-   //
-   // @param value 类型
-   //============================================================
-   public void setType(String value){
-      _type = value;
-   }
-
-   //============================================================
-   // <T>获得名称的内容。</T>
-   //
-   // @return 名称
-   //============================================================
-   public String getName(){
-      return _name;
-   }
-
-   //============================================================
-   // <T>设置名称的内容。</T>
-   //
-   // @param value 名称
-   //============================================================
-   public void setName(String value){
-      _name = value;
-   }
 
    //============================================================
    // <T>获得有效性的内容。</T>
@@ -164,6 +128,24 @@ public abstract class XBaseTemplate
    }
 
    //============================================================
+   // <T>获得名称的内容。</T>
+   //
+   // @return 名称
+   //============================================================
+   public String getName(){
+      return _name;
+   }
+
+   //============================================================
+   // <T>设置名称的内容。</T>
+   //
+   // @param value 名称
+   //============================================================
+   public void setName(String value){
+      _name = value;
+   }
+
+   //============================================================
    // <T>获得标签的内容。</T>
    //
    // @return 标签
@@ -179,6 +161,24 @@ public abstract class XBaseTemplate
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得类型的内容。</T>
+   //
+   // @return 类型
+   //============================================================
+   public String getType(){
+      return _type;
+   }
+
+   //============================================================
+   // <T>设置类型的内容。</T>
+   //
+   // @param value 类型
+   //============================================================
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================

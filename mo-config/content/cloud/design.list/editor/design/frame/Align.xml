@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825150722">
+  <List guid="FF10C3D3B06C45B0BF908B7A54E86608" name="editor.design.frame.Align" label="对齐" is_valid="true" note="M#" cache="Y">
+    <Item guid="3F288F32DEF5480989D89B2E50572C1F" name="left" label="左对齐" is_valid="Y" note="M#" type="I" value="left" />
+    <Item guid="B5DFDF291D944ADE923817AAFBBF3CB5" name="center" label="中对齐" is_valid="Y" note="M#" type="I" value="center" />
+    <Item guid="720269D456A045A9A60CFA380E1400BD" name="right" label="右对齐" is_valid="Y" note="M#" type="I" value="right" />
+  </List>
+</Content>

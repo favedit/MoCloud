@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825150718">
+  <List guid="A3C9F315AF5348588374393901D76645" name="editor.design.frame.DataSearch" label="被搜索方式" is_valid="true" note="M#12cn215搜索时，用来约束搜索条件的列表">
+    <Item guid="5EDBB8055DCB460F8647741D02FE4B05" name="equals" label="相等" is_valid="Y" note="" type="I" value="1" />
+    <Item guid="A7C4C2854E124C2DBAAE7C782C919E7F" name="start" label="开始" is_valid="Y" note="" type="I" value="2" />
+    <Item guid="D1D6D9BEE3FD4D9DA977AA11D08F8E10" name="end" label="结束" is_valid="Y" note="" type="I" value="3" />
+    <Item guid="89DBEA53A1954E48B21AA543ACE66FBC" name="like" label="包含" is_valid="Y" note="" type="I" value="4" />
+    <Item guid="DC312A460E6447BC8E096A1FA0129546" name="equalsNoCase" label="相等(大小写不敏感)" is_valid="Y" note="" type="I" value="5" />
+    <Item guid="D5A36D2CC3944BA886A6E1136CD5022F" name="startNoCase" label="开始(大小写不敏感)" is_valid="Y" note="" type="I" value="6" />
+    <Item guid="BA6AA8945BE84A26BC5121B657F42D99" name="endNoCase" label="结束(大小写不敏感)" is_valid="Y" note="" type="I" value="7" />
+    <Item guid="3EF85BBB86EB4F83818E539E7FE43E78" name="likeNoCase" label="包含(大小写不敏感)" is_valid="Y" note="M#12cn215不区分大小写，进行包含性检测。" type="I" value="8" />
+  </List>
+</Content>

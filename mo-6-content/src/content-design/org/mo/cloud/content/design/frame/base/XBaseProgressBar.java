@@ -17,14 +17,6 @@ public abstract class XBaseProgressBar
    // 类名称
    public static final String CONTENT_NAME = "ProgressBar";
 
-   // 类型的定义
-   @AContentField
-   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
-
-   // 名称的定义
-   @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
-
    // 有效性的定义
    @AContentField
    public final static FContentField VALID = new FContentField("valid", "valid", EContentData.Boolean, "", "", "", "YYNY");
@@ -33,17 +25,25 @@ public abstract class XBaseProgressBar
    @AContentField
    public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
 
+   // 名称的定义
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+
    // 标签的定义
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
+
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
 
    // 属性集合的定义
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
-   // 回行类型的定义
+   // 是否续行的定义
    @AContentField
-   public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField NOWRAP = new FContentField("nowrap", "nowrap", EContentData.Boolean, "", "", "", "YYNY");
 
    // 左位置的定义
    @AContentField
@@ -171,14 +171,6 @@ public abstract class XBaseProgressBar
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类型
-   @AName("type")
-   protected String _type;
-
-   // 名称
-   @AName("name")
-   protected String _name;
-
    // 有效性
    @AName("valid")
    protected boolean _valid;
@@ -187,17 +179,25 @@ public abstract class XBaseProgressBar
    @AName("code")
    protected String _code;
 
+   // 名称
+   @AName("name")
+   protected String _name;
+
    // 标签
    @AName("label")
    protected String _label;
+
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 属性集合
    @AName("attributes")
    protected String _attributes;
 
-   // 回行类型
-   @AName("wrap_cd")
-   protected String _wrapCd;
+   // 是否续行
+   @AName("nowrap")
+   protected boolean _nowrap;
 
    // 左位置
    @AName("left")
@@ -308,42 +308,6 @@ public abstract class XBaseProgressBar
    protected String _hint;
 
    //============================================================
-   // <T>获得类型的内容。</T>
-   //
-   // @return 类型
-   //============================================================
-   public String getType(){
-      return _type;
-   }
-
-   //============================================================
-   // <T>设置类型的内容。</T>
-   //
-   // @param value 类型
-   //============================================================
-   public void setType(String value){
-      _type = value;
-   }
-
-   //============================================================
-   // <T>获得名称的内容。</T>
-   //
-   // @return 名称
-   //============================================================
-   public String getName(){
-      return _name;
-   }
-
-   //============================================================
-   // <T>设置名称的内容。</T>
-   //
-   // @param value 名称
-   //============================================================
-   public void setName(String value){
-      _name = value;
-   }
-
-   //============================================================
    // <T>获得有效性的内容。</T>
    //
    // @return 有效性
@@ -380,6 +344,24 @@ public abstract class XBaseProgressBar
    }
 
    //============================================================
+   // <T>获得名称的内容。</T>
+   //
+   // @return 名称
+   //============================================================
+   public String getName(){
+      return _name;
+   }
+
+   //============================================================
+   // <T>设置名称的内容。</T>
+   //
+   // @param value 名称
+   //============================================================
+   public void setName(String value){
+      _name = value;
+   }
+
+   //============================================================
    // <T>获得标签的内容。</T>
    //
    // @return 标签
@@ -395,6 +377,24 @@ public abstract class XBaseProgressBar
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得类型的内容。</T>
+   //
+   // @return 类型
+   //============================================================
+   public String getType(){
+      return _type;
+   }
+
+   //============================================================
+   // <T>设置类型的内容。</T>
+   //
+   // @param value 类型
+   //============================================================
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================
@@ -416,21 +416,21 @@ public abstract class XBaseProgressBar
    }
 
    //============================================================
-   // <T>获得回行类型的内容。</T>
+   // <T>获得是否续行的内容。</T>
    //
-   // @return 回行类型
+   // @return 是否续行
    //============================================================
-   public String getWrapCd(){
-      return _wrapCd;
+   public Boolean getNowrap(){
+      return _nowrap;
    }
 
    //============================================================
-   // <T>设置回行类型的内容。</T>
+   // <T>设置是否续行的内容。</T>
    //
-   // @param value 回行类型
+   // @param value 是否续行
    //============================================================
-   public void setWrapCd(String value){
-      _wrapCd = value;
+   public void setNowrap(Boolean value){
+      _nowrap = value;
    }
 
    //============================================================

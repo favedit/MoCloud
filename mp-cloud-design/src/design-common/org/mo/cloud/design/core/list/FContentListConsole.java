@@ -72,7 +72,7 @@ public class FContentListConsole
       if(xlist == null){
          FContentPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, listName);
-         xlist = persistence.convertInstance(node.config());
+         xlist = persistence.convertInstance(node.content());
          _list.set(code, xlist);
       }
       return xlist;

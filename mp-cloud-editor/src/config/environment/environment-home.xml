@@ -9,6 +9,7 @@
          face  = 'org.mo.eng.environment.IEnvironmentConsole'
          class = 'org.mo.eng.environment.FEnvironmentConsole'
          scope = 'global' >
+      <Property name='process_mode'>${application.mode}</Property>
       <Property name='persistence'>eng-environment</Property>
       <Property name='extension'>xml</Property>
       <Property name='interval'>1000</Property>

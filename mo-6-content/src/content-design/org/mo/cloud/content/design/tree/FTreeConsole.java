@@ -13,6 +13,7 @@ import org.mo.com.console.FConsole;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.INamePair;
+import org.mo.com.system.IListener;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
@@ -49,6 +50,24 @@ public class FTreeConsole
    protected FDictionary<XTreeView> _contents = new FDictionary<XTreeView>(XTreeView.class);
 
    //============================================================
+   // <T>更新配置对象。</T>
+   //
+   // @param storgeName 存储名称
+   // @param contentObject 配置对象
+   //============================================================
+   public void initialize(){
+      _configurationConsole.registerFileChanged(new IListener(){
+         @Override
+         public boolean process(Object sender,
+                                int command,
+                                Object params){
+            _contents.clear();
+            return true;
+         }
+      });
+   }
+
+   //============================================================
    // <T>获得目录集合。</T>
    //
    // @param storgeName 存储名称
@@ -83,7 +102,7 @@ public class FTreeConsole
       if(xtree == null){
          FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
          FContentNode node = _configurationConsole.getNode(storgeName, _pathName, treeName);
-         xtree = persistence.convertInstance(node.config(), modeCd);
+         xtree = persistence.convertInstance(node.content(), modeCd);
          _contents.set(code, xtree);
       }
       return xtree;
@@ -145,7 +164,7 @@ public class FTreeConsole
       String nodeName = contentObject.get("name");
       FContentSpace space = _configurationConsole.findSpace(storgeName, _spaceName);
       FContentNode contentNode = space.create(nodeName);
-      contentNode.setConfig(contentObject);
+      contentNode.setContent(contentObject);
       contentNode.store();
       // 清空缓冲
       _contents.clear();
@@ -162,7 +181,7 @@ public class FTreeConsole
                       FContentObject contentObject){
       String nodeName = contentObject.get("name");
       FContentNode node = _configurationConsole.findNode(storgeName, _spaceName, nodeName);
-      FContentObject xinstance = node.config();
+      FContentObject xinstance = node.content();
       // 获得转换器
       FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _persistenceName);
       persistence.mergeConfig(xinstance, contentObject, EPersistenceMode.Config);

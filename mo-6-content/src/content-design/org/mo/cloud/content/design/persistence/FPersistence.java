@@ -289,10 +289,10 @@ public class FPersistence
       if(xconfig.hasAttribute()){
          for(INamePair<FContentField> pair : clazz.fields()){
             FContentField field = pair.value();
-            String name = field.name();
-            String value = xconfig.get(name, null);
+            String linkName = field.linkName();
+            String value = xconfig.get(linkName, null);
             if(!RString.isEmpty(value)){
-               xinstance.set(name, value);
+               xinstance.set(linkName, value);
             }
          }
       }

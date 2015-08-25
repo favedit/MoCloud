@@ -154,6 +154,20 @@ public class FContentStorage
    }
 
    //============================================================
+   // <T>检查处理，如果发生改变重新加载内容。</T>
+   //
+   // @param context 检查环境
+   // @return 处理结果
+   //============================================================
+   public EResult check(SConfigurationCheckContext context){
+      for(INamePair<FContentSpace> pair : _spaces){
+         FContentSpace contentSpace = pair.value();
+         contentSpace.check(context);
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>关闭处理。</T>
    //
    // @return 处理结果

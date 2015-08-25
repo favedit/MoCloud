@@ -5,9 +5,13 @@ import org.mo.com.io.RDirectory;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.INamePair;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.system.IListener;
+import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
+import org.mo.core.monitor.IMonitorConsole;
 
 //============================================================
 // <T>内容配置控制台。</T>
@@ -20,12 +24,26 @@ public class FConfigurationConsole
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FConfigurationConsole.class);
 
+   // 监视器控制台接口
+   @ALink
+   protected IMonitorConsole _monitorConsole;
+
    // 配置路径
    @AProperty
    protected String _configPath;
 
+   // 运行模式
+   @AProperty
+   protected String _processMode;
+
    // 内容存储字典
    protected FDictionary<FContentStorage> _storages = new FDictionary<FContentStorage>(FContentStorage.class);
+
+   // 内容节点监视器
+   protected FConfigurationMonitor _monitor;
+
+   // 检查环境
+   protected SConfigurationCheckContext _checkContext = new SConfigurationCheckContext();
 
    //============================================================
    // <T>获得内容存储字典。</T>
@@ -83,7 +101,6 @@ public class FConfigurationConsole
       }
       FContentSpace space = storage.find(spaceName);
       if(space != null){
-         //_persistenceConsole.find(nodeName)
          space.open();
       }
       return space;
@@ -145,6 +162,33 @@ public class FConfigurationConsole
    }
 
    //============================================================
+   // <T>根据空间名称和节点名称获得内容类对象。</T>
+   //
+   // @param storageName 存储名称
+   // @param spaceName 空间名称
+   // @param nodeName 节点名称
+   // @param typeName 类型名称
+   // @return 内容节点
+   //============================================================
+   @Override
+   public FContentClass getContentClass(String storageName,
+                                        String spaceName,
+                                        String nodeName,
+                                        String typeName){
+      return new FContentClass();
+   }
+
+   //============================================================
+   // <T>注册一个文件改变监听。</T>
+   //
+   // @param listener 监听器
+   //============================================================
+   @Override
+   public void registerFileChanged(IListener listener){
+      _checkContext.listeners.push(listener);
+   }
+
+   //============================================================
    // <T>初始化配置。</T>
    //============================================================
    public void initializeConfig(){
@@ -162,22 +206,18 @@ public class FConfigurationConsole
    // <T>初始化监视器。</T>
    //============================================================
    public void initializeMonitor(){
+      _monitor = new FConfigurationMonitor();
+      _monitor.setConsole(this);
+      _monitorConsole.start(_monitor);
    }
 
    //============================================================
-   // <T>根据空间名称和节点名称获得内容类对象。</T>
-   //
-   // @param storageName 存储名称
-   // @param spaceName 空间名称
-   // @param nodeName 节点名称
-   // @param typeName 类型名称
-   // @return 内容节点
+   // <T>初始化监视器。</T>
    //============================================================
-   @Override
-   public FContentClass getContentClass(String storageName,
-                                        String spaceName,
-                                        String nodeName,
-                                        String typeName){
-      return new FContentClass();
+   public void check(){
+      for(INamePair<FContentStorage> pair : _storages){
+         FContentStorage storage = pair.value();
+         storage.check(_checkContext);
+      }
    }
 }

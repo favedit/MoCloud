@@ -1,11 +1,11 @@
 package org.mo.cloud.content.design.frame.common;
 
-import org.mo.cloud.content.design.frame.base.XBaseDataMemo;
+import org.mo.cloud.content.design.frame.base.XBaseColumnPicture;
 
 //============================================================
-// <T>数据多行文本编辑框。</T>
+// <T>表格图片列。</T>
 //============================================================
-public class XDataMemo
-      extends XBaseDataMemo
+public class XColumnPicture
+      extends XBaseColumnPicture
 {
 }

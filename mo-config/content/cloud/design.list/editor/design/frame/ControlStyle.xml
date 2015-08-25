@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825150720">
+  <List guid="84A8BAC88BA940A9BBEB32EBDCDD16C8" name="editor.design.frame.ControlStyle" label="控件样式" is_valid="true" note="">
+    <Item guid="C49BAF77F7164CAE8A37B89ADEE29A80" name="controlMin" label="最短控件" is_valid="Y" note="" type="I" value="controlMin" />
+    <Item guid="79C8D835CDA74117A9211A9B9CF69932" name="controlNarrow" label="短控件" is_valid="Y" note="" type="I" value="controlNarrow" />
+    <Item guid="153F5BFAA9C04E83A0C34DD48FDD7F31" name="control" label="控件" is_valid="Y" note="" type="I" value="control" />
+    <Item guid="E9885DBB7826423EBB28D8F5D9A15323" name="controlWide" label="长控件" is_valid="Y" note="" type="I" value="controlWide" />
+    <Item guid="D616A083FA1B478082C82C721DEA7DBB" name="controlMax" label="最长控件" is_valid="Y" note="" type="I" value="controlMax" />
+  </List>
+</Content>

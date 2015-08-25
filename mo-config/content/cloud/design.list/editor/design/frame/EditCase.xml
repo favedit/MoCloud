@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825160712">
+  <List guid="EFECCC39B80F455F852B17C96A5903D2" name="editor.design.frame.EditCase" label="输入格式" is_valid="true" note="" cache="Y">
+    <Item guid="EFB4F66505944CDB8082C4C9E5870C7A" name="upper" label="大写格式" is_valid="Y" note="" type="I" value="U" />
+    <Item guid="2DF58EB34572466DAF7B79B291A74A08" name="lower" label="小写格式" is_valid="Y" note="" type="I" value="L" />
+    <Item guid="B510F51A682F4084A3857D1448650921" name="word" label="单词格式" is_valid="Y" note="" type="I" value="W" />
+  </List>
+</Content>

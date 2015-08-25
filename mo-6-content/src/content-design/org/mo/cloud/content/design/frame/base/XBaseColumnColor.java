@@ -7,23 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>数据数字3编辑框对象的内容基类。</T>
+// <T>表格颜色列对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseDataNumber3
+public abstract class XBaseColumnColor
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "DataNumber3";
-
-   // 类型的定义
-   @AContentField
-   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
-
-   // 名称的定义
-   @AContentField
-   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+   public static final String CONTENT_NAME = "ColumnColor";
 
    // 有效性的定义
    @AContentField
@@ -33,17 +25,25 @@ public abstract class XBaseDataNumber3
    @AContentField
    public final static FContentField CODE = new FContentField("code", "code", EContentData.String, "", "", "", "YYNY");
 
+   // 名称的定义
+   @AContentField
+   public final static FContentField NAME = new FContentField("name", "name", EContentData.String, "", "", "", "YYNY");
+
    // 标签的定义
    @AContentField
    public final static FContentField LABEL = new FContentField("label", "label", EContentData.String, "", "", "", "YYNY");
+
+   // 类型的定义
+   @AContentField
+   public final static FContentField TYPE = new FContentField("type", "type", EContentData.String, "", "", "", "YYNY");
 
    // 属性集合的定义
    @AContentField
    public final static FContentField ATTRIBUTES = new FContentField("attributes", "attributes", EContentData.String, "", "", "", "YYNY");
 
-   // 回行类型的定义
+   // 是否续行的定义
    @AContentField
-   public final static FContentField WRAP_CD = new FContentField("wrapCd", "wrap_cd", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField NOWRAP = new FContentField("nowrap", "nowrap", EContentData.Boolean, "", "", "", "YYNY");
 
    // 左位置的定义
    @AContentField
@@ -161,14 +161,6 @@ public abstract class XBaseDataNumber3
    @AContentField
    public final static FContentField DISPLAY_VIEW = new FContentField("displayView", "display_view", EContentData.Boolean, "display_mode", "V", "Y", "YNNY");
 
-   // 设计显示的定义
-   @AContentField
-   public final static FContentField DISPLAY_DESIGN = new FContentField("displayDesign", "display_design", EContentData.String, "display_mode", "G", "Y", "YNNY");
-
-   // 搜索显示的定义
-   @AContentField
-   public final static FContentField DISPLAY_SEARCH = new FContentField("displaySearch", "display_search", EContentData.String, "display_mode", "S", "Y", "YNNY");
-
    // 新建显示的定义
    @AContentField
    public final static FContentField DISPLAY_INSERT = new FContentField("displayInsert", "display_insert", EContentData.Boolean, "display_mode", "I", "Y", "YNNY");
@@ -181,13 +173,25 @@ public abstract class XBaseDataNumber3
    @AContentField
    public final static FContentField DISPLAY_DELETE = new FContentField("displayDelete", "display_delete", EContentData.Boolean, "display_mode", "D", "Y", "YNNY");
 
+   // 搜索显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_SEARCH = new FContentField("displaySearch", "display_search", EContentData.String, "display_mode", "S", "Y", "YNNY");
+
+   // 显示拾取的定义
+   @AContentField
+   public final static FContentField DISPLAY_PICKER = new FContentField("displayPicker", "display_picker", EContentData.Boolean, "display_mode", "P", "Y", "YYNY");
+
    // 缩放显示的定义
    @AContentField
    public final static FContentField DISPLAY_ZOOM = new FContentField("displayZoom", "display_zoom", EContentData.Boolean, "display_mode", "Z", "Y", "YNNY");
 
+   // 设计显示的定义
+   @AContentField
+   public final static FContentField DISPLAY_DESIGN = new FContentField("displayDesign", "display_design", EContentData.String, "display_mode", "G", "Y", "YNNY");
+
    // 打印显示的定义
    @AContentField
-   public final static FContentField DISPLAY_PRINT = new FContentField("displayPrint", "display_print", EContentData.Boolean, "display_mode", "project_id", "Y", "YNNY");
+   public final static FContentField DISPLAY_PRINT = new FContentField("displayPrint", "display_print", EContentData.Boolean, "display_mode", "R", "Y", "YNNY");
 
    // 编辑模式的定义
    @AContentField
@@ -213,6 +217,10 @@ public abstract class XBaseDataNumber3
    @AContentField
    public final static FContentField VERIFY_MODE = new FContentField("verifyMode", "verify_mode", EContentData.String, "", "", "", "NYNN");
 
+   // 校验必须的定义
+   @AContentField
+   public final static FContentField VALID_REQUIRE = new FContentField("validRequire", "valid_require", EContentData.String, "", "", "", "YYNY");
+
    // 新建检查的定义
    @AContentField
    public final static FContentField VERIFY_INSERT = new FContentField("verifyInsert", "verify_insert", EContentData.Boolean, "verify_mode", "I", "Y", "YNNY");
@@ -225,57 +233,29 @@ public abstract class XBaseDataNumber3
    @AContentField
    public final static FContentField VERIFY_DELETE = new FContentField("verifyDelete", "verify_delete", EContentData.Boolean, "verify_mode", "D", "Y", "YNNY");
 
+   // 标签类型的定义
+   @AContentField
+   public final static FContentField LABEL_TYPE_CD = new FContentField("labelTypeCd", "label_type_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 标签位置的定义
+   @AContentField
+   public final static FContentField LABEL_POSITION_CD = new FContentField("labelPositionCd", "label_position_cd", EContentData.String, "", "", "", "YYNY");
+
    // 标签对齐的定义
    @AContentField
    public final static FContentField LABEL_ALIGN_CD = new FContentField("labelAlignCd", "label_align_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 标签图表的定义
+   @AContentField
+   public final static FContentField LABEL_ICON = new FContentField("labelIcon", "label_icon", EContentData.String, "", "", "", "YYNY");
 
    // 标签尺寸的定义
    @AContentField
    public final static FContentField LABEL_SIZE = new FContentField("labelSize", "label_size", EContentData.String, "", "", "", "YYNY");
 
-   // 编辑尺寸的定义
+   // 标签颜色的定义
    @AContentField
-   public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
-
-   // 放大引用的定义
-   @AContentField
-   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
-
-   // 放大字段的定义
-   @AContentField
-   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
-
-   // 引用服务的定义
-   @AContentField
-   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
-
-   // 引用地址的定义
-   @AContentField
-   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
-
-   // 引用字段的定义
-   @AContentField
-   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
-
-   // 应用条件的定义
-   @AContentField
-   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
-
-   // 引用排序的定义
-   @AContentField
-   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
-
-   // 最小值的定义
-   @AContentField
-   public final static FContentField VALUE_MIN = new FContentField("valueMin", "value_min", EContentData.String, "", "", "", "YYNY");
-
-   // 最大值的定义
-   @AContentField
-   public final static FContentField VALUE_MAX = new FContentField("valueMax", "value_max", EContentData.String, "", "", "", "YYNY");
-
-   // 值精度的定义
-   @AContentField
-   public final static FContentField VALUE_PRECISION = new FContentField("valuePrecision", "value_precision", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField LABEL_COLOR = new FContentField("labelColor", "label_color", EContentData.String, "", "", "", "YYNY");
 
    // 数据必须的定义
    @AContentField
@@ -305,6 +285,62 @@ public abstract class XBaseDataNumber3
    @AContentField
    public final static FContentField DATA_SOURCE = new FContentField("dataSource", "data_source", EContentData.String, "", "", "", "YYNY");
 
+   // 放大引用的定义
+   @AContentField
+   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
+
+   // 放大字段的定义
+   @AContentField
+   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
+
+   // 引用服务的定义
+   @AContentField
+   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
+
+   // 引用地址的定义
+   @AContentField
+   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
+
+   // 引用字段的定义
+   @AContentField
+   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
+
+   // 应用条件的定义
+   @AContentField
+   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
+
+   // 引用排序的定义
+   @AContentField
+   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑长度的定义
+   @AContentField
+   public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑对齐方式的定义
+   @AContentField
+   public final static FContentField EDIT_ALIGN_CD = new FContentField("editAlignCd", "edit_align_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑大小写类型的定义
+   @AContentField
+   public final static FContentField EDIT_CASE_CD = new FContentField("editCaseCd", "edit_case_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑模板的定义
+   @AContentField
+   public final static FContentField EDIT_PATTERN = new FContentField("editPattern", "edit_pattern", EContentData.String, "", "", "", "YYNY");
+
+   // 编辑自动完成的定义
+   @AContentField
+   public final static FContentField EDIT_COMPLETE = new FContentField("editComplete", "edit_complete", EContentData.String, "", "", "", "YYNY");
+
+   // 校验最小长度的定义
+   @AContentField
+   public final static FContentField VALID_LENGTH_MIN = new FContentField("validLengthMin", "valid_length_min", EContentData.String, "", "", "", "YYNY");
+
+   // 校验最大长度的定义
+   @AContentField
+   public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -323,14 +359,6 @@ public abstract class XBaseDataNumber3
       return NAME.equals(xinstance.contentClass().name());
    }
 
-   // 类型
-   @AName("type")
-   protected String _type;
-
-   // 名称
-   @AName("name")
-   protected String _name;
-
    // 有效性
    @AName("valid")
    protected boolean _valid;
@@ -339,17 +367,25 @@ public abstract class XBaseDataNumber3
    @AName("code")
    protected String _code;
 
+   // 名称
+   @AName("name")
+   protected String _name;
+
    // 标签
    @AName("label")
    protected String _label;
+
+   // 类型
+   @AName("type")
+   protected String _type;
 
    // 属性集合
    @AName("attributes")
    protected String _attributes;
 
-   // 回行类型
-   @AName("wrap_cd")
-   protected String _wrapCd;
+   // 是否续行
+   @AName("nowrap")
+   protected boolean _nowrap;
 
    // 左位置
    @AName("left")
@@ -467,14 +503,6 @@ public abstract class XBaseDataNumber3
    @AName("display_view")
    protected boolean _displayView;
 
-   // 设计显示
-   @AName("display_design")
-   protected String _displayDesign;
-
-   // 搜索显示
-   @AName("display_search")
-   protected String _displaySearch;
-
    // 新建显示
    @AName("display_insert")
    protected boolean _displayInsert;
@@ -487,9 +515,21 @@ public abstract class XBaseDataNumber3
    @AName("display_delete")
    protected boolean _displayDelete;
 
+   // 搜索显示
+   @AName("display_search")
+   protected String _displaySearch;
+
+   // 显示拾取
+   @AName("display_picker")
+   protected boolean _displayPicker;
+
    // 缩放显示
    @AName("display_zoom")
    protected boolean _displayZoom;
+
+   // 设计显示
+   @AName("display_design")
+   protected String _displayDesign;
 
    // 打印显示
    @AName("display_print")
@@ -519,6 +559,10 @@ public abstract class XBaseDataNumber3
    @AName("verify_mode")
    protected String _verifyMode;
 
+   // 校验必须
+   @AName("valid_require")
+   protected String _validRequire;
+
    // 新建检查
    @AName("verify_insert")
    protected boolean _verifyInsert;
@@ -531,57 +575,29 @@ public abstract class XBaseDataNumber3
    @AName("verify_delete")
    protected boolean _verifyDelete;
 
+   // 标签类型
+   @AName("label_type_cd")
+   protected String _labelTypeCd;
+
+   // 标签位置
+   @AName("label_position_cd")
+   protected String _labelPositionCd;
+
    // 标签对齐
    @AName("label_align_cd")
    protected String _labelAlignCd;
+
+   // 标签图表
+   @AName("label_icon")
+   protected String _labelIcon;
 
    // 标签尺寸
    @AName("label_size")
    protected String _labelSize;
 
-   // 编辑尺寸
-   @AName("edit_size")
-   protected String _editSize;
-
-   // 放大引用
-   @AName("zoom_reference")
-   protected String _zoomReference;
-
-   // 放大字段
-   @AName("zoom_field")
-   protected String _zoomField;
-
-   // 引用服务
-   @AName("lov_service")
-   protected String _lovService;
-
-   // 引用地址
-   @AName("lov_reference")
-   protected String _lovReference;
-
-   // 引用字段
-   @AName("lov_fields")
-   protected String _lovFields;
-
-   // 应用条件
-   @AName("lov_where")
-   protected String _lovWhere;
-
-   // 引用排序
-   @AName("lov_order")
-   protected String _lovOrder;
-
-   // 最小值
-   @AName("value_min")
-   protected String _valueMin;
-
-   // 最大值
-   @AName("value_max")
-   protected String _valueMax;
-
-   // 值精度
-   @AName("value_precision")
-   protected String _valuePrecision;
+   // 标签颜色
+   @AName("label_color")
+   protected String _labelColor;
 
    // 数据必须
    @AName("data_require")
@@ -611,41 +627,61 @@ public abstract class XBaseDataNumber3
    @AName("data_source")
    protected String _dataSource;
 
-   //============================================================
-   // <T>获得类型的内容。</T>
-   //
-   // @return 类型
-   //============================================================
-   public String getType(){
-      return _type;
-   }
+   // 放大引用
+   @AName("zoom_reference")
+   protected String _zoomReference;
 
-   //============================================================
-   // <T>设置类型的内容。</T>
-   //
-   // @param value 类型
-   //============================================================
-   public void setType(String value){
-      _type = value;
-   }
+   // 放大字段
+   @AName("zoom_field")
+   protected String _zoomField;
 
-   //============================================================
-   // <T>获得名称的内容。</T>
-   //
-   // @return 名称
-   //============================================================
-   public String getName(){
-      return _name;
-   }
+   // 引用服务
+   @AName("lov_service")
+   protected String _lovService;
 
-   //============================================================
-   // <T>设置名称的内容。</T>
-   //
-   // @param value 名称
-   //============================================================
-   public void setName(String value){
-      _name = value;
-   }
+   // 引用地址
+   @AName("lov_reference")
+   protected String _lovReference;
+
+   // 引用字段
+   @AName("lov_fields")
+   protected String _lovFields;
+
+   // 应用条件
+   @AName("lov_where")
+   protected String _lovWhere;
+
+   // 引用排序
+   @AName("lov_order")
+   protected String _lovOrder;
+
+   // 编辑长度
+   @AName("edit_length")
+   protected String _editLength;
+
+   // 编辑对齐方式
+   @AName("edit_align_cd")
+   protected String _editAlignCd;
+
+   // 编辑大小写类型
+   @AName("edit_case_cd")
+   protected String _editCaseCd;
+
+   // 编辑模板
+   @AName("edit_pattern")
+   protected String _editPattern;
+
+   // 编辑自动完成
+   @AName("edit_complete")
+   protected String _editComplete;
+
+   // 校验最小长度
+   @AName("valid_length_min")
+   protected String _validLengthMin;
+
+   // 校验最大长度
+   @AName("valid_length_max")
+   protected String _validLengthMax;
 
    //============================================================
    // <T>获得有效性的内容。</T>
@@ -684,6 +720,24 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
+   // <T>获得名称的内容。</T>
+   //
+   // @return 名称
+   //============================================================
+   public String getName(){
+      return _name;
+   }
+
+   //============================================================
+   // <T>设置名称的内容。</T>
+   //
+   // @param value 名称
+   //============================================================
+   public void setName(String value){
+      _name = value;
+   }
+
+   //============================================================
    // <T>获得标签的内容。</T>
    //
    // @return 标签
@@ -699,6 +753,24 @@ public abstract class XBaseDataNumber3
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>获得类型的内容。</T>
+   //
+   // @return 类型
+   //============================================================
+   public String getType(){
+      return _type;
+   }
+
+   //============================================================
+   // <T>设置类型的内容。</T>
+   //
+   // @param value 类型
+   //============================================================
+   public void setType(String value){
+      _type = value;
    }
 
    //============================================================
@@ -720,21 +792,21 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
-   // <T>获得回行类型的内容。</T>
+   // <T>获得是否续行的内容。</T>
    //
-   // @return 回行类型
+   // @return 是否续行
    //============================================================
-   public String getWrapCd(){
-      return _wrapCd;
+   public Boolean getNowrap(){
+      return _nowrap;
    }
 
    //============================================================
-   // <T>设置回行类型的内容。</T>
+   // <T>设置是否续行的内容。</T>
    //
-   // @param value 回行类型
+   // @param value 是否续行
    //============================================================
-   public void setWrapCd(String value){
-      _wrapCd = value;
+   public void setNowrap(Boolean value){
+      _nowrap = value;
    }
 
    //============================================================
@@ -1260,42 +1332,6 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
-   // <T>获得设计显示的内容。</T>
-   //
-   // @return 设计显示
-   //============================================================
-   public String getDisplayDesign(){
-      return _displayDesign;
-   }
-
-   //============================================================
-   // <T>设置设计显示的内容。</T>
-   //
-   // @param value 设计显示
-   //============================================================
-   public void setDisplayDesign(String value){
-      _displayDesign = value;
-   }
-
-   //============================================================
-   // <T>获得搜索显示的内容。</T>
-   //
-   // @return 搜索显示
-   //============================================================
-   public String getDisplaySearch(){
-      return _displaySearch;
-   }
-
-   //============================================================
-   // <T>设置搜索显示的内容。</T>
-   //
-   // @param value 搜索显示
-   //============================================================
-   public void setDisplaySearch(String value){
-      _displaySearch = value;
-   }
-
-   //============================================================
    // <T>获得新建显示的内容。</T>
    //
    // @return 新建显示
@@ -1350,6 +1386,42 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
+   // <T>获得搜索显示的内容。</T>
+   //
+   // @return 搜索显示
+   //============================================================
+   public String getDisplaySearch(){
+      return _displaySearch;
+   }
+
+   //============================================================
+   // <T>设置搜索显示的内容。</T>
+   //
+   // @param value 搜索显示
+   //============================================================
+   public void setDisplaySearch(String value){
+      _displaySearch = value;
+   }
+
+   //============================================================
+   // <T>获得显示拾取的内容。</T>
+   //
+   // @return 显示拾取
+   //============================================================
+   public Boolean getDisplayPicker(){
+      return _displayPicker;
+   }
+
+   //============================================================
+   // <T>设置显示拾取的内容。</T>
+   //
+   // @param value 显示拾取
+   //============================================================
+   public void setDisplayPicker(Boolean value){
+      _displayPicker = value;
+   }
+
+   //============================================================
    // <T>获得缩放显示的内容。</T>
    //
    // @return 缩放显示
@@ -1365,6 +1437,24 @@ public abstract class XBaseDataNumber3
    //============================================================
    public void setDisplayZoom(Boolean value){
       _displayZoom = value;
+   }
+
+   //============================================================
+   // <T>获得设计显示的内容。</T>
+   //
+   // @return 设计显示
+   //============================================================
+   public String getDisplayDesign(){
+      return _displayDesign;
+   }
+
+   //============================================================
+   // <T>设置设计显示的内容。</T>
+   //
+   // @param value 设计显示
+   //============================================================
+   public void setDisplayDesign(String value){
+      _displayDesign = value;
    }
 
    //============================================================
@@ -1494,6 +1584,24 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
+   // <T>获得校验必须的内容。</T>
+   //
+   // @return 校验必须
+   //============================================================
+   public String getValidRequire(){
+      return _validRequire;
+   }
+
+   //============================================================
+   // <T>设置校验必须的内容。</T>
+   //
+   // @param value 校验必须
+   //============================================================
+   public void setValidRequire(String value){
+      _validRequire = value;
+   }
+
+   //============================================================
    // <T>获得新建检查的内容。</T>
    //
    // @return 新建检查
@@ -1548,6 +1656,42 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
+   // <T>获得标签类型的内容。</T>
+   //
+   // @return 标签类型
+   //============================================================
+   public String getLabelTypeCd(){
+      return _labelTypeCd;
+   }
+
+   //============================================================
+   // <T>设置标签类型的内容。</T>
+   //
+   // @param value 标签类型
+   //============================================================
+   public void setLabelTypeCd(String value){
+      _labelTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得标签位置的内容。</T>
+   //
+   // @return 标签位置
+   //============================================================
+   public String getLabelPositionCd(){
+      return _labelPositionCd;
+   }
+
+   //============================================================
+   // <T>设置标签位置的内容。</T>
+   //
+   // @param value 标签位置
+   //============================================================
+   public void setLabelPositionCd(String value){
+      _labelPositionCd = value;
+   }
+
+   //============================================================
    // <T>获得标签对齐的内容。</T>
    //
    // @return 标签对齐
@@ -1563,6 +1707,24 @@ public abstract class XBaseDataNumber3
    //============================================================
    public void setLabelAlignCd(String value){
       _labelAlignCd = value;
+   }
+
+   //============================================================
+   // <T>获得标签图表的内容。</T>
+   //
+   // @return 标签图表
+   //============================================================
+   public String getLabelIcon(){
+      return _labelIcon;
+   }
+
+   //============================================================
+   // <T>设置标签图表的内容。</T>
+   //
+   // @param value 标签图表
+   //============================================================
+   public void setLabelIcon(String value){
+      _labelIcon = value;
    }
 
    //============================================================
@@ -1584,21 +1746,147 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
-   // <T>获得编辑尺寸的内容。</T>
+   // <T>获得标签颜色的内容。</T>
    //
-   // @return 编辑尺寸
+   // @return 标签颜色
    //============================================================
-   public String getEditSize(){
-      return _editSize;
+   public String getLabelColor(){
+      return _labelColor;
    }
 
    //============================================================
-   // <T>设置编辑尺寸的内容。</T>
+   // <T>设置标签颜色的内容。</T>
    //
-   // @param value 编辑尺寸
+   // @param value 标签颜色
    //============================================================
-   public void setEditSize(String value){
-      _editSize = value;
+   public void setLabelColor(String value){
+      _labelColor = value;
+   }
+
+   //============================================================
+   // <T>获得数据必须的内容。</T>
+   //
+   // @return 数据必须
+   //============================================================
+   public Boolean getDataRequire(){
+      return _dataRequire;
+   }
+
+   //============================================================
+   // <T>设置数据必须的内容。</T>
+   //
+   // @param value 数据必须
+   //============================================================
+   public void setDataRequire(Boolean value){
+      _dataRequire = value;
+   }
+
+   //============================================================
+   // <T>获得数据类型的内容。</T>
+   //
+   // @return 数据类型
+   //============================================================
+   public String getDataTypeCd(){
+      return _dataTypeCd;
+   }
+
+   //============================================================
+   // <T>设置数据类型的内容。</T>
+   //
+   // @param value 数据类型
+   //============================================================
+   public void setDataTypeCd(String value){
+      _dataTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDataName(){
+      return _dataName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDataName(String value){
+      _dataName = value;
+   }
+
+   //============================================================
+   // <T>获得数据别称的内容。</T>
+   //
+   // @return 数据别称
+   //============================================================
+   public String getDataAlias(){
+      return _dataAlias;
+   }
+
+   //============================================================
+   // <T>设置数据别称的内容。</T>
+   //
+   // @param value 数据别称
+   //============================================================
+   public void setDataAlias(String value){
+      _dataAlias = value;
+   }
+
+   //============================================================
+   // <T>获得数据内容的内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String getDataValue(){
+      return _dataValue;
+   }
+
+   //============================================================
+   // <T>设置数据内容的内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDataValue(String value){
+      _dataValue = value;
+   }
+
+   //============================================================
+   // <T>获得数据默认的内容。</T>
+   //
+   // @return 数据默认
+   //============================================================
+   public String getDataDefault(){
+      return _dataDefault;
+   }
+
+   //============================================================
+   // <T>设置数据默认的内容。</T>
+   //
+   // @param value 数据默认
+   //============================================================
+   public void setDataDefault(String value){
+      _dataDefault = value;
+   }
+
+   //============================================================
+   // <T>获得数据来源的内容。</T>
+   //
+   // @return 数据来源
+   //============================================================
+   public String getDataSource(){
+      return _dataSource;
+   }
+
+   //============================================================
+   // <T>设置数据来源的内容。</T>
+   //
+   // @param value 数据来源
+   //============================================================
+   public void setDataSource(String value){
+      _dataSource = value;
    }
 
    //============================================================
@@ -1728,183 +2016,129 @@ public abstract class XBaseDataNumber3
    }
 
    //============================================================
-   // <T>获得最小值的内容。</T>
+   // <T>获得编辑长度的内容。</T>
    //
-   // @return 最小值
+   // @return 编辑长度
    //============================================================
-   public String getValueMin(){
-      return _valueMin;
+   public String getEditLength(){
+      return _editLength;
    }
 
    //============================================================
-   // <T>设置最小值的内容。</T>
+   // <T>设置编辑长度的内容。</T>
    //
-   // @param value 最小值
+   // @param value 编辑长度
    //============================================================
-   public void setValueMin(String value){
-      _valueMin = value;
+   public void setEditLength(String value){
+      _editLength = value;
    }
 
    //============================================================
-   // <T>获得最大值的内容。</T>
+   // <T>获得编辑对齐方式的内容。</T>
    //
-   // @return 最大值
+   // @return 编辑对齐方式
    //============================================================
-   public String getValueMax(){
-      return _valueMax;
+   public String getEditAlignCd(){
+      return _editAlignCd;
    }
 
    //============================================================
-   // <T>设置最大值的内容。</T>
+   // <T>设置编辑对齐方式的内容。</T>
    //
-   // @param value 最大值
+   // @param value 编辑对齐方式
    //============================================================
-   public void setValueMax(String value){
-      _valueMax = value;
+   public void setEditAlignCd(String value){
+      _editAlignCd = value;
    }
 
    //============================================================
-   // <T>获得值精度的内容。</T>
+   // <T>获得编辑大小写类型的内容。</T>
    //
-   // @return 值精度
+   // @return 编辑大小写类型
    //============================================================
-   public String getValuePrecision(){
-      return _valuePrecision;
+   public String getEditCaseCd(){
+      return _editCaseCd;
    }
 
    //============================================================
-   // <T>设置值精度的内容。</T>
+   // <T>设置编辑大小写类型的内容。</T>
    //
-   // @param value 值精度
+   // @param value 编辑大小写类型
    //============================================================
-   public void setValuePrecision(String value){
-      _valuePrecision = value;
+   public void setEditCaseCd(String value){
+      _editCaseCd = value;
    }
 
    //============================================================
-   // <T>获得数据必须的内容。</T>
+   // <T>获得编辑模板的内容。</T>
    //
-   // @return 数据必须
+   // @return 编辑模板
    //============================================================
-   public Boolean getDataRequire(){
-      return _dataRequire;
+   public String getEditPattern(){
+      return _editPattern;
    }
 
    //============================================================
-   // <T>设置数据必须的内容。</T>
+   // <T>设置编辑模板的内容。</T>
    //
-   // @param value 数据必须
+   // @param value 编辑模板
    //============================================================
-   public void setDataRequire(Boolean value){
-      _dataRequire = value;
+   public void setEditPattern(String value){
+      _editPattern = value;
    }
 
    //============================================================
-   // <T>获得数据类型的内容。</T>
+   // <T>获得编辑自动完成的内容。</T>
    //
-   // @return 数据类型
+   // @return 编辑自动完成
    //============================================================
-   public String getDataTypeCd(){
-      return _dataTypeCd;
+   public String getEditComplete(){
+      return _editComplete;
    }
 
    //============================================================
-   // <T>设置数据类型的内容。</T>
+   // <T>设置编辑自动完成的内容。</T>
    //
-   // @param value 数据类型
+   // @param value 编辑自动完成
    //============================================================
-   public void setDataTypeCd(String value){
-      _dataTypeCd = value;
+   public void setEditComplete(String value){
+      _editComplete = value;
    }
 
    //============================================================
-   // <T>获得数据名称的内容。</T>
+   // <T>获得校验最小长度的内容。</T>
    //
-   // @return 数据名称
+   // @return 校验最小长度
    //============================================================
-   public String getDataName(){
-      return _dataName;
+   public String getValidLengthMin(){
+      return _validLengthMin;
    }
 
    //============================================================
-   // <T>设置数据名称的内容。</T>
+   // <T>设置校验最小长度的内容。</T>
    //
-   // @param value 数据名称
+   // @param value 校验最小长度
    //============================================================
-   public void setDataName(String value){
-      _dataName = value;
+   public void setValidLengthMin(String value){
+      _validLengthMin = value;
    }
 
    //============================================================
-   // <T>获得数据别称的内容。</T>
+   // <T>获得校验最大长度的内容。</T>
    //
-   // @return 数据别称
+   // @return 校验最大长度
    //============================================================
-   public String getDataAlias(){
-      return _dataAlias;
+   public String getValidLengthMax(){
+      return _validLengthMax;
    }
 
    //============================================================
-   // <T>设置数据别称的内容。</T>
+   // <T>设置校验最大长度的内容。</T>
    //
-   // @param value 数据别称
+   // @param value 校验最大长度
    //============================================================
-   public void setDataAlias(String value){
-      _dataAlias = value;
-   }
-
-   //============================================================
-   // <T>获得数据内容的内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String getDataValue(){
-      return _dataValue;
-   }
-
-   //============================================================
-   // <T>设置数据内容的内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDataValue(String value){
-      _dataValue = value;
-   }
-
-   //============================================================
-   // <T>获得数据默认的内容。</T>
-   //
-   // @return 数据默认
-   //============================================================
-   public String getDataDefault(){
-      return _dataDefault;
-   }
-
-   //============================================================
-   // <T>设置数据默认的内容。</T>
-   //
-   // @param value 数据默认
-   //============================================================
-   public void setDataDefault(String value){
-      _dataDefault = value;
-   }
-
-   //============================================================
-   // <T>获得数据来源的内容。</T>
-   //
-   // @return 数据来源
-   //============================================================
-   public String getDataSource(){
-      return _dataSource;
-   }
-
-   //============================================================
-   // <T>设置数据来源的内容。</T>
-   //
-   // @param value 数据来源
-   //============================================================
-   public void setDataSource(String value){
-      _dataSource = value;
+   public void setValidLengthMax(String value){
+      _validLengthMax = value;
    }
 
 }
