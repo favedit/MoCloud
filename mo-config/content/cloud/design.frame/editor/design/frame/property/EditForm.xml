@@ -24,7 +24,7 @@
       <Edit guid="EA93F1BB165B43A49ECF270BE3D29ED4" name="lovOrder" label="选取顺序" label_size="80,0" edit_size="400,0" is_valid="Y" note="" disp_search="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="lov_order" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" label_position="left" edit_mode="IU" />
       <Edit guid="AA045784A06147ABB6BC793253B79449" name="lovFields" label="选取字段" label_size="80,0" edit_size="400,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_edit="editWide" data_name="lov_fields" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
     </Panel>
-    <Template guid="1F68695A62D04C32ADFC89405817A561" name="validTemplate" frame_source="editor.design.frame.property.template.ValidTemplate" />
+    <Template guid="1F68695A62D04C32ADFC89405817A561" name="verifyTemplate" frame_source="editor.design.frame.property.template.VerifyTemplate" />
     <Template guid="D560FDCD1BC74982BAAA1F1BB22077D0" name="noteTemplate" frame_source="editor.design.frame.property.template.NoteTemplate" />
   </FormFrame>
 </Content>

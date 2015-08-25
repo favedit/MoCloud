@@ -284,7 +284,7 @@ public abstract class FAbstractDesignService
       //............................................................
       // 加载配置
       IContentConsole contentConsole = contentConsole();
-      FContentObject xcontainer = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Config);
+      FContentObject xcontainer = contentConsole.findDefine(_storageName, containerName, EPersistenceMode.Store);
       if(xcontainer == null){
          throw new FFatalError("Container is not exists. (container_name={1})", containerName);
       }

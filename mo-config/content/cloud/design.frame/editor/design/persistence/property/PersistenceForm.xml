@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150823212549">
+<Content update_date="20150825172632">
   <FormFrame guid="D1F7E3C1BF9F44228C8C3755A995F52F" name="editor.design.persistence.property.PersistenceForm" type="FEditorDsPropertyForm" label="持久化属性" is_valid="Y" logic_group="container" logic_service="editor.design.persistence" note="" valid="false">
     <ToolBar guid="3101CBCF346A479BA5A5BCC42B79E93B" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
       <ToolButton guid="1558099CED6A497786166F9045A294FD" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
@@ -12,7 +12,7 @@
       <ToolButton guid="1270288F50C743FAA4F6275CC25A7D62" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.design" hotkey="F9" attributes="action=order" />
     </ToolBar>
     <Panel guid="2D9B09D4CB3E46C9B6B8F8F023B9BBE0" name="componentPanel" icon="design.panel.icon" label="基本属性">
-      <Select guid="59067969E765468FB83B34A2696BC387" name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_size="600,0" input_size="500,0" edit_refer="editor.design.persistence.ComponentType" note="" />
+      <Select guid="59067969E765468FB83B34A2696BC387" name="componentType" label="组件类型" label_size="80,0" valid="true" data_name="_type" edit_size="600,0" input_size="500,0" edit_refer="editor.design.persistence.ComponentType" note="" nowrap="false" location="0,0" size="0,0" padding="0,0,0,1" margin="0,0,0,1" display_view="false" display_insert="true" display_update="false" display_delete="false" display_search="false" display_picker="false" display_zoom="false" edit_view="false" edit_insert="false" edit_update="false" edit_delete="false" />
       <Check guid="EFF7CE633AF54E899988408BE577C6B2" name="isValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
       <Edit guid="3F7B7F029A414C51B47C5F5258C23EF1" name="name" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
       <Edit guid="4B3C710733284E9D8DBE0CD678D02148" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />

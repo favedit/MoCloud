@@ -179,7 +179,7 @@ public abstract class XBaseRadio
 
    // 显示拾取的定义
    @AContentField
-   public final static FContentField DISPLAY_PICKER = new FContentField("displayPicker", "display_picker", EContentData.Boolean, "display_mode", "P", "Y", "YYNY");
+   public final static FContentField DISPLAY_PICKER = new FContentField("displayPicker", "display_picker", EContentData.Boolean, "display_mode", "P", "Y", "YNNY");
 
    // 缩放显示的定义
    @AContentField
@@ -213,13 +213,17 @@ public abstract class XBaseRadio
    @AContentField
    public final static FContentField EDIT_DELETE = new FContentField("editDelete", "edit_delete", EContentData.Boolean, "edit_mode", "D", "Y", "YNNY");
 
-   // 校验模式的定义
+   // 编辑放大的定义
    @AContentField
-   public final static FContentField VERIFY_MODE = new FContentField("verifyMode", "verify_mode", EContentData.String, "", "", "", "NYNN");
+   public final static FContentField EDIT_ZOOM = new FContentField("editZoom", "edit_zoom", EContentData.String, "edit_mode", "Z", "Y", "YNNY");
 
    // 校验必须的定义
    @AContentField
-   public final static FContentField VALID_REQUIRE = new FContentField("validRequire", "valid_require", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField VERIFY_REQUIRE = new FContentField("verifyRequire", "verify_require", EContentData.String, "", "", "", "YYNY");
+
+   // 校验模式的定义
+   @AContentField
+   public final static FContentField VERIFY_MODE = new FContentField("verifyMode", "verify_mode", EContentData.String, "", "", "", "NYNN");
 
    // 新建检查的定义
    @AContentField
@@ -503,13 +507,17 @@ public abstract class XBaseRadio
    @AName("edit_delete")
    protected boolean _editDelete;
 
+   // 编辑放大
+   @AName("edit_zoom")
+   protected String _editZoom;
+
+   // 校验必须
+   @AName("verify_require")
+   protected String _verifyRequire;
+
    // 校验模式
    @AName("verify_mode")
    protected String _verifyMode;
-
-   // 校验必须
-   @AName("valid_require")
-   protected String _validRequire;
 
    // 新建检查
    @AName("verify_insert")
@@ -1462,6 +1470,42 @@ public abstract class XBaseRadio
    }
 
    //============================================================
+   // <T>获得编辑放大的内容。</T>
+   //
+   // @return 编辑放大
+   //============================================================
+   public String getEditZoom(){
+      return _editZoom;
+   }
+
+   //============================================================
+   // <T>设置编辑放大的内容。</T>
+   //
+   // @param value 编辑放大
+   //============================================================
+   public void setEditZoom(String value){
+      _editZoom = value;
+   }
+
+   //============================================================
+   // <T>获得校验必须的内容。</T>
+   //
+   // @return 校验必须
+   //============================================================
+   public String getVerifyRequire(){
+      return _verifyRequire;
+   }
+
+   //============================================================
+   // <T>设置校验必须的内容。</T>
+   //
+   // @param value 校验必须
+   //============================================================
+   public void setVerifyRequire(String value){
+      _verifyRequire = value;
+   }
+
+   //============================================================
    // <T>获得校验模式的内容。</T>
    //
    // @return 校验模式
@@ -1477,24 +1521,6 @@ public abstract class XBaseRadio
    //============================================================
    public void setVerifyMode(String value){
       _verifyMode = value;
-   }
-
-   //============================================================
-   // <T>获得校验必须的内容。</T>
-   //
-   // @return 校验必须
-   //============================================================
-   public String getValidRequire(){
-      return _validRequire;
-   }
-
-   //============================================================
-   // <T>设置校验必须的内容。</T>
-   //
-   // @param value 校验必须
-   //============================================================
-   public void setValidRequire(String value){
-      _validRequire = value;
    }
 
    //============================================================
