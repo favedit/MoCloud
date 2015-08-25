@@ -1,6 +1,7 @@
 package com.ahyc.eai.batch.financial.forecast;
 
-import com.ahyc.eai.batch.common.EDataConnection;
+import org.mo.eai.logic.common.EEaiDataConnection;
+
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialForecastLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialForecastUnit;
 import org.mo.com.collections.FDataset;
@@ -100,7 +101,7 @@ public class FStatisticsForecastCalculater
    // <T>投资阶段处理。</T>
    //============================================================
    public void process(FLogicContext logicContext){
-      ISqlConnection connection = logicContext.activeConnection(EDataConnection.STATISTICS);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       // 计算比率
       double totalRate = 0;
       for(double rate : _delayRate){

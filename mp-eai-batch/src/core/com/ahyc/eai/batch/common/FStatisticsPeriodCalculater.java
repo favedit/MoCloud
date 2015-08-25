@@ -1,5 +1,7 @@
 package com.ahyc.eai.batch.common;
 
+import org.mo.eai.logic.common.EEaiDataConnection;
+
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
@@ -34,7 +36,7 @@ public abstract class FStatisticsPeriodCalculater
    //============================================================
    @Override
    public void processLogic(FLogicContext logicContext){
-      ISqlConnection connection = logicContext.activeConnection(EDataConnection.STATISTICS);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       // 计算开始日期 
       TDateTime beginDate = _controllerUnit.linkDate();
       if(beginDate.isEmpty()){

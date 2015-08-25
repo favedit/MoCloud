@@ -5,6 +5,7 @@ import org.mo.com.console.FConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.logic.common.EEaiDataConnection;
 
 //============================================================
 // <T>金融控制台。</T>
@@ -14,9 +15,6 @@ public class FFinancialMarketerConsole
       implements
          IFinancialMarketerConsole
 {
-   // 资源访问接口
-   //private static IResource _resource = RResource.find(FFinancialMarketerConsole.class);
-
    //============================================================
    // <T>根据理登录名称查找理财师信息。</T>
    //
@@ -27,7 +25,7 @@ public class FFinancialMarketerConsole
    @Override
    public FFinancialMarketerInfo findInfo(ILogicContext logicContext,
                                           String passport){
-      ISqlConnection connection = logicContext.activeConnection("");
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       // 查找用户编号
       FSql findSql = new FSql("SELECT id FROM lzh_members WHERE user_name={passport}");
       findSql.bindString("passport", passport);

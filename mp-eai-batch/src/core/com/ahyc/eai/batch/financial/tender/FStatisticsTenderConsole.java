@@ -1,6 +1,7 @@
 package com.ahyc.eai.batch.financial.tender;
 
-import com.ahyc.eai.batch.common.EDataConnection;
+import org.mo.eai.logic.common.EEaiDataConnection;
+
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import org.mo.com.collections.FRow;
@@ -42,7 +43,7 @@ public class FStatisticsTenderConsole
          return unit;
       }
       // 查找投标信息
-      ISqlConnection connection = logicContext.activeConnection(EDataConnection.EZUBAO);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       FRow row = connection
             .find("SELECT borrow_name,borrow_model,borrow_duration,borrow_money,borrow_interest,borrow_interest_rate,borrow_info,FROM_UNIXTIME(`add_time`,'%Y%m%d%H%i%s') as borrow_date,DATE_FORMAT(`start_time`,'%Y%m%d%H%i%s') as begin_date,xm1,xm2,xm3,xm4 FROM lzh_borrow_info where id="
                   + id);

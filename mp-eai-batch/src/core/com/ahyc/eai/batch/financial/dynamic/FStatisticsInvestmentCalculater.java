@@ -1,6 +1,7 @@
 package com.ahyc.eai.batch.financial.dynamic;
 
-import com.ahyc.eai.batch.common.EDataConnection;
+import org.mo.eai.logic.common.EEaiDataConnection;
+
 import com.ahyc.eai.batch.common.FStatisticsCalculater;
 import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentInfo;
 import com.ahyc.eai.batch.financial.department.IStatisticsDepartmentInfoConsole;
@@ -33,7 +34,7 @@ public class FStatisticsInvestmentCalculater
                             long beginId,
                             long endId){
       // 代码修正
-      ISqlConnection sourceConnection = logicContext.activeConnection(EDataConnection.EZUBAO);
+      ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       IStatisticsDepartmentInfoConsole departmentInfoConsole = RAop.find(IStatisticsDepartmentInfoConsole.class);
       IStatisticsTenderConsole tenderConsole = RAop.find(IStatisticsTenderConsole.class);
