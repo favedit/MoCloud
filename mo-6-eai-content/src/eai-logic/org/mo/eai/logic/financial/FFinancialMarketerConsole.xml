@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.member.find'>
+SELECT id
+FROM lzh_members
+WHERE user_name={passport}
+</Resource>
+
+<Resource name='sql.marketer.find'>
+SELECT *
+FROM lzh_fmanager
+WHERE id={passport}
+</Resource>
+
+
+</Config>
