@@ -20,71 +20,66 @@
                <ul></ul>
             </section>
             <section class="main-container" id="main-container">
-               <header>
-                  <span class="btn-list" id="btn-list"></span> 全球实时数据中心
-                  <jh:notEquals source="host" value="&page.userType">
-                     <div class="header-r"><img src="images/re.png"></div>
-                     <ul class="header-list bounceInDown">
-                        <span>当前帐号</span>
-                        <p>
-                           <jh:write source='&page.passport' />
-                        </p>
-                        <li onclick="loginOut();">退出</li>
-                     </ul>
-                     <div class="shadow"></div>
-                  </jh:notEquals>
-               </header>
-
-               <div class="banner" id="banner">
-                  <div class="bd">
-                     <ul>
-                        <li>
-                           <a class="pic" href="#"><img src="images/ban.jpg"> </a>
-                        </li>
-                        <li>
-                           <a class="pic" href="#"><img src="images/ban.jpg"></a>
-                        </li>
-                        <li>
-                           <a class="pic" href="#"><img src="images/ban.jpg"></a>
-                        </li>
-                        <li>
-                           <a class="pic" href="#"><img src="images/ban.jpg"></a>
-                        </li>
-                     </ul>
+               <section class="box-container" style="display: block;">
+                   <header>
+                     <span class="btn-list" id="btn-list"></span> 全球实时数据中心
+                        <div class="header-r"><img src="images/re.png"></div>
+                        <ul class="header-list bounceInDown">
+                           <span>当前帐号</span>
+                           <p>er@153.com</p>
+                           <li class="binding-icon"><a href="binding.jsp">帐号绑定</a></li>
+                           <li onclick="loginOut();">退出</li>
+                        </ul>
+                        <div class="shadow"></div>
+                  </header>
+                  <div class="banner" id="banner" >
+                     <div class="bd">
+                        <ul>
+                           <li>
+                              <a class="pic" href="#"><img src="images/img2.jpg"> </a>
+                           </li>
+                           <li>
+                              <a class="pic" href="#"><img src="images/img3.jpg"></a>
+                           </li>
+                           <li>
+                              <a class="pic" href="#"><img src="images/img1.jpg"></a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="hd">
+                        <ul></ul>
+                     </div>
                   </div>
-                  <div class="hd">
-                     <ul></ul>
+                  <div class="details-container">
+                        <ul>
+                           <!-- <p>客户</p> -->
+                           <li>
+                               <p>客户</p>
+                              <span>投资实时数据图</span>
+                              <img src="images/img.png" onclick='doChart("ChartMarketerCustomer")'>
+                             
+                           </li>
+                        </ul>
+                        <ul>
+                           <!-- <p class="icon2">理财师</p> -->
+                           <li>
+                              <p class="icon2">理财师</p>
+                              <span>投资实时数据图</span>
+                              <img src="images/img.png" onclick='doChart("ChartMarketerMarketer")'>
+                               
+                           </li>
+                        </ul>
+                        <ul>
+                           <!-- <p class="icon3">公司</p> -->
+                           <li>
+                              <p class="icon3">公司</p>
+                              <span>投资实时数据图</span>
+                              <img src="images/img.png" onclick='doChart("ChartDepartmentMarketer")'>
+                               
+                           </li>
+                        </ul>
                   </div>
-               </div>
-               <div class="details-container">
-                  <jh:equals source="eai.marketer.customer" value="&page.menuString">
-                     <ul>
-                        <p>客户</p>
-                        <li>
-                           <span>投资实时数据图</span>
-                           <img src="images/img.png" onclick='doChart("ChartMarketerCustomer")'>
-                        </li>
-                     </ul>
-                  </jh:equals>
-                  <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                     <ul>
-                        <p class="icon2">理财师</p>
-                        <li>
-                           <span>投资实时数据图</span>
-                           <img src="images/img.png" onclick='doChart("ChartMarketerMarketer")'>
-                        </li>
-                     </ul>
-                  </jh:equals>
-                  <jh:equals source="eai.department.marketer" value="&page.menuString">
-                     <ul>
-                        <p class="icon3">公司</p>
-                        <li>
-                           <span>投资实时数据图</span>
-                           <img src="images/img.png" onclick='doChart("ChartDepartmentMarketer")'>
-                        </li>
-                     </ul>
-                  </jh:equals>
-               </div>
+               </section>
             </section>
          </div>
       </FORM>
@@ -103,17 +98,18 @@
          var $mainContainer = document.getElementById("main-container");
          var $navContainer = document.getElementById("nav-container");
          var state = true;
-         $btnList.onclick = function() {
-            if (state) {
-               $mainContainer.setAttribute("details", "slidebar");
-               $navContainer.setAttribute("details", "slidebar");
-               state = false;
-            } else {
-               $mainContainer.setAttribute("details", " ");
-               $navContainer.setAttribute("details", " ");
-               state = true;
-            }
-         }
+        
+         // $btnList.onclick = function() {
+         //    if (state) {
+         //       $mainContainer.setAttribute("details", "slidebar");
+         //       $navContainer.setAttribute("details", "slidebar");
+         //       state = false;
+         //    } else {
+         //       $mainContainer.setAttribute("details", " ");
+         //       $navContainer.setAttribute("details", " ");
+         //       state = true;
+         //    }
+         // }
          var $headerR = document.getElementsByClassName("header-r")[0];
          var $shadow = document.getElementsByClassName("shadow")[0];
          var $headerList = document.getElementsByClassName("header-list")[0];
@@ -125,12 +121,21 @@
             $headerList.style.display = "none";
             this.style.display = "none";
          }
-
+         // binding-icon
+         var $bindingIcon = document.getElementsByClassName("binding-icon")[0];
+         var $bindingContainer = document.getElementsByClassName("binding-container")[0];
+         var $boxContainer = document.getElementsByClassName("box-container")[0];
+         $bindingIcon.onclick = function () {
+            $headerList.style.display = "none";
+            $shadow.style.display = "none";
+            $bindingContainer.style.display = "block";
+            $boxContainer.style.display = "none";
+         }
+       
          function doChart(code) {
             id_code.value = code;
             frmMain.submit();
          }
-
          function loginOut() {
             location.href = "Index.wa?do=loginOut";
          }
