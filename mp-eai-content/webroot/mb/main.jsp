@@ -27,7 +27,7 @@
                         <ul class="header-list bounceInDown">
                            <span>当前帐号</span>
                            <p>er@153.com</p>
-                           <li class="binding-icon"><a href="binding.jsp">帐号绑定</a></li>
+                           <li class="binding-icon"><a href="Binding.jsp">帐号绑定</a></li>
                            <li onclick="loginOut();">退出</li>
                         </ul>
                         <div class="shadow"></div>

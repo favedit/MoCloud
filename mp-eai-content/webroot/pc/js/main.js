@@ -17,16 +17,8 @@
         validationErrorTel:"验证码错误"
       };
     // 绑定帐号
-     var $bindingContainer = $(".binding-container");
-         $main = $(".main");
-     $(".returns").on("click",function() {
-       $bindingContainer.hide();
-       $main.show();
-     })
-     $(".binding").on("click",function(){
-      $bindingContainer.show();
-      $main.hide();
-     })
+     
+    
      if($boxPrompt.text()!=""){
       $boxPrompt.show();
      }
@@ -131,18 +123,20 @@
     $("#send_btn").on("click",function(){
       var o = $(this);
        ctrl.setMatching(function(){
-         ctrl.countdown(o);
+        if($("input_state").val == 1 ){
+          ctrl.countdown(o);
+        }
        })
     });
    };
    ctrl.submits = function(){
     $("#btn").on("click", function(){
-        if($("#mobile").val()==""){
+        if($("#mobile").val() == ""){
            $boxPrompt.show().text(alertTips.emptyTel);
+           return false;
         }else if($("#verification_code").val() == ""){
           $boxPrompt.show().text(alertTips.validationTel);
         }else{
-           
            frmMain.submit();
         }
     })

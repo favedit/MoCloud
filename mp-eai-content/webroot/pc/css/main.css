@@ -130,6 +130,11 @@ body{
 }
 .users li.binding{
 	background-image:none;
+	background-image: url(../../mb/images/binding-icon.png);
+	background-position: 8px center;
+	background-repeat: no-repeat;
+	background-size: 17px;
+	border-bottom:1px solid rgb(205, 205, 205);;
 }
 .users li{
 	background-image:url(../images/main/icon4.png);

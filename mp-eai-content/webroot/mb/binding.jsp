@@ -16,7 +16,7 @@
             <section class="main-container" id="main-container">
                <section class="binding-container" style="display:block;">
                    <header>
-                     <a href="main.jsp"><img class="return-img" src="images/fanhui.png"></a>
+                     <a href="Main.jsp"><img class="return-img" src="images/fanhui.png"></a>
                       账号绑定
                   </header>
                   <ul class="fieldsWidget">
@@ -26,7 +26,7 @@
                            <label>帐号：</label>
                            <input type="tel" maxlength="11" data-type="tel" class="fieldInput" placeholder="请输入E租宝帐号" value="">
                            <button id="getVerifyCodeBtn" class="btnGetCode" type="button">获取验证码</button>
-                           <input tyle="hidden" value="1" id="input_state">
+                           <input tyle="hidden" style="display: none;" value="1" id="input_state">
                         </div>
                      </li>
                     
