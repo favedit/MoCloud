@@ -1,4 +1,4 @@
- $(document).ready(function(){
+  $(window).load(function(){
     var ctrl = {};
     var $imgH;
     var $imagContainer = $(".imag-container");
@@ -10,6 +10,27 @@
     var $imagDetails = $(".imag-details");
     var $userDetails = $("#user-details");
     var $users = $("#users");
+    var $boxPrompt = $(".box-prompt").find("i");
+    var alertTips={
+        emptyTel:"E租宝帐号不能为空",
+        validationTel:"验证码不能为空",
+        validationErrorTel:"验证码错误"
+      };
+    // 绑定帐号
+     var $bindingContainer = $(".binding-container");
+         $main = $(".main");
+     $(".returns").on("click",function() {
+       $bindingContainer.hide();
+       $main.show();
+     })
+     $(".binding").on("click",function(){
+      $bindingContainer.show();
+      $main.hide();
+     })
+     if($boxPrompt.text()!=""){
+      $boxPrompt.show();
+     }
+
     ctrl.setViewport = function (){
       var h = $imagContainer.find("li").eq(0).height();
           $imagDetails.height(h);
@@ -18,9 +39,9 @@
       $imagDetails.css({marginLeft:$imagDetailsW, marginTop:$imagDetailsH});
        var windowW = $(window).width();
        var windowH = $(window).height();
-       $(".main").height(windowH-70);
+       $(".main").height(windowH-86);
     };
-    ctrl.setTimeouts = function  () {
+    ctrl.setTimeouts = function () {
       setTimeout(function () {
         $(".prompt").hide();
       },2000);
@@ -70,7 +91,7 @@
     $users.mousemove(function(event) {
        $users.show();
     });
-    $users.mouseout(function(event) {
+    $userDetails.mouseout(function(event) {
        $users.hide();
     });
     $(window).resize(function(){
@@ -78,4 +99,56 @@
       ctrl.setRolling();
       ctrl.setViewport();
    });
+    // !(/^1[3|4|5|7|8|9][\d]{9}$/).test(mobileStr)
+   var wait=60;
+   ctrl.countdown = function(o){
+      if (wait == 0) { 
+          o.prop("disabled",false); 
+          o.val("发送动态密码"); 
+          wait = 60; 
+        } else { 
+          console.log("ok");
+          o.prop("disabled", true); 
+          o.val("重新发送(" + wait + ")"); 
+          wait--; 
+          setTimeout(function() { 
+            ctrl.countdown(o);
+          }, 
+          1000) 
+        } 
+   };
+   ctrl.setMatching = function(callback){
+     var mobileVal = $("#mobile").val();
+      if( mobileVal != ''){
+        $boxPrompt.hide();
+        callback();
+      }else{
+        $boxPrompt.show().text(alertTips.emptyTel);
+      }
+
+   };
+   ctrl.setValidation = function(){
+    $("#send_btn").on("click",function(){
+      var o = $(this);
+       ctrl.setMatching(function(){
+         ctrl.countdown(o);
+       })
+    });
+   };
+   ctrl.submits = function(){
+    $("#btn").on("click", function(){
+        if($("#mobile").val()==""){
+           $boxPrompt.show().text(alertTips.emptyTel);
+        }else if($("#verification_code").val() == ""){
+          $boxPrompt.show().text(alertTips.validationTel);
+        }else{
+           frmMain.submit();
+        }
+    })
+   };
+   ctrl.setValidation();
+   ctrl.submits();
+  
+
+
  });

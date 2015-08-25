@@ -38,6 +38,13 @@ body{
 .logo{
 	padding-left: 15px;
 	padding-top: 5px;
+	width: 240px;
+}
+#container_details{
+	display: block;
+	height: 100%;
+	overflow: hidden;
+	/*min-height: \*/
 }
 .head-left span{
 	display:inline-block;
@@ -119,7 +126,10 @@ body{
 	position: absolute;
 	display: none;
 	left: 10px;
-	cursor:pointer
+	cursor:pointer;
+}
+.users li.binding{
+	background-image:none;
 }
 .users li{
 	background-image:url(../images/main/icon4.png);
@@ -268,6 +278,7 @@ p.icon-picture span{
 
 .imag-details ul li{
 	width: 100%;
+	max-width: 1300px;
 	left:0px;
 	top:0px;
 	display: inline-block;
@@ -331,7 +342,7 @@ p.icon-picture span{
 	min-width:120px;
 	height: 120px;
 	display: block;
-	position: relative;
+	/*position: relative;*/
 	overflow: hidden;
 	cursor:pointer;
 	margin: 10px auto;
@@ -347,7 +358,6 @@ p.icon-picture span{
 	background: rgba(0,0,0,0.2);
 	left:0px;
 	top:0px;
-	display: block;
 }
 .titles-container li.on{
 	border:2px solid #f96;
@@ -394,3 +404,200 @@ p.icon-picture span{
 	padding: 5px 15px;
     color: #fff;
 }
+
+/*找回密码*/
+
+.box{
+	width: 550px;
+	height: 600px;
+	position: absolute;
+	left: 50%;
+	top:50%;
+	margin-left: -275px;
+	margin-top: -200px;
+}
+
+.box-container{
+	display: block;
+	background-color: #fff;
+	border-radius: 10px;
+  -webkit-box-shadow:0 0 10px rgba(98, 105, 105, 0.2);  
+  -moz-box-shadow:0 0 10px rgba(98, 105, 105, 0.2);  
+  box-shadow:0 0 10px rgba(98, 105, 105, 0.2); 
+  padding: 0px 65px;
+  padding-bottom: 20px;
+   
+}
+.box-container p{
+	position: relative;
+}
+.box-prompt{
+	color:red;
+	line-height: 30px;
+	height: 30px;
+	display: inline-block;
+}
+.box-prompt i{
+	display: block;
+	background: url(../images/main/png.png) no-repeat 10px center;
+	background-size: 14px;
+    padding-left: 28px;
+}
+.box-container h1{
+	padding: 24px 0px;
+	text-align: center;
+	font-size: 24px;
+	border-bottom: 2px solid #e3e3e3;
+}
+.box-container .icon{
+	background-image: url(../images/icon_0.png);
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	border:1px solid red;
+	height: 60px;
+	border:none;
+	line-height: 60px;
+	border-radius: 5px;
+	margin-bottom: 22px;
+	background-repeat: no-repeat;
+	background-position: 20px center ;
+	padding-left: 50px;
+	 border:1px solid #dedede;
+}
+
+.box-container .icon:hover{
+	border:1px solid #378bc6;
+	background-image: url(../images/icon_011.png);
+}
+
+.box-container .mt-30:hover{
+	border:1px solid #378bc6;
+	background-image: url(../images/icon_011.png);
+}
+.box-container .icon-p{
+	background-image: url(../images/icon_1.png);
+}
+.box-container .icon-p:hover{
+	background-image: url(../images/icon_02.png);
+}
+.box-container input{
+	font-size: 22px;
+}
+.box-container .quantico{
+	width: 368px;
+	line-height: 58px;
+	height: 58px;
+	border:none;
+}
+.box .validation {
+	position: relative;
+}
+.box .validation input{
+  line-height: 58px;
+  height: 58px;
+  width: 275px;
+  border:1px solid #dedede;
+  /*border: none;*/
+}
+.box .validation input[type=text]{
+	padding-left: 20px;
+	font-size: 18px;
+}
+.box .validation [type=button]{
+	position: absolute;
+	top:0px;
+	right: 0px;
+	height: 58px;
+	display: inline-block;
+	text-align: center;
+	background:#f7f7f7;
+	color:#000;
+	border:1px solid #dedede;
+	font-size: 16px;
+	width: 130px;
+}
+.box .validation [type=button][disabled=disabled]{
+	background:#f7f7f7;
+	color:#aeaeae;
+}
+.btn{
+	margin-top:20px;
+	height: 60px;
+	display: block;
+}
+.btn input{
+	border-radius: 5px;
+	display: block;
+	background-color: #1879bd;
+	line-height: 60px;
+	border:none;
+	color:#fff;
+	font-weight: bold;
+	width: 100%;
+}
+
+@media all and (max-width: 1360px) {
+	.box{
+		width: 440px;
+		height: 450px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -220px;
+		margin-top: -190px;
+	}
+	
+	.box-container{
+		padding: 0px 50px;
+		padding-bottom: 20px;
+	}
+	.box-container h1{
+		padding: 10px 0px;
+	}
+   
+    .btn input{
+		line-height: 45px;
+    }
+    .box-container .quantico{
+	 height: 45px;
+	 width: 287px;
+	 line-height: 45px;
+    }
+    .box-container .icon{
+    	height: 45px;
+    	line-height: 45px;
+    	margin-bottom: 12px;
+    	background-position: 10px center;
+   		padding-left: 45px;
+    }
+    .box-container input{
+    	font-size: 16px;
+    }
+
+    .box .validation input[type=text] {
+	  padding-left: 20px;
+	  height: 45px;
+      line-height: 45px;
+	}
+	.box .validation [type=button] {
+		 height: 45px;
+      line-height: 45px;
+      font-size: 14px;
+	}
+	.btn{
+		height: 45px;
+	}
+    .box-container .details {
+     height: 30px;
+     padding-left: 29px;
+     color: #999999;
+  	 font-size: 13px;
+  	 margin-bottom: 5px;
+	}
+	.dialog-box{
+		width: 490px;
+		margin: -200px 0 0 -245px;
+	}
+}
+
