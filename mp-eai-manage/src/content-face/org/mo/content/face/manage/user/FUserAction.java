@@ -191,28 +191,14 @@ public class FUserAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
+      _logger.debug(this, "Update", "Update Begin.(id={1})", context.parameter("id"));
       String id = context.parameter("id");
-      _logger.debug(this, "Update", "Update Begin.(id={1})", id);
-      String passport = context.parameter("passport").replaceAll(" ", "");
-      String password = context.parameter("password").trim();
-      password = RSha1.encode(password);
-      if(passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.indexOf(";") > -1 || passport.length() > 17){
-         basePage.setJson("-1");
-         return "/manage/common/ajax";
-      }
+      String password = context.parameter("password");
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
-      unit.setPassport(passport);
-      if(unit.isPassportChanged()){
-         EResult result = _userConsole.passportExists(logicContext, context.parameter("passport"));
-         if(result == EResult.Success){
-            _logger.debug(this, "updateUser", "updateUser fail,This user already exists.(passport={1})", context.parameter("passport"));
-            basePage.setJson("0");
-            return "/manage/common/ajax";
-         }
-      }
-      unit.setPassword(password);
-      if(unit.isPasswordChanged()){
-         unit.setPassword(unit.password());
+      if(password != null){
+         password = password.trim();
+         password = RSha1.encode(password);
+         unit.setPassword(password);
       }
       unit.setLabel(context.parameter("label"));
       unit.setRoleId(context.parameterAsLong("role"));

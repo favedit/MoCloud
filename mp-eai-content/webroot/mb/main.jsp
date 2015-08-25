@@ -3,7 +3,7 @@
    <html>
 
    <head>
-      <title></title>
+      <title>e租宝-全球实时数据展示系统</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -17,8 +17,7 @@
          <INPUT id='id_code' name='code' type='hidden' />
          <div class="main" style="overflow-x:hidden;">
             <section class="nav-container" id="nav-container">
-               <ul>
-               </ul>
+               <ul></ul>
             </section>
             <section class="main-container" id="main-container">
                <header>
@@ -53,13 +52,12 @@
                         </li>
                      </ul>
                   </div>
-
                   <div class="hd">
                      <ul></ul>
                   </div>
                </div>
                <div class="details-container">
-                  <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                  <jh:equals source="&page.menuString" value="eai.marketer.customer">
                      <ul>
                         <p>客户</p>
                         <li>
@@ -68,7 +66,7 @@
                         </li>
                      </ul>
                   </jh:equals>
-                  <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                  <jh:equals source="&page.menuString" value="eai.marketer.marketer">
                      <ul>
                         <p class="icon2">理财师</p>
                         <li>
@@ -77,7 +75,7 @@
                         </li>
                      </ul>
                   </jh:equals>
-                  <jh:equals source="eai.department.marketer" value="&page.menuString">
+                  <jh:equals source="&page.menuString" value="eai.department.marketer">
                      <ul>
                         <p class="icon3">公司</p>
                         <li>

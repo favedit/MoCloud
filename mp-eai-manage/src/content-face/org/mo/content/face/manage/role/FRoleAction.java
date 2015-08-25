@@ -170,9 +170,9 @@ public class FRoleAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      String code = context.parameter("code").trim();
+      String code = context.parameter("code");
+      code = code == null ? code : code.trim();
       FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, code);
-      System.out.println(code + "," + role + "------------------");
       if(role != null){
          basePage.setMessage("代码已存在！");
          return "#/manage/role/InsertRole";
