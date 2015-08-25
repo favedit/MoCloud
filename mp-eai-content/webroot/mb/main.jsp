@@ -57,7 +57,7 @@
                   </div>
                </div>
                <div class="details-container">
-                  <jh:equals source="&page.menuString" value="eai.marketer.customer">
+                  <jh:equals source="eai.marketer.customer" value="&page.menuString">
                      <ul>
                         <p>客户</p>
                         <li>
@@ -66,7 +66,7 @@
                         </li>
                      </ul>
                   </jh:equals>
-                  <jh:equals source="&page.menuString" value="eai.marketer.marketer">
+                  <jh:equals source="eai.marketer.marketer" value="&page.menuString">
                      <ul>
                         <p class="icon2">理财师</p>
                         <li>
@@ -75,7 +75,7 @@
                         </li>
                      </ul>
                   </jh:equals>
-                  <jh:equals source="&page.menuString" value="eai.department.marketer">
+                  <jh:equals source="eai.department.marketer" value="&page.menuString">
                      <ul>
                         <p class="icon3">公司</p>
                         <li>

@@ -66,4 +66,8 @@
     <Item _uuid="b1fa1b30-5ce8-4634-bd2c-95015c633bda" name="Normal" label="正常" is_valid="Y" note="M#" />
     <Item _uuid="c1ec9ba5-52cd-4ec8-955c-71cbe7b1e3d5" name="Admin" label="管理员" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="7f61ca19-2453-46ff-a10c-d00345599390" name="GcValidationValidate" label="短信校验类型" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="edf3133f-affb-4dd3-ba96-8e2c2e8922a2" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="7cdd323f-7578-42c8-bf6d-b11d4b9cbe50" name="EaiMarketer" label="理财师帐号绑定" is_valid="Y" note="M#" />
+  </Enum>
 </Group>
