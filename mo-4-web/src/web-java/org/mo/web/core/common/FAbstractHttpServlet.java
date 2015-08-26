@@ -221,12 +221,13 @@ public abstract class FAbstractHttpServlet
          for(IWebCookie webCookie : webCookies){
             String cookieName = webCookie.name();
             String cookieValue = webCookie.value();
+            int expiry = webCookie.expiry();
             if(_logger.debugAble()){
-               _logger.debug(this, "process", "Set cookie. {name={1}, value={2}}", cookieName, cookieValue);
+               _logger.debug(this, "process", "Set cookie. {name={1}, value={2}, expiry={3}}", cookieName, cookieValue, expiry);
             }
             Cookie cookie = new Cookie(cookieName, cookieValue);
             cookie.setPath("/");
-            cookie.setMaxAge(-1);
+            cookie.setMaxAge(expiry);
             httpResponse.addCookie(cookie);
          }
       }
