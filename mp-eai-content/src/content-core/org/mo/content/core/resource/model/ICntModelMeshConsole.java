@@ -2,7 +2,6 @@ package org.mo.content.core.resource.model;
 
 import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
-
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicUnit;
@@ -38,7 +37,7 @@ public interface ICntModelMeshConsole
    // @return 网格信息
    //============================================================
    FGcResModelMeshInfo createMesh(ILogicContext logicContext,
-                             FGcResModelMeshInfo mesh);
+                                  FGcResModelMeshInfo mesh);
 
    //============================================================
    // <T>删除网格信息。</T>

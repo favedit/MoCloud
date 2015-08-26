@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150826165637">
+  <FormFrame guid="87732EDBC3CC4C3E8EA0EC72276BE05B" name="logic.common.country.CountryForm" valid="Y" label="国家表单" nowrap="N" location="0,0" size="0,0">
+    <Edit guid="95299013208A49DD9BFBD15F31D1C01B" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="0,0" padding="0,1,0,1" margin="0,1,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="N" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="N" edit_zoom="N" verify_require="N" verify_insert="Y" verify_update="Y" verify_delete="N" label_size="0,0" edit_size="0,0" edit_complete="N" display_mode="VIUDSP" edit_mode="VIU" verify_mode="IU" />
+    <Edit guid="A934E442F0F04D3DB94A011D68188950" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="0,0" padding="0,1,0,1" margin="0,1,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="N" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="N" edit_zoom="N" verify_require="N" verify_insert="Y" verify_update="Y" verify_delete="N" label_size="0,0" edit_size="0,0" edit_complete="N" display_mode="VIUDSP" edit_mode="VIU" verify_mode="IU" />
+  </FormFrame>
+</Content>

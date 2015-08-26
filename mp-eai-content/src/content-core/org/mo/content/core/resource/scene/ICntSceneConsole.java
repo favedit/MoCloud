@@ -1,8 +1,7 @@
 package org.mo.content.core.resource.scene;
 
-import org.mo.content.engine.core.scene.IResSceneConsole;
-
 import org.mo.com.lang.EResult;
+import org.mo.content.engine.core.scene.IResSceneConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

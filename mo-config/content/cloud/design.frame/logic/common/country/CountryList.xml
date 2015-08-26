@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150826165649">
+  <TableFrame guid="C84CC4801FF448F6AD1735854D60B0CA" name="logic.common.country.CountryList" valid="Y" label="国家列表" nowrap="N" location="0,0" size="0,0">
+    <ColumnEdit guid="FA042B17FD2A412BA736096CAF2CB576" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="0,0" padding="0,1,0,1" margin="0,1,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="N" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="N" edit_zoom="N" verify_require="N" verify_insert="Y" verify_update="Y" verify_delete="N" label_size="0,0" display_mode="VIUDSP" edit_mode="VIU" verify_mode="IU" />
+    <ColumnEdit guid="B3B8F9ED3FF44BE29BF950A7B7646190" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="0,0" padding="0,1,0,1" margin="0,1,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="N" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="N" edit_zoom="N" verify_require="N" verify_insert="Y" verify_update="Y" verify_delete="N" label_size="0,0" display_mode="VIUDSP" edit_mode="VIU" verify_mode="IU" />
+  </TableFrame>
+</Content>

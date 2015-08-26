@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150825150721">
-  <List guid="D6B4640DEE274F29BC7889329E0A943E" name="editor.design.frame.ComponentType" label="控件类型" is_valid="true" note="" cache="Y">
+<Content update_date="20150826165549">
+  <List guid="D6B4640DEE274F29BC7889329E0A943E" name="editor.design.frame.ComponentType" label="控件类型" is_valid="Y" note="" cache="Y">
     <Item guid="46036D717D7F4CDD9F4879F109CDBB53" name="formFrame" label="表单页面" is_valid="Y" note="" type="I" value="FormFrame" />
     <Item guid="B4E8E42CB37241DB9D89F00ED510E7A6" name="tableFrame" label="表格页面" is_valid="Y" note="" type="I" value="TableFrame" />
     <Item guid="413D883B33D3493EABFA69242936F571" name="pickerFrame" label="拾取框" is_valid="Y" note="" type="I" value="PickerFrame" />

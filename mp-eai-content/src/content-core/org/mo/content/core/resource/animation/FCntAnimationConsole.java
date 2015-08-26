@@ -1,8 +1,7 @@
 package org.mo.content.core.resource.animation;
 
-import org.mo.content.engine.core.model.animation.IResModelAnimationConsole;
-
 import org.mo.content.engine.core.model.IResModelMeshStreamConsole;
+import org.mo.content.engine.core.model.animation.IResModelAnimationConsole;
 import org.mo.core.aop.face.ALink;
 
 //============================================================
