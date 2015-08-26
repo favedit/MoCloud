@@ -33,6 +33,7 @@ import org.mo.eai.logic.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
+import org.mo.web.core.action.common.FWebCookie;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -157,6 +158,7 @@ public class FIndexAction
       passport = ("T" + passport).trim().substring(1);
       String password = page.password();
       String hostAddress = context.head("x-real-ip");
+      String cookie = context.parameter("saveCookie");
       if(RString.isEmpty(hostAddress)){
          hostAddress = context.head("x-forwarded-for");
          if(RString.isEmpty(hostAddress)){
@@ -222,7 +224,13 @@ public class FIndexAction
             page.setId(guid);
          }
          passport = passport.substring(passport.indexOf(":") + 1, passport.length());
+         page.setIsLogin(true);
          page.setPassport(passport);
+         if(cookie != null){
+            context.outputCookies().push(new FWebCookie("passport", passport));
+         }else{
+            context.outputCookies().push(new FWebCookie("passport", null, 0));
+         }
          return "Main";
       }else{
          page.setMessage(message);
@@ -299,6 +307,7 @@ public class FIndexAction
       page.setId(id);
       String passport = user.passport();
       page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      page.setIsLogin(false);
       return "Main";
    }
 
@@ -360,6 +369,7 @@ public class FIndexAction
       String id = context.parameter("id");
       FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
       if(user == null){
+         page.setIsLogin(false);
          return "Main";
       }
       String passport = user.passport();
@@ -412,6 +422,7 @@ public class FIndexAction
       }
       page.setPassport(passport);
       page.setId(id);
+      page.setIsLogin(false);
       return "Main";
    }
 

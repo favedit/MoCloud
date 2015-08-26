@@ -15,14 +15,13 @@
          id_code.value = code;
          frmMain.submit();
       }
-
       function loginOut() {
          location.href = "Index.wa?do=loginOut";
       }
    </script>
 
    <body>
-      <p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登陆！</span></p>
+      <jh:equals source="true" value="&page.isLogin" ><p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p></jh:equals>
       <FORM name='frmMain' method='post' action='Index.wa'>
          <INPUT id='id_do' name='do' type='hidden' value='chart'>
          <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />

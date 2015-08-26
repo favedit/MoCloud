@@ -22,7 +22,7 @@
             <h1>全球实时数据中心</h1>
             <p class="icon mt-30"><i class=""></i><input id="passport" name="passport" class="quantico account"  type="text" placeholder="账号"></p>
             <p class="icon icon-p"><i class=" "></i><input id="password" name="password" class="quantico password" type="password" placeholder="密码"></p>
-            <p  class="details" ><input id="savePass" onclick="saveCookie(this)" type="checkbox">记住用户名</p>
+            <p  class="details" ><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</p>
             <a href="javascript:;" class="btn"><input id="btn" type="submit"  value="登录"></a>
          </div>
       </div>
@@ -49,19 +49,12 @@
       </div>
    </div>
    <script type="text/javascript">
-      var pass = document.getElementById("passport");
       var passport = getCookieValue("passport");
       if (passport != "") {
-         document.getElementById("savePass").checked = true;
+         document.getElementById("saveCookie").checked = true;
       }
-      pass.value = passport;
-      function saveCookie(o) {
-         if (o.checked) {
-            setCookie("passport", pass.value, 24, "/");
-         } else {
-            deleteCookie("passport", "/");
-         }
-      }
+       document.getElementById("passport").value = passport;
+      
       var $dialogOverlay = document.getElementById("dialog-overlay");
       var $dialogAlert = document.getElementById("dialog_alert");
       var errorVal = document.getElementById("error").innerHTML;

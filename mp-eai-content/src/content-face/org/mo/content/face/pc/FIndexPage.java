@@ -35,6 +35,17 @@ public class FIndexPage
    //用户guid
    protected String _id;
 
+   //是否登录
+   protected boolean _isLogin;
+
+   public boolean isLogin(){
+      return _isLogin;
+   }
+
+   public void setIsLogin(boolean _isLogin){
+      this._isLogin = _isLogin;
+   }
+
    public String id(){
       return _id;
    }
