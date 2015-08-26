@@ -1112,5 +1112,30 @@ ALTER TABLE DT_PSN_USER_RESOURCE ADD CONSTRAINT DT_PSN_USR_RES_FK_USR
 ALTER TABLE DT_PSN_USER_RESOURCE ADD CONSTRAINT DT_PSN_USR_RES_FK_RES 
       FOREIGN KEY (`RESOURCE_ID`) REFERENCES DT_RES_RESOURCE(`OUID`); 
 
+-- ------------------------------------------------------------
+-- Create table [Data.Financial.Marketer]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_MARKETER`;
+CREATE TABLE `ST_FIN_MARKETER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `PASSPORT`                      VARCHAR(40) NOT NULL, 
+   `LABEL`                         VARCHAR(40), 
+   `RANK`                          VARCHAR(40), 
+   `PHONE_CODE`                    VARCHAR(20), 
+   `CARD_CODE`                     VARCHAR(20), 
+   `DEPARTMENT_LABELS`             VARCHAR(200), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
 
+ALTER TABLE ST_FIN_MARKETER 
+   ADD CONSTRAINT ST_FIN_MKT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_MARKETER 
+   ADD CONSTRAINT ST_FIN_MKT_UK_PASSPORT UNIQUE ( PASSPORT ); 
 

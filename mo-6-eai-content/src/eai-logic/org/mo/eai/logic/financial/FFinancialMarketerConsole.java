@@ -1,11 +1,16 @@
 package org.mo.eai.logic.financial;
 
+import com.cyou.gccloud.data.data.FDataFinancialMarketerLogic;
+import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.com.collections.FRow;
 import org.mo.com.console.FConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
+import org.mo.com.lang.FFatalError;
+import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.common.EEaiDataConnection;
+import org.mo.eai.logic.common.EEaiLogicMode;
 
 //============================================================
 // <T>金融控制台。</T>
@@ -15,6 +20,10 @@ public class FFinancialMarketerConsole
       implements
          IFinancialMarketerConsole
 {
+   // 工作模式
+   @AProperty
+   protected String _modeCd = "online";
+
    //============================================================
    // <T>根据理登录名称查找理财师信息。</T>
    //
@@ -22,9 +31,34 @@ public class FFinancialMarketerConsole
    // @param passport 登录名称
    // @return 理财师信息
    //============================================================
-   @Override
-   public FFinancialMarketerInfo findInfo(ILogicContext logicContext,
-                                          String passport){
+   public FFinancialMarketerInfo testFindInfo(ILogicContext logicContext,
+                                              String passport){
+      FDataFinancialMarketerLogic marketerLogic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
+      // 查找数据
+      FSql whereSql = new FSql(FDataFinancialMarketerLogic.PASSPORT + "={passsport}");
+      whereSql.bindString("passsport", passport);
+      FDataFinancialMarketerUnit unit = marketerLogic.search(whereSql);
+      if(unit == null){
+         return null;
+      }
+      // 返回内容
+      FFinancialMarketerInfo info = new FFinancialMarketerInfo();
+      info.setPassport(passport);
+      info.setLabel(unit.label());
+      info.setPhone(unit.phoneCode());
+      info.setCard(unit.cardCode());
+      return info;
+   }
+
+   //============================================================
+   // <T>根据理登录名称查找理财师信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 登录名称
+   // @return 理财师信息
+   //============================================================
+   public FFinancialMarketerInfo onlineFindInfo(ILogicContext logicContext,
+                                                String passport){
       ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       // 查找用户编号
       FSql findSql = new FSql("SELECT id FROM lzh_members WHERE user_name={passport}");
@@ -55,5 +89,24 @@ public class FFinancialMarketerConsole
       info.setPhone(memberInfoRow.get("cell_phone"));
       info.setCard(memberInfoRow.get("idcard"));
       return info;
+   }
+
+   //============================================================
+   // <T>根据理登录名称查找理财师信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 登录名称
+   // @return 理财师信息
+   //============================================================
+   @Override
+   public FFinancialMarketerInfo findInfo(ILogicContext logicContext,
+                                          String passport){
+      if(EEaiLogicMode.Test.equals(_modeCd)){
+         return testFindInfo(logicContext, passport);
+      }else if(EEaiLogicMode.Online.equals(_modeCd)){
+         return onlineFindInfo(logicContext, passport);
+      }else{
+         throw new FFatalError("Invalid info.");
+      }
    }
 }

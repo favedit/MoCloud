@@ -1,0 +1,13 @@
+package org.mo.eai.logic.common;
+
+//============================================================
+// <T>逻辑模式。</T>
+//============================================================
+public class EEaiLogicMode
+{
+   // 测试模式
+   public final static String Test = "test";
+
+   // 在线模式
+   public final static String Online = "online";
+}

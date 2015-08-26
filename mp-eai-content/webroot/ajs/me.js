@@ -36283,6 +36283,14 @@ MO.MUiComponent_innerDump = function MUiComponent_innerDump(info, level){
    }
    return info;
 }
+MO.MUiContainer = function MUiContainer(o){
+   o = MO.Class.inherits(this, o);
+   o._scrollCd   = MO.Class.register(o, new MO.APtyEnum('_scrollCd', null, MO.EUiScroll, MO.EUiScroll.None));
+   o.createChild = MO.Method.empty;
+   o.appendChild = MO.Method.empty;
+   o.removeChild = MO.Method.empty;
+   return o;
+}
 MO.MUiControl = function MUiControl(o){
    o = MO.Class.inherits(this, o);
    o._visible      = MO.Class.register(o, [new MO.APtyString('_visible'), new MO.AGetter('_visible')], true);
@@ -37942,19 +37950,6 @@ MO.RDesktop.prototype.release = function RDesktop_release(){
    }
 }
 MO.Desktop = new MO.RDesktop();
-MO.MGuiContainer = function MGuiContainer(o){
-   o = MO.Class.inherits(this, o);
-   o.createChild = MO.MGuiContainer_createChild;
-   o.appendChild = MO.Method.empty;
-   o.removeChild = MO.Method.empty;
-   return o;
-}
-MO.MGuiContainer_createChild = function MGuiContainer_createChild(xconfig){
-   var o = this;
-   var child = MO.RGuiControl.newInstance(xconfig);
-   child._parent = o;
-   return child;
-}
 MO.MGuiDispatcher = function MGuiDispatcher(o){
    o = MO.Class.inherits(this, o);
    o.onOperationDown   = MO.MGuiDispatcher_onOperationDown;
@@ -38280,8 +38275,15 @@ MO.FGuiComponent_dispose = function FGuiComponent_dispose(){
    o.__base.FComponent.dispose.call(o);
 }
 MO.FGuiContainer = function FGuiContainer(o){
-   o = MO.Class.inherits(this, o, MO.FGuiControl, MO.MGuiContainer);
+   o = MO.Class.inherits(this, o, MO.FGuiControl, MO.MUiContainer);
+   o.createChild = MO.FGuiContainer_createChild;
    return o;
+}
+MO.FGuiContainer_createChild = function FGuiContainer_createChild(xconfig){
+   var o = this;
+   var child = MO.RGuiControl.newInstance(xconfig);
+   child._parent = o;
+   return child;
 }
 MO.FGuiControl = function FGuiControl(o){
    o = MO.Class.inherits(this, o, MO.FGuiComponent, MO.MUiControl, MO.MGraphicObject, MO.MRenderableLinker, MO.MListener, MO.MUiMargin, MO.MUiPadding, MO.MUiBorder, MO.MGuiSize);
@@ -38864,7 +38866,7 @@ MO.RGuiControl.prototype.innerbuild = function RGuiControl_innerbuild(parentCont
    if(control.__typed){
       parentControl = control;
    }
-   if(MO.Class.isClass(control, MO.MGuiContainer) && xconfig.hasNode()){
+   if(MO.Class.isClass(control, MO.MUiContainer) && xconfig.hasNode()){
       var nodes = xconfig.nodes();
       var nodeCount = nodes.count();
       for(var i = 0; i < nodeCount; i++){

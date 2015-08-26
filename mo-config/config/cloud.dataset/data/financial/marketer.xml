@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="6681a37a-6f78-4d35-82b2-570c7c1607d1" name="data.financial.marketer" label="M#12cn15理财师信息" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Marketer" data_name="ST_FIN_MARKETER" data_alias="ST_FIN_MKT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="4cbb3e24-de4b-4a66-b80e-ed4ed1cd9ce2" name="passport" label="M#12cn13登录名" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+  <FieldString _uuid="a79d73dc-d487-4872-86b7-b5c0db0bd356" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="4e58c448-92d5-4c1e-a60d-73cbb0820846" name="rank" label="M#12cn12职务" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RANK" data_size="40" />
+  <FieldString _uuid="d2a8b060-c8df-462b-b9f5-039f81bf7acc" name="phone_code" label="M#12cn14电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CODE" data_size="20" />
+  <FieldString _uuid="fd2c56d2-2e3e-4b9b-8a8b-c3cc3b996455" name="card_code" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_CODE" data_size="20" />
+  <FieldString _uuid="fb9dba05-d7c6-4819-a038-38bc36526318" name="department_labels" label="M#12cn16部门标签集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABELS" data_size="200" />
+  <FieldTemplate _uuid="b68b87a3-2f9d-4bcc-a86e-c223b5cd9ddd" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
