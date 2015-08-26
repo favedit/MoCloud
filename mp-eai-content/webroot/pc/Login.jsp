@@ -56,7 +56,6 @@
       }
       pass.value = passport;
       function saveCookie(o) {
-         alert(o.checked);
          if (o.checked) {
             setCookie("passport", pass.value, 24, "/");
          } else {
