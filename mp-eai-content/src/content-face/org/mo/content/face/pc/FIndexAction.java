@@ -260,7 +260,7 @@ public class FIndexAction
                               FIndexPage page){
       page.setMessage(null);
       String passport = context.parameter("passport");
-      //根据帐号查找用户及手机号(不是理财师：您不是理财师。)
+      //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
          page.setMessage("账户不能为空");
          return null;
@@ -285,6 +285,7 @@ public class FIndexAction
       unit.setCheckCode(random);
       unit.setValidateCd(EGcValidationValidate.EaiMarketer);
       _validationConsole.doInsert(logicContext, unit);
+      page.setMessage("1");
       return null;
    }
 
