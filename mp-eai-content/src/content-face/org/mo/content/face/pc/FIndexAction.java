@@ -153,8 +153,9 @@ public class FIndexAction
                        ILogicContext logicContext,
                        FIndexPage page){
       // 获得参数
-      String passport = RString.trim(page.passport());
-      String password = RString.trim(page.password());
+      String passport = page.passport();
+      passport = ("T" + passport).trim().substring(1);
+      String password = page.password();
       String hostAddress = context.head("x-real-ip");
       if(RString.isEmpty(hostAddress)){
          hostAddress = context.head("x-forwarded-for");

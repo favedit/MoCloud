@@ -85,7 +85,6 @@ public class FDataPersonAccessAuthorityConsole
                       String passport,
                       String password){
       _logger.debug(this, "doLogin", "Login process. (passport={1}, password={2})", passport, password);
-      passport = ("T" + passport).trim().substring(1);
       if(RString.isEmpty(passport) || passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
          _logger.debug(this, "doLogin", "Login passport illegal. (passport={1})", passport);
          return EGcAuthorityResult.PassportIllegal;

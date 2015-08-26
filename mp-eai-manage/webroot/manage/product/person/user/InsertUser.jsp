@@ -7,11 +7,15 @@
       <script>
          function doSubmit() {
             var passport = $("#passport").val();
-            if (!ischinese(passport)) {
-               alert("账号由字母及数字或下划线组成！");
-            } else {
-               form.submit();
+            if (passport.length > 18) {
+               alert("账号不能超过18位");
+               return;
             }
+            if (!ischinese(passport)) {
+               alert("账号和密码，由字母及数字或下划线组成！");
+               return;
+            }
+            form.submit();
          }
       </script>
    </HEAD>
@@ -47,7 +51,7 @@
                      <td align="left">帐号</td>
                      <td align="left">
                         <input id="passport" name="passport" style="width:200px;text-align:left;" value="" />
-                        <font color="red">只支持英文、数字和下划线</font>
+                        <font color="red">只支持英文、数字和下划线，长度18位以内</font>
                      </td>
                   </tr>
                   <tr>
@@ -86,7 +90,7 @@
                   <tr>
                      <td align="left">备注</td>
                      <td align="left">
-                        <textarea name="note" cols="60" rows="10"></textarea>
+                        <textarea name="note" cols="80" rows="10"></textarea>
                      </td>
                   </tr>
                </table>
