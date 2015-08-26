@@ -27,6 +27,7 @@
       <p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登陆！</span></p>
       <FORM name='frmMain' method='post' action='Index.wa'>
          <INPUT id='id_do' name='do' type='hidden' value='chart'>
+         <INPUT name='id' type='hidden' value="<jh:write source='&page.id'" />
          <INPUT id='id_code' name='code' type='hidden'>
          <header class="header floatBtn">
             <div class="head-left"><img class="logo" src="images/main/logo.png">

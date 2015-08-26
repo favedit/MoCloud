@@ -6,6 +6,7 @@ import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.data.logger.FLoggerPersonUserModuleUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
@@ -16,6 +17,7 @@ import org.mo.com.lang.RRandom;
 import org.mo.com.lang.RString;
 import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.common.EChartPage;
+import org.mo.content.core.manage.logger.user.ILoggerModuleConsole;
 import org.mo.content.core.manage.person.module.IModuleConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.role.IRoleModuleConsole;
@@ -77,11 +79,20 @@ public class FIndexAction
    @ALink
    protected IFinancialMarketerConsole _marketerConsole;
 
+   @ALink
+   protected ILoggerModuleConsole _loggerModuleConsole;
+
    //OA角色
    protected final String role_oa = "eai.oa";
 
    //理财师角色
    protected final String role_marketer = "eai.marketer";
+
+   protected final String module_code_customer = "eai.marketer.customer";
+
+   protected final String module_code_marketer = "eai.marketer.marketer";
+
+   protected final String module_code_department = "eai.department.marketer";
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -235,8 +246,28 @@ public class FIndexAction
                        ILogicContext logicContext,
                        FIndexPage page){
       String code = context.parameter("code");
+      String guid = context.parameter("id");
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
       page.setSceneCode(code);
+      //保存日志
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, guid);
+      if(user != null){
+         FLoggerPersonUserModuleUnit module = _loggerModuleConsole.doPrepare(logicContext);
+         module.setUserId(user.ouid());
+         module.setPassport(user.passport());
+         module.setBrowserUri(context.requestUrl());
+         module.setPageInfo(context.parameters().dump());
+         module.setModuleAction("view");
+         module.setModuleResult("Success");
+         if(code.equals("ChartMarketerCustomer")){
+            module.setModuleCode(module_code_customer);
+         }else if(code.equals("ChartMarketerMarketer")){
+            module.setModuleCode(module_code_marketer);
+         }else if(code.equals("ChartDepartmentMarketer")){
+            module.setModuleCode(module_code_department);
+         }
+         _loggerModuleConsole.doInsert(logicContext, module);
+      }
       return EChartPage.Scene;
    }
 
@@ -290,21 +321,21 @@ public class FIndexAction
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
          page.setMessage("账户不能为空");
-         return null;
+         return "ajax";
 
       }
       FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
       if(marketer == null){
          page.setMessage("您无理财师权限！");
-         return null;
+         return "ajax";
       }
       //获取手机号码 －〉 发送验证码
-      String mobile = "18710555908";
+      String mobile = marketer.phone();
       String random = RRandom.getNumberRandom(4);
       int result = sendMessage(random, mobile);
       if(result < 0){
          page.setMessage("验证码发送失败");
-         return null;
+         return "ajax";
       }
       //保存数据库
       FCacheSystemValidationUnit unit = _validationConsole.doPrepare(logicContext);

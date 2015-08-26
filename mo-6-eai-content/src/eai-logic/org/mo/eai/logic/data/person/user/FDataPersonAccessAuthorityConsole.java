@@ -86,12 +86,6 @@ public class FDataPersonAccessAuthorityConsole
                       String password){
       _logger.debug(this, "doLogin", "Login process. (passport={1}, password={2})", passport, password);
       passport = ("T" + passport).trim().substring(1);
-      //      password = RString.trim(password);
-      //      String regex = "[a-zA-Z0-9_\u4e00-\u9fa5]+";
-      //      if(!passport.matches(regex)){
-      //         _logger.debug(this, "doLogin", "Login passport illegal. (passport={1})", passport);
-      //         return EGcAuthorityResult.PassportIllegal;
-      //      }
       if(RString.isEmpty(passport) || passport.indexOf("'") > -1 || passport.indexOf("%") > -1 || passport.length() > 18){
          _logger.debug(this, "doLogin", "Login passport illegal. (passport={1})", passport);
          return EGcAuthorityResult.PassportIllegal;

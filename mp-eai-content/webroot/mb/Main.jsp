@@ -14,6 +14,7 @@
       <FORM name='frmMain' method='post' action='Index.wa'>
          <INPUT id='id_do' name='do' type='hidden' value='chart' />
          <INPUT id='id_code' name='code' type='hidden' />
+         <INPUT name='id' type='hidden' value="<jh:write source='&page.id'" />
          <div class="main" style="overflow-x:hidden;">
             <section class="nav-container" id="nav-container">
                <ul></ul>

@@ -16,7 +16,7 @@
             <section class="main-container" id="main-container">
                <section class="binding-container" style="display:block;">
                    <header>
-                     <a href="Main.jsp"><img class="return-img" src="images/fanhui.png"></a>
+                     <a href="Index.wa?do=main&id=<jh:write source='&page.id' />"><img class="return-img" src="images/fanhui.png"></a>
                       账号绑定
                   </header>
                   <ul class="fieldsWidget">
