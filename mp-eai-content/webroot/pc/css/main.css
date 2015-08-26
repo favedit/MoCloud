@@ -30,6 +30,7 @@ body{
 	height:56px;
 	background: #fff;
 	min-width: 1024px;
+	width: 100%;
 }
 
 .head-left{
@@ -45,6 +46,15 @@ body{
 	height: 100%;
 	overflow: hidden;
 	/*min-height: \*/
+}
+.loding{
+	display: inline-block;
+	left: 50%;
+	top:50%;
+	width: 400px;
+	position: absolute;
+	margin-left: -150px;
+	margin-top: -110px;
 }
 .head-left span{
 	display:inline-block;
@@ -217,7 +227,7 @@ body{
 	display: block;
 	min-width:500px;
 	/*height: 480px;*/
-	width: 79%;
+	width: 78%;
 	float: left;
 	height: 100%;
 	position: relative;
@@ -263,11 +273,8 @@ p.icon-picture span{
 	background-position: 10px center;
 }*/
 .imag-details{
-	/*max-width: 1300px;*/
 	width:80%;
-	/*min-width:800px;*/
 	margin:0px auto;
-	/*position: relative;*/
 	-webkit-animation-duration: 500ms;
 	-moz-animation-duration: 500ms;
 	-o-animation-duration: 500ms;
@@ -279,6 +286,7 @@ p.icon-picture span{
 	top:50%;
 	margin-left: -650px;
 	margin-top: -250px;
+	display: none;
 }
 
 .imag-details ul li{
@@ -331,12 +339,11 @@ p.icon-picture span{
 	display: block;
 }
 .titles-container{
-	/*height: 150px;*/
+	display: none;
 	width: 20%;
-	/*min-height: 150px;*/
 	text-align: center;
 	float: right;
-	background:rgba(0, 0, 0, 0.2);
+	background:#CBCBCB;
 	height: 100%;
 	padding-top: 30px;
 }
@@ -437,7 +444,6 @@ p.icon-picture span{
 	position: relative;
 }
 .box-prompt{
-	color:red;
 	line-height: 30px;
 	height: 30px;
 	display: inline-block;
@@ -447,6 +453,7 @@ p.icon-picture span{
 	background: url(../images/main/png.png) no-repeat 10px center;
 	background-size: 14px;
     padding-left: 28px;
+    color:red;
 }
 .box-container h1{
 	padding: 24px 0px;
@@ -459,7 +466,6 @@ p.icon-picture span{
 	display: block;
 	background-repeat: no-repeat;
 	background-position: center;
-	border:1px solid red;
 	height: 60px;
 	border:none;
 	line-height: 60px;
@@ -490,10 +496,10 @@ p.icon-picture span{
 	font-size: 22px;
 }
 .box-container .quantico{
-	width: 368px;
+	width: 365px;
 	line-height: 58px;
 	height: 58px;
-	border:none;
+	border:0 none;
 }
 .box .validation {
 	position: relative;

@@ -1853,7 +1853,6 @@ Copyright (c) 2015 Daniel Eden
   backface-visibility: visible !important;
   -webkit-animation-name: flipInX;
   animation-name: flipInX;
-  -webkit-animation-duration: 1s;
 }
 
 @-webkit-keyframes flipInY {

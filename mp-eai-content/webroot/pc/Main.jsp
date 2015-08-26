@@ -1,17 +1,15 @@
 <%@ include file='/apl/public.inc' %>
-   <!DOCTYPE >
-   <html>
-   <head>
-      <title></title>
-      <meta charset="UTF-8" />
-      <meta name="baidu-site-verification" content="r49gUEsySi" />
-      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-      <link rel="stylesheet" type="text/css" href="css/reset.css">
-      <link rel="stylesheet" type="text/css" href="css/animate.css">
-      <link rel="stylesheet" type="text/css" href="css/main.css">
-      <script type="text/javascript" src="js/jquery.min.js"></script>
-      <script type="text/javascript" src="js/main.js"></script>
-   </head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link rel="stylesheet" type="text/css" href="css/reset.css">
+   <link rel="stylesheet" type="text/css" href="css/animate.css">
+   <link rel="stylesheet" type="text/css" href="css/main.css">
+   <script type="text/javascript" src="js/jquery.min.js"></script>
+   <script type="text/javascript" src="js/main.js"></script>
+ </head>
    <script>
       function doChart(code) {
          id_code.value = code;
@@ -29,7 +27,7 @@
          <INPUT id='id_do' name='do' type='hidden' value='chart'>
          <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
          <INPUT id='id_code' name='code' type='hidden'>
-         <header class="header floatBtn">
+         <div class="header floatBtn">
             <div class="head-left"><img class="logo" src="images/main/logo.png">
                <p class="pl-10"></p>
             </div>
@@ -46,64 +44,66 @@
                   </span>
                </div>
             </jh:notEquals>
-         </header>
-         <div class="clear"></div>
+            <div class="clear"></div>
+         </div>
+        
          <div class="main" style="display:;">
-            <div class="imag-container">
-               <div class="imag-details">
-                  <p class="icon-picture">
-                     <jh:equals source="eai.marketer.customer" value="&page.menuString">
-                        <span>客户</span>
-                     </jh:equals>
-                     <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                        <span style="display:none;">理财师</span>
-                     </jh:equals>
-                     <jh:equals source="eai.department.marketer" value="&page.menuString">
-                        <span style="display:none;">公司</span>
-                     </jh:equals>
-                  </p>
-                  <div id="container_details" style="">
-                     <ul>
+            <img class="loding" src="images/main/loding.gif">
+               <div class="imag-container">
+                  <div class="imag-details">
+                     <p class="icon-picture">
                         <jh:equals source="eai.marketer.customer" value="&page.menuString">
-                           <li onclick='doChart("ChartMarketerCustomer")'>
-                              <img src="images/main/3.png">
-                              <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
-                           </li>
+                           <span>全球实时投资数据展示中心</span>
                         </jh:equals>
                         <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                           <li onclick='doChart("ChartMarketerMarketer")'>
-                              <img src="images/main/1.png">
-                              <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
-                           </li>
+                           <span style="display:none;">理财师排行实时投资数据展示</span>
                         </jh:equals>
                         <jh:equals source="eai.department.marketer" value="&page.menuString">
-                           <li onclick='doChart("ChartDepartmentMarketer")'>
-                              <img src="images/main/2.png">
-                              <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
-                           </li>
+                           <span style="display:none;">理财师管理实时投资数据展示 </span>
                         </jh:equals>
-                     </ul>
+                     </p>
+                     <div id="container_details" style="">
+                        <ul>
+                           <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                              <li onclick='doChart("ChartMarketerCustomer")'>
+                                 <img src="images/main/3.png">
+                                 <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
+                              </li>
+                           </jh:equals>
+                           <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                              <li onclick='doChart("ChartMarketerMarketer")'>
+                                 <img src="images/main/1.png">
+                                 <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
+                              </li>
+                           </jh:equals>
+                           <jh:equals source="eai.department.marketer" value="&page.menuString">
+                              <li onclick='doChart("ChartDepartmentMarketer")'>
+                                 <img src="images/main/2.png">
+                                 <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
+                              </li>
+                           </jh:equals>
+                        </ul>
+                     </div>
                   </div>
                </div>
-            </div>
-      </FORM>
 
-      <div class="titles-container">
-         <ul>
-            <p class="play_prev"></p>
-            <jh:equals source="eai.marketer.customer" value="&page.menuString">
-               <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
-            </jh:equals>
-            <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-               <li><i class="mask"></i><img src="images/main/1-1.PNG"></li>
-            </jh:equals>
-            <jh:equals source="eai.department.marketer" value="&page.menuString">
-               <li><i class="mask"></i><img src="images/main/2-2.png"></li>
-            </jh:equals>
-            <p class="play_next"></p>
-         </ul>
+            <div class="titles-container">
+               <ul>
+                  <p class="play_prev"></p>
+                  <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                     <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
+                  </jh:equals>
+                  <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                     <li><i class="mask"></i><img src="images/main/1-1.PNG"></li>
+                  </jh:equals>
+                  <jh:equals source="eai.department.marketer" value="&page.menuString">
+                     <li><i class="mask"></i><img src="images/main/2-2.png"></li>
+                  </jh:equals>
+                  <p class="play_next"></p>
+               </ul>
+            </div>
       </div>
-      </div>
+    </FORM>
    </body>
 
    </html>

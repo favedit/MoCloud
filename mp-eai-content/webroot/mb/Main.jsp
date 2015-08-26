@@ -52,35 +52,30 @@
                         <ul></ul>
                      </div>
                   </div>
+
                   <div class="details-container">
                      <jh:equals source="eai.marketer.customer" value="&page.menuString">
                         <ul>
-                           <!-- <p>客户</p> -->
                            <li>
-                              <p>客户</p>
-                              <span>投资实时数据图</span>
-                              <img src="images/img.png" onclick='doChart("ChartMarketerCustomer")'>
+                              <p>全球实时投资数据展示中心</p>
+                              <img src="../pc/images/main/3-3.png" onclick='doChart("ChartMarketerCustomer")'>
 
                            </li>
                         </ul>
                      </jh:equals>
                      <jh:equals source="eai.marketer.marketer" value="&page.menuString">
                         <ul>
-                           <!-- <p class="icon2">理财师</p> -->
                            <li>
-                              <p class="icon2">理财师</p>
-                              <span>投资实时数据图</span>
-                              <img src="images/img.png" onclick='doChart("ChartMarketerMarketer")'>
+                              <p class="icon2">理财师排行实时投资数据展示</p>
+                              <img src="../pc/images/main/1-1.PNG" onclick='doChart("ChartMarketerMarketer")'>
                            </li>
                         </ul>
                      </jh:equals>
                      <jh:equals source="eai.department.marketer" value="&page.menuString">
                         <ul>
-                           <!-- <p class="icon3">公司</p> -->
                            <li>
-                              <p class="icon3">公司</p>
-                              <span>投资实时数据图</span>
-                              <img src="images/img.png" onclick='doChart("ChartDepartmentMarketer")'>
+                              <p class="icon3">理财师管理实时投资数据展示</p>
+                              <img src="../pc/images/main/2-2.png" onclick='doChart("ChartDepartmentMarketer")'>
                            </li>
                         </ul>
                      </jh:equals>
@@ -104,7 +99,6 @@
          var $mainContainer = document.getElementById("main-container");
          var $navContainer = document.getElementById("nav-container");
          var state = true;
-
          // $btnList.onclick = function() {
          //    if (state) {
          //       $mainContainer.setAttribute("details", "slidebar");

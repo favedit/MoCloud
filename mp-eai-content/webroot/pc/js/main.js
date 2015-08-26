@@ -16,13 +16,14 @@
         validationTel:"验证码不能为空",
         validationErrorTel:"验证码错误"
       };
-    // 绑定帐号
+     $(".loding").hide();
+     $imagContainers.show();
+     $imagDetails.show();
      
-    
+    // 绑定帐号
      if($boxPrompt.text()!=""){
       $boxPrompt.show();
      }
-
     ctrl.setViewport = function (){
       var h = $imagContainer.find("li").eq(0).height();
           $imagDetails.height(h);
