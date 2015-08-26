@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="83719203-7ede-460d-8554-1658f482ada5" name="logger.person.user.module" label="M#12cn16人员模块访问" is_valid="Y" note="M#" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Module" data_name="LG_PSN_USER_MODULE" data_alias="LG_PSN_USR_MOD" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+  <FieldRecordId _uuid="ede04225-4aa9-4428-bd9e-783f30ee7045" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldString _uuid="392193ca-c84a-4f45-8254-df8602cc07f5" name="passport" label="M#12cn14登录名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+  <FieldString _uuid="e87944ad-ae93-4c04-9329-3499b90a06e7" name="module_code" label="M#12cn14模块代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_CODE" data_size="40" />
+  <FieldString _uuid="5c7871e2-404b-4955-bd5a-91f2fc387153" name="module_action" label="M#12cn14模块命令" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_ACTION" data_size="40" />
+  <FieldString _uuid="d41358bf-33ee-4d8b-b0d9-64228500ee17" name="module_result" label="M#12cn14模块结果" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_RESULT" data_size="200" />
+  <FieldString _uuid="0794e3b1-9e95-4a9f-86e8-7dce278729f3" name="browser_uri" label="M#12cn14浏览地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BROWSER_URI" data_size="800" />
+  <FieldString _uuid="5f4b2022-e8c1-40f0-808b-143b82e54bfa" name="page_info" label="M#12cn14页面信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PAGE_INFO" data_size="2000" />
+  <FieldTemplate _uuid="96cf207d-fa66-4d68-b498-99fbcf2b2d41" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
+</DataStore>

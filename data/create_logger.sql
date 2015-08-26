@@ -45,3 +45,28 @@ CREATE TABLE `LG_PSN_USER_ACCESS`
 
 ALTER TABLE LG_PSN_USER_ACCESS 
    ADD CONSTRAINT LG_PSN_USR_ACS_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Logger.Person.User.Module]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `LG_PSN_USER_MODULE`;
+CREATE TABLE `LG_PSN_USER_MODULE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `PASSPORT`                      VARCHAR(40), 
+   `MODULE_CODE`                   VARCHAR(40), 
+   `MODULE_ACTION`                 VARCHAR(40), 
+   `MODULE_RESULT`                 VARCHAR(200), 
+   `BROWSER_URI`                   VARCHAR(800), 
+   `PAGE_INFO`                     VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE LG_PSN_USER_MODULE 
+   ADD CONSTRAINT LG_PSN_USR_MOD_UK_GID UNIQUE ( GUID ); 
