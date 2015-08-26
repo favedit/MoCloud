@@ -21,18 +21,20 @@
             </section>
             <section class="main-container" id="main-container">
                <section class="box-container" style="display: block;">
-                   <header>
+                  <header>
                      <span class="btn-list" id="btn-list"></span> 全球实时数据中心
-                        <div class="header-r"><img src="images/re.png"></div>
-                        <ul class="header-list bounceInDown">
-                           <span>当前帐号</span>
-                           <p>er@153.com</p>
-                           <li class="binding-icon"><a href="Binding.jsp">帐号绑定</a></li>
-                           <li onclick="loginOut();">退出</li>
-                        </ul>
-                        <div class="shadow"></div>
+                     <div class="header-r"><img src="images/re.png"></div>
+                     <ul class="header-list bounceInDown">
+                        <span>当前帐号</span>
+                        <p>
+                           <jh:write source='&page.passport' />
+                        </p>
+                        <li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li>
+                        <li onclick="loginOut();">退出</li>
+                     </ul>
+                     <div class="shadow"></div>
                   </header>
-                  <div class="banner" id="banner" >
+                  <div class="banner" id="banner">
                      <div class="bd">
                         <ul>
                            <li>
@@ -51,33 +53,37 @@
                      </div>
                   </div>
                   <div class="details-container">
+                     <jh:equals source="eai.marketer.customer" value="&page.menuString">
                         <ul>
                            <!-- <p>客户</p> -->
                            <li>
-                               <p>客户</p>
+                              <p>客户</p>
                               <span>投资实时数据图</span>
                               <img src="images/img.png" onclick='doChart("ChartMarketerCustomer")'>
-                             
+
                            </li>
                         </ul>
+                     </jh:equals>
+                     <jh:equals source="eai.marketer.marketer" value="&page.menuString">
                         <ul>
                            <!-- <p class="icon2">理财师</p> -->
                            <li>
                               <p class="icon2">理财师</p>
                               <span>投资实时数据图</span>
                               <img src="images/img.png" onclick='doChart("ChartMarketerMarketer")'>
-                               
                            </li>
                         </ul>
+                     </jh:equals>
+                     <jh:equals source="eai.department.marketer" value="&page.menuString">
                         <ul>
                            <!-- <p class="icon3">公司</p> -->
                            <li>
                               <p class="icon3">公司</p>
                               <span>投资实时数据图</span>
                               <img src="images/img.png" onclick='doChart("ChartDepartmentMarketer")'>
-                               
                            </li>
                         </ul>
+                     </jh:equals>
                   </div>
                </section>
             </section>
@@ -98,7 +104,7 @@
          var $mainContainer = document.getElementById("main-container");
          var $navContainer = document.getElementById("nav-container");
          var state = true;
-        
+
          // $btnList.onclick = function() {
          //    if (state) {
          //       $mainContainer.setAttribute("details", "slidebar");
@@ -118,24 +124,25 @@
             $shadow.style.display = "block";
          }
          $shadow.onclick = function() {
-            $headerList.style.display = "none";
-            this.style.display = "none";
-         }
-         // binding-icon
+               $headerList.style.display = "none";
+               this.style.display = "none";
+            }
+            // binding-icon
          var $bindingIcon = document.getElementsByClassName("binding-icon")[0];
          var $bindingContainer = document.getElementsByClassName("binding-container")[0];
          var $boxContainer = document.getElementsByClassName("box-container")[0];
-         $bindingIcon.onclick = function () {
+         $bindingIcon.onclick = function() {
             $headerList.style.display = "none";
             $shadow.style.display = "none";
             $bindingContainer.style.display = "block";
             $boxContainer.style.display = "none";
          }
-       
+
          function doChart(code) {
             id_code.value = code;
             frmMain.submit();
          }
+
          function loginOut() {
             location.href = "Index.wa?do=loginOut";
          }

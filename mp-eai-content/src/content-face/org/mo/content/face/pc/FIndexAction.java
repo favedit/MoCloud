@@ -123,7 +123,7 @@ public class FIndexAction
             page.setUserType("host");
             synchronizeData(logicContext, page, passport, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
-            return "/pc/main";
+            return "Main";
          }
       }
       // 非法设置
@@ -205,13 +205,13 @@ public class FIndexAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         passport = passport.substring(passport.indexOf(":") + 1, passport.length());
-         String guid = _personAccessAuthorityConsole.findByPassport(logicContext, passport).guid();
+         String guid = _userConsole.findByPassport(logicContext, passport).guid();
          if(!RString.isEmpty(guid)){
             page.setId(guid);
          }
+         passport = passport.substring(passport.indexOf(":") + 1, passport.length());
          page.setPassport(passport);
-         return "/pc/main";
+         return "Main";
       }else{
          page.setMessage(message);
          return "Login";
@@ -240,11 +240,34 @@ public class FIndexAction
                           ILogicContext logicContext,
                           FIndexPage page){
       // 清空参数
+      page.setId(null);
       page.setPassport(null);
       page.setPassword(null);
-      page.setMessage(null);
       page.setUserType(null);
+      page.setMessage(null);
       return "Login";
+   }
+
+   //============================================================
+   // <T>主页面。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String main(IWebContext context,
+                      ILogicContext logicContext,
+                      FIndexPage page){
+      String id = context.parameter("id");
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
+      if(user == null){
+         return "Login";
+      }
+      page.setId(id);
+      String passport = user.passport();
+      page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      return "Main";
    }
 
    //============================================================
@@ -272,7 +295,7 @@ public class FIndexAction
          return null;
       }
       //获取手机号码 －〉 发送验证码
-      String mobile = marketer.phone();
+      String mobile = "18710555908";
       String random = RRandom.getNumberRandom(4);
       int result = sendMessage(random, mobile);
       if(result < 0){
@@ -286,7 +309,30 @@ public class FIndexAction
       unit.setValidateCd(EGcValidationValidate.EaiMarketer);
       _validationConsole.doInsert(logicContext, unit);
       page.setMessage("1");
-      return null;
+      return "ajax";
+   }
+
+   //============================================================
+   // <T>账号绑定之前处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String bind(IWebContext context,
+                      ILogicContext logicContext,
+                      FIndexPage page){
+      page.setMessage(null);
+      String id = context.parameter("id");
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
+      if(user == null){
+         return "Main";
+      }
+      String passport = user.passport();
+      page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      page.setId(id);
+      return "Binding";
    }
 
    //============================================================
@@ -306,22 +352,22 @@ public class FIndexAction
       String id = context.parameter("id");
       if(RString.isEmpty(passport) || RString.isEmpty(validate)){
          page.setMessage("账号或验证码不能为空");
-         return null;
+         return "Binding";
       }
       FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, passport);
       if(unit == null){
          page.setMessage("验证码错误");
-         return null;
+         return "Binding";
       }
       String checkCode = unit.checkCode();
       if(!checkCode.equals(validate)){
          page.setMessage("验证码错误");
-         return null;
+         return "Binding";
       }
       //修改用户的角色
       if(RString.isEmpty(id)){
          page.setMessage("用户失效,请重新登录绑定.");
-         return null;
+         return "Binding";
       }
       //获取用户
       FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
@@ -331,7 +377,9 @@ public class FIndexAction
          user.setRoleId(role.ouid());
          _userConsole.doUpdate(logicContext, user);
       }
-      return null;
+      page.setPassport(passport);
+      page.setId(id);
+      return "Main";
    }
 
    //============================================================

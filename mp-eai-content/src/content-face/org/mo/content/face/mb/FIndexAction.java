@@ -1,5 +1,6 @@
 package org.mo.content.face.mb;
 
+import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
@@ -9,7 +10,11 @@ import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
+import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
+import com.jianzhou.sdk.BusinessService;
+import org.mo.com.lang.RRandom;
 import org.mo.com.lang.RString;
+import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.common.EChartPage;
 import org.mo.content.core.manage.person.module.IModuleConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
@@ -21,6 +26,8 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
+import org.mo.eai.logic.financial.FFinancialMarketerInfo;
+import org.mo.eai.logic.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
@@ -61,6 +68,20 @@ public class FIndexAction
 
    @ALink
    protected IEntryConsole _entryConsole;
+
+   //短信校验控制台
+   @ALink
+   protected IValidationConsole _validationConsole;
+
+   //理财师控制台
+   @ALink
+   protected IFinancialMarketerConsole _marketerConsole;
+
+   //OA角色
+   protected final String role_oa = "eai.oa";
+
+   //理财师角色
+   protected final String role_marketer = "eai.marketer";
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -105,7 +126,7 @@ public class FIndexAction
             String passport = "white-host::" + hostAddress;
             synchronizeData(logicContext, page, passport, EGcPersonUserFrom.EaiHost);
             page.setUserType("host");
-            return "main";
+            return "Main";
          }
       }
       // 非法设置
@@ -189,8 +210,13 @@ public class FIndexAction
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
          page.setSceneCode("ChartMarketerCustomer");
-         page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
-         return "main";
+         String guid = _userConsole.findByPassport(logicContext, passport).guid();
+         if(!RString.isEmpty(guid)){
+            page.setId(guid);
+         }
+         passport = passport.substring(passport.indexOf(":") + 1, passport.length());
+         page.setPassport(passport);
+         return "Main";
       }else{
          page.setMessage(message);
          return "Login";
@@ -227,6 +253,155 @@ public class FIndexAction
    }
 
    //============================================================
+   // <T>主页面。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String main(IWebContext context,
+                      ILogicContext logicContext,
+                      FIndexPage page){
+      String id = context.parameter("id");
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
+      if(user == null){
+         return "Login";
+      }
+      page.setId(id);
+      String passport = user.passport();
+      page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      return "Main";
+   }
+
+   //============================================================
+   // <T>发送验证码。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String sendValidate(IWebContext context,
+                              ILogicContext logicContext,
+                              FIndexPage page){
+      page.setMessage(null);
+      String passport = context.parameter("passport");
+      //根据帐号查找用户及手机号
+      if(RString.isEmpty(passport)){
+         page.setMessage("账户不能为空");
+         return null;
+
+      }
+      FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
+      if(marketer == null){
+         page.setMessage("您无理财师权限！");
+         return null;
+      }
+      //获取手机号码 －〉 发送验证码
+      String mobile = "18710555908";
+      String random = RRandom.getNumberRandom(4);
+      int result = sendMessage(random, mobile);
+      if(result < 0){
+         page.setMessage("验证码发送失败");
+         return null;
+      }
+      //保存数据库
+      FCacheSystemValidationUnit unit = _validationConsole.doPrepare(logicContext);
+      unit.setPassport(passport);
+      unit.setCheckCode(random);
+      unit.setValidateCd(EGcValidationValidate.EaiMarketer);
+      _validationConsole.doInsert(logicContext, unit);
+      page.setMessage("1");
+      return "ajax";
+   }
+
+   //============================================================
+   // <T>账号绑定之前处理。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String bind(IWebContext context,
+                      ILogicContext logicContext,
+                      FIndexPage page){
+      page.setMessage(null);
+      String id = context.parameter("id");
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
+      if(user == null){
+         return "Main";
+      }
+      String passport = user.passport();
+      page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      page.setId(id);
+      return "Binding";
+   }
+
+   //============================================================
+   // <T>账号绑定。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String bindOnAccount(IWebContext context,
+                               ILogicContext logicContext,
+                               FIndexPage page){
+      page.setMessage(null);
+      String passport = context.parameter("passport");
+      String validate = context.parameter("validate");
+      String id = context.parameter("id");
+      if(RString.isEmpty(passport) || RString.isEmpty(validate)){
+         page.setMessage("账号或验证码不能为空");
+         return "Binding";
+      }
+      FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, passport);
+      if(unit == null){
+         page.setMessage("验证码错误");
+         return "Binding";
+      }
+      String checkCode = unit.checkCode();
+      if(!checkCode.equals(validate)){
+         page.setMessage("验证码错误");
+         return "Binding";
+      }
+      //修改用户的角色
+      if(RString.isEmpty(id)){
+         page.setMessage("用户失效,请重新登录绑定.");
+         return "Binding";
+      }
+      //获取用户
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
+      //获取角色
+      FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
+      if(user != null){
+         user.setRoleId(role.ouid());
+         _userConsole.doUpdate(logicContext, user);
+      }
+      page.setPassport(passport);
+      page.setId(id);
+      return "Main";
+   }
+
+   //============================================================
+   // <T>发送短信</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param mobile 手机号
+   //============================================================
+   private int sendMessage(String random,
+                           String mobile){
+      BusinessService bs = new BusinessService();
+      bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
+      String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",打死都不要告诉别人哟。【钰诚办公平台】";
+      int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
+      return result;
+   }
+
+   //============================================================
    // <T>登录成功后，用户信息同步。</T>
    //
    // @param logicContext 逻辑环境
@@ -239,7 +414,7 @@ public class FIndexAction
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
       if(user == null){
          //获取角色
-         FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, "eai.oa");
+         FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
          if(role != null){
             //同步OA用户
             FDataPersonUserUnit unit = new FDataPersonUserUnit();

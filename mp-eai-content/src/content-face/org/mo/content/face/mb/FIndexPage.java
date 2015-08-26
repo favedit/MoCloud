@@ -32,6 +32,17 @@ public class FIndexPage
    //用户类型
    protected String _userType;
 
+   //用户guid
+   protected String _id;
+
+   public String id(){
+      return _id;
+   }
+
+   public void setId(String _id){
+      this._id = _id;
+   }
+
    public String userType(){
       return _userType;
    }

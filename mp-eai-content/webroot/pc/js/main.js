@@ -94,7 +94,7 @@
     // !(/^1[3|4|5|7|8|9][\d]{9}$/).test(mobileStr)
    var wait=60;
    ctrl.countdown = function(o){
-      if (wait == 0) { 
+      if (wait == 0) {          
           o.prop("disabled",false); 
           o.val("发送动态密码"); 
           wait = 60; 
@@ -109,8 +109,9 @@
           1000) 
         } 
    };
+   var mobileVal;
    ctrl.setMatching = function(callback){
-     var mobileVal = $("#mobile").val();
+      mobileVal = $("#mobile").val();
       if( mobileVal != ''){
         $boxPrompt.hide();
         callback();
@@ -121,29 +122,40 @@
    };
    ctrl.setValidation = function(){
     $("#send_btn").on("click",function(){
+      ;
       var o = $(this);
        ctrl.setMatching(function(){
-        if($("input_state").val == 1 ){
-          ctrl.countdown(o);
-        }
+          $.post("Index.wa?do=sendValidate",{"passport":mobileVal},function(r){
+             r = ctrl.replaceNbsp(r);
+             if(r == '1'){
+                ctrl.countdown(o);
+             }else{
+                $boxPrompt.show().text(r);
+             }
+            })
        })
     });
    };
    ctrl.submits = function(){
     $("#btn").on("click", function(){
+       var frmBind = $("#frmBind");
         if($("#mobile").val() == ""){
            $boxPrompt.show().text(alertTips.emptyTel);
            return false;
         }else if($("#verification_code").val() == ""){
           $boxPrompt.show().text(alertTips.validationTel);
-        }else{
-           frmMain.submit();
+        }else{     
+           frmBind.submit();
         }
     })
    };
    ctrl.setValidation();
    ctrl.submits();
-  
-
+   ctrl.replaceNbsp = function (temp){
+      return $.trim(temp).replaceAll("&nbsp;", " ");      
+   }
+String.prototype.replaceAll = function(s1, s2) {
+   return this.replace(new RegExp(s1, "gm"), s2);
+}
 
  });

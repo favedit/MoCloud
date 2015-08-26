@@ -9,7 +9,7 @@
       <link rel="stylesheet" type="text/css" href="css/wap.css">
    </head>
    <body>
-      <FORM name='frmMain' method='post' action='Index.wa'>
+      <FORM id="frmBind" name='frmBind' method='post' action='Index.wa?do=bindOnAccount'>
          <INPUT id='id_do' name='do' type='hidden' value='chart' />
          <INPUT id='id_code' name='code' type='hidden' />
          <div class="main" style="overflow-x:hidden;">
@@ -20,20 +20,21 @@
                       账号绑定
                   </header>
                   <ul class="fieldsWidget">
-                     <p class="error"></p>
+                     <p class="error"><jh:write source='&page.message' /></p>
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>帐号：</label>
-                           <input type="tel" maxlength="11" data-type="tel" class="fieldInput" placeholder="请输入E租宝帐号" value="">
+                           <input type="tel" name="passport" class="fieldInput" placeholder="请输入E租宝帐号" value="">
                            <button id="getVerifyCodeBtn" class="btnGetCode" type="button">获取验证码</button>
                            <input tyle="hidden" style="display: none;" value="1" id="input_state">
+                           <input name="id" type="hidden" value="<jh:write source='&page.id' />" />
                         </div>
                      </li>
                     
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>验证码：</label>
-                           <input type="tel" maxlength="4" data-new="" data-type="code" class="fieldInput" placeholder="请输入验证码">
+                           <input type="tel" name="validate" maxlength="4" data-type="code" class="fieldInput" placeholder="请输入验证码">
                         </div>
                      </li>
                      <a href="javascript:;" class="wap-btn"><input id="btn" type="submit" value="提交"></a>
@@ -89,7 +90,7 @@
                error.innerHTML = alertTips.emptyTel;
                return false;   
             }else if( $fieldInput2.value != ""){
-               alert("提交");
+               frmBind.submit();
             }else{
                 error.innerHTML = alertTips.validationTel;
                 return false;
