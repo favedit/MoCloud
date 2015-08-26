@@ -1,7 +1,6 @@
 <%@ include file='/apl/public.inc' %>
    <!DOCTYPE >
    <html>
-
    <head>
       <title></title>
       <meta charset="UTF-8" />
