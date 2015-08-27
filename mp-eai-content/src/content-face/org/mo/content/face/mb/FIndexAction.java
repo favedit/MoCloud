@@ -160,6 +160,7 @@ public class FIndexAction
    public String login(IWebContext context,
                        ILogicContext logicContext,
                        FIndexPage page){
+      page.setIsMarketer(false);
       // 获得参数
       String passport = RString.trimRight(page.passport());
       String password = page.password();
@@ -430,6 +431,7 @@ public class FIndexAction
       if(user != null){
          user.setRoleId(role.ouid());
          _userConsole.doUpdate(logicContext, user);
+         page.setIsMarketer(true);
       }
       page.setPassport(passport);
       page.setId(id);
