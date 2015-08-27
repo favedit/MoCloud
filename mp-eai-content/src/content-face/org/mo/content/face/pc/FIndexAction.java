@@ -13,6 +13,8 @@ import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import org.mo.com.lang.RRandom;
 import org.mo.com.lang.RString;
 import org.mo.content.core.cache.system.IValidationConsole;
@@ -227,7 +229,12 @@ public class FIndexAction
          page.setIsLogin(true);
          page.setPassport(passport);
          if(cookie != null){
-            context.outputCookies().push(new FWebCookie("passport", passport));
+            try{
+               passport = URLEncoder.encode(passport, "UTF-8");
+               context.outputCookies().push(new FWebCookie("passport", passport));
+            }catch(UnsupportedEncodingException e){
+               e.printStackTrace();
+            }
          }else{
             context.outputCookies().push(new FWebCookie("passport", null, 0));
          }
@@ -281,10 +288,14 @@ public class FIndexAction
                           FIndexPage page){
       // 清空参数
       page.setId(null);
+      page.setHost(null);
+      page.setServiceLogic(null);
+      page.setSceneCode(null);
       page.setPassport(null);
       page.setPassword(null);
       page.setUserType(null);
       page.setMessage(null);
+      page.setMenuString(null);
       return "Login";
    }
 

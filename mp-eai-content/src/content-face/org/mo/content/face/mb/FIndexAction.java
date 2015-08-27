@@ -276,10 +276,15 @@ public class FIndexAction
                           ILogicContext logicContext,
                           FIndexPage page){
       // 清空参数
+      page.setId(null);
+      page.setHost(null);
+      page.setServiceLogic(null);
+      page.setSceneCode(null);
       page.setPassport(null);
       page.setPassword(null);
-      page.setMessage(null);
       page.setUserType(null);
+      page.setMessage(null);
+      page.setMenuString(null);
       return "Login";
    }
 
