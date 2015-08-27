@@ -446,7 +446,7 @@ public class FIndexAction
       _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},password={2})", random, mobile);
       BusinessService bs = new BusinessService();
       bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-      String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",打死都不要告诉别人哟。【钰诚办公平台】";
+      String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",不要告诉别人哟。【钰诚办公平台】";
       int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
       _logger.debug(this, "SendValidate", "sendMessage finish. (result={1})", result);
       return result;
