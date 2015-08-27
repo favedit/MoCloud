@@ -70,7 +70,10 @@ public abstract class MLoggerListener
       info.referInfo = referInfo;
       result.append(" [ ");
       if(info.timeSpan > 0){
-         String timeSpan = Long.toString(info.timeSpan);
+         long span = info.timeSpan;
+         long ms = span / 1000000;
+         long ns = span % 1000000;
+         String timeSpan = Long.toString(ms) + "." + RString.leftPad(Long.toString(ns), 6, "0");
          result.append(RString.rightPad(referInfo, 50 - timeSpan.length() - 2));
          result.append(timeSpan + "ms");
       }else{

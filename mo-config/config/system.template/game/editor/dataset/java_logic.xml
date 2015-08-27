@@ -37,7 +37,7 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
       _name = TABLE.name();
       _classUnit = <jt:item source='$dataset.source_class_name'/>Unit.class;
 <jt:notEmpty source='$dataset.logic_timeout'>
-      _timeout = <jt:Item source='$dataset.logic_timeout'/> * 1000;
+      _timeout = <jt:Item source='$dataset.logic_timeout'/>;
 </jt:notEmpty>
    }
 
@@ -51,7 +51,7 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
       _name = TABLE.name();
       _classUnit = <jt:item source='$dataset.source_class_name'/>Unit.class;
 <jt:notEmpty source='$dataset.logic_timeout'>
-      _timeout = <jt:Item source='$dataset.logic_timeout'/> * 1000;
+      _timeout = <jt:Item source='$dataset.logic_timeout'/>;
 </jt:notEmpty>
    }
 

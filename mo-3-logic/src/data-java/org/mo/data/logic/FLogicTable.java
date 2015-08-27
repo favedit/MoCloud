@@ -15,12 +15,9 @@ import org.mo.core.aop.RAop;
 import org.mo.core.bind.IBindConsole;
 import org.mo.data.logic.cache.FLogicCacheChannel;
 import org.mo.data.logic.cache.FLogicCacheDataset;
-import org.mo.data.logic.cache.FLogicCacheTable;
-import org.mo.data.logic.cache.ILogicCacheConsole;
 import org.mo.data.logic.cache.ILogicCacheVendor;
 import org.mo.eng.data.FDataOperator;
 import org.mo.eng.memorycache.FMemoryChannel;
-import org.mo.eng.memorycache.IMemoryCacheConsole;
 
 //============================================================
 // <T>逻辑数据表。</T>
@@ -31,11 +28,8 @@ public abstract class FLogicTable
       implements
          ILogicTable
 {
-   // 数据行超时时间
-   public static int DATASET_CACHE_TIMEOUT = 60000;
-
-   // 数据集超时时间
-   public static int DATASET_CACHE_DATASET_TIMEOUT = 60000;
+   // 数据超时时间[1分钟]
+   public static int DATASET_CACHE_TIMEOUT = 60;
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FLogicTable.class);
@@ -55,20 +49,17 @@ public abstract class FLogicTable
    // 逻辑单元缓冲提供商
    protected ILogicCacheVendor _cacheVendor;
 
-   // 内存缓冲控制台
-   protected IMemoryCacheConsole _memcacheConsole;
-
-   // 逻辑单元表格
-   protected FLogicCacheTable _cacheTable;
+   // 逻辑单元缓冲频道
+   protected FLogicCacheChannel _cacheChannel;
 
    // 逻辑单元缓冲
    protected FLogicCacheDataset _cacheDataset;
 
+   // 内存单元缓冲
+   protected FMemoryChannel _memoryChannel;
+
    // 记录行超时
    protected int _timeout = DATASET_CACHE_TIMEOUT;
-
-   // 记录集超时
-   protected int _timeoutDataset = DATASET_CACHE_DATASET_TIMEOUT;
 
    //============================================================
    // <T>构造逻辑数据集合。</T>
@@ -109,11 +100,17 @@ public abstract class FLogicTable
    // @param logicContext 逻辑环境
    //============================================================
    public void linkLogicContext(ILogicContext logicContext){
+      _logicContext = logicContext;
       SLogicConnectionInfo connectionInfo = connectionInfo();
       _connection = logicContext.activeConnection(connectionInfo.name());
-      _logicContext = logicContext;
       if(_connection instanceof ILogicCacheVendor){
          _cacheVendor = (ILogicCacheVendor)_connection;
+         if(_cacheVendor != null){
+            _cacheChannel = _cacheVendor.channel();
+            if(_cacheChannel != null){
+               _cacheChannel.memoryChannel();
+            }
+         }
       }
    }
 
@@ -136,22 +133,9 @@ public abstract class FLogicTable
    }
 
    //============================================================
-   // <T>获得缓冲表格。</T>
+   // <T>获得本地缓冲集合。</T>
    //
-   // @return 缓冲表格
-   //============================================================
-   protected FLogicCacheTable innerCacheTable(){
-      if(_cacheTable == null){
-         ILogicCacheConsole cacheConsole = RAop.find(ILogicCacheConsole.class);
-         _cacheTable = cacheConsole.syncTable(_name);
-      }
-      return _cacheTable;
-   }
-
-   //============================================================
-   // <T>获得缓冲集合。</T>
-   //
-   // @return 缓冲集合
+   // @return 本地缓冲集合
    //============================================================
    protected FLogicCacheDataset innerCacheDataset(){
       if(_cacheDataset == null){
@@ -172,9 +156,9 @@ public abstract class FLogicTable
    // @return 行记录
    //============================================================
    protected FRow innerCacheFindRow(long code){
-      FLogicCacheDataset cache = innerCacheDataset();
-      if(cache != null){
-         FRow unit = cache.get(code);
+      FLogicCacheDataset dataset = innerCacheDataset();
+      if(dataset != null){
+         FRow unit = dataset.get(code);
          if(unit != null){
             _logger.debug(this, "innerCacheFindRow", "Find row from cache. (code={1})", code);
          }
@@ -191,9 +175,9 @@ public abstract class FLogicTable
    //============================================================
    protected void innerCacheSetRow(long code,
                                    FRow row){
-      FLogicCacheDataset cache = innerCacheDataset();
-      if(cache != null){
-         cache.set(code, row);
+      FLogicCacheDataset dataset = innerCacheDataset();
+      if(dataset != null){
+         dataset.set(code, row);
       }
    }
 
@@ -203,9 +187,9 @@ public abstract class FLogicTable
    // @param code 代码
    //============================================================
    protected void innerCacheDeleteRow(long code){
-      FLogicCacheDataset cache = innerCacheDataset();
-      if(cache != null){
-         cache.set(code, null);
+      FLogicCacheDataset dataset = innerCacheDataset();
+      if(dataset != null){
+         dataset.set(code, null);
       }
    }
 
@@ -213,22 +197,10 @@ public abstract class FLogicTable
    // <T>清空本地缓冲。</T>
    //============================================================
    protected void innerCacheClear(){
-      FLogicCacheDataset cache = innerCacheDataset();
-      if(cache != null){
-         cache.clear();
+      FLogicCacheDataset dataset = innerCacheDataset();
+      if(dataset != null){
+         dataset.clear();
       }
-   }
-
-   //============================================================
-   // <T>获得内存缓冲。</T>
-   //
-   // @return 内存缓冲
-   //============================================================
-   protected IMemoryCacheConsole innerMemcache(){
-      if(_memcacheConsole == null){
-         _memcacheConsole = RAop.find(IMemoryCacheConsole.class);
-      }
-      return _memcacheConsole;
    }
 
    //============================================================
@@ -259,16 +231,9 @@ public abstract class FLogicTable
    // <T>清空内存缓冲。</T>
    //============================================================
    protected void innerMemcacheClear(){
-      IMemoryCacheConsole memcacheConsole = innerMemcache();
-      try(FMemoryChannel channel = memcacheConsole.alloc()){
-         if(channel != null){
-            // 缓冲内容
-            FLogicCacheTable cacheTable = innerCacheTable();
-            cacheTable.flush(channel);
-         }
-      }catch(Exception e){
-         throw new FFatalError(e);
-      }
+      // 缓冲内容
+      FLogicCacheDataset cacheDataset = innerCacheDataset();
+      cacheDataset.tableFlush();
    }
 
    //============================================================
@@ -279,10 +244,31 @@ public abstract class FLogicTable
    //============================================================
    protected FRow innerFindRow(long id,
                                CharSequence sql){
-      FRow row = innerCacheFindRow(id);
-      if(row == null){
-         row = innerFindRow("id-" + id, sql);
-         innerCacheSetRow(id, row);
+      FRow row = null;
+      if(_cacheChannel == null){
+         row = _connection.find(sql);
+      }else{
+         // 查找数据
+         FLogicCacheDataset cacheDataset = innerCacheDataset();
+         String key = cacheDataset.makeRowKey(id);
+         String value = _memoryChannel.getString(key);
+         if(value != null){
+            // 解析数据
+            row = new FRow();
+            row.unpack(value);
+            _logger.debug(this, "innerFindRow", "Find row from memcache. (key={1}, sql={2})", key, sql);
+         }
+         // 查询数据
+         if(row == null){
+            row = _connection.find(sql);
+            // 存储数据
+            if(row != null){
+               String pack = row.pack();
+               _memoryChannel.setString(key, pack, _timeout);
+            }else{
+               _memoryChannel.delete(key);
+            }
+         }
       }
       return row;
    }
@@ -297,45 +283,30 @@ public abstract class FLogicTable
    protected FRow innerFindRow(CharSequence code,
                                CharSequence sql){
       FRow row = null;
-      IMemoryCacheConsole memcacheConsole = innerMemcache();
-      try(FMemoryChannel channel = memcacheConsole.alloc()){
-         if(channel == null){
+      if(_cacheChannel == null){
+         row = _connection.find(sql);
+      }else{
+         // 查找数据
+         FLogicCacheDataset cacheDataset = innerCacheDataset();
+         String key = cacheDataset.makeFetchKey(code);
+         String value = _memoryChannel.getString(key);
+         if(value != null){
+            // 解析数据
+            row = new FRow();
+            row.unpack(value);
+            _logger.debug(this, "innerFindRow", "Find row from memcache. (key={1}, sql={2})", key, sql);
+         }
+         // 查询数据
+         if(row == null){
             row = _connection.find(sql);
-         }else{
-            // 获得当前代码
-            FLogicCacheTable cacheTable = innerCacheTable();
-            String currentCode = cacheTable.currentCode(channel);
-            // 生成标识
-            FString buffer = new FString();
-            buffer.append("mo-cache|logic.dataset.row|");
-            buffer.append(_name);
-            buffer.append('|');
-            buffer.append(currentCode);
-            buffer.append('|');
-            buffer.append(code);
-            String key = buffer.toString();
-            // 从内存中查找数据
-            String value = channel.getTimeoutString(key);
-            if(value != null){
-               // 获得数据
-               row = new FRow();
-               row.unpack(value);
-               _logger.debug(this, "innerFindRow", "Find row from memcache. (key={1}, sql={2})", key, sql);
-            }
-            // 获得结果集
-            if(row == null){
-               row = _connection.find(sql);
-               // 存储结果集合
-               if(row != null){
-                  String pack = row.pack();
-                  channel.setTimeoutString(key, pack, _timeout);
-               }else{
-                  channel.delete(key);
-               }
+            // 存储数据
+            if(row != null){
+               String pack = row.pack();
+               _memoryChannel.setString(key, pack, _timeout);
+            }else{
+               _memoryChannel.delete(key);
             }
          }
-      }catch(Exception e){
-         throw new FFatalError(e);
       }
       return row;
    }
@@ -346,24 +317,21 @@ public abstract class FLogicTable
    // @param id 编号
    // @return 行记录
    //============================================================
-   protected void innerDeleteRow(long recordId){
-      if(recordId > 0){
-         // 删除本地缓冲
-         innerCacheDeleteRow(recordId);
-         // 删除内存缓冲
-         IMemoryCacheConsole memcacheConsole = innerMemcache();
-         try(FMemoryChannel channel = memcacheConsole.alloc()){
-            if(channel != null){
-               // 清空记录缓冲
-               String key = "mo-cache|logic.row|" + _name + "|" + recordId;
-               channel.delete(key);
-               // 清空search和fetch缓冲内容
-               FLogicCacheTable cacheTable = innerCacheTable();
-               cacheTable.flush(channel);
-            }
-         }catch(Exception e){
-            throw new FFatalError(e);
-         }
+   protected void innerDeleteRow(long id){
+      // 检查记录编号
+      if(id == 0){
+         throw new FFatalError("Record is invalid.");
+      }
+      // 删除本地缓冲
+      innerCacheDeleteRow(id);
+      // 删除内存缓冲
+      if(_cacheChannel != null){
+         // 清空记录缓冲
+         FLogicCacheDataset cacheDataset = innerCacheDataset();
+         String key = cacheDataset.makeRowKey(id);
+         _memoryChannel.delete(key);
+         // 清空search和fetch缓冲内容
+         cacheDataset.tableFlush();
       }
    }
 
@@ -380,57 +348,35 @@ public abstract class FLogicTable
                                        int pageSize,
                                        int page){
       FDataset dataset = null;
-      IMemoryCacheConsole memcacheConsole = innerMemcache();
-      try(FMemoryChannel channel = memcacheConsole.alloc()){
-         String key = null;
-         if(channel != null){
-            // 获得当前代码
-            FLogicCacheTable cacheTable = innerCacheTable();
-            String currentCode = cacheTable.currentCode(channel);
-            // 生成标识
-            FString buffer = new FString();
-            buffer.append("mo-cache|logic.dataset|");
-            buffer.append(_name);
-            buffer.append('|');
-            buffer.append(currentCode);
-            buffer.append('|');
-            buffer.append(code);
-            buffer.append('|');
-            buffer.appendInt(pageSize);
-            buffer.append('|');
-            buffer.appendInt(page);
-            key = buffer.toString();
-            // 查找数据
-            // 从内存中查找数据
-            if(channel != null){
-               String value = channel.getTimeoutString(key);
-               if(value != null){
-                  // 获得数据
-                  dataset = new FDataset();
-                  dataset.unpack(value);
-                  _logger.debug(this, "innerFindDataset", "Find dataset from memcache. (key={1}, sql={2})", key, sql);
-               }
-            }
+      String key = null;
+      if(_cacheChannel != null){
+         // 查找数据
+         FLogicCacheDataset cacheDataset = innerCacheDataset();
+         key = cacheDataset.makeFetchKey(code + "|" + pageSize + "|" + page);
+         String value = _memoryChannel.getString(key);
+         if(value != null){
+            // 解析数据
+            dataset = new FDataset();
+            dataset.unpack(value);
+            _logger.debug(this, "innerFindDataset", "Find dataset from memcache. (key={1}, sql={2})", key, sql);
          }
-         // 获得结果集
-         if(dataset == null){
-            if(pageSize > 0){
-               dataset = _connection.fetchDataset(sql, pageSize, page);
+      }
+      // 查询数据
+      if(dataset == null){
+         if(pageSize > 0){
+            dataset = _connection.fetchDataset(sql, pageSize, page);
+         }else{
+            dataset = _connection.fetchDataset(sql);
+         }
+         // 存储结果集合
+         if(_cacheChannel != null){
+            if(dataset != null){
+               String pack = dataset.pack();
+               _memoryChannel.setString(key, pack, _timeout);
             }else{
-               dataset = _connection.fetchDataset(sql);
-            }
-            // 存储结果集合
-            if(channel != null){
-               if(dataset != null){
-                  String pack = dataset.pack();
-                  channel.setTimeoutString(key, pack, _timeoutDataset);
-               }else{
-                  channel.delete(key);
-               }
+               _memoryChannel.delete(key);
             }
          }
-      }catch(Exception e){
-         throw new FFatalError(e);
       }
       return dataset;
    }

@@ -58,9 +58,14 @@ public class FLoggerConsole
       return _dateFormat;
    }
 
-   /**
-    * <T>初始化操作</T>
-    */
+   @Override
+   public String storePath(){
+      return _storePath;
+   }
+
+   //============================================================
+   // <T>初始化操作。</T>
+   //============================================================
    public void initialize(){
       // 设置监听器列表
       _listeners = RLogger.listeners();
@@ -89,10 +94,5 @@ public class FLoggerConsole
       for(IListener listener : _listeners){
          ((ILoggerListener)listener).release();
       }
-   }
-
-   @Override
-   public String storePath(){
-      return _storePath;
    }
 }

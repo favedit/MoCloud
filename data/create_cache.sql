@@ -22,8 +22,9 @@ CREATE TABLE `CC_SYS_SESSION`
 
 ALTER TABLE CC_SYS_SESSION 
    ADD CONSTRAINT CC_SYS_SES_UK_GID UNIQUE ( GUID ); 
+
 -- ------------------------------------------------------------
--- Create table [Cache.System.Session]
+-- Create table [Cache.System.Validation]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `CC_SYS_VALIDATION`;
 CREATE TABLE `CC_SYS_VALIDATION` 

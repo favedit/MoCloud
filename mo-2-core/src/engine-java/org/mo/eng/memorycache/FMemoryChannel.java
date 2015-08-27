@@ -1,8 +1,9 @@
 package org.mo.eng.memorycache;
 
-import com.danga.MemCached.MemCachedClient;
+import net.rubyeye.xmemcached.XMemcachedClient;
+import net.rubyeye.xmemcached.XMemcachedClientBuilder;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.RLong;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -22,7 +23,7 @@ public class FMemoryChannel
    protected FMemoryCacheConsole _console;
 
    // 内存链接
-   protected MemCachedClient _client;
+   protected XMemcachedClient _client;
 
    // 代码
    protected String _code;
@@ -55,15 +56,25 @@ public class FMemoryChannel
    // <T>配置处理。</T>
    //============================================================
    public void setup(){
-      _client = new MemCachedClient();
+      XMemcachedClientBuilder builder = _console.builder();
+      try{
+         _client = (XMemcachedClient)builder.build();
+      }catch(Exception exception){
+         throw new FFatalError(exception);
+      }
    }
 
    //============================================================
    // <T>链接处理。</T>
    //============================================================
    public void connect(){
-      String identityCode = _console.code() + EMemoryCacheConstant.IDENTITY_CODE;
-      _code = _console.code() + "-" + _client.get(identityCode) + ":";
+      try{
+         String identityCode = _console.code() + EMemoryCacheConstant.IDENTITY_CODE;
+         String guid = (String)_client.get(identityCode);
+         _code = _console.code() + "(" + guid + ")|";
+      }catch(Exception exception){
+         throw new FFatalError(exception);
+      }
    }
 
    //============================================================
@@ -73,10 +84,15 @@ public class FMemoryChannel
    // @return 内容
    //============================================================
    public Object get(String key){
-      String cacheKey = _code + key;
-      Object value = _client.get(cacheKey);
-      if(value != null){
-         _logger.debug(this, "get", "Find memory cache. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+      Object value = null;
+      try{
+         String cacheKey = _code + key;
+         value = _client.get(cacheKey);
+         if(value != null){
+            _logger.debug(this, "get", "Find memory cache. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+         }
+      }catch(Exception exception){
+         throw new FFatalError(exception);
       }
       return value;
    }
@@ -88,10 +104,15 @@ public class FMemoryChannel
    // @return 内容
    //============================================================
    public byte[] getBytes(String key){
-      String cacheKey = _code + key;
-      byte[] value = (byte[])_client.get(cacheKey);
-      if(value != null){
-         _logger.debug(this, "getBytes", "Find memory cache. [code={1}, value_length={2}]", cacheKey, value.length);
+      byte[] value = null;
+      try{
+         String cacheKey = _code + key;
+         value = (byte[])_client.get(cacheKey);
+         if(value != null){
+            _logger.debug(this, "getBytes", "Find memory cache. [code={1}, value_length={2}]", cacheKey, value.length);
+         }
+      }catch(Exception exception){
+         throw new FFatalError(exception);
       }
       return value;
    }
@@ -103,36 +124,12 @@ public class FMemoryChannel
    // @return 字符串
    //============================================================
    public String getString(String key){
-      String cacheKey = _code + key;
-      String value = (String)_client.get(cacheKey);
-      return value;
-   }
-
-   //============================================================
-   // <T>获得超时字符串。</T>
-   //
-   // @param key 主键
-   // @param timeout 超时时间
-   // @return 字符串
-   //============================================================
-   public String getTimeoutString(String key){
-      String cacheKey = _code + key;
-      String value = (String)_client.get(cacheKey);
-      if(value != null){
-         int index = value.indexOf(":");
-         if(index != -1){
-            // 检查超时
-            String timeString = value.substring(0, index);
-            long time = RLong.parse(timeString, 0);
-            if(time > 0){
-               long currentTime = System.currentTimeMillis();
-               if(currentTime > time){
-                  _client.delete(cacheKey);
-                  return null;
-               }
-            }
-            value = value.substring(index + 1);
-         }
+      String value = null;
+      try{
+         String cacheKey = _code + key;
+         value = (String)_client.get(cacheKey);
+      }catch(Exception exception){
+         throw new FFatalError(exception);
       }
       return value;
    }
@@ -145,12 +142,17 @@ public class FMemoryChannel
    //============================================================
    public boolean set(String key,
                       Object value){
-      String cacheKey = _code + key;
-      boolean result = _client.set(cacheKey, value);
-      if(result){
-         _logger.debug(this, "set", "Update memory cache success. [code={1}, value={2}]", cacheKey, RClass.dump(value));
-      }else{
-         _logger.debug(this, "set", "Update memory cache failure. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+      boolean result = false;
+      try{
+         String cacheKey = _code + key;
+         result = _client.set(cacheKey, 0, value);
+         if(result){
+            _logger.debug(this, "set", "Update memory cache success. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+         }else{
+            _logger.debug(this, "set", "Update memory cache failure. [code={1}, value={2}]", cacheKey, RClass.dump(value));
+         }
+      }catch(Exception exception){
+         throw new FFatalError(exception);
       }
       return result;
    }
@@ -165,12 +167,16 @@ public class FMemoryChannel
                            byte[] value){
       boolean result = false;
       if(value != null){
-         String cacheKey = _code + key;
-         result = _client.set(cacheKey, value);
-         if(result){
-            _logger.debug(this, "setBytes", "Update memory cache success. [code={1}, value_length={2}]", cacheKey, value.length);
-         }else{
-            _logger.debug(this, "setBytes", "Update memory cache failure. [code={1}, value_length={2}]", cacheKey, value.length);
+         try{
+            String cacheKey = _code + key;
+            result = _client.set(cacheKey, 0, value);
+            if(result){
+               _logger.debug(this, "setBytes", "Update memory cache success. [code={1}, value_length={2}]", cacheKey, value.length);
+            }else{
+               _logger.debug(this, "setBytes", "Update memory cache failure. [code={1}, value_length={2}]", cacheKey, value.length);
+            }
+         }catch(Exception exception){
+            throw new FFatalError(exception);
          }
       }
       return result;
@@ -184,8 +190,13 @@ public class FMemoryChannel
    //============================================================
    public boolean setString(String key,
                             String value){
-      String cacheKey = _code + key;
-      boolean result = _client.set(cacheKey, value);
+      boolean result = false;
+      try{
+         String cacheKey = _code + key;
+         result = _client.set(cacheKey, 0, value);
+      }catch(Exception exception){
+         throw new FFatalError(exception);
+      }
       return result;
    }
 
@@ -194,15 +205,19 @@ public class FMemoryChannel
    //
    // @param key 主键
    // @param value 字符串
-   // @param timeout 超时时间
+   // @param expiry 期限[秒]
    // @param value 内容
    //============================================================
-   public boolean setTimeoutString(String key,
-                                   String value,
-                                   long timeout){
-      String cacheKey = _code + key;
-      long current = System.currentTimeMillis() + timeout;
-      boolean result = _client.set(cacheKey, current + ":" + value);
+   public boolean setString(String key,
+                            String value,
+                            int expiry){
+      boolean result = false;
+      try{
+         String cacheKey = _code + key;
+         result = _client.set(cacheKey, expiry, value);
+      }catch(Exception exception){
+         throw new FFatalError(exception);
+      }
       return result;
    }
 
@@ -213,8 +228,13 @@ public class FMemoryChannel
    // @return 处理结果
    //============================================================
    public boolean delete(String key){
-      String cacheKey = _code + key;
-      boolean result = _client.delete(cacheKey);
+      boolean result = false;
+      try{
+         String cacheKey = _code + key;
+         result = _client.delete(cacheKey);
+      }catch(Exception exception){
+         throw new FFatalError(exception);
+      }
       return result;
    }
 
@@ -223,9 +243,12 @@ public class FMemoryChannel
    //
    // @return 处理结果
    //============================================================
-   public boolean flush(){
-      boolean result = _client.flushAll();
-      return result;
+   public void flush(){
+      try{
+         _client.flushAll();
+      }catch(Exception exception){
+         throw new FFatalError(exception);
+      }
    }
 
    //============================================================

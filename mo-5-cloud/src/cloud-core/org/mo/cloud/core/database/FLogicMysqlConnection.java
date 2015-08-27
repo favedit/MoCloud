@@ -6,6 +6,8 @@ import org.mo.data.driver.FSqlMysqlConnection;
 import org.mo.data.logic.cache.FLogicCacheChannel;
 import org.mo.data.logic.cache.ILogicCacheConsole;
 import org.mo.data.logic.cache.ILogicCacheVendor;
+import org.mo.eng.memorycache.FMemoryChannel;
+import org.mo.eng.memorycache.IMemoryCacheConsole;
 
 //============================================================
 // <T>逻辑MySQL数据库链接。</T>
@@ -15,6 +17,12 @@ public class FLogicMysqlConnection
       implements
          ILogicCacheVendor
 {
+   // 内存单元缓冲频道
+   protected IMemoryCacheConsole _memoryCacheConsole;
+
+   // 内存单元缓冲频道
+   protected FMemoryChannel _memoryChannel;
+
    // 逻辑单元缓冲频道
    protected FLogicCacheChannel _channel;
 
@@ -43,9 +51,15 @@ public class FLogicMysqlConnection
    //============================================================
    @Override
    public FLogicCacheChannel channel(){
-      if(_channel == null){
+      // 收集内存缓冲
+      if(_memoryChannel == null){
+         _memoryCacheConsole = RAop.find(IMemoryCacheConsole.class);
+         _memoryChannel = _memoryCacheConsole.alloc();
+      }
+      // 收集逻辑缓冲
+      if((_memoryChannel != null) && (_channel == null)){
          _cacheConsole = RAop.find(ILogicCacheConsole.class);
-         _channel = _cacheConsole.alloc();
+         _channel = _cacheConsole.alloc(_memoryChannel);
       }
       return _channel;
    }
@@ -55,8 +69,13 @@ public class FLogicMysqlConnection
    //============================================================
    @Override
    public void free(){
+      // 释放内存缓冲
       if(_channel != null){
          _cacheConsole.free(_channel);
+      }
+      // 释放逻辑缓冲
+      if(_memoryChannel != null){
+         _memoryCacheConsole.free(_memoryChannel);
       }
    }
 }
