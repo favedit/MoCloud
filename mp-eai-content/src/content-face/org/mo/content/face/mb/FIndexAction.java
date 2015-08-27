@@ -30,6 +30,7 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
+import org.mo.eai.logic.financial.FFinancialMarketerInfo;
 import org.mo.eai.logic.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
@@ -340,14 +341,14 @@ public class FIndexAction
          return "ajax";
 
       }
-      //      FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
-      //      if(marketer == null){
-      //         page.setMessage("您无理财师权限！");
-      //         return "Binding";
-      //      }
-      //      _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
+      FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
+      if(marketer == null){
+         page.setMessage("您无理财师权限！");
+         return "ajax";
+      }
+      _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
-      String mobile = "18710555908";
+      String mobile = marketer.phone();
       String random = RRandom.getNumberRandom(4);
       int result = sendMessage(random, mobile);
       if(result < 0){

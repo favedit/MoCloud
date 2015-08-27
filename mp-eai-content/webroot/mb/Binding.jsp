@@ -22,9 +22,7 @@
                      账号绑定
                   </header>
                   <ul class="fieldsWidget">
-                     <p class="error">
-                        <jh:write source='&page.message' />
-                     </p>
+                     <p class="error"><jh:write source='&page.message' /></p>
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>帐号：</label>
@@ -90,16 +88,18 @@
                cbo.onError = Cbo_Error;
                cbo.OnLoaded = OnLoading;
                cbo.DoCallBack("Index.wa?do=sendValidate", "passport=" + $fieldInput.value);
-
                function OnLoading() {
-                  alert("OnLoading ");
+//                  alert("OnLoading ");
                }
-
                function Cbo_Complete(responseText, responseXML) {
                   var result = ctrl.replaceNbsp(responseText);
-                  alert(result);
+                  console.log(result);
+                  if(result == "1"){
+                     ctrl.countdown(o);
+                  }else{
+                     error.innerHTML = result;
+                  }
                }
-
                function Cbo_Error(status, statusText, responseText) {
                   alert(responseText);
                }
@@ -109,7 +109,7 @@
          };
          ctrl.replaceNbsp = function(temp) {
             return temp.replace(/[\r\n]/g,"");
-         }       
+         } 
          
          document.getElementById("btn").onclick = function() {
             if ($fieldInput.value == "") {
@@ -127,25 +127,9 @@
          function CallBackObject() {
             this.XmlHttp = this.GetHttpObject();
          }
-         CallBackObject.prototype.GetHttpObject = function() //动态为CallBackObject的原型添加了GetHttpObject共有方法 
+         CallBackObject.prototype.GetHttpObject = function()
             {
-               //第一步：创建XMLHttpRequest对象 
-               //进行兼容性判断 
                var xmlhttp;
-               /*@cc_on 
-               @if (@_jscript_version >= 5) 
-               try { 
-               xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); 
-               } catch (e) { 
-               try { 
-               xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); 
-               } catch (E) { 
-               xmlhttp = false; 
-               } 
-               } 
-               @else 
-               xmlhttp = false; 
-               @end @*/
                if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
                   try {
                      xmlhttp = new XMLHttpRequest();
@@ -159,16 +143,11 @@
             if (this.XmlHttp) {
                if (this.XmlHttp.readyState == 4 || this.XmlHttp.readyState == 0) {
                   var oThis = this;
-                  //第二步：注册回调方法，当服务器处理结束返回数据以后利用回调方法实现局部的页面刷新数据 
-                  //这个回调方法实际上在每次XMLHttpRequest对象的readyState属性的值发生变化的时候都会被调用 
                   this.XmlHttp.onreadystatechange = function() {
-                     //根据XmlHttp.readyState返回值不同调用不同的方法。 
                      oThis.ReadyStateChange();
                   };
-                  //第三步：设置和服务器交互的相应参数 
                   this.XmlHttp.open('POST', URL);
                   this.XmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                  //第四步：设置向服务器发送的数据，启动和服务器端交互 
                   this.XmlHttp.send(data);
                }
             }
@@ -178,19 +157,13 @@
                this.XmlHttp.abort();
          }
          CallBackObject.prototype.ReadyStateChange = function() {
-            //第五步：判断和服务器交互是否完成，还要判断服务器端是否正确返回数据 
-            //this.XmlHttp.readyState == 0初始化状态。XMLHttpRequest 对象已创建或已被 abort() 方法重置。 
             if (this.XmlHttp.readyState == 1) {
-               //open() 方法已调用，但是 send() 方法未调用。请求还没有被发送。 
                this.OnLoading();
             } else if (this.XmlHttp.readyState == 2) {
-               //Send() 方法已调用，HTTP 请求已发送到 Web 服务器。未接收到响应。 
                this.OnLoaded();
             } else if (this.XmlHttp.readyState == 3) {
-               //Receiving 所有响应头部都已经接收到。响应体开始接收但未完成。 
                this.OnInteractive();
             } else if (this.XmlHttp.readyState == 4) {
-               //Loaded HTTP 响应已经完全接收。 
                if (this.XmlHttp.status == 0)
                   this.OnAbort();
                else if (this.XmlHttp.status == 200 && this.XmlHttp.statusText == "OK")
