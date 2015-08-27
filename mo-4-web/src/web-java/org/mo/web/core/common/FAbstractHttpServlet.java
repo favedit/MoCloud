@@ -1,6 +1,8 @@
 package org.mo.web.core.common;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IAttributes;
 import org.mo.com.lang.RString;
@@ -221,6 +224,13 @@ public abstract class FAbstractHttpServlet
          for(IWebCookie webCookie : webCookies){
             String cookieName = webCookie.name();
             String cookieValue = webCookie.value();
+            if(!RString.isEmpty(cookieValue)){
+               try{
+                  cookieValue = URLEncoder.encode(cookieValue, "utf-8");
+               }catch(UnsupportedEncodingException exception){
+                  throw new FFatalError(exception);
+               }
+            }
             int expiry = webCookie.expiry();
             if(_logger.debugAble()){
                _logger.debug(this, "process", "Set cookie. {name={1}, value={2}, expiry={3}}", cookieName, cookieValue, expiry);
