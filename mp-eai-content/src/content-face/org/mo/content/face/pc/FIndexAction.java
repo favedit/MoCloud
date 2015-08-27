@@ -342,6 +342,7 @@ public class FIndexAction
       String passport = user.passport();
       page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
       page.setIsLogin(false);
+      tackAuthority(logicContext, page, user.roleId());
       return "Main";
    }
 
@@ -410,6 +411,7 @@ public class FIndexAction
       String passport = user.passport();
       page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
       page.setId(id);
+      tackAuthority(logicContext, page, user.roleId());
       return "Binding";
    }
 
@@ -460,6 +462,7 @@ public class FIndexAction
       page.setPassport(passport);
       page.setId(id);
       page.setIsLogin(false);
+      tackAuthority(logicContext, page, user.roleId());
       return "Main";
    }
 

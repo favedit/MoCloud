@@ -26,7 +26,7 @@
          </div>
          <div class="head-right">
             <p class="user-details" id="user-details" title="" ><i></i>
-               zhaoyoajil.com.sdflsdf&nbsp;<img src="images/main/icon.png"></p>
+               <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
             <ul class="users" id="users">
                <li onclick="loginOut();">退出</li>
             </ul>
