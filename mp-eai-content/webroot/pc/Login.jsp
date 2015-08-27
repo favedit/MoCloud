@@ -53,8 +53,7 @@
       if (passport != "") {
          document.getElementById("saveCookie").checked = true;
       }
-       document.getElementById("passport").value = passport;
-      
+      document.getElementById("passport").value = decodeURI(passport);
       var $dialogOverlay = document.getElementById("dialog-overlay");
       var $dialogAlert = document.getElementById("dialog_alert");
       var errorVal = document.getElementById("error").innerHTML;

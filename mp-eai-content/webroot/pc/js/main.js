@@ -134,6 +134,7 @@
      ctrl.setValidation = function() {
         $("#send_btn").on("click", function() {;
            var o = $(this);
+           o.prop("disabled", true);  
            ctrl.setMatching(function() {
               $.post("Index.wa?do=sendValidate", {
                  "passport": mobileVal
@@ -142,6 +143,7 @@
                  if (r == '1') {
                     ctrl.countdown(o);
                  } else {
+                    o.prop("disabled", false);  
                     $boxPrompt.show().text(r);
                  }
               })
