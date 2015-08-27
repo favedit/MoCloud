@@ -2,15 +2,11 @@ package org.mo.eai.logic.session;
 
 import org.mo.cloud.core.web.FGcWebSessionConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
-import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.core.aop.face.ALink;
-import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicContext;
-import org.mo.eng.data.IDatabaseConsole;
 import org.mo.web.core.session.IWebSession;
 
 //============================================================
@@ -22,22 +18,6 @@ public class FEaiSessionConsole
 {
    // 日志输出接口
    protected static ILogger _logger = RLogger.find(FEaiSessionConsole.class);
-
-   // 逻辑代码
-   @AProperty
-   protected String _logicCode;
-
-   // 服务代码
-   @AProperty
-   protected String _serverCode;
-
-   // 数据库管理器接口
-   @ALink
-   protected IDatabaseConsole _databaseConsole;
-
-   // 数据库管理器接口
-   @ALink
-   protected IGcSessionConsole _sessionConsole;
 
    //============================================================
    // <T>建立线程对象。</T>
