@@ -131,8 +131,8 @@ public class FSessionConsole
          worker = _workers.find(code);
       }
       // 重新加载工作器
-      if(null != worker){
-         if(null == worker.session()){
+      if(worker != null){
+         if(worker.session() == null){
             restore(worker);
          }
          worker.refresh();
@@ -150,7 +150,7 @@ public class FSessionConsole
    @Override
    public <V extends ISession> V get(String code){
       V session = find(code);
-      if(null == session){
+      if(session == null){
          throw new FFatalError("Session is not exists.");
       }
       return session;

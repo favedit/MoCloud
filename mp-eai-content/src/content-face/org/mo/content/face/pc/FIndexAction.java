@@ -13,6 +13,7 @@ import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
+import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.RRandom;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -36,6 +37,8 @@ import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
 import org.mo.web.core.action.common.FWebCookie;
+import org.mo.web.core.session.IWebSession;
+import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -50,6 +53,9 @@ public class FIndexAction
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FIndexAction.class);
+
+   @ALink
+   protected IWebSessionConsole _sessionConsole;
 
    @ALink
    protected IDataPersonAccessAuthorityConsole _personAccessAuthorityConsole;
@@ -151,11 +157,13 @@ public class FIndexAction
    // <T>登录逻辑处理。</T>
    //
    // @param context 页面环境
+   // @param sessionContext 会话环境
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
    @Override
    public String login(IWebContext context,
+                       IWebSession sessionContext,
                        ILogicContext logicContext,
                        FIndexPage page){
       // 获得参数
@@ -212,8 +220,20 @@ public class FIndexAction
             message = "密码非法或含有特殊字符。";
             break;
       }
+      // 获得用户信息
+      long userId = 0;
+      if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
+         FDataPersonUserUnit userUnit = _userConsole.findByPassport(logicContext, passport);
+         userId = userUnit.ouid();
+         // 打开会话
+         FGcWebSession session = (FGcWebSession)sessionContext;
+         _sessionConsole.open(session);
+         session.setUserId(userId);
+         _sessionConsole.update(session);
+      }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
+      logger.setUserId(userId);
       logger.setHostAddress(hostAddress);
       logger.setLogicMessage(logggerMessage);
       logger.setPassport(RString.left(passport, 40));

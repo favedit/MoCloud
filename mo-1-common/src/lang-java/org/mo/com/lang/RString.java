@@ -1052,7 +1052,7 @@ public class RString
    // @return 截掉后的字符串
    //============================================================
    public static String trimRight(String value){
-      return trimRight(value, " ");
+      return trimRight(value, ' ');
    }
 
    //============================================================
@@ -1063,18 +1063,22 @@ public class RString
    // @return 截掉后的字符串
    //============================================================
    public static String trimRight(String value,
-                                  String partten){
+                                  char partten){
       if(value != null){
          int length = value.length();
          if(length > 0){
             int position = length - 1;
             for(int n = length - 1; n >= 0; n--){
-               if(value.charAt(n) > ' '){
+               char charValue = value.charAt(n);
+               if(charValue > partten){
                   position = n;
                   break;
                }
             }
-            return (position != (length - 1)) ? value.substring(0, position + 1) : value;
+            if(position != (length - 1)){
+               return value.substring(0, position + 1);
+            }
+            return value;
          }
       }
       return "";

@@ -1,5 +1,6 @@
 package org.mo.web.core.session;
 
+import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.eng.culture.ICultureConsole;
 import org.mo.eng.security.IPermissionConsole;
@@ -49,18 +50,6 @@ public class FWebSessionConsole
    }
 
    //============================================================
-   // <T>根据代码查找会话对象。</T>
-   //
-   // @param code 代码
-   // @return 会话对象
-   //============================================================
-   @Override
-   @SuppressWarnings("unchecked")
-   public IWebSession find(String sessionCode){
-      return sync(IWebSession.class, sessionCode);
-   }
-
-   //============================================================
    // <T>建立线程对象。</T>
    //
    // @param sessionId 线程标识
@@ -69,5 +58,38 @@ public class FWebSessionConsole
    @Override
    public IWebSession build(String sessionId){
       return sync(IWebSession.class, sessionId);
+   }
+
+   //============================================================
+   // <T>打开会话对象。</T>
+   //
+   // @param session 会话对象
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult open(IWebSession session){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>更新会话对象。</T>
+   //
+   // @param session 会话对象
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult update(IWebSession session){
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>关闭会话对象。</T>
+   //
+   // @param session 会话对象
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult close(IWebSession session){
+      return EResult.Success;
    }
 }

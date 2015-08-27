@@ -73,12 +73,10 @@ public abstract class FAbstractActionServlet
          if(_sessionValid){
             sessionCode = findSessionId(httpRequest);
             sessionExist = !RString.isEmpty(sessionCode);
-            if(sessionExist){
-               session = _sessionConsole.find(sessionCode);
-            }else{
+            if(!sessionExist){
                sessionCode = RUuid.makeUniqueIdLower();
-               session = _sessionConsole.build(sessionCode);
             }
+            session = _sessionConsole.build(sessionCode);
             if(session != null){
                session.referIncrease();
                // 设置语言编码
