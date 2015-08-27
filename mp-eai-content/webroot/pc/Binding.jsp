@@ -44,7 +44,7 @@
                <span class="box-prompt"><i><jh:write source='&page.message' /></i></span>
                <FORM id="frmBind" name='frmBind' method='post' action='Index.wa?do=bindOnAccount'>
                   <p class="icon mt-30"><i class=""></i>
-                     <input id="mobile" name="passport" class="quantico account" type="text" placeholder="E租宝">
+                     <input id="mobile" name="ePassport" class="quantico account" type="text" placeholder="E租宝">
                      <input id="id" name="id"  type="hidden" value="<jh:write source='&page.id' />" />
                   </p>
                   <p class="validation">

@@ -135,14 +135,16 @@
         $("#send_btn").on("click", function() {;
            var o = $(this);
            o.prop("disabled", true);  
+           o.val("正在发送");
            ctrl.setMatching(function() {
               $.post("Index.wa?do=sendValidate", {
                  "passport": mobileVal
               }, function(r) {
                  r = ctrl.replaceNbsp(r);
-                 if (r == '1') {
+                 if (r == '1') {                    
                     ctrl.countdown(o);
                  } else {
+                    o.val("发送动态密码");
                     o.prop("disabled", false);  
                     $boxPrompt.show().text(r);
                  }
