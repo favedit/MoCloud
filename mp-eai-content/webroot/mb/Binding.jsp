@@ -8,6 +8,7 @@
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <link rel="stylesheet" type="text/css" href="css/wap.css">
+      <script type="text/javascript" src="js/ajax.js"></script>
    </head>
 
    <body>
@@ -56,6 +57,7 @@
          };
          var ctrl = {};
          var wait = 60;
+         var $getVerifyCodeBtn =document.getElementById("getVerifyCodeBtn");
          ctrl.countdown = function(o) {
             if (wait == 0) {
                o.removeAttribute("disabled");
@@ -78,39 +80,38 @@
          if (error.innerHTML != "") {
             error.innerHTML = error.innerHTML;
          }
+         ctrl.setCallBackObject = function(){
+           var ajax = new CallBackObject();
+           ajax.OnComplete = ctrl.onComplete();
+           ajax.onError = ctrl.onError();
+           ajax.OnLoaded = ctrl.onLoading();
+           ajax.DoCallBack("Index.wa?do=sendValidate", "passport=" + $fieldInput.value);
+         }
+         ctrl.onLoading = function() {
+         }
+         ctrl.onComplete  = function (responseText, responseXML) {
+          var result = ctrl.replaceNbsp(responseText);
+          if( result == 1){
+            ctrl.countdown($getVerifyCodeBtn);
+          }else{
+            error.innerHTML = result;
+          }
+         }
+         ctrl.onError = function(status, statusText, responseText) {
+            alert(responseText);
+         }
+         ctrl.replaceNbsp = function(temp) {
+            return temp.replace(/[\r\n]/g,"");
+         };
          // 验证码
-         document.getElementById("getVerifyCodeBtn").onclick = function() {
+         $getVerifyCodeBtn.onclick = function() {
             var o = this;
             if ($fieldInput.value != "") {
-               var url = "Index.wa?do=sendValidate";
-               var cbo = new CallBackObject();
-               cbo.OnComplete = Cbo_Complete;
-               cbo.onError = Cbo_Error;
-               cbo.OnLoaded = OnLoading;
-               cbo.DoCallBack("Index.wa?do=sendValidate", "passport=" + $fieldInput.value);
-               function OnLoading() {
-//                  alert("OnLoading ");
-               }
-               function Cbo_Complete(responseText, responseXML) {
-                  var result = ctrl.replaceNbsp(responseText);
-                  console.log(result);
-                  if(result == "1"){
-                     ctrl.countdown(o);
-                  }else{
-                     error.innerHTML = result;
-                  }
-               }
-               function Cbo_Error(status, statusText, responseText) {
-                  alert(responseText);
-               }
+              ctrl.setCallBackObject();
             } else {
                error.innerHTML = alertTips.emptyTel;
             }
          };
-         ctrl.replaceNbsp = function(temp) {
-            return temp.replace(/[\r\n]/g,"");
-         } 
-         
          document.getElementById("btn").onclick = function() {
             if ($fieldInput.value == "") {
                error.innerHTML = alertTips.emptyTel;
@@ -122,75 +123,6 @@
                return false;
             }
          };
-
-
-         function CallBackObject() {
-            this.XmlHttp = this.GetHttpObject();
-         }
-         CallBackObject.prototype.GetHttpObject = function()
-            {
-               var xmlhttp;
-               if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
-                  try {
-                     xmlhttp = new XMLHttpRequest();
-                  } catch (e) {
-                     xmlhttp = false;
-                  }
-               }
-               return xmlhttp;
-            }
-         CallBackObject.prototype.DoCallBack = function(URL, data) {
-            if (this.XmlHttp) {
-               if (this.XmlHttp.readyState == 4 || this.XmlHttp.readyState == 0) {
-                  var oThis = this;
-                  this.XmlHttp.onreadystatechange = function() {
-                     oThis.ReadyStateChange();
-                  };
-                  this.XmlHttp.open('POST', URL);
-                  this.XmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                  this.XmlHttp.send(data);
-               }
-            }
-         }
-         CallBackObject.prototype.AbortCallBack = function() {
-            if (this.XmlHttp)
-               this.XmlHttp.abort();
-         }
-         CallBackObject.prototype.ReadyStateChange = function() {
-            if (this.XmlHttp.readyState == 1) {
-               this.OnLoading();
-            } else if (this.XmlHttp.readyState == 2) {
-               this.OnLoaded();
-            } else if (this.XmlHttp.readyState == 3) {
-               this.OnInteractive();
-            } else if (this.XmlHttp.readyState == 4) {
-               if (this.XmlHttp.status == 0)
-                  this.OnAbort();
-               else if (this.XmlHttp.status == 200 && this.XmlHttp.statusText == "OK")
-                  this.OnComplete(this.XmlHttp.responseText, this.XmlHttp.responseXML);
-               else
-                  this.OnError(this.XmlHttp.status, this.XmlHttp.statusText, this.XmlHttp.responseText);
-            }
-         }
-         CallBackObject.prototype.OnLoading = function() {
-            // Loading 
-         }
-         CallBackObject.prototype.OnLoaded = function() {
-            // Loaded 
-         }
-         CallBackObject.prototype.OnInteractive = function() {
-            // Interactive 
-         }
-         CallBackObject.prototype.OnComplete = function(responseText, responseXml) {
-            // Complete 
-         }
-         CallBackObject.prototype.OnAbort = function() {
-            // Abort 
-         }
-         CallBackObject.prototype.OnError = function(status, statusText) {
-            // Error 
-         }
       </script>
    </body>
-
    </html>

@@ -20,14 +20,14 @@
          </div>
          <div class="box-container">
             <h1>全球实时数据中心</h1>
-            <p class="icon mt-30"><i class=""></i><input id="passport" name="passport" class="quantico account"  type="text" placeholder="账号"></p>
+            <p class="icon mt-30"><i class=""></i><input id="passport" name="passport" class="quantico account"  type="text" placeholder="请输入oa账号"></p>
             <p class="icon icon-p"><i class=" "></i><input id="password" name="password" class="quantico password" type="password" placeholder="密码"></p>
             <p  class="details" ><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</p>
             <a href="javascript:;" class="btn"><input id="btn" type="submit"  value="登录"></a>
          </div>
       </div>
    </div>
-   <footer class="footer">©2015 智慧企业推进中心（北京）</footer>
+   <footer class="footer">©2015 智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></footer>
    <div class="dialog-overlay" id="dialog-overlay"></div>
    <div id="dialog_alert" data-name="alert" class="dialog-box flipInX">
    <div class="box-title">提示</div>

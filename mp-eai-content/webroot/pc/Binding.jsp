@@ -20,12 +20,13 @@
 
    <body>
       <div class="header floatBtn">
-         <div class="head-left"><img class="logo" src="images/main/logo.png">
-            <p class="pl-10"></p>
+         <div class="head-left">
+            <a href="javascript:;"><img class="logo" src="images/main/logo.png"></a>
+            <p class="pl-10" style="line-height: 56px;">客服电话：010-65499299</p>
          </div>
          <div class="head-right">
-            <p class="user-details" id="user-details"><i></i>
-               <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
+            <p class="user-details" id="user-details" title="" ><i></i>
+               zhaoyoajil.com.sdflsdf&nbsp;<img src="images/main/icon.png"></p>
             <ul class="users" id="users">
                <li onclick="loginOut();">退出</li>
             </ul>
@@ -54,7 +55,7 @@
                      <input id="btn"  type="submit" value="提交">
                   </a>
                </FORM>
-               <p style="text-align: right"><a href="Index.wa?do=main&id=<jh:write source='&page.id' />" class="returns" style="margin-top: 20px;display:block;font-size: 14px;">返回首页</a></p>
+               <p style="text-align: right"><a href="Index.wa?do=main&id=<jh:write source='&page.id' />" class="returns" style="margin-top: 20px;display:block;font-size: 14px;text-decoration:underline;">返回首页</a></p>
             </div>
          </div>
       </div>

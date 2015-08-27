@@ -35,10 +35,14 @@ body{
 
 .head-left{
 	float:left;
+	position: relative;
 }
 .logo{
 	padding-left: 15px;
-	padding-top: 5px;
+	position: absolute;
+	left: 15px;
+	top:2px;
+	/*padding-top: 5px;*/
 	width: 240px;
 }
 #container_details{
@@ -68,8 +72,10 @@ body{
 }
 .head-left p{
 	display: inline-block;
-	color:#1879bd;
+	color:#000;
+	line-height: 56px;
 	font-size: 16px;
+	padding-left:280px;
 }
 .head-right{
 	float:right;
@@ -135,7 +141,7 @@ body{
 .users{
 	position: absolute;
 	display: none;
-	left: 10px;
+	right: 75px;
 	cursor:pointer;
 }
 .users li.binding{
@@ -144,7 +150,8 @@ body{
 	background-position: 8px center;
 	background-repeat: no-repeat;
 	background-size: 17px;
-	border-bottom:1px solid rgb(205, 205, 205);;
+	border-bottom:1px solid rgb(205, 205, 205);
+	width: 68px;
 }
 .users li{
 	background-image:url(../images/main/icon4.png);
@@ -239,7 +246,7 @@ p.icon-picture{
  	color:#000;
  	padding-bottom: 20px;
  	position: absolute;
- 	top:-50px;
+ 	top:-39px;
  	width: 100%;
 }
 p.icon-picture span{

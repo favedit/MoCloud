@@ -27,8 +27,8 @@
          <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
          <INPUT id='id_code' name='code' type='hidden'>
          <div class="header floatBtn">
-            <div class="head-left"><img class="logo" src="images/main/logo.png">
-               <p class="pl-10"></p>
+            <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a>
+            <p class="pl-10" style="line-height: 56px;">客服电话：010-65499299</p>
             </div>
             <jh:notEquals source="host" value="&page.userType">
                <div class="head-right">
@@ -93,7 +93,7 @@
                      <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
                   </jh:equals>
                   <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                     <li><i class="mask"></i><img src="images/main/1-1.PNG"></li>
+                     <li > <i class="mask"></i><img src="images/main/1-1.PNG"></li>
                   </jh:equals>
                   <jh:equals source="eai.department.marketer" value="&page.menuString">
                      <li><i class="mask"></i><img src="images/main/2-2.png"></li>

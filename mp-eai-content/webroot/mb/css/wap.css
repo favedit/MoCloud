@@ -149,6 +149,8 @@ body{
 .banner{
 	width: 100%;
 	position: relative;
+	overflow: hidden;
+	min-height: 180px;
 }
 .banner img{
 	width: 100%;
@@ -202,12 +204,21 @@ body{
   /*padding: 1%;*/
   background-color: #fff;
   margin-top: 10px;
-  background-image: url(../images/icon-r.png);
-  background-repeat: no-repeat;
-  background-size: 15px;
-  background-position: right 10px;
+ 
+}
+.details-container ul li i{
+	background-image: url(../images/icon-r.png);
+	background-repeat: no-repeat;
+	background-size: 8px;
+	background-position: center right;
+	position: absolute;
+	right: 0px;
+	display: inline-block;
+	padding: 10px;
+	top:9px;
 }
 .details-container ul p{
+	position: relative;
 	padding: 10px;
 	color:#000;
 	padding-left:28px;
@@ -337,4 +348,9 @@ body{
 	left:10px;
 	top:10px;
 	width: 27px;
+}
+.phone-container{
+	text-align: center;
+	display: block;
+	padding: 10px 0px;
 }

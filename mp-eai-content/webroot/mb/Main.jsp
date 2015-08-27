@@ -24,15 +24,7 @@
                   <header>
                      <span class="btn-list" id="btn-list"></span> 全球实时数据中心
                      <div class="header-r"><img src="images/re.png"></div>
-                     <ul class="header-list bounceInDown">
-                        <span>当前帐号</span>
-                        <p>
-                           <jh:write source='&page.passport' />
-                        </p>
-                        <jh:equals source="false" value="&page.isMarketer" ><li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
-                        <li onclick="loginOut();">退出</li>
-                     </ul>
-                     <div class="shadow"></div>
+                     
                   </header>
                   <div class="banner" id="banner">
                      <div class="bd">
@@ -44,7 +36,7 @@
                               <a class="pic" href="#"><img src="images/img3.jpg"></a>
                            </li>
                            <li>
-                              <a class="pic" href="#"><img src="images/img1.jpg"></a>
+                              <a class="pic" href="#"><img src="images/1.gif"></a>
                            </li>
                         </ul>
                      </div>
@@ -55,35 +47,44 @@
 
                   <div class="details-container">
                      <jh:equals source="eai.marketer.customer" value="&page.menuString">
-                        <ul>
+                        <ul onclick='doChart("ChartMarketerCustomer")'>
                            <li>
-                              <p>全球实时投资数据展示中心</p>
-                              <img src="../pc/images/main/3-3.png" onclick='doChart("ChartMarketerCustomer")'>
-
+                              <p>全球实时投资数据展示中心<i></i></p>
+                              <img src="../pc/images/main/3-3.png" >
                            </li>
                         </ul>
                      </jh:equals>
                      <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                        <ul>
+                        <ul  onclick='doChart("ChartMarketerMarketer")'>
                            <li>
-                              <p class="icon2">理财师排行实时投资数据展示</p>
-                              <img src="../pc/images/main/1-1.PNG" onclick='doChart("ChartMarketerMarketer")'>
+                              <p class="icon2">理财师排行实时投资数据展示<i></i></p>
+                              <img src="../pc/images/main/1-1.PNG">
                            </li>
                         </ul>
                      </jh:equals>
                      <jh:equals source="eai.department.marketer" value="&page.menuString">
-                        <ul>
+                        <ul onclick='doChart("ChartDepartmentMarketer")'>
                            <li>
-                              <p class="icon3">理财师管理实时投资数据展示</p>
-                              <img src="../pc/images/main/2-2.png" onclick='doChart("ChartDepartmentMarketer")'>
+                              <p class="icon3">理财师管理实时投资数据展示<i></i></p>
+                              <img src="../pc/images/main/2-2.png" >
                            </li>
                         </ul>
                      </jh:equals>
+                     <a class="phone-container" href="tel:010-65499299">客服电话：010-65499299</a>
                   </div>
                </section>
             </section>
          </div>
       </FORM>
+      <ul class="header-list bounceInDown">
+         <span>当前帐号</span>
+         <p>
+            <jh:write source='&page.passport' />
+         </p>
+         <jh:equals source="false" value="&page.isMarketer" ><li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
+         <li onclick="loginOut();">退出</li>
+      </ul>
+      <div class="shadow"></div>
       <script type="text/javascript">
          TouchSlide({
             slideCell: "#banner",
@@ -116,7 +117,7 @@
          $headerR.onclick = function() {
             $headerList.style.display = "block";
             $shadow.style.display = "block";
-         }
+         } 
          $shadow.onclick = function() {
                $headerList.style.display = "none";
                this.style.display = "none";

@@ -17,13 +17,13 @@
          </div>
          <div class="wap-box-container">
             <p class="wap-title">账号</p>
-            <p class="content"><input id="passport" name="passport" type="text" placeholder=""></p>
+            <p class="content"><input id="passport" name="passport" type="text" placeholder="请输入oa账号"></p>
             <p class="wap-title password">密码</p>
             <p class="content "><input id="password" name="password" type="password" ></p>
             <a href="javascript:;" class="wap-btn"><input type="submit" id="btn" value="登录"></a>
          </div>
    </div>
-   <footer class="wap-footer">©2015 智慧企业推进中心（北京）</footer>
+   <footer class="wap-footer">©2015 智慧企业推进中心（北京）<a  href="tel:010-65499299">客服电话：010-65499299</a></footer>
 
    <div class=" popBox animated flipInX" id="alertWidget" style="display: none;">
       <span class="ico-pop-wrong"></span>
