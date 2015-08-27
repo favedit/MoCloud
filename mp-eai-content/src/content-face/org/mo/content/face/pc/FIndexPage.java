@@ -38,6 +38,16 @@ public class FIndexPage
    //是否登录
    protected boolean _isLogin;
 
+   protected boolean _isMarketer = false;
+
+   public boolean isMarketer(){
+      return _isMarketer;
+   }
+
+   public void setIsMarketer(boolean _isMarketer){
+      this._isMarketer = _isMarketer;
+   }
+
    public boolean isLogin(){
       return _isLogin;
    }

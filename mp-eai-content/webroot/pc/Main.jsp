@@ -35,7 +35,7 @@
                   <p class="user-details" id="user-details"><i>3</i>
                      <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
                   <ul class="users" id="users">
-                     <li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li>
+                     <jh:equals source="false" value="&page.isMarketer" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
                      <li onclick="loginOut();">退出</li>
                   </ul>
                   <span class="img-details mr-20 pulse">

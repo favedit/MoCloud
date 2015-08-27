@@ -44,7 +44,7 @@
                <FORM id="frmBind" name='frmBind' method='post' action='Index.wa?do=bindOnAccount'>
                   <p class="icon mt-30"><i class=""></i>
                      <input id="mobile" name="passport" class="quantico account" type="text" placeholder="E租宝">
-                     <input name="id"  type="hidden" value="<jh:write source='&page.id' />" />
+                     <input id="id" name="id"  type="hidden" value="<jh:write source='&page.id' />" />
                   </p>
                   <p class="validation">
                      <input type="text" name="validate" id="verification_code" placeholder="验证码">

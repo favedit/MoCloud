@@ -35,6 +35,16 @@ public class FIndexPage
    //用户guid
    protected String _id;
 
+   protected boolean _isMarketer = false;
+
+   public boolean isMarketer(){
+      return _isMarketer;
+   }
+
+   public void setIsMarketer(boolean _isMarketer){
+      this._isMarketer = _isMarketer;
+   }
+
    public String id(){
       return _id;
    }

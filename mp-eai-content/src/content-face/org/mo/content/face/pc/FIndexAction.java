@@ -15,6 +15,8 @@ import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
 import org.mo.com.lang.RRandom;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.common.EChartPage;
 import org.mo.content.core.manage.logger.user.ILoggerModuleConsole;
@@ -46,6 +48,9 @@ public class FIndexAction
       implements
          IIndexAction
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FIndexAction.class);
+
    @ALink
    protected IDataPersonAccessAuthorityConsole _personAccessAuthorityConsole;
 
@@ -154,8 +159,7 @@ public class FIndexAction
                        ILogicContext logicContext,
                        FIndexPage page){
       // 获得参数
-      String passport = page.passport();
-      passport = ("T" + passport).trim().substring(1);
+      String passport = RString.trimRight(page.passport());
       String password = page.password();
       String hostAddress = context.head("x-real-ip");
       String cookie = context.parameter("saveCookie");
@@ -219,20 +223,20 @@ public class FIndexAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         String guid = _userConsole.findByPassport(logicContext, passport).guid();
-         if(!RString.isEmpty(guid)){
-            page.setId(guid);
+         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+         if(user != null){
+            page.setId(user.guid());
+            //获取角色 验证此用户是否绑定e租宝
+            FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
+            if(user.roleId() == role.ouid()){
+               page.setIsMarketer(true);
+            }
          }
          passport = passport.substring(passport.indexOf(":") + 1, passport.length());
          page.setIsLogin(true);
          page.setPassport(passport);
          if(cookie != null){
-            //            try{
-            //               passport = URLEncoder.encode(passport, "UTF-8");
             context.outputCookies().push(new FWebCookie("passport", passport));
-            //            }catch(UnsupportedEncodingException e){
-            //               e.printStackTrace();
-            //            }
          }else{
             context.outputCookies().push(new FWebCookie("passport", null, 0));
          }
@@ -333,10 +337,10 @@ public class FIndexAction
                               FIndexPage page){
       page.setMessage(null);
       String passport = context.parameter("passport");
-
+      _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
-         page.setMessage("账户不能为空");
+         page.setMessage("E租宝帐号不能为空");
          return "ajax";
 
       }
@@ -345,6 +349,7 @@ public class FIndexAction
          page.setMessage("您无理财师权限！");
          return "ajax";
       }
+      _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
       String mobile = marketer.phone();
       String random = RRandom.getNumberRandom(4);
@@ -402,6 +407,7 @@ public class FIndexAction
       String passport = context.parameter("passport");
       String validate = context.parameter("validate");
       String id = context.parameter("id");
+      _logger.debug(this, "BindOnAccount", "BindOnAccount begin. (passport={1},validate={2})", passport, validate);
       if(RString.isEmpty(passport) || RString.isEmpty(validate)){
          page.setMessage("账号或验证码不能为空");
          return "Binding";
@@ -443,10 +449,12 @@ public class FIndexAction
    //============================================================
    private int sendMessage(String random,
                            String mobile){
+      _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},password={2})", random, mobile);
       BusinessService bs = new BusinessService();
       bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
       String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",打死都不要告诉别人哟。【钰诚办公平台】";
       int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
+      _logger.debug(this, "SendValidate", "sendMessage finish. (result={1})", result);
       return result;
    }
 
