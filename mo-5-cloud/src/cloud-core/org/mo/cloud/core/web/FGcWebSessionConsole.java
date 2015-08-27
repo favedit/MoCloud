@@ -93,6 +93,7 @@ public class FGcWebSessionConsole
          }else{
             _sessionConsole.doUpdate(context, info);
          }
+         session.loadInfo(info);
       }catch(Exception e){
          throw new FFatalError(e);
       }

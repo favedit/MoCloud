@@ -19,8 +19,10 @@ public class FGcWebSession
    // 用户编号
    protected long _userId;
 
+   // 用户信息
    protected FGcUserInfo _userInfo;
 
+   // 会话信息
    protected FGcSessionInfo _sessionInfo;
 
    //============================================================
@@ -29,7 +31,7 @@ public class FGcWebSession
    // @return 记录编号
    //============================================================
    public long recordId(){
-      return _userId;
+      return _recordId;
    }
 
    //============================================================
@@ -74,9 +76,11 @@ public class FGcWebSession
    // @param unit 数据单元
    //============================================================
    public void loadInfo(FGcSessionInfo info){
+      // 加载信息
       _recordId = info.ouid();
       _id = info.sessionCode();
       _userId = info.userId();
+      // 设置会话
       _sessionInfo = info;
    }
 }
