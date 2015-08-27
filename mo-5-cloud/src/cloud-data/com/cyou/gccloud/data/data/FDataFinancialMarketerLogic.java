@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>理财师信息逻辑。</T>
+// <T>金融理财师信息逻辑。</T>
 //============================================================
 @ASourceMachine
 public class FDataFinancialMarketerLogic
       extends FLogicTable
 {
-   // 理财师信息的定义。
-   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("statistics");
+   // 金融理财师信息的定义。
+   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 理财师信息的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.financial.marketer", "ST_FIN_MARKETER");
+   // 金融理财师信息的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.financial.marketer", "DT_FIN_MARKETER");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -75,7 +75,7 @@ public class FDataFinancialMarketerLogic
    public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`PASSPORT`,`LABEL`,`RANK`,`PHONE_CODE`,`CARD_CODE`,`DEPARTMENT_LABELS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造理财师信息逻辑单元。</T>
+   // <T>构造金融理财师信息逻辑单元。</T>
    //============================================================
    public FDataFinancialMarketerLogic(){
       _name = TABLE.name();
@@ -83,7 +83,7 @@ public class FDataFinancialMarketerLogic
    }
 
    //============================================================
-   // <T>构造理财师信息逻辑单元。</T>
+   // <T>构造金融理财师信息逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================

@@ -13,7 +13,7 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>理财师信息逻辑单元。</T>
+// <T>金融理财师信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
 public class FDataFinancialMarketerUnit
@@ -98,7 +98,7 @@ public class FDataFinancialMarketerUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造理财师信息逻辑单元。</T>
+   // <T>构造金融理财师信息逻辑单元。</T>
    //============================================================
    public FDataFinancialMarketerUnit(){
    }
