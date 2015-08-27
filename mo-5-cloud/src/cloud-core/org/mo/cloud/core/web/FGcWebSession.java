@@ -1,6 +1,7 @@
 package org.mo.cloud.core.web;
 
-import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
+import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.web.core.session.FWebSession;
 
 //============================================================
@@ -17,6 +18,10 @@ public class FGcWebSession
 
    // 用户编号
    protected long _userId;
+
+   protected FGcUserInfo _userInfo;
+
+   protected FGcSessionInfo _sessionInfo;
 
    //============================================================
    // <T>记录编号。</T>
@@ -46,13 +51,32 @@ public class FGcWebSession
    }
 
    //============================================================
+   // <T>获得会话信息。</T>
+   //
+   // @return 会话信息
+   //============================================================
+   public FGcSessionInfo sessionInfo(){
+      return _sessionInfo;
+   }
+
+   //============================================================
+   // <T>获得用户信息。</T>
+   //
+   // @return 用户信息
+   //============================================================
+   public FGcUserInfo userInfo(){
+      return _userInfo;
+   }
+
+   //============================================================
    // <T>加载数据单元信息。</T>
    //
    // @param unit 数据单元
    //============================================================
-   public void loadUnit(FCacheSystemSessionUnit unit){
-      _recordId = unit.ouid();
-      _id = unit.sessionCode();
-      _userId = unit.userId();
+   public void loadInfo(FGcSessionInfo info){
+      _recordId = info.ouid();
+      _id = info.sessionCode();
+      _userId = info.userId();
+      _sessionInfo = info;
    }
 }

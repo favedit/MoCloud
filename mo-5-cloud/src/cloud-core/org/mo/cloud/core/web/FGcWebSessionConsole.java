@@ -1,8 +1,7 @@
 package org.mo.cloud.core.web;
 
-import com.cyou.gccloud.data.cache.FCacheSystemSessionLogic;
-import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
-import org.mo.com.data.FSql;
+import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
@@ -24,36 +23,39 @@ public class FGcWebSessionConsole
    // 日志输出接口
    protected static ILogger _logger = RLogger.find(FGcWebSessionConsole.class);
 
-   // 服务代码
-   @AProperty
-   protected String _serverCode;
-
    // 逻辑代码
    @AProperty
    protected String _logicCode;
+
+   // 服务代码
+   @AProperty
+   protected String _serverCode;
 
    // 数据库管理器接口
    @ALink
    protected IDatabaseConsole _databaseConsole;
 
+   // 数据库管理器接口
+   @ALink
+   protected IGcSessionConsole _sessionConsole;
+
    //============================================================
    // <T>建立线程对象。</T>
    //
-   // @param sessionId 线程标识
+   // @param sessionCode 会话代码
    // @return 线程对象
    //============================================================
    @Override
-   public IWebSession build(String sessionId){
+   public IWebSession build(String sessionCode){
       FGcWebSession session = new FGcWebSession();
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
-         // 根据唯一编号查找
-         FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
-         FCacheSystemSessionUnit unit = logic.findByGuid(sessionId);
+         // 查找信息
+         FGcSessionInfo info = _sessionConsole.findBySessionCode(context, _logicCode, "web", sessionCode);
          // 创建会话
-         if(unit != null){
-            session.loadUnit(unit);
+         if(info != null){
+            session.loadInfo(info);
          }else{
-            session.setId(sessionId);
+            session.setId(sessionCode);
          }
       }catch(Exception e){
          throw new FFatalError(e);
@@ -75,23 +77,21 @@ public class FGcWebSessionConsole
       // 打开会话
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 查找对象
-         FSql whereSql = new FSql(FCacheSystemSessionLogic.SERVER_CODE + "={session_code}");
-         whereSql.bindString("session_code", sessionCode);
-         FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
-         FCacheSystemSessionUnit unit = logic.search(whereSql);
+         // 查找信息
+         FGcSessionInfo info = _sessionConsole.findBySessionCode(context, _logicCode, "web", sessionCode);
          // 设置内容
-         boolean exists = (unit != null);
+         boolean exists = (info != null);
          if(!exists){
-            unit = logic.doPrepare();
+            info = _sessionConsole.doPrepare(context);
          }
-         unit.setServerCode(_serverCode);
-         unit.setLogicCode(_logicCode);
-         unit.setSessionCode(sessionCode);
-         unit.setUserId(session.userId());
+         info.setFromCode("web");
+         info.setLogicCode(_logicCode);
+         info.setSessionCode(sessionCode);
+         info.setUserId(session.userId());
          if(!exists){
-            logic.doInsert(unit);
+            _sessionConsole.doInsert(context, info);
          }else{
-            logic.doUpdate(unit);
+            _sessionConsole.doUpdate(context, info);
          }
       }catch(Exception e){
          throw new FFatalError(e);
@@ -114,15 +114,14 @@ public class FGcWebSessionConsole
       // 打开会话
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 新建会话
-         FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
-         FCacheSystemSessionUnit unit = logic.find(recordId);
-         if(unit == null){
+         FGcSessionInfo info = _sessionConsole.find(context, recordId);
+         if(info == null){
             _logger.warn(this, "update", "Update session is not exists. (record_id={1}, session_code={2})", recordId, sessionCode);
-         }else if(!sessionCode.equals(unit.sessionCode())){
-            _logger.error(this, "update", "Update session is invalid. (record_id={1}, session_code={2}, record_code={3})", recordId, sessionCode, unit.sessionCode());
+         }else if(!sessionCode.equals(info.sessionCode())){
+            _logger.error(this, "update", "Update session is invalid. (record_id={1}, session_code={2}, record_code={3})", recordId, sessionCode, info.sessionCode());
          }else{
-            unit.setUserId(session.userId());
-            logic.doUpdate(unit);
+            info.setUserId(session.userId());
+            _sessionConsole.doUpdate(context, info);
          }
       }catch(Exception e){
          throw new FFatalError(e);
@@ -145,14 +144,13 @@ public class FGcWebSessionConsole
       // 打开会话
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 新建会话
-         FCacheSystemSessionLogic logic = context.findLogic(FCacheSystemSessionLogic.class);
-         FCacheSystemSessionUnit unit = logic.find(recordId);
-         if(unit == null){
+         FGcSessionInfo info = _sessionConsole.find(context, recordId);
+         if(info == null){
             _logger.warn(this, "close", "Close session is not exists. (session_id={1})", sessionCode);
-         }else if(!sessionCode.equals(unit.sessionCode())){
-            _logger.error(this, "close", "Update session is invalid. (record_id={1}, session_code={2}, record_code={3})", recordId, sessionCode, unit.sessionCode());
+         }else if(!sessionCode.equals(info.sessionCode())){
+            _logger.error(this, "close", "Update session is invalid. (record_id={1}, session_code={2}, record_code={3})", recordId, sessionCode, info.sessionCode());
          }else{
-            logic.doDelete(unit);
+            _sessionConsole.doDelete(context, info);
          }
       }catch(Exception e){
          throw new FFatalError(e);

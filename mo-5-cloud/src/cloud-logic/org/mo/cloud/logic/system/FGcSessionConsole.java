@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.cache.FCacheSystemSessionLogic;
 import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.message.IGcMessageConsole;
+import org.mo.com.data.FSql;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.face.ALink;
@@ -35,6 +36,32 @@ public class FGcSessionConsole
    //============================================================
    public FGcSessionConsole(){
       super(FCacheSystemSessionLogic.class, FGcSessionInfo.class);
+   }
+
+   //============================================================
+   // <T>根据会话编号查找会话信息。</T>
+   //
+   // @param context 逻辑环境
+   // @param sessionCode 会话代码
+   // @return 会话信息
+   //============================================================
+   @Override
+   public FGcSessionInfo findBySessionCode(ILogicContext context,
+                                           String logicCode,
+                                           String fromCode,
+                                           String sessionCode){
+      // 生成SQL文
+      FSql whereSql = new FSql();
+      whereSql.append("(" + FCacheSystemSessionLogic.LOGIC_CODE + "={logic_code})");
+      whereSql.append(" AND (" + FCacheSystemSessionLogic.FROM_CODE + "={from_code})");
+      whereSql.append(" AND (" + FCacheSystemSessionLogic.SESSION_CODE + "={session_code})");
+      whereSql.bindString("logic_code", logicCode);
+      whereSql.bindString("from_code", fromCode);
+      whereSql.bindString("session_code", sessionCode);
+      // 查询单元
+      FCacheSystemSessionLogic logic = findLogic(context);
+      FGcSessionInfo sessionInfo = logic.search(FGcSessionInfo.class, whereSql);
+      return sessionInfo;
    }
 
    //============================================================

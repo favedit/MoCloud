@@ -12,6 +12,18 @@ public interface IGcSessionConsole
          IAbstractLogicUnitConsole<FGcSessionInfo>
 {
    //============================================================
+   // <T>根据会话编号查找会话信息。</T>
+   //
+   // @param context 逻辑环境
+   // @param sessionCode 会话代码
+   // @return 会话信息
+   //============================================================
+   FGcSessionInfo findBySessionCode(ILogicContext context,
+                                    String logicCode,
+                                    String fromCode,
+                                    String sessionCode);
+
+   //============================================================
    // <T>查找所有会话。</T>
    //
    // @param context 逻辑环境

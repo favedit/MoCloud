@@ -41,26 +41,32 @@ public class FCacheSystemSessionLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段服务器代码的定义。
-   public final static SLogicFieldInfo SERVER_CODE = new SLogicFieldInfo("SERVER_CODE");
-
-   // 字段逻辑代码的定义。
-   public final static SLogicFieldInfo LOGIC_CODE = new SLogicFieldInfo("LOGIC_CODE");
-
    // 字段会话代码的定义。
    public final static SLogicFieldInfo SESSION_CODE = new SLogicFieldInfo("SESSION_CODE");
 
-   // 字段用户编号的定义。
-   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
-
-   // 字段项目编号的定义。
-   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+   // 字段逻辑代码的定义。
+   public final static SLogicFieldInfo LOGIC_CODE = new SLogicFieldInfo("LOGIC_CODE");
 
    // 字段来源方式的定义。
    public final static SLogicFieldInfo FROM_CD = new SLogicFieldInfo("FROM_CD");
 
    // 字段来源代码的定义。
    public final static SLogicFieldInfo FROM_CODE = new SLogicFieldInfo("FROM_CODE");
+
+   // 字段用户编号的定义。
+   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
+
+   // 字段角色编号的定义。
+   public final static SLogicFieldInfo ROLE_ID = new SLogicFieldInfo("ROLE_ID");
+
+   // 字段项目编号的定义。
+   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+
+   // 字段角色模块集合的定义。
+   public final static SLogicFieldInfo ROLE_MODULES = new SLogicFieldInfo("ROLE_MODULES");
+
+   // 字段参数集合的定义。
+   public final static SLogicFieldInfo PARAMETERS = new SLogicFieldInfo("PARAMETERS");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -75,7 +81,7 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`SERVER_CODE`,`LOGIC_CODE`,`SESSION_CODE`,`USER_ID`,`PROJECT_ID`,`FROM_CD`,`FROM_CODE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`SESSION_CODE`,`LOGIC_CODE`,`FROM_CD`,`FROM_CODE`,`USER_ID`,`ROLE_ID`,`PROJECT_ID`,`ROLE_MODULES`,`PARAMETERS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
@@ -667,13 +673,15 @@ public class FCacheSystemSessionLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`SERVER_CODE`");
-      cmd.append(",`LOGIC_CODE`");
       cmd.append(",`SESSION_CODE`");
-      cmd.append(",`USER_ID`");
-      cmd.append(",`PROJECT_ID`");
+      cmd.append(",`LOGIC_CODE`");
       cmd.append(",`FROM_CD`");
       cmd.append(",`FROM_CODE`");
+      cmd.append(",`USER_ID`");
+      cmd.append(",`ROLE_ID`");
+      cmd.append(",`PROJECT_ID`");
+      cmd.append(",`ROLE_MODULES`");
+      cmd.append(",`PARAMETERS`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -689,12 +697,12 @@ public class FCacheSystemSessionLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String serverCode = unit.serverCode();
-      if(RString.isEmpty(serverCode)){
+      String sessionCode = unit.sessionCode();
+      if(RString.isEmpty(sessionCode)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(serverCode));
+         cmd.append(RSql.formatValue(sessionCode));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -707,12 +715,14 @@ public class FCacheSystemSessionLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String sessionCode = unit.sessionCode();
-      if(RString.isEmpty(sessionCode)){
+      cmd.append(unit.fromCd());
+      cmd.append(',');
+      String fromCode = unit.fromCode();
+      if(RString.isEmpty(fromCode)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(sessionCode));
+         cmd.append(RSql.formatValue(fromCode));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -723,6 +733,13 @@ public class FCacheSystemSessionLogic
          cmd.append(userId);
       }
       cmd.append(',');
+      long roleId = unit.roleId();
+      if(roleId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(roleId);
+      }
+      cmd.append(',');
       long projectId = unit.projectId();
       if(projectId == 0){
          cmd.append("NULL");
@@ -730,14 +747,21 @@ public class FCacheSystemSessionLogic
          cmd.append(projectId);
       }
       cmd.append(',');
-      cmd.append(unit.fromCd());
-      cmd.append(',');
-      String fromCode = unit.fromCode();
-      if(RString.isEmpty(fromCode)){
+      String roleModules = unit.roleModules();
+      if(RString.isEmpty(roleModules)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(fromCode));
+         cmd.append(RSql.formatValue(roleModules));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String parameters = unit.parameters();
+      if(RString.isEmpty(parameters)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(parameters));
          cmd.append('\'');
       }
       // 设置更新信息
@@ -814,14 +838,14 @@ public class FCacheSystemSessionLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isServerCodeChanged()){
-         cmd.append(",`SERVER_CODE`=");
-         String serverCode = unit.serverCode();
-         if(RString.isEmpty(serverCode)){
+      if(unit.isSessionCodeChanged()){
+         cmd.append(",`SESSION_CODE`=");
+         String sessionCode = unit.sessionCode();
+         if(RString.isEmpty(sessionCode)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(serverCode));
+            cmd.append(RSql.formatValue(sessionCode));
             cmd.append('\'');
          }
       }
@@ -836,35 +860,6 @@ public class FCacheSystemSessionLogic
             cmd.append('\'');
          }
       }
-      if(unit.isSessionCodeChanged()){
-         cmd.append(",`SESSION_CODE`=");
-         String sessionCode = unit.sessionCode();
-         if(RString.isEmpty(sessionCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(sessionCode));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isUserIdChanged()){
-         cmd.append(",`USER_ID`=");
-         long userId = unit.userId();
-         if(userId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(userId);
-         }
-      }
-      if(unit.isProjectIdChanged()){
-         cmd.append(",`PROJECT_ID`=");
-         long projectId = unit.projectId();
-         if(projectId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(projectId);
-         }
-      }
       if(unit.isFromCdChanged()){
          cmd.append(",`FROM_CD`=");
          cmd.append(unit.fromCd());
@@ -877,6 +872,55 @@ public class FCacheSystemSessionLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(fromCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isUserIdChanged()){
+         cmd.append(",`USER_ID`=");
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
+      }
+      if(unit.isRoleIdChanged()){
+         cmd.append(",`ROLE_ID`=");
+         long roleId = unit.roleId();
+         if(roleId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(roleId);
+         }
+      }
+      if(unit.isProjectIdChanged()){
+         cmd.append(",`PROJECT_ID`=");
+         long projectId = unit.projectId();
+         if(projectId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(projectId);
+         }
+      }
+      if(unit.isRoleModulesChanged()){
+         cmd.append(",`ROLE_MODULES`=");
+         String roleModules = unit.roleModules();
+         if(RString.isEmpty(roleModules)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(roleModules));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isParametersChanged()){
+         cmd.append(",`PARAMETERS`=");
+         String parameters = unit.parameters();
+         if(RString.isEmpty(parameters)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(parameters));
             cmd.append('\'');
          }
       }
