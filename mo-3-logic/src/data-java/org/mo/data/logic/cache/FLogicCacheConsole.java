@@ -79,7 +79,7 @@ public class FLogicCacheConsole
       String key = "mo-cache|logic.connection|code";
       String code = null;
       if(_setuped){
-         code = channel.getAsString(key);
+         code = channel.getString(key);
       }else{
          _setuped = true;
       }

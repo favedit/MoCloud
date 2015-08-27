@@ -115,7 +115,7 @@ public class FLogicCacheTable
       String key = "mo-cache|logic.table|" + _name + "|code";
       String code = null;
       if(_setuped){
-         code = channel.getAsString(key);
+         code = channel.getString(key);
       }else{
          _setuped = true;
       }

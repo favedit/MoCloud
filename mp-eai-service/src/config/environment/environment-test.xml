@@ -50,7 +50,7 @@
          scope = 'global' >
       <Property name='enable'>Y</Property>
       <Property name='code'>TS</Property>
-      <Property name='servers'>10.144.131.210:11211</Property>
+      <Property name='servers'>10.169.23.66:11211,10.163.173.14:11211,10.144.33.203:11211</Property>
       <Initialize name='initialize'/>
    </Component>
    

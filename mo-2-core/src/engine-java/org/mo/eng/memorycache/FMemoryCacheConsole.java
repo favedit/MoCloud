@@ -1,9 +1,10 @@
 package org.mo.eng.memorycache;
 
+import com.danga.MemCached.MemCachedClient;
 import com.danga.MemCached.SockIOPool;
-import org.mo.com.lang.FList;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
+import org.mo.com.system.FObjectPool;
 import org.mo.core.aop.face.AProperty;
 
 //============================================================
@@ -13,6 +14,7 @@ public class FMemoryCacheConsole
       implements
          IMemoryCacheConsole
 {
+
    // 允许缓冲
    @AProperty
    protected boolean _enable;
@@ -25,14 +27,8 @@ public class FMemoryCacheConsole
    @AProperty
    protected String _code = RString.EMPTY;
 
-   // 收集次数
-   protected long _allocTotal;
-
-   // 释放次数
-   protected long _freeTotal;
-
    // 内存频道集合
-   protected FList<FMemoryChannel> _channels = new FList<FMemoryChannel>();
+   protected FObjectPool<FMemoryChannel> _channels = new FObjectPool<FMemoryChannel>();
 
    //============================================================
    // <T>初始化处理。</T>
@@ -41,13 +37,17 @@ public class FMemoryCacheConsole
       // 初始化服务器
       if(_enable){
          // 获得服务器列表
-         String[] servers = RString.split(_servers, ',');
+         String[] servers = RString.splitChars(_servers, ",;|");
          // 初始化服务器
          SockIOPool pool = SockIOPool.getInstance();
          pool.setServers(servers);
          pool.initialize();
-         // 设置代码
-         _code += "[" + RUuid.simpleUuid() + "]";
+         // 获得同步代码
+         String guid = RUuid.simpleUuid();
+         MemCachedClient client = new MemCachedClient();
+         String identityCode = _code + EMemoryCacheConstant.IDENTITY_CODE;
+         client.set(identityCode, guid);
+         client.flushAll();
       }
    }
 
@@ -72,15 +72,6 @@ public class FMemoryCacheConsole
    }
 
    //============================================================
-   // <T>设置代码。</T>
-   //
-   // @param code 代码
-   //============================================================
-   public void setCode(String code){
-      _code = code;
-   }
-
-   //============================================================
    // <T>收集一个内存频道。</T>
    //
    // @return 内存频道
@@ -89,16 +80,16 @@ public class FMemoryCacheConsole
    public FMemoryChannel alloc(){
       FMemoryChannel channel = null;
       if(_enable){
-         synchronized(_channels){
-            if(_channels.isEmpty()){
-               channel = new FMemoryChannel();
-               channel.setConsole(this);
-               channel.setup();
-            }else{
-               channel = _channels.pop();
-            }
-            _allocTotal++;
+         // 收集链接
+         channel = _channels.alloc();
+         // 创建链接
+         if(channel == null){
+            channel = new FMemoryChannel();
+            channel.setConsole(this);
+            channel.setup();
          }
+         // 链接处理
+         channel.connect();
       }
       return channel;
    }
@@ -111,10 +102,10 @@ public class FMemoryCacheConsole
    @Override
    public void free(FMemoryChannel channel){
       if(_enable){
-         synchronized(_channels){
-            _channels.push(channel);
-            _freeTotal++;
-         }
+         // 断开处理
+         channel.disconnect();
+         // 释放处理
+         _channels.free(channel);
       }
    }
 }

@@ -19,7 +19,7 @@ public class FMemoryChannel
    private static ILogger _logger = RLogger.find(FMemoryChannel.class);
 
    // 控制台
-   protected IMemoryCacheConsole _console;
+   protected FMemoryCacheConsole _console;
 
    // 内存链接
    protected MemCachedClient _client;
@@ -38,7 +38,7 @@ public class FMemoryChannel
    //
    // @return 控制台
    //============================================================
-   public IMemoryCacheConsole console(){
+   public FMemoryCacheConsole console(){
       return _console;
    }
 
@@ -47,9 +47,8 @@ public class FMemoryChannel
    //
    // @return 控制台
    //============================================================
-   public void setConsole(IMemoryCacheConsole console){
+   public void setConsole(FMemoryCacheConsole console){
       _console = console;
-      _code = "[" + console.code() + "]";
    }
 
    //============================================================
@@ -57,6 +56,14 @@ public class FMemoryChannel
    //============================================================
    public void setup(){
       _client = new MemCachedClient();
+   }
+
+   //============================================================
+   // <T>链接处理。</T>
+   //============================================================
+   public void connect(){
+      String identityCode = _console.code() + EMemoryCacheConstant.IDENTITY_CODE;
+      _code = _console.code() + "-" + _client.get(identityCode) + ":";
    }
 
    //============================================================
@@ -95,10 +102,39 @@ public class FMemoryChannel
    // @param key 主键
    // @return 字符串
    //============================================================
-   public String getAsString(String key){
+   public String getString(String key){
       String cacheKey = _code + key;
-      Object result = _client.get(cacheKey);
-      return (String)result;
+      String value = (String)_client.get(cacheKey);
+      return value;
+   }
+
+   //============================================================
+   // <T>获得超时字符串。</T>
+   //
+   // @param key 主键
+   // @param timeout 超时时间
+   // @return 字符串
+   //============================================================
+   public String getTimeoutString(String key){
+      String cacheKey = _code + key;
+      String value = (String)_client.get(cacheKey);
+      if(value != null){
+         int index = value.indexOf(":");
+         if(index != -1){
+            // 检查超时
+            String timeString = value.substring(0, index);
+            long time = RLong.parse(timeString, 0);
+            if(time > 0){
+               long currentTime = System.currentTimeMillis();
+               if(currentTime > time){
+                  _client.delete(cacheKey);
+                  return null;
+               }
+            }
+            value = value.substring(index + 1);
+         }
+      }
+      return value;
    }
 
    //============================================================
@@ -154,35 +190,6 @@ public class FMemoryChannel
    }
 
    //============================================================
-   // <T>获得超时字符串。</T>
-   //
-   // @param key 主键
-   // @param timeout 超时时间
-   // @return 字符串
-   //============================================================
-   public String getTimeoutString(String key){
-      String cacheKey = _code + key;
-      String value = (String)_client.get(cacheKey);
-      if(value != null){
-         int index = value.indexOf(":");
-         if(index != -1){
-            // 检查超时
-            String timeString = value.substring(0, index);
-            long time = RLong.parse(timeString, 0);
-            if(time > 0){
-               long currentTime = System.currentTimeMillis();
-               if(currentTime > time){
-                  _client.delete(cacheKey);
-                  return null;
-               }
-            }
-            value = value.substring(index + 1);
-         }
-      }
-      return value;
-   }
-
-   //============================================================
    // <T>设置超时字符串。</T>
    //
    // @param key 主键
@@ -219,6 +226,12 @@ public class FMemoryChannel
    public boolean flush(){
       boolean result = _client.flushAll();
       return result;
+   }
+
+   //============================================================
+   // <T>断开处理。</T>
+   //============================================================
+   public void disconnect(){
    }
 
    //============================================================

@@ -1,93 +1,70 @@
 package org.mo.com.system;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.mo.com.lang.FError;
-import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FList;
+import org.mo.com.lang.FObject;
 
-public abstract class FObjectPool
+//============================================================
+// <T>对象缓冲池。</T>
+//============================================================
+public class FObjectPool<T>
+      extends FObject
 {
-   private class FObject
-   {
-      private boolean m_bIsBusy = false;
+   // 收集次数
+   protected long _allocTotal;
 
-      private Object m_oObject = null;
+   // 释放次数
+   protected long _freeTotal;
 
-      public FObject(Object oObject) throws FError{
-         m_oObject = oObject;
-         if(m_oObject == null){
-            throw new FFatalError("Pooled object can't be null.");
-         }
-      }
+   // 自由对象集合
+   protected FList<T> _items = new FList<T>();
 
-      @SuppressWarnings("unused")
-      public boolean beginBusy(){
-         return m_bIsBusy = true;
-      }
-
-      public boolean endBusy(){
-         return m_bIsBusy = false;
-      }
-
-      public Object getObject(){
-         return m_oObject;
-      }
-
-      public boolean isBusy(){
-         return m_bIsBusy;
-      }
-   }
-
-   private List<Object> m_oPoolList = new ArrayList<Object>();
-
+   //============================================================
+   // <T>构造对象缓冲池。</T>
+   //============================================================
    public FObjectPool(){
    }
 
-   protected synchronized Object allocObject() throws FError{
-      FObject oObject = null;
-      FObject oAllocObject = null;
-      int nSize = m_oPoolList.size();
-      for(int n = 0; n < nSize; n++){
-         oObject = (FObject)m_oPoolList.get(n);
-         if(!oObject.isBusy()){
-            oAllocObject = oObject;
-         }
-      }
-      if(oAllocObject == null){
-         oAllocObject = new FObject(createObject());
-         m_oPoolList.add(oAllocObject);
-      }
-      return oAllocObject.getObject();
+   //============================================================
+   // <T>获得收集次数。</T>
+   //
+   // @return 收集次数
+   //============================================================
+   public long allocTotal(){
+      return _allocTotal;
    }
 
-   protected abstract Object createObject() throws FError;
-
-   protected synchronized boolean freeObject(Object oReleaseObject) throws FError{
-      FObject oObject = null;
-      int nSize = m_oPoolList.size();
-      for(int n = 0; n < nSize; n++){
-         oObject = (FObject)m_oPoolList.get(n);
-         if(oObject.getObject() == oReleaseObject){
-            oObject.endBusy();
-         }
-      }
-      return true;
+   //============================================================
+   // <T>获得释放次数。</T>
+   //
+   // @return 释放次数
+   //============================================================
+   public long freeTotal(){
+      return _freeTotal;
    }
 
-   protected synchronized boolean releaseObject(Object oReleaseObject) throws FError{
-      List<Object> releaseList = new ArrayList<Object>();
-      FObject oObject = null;
-      int nSize = m_oPoolList.size();
-      for(int n = 0; n < nSize; n++){
-         oObject = (FObject)m_oPoolList.get(n);
-         if(oObject.getObject() == oReleaseObject){
-            releaseList.add(oObject);
-         }
+   //============================================================
+   // <T>收集一个空闲对象。</T>
+   //
+   // @param item 对象
+   //============================================================
+   public synchronized T alloc(){
+      T value = null;
+      if(!_items.isEmpty()){
+         value = _items.pop();
       }
-      nSize = releaseList.size();
-      for(int n = 0; n < nSize; n++){
-         m_oPoolList.remove(releaseList.get(n));
+      _allocTotal++;
+      return value;
+   }
+
+   //============================================================
+   // <T>释放一个空闲对象。</T>
+   //
+   // @param item 对象
+   //============================================================
+   public synchronized void free(T item){
+      if(item != null){
+         _items.push(item);
       }
-      return true;
+      _freeTotal++;
    }
 }

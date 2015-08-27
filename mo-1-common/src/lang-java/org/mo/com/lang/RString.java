@@ -2400,24 +2400,22 @@ public class RString
    //============================================================
    // <T>使用分割字符将字符串分割为字符串集合。</T>
    //
-   // @param value 字符串
+   // @param source 字符串
    // @param split 分割字符
    // @param limit 限制次数
    // @return 字符串集合
    //============================================================
-   public static String[] split(String value,
+   public static String[] split(String source,
                                 char split,
                                 int limit){
-      if(null == value){
+      if(source == null){
          return new String[0];
       }
       // 计算出现次数
-      int length = value.length();
-      char[] memory = new char[length];
-      value.getChars(0, length, memory, 0);
+      int length = source.length();
       int blockSize = 1;
       for(int n = 0; n < length; n++){
-         if(memory[n] == split){
+         if(source.charAt(n) == split){
             blockSize++;
             if(blockSize >= limit){
                break;
@@ -2428,21 +2426,21 @@ public class RString
       String[] blocks = new String[blockSize];
       if(blockSize > 1){
          blockSize = 0;
-         int pos = 0;
+         int position = 0;
          for(int n = 0; n < length; n++){
-            if(memory[n] == split){
+            if(source.charAt(n) == split){
                if(blockSize >= limit - 1){
                   break;
                }
-               blocks[blockSize++] = new String(memory, pos, n - pos);
-               pos = n + 1;
+               blocks[blockSize++] = source.substring(position, n);
+               position = n + 1;
             }
          }
-         if(pos < length){
-            blocks[blockSize] = new String(memory, pos, length - pos);
+         if(position < length){
+            blocks[blockSize] = source.substring(position, length);
          }
       }else{
-         blocks[0] = value;
+         blocks[0] = source;
       }
       return blocks;
    }
@@ -2456,37 +2454,49 @@ public class RString
    //============================================================
    public static String[] split(String source,
                                 char[] splitters){
-      if(null == source){
+      if(source == null){
          return new String[0];
       }
       // 计算出现次数
       int length = source.length();
-      char[] arMemory = new char[length];
-      source.getChars(0, length, arMemory, 0);
       int blockSize = 1;
       for(int n = 0; n < length; n++){
-         if(RChar.contains(splitters, arMemory[n])){
+         if(RChar.contains(splitters, source.charAt(n))){
             blockSize++;
          }
       }
+      // 分割字符串集合
       String[] blocks = new String[blockSize];
       if(blockSize > 1){
          blockSize = 0;
-         int nPosition = 0;
+         int position = 0;
          for(int n = 0; n < length; n++){
-            if(RChar.contains(splitters, arMemory[n])){
-               blocks[blockSize] = new String(arMemory, nPosition, n - nPosition);
+            if(RChar.contains(splitters, source.charAt(n))){
+               blocks[blockSize] = source.substring(position, n);
                blockSize++;
-               nPosition = n + 1;
+               position = n + 1;
             }
          }
-         if(nPosition < length - 1){
-            blocks[blockSize] = new String(arMemory, nPosition, length - nPosition);
+         if(position < length){
+            blocks[blockSize] = source.substring(position, length);
          }
       }else{
          blocks[0] = source;
       }
       return blocks;
+   }
+
+   //============================================================
+   // <T>分割字符串成为字符串集合。</T>
+   //
+   // @param value 字符串
+   // @param split 分割字符串
+   // @return 字符串集合
+   //============================================================
+   public final static String[] splitChars(String value,
+                                           String split){
+
+      return split(value, split.toCharArray());
    }
 
    //============================================================

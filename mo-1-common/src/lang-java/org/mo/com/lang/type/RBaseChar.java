@@ -120,7 +120,7 @@ public class RBaseChar
    //============================================================
    public final static boolean contains(char[] values,
                                         char find){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -144,7 +144,7 @@ public class RBaseChar
                                         int offset,
                                         int length,
                                         char find){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
             if(values[n] == find){
@@ -189,7 +189,7 @@ public class RBaseChar
       int loop = Math.min(scl, tcl);
       while(loop-- != 0){
          if(source[sourceOffset++] != target[targetOffset++]){
-            return (int)(source[sourceOffset - 1] - target[targetOffset - 1]);
+            return source[sourceOffset - 1] - target[targetOffset - 1];
          }
       }
       return scl - tcl;
