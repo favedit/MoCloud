@@ -24,25 +24,10 @@ import org.mo.web.core.face.AWebSession;
 public class FActionMethodDescriptor
 {
    // 页面命令的描述器
-   private FActionDescriptor _actionDescriptor;
+   protected FActionDescriptor _actionDescriptor;
 
    // 调用函数对象
-   private Method _method;
-
-   // 类描述对象
-   private Class<?>[] _types;
-
-   // 角色描述器
-   private AWebRole _role;
-
-   // 权限描述器
-   private AWebAuthority _authority;
-
-   // 表单描述器数组
-   private AContainer[] _forms;
-
-   // 数据链接数组
-   private ASqlConnect[] _sqlConnects;
+   protected Method _method;
 
    // 会话的描述器
    protected AWebSession _sessionDescriptor;
@@ -55,6 +40,21 @@ public class FActionMethodDescriptor
 
    // 是否需要登录
    protected boolean _loginRequire;
+
+   // 角色描述器
+   protected AWebRole _role;
+
+   // 权限描述器
+   protected AWebAuthority _authority;
+
+   // 类描述对象
+   protected Class<?>[] _types;
+
+   // 表单描述器数组
+   protected AContainer[] _forms;
+
+   // 数据链接数组
+   protected ASqlConnect[] _sqlConnects;
 
    //============================================================
    // <T>构造命令函数描述器。</T>
@@ -127,51 +127,6 @@ public class FActionMethodDescriptor
    }
 
    //============================================================
-   // <T>获得类型描述器集合。</T>
-   //
-   // @return 类型描述器集合
-   //============================================================
-   public Class<?>[] types(){
-      return _types;
-   }
-
-   //============================================================
-   // <T>获得角色描述器。</T>
-   //
-   // @return 角色描述器
-   //============================================================
-   public AWebRole role(){
-      return _role;
-   }
-
-   //============================================================
-   // <T>获得权限描述器。</T>
-   //
-   // @return 权限描述器
-   //============================================================
-   public AWebAuthority authority(){
-      return _authority;
-   }
-
-   //============================================================
-   // <T>获得表单描述器集合。</T>
-   //
-   // @return 表单描述器集合
-   //============================================================
-   public AContainer[] forms(){
-      return _forms;
-   }
-
-   //============================================================
-   // <T>获得数据链接描述器集合。</T>
-   //
-   // @return 链接描述器集合
-   //============================================================
-   public ASqlConnect[] sqlConnects(){
-      return _sqlConnects;
-   }
-
-   //============================================================
    // <T>获得会话描述器。</T>
    //
    // @return 会话描述器
@@ -205,6 +160,51 @@ public class FActionMethodDescriptor
    //============================================================
    public boolean loginRequire(){
       return _loginRequire;
+   }
+
+   //============================================================
+   // <T>获得角色描述器。</T>
+   //
+   // @return 角色描述器
+   //============================================================
+   public AWebRole role(){
+      return _role;
+   }
+
+   //============================================================
+   // <T>获得权限描述器。</T>
+   //
+   // @return 权限描述器
+   //============================================================
+   public AWebAuthority authority(){
+      return _authority;
+   }
+
+   //============================================================
+   // <T>获得类型描述器集合。</T>
+   //
+   // @return 类型描述器集合
+   //============================================================
+   public Class<?>[] types(){
+      return _types;
+   }
+
+   //============================================================
+   // <T>获得表单描述器集合。</T>
+   //
+   // @return 表单描述器集合
+   //============================================================
+   public AContainer[] forms(){
+      return _forms;
+   }
+
+   //============================================================
+   // <T>获得数据链接描述器集合。</T>
+   //
+   // @return 链接描述器集合
+   //============================================================
+   public ASqlConnect[] sqlConnects(){
+      return _sqlConnects;
    }
 
    //============================================================

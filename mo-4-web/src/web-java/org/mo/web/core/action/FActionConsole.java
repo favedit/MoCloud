@@ -44,6 +44,7 @@ import org.mo.web.core.action.common.XAopAction;
 import org.mo.web.core.action.common.XAopActions;
 import org.mo.web.core.action.common.XAopActionsCollection;
 import org.mo.web.core.action.servlet.IActionConstant;
+import org.mo.web.core.common.IWebAccessRule;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.IWebContainerConsole;
 import org.mo.web.core.container.common.FWebContainerItem;
@@ -72,6 +73,13 @@ public class FActionConsole
 
    // 逻辑环境类对象
    protected Class<FLogicContext> _logicContextClass;
+
+   // 访问规则类名称
+   @AProperty(name = "access_rule")
+   protected String _accessRuleClassName;
+
+   // 访问规则
+   protected IWebAccessRule _accessRule;
 
    // 参数绑定控制台
    @ALink
@@ -250,54 +258,6 @@ public class FActionConsole
    }
 
    //============================================================
-   // <T>检查会话是否有效。</T>
-   //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param input 输入信息
-   // @param output 输出信息
-   // @return 处理结果
-   //============================================================
-   public EResult checkSession(IWebContext context,
-                               ILogicContext logicContext){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>检查会话是否登录。</T>
-   //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param input 输入信息
-   // @param output 输出信息
-   // @return 处理结果
-   //============================================================
-   public EResult checkLogin(IWebContext context,
-                             ILogicContext logicContext){
-      IWebSession session = context.session();
-      if(!session.user().isLogin()){
-         return EResult.Failure;
-      }
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>检查角色是否有权限。</T>
-   //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param authority 权限
-   // @param output 输出信息
-   // @return 处理结果
-   //============================================================
-   public EResult checkAuthority(IWebContext context,
-                                 ILogicContext logicContext,
-                                 AWebRole role,
-                                 AWebAuthority authority){
-      return EResult.Success;
-   }
-
-   //============================================================
    // <T>根据转向信息转向新的页面。</T>
    // <P>
    //    如果转向页面中为.wa结尾，则执行新的处理过程。
@@ -452,28 +412,31 @@ public class FActionConsole
          }
          // 检查当前处理是否需要会话
          if(methodDescriptor.sessionRequire()){
-            EResult resultCd = checkSession(context, logicContext);
-            if(resultCd != EResult.Success){
-               // 返回用户未登录画面
-               return redirect(context, _messageConsole.loginWithout());
+            if(_accessRule != null){
+               EResult resultCd = _accessRule.checkSession(context, logicContext);
+               if(resultCd != EResult.Success){
+                  return redirect(context, _messageConsole.loginWithout());
+               }
             }
          }
          // 检查当前处理是否需要登录
          if(methodDescriptor.loginRequire()){
-            EResult resultCd = checkLogin(context, logicContext);
-            if(resultCd != EResult.Success){
-               // 返回用户未登录画面
-               return redirect(context, _messageConsole.loginWithout());
+            if(_accessRule != null){
+               EResult resultCd = _accessRule.checkLogin(context, logicContext);
+               if(resultCd != EResult.Success){
+                  return redirect(context, _messageConsole.loginWithout());
+               }
             }
          }
          // 检查当前处理是否需要登录
          AWebRole role = methodDescriptor.role();
          AWebAuthority authority = methodDescriptor.authority();
          if((role != null) || (authority != null)){
-            EResult resultCd = checkAuthority(context, logicContext, role, authority);
-            if(resultCd != EResult.Success){
-               // 返回用户权限画面
-               return redirect(context, _messageConsole.loginAuthority());
+            if(_accessRule != null){
+               EResult resultCd = _accessRule.checkAuthority(context, logicContext, role, authority);
+               if(resultCd != EResult.Success){
+                  return redirect(context, _messageConsole.loginAuthority());
+               }
             }
          }
          //............................................................
@@ -621,8 +584,18 @@ public class FActionConsole
    // <T>初始化配置信息。</T>
    //============================================================
    public void initializeConfig(){
+      // 设置逻辑环境类对象
       if(!RString.isEmpty(_logicContextClassName)){
          _logicContextClass = RClass.findClass(_logicContextClassName);
+      }
+      // 设置访问权限类对象
+      if(!RString.isEmpty(_accessRuleClassName)){
+         try{
+            Class<?> accessRuleClass = RClass.findClass(_accessRuleClassName);
+            _accessRule = (IWebAccessRule)accessRuleClass.newInstance();
+         }catch(Exception exception){
+            throw new FFatalError(exception);
+         }
       }
    }
 }

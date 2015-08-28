@@ -4,7 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import org.mo.com.lang.FFatalError;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.core.face.AWebAuthority;
 import org.mo.web.core.face.AWebLogin;
+import org.mo.web.core.face.AWebRole;
 import org.mo.web.core.face.AWebSession;
 
 //============================================================
@@ -29,6 +31,12 @@ public class FServletMethodDescriptor
 
    // 是否需要登录
    protected boolean _loginRequire;
+
+   // 角色描述器
+   protected AWebRole _role;
+
+   // 权限描述器
+   protected AWebAuthority _authority;
 
    // 表单信息集合
    protected AContainer[] _forms;
@@ -63,6 +71,10 @@ public class FServletMethodDescriptor
             }else if(annotation instanceof AWebLogin){
                _loginDescriptor = (AWebLogin)annotation;
                _loginRequire = _loginDescriptor.require();
+            }else if(annotation instanceof AWebRole){
+               _role = (AWebRole)annotation;
+            }else if(annotation instanceof AWebAuthority){
+               _authority = (AWebAuthority)annotation;
             }
          }
       }
@@ -133,6 +145,24 @@ public class FServletMethodDescriptor
    //============================================================
    public boolean loginRequire(){
       return _loginRequire;
+   }
+
+   //============================================================
+   // <T>获得角色描述器。</T>
+   //
+   // @return 角色描述器
+   //============================================================
+   public AWebRole role(){
+      return _role;
+   }
+
+   //============================================================
+   // <T>获得权限描述器。</T>
+   //
+   // @return 权限描述器
+   //============================================================
+   public AWebAuthority authority(){
+      return _authority;
    }
 
    //============================================================

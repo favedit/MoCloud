@@ -68,7 +68,7 @@ public class FEaiAuthorityTag
          }
       }
       // 返回成功
-      return SKIP_BODY;
+      return EVAL_BODY_INCLUDE;
    }
 
    //============================================================

@@ -38,9 +38,12 @@ import org.mo.eng.data.IDatabaseConsole;
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.logic.session.FSqlSessionContext;
 import org.mo.logic.session.ISqlSessionContext;
+import org.mo.web.core.common.IWebAccessRule;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.IWebContainerConsole;
 import org.mo.web.core.container.common.FWebContainerItem;
+import org.mo.web.core.face.AWebAuthority;
+import org.mo.web.core.face.AWebRole;
 import org.mo.web.core.message.FWebErrorMessage;
 import org.mo.web.core.message.FWebLogicError;
 import org.mo.web.core.message.IWebMessageConsole;
@@ -82,6 +85,13 @@ public class FServiceConsole
 
    // 逻辑环境类对象
    protected Class<FLogicContext> _logicContextClass;
+
+   // 访问规则类名称
+   @AProperty(name = "access_rule")
+   protected String _accessRuleClassName;
+
+   // 访问规则
+   protected IWebAccessRule _accessRule;
 
    // 绑定控制台接口
    @ALink
@@ -387,20 +397,49 @@ public class FServiceConsole
       }
       // 检查当前处理是否需要会话
       if(methodDescriptor.sessionRequire()){
-         EResult resultCd = checkSession(context, logicContext, input, output);
-         if(resultCd != EResult.Success){
-            buildMessages(context, output);
-            return null;
+         if(_accessRule != null){
+            EResult resultCd = _accessRule.checkSession(context, logicContext);
+            if(resultCd != EResult.Success){
+               buildMessages(context, output);
+            }
          }
       }
       // 检查当前处理是否需要登录
       if(methodDescriptor.loginRequire()){
-         EResult resultCd = checkLogin(context, logicContext, input, output);
-         if(resultCd != EResult.Success){
-            buildMessages(context, output);
-            return null;
+         if(_accessRule != null){
+            EResult resultCd = _accessRule.checkLogin(context, logicContext);
+            if(resultCd != EResult.Success){
+               buildMessages(context, output);
+            }
          }
       }
+      // 检查当前处理是否需要登录
+      AWebRole role = methodDescriptor.role();
+      AWebAuthority authority = methodDescriptor.authority();
+      if((role != null) || (authority != null)){
+         if(_accessRule != null){
+            EResult resultCd = _accessRule.checkAuthority(context, logicContext, role, authority);
+            if(resultCd != EResult.Success){
+               buildMessages(context, output);
+            }
+         }
+      }
+      //      // 检查当前处理是否需要会话
+      //      if(methodDescriptor.sessionRequire()){
+      //         EResult resultCd = checkSession(context, logicContext, input, output);
+      //         if(resultCd != EResult.Success){
+      //            buildMessages(context, output);
+      //            return null;
+      //         }
+      //      }
+      //      // 检查当前处理是否需要登录
+      //      if(methodDescriptor.loginRequire()){
+      //         EResult resultCd = checkLogin(context, logicContext, input, output);
+      //         if(resultCd != EResult.Success){
+      //            buildMessages(context, output);
+      //            return null;
+      //         }
+      //      }
       //............................................................
       // 调用函数对象
       Object result = null;
@@ -558,8 +597,18 @@ public class FServiceConsole
    // <T>初始化配置信息。</T>
    //============================================================
    public void initializeConfig(){
+      // 设置逻辑环境类对象
       if(!RString.isEmpty(_logicContextClassName)){
          _logicContextClass = RClass.findClass(_logicContextClassName);
+      }
+      // 设置访问权限类对象
+      if(!RString.isEmpty(_accessRuleClassName)){
+         try{
+            Class<?> accessRuleClass = RClass.findClass(_accessRuleClassName);
+            _accessRule = (IWebAccessRule)accessRuleClass.newInstance();
+         }catch(Exception exception){
+            throw new FFatalError(exception);
+         }
       }
    }
 

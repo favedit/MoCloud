@@ -7,6 +7,7 @@ import org.mo.com.lang.IRelease;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.reflect.FClass;
 import org.mo.com.lang.reflect.FMethod;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.message.FFatalMessage;
@@ -18,9 +19,12 @@ import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 import org.mo.eng.data.common.ISqlContext;
+import org.mo.web.core.common.IWebAccessRule;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.IWebContainerConsole;
 import org.mo.web.core.container.common.FWebContainerItem;
+import org.mo.web.core.face.AWebAuthority;
+import org.mo.web.core.face.AWebRole;
 import org.mo.web.core.servlet.common.FServletDescriptor;
 import org.mo.web.core.servlet.common.FServletMethodDescriptor;
 import org.mo.web.core.servlet.common.FWebServlet;
@@ -64,6 +68,13 @@ public class FWebServletConsole
 
    // 逻辑环境类对象
    protected Class<FLogicContext> _logicContextClass;
+
+   // 访问规则类名称
+   @AProperty(name = "access_rule")
+   protected String _accessRuleClassName;
+
+   // 访问规则
+   protected IWebAccessRule _accessRule;
 
    // 描述器集合
    @SuppressWarnings("rawtypes")
@@ -160,42 +171,42 @@ public class FWebServletConsole
       return instance;
    }
 
-   //============================================================
-   // <T>检查会话是否有效。</T>
+   //   //============================================================
+   //   // <T>检查会话是否有效。</T>
+   //   //
+   //   // @param context 页面环境
+   //   // @param logicContext 逻辑环境
+   //   // @param input 输入信息
+   //   // @param output 输出信息
+   //   // @return 处理结果
+   //   //============================================================
+   //   public EResult checkSession(IWebContext context,
+   //                               ILogicContext logicContext,
+   //                               IWebServletRequest request,
+   //                               IWebServletResponse response){
+   //      return EResult.Success;
+   //   }
    //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param input 输入信息
-   // @param output 输出信息
-   // @return 处理结果
-   //============================================================
-   public EResult checkSession(IWebContext context,
-                               ILogicContext logicContext,
-                               IWebServletRequest request,
-                               IWebServletResponse response){
-      return EResult.Success;
-   }
-
-   //============================================================
-   // <T>检查会话是否登录。</T>
-   //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param input 输入信息
-   // @param output 输出信息
-   // @return 处理结果
-   //============================================================
-   public EResult checkLogin(IWebContext context,
-                             ILogicContext logicContext,
-                             IWebServletRequest request,
-                             IWebServletResponse response){
-      IWebSession session = context.session();
-      if(!session.user().isLogin()){
-         // 返回用户未登录画面
-         return null;
-      }
-      return EResult.Success;
-   }
+   //   //============================================================
+   //   // <T>检查会话是否登录。</T>
+   //   //
+   //   // @param context 页面环境
+   //   // @param logicContext 逻辑环境
+   //   // @param input 输入信息
+   //   // @param output 输出信息
+   //   // @return 处理结果
+   //   //============================================================
+   //   public EResult checkLogin(IWebContext context,
+   //                             ILogicContext logicContext,
+   //                             IWebServletRequest request,
+   //                             IWebServletResponse response){
+   //      IWebSession session = context.session();
+   //      if(!session.user().isLogin()){
+   //         // 返回用户未登录画面
+   //         return null;
+   //      }
+   //      return EResult.Success;
+   //   }
 
    //============================================================
    // <T>执行后处理。</T>
@@ -264,20 +275,49 @@ public class FWebServletConsole
       }
       // 检查当前处理是否需要会话
       if(methodDescriptor.sessionRequire()){
-         EResult resultCd = checkSession(context, logicContext, request, response);
-         if(resultCd != EResult.Success){
-            //buildMessages(context, response);
-            return null;
+         if(_accessRule != null){
+            EResult resultCd = _accessRule.checkSession(context, logicContext);
+            if(resultCd != EResult.Success){
+               return null;
+            }
          }
       }
       // 检查当前处理是否需要登录
       if(methodDescriptor.loginRequire()){
-         EResult resultCd = checkLogin(context, logicContext, request, response);
-         if(resultCd != EResult.Success){
-            //buildMessages(context, response);
-            return null;
+         if(_accessRule != null){
+            EResult resultCd = _accessRule.checkLogin(context, logicContext);
+            if(resultCd != EResult.Success){
+               return null;
+            }
          }
       }
+      // 检查当前处理是否需要登录
+      AWebRole role = methodDescriptor.role();
+      AWebAuthority authority = methodDescriptor.authority();
+      if((role != null) || (authority != null)){
+         if(_accessRule != null){
+            EResult resultCd = _accessRule.checkAuthority(context, logicContext, role, authority);
+            if(resultCd != EResult.Success){
+               return null;
+            }
+         }
+      }
+      //      // 检查当前处理是否需要会话
+      //      if(methodDescriptor.sessionRequire()){
+      //         EResult resultCd = checkSession(context, logicContext, request, response);
+      //         if(resultCd != EResult.Success){
+      //            //buildMessages(context, response);
+      //            return null;
+      //         }
+      //      }
+      //      // 检查当前处理是否需要登录
+      //      if(methodDescriptor.loginRequire()){
+      //         EResult resultCd = checkLogin(context, logicContext, request, response);
+      //         if(resultCd != EResult.Success){
+      //            //buildMessages(context, response);
+      //            return null;
+      //         }
+      //      }
       //............................................................
       Object result = null;
       Class<?>[] types = methodDescriptor.types();
@@ -377,5 +417,24 @@ public class FWebServletConsole
       context.parameters().set(IWebServletConstant.PARAMETER_URI, parameter);
       // 执行处理
       return execute(name, context, request, response);
+   }
+
+   //============================================================
+   // <T>初始化配置信息。</T>
+   //============================================================
+   public void initializeConfig(){
+      // 设置逻辑环境类对象
+      if(!RString.isEmpty(_logicContextClassName)){
+         _logicContextClass = RClass.findClass(_logicContextClassName);
+      }
+      // 设置访问权限类对象
+      if(!RString.isEmpty(_accessRuleClassName)){
+         try{
+            Class<?> accessRuleClass = RClass.findClass(_accessRuleClassName);
+            _accessRule = (IWebAccessRule)accessRuleClass.newInstance();
+         }catch(Exception exception){
+            throw new FFatalError(exception);
+         }
+      }
    }
 }
