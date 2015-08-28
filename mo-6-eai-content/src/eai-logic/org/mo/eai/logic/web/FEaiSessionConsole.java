@@ -14,6 +14,7 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.eai.logic.control.role.FDataControlModuleInfo;
+import org.mo.eai.logic.control.role.FDataControlRoleInfo;
 import org.mo.eai.logic.control.role.IDataControlRoleConsole;
 import org.mo.web.core.session.IWebSession;
 
@@ -74,20 +75,27 @@ public class FEaiSessionConsole
       try(FLogicContext logicContext = new FLogicContext(_databaseConsole)){
          // 获得用户信息
          long userId = session.userId();
+         String userLabel = null;
          long roleId = 0;
+         String roleCode = null;
          String roleModules = null;
          if(userId > 0){
             FGcUserInfo userInfo = _userConsole.find(logicContext, userId);
             roleId = userInfo.roleId();
+            userLabel = userInfo.label();
             // 获得用户权限
             FStrings moduleCodes = new FStrings();
             if(roleId != 0){
-               FLogicDataset<FDataControlModuleInfo> moduleDataset = _roleConsole.findRoleModules(logicContext, roleId);
-               if(moduleDataset != null){
-                  for(FDataControlModuleInfo moduleInfo : moduleDataset){
-                     if(moduleInfo.viewValidCd() == EGcControlRoleModuleValid.Valid){
-                        String moduleCode = moduleInfo.code();
-                        moduleCodes.push(moduleCode);
+               FDataControlRoleInfo roleInfo = _roleConsole.find(logicContext, roleId);
+               if(roleInfo != null){
+                  roleCode = roleInfo.code();
+                  FLogicDataset<FDataControlModuleInfo> moduleDataset = _roleConsole.findRoleModules(logicContext, roleId);
+                  if(moduleDataset != null){
+                     for(FDataControlModuleInfo moduleInfo : moduleDataset){
+                        if(moduleInfo.viewValidCd() == EGcControlRoleModuleValid.Valid){
+                           String moduleCode = moduleInfo.code();
+                           moduleCodes.push(moduleCode);
+                        }
                      }
                   }
                }
@@ -105,7 +113,9 @@ public class FEaiSessionConsole
          sessionInfo.setLogicCode(_logicCode);
          sessionInfo.setSessionCode(sessionCode);
          sessionInfo.setUserId(userId);
+         sessionInfo.setUserLabel(userLabel);
          sessionInfo.setRoleId(roleId);
+         sessionInfo.setRoleCode(roleCode);
          sessionInfo.setRoleModules(roleModules);
          if(!exists){
             _sessionConsole.doInsert(logicContext, sessionInfo);

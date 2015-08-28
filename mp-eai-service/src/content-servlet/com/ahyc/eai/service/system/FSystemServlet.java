@@ -41,7 +41,7 @@ public class FSystemServlet
                        IWebServletResponse response){
       // 开启会话
       String sessionId = session.id();
-      _sessionConsole.open(logicContext, sessionId);
+      //_sessionConsole.open(logicContext, sessionId);
       //............................................................
       // 发送信息
       FByteStream stream = new FByteStream();

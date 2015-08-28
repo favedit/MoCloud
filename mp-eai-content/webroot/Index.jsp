@@ -46,10 +46,8 @@ function onLoad(){
    //..........................................................
    // 页面跳转
    if(MO.Runtime.isPlatformMobile()){
-      console.log("mb");
       window.location = '/mb/Index.wa';
    }else{
-      console.log("pc");
       window.location = '/pc/Index.wa';
    }
 }

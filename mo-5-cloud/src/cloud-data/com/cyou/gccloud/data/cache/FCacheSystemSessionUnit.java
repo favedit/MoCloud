@@ -68,23 +68,35 @@ public class FCacheSystemSessionUnit
    // 字段用户编号的定义。
    protected long _userId;
 
+   // 存储字段角色标签的定义。
+   private String __userLabel;
+
+   // 字段角色标签的定义。
+   protected String _userLabel;
+
    // 存储字段角色编号的定义。
    private long __roleId;
 
    // 字段角色编号的定义。
    protected long _roleId;
 
-   // 存储字段项目编号的定义。
-   private long __projectId;
+   // 存储字段角色代码的定义。
+   private String __roleCode;
 
-   // 字段项目编号的定义。
-   protected long _projectId;
+   // 字段角色代码的定义。
+   protected String _roleCode;
 
    // 存储字段角色模块集合的定义。
    private String __roleModules;
 
    // 字段角色模块集合的定义。
    protected String _roleModules;
+
+   // 存储字段项目编号的定义。
+   private long __projectId;
+
+   // 字段项目编号的定义。
+   protected long _projectId;
 
    // 存储字段参数集合的定义。
    private String __parameters;
@@ -339,6 +351,33 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
+   // <T>判断角色标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserLabelChanged(){
+      return !RString.equals(__userLabel, _userLabel);
+   }
+
+   //============================================================
+   // <T>获得角色标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String userLabel(){
+      return _userLabel;
+   }
+
+   //============================================================
+   // <T>设置角色标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserLabel(String value){
+      _userLabel = value;
+   }
+
+   //============================================================
    // <T>判断角色编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -366,30 +405,30 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
-   // <T>判断项目编号的数据是否改变。</T>
+   // <T>判断角色代码的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isProjectIdChanged(){
-      return __projectId != _projectId;
+   public boolean isRoleCodeChanged(){
+      return !RString.equals(__roleCode, _roleCode);
    }
 
    //============================================================
-   // <T>获得项目编号的数据内容。</T>
+   // <T>获得角色代码的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long projectId(){
-      return _projectId;
+   public String roleCode(){
+      return _roleCode;
    }
 
    //============================================================
-   // <T>设置项目编号的数据内容。</T>
+   // <T>设置角色代码的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setProjectId(long value){
-      _projectId = value;
+   public void setRoleCode(String value){
+      _roleCode = value;
    }
 
    //============================================================
@@ -417,6 +456,33 @@ public class FCacheSystemSessionUnit
    //============================================================
    public void setRoleModules(String value){
       _roleModules = value;
+   }
+
+   //============================================================
+   // <T>判断项目编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProjectIdChanged(){
+      return __projectId != _projectId;
+   }
+
+   //============================================================
+   // <T>获得项目编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long projectId(){
+      return _projectId;
+   }
+
+   //============================================================
+   // <T>设置项目编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProjectId(long value){
+      _projectId = value;
    }
 
    //============================================================
@@ -579,12 +645,16 @@ public class FCacheSystemSessionUnit
             return _fromCode;
          case "user_id":
             return Long.toString(_userId);
+         case "user_label":
+            return _userLabel;
          case "role_id":
             return Long.toString(_roleId);
-         case "project_id":
-            return Long.toString(_projectId);
+         case "role_code":
+            return _roleCode;
          case "role_modules":
             return _roleModules;
+         case "project_id":
+            return Long.toString(_projectId);
          case "parameters":
             return _parameters;
          case "create_user_id":
@@ -633,14 +703,20 @@ public class FCacheSystemSessionUnit
          case "user_id":
             _userId = RLong.parse(value);
             break;
+         case "user_label":
+            _userLabel = value;
+            break;
          case "role_id":
             _roleId = RLong.parse(value);
             break;
-         case "project_id":
-            _projectId = RLong.parse(value);
+         case "role_code":
+            _roleCode = value;
             break;
          case "role_modules":
             _roleModules = value;
+            break;
+         case "project_id":
+            _projectId = RLong.parse(value);
             break;
          case "parameters":
             _parameters = value;
@@ -704,17 +780,25 @@ public class FCacheSystemSessionUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
+            case "user_label":
+               __userLabel = value;
+               _userLabel = __userLabel;
+               break;
             case "role_id":
                __roleId = RLong.parse(value);
                _roleId = __roleId;
                break;
-            case "project_id":
-               __projectId = RLong.parse(value);
-               _projectId = __projectId;
+            case "role_code":
+               __roleCode = value;
+               _roleCode = __roleCode;
                break;
             case "role_modules":
                __roleModules = value;
                _roleModules = __roleModules;
+               break;
+            case "project_id":
+               __projectId = RLong.parse(value);
+               _projectId = __projectId;
                break;
             case "parameters":
                __parameters = value;
@@ -756,9 +840,11 @@ public class FCacheSystemSessionUnit
       row.set("fromCd", _fromCd);
       row.set("fromCode", _fromCode);
       row.set("userId", _userId);
+      row.set("userLabel", _userLabel);
       row.set("roleId", _roleId);
-      row.set("projectId", _projectId);
+      row.set("roleCode", _roleCode);
       row.set("roleModules", _roleModules);
+      row.set("projectId", _projectId);
       row.set("parameters", _parameters);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -782,9 +868,11 @@ public class FCacheSystemSessionUnit
       map.put("fromCd", RInteger.toString(_fromCd));
       map.put("fromCode", _fromCode);
       map.put("userId", RLong.toString(_userId));
+      map.put("userLabel", _userLabel);
       map.put("roleId", RLong.toString(_roleId));
-      map.put("projectId", RLong.toString(_projectId));
+      map.put("roleCode", _roleCode);
       map.put("roleModules", _roleModules);
+      map.put("projectId", RLong.toString(_projectId));
       map.put("parameters", _parameters);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -808,9 +896,11 @@ public class FCacheSystemSessionUnit
       _fromCd = input.readInt32();
       _fromCode = input.readString();
       _userId = input.readInt64();
+      _userLabel = input.readString();
       _roleId = input.readInt64();
-      _projectId = input.readInt64();
+      _roleCode = input.readString();
       _roleModules = input.readString();
+      _projectId = input.readInt64();
       _parameters = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -834,9 +924,11 @@ public class FCacheSystemSessionUnit
       output.writeInt32(_fromCd);
       output.writeString(_fromCode);
       output.writeInt64(_userId);
+      output.writeString(_userLabel);
       output.writeInt64(_roleId);
-      output.writeInt64(_projectId);
+      output.writeString(_roleCode);
       output.writeString(_roleModules);
+      output.writeInt64(_projectId);
       output.writeString(_parameters);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

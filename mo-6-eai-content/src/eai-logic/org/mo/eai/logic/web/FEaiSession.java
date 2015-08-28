@@ -12,10 +12,13 @@ public class FEaiSession
    // 序列化编号
    private static final long serialVersionUID = 1L;
 
-   // 用户编号
+   // 角色编号
    protected long _roleId;
 
-   // 用户信息
+   // 角色代码
+   protected String _roleCode;
+
+   // 角色模块集合
    protected String _roleModules;
 
    //============================================================
@@ -25,6 +28,15 @@ public class FEaiSession
    //============================================================
    public long roleId(){
       return _roleId;
+   }
+
+   //============================================================
+   // <T>获得角色代码。</T>
+   //
+   // @return 角色代码
+   //============================================================
+   public String roleCode(){
+      return _roleCode;
    }
 
    //============================================================
@@ -46,6 +58,7 @@ public class FEaiSession
       super.loadInfo(info);
       // 加载信息
       _roleId = info.roleId();
+      _roleCode = info.roleCode();
       _roleModules = info.roleModules();
    }
 }
