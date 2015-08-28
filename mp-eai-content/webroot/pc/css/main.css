@@ -2,7 +2,20 @@ body{
 	background: #edeef0;
 	font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;
 	min-width: 1024px;
-	background-image: 
+}
+html,body  
+{  
+    width:100%;  
+    height:100%;  
+}    
+/*table,tbody{
+	width: 100%;
+	display: block;
+}
+*/
+#form{
+  width: 100%;
+  height: 100%;
 }
 .clear{ clear:both} 
 .pl-10{
@@ -27,12 +40,12 @@ body{
 	 margin-top: 10px;
 }
 .header{
-	height:56px;
+	/*height:56px;*/
 	background: #fff;
-	min-width: 1024px;
-	width: 100%;
+	/*min-width: 1024px;*/
+	/*width: 100%;*/
+	overflow: hidden;
 }
-
 .head-left{
 	float:left;
 	position: relative;
@@ -50,6 +63,15 @@ body{
 	height: 100%;
 	overflow: hidden;
 	/*min-height: \*/
+}
+.main-left{
+	width: 80%;
+	overflow: hidden;
+}
+.main-right{
+	width: 19%;
+	background:#CBCBCB;
+	overflow: hidden;
 }
 .loding{
 	display: inline-block;
@@ -101,6 +123,7 @@ body{
 	-moz-transform:rotate(180deg); 
 	-webkit-transform:rotate(180deg);
 	transform:rotate(180deg);
+
 }
 .user-details:hover img{
 	-moz-transform:rotate(0deg); 
@@ -137,19 +160,24 @@ body{
 }
 .head-right .img-details img{
 	width: 100%;
+	cursor:default ;
 }
 .users{
 	position: absolute;
 	display: none;
 	right: 75px;
 	cursor:pointer;
+	z-index: 2;
+}
+.return{
+	min-width: 68px;
 }
 .users li.binding{
 	background-image:none;
 	background-image: url(../../mb/images/binding-icon.png);
 	background-position: 8px center;
 	background-repeat: no-repeat;
-	background-size: 17px;
+	background-size: 16px;
 	border-bottom:1px solid rgb(205, 205, 205);
 	width: 68px;
 }
@@ -225,6 +253,9 @@ body{
 	top:50%;
 	margin-top: -3px;
 }
+.main{
+	min-height: 780px;
+}
 .headers:hover:after{
 	border-top: 6px solid transparent;
 	border-left: 6px solid #1879bd;
@@ -232,12 +263,11 @@ body{
 }
 .imag-container{
 	display: block;
-	min-width:500px;
-	/*height: 480px;*/
-	width: 78%;
+	width: 100%;
 	float: left;
 	height: 100%;
 	position: relative;
+	min-height: 600px;
 }
 p.icon-picture{
  	text-align: center;
@@ -293,7 +323,7 @@ p.icon-picture span{
 	top:50%;
 	margin-left: -650px;
 	margin-top: -250px;
-	display: none;
+	display: block;
 }
 
 .imag-details ul li{
@@ -346,15 +376,17 @@ p.icon-picture span{
 	display: block;
 }
 .titles-container{
-	display: none;
-	width: 20%;
+	display:block;
+	width:100%;
+	height: 100%;
 	text-align: center;
 	float: right;
-	background:#CBCBCB;
-	height: 100%;
+	
 	padding-top: 30px;
 }
-
+.titles-container ul{
+	height: 100%;
+}
 .titles-container li{
 	margin: 10px;
 	width: 200px;
@@ -428,14 +460,18 @@ p.icon-picture span{
 
 .box{
 	width: 550px;
-	height: 600px;
+	/*height: 600px;*/
 	position: absolute;
 	left: 50%;
 	top:50%;
 	margin-left: -275px;
 	margin-top: -200px;
 }
-
+.binding-container{
+	min-height: 580px;
+	height: 90%;
+	position: relative;
+}
 .box-container{
 	display: block;
 	background-color: #fff;
@@ -461,6 +497,7 @@ p.icon-picture span{
 	background-size: 14px;
     padding-left: 28px;
     color:red;
+    font-size: 16px;
 }
 .box-container h1{
 	padding: 24px 0px;
@@ -473,9 +510,9 @@ p.icon-picture span{
 	display: block;
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 60px;
+	/*height: 60px;*/
 	border:none;
-	line-height: 60px;
+	/*line-height: 60px;*/
 	border-radius: 5px;
 	margin-bottom: 22px;
 	background-repeat: no-repeat;
@@ -504,8 +541,9 @@ p.icon-picture span{
 }
 .box-container .quantico{
 	width: 365px;
-	line-height: 58px;
-	height: 58px;
+	line-height: 56px;
+	height: 56px;
+	font-size: 16px;
 	border:0 none;
 }
 .box .validation {
@@ -516,6 +554,9 @@ p.icon-picture span{
   height: 58px;
   width: 275px;
   border:1px solid #dedede;
+  width:255px\9;
+	
+
   /*border: none;*/
 }
 .box .validation input[type=text]{
@@ -526,7 +567,6 @@ p.icon-picture span{
 	position: absolute;
 	top:0px;
 	right: 0px;
-	height: 58px;
 	display: inline-block;
 	text-align: center;
 	background:#f7f7f7;
@@ -534,6 +574,9 @@ p.icon-picture span{
 	border:1px solid #dedede;
 	font-size: 16px;
 	width: 130px;
+	height:62px\9;
+	line-height: 62px\9;
+
 }
 .box .validation [type=button][disabled=disabled]{
 	background:#f7f7f7;
@@ -554,8 +597,17 @@ p.icon-picture span{
 	font-weight: bold;
 	width: 100%;
 }
-
-@media all and (max-width: 1360px) {
+.fot{
+	width: 100%;
+	text-align: center;
+	/*height: 56px;*/
+	/*line-height: 56px;*/
+	font-size: 16px;
+}
+@media all and (max-width: 1400px) {
+	.main{
+		min-height: 580px;
+	}	
 	.box{
 		width: 440px;
 		height: 450px;
@@ -578,9 +630,9 @@ p.icon-picture span{
 		line-height: 45px;
     }
     .box-container .quantico{
-	 height: 45px;
+	 height: 43px;
 	 width: 287px;
-	 line-height: 45px;
+	 line-height: 43px;
     }
     .box-container .icon{
     	height: 45px;
@@ -595,13 +647,17 @@ p.icon-picture span{
 
     .box .validation input[type=text] {
 	  padding-left: 20px;
+	  width: 200px;
 	  height: 45px;
       line-height: 45px;
+      width: 180px\9;
 	}
 	.box .validation [type=button] {
-		 height: 45px;
-      line-height: 45px;
-      font-size: 14px;
+		height: 45px;
+		line-height: 45px;
+		font-size: 14px;
+		height:48px\9;
+		line-height: 48px\9;
 	}
 	.btn{
 		height: 45px;

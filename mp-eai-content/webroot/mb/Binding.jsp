@@ -3,7 +3,7 @@
    <html>
 
    <head>
-      <title>e租宝-全球实时数据展示系统帐号棒定</title>
+      <title>e租宝-全球实时数据展示系统账号棒定</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -26,8 +26,8 @@
                      <p class="error"><jh:write source='&page.message' /></p>
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
-                           <label>帐号：</label>
-                           <input type="tel" name="passport" class="fieldInput" placeholder="请输入E租宝帐号" value="">
+                           <label>账号：</label>
+                           <input type="tel" name="passport" class="fieldInput" placeholder="请输入E租宝账号" value="">
                            <button id="getVerifyCodeBtn" class="btnGetCode" type="button">获取验证码</button>
                            <input tyle="hidden" style="display: none;" value="1" id="input_state">
                            <input name="id" type="hidden" value="<jh:write source='&page.id' />" />
@@ -51,7 +51,7 @@
 
       <script type="text/javascript">
          var alertTips = {
-            emptyTel: "E租宝帐号不能为空",
+            emptyTel: "E租宝账号不能为空",
             validationTel: "验证码不能为空",
             validationErrorTel: "验证码错误"
          };

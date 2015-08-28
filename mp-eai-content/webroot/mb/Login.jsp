@@ -17,7 +17,7 @@
          </div>
          <div class="wap-box-container">
             <p class="wap-title">账号</p>
-            <p class="content"><input id="passport" name="passport" type="text" placeholder="请输入oa账号"></p>
+            <p class="content"><input id="passport" name="passport" type="text" placeholder="请输入OA账号"></p>
             <p class="wap-title password">密码</p>
             <p class="content "><input id="password" name="password" type="password" ></p>
             <a href="javascript:;" class="wap-btn"><input type="submit" id="btn" value="登录"></a>

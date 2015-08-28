@@ -1,53 +1,54 @@
 <%@ include file='/apl/public.inc' %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <meta http-equiv="X-UA-Compatible" IE="EmulateIE7" content="IE=edge" />
+   <meta content="always" name="referrer">
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/animate.css">
    <link rel="stylesheet" type="text/css" href="css/main.css">
    <script type="text/javascript" src="js/jquery.min.js"></script>
    <script type="text/javascript" src="js/main.js"></script>
  </head>
-   <script>
-      function doChart(code) {
-         id_code.value = code;
-         frmMain.submit();
-      }
-      function loginOut() {
-         location.href = "Index.wa?do=loginOut";
-      }
-   </script>
-
-   <body>
-      <jh:equals source="true" value="&page.isLogin" ><p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p></jh:equals>
-      <FORM name='frmMain' method='post' action='Index.wa'>
-         <INPUT id='id_do' name='do' type='hidden' value='chart'>
-         <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
-         <INPUT id='id_code' name='code' type='hidden'>
-         <div class="header floatBtn">
-            <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a>
-            <p class="pl-10" style="line-height: 56px;">客服电话：010-65499299</p>
-            </div>
-            <jh:notEquals source="host" value="&page.userType">
-               <div class="head-right">
-                  <p class="user-details" id="user-details"><i>3</i>
-                     <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
-                  <ul class="users" id="users">
-                     <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
-                     <li onclick="loginOut();">退出</li>
-                  </ul>
-                  <span class="img-details mr-20 pulse">
-                     <img src='../mb/images/re.png'>
-                  </span>
-               </div>
-            </jh:notEquals>
-            <div class="clear"></div>
-         </div>
-        
-         <div class="main" style="display:;">
-            <img class="loding" src="images/main/loding.gif">
+<script>
+   function doChart(code) {
+      id_code.value = code;
+      frmMain.submit();
+   }
+   function loginOut() {
+      location.href = "Index.wa?do=loginOut";
+   }
+</script>
+ <body>
+   <FORM id="form" name='frmMain' method='post' action='Index.wa'>
+   <jh:equals source="true" value="&page.isLogin" ><p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p></jh:equals>
+      <TABLE style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
+         <TR>
+            <TD height='56' colspan="2">
+               <INPUT id='id_do' name='do' type='hidden' value='chart'>
+               <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
+               <INPUT id='id_code' name='code' type='hidden'>
+             <div class="header floatBtn">
+                  <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a>
+                  </div>
+                  <jh:notEquals source="host" value="&page.userType">
+                     <div class="head-right">
+                        <p class="user-details" id="user-details"><i>3</i>
+                           <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
+                        <span class="img-details mr-20 pulse">
+                           <img src='../mb/images/re.png'>
+                        </span>
+                     </div>
+                  </jh:notEquals>
+               </div> 
+               <ul class="users" id="users">
+                  <jh:equals source="false" value="&page.isMarketer" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">账号绑定</a></li></jh:equals>
+                  <li onclick="loginOut();">退出</li>
+               </ul>
+            </TD>
+         </TR>
+         <TR>
+            <TD class="main-left" width="80%">
                <div class="imag-container">
                   <div class="imag-details">
                      <p class="icon-picture">
@@ -85,24 +86,42 @@
                      </div>
                   </div>
                </div>
-
-            <div class="titles-container">
-               <ul>
-                  <p class="play_prev"></p>
-                  <jh:equals source="eai.marketer.customer" value="&page.menuString">
-                     <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
-                  </jh:equals>
-                  <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                     <li > <i class="mask"></i><img src="images/main/1-1.PNG"></li>
-                  </jh:equals>
-                  <jh:equals source="eai.department.marketer" value="&page.menuString">
-                     <li><i class="mask"></i><img src="images/main/2-2.png"></li>
-                  </jh:equals>
-                  <p class="play_next"></p>
-               </ul>
-            </div>
-      </div>
-    </FORM>
-   </body>
-
-   </html>
+            </TD>
+            <TD width="19%" class="main-right">
+               <div class="titles-container">
+                  <ul>
+                    <p class="play_prev"></p>
+                    <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                        <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
+                     </jh:equals>
+                     <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                        <li > <i class="mask"></i><img src="images/main/1-1.PNG"></li>
+                     </jh:equals>
+                     <jh:equals source="eai.department.marketer" value="&page.menuString">
+                        <li><i class="mask"></i><img src="images/main/2-2.png"></li>
+                     </jh:equals> 
+                     <p class="play_next"></p>
+                  </ul> 
+               </div>  
+            </TD>
+         </TR>
+         <TR>
+            <TD height='56' colspan="2">
+                <div class="fot"><p>客服电话：010-65499299</p></div>
+            </TD>
+         </TR>
+      </TABLE>
+   </FORM>
+   <script type="text/javascript">
+   // var windowW = $(window).width();
+   // var windowH = $(window).height();
+   //      // main-left
+   //      $(".main-right").css({"width":windowW*0.2})
+   // $(window).resize(function() {
+   //      $imgH = $imagContainer.find("li").eq(0).height();
+   //      ctrl.setRolling();
+   //      ctrl.setViewport();
+   //   });
+   </script>
+</body>
+</html>

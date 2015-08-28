@@ -22,19 +22,19 @@
       <div class="header floatBtn">
          <div class="head-left">
             <a href="javascript:;"><img class="logo" src="images/main/logo.png"></a>
-            <p class="pl-10" style="line-height: 56px;">客服电话：010-65499299</p>
          </div>
          <div class="head-right">
             <p class="user-details" id="user-details" title="" ><i></i>
                <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
-            <ul class="users" id="users">
-               <li onclick="loginOut();">退出</li>
-            </ul>
+
             <span class="img-details mr-20 pulse">
                <img src='../mb/images/re.png'>
             </span>
          </div>
       </div>
+      <ul class="users" id="users">
+         <li onclick="loginOut();" class="return">退出</li>
+      </ul>
       <div class="clear"></div>
       <div class="binding-container">
          <input tyle="hidden" value="1" id="input_state" style="display: none;">
@@ -47,17 +47,16 @@
                      <input id="mobile" name="ePassport" class="quantico account" type="text" placeholder="E租宝理财师账号">
                      <input id="id" name="id"  type="hidden" value="<jh:write source='&page.id' />" />
                   </p>
-                  <p class="validation">
-                     <input type="text" name="validate" id="verification_code" placeholder="验证码">
-                     <input type="button" id="send_btn" value="发送动态密码">
+                  <p class="validation"><input type="text" name="validate" id="verification_code" placeholder="验证码"><input type="button" id="send_btn" value="发送动态密码">
                   </p>
                   <a href="javascript:;" class="btn">
                      <input id="btn"  type="submit" value="提交">
                   </a>
                </FORM>
-               <p style="text-align: right"><a href="Index.wa?do=main&id=<jh:write source='&page.id' />" class="returns" style="margin-top: 20px;display:block;font-size: 14px;text-decoration:underline;">返回首页</a></p>
+               <p style="text-align: right"><a href="Index.wa?do=main&id=<jh:write source='&page.id' />" class="returns" style="margin-top: 20px;display:inline-block;font-size: 14px;text-decoration:underline;">返回首页</a></p>
             </div>
          </div>
+         <div class="fot" style="position: absolute;bottom:5px;"><p>客服电话：010-65499299</p></div>
       </div>
       <script type="text/javascript"></script>
    </body>

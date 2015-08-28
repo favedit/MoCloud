@@ -77,11 +77,12 @@
          </div>
       </FORM>
       <ul class="header-list bounceInDown">
-         <span>当前帐号</span>
+         <span>当前账号</span>
          <p>
             <jh:write source='&page.passport' />
          </p>
          <jh:equals source="true" value="&page.isOa" ><li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
+
          <li onclick="loginOut();">退出</li>
       </ul>
       <div class="shadow"></div>
