@@ -13,8 +13,11 @@ import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RRandom;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.cache.system.IValidationConsole;
@@ -160,7 +163,6 @@ public class FIndexAction
    public String login(IWebContext context,
                        ILogicContext logicContext,
                        FIndexPage page){
-      page.setIsMarketer(false);
       // 获得参数
       String passport = RString.trimRight(page.passport());
       String password = page.password();
@@ -231,9 +233,9 @@ public class FIndexAction
          if(user != null){
             page.setId(user.guid());
             //获取角色 验证此用户是否绑定e租宝
-            FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
+            FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
             if(user.roleId() == role.ouid()){
-               page.setIsMarketer(true);
+               page.setIsOa(true);
             }
          }
 
@@ -334,6 +336,7 @@ public class FIndexAction
                               ILogicContext logicContext,
                               FIndexPage page){
       page.setMessage(null);
+      TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       String passport = context.parameter("passport");
       _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
       //根据帐号查找用户及手机号
@@ -344,13 +347,23 @@ public class FIndexAction
       }
       FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
       if(marketer == null){
-         page.setMessage("您无理财师权限！");
+         page.setMessage("E租宝账号无理财师权限！");
          return "ajax";
       }
       _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
       String mobile = marketer.phone();
-      String random = RRandom.getNumberRandom(4);
+      String random = null;
+      //验证5分钟前有没有发过验证码，发过再次发送此验证码
+      FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime);
+      if(validate != null){
+         random = validate.checkCode();
+         _logger.debug(this, "SendValidate", "SendValidate get 5Minute ago data. (checkCode={1})", validate.checkCode());
+         EResult result = _validationConsole.deleteByCode(logicContext, random);
+         _logger.debug(this, "SendValidate", "SendValidate delete 5Minute ago same code. (result={1})", result);
+      }else{
+         random = RRandom.getNumberRandom(4);
+      }
       int result = sendMessage(random, mobile);
       if(result < 0){
          page.setMessage("验证码发送失败");
@@ -405,12 +418,28 @@ public class FIndexAction
       String validate = context.parameter("validate");
       String id = context.parameter("id");
       _logger.debug(this, "BindOnAccount", "BindOnAccount begin. (passport={1},validate={2})", passport, validate);
+      //获取用户
+      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
+      if(user != null){
+         passport = user.passport();
+         passport = passport.substring(passport.indexOf(":") + 1, passport.length());
+         page.setPassport(passport);
+         _logger.debug(this, "BindOnAccount", "BindOnAccount find user passport. (passport={1})", passport);
+      }
       if(RString.isEmpty(passport) || RString.isEmpty(validate)){
          page.setMessage("账号或验证码不能为空");
          return "Binding";
       }
       FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, passport);
       if(unit == null){
+         page.setMessage("验证码错误");
+         return "Binding";
+      }
+      //检测时间超时
+      TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
+      TDateTime serviceTime = new TDateTime(unit.createDate());
+      serviceTime.addMinute(5);
+      if(serviceTime.isBefore(nowTime)){
          page.setMessage("验证码错误");
          return "Binding";
       }
@@ -424,14 +453,12 @@ public class FIndexAction
          page.setMessage("用户失效,请重新登录绑定.");
          return "Binding";
       }
-      //获取用户
-      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
       //获取角色
       FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
       if(user != null){
          user.setRoleId(role.ouid());
          _userConsole.doUpdate(logicContext, user);
-         page.setIsMarketer(true);
+         page.setIsOa(false);
       }
       page.setPassport(passport);
       page.setId(id);
@@ -449,7 +476,7 @@ public class FIndexAction
       _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},password={2})", random, mobile);
       BusinessService bs = new BusinessService();
       bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-      String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",不要告诉别人哟。【钰诚办公平台】";
+      String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",千万不要告诉别人哟。【钰诚办公平台】";
       int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
       _logger.debug(this, "SendValidate", "sendMessage finish. (result={1})", result);
       return result;
@@ -476,6 +503,7 @@ public class FIndexAction
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
+            page.setIsOa(true);
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
             entryUnit.setOvld(true);

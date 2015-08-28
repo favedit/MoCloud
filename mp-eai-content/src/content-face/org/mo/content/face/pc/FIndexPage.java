@@ -38,14 +38,14 @@ public class FIndexPage
    //是否登录
    protected boolean _isLogin;
 
-   protected boolean _isMarketer = false;
+   protected boolean _isOa = false;
 
-   public boolean isMarketer(){
-      return _isMarketer;
+   public boolean isOa(){
+      return _isOa;
    }
 
-   public void setIsMarketer(boolean _isMarketer){
-      this._isMarketer = _isMarketer;
+   public void setIsOa(boolean _isOa){
+      this._isOa = _isOa;
    }
 
    public boolean isLogin(){

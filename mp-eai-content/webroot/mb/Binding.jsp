@@ -57,7 +57,7 @@
          };
          var ctrl = {};
          var wait = 60;
-         var $getVerifyCodeBtn =document.getElementById("getVerifyCodeBtn");
+         var $getVerifyCodeBtn = document.getElementById("getVerifyCodeBtn");
          ctrl.countdown = function(o) {
             if (wait == 0) {
                o.removeAttribute("disabled");
@@ -80,34 +80,37 @@
          if (error.innerHTML != "") {
             error.innerHTML = error.innerHTML;
          }
-         ctrl.setCallBackObject = function(){
-           var ajax = new CallBackObject();
-           ajax.OnComplete = ctrl.onComplete();
-           ajax.onError = ctrl.onError();
-           ajax.OnLoaded = ctrl.onLoading();
-           ajax.DoCallBack("Index.wa?do=sendValidate", "passport=" + $fieldInput.value);
+         ctrl.setCallBackObject = function() {
+            var ajax = new CallBackObject();
+            ajax.OnComplete = ctrl.onComplete();
+            ajax.onError = ctrl.onError();
+            ajax.OnLoaded = ctrl.onLoading();
+            ajax.DoCallBack("Index.wa?do=sendValidate", "passport=" + $fieldInput.value);
          }
-         ctrl.onLoading = function() {
-         }
-         ctrl.onComplete  = function (responseText, responseXML) {
-          var result = ctrl.replaceNbsp(responseText);
-          if( result == 1){
-            ctrl.countdown($getVerifyCodeBtn);
-          }else{
-            error.innerHTML = result;
-          }
+         ctrl.onLoading = function() {}
+         ctrl.onComplete = function(responseText, responseXML) {
+            console.log(responseText);
+            var result = ctrl.replaceNbsp(responseText);
+            if (result == 1) {
+               ctrl.countdown($getVerifyCodeBtn);
+            } else {
+               error.innerHTML = result;
+            }
          }
          ctrl.onError = function(status, statusText, responseText) {
             alert(responseText);
          }
          ctrl.replaceNbsp = function(temp) {
-            return temp.replace(/[\r\n]/g,"");
+            if (temp != undefined && temp != "") {
+               return temp.replace(/[\r\n]/g, "");
+            }
+            return temp;
          };
          // 验证码
          $getVerifyCodeBtn.onclick = function() {
             var o = this;
             if ($fieldInput.value != "") {
-              ctrl.setCallBackObject();
+               ctrl.setCallBackObject();
             } else {
                error.innerHTML = alertTips.emptyTel;
             }
@@ -125,4 +128,5 @@
          };
       </script>
    </body>
+
    </html>

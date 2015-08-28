@@ -81,7 +81,7 @@
          <p>
             <jh:write source='&page.passport' />
          </p>
-         <jh:equals source="false" value="&page.isMarketer" ><li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
+         <jh:equals source="true" value="&page.isOa" ><li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
          <li onclick="loginOut();">退出</li>
       </ul>
       <div class="shadow"></div>
