@@ -1,4 +1,4 @@
-package org.mo.eai.logic.session;
+package org.mo.eai.logic.web;
 
 import com.cyou.gccloud.define.enums.core.EGcControlRoleModuleValid;
 import org.mo.cloud.core.web.FGcWebSessionConsole;

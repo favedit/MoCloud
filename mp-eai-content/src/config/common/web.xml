@@ -16,10 +16,10 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.session.IWebSessionConsole'
-         class = 'org.mo.eai.logic.session.FEaiSessionConsole'
+         class = 'org.mo.eai.logic.web.FEaiSessionConsole'
          scope = 'global' >
       <Property name='valid'>Y</Property>
-      <Property name='sessionClassName'>org.mo.eai.logic.session.FEaiSession</Property>
+      <Property name='sessionClassName'>org.mo.eai.logic.web.FEaiSession</Property>
       <Property name='logic_code'>eai</Property>
       <Property name='server_code'>eai.content</Property>
       <Property name='interval'>10000</Property>
@@ -165,7 +165,7 @@
    <!-- ==================================================== -->
    <Component
          face      = 'org.mo.web.core.action.IActionConsole'
-         class     = 'org.mo.cloud.core.web.FGcActionConsole'
+         class     = 'org.mo.eai.logic.web.FEaiActionConsole'
          scope     = 'global' >
       <Initialize name='addContext'>
          <Parameter>/content</Parameter>
@@ -190,7 +190,7 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.service.IServiceConsole'
-         class = 'org.mo.cloud.core.web.FGcServiceConsole'
+         class     = 'org.mo.eai.logic.web.FEaiServiceConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
       <Initialize name='initializeConfig'/>
@@ -201,7 +201,7 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.servlet.IWebServletConsole'
-         class = 'org.mo.cloud.core.web.FGcServletConsole'
+         class     = 'org.mo.eai.logic.web.FEaiServletConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
    </Component>

@@ -12,5 +12,7 @@ public interface IWebMessageConsole
 
    String loginWithout();
 
+   String loginAuthority();
+
    String warnMessage();
 }

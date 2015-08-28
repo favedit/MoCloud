@@ -48,6 +48,11 @@ public class FWebMessageConsole
    }
 
    @Override
+   public String loginAuthority(){
+      return _pageFatal;
+   }
+
+   @Override
    public String warnMessage(){
       return _pageWarn;
    }

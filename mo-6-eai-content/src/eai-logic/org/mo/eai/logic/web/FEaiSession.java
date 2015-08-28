@@ -1,4 +1,4 @@
-package org.mo.eai.logic.session;
+package org.mo.eai.logic.web;
 
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.cloud.logic.system.FGcSessionInfo;

@@ -47,6 +47,8 @@ import org.mo.web.core.action.servlet.IActionConstant;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.IWebContainerConsole;
 import org.mo.web.core.container.common.FWebContainerItem;
+import org.mo.web.core.face.AWebAuthority;
+import org.mo.web.core.face.AWebRole;
 import org.mo.web.core.message.IWebMessageConsole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.FPageConfig;
@@ -280,6 +282,22 @@ public class FActionConsole
    }
 
    //============================================================
+   // <T>检查角色是否有权限。</T>
+   //
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   // @param authority 权限
+   // @param output 输出信息
+   // @return 处理结果
+   //============================================================
+   public EResult checkAuthority(IWebContext context,
+                                 ILogicContext logicContext,
+                                 AWebRole role,
+                                 AWebAuthority authority){
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>根据转向信息转向新的页面。</T>
    // <P>
    //    如果转向页面中为.wa结尾，则执行新的处理过程。
@@ -446,6 +464,16 @@ public class FActionConsole
             if(resultCd != EResult.Success){
                // 返回用户未登录画面
                return redirect(context, _messageConsole.loginWithout());
+            }
+         }
+         // 检查当前处理是否需要登录
+         AWebRole role = methodDescriptor.role();
+         AWebAuthority authority = methodDescriptor.authority();
+         if((role != null) || (authority != null)){
+            EResult resultCd = checkAuthority(context, logicContext, role, authority);
+            if(resultCd != EResult.Success){
+               // 返回用户权限画面
+               return redirect(context, _messageConsole.loginAuthority());
             }
          }
          //............................................................
