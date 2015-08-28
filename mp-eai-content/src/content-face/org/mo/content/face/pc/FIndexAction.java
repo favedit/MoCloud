@@ -228,9 +228,8 @@ public class FIndexAction
          userId = userUnit.ouid();
          // 打开会话
          FGcWebSession session = (FGcWebSession)sessionContext;
-         _sessionConsole.open(session);
          session.setUserId(userId);
-         _sessionConsole.update(session);
+         _sessionConsole.open(session);
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);

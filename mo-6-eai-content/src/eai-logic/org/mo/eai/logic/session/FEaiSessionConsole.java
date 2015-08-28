@@ -1,12 +1,20 @@
 package org.mo.eai.logic.session;
 
+import com.cyou.gccloud.define.enums.core.EGcControlRoleModuleValid;
 import org.mo.cloud.core.web.FGcWebSessionConsole;
+import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.person.IGcUserConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FStrings;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
+import org.mo.data.logic.FLogicDataset;
+import org.mo.eai.logic.control.role.FDataControlModuleInfo;
+import org.mo.eai.logic.control.role.IDataControlRoleConsole;
 import org.mo.web.core.session.IWebSession;
 
 //============================================================
@@ -18,6 +26,14 @@ public class FEaiSessionConsole
 {
    // 日志输出接口
    protected static ILogger _logger = RLogger.find(FEaiSessionConsole.class);
+
+   // 用户控制台
+   @ALink
+   protected IGcUserConsole _userConsole;
+
+   // 角色控制台
+   @ALink
+   protected IDataControlRoleConsole _roleConsole;
 
    //============================================================
    // <T>建立线程对象。</T>
@@ -55,27 +71,50 @@ public class FEaiSessionConsole
       // 获得编号
       String sessionCode = session.id();
       // 打开会话
-      try(FLogicContext context = new FLogicContext(_databaseConsole)){
-         // 查找对象
-         // 查找信息
-         FGcSessionInfo info = _sessionConsole.findBySessionCode(context, _logicCode, "web", sessionCode);
+      try(FLogicContext logicContext = new FLogicContext(_databaseConsole)){
+         // 获得用户信息
+         long userId = session.userId();
+         long roleId = 0;
+         String roleModules = null;
+         if(userId > 0){
+            FGcUserInfo userInfo = _userConsole.find(logicContext, userId);
+            roleId = userInfo.roleId();
+            // 获得用户权限
+            FStrings moduleCodes = new FStrings();
+            if(roleId != 0){
+               FLogicDataset<FDataControlModuleInfo> moduleDataset = _roleConsole.findRoleModules(logicContext, roleId);
+               if(moduleDataset != null){
+                  for(FDataControlModuleInfo moduleInfo : moduleDataset){
+                     if(moduleInfo.viewValidCd() == EGcControlRoleModuleValid.Valid){
+                        String moduleCode = moduleInfo.code();
+                        moduleCodes.push(moduleCode);
+                     }
+                  }
+               }
+            }
+            roleModules = moduleCodes.join('|');
+         }
+         // 获得会话信息
+         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, _logicCode, "web", sessionCode);
          // 设置内容
-         boolean exists = (info != null);
+         boolean exists = (sessionInfo != null);
          if(!exists){
-            info = _sessionConsole.doPrepare(context);
+            sessionInfo = _sessionConsole.doPrepare(logicContext);
          }
-         info.setFromCode("web");
-         info.setLogicCode(_logicCode);
-         info.setSessionCode(sessionCode);
-         info.setUserId(session.userId());
+         sessionInfo.setFromCode("web");
+         sessionInfo.setLogicCode(_logicCode);
+         sessionInfo.setSessionCode(sessionCode);
+         sessionInfo.setUserId(userId);
+         sessionInfo.setRoleId(roleId);
+         sessionInfo.setRoleModules(roleModules);
          if(!exists){
-            _sessionConsole.doInsert(context, info);
+            _sessionConsole.doInsert(logicContext, sessionInfo);
          }else{
-            _sessionConsole.doUpdate(context, info);
+            _sessionConsole.doUpdate(logicContext, sessionInfo);
          }
-         session.loadInfo(info);
-      }catch(Exception e){
-         throw new FFatalError(e);
+         session.loadInfo(sessionInfo);
+      }catch(Exception exception){
+         throw new FFatalError(exception);
       }
       return EResult.Success;
    }

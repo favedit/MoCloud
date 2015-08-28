@@ -70,4 +70,9 @@
     <Item _uuid="edf3133f-affb-4dd3-ba96-8e2c2e8922a2" name="Unknown" label="未知" is_valid="Y" note="M#" />
     <Item _uuid="7cdd323f-7578-42c8-bf6d-b11d4b9cbe50" name="EaiMarketer" label="理财师帐号绑定" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="e329103c-7aa7-44ab-adf1-be6e844f8003" name="GcControlRoleModuleValid" label="控制角色模块有效性" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="77b3deb9-433d-4ccd-a800-9af37a82a58c" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="0b914f3c-0bd3-46e2-b0cd-4cbf1dc2db46" name="Valid" label="有效" is_valid="Y" note="M#" />
+    <Item _uuid="1317a205-326f-4a7b-b2c3-b02df19c0bac" name="Invlaid" label="非法" is_valid="Y" note="M#" />
+  </Enum>
 </Group>
