@@ -34,7 +34,8 @@ public interface IValidationConsole
    // @param nowTime 当前时间
    // ============================================================
    FCacheSystemValidationUnit findByTime(ILogicContext logicContext,
-                                         TDateTime nowTime);
+                                         TDateTime nowTime,
+                                         String passport);
 
    // ============================================================
    // <T>根据验证码获取数据</T>

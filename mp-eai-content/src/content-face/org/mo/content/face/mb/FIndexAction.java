@@ -355,7 +355,7 @@ public class FIndexAction
       String mobile = marketer.phone();
       String random = null;
       //验证5分钟前有没有发过验证码，发过再次发送此验证码
-      FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime);
+      FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime, passport);
       if(validate != null){
          random = validate.checkCode();
          _logger.debug(this, "SendValidate", "SendValidate get 5Minute ago data. (checkCode={1})", validate.checkCode());

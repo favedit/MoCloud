@@ -65,7 +65,8 @@ public class FValidationConsole
    // ============================================================
    @Override
    public FCacheSystemValidationUnit findByTime(ILogicContext logicContext,
-                                                TDateTime nowTime){
+                                                TDateTime nowTime,
+                                                String passport){
 
       TDateTime nowTimeBefore = new TDateTime(nowTime);
       nowTimeBefore.addMinute(-5);
@@ -77,8 +78,9 @@ public class FValidationConsole
       where.append(nowTimeBefore + " < " + FCacheSystemValidationLogic.CREATE_DATE);
       where.append(" AND ");
       where.append(nowTime + " > " + FCacheSystemValidationLogic.CREATE_DATE);
+      where.append(" AND ");
+      where.append(FCacheSystemValidationLogic.PASSPORT + " = '" + passport + "'");
       FCacheSystemValidationLogic logic = logicContext.findLogic(FCacheSystemValidationLogic.class);
-
       FLogicDataset<FCacheSystemValidationUnit> user = logic.fetch(where, "CREATE_DATE");
       if(user == null){
          return null;
