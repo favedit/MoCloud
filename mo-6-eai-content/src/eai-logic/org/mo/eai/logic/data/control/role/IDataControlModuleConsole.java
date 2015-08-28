@@ -1,4 +1,4 @@
-package org.mo.eai.logic.control.role;
+package org.mo.eai.logic.data.control.role;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 

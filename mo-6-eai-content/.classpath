@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/eai-resource"/>
 	<classpathentry kind="src" path="src/eai-logic"/>
 	<classpathentry kind="src" path="src/eai-console"/>
+	<classpathentry kind="src" path="src/eai-resource"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-1-common"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/poly2tri-core.jar"/>

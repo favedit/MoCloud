@@ -1,4 +1,4 @@
-package org.mo.eai.logic.control.role;
+package org.mo.eai.logic.data.control.role;
 
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 
