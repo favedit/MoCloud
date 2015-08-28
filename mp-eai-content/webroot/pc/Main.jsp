@@ -42,7 +42,7 @@
                   </jh:notEquals>
                </div> 
                <ul class="users" id="users">
-                  <jh:equals source="false" value="&page.isMarketer" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">账号绑定</a></li></jh:equals>
+                  <jh:equals source="false" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">账号绑定</a></li></jh:equals>
                   <li onclick="loginOut();">退出</li>
                </ul>
             </TD>
@@ -52,15 +52,9 @@
                <div class="imag-container">
                   <div class="imag-details">
                      <p class="icon-picture">
-                        <jh:equals source="eai.marketer.customer" value="&page.menuString">
-                           <span>全球实时投资数据展示中心</span>
-                        </jh:equals>
-                        <jh:equals source="eai.marketer.marketer" value="&page.menuString">
-                           <span style="display:none;">理财师排行实时投资数据展示</span>
-                        </jh:equals>
-                        <jh:equals source="eai.department.marketer" value="&page.menuString">
-                           <span style="display:none;">理财师管理实时投资数据展示 </span>
-                        </jh:equals>
+                        <je:authority module='eai.marketer.customer'><span>全球实时投资数据展示中心</span></je:authority>
+                        <je:authority module='eai.marketer.marketer'><span>理财师排行实时投资数据展示</span></je:authority>
+                        <je:authority module='eai.department.marketer'><span>理财师管理实时投资数据展示</span></je:authority>
                      </p>
                      <div id="container_details" style="">
                         <ul>
