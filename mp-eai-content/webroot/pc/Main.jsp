@@ -42,7 +42,7 @@
                   </jh:notEquals>
                </div> 
                <ul class="users" id="users">
-                  <jh:equals source="false" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">账号绑定</a></li></jh:equals>
+                  <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">账号绑定</a></li></jh:equals>
                   <li onclick="loginOut();">退出</li>
                </ul>
             </TD>

@@ -343,6 +343,11 @@ public class FIndexAction
          return "Login";
       }
       page.setId(id);
+      //获取角色 验证此用户是否绑定e租宝
+      FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
+      if(user.roleId() == role.ouid()){
+         page.setIsOa(true);
+      }
       String passport = user.passport();
       page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
       page.setIsLogin(false);
@@ -446,27 +451,25 @@ public class FIndexAction
                                ILogicContext logicContext,
                                FIndexPage page){
       page.setMessage(null);
-      String passport = context.parameter("ePassport");
+      String epassport = context.parameter("ePassport");
       String validate = context.parameter("validate");
       String id = context.parameter("id");
-      _logger.debug(this, "BindOnAccount", "BindOnAccount begin. (passport={1},validate={2},guid={3})", passport, validate, id);
+      _logger.debug(this, "BindOnAccount", "BindOnAccount begin. (passport={1},validate={2},guid={3})", epassport, validate, id);
       if(RString.isEmpty(id)){
          return "Login";
+      }
+      if(RString.isEmpty(epassport) || RString.isEmpty(validate)){
+         page.setMessage("账号或验证码不能为空");
+         return "Binding";
       }
       //获取用户
       FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
       if(user != null){
-         passport = user.passport();
+         String passport = user.passport();
          passport = passport.substring(passport.indexOf(":") + 1, passport.length());
          page.setPassport(passport);
-         _logger.debug(this, "BindOnAccount", "BindOnAccount find user passport. (passport={1})", passport);
       }
-      if(RString.isEmpty(passport) || RString.isEmpty(validate)){
-         page.setMessage("账号或验证码不能为空");
-         return "Binding";
-      }
-
-      FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, passport);
+      FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, epassport);
       //时间验证
       if(unit == null){
          page.setMessage("验证码错误");
@@ -477,14 +480,16 @@ public class FIndexAction
       TDateTime serviceTime = new TDateTime(unit.createDate());
       serviceTime.addMinute(5);
       if(serviceTime.isBefore(nowTime)){
-         page.setMessage("验证码错误");
+         page.setMessage("验证码错误time");
          return "Binding";
       }
+
       String checkCode = unit.checkCode();
       if(!checkCode.equals(validate)){
-         page.setMessage("验证码错误");
+         page.setMessage("验证码错误code");
          return "Binding";
       }
+
       //获取角色
       FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
       if(user != null){

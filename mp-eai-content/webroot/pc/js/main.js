@@ -11,7 +11,7 @@
      var $userDetails = $("#user-details");
      var $users = $("#users");
      var $boxPrompt = $(".box-prompt").find("i");
-     var $containerDetails= $("#container_details ul li");
+     var $containerDetails = $("#container_details ul li");
      var alertTips = {
         emptyTel: "E租宝账号不能为空",
         validationTel: "验证码不能为空",
@@ -70,34 +70,34 @@
         $containersImg.eq(index).find("i").hide();
      };
 
-      $containersImg.mouseover(function(){
+     $containersImg.mouseover(function() {
         clearInterval(timing);
         index = $(".titles-container li").index(this);
         ctrl.setRolling(index);
-      });
-      $containersImg.mouseleave(function(){
+     });
+     $containersImg.mouseleave(function() {
         ctrl.setRolling(index);
-      });
-      $containerDetails.mouseover(function(){
-       clearInterval(timing);
-      });
-        $containerDetails.mouseleave(function(){
+     });
+     $containerDetails.mouseover(function() {
+        clearInterval(timing);
+     });
+     $containerDetails.mouseleave(function() {
         ctrl.setTimer();
-      });
+     });
 
      $userDetails.mouseover(function(event) {
         $users.show();
      });
-     $userDetails.mouseleave (function(event) {
+     $userDetails.mouseleave(function(event) {
         $users.hide();
      });
-     $users.mouseleave (function(event) {
+     $users.mouseleave(function(event) {
         $(this).hide();
      });
      $users.mouseover(function(event) {
         $(this).show();
      });
-    
+
      $(window).resize(function() {
         $imgH = $imagContainer.find("li").eq(0).height();
         ctrl.setRolling();
@@ -128,25 +128,29 @@
            $boxPrompt.hide();
            callback();
         } else {
+           var sendBtn = $("#send_btn");
+           sendBtn.val("发送动态密码");
+           sendBtn.prop("disabled", false);
            $boxPrompt.show().text(alertTips.emptyTel);
+
         }
 
      };
      ctrl.setValidation = function() {
-        $("#send_btn").on("click", function() {;
+        $("#send_btn").on("click", function() {
            var o = $(this);
-           o.prop("disabled", true);  
+           o.prop("disabled", true);
            o.val("正在发送");
            ctrl.setMatching(function() {
               $.post("Index.wa?do=sendValidate", {
                  "passport": mobileVal
               }, function(r) {
                  r = ctrl.replaceNbsp(r);
-                 if (r == '1') {                    
+                 if (r == '1') {
                     ctrl.countdown(o);
                  } else {
                     o.val("发送动态密码");
-                    o.prop("disabled", false);  
+                    o.prop("disabled", false);
                     $boxPrompt.show().text(r);
                  }
               })
@@ -176,5 +180,3 @@
      }
 
   });
-
-
