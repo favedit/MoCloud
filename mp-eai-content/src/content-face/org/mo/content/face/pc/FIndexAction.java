@@ -145,9 +145,8 @@ public class FIndexAction
             logger.setLogicMessage("主机地址为白名单。");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             //插入用户，权限绑定
-            String passport = "white-host:" + hostAddress;
             page.setUserType("host");
-            synchronizeData(logicContext, page, passport, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             return "Main";
          }
@@ -183,11 +182,12 @@ public class FIndexAction
       // 登录处理
       String message = null;
       String logggerMessage = null;
+      String changePass = null;
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.Success:
-            passport = "white-user:" + passport;
-            synchronizeData(logicContext, page, passport, EGcPersonUserFrom.EaiHost);
+            changePass = "white-user:" + passport;
+            synchronizeData(logicContext, page, changePass, passport, EGcPersonUserFrom.EaiHost);
             logggerMessage = "登录成功。";
             break;
          case EGcAuthorityResult.PassportInvalid:
@@ -202,8 +202,8 @@ public class FIndexAction
             message = "时间已失效。";
             break;
          case EGcAuthorityResult.OaSuccess:
-            passport = "oa:" + passport;
-            synchronizeData(logicContext, page, passport, EGcPersonUserFrom.EaiOa);
+            changePass = "oa:" + passport;
+            synchronizeData(logicContext, page, changePass, passport, EGcPersonUserFrom.EaiOa);
             logggerMessage = "OA登录成功。";
             break;
          case EGcAuthorityResult.OaPasswordInvald:
@@ -226,7 +226,7 @@ public class FIndexAction
       // 获得用户信息
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         FDataPersonUserUnit userUnit = _userConsole.findByPassport(logicContext, passport);
+         FDataPersonUserUnit userUnit = _userConsole.findByPassport(logicContext, changePass);
          userId = userUnit.ouid();
          // 打开会话
          FGcWebSession session = (FGcWebSession)sessionContext;
@@ -245,7 +245,7 @@ public class FIndexAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
          if(user != null){
             page.setId(user.guid());
             //获取角色 验证此用户是否绑定e租宝
@@ -254,7 +254,6 @@ public class FIndexAction
                page.setIsOa(true);
             }
          }
-         passport = passport.substring(passport.indexOf(":") + 1, passport.length());
          page.setIsLogin(true);
          page.setPassport(passport);
          if(cookie != null){
@@ -348,8 +347,8 @@ public class FIndexAction
       if(user.roleId() == role.ouid()){
          page.setIsOa(true);
       }
-      String passport = user.passport();
-      page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      String label = user.label();
+      page.setPassport(label);
       page.setIsLogin(false);
       tackAuthority(logicContext, page, user.roleId());
       return "Main";
@@ -432,8 +431,8 @@ public class FIndexAction
          page.setIsLogin(false);
          return "Main";
       }
-      String passport = user.passport();
-      page.setPassport(passport.substring(passport.indexOf(":") + 1, passport.length()));
+      String label = user.label();
+      page.setPassport(label);
       page.setId(id);
       tackAuthority(logicContext, page, user.roleId());
       return "Binding";
@@ -465,9 +464,7 @@ public class FIndexAction
       //获取用户
       FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
       if(user != null){
-         String passport = user.passport();
-         passport = passport.substring(passport.indexOf(":") + 1, passport.length());
-         page.setPassport(passport);
+         page.setPassport(user.label());
       }
       FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, epassport);
       //时间验证
@@ -530,6 +527,7 @@ public class FIndexAction
    private void synchronizeData(ILogicContext logicContext,
                                 FIndexPage page,
                                 String passport,
+                                String label,
                                 int from){
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
       if(user == null){
@@ -538,6 +536,7 @@ public class FIndexAction
          if(role != null){
             //同步OA用户
             FDataPersonUserUnit unit = new FDataPersonUserUnit();
+            unit.setLabel(label);
             unit.setPassport(passport);
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
