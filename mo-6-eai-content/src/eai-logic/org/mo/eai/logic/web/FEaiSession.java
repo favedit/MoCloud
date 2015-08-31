@@ -21,6 +21,9 @@ public class FEaiSession
    // 角色模块集合
    protected String _roleModules;
 
+   // 角色模块数组   
+   protected String[] _roleModuleCodes;
+
    //============================================================
    // <T>获得角色编号。</T>
    //
@@ -49,6 +52,15 @@ public class FEaiSession
    }
 
    //============================================================
+   // <T>获得角色模块数组。</T>
+   //
+   // @return 角色模块数组
+   //============================================================
+   public String[] roleModuleCodes(){
+      return _roleModuleCodes;
+   }
+
+   //============================================================
    // <T>加载数据单元信息。</T>
    //
    // @param unit 数据单元
@@ -60,5 +72,8 @@ public class FEaiSession
       _roleId = info.roleId();
       _roleCode = info.roleCode();
       _roleModules = info.roleModules();
+      if(_roleModules != null){
+         _roleModuleCodes = _roleModules.split("|");
+      }
    }
 }

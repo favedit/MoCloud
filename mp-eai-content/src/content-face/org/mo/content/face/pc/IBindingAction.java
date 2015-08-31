@@ -2,7 +2,6 @@ package org.mo.content.face.pc;
 
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
-import org.mo.web.core.face.AWebAuthority;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -12,7 +11,7 @@ import org.mo.web.protocol.context.IWebContext;
 // @author maocy
 // @version 150724
 //============================================================
-public interface IIndexAction
+public interface IBindingAction
 {
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -26,41 +25,37 @@ public interface IIndexAction
                     @AContainer(name = "page") FIndexPage page);
 
    //============================================================
-   // <T>登录逻辑处理。</T>
+   // <T>发送验证码。</T>
    //
    // @param context 页面环境
-   // @param sessionContext 会话环境
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   //   @AWebAuthority("eai.marketer.customer1|eai.marketer.marketer1|eai.department.marketer1")
-   String login(IWebContext context,
-                IWebSession sessionContext,
-                ILogicContext logicContext,
-                @AContainer(name = "page", fill = true) FIndexPage page);
+   String sendValidate(IWebContext context,
+                       ILogicContext logicContext,
+                       @AContainer(name = "page", fill = true) FIndexPage page);
 
    //============================================================
-   // <T>表格逻辑处理。</T>
+   // <T>账号绑定之前处理。</T>
    //
    // @param context 页面环境
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   @AWebAuthority("eai.marketer.customer1")
-   String chart(IWebContext context,
-                IWebSession sessionContext,
-                ILogicContext logicContext,
-                @AContainer(name = "page", fill = true) FIndexPage page);
+   String bind(IWebContext context,
+               IWebSession sessionContext,
+               ILogicContext logicContext,
+               @AContainer(name = "page", fill = true) FIndexPage page);
 
    //============================================================
-   // <T>表格逻辑处理。</T>
+   // <T>账号绑定。</T>
    //
    // @param context 页面环境
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   String loginOut(IWebContext context,
-                   IWebSession sessionContext,
-                   ILogicContext logicContext,
-                   @AContainer(name = "page", fill = true) FIndexPage page);
+   String bindOnAccount(IWebContext context,
+                        ILogicContext logicContext,
+                        @AContainer(name = "page", fill = true) FIndexPage page);
+
 }

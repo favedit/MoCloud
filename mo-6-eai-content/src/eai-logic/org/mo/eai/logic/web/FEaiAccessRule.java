@@ -75,6 +75,47 @@ public class FEaiAccessRule
                                  ILogicContext logicContext,
                                  AWebRole role,
                                  AWebAuthority authority){
+      FEaiSession session = (FEaiSession)context.session();
+      // 会话不存在
+      if(session == null){
+         return EResult.Failure;
+      }
+      String storeRoleCode = session.roleCode();
+      // 效验角色
+      if(role != null){
+         // 登录用户角色是否正确
+         String roleCode = role.value();
+         if(!roleCode.equals(storeRoleCode)){
+            return EResult.Failure;
+         }
+      }
+      // 效验模块
+      boolean moduleFlag = false;
+      if(authority != null){
+         String[] modules = authority.toString().split("|");
+         String[] storeRoleModules = session.roleModuleCodes();
+         int modulesLength = modules.length;
+         int storeRoleModulesLength = storeRoleModules.length;
+         if(storeRoleModulesLength != 0){
+            for(int i = 0; i < modulesLength; i++){
+               String module = modules[i];
+               for(int j = 0; j < storeRoleModulesLength; j++){
+                  String storerolemodule = storeRoleModules[j];
+                  if(module.equals(storerolemodule)){
+                     moduleFlag = true;
+                     break;
+                  }
+               }
+               if(moduleFlag){
+                  break;
+               }
+            }
+         }
+      }
+      if(!moduleFlag){
+         return EResult.Failure;
+      }
+
       return EResult.Success;
    }
 }

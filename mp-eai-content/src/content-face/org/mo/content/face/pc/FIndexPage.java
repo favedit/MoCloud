@@ -27,7 +27,7 @@ public class FIndexPage
    protected String _sceneCode;
 
    //用户权限
-   protected String _menuString;
+   //   protected String _menuString;
 
    //用户类型
    protected String _userType;
@@ -72,13 +72,13 @@ public class FIndexPage
       this._userType = _userType;
    }
 
-   public String menuString(){
-      return _menuString;
-   }
-
-   public void setMenuString(String _menuString){
-      this._menuString = _menuString;
-   }
+   //   public String menuString(){
+   //      return _menuString;
+   //   }
+   //
+   //   public void setMenuString(String _menuString){
+   //      this._menuString = _menuString;
+   //   }
 
    //============================================================
    // <P>获得主机地址。</P>
