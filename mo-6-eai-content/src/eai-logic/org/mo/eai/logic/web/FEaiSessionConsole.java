@@ -3,7 +3,6 @@ package org.mo.eai.logic.web;
 import com.cyou.gccloud.define.enums.core.EGcControlRoleModuleValid;
 import org.mo.cloud.core.web.FGcWebSessionConsole;
 import org.mo.cloud.logic.person.FGcUserInfo;
-import org.mo.cloud.logic.person.IGcUserConsole;
 import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -27,10 +26,6 @@ public class FEaiSessionConsole
 {
    // 日志输出接口
    protected static ILogger _logger = RLogger.find(FEaiSessionConsole.class);
-
-   // 用户控制台
-   @ALink
-   protected IGcUserConsole _userConsole;
 
    // 角色控制台
    @ALink

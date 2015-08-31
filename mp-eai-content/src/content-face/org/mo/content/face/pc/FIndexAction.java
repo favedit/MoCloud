@@ -26,7 +26,6 @@ import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
-import org.mo.eai.logic.web.FEaiSession;
 import org.mo.web.core.action.common.FWebCookie;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
@@ -235,7 +234,7 @@ public class FIndexAction
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
          if(user != null){
-            page.setId(user.guid());
+            //            page.setId(user.guid());
             //获取角色 验证此用户是否绑定e租宝
             FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
             if(user.roleId() == role.ouid()){
@@ -269,18 +268,16 @@ public class FIndexAction
                        IWebSession sessionContext,
                        ILogicContext logicContext,
                        FIndexPage page){
-      FEaiSession session = (FEaiSession)context.session();
-      System.out.println(session.roleModules() + "-------------");
       String code = context.parameter("code");
-      String guid = context.parameter("id");
-      System.out.println(code + "-----------------------");
-      if(RString.isEmpty(guid)){
-         return "Login";
-      }
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      //      String guid = context.parameter("id");
+      //      if(RString.isEmpty(guid)){
+      //         return "Login";
+      //      }
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
       page.setSceneCode(code);
       //保存日志
-      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, guid);
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
          FLoggerPersonUserModuleUnit module = _loggerModuleConsole.doPrepare(logicContext);
          module.setUserId(user.ouid());

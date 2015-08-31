@@ -1,6 +1,7 @@
 package org.mo.eai.logic.web;
 
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.RString;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.common.FWebAccessRule;
 import org.mo.web.core.face.AWebAuthority;
@@ -92,7 +93,7 @@ public class FEaiAccessRule
       // 效验模块
       boolean moduleFlag = false;
       if(authority != null){
-         String[] modules = authority.toString().split("|");
+         String[] modules = RString.split(authority.value(), '|');
          String[] storeRoleModules = session.roleModuleCodes();
          int modulesLength = modules.length;
          int storeRoleModulesLength = storeRoleModules.length;

@@ -2,6 +2,7 @@ package org.mo.eai.logic.web;
 
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.com.lang.RString;
 
 //============================================================
 // <T>会话信息。</T>
@@ -73,7 +74,7 @@ public class FEaiSession
       _roleCode = info.roleCode();
       _roleModules = info.roleModules();
       if(_roleModules != null){
-         _roleModuleCodes = _roleModules.split("|");
+         _roleModuleCodes = RString.split(_roleModules, '|');
       }
    }
 }

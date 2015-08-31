@@ -26,7 +26,6 @@
          <TR>
             <TD height='56' colspan="2">
                <INPUT id='id_do' name='do' type='hidden' value='chart'>
-               <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
                <INPUT id='id_code' name='code' type='hidden'>
              <div class="header floatBtn">
                   <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a></div>

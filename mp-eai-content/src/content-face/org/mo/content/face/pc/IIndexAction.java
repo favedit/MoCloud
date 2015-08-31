@@ -46,7 +46,7 @@ public interface IIndexAction
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   @AWebAuthority("eai.marketer.customer1")
+   @AWebAuthority("eai.marketer.customer|eai.marketer.marketer|eai.department.marketer")
    String chart(IWebContext context,
                 IWebSession sessionContext,
                 ILogicContext logicContext,
