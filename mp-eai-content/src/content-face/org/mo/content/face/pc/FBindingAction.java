@@ -227,7 +227,7 @@ public class FBindingAction
       }
       String label = user.label();
       page.setPassport(label);
-      page.setId(id);
+      //      page.setId(id);
       //      tackAuthority(logicContext, page, user.roleId());
       return "Binding";
    }
@@ -289,7 +289,7 @@ public class FBindingAction
          page.setIsOa(false);
       }
 
-      page.setId(id);
+      //      page.setId(id);
       page.setIsLogin(false);
       //      tackAuthority(logicContext, page, user.roleId());
       return "Main";

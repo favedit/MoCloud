@@ -3,7 +3,6 @@ package org.mo.content.face.pc;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
-import com.cyou.gccloud.data.logger.FLoggerPersonUserModuleUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
@@ -12,7 +11,6 @@ import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.common.EChartPage;
 import org.mo.content.core.manage.logger.user.ILoggerModuleConsole;
 import org.mo.content.core.manage.person.module.IModuleConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
@@ -73,28 +71,11 @@ public class FIndexAction
    @ALink
    protected IEntryConsole _entryConsole;
 
-   //短信校验控制台
-   //   @ALink
-   //   protected IValidationConsole _validationConsole;
-
-   //理财师控制台
-   //   @ALink
-   //   protected IFinancialMarketerConsole _marketerConsole;
-
    @ALink
    protected ILoggerModuleConsole _loggerModuleConsole;
 
    //OA角色
    protected final String role_oa = "eai.oa";
-
-   //理财师角色
-   protected final String role_marketer = "eai.marketer";
-
-   protected final String module_code_customer = "eai.marketer.customer";
-
-   protected final String module_code_marketer = "eai.marketer.marketer";
-
-   protected final String module_code_department = "eai.department.marketer";
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -109,7 +90,6 @@ public class FIndexAction
                            FIndexPage page){
       // 清空参数
       page.setPassport(null);
-      //      page.setPassword(null);
       page.setMessage(null);
       page.setUserType(null);
       // 获得参数
@@ -256,49 +236,6 @@ public class FIndexAction
    }
 
    //============================================================
-   // <T>表格逻辑处理。</T>
-   //
-   // @param context 页面环境
-   // @param sessionContext 用户会话
-   // @param logicContext 逻辑环境
-   // @param page 页面
-   //============================================================
-   @Override
-   public String chart(IWebContext context,
-                       IWebSession sessionContext,
-                       ILogicContext logicContext,
-                       FIndexPage page){
-      String code = context.parameter("code");
-      FGcWebSession session = (FGcWebSession)sessionContext;
-      //      String guid = context.parameter("id");
-      //      if(RString.isEmpty(guid)){
-      //         return "Login";
-      //      }
-      page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-      page.setSceneCode(code);
-      //保存日志
-      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
-      if(user != null){
-         FLoggerPersonUserModuleUnit module = _loggerModuleConsole.doPrepare(logicContext);
-         module.setUserId(user.ouid());
-         module.setPassport(user.passport());
-         module.setBrowserUri(context.requestUrl());
-         module.setPageInfo(context.parameters().dump());
-         module.setModuleAction("view");
-         module.setModuleResult("Success");
-         if(code.equals("ChartMarketerCustomer")){
-            module.setModuleCode(module_code_customer);
-         }else if(code.equals("ChartMarketerMarketer")){
-            module.setModuleCode(module_code_marketer);
-         }else if(code.equals("ChartDepartmentMarketer")){
-            module.setModuleCode(module_code_department);
-         }
-         _loggerModuleConsole.doInsert(logicContext, module);
-      }
-      return EChartPage.Scene;
-   }
-
-   //============================================================
    // <T>退出登录。</T>
    //
    // @param context 页面环境
@@ -312,15 +249,6 @@ public class FIndexAction
                           ILogicContext logicContext,
                           FIndexPage page){
       // 清空参数
-      //      page.setId(null);
-      //      page.setHost(null);
-      //      page.setServiceLogic(null);
-      //      page.setSceneCode(null);
-      //      page.setPassport(null);
-      //      page.setPassword(null);
-      //      page.setUserType(null);
-      //      page.setMessage(null);
-      //      page.setMenuString(null);
       FGcWebSession session = (FGcWebSession)sessionContext;
       _sessionConsole.close(session);
       return "Login";

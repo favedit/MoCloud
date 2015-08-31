@@ -2,7 +2,6 @@ package org.mo.content.face.pc;
 
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
-import org.mo.web.core.face.AWebAuthority;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -33,21 +32,7 @@ public interface IIndexAction
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   //   @AWebAuthority("eai.marketer.customer1|eai.marketer.marketer1|eai.department.marketer1")
    String login(IWebContext context,
-                IWebSession sessionContext,
-                ILogicContext logicContext,
-                @AContainer(name = "page", fill = true) FIndexPage page);
-
-   //============================================================
-   // <T>表格逻辑处理。</T>
-   //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param page 页面
-   //============================================================
-   @AWebAuthority("eai.marketer.customer|eai.marketer.marketer|eai.department.marketer")
-   String chart(IWebContext context,
                 IWebSession sessionContext,
                 ILogicContext logicContext,
                 @AContainer(name = "page", fill = true) FIndexPage page);

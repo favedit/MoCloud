@@ -12,7 +12,7 @@
  </head>
 <script>
    function doChart(code) {
-      id_code.value = code;
+      id_do.value = code;
       frmMain.submit();
    }
    function loginOut() {
@@ -20,13 +20,12 @@
    }
 </script>
  <body>
-   <FORM id="form" name='frmMain' method='post' action='Index.wa'>
+   <FORM id="form" name='frmMain' method='post' action='Main.wa'>
    <jh:equals source="true" value="&page.isLogin" ><p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p></jh:equals>
       <TABLE style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
          <TR>
             <TD height='56' colspan="2">
-               <INPUT id='id_do' name='do' type='hidden' value='chart'>
-               <INPUT id='id_code' name='code' type='hidden'>
+               <INPUT id='id_do' name='do' type='hidden'>
              <div class="header floatBtn">
                   <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a></div>
                   <jh:notEquals source="host" value="&page.userType">
@@ -40,7 +39,7 @@
                   </jh:notEquals>
                </div> 
                <ul class="users" id="users">
-                  <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">账号绑定</a></li></jh:equals>
+                  <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind">账号绑定</a></li></jh:equals>
                   <li onclick="loginOut();">退出</li>
                </ul>
             </TD>
@@ -58,19 +57,19 @@
                      <div id="container_details" style="">
                         <ul>
                            <je:authority module='eai.marketer.customer'>
-                              <li onclick='doChart("ChartMarketerCustomer")'>
+                              <li onclick='doChart("customer")'>
                                  <img src="images/main/3.png">
                                  <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
                               </li>
                            </je:authority>
                            <je:authority module='eai.marketer.marketer'>
-                              <li onclick='doChart("ChartMarketerMarketer")'>
+                              <li onclick='doChart("marketer")'>
                                  <img src="images/main/1.png">
                                  <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
                               </li>
                            </je:authority>
                           <je:authority module='eai.department.marketer'>
-                              <li onclick='doChart("ChartDepartmentMarketer")'>
+                              <li onclick='doChart("department")'>
                                  <img src="images/main/2.png">
                                  <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
                               </li>
