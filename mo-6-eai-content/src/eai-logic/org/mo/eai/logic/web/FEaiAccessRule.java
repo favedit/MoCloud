@@ -91,8 +91,8 @@ public class FEaiAccessRule
          }
       }
       // 效验模块
-      boolean moduleFlag = false;
       if(authority != null){
+         boolean moduleFlag = false;
          String[] modules = RString.split(authority.value(), '|');
          String[] storeRoleModules = session.roleModuleCodes();
          int modulesLength = modules.length;
@@ -112,9 +112,9 @@ public class FEaiAccessRule
                }
             }
          }
-      }
-      if(!moduleFlag){
-         return EResult.Failure;
+         if(!moduleFlag){
+            return EResult.Failure;
+         }
       }
 
       return EResult.Success;

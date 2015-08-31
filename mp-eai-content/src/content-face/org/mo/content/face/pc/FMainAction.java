@@ -68,13 +68,16 @@ public class FMainAction
    //============================================================
    @Override
    public String construct(IWebContext context,
+                           IWebSession sessionContext,
                            ILogicContext logicContext,
                            FMainPage page){
-      String id = context.parameter("id");
-      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
-      if(user == null){
-         return "Login";
-      }
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      System.out.println(session.id() + "--------------------------------------------------");
+      _logger.debug(this, "Main", "Main begin.", session);
+      //      if(session == null){
+      //         return "Login";
+      //      }
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       //获取角色 验证此用户是否绑定e租宝
       FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
       if(user.roleId() == role.ouid()){
@@ -84,27 +87,6 @@ public class FMainAction
       page.setPassport(label);
       page.setIsLogin(false);
       return "Main";
-   }
-
-   //============================================================
-   // <T>表格逻辑处理。</T>
-   //
-   // @param context 页面环境
-   // @param sessionContext 用户会话
-   // @param logicContext 逻辑环境
-   // @param page 页面
-   //============================================================
-   @Override
-   public String chart(IWebContext context,
-                       IWebSession sessionContext,
-                       ILogicContext logicContext,
-                       FMainPage page){
-      String code = context.parameter("code");
-      page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-      page.setSceneCode(code);
-      //保存日志
-      saveLogger(context, sessionContext, logicContext, page, code);
-      return EChartPage.Scene;
    }
 
    //============================================================
@@ -122,7 +104,7 @@ public class FMainAction
                           FMainPage page){
       String code = "ChartMarketerMarketer";
       //保存日志
-      saveLogger(context, sessionContext, logicContext, page, code);
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;
    }
 
@@ -141,7 +123,7 @@ public class FMainAction
                           FMainPage page){
       String code = "ChartMarketerMarketer";
       //保存日志
-      saveLogger(context, sessionContext, logicContext, page, code);
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;
    }
 
@@ -160,7 +142,7 @@ public class FMainAction
                             FMainPage page){
       String code = "ChartDepartmentMarketer";
       //保存日志
-      saveLogger(context, sessionContext, logicContext, page, code);
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;
    }
 
@@ -177,9 +159,10 @@ public class FMainAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FMainPage page,
-                           String code){
+                           String sceneCode,
+                           String moduleCode){
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
-      page.setSceneCode(code);
+      page.setSceneCode(sceneCode);
       FGcWebSession session = (FGcWebSession)sessionContext;
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
@@ -191,13 +174,7 @@ public class FMainAction
          module.setPageInfo(context.parameters().dump());
          module.setModuleAction("view");
          module.setModuleResult("Success");
-         if(code.equals("ChartMarketerCustomer")){
-            module.setModuleCode(MODULE_CODE.get(code));
-         }else if(code.equals("ChartMarketerMarketer")){
-            module.setModuleCode(MODULE_CODE.get(code));
-         }else if(code.equals("ChartDepartmentMarketer")){
-            module.setModuleCode(MODULE_CODE.get(code));
-         }
+         module.setModuleCode(moduleCode);
          _loggerModuleConsole.doInsert(logicContext, module);
       }
    }

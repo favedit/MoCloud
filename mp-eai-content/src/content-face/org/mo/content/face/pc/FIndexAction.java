@@ -285,38 +285,7 @@ public class FIndexAction
             entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
             entryUnit.setFromCd(from);
             _entryConsole.doInsert(logicContext, entryUnit);
-            //            tackAuthority(logicContext, page, unit.roleId());
          }
       }
-      //      }else{
-      //         tackAuthority(logicContext, page, user.roleId());
-      //      }
    }
-
-   //============================================================
-   // <T>获取管理权限。</T>
-   //
-   // @param logicContext 环境
-   // @param page 容器
-   // @param roleid 角色编号
-   //============================================================
-   //   private void tackAuthority(ILogicContext logicContext,
-   //                              FIndexPage page,
-   //                              long roleid){
-   //      StringBuffer menuStrings = new StringBuffer();
-   //      long roleId = roleid;
-   //      if(roleId != 0){
-   //         FLogicDataset<FDataControlRoleModuleUnit> roelModuleInfoList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleId, 0);
-   //         for(FDataControlRoleModuleUnit role : roelModuleInfoList){
-   //            FDataControlModuleUnit module = _moduleConsole.find(logicContext, role.moduleId());
-   //            if(module != null){
-   //               menuStrings.append(module.code()).append("|");
-   //            }
-   //         }
-   //         page.setMenuString(menuStrings.deleteCharAt(menuStrings.length() - 1).toString());
-   //      }else{
-   //         page.setMenuString(null);
-   //      }
-   //   }
-
 }

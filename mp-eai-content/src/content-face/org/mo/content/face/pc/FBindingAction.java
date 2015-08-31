@@ -4,11 +4,10 @@ import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
-import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
-import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
+import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RRandom;
@@ -17,29 +16,23 @@ import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.cache.system.IValidationConsole;
-import org.mo.content.core.manage.logger.user.ILoggerModuleConsole;
-import org.mo.content.core.manage.person.module.IModuleConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
-import org.mo.content.core.manage.person.role.IRoleModuleConsole;
 import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
-import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.eai.logic.financial.FFinancialMarketerInfo;
 import org.mo.eai.logic.financial.IFinancialMarketerConsole;
-import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
-import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>首页。</P>
+// <P>账号绑定。</P>
 //
-// @author maocy
+// @author sunhr
 // @version 150427
 //============================================================
 public class FBindingAction
@@ -59,21 +52,10 @@ public class FBindingAction
    protected ILoggerPersonUserAccessConsole _loggerPersonUserAccessConsole;
 
    @ALink
-   protected ILogicServiceInfoConsole _loggerServiceInfoConsole;
-
-   @ALink
    protected IUserConsole _userConsole;
 
    @ALink
    protected IRoleConsole _roleConsole;
-
-   //模块控制台
-   @ALink
-   protected IModuleConsole _moduleConsole;
-
-   //角色模块控制台
-   @ALink
-   protected IRoleModuleConsole _roleModuleConsole;
 
    @ALink
    protected IEntryConsole _entryConsole;
@@ -86,20 +68,11 @@ public class FBindingAction
    @ALink
    protected IFinancialMarketerConsole _marketerConsole;
 
-   @ALink
-   protected ILoggerModuleConsole _loggerModuleConsole;
-
    //OA角色
    protected final String role_oa = "eai.oa";
 
    //理财师角色
    protected final String role_marketer = "eai.marketer";
-
-   protected final String module_code_customer = "eai.marketer.customer";
-
-   protected final String module_code_marketer = "eai.marketer.marketer";
-
-   protected final String module_code_department = "eai.department.marketer";
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -110,41 +83,24 @@ public class FBindingAction
    //============================================================
    @Override
    public String construct(IWebContext context,
+                           IWebSession sessionContext,
                            ILogicContext logicContext,
                            FIndexPage page){
-      // 清空参数
-      page.setPassport(null);
-      page.setPassword(null);
       page.setMessage(null);
-      page.setUserType(null);
-      // 获得参数
-      String hostAddress = context.head("x-real-ip");
-      if(RString.isEmpty(hostAddress)){
-         hostAddress = context.head("x-forwarded-for");
-         if(RString.isEmpty(hostAddress)){
-            hostAddress = context.remoteAddress();
-         }
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      //      FEaiSession session = (FEaiSession)sessionContext;
+      //      System.out.println(session.roleCode() + "----------------");
+      _logger.debug(this, "Bind", "Bind begin. (guid={1})", session);
+      if(session == null){
+         return "Login";
       }
-      page.setHost(hostAddress);
-      // 登录处理
-      FDataPersonAccessAuthority authority = _personAccessAuthorityConsole.findByHostAddress(logicContext, hostAddress);
-      if(authority != null){
-         int accessCd = authority.accessCd();
-         if(accessCd == EGcAuthorityAccess.Allow){
-            // 增加日志
-            FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
-            logger.setHostAddress(hostAddress);
-            logger.setLogicMessage("主机地址为白名单。");
-            _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
-            //插入用户，权限绑定
-            page.setUserType("host");
-            synchronizeData(logicContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
-            // 设置服务主机
-            return "Main";
-         }
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      if(user == null){
+         page.setIsLogin(false);
+         return "Main";
       }
-      // 非法设置
-      return "Login";
+      page.setPassport(user.label());
+      return "Binding";
    }
 
    //============================================================
@@ -156,6 +112,7 @@ public class FBindingAction
    //============================================================
    @Override
    public String sendValidate(IWebContext context,
+                              IWebSession sessionContext,
                               ILogicContext logicContext,
                               FIndexPage page){
       page.setMessage(null);
@@ -203,36 +160,6 @@ public class FBindingAction
    }
 
    //============================================================
-   // <T>账号绑定之前处理。</T>
-   //
-   // @param context 页面环境
-   // @param logicContext 逻辑环境
-   // @param page 页面
-   //============================================================
-   @Override
-   public String bind(IWebContext context,
-                      IWebSession sessionContext,
-                      ILogicContext logicContext,
-                      FIndexPage page){
-      page.setMessage(null);
-      String id = context.parameter("id");
-      if(RString.isEmpty(id)){
-         return "Login";
-      }
-      _logger.debug(this, "Bind", "Bind begin. (guid={1})", id);
-      FDataPersonUserUnit user = _userConsole.findByGuid(logicContext, id);
-      if(user == null){
-         page.setIsLogin(false);
-         return "Main";
-      }
-      String label = user.label();
-      page.setPassport(label);
-      //      page.setId(id);
-      //      tackAuthority(logicContext, page, user.roleId());
-      return "Binding";
-   }
-
-   //============================================================
    // <T>账号绑定。</T>
    //
    // @param context 页面环境
@@ -241,8 +168,10 @@ public class FBindingAction
    //============================================================
    @Override
    public String bindOnAccount(IWebContext context,
+                               IWebSession sessionContext,
                                ILogicContext logicContext,
                                FIndexPage page){
+      System.out.println("*************************************************bindOnAccount");
       page.setMessage(null);
       String epassport = context.parameter("ePassport");
       String validate = context.parameter("validate");

@@ -142,7 +142,7 @@
            o.prop("disabled", true);
            o.val("正在发送");
            ctrl.setMatching(function() {
-              $.post("Index.wa?do=sendValidate", {
+              $.post("Binding.wa?do=sendValidate", {
                  "passport": mobileVal
               }, function(r) {
                  r = ctrl.replaceNbsp(r);
@@ -165,6 +165,7 @@
               return false;
            } else if ($("#verification_code").val() == "") {
               $boxPrompt.show().text(alertTips.validationTel);
+              return false;
            } else {
               frmBind.submit();
            }
@@ -180,3 +181,7 @@
      }
 
   });
+
+  function loginOut() {
+     location.href = "Index.wa?do=loginOut";
+  }

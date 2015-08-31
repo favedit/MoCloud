@@ -15,9 +15,6 @@
       id_do.value = code;
       frmMain.submit();
    }
-   function loginOut() {
-      location.href = "Index.wa?do=loginOut";
-   }
 </script>
  <body>
    <FORM id="form" name='frmMain' method='post' action='Main.wa'>
@@ -28,7 +25,6 @@
                <INPUT id='id_do' name='do' type='hidden'>
              <div class="header floatBtn">
                   <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a></div>
-                  <jh:notEquals source="host" value="&page.userType">
                      <div class="head-right">
                         <p class="user-details" id="user-details"><i>3</i>
                            <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
@@ -36,10 +32,9 @@
                            <img src='../mb/images/re.png'>
                         </span>
                      </div>
-                  </jh:notEquals>
                </div> 
                <ul class="users" id="users">
-                  <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Index.wa?do=bind">账号绑定</a></li></jh:equals>
+                  <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Binding.wa">账号绑定</a></li></jh:equals>
                   <li onclick="loginOut();">退出</li>
                </ul>
             </TD>
