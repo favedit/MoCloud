@@ -27,7 +27,7 @@
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>账号：</label>
-                           <input type="tel" name="passport" class="fieldInput" placeholder="请输入E租宝账号" value="">
+                           <input type="text" name="passport" class="fieldInput" placeholder="请输入E租宝账号" value="">
                            <button id="getVerifyCodeBtn" class="btnGetCode" type="button">获取验证码</button>
                            <input tyle="hidden" style="display: none;" value="1" id="input_state">
                            <input name="id" type="hidden" value="<jh:write source='&page.id' />" />
@@ -37,7 +37,7 @@
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>验证码：</label>
-                           <input type="tel" name="validate" maxlength="4" data-type="code" class="fieldInput" placeholder="请输入验证码">
+                           <input type="text" name="validate" maxlength="4" data-type="code" class="fieldInput" placeholder="请输入验证码">
                         </div>
                      </li>
                      <a href="javascript:;" class="wap-btn">

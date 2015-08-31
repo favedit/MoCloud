@@ -9,7 +9,6 @@
       <link rel="stylesheet" type="text/css" href="css/wap.css">
       <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
    </head>
-
    <body>
       <FORM name='frmMain' method='post' action='Index.wa'>
          <INPUT id='id_do' name='do' type='hidden' value='chart' />
@@ -24,19 +23,18 @@
                   <header>
                      <span class="btn-list" id="btn-list"></span> 全球实时数据中心
                      <div class="header-r"><img src="images/re.png"></div>
-                     
                   </header>
                   <div class="banner" id="banner">
                      <div class="bd">
                         <ul>
                            <li>
-                              <a class="pic" href="#"><img src="images/img2.jpg"> </a>
+                              <a class="pic" href="#"><img src="images/1.gif"></a>
                            </li>
                            <li>
                               <a class="pic" href="#"><img src="images/img3.jpg"></a>
                            </li>
                            <li>
-                              <a class="pic" href="#"><img src="images/1.gif"></a>
+                              <a class="pic" href="#"><img src="images/img2.jpg"> </a>
                            </li>
                         </ul>
                      </div>
@@ -44,32 +42,31 @@
                         <ul></ul>
                      </div>
                   </div>
-
                   <div class="details-container">
-                     <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                      <je:authority module='eai.marketer.customer'>
                         <ul onclick='doChart("ChartMarketerCustomer")'>
                            <li>
                               <p>全球实时投资数据展示中心<i></i></p>
                               <img src="../pc/images/main/3-3.png" >
                            </li>
                         </ul>
-                     </jh:equals>
-                     <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                     </je:authority>
+                      <je:authority module='eai.marketer.marketer'>
                         <ul  onclick='doChart("ChartMarketerMarketer")'>
                            <li>
                               <p class="icon2">理财师排行实时投资数据展示<i></i></p>
                               <img src="../pc/images/main/1-1.PNG">
                            </li>
                         </ul>
-                     </jh:equals>
-                     <jh:equals source="eai.department.marketer" value="&page.menuString">
+                     </je:authority>
+                     <je:authority module='eai.department.marketer'>
                         <ul onclick='doChart("ChartDepartmentMarketer")'>
                            <li>
                               <p class="icon3">理财师管理实时投资数据展示<i></i></p>
                               <img src="../pc/images/main/2-2.png" >
                            </li>
                         </ul>
-                     </jh:equals>
+                     </je:authority>
                      <a class="phone-container" href="tel:010-65499299">客服电话：010-65499299</a>
                   </div>
                </section>
@@ -101,17 +98,6 @@
          var $mainContainer = document.getElementById("main-container");
          var $navContainer = document.getElementById("nav-container");
          var state = true;
-         // $btnList.onclick = function() {
-         //    if (state) {
-         //       $mainContainer.setAttribute("details", "slidebar");
-         //       $navContainer.setAttribute("details", "slidebar");
-         //       state = false;
-         //    } else {
-         //       $mainContainer.setAttribute("details", " ");
-         //       $navContainer.setAttribute("details", " ");
-         //       state = true;
-         //    }
-         // }
          var $headerR = document.getElementsByClassName("header-r")[0];
          var $shadow = document.getElementsByClassName("shadow")[0];
          var $headerList = document.getElementsByClassName("header-list")[0];
@@ -123,7 +109,6 @@
                $headerList.style.display = "none";
                this.style.display = "none";
             }
-            // binding-icon
          var $bindingIcon = document.getElementsByClassName("binding-icon")[0];
          var $bindingContainer = document.getElementsByClassName("binding-container")[0];
          var $boxContainer = document.getElementsByClassName("box-container")[0];

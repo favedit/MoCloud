@@ -17,7 +17,6 @@
          location.href = "Index.wa?do=loginOut";
       }
    </script>
-
    <body>
       <div class="header floatBtn">
          <div class="head-left">
@@ -26,7 +25,6 @@
          <div class="head-right">
             <p class="user-details" id="user-details" title="" ><i></i>
                <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
-
             <span class="img-details mr-20 pulse">
                <img src='../mb/images/re.png'>
             </span>

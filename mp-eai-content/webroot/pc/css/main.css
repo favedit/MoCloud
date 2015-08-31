@@ -55,8 +55,8 @@ html,body
 	position: absolute;
 	left: 15px;
 	top:2px;
-	/*padding-top: 5px;*/
 	width: 240px;
+	cursor:default;
 }
 #container_details{
 	display: block;
@@ -103,7 +103,7 @@ html,body
 	float:right;
 	font-size: 16px;
 	position: relative;
-	cursor:pointer;
+	
 }
 .user-details{
 	display:inline-block;
@@ -113,6 +113,7 @@ html,body
 	margin-right: 80px;
 	position: relative;
 	padding: 0px 15px;
+	cursor:pointer;
 }
 .user-details img{
 	position: absolute;
@@ -188,6 +189,7 @@ html,body
 	color:#616f7d;
 	background-color:  #fff;
 	padding: 10px 10px 10px 30px;
+	font-size: 16px;
 }
 .headers{
 	min-width: 30px;
@@ -267,7 +269,7 @@ html,body
 	float: left;
 	height: 100%;
 	position: relative;
-	min-height: 600px;
+	min-height: 550px;
 }
 p.icon-picture{
  	text-align: center;
@@ -369,8 +371,9 @@ p.icon-picture span{
 
 }
 .imag-details span{
-	display: inline-block;
+	/*display: inline-block;*/
 	color:#fff;
+	display: none;
 }
 .imag-details ul li:hover .shadow{
 	display: block;
@@ -602,7 +605,7 @@ p.icon-picture span{
 	text-align: center;
 	/*height: 56px;*/
 	/*line-height: 56px;*/
-	font-size: 16px;
+	font-size: 14px;
 }
 @media all and (max-width: 1400px) {
 	.main{

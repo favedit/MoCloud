@@ -157,7 +157,7 @@ table, tbody{
 .footer{
 	text-align: center;
 	width: 100%;
-	font-size: 18px;
+	font-size: 16px;
 	color:#000;
 	position: absolute;
 	bottom:-20px;
@@ -364,6 +364,9 @@ transform:rotate(180deg)
 	.dialog-box{
 		width: 490px;
 		margin: -200px 0 0 -245px;
+	}
+	.footer{
+		bottom: -10px;
 	}
 }
 

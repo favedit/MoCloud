@@ -29,8 +29,7 @@
                <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
                <INPUT id='id_code' name='code' type='hidden'>
              <div class="header floatBtn">
-                  <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a>
-                  </div>
+                  <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a></div>
                   <jh:notEquals source="host" value="&page.userType">
                      <div class="head-right">
                         <p class="user-details" id="user-details"><i>3</i>
@@ -50,32 +49,33 @@
          <TR>
             <TD class="main-left" width="80%">
                <div class="imag-container">
-                  <div class="imag-details">
+                  <img class="loding" src="images/main/loding.gif" style="display: block">
+                  <div class="imag-details" style="display: block;">
                      <p class="icon-picture">
-                        <je:authority module='eai.marketer.customer'><span>全球实时投资数据展示中心</span></je:authority>
-                        <je:authority module='eai.marketer.marketer'><span>理财师排行实时投资数据展示</span></je:authority>
-                        <je:authority module='eai.department.marketer'><span>理财师管理实时投资数据展示</span></je:authority>
+                        <je:authority module='eai.marketer.customer'><span >全球实时投资数据展示中心</span></je:authority>
+                        <je:authority module='eai.marketer.marketer'><span >理财师排行实时投资数据展示</span></je:authority>
+                        <je:authority module='eai.department.marketer'><span >理财师管理实时投资数据展示</span></je:authority>
                      </p>
                      <div id="container_details" style="">
                         <ul>
-                           <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                           <je:authority module='eai.marketer.customer'>
                               <li onclick='doChart("ChartMarketerCustomer")'>
                                  <img src="images/main/3.png">
                                  <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
                               </li>
-                           </jh:equals>
-                           <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                           </je:authority>
+                           <je:authority module='eai.marketer.marketer'>
                               <li onclick='doChart("ChartMarketerMarketer")'>
                                  <img src="images/main/1.png">
                                  <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
                               </li>
-                           </jh:equals>
-                           <jh:equals source="eai.department.marketer" value="&page.menuString">
+                           </je:authority>
+                          <je:authority module='eai.department.marketer'>
                               <li onclick='doChart("ChartDepartmentMarketer")'>
                                  <img src="images/main/2.png">
                                  <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
                               </li>
-                           </jh:equals>
+                           </je:authority>
                         </ul>
                      </div>
                   </div>
@@ -85,15 +85,15 @@
                <div class="titles-container">
                   <ul>
                     <p class="play_prev"></p>
-                    <jh:equals source="eai.marketer.customer" value="&page.menuString">
+                    <je:authority module='eai.marketer.customer'>
                         <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
-                     </jh:equals>
-                     <jh:equals source="eai.marketer.marketer" value="&page.menuString">
+                     </je:authority>
+                      <je:authority module='eai.marketer.marketer'>
                         <li > <i class="mask"></i><img src="images/main/1-1.PNG"></li>
-                     </jh:equals>
-                     <jh:equals source="eai.department.marketer" value="&page.menuString">
+                     </je:authority>
+                     <je:authority module='eai.department.marketer'>
                         <li><i class="mask"></i><img src="images/main/2-2.png"></li>
-                     </jh:equals> 
+                     </je:authority>
                      <p class="play_next"></p>
                   </ul> 
                </div>  
@@ -106,16 +106,5 @@
          </TR>
       </TABLE>
    </FORM>
-   <script type="text/javascript">
-   // var windowW = $(window).width();
-   // var windowH = $(window).height();
-   //      // main-left
-   //      $(".main-right").css({"width":windowW*0.2})
-   // $(window).resize(function() {
-   //      $imgH = $imagContainer.find("li").eq(0).height();
-   //      ctrl.setRolling();
-   //      ctrl.setViewport();
-   //   });
-   </script>
 </body>
 </html>

@@ -20,7 +20,7 @@
      $(".loding").hide();
      $imagContainers.show();
      $imagDetails.show();
-
+     $iconPictures.eq(0).show();
      // 绑定帐号
      if ($boxPrompt.text() != "") {
         $boxPrompt.show();
@@ -56,7 +56,7 @@
               index = 0;
            }
            ctrl.setRolling(index);
-        }, 8000);
+        }, 5000);
      };
      ctrl.setTimer();
      ctrl.setRolling = function(index) {
