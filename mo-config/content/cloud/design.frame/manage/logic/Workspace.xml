@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Workspace name="editor.design.Workspace" type='FManageWorkspace' label="管理工作区">
+      <FrameSet name='mainFrameSet' direction_cd='V' label='页面布局'>
+         <FramePage name='menuFrame' linker='_frameMenuBar' label='菜单区' size='0,48'/>
+         <FramePage name='bodyFrame' linker='_frameBody' label='内容区'>
+            <FrameSet name='bodyFrameSet' direction_cd='H' label='页面布局'>
+               <FramePage name='moduleFrame' linker='_frameModule' label='菜单区' size='160,0'>
+                  <SliderMenu name='moduleMenu' label='菜单区'>
+                     <SliderGroup name='logicGroup' label='业务功能'>
+                        <SliderButton name='commonButton' linker='_controlCommonButton' icon='editor.design.persistence|png' label='业务' fore_color='#FFFFFF'/>
+                     </SliderGroup>
+                     <SliderGroup name='loggerGroup' label='日志功能' fore_color='#FFFFFF'>
+                        <SliderButton name='datasetGroup' linker='_controlDatasetButton' label='数据集' fore_color='#FFFFFF'/>
+                     </SliderGroup>
+                  </SliderMenu>
+               </FramePage>
+               <FramePage name='spaceFrame' linker='_frameSpace' label='工作区'/>
+            </FrameSet>
+         </FramePage>
+      </FrameSet>
+   </Workspace>
+</Content>

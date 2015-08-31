@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824125912">
+  <FrameSet guid="92D44C4BDEC444B78E93998D8FC22D61" name="editor.design.frame.FrameSet" direction_cd="H" label="工作布局" valid="false">
+    <FramePage guid="DFDB88C4DF59447A89BFDD92F8ACEBED" name="catalogFrame" linker="_frameCatalog" label="目录区" size="400,0">
+      <FrameSet guid="FEE0748445364A22A52F1939590FA6CE" name="catalogFrameSet" direction_cd="V" label="目录布局">
+        <FramePage guid="063E4855F01F447C8C67656583052667" name="catalogTitleFrame" linker="_frameCatalogTitle" label="目录标题区" size="0,36" back_color="#C6CBD0" />
+        <FramePage guid="3088ADBB26E34A4791E140F005142A5E" name="catalogToolbarFrame" linker="_frameCatalogToolBar" label="目录工具栏区" size="0,24" />
+        <FramePage guid="F98237414F054C76BEA6FA857E58DC89" name="catalogContentFrame" linker="_frameCatalogContent" label="目录内容区" />
+      </FrameSet>
+    </FramePage>
+    <FrameSpliter guid="6F652DE8E3B9425BB2015186B7004F0B" name="catalogSpliter" />
+    <FramePage guid="DF3967028B67410C882CEAC0AC3DF70B" name="spaceFrame" label="工作区">
+      <FrameSet guid="BF7727592F3A4647976AF98CE3D258F8" name="spaceFrameSet" direction_cd="V" label="工作布局">
+        <FramePage guid="80063F1881BF4C238D25ECD177871F22" name="spaceTitleFrame" linker="_frameSpaceTitle" label="标题区" size="0,36" back_color="#C6CBD0" />
+        <FramePage guid="DBEF83601C164B81B05EAA06FF495848" name="spaceBodyFrame" label="工作区">
+          <FrameSet guid="10F47AB2A29D4D6286E90F4E3E4B18F1" name="spaceBodyFrameSet" direction_cd="H" label="工作布局">
+            <FramePage guid="B6A0802EB7A3406D8EAD4EAB8CBE48DD" name="contentFrame" label="工作区">
+              <FrameSet guid="AB10F6EFF72E4026A23EE1DD1BCD7405" name="contentFrameSet" direction_cd="V" label="空间布局">
+                <FramePage guid="694B00A747B54C22A76881DEC9414774" name="contentToolbarFrame" linker="_frameSpaceToolBar" label="空间工具栏" size="0,24" />
+                <FramePage guid="943E1923B80E4EFF9A7D0D4F7756D0A1" name="contentContentFrame" linker="_frameSpaceContent" label="空间内容区" />
+              </FrameSet>
+            </FramePage>
+            <FrameSpliter guid="E394E72228D6461B988E57F88F9E8178" name="propertySpliter" />
+            <FramePage guid="2A961304C1C74D02952E1A2FAFE59366" name="propertyFrame" linker="_frameProperty" label="属性区" size="510,0" scroll_cd="VA">
+              <FrameSet guid="E16BDFDC29D34E40A80D8DE9E945470E" name="propertyFrameSet" direction_cd="V" label="属性布局">
+                <FramePage guid="6ABD517557D1431E9E44C278EEE7CB38" name="propertyToolbarFrame" linker="_framePropertyToolBar" label="属性工具栏" size="0,24" />
+                <FramePage guid="F1D6E0CE1B0A46538258C474060FF127" name="propertyContentFrame" linker="_framePropertyContent" label="属性内容区" />
+              </FrameSet>
+            </FramePage>
+          </FrameSet>
+        </FramePage>
+      </FrameSet>
+    </FramePage>
+  </FrameSet>
+</Content>

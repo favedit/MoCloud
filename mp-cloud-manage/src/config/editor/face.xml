@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 命令：应用程序共通组件定义                                   -->
+   <!--    Action = apl/*                                            -->
+   <!-- ============================================================ -->
+   <Actions
+         uri   = '/apl/*/*'
+         face  = 'org.mo.content.face.apl.*.I*Action'/>
+
+   <Actions
+         uri   = '/apl/*'
+         face  = 'org.mo.content.face.apl.I*Action' />
+
+   <Components
+         face  = 'org.mo.content.face.apl.*.I*Action'
+         class = 'org.mo.content.face.apl.*.F*Action' />
+
+   <Components
+         face  = 'org.mo.content.face.apl.I*Action'
+         class = 'org.mo.content.face.apl.F*Action' />
+
+   <!-- ============================================================ -->
+   <!-- 命令：默认共通组件定义                                       -->
+   <!--    Action = *                                                -->
+   <!-- ============================================================ -->
+   <Actions
+         uri   = '/*/*'
+         face  = 'org.mo.content.face.*.I*Action'/>
+
+   <Actions
+         uri   = '*'
+         face  = 'org.mo.content.face.I*Action' />
+
+   <Components
+         face  = 'org.mo.content.face.*.I*Action'
+         class = 'org.mo.content.face.*.F*Action' />
+
+   <Components
+         face  = 'org.mo.content.face.I*Action'
+         class = 'org.mo.content.face.F*Action' />
+</Config>

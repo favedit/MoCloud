@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824125717">
+  <ToolBar guid="1D798249EF1848DF8C5E6DA88AA685E9" name="editor.design.frame.CatalogToolBar" label="目录工具栏" valid="false">
+      <ToolButtonEdit name='searchEdit' linker='_controlSearchEdit' edit_size='190,0' hint='搜索内容'/>
+      <ToolButton name='search' linker='_controlSearch' icon='editor.common.search' label='搜索' hint='搜索处理'/>
+      <ToolButtonSplit/>
+      <ToolButton name='refresh' linker='_controlRefresh' icon='editor.common.refresh' label='刷新' hint='刷新当前节点信息'/>
+      <ToolButtonSplit/>
+      <ToolButton name='list' linker='_controlList' icon='editor.common.list' label='列表' hint='列出当前所有信息'/>
+  </ToolBar>
+</Content>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <TableFrame name="system.design.frame.property.ButtonFrame" type='FEditorDsPropertyForm' label="持久化属性" is_valid="Y" note="">
+     <ToolBar name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
+       <ToolButton name="insertButton" label="新建目录" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.tree.treeview" hotkey="F5" attributes="action=insert\nlogic_group=container\nframe_name=editor.design.tree.property.TreeViewForm\ncomponent_type=TreeView" />
+     </ToolBar>
+   </TableFrame>
+</Content>

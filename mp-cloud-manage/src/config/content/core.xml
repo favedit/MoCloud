@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <!-- ==================================================== -->
+   <!-- ContentConfigurationConsole:内容配置控制台           -->
+   <!--  P:config_path - 配置文件路径                        -->
+   <!--  I:initializeConfig - 增加配置信息                   -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.content.design.configuration.IConfigurationConsole'
+         class = 'org.mo.cloud.content.design.configuration.FConfigurationConsole'
+         scope = 'global'>
+      <Property name='config_path'>${application.content}</Property>
+      <Initialize name='initializeConfig'/>
+      <Initialize name='initializeMonitor'/>
+   </Component>
+   
+   <!-- ==================================================== -->
+   <!-- ContentPersistenceConsole:内容持久化制台             -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.content.design.persistence.IPersistenceConsole'
+         class = 'org.mo.cloud.content.design.persistence.FPersistenceConsole'
+         scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
+      <Property name='space_name'>design.persistence</Property>
+      <Property name='path_name'>design.persistence</Property>
+      <Property name='persistence_name'>design.persistence</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ==================================================== -->
+   <!-- ContentListConsole:内容列表控制台                    -->
+   <!--  P:space_name - 空间名称                             -->
+   <!--  P:path_name - 保存路径                              -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.content.design.list.IListConsole'
+         class = 'org.mo.cloud.content.design.list.FListConsole'
+         scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
+      <Property name='space_name'>design.list</Property>
+      <Property name='path_name'>design.list</Property>
+      <Property name='persistence_name'>design.list</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ==================================================== -->
+   <!-- TreeConsole:目录列表控制台                           -->
+   <!--  P:space_name - 空间名称                             -->
+   <!--  P:path_name - 保存路径                              -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.content.design.tree.ITreeConsole'
+         class = 'org.mo.cloud.content.design.tree.FTreeConsole'
+         scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
+      <Property name='space_name'>design.tree</Property>
+      <Property name='path_name'>design.tree</Property>
+      <Property name='persistence_name'>design.tree</Property>
+      <Initialize name='initialize'/>
+   </Component>
+
+   <!-- ==================================================== -->
+   <!-- ContentFormConsole:内容表单控制台                    -->
+   <!--  P:space_name - 空间名称                             -->
+   <!--  P:path_name - 保存路径                              -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.content.design.frame.IFrameConsole'
+         class = 'org.mo.cloud.content.design.frame.FFrameConsole'
+         scope = 'global'>
+      <Property name='storage_name'>cloud</Property>
+      <Property name='space_name'>design.frame</Property>
+      <Property name='path_name'>design.frame</Property>
+      <Property name='persistence_name'>design.frame</Property>
+      <Initialize name='initialize'/>
+   </Component>
+
+</Config>

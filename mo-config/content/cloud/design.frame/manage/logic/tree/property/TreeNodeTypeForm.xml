@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824093504">
+  <FormFrame guid="1D9BD68A2C7743319A3358F1EE769BCD" name="editor.design.tree.property.TreeNodeTypeForm" type="FEditorDsPropertyForm" label="按键属性" is_valid="Y" logic_group="item" logic_service="editor.design.tree" note="" valid="false">
+    <ToolBar guid="D668C83B21B444B2ACCB40E6B486BB68" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%">
+      <ToolButton guid="017177F891E24B19A4F2A2E9CBB948EB" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="1A7C30DD8108464CAACEA107E72BE6A9" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+    </ToolBar>
+    <Panel guid="4F557A7D0E394E588FB97BFA02062879" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="F8642CAB3CFB42AE8C9F6D778C21E439" name="componentType" linker="_controlComponentType" label="组件类型" label_size="80,0" valid="Y" edit_size="600,0" input_size="500,0" note="" data_name="_type" edit_refer="editor.design.tree.ComponentType" />
+      <Check guid="1338DC087C234235B7C268B6C0E7F78D" name="isValid" linker="_controlIsValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="77457DC4684E43A1B5C831FF2442FE85" name="name" linker="_controlName" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="685C996088E44481A4E0DBADFF750D3B" name="label" linker="_controlLabel" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="CB028A2F22844500959ED8223068FE3F" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Memo guid="70976D2EAB8646849E5E16A3AEE297D7" name="note" linker="_controlNote" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,80" note="" />
+    </Panel>
+  </FormFrame>
+</Content>

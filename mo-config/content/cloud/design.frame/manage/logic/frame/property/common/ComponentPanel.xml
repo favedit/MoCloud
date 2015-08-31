@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <FormFrame name="editor.design.frame.property.common.ComponentPanel" label="停靠栏属性" is_valid="Y" note="">
+      <Panel name='componentPanel' icon='design.panel.icon' label='基本属性'>
+         <Select name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_refer="editor.design.frame.ComponentType" edit_size="400,0" note="" />
+         <Edit name="name" label="名称" label_size='80,0' valid="Y" data_name='name' edit_size='300,0' note="" nowrap='Y'/>
+         <Check name="valid" label="有效性" label_size='80,0' valid="Y" data_name='valid' note="" />
+         <Edit name="label" label="标签" label_size='80,0' valid="Y" data_name='label' edit_size='300,0' note="" nowrap='Y'/>
+         <Check name="nowrap" label="续行" label_size='80,0' valid="Y" data_name='nowrap' note="" />
+      </Panel>
+   </FormFrame>
+</Content>

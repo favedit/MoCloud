@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ==================================================== -->
+   <!-- 用户账号数据服务                                     -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.person.account'
+         face  = 'org.mo.content.service.person.IAccountService'/>
+
+   <Component
+         face  = 'org.mo.content.service.person.IAccountService'
+         class = 'org.mo.content.service.person.FAccountService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 方案项目数据服务                                     -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.solution.project'
+         face  = 'org.mo.content.service.solution.IProjectService'/>
+
+   <Component
+         face  = 'org.mo.content.service.solution.IProjectService'
+         class = 'org.mo.content.service.solution.FProjectService'
+         scope = 'global'/>
+
+</Config>

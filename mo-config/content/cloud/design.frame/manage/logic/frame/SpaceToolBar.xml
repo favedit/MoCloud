@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150824130317">
+  <ToolBar _guid="78470CB8F4B04A33BB4FB693DC23E03B" name="editor.design.frame.SpaceToolBar" label="空间工具栏" valid="false">
+    <ToolButton _guid="D27848AFBA6C45869E14BCAF1A367570" name="alignLeft" linker="_controlSearchEdit" icon="editor.common.alignleft" label="左对齐" edit_size="200,0" />
+    <ToolButton _guid="77F96F0B31F94C4FBDBB47E6288F384A" name="alignRight" linker="_controlSearchEdit" icon="editor.common.alignright" label="右对齐" edit_size="200,0" />
+    <ToolButton _guid="9A39ED169FF04299A80E7FC1EBC3D2DE" name="alignTop" linker="_controlSearchEdit" icon="editor.common.aligntop" label="上对齐" edit_size="200,0" />
+    <ToolButton _guid="4681B5F943E943CE9A402B269CDAF9DA" name="alignBottom" linker="_controlSearchEdit" icon="editor.common.alignbottom" label="下对齐" edit_size="200,0" />
+  </ToolBar>
+</Content>

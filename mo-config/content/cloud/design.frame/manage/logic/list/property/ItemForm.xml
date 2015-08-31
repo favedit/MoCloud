@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150822215539">
+  <FormFrame guid="CABA128538DB4EBAB5C0A504F359ED24" name="editor.design.list.property.ItemForm" type="FEditorDsPropertyForm" label="图片属性" is_valid="Y" logic_group="item" logic_service="editor.design.list" note="" valid="false">
+    <ToolBar guid="D8BD3318FAB648C492781E9737A45074" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
+      <ToolButton guid="AE97B48F9D604714A9382DB111D5481A" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="27EA488A261947BEBA9726E4CC7A64B2" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+    </ToolBar>
+    <Panel guid="B506765AFC87441E9CF45A413F248E02" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="8E25637FECA2445594693615EDD64FB0" name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_refer="editor.design.list.ComponentType" edit_size="600,0" input_size="500,0" note="" />
+      <Check guid="E29DCFE8D3E64650975930848FFB98C8" name="isValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="D2A00516B2EF4AD597C40F5AF37F7B4B" name="name" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="F4B737D12D1B448A838E7A8A2F2F5E74" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="B79FF9FA67F84585BA3408A5D886A868" name="controlPanel" icon="design.panel.icon" label="数据属性">
+      <Edit guid="8E269B122BFC47BA8B55D644CA77D2C6" name="value" label="内容" label_size="80,0" valid="Y" data_name="value" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="9695A9B5DE4744B68F6DD7D7ED56B6D4" name="icon" label="图标" label_size="80,0" valid="Y" data_name="icon" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="2D761A78A0C647C8B9882B56C154D480" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Edit guid="8D46E8B9010A4BCF951506B840CFA1A9" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+  </FormFrame>
+</Content>

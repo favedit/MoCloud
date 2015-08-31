@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ==================================================== -->
+   <!-- 设计：持久化描述服务                                 -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'editor.design.persistence'
+         face  = 'org.mo.cloud.editor.design.persistence.IPersistenceService'/>
+
+   <Component
+         face  = 'org.mo.cloud.editor.design.persistence.IPersistenceService'
+         class = 'org.mo.cloud.editor.design.persistence.FPersistenceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：列表描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'editor.design.list'
+         face  = 'org.mo.cloud.editor.design.list.IListService'/>
+
+   <Component
+         face  = 'org.mo.cloud.editor.design.list.IListService'
+         class = 'org.mo.cloud.editor.design.list.FListService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：目录描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'editor.design.tree'
+         face  = 'org.mo.cloud.editor.design.tree.ITreeService'/>
+
+   <Component
+         face  = 'org.mo.cloud.editor.design.tree.ITreeService'
+         class = 'org.mo.cloud.editor.design.tree.FTreeService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：数据描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'editor.design.dataset'
+         face  = 'org.mo.cloud.editor.design.dataset.IDatasetService'/>
+
+   <Component
+         face  = 'org.mo.cloud.editor.design.dataset.IDatasetService'
+         class = 'org.mo.cloud.editor.design.dataset.FDatasetService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：表单描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'editor.design.frame'
+         face  = 'org.mo.cloud.editor.design.frame.IFrameService'/>
+
+   <Component
+         face  = 'org.mo.cloud.editor.design.frame.IFrameService'
+         class = 'org.mo.cloud.editor.design.frame.FFrameService'
+         scope = 'global'/>
+
+</Config>

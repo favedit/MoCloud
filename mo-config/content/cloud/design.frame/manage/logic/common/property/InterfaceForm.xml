@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150823212551">
+  <FormFrame guid="86078FD0AEC644009DDC945D1F01B2F9" name="editor.design.persistence.property.InterfaceForm" type="FEditorDsPropertyForm" label="接口属性" is_valid="Y" logic_group="item" logic_service="editor.design.persistence" note="" valid="false">
+    <ToolBar guid="DBADC79D63A44E419A067FE91D3BBEAA" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+      <ToolButton guid="7E1411AD7533449BA2E18A140F3D562E" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="792F865EA4A944DBAE9556396E9AF09D" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+      <ToolButtonSplit guid="471F2F4BB62445B8A647BBB781878260" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="BF52D444781542299B0F1861B54270D9" name="insertAttributeButton" label="新建属性" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.attribute" hotkey="F5" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.persistence.property.AttributeForm\ncomponent_type=Attribute" />
+      <ToolButtonSplit guid="BC8C2FF4AD62404CB1B394063ED9FFE8" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="8CA901347140484496380A3F8AA1C26B" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" />
+      <ToolButton guid="EFE62BBEF58149DCB102208469A42B4F" name="buildButton" label="编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" />
+    </ToolBar>
+    <Panel guid="01BA9171D5E54339B244C56585BE7F81" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="42A269B306694AFF875B83E616F679D1" name="componentType" label="组件类型" label_size="80,0" valid="Y" data_name="_type" edit_size="600,0" input_size="500,0" edit_refer="editor.design.persistence.ComponentType" note="" />
+      <Check guid="869D720BB4DE43B7A6BA1FA98D38EEE2" name="isValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="482E8FEF0E68410497CF1B3295EAE3B4" name="name" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="01A1FC701B784710B01893D794CAC557" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="816BFED9E53F4C6A80B088B227614E00" name="dataPanel" icon="design.panel.icon" label="数据属性">
+      <Edit guid="F4D8354286D4453183077844BE32F810" name="inherits" label="继承组件" label_size="80,0" valid="Y" data_name="inherits" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="C3D9B4B78A0B4599A80839262FA826A5" name="className" label="实装类名" label_size="80,0" valid="Y" data_name="class_name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="5C137AF6D733481790BFF631855E057B" name="sourcePath" label="代码路径" label_size="80,0" valid="Y" data_name="source_path" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="06B55AE59944486B87765673538CF03D" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Edit guid="A49FAAB0647941B98B4BF9492CF62A99" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+  </FormFrame>
+</Content>

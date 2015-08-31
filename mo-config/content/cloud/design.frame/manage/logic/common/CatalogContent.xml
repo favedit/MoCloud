@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <SliderMenu name='logicMenu' label='菜单区'>
+      <SliderGroup name='logicGroup' label='业务共通'>
+         <SliderButton name='commonCountryButton' icon='editor.design.persistence|png' label='国家信息' fore_color='#333333' attributes='frame_name=logic.common.country.CountryList'/>
+         <SliderButton name='commonAreaButton' icon='editor.design.persistence|png' label='地区信息' fore_color='#333333' attributes='frame_name=logic.common.area.AreaList'/>
+         <SliderButton name='commonProvinceButton' icon='editor.design.persistence|png' label='省份信息' fore_color='#333333' attributes='frame_name=logic.common.province.ProvinceList'/>
+         <SliderButton name='commonCityButton' icon='editor.design.persistence|png' label='城市信息' fore_color='#333333' attributes='frame_name=logic.common.city.CityList'/>
+      </SliderGroup>
+   </SliderMenu>
+</Content>

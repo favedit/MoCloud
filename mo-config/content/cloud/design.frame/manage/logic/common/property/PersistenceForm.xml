@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150825172632">
+  <FormFrame guid="D1F7E3C1BF9F44228C8C3755A995F52F" name="editor.design.persistence.property.PersistenceForm" type="FEditorDsPropertyForm" label="持久化属性" is_valid="Y" logic_group="container" logic_service="editor.design.persistence" note="" valid="false">
+    <ToolBar guid="3101CBCF346A479BA5A5BCC42B79E93B" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24" hebing="N">
+      <ToolButton guid="1558099CED6A497786166F9045A294FD" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton guid="796E8B948864483EB53273A610F34308" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+      <ToolButtonSplit guid="6E6D7C12EB8142FA88D5B20A049E89D0" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="996733D790C64EA283CF450B86485B10" name="insertComponentButton" label="新建组件" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.component" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.persistence.property.ComponentForm\ncomponent_type=Component" />
+      <ToolButton guid="9A37F2F45307406E94DAF51354277298" name="insertInterfaceButton" label="新建接口" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.design.persistence.interface" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.persistence.property.InterfaceForm\ncomponent_type=Interface" />
+      <ToolButtonSplit guid="6E34D1AB6B3C4E6DB9A276C6E072E66D" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
+      <ToolButton guid="6A5269F61A70484DBE26319F84C64E50" name="buildButton" label="编译" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.build" attributes="action=build" />
+      <ToolButton guid="1270288F50C743FAA4F6275CC25A7D62" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.design" hotkey="F9" attributes="action=order" />
+    </ToolBar>
+    <Panel guid="2D9B09D4CB3E46C9B6B8F8F023B9BBE0" name="componentPanel" icon="design.panel.icon" label="基本属性">
+      <Select guid="59067969E765468FB83B34A2696BC387" name="componentType" label="组件类型" label_size="80,0" valid="true" data_name="_type" edit_size="600,0" input_size="500,0" edit_refer="editor.design.persistence.ComponentType" note="" nowrap="false" location="0,0" size="0,0" padding="0,0,0,1" margin="0,0,0,1" display_view="false" display_insert="true" display_update="false" display_delete="false" display_search="false" display_picker="false" display_zoom="false" edit_view="false" edit_insert="false" edit_update="false" edit_delete="false" />
+      <Check guid="EFF7CE633AF54E899988408BE577C6B2" name="isValid" label="有效性" label_size="80,0" valid="Y" data_name="is_valid" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="3F7B7F029A414C51B47C5F5258C23EF1" name="name" label="名称" label_size="80,0" valid="Y" data_name="name" edit_size="600,0" input_size="500,0" note="" />
+      <Edit guid="4B3C710733284E9D8DBE0CD678D02148" name="label" label="标签" label_size="80,0" valid="Y" data_name="label" edit_size="600,0" input_size="500,0" note="" />
+    </Panel>
+    <Panel guid="67F706708A164239AE0B2A3CBF5AB77C" name="notePanel" icon="design.panel.icon" label="备注信息">
+      <Memo guid="8A69C71A5CDE409EB6DC2E687D914A34" name="note" label="备注" label_size="80,0" valid="Y" data_name="note" edit_size="600,0" input_size="500,80" note="" />
+    </Panel>
+  </FormFrame>
+</Content>

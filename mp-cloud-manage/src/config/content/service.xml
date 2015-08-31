@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ==================================================== -->
+   <!-- 设计：持久化描述服务                                 -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'content.define.persistence'
+         face  = 'org.mo.cloud.content.define.persistence.IPersistenceService'/>
+
+   <Component
+         face  = 'org.mo.cloud.content.define.persistence.IPersistenceService'
+         class = 'org.mo.cloud.content.define.persistence.FPersistenceService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：列表描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'content.define.list'
+         face  = 'org.mo.cloud.content.define.list.IListService'/>
+
+   <Component
+         face  = 'org.mo.cloud.content.define.list.IListService'
+         class = 'org.mo.cloud.content.define.list.FListService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：目录描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'content.define.tree'
+         face  = 'org.mo.cloud.content.define.tree.ITreeService'/>
+
+   <Component
+         face  = 'org.mo.cloud.content.define.tree.ITreeService'
+         class = 'org.mo.cloud.content.define.tree.FTreeService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：数据描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'content.define.dataset'
+         face  = 'org.mo.cloud.content.define.dataset.IDatasetService'/>
+
+   <Component
+         face  = 'org.mo.cloud.content.define.dataset.IDatasetService'
+         class = 'org.mo.cloud.content.define.dataset.FDatasetService'
+         scope = 'global'/>
+
+   <!-- ==================================================== -->
+   <!-- 设计：表单描述服务                                   -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'content.define.frame'
+         face  = 'org.mo.cloud.content.define.frame.IFrameService'/>
+
+   <Component
+         face  = 'org.mo.cloud.content.define.frame.IFrameService'
+         class = 'org.mo.cloud.content.define.frame.FFrameService'
+         scope = 'global'/>
+
+</Config>
