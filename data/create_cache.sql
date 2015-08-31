@@ -7,10 +7,10 @@ CREATE TABLE `CC_SYS_SESSION`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `SESSION_CODE`                  VARCHAR(40) NOT NULL, 
-   `LOGIC_CODE`                    VARCHAR(40), 
+   `LOGIC_CODE`                    VARCHAR(40) NOT NULL, 
    `FROM_CD`                       INTEGER, 
-   `FROM_CODE`                     VARCHAR(40), 
+   `FROM_CODE`                     VARCHAR(40) NOT NULL, 
+   `SESSION_CODE`                  VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
    `USER_LABEL`                    VARCHAR(40), 
    `ROLE_ID`                       BIGINT, 
@@ -28,7 +28,7 @@ ALTER TABLE CC_SYS_SESSION
    ADD CONSTRAINT CC_SYS_SES_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE CC_SYS_SESSION 
-   ADD CONSTRAINT CC_SYS_SES_UK_SESSION_CODE UNIQUE ( SESSION_CODE ); 
+   ADD CONSTRAINT CC_SYS_SES_UK_SCD UNIQUE ( LOGIC_CODE, FROM_CODE, SESSION_CODE ); 
 
 -- ------------------------------------------------------------
 -- Create table [Cache.System.Validation]

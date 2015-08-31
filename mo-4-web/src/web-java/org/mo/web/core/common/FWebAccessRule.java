@@ -2,6 +2,8 @@ package org.mo.web.core.common;
 
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
+import org.mo.core.aop.RAop;
+import org.mo.core.bind.IBindConsole;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.face.AWebAuthority;
 import org.mo.web.core.face.AWebRole;
@@ -16,6 +18,21 @@ public class FWebAccessRule
       implements
          IWebAccessRule
 {
+   // 绑定控制台接口
+   protected IBindConsole _bindConsole;
+
+   //============================================================
+   // <T>获得绑定控制台接口。</T>
+   //
+   // @return 绑定控制台接口
+   //============================================================
+   public IBindConsole bindConsole(){
+      if(_bindConsole == null){
+         _bindConsole = RAop.find(IBindConsole.class);
+      }
+      return _bindConsole;
+   }
+
    //============================================================
    // <T>检查会话是否有效。</T>
    //

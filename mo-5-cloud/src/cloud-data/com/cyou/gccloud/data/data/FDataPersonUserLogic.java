@@ -101,8 +101,14 @@ public class FDataPersonUserLogic
    // 字段更新时间的定义。
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
+   // 字段等级的定义。
+   public final static SLogicFieldInfo RANK = new SLogicFieldInfo("RANK");
+
+   // 字段部门标签集合的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
+
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ROLE_CD`,`ROLE_ID`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ROLE_CD`,`ROLE_ID`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`,`RANK`,`DEPARTMENT_LABELS`";
 
    //============================================================
    // <T>构造人员用户信息逻辑单元。</T>
@@ -714,6 +720,8 @@ public class FDataPersonUserLogic
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
       cmd.append(",`UPDATE_DATE`");
+      cmd.append(",`RANK`");
+      cmd.append(",`DEPARTMENT_LABELS`");
       cmd.append(") VALUES(");
       cmd.append(unit.ovld());
       String guid = unit.guid();
@@ -836,6 +844,24 @@ public class FDataPersonUserLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(note));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String rank = unit.rank();
+      if(RString.isEmpty(rank)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(rank));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String departmentLabels = unit.departmentLabels();
+      if(RString.isEmpty(departmentLabels)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLabels));
          cmd.append('\'');
       }
       // 设置更新信息
@@ -1055,6 +1081,28 @@ public class FDataPersonUserLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(note));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isRankChanged()){
+         cmd.append(",`RANK`=");
+         String rank = unit.rank();
+         if(RString.isEmpty(rank)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(rank));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLabelsChanged()){
+         cmd.append(",`DEPARTMENT_LABELS`=");
+         String departmentLabels = unit.departmentLabels();
+         if(RString.isEmpty(departmentLabels)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLabels));
             cmd.append('\'');
          }
       }

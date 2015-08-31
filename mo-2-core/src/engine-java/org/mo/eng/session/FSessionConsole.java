@@ -1,5 +1,6 @@
 package org.mo.eng.session;
 
+import org.mo.com.console.FConsole;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
@@ -25,6 +26,7 @@ import org.mo.eng.session.common.ISession;
 // </P>
 //============================================================
 public class FSessionConsole
+      extends FConsole
       implements
          ISessionConsole
 {
@@ -329,31 +331,31 @@ public class FSessionConsole
    // <T>刷新线程信息,释放掉超时的线程对象。</T>
    //============================================================
    public void refresh(){
-      FSessionWorker worker;
-      _removes.clear();
-      _buffers.clear();
-      synchronized(_workers){
-         int count = _workers.count();
-         for(int n = 0; n < count; n++){
-            worker = _workers.value(n);
-            if(null != worker){
-               if(worker.testTimeout(_interval)){
-                  // 找出超时的线程信息，移除超时线程
-                  _removes.push(worker);
-                  //}else if(worker.isActive() && worker.testTimeout(_memoryTimeout)){
-                  // 找出内存超时的线程信息
-                  //   _buffers.set(_workers.name(n), worker);
-               }
-            }
-         }
-      }
-      // 释放的超时的线程
-      if(!_removes.isEmpty()){
-         int count = _removes.count();
-         for(int n = 0; n < count; n++){
-            release(_removes.get(n));
-         }
-      }
+      //      FSessionWorker worker;
+      //      _removes.clear();
+      //      _buffers.clear();
+      //      synchronized(_workers){
+      //         int count = _workers.count();
+      //         for(int n = 0; n < count; n++){
+      //            worker = _workers.value(n);
+      //            if(null != worker){
+      //               if(worker.testTimeout(_interval)){
+      //                  // 找出超时的线程信息，移除超时线程
+      //                  _removes.push(worker);
+      //                  //}else if(worker.isActive() && worker.testTimeout(_memoryTimeout)){
+      //                  // 找出内存超时的线程信息
+      //                  //   _buffers.set(_workers.name(n), worker);
+      //               }
+      //            }
+      //         }
+      //      }
+      //      // 释放的超时的线程
+      //      if(!_removes.isEmpty()){
+      //         int count = _removes.count();
+      //         for(int n = 0; n < count; n++){
+      //            release(_removes.get(n));
+      //         }
+      //      }
       // 刷新内存，将内存超时的线程信息写入文件缓冲
       //      if(!_buffers.isEmpty()){
       //         int count = _buffers.count();

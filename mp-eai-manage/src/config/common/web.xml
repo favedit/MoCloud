@@ -19,9 +19,9 @@
          class = 'org.mo.web.core.session.FWebSessionConsole'
          scope = 'global' >
       <Property name='sessionClassName'>org.mo.web.core.session.FWebSession</Property>
-      <Property name='interval'>60000</Property>
-      <Property name='timeout'>36000000</Property>
-      <Property name='memoryTimeout'>3600000</Property>
+      <Property name='interval'>600000</Property>
+      <Property name='memoryTimeout'>604800000</Property>
+      <Property name='timeout'>604800000</Property>
       <Property name='workfile'>${application.temp}/web.session/session.ser</Property>
       <Property name='directory'>${application.temp}/web.session/</Property>
       <Initialize name='initializeConfig'/>

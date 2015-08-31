@@ -85,7 +85,7 @@ public class FEaiSessionConsole
          if(!exists){
             sessionInfo = _sessionConsole.doPrepare(logicContext);
          }
-         sessionInfo.setFromCode("web");
+         sessionInfo.setFromCode(session.fromCode());
          sessionInfo.setLogicCode(_logicCode);
          sessionInfo.setSessionCode(sessionCode);
          sessionInfo.setUserId(userId);

@@ -253,7 +253,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    @Override
    public U search(ILogicContext logicContext,
                    Class<U> clazz,
-                   String whereSql){
+                   CharSequence whereSql){
       // 生成参数
       Class<U> classUnit = (clazz != null) ? clazz : _classUnit;
       // 查询内容
@@ -271,7 +271,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    @Override
    public FLogicDataset<U> fetch(ILogicContext logicContext,
-                                 String whereSql){
+                                 CharSequence whereSql){
       T logic = findLogic(logicContext);
       return logic.fetchClass(_classUnit, null, whereSql, null, null, 0, 0);
    }
@@ -286,8 +286,8 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    @Override
    public FLogicDataset<U> fetch(ILogicContext logicContext,
-                                 String whereSql,
-                                 String orderSql){
+                                 CharSequence whereSql,
+                                 CharSequence orderSql){
       T logic = findLogic(logicContext);
       return logic.fetchClass(_classUnit, null, whereSql, null, orderSql, 0, 0);
    }
@@ -304,8 +304,8 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    @Override
    public FLogicDataset<U> fetch(ILogicContext logicContext,
-                                 String whereSql,
-                                 String orderSql,
+                                 CharSequence whereSql,
+                                 CharSequence orderSql,
                                  int pageSize,
                                  int page){
       T logic = findLogic(logicContext);

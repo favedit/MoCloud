@@ -1,10 +1,11 @@
 package org.mo.content.face.design;
 
+import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.cloud.logic.person.IGcUserConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -25,17 +26,18 @@ public class FSpaceAction
    // <T>用户信息页面处理。</T>
    //
    // @param context 网络环境
+   // @param sessionContext 会话环境
    // @param logicContext 逻辑环境
-   // @param sessionInfo 会话信息
    // @param page 容器
    // @return 页面
    //============================================================
    @Override
    public String construct(IWebContext context,
+                           IWebSession sessionContext,
                            ILogicContext logicContext,
-                           FGcSessionInfo sessionInfo,
                            FSpacePage page){
-      FGcUserInfo user = _userConsole.find(logicContext, sessionInfo.userId());
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      FGcUserInfo user = _userConsole.find(logicContext, session.userId());
       page.setUser(user);
       return "Space";
    }

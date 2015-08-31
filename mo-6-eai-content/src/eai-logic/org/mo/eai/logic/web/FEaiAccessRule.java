@@ -30,7 +30,7 @@ public class FEaiAccessRule
          return EResult.Failure;
       }
       // 绑定数据
-      //_bindConsole.bind(FEaiSession.class, session);
+      bindConsole().bind(FEaiSession.class, session);
       return EResult.Success;
    }
 
@@ -57,7 +57,7 @@ public class FEaiAccessRule
          return EResult.Failure;
       }
       // 绑定会话数据
-      //_bindConsole.bind(FEaiSession.class, session);
+      bindConsole().bind(FEaiSession.class, session);
       return EResult.Success;
    }
 

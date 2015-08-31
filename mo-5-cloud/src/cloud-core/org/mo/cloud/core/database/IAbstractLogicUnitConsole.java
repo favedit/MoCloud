@@ -148,7 +148,7 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    //============================================================
    U search(ILogicContext logicContext,
             Class<U> clazz,
-            String whereSql);
+            CharSequence whereSql);
 
    //============================================================
    // <T>获取数据处理。</T>
@@ -158,7 +158,7 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    // @return 数据集合
    //============================================================
    FLogicDataset<U> fetch(ILogicContext logicContext,
-                          String whereSql);
+                          CharSequence whereSql);
 
    //============================================================
    // <T>获取数据处理。</T>
@@ -169,8 +169,8 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    // @return 数据集合
    //============================================================
    FLogicDataset<U> fetch(ILogicContext logicContext,
-                          String whereSql,
-                          String orderSql);
+                          CharSequence whereSql,
+                          CharSequence orderSql);
 
    //============================================================
    // <T>获取数据处理。</T>
@@ -183,8 +183,8 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    // @return 数据集合
    //============================================================
    FLogicDataset<U> fetch(ILogicContext logicContext,
-                          String whereSql,
-                          String orderSql,
+                          CharSequence whereSql,
+                          CharSequence orderSql,
                           int pageSize,
                           int page);
 

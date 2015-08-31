@@ -22,9 +22,9 @@
       <Property name='sessionClassName'>org.mo.eai.logic.web.FEaiSession</Property>
       <Property name='logic_code'>eai</Property>
       <Property name='server_code'>eai.content</Property>
-      <Property name='interval'>10000</Property>
-      <Property name='timeout'>36000000</Property>
-      <Property name='memoryTimeout'>36000000</Property>
+      <Property name='interval'>600000</Property>
+      <Property name='memoryTimeout'>604800000</Property>
+      <Property name='timeout'>604800000</Property>
       <Property name='workfile'>${application.temp}/web.session/session.ser</Property>
       <Property name='directory'>${application.temp}/web.session/</Property>
       <Initialize name='initializeConfig'/>

@@ -20,25 +20,48 @@ public class FWebSession
    // 序列化标志
    private static final long serialVersionUID = 1L;
 
+   // 来源代码
+   protected String _fromCode = "web";
+
    // 关联标识
-   private String _connectId = "0";
+   protected String _connectId = "0";
 
    // 主题标识
-   private String _themeId;
+   protected String _themeId;
 
    // 登录用户
-   private FWebUser _user;
+   protected FWebUser _user;
 
    // 容器集合
-   private FWebContainerCollection _containers;
+   protected FWebContainerCollection _containers;
 
    // 历史管理器
-   private FWebHistory _history;
+   protected FWebHistory _history;
 
    //============================================================
    // <T>构造网络会话。</T>
    //============================================================
    public FWebSession(){
+   }
+
+   //============================================================
+   // <T>获得来源代码。</T>
+   //
+   // @return 来源代码
+   //============================================================
+   @Override
+   public String fromCode(){
+      return _fromCode;
+   }
+
+   //============================================================
+   // <T>设置来源代码。</T>
+   //
+   // @param fromCode 来源代码
+   //============================================================
+   @Override
+   public void setFromCode(String fromCode){
+      _fromCode = fromCode;
    }
 
    //============================================================

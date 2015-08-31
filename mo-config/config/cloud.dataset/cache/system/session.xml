@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="7d20ffab-7d3a-429c-af91-c82c6744bab4" name="cache.system.session" label="M#12cn15系统会话表" is_valid="Y" note="M#" data_engine="HEAP" data_group="cache" data_factory="Cache.System.Session" data_name="CC_SYS_SESSION" data_alias="CC_SYS_SES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldString _uuid="da81b465-fb4c-4584-9f01-1db5cbd084aa" name="session_code" label="M#12cn14会话代码" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="SESSION_CODE" data_size="40" />
-  <FieldString _uuid="2c29a072-e0a6-4033-9f90-aef5b970e692" name="logic_code" label="M#12cn14逻辑代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_CODE" data_size="40" />
+  <FieldString _uuid="2c29a072-e0a6-4033-9f90-aef5b970e692" name="logic_code" label="M#12cn14逻辑代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="LOGIC_CODE" data_alias="LGC_COD" data_size="40" data_uniques="SCD" />
   <FieldInteger _uuid="c38b2e0f-dfe4-4af9-a9dd-9ca6307b6653" name="from_cd" label="M#12cn14来源方式" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FROM_CD" />
-  <FieldString _uuid="1a8568b4-9a82-4d81-8f07-bc74ce556cd9" name="from_code" label="M#12cn14来源代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FROM_CODE" data_size="40" />
+  <FieldString _uuid="1a8568b4-9a82-4d81-8f07-bc74ce556cd9" name="from_code" label="M#12cn14来源代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="FROM_CODE" data_alias="FRM_COD" data_size="40" data_uniques="SCD" />
+  <FieldString _uuid="da81b465-fb4c-4584-9f01-1db5cbd084aa" name="session_code" label="M#12cn14会话代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="SESSION_CODE" data_alias="SES_COD" data_size="40" data_uniques="SCD" />
   <FieldRecordId _uuid="4b47f4e4-fd73-4374-bece-29292e1312e3" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
   <FieldString _uuid="d8e0a79f-d4fb-4113-815e-300598a48f85" name="user_label" label="M#12cn14角色标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_LABEL" data_size="40" />
   <FieldRecordId _uuid="762603cf-0960-471b-a2e3-4e06ab511454" name="role_id" label="M#12cn14角色编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_ID" />

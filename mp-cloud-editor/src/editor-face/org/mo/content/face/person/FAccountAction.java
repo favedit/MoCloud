@@ -1,14 +1,17 @@
 package org.mo.content.face.person;
 
 import com.cyou.gccloud.define.enums.core.EGcAccountFrom;
+import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.cloud.logic.person.FGcUserInfo;
-import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.content.core.person.IAccountConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.action.common.FWebCookie;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.core.session.IWebSession;
+import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -27,7 +30,7 @@ public class FAccountAction
 
    // 会话控制台
    @ALink
-   protected IGcSessionConsole _sessionConsole;
+   protected IWebSessionConsole _sessionConsole;
 
    //============================================================
    // <T>注册用户</T>
@@ -63,22 +66,30 @@ public class FAccountAction
    // <T>用户登录</T>
    //
    // @param context 网络环境
+   // @param sessionContext 会话环境
    // @param logicContext 逻辑环境
    // @param page 容器
    // @return 页面
    //============================================================
    @Override
    public String login(IWebContext context,
+                       IWebSession sessionContext,
                        ILogicContext logicContext,
                        @AContainer(name = "page") FAccountPage page){
+      FGcWebSession session = (FGcWebSession)sessionContext;
       // 获得参数
       String passport = context.parameter("passport");
       String password = context.parameter("password");
       // 新建记录
       FGcUserInfo user = _accountConsole.doLogin(logicContext, passport, password, EGcAccountFrom.Web);
       if(user == null){
-         page.setResult("用户不存在。");
+         throw new FFatalError("用户不存在。");
       }
+      long userId = user.ouid();
+      // 打开用户会话
+      session.setFromCode("web");
+      session.setUserId(userId);
+      _sessionConsole.open(session);
       // 设置客户端信息
       String sessionGuid = user.sessionGuid();
       context.outputCookies().push(new FWebCookie("session_guid", sessionGuid));

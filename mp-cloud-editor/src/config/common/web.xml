@@ -16,14 +16,18 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.session.IWebSessionConsole'
-         class = 'org.mo.web.core.session.FWebSessionConsole'
+         class = 'org.mo.cloud.core.web.FGcWebSessionConsole'
          scope = 'global' >
-      <Property name='sessionClassName'>org.mo.web.core.session.FWebSession</Property>
-      <Property name='interval'>10000</Property>
-      <Property name='timeout'>36000000</Property>
-      <Property name='memoryTimeout'>36000000</Property>
+      <Property name='valid'>Y</Property>
+      <Property name='sessionClassName'>org.mo.cloud.core.web.FGcWebSession</Property>
+      <Property name='logic_code'>cloud</Property>
+      <Property name='server_code'>cloud.editor</Property>
+      <Property name='interval'>600000</Property>
+      <Property name='memoryTimeout'>604800000</Property>
+      <Property name='timeout'>604800000</Property>
       <Property name='workfile'>${application.temp}/web.session/session.ser</Property>
       <Property name='directory'>${application.temp}/web.session/</Property>
+      <Initialize name='initializeConfig'/>
       <Initialize name='initializeMonitor'/>
       <Initialize name='initializeResume'/>
       <Release name='releaseInterrupt'/>

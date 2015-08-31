@@ -19,6 +19,9 @@ public class FGcWebSession
    // 用户编号
    protected long _userId;
 
+   // 用户标签
+   protected String _userLabel;
+
    // 用户信息
    protected FGcUserInfo _userInfo;
 
@@ -53,6 +56,24 @@ public class FGcWebSession
    }
 
    //============================================================
+   // <T>获得用户标签。</T>
+   //
+   // @return 用户标签
+   //============================================================
+   public String userLabel(){
+      return _userLabel;
+   }
+
+   //============================================================
+   // <T>设置用户标签。</T>
+   //
+   // @param userLabel 用户标签
+   //============================================================
+   public void setUserLabel(String userLabel){
+      _userLabel = userLabel;
+   }
+
+   //============================================================
    // <T>获得会话信息。</T>
    //
    // @return 会话信息
@@ -79,7 +100,9 @@ public class FGcWebSession
       // 加载信息
       _recordId = info.ouid();
       _id = info.sessionCode();
+      _fromCode = info.fromCode();
       _userId = info.userId();
+      _userLabel = info.userLabel();
       // 设置会话
       _sessionInfo = info;
    }
@@ -90,7 +113,9 @@ public class FGcWebSession
    // @param info 会话数据
    //============================================================
    public void saveInfo(FGcSessionInfo info){
-      // 加载信息
+      // 保存信息
+      info.setFromCode(_fromCode);
       info.setUserId(_userId);
+      info.setUserLabel(_userLabel);
    }
 }
