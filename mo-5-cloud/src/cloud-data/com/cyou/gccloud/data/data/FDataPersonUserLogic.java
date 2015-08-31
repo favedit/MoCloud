@@ -80,6 +80,12 @@ public class FDataPersonUserLogic
    // 字段角色编号的定义。
    public final static SLogicFieldInfo ROLE_ID = new SLogicFieldInfo("ROLE_ID");
 
+   // 字段等级标签的定义。
+   public final static SLogicFieldInfo RANK_LABEL = new SLogicFieldInfo("RANK_LABEL");
+
+   // 字段部门标签集合的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
+
    // 字段描述的定义。
    public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
 
@@ -101,14 +107,8 @@ public class FDataPersonUserLogic
    // 字段更新时间的定义。
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
-   // 字段等级的定义。
-   public final static SLogicFieldInfo RANK = new SLogicFieldInfo("RANK");
-
-   // 字段部门标签集合的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
-
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ROLE_CD`,`ROLE_ID`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`,`RANK`,`DEPARTMENT_LABELS`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ROLE_CD`,`ROLE_ID`,`RANK_LABEL`,`DEPARTMENT_LABELS`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造人员用户信息逻辑单元。</T>
@@ -713,6 +713,8 @@ public class FDataPersonUserLogic
       cmd.append(",`CONTACT_MAIL_VERIFY_CD`");
       cmd.append(",`ROLE_CD`");
       cmd.append(",`ROLE_ID`");
+      cmd.append(",`RANK_LABEL`");
+      cmd.append(",`DEPARTMENT_LABELS`");
       cmd.append(",`DESCRIPTION`");
       cmd.append(",`CONTENT`");
       cmd.append(",`NOTE`");
@@ -720,8 +722,6 @@ public class FDataPersonUserLogic
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
       cmd.append(",`UPDATE_DATE`");
-      cmd.append(",`RANK`");
-      cmd.append(",`DEPARTMENT_LABELS`");
       cmd.append(") VALUES(");
       cmd.append(unit.ovld());
       String guid = unit.guid();
@@ -820,6 +820,24 @@ public class FDataPersonUserLogic
          cmd.append(roleId);
       }
       cmd.append(',');
+      String rankLabel = unit.rankLabel();
+      if(RString.isEmpty(rankLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(rankLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String departmentLabels = unit.departmentLabels();
+      if(RString.isEmpty(departmentLabels)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLabels));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       String description = unit.description();
       if(RString.isEmpty(description)){
          cmd.append("NULL");
@@ -844,24 +862,6 @@ public class FDataPersonUserLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(note));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String rank = unit.rank();
-      if(RString.isEmpty(rank)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(rank));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String departmentLabels = unit.departmentLabels();
-      if(RString.isEmpty(departmentLabels)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(departmentLabels));
          cmd.append('\'');
       }
       // 设置更新信息
@@ -1051,6 +1051,28 @@ public class FDataPersonUserLogic
             cmd.append(roleId);
          }
       }
+      if(unit.isRankLabelChanged()){
+         cmd.append(",`RANK_LABEL`=");
+         String rankLabel = unit.rankLabel();
+         if(RString.isEmpty(rankLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(rankLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLabelsChanged()){
+         cmd.append(",`DEPARTMENT_LABELS`=");
+         String departmentLabels = unit.departmentLabels();
+         if(RString.isEmpty(departmentLabels)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLabels));
+            cmd.append('\'');
+         }
+      }
       if(unit.isDescriptionChanged()){
          cmd.append(",`DESCRIPTION`=");
          String description = unit.description();
@@ -1081,28 +1103,6 @@ public class FDataPersonUserLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(note));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isRankChanged()){
-         cmd.append(",`RANK`=");
-         String rank = unit.rank();
-         if(RString.isEmpty(rank)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(rank));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isDepartmentLabelsChanged()){
-         cmd.append(",`DEPARTMENT_LABELS`=");
-         String departmentLabels = unit.departmentLabels();
-         if(RString.isEmpty(departmentLabels)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(departmentLabels));
             cmd.append('\'');
          }
       }

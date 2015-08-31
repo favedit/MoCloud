@@ -13,10 +13,10 @@
   <FieldInteger _uuid="75319d8a-3803-4828-a1dd-c50fd785bf33" name="contact_mail_verify_cd" label="M#12cn16联系邮件验证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTACT_MAIL_VERIFY_CD" />
   <FieldInteger _uuid="4ac771aa-e3bc-4724-b952-a9b569cd3c3c" name="role_cd" label="M#12cn16用户权限状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_CD" />
   <FieldRecordId _uuid="73ed5636-cb2f-4480-890b-139695c69342" name="role_id" label="M#12cn14角色编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_ID" />
+  <FieldString _uuid="fe3cb5dc-8c28-4b1f-a62a-781496f4a7e4" name="rank_label" label="M#12cn14等级标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RANK_LABEL" data_size="80" />
+  <FieldString _uuid="50415a3b-d782-4963-a252-5bb45ff36fce" name="department_labels" label="M#12cn16部门标签集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABELS" data_size="800" />
   <FieldString _uuid="a6439357-3de7-4fe6-aed4-3f8032158ace" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
   <FieldContent _uuid="c6dfe0dc-e9db-4ce6-90ea-9fcad0a105ba" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
   <FieldString _uuid="b7b85bbe-cfa2-44d5-930f-fb150cc84cd4" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
   <FieldTemplate _uuid="92544e34-7cb5-4450-8bfa-116f5956bb37" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
-  <FieldString _uuid="fe3cb5dc-8c28-4b1f-a62a-781496f4a7e4" name="rank" label="M#12cn12等级" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RANK" data_size="80" />
-  <FieldString _uuid="50415a3b-d782-4963-a252-5bb45ff36fce" name="department_labels" label="M#12cn16部门标签集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABELS" data_size="800" />
 </DataStore>

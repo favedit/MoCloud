@@ -116,6 +116,18 @@ public class FDataPersonUserUnit
    // 字段角色编号的定义。
    protected long _roleId;
 
+   // 存储字段等级标签的定义。
+   private String __rankLabel;
+
+   // 字段等级标签的定义。
+   protected String _rankLabel;
+
+   // 存储字段部门标签集合的定义。
+   private String __departmentLabels;
+
+   // 字段部门标签集合的定义。
+   protected String _departmentLabels;
+
    // 存储字段描述的定义。
    private String __description;
 
@@ -157,18 +169,6 @@ public class FDataPersonUserUnit
 
    // 字段更新时间的定义。
    protected TDateTime _updateDate = new TDateTime();
-
-   // 存储字段等级的定义。
-   private String __rank;
-
-   // 字段等级的定义。
-   protected String _rank;
-
-   // 存储字段部门标签集合的定义。
-   private String __departmentLabels;
-
-   // 字段部门标签集合的定义。
-   protected String _departmentLabels;
 
    //============================================================
    // <T>构造人员用户信息逻辑单元。</T>
@@ -609,6 +609,60 @@ public class FDataPersonUserUnit
    }
 
    //============================================================
+   // <T>判断等级标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRankLabelChanged(){
+      return !RString.equals(__rankLabel, _rankLabel);
+   }
+
+   //============================================================
+   // <T>获得等级标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String rankLabel(){
+      return _rankLabel;
+   }
+
+   //============================================================
+   // <T>设置等级标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRankLabel(String value){
+      _rankLabel = value;
+   }
+
+   //============================================================
+   // <T>判断部门标签集合的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLabelsChanged(){
+      return !RString.equals(__departmentLabels, _departmentLabels);
+   }
+
+   //============================================================
+   // <T>获得部门标签集合的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLabels(){
+      return _departmentLabels;
+   }
+
+   //============================================================
+   // <T>设置部门标签集合的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLabels(String value){
+      _departmentLabels = value;
+   }
+
+   //============================================================
    // <T>判断描述的数据是否改变。</T>
    //
    // @return 数据内容
@@ -798,60 +852,6 @@ public class FDataPersonUserUnit
    }
 
    //============================================================
-   // <T>判断等级的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRankChanged(){
-      return !RString.equals(__rank, _rank);
-   }
-
-   //============================================================
-   // <T>获得等级的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String rank(){
-      return _rank;
-   }
-
-   //============================================================
-   // <T>设置等级的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRank(String value){
-      _rank = value;
-   }
-
-   //============================================================
-   // <T>判断部门标签集合的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDepartmentLabelsChanged(){
-      return !RString.equals(__departmentLabels, _departmentLabels);
-   }
-
-   //============================================================
-   // <T>获得部门标签集合的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String departmentLabels(){
-      return _departmentLabels;
-   }
-
-   //============================================================
-   // <T>设置部门标签集合的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDepartmentLabels(String value){
-      _departmentLabels = value;
-   }
-
-   //============================================================
    // <T>根据名称获得内容。</T>
    //
    // @param name 名称
@@ -892,6 +892,10 @@ public class FDataPersonUserUnit
             return RInteger.toString(_roleCd);
          case "role_id":
             return Long.toString(_roleId);
+         case "rank_label":
+            return _rankLabel;
+         case "department_labels":
+            return _departmentLabels;
          case "description":
             return _description;
          case "content":
@@ -906,10 +910,6 @@ public class FDataPersonUserUnit
             return Long.toString(_updateUserId);
          case "update_date":
             return _updateDate.toString();
-         case "rank":
-            return _rank;
-         case "department_labels":
-            return _departmentLabels;
       }
       return null;
    }
@@ -972,6 +972,12 @@ public class FDataPersonUserUnit
          case "role_id":
             _roleId = RLong.parse(value);
             break;
+         case "rank_label":
+            _rankLabel = value;
+            break;
+         case "department_labels":
+            _departmentLabels = value;
+            break;
          case "description":
             _description = value;
             break;
@@ -992,12 +998,6 @@ public class FDataPersonUserUnit
             break;
          case "update_date":
             _updateDate.parse(value);
-            break;
-         case "rank":
-            _rank = value;
-            break;
-         case "department_labels":
-            _departmentLabels = value;
             break;
       }
    }
@@ -1078,6 +1078,14 @@ public class FDataPersonUserUnit
                __roleId = RLong.parse(value);
                _roleId = __roleId;
                break;
+            case "rank_label":
+               __rankLabel = value;
+               _rankLabel = __rankLabel;
+               break;
+            case "department_labels":
+               __departmentLabels = value;
+               _departmentLabels = __departmentLabels;
+               break;
             case "description":
                __description = value;
                _description = __description;
@@ -1105,14 +1113,6 @@ public class FDataPersonUserUnit
             case "update_date":
                __updateDate.parse(value);
                _updateDate.assign(__updateDate);
-               break;
-            case "rank":
-               __rank = value;
-               _rank = __rank;
-               break;
-            case "department_labels":
-               __departmentLabels = value;
-               _departmentLabels = __departmentLabels;
                break;
          }
       }
@@ -1142,6 +1142,8 @@ public class FDataPersonUserUnit
       row.set("contactMailVerifyCd", _contactMailVerifyCd);
       row.set("roleCd", _roleCd);
       row.set("roleId", _roleId);
+      row.set("rankLabel", _rankLabel);
+      row.set("departmentLabels", _departmentLabels);
       row.set("description", _description);
       row.set("content", _content);
       row.set("note", _note);
@@ -1149,8 +1151,6 @@ public class FDataPersonUserUnit
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
       row.set("updateDate", _updateDate);
-      row.set("rank", _rank);
-      row.set("departmentLabels", _departmentLabels);
    }
 
    //============================================================
@@ -1177,6 +1177,8 @@ public class FDataPersonUserUnit
       map.put("contactMailVerifyCd", RInteger.toString(_contactMailVerifyCd));
       map.put("roleCd", RInteger.toString(_roleCd));
       map.put("roleId", RLong.toString(_roleId));
+      map.put("rankLabel", _rankLabel);
+      map.put("departmentLabels", _departmentLabels);
       map.put("description", _description);
       map.put("content", _content);
       map.put("note", _note);
@@ -1184,8 +1186,6 @@ public class FDataPersonUserUnit
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
       map.put("updateDate", _updateDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("rank", _rank);
-      map.put("departmentLabels", _departmentLabels);
    }
 
    //============================================================
@@ -1212,6 +1212,8 @@ public class FDataPersonUserUnit
       _contactMailVerifyCd = input.readInt32();
       _roleCd = input.readInt32();
       _roleId = input.readInt64();
+      _rankLabel = input.readString();
+      _departmentLabels = input.readString();
       _description = input.readString();
       _content = input.readString();
       _note = input.readString();
@@ -1219,8 +1221,6 @@ public class FDataPersonUserUnit
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
       _updateDate.set(input.readInt64());
-      _rank = input.readString();
-      _departmentLabels = input.readString();
    }
 
    //============================================================
@@ -1247,6 +1247,8 @@ public class FDataPersonUserUnit
       output.writeInt32(_contactMailVerifyCd);
       output.writeInt32(_roleCd);
       output.writeInt64(_roleId);
+      output.writeString(_rankLabel);
+      output.writeString(_departmentLabels);
       output.writeString(_description);
       output.writeString(_content);
       output.writeString(_note);
@@ -1254,7 +1256,5 @@ public class FDataPersonUserUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
-      output.writeString(_rank);
-      output.writeString(_departmentLabels);
    }
 }

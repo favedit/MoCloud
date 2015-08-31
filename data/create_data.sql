@@ -202,18 +202,20 @@ CREATE TABLE `DT_PSN_USER`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `STATUS_CD`                     INTEGER, 
-   `PASSPORT`                      VARCHAR(40), 
+   `PASSPORT`                      VARCHAR(40) NOT NULL, 
    `PASSWORD`                      VARCHAR(40), 
    `CODE`                          VARCHAR(80), 
    `NAME`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(80), 
    `ICON_URL`                      VARCHAR(400), 
    `CONTACT_PHONE`                 VARCHAR(20), 
-   `CONTACT_PHONE_VERIFY_CD`       INTEGER,
+   `CONTACT_PHONE_VERIFY_CD`       INTEGER, 
    `CONTACT_MAIL`                  VARCHAR(40), 
    `CONTACT_MAIL_VERIFY_CD`        INTEGER, 
    `ROLE_CD`                       INTEGER, 
    `ROLE_ID`                       BIGINT, 
+   `RANK_LABEL`                    VARCHAR(80), 
+   `DEPARTMENT_LABELS`             VARCHAR(800), 
    `DESCRIPTION`                   VARCHAR(2000), 
    `CONTENT`                       TEXT, 
    `NOTE`                          VARCHAR(2000), 
@@ -221,10 +223,13 @@ CREATE TABLE `DT_PSN_USER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_PSN_USER 
    ADD CONSTRAINT DT_PSN_USR_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER 
+   ADD CONSTRAINT DT_PSN_USR_UK_PASSPORT UNIQUE ( PASSPORT ); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.Entry]
