@@ -33,27 +33,27 @@ public interface IGcSessionConsole
    FLogicDataset<FGcSessionInfo> findByUserId(ILogicContext context,
                                               long userId);
 
-   //============================================================
-   // <T>打开一个会话。</T>
+   //   //============================================================
+   //   // <T>打开一个会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param sessionId 会话编号
+   //   // @return 会话信息
+   //   //============================================================
+   //   FGcSessionInfo open(ILogicContext context,
+   //                       String sessionId);
    //
-   // @param context 逻辑环境
-   // @param sessionId 会话编号
-   // @return 会话信息
-   //============================================================
-   FGcSessionInfo open(ILogicContext context,
-                       String sessionId);
-
-   //============================================================
-   // <T>打开一个会话。</T>
-   //
-   // @param context 逻辑环境
-   // @param userId 用户编号
-   // @param fromCd 来源类型
-   // @return 会话信息
-   //============================================================
-   FGcSessionInfo open(ILogicContext context,
-                       long userId,
-                       int fromCd);
+   //   //============================================================
+   //   // <T>打开一个会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param userId 用户编号
+   //   // @param fromCd 来源类型
+   //   // @return 会话信息
+   //   //============================================================
+   //   FGcSessionInfo open(ILogicContext context,
+   //                       long userId,
+   //                       int fromCd);
 
    //   //============================================================
    //   // <T>验证一个会话是否有效。</T>
@@ -91,21 +91,21 @@ public interface IGcSessionConsole
    //                              ILogicContext context,
    //                              String code);
 
-   //============================================================
-   // <T>关闭指定代码的会话。</T>
+   //   //============================================================
+   //   // <T>关闭指定代码的会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param guid 唯一代码
+   //   //============================================================
+   //   void close(ILogicContext context,
+   //              String guid);
    //
-   // @param context 逻辑环境
-   // @param guid 唯一代码
-   //============================================================
-   void close(ILogicContext context,
-              String guid);
-
-   //============================================================
-   // <T>关闭指定用户的所有会话。</T>
-   //
-   // @param context 逻辑环境
-   // @param userId 用户编号
-   //============================================================
-   void close(ILogicContext context,
-              long userId);
+   //   //============================================================
+   //   // <T>关闭指定用户的所有会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param userId 用户编号
+   //   //============================================================
+   //   void close(ILogicContext context,
+   //              long userId);
 }

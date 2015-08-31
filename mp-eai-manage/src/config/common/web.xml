@@ -24,6 +24,7 @@
       <Property name='memoryTimeout'>3600000</Property>
       <Property name='workfile'>${application.temp}/web.session/session.ser</Property>
       <Property name='directory'>${application.temp}/web.session/</Property>
+      <Initialize name='initializeConfig'/>
       <Initialize name='initializeMonitor'/>
       <Initialize name='initializeResume'/>
       <Release name='releaseInterrupt'/>

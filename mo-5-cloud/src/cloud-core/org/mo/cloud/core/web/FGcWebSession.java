@@ -71,9 +71,9 @@ public class FGcWebSession
    }
 
    //============================================================
-   // <T>加载数据单元信息。</T>
+   // <T>加载会话数据。</T>
    //
-   // @param unit 数据单元
+   // @param info 会话数据
    //============================================================
    public void loadInfo(FGcSessionInfo info){
       // 加载信息
@@ -82,5 +82,15 @@ public class FGcWebSession
       _userId = info.userId();
       // 设置会话
       _sessionInfo = info;
+   }
+
+   //============================================================
+   // <T>保存会话数据。</T>
+   //
+   // @param info 会话数据
+   //============================================================
+   public void saveInfo(FGcSessionInfo info){
+      // 加载信息
+      info.setUserId(_userId);
    }
 }

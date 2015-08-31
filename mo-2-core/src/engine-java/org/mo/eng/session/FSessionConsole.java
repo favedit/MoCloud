@@ -3,6 +3,7 @@ package org.mo.eng.session;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
+import org.mo.com.lang.RString;
 import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -33,6 +34,14 @@ public class FSessionConsole
    // 线程类对象名称
    @AProperty
    protected String _sessionClassName;
+
+   // 线程类对象
+   @AProperty
+   protected Class<FSession> _sessionClass;
+
+   // 监视器类对象名称
+   @AProperty
+   protected String _monitorClassName;
 
    // 有效
    @AProperty
@@ -110,9 +119,21 @@ public class FSessionConsole
    // @param worker 会话工作器
    // @return 会话对象
    //============================================================
+   protected FSession createSession(String sessionCode){
+      FSession session = RClass.newInstance(_sessionClass);
+      session.setId(sessionCode);
+      return session;
+   }
+
+   //============================================================
+   // <T>创建会话对象。</T>
+   //
+   // @param worker 会话工作器
+   // @return 会话对象
+   //============================================================
    protected FSession createSession(FSessionWorker worker){
-      FSession session = RClass.newInstance(_sessionClassName);
-      session.setId(worker.id());
+      String sessionCode = worker.id();
+      FSession session = createSession(sessionCode);
       session.setStoreId(worker.storeId());
       return session;
    }
@@ -204,28 +225,28 @@ public class FSessionConsole
    // @param worker 会话工作器
    //============================================================
    protected void store(FSessionWorker worker){
-      // 只有激活状态下才允许被存储
-      if(worker.isActive()){
-         // 生成文件名称
-         String filename = makeFilename(worker.storeId());
-         if(_logger.debugAble()){
-            _logger.debug(this, "store", "Store session {1} to {2}", worker, filename);
-         }
-         // 尝试序列化对象到文件中
-         try{
-            //FObjectFile file = new FObjectFile(filename);
-            //            FXmlObjectFile file = new FXmlObjectFile(filename);
-            //            file.writeObject(worker.session());
-            //            //RXmlPersistent.saveFile(worker.session(), filename);
-            // 释放线程信息对象
-            worker.free();
-         }catch(Throwable t){
-            // 如果序列化失败，则删除错误的序列化文件
-            RFile.delete(filename);
-            // 输出失败原因
-            _logger.error(this, "store", t);
-         }
-      }
+      //      // 只有激活状态下才允许被存储
+      //      if(worker.isActive()){
+      //         // 生成文件名称
+      //         String filename = makeFilename(worker.storeId());
+      //         if(_logger.debugAble()){
+      //            _logger.debug(this, "store", "Store session {1} to {2}", worker, filename);
+      //         }
+      //         // 尝试序列化对象到文件中
+      //         try{
+      //            FObjectFile file = new FObjectFile(filename);
+      //            FXmlObjectFile file = new FXmlObjectFile(filename);
+      //            file.writeObject(worker.session());
+      //            //RXmlPersistent.saveFile(worker.session(), filename);
+      //            // 释放线程信息对象
+      //            worker.free();
+      //         }catch(Throwable t){
+      //            // 如果序列化失败，则删除错误的序列化文件
+      //            RFile.delete(filename);
+      //            // 输出失败原因
+      //            _logger.error(this, "store", t);
+      //         }
+      //      }
    }
 
    //============================================================
@@ -234,30 +255,30 @@ public class FSessionConsole
    // @param worker 会话工作器
    //============================================================
    protected void restore(FSessionWorker worker){
-      // 生成文件名称
-      String fileName = makeFilename(worker.storeId());
-      if(RFile.exists(fileName)){
-         // 文件存在时，允许加载序列化对象
-         try{
-            //FObjectFile file = new FObjectFile(filename);
-            //            FXmlObjectFile file = new FXmlObjectFile(filename);
-            //            ISession session = file.readObject();
-            //ISession session = (ISession) RXmlPersistent.loadFile(filename);
-            //            worker.setSession(session);
-            if(_logger.debugAble()){
-               _logger.debug(this, "restore", "Restore session {1} from {2}", worker, fileName);
-            }
-         }catch(Throwable t){
-            _logger.error(this, "restore", t);
-         }
-      }else{
-         // 文件不存在时，输出警告信息
-         _logger.warn(this, "restore", "Session file lose. (file_name={1})", fileName);
-      }
-      // 如果反序列化失败时，重新创建一个空的线程信息对象
-      if(null == worker.session()){
-         worker.setSession(createSession(worker));
-      }
+      //      // 生成文件名称
+      //      String fileName = makeFilename(worker.storeId());
+      //      if(RFile.exists(fileName)){
+      //         // 文件存在时，允许加载序列化对象
+      //         try{
+      //            FObjectFile file = new FObjectFile(filename);
+      //                        FXmlObjectFile file = new FXmlObjectFile(filename);
+      //                        ISession session = file.readObject();
+      //            ISession session = (ISession) RXmlPersistent.loadFile(filename);
+      //                        worker.setSession(session);
+      //            if(_logger.debugAble()){
+      //               _logger.debug(this, "restore", "Restore session {1} from {2}", worker, fileName);
+      //            }
+      //         }catch(Throwable t){
+      //            _logger.error(this, "restore", t);
+      //         }
+      //      }else{
+      //         // 文件不存在时，输出警告信息
+      //         _logger.warn(this, "restore", "Session file lose. (file_name={1})", fileName);
+      //      }
+      //      // 如果反序列化失败时，重新创建一个空的线程信息对象
+      //      if(null == worker.session()){
+      //         worker.setSession(createSession(worker));
+      //      }
    }
 
    //============================================================
@@ -347,10 +368,26 @@ public class FSessionConsole
    }
 
    //============================================================
-   // <T>初始化控制台的监视器操作。</T>
+   // <T>初始化配置信息。</T>
+   //============================================================
+   public void initializeConfig(){
+      if(RString.isEmpty(_sessionClassName)){
+         _sessionClass = FSession.class;
+      }else{
+         _sessionClass = RClass.findClass(_sessionClassName);
+      }
+   }
+
+   //============================================================
+   // <T>初始化会话监视器。</T>
    //============================================================
    public void initializeMonitor(){
-      _monitor = new FSessionMonitor(this);
+      if(RString.isEmpty(_monitorClassName)){
+         _monitor = new FSessionMonitor();
+      }else{
+         _monitor = RClass.newInstance(_monitorClassName);
+      }
+      _monitor.setConsole(this);
       _monitor.setInterval(_interval);
       _monitorConsole.register(_monitor);
    }
@@ -360,26 +397,30 @@ public class FSessionConsole
    // <P>读取缓冲的设置信息，将缓冲的数据文件录入到内存缓冲中。</P>
    //============================================================
    public void initializeResume(){
-      if(RFile.exists(_workfile)){
-         // 继续前次暂停的服务，恢复所有可以缓冲的信息
-         try{
-            // 读取序列化文件
-            //FObjectFile file = new FObjectFile(_workfile);
-            //            FXmlObjectFile file = new FXmlObjectFile(_workfile);
-            //            FSessionWorkers workers = file.readObject();
-            //FSessionWorkers workers = (FSessionWorkers) RXmlPersistent.loadFile(_workfile);
-            //            if(null == workers){
-            //               _logger.error(this, "initializeResume", "Sessions is null.");
-            //            }else{
-            //               _logger.debug(this, "initializeResume", "Uerialize all session.");
-            //               _workers = workers;
-            //            }
-         }catch(Throwable t){
-            // 如果读取失败，则删除序列化文件
-            _logger.error(this, "initializeResume", t, "Resume session failed.");
-            RFile.delete(_workfile);
-         }
-      }
+      long beginTick = System.nanoTime();
+      _logger.info(this, "initializeResume", "Begin unserialize all session.");
+      //      if(RFile.exists(_workfile)){
+      //         // 继续前次暂停的服务，恢复所有可以缓冲的信息
+      //         try{
+      //            // 读取序列化文件
+      //            //FObjectFile file = new FObjectFile(_workfile);
+      //            //            FXmlObjectFile file = new FXmlObjectFile(_workfile);
+      //            //            FSessionWorkers workers = file.readObject();
+      //            //FSessionWorkers workers = (FSessionWorkers) RXmlPersistent.loadFile(_workfile);
+      //            //            if(null == workers){
+      //            //               _logger.error(this, "initializeResume", "Sessions is null.");
+      //            //            }else{
+      //            //               _logger.debug(this, "initializeResume", "Uerialize all session.");
+      //            //               _workers = workers;
+      //            //            }
+      //         }catch(Throwable t){
+      //            // 如果读取失败，则删除序列化文件
+      //            _logger.error(this, "initializeResume", t, "Resume session failed.");
+      //            RFile.delete(_workfile);
+      //         }
+      //      }
+      long endTick = System.nanoTime();
+      _logger.info(this, "initializeResume", endTick - beginTick, "Unserialize all session.");
    }
 
    //============================================================
@@ -387,33 +428,28 @@ public class FSessionConsole
    // <P>存储当前缓冲中所有信息对象。</P>
    //============================================================
    public void releaseInterrupt(){
-      long beginTick = System.currentTimeMillis();
-      if(_logger.debugAble()){
-         _logger.debug(this, "releaseInterrupt", "Begin serialize all session.");
-      }
-      // 保存所有线程信息
-      synchronized(_workers){
-         //_workers.compress();
-         int count = _workers.count();
-         for(int n = 0; n < count; n++){
-            store(_workers.value(n));
-         }
-      }
-      // 保存线程列表
-      try{
-         //FObjectFile file = new FObjectFile(_workfile);
-         //         FXmlObjectFile file = new FXmlObjectFile(_workfile);
-         //         file.writeObject(_workers);
-         //RXmlPersistent.saveFile(_workers, _workfile);
-      }catch(Exception e){
-         // 失败时尝试删除工作文件
-         RFile.delete(_workfile);
-         _logger.error(this, "releaseInterrupt", e);
-      }
-      if(_logger.debugAble()){
-         long endTick = System.currentTimeMillis();
-         _logger.debug(this, "releaseInterrupt", endTick - beginTick, "Serialize all session.");
-      }
+      long beginTick = System.nanoTime();
+      _logger.info(this, "releaseInterrupt", "Begin serialize all session.");
+      //      // 保存所有线程信息
+      //      synchronized(_workers){
+      //         //_workers.compress();
+      //         int count = _workers.count();
+      //         for(int n = 0; n < count; n++){
+      //            store(_workers.value(n));
+      //         }
+      //      }
+      //      // 保存线程列表
+      //      try{
+      //         FObjectFile file = new FObjectFile(_workfile);
+      //         FXmlObjectFile file = new FXmlObjectFile(_workfile);
+      //         file.writeObject(_workers);
+      //         RXmlPersistent.saveFile(_workers, _workfile);
+      //      }catch(Exception e){
+      //         // 失败时尝试删除工作文件
+      //         RFile.delete(_workfile);
+      //         _logger.error(this, "releaseInterrupt", e);
+      //      }
+      long endTick = System.nanoTime();
+      _logger.info(this, "releaseInterrupt", endTick - beginTick, "Serialize all session.");
    }
-
 }

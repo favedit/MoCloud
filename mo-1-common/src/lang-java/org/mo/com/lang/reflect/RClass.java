@@ -292,7 +292,7 @@ public class RClass
    @SuppressWarnings("unchecked")
    public static <V> Class<V> findClass(Object item){
       Class<?> clazz = null;
-      if(null != item){
+      if(item != null){
          if(item instanceof Class){
             clazz = (Class<?>)item;
          }else if(item instanceof String){

@@ -3,7 +3,6 @@ package org.mo.content.core.person;
 import org.mo.cloud.logic.person.FGcUserConsole;
 import org.mo.cloud.logic.person.FGcUserInfo;
 import org.mo.cloud.logic.person.IGcUserConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.EResult;
@@ -98,9 +97,9 @@ public class FAccountConsole
          throw new FFatalError("User password is invalid.");
       }
       // 打开用户会话
-      long userId = user.ouid();
-      FGcSessionInfo session = _sessionConsole.open(logicContext, userId, fromCd);
-      user.setSessionGuid(session.guid());
+      //long userId = user.ouid();
+      //FGcSessionInfo session = _sessionConsole.open(logicContext, userId, fromCd);
+      //user.setSessionGuid(session.guid());
       return user;
    }
 }

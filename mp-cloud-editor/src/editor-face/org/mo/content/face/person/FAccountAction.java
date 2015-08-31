@@ -2,6 +2,7 @@ package org.mo.content.face.person;
 
 import com.cyou.gccloud.define.enums.core.EGcAccountFrom;
 import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.content.core.person.IAccountConsole;
 import org.mo.core.aop.face.ALink;
@@ -23,6 +24,10 @@ public class FAccountAction
    //用户控制台
    @ALink
    protected IAccountConsole _accountConsole;
+
+   // 会话控制台
+   @ALink
+   protected IGcSessionConsole _sessionConsole;
 
    //============================================================
    // <T>注册用户</T>

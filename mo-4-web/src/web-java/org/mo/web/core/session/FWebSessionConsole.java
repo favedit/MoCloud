@@ -7,7 +7,6 @@ import org.mo.eng.security.IPermissionConsole;
 import org.mo.eng.session.FSessionConsole;
 import org.mo.eng.session.common.FSession;
 import org.mo.eng.session.common.FSessionWorker;
-import org.mo.web.core.container.IWebContainerConsole;
 
 //============================================================
 // <T>网络线程控制台。</T>
@@ -21,19 +20,9 @@ public class FWebSessionConsole
    @ALink
    protected ICultureConsole _cultureConsole;
 
-   // 表单控制台
-   @ALink
-   protected IWebContainerConsole _formConsole;
-
    // 权限控制台
    @ALink
    protected IPermissionConsole _permissionConsole;
-
-   // 线程标识的字段列表
-   protected String[] _fields;
-
-   // 线程信息的标志
-   protected boolean _uriFlag = false;
 
    //============================================================
    // <T>创建会话对象。</T>

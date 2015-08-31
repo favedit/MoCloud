@@ -47,7 +47,7 @@ public class FGcWebSessionConsole
    //============================================================
    @Override
    public IWebSession build(String sessionCode){
-      FGcWebSession session = new FGcWebSession();
+      FGcWebSession session = (FGcWebSession)createSession(sessionCode);
       try(FLogicContext context = new FLogicContext(_databaseConsole)){
          // 查找信息
          FGcSessionInfo info = _sessionConsole.findBySessionCode(context, _logicCode, "web", sessionCode);
@@ -121,7 +121,7 @@ public class FGcWebSessionConsole
          }else if(!sessionCode.equals(info.sessionCode())){
             _logger.error(this, "update", "Update session is invalid. (record_id={1}, session_code={2}, record_code={3})", recordId, sessionCode, info.sessionCode());
          }else{
-            info.setUserId(session.userId());
+            session.saveInfo(info);
             _sessionConsole.doUpdate(context, info);
          }
       }catch(Exception e){

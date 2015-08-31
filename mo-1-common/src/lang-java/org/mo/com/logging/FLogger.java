@@ -35,6 +35,7 @@ public class FLogger
    //
    // @param flags 标志
    //============================================================
+   @Override
    public void setFlags(int flags){
       _flags = flags;
    }
@@ -111,7 +112,7 @@ public class FLogger
    //
    // @param instance 对象实体
    // @param method 函数名称
-   // @param timeSpan 时间
+   // @param timeSpan 时长
    // @param message 消息
    // @param parameters 参数集合 
    //============================================================
@@ -194,6 +195,27 @@ public class FLogger
       if(infoAble()){
          Object reference = RObject.nvl(instance, _reference);
          output(new SLoggerInfo(ELoggerLevel.INFO, reference, method, 0, null, false, message, parameters));
+      }
+   }
+
+   //============================================================
+   // <T>输出一条信息日志。</T>
+   //
+   // @param instance 对象实体
+   // @param method 函数名称
+   // @param timeSpan 时长
+   // @param message 消息
+   // @param parameters 参数集合 
+   //============================================================
+   @Override
+   public void info(Object instance,
+                    String method,
+                    long timeSpan,
+                    String message,
+                    Object... parameters){
+      if(infoAble()){
+         Object reference = RObject.nvl(instance, _reference);
+         output(new SLoggerInfo(ELoggerLevel.INFO, reference, method, timeSpan, null, false, message, parameters));
       }
    }
 

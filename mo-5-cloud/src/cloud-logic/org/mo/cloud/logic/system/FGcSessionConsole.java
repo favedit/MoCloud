@@ -1,12 +1,9 @@
 package org.mo.cloud.logic.system;
 
 import com.cyou.gccloud.data.cache.FCacheSystemSessionLogic;
-import com.cyou.gccloud.data.cache.FCacheSystemSessionUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.message.IGcMessageConsole;
 import org.mo.com.data.FSql;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.bind.IBindConsole;
 import org.mo.data.logic.FLogicDataset;
@@ -21,7 +18,7 @@ public class FGcSessionConsole
          IGcSessionConsole
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FGcSessionConsole.class);
+   //private static ILogger _logger = RLogger.find(FGcSessionConsole.class);
 
    // 消息控制台
    @ALink
@@ -80,63 +77,63 @@ public class FGcSessionConsole
       return sessions;
    }
 
-   //============================================================
-   // <T>打开一个会话。</T>
+   //   //============================================================
+   //   // <T>打开一个会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param userId 用户编号
+   //   // @param fromCd 来源类型
+   //   // @return 会话信息
+   //   //============================================================
+   //   @Override
+   //   public FGcSessionInfo open(ILogicContext context,
+   //                              String sessionId){
+   //      FCacheSystemSessionLogic logic = findLogic(context);
+   //      // 新建记录
+   //      FGcSessionInfo session = logic.findByGuid(FGcSessionInfo.class, sessionId);
+   //      if(session == null){
+   //         session = logic.doPrepare(FGcSessionInfo.class);
+   //         session.setGuid(sessionId);
+   //         try{
+   //            logic.doInsert(session);
+   //         }catch(Exception exception){
+   //            session = logic.findByGuid(FGcSessionInfo.class, sessionId);
+   //            if(session == null){
+   //               throw exception;
+   //            }
+   //         }
+   //      }else{
+   //         logic.doUpdate(session);
+   //      }
+   //      _logger.debug(this, "open", "Open session. (guid={1})", session.guid());
+   //      // 返回结果
+   //      return session;
+   //   }
    //
-   // @param context 逻辑环境
-   // @param userId 用户编号
-   // @param fromCd 来源类型
-   // @return 会话信息
-   //============================================================
-   @Override
-   public FGcSessionInfo open(ILogicContext context,
-                              String sessionId){
-      FCacheSystemSessionLogic logic = findLogic(context);
-      // 新建记录
-      FGcSessionInfo session = logic.findByGuid(FGcSessionInfo.class, sessionId);
-      if(session == null){
-         session = logic.doPrepare(FGcSessionInfo.class);
-         session.setGuid(sessionId);
-         try{
-            logic.doInsert(session);
-         }catch(Exception exception){
-            session = logic.findByGuid(FGcSessionInfo.class, sessionId);
-            if(session == null){
-               throw exception;
-            }
-         }
-      }else{
-         logic.doUpdate(session);
-      }
-      _logger.debug(this, "open", "Open session. (guid={1})", session.guid());
-      // 返回结果
-      return session;
-   }
-
-   //============================================================
-   // <T>打开一个会话。</T>
-   //
-   // @param context 逻辑环境
-   // @param userId 用户编号
-   // @param fromCd 来源类型
-   // @return 会话信息
-   //============================================================
-   @Override
-   public FGcSessionInfo open(ILogicContext context,
-                              long userId,
-                              int fromCd){
-      FCacheSystemSessionLogic logic = findLogic(context);
-      // 新建记录
-      FGcSessionInfo session = logic.doPrepare(FGcSessionInfo.class);
-      session.setUserId(userId);
-      session.setFromCd(fromCd);
-      logic.doInsert(session);
-      _logger.debug(this, "open", "Open session. (guid={1}, user_id={2}, from_cd={3})", session.guid(), userId, fromCd);
-      // 绑定数据
-      _bindConsole.bind(FGcSessionInfo.class, session);
-      // 返回结果
-      return session;
-   }
+   //   //============================================================
+   //   // <T>打开一个会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param userId 用户编号
+   //   // @param fromCd 来源类型
+   //   // @return 会话信息
+   //   //============================================================
+   //   @Override
+   //   public FGcSessionInfo open(ILogicContext context,
+   //                              long userId,
+   //                              int fromCd){
+   //      FCacheSystemSessionLogic logic = findLogic(context);
+   //      // 新建记录
+   //      FGcSessionInfo session = logic.doPrepare(FGcSessionInfo.class);
+   //      session.setUserId(userId);
+   //      session.setFromCd(fromCd);
+   //      logic.doInsert(session);
+   //      _logger.debug(this, "open", "Open session. (guid={1}, user_id={2}, from_cd={3})", session.guid(), userId, fromCd);
+   //      // 绑定数据
+   //      _bindConsole.bind(FGcSessionInfo.class, session);
+   //      // 返回结果
+   //      return session;
+   //   }
 
    //   //============================================================
    //   // <T>验证一个会话是否有效。</T>
@@ -234,44 +231,44 @@ public class FGcSessionConsole
    //      return sessionInfo;
    //   }
 
-   //============================================================
-   // <T>关闭指定代码的会话。</T>
+   //   //============================================================
+   //   // <T>关闭指定代码的会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param guid 唯一编码
+   //   //============================================================
+   //   @Override
+   //   public void close(ILogicContext context,
+   //                     String guid){
+   //      // 新建记录
+   //      FCacheSystemSessionLogic logic = findLogic(context);
+   //      FCacheSystemSessionUnit unit = logic.findByGuid(guid);
+   //      if(unit != null){
+   //         close(context, unit.userId());
+   //         _logger.debug(this, "close", "Close session. (guid={1})", guid);
+   //      }else{
+   //         _logger.warn(this, "close", "Session is not exists. (guid={1})", guid);
+   //      }
+   //   }
    //
-   // @param context 逻辑环境
-   // @param guid 唯一编码
-   //============================================================
-   @Override
-   public void close(ILogicContext context,
-                     String guid){
-      // 新建记录
-      FCacheSystemSessionLogic logic = findLogic(context);
-      FCacheSystemSessionUnit unit = logic.findByGuid(guid);
-      if(unit != null){
-         close(context, unit.userId());
-         _logger.debug(this, "close", "Close session. (guid={1})", guid);
-      }else{
-         _logger.warn(this, "close", "Session is not exists. (guid={1})", guid);
-      }
-   }
-
-   //============================================================
-   // <T>关闭指定用户的所有会话。</T>
-   //
-   // @param context 逻辑环境
-   // @param userId 用户编号
-   //============================================================
-   @Override
-   public void close(ILogicContext context,
-                     long userId){
-      // 查找当前用户会话
-      String whereSql = FCacheSystemSessionLogic.USER_ID + "=" + userId;
-      FCacheSystemSessionLogic logic = findLogic(context);
-      FLogicDataset<FCacheSystemSessionUnit> sessions = logic.fetch(whereSql, 100, 0);
-      // 删除当前用户所有会话
-      if(sessions != null){
-         for(FCacheSystemSessionUnit unit : sessions){
-            logic.doDelete(unit);
-         }
-      }
-   }
+   //   //============================================================
+   //   // <T>关闭指定用户的所有会话。</T>
+   //   //
+   //   // @param context 逻辑环境
+   //   // @param userId 用户编号
+   //   //============================================================
+   //   @Override
+   //   public void close(ILogicContext context,
+   //                     long userId){
+   //      // 查找当前用户会话
+   //      String whereSql = FCacheSystemSessionLogic.USER_ID + "=" + userId;
+   //      FCacheSystemSessionLogic logic = findLogic(context);
+   //      FLogicDataset<FCacheSystemSessionUnit> sessions = logic.fetch(whereSql, 100, 0);
+   //      // 删除当前用户所有会话
+   //      if(sessions != null){
+   //         for(FCacheSystemSessionUnit unit : sessions){
+   //            logic.doDelete(unit);
+   //         }
+   //      }
+   //   }
 }

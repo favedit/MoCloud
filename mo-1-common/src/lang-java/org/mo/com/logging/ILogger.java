@@ -57,7 +57,7 @@ public interface ILogger
    //
    // @param instance 对象实体
    // @param method 函数名称
-   // @param timeSpan 时间
+   // @param timeSpan 时长
    // @param message 消息
    // @param parameters 参数集合 
    //============================================================
@@ -113,6 +113,21 @@ public interface ILogger
    //============================================================
    void info(Object instance,
              String method,
+             String message,
+             Object... parameters);
+
+   //============================================================
+   // <T>输出一条信息日志。</T>
+   //
+   // @param instance 对象实体
+   // @param method 函数名称
+   // @param timeSpan 时长
+   // @param message 消息
+   // @param parameters 参数集合 
+   //============================================================
+   void info(Object instance,
+             String method,
+             long timeSpan,
              String message,
              Object... parameters);
 
