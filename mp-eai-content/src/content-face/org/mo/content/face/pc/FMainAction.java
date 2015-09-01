@@ -13,6 +13,7 @@ import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.console.service.info.ILogicServiceInfoConsole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
