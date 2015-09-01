@@ -1,4 +1,7 @@
-package org.mo.eai.logic.financial;
+package org.mo.eai.console.financial;
+
+import org.mo.eai.core.common.EEaiDataConnection;
+import org.mo.eai.core.common.EEaiLogicMode;
 
 import com.cyou.gccloud.data.data.FDataFinancialMarketerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
@@ -9,8 +12,6 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.ILogicContext;
-import org.mo.eai.logic.common.EEaiDataConnection;
-import org.mo.eai.logic.common.EEaiLogicMode;
 
 //============================================================
 // <T>金融控制台。</T>

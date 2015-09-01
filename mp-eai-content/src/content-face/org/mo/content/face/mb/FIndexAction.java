@@ -1,5 +1,9 @@
 package org.mo.content.face.mb;
 
+import org.mo.eai.console.service.info.ILogicServiceInfoConsole;
+
+import org.mo.eai.console.financial.FFinancialMarketerInfo;
+import org.mo.eai.console.financial.IFinancialMarketerConsole;
 import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
@@ -33,11 +37,8 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
-import org.mo.eai.logic.financial.FFinancialMarketerInfo;
-import org.mo.eai.logic.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
-import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================

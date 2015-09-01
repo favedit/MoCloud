@@ -1,4 +1,4 @@
-package org.mo.eai.logic.web;
+package org.mo.eai.console.web;
 
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;

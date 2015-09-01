@@ -110,7 +110,7 @@ public class RBase{type_name}
    // @return 是否含有
    //============================================================
    public final static boolean contains({type_base}[] values, {type_base} find){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -131,7 +131,7 @@ public class RBase{type_name}
    // @return 是否含有
    //============================================================
    public final static boolean contains({type_base}[] values, int offset, int length, {type_base} find){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
             if(values[n] == find){
@@ -150,7 +150,7 @@ public class RBase{type_name}
    // @return 索引位置
    //============================================================
    public final static int indexOf({type_base}[] values, {type_base} find){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -171,7 +171,7 @@ public class RBase{type_name}
    // @return 索引位置
    //============================================================
    public final static int indexOf({type_base}[] values, int offset, int length, {type_base} find){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -489,12 +489,12 @@ public class RBase{type_name}
    // @param length 索引长度
    //============================================================
    public final static void reverse({type_base}[] values, int index, int length){
-      int s = index - 1;
-      int e = index + length + 1;
-      while(++s < --e){
-         {type_base} temp = values[s];
-         values[s] = values[e];
-         values[e] = temp;
+      int begin = index - 1;
+      int end = index + length + 1;
+      while(++begin < --end){
+         {type_base} temp = values[begin];
+         values[begin] = values[end];
+         values[begin] = temp;
       }
    }
    

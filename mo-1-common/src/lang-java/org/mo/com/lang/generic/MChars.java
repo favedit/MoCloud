@@ -57,7 +57,7 @@ public abstract class MChars
                               boolean copy){
       // 获得容量
       int capacity = 0;
-      if(null != _memory){
+      if(_memory != null){
          capacity = _memory.length;
       }
       // 扩充容量
@@ -65,7 +65,7 @@ public abstract class MChars
          // 计算总大小
          int total = 0;
          if(extend){
-            if(null == _memory){
+            if(_memory == null){
                total = Math.max(length, CAPACITY);
             }else{
                total = Math.max(length + (length >> 1), CAPACITY);
@@ -76,7 +76,7 @@ public abstract class MChars
          // 收集内存
          char[] alloc = new char[total];
          // 复制内存
-         if(null != _memory){
+         if(_memory != null){
             if(copy){
                System.arraycopy(_memory, 0, alloc, 0, _length);
             }
@@ -130,7 +130,7 @@ public abstract class MChars
    // @return 是否含有
    //============================================================
    public boolean contains(char value){
-      return (indexOf(value) != -1);
+      return indexOf(value) != -1;
    }
 
    //============================================================
@@ -151,11 +151,10 @@ public abstract class MChars
    //============================================================
    public int indexOf(char value,
                       int offset){
-      if(null != _memory){
-         int p = offset - 1;
-         while(++p < _length){
-            if(_memory[p] == value){
-               return p;
+      if(_memory != null){
+         for(int i = 0; i < _length; i++){
+            if(_memory[i] == value){
+               return i;
             }
          }
       }
@@ -180,11 +179,10 @@ public abstract class MChars
    //============================================================
    public int lastIndexOf(char value,
                           int last){
-      if(null != _memory){
-         int p = last;
-         while(--p >= 0){
-            if(_memory[p] == value){
-               return p;
+      if(_memory != null){
+         for(int i = _length - 1; i >= 0; i--){
+            if(_memory[i] == value){
+               return i;
             }
          }
       }
@@ -198,7 +196,7 @@ public abstract class MChars
    //============================================================
    public char first(){
       if(_length == 0){
-         throw new FFatalError("Get first failure. (length={1})", _length);
+         throw new FFatalError("Get first element failure. (length={1})", _length);
       }
       return _memory[0];
    }
@@ -210,7 +208,7 @@ public abstract class MChars
    //============================================================
    public char last(){
       if(_length == 0){
-         throw new FFatalError("Get first failure. (length={1})", _length);
+         throw new FFatalError("Get last element failure. (length={1})", _length);
       }
       return _memory[_length - 1];
    }
@@ -223,11 +221,21 @@ public abstract class MChars
    //============================================================
    public char get(int index){
       if(_memory == null){
-         throw new FFatalError("Memory is null");
+         throw new FFatalError("Memory is null.");
       }
       if((index < 0) || (index >= _length)){
          throw new FFatalError("Get index failure. (length={1}, index={2})", _length, index);
       }
+      return _memory[index];
+   }
+
+   //============================================================
+   // <T>获得索引位置的数据内容。</T>
+   //
+   // @param index 索引位置
+   // @return length 长度
+   //============================================================
+   public char getAt(int index){
       return _memory[index];
    }
 
@@ -240,7 +248,7 @@ public abstract class MChars
    public void set(int index,
                    char value){
       if(_memory == null){
-         throw new FFatalError("Memory is null");
+         throw new FFatalError("Memory is null.");
       }
       if((index < 0) || (index >= _length)){
          throw new FFatalError("Set index failure. (length={1}, index={2})", _length, index);
@@ -254,7 +262,11 @@ public abstract class MChars
    // @param values 基础类型集合
    //============================================================
    public void assign(MChars values){
-      assign(values._memory, 0, values._length);
+      if(values == null){
+         clear();
+      }else{
+         assign(values._memory, 0, values._length);
+      }
    }
 
    //============================================================
@@ -267,7 +279,10 @@ public abstract class MChars
    public void assign(char[] values,
                       int offset,
                       int length){
-      if((null != values) && (length > 0)){
+      // 清空数据
+      clear();
+      // 接收数据
+      if((values != null) && (length > 0)){
          innerResize(length, false, false);
          System.arraycopy(values, offset, _memory, 0, length);
          _length = length;
@@ -299,7 +314,9 @@ public abstract class MChars
    // @param values 基础类型集合
    //============================================================
    public void append(MChars values){
-      append(values._memory, 0, values._length);
+      if(values != null){
+         append(values._memory, 0, values._length);
+      }
    }
 
    //============================================================
@@ -311,11 +328,11 @@ public abstract class MChars
    //============================================================
    public void append(char[] values,
                       int offset,
-                      int count){
-      if((null != values) && (count > 0)){
-         innerResize(_length + count, true, true);
-         System.arraycopy(values, offset, _memory, _length, count);
-         _length += count;
+                      int length){
+      if((values != null) && (length > 0)){
+         innerResize(_length + length, true, true);
+         System.arraycopy(values, offset, _memory, _length, length);
+         _length += length;
       }
    }
 
@@ -325,8 +342,10 @@ public abstract class MChars
    // @return 数据内容
    //============================================================
    public char pop(){
-      char value = _memory[_length - 1];
-      _length--;
+      if(_length == 0){
+         throw new FFatalError("Pop last element failure. (length={1})", _length);
+      }
+      char value = _memory[--_length];
       return value;
    }
 
@@ -347,12 +366,19 @@ public abstract class MChars
    //============================================================
    public void insert(char value,
                       int index){
-      if((index >= 0) && (index < _length)){
-         innerResize(_length + 1, true, true);
-         System.arraycopy(_memory, index, _memory, index + 1, _length - index);
-         _length++;
-         _memory[index] = value;
+      // 检查范围
+      if((index < 0) || (index > _length)){
+         throw new FFatalError("Index range is invalid. (length={1}, index={2})", _length, index);
       }
+      // 调整大小
+      innerResize(_length + 1, true, true);
+      // 复制数据
+      int copy = _length - index;
+      if(copy > 0){
+         System.arraycopy(_memory, index, _memory, index + 1, copy);
+      }
+      _memory[index] = value;
+      _length++;
    }
 
    //============================================================
@@ -361,16 +387,41 @@ public abstract class MChars
    // @param index 索引位置 
    //============================================================
    public char remove(int index){
-      char value = 0;
-      if(null != _memory){
-         value = _memory[index];
-         int move = _length - index - 1;
-         if(move > 0){
-            System.arraycopy(_memory, index + 1, _memory, index, move);
-         }
-         _length--;
+      // 检查范围
+      if((index < 0) || (index >= _length)){
+         throw new FFatalError("Index range is invalid. (length={1}, index={2})", _length, index);
       }
+      char value = _memory[index];
+      int copy = _length - index - 1;
+      if(copy > 0){
+         System.arraycopy(_memory, index + 1, _memory, index, copy);
+      }
+      _length--;
       return value;
+   }
+
+   //============================================================
+   // <T>移除指定索引位置的定长数据。</T>
+   //
+   // @param index 索引位置 
+   // @param length 长度
+   //============================================================
+   public void remove(int index,
+                      int length){
+      // 检查范围
+      if((index < 0) || (index >= _length)){
+         throw new FFatalError("Index range is invalid. (length={1}, index={2})", _length, index);
+      }
+      if(length <= 0){
+         throw new FFatalError("Length is out range.");
+      }
+      if(index + length > _length){
+         throw new FFatalError("Length is out range.");
+      }
+      // 复制数据
+      int moved = _length - index - length;
+      System.arraycopy(_memory, index + length, _memory, index, moved);
+      _length -= length;
    }
 
    //============================================================
@@ -381,7 +432,15 @@ public abstract class MChars
    //============================================================
    public void swap(int from,
                     int to){
-      if((from != to) && (from >= 0) && (from < _length) && (to >= 0) && (to < _length)){
+      // 检查范围
+      if((from < 0) || (from > _length)){
+         throw new FFatalError("From range is invalid. (length={1}, index={2})", _length, from);
+      }
+      if((to < 0) || (to > _length)){
+         throw new FFatalError("To range is invalid. (length={1}, index={2})", _length, to);
+      }
+      // 移动内容
+      if(from != to){
          char swap = _memory[from];
          _memory[from] = _memory[to];
          _memory[to] = swap;
@@ -413,7 +472,7 @@ public abstract class MChars
    //============================================================
    public char[] toArray(){
       char[] alloc = new char[_length];
-      if(null != _memory){
+      if(_memory != null){
          System.arraycopy(_memory, 0, alloc, 0, _length);
       }
       return alloc;
@@ -429,15 +488,23 @@ public abstract class MChars
    public void copy(char[] memory,
                     int offset,
                     int length){
-      if(null != _memory){
+      if(_memory != null){
          System.arraycopy(_memory, 0, memory, offset, length);
       }
    }
 
    //============================================================
-   // <T>清除全部数据内容。</T>
+   // <T>清空处理。</T>
    //============================================================
    public void clear(){
       _length = 0;
+   }
+
+   //============================================================
+   // <T>释放处理。</T>
+   //============================================================
+   public void dispose(){
+      _length = 0;
+      _memory = null;
    }
 }

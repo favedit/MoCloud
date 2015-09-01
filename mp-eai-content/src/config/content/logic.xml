@@ -6,8 +6,8 @@
    <!-- FinancialMarketerConsole:金融理财师控制台            -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.eai.logic.financial.IFinancialMarketerConsole'
-         class = 'org.mo.eai.logic.financial.FFinancialMarketerConsole'
+         face  = 'org.mo.eai.console.financial.IFinancialMarketerConsole'
+         class = 'org.mo.eai.console.financial.FFinancialMarketerConsole'
          scope = 'global'>
       <Property name='mode_cd'>${application.mode}</Property>
    </Component>

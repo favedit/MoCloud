@@ -1,6 +1,6 @@
 package com.ahyc.eai.batch.financial.dynamic;
 
-import org.mo.eai.logic.common.EEaiDataConnection;
+import org.mo.eai.core.common.EEaiDataConnection;
 
 import com.ahyc.eai.batch.common.FStatisticsCalculater;
 import com.ahyc.eai.batch.financial.department.FStatisticsDepartmentInfo;

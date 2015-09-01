@@ -1,6 +1,6 @@
 package com.ahyc.eai.batch.financial.forecast;
 
-import org.mo.eai.logic.common.EEaiDataConnection;
+import org.mo.eai.core.common.EEaiDataConnection;
 
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialForecastLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialForecastUnit;

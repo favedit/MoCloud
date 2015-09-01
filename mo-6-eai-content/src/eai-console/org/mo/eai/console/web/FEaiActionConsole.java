@@ -1,4 +1,4 @@
-package org.mo.eai.logic.web;
+package org.mo.eai.console.web;
 
 import org.mo.cloud.core.message.IGcMessageConsole;
 import org.mo.cloud.logic.system.IGcSessionConsole;

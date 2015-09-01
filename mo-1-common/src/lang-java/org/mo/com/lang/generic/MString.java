@@ -107,6 +107,7 @@ public class MString
    //
    // @param value 字符串
    //============================================================
+   @Override
    public void assign(String value){
       _length = 0;
       if(null != value){
@@ -512,11 +513,12 @@ public class MString
    //============================================================
    @Override
    public String toString(){
-      if(null != _memory){
+      if(_memory != null){
          return new String(_memory, 0, _length);
       }
       return RString.EMPTY;
    }
+
    //   public int compare(FString value){
    //      return RChar.compare(_memory, 0, _length, value._memory, 0, value._length);
    //   }

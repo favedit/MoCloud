@@ -1,7 +1,8 @@
-package org.mo.eai.logic.web.tag;
+package org.mo.eai.console.web.tag;
+
+import org.mo.eai.console.web.FEaiSession;
 
 import org.mo.com.lang.RString;
-import org.mo.eai.logic.web.FEaiSession;
 import org.mo.web.tag.common.FAbstractTag;
 
 //============================================================

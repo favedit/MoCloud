@@ -1,4 +1,4 @@
-package org.mo.eai.logic.service.info;
+package org.mo.eai.console.service.info;
 
 //============================================================
 // <T>逻辑服务信息控制台接口。</T>

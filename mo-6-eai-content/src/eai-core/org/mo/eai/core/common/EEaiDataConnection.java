@@ -1,4 +1,4 @@
-package org.mo.eai.logic.common;
+package org.mo.eai.core.common;
 
 //============================================================
 // <T>数据链接。</T>

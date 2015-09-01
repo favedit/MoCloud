@@ -1,5 +1,6 @@
 package org.mo.com.io.base;
 
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.generic.MDoubles;
 
 //============================================================
@@ -71,12 +72,24 @@ public abstract class MDoubleStream
    }
 
    //============================================================
+   // <T>忽略指定长度。</T>
+   //
+   // @param length 长度
+   //============================================================
+   public void skip(int length){
+      _position += length;
+   }
+
+   //============================================================
    // <T>获得位置。</T>
    //
    // @return 位置
    //============================================================
    public double read(){
-      return (_position < _length - 1) ? _memory[_position++] : _memory[_position];
+      if(_position >= _length - 1){
+         throw new FFatalError("Read failure. (length={1}, _osition={2})", _length, _position);
+      }
+      return _memory[_position++];
    }
 
    //============================================================

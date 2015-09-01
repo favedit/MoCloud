@@ -189,7 +189,7 @@ public class RBaseChar
       int loop = Math.min(scl, tcl);
       while(loop-- != 0){
          if(source[sourceOffset++] != target[targetOffset++]){
-            return source[sourceOffset - 1] - target[targetOffset - 1];
+            return (int)(source[sourceOffset - 1] - target[targetOffset - 1]);
          }
       }
       return scl - tcl;
@@ -204,7 +204,7 @@ public class RBaseChar
    //============================================================
    public final static int indexOf(char[] values,
                                    char find){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -228,7 +228,7 @@ public class RBaseChar
                                    int offset,
                                    int length,
                                    char find){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -590,12 +590,12 @@ public class RBaseChar
    public final static void reverse(char[] values,
                                     int index,
                                     int length){
-      int s = index - 1;
-      int e = index + length + 1;
-      while(++s < --e){
-         char temp = values[s];
-         values[s] = values[e];
-         values[e] = temp;
+      int begin = index - 1;
+      int end = index + length + 1;
+      while(++begin < --end){
+         char temp = values[begin];
+         values[begin] = values[end];
+         values[begin] = temp;
       }
    }
 

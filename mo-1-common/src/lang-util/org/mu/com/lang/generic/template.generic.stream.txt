@@ -1,5 +1,6 @@
 package org.mo.com.io.base;
 
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.generic.M{type_name}s;
 
 //============================================================
@@ -70,12 +71,24 @@ public abstract class M{type_name}Stream
    }
 
    //============================================================
+   // <T>忽略指定长度。</T>
+   //
+   // @param length 长度
+   //============================================================
+   public void skip(int length){
+      _position += length;
+   }
+
+   //============================================================
    // <T>获得位置。</T>
    //
    // @return 位置
    //============================================================
    public {type_base} read(){
-      return (_position < _length - 1) ? _memory[_position++] : _memory[_position];
+      if(_position >= _length - 1){
+         throw new FFatalError("Read failure. (length={1}, _osition={2})", _length, _position);
+      }
+      return _memory[_position++];
    }
 
    //============================================================
@@ -143,5 +156,30 @@ public abstract class M{type_name}Stream
          _position += length;
       }
       return length;
+   }
+
+   //============================================================
+   // <T>重设数据开始位置和长度。</T>
+   //============================================================
+   public void flip(){
+      _length = _position;
+      _position = 0;
+   }
+
+   //============================================================
+   // <T>清除所有数据内容。</T>
+   //============================================================
+   public void reset(){
+      _position = 0;
+   }
+
+   //============================================================
+   // <T>清除所有数据内容。</T>
+   // <P>不清空数据，只是重设长度和位置。</P>
+   //============================================================
+   @Override
+   public void clear(){
+      super.clear();
+      _position = 0;
    }
 }

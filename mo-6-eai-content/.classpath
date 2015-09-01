@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/eai-core"/>
 	<classpathentry kind="src" path="src/eai-logic"/>
 	<classpathentry kind="src" path="src/eai-console"/>
 	<classpathentry kind="src" path="src/eai-resource"/>

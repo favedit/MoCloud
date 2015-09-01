@@ -1,5 +1,7 @@
 package org.mo.content.face.live;
 
+import org.mo.eai.console.service.info.ILogicServiceInfoConsole;
+
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import org.mo.com.lang.RString;
@@ -13,7 +15,6 @@ import org.mo.eai.logic.data.person.user.FDataPersonAccessAuthority;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.eai.logic.logger.person.user.FLoggerPersonUserAccess;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
-import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================

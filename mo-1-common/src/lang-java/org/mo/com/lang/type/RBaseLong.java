@@ -120,7 +120,7 @@ public class RBaseLong
    //============================================================
    public final static boolean contains(long[] values,
                                         long find){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -144,7 +144,7 @@ public class RBaseLong
                                         int offset,
                                         int length,
                                         long find){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = offset; n < loop; n++){
             if(values[n] == find){
@@ -204,7 +204,7 @@ public class RBaseLong
    //============================================================
    public final static int indexOf(long[] values,
                                    long find){
-      if(null != values){
+      if(values != null){
          int loop = values.length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -228,7 +228,7 @@ public class RBaseLong
                                    int offset,
                                    int length,
                                    long find){
-      if(null != values){
+      if(values != null){
          int loop = offset + length;
          for(int n = 0; n < loop; n++){
             if(values[n] == find){
@@ -590,12 +590,12 @@ public class RBaseLong
    public final static void reverse(long[] values,
                                     int index,
                                     int length){
-      int s = index - 1;
-      int e = index + length + 1;
-      while(++s < --e){
-         long temp = values[s];
-         values[s] = values[e];
-         values[e] = temp;
+      int begin = index - 1;
+      int end = index + length + 1;
+      while(++begin < --end){
+         long temp = values[begin];
+         values[begin] = values[end];
+         values[begin] = temp;
       }
    }
 

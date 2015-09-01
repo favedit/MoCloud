@@ -1,5 +1,8 @@
 package org.mo.content.face.pc;
 
+import org.mo.eai.console.financial.FFinancialMarketerInfo;
+import org.mo.eai.console.financial.IFinancialMarketerConsole;
+
 import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
@@ -20,8 +23,6 @@ import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
-import org.mo.eai.logic.financial.FFinancialMarketerInfo;
-import org.mo.eai.logic.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;

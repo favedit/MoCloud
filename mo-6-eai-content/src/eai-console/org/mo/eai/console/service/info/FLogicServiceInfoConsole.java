@@ -1,4 +1,4 @@
-package org.mo.eai.logic.service.info;
+package org.mo.eai.console.service.info;
 
 import org.mo.core.aop.face.AProperty;
 

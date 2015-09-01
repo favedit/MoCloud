@@ -1,6 +1,6 @@
 package com.ahyc.eai.batch.common;
 
-import org.mo.eai.logic.common.EEaiDataConnection;
+import org.mo.eai.core.common.EEaiDataConnection;
 
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.type.TDateTime;

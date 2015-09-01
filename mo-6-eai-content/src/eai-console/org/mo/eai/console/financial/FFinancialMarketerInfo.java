@@ -1,4 +1,4 @@
-package org.mo.eai.logic.financial;
+package org.mo.eai.console.financial;
 
 import org.mo.com.lang.FObject;
 

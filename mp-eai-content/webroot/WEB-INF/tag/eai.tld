@@ -11,7 +11,7 @@
 
    <tag>
       <name>authority</name>
-      <tagclass>org.mo.eai.logic.web.tag.FEaiAuthorityTag</tagclass>
+      <tagclass>org.mo.eai.console.web.tag.FEaiAuthorityTag</tagclass>
       <attribute>
          <name>role</name>
          <required>false</required>

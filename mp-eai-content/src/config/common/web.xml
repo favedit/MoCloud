@@ -16,10 +16,10 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.session.IWebSessionConsole'
-         class = 'org.mo.eai.logic.web.FEaiSessionConsole'
+         class = 'org.mo.eai.console.web.FEaiSessionConsole'
          scope = 'global' >
       <Property name='valid'>Y</Property>
-      <Property name='sessionClassName'>org.mo.eai.logic.web.FEaiSession</Property>
+      <Property name='sessionClassName'>org.mo.eai.console.web.FEaiSession</Property>
       <Property name='logic_code'>eai</Property>
       <Property name='server_code'>eai.content</Property>
       <Property name='interval'>600000</Property>
@@ -142,9 +142,9 @@
    <!-- WebMessage                                           -->
    <!-- ==================================================== -->
    <Component
-         face      = 'org.mo.web.core.message.IWebMessageConsole'
-         class     = 'org.mo.web.core.message.FWebMessageConsole'
-         scope     = 'global' >
+         face  = 'org.mo.web.core.message.IWebMessageConsole'
+         class = 'org.mo.web.core.message.FWebMessageConsole'
+         scope = 'global' >
       <Property name='pageFatal'>fatal@/apl/message/WebMessage.wa</Property>
       <Property name='pageError'>error@/apl/message/WebMessage.wa</Property>
       <Property name='pageTimeout'>timeout@/apl/message/WebMessage.wa</Property>
@@ -156,19 +156,19 @@
    <!-- WebProcess                                           -->
    <!-- ==================================================== -->
    <Component
-         face      = 'org.mo.web.core.process.IWebProcessConsole'
-         class     = 'org.mo.web.core.process.FWebProcessConsole'
-         scope     = 'global' >
+         face  = 'org.mo.web.core.process.IWebProcessConsole'
+         class = 'org.mo.web.core.process.FWebProcessConsole'
+         scope = 'global' >
    </Component>
 
    <!-- ==================================================== -->
    <!-- WebAction                                            -->
    <!-- ==================================================== -->
    <Component
-         face      = 'org.mo.web.core.action.IActionConsole'
-         class     = 'org.mo.eai.logic.web.FEaiActionConsole'
-         scope     = 'global' >
-      <Property name='access_rule'>org.mo.eai.logic.web.FEaiAccessRule</Property>
+         face  = 'org.mo.web.core.action.IActionConsole'
+         class = 'org.mo.eai.console.web.FEaiActionConsole'
+         scope = 'global' >
+      <Property name='access_rule'>org.mo.eai.console.web.FEaiAccessRule</Property>
       <Initialize name='addContext'>
          <Parameter>/content</Parameter>
          <Parameter>/content</Parameter>
@@ -193,10 +193,10 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.service.IServiceConsole'
-         class  = 'org.mo.eai.logic.web.FEaiServiceConsole'
+         class = 'org.mo.eai.console.web.FEaiServiceConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
-      <Property name='access_rule'>org.mo.eai.logic.web.FEaiAccessRule</Property>
+      <Property name='access_rule'>org.mo.eai.console.web.FEaiAccessRule</Property>
       <Initialize name='initializeConfig'/>
    </Component>
 
@@ -205,10 +205,10 @@
    <!-- ==================================================== -->
    <Component
          face  = 'org.mo.web.core.servlet.IWebServletConsole'
-         class     = 'org.mo.eai.logic.web.FEaiServletConsole'
+         class = 'org.mo.eai.console.web.FEaiServletConsole'
          scope = 'global' >
       <Property name='encoding'>UTF-8</Property>
-      <Property name='access_rule'>org.mo.eai.logic.web.FEaiAccessRule</Property>
+      <Property name='access_rule'>org.mo.eai.console.web.FEaiAccessRule</Property>
       <Initialize name='initializeConfig'/>
    </Component>
 
