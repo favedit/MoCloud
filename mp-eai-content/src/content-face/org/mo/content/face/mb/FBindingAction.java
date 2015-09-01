@@ -170,38 +170,40 @@ public class FBindingAction
       String validate = context.parameter("validate");
       long userId = session.userId();
       _logger.debug(this, "BindOnAccount", "BindOnAccount begin. (passport={1},validate={2},userId={3})", epassport, validate, userId);
+      // 获取用户
+      FDataPersonUserUnit user = _userConsole.find(logicContext, userId);
+      page.setPassport(user.label());
       if(RString.isEmpty(epassport) || RString.isEmpty(validate)){
          page.setMessage("账号或验证码不能为空");
          return "Binding";
       }
 
+      // 验证是否发送过验证码
       FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, epassport);
-      //时间验证
       if(unit == null){
          page.setMessage("验证码错误");
          return "Binding";
       }
-      //检测时间超时
+      // 检测时间超时
       TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       TDateTime serviceTime = new TDateTime(unit.createDate());
       serviceTime.addMinute(5);
+      _logger.debug(this, "BindOnAccount", "BindOnAccount check verification time out. (nowTime={1},serviceTime={2})", nowTime, serviceTime);
       if(serviceTime.isBefore(nowTime)){
          page.setMessage("验证码错误");
          return "Binding";
       }
-
+      // 检查验证码
       String checkCode = unit.checkCode();
+      _logger.debug(this, "BindOnAccount", "BindOnAccount check Verification. (inputVerifica={1},serviceVerifica={2})", validate, checkCode);
       if(!checkCode.equals(validate)){
          page.setMessage("验证码错误");
          return "Binding";
       }
-      //获取用户
-      FDataPersonUserUnit user = _userConsole.find(logicContext, userId);
       //获取角色
       FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
       if(user != null){
          user.setRoleId(role.ouid());
-         page.setPassport(user.label());
          _userConsole.doUpdate(logicContext, user);
       }
       page.setIsLogin(false);

@@ -1,6 +1,7 @@
 <%@ include file='/apl/public.inc' %>
    <!DOCTYPE>
    <html>
+
    <head>
       <title>e租宝-全球实时数据展示系统</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -9,9 +10,10 @@
       <link rel="stylesheet" type="text/css" href="css/wap.css">
       <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
    </head>
+
    <body>
       <FORM name='frmMain' method='post' action='Main.wa'>
-         <INPUT id='id_do' name='do' type='hidden'/>
+         <INPUT id='id_do' name='do' type='hidden' />
          <div class="main" style="overflow-x:hidden;">
             <section class="nav-container" id="nav-container">
                <ul></ul>
@@ -41,16 +43,16 @@
                      </div>
                   </div>
                   <div class="details-container">
-                      <je:authority module='eai.marketer.customer'>
+                     <je:authority module='eai.marketer.customer'>
                         <ul onclick='doChart("customer")'>
                            <li>
                               <p>全球实时投资数据展示中心<i></i></p>
-                              <img src="../pc/images/main/3-3.png" >
+                              <img src="../pc/images/main/3-3.png">
                            </li>
                         </ul>
                      </je:authority>
-                      <je:authority module='eai.marketer.marketer'>
-                        <ul  onclick='doChart("marketer")'>
+                     <je:authority module='eai.marketer.marketer'>
+                        <ul onclick='doChart("marketer")'>
                            <li>
                               <p class="icon2">理财师排行实时投资数据展示<i></i></p>
                               <img src="../pc/images/main/1-1.PNG">
@@ -61,7 +63,7 @@
                         <ul onclick='doChart("department")'>
                            <li>
                               <p class="icon3">理财师管理实时投资数据展示<i></i></p>
-                              <img src="../pc/images/main/2-2.png" >
+                              <img src="../pc/images/main/2-2.png">
                            </li>
                         </ul>
                      </je:authority>
@@ -71,15 +73,19 @@
             </section>
          </div>
       </FORM>
-      <ul class="header-list bounceInDown">
-         <span>当前账号</span>
-         <p>
-            <jh:write source='&page.passport' />
-         </p>
-         <je:authority role='eai.oa'><li class="binding-icon"><a href="Binding.wa">帐号绑定</a></li></je:authority>
+      <jh:notEquals source="host" value="&page.userType">
+         <ul class="header-list bounceInDown">
+            <span>当前账号</span>
+            <p>
+               <jh:write source='&page.passport' />
+            </p>
+            <je:authority role='eai.oa'>
+               <li class="binding-icon"><a href="Binding.wa">帐号绑定</a></li>
+            </je:authority>
 
-         <li onclick="loginOut();">退出</li>
-      </ul>
+            <li onclick="loginOut();">退出</li>
+         </ul>
+      </jh:notEquals>
       <div class="shadow"></div>
       <script type="text/javascript">
          TouchSlide({
@@ -102,11 +108,11 @@
          $headerR.onclick = function() {
             $headerList.style.display = "block";
             $shadow.style.display = "block";
-         } 
+         }
          $shadow.onclick = function() {
-               $headerList.style.display = "none";
-               this.style.display = "none";
-            }
+            $headerList.style.display = "none";
+            this.style.display = "none";
+         }
          var $bindingIcon = document.getElementsByClassName("binding-icon")[0];
          var $bindingContainer = document.getElementsByClassName("binding-container")[0];
          var $boxContainer = document.getElementsByClassName("box-container")[0];

@@ -72,7 +72,7 @@ public class FMainAction
                            FMainPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
       _sessionConsole.open(session);
-      _logger.debug(this, "Main", "Main begin.", session);
+      _logger.debug(this, "Main", "Main default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
          page.setPassport(user.label());
@@ -153,6 +153,7 @@ public class FMainAction
                            FMainPage page,
                            String sceneCode,
                            String moduleCode){
+      _logger.debug(this, "Scene", "Into Scene.(sceneCode={1},moduleCode={2})", sceneCode, moduleCode);
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
       page.setSceneCode(sceneCode);
       FGcWebSession session = (FGcWebSession)sessionContext;

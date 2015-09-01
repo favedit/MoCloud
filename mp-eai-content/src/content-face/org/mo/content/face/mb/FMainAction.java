@@ -152,6 +152,7 @@ public class FMainAction
                            FMainPage page,
                            String sceneCode,
                            String moduleCode){
+      _logger.debug(this, "Scene", "Into Scene.(sceneCode={1},moduleCode={2})", sceneCode, moduleCode);
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
       page.setSceneCode(sceneCode);
       FGcWebSession session = (FGcWebSession)sessionContext;

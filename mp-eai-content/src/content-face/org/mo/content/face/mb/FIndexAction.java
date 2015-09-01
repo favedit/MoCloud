@@ -91,6 +91,7 @@ public class FIndexAction
       // 清空参数
       page.setPassport(null);
       page.setMessage(null);
+      _logger.debug(this, "Index", "Index default begin.");
       // 获得参数
       String hostAddress = context.head("x-real-ip");
       if(RString.isEmpty(hostAddress)){
@@ -105,10 +106,12 @@ public class FIndexAction
       if(authority != null){
          int accessCd = authority.accessCd();
          if(accessCd == EGcAuthorityAccess.Allow){
+            _logger.debug(this, "Index", "Index default white login.(hostAddress={1})", hostAddress);
             // 增加日志
             FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
             logger.setHostAddress(hostAddress);
             logger.setLogicMessage("主机地址为白名单。");
+            page.setUserType("host");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             //插入用户，权限绑定
             synchronizeData(logicContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
@@ -144,6 +147,7 @@ public class FIndexAction
             hostAddress = context.remoteAddress();
          }
       }
+      _logger.debug(this, "Index", "Index login.(passport={1},password={2})", passport, password);
       // 登录处理
       String message = null;
       String logggerMessage = null;
@@ -237,6 +241,7 @@ public class FIndexAction
                           IWebSession sessionContext,
                           ILogicContext logicContext,
                           FIndexPage page){
+      _logger.debug(this, "Index", "Index login out.");
       // 清空参数
       FGcWebSession session = (FGcWebSession)sessionContext;
       _sessionConsole.close(session);
@@ -254,6 +259,7 @@ public class FIndexAction
                                 String passport,
                                 String label,
                                 int from){
+      _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
       if(user == null){
          //获取角色

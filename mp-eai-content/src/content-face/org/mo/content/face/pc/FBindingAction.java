@@ -86,7 +86,7 @@ public class FBindingAction
                            FBindingPage page){
       page.setMessage(null);
       FGcWebSession session = (FGcWebSession)sessionContext;
-      _logger.debug(this, "Bind", "Bind begin. (guid={1})", session);
+      _logger.debug(this, "Bind", "Bind default begin. (guid={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user == null){
          page.setIsLogin(false);
@@ -178,8 +178,8 @@ public class FBindingAction
          return "Binding";
       }
 
+      // 验证是否发送过验证码
       FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, epassport);
-      //时间验证
       if(unit == null){
          page.setMessage("验证码错误");
          return "Binding";
@@ -188,12 +188,14 @@ public class FBindingAction
       TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       TDateTime serviceTime = new TDateTime(unit.createDate());
       serviceTime.addMinute(5);
+      _logger.debug(this, "BindOnAccount", "BindOnAccount check verification time out. (nowTime={1},serviceTime={2})", nowTime, serviceTime);
       if(serviceTime.isBefore(nowTime)){
          page.setMessage("验证码错误");
          return "Binding";
       }
-
+      // 检查验证码
       String checkCode = unit.checkCode();
+      _logger.debug(this, "BindOnAccount", "BindOnAccount check Verification. (inputVerifica={1},serviceVerifica={2})", validate, checkCode);
       if(!checkCode.equals(validate)){
          page.setMessage("验证码错误");
          return "Binding";
