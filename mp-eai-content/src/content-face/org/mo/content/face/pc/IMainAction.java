@@ -13,6 +13,7 @@ import org.mo.web.protocol.context.IWebContext;
 // @author sunhr
 // @version 150724
 //============================================================
+@AWebLogin
 public interface IMainAction
 {
    //============================================================

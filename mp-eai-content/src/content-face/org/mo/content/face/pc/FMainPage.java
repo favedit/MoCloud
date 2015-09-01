@@ -21,17 +21,6 @@ public class FMainPage
    //是否登录
    protected boolean _isLogin;
 
-   //是否OA权限
-   protected boolean _isOa = false;
-
-   public boolean isOa(){
-      return _isOa;
-   }
-
-   public void setIsOa(boolean _isOa){
-      this._isOa = _isOa;
-   }
-
    public boolean isLogin(){
       return _isLogin;
    }

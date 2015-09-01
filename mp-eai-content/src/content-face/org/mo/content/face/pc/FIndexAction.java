@@ -92,7 +92,6 @@ public class FIndexAction
       // 清空参数
       page.setPassport(null);
       page.setMessage(null);
-      page.setUserType(null);
       // 获得参数
       String hostAddress = context.head("x-real-ip");
       if(RString.isEmpty(hostAddress)){
@@ -113,7 +112,6 @@ public class FIndexAction
             logger.setLogicMessage("主机地址为白名单。");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             //插入用户，权限绑定
-            page.setUserType("host");
             synchronizeData(logicContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             return "Main";
@@ -213,15 +211,6 @@ public class FIndexAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
-         if(user != null){
-            //            page.setId(user.guid());
-            //获取角色 验证此用户是否绑定e租宝
-            FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
-            if(user.roleId() == role.ouid()){
-               page.setIsOa(true);
-            }
-         }
          page.setIsLogin(true);
          page.setPassport(passport);
          if(cookie != null){
@@ -249,7 +238,7 @@ public class FIndexAction
                           IWebSession sessionContext,
                           ILogicContext logicContext,
                           FIndexPage page){
-      // 清空参数
+      // 清空session
       FGcWebSession session = (FGcWebSession)sessionContext;
       _sessionConsole.close(session);
       return "Login";
@@ -278,7 +267,6 @@ public class FIndexAction
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
-            page.setIsOa(true);
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
             entryUnit.setOvld(true);

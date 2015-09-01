@@ -26,24 +26,8 @@ public class FIndexPage
    // 场景代码
    protected String _sceneCode;
 
-   //用户权限
-   //   protected String _menuString;
-
-   //用户类型
-   protected String _userType;
-
    //是否登录
    protected boolean _isLogin;
-
-   protected boolean _isOa = false;
-
-   public boolean isOa(){
-      return _isOa;
-   }
-
-   public void setIsOa(boolean _isOa){
-      this._isOa = _isOa;
-   }
 
    public boolean isLogin(){
       return _isLogin;
@@ -52,22 +36,6 @@ public class FIndexPage
    public void setIsLogin(boolean _isLogin){
       this._isLogin = _isLogin;
    }
-
-   public String userType(){
-      return _userType;
-   }
-
-   public void setUserType(String _userType){
-      this._userType = _userType;
-   }
-
-   //   public String menuString(){
-   //      return _menuString;
-   //   }
-   //
-   //   public void setMenuString(String _menuString){
-   //      this._menuString = _menuString;
-   //   }
 
    //============================================================
    // <P>获得主机地址。</P>

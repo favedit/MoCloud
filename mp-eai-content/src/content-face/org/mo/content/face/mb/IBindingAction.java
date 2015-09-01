@@ -1,4 +1,4 @@
-package org.mo.content.face.pc;
+package org.mo.content.face.mb;
 
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;

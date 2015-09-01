@@ -35,7 +35,7 @@
             <div class="box-container">
                <h1>账号绑定</h1>
                <span class="box-prompt"><i><jh:write source='&page.message' /></i></span>
-               <FORM id="frmBind" name='frmBind' method='post' action='Main.wa?do=bindOnAccount'>
+               <FORM id="frmBind" name='frmBind' method='post' action='Binding.wa?do=bindOnAccount'>
                   <p class="icon mt-30"><i class=""></i>
                      <input id="mobile" name="ePassport" class="quantico account" type="text" placeholder="E租宝理财师账号">
                   </p>

@@ -20,7 +20,7 @@
      <tr id="mains">
        <td>
           <FORM name='frmMain' style="height:100%;" method='post' action='Index.wa?do=login'>
-            <p id="error" style="display: none;"></p>
+            <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
             <div class="main">
                <div class="box">
                   <div class="logo">

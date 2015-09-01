@@ -12,14 +12,12 @@
    </head>
 
    <body>
-      <FORM id="frmBind" name='frmBind' method='post' action='Index.wa?do=bindOnAccount'>
-         <INPUT id='id_do' name='do' type='hidden' value='chart' />
-         <INPUT id='id_code' name='code' type='hidden' />
+      <FORM id="frmBind" name='frmBind' method='post' action='Binding.wa?do=bindOnAccount'>
          <div class="main" style="overflow-x:hidden;">
             <section class="main-container" id="main-container">
                <section class="binding-container" style="display:block;">
                   <header>
-                     <a href="Index.wa?do=main&id=<jh:write source='&page.id' />"><img class="return-img" src="images/fanhui.png"></a>
+                     <a href="Main.wa"><img class="return-img" src="images/fanhui.png"></a>
                      账号绑定
                   </header>
                   <ul class="fieldsWidget">
@@ -27,13 +25,11 @@
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>账号：</label>
-                           <input type="text" name="passport" class="fieldInput" placeholder="请输入E租宝账号" value="">
+                           <input type="text" name="ePassport" class="fieldInput" placeholder="请输入E租宝账号" value="">
                            <button id="getVerifyCodeBtn" class="btnGetCode" type="button">获取验证码</button>
                            <input tyle="hidden" style="display: none;" value="1" id="input_state">
-                           <input name="id" type="hidden" value="<jh:write source='&page.id' />" />
                         </div>
                      </li>
-
                      <li class="fieldsItem">
                         <div class="fieldsItemRibbon">
                            <label>验证码：</label>
@@ -85,7 +81,7 @@
             ajax.OnComplete = ctrl.onComplete();
             ajax.onError = ctrl.onError();
             ajax.OnLoaded = ctrl.onLoading();
-            ajax.DoCallBack("Index.wa?do=sendValidate", "passport=" + $fieldInput.value);
+            ajax.DoCallBack("Binding.wa?do=sendValidate", "passport=" + $fieldInput.value);
          }
          ctrl.onLoading = function() {}
          ctrl.onComplete = function(responseText, responseXML) {
@@ -98,7 +94,7 @@
             }
          }
          ctrl.onError = function(status, statusText, responseText) {
-            alert(responseText);
+//            alert(responseText);
          }
          ctrl.replaceNbsp = function(temp) {
             if (temp != undefined && temp != "") {

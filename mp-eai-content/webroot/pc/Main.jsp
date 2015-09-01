@@ -34,7 +34,7 @@
                      </div>
                </div> 
                <ul class="users" id="users">
-                  <jh:equals source="true" value="&page.isOa" ><li class="binding"><a href="Binding.wa">账号绑定</a></li></jh:equals>
+                  <je:authority role='eai.oa'><li class="binding"><a href="Binding.wa">账号绑定</a></li></je:authority>
                   <li onclick="loginOut();">退出</li>
                </ul>
             </TD>

@@ -1,4 +1,4 @@
-package org.mo.content.face.pc;
+package org.mo.content.face.mb;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserModuleUnit;
@@ -13,6 +13,7 @@ import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.logic.service.info.ILogicServiceInfoConsole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
@@ -70,7 +71,6 @@ public class FMainAction
                            ILogicContext logicContext,
                            FMainPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
-      _sessionConsole.open(session);
       _logger.debug(this, "Main", "Main begin.", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){

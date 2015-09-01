@@ -10,10 +10,8 @@
       <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
    </head>
    <body>
-      <FORM name='frmMain' method='post' action='Index.wa'>
-         <INPUT id='id_do' name='do' type='hidden' value='chart' />
-         <INPUT id='id_code' name='code' type='hidden' />
-         <INPUT name='id' type='hidden' value="<jh:write source='&page.id'/>" />
+      <FORM name='frmMain' method='post' action='Main.wa'>
+         <INPUT id='id_do' name='do' type='hidden'/>
          <div class="main" style="overflow-x:hidden;">
             <section class="nav-container" id="nav-container">
                <ul></ul>
@@ -44,7 +42,7 @@
                   </div>
                   <div class="details-container">
                       <je:authority module='eai.marketer.customer'>
-                        <ul onclick='doChart("ChartMarketerCustomer")'>
+                        <ul onclick='doChart("customer")'>
                            <li>
                               <p>全球实时投资数据展示中心<i></i></p>
                               <img src="../pc/images/main/3-3.png" >
@@ -52,7 +50,7 @@
                         </ul>
                      </je:authority>
                       <je:authority module='eai.marketer.marketer'>
-                        <ul  onclick='doChart("ChartMarketerMarketer")'>
+                        <ul  onclick='doChart("marketer")'>
                            <li>
                               <p class="icon2">理财师排行实时投资数据展示<i></i></p>
                               <img src="../pc/images/main/1-1.PNG">
@@ -60,7 +58,7 @@
                         </ul>
                      </je:authority>
                      <je:authority module='eai.department.marketer'>
-                        <ul onclick='doChart("ChartDepartmentMarketer")'>
+                        <ul onclick='doChart("department")'>
                            <li>
                               <p class="icon3">理财师管理实时投资数据展示<i></i></p>
                               <img src="../pc/images/main/2-2.png" >
@@ -78,7 +76,7 @@
          <p>
             <jh:write source='&page.passport' />
          </p>
-         <jh:equals source="true" value="&page.isOa" ><li class="binding-icon"><a href="Index.wa?do=bind&id=<jh:write source='&page.id' />">帐号绑定</a></li></jh:equals>
+         <je:authority role='eai.oa'><li class="binding-icon"><a href="Binding.wa">帐号绑定</a></li></je:authority>
 
          <li onclick="loginOut();">退出</li>
       </ul>
@@ -120,7 +118,7 @@
          }
 
          function doChart(code) {
-            id_code.value = code;
+            id_do.value = code;
             frmMain.submit();
          }
 
