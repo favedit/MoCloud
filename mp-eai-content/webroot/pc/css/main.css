@@ -188,6 +188,7 @@ body{
 	cursor:pointer;
 	z-index: 2;
 	top:100px;
+	width: 104px;
 }
 .return{
 	min-width: 68px;
