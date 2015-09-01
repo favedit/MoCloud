@@ -16,61 +16,6 @@
    </style>
 </head>
 <body>
-  <!--  <table  class="table" border="1" align="center" valign="center" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
-      <tbody>
-      <tr id="heads">
-         <td></td>
-     </tr>
-     <tr id="mains">
-       <td>
-          <FORM name='frmMain' style="height:100%;" method='post' action='Index.wa?do=login'>
-            <p id="error" style="display: none;"></p>
-            <div class="main">
-               <div class="box">
-                  <div class="logo">
-                     <img src="images/logos.png">
-                  </div>
-                  <div class="box-container">
-                     <h1>全球实时数据中心</h1>
-                     <p class="icon mt-30"><i class=""></i><input id="passport" name="passport" class="quantico account"  type="text" placeholder="请输入oa账号"></p>
-                     <p class="icon icon-p"><i class=" "></i><input id="password" name="password" class="quantico password" type="password" placeholder="密码"></p>
-                     <p  class="details" ><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</p>
-                     <a href="javascript:;" class="btn"><input id="btn" type="submit"  value="登录"></a>
-                  </div>
-               </div>
-            </div>
-            
-           <div class="dialog-overlay" id="dialog-overlay"></div>
-            <div id="dialog_alert" data-name="alert" class="dialog-box flipInX">
-            <div class="box-title">提示</div>
-               <div class="box-inner">
-               <div class="info-text">
-                  <i class="icon-caution"></i>
-                  <span id="prompt_val"></span>
-               </div>
-               </div>
-               <div class="box-bottom">
-                  <div class="buttons">
-                     <a href="javascript:;"  onclick="setShut();" class="action btn btn18 rbtn">
-                        <span class="text" id="shut">确定</span>
-                     </a>
-                  </div>
-               </div>
-               <div class="close-btn" onclick="setShut();" id="close-btn">
-                  <i ></i>
-               </div>
-            </div> 
-          </FORM> 
-          </td>
-     </tr>
-
-     <tr id="footers" border="1">
-       <td>
-         <div class="footer">©2015 智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
-       </td>
-     </tr>
-      </tbody>
-   </table> -->
    <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
       <tbody>
       <tr id="heads">
@@ -93,27 +38,7 @@
               </div>
 
             </div>
-            <!--提示 -->
-           <div class="dialog-overlay" id="dialog-overlay" ></div>
-            <div id="dialog_alert" data-name="alert" class="dialog-box flipInX">
-            <div class="box-title">提示</div>
-               <div class="box-inner">
-               <div class="info-text">
-                  <i class="icon-caution"></i>
-                  <span id="prompt_val"></span>
-               </div>
-               </div>
-               <div class="box-bottom">
-                  <div class="buttons">
-                     <a href="javascript:;"  onclick="setShut();" class="action btn btn18 rbtn">
-                        <span class="text" id="shut">确定</span>
-                     </a>
-                  </div>
-               </div>
-               <div class="close-btn" onclick="setShut();" id="close-btn">
-                  <i ></i>
-               </div>
-            </div>
+       
           </FORM> 
         </td>
      </tr>
@@ -139,16 +64,6 @@
          $btnContainer.style.backgroundImage="url(images/6.png)";
       }
 
-      function setShut() {
-         $dialogOverlay.style.display = "none";
-         $dialogAlert.style.display = "none";
-      }
-      document.getElementById("close-btn").onclick = function() {
-         setShut();
-      }
-      document.getElementById("shut").onclick = function() {
-         setShut();
-      }
 
       function setPrompt(val) {
          document.getElementById("prompt_val").innerHTML = val;

@@ -239,10 +239,10 @@ body{
 	background-image: url(../images/binding/7.png);
 	background-repeat: no-repeat;
 	background-position: center;
-	-webkit-background-size: 450px 405px ;
-	-moz-background-size: 450px 405px ;
-	-o-background-size: 450px 405px ;
-	background-size: 450px 405px ;
+	-webkit-background-size: 450px 390px ;
+	-moz-background-size: 450px 390px ;
+	-o-background-size: 450px 390px ;
+	background-size: 450px 390px ;
 	padding: 0px 40px;
 }
 .box-container p{
@@ -263,7 +263,7 @@ body{
     font-size: 16px;
 }
 .box-container h1{
-	padding: 30px 0px;
+	  padding: 34px 0px 25px 0px;
 	text-align: center;
 	font-size: 32px;
 	color:#3dddff;
