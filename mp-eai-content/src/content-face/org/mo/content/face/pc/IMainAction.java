@@ -3,6 +3,7 @@ package org.mo.content.face.pc;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.face.AWebAuthority;
+import org.mo.web.core.face.AWebLogin;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -21,7 +22,7 @@ public interface IMainAction
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   @AWebAuthority("eai.marketer.customer|eai.marketer.marketer|eai.department.marketer")
+   @AWebLogin
    String construct(IWebContext context,
                     IWebSession sessionContext,
                     ILogicContext logicContext,

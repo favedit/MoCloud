@@ -2,6 +2,7 @@ package org.mo.content.face.pc;
 
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.core.face.AWebLogin;
 import org.mo.web.core.face.AWebRole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
@@ -12,6 +13,7 @@ import org.mo.web.protocol.context.IWebContext;
 // @author sunhr
 // @version 150724
 //============================================================
+@AWebLogin
 public interface IBindingAction
 {
    //============================================================
@@ -47,7 +49,7 @@ public interface IBindingAction
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   //   @AWebRole("eai.oa")
+   @AWebRole("eai.oa")
    String bindOnAccount(IWebContext context,
                         IWebSession sessionContext,
                         ILogicContext logicContext,

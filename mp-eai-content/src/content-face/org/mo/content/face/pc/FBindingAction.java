@@ -2,9 +2,7 @@ package org.mo.content.face.pc;
 
 import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
-import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
-import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
 import org.mo.cloud.core.web.FGcWebSession;
@@ -88,12 +86,7 @@ public class FBindingAction
                            FIndexPage page){
       page.setMessage(null);
       FGcWebSession session = (FGcWebSession)sessionContext;
-      //      FEaiSession session = (FEaiSession)sessionContext;
-      //      System.out.println(session.roleCode() + "----------------");
       _logger.debug(this, "Bind", "Bind begin. (guid={1})", session);
-      if(session == null){
-         return "Login";
-      }
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user == null){
          page.setIsLogin(false);
@@ -240,69 +233,4 @@ public class FBindingAction
       _logger.debug(this, "SendValidate", "sendMessage finish. (text={1},result={2})", text, result);
       return result;
    }
-
-   //============================================================
-   // <T>登录成功后，用户信息同步。</T>
-   //
-   // @param logicContext 逻辑环境
-   // @param passport 账户
-   //============================================================
-   private void synchronizeData(ILogicContext logicContext,
-                                FIndexPage page,
-                                String passport,
-                                String label,
-                                int from){
-      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
-      if(user == null){
-         //获取角色
-         FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
-         if(role != null){
-            //同步OA用户
-            FDataPersonUserUnit unit = new FDataPersonUserUnit();
-            unit.setLabel(label);
-            unit.setPassport(passport);
-            unit.setRoleId(role.ouid());
-            unit.setOvld(true);
-            _userConsole.doInsert(logicContext, unit);
-            page.setIsOa(true);
-            //同步用户状态
-            FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
-            entryUnit.setOvld(true);
-            entryUnit.setUserId(unit.ouid());
-            entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
-            entryUnit.setFromCd(from);
-            _entryConsole.doInsert(logicContext, entryUnit);
-            //            tackAuthority(logicContext, page, unit.roleId());
-         }
-         //      }else{
-         //         tackAuthority(logicContext, page, user.roleId());
-      }
-   }
-
-   //   //============================================================
-   //   // <T>获取管理权限。</T>
-   //   //
-   //   // @param logicContext 环境
-   //   // @param page 容器
-   //   // @param roleid 角色编号
-   //   //============================================================
-   //   private void tackAuthority(ILogicContext logicContext,
-   //                              FIndexPage page,
-   //                              long roleid){
-   //      StringBuffer menuStrings = new StringBuffer();
-   //      long roleId = roleid;
-   //      if(roleId != 0){
-   //         FLogicDataset<FDataControlRoleModuleUnit> roelModuleInfoList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleId, 0);
-   //         for(FDataControlRoleModuleUnit role : roelModuleInfoList){
-   //            FDataControlModuleUnit module = _moduleConsole.find(logicContext, role.moduleId());
-   //            if(module != null){
-   //               menuStrings.append(module.code()).append("|");
-   //            }
-   //         }
-   //         page.setMenuString(menuStrings.deleteCharAt(menuStrings.length() - 1).toString());
-   //      }else{
-   //         page.setMenuString(null);
-   //      }
-   //   }
-
 }
