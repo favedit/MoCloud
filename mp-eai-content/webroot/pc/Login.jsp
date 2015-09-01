@@ -26,7 +26,7 @@
      <tr id="mains">
        <td align="center" valign="center">
           <FORM name='frmMain' method='post' action='Index.wa?do=login'>
-            <p id="error" style="display: none;"></p>
+            <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
             <div class="main">
               <div class="main-container">
                 <ul class="details-container">

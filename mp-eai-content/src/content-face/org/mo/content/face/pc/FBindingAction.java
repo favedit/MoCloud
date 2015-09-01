@@ -1,8 +1,5 @@
 package org.mo.content.face.pc;
 
-import org.mo.eai.console.financial.FFinancialMarketerInfo;
-import org.mo.eai.console.financial.IFinancialMarketerConsole;
-
 import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
@@ -22,6 +19,8 @@ import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.console.financial.FFinancialMarketerInfo;
+import org.mo.eai.console.financial.IFinancialMarketerConsole;
 import org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole;
 import org.mo.eai.logic.logger.person.user.ILoggerPersonUserAccessConsole;
 import org.mo.web.core.session.IWebSession;
@@ -171,6 +170,9 @@ public class FBindingAction
       String validate = context.parameter("validate");
       long userId = session.userId();
       _logger.debug(this, "BindOnAccount", "BindOnAccount begin. (passport={1},validate={2},userId={3})", epassport, validate, userId);
+      //获取用户
+      FDataPersonUserUnit user = _userConsole.find(logicContext, userId);
+      page.setPassport(user.label());
       if(RString.isEmpty(epassport) || RString.isEmpty(validate)){
          page.setMessage("账号或验证码不能为空");
          return "Binding";
@@ -196,16 +198,15 @@ public class FBindingAction
          page.setMessage("验证码错误");
          return "Binding";
       }
-      //获取用户
-      FDataPersonUserUnit user = _userConsole.find(logicContext, userId);
+
       //获取角色
       FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_marketer);
       if(user != null){
          user.setRoleId(role.ouid());
-         page.setPassport(user.label());
          _userConsole.doUpdate(logicContext, user);
       }
       page.setIsLogin(false);
+      _sessionConsole.open(session);
       return "Main";
    }
 
