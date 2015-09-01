@@ -15,87 +15,76 @@
       id_do.value = code;
       frmMain.submit();
    }
+   function loginOut() {
+      location.href = "Index.wa?do=loginOut";
+   }
 </script>
  <body>
    <FORM id="form" name='frmMain' method='post' action='Main.wa'>
    <jh:equals source="true" value="&page.isLogin" ><p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p></jh:equals>
       <TABLE style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
          <TR>
-            <TD height='56' colspan="2">
+            <TD height='100' colspan="2">
                <INPUT id='id_do' name='do' type='hidden'>
              <div class="header floatBtn">
-                  <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo.png"></a></div>
+                  <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a></div>
                      <div class="head-right">
-                        <p class="user-details" id="user-details"><i>3</i>
-                           <jh:write source='&page.passport' />&nbsp;<img src="images/main/icon.png"></p>
+                        <p class="user-details" id="user-details"><i></i>
+                           <jh:write source='&page.passport' />&nbsp;<img src="images/main/new8.png"></p>
+                        <b></b>
                         <span class="img-details mr-20 pulse">
-                           <img src='../mb/images/re.png'>
+                              <img src='../mb/images/re.png'>
                         </span>
                      </div>
                </div> 
-               <ul class="users" id="users">
+               <ul class="users" id="users" >
                   <je:authority role='eai.oa'><li class="binding"><a href="Binding.wa">账号绑定</a></li></je:authority>
-                  <li onclick="loginOut();">退出</li>
+                  <li onclick="loginOut();"><a class="exit" href="javascript:;">退出</a></li>
                </ul>
             </TD>
          </TR>
          <TR>
-            <TD class="main-left" width="80%">
+            <TD class="main-left" width="80%" align="center" valign="center">
                <div class="imag-container">
-                  <img class="loding" src="images/main/loding.gif" style="display: block">
-                  <div class="imag-details" style="display: block;">
-                     <p class="icon-picture">
-                        <je:authority module='eai.marketer.customer'><span >全球实时投资数据展示中心</span></je:authority>
-                        <je:authority module='eai.marketer.marketer'><span >理财师排行实时投资数据展示</span></je:authority>
-                        <je:authority module='eai.department.marketer'><span >理财师管理实时投资数据展示</span></je:authority>
-                     </p>
-                     <div id="container_details" style="">
-                        <ul>
-                           <je:authority module='eai.marketer.customer'>
-                              <li onclick='doChart("customer")'>
-                                 <img src="images/main/3.png">
-                                 <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
-                              </li>
-                           </je:authority>
-                           <je:authority module='eai.marketer.marketer'>
-                              <li onclick='doChart("marketer")'>
-                                 <img src="images/main/1.png">
-                                 <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
-                              </li>
-                           </je:authority>
-                          <je:authority module='eai.department.marketer'>
-                              <li onclick='doChart("department")'>
-                                 <img src="images/main/2.png">
-                                 <div class="shadow"><img src="images/main/iconfont-sousuo.png"></div>
-                              </li>
-                           </je:authority>
-                        </ul>
-                     </div>
+                  <img class="loding" src="images/main/loading.png" style="display: block">
+                     <div class="imag-details" style="display: block;">
+                        <div id="container_details" style="">
+                           <ul>
+                              <je:authority module='eai.marketer.customer'>
+                                 <li style="display: none;"  onclick='doChart("customer")' >
+                                    <img src="images/main/1-2.png">
+                                 </li>
+                              </je:authority>
+                              <je:authority module='eai.marketer.marketer'>
+                                 <li style="display: none;" onclick='doChart("marketer")'>
+                                    <img src="images/main/2-1.png">
+                                 </li>
+                              </je:authority>
+                              <je:authority module='eai.department.marketer'>
+                                 <li style="display: none;"  onclick='doChart("department")'>
+                                    <img src="images/main/2-3.png">
+                                 </li>
+                              </je:authority>
+                           </ul>
+                        </div>
                   </div>
                </div>
             </TD>
-            <TD width="19%" class="main-right">
+            <TD width="19%" class="main-right" rowspan="2">
                <div class="titles-container">
                   <ul>
-                    <p class="play_prev"></p>
-                    <je:authority module='eai.marketer.customer'>
-                        <li class="on"><i class="mask"></i><img src="images/main/3-3.png"></li>
-                     </je:authority>
-                      <je:authority module='eai.marketer.marketer'>
-                        <li > <i class="mask"></i><img src="images/main/1-1.PNG"></li>
-                     </je:authority>
-                     <je:authority module='eai.department.marketer'>
-                        <li><i class="mask"></i><img src="images/main/2-2.png"></li>
-                     </je:authority>
-                     <p class="play_next"></p>
+                     <je:authority module='eai.marketer.customer'><li><img src="images/main/3-3.png"><b>全球实时投资数据展示中心</b></li></je:authority>
+                     <je:authority module='eai.marketer.marketer'><li><img src="images/main/1-1.PNG"><b>理财师排行实时投资数据展示</b></li></je:authority>
+                     <je:authority module='eai.department.marketer'><li></i><img src="images/main/2-2.png"><b>理财师管理实时投资数据展示</b></li></je:authority>
                   </ul> 
                </div>  
             </TD>
          </TR>
          <TR>
-            <TD height='56' colspan="2">
+            <TD height='56' colspan="0">
                 <div class="fot"><p>客服电话：010-65499299</p></div>
             </TD>
+            <td class="td-container"></td>
          </TR>
       </TABLE>
    </FORM>

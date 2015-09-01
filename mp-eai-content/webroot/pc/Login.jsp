@@ -9,10 +9,14 @@
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/animate.css">
    <link rel="stylesheet" type="text/css" href="css/login.css">
+   <script type="text/javascript" src="js/jquery.min.js"></script>
    <script type="text/javascript" src="/ajs/cookie.js"></script>
+   <style type="text/css">
+
+   </style>
 </head>
 <body>
-   <table  class="table" border="0" align="center" valign="center" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
+  <!--  <table  class="table" border="1" align="center" valign="center" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
       <tbody>
       <tr id="heads">
          <td></td>
@@ -20,7 +24,7 @@
      <tr id="mains">
        <td>
           <FORM name='frmMain' style="height:100%;" method='post' action='Index.wa?do=login'>
-            <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
+            <p id="error" style="display: none;"></p>
             <div class="main">
                <div class="box">
                   <div class="logo">
@@ -60,8 +64,61 @@
           </td>
      </tr>
 
-     <tr id="footers" >
+     <tr id="footers" border="1">
        <td>
+         <div class="footer">©2015 智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
+       </td>
+     </tr>
+      </tbody>
+   </table> -->
+   <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
+      <tbody>
+      <tr id="heads">
+         <td height="50">
+          <img src="images/main/logo3.png">
+        </td>
+     </tr>
+     <tr id="mains">
+       <td align="center" valign="center">
+          <FORM name='frmMain' method='post' action='Index.wa?do=login'>
+            <p id="error" style="display: none;"></p>
+            <div class="main">
+              <div class="main-container">
+                <ul class="details-container">
+                  <p><b>用户名</b><input id="passport" name="passport" class="quantico account"  type="text" placeholder="请输入oa账号"></p>
+                  <p><b>密<i>码</i>码</b><input input id="password" name="password" class="quantico password" type="password" placeholder="密码"></p>
+                  <span class="details" ><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</span>
+                  <span class="btn-container" ><input input id="btn" type="submit"  value=""></span>
+                </ul>
+              </div>
+
+            </div>
+            <!--提示 -->
+           <div class="dialog-overlay" id="dialog-overlay" ></div>
+            <div id="dialog_alert" data-name="alert" class="dialog-box flipInX">
+            <div class="box-title">提示</div>
+               <div class="box-inner">
+               <div class="info-text">
+                  <i class="icon-caution"></i>
+                  <span id="prompt_val"></span>
+               </div>
+               </div>
+               <div class="box-bottom">
+                  <div class="buttons">
+                     <a href="javascript:;"  onclick="setShut();" class="action btn btn18 rbtn">
+                        <span class="text" id="shut">确定</span>
+                     </a>
+                  </div>
+               </div>
+               <div class="close-btn" onclick="setShut();" id="close-btn">
+                  <i ></i>
+               </div>
+            </div>
+          </FORM> 
+        </td>
+     </tr>
+     <tr  id="footers" border="1">
+       <td height="100">
          <div class="footer">©2015 智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
        </td>
      </tr>
@@ -73,11 +130,13 @@
          document.getElementById("saveCookie").checked = true;
       }
       document.getElementById("passport").value = passport;
+
       var $dialogOverlay = document.getElementById("dialog-overlay");
       var $dialogAlert = document.getElementById("dialog_alert");
       var errorVal = document.getElementById("error").innerHTML;
+      var $btnContainer =  document.getElementsByClassName("btn-container")[0];
       if (errorVal != "") {
-         setPrompt(errorVal);
+         $btnContainer.style.backgroundImage="url(images/6.png)";
       }
 
       function setShut() {
@@ -99,12 +158,29 @@
       var $username = document.getElementById('passport');
       var $password = document.getElementById('password');
       var $btn = document.getElementById('btn');
+      
+      function setFocus(){
+
+      }
+      $username.onfocus=function(){
+         $btnContainer.style.backgroundImage="url(images/2.png)";
+      }
+      $password.onfocus=function(){
+         $btnContainer.style.backgroundImage="url(images/2.png)";
+      }
+      function setBackgroundImage (){
+         $btnContainer.style.backgroundImage="url(images/7.png)";
+      }
+      
       $btn.onclick = function() {
          if ($username.value == "" || $password.value == "") {
-            setPrompt("用户名或密码不能为空");
+            // setPrompt("用户名或密码不能为空");
+            // $btnContainer.style.backgroundImage="images/7.png";
+          setBackgroundImage();
+         // $(".btn-container").addClass("on");
             return false;
          } else {
-            frmMain.submit();
+            // frmMain.submit();
          }
       }
    </script>      
