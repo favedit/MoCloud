@@ -91,7 +91,6 @@ public class FBindingAction
       _logger.debug(this, "Bind", "Bind default begin. (guid={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user == null){
-         page.setIsLogin(false);
          basePage.setUrl("Main.wa");
          return "Success";
       }
@@ -222,7 +221,6 @@ public class FBindingAction
          user.setRoleId(role.ouid());
          _userConsole.doUpdate(logicContext, user);
       }
-      page.setIsLogin(false);
       _sessionConsole.open(session);
       basePage.setUrl("Main.wa");
       return "Success";

@@ -2,7 +2,7 @@
  <!DOCTYPE >
 <html >
 <head>
-   <title></title>
+   <title>钰诚集团智慧企业推进中心</title>
    <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/animate.css">

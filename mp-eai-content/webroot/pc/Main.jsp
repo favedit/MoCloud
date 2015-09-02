@@ -2,6 +2,7 @@
    <!DOCTYPE html>
 
    <head>
+      <title>钰诚集团智慧企业推进中心</title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta http-equiv="X-UA-Compatible" IE="EmulateIE7" content="IE=edge" />
       <meta content="always" name="referrer">
@@ -10,28 +11,25 @@
       <link rel="stylesheet" type="text/css" href="css/main.css">
       <script type="text/javascript" src="js/jquery.min.js"></script>
       <script type="text/javascript" src="js/main.js"></script>
+      <script type="text/javascript" src="/ajs/cookie.js"></script>
    </head>
    <script>
       function doChart(code) {
          id_do.value = code;
          frmMain.submit();
       }
-
       function loginOut() {
          location.href = "Index.wa?do=loginOut";
       }
    </script>
-
    <body>
       <FORM id="form" name='frmMain' method='post' action='Main.wa'>
-         <jh:equals source="true" value="&page.isLogin">
-            <p class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p>
-         </jh:equals>
+         <p id="prompt" class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p>
          <TABLE style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
             <TR>
                <TD id="header" height='100' colspan="2">
                   <INPUT id='id_do' name='do' type='hidden'>
-                  <div class="header floatBtn" >
+                  <div class="header floatBtn">
                      <div class="head-left">
                         <a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a>
                      </div>

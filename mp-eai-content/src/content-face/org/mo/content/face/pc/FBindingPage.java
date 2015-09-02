@@ -15,9 +15,6 @@ public class FBindingPage
    // 消息
    protected String _message;
 
-   //是否登录
-   protected boolean _isLogin;
-
    //用户类型
    protected String _userType;
 
@@ -43,14 +40,6 @@ public class FBindingPage
 
    public void setPassport(String _passport){
       this._passport = _passport;
-   }
-
-   public boolean isLogin(){
-      return _isLogin;
-   }
-
-   public void setIsLogin(boolean _isLogin){
-      this._isLogin = _isLogin;
    }
 
 }

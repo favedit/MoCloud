@@ -18,9 +18,6 @@ public class FMainPage
    // 场景代码
    protected String _sceneCode;
 
-   //是否登录
-   protected boolean _isLogin;
-
    //用户类型
    protected String _userType;
 
@@ -30,14 +27,6 @@ public class FMainPage
 
    public void setUserType(String _userType){
       this._userType = _userType;
-   }
-
-   public boolean isLogin(){
-      return _isLogin;
-   }
-
-   public void setIsLogin(boolean _isLogin){
-      this._isLogin = _isLogin;
    }
 
    //============================================================

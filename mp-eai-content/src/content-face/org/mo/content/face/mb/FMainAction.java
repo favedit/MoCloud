@@ -71,12 +71,16 @@ public class FMainAction
                            ILogicContext logicContext,
                            FMainPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
-      _logger.debug(this, "Main", "Main begin.", session);
+      _sessionConsole.open(session);
+      _logger.debug(this, "Main", "Main default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
          page.setPassport(user.label());
+         String passport = user.passport();
+         if(passport.substring(0, passport.indexOf(':')).equals("white-host")){
+            page.setUserType("host");
+         }
       }
-      page.setIsLogin(false);
       return "Main";
    }
 

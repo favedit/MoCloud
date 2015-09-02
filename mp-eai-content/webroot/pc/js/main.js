@@ -19,13 +19,17 @@
      $imagContainers.show();
      // 主内容 效果
      $imagDetails.show();
-    
+     var isLogin = getCookieValue("islogin");
+     if(isLogin == ""){
+         $(".prompt").hide();
+     }
      ctrl.setTimeouts = function() {
         setTimeout(function() {
            $(".prompt").hide();
         }, 2000);
-     };
+     };     
      ctrl.setTimeouts();
+     deleteCookie("islogin","/");
      $imgH = $imagContainer.find("li").eq(0).height();
      var timing = null;
      $imagContainer.find("li").eq(0).show();

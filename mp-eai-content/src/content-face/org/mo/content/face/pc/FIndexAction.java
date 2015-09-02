@@ -220,13 +220,12 @@ public class FIndexAction
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         page.setIsLogin(true);
-         page.setPassport(passport);
          if(cookie != null){
             context.outputCookies().push(new FWebCookie("passport", passport));
          }else{
             context.outputCookies().push(new FWebCookie("passport", null, 0));
          }
+         context.outputCookies().push(new FWebCookie("islogin", "true"));
          basePage.setUrl("Main.wa");
          return "Success";
       }else{

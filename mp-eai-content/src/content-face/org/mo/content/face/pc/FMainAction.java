@@ -76,8 +76,11 @@ public class FMainAction
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
          page.setPassport(user.label());
+         String passport = user.passport();
+         if(passport.substring(0, passport.indexOf(':')).equals("white-host")){
+            page.setUserType("host");
+         }
       }
-      page.setIsLogin(false);
       return "Main";
    }
 
