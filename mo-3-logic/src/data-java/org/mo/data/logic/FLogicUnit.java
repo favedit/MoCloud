@@ -5,6 +5,8 @@ import org.mo.com.collections.FRow;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.IAttributes;
+import org.mo.com.lang.IStringPair;
 
 //============================================================
 // <T>逻辑数据单元。</T>
@@ -51,6 +53,19 @@ public class FLogicUnit
    //============================================================
    public void set(String name,
                    String value){
+   }
+
+   //============================================================
+   // <T>加载属性集合。</T>
+   //
+   // @param attributes 存储属性集合
+   //============================================================
+   public void loadAttributes(IAttributes attributes){
+      for(IStringPair pair : attributes){
+         String attributeName = pair.name();
+         String attributeValue = pair.value();
+         set(attributeName, attributeValue);
+      }
    }
 
    //============================================================

@@ -31,19 +31,21 @@ public class RFileRenameUtil
    // <T>启动处理。</T>
    //============================================================
    public static void main(String[] args){
-      String sourcePath = "F:/Download/Finish/Natsume Yuujinchou SE 1-4+OVA [BDRip 1920x1080 x264 FLAC]/夏目友人帐-4 (2012-13.mkv-1920x1080-15.1G)";
+      String fileExt = ".mkv";
+      String sourcePath = "Q:/[Temp]/尽管如此世界依然美丽 (2014-12.mkv-1920x1080-27.2G)";
       FStrings fileNames = RFile.listFiles(sourcePath);
       for(String fileName : fileNames){
-         if(fileName.endsWith(".mkv")){
+         if(fileName.endsWith(fileExt)){
             //RFile.rename(fileName, RString.replace(fileName, ".MKV", ".mkv"));
-            String code = RString.mid(fileName, "Natsume Yuujinchou Shi - ", " [BDRip 1920x1080 x264 FLAC]");
+            String code = RString.mid(RFile.name(fileName), "第", "話");
+            //String code = RFile.name(fileName).substring(0, 2);
             if(RInteger.isInteger(code)){
                String name = RFile.name(fileName);
-               String findFileName = findFile(fileNames, "[" + code + "]", ".sc.ass");
+               String findFileName = findFile(fileNames, "[" + code + "]", "-tc.ass");
                if(!RString.isEmpty(findFileName)){
                   String findName = RFile.name(findFileName);
                   System.out.println(code + " - " + name + " : " + findName);
-                  RFile.rename(sourcePath + "/" + findName, sourcePath + "/" + RString.replace(name, ".mkv", ".sc.ass"));
+                  RFile.rename(sourcePath + "/" + findName, sourcePath + "/" + RString.replace(name, fileExt, ".tc.ass"));
                }
             }
          }

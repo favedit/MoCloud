@@ -188,21 +188,32 @@ public class FFrameService
                        FContentObject frameContent,
                        FContentObject datasetContent,
                        FXmlNode xrow){
+      // 获得逻辑控制器
       String name = datasetContent.get("name");
       String className = "org.mo.content.core." + name + ".I" + RString.firstUpper(RString.right(name, ".")) + "Console";
       IAbstractLogicUnitConsole<FLogicUnit> console = RAop.find(className);
-      FLogicUnit unit = console.doPrepare(logicContext);
-      for(IStringPair pair : xrow.attributes()){
-         String attributeName = pair.name();
-         String attributeValue = pair.value();
-         unit.set(attributeName, attributeValue);
+      // 获得状态
+      String statusCd = xrow.get("_status_cd");
+      if("I".equals(statusCd)){
+         // 新建处理
+         FLogicUnit unit = console.doPrepare(logicContext);
+         unit.loadAttributes(xrow.attributes());
+         console.doInsert(logicContext, unit);
+      }else if("U".equals(statusCd)){
+         // 更新处理
+         long ouid = xrow.getLong("ouid");
+         FLogicUnit unit = console.find(logicContext, ouid);
+         unit.loadAttributes(xrow.attributes());
+         console.doUpdate(logicContext, unit);
+      }else if("D".equals(statusCd)){
+         // 删除处理
+         long ouid = xrow.getLong("ouid");
+         FLogicUnit unit = console.find(logicContext, ouid);
+         unit.loadAttributes(xrow.attributes());
+         console.doDelete(logicContext, unit);
+      }else{
+         throw new FFatalError("Invalid data status. (status_cd={1})", statusCd);
       }
-      console.doInsert(logicContext, unit);
-      //      String statusCd = xrow.get("_status_cd", "I");
-      //      if("I".equals(statusCd)){
-      //      }else if("U".equals(statusCd)){
-      //      }else if("D".equals(statusCd)){
-      //      }
    }
 
    //============================================================
