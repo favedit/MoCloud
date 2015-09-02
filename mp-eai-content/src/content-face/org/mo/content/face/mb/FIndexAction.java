@@ -17,6 +17,7 @@ import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.role.IRoleModuleConsole;
 import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
+import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.console.service.info.ILogicServiceInfoConsole;
@@ -87,6 +88,7 @@ public class FIndexAction
    @Override
    public String construct(IWebContext context,
                            ILogicContext logicContext,
+                           FBasePage basePage,
                            FIndexPage page){
       // 清空参数
       page.setPassport(null);
@@ -116,7 +118,8 @@ public class FIndexAction
             //插入用户，权限绑定
             synchronizeData(logicContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
-            return "Main";
+            basePage.setUrl("Main.wa");
+            return "Success";
          }
       }
       // 非法设置
@@ -135,6 +138,7 @@ public class FIndexAction
    public String login(IWebContext context,
                        IWebSession sessionContext,
                        ILogicContext logicContext,
+                       FBasePage basePage,
                        FIndexPage page){
       // 获得参数
       String passport = RString.trimRight(page.passport());
@@ -221,7 +225,8 @@ public class FIndexAction
          }else{
             context.outputCookies().push(new FWebCookie("passport", null, 0));
          }
-         return "Main";
+         basePage.setUrl("Main.wa");
+         return "Success";
       }else{
          page.setMessage(message);
          return "Login";
@@ -240,12 +245,14 @@ public class FIndexAction
    public String loginOut(IWebContext context,
                           IWebSession sessionContext,
                           ILogicContext logicContext,
+                          FBasePage basePage,
                           FIndexPage page){
       _logger.debug(this, "Index", "Index login out.");
       // 清空参数
       FGcWebSession session = (FGcWebSession)sessionContext;
       _sessionConsole.close(session);
-      return "Login";
+      basePage.setUrl("Index.wa");
+      return "Success";
    }
 
    //============================================================

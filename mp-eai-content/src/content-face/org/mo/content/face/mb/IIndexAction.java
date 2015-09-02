@@ -1,5 +1,6 @@
 package org.mo.content.face.mb;
 
+import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.session.IWebSession;
@@ -22,6 +23,7 @@ public interface IIndexAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
+                    @AContainer(name = "basePage") FBasePage basePage,
                     @AContainer(name = "page") FIndexPage page);
 
    //============================================================
@@ -35,6 +37,7 @@ public interface IIndexAction
    String login(IWebContext context,
                 IWebSession sessionContext,
                 ILogicContext logicContext,
+                @AContainer(name = "basePage") FBasePage basePage,
                 @AContainer(name = "page", fill = true) FIndexPage page);
 
    //============================================================
@@ -47,5 +50,6 @@ public interface IIndexAction
    String loginOut(IWebContext context,
                    IWebSession sessionContext,
                    ILogicContext logicContext,
+                   @AContainer(name = "basePage") FBasePage basePage,
                    @AContainer(name = "page", fill = true) FIndexPage page);
 }

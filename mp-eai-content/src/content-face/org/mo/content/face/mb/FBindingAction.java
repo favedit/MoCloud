@@ -17,6 +17,7 @@ import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
+import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.console.financial.FFinancialMarketerInfo;
@@ -83,6 +84,7 @@ public class FBindingAction
    public String construct(IWebContext context,
                            IWebSession sessionContext,
                            ILogicContext logicContext,
+                           FBasePage basePage,
                            FBindingPage page){
       page.setMessage(null);
       FGcWebSession session = (FGcWebSession)sessionContext;
@@ -90,7 +92,8 @@ public class FBindingAction
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user == null){
          page.setIsLogin(false);
-         return "Main";
+         basePage.setUrl("Main.wa");
+         return "Success";
       }
       page.setPassport(user.label());
       return "Binding";
@@ -166,6 +169,7 @@ public class FBindingAction
    public String bindOnAccount(IWebContext context,
                                IWebSession sessionContext,
                                ILogicContext logicContext,
+                               FBasePage basePage,
                                FBindingPage page){
       page.setMessage(null);
       FGcWebSession session = (FGcWebSession)sessionContext;
@@ -180,7 +184,14 @@ public class FBindingAction
          page.setMessage("账号或验证码不能为空");
          return "Binding";
       }
-
+      if(epassport.length() > 30 || epassport.indexOf('%') > -1 || epassport.indexOf("'") > -1){
+         page.setMessage("E租宝账号或验证码非法");
+         return "Binding";
+      }
+      if(validate.length() > 4 || validate.indexOf('%') > -1 || validate.indexOf("'") > -1){
+         page.setMessage("E租宝账号或验证码非法");
+         return "Binding";
+      }
       // 验证是否发送过验证码
       FCacheSystemValidationUnit unit = _validationConsole.findByPassport(logicContext, epassport);
       if(unit == null){
@@ -210,7 +221,8 @@ public class FBindingAction
          _userConsole.doUpdate(logicContext, user);
       }
       page.setIsLogin(false);
-      return "Main";
+      basePage.setUrl("Main.wa");
+      return "Success";
    }
 
    //============================================================
