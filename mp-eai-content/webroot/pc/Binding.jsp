@@ -26,7 +26,7 @@
                <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a></div>
                   <div class="head-right">
                      <p class="user-details" id="user-details"><i></i>
-                        <jh:write source='&page.passport' />您好&nbsp;<img src="images/main/new8.png"></p>
+                        <jh:write source='&page.passport' />&nbsp;<img src="images/main/new8.png"></p>
                         <b></b>
                         <span class="img-details mr-20 pulse">
                               <img src='../mb/images/re.png'>

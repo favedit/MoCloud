@@ -21,6 +21,7 @@ public interface IIndexAction
    // @param page 页面
    //============================================================
    String construct(IWebContext context,
+                    IWebSession sessionContext,
                     ILogicContext logicContext,
                     @AContainer(name = "page") FIndexPage page);
 

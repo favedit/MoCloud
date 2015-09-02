@@ -86,11 +86,13 @@ public class FIndexAction
    //============================================================
    @Override
    public String construct(IWebContext context,
+                           IWebSession sessionContext,
                            ILogicContext logicContext,
                            FIndexPage page){
       // 清空参数
       page.setPassport(null);
       page.setMessage(null);
+      page.setUserType(null);
       _logger.debug(this, "Index", "Index default begin.");
       // 获得参数
       String hostAddress = context.head("x-real-ip");
@@ -114,7 +116,7 @@ public class FIndexAction
             page.setUserType("host");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             //插入用户，权限绑定
-            synchronizeData(logicContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             return "Main";
          }
@@ -156,7 +158,7 @@ public class FIndexAction
       switch(resultCd){
          case EGcAuthorityResult.Success:
             changePass = "white-user:" + passport;
-            synchronizeData(logicContext, page, changePass, passport, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, changePass, passport, EGcPersonUserFrom.EaiHost);
             logggerMessage = "登录成功。";
             break;
          case EGcAuthorityResult.PassportInvalid:
@@ -172,7 +174,7 @@ public class FIndexAction
             break;
          case EGcAuthorityResult.OaSuccess:
             changePass = "oa:" + passport;
-            synchronizeData(logicContext, page, changePass, passport, EGcPersonUserFrom.EaiOa);
+            synchronizeData(logicContext, sessionContext, page, changePass, passport, EGcPersonUserFrom.EaiOa);
             logggerMessage = "OA登录成功。";
             break;
          case EGcAuthorityResult.OaPasswordInvald:
@@ -255,23 +257,30 @@ public class FIndexAction
    // @param passport 账户
    //============================================================
    private void synchronizeData(ILogicContext logicContext,
+                                IWebSession sessionContext,
                                 FIndexPage page,
                                 String passport,
                                 String label,
                                 int from){
       _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
+      // 会话管理
+      FGcWebSession session = (FGcWebSession)sessionContext;
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
       if(user == null){
          //获取角色
          FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
          if(role != null){
             //同步OA用户
-            FDataPersonUserUnit unit = new FDataPersonUserUnit();
+            FDataPersonUserUnit unit = _userConsole.doPrepare(logicContext);
             unit.setLabel(label);
             unit.setPassport(passport);
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
+            //白名单 单独处理
+            if(page.userType() != null){
+               session.setUserId(unit.ouid());
+            }
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
             entryUnit.setOvld(true);
@@ -280,6 +289,13 @@ public class FIndexAction
             entryUnit.setFromCd(from);
             _entryConsole.doInsert(logicContext, entryUnit);
          }
+      }else{
+         //白名单 单独处理
+         if(page.userType() != null){
+            session.setUserId(user.ouid());
+         }
       }
+      // 打开会话
+      _sessionConsole.open(session);
    }
 }

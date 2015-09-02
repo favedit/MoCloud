@@ -31,7 +31,7 @@
             <TR>
                <TD height='100' colspan="2">
                   <INPUT id='id_do' name='do' type='hidden'>
-                  <div class="header floatBtn">
+                  <div class="header floatBtn" style="height:100px">
                      <div class="head-left">
                         <a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a>
                      </div>
