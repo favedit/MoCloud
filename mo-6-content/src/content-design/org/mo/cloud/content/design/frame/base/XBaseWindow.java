@@ -161,6 +161,14 @@ public abstract class XBaseWindow
    @AContentField
    public final static FContentField SCROLL_CD = new FContentField("scrollCd", "scroll_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 业务代码的定义
+   @AContentField
+   public final static FContentField BUSINESS_CODE = new FContentField("businessCode", "business_code", EContentData.String, "", "", "", "YYNY");
+
+   // 业务标签的定义
+   @AContentField
+   public final static FContentField BUSINESS_LABEL = new FContentField("businessLabel", "business_label", EContentData.String, "", "", "", "YYNY");
+
    // 逻辑分组的定义
    @AContentField
    public final static FContentField LOGIC_GROUP = new FContentField("logicGroup", "logic_group", EContentData.String, "", "", "", "YYNY");
@@ -342,6 +350,14 @@ public abstract class XBaseWindow
    // 滚动类型
    @AName("scroll_cd")
    protected String _scrollCd;
+
+   // 业务代码
+   @AName("business_code")
+   protected String _businessCode;
+
+   // 业务标签
+   @AName("business_label")
+   protected String _businessLabel;
 
    // 逻辑分组
    @AName("logic_group")
@@ -1009,6 +1025,42 @@ public abstract class XBaseWindow
    //============================================================
    public void setScrollCd(String value){
       _scrollCd = value;
+   }
+
+   //============================================================
+   // <T>获得业务代码的内容。</T>
+   //
+   // @return 业务代码
+   //============================================================
+   public String getBusinessCode(){
+      return _businessCode;
+   }
+
+   //============================================================
+   // <T>设置业务代码的内容。</T>
+   //
+   // @param value 业务代码
+   //============================================================
+   public void setBusinessCode(String value){
+      _businessCode = value;
+   }
+
+   //============================================================
+   // <T>获得业务标签的内容。</T>
+   //
+   // @return 业务标签
+   //============================================================
+   public String getBusinessLabel(){
+      return _businessLabel;
+   }
+
+   //============================================================
+   // <T>设置业务标签的内容。</T>
+   //
+   // @param value 业务标签
+   //============================================================
+   public void setBusinessLabel(String value){
+      _businessLabel = value;
    }
 
    //============================================================

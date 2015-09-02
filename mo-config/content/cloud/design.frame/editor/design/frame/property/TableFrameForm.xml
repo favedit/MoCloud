@@ -21,8 +21,9 @@
       <ToolButton _guid="477D82499B204B03B8CA3A0B9813BDC0" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/webform/WebForm.wa" attributes="sel_type=collection" />
   </ToolBar>
     <Template _guid="E103B70E21C84C9C976CE8293630F35F" name="datasetTemplate" frame_source="editor.design.frame.property.template.DatasetTemplate" />
-      <Panel name='barPanel' icon='design.panel.icon' label='停靠栏属性'>
-         <Edit name="dockCd" linker='_controlDockCd' label="停靠" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
+      <Panel name='barPanel' icon='design.panel.icon' label='页面容器属性'>
+         <Edit name="unitFrameName" label="页面名称" label_size='80,0' valid="Y" edit_size='400,0' data_name='unit_frame_name' note="" />
+         <Edit name="unitWhere" label="页面条件" label_size='80,0' valid="Y" edit_size='400,0' data_name='unit_where' note="" />
       </Panel>
    </FormFrame>
 </Content>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150902124219">
+  <List guid="7AF8B4C77E294B7A9A2916EDCAB3E3CF" name="editor.design.dataset.ComponentType" label="数据集-组件类型" is_valid="Y" note="">
+    <Item guid="A280B9F0CE63441782CE22F526005719" name="fieldRecordId" label="记录" is_valid="Y" note="" type="I" value="FieldRecordId" />
+    <Item guid="656AC338124D4114831E77044AC64E11" name="fieldBoolean" label="布尔值" is_valid="Y" note="" type="I" value="FieldBoolean" />
+    <Item guid="A0C3FD24E9034E50B0A7AE9A960662CB" name="fieldInteger" label="整数" is_valid="Y" note="" type="I" value="FieldInteger" />
+    <Item guid="301DD5B560CB4773BC72C61817ACF603" name="fieldLong" label="长整数" is_valid="Y" note="" type="I" value="FieldLong" />
+    <Item guid="AD01FB83E61B466AA97CF15D1675756C" name="fieldFloat" label="浮点数" is_valid="Y" note="" type="I" value="FieldFloat" />
+    <Item guid="9A4C7DCAB36348D1BD5D0B2889745D8B" name="fieldDouble" label="双精度" is_valid="Y" note="" type="I" value="FieldDouble" />
+    <Item guid="4AD53F5C8DC840208A7BB594B0D573DE" name="fieldDate" label="日期" is_valid="Y" note="" type="I" value="FieldDate" />
+    <Item guid="9FF0E4ACF84A4577804CD8965BF90057" name="fieldTimeSpan" label="时间段" is_valid="Y" note="" type="I" value="FieldTimeSpan" />
+    <Item guid="8D5A816B549240AD83BDC349BE038E0A" name="fieldTime" label="时间" is_valid="Y" note="" type="I" value="FieldTime" />
+    <Item guid="1B7A6BB073E644FDAECFDD73BE9535E9" name="fieldDateTime" label="日期时间" is_valid="Y" note="" type="I" value="FieldDateTime" />
+    <Item guid="BDFD71CD4C994154BE059ABE1FC526D9" name="fieldChar" label="字符" is_valid="Y" note="" type="I" value="FieldChar" />
+    <Item guid="9530FDE2CD28471CBE3AA339F682453D" name="fieldString" label="字符串" is_valid="Y" note="" type="I" value="FieldString" />
+    <Item guid="2DCDBAA9CD0647F3BDE208CAFE58D754" name="fieldContent" label="内容" is_valid="Y" note="" type="I" value="FieldContent" />
+    <Item guid="3319219826CF4A538ADADEB65632B520" name="fieldEnum" label="枚举" is_valid="Y" note="" type="I" value="FieldEnum" />
+    <Item guid="163FBE90961C4F4BA50C58F8798B95C9" name="fieldSet" label="集合" is_valid="Y" note="" type="I" value="FieldSet" />
+    <Item guid="1E11832AC1B44B48A054C5FBFCF4B07D" name="fieldTemplate" label="字段模板" is_valid="Y" note="" type="I" value="FieldTemplate" />
+  </List>
+</Content>

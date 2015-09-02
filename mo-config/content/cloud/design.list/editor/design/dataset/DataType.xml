@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150902124216">
+  <List guid="2D5A52A513184BF0B4B8CDEC42FAEB44" name="editor.design.dataset.DataType" label="数据集-数据类型" is_valid="Y" note="">
+    <Item guid="BD41B95FA34C4198B7BBB8686FB07F22" name="dataset" label="数据集合" is_valid="Y" note="" type="I" value="D" />
+    <Item guid="D2306A250C81407BBE303CDC6A48DA9A" name="property" label="属性集合" is_valid="Y" note="" type="I" value="P" />
+  </List>
+</Content>

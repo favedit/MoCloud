@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150902125352">
+  <DataStore guid="64C0E35A0D8A4918AE69ED37E98556FD" name="data.common.city" label="共通城市表" is_valid="Y" note="" data_engine="InnoDB" data_group="data" data_factory="Data.Common.City" data_name="DT_COM_CITY" data_alias="DT_COM_CTY" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+    <FieldRecordId guid="E23D3645C8C74BE883E1CB7B954AD188" name="country_id" label="国家编号" is_valid="Y" note="" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_refer="data.common.city" />
+    <FieldRecordId guid="9F22A5A9D37C4F038FF6AD018B0DAF60" name="area_id" label="地区编号" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="AREA_ID" data_alias="ARE" data_refer="data.common.area" />
+    <FieldRecordId guid="004EE2C0FB484BF48E8F0E2D2391593E" name="province_id" label="省份编号" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_ID" data_alias="PVN" data_refer="data.common.province" />
+    <FieldString guid="89259FFFFFFF44E09AC33E667C2E3F57" name="code" label="代码" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+    <FieldString guid="41B3534814BE46299975AB7D7F4CD8A9" name="label" label="真实名称" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+    <FieldString guid="E1CD07E7CD554096A60B7B926BA392A6" name="icon_url" label="图标地址" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+    <FieldInteger guid="4132FC37ABA149D3A110F727FCBA9DCA" name="display_order" label="排序值" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+    <FieldString guid="84B410586BA8471F9A2802DB5D8CE90C" name="note" label="备注" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+    <FieldTemplate guid="CEC0C35215F547D0B85BA1584F607F83" name="track" label="跟踪模板" is_valid="Y" note="" template_name="define.track" />
+  </DataStore>
+</Content>

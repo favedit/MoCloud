@@ -14,7 +14,7 @@
                         <SliderButton name='frameButton' linker='_controlFrameButton' icon='editor.design.frame|png' label='页面' fore_color='#FFFFFF'/>
                      </SliderGroup>
                      <SliderGroup name='databaseGroup' label='数据设计' fore_color='#FFFFFF'>
-                        <SliderButton name='datasetGroup' linker='_controlDatasetButton' label='数据集' fore_color='#FFFFFF'/>
+                        <SliderButton name='datasetButton' linker='_controlDatasetButton' icon='editor.design.frame|png' label='数据集' fore_color='#FFFFFF'/>
                      </SliderGroup>
                   </SliderMenu>
                </FramePage>

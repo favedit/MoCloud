@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150902104803">
+<Content name="design.frame" update_date="20150902125759">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IComponent" label="组件接口" class_name="org.mo.cloud.content.design.frame.common.XComponent" inherits="" note="">
       <Attribute is_valid="Y" type="Boolean" name="valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
@@ -50,12 +50,13 @@
       <Attribute is_valid="Y" type="String" name="logic_service" label="逻辑服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="IColumn" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" inherits="IControl" note="" />
-    <Interface is_valid="Y" name="IFrame" label="页面接口" class_name="" inherits="IContainer" note="">
+    <Interface is_valid="Y" name="IFrame" label="页面接口" class_name="org.mo.cloud.content.design.frame.common.XFrame" inherits="IContainer" note="">
       <Attribute is_valid="Y" type="String" name="business_code" label="业务代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="business_label" label="业务标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
-    <Interface is_valid="Y" name="IFrameContainer" label="页面容器接口" class_name="" inherits="IFrame" note="">
-      <Attribute is_valid="Y" type="String" name="item_frame_name" label="项目页面名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    <Interface is_valid="Y" name="IFrameContainer" label="页面容器接口" class_name="org.mo.cloud.content.design.frame.common.XFrameContainer" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="unit_frame_name" label="项目页面名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="unit_where" label="单元条件" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="MDataField" label="数据字段" class_name="org.mo.cloud.content.design.frame.common.XDataField" inherits="" note="">
       <Attribute is_valid="Y" type="Boolean" name="data_require" label="数据必须" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
@@ -281,14 +282,14 @@
       <Attribute is_valid="Y" type="String" name="action" label="命令" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="DataAction" label="数据命令" class_name="org.mo.cloud.content.design.frame.common.XDataAction" base_name="org.mo.cloud.content.design.frame.base.XBaseDataAction" inherits="Action" note="" />
-    <Component is_valid="Y" name="Frame" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFrame" inherits="IContainer,IService" note="">
+    <Component is_valid="Y" name="Frame" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFrame" inherits="IFrame,IService" note="">
       <Attribute is_valid="Y" type="String" name="inherit_frames" label="继承页面集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="TemplateFrame" label="模板页面" class_name="org.mo.cloud.content.design.frame.common.XTemplateFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTemplateFrame" inherits="Frame" note="" />
-    <Component is_valid="Y" name="FormFrame" label="表单页面" class_name="org.mo.cloud.content.design.frame.common.XFormFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFormFrame" inherits="Frame" note="" />
-    <Component is_valid="Y" name="TableFrame" label="表格页面" class_name="org.mo.cloud.content.design.frame.common.XTableFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTableFrame" inherits="Frame" note="" />
+    <Component is_valid="Y" name="FormFrame" label="表单页面" class_name="org.mo.cloud.content.design.frame.common.XFormFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFormFrame" inherits="Frame,MDataset,IFrameContainer" note="" />
+    <Component is_valid="Y" name="TableFrame" label="表格页面" class_name="org.mo.cloud.content.design.frame.common.XTableFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTableFrame" inherits="Frame,MDataset,IFrameContainer" note="" />
     <Component is_valid="Y" name="PickerFrame" label="拾取页面" class_name="org.mo.cloud.content.design.frame.common.XPickerFrame" base_name="org.mo.cloud.content.design.frame.base.XBasePickerFrame" inherits="Frame" note="" />
     <Component is_valid="Y" name="DialogFrame" label="对话页面" class_name="org.mo.cloud.content.design.frame.common.XDialogFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseDialogFrame" inherits="Frame" note="" />
+    <Component is_valid="Y" name="TemplateFrame" label="模板页面" class_name="org.mo.cloud.content.design.frame.common.XTemplateFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTemplateFrame" inherits="Frame" note="" />
     <Component is_valid="Y" name="Bar" label="停靠栏" class_name="org.mo.cloud.content.design.frame.common.XBar" base_name="org.mo.cloud.content.design.frame.base.XBaseBar" inherits="Frame" note="" />
     <Component is_valid="Y" name="Window" label="窗口" class_name="org.mo.cloud.content.design.frame.common.XWindow" base_name="org.mo.cloud.content.design.frame.base.XBaseWindow" inherits="Frame" note="" />
     <Component is_valid="Y" name="FramePage" label="页面" class_name="org.mo.cloud.content.design.frame.common.XFramePage" base_name="org.mo.cloud.content.design.frame.base.XBaseFramePage" inherits="IContainer" note="" />

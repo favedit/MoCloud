@@ -161,6 +161,14 @@ public abstract class XBaseFormFrame
    @AContentField
    public final static FContentField SCROLL_CD = new FContentField("scrollCd", "scroll_cd", EContentData.String, "", "", "", "YYNY");
 
+   // 业务代码的定义
+   @AContentField
+   public final static FContentField BUSINESS_CODE = new FContentField("businessCode", "business_code", EContentData.String, "", "", "", "YYNY");
+
+   // 业务标签的定义
+   @AContentField
+   public final static FContentField BUSINESS_LABEL = new FContentField("businessLabel", "business_label", EContentData.String, "", "", "", "YYNY");
+
    // 逻辑分组的定义
    @AContentField
    public final static FContentField LOGIC_GROUP = new FContentField("logicGroup", "logic_group", EContentData.String, "", "", "", "YYNY");
@@ -180,6 +188,46 @@ public abstract class XBaseFormFrame
    // 继承页面集合的定义
    @AContentField
    public final static FContentField INHERIT_FRAMES = new FContentField("inheritFrames", "inherit_frames", EContentData.String, "", "", "", "YYNY");
+
+   // 数据名称的定义
+   @AContentField
+   public final static FContentField DATASET_NAME = new FContentField("datasetName", "dataset_name", EContentData.String, "", "", "", "YYNY");
+
+   // 数据分页大小的定义
+   @AContentField
+   public final static FContentField DATASET_PAGE_SIZE = new FContentField("datasetPageSize", "dataset_page_size", EContentData.String, "", "", "", "YYNY");
+
+   // 数据搜索的定义
+   @AContentField
+   public final static FContentField DATASET_SEARCH = new FContentField("datasetSearch", "dataset_search", EContentData.String, "", "", "", "YYNY");
+
+   // 数据排序的定义
+   @AContentField
+   public final static FContentField DATASET_ORDER = new FContentField("datasetOrder", "dataset_order", EContentData.String, "", "", "", "YYNY");
+
+   // 数据查询指令的定义
+   @AContentField
+   public final static FContentField DATASET_FETCH_COMMAND = new FContentField("datasetFetchCommand", "dataset_fetch_command", EContentData.String, "", "", "", "YYNY");
+
+   // 数据新建命令的定义
+   @AContentField
+   public final static FContentField DATASET_INSERT_ACTION = new FContentField("datasetInsertAction", "dataset_insert_action", EContentData.String, "", "", "", "YYNY");
+
+   // 数据更新命令的定义
+   @AContentField
+   public final static FContentField DATASET_UPDATE_ACTION = new FContentField("datasetUpdateAction", "dataset_update_action", EContentData.String, "", "", "", "YYNY");
+
+   // 数据删除命令的定义
+   @AContentField
+   public final static FContentField DATASET_DELETE_ACTION = new FContentField("datasetDeleteAction", "dataset_delete_action", EContentData.String, "", "", "", "YYNY");
+
+   // 项目页面名称的定义
+   @AContentField
+   public final static FContentField UNIT_FRAME_NAME = new FContentField("unitFrameName", "unit_frame_name", EContentData.String, "", "", "", "YYNY");
+
+   // 单元条件的定义
+   @AContentField
+   public final static FContentField UNIT_WHERE = new FContentField("unitWhere", "unit_where", EContentData.String, "", "", "", "YYNY");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -343,6 +391,14 @@ public abstract class XBaseFormFrame
    @AName("scroll_cd")
    protected String _scrollCd;
 
+   // 业务代码
+   @AName("business_code")
+   protected String _businessCode;
+
+   // 业务标签
+   @AName("business_label")
+   protected String _businessLabel;
+
    // 逻辑分组
    @AName("logic_group")
    protected String _logicGroup;
@@ -362,6 +418,46 @@ public abstract class XBaseFormFrame
    // 继承页面集合
    @AName("inherit_frames")
    protected String _inheritFrames;
+
+   // 数据名称
+   @AName("dataset_name")
+   protected String _datasetName;
+
+   // 数据分页大小
+   @AName("dataset_page_size")
+   protected String _datasetPageSize;
+
+   // 数据搜索
+   @AName("dataset_search")
+   protected String _datasetSearch;
+
+   // 数据排序
+   @AName("dataset_order")
+   protected String _datasetOrder;
+
+   // 数据查询指令
+   @AName("dataset_fetch_command")
+   protected String _datasetFetchCommand;
+
+   // 数据新建命令
+   @AName("dataset_insert_action")
+   protected String _datasetInsertAction;
+
+   // 数据更新命令
+   @AName("dataset_update_action")
+   protected String _datasetUpdateAction;
+
+   // 数据删除命令
+   @AName("dataset_delete_action")
+   protected String _datasetDeleteAction;
+
+   // 项目页面名称
+   @AName("unit_frame_name")
+   protected String _unitFrameName;
+
+   // 单元条件
+   @AName("unit_where")
+   protected String _unitWhere;
 
    //============================================================
    // <T>获得有效性的内容。</T>
@@ -1012,6 +1108,42 @@ public abstract class XBaseFormFrame
    }
 
    //============================================================
+   // <T>获得业务代码的内容。</T>
+   //
+   // @return 业务代码
+   //============================================================
+   public String getBusinessCode(){
+      return _businessCode;
+   }
+
+   //============================================================
+   // <T>设置业务代码的内容。</T>
+   //
+   // @param value 业务代码
+   //============================================================
+   public void setBusinessCode(String value){
+      _businessCode = value;
+   }
+
+   //============================================================
+   // <T>获得业务标签的内容。</T>
+   //
+   // @return 业务标签
+   //============================================================
+   public String getBusinessLabel(){
+      return _businessLabel;
+   }
+
+   //============================================================
+   // <T>设置业务标签的内容。</T>
+   //
+   // @param value 业务标签
+   //============================================================
+   public void setBusinessLabel(String value){
+      _businessLabel = value;
+   }
+
+   //============================================================
    // <T>获得逻辑分组的内容。</T>
    //
    // @return 逻辑分组
@@ -1099,6 +1231,186 @@ public abstract class XBaseFormFrame
    //============================================================
    public void setInheritFrames(String value){
       _inheritFrames = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDatasetName(){
+      return _datasetName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDatasetName(String value){
+      _datasetName = value;
+   }
+
+   //============================================================
+   // <T>获得数据分页大小的内容。</T>
+   //
+   // @return 数据分页大小
+   //============================================================
+   public String getDatasetPageSize(){
+      return _datasetPageSize;
+   }
+
+   //============================================================
+   // <T>设置数据分页大小的内容。</T>
+   //
+   // @param value 数据分页大小
+   //============================================================
+   public void setDatasetPageSize(String value){
+      _datasetPageSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据搜索的内容。</T>
+   //
+   // @return 数据搜索
+   //============================================================
+   public String getDatasetSearch(){
+      return _datasetSearch;
+   }
+
+   //============================================================
+   // <T>设置数据搜索的内容。</T>
+   //
+   // @param value 数据搜索
+   //============================================================
+   public void setDatasetSearch(String value){
+      _datasetSearch = value;
+   }
+
+   //============================================================
+   // <T>获得数据排序的内容。</T>
+   //
+   // @return 数据排序
+   //============================================================
+   public String getDatasetOrder(){
+      return _datasetOrder;
+   }
+
+   //============================================================
+   // <T>设置数据排序的内容。</T>
+   //
+   // @param value 数据排序
+   //============================================================
+   public void setDatasetOrder(String value){
+      _datasetOrder = value;
+   }
+
+   //============================================================
+   // <T>获得数据查询指令的内容。</T>
+   //
+   // @return 数据查询指令
+   //============================================================
+   public String getDatasetFetchCommand(){
+      return _datasetFetchCommand;
+   }
+
+   //============================================================
+   // <T>设置数据查询指令的内容。</T>
+   //
+   // @param value 数据查询指令
+   //============================================================
+   public void setDatasetFetchCommand(String value){
+      _datasetFetchCommand = value;
+   }
+
+   //============================================================
+   // <T>获得数据新建命令的内容。</T>
+   //
+   // @return 数据新建命令
+   //============================================================
+   public String getDatasetInsertAction(){
+      return _datasetInsertAction;
+   }
+
+   //============================================================
+   // <T>设置数据新建命令的内容。</T>
+   //
+   // @param value 数据新建命令
+   //============================================================
+   public void setDatasetInsertAction(String value){
+      _datasetInsertAction = value;
+   }
+
+   //============================================================
+   // <T>获得数据更新命令的内容。</T>
+   //
+   // @return 数据更新命令
+   //============================================================
+   public String getDatasetUpdateAction(){
+      return _datasetUpdateAction;
+   }
+
+   //============================================================
+   // <T>设置数据更新命令的内容。</T>
+   //
+   // @param value 数据更新命令
+   //============================================================
+   public void setDatasetUpdateAction(String value){
+      _datasetUpdateAction = value;
+   }
+
+   //============================================================
+   // <T>获得数据删除命令的内容。</T>
+   //
+   // @return 数据删除命令
+   //============================================================
+   public String getDatasetDeleteAction(){
+      return _datasetDeleteAction;
+   }
+
+   //============================================================
+   // <T>设置数据删除命令的内容。</T>
+   //
+   // @param value 数据删除命令
+   //============================================================
+   public void setDatasetDeleteAction(String value){
+      _datasetDeleteAction = value;
+   }
+
+   //============================================================
+   // <T>获得项目页面名称的内容。</T>
+   //
+   // @return 项目页面名称
+   //============================================================
+   public String getUnitFrameName(){
+      return _unitFrameName;
+   }
+
+   //============================================================
+   // <T>设置项目页面名称的内容。</T>
+   //
+   // @param value 项目页面名称
+   //============================================================
+   public void setUnitFrameName(String value){
+      _unitFrameName = value;
+   }
+
+   //============================================================
+   // <T>获得单元条件的内容。</T>
+   //
+   // @return 单元条件
+   //============================================================
+   public String getUnitWhere(){
+      return _unitWhere;
+   }
+
+   //============================================================
+   // <T>设置单元条件的内容。</T>
+   //
+   // @param value 单元条件
+   //============================================================
+   public void setUnitWhere(String value){
+      _unitWhere = value;
    }
 
 }

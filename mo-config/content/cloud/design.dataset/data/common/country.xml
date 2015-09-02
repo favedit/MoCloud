@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150902125354">
+  <DataStore guid="CE99F8E3E3724CD5BD2B1836B066415B" name="data.common.country" label="共通国家表" is_valid="Y" note="" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Country" data_name="DT_COM_COUNTRY" data_alias="DT_COM_CTY" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+    <FieldString guid="6CEFF0D3B1B74B498E5A260EB1A1A65D" name="code" label="代码" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="8" />
+    <FieldString guid="FD03E91BE0764D80862DA3C3DC9B9A76" name="name" label="名称" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="20" />
+    <FieldString guid="05491D7657E84EF4AB692819EF96CAEF" name="label" label="标签" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+    <FieldString guid="1C170117D3E14142B31EEFA66E2CDD6F" name="phone_code" label="描述" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CODE" data_size="8" />
+    <FieldString guid="6191BD1EEC1D4784954E78A1A5E8C9E5" name="icon_url" label="图标地址" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+    <FieldInteger guid="B1B0B51D73E744D99F38BBCDF5056526" name="display_code" label="排序值" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CODE" />
+    <FieldString guid="DC783A09B0854B87801A0909F6D2B993" name="note" label="备注" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+    <FieldTemplate guid="990E0672250A4B75BA673EFB7FA93762" name="track" label="跟踪模板" is_valid="Y" note="" template_name="define.track" />
+  </DataStore>
+</Content>

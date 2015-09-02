@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150902124217">
+  <List guid="BA191CA5E6F54236B0C12AF8893A4B62" name="editor.design.dataset.DatasetType" label="数据集-数据集类型" is_valid="Y" note="">
+    <Item guid="16829677B0084CCB86454629B087FE87" name="dataStore" label="数据存储" is_valid="Y" note="" type="I" value="DataStore" />
+    <Item guid="3E925C1CBFB647CC9877DB01345AB425" name="dataWork" label="工作数据" is_valid="Y" note="" type="I" value="DataWork" />
+    <Item guid="9DF5C46F58F048A58F508E0DCAFCECD0" name="dataProperty" label="属性视图" is_valid="Y" note="" type="I" value="DataProperty" />
+    <Item guid="38A4EA4E8F4A42BAA120CCA2601B3867" name="dataCache" label="数据缓冲" is_valid="Y" note="" type="I" value="DataCache" />
+    <Item guid="7BE2A1C9F3AB48358147A7EBF547BDB3" name="dataView" label="数据视图" is_valid="Y" note="" type="I" value="DataView" />
+    <Item guid="05D68C3C44234C1B985193FF9448C538" name="dataTemplate" label="数据模板" is_valid="Y" note="" type="I" value="DataTemplate" />
+    <Item guid="9755A5E290FE49CEAEB363036DE98328" name="dataHistory" label="数据历史" is_valid="Y" note="" type="I" value="DataHistory" />
+  </List>
+</Content>

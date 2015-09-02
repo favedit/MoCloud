@@ -69,4 +69,18 @@
       <Property name='persistence_name'>design.frame</Property>
    </Component>
 
+   <!-- ==================================================== -->
+   <!-- DatasetConsole: 数据集控制台                         -->
+   <!--  P:space_name - 空间名称                             -->
+   <!--  P:path_name - 保存路径                              -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.content.design.dataset.IDatasetConsole'
+         class = 'org.mo.cloud.content.design.dataset.FDatasetConsole'
+         scope = 'global'>
+      <Property name='space_name'>design.dataset</Property>
+      <Property name='path_name'>design.dataset</Property>
+      <Property name='persistence_name'>design.dataset</Property>
+   </Component>
+
 </Config>

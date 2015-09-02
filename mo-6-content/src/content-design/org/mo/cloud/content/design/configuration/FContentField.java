@@ -81,13 +81,11 @@ public class FContentField
          throw new FFatalError("Group data is valid. (data_group={1}, data_code={2})", _dataGroup, _dataCode);
       }
       // 设置标志
-      if(flags.length() != 4){
-         throw new FFatalError("Invalid flag. (flags={1})", flags);
-      }
-      _isStore = RBoolean.parse(flags.charAt(0));
-      _isConfig = RBoolean.parse(flags.charAt(1));
-      _isAbstract = RBoolean.parse(flags.charAt(2));
-      _isDefault = RBoolean.parse(flags.charAt(3));
+      String flagChars = RString.rightPad(flags, 4, ' ');
+      _isStore = RBoolean.parse(flagChars.charAt(0));
+      _isConfig = RBoolean.parse(flagChars.charAt(1));
+      _isAbstract = RBoolean.parse(flagChars.charAt(2));
+      _isDefault = RBoolean.parse(flagChars.charAt(3));
    }
 
    //============================================================

@@ -1,17 +1,22 @@
 package org.mo.cloud.editor.design.dataset;
 
-import org.mo.cloud.content.design.list.IListConsole;
-import org.mo.cloud.content.design.list.common.XList;
-import org.mo.com.xml.FXmlNode;
+import org.mo.cloud.content.design.common.IContentConsole;
+import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.XContentObject;
+import org.mo.cloud.content.design.dataset.IDatasetConsole;
+import org.mo.cloud.content.design.persistence.EPersistenceMode;
+import org.mo.cloud.editor.design.common.FAbstractDesignService;
+import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>内容表单服务。</T>
+// <T>数据集服务。</T>
 //============================================================
 public class FDatasetService
+      extends FAbstractDesignService
       implements
          IDatasetService
 {
@@ -20,84 +25,69 @@ public class FDatasetService
 
    // 内容列表控制台接口
    @ALink
-   protected IListConsole _listConsole;
+   protected IDatasetConsole _datasetConsole;
 
    //============================================================
-   // <T>构造内容表单服务。</T>
+   // <T>构造数据集服务。</T>
    //============================================================
    public FDatasetService(){
-      //_storageName = "cloud";
-      //_spaceName = "design.form";
    }
 
    //============================================================
-   // <T>从配置文件中加载树目录节点。</T>
+   // <T>获得内容管理器。</T>
    //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
+   // @return 内容管理器
    //============================================================
    @Override
-   public void list(IWebContext context,
-                    IWebInput input,
-                    IWebOutput output){
-      XList[] xlists = _listConsole.list(_storageName);
-      FXmlNode xconfig = output.config();
-      for(XList xlist : xlists){
-         FXmlNode xnode = xconfig.createNode("Node");
-         xnode.set("name", xlist.getName());
-      }
+   protected IContentConsole contentConsole(){
+      return _datasetConsole;
    }
 
    //============================================================
-   // <T>查询配置处理。</T>
+   // <T>获得内容列表处理。</T>
    //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
+   // @return 内容列表
    //============================================================
    @Override
-   public void query(IWebContext context,
-                     IWebInput input,
-                     IWebOutput output){
+   protected XContentObject[] contentList(){
+      return _datasetConsole.list(_storageName);
    }
 
    //============================================================
-   // <T>新建配置处理。</T>
+   // <T>查找配置定义处理。</T>
    //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
+   // @param containerName 容器名称
+   // @param modeCd 持久化模式
+   // @return 内容对象
    //============================================================
    @Override
-   public void insert(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   protected FContentObject contentFindDefine(String containerName,
+                                              EPersistenceMode modeCd){
+      return _datasetConsole.findDefine(_storageName, containerName, modeCd);
    }
 
    //============================================================
    // <T>更新配置处理。</T>
    //
-   // @param context 网络环境
-   // @param input 网络输入
-   // @param output 网络输出
+   // @param content 内容
    //============================================================
    @Override
-   public void update(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   protected void contentUpdate(FContentObject content){
+      _datasetConsole.update(_storageName, content);
    }
 
    //============================================================
-   // <T>删除配置处理。</T>
+   // <T>获得目录处理。</T>
    //
    // @param context 网络环境
    // @param input 网络输入
    // @param output 网络输出
+   // @return 处理结果
    //============================================================
    @Override
-   public void delete(IWebContext context,
-                      IWebInput input,
-                      IWebOutput output){
+   public EResult catalog(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
+      return catalogPackage(context, input, output);
    }
 }

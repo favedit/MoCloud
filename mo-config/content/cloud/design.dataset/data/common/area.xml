@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150902125349">
+  <DataStore guid="DC7F65AEC9284F2D88227D2839C30916" name="data.common.area" label="共通地区表" is_valid="Y" note="" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Area" data_name="DT_COM_AREA" data_alias="DT_COM_AREA" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+    <FieldRecordId guid="4C4365C12D514A1C8858DB13EC5C816A" name="country_id" label="国家编号" is_valid="Y" note="" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_size="40" data_refer="data.common.country" />
+    <FieldString guid="2D52758839954DDBB86E7DB6F3DF74A6" name="code" label="代码" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="20" />
+    <FieldString guid="431EDDC2C3984F2DA213DE894C5A5633" name="label" label="真实名称" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+    <FieldString guid="36838A188A1249559458D5E9649C46FF" name="icon_url" label="图标地址" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+    <FieldInteger guid="91B21B0B0B6C431684FF75A1039E0DA9" name="display_order" label="排序值" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+    <FieldString guid="20C69AEC3FEB4258BCC40249DD84417F" name="note" label="备注" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+    <FieldTemplate guid="49952FCE988A4BF1B1227749A1524CB0" name="track" label="跟踪模板" is_valid="Y" note="" template_name="define.track" />
+  </DataStore>
+</Content>
