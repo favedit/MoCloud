@@ -3,9 +3,9 @@
    <html>
    <head>
       <title></title>
-      <meta charset="UTF-8" />
-      <meta name="baidu-site-verification" content="r49gUEsySi" />
-      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta http-equiv="X-UA-Compatible" IE="EmulateIE7" content="IE=edge" />
+      <meta content="always" name="referrer">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <link rel="stylesheet" type="text/css" href="css/binding.css">
