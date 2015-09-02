@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>字符串字段对象的内容基类。</T>
+// <T>内容字段属性对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseFieldString
+public abstract class XBaseFieldContentProperty
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "FieldString";
+   public static final String CONTENT_NAME = "FieldContentProperty";
 
    // 名称的定义
    @AContentField
@@ -132,6 +132,10 @@ public abstract class XBaseFieldString
    // 索引名称的定义
    @AContentField
    public final static FContentField INDEX_NAMES = new FContentField("indexNames", "index_names", EContentData.String, "", "", "", "YYY");
+
+   // 属性代码号的定义
+   @AContentField
+   public final static FContentField PROPERTY_ID = new FContentField("propertyId", "property_id", EContentData.String, "", "", "", "YYN");
 
    //============================================================
    // <T>判断是否指定实例。</T>
@@ -266,6 +270,10 @@ public abstract class XBaseFieldString
    // 索引名称
    @AName("index_names")
    protected String _indexNames;
+
+   // 属性代码号
+   @AName("property_id")
+   protected String _propertyId;
 
    //============================================================
    // <T>获得名称的内容。</T>
@@ -787,6 +795,24 @@ public abstract class XBaseFieldString
    //============================================================
    public void setIndexNames(String value){
       _indexNames = value;
+   }
+
+   //============================================================
+   // <T>获得属性代码号的内容。</T>
+   //
+   // @return 属性代码号
+   //============================================================
+   public String getPropertyId(){
+      return _propertyId;
+   }
+
+   //============================================================
+   // <T>设置属性代码号的内容。</T>
+   //
+   // @param value 属性代码号
+   //============================================================
+   public void setPropertyId(String value){
+      _propertyId = value;
    }
 
 }

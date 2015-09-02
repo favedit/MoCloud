@@ -96,7 +96,7 @@ public class FContentPersistenceConsole
                                   FContentObjects xattributes){
       // 分解继承的接口或类
       String name = xcomponent.get("name");
-      String inherits = xcomponent.get("inherits");
+      String inherits = xcomponent.get("inherits", null);
       if(!RString.isEmpty(inherits)){
          String[] inheritItems = RString.trimNoEmpty(RString.split(inherits, ','));
          for(String inherit : inheritItems){
@@ -140,7 +140,7 @@ public class FContentPersistenceConsole
       }
       // 分解继承关系
       FXmlNodes importNodes = new FXmlNodes();
-      String inherits = xcomponent.get("inherits");
+      String inherits = xcomponent.get("inherits", null);
       if(!RString.isEmpty(inherits)){
          for(String inherit : RString.split(inherits, ',')){
             if(!RString.isEmpty(inherit)){

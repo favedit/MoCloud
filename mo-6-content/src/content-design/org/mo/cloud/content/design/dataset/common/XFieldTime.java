@@ -1,11 +1,11 @@
 package org.mo.cloud.content.design.dataset.common;
 
-import org.mo.cloud.content.design.dataset.base.XBaseDataset;
+import org.mo.cloud.content.design.dataset.base.XBaseFieldTime;
 
 //============================================================
-// <T>数据集合。</T>
+// <T>时间字段。</T>
 //============================================================
-public class XDataset
-      extends XBaseDataset
+public class XFieldTime
+      extends XBaseFieldTime
 {
 }

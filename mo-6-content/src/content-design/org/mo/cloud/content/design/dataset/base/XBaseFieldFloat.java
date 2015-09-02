@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>字符串字段对象的内容基类。</T>
+// <T>浮点数字段对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseFieldString
+public abstract class XBaseFieldFloat
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "FieldString";
+   public static final String CONTENT_NAME = "FieldFloat";
 
    // 名称的定义
    @AContentField
