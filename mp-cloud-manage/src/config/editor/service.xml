@@ -26,4 +26,16 @@
          class = 'org.mo.content.service.solution.FProjectService'
          scope = 'global'/>
 
+   <!-- ==================================================== -->
+   <!-- 页面数据处理                                         -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.logic.frame'
+         face  = 'org.mo.content.service.logic.frame.IFrameService'/>
+
+   <Component
+         face  = 'org.mo.content.service.logic.frame.IFrameService'
+         class = 'org.mo.content.service.logic.frame.FFrameService'
+         scope = 'global'/>
+
 </Config>
