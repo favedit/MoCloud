@@ -20,6 +20,7 @@ body{
   width: 100%;
   height: 100%;
 }
+
 .clear{ clear:both} 
 .pl-10{
 	padding-left: 10px;
@@ -42,10 +43,12 @@ body{
 .mt-10{
 	 margin-top: 10px;
 }
+#header{
+	height: 100px;
+}
 .header{
 	background: url(../images/main/bor.png) no-repeat center bottom;
 	overflow: hidden;
-	/*background-size: 100%;/*/
 }
 .head-left{
 	float:left;
@@ -187,7 +190,7 @@ body{
 	right: 75px;
 	cursor:pointer;
 	z-index: 2;
-	top:100px;
+	top:85px;
 	width: 104px;
 }
 .return{
@@ -363,6 +366,9 @@ body{
 	padding-right: 10px;
 }
 @media all and (max-width: 1400px) {
+	#header{
+		height: 75px;
+	}
 	.logo {
 	  padding-left: 15px;
 	  left: -4px;
@@ -370,7 +376,7 @@ body{
 	  width: 362px;
 	}
 	.users{
-		top:76px;
+		top:55px;
 	}
 	.user-details{
 		height: 70px;
@@ -397,6 +403,7 @@ body{
 	display: inline-block;
 	top: 7px;
 	right: 10px;
+
 	}
 }
 

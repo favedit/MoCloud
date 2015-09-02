@@ -21,7 +21,7 @@
      <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
       <tbody>
       <tr id="heads">
-         <td height="100">
+         <td id="header">
             <div class="header floatBtn">
                <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a></div>
                   <div class="head-right">

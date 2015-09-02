@@ -29,9 +29,9 @@
          </jh:equals>
          <TABLE style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
             <TR>
-               <TD height='100' colspan="2">
+               <TD id="header" height='100' colspan="2">
                   <INPUT id='id_do' name='do' type='hidden'>
-                  <div class="header floatBtn" style="height:100px">
+                  <div class="header floatBtn" >
                      <div class="head-left">
                         <a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a>
                      </div>
