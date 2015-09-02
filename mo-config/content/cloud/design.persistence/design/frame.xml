@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150826152514">
+<Content name="design.frame" update_date="20150902104803">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IComponent" label="组件接口" class_name="org.mo.cloud.content.design.frame.common.XComponent" inherits="" note="">
       <Attribute is_valid="Y" type="Boolean" name="valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
@@ -50,6 +50,13 @@
       <Attribute is_valid="Y" type="String" name="logic_service" label="逻辑服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="IColumn" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" inherits="IControl" note="" />
+    <Interface is_valid="Y" name="IFrame" label="页面接口" class_name="" inherits="IContainer" note="">
+      <Attribute is_valid="Y" type="String" name="business_code" label="业务代码" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="business_label" label="业务标签" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Interface>
+    <Interface is_valid="Y" name="IFrameContainer" label="页面容器接口" class_name="" inherits="IFrame" note="">
+      <Attribute is_valid="Y" type="String" name="item_frame_name" label="项目页面名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Interface>
     <Interface is_valid="Y" name="MDataField" label="数据字段" class_name="org.mo.cloud.content.design.frame.common.XDataField" inherits="" note="">
       <Attribute is_valid="Y" type="Boolean" name="data_require" label="数据必须" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />

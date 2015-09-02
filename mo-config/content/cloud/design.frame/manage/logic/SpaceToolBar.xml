@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <ToolBar name="system.design.frame.CatalogToolBar" label="目录工具栏">
+      <ToolButton name='insertButton' linker='_controlInsert' icon='manage.common.insert' label='新建'/>
+      <ToolButton name='updateButton' linker='_controlUpdate' icon='manage.common.save' label='保存'/>
+      <ToolButton name='deleteButton' linker='_controlDelete' icon='manage.common.delete' label='删除'/>
+      <ToolButtonSplit/>
+      <ToolButton name='searchButton' linker='_controlSearch' icon='manage.common.search' label='搜索'/>
+   </ToolBar>
+</Content>

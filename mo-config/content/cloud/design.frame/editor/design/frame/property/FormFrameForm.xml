@@ -31,6 +31,7 @@
       <ToolButtonSplit _guid="9FFD3B7CA4224F2392D6070514C56881" name="split4Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" />
       <ToolButton _guid="477D82499B204B03B8CA3A0B9813BDC0" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/webform/WebForm.wa" attributes="sel_type=collection" />
     </ToolBar>
+    <Template _guid="E103B70E21C84C9C976CE8293630F35F" name="datasetTemplate" frame_source="editor.design.frame.property.template.DatasetTemplate" />
     <Panel _guid="2CA87F0C437148B2ABA52A61699DC462" name="barPanel" icon="design.panel.icon" label="停靠栏属性">
       <Edit _guid="75245A0076D44A5DA7855B7EB7B41203" name="dockCd" linker="_controlDockCd" label="停靠" label_size="70,0" valid="Y" edit_size="200,0" input_size="200,0" note="" />
     </Panel>

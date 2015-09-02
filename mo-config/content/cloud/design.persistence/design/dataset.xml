@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.dataset" update_date="20150902095658">
+<Content name="design.dataset" update_date="20150902103350">
   <Persistence _uuid2="lUFHlSFaFAgD22CPbRzTuw" name="cloud.editor.dataset" label="数据集信息" is_valid="Y" note="" template="xmlobject" source="${output.design}/src/content-design">
-    <Interface _uuid2="EUsC8pyj1s4aSxTr]cNipg" name="IObject" label="对象" is_valid="Y" note="オブジェクト" class_name="org.mo.cloud.content.design.dataset.common.XObjectFace">
+    <Interface _uuid2="EUsC8pyj1s4aSxTr]cNipg" name="IObject" label="对象" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XObjectFace" inherits="">
       <Attribute _uuid2="MEhdZTCCyYfx87n]60zsmQ" name="name" label="名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
       <Attribute _uuid2="QkKVATvlJL1B4RlBT56blg" name="alias" label="简称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
       <Attribute _uuid2="IUcxcfdLaQO[QXtyKdIojA" name="label" label="标签" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_abstract="N" is_default="N" data_group="" data_code="" data_default="" />
