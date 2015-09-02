@@ -18,6 +18,17 @@ public class FBindingPage
    //是否登录
    protected boolean _isLogin;
 
+   //用户类型
+   protected String _userType;
+
+   public String userType(){
+      return _userType;
+   }
+
+   public void setUserType(String _userType){
+      this._userType = _userType;
+   }
+
    public String message(){
       return _message;
    }

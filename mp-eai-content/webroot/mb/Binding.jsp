@@ -78,9 +78,9 @@
          }
          ctrl.setCallBackObject = function() {
             var ajax = new CallBackObject();
-            ajax.OnComplete = ctrl.onComplete();
-            ajax.onError = ctrl.onError();
-            ajax.OnLoaded = ctrl.onLoading();
+            ajax.OnComplete = ctrl.onComplete;
+            ajax.onError = ctrl.onError;
+            ajax.OnLoaded = ctrl.onLoading;
             ajax.DoCallBack("Binding.wa?do=sendValidate", "passport=" + $fieldInput.value);
          }
          ctrl.onLoading = function() {}
