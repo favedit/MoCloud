@@ -2,6 +2,8 @@ package org.mo.cloud.javascript;
 
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FStrings;
+import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -29,22 +31,22 @@ public class RFileRenameUtil2
    // <T>启动处理。</T>
    //============================================================
    public static void main(String[] args){
-      String sourcePath = "E:/Download/Manhua/不死者之王";
-      for(String fullName : RFile.listFiles(sourcePath)){
-         String fileName = RFile.name(fullName);
-         if(fileName.startsWith("话-")){
-            System.out.println(fileName);
-            RFile.rename(fullName, sourcePath + "/章-" + fileName.substring(2));
-         }
-      }
+      String sourcePath = "E:/Download/Manhua/杀戮都市";
       //      for(String fullName : RFile.listFiles(sourcePath)){
       //         String fileName = RFile.name(fullName);
-      //         String code = RString.leftPad(RString.mid(fileName, "第", "卷"), 2, "0");
-      //         if(RInteger.isInteger(code)){
-      //            System.out.println(code + " - " + code + " : " + fileName);
-      //            RFile.rename(fullName, sourcePath + "/卷-" + code);
+      //         if(fileName.startsWith("话-")){
+      //            System.out.println(fileName);
+      //            RFile.rename(fullName, sourcePath + "/章-" + fileName.substring(2));
       //         }
       //      }
+      for(String fullName : RFile.listFiles(sourcePath)){
+         String fileName = RFile.name(fullName);
+         String code = RString.leftPad(RString.mid(fileName, "第", "卷"), 2, "0");
+         if(RInteger.isInteger(code)){
+            System.out.println(code + " - " + code + " : " + fileName);
+            RFile.rename(fullName, sourcePath + "/卷-" + code);
+         }
+      }
       //      for(String fullName : RFile.listFiles(sourcePath)){
       //         String fileName = RFile.name(fullName);
       //         String code = RString.leftPad(RString.mid(fileName, "第", "话"), 3, "0");

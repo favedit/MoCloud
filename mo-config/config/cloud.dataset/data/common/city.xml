@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="c72af714-479a-4991-a685-a595cc6b836e" name="data.common.city" label="M#12cn15共通城市表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Common.City" data_name="DT_COM_CITY" data_alias="DT_COM_CTY" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="efdc7141-e884-4d08-b11d-f6840a281f04" name="country_id" label="M#12cn14国家编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_refer="data.common.city" />
+  <FieldRecordId _uuid="efdc7141-e884-4d08-b11d-f6840a281f04" name="country_id" label="M#12cn14国家编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" data_alias="CTY" data_refer="data.common.country" />
   <FieldRecordId _uuid="0bcd253b-f444-4d19-a477-7451cc6bd5b8" name="area_id" label="M#12cn14地区编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREA_ID" data_alias="ARE" data_refer="data.common.area" />
   <FieldRecordId _uuid="be3d31ab-3f64-48f3-895b-1faaf00593a7" name="province_id" label="M#12cn14省份编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_ID" data_alias="PVN" data_refer="data.common.province" />
   <FieldString _uuid="ed639a13-a0ae-438b-a92d-b2fb9fbe836d" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
