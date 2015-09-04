@@ -265,7 +265,7 @@ public abstract class XBaseFile
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
-   // 输入尺寸的定义
+   // 输入大小的定义
    @AContentField
    public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
 
@@ -535,7 +535,7 @@ public abstract class XBaseFile
    @AName("edit_size")
    protected String _editSize;
 
-   // 输入尺寸
+   // 输入大小
    @AName("input_size")
    protected String _inputSize;
 
@@ -1656,18 +1656,18 @@ public abstract class XBaseFile
    }
 
    //============================================================
-   // <T>获得输入尺寸的内容。</T>
+   // <T>获得输入大小的内容。</T>
    //
-   // @return 输入尺寸
+   // @return 输入大小
    //============================================================
    public String getInputSize(){
       return _inputSize;
    }
 
    //============================================================
-   // <T>设置输入尺寸的内容。</T>
+   // <T>设置输入大小的内容。</T>
    //
-   // @param value 输入尺寸
+   // @param value 输入大小
    //============================================================
    public void setInputSize(String value){
       _inputSize = value;

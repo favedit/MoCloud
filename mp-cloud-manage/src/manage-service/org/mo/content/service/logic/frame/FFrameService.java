@@ -1,6 +1,7 @@
 package org.mo.content.service.logic.frame;
 
 import org.mo.cloud.content.design.configuration.FContentObject;
+import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.dataset.IDatasetConsole;
 import org.mo.cloud.content.design.frame.IFrameConsole;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
@@ -55,7 +56,9 @@ public class FFrameService
    //============================================================
    // <T>构造资源3D服务。</T>
    //============================================================
-   public FSql makeSelectSql(FContentObject frameContent){
+   public FSql makeSelectSql(FContentObject frameContent,
+                             FXmlNode xsearch,
+                             FContentObjects expressions){
       String frameName = frameContent.get("name");
       // 更新数据集
       String datasetName = frameContent.get("dataset_name");
@@ -66,6 +69,7 @@ public class FFrameService
          throw new FFatalError("Frame dataset is not exists. (frame_name={1}, dataset_name={2})", frameName, datasetName);
       }
       String datasetDataName = datasetContent.get("data_name");
+      //..........................................................
       // 生成SQL
       FSql sql = new FSql();
       sql.append("SELECT ");
@@ -73,6 +77,13 @@ public class FFrameService
       for(FContentObject controlContent : frameContent.nodes()){
          String dataName = controlContent.get("data_name", null);
          if(!RString.isEmpty(dataName)){
+            // 表达式字段
+            String dataExpression = controlContent.get("data_expression", null);
+            if(!RString.isEmpty(dataExpression)){
+               expressions.push(controlContent);
+               continue;
+            }
+            // 查询字段
             if(!fieldFirst){
                sql.append(",");
             }
@@ -82,11 +93,36 @@ public class FFrameService
       }
       sql.append(" FROM ");
       sql.append(datasetDataName);
+      //..........................................................
       // 增加查询条件
+      FSql searchSql = new FSql();
       if(!RString.isEmpty(datasetWhere)){
-         sql.append(" WHERE ");
-         sql.append(datasetWhere);
+         searchSql.append(datasetWhere);
       }
+      if(xsearch != null){
+         for(FXmlNode xcolumn : xsearch){
+            if(xcolumn.isName("Column")){
+               String name = xcolumn.get("name");
+               // 查找字段
+               FContentObject fieldContent = frameContent.findObject("name", name);
+               String dataName = fieldContent.get("data_name");
+               String dataValue = xcolumn.get("value");
+               if(!searchSql.isEmpty()){
+                  searchSql.append(" AND ");
+               }
+               searchSql.append("(");
+               searchSql.append(dataName);
+               searchSql.append(" LIKE '%");
+               searchSql.append(dataValue);
+               searchSql.append("%')");
+            }
+         }
+      }
+      if(!searchSql.isEmpty()){
+         sql.append(" WHERE ");
+         sql.append(searchSql);
+      }
+      //..........................................................
       // 增加排序条件
       if(!RString.isEmpty(datasetOrder)){
          sql.append(" ORDER BY ");
@@ -101,16 +137,47 @@ public class FFrameService
    // @param dataset 数据集
    // @param xdataset 数据集节点
    //============================================================
-   public void saveDataset(FDataset dataset,
-                           FXmlNode xdataset){
+   public void calculateExpression(ILogicContext logicContext,
+                                   FContentObject expression,
+                                   FXmlNode xrow){
+      String dataName = expression.get("data_name");
+      String dataExpression = expression.get("data_expression");
+      String datasetName = RString.mid(dataExpression, "{", "}");
+      String filterName = RString.mid(dataExpression, "find(", ")");
+      String fieldName = RString.right(dataExpression, ").");
+      long filterId = xrow.getLong(filterName);
+      String className = "org.mo.content.core." + datasetName + ".I" + RString.firstUpper(RString.right(datasetName, ".")) + "Console";
+      IAbstractLogicUnitConsole<FLogicUnit> console = RAop.find(className);
+      FLogicUnit unit = console.find(logicContext, filterId);
+      String value = unit.get(fieldName);
+      xrow.set(dataName, value);
+   }
+
+   //============================================================
+   // <T>存储数据集合。</T>
+   //
+   // @param dataset 数据集
+   // @param xdataset 数据集节点
+   //============================================================
+   public void saveDataset(ILogicContext logicContext,
+                           FDataset dataset,
+                           FXmlNode xdataset,
+                           FContentObjects expressions){
       xdataset.set("total", dataset.total());
       xdataset.set("page_size", dataset.pageSize());
       xdataset.set("page_count", dataset.pageCount());
       xdataset.set("page", dataset.page());
       for(FRow row : dataset){
+         // 获得数值
          FXmlNode xrow = xdataset.createNode("Row");
          for(IStringPair pair : row){
             xrow.set(pair.name(), pair.value());
+         }
+         // 表达式计算
+         if(expressions != null){
+            for(FContentObject expression : expressions){
+               calculateExpression(logicContext, expression, xrow);
+            }
          }
       }
    }
@@ -133,6 +200,7 @@ public class FFrameService
       int page = xcontent.getInt("page", 0);
       int pageSize = xcontent.getInt("page_size", 20);
       String frameName = xcontent.get("frame_name");
+      FXmlNode xsearch = xcontent.findNode("Search");
       // 获得页面
       FContentObject frameContent = _frameConsole.findDefine(_storgeName, frameName, EPersistenceMode.Store);
       if(frameContent == null){
@@ -147,7 +215,8 @@ public class FFrameService
       }
       String dataGroup = datasetContent.get("data_group");
       // 生成SQL
-      FSql sql = makeSelectSql(frameContent);
+      FContentObjects expressions = new FContentObjects();
+      FSql sql = makeSelectSql(frameContent, xsearch, expressions);
       // 查询数据
       ISqlConnection connection = logicContext.activeConnection(dataGroup);
       FDataset dataset = connection.fetchDataset(sql, pageSize, page);
@@ -155,7 +224,7 @@ public class FFrameService
       // 输出内容
       FXmlNode xdataset = xoutput.createNode("Dataset");
       xdataset.set("name", datasetName);
-      saveDataset(dataset, xdataset);
+      saveDataset(logicContext, dataset, xdataset, expressions);
       return EResult.Success;
    }
 
@@ -214,7 +283,7 @@ public class FFrameService
       // 输出内容
       FXmlNode xdataset = xoutput.createNode("Dataset");
       xdataset.set("name", datasetName);
-      saveDataset(dataset, xdataset);
+      saveDataset(logicContext, dataset, xdataset, null);
       return EResult.Success;
    }
 

@@ -31,7 +31,7 @@ public class RFileRenameUtil2
    // <T>启动处理。</T>
    //============================================================
    public static void main(String[] args){
-      String sourcePath = "E:/Download/Manhua/杀戮都市";
+      String sourcePath = "E:/Download/Manhua/火影忍者";
       //      for(String fullName : RFile.listFiles(sourcePath)){
       //         String fileName = RFile.name(fullName);
       //         if(fileName.startsWith("话-")){
@@ -39,22 +39,21 @@ public class RFileRenameUtil2
       //            RFile.rename(fullName, sourcePath + "/章-" + fileName.substring(2));
       //         }
       //      }
-      for(String fullName : RFile.listFiles(sourcePath)){
-         String fileName = RFile.name(fullName);
-         String code = RString.leftPad(RString.mid(fileName, "第", "卷"), 2, "0");
-         if(RInteger.isInteger(code)){
-            System.out.println(code + " - " + code + " : " + fileName);
-            RFile.rename(fullName, sourcePath + "/卷-" + code);
-         }
-      }
       //      for(String fullName : RFile.listFiles(sourcePath)){
       //         String fileName = RFile.name(fullName);
-      //         String code = RString.leftPad(RString.mid(fileName, "第", "话"), 3, "0");
-      //         //String code = RString.leftPad(RString.right(fileName, "_CH"), 3, "0");
+      //         String code = RString.leftPad(RString.mid(fileName, "第", "卷"), 2, "0");
       //         if(RInteger.isInteger(code)){
       //            System.out.println(code + " - " + code + " : " + fileName);
-      //            RFile.rename(fullName, sourcePath + "/章-" + code);
+      //            RFile.rename(fullName, sourcePath + "/卷-" + code);
       //         }
       //      }
+      for(String fullName : RFile.listFiles(sourcePath)){
+         String fileName = RFile.name(fullName);
+         String code = RString.leftPad(RString.mid(fileName, "第", "话"), 3, "0");
+         if(RInteger.isInteger(code)){
+            System.out.println(code + " - " + code + " : " + fileName);
+            RFile.rename(fullName, sourcePath + "/章-" + code);
+         }
+      }
    }
 }

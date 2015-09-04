@@ -265,21 +265,21 @@ public abstract class XBaseEdit
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
-   // 数据必须的定义
+   // 数据名称的定义
    @AContentField
-   public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
+   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
+
+   // 数据查询的定义
+   @AContentField
+   public final static FContentField DATA_SELECT = new FContentField("dataSelect", "data_select", EContentData.Boolean, "", "", "", "YYNY");
 
    // 数据类型的定义
    @AContentField
    public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
 
-   // 数据名称的定义
+   // 数据表达式的定义
    @AContentField
-   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
-
-   // 数据别称的定义
-   @AContentField
-   public final static FContentField DATA_ALIAS = new FContentField("dataAlias", "data_alias", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField DATA_EXPRESSION = new FContentField("dataExpression", "data_expression", EContentData.String, "", "", "", "YYNY");
 
    // 数据内容的定义
    @AContentField
@@ -349,7 +349,7 @@ public abstract class XBaseEdit
    @AContentField
    public final static FContentField VALID_LENGTH_MAX = new FContentField("validLengthMax", "valid_length_max", EContentData.String, "", "", "", "YYNY");
 
-   // 输入尺寸的定义
+   // 输入大小的定义
    @AContentField
    public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
 
@@ -619,21 +619,21 @@ public abstract class XBaseEdit
    @AName("edit_size")
    protected String _editSize;
 
-   // 数据必须
-   @AName("data_require")
-   protected boolean _dataRequire;
+   // 数据名称
+   @AName("data_name")
+   protected String _dataName;
+
+   // 数据查询
+   @AName("data_select")
+   protected boolean _dataSelect;
 
    // 数据类型
    @AName("data_type_cd")
    protected String _dataTypeCd;
 
-   // 数据名称
-   @AName("data_name")
-   protected String _dataName;
-
-   // 数据别称
-   @AName("data_alias")
-   protected String _dataAlias;
+   // 数据表达式
+   @AName("data_expression")
+   protected String _dataExpression;
 
    // 数据内容
    @AName("data_value")
@@ -703,7 +703,7 @@ public abstract class XBaseEdit
    @AName("valid_length_max")
    protected String _validLengthMax;
 
-   // 输入尺寸
+   // 输入大小
    @AName("input_size")
    protected String _inputSize;
 
@@ -1824,21 +1824,39 @@ public abstract class XBaseEdit
    }
 
    //============================================================
-   // <T>获得数据必须的内容。</T>
+   // <T>获得数据名称的内容。</T>
    //
-   // @return 数据必须
+   // @return 数据名称
    //============================================================
-   public Boolean getDataRequire(){
-      return _dataRequire;
+   public String getDataName(){
+      return _dataName;
    }
 
    //============================================================
-   // <T>设置数据必须的内容。</T>
+   // <T>设置数据名称的内容。</T>
    //
-   // @param value 数据必须
+   // @param value 数据名称
    //============================================================
-   public void setDataRequire(Boolean value){
-      _dataRequire = value;
+   public void setDataName(String value){
+      _dataName = value;
+   }
+
+   //============================================================
+   // <T>获得数据查询的内容。</T>
+   //
+   // @return 数据查询
+   //============================================================
+   public Boolean getDataSelect(){
+      return _dataSelect;
+   }
+
+   //============================================================
+   // <T>设置数据查询的内容。</T>
+   //
+   // @param value 数据查询
+   //============================================================
+   public void setDataSelect(Boolean value){
+      _dataSelect = value;
    }
 
    //============================================================
@@ -1860,39 +1878,21 @@ public abstract class XBaseEdit
    }
 
    //============================================================
-   // <T>获得数据名称的内容。</T>
+   // <T>获得数据表达式的内容。</T>
    //
-   // @return 数据名称
+   // @return 数据表达式
    //============================================================
-   public String getDataName(){
-      return _dataName;
+   public String getDataExpression(){
+      return _dataExpression;
    }
 
    //============================================================
-   // <T>设置数据名称的内容。</T>
+   // <T>设置数据表达式的内容。</T>
    //
-   // @param value 数据名称
+   // @param value 数据表达式
    //============================================================
-   public void setDataName(String value){
-      _dataName = value;
-   }
-
-   //============================================================
-   // <T>获得数据别称的内容。</T>
-   //
-   // @return 数据别称
-   //============================================================
-   public String getDataAlias(){
-      return _dataAlias;
-   }
-
-   //============================================================
-   // <T>设置数据别称的内容。</T>
-   //
-   // @param value 数据别称
-   //============================================================
-   public void setDataAlias(String value){
-      _dataAlias = value;
+   public void setDataExpression(String value){
+      _dataExpression = value;
    }
 
    //============================================================
@@ -2202,18 +2202,18 @@ public abstract class XBaseEdit
    }
 
    //============================================================
-   // <T>获得输入尺寸的内容。</T>
+   // <T>获得输入大小的内容。</T>
    //
-   // @return 输入尺寸
+   // @return 输入大小
    //============================================================
    public String getInputSize(){
       return _inputSize;
    }
 
    //============================================================
-   // <T>设置输入尺寸的内容。</T>
+   // <T>设置输入大小的内容。</T>
    //
-   // @param value 输入尺寸
+   // @param value 输入大小
    //============================================================
    public void setInputSize(String value){
       _inputSize = value;

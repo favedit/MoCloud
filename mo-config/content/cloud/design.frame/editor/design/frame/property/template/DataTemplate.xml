@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content update_date="20150904143023">
-  <TemplateFrame guid="CA4C40BE744C4CA9BC1919070CDE814A" valid="N" name="editor.design.frame.property.template.DataTemplate" label="数据属性模板" nowrap="N" location="0,0" size="0,0">
-    <Panel guid="9DAA4A7496A54FA297A1AD71192E0368" name="dataPanel" label="数据属性" icon="design.panel.icon">
-      <Edit guid="229189A9DAA64FB69CFA8A1CF913D61A" name="dataName" label="数据名称" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_name" input_size="300,0" />
-      <Check guid="2D1409486D594DD1B10DBEBE9CABA0F2" name="dataFetch" label="是否查询" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_fetch" data_default="Y" />
-      <Select guid="E3F1CC0ECF96465B97AD870A24B2E098" name="dataType" label="数据类型" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="DATA_TYPE" edit_refer="editor.design.frame.DataType" input_size="400,0" />
-      <Edit guid="6A4C2D6CD18B4F39855F0E34025E1840" name="dataCode" label="数据代码" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_code" input_size="400,0" />
-      <Edit guid="7E61BF3FB0D947CA97AB540A0EC027B2" name="dataSearch" label="查询字段" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_search" input_size="400,0" />
-      <Edit guid="C15AC643B7054428B589368EAB50E887" name="dataPrepare" label="数据准备" height="20" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_prepare" input_size="400,0" />
-      <Edit guid="39855FD9A2A74789A0B930D2A22886DE" name="dataValue" label="数据内容" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_value" input_size="400,0" />
-      <Edit guid="75F1E5FC52454FCD8FB940DF3D88EA34" valid="N" name="dataDefault" label="缺省内容" nowrap="N" location="0,0" size="0,0" padding="0,0,0,1" margin="0,0,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="Y" edit_mode="IU" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="N" edit_zoom="N" verify_require="N" verify_insert="N" verify_update="N" verify_delete="N" label_size="80,0" edit_size="0,0" data_name="data_default" edit_complete="N" input_size="400,0" />
+  <TemplateFrame _guid="CA4C40BE744C4CA9BC1919070CDE814A" valid="N" name="editor.design.frame.property.template.DataTemplate" label="数据属性模板" nowrap="N" location="0,0" size="0,0">
+    <Panel _guid="9DAA4A7496A54FA297A1AD71192E0368" name="dataPanel" label="数据属性" icon="design.panel.icon">
+      <Select _guid="E3F1CC0ECF96465B97AD870A24B2E098" name="dataTypeCd" label="类型" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_type_cd" edit_refer="editor.design.frame.DataType" input_size="400,0" />
+      <Edit _guid="229189A9DAA64FB69CFA8A1CF913D61A" name="dataName" label="名称" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_name" input_size="300,0" />
+      <Check _guid="2D1409486D594DD1B10DBEBE9CABA0F2" name="dataSelect" label="选取" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_select" data_default="Y" />
+      <Edit _guid="6A4C2D6CD18B4F39855F0E34025E1840" name="dataExpression" label="表达式" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_expression" input_size="400,0" />
+      <Edit _guid="39855FD9A2A74789A0B930D2A22886DE" name="dataValue" label="内容" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="data_value" input_size="400,0" />
+      <Edit _guid="75F1E5FC52454FCD8FB940DF3D88EA34" valid="N" name="dataDefault" label="缺省值" nowrap="N" location="0,0" size="0,0" padding="0,0,0,1" margin="0,0,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="Y" edit_mode="IU" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="N" edit_zoom="N" verify_require="N" verify_insert="N" verify_update="N" verify_delete="N" label_size="80,0" edit_size="0,0" data_name="data_default" edit_complete="N" input_size="400,0" />
     </Panel>
   </TemplateFrame>
 </Content>
