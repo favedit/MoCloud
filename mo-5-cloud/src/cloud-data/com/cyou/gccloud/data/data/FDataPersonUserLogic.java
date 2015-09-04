@@ -74,6 +74,12 @@ public class FDataPersonUserLogic
    // 字段联系邮件验证的定义。
    public final static SLogicFieldInfo CONTACT_MAIL_VERIFY_CD = new SLogicFieldInfo("CONTACT_MAIL_VERIFY_CD");
 
+   // 字段身份证号的定义。
+   public final static SLogicFieldInfo ID_CARD = new SLogicFieldInfo("ID_CARD");
+
+   // 字段身份证号验证的定义。
+   public final static SLogicFieldInfo ID_CARD_VERIFY_CD = new SLogicFieldInfo("ID_CARD_VERIFY_CD");
+
    // 字段用户权限状态的定义。
    public final static SLogicFieldInfo ROLE_CD = new SLogicFieldInfo("ROLE_CD");
 
@@ -108,7 +114,7 @@ public class FDataPersonUserLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ROLE_CD`,`ROLE_ID`,`RANK_LABEL`,`DEPARTMENT_LABELS`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`STATUS_CD`,`PASSPORT`,`PASSWORD`,`CODE`,`NAME`,`LABEL`,`ICON_URL`,`CONTACT_PHONE`,`CONTACT_PHONE_VERIFY_CD`,`CONTACT_MAIL`,`CONTACT_MAIL_VERIFY_CD`,`ID_CARD`,`ID_CARD_VERIFY_CD`,`ROLE_CD`,`ROLE_ID`,`RANK_LABEL`,`DEPARTMENT_LABELS`,`DESCRIPTION`,`CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造人员用户信息逻辑单元。</T>
@@ -711,6 +717,8 @@ public class FDataPersonUserLogic
       cmd.append(",`CONTACT_PHONE_VERIFY_CD`");
       cmd.append(",`CONTACT_MAIL`");
       cmd.append(",`CONTACT_MAIL_VERIFY_CD`");
+      cmd.append(",`ID_CARD`");
+      cmd.append(",`ID_CARD_VERIFY_CD`");
       cmd.append(",`ROLE_CD`");
       cmd.append(",`ROLE_ID`");
       cmd.append(",`RANK_LABEL`");
@@ -810,6 +818,17 @@ public class FDataPersonUserLogic
       }
       cmd.append(',');
       cmd.append(unit.contactMailVerifyCd());
+      cmd.append(',');
+      String idCard = unit.idCard();
+      if(RString.isEmpty(idCard)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(idCard));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.idCardVerifyCd());
       cmd.append(',');
       cmd.append(unit.roleCd());
       cmd.append(',');
@@ -1037,6 +1056,21 @@ public class FDataPersonUserLogic
       if(unit.isContactMailVerifyCdChanged()){
          cmd.append(",`CONTACT_MAIL_VERIFY_CD`=");
          cmd.append(unit.contactMailVerifyCd());
+      }
+      if(unit.isIdCardChanged()){
+         cmd.append(",`ID_CARD`=");
+         String idCard = unit.idCard();
+         if(RString.isEmpty(idCard)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(idCard));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isIdCardVerifyCdChanged()){
+         cmd.append(",`ID_CARD_VERIFY_CD`=");
+         cmd.append(unit.idCardVerifyCd());
       }
       if(unit.isRoleCdChanged()){
          cmd.append(",`ROLE_CD`=");

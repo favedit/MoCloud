@@ -104,6 +104,18 @@ public class FDataPersonUserUnit
    // 字段联系邮件验证的定义。
    protected int _contactMailVerifyCd;
 
+   // 存储字段身份证号的定义。
+   private String __idCard;
+
+   // 字段身份证号的定义。
+   protected String _idCard;
+
+   // 存储字段身份证号验证的定义。
+   private int __idCardVerifyCd;
+
+   // 字段身份证号验证的定义。
+   protected int _idCardVerifyCd;
+
    // 存储字段用户权限状态的定义。
    private int __roleCd;
 
@@ -555,6 +567,60 @@ public class FDataPersonUserUnit
    }
 
    //============================================================
+   // <T>判断身份证号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIdCardChanged(){
+      return !RString.equals(__idCard, _idCard);
+   }
+
+   //============================================================
+   // <T>获得身份证号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String idCard(){
+      return _idCard;
+   }
+
+   //============================================================
+   // <T>设置身份证号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIdCard(String value){
+      _idCard = value;
+   }
+
+   //============================================================
+   // <T>判断身份证号验证的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIdCardVerifyCdChanged(){
+      return __idCardVerifyCd != _idCardVerifyCd;
+   }
+
+   //============================================================
+   // <T>获得身份证号验证的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int idCardVerifyCd(){
+      return _idCardVerifyCd;
+   }
+
+   //============================================================
+   // <T>设置身份证号验证的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIdCardVerifyCd(int value){
+      _idCardVerifyCd = value;
+   }
+
+   //============================================================
    // <T>判断用户权限状态的数据是否改变。</T>
    //
    // @return 数据内容
@@ -888,6 +954,10 @@ public class FDataPersonUserUnit
             return _contactMail;
          case "contact_mail_verify_cd":
             return RInteger.toString(_contactMailVerifyCd);
+         case "id_card":
+            return _idCard;
+         case "id_card_verify_cd":
+            return RInteger.toString(_idCardVerifyCd);
          case "role_cd":
             return RInteger.toString(_roleCd);
          case "role_id":
@@ -965,6 +1035,12 @@ public class FDataPersonUserUnit
             break;
          case "contact_mail_verify_cd":
             _contactMailVerifyCd = RInteger.parse(value);
+            break;
+         case "id_card":
+            _idCard = value;
+            break;
+         case "id_card_verify_cd":
+            _idCardVerifyCd = RInteger.parse(value);
             break;
          case "role_cd":
             _roleCd = RInteger.parse(value);
@@ -1070,6 +1146,14 @@ public class FDataPersonUserUnit
                __contactMailVerifyCd = RInteger.parse(value);
                _contactMailVerifyCd = __contactMailVerifyCd;
                break;
+            case "id_card":
+               __idCard = value;
+               _idCard = __idCard;
+               break;
+            case "id_card_verify_cd":
+               __idCardVerifyCd = RInteger.parse(value);
+               _idCardVerifyCd = __idCardVerifyCd;
+               break;
             case "role_cd":
                __roleCd = RInteger.parse(value);
                _roleCd = __roleCd;
@@ -1140,6 +1224,8 @@ public class FDataPersonUserUnit
       row.set("contactPhoneVerifyCd", _contactPhoneVerifyCd);
       row.set("contactMail", _contactMail);
       row.set("contactMailVerifyCd", _contactMailVerifyCd);
+      row.set("idCard", _idCard);
+      row.set("idCardVerifyCd", _idCardVerifyCd);
       row.set("roleCd", _roleCd);
       row.set("roleId", _roleId);
       row.set("rankLabel", _rankLabel);
@@ -1175,6 +1261,8 @@ public class FDataPersonUserUnit
       map.put("contactPhoneVerifyCd", RInteger.toString(_contactPhoneVerifyCd));
       map.put("contactMail", _contactMail);
       map.put("contactMailVerifyCd", RInteger.toString(_contactMailVerifyCd));
+      map.put("idCard", _idCard);
+      map.put("idCardVerifyCd", RInteger.toString(_idCardVerifyCd));
       map.put("roleCd", RInteger.toString(_roleCd));
       map.put("roleId", RLong.toString(_roleId));
       map.put("rankLabel", _rankLabel);
@@ -1210,6 +1298,8 @@ public class FDataPersonUserUnit
       _contactPhoneVerifyCd = input.readInt32();
       _contactMail = input.readString();
       _contactMailVerifyCd = input.readInt32();
+      _idCard = input.readString();
+      _idCardVerifyCd = input.readInt32();
       _roleCd = input.readInt32();
       _roleId = input.readInt64();
       _rankLabel = input.readString();
@@ -1245,6 +1335,8 @@ public class FDataPersonUserUnit
       output.writeInt32(_contactPhoneVerifyCd);
       output.writeString(_contactMail);
       output.writeInt32(_contactMailVerifyCd);
+      output.writeString(_idCard);
+      output.writeInt32(_idCardVerifyCd);
       output.writeInt32(_roleCd);
       output.writeInt64(_roleId);
       output.writeString(_rankLabel);

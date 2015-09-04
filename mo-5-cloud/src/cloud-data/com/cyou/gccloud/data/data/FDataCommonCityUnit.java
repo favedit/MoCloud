@@ -220,9 +220,9 @@ public class FDataCommonCityUnit
    //
    // @return 数据内容
    //============================================================
-   public FDataCommonCityUnit country(){
-      FDataCommonCityLogic logic = _logicContext.findLogic(FDataCommonCityLogic.class);
-      FDataCommonCityUnit unit = logic.find(_countryId);
+   public FDataCommonCountryUnit country(){
+      FDataCommonCountryLogic logic = _logicContext.findLogic(FDataCommonCountryLogic.class);
+      FDataCommonCountryUnit unit = logic.find(_countryId);
       return unit;
    }
 

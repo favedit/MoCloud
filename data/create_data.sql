@@ -212,6 +212,8 @@ CREATE TABLE `DT_PSN_USER`
    `CONTACT_PHONE_VERIFY_CD`       INTEGER, 
    `CONTACT_MAIL`                  VARCHAR(40), 
    `CONTACT_MAIL_VERIFY_CD`        INTEGER, 
+   `ID_CARD`                       VARCHAR(40), 
+   `ID_CARD_VERIFY_CD`             INTEGER, 
    `ROLE_CD`                       INTEGER, 
    `ROLE_ID`                       BIGINT, 
    `RANK_LABEL`                    VARCHAR(80), 
