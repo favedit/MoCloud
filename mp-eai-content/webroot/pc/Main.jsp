@@ -27,7 +27,7 @@
          <p id="prompt" class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p>
          <TABLE style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
             <TR>
-               <TD id="header" height='100' colspan="2">
+               <TD id="header"  colspan="2">
                   <INPUT id='id_do' name='do' type='hidden'>
                   <div class="header floatBtn">
                      <div class="head-left">
@@ -61,17 +61,17 @@
                            <ul>
                               <je:authority module='eai.marketer.customer'>
                                  <li style="display: none;" onclick='doChart("customer")'>
-                                    <img src="images/main/1-2.png">
+                                    <img onclick='doChart("customer")' src="images/main/1-2.png">
                                  </li>
                               </je:authority>
                               <je:authority module='eai.marketer.marketer'>
-                                 <li style="display: none;" onclick='doChart("marketer")'>
-                                    <img src="images/main/2-1.png">
+                                 <li style="display: none;">
+                                    <img  onclick='doChart("marketer")' src="images/main/2-1.png">
                                  </li>
                               </je:authority>
                               <je:authority module='eai.department.marketer'>
-                                 <li style="display: none;" onclick='doChart("department")'>
-                                    <img src="images/main/2-3.png">
+                                 <li style="display: none;" >
+                                    <img onclick='doChart("department")' src="images/main/2-3.png">
                                  </li>
                               </je:authority>
                            </ul>
@@ -97,7 +97,7 @@
                </TD>
             </TR>
             <TR>
-               <TD height='56' colspan="0">
+               <TD height='46' colspan="0" align="center" valign="top">
                   <div class="fot">
                      <p>客服电话：010-65499299</p>
                   </div>

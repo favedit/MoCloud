@@ -371,13 +371,12 @@ body{
 	color:#3d6aa3;
 }
 @media all and (max-width: 1400px) {
-	#header{
+	#header, .header{
 		height: 75px;
 	}
 	.logo {
 	  padding-left: 15px;
-	  left: -4px;
-	  top: 0px;
+	  top: 8px;
 	  width: 362px;
 	}
 	.users{

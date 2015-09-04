@@ -35,14 +35,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
   text-align: center;
-  -webkit-animation-name: slideInRight;
-  -moz-animation-name: slideInRight;
-  -o-animation-name: slideInRight;
-  animation-name: slideInRight;
-  -webkit-animation-duration: 500ms;
-  -moz-animation-duration: 500ms;
-  -o-animation-duration: 500ms;
-  animation-duration: 500ms;
   display: none;
 }
 .nav-container[animation=true] {
@@ -117,60 +109,6 @@ body {
   margin-top: 1.25rem;
   width: 2.5rem;
   height: 2.5rem;
-}
-.header-list {
-  position: absolute;
-  right: 2%;
-  top: 50px;
-  z-index: 2;
-  background: #fff;
-  border-radius: 5px;
-  padding: 4px;
-  display: inline-block;
-  text-align: left;
-  font-size: 16px;
-  padding: 5px 10px 0px 10px;
-  animation-duration: 0.5s;
-  display: none;
-}
-.header-list:after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #fff;
-  position: absolute;
-  right: 10px;
-  top: -8px;
-}
-.header-list span {
-  color: #666;
-  display: inline-block;
-  height: 24px;
-  font-size: 15px;
-  line-height: 24px;
-}
-.header-list p {
-  color: #000;
-  height: 26px;
-  line-height: 26px;
-}
-.header-list li {
-  background-image: url(../images/icon4.png);
-  background-position: 0px center;
-  background-repeat: no-repeat;
-  color: #666;
-  height: 38px;
-  line-height: 38px;
-  padding-left: 20px;
-  border-top: 1px solid #999;
-}
-.header-list li.binding-icon {
-  background-image: url(../images/binding-icon.png);
-  background-position: 0px center;
-  background-repeat: no-repeat;
-  background-size: 17px;
 }
 .banner {
   width: 100%;
@@ -248,12 +186,12 @@ body {
   width: 100%;
 }
 .details-container ul p {
-  height: 3.3333333333333335rem;
-  line-height: 3.3333333333333335rem;
-  background-image: url(../images/main/4.png);
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: 100% 3.3333333333333335rem;
+  background-image: -webkit-linear-gradient(45deg, #101c39, #0b466b);
+  background-image: linear-gradient(45deg, #101c39, #0b466b);
+  height: 2.5rem;
+  line-height: 2.5rem;
+  border: 0.20833333333333334rem solid #3489ac;
+  border-radius: 0.4166666666666667rem;
   width: 20.833333333333332rem;
   margin: 0.4166666666666667rem auto;
   font-size: 1.3333333333333333rem;

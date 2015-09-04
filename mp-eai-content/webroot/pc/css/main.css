@@ -48,6 +48,7 @@ body{
 .header{
 	background: url(../images/main/bor.png) no-repeat center bottom;
 	overflow: hidden;
+	height: 100px;
 }
 .head-left{
 	float:left;
@@ -243,15 +244,12 @@ body{
 .imag-details ul li{
 	display: none;
 	z-index: 0;
-	margin-bottom: 30px;
 	width: 80%;
 	padding:0px 10%; 
 	/*max-width: 1300px;*/
 	/*left:0px;*/
 	/*top:0px;*/
 	display: inline-block;
-	cursor:pointer;
-	/*position: absolute;*/
 	-webkit-animation-name: zoomIn;
 	-moz-animation-name: zoomIn;
 	-o-animation-name: zoomIn;
@@ -264,18 +262,15 @@ body{
 }
 .imag-details ul li img{
 	width: 100%;
+	cursor:pointer;
 }
-
 .imag-details span{
-	/*display: inline-block;*/
 	color:#fff;
 	display: none;
 }
-
 .titles-container{
 	display:block;
 	width:100%;
-	/*height: 100%;*/
 	text-align: center;
 }
 .titles-container ul{
@@ -307,8 +302,6 @@ body{
 .titles-container li img{
 	width: 176px;
 	padding-top: 10px;
-	/* height: 100%; */
-	/* display: none; */
 	margin: 0 auto;
 	display: block;
 }
@@ -365,13 +358,13 @@ body{
 	padding-right: 10px;
 }
 @media all and (max-width: 1400px) {
-	#header{
+	#header, .header{
 		height: 75px;
 	}
 	.logo {
 	  padding-left: 15px;
-	  left: -4px;
-	  top: 0px;
+	  /*left: -4px;*/
+	  top: 8px;
 	  width: 362px;
 	}
 	.users{
