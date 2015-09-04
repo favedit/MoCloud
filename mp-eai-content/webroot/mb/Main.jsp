@@ -2,7 +2,7 @@
    <!DOCTYPE>
    <html>
    <head>
-      <title>钰诚集团智慧企业推进中心</title>
+      <title>全球实时投资数据展示中心—钰诚集团智慧企业</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -18,7 +18,7 @@
                   <li class="img"><Img src="images/main/7.png"></li>
                   <li class="current font20">当前账号</li>
                   <li class="names font40"><jh:write source='&page.passport' /></li>
-                  <p class="font40 mt50"><a style="color:#31b7d5;" href="Binding.wa">帐号绑定</a></p>
+                  <je:authority role='eai.oa'><p class="font40 mt50"><a style="color:#31b7d5;" href="Binding.wa">帐号绑定</a></p></je:authority>
                   <p class="font40" onclick="loginOut();">退出账号</p>
                   <p class="service font40">客服电话</p>
                   <p class=""><a class="phone-container font20" style="color:#31b7d5;" href="tel:010-65499299">010-65499299</a></p>
@@ -29,7 +29,7 @@
                <section class="box-container" style="display: block;">
                   <header>
                      <span class="btn-list" id="btn-list"></span>全球实时数据中心
-                     <div class="header-r"><img src="images/main/81.png"></div>
+                     <jh:notEquals source="host" value="&page.userType"><div class="header-r"><img src="images/main/81.png"></div></jh:notEquals>
                   </header>
                   <div class="banner" id="banner">
                      <div class="bd">

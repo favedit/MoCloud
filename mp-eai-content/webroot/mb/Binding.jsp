@@ -3,7 +3,7 @@
    <html>
 
    <head>
-      <title>e租宝-全球实时数据展示系统账号棒定</title>
+      <title>账号绑定—全球实时投资数据展示中心—钰诚集团智慧企业</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -26,7 +26,7 @@
        <td align="center" valign="center">
          <div class="box-container">
             <h1>账号绑定</h1>
-            <span class="box-prompt error"></span>
+            <span class="box-prompt error"><jh:write source='&page.message' /></span>
             <FORM id="frmBind" name='frmBind' method='post' action='Binding.wa?do=bindOnAccount'>
                <p class="user-name">
                   <input id="mobile" name="ePassport" class="quantico account" type="text" placeholder="E租宝理财师账号">
@@ -60,11 +60,11 @@
          ctrl.countdown = function(o) {
             if (wait == 0) {
                o.removeAttribute("disabled");
-               o.value = "获取验证码";
+               o.value = "发送动态验证码";
                wait = 60;
             } else {
-               error.innerHTML = "";
-               o.value = wait;
+//               error.innerHTML = "";
+               o.value = "重新发送("+wait+")";
                wait--;
                o.setAttribute("disabled", true);
                setTimeout(function() {
@@ -93,6 +93,7 @@
             if (result == 1) {
                ctrl.countdown($getVerifyCodeBtn);
             } else {
+               $getVerifyCodeBtn.value = "发送动态验证码";
                error.innerHTML = result;
             }
          }
@@ -110,6 +111,8 @@
          $getVerifyCodeBtn.onclick = function() {
             var o = this;
             if ($fieldInput.value != "") {
+               o.value = "正在发送...";
+               
                ctrl.setCallBackObject();
             } else {
                error.innerHTML = alertTips.emptyTel;

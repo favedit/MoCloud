@@ -24,9 +24,9 @@ function getCookieValue(name){
         if (end == -1) end = allcookies.length;        //如果end值为-1说明cookie列表里只有一个cookie   
         var value = allcookies.substring(start,end);  //提取cookie的值   
         return decodeURI(value);                           //对它解码         
-        }      
+        }
    else return "";                                             //搜索失败，返回空字符串   
-}   
+}
 //删除cookie   
 function deleteCookie(name,path){   
     var name = escape(name);   

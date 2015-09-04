@@ -3,9 +3,9 @@
 <HTML>
 <HEAD>
 <TITLE>
-<jh:equals source="&page.sceneCode" value="ChartMarketerCustomer">e租宝-全球实时投资数据展示中心(中国)</jh:equals>
-<jh:equals source="&page.sceneCode" value="ChartMarketerMarketer">e租宝-理财师业绩展示中心</jh:equals>
-<jh:equals source="&page.sceneCode" value="ChartDepartmentMarketer">e租宝-理财师业绩展示中心</jh:equals>
+<jh:equals source="&page.sceneCode" value="ChartMarketerCustomer">e租宝-全球实时投资数据展示中心(中国)-钰诚集团智慧企业</jh:equals>
+<jh:equals source="&page.sceneCode" value="ChartMarketerMarketer">e租宝-理财师业绩展示中心-钰诚集团智慧企业</jh:equals>
+<jh:equals source="&page.sceneCode" value="ChartDepartmentMarketer">e租宝-理财师业绩展示中心-钰诚集团智慧企业</jh:equals>
 </TITLE>
 <META http-equiv='Content-Type' content='text/html;charset=UTF-8'>
 <META name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">

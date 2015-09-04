@@ -115,13 +115,15 @@ public class FIndexAction
             FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
             logger.setHostAddress(hostAddress);
             logger.setLogicMessage("主机地址为白名单。");
-            page.setUserType("host");
             _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
             //插入用户，权限绑定
-            synchronizeData(logicContext, sessionContext, page, "white-host:" + hostAddress, hostAddress, EGcPersonUserFrom.EaiHost);
+            page.setUserType("host");
+            String changePass = "white-host:" + hostAddress;
+            FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
+            synchronizeData(logicContext, sessionContext, page, user, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             basePage.setUrl("Main.wa");
-            return "Success";
+            return "/apl/Redirector";
          }
       }
       // 非法设置
@@ -158,11 +160,12 @@ public class FIndexAction
       String message = null;
       String logggerMessage = null;
       String changePass = null;
+      int from = 0;
       int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.Success:
             changePass = "white-user:" + passport;
-            synchronizeData(logicContext, sessionContext, page, changePass, passport, EGcPersonUserFrom.EaiHost);
+            from = EGcPersonUserFrom.EaiHost;
             logggerMessage = "登录成功。";
             break;
          case EGcAuthorityResult.PassportInvalid:
@@ -178,7 +181,7 @@ public class FIndexAction
             break;
          case EGcAuthorityResult.OaSuccess:
             changePass = "oa:" + passport;
-            synchronizeData(logicContext, sessionContext, page, changePass, passport, EGcPersonUserFrom.EaiOa);
+            from = EGcPersonUserFrom.EaiOa;
             logggerMessage = "OA登录成功。";
             break;
          case EGcAuthorityResult.OaPasswordInvald:
@@ -198,15 +201,12 @@ public class FIndexAction
             message = "密码非法或含有特殊字符。";
             break;
       }
-      // 获得用户信息
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         FDataPersonUserUnit userUnit = _userConsole.findByPassport(logicContext, changePass);
-         userId = userUnit.ouid();
-         // 打开会话
-         FGcWebSession session = (FGcWebSession)sessionContext;
-         session.setUserId(userId);
-         _sessionConsole.open(session);
+         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
+         if(user != null)
+            userId = user.ouid();
+         synchronizeData(logicContext, sessionContext, page, user, changePass, passport, from);
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
@@ -227,7 +227,7 @@ public class FIndexAction
          }
          context.outputCookies().push(new FWebCookie("islogin", "true"));
          basePage.setUrl("Main.wa");
-         return "Success";
+         return "/apl/Redirector";
       }else{
          page.setMessage(message);
          return "Login";
@@ -253,7 +253,7 @@ public class FIndexAction
       FGcWebSession session = (FGcWebSession)sessionContext;
       _sessionConsole.close(session);
       basePage.setUrl("Index.wa");
-      return "Success";
+      return "/apl/Redirector";
    }
 
    //============================================================
@@ -265,13 +265,13 @@ public class FIndexAction
    private void synchronizeData(ILogicContext logicContext,
                                 IWebSession sessionContext,
                                 FIndexPage page,
+                                FDataPersonUserUnit user,
                                 String passport,
                                 String label,
                                 int from){
       _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
-      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
       if(user == null){
          //获取角色
          FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
@@ -283,12 +283,9 @@ public class FIndexAction
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
-            //白名单 单独处理
-            if(page.userType() != null){
-               session.setUserId(unit.ouid());
-            }
+            session.setUserId(unit.ouid());
             //同步用户状态
-            FDataPersonUserEntryUnit entryUnit = new FDataPersonUserEntryUnit();
+            FDataPersonUserEntryUnit entryUnit = _entryConsole.doPrepare(logicContext);
             entryUnit.setOvld(true);
             entryUnit.setUserId(unit.ouid());
             entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
@@ -296,10 +293,7 @@ public class FIndexAction
             _entryConsole.doInsert(logicContext, entryUnit);
          }
       }else{
-         //白名单 单独处理
-         if(page.userType() != null){
-            session.setUserId(user.ouid());
-         }
+         session.setUserId(user.ouid());
       }
       // 打开会话
       _sessionConsole.open(session);

@@ -2,7 +2,7 @@
    <!DOCTYPE html>
 
    <head>
-      <title>钰诚集团智慧企业推进中心</title>
+      <title>全球实时投资数据展示中心—钰诚集团智慧企业</title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta http-equiv="X-UA-Compatible" IE="EmulateIE7" content="IE=edge" />
       <meta content="always" name="referrer">

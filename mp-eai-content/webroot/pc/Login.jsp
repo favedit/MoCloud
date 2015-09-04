@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <title>全球实时投资数据展示中心—钰诚集团智慧企业</title>
    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
    <meta content="always" name="referrer">
-   <title>钰诚集团智慧企业推进中心</title>
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/animate.css">
    <link rel="stylesheet" type="text/css" href="css/login.css">

@@ -92,7 +92,7 @@ public class FBindingAction
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user == null){
          basePage.setUrl("Main.wa");
-         return "Success";
+         return "/apl/Redirector";
       }
       page.setPassport(user.label());
       return "Binding";
@@ -132,6 +132,8 @@ public class FBindingAction
       _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
       String mobile = marketer.phone();
+      String card = marketer.card();
+      String label = marketer.label();
       String random = null;
       //验证5分钟前有没有发过验证码，发过再次发送此验证码
       FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime, passport);
@@ -154,6 +156,13 @@ public class FBindingAction
       unit.setCheckCode(random);
       unit.setValidateCd(EGcValidationValidate.EaiMarketer);
       _validationConsole.doInsert(logicContext, unit);
+      // 记录用户信息
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      user.setIdCard(card);
+      user.setLabel(label);
+      user.setContactPhone(mobile);
+      _userConsole.doUpdate(logicContext, user);
       page.setMessage("1");
       return "ajax";
    }
@@ -223,7 +232,7 @@ public class FBindingAction
       }
       _sessionConsole.open(session);
       basePage.setUrl("Main.wa");
-      return "Success";
+      return "/apl/Redirector";
    }
 
    //============================================================
