@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150904105740">
+  <DataStore guid="B1BDE3A52C7B405980CA3038F0BC5A07" name="logger.person.user.module" label="人员模块访问" is_valid="Y" note="" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Module" data_name="LG_PSN_USER_MODULE" data_alias="LG_PSN_USR_MOD" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+    <FieldRecordId guid="2765420333C14097BB6069E588497630" name="user_id" label="用户编号" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+    <FieldString guid="3FE22854B6FC4DAC835D7B8904B01139" name="passport" label="登录名称" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+    <FieldString guid="97683A6C6560416284A5EC8041EF91F2" name="module_code" label="模块代码" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_CODE" data_size="40" />
+    <FieldString guid="F387ECDFAA2344D19997187432439207" name="module_action" label="模块命令" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_ACTION" data_size="40" />
+    <FieldString guid="D66AB2B495B8440B93F03739FE68586C" name="module_result" label="模块结果" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="MODULE_RESULT" data_size="200" />
+    <FieldString guid="0CBFB248AF264DFFA6690EE413E2EA6B" name="browser_uri" label="浏览地址" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="BROWSER_URI" data_size="800" />
+    <FieldString guid="54FA47F9B2E24ED78625FBAB9EEB8C99" name="page_info" label="页面信息" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PAGE_INFO" data_size="2000" />
+    <FieldTemplate guid="8CB94ADEDA134E30BA67BC93AC9A7DF6" name="track" label="跟踪模板" is_valid="Y" note="" template_name="define.logger.track" />
+  </DataStore>
+</Content>

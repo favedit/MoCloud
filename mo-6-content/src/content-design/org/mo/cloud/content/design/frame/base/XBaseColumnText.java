@@ -7,15 +7,15 @@ import org.mo.cloud.content.design.configuration.XContentObject;
 import org.mo.com.lang.face.AName;
 
 //============================================================
-// <T>表格标签列对象的内容基类。</T>
+// <T>表格文本列对象的内容基类。</T>
 //
 // @author autosource
 //============================================================
-public abstract class XBaseColumnLabel
+public abstract class XBaseColumnText
       extends XContentObject
 {
    // 类名称
-   public static final String CONTENT_NAME = "ColumnLabel";
+   public static final String CONTENT_NAME = "ColumnText";
 
    // 有效性的定义
    @AContentField

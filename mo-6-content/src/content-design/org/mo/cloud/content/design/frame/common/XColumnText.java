@@ -1,11 +1,11 @@
 package org.mo.cloud.content.design.frame.common;
 
-import org.mo.cloud.content.design.frame.base.XBaseColumnLabel;
+import org.mo.cloud.content.design.frame.base.XBaseColumnText;
 
 //============================================================
-// <T>表格标签列。</T>
+// <T>表格文本列。</T>
 //============================================================
-public class XColumnLabel
-      extends XBaseColumnLabel
+public class XColumnText
+      extends XBaseColumnText
 {
 }

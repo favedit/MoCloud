@@ -10,8 +10,11 @@
                      <SliderGroup name='logicGroup' label='业务功能'>
                         <SliderButton name='commonButton' linker='_controlCommonButton' icon='editor.design.persistence|png' label='业务' fore_color='#FFFFFF'/>
                      </SliderGroup>
+                     <SliderGroup name='personGroup' label='用户功能' fore_color='#FFFFFF'>
+                        <SliderButton name='personButton' linker='_controlPersonButton' icon='editor.design.persistence|png' label='用户' fore_color='#FFFFFF'/>
+                     </SliderGroup>
                      <SliderGroup name='loggerGroup' label='日志功能' fore_color='#FFFFFF'>
-                        <SliderButton name='datasetGroup' linker='_controlDatasetButton' label='数据集' fore_color='#FFFFFF'/>
+                        <SliderButton name='loggerButton' linker='_controlLoggerButton' icon='editor.design.persistence|png' label='日志' fore_color='#FFFFFF'/>
                      </SliderGroup>
                   </SliderMenu>
                </FramePage>

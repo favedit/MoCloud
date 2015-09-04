@@ -53,32 +53,17 @@ public class FFrameService
    }
 
    //============================================================
-   // <T>获取数据处理。</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param input 网络输入
-   // @param output 网络输出
+   // <T>构造资源3D服务。</T>
    //============================================================
-   @Override
-   public EResult fetch(IWebContext context,
-                        ILogicContext logicContext,
-                        IWebInput input,
-                        IWebOutput output){
-      FXmlNode xcontent = input.config().findNode("Content");
-      String frameName = xcontent.get("frame_name");
-      // 获得页面
-      FContentObject frameContent = _frameConsole.findDefine(_storgeName, frameName, EPersistenceMode.Store);
-      if(frameContent == null){
-         throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
-      }
-      _logger.debug(this, "save", "Save frame dataset. (frame={1})", frameName);
+   public FSql makeSelectSql(FContentObject frameContent){
+      String frameName = frameContent.get("name");
       // 更新数据集
       String datasetName = frameContent.get("dataset_name");
       FContentObject datasetContent = _datasetConsole.findDefine(_storgeName, datasetName, EPersistenceMode.Store);
       if(datasetContent == null){
          throw new FFatalError("Frame dataset is not exists. (frame_name={1}, dataset_name={2})", frameName, datasetName);
       }
+      String dataGroup = datasetContent.get("data_group");
       String datasetDataName = datasetContent.get("data_name");
       // 生成SQL
       FSql sql = new FSql();
@@ -96,9 +81,45 @@ public class FFrameService
       }
       sql.append(" FROM ");
       sql.append(datasetDataName);
+      return sql;
+   }
+
+   //============================================================
+   // <T>获取数据处理。</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param input 网络输入
+   // @param output 网络输出
+   //============================================================
+   @Override
+   public EResult fetch(IWebContext context,
+                        ILogicContext logicContext,
+                        IWebInput input,
+                        IWebOutput output){
+      // 获得参数
+      FXmlNode xcontent = input.config().findNode("Content");
+      int page = xcontent.getInt("page", 0);
+      int pageSize = xcontent.getInt("page_size", 20);
+      String frameName = xcontent.get("frame_name");
+      // 获得页面
+      FContentObject frameContent = _frameConsole.findDefine(_storgeName, frameName, EPersistenceMode.Store);
+      if(frameContent == null){
+         throw new FFatalError("Frame is not exists. (frame_name={1})", frameName);
+      }
+      _logger.debug(this, "save", "Save frame dataset. (frame={1})", frameName);
+      // 更新数据集
+      String datasetName = frameContent.get("dataset_name");
+      FContentObject datasetContent = _datasetConsole.findDefine(_storgeName, datasetName, EPersistenceMode.Store);
+      if(datasetContent == null){
+         throw new FFatalError("Frame dataset is not exists. (frame_name={1}, dataset_name={2})", frameName, datasetName);
+      }
+      String dataGroup = datasetContent.get("data_group");
+      // 生成SQL
+      FSql sql = makeSelectSql(frameContent);
       // 查询数据
-      ISqlConnection connection = logicContext.activeConnection("data");
-      FDataset dataset = connection.fetchDataset(sql);
+      ISqlConnection connection = logicContext.activeConnection(dataGroup);
+      FDataset dataset = connection.fetchDataset(sql, pageSize, page);
       FXmlNode xoutput = output.config().createNode("Content");
       // 输出内容
       FXmlNode xdataset = xoutput.createNode("Dataset");

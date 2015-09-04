@@ -261,6 +261,10 @@ public abstract class XBaseColumnEdit
    @AContentField
    public final static FContentField LABEL_COLOR = new FContentField("labelColor", "label_color", EContentData.String, "", "", "", "YYNY");
 
+   // 固定列的定义
+   @AContentField
+   public final static FContentField OPTION_FIXED = new FContentField("optionFixed", "option_fixed", EContentData.String, "", "", "", "YYNY");
+
    // 数据必须的定义
    @AContentField
    public final static FContentField DATA_REQUIRE = new FContentField("dataRequire", "data_require", EContentData.Boolean, "", "", "", "YYNY");
@@ -606,6 +610,10 @@ public abstract class XBaseColumnEdit
    // 标签颜色
    @AName("label_color")
    protected String _labelColor;
+
+   // 固定列
+   @AName("option_fixed")
+   protected String _optionFixed;
 
    // 数据必须
    @AName("data_require")
@@ -1787,6 +1795,24 @@ public abstract class XBaseColumnEdit
    //============================================================
    public void setLabelColor(String value){
       _labelColor = value;
+   }
+
+   //============================================================
+   // <T>获得固定列的内容。</T>
+   //
+   // @return 固定列
+   //============================================================
+   public String getOptionFixed(){
+      return _optionFixed;
+   }
+
+   //============================================================
+   // <T>设置固定列的内容。</T>
+   //
+   // @param value 固定列
+   //============================================================
+   public void setOptionFixed(String value){
+      _optionFixed = value;
    }
 
    //============================================================

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <SliderMenu name='logicMenu' label='菜单区'>
+      <SliderGroup name='logicGroup' label='业务共通'>
+         <SliderButton name='loggerBrowserTypeButton' icon='editor.design.persistence|png' label='浏览器类型' fore_color='#333333' attributes='frame_name=logic.logger.browser.TypeList'/>
+         <SliderButton name='loggerBrowserAccessButton' icon='editor.design.persistence|png' label='浏览器访问' fore_color='#333333' attributes='frame_name=logic.logger.browser.AccessList'/>
+         <SliderButton name='loggerUserAccess' icon='editor.design.persistence|png' label='用户访问' fore_color='#333333' attributes='frame_name=logic.logger.person.user.AccessList'/>
+         <SliderButton name='loggerUserModuleButton' icon='editor.design.persistence|png' label='用户模块' fore_color='#333333' attributes='frame_name=logic.logger.person.user.ModuleList'/>
+      </SliderGroup>
+   </SliderMenu>
+</Content>

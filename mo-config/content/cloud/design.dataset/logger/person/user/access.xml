@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150904105738">
+  <DataStore guid="D935360E90B6464E9A8BF86547B85EE7" name="logger.person.user.access" label="人员用户访问" is_valid="Y" note="" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Access" data_name="LG_PSN_USER_ACCESS" data_alias="LG_PSN_USR_ACS" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+    <FieldRecordId guid="D8ED57E93CCB45FF8F65B6FDF4A363D9" name="user_id" label="用户编号" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+    <FieldString guid="2C6CD318942B4474977FA44F1DFBFE28" name="logic_code" label="逻辑代码" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_CODE" data_size="40" />
+    <FieldString guid="408537FF8EBB40E5AC8A5E0B3CFC818D" name="logic_result" label="逻辑结果" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_RESULT" data_size="40" />
+    <FieldString guid="BF6A498717824354B93D696D3B894661" name="logic_message" label="逻辑消息" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="LOGIC_MESSAGE" data_size="800" />
+    <FieldString guid="F30E751F3E4D4C37ADDC9EF3CBB6499B" name="host_address" label="登录地址" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST_ADDRESS" data_size="40" />
+    <FieldInteger guid="19DC0D8023A74756AA459D78CF9E2592" name="host_port" label="登录端口" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="HOST_PORT" />
+    <FieldString guid="8B2A7DF3FEBD4BA98E5F8E0FFB31E294" name="passport" label="登录名称" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+    <FieldString guid="A4FE000DD8B8454E8F9073B6F3243CEF" name="password" label="登录密码" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="40" />
+    <FieldString guid="12C782D8FB0C486AA8F764BB4F6AFEDF" name="browser_uri" label="浏览地址" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="BROWSER_URI" data_size="800" />
+    <FieldString guid="A6D17FEA119445429BDCBED6D658D072" name="page_info" label="页面信息" is_valid="Y" note="" is_null="Y" is_store="Y" is_abstract="N" data_name="PAGE_INFO" data_size="2000" />
+    <FieldTemplate guid="B8FCF44AB5E64234B32187A70659CF6A" name="track" label="跟踪模板" is_valid="Y" note="" template_name="define.logger.track" />
+  </DataStore>
+</Content>

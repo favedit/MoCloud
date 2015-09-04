@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <SliderMenu name='logicMenu' label='菜单区'>
+      <SliderGroup name='logicGroup' label='业务共通'>
+         <SliderButton name='controlModuleButton' icon='editor.design.persistence|png' label='模块信息' fore_color='#333333' attributes='frame_name=logic.control.ModuleList'/>
+         <SliderButton name='controlRoleButton' icon='editor.design.persistence|png' label='角色信息' fore_color='#333333' attributes='frame_name=logic.control.RoleList'/>
+         <SliderButton name='personUserButton' icon='editor.design.persistence|png' label='人员信息' fore_color='#333333' attributes='frame_name=logic.person.province.ProvinceList'/>
+         <SliderButton name='personHostButton' icon='editor.design.persistence|png' label='白名单信息' fore_color='#333333' attributes='frame_name=logic.person.city.CityList'/>
+      </SliderGroup>
+   </SliderMenu>
+</Content>
