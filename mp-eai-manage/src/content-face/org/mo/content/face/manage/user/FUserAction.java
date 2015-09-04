@@ -7,6 +7,7 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.manage.user.FDataPersonUserInfo;
 import org.mo.content.core.manage.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
@@ -73,8 +74,8 @@ public class FUserAction
       }else{
          userPage.setPageCurrent(0);
       }
-      FLogicDataset<FDataPersonUserUnit> unit = _userConsole.selectDataByPageAndSomerow(logicContext, null, userPage.pageCurrent() - 1);
-      basePage.setJson(unit.toJsonListString());
+      FLogicDataset<FDataPersonUserInfo> unitList = _userConsole.selectDataByPageAndSomerow(logicContext, null, userPage.pageCurrent() - 1);
+      basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
    }
 

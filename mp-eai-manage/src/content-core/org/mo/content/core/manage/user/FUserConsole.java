@@ -1,11 +1,13 @@
 package org.mo.content.core.manage.user;
 
+import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
+import org.mo.content.core.manage.role.IRoleConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -23,6 +25,9 @@ public class FUserConsole
    @ALink
    public IGcStorageConsole _storageConsole;
 
+   @ALink
+   protected IRoleConsole _roleConsole;
+
    //============================================================
    // <T>构造设备控制台。</T>
    //============================================================
@@ -38,7 +43,7 @@ public class FUserConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataPersonUserUnit> selectDataByPageAndSomerow(ILogicContext logicContext,
+   public FLogicDataset<FDataPersonUserInfo> selectDataByPageAndSomerow(ILogicContext logicContext,
                                                                         FDataPersonUserUnit userUnit,
                                                                         int pageNum){
       if(0 > pageNum){
@@ -47,7 +52,13 @@ public class FUserConsole
       FDataPersonUserLogic userUnitLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
       whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
-      FLogicDataset<FDataPersonUserUnit> userInfoList = userUnitLogic.fetchClass(FDataPersonUserUnit.class, null, whereSB.toString(), null, _pageSize, pageNum);
+      FLogicDataset<FDataPersonUserInfo> userInfoList = userUnitLogic.fetchClass(FDataPersonUserInfo.class, null, whereSB.toString(), null, _pageSize, pageNum);
+      for(FDataPersonUserInfo info : userInfoList){
+         FDataControlRoleUnit role = _roleConsole.find(logicContext, info.roleId());
+         if(role != null){
+            info.setRoleLabel(role.label());
+         }
+      }
       return userInfoList;
    }
 

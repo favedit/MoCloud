@@ -9,6 +9,7 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.module.FDataControlModuleInfo;
 import org.mo.content.core.manage.module.IModuleConsole;
+import org.mo.content.core.manage.role.FDataControlRoleInfo;
 import org.mo.content.core.manage.role.IRoleConsole;
 import org.mo.content.core.manage.role.IRoleModuleConsole;
 import org.mo.content.core.manage.user.IUserConsole;
@@ -92,7 +93,7 @@ public class FRoleAction
       }
       FDataControlRoleUnit roleUnit = new FDataControlRoleUnit();
       roleUnit.setCode(context.parameter("code"));
-      FLogicDataset<FDataControlRoleUnit> roleUnitList = _roleConsole.selectDataByPageAndSomerow(logicContext, roleUnit, rolePage.pageCurrent() - 1);
+      FLogicDataset<FDataControlRoleInfo> roleUnitList = _roleConsole.selectDataByPageAndSomerow(logicContext, roleUnit, rolePage.pageCurrent() - 1);
       basePage.toJson(roleUnitList.toJsonListString());
       _logger.debug(this, "Role", "Role selectDataByPage Finish. (roleUnitList={1})", roleUnitList.count());
       return "#/common/ajax";
@@ -334,7 +335,7 @@ public class FRoleAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      FLogicDataset<FDataControlRoleUnit> roleList = _roleConsole.selectDataByPageAndSomerow(logicContext, new FDataControlRoleUnit(), 0);
+      FLogicDataset<FDataControlRoleInfo> roleList = _roleConsole.selectDataByPageAndSomerow(logicContext, new FDataControlRoleUnit(), 0);
       basePage.setJson(roleList.toJsonString());
       _logger.debug(this, "Role", "Role selectAll begin. (roleList={1})", roleList.count());
       return "#/common/ajax";

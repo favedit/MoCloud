@@ -104,6 +104,7 @@
                <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
                <th data-options="field:'code',halign:'center',align:'left'" width="150px">代码</th>
                <th data-options="field:'label',halign:'center',align:'left'" width="150px">角色名称</th>
+               <th data-options="field:'roleModules',halign:'center',align:'left'" width="300px">拥有模块</th>
                <th data-options="field:'note',halign:'center',align:'left'" width="200px">备注</th>
                <th data-options="field:'createDate',halign:'center'" width="140px">创建时间</th>
                <th data-options="field:'make',align:'left',halign:'center',formatter:insert_role_editButton" width="150px">操作</th>

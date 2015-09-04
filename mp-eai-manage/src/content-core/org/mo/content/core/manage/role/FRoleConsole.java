@@ -1,9 +1,13 @@
 package org.mo.content.core.manage.role;
 
+import com.cyou.gccloud.data.data.FDataControlModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleLogic;
+import com.cyou.gccloud.data.data.FDataControlRoleModuleUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.lang.RString;
+import org.mo.content.core.manage.module.IModuleConsole;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -15,6 +19,14 @@ public class FRoleConsole
 
    // 每页条数
    static final int _pageSize = 20;
+
+   //角色模块控制台
+   @ALink
+   protected IRoleModuleConsole _roleModuleConsole;
+
+   //模块控制台
+   @ALink
+   protected IModuleConsole _moduleConsole;
 
    //============================================================
    // <T>构造设备控制台。</T>
@@ -32,7 +44,7 @@ public class FRoleConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataControlRoleUnit> selectDataByPageAndSomerow(ILogicContext logicContext,
+   public FLogicDataset<FDataControlRoleInfo> selectDataByPageAndSomerow(ILogicContext logicContext,
                                                                          FDataControlRoleUnit roleUnit,
                                                                          int pageNum){
       if(pageNum < 0){
@@ -43,7 +55,19 @@ public class FRoleConsole
          whereSql.append(FDataControlRoleLogic.CODE).append(" LIKE '%").append(roleUnit.code() + "%'");
       }
       FDataControlRoleLogic roleLogic = logicContext.findLogic(FDataControlRoleLogic.class);
-      FLogicDataset<FDataControlRoleUnit> roleList = roleLogic.fetch(whereSql.toString(), _pageSize, pageNum);
+      FLogicDataset<FDataControlRoleInfo> roleList = roleLogic.fetchClass(FDataControlRoleInfo.class, whereSql.toString(), _pageSize, pageNum);
+      for(FDataControlRoleInfo info : roleList){
+         StringBuffer modules = new StringBuffer();
+         FLogicDataset<FDataControlRoleModuleUnit> roleModuleList = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, info.ouid(), 0);
+         for(FDataControlRoleModuleUnit moduleUnit : roleModuleList){
+            FDataControlModuleUnit module = _moduleConsole.find(logicContext, moduleUnit.moduleId());
+            if(module != null){
+               modules.append(module.label()).append(",");
+            }
+         }
+         if(modules.length() > 0)
+            info.setRoleModules(modules.substring(0, modules.length() - 1));
+      }
       return roleList;
    }
 

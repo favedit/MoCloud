@@ -118,16 +118,16 @@ public class FBindingAction
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
          page.setMessage("E租宝帐号不能为空");
-         return "ajax";
+         return "/apl/ajax";
       }
       if(passport.length() > 30 || passport.indexOf('%') > -1 || passport.indexOf("'") > -1){
          page.setMessage("E租宝账号非法");
-         return "ajax";
+         return "/apl/ajax";
       }
       FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
       if(marketer == null){
          page.setMessage("E租宝账号无理财师权限！");
-         return "ajax";
+         return "/apl/ajax";
       }
       _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
@@ -148,7 +148,7 @@ public class FBindingAction
       int result = sendMessage(random, mobile);
       if(result < 0){
          page.setMessage("验证码发送失败");
-         return "ajax";
+         return "/apl/ajax";
       }
       //保存数据库
       FCacheSystemValidationUnit unit = _validationConsole.doPrepare(logicContext);
@@ -164,7 +164,7 @@ public class FBindingAction
       user.setContactPhone(mobile);
       _userConsole.doUpdate(logicContext, user);
       page.setMessage("1");
-      return "ajax";
+      return "/apl/ajax";
    }
 
    //============================================================

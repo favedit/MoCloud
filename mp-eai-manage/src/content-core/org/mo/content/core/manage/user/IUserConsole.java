@@ -26,7 +26,7 @@ public interface IUserConsole
    // @pageNum 指定页面
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataPersonUserUnit> selectDataByPageAndSomerow(ILogicContext logicContext,
+   FLogicDataset<FDataPersonUserInfo> selectDataByPageAndSomerow(ILogicContext logicContext,
                                                                  FDataPersonUserUnit userUnit,
                                                                  int pageNum);
 

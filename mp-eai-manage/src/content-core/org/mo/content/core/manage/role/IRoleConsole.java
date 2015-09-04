@@ -26,7 +26,7 @@ public interface IRoleConsole
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataControlRoleUnit> selectDataByPageAndSomerow(ILogicContext logicContext,
+   FLogicDataset<FDataControlRoleInfo> selectDataByPageAndSomerow(ILogicContext logicContext,
                                                                   FDataControlRoleUnit roleUnit,
                                                                   int pageNum);
 
