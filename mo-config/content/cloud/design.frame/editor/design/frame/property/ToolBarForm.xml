@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150824130350">
-  <FormFrame guid="BCB04888DE1E440687C659AAA8D9BB4D" name="editor.design.frame.property.ToolBarForm" inherit_frames="editor.design.frame.property.common.ControlPanel" type="FEditorDsPropertyForm" label="工具栏属性" is_valid="Y" logic_group="item" logic_service="editor.design.frame" note="" valid="false">
-    <ToolBar guid="EA9561C56F834C238B9F1D88E042ECB2" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%">
-      <ToolButton guid="2E50D79C56FB4C4FAE40FAF6239993B7" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
-      <ToolButton guid="7139CF9B6E96460FB9336748F7891365" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
-      <ToolButtonSplit guid="AF563A67AD6A4724A77A38CD2848D362" name="split2Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-      <ToolButtonMenu guid="D1A7382C7F4A49CE977D5DFC3FD24601" name="insertButton" label="新建控件" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="tool.insert">
-        <MenuButton guid="D6BAB6EF40C145D0A5E0F9A8182FC507" name="insertToolButton" label="新建 - 按键" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#design.webform.toolbuttonNew" hotkey="F6" page="insert@#/design/webform/WebForm.wa" attributes="_type=ToolButton\nsel_type=component\nform_name=design.webform.ToolButtonForm" />
-        <MenuButton guid="30FBF67E6C1E41D7B5B12E1DBF80E153" name="insertToolButtonSplit" label="新建 - 分割" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#design.webform.toolbtnsplitNew" hotkey="F6" page="insert@#/design/webform/WebForm.wa" attributes="_type=ToolButtonSplit\nsel_type=component\nform_name=design.webform.ToolButtonSplitForm" />
-        <MenuButton guid="544ECF31F3484449B5331586D4CC6B97" name="insertToolButtonMenu" label="新建 - 菜单" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="#design.webform.toolbuttonmenuNew" hotkey="F6" page="insert@#/design/webform/WebForm.wa" attributes="_type=ToolButtonMenu\nsel_type=component\nform_name=design.webform.ToolButtonMenuForm" />
+<Content update_date="20150904142446">
+  <FormFrame guid="D483F6F810454ABDA3B4628B66C93546" valid="N" name="editor.design.frame.property.ToolBarForm" label="工具栏属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+    <ToolBar guid="2A80111484BC40F9A56EEC2EF08B45BD" name="toolBar" label="工具栏" width="100%">
+      <ToolButton guid="31827F7040674A729C4C26646D7F7222" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="4C069931FC5448BBB873C55428E54AA9" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
+      <ToolButtonSplit guid="78571FDFF6FF45B6916C0D97CA6F1EB4" name="split2Button" label="分割" />
+      <ToolButtonMenu guid="B0178CE837A4473FA4665003338135CB" name="insertButton" label="新建控件" icon="tool.insert">
+        <MenuButton guid="51192E15794D4A4E8508C08B17B1F4B2" name="insertToolButton" label="新建 - 按键" attributes="_type=ToolButton\nsel_type=component\nform_name=design.webform.ToolButtonForm" icon="#design.webform.toolbuttonNew" hotkey="F6" />
+        <MenuButton guid="74F68972D9C34A88B1164B133C82EBB9" name="insertToolButtonSplit" label="新建 - 分割" attributes="_type=ToolButtonSplit\nsel_type=component\nform_name=design.webform.ToolButtonSplitForm" icon="#design.webform.toolbtnsplitNew" hotkey="F6" />
+        <MenuButton guid="D146D6B58D504B6CB5A11BA8ACD97132" name="insertToolButtonMenu" label="新建 - 菜单" attributes="_type=ToolButtonMenu\nsel_type=component\nform_name=design.webform.ToolButtonMenuForm" icon="#design.webform.toolbuttonmenuNew" hotkey="F6" />
       </ToolButtonMenu>
-      <ToolButtonSplit guid="6CB6551B2DFE4A74AAC5A02AF0B4453C" name="split4Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-      <ToolButton guid="202D9B38B003456597450A1983B767F1" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/webform/WebForm.wa" attributes="action=sort" />
+      <ToolButtonSplit guid="22CC17C972DA416A8FE73896FAE677DA" name="split4Button" label="分割" />
+      <ToolButton guid="839FA467C5DB4B809EDA8DDA264B8C5D" name="sortButton" label="排序" attributes="action=sort" icon="editor.common.sort" />
     </ToolBar>
-    <Panel guid="C9FC369245B74CE0975A97DFB80E334A" name="barPanel" icon="design.panel.icon" label="停靠栏属性">
-      <Edit guid="1206E1E42081469A931BDE36A3B25624" name="dockCd" linker="_controlDockCd" label="停靠" label_size="70,0" valid="Y" edit_size="200,0" input_size="200,0" note="" />
-    </Panel>
+    <Template guid="B4998C8128B4495190F89D76251FCC0E" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="261274FD48D74705BD22769A20E15464" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
   </FormFrame>
 </Content>

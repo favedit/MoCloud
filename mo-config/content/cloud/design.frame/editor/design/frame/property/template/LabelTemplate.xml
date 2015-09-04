@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150825162107">
-  <TemplateFrame guid="C3BAC113BA714D26B73DFF2B8E802C8A" name="editor.design.frame.property.template.LabelTemplate" label="标签属性模板" is_valid="Y" note="" valid="false" nowrap="false" location="0,0" size="0,0">
-    <Panel guid="16505B6680174E89B825D6AD0FA24BC8" name="labelPanel" icon="design.panel.icon" label="标签属性">
-      <Select guid="0BD7F7ACF8AB479EA51CC97AE96B8F97" name="labelTypeCd" label="标签类型" label_size="80,0" edit_size="160,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" data_name="label_type_cd" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_refer="editor.design.frame.LabelType" edit_check="N" edit_mode="IU" />
-      <Select guid="2B43A66C38CC4742A00F57B51C96A675" name="labelPositionCd" label="标签位置" label_size="80,0" edit_size="160,0" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="label_position_cd" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_refer="editor.design.frame.LabelPosition" edit_check="N" edit_dynamic="N" edit_mode="IU" />
-      <IconPicker guid="DAF6504F8BFD4EB086CC4A02BCAC18FB" name="labelIcon" label="标签图标" label_size="80,0" edit_size="160,0" is_valid="Y" note="" disp_search="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" style_edit="iconPicker" data_name="label_icon" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
-      <Select guid="B68F4EC58550493D950294FC9399A31B" name="labelAlignCd" label="标签对齐" label_size="80,0" edit_size="160,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="label_align_cd" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_refer="editor.design.frame.Align" edit_check="N" edit_dynamic="N" edit_mode="IU" />
-      <Number2 guid="DB5E358E6ADB4F8E9EEB6F36BBAB7D17" name="labelSize" label="标签宽度" label_size="80,0" edit_size="160,0" is_valid="Y" note="" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" data_name="label_size" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_round="N" edit_mode="IU" />
-      <ColorPicker guid="F1F793498CCA4F5C90EB971C1DA10E69" name="labelColor" label="标签颜色" label_size="80,0" edit_size="160,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_zoom="N" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" data_name="label_color" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
+<Content update_date="20150904142351">
+  <TemplateFrame guid="80791ECDD57946A99866A1FE8D257EB8" valid="N" name="editor.design.frame.property.template.LabelTemplate" label="标签属性模板" nowrap="N" location="0,0" size="0,0">
+    <Panel guid="D52D1324738748B2840BF1FD312FFBE5" name="labelPanel" label="标签属性" icon="design.panel.icon">
+      <Select guid="31A5A2C21BA342F8B7FF0287264D9D4A" name="labelTypeCd" label="标签类型" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_type_cd" edit_refer="editor.design.frame.LabelType" input_size="160,0" />
+      <Select guid="EDBE49BCE4234F29B60FE21F9B79DF81" name="labelPositionCd" label="标签位置" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_position_cd" edit_refer="editor.design.frame.LabelPosition" input_size="160,0" />
+      <IconPicker guid="D6F5F0EB0D574E46968624B06674D0BD" name="labelIcon" label="标签图标" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_icon" />
+      <Select guid="7314770115CA4646849900B00E1AE101" name="labelAlignCd" label="标签对齐" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_align_cd" edit_refer="editor.design.frame.Align" input_size="160,0" />
+      <Number2 guid="C27613883965460AAF5632F4634CB34E" name="labelSize" label="标签宽度" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_size" />
+      <ColorPicker guid="B1984C9FAF7C4A49BEF66023C7946825" name="labelColor" label="标签颜色" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_color" />
     </Panel>
   </TemplateFrame>
 </Content>

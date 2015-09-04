@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <FormFrame name="editor.design.frame.property.ButtonFrame" inherit_frames='editor.design.frame.property.common.ControlPanel' type='FEditorDsPropertyForm' label="按键属性" is_valid="Y" logic_group='item' logic_service='editor.design.frame' note="">
-    <ToolBar _guid="87F9762E92664806B10EDD51313F2120" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-      <ToolButton _guid="01848FCB94314D01B9382ED494921185" name="saveButton" label="保存" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
-      <ToolButton _guid="1688BB74FDC940CCAAB14C50D29375B5" name="deleteButton" label="删除" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+<Content update_date="20150904142604">
+  <FormFrame guid="1BAE6F942232481F8E9F2EC1C025E5A8" valid="N" name="editor.design.frame.property.ButtonForm" label="按键属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+    <ToolBar guid="3692F3B7E0444B72BBA75521702884C5" name="toolBar" label="工具栏" width="100%" height="24">
+      <ToolButton guid="135E5764B8AF4BC3A5FD182879F0B54C" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="956B6695328046D6A2C1E258A327E770" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
     </ToolBar>
-      <Panel name='buttonPanel' icon='design.panel.icon' label='按键属性'>
-         <Edit name="clickSource" linker='_controlClickSource' label="停靠" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
-   </FormFrame>
+    <Template guid="6E7DDD9C42014C23BECC61162155D3A9" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="4848CFB49FE14166AE2EB4F5A068202F" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+  </FormFrame>
 </Content>

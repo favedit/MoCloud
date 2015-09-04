@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150825162103">
-  <TemplateFrame guid="054BB983D8064039BA239590921396C5" name="editor.design.frame.property.template.ValidTemplate" label="标签属性模板" is_valid="Y" note="" valid="false" nowrap="false" location="0,0" size="0,0">
-    <Panel guid="E819B648F3FF44E7A725572E1346BCEB" name="verifyPanel" icon="design.panel.icon" label="检查属性">
-      <Check guid="D8BB2D96D6E4499FB8BFF3B90B6729C2" name="verifyRequire" label="数据必须" label_size="80,0" edit_size="40,0" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" style_refer="controlNarrow" data_name="verify_require" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
-      <Check guid="1166E551B9334F82ABCADA799E45CBD9" name="verifyInsert" label="新建检查" label_size="80,0" edit_size="40,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" style_refer="controlNarrow" data_name="verify_insert" data_default="Y" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
-      <Check guid="26C06B5CA57A4DBEBA7A070180EA69F4" name="verifyUpdate" label="更新检查" label_size="80,0" edit_size="40,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" nowrap="Y" style_refer="controlNarrow" data_name="verify_update" data_default="Y" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
-      <Check guid="F6CF6685674D43E2B896651455BE5B49" name="verifyDelete" label="删除检查" label_size="80,0" edit_size="40,0" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" style_refer="controlNarrow" data_name="verify_delete" edit_insert="Y" edit_update="Y" valid_insert="Y" valid_update="Y" edit_mode="IU" />
+<Content update_date="20150904142347">
+  <TemplateFrame guid="3831A7F5FE34452A8FE8F7C217F1A0FB" valid="N" name="editor.design.frame.property.template.VerifyTemplate" label="校验属性模板" nowrap="N" location="0,0" size="0,0">
+    <Panel guid="AD6A8E0A4B744DF4A6A1BBA7F082318E" name="verifyPanel" label="检查属性" icon="design.panel.icon">
+      <Check guid="1B47B69EE1B8432AA1574726E557BF22" name="verifyRequire" label="数据必须" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="verify_require" />
+      <Check guid="BADCAF8B46AF4F32852F4842928D4288" name="verifyInsert" label="新建检查" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="verify_insert" data_default="Y" />
+      <Check guid="26F43B1DD80942968D17AB50477FC276" name="verifyUpdate" label="更新检查" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="verify_update" data_default="Y" />
+      <Check guid="4C4D0E4E24B14EADB8A7DD8C8A779F3C" name="verifyDelete" label="删除检查" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="verify_delete" />
     </Panel>
   </TemplateFrame>
 </Content>

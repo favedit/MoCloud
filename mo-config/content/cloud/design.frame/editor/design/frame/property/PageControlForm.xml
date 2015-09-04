@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <FormFrame name="editor.design.frame.property.LabelFrame" inherit_frames='editor.design.frame.property.common.ControlPanel' type='FEditorDsPropertyForm' label="标签属性" is_valid="Y" logic_group='item' logic_service='editor.design.frame' note="">
-    <ToolBar _guid="87F9762E92664806B10EDD51313F2120" name="toolBar" label="M#12cn13工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-      <ToolButton _guid="01848FCB94314D01B9382ED494921185" name="saveButton" label="保存" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
-      <ToolButton _guid="1688BB74FDC940CCAAB14C50D29375B5" name="deleteButton" label="删除" is_valid="Y" note="M#" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+<Content update_date="20150904142513">
+  <FormFrame guid="45253CFC497D432FAAF128968B20332A" valid="N" name="editor.design.frame.property.PageControlForm" label="标签属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+    <ToolBar guid="02AB11B890174050A7ED6267CE4709BF" name="toolBar" label="M#12cn13工具栏" width="100%" height="24">
+      <ToolButton guid="F4C499E85F4F463490A2F763377685FB" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="435347BE1E7145BEA28403F34A9C17E4" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
     </ToolBar>
-      <Panel name='buttonPanel' icon='design.panel.icon' label='按键属性'>
-         <Edit name="clickSource" linker='_controlClickSource' label="停靠" label_size='70,0' valid="Y" edit_size='200,0' input_size='200,0' note="" />
-      </Panel>
-   </FormFrame>
+    <Template guid="564E9635A3C545A8BDA9F1688007A16D" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="EBD3E50FEA654447A35F8F1411C721AC" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+  </FormFrame>
 </Content>

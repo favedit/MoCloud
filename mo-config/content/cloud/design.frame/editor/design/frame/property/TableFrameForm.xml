@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <FormFrame name="editor.design.frame.property.BarFrame" inherit_frames='editor.design.frame.property.common.ControlPanel' type='FEditorDsPropertyForm' label="停靠栏属性" is_valid="Y" logic_group='container' logic_service='editor.design.frame' note="">
-  <ToolBar _uuid="xEvPHiLFlzDmFkIf4iRdvA" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-      <ToolButton _guid="01848FCB94314D01B9382ED494921185" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
-      <ToolButton _guid="1688BB74FDC940CCAAB14C50D29375B5" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
-    <ToolButtonSplit _uuid="dEZynJDYe4FdwB7rdFgFvQ" name="split1Button" label="分割" is_valid="Y" note="" disp_list="Y" disp_update="Y" disp_delete="Y" />
-    <ToolButtonMenu _uuid="[kIAT19roZskXT[AsYnOrQ" name="insertButtonMenu" label="新建控件" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.insertcontrol">
-      <MenuButton _uuid="]UsFkwq30fWOpMYdhQidig" name="insertToolBar" label="工具栏控件" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.toolbar" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ToolBarForm\ncomponent_type=ToolBar" />
-      <MenuButton _uuid="ME8Hvd2iNZCM]pWRXsDLvQ" name="insertColumnLabel" label="标签列" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columnlabel" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnLabelForm\ncomponent_type=ColumnLabel" />
-      <MenuButton _uuid="TU5]PZ7qreLSmt6mJeYlpw" name="insertColumnCheck" label="单选框列" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columncheck" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnCheckForm\ncomponent_type=ColumnCheck" />
-      <MenuButton _uuid="5EEQa6MEc[C4nQAw6Gs9nA" name="insertColumnNumber" label="数字输入列" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columnnumber" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnNumberForm\ncomponent_type=ColumnNumber" />
-      <MenuButton _uuid="lUGBaSc1QZiLEsI3VlZNvg" name="insertColumnSelect" label="下拉列表列" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columnselect" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnSelectForm\ncomponent_type=ColumnSelect" />
-      <MenuButton _uuid="kEOml9[[Y9V37jLJEF8Fkw" name="insertColumnCalendar" label="日期时间列" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columncalendar" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnCalendarForm\ncomponent_type=ColumnCalendar" />
-      <MenuButton _uuid="ME8Hvd2iNZCM]pWRXsDLvQ" name="insertColumnEdit" label="文本输入列" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columnedit" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnEditForm\ncomponent_type=ColumnEdit" />
-      <MenuButton _uuid="lUGBaSc1QZiLEsI3VlZNvg" name="insertColumnMemo" label="多行文本列" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columnmemo" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnMemoForm\ncomponent_type=ColumnMemo" />
-      <MenuButton _uuid="lUGBaSc1QZiLEsI3VlZNvg" name="insertColumnColor" label="颜色选取列" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columncolor" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnColorForm\ncomponent_type=ColumnColor" />
-      <MenuButton _uuid="Tkn3ijwYHbNaZCSGVsmIkg" name="insertColumnPicture" label="图片列" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.design.frame.columnpicture" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnPictureForm\ncomponent_type=ColumnPicture" />
-    </ToolButtonMenu>
-    <ToolButtonSplit _uuid="z0qInn7[PmxIHMB1xSWZvw" name="spilt4" label="分隔" is_valid="Y" note="" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" />
-      <ToolButton _guid="477D82499B204B03B8CA3A0B9813BDC0" name="sortButton" label="排序" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.sort" page="sort@#/design/webform/WebForm.wa" attributes="sel_type=collection" />
-  </ToolBar>
-    <Template _guid="E103B70E21C84C9C976CE8293630F35F" name="datasetTemplate" frame_source="editor.design.frame.property.template.DatasetTemplate" />
-      <Panel name='barPanel' icon='design.panel.icon' label='页面容器属性'>
-         <Edit name="unitFrameName" label="页面名称" label_size='80,0' valid="Y" edit_size='400,0' data_name='unit_frame_name' note="" />
-         <Edit name="unitWhere" label="页面条件" label_size='80,0' valid="Y" edit_size='400,0' data_name='unit_where' note="" />
-      </Panel>
-   </FormFrame>
+<Content update_date="20150904142453">
+  <FormFrame guid="5FC846142B9A4985B5C0D1C822ED6200" valid="N" name="editor.design.frame.property.TableFrameForm" label="停靠栏属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="container" logic_service="editor.design.frame">
+    <ToolBar guid="625071DAFC864349B517A909FD5A8A8A" name="toolBar" label="工具栏" width="100%" height="24">
+      <ToolButton guid="2854400DA37B4774BB1FE77497546A30" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="06B6254831704132B23B905B14CB5348" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
+      <ToolButtonSplit guid="1C762C42B28F480F83B24CE7D3C368AF" name="split1Button" label="分割" />
+      <ToolButtonMenu guid="C7CD9F2C222E40C68D32CFD326C19870" name="insertButtonMenu" label="新建控件" icon="editor.design.frame.insertcontrol">
+        <MenuButton guid="9A654B1A205C4AC89E4021CFEF26DC41" name="insertToolBar" label="工具栏控件" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ToolBarForm\ncomponent_type=ToolBar" icon="editor.design.frame.toolbar" />
+        <MenuButton guid="07141286F48F4D0287F74B331E662784" name="insertColumnLabel" label="标签列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnLabelForm\ncomponent_type=ColumnLabel" icon="editor.design.frame.columnlabel" />
+        <MenuButton guid="11DAF02B1E6948E9A53835ADADD09F08" name="insertColumnCheck" label="单选框列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnCheckForm\ncomponent_type=ColumnCheck" icon="editor.design.frame.columncheck" />
+        <MenuButton guid="D3FF0D8E5B814AA79F1DCBAB587647C5" name="insertColumnNumber" label="数字输入列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnNumberForm\ncomponent_type=ColumnNumber" icon="editor.design.frame.columnnumber" />
+        <MenuButton guid="AC16BBB97B6840F992A99363BE34F755" name="insertColumnSelect" label="下拉列表列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnSelectForm\ncomponent_type=ColumnSelect" icon="editor.design.frame.columnselect" />
+        <MenuButton guid="E50E32813D7D4C33ABF1984715237B32" name="insertColumnCalendar" label="日期时间列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnCalendarForm\ncomponent_type=ColumnCalendar" icon="editor.design.frame.columncalendar" />
+        <MenuButton guid="0A93B7BE67274C08B1C9C00070B21151" name="insertColumnEdit" label="文本输入列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnEditForm\ncomponent_type=ColumnEdit" icon="editor.design.frame.columnedit" />
+        <MenuButton guid="12A43AC39BDB4C12A55100DEC4A3B0B1" name="insertColumnMemo" label="多行文本列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnMemoForm\ncomponent_type=ColumnMemo" icon="editor.design.frame.columnmemo" />
+        <MenuButton guid="772B904C105643FC8584771767CAD693" name="insertColumnColor" label="颜色选取列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnColorForm\ncomponent_type=ColumnColor" icon="editor.design.frame.columncolor" />
+        <MenuButton guid="4A056DBDECA94F0AABF6C455E9B7F48E" name="insertColumnPicture" label="图片列" attributes="action=insert\nlogic_group=item\nframe_name=editor.design.frame.property.ColumnPictureForm\ncomponent_type=ColumnPicture" icon="editor.design.frame.columnpicture" />
+      </ToolButtonMenu>
+      <ToolButtonSplit guid="1CC5FD54D58548B2A092A4D7FA367F63" name="spilt4" label="分隔" />
+      <ToolButton guid="3E50301BEDBB438A9D5A178601EAFD19" name="sortButton" label="排序" attributes="sel_type=collection" icon="editor.common.sort" />
+    </ToolBar>
+    <Template guid="989EA69D87CF4EF2A77C3A72826FD7D5" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="721428F8DB114641B7E1EE000FA5E30E" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="B4B28FBA52E645028CE5FB80F27DD7C0" name="datasetTemplate" frame_source="editor.design.frame.property.template.DatasetTemplate" />
+    <Panel guid="4B6B338DF4D64A079113EDEA80C121E2" name="barPanel" label="页面容器属性" icon="design.panel.icon">
+      <Edit guid="CEF68C0F17B04027949158F92C3816DA" valid="Y" name="unitFrameName" label="页面名称" label_size="80,0" edit_size="400,0" data_name="unit_frame_name" />
+      <Edit guid="D6F8C0B53A2C4771965E0BDFE7A87596" valid="Y" name="unitWhere" label="页面条件" label_size="80,0" edit_size="400,0" data_name="unit_where" />
+    </Panel>
+  </FormFrame>
 </Content>

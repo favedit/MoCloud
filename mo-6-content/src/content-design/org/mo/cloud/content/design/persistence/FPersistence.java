@@ -286,16 +286,22 @@ public class FPersistence
          throw new FFatalError("Content class is not exists. (class_name={1})", className);
       }
       // 合并属性
-      if(xconfig.hasAttribute()){
-         for(INamePair<FContentField> pair : clazz.fields()){
-            FContentField field = pair.value();
-            String linkName = field.linkName();
-            String value = xconfig.get(linkName, null);
-            if(!RString.isEmpty(value)){
-               xinstance.set(linkName, value);
-            }
+      FAttributes attributes = new FAttributes();
+      for(INamePair<FContentField> pair : clazz.fields()){
+         FContentField field = pair.value();
+         String linkName = field.linkName();
+         // 设置原始数据
+         String linkValue = xinstance.get(linkName, null);
+         if(!RString.isEmpty(linkValue)){
+            attributes.set(linkName, linkValue);
+         }
+         // 设置合并数据
+         String value = xconfig.get(linkName, null);
+         if(!RString.isEmpty(value)){
+            attributes.set(linkName, value);
          }
       }
+      xinstance.attributes().assign(attributes);
       // 合并节点
       FContentObjects nodes = new FContentObjects();
       if(xconfig.hasNode()){

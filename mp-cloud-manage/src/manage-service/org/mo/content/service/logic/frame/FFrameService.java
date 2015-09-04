@@ -59,11 +59,12 @@ public class FFrameService
       String frameName = frameContent.get("name");
       // 更新数据集
       String datasetName = frameContent.get("dataset_name");
+      String datasetWhere = frameContent.get("dataset_where", null);
+      String datasetOrder = frameContent.get("dataset_order", null);
       FContentObject datasetContent = _datasetConsole.findDefine(_storgeName, datasetName, EPersistenceMode.Store);
       if(datasetContent == null){
          throw new FFatalError("Frame dataset is not exists. (frame_name={1}, dataset_name={2})", frameName, datasetName);
       }
-      String dataGroup = datasetContent.get("data_group");
       String datasetDataName = datasetContent.get("data_name");
       // 生成SQL
       FSql sql = new FSql();
@@ -81,7 +82,37 @@ public class FFrameService
       }
       sql.append(" FROM ");
       sql.append(datasetDataName);
+      // 增加查询条件
+      if(!RString.isEmpty(datasetWhere)){
+         sql.append(" WHERE ");
+         sql.append(datasetWhere);
+      }
+      // 增加排序条件
+      if(!RString.isEmpty(datasetOrder)){
+         sql.append(" ORDER BY ");
+         sql.append(datasetOrder);
+      }
       return sql;
+   }
+
+   //============================================================
+   // <T>存储数据集合。</T>
+   //
+   // @param dataset 数据集
+   // @param xdataset 数据集节点
+   //============================================================
+   public void saveDataset(FDataset dataset,
+                           FXmlNode xdataset){
+      xdataset.set("total", dataset.total());
+      xdataset.set("page_size", dataset.pageSize());
+      xdataset.set("page_count", dataset.pageCount());
+      xdataset.set("page", dataset.page());
+      for(FRow row : dataset){
+         FXmlNode xrow = xdataset.createNode("Row");
+         for(IStringPair pair : row){
+            xrow.set(pair.name(), pair.value());
+         }
+      }
    }
 
    //============================================================
@@ -124,12 +155,7 @@ public class FFrameService
       // 输出内容
       FXmlNode xdataset = xoutput.createNode("Dataset");
       xdataset.set("name", datasetName);
-      for(FRow row : dataset){
-         FXmlNode xrow = xdataset.createNode("Row");
-         for(IStringPair pair : row){
-            xrow.set(pair.name(), pair.value());
-         }
-      }
+      saveDataset(dataset, xdataset);
       return EResult.Success;
    }
 
@@ -188,12 +214,7 @@ public class FFrameService
       // 输出内容
       FXmlNode xdataset = xoutput.createNode("Dataset");
       xdataset.set("name", datasetName);
-      for(FRow row : dataset){
-         FXmlNode xrow = xdataset.createNode("Row");
-         for(IStringPair pair : row){
-            xrow.set(pair.name(), pair.value());
-         }
-      }
+      saveDataset(dataset, xdataset);
       return EResult.Success;
    }
 
