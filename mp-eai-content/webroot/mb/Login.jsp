@@ -7,28 +7,48 @@
    <link rel="stylesheet" type="text/css" href="css/reset.css">
    <link rel="stylesheet" type="text/css" href="css/animate.css">
    <link rel="stylesheet" type="text/css" href="css/login.css">
+   <script type="text/javascript" src="js/viewport.js"></script>
 </head>
 <body>
-   <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
-   <FORM name='frmMain' style="height:100%;" method='post' action='Index.wa?do=login'>
-   <div class="wap-main">
-         <div class="wap-logo">
-            <img src="images/logos.png">
-         </div>
-         <div class="wap-box-container">
-            <p class="wap-title">账号</p>
-            <p class="content"><input id="passport" name="passport" type="text" placeholder="请输入OA账号"></p>
-            <p class="wap-title password">密码</p>
-            <p class="content "><input id="password" name="password" type="password" ></p>
-            <a href="javascript:;" class="wap-btn"><input type="submit" id="btn" value="登录"></a>
-         </div>
-   </div>
-   <footer class="wap-footer">©2015 智慧企业推进中心（北京）<a  href="tel:010-65499299">客服电话：010-65499299</a></footer>
 
-   <div class=" popBox animated flipInX" id="alertWidget" style="display: none;">
-      <span class="ico-pop-wrong"></span>
-      <span class="tip" id="tip">请输入病情描述</span>
-   </div>
+ <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
+      <tbody>
+      <tr>
+         <td height="120" align="center" valign="center">
+            <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
+            <img class="logo" src="images/login/6.png">
+        </td>
+     </tr>
+     <tr>
+       <td align="center" valign="center">
+         <section class="wap-main">
+            <FORM name='frmMain' style="height:100%;" method='post' action='Index.wa?do=login'>
+               <div class="wap-box">
+                  <div style="position: relative">
+                  <ul class="details-container">
+                     <p><b>用户名</b><input id="passport" name="passport" class="quantico account"  type="text" placeholder="请输入oa账号"></p>
+                     <p><b>密<i>码</i>码</b><input input id="password" name="password" class="quantico password" type="password" placeholder="密码"></p>
+                     <span class="details" ><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</span>
+                     <span class="btn-container" ><input input id="btn" type="submit"  value=""></span>
+                  </ul>
+                  </div>
+               </div>
+            </FORM>
+         </section>
+          <div class="popBox animated flipInX" id="alertWidget" style="display: none;">
+            <span class="ico-pop-wrong"></span>
+            <span class="tip" id="tip">请输入病情描述</span>
+         </div>
+        </td>
+     </tr>
+     <tr>
+       <td height="60" align="center" valign="center">
+          <footer class="wap-footer">©2015 智慧企业推进中心（北京）<a href="tel:010-65499299">客服电话：010-65499299</a></footer>
+       </td>
+     </tr>
+      </tbody>
+   </table>
+
    <script type="text/javascript">
            function popupBox (str) {
                var $alertBox = document.getElementById("alertWidget");
@@ -54,6 +74,6 @@
             }
          }
    </script>
-   </FORM>
+   
 </body>
 </html>

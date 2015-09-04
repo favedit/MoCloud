@@ -3,47 +3,50 @@
    <html>
 
    <head>
-      <title>钰诚集团智慧企业推进中心</title>
+      <title>e租宝-全球实时数据展示系统账号棒定</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
-      <link rel="stylesheet" type="text/css" href="css/wap.css">
+      <link rel="stylesheet" type="text/css" href="css/binding.css">
+      <script type="text/javascript" src="js/viewport.js"></script>
       <script type="text/javascript" src="js/ajax.js"></script>
    </head>
-
    <body>
-      <FORM id="frmBind" name='frmBind' method='post' action='Binding.wa?do=bindOnAccount'>
-         <div class="main" style="overflow-x:hidden;">
-            <section class="main-container" id="main-container">
-               <section class="binding-container" style="display:block;">
-                  <header>
-                     <a href="Main.wa"><img class="return-img" src="images/fanhui.png"></a>
-                     账号绑定
-                  </header>
-                  <ul class="fieldsWidget">
-                     <p class="error"><jh:write source='&page.message' /></p>
-                     <li class="fieldsItem">
-                        <div class="fieldsItemRibbon">
-                           <label>账号：</label>
-                           <input type="text" name="ePassport" class="fieldInput" placeholder="请输入E租宝账号" value="">
-                           <button id="getVerifyCodeBtn" class="btnGetCode" type="button">获取验证码</button>
-                           <input tyle="hidden" style="display: none;" value="1" id="input_state">
-                        </div>
-                     </li>
-                     <li class="fieldsItem">
-                        <div class="fieldsItemRibbon">
-                           <label>验证码：</label>
-                           <input type="text" name="validate" maxlength="4" data-type="code" class="fieldInput" placeholder="请输入验证码">
-                        </div>
-                     </li>
-                     <a href="javascript:;" class="wap-btn">
-                        <input id="btn" type="submit" value="提交">
-                     </a>
-                  </ul>
-               </section>
-            </section>
+     <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
+      <tbody>
+      <tr >
+         <td height="60">
+             <header class="header">
+               <a  href="Main.wa"><img class="return-img" src="images/binding/8.png"></a>
+               全球实时数据中心
+            </header>
+        </td>
+      </tr>
+      <tr>
+       <td align="center" valign="center">
+         <div class="box-container">
+            <h1>账号绑定</h1>
+            <span class="box-prompt error"><jh:write source='&page.message' /></span>
+            <FORM id="frmBind" name='frmBind' method='post' action='Binding.wa?do=bindOnAccount'>
+               <p class="user-name">
+                  <input id="mobile" name="ePassport" class="quantico account" type="text" placeholder="E租宝理财师账号">
+               </p>
+               <p class="validation"><input type="text" name="validate" id="verification_code" placeholder="验证码"><input type="button" id="send_btn" value="发送动态密码">
+               </p>
+               <a href="javascript:;" class="btn">
+                  <input id="btn"  type="submit" value=" ">
+               </a>
+            </FORM>
+            <p class="refund"><a href="Main.wa" class="returns">返回首页</a></p>
          </div>
-      </FORM>
+        </td>
+      </tr>
+      <tr>
+       <td height="10" align="center" valign="center">
+       </td>
+      </tr>
+      </tbody>
+      </table>
 
       <script type="text/javascript">
          var alertTips = {
@@ -53,7 +56,7 @@
          };
          var ctrl = {};
          var wait = 60;
-         var $getVerifyCodeBtn = document.getElementById("getVerifyCodeBtn");
+         var $getVerifyCodeBtn = document.getElementById("send_btn");
          ctrl.countdown = function(o) {
             if (wait == 0) {
                o.removeAttribute("disabled");
@@ -70,31 +73,32 @@
                }, 1000)
             }
          };
-         var $fieldInput = document.getElementsByClassName("fieldInput")[0];
-         var $fieldInput2 = document.getElementsByClassName("fieldInput")[1];
+         var $fieldInput = document.getElementsByClassName("quantico")[0];
+         var $fieldInput2 = document.getElementById("verification_code");
          var error = document.getElementsByClassName("error")[0];
          if (error.innerHTML != "") {
             error.innerHTML = error.innerHTML;
          }
          ctrl.setCallBackObject = function() {
-            var ajax = new CallBackObject();
-            ajax.OnComplete = ctrl.onComplete;
-            ajax.onError = ctrl.onError;
-            ajax.OnLoaded = ctrl.onLoading;
-            ajax.DoCallBack("Binding.wa?do=sendValidate", "passport=" + $fieldInput.value);
+               var cbo = new CallBackObject(); 
+               cbo.OnComplete = ctrl.Cbo_Complete; 
+               cbo.onError = ctrl.Cbo_Error; 
+               cbo.OnLoaded = ctrl.OnLoading; 
+               cbo.DoCallBack("Binding.wa?do=sendValidate", "passport=" + $fieldInput.value); 
+         };
+         ctrl.OnLoading = function() {
          }
-         ctrl.onLoading = function() {}
-         ctrl.onComplete = function(responseText, responseXML) {
-            console.log(responseText);
+         ctrl.Cbo_Complete = function(responseText, responseXML) {
             var result = ctrl.replaceNbsp(responseText);
+             console.log(result);
             if (result == 1) {
                ctrl.countdown($getVerifyCodeBtn);
             } else {
                error.innerHTML = result;
             }
          }
-         ctrl.onError = function(status, statusText, responseText) {
-//            alert(responseText);
+         ctrl.Cbo_Error = function(status, statusText, responseText) {
+            console.log(responseText);
          }
          ctrl.replaceNbsp = function(temp) {
             if (temp != undefined && temp != "") {
@@ -102,6 +106,7 @@
             }
             return temp;
          };
+
          // 验证码
          $getVerifyCodeBtn.onclick = function() {
             var o = this;
