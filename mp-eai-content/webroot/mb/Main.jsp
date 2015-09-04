@@ -1,7 +1,6 @@
 <%@ include file='/apl/public.inc' %>
    <!DOCTYPE>
    <html>
-
    <head>
       <title>钰诚集团智慧企业推进中心</title>
       <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -10,83 +9,79 @@
       <link rel="stylesheet" type="text/css" href="css/wap.css">
       <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
    </head>
-
    <body>
       <FORM name='frmMain' method='post' action='Main.wa'>
          <INPUT id='id_do' name='do' type='hidden' />
          <div class="main" style="overflow-x:hidden;">
-            <section class="nav-container" id="nav-container">
-               <ul></ul>
+            <section class="nav-container"  id="nav-container">
+               <ul>
+                  <li class="img"><Img src="images/main/7.png"></li>
+                  <li class="current font20">当前账号</li>
+                  <li class="names font40"><jh:write source='&page.passport' /></li>
+                  <p class="font40 mt50"><a style="color:#31b7d5;" href="Binding.wa">帐号绑定</a></p>
+                  <p class="font40" onclick="loginOut();">退出账号</p>
+                  <p class="service font40">客服电话</p>
+                  <p class=""><a class="phone-container font20" style="color:#31b7d5;" href="tel:010-65499299">010-65499299</a></p>
+               </ul>
             </section>
+             <div class="shadow"></div>
             <section class="main-container" id="main-container">
                <section class="box-container" style="display: block;">
                   <header>
-                     <span class="btn-list" id="btn-list"></span> 全球实时数据中心
-                     <div class="header-r"><img src="images/re.png"></div>
+                     <span class="btn-list" id="btn-list"></span>全球实时数据中心
+                     <div class="header-r"><img src="images/main/81.png"></div>
                   </header>
                   <div class="banner" id="banner">
                      <div class="bd">
                         <ul>
                            <li>
-                              <a class="pic" href="#"><img src="images/1.gif"></a>
+                              <a class="pic" href="#"><img src="images/main/5.png"></a>
                            </li>
                            <li>
-                              <a class="pic" href="#"><img src="images/img3.jpg"></a>
+                              <a class="pic" href="#"><img src="images/main/6.png"></a>
                            </li>
-                           <li>
-                              <a class="pic" href="#"><img src="images/img2.jpg"> </a>
-                           </li>
+                         
                         </ul>
                      </div>
                      <div class="hd">
                         <ul></ul>
                      </div>
                   </div>
+
                   <div class="details-container">
                      <je:authority module='eai.marketer.customer'>
-                        <ul onclick='doChart("customer")'>
+                        <ul class="ul" onclick='doChart("customer")' >
                            <li>
-                              <p>全球实时投资数据展示中心<i></i></p>
                               <img src="../pc/images/main/3-3.png">
+                              <img class="cover" src="images/main/3.png"/>
                            </li>
+                           <p>全球实时投资数据展示中心</p>
                         </ul>
-                     </je:authority>
+                      </je:authority>
                      <je:authority module='eai.marketer.marketer'>
-                        <ul onclick='doChart("marketer")'>
+                        <ul onclick='doChart("marketer")' class="ul" >
                            <li>
-                              <p class="icon2">理财师排行实时投资数据展示<i></i></p>
+                              <img class="cover" src="images/main/3.png"/>
                               <img src="../pc/images/main/1-1.PNG">
                            </li>
+                            <p class="icon2">理财师排行实时投资数据展示</p>
                         </ul>
                      </je:authority>
                      <je:authority module='eai.department.marketer'>
-                        <ul onclick='doChart("department")'>
+                        <ul onclick='doChart("department")' class="ul" >
                            <li>
-                              <p class="icon3">理财师管理实时投资数据展示<i></i></p>
+                              <img class="cover" src="images/main/3.png"/>
                               <img src="../pc/images/main/2-2.png">
                            </li>
-                        </ul>
+                           <p class="icon3">理财师管理实时投资数据展示</p>
+                        </ul> 
                      </je:authority>
-                     <a class="phone-container" href="tel:010-65499299">客服电话：010-65499299</a>
                   </div>
                </section>
+
             </section>
          </div>
       </FORM>
-      <jh:notEquals source="host" value="&page.userType">
-         <ul class="header-list bounceInDown">
-            <span>当前账号</span>
-            <p>
-               <jh:write source='&page.passport' />
-            </p>
-            <je:authority role='eai.oa'>
-               <li class="binding-icon"><a href="Binding.wa">帐号绑定</a></li>
-            </je:authority>
-
-            <li onclick="loginOut();">退出</li>
-         </ul>
-      </jh:notEquals>
-      <div class="shadow"></div>
       <script type="text/javascript">
          TouchSlide({
             slideCell: "#banner",
@@ -101,36 +96,58 @@
          var $btnList = document.getElementById("btn-list");
          var $mainContainer = document.getElementById("main-container");
          var $navContainer = document.getElementById("nav-container");
-         var state = true;
          var $headerR = document.getElementsByClassName("header-r")[0];
          var $shadow = document.getElementsByClassName("shadow")[0];
-         var $headerList = document.getElementsByClassName("header-list")[0];
-         $headerR.onclick = function() {
-            $headerList.style.display = "block";
+         var $detailsContainers = document.getElementsByClassName("ul");
+         var detailsContainersLs = $detailsContainers.length-1;
+         var timing = null;
+         function setHeight(){
+            var windowH = document.documentElement.scrollHeight;
+            console.log(windowH);
+            if( $mainContainer.offsetHeight < windowH){
+               $navContainer.style.height = windowH;
+            }else{
+               $navContainer.style.height = $mainContainer.offsetHeight;
+            }
+         };
+         window.onload = function(){
+            setHeight();
+         };
+         var i = 0;
+         function setSetTimeout(){
+             timing = setInterval(function(){
+             if( i == detailsContainersLs ){
+               clearInterval(timing);
+             }
+             $detailsContainers[i].setAttribute("dynamic",true);
+             setHeight();
+              i++;
+            },300);
+         }
+         setSetTimeout();
+         // $navContainer.addEventListener("touchmove", function(event){
+             // event.preventDefault();
+             // $navContainer.setAttribute("animation","");
+             // $shadow.style.display = "none";
+         // },true);
+         $headerR.addEventListener("touchstart", function(){
+            $navContainer.setAttribute("animation",true);
             $shadow.style.display = "block";
-         }
-         $shadow.onclick = function() {
-            $headerList.style.display = "none";
-            this.style.display = "none";
-         }
-         var $bindingIcon = document.getElementsByClassName("binding-icon")[0];
-         var $bindingContainer = document.getElementsByClassName("binding-container")[0];
-         var $boxContainer = document.getElementsByClassName("box-container")[0];
-         $bindingIcon.onclick = function() {
-            $headerList.style.display = "none";
-            $shadow.style.display = "none";
-            $bindingContainer.style.display = "block";
-            $boxContainer.style.display = "none";
-         }
+         },false);
+         $shadow.addEventListener("touchstart", function(){
+
+             $navContainer.setAttribute("animation","");
+             this.style.display = "none";
+         },false);
 
          function doChart(code) {
             id_do.value = code;
             frmMain.submit();
          }
-
          function loginOut() {
             location.href = "Index.wa?do=loginOut";
          }
+
       </script>
    </body>
 

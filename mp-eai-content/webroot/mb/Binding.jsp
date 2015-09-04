@@ -26,7 +26,7 @@
        <td align="center" valign="center">
          <div class="box-container">
             <h1>账号绑定</h1>
-            <span class="box-prompt error"><jh:write source='&page.message' /></span>
+            <span class="box-prompt error"></span>
             <FORM id="frmBind" name='frmBind' method='post' action='Binding.wa?do=bindOnAccount'>
                <p class="user-name">
                   <input id="mobile" name="ePassport" class="quantico account" type="text" placeholder="E租宝理财师账号">
@@ -60,14 +60,13 @@
          ctrl.countdown = function(o) {
             if (wait == 0) {
                o.removeAttribute("disabled");
-               o.style.background = "#f5f5f5";
-               o.innerHTML = "获取验证码";
+               o.value = "获取验证码";
                wait = 60;
             } else {
-               o.setAttribute("disabled", true);
-               o.style.background = "#cdcdcd";
-               o.innerHTML = wait;
+               error.innerHTML = "";
+               o.value = wait;
                wait--;
+               o.setAttribute("disabled", true);
                setTimeout(function() {
                   ctrl.countdown(o);
                }, 1000)
@@ -129,5 +128,4 @@
          };
       </script>
    </body>
-
    </html>
