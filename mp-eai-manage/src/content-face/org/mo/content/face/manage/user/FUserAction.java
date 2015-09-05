@@ -196,7 +196,7 @@ public class FUserAction
       String id = context.parameter("id");
       String oa = context.parameter("oa");
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
-      if(!RString.isEmpty(oa)){
+      if(RString.isEmpty(oa)){
          String password = context.parameter("password");
          if(password != null){
             password = password.trim();
