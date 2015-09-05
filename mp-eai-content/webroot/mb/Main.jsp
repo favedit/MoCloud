@@ -27,8 +27,6 @@
             </section>
              <div class="shadow"></div>
             <section class="main-container" id="main-container">
-               <a href="http://10.21.0.218:88/script/eai/marketer-marketer.html">http://10.21.0.218:88/script/eai/marketer-marketer.html</a>
-               <a href="http://10.21.0.218:88/script/eai/department-marketer.html">http://10.21.0.218:88/script/eai/department-marketer.html</a>
                <section class="box-container" style="display: block;">
                   <header>
                      <span class="btn-list" id="btn-list"></span>全球实时数据中心

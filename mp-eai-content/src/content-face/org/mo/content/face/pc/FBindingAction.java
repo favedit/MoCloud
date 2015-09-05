@@ -117,7 +117,7 @@ public class FBindingAction
       _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
-         page.setMessage("E租宝帐号不能为空");
+         page.setMessage("E租宝账号不能为空");
          return "/apl/ajax";
       }
       if(passport.length() > 30 || passport.indexOf('%') > -1 || passport.indexOf("'") > -1){
@@ -160,7 +160,6 @@ public class FBindingAction
       // 记录用户信息
       FGcWebSession session = (FGcWebSession)sessionContext;
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
-      user.setLabel(label);
       user.setIdCard(card);
       user.setContactPhone(mobile);
       _userConsole.doUpdate(logicContext, user);
