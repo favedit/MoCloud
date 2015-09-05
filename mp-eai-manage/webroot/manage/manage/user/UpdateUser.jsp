@@ -33,6 +33,7 @@
                "passport": $('#passport').val(),
                "password": $('#pwd2').val(),
                "label": $('#label').val(),
+               "oa": $('#oa').val(),
                "role": $('#role').combobox("getValue"),
                "adminId": $('#adminId').val()
             };
@@ -100,6 +101,7 @@
                   <input id="passport" name="passport" readonly class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true" value="<jh:write source='&user.passport'/>" />
                   <input id="adminId" name="id" style="display:none" value="<jh:write source='&basePage.userId'/>" />
                   <input id="id" name="id" style="display:none" value="<jh:write source='&user.guid'/>" />
+                  <input id="oa" value="<jh:write source='&basePage.temp'/>" />
                </td>
             </tr>
             <jh:notEquals source="oa" value="&basePage.temp">

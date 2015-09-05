@@ -97,7 +97,6 @@ public class FFrameAction
          basePage.ajax(0, null);
          _logger.debug(this, "LoginUser", "LoginUser fail,Without this user.");
       }else if(userUnitList.count() == 1){//有此用户
-         System.out.println(userUnitList.first().password() + "," + password + "---------------------");
          if(userUnitList.first().password().equals(password)){//密码正确
             FDataPersonUserUnit unit = userUnitList.first();
             formPage.setUser(unit);

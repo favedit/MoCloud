@@ -31,6 +31,5 @@ public class FDataPersonUserInfo
    public void saveMap(Map<String, String> map){
       super.saveMap(map);
       map.put("roleLabel", _roleLabel);
-
    }
 }

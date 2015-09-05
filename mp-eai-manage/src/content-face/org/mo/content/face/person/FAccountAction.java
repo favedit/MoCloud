@@ -8,7 +8,6 @@ import org.mo.content.core.person.IAccountConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.action.common.FWebCookie;
-import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -66,7 +65,7 @@ public class FAccountAction
    @Override
    public String login(IWebContext context,
                        ILogicContext logicContext,
-                       @AContainer(name = "page") FAccountPage page){
+                       FAccountPage page){
       // 获得参数
       String passport = context.parameter("passport");
       String password = context.parameter("password");

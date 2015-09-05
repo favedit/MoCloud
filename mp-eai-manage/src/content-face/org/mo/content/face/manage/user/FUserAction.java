@@ -194,14 +194,17 @@ public class FUserAction
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", context.parameter("id"));
       String id = context.parameter("id");
-      String password = context.parameter("password");
+      String oa = context.parameter("oa");
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
-      if(password != null){
-         password = password.trim();
-         password = RSha1.encode(password);
-         unit.setPassword(password);
+      if(!RString.isEmpty(oa)){
+         String password = context.parameter("password");
+         if(password != null){
+            password = password.trim();
+            password = RSha1.encode(password);
+            unit.setPassword(password);
+         }
+         unit.setLabel(context.parameter("label"));
       }
-      unit.setLabel(context.parameter("label"));
       unit.setRoleId(context.parameterAsLong("role"));
       unit.setRoleCd(EGcPersonUserRole.Normal);
       unit.setUpdateUserId(context.parameterAsLong("adminId"));

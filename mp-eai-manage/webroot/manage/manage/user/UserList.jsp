@@ -78,7 +78,9 @@
                <th data-options="field:'guid',halign:'center',align:'right',hidden:'true'" width="60px">编号</th>
                <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="200px">帐号</th>
                <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="200px">名称</th>
-               <th data-options="field:'roleLabel',halign:'center',align:'left',sortable:true" width="200px">角色状态</th>
+               <th data-options="field:'contactPhone',halign:'center',align:'left',sortable:true" width="100px">手机号码</th>
+               <th data-options="field:'idCard',halign:'center',align:'left',sortable:true" width="160px">证件号码</th>
+               <th data-options="field:'roleLabel',halign:'center',align:'left',sortable:true" width="160px">角色状态</th>
                <th data-options="field:'createDate',halign:'center',align:'left'" width="140px">创建时间</th>
                <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">修改时间</th>
                <th data-options="field:'operation',halign:'center',align:'left',formatter:insert_admin_editButton" width="160px">操作</th>
