@@ -1,7 +1,8 @@
 package org.mo.content.service.resource.model;
 
-import org.mo.cloud.logic.resource.model.FGcResModelInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;

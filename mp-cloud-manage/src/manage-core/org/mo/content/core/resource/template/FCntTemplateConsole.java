@@ -1,8 +1,8 @@
 package org.mo.content.core.resource.template;
 
-import org.mo.content.engine.core.template.FResTemplateConsole;
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
 
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
+import org.mo.content.engine.core.template.FResTemplateConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.data.logic.ILogicContext;

@@ -1,10 +1,11 @@
 package org.mo.content.engine.core.model.animation;
 
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonInfo;
+
+import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationConsole;
+import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationInfo;
+import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationTrackInfo;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationTrackLogic;
-import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationConsole;
-import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
-import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationTrackInfo;
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonInfo;
 import org.mo.content.engine.core.model.skeleton.IResModelSkeletonConsole;
 import org.mo.content.resource.common.FResAnimation;
 import org.mo.content.resource.common.FResTrack;

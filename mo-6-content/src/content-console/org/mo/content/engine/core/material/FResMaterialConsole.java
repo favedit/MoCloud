@@ -1,11 +1,12 @@
 package org.mo.content.engine.core.material;
 
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialBitmapInfo;
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialConsole;
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
+
+import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
-import org.mo.cloud.logic.resource.material.FGcResMaterialBitmapInfo;
-import org.mo.cloud.logic.resource.material.FGcResMaterialConsole;
-import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.content.engine.core.bitmap.IResBitmapConsole;

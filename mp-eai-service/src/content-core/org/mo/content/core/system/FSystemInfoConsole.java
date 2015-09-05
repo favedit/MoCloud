@@ -1,6 +1,7 @@
 package org.mo.content.core.system;
 
-import org.mo.cloud.logic.system.IGcSessionConsole;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
+
 import org.mo.core.aop.face.ALink;
 
 //============================================================

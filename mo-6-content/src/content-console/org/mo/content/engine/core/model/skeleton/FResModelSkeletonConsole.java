@@ -1,11 +1,12 @@
 package org.mo.content.engine.core.model.skeleton;
 
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonConsole;
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonInfo;
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonSkinInfo;
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonSkinStreamInfo;
+
+import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
 import com.cyou.gccloud.data.data.FDataResourceModelSkeletonSkinLogic;
-import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonConsole;
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonInfo;
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinInfo;
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinStreamInfo;
 import org.mo.com.lang.FFatalError;
 import org.mo.content.engine.core.model.IResModelMeshConsole;
 import org.mo.content.resource.common.FResSkeleton;

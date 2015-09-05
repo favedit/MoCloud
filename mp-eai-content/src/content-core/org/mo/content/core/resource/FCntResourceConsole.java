@@ -1,8 +1,9 @@
 package org.mo.content.core.resource;
 
+import org.mo.cloud.logic.data.resource.FGcResourceConsole;
+
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.cloud.logic.resource.FGcResourceConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;

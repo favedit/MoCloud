@@ -1,8 +1,9 @@
 package org.mo.content.engine.core.bitmap;
 
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
-import org.mo.cloud.logic.resource.bitmap.IGcResBitmapConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
+import org.mo.cloud.logic.data.resource.bitmap.IGcResBitmapConsole;
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.image.FImage;

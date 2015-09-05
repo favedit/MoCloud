@@ -1,8 +1,9 @@
 package org.mo.content.engine.core.template;
 
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
-import org.mo.cloud.logic.resource.template.IGcResTemplateConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
+import org.mo.cloud.logic.data.resource.template.IGcResTemplateConsole;
 import org.mo.com.lang.EResult;
 import org.mo.content.resource.template.FResTemplate;
 import org.mo.data.logic.ILogicContext;

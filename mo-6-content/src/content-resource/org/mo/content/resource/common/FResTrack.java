@@ -1,6 +1,7 @@
 package org.mo.content.resource.common;
 
-import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationTrackInfo;
+import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationTrackInfo;
+
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;

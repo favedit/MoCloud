@@ -1,7 +1,8 @@
 package org.mo.content.engine.core.material;
 
-import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
-import org.mo.cloud.logic.resource.material.IGcResMaterialConsole;
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
+import org.mo.cloud.logic.data.resource.material.IGcResMaterialConsole;
+
 import org.mo.com.lang.EResult;
 import org.mo.content.resource.common.FResMaterial;
 import org.mo.content.resource.material.FResMaterialResource;

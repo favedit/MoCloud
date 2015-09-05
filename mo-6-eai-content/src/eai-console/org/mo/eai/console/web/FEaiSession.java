@@ -1,7 +1,8 @@
 package org.mo.eai.console.web;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
 import org.mo.cloud.core.web.FGcWebSession;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.RString;
 
 //============================================================

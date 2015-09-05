@@ -1,7 +1,8 @@
 package org.mo.content.resource.common;
 
+import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationInfo;
+
 import java.text.DecimalFormat;
-import org.mo.cloud.logic.resource.model.animation.FGcResModelAnimationInfo;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;

@@ -1,10 +1,11 @@
 package org.mo.content.engine.core.bitmap;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapConsole;
+import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.SGcStorage;
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapConsole;
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;

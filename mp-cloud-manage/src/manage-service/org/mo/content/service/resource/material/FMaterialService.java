@@ -1,14 +1,15 @@
 package org.mo.content.service.resource.material;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialBitmapInfo;
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
+import org.mo.cloud.logic.data.resource.material.IGcResMaterialBitmapConsole;
+import org.mo.cloud.logic.data.resource.material.IGcResMaterialConsole;
+import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
+import org.mo.cloud.logic.data.resource.bitmap.IGcResBitmapConsole;
+import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import com.cyou.gccloud.data.data.FDataResourceMaterialBitmapLogic;
-import org.mo.cloud.logic.resource.IGcResourceConsole;
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
-import org.mo.cloud.logic.resource.bitmap.IGcResBitmapConsole;
-import org.mo.cloud.logic.resource.material.FGcResMaterialBitmapInfo;
-import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
-import org.mo.cloud.logic.resource.material.IGcResMaterialBitmapConsole;
-import org.mo.cloud.logic.resource.material.IGcResMaterialConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;

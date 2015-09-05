@@ -1,7 +1,6 @@
 package org.mo.content.service.logic.frame;
 
 import org.mo.cloud.content.design.configuration.FContentObject;
-import org.mo.cloud.content.design.configuration.FContentObjects;
 import org.mo.cloud.content.design.dataset.IDatasetConsole;
 import org.mo.cloud.content.design.frame.IFrameConsole;
 import org.mo.cloud.content.design.persistence.EPersistenceMode;
@@ -13,6 +12,7 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -58,7 +58,7 @@ public class FFrameService
    //============================================================
    public FSql makeSelectSql(FContentObject frameContent,
                              FXmlNode xsearch,
-                             FContentObjects expressions){
+                             FObjects<FFieldExpression> expressions){
       String frameName = frameContent.get("name");
       // 更新数据集
       String datasetName = frameContent.get("dataset_name");
@@ -80,7 +80,7 @@ public class FFrameService
             // 表达式字段
             String dataExpression = controlContent.get("data_expression", null);
             if(!RString.isEmpty(dataExpression)){
-               expressions.push(controlContent);
+               expressions.push(new FFieldExpression(controlContent));
                continue;
             }
             // 查询字段
@@ -137,32 +137,10 @@ public class FFrameService
    // @param dataset 数据集
    // @param xdataset 数据集节点
    //============================================================
-   public void calculateExpression(ILogicContext logicContext,
-                                   FContentObject expression,
-                                   FXmlNode xrow){
-      String dataName = expression.get("data_name");
-      String dataExpression = expression.get("data_expression");
-      String datasetName = RString.mid(dataExpression, "{", "}");
-      String filterName = RString.mid(dataExpression, "find(", ")");
-      String fieldName = RString.right(dataExpression, ").");
-      long filterId = xrow.getLong(filterName);
-      String className = "org.mo.content.core." + datasetName + ".I" + RString.firstUpper(RString.right(datasetName, ".")) + "Console";
-      IAbstractLogicUnitConsole<FLogicUnit> console = RAop.find(className);
-      FLogicUnit unit = console.find(logicContext, filterId);
-      String value = unit.get(fieldName);
-      xrow.set(dataName, value);
-   }
-
-   //============================================================
-   // <T>存储数据集合。</T>
-   //
-   // @param dataset 数据集
-   // @param xdataset 数据集节点
-   //============================================================
    public void saveDataset(ILogicContext logicContext,
                            FDataset dataset,
                            FXmlNode xdataset,
-                           FContentObjects expressions){
+                           FObjects<FFieldExpression> expressions){
       xdataset.set("total", dataset.total());
       xdataset.set("page_size", dataset.pageSize());
       xdataset.set("page_count", dataset.pageCount());
@@ -175,8 +153,8 @@ public class FFrameService
          }
          // 表达式计算
          if(expressions != null){
-            for(FContentObject expression : expressions){
-               calculateExpression(logicContext, expression, xrow);
+            for(FFieldExpression expression : expressions){
+               expression.execute(logicContext, xrow, row);
             }
          }
       }
@@ -215,7 +193,7 @@ public class FFrameService
       }
       String dataGroup = datasetContent.get("data_group");
       // 生成SQL
-      FContentObjects expressions = new FContentObjects();
+      FObjects<FFieldExpression> expressions = new FObjects<FFieldExpression>(FFieldExpression.class);
       FSql sql = makeSelectSql(frameContent, xsearch, expressions);
       // 查询数据
       ISqlConnection connection = logicContext.activeConnection(dataGroup);
@@ -301,7 +279,7 @@ public class FFrameService
                        FXmlNode xrow){
       // 获得逻辑控制器
       String name = datasetContent.get("name");
-      String className = "org.mo.content.core." + name + ".I" + RString.firstUpper(RString.right(name, ".")) + "Console";
+      String className = "org.mo.cloud.logic." + name + ".IGc" + RString.firstUpper(RString.right(name, ".")) + "Console";
       IAbstractLogicUnitConsole<FLogicUnit> console = RAop.find(className);
       // 获得状态
       String statusCd = xrow.get("_status_cd");

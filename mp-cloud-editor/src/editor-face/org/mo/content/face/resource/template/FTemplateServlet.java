@@ -1,9 +1,10 @@
 package org.mo.content.face.resource.template;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
 import javax.servlet.http.HttpServletResponse;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;

@@ -1,8 +1,9 @@
 package org.mo.cloud.core.web;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
+
 import org.mo.cloud.core.message.IGcMessageConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
-import org.mo.cloud.logic.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.com.xml.FXmlNode;

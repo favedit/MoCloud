@@ -1,12 +1,13 @@
 package org.mo.content.service.resource.template;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateMaterialInfo;
+import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
+import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
 import com.cyou.gccloud.data.data.FDataSolutionProjectLogic;
-import org.mo.cloud.logic.resource.material.FGcResMaterialInfo;
-import org.mo.cloud.logic.resource.model.FGcResModelInfo;
-import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
-import org.mo.cloud.logic.resource.template.FGcResTemplateMaterialInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;

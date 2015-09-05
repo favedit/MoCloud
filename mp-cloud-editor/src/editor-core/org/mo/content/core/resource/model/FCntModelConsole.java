@@ -1,8 +1,8 @@
 package org.mo.content.core.resource.model;
 
-import org.mo.content.engine.core.model.FResModelConsole;
+import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
 
-import org.mo.cloud.logic.resource.model.FGcResModelInfo;
+import org.mo.content.engine.core.model.FResModelConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.data.logic.ILogicContext;

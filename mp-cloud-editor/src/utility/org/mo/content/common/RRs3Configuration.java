@@ -1,6 +1,6 @@
 package org.mo.content.common;
 
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 
 public class RRs3Configuration
 {

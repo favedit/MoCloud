@@ -237,6 +237,25 @@ public class FCsvFile
       }
    }
 
+   /**
+   * @param fileName
+   */
+   public void saveFile(String fileName,
+                        String charset){
+      _fileName = fileName;
+      FCsvWriter csvWriter = new FCsvWriter();
+      try{
+         csvWriter.openFile(fileName, charset);
+         for(FCsvLine item : _lines){
+            csvWriter.writeLine(item);
+         }
+      }finally{
+         if(null != csvWriter){
+            csvWriter.Close();
+         }
+      }
+   }
+
    public void setExecuteAction(String action){
       _executeAction = action;
    }

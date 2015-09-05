@@ -1,6 +1,6 @@
 package org.mo.content.engine.core.material;
 
-import org.mo.cloud.logic.resource.material.IGcResMaterialBitmapConsole;
+import org.mo.cloud.logic.data.resource.material.IGcResMaterialBitmapConsole;
 
 //============================================================
 // <T>资源材质位图控制台接口。</T>

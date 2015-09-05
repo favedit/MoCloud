@@ -1,6 +1,7 @@
 package org.mo.cloud.core.common;
 
-import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.data.person.FGcUserInfo;
+
 import org.mo.com.lang.FObject;
 
 //============================================================

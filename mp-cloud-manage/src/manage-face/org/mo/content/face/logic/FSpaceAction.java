@@ -1,8 +1,9 @@
 package org.mo.content.face.logic;
 
+import org.mo.cloud.logic.data.person.FGcUserInfo;
+import org.mo.cloud.logic.data.person.IGcUserConsole;
+
 import org.mo.cloud.core.web.FGcWebSession;
-import org.mo.cloud.logic.person.FGcUserInfo;
-import org.mo.cloud.logic.person.IGcUserConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;

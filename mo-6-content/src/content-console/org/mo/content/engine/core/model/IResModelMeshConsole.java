@@ -1,9 +1,10 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.cloud.logic.resource.model.FGcResModelInfo;
-import org.mo.cloud.logic.resource.model.mesh.FGcResModelMeshInfo;
-import org.mo.cloud.logic.resource.model.mesh.IGcResModelMeshConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.data.resource.model.mesh.IGcResModelMeshConsole;
+import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
 import org.mo.content.resource.model.FResModelMesh;
 import org.mo.data.logic.ILogicContext;
 

@@ -1,6 +1,7 @@
 package org.mo.content.resource.template;
 
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
+
 import org.mo.com.xml.FXmlDocument;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.resource.common.FResMaterial;

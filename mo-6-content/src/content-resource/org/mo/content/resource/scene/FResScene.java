@@ -1,6 +1,7 @@
 package org.mo.content.resource.scene;
 
-import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.data.resource.scene.FGcResSceneInfo;
+
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FDictionary;

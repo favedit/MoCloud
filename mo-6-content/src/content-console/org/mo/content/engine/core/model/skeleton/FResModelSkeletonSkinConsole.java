@@ -1,6 +1,6 @@
 package org.mo.content.engine.core.model.skeleton;
 
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinConsole;
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonSkinConsole;
 
 //============================================================
 // <T>资源模型骨骼蒙皮控制台。</T>

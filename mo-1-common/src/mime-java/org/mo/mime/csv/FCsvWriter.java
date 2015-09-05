@@ -24,6 +24,11 @@ public class FCsvWriter
       openFile(fileName);
    }
 
+   public FCsvWriter(String fileName,
+                     String charset){
+      openFile(fileName, charset);
+   }
+
    public void Close(){
       _writer.close();
    }

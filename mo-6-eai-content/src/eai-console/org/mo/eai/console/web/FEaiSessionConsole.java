@@ -1,9 +1,10 @@
 package org.mo.eai.console.web;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+
+import org.mo.cloud.logic.data.person.FGcUserInfo;
 import com.cyou.gccloud.define.enums.core.EGcControlRoleModuleValid;
 import org.mo.cloud.core.web.FGcWebSessionConsole;
-import org.mo.cloud.logic.person.FGcUserInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FStrings;

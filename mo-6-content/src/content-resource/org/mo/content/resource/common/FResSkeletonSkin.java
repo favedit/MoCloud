@@ -1,6 +1,7 @@
 package org.mo.content.resource.common;
 
-import org.mo.cloud.logic.resource.model.skeleton.FGcResModelSkeletonSkinInfo;
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonSkinInfo;
+
 import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FObjects;

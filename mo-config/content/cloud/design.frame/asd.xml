@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150825182546">
-  <FormFrame guid="EEA2002F0A084E08AA065CF733C57463" name="asd" valid="false" label="我们" fore_color="" back_color="" back_resource="" back_grid="" nowrap="false" location="0,0" size="0,0">
-    <Edit guid="B34729FDBB884726A9AAB020000A0A3F" valid="Y" name="a1" nowrap="false" location="2,3" size="4,5" label="a2" label_type_cd="A" label_size="6,7" fore_color="a3" back_color="4" back_resource="5" back_grid="a6" label_position_cd="left" label_align_cd="left" label_icon="a7" label_color="a8" />
-    <Select guid="B752B18DF4A74EC388E1CC86D3E16270" valid="N" name="sert" nowrap="N" location="0,0" size="0,0" padding="0,1,0,1" margin="0,1,0,1" display_view="Y" display_insert="Y" display_update="Y" display_delete="Y" display_search="Y" display_picker="Y" display_zoom="Y" edit_view="Y" edit_insert="Y" edit_update="Y" edit_delete="Y" label_size="0,0" display_mode="VIUDSPZ" edit_mode="VIUD" valid_require="Y" edit_zoom="Y" verify_require="Y" verify_insert="Y" verify_update="Y" verify_delete="Y" />
-  </FormFrame>
-</Content>
