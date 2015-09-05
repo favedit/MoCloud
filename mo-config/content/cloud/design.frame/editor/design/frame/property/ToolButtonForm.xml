@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150904142443">
-  <FormFrame guid="BD0F71B54A29478B89AAA89E52B77383" valid="N" name="editor.design.frame.property.ToolButtonForm" label="按键属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+<Content update_date="20150905150152">
+  <FormFrame guid="BD0F71B54A29478B89AAA89E52B77383" valid="N" name="editor.design.frame.property.ToolButtonForm" label="工具栏按键属性页面" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
     <Template guid="1DFFACB39E7E403484095A2B226C7A36" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
     <Template guid="0C03E5BE97E646918C39393983D3CEC4" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
   </FormFrame>

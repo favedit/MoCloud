@@ -1,8 +1,8 @@
 package org.mo.content.face.resource.scene;
 
 import javax.servlet.http.HttpServletResponse;
-import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;

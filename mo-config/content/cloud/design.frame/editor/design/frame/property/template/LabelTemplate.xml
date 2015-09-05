@@ -4,10 +4,10 @@
     <Panel guid="D52D1324738748B2840BF1FD312FFBE5" name="labelPanel" label="标签属性" icon="design.panel.icon">
       <Select guid="31A5A2C21BA342F8B7FF0287264D9D4A" name="labelTypeCd" label="标签类型" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_type_cd" edit_refer="editor.design.frame.LabelType" input_size="160,0" />
       <Select guid="EDBE49BCE4234F29B60FE21F9B79DF81" name="labelPositionCd" label="标签位置" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_position_cd" edit_refer="editor.design.frame.LabelPosition" input_size="160,0" />
-      <IconPicker guid="D6F5F0EB0D574E46968624B06674D0BD" name="labelIcon" label="标签图标" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_icon" />
+      <IconPicker guid="D6F5F0EB0D574E46968624B06674D0BD" name="labelIcon" label="标签图标" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_icon" input_size="160,0" />
       <Select guid="7314770115CA4646849900B00E1AE101" name="labelAlignCd" label="标签对齐" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_align_cd" edit_refer="editor.design.frame.Align" input_size="160,0" />
-      <Number2 guid="C27613883965460AAF5632F4634CB34E" name="labelSize" label="标签宽度" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_size" />
-      <ColorPicker guid="B1984C9FAF7C4A49BEF66023C7946825" name="labelColor" label="标签颜色" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_color" />
+      <Number2 guid="C27613883965460AAF5632F4634CB34E" name="labelSize" label="标签宽度" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_size" input_size="160,0" />
+      <ColorPicker guid="B1984C9FAF7C4A49BEF66023C7946825" name="labelColor" label="标签颜色" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="label_color" input_size="160,0" />
     </Panel>
   </TemplateFrame>
 </Content>

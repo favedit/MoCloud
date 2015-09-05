@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content>
    <FormFrame name="editor.design.frame.property.LabelFrame" type='FEditorDsPropertyForm' label="标签属性" is_valid="Y" logic_group='item' logic_service='editor.design.frame' note="">
-    <ToolBar ___guid="87F9762E92664806B10EDD51313F2120" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-      <ToolButton ___guid="01848FCB94314D01B9382ED494921185" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
-      <ToolButton ___guid="1688BB74FDC940CCAAB14C50D29375B5" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+    <ToolBar __guid="87F9762E92664806B10EDD51313F2120" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
+      <ToolButton __guid="01848FCB94314D01B9382ED494921185" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
+      <ToolButton __guid="1688BB74FDC940CCAAB14C50D29375B5" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
     </ToolBar>
     <Template _guid="FCBAF2DD12BA4FEF8E443DDCB04B7770" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
     <Template _guid="D757D580C45543B49D4DEC333BD123D5" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />

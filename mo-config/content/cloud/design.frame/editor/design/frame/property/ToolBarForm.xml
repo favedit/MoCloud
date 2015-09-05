@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150904142446">
-  <FormFrame guid="D483F6F810454ABDA3B4628B66C93546" valid="N" name="editor.design.frame.property.ToolBarForm" label="工具栏属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+<Content update_date="20150905150159">
+  <FormFrame guid="D483F6F810454ABDA3B4628B66C93546" valid="N" name="editor.design.frame.property.ToolBarForm" label="工具栏属性页面" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
     <ToolBar guid="2A80111484BC40F9A56EEC2EF08B45BD" name="toolBar" label="工具栏" width="100%">
       <ToolButton guid="31827F7040674A729C4C26646D7F7222" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
       <ToolButton guid="4C069931FC5448BBB873C55428E54AA9" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />

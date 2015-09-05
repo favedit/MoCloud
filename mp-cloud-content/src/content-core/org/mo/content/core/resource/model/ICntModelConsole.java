@@ -1,8 +1,7 @@
 package org.mo.content.core.resource.model;
 
-import org.mo.content.engine.core.model.IResModelConsole;
-
 import org.mo.com.lang.EResult;
+import org.mo.content.engine.core.model.IResModelConsole;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================

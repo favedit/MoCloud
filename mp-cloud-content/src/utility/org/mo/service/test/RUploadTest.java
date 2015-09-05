@@ -1,6 +1,5 @@
 package org.mo.service.test;
 
-
 public class RUploadTest
 {
    //============================================================

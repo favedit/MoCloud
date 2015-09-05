@@ -1,7 +1,7 @@
 package org.mo.content.service.person;
 
 import com.cyou.gccloud.define.enums.core.EGcAccountFrom;
-import org.mo.cloud.logic.person.FGcUserInfo;
+import org.mo.cloud.logic.data.person.FGcUserInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.xml.FXmlNode;

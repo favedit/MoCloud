@@ -1,10 +1,10 @@
 package org.mo.content.service.resource.scene;
 
 import com.cyou.gccloud.data.data.FDataResourceSceneLogic;
-import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
-import org.mo.cloud.logic.solution.FGcProjectInfo;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
+import org.mo.cloud.logic.data.solution.FGcProjectInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;

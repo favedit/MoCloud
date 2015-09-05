@@ -1,15 +1,13 @@
 package org.mo.content.face.resource;
 
-import org.mo.content.core.resource.model.ICntModelMeshConsole;
-
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import java.awt.image.BufferedImage;
 import javax.servlet.http.HttpServletResponse;
-import org.mo.cloud.logic.resource.FGcResourceInfo;
-import org.mo.cloud.logic.resource.bitmap.FGcResBitmapInfo;
-import org.mo.cloud.logic.resource.model.FGcResModelInfo;
-import org.mo.cloud.logic.resource.scene.FGcResSceneInfo;
-import org.mo.cloud.logic.resource.template.FGcResTemplateInfo;
+import org.mo.cloud.logic.data.resource.FGcResourceInfo;
+import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
+import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
+import org.mo.cloud.logic.data.resource.scene.FGcResSceneInfo;
+import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -21,6 +19,7 @@ import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.content.core.resource.material.ICntMaterialConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.core.aop.face.ALink;

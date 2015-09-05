@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150904142559">
-  <FormFrame guid="98C88EB5F3F44F7E8357C821021717FE" valid="N" name="editor.design.frame.property.CheckForm" label="按键属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
-    <ToolBar guid="33A5CA3089E648B7988D22509F5104FF" name="toolBar" label="M#12cn13工具栏" width="100%" height="24">
-      <ToolButton guid="CF109A463F534C2AB638909A5A38F093" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
-      <ToolButton guid="2DE79675CF4042898543459C01A417BB" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
+<Content update_date="20150905150114">
+  <FormFrame guid="2619087425EA4FB99CDB8947F9D1A84F" valid="N" name="editor.design.frame.property.CheckForm" label="复选框属性页面" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+    <ToolBar guid="0FF2628461DC4B588BE398A1BB633EDA" name="toolBar" label="工具栏">
+      <ToolButton guid="24FE06DBB00C44768D011105B5B3F500" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="03160850BE5D43F98B0E44023A7C469A" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
     </ToolBar>
-    <Template guid="E7DE07951D7445B398B3E41FA1A5A51A" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
-    <Template guid="80945D2080A541228ED7FDDCB84D65B2" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="FCBAF2DD12BA4FEF8E443DDCB04B7770" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="D757D580C45543B49D4DEC333BD123D5" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="BA2F20AA92864BE0B95FE5E14655A6C5" name="labelTemplate" frame_source="editor.design.frame.property.template.LabelTemplate" />
+    <Template guid="D7B53536879C4BB280417BAB1430D129" name="displayTemplate" frame_source="editor.design.frame.property.template.DisplayTemplate" />
+    <Template guid="F2700F41291D4517BFD931F20325B2EC" name="dataTemplate" frame_source="editor.design.frame.property.template.DataTemplate" />
+    <Template guid="4F83E9D82030498987BEFB58FD075A0C" name="editTemplate" frame_source="editor.design.frame.property.template.EditTemplate" />
+    <Panel guid="FBD29B2330A648EBA11E1B43B58C18E8" name="specifyPanel" label="特定属性" icon="design.panel.icon">
+      <Edit guid="26EECA124AFE460CBDD0110FD4F66D82" name="valueTrue" label="真值" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="value_true" input_size="160,0" />
+      <Edit guid="4E31856E4BB145F08EAE87245527321C" name="valueFalse" label="假值" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="value_false" input_size="160,0" />
+    </Panel>
+    <Template guid="72FD2364E4AF4C72A2F30E3DAC67755D" name="verifyTemplate" frame_source="editor.design.frame.property.template.VerifyTemplate" />
+    <Template guid="8C7AFFB4463D47189AA32C1E9DC88253" name="noteTemplate" frame_source="editor.design.frame.property.template.NoteTemplate" />
   </FormFrame>
 </Content>

@@ -1,8 +1,8 @@
 package org.mo.content.face.solution.person;
 
-import org.mo.cloud.logic.person.FGcUserInfo;
-import org.mo.cloud.logic.person.IGcUserConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.person.FGcUserInfo;
+import org.mo.cloud.logic.data.person.IGcUserConsole;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;

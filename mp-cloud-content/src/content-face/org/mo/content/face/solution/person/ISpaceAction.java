@@ -1,6 +1,6 @@
 package org.mo.content.face.solution.person;
 
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.face.AWebLogin;

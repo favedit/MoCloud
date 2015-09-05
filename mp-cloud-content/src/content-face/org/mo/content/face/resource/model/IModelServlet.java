@@ -1,6 +1,6 @@
 package org.mo.content.face.resource.model;
 
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.face.AWebLogin;
 import org.mo.web.core.servlet.common.IWebServletRequest;

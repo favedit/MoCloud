@@ -101,16 +101,20 @@ public class FFrameConsole
    //============================================================
    @Override
    public XContentObject find(String storgeName,
-                              String formName,
+                              String frameName,
                               EPersistenceMode modeCd){
-      String code = storgeName + "|" + formName + "|" + modeCd.toString();
+      String code = storgeName + "|" + frameName + "|" + modeCd.toString();
       XContentObject xframe = _contents.find(code);
       if(xframe == null){
-         FContentNode node = _configurationConsole.getNode(storgeName, _pathName, formName);
+         FContentNode node = _configurationConsole.getNode(storgeName, _pathName, frameName);
          if(node != null){
-            FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
-            xframe = persistence.convertInstance(node.content(), modeCd);
-            _contents.set(code, xframe);
+            try{
+               FPersistence persistence = _persistenceConsole.findPersistence(storgeName, _spaceName);
+               xframe = persistence.convertInstance(node.content(), modeCd);
+               _contents.set(code, xframe);
+            }catch(Exception exception){
+               throw new FFatalError(exception, "Find frame failure. (storage={1}, frame_name={2})", storgeName, frameName);
+            }
          }
       }
       return xframe;

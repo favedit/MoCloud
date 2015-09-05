@@ -1,13 +1,11 @@
 package org.mo.content.service.resource;
 
-import org.mo.content.core.resource.model.ICntModelMeshConsole;
-
 import com.cyou.gccloud.data.data.FDataResourceResourceLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import com.cyou.gccloud.define.enums.core.EGcResourceShare;
-import org.mo.cloud.logic.resource.FGcResourceInfo;
-import org.mo.cloud.logic.resource.IGcResourceCatalogConsole;
-import org.mo.cloud.logic.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.resource.FGcResourceInfo;
+import org.mo.cloud.logic.data.resource.IGcResourceCatalogConsole;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -19,6 +17,7 @@ import org.mo.content.core.resource.ICntResourceConsole;
 import org.mo.content.core.resource.bitmap.ICntBitmapConsole;
 import org.mo.content.core.resource.material.ICntMaterialConsole;
 import org.mo.content.core.resource.model.ICntModelConsole;
+import org.mo.content.core.resource.model.ICntModelMeshConsole;
 import org.mo.content.core.resource.scene.ICntSceneConsole;
 import org.mo.content.core.resource.template.ICntTemplateConsole;
 import org.mo.core.aop.face.ALink;

@@ -1,7 +1,6 @@
 package org.mo.content.core.resource.skeleton;
 
 import org.mo.content.engine.core.model.IResModelMeshStreamConsole;
-
 import org.mo.core.aop.face.ALink;
 
 //============================================================

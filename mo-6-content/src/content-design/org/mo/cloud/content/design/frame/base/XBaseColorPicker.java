@@ -293,6 +293,10 @@ public abstract class XBaseColorPicker
    @AContentField
    public final static FContentField DATA_SOURCE = new FContentField("dataSource", "data_source", EContentData.String, "", "", "", "YYNY");
 
+   // 输入大小的定义
+   @AContentField
+   public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -586,6 +590,10 @@ public abstract class XBaseColorPicker
    // 数据来源
    @AName("data_source")
    protected String _dataSource;
+
+   // 输入大小
+   @AName("input_size")
+   protected String _inputSize;
 
    //============================================================
    // <T>获得有效性的内容。</T>
@@ -1827,6 +1835,24 @@ public abstract class XBaseColorPicker
    //============================================================
    public void setDataSource(String value){
       _dataSource = value;
+   }
+
+   //============================================================
+   // <T>获得输入大小的内容。</T>
+   //
+   // @return 输入大小
+   //============================================================
+   public String getInputSize(){
+      return _inputSize;
+   }
+
+   //============================================================
+   // <T>设置输入大小的内容。</T>
+   //
+   // @param value 输入大小
+   //============================================================
+   public void setInputSize(String value){
+      _inputSize = value;
    }
 
 }

@@ -5,7 +5,7 @@
          <FramePage name='menuFrame' linker='_frameMenuBar' label='菜单区' size='0,48'/>
          <FramePage name='bodyFrame' linker='_frameBody' label='内容区'>
             <FrameSet name='bodyFrameSet' direction_cd='H' label='页面布局'>
-               <FramePage name='moduleFrame' linker='_frameModule' label='菜单区' size='160,0'>
+               <FramePage name='moduleFrame' linker='_frameModule' label='菜单区' size='100,0'>
                   <SliderMenu name='moduleMenu' label='菜单区'>
                      <SliderGroup name='logicGroup' label='业务功能'>
                         <SliderButton name='commonButton' linker='_controlCommonButton' icon='editor.design.persistence|png' label='业务' fore_color='#FFFFFF'/>

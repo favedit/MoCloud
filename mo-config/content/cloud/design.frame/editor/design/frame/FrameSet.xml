@@ -21,10 +21,10 @@
               </FrameSet>
             </FramePage>
             <FrameSpliter guid="E394E72228D6461B988E57F88F9E8178" name="propertySpliter" />
-            <FramePage guid="2A961304C1C74D02952E1A2FAFE59366" name="propertyFrame" linker="_frameProperty" label="属性区" size="510,0" scroll_cd="VA">
+            <FramePage guid="2A961304C1C74D02952E1A2FAFE59366" name="propertyFrame" linker="_frameProperty" label="属性区" size="510,0">
               <FrameSet guid="E16BDFDC29D34E40A80D8DE9E945470E" name="propertyFrameSet" direction_cd="V" label="属性布局">
                 <FramePage guid="6ABD517557D1431E9E44C278EEE7CB38" name="propertyToolbarFrame" linker="_framePropertyToolBar" label="属性工具栏" size="0,24" />
-                <FramePage guid="F1D6E0CE1B0A46538258C474060FF127" name="propertyContentFrame" linker="_framePropertyContent" label="属性内容区" />
+                <FramePage guid="F1D6E0CE1B0A46538258C474060FF127" name="propertyContentFrame" linker="_framePropertyContent" label="属性内容区" scroll_cd="VA"/>
               </FrameSet>
             </FramePage>
           </FrameSet>

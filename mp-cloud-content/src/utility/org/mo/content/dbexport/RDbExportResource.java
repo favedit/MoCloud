@@ -1,6 +1,5 @@
 package org.mo.content.dbexport;
 
-
 public class RDbExportResource
 {
    //   //============================================================

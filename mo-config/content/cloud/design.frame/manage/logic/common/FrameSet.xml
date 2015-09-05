@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Content name="manage.logic.common.FrameSet">
    <FrameSet name='bodyFrameSet' direction_cd='H' label='工作布局'>
-      <FramePage name='catalogFrame' linker='_frameCatalog' label='目录区' size='180,0'>
+      <FramePage name='catalogFrame' linker='_frameCatalog' label='目录区' size='140,0'>
          <FrameSet name='catalogFrameSet' direction_cd='V' label='目录布局'>
             <FramePage name='catalogTitleFrame' linker='_frameCatalogTitle' label='目录标题区' size='0,36' back_color='#C6CBD0'/>
             <FramePage name='catalogToolbarFrame' linker='_frameCatalogToolBar' label='目录工具栏' size='0,28'/>
