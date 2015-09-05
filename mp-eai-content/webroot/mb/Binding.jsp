@@ -15,7 +15,7 @@
      <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
       <tbody>
       <tr >
-         <td height="60">
+         <td height="40">
              <header class="header">
                <a  href="Main.wa"><img class="return-img" src="images/binding/8.png"></a>
                全球实时数据中心
@@ -80,26 +80,41 @@
          }
          ctrl.setCallBackObject = function() {
                var cbo = new CallBackObject(); 
-               cbo.OnComplete = ctrl.Cbo_Complete; 
-               cbo.onError = ctrl.Cbo_Error; 
-               cbo.OnLoaded = ctrl.OnLoading; 
-               cbo.DoCallBack("Binding.wa?do=sendValidate", "passport=" + $fieldInput.value); 
+               cbo.OnComplete = function(responseText, responseXML) {
+                     var result = ctrl.replaceNbsp(responseText);
+                      console.log(result);
+                     if (result == 1) {
+                        ctrl.countdown($getVerifyCodeBtn);
+                     } else {
+                        $getVerifyCodeBtn.value = "发送动态验证码";
+                        error.innerHTML = result;
+                     }
+                  }; 
+               cbo.onError = function(status, statusText, responseText) {
+                  console.log(responseText);
+               }; 
+               cbo.OnLoaded = function() {};
+
+               var data = "do=sendValidate&passport=" + $fieldInput.value;
+               cbo.DoCallBack("Binding.wa?",data); 
+               // cbo.DoCallBack("Binding.wa?do=sendValidate", "passport=" + "'"+$fieldInput.value+"'"); 
          };
-         ctrl.OnLoading = function() {
-         }
-         ctrl.Cbo_Complete = function(responseText, responseXML) {
-            var result = ctrl.replaceNbsp(responseText);
-             console.log(result);
-            if (result == 1) {
-               ctrl.countdown($getVerifyCodeBtn);
-            } else {
-               $getVerifyCodeBtn.value = "发送动态验证码";
-               error.innerHTML = result;
-            }
-         }
-         ctrl.Cbo_Error = function(status, statusText, responseText) {
-            console.log(responseText);
-         }
+
+         // ctrl.OnLoading = function() {
+         // };
+         // ctrl.Cbo_Complete = function(responseText, responseXML) {
+         //    var result = ctrl.replaceNbsp(responseText);
+         //     console.log(result);
+         //    if (result == 1) {
+         //       ctrl.countdown($getVerifyCodeBtn);
+         //    } else {
+         //       $getVerifyCodeBtn.value = "发送动态验证码";
+         //       error.innerHTML = result;
+         //    }
+         // }
+         // ctrl.Cbo_Error = function(status, statusText, responseText) {
+         //    console.log(responseText);
+         // }
          ctrl.replaceNbsp = function(temp) {
             if (temp != undefined && temp != "") {
                return temp.replace(/[\r\n]/g, "");

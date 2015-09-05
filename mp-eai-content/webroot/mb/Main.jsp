@@ -7,6 +7,7 @@
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <link rel="stylesheet" type="text/css" href="css/wap.css">
+      <script type="text/javascript" src="js/viewport.js"></script>
       <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
    </head>
    <body>
@@ -17,15 +18,17 @@
                <ul>
                   <li class="img"><Img src="images/main/7.png"></li>
                   <li class="current font20">当前账号</li>
-                  <li class="names font40"><jh:write source='&page.passport' /></li>
-                  <je:authority role='eai.oa'><p class="font40 mt50"><a style="color:#31b7d5;" href="Binding.wa">帐号绑定</a></p></je:authority>
-                  <p class="font40" onclick="loginOut();">退出账号</p>
+                  <li class="names font30"><jh:write source='&page.passport' /></li>
+                  <je:authority role='eai.oa'><p class="font30 mt50"><a style="color:#31b7d5;" href="Binding.wa">帐号绑定</a></p></je:authority>
+                  <p class="font30" onclick="loginOut();">退出账号</p>
                   <p class="service font40">客服电话</p>
                   <p class=""><a class="phone-container font20" style="color:#31b7d5;" href="tel:010-65499299">010-65499299</a></p>
                </ul>
             </section>
              <div class="shadow"></div>
             <section class="main-container" id="main-container">
+               <a href="http://10.21.0.218:88/script/eai/marketer-marketer.html">http://10.21.0.218:88/script/eai/marketer-marketer.html</a>
+               <a href="http://10.21.0.218:88/script/eai/department-marketer.html">http://10.21.0.218:88/script/eai/department-marketer.html</a>
                <section class="box-container" style="display: block;">
                   <header>
                      <span class="btn-list" id="btn-list"></span>全球实时数据中心
@@ -124,6 +127,9 @@
               i++;
             },300);
          }
+         window.onresize = function(){
+            setHeight();
+         };
          setSetTimeout();
          // $navContainer.addEventListener("touchmove", function(event){
              // event.preventDefault();

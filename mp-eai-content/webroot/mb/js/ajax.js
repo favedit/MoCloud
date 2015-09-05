@@ -25,7 +25,7 @@
           oThis.ReadyStateChange();
         };
         //第三步：设置和服务器交互的相应参数 
-        this.XmlHttp.open('POST', URL);
+        this.XmlHttp.open('POST', URL, true);
         this.XmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         //第四步：设置向服务器发送的数据，启动和服务器端交互 
         this.XmlHttp.send(data);

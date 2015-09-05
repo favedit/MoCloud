@@ -4,7 +4,6 @@ body {
   background: url(../images/login/bg.png);
   background-position: center top;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,21 +11,29 @@ body {
 }
 .header {
   color: #3cddff;
-  line-height: 60px;
   text-align: center;
   background-image: url(../images/main/2.png);
   background-repeat: no-repeat;
   background-position: bottom center;
-  font-size: 1.6666666666666667rem;
+  font-size: 1.25rem;
+  height: 3.3333333333333335rem;
+  line-height: 3.3333333333333335rem;
 }
 .header a {
   display: block;
   position: absolute;
+  width: 2.0833333333333335rem;
+  height: 1.6666666666666667rem;
   left: 0.8333333333333334rem;
-  top: 1.25rem;
+  top: 0.625rem;
+}
+.header a img {
+  width: 100%;
+  height: 100%;
 }
 /*找回密码*/
 .box-container {
+  margin-top: 1.6666666666666667rem;
   width: 20.416666666666668rem;
   height: 20rem;
   background-image: url(../images/binding/7.png);
@@ -54,7 +61,7 @@ body {
 .box-container h1 {
   padding: 0.4166666666666667rem 0rem 0.4166666666666667rem 0rem;
   text-align: center;
-  font-size: 1.6666666666666667rem;
+  font-size: 1.4166666666666667rem;
   color: #3dddff;
 }
 .box-container input {
@@ -67,7 +74,7 @@ body {
   background-position: center;
   background-size: 100% 3.1666666666666665rem;
   margin-bottom: 0.8333333333333334rem;
-  padding: 0.20833333333333334rem 0.625rem;
+  padding: 0.25rem 0.625rem;
   display: block;
 }
 .box-container .quantico {

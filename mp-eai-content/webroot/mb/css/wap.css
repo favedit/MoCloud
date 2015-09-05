@@ -10,21 +10,18 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+.font20 {
+  font-size: 0.8333333333333334rem;
+}
 .font30 {
   font-size: 1.25rem;
-}
-.font40 {
-  font-size: 1.6666666666666667rem;
-}
-.font50 {
-  font-size: 2.0833333333333335rem;
 }
 .mt50 {
   margin-top: 2.0833333333333335rem;
 }
 .nav-container {
   position: absolute;
-  width: 12.5rem;
+  width: 8.333333333333334rem;
   height: 100%;
   z-index: 9;
   background-image: url(../images/main/10.png);
@@ -49,15 +46,15 @@ body {
   display: block;
 }
 .nav-container ul {
-  padding-top: 5rem;
+  padding-top: 2.3333333333333335rem;
 }
 .nav-container ul li {
   color: #ff914c;
-  line-height: 2.9166666666666665rem;
+  line-height: 2.0833333333333335rem;
 }
 .nav-container ul li img {
-  width: 6.25rem;
-  height: 6.25rem;
+  width: 3.75rem;
+  height: 3.75rem;
 }
 .nav-container ul p {
   line-height: 2.9166666666666665rem;
@@ -87,28 +84,28 @@ body {
 }
 .main-container header {
   position: relative;
-  height: 5rem;
-  line-height: 5rem;
+  height: 3.3333333333333335rem;
+  line-height: 3.3333333333333335rem;
   text-align: center;
   color: #3cddff;
-  font-size: 1.6666666666666667rem;
+  font-size: 1.25rem;
   background-image: url(../images/main/2.png);
   background-repeat: no-repeat;
   background-position: bottom center;
 }
 .header-r {
   position: absolute;
-  width: 5rem;
-  height: 5rem;
+  width: 3.3333333333333335rem;
+  height: 3.3333333333333335rem;
   overflow: hidden;
   text-align: center;
   left: 0rem;
   top: 0rem;
 }
 .header-r img {
-  margin-top: 1.25rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  margin-top: 0.8333333333333334rem;
+  width: 1.4583333333333333rem;
+  height: 1.4583333333333333rem;
 }
 .banner {
   width: 100%;
@@ -188,13 +185,13 @@ body {
 .details-container ul p {
   background-image: -webkit-linear-gradient(45deg, #101c39, #0b466b);
   background-image: linear-gradient(45deg, #101c39, #0b466b);
-  height: 2.5rem;
-  line-height: 2.5rem;
+  height: 2.0833333333333335rem;
+  line-height: 2.0833333333333335rem;
   border: 0.20833333333333334rem solid #3489ac;
   border-radius: 0.4166666666666667rem;
   width: 20.833333333333332rem;
   margin: 0.4166666666666667rem auto;
-  font-size: 1.3333333333333333rem;
+  font-size: 1rem;
   text-align: center;
   color: #3cddff;
 }
