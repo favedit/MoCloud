@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150905135713">
+  <TemplateFrame guid="FE4F199A3D3E4C609F5185B6EAE5BDA7" valid="N" name="logic.template.ListToolBarTemplate" label="组件属性模板" nowrap="N" location="0,0" size="0,0">
+    <ToolBar guid="BA40EA67F3F440EF943C0BFAA3FC8E35" valid="N" name="toolBar" label="工具栏" nowrap="N" location="0,0" size="0,0">
+      <ToolButton guid="9566DDF19F9B49FA8BA3BF4199E0912F" name="insertButton" label="新建" linker="_controlInsert" icon="manage.common.insert" />
+    </ToolBar>
+  </TemplateFrame>
+</Content>

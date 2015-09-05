@@ -25,6 +25,9 @@ public class FFieldExpression
    // 数据集合名称
    protected String _datasetName;
 
+   // 数据集合数据名称
+   protected String _datasetDataName;
+
    // 过滤名称
    protected String _filterName;
 
@@ -65,6 +68,24 @@ public class FFieldExpression
    //============================================================
    public void setDatasetName(String datasetName){
       _datasetName = datasetName;
+   }
+
+   //============================================================
+   // <T>获得数据集合数据名称。</T>
+   //
+   // @return 数据集合数据名称
+   //============================================================
+   public String datasetDataName(){
+      return _datasetDataName;
+   }
+
+   //============================================================
+   // <T>设置数据集合数据名称。</T>
+   //
+   // @return datasetDataName 数据集合数据名称
+   //============================================================
+   public void setDatasetDataName(String datasetDataName){
+      _datasetDataName = datasetDataName;
    }
 
    //============================================================

@@ -12,7 +12,7 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.com.lang.FObjects;
+import org.mo.com.lang.INamePair;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -58,7 +58,7 @@ public class FFrameService
    //============================================================
    public FSql makeSelectSql(FContentObject frameContent,
                              FXmlNode xsearch,
-                             FObjects<FFieldExpression> expressions){
+                             FFieldExpressions expressions){
       String frameName = frameContent.get("name");
       // 更新数据集
       String datasetName = frameContent.get("dataset_name");
@@ -80,19 +80,42 @@ public class FFrameService
             // 表达式字段
             String dataExpression = controlContent.get("data_expression", null);
             if(!RString.isEmpty(dataExpression)){
-               expressions.push(new FFieldExpression(controlContent));
                continue;
             }
             // 查询字段
             if(!fieldFirst){
                sql.append(",");
             }
-            sql.append("`", dataName, "`");
+            sql.append("`", datasetDataName, "`.`", dataName, "`");
             fieldFirst = false;
          }
       }
       sql.append(" FROM ");
       sql.append(datasetDataName);
+      //..........................................................
+      // 增加交叉查询条件
+      if(xsearch != null){
+         for(FXmlNode xcolumn : xsearch){
+            if(xcolumn.isName("Column")){
+               String name = xcolumn.get("name");
+               // 查找字段
+               FContentObject fieldContent = frameContent.findObject("name", name);
+               String dataValue = xcolumn.get("value");
+               // 表达式字段
+               String dataExpression = fieldContent.get("data_expression", null);
+               if(!RString.isEmpty(dataExpression)){
+                  FFieldExpression expression = expressions.get(name);
+                  FSql joinSql = new FSql(" INNER JOIN {table} on {base}.{filter_name} = {table}.OUID AND {table}.{field_name} like '%{value}%'");
+                  joinSql.bind("base", datasetDataName);
+                  joinSql.bind("table", expression.datasetDataName());
+                  joinSql.bind("filter_name", expression.filterName());
+                  joinSql.bind("field_name", expression.fieldName());
+                  joinSql.bind("value", dataValue);
+                  sql.append(joinSql);
+               }
+            }
+         }
+      }
       //..........................................................
       // 增加查询条件
       FSql searchSql = new FSql();
@@ -107,14 +130,16 @@ public class FFrameService
                FContentObject fieldContent = frameContent.findObject("name", name);
                String dataName = fieldContent.get("data_name");
                String dataValue = xcolumn.get("value");
+               // 表达式字段
+               String dataExpression = fieldContent.get("data_expression", null);
+               if(!RString.isEmpty(dataExpression)){
+                  continue;
+               }
                if(!searchSql.isEmpty()){
                   searchSql.append(" AND ");
                }
-               searchSql.append("(");
-               searchSql.append(dataName);
-               searchSql.append(" LIKE '%");
-               searchSql.append(dataValue);
-               searchSql.append("%')");
+               searchSql.append("(`", datasetDataName, "`.`", dataName, "`");
+               searchSql.append(" LIKE '%", dataValue, "%')");
             }
          }
       }
@@ -132,6 +157,34 @@ public class FFrameService
    }
 
    //============================================================
+   // <T>查找所有表达式集合。</T>
+   //============================================================
+   public FFieldExpressions findExpressions(FContentObject frameContent){
+      FFieldExpressions expressions = new FFieldExpressions();
+      // 查找字段
+      for(FContentObject controlContent : frameContent.nodes()){
+         String name = controlContent.get("name");
+         String dataName = controlContent.get("data_name", null);
+         if(!RString.isEmpty(dataName)){
+            // 表达式字段
+            String dataExpression = controlContent.get("data_expression", null);
+            if(!RString.isEmpty(dataExpression)){
+               FFieldExpression expression = new FFieldExpression(controlContent);
+               String datasetName = expression.datasetName();
+               FContentObject datasetContent = _datasetConsole.findDefine(_storgeName, datasetName, EPersistenceMode.Store);
+               if(datasetContent == null){
+                  throw new FFatalError("Frame dataset is not exists. (dataset_name={1})", datasetName);
+               }
+               String datasetDataName = datasetContent.get("data_name");
+               expression.setDatasetDataName(datasetDataName);
+               expressions.set(name, expression);
+            }
+         }
+      }
+      return expressions;
+   }
+
+   //============================================================
    // <T>存储数据集合。</T>
    //
    // @param dataset 数据集
@@ -140,7 +193,7 @@ public class FFrameService
    public void saveDataset(ILogicContext logicContext,
                            FDataset dataset,
                            FXmlNode xdataset,
-                           FObjects<FFieldExpression> expressions){
+                           FFieldExpressions expressions){
       xdataset.set("total", dataset.total());
       xdataset.set("page_size", dataset.pageSize());
       xdataset.set("page_count", dataset.pageCount());
@@ -153,8 +206,8 @@ public class FFrameService
          }
          // 表达式计算
          if(expressions != null){
-            for(FFieldExpression expression : expressions){
-               expression.execute(logicContext, xrow, row);
+            for(INamePair<FFieldExpression> pair : expressions){
+               pair.value().execute(logicContext, xrow, row);
             }
          }
       }
@@ -193,7 +246,7 @@ public class FFrameService
       }
       String dataGroup = datasetContent.get("data_group");
       // 生成SQL
-      FObjects<FFieldExpression> expressions = new FObjects<FFieldExpression>(FFieldExpression.class);
+      FFieldExpressions expressions = findExpressions(frameContent);
       FSql sql = makeSelectSql(frameContent, xsearch, expressions);
       // 查询数据
       ISqlConnection connection = logicContext.activeConnection(dataGroup);

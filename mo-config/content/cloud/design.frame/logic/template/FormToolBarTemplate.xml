@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150905135716">
+  <TemplateFrame guid="6C6F790C4E91465C92970813F0608798" valid="N" name="logic.template.FormToolBarTemplate" label="组件属性模板" nowrap="N" location="0,0" size="0,0">
+    <ToolBar guid="2EF823D7399F49299600066733292726" valid="N" name="toolBar" label="工具栏" nowrap="N" location="0,0" size="0,0">
+      <ToolButton guid="38B1F0E4D3984B648BA152D6EA708597" name="backButton" label="返回" linker="_controlBack" icon="manage.common.back" />
+      <ToolButtonSplit />
+      <ToolButton guid="1B5EED447B75476CB2B8798E0C817B0E" name="updateButton" label="保存" linker="_controlUpdate" icon="manage.common.save" />
+      <ToolButton guid="13F3C3177DBA4A65AC051BD4BF1BBEF3" name="deleteButton" label="删除" linker="_controlDelete" icon="manage.common.delete" />
+    </ToolBar>
+  </TemplateFrame>
+</Content>
