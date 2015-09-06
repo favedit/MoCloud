@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150904130401">
+<Content name="design.frame" update_date="20150906100924">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IComponent" label="组件接口" class_name="org.mo.cloud.content.design.frame.common.XComponent" inherits="" note="">
       <Attribute is_valid="Y" type="Boolean" name="valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
@@ -59,10 +59,10 @@
       <Attribute is_valid="Y" type="String" name="unit_where" label="单元条件" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="MDataField" label="数据字段" class_name="org.mo.cloud.content.design.frame.common.XDataField" inherits="" note="">
-      <Attribute is_valid="Y" type="Boolean" name="data_require" label="数据必须" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_name" label="数据名称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="data_alias" label="数据别称" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="Boolean" name="data_select" label="数据查询" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="data_type_cd" label="数据类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="data_expression" label="数据表达式" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_value" label="数据内容" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_default" label="数据默认" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="data_source" label="数据来源" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
@@ -115,27 +115,27 @@
     <Interface is_valid="Y" name="MDescriptorEdit" label="编辑描述" class_name="" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="edit_size" label="编辑尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>
-    <Interface is_valid="Y" name="MEditReference" label="编辑引用" class_name="org.mo.cloud.content.design.frame.common.XEditReference" inherits="" note="">
-      <Attribute is_valid="Y" type="String" name="lov_service" label="引用服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="lov_reference" label="引用地址" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="lov_fields" label="引用字段" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="lov_where" label="应用条件" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
-      <Attribute is_valid="Y" type="String" name="lov_order" label="引用排序" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Interface is_valid="Y" name="MDescriptorPicker" label="拾取描述" class_name="org.mo.cloud.content.design.frame.common.XDescriptorPicker" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="picker_service" label="拾取服务" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+      <Attribute is_valid="Y" type="String" name="picker_frame" label="拾取页面" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+      <Attribute is_valid="Y" type="String" name="picker_fields" label="拾取字段集合" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+      <Attribute is_valid="Y" type="String" name="picker_where" label="拾取条件" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
+      <Attribute is_valid="Y" type="String" name="picker_order" label="拾取排序" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Interface>
-    <Interface is_valid="Y" name="MEditZoom" label="编辑放大" class_name="org.mo.cloud.content.design.frame.common.XEditZoom" inherits="" note="">
-      <Attribute is_valid="Y" type="String" name="zoom_reference" label="放大引用" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+    <Interface is_valid="Y" name="MDescriptorZoom" label="放大描述" class_name="org.mo.cloud.content.design.frame.common.XDescriptorZoom" inherits="" note="">
+      <Attribute is_valid="Y" type="String" name="zoom_frame" label="放大引用" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
       <Attribute is_valid="Y" type="String" name="zoom_field" label="放大字段" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
     </Interface>
     <Interface is_valid="Y" name="MPropertyCheck" label="复选属性接口" class_name="org.mo.cloud.content.design.frame.common.XProperyCheck" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="value_true" label="真值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
       <Attribute is_valid="Y" type="String" name="value_false" label="假值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Interface>
-    <Interface is_valid="Y" name="MPropertyNumber" label="数字属性接口" class_name="org.mo.cloud.content.design.frame.common.XProperyNumber" inherits="MEditZoom,MEditReference" note="">
+    <Interface is_valid="Y" name="MPropertyNumber" label="数字属性接口" class_name="org.mo.cloud.content.design.frame.common.XProperyNumber" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="value_min" label="最小值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="value_max" label="最大值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="value_precision" label="值精度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Interface>
-    <Interface is_valid="Y" name="MPropertyEdit" label="编辑属性接口" class_name="org.mo.cloud.content.design.frame.common.XProperyEdit" inherits="MEditZoom,MEditReference" note="">
+    <Interface is_valid="Y" name="MPropertyEdit" label="编辑属性接口" class_name="org.mo.cloud.content.design.frame.common.XProperyEdit" inherits="" note="">
       <Attribute is_valid="Y" type="String" name="edit_length" label="编辑长度" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="edit_align_cd" label="编辑对齐方式" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="edit_case_cd" label="编辑大小写类型" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
@@ -171,47 +171,65 @@
     </Component>
     <Component is_valid="Y" name="Radio" label="单选框" class_name="org.mo.cloud.content.design.frame.common.XRadio" base_name="org.mo.cloud.content.design.frame.base.XBaseRadio" inherits="IEditControl,MDataField" note="" />
     <Component is_valid="Y" name="Check" label="复选框" class_name="org.mo.cloud.content.design.frame.common.XCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseCheck" inherits="IEditControl,MDataField,MPropertyCheck" note="" />
-    <Component is_valid="Y" name="Number" label="数字编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber" inherits="IEditControl,MDataField,MPropertyNumber" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    <Component is_valid="Y" name="Number" label="数字编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber" inherits="IEditControl,MDataField,MDescriptorPicker,MDescriptorZoom,MPropertyNumber" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="Number2" label="数字2编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber2" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber2" inherits="IEditControl,MDataField,MPropertyNumber" note="" />
-    <Component is_valid="Y" name="Number3" label="数字3编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber3" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber3" inherits="IEditControl,MDataField,MPropertyNumber" note="" />
-    <Component is_valid="Y" name="Number4" label="数字4编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber4" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber4" inherits="IEditControl,MDataField,MPropertyNumber" note="" />
+    <Component is_valid="Y" name="Number2" label="数字2编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber2" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber2" inherits="IEditControl,MDataField,MPropertyNumber" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="Number3" label="数字3编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber3" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber3" inherits="IEditControl,MDataField,MPropertyNumber" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="Number4" label="数字4编辑框" class_name="org.mo.cloud.content.design.frame.common.XNumber4" base_name="org.mo.cloud.content.design.frame.base.XBaseNumber4" inherits="IEditControl,MDataField,MPropertyNumber" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="SlideNumber" label="滑动数字编辑框" class_name="org.mo.cloud.content.design.frame.common.XSlideNumber" base_name="org.mo.cloud.content.design.frame.base.XBaseSlideNumber" inherits="IEditControl,MDataField,MPropertyNumber" note="">
       <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="DateTime" label="时间编辑框" class_name="org.mo.cloud.content.design.frame.common.XDateTime" base_name="org.mo.cloud.content.design.frame.base.XBaseDateTime" inherits="IEditControl,MDataField" note="" />
+    <Component is_valid="Y" name="DateTime" label="时间编辑框" class_name="org.mo.cloud.content.design.frame.common.XDateTime" base_name="org.mo.cloud.content.design.frame.base.XBaseDateTime" inherits="IEditControl,MDataField" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="Calendar" label="日期时间输入框" class_name="org.mo.cloud.content.design.frame.common.XCalendar" base_name="org.mo.cloud.content.design.frame.base.XBaseCalendar" inherits="IEditControl,MDataField" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
     <Component is_valid="Y" name="SelectItem" label="选择项目" class_name="org.mo.cloud.content.design.frame.common.XSelectItem" base_name="org.mo.cloud.content.design.frame.base.XBaseSelectItem" inherits="IComponent" note="">
       <Attribute is_valid="Y" type="String" name="data_value" label="数据内容" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="Select" label="下拉选择框" class_name="org.mo.cloud.content.design.frame.common.XSelect" base_name="org.mo.cloud.content.design.frame.base.XBaseSelect" inherits="IEditControl,MDataField,MPropertySelect" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
-    <Component is_valid="Y" name="Color" label="颜色编辑框" class_name="org.mo.cloud.content.design.frame.common.XColor" base_name="org.mo.cloud.content.design.frame.base.XBaseColor" inherits="IEditControl,MDataField" note="" />
-    <Component is_valid="Y" name="Color3" label="颜色3编辑框" class_name="org.mo.cloud.content.design.frame.common.XColor3" base_name="org.mo.cloud.content.design.frame.base.XBaseColor3" inherits="IEditControl,MDataField" note="" />
-    <Component is_valid="Y" name="Color4" label="颜色4编辑框" class_name="org.mo.cloud.content.design.frame.common.XColor4" base_name="org.mo.cloud.content.design.frame.base.XBaseColor4" inherits="IEditControl,MDataField" note="" />
+    <Component is_valid="Y" name="Color" label="颜色编辑框" class_name="org.mo.cloud.content.design.frame.common.XColor" base_name="org.mo.cloud.content.design.frame.base.XBaseColor" inherits="IEditControl,MDataField" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="Color3" label="颜色3编辑框" class_name="org.mo.cloud.content.design.frame.common.XColor3" base_name="org.mo.cloud.content.design.frame.base.XBaseColor3" inherits="IEditControl,MDataField" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
+    <Component is_valid="Y" name="Color4" label="颜色4编辑框" class_name="org.mo.cloud.content.design.frame.common.XColor4" base_name="org.mo.cloud.content.design.frame.base.XBaseColor4" inherits="IEditControl,MDataField" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="ColorPower" label="颜色强度编辑框" class_name="org.mo.cloud.content.design.frame.common.XColorPower" base_name="org.mo.cloud.content.design.frame.base.XBaseColorPower" inherits="IEditControl,MDataField" note="">
       <Attribute is_valid="Y" type="String" name="value_min" label="最小值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
       <Attribute is_valid="Y" type="String" name="value_max" label="最大值" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
-    <Component is_valid="Y" name="ColorPicker" label="颜色选择框" class_name="org.mo.cloud.content.design.frame.common.XColorPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseColorPicker" inherits="IEditControl,MDataField" note="" />
+    <Component is_valid="Y" name="ColorPicker" label="颜色选择框" class_name="org.mo.cloud.content.design.frame.common.XColorPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseColorPicker" inherits="IEditControl,MDataField" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="Edit" label="文本编辑框" class_name="org.mo.cloud.content.design.frame.common.XEdit" base_name="org.mo.cloud.content.design.frame.base.XBaseEdit" inherits="IEditControl,MDataField,MPropertyEdit" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
     <Component is_valid="Y" name="Memo" label="多行文本编辑器" class_name="org.mo.cloud.content.design.frame.common.XMemo" base_name="org.mo.cloud.content.design.frame.base.XBaseMemo" inherits="IEditControl,MPropertyMemo" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
-    <Component is_valid="Y" name="IconPicker" label="图标选择框" class_name="org.mo.cloud.content.design.frame.common.XIconPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseIconPicker" inherits="IEditControl,MDataField" note="" />
+    <Component is_valid="Y" name="IconPicker" label="图标选择框" class_name="org.mo.cloud.content.design.frame.common.XIconPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseIconPicker" inherits="IEditControl,MDataField" note="">
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="ProgressBar" label="进度条" class_name="org.mo.cloud.content.design.frame.common.XProgressBar" base_name="org.mo.cloud.content.design.frame.base.XBaseProgressBar" inherits="IControl" note="" />
     <Component is_valid="Y" name="Picture" label="图片选择框" class_name="org.mo.cloud.content.design.frame.common.XPicture" base_name="org.mo.cloud.content.design.frame.base.XBasePicture" inherits="IEditControl,MPropertyPicture" note="" />
     <Component is_valid="Y" name="File" label="文件输入框" class_name="org.mo.cloud.content.design.frame.common.XFile" base_name="org.mo.cloud.content.design.frame.base.XBaseFile" inherits="IEditControl" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="Attachment" label="上传附件" class_name="org.mo.cloud.content.design.frame.common.XAttachment" base_name="org.mo.cloud.content.design.frame.base.XBaseAttachment" inherits="IEditControl" note="">
-      <Attribute is_valid="Y" type="String" name="input_size" label="输入尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+      <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
     </Component>
     <Component is_valid="Y" name="ListItem" label="列表项目" class_name="org.mo.cloud.content.design.frame.common.XListItem" base_name="org.mo.cloud.content.design.frame.base.XBaseListItem" inherits="IControl" note="" />
     <Component is_valid="Y" name="ListBox" label="列表控件" class_name="org.mo.cloud.content.design.frame.common.XListBox" base_name="org.mo.cloud.content.design.frame.base.XBaseListBox" inherits="IContainer" note="" />
@@ -231,7 +249,7 @@
     <Component is_valid="Y" name="Column" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" base_name="org.mo.cloud.content.design.frame.base.XBaseColumn" inherits="IColumn" note="" />
     <Component is_valid="Y" name="ColumnText" label="表格文本列" class_name="org.mo.cloud.content.design.frame.common.XColumnText" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnText" inherits="IColumn,MDataField" note="" />
     <Component is_valid="Y" name="ColumnCheck" label="表格复选列" class_name="org.mo.cloud.content.design.frame.common.XColumnCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnCheck" inherits="IColumnEditControl,MDataField,MPropertyCheck" note="" />
-    <Component is_valid="Y" name="ColumnNumber" label="表格数字列" class_name="org.mo.cloud.content.design.frame.common.XColumnNumber" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnNumber" inherits="IColumnEditControl,MDataField,MPropertyNumber" note="" />
+    <Component is_valid="Y" name="ColumnNumber" label="表格数字列" class_name="org.mo.cloud.content.design.frame.common.XColumnNumber" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnNumber" inherits="IColumnEditControl,MDataField,MDescriptorPicker,MDescriptorZoom,MPropertyNumber" note="" />
     <Component is_valid="Y" name="ColumnCalendar" label="表格日期时间列" class_name="org.mo.cloud.content.design.frame.common.XColumnCalendar" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnCalendar" inherits="IColumnEditControl,MDataField,MPropertyEdit" note="" />
     <Component is_valid="Y" name="ColumnEdit" label="表格编辑列" class_name="org.mo.cloud.content.design.frame.common.XColumnEdit" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnEdit" inherits="IColumnEditControl,MDataField,MPropertyEdit" note="" />
     <Component is_valid="Y" name="ColumnSelect" label="表格选择列" class_name="org.mo.cloud.content.design.frame.common.XColumnSelect" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnSelect" inherits="IColumnEditControl,MDataField,MPropertySelect" note="" />
@@ -289,7 +307,7 @@
     </Component>
     <Component is_valid="Y" name="FormFrame" label="表单页面" class_name="org.mo.cloud.content.design.frame.common.XFormFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseFormFrame" inherits="Frame,MDataset,IFrameContainer" note="" />
     <Component is_valid="Y" name="TableFrame" label="表格页面" class_name="org.mo.cloud.content.design.frame.common.XTableFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTableFrame" inherits="Frame,MDataset,IFrameContainer" note="" />
-    <Component is_valid="Y" name="PickerFrame" label="拾取页面" class_name="org.mo.cloud.content.design.frame.common.XPickerFrame" base_name="org.mo.cloud.content.design.frame.base.XBasePickerFrame" inherits="Frame" note="" />
+    <Component is_valid="Y" name="PickerFrame" label="拾取页面" class_name="org.mo.cloud.content.design.frame.common.XPickerFrame" base_name="org.mo.cloud.content.design.frame.base.XBasePickerFrame" inherits="Frame,MDataset" note="" />
     <Component is_valid="Y" name="DialogFrame" label="对话页面" class_name="org.mo.cloud.content.design.frame.common.XDialogFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseDialogFrame" inherits="Frame" note="" />
     <Component is_valid="Y" name="TemplateFrame" label="模板页面" class_name="org.mo.cloud.content.design.frame.common.XTemplateFrame" base_name="org.mo.cloud.content.design.frame.base.XBaseTemplateFrame" inherits="Frame" note="" />
     <Component is_valid="Y" name="Bar" label="停靠栏" class_name="org.mo.cloud.content.design.frame.common.XBar" base_name="org.mo.cloud.content.design.frame.base.XBaseBar" inherits="Frame" note="" />

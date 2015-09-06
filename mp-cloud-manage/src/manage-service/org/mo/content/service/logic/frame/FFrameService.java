@@ -274,8 +274,8 @@ public class FFrameService
                          IWebOutput output){
       FXmlNode xcontent = input.config().findNode("Content");
       String frameName = xcontent.get("frame_name");
-      FXmlNode xsearch = xcontent.nodes().first();
-      long ouid = xsearch.getLong("ouid");
+      FXmlNode xouid = xcontent.nodes().first();
+      long ouid = xouid.getLong("ouid");
       // 获得页面
       FContentObject frameContent = _frameConsole.findDefine(_storgeName, frameName, EPersistenceMode.Store);
       if(frameContent == null){
@@ -288,25 +288,14 @@ public class FFrameService
       if(datasetContent == null){
          throw new FFatalError("Frame dataset is not exists. (frame_name={1}, dataset_name={2})", frameName, datasetName);
       }
-      String datasetDataName = datasetContent.get("data_name");
       // 生成SQL
-      FSql sql = new FSql();
-      sql.append("SELECT ");
-      boolean fieldFirst = true;
-      for(FContentObject controlContent : frameContent.nodes()){
-         String dataName = controlContent.get("data_name", null);
-         if(!RString.isEmpty(dataName)){
-            if(!fieldFirst){
-               sql.append(",");
-            }
-            sql.append("`", dataName, "`");
-            fieldFirst = false;
-         }
-      }
-      sql.append(" FROM ");
-      sql.append(datasetDataName);
-      sql.append(" WHERE OUID={ouid}");
-      sql.bindLong("ouid", ouid);
+      FXmlNode xsearch = new FXmlNode("Search");
+      FXmlNode xcolumn = new FXmlNode("Column");
+      xcolumn.set("name", "ouid");
+      xcolumn.set("value", ouid);
+      xsearch.push(xcolumn);
+      FFieldExpressions expressions = findExpressions(frameContent);
+      FSql sql = makeSelectSql(frameContent, xsearch, expressions);
       // 查询数据
       ISqlConnection connection = logicContext.activeConnection("data");
       FDataset dataset = connection.fetchDataset(sql);
@@ -314,7 +303,7 @@ public class FFrameService
       // 输出内容
       FXmlNode xdataset = xoutput.createNode("Dataset");
       xdataset.set("name", datasetName);
-      saveDataset(logicContext, dataset, xdataset, null);
+      saveDataset(logicContext, dataset, xdataset, expressions);
       return EResult.Success;
    }
 

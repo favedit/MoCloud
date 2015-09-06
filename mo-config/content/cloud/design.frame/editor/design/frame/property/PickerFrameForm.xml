@@ -1,60 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150904142509">
-  <FormFrame guid="47AAEB980118408F9D0B98BBC3DF71F1" valid="N" name="editor.design.frame.property.PickerFrameForm" label="停靠栏属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="container" logic_service="editor.design.frame">
-    <ToolBar guid="F812C2C808C242698462CF7DFC19C43D" name="toolBar" label="M#12cn13工具栏" width="100%" height="24">
-      <ToolButton guid="253C39C67B9F40AB8B399B9301910996" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
-      <ToolButton guid="B61D0D4925304D5C9D9A8FAE64FABFFF" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
-      <ToolButtonSplit guid="8FCB6596E4AF433585A2751ABF62D065" name="split1Button" label="分割" />
-      <ToolButtonMenu guid="914B624F5A55484AA450BCD9443105E2" name="insertButtonMenu" label="新建控件" icon="editor.common.save">
-        <MenuButton guid="199428B5737F4F0CB62EA6CB1478C609" name="insertIconPacker" label="图标选取" attributes="_type=IconPicker\nsel_type=component\nform_name=design.webform.IconPickerForm" icon="editor.design.frame.iconPickerNew" />
-        <MenuButton guid="9AAFF1D1DA374D44B58B3A3AB2BB4DAE" name="insertSplitButton" label="插入分割线" attributes="_type=Split\nsel_type=component\nform_name=design.webform.SplitForm" icon="editor.design.frame.split" />
-        <MenuButton guid="9FBFA3EDECC0410EB44BB350B10935CA" name="insertEditButton" label="文本编辑控件" attributes="_type=Edit\nsel_type=component\nform_name=design.webform.EditForm" icon="editor.design.frame.editNew" />
-        <MenuButton guid="ED907AF7D737483D8C45741829103E47" name="insertReferenceButton" label="引用编辑控件" attributes="_type=Reference\nsel_type=component\nform_name=design.webform.ReferenceForm" icon="editor.design.frame.reference" />
-        <MenuButton guid="8C1CF6BC5C814E12B441588B4884F4E0" name="insertMemoButton" label="多行文本控件" attributes="_type=Memo\nsel_type=component\nform_name=design.webform.MemoForm" icon="editor.design.frame.memoNew" />
-        <MenuButton guid="FE001CDC71A54B6090159482E5ED1AE3" name="insertHtmlEditorButton" label="HTML编辑框" attributes="_type=HtmlEditor\nsel_type=component\nform_name=design.webform.HtmlEditorForm" icon="editor.design.frame.memoNew" />
-        <MenuButton guid="4DA9D3AE88EC42C98C604D303BC7040C" name="insertFRichEditButton" label="格式文本输入框" attributes="_type=FRichEdit\nsel_type=component\nform_name=design.webform.RichEditForm" icon="editor.design.frame.richedit" />
-        <MenuButton guid="786C175B719C4A3AB07F9E2BB8E6C180" name="insertNumberButton" label="数字输入框控件" attributes="_type=Number\nsel_type=component\nform_name=design.webform.NumberForm" icon="editor.design.frame.numberNew" />
-        <MenuButton guid="BA4E604553E449D1A6CDDA407C123BC1" name="insertSelectButton" label="下拉选择框控件" attributes="_type=Select\nsel_type=component\nform_name=design.webform.SelectForm" icon="editor.design.frame.selectNew" />
-        <MenuButton guid="AA0BE1A710644C7D8B47009B50EE685E" name="insertCheckButton" label="单选框控件" attributes="_type=Check\nsel_type=component\nform_name=design.webform.CheckForm" icon="editor.design.frame.checkNew" />
-        <MenuButton guid="C6D13D48706240BDA9EE78F1C875B7E5" name="insertCalendarButton" label="日期时间选取框控件" attributes="_type=Calendar\nsel_type=component\nform_name=design.webform.CalendarForm" icon="editor.design.frame.calendarNew" />
-        <MenuButton guid="77D4CFDB510C4595ACF979EA1EDCFE73" name="insertDateButton" label="日期选取框控件" attributes="_type=Date\nsel_type=component\nform_name=design.webform.DateForm" icon="editor.design.frame.dateNew" />
-        <MenuButton guid="49A3325563AA47CF8213F17A10ACBF06" name="insertTimeButton" label="时间选取框控件" attributes="_type=Time\nsel_type=component\nform_name=design.webform.TimeForm" icon="editor.design.frame.time" />
-        <MenuButton guid="4B6AA76D158747FF8BE630731214AEB9" name="insertColorPickerButton" label="颜色选取框控件" attributes="_type=ColorPicker\nsel_type=component\nform_name=design.webform.ColorPickerForm" icon="editor.design.frame.colorpickerNew" />
-        <MenuButton guid="4E1E6F24D6484F68BFC96A48B39950E6" name="insertPicture" label="图片控件" attributes="_type=Picture\nsel_type=component\nform_name=design.webform.PictureForm" icon="editor.design.frame.picture" />
-        <MenuButton guid="E96A5CAD442C4878A88B5AF9E140B9BF" name="insertPickerButton" label="记录选取框控件" attributes="_type=Picker\nsel_type=component\nform_name=design.webform.PickerForm" icon="editor.design.frame.pickerNew" />
-        <MenuButton guid="88E04BEBF6684278BE412ADBDC962A4D" name="insertSplitButton" label="分割线控件" attributes="_type=Split\nsel_type=component\nform_name=design.webform.SplitForm" icon="editor.design.frame.splitNew" />
-        <MenuButton guid="9F09EB4DFBF14C19B512CD7A6AE4885E" name="insertRadioButton" label="单选择按钮" attributes="_type=Radio\nsel_type=component\nform_name=design.webform.RadioForm" icon="editor.design.frame.fradio" />
-        <MenuButton guid="C2086AB6CB624101B835AB2240571F2E" name="insertButton" label="按钮控件" attributes="_type=Button\nsel_type=component\nform_name=design.webform.ButtonForm" icon="editor.design.frame.button" />
-        <MenuButton guid="A32D49F9011E423A8BAEEFCECC171BC7" name="insertDataActionButton" label="数据命令" attributes="_type=DataAction\nsel_type=component\nform_name=design.webform.DataActionForm" icon="editor.design.frame.dataactionNew" />
-        <MenuButton guid="C853E3E533F94F19A227BB3A4AAFECA8" name="insertToolBarButton" label="工具栏控件" attributes="_type=ToolBar\nsel_type=component\nform_name=design.webform.ToolBarForm" icon="editor.design.frame.toolbarNew" />
-        <MenuButton guid="1A8493E9AECB4E70B890BF8B9DF25200" name="insertPageControlButton" label="分页控件" attributes="_type=PageControl\nsel_type=component\nform_name=design.webform.PageControlForm" icon="editor.design.frame.pagecontrolNew" />
-        <MenuButton guid="1FECA5662EAE456E9409699ADAE5DC2A" name="insertChartButton" label="图表控件" attributes="_type=Chart\nsel_type=component\nform_name=design.webform.ChartForm" icon="editor.design.frame.report" />
-        <MenuButton guid="59E38573B18E4DF6B1BDEBEC9990D549" name="insertTable" label="表格" attributes="_type=Table\nsel_type=component\nform_name=design.webform.TableForm" icon="editor.design.frame.webtable" />
-        <MenuButton guid="2F5439A9F9194BBF97C34207471F3B76" name="insertBrowserControl" label="流程控件" attributes="_type=BrowserControl\nsel_type=component\nform_name=design.webform.BrowserControlForm" icon="editor.design.frame.webbrowser" />
-        <MenuButton guid="C18769B9E5CA44FE91221FD5AF042F56" name="insertDiscussion" label="讨论控件" attributes="_type=Discussion\nsel_type=component\nform_name=design.webform.DiscussionForm" icon="editor.design.frame.discussion" />
-        <MenuButton guid="E641F10078E9472BADCDF9CF26446DB0" name="insertTemplateButton" label="表单模板" attributes="_type=Template\nsel_type=component\nform_name=design.webform.TemplateForm" icon="editor.design.frame.webtemplateNew" />
-        <MenuButton guid="59B9E616BE05468BBFDC8A3AD47776E8" name="insertTimer" label="时间表控件" attributes="_type=Timer\nsel_type=component\nform_name=design.webform.TimerForm" />
-        <MenuButton guid="ECD0190322044D2391C0572825FC708D" name="insertHtmlMemo" label="HTML显示控件" attributes="_type=HtmlMemo\nsel_type=component\nform_name=design.webform.HtmlMemoForm" />
-        <MenuButton guid="EBF5467F17CB4934AC4AF7F4EAF708BE" name="insertCheckPickerButton" label="多项选择框" attributes="_type=CheckPicker\nsel_type=component\nform_name=design.webform.CheckPickerForm" />
-        <MenuButton guid="4E3AF86325144EA8A37997ACA75DE8FC" name="insertTimeSpanPickerButton" label="7时间段选取控件" attributes="_type=TimeSpanPicker\nsel_type=component\nform_name=design.webform.TimeSpanPickerForm" />
-        <MenuButton guid="C2CE9DBAD6474FB4AE22B734B6ECFAB0" name="insertLabelButton" label="文本标签控件" attributes="_type=Label\nsel_type=component\nform_name=design.webform.LabelForm" icon="editor.design.frame.label" />
-        <MenuButton guid="AE9D38E4579845D08BFD935C92B274DE" name="insertAttachment" label="上传控件" attributes="_type=Attachment\nsel_type=component\nform_name=design.webform.AttachmentForm" icon="editor.design.frame.attachment" />
-        <MenuButton guid="A0920DDE8AEF429AA76C0BCDCBEC62F2" name="insertProgressBar" label="百分比进度条" attributes="_type=ProgressBar\nsel_type=component\nform_name=design.webform.ProgressBarForm" />
-        <MenuButton guid="6086D8E4B8C9430E9F2AEF2C8DCEC67B" name="insertLogicUserPickerButton" label="用户逻辑控件" attributes="_type=LogicUserPicker\nsel_type=component\nform_name=design.webform.LogicUserPickerForm" />
-        <MenuButton guid="517BC8F6D0614375BD630670C37711D0" name="insertFormInformationBarButton" label="表单信息控件" attributes="_type=FormInformationBar\nsel_type=component\nform_name=design.webform.FormInformationBarForm" />
-        <MenuButton guid="D2E30377A3C94DB2ABFA93206726902D" name="insertFixGridButton" label="固定网格控件" attributes="_type=FixGrid\nsel_type=component\nform_name=design.webform.FixGridForm" icon="editor.design.frame.fixGrid" />
-        <MenuButton guid="87E49E9062D641D498F624B9ED347109" name="insertGridButton" label="网格控件" attributes="_type=Grid\nsel_type=component\nform_name=design.webform.GridForm" icon="editor.design.frame.grid" />
-        <MenuButton guid="D759B3CF3EA14B6DB87BEBB4CCA57C67" name="insertFixTableButton" label="固定表格控件" attributes="_type=FixTable\nsel_type=component\nform_name=design.webform.FixTableForm" icon="editor.design.frame.fixTable" />
-        <MenuButton guid="5603B81CBDB6454091D2C020710CBC31" name="insertPanel" label="面板控件" attributes="_type=Panel\nsel_type=component\nform_name=design.webform.PanelForm" icon="editor.design.frame.panel" />
-        <MenuButton guid="7E61378F0C034CF391736475F53E1E6C" name="insertGroup" label="新建组控件" attributes="_type=Group\nsel_type=component\nform_name=design.webform.GroupForm" />
+<Content update_date="20150906090556">
+  <FormFrame guid="BCC31E2472BE45F2805FFD9A0B7FEBB2" valid="N" name="editor.design.frame.property.PickerFrameForm" label="停靠栏属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="container" logic_service="editor.design.frame">
+    <ToolBar guid="CB3DC6B0691149F69F465A14813EA8F4" name="toolBar" label="M#12cn13工具栏" width="100%" height="24">
+      <ToolButton guid="AC295DFD5E684298AE253DA8F79D43E4" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="98621B1C572C4344ADBF0232BB973699" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
+      <ToolButtonSplit guid="72A1F0E827344DAE9450535488649AB0" name="split1Button" label="分割" />
+      <ToolButtonMenu guid="0FCD869AE29844F1BED6658C8DFE5FE1" name="insertButtonMenu" label="新建控件" icon="editor.common.save">
+        <MenuButton guid="8ECD0A2C1ADA4FCFAEC6A499FA48C873" name="insertColumnText" label="文本列" attributes="_type=IconPicker\nsel_type=component\nframe_name=editor.design.frame.property.ColumnTextForm" icon="editor.design.frame.iconPickerNew" />
       </ToolButtonMenu>
-      <ToolButtonSplit guid="555C27FBE7E04830966F4A56BDAD8AE8" name="split4Button" label="分割" />
-      <ToolButton guid="464A83341EB74D679A9821C6C51FF16C" name="designButton" label="设计" attributes="sel_type=collection" icon="editor.common.design" hotkey="F9" />
-      <ToolButton guid="6BE9F8142BF848149B94C11EFE36606A" name="sortButton" label="排序" attributes="sel_type=collection" icon="editor.common.sort" />
-      <ToolButtonSplit guid="5FC6987CA75041259297BE4245C777A7" name="sjplit3Button" label="分割" />
-      <ToolButton guid="05E060D0136C4D64B2E8B0E7DEDB8453" name="synchronizationButton" label="提交" attributes="sel_type=collection" icon="editor.common.save" />
+      <ToolButtonSplit guid="4AAF1FE59A56417EBB6D36E897F72084" name="split4Button" label="分割" />
+      <ToolButton guid="856C0E1B8C76477AB13475E2246FBD39" name="sortButton" label="排序" attributes="sel_type=collection" icon="editor.common.sort" />
     </ToolBar>
-    <Template guid="8407676653944A33993872D25627F100" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
-    <Template guid="F08AB36DDB83497DA1D4E2E5DA8FA559" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="01674B6A58AE46EFB33BCB0ECCDD217A" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="DA51C614044C492BBC398F0282EE4EB9" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="EE552854765D4CDD84F0776498B16095" name="datasetTemplate" frame_source="editor.design.frame.property.template.DatasetTemplate" />
   </FormFrame>
 </Content>

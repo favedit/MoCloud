@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150906091200">
+  <PickerFrame guid="26EBC6D4148142169AEEBA3DF088260B" valid="Y" name="logic.common.country.CountryPicker" label="国家列表" type="FManageDataTable" nowrap="N" location="0,0" size="0,0" dataset_name="data.common.country">
+    <Template guid="7DFAAD6FBFED4644B6DA446743C2DA74" name="toolBarTemplate" frame_source="logic.template.ListToolBarTemplate" />
+    <ColumnText guid="4274891D78754F529057E2EC9CB442C1" valid="Y" name="ouid" label="编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="ouid" />
+    <ColumnText guid="18449BBCAE1844D882B0B6E16C6B742D" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="code" />
+    <ColumnText guid="CB20F33495D2409DA3FA73A0BB06F2E6" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="200,0" padding="0,1,0,1" margin="0,1,0,1" data_name="label" />
+  </PickerFrame>
+</Content>

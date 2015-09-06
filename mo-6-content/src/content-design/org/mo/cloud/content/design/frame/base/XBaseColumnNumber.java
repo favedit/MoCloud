@@ -293,33 +293,33 @@ public abstract class XBaseColumnNumber
    @AContentField
    public final static FContentField DATA_SOURCE = new FContentField("dataSource", "data_source", EContentData.String, "", "", "", "YYNY");
 
+   // 拾取服务的定义
+   @AContentField
+   public final static FContentField PICKER_SERVICE = new FContentField("pickerService", "picker_service", EContentData.String, "", "", "", "YYNY");
+
+   // 拾取页面的定义
+   @AContentField
+   public final static FContentField PICKER_FRAME = new FContentField("pickerFrame", "picker_frame", EContentData.String, "", "", "", "YYNY");
+
+   // 拾取字段集合的定义
+   @AContentField
+   public final static FContentField PICKER_FIELDS = new FContentField("pickerFields", "picker_fields", EContentData.String, "", "", "", "YYNY");
+
+   // 拾取条件的定义
+   @AContentField
+   public final static FContentField PICKER_WHERE = new FContentField("pickerWhere", "picker_where", EContentData.String, "", "", "", "YYNY");
+
+   // 拾取排序的定义
+   @AContentField
+   public final static FContentField PICKER_ORDER = new FContentField("pickerOrder", "picker_order", EContentData.String, "", "", "", "YYNY");
+
    // 放大引用的定义
    @AContentField
-   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
+   public final static FContentField ZOOM_FRAME = new FContentField("zoomFrame", "zoom_frame", EContentData.String, "", "", "", "YYNY");
 
    // 放大字段的定义
    @AContentField
    public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
-
-   // 引用服务的定义
-   @AContentField
-   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
-
-   // 引用地址的定义
-   @AContentField
-   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
-
-   // 引用字段的定义
-   @AContentField
-   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
-
-   // 应用条件的定义
-   @AContentField
-   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
-
-   // 引用排序的定义
-   @AContentField
-   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
 
    // 最小值的定义
    @AContentField
@@ -627,33 +627,33 @@ public abstract class XBaseColumnNumber
    @AName("data_source")
    protected String _dataSource;
 
+   // 拾取服务
+   @AName("picker_service")
+   protected String _pickerService;
+
+   // 拾取页面
+   @AName("picker_frame")
+   protected String _pickerFrame;
+
+   // 拾取字段集合
+   @AName("picker_fields")
+   protected String _pickerFields;
+
+   // 拾取条件
+   @AName("picker_where")
+   protected String _pickerWhere;
+
+   // 拾取排序
+   @AName("picker_order")
+   protected String _pickerOrder;
+
    // 放大引用
-   @AName("zoom_reference")
-   protected String _zoomReference;
+   @AName("zoom_frame")
+   protected String _zoomFrame;
 
    // 放大字段
    @AName("zoom_field")
    protected String _zoomField;
-
-   // 引用服务
-   @AName("lov_service")
-   protected String _lovService;
-
-   // 引用地址
-   @AName("lov_reference")
-   protected String _lovReference;
-
-   // 引用字段
-   @AName("lov_fields")
-   protected String _lovFields;
-
-   // 应用条件
-   @AName("lov_where")
-   protected String _lovWhere;
-
-   // 引用排序
-   @AName("lov_order")
-   protected String _lovOrder;
 
    // 最小值
    @AName("value_min")
@@ -1910,12 +1910,102 @@ public abstract class XBaseColumnNumber
    }
 
    //============================================================
+   // <T>获得拾取服务的内容。</T>
+   //
+   // @return 拾取服务
+   //============================================================
+   public String getPickerService(){
+      return _pickerService;
+   }
+
+   //============================================================
+   // <T>设置拾取服务的内容。</T>
+   //
+   // @param value 拾取服务
+   //============================================================
+   public void setPickerService(String value){
+      _pickerService = value;
+   }
+
+   //============================================================
+   // <T>获得拾取页面的内容。</T>
+   //
+   // @return 拾取页面
+   //============================================================
+   public String getPickerFrame(){
+      return _pickerFrame;
+   }
+
+   //============================================================
+   // <T>设置拾取页面的内容。</T>
+   //
+   // @param value 拾取页面
+   //============================================================
+   public void setPickerFrame(String value){
+      _pickerFrame = value;
+   }
+
+   //============================================================
+   // <T>获得拾取字段集合的内容。</T>
+   //
+   // @return 拾取字段集合
+   //============================================================
+   public String getPickerFields(){
+      return _pickerFields;
+   }
+
+   //============================================================
+   // <T>设置拾取字段集合的内容。</T>
+   //
+   // @param value 拾取字段集合
+   //============================================================
+   public void setPickerFields(String value){
+      _pickerFields = value;
+   }
+
+   //============================================================
+   // <T>获得拾取条件的内容。</T>
+   //
+   // @return 拾取条件
+   //============================================================
+   public String getPickerWhere(){
+      return _pickerWhere;
+   }
+
+   //============================================================
+   // <T>设置拾取条件的内容。</T>
+   //
+   // @param value 拾取条件
+   //============================================================
+   public void setPickerWhere(String value){
+      _pickerWhere = value;
+   }
+
+   //============================================================
+   // <T>获得拾取排序的内容。</T>
+   //
+   // @return 拾取排序
+   //============================================================
+   public String getPickerOrder(){
+      return _pickerOrder;
+   }
+
+   //============================================================
+   // <T>设置拾取排序的内容。</T>
+   //
+   // @param value 拾取排序
+   //============================================================
+   public void setPickerOrder(String value){
+      _pickerOrder = value;
+   }
+
+   //============================================================
    // <T>获得放大引用的内容。</T>
    //
    // @return 放大引用
    //============================================================
-   public String getZoomReference(){
-      return _zoomReference;
+   public String getZoomFrame(){
+      return _zoomFrame;
    }
 
    //============================================================
@@ -1923,8 +2013,8 @@ public abstract class XBaseColumnNumber
    //
    // @param value 放大引用
    //============================================================
-   public void setZoomReference(String value){
-      _zoomReference = value;
+   public void setZoomFrame(String value){
+      _zoomFrame = value;
    }
 
    //============================================================
@@ -1943,96 +2033,6 @@ public abstract class XBaseColumnNumber
    //============================================================
    public void setZoomField(String value){
       _zoomField = value;
-   }
-
-   //============================================================
-   // <T>获得引用服务的内容。</T>
-   //
-   // @return 引用服务
-   //============================================================
-   public String getLovService(){
-      return _lovService;
-   }
-
-   //============================================================
-   // <T>设置引用服务的内容。</T>
-   //
-   // @param value 引用服务
-   //============================================================
-   public void setLovService(String value){
-      _lovService = value;
-   }
-
-   //============================================================
-   // <T>获得引用地址的内容。</T>
-   //
-   // @return 引用地址
-   //============================================================
-   public String getLovReference(){
-      return _lovReference;
-   }
-
-   //============================================================
-   // <T>设置引用地址的内容。</T>
-   //
-   // @param value 引用地址
-   //============================================================
-   public void setLovReference(String value){
-      _lovReference = value;
-   }
-
-   //============================================================
-   // <T>获得引用字段的内容。</T>
-   //
-   // @return 引用字段
-   //============================================================
-   public String getLovFields(){
-      return _lovFields;
-   }
-
-   //============================================================
-   // <T>设置引用字段的内容。</T>
-   //
-   // @param value 引用字段
-   //============================================================
-   public void setLovFields(String value){
-      _lovFields = value;
-   }
-
-   //============================================================
-   // <T>获得应用条件的内容。</T>
-   //
-   // @return 应用条件
-   //============================================================
-   public String getLovWhere(){
-      return _lovWhere;
-   }
-
-   //============================================================
-   // <T>设置应用条件的内容。</T>
-   //
-   // @param value 应用条件
-   //============================================================
-   public void setLovWhere(String value){
-      _lovWhere = value;
-   }
-
-   //============================================================
-   // <T>获得引用排序的内容。</T>
-   //
-   // @return 引用排序
-   //============================================================
-   public String getLovOrder(){
-      return _lovOrder;
-   }
-
-   //============================================================
-   // <T>设置引用排序的内容。</T>
-   //
-   // @param value 引用排序
-   //============================================================
-   public void setLovOrder(String value){
-      _lovOrder = value;
    }
 
    //============================================================

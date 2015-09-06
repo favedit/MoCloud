@@ -169,34 +169,6 @@ public abstract class XBaseToolButtonEdit
    @AContentField
    public final static FContentField ACTION = new FContentField("action", "action", EContentData.String, "", "", "", "YYNY");
 
-   // 放大引用的定义
-   @AContentField
-   public final static FContentField ZOOM_REFERENCE = new FContentField("zoomReference", "zoom_reference", EContentData.String, "", "", "", "YYNY");
-
-   // 放大字段的定义
-   @AContentField
-   public final static FContentField ZOOM_FIELD = new FContentField("zoomField", "zoom_field", EContentData.String, "", "", "", "YYNY");
-
-   // 引用服务的定义
-   @AContentField
-   public final static FContentField LOV_SERVICE = new FContentField("lovService", "lov_service", EContentData.String, "", "", "", "YYNY");
-
-   // 引用地址的定义
-   @AContentField
-   public final static FContentField LOV_REFERENCE = new FContentField("lovReference", "lov_reference", EContentData.String, "", "", "", "YYNY");
-
-   // 引用字段的定义
-   @AContentField
-   public final static FContentField LOV_FIELDS = new FContentField("lovFields", "lov_fields", EContentData.String, "", "", "", "YYNY");
-
-   // 应用条件的定义
-   @AContentField
-   public final static FContentField LOV_WHERE = new FContentField("lovWhere", "lov_where", EContentData.String, "", "", "", "YYNY");
-
-   // 引用排序的定义
-   @AContentField
-   public final static FContentField LOV_ORDER = new FContentField("lovOrder", "lov_order", EContentData.String, "", "", "", "YYNY");
-
    // 编辑长度的定义
    @AContentField
    public final static FContentField EDIT_LENGTH = new FContentField("editLength", "edit_length", EContentData.String, "", "", "", "YYNY");
@@ -398,34 +370,6 @@ public abstract class XBaseToolButtonEdit
    // 命令
    @AName("action")
    protected String _action;
-
-   // 放大引用
-   @AName("zoom_reference")
-   protected String _zoomReference;
-
-   // 放大字段
-   @AName("zoom_field")
-   protected String _zoomField;
-
-   // 引用服务
-   @AName("lov_service")
-   protected String _lovService;
-
-   // 引用地址
-   @AName("lov_reference")
-   protected String _lovReference;
-
-   // 引用字段
-   @AName("lov_fields")
-   protected String _lovFields;
-
-   // 应用条件
-   @AName("lov_where")
-   protected String _lovWhere;
-
-   // 引用排序
-   @AName("lov_order")
-   protected String _lovOrder;
 
    // 编辑长度
    @AName("edit_length")
@@ -1141,132 +1085,6 @@ public abstract class XBaseToolButtonEdit
    //============================================================
    public void setAction(String value){
       _action = value;
-   }
-
-   //============================================================
-   // <T>获得放大引用的内容。</T>
-   //
-   // @return 放大引用
-   //============================================================
-   public String getZoomReference(){
-      return _zoomReference;
-   }
-
-   //============================================================
-   // <T>设置放大引用的内容。</T>
-   //
-   // @param value 放大引用
-   //============================================================
-   public void setZoomReference(String value){
-      _zoomReference = value;
-   }
-
-   //============================================================
-   // <T>获得放大字段的内容。</T>
-   //
-   // @return 放大字段
-   //============================================================
-   public String getZoomField(){
-      return _zoomField;
-   }
-
-   //============================================================
-   // <T>设置放大字段的内容。</T>
-   //
-   // @param value 放大字段
-   //============================================================
-   public void setZoomField(String value){
-      _zoomField = value;
-   }
-
-   //============================================================
-   // <T>获得引用服务的内容。</T>
-   //
-   // @return 引用服务
-   //============================================================
-   public String getLovService(){
-      return _lovService;
-   }
-
-   //============================================================
-   // <T>设置引用服务的内容。</T>
-   //
-   // @param value 引用服务
-   //============================================================
-   public void setLovService(String value){
-      _lovService = value;
-   }
-
-   //============================================================
-   // <T>获得引用地址的内容。</T>
-   //
-   // @return 引用地址
-   //============================================================
-   public String getLovReference(){
-      return _lovReference;
-   }
-
-   //============================================================
-   // <T>设置引用地址的内容。</T>
-   //
-   // @param value 引用地址
-   //============================================================
-   public void setLovReference(String value){
-      _lovReference = value;
-   }
-
-   //============================================================
-   // <T>获得引用字段的内容。</T>
-   //
-   // @return 引用字段
-   //============================================================
-   public String getLovFields(){
-      return _lovFields;
-   }
-
-   //============================================================
-   // <T>设置引用字段的内容。</T>
-   //
-   // @param value 引用字段
-   //============================================================
-   public void setLovFields(String value){
-      _lovFields = value;
-   }
-
-   //============================================================
-   // <T>获得应用条件的内容。</T>
-   //
-   // @return 应用条件
-   //============================================================
-   public String getLovWhere(){
-      return _lovWhere;
-   }
-
-   //============================================================
-   // <T>设置应用条件的内容。</T>
-   //
-   // @param value 应用条件
-   //============================================================
-   public void setLovWhere(String value){
-      _lovWhere = value;
-   }
-
-   //============================================================
-   // <T>获得引用排序的内容。</T>
-   //
-   // @return 引用排序
-   //============================================================
-   public String getLovOrder(){
-      return _lovOrder;
-   }
-
-   //============================================================
-   // <T>设置引用排序的内容。</T>
-   //
-   // @param value 引用排序
-   //============================================================
-   public void setLovOrder(String value){
-      _lovOrder = value;
    }
 
    //============================================================

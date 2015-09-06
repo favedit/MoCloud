@@ -189,6 +189,38 @@ public abstract class XBasePickerFrame
    @AContentField
    public final static FContentField INHERIT_FRAMES = new FContentField("inheritFrames", "inherit_frames", EContentData.String, "", "", "", "YYNY");
 
+   // 数据名称的定义
+   @AContentField
+   public final static FContentField DATASET_NAME = new FContentField("datasetName", "dataset_name", EContentData.String, "", "", "", "YYNY");
+
+   // 数据分页大小的定义
+   @AContentField
+   public final static FContentField DATASET_PAGE_SIZE = new FContentField("datasetPageSize", "dataset_page_size", EContentData.String, "", "", "", "YYNY");
+
+   // 数据搜索的定义
+   @AContentField
+   public final static FContentField DATASET_SEARCH = new FContentField("datasetSearch", "dataset_search", EContentData.String, "", "", "", "YYNY");
+
+   // 数据排序的定义
+   @AContentField
+   public final static FContentField DATASET_ORDER = new FContentField("datasetOrder", "dataset_order", EContentData.String, "", "", "", "YYNY");
+
+   // 数据查询指令的定义
+   @AContentField
+   public final static FContentField DATASET_FETCH_COMMAND = new FContentField("datasetFetchCommand", "dataset_fetch_command", EContentData.String, "", "", "", "YYNY");
+
+   // 数据新建命令的定义
+   @AContentField
+   public final static FContentField DATASET_INSERT_ACTION = new FContentField("datasetInsertAction", "dataset_insert_action", EContentData.String, "", "", "", "YYNY");
+
+   // 数据更新命令的定义
+   @AContentField
+   public final static FContentField DATASET_UPDATE_ACTION = new FContentField("datasetUpdateAction", "dataset_update_action", EContentData.String, "", "", "", "YYNY");
+
+   // 数据删除命令的定义
+   @AContentField
+   public final static FContentField DATASET_DELETE_ACTION = new FContentField("datasetDeleteAction", "dataset_delete_action", EContentData.String, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -378,6 +410,38 @@ public abstract class XBasePickerFrame
    // 继承页面集合
    @AName("inherit_frames")
    protected String _inheritFrames;
+
+   // 数据名称
+   @AName("dataset_name")
+   protected String _datasetName;
+
+   // 数据分页大小
+   @AName("dataset_page_size")
+   protected String _datasetPageSize;
+
+   // 数据搜索
+   @AName("dataset_search")
+   protected String _datasetSearch;
+
+   // 数据排序
+   @AName("dataset_order")
+   protected String _datasetOrder;
+
+   // 数据查询指令
+   @AName("dataset_fetch_command")
+   protected String _datasetFetchCommand;
+
+   // 数据新建命令
+   @AName("dataset_insert_action")
+   protected String _datasetInsertAction;
+
+   // 数据更新命令
+   @AName("dataset_update_action")
+   protected String _datasetUpdateAction;
+
+   // 数据删除命令
+   @AName("dataset_delete_action")
+   protected String _datasetDeleteAction;
 
    //============================================================
    // <T>获得有效性的内容。</T>
@@ -1151,6 +1215,150 @@ public abstract class XBasePickerFrame
    //============================================================
    public void setInheritFrames(String value){
       _inheritFrames = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDatasetName(){
+      return _datasetName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDatasetName(String value){
+      _datasetName = value;
+   }
+
+   //============================================================
+   // <T>获得数据分页大小的内容。</T>
+   //
+   // @return 数据分页大小
+   //============================================================
+   public String getDatasetPageSize(){
+      return _datasetPageSize;
+   }
+
+   //============================================================
+   // <T>设置数据分页大小的内容。</T>
+   //
+   // @param value 数据分页大小
+   //============================================================
+   public void setDatasetPageSize(String value){
+      _datasetPageSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据搜索的内容。</T>
+   //
+   // @return 数据搜索
+   //============================================================
+   public String getDatasetSearch(){
+      return _datasetSearch;
+   }
+
+   //============================================================
+   // <T>设置数据搜索的内容。</T>
+   //
+   // @param value 数据搜索
+   //============================================================
+   public void setDatasetSearch(String value){
+      _datasetSearch = value;
+   }
+
+   //============================================================
+   // <T>获得数据排序的内容。</T>
+   //
+   // @return 数据排序
+   //============================================================
+   public String getDatasetOrder(){
+      return _datasetOrder;
+   }
+
+   //============================================================
+   // <T>设置数据排序的内容。</T>
+   //
+   // @param value 数据排序
+   //============================================================
+   public void setDatasetOrder(String value){
+      _datasetOrder = value;
+   }
+
+   //============================================================
+   // <T>获得数据查询指令的内容。</T>
+   //
+   // @return 数据查询指令
+   //============================================================
+   public String getDatasetFetchCommand(){
+      return _datasetFetchCommand;
+   }
+
+   //============================================================
+   // <T>设置数据查询指令的内容。</T>
+   //
+   // @param value 数据查询指令
+   //============================================================
+   public void setDatasetFetchCommand(String value){
+      _datasetFetchCommand = value;
+   }
+
+   //============================================================
+   // <T>获得数据新建命令的内容。</T>
+   //
+   // @return 数据新建命令
+   //============================================================
+   public String getDatasetInsertAction(){
+      return _datasetInsertAction;
+   }
+
+   //============================================================
+   // <T>设置数据新建命令的内容。</T>
+   //
+   // @param value 数据新建命令
+   //============================================================
+   public void setDatasetInsertAction(String value){
+      _datasetInsertAction = value;
+   }
+
+   //============================================================
+   // <T>获得数据更新命令的内容。</T>
+   //
+   // @return 数据更新命令
+   //============================================================
+   public String getDatasetUpdateAction(){
+      return _datasetUpdateAction;
+   }
+
+   //============================================================
+   // <T>设置数据更新命令的内容。</T>
+   //
+   // @param value 数据更新命令
+   //============================================================
+   public void setDatasetUpdateAction(String value){
+      _datasetUpdateAction = value;
+   }
+
+   //============================================================
+   // <T>获得数据删除命令的内容。</T>
+   //
+   // @return 数据删除命令
+   //============================================================
+   public String getDatasetDeleteAction(){
+      return _datasetDeleteAction;
+   }
+
+   //============================================================
+   // <T>设置数据删除命令的内容。</T>
+   //
+   // @param value 数据删除命令
+   //============================================================
+   public void setDatasetDeleteAction(String value){
+      _datasetDeleteAction = value;
    }
 
 }
