@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150906103044">
+  <TemplateFrame _guid="EFEBB9ABBCBE44F6AF488FAAB3C74112" valid="N" name="editor.design.frame.property.template.PickerTemplate" label="拾取属性模板" nowrap="N" location="0,0" size="0,0">
+    <Panel _guid="833BBD680F8C446F80017A067F19CD26" name="zoomrPanel" label="放大属性" icon="design.panel.icon">
+      <Edit _guid="03C1ACC33AFA430AB86738A78DC578E6" name="zoomFrame" label="页面" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="zoom_frame" input_size="400,0" />
+      <Edit _guid="480588CFFED14C32BA534351E61DFD08" name="zoomField" label="字段" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="zoom_field" input_size="400,0" />
+    </Panel>
+  </TemplateFrame>
+</Content>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150906103044">
+  <TemplateFrame guid="EFEBB9ABBCBE44F6AF488FAAB3C74112" valid="N" name="editor.design.frame.property.template.PickerTemplate" label="拾取属性模板" nowrap="N" location="0,0" size="0,0">
+    <Panel guid="833BBD680F8C446F80017A067F19CD26" name="pickerPanel" label="拾取属性" icon="design.panel.icon">
+      <Edit guid="5526719C0B5A4C7AAC19DB7FAE3AA956" name="pickerService" label="服务" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="picker_service" input_size="400,0" />
+      <Edit guid="03C1ACC33AFA430AB86738A78DC578E6" name="pickerFrame" label="页面" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="picker_frame" input_size="400,0" />
+      <Edit guid="480588CFFED14C32BA534351E61DFD08" name="pickerFields" label="字段集合" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="picker_fields" input_size="400,0" />
+      <Edit guid="42DFF374AEB1441E940A0FBF55DBF682" name="pickerWhere" label="条件" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="picker_where" input_size="400,0" />
+      <Edit guid="377132A475354EFDA92919AA6053ABF6" name="pickerOrder" label="排序" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="picker_order" input_size="400,0" />
+    </Panel>
+  </TemplateFrame>
+</Content>

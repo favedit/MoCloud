@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content>
-   <FormFrame name="editor.design.frame.property.LabelFrame" type='FEditorDsPropertyForm' label="标签属性" is_valid="Y" logic_group='item' logic_service='editor.design.frame' note="">
-    <ToolBar ___guid="87F9762E92664806B10EDD51313F2120" name="toolBar" label="工具栏" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" width="100%" height="24">
-      <ToolButton ___guid="01848FCB94314D01B9382ED494921185" name="saveButton" label="保存" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_insert="Y" disp_update="Y" disp_delete="Y" icon="editor.common.save" hotkey="F8" attributes="action=save" />
-      <ToolButton ___guid="1688BB74FDC940CCAAB14C50D29375B5" name="deleteButton" label="删除" is_valid="Y" note="" disp_search="Y" disp_picker="Y" disp_list="Y" disp_update="Y" disp_delete="Y" icon="editor.common.delete" hotkey="F6" attributes="action=delete" />
+<Content update_date="20150906103119">
+  <FormFrame guid="710CD3D7942C4C17BCE7C151D9071406" valid="N" name="editor.design.frame.property.NumberForm" label="数字输入框属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+    <ToolBar guid="D6D5BF91219F40EAAFE87807B7D7893E" name="toolBar" label="工具栏" width="100%" height="24">
+      <ToolButton guid="389BB7C2EDC7495797E4B75EBD18972E" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="CA72D40CD8B44FF88F6B14CC27E7BC24" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
     </ToolBar>
-    <Template _guid="FCBAF2DD12BA4FEF8E443DDCB04B7770" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
-    <Template _guid="D757D580C45543B49D4DEC333BD123D5" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
-    <Template _guid="BA2F20AA92864BE0B95FE5E14655A6C5" name="labelTemplate" frame_source="editor.design.frame.property.template.LabelTemplate" />
-    <Template _guid="D7B53536879C4BB280417BAB1430D129" name="displayTemplate" frame_source="editor.design.frame.property.template.DisplayTemplate" />
-    <Template _guid="F2700F41291D4517BFD931F20325B2EC" name="dataTemplate" frame_source="editor.design.frame.property.template.DataTemplate" />
-    <Template _guid="4F83E9D82030498987BEFB58FD075A0C" name="editTemplate" frame_source="editor.design.frame.property.template.EditTemplate" />
-    <Panel _guid="FBD29B2330A648EBA11E1B43B58C18E8" name="specifyPanel" label="特定属性" icon="design.panel.icon">
-      <Edit _guid="26EECA124AFE460CBDD0110FD4F66D82" name="length_min" label="最小值" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="length_min" input_size="400,0" />
+    <Template guid="A0340AA87EA445A3B9BF672B14E575CD" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="9B30C46AC28540AD8DFE7DC203A33FAD" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="ED6AFBD2B1B0420E881770E81EC1443D" name="labelTemplate" frame_source="editor.design.frame.property.template.LabelTemplate" />
+    <Template guid="6D316D27E23B48DA80B6CB840F53FC2F" name="displayTemplate" frame_source="editor.design.frame.property.template.DisplayTemplate" />
+    <Template guid="29C905357C9C490F8A2781EE25741CBE" name="dataTemplate" frame_source="editor.design.frame.property.template.DataTemplate" />
+    <Template guid="57A4C5C9035B42D797FF732038231178" name="editTemplate" frame_source="editor.design.frame.property.template.EditTemplate" />
+    <Template guid="A2E6ED68CA6B4CF2A9A586D3845CC7EC" name="pickerTemplate" frame_source="editor.design.frame.property.template.PickerTemplate" />
+    <Panel guid="E5134C8F560542479329958551140A12" name="specifyPanel" label="特定属性" icon="design.panel.icon">
+      <Edit guid="38B2E5E66FD24DAB838E1C3730F905C1" name="length_min" label="最小值" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="length_min" input_size="400,0" />
     </Panel>
-    <Template _guid="72FD2364E4AF4C72A2F30E3DAC67755D" name="verifyTemplate" frame_source="editor.design.frame.property.template.VerifyTemplate" />
-    <Template _guid="8C7AFFB4463D47189AA32C1E9DC88253" name="noteTemplate" frame_source="editor.design.frame.property.template.NoteTemplate" />
-   </FormFrame>
+    <Template guid="3171E4D07E824B0F87316D0E555FC8A7" name="verifyTemplate" frame_source="editor.design.frame.property.template.VerifyTemplate" />
+    <Template guid="AD76783069A54B008C242EA11735D06F" name="noteTemplate" frame_source="editor.design.frame.property.template.NoteTemplate" />
+  </FormFrame>
 </Content>
