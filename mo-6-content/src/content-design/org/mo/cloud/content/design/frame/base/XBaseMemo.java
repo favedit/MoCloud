@@ -265,6 +265,34 @@ public abstract class XBaseMemo
    @AContentField
    public final static FContentField EDIT_SIZE = new FContentField("editSize", "edit_size", EContentData.String, "", "", "", "YYNY");
 
+   // 数据名称的定义
+   @AContentField
+   public final static FContentField DATA_NAME = new FContentField("dataName", "data_name", EContentData.String, "", "", "", "YYNY");
+
+   // 数据查询的定义
+   @AContentField
+   public final static FContentField DATA_SELECT = new FContentField("dataSelect", "data_select", EContentData.Boolean, "", "", "", "YYNY");
+
+   // 数据类型的定义
+   @AContentField
+   public final static FContentField DATA_TYPE_CD = new FContentField("dataTypeCd", "data_type_cd", EContentData.String, "", "", "", "YYNY");
+
+   // 数据表达式的定义
+   @AContentField
+   public final static FContentField DATA_EXPRESSION = new FContentField("dataExpression", "data_expression", EContentData.String, "", "", "", "YYNY");
+
+   // 数据内容的定义
+   @AContentField
+   public final static FContentField DATA_VALUE = new FContentField("dataValue", "data_value", EContentData.String, "", "", "", "YYNY");
+
+   // 数据默认的定义
+   @AContentField
+   public final static FContentField DATA_DEFAULT = new FContentField("dataDefault", "data_default", EContentData.String, "", "", "", "YYNY");
+
+   // 数据来源的定义
+   @AContentField
+   public final static FContentField DATA_SOURCE = new FContentField("dataSource", "data_source", EContentData.String, "", "", "", "YYNY");
+
    // 输入大小的定义
    @AContentField
    public final static FContentField INPUT_SIZE = new FContentField("inputSize", "input_size", EContentData.String, "", "", "", "YYNY");
@@ -534,6 +562,34 @@ public abstract class XBaseMemo
    // 编辑尺寸
    @AName("edit_size")
    protected String _editSize;
+
+   // 数据名称
+   @AName("data_name")
+   protected String _dataName;
+
+   // 数据查询
+   @AName("data_select")
+   protected boolean _dataSelect;
+
+   // 数据类型
+   @AName("data_type_cd")
+   protected String _dataTypeCd;
+
+   // 数据表达式
+   @AName("data_expression")
+   protected String _dataExpression;
+
+   // 数据内容
+   @AName("data_value")
+   protected String _dataValue;
+
+   // 数据默认
+   @AName("data_default")
+   protected String _dataDefault;
+
+   // 数据来源
+   @AName("data_source")
+   protected String _dataSource;
 
    // 输入大小
    @AName("input_size")
@@ -1653,6 +1709,132 @@ public abstract class XBaseMemo
    //============================================================
    public void setEditSize(String value){
       _editSize = value;
+   }
+
+   //============================================================
+   // <T>获得数据名称的内容。</T>
+   //
+   // @return 数据名称
+   //============================================================
+   public String getDataName(){
+      return _dataName;
+   }
+
+   //============================================================
+   // <T>设置数据名称的内容。</T>
+   //
+   // @param value 数据名称
+   //============================================================
+   public void setDataName(String value){
+      _dataName = value;
+   }
+
+   //============================================================
+   // <T>获得数据查询的内容。</T>
+   //
+   // @return 数据查询
+   //============================================================
+   public Boolean getDataSelect(){
+      return _dataSelect;
+   }
+
+   //============================================================
+   // <T>设置数据查询的内容。</T>
+   //
+   // @param value 数据查询
+   //============================================================
+   public void setDataSelect(Boolean value){
+      _dataSelect = value;
+   }
+
+   //============================================================
+   // <T>获得数据类型的内容。</T>
+   //
+   // @return 数据类型
+   //============================================================
+   public String getDataTypeCd(){
+      return _dataTypeCd;
+   }
+
+   //============================================================
+   // <T>设置数据类型的内容。</T>
+   //
+   // @param value 数据类型
+   //============================================================
+   public void setDataTypeCd(String value){
+      _dataTypeCd = value;
+   }
+
+   //============================================================
+   // <T>获得数据表达式的内容。</T>
+   //
+   // @return 数据表达式
+   //============================================================
+   public String getDataExpression(){
+      return _dataExpression;
+   }
+
+   //============================================================
+   // <T>设置数据表达式的内容。</T>
+   //
+   // @param value 数据表达式
+   //============================================================
+   public void setDataExpression(String value){
+      _dataExpression = value;
+   }
+
+   //============================================================
+   // <T>获得数据内容的内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String getDataValue(){
+      return _dataValue;
+   }
+
+   //============================================================
+   // <T>设置数据内容的内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDataValue(String value){
+      _dataValue = value;
+   }
+
+   //============================================================
+   // <T>获得数据默认的内容。</T>
+   //
+   // @return 数据默认
+   //============================================================
+   public String getDataDefault(){
+      return _dataDefault;
+   }
+
+   //============================================================
+   // <T>设置数据默认的内容。</T>
+   //
+   // @param value 数据默认
+   //============================================================
+   public void setDataDefault(String value){
+      _dataDefault = value;
+   }
+
+   //============================================================
+   // <T>获得数据来源的内容。</T>
+   //
+   // @return 数据来源
+   //============================================================
+   public String getDataSource(){
+      return _dataSource;
+   }
+
+   //============================================================
+   // <T>设置数据来源的内容。</T>
+   //
+   // @param value 数据来源
+   //============================================================
+   public void setDataSource(String value){
+      _dataSource = value;
    }
 
    //============================================================

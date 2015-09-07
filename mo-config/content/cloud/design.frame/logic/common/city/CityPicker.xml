@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150907111221">
+  <PickerFrame guid="245FBD41817F43CB9A5627E8377B2ED0" valid="Y" name="logic.common.city.CityPicker" label="城市拾取" type="FManageDataPicker" nowrap="N" location="0,0" size="800,400" dataset_name="data.common.city">
+    <Template guid="E728C617EB784A0F9A3AD278D90B35BF" name="toolBarTemplate" frame_source="logic.template.ListToolBarTemplate" />
+    <ColumnText guid="9FE1D5F9DEC147579C433B66FE2690BD" valid="Y" name="ouid" label="编号" nowrap="N" location="0,0" size="60,0" padding="0,1,0,1" margin="0,1,0,1" data_name="ouid" />
+    <ColumnText guid="36389E3B3A4D45BEB5561154E922143F" valid="Y" name="countryId" label="国家编号" nowrap="N" location="0,0" size="60,0" padding="0,1,0,1" margin="0,1,0,1" data_name="country_id" />
+    <ColumnText guid="D5A0F854A9114D249C70F0F984063913" valid="Y" name="countryLabel" label="国家标签" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="country_label" data_select="N" data_expression="{data.common.country}.find(country_id).label" />
+    <ColumnText guid="B6706D19794848C5A0E90C5BD440FC66" valid="Y" name="areaId" label="地区编号" nowrap="N" location="0,0" size="60,0" padding="0,1,0,1" margin="0,1,0,1" data_name="area_id" />
+    <ColumnText guid="58DBF17706CF4CC581FFA4F9CAFD7CC3" valid="Y" name="areaLabel" label="地区标签" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="area_label" data_select="N" data_expression="{data.common.area}.find(area_id).label" />
+    <ColumnText guid="181B29808A4F4BD98D900F5B9DD7C771" valid="Y" name="provinceId" label="省份编号" nowrap="N" location="0,0" size="60,0" padding="0,1,0,1" margin="0,1,0,1" data_name="province_id" />
+    <ColumnText guid="F34B9514076A4B739D7020CCE807EE4D" valid="Y" name="provinceLabel" label="省份标签" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="province_label" data_select="N" data_expression="{data.common.province}.find(province_id).label" />
+    <ColumnText guid="B93BD6641AFD4D6A94DF3BB8119DB98D" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="code" />
+    <ColumnText guid="3ACEE976A2C149148018CD959887C5BD" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="200,0" padding="0,1,0,1" margin="0,1,0,1" data_name="label" />
+  </PickerFrame>
+</Content>

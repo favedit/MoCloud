@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150907125456">
+  <TemplateFrame guid="8BD3025E57064CD2AACE8DCCE5755643" valid="Y" name="editor.design.frame.property.template.ColumnTemplate" label="标签属性模板" nowrap="N" location="0,0" size="0,0">
+    <Panel guid="CFC8E9003752484DB04025DB8A41F91B" name="columnPanel" label="表格列属性" icon="design.panel.icon">
+      <Check guid="E60CFC6B84D543248BADD0E72A577A9A" name="columnAutoSize" label="自动大小" nowrap="Y" edit_mode="IU" edit_insert="Y" edit_update="Y" label_size="80,0" data_name="column_auto_size" />
+    </Panel>
+  </TemplateFrame>
+</Content>

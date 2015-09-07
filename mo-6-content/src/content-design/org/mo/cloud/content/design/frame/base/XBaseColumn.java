@@ -153,6 +153,10 @@ public abstract class XBaseColumn
    @AContentField
    public final static FContentField HINT = new FContentField("hint", "hint", EContentData.String, "", "", "", "YYNY");
 
+   // 列自动尺寸的定义
+   @AContentField
+   public final static FContentField COLUMN_AUTO_SIZE = new FContentField("columnAutoSize", "column_auto_size", EContentData.Boolean, "", "", "", "YYNY");
+
    //============================================================
    // <T>判断是否指定实例。</T>
    //
@@ -306,6 +310,10 @@ public abstract class XBaseColumn
    // 提示信息
    @AName("hint")
    protected String _hint;
+
+   // 列自动尺寸
+   @AName("column_auto_size")
+   protected boolean _columnAutoSize;
 
    //============================================================
    // <T>获得有效性的内容。</T>
@@ -917,6 +925,24 @@ public abstract class XBaseColumn
    //============================================================
    public void setHint(String value){
       _hint = value;
+   }
+
+   //============================================================
+   // <T>获得列自动尺寸的内容。</T>
+   //
+   // @return 列自动尺寸
+   //============================================================
+   public Boolean getColumnAutoSize(){
+      return _columnAutoSize;
+   }
+
+   //============================================================
+   // <T>设置列自动尺寸的内容。</T>
+   //
+   // @param value 列自动尺寸
+   //============================================================
+   public void setColumnAutoSize(Boolean value){
+      _columnAutoSize = value;
    }
 
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150906091200">
-  <PickerFrame guid="26EBC6D4148142169AEEBA3DF088260B" type='FManageDataPicker' valid="Y" name="logic.common.country.CountryPicker" label="国家列表" nowrap="N" location="0,0" size="640,380" dataset_name="data.common.country">
-    <Template guid="7DFAAD6FBFED4644B6DA446743C2DA74" name="toolBarTemplate" frame_source="logic.template.ListToolBarTemplate" />
-    <ColumnText guid="4274891D78754F529057E2EC9CB442C1" valid="Y" name="ouid" label="编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="ouid" />
-    <ColumnText guid="18449BBCAE1844D882B0B6E16C6B742D" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="code" />
-    <ColumnText guid="CB20F33495D2409DA3FA73A0BB06F2E6" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="200,0" padding="0,1,0,1" margin="0,1,0,1" data_name="label" />
+<Content update_date="20150907111217">
+  <PickerFrame guid="D30759A4B63B4ED6BECE434C75DEBCAE" valid="Y" name="logic.common.country.CountryPicker" label="国家拾取" type="FManageDataPicker" nowrap="N" location="0,0" size="600,400" dataset_name="data.common.country">
+    <Template guid="2B51F923F1FA47A38EF9093E2A521545" name="toolBarTemplate" frame_source="logic.template.ListToolBarTemplate" />
+    <ColumnText guid="7C2E21F0FE3F4C2B8FF048AEB83DEA44" valid="Y" name="ouid" label="编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="ouid" />
+    <ColumnText guid="EF68239E28D24DFE8AA977D54FDD72C4" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="code" />
+    <ColumnText guid="204C4207A86B4EA1B4BD9ACFA8BC6898" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="200,0" padding="0,1,0,1" margin="0,1,0,1" data_name="label" />
   </PickerFrame>
 </Content>

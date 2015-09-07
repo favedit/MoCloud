@@ -34,8 +34,5 @@
     <Template guid="71D0B180B2524741B55CAAA33F424F3A" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
     <Template guid="56C42AF1F10D4007B3C1284DA15DC85C" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
     <Template guid="B85619026E5D4E4C81173337B705775C" name="datasetTemplate" frame_source="editor.design.frame.property.template.DatasetTemplate" />
-    <Panel guid="BF33D57B4693452CBA3F72E6CE0511A9" name="barPanel" label="停靠栏属性" icon="design.panel.icon">
-      <Edit guid="1BF3C6D50F054963B71A176F5C775083" valid="Y" name="dockCd" label="停靠" linker="_controlDockCd" label_size="70,0" edit_size="200,0" input_size="200,0" />
-    </Panel>
   </FormFrame>
 </Content>

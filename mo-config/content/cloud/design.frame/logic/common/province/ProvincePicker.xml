@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150907105320">
+  <PickerFrame guid="BF11E10423554C16BD0C5F39CCF21D8B" valid="Y" name="logic.common.province.ProvincePicker" label="省份拾取" type="FManageDataPicker" nowrap="N" location="0,0" size="800,400" dataset_name="data.common.province">
+    <Template guid="6D5C9DAAAE864D148287F534D8603536" name="toolBarTemplate" frame_source="logic.template.ListToolBarTemplate" />
+    <ColumnText guid="65115B76716D464BA94BF4CBDE1DE3CA" valid="Y" name="ouid" label="编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="ouid" />
+    <ColumnText guid="8FE2AC6104644830BD0FAAD36133CE60" valid="Y" name="countryId" label="国家编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="country_id" />
+    <ColumnText guid="6F49FF298C30426BBBDEE24059161E9C" valid="Y" name="countryLabel" label="国家标签" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="country_label" data_select="N" data_expression="{data.common.country}.find(country_id).label" />
+    <ColumnText guid="F7BB8E732E594351A8DB4AA3A8416912" valid="Y" name="areaId" label="地区编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="area_id" />
+    <ColumnText guid="6A2DCC09F3514F27A2AE8FC865B323E3" valid="Y" name="areaLabel" label="地区标签" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="area_label" data_select="N" data_expression="{data.common.area}.find(area_id).label" />
+    <ColumnText guid="F4A8C918CE994A69A7924B5867AB75A1" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="code" />
+    <ColumnText guid="4F3BD7F7D69A48BF863DE014CDF6DECC" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="160,0" padding="0,1,0,1" margin="0,1,0,1" data_name="label" />
+  </PickerFrame>
+</Content>

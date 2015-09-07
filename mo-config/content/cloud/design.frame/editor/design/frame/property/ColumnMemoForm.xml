@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content update_date="20150904142545">
-  <FormFrame guid="254BE9D8B86C4698AF25A0E076AE04E8" valid="N" name="editor.design.frame.property.ColumnMemoForm" label="按键属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
-    <ToolBar guid="44ED5257C39E441E93E4856399711FDA" name="toolBar" label="工具栏" width="100%" height="24">
-      <ToolButton guid="A33A13AF68F142C3A788C0171082E0B3" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
-      <ToolButton guid="EF723D6597024E15A922D6315D854975" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
+<Content update_date="20150907133603">
+  <FormFrame guid="C5AE3F7F5F7F432F859D8BC2E419638B" valid="N" name="editor.design.frame.property.ColumnMemoForm" label="表格多行文本列属性" type="FEditorDsPropertyForm" nowrap="N" location="0,0" size="0,0" logic_group="item" logic_service="editor.design.frame">
+    <ToolBar guid="CEB680B972E2407889806D2278BCB630" name="toolBar" label="工具栏" width="100%" height="24">
+      <ToolButton guid="66B3C0404A9E4AD48E1E53566C4DDC91" name="saveButton" label="保存" attributes="action=save" icon="editor.common.save" hotkey="F8" />
+      <ToolButton guid="C5A70C99975748298C27A72F2DF5206C" name="deleteButton" label="删除" attributes="action=delete" icon="editor.common.delete" hotkey="F6" />
     </ToolBar>
-    <Template guid="1A62E8AE9998434DA743AE0BBB749CA9" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
-    <Template guid="CD46F6F0F45048D39095753C2C18B4AF" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
-    <Template guid="9EC574249C1B42D9A1EDA0C4065352A7" name="labelTemplate" frame_source="editor.design.frame.property.template.LabelTemplate" />
-    <Template guid="153BADD3DFA04587B936CFDF723B61E0" name="displayTemplate" frame_source="editor.design.frame.property.template.DisplayTemplate" />
-    <Template guid="5AF31EB1932440CD827068D9AD8B1891" name="dataTemplate" frame_source="editor.design.frame.property.template.DataTemplate" />
-    <Template guid="C4CFC4CEFFF94E768E639B154AE93CC6" name="editTemplate" frame_source="editor.design.frame.property.template.EditTemplate" />
-    <Panel guid="0F4F36D421024393A35B8947918D0EC7" name="buttonPanel" label="按键属性" icon="design.panel.icon">
-      <Edit guid="AC96FAF0D6F04B3197C3465C6A80F51F" valid="Y" name="clickSource" label="停靠" linker="_controlClickSource" label_size="70,0" edit_size="200,0" input_size="200,0" />
-    </Panel>
-    <Template guid="C34B74A1E71D48DCBD096A418DA8560E" name="verifyTemplate" frame_source="editor.design.frame.property.template.VerifyTemplate" />
-    <Template guid="34DA79CF2FBD49FAB82AC0B659EBB782" name="noteTemplate" frame_source="editor.design.frame.property.template.NoteTemplate" />
+    <Template guid="FA34BA7E925B4072AEBDBDCF167D545C" name="componentTemplate" frame_source="editor.design.frame.property.template.ComponentTemplate" />
+    <Template guid="123E1CE4289D4D70A2BBFAFDB2BA00D2" name="controlTemplate" frame_source="editor.design.frame.property.template.ControlTemplate" />
+    <Template guid="46CCB52AA565430388BD4B47F8C2EBC7" name="labelTemplate" frame_source="editor.design.frame.property.template.LabelTemplate" />
+    <Template guid="3E6155690ABE4897BFE86004258C3673" name="displayTemplate" frame_source="editor.design.frame.property.template.DisplayTemplate" />
+    <Template guid="E4BF09A812E44FF9B4F2AF89E65A6669" name="dataTemplate" frame_source="editor.design.frame.property.template.DataTemplate" />
+    <Template guid="6FAED8796E884009A525C8F9322B4156" name="editTemplate" frame_source="editor.design.frame.property.template.EditTemplate" />
+    <Template guid="FF8EEE20FF9C48E8850CB121B8729BB5" name="columnTemplate" frame_source="editor.design.frame.property.template.ColumnTemplate" />
+    <Template guid="05DDF20F2B2E4392AE86F23E40B9B443" name="verifyTemplate" frame_source="editor.design.frame.property.template.VerifyTemplate" />
+    <Template guid="2033FF6A964142AD9007A97A645E06AC" name="noteTemplate" frame_source="editor.design.frame.property.template.NoteTemplate" />
   </FormFrame>
 </Content>

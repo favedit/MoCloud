@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Content name="design.frame" update_date="20150906100924">
+<Content name="design.frame" update_date="20150907125248">
   <Persistence _type="Persistence" is_valid="Y" name="content.form" label="表单定义" template="" source="${output.design}/src/content-design" note="" _status="I">
     <Interface is_valid="Y" name="IComponent" label="组件接口" class_name="org.mo.cloud.content.design.frame.common.XComponent" inherits="" note="">
       <Attribute is_valid="Y" type="Boolean" name="valid" label="有效性" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
@@ -217,7 +217,7 @@
     <Component is_valid="Y" name="Edit" label="文本编辑框" class_name="org.mo.cloud.content.design.frame.common.XEdit" base_name="org.mo.cloud.content.design.frame.base.XBaseEdit" inherits="IEditControl,MDataField,MPropertyEdit" note="">
       <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
-    <Component is_valid="Y" name="Memo" label="多行文本编辑器" class_name="org.mo.cloud.content.design.frame.common.XMemo" base_name="org.mo.cloud.content.design.frame.base.XBaseMemo" inherits="IEditControl,MPropertyMemo" note="">
+    <Component is_valid="Y" name="Memo" label="多行文本编辑器" class_name="org.mo.cloud.content.design.frame.common.XMemo" base_name="org.mo.cloud.content.design.frame.base.XBaseMemo" inherits="IEditControl,MDataField,MPropertyMemo" note="">
       <Attribute is_valid="Y" type="String" name="input_size" label="输入大小" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_default="" note="" data_group="" data_code="" />
     </Component>
     <Component is_valid="Y" name="IconPicker" label="图标选择框" class_name="org.mo.cloud.content.design.frame.common.XIconPicker" base_name="org.mo.cloud.content.design.frame.base.XBaseIconPicker" inherits="IEditControl,MDataField" note="">
@@ -246,7 +246,9 @@
     </Component>
     <Component is_valid="Y" name="PageControl" label="页面控件" class_name="org.mo.cloud.content.design.frame.common.XPageControl" base_name="org.mo.cloud.content.design.frame.base.XBasePageControl" inherits="IContainer" note="" />
     <Component is_valid="Y" name="Form" label="表单" class_name="org.mo.cloud.content.design.frame.common.XForm" base_name="org.mo.cloud.content.design.frame.base.XBaseForm" inherits="IContainer,MDataset" note="" />
-    <Component is_valid="Y" name="Column" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" base_name="org.mo.cloud.content.design.frame.base.XBaseColumn" inherits="IColumn" note="" />
+    <Component is_valid="Y" name="Column" label="表格列" class_name="org.mo.cloud.content.design.frame.common.XColumn" base_name="org.mo.cloud.content.design.frame.base.XBaseColumn" inherits="IColumn" note="">
+      <Attribute is_valid="Y" type="Boolean" name="column_auto_size" label="列自动尺寸" is_store="Y" is_abstract="N" is_config="Y" is_default="Y" data_group="" data_code="" data_default="" note="" />
+    </Component>
     <Component is_valid="Y" name="ColumnText" label="表格文本列" class_name="org.mo.cloud.content.design.frame.common.XColumnText" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnText" inherits="IColumn,MDataField" note="" />
     <Component is_valid="Y" name="ColumnCheck" label="表格复选列" class_name="org.mo.cloud.content.design.frame.common.XColumnCheck" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnCheck" inherits="IColumnEditControl,MDataField,MPropertyCheck" note="" />
     <Component is_valid="Y" name="ColumnNumber" label="表格数字列" class_name="org.mo.cloud.content.design.frame.common.XColumnNumber" base_name="org.mo.cloud.content.design.frame.base.XBaseColumnNumber" inherits="IColumnEditControl,MDataField,MDescriptorPicker,MDescriptorZoom,MPropertyNumber" note="" />

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150907111224">
+  <PickerFrame guid="D669154805F5403B872E31A0BF86D932" valid="Y" name="logic.common.area.AreaPicker" label="地区拾取" type="FManageDataPicker" nowrap="N" location="0,0" size="700,400" dataset_name="data.common.area">
+    <Template guid="E13B728F1A6B4845977375BCCB865AC2" name="toolBarTemplate" frame_source="logic.template.ListToolBarTemplate" />
+    <ColumnText guid="87FEFD95675A4D3CBEA92EE0318A1B7C" valid="Y" name="ouid" label="编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="ouid" data_select="N" />
+    <ColumnText guid="F0EC3373716441419ECE49FC01E00466" valid="Y" name="countryId" label="国家编号" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="country_id" />
+    <ColumnText guid="58DE9D81BBE34DCE8EB3316D8F4C7A9C" valid="Y" name="countryLabel" label="国家标签" nowrap="N" location="0,0" size="80,0" padding="0,1,0,1" margin="0,1,0,1" data_name="country_label" data_select="N" data_expression="{data.common.country}.find(country_id).label" />
+    <ColumnText guid="8E07C2FDB743402CB3B3ACCB3CF5B9D8" valid="Y" name="code" label="代码" nowrap="N" location="0,0" size="120,0" padding="0,1,0,1" margin="0,1,0,1" data_name="code" />
+    <ColumnText guid="AC7F1373F79143B0AE59D718E496C660" valid="Y" name="label" label="标签" nowrap="N" location="0,0" size="200,0" padding="0,1,0,1" margin="0,1,0,1" data_name="label" />
+  </PickerFrame>
+</Content>
