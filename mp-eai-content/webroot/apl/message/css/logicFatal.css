@@ -33,7 +33,7 @@ body{
 	padding-top: 60px;
 	color:#f6d500;
 }
-.main p a {
+.main p , a{
 	text-decoration:none;
 	color:#35a1db;
 }

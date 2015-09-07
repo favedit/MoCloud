@@ -15,6 +15,7 @@
    </head>
    <script>
       function doChart(code) {
+         var id_do = document.getElementById("id_do");
          id_do.value = code;
          frmMain.submit();
       }
@@ -59,8 +60,8 @@
                      <div class="imag-details" style="display: block;">
                         <div id="container_details" style="">
                            <ul>
-                              <je:authority module='eai.marketer.customer'>
-                                 <li style="display: none;" onclick='doChart("customer")'>
+                              <je:authority module='eai.marketer.customer' >
+                                 <li style="display: block;" >
                                     <img onclick='doChart("customer")' src="images/main/1-2.png">
                                  </li>
                               </je:authority>
@@ -107,5 +108,4 @@
          </TABLE>
       </FORM>
    </body>
-
    </html>

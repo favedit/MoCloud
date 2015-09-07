@@ -129,7 +129,7 @@ body{
   background-repeat: no-repeat;
   background-size: 264px;
 }
-.btn-container:hover{
+.btn-container:active{
   top: 11px;
   right: -51px;
    top: 19px\0;
