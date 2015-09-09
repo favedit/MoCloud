@@ -292,12 +292,17 @@ body{
 	display: none;
 }
 .titles-container{
-	display:block;
 	width:100%;
+	/*height: 100%;*/
 	text-align: center;
+	/*position:relative;*/
 }
 .titles-container ul{
-	height: 100%;
+	/*position: absolute;*/
+	/*border:1px solid red;*/
+	top:0px;	
+	/*left:50%;*/
+	/*margin-left: -116px;*/
 }
 .titles-container li{
 	background:url(../images/main/new11.png) no-repeat center center; 
