@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+   <property>
+      <name>dfs.data.dir</name>
+      <value>/data/hadoop/stg/data</value>
+   </property>
+   <property>
+      <name>dfs.replication</name>
+      <value>3</value>
+   </property>
+</configuration>
