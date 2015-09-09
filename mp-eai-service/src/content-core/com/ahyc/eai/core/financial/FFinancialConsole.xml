@@ -3,21 +3,25 @@
 <Config>
 
 <Resource name='ezubao.investment.model'>
-   <Model code='detaildh'  label='e租财富' rate='13.0' horizon_count='12' horizon_unit='month' closed='30' wait='10' factor='0.8'/>
-   <Model code='detailzy'  label='e租稳盈' rate='8.8'  horizon_count='12' horizon_unit='month' closed='0'  wait='0'  factor='0.7'/>
-   <Model code='nianxiang' label='e租年享' rate='14.5' horizon_count='12' horizon_unit='month' closed='30' wait='10' factor='1'/>
-   <Model code='yuexiang'  label='e租月享' rate='13.5' horizon_count='12' horizon_unit='month' closed='30' wait='10' factor='1'/>
-   <Model code='leying'    label='e租乐盈' rate='10.5' horizon_count='12' horizon_unit='month' closed='0'  wait='20' factor='0.9'/>
-   <Model code='lexiang'   label='e租乐享' rate='9.8'  horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='0.8'/>
-   <Model code='suying'    label='e租富盈' rate='13.8' horizon_count='6'  horizon_unit='month' closed='0'  wait='10' factor='0.6'/>
-   <Model code='suxiang'   label='e租富享' rate='13.2' horizon_count='3'  horizon_unit='month' closed='0'  wait='10' factor='0.4'/>
+   <Model code='detaildh'     label='e租财富'  rate='13.0' horizon_count='12' horizon_unit='month' closed='30' wait='10' factor='0.8'/>
+   <Model code='detailzy'     label='e租稳盈'  rate='8.8'  horizon_count='12' horizon_unit='month' closed='0'  wait='0'  factor='0.7'/>
+   <Model code='nianxiang'    label='e租年享'  rate='14.5' horizon_count='12' horizon_unit='month' closed='30' wait='10' factor='1'/>
+   <Model code='yuexiang'     label='e租月享'  rate='13.5' horizon_count='12' horizon_unit='month' closed='30' wait='10' factor='1'/>
+   <Model code='leying'       label='e租乐盈'  rate='10.5' horizon_count='12' horizon_unit='month' closed='0'  wait='20' factor='0.9'/>
+   <Model code='lexiang'      label='e租乐享'  rate='9.8'  horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='0.8'/>
+   <Model code='suying'       label='e租富盈'  rate='13.8' horizon_count='6'  horizon_unit='month' closed='0'  wait='10' factor='0.6'/>
+   <Model code='suxiang'      label='e租富享'  rate='13.2' horizon_count='3'  horizon_unit='month' closed='0'  wait='10' factor='0.4'/>
 
-   <Model code='newdetaildh'  label='e租财富' rate='13.0' horizon_count='40' horizon_unit='day'   closed='30' wait='10' factor='0.8'/>
-   <Model code='newdetailzy'  label='e租稳盈' rate='9.0'  horizon_count='2'  horizon_unit='day'   closed='0'  wait='2'  factor='0.7'/>
-   <Model code='newnianxiang' label='e租年享' rate='14.6' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
-   <Model code='newyuexiang'  label='e租年丰' rate='14.2' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
-   <Model code='newsuying'    label='e租富盈' rate='13.8' horizon_count='6'  horizon_unit='month' closed='0'  wait='10' factor='0.6'/>
-   <Model code='newsuxiang'   label='e租富享' rate='13.4' horizon_count='3'  horizon_unit='month' closed='0'  wait='10' factor='0.4'/>
+   <Model code='newdetaildh'  label='e租财富'  rate='13.0' horizon_count='40' horizon_unit='day'   closed='30' wait='10' factor='0.8'/>
+   <Model code='newdetailzy'  label='e租稳盈'  rate='9.0'  horizon_count='2'  horizon_unit='day'   closed='0'  wait='2'  factor='0.7'/>
+   <Model code='newnianxiang' label='e租年享'  rate='14.6' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
+   <Model code='newyuexiang'  label='e租年丰'  rate='14.2' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
+   <Model code='newsuying'    label='e租富盈'  rate='13.8' horizon_count='6'  horizon_unit='month' closed='0'  wait='10' factor='0.6'/>
+   <Model code='newsuxiang'   label='e租富享'  rate='13.4' horizon_count='3'  horizon_unit='month' closed='0'  wait='10' factor='0.4'/>
+   
+   <Model code='ewealth'      label='e租财富'  rate='12.0' horizon_count='40' horizon_unit='day'   closed='30' wait='10' factor='0.8'/>
+   <Model code='musetreasure' label='缪斯珍品' rate='14.6' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
+   <Model code='musemovie'    label='缪斯影视' rate='14.6' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
 </Resource>
 
 </Config>

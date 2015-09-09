@@ -3,6 +3,7 @@ package org.mo.cloud.logic.data.common.configuration;
 import com.cyou.gccloud.data.data.FDataCommonConfigurationLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
@@ -40,6 +41,80 @@ public class FGcConfigurationConsole
       FSql whereSql = new FSql("CODE={code}");
       whereSql.bindString("code", code);
       return search(logicContext, whereSql);
+   }
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   @Override
+   public String getParameter(ILogicContext logicContext,
+                              String code){
+      FGcConfigurationInfo info = findByCode(logicContext, code);
+      if(info == null){
+         throw new FFatalError("Parameter is not exists. (code={1})", code);
+      }
+      return info.dataValue();
+   }
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   @Override
+   public int getParameterAsInteger(ILogicContext logicContext,
+                                    String code){
+      String value = getParameter(logicContext, code);
+      return RInteger.parse(value);
+   }
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   @Override
+   public long getParameterAsLong(ILogicContext logicContext,
+                                  String code){
+      String value = getParameter(logicContext, code);
+      return RLong.parse(value);
+   }
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   @Override
+   public float getParameterAsFloat(ILogicContext logicContext,
+                                    String code){
+      String value = getParameter(logicContext, code);
+      return RFloat.parse(value);
+   }
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   @Override
+   public double getParameterAsDouble(ILogicContext logicContext,
+                                      String code){
+      String value = getParameter(logicContext, code);
+      return RDouble.parse(value);
+
    }
 
    //============================================================

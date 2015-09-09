@@ -8,6 +8,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseUnit;
+import org.mo.cloud.logic.data.common.configuration.IGcConfigurationConsole;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
@@ -42,6 +43,10 @@ public class FStatisticsCustomerServlet
 
    // 资源访问接口
    private static IResource _resource = RResource.find(FStatisticsCustomerServlet.class);
+
+   // 配置控制台
+   @ALink
+   protected IGcConfigurationConsole _configurationConsole;
 
    // 金融控制台
    @ALink
@@ -92,8 +97,8 @@ public class FStatisticsCustomerServlet
       // 设置输出流
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
-      //IGcConfigurationConsole configurationConsole = logicContext.findLogic(IGcConfigurationConsole.class);
-      //configurationConsole.findParameterAsFloat(logicContext, "eai.financial.bank.")
+      // 获得银行年化利率
+      float annualizedRate = _configurationConsole.getParameterAsFloat(logicContext, "eai.financial.bank.annualized.rate");
       // 输出当日合计数据
       FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
       sumSql.bindString("date", endDate.format("YYYYMMDD"));
@@ -127,14 +132,16 @@ public class FStatisticsCustomerServlet
       stream.writeInt32(count);
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
          double investmentAmount = dynamicUnit.customerActionAmount();
-         // 计算盈利
+         // 计算投资年化盈利
          String tenderModelLabel = null;
          double investmentGain = 0;
          FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(dynamicUnit.tenderModel());
          if(tenderModel != null){
             tenderModelLabel = tenderModel.label();
-            investmentGain = tenderModel.calculateGain(investmentAmount, currentDate);
+            investmentGain = tenderModel.calculateYearGain(investmentAmount, currentDate);
          }
+         // 计算银行
+         double investmentBankGain = investmentAmount * annualizedRate;
          // 输出内容
          stream.writeString(dynamicUnit.customerActionDate().format());
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
@@ -143,6 +150,7 @@ public class FStatisticsCustomerServlet
          stream.writeString(tenderModelLabel);
          stream.writeDouble(investmentAmount);
          stream.writeDouble(investmentGain);
+         stream.writeDouble(investmentBankGain);
       }
       //............................................................
       // 保存数据到缓冲中

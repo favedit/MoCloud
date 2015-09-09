@@ -21,6 +21,56 @@ public interface IGcConfigurationConsole
                                    String code);
 
    //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   String getParameter(ILogicContext logicContext,
+                       String code);
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   int getParameterAsInteger(ILogicContext logicContext,
+                             String code);
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   long getParameterAsLong(ILogicContext logicContext,
+                           String code);
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   float getParameterAsFloat(ILogicContext logicContext,
+                             String code);
+
+   //============================================================
+   // <T>根据参数获得内容。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param code 代码
+   // @return 内容
+   //============================================================
+   double getParameterAsDouble(ILogicContext logicContext,
+                               String code);
+
+   //============================================================
    // <T>根据参数查找内容。</T>
    //
    // @param logicContext 逻辑环境

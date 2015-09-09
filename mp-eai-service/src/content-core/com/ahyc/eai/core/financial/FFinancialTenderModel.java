@@ -124,6 +124,19 @@ public class FFinancialTenderModel
    }
 
    //============================================================
+   // <T>计算年化盈利。</T>
+   //
+   // @param currency 货币
+   // @param currentDate 时间
+   // @return 盈利
+   //============================================================
+   public double calculateYearGain(double currency,
+                                   TDateTime currentDate){
+      double gain = Math.max(currency * _rate / 100, 0.01);
+      return gain;
+   }
+
+   //============================================================
    // <T>加载配置信息。</T>
    //
    // @param xconfig 配置
