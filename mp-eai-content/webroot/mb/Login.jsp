@@ -50,7 +50,7 @@
             </tr>
             <tr>
                <td height="60" align="center" valign="center">
-                  <footer class="wap-footer">©2015 智慧企业推进中心（北京）<a href="tel:010-65499299">客服电话：010-65499299</a></footer>
+                  <footer class="wap-footer">©2015 钰诚集团智慧企业推进中心（北京）<a href="tel:010-65499299">客服电话：010-65499299</a></footer>
                </td>
             </tr>
          </tbody>
