@@ -136,7 +136,7 @@ public interface IAbstractLogicUnitConsole<U extends FLogicUnit>
    // @return 数据单元
    //============================================================
    U search(ILogicContext logicContext,
-            String whereSql);
+            CharSequence whereSql);
 
    //============================================================
    // <T>根据条件查找一个数据单元。</T>

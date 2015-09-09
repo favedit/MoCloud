@@ -1,4 +1,27 @@
 ﻿-- ------------------------------------------------------------
+-- Create table [Data.Common.Configuration]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_CONFIGURATION`;
+CREATE TABLE `DT_COM_CONFIGURATION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(20), 
+   `LABEL`                         VARCHAR(80), 
+   `DATA_TYPE_CD`                  VARCHAR(40), 
+   `ICON_URL`                      VARCHAR(800), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_CONFIGURATION 
+   ADD CONSTRAINT DT_COM_CNF_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Common.Country]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_COM_COUNTRY`;

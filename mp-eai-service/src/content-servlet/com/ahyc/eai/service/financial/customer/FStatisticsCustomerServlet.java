@@ -92,6 +92,8 @@ public class FStatisticsCustomerServlet
       // 设置输出流
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
+      //IGcConfigurationConsole configurationConsole = logicContext.findLogic(IGcConfigurationConsole.class);
+      //configurationConsole.findParameterAsFloat(logicContext, "eai.financial.bank.")
       // 输出当日合计数据
       FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
       sumSql.bindString("date", endDate.format("YYYYMMDD"));

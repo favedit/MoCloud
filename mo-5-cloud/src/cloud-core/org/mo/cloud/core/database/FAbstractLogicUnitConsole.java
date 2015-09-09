@@ -238,7 +238,7 @@ public abstract class FAbstractLogicUnitConsole<T extends FLogicTable, U extends
    //============================================================
    @Override
    public U search(ILogicContext logicContext,
-                   String whereSql){
+                   CharSequence whereSql){
       return search(logicContext, _classUnit, whereSql);
    }
 
