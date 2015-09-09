@@ -54,7 +54,7 @@ public class RJobTester
    }
 
    public static void main(String[] args) throws Exception{
-      args = new String[]{"file:///d/test.html", "file:///d/test"};
+      args = new String[]{"hdfs://10.13.0.250:9000/test/citydata.json", "hdfs://10.13.0.250:9000/result/citydata.json"};
       Configuration configuration = new Configuration();
       System.setProperty("hadoop.home.dir", "D:/Studio/Hadoop");
       String[] otherArgs = new GenericOptionsParser(configuration, args).getRemainingArgs();
