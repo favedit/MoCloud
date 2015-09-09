@@ -231,7 +231,6 @@ body{
 
 .imag-container{
 	display: block;
-	/*width: 100%;*/
 	position: relative;
 }
 
@@ -246,9 +245,7 @@ body{
 	z-index: 0;
 	width: 80%;
 	padding:0px 10%; 
-	/*max-width: 1300px;*/
-	/*left:0px;*/
-	/*top:0px;*/
+
 	display: inline-block;
 	-webkit-animation-name: zoomIn;
 	-moz-animation-name: zoomIn;
@@ -259,10 +256,36 @@ body{
 	-moz-animation-duration: 1s;
 	-o-animation-duration: 1s;
 	animation-duration: 1s;
+	position: relative;
+}
+.imag-details ul li .icon{
+	width: 100%;
+	background: url(../images/main/player.png);
+	background-repeat:no-repeat;
+	background-size: 120px;
+	background-position:center center;
+	height: 100%;
+	display:none;
+	position: absolute;
+	left:0px;
+	top:0px;
+	-webkit-animation-name: zoomInUp;
+	animation-name: zoomInUp;
+	-webkit-animation-duration: 500ms;
+	-moz-animation-duration: 500ms;
+	-o-animation-duration: 500ms;
+	animation-duration: 500ms;
+}
+.imag-details ul li:hover .icon{
+	display: block;
+	cursor:pointer;
 }
 .imag-details ul li img{
 	width: 100%;
 	cursor:pointer;
+}
+.imag-details ul li img:hover{
+	/*background: #f96;*/
 }
 .imag-details span{
 	color:#fff;

@@ -19,8 +19,8 @@
    <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
       <tbody>
       <tr id="heads">
-         <td height="50">
-          <img src="images/main/logo3.png">
+         <td height="50"  align="center" valign="center"  >
+          <img src="images/main/logos.png">
         </td>
      </tr>
      <tr id="mains">
@@ -44,7 +44,7 @@
      </tr>
      <tr  id="footers" border="1">
        <td height="100">
-         <div class="footer">©2015 智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
+         <div class="footer">©2015 钰诚集团智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
        </td>
      </tr>
       </tbody>

@@ -23,7 +23,7 @@
       <tr id="heads">
          <td id="header">
             <div class="header floatBtn">
-               <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logo3.png"></a></div>
+               <div class="head-left"><a href="javascript:;"><img class="logo" src="images/main/logos.png"></a></div>
                   <div class="head-right">
                      <p class="user-details" id="user-details"><i></i>
                         <jh:write source='&page.passport' />&nbsp;<img src="images/main/new8.png"></p>
@@ -65,7 +65,7 @@
      </tr>
      <tr>
        <td height="100" align="center" valign="center">
-         <div class="footer">©2015 智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
+         <div class="footer">©2015 钰诚集团智慧企业推进中心（北京）<p style="padding-top:5px;">客服电话：010-65499299</p></div>
        </td>
      </tr>
       </tbody>

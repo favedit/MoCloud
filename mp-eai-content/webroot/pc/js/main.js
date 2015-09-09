@@ -46,7 +46,7 @@
         }, 8000);
      };
 
-     // ctrl.setTimer();
+     ctrl.setTimer();
 
      ctrl.setRolling = function(index) {
         console.log(index);
