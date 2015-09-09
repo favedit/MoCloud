@@ -148,7 +148,7 @@ public class FHeaderAction
       String guid = basePage.userId();
       int roleCd = _userConsole.findByGuid(logicContext, guid).roleCd();
       if(roleCd == EGcPersonUserRole.Admin){
-         menuStrings.append("manage.user.module|manage.user.role|manage.user|product.device|product.user.logger|product.user.writelists");
+         menuStrings.append("manage.user.module|manage.user.role|manage.user|product.configration|product.device|product.user.logger|product.user.writelists");
          basePage.setMenuString(menuStrings.toString());
       }else{
          long roleId = basePage.roleId();

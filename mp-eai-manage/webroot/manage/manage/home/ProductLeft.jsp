@@ -39,14 +39,21 @@
       <div id="cy_left">
          <!-- 导航 开始 -->
          <ul class="accordion">
-            <li id="one" class="common"> <a href="#one">设备管理</a>
+            <li id="one" class="common"> <a href="#one">共通管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="product.configration" value="&basePage.menuString">
+                     <li><a href="/product/configration/Configration.wa" target="right">配置信息</a></li>
+                  </jh:equals>
+               </ul>
+            </li>
+            <li id="two" class="common"> <a href="#two">设备管理</a>
                <ul class="sub-menu">
                   <jh:equals source="product.device" value="&basePage.menuString">
                      <li><a href="/product/device/Device.wa" target="right">设备信息</a></li>
                   </jh:equals>
                </ul>
             </li>
-            <li id="two" class="classify"> <a href="#two">用户管理</a>
+            <li id="three" class="classify"> <a href="#three">用户管理</a>
                <ul class="sub-menu">
                   <jh:equals source="product.user.logger" value="&basePage.menuString"><li><a href="/product/logger/user/Access.wa" target="right">用户日志</a></li></jh:equals>
                   <jh:equals source="product.user.writelists" value="&basePage.menuString"><li><a href="/product/person/user/Access.wa" target="right">白名单</a></li></jh:equals>

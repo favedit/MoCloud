@@ -263,7 +263,10 @@ public class FRoleAction
       roleUnit.setUpdateUserId(userOuid);
       _roleConsole.doUpdate(logicContext, roleUnit);
       //删除此角色所拥有的权限
-      _roleModuleConsole.deleteByRoleId(logicContext, roleUnit.ouid());
+      FLogicDataset<FDataControlRoleModuleUnit> roleModule = _roleModuleConsole.selectDataByRoleIdAndModuleId(logicContext, roleUnit.ouid(), 0);
+      for(FDataControlRoleModuleUnit unit : roleModule){
+         _roleModuleConsole.doDelete(logicContext, unit);
+      }
       //为角色添加查看权限
       String tempModuleIds = context.parameter("moduleIds");
       if(!RString.isEmpty(tempModuleIds)){
