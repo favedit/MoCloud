@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="cd64caff-e685-4e2d-a60a-61e67989ca54" name="data.financial.department" label="M#12cn16金融部门信息" is_valid="Y" note="M#" data_engine="MyISAM" data_group="data" data_factory="Data.Financial.Department" data_name="DT_FIN_DEPARTMENT" data_alias="DT_FIN_DPT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="ad9740a7-c5d6-410c-861f-753106cc0cfc" name="link_parent_id" label="M#12cn15关联父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_PARENT_ID" />
+  <FieldRecordId _uuid="a5797164-7ab6-44f5-845b-00587be3c482" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldString _uuid="c38b86b2-66db-41a8-8738-93d1bceb3944" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
+  <FieldString _uuid="98884950-df7a-439d-a403-277bc188a8b8" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="80" />
+  <FieldString _uuid="6f064089-1de6-4f14-868b-8b685430a837" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldInteger _uuid="987ba53e-0ddc-4d40-90ab-5c11521fa5f0" name="level" label="M#12cn12级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEVEL" />
+  <FieldRecordId _uuid="600975f8-c3a0-4998-8ab7-0890810a8372" name="leader_id" label="M#12cn15负责人编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEADER_ID" />
+  <FieldString _uuid="89233e61-616c-40bd-80d4-4b5c80f74959" name="leader_label" label="M#12cn15负责人标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEADER_LABEL" data_size="80" />
+  <FieldDouble _uuid="933cf6fc-915b-4aad-8ccb-edd38e33d8fd" name="location_latitude" label="M#12cn14位置维度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LATITUDE" />
+  <FieldDouble _uuid="1190bfec-fa55-4d5c-a626-7fdcb4706870" name="location_longitude" label="M#12cn14位置经度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LONGITUDE" />
+  <FieldDateTime _uuid="28bcaf6a-e51d-4618-91a1-a34da48aea9e" name="build_date" label="M#12cn14建立日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUILD_DATE" />
+  <FieldDouble _uuid="d65b4275-f8b9-4253-af5f-c7fe47c5a884" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="f0c41c38-0e8e-4d6b-9bfe-150d173155e1" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
+  <FieldDateTime _uuid="48e92b17-29f0-4dcc-9942-749cf9c96771" name="investment_date" label="M#12cn14投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_DATE" />
+  <FieldDouble _uuid="88d75a5e-8e6f-4c75-b1a1-d9963e2473c8" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldInteger _uuid="71095d11-fdcb-45f6-b109-d48e416f4e42" name="redemption_count" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_COUNT" />
+  <FieldDateTime _uuid="6ccfe568-c214-46e0-9c24-18f7bc30afd7" name="redemption_date" label="M#12cn14赎回时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_DATE" />
+  <FieldDouble _uuid="381a5669-5009-43d7-a50f-3807fcac6b9c" name="netinvestment_total" label="M#12cn14净投总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="1774f408-5ffa-4bc5-b382-ad014937213f" name="interest_total" label="M#12cn14利息总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldDouble _uuid="4a5a1c74-b837-40ab-b355-701bd329b124" name="performance_total" label="M#12cn14业绩总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldString _uuid="b0735636-c63e-4d7c-b794-ce03717f850f" name="note" label="M#12cn14备注信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="4c9e4fd6-b537-498e-8e66-70cb816731fe" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

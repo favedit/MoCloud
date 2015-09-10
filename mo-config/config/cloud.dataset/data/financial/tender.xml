@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="2265d696-71cb-4e28-af71-f3bb47608a6e" name="data.financial.tender" label="M#12cn16金融投标信息" is_valid="Y" note="M#" data_engine="MyISAM" data_group="data" data_factory="Data.Financial.Tender" data_name="DT_FIN_TENDER" data_alias="DT_FIN_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="2939d940-0545-44e6-b9bb-a3268d9b764f" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="40" />
+  <FieldString _uuid="08bbb88d-3d72-4cf9-947c-a0193afbfd51" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldFloat _uuid="63b14670-f0d8-474d-b893-f9ae186e842f" name="rate" label="M#12cn12比率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RATE" />
+  <FieldFloat _uuid="bc5d21a2-5582-4dd6-8731-35c3d16ba44d" name="factor" label="M#12cn14绩效因子" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FACTOR" />
+  <FieldString _uuid="9d0bc0a9-c98f-4afa-945f-6bfa4dcf008a" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="8c8175ff-c526-4b7b-8bfa-a8dc33961a64" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

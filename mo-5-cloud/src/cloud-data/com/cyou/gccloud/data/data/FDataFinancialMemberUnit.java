@@ -15,10 +15,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>金融理财师信息逻辑单元。</T>
+// <T>金融成员信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialMarketerUnit
+public class FDataFinancialMemberUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -51,11 +51,11 @@ public class FDataFinancialMarketerUnit
    // 字段关联编号的定义。
    protected long _linkId;
 
-   // 存储字段登录名的定义。
-   private String __passport;
+   // 存储字段名称的定义。
+   private String __name;
 
-   // 字段登录名的定义。
-   protected String _passport;
+   // 字段名称的定义。
+   protected String _name;
 
    // 存储字段名称的定义。
    private String __label;
@@ -63,101 +63,119 @@ public class FDataFinancialMarketerUnit
    // 字段名称的定义。
    protected String _label;
 
-   // 存储字段状态的定义。
-   private int __statusCd;
-
-   // 字段状态的定义。
-   protected int _statusCd;
-
    // 存储字段电话号码的定义。
    private String __phone;
 
    // 字段电话号码的定义。
    protected String _phone;
 
-   // 存储字段身份证的定义。
+   // 存储字段身份证号的定义。
    private String __card;
 
-   // 字段身份证的定义。
+   // 字段身份证号的定义。
    protected String _card;
 
-   // 存储字段职务标签的定义。
-   private String __rankLabel;
+   // 存储字段电子邮箱的定义。
+   private String __email;
 
-   // 字段职务标签的定义。
-   protected String _rankLabel;
+   // 字段电子邮箱的定义。
+   protected String _email;
 
-   // 存储字段部门编号的定义。
-   private long __departmentId;
+   // 存储字段性别的定义。
+   private int __genderCd;
 
-   // 字段部门编号的定义。
-   protected long _departmentId;
+   // 字段性别的定义。
+   protected int _genderCd;
 
-   // 存储字段直属部门标签的定义。
-   private String __departmentLabel;
+   // 存储字段生日的定义。
+   private TDateTime __birthday = new TDateTime();
 
-   // 字段直属部门标签的定义。
-   protected String _departmentLabel;
+   // 字段生日的定义。
+   protected TDateTime _birthday = new TDateTime();
 
-   // 存储字段部门标签集合的定义。
-   private String __departmentLabels;
+   // 存储字段投资总额的定义。
+   private double __investmentTotal;
 
-   // 字段部门标签集合的定义。
-   protected String _departmentLabels;
+   // 字段投资总额的定义。
+   protected double _investmentTotal;
 
-   // 存储字段客户投资总额的定义。
-   private double __customerInvestmentTotal;
+   // 存储字段投资次数的定义。
+   private int __investmentCount;
 
-   // 字段客户投资总额的定义。
-   protected double _customerInvestmentTotal;
-
-   // 存储字段客户投资次数的定义。
-   private int __customerInvestmentCount;
-
-   // 字段客户投资次数的定义。
-   protected int _customerInvestmentCount;
+   // 字段投资次数的定义。
+   protected int _investmentCount;
 
    // 存储字段投资时间的定义。
-   private TDateTime __customerInvestmentDate = new TDateTime();
+   private TDateTime __investmentDate = new TDateTime();
 
    // 字段投资时间的定义。
-   protected TDateTime _customerInvestmentDate = new TDateTime();
+   protected TDateTime _investmentDate = new TDateTime();
 
    // 存储字段赎回总额的定义。
-   private double __customerRedemptionTotal;
+   private double __redemptionTotal;
 
    // 字段赎回总额的定义。
-   protected double _customerRedemptionTotal;
+   protected double _redemptionTotal;
 
    // 存储字段赎回次数的定义。
-   private int __customerRedemptionCount;
+   private int __redemptionCount;
 
    // 字段赎回次数的定义。
-   protected int _customerRedemptionCount;
+   protected int _redemptionCount;
 
    // 存储字段赎回时间的定义。
-   private TDateTime __customerRedemptionDate = new TDateTime();
+   private TDateTime __redemptionDate = new TDateTime();
 
    // 字段赎回时间的定义。
-   protected TDateTime _customerRedemptionDate = new TDateTime();
+   protected TDateTime _redemptionDate = new TDateTime();
 
    // 存储字段净投总额的定义。
-   private double __customerNetinvestmentTotal;
+   private double __netinvestmentTotal;
 
    // 字段净投总额的定义。
-   protected double _customerNetinvestmentTotal;
+   protected double _netinvestmentTotal;
 
    // 存储字段利息总额的定义。
-   private double __customerInterestTotal;
+   private double __interestTotal;
 
    // 字段利息总额的定义。
-   protected double _customerInterestTotal;
+   protected double _interestTotal;
 
    // 存储字段业绩总额的定义。
-   private double __customerPerformanceTotal;
+   private double __performanceTotal;
 
    // 字段业绩总额的定义。
-   protected double _customerPerformanceTotal;
+   protected double _performanceTotal;
+
+   // 存储字段推荐评分的定义。
+   private int __scoreRecommend;
+
+   // 字段推荐评分的定义。
+   protected int _scoreRecommend;
+
+   // 存储字段累计点数的定义。
+   private int __scorePoint;
+
+   // 字段累计点数的定义。
+   protected int _scorePoint;
+
+   // 存储字段注册时间的定义。
+   private TDateTime __registerDate = new TDateTime();
+
+   // 字段注册时间的定义。
+   protected TDateTime _registerDate = new TDateTime();
+
+   // 存储字段最后登录时间的定义。
+   private TDateTime __lastLoginDate = new TDateTime();
+
+   // 字段最后登录时间的定义。
+   protected TDateTime _lastLoginDate = new TDateTime();
+
+   // 存储字段备注信息的定义。
+   private String __note;
+
+   // 字段备注信息的定义。
+   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -184,9 +202,9 @@ public class FDataFinancialMarketerUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造金融理财师信息逻辑单元。</T>
+   // <T>构造金融成员信息逻辑单元。</T>
    //============================================================
-   public FDataFinancialMarketerUnit(){
+   public FDataFinancialMemberUnit(){
    }
 
    //============================================================
@@ -325,30 +343,30 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>判断登录名的数据是否改变。</T>
+   // <T>判断名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isPassportChanged(){
-      return !RString.equals(__passport, _passport);
+   public boolean isNameChanged(){
+      return !RString.equals(__name, _name);
    }
 
    //============================================================
-   // <T>获得登录名的数据内容。</T>
+   // <T>获得名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String passport(){
-      return _passport;
+   public String name(){
+      return _name;
    }
 
    //============================================================
-   // <T>设置登录名的数据内容。</T>
+   // <T>设置名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setPassport(String value){
-      _passport = value;
+   public void setName(String value){
+      _name = value;
    }
 
    //============================================================
@@ -379,33 +397,6 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>判断状态的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isStatusCdChanged(){
-      return __statusCd != _statusCd;
-   }
-
-   //============================================================
-   // <T>获得状态的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int statusCd(){
-      return _statusCd;
-   }
-
-   //============================================================
-   // <T>设置状态的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setStatusCd(int value){
-      _statusCd = value;
-   }
-
-   //============================================================
    // <T>判断电话号码的数据是否改变。</T>
    //
    // @return 数据内容
@@ -433,7 +424,7 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>判断身份证的数据是否改变。</T>
+   // <T>判断身份证号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -442,7 +433,7 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>获得身份证的数据内容。</T>
+   // <T>获得身份证号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -451,7 +442,7 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>设置身份证的数据内容。</T>
+   // <T>设置身份证号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -460,165 +451,138 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>判断职务标签的数据是否改变。</T>
+   // <T>判断电子邮箱的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRankLabelChanged(){
-      return !RString.equals(__rankLabel, _rankLabel);
+   public boolean isEmailChanged(){
+      return !RString.equals(__email, _email);
    }
 
    //============================================================
-   // <T>获得职务标签的数据内容。</T>
+   // <T>获得电子邮箱的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String rankLabel(){
-      return _rankLabel;
+   public String email(){
+      return _email;
    }
 
    //============================================================
-   // <T>设置职务标签的数据内容。</T>
+   // <T>设置电子邮箱的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setRankLabel(String value){
-      _rankLabel = value;
+   public void setEmail(String value){
+      _email = value;
    }
 
    //============================================================
-   // <T>判断部门编号的数据是否改变。</T>
+   // <T>判断性别的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentIdChanged(){
-      return __departmentId != _departmentId;
+   public boolean isGenderCdChanged(){
+      return __genderCd != _genderCd;
    }
 
    //============================================================
-   // <T>获得部门编号的数据内容。</T>
+   // <T>获得性别的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long departmentId(){
-      return _departmentId;
+   public int genderCd(){
+      return _genderCd;
    }
 
    //============================================================
-   // <T>设置部门编号的数据内容。</T>
+   // <T>设置性别的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentId(long value){
-      _departmentId = value;
+   public void setGenderCd(int value){
+      _genderCd = value;
    }
 
    //============================================================
-   // <T>判断直属部门标签的数据是否改变。</T>
+   // <T>判断生日的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLabelChanged(){
-      return !RString.equals(__departmentLabel, _departmentLabel);
+   public boolean isBirthdayChanged(){
+      return !__birthday.equals(_birthday);
    }
 
    //============================================================
-   // <T>获得直属部门标签的数据内容。</T>
+   // <T>获得生日的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String departmentLabel(){
-      return _departmentLabel;
+   public TDateTime birthday(){
+      return _birthday;
    }
 
    //============================================================
-   // <T>设置直属部门标签的数据内容。</T>
+   // <T>设置生日的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLabel(String value){
-      _departmentLabel = value;
+   public void setBirthday(TDateTime value){
+      _birthday = value;
    }
 
    //============================================================
-   // <T>判断部门标签集合的数据是否改变。</T>
+   // <T>判断投资总额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLabelsChanged(){
-      return !RString.equals(__departmentLabels, _departmentLabels);
+   public boolean isInvestmentTotalChanged(){
+      return __investmentTotal != _investmentTotal;
    }
 
    //============================================================
-   // <T>获得部门标签集合的数据内容。</T>
+   // <T>获得投资总额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String departmentLabels(){
-      return _departmentLabels;
+   public double investmentTotal(){
+      return _investmentTotal;
    }
 
    //============================================================
-   // <T>设置部门标签集合的数据内容。</T>
+   // <T>设置投资总额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLabels(String value){
-      _departmentLabels = value;
+   public void setInvestmentTotal(double value){
+      _investmentTotal = value;
    }
 
    //============================================================
-   // <T>判断客户投资总额的数据是否改变。</T>
+   // <T>判断投资次数的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerInvestmentTotalChanged(){
-      return __customerInvestmentTotal != _customerInvestmentTotal;
+   public boolean isInvestmentCountChanged(){
+      return __investmentCount != _investmentCount;
    }
 
    //============================================================
-   // <T>获得客户投资总额的数据内容。</T>
+   // <T>获得投资次数的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double customerInvestmentTotal(){
-      return _customerInvestmentTotal;
+   public int investmentCount(){
+      return _investmentCount;
    }
 
    //============================================================
-   // <T>设置客户投资总额的数据内容。</T>
+   // <T>设置投资次数的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerInvestmentTotal(double value){
-      _customerInvestmentTotal = value;
-   }
-
-   //============================================================
-   // <T>判断客户投资次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCustomerInvestmentCountChanged(){
-      return __customerInvestmentCount != _customerInvestmentCount;
-   }
-
-   //============================================================
-   // <T>获得客户投资次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int customerInvestmentCount(){
-      return _customerInvestmentCount;
-   }
-
-   //============================================================
-   // <T>设置客户投资次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCustomerInvestmentCount(int value){
-      _customerInvestmentCount = value;
+   public void setInvestmentCount(int value){
+      _investmentCount = value;
    }
 
    //============================================================
@@ -626,8 +590,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerInvestmentDateChanged(){
-      return !__customerInvestmentDate.equals(_customerInvestmentDate);
+   public boolean isInvestmentDateChanged(){
+      return !__investmentDate.equals(_investmentDate);
    }
 
    //============================================================
@@ -635,8 +599,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public TDateTime customerInvestmentDate(){
-      return _customerInvestmentDate;
+   public TDateTime investmentDate(){
+      return _investmentDate;
    }
 
    //============================================================
@@ -644,8 +608,8 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerInvestmentDate(TDateTime value){
-      _customerInvestmentDate = value;
+   public void setInvestmentDate(TDateTime value){
+      _investmentDate = value;
    }
 
    //============================================================
@@ -653,8 +617,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerRedemptionTotalChanged(){
-      return __customerRedemptionTotal != _customerRedemptionTotal;
+   public boolean isRedemptionTotalChanged(){
+      return __redemptionTotal != _redemptionTotal;
    }
 
    //============================================================
@@ -662,8 +626,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public double customerRedemptionTotal(){
-      return _customerRedemptionTotal;
+   public double redemptionTotal(){
+      return _redemptionTotal;
    }
 
    //============================================================
@@ -671,8 +635,8 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerRedemptionTotal(double value){
-      _customerRedemptionTotal = value;
+   public void setRedemptionTotal(double value){
+      _redemptionTotal = value;
    }
 
    //============================================================
@@ -680,8 +644,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerRedemptionCountChanged(){
-      return __customerRedemptionCount != _customerRedemptionCount;
+   public boolean isRedemptionCountChanged(){
+      return __redemptionCount != _redemptionCount;
    }
 
    //============================================================
@@ -689,8 +653,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public int customerRedemptionCount(){
-      return _customerRedemptionCount;
+   public int redemptionCount(){
+      return _redemptionCount;
    }
 
    //============================================================
@@ -698,8 +662,8 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerRedemptionCount(int value){
-      _customerRedemptionCount = value;
+   public void setRedemptionCount(int value){
+      _redemptionCount = value;
    }
 
    //============================================================
@@ -707,8 +671,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerRedemptionDateChanged(){
-      return !__customerRedemptionDate.equals(_customerRedemptionDate);
+   public boolean isRedemptionDateChanged(){
+      return !__redemptionDate.equals(_redemptionDate);
    }
 
    //============================================================
@@ -716,8 +680,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public TDateTime customerRedemptionDate(){
-      return _customerRedemptionDate;
+   public TDateTime redemptionDate(){
+      return _redemptionDate;
    }
 
    //============================================================
@@ -725,8 +689,8 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerRedemptionDate(TDateTime value){
-      _customerRedemptionDate = value;
+   public void setRedemptionDate(TDateTime value){
+      _redemptionDate = value;
    }
 
    //============================================================
@@ -734,8 +698,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerNetinvestmentTotalChanged(){
-      return __customerNetinvestmentTotal != _customerNetinvestmentTotal;
+   public boolean isNetinvestmentTotalChanged(){
+      return __netinvestmentTotal != _netinvestmentTotal;
    }
 
    //============================================================
@@ -743,8 +707,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public double customerNetinvestmentTotal(){
-      return _customerNetinvestmentTotal;
+   public double netinvestmentTotal(){
+      return _netinvestmentTotal;
    }
 
    //============================================================
@@ -752,8 +716,8 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerNetinvestmentTotal(double value){
-      _customerNetinvestmentTotal = value;
+   public void setNetinvestmentTotal(double value){
+      _netinvestmentTotal = value;
    }
 
    //============================================================
@@ -761,8 +725,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerInterestTotalChanged(){
-      return __customerInterestTotal != _customerInterestTotal;
+   public boolean isInterestTotalChanged(){
+      return __interestTotal != _interestTotal;
    }
 
    //============================================================
@@ -770,8 +734,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public double customerInterestTotal(){
-      return _customerInterestTotal;
+   public double interestTotal(){
+      return _interestTotal;
    }
 
    //============================================================
@@ -779,8 +743,8 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerInterestTotal(double value){
-      _customerInterestTotal = value;
+   public void setInterestTotal(double value){
+      _interestTotal = value;
    }
 
    //============================================================
@@ -788,8 +752,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerPerformanceTotalChanged(){
-      return __customerPerformanceTotal != _customerPerformanceTotal;
+   public boolean isPerformanceTotalChanged(){
+      return __performanceTotal != _performanceTotal;
    }
 
    //============================================================
@@ -797,8 +761,8 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public double customerPerformanceTotal(){
-      return _customerPerformanceTotal;
+   public double performanceTotal(){
+      return _performanceTotal;
    }
 
    //============================================================
@@ -806,8 +770,143 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerPerformanceTotal(double value){
-      _customerPerformanceTotal = value;
+   public void setPerformanceTotal(double value){
+      _performanceTotal = value;
+   }
+
+   //============================================================
+   // <T>判断推荐评分的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isScoreRecommendChanged(){
+      return __scoreRecommend != _scoreRecommend;
+   }
+
+   //============================================================
+   // <T>获得推荐评分的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int scoreRecommend(){
+      return _scoreRecommend;
+   }
+
+   //============================================================
+   // <T>设置推荐评分的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setScoreRecommend(int value){
+      _scoreRecommend = value;
+   }
+
+   //============================================================
+   // <T>判断累计点数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isScorePointChanged(){
+      return __scorePoint != _scorePoint;
+   }
+
+   //============================================================
+   // <T>获得累计点数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int scorePoint(){
+      return _scorePoint;
+   }
+
+   //============================================================
+   // <T>设置累计点数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setScorePoint(int value){
+      _scorePoint = value;
+   }
+
+   //============================================================
+   // <T>判断注册时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRegisterDateChanged(){
+      return !__registerDate.equals(_registerDate);
+   }
+
+   //============================================================
+   // <T>获得注册时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime registerDate(){
+      return _registerDate;
+   }
+
+   //============================================================
+   // <T>设置注册时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRegisterDate(TDateTime value){
+      _registerDate = value;
+   }
+
+   //============================================================
+   // <T>判断最后登录时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLastLoginDateChanged(){
+      return !__lastLoginDate.equals(_lastLoginDate);
+   }
+
+   //============================================================
+   // <T>获得最后登录时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime lastLoginDate(){
+      return _lastLoginDate;
+   }
+
+   //============================================================
+   // <T>设置最后登录时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLastLoginDate(TDateTime value){
+      _lastLoginDate = value;
+   }
+
+   //============================================================
+   // <T>判断备注信息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNoteChanged(){
+      return !RString.equals(__note, _note);
+   }
+
+   //============================================================
+   // <T>获得备注信息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String note(){
+      return _note;
+   }
+
+   //============================================================
+   // <T>设置备注信息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNote(String value){
+      _note = value;
    }
 
    //============================================================
@@ -937,42 +1036,48 @@ public class FDataFinancialMarketerUnit
             return Long.toString(_userId);
          case "link_id":
             return Long.toString(_linkId);
-         case "passport":
-            return _passport;
+         case "name":
+            return _name;
          case "label":
             return _label;
-         case "status_cd":
-            return RInteger.toString(_statusCd);
          case "phone":
             return _phone;
          case "card":
             return _card;
-         case "rank_label":
-            return _rankLabel;
-         case "department_id":
-            return Long.toString(_departmentId);
-         case "department_label":
-            return _departmentLabel;
-         case "department_labels":
-            return _departmentLabels;
-         case "customer_investment_total":
-            return RDouble.toString(_customerInvestmentTotal);
-         case "customer_investment_count":
-            return RInteger.toString(_customerInvestmentCount);
-         case "customer_investment_date":
-            return _customerInvestmentDate.toString();
-         case "customer_redemption_total":
-            return RDouble.toString(_customerRedemptionTotal);
-         case "customer_redemption_count":
-            return RInteger.toString(_customerRedemptionCount);
-         case "customer_redemption_date":
-            return _customerRedemptionDate.toString();
-         case "customer_netinvestment_total":
-            return RDouble.toString(_customerNetinvestmentTotal);
-         case "customer_interest_total":
-            return RDouble.toString(_customerInterestTotal);
-         case "customer_performance_total":
-            return RDouble.toString(_customerPerformanceTotal);
+         case "email":
+            return _email;
+         case "gender_cd":
+            return RInteger.toString(_genderCd);
+         case "birthday":
+            return _birthday.toString();
+         case "investment_total":
+            return RDouble.toString(_investmentTotal);
+         case "investment_count":
+            return RInteger.toString(_investmentCount);
+         case "investment_date":
+            return _investmentDate.toString();
+         case "redemption_total":
+            return RDouble.toString(_redemptionTotal);
+         case "redemption_count":
+            return RInteger.toString(_redemptionCount);
+         case "redemption_date":
+            return _redemptionDate.toString();
+         case "netinvestment_total":
+            return RDouble.toString(_netinvestmentTotal);
+         case "interest_total":
+            return RDouble.toString(_interestTotal);
+         case "performance_total":
+            return RDouble.toString(_performanceTotal);
+         case "score_recommend":
+            return RInteger.toString(_scoreRecommend);
+         case "score_point":
+            return RInteger.toString(_scorePoint);
+         case "register_date":
+            return _registerDate.toString();
+         case "last_login_date":
+            return _lastLoginDate.toString();
+         case "note":
+            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -1010,14 +1115,11 @@ public class FDataFinancialMarketerUnit
          case "link_id":
             _linkId = RLong.parse(value);
             break;
-         case "passport":
-            _passport = value;
+         case "name":
+            _name = value;
             break;
          case "label":
             _label = value;
-            break;
-         case "status_cd":
-            _statusCd = RInteger.parse(value);
             break;
          case "phone":
             _phone = value;
@@ -1025,44 +1127,56 @@ public class FDataFinancialMarketerUnit
          case "card":
             _card = value;
             break;
-         case "rank_label":
-            _rankLabel = value;
+         case "email":
+            _email = value;
             break;
-         case "department_id":
-            _departmentId = RLong.parse(value);
+         case "gender_cd":
+            _genderCd = RInteger.parse(value);
             break;
-         case "department_label":
-            _departmentLabel = value;
+         case "birthday":
+            _birthday.parse(value);
             break;
-         case "department_labels":
-            _departmentLabels = value;
+         case "investment_total":
+            _investmentTotal = RDouble.parse(value);
             break;
-         case "customer_investment_total":
-            _customerInvestmentTotal = RDouble.parse(value);
+         case "investment_count":
+            _investmentCount = RInteger.parse(value);
             break;
-         case "customer_investment_count":
-            _customerInvestmentCount = RInteger.parse(value);
+         case "investment_date":
+            _investmentDate.parse(value);
             break;
-         case "customer_investment_date":
-            _customerInvestmentDate.parse(value);
+         case "redemption_total":
+            _redemptionTotal = RDouble.parse(value);
             break;
-         case "customer_redemption_total":
-            _customerRedemptionTotal = RDouble.parse(value);
+         case "redemption_count":
+            _redemptionCount = RInteger.parse(value);
             break;
-         case "customer_redemption_count":
-            _customerRedemptionCount = RInteger.parse(value);
+         case "redemption_date":
+            _redemptionDate.parse(value);
             break;
-         case "customer_redemption_date":
-            _customerRedemptionDate.parse(value);
+         case "netinvestment_total":
+            _netinvestmentTotal = RDouble.parse(value);
             break;
-         case "customer_netinvestment_total":
-            _customerNetinvestmentTotal = RDouble.parse(value);
+         case "interest_total":
+            _interestTotal = RDouble.parse(value);
             break;
-         case "customer_interest_total":
-            _customerInterestTotal = RDouble.parse(value);
+         case "performance_total":
+            _performanceTotal = RDouble.parse(value);
             break;
-         case "customer_performance_total":
-            _customerPerformanceTotal = RDouble.parse(value);
+         case "score_recommend":
+            _scoreRecommend = RInteger.parse(value);
+            break;
+         case "score_point":
+            _scorePoint = RInteger.parse(value);
+            break;
+         case "register_date":
+            _registerDate.parse(value);
+            break;
+         case "last_login_date":
+            _lastLoginDate.parse(value);
+            break;
+         case "note":
+            _note = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -1111,17 +1225,13 @@ public class FDataFinancialMarketerUnit
                __linkId = RLong.parse(value);
                _linkId = __linkId;
                break;
-            case "passport":
-               __passport = value;
-               _passport = __passport;
+            case "name":
+               __name = value;
+               _name = __name;
                break;
             case "label":
                __label = value;
                _label = __label;
-               break;
-            case "status_cd":
-               __statusCd = RInteger.parse(value);
-               _statusCd = __statusCd;
                break;
             case "phone":
                __phone = value;
@@ -1131,57 +1241,73 @@ public class FDataFinancialMarketerUnit
                __card = value;
                _card = __card;
                break;
-            case "rank_label":
-               __rankLabel = value;
-               _rankLabel = __rankLabel;
+            case "email":
+               __email = value;
+               _email = __email;
                break;
-            case "department_id":
-               __departmentId = RLong.parse(value);
-               _departmentId = __departmentId;
+            case "gender_cd":
+               __genderCd = RInteger.parse(value);
+               _genderCd = __genderCd;
                break;
-            case "department_label":
-               __departmentLabel = value;
-               _departmentLabel = __departmentLabel;
+            case "birthday":
+               __birthday.parse(value);
+               _birthday.assign(__birthday);
                break;
-            case "department_labels":
-               __departmentLabels = value;
-               _departmentLabels = __departmentLabels;
+            case "investment_total":
+               __investmentTotal = RDouble.parse(value);
+               _investmentTotal = __investmentTotal;
                break;
-            case "customer_investment_total":
-               __customerInvestmentTotal = RDouble.parse(value);
-               _customerInvestmentTotal = __customerInvestmentTotal;
+            case "investment_count":
+               __investmentCount = RInteger.parse(value);
+               _investmentCount = __investmentCount;
                break;
-            case "customer_investment_count":
-               __customerInvestmentCount = RInteger.parse(value);
-               _customerInvestmentCount = __customerInvestmentCount;
+            case "investment_date":
+               __investmentDate.parse(value);
+               _investmentDate.assign(__investmentDate);
                break;
-            case "customer_investment_date":
-               __customerInvestmentDate.parse(value);
-               _customerInvestmentDate.assign(__customerInvestmentDate);
+            case "redemption_total":
+               __redemptionTotal = RDouble.parse(value);
+               _redemptionTotal = __redemptionTotal;
                break;
-            case "customer_redemption_total":
-               __customerRedemptionTotal = RDouble.parse(value);
-               _customerRedemptionTotal = __customerRedemptionTotal;
+            case "redemption_count":
+               __redemptionCount = RInteger.parse(value);
+               _redemptionCount = __redemptionCount;
                break;
-            case "customer_redemption_count":
-               __customerRedemptionCount = RInteger.parse(value);
-               _customerRedemptionCount = __customerRedemptionCount;
+            case "redemption_date":
+               __redemptionDate.parse(value);
+               _redemptionDate.assign(__redemptionDate);
                break;
-            case "customer_redemption_date":
-               __customerRedemptionDate.parse(value);
-               _customerRedemptionDate.assign(__customerRedemptionDate);
+            case "netinvestment_total":
+               __netinvestmentTotal = RDouble.parse(value);
+               _netinvestmentTotal = __netinvestmentTotal;
                break;
-            case "customer_netinvestment_total":
-               __customerNetinvestmentTotal = RDouble.parse(value);
-               _customerNetinvestmentTotal = __customerNetinvestmentTotal;
+            case "interest_total":
+               __interestTotal = RDouble.parse(value);
+               _interestTotal = __interestTotal;
                break;
-            case "customer_interest_total":
-               __customerInterestTotal = RDouble.parse(value);
-               _customerInterestTotal = __customerInterestTotal;
+            case "performance_total":
+               __performanceTotal = RDouble.parse(value);
+               _performanceTotal = __performanceTotal;
                break;
-            case "customer_performance_total":
-               __customerPerformanceTotal = RDouble.parse(value);
-               _customerPerformanceTotal = __customerPerformanceTotal;
+            case "score_recommend":
+               __scoreRecommend = RInteger.parse(value);
+               _scoreRecommend = __scoreRecommend;
+               break;
+            case "score_point":
+               __scorePoint = RInteger.parse(value);
+               _scorePoint = __scorePoint;
+               break;
+            case "register_date":
+               __registerDate.parse(value);
+               _registerDate.assign(__registerDate);
+               break;
+            case "last_login_date":
+               __lastLoginDate.parse(value);
+               _lastLoginDate.assign(__lastLoginDate);
+               break;
+            case "note":
+               __note = value;
+               _note = __note;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -1216,24 +1342,27 @@ public class FDataFinancialMarketerUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("linkId", _linkId);
-      row.set("passport", _passport);
+      row.set("name", _name);
       row.set("label", _label);
-      row.set("statusCd", _statusCd);
       row.set("phone", _phone);
       row.set("card", _card);
-      row.set("rankLabel", _rankLabel);
-      row.set("departmentId", _departmentId);
-      row.set("departmentLabel", _departmentLabel);
-      row.set("departmentLabels", _departmentLabels);
-      row.set("customerInvestmentTotal", _customerInvestmentTotal);
-      row.set("customerInvestmentCount", _customerInvestmentCount);
-      row.set("customerInvestmentDate", _customerInvestmentDate);
-      row.set("customerRedemptionTotal", _customerRedemptionTotal);
-      row.set("customerRedemptionCount", _customerRedemptionCount);
-      row.set("customerRedemptionDate", _customerRedemptionDate);
-      row.set("customerNetinvestmentTotal", _customerNetinvestmentTotal);
-      row.set("customerInterestTotal", _customerInterestTotal);
-      row.set("customerPerformanceTotal", _customerPerformanceTotal);
+      row.set("email", _email);
+      row.set("genderCd", _genderCd);
+      row.set("birthday", _birthday);
+      row.set("investmentTotal", _investmentTotal);
+      row.set("investmentCount", _investmentCount);
+      row.set("investmentDate", _investmentDate);
+      row.set("redemptionTotal", _redemptionTotal);
+      row.set("redemptionCount", _redemptionCount);
+      row.set("redemptionDate", _redemptionDate);
+      row.set("netinvestmentTotal", _netinvestmentTotal);
+      row.set("interestTotal", _interestTotal);
+      row.set("performanceTotal", _performanceTotal);
+      row.set("scoreRecommend", _scoreRecommend);
+      row.set("scorePoint", _scorePoint);
+      row.set("registerDate", _registerDate);
+      row.set("lastLoginDate", _lastLoginDate);
+      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1253,24 +1382,27 @@ public class FDataFinancialMarketerUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("linkId", RLong.toString(_linkId));
-      map.put("passport", _passport);
+      map.put("name", _name);
       map.put("label", _label);
-      map.put("statusCd", RInteger.toString(_statusCd));
       map.put("phone", _phone);
       map.put("card", _card);
-      map.put("rankLabel", _rankLabel);
-      map.put("departmentId", RLong.toString(_departmentId));
-      map.put("departmentLabel", _departmentLabel);
-      map.put("departmentLabels", _departmentLabels);
-      map.put("customerInvestmentTotal", RDouble.toString(_customerInvestmentTotal));
-      map.put("customerInvestmentCount", RInteger.toString(_customerInvestmentCount));
-      map.put("customerInvestmentDate", _customerInvestmentDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("customerRedemptionTotal", RDouble.toString(_customerRedemptionTotal));
-      map.put("customerRedemptionCount", RInteger.toString(_customerRedemptionCount));
-      map.put("customerRedemptionDate", _customerRedemptionDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("customerNetinvestmentTotal", RDouble.toString(_customerNetinvestmentTotal));
-      map.put("customerInterestTotal", RDouble.toString(_customerInterestTotal));
-      map.put("customerPerformanceTotal", RDouble.toString(_customerPerformanceTotal));
+      map.put("email", _email);
+      map.put("genderCd", RInteger.toString(_genderCd));
+      map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("investmentCount", RInteger.toString(_investmentCount));
+      map.put("investmentDate", _investmentDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("redemptionCount", RInteger.toString(_redemptionCount));
+      map.put("redemptionDate", _redemptionDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("interestTotal", RDouble.toString(_interestTotal));
+      map.put("performanceTotal", RDouble.toString(_performanceTotal));
+      map.put("scoreRecommend", RInteger.toString(_scoreRecommend));
+      map.put("scorePoint", RInteger.toString(_scorePoint));
+      map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("lastLoginDate", _lastLoginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -1290,19 +1422,22 @@ public class FDataFinancialMarketerUnit
       _guid = input.readString();
       _userId = input.readInt64();
       _linkId = input.readInt64();
-      _passport = input.readString();
+      _name = input.readString();
       _label = input.readString();
-      _statusCd = input.readInt32();
       _phone = input.readString();
       _card = input.readString();
-      _rankLabel = input.readString();
-      _departmentId = input.readInt64();
-      _departmentLabel = input.readString();
-      _departmentLabels = input.readString();
-      _customerInvestmentCount = input.readInt32();
-      _customerInvestmentDate.set(input.readInt64());
-      _customerRedemptionCount = input.readInt32();
-      _customerRedemptionDate.set(input.readInt64());
+      _email = input.readString();
+      _genderCd = input.readInt32();
+      _birthday.set(input.readInt64());
+      _investmentCount = input.readInt32();
+      _investmentDate.set(input.readInt64());
+      _redemptionCount = input.readInt32();
+      _redemptionDate.set(input.readInt64());
+      _scoreRecommend = input.readInt32();
+      _scorePoint = input.readInt32();
+      _registerDate.set(input.readInt64());
+      _lastLoginDate.set(input.readInt64());
+      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -1322,19 +1457,22 @@ public class FDataFinancialMarketerUnit
       output.writeString(_guid);
       output.writeInt64(_userId);
       output.writeInt64(_linkId);
-      output.writeString(_passport);
+      output.writeString(_name);
       output.writeString(_label);
-      output.writeInt32(_statusCd);
       output.writeString(_phone);
       output.writeString(_card);
-      output.writeString(_rankLabel);
-      output.writeInt64(_departmentId);
-      output.writeString(_departmentLabel);
-      output.writeString(_departmentLabels);
-      output.writeInt32(_customerInvestmentCount);
-      output.writeInt64(_customerInvestmentDate.get());
-      output.writeInt32(_customerRedemptionCount);
-      output.writeInt64(_customerRedemptionDate.get());
+      output.writeString(_email);
+      output.writeInt32(_genderCd);
+      output.writeInt64(_birthday.get());
+      output.writeInt32(_investmentCount);
+      output.writeInt64(_investmentDate.get());
+      output.writeInt32(_redemptionCount);
+      output.writeInt64(_redemptionDate.get());
+      output.writeInt32(_scoreRecommend);
+      output.writeInt32(_scorePoint);
+      output.writeInt64(_registerDate.get());
+      output.writeInt64(_lastLoginDate.get());
+      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

@@ -21,17 +21,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>金融理财师信息逻辑。</T>
+// <T>金融成员信息逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialMarketerLogic
+public class FDataFinancialMemberLogic
       extends FLogicTable
 {
-   // 金融理财师信息的定义。
+   // 金融成员信息的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 金融理财师信息的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.financial.marketer", "DT_FIN_MARKETER");
+   // 金融成员信息的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.financial.member", "DT_FIN_MEMBER");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -48,59 +48,68 @@ public class FDataFinancialMarketerLogic
    // 字段关联编号的定义。
    public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
-   // 字段登录名的定义。
-   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
+   // 字段名称的定义。
+   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
 
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段状态的定义。
-   public final static SLogicFieldInfo STATUS_CD = new SLogicFieldInfo("STATUS_CD");
-
    // 字段电话号码的定义。
    public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
 
-   // 字段身份证的定义。
+   // 字段身份证号的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
 
-   // 字段职务标签的定义。
-   public final static SLogicFieldInfo RANK_LABEL = new SLogicFieldInfo("RANK_LABEL");
+   // 字段电子邮箱的定义。
+   public final static SLogicFieldInfo EMAIL = new SLogicFieldInfo("EMAIL");
 
-   // 字段部门编号的定义。
-   public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
+   // 字段性别的定义。
+   public final static SLogicFieldInfo GENDER_CD = new SLogicFieldInfo("GENDER_CD");
 
-   // 字段直属部门标签的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
+   // 字段生日的定义。
+   public final static SLogicFieldInfo BIRTHDAY = new SLogicFieldInfo("BIRTHDAY");
 
-   // 字段部门标签集合的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
+   // 字段投资总额的定义。
+   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
-   // 字段客户投资总额的定义。
-   public final static SLogicFieldInfo CUSTOMER_INVESTMENT_TOTAL = new SLogicFieldInfo("CUSTOMER_INVESTMENT_TOTAL");
-
-   // 字段客户投资次数的定义。
-   public final static SLogicFieldInfo CUSTOMER_INVESTMENT_COUNT = new SLogicFieldInfo("CUSTOMER_INVESTMENT_COUNT");
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
 
    // 字段投资时间的定义。
-   public final static SLogicFieldInfo CUSTOMER_INVESTMENT_DATE = new SLogicFieldInfo("CUSTOMER_INVESTMENT_DATE");
+   public final static SLogicFieldInfo INVESTMENT_DATE = new SLogicFieldInfo("INVESTMENT_DATE");
 
    // 字段赎回总额的定义。
-   public final static SLogicFieldInfo CUSTOMER_REDEMPTION_TOTAL = new SLogicFieldInfo("CUSTOMER_REDEMPTION_TOTAL");
+   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
 
    // 字段赎回次数的定义。
-   public final static SLogicFieldInfo CUSTOMER_REDEMPTION_COUNT = new SLogicFieldInfo("CUSTOMER_REDEMPTION_COUNT");
+   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
 
    // 字段赎回时间的定义。
-   public final static SLogicFieldInfo CUSTOMER_REDEMPTION_DATE = new SLogicFieldInfo("CUSTOMER_REDEMPTION_DATE");
+   public final static SLogicFieldInfo REDEMPTION_DATE = new SLogicFieldInfo("REDEMPTION_DATE");
 
    // 字段净投总额的定义。
-   public final static SLogicFieldInfo CUSTOMER_NETINVESTMENT_TOTAL = new SLogicFieldInfo("CUSTOMER_NETINVESTMENT_TOTAL");
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
    // 字段利息总额的定义。
-   public final static SLogicFieldInfo CUSTOMER_INTEREST_TOTAL = new SLogicFieldInfo("CUSTOMER_INTEREST_TOTAL");
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
 
    // 字段业绩总额的定义。
-   public final static SLogicFieldInfo CUSTOMER_PERFORMANCE_TOTAL = new SLogicFieldInfo("CUSTOMER_PERFORMANCE_TOTAL");
+   public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
+
+   // 字段推荐评分的定义。
+   public final static SLogicFieldInfo SCORE_RECOMMEND = new SLogicFieldInfo("SCORE_RECOMMEND");
+
+   // 字段累计点数的定义。
+   public final static SLogicFieldInfo SCORE_POINT = new SLogicFieldInfo("SCORE_POINT");
+
+   // 字段注册时间的定义。
+   public final static SLogicFieldInfo REGISTER_DATE = new SLogicFieldInfo("REGISTER_DATE");
+
+   // 字段最后登录时间的定义。
+   public final static SLogicFieldInfo LAST_LOGIN_DATE = new SLogicFieldInfo("LAST_LOGIN_DATE");
+
+   // 字段备注信息的定义。
+   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -115,25 +124,25 @@ public class FDataFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`PASSPORT`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABELS`,`CUSTOMER_INVESTMENT_TOTAL`,`CUSTOMER_INVESTMENT_COUNT`,`CUSTOMER_INVESTMENT_DATE`,`CUSTOMER_REDEMPTION_TOTAL`,`CUSTOMER_REDEMPTION_COUNT`,`CUSTOMER_REDEMPTION_DATE`,`CUSTOMER_NETINVESTMENT_TOTAL`,`CUSTOMER_INTEREST_TOTAL`,`CUSTOMER_PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`NAME`,`LABEL`,`PHONE`,`CARD`,`EMAIL`,`GENDER_CD`,`BIRTHDAY`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`INVESTMENT_DATE`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_DATE`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`SCORE_RECOMMEND`,`SCORE_POINT`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造金融理财师信息逻辑单元。</T>
+   // <T>构造金融成员信息逻辑单元。</T>
    //============================================================
-   public FDataFinancialMarketerLogic(){
+   public FDataFinancialMemberLogic(){
       _name = TABLE.name();
-      _classUnit = FDataFinancialMarketerUnit.class;
+      _classUnit = FDataFinancialMemberUnit.class;
    }
 
    //============================================================
-   // <T>构造金融理财师信息逻辑单元。</T>
+   // <T>构造金融成员信息逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataFinancialMarketerLogic(ILogicContext context){
+   public FDataFinancialMemberLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataFinancialMarketerUnit.class;
+      _classUnit = FDataFinancialMemberUnit.class;
    }
 
    //============================================================
@@ -267,7 +276,7 @@ public class FDataFinancialMarketerLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataFinancialMarketerUnit());
+            unit = (T)(new FDataFinancialMemberUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -283,8 +292,8 @@ public class FDataFinancialMarketerLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataFinancialMarketerUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataFinancialMarketerUnit.class, guid);
+   public FDataFinancialMemberUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataFinancialMemberUnit.class, guid);
    }
 
    //============================================================
@@ -322,8 +331,8 @@ public class FDataFinancialMarketerLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataFinancialMarketerUnit search(CharSequence whereSql){
-      return search(null, FDataFinancialMarketerUnit.class, whereSql);
+   public FDataFinancialMemberUnit search(CharSequence whereSql){
+      return search(null, FDataFinancialMemberUnit.class, whereSql);
    }
 
    //============================================================
@@ -360,7 +369,7 @@ public class FDataFinancialMarketerLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -371,8 +380,8 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(int pageSize,
+                                                        int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -384,9 +393,9 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(CharSequence whereSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(CharSequence whereSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -399,8 +408,8 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(CharSequence whereSql,
-                                                          CharSequence orderSql){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(CharSequence whereSql,
+                                                        CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -413,10 +422,10 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(CharSequence whereSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(CharSequence whereSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -430,11 +439,11 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(CharSequence fields,
-                                                          CharSequence whereSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(CharSequence fields,
+                                                        CharSequence whereSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -448,12 +457,12 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetch(CharSequence fields,
-                                                          CharSequence whereSql,
-                                                          CharSequence groupSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FDataFinancialMemberUnit> fetch(CharSequence fields,
+                                                        CharSequence whereSql,
+                                                        CharSequence groupSql,
+                                                        CharSequence orderSql,
+                                                        int pageSize,
+                                                        int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -594,10 +603,10 @@ public class FDataFinancialMarketerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetchSql(CharSequence code,
-                                                             CharSequence sql,
-                                                             int pageSize,
-                                                             int page){
+   public FLogicDataset<FDataFinancialMemberUnit> fetchSql(CharSequence code,
+                                                           CharSequence sql,
+                                                           int pageSize,
+                                                           int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -622,7 +631,7 @@ public class FDataFinancialMarketerLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataFinancialMarketerUnit>(FDataFinancialMarketerUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataFinancialMemberUnit>(FDataFinancialMemberUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -635,7 +644,7 @@ public class FDataFinancialMarketerLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialMarketerUnit> fetchAll(){
+   public FLogicDataset<FDataFinancialMemberUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -648,8 +657,8 @@ public class FDataFinancialMarketerLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataFinancialMarketerUnit doPrepare(){
-      FDataFinancialMarketerUnit unit = new FDataFinancialMarketerUnit();
+   public FDataFinancialMemberUnit doPrepare(){
+      FDataFinancialMemberUnit unit = new FDataFinancialMemberUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -676,7 +685,7 @@ public class FDataFinancialMarketerLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataFinancialMarketerUnit unit = (FDataFinancialMarketerUnit)logicUnit;
+      FDataFinancialMemberUnit unit = (FDataFinancialMemberUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -690,7 +699,7 @@ public class FDataFinancialMarketerLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataFinancialMarketerUnit unit = (FDataFinancialMarketerUnit)logicUnit;
+      FDataFinancialMemberUnit unit = (FDataFinancialMemberUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -709,24 +718,27 @@ public class FDataFinancialMarketerLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`LINK_ID`");
-      cmd.append(",`PASSPORT`");
+      cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
-      cmd.append(",`STATUS_CD`");
       cmd.append(",`PHONE`");
       cmd.append(",`CARD`");
-      cmd.append(",`RANK_LABEL`");
-      cmd.append(",`DEPARTMENT_ID`");
-      cmd.append(",`DEPARTMENT_LABEL`");
-      cmd.append(",`DEPARTMENT_LABELS`");
-      cmd.append(",`CUSTOMER_INVESTMENT_TOTAL`");
-      cmd.append(",`CUSTOMER_INVESTMENT_COUNT`");
-      cmd.append(",`CUSTOMER_INVESTMENT_DATE`");
-      cmd.append(",`CUSTOMER_REDEMPTION_TOTAL`");
-      cmd.append(",`CUSTOMER_REDEMPTION_COUNT`");
-      cmd.append(",`CUSTOMER_REDEMPTION_DATE`");
-      cmd.append(",`CUSTOMER_NETINVESTMENT_TOTAL`");
-      cmd.append(",`CUSTOMER_INTEREST_TOTAL`");
-      cmd.append(",`CUSTOMER_PERFORMANCE_TOTAL`");
+      cmd.append(",`EMAIL`");
+      cmd.append(",`GENDER_CD`");
+      cmd.append(",`BIRTHDAY`");
+      cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`INVESTMENT_COUNT`");
+      cmd.append(",`INVESTMENT_DATE`");
+      cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`REDEMPTION_COUNT`");
+      cmd.append(",`REDEMPTION_DATE`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`PERFORMANCE_TOTAL`");
+      cmd.append(",`SCORE_RECOMMEND`");
+      cmd.append(",`SCORE_POINT`");
+      cmd.append(",`REGISTER_DATE`");
+      cmd.append(",`LAST_LOGIN_DATE`");
+      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -756,12 +768,12 @@ public class FDataFinancialMarketerLogic
          cmd.append(linkId);
       }
       cmd.append(',');
-      String passport = unit.passport();
-      if(RString.isEmpty(passport)){
+      String name = unit.name();
+      if(RString.isEmpty(name)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(passport));
+         cmd.append(RSql.formatValue(name));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -773,8 +785,6 @@ public class FDataFinancialMarketerLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
-      cmd.append(',');
-      cmd.append(unit.statusCd());
       cmd.append(',');
       String phone = unit.phone();
       if(RString.isEmpty(phone)){
@@ -794,75 +804,98 @@ public class FDataFinancialMarketerLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String rankLabel = unit.rankLabel();
-      if(RString.isEmpty(rankLabel)){
+      String email = unit.email();
+      if(RString.isEmpty(email)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(rankLabel));
+         cmd.append(RSql.formatValue(email));
          cmd.append('\'');
       }
       cmd.append(',');
-      long departmentId = unit.departmentId();
-      if(departmentId == 0){
+      cmd.append(unit.genderCd());
+      cmd.append(',');
+      TDateTime birthday = unit.birthday();
+      if(birthday == null){
          cmd.append("NULL");
-      }else{
-         cmd.append(departmentId);
-      }
-      cmd.append(',');
-      String departmentLabel = unit.departmentLabel();
-      if(RString.isEmpty(departmentLabel)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(departmentLabel));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String departmentLabels = unit.departmentLabels();
-      if(RString.isEmpty(departmentLabels)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(departmentLabels));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.customerInvestmentTotal());
-      cmd.append(',');
-      cmd.append(unit.customerInvestmentCount());
-      cmd.append(',');
-      TDateTime customerInvestmentDate = unit.customerInvestmentDate();
-      if(customerInvestmentDate == null){
-         cmd.append("NULL");
-      }else if(customerInvestmentDate.isEmpty()){
+      }else if(birthday.isEmpty()){
          cmd.append("NULL");
       }else{
          cmd.append("STR_TO_DATE('");
-         cmd.append(customerInvestmentDate.format());
+         cmd.append(birthday.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      cmd.append(unit.customerRedemptionTotal());
+      cmd.append(unit.investmentTotal());
       cmd.append(',');
-      cmd.append(unit.customerRedemptionCount());
+      cmd.append(unit.investmentCount());
       cmd.append(',');
-      TDateTime customerRedemptionDate = unit.customerRedemptionDate();
-      if(customerRedemptionDate == null){
+      TDateTime investmentDate = unit.investmentDate();
+      if(investmentDate == null){
          cmd.append("NULL");
-      }else if(customerRedemptionDate.isEmpty()){
+      }else if(investmentDate.isEmpty()){
          cmd.append("NULL");
       }else{
          cmd.append("STR_TO_DATE('");
-         cmd.append(customerRedemptionDate.format());
+         cmd.append(investmentDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      cmd.append(unit.customerNetinvestmentTotal());
+      cmd.append(unit.redemptionTotal());
       cmd.append(',');
-      cmd.append(unit.customerInterestTotal());
+      cmd.append(unit.redemptionCount());
       cmd.append(',');
-      cmd.append(unit.customerPerformanceTotal());
+      TDateTime redemptionDate = unit.redemptionDate();
+      if(redemptionDate == null){
+         cmd.append("NULL");
+      }else if(redemptionDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.netinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
+      cmd.append(',');
+      cmd.append(unit.performanceTotal());
+      cmd.append(',');
+      cmd.append(unit.scoreRecommend());
+      cmd.append(',');
+      cmd.append(unit.scorePoint());
+      cmd.append(',');
+      TDateTime registerDate = unit.registerDate();
+      if(registerDate == null){
+         cmd.append("NULL");
+      }else if(registerDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(registerDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime lastLoginDate = unit.lastLoginDate();
+      if(lastLoginDate == null){
+         cmd.append("NULL");
+      }else if(lastLoginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(lastLoginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      String note = unit.note();
+      if(RString.isEmpty(note)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(note));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -898,7 +931,7 @@ public class FDataFinancialMarketerLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataFinancialMarketerUnit unit = (FDataFinancialMarketerUnit)logicUnit;
+      FDataFinancialMemberUnit unit = (FDataFinancialMemberUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -917,7 +950,7 @@ public class FDataFinancialMarketerLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataFinancialMarketerUnit unit = (FDataFinancialMarketerUnit)logicUnit;
+      FDataFinancialMemberUnit unit = (FDataFinancialMemberUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -955,14 +988,14 @@ public class FDataFinancialMarketerLogic
             cmd.append(linkId);
          }
       }
-      if(unit.isPassportChanged()){
-         cmd.append(",`PASSPORT`=");
-         String passport = unit.passport();
-         if(RString.isEmpty(passport)){
+      if(unit.isNameChanged()){
+         cmd.append(",`NAME`=");
+         String name = unit.name();
+         if(RString.isEmpty(name)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(passport));
+            cmd.append(RSql.formatValue(name));
             cmd.append('\'');
          }
       }
@@ -976,10 +1009,6 @@ public class FDataFinancialMarketerLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
-      }
-      if(unit.isStatusCdChanged()){
-         cmd.append(",`STATUS_CD`=");
-         cmd.append(unit.statusCd());
       }
       if(unit.isPhoneChanged()){
          cmd.append(",`PHONE`=");
@@ -1003,101 +1032,132 @@ public class FDataFinancialMarketerLogic
             cmd.append('\'');
          }
       }
-      if(unit.isRankLabelChanged()){
-         cmd.append(",`RANK_LABEL`=");
-         String rankLabel = unit.rankLabel();
-         if(RString.isEmpty(rankLabel)){
+      if(unit.isEmailChanged()){
+         cmd.append(",`EMAIL`=");
+         String email = unit.email();
+         if(RString.isEmpty(email)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(rankLabel));
+            cmd.append(RSql.formatValue(email));
             cmd.append('\'');
          }
       }
-      if(unit.isDepartmentIdChanged()){
-         cmd.append(",`DEPARTMENT_ID`=");
-         long departmentId = unit.departmentId();
-         if(departmentId == 0){
+      if(unit.isGenderCdChanged()){
+         cmd.append(",`GENDER_CD`=");
+         cmd.append(unit.genderCd());
+      }
+      if(unit.isBirthdayChanged()){
+         cmd.append(",`BIRTHDAY`=");
+         TDateTime birthday = unit.birthday();
+         if(birthday == null){
             cmd.append("NULL");
-         }else{
-            cmd.append(departmentId);
-         }
-      }
-      if(unit.isDepartmentLabelChanged()){
-         cmd.append(",`DEPARTMENT_LABEL`=");
-         String departmentLabel = unit.departmentLabel();
-         if(RString.isEmpty(departmentLabel)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(departmentLabel));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isDepartmentLabelsChanged()){
-         cmd.append(",`DEPARTMENT_LABELS`=");
-         String departmentLabels = unit.departmentLabels();
-         if(RString.isEmpty(departmentLabels)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(departmentLabels));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isCustomerInvestmentTotalChanged()){
-         cmd.append(",`CUSTOMER_INVESTMENT_TOTAL`=");
-         cmd.append(unit.customerInvestmentTotal());
-      }
-      if(unit.isCustomerInvestmentCountChanged()){
-         cmd.append(",`CUSTOMER_INVESTMENT_COUNT`=");
-         cmd.append(unit.customerInvestmentCount());
-      }
-      if(unit.isCustomerInvestmentDateChanged()){
-         cmd.append(",`CUSTOMER_INVESTMENT_DATE`=");
-         TDateTime customerInvestmentDate = unit.customerInvestmentDate();
-         if(customerInvestmentDate == null){
-            cmd.append("NULL");
-         }else if(customerInvestmentDate.isEmpty()){
+         }else if(birthday.isEmpty()){
             cmd.append("NULL");
          }else{
             cmd.append("STR_TO_DATE('");
-            cmd.append(customerInvestmentDate.format());
+            cmd.append(birthday.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isCustomerRedemptionTotalChanged()){
-         cmd.append(",`CUSTOMER_REDEMPTION_TOTAL`=");
-         cmd.append(unit.customerRedemptionTotal());
+      if(unit.isInvestmentTotalChanged()){
+         cmd.append(",`INVESTMENT_TOTAL`=");
+         cmd.append(unit.investmentTotal());
       }
-      if(unit.isCustomerRedemptionCountChanged()){
-         cmd.append(",`CUSTOMER_REDEMPTION_COUNT`=");
-         cmd.append(unit.customerRedemptionCount());
+      if(unit.isInvestmentCountChanged()){
+         cmd.append(",`INVESTMENT_COUNT`=");
+         cmd.append(unit.investmentCount());
       }
-      if(unit.isCustomerRedemptionDateChanged()){
-         cmd.append(",`CUSTOMER_REDEMPTION_DATE`=");
-         TDateTime customerRedemptionDate = unit.customerRedemptionDate();
-         if(customerRedemptionDate == null){
+      if(unit.isInvestmentDateChanged()){
+         cmd.append(",`INVESTMENT_DATE`=");
+         TDateTime investmentDate = unit.investmentDate();
+         if(investmentDate == null){
             cmd.append("NULL");
-         }else if(customerRedemptionDate.isEmpty()){
+         }else if(investmentDate.isEmpty()){
             cmd.append("NULL");
          }else{
             cmd.append("STR_TO_DATE('");
-            cmd.append(customerRedemptionDate.format());
+            cmd.append(investmentDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isCustomerNetinvestmentTotalChanged()){
-         cmd.append(",`CUSTOMER_NETINVESTMENT_TOTAL`=");
-         cmd.append(unit.customerNetinvestmentTotal());
+      if(unit.isRedemptionTotalChanged()){
+         cmd.append(",`REDEMPTION_TOTAL`=");
+         cmd.append(unit.redemptionTotal());
       }
-      if(unit.isCustomerInterestTotalChanged()){
-         cmd.append(",`CUSTOMER_INTEREST_TOTAL`=");
-         cmd.append(unit.customerInterestTotal());
+      if(unit.isRedemptionCountChanged()){
+         cmd.append(",`REDEMPTION_COUNT`=");
+         cmd.append(unit.redemptionCount());
       }
-      if(unit.isCustomerPerformanceTotalChanged()){
-         cmd.append(",`CUSTOMER_PERFORMANCE_TOTAL`=");
-         cmd.append(unit.customerPerformanceTotal());
+      if(unit.isRedemptionDateChanged()){
+         cmd.append(",`REDEMPTION_DATE`=");
+         TDateTime redemptionDate = unit.redemptionDate();
+         if(redemptionDate == null){
+            cmd.append("NULL");
+         }else if(redemptionDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
+      }
+      if(unit.isPerformanceTotalChanged()){
+         cmd.append(",`PERFORMANCE_TOTAL`=");
+         cmd.append(unit.performanceTotal());
+      }
+      if(unit.isScoreRecommendChanged()){
+         cmd.append(",`SCORE_RECOMMEND`=");
+         cmd.append(unit.scoreRecommend());
+      }
+      if(unit.isScorePointChanged()){
+         cmd.append(",`SCORE_POINT`=");
+         cmd.append(unit.scorePoint());
+      }
+      if(unit.isRegisterDateChanged()){
+         cmd.append(",`REGISTER_DATE`=");
+         TDateTime registerDate = unit.registerDate();
+         if(registerDate == null){
+            cmd.append("NULL");
+         }else if(registerDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(registerDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isLastLoginDateChanged()){
+         cmd.append(",`LAST_LOGIN_DATE`=");
+         TDateTime lastLoginDate = unit.lastLoginDate();
+         if(lastLoginDate == null){
+            cmd.append("NULL");
+         }else if(lastLoginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(lastLoginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isNoteChanged()){
+         cmd.append(",`NOTE`=");
+         String note = unit.note();
+         if(RString.isEmpty(note)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(note));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
@@ -1119,7 +1179,7 @@ public class FDataFinancialMarketerLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataFinancialMarketerUnit unit = (FDataFinancialMarketerUnit)logicUnit;
+      FDataFinancialMemberUnit unit = (FDataFinancialMemberUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

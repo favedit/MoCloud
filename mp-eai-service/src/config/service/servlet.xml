@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
+
    <!-- ============================================================ -->
    <!-- 统计动态数据处理                                             -->
    <!-- ============================================================ -->
@@ -88,7 +89,7 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
-   <!-- 公司-公司数据统计                                          -->
+   <!-- 公司-公司数据统计                                            -->
    <!-- ============================================================ -->
    <WebServlet
          name  = 'eai.financial.department.department'
@@ -97,6 +98,18 @@
    <Component
          face  = 'com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'
          class = 'com.ahyc.eai.service.financial.department.FStatisticsDepartmentServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
+   <!-- 公司-业绩数据统计                                            -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.achievement'
+         face  = 'com.ahyc.eai.service.financial.achievement.IStatisticsAchievementServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.achievement.IStatisticsAchievementServlet'
+         class = 'com.ahyc.eai.service.financial.achievement.FStatisticsAchievementServlet'
          scope = 'global'/>
 
 </Config>
