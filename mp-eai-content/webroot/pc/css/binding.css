@@ -109,7 +109,7 @@ body{
 	float:right;
 	font-size: 16px;
 	position: relative;
-	
+	cursor: pointer;
 }
 .user-details{
 	display:inline-block;
@@ -181,48 +181,47 @@ body{
 }
 .head-right .img-details img{
 	width: 100%;
-	cursor:default;
 }
+
 .users{
 	position: absolute;
 	display: none;
-	right: 75px;
+	right: 2px;
 	cursor:pointer;
 	z-index: 2;
 	top:85px;
-	width: 104px;
+	width: 154px;
+	text-align: center;
 }
 .return{
 	min-width: 68px;
 }
 .users li.binding a{
 	background-image: url(../images/main/new2.png);
-	-moz-background-size: 16px;     
-	-webkit-background-size: 16px;;      
-	-o-background-size: 16px; 
-	background-size: 16px;;    
-	background-position: 8px center;
+	-moz-background-size: 30px;     
+	-webkit-background-size: 30px;;      
+	-o-background-size: 30px; 
+	background-size: 30px;;    
+	background-position: 10px center;
 	background-repeat: no-repeat;
 }
 .users li a{
 	color:#ff8e0a;
-	padding: 10px 10px 10px 30px;
+	padding: 18px 10px 18px 50px;
 	display: block;
 }
 .users li a.exit{
 	background-image: url(../images/main/new10.png);
-	background-position: 8px center;
+	background-position: 10px center;
 	background-repeat: no-repeat;
-	background-size: 16px;
+	background-size: 30px;
 }
 .users li{
 	background-image:url(../images/main/new5.png);
 	background-repeat: no-repeat;
-	/*background-position: 10px center;*/
 	color:#ff8e0a;
-	/*background-color:  #fff;*/
-    background-size: 105px 42px;
-	font-size: 16px;
+    background-size: 152px 61px;
+	font-size: 18px;
 }
 .users li:hover{
 	background-image:url(../images/main/new6.png);
@@ -385,30 +384,29 @@ body{
 
 	.user-details{
 		height: 70px;
-		line-height: 55px;
+		line-height: 70px;
 	}
 	.user-details img {
-	position: absolute;
-	top:23px;
-	right: -6px;
+		position: absolute;
+		top:28px;
+		right: -6px;
 	}
 	.head-right b {
-	display: block;
-	width: 44px;
-	height: 44px;
-	position: absolute;
-	top: 5px;
-	right: 28px;
+		display: block;
+		width: 44px;
+		height: 44px;
+		position: absolute;
+		top: 10px;
+		right: 28px;
 	}
 	.head-right .img-details{
-	width: 40px;
-	height: 40px;
-	border-radius: 20px;
-	overflow: hidden;
-	display: inline-block;
-	top: 7px;
-	right: 10px;
-
+		width: 40px;
+		height: 40px;
+		border-radius: 20px;
+		overflow: hidden;
+		display: inline-block;
+		top: 12px;
+		right: 10px;
 	}
 }
 

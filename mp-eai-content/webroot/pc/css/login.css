@@ -129,14 +129,14 @@ body{
   background-size: 264px;
 }
 .btn-container:active{
-  top: 11px;
-  right: -51px;
-   top: 19px\0;
-  display: block;
-   background-image: url(../images/3.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 264px;
+	top: 11px;
+	right: -51px;
+	top: 19px\0;
+	display: block;
+	background-image: url(../images/3.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 264px;
 }
 .btn-container input{
 	width: 100%;

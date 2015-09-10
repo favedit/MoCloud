@@ -8,6 +8,7 @@
      var index = 0;
      var $imagDetails = $(".imag-details");
      var $userDetails = $("#user-details");
+     var $headRight = $(".head-right");
      var $users = $("#users");
      var $container = $("#container_details");
      var $containerDetails = $("#container_details ul li");
@@ -51,16 +52,14 @@
      var totalLe = Math.round(totalHeight/indexH);
       
      ctrl.setRolling = function(index) {
-        var ls = imgL - totalLe;
-        console.log(ls)
-        if( index <= ls){
-        var h = -index * indexH;
-            console.log(index+".."+indexH);
-            $imagContainers.animate({
-                top: h 
-            });
-        }
-       
+        // var ls = imgL - totalLe;
+        // if( index <= ls){
+        // var h = -index * indexH;
+        //     console.log(index+".."+indexH);
+        //     $imagContainers.animate({
+        //         top: h 
+        //     });
+        // }
 
         $containerDetails.eq(index).show().siblings().hide();
         $containersImg.eq(index).addClass('on').siblings().removeClass('on');
@@ -81,13 +80,11 @@
      $containerDetails.mouseleave(function() {
         ctrl.setTimer();
      });
-
-
-
-     $userDetails.mouseenter(function(event) {
+     // $userDetails
+     $headRight.mouseenter(function(event) {
         $users.show();
      });
-     $userDetails.mouseleave(function(event) {
+     $headRight.mouseleave(function(event) {
         $users.hide();
      });
      $users.mouseleave(function(event) {

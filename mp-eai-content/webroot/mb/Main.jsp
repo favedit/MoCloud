@@ -56,7 +56,7 @@
                               <img src="../pc/images/main/3-3.png">
                               <img class="cover" src="images/main/3.png"/>
                            </li>
-                           <p>全球实时投资数据展示中心</p>
+                           <p>用户投资实时展示中心</p>
                         </ul>
                       </je:authority>
                      <je:authority module='eai.marketer.marketer'>
@@ -65,7 +65,7 @@
                               <img class="cover" src="images/main/3.png"/>
                               <img src="../pc/images/main/1-1.PNG">
                            </li>
-                            <p class="icon2">理财师排行实时投资数据展示</p>
+                            <p class="icon2">理财师排行实时展示中心</p>
                         </ul>
                      </je:authority>
                      <je:authority module='eai.department.marketer'>
@@ -74,7 +74,7 @@
                               <img class="cover" src="images/main/3.png"/>
                               <img src="../pc/images/main/2-2.png">
                            </li>
-                           <p class="icon3">理财师管理实时投资数据展示</p>
+                           <p class="icon3">理财师管理实时展示中心</p>
                         </ul> 
                      </je:authority>
                   </div>
