@@ -1,79 +1,93 @@
 <%@ include file='/apl/public.inc' %>
+<jh:define source="&page.unit" alias="unit"></jh:define>
    <HTML>
 
    <HEAD>
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
-      <script>
-         $(function() {
-            doSubmit(null);
-            var pager = $('#config').datagrid().datagrid('getPager');
-            pager.pagination({
-               pageSize: 20,
-               showPageList: false,
-               onSelectPage: function(pageNumber) {
-                  doSubmit(pageNumber);
-               }
-            });
-         });
-
-         function doSubmit(page) {
+   </HEAD>
+   <script>
+      function submitForm() {
+       
+            if (!isValid()) return;
             progress();
-            var url = "/product/configration/Configration.wa?do=select&date=" + new Date().valueOf();
-            var data = null;
-            if (page != null) {
-               url = "/product/configration/Configration.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
-               data = {
-                  "label": $('#label').val(),
-                  "page": page
-               };
-            }
+            var url = "/product/configration/Configration.wa?do=update&date=" + new Date().valueOf();
+            var data = {
+               "configInfoId": $('#configInfoId').val(),
+               "code": $('#code').val(),
+               "label": $('#label').val(),
+               "dataType": $('#dataType').val(),
+               "dataValue": $('#dataValue').val(),
+               "note": $('#note').val()
+            };
             $.ajax({
                type: "POST",
                url: url,
-               data: "",
+               data: data,
                success: function(msg) {
                   closeProgress();
-                  $('#config').datagrid('loadData', toJsonObject(msg));
+                  var result = toJsonObject(msg);
+                     location.href = "/product/configration/Configration.wa";
                },
                fail: function() {
                   closeProgress();
                   alert("error");
                }
             });
-         }
+      }
+   </script>
 
-         function infoButton(value, row, index) {
-            var edit = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="rowInfo(\'' + row.ouid + '\')"><span class="l-btn-text icon-tip l-btn-icon-left">详情</span></span></a>';
-            return edit;
-         }
-      </script>
-   </HEAD>
-
-   <body>
+   <body bgcolor="#198bc9">
       <div id="cy_right" style="width:100%">
-         <div class="right_title">
-            <span>设备信息</span>
+         <div class="right_title" style="width:100%">
+            <span>增加配置信息</span>
          </div>
          <div class="btn_bar">
-            <div class="nav_btn"><a href="/product/configration/Configration.wa?do=insertBefore" class="add_btn"></a></div>
+            <div class="nav_btn">
+               <a href="#" onClick="submitForm()" class="sub_btn"></a>
+               <a href="/product/configration/Configration.wa" class="back_btn"></a>
+            </div>
             <div class="nav_search"></div>
          </div>
       </div>
-      <table id="config" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
-         <thead>
+      <div class="easyui-panel" fit='true' data-options="border:false">
+         
+         <form id="config" action="/product/configration/Configration.wa?do=insert" method="post" align="center">
+            <font style="color:red;"><jh:write source='&page.result'/></font>
+         <table width="718" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
             <tr>
-               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>               
-               <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="200px">代码</th>
-               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">名称</th>
-               <th data-options="field:'dataTypeCd',halign:'center',align:'right',sortable:true" width="100px">数据类型</th>
-               <th data-options="field:'dataValue',halign:'center',align:'right',sortable:true" width="100px">值</th>
-               <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">备注</th>
-               <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">更新时间</th>
-               <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton" width="140px">操作</th>
+               <td align="left" width="48">代码</td>
+               <td align="left" width="660">
+                  <input id="code" name="code" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,100]'" value="<jh:write source='&unit.code'/>"/>
+                  <input id="configInfoId" name="configInfoId" style="display:none" value="<jh:write source='&unit.ouid'/>" />
+               </td>
             </tr>
-         </thead>
-      </table>
+            <tr>
+               <td align="left">名称</td>
+               <td align="left">
+                  <input id="label" name="label" value="<jh:write source='&unit.label'/>" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,100]'" />
+               </td>
+            </tr>
+            <tr>
+               <td align="left">数据类型</td>
+               <td align="left">
+                  <input id="dataType" name="dataType" value="<jh:write source='&unit.dataTypeCd'/>" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,20]'" /> </td>
+            </tr>
+            <tr>
+               <td align="left">数据</td>
+               <td align="left">
+                  <input id="dataValue" name="dataValue" value="<jh:write source='&unit.dataValue'/>" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,200]'" />
+               </td>
+            </tr>
+            <tr>
+               <td width="66" height="30" align="left">备注</td>
+               <td height="30" colspan="7" align="left">
+                  <input id="note" name="note" class="easyui-textbox" value="<jh:write source='&unit.note'/>" data-options="multiline:true" style="height:100px;width:500px" />
+               </td>
+            </tr>
+         </table>
+         </form>
+      </div>
    </body>
 
    </HTML>

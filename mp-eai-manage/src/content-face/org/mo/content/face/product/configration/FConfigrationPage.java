@@ -1,5 +1,6 @@
 package org.mo.content.face.product.configration;
 
+import com.cyou.gccloud.data.data.FDataCommonConfigurationUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
@@ -18,6 +19,16 @@ public class FConfigrationPage
    protected int _pageCurrent;
 
    protected String result;
+
+   protected FDataCommonConfigurationUnit unit;
+
+   public FDataCommonConfigurationUnit unit(){
+      return unit;
+   }
+
+   public void setUnit(FDataCommonConfigurationUnit unit){
+      this.unit = unit;
+   }
 
    public String result(){
       return result;

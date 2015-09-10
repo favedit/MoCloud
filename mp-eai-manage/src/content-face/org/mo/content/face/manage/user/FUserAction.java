@@ -163,16 +163,8 @@ public class FUserAction
       String id = context.parameter("id");
       _logger.debug(this, "UpdateBefore", "UpdateBefore Begin.(id={1})", id);
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
-      String passport = unit.passport();
-      int isOa = passport.indexOf(":");
-      if(isOa > 0){
-         String userType = passport.substring(0, isOa);
-         if(userType.equals("white-host") || userType.equals("white-user") || userType.equals("oa")){
-            basePage.setTemp("oa");
-         }
-      }
       userPage.setUser(unit);
-      return "#/manage/user/UpdateUser";
+      return "/manage/user/UpdateUser";
    }
 
    // ============================================================

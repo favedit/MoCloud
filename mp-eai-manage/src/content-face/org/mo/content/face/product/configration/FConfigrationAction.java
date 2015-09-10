@@ -132,10 +132,17 @@ public class FConfigrationAction
    @Override
    public String updateBefore(IWebContext context,
                               ILogicContext logicContext,
-                              FConfigrationPage Page,
+                              FConfigrationPage configrationPage,
                               FBasePage basePage){
-      // TODO Auto-generated method stub
-      return null;
+      _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+
+      FDataCommonConfigurationUnit unit = _configrationConsole.find(logicContext, id);
+      configrationPage.setUnit(unit);
+      return "/manage/product/configration/UpdateConfig";
    }
 
    //============================================================
@@ -151,8 +158,20 @@ public class FConfigrationAction
                         ILogicContext logicContext,
                         FConfigrationPage Page,
                         FBasePage basePage){
-      // TODO Auto-generated method stub
-      return null;
+
+      if(!basePage.userExists()){
+         return "/manage/common/ConnectTimeout";
+      }
+      _logger.debug(this, "Update", "Update Begin.(id={1})", context.parameter("configInfoId"));
+      FDataCommonConfigurationUnit unit = new FDataCommonConfigurationUnit();
+      unit.setOuid(Long.parseLong(context.parameter("configInfoId")));
+      unit.setLabel(context.parameter("label"));
+      unit.setCode(context.parameter("code"));
+      unit.setDataTypeCd(context.parameter("dataType"));
+      unit.setDataValue(context.parameter("dataValue"));
+      unit.setNote(context.parameter("note"));
+      _configrationConsole.doUpdate(logicContext, unit);
+      return "/manage/common/ajax";
    }
 
    //============================================================

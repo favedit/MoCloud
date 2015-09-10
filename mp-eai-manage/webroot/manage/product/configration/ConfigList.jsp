@@ -67,6 +67,13 @@
                location.href = "/product/configration/Configration.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
                });
          }
+         
+         //更新配置信息-AnjoyTian
+         function edit(id){
+         console.info(id);
+         window.location.href="/product/configration/Configration.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
+         
+         }
       </script>
    </HEAD>
 
