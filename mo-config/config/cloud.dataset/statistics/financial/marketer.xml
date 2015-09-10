@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="b9e9815c-6709-47ea-ad5a-ade7c7063663" name="statistics.financial.marketer" label="M#12cn16理财师统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Marketer" data_name="ST_FIN_MARKETER" data_alias="ST_FIN_MKT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="fb4f401b-b5b4-46e8-bb0d-08a9325d4f02" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
+  <FieldRecordId _uuid="fb4f401b-b5b4-46e8-bb0d-08a9325d4f02" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldDateTime _uuid="65b86f19-75b4-47ed-83ac-125419e9fd24" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldDouble _uuid="4afdbe9f-2e22-4e5f-9ddb-85f9c0f86677" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldDouble _uuid="9d22f640-256d-4938-ad18-5fb5fc684e17" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />

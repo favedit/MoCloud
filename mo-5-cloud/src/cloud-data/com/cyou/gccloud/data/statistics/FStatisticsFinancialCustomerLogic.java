@@ -41,8 +41,8 @@ public class FStatisticsFinancialCustomerLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段客户编号的定义。
-   public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
+   // 字段关联编号的定义。
+   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
    // 字段关联时间的定义。
    public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
@@ -75,7 +75,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`LINK_DATE`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -667,7 +667,7 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`CUSTOMER_ID`");
+      cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
@@ -689,11 +689,11 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      long customerId = unit.customerId();
-      if(customerId == 0){
+      long linkId = unit.linkId();
+      if(linkId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(customerId);
+         cmd.append(linkId);
       }
       cmd.append(',');
       TDateTime linkDate = unit.linkDate();
@@ -790,13 +790,13 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isCustomerIdChanged()){
-         cmd.append(",`CUSTOMER_ID`=");
-         long customerId = unit.customerId();
-         if(customerId == 0){
+      if(unit.isLinkIdChanged()){
+         cmd.append(",`LINK_ID`=");
+         long linkId = unit.linkId();
+         if(linkId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(customerId);
+            cmd.append(linkId);
          }
       }
       if(unit.isLinkDateChanged()){

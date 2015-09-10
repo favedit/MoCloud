@@ -14,10 +14,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>理财师统计表逻辑单元。</T>
+// <T>部门统计表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialMarketerUnit
+public class FStatisticsFinancialDepartmentUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -105,9 +105,9 @@ public class FStatisticsFinancialMarketerUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造理财师统计表逻辑单元。</T>
+   // <T>构造部门统计表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialMarketerUnit(){
+   public FStatisticsFinancialDepartmentUnit(){
    }
 
    //============================================================

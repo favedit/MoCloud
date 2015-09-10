@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="7d4d76e2-c447-4ff0-b82b-682ce1b4c552" name="statistics.financial.department" label="M#12cn15部门统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Department" data_name="ST_FIN_DEPARTMENT" data_alias="ST_FIN_DEP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="42c541ff-685d-489c-8e09-d332c504f8f2" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="375a4ff4-6a78-49ba-b21f-aaebec847216" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldDouble _uuid="f3a182de-aeab-47e8-979e-d1e83692e17c" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldDouble _uuid="43caa1ae-e630-44c9-a655-a948ba665266" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="ecd5da6d-11dd-47cb-ab87-4d0ab6529ecf" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldDouble _uuid="1a781555-3698-41ee-a8a0-f50d71daa4c8" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldDouble _uuid="d028ebb1-026c-4b64-84ff-41cf5d6c141f" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldTemplate _uuid="f84fe47f-701b-4dce-b0fb-f453e515a107" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

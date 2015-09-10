@@ -38,11 +38,11 @@ public class FStatisticsFinancialCustomerUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段客户编号的定义。
-   private long __customerId;
+   // 存储字段关联编号的定义。
+   private long __linkId;
 
-   // 字段客户编号的定义。
-   protected long _customerId;
+   // 字段关联编号的定义。
+   protected long _linkId;
 
    // 存储字段关联时间的定义。
    private TDateTime __linkDate = new TDateTime();
@@ -192,30 +192,30 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
-   // <T>判断客户编号的数据是否改变。</T>
+   // <T>判断关联编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerIdChanged(){
-      return __customerId != _customerId;
+   public boolean isLinkIdChanged(){
+      return __linkId != _linkId;
    }
 
    //============================================================
-   // <T>获得客户编号的数据内容。</T>
+   // <T>获得关联编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long customerId(){
-      return _customerId;
+   public long linkId(){
+      return _linkId;
    }
 
    //============================================================
-   // <T>设置客户编号的数据内容。</T>
+   // <T>设置关联编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerId(long value){
-      _customerId = value;
+   public void setLinkId(long value){
+      _linkId = value;
    }
 
    //============================================================
@@ -503,8 +503,8 @@ public class FStatisticsFinancialCustomerUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "customer_id":
-            return Long.toString(_customerId);
+         case "link_id":
+            return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
          case "investment_total":
@@ -548,8 +548,8 @@ public class FStatisticsFinancialCustomerUnit
          case "guid":
             _guid = value;
             break;
-         case "customer_id":
-            _customerId = RLong.parse(value);
+         case "link_id":
+            _linkId = RLong.parse(value);
             break;
          case "link_date":
             _linkDate.parse(value);
@@ -608,9 +608,9 @@ public class FStatisticsFinancialCustomerUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "customer_id":
-               __customerId = RLong.parse(value);
-               _customerId = __customerId;
+            case "link_id":
+               __linkId = RLong.parse(value);
+               _linkId = __linkId;
                break;
             case "link_date":
                __linkDate.parse(value);
@@ -667,7 +667,7 @@ public class FStatisticsFinancialCustomerUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("customerId", _customerId);
+      row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
@@ -691,7 +691,7 @@ public class FStatisticsFinancialCustomerUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("customerId", RLong.toString(_customerId));
+      map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
@@ -715,7 +715,7 @@ public class FStatisticsFinancialCustomerUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _customerId = input.readInt64();
+      _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -734,7 +734,7 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeInt64(_customerId);
+      output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

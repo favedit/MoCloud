@@ -75,11 +75,23 @@ public class FStatisticsFinancialAmountUnit
    // 字段投资总计的定义。
    protected double _investmentTotal;
 
+   // 存储字段投资用户总数的定义。
+   private int __investmentUserTotal;
+
+   // 字段投资用户总数的定义。
+   protected int _investmentUserTotal;
+
    // 存储字段赎回总计的定义。
    private double __redemptionTotal;
 
    // 字段赎回总计的定义。
    protected double _redemptionTotal;
+
+   // 存储字段赎回用户总数的定义。
+   private int __redemptionUserTotal;
+
+   // 字段赎回用户总数的定义。
+   protected int _redemptionUserTotal;
 
    // 存储字段净投总计的定义。
    private double __netinvestmentTotal;
@@ -373,6 +385,33 @@ public class FStatisticsFinancialAmountUnit
    }
 
    //============================================================
+   // <T>判断投资用户总数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentUserTotalChanged(){
+      return __investmentUserTotal != _investmentUserTotal;
+   }
+
+   //============================================================
+   // <T>获得投资用户总数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentUserTotal(){
+      return _investmentUserTotal;
+   }
+
+   //============================================================
+   // <T>设置投资用户总数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentUserTotal(int value){
+      _investmentUserTotal = value;
+   }
+
+   //============================================================
    // <T>判断赎回总计的数据是否改变。</T>
    //
    // @return 数据内容
@@ -397,6 +436,33 @@ public class FStatisticsFinancialAmountUnit
    //============================================================
    public void setRedemptionTotal(double value){
       _redemptionTotal = value;
+   }
+
+   //============================================================
+   // <T>判断赎回用户总数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionUserTotalChanged(){
+      return __redemptionUserTotal != _redemptionUserTotal;
+   }
+
+   //============================================================
+   // <T>获得赎回用户总数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionUserTotal(){
+      return _redemptionUserTotal;
+   }
+
+   //============================================================
+   // <T>设置赎回用户总数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionUserTotal(int value){
+      _redemptionUserTotal = value;
    }
 
    //============================================================
@@ -615,8 +681,12 @@ public class FStatisticsFinancialAmountUnit
             return RInteger.toString(_customerTotal);
          case "investment_total":
             return RDouble.toString(_investmentTotal);
+         case "investment_user_total":
+            return RInteger.toString(_investmentUserTotal);
          case "redemption_total":
             return RDouble.toString(_redemptionTotal);
+         case "redemption_user_total":
+            return RInteger.toString(_redemptionUserTotal);
          case "netinvestment_total":
             return RDouble.toString(_netinvestmentTotal);
          case "interest_total":
@@ -672,8 +742,14 @@ public class FStatisticsFinancialAmountUnit
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
             break;
+         case "investment_user_total":
+            _investmentUserTotal = RInteger.parse(value);
+            break;
          case "redemption_total":
             _redemptionTotal = RDouble.parse(value);
+            break;
+         case "redemption_user_total":
+            _redemptionUserTotal = RInteger.parse(value);
             break;
          case "netinvestment_total":
             _netinvestmentTotal = RDouble.parse(value);
@@ -747,9 +823,17 @@ public class FStatisticsFinancialAmountUnit
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
                break;
+            case "investment_user_total":
+               __investmentUserTotal = RInteger.parse(value);
+               _investmentUserTotal = __investmentUserTotal;
+               break;
             case "redemption_total":
                __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
+               break;
+            case "redemption_user_total":
+               __redemptionUserTotal = RInteger.parse(value);
+               _redemptionUserTotal = __redemptionUserTotal;
                break;
             case "netinvestment_total":
                __netinvestmentTotal = RDouble.parse(value);
@@ -800,7 +884,9 @@ public class FStatisticsFinancialAmountUnit
       row.set("marketerTotal", _marketerTotal);
       row.set("customerTotal", _customerTotal);
       row.set("investmentTotal", _investmentTotal);
+      row.set("investmentUserTotal", _investmentUserTotal);
       row.set("redemptionTotal", _redemptionTotal);
+      row.set("redemptionUserTotal", _redemptionUserTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
@@ -827,7 +913,9 @@ public class FStatisticsFinancialAmountUnit
       map.put("marketerTotal", RInteger.toString(_marketerTotal));
       map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("investmentUserTotal", RInteger.toString(_investmentUserTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("redemptionUserTotal", RInteger.toString(_redemptionUserTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
@@ -853,6 +941,8 @@ public class FStatisticsFinancialAmountUnit
       _departmentTotal = input.readInt32();
       _marketerTotal = input.readInt32();
       _customerTotal = input.readInt32();
+      _investmentUserTotal = input.readInt32();
+      _redemptionUserTotal = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -875,6 +965,8 @@ public class FStatisticsFinancialAmountUnit
       output.writeInt32(_departmentTotal);
       output.writeInt32(_marketerTotal);
       output.writeInt32(_customerTotal);
+      output.writeInt32(_investmentUserTotal);
+      output.writeInt32(_redemptionUserTotal);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

@@ -6,7 +6,9 @@
   <FieldInteger _uuid="f30dbfde-d579-46f4-aaa2-c127b1037b38" name="marketer_total" label="M#12cn15理财师总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_TOTAL" />
   <FieldInteger _uuid="ee3198ad-1dc1-49ce-bbdf-a33b9fd9779d" name="customer_total" label="M#12cn14客户合计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_TOTAL" />
   <FieldDouble _uuid="24da35fe-1499-4b84-adc6-20e671694f38" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="762ca93c-f267-40ff-a77c-d7a13e6858fb" name="investment_user_total" label="M#12cn16投资用户总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_USER_TOTAL" />
   <FieldDouble _uuid="f74f4e05-ff3b-47b8-9672-393e89dd7d3c" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldInteger _uuid="7757356e-df0b-4a1c-8476-b0402c78a2cd" name="redemption_user_total" label="M#12cn16赎回用户总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_USER_TOTAL" />
   <FieldDouble _uuid="abaa6596-75ec-4f99-b35f-a6c93db85677" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
   <FieldDouble _uuid="7ba0808e-5062-4ce4-a65a-945d97c54e33" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="9cacc7e7-db56-41ad-9639-ff8ca0523c74" name="performance_total" label="M#12cn14业绩总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
