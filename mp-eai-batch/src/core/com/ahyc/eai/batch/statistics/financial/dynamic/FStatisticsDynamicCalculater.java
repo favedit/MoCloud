@@ -133,7 +133,7 @@ public class FStatisticsDynamicCalculater
          // 统计部门信息
          boolean departmentExist = false;
          if(departmentId > 0){
-            FStatisticsFinancialDepartmentUnit departmentUnit = _departmentConsole.syncByLinkId(logicContext, dynamicUnit.marketerLinkId());
+            FStatisticsFinancialDepartmentUnit departmentUnit = _departmentConsole.syncByLinkId(logicContext, dynamicUnit.departmentLinkId());
             departmentExist = departmentUnit.linkCd() > 0;
             departmentUnit.setLinkCd(1);
             departmentUnit.linkDate().assign(customerActionDate);

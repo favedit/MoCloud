@@ -7,6 +7,7 @@ import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
 import org.mo.data.logic.FLogicContext;
@@ -119,7 +120,7 @@ public class FStatisticsDepartmentConsole
       sql.bindLong("id", linkId);
       FRow row = connection.find(sql);
       if(row == null){
-         return null;
+         throw new FFatalError("Department is not exists. (link_id={1})", linkId);
       }
       // 查找信息
       FStatisticsDepartmentInfo info = find(logicContext, linkId);

@@ -84,6 +84,7 @@ public class FStatisticsAchievementServlet
          dataStream.writeInt32(count);
          for(FRow row : dataset){
             // 计算数据
+            String recordDate = row.get("record_hour");
             double investmentAmount = row.getDouble("investment_amount");
             investmentTotal += investmentAmount;
             double redemptionAmount = row.getDouble("redemption_amount");
@@ -92,6 +93,7 @@ public class FStatisticsAchievementServlet
             int customerCount = row.getInt("customer_count");
             customerTotal += customerCount;
             // 输出数据
+            dataStream.writeString(recordDate);
             dataStream.writeDouble(investmentAmount);
             dataStream.writeDouble(redemptionAmount);
             dataStream.writeDouble(netinvestmentAmount);
@@ -100,6 +102,7 @@ public class FStatisticsAchievementServlet
          stream.writeDouble(investmentTotal);
          stream.writeDouble(redemptionTotal);
          stream.writeDouble(netinvestmentTotal);
+         stream.writeInt(customerTotal);
          stream.writeInt(customerTotal);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
@@ -115,11 +118,15 @@ public class FStatisticsAchievementServlet
          int count = dataset.count();
          dataStream.writeInt32(count);
          for(FRow row : dataset){
+            String recordDate = row.get("record_day");
+            // 计算数据
             double investmentAmount = row.getDouble("investment_amount");
             investmentTotal += investmentAmount;
             double redemptionAmount = row.getDouble("redemption_amount");
             redemptionTotal += redemptionAmount;
             double netinvestmentAmount = investmentAmount - redemptionAmount;
+            // 输出数据
+            dataStream.writeString(recordDate);
             dataStream.writeDouble(investmentAmount);
             dataStream.writeDouble(redemptionAmount);
             dataStream.writeDouble(netinvestmentAmount);
@@ -127,6 +134,8 @@ public class FStatisticsAchievementServlet
          stream.writeDouble(investmentTotal);
          stream.writeDouble(redemptionTotal);
          stream.writeDouble(netinvestmentTotal);
+         stream.writeInt(0);
+         stream.writeInt(0);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当年合计数据
@@ -141,11 +150,15 @@ public class FStatisticsAchievementServlet
          int count = dataset.count();
          dataStream.writeInt32(count);
          for(FRow row : dataset){
+            String recordDate = row.get("record_month");
+            // 计算数据
             double investmentAmount = row.getDouble("investment_amount");
             investmentTotal += investmentAmount;
             double redemptionAmount = row.getDouble("redemption_amount");
             redemptionTotal += redemptionAmount;
             double netinvestmentAmount = investmentAmount - redemptionAmount;
+            // 输出数据
+            dataStream.writeString(recordDate);
             dataStream.writeDouble(investmentAmount);
             dataStream.writeDouble(redemptionAmount);
             dataStream.writeDouble(netinvestmentAmount);
@@ -153,6 +166,8 @@ public class FStatisticsAchievementServlet
          stream.writeDouble(investmentTotal);
          stream.writeDouble(redemptionTotal);
          stream.writeDouble(netinvestmentTotal);
+         stream.writeInt(0);
+         stream.writeInt(0);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       //............................................................
