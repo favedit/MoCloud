@@ -77,7 +77,6 @@ public class FStatisticsAchievementServlet
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
-         double netinvestmentTotal = 0;
          int customerTotal = 0;
          FByteStream dataStream = createStream(context);
          int count = dataset.count();
@@ -97,23 +96,21 @@ public class FStatisticsAchievementServlet
             dataStream.writeDouble(investmentAmount);
             dataStream.writeDouble(redemptionAmount);
             dataStream.writeDouble(netinvestmentAmount);
-            dataStream.writeInt(customerCount);
          }
          stream.writeDouble(investmentTotal);
          stream.writeDouble(redemptionTotal);
-         stream.writeDouble(netinvestmentTotal);
-         stream.writeInt(customerTotal);
-         stream.writeInt(customerTotal);
+         stream.writeDouble(investmentTotal - redemptionTotal);
+         stream.writeUint32(customerTotal);
+         stream.writeUint32(customerTotal);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当月合计数据
       if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.month");
-         sql.bindString("date", currentDate.format("YYYYMMDD"));
+         sql.bindString("date", currentDate.format("YYYYMM01"));
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
-         double netinvestmentTotal = 0;
          FByteStream dataStream = createStream(context);
          int count = dataset.count();
          dataStream.writeInt32(count);
@@ -133,19 +130,18 @@ public class FStatisticsAchievementServlet
          }
          stream.writeDouble(investmentTotal);
          stream.writeDouble(redemptionTotal);
-         stream.writeDouble(netinvestmentTotal);
-         stream.writeInt(0);
-         stream.writeInt(0);
+         stream.writeDouble(investmentTotal - redemptionTotal);
+         stream.writeUint32(0);
+         stream.writeUint32(0);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当年合计数据
       if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.year");
-         sql.bindString("date", currentDate.format("YYYYMMDD"));
+         sql.bindString("date", currentDate.format("YYYY0101"));
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
-         double netinvestmentTotal = 0;
          FByteStream dataStream = createStream(context);
          int count = dataset.count();
          dataStream.writeInt32(count);
@@ -165,9 +161,9 @@ public class FStatisticsAchievementServlet
          }
          stream.writeDouble(investmentTotal);
          stream.writeDouble(redemptionTotal);
-         stream.writeDouble(netinvestmentTotal);
-         stream.writeInt(0);
-         stream.writeInt(0);
+         stream.writeDouble(investmentTotal - redemptionTotal);
+         stream.writeUint32(0);
+         stream.writeUint32(0);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       //............................................................
