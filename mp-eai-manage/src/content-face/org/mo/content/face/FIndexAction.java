@@ -10,7 +10,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.content.core.product.financial.IDepartmentConsole;
+import org.mo.content.core.product.financial.department.IDepartmentConsole;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
