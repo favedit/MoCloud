@@ -57,6 +57,12 @@ public class FStatisticsFinancialMarketerUnit
    // 字段部门编号的定义。
    protected long _linkDepartmentId;
 
+   // 存储字段关联类型的定义。
+   private int __linkCd;
+
+   // 字段关联类型的定义。
+   protected int _linkCd;
+
    // 存储字段数据编号的定义。
    private long __dataId;
 
@@ -337,6 +343,33 @@ public class FStatisticsFinancialMarketerUnit
    //============================================================
    public void setLinkDepartmentId(long value){
       _linkDepartmentId = value;
+   }
+
+   //============================================================
+   // <T>判断关联类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkCdChanged(){
+      return __linkCd != _linkCd;
+   }
+
+   //============================================================
+   // <T>获得关联类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int linkCd(){
+      return _linkCd;
+   }
+
+   //============================================================
+   // <T>设置关联类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkCd(int value){
+      _linkCd = value;
    }
 
    //============================================================
@@ -873,6 +906,8 @@ public class FStatisticsFinancialMarketerUnit
             return _linkDate.toString();
          case "link_department_id":
             return Long.toString(_linkDepartmentId);
+         case "link_cd":
+            return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
          case "department_label":
@@ -942,6 +977,9 @@ public class FStatisticsFinancialMarketerUnit
             break;
          case "link_department_id":
             _linkDepartmentId = RLong.parse(value);
+            break;
+         case "link_cd":
+            _linkCd = RInteger.parse(value);
             break;
          case "data_id":
             _dataId = RLong.parse(value);
@@ -1039,6 +1077,10 @@ public class FStatisticsFinancialMarketerUnit
                __linkDepartmentId = RLong.parse(value);
                _linkDepartmentId = __linkDepartmentId;
                break;
+            case "link_cd":
+               __linkCd = RInteger.parse(value);
+               _linkCd = __linkCd;
+               break;
             case "data_id":
                __dataId = RLong.parse(value);
                _dataId = __dataId;
@@ -1133,6 +1175,7 @@ public class FStatisticsFinancialMarketerUnit
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
       row.set("linkDepartmentId", _linkDepartmentId);
+      row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("departmentLabel", _departmentLabel);
       row.set("code", _code);
@@ -1168,6 +1211,7 @@ public class FStatisticsFinancialMarketerUnit
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("linkDepartmentId", RLong.toString(_linkDepartmentId));
+      map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("departmentLabel", _departmentLabel);
       map.put("code", _code);
@@ -1203,6 +1247,7 @@ public class FStatisticsFinancialMarketerUnit
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
       _linkDepartmentId = input.readInt64();
+      _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _departmentLabel = input.readString();
       _code = input.readString();
@@ -1233,6 +1278,7 @@ public class FStatisticsFinancialMarketerUnit
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
       output.writeInt64(_linkDepartmentId);
+      output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeString(_departmentLabel);
       output.writeString(_code);

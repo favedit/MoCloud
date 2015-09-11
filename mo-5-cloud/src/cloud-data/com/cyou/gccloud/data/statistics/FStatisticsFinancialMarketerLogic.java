@@ -51,6 +51,9 @@ public class FStatisticsFinancialMarketerLogic
    // 字段部门编号的定义。
    public final static SLogicFieldInfo LINK_DEPARTMENT_ID = new SLogicFieldInfo("LINK_DEPARTMENT_ID");
 
+   // 字段关联类型的定义。
+   public final static SLogicFieldInfo LINK_CD = new SLogicFieldInfo("LINK_CD");
+
    // 字段数据编号的定义。
    public final static SLogicFieldInfo DATA_ID = new SLogicFieldInfo("DATA_ID");
 
@@ -109,7 +112,7 @@ public class FStatisticsFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_DEPARTMENT_ID`,`DATA_ID`,`DEPARTMENT_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_DEPARTMENT_ID`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师统计表逻辑单元。</T>
@@ -704,6 +707,7 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
       cmd.append(",`LINK_DEPARTMENT_ID`");
+      cmd.append(",`LINK_CD`");
       cmd.append(",`DATA_ID`");
       cmd.append(",`DEPARTMENT_LABEL`");
       cmd.append(",`CODE`");
@@ -758,6 +762,8 @@ public class FStatisticsFinancialMarketerLogic
       }else{
          cmd.append(linkDepartmentId);
       }
+      cmd.append(',');
+      cmd.append(unit.linkCd());
       cmd.append(',');
       long dataId = unit.dataId();
       if(dataId == 0){
@@ -957,6 +963,10 @@ public class FStatisticsFinancialMarketerLogic
          }else{
             cmd.append(linkDepartmentId);
          }
+      }
+      if(unit.isLinkCdChanged()){
+         cmd.append(",`LINK_CD`=");
+         cmd.append(unit.linkCd());
       }
       if(unit.isDataIdChanged()){
          cmd.append(",`DATA_ID`=");

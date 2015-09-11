@@ -69,6 +69,12 @@ public class FStatisticsFinancialDepartmentUnit
    // 字段关联编号路径的定义。
    protected String _linkIdPath;
 
+   // 存储字段关联类型的定义。
+   private int __linkCd;
+
+   // 字段关联类型的定义。
+   protected int _linkCd;
+
    // 存储字段数据编号的定义。
    private long __dataId;
 
@@ -391,6 +397,33 @@ public class FStatisticsFinancialDepartmentUnit
    //============================================================
    public void setLinkIdPath(String value){
       _linkIdPath = value;
+   }
+
+   //============================================================
+   // <T>判断关联类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkCdChanged(){
+      return __linkCd != _linkCd;
+   }
+
+   //============================================================
+   // <T>获得关联类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int linkCd(){
+      return _linkCd;
+   }
+
+   //============================================================
+   // <T>设置关联类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkCd(int value){
+      _linkCd = value;
    }
 
    //============================================================
@@ -877,6 +910,8 @@ public class FStatisticsFinancialDepartmentUnit
             return _linkDate.toString();
          case "link_id_path":
             return _linkIdPath;
+         case "link_cd":
+            return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
          case "parent_id":
@@ -948,6 +983,9 @@ public class FStatisticsFinancialDepartmentUnit
             break;
          case "link_id_path":
             _linkIdPath = value;
+            break;
+         case "link_cd":
+            _linkCd = RInteger.parse(value);
             break;
          case "data_id":
             _dataId = RLong.parse(value);
@@ -1047,6 +1085,10 @@ public class FStatisticsFinancialDepartmentUnit
                __linkIdPath = value;
                _linkIdPath = __linkIdPath;
                break;
+            case "link_cd":
+               __linkCd = RInteger.parse(value);
+               _linkCd = __linkCd;
+               break;
             case "data_id":
                __dataId = RLong.parse(value);
                _dataId = __dataId;
@@ -1135,6 +1177,7 @@ public class FStatisticsFinancialDepartmentUnit
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
       row.set("linkIdPath", _linkIdPath);
+      row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("parentId", _parentId);
       row.set("code", _code);
@@ -1170,6 +1213,7 @@ public class FStatisticsFinancialDepartmentUnit
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("linkIdPath", _linkIdPath);
+      map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("parentId", RLong.toString(_parentId));
       map.put("code", _code);
@@ -1205,6 +1249,7 @@ public class FStatisticsFinancialDepartmentUnit
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
       _linkIdPath = input.readString();
+      _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _parentId = input.readInt64();
       _code = input.readString();
@@ -1235,6 +1280,7 @@ public class FStatisticsFinancialDepartmentUnit
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
       output.writeString(_linkIdPath);
+      output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeInt64(_parentId);
       output.writeString(_code);

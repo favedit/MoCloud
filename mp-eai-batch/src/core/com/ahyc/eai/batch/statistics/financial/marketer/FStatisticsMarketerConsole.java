@@ -8,6 +8,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
@@ -65,7 +66,7 @@ public class FStatisticsMarketerConsole
       // 查找成员
       FStatisticsFinancialMemberUnit memberUnit = _memberConsole.syncByLinkId(logicContext, linkId);
       if(memberUnit == null){
-         return null;
+         throw new FFatalError("Marketer member is not exists. (link_id={1})", linkId);
       }
       //............................................................
       // 查询信息
@@ -74,7 +75,7 @@ public class FStatisticsMarketerConsole
       sql.bindLong("id", linkId);
       FRow row = connection.find(sql);
       if(row == null){
-         return null;
+         throw new FFatalError("Marketer is not exists. (link_id={1})", linkId);
       }
       // 查询状态
       FSql statusSql = _resource.findString(FSql.class, "sql.marketer.status");

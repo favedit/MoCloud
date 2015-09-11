@@ -50,6 +50,12 @@ public class FStatisticsFinancialMemberUnit
    // 字段关联时间的定义。
    protected TDateTime _linkDate = new TDateTime();
 
+   // 存储字段关联类型的定义。
+   private int __linkCd;
+
+   // 字段关联类型的定义。
+   protected int _linkCd;
+
    // 存储字段数据编号的定义。
    private long __dataId;
 
@@ -369,6 +375,33 @@ public class FStatisticsFinancialMemberUnit
    //============================================================
    public void setLinkDate(TDateTime value){
       _linkDate = value;
+   }
+
+   //============================================================
+   // <T>判断关联类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkCdChanged(){
+      return __linkCd != _linkCd;
+   }
+
+   //============================================================
+   // <T>获得关联类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int linkCd(){
+      return _linkCd;
+   }
+
+   //============================================================
+   // <T>设置关联类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkCd(int value){
+      _linkCd = value;
    }
 
    //============================================================
@@ -1200,6 +1233,8 @@ public class FStatisticsFinancialMemberUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "link_cd":
+            return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
          case "passport":
@@ -1288,6 +1323,9 @@ public class FStatisticsFinancialMemberUnit
             break;
          case "link_date":
             _linkDate.parse(value);
+            break;
+         case "link_cd":
+            _linkCd = RInteger.parse(value);
             break;
          case "data_id":
             _dataId = RLong.parse(value);
@@ -1413,6 +1451,10 @@ public class FStatisticsFinancialMemberUnit
             case "link_date":
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
+               break;
+            case "link_cd":
+               __linkCd = RInteger.parse(value);
+               _linkCd = __linkCd;
                break;
             case "data_id":
                __dataId = RLong.parse(value);
@@ -1551,6 +1593,7 @@ public class FStatisticsFinancialMemberUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("passport", _passport);
       row.set("label", _label);
@@ -1596,6 +1639,7 @@ public class FStatisticsFinancialMemberUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("passport", _passport);
       map.put("label", _label);
@@ -1641,6 +1685,7 @@ public class FStatisticsFinancialMemberUnit
       _guid = input.readString();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
+      _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _passport = input.readString();
       _label = input.readString();
@@ -1686,6 +1731,7 @@ public class FStatisticsFinancialMemberUnit
       output.writeString(_guid);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
+      output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeString(_passport);
       output.writeString(_label);

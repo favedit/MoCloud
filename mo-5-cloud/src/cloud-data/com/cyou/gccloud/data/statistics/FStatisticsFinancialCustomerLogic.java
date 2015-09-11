@@ -48,6 +48,9 @@ public class FStatisticsFinancialCustomerLogic
    // 字段关联时间的定义。
    public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
 
+   // 字段关联类型的定义。
+   public final static SLogicFieldInfo LINK_CD = new SLogicFieldInfo("LINK_CD");
+
    // 字段数据编号的定义。
    public final static SLogicFieldInfo DATA_ID = new SLogicFieldInfo("DATA_ID");
 
@@ -88,7 +91,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -682,6 +685,7 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`GUID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
+      cmd.append(",`LINK_CD`");
       cmd.append(",`DATA_ID`");
       cmd.append(",`LABEL`");
       cmd.append(",`PHONE`");
@@ -723,6 +727,8 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append(linkDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
+      cmd.append(',');
+      cmd.append(unit.linkCd());
       cmd.append(',');
       long dataId = unit.dataId();
       if(dataId == 0){
@@ -862,6 +868,10 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append(linkDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
+      }
+      if(unit.isLinkCdChanged()){
+         cmd.append(",`LINK_CD`=");
+         cmd.append(unit.linkCd());
       }
       if(unit.isDataIdChanged()){
          cmd.append(",`DATA_ID`=");

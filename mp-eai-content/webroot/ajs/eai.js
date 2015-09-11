@@ -13298,7 +13298,7 @@ MO.FEaiChartStatMarketerInfoProvince = function FEaiChartStatMarketerInfoProvinc
    o._code            = MO.Class.register(o, [new MO.AGetter('_code'), new MO.APersistence('_code', MO.EDataType.String)]);
    o._label           = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
    o._investmentTotal = MO.Class.register(o, [new MO.AGetter('_investmentTotal'), new MO.APersistence('_investmentTotal', MO.EDataType.Double)]);
-   o._customerCount   = MO.Class.register(o, [new MO.AGetter('_customerCount'), new MO.APersistence('_customerCount', MO.EDataType.Integer)]);
+   o._customerCount   = MO.Class.register(o, [new MO.AGetter('_customerCount'), new MO.APersistence('_customerCount', MO.EDataType.Uint32)]);
    o._investmentAvg   = MO.Class.register(o, [new MO.AGetter('_investmentAvg'), new MO.APersistence('_investmentAvg', MO.EDataType.Double)]);
    return o;
 }
@@ -13309,6 +13309,7 @@ MO.FEaiChartStatMarketerProcessor = function FEaiChartStatMarketerProcessor(o){
    o._endDate                 = MO.Class.register(o, new MO.AGetter('_endDate'));
    o._24HBeginDate            = MO.Class.register(o, new MO.AGetter('_24HBeginDate'));
    o._24HEndDate              = MO.Class.register(o, new MO.AGetter('_24HEndDate'));
+   o._infoProvince            = MO.Class.register(o, new MO.AGetter('_infoProvince'));
    o._invementDayCurrent      = MO.Class.register(o, new MO.AGetter('_invementDayCurrent'), 0);
    o._redemptionDayCurrent    = MO.Class.register(o, new MO.AGetter('_redemptionDayCurrent'), 0);
    o._netinvestmentDayCurrent = MO.Class.register(o, new MO.AGetter('_netinvestmentDayCurrent'), 0);
@@ -13332,10 +13333,13 @@ MO.FEaiChartStatMarketerProcessor = function FEaiChartStatMarketerProcessor(o){
    o._autios                  = null;
    o._eventDataChanged        = null;
    o._listenersDataChanged    = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
+   o._eventInfoProvinceChanged= null;
+   o._listenersInfoProvinceChanged= MO.Class.register(o, new MO.AListener('_listenersInfoProvinceChanged', 'InfoProvinceDataChanged'));
    o._event24HDataChanged     = null;
    o._listeners24HDataChanged = MO.Class.register(o, new MO.AListener('_listeners24HDataChanged', '24H' + MO.EEvent.DataChanged));
    o.onDynamicData            = MO.FEaiChartStatMarketerProcessor_onDynamicData;
    o.on24HDataFetch           = MO.FEaiChartStatMarketerProcessor_on24HDataFetch;
+   o.onInfoProvince           = MO.FEaiChartStatMarketerProcessor_onInfoProvince;
    o.construct                = MO.FEaiChartStatMarketerProcessor_construct;
    o.allocUnit                = MO.FEaiChartStatMarketerProcessor_allocUnit;
    o.allocShape               = MO.FEaiChartStatMarketerProcessor_allocShape;
@@ -13351,6 +13355,16 @@ MO.FEaiChartStatMarketerProcessor_on24HDataFetch = function FEaiChartStatMarkete
    event.beginDate = o._24HBeginDate;
    event.endDate = o._24HEndDate;
    o.process24HDataChangedListener(event);
+}
+MO.FEaiChartStatMarketerProcessor_onInfoProvince = function FEaiChartStatMarketerProcessor_onInfoProvince(event){
+   var o = this;
+   var infoProvince = o._infoProvince;
+   infoProvince.unserializeSignBuffer(event.sign, event.content, true);
+   for (i in infoProvince){
+      alert(i);
+      alert(infoProvince[i]);
+   }
+   o.processInfoProvinceDataChangedListener(event);
 }
 MO.FEaiChartStatMarketerProcessor_onDynamicData = function FEaiChartStatMarketerProcessor_onDynamicData(event){
    var o = this;
@@ -13385,6 +13399,7 @@ MO.FEaiChartStatMarketerProcessor_construct = function FEaiChartStatMarketerProc
    o._autios = new Object();
    o._dataTicker = new MO.TTicker(1000 * 60 * o._intervalMinute);
    o._dynamicInfo = MO.Class.create(MO.FEaiChartMktCustomerDynamicInfo);
+   o._infoProvince = MO.Class.create(MO.FEaiChartStatMarketerInfo);
    o._rankUnits = new MO.TObjects();
    o._unitPool = MO.Class.create(MO.FObjectPool);
    o._eventDataChanged = new MO.SEvent(o);
@@ -13410,6 +13425,7 @@ MO.FEaiChartStatMarketerProcessor_setup = function FEaiChartStatMarketerProcesso
 MO.FEaiChartStatMarketerProcessor_calculateCurrent = function FEaiChartStatMarketerProcessor_calculateCurrent(){
    var o = this;
    var info = o._dynamicInfo;
+   var infoprovince = o._infoProvince;
    var investmentCurrent = info.investmentCount();
    var investmentTotalCurrent = info.investmentTotal();
    var units = o._units;
@@ -13476,6 +13492,7 @@ MO.FEaiChartStatMarketerProcessor_process = function FEaiChartStatMarketerProces
       endDate24H.assign(systemDate);
       endDate24H.truncMinute(15);
       statistics.marketer().doCustomerTrend(o, o.on24HDataFetch, beginDate24H.format(), endDate24H.format());
+      statistics.customer().doProvince(o, o.onInfoProvince,beginDate24H.format(), endDate24H.format());
    }
    var currentTick = MO.Timer.current();
    if(currentTick - o._tableTick > o._tableInterval){
@@ -13589,7 +13606,6 @@ MO.FEaiChartStatMarketerScene_onProcess = function FEaiChartStatMarketerScene_on
       var countryEntity = o._countryEntity;
       if (!countryEntity.introAnimeDone()) {
          countryEntity.process();
-         return;
       }
       if (!o._mapReady) {
          o._guiManager.show();

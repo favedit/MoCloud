@@ -7,6 +7,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -49,6 +50,12 @@ public class FStatisticsFinancialCustomerUnit
 
    // 字段关联时间的定义。
    protected TDateTime _linkDate = new TDateTime();
+
+   // 存储字段关联类型的定义。
+   private int __linkCd;
+
+   // 字段关联类型的定义。
+   protected int _linkCd;
 
    // 存储字段数据编号的定义。
    private long __dataId;
@@ -267,6 +274,33 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setLinkDate(TDateTime value){
       _linkDate = value;
+   }
+
+   //============================================================
+   // <T>判断关联类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkCdChanged(){
+      return __linkCd != _linkCd;
+   }
+
+   //============================================================
+   // <T>获得关联类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int linkCd(){
+      return _linkCd;
+   }
+
+   //============================================================
+   // <T>设置关联类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkCd(int value){
+      _linkCd = value;
    }
 
    //============================================================
@@ -639,6 +673,8 @@ public class FStatisticsFinancialCustomerUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "link_cd":
+            return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
          case "label":
@@ -693,6 +729,9 @@ public class FStatisticsFinancialCustomerUnit
             break;
          case "link_date":
             _linkDate.parse(value);
+            break;
+         case "link_cd":
+            _linkCd = RInteger.parse(value);
             break;
          case "data_id":
             _dataId = RLong.parse(value);
@@ -768,6 +807,10 @@ public class FStatisticsFinancialCustomerUnit
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
                break;
+            case "link_cd":
+               __linkCd = RInteger.parse(value);
+               _linkCd = __linkCd;
+               break;
             case "data_id":
                __dataId = RLong.parse(value);
                _dataId = __dataId;
@@ -837,6 +880,7 @@ public class FStatisticsFinancialCustomerUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("label", _label);
       row.set("phone", _phone);
@@ -865,6 +909,7 @@ public class FStatisticsFinancialCustomerUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("label", _label);
       map.put("phone", _phone);
@@ -893,6 +938,7 @@ public class FStatisticsFinancialCustomerUnit
       _guid = input.readString();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
+      _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _label = input.readString();
       _phone = input.readString();
@@ -916,6 +962,7 @@ public class FStatisticsFinancialCustomerUnit
       output.writeString(_guid);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
+      output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeString(_label);
       output.writeString(_phone);

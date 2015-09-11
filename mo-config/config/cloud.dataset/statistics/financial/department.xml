@@ -5,6 +5,7 @@
   <FieldRecordId _uuid="42c541ff-685d-489c-8e09-d332c504f8f2" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldDateTime _uuid="375a4ff4-6a78-49ba-b21f-aaebec847216" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldString _uuid="b28479fd-199c-4d17-9261-3c1dfdf89663" name="link_id_path" label="M#12cn16关联编号路径" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID_PATH" data_size="400" />
+  <FieldInteger _uuid="1559e3b4-8c34-41a1-995c-f3baffc51e9c" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
   <FieldRecordId _uuid="627ecc40-8b4b-4f57-825e-8ad491210d15" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
   <FieldRecordId _uuid="6877463f-6015-4d66-8933-676fac8cae6f" name="parent_id" label="M#12cn13父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARENT_ID" />
   <FieldString _uuid="c0b4b4b4-3327-4c6c-8de7-f3dcf4f42da0" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />

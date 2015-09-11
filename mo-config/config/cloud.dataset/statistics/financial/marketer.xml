@@ -3,6 +3,7 @@
   <FieldRecordId _uuid="fb4f401b-b5b4-46e8-bb0d-08a9325d4f02" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldDateTime _uuid="65b86f19-75b4-47ed-83ac-125419e9fd24" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldRecordId _uuid="91f437ff-8e41-400b-badd-6555570b91ef" name="link_department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DEPARTMENT_ID" />
+  <FieldInteger _uuid="289f571d-02c8-4454-9698-48918e0ea01d" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
   <FieldRecordId _uuid="0746484c-fcd4-442d-8ed4-2c405de7aa94" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
   <FieldString _uuid="81e69155-f899-4bcd-bcf0-78121d9b830d" name="department_label" label="M#12cn14部门标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABEL" data_size="80" />
   <FieldString _uuid="855d3233-d43f-429b-a50c-18631b8bccba" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />

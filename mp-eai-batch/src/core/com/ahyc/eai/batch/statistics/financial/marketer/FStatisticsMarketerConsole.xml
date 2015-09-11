@@ -19,7 +19,7 @@ WHERE uid={id}
 <Resource name='sql.marketer.status'>
 SELECT
    FROM_UNIXTIME(max(`add_time`), '%Y%m%d%H%i%s') AS add_date
-FROM lzh_member_info
+FROM lzh_fmanager_status
 WHERE uid={id} AND type=1
 </Resource>
 
