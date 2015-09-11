@@ -63,29 +63,35 @@ public class FStatisticsFinancialDynamicUnit
    // 字段部门编号的定义。
    protected long _departmentId;
 
+   // 存储字段部门关联编号的定义。
+   private long __departmentLinkId;
+
+   // 字段部门关联编号的定义。
+   protected long _departmentLinkId;
+
    // 存储字段部门名称的定义。
    private String __departmentLabel;
 
    // 字段部门名称的定义。
    protected String _departmentLabel;
 
-   // 存储字段部门编号集合的定义。
-   private String __departmentIds;
-
-   // 字段部门编号集合的定义。
-   protected String _departmentIds;
-
    // 存储字段部门标签集合的定义。
-   private String __departmentLabels;
+   private String __departmentLabelPath;
 
    // 字段部门标签集合的定义。
-   protected String _departmentLabels;
+   protected String _departmentLabelPath;
 
    // 存储字段理财师编号的定义。
    private long __marketerId;
 
    // 字段理财师编号的定义。
    protected long _marketerId;
+
+   // 存储字段理财师关联编号的定义。
+   private long __marketerLinkId;
+
+   // 字段理财师关联编号的定义。
+   protected long _marketerLinkId;
 
    // 存储字段理财师名称的定义。
    private String __marketerLabel;
@@ -99,17 +105,23 @@ public class FStatisticsFinancialDynamicUnit
    // 字段理财师状态的定义。
    protected int _marketerStatusCd;
 
-   // 存储字段理财师等级的定义。
-   private String __marketerRank;
+   // 存储字段理财师等级标签的定义。
+   private String __marketerRankLabel;
 
-   // 字段理财师等级的定义。
-   protected String _marketerRank;
+   // 字段理财师等级标签的定义。
+   protected String _marketerRankLabel;
 
    // 存储字段客户编号的定义。
    private long __customerId;
 
    // 字段客户编号的定义。
    protected long _customerId;
+
+   // 存储字段客户关联编号的定义。
+   private long __customerLinkId;
+
+   // 字段客户关联编号的定义。
+   protected long _customerLinkId;
 
    // 存储字段客户名称的定义。
    private String __customerLabel;
@@ -176,6 +188,12 @@ public class FStatisticsFinancialDynamicUnit
 
    // 字段投标编号的定义。
    protected long _tenderId;
+
+   // 存储字段投标关联编号的定义。
+   private long __tenderLinkId;
+
+   // 字段投标关联编号的定义。
+   protected long _tenderLinkId;
 
    // 存储字段投标类型的定义。
    private String __tenderModel;
@@ -403,6 +421,33 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
+   // <T>判断部门关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLinkIdChanged(){
+      return __departmentLinkId != _departmentLinkId;
+   }
+
+   //============================================================
+   // <T>获得部门关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLinkId(){
+      return _departmentLinkId;
+   }
+
+   //============================================================
+   // <T>设置部门关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLinkId(long value){
+      _departmentLinkId = value;
+   }
+
+   //============================================================
    // <T>判断部门名称的数据是否改变。</T>
    //
    // @return 数据内容
@@ -430,39 +475,12 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
-   // <T>判断部门编号集合的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDepartmentIdsChanged(){
-      return !RString.equals(__departmentIds, _departmentIds);
-   }
-
-   //============================================================
-   // <T>获得部门编号集合的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String departmentIds(){
-      return _departmentIds;
-   }
-
-   //============================================================
-   // <T>设置部门编号集合的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDepartmentIds(String value){
-      _departmentIds = value;
-   }
-
-   //============================================================
    // <T>判断部门标签集合的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLabelsChanged(){
-      return !RString.equals(__departmentLabels, _departmentLabels);
+   public boolean isDepartmentLabelPathChanged(){
+      return !RString.equals(__departmentLabelPath, _departmentLabelPath);
    }
 
    //============================================================
@@ -470,8 +488,8 @@ public class FStatisticsFinancialDynamicUnit
    //
    // @return 数据内容
    //============================================================
-   public String departmentLabels(){
-      return _departmentLabels;
+   public String departmentLabelPath(){
+      return _departmentLabelPath;
    }
 
    //============================================================
@@ -479,8 +497,8 @@ public class FStatisticsFinancialDynamicUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLabels(String value){
-      _departmentLabels = value;
+   public void setDepartmentLabelPath(String value){
+      _departmentLabelPath = value;
    }
 
    //============================================================
@@ -508,6 +526,33 @@ public class FStatisticsFinancialDynamicUnit
    //============================================================
    public void setMarketerId(long value){
       _marketerId = value;
+   }
+
+   //============================================================
+   // <T>判断理财师关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerLinkIdChanged(){
+      return __marketerLinkId != _marketerLinkId;
+   }
+
+   //============================================================
+   // <T>获得理财师关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerLinkId(){
+      return _marketerLinkId;
+   }
+
+   //============================================================
+   // <T>设置理财师关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerLinkId(long value){
+      _marketerLinkId = value;
    }
 
    //============================================================
@@ -565,30 +610,30 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
-   // <T>判断理财师等级的数据是否改变。</T>
+   // <T>判断理财师等级标签的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerRankChanged(){
-      return !RString.equals(__marketerRank, _marketerRank);
+   public boolean isMarketerRankLabelChanged(){
+      return !RString.equals(__marketerRankLabel, _marketerRankLabel);
    }
 
    //============================================================
-   // <T>获得理财师等级的数据内容。</T>
+   // <T>获得理财师等级标签的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String marketerRank(){
-      return _marketerRank;
+   public String marketerRankLabel(){
+      return _marketerRankLabel;
    }
 
    //============================================================
-   // <T>设置理财师等级的数据内容。</T>
+   // <T>设置理财师等级标签的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerRank(String value){
-      _marketerRank = value;
+   public void setMarketerRankLabel(String value){
+      _marketerRankLabel = value;
    }
 
    //============================================================
@@ -616,6 +661,33 @@ public class FStatisticsFinancialDynamicUnit
    //============================================================
    public void setCustomerId(long value){
       _customerId = value;
+   }
+
+   //============================================================
+   // <T>判断客户关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerLinkIdChanged(){
+      return __customerLinkId != _customerLinkId;
+   }
+
+   //============================================================
+   // <T>获得客户关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long customerLinkId(){
+      return _customerLinkId;
+   }
+
+   //============================================================
+   // <T>设置客户关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerLinkId(long value){
+      _customerLinkId = value;
    }
 
    //============================================================
@@ -916,6 +988,33 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
+   // <T>判断投标关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderLinkIdChanged(){
+      return __tenderLinkId != _tenderLinkId;
+   }
+
+   //============================================================
+   // <T>获得投标关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderLinkId(){
+      return _tenderLinkId;
+   }
+
+   //============================================================
+   // <T>设置投标关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderLinkId(long value){
+      _tenderLinkId = value;
+   }
+
+   //============================================================
    // <T>判断投标类型的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1073,22 +1172,26 @@ public class FStatisticsFinancialDynamicUnit
             return Long.toString(_linkBorrowId);
          case "department_id":
             return Long.toString(_departmentId);
+         case "department_link_id":
+            return Long.toString(_departmentLinkId);
          case "department_label":
             return _departmentLabel;
-         case "department_ids":
-            return _departmentIds;
-         case "department_labels":
-            return _departmentLabels;
+         case "department_label_path":
+            return _departmentLabelPath;
          case "marketer_id":
             return Long.toString(_marketerId);
+         case "marketer_link_id":
+            return Long.toString(_marketerLinkId);
          case "marketer_label":
             return _marketerLabel;
          case "marketer_status_cd":
             return RInteger.toString(_marketerStatusCd);
-         case "marketer_rank":
-            return _marketerRank;
+         case "marketer_rank_label":
+            return _marketerRankLabel;
          case "customer_id":
             return Long.toString(_customerId);
+         case "customer_link_id":
+            return Long.toString(_customerLinkId);
          case "customer_label":
             return _customerLabel;
          case "customer_card":
@@ -1111,6 +1214,8 @@ public class FStatisticsFinancialDynamicUnit
             return RDouble.toString(_customerActionInterest);
          case "tender_id":
             return Long.toString(_tenderId);
+         case "tender_link_id":
+            return Long.toString(_tenderLinkId);
          case "tender_model":
             return _tenderModel;
          case "create_user_id":
@@ -1156,17 +1261,20 @@ public class FStatisticsFinancialDynamicUnit
          case "department_id":
             _departmentId = RLong.parse(value);
             break;
+         case "department_link_id":
+            _departmentLinkId = RLong.parse(value);
+            break;
          case "department_label":
             _departmentLabel = value;
             break;
-         case "department_ids":
-            _departmentIds = value;
-            break;
-         case "department_labels":
-            _departmentLabels = value;
+         case "department_label_path":
+            _departmentLabelPath = value;
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
+            break;
+         case "marketer_link_id":
+            _marketerLinkId = RLong.parse(value);
             break;
          case "marketer_label":
             _marketerLabel = value;
@@ -1174,11 +1282,14 @@ public class FStatisticsFinancialDynamicUnit
          case "marketer_status_cd":
             _marketerStatusCd = RInteger.parse(value);
             break;
-         case "marketer_rank":
-            _marketerRank = value;
+         case "marketer_rank_label":
+            _marketerRankLabel = value;
             break;
          case "customer_id":
             _customerId = RLong.parse(value);
+            break;
+         case "customer_link_id":
+            _customerLinkId = RLong.parse(value);
             break;
          case "customer_label":
             _customerLabel = value;
@@ -1212,6 +1323,9 @@ public class FStatisticsFinancialDynamicUnit
             break;
          case "tender_id":
             _tenderId = RLong.parse(value);
+            break;
+         case "tender_link_id":
+            _tenderLinkId = RLong.parse(value);
             break;
          case "tender_model":
             _tenderModel = value;
@@ -1271,21 +1385,25 @@ public class FStatisticsFinancialDynamicUnit
                __departmentId = RLong.parse(value);
                _departmentId = __departmentId;
                break;
+            case "department_link_id":
+               __departmentLinkId = RLong.parse(value);
+               _departmentLinkId = __departmentLinkId;
+               break;
             case "department_label":
                __departmentLabel = value;
                _departmentLabel = __departmentLabel;
                break;
-            case "department_ids":
-               __departmentIds = value;
-               _departmentIds = __departmentIds;
-               break;
-            case "department_labels":
-               __departmentLabels = value;
-               _departmentLabels = __departmentLabels;
+            case "department_label_path":
+               __departmentLabelPath = value;
+               _departmentLabelPath = __departmentLabelPath;
                break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
+               break;
+            case "marketer_link_id":
+               __marketerLinkId = RLong.parse(value);
+               _marketerLinkId = __marketerLinkId;
                break;
             case "marketer_label":
                __marketerLabel = value;
@@ -1295,13 +1413,17 @@ public class FStatisticsFinancialDynamicUnit
                __marketerStatusCd = RInteger.parse(value);
                _marketerStatusCd = __marketerStatusCd;
                break;
-            case "marketer_rank":
-               __marketerRank = value;
-               _marketerRank = __marketerRank;
+            case "marketer_rank_label":
+               __marketerRankLabel = value;
+               _marketerRankLabel = __marketerRankLabel;
                break;
             case "customer_id":
                __customerId = RLong.parse(value);
                _customerId = __customerId;
+               break;
+            case "customer_link_id":
+               __customerLinkId = RLong.parse(value);
+               _customerLinkId = __customerLinkId;
                break;
             case "customer_label":
                __customerLabel = value;
@@ -1347,6 +1469,10 @@ public class FStatisticsFinancialDynamicUnit
                __tenderId = RLong.parse(value);
                _tenderId = __tenderId;
                break;
+            case "tender_link_id":
+               __tenderLinkId = RLong.parse(value);
+               _tenderLinkId = __tenderLinkId;
+               break;
             case "tender_model":
                __tenderModel = value;
                _tenderModel = __tenderModel;
@@ -1386,14 +1512,16 @@ public class FStatisticsFinancialDynamicUnit
       row.set("linkDate", _linkDate);
       row.set("linkBorrowId", _linkBorrowId);
       row.set("departmentId", _departmentId);
+      row.set("departmentLinkId", _departmentLinkId);
       row.set("departmentLabel", _departmentLabel);
-      row.set("departmentIds", _departmentIds);
-      row.set("departmentLabels", _departmentLabels);
+      row.set("departmentLabelPath", _departmentLabelPath);
       row.set("marketerId", _marketerId);
+      row.set("marketerLinkId", _marketerLinkId);
       row.set("marketerLabel", _marketerLabel);
       row.set("marketerStatusCd", _marketerStatusCd);
-      row.set("marketerRank", _marketerRank);
+      row.set("marketerRankLabel", _marketerRankLabel);
       row.set("customerId", _customerId);
+      row.set("customerLinkId", _customerLinkId);
       row.set("customerLabel", _customerLabel);
       row.set("customerCard", _customerCard);
       row.set("customerArea", _customerArea);
@@ -1405,6 +1533,7 @@ public class FStatisticsFinancialDynamicUnit
       row.set("customerActionAmount", _customerActionAmount);
       row.set("customerActionInterest", _customerActionInterest);
       row.set("tenderId", _tenderId);
+      row.set("tenderLinkId", _tenderLinkId);
       row.set("tenderModel", _tenderModel);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -1427,14 +1556,16 @@ public class FStatisticsFinancialDynamicUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("linkBorrowId", RLong.toString(_linkBorrowId));
       map.put("departmentId", RLong.toString(_departmentId));
+      map.put("departmentLinkId", RLong.toString(_departmentLinkId));
       map.put("departmentLabel", _departmentLabel);
-      map.put("departmentIds", _departmentIds);
-      map.put("departmentLabels", _departmentLabels);
+      map.put("departmentLabelPath", _departmentLabelPath);
       map.put("marketerId", RLong.toString(_marketerId));
+      map.put("marketerLinkId", RLong.toString(_marketerLinkId));
       map.put("marketerLabel", _marketerLabel);
       map.put("marketerStatusCd", RInteger.toString(_marketerStatusCd));
-      map.put("marketerRank", _marketerRank);
+      map.put("marketerRankLabel", _marketerRankLabel);
       map.put("customerId", RLong.toString(_customerId));
+      map.put("customerLinkId", RLong.toString(_customerLinkId));
       map.put("customerLabel", _customerLabel);
       map.put("customerCard", _customerCard);
       map.put("customerArea", _customerArea);
@@ -1446,6 +1577,7 @@ public class FStatisticsFinancialDynamicUnit
       map.put("customerActionAmount", RDouble.toString(_customerActionAmount));
       map.put("customerActionInterest", RDouble.toString(_customerActionInterest));
       map.put("tenderId", RLong.toString(_tenderId));
+      map.put("tenderLinkId", RLong.toString(_tenderLinkId));
       map.put("tenderModel", _tenderModel);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1468,14 +1600,16 @@ public class FStatisticsFinancialDynamicUnit
       _linkDate.set(input.readInt64());
       _linkBorrowId = input.readInt64();
       _departmentId = input.readInt64();
+      _departmentLinkId = input.readInt64();
       _departmentLabel = input.readString();
-      _departmentIds = input.readString();
-      _departmentLabels = input.readString();
+      _departmentLabelPath = input.readString();
       _marketerId = input.readInt64();
+      _marketerLinkId = input.readInt64();
       _marketerLabel = input.readString();
       _marketerStatusCd = input.readInt32();
-      _marketerRank = input.readString();
+      _marketerRankLabel = input.readString();
       _customerId = input.readInt64();
+      _customerLinkId = input.readInt64();
       _customerLabel = input.readString();
       _customerCard = input.readString();
       _customerArea = input.readString();
@@ -1485,6 +1619,7 @@ public class FStatisticsFinancialDynamicUnit
       _customerActionCd = input.readInt32();
       _customerActionDate.set(input.readInt64());
       _tenderId = input.readInt64();
+      _tenderLinkId = input.readInt64();
       _tenderModel = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -1507,14 +1642,16 @@ public class FStatisticsFinancialDynamicUnit
       output.writeInt64(_linkDate.get());
       output.writeInt64(_linkBorrowId);
       output.writeInt64(_departmentId);
+      output.writeInt64(_departmentLinkId);
       output.writeString(_departmentLabel);
-      output.writeString(_departmentIds);
-      output.writeString(_departmentLabels);
+      output.writeString(_departmentLabelPath);
       output.writeInt64(_marketerId);
+      output.writeInt64(_marketerLinkId);
       output.writeString(_marketerLabel);
       output.writeInt32(_marketerStatusCd);
-      output.writeString(_marketerRank);
+      output.writeString(_marketerRankLabel);
       output.writeInt64(_customerId);
+      output.writeInt64(_customerLinkId);
       output.writeString(_customerLabel);
       output.writeString(_customerCard);
       output.writeString(_customerArea);
@@ -1524,6 +1661,7 @@ public class FStatisticsFinancialDynamicUnit
       output.writeInt32(_customerActionCd);
       output.writeInt64(_customerActionDate.get());
       output.writeInt64(_tenderId);
+      output.writeInt64(_tenderLinkId);
       output.writeString(_tenderModel);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

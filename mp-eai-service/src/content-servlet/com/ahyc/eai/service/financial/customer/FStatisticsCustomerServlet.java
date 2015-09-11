@@ -287,9 +287,11 @@ public class FStatisticsCustomerServlet
       int count = dataset.count();
       stream.writeInt32(count);
       for(FRow row : dataset){
-         stream.writeString(row.get("province_code"));
-         stream.writeInt32(row.getInteger("customer_count"));
+         String provinceCode = row.get("province_code");
+         stream.writeString(provinceCode);
+         stream.writeString(provinceCode);
          stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeInt32(row.getInteger("customer_count"));
          stream.writeDouble(row.getDouble("investment_avg"));
       }
       //............................................................

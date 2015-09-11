@@ -7,6 +7,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -50,6 +51,60 @@ public class FStatisticsFinancialMarketerUnit
    // 字段关联时间的定义。
    protected TDateTime _linkDate = new TDateTime();
 
+   // 存储字段部门编号的定义。
+   private long __linkDepartmentId;
+
+   // 字段部门编号的定义。
+   protected long _linkDepartmentId;
+
+   // 存储字段数据编号的定义。
+   private long __dataId;
+
+   // 字段数据编号的定义。
+   protected long _dataId;
+
+   // 存储字段部门标签的定义。
+   private String __departmentLabel;
+
+   // 字段部门标签的定义。
+   protected String _departmentLabel;
+
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
+
+   // 存储字段标签的定义。
+   private String __label;
+
+   // 字段标签的定义。
+   protected String _label;
+
+   // 存储字段状态类型的定义。
+   private int __statusCd;
+
+   // 字段状态类型的定义。
+   protected int _statusCd;
+
+   // 存储字段电话的定义。
+   private String __phone;
+
+   // 字段电话的定义。
+   protected String _phone;
+
+   // 存储字段卡片的定义。
+   private String __card;
+
+   // 字段卡片的定义。
+   protected String _card;
+
+   // 存储字段级别标签的定义。
+   private String __rankLabel;
+
+   // 字段级别标签的定义。
+   protected String _rankLabel;
+
    // 存储字段投资总计的定义。
    private double __investmentTotal;
 
@@ -79,6 +134,18 @@ public class FStatisticsFinancialMarketerUnit
 
    // 字段绩效总计的定义。
    protected double _performanceTotal;
+
+   // 存储字段入职时间的定义。
+   private TDateTime __enterDate = new TDateTime();
+
+   // 字段入职时间的定义。
+   protected TDateTime _enterDate = new TDateTime();
+
+   // 存储字段离职时间的定义。
+   private TDateTime __leaveDate = new TDateTime();
+
+   // 字段离职时间的定义。
+   protected TDateTime _leaveDate = new TDateTime();
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -246,6 +313,249 @@ public class FStatisticsFinancialMarketerUnit
    }
 
    //============================================================
+   // <T>判断部门编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkDepartmentIdChanged(){
+      return __linkDepartmentId != _linkDepartmentId;
+   }
+
+   //============================================================
+   // <T>获得部门编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkDepartmentId(){
+      return _linkDepartmentId;
+   }
+
+   //============================================================
+   // <T>设置部门编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkDepartmentId(long value){
+      _linkDepartmentId = value;
+   }
+
+   //============================================================
+   // <T>判断数据编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDataIdChanged(){
+      return __dataId != _dataId;
+   }
+
+   //============================================================
+   // <T>获得数据编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long dataId(){
+      return _dataId;
+   }
+
+   //============================================================
+   // <T>设置数据编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDataId(long value){
+      _dataId = value;
+   }
+
+   //============================================================
+   // <T>判断部门标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLabelChanged(){
+      return !RString.equals(__departmentLabel, _departmentLabel);
+   }
+
+   //============================================================
+   // <T>获得部门标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLabel(){
+      return _departmentLabel;
+   }
+
+   //============================================================
+   // <T>设置部门标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLabel(String value){
+      _departmentLabel = value;
+   }
+
+   //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
+   }
+
+   //============================================================
+   // <T>判断标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
+   }
+
+   //============================================================
+   // <T>获得标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>设置标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabel(String value){
+      _label = value;
+   }
+
+   //============================================================
+   // <T>判断状态类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isStatusCdChanged(){
+      return __statusCd != _statusCd;
+   }
+
+   //============================================================
+   // <T>获得状态类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int statusCd(){
+      return _statusCd;
+   }
+
+   //============================================================
+   // <T>设置状态类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setStatusCd(int value){
+      _statusCd = value;
+   }
+
+   //============================================================
+   // <T>判断电话的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneChanged(){
+      return !RString.equals(__phone, _phone);
+   }
+
+   //============================================================
+   // <T>获得电话的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phone(){
+      return _phone;
+   }
+
+   //============================================================
+   // <T>设置电话的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhone(String value){
+      _phone = value;
+   }
+
+   //============================================================
+   // <T>判断卡片的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardChanged(){
+      return !RString.equals(__card, _card);
+   }
+
+   //============================================================
+   // <T>获得卡片的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String card(){
+      return _card;
+   }
+
+   //============================================================
+   // <T>设置卡片的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCard(String value){
+      _card = value;
+   }
+
+   //============================================================
+   // <T>判断级别标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRankLabelChanged(){
+      return !RString.equals(__rankLabel, _rankLabel);
+   }
+
+   //============================================================
+   // <T>获得级别标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String rankLabel(){
+      return _rankLabel;
+   }
+
+   //============================================================
+   // <T>设置级别标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRankLabel(String value){
+      _rankLabel = value;
+   }
+
+   //============================================================
    // <T>判断投资总计的数据是否改变。</T>
    //
    // @return 数据内容
@@ -381,6 +691,60 @@ public class FStatisticsFinancialMarketerUnit
    }
 
    //============================================================
+   // <T>判断入职时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isEnterDateChanged(){
+      return !__enterDate.equals(_enterDate);
+   }
+
+   //============================================================
+   // <T>获得入职时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime enterDate(){
+      return _enterDate;
+   }
+
+   //============================================================
+   // <T>设置入职时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setEnterDate(TDateTime value){
+      _enterDate = value;
+   }
+
+   //============================================================
+   // <T>判断离职时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLeaveDateChanged(){
+      return !__leaveDate.equals(_leaveDate);
+   }
+
+   //============================================================
+   // <T>获得离职时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime leaveDate(){
+      return _leaveDate;
+   }
+
+   //============================================================
+   // <T>设置离职时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLeaveDate(TDateTime value){
+      _leaveDate = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -507,6 +871,24 @@ public class FStatisticsFinancialMarketerUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "link_department_id":
+            return Long.toString(_linkDepartmentId);
+         case "data_id":
+            return Long.toString(_dataId);
+         case "department_label":
+            return _departmentLabel;
+         case "code":
+            return _code;
+         case "label":
+            return _label;
+         case "status_cd":
+            return RInteger.toString(_statusCd);
+         case "phone":
+            return _phone;
+         case "card":
+            return _card;
+         case "rank_label":
+            return _rankLabel;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -517,6 +899,10 @@ public class FStatisticsFinancialMarketerUnit
             return RDouble.toString(_interestTotal);
          case "performance_total":
             return RDouble.toString(_performanceTotal);
+         case "enter_date":
+            return _enterDate.toString();
+         case "leave_date":
+            return _leaveDate.toString();
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -554,6 +940,33 @@ public class FStatisticsFinancialMarketerUnit
          case "link_date":
             _linkDate.parse(value);
             break;
+         case "link_department_id":
+            _linkDepartmentId = RLong.parse(value);
+            break;
+         case "data_id":
+            _dataId = RLong.parse(value);
+            break;
+         case "department_label":
+            _departmentLabel = value;
+            break;
+         case "code":
+            _code = value;
+            break;
+         case "label":
+            _label = value;
+            break;
+         case "status_cd":
+            _statusCd = RInteger.parse(value);
+            break;
+         case "phone":
+            _phone = value;
+            break;
+         case "card":
+            _card = value;
+            break;
+         case "rank_label":
+            _rankLabel = value;
+            break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
             break;
@@ -568,6 +981,12 @@ public class FStatisticsFinancialMarketerUnit
             break;
          case "performance_total":
             _performanceTotal = RDouble.parse(value);
+            break;
+         case "enter_date":
+            _enterDate.parse(value);
+            break;
+         case "leave_date":
+            _leaveDate.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -616,6 +1035,42 @@ public class FStatisticsFinancialMarketerUnit
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
                break;
+            case "link_department_id":
+               __linkDepartmentId = RLong.parse(value);
+               _linkDepartmentId = __linkDepartmentId;
+               break;
+            case "data_id":
+               __dataId = RLong.parse(value);
+               _dataId = __dataId;
+               break;
+            case "department_label":
+               __departmentLabel = value;
+               _departmentLabel = __departmentLabel;
+               break;
+            case "code":
+               __code = value;
+               _code = __code;
+               break;
+            case "label":
+               __label = value;
+               _label = __label;
+               break;
+            case "status_cd":
+               __statusCd = RInteger.parse(value);
+               _statusCd = __statusCd;
+               break;
+            case "phone":
+               __phone = value;
+               _phone = __phone;
+               break;
+            case "card":
+               __card = value;
+               _card = __card;
+               break;
+            case "rank_label":
+               __rankLabel = value;
+               _rankLabel = __rankLabel;
+               break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
@@ -635,6 +1090,14 @@ public class FStatisticsFinancialMarketerUnit
             case "performance_total":
                __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
+               break;
+            case "enter_date":
+               __enterDate.parse(value);
+               _enterDate.assign(__enterDate);
+               break;
+            case "leave_date":
+               __leaveDate.parse(value);
+               _leaveDate.assign(__leaveDate);
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -669,11 +1132,22 @@ public class FStatisticsFinancialMarketerUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("linkDepartmentId", _linkDepartmentId);
+      row.set("dataId", _dataId);
+      row.set("departmentLabel", _departmentLabel);
+      row.set("code", _code);
+      row.set("label", _label);
+      row.set("statusCd", _statusCd);
+      row.set("phone", _phone);
+      row.set("card", _card);
+      row.set("rankLabel", _rankLabel);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
+      row.set("enterDate", _enterDate);
+      row.set("leaveDate", _leaveDate);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -693,11 +1167,22 @@ public class FStatisticsFinancialMarketerUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkDepartmentId", RLong.toString(_linkDepartmentId));
+      map.put("dataId", RLong.toString(_dataId));
+      map.put("departmentLabel", _departmentLabel);
+      map.put("code", _code);
+      map.put("label", _label);
+      map.put("statusCd", RInteger.toString(_statusCd));
+      map.put("phone", _phone);
+      map.put("card", _card);
+      map.put("rankLabel", _rankLabel);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
+      map.put("enterDate", _enterDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("leaveDate", _leaveDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -717,6 +1202,17 @@ public class FStatisticsFinancialMarketerUnit
       _guid = input.readString();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
+      _linkDepartmentId = input.readInt64();
+      _dataId = input.readInt64();
+      _departmentLabel = input.readString();
+      _code = input.readString();
+      _label = input.readString();
+      _statusCd = input.readInt32();
+      _phone = input.readString();
+      _card = input.readString();
+      _rankLabel = input.readString();
+      _enterDate.set(input.readInt64());
+      _leaveDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -736,6 +1232,17 @@ public class FStatisticsFinancialMarketerUnit
       output.writeString(_guid);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
+      output.writeInt64(_linkDepartmentId);
+      output.writeInt64(_dataId);
+      output.writeString(_departmentLabel);
+      output.writeString(_code);
+      output.writeString(_label);
+      output.writeInt32(_statusCd);
+      output.writeString(_phone);
+      output.writeString(_card);
+      output.writeString(_rankLabel);
+      output.writeInt64(_enterDate.get());
+      output.writeInt64(_leaveDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

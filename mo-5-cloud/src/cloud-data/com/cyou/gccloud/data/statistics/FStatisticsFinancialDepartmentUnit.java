@@ -7,6 +7,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -38,6 +39,18 @@ public class FStatisticsFinancialDepartmentUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段关联顶层编号的定义。
+   private long __linkTopId;
+
+   // 字段关联顶层编号的定义。
+   protected long _linkTopId;
+
+   // 存储字段关联父编号的定义。
+   private long __linkParentId;
+
+   // 字段关联父编号的定义。
+   protected long _linkParentId;
+
    // 存储字段关联编号的定义。
    private long __linkId;
 
@@ -49,6 +62,48 @@ public class FStatisticsFinancialDepartmentUnit
 
    // 字段关联时间的定义。
    protected TDateTime _linkDate = new TDateTime();
+
+   // 存储字段关联编号路径的定义。
+   private String __linkIdPath;
+
+   // 字段关联编号路径的定义。
+   protected String _linkIdPath;
+
+   // 存储字段数据编号的定义。
+   private long __dataId;
+
+   // 字段数据编号的定义。
+   protected long _dataId;
+
+   // 存储字段父编号的定义。
+   private long __parentId;
+
+   // 字段父编号的定义。
+   protected long _parentId;
+
+   // 存储字段代码的定义。
+   private String __code;
+
+   // 字段代码的定义。
+   protected String _code;
+
+   // 存储字段顶层标签的定义。
+   private String __topLabel;
+
+   // 字段顶层标签的定义。
+   protected String _topLabel;
+
+   // 存储字段标签的定义。
+   private String __label;
+
+   // 字段标签的定义。
+   protected String _label;
+
+   // 存储字段标签路径的定义。
+   private String __labelPath;
+
+   // 字段标签路径的定义。
+   protected String _labelPath;
 
    // 存储字段投资总计的定义。
    private double __investmentTotal;
@@ -79,6 +134,18 @@ public class FStatisticsFinancialDepartmentUnit
 
    // 字段绩效总计的定义。
    protected double _performanceTotal;
+
+   // 存储字段理财师总计的定义。
+   private int __marketerTotal;
+
+   // 字段理财师总计的定义。
+   protected int _marketerTotal;
+
+   // 存储字段客户总计的定义。
+   private int __customerTotal;
+
+   // 字段客户总计的定义。
+   protected int _customerTotal;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -192,6 +259,60 @@ public class FStatisticsFinancialDepartmentUnit
    }
 
    //============================================================
+   // <T>判断关联顶层编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkTopIdChanged(){
+      return __linkTopId != _linkTopId;
+   }
+
+   //============================================================
+   // <T>获得关联顶层编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkTopId(){
+      return _linkTopId;
+   }
+
+   //============================================================
+   // <T>设置关联顶层编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkTopId(long value){
+      _linkTopId = value;
+   }
+
+   //============================================================
+   // <T>判断关联父编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkParentIdChanged(){
+      return __linkParentId != _linkParentId;
+   }
+
+   //============================================================
+   // <T>获得关联父编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long linkParentId(){
+      return _linkParentId;
+   }
+
+   //============================================================
+   // <T>设置关联父编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkParentId(long value){
+      _linkParentId = value;
+   }
+
+   //============================================================
    // <T>判断关联编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -243,6 +364,195 @@ public class FStatisticsFinancialDepartmentUnit
    //============================================================
    public void setLinkDate(TDateTime value){
       _linkDate = value;
+   }
+
+   //============================================================
+   // <T>判断关联编号路径的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkIdPathChanged(){
+      return !RString.equals(__linkIdPath, _linkIdPath);
+   }
+
+   //============================================================
+   // <T>获得关联编号路径的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String linkIdPath(){
+      return _linkIdPath;
+   }
+
+   //============================================================
+   // <T>设置关联编号路径的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkIdPath(String value){
+      _linkIdPath = value;
+   }
+
+   //============================================================
+   // <T>判断数据编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDataIdChanged(){
+      return __dataId != _dataId;
+   }
+
+   //============================================================
+   // <T>获得数据编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long dataId(){
+      return _dataId;
+   }
+
+   //============================================================
+   // <T>设置数据编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDataId(long value){
+      _dataId = value;
+   }
+
+   //============================================================
+   // <T>判断父编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isParentIdChanged(){
+      return __parentId != _parentId;
+   }
+
+   //============================================================
+   // <T>获得父编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long parentId(){
+      return _parentId;
+   }
+
+   //============================================================
+   // <T>设置父编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setParentId(long value){
+      _parentId = value;
+   }
+
+   //============================================================
+   // <T>判断代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
+   }
+
+   //============================================================
+   // <T>获得代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>设置代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCode(String value){
+      _code = value;
+   }
+
+   //============================================================
+   // <T>判断顶层标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTopLabelChanged(){
+      return !RString.equals(__topLabel, _topLabel);
+   }
+
+   //============================================================
+   // <T>获得顶层标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String topLabel(){
+      return _topLabel;
+   }
+
+   //============================================================
+   // <T>设置顶层标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTopLabel(String value){
+      _topLabel = value;
+   }
+
+   //============================================================
+   // <T>判断标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
+   }
+
+   //============================================================
+   // <T>获得标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>设置标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabel(String value){
+      _label = value;
+   }
+
+   //============================================================
+   // <T>判断标签路径的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelPathChanged(){
+      return !RString.equals(__labelPath, _labelPath);
+   }
+
+   //============================================================
+   // <T>获得标签路径的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String labelPath(){
+      return _labelPath;
+   }
+
+   //============================================================
+   // <T>设置标签路径的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabelPath(String value){
+      _labelPath = value;
    }
 
    //============================================================
@@ -381,6 +691,60 @@ public class FStatisticsFinancialDepartmentUnit
    }
 
    //============================================================
+   // <T>判断理财师总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerTotalChanged(){
+      return __marketerTotal != _marketerTotal;
+   }
+
+   //============================================================
+   // <T>获得理财师总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int marketerTotal(){
+      return _marketerTotal;
+   }
+
+   //============================================================
+   // <T>设置理财师总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerTotal(int value){
+      _marketerTotal = value;
+   }
+
+   //============================================================
+   // <T>判断客户总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerTotalChanged(){
+      return __customerTotal != _customerTotal;
+   }
+
+   //============================================================
+   // <T>获得客户总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int customerTotal(){
+      return _customerTotal;
+   }
+
+   //============================================================
+   // <T>设置客户总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerTotal(int value){
+      _customerTotal = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -503,10 +867,28 @@ public class FStatisticsFinancialDepartmentUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "link_top_id":
+            return Long.toString(_linkTopId);
+         case "link_parent_id":
+            return Long.toString(_linkParentId);
          case "link_id":
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "link_id_path":
+            return _linkIdPath;
+         case "data_id":
+            return Long.toString(_dataId);
+         case "parent_id":
+            return Long.toString(_parentId);
+         case "code":
+            return _code;
+         case "top_label":
+            return _topLabel;
+         case "label":
+            return _label;
+         case "label_path":
+            return _labelPath;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -517,6 +899,10 @@ public class FStatisticsFinancialDepartmentUnit
             return RDouble.toString(_interestTotal);
          case "performance_total":
             return RDouble.toString(_performanceTotal);
+         case "marketer_total":
+            return RInteger.toString(_marketerTotal);
+         case "customer_total":
+            return RInteger.toString(_customerTotal);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -548,11 +934,38 @@ public class FStatisticsFinancialDepartmentUnit
          case "guid":
             _guid = value;
             break;
+         case "link_top_id":
+            _linkTopId = RLong.parse(value);
+            break;
+         case "link_parent_id":
+            _linkParentId = RLong.parse(value);
+            break;
          case "link_id":
             _linkId = RLong.parse(value);
             break;
          case "link_date":
             _linkDate.parse(value);
+            break;
+         case "link_id_path":
+            _linkIdPath = value;
+            break;
+         case "data_id":
+            _dataId = RLong.parse(value);
+            break;
+         case "parent_id":
+            _parentId = RLong.parse(value);
+            break;
+         case "code":
+            _code = value;
+            break;
+         case "top_label":
+            _topLabel = value;
+            break;
+         case "label":
+            _label = value;
+            break;
+         case "label_path":
+            _labelPath = value;
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -568,6 +981,12 @@ public class FStatisticsFinancialDepartmentUnit
             break;
          case "performance_total":
             _performanceTotal = RDouble.parse(value);
+            break;
+         case "marketer_total":
+            _marketerTotal = RInteger.parse(value);
+            break;
+         case "customer_total":
+            _customerTotal = RInteger.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -608,6 +1027,14 @@ public class FStatisticsFinancialDepartmentUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "link_top_id":
+               __linkTopId = RLong.parse(value);
+               _linkTopId = __linkTopId;
+               break;
+            case "link_parent_id":
+               __linkParentId = RLong.parse(value);
+               _linkParentId = __linkParentId;
+               break;
             case "link_id":
                __linkId = RLong.parse(value);
                _linkId = __linkId;
@@ -615,6 +1042,34 @@ public class FStatisticsFinancialDepartmentUnit
             case "link_date":
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
+               break;
+            case "link_id_path":
+               __linkIdPath = value;
+               _linkIdPath = __linkIdPath;
+               break;
+            case "data_id":
+               __dataId = RLong.parse(value);
+               _dataId = __dataId;
+               break;
+            case "parent_id":
+               __parentId = RLong.parse(value);
+               _parentId = __parentId;
+               break;
+            case "code":
+               __code = value;
+               _code = __code;
+               break;
+            case "top_label":
+               __topLabel = value;
+               _topLabel = __topLabel;
+               break;
+            case "label":
+               __label = value;
+               _label = __label;
+               break;
+            case "label_path":
+               __labelPath = value;
+               _labelPath = __labelPath;
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -635,6 +1090,14 @@ public class FStatisticsFinancialDepartmentUnit
             case "performance_total":
                __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
+               break;
+            case "marketer_total":
+               __marketerTotal = RInteger.parse(value);
+               _marketerTotal = __marketerTotal;
+               break;
+            case "customer_total":
+               __customerTotal = RInteger.parse(value);
+               _customerTotal = __customerTotal;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -667,13 +1130,24 @@ public class FStatisticsFinancialDepartmentUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("linkTopId", _linkTopId);
+      row.set("linkParentId", _linkParentId);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("linkIdPath", _linkIdPath);
+      row.set("dataId", _dataId);
+      row.set("parentId", _parentId);
+      row.set("code", _code);
+      row.set("topLabel", _topLabel);
+      row.set("label", _label);
+      row.set("labelPath", _labelPath);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
+      row.set("marketerTotal", _marketerTotal);
+      row.set("customerTotal", _customerTotal);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -691,13 +1165,24 @@ public class FStatisticsFinancialDepartmentUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("linkTopId", RLong.toString(_linkTopId));
+      map.put("linkParentId", RLong.toString(_linkParentId));
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("linkIdPath", _linkIdPath);
+      map.put("dataId", RLong.toString(_dataId));
+      map.put("parentId", RLong.toString(_parentId));
+      map.put("code", _code);
+      map.put("topLabel", _topLabel);
+      map.put("label", _label);
+      map.put("labelPath", _labelPath);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
+      map.put("marketerTotal", RInteger.toString(_marketerTotal));
+      map.put("customerTotal", RInteger.toString(_customerTotal));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -715,8 +1200,19 @@ public class FStatisticsFinancialDepartmentUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
+      _linkTopId = input.readInt64();
+      _linkParentId = input.readInt64();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
+      _linkIdPath = input.readString();
+      _dataId = input.readInt64();
+      _parentId = input.readInt64();
+      _code = input.readString();
+      _topLabel = input.readString();
+      _label = input.readString();
+      _labelPath = input.readString();
+      _marketerTotal = input.readInt32();
+      _customerTotal = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -734,8 +1230,19 @@ public class FStatisticsFinancialDepartmentUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
+      output.writeInt64(_linkTopId);
+      output.writeInt64(_linkParentId);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
+      output.writeString(_linkIdPath);
+      output.writeInt64(_dataId);
+      output.writeInt64(_parentId);
+      output.writeString(_code);
+      output.writeString(_topLabel);
+      output.writeString(_label);
+      output.writeString(_labelPath);
+      output.writeInt32(_marketerTotal);
+      output.writeInt32(_customerTotal);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

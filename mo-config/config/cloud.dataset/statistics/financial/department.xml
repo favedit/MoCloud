@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="7d4d76e2-c447-4ff0-b82b-682ce1b4c552" name="statistics.financial.department" label="M#12cn15部门统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Department" data_name="ST_FIN_DEPARTMENT" data_alias="ST_FIN_DEP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="6a31acb3-0e79-4d56-a5fe-8a74ec46288f" name="link_top_id" label="M#12cn16关联顶层编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_TOP_ID" />
+  <FieldRecordId _uuid="5a20af36-24f3-48a5-a667-4b864de41519" name="link_parent_id" label="M#12cn15关联父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_PARENT_ID" />
   <FieldRecordId _uuid="42c541ff-685d-489c-8e09-d332c504f8f2" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldDateTime _uuid="375a4ff4-6a78-49ba-b21f-aaebec847216" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldString _uuid="b28479fd-199c-4d17-9261-3c1dfdf89663" name="link_id_path" label="M#12cn16关联编号路径" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID_PATH" data_size="400" />
+  <FieldRecordId _uuid="627ecc40-8b4b-4f57-825e-8ad491210d15" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
+  <FieldRecordId _uuid="6877463f-6015-4d66-8933-676fac8cae6f" name="parent_id" label="M#12cn13父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARENT_ID" />
+  <FieldString _uuid="c0b4b4b4-3327-4c6c-8de7-f3dcf4f42da0" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
+  <FieldString _uuid="bcf43dce-d430-4089-a476-ec31ebbf57f5" name="top_label" label="M#12cn14顶层标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TOP_LABEL" data_size="40" />
+  <FieldString _uuid="ebfc79b8-03ae-4ca2-94e5-be576b651aac" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="d0be4ea3-5a32-4b9a-8e13-0d9722ae1a82" name="label_path" label="M#12cn14标签路径" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL_PATH" data_size="800" />
   <FieldDouble _uuid="f3a182de-aeab-47e8-979e-d1e83692e17c" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldDouble _uuid="43caa1ae-e630-44c9-a655-a948ba665266" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
   <FieldDouble _uuid="ecd5da6d-11dd-47cb-ab87-4d0ab6529ecf" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
   <FieldDouble _uuid="1a781555-3698-41ee-a8a0-f50d71daa4c8" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="d028ebb1-026c-4b64-84ff-41cf5d6c141f" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldInteger _uuid="b5104b31-21e8-42a6-8ab1-52c505028a65" name="marketer_total" label="M#12cn15理财师总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_TOTAL" />
+  <FieldInteger _uuid="fcc0e097-e691-4d6c-a704-c115c8e350cf" name="customer_total" label="M#12cn14客户总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_TOTAL" />
   <FieldTemplate _uuid="f84fe47f-701b-4dce-b0fb-f453e515a107" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.marketer'>
+SELECT
+   real_name,
+   rank,
+   user_name,
+   belong_dept,
+   code,
+   status,
+   FROM_UNIXTIME(`add_time`, '%Y%m%d%H%i%s') AS add_date,
+   upd_time
+FROM lzh_fmanager
+WHERE uid={id}
+</Resource>
+
+<Resource name='sql.marketer.status'>
+SELECT
+   FROM_UNIXTIME(max(`add_time`), '%Y%m%d%H%i%s') AS add_date
+FROM lzh_member_info
+WHERE uid={id} AND type=1
+</Resource>
+
+</Config>

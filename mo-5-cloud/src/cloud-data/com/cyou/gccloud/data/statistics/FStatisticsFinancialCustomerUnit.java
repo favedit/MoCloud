@@ -50,6 +50,30 @@ public class FStatisticsFinancialCustomerUnit
    // 字段关联时间的定义。
    protected TDateTime _linkDate = new TDateTime();
 
+   // 存储字段数据编号的定义。
+   private long __dataId;
+
+   // 字段数据编号的定义。
+   protected long _dataId;
+
+   // 存储字段标签的定义。
+   private String __label;
+
+   // 字段标签的定义。
+   protected String _label;
+
+   // 存储字段电话号码的定义。
+   private String __phone;
+
+   // 字段电话号码的定义。
+   protected String _phone;
+
+   // 存储字段身份证号的定义。
+   private String __card;
+
+   // 字段身份证号的定义。
+   protected String _card;
+
    // 存储字段投资总计的定义。
    private double __investmentTotal;
 
@@ -243,6 +267,114 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setLinkDate(TDateTime value){
       _linkDate = value;
+   }
+
+   //============================================================
+   // <T>判断数据编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDataIdChanged(){
+      return __dataId != _dataId;
+   }
+
+   //============================================================
+   // <T>获得数据编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long dataId(){
+      return _dataId;
+   }
+
+   //============================================================
+   // <T>设置数据编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDataId(long value){
+      _dataId = value;
+   }
+
+   //============================================================
+   // <T>判断标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
+   }
+
+   //============================================================
+   // <T>获得标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>设置标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabel(String value){
+      _label = value;
+   }
+
+   //============================================================
+   // <T>判断电话号码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneChanged(){
+      return !RString.equals(__phone, _phone);
+   }
+
+   //============================================================
+   // <T>获得电话号码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phone(){
+      return _phone;
+   }
+
+   //============================================================
+   // <T>设置电话号码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhone(String value){
+      _phone = value;
+   }
+
+   //============================================================
+   // <T>判断身份证号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardChanged(){
+      return !RString.equals(__card, _card);
+   }
+
+   //============================================================
+   // <T>获得身份证号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String card(){
+      return _card;
+   }
+
+   //============================================================
+   // <T>设置身份证号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCard(String value){
+      _card = value;
    }
 
    //============================================================
@@ -507,6 +639,14 @@ public class FStatisticsFinancialCustomerUnit
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
+         case "data_id":
+            return Long.toString(_dataId);
+         case "label":
+            return _label;
+         case "phone":
+            return _phone;
+         case "card":
+            return _card;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -553,6 +693,18 @@ public class FStatisticsFinancialCustomerUnit
             break;
          case "link_date":
             _linkDate.parse(value);
+            break;
+         case "data_id":
+            _dataId = RLong.parse(value);
+            break;
+         case "label":
+            _label = value;
+            break;
+         case "phone":
+            _phone = value;
+            break;
+         case "card":
+            _card = value;
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -616,6 +768,22 @@ public class FStatisticsFinancialCustomerUnit
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
                break;
+            case "data_id":
+               __dataId = RLong.parse(value);
+               _dataId = __dataId;
+               break;
+            case "label":
+               __label = value;
+               _label = __label;
+               break;
+            case "phone":
+               __phone = value;
+               _phone = __phone;
+               break;
+            case "card":
+               __card = value;
+               _card = __card;
+               break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
@@ -669,6 +837,10 @@ public class FStatisticsFinancialCustomerUnit
       row.set("guid", _guid);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
+      row.set("dataId", _dataId);
+      row.set("label", _label);
+      row.set("phone", _phone);
+      row.set("card", _card);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
@@ -693,6 +865,10 @@ public class FStatisticsFinancialCustomerUnit
       map.put("guid", _guid);
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("dataId", RLong.toString(_dataId));
+      map.put("label", _label);
+      map.put("phone", _phone);
+      map.put("card", _card);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
@@ -717,6 +893,10 @@ public class FStatisticsFinancialCustomerUnit
       _guid = input.readString();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
+      _dataId = input.readInt64();
+      _label = input.readString();
+      _phone = input.readString();
+      _card = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -736,6 +916,10 @@ public class FStatisticsFinancialCustomerUnit
       output.writeString(_guid);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
+      output.writeInt64(_dataId);
+      output.writeString(_label);
+      output.writeString(_phone);
+      output.writeString(_card);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

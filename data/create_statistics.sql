@@ -76,14 +76,16 @@ CREATE TABLE `ST_FIN_DYNAMIC`
    `LINK_DATE`                     DATETIME, 
    `LINK_BORROW_ID`                BIGINT, 
    `DEPARTMENT_ID`                 BIGINT, 
+   `DEPARTMENT_LINK_ID`            BIGINT, 
    `DEPARTMENT_LABEL`              VARCHAR(40), 
-   `DEPARTMENT_IDS`                VARCHAR(200), 
-   `DEPARTMENT_LABELS`             VARCHAR(400), 
+   `DEPARTMENT_LABEL_PATH`         VARCHAR(400), 
    `MARKETER_ID`                   BIGINT, 
+   `MARKETER_LINK_ID`              BIGINT, 
    `MARKETER_LABEL`                VARCHAR(40), 
    `MARKETER_STATUS_CD`            INTEGER, 
-   `MARKETER_RANK`                 VARCHAR(40), 
+   `MARKETER_RANK_LABEL`           VARCHAR(40), 
    `CUSTOMER_ID`                   BIGINT, 
+   `CUSTOMER_LINK_ID`              BIGINT, 
    `CUSTOMER_LABEL`                VARCHAR(40), 
    `CUSTOMER_CARD`                 VARCHAR(20), 
    `CUSTOMER_AREA`                 VARCHAR(6), 
@@ -95,6 +97,7 @@ CREATE TABLE `ST_FIN_DYNAMIC`
    `CUSTOMER_ACTION_AMOUNT`        DOUBLE, 
    `CUSTOMER_ACTION_INTEREST`      DOUBLE, 
    `TENDER_ID`                     BIGINT, 
+   `TENDER_LINK_ID`                BIGINT, 
    `TENDER_MODEL`                  VARCHAR(20), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -104,6 +107,165 @@ CREATE TABLE `ST_FIN_DYNAMIC`
 
 ALTER TABLE ST_FIN_DYNAMIC 
    ADD CONSTRAINT ST_FIN_DYN_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Statistics.Financial.Member]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_MEMBER`;
+CREATE TABLE `ST_FIN_MEMBER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LINK_ID`                       BIGINT NOT NULL, 
+   `LINK_DATE`                     DATETIME, 
+   `DATA_ID`                       BIGINT, 
+   `PASSPORT`                      VARCHAR(40), 
+   `LABEL`                         VARCHAR(40), 
+   `CARD`                          VARCHAR(20), 
+   `PHONE`                         VARCHAR(20), 
+   `EMAIL`                         VARCHAR(80), 
+   `GENDER_CD`                     INTEGER, 
+   `GENDER_CODE`                   VARCHAR(8), 
+   `MARRY_CD`                      INTEGER, 
+   `MARRY_CODE`                    VARCHAR(8), 
+   `EDUCATION_CD`                  INTEGER, 
+   `EDUCATION_CODE`                VARCHAR(40), 
+   `BUSINESS_CD`                   INTEGER, 
+   `BUSINESS_CODE`                 VARCHAR(80), 
+   `INCOME_CD`                     INTEGER, 
+   `INCOME_CODE`                   VARCHAR(20), 
+   `PROVINCE_AREA_ID`              BIGINT, 
+   `PROVINCE_ID`                   BIGINT, 
+   `PROVINCE_CODE`                 INTEGER, 
+   `CITY_ID`                       BIGINT, 
+   `CITY_CODE`                     INTEGER, 
+   `AREA_ID`                       BIGINT, 
+   `AREA_CODE`                     INTEGER, 
+   `ADDRESS`                       VARCHAR(200), 
+   `INFO`                          VARCHAR(800), 
+   `REGISTER_DATE`                 DATETIME, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE ST_FIN_MEMBER 
+   ADD CONSTRAINT ST_FIN_MEM_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_MEMBER 
+   ADD CONSTRAINT ST_FIN_MEM_UK_LINK_ID UNIQUE ( LINK_ID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Statistics.Financial.Customer]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_CUSTOMER`;
+CREATE TABLE `ST_FIN_CUSTOMER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LINK_ID`                       BIGINT NOT NULL, 
+   `LINK_DATE`                     DATETIME, 
+   `DATA_ID`                       BIGINT, 
+   `LABEL`                         VARCHAR(40), 
+   `PHONE`                         VARCHAR(20), 
+   `CARD`                          VARCHAR(20), 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `PERFORMANCE_TOTAL`             DOUBLE, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE ST_FIN_CUSTOMER 
+   ADD CONSTRAINT ST_FIN_CUS_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_CUSTOMER 
+   ADD CONSTRAINT ST_FIN_CUS_UK_LINK_ID UNIQUE ( LINK_ID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Statistics.Financial.Marketer]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_MARKETER`;
+CREATE TABLE `ST_FIN_MARKETER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LINK_ID`                       BIGINT NOT NULL, 
+   `LINK_DATE`                     DATETIME, 
+   `LINK_DEPARTMENT_ID`            BIGINT, 
+   `DATA_ID`                       BIGINT, 
+   `DEPARTMENT_LABEL`              VARCHAR(80), 
+   `CODE`                          VARCHAR(40), 
+   `LABEL`                         VARCHAR(40), 
+   `STATUS_CD`                     INTEGER, 
+   `PHONE`                         VARCHAR(20), 
+   `CARD`                          VARCHAR(20), 
+   `RANK_LABEL`                    VARCHAR(80), 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `PERFORMANCE_TOTAL`             DOUBLE, 
+   `ENTER_DATE`                    DATETIME, 
+   `LEAVE_DATE`                    DATETIME, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE ST_FIN_MARKETER 
+   ADD CONSTRAINT ST_FIN_MKT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_MARKETER 
+   ADD CONSTRAINT ST_FIN_MKT_UK_LINK_ID UNIQUE ( LINK_ID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Statistics.Financial.Department]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `ST_FIN_DEPARTMENT`;
+CREATE TABLE `ST_FIN_DEPARTMENT` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LINK_TOP_ID`                   BIGINT, 
+   `LINK_PARENT_ID`                BIGINT, 
+   `LINK_ID`                       BIGINT NOT NULL, 
+   `LINK_DATE`                     DATETIME, 
+   `LINK_ID_PATH`                  VARCHAR(400), 
+   `DATA_ID`                       BIGINT, 
+   `PARENT_ID`                     BIGINT, 
+   `CODE`                          VARCHAR(40), 
+   `TOP_LABEL`                     VARCHAR(40), 
+   `LABEL`                         VARCHAR(40), 
+   `LABEL_PATH`                    VARCHAR(800), 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `PERFORMANCE_TOTAL`             DOUBLE, 
+   `MARKETER_TOTAL`                INTEGER, 
+   `CUSTOMER_TOTAL`                INTEGER, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE ST_FIN_DEPARTMENT 
+   ADD CONSTRAINT ST_FIN_DEP_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE ST_FIN_DEPARTMENT 
+   ADD CONSTRAINT ST_FIN_DEP_UK_LINK_ID UNIQUE ( LINK_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Amount]
@@ -134,90 +296,6 @@ CREATE TABLE `ST_FIN_AMOUNT`
 
 ALTER TABLE ST_FIN_AMOUNT 
    ADD CONSTRAINT ST_FIN_AMT_UK_GID UNIQUE ( GUID ); 
-
--- ------------------------------------------------------------
--- Create table [Statistics.Financial.Department]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `ST_FIN_DEPARTMENT`;
-CREATE TABLE `ST_FIN_DEPARTMENT` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `LINK_ID`                       BIGINT NOT NULL, 
-   `LINK_DATE`                     DATETIME, 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
-   `INTEREST_TOTAL`                DOUBLE, 
-   `PERFORMANCE_TOTAL`             DOUBLE, 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
-
-ALTER TABLE ST_FIN_DEPARTMENT 
-   ADD CONSTRAINT ST_FIN_DEP_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE ST_FIN_DEPARTMENT 
-   ADD CONSTRAINT ST_FIN_DEP_UK_LINK_ID UNIQUE ( LINK_ID ); 
-
--- ------------------------------------------------------------
--- Create table [Statistics.Financial.Marketer]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `ST_FIN_MARKETER`;
-CREATE TABLE `ST_FIN_MARKETER` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `LINK_ID`                       BIGINT NOT NULL, 
-   `LINK_DATE`                     DATETIME, 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
-   `INTEREST_TOTAL`                DOUBLE, 
-   `PERFORMANCE_TOTAL`             DOUBLE, 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
-
-ALTER TABLE ST_FIN_MARKETER 
-   ADD CONSTRAINT ST_FIN_MKT_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE ST_FIN_MARKETER 
-   ADD CONSTRAINT ST_FIN_MKT_UK_LINK_ID UNIQUE ( LINK_ID ); 
-
--- ------------------------------------------------------------
--- Create table [Statistics.Financial.Customer]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `ST_FIN_CUSTOMER`;
-CREATE TABLE `ST_FIN_CUSTOMER` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `LINK_ID`                       BIGINT NOT NULL, 
-   `LINK_DATE`                     DATETIME, 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
-   `INTEREST_TOTAL`                DOUBLE, 
-   `PERFORMANCE_TOTAL`             DOUBLE, 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
-
-ALTER TABLE ST_FIN_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_CUS_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE ST_FIN_CUSTOMER 
-   ADD CONSTRAINT ST_FIN_CUS_UK_LINK_ID UNIQUE ( LINK_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Phase]

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="9b7e0c46-5f49-4bf4-8320-19cb2a04ffe2" name="statistics.financial.member" label="M#12cn15用户统计表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Member" data_name="ST_FIN_MEMBER" data_alias="ST_FIN_MEM" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="e369fd6d-6b1d-4e9b-8441-1e332a87900d" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="3863ca58-1a39-40bc-834d-d22eccf1212f" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldRecordId _uuid="24fee175-b568-459b-ad29-7051959af6d1" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
+  <FieldString _uuid="48e530fe-ab83-4fcd-a7b3-b8267f836eb8" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
+  <FieldString _uuid="f04e3302-dc48-4055-a196-7f1c99bb2bda" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="c0d8d097-2813-4548-93ee-96f54ebb0690" name="card" label="M#12cn13身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
+  <FieldString _uuid="6f3c96f1-27fb-424f-97c3-113feff130f4" name="phone" label="M#12cn12电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
+  <FieldString _uuid="bde10850-fbb2-4d90-96a1-b4ffb1256813" name="email" label="M#12cn14电子邮箱" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EMAIL" data_size="80" />
+  <FieldInteger _uuid="d684624f-9b54-4a72-8177-0f347037febb" name="gender_cd" label="M#12cn14性别类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CD" />
+  <FieldString _uuid="50402f5b-dcbb-46e3-83e2-68355e442896" name="gender_code" label="M#12cn14性别代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CODE" data_size="8" />
+  <FieldInteger _uuid="e7c50b71-0f44-45e4-b652-8b361d0a9db3" name="marry_cd" label="M#12cn14已婚类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CD" />
+  <FieldString _uuid="67af31af-062d-4173-9ad0-2c2756552ae1" name="marry_code" label="M#12cn14已婚代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CODE" data_size="8" />
+  <FieldInteger _uuid="175ada3f-5e1c-4284-a710-5060256fea06" name="education_cd" label="M#12cn14学历类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EDUCATION_CD" />
+  <FieldString _uuid="8e7e3e27-1209-4fd3-af72-35d1ea68251a" name="education_code" label="M#12cn14学历代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EDUCATION_CODE" data_size="40" />
+  <FieldInteger _uuid="154022c8-bb1e-4f52-a278-346e36916138" name="business_cd" label="M#12cn14行业类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUSINESS_CD" />
+  <FieldString _uuid="801dac85-7d25-43f6-98e9-99d8992e7edc" name="business_code" label="M#12cn14行业代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUSINESS_CODE" data_size="80" />
+  <FieldInteger _uuid="d14046dd-94a9-4396-9494-a95c17e9d7df" name="income_cd" label="M#12cn14收入类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INCOME_CD" />
+  <FieldString _uuid="4a2ec5d2-7403-48fd-9047-85ac8f4483cc" name="income_code" label="M#12cn14收入代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INCOME_CODE" data_size="20" />
+  <FieldRecordId _uuid="8baca263-a660-4ab7-aa60-a9622a03debc" name="province_area_id" label="M#12cn16省份区域编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_AREA_ID" />
+  <FieldRecordId _uuid="45e7c4fe-a59f-43bf-a682-c42ff4a25d48" name="province_id" label="M#12cn14省份编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_ID" />
+  <FieldInteger _uuid="8e9c56ef-c258-41c7-a597-7cb85f7e2d1a" name="province_code" label="M#12cn14省份代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_CODE" />
+  <FieldRecordId _uuid="94b7f615-8ee3-4b8a-8048-dd3ca4bcdebc" name="city_id" label="M#12cn14城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY_ID" />
+  <FieldInteger _uuid="718e02ce-78b7-40ee-b8f4-9640c292cfae" name="city_code" label="M#12cn14城市代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY_CODE" />
+  <FieldRecordId _uuid="675ef539-962f-4b7a-b6e3-f6e6544fa083" name="area_id" label="M#12cn14地区编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREA_ID" />
+  <FieldInteger _uuid="85265bdd-25bc-4939-a0b4-f5989a798ac6" name="area_code" label="M#12cn14地区代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREA_CODE" />
+  <FieldString _uuid="8463684e-d8e3-485f-9a0c-2521953580b6" name="address" label="M#12cn12地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ADDRESS" data_size="200" />
+  <FieldString _uuid="0d937a92-5c8a-4954-a763-7fcd8bf69078" name="info" label="M#12cn12信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INFO" data_size="800" />
+  <FieldDateTime _uuid="0da1a445-2b95-46c9-9d8d-90d13c80a37d" name="register_date" label="M#12cn14注册时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_DATE" />
+  <FieldTemplate _uuid="5682ca47-5f52-4c99-bce2-539c4ea5edf5" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

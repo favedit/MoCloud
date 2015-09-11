@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.member'>
+SELECT
+   user_name,
+   user_phone,
+   user_email,
+   FROM_UNIXTIME(`reg_time`, '%Y%m%d%H%i%s') AS register_date,
+   upd_time
+FROM lzh_members
+WHERE id={id}
+</Resource>
+
+<Resource name='sql.member.info'>
+SELECT
+   real_name,
+   idcard,
+   sex,
+   marry,
+   education,
+   income,
+   zy,
+   province,
+   city,
+   area,
+   address,
+   info
+FROM lzh_member_info
+WHERE uid={id}
+</Resource>
+
+</Config>

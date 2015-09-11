@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.department'>
+SELECT
+   id,
+   upid,
+   dept_name,
+   code,
+   level,
+   upd_time
+FROM lzh_new_department
+WHERE id={id}
+</Resource>
+
+</Config>
