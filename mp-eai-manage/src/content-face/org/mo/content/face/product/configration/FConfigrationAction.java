@@ -46,6 +46,14 @@ public class FConfigrationAction
       return "/manage/product/configration/ConfigList";
    }
 
+   //============================================================
+   // <T>查询</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
    @Override
    public String select(IWebContext context,
                         ILogicContext logicContext,

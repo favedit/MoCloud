@@ -57,6 +57,18 @@ public class FDataFinancialDepartmentLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段所属公司编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
+
+   // 字段所属公司名称的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
+
+   // 字段所属区域编号的定义。
+   public final static SLogicFieldInfo REGION_ID = new SLogicFieldInfo("REGION_ID");
+
+   // 字段区域名称的定义。
+   public final static SLogicFieldInfo REGION_LABEL = new SLogicFieldInfo("REGION_LABEL");
+
    // 字段级别的定义。
    public final static SLogicFieldInfo LEVEL = new SLogicFieldInfo("LEVEL");
 
@@ -66,11 +78,32 @@ public class FDataFinancialDepartmentLogic
    // 字段负责人标签的定义。
    public final static SLogicFieldInfo LEADER_LABEL = new SLogicFieldInfo("LEADER_LABEL");
 
-   // 字段位置维度的定义。
-   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
+   // 字段负责人电话的定义。
+   public final static SLogicFieldInfo LEADER_PHONE = new SLogicFieldInfo("LEADER_PHONE");
+
+   // 字段省份标签编号的定义。
+   public final static SLogicFieldInfo PROVINCE_ID = new SLogicFieldInfo("PROVINCE_ID");
+
+   // 字段省份标签的定义。
+   public final static SLogicFieldInfo PROVINCE_LABEL = new SLogicFieldInfo("PROVINCE_LABEL");
+
+   // 字段城市编号的定义。
+   public final static SLogicFieldInfo CITY_ID = new SLogicFieldInfo("CITY_ID");
+
+   // 字段城市标签的定义。
+   public final static SLogicFieldInfo CITY_LABEL = new SLogicFieldInfo("CITY_LABEL");
+
+   // 字段详细地址的定义。
+   public final static SLogicFieldInfo DETAIL_ADDRESS = new SLogicFieldInfo("DETAIL_ADDRESS");
 
    // 字段位置经度的定义。
    public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
+
+   // 字段位置维度的定义。
+   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
+
+   // 字段部门电话的定义。
+   public final static SLogicFieldInfo DEPARTMENT_PHONE = new SLogicFieldInfo("DEPARTMENT_PHONE");
 
    // 字段建立日期的定义。
    public final static SLogicFieldInfo BUILD_DATE = new SLogicFieldInfo("BUILD_DATE");
@@ -118,7 +151,7 @@ public class FDataFinancialDepartmentLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_PARENT_ID`,`LINK_ID`,`CODE`,`NAME`,`LABEL`,`LEVEL`,`LEADER_ID`,`LEADER_LABEL`,`LOCATION_LATITUDE`,`LOCATION_LONGITUDE`,`BUILD_DATE`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`INVESTMENT_DATE`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_DATE`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_PARENT_ID`,`LINK_ID`,`CODE`,`NAME`,`LABEL`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`REGION_ID`,`REGION_LABEL`,`LEVEL`,`LEADER_ID`,`LEADER_LABEL`,`LEADER_PHONE`,`PROVINCE_ID`,`PROVINCE_LABEL`,`CITY_ID`,`CITY_LABEL`,`DETAIL_ADDRESS`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`DEPARTMENT_PHONE`,`BUILD_DATE`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`INVESTMENT_DATE`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_DATE`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融部门信息逻辑单元。</T>
@@ -715,11 +748,22 @@ public class FDataFinancialDepartmentLogic
       cmd.append(",`CODE`");
       cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
+      cmd.append(",`DEPARTMENT_ID`");
+      cmd.append(",`DEPARTMENT_LABEL`");
+      cmd.append(",`REGION_ID`");
+      cmd.append(",`REGION_LABEL`");
       cmd.append(",`LEVEL`");
       cmd.append(",`LEADER_ID`");
       cmd.append(",`LEADER_LABEL`");
-      cmd.append(",`LOCATION_LATITUDE`");
+      cmd.append(",`LEADER_PHONE`");
+      cmd.append(",`PROVINCE_ID`");
+      cmd.append(",`PROVINCE_LABEL`");
+      cmd.append(",`CITY_ID`");
+      cmd.append(",`CITY_LABEL`");
+      cmd.append(",`DETAIL_ADDRESS`");
       cmd.append(",`LOCATION_LONGITUDE`");
+      cmd.append(",`LOCATION_LATITUDE`");
+      cmd.append(",`DEPARTMENT_PHONE`");
       cmd.append(",`BUILD_DATE`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`INVESTMENT_COUNT`");
@@ -787,6 +831,28 @@ public class FDataFinancialDepartmentLogic
          cmd.append('\'');
       }
       cmd.append(',');
+      cmd.append(unit.departmentId());
+      cmd.append(',');
+      String departmentLabel = unit.departmentLabel();
+      if(RString.isEmpty(departmentLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.regionId());
+      cmd.append(',');
+      String regionLabel = unit.regionLabel();
+      if(RString.isEmpty(regionLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(regionLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       cmd.append(unit.level());
       cmd.append(',');
       long leaderId = unit.leaderId();
@@ -805,9 +871,58 @@ public class FDataFinancialDepartmentLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.locationLatitude());
+      String leaderPhone = unit.leaderPhone();
+      if(RString.isEmpty(leaderPhone)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(leaderPhone));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.provinceId());
+      cmd.append(',');
+      String provinceLabel = unit.provinceLabel();
+      if(RString.isEmpty(provinceLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(provinceLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.cityId());
+      cmd.append(',');
+      String cityLabel = unit.cityLabel();
+      if(RString.isEmpty(cityLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(cityLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String detailAddress = unit.detailAddress();
+      if(RString.isEmpty(detailAddress)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(detailAddress));
+         cmd.append('\'');
+      }
       cmd.append(',');
       cmd.append(unit.locationLongitude());
+      cmd.append(',');
+      cmd.append(unit.locationLatitude());
+      cmd.append(',');
+      String departmentPhone = unit.departmentPhone();
+      if(RString.isEmpty(departmentPhone)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentPhone));
+         cmd.append('\'');
+      }
       cmd.append(',');
       TDateTime buildDate = unit.buildDate();
       if(buildDate == null){
@@ -989,6 +1104,36 @@ public class FDataFinancialDepartmentLogic
             cmd.append('\'');
          }
       }
+      if(unit.isDepartmentIdChanged()){
+         cmd.append(",`DEPARTMENT_ID`=");
+         cmd.append(unit.departmentId());
+      }
+      if(unit.isDepartmentLabelChanged()){
+         cmd.append(",`DEPARTMENT_LABEL`=");
+         String departmentLabel = unit.departmentLabel();
+         if(RString.isEmpty(departmentLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isRegionIdChanged()){
+         cmd.append(",`REGION_ID`=");
+         cmd.append(unit.regionId());
+      }
+      if(unit.isRegionLabelChanged()){
+         cmd.append(",`REGION_LABEL`=");
+         String regionLabel = unit.regionLabel();
+         if(RString.isEmpty(regionLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(regionLabel));
+            cmd.append('\'');
+         }
+      }
       if(unit.isLevelChanged()){
          cmd.append(",`LEVEL`=");
          cmd.append(unit.level());
@@ -1013,13 +1158,76 @@ public class FDataFinancialDepartmentLogic
             cmd.append('\'');
          }
       }
-      if(unit.isLocationLatitudeChanged()){
-         cmd.append(",`LOCATION_LATITUDE`=");
-         cmd.append(unit.locationLatitude());
+      if(unit.isLeaderPhoneChanged()){
+         cmd.append(",`LEADER_PHONE`=");
+         String leaderPhone = unit.leaderPhone();
+         if(RString.isEmpty(leaderPhone)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(leaderPhone));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isProvinceIdChanged()){
+         cmd.append(",`PROVINCE_ID`=");
+         cmd.append(unit.provinceId());
+      }
+      if(unit.isProvinceLabelChanged()){
+         cmd.append(",`PROVINCE_LABEL`=");
+         String provinceLabel = unit.provinceLabel();
+         if(RString.isEmpty(provinceLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(provinceLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCityIdChanged()){
+         cmd.append(",`CITY_ID`=");
+         cmd.append(unit.cityId());
+      }
+      if(unit.isCityLabelChanged()){
+         cmd.append(",`CITY_LABEL`=");
+         String cityLabel = unit.cityLabel();
+         if(RString.isEmpty(cityLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(cityLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDetailAddressChanged()){
+         cmd.append(",`DETAIL_ADDRESS`=");
+         String detailAddress = unit.detailAddress();
+         if(RString.isEmpty(detailAddress)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(detailAddress));
+            cmd.append('\'');
+         }
       }
       if(unit.isLocationLongitudeChanged()){
          cmd.append(",`LOCATION_LONGITUDE`=");
          cmd.append(unit.locationLongitude());
+      }
+      if(unit.isLocationLatitudeChanged()){
+         cmd.append(",`LOCATION_LATITUDE`=");
+         cmd.append(unit.locationLatitude());
+      }
+      if(unit.isDepartmentPhoneChanged()){
+         cmd.append(",`DEPARTMENT_PHONE`=");
+         String departmentPhone = unit.departmentPhone();
+         if(RString.isEmpty(departmentPhone)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentPhone));
+            cmd.append('\'');
+         }
       }
       if(unit.isBuildDateChanged()){
          cmd.append(",`BUILD_DATE`=");

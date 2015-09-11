@@ -1200,11 +1200,22 @@ CREATE TABLE `DT_FIN_DEPARTMENT`
    `CODE`                          VARCHAR(40), 
    `NAME`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(80), 
+   `DEPARTMENT_ID`                 INTEGER, 
+   `DEPARTMENT_LABEL`              VARCHAR(400), 
+   `REGION_ID`                     INTEGER, 
+   `REGION_LABEL`                  VARCHAR(200), 
    `LEVEL`                         INTEGER, 
    `LEADER_ID`                     BIGINT, 
    `LEADER_LABEL`                  VARCHAR(80), 
-   `LOCATION_LATITUDE`             DOUBLE, 
+   `LEADER_PHONE`                  VARCHAR(20), 
+   `PROVINCE_ID`                   INTEGER, 
+   `PROVINCE_LABEL`                VARCHAR(80), 
+   `CITY_ID`                       INTEGER, 
+   `CITY_LABEL`                    VARCHAR(80), 
+   `DETAIL_ADDRESS`                VARCHAR(400), 
    `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
+   `DEPARTMENT_PHONE`              VARCHAR(20), 
    `BUILD_DATE`                    DATETIME, 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `INVESTMENT_COUNT`              INTEGER, 
@@ -1224,7 +1235,6 @@ CREATE TABLE `DT_FIN_DEPARTMENT`
 
 ALTER TABLE DT_FIN_DEPARTMENT 
    ADD CONSTRAINT DT_FIN_DPT_UK_GID UNIQUE ( GUID ); 
-
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Member]
 -- ------------------------------------------------------------

@@ -69,6 +69,30 @@ public class FDataFinancialDepartmentUnit
    // 字段名称的定义。
    protected String _label;
 
+   // 存储字段所属公司编号的定义。
+   private int __departmentId;
+
+   // 字段所属公司编号的定义。
+   protected int _departmentId;
+
+   // 存储字段所属公司名称的定义。
+   private String __departmentLabel;
+
+   // 字段所属公司名称的定义。
+   protected String _departmentLabel;
+
+   // 存储字段所属区域编号的定义。
+   private int __regionId;
+
+   // 字段所属区域编号的定义。
+   protected int _regionId;
+
+   // 存储字段区域名称的定义。
+   private String __regionLabel;
+
+   // 字段区域名称的定义。
+   protected String _regionLabel;
+
    // 存储字段级别的定义。
    private int __level;
 
@@ -87,17 +111,59 @@ public class FDataFinancialDepartmentUnit
    // 字段负责人标签的定义。
    protected String _leaderLabel;
 
-   // 存储字段位置维度的定义。
-   private double __locationLatitude;
+   // 存储字段负责人电话的定义。
+   private String __leaderPhone;
 
-   // 字段位置维度的定义。
-   protected double _locationLatitude;
+   // 字段负责人电话的定义。
+   protected String _leaderPhone;
+
+   // 存储字段省份标签编号的定义。
+   private int __provinceId;
+
+   // 字段省份标签编号的定义。
+   protected int _provinceId;
+
+   // 存储字段省份标签的定义。
+   private String __provinceLabel;
+
+   // 字段省份标签的定义。
+   protected String _provinceLabel;
+
+   // 存储字段城市编号的定义。
+   private int __cityId;
+
+   // 字段城市编号的定义。
+   protected int _cityId;
+
+   // 存储字段城市标签的定义。
+   private String __cityLabel;
+
+   // 字段城市标签的定义。
+   protected String _cityLabel;
+
+   // 存储字段详细地址的定义。
+   private String __detailAddress;
+
+   // 字段详细地址的定义。
+   protected String _detailAddress;
 
    // 存储字段位置经度的定义。
    private double __locationLongitude;
 
    // 字段位置经度的定义。
    protected double _locationLongitude;
+
+   // 存储字段位置维度的定义。
+   private double __locationLatitude;
+
+   // 字段位置维度的定义。
+   protected double _locationLatitude;
+
+   // 存储字段部门电话的定义。
+   private String __departmentPhone;
+
+   // 字段部门电话的定义。
+   protected String _departmentPhone;
 
    // 存储字段建立日期的定义。
    private TDateTime __buildDate = new TDateTime();
@@ -412,6 +478,114 @@ public class FDataFinancialDepartmentUnit
    }
 
    //============================================================
+   // <T>判断所属公司编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
+   }
+
+   //============================================================
+   // <T>获得所属公司编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int departmentId(){
+      return _departmentId;
+   }
+
+   //============================================================
+   // <T>设置所属公司编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentId(int value){
+      _departmentId = value;
+   }
+
+   //============================================================
+   // <T>判断所属公司名称的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLabelChanged(){
+      return !RString.equals(__departmentLabel, _departmentLabel);
+   }
+
+   //============================================================
+   // <T>获得所属公司名称的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLabel(){
+      return _departmentLabel;
+   }
+
+   //============================================================
+   // <T>设置所属公司名称的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLabel(String value){
+      _departmentLabel = value;
+   }
+
+   //============================================================
+   // <T>判断所属区域编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRegionIdChanged(){
+      return __regionId != _regionId;
+   }
+
+   //============================================================
+   // <T>获得所属区域编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int regionId(){
+      return _regionId;
+   }
+
+   //============================================================
+   // <T>设置所属区域编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRegionId(int value){
+      _regionId = value;
+   }
+
+   //============================================================
+   // <T>判断区域名称的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRegionLabelChanged(){
+      return !RString.equals(__regionLabel, _regionLabel);
+   }
+
+   //============================================================
+   // <T>获得区域名称的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String regionLabel(){
+      return _regionLabel;
+   }
+
+   //============================================================
+   // <T>设置区域名称的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRegionLabel(String value){
+      _regionLabel = value;
+   }
+
+   //============================================================
    // <T>判断级别的数据是否改变。</T>
    //
    // @return 数据内容
@@ -493,30 +667,165 @@ public class FDataFinancialDepartmentUnit
    }
 
    //============================================================
-   // <T>判断位置维度的数据是否改变。</T>
+   // <T>判断负责人电话的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLocationLatitudeChanged(){
-      return __locationLatitude != _locationLatitude;
+   public boolean isLeaderPhoneChanged(){
+      return !RString.equals(__leaderPhone, _leaderPhone);
    }
 
    //============================================================
-   // <T>获得位置维度的数据内容。</T>
+   // <T>获得负责人电话的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double locationLatitude(){
-      return _locationLatitude;
+   public String leaderPhone(){
+      return _leaderPhone;
    }
 
    //============================================================
-   // <T>设置位置维度的数据内容。</T>
+   // <T>设置负责人电话的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLocationLatitude(double value){
-      _locationLatitude = value;
+   public void setLeaderPhone(String value){
+      _leaderPhone = value;
+   }
+
+   //============================================================
+   // <T>判断省份标签编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProvinceIdChanged(){
+      return __provinceId != _provinceId;
+   }
+
+   //============================================================
+   // <T>获得省份标签编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int provinceId(){
+      return _provinceId;
+   }
+
+   //============================================================
+   // <T>设置省份标签编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProvinceId(int value){
+      _provinceId = value;
+   }
+
+   //============================================================
+   // <T>判断省份标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProvinceLabelChanged(){
+      return !RString.equals(__provinceLabel, _provinceLabel);
+   }
+
+   //============================================================
+   // <T>获得省份标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String provinceLabel(){
+      return _provinceLabel;
+   }
+
+   //============================================================
+   // <T>设置省份标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProvinceLabel(String value){
+      _provinceLabel = value;
+   }
+
+   //============================================================
+   // <T>判断城市编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCityIdChanged(){
+      return __cityId != _cityId;
+   }
+
+   //============================================================
+   // <T>获得城市编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int cityId(){
+      return _cityId;
+   }
+
+   //============================================================
+   // <T>设置城市编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCityId(int value){
+      _cityId = value;
+   }
+
+   //============================================================
+   // <T>判断城市标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCityLabelChanged(){
+      return !RString.equals(__cityLabel, _cityLabel);
+   }
+
+   //============================================================
+   // <T>获得城市标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String cityLabel(){
+      return _cityLabel;
+   }
+
+   //============================================================
+   // <T>设置城市标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCityLabel(String value){
+      _cityLabel = value;
+   }
+
+   //============================================================
+   // <T>判断详细地址的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDetailAddressChanged(){
+      return !RString.equals(__detailAddress, _detailAddress);
+   }
+
+   //============================================================
+   // <T>获得详细地址的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String detailAddress(){
+      return _detailAddress;
+   }
+
+   //============================================================
+   // <T>设置详细地址的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDetailAddress(String value){
+      _detailAddress = value;
    }
 
    //============================================================
@@ -544,6 +853,60 @@ public class FDataFinancialDepartmentUnit
    //============================================================
    public void setLocationLongitude(double value){
       _locationLongitude = value;
+   }
+
+   //============================================================
+   // <T>判断位置维度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLatitudeChanged(){
+      return __locationLatitude != _locationLatitude;
+   }
+
+   //============================================================
+   // <T>获得位置维度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLatitude(){
+      return _locationLatitude;
+   }
+
+   //============================================================
+   // <T>设置位置维度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLatitude(double value){
+      _locationLatitude = value;
+   }
+
+   //============================================================
+   // <T>判断部门电话的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentPhoneChanged(){
+      return !RString.equals(__departmentPhone, _departmentPhone);
+   }
+
+   //============================================================
+   // <T>获得部门电话的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentPhone(){
+      return _departmentPhone;
+   }
+
+   //============================================================
+   // <T>设置部门电话的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentPhone(String value){
+      _departmentPhone = value;
    }
 
    //============================================================
@@ -976,16 +1339,38 @@ public class FDataFinancialDepartmentUnit
             return _name;
          case "label":
             return _label;
+         case "department_id":
+            return RInteger.toString(_departmentId);
+         case "department_label":
+            return _departmentLabel;
+         case "region_id":
+            return RInteger.toString(_regionId);
+         case "region_label":
+            return _regionLabel;
          case "level":
             return RInteger.toString(_level);
          case "leader_id":
             return Long.toString(_leaderId);
          case "leader_label":
             return _leaderLabel;
-         case "location_latitude":
-            return RDouble.toString(_locationLatitude);
+         case "leader_phone":
+            return _leaderPhone;
+         case "province_id":
+            return RInteger.toString(_provinceId);
+         case "province_label":
+            return _provinceLabel;
+         case "city_id":
+            return RInteger.toString(_cityId);
+         case "city_label":
+            return _cityLabel;
+         case "detail_address":
+            return _detailAddress;
          case "location_longitude":
             return RDouble.toString(_locationLongitude);
+         case "location_latitude":
+            return RDouble.toString(_locationLatitude);
+         case "department_phone":
+            return _departmentPhone;
          case "build_date":
             return _buildDate.toString();
          case "investment_total":
@@ -1054,6 +1439,18 @@ public class FDataFinancialDepartmentUnit
          case "label":
             _label = value;
             break;
+         case "department_id":
+            _departmentId = RInteger.parse(value);
+            break;
+         case "department_label":
+            _departmentLabel = value;
+            break;
+         case "region_id":
+            _regionId = RInteger.parse(value);
+            break;
+         case "region_label":
+            _regionLabel = value;
+            break;
          case "level":
             _level = RInteger.parse(value);
             break;
@@ -1063,11 +1460,32 @@ public class FDataFinancialDepartmentUnit
          case "leader_label":
             _leaderLabel = value;
             break;
-         case "location_latitude":
-            _locationLatitude = RDouble.parse(value);
+         case "leader_phone":
+            _leaderPhone = value;
+            break;
+         case "province_id":
+            _provinceId = RInteger.parse(value);
+            break;
+         case "province_label":
+            _provinceLabel = value;
+            break;
+         case "city_id":
+            _cityId = RInteger.parse(value);
+            break;
+         case "city_label":
+            _cityLabel = value;
+            break;
+         case "detail_address":
+            _detailAddress = value;
             break;
          case "location_longitude":
             _locationLongitude = RDouble.parse(value);
+            break;
+         case "location_latitude":
+            _locationLatitude = RDouble.parse(value);
+            break;
+         case "department_phone":
+            _departmentPhone = value;
             break;
          case "build_date":
             _buildDate.parse(value);
@@ -1161,6 +1579,22 @@ public class FDataFinancialDepartmentUnit
                __label = value;
                _label = __label;
                break;
+            case "department_id":
+               __departmentId = RInteger.parse(value);
+               _departmentId = __departmentId;
+               break;
+            case "department_label":
+               __departmentLabel = value;
+               _departmentLabel = __departmentLabel;
+               break;
+            case "region_id":
+               __regionId = RInteger.parse(value);
+               _regionId = __regionId;
+               break;
+            case "region_label":
+               __regionLabel = value;
+               _regionLabel = __regionLabel;
+               break;
             case "level":
                __level = RInteger.parse(value);
                _level = __level;
@@ -1173,13 +1607,41 @@ public class FDataFinancialDepartmentUnit
                __leaderLabel = value;
                _leaderLabel = __leaderLabel;
                break;
-            case "location_latitude":
-               __locationLatitude = RDouble.parse(value);
-               _locationLatitude = __locationLatitude;
+            case "leader_phone":
+               __leaderPhone = value;
+               _leaderPhone = __leaderPhone;
+               break;
+            case "province_id":
+               __provinceId = RInteger.parse(value);
+               _provinceId = __provinceId;
+               break;
+            case "province_label":
+               __provinceLabel = value;
+               _provinceLabel = __provinceLabel;
+               break;
+            case "city_id":
+               __cityId = RInteger.parse(value);
+               _cityId = __cityId;
+               break;
+            case "city_label":
+               __cityLabel = value;
+               _cityLabel = __cityLabel;
+               break;
+            case "detail_address":
+               __detailAddress = value;
+               _detailAddress = __detailAddress;
                break;
             case "location_longitude":
                __locationLongitude = RDouble.parse(value);
                _locationLongitude = __locationLongitude;
+               break;
+            case "location_latitude":
+               __locationLatitude = RDouble.parse(value);
+               _locationLatitude = __locationLatitude;
+               break;
+            case "department_phone":
+               __departmentPhone = value;
+               _departmentPhone = __departmentPhone;
                break;
             case "build_date":
                __buildDate.parse(value);
@@ -1261,11 +1723,22 @@ public class FDataFinancialDepartmentUnit
       row.set("code", _code);
       row.set("name", _name);
       row.set("label", _label);
+      row.set("departmentId", _departmentId);
+      row.set("departmentLabel", _departmentLabel);
+      row.set("regionId", _regionId);
+      row.set("regionLabel", _regionLabel);
       row.set("level", _level);
       row.set("leaderId", _leaderId);
       row.set("leaderLabel", _leaderLabel);
-      row.set("locationLatitude", _locationLatitude);
+      row.set("leaderPhone", _leaderPhone);
+      row.set("provinceId", _provinceId);
+      row.set("provinceLabel", _provinceLabel);
+      row.set("cityId", _cityId);
+      row.set("cityLabel", _cityLabel);
+      row.set("detailAddress", _detailAddress);
       row.set("locationLongitude", _locationLongitude);
+      row.set("locationLatitude", _locationLatitude);
+      row.set("departmentPhone", _departmentPhone);
       row.set("buildDate", _buildDate);
       row.set("investmentTotal", _investmentTotal);
       row.set("investmentCount", _investmentCount);
@@ -1299,11 +1772,22 @@ public class FDataFinancialDepartmentUnit
       map.put("code", _code);
       map.put("name", _name);
       map.put("label", _label);
+      map.put("departmentId", RInteger.toString(_departmentId));
+      map.put("departmentLabel", _departmentLabel);
+      map.put("regionId", RInteger.toString(_regionId));
+      map.put("regionLabel", _regionLabel);
       map.put("level", RInteger.toString(_level));
       map.put("leaderId", RLong.toString(_leaderId));
       map.put("leaderLabel", _leaderLabel);
-      map.put("locationLatitude", RDouble.toString(_locationLatitude));
+      map.put("leaderPhone", _leaderPhone);
+      map.put("provinceId", RInteger.toString(_provinceId));
+      map.put("provinceLabel", _provinceLabel);
+      map.put("cityId", RInteger.toString(_cityId));
+      map.put("cityLabel", _cityLabel);
+      map.put("detailAddress", _detailAddress);
       map.put("locationLongitude", RDouble.toString(_locationLongitude));
+      map.put("locationLatitude", RDouble.toString(_locationLatitude));
+      map.put("departmentPhone", _departmentPhone);
       map.put("buildDate", _buildDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("investmentCount", RInteger.toString(_investmentCount));
@@ -1337,9 +1821,20 @@ public class FDataFinancialDepartmentUnit
       _code = input.readString();
       _name = input.readString();
       _label = input.readString();
+      _departmentId = input.readInt32();
+      _departmentLabel = input.readString();
+      _regionId = input.readInt32();
+      _regionLabel = input.readString();
       _level = input.readInt32();
       _leaderId = input.readInt64();
       _leaderLabel = input.readString();
+      _leaderPhone = input.readString();
+      _provinceId = input.readInt32();
+      _provinceLabel = input.readString();
+      _cityId = input.readInt32();
+      _cityLabel = input.readString();
+      _detailAddress = input.readString();
+      _departmentPhone = input.readString();
       _buildDate.set(input.readInt64());
       _investmentCount = input.readInt32();
       _investmentDate.set(input.readInt64());
@@ -1368,9 +1863,20 @@ public class FDataFinancialDepartmentUnit
       output.writeString(_code);
       output.writeString(_name);
       output.writeString(_label);
+      output.writeInt32(_departmentId);
+      output.writeString(_departmentLabel);
+      output.writeInt32(_regionId);
+      output.writeString(_regionLabel);
       output.writeInt32(_level);
       output.writeInt64(_leaderId);
       output.writeString(_leaderLabel);
+      output.writeString(_leaderPhone);
+      output.writeInt32(_provinceId);
+      output.writeString(_provinceLabel);
+      output.writeInt32(_cityId);
+      output.writeString(_cityLabel);
+      output.writeString(_detailAddress);
+      output.writeString(_departmentPhone);
       output.writeInt64(_buildDate.get());
       output.writeInt32(_investmentCount);
       output.writeInt64(_investmentDate.get());
