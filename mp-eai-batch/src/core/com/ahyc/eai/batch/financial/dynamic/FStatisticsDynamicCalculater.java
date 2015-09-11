@@ -20,7 +20,6 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
-import org.mo.eai.core.common.EEaiDataConnection;
 
 //============================================================
 // <T>金融动态统计计算器。</T>
@@ -41,13 +40,56 @@ public class FStatisticsDynamicCalculater
    }
 
    //============================================================
+   // <T>计算用户个数。</T>
+   //============================================================
+   public int calculateMemberCount(ISqlConnection connection,
+                                   String beginDate,
+                                   String endDate){
+      FSql sql = new FSql("SELECT COUNT(*) FROM lzh_members WHERE ");
+      sql.append("FROM_UNIXTIME(reg_time,'%Y%m%d%H%i%s') > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s')");
+      sql.append(" AND ");
+      sql.append("FROM_UNIXTIME(reg_time,'%Y%m%d%H%i%s') <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      sql.bindString("begin_date", beginDate);
+      sql.bindString("end_date", endDate);
+      int count = connection.executeInteger(sql);
+      return count;
+   }
+
+   //============================================================
+   // <T>计算用户总数。</T>
+   //============================================================
+   public int calculateMemberTotal(ISqlConnection connection,
+                                   String beginDate,
+                                   String endDate){
+      FSql sql = new FSql("SELECT COUNT(*) FROM lzh_members WHERE ");
+      sql.append("FROM_UNIXTIME(reg_time,'%Y%m%d%H%i%s') <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      sql.bindString("end_date", endDate);
+      int count = connection.executeInteger(sql);
+      return count;
+   }
+
+   //============================================================
+   // <T>计算用户个数。</T>
+   //============================================================
+   public int calculateInvestmentUserCount(ISqlConnection connection,
+                                           String beginDate,
+                                           String endDate){
+      FSql sql = new FSql("SELECT COUNT(DISTINCT CUSTOMER_ID) FROM ST_FIN_DYNAMIC WHERE ");
+      sql.append("CUSTOMER_ACTION_CD = 1 AND ");
+      sql.append("CUSTOMER_ACTION_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND ");
+      sql.append("CUSTOMER_ACTION_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      int count = connection.executeInteger(sql);
+      return count;
+   }
+
+   //============================================================
    // <T>投资阶段处理。</T>
    //============================================================
    @Override
    public void processPhase(FLogicContext logicContext,
                             String beginDate,
                             String endDate){
-      ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
+      //ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       // 代码修正
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FStatisticsFinancialAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialAmountLogic.class);
@@ -169,20 +211,20 @@ public class FStatisticsDynamicCalculater
          }
          // 计算资金信息
          double investmentTotal = amountUnit.investmentTotal();
-         int investmentUserTotal = amountUnit.investmentUserTotal();
+         int investmentNumberTotal = amountUnit.investmentNumberTotal();
          double redemptionTotal = amountUnit.redemptionTotal();
-         int redemptionUserTotal = amountUnit.redemptionUserTotal();
+         int redemptionNumberTotal = amountUnit.redemptionNumberTotal();
          double interestTotal = amountUnit.interestTotal();
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
             investmentTotal += customerActionAmount;
             amountUnit.setInvestmentTotal(investmentTotal);
-            investmentUserTotal++;
-            amountUnit.setInvestmentUserTotal(investmentUserTotal);
+            investmentNumberTotal++;
+            amountUnit.setInvestmentNumberTotal(investmentNumberTotal);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
             redemptionTotal += customerActionAmount;
             amountUnit.setRedemptionTotal(redemptionTotal);
-            redemptionUserTotal++;
-            amountUnit.setRedemptionUserTotal(redemptionUserTotal);
+            redemptionNumberTotal++;
+            amountUnit.setRedemptionNumberTotal(redemptionNumberTotal);
             interestTotal += customerActionInterest;
             amountUnit.setInterestTotal(interestTotal);
          }else{
@@ -228,39 +270,15 @@ public class FStatisticsDynamicCalculater
             phaseUnit.recordHour().parse(spanDate.format("YYYYMMDDHH240000"));
             phaseUnit.recordDate().assign(spanDate);
             // 获得用户注册数
-            FSql memberRegisterSql = new FSql("SELECT COUNT(*) FROM lzh_members WHERE ");
-            memberRegisterSql.append(" reg_time > 0 AND ");
-            memberRegisterSql.append("FROM_UNIXTIME(reg_time, '%Y%m%d%H%i%s') > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s')");
-            memberRegisterSql.append(" AND ");
-            memberRegisterSql.append("FROM_UNIXTIME(reg_time, '%Y%m%d%H%i%s') <= STR_TO_DATE('" + endDate + "','%Y%m%d%H%i%s')");
-            int memberRegister = sourceConnection.executeInteger(memberRegisterSql);
-            phaseUnit.setMemberRegister(memberRegister);
+            //int memberCount = calculateMemberCount(sourceConnection, beginDate, endDate);
+            //phaseUnit.setMemberCount(memberCount);
             // 获得用户总数
-            FSql memberTotalSql = new FSql("SELECT COUNT(*) FROM lzh_members WHERE ");
-            memberTotalSql.append(" reg_time > 0 AND ");
-            memberTotalSql.append("FROM_UNIXTIME(reg_time, '%Y%m%d%H%i%s') <= STR_TO_DATE('" + endDate + "','%Y%m%d%H%i%s')");
-            int memberTotal = sourceConnection.executeInteger(memberTotalSql);
-            phaseUnit.setMemberTotal(memberTotal);
+            //int memberTotal = calculateMemberTotal(sourceConnection, beginDate, endDate);
+            //phaseUnit.setMemberTotal(memberTotal);
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());
          phaseUnit.actionDate().assign(dynamicUnit.customerActionDate());
-         // 计算资金信息
-         if(customerActionCd == EGcFinancialCustomerAction.Investment){
-            phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);
-         }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
-            phaseUnit.setRedemption(phaseUnit.redemption() + customerActionAmount);
-            phaseUnit.setInterest(phaseUnit.interest() + customerActionInterest);
-         }else{
-            throw new FFatalError("Marketer action invalid.");
-         }
-         phaseUnit.setInvestmentTotal(investmentTotal);
-         phaseUnit.setInvestmentUserTotal(investmentUserTotal);
-         phaseUnit.setRedemptionTotal(redemptionTotal);
-         phaseUnit.setRedemptionUserTotal(redemptionUserTotal);
-         phaseUnit.setNetinvestment(phaseUnit.investment() - phaseUnit.redemption());
-         phaseUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
-         phaseUnit.setInterestTotal(interestTotal);
          // 计算客户信息
          if(!customerExist){
             phaseUnit.setCustomerCount(phaseUnit.customerCount() + 1);
@@ -276,6 +294,23 @@ public class FStatisticsDynamicCalculater
             phaseUnit.setDepartmentCount(phaseUnit.departmentCount() + 1);
          }
          phaseUnit.setDepartmentTotal(departmentTotal);
+         // 计算资金信息
+         if(customerActionCd == EGcFinancialCustomerAction.Investment){
+            phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);
+            phaseUnit.setInvestmentNumber(phaseUnit.investmentNumber() + 1);
+         }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+            phaseUnit.setRedemption(phaseUnit.redemption() + customerActionAmount);
+            phaseUnit.setRedemptionNumber(phaseUnit.redemptionNumber() + 1);
+         }else{
+            throw new FFatalError("Marketer action invalid.");
+         }
+         phaseUnit.setInvestmentTotal(investmentTotal);
+         phaseUnit.setInvestmentNumberTotal(investmentNumberTotal);
+         phaseUnit.setRedemptionTotal(redemptionTotal);
+         phaseUnit.setRedemptionNumberTotal(redemptionNumberTotal);
+         phaseUnit.setNetinvestment(phaseUnit.investment() - phaseUnit.redemption());
+         phaseUnit.setNetinvestmentTotal(investmentTotal - redemptionTotal);
+         phaseUnit.setInterestTotal(interestTotal);
          // 更新数据
          if(phaseExist){
             phaseLogic.doUpdate(phaseUnit);

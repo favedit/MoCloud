@@ -129,11 +129,11 @@ public class FStatisticsFinancialPhaseUnit
    // 字段客户总数的定义。
    protected int _customerTotal;
 
-   // 存储字段成员注册数的定义。
-   private int __memberRegister;
+   // 存储字段成员数量的定义。
+   private int __memberCount;
 
-   // 字段成员注册数的定义。
-   protected int _memberRegister;
+   // 字段成员数量的定义。
+   protected int _memberCount;
 
    // 存储字段用户总数的定义。
    private int __memberTotal;
@@ -141,17 +141,29 @@ public class FStatisticsFinancialPhaseUnit
    // 字段用户总数的定义。
    protected int _memberTotal;
 
-   // 存储字段投资的定义。
+   // 存储字段投资金额的定义。
    private double __investment;
 
-   // 字段投资的定义。
+   // 字段投资金额的定义。
    protected double _investment;
 
-   // 存储字段投资总计的定义。
+   // 存储字段投资总金额的定义。
    private double __investmentTotal;
 
-   // 字段投资总计的定义。
+   // 字段投资总金额的定义。
    protected double _investmentTotal;
+
+   // 存储字段投资次数的定义。
+   private int __investmentNumber;
+
+   // 字段投资次数的定义。
+   protected int _investmentNumber;
+
+   // 存储字段投资总次数的定义。
+   private int __investmentNumberTotal;
+
+   // 字段投资总次数的定义。
+   protected int _investmentNumberTotal;
 
    // 存储字段投资用户数的定义。
    private int __investmentUser;
@@ -165,17 +177,29 @@ public class FStatisticsFinancialPhaseUnit
    // 字段投资用户总数的定义。
    protected int _investmentUserTotal;
 
-   // 存储字段赎回的定义。
+   // 存储字段赎回金额的定义。
    private double __redemption;
 
-   // 字段赎回的定义。
+   // 字段赎回金额的定义。
    protected double _redemption;
 
-   // 存储字段赎回总计的定义。
+   // 存储字段赎回总金额的定义。
    private double __redemptionTotal;
 
-   // 字段赎回总计的定义。
+   // 字段赎回总金额的定义。
    protected double _redemptionTotal;
+
+   // 存储字段赎回次数的定义。
+   private int __redemptionNumber;
+
+   // 字段赎回次数的定义。
+   protected int _redemptionNumber;
+
+   // 存储字段赎回总次数的定义。
+   private int __redemptionNumberTotal;
+
+   // 字段赎回总次数的定义。
+   protected int _redemptionNumberTotal;
 
    // 存储字段赎回用户数的定义。
    private int __redemptionUser;
@@ -189,28 +213,28 @@ public class FStatisticsFinancialPhaseUnit
    // 字段赎回用户总数的定义。
    protected int _redemptionUserTotal;
 
-   // 存储字段净投的定义。
+   // 存储字段净投金额的定义。
    private double __netinvestment;
 
-   // 字段净投的定义。
+   // 字段净投金额的定义。
    protected double _netinvestment;
 
-   // 存储字段净投总计的定义。
+   // 存储字段净投总金额的定义。
    private double __netinvestmentTotal;
 
-   // 字段净投总计的定义。
+   // 字段净投总金额的定义。
    protected double _netinvestmentTotal;
 
-   // 存储字段利息的定义。
+   // 存储字段利息金额的定义。
    private double __interest;
 
-   // 字段利息的定义。
+   // 字段利息金额的定义。
    protected double _interest;
 
-   // 存储字段利息总计的定义。
+   // 存储字段利息总金额的定义。
    private double __interestTotal;
 
-   // 字段利息总计的定义。
+   // 字段利息总金额的定义。
    protected double _interestTotal;
 
    // 存储字段绩效的定义。
@@ -742,30 +766,30 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断成员注册数的数据是否改变。</T>
+   // <T>判断成员数量的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMemberRegisterChanged(){
-      return __memberRegister != _memberRegister;
+   public boolean isMemberCountChanged(){
+      return __memberCount != _memberCount;
    }
 
    //============================================================
-   // <T>获得成员注册数的数据内容。</T>
+   // <T>获得成员数量的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int memberRegister(){
-      return _memberRegister;
+   public int memberCount(){
+      return _memberCount;
    }
 
    //============================================================
-   // <T>设置成员注册数的数据内容。</T>
+   // <T>设置成员数量的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMemberRegister(int value){
-      _memberRegister = value;
+   public void setMemberCount(int value){
+      _memberCount = value;
    }
 
    //============================================================
@@ -796,7 +820,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断投资的数据是否改变。</T>
+   // <T>判断投资金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -805,7 +829,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得投资的数据内容。</T>
+   // <T>获得投资金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -814,7 +838,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置投资的数据内容。</T>
+   // <T>设置投资金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -823,7 +847,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断投资总计的数据是否改变。</T>
+   // <T>判断投资总金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -832,7 +856,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得投资总计的数据内容。</T>
+   // <T>获得投资总金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -841,12 +865,66 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置投资总计的数据内容。</T>
+   // <T>设置投资总金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setInvestmentTotal(double value){
       _investmentTotal = value;
+   }
+
+   //============================================================
+   // <T>判断投资次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentNumberChanged(){
+      return __investmentNumber != _investmentNumber;
+   }
+
+   //============================================================
+   // <T>获得投资次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentNumber(){
+      return _investmentNumber;
+   }
+
+   //============================================================
+   // <T>设置投资次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentNumber(int value){
+      _investmentNumber = value;
+   }
+
+   //============================================================
+   // <T>判断投资总次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentNumberTotalChanged(){
+      return __investmentNumberTotal != _investmentNumberTotal;
+   }
+
+   //============================================================
+   // <T>获得投资总次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentNumberTotal(){
+      return _investmentNumberTotal;
+   }
+
+   //============================================================
+   // <T>设置投资总次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentNumberTotal(int value){
+      _investmentNumberTotal = value;
    }
 
    //============================================================
@@ -904,7 +982,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断赎回的数据是否改变。</T>
+   // <T>判断赎回金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -913,7 +991,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得赎回的数据内容。</T>
+   // <T>获得赎回金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -922,7 +1000,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置赎回的数据内容。</T>
+   // <T>设置赎回金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -931,7 +1009,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断赎回总计的数据是否改变。</T>
+   // <T>判断赎回总金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -940,7 +1018,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得赎回总计的数据内容。</T>
+   // <T>获得赎回总金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -949,12 +1027,66 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置赎回总计的数据内容。</T>
+   // <T>设置赎回总金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
    public void setRedemptionTotal(double value){
       _redemptionTotal = value;
+   }
+
+   //============================================================
+   // <T>判断赎回次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionNumberChanged(){
+      return __redemptionNumber != _redemptionNumber;
+   }
+
+   //============================================================
+   // <T>获得赎回次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionNumber(){
+      return _redemptionNumber;
+   }
+
+   //============================================================
+   // <T>设置赎回次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionNumber(int value){
+      _redemptionNumber = value;
+   }
+
+   //============================================================
+   // <T>判断赎回总次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionNumberTotalChanged(){
+      return __redemptionNumberTotal != _redemptionNumberTotal;
+   }
+
+   //============================================================
+   // <T>获得赎回总次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionNumberTotal(){
+      return _redemptionNumberTotal;
+   }
+
+   //============================================================
+   // <T>设置赎回总次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionNumberTotal(int value){
+      _redemptionNumberTotal = value;
    }
 
    //============================================================
@@ -1012,7 +1144,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断净投的数据是否改变。</T>
+   // <T>判断净投金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1021,7 +1153,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得净投的数据内容。</T>
+   // <T>获得净投金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1030,7 +1162,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置净投的数据内容。</T>
+   // <T>设置净投金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -1039,7 +1171,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断净投总计的数据是否改变。</T>
+   // <T>判断净投总金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1048,7 +1180,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得净投总计的数据内容。</T>
+   // <T>获得净投总金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1057,7 +1189,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置净投总计的数据内容。</T>
+   // <T>设置净投总金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -1066,7 +1198,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断利息的数据是否改变。</T>
+   // <T>判断利息金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1075,7 +1207,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得利息的数据内容。</T>
+   // <T>获得利息金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1084,7 +1216,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置利息的数据内容。</T>
+   // <T>设置利息金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -1093,7 +1225,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>判断利息总计的数据是否改变。</T>
+   // <T>判断利息总金额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1102,7 +1234,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>获得利息总计的数据内容。</T>
+   // <T>获得利息总金额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -1111,7 +1243,7 @@ public class FStatisticsFinancialPhaseUnit
    }
 
    //============================================================
-   // <T>设置利息总计的数据内容。</T>
+   // <T>设置利息总金额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -1326,14 +1458,18 @@ public class FStatisticsFinancialPhaseUnit
             return RInteger.toString(_customerCount);
          case "customer_total":
             return RInteger.toString(_customerTotal);
-         case "member_register":
-            return RInteger.toString(_memberRegister);
+         case "member_count":
+            return RInteger.toString(_memberCount);
          case "member_total":
             return RInteger.toString(_memberTotal);
          case "investment":
             return RDouble.toString(_investment);
          case "investment_total":
             return RDouble.toString(_investmentTotal);
+         case "investment_number":
+            return RInteger.toString(_investmentNumber);
+         case "investment_number_total":
+            return RInteger.toString(_investmentNumberTotal);
          case "investment_user":
             return RInteger.toString(_investmentUser);
          case "investment_user_total":
@@ -1342,6 +1478,10 @@ public class FStatisticsFinancialPhaseUnit
             return RDouble.toString(_redemption);
          case "redemption_total":
             return RDouble.toString(_redemptionTotal);
+         case "redemption_number":
+            return RInteger.toString(_redemptionNumber);
+         case "redemption_number_total":
+            return RInteger.toString(_redemptionNumberTotal);
          case "redemption_user":
             return RInteger.toString(_redemptionUser);
          case "redemption_user_total":
@@ -1434,8 +1574,8 @@ public class FStatisticsFinancialPhaseUnit
          case "customer_total":
             _customerTotal = RInteger.parse(value);
             break;
-         case "member_register":
-            _memberRegister = RInteger.parse(value);
+         case "member_count":
+            _memberCount = RInteger.parse(value);
             break;
          case "member_total":
             _memberTotal = RInteger.parse(value);
@@ -1445,6 +1585,12 @@ public class FStatisticsFinancialPhaseUnit
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
+            break;
+         case "investment_number":
+            _investmentNumber = RInteger.parse(value);
+            break;
+         case "investment_number_total":
+            _investmentNumberTotal = RInteger.parse(value);
             break;
          case "investment_user":
             _investmentUser = RInteger.parse(value);
@@ -1457,6 +1603,12 @@ public class FStatisticsFinancialPhaseUnit
             break;
          case "redemption_total":
             _redemptionTotal = RDouble.parse(value);
+            break;
+         case "redemption_number":
+            _redemptionNumber = RInteger.parse(value);
+            break;
+         case "redemption_number_total":
+            _redemptionNumberTotal = RInteger.parse(value);
             break;
          case "redemption_user":
             _redemptionUser = RInteger.parse(value);
@@ -1581,9 +1733,9 @@ public class FStatisticsFinancialPhaseUnit
                __customerTotal = RInteger.parse(value);
                _customerTotal = __customerTotal;
                break;
-            case "member_register":
-               __memberRegister = RInteger.parse(value);
-               _memberRegister = __memberRegister;
+            case "member_count":
+               __memberCount = RInteger.parse(value);
+               _memberCount = __memberCount;
                break;
             case "member_total":
                __memberTotal = RInteger.parse(value);
@@ -1596,6 +1748,14 @@ public class FStatisticsFinancialPhaseUnit
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
+               break;
+            case "investment_number":
+               __investmentNumber = RInteger.parse(value);
+               _investmentNumber = __investmentNumber;
+               break;
+            case "investment_number_total":
+               __investmentNumberTotal = RInteger.parse(value);
+               _investmentNumberTotal = __investmentNumberTotal;
                break;
             case "investment_user":
                __investmentUser = RInteger.parse(value);
@@ -1612,6 +1772,14 @@ public class FStatisticsFinancialPhaseUnit
             case "redemption_total":
                __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
+               break;
+            case "redemption_number":
+               __redemptionNumber = RInteger.parse(value);
+               _redemptionNumber = __redemptionNumber;
+               break;
+            case "redemption_number_total":
+               __redemptionNumberTotal = RInteger.parse(value);
+               _redemptionNumberTotal = __redemptionNumberTotal;
                break;
             case "redemption_user":
                __redemptionUser = RInteger.parse(value);
@@ -1691,14 +1859,18 @@ public class FStatisticsFinancialPhaseUnit
       row.set("marketerTotal", _marketerTotal);
       row.set("customerCount", _customerCount);
       row.set("customerTotal", _customerTotal);
-      row.set("memberRegister", _memberRegister);
+      row.set("memberCount", _memberCount);
       row.set("memberTotal", _memberTotal);
       row.set("investment", _investment);
       row.set("investmentTotal", _investmentTotal);
+      row.set("investmentNumber", _investmentNumber);
+      row.set("investmentNumberTotal", _investmentNumberTotal);
       row.set("investmentUser", _investmentUser);
       row.set("investmentUserTotal", _investmentUserTotal);
       row.set("redemption", _redemption);
       row.set("redemptionTotal", _redemptionTotal);
+      row.set("redemptionNumber", _redemptionNumber);
+      row.set("redemptionNumberTotal", _redemptionNumberTotal);
       row.set("redemptionUser", _redemptionUser);
       row.set("redemptionUserTotal", _redemptionUserTotal);
       row.set("netinvestment", _netinvestment);
@@ -1739,14 +1911,18 @@ public class FStatisticsFinancialPhaseUnit
       map.put("marketerTotal", RInteger.toString(_marketerTotal));
       map.put("customerCount", RInteger.toString(_customerCount));
       map.put("customerTotal", RInteger.toString(_customerTotal));
-      map.put("memberRegister", RInteger.toString(_memberRegister));
+      map.put("memberCount", RInteger.toString(_memberCount));
       map.put("memberTotal", RInteger.toString(_memberTotal));
       map.put("investment", RDouble.toString(_investment));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("investmentNumber", RInteger.toString(_investmentNumber));
+      map.put("investmentNumberTotal", RInteger.toString(_investmentNumberTotal));
       map.put("investmentUser", RInteger.toString(_investmentUser));
       map.put("investmentUserTotal", RInteger.toString(_investmentUserTotal));
       map.put("redemption", RDouble.toString(_redemption));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("redemptionNumber", RInteger.toString(_redemptionNumber));
+      map.put("redemptionNumberTotal", RInteger.toString(_redemptionNumberTotal));
       map.put("redemptionUser", RInteger.toString(_redemptionUser));
       map.put("redemptionUserTotal", RInteger.toString(_redemptionUserTotal));
       map.put("netinvestment", RDouble.toString(_netinvestment));
@@ -1787,10 +1963,14 @@ public class FStatisticsFinancialPhaseUnit
       _marketerTotal = input.readInt32();
       _customerCount = input.readInt32();
       _customerTotal = input.readInt32();
-      _memberRegister = input.readInt32();
+      _memberCount = input.readInt32();
       _memberTotal = input.readInt32();
+      _investmentNumber = input.readInt32();
+      _investmentNumberTotal = input.readInt32();
       _investmentUser = input.readInt32();
       _investmentUserTotal = input.readInt32();
+      _redemptionNumber = input.readInt32();
+      _redemptionNumberTotal = input.readInt32();
       _redemptionUser = input.readInt32();
       _redemptionUserTotal = input.readInt32();
       _createUserId = input.readInt64();
@@ -1825,10 +2005,14 @@ public class FStatisticsFinancialPhaseUnit
       output.writeInt32(_marketerTotal);
       output.writeInt32(_customerCount);
       output.writeInt32(_customerTotal);
-      output.writeInt32(_memberRegister);
+      output.writeInt32(_memberCount);
       output.writeInt32(_memberTotal);
+      output.writeInt32(_investmentNumber);
+      output.writeInt32(_investmentNumberTotal);
       output.writeInt32(_investmentUser);
       output.writeInt32(_investmentUserTotal);
+      output.writeInt32(_redemptionNumber);
+      output.writeInt32(_redemptionNumberTotal);
       output.writeInt32(_redemptionUser);
       output.writeInt32(_redemptionUserTotal);
       output.writeInt64(_createUserId);

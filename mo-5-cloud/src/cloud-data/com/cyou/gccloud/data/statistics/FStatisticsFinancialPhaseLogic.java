@@ -86,17 +86,23 @@ public class FStatisticsFinancialPhaseLogic
    // 字段客户总数的定义。
    public final static SLogicFieldInfo CUSTOMER_TOTAL = new SLogicFieldInfo("CUSTOMER_TOTAL");
 
-   // 字段成员注册数的定义。
-   public final static SLogicFieldInfo MEMBER_REGISTER = new SLogicFieldInfo("MEMBER_REGISTER");
+   // 字段成员数量的定义。
+   public final static SLogicFieldInfo MEMBER_COUNT = new SLogicFieldInfo("MEMBER_COUNT");
 
    // 字段用户总数的定义。
    public final static SLogicFieldInfo MEMBER_TOTAL = new SLogicFieldInfo("MEMBER_TOTAL");
 
-   // 字段投资的定义。
+   // 字段投资金额的定义。
    public final static SLogicFieldInfo INVESTMENT = new SLogicFieldInfo("INVESTMENT");
 
-   // 字段投资总计的定义。
+   // 字段投资总金额的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
+
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_NUMBER = new SLogicFieldInfo("INVESTMENT_NUMBER");
+
+   // 字段投资总次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_NUMBER_TOTAL = new SLogicFieldInfo("INVESTMENT_NUMBER_TOTAL");
 
    // 字段投资用户数的定义。
    public final static SLogicFieldInfo INVESTMENT_USER = new SLogicFieldInfo("INVESTMENT_USER");
@@ -104,11 +110,17 @@ public class FStatisticsFinancialPhaseLogic
    // 字段投资用户总数的定义。
    public final static SLogicFieldInfo INVESTMENT_USER_TOTAL = new SLogicFieldInfo("INVESTMENT_USER_TOTAL");
 
-   // 字段赎回的定义。
+   // 字段赎回金额的定义。
    public final static SLogicFieldInfo REDEMPTION = new SLogicFieldInfo("REDEMPTION");
 
-   // 字段赎回总计的定义。
+   // 字段赎回总金额的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
+
+   // 字段赎回次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_NUMBER = new SLogicFieldInfo("REDEMPTION_NUMBER");
+
+   // 字段赎回总次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_NUMBER_TOTAL = new SLogicFieldInfo("REDEMPTION_NUMBER_TOTAL");
 
    // 字段赎回用户数的定义。
    public final static SLogicFieldInfo REDEMPTION_USER = new SLogicFieldInfo("REDEMPTION_USER");
@@ -116,16 +128,16 @@ public class FStatisticsFinancialPhaseLogic
    // 字段赎回用户总数的定义。
    public final static SLogicFieldInfo REDEMPTION_USER_TOTAL = new SLogicFieldInfo("REDEMPTION_USER_TOTAL");
 
-   // 字段净投的定义。
+   // 字段净投金额的定义。
    public final static SLogicFieldInfo NETINVESTMENT = new SLogicFieldInfo("NETINVESTMENT");
 
-   // 字段净投总计的定义。
+   // 字段净投总金额的定义。
    public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
-   // 字段利息的定义。
+   // 字段利息金额的定义。
    public final static SLogicFieldInfo INTEREST = new SLogicFieldInfo("INTEREST");
 
-   // 字段利息总计的定义。
+   // 字段利息总金额的定义。
    public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
 
    // 字段绩效的定义。
@@ -147,7 +159,7 @@ public class FStatisticsFinancialPhaseLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`ACTION_DATE`,`DEPARTMENT_COUNT`,`DEPARTMENT_TOTAL`,`MARKETER_COUNT`,`MARKETER_TOTAL`,`CUSTOMER_COUNT`,`CUSTOMER_TOTAL`,`MEMBER_REGISTER`,`MEMBER_TOTAL`,`INVESTMENT`,`INVESTMENT_TOTAL`,`INVESTMENT_USER`,`INVESTMENT_USER_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`REDEMPTION_USER`,`REDEMPTION_USER_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`INTEREST`,`INTEREST_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`RECORD_YEAR`,`RECORD_MONTH`,`RECORD_WEEK`,`RECORD_DAY`,`RECORD_HOUR`,`RECORD_DATE`,`LINK_ID`,`LINK_DATE`,`ACTION_DATE`,`DEPARTMENT_COUNT`,`DEPARTMENT_TOTAL`,`MARKETER_COUNT`,`MARKETER_TOTAL`,`CUSTOMER_COUNT`,`CUSTOMER_TOTAL`,`MEMBER_COUNT`,`MEMBER_TOTAL`,`INVESTMENT`,`INVESTMENT_TOTAL`,`INVESTMENT_NUMBER`,`INVESTMENT_NUMBER_TOTAL`,`INVESTMENT_USER`,`INVESTMENT_USER_TOTAL`,`REDEMPTION`,`REDEMPTION_TOTAL`,`REDEMPTION_NUMBER`,`REDEMPTION_NUMBER_TOTAL`,`REDEMPTION_USER`,`REDEMPTION_USER_TOTAL`,`NETINVESTMENT`,`NETINVESTMENT_TOTAL`,`INTEREST`,`INTEREST_TOTAL`,`PERFORMANCE`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态阶段表逻辑单元。</T>
@@ -754,14 +766,18 @@ public class FStatisticsFinancialPhaseLogic
       cmd.append(",`MARKETER_TOTAL`");
       cmd.append(",`CUSTOMER_COUNT`");
       cmd.append(",`CUSTOMER_TOTAL`");
-      cmd.append(",`MEMBER_REGISTER`");
+      cmd.append(",`MEMBER_COUNT`");
       cmd.append(",`MEMBER_TOTAL`");
       cmd.append(",`INVESTMENT`");
       cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`INVESTMENT_NUMBER`");
+      cmd.append(",`INVESTMENT_NUMBER_TOTAL`");
       cmd.append(",`INVESTMENT_USER`");
       cmd.append(",`INVESTMENT_USER_TOTAL`");
       cmd.append(",`REDEMPTION`");
       cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`REDEMPTION_NUMBER`");
+      cmd.append(",`REDEMPTION_NUMBER_TOTAL`");
       cmd.append(",`REDEMPTION_USER`");
       cmd.append(",`REDEMPTION_USER_TOTAL`");
       cmd.append(",`NETINVESTMENT`");
@@ -892,13 +908,17 @@ public class FStatisticsFinancialPhaseLogic
       cmd.append(',');
       cmd.append(unit.customerTotal());
       cmd.append(',');
-      cmd.append(unit.memberRegister());
+      cmd.append(unit.memberCount());
       cmd.append(',');
       cmd.append(unit.memberTotal());
       cmd.append(',');
       cmd.append(unit.investment());
       cmd.append(',');
       cmd.append(unit.investmentTotal());
+      cmd.append(',');
+      cmd.append(unit.investmentNumber());
+      cmd.append(',');
+      cmd.append(unit.investmentNumberTotal());
       cmd.append(',');
       cmd.append(unit.investmentUser());
       cmd.append(',');
@@ -907,6 +927,10 @@ public class FStatisticsFinancialPhaseLogic
       cmd.append(unit.redemption());
       cmd.append(',');
       cmd.append(unit.redemptionTotal());
+      cmd.append(',');
+      cmd.append(unit.redemptionNumber());
+      cmd.append(',');
+      cmd.append(unit.redemptionNumberTotal());
       cmd.append(',');
       cmd.append(unit.redemptionUser());
       cmd.append(',');
@@ -1134,9 +1158,9 @@ public class FStatisticsFinancialPhaseLogic
          cmd.append(",`CUSTOMER_TOTAL`=");
          cmd.append(unit.customerTotal());
       }
-      if(unit.isMemberRegisterChanged()){
-         cmd.append(",`MEMBER_REGISTER`=");
-         cmd.append(unit.memberRegister());
+      if(unit.isMemberCountChanged()){
+         cmd.append(",`MEMBER_COUNT`=");
+         cmd.append(unit.memberCount());
       }
       if(unit.isMemberTotalChanged()){
          cmd.append(",`MEMBER_TOTAL`=");
@@ -1149,6 +1173,14 @@ public class FStatisticsFinancialPhaseLogic
       if(unit.isInvestmentTotalChanged()){
          cmd.append(",`INVESTMENT_TOTAL`=");
          cmd.append(unit.investmentTotal());
+      }
+      if(unit.isInvestmentNumberChanged()){
+         cmd.append(",`INVESTMENT_NUMBER`=");
+         cmd.append(unit.investmentNumber());
+      }
+      if(unit.isInvestmentNumberTotalChanged()){
+         cmd.append(",`INVESTMENT_NUMBER_TOTAL`=");
+         cmd.append(unit.investmentNumberTotal());
       }
       if(unit.isInvestmentUserChanged()){
          cmd.append(",`INVESTMENT_USER`=");
@@ -1165,6 +1197,14 @@ public class FStatisticsFinancialPhaseLogic
       if(unit.isRedemptionTotalChanged()){
          cmd.append(",`REDEMPTION_TOTAL`=");
          cmd.append(unit.redemptionTotal());
+      }
+      if(unit.isRedemptionNumberChanged()){
+         cmd.append(",`REDEMPTION_NUMBER`=");
+         cmd.append(unit.redemptionNumber());
+      }
+      if(unit.isRedemptionNumberTotalChanged()){
+         cmd.append(",`REDEMPTION_NUMBER_TOTAL`=");
+         cmd.append(unit.redemptionNumberTotal());
       }
       if(unit.isRedemptionUserChanged()){
          cmd.append(",`REDEMPTION_USER`=");

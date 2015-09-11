@@ -1,10 +1,9 @@
 package com.ahyc.eai.batch.common;
 
-import org.mo.eai.core.common.EEaiDataConnection;
-
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 
 //============================================================
 // <T>统计计算器。</T>
@@ -21,8 +20,8 @@ public abstract class FStatisticsPeriodCalculater
    // 同步时间(1小时)
    protected long _intervalSpan = 1000 * 60 * 60 * 6;
 
-   // 合计延迟(10秒)
-   protected int _recordDelaySecond = -10;
+   // 合计延迟(30秒)
+   protected int _recordDelaySecond = -20;
 
    //============================================================
    // <T>阶段处理。</T>

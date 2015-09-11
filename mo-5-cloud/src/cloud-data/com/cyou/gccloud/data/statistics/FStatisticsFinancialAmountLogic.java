@@ -47,34 +47,34 @@ public class FStatisticsFinancialAmountLogic
    // 字段记录时间的定义。
    public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
 
-   // 字段部门总计的定义。
+   // 字段部门总数的定义。
    public final static SLogicFieldInfo DEPARTMENT_TOTAL = new SLogicFieldInfo("DEPARTMENT_TOTAL");
 
-   // 字段理财师总计的定义。
+   // 字段理财师总数的定义。
    public final static SLogicFieldInfo MARKETER_TOTAL = new SLogicFieldInfo("MARKETER_TOTAL");
 
-   // 字段客户合计的定义。
+   // 字段客户总数的定义。
    public final static SLogicFieldInfo CUSTOMER_TOTAL = new SLogicFieldInfo("CUSTOMER_TOTAL");
 
-   // 字段投资总计的定义。
+   // 字段投资总金额的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
-   // 字段投资用户总数的定义。
-   public final static SLogicFieldInfo INVESTMENT_USER_TOTAL = new SLogicFieldInfo("INVESTMENT_USER_TOTAL");
+   // 字段投资总次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_NUMBER_TOTAL = new SLogicFieldInfo("INVESTMENT_NUMBER_TOTAL");
 
-   // 字段赎回总计的定义。
+   // 字段赎回总金额的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
 
-   // 字段赎回用户总数的定义。
-   public final static SLogicFieldInfo REDEMPTION_USER_TOTAL = new SLogicFieldInfo("REDEMPTION_USER_TOTAL");
+   // 字段赎回总次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_NUMBER_TOTAL = new SLogicFieldInfo("REDEMPTION_NUMBER_TOTAL");
 
-   // 字段净投总计的定义。
+   // 字段净投总金额的定义。
    public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
-   // 字段利息总计的定义。
+   // 字段利息总金额的定义。
    public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
 
-   // 字段业绩总计的定义。
+   // 字段业绩总金额的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
    // 字段创建用户标识的定义。
@@ -90,7 +90,7 @@ public class FStatisticsFinancialAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_TOTAL`,`MARKETER_TOTAL`,`CUSTOMER_TOTAL`,`INVESTMENT_TOTAL`,`INVESTMENT_USER_TOTAL`,`REDEMPTION_TOTAL`,`REDEMPTION_USER_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`DEPARTMENT_TOTAL`,`MARKETER_TOTAL`,`CUSTOMER_TOTAL`,`INVESTMENT_TOTAL`,`INVESTMENT_NUMBER_TOTAL`,`REDEMPTION_TOTAL`,`REDEMPTION_NUMBER_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态数据表逻辑单元。</T>
@@ -688,9 +688,9 @@ public class FStatisticsFinancialAmountLogic
       cmd.append(",`MARKETER_TOTAL`");
       cmd.append(",`CUSTOMER_TOTAL`");
       cmd.append(",`INVESTMENT_TOTAL`");
-      cmd.append(",`INVESTMENT_USER_TOTAL`");
+      cmd.append(",`INVESTMENT_NUMBER_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
-      cmd.append(",`REDEMPTION_USER_TOTAL`");
+      cmd.append(",`REDEMPTION_NUMBER_TOTAL`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
@@ -735,11 +735,11 @@ public class FStatisticsFinancialAmountLogic
       cmd.append(',');
       cmd.append(unit.investmentTotal());
       cmd.append(',');
-      cmd.append(unit.investmentUserTotal());
+      cmd.append(unit.investmentNumberTotal());
       cmd.append(',');
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
-      cmd.append(unit.redemptionUserTotal());
+      cmd.append(unit.redemptionNumberTotal());
       cmd.append(',');
       cmd.append(unit.netinvestmentTotal());
       cmd.append(',');
@@ -858,17 +858,17 @@ public class FStatisticsFinancialAmountLogic
          cmd.append(",`INVESTMENT_TOTAL`=");
          cmd.append(unit.investmentTotal());
       }
-      if(unit.isInvestmentUserTotalChanged()){
-         cmd.append(",`INVESTMENT_USER_TOTAL`=");
-         cmd.append(unit.investmentUserTotal());
+      if(unit.isInvestmentNumberTotalChanged()){
+         cmd.append(",`INVESTMENT_NUMBER_TOTAL`=");
+         cmd.append(unit.investmentNumberTotal());
       }
       if(unit.isRedemptionTotalChanged()){
          cmd.append(",`REDEMPTION_TOTAL`=");
          cmd.append(unit.redemptionTotal());
       }
-      if(unit.isRedemptionUserTotalChanged()){
-         cmd.append(",`REDEMPTION_USER_TOTAL`=");
-         cmd.append(unit.redemptionUserTotal());
+      if(unit.isRedemptionNumberTotalChanged()){
+         cmd.append(",`REDEMPTION_NUMBER_TOTAL`=");
+         cmd.append(unit.redemptionNumberTotal());
       }
       if(unit.isNetinvestmentTotalChanged()){
          cmd.append(",`NETINVESTMENT_TOTAL`=");
