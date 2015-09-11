@@ -39,6 +39,7 @@
       <div id="cy_left">
          <!-- 导航 开始 -->
          <ul class="accordion">
+         
             <li id="one" class="common"> <a href="#one">共通管理</a>
                <ul class="sub-menu">
                   <jh:equals source="product.configration" value="&basePage.menuString">
@@ -59,6 +60,14 @@
                   <jh:equals source="product.user.writelists" value="&basePage.menuString"><li><a href="/product/person/user/Access.wa" target="right">白名单</a></li></jh:equals>
                </ul>
             </li>
+            
+            <li id="four" class="common"> <a href="#four">金融管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="product.financial.department" value="&basePage.menuString">
+                     <li><a href="/product/financial/department/Department.wa" target="right">部门信息</a></li>
+                  </jh:equals>
+               </ul>
+         </li>
          </ul>
          <script type="text/javascript">
             $(document).ready(function() {
