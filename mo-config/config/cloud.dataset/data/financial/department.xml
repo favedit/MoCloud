@@ -12,7 +12,7 @@
   <FieldInteger _uuid="987ba53e-0ddc-4d40-90ab-5c11521fa5f0" name="level" label="M#12cn12级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEVEL" />
   <FieldRecordId _uuid="600975f8-c3a0-4998-8ab7-0890810a8372" name="leader_id" label="M#12cn15负责人编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEADER_ID" />
   <FieldString _uuid="89233e61-616c-40bd-80d4-4b5c80f74959" name="leader_label" label="M#12cn15负责人标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEADER_LABEL" data_size="80" />
-  <FieldString _uuid="5d148e0c-ec19-4cca-8068-0d79d2d76142" name="leader_phone" label="M#12cn15负责人电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEADER_PHONE" data_size="20" />
+  <FieldString _uuid="5d148e0c-ec19-4cca-8068-0d79d2d76142" name="leader_phone" label="M#12cn15负责人电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEADER_PHONE" data_size="80" />
   <FieldInteger _uuid="314c4865-5014-47ce-919d-582fb0865da9" name="province_id" label="M#12cn16省份标签编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_ID" />
   <FieldString _uuid="7e30510c-352d-4925-a90c-eb0b2dc0765a" name="province_label" label="M#12cn14省份标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_LABEL" data_size="80" />
   <FieldInteger _uuid="b16327db-3fce-488b-86a8-41ed297186a1" name="city_id" label="M#12cn14城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY_ID" />
@@ -20,7 +20,7 @@
   <FieldString _uuid="7583bd02-7d09-4175-b4fa-3cb68e7a6c06" name="detail_address" label="M#12cn14详细地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DETAIL_ADDRESS" data_size="400" />
   <FieldDouble _uuid="1190bfec-fa55-4d5c-a626-7fdcb4706870" name="location_longitude" label="M#12cn14位置经度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LONGITUDE" />
   <FieldDouble _uuid="933cf6fc-915b-4aad-8ccb-edd38e33d8fd" name="location_latitude" label="M#12cn14位置维度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LATITUDE" />
-  <FieldString _uuid="45087458-e1da-4688-b186-5ab3d71e0e79" name="department_phone" label="M#12cn14部门电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PHONE" data_size="20" />
+  <FieldString _uuid="45087458-e1da-4688-b186-5ab3d71e0e79" name="department_phone" label="M#12cn14部门电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_PHONE" data_size="80" />
   <FieldDateTime _uuid="28bcaf6a-e51d-4618-91a1-a34da48aea9e" name="build_date" label="M#12cn14建立日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUILD_DATE" />
   <FieldDouble _uuid="d65b4275-f8b9-4253-af5f-c7fe47c5a884" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldInteger _uuid="f0c41c38-0e8e-4d6b-9bfe-150d173155e1" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
