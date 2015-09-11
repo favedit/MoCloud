@@ -42,7 +42,8 @@ public class FConfigrationConsole
    @Override
    public FLogicDataset<FDataCommonConfigurationUnit> select(ILogicContext logicContext,
                                                              FDataCommonConfigurationUnit unit,
-                                                             int pageNum){
+                                                             int pageNum,
+                                                             int pageSize){
       if(pageNum < 0){
          pageNum = 0;
       }
@@ -52,7 +53,7 @@ public class FConfigrationConsole
       }
       String orderBy = String.format("%s %s", FDataCommonConfigurationLogic.CODE, "ASC");
       FDataCommonConfigurationLogic logic = logicContext.findLogic(FDataCommonConfigurationLogic.class);
-      FLogicDataset<FDataCommonConfigurationUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, _pageSize, pageNum);
+      FLogicDataset<FDataCommonConfigurationUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;
    }
 

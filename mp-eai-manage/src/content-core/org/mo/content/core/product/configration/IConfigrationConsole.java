@@ -28,7 +28,8 @@ public interface IConfigrationConsole
    // ============================================================
    FLogicDataset<FDataCommonConfigurationUnit> select(ILogicContext logicContext,
                                                       FDataCommonConfigurationUnit unit,
-                                                      int pageNum);
+                                                      int pageNum,
+                                                      int pageSize);
 
    FDataCommonConfigurationUnit findByCode(ILogicContext logicContext,
                                            String code);

@@ -71,7 +71,12 @@ public class FConfigrationAction
       }
       FDataCommonConfigurationUnit unit = new FDataCommonConfigurationUnit();
       unit.setCode(context.parameter("code"));
-      FLogicDataset<FDataCommonConfigurationUnit> unitList = _configrationConsole.select(logicContext, unit, Page.pageCurrent() - 1);
+      String StrPageSize = context.parameter("pageSize");
+      int pageSize = 20;
+      if(null != StrPageSize){
+         pageSize = Integer.parseInt(StrPageSize);
+      }
+      FLogicDataset<FDataCommonConfigurationUnit> unitList = _configrationConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";

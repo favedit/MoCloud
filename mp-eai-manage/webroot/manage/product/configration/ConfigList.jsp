@@ -5,19 +5,20 @@
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <script>
+      //显示更新成功
          $(function() {
             doSubmit(null);
             var pager = $('#config').datagrid().datagrid('getPager');
             pager.pagination({
                pageSize: 20,
-               showPageList: false,
-               onSelectPage: function(pageNumber) {
-                  doSubmit(pageNumber);
+               showPageList: [20,30,40],
+               onSelectPage: function(pageNumber,pageSize) {
+                  doSubmit(pageNumber,pageSize);
                }
             });
          });
 
-         function doSubmit(page) {
+         function doSubmit(page,pageSize) {
             progress();
             var url = "/product/configration/Configration.wa?do=select&date=" + new Date().valueOf();
             var data = null;
@@ -27,7 +28,8 @@
                url = "/product/configration/Configration.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
                   "code": code,
-                  "page": page
+                  "page": page,
+                  "pageSize":pageSize
                };
             }
             $.ajax({
@@ -92,7 +94,7 @@
             </div>
          </div>
       </div>
-      <table id="config" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
+      <table id="config" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,rownumbers: true,striped: true">
          <thead>
             <tr>
                <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
