@@ -8,6 +8,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.content.core.product.financial.IDepartmentConsole;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
@@ -44,11 +46,25 @@ public class FIndexAction
 
    public static void main(String[] args){
       try{
-         InputStream fis = new FileInputStream("D:\\Microbject\\MoScript\\data\\ezubo_department.xls");
+
+         String modeCd = RString.trim(args[0]);
+         if(!modeCd.equals("test") && !modeCd.equals("online")){
+            throw new FFatalError("Mode type failure.");
+         }
          // 设置属性
          FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-         attributes.set("application", "D:/Microbject/MoCloud/");
-         RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
+         attributes.set("application", "/data/eai/eai.batch");
+         // 加载配置
+         RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
+
+         //         String filePath = "D:\\Microbject\\MoScript\\data\\ezubo_department.xls";
+         String filePath = "/data/eai/eai.batch/webroot/dataezubo_department.xls";
+
+         InputStream fis = new FileInputStream(filePath);
+         // 设置属性
+         //         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
+         //         attributes.set("application", "D:/Microbject/MoCloud/");
+         //         RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
 
          IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
          FLogicContext logicContext = new FLogicContext(databaseConsole);
