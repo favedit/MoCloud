@@ -2605,7 +2605,7 @@ MO.FEaiWorldEntity_setup = function FEaiWorldEntity_setup(){
    sphere.linkGraphicContext(context);
    sphere.setSplitCount(24);
    sphere.setup();
-   sphere.matrix().setScaleAll(0.98);
+   sphere.matrix().setScaleAll(0.97);
    sphere.matrix().update();
    var info = sphere.material().info();
    info.optionAlpha = false;
@@ -2619,7 +2619,7 @@ MO.FEaiWorldEntity_setup = function FEaiWorldEntity_setup(){
    sphere.linkGraphicContext(context);
    sphere.setSplitCount(24);
    sphere.setup();
-   sphere.matrix().setScaleAll(0.99);
+   sphere.matrix().setScaleAll(0.98);
    sphere.matrix().update();
    var info = sphere.material().info();
    info.optionAlpha = true;
@@ -10263,14 +10263,291 @@ MO.FEaiChartMktMarketerTrendUnit = function FEaiChartMktMarketerTrendUnit(o){
    o._performance   = MO.Class.register(o, [new MO.AGetter('_performance'), new MO.APersistence('_performance', MO.EDataType.Double)]);
    return o;
 }
-MO.FEaiChartMktManageInfo = function FEaiChartMktManageInfo(o){
-   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
-   o._departments = MO.Class.register(o, [new MO.AGetter('_departments'), new MO.APersistence('_departments', MO.EDataType.Objects, MO.FEaiChartMktManageInfoDepartment)]);
+MO.FEaiChartMktManageCountryTable = function FEaiChartMktManageCountryTable(o) {
+   o = MO.Class.inherits(this, o, MO.FGuiControl);
+   o._
+   o._currentDate = null;
+   o._rank = MO.Class.register(o, new MO.AGetter('_rank'));
+   o._rankLogoImage = null;
+   o._rankTitleImage = null;
+   o._rankLineImage = null;
+   o._rankLinePadding = null;
+   o._rank1Image = null;
+   o._rank2Image = null;
+   o._rank3Image = null;
+   o._backgroundImage = null;
+   o._backgroundPadding = null;
+   o._tableCount = 0;
+   o._units = null;
+   o._lineScroll = 0;
+   o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
+   o.onImageLoad = MO.FEaiChartMktManageCountryTable_onImageLoad;
+   o.onPaintBegin = MO.FEaiChartMktManageCountryTable_onPaintBegin;
+   o.construct = MO.FEaiChartMktManageCountryTable_construct;
+   o.setup = MO.FEaiChartMktManageCountryTable_setup;
+   o.setRankUnits = MO.FEaiChartMktManageCountryTable_setRankUnits;
+   o.pushUnit = MO.FEaiChartMktManageCountryTable_pushUnit;
+   o.drawRow = MO.FEaiChartMktManageCountryTable_drawRow;
+   o.dispose = MO.FEaiChartMktManageCountryTable_dispose;
    return o;
 }
-MO.FEaiChartMktManageInfoDepartment = function FEaiChartMktManageInfoDepartment(o){
+MO.FEaiChartMktManageCountryTable_onImageLoad = function FEaiChartMktManageCountryTable_onImageLoad() {
+   this.dirty();
+}
+MO.FEaiChartMktManageCountryTable_onPaintBegin = function FEaiChartMktManageCountryTable_onPaintBegin(event) {
+   var o = this;
+   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   var graphic = event.graphic;
+   var rectangle = event.rectangle;
+   var left = rectangle.left;
+   var top = rectangle.top;
+   var width = rectangle.width;
+   var height = rectangle.height;
+   var right = left + width;
+   var bottom = top + height;
+   var drawPosition = top;
+   var heightRate = height / o._size.height;
+   var drawLeft = left + 12;
+   var drawRight = right - 12;
+   var drawWidth = right - left;
+   graphic.drawGridImage(o._backgroundImage, left, top, width, height, o._backgroundPadding);
+   var titleText = '全球实时投资数据展示中心(中国)';
+   graphic.setFont(o._headFontStyle);
+   var titleWidth = graphic.textWidth(titleText);
+   var textLeft = left + (width - titleWidth) * 0.5;
+   graphic.drawText(titleText, textLeft, top + 76, '#59FDE9');
+   drawPosition += 60
+   graphic.setFont(o._rowFontStyle);
+   var tableTop = top + o._rankStart;
+   graphic.drawGridImage(o._rankLineImage, left + 6, tableTop + o._rankTitleStart, width - 22, o._rankHeight, o._rankLinePadding);
+   graphic.drawImage(o._rankTitleImage, left + (width - 167) * 0.5, tableTop + 3, 198, 40);
+   var rankUnits = o._rank;
+   if (rankUnits) {
+      var tableText = '';
+      var tableTextWidth = 0;
+      var count = rankUnit.count();
+      tableTop += 90;
+      for (var i = 0; i < count; i++) {
+         var unit = rankUnit.at(i);
+         o.drawRow(graphic, unit, true, i, drawLeft, tableTop + o._rankRowHeight * i, drawWidth);
+      }
+   }
+}
+MO.FEaiChartMktManageCountryTable_construct = function FEaiChartMktManageCountryTable_construct() {
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o._units = new MO.TObjects();
+   o._currentDate = new MO.TDate();
+   o._rankLinePadding = new MO.SPadding(40, 0, 40, 0);
+   o._backgroundPadding = new MO.SPadding(20, 20, 90, 20);
+}
+MO.FEaiChartMktManageCountryTable_setup = function FEaiChartMktManageCountryTable_setup() {
+   var o = this;
+   var imageConsole = MO.Console.find(MO.FImageConsole);
+   var grid = o._gridControl = MO.Class.create(MO.FGuiTable);
+   grid.setOptionClip(true);
+   grid.setLocation(50, 332);
+   grid.setSize(800, 700);
+   grid.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right | MO.EUiAnchor.Bottom);
+   grid.setLeft(9);
+   grid.setRight(19);
+   grid.setBottom(20);
+   grid.setHeadHeight(35);
+   grid.setHeadBackColor('#122A46');
+   grid.headFont().font = 'Microsoft YaHei';
+   grid.headFont().size = 22;
+   grid.headFont().color = '#00B2F2';
+   grid.setRowHeight(32);
+   grid.rowFont().font = 'Microsoft YaHei';
+   grid.rowFont().size = 21;
+   grid.rowFont().color = '#59FDE9';
+   var column = MO.Class.create(MO.FGuiGridColumnDate);
+   column.setName('recordDate');
+   column.setLabel('时间');
+   column.setDataName('record_date');
+   column.setDateFormat('HH24:MI:SS');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerCity');
+   column.setLabel('城市');
+   column.setDataName('customer_city');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerInfo');
+   column.setLabel('用户-手机');
+   column.setDataName('customer_info');
+   column.setWidth(140);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investmentAmount');
+   column.setLabel('投资额');
+   column.setDataName('investment_amount');
+   column.cellPadding().right = 10;
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.setWidth(160);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('modelLabel');
+   column.setLabel('投资产品');
+   column.setDataName('model_label');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investmentGain');
+   column.setLabel('年化收益');
+   column.setDataName('investment_gain');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('bankGain');
+   column.setLabel('银行收益');
+   column.setDataName('bank_gain');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.setWidth(120);
+   column.cellPadding().right = 10;
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   o.push(grid);
+   o._headFontStyle = 'bold 32px Microsoft YaHei';
+   var isVertical = MO.Window.Browser.isOrientationVertical()
+   if (isVertical) {
+      o._tableCount = 11;
+      o._rankStart = 100;
+      o._rankTitleStart = -5;
+      o._rankHeight = 249;
+      o._rankRowHeight = 50;
+      o._rankIconStart = 22;
+      o._rankTextStart = 8;
+      o._rankRowUp = 36;
+      o._rankRowDown = 68;
+      o._headStart = 352;
+      o._headTextTop = 37;
+      o._headHeight = 54;
+      o._rowStart = 418;
+      o._rowTextTop = 0;
+      o._rowFontStyle = '36px Microsoft YaHei';
+   } else {
+      o._tableCount = 19;
+      o._rankStart = 110;
+      o._rankTitleStart = 0;
+      o._rankHeight = 219;
+      o._rankRowHeight = 40;
+      o._rankIconStart = 25;
+      o._rankTextStart = 0;
+      o._rankRowUp = 32;
+      o._rankRowDown = 51;
+      o._headStart = 336;
+      o._headTextTop = 27;
+      o._headHeight = 40;
+      o._rowFontStyle = '22px Microsoft YaHei';
+      o._rowStart = 384;
+   }
+}
+MO.FEaiChartMktManageCountryTable_setRankUnits = function FEaiChartMktManageCountryTable_setRankUnits(units) {
+   var o = this;
+   var grid = o._gridRank;
+   grid.clearRows();
+   var count = units.count();
+   for (var i = 0; i < count; i++) {
+      var unit = units.at(i);
+      var row = grid.allocRow();
+      var card = unit.card();
+      var city = MO.Console.find(MO.FEaiResourceConsole).cityModule().findByCard(card);
+      var cityLabel = '';
+      if (city) {
+         cityLabel = city.label();
+      }
+      row.set('image', '{eai.resource}/live/' + (i + 1) + '.png');
+      row.set('customer_city', cityLabel);
+      row.set('label_phone', unit.label() + " - " + unit.phone());
+      row.set('investment', unit.investment());
+      grid.pushRow(row);
+   }
+}
+MO.FEaiChartMktManageCountryTable_pushUnit = function FEaiChartMktManageCountryTable_pushUnit(unit) {
+   var o = this;
+   if (!unit) {
+      return null;
+   }
+   var card = unit.card();
+   var city = MO.Console.find(MO.FEaiResourceConsole).cityModule().findByCard(card);
+   var cityLabel = '';
+   if (city) {
+      cityLabel = city.label();
+   }
+   var grid = o._gridControl;
+   var row = grid.allocRow();
+   row.set('record_date', unit.recordDate());
+   row.set('customer_city', cityLabel);
+   row.set('customer_info', unit.label() + ' - ' + unit.phone());
+   row.set('model_label', unit.modelLabel());
+   row.set('investment_amount', unit.investment());
+   row.set('investment_gain', unit.gain());
+   row.set('bank_gain', unit.bankGain());
+   grid.insertRow(row);
+   var entities = o._units;
+   entities.unshift(unit);
+   o._lineScroll -= o._rowHeight;
+   if (entities.count() > o._tableCount) {
+      entities.pop();
+   }
+}
+MO.FEaiChartMktManageCountryTable_dispose = function FEaiChartMktManageCountryTable_dispose() {
+   var o = this;
+   o._units = MO.Lang.Object.dispose(o._units);
+   o._backgroundPadding = MO.Lang.Object.dispose(o._backgroundPadding);
+   o.__base.FGuiControl.dispose.call(o);
+}
+MO.FEaiChartMktManageInfo = function FEaiChartMktManageInfo(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._department2s = MO.Class.register(o, [new MO.AGetter('_department2s'), new MO.APersistence('_department2s', MO.EDataType.Objects, MO.FEaiChartMktManageInfoDepartment2)]);
+   o._department4s = MO.Class.register(o, [new MO.AGetter('_department4s'), new MO.APersistence('_department4s', MO.EDataType.Objects, MO.FEaiChartMktManageInfoDepartment4)]);
+   o._citys        = MO.Class.register(o, [new MO.AGetter('_citys'), new MO.APersistence('_citys', MO.EDataType.Objects, MO.FEaiChartMktManageInfoCity)]);
+   return o;
+}
+MO.FEaiChartMktManageInfoCity = function FEaiChartMktManageInfoCity(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._card          = MO.Class.register(o, [new MO.AGetter('_card'), new MO.APersistence('_card', MO.EDataType.Uint32)]);
+   o._marketerCount = MO.Class.register(o, [new MO.AGetter('_marketerCount'), new MO.APersistence('_marketerCount', MO.EDataType.Uint32)]);
+   o._investment    = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._redemption    = MO.Class.register(o, [new MO.AGetter('_redemption'), new MO.APersistence('_redemption', MO.EDataType.Double)]);
+   o._netinvestment = MO.Class.register(o, [new MO.AGetter('_netinvestment'), new MO.APersistence('_netinvestment', MO.EDataType.Double)]);
+   o._performance   = MO.Class.register(o, [new MO.AGetter('_performance'), new MO.APersistence('_performance', MO.EDataType.Double)]);
+   return o;
+}
+MO.FEaiChartMktManageInfoDepartment2 = function FEaiChartMktManageInfoDepartment2(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
    o._id            = MO.Class.register(o, [new MO.AGetter('_id'), new MO.APersistence('_id', MO.EDataType.Uint32)]);
+   o._label         = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
+   o._marketerCount = MO.Class.register(o, [new MO.AGetter('_marketerCount'), new MO.APersistence('_marketerCount', MO.EDataType.Uint32)]);
+   o._investment    = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._redemption    = MO.Class.register(o, [new MO.AGetter('_redemption'), new MO.APersistence('_redemption', MO.EDataType.Double)]);
+   o._netinvestment = MO.Class.register(o, [new MO.AGetter('_netinvestment'), new MO.APersistence('_netinvestment', MO.EDataType.Double)]);
+   o._performance   = MO.Class.register(o, [new MO.AGetter('_performance'), new MO.APersistence('_performance', MO.EDataType.Double)]);
+   return o;
+}
+MO.FEaiChartMktManageInfoDepartment4 = function FEaiChartMktManageInfoDepartment4(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._id            = MO.Class.register(o, [new MO.AGetter('_id'), new MO.APersistence('_id', MO.EDataType.Uint32)]);
+   o._parentLabel   = MO.Class.register(o, [new MO.AGetter('_parentLabel'), new MO.APersistence('_parentLabel', MO.EDataType.String)]);
    o._label         = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
    o._marketerCount = MO.Class.register(o, [new MO.AGetter('_marketerCount'), new MO.APersistence('_marketerCount', MO.EDataType.Uint32)]);
    o._investment    = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
@@ -10659,70 +10936,373 @@ MO.FEaiChartMktManageLiveTable_dispose = function FEaiChartMktManageLiveTable_di
    o._backgroundPadding = MO.Lang.Object.dispose(o._backgroundPadding);
    o.__base.FEaiEntity.dispose.call(o);
 }
-MO.FEaiChartMktManageScene = function FEaiChartMktManageScene(o){
-   o = MO.Class.inherits(this, o, MO.FEaiChartScene);
-   o._code                   = MO.EEaiScene.ChartWorld;
-   o._investment             = MO.Class.register(o, new MO.AGetter('_investment'));
-   o._investmentCurrent      = 0;
-   o._ready                  = false;
-   o._mapReady               = false;
-   o._playing                = false;
-   o._lastTick               = 0;
-   o._interval               = 10;
-   o._24HLastTick            = 0;
-   o._24HTrendInterval       = 1000 * 60 * 5;
-   o._logoBar                = null;
-   o._timeline               = null;
-   o._liveTable              = null;
-   o._livePop                = null;
-   o._statusStart            = false;
-   o._statusLayerCount       = 100;
-   o._statusLayerLevel       = 100;
-   o._operationFlag          = false;
-   o._operationPoint         = null;
-   o._operationRotationX     = 0;
-   o._operationRotationY     = 0;
-   o._rotationX              = 0;
-   o._rotationY              = 0;
-   o._worldScale             = 500;
-   o._groundAutioUrl         = '{eai.resource}/music/statistics.mp3';
-   o._organizationDataTicker = null;
-   o._organizationInfo       = null;
-   o.onOrganizationFetch     = MO.FEaiChartMktManageScene_onOrganizationFetch;
-   o.onInvestmentDataChanged = MO.FEaiChartMktManageScene_onInvestmentDataChanged;
-   o.onProcessReady          = MO.FEaiChartMktManageScene_onProcessReady;
-   o.onProcess               = MO.FEaiChartMktManageScene_onProcess;
-   o.onOperationDown         = MO.FEaiChartMktManageScene_onOperationDown;
-   o.onOperationMove         = MO.FEaiChartMktManageScene_onOperationMove;
-   o.onOperationUp           = MO.FEaiChartMktManageScene_onOperationUp;
-   o.onOperationWheel        = MO.FEaiChartMktManageScene_onOperationWheel;
-   o.onSwitchProcess         = MO.FEaiChartMktManageScene_onSwitchProcess;
-   o.onSwitchComplete        = MO.FEaiChartMktManageScene_onSwitchComplete;
-   o.construct               = MO.FEaiChartMktManageScene_construct;
-   o.setup                   = MO.FEaiChartMktManageScene_setup;
-   o.testReady               = MO.FEaiChartMktManageScene_testReady;
-   o.showParticle            = MO.FEaiChartMktManageScene_showParticle;
-   o.showFace                = MO.FEaiChartMktManageScene_showFace;
-   o.fixMatrix               = MO.FEaiChartMktManageScene_fixMatrix;
-   o.processResize           = MO.FEaiChartMktManageScene_processResize;
+MO.FEaiChartMktManageProvinceTable = function FEaiChartMktManageProvinceTable(o) {
+   o = MO.Class.inherits(this, o, MO.FGuiControl);
+   o._currentDate = null;
+   o._rank = MO.Class.register(o, new MO.AGetter('_rank'));
+   o._rankLogoImage = null;
+   o._rankTitleImage = null;
+   o._rankLineImage = null;
+   o._rankLinePadding = null;
+   o._rank1Image = null;
+   o._rank2Image = null;
+   o._rank3Image = null;
+   o._backgroundImage = null;
+   o._backgroundPadding = null;
+   o._tableCount = 0;
+   o._units = null;
+   o._lineScroll = 0;
+   o._listenersDataChanged = MO.Class.register(o, new MO.AListener('_listenersDataChanged', MO.EEvent.DataChanged));
+   o.onImageLoad = MO.FEaiChartMktManageProvinceTable_onImageLoad;
+   o.onPaintBegin = MO.FEaiChartMktManageProvinceTable_onPaintBegin;
+   o.construct = MO.FEaiChartMktManageProvinceTable_construct;
+   o.setup = MO.FEaiChartMktManageProvinceTable_setup;
+   o.setRankUnits = MO.FEaiChartMktManageProvinceTable_setRankUnits;
+   o.pushUnit = MO.FEaiChartMktManageProvinceTable_pushUnit;
+   o.drawRow = MO.FEaiChartMktManageProvinceTable_drawRow;
+   o.dispose = MO.FEaiChartMktManageProvinceTable_dispose;
    return o;
 }
-MO.FEaiChartMktManageScene_onOrganizationFetch = function FEaiChartMktManageScene_onOrganizationFetch(event){
+MO.FEaiChartMktManageProvinceTable_onImageLoad = function FEaiChartMktManageProvinceTable_onImageLoad() {
+   this.dirty();
+}
+MO.FEaiChartMktManageProvinceTable_onPaintBegin = function FEaiChartMktManageProvinceTable_onPaintBegin(event) {
    var o = this;
-   debugger
+   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   var graphic = event.graphic;
+   var rectangle = event.rectangle;
+   var left = rectangle.left;
+   var top = rectangle.top;
+   var width = rectangle.width;
+   var height = rectangle.height;
+   var right = left + width;
+   var bottom = top + height;
+   var drawPosition = top;
+   var heightRate = height / o._size.height;
+   var drawLeft = left + 12;
+   var drawRight = right - 12;
+   var drawWidth = right - left;
+   graphic.drawGridImage(o._backgroundImage, left, top, width, height, o._backgroundPadding);
+   var titleText = '全球实时投资数据展示中心(中国)';
+   graphic.setFont(o._headFontStyle);
+   var titleWidth = graphic.textWidth(titleText);
+   var textLeft = left + (width - titleWidth) * 0.5;
+   graphic.drawText(titleText, textLeft, top + 76, '#59FDE9');
+   drawPosition += 60
+   graphic.setFont(o._rowFontStyle);
+   var tableTop = top + o._rankStart;
+   graphic.drawGridImage(o._rankLineImage, left + 6, tableTop + o._rankTitleStart, width - 22, o._rankHeight, o._rankLinePadding);
+   graphic.drawImage(o._rankTitleImage, left + (width - 167) * 0.5, tableTop + 3, 198, 40);
+   var rankUnits = o._rank;
+   if (rankUnits) {
+      var tableText = '';
+      var tableTextWidth = 0;
+      var count = rankUnit.count();
+      tableTop += 90;
+      for (var i = 0; i < count; i++) {
+         var unit = rankUnit.at(i);
+         o.drawRow(graphic, unit, true, i, drawLeft, tableTop + o._rankRowHeight * i, drawWidth);
+      }
+   }
+}
+MO.FEaiChartMktManageProvinceTable_construct = function FEaiChartMktManageProvinceTable_construct() {
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o._units = new MO.TObjects();
+   o._currentDate = new MO.TDate();
+   o._rankLinePadding = new MO.SPadding(40, 0, 40, 0);
+   o._backgroundPadding = new MO.SPadding(20, 20, 90, 20);
+}
+MO.FEaiChartMktManageProvinceTable_setup = function FEaiChartMktManageProvinceTable_setup() {
+   var o = this;
+   var imageConsole = MO.Console.find(MO.FImageConsole);
+   var image = o._logoImage = imageConsole.load('{eai.resource}/live/company.png');
+   image.addLoadListener(o, o.onImageLoad);
+   var image = o._backgroundImage = imageConsole.load('{eai.resource}/live/grid.png');
+   image.addLoadListener(o, o.onImageLoad);
+   var image = o._rankTitleImage = imageConsole.load('{eai.resource}/live/tank-title.png');
+   image.addLoadListener(o, o.onImageLoad);
+   var image = o._rankLineImage = imageConsole.load('{eai.resource}/live/rank.png');
+   image.addLoadListener(o, o.onImageLoad);
+   var grid = o._gridRank = MO.Class.create(MO.FGuiGridControl);
+   grid.setOptionClip(false);
+   grid.setDisplayHead(false);
+   grid.setLocation(50, 170);
+   grid.setSize(800, 700);
+   grid.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
+   grid.setLeft(9);
+   grid.setRight(19);
+   grid.setHeadHeight(40);
+   grid.setHeadBackColor('#122A46');
+   grid.headFont().font = 'Microsoft YaHei';
+   grid.headFont().size = 22;
+   grid.headFont().color = '#00B2F2';
+   grid.setRowHeight(40);
+   grid.rowFont().font = 'Microsoft YaHei';
+   grid.rowFont().size = 22;
+   grid.rowFont().color = '#59FDE9';
+   var column = MO.Class.create(MO.FGuiGridColumnPicture);
+   column.setName('rank');
+   column.setLabel();
+   column.setDataName('image');
+   column.setWidth(110);
+   column.setPadding(1, 1, 1, 1);
+   column.setAlign(MO.EUiAlign.Center);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customer_city');
+   column.setLabel('');
+   column.setDataName('customer_city');
+   column.setWidth(100);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('label_phone');
+   column.setLabel('');
+   column.setDataName('label_phone');
+   column.setWidth(160);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investment');
+   column.setLabel('');
+   column.setDataName('investment');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.cellPadding().right = 10;
+   column.setWidth(160);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   o.push(grid);
+   var grid = o._gridControl = MO.Class.create(MO.FGuiTable);
+   grid.setOptionClip(true);
+   grid.setLocation(50, 332);
+   grid.setSize(800, 700);
+   grid.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right | MO.EUiAnchor.Bottom);
+   grid.setLeft(9);
+   grid.setRight(19);
+   grid.setBottom(20);
+   grid.setHeadHeight(35);
+   grid.setHeadBackColor('#122A46');
+   grid.headFont().font = 'Microsoft YaHei';
+   grid.headFont().size = 22;
+   grid.headFont().color = '#00B2F2';
+   grid.setRowHeight(32);
+   grid.rowFont().font = 'Microsoft YaHei';
+   grid.rowFont().size = 21;
+   grid.rowFont().color = '#59FDE9';
+   var column = MO.Class.create(MO.FGuiGridColumnDate);
+   column.setName('recordDate');
+   column.setLabel('时间');
+   column.setDataName('record_date');
+   column.setDateFormat('HH24:MI:SS');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerCity');
+   column.setLabel('城市');
+   column.setDataName('customer_city');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('customerInfo');
+   column.setLabel('用户-手机');
+   column.setDataName('customer_info');
+   column.setWidth(140);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investmentAmount');
+   column.setLabel('投资额');
+   column.setDataName('investment_amount');
+   column.cellPadding().right = 10;
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.setWidth(160);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnText);
+   column.setName('modelLabel');
+   column.setLabel('投资产品');
+   column.setDataName('model_label');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('investmentGain');
+   column.setLabel('年化收益');
+   column.setDataName('investment_gain');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.setWidth(120);
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   var column = MO.Class.create(MO.FGuiGridColumnCurrency);
+   column.setName('bankGain');
+   column.setLabel('银行收益');
+   column.setDataName('bank_gain');
+   column.setNormalColor('#59FDE9');
+   column.setHighColor('#FDEF01');
+   column.setLowerColor('#EB6C03');
+   column.setNegativeColor('#FF0000');
+   column.setWidth(120);
+   column.cellPadding().right = 10;
+   column.setPadding(1, 1, 1, 1);
+   grid.pushColumn(column);
+   o.push(grid);
+   o._headFontStyle = 'bold 32px Microsoft YaHei';
+   var isVertical = MO.Window.Browser.isOrientationVertical()
+   if (isVertical) {
+      o._tableCount = 11;
+      o._rankStart = 100;
+      o._rankTitleStart = -5;
+      o._rankHeight = 249;
+      o._rankRowHeight = 50;
+      o._rankIconStart = 22;
+      o._rankTextStart = 8;
+      o._rankRowUp = 36;
+      o._rankRowDown = 68;
+      o._headStart = 352;
+      o._headTextTop = 37;
+      o._headHeight = 54;
+      o._rowStart = 418;
+      o._rowTextTop = 0;
+      o._rowFontStyle = '36px Microsoft YaHei';
+   } else {
+      o._tableCount = 19;
+      o._rankStart = 110;
+      o._rankTitleStart = 0;
+      o._rankHeight = 219;
+      o._rankRowHeight = 40;
+      o._rankIconStart = 25;
+      o._rankTextStart = 0;
+      o._rankRowUp = 32;
+      o._rankRowDown = 51;
+      o._headStart = 336;
+      o._headTextTop = 27;
+      o._headHeight = 40;
+      o._rowFontStyle = '22px Microsoft YaHei';
+      o._rowStart = 384;
+   }
+}
+MO.FEaiChartMktManageProvinceTable_setRankUnits = function FEaiChartMktManageProvinceTable_setRankUnits(units) {
+   var o = this;
+   var grid = o._gridRank;
+   grid.clearRows();
+   var count = units.count();
+   for (var i = 0; i < count; i++) {
+      var unit = units.at(i);
+      var row = grid.allocRow();
+      var card = unit.card();
+      var city = MO.Console.find(MO.FEaiResourceConsole).cityModule().findByCard(card);
+      var cityLabel = '';
+      if (city) {
+         cityLabel = city.label();
+      }
+      row.set('image', '{eai.resource}/live/' + (i + 1) + '.png');
+      row.set('customer_city', cityLabel);
+      row.set('label_phone', unit.label() + " - " + unit.phone());
+      row.set('investment', unit.investment());
+      grid.pushRow(row);
+   }
+}
+MO.FEaiChartMktManageProvinceTable_pushUnit = function FEaiChartMktManageProvinceTable_pushUnit(unit) {
+   var o = this;
+   if (!unit) {
+      return null;
+   }
+   var card = unit.card();
+   var city = MO.Console.find(MO.FEaiResourceConsole).cityModule().findByCard(card);
+   var cityLabel = '';
+   if (city) {
+      cityLabel = city.label();
+   }
+   var grid = o._gridControl;
+   var row = grid.allocRow();
+   row.set('record_date', unit.recordDate());
+   row.set('customer_city', cityLabel);
+   row.set('customer_info', unit.label() + ' - ' + unit.phone());
+   row.set('model_label', unit.modelLabel());
+   row.set('investment_amount', unit.investment());
+   row.set('investment_gain', unit.gain());
+   row.set('bank_gain', unit.bankGain());
+   grid.insertRow(row);
+   var entities = o._units;
+   entities.unshift(unit);
+   o._lineScroll -= o._rowHeight;
+   if (entities.count() > o._tableCount) {
+      entities.pop();
+   }
+}
+MO.FEaiChartMktManageProvinceTable_dispose = function FEaiChartMktManageProvinceTable_dispose() {
+   var o = this;
+   o._units = MO.Lang.Object.dispose(o._units);
+   o._backgroundPadding = MO.Lang.Object.dispose(o._backgroundPadding);
+   o.__base.FGuiControl.dispose.call(o);
+}
+MO.FEaiChartMktManageScene = function FEaiChartMktManageScene(o){
+   o = MO.Class.inherits(this, o, MO.FEaiChartScene);
+   o._code                    = MO.EEaiScene.ChartWorld;
+   o._mapReady                = false;
+   o._playing                 = false;
+   o._statusStart             = false;
+   o._statusLayerCount        = 100;
+   o._statusLayerLevel        = 100;
+   o._operationFlag           = false;
+   o._operationPoint          = null;
+   o._operationRotationX      = 0;
+   o._operationRotationY      = 0;
+   o._rotationX               = 0;
+   o._rotationY               = 0;
+   o._worldScale              = 500;
+   o._countryTable            = null;
+   o._provinceTable           = null;
+   o._cameraFrom              = MO.Class.register(o, new MO.AGetSet('_cameraFrom'));
+   o._cameraTo                = MO.Class.register(o, new MO.AGetSet('_cameraTo'));
+   o._opMouseDown             = false;
+   o._opMouseMoved            = false;
+   o.__opMouseMoveThreshold   = 4;
+   o._organizationDataTicker  = null;
+   o._organizationInfo        = null;
+   o.onOrganizationFetch      = MO.FEaiChartMktManageScene_onOrganizationFetch;
+   o.onOperationDown          = MO.FEaiChartMktManageScene_onOperationDown;
+   o.onOperationMove          = MO.FEaiChartMktManageScene_onOperationMove;
+   o.onOperationUp            = MO.FEaiChartMktManageScene_onOperationUp;
+   o.onOperationWheel         = MO.FEaiChartMktManageScene_onOperationWheel;
+   o.onOperationVisibility    = MO.FEaiChartMktManageScene_onOperationVisibility;
+   o.onProcessReady           = MO.FEaiChartMktManageScene_onProcessReady;
+   o.onProcess                = MO.FEaiChartMktManageScene_onProcess;
+   o.onSwitchProcess          = MO.FEaiChartMktManageScene_onSwitchProcess;
+   o.onSwitchComplete         = MO.FEaiChartMktManageScene_onSwitchComplete;
+   o.construct                = MO.FEaiChartMktManageScene_construct;
+   o.setup                    = MO.FEaiChartMktManageScene_setup;
+   o.showFace                 = MO.FEaiChartMktManageScene_showFace;
+   o.fixMatrix                = MO.FEaiChartMktManageScene_fixMatrix;
+   o.processResize            = MO.FEaiChartMktManageScene_processResize;
+   return o;
+}
+MO.FEaiChartMktManageScene_onOrganizationFetch = function FEaiChartMktManageScene_onOrganizationFetch(event) {
+   var o = this;
    var info = o._organizationInfo;
    info.unserializeSignBuffer(event.sign, event.content, true);
 }
-MO.FEaiChartMktManageScene_onInvestmentDataChanged = function FEaiChartMktManageScene_onInvestmentDataChanged(event) {
+MO.FEaiChartMktManageScene_onOperationVisibility = function FEaiChartMktManageScene_onOperationVisibility(event) {
    var o = this;
-   var entity = event.entity;
-   var table = o._liveTable;
-   table.setRank(event.rank);
-   table.pushEntity(entity);
-   table.dirty();
-   if(entity){
-      var pop = o._livePop;
-      pop.setData(entity);
+   o.__base.FEaiChartScene.onOperationVisibility.call(o, event);
+   if (event.visibility) {
+      o._groundAutio.play();
+      o._countryEntity._audioMapEnter._hAudio.muted = false;
+   } else {
+      o._groundAutio.pause();
+      o._countryEntity._audioMapEnter._hAudio.muted = true;
    }
 }
 MO.FEaiChartMktManageScene_onProcessReady = function FEaiChartMktManageScene_onProcessReady() {
@@ -10733,22 +11313,31 @@ MO.FEaiChartMktManageScene_onProcessReady = function FEaiChartMktManageScene_onP
 MO.FEaiChartMktManageScene_onProcess = function FEaiChartMktManageScene_onProcess() {
    var o = this;
    o.__base.FEaiChartScene.onProcess.call(o);
-   if(!o._statusStart){
-      if(o.testReady()){
+   if (!o._statusStart) {
+      if (MO.Window.Browser.capability().soundConfirm) {
+         var iosPlay = document.getElementById('id_ios_play');
+         if (iosPlay) {
+            MO.Window.Html.visibleSet(iosPlay, true);
+         }
          var hLoading = document.getElementById('id_loading');
-         if(hLoading){
+         if (hLoading) {
+            document.body.removeChild(hLoading);
+         }
+      } else {
+         var hLoading = document.getElementById('id_loading');
+         if (hLoading) {
             hLoading.style.opacity = o._statusLayerLevel / o._statusLayerCount;
             o._statusLayerLevel--;
          }
          o._statusLayerLevel--;
-         if(o._statusLayerLevel <= 0){
-            if(hLoading){
-               document.body.removeChild(hLoading);
-            }
-            o.processLoaded();
-            o._playing = true;
-            o._statusStart = true;
+      }
+      if (o._statusLayerLevel <= 0) {
+         if (hLoading) {
+            document.body.removeChild(hLoading);
          }
+         o.processLoaded();
+         o._playing = true;
+         o._statusStart = true;
       }
    }
    if (o._playing) {
@@ -10763,106 +11352,88 @@ MO.FEaiChartMktManageScene_onProcess = function FEaiChartMktManageScene_onProces
          o._guiManager.mainTimeline().pushAction(alphaAction);
          o._mapReady = true;
       }
-      if(o._organizationDataTicker.process()){
+      if (o._organizationDataTicker.process()) {
          MO.Console.find(MO.FEaiLogicConsole).statistics().department().doOrganization(o, o.onOrganizationFetch, 2);
-      }
-      var currentTick = MO.Timer.current();
-      if (currentTick - o._24HLastTick > o._24HTrendInterval) {
-         o._timeline.sync();
-         o._24HLastTick = currentTick;
-      }
-      var logoBar = o._logoBar;
-      var investmentTotal = logoBar.findComponent('investmentTotal');
-      var invementTotalCurrent = o._investment.invementTotalCurrent();
-      investmentTotal.setValue(parseInt(invementTotalCurrent).toString());
-      var investmentDay = logoBar.findComponent('investmentDay');
-      var invementDayCurrent = o._investment.invementDayCurrent();
-      investmentDay.setValue(parseInt(invementDayCurrent).toString());
-      if(o._nowTicker.process()){
-         var bar = o._logoBar;
-         var date = o._nowDate;
-         date.setNow();
-         var dateControl = bar.findComponent('date');
-         dateControl.setLabel(date.format('YYYY/MM/DD'));
-         var timeControl = bar.findComponent('time');
-         timeControl.setLabel(date.format('HH24:MI'));
       }
       var mapEntity = o._mapEntity;
       o.fixMatrix(mapEntity.countryFaceDisplay().matrix());
       o.fixMatrix(mapEntity.countryBorderDisplay().matrix());
    }
-   if (o._livePop.visible()) {
-      o._livePop.dirty();
-   }
 }
-MO.FEaiChartMktManageScene_onOperationDown = function FEaiChartMktManageScene_onOperationDown(event){
+MO.FEaiChartMktManageScene_onOperationDown = function FEaiChartMktManageScene_onOperationDown(event) {
    var o = this;
-   o._operationFlag = true;
+   o._opMouseDown = true;
    o._operationRotationX = o._rotationX;
    o._operationRotationY = o._rotationY;
    o._operationPoint.set(event.x, event.y);
-   var region = o.activeStage().region();
-   var camera = region.camera();
-   var canvas3d = o.application().desktop().canvas3d();
-   var selectTechnique = MO.Console.find(MO.FG3dTechniqueConsole).find(canvas3d, MO.FG3dSelectTechnique);
-   var renderable = selectTechnique.test(region, event.offsetX, event.offsetY);
-   if(renderable){
-      var eaiSelectTechnique = MO.Console.find(MO.FG3dTechniqueConsole).find(canvas3d, MO.FEaiSelectTechnique);
-      var countryRenderable = eaiSelectTechnique.test(region, renderable, event.offsetX, event.offsetY);
-      if(countryRenderable){
-         var countryEntity = countryRenderable._shape._countryEntity
-         var outline = renderable._shape.calculateOutline();
-         var countryOutline = countryRenderable.calculateOutline();
-         console.log('Select countty: ' + countryEntity.code() + ' - ' + outline + ' - ' + countryOutline);
+}
+MO.FEaiChartMktManageScene_onOperationMove = function FEaiChartMktManageScene_onOperationMove(event) {
+   var o = this;
+   if (o._opMouseDown) {
+      var cx = event.x - o._operationPoint.x;
+      if (cx > o.__opMouseMoveThreshold) {
+         o._operationMoved = true;
+         var cx = event.x - o._operationPoint.x;
+         var cy = event.y - o._operationPoint.y;
+         o._rotationY = o._operationRotationY - cx * 0.002;
       }
    }
-   return;
-   if (!renderable) {
-      camera.setPosition(3, 24, -0.5);
-      camera.update();
-      return;
-   }
-   var outline = renderable.calculateOutline();
-   var relativeOutline = new SOutline3d();
-   relativeOutline.calculateFrom(outline, camera.matrix());
-   var distance = relativeOutline.radius / Math.sin(camera.projection().angle() / 2) * Math.sin(90 - camera.projection().angle() / 2);
-   var currentCenter = outline.center;
-   var cameraTo = new SPoint3(currentCenter.x - distance * o.cameraDirection().x, currentCenter.y - distance * o.cameraDirection().y, currentCenter.z - distance * o.cameraDirection().z);
-   var cameraPosition = camera.position();
-   o.setStartTime(new Date());
-   o.cameraFrom().assign(cameraPosition);
-   o.cameraTo().assign(cameraTo);
-   o.setCameraMoving(true);
 }
-MO.FEaiChartMktManageScene_onOperationMove = function FEaiChartMktManageScene_onOperationMove(event){
+MO.FEaiChartMktManageScene_onOperationUp = function FEaiChartMktManageScene_onOperationUp(event) {
    var o = this;
-   if(o._operationFlag){
-      var cx = event.x - o._operationPoint.x;
-      var cy = event.y - o._operationPoint.y;
-      o._rotationX = o._operationRotationX - cy * 0.001;
-      o._rotationY = o._operationRotationY - cx * 0.002;
+   o._opMouseDown = false;
+   if (!o._operationMoved) {
+      var canvas3d = o.application().desktop().canvas3d();
+      var region = o.activeStage().region();
+      var camera = region.camera();
+      var selectTechnique = MO.Console.find(MO.FG3dTechniqueConsole).find(canvas3d, MO.FG3dSelectTechnique);
+      var renderable = selectTechnique.test(region, event.offsetX, event.offsetY);
+      if (renderable) {
+         var eaiSelectTechnique = MO.Console.find(MO.FG3dTechniqueConsole).find(canvas3d, MO.FEaiSelectTechnique);
+         var countryRenderable = eaiSelectTechnique.test(region, renderable, event.offsetX, event.offsetY);
+         if (countryRenderable) {
+            var countryEntity = countryRenderable._shape._countryEntity;
+            var countryOutline = countryRenderable.calculateOutline();
+            var relativeOutline = new MO.SOutline3d();
+            relativeOutline.calculateFrom(countryOutline, camera.matrix());
+            var distance = relativeOutline.radius / Math.sin(camera.projection().angle() / 2) * Math.sin(90 - camera.projection().angle() / 2);
+            var currentCenter = countryOutline.center;
+            var cameraTo = new MO.SPoint3(currentCenter.x - distance * camera.direction().x, currentCenter.y - distance * camera.direction().y, currentCenter.z - distance * camera.direction().z);
+            var cameraPosition = camera.position();
+            camera.setPosition(cameraTo.x, cameraTo.y, cameraTo.z);
+            camera.lookAt(0, 0, 0);
+            camera.update();
+         }
+         else {
+            camera.position().set(0, 0, -10);
+            camera.lookAt(0, 0, 0);
+            camera.update();
+         }
+      }
+      else {
+         camera.position().set(0, 0, -10);
+         camera.lookAt(0, 0, 0);
+         camera.update();
+      }
    }
+   o._operationMoved = false;
 }
-MO.FEaiChartMktManageScene_onOperationUp = function FEaiChartMktManageScene_onOperationUp(event){
-   var o = this;
-   o._operationFlag = false;
-}
-MO.FEaiChartMktManageScene_onOperationWheel = function FEaiChartMktManageScene_onOperationWheel(event){
+MO.FEaiChartMktManageScene_onOperationWheel = function FEaiChartMktManageScene_onOperationWheel(event) {
    var o = this;
    var delta = event.deltaY
-   if(delta > 0){
+   if (delta > 0) {
       o._worldScale /= 1.05;
-   }else if(delta < 0){
+   } else if (delta < 0) {
       o._worldScale *= 1.05;
    }
 }
-MO.FEaiChartMktManageScene_onSwitchProcess = function FEaiChartMktManageScene_onSwitchProcess(event){
+MO.FEaiChartMktManageScene_onSwitchProcess = function FEaiChartMktManageScene_onSwitchProcess(event) {
    var o = this;
 }
-MO.FEaiChartMktManageScene_onSwitchComplete = function FEaiChartMktManageScene_onSwitchComplete(event){
+MO.FEaiChartMktManageScene_onSwitchComplete = function FEaiChartMktManageScene_onSwitchComplete(event) {
    var o = this;
 }
-MO.FEaiChartMktManageScene_construct = function FEaiChartMktManageScene_construct(){
+MO.FEaiChartMktManageScene_construct = function FEaiChartMktManageScene_construct() {
    var o = this;
    o.__base.FEaiChartScene.construct.call(o);
    o._operationPoint = new MO.SPoint2();
@@ -10873,35 +11444,16 @@ MO.FEaiChartMktManageScene_setup = function FEaiChartMktManageScene_setup() {
    var o = this;
    o.__base.FEaiChartScene.setup.call(o);
    var dataLayer = o._activeStage.dataLayer();
-   var frame = o._logoBar = MO.Console.find(MO.FGuiFrameConsole).get(o, 'eai.chart.LogoBar');
-   o._guiManager.register(frame);
-   var invement = o._investment = MO.Class.create(MO.FEaiStatisticsInvestment);
-   invement.linkGraphicContext(o);
-   invement.setMapEntity(o._mapEntity);
-   invement.setup();
-   invement.addDataChangedListener(o, o.onInvestmentDataChanged);
-   var display = invement.display();
-   o.fixMatrix(display.matrix());
-   dataLayer.push(display);
-   var stage = o.activeStage();
-   var timeline = o._timeline = MO.Class.create(MO.FEaiChartMktManageTimeline);
-   timeline.setName('Timeline');
-   timeline.linkGraphicContext(o);
-   timeline.sync();
-   timeline.build();
-   o._guiManager.register(timeline);
-   var liveTable = o._liveTable = MO.Class.create(MO.FEaiChartMktManageLiveTable);
-   liveTable.setName('LiveTable');
-   liveTable.linkGraphicContext(o);
-   liveTable.setup();
-   liveTable.build();
-   o._guiManager.register(liveTable);
-   var livePop = o._livePop = MO.Class.create(MO.FEaiChartMktManageLivePop);
-   livePop.setName('LivePop');
-   livePop.linkGraphicContext(o);
-   livePop.setup();
-   livePop.build();
-   o._guiManager.register(livePop);
+   var countryTable = o._countryTable = MO.Class.create(MO.FEaiChartMktManageCountryTable);
+   countryTable.setName('CountryTable');
+   countryTable.linkGraphicContext(o);
+   countryTable.setup();
+   countryTable.build();
+   var provinceTable = o._provinceTable = MO.Class.create(MO.FEaiChartMktManageProvinceTable);
+   provinceTable.setName('CountryTable');
+   provinceTable.linkGraphicContext(o);
+   provinceTable.setup();
+   provinceTable.build();
    o._guiManager.hide();
    var camera = MO.Class.create(MO.FE3dOrthoCamera);
    camera.position().set(0, 0, -500);
@@ -10916,29 +11468,7 @@ MO.FEaiChartMktManageScene_setup = function FEaiChartMktManageScene_setup() {
    var worldEntity = o._worldEntity = MO.Console.find(MO.FEaiEntityConsole).mapModule().loadWorld(o);
    o._readyLoader.push(worldEntity);
 }
-MO.FEaiChartMktManageScene_testReady = function FEaiChartMktManageScene_testReady(){
-   return true;
-}
-MO.FEaiChartMktManageScene_showParticle = function FEaiChartMktManageScene_showParticle(provinceEntity, cityResource){
-   var o = this;
-   var particle = o._particle;
-   var location = cityResource.location();
-   var count = 4;
-   particle.color().set(1, 1, 0, 1);
-   for(var i = 0; i < count; i++){
-      var itemCount = parseInt(Math.random() * 100);
-      var attenuation = Math.random();
-      particle.setItemCount(itemCount);
-      particle.position().assign(location);
-      particle.position().z = provinceEntity.currentZ();
-      particle.setDelay(10 * i);
-      particle.setSpeed(4 + 0.4 * i);
-      particle.setAcceleration(0);
-      particle.setAttenuation(0.8);
-      particle.start();
-   }
-}
-MO.FEaiChartMktManageScene_showFace = function FEaiChartMktManageScene_showFace(){
+MO.FEaiChartMktManageScene_showFace = function FEaiChartMktManageScene_showFace() {
    var o = this;
    o._statusStart = true;
    o._playing = true;
@@ -10946,15 +11476,15 @@ MO.FEaiChartMktManageScene_showFace = function FEaiChartMktManageScene_showFace(
    o._mapEntity.reset();
    o.processResize();
 }
-MO.FEaiChartMktManageScene_fixMatrix = function FEaiChartMktManageScene_fixMatrix(matrix){
+MO.FEaiChartMktManageScene_fixMatrix = function FEaiChartMktManageScene_fixMatrix(matrix) {
    var o = this;
    var isVertical = MO.Window.Browser.isOrientationVertical()
-   if(isVertical){
+   if (isVertical) {
       matrix.tx = -14.58;
       matrix.ty = -1.9;
       matrix.tz = 0;
       matrix.setScale(0.14, 0.16, 0.14);
-   }else{
+   } else {
       matrix.tx = -320;
       matrix.ty = 0;
       matrix.tz = 0;
@@ -10965,62 +11495,10 @@ MO.FEaiChartMktManageScene_fixMatrix = function FEaiChartMktManageScene_fixMatri
    matrix.update();
    o._rotationY += 0.001;
 }
-MO.FEaiChartMktManageScene_processResize = function FEaiChartMktManageScene_processResize(){
+MO.FEaiChartMktManageScene_processResize = function FEaiChartMktManageScene_processResize() {
    var o = this;
    o.__base.FEaiChartScene.processResize.call(o);
    var isVertical = MO.Window.Browser.isOrientationVertical()
-   o.fixMatrix(o._investment.display().matrix());
-   var logoBar = o._logoBar;
-   if(isVertical){
-      logoBar.setLocation(8, 8);
-      logoBar.setScale(0.85, 0.85);
-   }else{
-      logoBar.setLocation(5, 5);
-      logoBar.setScale(1, 1);
-   }
-   var control = o._southSea;
-   if(isVertical){
-      control.setDockCd(MO.EUiDock.RightTop);
-      control.setTop(570);
-      control.setRight(100);
-   }else{
-      control.setDockCd(MO.EUiDock.RightBottom);
-      control.setRight(710);
-      control.setBottom(260);
-   }
-   var timeline = o._timeline;
-   if(isVertical){
-      timeline.setDockCd(MO.EUiDock.Bottom);
-      timeline.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
-      timeline.setLeft(10);
-      timeline.setRight(10);
-      timeline.setBottom(920);
-      timeline.setHeight(250);
-   }else{
-      timeline.setDockCd(MO.EUiDock.Bottom);
-      timeline.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Right);
-      timeline.setLeft(20);
-      timeline.setBottom(30);
-      timeline.setRight(680);
-      timeline.setHeight(250);
-   }
-   var liveTable = o._liveTable;
-   if(isVertical){
-      liveTable.setDockCd(MO.EUiDock.Bottom);
-      liveTable.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Right);
-      liveTable.setLeft(10);
-      liveTable.setRight(10);
-      liveTable.setBottom(10);
-      liveTable.setWidth(1060);
-      liveTable.setHeight(900);
-   }else{
-      liveTable.setDockCd(MO.EUiDock.Right);
-      liveTable.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Bottom);
-      liveTable.setTop(10);
-      liveTable.setRight(0);
-      liveTable.setBottom(10);
-      liveTable.setWidth(650);
-   }
 }
 with (MO) {
    MO.FEaiChartMktManageTimeline = function FEaiChartMktManageTimeline(o) {

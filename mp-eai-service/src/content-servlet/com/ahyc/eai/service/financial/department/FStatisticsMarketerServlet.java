@@ -12,6 +12,7 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -55,14 +56,11 @@ public class FStatisticsMarketerServlet
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
       }
-      // 检查参数
-      int level = context.parameterAsInteger("level", 0);
-      if((level != 2) && (level != 4)){
-         throw new FFatalError("Parameter is invalid.");
-      }
       //............................................................
       // 从缓冲中查找数据
-      String cacheCode = "organization|" + level;
+      TDateTime currentDate = RDateTime.currentDateTime();
+      String dateSource = currentDate.format("YYYYMMDDHH24MI00");
+      String cacheCode = "organization|" + dateSource;
       FByteStream cacheStream = findCacheStream(cacheCode);
       if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
@@ -71,12 +69,12 @@ public class FStatisticsMarketerServlet
       // 设置输出流
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
-      // 输出当日合计数据
-      FSql sql = _resource.findString(FSql.class, "sql.organization.level" + level);
-      FDataset dataset = connection.fetchDataset(sql);
-      int count = dataset.count();
-      stream.writeInt32(count);
-      for(FRow row : dataset){
+      // 输出级别2的部门数据
+      FSql level2Sql = _resource.findString(FSql.class, "sql.organization.level2");
+      FDataset level2Dataset = connection.fetchDataset(level2Sql);
+      int level2Count = level2Dataset.count();
+      stream.writeInt32(level2Count);
+      for(FRow row : level2Dataset){
          stream.writeUint32(row.getInt("id"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));
@@ -85,13 +83,54 @@ public class FStatisticsMarketerServlet
          stream.writeDouble(row.getDouble("netinvestment_total"));
          stream.writeDouble(0);
       }
+      // 输出级别4的部门数据
+      FSql level4Sql = _resource.findString(FSql.class, "sql.organization.level4");
+      FDataset level4Dataset = connection.fetchDataset(level4Sql);
+      int level4Count = level4Dataset.count();
+      stream.writeInt32(level4Count);
+      for(FRow row : level4Dataset){
+         stream.writeUint32(row.getInt("id"));
+         stream.writeString(row.get("parent_label"));
+         stream.writeString(row.get("label"));
+         stream.writeUint32(row.getInt("marketer_count"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(0);
+      }
+      // 输出理财师分布数据
+      FSql areaSql = _resource.findString(FSql.class, "sql.organization.area");
+      FDataset areaDataset = connection.fetchDataset(areaSql);
+      int areaCount = 0;
+      for(FRow row : areaDataset){
+         String card = row.get("marketer_card");
+         if(!RString.isEmpty(card)){
+            if(card.length() == 4){
+               areaCount++;
+            }
+         }
+      }
+      stream.writeInt32(areaCount);
+      for(FRow row : areaDataset){
+         String card = row.get("marketer_card");
+         if(!RString.isEmpty(card)){
+            if(card.length() == 4){
+               stream.writeUint32(row.getInt("marketer_card"));
+               stream.writeUint32(row.getInt("marketer_count"));
+               stream.writeDouble(row.getDouble("investment_total"));
+               stream.writeDouble(row.getDouble("redemption_total"));
+               stream.writeDouble(row.getDouble("netinvestment_total"));
+               stream.writeDouble(0);
+            }
+         }
+      }
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "organization", "Send marketer organization. (level={1}, count={2}, data_length={3})", level, count, dataLength);
+      _logger.debug(this, "organization", "Send marketer organization. (level2_count={1}, level4_count={2}, area_count={3}, data_length={4})", level2Count, level4Count, areaCount, dataLength);
       return sendStream(context, request, response, stream);
    }
 
