@@ -53,15 +53,15 @@ public class FIndexAction
          }
          // 设置属性
          FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-         attributes.set("application", "/data/eai/eai.batch");
+         attributes.set("application", "/data/eai/eai.manage");
          // 加载配置
-         RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
+         RAop.initialize("/data/eai/eai.manage/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
 
+         String filePath = "/data/eai/eai.manage/webroot/dataezubo_department.xls";
          //         String filePath = "D:\\Microbject\\MoScript\\data\\ezubo_department.xls";
-         String filePath = "/data/eai/eai.batch/webroot/dataezubo_department.xls";
 
          InputStream fis = new FileInputStream(filePath);
-         // 设置属性
+         //         //设置属性
          //         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
          //         attributes.set("application", "D:/Microbject/MoCloud/");
          //         RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
@@ -86,17 +86,19 @@ public class FIndexAction
                }
                HSSFCell regionCell = row.getCell(1);
                HSSFCell companCell = row.getCell(2);
-               HSSFCell provinceCell = row.getCell(3);
-               HSSFCell cityCell = row.getCell(4);
-               HSSFCell detailCell = row.getCell(5);
-               HSSFCell longitudeCell = row.getCell(6);
-               HSSFCell latitudeCell = row.getCell(7);
-               HSSFCell departmentPhoneCell = row.getCell(8);
-               HSSFCell leaderLabelCell = row.getCell(9);
+               HSSFCell linkIdCell = row.getCell(3);
+               HSSFCell provinceCell = row.getCell(4);
+               HSSFCell cityCell = row.getCell(5);
+               HSSFCell detailCell = row.getCell(6);
+               HSSFCell longitudeCell = row.getCell(7);
+               HSSFCell latitudeCell = row.getCell(8);
+               HSSFCell departmentPhoneCell = row.getCell(9);
+               HSSFCell leaderLabelCell = row.getCell(10);
                //生成对象增加数据库
                FDataFinancialDepartmentUnit unit = new FDataFinancialDepartmentUnit();
                unit.setDepartmentLabel(department);
                unit.setRegionLabel(regionCell.getStringCellValue());
+               unit.setLinkId(new Long((long)linkIdCell.getNumericCellValue()));
                unit.setLabel(companCell.getStringCellValue());
                unit.setProvinceLabel(provinceCell.getStringCellValue());
                unit.setCityLabel(cityCell.getStringCellValue());

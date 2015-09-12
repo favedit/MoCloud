@@ -1207,7 +1207,7 @@ CREATE TABLE `DT_FIN_DEPARTMENT`
    `LEVEL`                         INTEGER, 
    `LEADER_ID`                     BIGINT, 
    `LEADER_LABEL`                  VARCHAR(80), 
-   `LEADER_PHONE`                  VARCHAR(20), 
+   `LEADER_PHONE`                  VARCHAR(80), 
    `PROVINCE_ID`                   INTEGER, 
    `PROVINCE_LABEL`                VARCHAR(80), 
    `CITY_ID`                       INTEGER, 
@@ -1215,7 +1215,7 @@ CREATE TABLE `DT_FIN_DEPARTMENT`
    `DETAIL_ADDRESS`                VARCHAR(400), 
    `LOCATION_LONGITUDE`            DOUBLE, 
    `LOCATION_LATITUDE`             DOUBLE, 
-   `DEPARTMENT_PHONE`              VARCHAR(20), 
+   `DEPARTMENT_PHONE`              VARCHAR(80), 
    `BUILD_DATE`                    DATETIME, 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `INVESTMENT_COUNT`              INTEGER, 
@@ -1231,7 +1231,7 @@ CREATE TABLE `DT_FIN_DEPARTMENT`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_DEPARTMENT 
    ADD CONSTRAINT DT_FIN_DPT_UK_GID UNIQUE ( GUID ); 
