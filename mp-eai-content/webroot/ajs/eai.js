@@ -1265,6 +1265,7 @@ MO.FEaiLogicStatisticsDepartment = function FEaiLogicStatisticsDepartment(o){
    o._customerDynamicFirst   = true;
    o._marketerDynamicFirst   = true;
    o._departmentDynamicFirst = true;
+   o.doOrganization          = MO.FEaiLogicStatisticsDepartment_doOrganization;
    o.doCustomerDynamic       = MO.FEaiLogicStatisticsDepartment_doCustomerDynamic;
    o.doCustomerTrend         = MO.FEaiLogicStatisticsDepartment_doCustomerTrend;
    o.doMarketerDynamic       = MO.FEaiLogicStatisticsDepartment_doMarketerDynamic;
@@ -1272,6 +1273,13 @@ MO.FEaiLogicStatisticsDepartment = function FEaiLogicStatisticsDepartment(o){
    o.doDepartmentDynamic     = MO.FEaiLogicStatisticsDepartment_doDepartmentDynamic;
    o.doDepartmentTrend       = MO.FEaiLogicStatisticsDepartment_doDepartmentTrend;
    return o;
+}
+MO.FEaiLogicStatisticsDepartment_doOrganization = function FEaiLogicStatisticsDepartment_doOrganization(owner, callback, level){
+   var o = this;
+   var parameters = o.prepareParemeters();
+   parameters.set('level', level);
+   o.sendService('{eai.logic.service}/eai.financial.department.marketer.wv?do=organization', parameters, owner, callback);
+   o._customerDynamicFirst = false;
 }
 MO.FEaiLogicStatisticsDepartment_doCustomerDynamic = function FEaiLogicStatisticsDepartment_doCustomerDynamic(owner, callback, startDate, endDate){
    var o = this;
@@ -10255,6 +10263,22 @@ MO.FEaiChartMktMarketerTrendUnit = function FEaiChartMktMarketerTrendUnit(o){
    o._performance   = MO.Class.register(o, [new MO.AGetter('_performance'), new MO.APersistence('_performance', MO.EDataType.Double)]);
    return o;
 }
+MO.FEaiChartMktManageInfo = function FEaiChartMktManageInfo(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._departments = MO.Class.register(o, [new MO.AGetter('_departments'), new MO.APersistence('_departments', MO.EDataType.Objects, MO.FEaiChartMktManageInfoDepartment)]);
+   return o;
+}
+MO.FEaiChartMktManageInfoDepartment = function FEaiChartMktManageInfoDepartment(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._id            = MO.Class.register(o, [new MO.AGetter('_id'), new MO.APersistence('_id', MO.EDataType.Uint32)]);
+   o._label         = MO.Class.register(o, [new MO.AGetter('_label'), new MO.APersistence('_label', MO.EDataType.String)]);
+   o._marketerCount = MO.Class.register(o, [new MO.AGetter('_marketerCount'), new MO.APersistence('_marketerCount', MO.EDataType.Uint32)]);
+   o._investment    = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._redemption    = MO.Class.register(o, [new MO.AGetter('_redemption'), new MO.APersistence('_redemption', MO.EDataType.Double)]);
+   o._netinvestment = MO.Class.register(o, [new MO.AGetter('_netinvestment'), new MO.APersistence('_netinvestment', MO.EDataType.Double)]);
+   o._performance   = MO.Class.register(o, [new MO.AGetter('_performance'), new MO.APersistence('_performance', MO.EDataType.Double)]);
+   return o;
+}
 MO.FEaiChartMktManageLivePop = function FEaiChartMktManageLivePop(o) {
    o = MO.Class.inherits(this, o, MO.FGuiControl);
    o._bgImage       = null;
@@ -10662,6 +10686,9 @@ MO.FEaiChartMktManageScene = function FEaiChartMktManageScene(o){
    o._rotationY              = 0;
    o._worldScale             = 500;
    o._groundAutioUrl         = '{eai.resource}/music/statistics.mp3';
+   o._organizationDataTicker = null;
+   o._organizationInfo       = null;
+   o.onOrganizationFetch     = MO.FEaiChartMktManageScene_onOrganizationFetch;
    o.onInvestmentDataChanged = MO.FEaiChartMktManageScene_onInvestmentDataChanged;
    o.onProcessReady          = MO.FEaiChartMktManageScene_onProcessReady;
    o.onProcess               = MO.FEaiChartMktManageScene_onProcess;
@@ -10679,6 +10706,12 @@ MO.FEaiChartMktManageScene = function FEaiChartMktManageScene(o){
    o.fixMatrix               = MO.FEaiChartMktManageScene_fixMatrix;
    o.processResize           = MO.FEaiChartMktManageScene_processResize;
    return o;
+}
+MO.FEaiChartMktManageScene_onOrganizationFetch = function FEaiChartMktManageScene_onOrganizationFetch(event){
+   var o = this;
+   debugger
+   var info = o._organizationInfo;
+   info.unserializeSignBuffer(event.sign, event.content, true);
 }
 MO.FEaiChartMktManageScene_onInvestmentDataChanged = function FEaiChartMktManageScene_onInvestmentDataChanged(event) {
    var o = this;
@@ -10729,6 +10762,9 @@ MO.FEaiChartMktManageScene_onProcess = function FEaiChartMktManageScene_onProces
          alphaAction.push(o._guiManager);
          o._guiManager.mainTimeline().pushAction(alphaAction);
          o._mapReady = true;
+      }
+      if(o._organizationDataTicker.process()){
+         MO.Console.find(MO.FEaiLogicConsole).statistics().department().doOrganization(o, o.onOrganizationFetch, 2);
       }
       var currentTick = MO.Timer.current();
       if (currentTick - o._24HLastTick > o._24HTrendInterval) {
@@ -10830,6 +10866,8 @@ MO.FEaiChartMktManageScene_construct = function FEaiChartMktManageScene_construc
    var o = this;
    o.__base.FEaiChartScene.construct.call(o);
    o._operationPoint = new MO.SPoint2();
+   o._organizationDataTicker = new MO.TTicker(1000 * 60);
+   o._organizationInfo = MO.Class.create(MO.FEaiChartMktManageInfo);
 }
 MO.FEaiChartMktManageScene_setup = function FEaiChartMktManageScene_setup() {
    var o = this;

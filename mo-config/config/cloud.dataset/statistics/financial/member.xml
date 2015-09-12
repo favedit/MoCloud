@@ -4,17 +4,17 @@
   <FieldDateTime _uuid="3863ca58-1a39-40bc-834d-d22eccf1212f" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldInteger _uuid="a1bff263-944a-4453-9e0a-18498918e33e" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
   <FieldRecordId _uuid="24fee175-b568-459b-ad29-7051959af6d1" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
-  <FieldString _uuid="48e530fe-ab83-4fcd-a7b3-b8267f836eb8" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
-  <FieldString _uuid="f04e3302-dc48-4055-a196-7f1c99bb2bda" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="48e530fe-ab83-4fcd-a7b3-b8267f836eb8" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
+  <FieldString _uuid="f04e3302-dc48-4055-a196-7f1c99bb2bda" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="60" />
   <FieldString _uuid="c0d8d097-2813-4548-93ee-96f54ebb0690" name="card" label="M#12cn13身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
   <FieldString _uuid="6f3c96f1-27fb-424f-97c3-113feff130f4" name="phone" label="M#12cn12电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
   <FieldString _uuid="bde10850-fbb2-4d90-96a1-b4ffb1256813" name="email" label="M#12cn14电子邮箱" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EMAIL" data_size="80" />
   <FieldInteger _uuid="d684624f-9b54-4a72-8177-0f347037febb" name="gender_cd" label="M#12cn14性别类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CD" />
-  <FieldString _uuid="50402f5b-dcbb-46e3-83e2-68355e442896" name="gender_code" label="M#12cn14性别代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CODE" data_size="8" />
+  <FieldString _uuid="50402f5b-dcbb-46e3-83e2-68355e442896" name="gender_code" label="M#12cn14性别代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CODE" data_size="20" />
   <FieldInteger _uuid="e7c50b71-0f44-45e4-b652-8b361d0a9db3" name="marry_cd" label="M#12cn14已婚类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CD" />
-  <FieldString _uuid="67af31af-062d-4173-9ad0-2c2756552ae1" name="marry_code" label="M#12cn14已婚代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CODE" data_size="8" />
+  <FieldString _uuid="67af31af-062d-4173-9ad0-2c2756552ae1" name="marry_code" label="M#12cn14已婚代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CODE" data_size="20" />
   <FieldInteger _uuid="175ada3f-5e1c-4284-a710-5060256fea06" name="education_cd" label="M#12cn14学历类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EDUCATION_CD" />
-  <FieldString _uuid="8e7e3e27-1209-4fd3-af72-35d1ea68251a" name="education_code" label="M#12cn14学历代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EDUCATION_CODE" data_size="40" />
+  <FieldString _uuid="8e7e3e27-1209-4fd3-af72-35d1ea68251a" name="education_code" label="M#12cn14学历代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EDUCATION_CODE" data_size="60" />
   <FieldInteger _uuid="154022c8-bb1e-4f52-a278-346e36916138" name="business_cd" label="M#12cn14行业类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUSINESS_CD" />
   <FieldString _uuid="801dac85-7d25-43f6-98e9-99d8992e7edc" name="business_code" label="M#12cn14行业代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUSINESS_CODE" data_size="80" />
   <FieldInteger _uuid="d14046dd-94a9-4396-9494-a95c17e9d7df" name="income_cd" label="M#12cn14收入类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INCOME_CD" />

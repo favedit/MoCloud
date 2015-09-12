@@ -39,6 +39,63 @@ public class FStatisticsMarketerServlet
    private static IResource _resource = RResource.find(FStatisticsMarketerServlet.class);
 
    //============================================================
+   // <T>获得理财师组织数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public EResult organization(IWebContext context,
+                               ILogicContext logicContext,
+                               IWebServletRequest request,
+                               IWebServletResponse response){
+      // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      // 检查参数
+      int level = context.parameterAsInteger("level", 0);
+      if((level != 2) && (level != 4)){
+         throw new FFatalError("Parameter is invalid.");
+      }
+      //............................................................
+      // 从缓冲中查找数据
+      String cacheCode = "organization|" + level;
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
+      }
+      //............................................................
+      // 设置输出流
+      FByteStream stream = createStream(context);
+      ISqlConnection connection = logicContext.activeConnection("statistics");
+      // 输出当日合计数据
+      FSql sql = _resource.findString(FSql.class, "sql.organization.level" + level);
+      FDataset dataset = connection.fetchDataset(sql);
+      int count = dataset.count();
+      stream.writeInt32(count);
+      for(FRow row : dataset){
+         stream.writeUint32(row.getInt("id"));
+         stream.writeString(row.get("label"));
+         stream.writeUint32(row.getInt("marketer_count"));
+         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(row.getDouble("redemption_total"));
+         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(0);
+      }
+      //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
+      //............................................................
+      // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "organization", "Send marketer organization. (level={1}, count={2}, data_length={3})", level, count, dataLength);
+      return sendStream(context, request, response, stream);
+   }
+
+   //============================================================
    // <T>逻辑处理。</T>
    //
    // @param context 环境

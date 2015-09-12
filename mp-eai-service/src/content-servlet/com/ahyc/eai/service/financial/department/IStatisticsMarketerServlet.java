@@ -7,10 +7,23 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>理财师信息处理接口。</T>
+// <T>部门理财师信息处理接口。</T>
 //============================================================
 public interface IStatisticsMarketerServlet
 {
+   //============================================================
+   // <T>获得理财师组织数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   EResult organization(IWebContext context,
+                        ILogicContext logicContext,
+                        IWebServletRequest request,
+                        IWebServletResponse response);
+
    //============================================================
    // <T>获得实时动态数据。</T>
    //

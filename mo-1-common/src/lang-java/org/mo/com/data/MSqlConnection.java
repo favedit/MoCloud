@@ -833,7 +833,8 @@ public abstract class MSqlConnection
             String[] names = new String[count];
             int[] types = new int[count];
             for(int n = 0; n < count; n++){
-               names[n] = meta.getColumnName(n + 1).toLowerCase();
+               //names[n] = meta.getColumnName(n + 1).toLowerCase();
+               names[n] = meta.getColumnLabel(n + 1).toLowerCase();
                types[n] = meta.getColumnType(n + 1);
             }
             // 获得行数
