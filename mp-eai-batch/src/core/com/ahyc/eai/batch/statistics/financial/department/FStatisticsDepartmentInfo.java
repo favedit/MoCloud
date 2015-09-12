@@ -1,6 +1,7 @@
 package com.ahyc.eai.batch.statistics.financial.department;
 
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.FObjects;
 
 //============================================================
 // <T>部门信息。</T>
@@ -19,6 +20,8 @@ public class FStatisticsDepartmentInfo
 
    // 标签集合
    protected String _labels;
+
+   protected FObjects<SDepartmentInfo> _levels = new FObjects<SDepartmentInfo>(SDepartmentInfo.class);
 
    //============================================================
    // <T>获得编号。</T>
@@ -74,5 +77,12 @@ public class FStatisticsDepartmentInfo
    //============================================================
    public void setLabels(String labels){
       this._labels = labels;
+   }
+
+   //============================================================
+   // <T>获得层级集合。</T>
+   //============================================================
+   public FObjects<SDepartmentInfo> levels(){
+      return _levels;
    }
 }

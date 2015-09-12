@@ -19,4 +19,13 @@ public interface IStatisticsMarketerConsole
    //============================================================
    FStatisticsFinancialMarketerUnit syncByLinkId(FLogicContext logicContext,
                                                  long linkId);
+
+   //============================================================
+   // <T>更新理财师理财师部门关系。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param linkId 关联编号
+   //============================================================
+   void updateDepartment(FLogicContext logicContext,
+                         long linkId);
 }

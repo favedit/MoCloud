@@ -60,7 +60,6 @@ public class FStatisticsDynamicCalculater
    public void processPhase(FLogicContext logicContext,
                             String beginDate,
                             String endDate){
-      //ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       // 代码修正
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FStatisticsFinancialAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialAmountLogic.class);

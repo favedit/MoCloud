@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <!-- ============================================================ -->
+   <!-- 环境控制台                                                   -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.eng.environment.IEnvironmentConsole'
+         class = 'org.mo.eng.environment.FEnvironmentConsole'
+         scope = 'global' >
+      <Property name='persistence'>eng-environment</Property>
+      <Property name='extension'>xml</Property>
+      <Property name='interval'>1000</Property>
+      <Property name='workpath'>${home.web.config}/system.environment</Property>
+      <Initialize name='initializeMonitor'/>
+      <Initialize name='initializeConfig'/>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- 资源存储控制台                                               -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
+         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
+         scope = 'global' >
+      <Property name='enable'>Y</Property>
+      <Property name='storage_host'>127.0.0.1</Property>
+      <Property name='storage_port'>27017</Property>
+      <Property name='storage_name'>eai</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- 内存缓冲控制台                                               -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
+         class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
+         scope = 'global' >
+      <Property name='enable'>N</Property>
+      <Property name='code'>CC</Property>
+      <Property name='servers'>10.30.101.11:11311</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- 数据控制台                                                   -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'org.mo.eng.data.IDatabaseConsole'
+         class = 'org.mo.eng.data.FDatabaseConsole'
+         scope = 'global'>
+      <Property name='default'>data</Property>
+      <!-- ============================================================ -->
+      <!-- 缓冲链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>ezubao</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://rdsrmtuowdhu37dfpth41.mysql.rds.aliyuncs.com:3306/ezubao_php</Property>
+               <Property name='passport'>ezubao_ai</Property>
+               <Property name='encryptPassword'>8E4934AF399382530728E65583CF7DBB5663D0</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 缓冲链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>cache</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_CACHE</Property>
+               <Property name='passport'>eai_online</Property>
+               <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 数据链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>data</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DATA</Property>
+               <Property name='passport'>eai_online</Property>
+               <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 统计链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>statistics</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_STATISTICS1</Property>
+               <Property name='passport'>eai_online</Property>
+               <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 日志链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>logger</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_LOGGER</Property>
+               <Property name='passport'>eai_online</Property>
+               <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>8</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <Release name='releaseAll'/>
+   </Component>
+
+</Config>

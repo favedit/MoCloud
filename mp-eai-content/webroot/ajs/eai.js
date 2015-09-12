@@ -1167,21 +1167,21 @@ MO.FEaiLogicSchedule_doFetch = function FEaiLogicSchedule_doFetch(owner, callbac
 }
 MO.FEaiLogicStatistics = function FEaiLogicStatistics(o){
    o = MO.Class.inherits(this, o, MO.FEaiLogic);
-   o._code                 = 'statistics';
-   o._customerDynamicFirst = true;
-   o._marketerDynamicFirst = true;
-   o._customer             = MO.Class.register(o, new MO.AGetter('_customer'));
-   o._marketer             = MO.Class.register(o, new MO.AGetter('_marketer'));
-   o._department           = MO.Class.register(o, new MO.AGetter('_department'));
-   o.construct             = MO.FEaiLogicStatistics_construct;
-   o.calculateAmountLevel  = MO.FEaiLogicStatistics_calculateAmountLevel;
-   o.doPerformenceDynamic  = MO.FEaiLogicStatistics_doPerformenceDynamic;
-   o.dispose               = MO.FEaiLogicStatistics_dispose;
+   o._code                = 'statistics';
+   o._achievement         = MO.Class.register(o, new MO.AGetter('_achievement'));
+   o._customer            = MO.Class.register(o, new MO.AGetter('_customer'));
+   o._marketer            = MO.Class.register(o, new MO.AGetter('_marketer'));
+   o._department          = MO.Class.register(o, new MO.AGetter('_department'));
+   o.construct            = MO.FEaiLogicStatistics_construct;
+   o.calculateAmountLevel = MO.FEaiLogicStatistics_calculateAmountLevel;
+   o.doPerformenceDynamic = MO.FEaiLogicStatistics_doPerformenceDynamic;
+   o.dispose              = MO.FEaiLogicStatistics_dispose;
    return o;
 }
 MO.FEaiLogicStatistics_construct = function FEaiLogicStatistics_construct(){
    var o = this;
    o.__base.FEaiLogic.construct.call(o);
+   o._achievement = MO.Class.create(MO.FEaiLogicStatisticsAchievement);
    o._customer = MO.Class.create(MO.FEaiLogicStatisticsCustomer);
    o._marketer = MO.Class.create(MO.FEaiLogicStatisticsMarketer);
    o._department = MO.Class.create(MO.FEaiLogicStatisticsDepartment);
@@ -1201,69 +1201,6 @@ MO.FEaiLogicStatistics_calculateAmountLevel = function FEaiLogicStatistics_calcu
    }
    return 0;
 }
-MO.FEaiLogicStatistics_doInvestmentDynamic = function FEaiLogicStatistics_doInvestmentDynamic(owner, callback, startDate, endDate){
-   var parameters = 'begin=' + startDate + '&end=' + endDate;
-   return this.send('investment_dynamic', parameters, owner, callback);
-}
-MO.FEaiLogicStatistics_doInvestmentTrend = function FEaiLogicStatistics_doInvestmentTrend(owner, callback, startDate, endDate, interval){
-   if(!interval){
-      interval = 600000;
-   }
-   var parameters = 'begin=' + startDate + '&end=' + endDate + '&interval=' + interval;
-   return this.send('investment_trend', parameters, owner, callback);
-}
-MO.FEaiLogicStatistics_doCustomerDynamic = function FEaiLogicStatistics_doCustomerDynamic(owner, callback, startDate, endDate){
-   var o = this;
-   var first = o._customerDynamicFirst;
-   var parameters = o.prepareParemeters();
-   if(first){
-      parameters.set('first', first);
-   }
-   parameters.set('begin', startDate);
-   parameters.set('end', endDate);
-   o.sendService('{eai.logic.service}/eai.financial.customer.wv?do=dynamic', parameters, owner, callback);
-   o._customerDynamicFirst = false;
-}
-MO.FEaiLogicStatistics_doCustomerTrend = function FEaiLogicStatistics_doCustomerTrend(owner, callback, startDate, endDate){
-   var o = this;
-   var parameters = o.prepareParemeters();
-   parameters.set('begin', startDate);
-   parameters.set('end', endDate);
-   o.sendService('{eai.logic.service}/eai.financial.customer.wv?do=trend', parameters, owner, callback);
-}
-MO.FEaiLogicStatistics_doMarketerDynamic = function FEaiLogicStatistics_doMarketerDynamic(owner, callback, startDate, endDate){
-   var o = this;
-   var first = o._marketerDynamicFirst;
-   var parameters = o.prepareParemeters();
-   if(first){
-      parameters.set('first', first);
-   }
-   parameters.set('begin', startDate);
-   parameters.set('end', endDate);
-   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=dynamic', parameters, owner, callback);
-   o._marketerDynamicFirst = false;
-}
-MO.FEaiLogicStatistics_doMarketerTrend = function FEaiLogicStatistics_doMarketerTrend(owner, callback, startDate, endDate){
-   var o = this;
-   var parameters = o.prepareParemeters();
-   parameters.set('begin', startDate);
-   parameters.set('end', endDate);
-   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=trend', parameters, owner, callback);
-}
-MO.FEaiLogicStatistics_doDepartmentDynamic = function FEaiLogicStatistics_doDepartmentDynamic(owner, callback, startDate, endDate){
-   var o = this;
-   var parameters = o.prepareParemeters();
-   parameters.set('begin', startDate);
-   parameters.set('end', endDate);
-   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=dynamic', parameters, owner, callback);
-}
-MO.FEaiLogicStatistics_doDepartmentTrend = function FEaiLogicStatistics_doDepartmentTrend(owner, callback, startDate, endDate){
-   var o = this;
-   var parameters = o.prepareParemeters();
-   parameters.set('begin', startDate);
-   parameters.set('end', endDate);
-   o.sendService('{eai.logic.service}/eai.financial.marketer.wv?do=trend', parameters, owner, callback);
-}
 MO.FEaiLogicStatistics_doPerformenceDynamic = function FEaiLogicStatistics_doPerformenceDynamic(owner, callback, startDate, endDate){
    var o = this;
    var parameters = o.prepareParemeters();
@@ -1273,10 +1210,21 @@ MO.FEaiLogicStatistics_doPerformenceDynamic = function FEaiLogicStatistics_doPer
 }
 MO.FEaiLogicStatistics_dispose = function FEaiLogicStatistics_dispose(){
    var o = this;
+   o._achievement = MO.Lang.Object.dispose(o._achievement);
    o._customer = MO.Lang.Object.dispose(o._customer);
    o._marketer = MO.Lang.Object.dispose(o._marketer);
    o._department = MO.Lang.Object.dispose(o._department);
    o.__base.FEaiLogic.dispose.call(o);
+}
+MO.FEaiLogicStatisticsAchievement = function FEaiLogicStatisticsAchievement(o){
+   o = MO.Class.inherits(this, o, MO.FEaiLogic);
+   o.doDynamic = MO.FEaiLogicStatisticsAchievement_doDynamic;
+   return o;
+}
+MO.FEaiLogicStatisticsAchievement_doDynamic = function FEaiLogicStatisticsAchievement_doDynamic(owner, callback, startDate, endDate){
+   var o = this;
+   var parameters = o.prepareParemeters();
+   o.sendService('{eai.logic.service}/eai.financial.achievement.wv?do=dynamic', parameters, owner, callback);
 }
 MO.FEaiLogicStatisticsCustomer = function FEaiLogicStatisticsCustomer(o){
    o = MO.Class.inherits(this, o, MO.FEaiLogic);
@@ -1798,13 +1746,16 @@ MO.FEaiCountryEntity_construct = function FEaiCountryEntity_construct(){
 MO.FEaiCountryEntity_setup = function FEaiCountryEntity_setup() {
    var o = this;
    var shape = o._boundaryShape = MO.Class.create(MO.EE3dBoundaryShape);
+   shape._countryEntity = o;
    shape.linkGraphicContext(o);
 }
 MO.FEaiCountryEntity_build = function FEaiCountryEntity_build(){
    var o = this;
    var shape = o._faceShape = MO.Class.create(MO.FE3dDynamicShape);
+   shape._countryEntity = o;
    shape.linkGraphicContext(o);
    var shape = o._borderShape = MO.Class.create(MO.FE3dDynamicShape);
+   shape._countryEntity = o;
    shape.linkGraphicContext(o);
    var audioContextConsole = MO.Console.find(MO.FAudioContextConsole);
    var audioContext = o._audioContext = audioContextConsole.create();
@@ -2633,10 +2584,16 @@ MO.FEaiWorldEntity_setup = function FEaiWorldEntity_setup(){
    var o = this;
    var context = o._graphicContext;
    var faceShape = o._faceShape = MO.Class.create(MO.FE3dDynamicShape);
+   faceShape._worldEntity = o;
+   faceShape.outline().set(-1, -1, -1, 1, 1, 1);
    faceShape.linkGraphicContext(context);
    var borderShape = o._borderShape = MO.Class.create(MO.FE3dDynamicShape);
+   borderShape._optionSelect = false;
+   borderShape._worldEntity = o;
+   borderShape.outline().set(-1, -1, -1, 1, 1, 1);
    borderShape.linkGraphicContext(context);
    var sphere = o._sphere2 = MO.Class.create(MO.FE3dSphere);
+   sphere._optionSelect = false;
    sphere.linkGraphicContext(context);
    sphere.setSplitCount(24);
    sphere.setup();
@@ -2650,6 +2607,7 @@ MO.FEaiWorldEntity_setup = function FEaiWorldEntity_setup(){
    info.specularColor.set(0.2, 0.2, 0.2, 0.2);
    info.specularLevel = 64;
    var sphere = o._sphere = MO.Class.create(MO.FE3dSphere);
+   sphere._optionSelect = false;
    sphere.linkGraphicContext(context);
    sphere.setSplitCount(24);
    sphere.setup();
@@ -2657,13 +2615,14 @@ MO.FEaiWorldEntity_setup = function FEaiWorldEntity_setup(){
    sphere.matrix().update();
    var info = sphere.material().info();
    info.optionAlpha = true;
-   info.alphaRate = 0.6;
+   info.alphaRate = 0.8;
    info.ambientColor.setHex('#128AF9');
    info.ambientColor.alpha = 0.4
    info.diffuseColor.set(0.4, 0.4, 0.4, 1);
    info.specularColor.set(0.2, 0.2, 0.2, 0.2);
    info.specularLevel = 64;
    var sphere = o._sphere3 = MO.Class.create(MO.FE3dSphere);
+   sphere._optionSelect = false;
    sphere.linkGraphicContext(context);
    sphere.setSplitCount(24);
    sphere.setup();
@@ -2672,7 +2631,7 @@ MO.FEaiWorldEntity_setup = function FEaiWorldEntity_setup(){
    var info = sphere.material().info();
    info.optionAlpha = true;
    info.optionDepth = false;
-   info.alphaRate = 0.05;
+   info.alphaRate = 0.1;
    info.ambientColor.setHex('#128AF9');
    info.ambientColor.alpha = 0.4
    info.diffuseColor.set(0.4, 0.4, 0.4, 1);
@@ -3166,6 +3125,132 @@ MO.FEaiMapFaceEffect_drawRenderable = function FEaiMapFaceEffect_drawRenderable(
    o.bindAttributes(renderable);
    var indexBuffer = renderable.indexBuffers().first();
    context.drawTriangles(indexBuffer);
+}
+MO.FEaiSelectAutomaticEffect = function FEaiSelectAutomaticEffect(o){
+   o = MO.Class.inherits(this, o, MO.FG3dAutomaticEffect);
+   o._code          = 'eai.select.automatic';
+   o.drawRenderable = MO.FEaiSelectAutomaticEffect_drawRenderable;
+   return o;
+}
+MO.FEaiSelectAutomaticEffect_drawRenderable = function FEaiSelectAutomaticEffect_drawRenderable(region, renderable){
+   var o = this;
+   var context = o._graphicContext;
+   var size = context.size();
+   var program = o._program;
+   var selectX = region._selectX;
+   var selectY = region._selectY;
+   var material = renderable.material();
+   var materialInfo = material.info();
+   o.bindMaterial(material);
+   var mergeRenderables = renderable.mergeRenderables();
+   var mergeCount = mergeRenderables.count();
+   var data = MO.Lang.TypeArray.findTemp(MO.EDataType.Float32, 16 * mergeCount);
+   for(var i = 0; i < mergeCount; i++){
+      var index = 16 * i;
+      var mergeRenderable = mergeRenderables.at(i);
+      var matrix = mergeRenderable.matrix();
+      var color = mergeRenderable.color();
+      matrix.writeData(data, index);
+      data[index + 12] = color.red;
+      data[index + 13] = color.green;
+      data[index + 14] = color.blue;
+      data[index + 15] = color.alpha;
+   }
+   program.setParameter('vc_data', data);
+   program.setParameter('vc_model_matrix', renderable.currentMatrix());
+   program.setParameter('vc_vp_matrix', region.calculate(MO.EG3dRegionParameter.CameraViewProjectionMatrix));
+   program.setParameter4('vc_offset', size.width, size.height, 1 - (selectX / size.width) * 2, (selectY / size.height) * 2 - 1);
+   o.bindAttributes(renderable);
+   o.bindSamplers(renderable);
+   var indexBuffers = renderable.indexBuffers();
+   var count = indexBuffers.count();
+   for(var i = 0; i < count; i++){
+      var indexBuffer = indexBuffers.at(i);
+      context.drawTriangles(indexBuffer);
+   }
+}
+MO.FEaiSelectPass = function FEaiSelectPass(o){
+   o = MO.Class.inherits(this, o, MO.FG3dTechniquePass);
+   o._code         = 'select';
+   o._texture      = MO.Class.register(o, new MO.AGetter('_texture'));
+   o._renderTarget = null;
+   o._position     = null;
+   o._data         = null;
+   o.construct     = MO.FEaiSelectPass_construct;
+   o.setup         = MO.FEaiSelectPass_setup;
+   o.drawRegion    = MO.FEaiSelectPass_drawRegion;
+   return o;
+}
+MO.FEaiSelectPass_construct = function FEaiSelectPass_construct(){
+   var o = this;
+   o.__base.FG3dTechniquePass.construct.call(o);
+   o._data = new Uint8Array(4);
+   o._position = new MO.SPoint2();
+}
+MO.FEaiSelectPass_setup = function FEaiSelectPass_setup(){
+   var o = this;
+   o.__base.FG3dTechniquePass.setup.call(o);
+   var c = o._graphicContext;
+   var texture = o._texture = c.createFlatTexture();
+   texture.setFilterCd(MO.EG3dSamplerFilter.Nearest, MO.EG3dSamplerFilter.Nearest);
+   texture.setWrapCd(MO.EG3dSamplerFilter.ClampToEdge, MO.EG3dSamplerFilter.ClampToEdge);
+   var target = o._renderTarget = c.createRenderTarget();
+   target.size().set(1, 1);
+   target.textures().push(texture);
+   target.build();
+}
+MO.FEaiSelectPass_drawRegion = function FEaiSelectPass_drawRegion(region){
+   var o = this;
+   var context = o._graphicContext;
+   var handle = context.handle();
+   context.setRenderTarget(o._renderTarget);
+   context.clear(0, 0, 0, 0, 1, 1);
+   var renderables = region.allRenderables();
+   o.activeEffects(region, renderables);
+   var renderableCount = renderables.count();
+   for(var i = 0; i < renderableCount; i++){
+      var renderable = renderables.at(i);
+      var effect = renderable.activeEffect();
+      context.setProgram(effect.program());
+      var display = renderable.display();
+      if(!display){
+         effect.drawRenderable(region, renderable, i);
+      }else if(!display._optionFace){
+         effect.drawRenderable(region, renderable, i);
+      }
+   }
+   handle.readPixels(0, 0, 1, 1, handle.RGBA, handle.UNSIGNED_BYTE, o._data);
+   var index = o._data[0] + (o._data[1] << 8) + (o._data[2] << 16);
+   o._selectRenderable = null;
+   if(index != 0){
+      o._selectRenderable = region._selectRenderable.findMergeRenderable(index - 1);
+   }
+}
+MO.FEaiSelectTechnique = function FEaiSelectTechnique(o){
+   o = MO.Class.inherits(this, o, MO.FG3dTechnique);
+   o._code       = 'eai';
+   o._passSelect = MO.Class.register(o, new MO.AGetter('_passSelect'));
+   o.setup       = MO.FEaiSelectTechnique_setup;
+   o.test        = MO.FEaiSelectTechnique_test;
+   return o;
+}
+MO.FEaiSelectTechnique_setup = function FEaiSelectTechnique_setup(){
+   var o = this;
+   o.__base.FG3dTechnique.setup.call(o);
+   o.registerMode(MO.EG3dTechniqueMode.Result);
+   var pd = o._passSelect = MO.Class.create(MO.FEaiSelectPass);
+   pd.linkGraphicContext(o);
+   pd.setup();
+   o._passes.push(pd);
+}
+MO.FEaiSelectTechnique_test = function FEaiSelectTechnique_test(region, selectRenderable, x, y){
+   var o = this;
+   region._selectX = x;
+   region._selectY = y;
+   region._selectRenderable = selectRenderable;
+   region.setTechnique(o);
+   o.drawRegion(region);
+   return o._passSelect._selectRenderable;
 }
 MO.FEaiWorldFaceEffect = function FEaiWorldFaceEffect(o){
    o = MO.Class.inherits(this, o, MO.FG3dAutomaticEffect);
@@ -10680,6 +10765,38 @@ MO.FEaiChartMktManageScene_onOperationDown = function FEaiChartMktManageScene_on
    o._operationRotationX = o._rotationX;
    o._operationRotationY = o._rotationY;
    o._operationPoint.set(event.x, event.y);
+   var region = o.activeStage().region();
+   var camera = region.camera();
+   var canvas3d = o.application().desktop().canvas3d();
+   var selectTechnique = MO.Console.find(MO.FG3dTechniqueConsole).find(canvas3d, MO.FG3dSelectTechnique);
+   var renderable = selectTechnique.test(region, event.offsetX, event.offsetY);
+   if(renderable){
+      var eaiSelectTechnique = MO.Console.find(MO.FG3dTechniqueConsole).find(canvas3d, MO.FEaiSelectTechnique);
+      var countryRenderable = eaiSelectTechnique.test(region, renderable, event.offsetX, event.offsetY);
+      if(countryRenderable){
+         var countryEntity = countryRenderable._shape._countryEntity
+         var outline = renderable._shape.calculateOutline();
+         var countryOutline = countryRenderable.calculateOutline();
+         console.log('Select countty: ' + countryEntity.code() + ' - ' + outline + ' - ' + countryOutline);
+      }
+   }
+   return;
+   if (!renderable) {
+      camera.setPosition(3, 24, -0.5);
+      camera.update();
+      return;
+   }
+   var outline = renderable.calculateOutline();
+   var relativeOutline = new SOutline3d();
+   relativeOutline.calculateFrom(outline, camera.matrix());
+   var distance = relativeOutline.radius / Math.sin(camera.projection().angle() / 2) * Math.sin(90 - camera.projection().angle() / 2);
+   var currentCenter = outline.center;
+   var cameraTo = new SPoint3(currentCenter.x - distance * o.cameraDirection().x, currentCenter.y - distance * o.cameraDirection().y, currentCenter.z - distance * o.cameraDirection().z);
+   var cameraPosition = camera.position();
+   o.setStartTime(new Date());
+   o.cameraFrom().assign(cameraPosition);
+   o.cameraTo().assign(cameraTo);
+   o.setCameraMoving(true);
 }
 MO.FEaiChartMktManageScene_onOperationMove = function FEaiChartMktManageScene_onOperationMove(event){
    var o = this;
@@ -12630,27 +12747,185 @@ MO.FEaiChartPerfMarketerChart_onPaintBegin = function FEaiChartPerfMarketerChart
          lastHour = hour;
       }
    }
-   graphic.setFont('24px Microsoft YaHei');
-   graphic.drawText("24H数据曲线", decoLeft, top, '#54F0FF');
-   graphic.setFont('22px Microsoft YaHei');
-   var rowStart = top + 30;
-   var rowHeight = 22;
-   var textWidth = graphic.textWidth('投资总计：');
-   var investmentTotalText = MO.Lang.Float.unitFormat(trendInfo.investmentTotal(), 0, 0, 2, 0, 10000, '万');
-   var investmentTotalWidth = graphic.textWidth(investmentTotalText);
-   var investmentMaxText = MO.Lang.Float.unitFormat(maxHourInves, 0, 0, 2, 0, 10000, '万');
-   var investmentMaxWidth = graphic.textWidth(investmentMaxText);
-   var investmentAvgText = MO.Lang.Float.unitFormat(trendInfo.investmentTotal() / 24, 0, 0, 2, 0, 10000, '万');
-   var investmentAvgWidth = graphic.textWidth(investmentAvgText);
-   var maxWidth = investmentTotalWidth;
-   graphic.drawText('24H总额：', decoLeft, rowStart + rowHeight * 0, '#00CFFF');
-   graphic.drawText(investmentTotalText, decoLeft + textWidth + maxWidth - investmentTotalWidth, rowStart + rowHeight * 0, '#00B5F6');
-   graphic.drawText('小时峰值：', decoLeft, rowStart + rowHeight * 1 + 5, '#00CFFF');
-   graphic.drawText(investmentMaxText, decoLeft + textWidth + maxWidth - investmentMaxWidth, rowStart + rowHeight * 1 + 5, '#00B5F6');
-   graphic.drawText('小时均值：', decoLeft, rowStart + rowHeight * 2 + 10, '#00CFFF');
-   graphic.drawText(investmentAvgText, decoLeft + textWidth + maxWidth - investmentAvgWidth, rowStart + rowHeight * 2 + 10, '#00B5F6');
-   startTime.date.setTime(bakTime);
-   startTime.refresh();
+}
+MO.FEaiChartPerfMarketerCharts = function FEaiChartPerfMarketerCharts(o){
+   o = MO.Class.inherits(this, o, MO.FGuiControl);
+   o._backgroundImage      = null;
+   o._dayImage             = null;
+   o._monthImage           = null;
+   o._cumulativeImage      = null;
+   o.__chartBackgroundImage= null;
+   o._rankLinePadding      = null;
+   o._backgroundPadding    = null;
+   o._logoPadding          = null;
+   o.onImageLoad           = MO.FEaiChartPerfMarketerCharts_onImageLoad;
+   o.onPaintBegin          = MO.FEaiChartPerfMarketerCharts_onPaintBegin;
+   o.construct             = MO.FEaiChartPerfMarketerCharts_construct;
+   o.setup                 = MO.FEaiChartPerfMarketerCharts_setup;
+   o.dispose               = MO.FEaiChartPerfMarketerCharts_dispose;
+   return o;
+}
+MO.FEaiChartPerfMarketerCharts_setup = function FEaiChartPerfMarketerCharts_setup(){
+   var o = this;
+   var imageConsole = MO.Console.find(MO.FImageConsole);
+   var image = o._backgroundImage = imageConsole.load('{eai.resource}/performence_marketer/bg2.png');
+   image.addLoadListener = (o, o.onImageLoad);
+   var image = o._chartBackgroundImage = imageConsole.load('{eai.resource}/performence_marketer/right.png');
+   image.addLoadListener = (o, o.onImageLoad);
+   var image = o._dayImage = imageConsole.load('{eai.resource}/performence_marketer/3.png');
+   image.addLoadListener(o, o.onImageLoad);
+   var image = o._monthImage = imageConsole.load('{eai.resource}/performence_marketer/2.png');
+   image.addLoadListener(o, o.onImageLoad);
+   var image = o._cumulativeImage = imageConsole.load('{eai.resource}/performence_marketer/1.png');
+   image.addLoadListener(o, o.onImageLoad);
+   o._headFontStyle = 'bold 32px Microsoft YaHei';
+   var isVertical = MO.Window.Browser.isOrientationVertical()
+   if(isVertical){
+      o._tableCount = 11;
+      o._rankStart = 100;
+      o._rankTitleStart = 5;
+      o._rankHeight = 174;
+      o._rankRowHeight = 50;
+      o._rankIconStart = 22;
+      o._rankTextStart = 8;
+      o._rankRowUp = 36;
+      o._rankRowDown = 68;
+      o._headStart = 352;
+      o._headTextTop = 37;
+      o._headHeight = 54;
+      o._rowStart = 418;
+      o._rowTextTop = 0;
+      o._rowFontStyle = '36px Microsoft YaHei';
+   }else{
+      o._tableCount = 19;
+      o._rankStart = 1416;
+      o._rankTitleStart = 0;
+      o._rankHeight = 174;
+      o._rankWeeksHeight = 174;
+      o._rankMonthHeight = 139;
+      o._rankDayHeight = 137;
+      o._rankRowHeight = 40;
+      o._rankIconStart = 25;
+      o._rankTextStart = 0;
+      o._rankRowUp = 32;
+      o._rankRowDown = 51;
+      o._headStart = 336;
+      o._headTextTop = 27;
+      o._headHeight = 40;
+      o._rowFontStyle = '22px Microsoft YaHei';
+      o._rowStart = 384;
+   }
+}
+MO.FEaiChartPerfMarketerCharts_construct = function FEaiChartPerfMarketerCharts_construct() {
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o._rankLinePadding = new MO.SPadding(40, 0, 40, 0);
+   o._backgroundPadding = new MO.SPadding(0, 0, 0, 0);
+   o._logoPadding = new MO.SPadding(0, 0, 0, 0);
+}
+MO.FEaiChartPerfMarketerCharts_onImageLoad = function FEaiChartPerfMarketerCharts_onImageLoad(){
+   this.dirty();
+}
+MO.FEaiChartPerfMarketerCharts_onPaintBegin = function FEaiChartPerfMarketerCharts_onPaintBegin(event){
+   var o = this;
+   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   var graphic = event.graphic;
+   var rectangle = event.rectangle;
+   var left = rectangle.left;
+   var top = rectangle.top;
+   var width = rectangle.width;
+   var height = rectangle.height;
+   graphic.drawGridImage(o._backgroundImage, left, top, width, height, o._logoPadding);
+   graphic.drawGridImage(o._dayImage, left+20, top+41, 82, 236, o._logoPadding);
+   graphic.drawGridImage(o._chartBackgroundImage, left+433, top+41, 1416, 236, o._logoPadding);
+   graphic.drawGridImage(o._monthImage, left+20, top+310, 82, 236, o._logoPadding);
+   graphic.drawGridImage(o._chartBackgroundImage, left+433, top+310, 1416, 236, o._logoPadding);
+   graphic.drawGridImage(o._cumulativeImage, left+20, top+578, 82, 236, o._logoPadding);
+   graphic.drawGridImage(o._chartBackgroundImage, left+433, top+578, 1416, 236, o._logoPadding);
+}
+MO.FEaiChartPerfMarketerCharts_dispose = function FEaiChartPerfMarketerCharts_dispose(){
+   var o = this;
+}
+MO.FEaiChartPerfMarketerHead = function FEaiChartPerfMarketerHead(o){
+   o = MO.Class.inherits(this, o, MO.FGuiControl);
+   o._logoimg              = null;
+   o._backgroundImage      = null;
+   o._titleImage           = null;
+   o._rankLinePadding      = null;
+   o._backgroundPadding    = null;
+   o._logoPadding          = null;
+   o.onImageLoad           = MO.FEaiChartPerfMarketerHead_onImageLoad;
+   o.onPaintBegin          = MO.FEaiChartPerfMarketerHead_onPaintBegin;
+   o.construct             = MO.FEaiChartPerfMarketerHead_construct;
+   o.setup                 = MO.FEaiChartPerfMarketerHead_setup;
+   o.dispose               = MO.FEaiChartPerfMarketerHead_dispose;
+   return o;
+}
+MO.FEaiChartPerfMarketerHead_setup = function FEaiChartPerfMarketerHead_setup(){
+   var o = this;
+   var imageConsole = MO.Console.find(MO.FImageConsole);
+   var image = o._logoimg = imageConsole.load('{eai.resource}/performence_marketer/logo.png');
+   image.addLoadListener = (o, o.onImageLoad);
+   var image = o._titleImage = imageConsole.load('{eai.resource}/performence_marketer/telte.png');
+   image.addLoadListener(o, o.onImageLoad);
+}
+MO.FEaiChartPerfMarketerHead_construct = function FEaiChartPerfMarketerHead_construct() {
+   var o = this;
+   o.__base.FGuiControl.construct.call(o);
+   o._rankLinePadding = new MO.SPadding(40, 0, 40, 0);
+   o._backgroundPadding = new MO.SPadding(0, 0, 0, 0);
+   o._logoPadding = new MO.SPadding(0, 0, 0, 0);
+}
+MO.FEaiChartPerfMarketerHead_onImageLoad = function FEaiChartPerfMarketerHead_onImageLoad(){
+   this.dirty();
+}
+MO.FEaiChartPerfMarketerHead_onPaintBegin = function FEaiChartPerfMarketerHead_onPaintBegin(event){
+   var o = this;
+   o.__base.FGuiControl.onPaintBegin.call(o, event);
+   var graphic = event.graphic;
+   var rectangle = event.rectangle;
+   var left = rectangle.left;
+   var top = rectangle.top;
+   var width = rectangle.width;
+   var height = rectangle.height;
+   graphic.drawGridImage(o._logoimg, left, top, 202, 176, o._logoPadding);
+   var titleL =  width / 2 - 728 / 2;
+   graphic.drawGridImage(o._titleImage, titleL, 70, 728, 67, o._logoPadding);
+   graphic.setFont('bold 24px Microsoft YaHei');
+   graphic.drawCircle(width-565 , 176, 10, 0,"#fb2509","#fb2509");
+   graphic.drawText("投资", width-550 , 184, "#fb2509");
+   graphic.drawCircle(width-435 , 176, 10, 0,"#457eff","#457eff");
+   graphic.drawText("赎回", width-420 , 184, "#457eff");
+   graphic.drawCircle(width-305 , 176, 10, 0,"#02fb49","#02fb49");
+   graphic.drawText("净投", width-290 , 184, "#02fb49");
+}
+MO.FEaiChartPerfMarketerHead_dispose = function FEaiChartPerfMarketerHead_dispose(){
+   var o = this;
+}
+MO.FEaiChartPerfMarketerInfo = function FEaiChartPerfMarketerInfo(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._day   = MO.Class.register(o, [new MO.AGetter('_day'), new MO.APersistence('_day', MO.EDataType.Object, MO.FEaiChartPerfMarketerInfoSpan)]);
+   o._month = MO.Class.register(o, [new MO.AGetter('_month'), new MO.APersistence('_month', MO.EDataType.Object, MO.FEaiChartPerfMarketerInfoSpan)]);
+   o._year  = MO.Class.register(o, [new MO.AGetter('_year'), new MO.APersistence('_year', MO.EDataType.Object, MO.FEaiChartPerfMarketerInfoSpan)]);
+   return o;
+}
+MO.FEaiChartPerfMarketerInfoSpan = function FEaiChartPerfMarketerInfoSpan(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._investment       = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._redemption       = MO.Class.register(o, [new MO.AGetter('_redemption'), new MO.APersistence('_redemption', MO.EDataType.Double)]);
+   o._netinvestment    = MO.Class.register(o, [new MO.AGetter('_netinvestment'), new MO.APersistence('_netinvestment', MO.EDataType.Double)]);
+   o._memberRegister   = MO.Class.register(o, [new MO.AGetter('_memberRegister'), new MO.APersistence('_memberRegister', MO.EDataType.Uint32)]);
+   o._customerRegister = MO.Class.register(o, [new MO.AGetter('_customerRegister'), new MO.APersistence('_customerRegister', MO.EDataType.Uint32)]);
+   o._ticks            = MO.Class.register(o, [new MO.AGetter('_ticks'), new MO.APersistence('_ticks', MO.EDataType.Objects, MO.FEaiChartPerfMarketerInfoTick)]);
+   return o;
+}
+MO.FEaiChartPerfMarketerInfoTick = function FEaiChartPerfMarketerInfoTick(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MPersistence);
+   o._recordDate    = MO.Class.register(o, [new MO.AGetter('_recordDate'), new MO.APersistence('_recordDate', MO.EDataType.String)]);
+   o._investment    = MO.Class.register(o, [new MO.AGetter('_investment'), new MO.APersistence('_investment', MO.EDataType.Double)]);
+   o._redemption    = MO.Class.register(o, [new MO.AGetter('_redemption'), new MO.APersistence('_redemption', MO.EDataType.Double)]);
+   o._netinvestment = MO.Class.register(o, [new MO.AGetter('_netinvestment'), new MO.APersistence('_netinvestment', MO.EDataType.Double)]);
+   return o;
 }
 MO.FEaiChartPerfMarketerProcessor = function FEaiChartPerfMarketerProcessor(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MGraphicObject, MO.MListener);
@@ -12669,6 +12944,7 @@ MO.FEaiChartPerfMarketerProcessor = function FEaiChartPerfMarketerProcessor(o){
    o._invementTotalCurrent    = MO.Class.register(o, new MO.AGetter('_invementTotalCurrent'), 0);
    o._invementTotal           = MO.Class.register(o, new MO.AGetter('_invementTotal'), 0);
    o._dynamicInfo             = MO.Class.register(o, new MO.AGetter('_dynamicInfo'));
+   o._performanceDate         = MO.Class.register(o, new MO.AGetter('_performanceDate'));
    o._intervalMinute          = 1;
    o._mapEntity               = MO.Class.register(o, new MO.AGetSet('_mapEntity'));
    o._display                 = MO.Class.register(o, new MO.AGetter('_display'));
@@ -12686,6 +12962,7 @@ MO.FEaiChartPerfMarketerProcessor = function FEaiChartPerfMarketerProcessor(o){
    o._listeners24HDataChanged = MO.Class.register(o, new MO.AListener('_listeners24HDataChanged', '24H' + MO.EEvent.DataChanged));
    o.onDynamicData            = MO.FEaiChartPerfMarketerProcessor_onDynamicData;
    o.on24HDataFetch           = MO.FEaiChartPerfMarketerProcessor_on24HDataFetch;
+   o.onPerformanceDate        = MO.FEaiChartPerfMarketerProcessor_onPerformanceDate;
    o.construct                = MO.FEaiChartPerfMarketerProcessor_construct;
    o.allocUnit                = MO.FEaiChartPerfMarketerProcessor_allocUnit;
    o.allocShape               = MO.FEaiChartPerfMarketerProcessor_allocShape;
@@ -12695,6 +12972,11 @@ MO.FEaiChartPerfMarketerProcessor = function FEaiChartPerfMarketerProcessor(o){
    o.process                  = MO.FEaiChartPerfMarketerProcessor_process;
    o.dispose                  = MO.FEaiChartPerfMarketerProcessor_dispose;
    return o;
+}
+MO.FEaiChartPerfMarketerProcessor_onPerformanceDate = function FEaiChartPerfMarketerProcessor_onPerformanceDate(event){
+   var o = this;
+   var performanceDate = o._performanceDate;
+   performanceDate.unserializeSignBuffer(event.sign, event.content, true);
 }
 MO.FEaiChartPerfMarketerProcessor_on24HDataFetch = function FEaiChartPerfMarketerProcessor_on24HDataFetch(event) {
    var o = this;
@@ -12739,6 +13021,7 @@ MO.FEaiChartPerfMarketerProcessor_construct = function FEaiChartPerfMarketerProc
    o._unitPool = MO.Class.create(MO.FObjectPool);
    o._eventDataChanged = new MO.SEvent(o);
    o._event24HDataChanged = new MO.SEvent(o);
+   o._performanceDate = MO.Class.create(MO.FEaiChartPerfMarketerInfo);
 }
 MO.FEaiChartPerfMarketerProcessor_allocUnit = function FEaiChartPerfMarketerProcessor_allocUnit(){
    var o = this;
@@ -12812,11 +13095,11 @@ MO.FEaiChartPerfMarketerProcessor_process = function FEaiChartPerfMarketerProces
    }
    if(o._dataTicker.process()){
       var statistics = MO.Console.find(MO.FEaiLogicConsole).statistics();
+      statistics.achievement().doDynamic(o,o.onPerformanceDate);
       var beginDate = o._beginDate;
       var endDate = o._endDate;
       beginDate.assign(endDate);
       endDate.assign(systemDate);
-      statistics.marketer().doCustomerDynamic(o, o.onDynamicData, beginDate.format(), endDate.format());
       beginDate.assign(endDate);
       var beginDate24H = o._24HBeginDate;
       beginDate24H.assign(systemDate);
@@ -12825,7 +13108,6 @@ MO.FEaiChartPerfMarketerProcessor_process = function FEaiChartPerfMarketerProces
       var endDate24H = o._24HEndDate;
       endDate24H.assign(systemDate);
       endDate24H.truncMinute(15);
-      statistics.marketer().doCustomerTrend(o, o.on24HDataFetch, beginDate24H.format(), endDate24H.format());
    }
    var currentTick = MO.Timer.current();
    if(currentTick - o._tableTick > o._tableInterval){
@@ -12862,6 +13144,8 @@ MO.FEaiChartPerfMarketerScene = function FEaiChartPerfMarketerScene(o) {
    o._interval               = 10;
    o._logoBar                = null;
    o._timeline               = null;
+   o._head                   = null;
+   o._charts                 = null;
    o._statusStart            = false;
    o._statusLayerCount       = 100;
    o._statusLayerLevel       = 100;
@@ -12939,7 +13223,6 @@ MO.FEaiChartPerfMarketerScene_onProcess = function FEaiChartPerfMarketerScene_on
       var countryEntity = o._countryEntity;
       if (!countryEntity.introAnimeDone()) {
          countryEntity.process();
-         return;
       }
       if (!o._mapReady) {
          o._guiManager.show();
@@ -12955,19 +13238,15 @@ MO.FEaiChartPerfMarketerScene_onProcess = function FEaiChartPerfMarketerScene_on
       var logoBar = o._logoBar;
       var processor = o._processor;
       if(processor.invementDayCurrent() > 0){
+         var investmentTotalCount = logoBar.findComponent('investmentTotalCount');
+         investmentTotalCount.setValue(parseInt(processor.invementTotalCurrent()).toString());
          var investmentTotal = logoBar.findComponent('investmentTotal');
-         investmentTotal.setValue(parseInt(processor.invementTotalCurrent()).toString());
-         var investmentDay = logoBar.findComponent('investmentDay');
-         investmentDay.setValue(parseInt(processor.invementDayCurrent()).toString());
+         investmentTotal.setValue(parseInt(processor.invementDayCurrent()).toString());
       }
       if (o._nowTicker.process()) {
          var bar = o._logoBar;
          var date = o._nowDate;
          date.setNow();
-         var dateControl = bar.findComponent('date');
-         dateControl.setLabel(date.format('YYYY/MM/DD'));
-         var timeControl = bar.findComponent('time');
-         timeControl.setLabel(date.format('HH24:MI'));
       }
    }
 }
@@ -12981,7 +13260,7 @@ MO.FEaiChartPerfMarketerScene_setup = function FEaiChartPerfMarketerScene_setup(
    var o = this;
    o.__base.FEaiChartScene.setup.call(o);
    var dataLayer = o._activeStage.dataLayer();
-   var frame = o._logoBar = MO.Console.find(MO.FGuiFrameConsole).get(o, 'eai.chart.customer.LogoBar');
+   var frame = o._logoBar = MO.Console.find(MO.FGuiFrameConsole).get(o, 'eai.chart.performence-marketer.LogoBar');
    o._guiManager.register(frame);
    var invement = o._processor = MO.Class.create(MO.FEaiChartPerfMarketerProcessor);
    invement.linkGraphicContext(o);
@@ -12997,6 +13276,17 @@ MO.FEaiChartPerfMarketerScene_setup = function FEaiChartPerfMarketerScene_setup(
    timeline.linkGraphicContext(o);
    timeline.build();
    o._guiManager.register(timeline);
+   var head = o._head = MO.Class.create(MO.FEaiChartPerfMarketerHead);
+   timeline.setName('head');
+   head.linkGraphicContext(o);
+   head.setup();
+   head.build();
+   o._guiManager.register(head);
+   var charts = o._charts = MO.Class.create(MO.FEaiChartPerfMarketerCharts);
+   charts.linkGraphicContext(o);
+   charts.setup();
+   charts.build();
+   o._guiManager.register(charts);
    o._guiManager.hide();
    var entityConsole = MO.Console.find(MO.FEaiEntityConsole);
    entityConsole.cityModule().build(o);
@@ -13086,6 +13376,44 @@ MO.FEaiChartPerfMarketerScene_processResize = function FEaiChartPerfMarketerScen
       timeline.setBottom(30);
       timeline.setRight(780);
       timeline.setHeight(250);
+   }
+   var heads = o._head;
+   if (isVertical) {
+      heads.setDockCd(MO.EUiDock.RightTop);
+      heads.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Right);
+      heads.setLeft(10);
+      heads.setRight(10);
+      heads.setBottom(10);
+      heads.setWidth(1060);
+      heads.setHeight(900);
+   } else {
+      heads.setDockCd(MO.EUiDock.Right);
+      heads.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Bottom);
+      heads.setTop(26);
+      heads.setRight(0);
+      heads.setLeft(11);
+      heads.setBottom(0);
+      heads.setHeight(176);
+      heads.setWidth(1894);
+   }
+   var charts = o._charts;
+   if (isVertical) {
+      charts.setDockCd(MO.EUiDock.Bottom);
+      charts.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Right);
+      charts.setLeft(10);
+      charts.setRight(10);
+      charts.setBottom(10);
+      charts.setWidth(1060);
+      charts.setHeight(900);
+   } else {
+      charts.setDockCd(MO.EUiDock.Bottom);
+      charts.setAnchorCd(MO.EUiAnchor.Left | MO.EUiAnchor.Top | MO.EUiAnchor.Right);
+      charts.setTop(0);
+      charts.setRight(24);
+      charts.setLeft(24);
+      charts.setBottom(20);
+      charts.setHeight(862);
+      charts.setWidth(1876);
    }
 }
 MO.FEaiChartStatMarketerBarChart = function FEaiChartStatMarketerBarChart(o) {
@@ -13888,6 +14216,11 @@ MO.FEaiApplication_setup = function FEaiApplication_setup(hPanel){
       return false;
    }
    var effectConsole = MO.Console.find(MO.FG3dEffectConsole);
+   effectConsole.register('select.select.eai.world.face', MO.FG3dSelectAutomaticEffect);
+   effectConsole.register('select.select.eai.map.face', MO.FG3dSelectAutomaticEffect);
+   effectConsole.register('eai.select.automatic', MO.FG3dSelectAutomaticEffect);
+   effectConsole.register('eai.select.eai.world.face', MO.FEaiSelectAutomaticEffect);
+   effectConsole.register('eai.select.eai.map.face', MO.FEaiSelectAutomaticEffect);
    effectConsole.register('general.color.eai.world.face', MO.FEaiWorldFaceEffect);
    effectConsole.register('general.color.eai.map.face', MO.FEaiMapFaceEffect);
    effectConsole.register('general.color.eai.citys', MO.FEaiCityEffect);

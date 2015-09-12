@@ -40,8 +40,9 @@ public class FStatisticsDepartmentConsole
    // @param logicContext 逻辑环境
    // @param id 编号
    //============================================================
-   public FStatisticsDepartmentInfo find(FLogicContext logicContext,
-                                         long id){
+   @Override
+   public FStatisticsDepartmentInfo findInfo(FLogicContext logicContext,
+                                             long id){
       // 检查参数
       if(id == 0){
          return null;
@@ -65,6 +66,13 @@ public class FStatisticsDepartmentConsole
          }
          long departmentId = row.getLong("id");
          String departmentName = row.get("dept_name");
+         int departmentLevel = row.getInt("level");
+         // 生成层级
+         SDepartmentInfo departmentInfo = new SDepartmentInfo();
+         departmentInfo.id = departmentId;
+         departmentInfo.label = departmentName;
+         departmentInfo.level = departmentLevel;
+         info.levels().push(departmentInfo);
          // 初次设置
          if(info.label() == null){
             info.setId(departmentId);
@@ -123,7 +131,7 @@ public class FStatisticsDepartmentConsole
          throw new FFatalError("Department is not exists. (link_id={1})", linkId);
       }
       // 查找信息
-      FStatisticsDepartmentInfo info = find(logicContext, linkId);
+      FStatisticsDepartmentInfo info = findInfo(logicContext, linkId);
       info.labels();
       // 新建单元
       unit = logic.doPrepare();

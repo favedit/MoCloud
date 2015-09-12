@@ -23,4 +23,13 @@ FROM lzh_fmanager_status
 WHERE uid={id} AND type=1
 </Resource>
 
+<Resource name='sql.marketer.department'>
+SELECT
+   dept_id,
+   rank
+FROM lzh_fmanager_maping
+WHERE uid={id}
+ORDER BY add_time DESC
+</Resource>
+
 </Config>
