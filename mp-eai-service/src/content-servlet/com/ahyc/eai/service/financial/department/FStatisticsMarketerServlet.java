@@ -90,6 +90,7 @@ public class FStatisticsMarketerServlet
       stream.writeInt32(level4Count);
       for(FRow row : level4Dataset){
          stream.writeUint32(row.getInt("id"));
+         stream.writeUint16(row.getInt("code"));
          stream.writeString(row.get("parent_label"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));

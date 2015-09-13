@@ -38,10 +38,10 @@ public class RSynchronizeCity
          RAop.initialize("/data/eai/eai.manage/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
 
          String filePath = "/data/eai/eai.manage/webroot/data/citys.xls";
-         //         String filePath = "D:\\Microbject\\MoScript\\data\\citys2.xls";
+         //                  String filePath = "D:\\Microbject\\MoScript\\data\\citys.xls";
 
          InputStream fis = new FileInputStream(filePath);
-         //设置属性
+         //         //设置属性
          //         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
          //         attributes.set("application", "D:/Microbject/MoCloud/");
          //         RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
@@ -63,6 +63,7 @@ public class RSynchronizeCity
             HSSFRow row = s.getRow(i + 1);
             if(row != null){
                //获取每一列
+               HSSFCell proCodeCell = row.getCell(0);
                HSSFCell provinceCell = row.getCell(1);
                provinceLabel = provinceCell.getStringCellValue();
                if(i == 0 || !provinceLabel.equals(provinceTemp)){
@@ -71,6 +72,7 @@ public class RSynchronizeCity
                   provinceTemp = provinceLabel.trim();
                   province.setCountryId(1);
                   province.setAreaId(1);
+                  province.setCode(proCodeCell.getStringCellValue());
                   province.setLabel(provinceLabel);
                   provinceConsole.doInsert(logicContext, province);
                   provinceId = province.ouid();
