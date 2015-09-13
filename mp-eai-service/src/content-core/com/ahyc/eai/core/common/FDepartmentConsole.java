@@ -3,7 +3,7 @@ package com.ahyc.eai.core.common;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentLogic;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.data.logic.FLogicDataset;
+import org.mo.com.data.FSql;
 //============================================================
 //<P>部门信息操作接口</P>
 //
@@ -37,13 +37,10 @@ public class FDepartmentConsole
    @Override
    public FDataFinancialDepartmentUnit findByLinkId(ILogicContext logicContext,
                                                     long linkId){
-      StringBuffer where = new StringBuffer();
-      if(linkId != 0){
-         where.append(FDataFinancialDepartmentLogic.LINK_ID).append(" = '").append(linkId).append("'");
-      }
+      FSql whereSql = new FSql(FDataFinancialDepartmentLogic.LINK_ID + "={linkId}");
+      whereSql.bindLong("linkId", linkId);
       FDataFinancialDepartmentLogic logic = logicContext.findLogic(FDataFinancialDepartmentLogic.class);
-      FLogicDataset<FDataFinancialDepartmentUnit> department = logic.fetch(where);
-      return department.first();
+      FDataFinancialDepartmentUnit unit = logic.search(whereSql);
+      return unit;
    }
-
 }

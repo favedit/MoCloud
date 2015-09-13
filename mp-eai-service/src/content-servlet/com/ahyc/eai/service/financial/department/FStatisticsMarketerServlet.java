@@ -71,19 +71,21 @@ public class FStatisticsMarketerServlet
          return EResult.Failure;
       }
       // 分公司资源
-      FDictionary<FDataFinancialDepartmentUnit> _departments = new FDictionary<FDataFinancialDepartmentUnit>(FDataFinancialDepartmentUnit.class);
-      FLogicDataset<FDataFinancialDepartmentUnit> departmentList = _departmentConsole.fetch(logicContext, null);
-      for(FDataFinancialDepartmentUnit unit : departmentList){
-         if(unit != null && unit.linkId() != 0){
-            _departments.set(RLong.toString(unit.linkId()), unit);
+      FDictionary<FDataFinancialDepartmentUnit> departments = new FDictionary<FDataFinancialDepartmentUnit>(FDataFinancialDepartmentUnit.class);
+      FLogicDataset<FDataFinancialDepartmentUnit> departmentDataset = _departmentConsole.fetch(logicContext, null);
+      if(departmentDataset != null){
+         for(FDataFinancialDepartmentUnit unit : departmentDataset){
+            if(unit.linkId() != 0){
+               departments.set(RLong.toString(unit.linkId()), unit);
+            }
          }
       }
       // 省份资源
-      FDictionary<FDataCommonProvinceUnit> _provinces = new FDictionary<FDataCommonProvinceUnit>(FDataCommonProvinceUnit.class);
-      FLogicDataset<FDataCommonProvinceUnit> provinceList = _provinceConsole.fetch(logicContext, null);
-      for(FDataCommonProvinceUnit unit : provinceList){
-         if(unit != null){
-            _provinces.set(RLong.toString(unit.ouid()), unit);
+      FDictionary<FDataCommonProvinceUnit> provinces = new FDictionary<FDataCommonProvinceUnit>(FDataCommonProvinceUnit.class);
+      FLogicDataset<FDataCommonProvinceUnit> provinceDataset = _provinceConsole.fetch(logicContext, null);
+      if(provinceDataset != null){
+         for(FDataCommonProvinceUnit unit : provinceDataset){
+            provinces.set(RLong.toString(unit.ouid()), unit);
          }
       }
       //............................................................
@@ -118,13 +120,13 @@ public class FStatisticsMarketerServlet
       FDataset level4Dataset = connection.fetchDataset(level4Sql);
       int level4Count = level4Dataset.count();
       stream.writeInt32(level4Count);
-      int provinceCode = 0;
       for(FRow row : level4Dataset){
-         //获取省份code
+         // 获取省份代码
+         int provinceCode = 0;
          long linkId = row.getLong("id");
-         FDataFinancialDepartmentUnit departmentUnit = _departments.find(RLong.toString(linkId));
+         FDataFinancialDepartmentUnit departmentUnit = departments.find(RLong.toString(linkId));
          if(departmentUnit != null){
-            FDataCommonProvinceUnit province = _provinces.find(RInteger.toString((departmentUnit.provinceId())));
+            FDataCommonProvinceUnit province = provinces.find(RInteger.toString((departmentUnit.provinceId())));
             if(province != null){
                provinceCode = RInteger.parse(province.code());
             }
@@ -141,8 +143,8 @@ public class FStatisticsMarketerServlet
          stream.writeDouble(0);
       }
       //释放资源
-      _departments.clear();
-      _provinces.clear();
+      departments.clear();
+      provinces.clear();
       // 输出理财师分布数据
       FSql areaSql = _resource.findString(FSql.class, "sql.organization.area");
       FDataset areaDataset = connection.fetchDataset(areaSql);
