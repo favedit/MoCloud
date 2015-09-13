@@ -17,6 +17,7 @@ import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -99,18 +100,21 @@ public class FStatisticsMarketerServlet
       FDataset level4Dataset = connection.fetchDataset(level4Sql);
       int level4Count = level4Dataset.count();
       stream.writeInt32(level4Count);
+      int provinceCode = 0;
       for(FRow row : level4Dataset){
          //获取省份code
-         long id = row.getLong("id");
-         FDataFinancialDepartmentUnit departmentUnit = _departmentConsole.find(logicContext, id);
+         long linkId = row.getLong("id");
+         FDataFinancialDepartmentUnit departmentUnit = _departmentConsole.findByLinkId(logicContext, linkId);
          if(departmentUnit != null){
-            FDataCommonProvinceUnit province = _provinceConsole.find(logicContext, departmentUnit.linkId());
+            FDataCommonProvinceUnit province = _provinceConsole.find(logicContext, departmentUnit.provinceId());
             if(province != null){
-               stream.writeUint16(Integer.parseInt(province.code()));
+               provinceCode = RInteger.parse(province.code());
+               stream.writeUint16(provinceCode);
             }
          }
          //............................................................
-         stream.writeUint32(id);
+         stream.writeUint32(linkId);
+         stream.writeUint16(provinceCode);
          stream.writeString(row.get("parent_label"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));
