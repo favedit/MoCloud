@@ -7377,6 +7377,136 @@ MO.SMatrix4x4_toString = function SMatrix4x4_toString(){
    }
    return r.flush();
 }
+MO.SOutline2 = function SOutline2(){
+   var o = this;
+   o.min         = new MO.SPoint2();
+   o.max         = new MO.SPoint2();
+   o.isEmpty     = MO.SOutline2_isEmpty;
+   o.assign      = MO.SOutline2_assign;
+   o.setMin      = MO.SOutline2_setMin;
+   o.setMax      = MO.SOutline2_setMax;
+   o.set         = MO.SOutline2_set;
+   o.mergeMin    = MO.SOutline2_mergeMin;
+   o.mergeMax    = MO.SOutline2_mergeMax;
+   o.mergeMax2   = MO.SOutline2_mergeMax2;
+   o.mergePoint  = MO.SOutline2_mergePoint;
+   o.serialize   = MO.SOutline2_serialize;
+   o.unserialize = MO.SOutline2_unserialize;
+   o.toString    = MO.SOutline2_toString;
+   return o;
+}
+MO.SOutline2_isEmpty = function SOutline2_isEmpty(p){
+   var o = this;
+   return o.min.isEmpty() && o.max.isEmpty();
+}
+MO.SOutline2_assign = function SOutline2_assign(p){
+   var o = this;
+   o.min.assign(p.min);
+   o.max.assign(p.max);
+}
+MO.SOutline2_setMin = function SOutline2_setMin(){
+   var o = this;
+   o.min.setMax();
+   o.max.setMin();
+}
+MO.SOutline2_setMax = function SOutline2_setMax(){
+   var o = this;
+   o.min.setMin();
+   o.max.setMax();
+}
+MO.SOutline2_set = function SOutline2_set(minX, minY, minZ, maxX, maxY, maxZ){
+   var o = this;
+   o.min.set(minX, minY, minZ);
+   o.max.set(maxX, maxY, maxZ);
+}
+MO.SOutline2_mergeMin = function SOutline2_mergeMin(p){
+   var o = this;
+   o.min.mergeMax(p.min);
+   o.max.mergeMin(p.max);
+}
+MO.SOutline2_mergeMax = function SOutline2_mergeMax(p){
+   var o = this;
+   o.min.mergeMin(p.min);
+   o.max.mergeMax(p.max);
+}
+MO.SOutline2_mergeMax2 = function SOutline2_mergeMax2(x, y){
+   var o = this;
+   o.min.mergeMin2(x, y);
+   o.max.mergeMax2(x, y);
+}
+MO.SOutline2_mergePoint = function SOutline2_mergePoint(x, y, z){
+   var o = this;
+   o.min.mergeMin3(x, y, z);
+   o.max.mergeMax3(x, y, z);
+}
+MO.SOutline2_serialize = function SOutline2_serialize(p){
+   var o = this;
+   o.min.serialize(p);
+   o.max.serialize(p);
+}
+MO.SOutline2_unserialize = function SOutline2_unserialize(p){
+   var o = this;
+   o.min.unserialize(p);
+   o.max.unserialize(p);
+}
+MO.SOutline2_toString = function SOutline2_toString(){
+   var o = this;
+   return '(' + o.min + ')-(' + o.max + ')';
+}
+MO.SOutline2d = function SOutline2d(){
+   var o = this;
+   MO.SOutline2.call(o);
+   o.center        = new MO.SPoint2();
+   o.distance      = new MO.SPoint2();
+   o.radius        = 0;
+   o.points        = new Array(8);
+   o.assign        = MO.SOutline2d_assign;
+   o.set           = MO.SOutline2d_set;
+   o.update        = MO.SOutline2d_update;
+   return o;
+}
+MO.SOutline2d_assign = function SOutline2d_assign(value){
+   var o = this;
+   o.center.assign(value.center);
+   o.distance.assign(value.distance);
+   o.radius = value.radius;
+   for(var i = 0; i < 8; i++){
+      o.points[i] = value.points[i];
+   }
+}
+MO.SOutline2d_set = function SOutline2d_set(minX, minY, maxX, maxY){
+   var o = this;
+   o.min.set(minX, minY);
+   o.max.set(maxX, maxY);
+   o.update();
+}
+MO.SOutline2d_update = function SOutline2d_update(){
+   var o = this;
+   var min = o.min;
+   var minX = min.x;
+   var minY = min.y;
+   var max = o.max;
+   var maxX = max.x;
+   var maxY = max.y;
+   var ps = o.points;
+   ps[0] = minX;
+   ps[1] = maxY;
+   ps[2] = maxX;
+   ps[3] = maxY;
+   ps[4] = maxX;
+   ps[5] = minY;
+   ps[6] = minX;
+   ps[7] = minY;
+   var center = o.center;
+   center.x = (minX + maxX) * 0.5;
+   center.y = (minY + maxY) * 0.5;
+   var distance = o.distance;
+   distance.x = maxX - minX;
+   distance.y = maxY - minY;
+   var cx = maxX - minX;
+   var cy = maxY - minY;
+   o.radius = Math.sqrt(cx * cx + cy * cy) * 0.5;
+}
 MO.SOutline3 = function SOutline3(){
    var o = this;
    o.min         = new MO.SPoint3();
@@ -7715,36 +7845,13 @@ MO.SPlane_dump = function SPlane_dump(){
 }
 MO.SPoint2 = function SPoint2(x, y){
    var o = this;
-   o.x           = MO.Lang.Integer.nvl(x);
-   o.y           = MO.Lang.Integer.nvl(y);
-   o.isEmpty     = MO.SPoint2_isEmpty;
-   o.equals      = MO.SPoint2_equals;
-   o.assign      = MO.SPoint2_assign;
-   o.set         = MO.SPoint2_set;
+   MO.SValue2.call(o, MO.Lang.Integer.nvl(x), MO.Lang.Integer.nvl(y));
    o.serialize   = MO.SPoint2_serialize;
    o.unserialize = MO.SPoint2_unserialize;
    o.parse       = MO.SPoint2_parse;
    o.toString    = MO.SPoint2_toString;
    o.dispose     = MO.SPoint2_dispose;
-   o.dump        = MO.SPoint2_dump;
    return o;
-}
-MO.SPoint2_isEmpty = function SPoint2_isEmpty(){
-   var o = this;
-   return (o.x == 0) && (o.y == 0);
-}
-MO.SPoint2_equals = function SPoint2_equals(p){
-   return p ? (this.x == p.x && this.y == p.y) : false;
-}
-MO.SPoint2_assign = function SPoint2_assign(p){
-   var o = this;
-   o.x = p.x;
-   o.y = p.y;
-}
-MO.SPoint2_set = function SPoint2_set(x, y){
-   var o = this;
-   o.x = x;
-   o.y = y;
 }
 MO.SPoint2_serialize = function SPoint2_serialize(output){
    var o = this;
@@ -7774,9 +7881,6 @@ MO.SPoint2_dispose = function SPoint2_dispose(){
    var o = this;
    o.x = null;
    o.y = null;
-}
-MO.SPoint2_dump = function SPoint2_dump(){
-   return MO.Class.dump(this) + ' [' + this.x + ',' + this.y + ']';
 }
 MO.SPoint3 = function SPoint3(x, y, z){
    var o = this;
@@ -8475,6 +8579,114 @@ MO.SSquare_dump = function SSquare_dump(d){
    d.append(' [', this.left, ',', this.top, '-', this.right, ',', this.bottom, '] ');
    d.append('(', this.width(), '-', this.height(), ')');
    return d;
+}
+MO.SValue2 = function SValue2(x, y){
+   var o = this;
+   o.x            = MO.Runtime.nvl(x, 0);
+   o.y            = MO.Runtime.nvl(y, 0);
+   o.isEmpty      = MO.SValue2_isEmpty;
+   o.equals       = MO.SValue2_equals;
+   o.equalsData   = MO.SValue2_equalsData;
+   o.assign       = MO.SValue2_assign;
+   o.setMin       = MO.SValue2_setMin;
+   o.setMax       = MO.SValue2_setMax;
+   o.set          = MO.SValue2_set;
+   o.setAll       = MO.SValue2_setAll;
+   o.mergeMin     = MO.SValue2_mergeMin;
+   o.mergeMin2    = MO.SValue2_mergeMin2;
+   o.mergeMax     = MO.SValue2_mergeMax;
+   o.mergeMax2    = MO.SValue2_mergeMax2;
+   o.length       = MO.SValue2_absolute;
+   o.absolute     = MO.SValue2_absolute;
+   o.normalize    = MO.SValue2_normalize;
+   o.negative     = MO.SValue2_negative;
+   o.parse        = MO.SValue2_parse;
+   o.toString     = MO.SValue2_toString;
+   return o;
+}
+MO.SValue2_isEmpty = function SValue2_isEmpty(){
+   return (this.x == 0) && (this.y == 0);
+}
+MO.SValue2_equals = function SValue2_equals(value){
+   return (this.x == value.x) && (this.y == value.y);
+}
+MO.SValue2_equalsData = function SValue2_equalsData(x, y){
+   return (this.x == x) && (this.y == y);
+}
+MO.SValue2_assign = function SValue2_assign(value){
+   this.x = value.x;
+   this.y = value.y;
+}
+MO.SValue2_setMin = function SValue2_setMin(){
+   this.x = Number.MIN_VALUE;
+   this.y = Number.MIN_VALUE;
+}
+MO.SValue2_setMax = function SValue2_setMax(){
+   this.x = Number.MAX_VALUE;
+   this.y = Number.MAX_VALUE;
+}
+MO.SValue2_set = function SValue2_set(x, y){
+   this.x = x;
+   this.y = y;
+}
+MO.SValue2_setAll = function SValue2_set(value){
+   this.x = value;
+   this.y = value;
+}
+MO.SValue2_normalize = function SValue2_normalize(){
+   var value = this.absolute();
+   if(value != 0){
+      var rate = 1 / value;
+      this.x *= rate;
+      this.y *= rate;
+   }
+   return this;
+}
+MO.SValue2_mergeMin = function SValue2_mergeMin(value){
+   var o = this;
+   o.x = Math.min(o.x, value.x);
+   o.y = Math.min(o.y, value.y);
+}
+MO.SValue2_mergeMin2 = function SValue2_mergeMin2(x, y){
+   var o = this;
+   o.x = Math.min(o.x, x);
+   o.y = Math.min(o.y, y);
+}
+MO.SValue2_mergeMax = function SValue2_mergeMax(value){
+   var o = this;
+   o.x = Math.max(o.x, value.x);
+   o.y = Math.max(o.y, value.y);
+}
+MO.SValue2_mergeMax2 = function SValue2_mergeMax2(x, y){
+   var o = this;
+   o.x = Math.max(o.x, x);
+   o.y = Math.max(o.y, y);
+}
+MO.SValue2_absolute = function SValue2_absolute(){
+   return Math.sqrt((this.x * this.x) + (this.y * this.y));
+}
+MO.SValue2_negative = function SValue2_negative(value){
+   var result = null;
+   if(p){
+      result = value;
+   }else{
+      result = new this.constructor();
+   }
+   result.x = -this.x;
+   result.y = -this.y;
+   return result;
+}
+MO.SValue2_parse = function SValue2_parse(value){
+   var items = value.split(',')
+   if(items.length == 2){
+      this.x = parseFloat(items[0]);
+      this.y = parseFloat(items[1]);
+   }else{
+      throw new MO.TError(o, "Parse value failure. (value={1})", value);
+   }
+}
+MO.SValue2_toString = function SValue2_toString(){
+   return this.x + ',' + this.y;
 }
 MO.SValue3 = function SValue3(x, y, z){
    var o = this;

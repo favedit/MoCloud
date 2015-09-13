@@ -58,6 +58,7 @@ public class FStatisticsAchievementServlet
       //............................................................
       // 获得当前时间
       TDateTime currentDate = RDateTime.currentDateTime();
+      currentDate.parse("20140901231500");
       String dateString = currentDate.format("YYYYMMDDHH24MI00");
       //............................................................
       // 从缓冲中查找数据
