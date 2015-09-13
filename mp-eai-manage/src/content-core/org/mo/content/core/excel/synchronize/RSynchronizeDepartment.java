@@ -17,7 +17,7 @@ import org.mo.data.logic.FLogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 
 //============================================================
-// <T>金融客户统计计算器。</T>
+// <T>同步excel分公司。</T>
 //============================================================
 public class RSynchronizeDepartment
 {
