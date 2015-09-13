@@ -15,9 +15,11 @@ import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RInteger;
+import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -51,6 +53,12 @@ public class FStatisticsMarketerServlet
    @ALink
    protected static IProvinceConsole _provinceConsole;
 
+   // 分公司资源
+   protected FDictionary<FDataFinancialDepartmentUnit> _departments = new FDictionary<FDataFinancialDepartmentUnit>(FDataFinancialDepartmentUnit.class);
+
+   // 省份资源
+   protected FDictionary<FDataCommonProvinceUnit> _provinces = new FDictionary<FDataCommonProvinceUnit>(FDataCommonProvinceUnit.class);
+
    //============================================================
    // <T>获得理财师组织数据。</T>
    //
@@ -67,6 +75,21 @@ public class FStatisticsMarketerServlet
       // 检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
+      }
+
+      //分公司对象
+      FLogicDataset<FDataFinancialDepartmentUnit> departmentList = _departmentConsole.fetch(logicContext, null);
+      for(FDataFinancialDepartmentUnit unit : departmentList){
+         if(unit != null && unit.linkId() != 0){
+            _departments.set(RLong.toString(unit.linkId()), unit);
+         }
+      }
+      //省份对象
+      FLogicDataset<FDataCommonProvinceUnit> provinceList = _provinceConsole.fetch(logicContext, null);
+      for(FDataCommonProvinceUnit unit : provinceList){
+         if(unit != null){
+            _provinces.set(RLong.toString(unit.ouid()), unit);
+         }
       }
       //............................................................
       // 从缓冲中查找数据
@@ -100,21 +123,14 @@ public class FStatisticsMarketerServlet
       FDataset level4Dataset = connection.fetchDataset(level4Sql);
       int level4Count = level4Dataset.count();
       stream.writeInt32(level4Count);
-      int provinceCode = 0;
       for(FRow row : level4Dataset){
          //获取省份code
          long linkId = row.getLong("id");
-         FDataFinancialDepartmentUnit departmentUnit = _departmentConsole.findByLinkId(logicContext, linkId);
-         if(departmentUnit != null){
-            FDataCommonProvinceUnit province = _provinceConsole.find(logicContext, departmentUnit.provinceId());
-            if(province != null){
-               provinceCode = RInteger.parse(province.code());
-               stream.writeUint16(provinceCode);
-            }
-         }
+         FDataFinancialDepartmentUnit departmentUnit = _departments.find(RLong.toString(linkId));
+         FDataCommonProvinceUnit province = _provinces.find(RInteger.toString((departmentUnit.provinceId())));
+         stream.writeUint16(RInteger.parse(province.code()));
          //............................................................
          stream.writeUint32(linkId);
-         stream.writeUint16(provinceCode);
          stream.writeString(row.get("parent_label"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));
