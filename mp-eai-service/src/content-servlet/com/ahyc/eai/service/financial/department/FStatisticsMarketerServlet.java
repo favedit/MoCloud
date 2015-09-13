@@ -1,6 +1,10 @@
 package com.ahyc.eai.service.financial.department;
 
+import com.ahyc.eai.core.common.IDepartmentConsole;
+import com.ahyc.eai.core.common.IProvinceConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
+import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
+import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
@@ -19,6 +23,7 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
@@ -38,6 +43,12 @@ public class FStatisticsMarketerServlet
 
    // 日志输出接口
    private static IResource _resource = RResource.find(FStatisticsMarketerServlet.class);
+
+   @ALink
+   protected static IDepartmentConsole _departmentConsole;
+
+   @ALink
+   protected static IProvinceConsole _provinceConsole;
 
    //============================================================
    // <T>获得理财师组织数据。</T>
@@ -89,8 +100,17 @@ public class FStatisticsMarketerServlet
       int level4Count = level4Dataset.count();
       stream.writeInt32(level4Count);
       for(FRow row : level4Dataset){
-         stream.writeUint32(row.getInt("id"));
-         stream.writeUint16(row.getInt("code"));
+         //获取省份code
+         long id = row.getLong("id");
+         FDataFinancialDepartmentUnit departmentUnit = _departmentConsole.find(logicContext, id);
+         if(departmentUnit != null){
+            FDataCommonProvinceUnit province = _provinceConsole.find(logicContext, departmentUnit.linkId());
+            if(province != null){
+               stream.writeUint16(Integer.parseInt(province.code()));
+            }
+         }
+         //............................................................
+         stream.writeUint32(id);
          stream.writeString(row.get("parent_label"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));
