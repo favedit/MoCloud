@@ -49,9 +49,9 @@ public class FDepartmentConsole
       }
       StringBuffer whereSql = new StringBuffer();
       if(!RString.isEmpty(unit.code())){
-         whereSql.append(FDataFinancialDepartmentLogic.CODE).append(" LIKE '%").append(unit.code() + "%'");
+         whereSql.append(FDataFinancialDepartmentLogic.LABEL).append(" LIKE '%").append(unit.code() + "%'");
       }
-      String orderBy = String.format("%s %s", FDataFinancialDepartmentLogic.CODE, "ASC");
+      String orderBy = String.format("%s %s", FDataFinancialDepartmentLogic.DEPARTMENT_LABEL, "ASC");
       FDataFinancialDepartmentLogic logic = logicContext.findLogic(FDataFinancialDepartmentLogic.class);
       FLogicDataset<FDataFinancialDepartmentUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;
