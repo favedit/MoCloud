@@ -86,7 +86,10 @@
             cbo.OnComplete = function(responseText, responseXML) {
                var result = ctrl.replaceNbsp(responseText);
                console.log(result);
-               if (result == 1) {
+               if (result.length > 20) {
+                  $getVerifyCodeBtn.value = "发送动态验证码";
+                  error.innerHTML = "发送验证码失败";
+               } else if (result == 1) {
                   error.innerHTML = "";
                   ctrl.countdown($getVerifyCodeBtn);
                } else {

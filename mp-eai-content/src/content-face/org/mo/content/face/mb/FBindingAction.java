@@ -113,7 +113,6 @@ public class FBindingAction
       page.setMessage(null);
       TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       String passport = context.parameter("passport");
-
       _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
@@ -133,7 +132,6 @@ public class FBindingAction
       //获取手机号码 －〉 发送验证码
       String mobile = marketer.phone();
       String card = marketer.card();
-      String label = marketer.label();
       String random = null;
       //验证5分钟前有没有发过验证码，发过再次发送此验证码
       FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime, passport);
@@ -245,7 +243,7 @@ public class FBindingAction
       _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},mobile={2})", random, mobile);
       BusinessService bs = new BusinessService();
       bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-      String text = "您正在使用[全球实时数据中心系统]进行账户绑定，验证码" + random + ",千万不要告诉别人哟。【钰诚办公平台】";
+      String text = "验证码" + random + ",您正在使用[智慧企业－数据可视化平台]进行账户绑定，千万不要告诉别人哟。【钰诚办公平台】";
       int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
       _logger.debug(this, "SendValidate", "sendMessage finish. (text={1},result={2})", text, result);
       return result;

@@ -48,7 +48,6 @@
                         <ul></ul>
                      </div>
                   </div>
-
                   <div class="details-container">
                      <je:authority module='eai.marketer.customer'>
                         <ul class="ul" onclick='doChart("customer")' >

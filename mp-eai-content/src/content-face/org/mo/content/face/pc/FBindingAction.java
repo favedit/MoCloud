@@ -113,8 +113,8 @@ public class FBindingAction
       page.setMessage(null);
       TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       String passport = context.parameter("passport");
-
       _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
+
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
          page.setMessage("E租宝账号不能为空");
@@ -124,6 +124,7 @@ public class FBindingAction
          page.setMessage("E租宝账号非法");
          return "/apl/ajax";
       }
+
       FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
       if(marketer == null){
          page.setMessage("E租宝账号无理财师权限！");
@@ -134,7 +135,6 @@ public class FBindingAction
       //获取手机号码 －〉 发送验证码
       String mobile = marketer.phone();
       String card = marketer.card();
-      String label = marketer.label();
       String random = null;
       //验证5分钟前有没有发过验证码，发过再次发送此验证码
       FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime, passport);

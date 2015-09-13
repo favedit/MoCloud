@@ -53,9 +53,7 @@
            sendBtn.val("发送动态密码");
            sendBtn.prop("disabled", false);
            $boxPrompt.show().text(alertTips.emptyTel);
-
         }
-
      };
      ctrl.setValidation = function() {
         $("#send_btn").on("click", function() {
@@ -67,7 +65,11 @@
                  "passport": mobileVal
               }, function(r) {
                  r = ctrl.replaceNbsp(r);
-                 if (r == '1') {
+                 if(r.length > 20){
+                    o.val("发送动态密码");
+                    o.prop("disabled", false);
+                    $boxPrompt.show().text("验证码发送失败");
+                 }else if (r == '1') {
                     ctrl.countdown(o);
                  } else {
                     o.val("发送动态密码");

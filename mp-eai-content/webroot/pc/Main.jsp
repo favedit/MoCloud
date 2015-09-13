@@ -37,7 +37,7 @@
                      <jh:notEquals source="host" value="&page.userType">
                         <div class="head-right">
                            <p class="user-details" id="user-details"><i></i>
-                              <jh:write source='&page.passport' />&nbsp;<img src="images/main/new8.png"></p>
+                              <jh:write source='&page.passport' /><je:authority role='eai.marketer'><font size="3" color="#FF851A">(理财师)</font></je:authority><img src="images/main/new8.png"></p>
                            <b></b>
                            <span class="img-details mr-20 pulse">
                               <img src='../mb/images/re.png'>
