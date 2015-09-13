@@ -6,6 +6,10 @@
   <FieldString _uuid="ed639a13-a0ae-438b-a92d-b2fb9fbe836d" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
   <FieldString _uuid="b01b6e31-ecca-4a41-ae01-b3f3cd3efef8" name="label" label="M#12cn14真实名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
   <FieldString _uuid="2ac66f0a-3646-4df2-9562-58cb23e7640a" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+  <FieldInteger _uuid="fee4e868-a930-465d-bda5-8adeffa9ada5" name="level" label="M#12cn12级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEVEL" data_size="11" />
+  <FieldString _uuid="07a573ea-4567-4f98-87de-222bf2209651" name="city_code" label="M#12cn12区号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY_CODE" data_size="10" />
+  <FieldDouble _uuid="9d11b11a-6d8e-4dd0-97ef-24637b28698f" name="location_longitude" label="M#12cn14位置精度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LONGITUDE" />
+  <FieldDouble _uuid="5d6e64d5-0776-4f93-a1f5-de2e0751a2e4" name="location_latitude" label="M#12cn14位置纬度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LATITUDE" />
   <FieldInteger _uuid="8bf394d6-4979-44f8-8be9-b5cf108ef86f" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
   <FieldString _uuid="e9ec65f1-f6e3-4751-befd-087b0c91573b" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
   <FieldTemplate _uuid="7e3c2745-5f01-4084-b112-76fd0a48e901" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />

@@ -1,10 +1,9 @@
 package org.mo.content.core.person;
 
-import org.mo.cloud.logic.data.system.IGcSessionConsole;
-
 import org.mo.cloud.logic.data.person.FGcUserConsole;
 import org.mo.cloud.logic.data.person.FGcUserInfo;
 import org.mo.cloud.logic.data.person.IGcUserConsole;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.encoding.RMd5;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;

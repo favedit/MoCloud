@@ -6,7 +6,6 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -18,7 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>共通城市表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataCommonCityUnit
+public class FDataCommonCityCardUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -39,77 +38,23 @@ public class FDataCommonCityUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段国家编号的定义。
-   private long __countryId;
+   // 存储字段城市编号的定义。
+   private long __cityId;
 
-   // 字段国家编号的定义。
-   protected long _countryId;
+   // 字段城市编号的定义。
+   protected long _cityId;
 
-   // 存储字段地区编号的定义。
-   private long __areaId;
+   // 存储字段身份证前4位的定义。
+   private int __cardCode;
 
-   // 字段地区编号的定义。
-   protected long _areaId;
-
-   // 存储字段省份编号的定义。
-   private long __provinceId;
-
-   // 字段省份编号的定义。
-   protected long _provinceId;
-
-   // 存储字段代码的定义。
-   private String __code;
-
-   // 字段代码的定义。
-   protected String _code;
-
-   // 存储字段真实名称的定义。
-   private String __label;
-
-   // 字段真实名称的定义。
-   protected String _label;
-
-   // 存储字段图标地址的定义。
-   private String __iconUrl;
-
-   // 字段图标地址的定义。
-   protected String _iconUrl;
-
-   // 存储字段级别的定义。
-   private int __level;
-
-   // 字段级别的定义。
-   protected int _level;
-
-   // 存储字段区号的定义。
-   private String __cityCode;
-
-   // 字段区号的定义。
-   protected String _cityCode;
-
-   // 存储字段位置精度的定义。
-   private double __locationLongitude;
-
-   // 字段位置精度的定义。
-   protected double _locationLongitude;
-
-   // 存储字段位置纬度的定义。
-   private double __locationLatitude;
-
-   // 字段位置纬度的定义。
-   protected double _locationLatitude;
+   // 字段身份证前4位的定义。
+   protected int _cardCode;
 
    // 存储字段排序值的定义。
    private int __displayOrder;
 
    // 字段排序值的定义。
    protected int _displayOrder;
-
-   // 存储字段备注的定义。
-   private String __note;
-
-   // 字段备注的定义。
-   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -138,7 +83,7 @@ public class FDataCommonCityUnit
    //============================================================
    // <T>构造共通城市表逻辑单元。</T>
    //============================================================
-   public FDataCommonCityUnit(){
+   public FDataCommonCityCardUnit(){
    }
 
    //============================================================
@@ -223,306 +168,68 @@ public class FDataCommonCityUnit
    }
 
    //============================================================
-   // <T>判断国家编号的数据是否改变。</T>
+   // <T>判断城市编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCountryIdChanged(){
-      return __countryId != _countryId;
+   public boolean isCityIdChanged(){
+      return __cityId != _cityId;
    }
 
    //============================================================
-   // <T>获得国家编号的数据内容。</T>
+   // <T>获得城市编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long countryId(){
-      return _countryId;
+   public long cityId(){
+      return _cityId;
    }
 
    //============================================================
-   // <T>获得国家编号的数据单元。</T>
+   // <T>获得城市编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public FDataCommonCountryUnit country(){
-      FDataCommonCountryLogic logic = _logicContext.findLogic(FDataCommonCountryLogic.class);
-      FDataCommonCountryUnit unit = logic.find(_countryId);
+   public FDataCommonCityUnit city(){
+      FDataCommonCityLogic logic = _logicContext.findLogic(FDataCommonCityLogic.class);
+      FDataCommonCityUnit unit = logic.find(_cityId);
       return unit;
    }
 
    //============================================================
-   // <T>设置国家编号的数据内容。</T>
+   // <T>设置城市编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCountryId(long value){
-      _countryId = value;
+   public void setCityId(long value){
+      _cityId = value;
    }
 
    //============================================================
-   // <T>判断地区编号的数据是否改变。</T>
+   // <T>判断身份证前4位的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isAreaIdChanged(){
-      return __areaId != _areaId;
+   public boolean isCardCodeChanged(){
+      return __cardCode != _cardCode;
    }
 
    //============================================================
-   // <T>获得地区编号的数据内容。</T>
+   // <T>获得身份证前4位的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long areaId(){
-      return _areaId;
+   public int cardCode(){
+      return _cardCode;
    }
 
    //============================================================
-   // <T>获得地区编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataCommonAreaUnit area(){
-      FDataCommonAreaLogic logic = _logicContext.findLogic(FDataCommonAreaLogic.class);
-      FDataCommonAreaUnit unit = logic.find(_areaId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置地区编号的数据内容。</T>
+   // <T>设置身份证前4位的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setAreaId(long value){
-      _areaId = value;
-   }
-
-   //============================================================
-   // <T>判断省份编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isProvinceIdChanged(){
-      return __provinceId != _provinceId;
-   }
-
-   //============================================================
-   // <T>获得省份编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long provinceId(){
-      return _provinceId;
-   }
-
-   //============================================================
-   // <T>获得省份编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataCommonProvinceUnit province(){
-      FDataCommonProvinceLogic logic = _logicContext.findLogic(FDataCommonProvinceLogic.class);
-      FDataCommonProvinceUnit unit = logic.find(_provinceId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置省份编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setProvinceId(long value){
-      _provinceId = value;
-   }
-
-   //============================================================
-   // <T>判断代码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
-   }
-
-   //============================================================
-   // <T>获得代码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String code(){
-      return _code;
-   }
-
-   //============================================================
-   // <T>设置代码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCode(String value){
-      _code = value;
-   }
-
-   //============================================================
-   // <T>判断真实名称的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
-   }
-
-   //============================================================
-   // <T>获得真实名称的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String label(){
-      return _label;
-   }
-
-   //============================================================
-   // <T>设置真实名称的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLabel(String value){
-      _label = value;
-   }
-
-   //============================================================
-   // <T>判断图标地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIconUrlChanged(){
-      return !RString.equals(__iconUrl, _iconUrl);
-   }
-
-   //============================================================
-   // <T>获得图标地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String iconUrl(){
-      return _iconUrl;
-   }
-
-   //============================================================
-   // <T>设置图标地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIconUrl(String value){
-      _iconUrl = value;
-   }
-
-   //============================================================
-   // <T>判断级别的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLevelChanged(){
-      return __level != _level;
-   }
-
-   //============================================================
-   // <T>获得级别的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int level(){
-      return _level;
-   }
-
-   //============================================================
-   // <T>设置级别的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLevel(int value){
-      _level = value;
-   }
-
-   //============================================================
-   // <T>判断区号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCityCodeChanged(){
-      return !RString.equals(__cityCode, _cityCode);
-   }
-
-   //============================================================
-   // <T>获得区号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String cityCode(){
-      return _cityCode;
-   }
-
-   //============================================================
-   // <T>设置区号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCityCode(String value){
-      _cityCode = value;
-   }
-
-   //============================================================
-   // <T>判断位置精度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLocationLongitudeChanged(){
-      return __locationLongitude != _locationLongitude;
-   }
-
-   //============================================================
-   // <T>获得位置精度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double locationLongitude(){
-      return _locationLongitude;
-   }
-
-   //============================================================
-   // <T>设置位置精度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLocationLongitude(double value){
-      _locationLongitude = value;
-   }
-
-   //============================================================
-   // <T>判断位置纬度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLocationLatitudeChanged(){
-      return __locationLatitude != _locationLatitude;
-   }
-
-   //============================================================
-   // <T>获得位置纬度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double locationLatitude(){
-      return _locationLatitude;
-   }
-
-   //============================================================
-   // <T>设置位置纬度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLocationLatitude(double value){
-      _locationLatitude = value;
+   public void setCardCode(int value){
+      _cardCode = value;
    }
 
    //============================================================
@@ -550,33 +257,6 @@ public class FDataCommonCityUnit
    //============================================================
    public void setDisplayOrder(int value){
       _displayOrder = value;
-   }
-
-   //============================================================
-   // <T>判断备注的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isNoteChanged(){
-      return !RString.equals(__note, _note);
-   }
-
-   //============================================================
-   // <T>获得备注的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String note(){
-      return _note;
-   }
-
-   //============================================================
-   // <T>设置备注的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setNote(String value){
-      _note = value;
    }
 
    //============================================================
@@ -702,30 +382,12 @@ public class FDataCommonCityUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "country_id":
-            return Long.toString(_countryId);
-         case "area_id":
-            return Long.toString(_areaId);
-         case "province_id":
-            return Long.toString(_provinceId);
-         case "code":
-            return _code;
-         case "label":
-            return _label;
-         case "icon_url":
-            return _iconUrl;
-         case "level":
-            return RInteger.toString(_level);
-         case "city_code":
-            return _cityCode;
-         case "location_longitude":
-            return RDouble.toString(_locationLongitude);
-         case "location_latitude":
-            return RDouble.toString(_locationLatitude);
+         case "city_id":
+            return Long.toString(_cityId);
+         case "card_code":
+            return RInteger.toString(_cardCode);
          case "display_order":
             return RInteger.toString(_displayOrder);
-         case "note":
-            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -757,41 +419,14 @@ public class FDataCommonCityUnit
          case "guid":
             _guid = value;
             break;
-         case "country_id":
-            _countryId = RLong.parse(value);
+         case "city_id":
+            _cityId = RLong.parse(value);
             break;
-         case "area_id":
-            _areaId = RLong.parse(value);
-            break;
-         case "province_id":
-            _provinceId = RLong.parse(value);
-            break;
-         case "code":
-            _code = value;
-            break;
-         case "label":
-            _label = value;
-            break;
-         case "icon_url":
-            _iconUrl = value;
-            break;
-         case "level":
-            _level = RInteger.parse(value);
-            break;
-         case "city_code":
-            _cityCode = value;
-            break;
-         case "location_longitude":
-            _locationLongitude = RDouble.parse(value);
-            break;
-         case "location_latitude":
-            _locationLatitude = RDouble.parse(value);
+         case "card_code":
+            _cardCode = RInteger.parse(value);
             break;
          case "display_order":
             _displayOrder = RInteger.parse(value);
-            break;
-         case "note":
-            _note = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -832,53 +467,17 @@ public class FDataCommonCityUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "country_id":
-               __countryId = RLong.parse(value);
-               _countryId = __countryId;
+            case "city_id":
+               __cityId = RLong.parse(value);
+               _cityId = __cityId;
                break;
-            case "area_id":
-               __areaId = RLong.parse(value);
-               _areaId = __areaId;
-               break;
-            case "province_id":
-               __provinceId = RLong.parse(value);
-               _provinceId = __provinceId;
-               break;
-            case "code":
-               __code = value;
-               _code = __code;
-               break;
-            case "label":
-               __label = value;
-               _label = __label;
-               break;
-            case "icon_url":
-               __iconUrl = value;
-               _iconUrl = __iconUrl;
-               break;
-            case "level":
-               __level = RInteger.parse(value);
-               _level = __level;
-               break;
-            case "city_code":
-               __cityCode = value;
-               _cityCode = __cityCode;
-               break;
-            case "location_longitude":
-               __locationLongitude = RDouble.parse(value);
-               _locationLongitude = __locationLongitude;
-               break;
-            case "location_latitude":
-               __locationLatitude = RDouble.parse(value);
-               _locationLatitude = __locationLatitude;
+            case "card_code":
+               __cardCode = RInteger.parse(value);
+               _cardCode = __cardCode;
                break;
             case "display_order":
                __displayOrder = RInteger.parse(value);
                _displayOrder = __displayOrder;
-               break;
-            case "note":
-               __note = value;
-               _note = __note;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -911,18 +510,9 @@ public class FDataCommonCityUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("countryId", _countryId);
-      row.set("areaId", _areaId);
-      row.set("provinceId", _provinceId);
-      row.set("code", _code);
-      row.set("label", _label);
-      row.set("iconUrl", _iconUrl);
-      row.set("level", _level);
-      row.set("cityCode", _cityCode);
-      row.set("locationLongitude", _locationLongitude);
-      row.set("locationLatitude", _locationLatitude);
+      row.set("cityId", _cityId);
+      row.set("cardCode", _cardCode);
       row.set("displayOrder", _displayOrder);
-      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -940,18 +530,9 @@ public class FDataCommonCityUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("countryId", RLong.toString(_countryId));
-      map.put("areaId", RLong.toString(_areaId));
-      map.put("provinceId", RLong.toString(_provinceId));
-      map.put("code", _code);
-      map.put("label", _label);
-      map.put("iconUrl", _iconUrl);
-      map.put("level", RInteger.toString(_level));
-      map.put("cityCode", _cityCode);
-      map.put("locationLongitude", RDouble.toString(_locationLongitude));
-      map.put("locationLatitude", RDouble.toString(_locationLatitude));
+      map.put("cityId", RLong.toString(_cityId));
+      map.put("cardCode", RInteger.toString(_cardCode));
       map.put("displayOrder", RInteger.toString(_displayOrder));
-      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -969,16 +550,9 @@ public class FDataCommonCityUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _countryId = input.readInt64();
-      _areaId = input.readInt64();
-      _provinceId = input.readInt64();
-      _code = input.readString();
-      _label = input.readString();
-      _iconUrl = input.readString();
-      _level = input.readInt32();
-      _cityCode = input.readString();
+      _cityId = input.readInt64();
+      _cardCode = input.readInt32();
       _displayOrder = input.readInt32();
-      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -996,16 +570,9 @@ public class FDataCommonCityUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeInt64(_countryId);
-      output.writeInt64(_areaId);
-      output.writeInt64(_provinceId);
-      output.writeString(_code);
-      output.writeString(_label);
-      output.writeString(_iconUrl);
-      output.writeInt32(_level);
-      output.writeString(_cityCode);
+      output.writeInt64(_cityId);
+      output.writeInt32(_cardCode);
       output.writeInt32(_displayOrder);
-      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

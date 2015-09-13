@@ -59,6 +59,18 @@ public class FDataCommonCityLogic
    // 字段图标地址的定义。
    public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
 
+   // 字段级别的定义。
+   public final static SLogicFieldInfo LEVEL = new SLogicFieldInfo("LEVEL");
+
+   // 字段区号的定义。
+   public final static SLogicFieldInfo CITY_CODE = new SLogicFieldInfo("CITY_CODE");
+
+   // 字段位置精度的定义。
+   public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
+
+   // 字段位置纬度的定义。
+   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
+
    // 字段排序值的定义。
    public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
 
@@ -78,7 +90,7 @@ public class FDataCommonCityLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`COUNTRY_ID`,`AREA_ID`,`PROVINCE_ID`,`CODE`,`LABEL`,`ICON_URL`,`DISPLAY_ORDER`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`COUNTRY_ID`,`AREA_ID`,`PROVINCE_ID`,`CODE`,`LABEL`,`ICON_URL`,`LEVEL`,`CITY_CODE`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`DISPLAY_ORDER`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造共通城市表逻辑单元。</T>
@@ -534,6 +546,7 @@ public class FDataCommonCityLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
+   @Override
    public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
                                                              CharSequence fields,
                                                              CharSequence whereSql,
@@ -676,6 +689,10 @@ public class FDataCommonCityLogic
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`ICON_URL`");
+      cmd.append(",`LEVEL`");
+      cmd.append(",`CITY_CODE`");
+      cmd.append(",`LOCATION_LONGITUDE`");
+      cmd.append(",`LOCATION_LATITUDE`");
       cmd.append(",`DISPLAY_ORDER`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
@@ -740,6 +757,21 @@ public class FDataCommonCityLogic
          cmd.append(RSql.formatValue(iconUrl));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.level());
+      cmd.append(',');
+      String cityCode = unit.cityCode();
+      if(RString.isEmpty(cityCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(cityCode));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.locationLongitude());
+      cmd.append(',');
+      cmd.append(unit.locationLatitude());
       cmd.append(',');
       cmd.append(unit.displayOrder());
       cmd.append(',');
@@ -884,6 +916,29 @@ public class FDataCommonCityLogic
             cmd.append(RSql.formatValue(iconUrl));
             cmd.append('\'');
          }
+      }
+      if(unit.isLevelChanged()){
+         cmd.append(",`LEVEL`=");
+         cmd.append(unit.level());
+      }
+      if(unit.isCityCodeChanged()){
+         cmd.append(",`CITY_CODE`=");
+         String cityCode = unit.cityCode();
+         if(RString.isEmpty(cityCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(cityCode));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isLocationLongitudeChanged()){
+         cmd.append(",`LOCATION_LONGITUDE`=");
+         cmd.append(unit.locationLongitude());
+      }
+      if(unit.isLocationLatitudeChanged()){
+         cmd.append(",`LOCATION_LATITUDE`=");
+         cmd.append(unit.locationLatitude());
       }
       if(unit.isDisplayOrderChanged()){
          cmd.append(",`DISPLAY_ORDER`=");

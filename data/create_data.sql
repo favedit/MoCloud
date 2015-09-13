@@ -119,13 +119,17 @@ CREATE TABLE `DT_COM_CITY`
    `CODE`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(80), 
    `ICON_URL`                      VARCHAR(400), 
+   `LEVEL`                         INTEGER, 
+   `CITY_CODE`                     VARCHAR(10),  
+   `LOCATION_LONGITUDE`            double, 
+   `LOCATION_LATITUDE`             double, 
    `DISPLAY_ORDER`                 INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_COM_CITY 
    ADD CONSTRAINT DT_COM_CTY_UK_GID UNIQUE ( GUID ); 
@@ -138,6 +142,31 @@ ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_ARE
 
 ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_PVN 
       FOREIGN KEY (`PROVINCE_ID`) REFERENCES DT_COM_PROVINCE(`OUID`); 
+	  
+	  
+-- ------------------------------------------------------------
+-- Create table [Data.Common.City.CARD]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_CITY_CARD`;	  
+CREATE TABLE `DT_COM_CITY_CARD` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CITY_ID`                       BIGINT NOT NULL, 
+   `CARD_CODE`                     INTEGER, 
+   `DISPLAY_ORDER`                 INTEGER, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_CITY_CARD 
+   ADD CONSTRAINT DT_COM_CITY_CARD_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_COM_CITY_CARD ADD CONSTRAINT DT_COM_CITY_CARD_FK_CITY 
+      FOREIGN KEY (`CITY_ID`) REFERENCES DT_COM_CITY(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Info.Device]
