@@ -39,19 +39,19 @@ public class FStatisticsMemberConsole
    public FStatisticsFinancialMemberUnit syncByLinkId(FLogicContext logicContext,
                                                       long linkId){
       // 检查参数
-      if(linkId == 0){
+      if(linkId == 0) {
          return null;
       }
       // 查找单元
       String code = Long.toString(linkId);
       FStatisticsFinancialMemberUnit unit = _pool.find(code);
-      if(unit != null){
+      if(unit != null) {
          return unit;
       }
       // 查找单元
       FStatisticsFinancialMemberLogic logic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
       unit = logic.search("LINK_ID=" + linkId);
-      if(unit != null){
+      if(unit != null) {
          return unit;
       }
       //............................................................
@@ -60,7 +60,7 @@ public class FStatisticsMemberConsole
       FSql sql = _resource.findString(FSql.class, "sql.member");
       sql.bindLong("id", linkId);
       FRow row = connection.find(sql);
-      if(row == null){
+      if(row == null) {
          return null;
       }
       FSql infoSql = _resource.findString(FSql.class, "sql.member.info");
@@ -74,7 +74,7 @@ public class FStatisticsMemberConsole
       unit.setPhone(row.get("user_phone"));
       unit.setEmail(row.get("user_email"));
       unit.registerDate().parse(row.get("register_date"));
-      if(infoRow != null){
+      if(infoRow != null) {
          unit.setLabel(infoRow.get("real_name"));
          unit.setCard(infoRow.get("idcard"));
          unit.setGenderCode(infoRow.get("sex"));
@@ -89,6 +89,54 @@ public class FStatisticsMemberConsole
          unit.setInfo(infoRow.get("info"));
       }
       logic.doInsert(unit);
+      return unit;
+   }
+
+   //============================================================
+   // <T>根据编号更新一个用户信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param linkId 关联编号
+   //============================================================
+   @Override
+   public FStatisticsFinancialMemberUnit updateByLinkId(FLogicContext logicContext,
+                                                        long linkId){
+      // 查询信息
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
+      // 查找单元
+      FStatisticsFinancialMemberLogic logic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
+      FStatisticsFinancialMemberUnit unit = logic.search("LINK_ID=" + linkId);
+      if(unit == null) {
+         return null;
+      }
+      // 设置基本信息
+      FSql sql = _resource.findString(FSql.class, "sql.member");
+      sql.bindLong("id", linkId);
+      FRow row = connection.find(sql);
+      if(row != null) {
+         unit.setPhone(row.get("user_phone"));
+         unit.setEmail(row.get("user_email"));
+         unit.registerDate().parse(row.get("register_date"));
+      }
+      // 更新详细信息
+      FSql infoSql = _resource.findString(FSql.class, "sql.member.info");
+      infoSql.bindLong("id", linkId);
+      FRow infoRow = connection.find(infoSql);
+      if(infoRow != null) {
+         unit.setLabel(infoRow.get("real_name"));
+         unit.setCard(infoRow.get("idcard"));
+         unit.setGenderCode(infoRow.get("sex"));
+         unit.setMarryCode(infoRow.get("marry"));
+         unit.setEducationCode(infoRow.get("education"));
+         unit.setBusinessCode(infoRow.get("zy"));
+         unit.setIncomeCode(infoRow.get("income"));
+         unit.setProvinceCode(infoRow.getInt("province"));
+         unit.setCityCode(infoRow.getInt("city"));
+         unit.setAreaCode(infoRow.getInt("area"));
+         unit.setAddress(infoRow.get("address"));
+         unit.setInfo(infoRow.get("info"));
+      }
+      logic.doUpdate(unit);
       return unit;
    }
 }

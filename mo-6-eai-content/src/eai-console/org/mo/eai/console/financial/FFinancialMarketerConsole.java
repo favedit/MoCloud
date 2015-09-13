@@ -7,6 +7,8 @@ import org.mo.com.console.FConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.core.common.EEaiDataConnection;
@@ -20,6 +22,9 @@ public class FFinancialMarketerConsole
       implements
          IFinancialMarketerConsole
 {
+   // 日志输出接口    
+   protected static ILogger _logger = RLogger.find(FFinancialMarketerConsole.class);
+
    // 工作模式
    @AProperty
    protected String _modeCd = "online";
@@ -69,16 +74,16 @@ public class FFinancialMarketerConsole
       }
       // 查找理财师
       long memberId = memberRow.getLong("id");
-      FSql managerSql = new FSql("SELECT id FROM idcard WHERE uid={user_id} status != 1");
+      FSql managerSql = new FSql("SELECT id FROM lzh_fmanager WHERE (uid={user_id}) AND (status = 0)");
       managerSql.bindLong("user_id", memberId);
-      FRow managerRow = connection.find(findSql);
+      FRow managerRow = connection.find(managerSql);
       if(managerRow == null){
          return null;
       }
       // 查找用户信息
       FSql memberInfoSql = new FSql("SELECT real_name,cell_phone,idcard FROM lzh_member_info WHERE uid={user_id}");
       memberInfoSql.bindLong("user_id", memberId);
-      FRow memberInfoRow = connection.find(findSql);
+      FRow memberInfoRow = connection.find(memberInfoSql);
       if(memberInfoRow == null){
          return null;
       }

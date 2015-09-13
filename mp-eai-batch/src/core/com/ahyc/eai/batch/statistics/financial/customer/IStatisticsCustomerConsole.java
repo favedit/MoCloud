@@ -19,4 +19,13 @@ public interface IStatisticsCustomerConsole
    //============================================================
    FStatisticsFinancialCustomerUnit syncByLinkId(FLogicContext logicContext,
                                                  long linkId);
+
+   //============================================================
+   // <T>根据编号更新一个客户信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param linkId 关联编号
+   //============================================================
+   FStatisticsFinancialCustomerUnit updateByLinkId(FLogicContext logicContext,
+                                                   long linkId);
 }

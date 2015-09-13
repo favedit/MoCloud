@@ -118,6 +118,12 @@ public class FStatisticsInvestmentCalculater
                dynamicUnit.setMarketerRankLabel(marketerInfo.rankLabel());
             }
             if(customerInfo != null){
+               // 检查用户信息，如果为空的话重新更新一次客户信息
+               String customerLabel = customerInfo.label();
+               if(RString.isEmpty(customerLabel)){
+                  customerInfo = _customerConsole.updateByLinkId(logicContext, customerId);
+               }
+               // 设置用户信息
                dynamicUnit.setCustomerId(customerInfo.ouid());
                dynamicUnit.setCustomerLinkId(customerInfo.linkId());
                dynamicUnit.setCustomerLabel(customerInfo.label());

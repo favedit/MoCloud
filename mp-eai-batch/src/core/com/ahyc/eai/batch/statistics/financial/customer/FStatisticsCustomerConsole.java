@@ -69,4 +69,31 @@ public class FStatisticsCustomerConsole
       logic.doInsert(unit);
       return unit;
    }
+
+   //============================================================
+   // <T>根据编号更新一个客户信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param linkId 关联编号
+   //============================================================
+   @Override
+   public FStatisticsFinancialCustomerUnit updateByLinkId(FLogicContext logicContext,
+                                                          long linkId){
+      // 更新成员信息
+      FStatisticsFinancialMemberUnit memberUnit = _memberConsole.updateByLinkId(logicContext, linkId);
+      if(memberUnit == null){
+         return null;
+      }
+      //............................................................
+      // 更新客户信息
+      FStatisticsFinancialCustomerLogic logic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
+      FStatisticsFinancialCustomerUnit unit = logic.search("LINK_ID=" + linkId);
+      if(unit != null){
+         unit.setLabel(memberUnit.label());
+         unit.setPhone(memberUnit.phone());
+         unit.setCard(memberUnit.card());
+         logic.doUpdate(unit);
+      }
+      return unit;
+   }
 }

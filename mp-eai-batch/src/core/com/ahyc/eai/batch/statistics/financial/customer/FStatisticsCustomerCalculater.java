@@ -103,8 +103,8 @@ public class FStatisticsCustomerCalculater
             amountLogic.doInsert(amountUnit);
          }
          // 插入用户数据
-         TDateTime spanDate = new TDateTime(customerActionDate.get());
-         spanDate.truncate(_recordSpan);
+         TDateTime spanDate = new TDateTime();
+         spanDate.parse(customerActionDate.format("YYYYMMDD"), "YYYYMMDD");
          FStatisticsFinancialCustomerPhaseUnit phaseUnit = phaseLogic.search("CUSTOMER_ID=" + customerId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
          boolean phaseExist = (phaseUnit != null);
          if(!phaseExist){
@@ -125,6 +125,7 @@ public class FStatisticsCustomerCalculater
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());
+         // 设置数据
          phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
             phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);

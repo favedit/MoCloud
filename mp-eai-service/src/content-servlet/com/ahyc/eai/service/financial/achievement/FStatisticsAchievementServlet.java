@@ -52,19 +52,18 @@ public class FStatisticsAchievementServlet
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
-      if(!checkParameters(context, request, response)){
+      if(!checkParameters(context, request, response)) {
          return EResult.Failure;
       }
       //............................................................
       // 获得当前时间
       TDateTime currentDate = RDateTime.currentDateTime();
-      currentDate.parse("20140901231500");
       String dateString = currentDate.format("YYYYMMDDHH24MI00");
       //............................................................
       // 从缓冲中查找数据
       String cacheCode = "dynamic|" + dateString;
       FByteStream cacheStream = findCacheStream(cacheCode);
-      if(cacheStream != null){
+      if(cacheStream != null) {
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
@@ -72,7 +71,7 @@ public class FStatisticsAchievementServlet
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
-      if(connection != null){
+      if(connection != null) {
          FSql sql = _resource.findString(FSql.class, "sql.achievement.day");
          sql.bindString("date", currentDate.format("YYYYMMDD"));
          FDataset dataset = connection.fetchDataset(sql);
@@ -106,7 +105,7 @@ public class FStatisticsAchievementServlet
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当月合计数据
-      if(connection != null){
+      if(connection != null) {
          FSql sql = _resource.findString(FSql.class, "sql.achievement.month");
          sql.bindString("date", currentDate.format("YYYYMM01"));
          FDataset dataset = connection.fetchDataset(sql);
@@ -137,7 +136,7 @@ public class FStatisticsAchievementServlet
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当年合计数据
-      if(connection != null){
+      if(connection != null) {
          FSql sql = _resource.findString(FSql.class, "sql.achievement.year");
          sql.bindString("date", currentDate.format("YYYY0101"));
          FDataset dataset = connection.fetchDataset(sql);
