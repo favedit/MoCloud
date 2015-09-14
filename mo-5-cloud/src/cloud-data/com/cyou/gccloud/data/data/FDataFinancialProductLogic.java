@@ -47,6 +47,18 @@ public class FDataFinancialProductLogic
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段出租人的定义。
+   public final static SLogicFieldInfo RENT_PERSON = new SLogicFieldInfo("RENT_PERSON");
+
+   // 字段承租人的定义。
+   public final static SLogicFieldInfo TENANT_PERSON = new SLogicFieldInfo("TENANT_PERSON");
+
+   // 字段预期年化收益率的定义。
+   public final static SLogicFieldInfo ANNUAL_RATE_OF_RETURN = new SLogicFieldInfo("ANNUAL_RATE_OF_RETURN");
+
+   // 字段投资期限的定义。
+   public final static SLogicFieldInfo TIME_LIMIT = new SLogicFieldInfo("TIME_LIMIT");
+
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
@@ -63,7 +75,7 @@ public class FDataFinancialProductLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NAME`,`LABEL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NAME`,`LABEL`,`RENT_PERSON`,`TENANT_PERSON`,`ANNUAL_RATE_OF_RETURN`,`TIME_LIMIT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融产品信息逻辑单元。</T>
@@ -657,6 +669,10 @@ public class FDataFinancialProductLogic
       cmd.append(",`GUID`");
       cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
+      cmd.append(",`RENT_PERSON`");
+      cmd.append(",`TENANT_PERSON`");
+      cmd.append(",`ANNUAL_RATE_OF_RETURN`");
+      cmd.append(",`TIME_LIMIT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -690,6 +706,28 @@ public class FDataFinancialProductLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
+      cmd.append(',');
+      String rentPerson = unit.rentPerson();
+      if(RString.isEmpty(rentPerson)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(rentPerson));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String tenantPerson = unit.tenantPerson();
+      if(RString.isEmpty(tenantPerson)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenantPerson));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.annualRateOfReturn());
+      cmd.append(',');
+      cmd.append(unit.timeLimit());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -794,6 +832,36 @@ public class FDataFinancialProductLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
+      }
+      if(unit.isRentPersonChanged()){
+         cmd.append(",`RENT_PERSON`=");
+         String rentPerson = unit.rentPerson();
+         if(RString.isEmpty(rentPerson)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(rentPerson));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isTenantPersonChanged()){
+         cmd.append(",`TENANT_PERSON`=");
+         String tenantPerson = unit.tenantPerson();
+         if(RString.isEmpty(tenantPerson)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenantPerson));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isAnnualRateOfReturnChanged()){
+         cmd.append(",`ANNUAL_RATE_OF_RETURN`=");
+         cmd.append(unit.annualRateOfReturn());
+      }
+      if(unit.isTimeLimitChanged()){
+         cmd.append(",`TIME_LIMIT`=");
+         cmd.append(unit.timeLimit());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

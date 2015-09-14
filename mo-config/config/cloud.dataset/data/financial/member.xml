@@ -8,16 +8,7 @@
   <FieldString _uuid="3187c309-b4ca-4db4-adbb-00f9d7b2ad93" name="card" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
   <FieldString _uuid="09777361-02f2-4b97-aa79-1789dd66cc07" name="email" label="M#12cn14电子邮箱" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EMAIL" data_size="80" />
   <FieldInteger _uuid="8d0a85b6-1d59-46e8-87a1-2654ee573aed" name="gender_cd" label="M#12cn12性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GENDER_CD" />
-  <FieldDateTime _uuid="f2b6bb3f-9f84-4c65-bca3-2cbb166003d6" name="birthday" label="M#12cn12生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BIRTHDAY" />
-  <FieldDouble _uuid="d5b21c63-6905-44ff-9c34-ffdbf201c19c" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
-  <FieldInteger _uuid="866c38ba-876c-47e4-a885-7cd1ddd327d7" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
-  <FieldDateTime _uuid="e598ebd6-599d-42dd-bf6a-fcc39f0a0841" name="investment_date" label="M#12cn14投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_DATE" />
-  <FieldDouble _uuid="43e4d9d4-30ce-4863-8fac-c9684af3974b" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
-  <FieldInteger _uuid="6facc9ea-c7b7-413d-960f-4abfa079d971" name="redemption_count" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_COUNT" />
-  <FieldDateTime _uuid="895143b0-abf2-474d-8c73-c77204b183be" name="redemption_date" label="M#12cn14赎回时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_DATE" />
-  <FieldDouble _uuid="6dd207cc-885c-44be-9141-c1a891757f9f" name="netinvestment_total" label="M#12cn14净投总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
-  <FieldDouble _uuid="93ae9c4a-c714-4726-9c07-55eebbe75ff6" name="interest_total" label="M#12cn14利息总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
-  <FieldDouble _uuid="e2ac235c-ca6a-4455-bbb8-a8c86a6fd2bb" name="performance_total" label="M#12cn14业绩总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldDateTime _uuid="f2b6bb3f-9f84-4c65-bca3-2cbb166003d6" name="birthday" label="M#12cn12生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BIRTHDAY" /> 
   <FieldInteger _uuid="49747a63-aca4-45f7-b891-dc4d37c07b54" name="score_recommend" label="M#12cn14推荐评分" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_RECOMMEND" />
   <FieldInteger _uuid="1ec2d2ad-9adb-494d-9ecb-4bc73aa9e240" name="score_point" label="M#12cn14累计点数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_POINT" />
   <FieldDateTime _uuid="4e2ce15e-2012-4a7d-81fe-a1d9627593af" name="register_date" label="M#12cn14注册时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_DATE" />

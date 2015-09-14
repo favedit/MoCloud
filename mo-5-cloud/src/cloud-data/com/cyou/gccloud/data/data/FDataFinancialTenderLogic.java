@@ -10,6 +10,7 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -41,17 +42,29 @@ public class FDataFinancialTenderLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段名称的定义。
-   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
+   // 字段客户编号的定义。
+   public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
 
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+   // 字段产品编号的定义。
+   public final static SLogicFieldInfo PRODUCT_ID = new SLogicFieldInfo("PRODUCT_ID");
 
-   // 字段比率的定义。
-   public final static SLogicFieldInfo RATE = new SLogicFieldInfo("RATE");
+   // 字段投资额的定义。
+   public final static SLogicFieldInfo INVESTMENT = new SLogicFieldInfo("INVESTMENT");
 
-   // 字段绩效因子的定义。
-   public final static SLogicFieldInfo FACTOR = new SLogicFieldInfo("FACTOR");
+   // 字段投资时间的定义。
+   public final static SLogicFieldInfo INVESTMENT_DATE = new SLogicFieldInfo("INVESTMENT_DATE");
+
+   // 字段赎回额的定义。
+   public final static SLogicFieldInfo REDEMPTION = new SLogicFieldInfo("REDEMPTION");
+
+   // 字段赎回时间的定义。
+   public final static SLogicFieldInfo REDEMPTION_DATE = new SLogicFieldInfo("REDEMPTION_DATE");
+
+   // 字段净投额的定义。
+   public final static SLogicFieldInfo NETINVESTMENT = new SLogicFieldInfo("NETINVESTMENT");
+
+   // 字段利息额的定义。
+   public final static SLogicFieldInfo INTEREST = new SLogicFieldInfo("INTEREST");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -69,7 +82,7 @@ public class FDataFinancialTenderLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NAME`,`LABEL`,`RATE`,`FACTOR`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`PRODUCT_ID`,`INVESTMENT`,`INVESTMENT_DATE`,`REDEMPTION`,`REDEMPTION_DATE`,`NETINVESTMENT`,`INTEREST`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融投标信息逻辑单元。</T>
@@ -661,10 +674,14 @@ public class FDataFinancialTenderLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`NAME`");
-      cmd.append(",`LABEL`");
-      cmd.append(",`RATE`");
-      cmd.append(",`FACTOR`");
+      cmd.append(",`CUSTOMER_ID`");
+      cmd.append(",`PRODUCT_ID`");
+      cmd.append(",`INVESTMENT`");
+      cmd.append(",`INVESTMENT_DATE`");
+      cmd.append(",`REDEMPTION`");
+      cmd.append(",`REDEMPTION_DATE`");
+      cmd.append(",`NETINVESTMENT`");
+      cmd.append(",`INTEREST`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -681,27 +698,39 @@ public class FDataFinancialTenderLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String name = unit.name();
-      if(RString.isEmpty(name)){
+      cmd.append(unit.customerId());
+      cmd.append(',');
+      cmd.append(unit.productId());
+      cmd.append(',');
+      cmd.append(unit.investment());
+      cmd.append(',');
+      TDateTime investmentDate = unit.investmentDate();
+      if(investmentDate == null){
+         cmd.append("NULL");
+      }else if(investmentDate.isEmpty()){
          cmd.append("NULL");
       }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(name));
-         cmd.append('\'');
+         cmd.append("STR_TO_DATE('");
+         cmd.append(investmentDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
+      cmd.append(unit.redemption());
+      cmd.append(',');
+      TDateTime redemptionDate = unit.redemptionDate();
+      if(redemptionDate == null){
+         cmd.append("NULL");
+      }else if(redemptionDate.isEmpty()){
          cmd.append("NULL");
       }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      cmd.append(unit.rate());
+      cmd.append(unit.netinvestment());
       cmd.append(',');
-      cmd.append(unit.factor());
+      cmd.append(unit.interest());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -785,35 +814,55 @@ public class FDataFinancialTenderLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isNameChanged()){
-         cmd.append(",`NAME`=");
-         String name = unit.name();
-         if(RString.isEmpty(name)){
+      if(unit.isCustomerIdChanged()){
+         cmd.append(",`CUSTOMER_ID`=");
+         cmd.append(unit.customerId());
+      }
+      if(unit.isProductIdChanged()){
+         cmd.append(",`PRODUCT_ID`=");
+         cmd.append(unit.productId());
+      }
+      if(unit.isInvestmentChanged()){
+         cmd.append(",`INVESTMENT`=");
+         cmd.append(unit.investment());
+      }
+      if(unit.isInvestmentDateChanged()){
+         cmd.append(",`INVESTMENT_DATE`=");
+         TDateTime investmentDate = unit.investmentDate();
+         if(investmentDate == null){
+            cmd.append("NULL");
+         }else if(investmentDate.isEmpty()){
             cmd.append("NULL");
          }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(name));
-            cmd.append('\'');
+            cmd.append("STR_TO_DATE('");
+            cmd.append(investmentDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
+      if(unit.isRedemptionChanged()){
+         cmd.append(",`REDEMPTION`=");
+         cmd.append(unit.redemption());
+      }
+      if(unit.isRedemptionDateChanged()){
+         cmd.append(",`REDEMPTION_DATE`=");
+         TDateTime redemptionDate = unit.redemptionDate();
+         if(redemptionDate == null){
+            cmd.append("NULL");
+         }else if(redemptionDate.isEmpty()){
             cmd.append("NULL");
          }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isRateChanged()){
-         cmd.append(",`RATE`=");
-         cmd.append(unit.rate());
+      if(unit.isNetinvestmentChanged()){
+         cmd.append(",`NETINVESTMENT`=");
+         cmd.append(unit.netinvestment());
       }
-      if(unit.isFactorChanged()){
-         cmd.append(",`FACTOR`=");
-         cmd.append(unit.factor());
+      if(unit.isInterestChanged()){
+         cmd.append(",`INTEREST`=");
+         cmd.append(unit.interest());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

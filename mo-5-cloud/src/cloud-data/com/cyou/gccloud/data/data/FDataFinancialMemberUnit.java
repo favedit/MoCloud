@@ -6,7 +6,6 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -92,60 +91,6 @@ public class FDataFinancialMemberUnit
 
    // 字段生日的定义。
    protected TDateTime _birthday = new TDateTime();
-
-   // 存储字段投资总额的定义。
-   private double __investmentTotal;
-
-   // 字段投资总额的定义。
-   protected double _investmentTotal;
-
-   // 存储字段投资次数的定义。
-   private int __investmentCount;
-
-   // 字段投资次数的定义。
-   protected int _investmentCount;
-
-   // 存储字段投资时间的定义。
-   private TDateTime __investmentDate = new TDateTime();
-
-   // 字段投资时间的定义。
-   protected TDateTime _investmentDate = new TDateTime();
-
-   // 存储字段赎回总额的定义。
-   private double __redemptionTotal;
-
-   // 字段赎回总额的定义。
-   protected double _redemptionTotal;
-
-   // 存储字段赎回次数的定义。
-   private int __redemptionCount;
-
-   // 字段赎回次数的定义。
-   protected int _redemptionCount;
-
-   // 存储字段赎回时间的定义。
-   private TDateTime __redemptionDate = new TDateTime();
-
-   // 字段赎回时间的定义。
-   protected TDateTime _redemptionDate = new TDateTime();
-
-   // 存储字段净投总额的定义。
-   private double __netinvestmentTotal;
-
-   // 字段净投总额的定义。
-   protected double _netinvestmentTotal;
-
-   // 存储字段利息总额的定义。
-   private double __interestTotal;
-
-   // 字段利息总额的定义。
-   protected double _interestTotal;
-
-   // 存储字段业绩总额的定义。
-   private double __performanceTotal;
-
-   // 字段业绩总额的定义。
-   protected double _performanceTotal;
 
    // 存储字段推荐评分的定义。
    private int __scoreRecommend;
@@ -532,249 +477,6 @@ public class FDataFinancialMemberUnit
    }
 
    //============================================================
-   // <T>判断投资总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInvestmentTotalChanged(){
-      return __investmentTotal != _investmentTotal;
-   }
-
-   //============================================================
-   // <T>获得投资总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double investmentTotal(){
-      return _investmentTotal;
-   }
-
-   //============================================================
-   // <T>设置投资总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInvestmentTotal(double value){
-      _investmentTotal = value;
-   }
-
-   //============================================================
-   // <T>判断投资次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInvestmentCountChanged(){
-      return __investmentCount != _investmentCount;
-   }
-
-   //============================================================
-   // <T>获得投资次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int investmentCount(){
-      return _investmentCount;
-   }
-
-   //============================================================
-   // <T>设置投资次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInvestmentCount(int value){
-      _investmentCount = value;
-   }
-
-   //============================================================
-   // <T>判断投资时间的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInvestmentDateChanged(){
-      return !__investmentDate.equals(_investmentDate);
-   }
-
-   //============================================================
-   // <T>获得投资时间的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public TDateTime investmentDate(){
-      return _investmentDate;
-   }
-
-   //============================================================
-   // <T>设置投资时间的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInvestmentDate(TDateTime value){
-      _investmentDate = value;
-   }
-
-   //============================================================
-   // <T>判断赎回总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRedemptionTotalChanged(){
-      return __redemptionTotal != _redemptionTotal;
-   }
-
-   //============================================================
-   // <T>获得赎回总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double redemptionTotal(){
-      return _redemptionTotal;
-   }
-
-   //============================================================
-   // <T>设置赎回总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRedemptionTotal(double value){
-      _redemptionTotal = value;
-   }
-
-   //============================================================
-   // <T>判断赎回次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRedemptionCountChanged(){
-      return __redemptionCount != _redemptionCount;
-   }
-
-   //============================================================
-   // <T>获得赎回次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int redemptionCount(){
-      return _redemptionCount;
-   }
-
-   //============================================================
-   // <T>设置赎回次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRedemptionCount(int value){
-      _redemptionCount = value;
-   }
-
-   //============================================================
-   // <T>判断赎回时间的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRedemptionDateChanged(){
-      return !__redemptionDate.equals(_redemptionDate);
-   }
-
-   //============================================================
-   // <T>获得赎回时间的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public TDateTime redemptionDate(){
-      return _redemptionDate;
-   }
-
-   //============================================================
-   // <T>设置赎回时间的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRedemptionDate(TDateTime value){
-      _redemptionDate = value;
-   }
-
-   //============================================================
-   // <T>判断净投总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isNetinvestmentTotalChanged(){
-      return __netinvestmentTotal != _netinvestmentTotal;
-   }
-
-   //============================================================
-   // <T>获得净投总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double netinvestmentTotal(){
-      return _netinvestmentTotal;
-   }
-
-   //============================================================
-   // <T>设置净投总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setNetinvestmentTotal(double value){
-      _netinvestmentTotal = value;
-   }
-
-   //============================================================
-   // <T>判断利息总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInterestTotalChanged(){
-      return __interestTotal != _interestTotal;
-   }
-
-   //============================================================
-   // <T>获得利息总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double interestTotal(){
-      return _interestTotal;
-   }
-
-   //============================================================
-   // <T>设置利息总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInterestTotal(double value){
-      _interestTotal = value;
-   }
-
-   //============================================================
-   // <T>判断业绩总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPerformanceTotalChanged(){
-      return __performanceTotal != _performanceTotal;
-   }
-
-   //============================================================
-   // <T>获得业绩总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double performanceTotal(){
-      return _performanceTotal;
-   }
-
-   //============================================================
-   // <T>设置业绩总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPerformanceTotal(double value){
-      _performanceTotal = value;
-   }
-
-   //============================================================
    // <T>判断推荐评分的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1050,24 +752,6 @@ public class FDataFinancialMemberUnit
             return RInteger.toString(_genderCd);
          case "birthday":
             return _birthday.toString();
-         case "investment_total":
-            return RDouble.toString(_investmentTotal);
-         case "investment_count":
-            return RInteger.toString(_investmentCount);
-         case "investment_date":
-            return _investmentDate.toString();
-         case "redemption_total":
-            return RDouble.toString(_redemptionTotal);
-         case "redemption_count":
-            return RInteger.toString(_redemptionCount);
-         case "redemption_date":
-            return _redemptionDate.toString();
-         case "netinvestment_total":
-            return RDouble.toString(_netinvestmentTotal);
-         case "interest_total":
-            return RDouble.toString(_interestTotal);
-         case "performance_total":
-            return RDouble.toString(_performanceTotal);
          case "score_recommend":
             return RInteger.toString(_scoreRecommend);
          case "score_point":
@@ -1135,33 +819,6 @@ public class FDataFinancialMemberUnit
             break;
          case "birthday":
             _birthday.parse(value);
-            break;
-         case "investment_total":
-            _investmentTotal = RDouble.parse(value);
-            break;
-         case "investment_count":
-            _investmentCount = RInteger.parse(value);
-            break;
-         case "investment_date":
-            _investmentDate.parse(value);
-            break;
-         case "redemption_total":
-            _redemptionTotal = RDouble.parse(value);
-            break;
-         case "redemption_count":
-            _redemptionCount = RInteger.parse(value);
-            break;
-         case "redemption_date":
-            _redemptionDate.parse(value);
-            break;
-         case "netinvestment_total":
-            _netinvestmentTotal = RDouble.parse(value);
-            break;
-         case "interest_total":
-            _interestTotal = RDouble.parse(value);
-            break;
-         case "performance_total":
-            _performanceTotal = RDouble.parse(value);
             break;
          case "score_recommend":
             _scoreRecommend = RInteger.parse(value);
@@ -1253,42 +910,6 @@ public class FDataFinancialMemberUnit
                __birthday.parse(value);
                _birthday.assign(__birthday);
                break;
-            case "investment_total":
-               __investmentTotal = RDouble.parse(value);
-               _investmentTotal = __investmentTotal;
-               break;
-            case "investment_count":
-               __investmentCount = RInteger.parse(value);
-               _investmentCount = __investmentCount;
-               break;
-            case "investment_date":
-               __investmentDate.parse(value);
-               _investmentDate.assign(__investmentDate);
-               break;
-            case "redemption_total":
-               __redemptionTotal = RDouble.parse(value);
-               _redemptionTotal = __redemptionTotal;
-               break;
-            case "redemption_count":
-               __redemptionCount = RInteger.parse(value);
-               _redemptionCount = __redemptionCount;
-               break;
-            case "redemption_date":
-               __redemptionDate.parse(value);
-               _redemptionDate.assign(__redemptionDate);
-               break;
-            case "netinvestment_total":
-               __netinvestmentTotal = RDouble.parse(value);
-               _netinvestmentTotal = __netinvestmentTotal;
-               break;
-            case "interest_total":
-               __interestTotal = RDouble.parse(value);
-               _interestTotal = __interestTotal;
-               break;
-            case "performance_total":
-               __performanceTotal = RDouble.parse(value);
-               _performanceTotal = __performanceTotal;
-               break;
             case "score_recommend":
                __scoreRecommend = RInteger.parse(value);
                _scoreRecommend = __scoreRecommend;
@@ -1349,15 +970,6 @@ public class FDataFinancialMemberUnit
       row.set("email", _email);
       row.set("genderCd", _genderCd);
       row.set("birthday", _birthday);
-      row.set("investmentTotal", _investmentTotal);
-      row.set("investmentCount", _investmentCount);
-      row.set("investmentDate", _investmentDate);
-      row.set("redemptionTotal", _redemptionTotal);
-      row.set("redemptionCount", _redemptionCount);
-      row.set("redemptionDate", _redemptionDate);
-      row.set("netinvestmentTotal", _netinvestmentTotal);
-      row.set("interestTotal", _interestTotal);
-      row.set("performanceTotal", _performanceTotal);
       row.set("scoreRecommend", _scoreRecommend);
       row.set("scorePoint", _scorePoint);
       row.set("registerDate", _registerDate);
@@ -1389,15 +1001,6 @@ public class FDataFinancialMemberUnit
       map.put("email", _email);
       map.put("genderCd", RInteger.toString(_genderCd));
       map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("investmentTotal", RDouble.toString(_investmentTotal));
-      map.put("investmentCount", RInteger.toString(_investmentCount));
-      map.put("investmentDate", _investmentDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
-      map.put("redemptionCount", RInteger.toString(_redemptionCount));
-      map.put("redemptionDate", _redemptionDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
-      map.put("interestTotal", RDouble.toString(_interestTotal));
-      map.put("performanceTotal", RDouble.toString(_performanceTotal));
       map.put("scoreRecommend", RInteger.toString(_scoreRecommend));
       map.put("scorePoint", RInteger.toString(_scorePoint));
       map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1429,10 +1032,6 @@ public class FDataFinancialMemberUnit
       _email = input.readString();
       _genderCd = input.readInt32();
       _birthday.set(input.readInt64());
-      _investmentCount = input.readInt32();
-      _investmentDate.set(input.readInt64());
-      _redemptionCount = input.readInt32();
-      _redemptionDate.set(input.readInt64());
       _scoreRecommend = input.readInt32();
       _scorePoint = input.readInt32();
       _registerDate.set(input.readInt64());
@@ -1464,10 +1063,6 @@ public class FDataFinancialMemberUnit
       output.writeString(_email);
       output.writeInt32(_genderCd);
       output.writeInt64(_birthday.get());
-      output.writeInt32(_investmentCount);
-      output.writeInt64(_investmentDate.get());
-      output.writeInt32(_redemptionCount);
-      output.writeInt64(_redemptionDate.get());
       output.writeInt32(_scoreRecommend);
       output.writeInt32(_scorePoint);
       output.writeInt64(_registerDate.get());

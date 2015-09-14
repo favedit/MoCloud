@@ -51,17 +51,23 @@ public class FDataFinancialMarketerUnit
    // 字段关联编号的定义。
    protected long _linkId;
 
-   // 存储字段登录名的定义。
-   private String __passport;
+   // 存储字段名称的定义。
+   private String __name;
 
-   // 字段登录名的定义。
-   protected String _passport;
+   // 字段名称的定义。
+   protected String _name;
 
    // 存储字段名称的定义。
    private String __label;
 
    // 字段名称的定义。
    protected String _label;
+
+   // 存储字段登录名的定义。
+   private int __passport;
+
+   // 字段登录名的定义。
+   protected int _passport;
 
    // 存储字段状态的定义。
    private int __statusCd;
@@ -158,6 +164,12 @@ public class FDataFinancialMarketerUnit
 
    // 字段业绩总额的定义。
    protected double _customerPerformanceTotal;
+
+   // 存储字段备注的定义。
+   private String __note;
+
+   // 字段备注的定义。
+   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -325,30 +337,30 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
-   // <T>判断登录名的数据是否改变。</T>
+   // <T>判断名称的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isPassportChanged(){
-      return !RString.equals(__passport, _passport);
+   public boolean isNameChanged(){
+      return !RString.equals(__name, _name);
    }
 
    //============================================================
-   // <T>获得登录名的数据内容。</T>
+   // <T>获得名称的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String passport(){
-      return _passport;
+   public String name(){
+      return _name;
    }
 
    //============================================================
-   // <T>设置登录名的数据内容。</T>
+   // <T>设置名称的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setPassport(String value){
-      _passport = value;
+   public void setName(String value){
+      _name = value;
    }
 
    //============================================================
@@ -376,6 +388,33 @@ public class FDataFinancialMarketerUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断登录名的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPassportChanged(){
+      return __passport != _passport;
+   }
+
+   //============================================================
+   // <T>获得登录名的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int passport(){
+      return _passport;
+   }
+
+   //============================================================
+   // <T>设置登录名的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPassport(int value){
+      _passport = value;
    }
 
    //============================================================
@@ -811,6 +850,33 @@ public class FDataFinancialMarketerUnit
    }
 
    //============================================================
+   // <T>判断备注的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNoteChanged(){
+      return !RString.equals(__note, _note);
+   }
+
+   //============================================================
+   // <T>获得备注的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String note(){
+      return _note;
+   }
+
+   //============================================================
+   // <T>设置备注的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNote(String value){
+      _note = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -937,10 +1003,12 @@ public class FDataFinancialMarketerUnit
             return Long.toString(_userId);
          case "link_id":
             return Long.toString(_linkId);
-         case "passport":
-            return _passport;
+         case "name":
+            return _name;
          case "label":
             return _label;
+         case "passport":
+            return RInteger.toString(_passport);
          case "status_cd":
             return RInteger.toString(_statusCd);
          case "phone":
@@ -973,6 +1041,8 @@ public class FDataFinancialMarketerUnit
             return RDouble.toString(_customerInterestTotal);
          case "customer_performance_total":
             return RDouble.toString(_customerPerformanceTotal);
+         case "note":
+            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -1010,11 +1080,14 @@ public class FDataFinancialMarketerUnit
          case "link_id":
             _linkId = RLong.parse(value);
             break;
-         case "passport":
-            _passport = value;
+         case "name":
+            _name = value;
             break;
          case "label":
             _label = value;
+            break;
+         case "passport":
+            _passport = RInteger.parse(value);
             break;
          case "status_cd":
             _statusCd = RInteger.parse(value);
@@ -1064,6 +1137,9 @@ public class FDataFinancialMarketerUnit
          case "customer_performance_total":
             _customerPerformanceTotal = RDouble.parse(value);
             break;
+         case "note":
+            _note = value;
+            break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
             break;
@@ -1111,13 +1187,17 @@ public class FDataFinancialMarketerUnit
                __linkId = RLong.parse(value);
                _linkId = __linkId;
                break;
-            case "passport":
-               __passport = value;
-               _passport = __passport;
+            case "name":
+               __name = value;
+               _name = __name;
                break;
             case "label":
                __label = value;
                _label = __label;
+               break;
+            case "passport":
+               __passport = RInteger.parse(value);
+               _passport = __passport;
                break;
             case "status_cd":
                __statusCd = RInteger.parse(value);
@@ -1183,6 +1263,10 @@ public class FDataFinancialMarketerUnit
                __customerPerformanceTotal = RDouble.parse(value);
                _customerPerformanceTotal = __customerPerformanceTotal;
                break;
+            case "note":
+               __note = value;
+               _note = __note;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -1216,8 +1300,9 @@ public class FDataFinancialMarketerUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("linkId", _linkId);
-      row.set("passport", _passport);
+      row.set("name", _name);
       row.set("label", _label);
+      row.set("passport", _passport);
       row.set("statusCd", _statusCd);
       row.set("phone", _phone);
       row.set("card", _card);
@@ -1234,6 +1319,7 @@ public class FDataFinancialMarketerUnit
       row.set("customerNetinvestmentTotal", _customerNetinvestmentTotal);
       row.set("customerInterestTotal", _customerInterestTotal);
       row.set("customerPerformanceTotal", _customerPerformanceTotal);
+      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1253,8 +1339,9 @@ public class FDataFinancialMarketerUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("linkId", RLong.toString(_linkId));
-      map.put("passport", _passport);
+      map.put("name", _name);
       map.put("label", _label);
+      map.put("passport", RInteger.toString(_passport));
       map.put("statusCd", RInteger.toString(_statusCd));
       map.put("phone", _phone);
       map.put("card", _card);
@@ -1271,6 +1358,7 @@ public class FDataFinancialMarketerUnit
       map.put("customerNetinvestmentTotal", RDouble.toString(_customerNetinvestmentTotal));
       map.put("customerInterestTotal", RDouble.toString(_customerInterestTotal));
       map.put("customerPerformanceTotal", RDouble.toString(_customerPerformanceTotal));
+      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -1290,8 +1378,9 @@ public class FDataFinancialMarketerUnit
       _guid = input.readString();
       _userId = input.readInt64();
       _linkId = input.readInt64();
-      _passport = input.readString();
+      _name = input.readString();
       _label = input.readString();
+      _passport = input.readInt32();
       _statusCd = input.readInt32();
       _phone = input.readString();
       _card = input.readString();
@@ -1303,6 +1392,7 @@ public class FDataFinancialMarketerUnit
       _customerInvestmentDate.set(input.readInt64());
       _customerRedemptionCount = input.readInt32();
       _customerRedemptionDate.set(input.readInt64());
+      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -1322,8 +1412,9 @@ public class FDataFinancialMarketerUnit
       output.writeString(_guid);
       output.writeInt64(_userId);
       output.writeInt64(_linkId);
-      output.writeString(_passport);
+      output.writeString(_name);
       output.writeString(_label);
+      output.writeInt32(_passport);
       output.writeInt32(_statusCd);
       output.writeString(_phone);
       output.writeString(_card);
@@ -1335,6 +1426,7 @@ public class FDataFinancialMarketerUnit
       output.writeInt64(_customerInvestmentDate.get());
       output.writeInt32(_customerRedemptionCount);
       output.writeInt64(_customerRedemptionDate.get());
+      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

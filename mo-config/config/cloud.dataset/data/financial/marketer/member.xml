@@ -4,11 +4,10 @@
   <FieldRecordId _uuid="7f64d019-c87c-4cba-a50d-7ea94bf2f690" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_alias="CUS" data_refer="data.financial.customer" />
   <FieldInteger _uuid="4c72a41f-8ed1-40b0-84ff-c1a4c8665787" name="relation_cd" label="M#12cn14关系类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RELATION_CD" />
   <FieldInteger _uuid="a19bfa8d-200d-4731-8c8c-5a73d1803540" name="sms_contact_cd" label="M#12cn16短信联系类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SMS_CONTACT_CD" />
-  <FieldString _uuid="016f286e-2758-4cf3-a45a-9b32476546e6" name="card_code" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_CODE" data_size="20" />
-  <FieldString _uuid="8ce1e0fb-67e2-40a7-9310-533ef765915a" name="department_labels" label="M#12cn16部门标签集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABELS" data_size="200" />
   <FieldDateTime _uuid="85641256-ddfb-4214-bcfa-87424a5ce6aa" name="recommend_begin_date" label="M#12cn16推荐开始时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECOMMEND_BEGIN_DATE" />
   <FieldDateTime _uuid="1d44b738-eb49-4347-b641-c4154aa6dbad" name="recommend_end_date" label="M#12cn16推荐结束时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECOMMEND_END_DATE" />
   <FieldInteger _uuid="e6cd8f2e-4fd1-46cb-a015-19ccb4f28d26" name="feedback_cd" label="M#12cn14反馈类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FEEDBACK_CD" />
   <FieldString _uuid="af80bbee-645a-472a-a165-d996f19619c0" name="feedback_note" label="M#12cn14反馈内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FEEDBACK_NOTE" data_size="2000" />
+  <FieldString _uuid="470cd3dc-578b-47b6-b99e-2d80d172b00c" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
   <FieldTemplate _uuid="80b3d428-11f5-4645-9fef-f55ecc23b66b" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

@@ -6,6 +6,9 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
+import org.mo.com.lang.RFloat;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -37,41 +40,77 @@ public class FDataFinancialCustomerUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段登录名的定义。
-   private String __passport;
+   // 存储字段成员编号的定义。
+   private long __memberId;
 
-   // 字段登录名的定义。
-   protected String _passport;
+   // 字段成员编号的定义。
+   protected long _memberId;
 
-   // 存储字段名称的定义。
-   private String __label;
+   // 存储字段婚姻状态的定义。
+   private int __marriageStatus;
 
-   // 字段名称的定义。
-   protected String _label;
+   // 字段婚姻状态的定义。
+   protected int _marriageStatus;
 
-   // 存储字段职务的定义。
-   private String __rank;
+   // 存储字段最高学历的定义。
+   private int __highestEducation;
 
-   // 字段职务的定义。
-   protected String _rank;
+   // 字段最高学历的定义。
+   protected int _highestEducation;
 
-   // 存储字段电话号码的定义。
-   private String __phoneCode;
+   // 存储字段月收入的定义。
+   private int __monthlyIncome;
 
-   // 字段电话号码的定义。
-   protected String _phoneCode;
+   // 字段月收入的定义。
+   protected int _monthlyIncome;
 
-   // 存储字段身份证号的定义。
-   private String __cardCode;
+   // 存储字段职业的定义。
+   private int __profession;
 
-   // 字段身份证号的定义。
-   protected String _cardCode;
+   // 字段职业的定义。
+   protected int _profession;
 
-   // 存储字段部门标签集合的定义。
-   private String __departmentLabels;
+   // 存储字段投资总额的定义。
+   private double __investmentTotal;
 
-   // 字段部门标签集合的定义。
-   protected String _departmentLabels;
+   // 字段投资总额的定义。
+   protected double _investmentTotal;
+
+   // 存储字段投资次数的定义。
+   private int __investmentCount;
+
+   // 字段投资次数的定义。
+   protected int _investmentCount;
+
+   // 存储字段赎回总额的定义。
+   private float __redemptionTotal;
+
+   // 字段赎回总额的定义。
+   protected float _redemptionTotal;
+
+   // 存储字段赎回次数的定义。
+   private int __redemptionCount;
+
+   // 字段赎回次数的定义。
+   protected int _redemptionCount;
+
+   // 存储字段净投总额的定义。
+   private float __netinvestment;
+
+   // 字段净投总额的定义。
+   protected float _netinvestment;
+
+   // 存储字段利息总额的定义。
+   private float __interestTotal;
+
+   // 字段利息总额的定义。
+   protected float _interestTotal;
+
+   // 存储字段备注的定义。
+   private String __note;
+
+   // 字段备注的定义。
+   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -185,165 +224,338 @@ public class FDataFinancialCustomerUnit
    }
 
    //============================================================
-   // <T>判断登录名的数据是否改变。</T>
+   // <T>判断成员编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isPassportChanged(){
-      return !RString.equals(__passport, _passport);
+   public boolean isMemberIdChanged(){
+      return __memberId != _memberId;
    }
 
    //============================================================
-   // <T>获得登录名的数据内容。</T>
+   // <T>获得成员编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String passport(){
-      return _passport;
+   public long memberId(){
+      return _memberId;
    }
 
    //============================================================
-   // <T>设置登录名的数据内容。</T>
+   // <T>获得成员编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataFinancialMemberUnit member(){
+      FDataFinancialMemberLogic logic = _logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FDataFinancialMemberUnit unit = logic.find(_memberId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置成员编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setPassport(String value){
-      _passport = value;
+   public void setMemberId(long value){
+      _memberId = value;
    }
 
    //============================================================
-   // <T>判断名称的数据是否改变。</T>
+   // <T>判断婚姻状态的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
+   public boolean isMarriageStatusChanged(){
+      return __marriageStatus != _marriageStatus;
    }
 
    //============================================================
-   // <T>获得名称的数据内容。</T>
+   // <T>获得婚姻状态的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String label(){
-      return _label;
+   public int marriageStatus(){
+      return _marriageStatus;
    }
 
    //============================================================
-   // <T>设置名称的数据内容。</T>
+   // <T>设置婚姻状态的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLabel(String value){
-      _label = value;
+   public void setMarriageStatus(int value){
+      _marriageStatus = value;
    }
 
    //============================================================
-   // <T>判断职务的数据是否改变。</T>
+   // <T>判断最高学历的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRankChanged(){
-      return !RString.equals(__rank, _rank);
+   public boolean isHighestEducationChanged(){
+      return __highestEducation != _highestEducation;
    }
 
    //============================================================
-   // <T>获得职务的数据内容。</T>
+   // <T>获得最高学历的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String rank(){
-      return _rank;
+   public int highestEducation(){
+      return _highestEducation;
    }
 
    //============================================================
-   // <T>设置职务的数据内容。</T>
+   // <T>设置最高学历的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setRank(String value){
-      _rank = value;
+   public void setHighestEducation(int value){
+      _highestEducation = value;
    }
 
    //============================================================
-   // <T>判断电话号码的数据是否改变。</T>
+   // <T>判断月收入的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isPhoneCodeChanged(){
-      return !RString.equals(__phoneCode, _phoneCode);
+   public boolean isMonthlyIncomeChanged(){
+      return __monthlyIncome != _monthlyIncome;
    }
 
    //============================================================
-   // <T>获得电话号码的数据内容。</T>
+   // <T>获得月收入的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String phoneCode(){
-      return _phoneCode;
+   public int monthlyIncome(){
+      return _monthlyIncome;
    }
 
    //============================================================
-   // <T>设置电话号码的数据内容。</T>
+   // <T>设置月收入的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setPhoneCode(String value){
-      _phoneCode = value;
+   public void setMonthlyIncome(int value){
+      _monthlyIncome = value;
    }
 
    //============================================================
-   // <T>判断身份证号的数据是否改变。</T>
+   // <T>判断职业的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCardCodeChanged(){
-      return !RString.equals(__cardCode, _cardCode);
+   public boolean isProfessionChanged(){
+      return __profession != _profession;
    }
 
    //============================================================
-   // <T>获得身份证号的数据内容。</T>
+   // <T>获得职业的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String cardCode(){
-      return _cardCode;
+   public int profession(){
+      return _profession;
    }
 
    //============================================================
-   // <T>设置身份证号的数据内容。</T>
+   // <T>设置职业的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCardCode(String value){
-      _cardCode = value;
+   public void setProfession(int value){
+      _profession = value;
    }
 
    //============================================================
-   // <T>判断部门标签集合的数据是否改变。</T>
+   // <T>判断投资总额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLabelsChanged(){
-      return !RString.equals(__departmentLabels, _departmentLabels);
+   public boolean isInvestmentTotalChanged(){
+      return __investmentTotal != _investmentTotal;
    }
 
    //============================================================
-   // <T>获得部门标签集合的数据内容。</T>
+   // <T>获得投资总额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String departmentLabels(){
-      return _departmentLabels;
+   public double investmentTotal(){
+      return _investmentTotal;
    }
 
    //============================================================
-   // <T>设置部门标签集合的数据内容。</T>
+   // <T>设置投资总额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLabels(String value){
-      _departmentLabels = value;
+   public void setInvestmentTotal(double value){
+      _investmentTotal = value;
+   }
+
+   //============================================================
+   // <T>判断投资次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentCountChanged(){
+      return __investmentCount != _investmentCount;
+   }
+
+   //============================================================
+   // <T>获得投资次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentCount(){
+      return _investmentCount;
+   }
+
+   //============================================================
+   // <T>设置投资次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentCount(int value){
+      _investmentCount = value;
+   }
+
+   //============================================================
+   // <T>判断赎回总额的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionTotalChanged(){
+      return __redemptionTotal != _redemptionTotal;
+   }
+
+   //============================================================
+   // <T>获得赎回总额的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float redemptionTotal(){
+      return _redemptionTotal;
+   }
+
+   //============================================================
+   // <T>设置赎回总额的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionTotal(float value){
+      _redemptionTotal = value;
+   }
+
+   //============================================================
+   // <T>判断赎回次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionCountChanged(){
+      return __redemptionCount != _redemptionCount;
+   }
+
+   //============================================================
+   // <T>获得赎回次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionCount(){
+      return _redemptionCount;
+   }
+
+   //============================================================
+   // <T>设置赎回次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionCount(int value){
+      _redemptionCount = value;
+   }
+
+   //============================================================
+   // <T>判断净投总额的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNetinvestmentChanged(){
+      return __netinvestment != _netinvestment;
+   }
+
+   //============================================================
+   // <T>获得净投总额的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float netinvestment(){
+      return _netinvestment;
+   }
+
+   //============================================================
+   // <T>设置净投总额的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNetinvestment(float value){
+      _netinvestment = value;
+   }
+
+   //============================================================
+   // <T>判断利息总额的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestTotalChanged(){
+      return __interestTotal != _interestTotal;
+   }
+
+   //============================================================
+   // <T>获得利息总额的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float interestTotal(){
+      return _interestTotal;
+   }
+
+   //============================================================
+   // <T>设置利息总额的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterestTotal(float value){
+      _interestTotal = value;
+   }
+
+   //============================================================
+   // <T>判断备注的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNoteChanged(){
+      return !RString.equals(__note, _note);
+   }
+
+   //============================================================
+   // <T>获得备注的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String note(){
+      return _note;
+   }
+
+   //============================================================
+   // <T>设置备注的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNote(String value){
+      _note = value;
    }
 
    //============================================================
@@ -469,18 +681,30 @@ public class FDataFinancialCustomerUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "passport":
-            return _passport;
-         case "label":
-            return _label;
-         case "rank":
-            return _rank;
-         case "phone_code":
-            return _phoneCode;
-         case "card_code":
-            return _cardCode;
-         case "department_labels":
-            return _departmentLabels;
+         case "member_id":
+            return Long.toString(_memberId);
+         case "marriage_status":
+            return RInteger.toString(_marriageStatus);
+         case "highest_education":
+            return RInteger.toString(_highestEducation);
+         case "monthly_income":
+            return RInteger.toString(_monthlyIncome);
+         case "profession":
+            return RInteger.toString(_profession);
+         case "investment_total":
+            return RDouble.toString(_investmentTotal);
+         case "investment_count":
+            return RInteger.toString(_investmentCount);
+         case "redemption_total":
+            return RFloat.toString(_redemptionTotal);
+         case "redemption_count":
+            return RInteger.toString(_redemptionCount);
+         case "netinvestment":
+            return RFloat.toString(_netinvestment);
+         case "interest_total":
+            return RFloat.toString(_interestTotal);
+         case "note":
+            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -512,23 +736,41 @@ public class FDataFinancialCustomerUnit
          case "guid":
             _guid = value;
             break;
-         case "passport":
-            _passport = value;
+         case "member_id":
+            _memberId = RLong.parse(value);
             break;
-         case "label":
-            _label = value;
+         case "marriage_status":
+            _marriageStatus = RInteger.parse(value);
             break;
-         case "rank":
-            _rank = value;
+         case "highest_education":
+            _highestEducation = RInteger.parse(value);
             break;
-         case "phone_code":
-            _phoneCode = value;
+         case "monthly_income":
+            _monthlyIncome = RInteger.parse(value);
             break;
-         case "card_code":
-            _cardCode = value;
+         case "profession":
+            _profession = RInteger.parse(value);
             break;
-         case "department_labels":
-            _departmentLabels = value;
+         case "investment_total":
+            _investmentTotal = RDouble.parse(value);
+            break;
+         case "investment_count":
+            _investmentCount = RInteger.parse(value);
+            break;
+         case "redemption_total":
+            _redemptionTotal = RFloat.parse(value);
+            break;
+         case "redemption_count":
+            _redemptionCount = RInteger.parse(value);
+            break;
+         case "netinvestment":
+            _netinvestment = RFloat.parse(value);
+            break;
+         case "interest_total":
+            _interestTotal = RFloat.parse(value);
+            break;
+         case "note":
+            _note = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -569,29 +811,53 @@ public class FDataFinancialCustomerUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "passport":
-               __passport = value;
-               _passport = __passport;
+            case "member_id":
+               __memberId = RLong.parse(value);
+               _memberId = __memberId;
                break;
-            case "label":
-               __label = value;
-               _label = __label;
+            case "marriage_status":
+               __marriageStatus = RInteger.parse(value);
+               _marriageStatus = __marriageStatus;
                break;
-            case "rank":
-               __rank = value;
-               _rank = __rank;
+            case "highest_education":
+               __highestEducation = RInteger.parse(value);
+               _highestEducation = __highestEducation;
                break;
-            case "phone_code":
-               __phoneCode = value;
-               _phoneCode = __phoneCode;
+            case "monthly_income":
+               __monthlyIncome = RInteger.parse(value);
+               _monthlyIncome = __monthlyIncome;
                break;
-            case "card_code":
-               __cardCode = value;
-               _cardCode = __cardCode;
+            case "profession":
+               __profession = RInteger.parse(value);
+               _profession = __profession;
                break;
-            case "department_labels":
-               __departmentLabels = value;
-               _departmentLabels = __departmentLabels;
+            case "investment_total":
+               __investmentTotal = RDouble.parse(value);
+               _investmentTotal = __investmentTotal;
+               break;
+            case "investment_count":
+               __investmentCount = RInteger.parse(value);
+               _investmentCount = __investmentCount;
+               break;
+            case "redemption_total":
+               __redemptionTotal = RFloat.parse(value);
+               _redemptionTotal = __redemptionTotal;
+               break;
+            case "redemption_count":
+               __redemptionCount = RInteger.parse(value);
+               _redemptionCount = __redemptionCount;
+               break;
+            case "netinvestment":
+               __netinvestment = RFloat.parse(value);
+               _netinvestment = __netinvestment;
+               break;
+            case "interest_total":
+               __interestTotal = RFloat.parse(value);
+               _interestTotal = __interestTotal;
+               break;
+            case "note":
+               __note = value;
+               _note = __note;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -624,12 +890,18 @@ public class FDataFinancialCustomerUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("passport", _passport);
-      row.set("label", _label);
-      row.set("rank", _rank);
-      row.set("phoneCode", _phoneCode);
-      row.set("cardCode", _cardCode);
-      row.set("departmentLabels", _departmentLabels);
+      row.set("memberId", _memberId);
+      row.set("marriageStatus", _marriageStatus);
+      row.set("highestEducation", _highestEducation);
+      row.set("monthlyIncome", _monthlyIncome);
+      row.set("profession", _profession);
+      row.set("investmentTotal", _investmentTotal);
+      row.set("investmentCount", _investmentCount);
+      row.set("redemptionTotal", _redemptionTotal);
+      row.set("redemptionCount", _redemptionCount);
+      row.set("netinvestment", _netinvestment);
+      row.set("interestTotal", _interestTotal);
+      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -647,12 +919,18 @@ public class FDataFinancialCustomerUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("passport", _passport);
-      map.put("label", _label);
-      map.put("rank", _rank);
-      map.put("phoneCode", _phoneCode);
-      map.put("cardCode", _cardCode);
-      map.put("departmentLabels", _departmentLabels);
+      map.put("memberId", RLong.toString(_memberId));
+      map.put("marriageStatus", RInteger.toString(_marriageStatus));
+      map.put("highestEducation", RInteger.toString(_highestEducation));
+      map.put("monthlyIncome", RInteger.toString(_monthlyIncome));
+      map.put("profession", RInteger.toString(_profession));
+      map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("investmentCount", RInteger.toString(_investmentCount));
+      map.put("redemptionTotal", RFloat.toString(_redemptionTotal));
+      map.put("redemptionCount", RInteger.toString(_redemptionCount));
+      map.put("netinvestment", RFloat.toString(_netinvestment));
+      map.put("interestTotal", RFloat.toString(_interestTotal));
+      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -670,12 +948,14 @@ public class FDataFinancialCustomerUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _passport = input.readString();
-      _label = input.readString();
-      _rank = input.readString();
-      _phoneCode = input.readString();
-      _cardCode = input.readString();
-      _departmentLabels = input.readString();
+      _memberId = input.readInt64();
+      _marriageStatus = input.readInt32();
+      _highestEducation = input.readInt32();
+      _monthlyIncome = input.readInt32();
+      _profession = input.readInt32();
+      _investmentCount = input.readInt32();
+      _redemptionCount = input.readInt32();
+      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -693,12 +973,14 @@ public class FDataFinancialCustomerUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeString(_passport);
-      output.writeString(_label);
-      output.writeString(_rank);
-      output.writeString(_phoneCode);
-      output.writeString(_cardCode);
-      output.writeString(_departmentLabels);
+      output.writeInt64(_memberId);
+      output.writeInt32(_marriageStatus);
+      output.writeInt32(_highestEducation);
+      output.writeInt32(_monthlyIncome);
+      output.writeInt32(_profession);
+      output.writeInt32(_investmentCount);
+      output.writeInt32(_redemptionCount);
+      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

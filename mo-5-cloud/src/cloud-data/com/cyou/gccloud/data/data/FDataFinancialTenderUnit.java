@@ -7,6 +7,7 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RFloat;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -38,29 +39,53 @@ public class FDataFinancialTenderUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段名称的定义。
-   private String __name;
+   // 存储字段客户编号的定义。
+   private int __customerId;
 
-   // 字段名称的定义。
-   protected String _name;
+   // 字段客户编号的定义。
+   protected int _customerId;
 
-   // 存储字段名称的定义。
-   private String __label;
+   // 存储字段产品编号的定义。
+   private int __productId;
 
-   // 字段名称的定义。
-   protected String _label;
+   // 字段产品编号的定义。
+   protected int _productId;
 
-   // 存储字段比率的定义。
-   private float __rate;
+   // 存储字段投资额的定义。
+   private float __investment;
 
-   // 字段比率的定义。
-   protected float _rate;
+   // 字段投资额的定义。
+   protected float _investment;
 
-   // 存储字段绩效因子的定义。
-   private float __factor;
+   // 存储字段投资时间的定义。
+   private TDateTime __investmentDate = new TDateTime();
 
-   // 字段绩效因子的定义。
-   protected float _factor;
+   // 字段投资时间的定义。
+   protected TDateTime _investmentDate = new TDateTime();
+
+   // 存储字段赎回额的定义。
+   private float __redemption;
+
+   // 字段赎回额的定义。
+   protected float _redemption;
+
+   // 存储字段赎回时间的定义。
+   private TDateTime __redemptionDate = new TDateTime();
+
+   // 字段赎回时间的定义。
+   protected TDateTime _redemptionDate = new TDateTime();
+
+   // 存储字段净投额的定义。
+   private float __netinvestment;
+
+   // 字段净投额的定义。
+   protected float _netinvestment;
+
+   // 存储字段利息额的定义。
+   private float __interest;
+
+   // 字段利息额的定义。
+   protected float _interest;
 
    // 存储字段备注的定义。
    private String __note;
@@ -180,111 +205,241 @@ public class FDataFinancialTenderUnit
    }
 
    //============================================================
-   // <T>判断名称的数据是否改变。</T>
+   // <T>判断客户编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isNameChanged(){
-      return !RString.equals(__name, _name);
+   public boolean isCustomerIdChanged(){
+      return __customerId != _customerId;
    }
 
    //============================================================
-   // <T>获得名称的数据内容。</T>
+   // <T>获得客户编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String name(){
-      return _name;
+   public int customerId(){
+      return _customerId;
    }
 
    //============================================================
-   // <T>设置名称的数据内容。</T>
+   // <T>获得客户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataFinancialCustomerUnit customer(){
+      FDataFinancialCustomerLogic logic = _logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FDataFinancialCustomerUnit unit = logic.find(_customerId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置客户编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setName(String value){
-      _name = value;
+   public void setCustomerId(int value){
+      _customerId = value;
    }
 
    //============================================================
-   // <T>判断名称的数据是否改变。</T>
+   // <T>判断产品编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
+   public boolean isProductIdChanged(){
+      return __productId != _productId;
    }
 
    //============================================================
-   // <T>获得名称的数据内容。</T>
+   // <T>获得产品编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String label(){
-      return _label;
+   public int productId(){
+      return _productId;
    }
 
    //============================================================
-   // <T>设置名称的数据内容。</T>
+   // <T>获得产品编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataFinancialTenderUnit product(){
+      FDataFinancialTenderLogic logic = _logicContext.findLogic(FDataFinancialTenderLogic.class);
+      FDataFinancialTenderUnit unit = logic.find(_productId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置产品编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLabel(String value){
-      _label = value;
+   public void setProductId(int value){
+      _productId = value;
    }
 
    //============================================================
-   // <T>判断比率的数据是否改变。</T>
+   // <T>判断投资额的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRateChanged(){
-      return __rate != _rate;
+   public boolean isInvestmentChanged(){
+      return __investment != _investment;
    }
 
    //============================================================
-   // <T>获得比率的数据内容。</T>
+   // <T>获得投资额的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public float rate(){
-      return _rate;
+   public float investment(){
+      return _investment;
    }
 
    //============================================================
-   // <T>设置比率的数据内容。</T>
+   // <T>设置投资额的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setRate(float value){
-      _rate = value;
+   public void setInvestment(float value){
+      _investment = value;
    }
 
    //============================================================
-   // <T>判断绩效因子的数据是否改变。</T>
+   // <T>判断投资时间的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isFactorChanged(){
-      return __factor != _factor;
+   public boolean isInvestmentDateChanged(){
+      return !__investmentDate.equals(_investmentDate);
    }
 
    //============================================================
-   // <T>获得绩效因子的数据内容。</T>
+   // <T>获得投资时间的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public float factor(){
-      return _factor;
+   public TDateTime investmentDate(){
+      return _investmentDate;
    }
 
    //============================================================
-   // <T>设置绩效因子的数据内容。</T>
+   // <T>设置投资时间的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setFactor(float value){
-      _factor = value;
+   public void setInvestmentDate(TDateTime value){
+      _investmentDate = value;
+   }
+
+   //============================================================
+   // <T>判断赎回额的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionChanged(){
+      return __redemption != _redemption;
+   }
+
+   //============================================================
+   // <T>获得赎回额的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float redemption(){
+      return _redemption;
+   }
+
+   //============================================================
+   // <T>设置赎回额的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemption(float value){
+      _redemption = value;
+   }
+
+   //============================================================
+   // <T>判断赎回时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionDateChanged(){
+      return !__redemptionDate.equals(_redemptionDate);
+   }
+
+   //============================================================
+   // <T>获得赎回时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime redemptionDate(){
+      return _redemptionDate;
+   }
+
+   //============================================================
+   // <T>设置赎回时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionDate(TDateTime value){
+      _redemptionDate = value;
+   }
+
+   //============================================================
+   // <T>判断净投额的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNetinvestmentChanged(){
+      return __netinvestment != _netinvestment;
+   }
+
+   //============================================================
+   // <T>获得净投额的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float netinvestment(){
+      return _netinvestment;
+   }
+
+   //============================================================
+   // <T>设置净投额的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNetinvestment(float value){
+      _netinvestment = value;
+   }
+
+   //============================================================
+   // <T>判断利息额的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestChanged(){
+      return __interest != _interest;
+   }
+
+   //============================================================
+   // <T>获得利息额的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float interest(){
+      return _interest;
+   }
+
+   //============================================================
+   // <T>设置利息额的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterest(float value){
+      _interest = value;
    }
 
    //============================================================
@@ -437,14 +592,22 @@ public class FDataFinancialTenderUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "name":
-            return _name;
-         case "label":
-            return _label;
-         case "rate":
-            return RFloat.toString(_rate);
-         case "factor":
-            return RFloat.toString(_factor);
+         case "customer_id":
+            return RInteger.toString(_customerId);
+         case "product_id":
+            return RInteger.toString(_productId);
+         case "investment":
+            return RFloat.toString(_investment);
+         case "investment_date":
+            return _investmentDate.toString();
+         case "redemption":
+            return RFloat.toString(_redemption);
+         case "redemption_date":
+            return _redemptionDate.toString();
+         case "netinvestment":
+            return RFloat.toString(_netinvestment);
+         case "interest":
+            return RFloat.toString(_interest);
          case "note":
             return _note;
          case "create_user_id":
@@ -478,17 +641,29 @@ public class FDataFinancialTenderUnit
          case "guid":
             _guid = value;
             break;
-         case "name":
-            _name = value;
+         case "customer_id":
+            _customerId = RInteger.parse(value);
             break;
-         case "label":
-            _label = value;
+         case "product_id":
+            _productId = RInteger.parse(value);
             break;
-         case "rate":
-            _rate = RFloat.parse(value);
+         case "investment":
+            _investment = RFloat.parse(value);
             break;
-         case "factor":
-            _factor = RFloat.parse(value);
+         case "investment_date":
+            _investmentDate.parse(value);
+            break;
+         case "redemption":
+            _redemption = RFloat.parse(value);
+            break;
+         case "redemption_date":
+            _redemptionDate.parse(value);
+            break;
+         case "netinvestment":
+            _netinvestment = RFloat.parse(value);
+            break;
+         case "interest":
+            _interest = RFloat.parse(value);
             break;
          case "note":
             _note = value;
@@ -532,21 +707,37 @@ public class FDataFinancialTenderUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "name":
-               __name = value;
-               _name = __name;
+            case "customer_id":
+               __customerId = RInteger.parse(value);
+               _customerId = __customerId;
                break;
-            case "label":
-               __label = value;
-               _label = __label;
+            case "product_id":
+               __productId = RInteger.parse(value);
+               _productId = __productId;
                break;
-            case "rate":
-               __rate = RFloat.parse(value);
-               _rate = __rate;
+            case "investment":
+               __investment = RFloat.parse(value);
+               _investment = __investment;
                break;
-            case "factor":
-               __factor = RFloat.parse(value);
-               _factor = __factor;
+            case "investment_date":
+               __investmentDate.parse(value);
+               _investmentDate.assign(__investmentDate);
+               break;
+            case "redemption":
+               __redemption = RFloat.parse(value);
+               _redemption = __redemption;
+               break;
+            case "redemption_date":
+               __redemptionDate.parse(value);
+               _redemptionDate.assign(__redemptionDate);
+               break;
+            case "netinvestment":
+               __netinvestment = RFloat.parse(value);
+               _netinvestment = __netinvestment;
+               break;
+            case "interest":
+               __interest = RFloat.parse(value);
+               _interest = __interest;
                break;
             case "note":
                __note = value;
@@ -583,10 +774,14 @@ public class FDataFinancialTenderUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("name", _name);
-      row.set("label", _label);
-      row.set("rate", _rate);
-      row.set("factor", _factor);
+      row.set("customerId", _customerId);
+      row.set("productId", _productId);
+      row.set("investment", _investment);
+      row.set("investmentDate", _investmentDate);
+      row.set("redemption", _redemption);
+      row.set("redemptionDate", _redemptionDate);
+      row.set("netinvestment", _netinvestment);
+      row.set("interest", _interest);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -605,10 +800,14 @@ public class FDataFinancialTenderUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("name", _name);
-      map.put("label", _label);
-      map.put("rate", RFloat.toString(_rate));
-      map.put("factor", RFloat.toString(_factor));
+      map.put("customerId", RInteger.toString(_customerId));
+      map.put("productId", RInteger.toString(_productId));
+      map.put("investment", RFloat.toString(_investment));
+      map.put("investmentDate", _investmentDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("redemption", RFloat.toString(_redemption));
+      map.put("redemptionDate", _redemptionDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("netinvestment", RFloat.toString(_netinvestment));
+      map.put("interest", RFloat.toString(_interest));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -627,8 +826,10 @@ public class FDataFinancialTenderUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _name = input.readString();
-      _label = input.readString();
+      _customerId = input.readInt32();
+      _productId = input.readInt32();
+      _investmentDate.set(input.readInt64());
+      _redemptionDate.set(input.readInt64());
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -647,8 +848,10 @@ public class FDataFinancialTenderUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeString(_name);
-      output.writeString(_label);
+      output.writeInt32(_customerId);
+      output.writeInt32(_productId);
+      output.writeInt64(_investmentDate.get());
+      output.writeInt64(_redemptionDate.get());
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

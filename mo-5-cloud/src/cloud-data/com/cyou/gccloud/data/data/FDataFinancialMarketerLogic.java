@@ -48,11 +48,14 @@ public class FDataFinancialMarketerLogic
    // 字段关联编号的定义。
    public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
-   // 字段登录名的定义。
-   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
+   // 字段名称的定义。
+   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
 
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段登录名的定义。
+   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
 
    // 字段状态的定义。
    public final static SLogicFieldInfo STATUS_CD = new SLogicFieldInfo("STATUS_CD");
@@ -102,6 +105,9 @@ public class FDataFinancialMarketerLogic
    // 字段业绩总额的定义。
    public final static SLogicFieldInfo CUSTOMER_PERFORMANCE_TOTAL = new SLogicFieldInfo("CUSTOMER_PERFORMANCE_TOTAL");
 
+   // 字段备注的定义。
+   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -115,7 +121,7 @@ public class FDataFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`PASSPORT`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABELS`,`CUSTOMER_INVESTMENT_TOTAL`,`CUSTOMER_INVESTMENT_COUNT`,`CUSTOMER_INVESTMENT_DATE`,`CUSTOMER_REDEMPTION_TOTAL`,`CUSTOMER_REDEMPTION_COUNT`,`CUSTOMER_REDEMPTION_DATE`,`CUSTOMER_NETINVESTMENT_TOTAL`,`CUSTOMER_INTEREST_TOTAL`,`CUSTOMER_PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`NAME`,`LABEL`,`PASSPORT`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABELS`,`CUSTOMER_INVESTMENT_TOTAL`,`CUSTOMER_INVESTMENT_COUNT`,`CUSTOMER_INVESTMENT_DATE`,`CUSTOMER_REDEMPTION_TOTAL`,`CUSTOMER_REDEMPTION_COUNT`,`CUSTOMER_REDEMPTION_DATE`,`CUSTOMER_NETINVESTMENT_TOTAL`,`CUSTOMER_INTEREST_TOTAL`,`CUSTOMER_PERFORMANCE_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融理财师信息逻辑单元。</T>
@@ -709,8 +715,9 @@ public class FDataFinancialMarketerLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`LINK_ID`");
-      cmd.append(",`PASSPORT`");
+      cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
+      cmd.append(",`PASSPORT`");
       cmd.append(",`STATUS_CD`");
       cmd.append(",`PHONE`");
       cmd.append(",`CARD`");
@@ -727,6 +734,7 @@ public class FDataFinancialMarketerLogic
       cmd.append(",`CUSTOMER_NETINVESTMENT_TOTAL`");
       cmd.append(",`CUSTOMER_INTEREST_TOTAL`");
       cmd.append(",`CUSTOMER_PERFORMANCE_TOTAL`");
+      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -756,12 +764,12 @@ public class FDataFinancialMarketerLogic
          cmd.append(linkId);
       }
       cmd.append(',');
-      String passport = unit.passport();
-      if(RString.isEmpty(passport)){
+      String name = unit.name();
+      if(RString.isEmpty(name)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(passport));
+         cmd.append(RSql.formatValue(name));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -773,6 +781,8 @@ public class FDataFinancialMarketerLogic
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.passport());
       cmd.append(',');
       cmd.append(unit.statusCd());
       cmd.append(',');
@@ -863,6 +873,15 @@ public class FDataFinancialMarketerLogic
       cmd.append(unit.customerInterestTotal());
       cmd.append(',');
       cmd.append(unit.customerPerformanceTotal());
+      cmd.append(',');
+      String note = unit.note();
+      if(RString.isEmpty(note)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(note));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -955,14 +974,14 @@ public class FDataFinancialMarketerLogic
             cmd.append(linkId);
          }
       }
-      if(unit.isPassportChanged()){
-         cmd.append(",`PASSPORT`=");
-         String passport = unit.passport();
-         if(RString.isEmpty(passport)){
+      if(unit.isNameChanged()){
+         cmd.append(",`NAME`=");
+         String name = unit.name();
+         if(RString.isEmpty(name)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(passport));
+            cmd.append(RSql.formatValue(name));
             cmd.append('\'');
          }
       }
@@ -976,6 +995,10 @@ public class FDataFinancialMarketerLogic
             cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
+      }
+      if(unit.isPassportChanged()){
+         cmd.append(",`PASSPORT`=");
+         cmd.append(unit.passport());
       }
       if(unit.isStatusCdChanged()){
          cmd.append(",`STATUS_CD`=");
@@ -1098,6 +1121,17 @@ public class FDataFinancialMarketerLogic
       if(unit.isCustomerPerformanceTotalChanged()){
          cmd.append(",`CUSTOMER_PERFORMANCE_TOTAL`=");
          cmd.append(unit.customerPerformanceTotal());
+      }
+      if(unit.isNoteChanged()){
+         cmd.append(",`NOTE`=");
+         String note = unit.note();
+         if(RString.isEmpty(note)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(note));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

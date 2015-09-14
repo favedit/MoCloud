@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="b23d32eb-bb60-4f1d-9d15-1894cf7ef8f0" name="data.financial.customer" label="M#12cn16金融客户信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Customer" data_name="DT_FIN_CUSTOMER" data_alias="DT_FIN_CST" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldString _uuid="e6ded19e-f6ce-49b5-8d3a-318ab607df58" name="passport" label="M#12cn13登录名" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="40" />
-  <FieldString _uuid="baba9028-1026-4533-a309-3ad1d9a917c5" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
-  <FieldString _uuid="5afba881-e30a-4b1b-a1ff-43c3c6f37225" name="rank" label="M#12cn12职务" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RANK" data_size="40" />
-  <FieldString _uuid="926c3553-5584-4552-85fd-d7862fa943ac" name="phone_code" label="M#12cn14电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CODE" data_size="20" />
-  <FieldString _uuid="1525fe94-a478-464a-8236-d6acaad7cac5" name="card_code" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_CODE" data_size="20" />
-  <FieldString _uuid="aaccd3d7-108f-4c43-b27a-29f59a82f2e1" name="department_labels" label="M#12cn16部门标签集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABELS" data_size="200" />
+  <FieldRecordId _uuid="7a9f8534-b6fc-4ab1-ad83-56f9e034de87" name="member_id" label="M#12cn14成员编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MEMBER_ID" data_alias="MEMBER" data_refer="data.financial.member" />
+  <FieldInteger _uuid="d20c81f9-3914-45c2-b648-caddab5e1fdf" name="marriage_status" label="M#12cn14婚姻状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRIAGE_STATUS" />
+  <FieldInteger _uuid="2099014f-5918-46e6-b3c7-299c7fa4008c" name="highest_education" label="M#12cn14最高学历" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HIGHEST_EDUCATION" />
+  <FieldInteger _uuid="8a71cbe9-10d9-4cd9-b936-c0eb5dad2fa0" name="monthly_income" label="M#12cn13月收入" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MONTHLY_INCOME" />
+  <FieldInteger _uuid="0365ca10-e956-46ed-b8be-abd926e5aa66" name="profession" label="M#12cn12职业" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROFESSION" />
+  <FieldDouble _uuid="e2f954ed-c06b-4022-9b59-debf6cdda84e" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="2593c636-bd63-4069-b256-f9e71aa60d49" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
+  <FieldFloat _uuid="cec17914-d75e-4af8-b46b-e121c83547bb" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldInteger _uuid="e9dee007-3fd8-48cc-8912-259dbe2f7cc7" name="redemption_count" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_COUNT" />
+  <FieldFloat _uuid="e598dfc5-5825-4fe9-9948-884f0f31af22" name="netinvestment" label="M#12cn14净投总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
+  <FieldFloat _uuid="6a84b56d-ff9f-4cf0-ab5e-8e24949cb964" name="interest_total" label="M#12cn14利息总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldString _uuid="25d07462-4911-460e-b55f-fe81ec955d2a" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
   <FieldTemplate _uuid="2524c567-592b-4ef9-89ad-f16daa5e9529" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

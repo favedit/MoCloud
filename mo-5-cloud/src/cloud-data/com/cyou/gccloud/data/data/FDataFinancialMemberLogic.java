@@ -69,33 +69,6 @@ public class FDataFinancialMemberLogic
    // 字段生日的定义。
    public final static SLogicFieldInfo BIRTHDAY = new SLogicFieldInfo("BIRTHDAY");
 
-   // 字段投资总额的定义。
-   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
-
-   // 字段投资次数的定义。
-   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
-
-   // 字段投资时间的定义。
-   public final static SLogicFieldInfo INVESTMENT_DATE = new SLogicFieldInfo("INVESTMENT_DATE");
-
-   // 字段赎回总额的定义。
-   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
-
-   // 字段赎回次数的定义。
-   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
-
-   // 字段赎回时间的定义。
-   public final static SLogicFieldInfo REDEMPTION_DATE = new SLogicFieldInfo("REDEMPTION_DATE");
-
-   // 字段净投总额的定义。
-   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
-
-   // 字段利息总额的定义。
-   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
-
-   // 字段业绩总额的定义。
-   public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
-
    // 字段推荐评分的定义。
    public final static SLogicFieldInfo SCORE_RECOMMEND = new SLogicFieldInfo("SCORE_RECOMMEND");
 
@@ -124,7 +97,7 @@ public class FDataFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`NAME`,`LABEL`,`PHONE`,`CARD`,`EMAIL`,`GENDER_CD`,`BIRTHDAY`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`INVESTMENT_DATE`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_DATE`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`SCORE_RECOMMEND`,`SCORE_POINT`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`NAME`,`LABEL`,`PHONE`,`CARD`,`EMAIL`,`GENDER_CD`,`BIRTHDAY`,`SCORE_RECOMMEND`,`SCORE_POINT`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融成员信息逻辑单元。</T>
@@ -725,15 +698,6 @@ public class FDataFinancialMemberLogic
       cmd.append(",`EMAIL`");
       cmd.append(",`GENDER_CD`");
       cmd.append(",`BIRTHDAY`");
-      cmd.append(",`INVESTMENT_TOTAL`");
-      cmd.append(",`INVESTMENT_COUNT`");
-      cmd.append(",`INVESTMENT_DATE`");
-      cmd.append(",`REDEMPTION_TOTAL`");
-      cmd.append(",`REDEMPTION_COUNT`");
-      cmd.append(",`REDEMPTION_DATE`");
-      cmd.append(",`NETINVESTMENT_TOTAL`");
-      cmd.append(",`INTEREST_TOTAL`");
-      cmd.append(",`PERFORMANCE_TOTAL`");
       cmd.append(",`SCORE_RECOMMEND`");
       cmd.append(",`SCORE_POINT`");
       cmd.append(",`REGISTER_DATE`");
@@ -825,42 +789,6 @@ public class FDataFinancialMemberLogic
          cmd.append(birthday.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
-      cmd.append(',');
-      cmd.append(unit.investmentTotal());
-      cmd.append(',');
-      cmd.append(unit.investmentCount());
-      cmd.append(',');
-      TDateTime investmentDate = unit.investmentDate();
-      if(investmentDate == null){
-         cmd.append("NULL");
-      }else if(investmentDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(investmentDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      cmd.append(unit.redemptionTotal());
-      cmd.append(',');
-      cmd.append(unit.redemptionCount());
-      cmd.append(',');
-      TDateTime redemptionDate = unit.redemptionDate();
-      if(redemptionDate == null){
-         cmd.append("NULL");
-      }else if(redemptionDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(redemptionDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
-      cmd.append(',');
-      cmd.append(unit.netinvestmentTotal());
-      cmd.append(',');
-      cmd.append(unit.interestTotal());
-      cmd.append(',');
-      cmd.append(unit.performanceTotal());
       cmd.append(',');
       cmd.append(unit.scoreRecommend());
       cmd.append(',');
@@ -1059,60 +987,6 @@ public class FDataFinancialMemberLogic
             cmd.append(birthday.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
-      }
-      if(unit.isInvestmentTotalChanged()){
-         cmd.append(",`INVESTMENT_TOTAL`=");
-         cmd.append(unit.investmentTotal());
-      }
-      if(unit.isInvestmentCountChanged()){
-         cmd.append(",`INVESTMENT_COUNT`=");
-         cmd.append(unit.investmentCount());
-      }
-      if(unit.isInvestmentDateChanged()){
-         cmd.append(",`INVESTMENT_DATE`=");
-         TDateTime investmentDate = unit.investmentDate();
-         if(investmentDate == null){
-            cmd.append("NULL");
-         }else if(investmentDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(investmentDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isRedemptionTotalChanged()){
-         cmd.append(",`REDEMPTION_TOTAL`=");
-         cmd.append(unit.redemptionTotal());
-      }
-      if(unit.isRedemptionCountChanged()){
-         cmd.append(",`REDEMPTION_COUNT`=");
-         cmd.append(unit.redemptionCount());
-      }
-      if(unit.isRedemptionDateChanged()){
-         cmd.append(",`REDEMPTION_DATE`=");
-         TDateTime redemptionDate = unit.redemptionDate();
-         if(redemptionDate == null){
-            cmd.append("NULL");
-         }else if(redemptionDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(redemptionDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
-      }
-      if(unit.isNetinvestmentTotalChanged()){
-         cmd.append(",`NETINVESTMENT_TOTAL`=");
-         cmd.append(unit.netinvestmentTotal());
-      }
-      if(unit.isInterestTotalChanged()){
-         cmd.append(",`INTEREST_TOTAL`=");
-         cmd.append(unit.interestTotal());
-      }
-      if(unit.isPerformanceTotalChanged()){
-         cmd.append(",`PERFORMANCE_TOTAL`=");
-         cmd.append(unit.performanceTotal());
       }
       if(unit.isScoreRecommendChanged()){
          cmd.append(",`SCORE_RECOMMEND`=");

@@ -41,23 +41,41 @@ public class FDataFinancialCustomerLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段登录名的定义。
-   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
+   // 字段成员编号的定义。
+   public final static SLogicFieldInfo MEMBER_ID = new SLogicFieldInfo("MEMBER_ID");
 
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+   // 字段婚姻状态的定义。
+   public final static SLogicFieldInfo MARRIAGE_STATUS = new SLogicFieldInfo("MARRIAGE_STATUS");
 
-   // 字段职务的定义。
-   public final static SLogicFieldInfo RANK = new SLogicFieldInfo("RANK");
+   // 字段最高学历的定义。
+   public final static SLogicFieldInfo HIGHEST_EDUCATION = new SLogicFieldInfo("HIGHEST_EDUCATION");
 
-   // 字段电话号码的定义。
-   public final static SLogicFieldInfo PHONE_CODE = new SLogicFieldInfo("PHONE_CODE");
+   // 字段月收入的定义。
+   public final static SLogicFieldInfo MONTHLY_INCOME = new SLogicFieldInfo("MONTHLY_INCOME");
 
-   // 字段身份证号的定义。
-   public final static SLogicFieldInfo CARD_CODE = new SLogicFieldInfo("CARD_CODE");
+   // 字段职业的定义。
+   public final static SLogicFieldInfo PROFESSION = new SLogicFieldInfo("PROFESSION");
 
-   // 字段部门标签集合的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
+   // 字段投资总额的定义。
+   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
+
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
+
+   // 字段赎回总额的定义。
+   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
+
+   // 字段赎回次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
+
+   // 字段净投总额的定义。
+   public final static SLogicFieldInfo NETINVESTMENT = new SLogicFieldInfo("NETINVESTMENT");
+
+   // 字段利息总额的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
+   // 字段备注的定义。
+   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -72,7 +90,7 @@ public class FDataFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`PASSPORT`,`LABEL`,`RANK`,`PHONE_CODE`,`CARD_CODE`,`DEPARTMENT_LABELS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MEMBER_ID`,`MARRIAGE_STATUS`,`HIGHEST_EDUCATION`,`MONTHLY_INCOME`,`PROFESSION`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融客户信息逻辑单元。</T>
@@ -664,12 +682,18 @@ public class FDataFinancialCustomerLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`PASSPORT`");
-      cmd.append(",`LABEL`");
-      cmd.append(",`RANK`");
-      cmd.append(",`PHONE_CODE`");
-      cmd.append(",`CARD_CODE`");
-      cmd.append(",`DEPARTMENT_LABELS`");
+      cmd.append(",`MEMBER_ID`");
+      cmd.append(",`MARRIAGE_STATUS`");
+      cmd.append(",`HIGHEST_EDUCATION`");
+      cmd.append(",`MONTHLY_INCOME`");
+      cmd.append(",`PROFESSION`");
+      cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`INVESTMENT_COUNT`");
+      cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`REDEMPTION_COUNT`");
+      cmd.append(",`NETINVESTMENT`");
+      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -685,57 +709,39 @@ public class FDataFinancialCustomerLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String passport = unit.passport();
-      if(RString.isEmpty(passport)){
+      long memberId = unit.memberId();
+      if(memberId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(passport));
-         cmd.append('\'');
+         cmd.append(memberId);
       }
       cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
+      cmd.append(unit.marriageStatus());
       cmd.append(',');
-      String rank = unit.rank();
-      if(RString.isEmpty(rank)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(rank));
-         cmd.append('\'');
-      }
+      cmd.append(unit.highestEducation());
       cmd.append(',');
-      String phoneCode = unit.phoneCode();
-      if(RString.isEmpty(phoneCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(phoneCode));
-         cmd.append('\'');
-      }
+      cmd.append(unit.monthlyIncome());
       cmd.append(',');
-      String cardCode = unit.cardCode();
-      if(RString.isEmpty(cardCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(cardCode));
-         cmd.append('\'');
-      }
+      cmd.append(unit.profession());
       cmd.append(',');
-      String departmentLabels = unit.departmentLabels();
-      if(RString.isEmpty(departmentLabels)){
+      cmd.append(unit.investmentTotal());
+      cmd.append(',');
+      cmd.append(unit.investmentCount());
+      cmd.append(',');
+      cmd.append(unit.redemptionTotal());
+      cmd.append(',');
+      cmd.append(unit.redemptionCount());
+      cmd.append(',');
+      cmd.append(unit.netinvestment());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
+      cmd.append(',');
+      String note = unit.note();
+      if(RString.isEmpty(note)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(departmentLabels));
+         cmd.append(RSql.formatValue(note));
          cmd.append('\'');
       }
       // 设置更新信息
@@ -812,69 +818,63 @@ public class FDataFinancialCustomerLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isPassportChanged()){
-         cmd.append(",`PASSPORT`=");
-         String passport = unit.passport();
-         if(RString.isEmpty(passport)){
+      if(unit.isMemberIdChanged()){
+         cmd.append(",`MEMBER_ID`=");
+         long memberId = unit.memberId();
+         if(memberId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(passport));
-            cmd.append('\'');
+            cmd.append(memberId);
          }
       }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
-         }
+      if(unit.isMarriageStatusChanged()){
+         cmd.append(",`MARRIAGE_STATUS`=");
+         cmd.append(unit.marriageStatus());
       }
-      if(unit.isRankChanged()){
-         cmd.append(",`RANK`=");
-         String rank = unit.rank();
-         if(RString.isEmpty(rank)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(rank));
-            cmd.append('\'');
-         }
+      if(unit.isHighestEducationChanged()){
+         cmd.append(",`HIGHEST_EDUCATION`=");
+         cmd.append(unit.highestEducation());
       }
-      if(unit.isPhoneCodeChanged()){
-         cmd.append(",`PHONE_CODE`=");
-         String phoneCode = unit.phoneCode();
-         if(RString.isEmpty(phoneCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(phoneCode));
-            cmd.append('\'');
-         }
+      if(unit.isMonthlyIncomeChanged()){
+         cmd.append(",`MONTHLY_INCOME`=");
+         cmd.append(unit.monthlyIncome());
       }
-      if(unit.isCardCodeChanged()){
-         cmd.append(",`CARD_CODE`=");
-         String cardCode = unit.cardCode();
-         if(RString.isEmpty(cardCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(cardCode));
-            cmd.append('\'');
-         }
+      if(unit.isProfessionChanged()){
+         cmd.append(",`PROFESSION`=");
+         cmd.append(unit.profession());
       }
-      if(unit.isDepartmentLabelsChanged()){
-         cmd.append(",`DEPARTMENT_LABELS`=");
-         String departmentLabels = unit.departmentLabels();
-         if(RString.isEmpty(departmentLabels)){
+      if(unit.isInvestmentTotalChanged()){
+         cmd.append(",`INVESTMENT_TOTAL`=");
+         cmd.append(unit.investmentTotal());
+      }
+      if(unit.isInvestmentCountChanged()){
+         cmd.append(",`INVESTMENT_COUNT`=");
+         cmd.append(unit.investmentCount());
+      }
+      if(unit.isRedemptionTotalChanged()){
+         cmd.append(",`REDEMPTION_TOTAL`=");
+         cmd.append(unit.redemptionTotal());
+      }
+      if(unit.isRedemptionCountChanged()){
+         cmd.append(",`REDEMPTION_COUNT`=");
+         cmd.append(unit.redemptionCount());
+      }
+      if(unit.isNetinvestmentChanged()){
+         cmd.append(",`NETINVESTMENT`=");
+         cmd.append(unit.netinvestment());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
+      }
+      if(unit.isNoteChanged()){
+         cmd.append(",`NOTE`=");
+         String note = unit.note();
+         if(RString.isEmpty(note)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(departmentLabels));
+            cmd.append(RSql.formatValue(note));
             cmd.append('\'');
          }
       }

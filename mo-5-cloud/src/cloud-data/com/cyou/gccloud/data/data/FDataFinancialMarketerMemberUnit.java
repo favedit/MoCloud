@@ -62,18 +62,6 @@ public class FDataFinancialMarketerMemberUnit
    // 字段短信联系类型的定义。
    protected int _smsContactCd;
 
-   // 存储字段身份证号的定义。
-   private String __cardCode;
-
-   // 字段身份证号的定义。
-   protected String _cardCode;
-
-   // 存储字段部门标签集合的定义。
-   private String __departmentLabels;
-
-   // 字段部门标签集合的定义。
-   protected String _departmentLabels;
-
    // 存储字段推荐开始时间的定义。
    private TDateTime __recommendBeginDate = new TDateTime();
 
@@ -97,6 +85,12 @@ public class FDataFinancialMarketerMemberUnit
 
    // 字段反馈内容的定义。
    protected String _feedbackNote;
+
+   // 存储字段备注的定义。
+   private String __note;
+
+   // 字段备注的定义。
+   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -340,60 +334,6 @@ public class FDataFinancialMarketerMemberUnit
    }
 
    //============================================================
-   // <T>判断身份证号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCardCodeChanged(){
-      return !RString.equals(__cardCode, _cardCode);
-   }
-
-   //============================================================
-   // <T>获得身份证号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String cardCode(){
-      return _cardCode;
-   }
-
-   //============================================================
-   // <T>设置身份证号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCardCode(String value){
-      _cardCode = value;
-   }
-
-   //============================================================
-   // <T>判断部门标签集合的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDepartmentLabelsChanged(){
-      return !RString.equals(__departmentLabels, _departmentLabels);
-   }
-
-   //============================================================
-   // <T>获得部门标签集合的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String departmentLabels(){
-      return _departmentLabels;
-   }
-
-   //============================================================
-   // <T>设置部门标签集合的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDepartmentLabels(String value){
-      _departmentLabels = value;
-   }
-
-   //============================================================
    // <T>判断推荐开始时间的数据是否改变。</T>
    //
    // @return 数据内容
@@ -499,6 +439,33 @@ public class FDataFinancialMarketerMemberUnit
    //============================================================
    public void setFeedbackNote(String value){
       _feedbackNote = value;
+   }
+
+   //============================================================
+   // <T>判断备注的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNoteChanged(){
+      return !RString.equals(__note, _note);
+   }
+
+   //============================================================
+   // <T>获得备注的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String note(){
+      return _note;
+   }
+
+   //============================================================
+   // <T>设置备注的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNote(String value){
+      _note = value;
    }
 
    //============================================================
@@ -632,10 +599,6 @@ public class FDataFinancialMarketerMemberUnit
             return RInteger.toString(_relationCd);
          case "sms_contact_cd":
             return RInteger.toString(_smsContactCd);
-         case "card_code":
-            return _cardCode;
-         case "department_labels":
-            return _departmentLabels;
          case "recommend_begin_date":
             return _recommendBeginDate.toString();
          case "recommend_end_date":
@@ -644,6 +607,8 @@ public class FDataFinancialMarketerMemberUnit
             return RInteger.toString(_feedbackCd);
          case "feedback_note":
             return _feedbackNote;
+         case "note":
+            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -687,12 +652,6 @@ public class FDataFinancialMarketerMemberUnit
          case "sms_contact_cd":
             _smsContactCd = RInteger.parse(value);
             break;
-         case "card_code":
-            _cardCode = value;
-            break;
-         case "department_labels":
-            _departmentLabels = value;
-            break;
          case "recommend_begin_date":
             _recommendBeginDate.parse(value);
             break;
@@ -704,6 +663,9 @@ public class FDataFinancialMarketerMemberUnit
             break;
          case "feedback_note":
             _feedbackNote = value;
+            break;
+         case "note":
+            _note = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -760,14 +722,6 @@ public class FDataFinancialMarketerMemberUnit
                __smsContactCd = RInteger.parse(value);
                _smsContactCd = __smsContactCd;
                break;
-            case "card_code":
-               __cardCode = value;
-               _cardCode = __cardCode;
-               break;
-            case "department_labels":
-               __departmentLabels = value;
-               _departmentLabels = __departmentLabels;
-               break;
             case "recommend_begin_date":
                __recommendBeginDate.parse(value);
                _recommendBeginDate.assign(__recommendBeginDate);
@@ -783,6 +737,10 @@ public class FDataFinancialMarketerMemberUnit
             case "feedback_note":
                __feedbackNote = value;
                _feedbackNote = __feedbackNote;
+               break;
+            case "note":
+               __note = value;
+               _note = __note;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -819,12 +777,11 @@ public class FDataFinancialMarketerMemberUnit
       row.set("customerId", _customerId);
       row.set("relationCd", _relationCd);
       row.set("smsContactCd", _smsContactCd);
-      row.set("cardCode", _cardCode);
-      row.set("departmentLabels", _departmentLabels);
       row.set("recommendBeginDate", _recommendBeginDate);
       row.set("recommendEndDate", _recommendEndDate);
       row.set("feedbackCd", _feedbackCd);
       row.set("feedbackNote", _feedbackNote);
+      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -846,12 +803,11 @@ public class FDataFinancialMarketerMemberUnit
       map.put("customerId", RLong.toString(_customerId));
       map.put("relationCd", RInteger.toString(_relationCd));
       map.put("smsContactCd", RInteger.toString(_smsContactCd));
-      map.put("cardCode", _cardCode);
-      map.put("departmentLabels", _departmentLabels);
       map.put("recommendBeginDate", _recommendBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("recommendEndDate", _recommendEndDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("feedbackCd", RInteger.toString(_feedbackCd));
       map.put("feedbackNote", _feedbackNote);
+      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -873,12 +829,11 @@ public class FDataFinancialMarketerMemberUnit
       _customerId = input.readInt64();
       _relationCd = input.readInt32();
       _smsContactCd = input.readInt32();
-      _cardCode = input.readString();
-      _departmentLabels = input.readString();
       _recommendBeginDate.set(input.readInt64());
       _recommendEndDate.set(input.readInt64());
       _feedbackCd = input.readInt32();
       _feedbackNote = input.readString();
+      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -900,12 +855,11 @@ public class FDataFinancialMarketerMemberUnit
       output.writeInt64(_customerId);
       output.writeInt32(_relationCd);
       output.writeInt32(_smsContactCd);
-      output.writeString(_cardCode);
-      output.writeString(_departmentLabels);
       output.writeInt64(_recommendBeginDate.get());
       output.writeInt64(_recommendEndDate.get());
       output.writeInt32(_feedbackCd);
       output.writeString(_feedbackNote);
+      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

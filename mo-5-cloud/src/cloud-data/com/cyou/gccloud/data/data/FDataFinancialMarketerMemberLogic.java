@@ -54,12 +54,6 @@ public class FDataFinancialMarketerMemberLogic
    // 字段短信联系类型的定义。
    public final static SLogicFieldInfo SMS_CONTACT_CD = new SLogicFieldInfo("SMS_CONTACT_CD");
 
-   // 字段身份证号的定义。
-   public final static SLogicFieldInfo CARD_CODE = new SLogicFieldInfo("CARD_CODE");
-
-   // 字段部门标签集合的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LABELS = new SLogicFieldInfo("DEPARTMENT_LABELS");
-
    // 字段推荐开始时间的定义。
    public final static SLogicFieldInfo RECOMMEND_BEGIN_DATE = new SLogicFieldInfo("RECOMMEND_BEGIN_DATE");
 
@@ -71,6 +65,9 @@ public class FDataFinancialMarketerMemberLogic
 
    // 字段反馈内容的定义。
    public final static SLogicFieldInfo FEEDBACK_NOTE = new SLogicFieldInfo("FEEDBACK_NOTE");
+
+   // 字段备注的定义。
+   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -85,7 +82,7 @@ public class FDataFinancialMarketerMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`CUSTOMER_ID`,`RELATION_CD`,`SMS_CONTACT_CD`,`CARD_CODE`,`DEPARTMENT_LABELS`,`RECOMMEND_BEGIN_DATE`,`RECOMMEND_END_DATE`,`FEEDBACK_CD`,`FEEDBACK_NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`CUSTOMER_ID`,`RELATION_CD`,`SMS_CONTACT_CD`,`RECOMMEND_BEGIN_DATE`,`RECOMMEND_END_DATE`,`FEEDBACK_CD`,`FEEDBACK_NOTE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融成员信息逻辑单元。</T>
@@ -681,12 +678,11 @@ public class FDataFinancialMarketerMemberLogic
       cmd.append(",`CUSTOMER_ID`");
       cmd.append(",`RELATION_CD`");
       cmd.append(",`SMS_CONTACT_CD`");
-      cmd.append(",`CARD_CODE`");
-      cmd.append(",`DEPARTMENT_LABELS`");
       cmd.append(",`RECOMMEND_BEGIN_DATE`");
       cmd.append(",`RECOMMEND_END_DATE`");
       cmd.append(",`FEEDBACK_CD`");
       cmd.append(",`FEEDBACK_NOTE`");
+      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -720,24 +716,6 @@ public class FDataFinancialMarketerMemberLogic
       cmd.append(',');
       cmd.append(unit.smsContactCd());
       cmd.append(',');
-      String cardCode = unit.cardCode();
-      if(RString.isEmpty(cardCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(cardCode));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String departmentLabels = unit.departmentLabels();
-      if(RString.isEmpty(departmentLabels)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(departmentLabels));
-         cmd.append('\'');
-      }
-      cmd.append(',');
       TDateTime recommendBeginDate = unit.recommendBeginDate();
       if(recommendBeginDate == null){
          cmd.append("NULL");
@@ -768,6 +746,15 @@ public class FDataFinancialMarketerMemberLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(feedbackNote));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String note = unit.note();
+      if(RString.isEmpty(note)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(note));
          cmd.append('\'');
       }
       // 设置更新信息
@@ -870,28 +857,6 @@ public class FDataFinancialMarketerMemberLogic
          cmd.append(",`SMS_CONTACT_CD`=");
          cmd.append(unit.smsContactCd());
       }
-      if(unit.isCardCodeChanged()){
-         cmd.append(",`CARD_CODE`=");
-         String cardCode = unit.cardCode();
-         if(RString.isEmpty(cardCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(cardCode));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isDepartmentLabelsChanged()){
-         cmd.append(",`DEPARTMENT_LABELS`=");
-         String departmentLabels = unit.departmentLabels();
-         if(RString.isEmpty(departmentLabels)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(departmentLabels));
-            cmd.append('\'');
-         }
-      }
       if(unit.isRecommendBeginDateChanged()){
          cmd.append(",`RECOMMEND_BEGIN_DATE`=");
          TDateTime recommendBeginDate = unit.recommendBeginDate();
@@ -930,6 +895,17 @@ public class FDataFinancialMarketerMemberLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(feedbackNote));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isNoteChanged()){
+         cmd.append(",`NOTE`=");
+         String note = unit.note();
+         if(RString.isEmpty(note)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(note));
             cmd.append('\'');
          }
       }
