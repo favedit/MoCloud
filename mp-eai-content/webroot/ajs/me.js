@@ -41898,6 +41898,7 @@ MO.FGuiGridControl_onPaintBegin = function FGuiGridControl_onPaintBegin(event) {
    if(dirty){
       o.dirty();
    }
+   console.log(rowCount + ' - ' + o._rowScroll);
 }
 MO.FGuiGridControl_construct = function FGuiGridControl_construct() {
    var o = this;
