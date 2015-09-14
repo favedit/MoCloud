@@ -65,8 +65,10 @@
       application.setup(document.body);
    }
    function onLoad(){
+      var date = new Date();
+      var url = '../ajs/eai.jc?time='+date.toLocaleDateString();
       MO.initialize();
-      RJsLoader.loadUrl('../ajs/eai.jc', onLoadScript);
+      RJsLoader.loadUrl(url, onLoadScript);
    }
 </SCRIPT>
 </HEAD>
