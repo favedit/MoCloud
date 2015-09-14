@@ -4,7 +4,7 @@
     <!-- 当日 -->
     <!--  总投资金额  -->
     <Label name="" label="总投资金额" location="150,280" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font="20px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="dayInvestment" label="0" location="265,278" size="208,22" back_color="#f8b51a" fore_color='#f8b51a' align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="dayInvestment" label="0" location="265,278" size="208,22"  fore_color='#f8b51a' align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
     <!-- 赎回总金额 -->
     <Label name="" label="赎回总金额" location="150,330" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
     <Label type="FEaiStatisticsLabel" name="dayRedemption" label="0" location="265,330" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
