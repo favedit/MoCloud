@@ -20,17 +20,27 @@ public class FDepartmentPage
 
    protected String result;
 
+   protected String strInvestment;
+
+   protected String redemptionDate;
+
+   public String strInvestment(){
+      return strInvestment;
+   }
+
+   public void setStrInvestment(String strInvestment){
+      this.strInvestment = strInvestment;
+   }
+
+   public String redemptionDate(){
+      return redemptionDate;
+   }
+
+   public void setRedemptionDate(String redemptionDate){
+      this.redemptionDate = redemptionDate;
+   }
+
    protected FDataFinancialDepartmentUnit unit;
-
-   protected String dataInfo;
-
-   public String dataInfo(){
-      return dataInfo;
-   }
-
-   public void setDataInfo(String dataInfo){
-      this.dataInfo = dataInfo;
-   }
 
    public FDataFinancialDepartmentUnit unit(){
       return unit;

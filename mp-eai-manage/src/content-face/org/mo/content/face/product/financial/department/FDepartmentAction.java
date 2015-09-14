@@ -211,8 +211,11 @@ public class FDepartmentAction
       long id = context.parameterAsLong("id");
 
       FDataFinancialDepartmentUnit unit = _departmentConsole.find(logicContext, id);
+
+      page.setRedemptionDate(unit.redemptionDate().format("yyyy-mm-dd"));
+      page.setStrInvestment(unit.investmentDate().format("yyyy-mm-dd"));
       page.setUnit(unit);
-      return "/manage/product/configration/UpdateConfig";
+      return "/manage/product/financial/department/UpdateDept";
    }
 
    //============================================================
@@ -234,10 +237,66 @@ public class FDepartmentAction
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", context.parameter("configInfoId"));
       FDataFinancialDepartmentUnit unit = new FDataFinancialDepartmentUnit();
-      unit.setOuid(Long.parseLong(context.parameter("configInfoId")));
+      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      String provinceId = context.parameter("provinceId");
+      if(!"".equals(provinceId) && null != provinceId){
+         unit.setProvinceId(Integer.parseInt(provinceId));
+      }
+      String cityId = context.parameter("cityId");
+      if(!"".equals(cityId) && cityId != null){
+         unit.setCityId(Integer.parseInt(cityId));
+      }
+      String regionId = context.parameter("regionId");
+      if(!"".equals(regionId) && null != regionId){
+         unit.setRegionId(Integer.parseInt(regionId));
+      }
+
+      //投资时间
+      String investmentDate = context.parameter("investmentDate");
+      if(!"".equals(investmentDate) && null != investmentDate){
+         TDateTime dateTime = null;
+         try{
+            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(investmentDate));
+         }catch(ParseException e){
+            e.printStackTrace();
+         }
+         unit.setInvestmentDate(dateTime);
+      }
+      //赎回时间
+      String redemptionDate = context.parameter("redemptionDate");
+      if(!"".equals("redemptionDate") && null != redemptionDate){
+         TDateTime dateTime = null;
+         try{
+            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(redemptionDate));
+         }catch(ParseException e){
+            e.printStackTrace();
+         }
+         unit.setRedemptionDate(dateTime);
+      }
+      unit.setLevel(context.parameterAsInteger("level"));
+      //是否删除
+      String ovld = context.parameter("ovld");
+      unit.setOvld(ovld.equals("0") ? true : false);
+      unit.setName(context.parameter("name"));
       unit.setLabel(context.parameter("label"));
+      unit.setLeaderLabel(context.parameter("leaderLabel"));
+      unit.setLeaderPhone(context.parameter("leaderPhone"));
+      unit.setDepartmentLabel(context.parameter("departmentLabel"));
+      unit.setLocationLongitude(context.parameterAsDouble("locationLongitude"));
+      unit.setLocationLatitude(context.parameterAsDouble("locationLatitude"));
+      unit.setDepartmentPhone(context.parameter("departmentPhone"));
+      unit.setInvestmentTotal(context.parameterAsDouble("investmentTotal"));
+      unit.setInvestmentCount(context.parameterAsInteger("investmentCount"));
+      unit.setRedemptionTotal(context.parameterAsDouble("redemptionTotal"));
+      unit.setRedemptionCount(context.parameterAsInteger("redemptionCount"));
+      unit.setInterestTotal(context.parameterAsDouble("interestTotal"));
+      unit.setPerformanceTotal(context.parameterAsDouble("performanceTotal"));
+      unit.setNetinvestmentTotal(context.parameterAsDouble("netinvestmentTotal"));
       unit.setCode(context.parameter("code"));
+      unit.setDetailAddress(context.parameter("detailAddress"));
+
       unit.setNote(context.parameter("note"));
+      unit.setCreateUserId(context.parameterAsLong("adminId"));
       _departmentConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }

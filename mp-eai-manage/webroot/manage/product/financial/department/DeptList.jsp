@@ -96,37 +96,37 @@
       <table id="config" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,striped: true">
          <thead>
             <tr>
-               <th data-options="field:'ouid',halign:'center',align:'right'" width="40px">编号</th>
-               <th data-options="field:'ovld',halign:'center',align:'right'" width="55px">是否删除</th>
-               <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="200px">代码</th>
-               <th data-options="field:'name',halign:'center',align:'left',sortable:true" width="100px">名称</th>
+               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
+               <!-- <th data-options="field:'ovld',halign:'center',align:'right'" width="55px">是否删除</th> -->
+               <!-- <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="80px">代码</th> -->
+               <!-- <th data-options="field:'name',halign:'center',align:'left',sortable:true" width="80px">名称</th> -->
                <!-- <th data-options="field:'departmentId',halign:'center',align:'right'" width="100px">所属公司编号</th> -->
-               <th data-options="field:'departmentLabel',halign:'center',align:'right'" width="100px">所属公司</th>
+               <th data-options="field:'departmentLabel',halign:'center',align:'left'" width="100px">所属公司</th>
                <!-- <th data-options="field:'regionId',halign:'center',align:'right'" width="100px">所属区域编号</th> -->
-               <th data-options="field:'regionLabel',halign:'center',align:'right'" width="100px">所属区域</th>
-               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="70px">标签</th>
-               <th data-options="field:'level',halign:'center',align:'right'" width="30px">级别</th>
+               <th data-options="field:'regionLabel',halign:'center',align:'left'" width="110px">所属区域</th>
+               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">部门名称</th>
+              <!--  <th data-options="field:'level',halign:'center',align:'left'" width="30px">级别</th> -->
                <!-- <th data-options="field:'leaderId',halign:'center',align:'right'" width="100px">负责人编号</th> -->
-               <th data-options="field:'leaderLabel',halign:'center',align:'right'" width="70px">负责人标签</th>
-               <th data-options="field:'leaderPhone',halign:'center',align:'right'" width="100px">负责人电话</th>
+               <th data-options="field:'leaderLabel',halign:'center',align:'left'" width="70px">负责人</th>
+               <th data-options="field:'leaderPhone',halign:'center',align:'left'" width="100px">负责人电话</th>
                <!-- <th data-options="field:'provinceId',halign:'center',align:'right'" width="100px">省份标签编号</th> -->
-               <th data-options="field:'provinceLabel',halign:'center',align:'right'" width="60px">省份标签</th>
+               <th data-options="field:'provinceLabel',halign:'center',align:'left'" width="80px">省份</th>
                <!-- <th data-options="field:'cityId',halign:'center',align:'right'" width="100px">城市编号</th> -->
-               <th data-options="field:'cityLabel',halign:'center',align:'right'" width="60px">城市标签</th>
-               <th data-options="field:'locationLatitude',halign:'center',align:'right'" width="70px">位置维度</th>
-               <th data-options="field:'locationLongitude',halign:'center',align:'right'" width="70px">位置经度</th>
-               <th data-options="field:'detailAddress',halign:'center',align:'left',sortable:true" width="180px">详细地址</th>
-               <th data-options="field:'departmentPhone',halign:'center',align:'left',sortable:true" width="90px">部门电话</th>
-               <th data-options="field:'investmentTotal',halign:'center',align:'left',sortable:true" width="60px">投资总额</th>
-               <th data-options="field:'investmentCount',halign:'center',align:'left',sortable:true" width="60px">投资次数</th>
-               <th data-options="field:'investmentDate',halign:'center',align:'left',sortable:true" width="60px">投资时间</th>
-               <th data-options="field:'redemptionTotal',halign:'center',align:'left',sortable:true" width="60px">赎回总额</th>
-               <th data-options="field:'redemptionCount',halign:'center',align:'left',sortable:true" width="60px">赎回次数</th>
-               <th data-options="field:'redemptionDate',halign:'center',align:'left',sortable:true" width="60px">赎回时间</th>
-               <th data-options="field:'netinvestmentTotal',halign:'center',align:'left',sortable:true" width="60px">净投总额</th>
-               <th data-options="field:'interestTotal',halign:'center',align:'left',sortable:true" width="60px">利息总额</th>
-               <th data-options="field:'performanceTotal',halign:'center',align:'left',sortable:true" width="60px">业绩总额</th>
-               <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">备注信息</th>
+               <th data-options="field:'cityLabel',halign:'center',align:'left'" width="80px">城市</th>
+               <th data-options="field:'detailAddress',halign:'center',align:'left',sortable:true" width="200px">详细地址</th>
+               <th data-options="field:'locationLatitude',halign:'center',align:'left'" width="100px">位置维度</th>
+               <th data-options="field:'locationLongitude',halign:'center',align:'left'" width="100px">位置经度</th>
+               <th data-options="field:'departmentPhone',halign:'center',align:'left',sortable:true" width="110px">部门电话</th>
+               <th data-options="field:'investmentTotal',halign:'center',align:'left',sortable:true" width="80px">投资总额</th>
+               <th data-options="field:'investmentCount',halign:'center',align:'right',sortable:true" width="60px">投资次数</th>
+               <th data-options="field:'investmentDate',halign:'center',align:'left',sortable:true" width="140px">投资时间</th>
+               <th data-options="field:'redemptionTotal',halign:'center',align:'left',sortable:true" width="80px">赎回总额</th>
+               <th data-options="field:'redemptionCount',halign:'center',align:'right',sortable:true" width="60px">赎回次数</th>
+               <th data-options="field:'redemptionDate',halign:'center',align:'left',sortable:true" width="140px">赎回时间</th>
+               <th data-options="field:'netinvestmentTotal',halign:'center',align:'left',sortable:true" width="80px">净投总额</th>
+               <th data-options="field:'interestTotal',halign:'center',align:'left',sortable:true" width="80px">利息总额</th>
+               <th data-options="field:'performanceTotal',halign:'center',align:'left',sortable:true" width="80px">业绩总额</th>
+               <!-- <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">备注信息</th> -->
                <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">更新时间</th>
                <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton" width="140px">操作</th>
             </tr>
