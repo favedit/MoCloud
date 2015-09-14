@@ -1,8 +1,11 @@
 package org.mo.content.face.product.financial.department;
 
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.product.financial.department.IDepartmentConsole;
@@ -116,13 +119,68 @@ public class FDepartmentAction
                         ILogicContext logicContext,
                         FDepartmentPage page,
                         FBasePage basePage){
-      _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataFinancialDepartmentUnit unit = _departmentConsole.doPrepare(logicContext);
-      unit.setCode(context.parameter("code"));
+      String provinceId = context.parameter("provinceId");
+      if(!"".equals(provinceId) && null != provinceId){
+         unit.setProvinceId(Integer.parseInt(provinceId));
+      }
+      String cityId = context.parameter("cityId");
+      if(!"".equals(cityId) && cityId != null){
+         unit.setCityId(Integer.parseInt(cityId));
+      }
+      String regionId = context.parameter("regionId");
+      if(!"".equals(regionId) && null != regionId){
+         unit.setRegionId(Integer.parseInt(regionId));
+      }
+
+      //投资时间
+      String investmentDate = context.parameter("investmentDate");
+      if(!"".equals(investmentDate) && null != investmentDate){
+         TDateTime dateTime = null;
+         try{
+            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(investmentDate));
+         }catch(ParseException e){
+            e.printStackTrace();
+         }
+         unit.setInvestmentDate(dateTime);
+      }
+      //赎回时间
+      String redemptionDate = context.parameter("redemptionDate");
+      if(!"".equals("redemptionDate") && null != redemptionDate){
+         TDateTime dateTime = null;
+         try{
+            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(redemptionDate));
+         }catch(ParseException e){
+            e.printStackTrace();
+         }
+         unit.setRedemptionDate(dateTime);
+      }
+      unit.setLevel(context.parameterAsInteger("level"));
+      //是否删除
+      String ovld = context.parameter("ovld");
+      unit.setOvld(ovld.equals("0") ? true : false);
+      unit.setName(context.parameter("name"));
       unit.setLabel(context.parameter("label"));
+      unit.setLeaderLabel(context.parameter("leaderLabel"));
+      unit.setLeaderPhone(context.parameter("leaderPhone"));
+      unit.setDepartmentLabel(context.parameter("departmentLabel"));
+      unit.setLocationLongitude(context.parameterAsDouble("locationLongitude"));
+      unit.setLocationLatitude(context.parameterAsDouble("locationLatitude"));
+      unit.setDepartmentPhone(context.parameter("departmentPhone"));
+      unit.setInvestmentTotal(context.parameterAsDouble("investmentTotal"));
+      unit.setInvestmentCount(context.parameterAsInteger("investmentCount"));
+      unit.setRedemptionTotal(context.parameterAsDouble("redemptionTotal"));
+      unit.setRedemptionCount(context.parameterAsInteger("redemptionCount"));
+      unit.setInterestTotal(context.parameterAsDouble("interestTotal"));
+      unit.setPerformanceTotal(context.parameterAsDouble("performanceTotal"));
+      unit.setNetinvestmentTotal(context.parameterAsDouble("netinvestmentTotal"));
+      unit.setCode(context.parameter("code"));
+      unit.setDetailAddress(context.parameter("detailAddress"));
+
       unit.setNote(context.parameter("note"));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       EResult result = _departmentConsole.doInsert(logicContext, unit);
@@ -210,7 +268,7 @@ public class FDepartmentAction
       if(!result.equals(EResult.Success)){
          throw new FFatalError("Delete failure.");
       }else{
-         return "/manage/product/configration/ConfigList";
+         return "/manage/product/financial/department/DeptList";
       }
    }
 }
