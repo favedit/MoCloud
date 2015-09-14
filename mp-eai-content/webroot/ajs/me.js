@@ -402,6 +402,7 @@ MO.TMap = function TMap(){
    o.setValue      = MO.TMap_setValue;
    o.get           = MO.TMap_get;
    o.set           = MO.TMap_set;
+   o.setNvl        = MO.TMap_setNvl;
    o.assign        = MO.TMap_assign;
    o.append        = MO.TMap_append;
    o.insert        = MO.TMap_insert;
@@ -514,6 +515,11 @@ MO.TMap_set = function TMap_set(name, value){
       o._table[code] = index;
    }
    o._values[index] = value;
+}
+MO.TMap_setNvl = function TMap_setNvl(name, value){
+   if(value){
+      this.set(name, value);
+   }
 }
 MO.TMap_assign = function TMap_assign(map){
    var o = this;
@@ -1634,6 +1640,7 @@ MO.EAnnotation = new function EAnnotation(){
 MO.EDataType = new function EDataType(){
    var o = this;
    o.Unknown = 0;
+   o.Boolean = 1;
    o.Int8 = 1;
    o.Int16 = 2;
    o.Int32 = 3;
@@ -6024,6 +6031,7 @@ MO.SColor4 = function SColor4(red, green, blue, alpha){
    o.savePower    = MO.SColor4_savePower;
    o.copyArray    = MO.SColor4_copyArray;
    o.toString     = MO.SColor4_toString;
+   o.dispose      = MO.SColor4_dispose;
    return o;
 }
 MO.SColor4_assign = function SColor4_assign(p){
@@ -6123,6 +6131,13 @@ MO.SColor4_copyArray = function SColor4_copyArray(d, i){
 MO.SColor4_toString = function SColor4_toString(){
    var o = this;
    return MO.Lang.Float.format(o.red) + ',' + MO.Lang.Float.format(o.green) + ',' + MO.Lang.Float.format(o.blue) + ',' + MO.Lang.Float.format(o.alpha);
+}
+MO.SColor4_dispose = function SColor4_dispose(){
+   var o = this;
+   o.red = null;
+   o.green = null;
+   o.blue = null;
+   o.alpha = null;
 }
 MO.SCorners = function SCorners(){
    var o = this;
@@ -16224,6 +16239,7 @@ MO.FG2dCanvasContext = function FG2dCanvasContext(o) {
    o.drawTriangle         = MO.FG2dCanvasContext_drawTriangle;
    o.drawCircle           = MO.FG2dCanvasContext_drawCircle;
    o.drawText             = MO.FG2dCanvasContext_drawText;
+   o.drawTextVertical     = MO.FG2dCanvasContext_drawTextVertical;
    o.drawImage            = MO.FG2dCanvasContext_drawImage;
    o.drawGridImage        = MO.FG2dCanvasContext_drawGridImage;
    o.drawQuadrilateral    = MO.FG2dCanvasContext_drawQuadrilateral;
@@ -16339,6 +16355,16 @@ MO.FG2dCanvasContext_drawText = function FG2dCanvasContext_drawText(text, x, y, 
    var handle = o._handle;
    handle.fillStyle = color;
    handle.fillText(text, x, y);
+}
+MO.FG2dCanvasContext_drawTextVertical = function FG2dCanvasContext_drawTextVertical(text, x, y, font) {
+   var o = this;
+   var handle = o._handle;
+   handle.font = font.toString();
+   handle.fillStyle = font.color;
+   for (var i = 0; i < text.length; i++) {
+      handle.fillText(text.charAt(i), x, y);
+      y += font.size + parseInt(font.size / 5);
+   }
 }
 MO.FG2dCanvasContext_drawImage = function FG2dCanvasContext_drawImage(content, x, y, width, height){
    var o = this;
@@ -19147,7 +19173,7 @@ MO.FG3dRenderTarget_dispose = function FG3dRenderTarget_dispose(){
    var o = this;
    o._size = MO.Lang.Object.dispose(o._size);
    o._color = MO.Lang.Object.dispose(o._color);
-   o.__base.dispose.construct();
+   o.__base.FG3dObject.dispose();
 }
 MO.FG3dShader = function FG3dShader(o){
    o = MO.Class.inherits(this, o, MO.FG3dObject);
@@ -19733,6 +19759,7 @@ MO.FG3dSelectPass = function FG3dSelectPass(o){
    o._data         = null;
    o.construct     = MO.FG3dSelectPass_construct;
    o.setup         = MO.FG3dSelectPass_setup;
+   o.activeEffects = MO.FG3dSelectPass_activeEffects;
    o.drawRegion    = MO.FG3dSelectPass_drawRegion;
    return o;
 }
@@ -19753,6 +19780,20 @@ MO.FG3dSelectPass_setup = function FG3dSelectPass_setup(){
    t.size().set(1, 1);
    t.textures().push(T);
    t.build();
+}
+MO.FG3dSelectPass_activeEffects = function FG3dSelectPass_activeEffects(region, renderables){
+   var o = this;
+   var spaceName = region.spaceName();
+   var count = renderables.count();
+   for(var i = 0; i < count; i++){
+      var renderable = renderables.at(i);
+      if(renderable.optionSelect()){
+         var info = renderable.selectInfo(spaceName);
+         if(!info.effect){
+            info.effect = MO.Console.find(MO.FG3dEffectConsole).find(o._graphicContext, region, renderable);
+         }
+      }
+   }
 }
 MO.FG3dSelectPass_drawRegion = function FG3dSelectPass_drawRegion(region){
    var o = this;
@@ -19779,11 +19820,13 @@ MO.FG3dSelectPass_drawRegion = function FG3dSelectPass_drawRegion(region){
    context.clearDepth(1);
    for(var i = 0; i < renderableCount; i++){
       var renderable = renderables.at(i);
-      var effect = renderable.activeEffect();
-      context.setProgram(effect.program());
-      var display = renderable.display();
-      if(display && display._optionFace){
-         effect.drawRenderable(region, renderable, i);
+      if(renderable.optionSelect()){
+         var effect = renderable.activeEffect();
+         context.setProgram(effect.program());
+         var display = renderable.display();
+         if(display && display._optionFace){
+            effect.drawRenderable(region, renderable, i);
+         }
       }
    }
    handle.readPixels(0, 0, 1, 1, handle.RGBA, handle.UNSIGNED_BYTE, o._data);
@@ -32949,6 +32992,7 @@ MO.FE3dBitmapData_dispose = function FE3dBitmapData_dispose(){
 MO.EE3dBoundaryShape = function EE3dBoundaryShape(o){
    o = MO.Class.inherits(this, o, MO.FObject, MO.MGraphicObject);
    o._optionSphere     = false;
+   o._scale            = MO.Class.register(o, new MO.AGetter('_scale'), 1);
    o._color            = MO.Class.register(o, new MO.AGetter('_color'));
    o._polygons         = MO.Class.register(o, new MO.AGetter('_polygons'));
    o._faceEffectCode   = MO.Class.register(o, new MO.AGetSet('_faceEffectCode'));
@@ -32999,9 +33043,9 @@ MO.EE3dBoundaryShape_buildFace = function EE3dBoundaryShape_buildFace(){
          var cy = positions[positionIndex++];
          var x = cx * MO.Lang.Const.DEGREE_RATE;
          var y = cy * MO.Lang.Const.DEGREE_RATE;
-         vertexData[vertexIndex++] = Math.sin(x) * Math.cos(y);
-         vertexData[vertexIndex++] = Math.sin(y);
-         vertexData[vertexIndex++] = -Math.cos(x) * Math.cos(y);
+         vertexData[vertexIndex++] = Math.sin(x) * Math.cos(y) * o._scale;
+         vertexData[vertexIndex++] = Math.sin(y) * o._scale;
+         vertexData[vertexIndex++] = -Math.cos(x) * Math.cos(y) * o._scale;
          coordData[coordIndex++] = cx / 360 + 0.5;
          coordData[coordIndex++] = 0.5 - cy / 180;
       }
@@ -33193,6 +33237,266 @@ MO.EE3dBoundaryShape_buildSphere = function EE3dBoundaryShape_buildSphere(contex
    o.build(context)
 }
 MO.EE3dBoundaryShape_dispose = function EE3dBoundaryShape_dispose(){
+   var o = this;
+   o._polygons = MO.Lang.Obejct.dispose(o._polygons);
+   o.__base.FObject.dispose.call(o);
+}
+MO.FE3dBoundaryShape3d = function FE3dBoundaryShape3d(o){
+   o = MO.Class.inherits(this, o, MO.FObject, MO.MGraphicObject);
+   o._optionSphere     = false;
+   o._scaleTop         = MO.Class.register(o, new MO.AGetSet('_scaleTop'), 1);
+   o._scaleBottom      = MO.Class.register(o, new MO.AGetSet('_scaleBottom'), 0.9);
+   o._faceColor        = MO.Class.register(o, new MO.AGetter('_faceColor'));
+   o._color            = MO.Class.register(o, new MO.AGetter('_color'));
+   o._polygons         = MO.Class.register(o, new MO.AGetter('_polygons'));
+   o._faceEffectCode   = MO.Class.register(o, new MO.AGetSet('_faceEffectCode'));
+   o._faceRenderable   = MO.Class.register(o, new MO.AGetter('_faceRenderable'));
+   o._borderEffectCode = MO.Class.register(o, new MO.AGetSet('_borderEffectCode'));
+   o._borderRenderable = MO.Class.register(o, new MO.AGetter('_borderRenderable'));
+   o.construct         = MO.FE3dBoundaryShape3d_construct;
+   o.pushPolygon       = MO.FE3dBoundaryShape3d_pushPolygon;
+   o.buildFace         = MO.FE3dBoundaryShape3d_buildFace;
+   o.buildBorder       = MO.FE3dBoundaryShape3d_buildBorder;
+   o.build             = MO.FE3dBoundaryShape3d_build;
+   o.buildFlat         = MO.FE3dBoundaryShape3d_buildFlat;
+   o.buildSphere       = MO.FE3dBoundaryShape3d_buildSphere;
+   o.dispose           = MO.FE3dBoundaryShape3d_dispose;
+   return o;
+}
+MO.FE3dBoundaryShape3d_construct = function FE3dBoundaryShape3d_construct(){
+   var o = this;
+   o.__base.FObject.construct.call(o);
+   o._faceColor = new MO.SColor4(1, 1, 1, 1);
+   o._color = new MO.SColor4(0.3, 0.3, 0.3);
+   o._polygons = new MO.TObjects();
+}
+MO.FE3dBoundaryShape3d_pushPolygon = function FE3dBoundaryShape3d_pushPolygon(polygon){
+   this._polygons.push(polygon);
+}
+MO.FE3dBoundaryShape3d_buildFace = function FE3dBoundaryShape3d_buildFace(){
+   var o = this;
+   var context = o._graphicContext;
+   var faceColor = o._faceColor;
+   var color = o._color;
+   var scaleTop = o._scaleTop;
+   var scaleBottom = o._scaleBottom;
+   var boundaries = o._polygons;
+   var count = boundaries.count();
+   var vertexTotal = o._vertexTotal;
+   var indexTotal = o._indexTotal;
+   var vertexStart = 0;
+   var vertexIndex = 0;
+   var vertexData = new Float32Array(3 * vertexTotal * 2);
+   var coordIndex = 0;
+   var coordData = new Float32Array(2 * vertexTotal * 2);
+   var faceIndex = 0;
+   var faceData = new Uint32Array(indexTotal + 3 * 2 * vertexTotal);
+   for(var n = 0; n < count; n++){
+      var boundary = boundaries.at(n);
+      var positionCount = boundary.positionCount();
+      var positions = boundary.positions();
+      var positionIndex = 0;
+      for(var i = 0; i < positionCount; i++){
+         var cx = positions[positionIndex++];
+         var cy = positions[positionIndex++];
+         var x = cx * MO.Lang.Const.DEGREE_RATE;
+         var y = cy * MO.Lang.Const.DEGREE_RATE;
+         vertexData[vertexIndex++] = Math.sin(x) * Math.cos(y) * scaleTop;
+         vertexData[vertexIndex++] = Math.sin(y) * scaleTop;
+         vertexData[vertexIndex++] = -Math.cos(x) * Math.cos(y) * scaleTop;
+         coordData[coordIndex++] = cx / 360 + 0.5;
+         coordData[coordIndex++] = 0.5 - cy / 180;
+      }
+      var indexes = boundary.indexes();
+      var indexCount = indexes.length;
+      var faceCount = indexCount / 3;
+      for(var i = 0; i < faceCount; i++){
+         var facePosition = 3 * i;
+         faceData[faceIndex++] = vertexStart + indexes[facePosition + 2];
+         faceData[faceIndex++] = vertexStart + indexes[facePosition + 1];
+         faceData[faceIndex++] = vertexStart + indexes[facePosition    ];
+      }
+      vertexStart += positionCount;
+   }
+   var layerStart = vertexStart;
+   for(var n = 0; n < count; n++){
+      var boundary = boundaries.at(n);
+      var positionCount = boundary.positionCount();
+      var positions = boundary.positions();
+      var positionIndex = 0;
+      for(var i = 0; i < positionCount; i++){
+         var x = positions[positionIndex++] * MO.Lang.Const.DEGREE_RATE;
+         var y = positions[positionIndex++] * MO.Lang.Const.DEGREE_RATE;
+         vertexData[vertexIndex++] = (Math.sin(x) * Math.cos(y)) * scaleBottom;
+         vertexData[vertexIndex++] = (Math.sin(y)) * scaleBottom;
+         vertexData[vertexIndex++] = (-Math.cos(x) * Math.cos(y)) * scaleBottom;
+         coordData[coordIndex++] = x;
+         coordData[coordIndex++] = y;
+      }
+   }
+   var vertexStart = 0;
+   for(var n = 0; n < count; n++){
+      var boundary = boundaries.at(n);
+      var positionCount = boundary.positionCount();
+      for(var i = 0; i < positionCount; i++){
+         if(i == positionCount - 1){
+            faceData[faceIndex++] = vertexStart + i;
+            faceData[faceIndex++] = vertexStart + 0;
+            faceData[faceIndex++] = vertexStart + i + layerStart;
+            faceData[faceIndex++] = vertexStart + 0;
+            faceData[faceIndex++] = vertexStart + layerStart;
+            faceData[faceIndex++] = vertexStart + i + layerStart;
+         }else{
+            faceData[faceIndex++] = vertexStart + i;
+            faceData[faceIndex++] = vertexStart + i + 1;
+            faceData[faceIndex++] = vertexStart + i + layerStart;
+            faceData[faceIndex++] = vertexStart + i + 1;
+            faceData[faceIndex++] = vertexStart + i + layerStart + 1;
+            faceData[faceIndex++] = vertexStart + i + layerStart;
+         }
+      }
+      vertexStart += positionCount;
+   }
+   var colorIndex = 0;
+   var colors = o.colorsData = new Uint8Array(4 * vertexTotal * 2);
+   var positionTotal = vertexTotal * 2;
+   for(var i = 0; i < positionTotal; i++){
+      colors[colorIndex++] = (faceColor.red * 255) & 0xFF;
+      colors[colorIndex++] = (faceColor.red * 255) & 0xFF;
+      colors[colorIndex++] = (faceColor.red * 255) & 0xFF;
+      colors[colorIndex++] = (faceColor.red * 255) & 0xFF;
+   }
+   var renderable = o._faceRenderable = MO.Class.create(MO.FE3dDataBox);
+   renderable._shape = o;
+   renderable.linkGraphicContext(context);
+   renderable.setOptionColor(true);
+   renderable.setOptionCoord(true);
+   renderable.setVertexCount(vertexTotal * 2);
+   renderable.setup();
+   renderable.color().setHex('#0A5294');
+   renderable.vertexPositionBuffer().upload(vertexData, 4 * 3, vertexTotal * 2, true);
+   renderable.vertexColorBuffer().upload(colors, 1 * 4, vertexTotal * 2, true);
+   renderable.vertexCoordBuffer().upload(coordData, 4 * 2, vertexTotal * 2, true);
+   renderable.indexBuffer().setStrideCd(MO.EG3dIndexStride.Uint32);
+   renderable.indexBuffer().upload(faceData, faceIndex, true);
+}
+MO.FE3dBoundaryShape3d_buildBorder = function FE3dBoundaryShape3d_buildBorder(){
+   var o = this;
+   var context = o._graphicContext;
+   var color = o._color;
+   var scaleTop = o._scaleTop * 1.001;
+   var scaleBottom = o._scaleBottom;
+   var boundaries = o._polygons;
+   var count = boundaries.count();
+   var vertexTotal = o._vertexTotal;
+   var indexTotal = o._indexTotal;
+   var vertexStart = 0;
+   var vertexIndex = 0;
+   var faceIndex = 0;
+   var vertexData = new Float32Array(3 * vertexTotal * 2);
+   var borderIndex = 0;
+   var borderData = new Uint32Array(2 * vertexTotal + 2 * vertexTotal);
+   for(var n = 0; n < count; n++){
+      var boundary = boundaries.at(n);
+      var positionCount = boundary.positionCount();
+      var positions = boundary.positions();
+      var positionIndex = 0;
+      for(var i = 0; i < positionCount; i++){
+         var x = positions[positionIndex++] / 180 * Math.PI;
+         var y = positions[positionIndex++] / 180 * Math.PI;
+         vertexData[vertexIndex++] = (Math.sin(x) * Math.cos(y)) * scaleTop;
+         vertexData[vertexIndex++] = (Math.sin(y)) * scaleTop;
+         vertexData[vertexIndex++] = (-Math.cos(x) * Math.cos(y)) * scaleTop;
+      }
+      for(var i = 0; i < positionCount; i++){
+         borderData[borderIndex++] = vertexStart + i;
+         if(i == positionCount - 1){
+            borderData[borderIndex++] = vertexStart;
+         }else{
+            borderData[borderIndex++] = vertexStart + i + 1;
+         }
+      }
+      vertexStart += positionCount;
+   }
+   var layerStart = vertexStart;
+   for(var n = 0; n < count; n++){
+      var boundary = boundaries.at(n);
+      var positionCount = boundary.positionCount();
+      var positions = boundary.positions();
+      var positionIndex = 0;
+      for(var i = 0; i < positionCount; i++){
+         var x = positions[positionIndex++] / 180 * Math.PI;
+         var y = positions[positionIndex++] / 180 * Math.PI;
+         vertexData[vertexIndex++] = (Math.sin(x) * Math.cos(y)) * scaleBottom;
+         vertexData[vertexIndex++] = (Math.sin(y)) * scaleBottom;
+         vertexData[vertexIndex++] = (-Math.cos(x) * Math.cos(y)) * scaleBottom;
+      }
+      vertexStart += positionCount;
+   }
+   var vertexStart = 0;
+   for(var n = 0; n < count; n++){
+      var boundary = boundaries.at(n);
+      var positionCount = boundary.positionCount();
+      for(var i = 0; i < positionCount; i++){
+         borderData[borderIndex++] = vertexStart + i;
+         borderData[borderIndex++] = vertexStart + i + layerStart;
+      }
+      vertexStart += positionCount;
+   }
+   var colorIndex = 0;
+   var colors = o.colorsData = new Uint8Array(4 * vertexTotal * 2);
+   for(var i = 0; i < vertexTotal; i++){
+      colors[colorIndex++] = 0x22;
+      colors[colorIndex++] = 0xA9;
+      colors[colorIndex++] = 0xFF;
+      colors[colorIndex++] = 0xFF;
+   }
+   for(var i = 0; i < vertexTotal; i++){
+      colors[colorIndex++] = 0x96;
+      colors[colorIndex++] = 0xB0;
+      colors[colorIndex++] = 0xD6;
+      colors[colorIndex++] = 0xFF;
+   }
+   var renderable = o._borderRenderable = MO.Class.create(MO.FE3dDataBox);
+   renderable._shape = o;
+   renderable.linkGraphicContext(context);
+   renderable.setup();
+   renderable.setVertexCount(vertexTotal * 2);
+   renderable.vertexPositionBuffer().upload(vertexData, 4 * 3, vertexTotal * 2, true);
+   renderable.vertexColorBuffer().upload(colors, 1 * 4, vertexTotal * 2, true);
+   renderable.indexBuffer().setDrawModeCd(MO.EG3dDrawMode.Lines);
+   renderable.indexBuffer().setStrideCd(MO.EG3dIndexStride.Uint32);
+   renderable.indexBuffer().setLineWidth(1);
+   renderable.indexBuffer().upload(borderData, borderIndex, true);
+   renderable.material().info().effectCode = 'eai.map.face';
+}
+MO.FE3dBoundaryShape3d_build = function FE3dBoundaryShape3d_build(context){
+   var o = this;
+   var vertexTotal = 0;
+   var indexTotal = 0;
+   var boundaries = o._polygons;
+   var count = boundaries.count();
+   for(var i = 0; i < count; i++){
+      var boundary = boundaries.at(i);
+      vertexTotal += boundary.positionCount();
+      indexTotal += boundary.indexes().length;
+   }
+   o._vertexTotal = vertexTotal;
+   o._indexTotal = indexTotal;
+   o.buildFace(context);
+   o.buildBorder(context);
+}
+MO.FE3dBoundaryShape3d_buildFlat = function FE3dBoundaryShape3d_buildFlat(context){
+   var o = this;
+   o._optionSphere = false;
+   o.build(context)
+}
+MO.FE3dBoundaryShape3d_buildSphere = function FE3dBoundaryShape3d_buildSphere(context){
+   var o = this;
+   o._optionSphere = true;
+   o.build(context)
+}
+MO.FE3dBoundaryShape3d_dispose = function FE3dBoundaryShape3d_dispose(){
    var o = this;
    o._polygons = MO.Lang.Obejct.dispose(o._polygons);
    o.__base.FObject.dispose.call(o);
@@ -38225,7 +38529,7 @@ MO.SUiDispatchEvent_dump = function SUiDispatchEvent_dump(){
 }
 MO.SUiFont = function SUiFont(){
    var o = this;
-   o.font     = null;
+   o.font     = 'Microsoft YaHei';
    o.size     = 16;
    o.bold     = false;
    o.color    = '#FFFFFF';
@@ -38492,8 +38796,10 @@ MO.MUiGridColumnCurrency = function MUiGridColumnCurrency(o){
    o = MO.Class.inherits(this, o);
    o._currencyPercent = MO.Class.register(o, new MO.AGetSet('_currencyPercent'), 2);
    o._normalColor     = MO.Class.register(o, new MO.AGetSet('_normalColor'), '#000000');
-   o._highColor       = MO.Class.register(o, new MO.AGetSet('_highColor'), '#000000');
+   o._lowerestColor   = MO.Class.register(o, new MO.AGetSet('_lowerestColor'), '#000000');
    o._lowerColor      = MO.Class.register(o, new MO.AGetSet('_lowerColor'), '#000000');
+   o._highColor       = MO.Class.register(o, new MO.AGetSet('_highColor'), '#000000');
+   o._highestColor    = MO.Class.register(o, new MO.AGetSet('_highestColor'), '#000000');
    o._negativeColor   = MO.Class.register(o, new MO.AGetSet('_negativeColor'), '#000000');
    o.construct        = MO.MUiGridColumnCurrency_construct;
    o.formatText       = MO.MUiGridColumnCurrency_formatText;
@@ -38536,6 +38842,7 @@ MO.MUiGridColumnDate_dispose = function MUiGridColumnDate_dispose(){
 }
 MO.MUiGridColumnText = function MUiGridColumnText(o){
    o = MO.Class.inherits(this, o);
+   o._textAlign = MO.Class.register(o, new MO.AGetSet('_textAlign'), MO.EUiAlign.Center);
    o.construct = MO.MUiGridColumnText_construct;
    o.dispose   = MO.MUiGridColumnText_dispose;
    return o;
@@ -41095,6 +41402,75 @@ MO.FGuiGridCell_dispose = function FGuiGridCell_dispose(){
    o.__base.MUiGridCell.dispose.call(o);
    o.__base.FObject.dispose.call(o);
 }
+MO.FGuiGridCellBigNumber = function FGuiGridCellBigNumber(o){
+   o = MO.Class.inherits(this, o, MO.FGuiGridCell, MO.MUiGridCellCurrency);
+   o._fontColor  = null;
+   o._numberFont = null;
+   o.construct   = MO.FGuiGridCellBigNumber_construct;
+   o.formatText  = MO.FGuiGridCellBigNumber_formatText;
+   o.draw        = MO.FGuiGridCellBigNumber_draw;
+   o.dispose     = MO.FGuiGridCellBigNumber_dispose;
+   return o;
+}
+MO.FGuiGridCellBigNumber_construct = function FGuiGridCellBigNumber_construct(){
+   var o = this;
+   o.__base.FGuiGridCell.construct.call(o);
+   o.__base.MUiGridCellCurrency.construct.call(o);
+   o._numberFont = new MO.SUiFont();
+}
+MO.FGuiGridCellBigNumber_formatText = function FGuiGridCellBigNumber_formatText(value){
+   return this.__base.MUiGridColumnDate.formatText.call(this, value)
+}
+MO.FGuiGridCellBigNumber_draw = function FGuiGridCellBigNumber_draw(context){
+   var o = this;
+   var graphic = context.graphic;
+   var rectangle = context.rectangle;
+   var font = context.style.font;
+   var x = rectangle.left;
+   var y = rectangle.top;
+   var width = rectangle.width;
+   var height = rectangle.height;
+   var column = o._column;
+   var cellPadding = column.cellPadding();
+   var value = o.value();
+   var text = o.text();
+   var textLength = text.length;
+   var numberFont = o._numberFont;
+   numberFont.assign(font);
+   var contentWidth = width - cellPadding.right;
+   if(value >= 0){
+      if(textLength > 7){
+         var fontColor = null;
+         fontColor = column.highColor();
+         var high = text.substring(0, text.length - 11);
+         var low = text.substring(text.length - 11, text.length - 7) + '.' +text.substring(text.length - 7, text.length - 5);
+         var highWidth = graphic.textWidth(high);
+         var lowWidth = graphic.textWidth(low);
+         numberFont.color = column.highColor();
+         graphic.drawFontText(high, numberFont, x, y, contentWidth - lowWidth, height, MO.EUiAlign.Right);
+         numberFont.color = column.normalColor();
+         graphic.drawFontText(low, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+      }
+      else if(textLength > 5){
+         var low = '0.' + text.substring(text.length - 7, text.length - 5);
+         numberFont.color = column.normalColor();
+         graphic.drawFontText(low, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+      }
+      else {
+         numberFont.color = column.normalColor();
+         graphic.drawFontText('0.00', numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+      }
+   }else if(value < 0){
+      numberFont.color = column.negativeColor();
+      graphic.drawFontText(text, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+   }
+}
+MO.FGuiGridCellBigNumber_dispose = function FGuiGridCellBigNumber_dispose(){
+   var o = this;
+   o._numberFont = MO.Lang.Object.dispose(o._numberFont);
+   o.__base.MUiGridCellCurrency.dispose.call(o);
+   o.__base.FGuiGridCell.dispose.call(o);
+}
 MO.FGuiGridCellCurrency = function FGuiGridCellCurrency(o){
    o = MO.Class.inherits(this, o, MO.FGuiGridCell, MO.MUiGridCellCurrency);
    o._fontColor  = null;
@@ -41132,15 +41508,29 @@ MO.FGuiGridCellCurrency_draw = function FGuiGridCellCurrency_draw(context){
    numberFont.assign(font);
    var contentWidth = width - cellPadding.right;
    if(value >= 0){
-      if(textLength > 7){
+      if(textLength > 11){
+         var fontColor = null;
+         var highest = text.substring(0, text.length - 11);
+         var high = text.substring(textLength - 11, textLength - 7);
+         var low = text.substring(textLength - 7, textLength);
+         var highestWidth = graphic.textWidth(highest);
+         var highWidth = graphic.textWidth(high);
+         var lowWidth = graphic.textWidth(low);
+         numberFont.color = column.highestColor();
+         graphic.drawFontText(highest, numberFont, x, y, contentWidth - highWidth - lowWidth, height, MO.EUiAlign.Right);
+         numberFont.color = column.highColor();
+         graphic.drawFontText(high, numberFont, x, y, contentWidth - lowWidth, height, MO.EUiAlign.Right);
+         numberFont.color = column.normalColor();
+         graphic.drawFontText(low, numberFont, x, y, contentWidth, height, MO.EUiAlign.Right);
+      }else if(textLength > 7){
          var fontColor = null;
          if(textLength > 9){
             fontColor = column.highColor();
          }else{
             fontColor = column.lowerColor();
          }
-         var high = text.substring(0, text.length - 7);
-         var low = text.substring(text.length - 7, text.length);
+         var high = text.substring(0, textLength - 7);
+         var low = text.substring(textLength - 7, textLength);
          var highWidth = graphic.textWidth(high);
          var lowWidth = graphic.textWidth(low);
          numberFont.color = fontColor;
@@ -41272,8 +41662,12 @@ MO.FGuiGridCellText_draw = function FGuiGridCellText_draw(context){
    var graphic = context.graphic;
    var rectangle = context.rectangle;
    var font = context.style.font;
+   var column = o._column;
+   var cellPadding = column.cellPadding();
    var text = o.text();
-   graphic.drawFontText(text, font, rectangle.left, rectangle.top, rectangle.width, rectangle.height, MO.EUiAlign.Center);
+   var column = o._column;
+   var contentWidth = rectangle.width - cellPadding.right;
+   graphic.drawFontText(text, font, rectangle.left, rectangle.top, contentWidth, rectangle.height, column.textAlign());
 }
 MO.FGuiGridCellText_dispose = function FGuiGridCellText_dispose(){
    var o = this;
@@ -41315,11 +41709,32 @@ MO.FGuiGridColumn_dispose = function FGuiGridColumn_dispose(){
    o.__base.MUiGridColumn.dispose.call(o);
    o.__base.FObject.dispose.call(o);
 }
+MO.FGuiGridColumnBigNumber = function FGuiGridColumnBigNumber(o){
+   o = MO.Class.inherits(this, o, MO.FGuiGridColumn, MO.MUiGridColumnCurrency);
+   o.construct  = MO.FGuiGridColumnBigNumber_construct;
+   o.formatText = MO.FGuiGridColumnBigNumber_formatText;
+   o.dispose    = MO.FGuiGridColumnBigNumber_dispose;
+   return o;
+}
+MO.FGuiGridColumnBigNumber_construct = function FGuiGridColumnBigNumber_construct(){
+   var o = this;
+   o.__base.FGuiGridColumn.construct.call(o);
+   o.__base.MUiGridColumnCurrency.construct.call(o);
+   o._cellClass = MO.FGuiGridCellBigNumber;
+}
+MO.FGuiGridColumnBigNumber_formatText = function FGuiGridColumnBigNumber_formatText(value){
+   return this.__base.MUiGridColumnCurrency.formatText.call(this, value)
+}
+MO.FGuiGridColumnBigNumber_dispose = function FGuiGridColumnBigNumber_dispose(){
+   var o = this;
+   o.__base.MUiGridColumnCurrency.dispose.call(o);
+   o.__base.FGuiGridColumn.dispose.call(o);
+}
 MO.FGuiGridColumnCurrency = function FGuiGridColumnCurrency(o){
    o = MO.Class.inherits(this, o, MO.FGuiGridColumn, MO.MUiGridColumnCurrency);
-   o.construct  = MO.FGuiGridColumnCurrency_construct;
-   o.formatText = MO.FGuiGridColumnCurrency_formatText;
-   o.dispose    = MO.FGuiGridColumnCurrency_dispose;
+   o.construct    = MO.FGuiGridColumnCurrency_construct;
+   o.formatText   = MO.FGuiGridColumnCurrency_formatText;
+   o.dispose      = MO.FGuiGridColumnCurrency_dispose;
    return o;
 }
 MO.FGuiGridColumnCurrency_construct = function FGuiGridColumnCurrency_construct(){
