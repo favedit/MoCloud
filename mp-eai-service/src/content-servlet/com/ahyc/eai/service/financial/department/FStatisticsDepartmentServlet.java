@@ -110,7 +110,7 @@ public class FStatisticsDepartmentServlet
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long dateSpan = endDate.get() - beginDate.get();
-      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24)){
+      if((dateSpan < 0) || (dateSpan > 1000 * 3600 * 24)){
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................

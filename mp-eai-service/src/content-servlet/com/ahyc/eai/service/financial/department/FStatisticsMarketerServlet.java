@@ -208,7 +208,7 @@ public class FStatisticsMarketerServlet
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long span = endDate.get() - beginDate.get();
-      if((span < 0) && (span > 1000 * 600)){
+      if((span < 0) || (span > 1000 * 600)){
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................

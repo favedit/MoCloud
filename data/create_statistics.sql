@@ -183,7 +183,13 @@ CREATE TABLE `ST_FIN_CUSTOMER`
    `LABEL`                         VARCHAR(40), 
    `PHONE`                         VARCHAR(20), 
    `CARD`                          VARCHAR(20), 
+   `INVESTMENT_FIRST_DATE`         DATETIME, 
+   `INVESTMENT_LAST_DATE`          DATETIME, 
+   `INVESTMENT_NUMBER`             INTEGER, 
    `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_FIRST_DATE`         DATETIME, 
+   `REDEMPTION_LAST_DATE`          DATETIME, 
+   `REDEMPTION_NUMBER`             INTEGER, 
    `REDEMPTION_TOTAL`              DOUBLE, 
    `NETINVESTMENT_TOTAL`           DOUBLE, 
    `INTEREST_TOTAL`                DOUBLE, 
@@ -826,5 +832,3 @@ CREATE TABLE `ST_FIN_FORECAST`
 
 ALTER TABLE ST_FIN_FORECAST 
    ADD CONSTRAINT ST_FIN_FCT_UK_GID UNIQUE ( GUID ); 
-
-

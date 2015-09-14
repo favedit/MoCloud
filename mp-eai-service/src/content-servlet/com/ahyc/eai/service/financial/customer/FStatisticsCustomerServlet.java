@@ -160,10 +160,10 @@ public class FStatisticsCustomerServlet
          }
          // 计算投资年化盈利
          double investmentGain = 0;
-         String tenderModelLabel = null;
+         String investmentTenderLabel = null;
          FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(dynamicUnit.tenderModel());
          if(tenderModel != null){
-            tenderModelLabel = tenderModel.label();
+            investmentTenderLabel = tenderModel.label();
             investmentGain = tenderModel.calculateYearGain(investmentAmount, currentDate);
          }
          // 计算银行
@@ -173,9 +173,9 @@ public class FStatisticsCustomerServlet
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
-         stream.writeString(tenderModelLabel);
          stream.writeBoolean(investmentFirst);
          stream.writeUint16(investmentNumber);
+         stream.writeString(investmentTenderLabel);
          stream.writeDouble(investmentAmount);
          stream.writeDouble(investmentGain);
          stream.writeDouble(investmentBankGain);
@@ -219,7 +219,7 @@ public class FStatisticsCustomerServlet
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long dateSpan = endDate.get() - beginDate.get();
-      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24 * 7)){
+      if((dateSpan < 0) || (dateSpan > 1000 * 3600 * 24 * 7)){
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................

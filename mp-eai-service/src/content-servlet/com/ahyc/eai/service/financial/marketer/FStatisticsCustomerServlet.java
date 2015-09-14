@@ -3,6 +3,8 @@ package com.ahyc.eai.service.financial.marketer;
 import com.ahyc.eai.core.financial.FFinancialTenderModel;
 import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
@@ -103,7 +105,7 @@ public class FStatisticsCustomerServlet
       float annualizedRate = _configurationConsole.getParameterAsFloat(logicContext, "eai.financial.bank.annualized.rate");
       // 输出当日合计数据
       FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
-      sumSql.bindString("date", endDate.format("YYYYMMDD"));
+      sumSql.bindDateTime("date", endDate, "YYYYMMDD");
       FRow sumRow = connection.find(sumSql);
       stream.writeDouble(sumRow.getDouble("investment_count"));
       stream.writeDouble(sumRow.getDouble("investment_total"));
@@ -112,7 +114,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 输出排行数据
       FSql rankSql = _resource.findString(FSql.class, "sql.dynamic.rank");
-      rankSql.bindString("date", endDate.format("YYYYMMDD"));
+      rankSql.bindDateTime("date", endDate, "YYYYMMDD");
       FDataset rankDataset = connection.fetchDataset(rankSql);
       int rankCount = rankDataset.count();
       stream.writeInt32(rankCount);
@@ -124,30 +126,43 @@ public class FStatisticsCustomerServlet
       }
       //............................................................
       // 输出即时数据[倒序获得，正序写入]
+      FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = null;
       FSql whereSql = new FSql();
       whereSql.append("CUSTOMER_ACTION_CD=1 AND CUSTOMER_ACTION_DATE >= STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
       if(first){
-         whereSql.bindString("begin_date", beginDate.format("YYYYMMDD000000"));
-         whereSql.bindString("end_date", endDate.format());
+         whereSql.bindDateTime("begin_date", beginDate, "YYYYMMDD000000");
+         whereSql.bindDateTime("end_date", endDate);
          dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE DESC", 30, 0);
       }else{
-         whereSql.bindString("begin_date", beginDate.format());
-         whereSql.bindString("end_date", endDate.format());
+         whereSql.bindDateTime("begin_date", beginDate);
+         whereSql.bindDateTime("end_date", endDate);
          dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE DESC");
       }
       int count = dynamicDataset.count();
       stream.writeInt32(count);
       for(int n = count - 1; n >= 0; n--){
          FStatisticsFinancialDynamicUnit dynamicUnit = dynamicDataset.get(n);
+         TDateTime investmentDate = dynamicUnit.customerActionDate();
          double investmentAmount = dynamicUnit.customerActionAmount();
+         // 查找用户信息
+         long customerId = dynamicUnit.customerId();
+         FStatisticsFinancialCustomerUnit customerUnit = customerLogic.find(customerId);
+         boolean investmentFirst = false;
+         int investmentNumber = 0;
+         if(customerUnit != null){
+            if(customerUnit.investmentFirstDate().equals(investmentDate)){
+               investmentFirst = true;
+               investmentNumber = customerUnit.investmentNumber();
+            }
+         }
          // 计算投资年化盈利
-         String tenderModelLabel = null;
+         String investmentTenderLabel = null;
          double investmentGain = 0;
          FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(dynamicUnit.tenderModel());
          if(tenderModel != null){
-            tenderModelLabel = tenderModel.label();
+            investmentTenderLabel = tenderModel.label();
             investmentGain = tenderModel.calculateYearGain(investmentAmount, currentDate);
          }
          // 计算银行
@@ -157,7 +172,9 @@ public class FStatisticsCustomerServlet
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
-         stream.writeString(tenderModelLabel);
+         stream.writeBoolean(investmentFirst);
+         stream.writeUint16(investmentNumber);
+         stream.writeString(investmentTenderLabel);
          stream.writeDouble(investmentAmount);
          stream.writeDouble(investmentGain);
          stream.writeDouble(investmentBankGain);
@@ -170,7 +187,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send marketer customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 
@@ -201,7 +218,7 @@ public class FStatisticsCustomerServlet
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       long dateSpan = endDate.get() - beginDate.get();
-      if((dateSpan < 0) && (dateSpan > 1000 * 3600 * 24 * 7)){
+      if((dateSpan < 0) || (dateSpan > 1000 * 3600 * 24 * 7)){
          throw new FFatalError("Parameter span is invalid.");
       }
       //............................................................
@@ -218,8 +235,8 @@ public class FStatisticsCustomerServlet
       FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
       FSql phaseWhereSql = new FSql();
       phaseWhereSql.append("RECORD_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
-      phaseWhereSql.bindString("begin_date", beginDate.format());
-      phaseWhereSql.bindString("end_date", endDate.format());
+      phaseWhereSql.bindDateTime("begin_date", beginDate);
+      phaseWhereSql.bindDateTime("end_date", endDate);
       FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(phaseWhereSql, "RECORD_DATE ASC");
       // 计算阶段统计
       double investmentTotal = 0;
@@ -244,7 +261,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send marketer customer trend. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
       return sendStream(context, request, response, stream);
    }
 }

@@ -165,7 +165,7 @@ public class RSql
       }
       // 格式化处理
       String[] items = RString.split(sql, '\n');
-      if(null != items){
+      if(items != null){
          boolean first = true;
          for(String item : items){
             item = item.trim();
