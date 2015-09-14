@@ -285,14 +285,17 @@ public class FStatisticsCustomerServlet
       }
       // 检查参数
       String beginSource = context.parameter("begin");
+      if(RString.isEmpty(beginSource)){
+         beginSource = "20140101000000";
+      }else if(beginSource.length() != 14){
+         throw new FFatalError("Parameter begin date is invalid.");
+      }
       String endSource = context.parameter("end");
-      if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
-         throw new FFatalError("Parameter is invalid.");
+      if(RString.isEmpty(endSource)){
+         endSource = RDateTime.format();
+      }else if(endSource.length() != 14){
+         throw new FFatalError("Parameter begin date is invalid.");
       }
-      if((beginSource.length() != 14) || (endSource.length() != 14)){
-         throw new FFatalError("Parameter length is invalid.");
-      }
-      // 限制查询范围最大10分钟
       TDateTime beginDate = new TDateTime(beginSource);
       TDateTime endDate = new TDateTime(endSource);
       //............................................................
@@ -311,6 +314,18 @@ public class FStatisticsCustomerServlet
       sql.bindDateTime("begin_date", beginDate);
       sql.bindDateTime("end_date", endDate);
       FDataset dataset = connection.fetchDataset(sql);
+      // 写入总数
+      int customerTotal = 0;
+      double investmentTotal = 0;
+      for(FRow row : dataset){
+         customerTotal += row.getInteger("customer_count");
+         investmentTotal += row.getDouble("investment_total");
+      }
+      double investmentAvg = investmentTotal / customerTotal;
+      stream.writeDouble(investmentTotal);
+      stream.writeUint32(customerTotal);
+      stream.writeDouble(investmentAvg);
+      // 写入详细
       int count = dataset.count();
       stream.writeInt32(count);
       for(FRow row : dataset){
@@ -378,6 +393,13 @@ public class FStatisticsCustomerServlet
       sql.bindDateTime("end_date", endDate);
       FDataset dataset = connection.fetchDataset(sql);
       int count = dataset.count();
+      // 写入总数
+      //      int customerTotal = 0;
+      //      for(FRow row : dataset){
+      //         customerTotal += row.getInteger("customer_count");
+      //      }
+      //      stream.writeUint32(customerTotal);
+      // 写入详细
       stream.writeInt32(count);
       for(FRow row : dataset){
          stream.writeInt32(row.getInteger("customer_age"));
