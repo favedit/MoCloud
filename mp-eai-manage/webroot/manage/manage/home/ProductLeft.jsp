@@ -67,7 +67,7 @@
                      <li><a href="/product/financial/department/Department.wa" target="right">部门信息</a></li>
                   </jh:equals>
                   <jh:equals source="product.financial.marketer" value="&basePage.menuString">
-                     <li><a href="/product/financial/department/Marketer.wa" target="right">理财师信息</a></li>
+                     <li><a href="/product/financial/marketer/Marketer.wa" target="right">理财师信息</a></li>
                   </jh:equals>
                   
                </ul>
