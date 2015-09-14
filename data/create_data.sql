@@ -1180,10 +1180,14 @@ CREATE TABLE `DT_FIN_TENDER`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `NAME`                          VARCHAR(40), 
-   `LABEL`                         VARCHAR(40), 
-   `RATE`                          FLOAT, 
-   `FACTOR`                        FLOAT, 
+   `CUSTOMER_ID`                   INTEGER, 
+   `PRODUCT_ID`                    INTEGER, 
+   `INVESTMENT`                    FLOAT, 
+   `INVESTMENT_DATE`               DATETIME, 
+   `REDEMPTION`                    FLOAT, 
+   `REDEMPTION_DATE`               DATETIME, 
+   `NETINVESTMENT`                 FLOAT, 
+   `INTEREST`                      FLOAT, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -1193,6 +1197,12 @@ CREATE TABLE `DT_FIN_TENDER`
 
 ALTER TABLE DT_FIN_TENDER 
    ADD CONSTRAINT DT_FIN_TDR_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_FIN_TENDER ADD CONSTRAINT DT_FIN_TDR_FK_CUSTOMER 
+      FOREIGN KEY (`CUSTOMER_ID`) REFERENCES DT_FIN_CUSTOMER(`OUID`); 
+
+ALTER TABLE DT_FIN_TENDER ADD CONSTRAINT DT_FIN_TDR_FK_PRODUCT 
+      FOREIGN KEY (`PRODUCT_ID`) REFERENCES DT_FIN_TENDER(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Product]
@@ -1205,6 +1215,10 @@ CREATE TABLE `DT_FIN_PRODUCT`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `NAME`                          VARCHAR(40), 
    `LABEL`                         VARCHAR(40), 
+   `RENT_PERSON`                   VARCHAR(200), 
+   `TENANT_PERSON`                 VARCHAR(200), 
+   `ANNUAL_RATE_OF_RETURN`         FLOAT, 
+   `TIME_LIMIT`                    INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -1282,15 +1296,6 @@ CREATE TABLE `DT_FIN_MEMBER`
    `EMAIL`                         VARCHAR(80), 
    `GENDER_CD`                     INTEGER, 
    `BIRTHDAY`                      DATETIME, 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `INVESTMENT_COUNT`              INTEGER, 
-   `INVESTMENT_DATE`               DATETIME, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `REDEMPTION_COUNT`              INTEGER, 
-   `REDEMPTION_DATE`               DATETIME, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
-   `INTEREST_TOTAL`                DOUBLE, 
-   `PERFORMANCE_TOTAL`             DOUBLE, 
    `SCORE_RECOMMEND`               INTEGER, 
    `SCORE_POINT`                   INTEGER, 
    `REGISTER_DATE`                 DATETIME, 
@@ -1314,12 +1319,18 @@ CREATE TABLE `DT_FIN_CUSTOMER`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `PASSPORT`                      VARCHAR(40), 
-   `LABEL`                         VARCHAR(40), 
-   `RANK`                          VARCHAR(40), 
-   `PHONE_CODE`                    VARCHAR(20), 
-   `CARD_CODE`                     VARCHAR(20), 
-   `DEPARTMENT_LABELS`             VARCHAR(200), 
+   `MEMBER_ID`                     BIGINT, 
+   `MARRIAGE_STATUS`               INTEGER, 
+   `HIGHEST_EDUCATION`             INTEGER, 
+   `MONTHLY_INCOME`                INTEGER, 
+   `PROFESSION`                    INTEGER, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `INVESTMENT_COUNT`              INTEGER, 
+   `REDEMPTION_TOTAL`              FLOAT, 
+   `REDEMPTION_COUNT`              INTEGER, 
+   `NETINVESTMENT`                 FLOAT, 
+   `INTEREST_TOTAL`                FLOAT, 
+   `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -1328,6 +1339,9 @@ CREATE TABLE `DT_FIN_CUSTOMER`
 
 ALTER TABLE DT_FIN_CUSTOMER 
    ADD CONSTRAINT DT_FIN_CST_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_FIN_CUSTOMER ADD CONSTRAINT DT_FIN_CST_FK_MEMBER 
+      FOREIGN KEY (`MEMBER_ID`) REFERENCES DT_FIN_MEMBER(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Marketer]
@@ -1340,8 +1354,9 @@ CREATE TABLE `DT_FIN_MARKETER`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
    `LINK_ID`                       BIGINT, 
-   `PASSPORT`                      VARCHAR(40), 
+   `NAME`                          VARCHAR(40), 
    `LABEL`                         VARCHAR(40), 
+   `PASSPORT`                      INTEGER, 
    `STATUS_CD`                     INTEGER, 
    `PHONE`                         VARCHAR(20), 
    `CARD`                          VARCHAR(20), 
@@ -1358,6 +1373,7 @@ CREATE TABLE `DT_FIN_MARKETER`
    `CUSTOMER_NETINVESTMENT_TOTAL`  DOUBLE, 
    `CUSTOMER_INTEREST_TOTAL`       DOUBLE, 
    `CUSTOMER_PERFORMANCE_TOTAL`    DOUBLE, 
+   `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -1380,12 +1396,11 @@ CREATE TABLE `DT_FIN_MARKETER_MEMBER`
    `CUSTOMER_ID`                   BIGINT, 
    `RELATION_CD`                   INTEGER, 
    `SMS_CONTACT_CD`                INTEGER, 
-   `CARD_CODE`                     VARCHAR(20), 
-   `DEPARTMENT_LABELS`             VARCHAR(200), 
    `RECOMMEND_BEGIN_DATE`          DATETIME, 
    `RECOMMEND_END_DATE`            DATETIME, 
    `FEEDBACK_CD`                   INTEGER, 
    `FEEDBACK_NOTE`                 VARCHAR(2000), 
+   `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 

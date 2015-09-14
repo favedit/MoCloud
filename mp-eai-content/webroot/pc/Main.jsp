@@ -64,20 +64,38 @@
                                  <li style="display: block;" >
                                     <!-- <h4>用户投资实时展示中心</h4> -->
                                     <div onclick='doChart("customer")' class="icon"></div>
-                                    <img onclick='doChart("customer")' src="images/main/1-2.png">
+                                    <img src="images/main/1-2.png">
                                     <!-- <p><p> -->
                                  </li>
                               </je:authority>
                               <je:authority module='eai.marketer.marketer'>
                                  <li style="display: none;">
                                     <div onclick='doChart("marketer")' class="icon"></div>
-                                    <img  onclick='doChart("marketer")' src="images/main/2-1.png">
+                                    <img src="images/main/2-1.png">
                                  </li>
                               </je:authority>
                               <je:authority module='eai.department.marketer'>
                                  <li style="display: none;" >
                                     <div onclick='doChart("department")' class="icon"></div>
-                                    <img onclick='doChart("department")' src="images/main/2-3.png">
+                                    <img src="images/main/2-3.png">
+                                 </li>
+                              </je:authority>
+                              <je:authority module='eai.statistics.marketer'>
+                                 <li style="display: none;" >
+                                    <div onclick='doChart("customer")' class="icon"></div>
+                                    <img src="images/main/2-3.png">
+                                 </li>
+                              </je:authority>
+                              <je:authority module='eai.marketer.manage'>
+                                 <li style="display: none;" >
+                                    <div onclick='doChart("customer")' class="icon"></div>
+                                    <img src="images/main/2-3.png">
+                                 </li>
+                              </je:authority>
+                              <je:authority module='eai.performence.marketer'>
+                                 <li style="display: none;" >
+                                    <div onclick='doChart("customer")' class="icon"></div>
+                                    <img src="images/main/2-3.png">
                                  </li>
                               </je:authority>
                            </ul>
@@ -96,6 +114,15 @@
                         </je:authority>
                         <je:authority module='eai.department.marketer'>
                            <li onclick='doChart("department")'><img src="images/main/2-2.png"><b>理财师管理实时展示中心</b></li>
+                        </je:authority>
+                         <je:authority module='eai.statistics.marketer'>
+                           <li onclick='doChart("marketer")' ><img src="images/main/1-1.PNG"><b>全国各省投资总额展示中心</b></li>
+                        </je:authority>
+                        <je:authority module='eai.marketer.manage'>
+                           <li onclick='doChart("marketer")' ><img src="images/main/1-1.PNG"><b>全球理财师数据展示中心</b></li>
+                        </je:authority>
+                        <je:authority module='eai.performence.marketer'>
+                           <li onclick='doChart("marketer")' ><img src="images/main/1-1.PNG"><b>全球实时统计数据展示中心</b></li>
                         </je:authority>
                      </ul>
                   </div>
