@@ -79,7 +79,8 @@ public class FValidationConsole
       where.append(" AND ");
       where.append(nowTime + " > " + FCacheSystemValidationLogic.CREATE_DATE);
       where.append(" AND ");
-      where.append(FCacheSystemValidationLogic.PASSPORT + " = '" + passport + "'");
+      where.append(FCacheSystemValidationLogic.PASSPORT + " = '{PASSPORT}'");
+      where.bind("PASSPORT", passport);
       FCacheSystemValidationLogic logic = logicContext.findLogic(FCacheSystemValidationLogic.class);
       FLogicDataset<FCacheSystemValidationUnit> user = logic.fetch(where, "CREATE_DATE");
       if(user == null){

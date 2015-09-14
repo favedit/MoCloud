@@ -164,7 +164,7 @@ public class FUserAction
       _logger.debug(this, "UpdateBefore", "UpdateBefore Begin.(id={1})", id);
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, id);
       userPage.setUser(unit);
-      return "/manage/user/UpdateUser";
+      return "#/manage/user/UpdateUser";
    }
 
    // ============================================================
