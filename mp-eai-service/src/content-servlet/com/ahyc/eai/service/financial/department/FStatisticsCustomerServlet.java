@@ -93,7 +93,7 @@ public class FStatisticsCustomerServlet
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
       FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
-      sumSql.bindString("date", endDate.format("YYYYMMDD"));
+      sumSql.bindDateTime("date", endDate, "YYYYMMDD");
       FRow sumRow = connection.find(sumSql);
       stream.writeDouble(sumRow.getDouble("investment_count"));
       stream.writeDouble(sumRow.getDouble("investment_total"));
@@ -102,7 +102,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 输出排行数据
       FSql rankSql = _resource.findString(FSql.class, "sql.dynamic.rank");
-      rankSql.bindString("date", endDate.format("YYYYMMDD"));
+      rankSql.bindDateTime("date", endDate, "YYYYMMDD");
       FDataset rankDataset = connection.fetchDataset(rankSql);
       int rankCount = rankDataset.count();
       stream.writeInt32(rankCount);
@@ -115,10 +115,9 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 输出即时数据
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
-      FSql whereSql = new FSql();
-      whereSql.append("CUSTOMER_ACTION_CD=1 AND CUSTOMER_ACTION_DATE >= STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
-      whereSql.bindString("begin_date", beginDate.format());
-      whereSql.bindString("end_date", endDate.format());
+      FSql whereSql = new FSql("CUSTOMER_ACTION_CD=1 AND CUSTOMER_ACTION_DATE >= STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE < STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      whereSql.bindDateTime("begin_date", beginDate);
+      whereSql.bindDateTime("end_date", endDate);
       FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE");
       int count = dynamicDataset.count();
       stream.writeInt32(count);
@@ -193,10 +192,9 @@ public class FStatisticsCustomerServlet
       FByteStream stream = createStream(context);
       // 输出总计数据
       FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
-      FSql phaseWhereSql = new FSql();
-      phaseWhereSql.append("RECORD_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
-      phaseWhereSql.bindString("begin_date", beginDate.format());
-      phaseWhereSql.bindString("end_date", endDate.format());
+      FSql phaseWhereSql = new FSql("RECORD_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND RECORD_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      phaseWhereSql.bindDateTime("begin_date", beginDate);
+      phaseWhereSql.bindDateTime("end_date", endDate);
       FLogicDataset<FStatisticsFinancialPhaseUnit> phaseDataset = phaseLogic.fetch(phaseWhereSql, "RECORD_DATE ASC");
       // 计算阶段统计
       double investmentTotal = 0;

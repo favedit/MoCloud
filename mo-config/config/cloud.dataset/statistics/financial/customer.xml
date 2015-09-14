@@ -7,7 +7,13 @@
   <FieldString _uuid="d9022379-2a1c-49f7-bf3d-7b5b74e0b37a" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
   <FieldString _uuid="a70e67e2-0570-4aa0-a9f4-79d5eab8cf15" name="phone" label="M#12cn14电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
   <FieldString _uuid="665f53d7-e329-42a6-ba8a-12461e872e22" name="card" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
+  <FieldDateTime _uuid="959c3256-780c-4806-96e0-b216e5809540" name="investment_first_date" label="M#12cn16首次投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_FIRST_DATE" />
+  <FieldDateTime _uuid="06abac33-af75-4693-b9fb-189a21180a60" name="investment_last_date" label="M#12cn16投资最后日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_LAST_DATE" />
+  <FieldInteger _uuid="c2250a0e-1731-4c61-a981-90760e165412" name="investment_number" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_NUMBER" />
   <FieldDouble _uuid="2fe8ae6d-ad8b-4f5a-a0b3-b94051786e7d" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldDateTime _uuid="73b9e864-6a69-47b7-a1a5-db4bbd880637" name="redemption_first_date" label="M#12cn16首次赎回时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_FIRST_DATE" />
+  <FieldDateTime _uuid="5726a6fd-24a4-48b1-a438-339871995bf8" name="redemption_last_date" label="M#12cn16赎回最后时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_LAST_DATE" />
+  <FieldInteger _uuid="1378cffb-1725-4313-9aa6-2f759ed3d7fc" name="redemption_number" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_NUMBER" />
   <FieldDouble _uuid="0a0d6713-ec0a-473c-8bb1-8e84a9e72a84" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
   <FieldDouble _uuid="e2ee0b22-9138-46c0-9787-b2b93223aebf" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
   <FieldDouble _uuid="b7cdab5c-9ad1-447d-8548-cad696f02099" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />

@@ -132,7 +132,7 @@ public class TDateTime
    // @return 是否为空
    //============================================================
    public boolean isEmpty(){
-      return (0 == _value);
+      return (_value == 0);
    }
 
    //============================================================
@@ -142,7 +142,7 @@ public class TDateTime
    // @return 是否相等
    //============================================================
    public boolean equals(TDateTime value){
-      if(null == value){
+      if(value == null){
          return false;
       }
       return _value == value._value;
@@ -156,7 +156,7 @@ public class TDateTime
    //============================================================
    public boolean equals(TDateTime value,
                          long span){
-      if(null == value){
+      if(value == null){
          return false;
       }
       long sourceValue = _value - (_value % span);
@@ -171,7 +171,7 @@ public class TDateTime
    // @return 是否相等
    //============================================================
    public boolean equalsDate(TDateTime value){
-      if(null == value){
+      if(value == null){
          return false;
       }else{
          // 解析数据
@@ -802,7 +802,7 @@ public class TDateTime
       _second = 0;
       _value = 0;
       // 参数检查
-      if((null == value) || (null == format)){
+      if((value == null) || (format == null)){
          return false;
       }
       if((0 == value.length()) || (0 == format.length())){

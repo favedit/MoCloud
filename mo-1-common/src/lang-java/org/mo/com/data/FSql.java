@@ -2,6 +2,7 @@ package org.mo.com.data;
 
 import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 
 //============================================================
 // <T>SQL字符串。</T>
@@ -201,6 +202,32 @@ public class FSql
    public void bindDouble(String name,
                           double value){
       innerReplace("{" + name + "}", Double.toString(value));
+   }
+
+   //============================================================
+   // <T>绑定时间日期。</T>
+   //
+   // @param name 名称 
+   // @param value 内容 
+   //============================================================
+   public void bindDateTime(String name,
+                            TDateTime value){
+      String text = value.format();
+      innerReplace("{" + name + "}", "'" + text + "'");
+   }
+
+   //============================================================
+   // <T>绑定时间日期。</T>
+   //
+   // @param name 名称 
+   // @param value 内容
+   // @param format 格式
+   //============================================================
+   public void bindDateTime(String name,
+                            TDateTime value,
+                            String format){
+      String text = value.format(format);
+      innerReplace("{" + name + "}", "'" + text + "'");
    }
 
    //============================================================

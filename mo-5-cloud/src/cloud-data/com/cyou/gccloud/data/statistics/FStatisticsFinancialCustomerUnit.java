@@ -81,11 +81,47 @@ public class FStatisticsFinancialCustomerUnit
    // 字段身份证号的定义。
    protected String _card;
 
+   // 存储字段首次投资时间的定义。
+   private TDateTime __investmentFirstDate = new TDateTime();
+
+   // 字段首次投资时间的定义。
+   protected TDateTime _investmentFirstDate = new TDateTime();
+
+   // 存储字段投资最后日期的定义。
+   private TDateTime __investmentLastDate = new TDateTime();
+
+   // 字段投资最后日期的定义。
+   protected TDateTime _investmentLastDate = new TDateTime();
+
+   // 存储字段投资次数的定义。
+   private int __investmentNumber;
+
+   // 字段投资次数的定义。
+   protected int _investmentNumber;
+
    // 存储字段投资总计的定义。
    private double __investmentTotal;
 
    // 字段投资总计的定义。
    protected double _investmentTotal;
+
+   // 存储字段首次赎回时间的定义。
+   private TDateTime __redemptionFirstDate = new TDateTime();
+
+   // 字段首次赎回时间的定义。
+   protected TDateTime _redemptionFirstDate = new TDateTime();
+
+   // 存储字段赎回最后时间的定义。
+   private TDateTime __redemptionLastDate = new TDateTime();
+
+   // 字段赎回最后时间的定义。
+   protected TDateTime _redemptionLastDate = new TDateTime();
+
+   // 存储字段赎回次数的定义。
+   private int __redemptionNumber;
+
+   // 字段赎回次数的定义。
+   protected int _redemptionNumber;
 
    // 存储字段赎回总计的定义。
    private double __redemptionTotal;
@@ -412,6 +448,87 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
+   // <T>判断首次投资时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentFirstDateChanged(){
+      return !__investmentFirstDate.equals(_investmentFirstDate);
+   }
+
+   //============================================================
+   // <T>获得首次投资时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime investmentFirstDate(){
+      return _investmentFirstDate;
+   }
+
+   //============================================================
+   // <T>设置首次投资时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentFirstDate(TDateTime value){
+      _investmentFirstDate = value;
+   }
+
+   //============================================================
+   // <T>判断投资最后日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentLastDateChanged(){
+      return !__investmentLastDate.equals(_investmentLastDate);
+   }
+
+   //============================================================
+   // <T>获得投资最后日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime investmentLastDate(){
+      return _investmentLastDate;
+   }
+
+   //============================================================
+   // <T>设置投资最后日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentLastDate(TDateTime value){
+      _investmentLastDate = value;
+   }
+
+   //============================================================
+   // <T>判断投资次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentNumberChanged(){
+      return __investmentNumber != _investmentNumber;
+   }
+
+   //============================================================
+   // <T>获得投资次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentNumber(){
+      return _investmentNumber;
+   }
+
+   //============================================================
+   // <T>设置投资次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentNumber(int value){
+      _investmentNumber = value;
+   }
+
+   //============================================================
    // <T>判断投资总计的数据是否改变。</T>
    //
    // @return 数据内容
@@ -436,6 +553,87 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setInvestmentTotal(double value){
       _investmentTotal = value;
+   }
+
+   //============================================================
+   // <T>判断首次赎回时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionFirstDateChanged(){
+      return !__redemptionFirstDate.equals(_redemptionFirstDate);
+   }
+
+   //============================================================
+   // <T>获得首次赎回时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime redemptionFirstDate(){
+      return _redemptionFirstDate;
+   }
+
+   //============================================================
+   // <T>设置首次赎回时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionFirstDate(TDateTime value){
+      _redemptionFirstDate = value;
+   }
+
+   //============================================================
+   // <T>判断赎回最后时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionLastDateChanged(){
+      return !__redemptionLastDate.equals(_redemptionLastDate);
+   }
+
+   //============================================================
+   // <T>获得赎回最后时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime redemptionLastDate(){
+      return _redemptionLastDate;
+   }
+
+   //============================================================
+   // <T>设置赎回最后时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionLastDate(TDateTime value){
+      _redemptionLastDate = value;
+   }
+
+   //============================================================
+   // <T>判断赎回次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionNumberChanged(){
+      return __redemptionNumber != _redemptionNumber;
+   }
+
+   //============================================================
+   // <T>获得赎回次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionNumber(){
+      return _redemptionNumber;
+   }
+
+   //============================================================
+   // <T>设置赎回次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionNumber(int value){
+      _redemptionNumber = value;
    }
 
    //============================================================
@@ -683,8 +881,20 @@ public class FStatisticsFinancialCustomerUnit
             return _phone;
          case "card":
             return _card;
+         case "investment_first_date":
+            return _investmentFirstDate.toString();
+         case "investment_last_date":
+            return _investmentLastDate.toString();
+         case "investment_number":
+            return RInteger.toString(_investmentNumber);
          case "investment_total":
             return RDouble.toString(_investmentTotal);
+         case "redemption_first_date":
+            return _redemptionFirstDate.toString();
+         case "redemption_last_date":
+            return _redemptionLastDate.toString();
+         case "redemption_number":
+            return RInteger.toString(_redemptionNumber);
          case "redemption_total":
             return RDouble.toString(_redemptionTotal);
          case "netinvestment_total":
@@ -745,8 +955,26 @@ public class FStatisticsFinancialCustomerUnit
          case "card":
             _card = value;
             break;
+         case "investment_first_date":
+            _investmentFirstDate.parse(value);
+            break;
+         case "investment_last_date":
+            _investmentLastDate.parse(value);
+            break;
+         case "investment_number":
+            _investmentNumber = RInteger.parse(value);
+            break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
+            break;
+         case "redemption_first_date":
+            _redemptionFirstDate.parse(value);
+            break;
+         case "redemption_last_date":
+            _redemptionLastDate.parse(value);
+            break;
+         case "redemption_number":
+            _redemptionNumber = RInteger.parse(value);
             break;
          case "redemption_total":
             _redemptionTotal = RDouble.parse(value);
@@ -827,9 +1055,33 @@ public class FStatisticsFinancialCustomerUnit
                __card = value;
                _card = __card;
                break;
+            case "investment_first_date":
+               __investmentFirstDate.parse(value);
+               _investmentFirstDate.assign(__investmentFirstDate);
+               break;
+            case "investment_last_date":
+               __investmentLastDate.parse(value);
+               _investmentLastDate.assign(__investmentLastDate);
+               break;
+            case "investment_number":
+               __investmentNumber = RInteger.parse(value);
+               _investmentNumber = __investmentNumber;
+               break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
+               break;
+            case "redemption_first_date":
+               __redemptionFirstDate.parse(value);
+               _redemptionFirstDate.assign(__redemptionFirstDate);
+               break;
+            case "redemption_last_date":
+               __redemptionLastDate.parse(value);
+               _redemptionLastDate.assign(__redemptionLastDate);
+               break;
+            case "redemption_number":
+               __redemptionNumber = RInteger.parse(value);
+               _redemptionNumber = __redemptionNumber;
                break;
             case "redemption_total":
                __redemptionTotal = RDouble.parse(value);
@@ -885,7 +1137,13 @@ public class FStatisticsFinancialCustomerUnit
       row.set("label", _label);
       row.set("phone", _phone);
       row.set("card", _card);
+      row.set("investmentFirstDate", _investmentFirstDate);
+      row.set("investmentLastDate", _investmentLastDate);
+      row.set("investmentNumber", _investmentNumber);
       row.set("investmentTotal", _investmentTotal);
+      row.set("redemptionFirstDate", _redemptionFirstDate);
+      row.set("redemptionLastDate", _redemptionLastDate);
+      row.set("redemptionNumber", _redemptionNumber);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("interestTotal", _interestTotal);
@@ -914,7 +1172,13 @@ public class FStatisticsFinancialCustomerUnit
       map.put("label", _label);
       map.put("phone", _phone);
       map.put("card", _card);
+      map.put("investmentFirstDate", _investmentFirstDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("investmentLastDate", _investmentLastDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("investmentNumber", RInteger.toString(_investmentNumber));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("redemptionFirstDate", _redemptionFirstDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("redemptionLastDate", _redemptionLastDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("redemptionNumber", RInteger.toString(_redemptionNumber));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
@@ -943,6 +1207,12 @@ public class FStatisticsFinancialCustomerUnit
       _label = input.readString();
       _phone = input.readString();
       _card = input.readString();
+      _investmentFirstDate.set(input.readInt64());
+      _investmentLastDate.set(input.readInt64());
+      _investmentNumber = input.readInt32();
+      _redemptionFirstDate.set(input.readInt64());
+      _redemptionLastDate.set(input.readInt64());
+      _redemptionNumber = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -967,6 +1237,12 @@ public class FStatisticsFinancialCustomerUnit
       output.writeString(_label);
       output.writeString(_phone);
       output.writeString(_card);
+      output.writeInt64(_investmentFirstDate.get());
+      output.writeInt64(_investmentLastDate.get());
+      output.writeInt32(_investmentNumber);
+      output.writeInt64(_redemptionFirstDate.get());
+      output.writeInt64(_redemptionLastDate.get());
+      output.writeInt32(_redemptionNumber);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

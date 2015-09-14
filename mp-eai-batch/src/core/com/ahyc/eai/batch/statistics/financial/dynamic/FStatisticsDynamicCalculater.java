@@ -17,6 +17,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
+import org.mo.com.data.FSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.RAop;
@@ -68,8 +69,10 @@ public class FStatisticsDynamicCalculater
       FStatisticsFinancialDepartmentLogic departmentLogic = logicContext.findLogic(FStatisticsFinancialDepartmentLogic.class);
       FStatisticsFinancialPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialPhaseLogic.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endDate + "','%Y%m%d%H%i%s')",
-            "CUSTOMER_ACTION_DATE");
+      FSql dynamicSql = new FSql("CUSTOMER_ACTION_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      dynamicSql.bindString("begin_date", beginDate);
+      dynamicSql.bindString("end_date", endDate);
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(dynamicSql, "CUSTOMER_ACTION_DATE");
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
          long recordId = dynamicUnit.ouid();
          long departmentId = dynamicUnit.departmentLinkId();
@@ -91,9 +94,31 @@ public class FStatisticsDynamicCalculater
             double customerRedemptionTotal = customerUnit.redemptionTotal();
             double customerInterestTotal = customerUnit.interestTotal();
             if(customerActionCd == EGcFinancialCustomerAction.Investment){
+               // 设置投资开始时间和结束时间
+               if(customerUnit.investmentFirstDate().isEmpty()){
+                  customerUnit.investmentFirstDate().assign(customerActionDate);
+               }
+               if(customerUnit.investmentLastDate().isEmpty()){
+                  customerUnit.investmentLastDate().assign(customerActionDate);
+               }else if(customerUnit.investmentLastDate().get() < customerActionDate.get()){
+                  customerUnit.investmentLastDate().assign(customerActionDate);
+               }
+               customerUnit.setInvestmentNumber(customerUnit.investmentNumber() + 1);
+               // 计算投资金额
                customerInvestmentTotal += customerActionAmount;
                customerUnit.setInvestmentTotal(customerInvestmentTotal);
             }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+               // 设置赎回开始时间和结束时间
+               if(customerUnit.redemptionFirstDate().isEmpty()){
+                  customerUnit.redemptionFirstDate().assign(customerActionDate);
+               }
+               if(customerUnit.redemptionLastDate().isEmpty()){
+                  customerUnit.redemptionLastDate().assign(customerActionDate);
+               }else if(customerUnit.redemptionLastDate().get() < customerActionDate.get()){
+                  customerUnit.redemptionLastDate().assign(customerActionDate);
+               }
+               customerUnit.setRedemptionNumber(customerUnit.redemptionNumber() + 1);
+               // 计算赎回金额
                customerRedemptionTotal += customerActionAmount;
                customerUnit.setRedemptionTotal(customerRedemptionTotal);
                customerInterestTotal += customerActionInterest;

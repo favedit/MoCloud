@@ -63,8 +63,26 @@ public class FStatisticsFinancialCustomerLogic
    // 字段身份证号的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
 
+   // 字段首次投资时间的定义。
+   public final static SLogicFieldInfo INVESTMENT_FIRST_DATE = new SLogicFieldInfo("INVESTMENT_FIRST_DATE");
+
+   // 字段投资最后日期的定义。
+   public final static SLogicFieldInfo INVESTMENT_LAST_DATE = new SLogicFieldInfo("INVESTMENT_LAST_DATE");
+
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_NUMBER = new SLogicFieldInfo("INVESTMENT_NUMBER");
+
    // 字段投资总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
+
+   // 字段首次赎回时间的定义。
+   public final static SLogicFieldInfo REDEMPTION_FIRST_DATE = new SLogicFieldInfo("REDEMPTION_FIRST_DATE");
+
+   // 字段赎回最后时间的定义。
+   public final static SLogicFieldInfo REDEMPTION_LAST_DATE = new SLogicFieldInfo("REDEMPTION_LAST_DATE");
+
+   // 字段赎回次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_NUMBER = new SLogicFieldInfo("REDEMPTION_NUMBER");
 
    // 字段赎回总计的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
@@ -91,7 +109,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -690,7 +708,13 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`LABEL`");
       cmd.append(",`PHONE`");
       cmd.append(",`CARD`");
+      cmd.append(",`INVESTMENT_FIRST_DATE`");
+      cmd.append(",`INVESTMENT_LAST_DATE`");
+      cmd.append(",`INVESTMENT_NUMBER`");
       cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`REDEMPTION_FIRST_DATE`");
+      cmd.append(",`REDEMPTION_LAST_DATE`");
+      cmd.append(",`REDEMPTION_NUMBER`");
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
@@ -764,7 +788,55 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append('\'');
       }
       cmd.append(',');
+      TDateTime investmentFirstDate = unit.investmentFirstDate();
+      if(investmentFirstDate == null){
+         cmd.append("NULL");
+      }else if(investmentFirstDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(investmentFirstDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime investmentLastDate = unit.investmentLastDate();
+      if(investmentLastDate == null){
+         cmd.append("NULL");
+      }else if(investmentLastDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(investmentLastDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.investmentNumber());
+      cmd.append(',');
       cmd.append(unit.investmentTotal());
+      cmd.append(',');
+      TDateTime redemptionFirstDate = unit.redemptionFirstDate();
+      if(redemptionFirstDate == null){
+         cmd.append("NULL");
+      }else if(redemptionFirstDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionFirstDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime redemptionLastDate = unit.redemptionLastDate();
+      if(redemptionLastDate == null){
+         cmd.append("NULL");
+      }else if(redemptionLastDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionLastDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.redemptionNumber());
       cmd.append(',');
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
@@ -915,9 +987,69 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append('\'');
          }
       }
+      if(unit.isInvestmentFirstDateChanged()){
+         cmd.append(",`INVESTMENT_FIRST_DATE`=");
+         TDateTime investmentFirstDate = unit.investmentFirstDate();
+         if(investmentFirstDate == null){
+            cmd.append("NULL");
+         }else if(investmentFirstDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(investmentFirstDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isInvestmentLastDateChanged()){
+         cmd.append(",`INVESTMENT_LAST_DATE`=");
+         TDateTime investmentLastDate = unit.investmentLastDate();
+         if(investmentLastDate == null){
+            cmd.append("NULL");
+         }else if(investmentLastDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(investmentLastDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isInvestmentNumberChanged()){
+         cmd.append(",`INVESTMENT_NUMBER`=");
+         cmd.append(unit.investmentNumber());
+      }
       if(unit.isInvestmentTotalChanged()){
          cmd.append(",`INVESTMENT_TOTAL`=");
          cmd.append(unit.investmentTotal());
+      }
+      if(unit.isRedemptionFirstDateChanged()){
+         cmd.append(",`REDEMPTION_FIRST_DATE`=");
+         TDateTime redemptionFirstDate = unit.redemptionFirstDate();
+         if(redemptionFirstDate == null){
+            cmd.append("NULL");
+         }else if(redemptionFirstDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionFirstDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRedemptionLastDateChanged()){
+         cmd.append(",`REDEMPTION_LAST_DATE`=");
+         TDateTime redemptionLastDate = unit.redemptionLastDate();
+         if(redemptionLastDate == null){
+            cmd.append("NULL");
+         }else if(redemptionLastDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionLastDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRedemptionNumberChanged()){
+         cmd.append(",`REDEMPTION_NUMBER`=");
+         cmd.append(unit.redemptionNumber());
       }
       if(unit.isRedemptionTotalChanged()){
          cmd.append(",`REDEMPTION_TOTAL`=");

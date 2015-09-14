@@ -531,7 +531,6 @@ public class FDataBatchProcessLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   @Override
    public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
                                                              CharSequence fields,
                                                              CharSequence whereSql,
