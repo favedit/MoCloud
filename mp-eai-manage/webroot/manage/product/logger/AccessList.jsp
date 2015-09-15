@@ -62,8 +62,10 @@
             <tr>
                <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
                <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="150px">ip地址</th>
-               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="400px">账号</th>
-               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="450px">操作信息</th>   
+               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="200px">账号</th>
+               <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="250px">操作信息</th>   
+               <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">请求地址</th>
+               <th data-options="field:'pageInfo',halign:'center',align:'left',sortable:true" width="450px">页面信息</th> 
                <th data-options="field:'updateDate',halign:'center',align:'left'" width="160px">更新时间</th>
             </tr>
          </thead>

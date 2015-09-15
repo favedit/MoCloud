@@ -119,8 +119,7 @@ public class FIndexAction
             //插入用户，权限绑定
             page.setUserType("host");
             String changePass = "white-host:" + hostAddress;
-            FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
-            synchronizeData(logicContext, sessionContext, page, user, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             basePage.setUrl("Main.wa");
             return "/apl/Redirector";
@@ -203,10 +202,7 @@ public class FIndexAction
       }
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
-         if(user != null)
-            userId = user.ouid();
-         synchronizeData(logicContext, sessionContext, page, user, changePass, passport, from);
+         userId = synchronizeData(logicContext, sessionContext, page, changePass, passport, from);
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
@@ -262,16 +258,18 @@ public class FIndexAction
    // @param logicContext 逻辑环境
    // @param passport 账户
    //============================================================
-   private void synchronizeData(ILogicContext logicContext,
+   private long synchronizeData(ILogicContext logicContext,
                                 IWebSession sessionContext,
                                 FIndexPage page,
-                                FDataPersonUserUnit user,
+                                //                                FDataPersonUserUnit user,
                                 String passport,
                                 String label,
                                 int from){
       _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
+      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+      long userId = 0;
       if(user == null){
          //获取角色
          FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
@@ -283,6 +281,7 @@ public class FIndexAction
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
+            userId = unit.ouid();
             session.setUserId(unit.ouid());
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = _entryConsole.doPrepare(logicContext);
@@ -293,9 +292,11 @@ public class FIndexAction
             _entryConsole.doInsert(logicContext, entryUnit);
          }
       }else{
+         userId = user.ouid();
          session.setUserId(user.ouid());
       }
       // 打开会话
       _sessionConsole.open(session);
+      return userId;
    }
 }
