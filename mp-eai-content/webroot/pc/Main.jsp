@@ -111,7 +111,7 @@
                      </div>
                   </div>
                </TD>
-               <TD width="19%" class="main-right" rowspan="2" align="center" valign="center">
+               <TD width="19%" class="main-right" rowspan="2" align="center" valign="top">
                   <div class="titles-container">
                      <ul>
                         <je:authority module='eai.marketer.customer'>
