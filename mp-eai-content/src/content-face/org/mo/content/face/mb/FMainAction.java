@@ -180,7 +180,7 @@ public class FMainAction
       String code = "ChartMarketerManage";
       //保存日志
       saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
-      return EChartPage.Scene;
+      return EChartPage.Scene3d;
    }
 
    //============================================================
