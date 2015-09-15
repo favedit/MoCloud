@@ -2,31 +2,31 @@
 
 <Config>
 
-<Resource name='sql.achievement.day'>
+<Resource name='sql.achievement.day'><![CDATA[
 SELECT
    RECORD_HOUR,
    SUM(INVESTMENT) INVESTMENT_AMOUNT,
    SUM(REDEMPTION) REDEMPTION_AMOUNT,
    SUM(CUSTOMER_COUNT) CUSTOMER_COUNT
 FROM ST_FIN_PHASE
-WHERE RECORD_DAY = {date}
+WHERE (RECORD_DAY = {date}) AND (RECORD_DATE < {date_span}) 
 GROUP BY RECORD_HOUR
 ORDER BY RECORD_HOUR
-</Resource>
+]]></Resource>
 
-<Resource name='sql.achievement.month'>
+<Resource name='sql.achievement.month'><![CDATA[
 SELECT
    RECORD_DAY,
    SUM(INVESTMENT) INVESTMENT_AMOUNT,
    SUM(REDEMPTION) REDEMPTION_AMOUNT,
    SUM(CUSTOMER_COUNT) CUSTOMER_COUNT
 FROM ST_FIN_PHASE
-WHERE RECORD_MONTH = {date}
+WHERE (RECORD_MONTH = {date}) AND (RECORD_DATE < {date_span}) 
 GROUP BY RECORD_DAY
 ORDER BY RECORD_DAY
-</Resource>
+]]></Resource>
 
-<Resource name='sql.achievement.year'>
+<Resource name='sql.achievement.year'><![CDATA[
 SELECT
    MIN(RECORD_DAY) RECORD_DAY,
    DATE_FORMAT(RECORD_DAY, '%w') WEEK_DAY,
@@ -37,6 +37,42 @@ FROM ST_FIN_PHASE
 WHERE (RECORD_YEAR = {prior_date}) OR (RECORD_YEAR = {date})
 GROUP BY DATE_FORMAT(RECORD_DAY, '%Y%v')
 ORDER BY RECORD_DAY
-</Resource>
+]]></Resource>
+
+<Resource name='sql.achievement.register.day'><![CDATA[
+SELECT COUNT(*)
+FROM ST_FIN_MEMBER
+WHERE DATE_FORMAT(REGISTER_DATE, '%Y%m%d') = {date}
+]]></Resource>
+
+<Resource name='sql.achievement.register.month'><![CDATA[
+SELECT COUNT(*)
+FROM ST_FIN_MEMBER
+WHERE DATE_FORMAT(REGISTER_DATE, '%Y%m') = {date}
+]]></Resource>
+
+<Resource name='sql.achievement.register.year'><![CDATA[
+SELECT COUNT(*)
+FROM ST_FIN_MEMBER
+WHERE DATE_FORMAT(REGISTER_DATE, '%Y') = {date}
+]]></Resource>
+
+<Resource name='sql.achievement.investment.day'><![CDATA[
+SELECT COUNT(*)
+FROM ST_FIN_CUSTOMER
+WHERE DATE_FORMAT(INVESTMENT_FIRST_DATE, '%Y%m%d') = {date}
+]]></Resource>
+
+<Resource name='sql.achievement.investment.month'><![CDATA[
+SELECT COUNT(*)
+FROM ST_FIN_CUSTOMER
+WHERE DATE_FORMAT(INVESTMENT_FIRST_DATE, '%Y%m') = {date}
+]]></Resource>
+
+<Resource name='sql.achievement.investment.year'><![CDATA[
+SELECT COUNT(*)
+FROM ST_FIN_CUSTOMER
+WHERE DATE_FORMAT(INVESTMENT_FIRST_DATE, '%Y') = {date}
+]]></Resource>
 
 </Config>

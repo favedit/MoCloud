@@ -78,6 +78,7 @@ public class FStatisticsAchievementServlet
       if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.day");
          sql.bindString("date", currentDate.format("YYYYMMDD"));
+         sql.bindString("date_span", currentDate.format("YYYYMMDDHH240000"));
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
@@ -101,17 +102,26 @@ public class FStatisticsAchievementServlet
             dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
             dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
          }
+         // 获得统计
+         FSql registerSql = _resource.findString(FSql.class, "sql.achievement.register.day");
+         registerSql.bindDateTime("date", currentDate, "YYYYMMDD");
+         long registerCount = connection.executeLong(registerSql);
+         FSql investmentSql = _resource.findString(FSql.class, "sql.achievement.investment.day");
+         investmentSql.bindDateTime("date", currentDate, "YYYYMMDD");
+         long investmentCount = connection.executeLong(investmentSql);
+         // 写入数据
          stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
          stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
          stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
-         stream.writeUint32(customerTotal);
-         stream.writeUint32(customerTotal);
+         stream.writeUint32(registerCount);
+         stream.writeUint32(investmentCount);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当月合计数据
       if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.month");
          sql.bindString("date", currentDate.format("YYYYMM01"));
+         sql.bindString("date_span", currentDate.format("YYYYMMDD000000"));
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
@@ -132,11 +142,19 @@ public class FStatisticsAchievementServlet
             dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
             dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
          }
+         // 获得统计
+         FSql registerSql = _resource.findString(FSql.class, "sql.achievement.register.month");
+         registerSql.bindDateTime("date", currentDate, "YYYYMM");
+         long registerCount = connection.executeLong(registerSql);
+         FSql investmentSql = _resource.findString(FSql.class, "sql.achievement.investment.month");
+         investmentSql.bindDateTime("date", currentDate, "YYYYMM");
+         long investmentCount = connection.executeLong(investmentSql);
+         // 写入数据
          stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
          stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
          stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
-         stream.writeUint32(0);
-         stream.writeUint32(0);
+         stream.writeUint32(registerCount);
+         stream.writeUint32(investmentCount);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当年合计数据
@@ -198,11 +216,19 @@ public class FStatisticsAchievementServlet
             dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
             dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
          }
+         // 获得统计
+         FSql registerSql = _resource.findString(FSql.class, "sql.achievement.register.year");
+         registerSql.bindDateTime("date", currentDate, "YYYY");
+         long registerCount = connection.executeLong(registerSql);
+         FSql investmentSql = _resource.findString(FSql.class, "sql.achievement.investment.year");
+         investmentSql.bindDateTime("date", currentDate, "YYYY");
+         long investmentCount = connection.executeLong(investmentSql);
+         // 写入数据
          stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
          stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
          stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
-         stream.writeUint32(0);
-         stream.writeUint32(0);
+         stream.writeUint32(registerCount);
+         stream.writeUint32(investmentCount);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       //............................................................

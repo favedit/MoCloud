@@ -70,7 +70,7 @@
             MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.LogicService, '<jh:write source='&page.serviceLogic '/>');
             // 设置应用
             var application = MO.Desktop.initialize(MO.FEaiChartApplication);
-            application.setSceneCode(MO.EEaiScene. < jh: write source = '&page.sceneCode' / > );
+            application.setSceneCode(MO.EEaiScene. <jh:write source='&page.sceneCode'/>);
             application.setup(document.body);
          }
 

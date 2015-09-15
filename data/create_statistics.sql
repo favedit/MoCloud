@@ -167,6 +167,9 @@ ALTER TABLE ST_FIN_MEMBER
 ALTER TABLE ST_FIN_MEMBER 
    ADD CONSTRAINT ST_FIN_MEM_UK_LINK_ID UNIQUE ( LINK_ID ); 
 
+ALTER TABLE ST_FIN_MEMBER
+   ADD INDEX ST_FIN_MEM_DX_REG_DAT(REGISTER_DATE);
+
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Customer]
 -- ------------------------------------------------------------

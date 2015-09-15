@@ -803,9 +803,11 @@ public class TDateTime
             return parse(value, "HH24MISS");
          }else if(length == 14){
             return parse(value, "YYYYMMDDHH24MISS");
+         }else{
+            throw new FFatalError("Invalid date format.");
          }
       }
-      throw new FFatalError("Invalid date format.");
+      return true;
    }
 
    //============================================================
