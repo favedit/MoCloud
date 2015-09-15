@@ -11,6 +11,7 @@ import org.mo.content.core.common.EChartPage;
 import org.mo.content.core.manage.logger.user.ILoggerModuleConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
+import org.mo.content.face.pc.FMainPage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.console.service.info.ILogicServiceInfoConsole;
@@ -56,6 +57,9 @@ public class FMainAction
       MODULE_CODE.put("ChartMarketerCustomer", "eai.marketer.customer");
       MODULE_CODE.put("ChartMarketerMarketer", "eai.marketer.marketer");
       MODULE_CODE.put("ChartDepartmentMarketer", "eai.marketer.customer");
+      MODULE_CODE.put("ChartMarketerManage", "eai.marketer.manage");
+      MODULE_CODE.put("ChartStatisticsMarketer", "eai.statistics.marketer");
+      MODULE_CODE.put("ChartPerformenceMarketer", "eai.performence.marketer");
    }
 
    //============================================================
@@ -136,6 +140,63 @@ public class FMainAction
                             ILogicContext logicContext,
                             FMainPage page){
       String code = "ChartDepartmentMarketer";
+      //保存日志
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
+      return EChartPage.Scene;
+   }
+
+   //============================================================
+   // <T>全国各省投资总额。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String statisticsMarketer(IWebContext context,
+                                    IWebSession sessionContext,
+                                    ILogicContext logicContext,
+                                    FMainPage page){
+      String code = "ChartStatisticsMarketer";
+      //保存日志
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
+      return EChartPage.Scene;
+   }
+
+   //============================================================
+   // <T>全球理财师数据展示中心</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String marketerManage(IWebContext context,
+                                IWebSession sessionContext,
+                                ILogicContext logicContext,
+                                FMainPage page){
+      String code = "ChartMarketerManage";
+      //保存日志
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
+      return EChartPage.Scene;
+   }
+
+   //============================================================
+   // <T>全球实时统计数据</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String performenceMarketer(IWebContext context,
+                                     IWebSession sessionContext,
+                                     ILogicContext logicContext,
+                                     FMainPage page){
+      String code = "ChartPerformenceMarketer";
       //保存日志
       saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;

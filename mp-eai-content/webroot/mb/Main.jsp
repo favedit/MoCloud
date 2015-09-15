@@ -76,6 +76,35 @@
                            <p class="icon3">理财师管理实时展示中心</p>
                         </ul> 
                      </je:authority>
+                     
+                     
+                      <je:authority module='eai.statistics.marketer'>
+                        <ul class="ul" onclick='doChart("statisticsMarketer")' >
+                           <li>
+                              <img src="../pc/images/main/4-1.jpg">
+                              <img class="cover" src="images/main/3.png"/>
+                           </li>
+                           <p>全国各省投资总额展示中心</p>
+                        </ul>
+                      </je:authority>
+                     <je:authority module='eai.marketer.manage'>
+                        <ul onclick='doChart("marketerManage")' class="ul" >
+                           <li>
+                              <img class="cover" src="images/main/3.png"/>
+                              <img src="../pc/images/main/6-1.jpg">
+                           </li>
+                            <p class="icon2">全球理财师数据展示中心</p>
+                        </ul>
+                     </je:authority>
+                     <je:authority module='eai.performence.marketer'>
+                        <ul onclick='doChart("performenceMarketer")' class="ul" >
+                           <li>
+                              <img class="cover" src="images/main/3.png"/>
+                              <img src="../pc/images/main/5-1.jpg">
+                           </li>
+                           <p class="icon3">全球实时统计数据展示中心</p>
+                        </ul> 
+                     </je:authority>
                   </div>
                </section>
 
