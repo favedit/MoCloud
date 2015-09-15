@@ -9,6 +9,7 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -52,7 +53,7 @@ public class FStatisticsAchievementServlet
                           IWebServletRequest request,
                           IWebServletResponse response){
       // 检查参数
-      if(!checkParameters(context, request, response)) {
+      if(!checkParameters(context, request, response)){
          return EResult.Failure;
       }
       //............................................................
@@ -63,7 +64,7 @@ public class FStatisticsAchievementServlet
       // 从缓冲中查找数据
       String cacheCode = "dynamic|" + dateString;
       FByteStream cacheStream = findCacheStream(cacheCode);
-      if(cacheStream != null) {
+      if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
@@ -71,7 +72,7 @@ public class FStatisticsAchievementServlet
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       // 输出当日合计数据
-      if(connection != null) {
+      if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.day");
          sql.bindString("date", currentDate.format("YYYYMMDD"));
          FDataset dataset = connection.fetchDataset(sql);
@@ -93,19 +94,19 @@ public class FStatisticsAchievementServlet
             customerTotal += customerCount;
             // 输出数据
             dataStream.writeString(recordDate);
-            dataStream.writeDouble(investmentAmount);
-            dataStream.writeDouble(redemptionAmount);
-            dataStream.writeDouble(netinvestmentAmount);
+            dataStream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
+            dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
+            dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
          }
-         stream.writeDouble(investmentTotal);
-         stream.writeDouble(redemptionTotal);
-         stream.writeDouble(investmentTotal - redemptionTotal);
+         stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
+         stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
          stream.writeUint32(customerTotal);
          stream.writeUint32(customerTotal);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当月合计数据
-      if(connection != null) {
+      if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.month");
          sql.bindString("date", currentDate.format("YYYYMM01"));
          FDataset dataset = connection.fetchDataset(sql);
@@ -124,19 +125,19 @@ public class FStatisticsAchievementServlet
             double netinvestmentAmount = investmentAmount - redemptionAmount;
             // 输出数据
             dataStream.writeString(recordDate);
-            dataStream.writeDouble(investmentAmount);
-            dataStream.writeDouble(redemptionAmount);
-            dataStream.writeDouble(netinvestmentAmount);
+            dataStream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
+            dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
+            dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
          }
-         stream.writeDouble(investmentTotal);
-         stream.writeDouble(redemptionTotal);
-         stream.writeDouble(investmentTotal - redemptionTotal);
+         stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
+         stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
          stream.writeUint32(0);
          stream.writeUint32(0);
          stream.write(dataStream.memory(), 0, dataStream.position());
       }
       // 输出当年合计数据
-      if(connection != null) {
+      if(connection != null){
          FSql sql = _resource.findString(FSql.class, "sql.achievement.year");
          sql.bindString("date", currentDate.format("YYYY0101"));
          FDataset dataset = connection.fetchDataset(sql);
@@ -155,13 +156,13 @@ public class FStatisticsAchievementServlet
             double netinvestmentAmount = investmentAmount - redemptionAmount;
             // 输出数据
             dataStream.writeString(recordDate);
-            dataStream.writeDouble(investmentAmount);
-            dataStream.writeDouble(redemptionAmount);
-            dataStream.writeDouble(netinvestmentAmount);
+            dataStream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
+            dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
+            dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
          }
-         stream.writeDouble(investmentTotal);
-         stream.writeDouble(redemptionTotal);
-         stream.writeDouble(investmentTotal - redemptionTotal);
+         stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
+         stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
          stream.writeUint32(0);
          stream.writeUint32(0);
          stream.write(dataStream.memory(), 0, dataStream.position());

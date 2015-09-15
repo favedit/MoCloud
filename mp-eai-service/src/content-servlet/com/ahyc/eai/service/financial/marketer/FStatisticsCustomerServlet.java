@@ -18,6 +18,7 @@ import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -107,8 +108,8 @@ public class FStatisticsCustomerServlet
       FSql sumSql = _resource.findString(FSql.class, "sql.dynamic.sum");
       sumSql.bindDateTime("date", endDate, "YYYYMMDD");
       FRow sumRow = connection.find(sumSql);
-      stream.writeDouble(sumRow.getDouble("investment_count"));
-      stream.writeDouble(sumRow.getDouble("investment_total"));
+      stream.writeDouble(RDouble.roundHalf(sumRow.getDouble("investment_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(sumRow.getDouble("investment_total"), 2));
       stream.writeInt32(sumRow.getInt("customer_count"));
       stream.writeInt32(sumRow.getInt("customer_total"));
       //............................................................
@@ -122,7 +123,7 @@ public class FStatisticsCustomerServlet
          stream.writeString(RString.left(row.get("customer_label"), 1));
          stream.writeString(RString.left(row.get("customer_card"), 4));
          stream.writeString(RString.right(row.get("customer_phone"), 4));
-         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
       }
       //............................................................
       // 输出即时数据[倒序获得，正序写入]
@@ -175,9 +176,9 @@ public class FStatisticsCustomerServlet
          stream.writeBoolean(investmentFirst);
          stream.writeUint16(investmentNumber);
          stream.writeString(investmentTenderLabel);
-         stream.writeDouble(investmentAmount);
-         stream.writeDouble(investmentGain);
-         stream.writeDouble(investmentBankGain);
+         stream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentGain, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentBankGain, 2));
       }
       //............................................................
       // 保存数据到缓冲中
@@ -245,14 +246,14 @@ public class FStatisticsCustomerServlet
          investmentTotal += phaseUnit.investment();
          customerTotal += phaseUnit.customerCount();
       }
-      stream.writeDouble(investmentTotal);
+      stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
       stream.writeUint32(customerTotal);
       // 输出数据集合
       int count = phaseDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          stream.writeString(phaseUnit.recordDate().format());
-         stream.writeDouble(phaseUnit.investment());
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.investment(), 2));
          stream.writeUint32(phaseUnit.customerCount());
       }
       //............................................................

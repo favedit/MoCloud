@@ -142,8 +142,7 @@ ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_ARE
 
 ALTER TABLE DT_COM_CITY ADD CONSTRAINT DT_COM_CTY_FK_PVN 
       FOREIGN KEY (`PROVINCE_ID`) REFERENCES DT_COM_PROVINCE(`OUID`); 
-	  
-	  
+
 -- ------------------------------------------------------------
 -- Create table [Data.Common.City.CARD]
 -- ------------------------------------------------------------

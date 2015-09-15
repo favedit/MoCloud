@@ -1,5 +1,6 @@
 package org.mo.com.lang;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import org.mo.com.lang.type.RBaseDouble;
 
@@ -156,6 +157,20 @@ public class RDouble
    //============================================================
    public final static String toString(double value){
       return Double.toString(value);
+   }
+
+   //============================================================
+   // <T>四舍五入方式截取浮点数精度。</T>
+   //
+   // @param value 双精度数
+   // @param length 格式化长度
+   // @return 字符串
+   //============================================================
+   public static double roundHalf(double value,
+                                  int length){
+      BigDecimal decimal = new BigDecimal(value);
+      double result = decimal.setScale(length, BigDecimal.ROUND_HALF_UP).doubleValue();
+      return result;
    }
 
    //============================================================

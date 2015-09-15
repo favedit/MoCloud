@@ -18,6 +18,7 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -110,9 +111,9 @@ public class FStatisticsMarketerServlet
          stream.writeUint32(row.getInt("id"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));
-         stream.writeDouble(row.getDouble("investment_total"));
-         stream.writeDouble(row.getDouble("redemption_total"));
-         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("redemption_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("netinvestment_total"), 2));
          stream.writeDouble(0);
       }
       // 输出级别4的部门数据
@@ -137,9 +138,9 @@ public class FStatisticsMarketerServlet
          stream.writeString(row.get("parent_label"));
          stream.writeString(row.get("label"));
          stream.writeUint32(row.getInt("marketer_count"));
-         stream.writeDouble(row.getDouble("investment_total"));
-         stream.writeDouble(row.getDouble("redemption_total"));
-         stream.writeDouble(row.getDouble("netinvestment_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("redemption_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("netinvestment_total"), 2));
          stream.writeDouble(0);
       }
       //释放资源
@@ -164,9 +165,9 @@ public class FStatisticsMarketerServlet
             if(card.length() == 4){
                stream.writeUint32(row.getInt("marketer_card"));
                stream.writeUint32(row.getInt("marketer_count"));
-               stream.writeDouble(row.getDouble("investment_total"));
-               stream.writeDouble(row.getDouble("redemption_total"));
-               stream.writeDouble(row.getDouble("netinvestment_total"));
+               stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
+               stream.writeDouble(RDouble.roundHalf(row.getDouble("redemption_total"), 2));
+               stream.writeDouble(RDouble.roundHalf(row.getDouble("netinvestment_total"), 2));
                stream.writeDouble(0);
             }
          }
@@ -226,16 +227,16 @@ public class FStatisticsMarketerServlet
       FSql statisticsSql = _resource.findString(FSql.class, "sql.dynamic.sum");
       statisticsSql.bindString("date", endDate.format("YYYYMMDD"));
       FRow statisticsRow = connection.find(statisticsSql);
-      stream.writeDouble(statisticsRow.getDouble("investment_count"));
-      stream.writeDouble(statisticsRow.getDouble("investment_total"));
-      stream.writeDouble(statisticsRow.getDouble("redemption_count"));
-      stream.writeDouble(statisticsRow.getDouble("redemption_total"));
-      stream.writeDouble(statisticsRow.getDouble("netinvestment_count"));
-      stream.writeDouble(statisticsRow.getDouble("netinvestment_total"));
-      stream.writeDouble(statisticsRow.getDouble("interest_count"));
-      stream.writeDouble(statisticsRow.getDouble("interest_total"));
-      stream.writeDouble(statisticsRow.getDouble("performance_count"));
-      stream.writeDouble(statisticsRow.getDouble("performance_total"));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("investment_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("investment_total"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("redemption_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("redemption_total"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("netinvestment_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("netinvestment_total"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("interest_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("interest_total"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("performance_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("performance_total"), 2));
       stream.writeInt32(statisticsRow.getInt("customer_count"));
       stream.writeInt32(statisticsRow.getInt("customer_total"));
       //............................................................
@@ -247,11 +248,11 @@ public class FStatisticsMarketerServlet
       for(FRow row : rankDayDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
-         stream.writeDouble(row.getDouble("investment_total"));
-         stream.writeDouble(row.getDouble("redemption_total"));
-         stream.writeDouble(row.getDouble("netinvestment_total"));
-         stream.writeDouble(row.getDouble("interest_total"));
-         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("redemption_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("netinvestment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("interest_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("performance_total"), 2));
          stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
@@ -264,11 +265,11 @@ public class FStatisticsMarketerServlet
       for(FRow row : rankWeekDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
-         stream.writeDouble(row.getDouble("investment_total"));
-         stream.writeDouble(row.getDouble("redemption_total"));
-         stream.writeDouble(row.getDouble("netinvestment_total"));
-         stream.writeDouble(row.getDouble("interest_total"));
-         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("redemption_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("netinvestment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("interest_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("performance_total"), 2));
          stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
@@ -281,11 +282,11 @@ public class FStatisticsMarketerServlet
       for(FRow row : rankMonthDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
-         stream.writeDouble(row.getDouble("investment_total"));
-         stream.writeDouble(row.getDouble("redemption_total"));
-         stream.writeDouble(row.getDouble("netinvestment_total"));
-         stream.writeDouble(row.getDouble("interest_total"));
-         stream.writeDouble(row.getDouble("performance_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("redemption_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("netinvestment_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("interest_total"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("performance_total"), 2));
          stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
@@ -304,8 +305,8 @@ public class FStatisticsMarketerServlet
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeUint8((byte)dynamicUnit.customerActionCd());
-         stream.writeDouble(dynamicUnit.customerActionAmount());
-         stream.writeDouble(dynamicUnit.customerActionInterest());
+         stream.writeDouble(RDouble.roundHalf(dynamicUnit.customerActionAmount(), 2));
+         stream.writeDouble(RDouble.roundHalf(dynamicUnit.customerActionInterest(), 2));
       }
       //............................................................
       // 保存数据到缓冲中
@@ -374,21 +375,21 @@ public class FStatisticsMarketerServlet
          interestTotal += phaseUnit.interest();
          performanceTotal += phaseUnit.performance();
       }
-      stream.writeDouble(investmentTotal);
-      stream.writeDouble(redemptionTotal);
-      stream.writeDouble(netinvestmentTotal);
-      stream.writeDouble(interestTotal);
-      stream.writeDouble(performanceTotal);
+      stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
+      stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
+      stream.writeDouble(RDouble.roundHalf(netinvestmentTotal, 2));
+      stream.writeDouble(RDouble.roundHalf(interestTotal, 2));
+      stream.writeDouble(RDouble.roundHalf(performanceTotal, 2));
       // 输出数据集合
       int count = phaseDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          stream.writeString(phaseUnit.recordDate().format());
-         stream.writeDouble(phaseUnit.investment());
-         stream.writeDouble(phaseUnit.redemption());
-         stream.writeDouble(phaseUnit.netinvestment());
-         stream.writeDouble(phaseUnit.interest());
-         stream.writeDouble(phaseUnit.performance());
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.investment(), 2));
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.redemption(), 2));
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.netinvestment(), 2));
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.interest(), 2));
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.performance(), 2));
       }
       //............................................................
       // 保存数据到缓冲中

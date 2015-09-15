@@ -12,6 +12,7 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -83,8 +84,8 @@ public class FStatisticsMarketerServlet
       FSql statisticsSql = _resource.findString(FSql.class, "sql.dynamic.sum");
       statisticsSql.bindDateTime("date", endDate, "YYYYMMDD");
       FRow statisticsRow = connection.find(statisticsSql);
-      stream.writeDouble(statisticsRow.getDouble("investment_count"));
-      stream.writeDouble(statisticsRow.getDouble("investment_total"));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("investment_count"), 2));
+      stream.writeDouble(RDouble.roundHalf(statisticsRow.getDouble("investment_total"), 2));
       stream.writeInt32(statisticsRow.getInt("customer_count"));
       stream.writeInt32(statisticsRow.getInt("customer_total"));
       //............................................................
@@ -96,7 +97,7 @@ public class FStatisticsMarketerServlet
       for(FRow row : rankDayDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
-         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
          stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
@@ -109,7 +110,7 @@ public class FStatisticsMarketerServlet
       for(FRow row : rankWeekDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
-         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
          stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
@@ -122,7 +123,7 @@ public class FStatisticsMarketerServlet
       for(FRow row : rankMonthDataset){
          stream.writeString(row.get("department_label"));
          stream.writeString(row.get("marketer_label"));
-         stream.writeDouble(row.getDouble("investment_total"));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
          stream.writeInt32(row.getInt("customer_count"));
          stream.writeInt32(row.getInt("customer_total"));
       }
@@ -143,8 +144,8 @@ public class FStatisticsMarketerServlet
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeUint8((byte)dynamicUnit.customerActionCd());
-         stream.writeDouble(dynamicUnit.customerActionAmount());
-         stream.writeDouble(dynamicUnit.customerActionInterest());
+         stream.writeDouble(RDouble.roundHalf(dynamicUnit.customerActionAmount(), 2));
+         stream.writeDouble(RDouble.roundHalf(dynamicUnit.customerActionInterest(), 2));
       }
       //............................................................
       // 保存数据到缓冲中
@@ -207,13 +208,13 @@ public class FStatisticsMarketerServlet
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          investmentTotal += phaseUnit.investment();
       }
-      stream.writeDouble(investmentTotal);
+      stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
       // 输出数据集合
       int count = phaseDataset.count();
       stream.writeInt32(count);
       for(FStatisticsFinancialPhaseUnit phaseUnit : phaseDataset){
          stream.writeString(phaseUnit.recordDate().format());
-         stream.writeDouble(phaseUnit.investment());
+         stream.writeDouble(RDouble.roundHalf(phaseUnit.investment(), 2));
       }
       //............................................................
       // 保存数据到缓冲中
