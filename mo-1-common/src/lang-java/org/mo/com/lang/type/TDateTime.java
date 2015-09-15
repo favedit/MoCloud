@@ -2,6 +2,7 @@ package org.mo.com.lang.type;
 
 import java.util.Calendar;
 import java.util.Date;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
@@ -52,6 +53,7 @@ public class TDateTime
    //============================================================
    public TDateTime(TDateTime value){
       _value = value._value;
+      parse();
    }
 
    //============================================================
@@ -61,6 +63,7 @@ public class TDateTime
    //============================================================
    public TDateTime(long value){
       _value = value;
+      parse();
    }
 
    //============================================================
@@ -70,6 +73,7 @@ public class TDateTime
    //============================================================
    public TDateTime(Date value){
       _value = value.getTime();
+      parse();
    }
 
    //============================================================
@@ -393,6 +397,17 @@ public class TDateTime
    //============================================================
    public void add(TTimeSpan span){
       add(span.get());
+   }
+
+   //============================================================
+   // <T>给当前时间加上指定年数。</T>
+   //
+   // @param value 月数
+   //============================================================
+   public void addYear(int value){
+      parse();
+      _year += value;
+      merge();
    }
 
    //============================================================
@@ -780,7 +795,17 @@ public class TDateTime
    // @return 时间
    //============================================================
    public boolean parse(String value){
-      return parse(value, "YYYYMMDDHH24MISS");
+      if(!RString.isEmpty(value)){
+         int length = value.length();
+         if(length == 8){
+            return parse(value, "YYYYMMDD");
+         }else if(length == 6){
+            return parse(value, "HH24MISS");
+         }else if(length == 14){
+            return parse(value, "YYYYMMDDHH24MISS");
+         }
+      }
+      throw new FFatalError("Invalid date format.");
    }
 
    //============================================================

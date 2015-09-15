@@ -8,6 +8,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FObjects;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RDouble;
 import org.mo.com.lang.type.TDateTime;
@@ -59,6 +60,8 @@ public class FStatisticsAchievementServlet
       //............................................................
       // 获得当前时间
       TDateTime currentDate = RDateTime.currentDateTime();
+      TDateTime currentDay = new TDateTime(currentDate.format("YYYYMMDD"));
+      int currentYear = currentDate.year();
       String dateString = currentDate.format("YYYYMMDDHH24MI00");
       //............................................................
       // 从缓冲中查找数据
@@ -138,16 +141,51 @@ public class FStatisticsAchievementServlet
       }
       // 输出当年合计数据
       if(connection != null){
+         TDateTime priorDate = new TDateTime(currentDate);
+         priorDate.addYear(-1);
          FSql sql = _resource.findString(FSql.class, "sql.achievement.year");
+         sql.bindString("prior_date", priorDate.format("YYYY0101"));
          sql.bindString("date", currentDate.format("YYYY0101"));
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
          FByteStream dataStream = createStream(context);
-         int count = dataset.count();
-         dataStream.writeInt32(count);
+         // 获得上一年最后一条记录
+         FRow lastRow = null;
          for(FRow row : dataset){
-            String recordDate = row.get("record_month");
+            TDateTime recordDate = new TDateTime(row.get("record_day"));
+            if(recordDate.year() + 1 == currentYear){
+               lastRow = row;
+            }
+         }
+         // 过滤数据
+         FObjects<FRow> rows = new FObjects<FRow>(FRow.class);
+         for(FRow row : dataset){
+            TDateTime recordDate = new TDateTime(row.get("record_day"));
+            if(recordDate.year() == currentYear){
+               int weekDay = row.getInt("week_day");
+               if(weekDay != 1){
+                  // 增加首周和上一年最后一周
+                  double investmentAmount = row.getDouble("investment_amount");
+                  double lastInvestmentAmount = lastRow.getDouble("investment_amount");
+                  row.set("investment_amount", lastInvestmentAmount + investmentAmount);
+                  double redemptionAmount = row.getDouble("redemption_amount");
+                  double lastRedemptionAmount = lastRow.getDouble("redemption_amount");
+                  row.set("redemption_amount", lastRedemptionAmount + redemptionAmount);
+                  rows.push(row);
+               }else{
+                  // 增加完整周
+                  recordDate.addDay(7);
+                  if(recordDate.get() <= currentDay.get()){
+                     rows.push(row);
+                  }
+               }
+            }
+         }
+         int count = rows.count();
+         dataStream.writeInt32(count);
+         for(FRow row : rows){
+            String recordDate = row.get("record_day");
             // 计算数据
             double investmentAmount = row.getDouble("investment_amount");
             investmentTotal += investmentAmount;
