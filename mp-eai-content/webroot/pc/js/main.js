@@ -60,7 +60,6 @@
         //         top: h 
         //     });
         // }
-
         $containerDetails.eq(index).show().siblings().hide();
         $containersImg.eq(index).addClass('on').siblings().removeClass('on');
      };

@@ -288,22 +288,49 @@ body{
 .imag-details ul li img:hover{
 	/*background: #f96;*/
 }
+.imag-details ul li h4{
+	color:#ffa200;
+	font-size: 30px;
+	position: relative;
+	margin-bottom: -25px;
+}
+.imag-details ul li p{
+	color:#ffa200;
+	font-size: 16px;
+	text-align: left;
+	padding-left: 30px;
+	margin-top: -20px;
+	position: relative;
+}
 .imag-details span{
 	color:#fff;
 	display: none;
 }
+.main-right{
+	/*display: block;*/
+	/*width:100%;*/
+	height: 100%;
+	overflow: hidden;
+}
 .titles-container{
 	width:100%;
-	/*height: 100%;*/
+	height: 100%;
+	/*display: block;*/
 	text-align: center;
 	/*position:relative;*/
+	overflow-y: auto;
+	/*overflow-x:hidden;*/
+	/*left: 0px;*/
+	display: block;
 }
 .titles-container ul{
-	/*position: absolute;*/
+	top:0px;
+	display: block;
+	position: relative;
 	/*border:1px solid red;*/
-	top:0px;	
-	/*left:50%;*/
-	/*margin-left: -116px;*/
+	/*	
+	left:50%;
+	margin-left: -116px;*/
 }
 .titles-container li{
 	background:url(../images/main/new11.png) no-repeat center center; 
