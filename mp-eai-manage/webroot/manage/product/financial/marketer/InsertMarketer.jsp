@@ -41,7 +41,7 @@
 		<div class="btn_bar">
 			<div class="nav_btn">
 				<a href="#" onClick="submitForm()" class="add_btn"></a> <a
-					href="/product/financial/department/Department.wa" class="back_btn"></a>
+					href="/product/financial/marketer/Marketer.wa" class="back_btn"></a>
 			</div>
 			<div class="nav_search"></div>
 		</div>
@@ -56,36 +56,36 @@
 			<table width="710"  height="492" border="0" align="left"
             cellpadding="0" cellspacing="0" style=" margin-left:10px">
             <tr>
-               <td width="38" height="38"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+               <td width="38" height="33"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
                <td width="109"><div align="left">
                      <input id="name" name="name" class="easyui-validatebox textbox"
                         style="width:80px;height:20px;"
-                        data-options="validType:'length[0,100]'" />
+                        data-options="validType:'length[0,20]'" />
               </div></td>
-               <td width="38"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+               <td width="38"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
                <td width="120"><div align="left">
                      <input id="label" name="label" class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
-               <td width="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
+               <td width="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
                <td width="241"><div align="left">
-                     <input id="ss" name="ss" class="easyui-validatebox textbox"
+                     <input id="statusCd" name="statusCd" class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,30]'" />
                   </div></td>
   </tr>
             <tr>
-               <td height="38"><div align="left">职&nbsp;&nbsp;&nbsp;&nbsp;务:</div></td>
+               <td height="38"><div align="left">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务:</div></td>
                <td><div align="left">
-                     <input id="leaderLabel" name="leaderLabel"
+                     <input id="rankLabel" name="rankLabel"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
-               <td><div align="left">电话:</div></td>
+               <td><div align="left">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</div></td>
                <td><div align="left">
-                     <input id="leaderPhone" name="leaderPhone"
+                     <input id="phone" name="phone"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
@@ -101,21 +101,21 @@
             <tr>
                <td height="38"><div align="left">客户投资总额:</div></td>
                <td><div align="left">
-                     <input id="investmentTotal" name="investmentTotal"
+                     <input id="customerInvestmentTotal" name="customerInvestmentTotal"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
                <td><div align="left">客户投资次数:</div></td>
                <td><div align="left">
-                     <input id="investmentCount" name="investmentCount"
+                     <input id="customerInvestmentCount" name="customerInvestmentCount"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
                <td height="38"><div align="left">客户投资时间:</div></td>
                <td><div align="left">
-                     <input id="investmentDate" name="investmentDate"
+                     <input id="customerInvestmentDate" name="customerInvestmentDate"
                         class="easyui-datebox" style="width:100px;height:20px"
                         data-options="formatter:myformatter,parser:myparser" />
                   </div></td>
@@ -124,21 +124,21 @@
             <tr>
                <td height="38"><div align="left">客户赎回总额:</div></td>
                <td><div align="left">
-                     <input id="redemptionTotal" name="redemptionTotal"
+                     <input id="customerRedemptionTotal" name="customerRedemptionTotal"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
                <td><div align="left">客户赎回次数:</div></td>
                <td><div align="left">
-                     <input id="redemptionCount" name="redemptionCount"
+                     <input id="customerRedemptionCount" name="customerRedemptionCount"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
                <td><div align="left">客户赎回时间:</div></td>
                <td><div align="left">
-                     <input id="redemptionDate" name="redemptionDate"
+                     <input id="customerRedemptionDate" name="customerRedemptionDate"
                         class="easyui-datebox" style="width:100px;height:20px"
                         data-options="formatter:myformatter,parser:myparser" />
                   </div></td>
@@ -148,21 +148,21 @@
 
                <td height="38"><div align="left">客户净投总额:</div></td>
                <td><div align="left">
-                     <input id="interestTotal" name="interestTotal"
+                     <input id="customerNetinvestmentTotal" name="customerNetinvestmentTotal"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
               </div></td>
                <td><div align="left">客户利息总额:</div></td>
                <td><div align="left">
-                     <input id="performanceTotal" name="performanceTotal"
+                     <input id="customerInterestTotal" name="customerInterestTotal"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />
                   </div></td>
                <td><div align="left">客户业绩总额:</div></td>
                <td><div align="left">
-                     <input id="netinvestmentTotal" name="netinvestmentTotal"
+                     <input id="customerPerformanceTotal" name="customerPerformanceTotal"
                         class="easyui-validatebox textbox"
                         style="width:80px;height:20px"
                         data-options="validType:'length[0,100]'" />

@@ -42,6 +42,7 @@ public class FMarketerAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
+
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
@@ -98,6 +99,7 @@ public class FMarketerAction
                               ILogicContext logicContext,
                               FMarketerPage Page,
                               FBasePage basePage){
+
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
@@ -123,28 +125,37 @@ public class FMarketerAction
          return "/manage/common/ConnectTimeout";
       }
       FDataFinancialMarketerUnit unit = _marketerConsole.doPrepare(logicContext);
-      String provinceId = context.parameter("provinceId");
 
-      //投资时间
-      String investmentDate = context.parameter("investmentDate");
-      if(!"".equals(investmentDate) && null != investmentDate){
+      //客户投资时间
+      String customerInvestmentDate = context.parameter("customerInvestmentDate");
+      if(!"".equals(customerInvestmentDate) && null != customerInvestmentDate){
          TDateTime dateTime = null;
          try{
-            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(investmentDate));
+            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(customerInvestmentDate));
+            unit.setCustomerInvestmentDate(dateTime);
          }catch(ParseException e){
             e.printStackTrace();
          }
       }
-      //赎回时间
-      String redemptionDate = context.parameter("redemptionDate");
-      if(!"".equals("redemptionDate") && null != redemptionDate){
+      //客户赎回时间
+      String customerRedemptionDate = context.parameter("customerRedemptionDate");
+      if(!"".equals("customerRedemptionDate") && null != customerRedemptionDate){
          TDateTime dateTime = null;
          try{
-            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(redemptionDate));
+            dateTime = new TDateTime(new SimpleDateFormat("yyyy-MM-dd").parse(customerRedemptionDate));
+            unit.setCustomerRedemptionDate(dateTime);
          }catch(ParseException e){
             e.printStackTrace();
          }
       }
+      //客户投资总额
+      unit.setCustomerInvestmentTotal(context.parameterAsDouble("customerInvestmentTotal"));
+      unit.setCustomerInvestmentCount(context.parameterAsInteger("customerInvestmentCount"));
+      unit.setCustomerRedemptionTotal(context.parameterAsDouble("customerRedemptionTotal"));
+      unit.setCustomerRedemptionCount(context.parameterAsInteger("customerRedemptionCount"));
+      unit.setCustomerNetinvestmentTotal(context.parameterAsDouble("customerNetinvestmentTotal"));
+      unit.setCustomerInterestTotal(context.parameterAsDouble("customerInterestTotal"));
+      unit.setCustomerPerformanceTotal(context.parameterAsDouble("customerPerformanceTotal"));
       //是否删除
       String ovld = context.parameter("ovld");
       unit.setOvld(ovld.equals("0") ? true : false);
