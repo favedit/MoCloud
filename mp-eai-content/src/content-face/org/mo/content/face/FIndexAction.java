@@ -1,6 +1,6 @@
 package org.mo.content.face;
 
-import org.mo.eng.data.common.ISqlContext;
+import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 // <P>首页。</P>
@@ -19,8 +19,7 @@ public class FIndexAction
    // @param page 页面
    //============================================================
    @Override
-   public String construct(ISqlContext context,
-                           FIndexPage areaPage){
+   public String construct(IWebContext context){
       return "Index";
    }
 }
