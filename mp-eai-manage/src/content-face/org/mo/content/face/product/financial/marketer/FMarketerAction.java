@@ -157,19 +157,20 @@ public class FMarketerAction
       unit.setCustomerInterestTotal(context.parameterAsDouble("customerInterestTotal"));
       unit.setCustomerPerformanceTotal(context.parameterAsDouble("customerPerformanceTotal"));
       //是否删除
-      String ovld = context.parameter("ovld");
-      unit.setOvld(ovld.equals("0") ? true : false);
       unit.setName(context.parameter("name"));
       unit.setLabel(context.parameter("label"));
-
+      unit.setStatusCd(context.parameterAsInteger("statusCd"));
       unit.setNote(context.parameter("note"));
+      unit.setPhone(context.parameter("phone"));
+      unit.setRankLabel(context.parameter("rankLabel"));
+      unit.setDepartmentLabel(context.parameter("departmentLabel"));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       EResult result = _marketerConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
-         return "/manage/product/configration/InsertConfig";
+         return "/manage/product/financial/marketer/InsertMarketer";
       }
-      return "/manage/product/configration/ConfigList";
+      return "/manage/product/financial/marketer/MarketerList";
    }
 
    //============================================================
@@ -193,7 +194,7 @@ public class FMarketerAction
 
       FDataFinancialMarketerUnit unit = _marketerConsole.find(logicContext, id);
       page.setUnit(unit);
-      return "/manage/product/financial/department/UpdateDept";
+      return "/manage/product/financial/marketer/UpdateMarketer";
    }
 
    //============================================================
@@ -248,7 +249,7 @@ public class FMarketerAction
       if(!result.equals(EResult.Success)){
          throw new FFatalError("Delete failure.");
       }else{
-         return "/manage/product/financial/department/DeptList";
+         return "/manage/product/financial/marketer/MarketerList";
       }
    }
 }

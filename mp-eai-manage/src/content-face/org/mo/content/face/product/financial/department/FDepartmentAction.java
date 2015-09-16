@@ -188,7 +188,7 @@ public class FDepartmentAction
          page.setResult("增加失败");
          return "/manage/product/configration/InsertConfig";
       }
-      return "/manage/product/configration/ConfigList";
+      return "/manage/product/financial/department/DeptList";
    }
 
    //============================================================
