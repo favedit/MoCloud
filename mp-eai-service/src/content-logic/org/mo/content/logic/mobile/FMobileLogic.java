@@ -13,7 +13,7 @@ import org.apache.http.util.EntityUtils;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.service.face.mobile.FMobileService;
+import org.mo.content.service.info.mobile.FMobileService;
 
 //============================================================
 // <T>人员账号服务接口。</T>
@@ -39,16 +39,15 @@ public class FMobileLogic
       JSONObject jo = JSONObject.fromObject("{}");
       try{
          //创建HttpGet
-
-         HttpGet httpGet = new HttpGet("http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=" + mobile);
+         HttpGet httpGet = new HttpGet("http://virtual.paipai.com/extinfo/GetMobileProductInfo?mobile=" + mobile + "&amount=10000&callname=getPhoneNumInfoExtCallback");
          //执行get请求
          CloseableHttpResponse response = httpclient.execute(httpGet);
          try{
             HttpEntity entity = response.getEntity();
             if(entity != null){
                String responseContent = EntityUtils.toString(entity);
-               String result = new String(responseContent.getBytes("utf-8"));
-               jo = JSONObject.fromObject(result.substring(result.indexOf('=') + 1, result.length()));
+               String result = new String(responseContent);
+               jo = JSONObject.fromObject(result.substring(result.indexOf('(') + 1, result.lastIndexOf(')')));
                _logger.debug(this, "getMobileInfo", "getMobileInfo. (mobileInfo={1})", jo);
                if(jo.get("province").equals("未知")){
                   jo = JSONObject.fromObject("{}");

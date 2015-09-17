@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
+   <!-- ============================================================ -->
+   <!-- 手机相关处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'eai.info.mobile'
+         face  = 'org.mo.content.service.info.mobile.IMobileService'/>
 
+   <Component
+         face  = 'org.mo.content.service.info.mobile.IMobileService'
+         class = 'org.mo.content.service.info.mobile.FMobileService'
+         scope = 'global'/>
 </Config>

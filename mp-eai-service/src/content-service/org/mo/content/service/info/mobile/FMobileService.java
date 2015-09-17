@@ -1,4 +1,4 @@
-package org.mo.content.service.face.mobile;
+package org.mo.content.service.info.mobile;
 
 import com.cyou.gccloud.define.enums.common.EGcResult;
 import net.sf.json.JSONObject;
@@ -28,6 +28,23 @@ public class FMobileService
    protected IMobileLogic _mobileLogic;
 
    //============================================================
+   // <T>默认逻辑。</T>
+   //
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult process(IWebContext context,
+                          IWebInput input,
+                          IWebOutput output){
+      _logger.debug(this, "process", "process begin. ");
+
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>根据手机号获取相关信息。</T>
    //
    // @param context 页面环境
@@ -36,9 +53,10 @@ public class FMobileService
    // @return 处理结果
    //============================================================
    @Override
-   public EResult mobileInfo(IWebContext context,
-                             IWebInput input,
-                             IWebOutput output){
+   public EResult getMobileInfo(IWebContext context,
+                                IWebInput input,
+                                IWebOutput output){
+      _logger.debug(this, "getMobileInfo", "getMobileInfo begin. ");
       // 获得参数
       FXmlNode inputNode = input.config();
       String mobile = inputNode.nodeText("mobile");
