@@ -35,6 +35,21 @@ body{
 	text-align: center;
 	display:none;
 }
+.switch {
+  position: absolute;
+  z-index: 5;
+  top: 30/24rem;
+  right:20/24rem;
+  text-align: right;
+  width: 120/24rem;
+  cursor: pointer;
+  // font-weight: bold;
+}
+.switch a{
+  color: #25e2ff;
+  line-height: 20/24rem;
+  font-size: 20/24rem;
+}
 .nav-container[animation=true]{
 	-webkit-animation-name: slideInLeft;
 	-moz-animation-name: slideInLeft;
@@ -53,11 +68,8 @@ body{
 .nav-container ul li{
 	color:#ff914c;
 	line-height: 50/24rem;
-	// background-image: -webkit-linear-gradient(-40deg, #0585c0 60px,#90fcf6 80px,#0585c0 100px);
-	// background-image: -o-linear-gradient(-40deg, #0585c0 60px,#90fcf6 80px,#0585c0 100px);
-	// background-image: -moz-linear-gradient(-40deg, #0585c0 60px,#90fcf6 80px,#0585c0 100px);
-	// background-image: linear-gradient(-40deg, #0585c0 60px,#90fcf6 80px,#0585c0 100px);
 }
+
 .nav-container ul li img{
 	width: 90/24rem;
 	height: 90/24rem;
@@ -99,8 +111,8 @@ body{
 	background-image: url(../images/main/2.png);
 	background-repeat: no-repeat;
 	background-position: bottom center;
+	position: relative;
 }
-
 .header-r{
 	position: absolute;
 	width: 80/24rem;
@@ -241,5 +253,10 @@ body{
 	left:0px;
 	z-index: 1;
 	display: none;
+}
+.footer{
+	text-align: center;
+    padding-bottom: 20;
+    color:#376095;
 }
 

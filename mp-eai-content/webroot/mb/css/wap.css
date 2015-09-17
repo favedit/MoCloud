@@ -34,6 +34,20 @@ body {
   text-align: center;
   display: none;
 }
+.switch {
+  position: absolute;
+  z-index: 5;
+  top: 1.25rem;
+  right: 0.8333333333333334rem;
+  text-align: right;
+  width: 5rem;
+  cursor: pointer;
+}
+.switch a {
+  color: #25e2ff;
+  line-height: 0.8333333333333334rem;
+  font-size: 0.8333333333333334rem;
+}
 .nav-container[animation=true] {
   -webkit-animation-name: slideInLeft;
   -moz-animation-name: slideInLeft;
@@ -83,7 +97,6 @@ body {
   transform: translate3d(40%, 0, 0);
 }
 .main-container header {
-  position: relative;
   height: 3.3333333333333335rem;
   line-height: 3.3333333333333335rem;
   text-align: center;
@@ -92,6 +105,7 @@ body {
   background-image: url(../images/main/2.png);
   background-repeat: no-repeat;
   background-position: bottom center;
+  position: relative;
 }
 .header-r {
   position: absolute;
@@ -214,4 +228,9 @@ body {
   left: 0px;
   z-index: 1;
   display: none;
+}
+.footer {
+  text-align: center;
+  padding-bottom: 20;
+  color: #376095;
 }

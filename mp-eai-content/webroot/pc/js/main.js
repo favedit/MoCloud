@@ -30,7 +30,6 @@
         }, 2000);
      };     
      ctrl.setTimeouts();
-
      deleteCookie("islogin","/");
      $imgH = $imagContainer.find("li").eq(0).height();
      var timing = null;

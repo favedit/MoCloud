@@ -79,6 +79,7 @@ html,body {
 	background: url(../images/main/bor.png) no-repeat center bottom;
 	overflow: hidden;
 	height: 100px;
+	position: relative;
 }
 .head-left{
 	float:left;
@@ -140,6 +141,18 @@ html,body {
 	font-size: 16px;
 	position: relative;
 	cursor: pointer;
+}
+.switch{
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	cursor: pointer;
+	color: #25e2ff;
+	font-size: 20px;
+	font-weight: bold;
+}
+.switch a{
+	color: #25e2ff;
 }
 .user-details{
 	display:inline-block;
@@ -273,9 +286,8 @@ html,body {
 .imag-details ul li{
 	display: none;
 	z-index: 0;
-	width: 80%;
-	padding:0px 10%; 
-
+	width: 76%;
+	padding:0px 12%; 
 	display: inline-block;
 	-webkit-animation-name: zoomIn;
 	-moz-animation-name: zoomIn;
@@ -320,16 +332,16 @@ html,body {
 }
 .imag-details ul li h4{
 	color:#ffa200;
-	font-size: 30px;
+	font-size:28px;
 	position: relative;
-	margin-bottom: -25px;
+	margin-bottom: -4px;
 }
 .imag-details ul li p{
 	color:#ffa200;
 	font-size: 16px;
 	text-align: left;
 	padding-left: 30px;
-	margin-top: -20px;
+	margin-top: -10px;	
 	position: relative;
 }
 .imag-details span{
@@ -436,15 +448,24 @@ html,body {
 .fot{
 	width: 100%;
 	text-align: right;
-	font-size: 18px;
+	font-size: 16px;
 	color: #376095;
+	
 }
 .fot p{
 	padding-right: 10px;
 }
+#table{
+	background: url(../images/main/bottom.png) no-repeat center bottom;
+	background-position: left bottom;
+	background-size: 80%;
+}
 @media all and (max-width: 1400px) {
 	#header, .header{
 		height: 75px;
+	}
+	.switch {
+	  top: 17px;
 	}
 	.logo {
 	  padding-left: 15px;

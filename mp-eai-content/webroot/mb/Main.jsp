@@ -31,7 +31,7 @@
                   <header>
                      <span class="btn-list" id="btn-list"></span>全球实时数据中心
                      <jh:notEquals source="host" value="&page.userType"><div class="header-r"><img src="images/main/81.png"></div></jh:notEquals>
-                     <jh:equals source="host" value="&page.userType"><a href="Index.wa?time=today">切换帐号</a></jh:equals>
+                     <jh:equals source="host" value="&page.userType"><div class="switch"><a href="Index.wa?time=today">切换帐号</a></div></jh:equals>
                   </header>
                   <div class="banner" id="banner">
                      <div class="bd">
@@ -107,6 +107,7 @@
                         </ul> 
                      </je:authority>
                   </div>
+                  <p class="footer">本平台由钰诚集团智慧企业推进中心 出品</p>
                </section>
 
             </section>
@@ -163,16 +164,17 @@
              // $navContainer.setAttribute("animation","");
              // $shadow.style.display = "none";
          // },true);
-         $headerR.addEventListener("touchstart", function(){
+         $headerR.addEventListener("touchstart", function(event){
+            event.preventDefault();
             $navContainer.setAttribute("animation",true);
             $shadow.style.display = "block";
          },false);
-         $shadow.addEventListener("touchstart", function(){
-
+        
+         $shadow.addEventListener("touchstart", function(event){
+             event.preventDefault();
              $navContainer.setAttribute("animation","");
              this.style.display = "none";
          },false);
-
          function doChart(code) {
             id_do.value = code;
             frmMain.submit();
