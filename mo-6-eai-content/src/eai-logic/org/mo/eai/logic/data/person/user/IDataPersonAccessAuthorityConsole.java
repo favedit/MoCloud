@@ -40,7 +40,6 @@ public interface IDataPersonAccessAuthorityConsole
    // @return 登录结果
    //============================================================
    int doLogin(ILogicContext logicContext,
-               String hostAddress,
                String passport,
                String password);
 }

@@ -1,6 +1,7 @@
 package org.mo.content.face.mb;
 
 import org.mo.content.face.base.FBasePage;
+import org.mo.content.face.pc.FIndexPage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.session.IWebSession;
@@ -53,4 +54,5 @@ public interface IIndexAction
                    ILogicContext logicContext,
                    @AContainer(name = "basePage") FBasePage basePage,
                    @AContainer(name = "page", fill = true) FIndexPage page);
+
 }

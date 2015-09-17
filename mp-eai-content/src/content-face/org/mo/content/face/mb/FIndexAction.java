@@ -18,6 +18,7 @@ import org.mo.content.core.manage.person.role.IRoleModuleConsole;
 import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
+import org.mo.content.face.pc.FIndexPage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eai.console.service.info.ILogicServiceInfoConsole;
@@ -105,6 +106,11 @@ public class FIndexAction
          }
       }
       page.setHost(hostAddress);
+      //白名单切换账号
+      String skipHost = context.parameter("time");
+      if(!RString.isEmpty(skipHost)){
+         return "Login";
+      }
       // 登录处理
       FDataPersonAccessAuthority authority = _personAccessAuthorityConsole.findByHostAddress(logicContext, hostAddress);
       if(authority != null){
@@ -119,9 +125,7 @@ public class FIndexAction
             //插入用户，权限绑定
             page.setUserType("host");
             String changePass = "white-host:" + hostAddress;
-            FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
-            synchronizeData(logicContext, sessionContext, page, user, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
-            // 设置服务主机
+            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
             basePage.setUrl("Main.wa");
             return "/apl/Redirector";
          }
@@ -147,21 +151,14 @@ public class FIndexAction
       // 获得参数
       String passport = RString.trimRight(page.passport());
       String password = page.password();
-      String hostAddress = context.head("x-real-ip");
       String cookie = context.parameter("saveCookie");
-      if(RString.isEmpty(hostAddress)){
-         hostAddress = context.head("x-forwarded-for");
-         if(RString.isEmpty(hostAddress)){
-            hostAddress = context.remoteAddress();
-         }
-      }
       _logger.debug(this, "Index", "Index login.(passport={1},password={2})", passport, password);
       // 登录处理
       String message = null;
       String logggerMessage = null;
       String changePass = null;
       int from = 0;
-      int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
+      int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.Success:
             changePass = "white-user:" + passport;
@@ -203,15 +200,11 @@ public class FIndexAction
       }
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
-         if(user != null)
-            userId = user.ouid();
-         synchronizeData(logicContext, sessionContext, page, user, changePass, passport, from);
+         userId = synchronizeData(logicContext, sessionContext, page, changePass, passport, from);
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
       logger.setUserId(userId);
-      logger.setHostAddress(hostAddress);
       logger.setLogicMessage(logggerMessage);
       logger.setPassport(RString.left(passport, 40));
       logger.setPassword(RString.left(password, 40));
@@ -262,16 +255,17 @@ public class FIndexAction
    // @param logicContext 逻辑环境
    // @param passport 账户
    //============================================================
-   private void synchronizeData(ILogicContext logicContext,
+   private long synchronizeData(ILogicContext logicContext,
                                 IWebSession sessionContext,
                                 FIndexPage page,
-                                FDataPersonUserUnit user,
                                 String passport,
                                 String label,
                                 int from){
       _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
+      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+      long userId = 0;
       if(user == null){
          //获取角色
          FDataControlRoleUnit role = _roleConsole.findByCode(logicContext, role_oa);
@@ -283,6 +277,7 @@ public class FIndexAction
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
+            userId = unit.ouid();
             session.setUserId(unit.ouid());
             //同步用户状态
             FDataPersonUserEntryUnit entryUnit = _entryConsole.doPrepare(logicContext);
@@ -293,9 +288,11 @@ public class FIndexAction
             _entryConsole.doInsert(logicContext, entryUnit);
          }
       }else{
+         userId = user.ouid();
          session.setUserId(user.ouid());
       }
       // 打开会话
       _sessionConsole.open(session);
+      return userId;
    }
 }

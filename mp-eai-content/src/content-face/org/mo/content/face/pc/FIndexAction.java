@@ -105,6 +105,11 @@ public class FIndexAction
          }
       }
       page.setHost(hostAddress);
+      //白名单切换账号
+      String skipHost = context.parameter("time");
+      if(!RString.isEmpty(skipHost)){
+         return "Login";
+      }
       // 登录处理
       FDataPersonAccessAuthority authority = _personAccessAuthorityConsole.findByHostAddress(logicContext, hostAddress);
       if(authority != null){
@@ -146,21 +151,14 @@ public class FIndexAction
       // 获得参数
       String passport = RString.trimRight(page.passport());
       String password = page.password();
-      String hostAddress = context.head("x-real-ip");
       String cookie = context.parameter("saveCookie");
-      if(RString.isEmpty(hostAddress)){
-         hostAddress = context.head("x-forwarded-for");
-         if(RString.isEmpty(hostAddress)){
-            hostAddress = context.remoteAddress();
-         }
-      }
       _logger.debug(this, "Index", "Index login.(passport={1},password={2})", passport, password);
       // 登录处理
       String message = null;
       String logggerMessage = null;
       String changePass = null;
       int from = 0;
-      int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, hostAddress, passport, password);
+      int resultCd = _personAccessAuthorityConsole.doLogin(logicContext, passport, password);
       switch(resultCd){
          case EGcAuthorityResult.Success:
             changePass = "white-user:" + passport;
@@ -207,7 +205,6 @@ public class FIndexAction
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
       logger.setUserId(userId);
-      logger.setHostAddress(hostAddress);
       logger.setLogicMessage(logggerMessage);
       logger.setPassport(RString.left(passport, 40));
       logger.setPassword(RString.left(password, 40));
@@ -261,7 +258,6 @@ public class FIndexAction
    private long synchronizeData(ILogicContext logicContext,
                                 IWebSession sessionContext,
                                 FIndexPage page,
-                                //                                FDataPersonUserUnit user,
                                 String passport,
                                 String label,
                                 int from){

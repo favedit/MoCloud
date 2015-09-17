@@ -119,7 +119,6 @@ public class FDataPersonAccessAuthorityConsole
    //============================================================
    @Override
    public int doLogin(ILogicContext logicContext,
-                      String hostAddress,
                       String passport,
                       String password){
       _logger.debug(this, "doLogin", "Login process. (passport={1}, password={2})", passport, password);
@@ -131,15 +130,6 @@ public class FDataPersonAccessAuthorityConsole
          _logger.debug(this, "doLogin", "Login password illegal. (password={1})", password);
          return EGcAuthorityResult.PasswordIllegal;
       }
-      // 根据主机地址检查设置
-      FDataPersonAccessAuthority hostAuthority = findByHostAddress(logicContext, hostAddress);
-      if(hostAuthority != null){
-         int accessCd = hostAuthority.accessCd();
-         if(accessCd == EGcAuthorityAccess.Allow){
-            return EGcAuthorityResult.Success;
-         }
-      }
-      //............................................................
       // 根据账号密码检查设置
       FDataPersonAccessAuthority passportAuthority = findByPassport(logicContext, passport);
       if(passportAuthority == null){

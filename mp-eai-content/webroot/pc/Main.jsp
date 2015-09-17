@@ -44,6 +44,11 @@
                         </span>
                         </div>
                      </jh:notEquals>
+                     <jh:equals source="host" value="&page.userType">
+                         <div class="head-right">
+                          <a href="Index.wa?time=today">切换帐号</a>
+                        </div>
+                     </jh:equals>
                   </div>
                   <ul class="users" id="users">
                      <je:authority role='eai.oa'>

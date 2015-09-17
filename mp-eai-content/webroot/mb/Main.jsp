@@ -31,6 +31,7 @@
                   <header>
                      <span class="btn-list" id="btn-list"></span>全球实时数据中心
                      <jh:notEquals source="host" value="&page.userType"><div class="header-r"><img src="images/main/81.png"></div></jh:notEquals>
+                     <jh:equals source="host" value="&page.userType"><a href="Index.wa?time=today">切换帐号</a></jh:equals>
                   </header>
                   <div class="banner" id="banner">
                      <div class="bd">
