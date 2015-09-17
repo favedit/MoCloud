@@ -21,10 +21,12 @@
             progress();
             var url = null;
             var data = null;
+             var passport = $.trim($('#passport').val()).replaceAll("'", "");
+            if (passport == "帐号") passport = null;
             if (page != null) {
                url = "/manage/user/User.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
-                  "passport": $('#passport').val(),
+                  "passport": passport,
                   "page": page
                };
             } else {
@@ -68,6 +70,8 @@
                <a href="/manage/user/User.wa?do=insertBefore" class="add_btn"></a>
             </div>
             <div class="nav_search">
+                <input id="passport" name="" type="text" onfocus="if(this.value=='帐号'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='帐号';this.style.color='#ccc';}" style="color:#ccc" value="帐号">
+               <a onClick="userSubmit(0)" href="#" class="sear_btn"></a>
             </div>
          </div>
       </div>

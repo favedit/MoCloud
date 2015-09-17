@@ -5,6 +5,7 @@ import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.com.data.FSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.content.core.manage.role.IRoleConsole;
@@ -50,9 +51,18 @@ public class FUserConsole
          pageNum = 0;
       }
       FDataPersonUserLogic userUnitLogic = logicContext.findLogic(FDataPersonUserLogic.class);
-      StringBuffer whereSB = new StringBuffer();
-      whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
-      FLogicDataset<FDataPersonUserInfo> userInfoList = userUnitLogic.fetchClass(FDataPersonUserInfo.class, null, whereSB.toString(), null, _pageSize, pageNum);
+      FSql where = new FSql();
+      where.append(FDataPersonUserLogic.OVLD);
+      where.append(" = ");
+      where.append(1);
+      if(!RString.isEmpty(userUnit.passport())){
+         where.append(" AND ");
+         where.append(userUnitLogic.PASSPORT);
+         where.append(" LIKE '%{passport}%'");
+         where.bind("passport", userUnit.passport());
+      }
+
+      FLogicDataset<FDataPersonUserInfo> userInfoList = userUnitLogic.fetchClass(FDataPersonUserInfo.class, null, where.toString(), null, _pageSize, pageNum);
       for(FDataPersonUserInfo info : userInfoList){
          FDataControlRoleUnit role = _roleConsole.find(logicContext, info.roleId());
          if(role != null){

@@ -74,7 +74,9 @@ public class FUserAction
       }else{
          userPage.setPageCurrent(0);
       }
-      FLogicDataset<FDataPersonUserInfo> unitList = _userConsole.selectDataByPageAndSomerow(logicContext, null, userPage.pageCurrent() - 1);
+      FDataPersonUserInfo user = new FDataPersonUserInfo();
+      user.setPassport(context.parameter("passport"));
+      FLogicDataset<FDataPersonUserInfo> unitList = _userConsole.selectDataByPageAndSomerow(logicContext, user, userPage.pageCurrent() - 1);
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
    }
