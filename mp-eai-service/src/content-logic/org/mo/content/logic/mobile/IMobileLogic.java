@@ -1,6 +1,6 @@
 package org.mo.content.logic.mobile;
 
-import net.sf.json.JSONObject;
+import java.util.Map;
 
 //============================================================
 // <T>手机服务接口。</T>
@@ -10,7 +10,7 @@ public interface IMobileLogic
    //============================================================
    // <T>根据手机号获取相关信息。</T>
    //
-   // @param mobile 网络环境
+   // @param mobile 手机号码
    //============================================================
-   JSONObject getMobileInfo(String mobile);
+   Map<String, String> getMobileInfo(String mobile);
 }

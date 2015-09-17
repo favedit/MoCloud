@@ -1,7 +1,7 @@
 package org.mo.content.service.info.mobile;
 
 import com.cyou.gccloud.define.enums.common.EGcResult;
-import net.sf.json.JSONObject;
+import java.util.Map;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -63,15 +63,15 @@ public class FMobileService
       FXmlNode xruntime = output.config().createNode("MobileInfo");
       String status = null;
       //............................................................
-      JSONObject mobileInfo = _mobileLogic.getMobileInfo(mobile);
+      Map<String, String> mobileInfo = _mobileLogic.getMobileInfo(mobile);
       if(mobileInfo.size() == 0){
          status = EGcResult.FailString;
       }else{
          status = EGcResult.SuccessString;
          xruntime.set("province", mobileInfo.get("province"));
-         xruntime.set("city", mobileInfo.get("cityname"));
-         xruntime.set("telString", mobileInfo.get("mobile"));
-         xruntime.set("operators", mobileInfo.get("isp"));
+         xruntime.set("city", mobileInfo.get("city"));
+         xruntime.set("telString", mobileInfo.get("telString"));
+         xruntime.set("operators", mobileInfo.get("operators"));
       }
       // 设置数据
       xruntime.set("status", status);
