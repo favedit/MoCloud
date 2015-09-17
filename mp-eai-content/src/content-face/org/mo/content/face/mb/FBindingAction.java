@@ -114,6 +114,7 @@ public class FBindingAction
       TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       String passport = context.parameter("passport");
       _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
+
       //根据帐号查找用户及手机号
       if(RString.isEmpty(passport)){
          page.setMessage("E租宝账号不能为空");
@@ -123,11 +124,13 @@ public class FBindingAction
          page.setMessage("E租宝账号非法");
          return "/apl/ajax";
       }
+
       FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
       if(marketer == null){
          page.setMessage("E租宝账号无理财师权限！");
          return "/apl/ajax";
       }
+
       _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
       String mobile = marketer.phone();
@@ -243,7 +246,7 @@ public class FBindingAction
       _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},mobile={2})", random, mobile);
       BusinessService bs = new BusinessService();
       bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-      String text = "验证码" + random + ",您正在使用[智慧企业－数据可视化平台]进行理财师绑定，注意保密哦！【钰诚办公平台】";
+      String text = "验证码" + random + ",您正在使用[全球实时数据中心系统]进行账户绑定，千万不要告诉别人哟。【钰诚办公平台】";
       int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
       _logger.debug(this, "SendValidate", "sendMessage finish. (text={1},result={2})", text, result);
       return result;
