@@ -2,8 +2,6 @@ package org.mo.content.logic.mobile;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -12,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -40,10 +39,10 @@ public class FMobileLogic
    // @param mobile 手机号码
    //============================================================
    @Override
-   public Map<String, String> getMobileInfo(String mobile){
+   public FAttributes getMobileInfo(String mobile){
 
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      Map<String, String> mobileInfo = new HashMap<String, String>();
+      FAttributes attributes = new FAttributes();
       try{
          //创建HttpGet
          HttpGet httpGet = new HttpGet("http://virtual.paipai.com/extinfo/GetMobileProductInfo?mobile=" + mobile + "&amount=10000&callname=getPhoneNumInfoExtCallback");
@@ -57,10 +56,10 @@ public class FMobileLogic
                JSONObject jo = JSONObject.fromObject(result.substring(result.indexOf('(') + 1, result.lastIndexOf(')')));
                _logger.debug(this, "getMobileInfo", "getMobileInfo. (mobileInfo={1})", jo);
                if(!jo.get("province").equals("未知")){
-                  mobileInfo.put("province", jo.get("province").toString());
-                  mobileInfo.put("city", jo.get("cityname").toString());
-                  mobileInfo.put("telString", jo.get("mobile").toString());
-                  mobileInfo.put("operators", jo.get("isp").toString());
+                  attributes.set("province", jo.get("province").toString());
+                  attributes.set("city", jo.get("cityname").toString());
+                  attributes.set("telString", jo.get("mobile").toString());
+                  attributes.set("operators", jo.get("isp").toString());
                }
             }
          }finally{
@@ -82,6 +81,6 @@ public class FMobileLogic
             e.printStackTrace();
          }
       }
-      return mobileInfo;
+      return attributes;
    }
 }

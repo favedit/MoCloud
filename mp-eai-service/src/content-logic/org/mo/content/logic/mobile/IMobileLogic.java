@@ -1,6 +1,6 @@
 package org.mo.content.logic.mobile;
 
-import java.util.Map;
+import org.mo.com.lang.FAttributes;
 
 //============================================================
 // <T>手机服务接口。</T>
@@ -12,5 +12,5 @@ public interface IMobileLogic
    //
    // @param mobile 手机号码
    //============================================================
-   Map<String, String> getMobileInfo(String mobile);
+   FAttributes getMobileInfo(String mobile);
 }

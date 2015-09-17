@@ -1,8 +1,8 @@
 package org.mo.content.service.info.mobile;
 
 import com.cyou.gccloud.define.enums.common.EGcResult;
-import java.util.Map;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -63,8 +63,8 @@ public class FMobileService
       FXmlNode xruntime = output.config().createNode("MobileInfo");
       String status = null;
       //............................................................
-      Map<String, String> mobileInfo = _mobileLogic.getMobileInfo(mobile);
-      if(mobileInfo.size() == 0){
+      FAttributes mobileInfo = _mobileLogic.getMobileInfo(mobile);
+      if(mobileInfo.isEmpty()){
          status = EGcResult.FailString;
       }else{
          status = EGcResult.SuccessString;
