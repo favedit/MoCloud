@@ -59,23 +59,28 @@ public class FMobileService
       _logger.debug(this, "getMobileInfo", "getMobileInfo begin. ");
       // 获得参数
       FXmlNode inputNode = input.config();
-      String mobile = inputNode.nodeText("mobile");
-      FXmlNode xruntime = output.config().createNode("MobileInfo");
-      String status = null;
-      //............................................................
-      FAttributes mobileInfo = _mobileLogic.getMobileInfo(mobile);
-      if(mobileInfo.isEmpty()){
-         status = EGcResult.FailString;
-      }else{
-         status = EGcResult.SuccessString;
-         xruntime.set("province", mobileInfo.get("province"));
-         xruntime.set("city", mobileInfo.get("city"));
-         xruntime.set("telString", mobileInfo.get("telString"));
-         xruntime.set("operators", mobileInfo.get("operators"));
+      FXmlNode list = output.config().createNode("MobileInfoList");
+      //获取所有手机号
+      for(FXmlNode node : inputNode.allNodes()){
+         String mobile = node.text();
+         String status = null;
+         FXmlNode xruntime = list.createNode("MobileInfo");
+         FAttributes mobileInfo = _mobileLogic.getMobileInfo(mobile);
+         if(mobileInfo.isEmpty()){
+            status = EGcResult.FailString;
+            xruntime.set("phone", mobile);
+         }else{
+            status = EGcResult.SuccessString;
+            xruntime.set("phone", mobileInfo.get("telString"));
+            xruntime.set("province", mobileInfo.get("province"));
+            xruntime.set("city", mobileInfo.get("city"));
+            xruntime.set("operators", mobileInfo.get("operators"));
+         }
+         // 设置数据
+         xruntime.set("status_cd", status);
       }
-      // 设置数据
-      xruntime.set("status", status);
-      _logger.debug(this, "mobileInfo", "mobileInfo. (xruntime={1})", xruntime.toString());
+
+      _logger.debug(this, "getMobileInfo", "getMobileInfo finish. (list={1})", list.toString());
       return EResult.Success;
    }
 }
