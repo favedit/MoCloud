@@ -1350,7 +1350,7 @@ CREATE TABLE `DT_FIN_MARKETER`
    `LINK_ID`                       BIGINT, 
    `NAME`                          VARCHAR(40), 
    `LABEL`                         VARCHAR(40), 
-   `PASSPORT`                      INTEGER, 
+   `PASSPORT`                      VARCHAR(60), 
    `STATUS_CD`                     INTEGER, 
    `PHONE`                         VARCHAR(20), 
    `CARD`                          VARCHAR(20), 

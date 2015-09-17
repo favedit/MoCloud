@@ -4,7 +4,7 @@
   <FieldRecordId _uuid="cbb2d65a-2d81-4e27-a811-9844902bc8e3" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldString _uuid="39bf5e43-e1cc-466a-9b8e-80286000d68d" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="40" />
   <FieldString _uuid="7fba70e1-27cc-4e57-b1f3-abb1b7078521" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
-  <FieldInteger _uuid="9db1c479-8864-4dfd-acca-eade9dc2726b" name="passsport" label="M#12cn13登录名" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" />
+  <FieldString _uuid="f70108fb-dc85-4619-834a-7c1bb50c9d59" name="passsport" label="M#12cn13登录名" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
   <FieldInteger _uuid="cfa8636e-4625-416d-81d7-443dde908676" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
   <FieldString _uuid="a1a7db16-f1db-4817-a474-54bddeb03579" name="phone" label="M#12cn14电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
   <FieldString _uuid="84d0bda2-de20-45a1-9b85-7b70b8861bed" name="card" label="M#12cn13身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />

@@ -64,10 +64,10 @@ public class FDataFinancialMarketerUnit
    protected String _label;
 
    // 存储字段登录名的定义。
-   private int __passport;
+   private String __passport;
 
    // 字段登录名的定义。
-   protected int _passport;
+   protected String _passport;
 
    // 存储字段状态的定义。
    private int __statusCd;
@@ -396,7 +396,7 @@ public class FDataFinancialMarketerUnit
    // @return 数据内容
    //============================================================
    public boolean isPassportChanged(){
-      return __passport != _passport;
+      return !RString.equals(__passport, _passport);
    }
 
    //============================================================
@@ -404,7 +404,7 @@ public class FDataFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public int passport(){
+   public String passport(){
       return _passport;
    }
 
@@ -413,7 +413,7 @@ public class FDataFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setPassport(int value){
+   public void setPassport(String value){
       _passport = value;
    }
 
@@ -1008,7 +1008,7 @@ public class FDataFinancialMarketerUnit
          case "label":
             return _label;
          case "passport":
-            return RInteger.toString(_passport);
+            return _passport;
          case "status_cd":
             return RInteger.toString(_statusCd);
          case "phone":
@@ -1087,7 +1087,7 @@ public class FDataFinancialMarketerUnit
             _label = value;
             break;
          case "passport":
-            _passport = RInteger.parse(value);
+            _passport = value;
             break;
          case "status_cd":
             _statusCd = RInteger.parse(value);
@@ -1196,7 +1196,7 @@ public class FDataFinancialMarketerUnit
                _label = __label;
                break;
             case "passport":
-               __passport = RInteger.parse(value);
+               __passport = value;
                _passport = __passport;
                break;
             case "status_cd":
@@ -1341,7 +1341,7 @@ public class FDataFinancialMarketerUnit
       map.put("linkId", RLong.toString(_linkId));
       map.put("name", _name);
       map.put("label", _label);
-      map.put("passport", RInteger.toString(_passport));
+      map.put("passport", _passport);
       map.put("statusCd", RInteger.toString(_statusCd));
       map.put("phone", _phone);
       map.put("card", _card);
@@ -1380,7 +1380,7 @@ public class FDataFinancialMarketerUnit
       _linkId = input.readInt64();
       _name = input.readString();
       _label = input.readString();
-      _passport = input.readInt32();
+      _passport = input.readString();
       _statusCd = input.readInt32();
       _phone = input.readString();
       _card = input.readString();
@@ -1414,7 +1414,7 @@ public class FDataFinancialMarketerUnit
       output.writeInt64(_linkId);
       output.writeString(_name);
       output.writeString(_label);
-      output.writeInt32(_passport);
+      output.writeString(_passport);
       output.writeInt32(_statusCd);
       output.writeString(_phone);
       output.writeString(_card);

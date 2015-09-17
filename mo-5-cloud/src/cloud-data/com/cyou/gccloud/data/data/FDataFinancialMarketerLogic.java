@@ -782,7 +782,14 @@ public class FDataFinancialMarketerLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.passport());
+      String passport = unit.passport();
+      if(RString.isEmpty(passport)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(passport));
+         cmd.append('\'');
+      }
       cmd.append(',');
       cmd.append(unit.statusCd());
       cmd.append(',');
@@ -998,7 +1005,14 @@ public class FDataFinancialMarketerLogic
       }
       if(unit.isPassportChanged()){
          cmd.append(",`PASSPORT`=");
-         cmd.append(unit.passport());
+         String passport = unit.passport();
+         if(RString.isEmpty(passport)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(passport));
+            cmd.append('\'');
+         }
       }
       if(unit.isStatusCdChanged()){
          cmd.append(",`STATUS_CD`=");
