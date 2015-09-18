@@ -63,16 +63,16 @@ public class FDataCommonAllprovincecityUnit
    protected String _areacode;
 
    // 存储字段级别的定义。
-   private int __level;
+   private int __arealevel;
 
    // 字段级别的定义。
-   protected int _level;
+   protected int _arealevel;
 
    // 存储字段类型的定义。
-   private int __type;
+   private int __typename;
 
    // 字段类型的定义。
-   protected int _type;
+   protected int _typename;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -298,8 +298,8 @@ public class FDataCommonAllprovincecityUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isLevelChanged(){
-      return __level != _level;
+   public boolean isArealevelChanged(){
+      return __arealevel != _arealevel;
    }
 
    //============================================================
@@ -307,8 +307,8 @@ public class FDataCommonAllprovincecityUnit
    //
    // @return 数据内容
    //============================================================
-   public int level(){
-      return _level;
+   public int arealevel(){
+      return _arealevel;
    }
 
    //============================================================
@@ -316,8 +316,8 @@ public class FDataCommonAllprovincecityUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setLevel(int value){
-      _level = value;
+   public void setArealevel(int value){
+      _arealevel = value;
    }
 
    //============================================================
@@ -325,8 +325,8 @@ public class FDataCommonAllprovincecityUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isTypeChanged(){
-      return __type != _type;
+   public boolean isTypenameChanged(){
+      return __typename != _typename;
    }
 
    //============================================================
@@ -334,8 +334,8 @@ public class FDataCommonAllprovincecityUnit
    //
    // @return 数据内容
    //============================================================
-   public int type(){
-      return _type;
+   public int typename(){
+      return _typename;
    }
 
    //============================================================
@@ -343,8 +343,8 @@ public class FDataCommonAllprovincecityUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setType(int value){
-      _type = value;
+   public void setTypename(int value){
+      _typename = value;
    }
 
    //============================================================
@@ -478,10 +478,10 @@ public class FDataCommonAllprovincecityUnit
             return RInteger.toString(_topno);
          case "areacode":
             return _areacode;
-         case "level":
-            return RInteger.toString(_level);
-         case "type":
-            return RInteger.toString(_type);
+         case "arealevel":
+            return RInteger.toString(_arealevel);
+         case "typename":
+            return RInteger.toString(_typename);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -525,11 +525,11 @@ public class FDataCommonAllprovincecityUnit
          case "areacode":
             _areacode = value;
             break;
-         case "level":
-            _level = RInteger.parse(value);
+         case "arealevel":
+            _arealevel = RInteger.parse(value);
             break;
-         case "type":
-            _type = RInteger.parse(value);
+         case "typename":
+            _typename = RInteger.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -586,13 +586,13 @@ public class FDataCommonAllprovincecityUnit
                __areacode = value;
                _areacode = __areacode;
                break;
-            case "level":
-               __level = RInteger.parse(value);
-               _level = __level;
+            case "arealevel":
+               __arealevel = RInteger.parse(value);
+               _arealevel = __arealevel;
                break;
-            case "type":
-               __type = RInteger.parse(value);
-               _type = __type;
+            case "typename":
+               __typename = RInteger.parse(value);
+               _typename = __typename;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -629,8 +629,8 @@ public class FDataCommonAllprovincecityUnit
       row.set("areaname", _areaname);
       row.set("topno", _topno);
       row.set("areacode", _areacode);
-      row.set("level", _level);
-      row.set("type", _type);
+      row.set("arealevel", _arealevel);
+      row.set("typename", _typename);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -652,8 +652,8 @@ public class FDataCommonAllprovincecityUnit
       map.put("areaname", _areaname);
       map.put("topno", RInteger.toString(_topno));
       map.put("areacode", _areacode);
-      map.put("level", RInteger.toString(_level));
-      map.put("type", RInteger.toString(_type));
+      map.put("arealevel", RInteger.toString(_arealevel));
+      map.put("typename", RInteger.toString(_typename));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -675,8 +675,8 @@ public class FDataCommonAllprovincecityUnit
       _areaname = input.readString();
       _topno = input.readInt32();
       _areacode = input.readString();
-      _level = input.readInt32();
-      _type = input.readInt32();
+      _arealevel = input.readInt32();
+      _typename = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -698,8 +698,8 @@ public class FDataCommonAllprovincecityUnit
       output.writeString(_areaname);
       output.writeInt32(_topno);
       output.writeString(_areacode);
-      output.writeInt32(_level);
-      output.writeInt32(_type);
+      output.writeInt32(_arealevel);
+      output.writeInt32(_typename);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

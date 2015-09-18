@@ -54,10 +54,10 @@ public class FDataCommonAllprovincecityLogic
    public final static SLogicFieldInfo AREACODE = new SLogicFieldInfo("AREACODE");
 
    // 字段级别的定义。
-   public final static SLogicFieldInfo LEVEL = new SLogicFieldInfo("LEVEL");
+   public final static SLogicFieldInfo AREALEVEL = new SLogicFieldInfo("AREALEVEL");
 
    // 字段类型的定义。
-   public final static SLogicFieldInfo TYPE = new SLogicFieldInfo("TYPE");
+   public final static SLogicFieldInfo TYPENAME = new SLogicFieldInfo("TYPENAME");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -72,7 +72,7 @@ public class FDataCommonAllprovincecityLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NO`,`AREANAME`,`TOPNO`,`AREACODE`,`LEVEL`,`TYPE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NO`,`AREANAME`,`TOPNO`,`AREACODE`,`AREALEVEL`,`TYPENAME`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造全国所有城市逻辑单元。</T>
@@ -668,8 +668,8 @@ public class FDataCommonAllprovincecityLogic
       cmd.append(",`AREANAME`");
       cmd.append(",`TOPNO`");
       cmd.append(",`AREACODE`");
-      cmd.append(",`LEVEL`");
-      cmd.append(",`TYPE`");
+      cmd.append(",`AREALEVEL`");
+      cmd.append(",`TYPENAME`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -707,9 +707,9 @@ public class FDataCommonAllprovincecityLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.level());
+      cmd.append(unit.arealevel());
       cmd.append(',');
-      cmd.append(unit.type());
+      cmd.append(unit.typename());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -814,13 +814,13 @@ public class FDataCommonAllprovincecityLogic
             cmd.append('\'');
          }
       }
-      if(unit.isLevelChanged()){
-         cmd.append(",`LEVEL`=");
-         cmd.append(unit.level());
+      if(unit.isArealevelChanged()){
+         cmd.append(",`AREALEVEL`=");
+         cmd.append(unit.arealevel());
       }
-      if(unit.isTypeChanged()){
-         cmd.append(",`TYPE`=");
-         cmd.append(unit.type());
+      if(unit.isTypenameChanged()){
+         cmd.append(",`TYPENAME`=");
+         cmd.append(unit.typename());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
