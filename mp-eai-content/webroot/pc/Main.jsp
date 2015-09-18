@@ -89,7 +89,6 @@
                                     <p style="color:#ffa200;" >展示分公司理财师的客户实时投资和赎回情况，以及当月、当周、当日的理财师业绩排行。</p>
                                  </li>
                               </je:authority>
-
                               <je:authority module='eai.statistics.marketer'>
                                  <li style="display: none;" >
                                     <div onclick='doChart("statisticsMarketer")' class="icon"></div>

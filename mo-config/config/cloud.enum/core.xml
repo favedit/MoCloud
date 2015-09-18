@@ -60,6 +60,7 @@
     <Item _uuid="9950c964-068f-4d30-aa05-80397d562334" name="OaHostInvalid" label="OA主机非法" is_valid="Y" note="M#" />
     <Item _uuid="7cedd56a-0c9a-4f3b-a7e4-498c3d63ee2c" name="PassportIllegal" label="用户名非法" is_valid="Y" note="M#" />
     <Item _uuid="01a9d0c0-778a-454d-b31a-cb137410e876" name="PasswordIllegal" label="密码非法" is_valid="Y" note="M#" />
+    <Item _uuid="9713f207-b79b-4bc0-8b8d-64789a19e0e5" name="PasswordLengthFail" label="密码长度不够" is_valid="Y" note="M#" />
   </Enum>
   <Enum _uuid="260561ac-95fe-4af7-8cb3-48e1cb5e78fe" name="GcPersonUserRole" label="用户角色状态" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
     <Item _uuid="7d34680b-afec-4080-a6f8-fce5c937c6d4" name="Unknown" label="未知" is_valid="Y" note="M#" />

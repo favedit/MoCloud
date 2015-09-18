@@ -197,6 +197,10 @@ public class FIndexAction
             logggerMessage = "密码非法特殊字符。";
             message = "密码非法或含有特殊字符。";
             break;
+         case EGcAuthorityResult.PasswordLengthFail:
+            logggerMessage = "密码长度小于6位。";
+            message = "密码长度小于6位。";
+            break;
       }
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
@@ -221,6 +225,8 @@ public class FIndexAction
          context.outputCookies().push(new FWebCookie("islogin", "true"));
          basePage.setUrl("Main.wa");
          return "/apl/Redirector";
+      }else if(resultCd == EGcAuthorityResult.PasswordLengthFail){
+         return "/apl/message/LoginFail";
       }else{
          page.setMessage(message);
          return "Login";

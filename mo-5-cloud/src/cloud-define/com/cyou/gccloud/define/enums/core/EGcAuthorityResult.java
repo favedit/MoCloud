@@ -105,6 +105,15 @@ public class EGcAuthorityResult
    // 密码非法标签
    public final static String PasswordIllegalLabel = "密码非法";
 
+   // 密码长度不够
+   public final static int PasswordLengthFail = 10;
+
+   // 密码长度不够字符串
+   public final static String PasswordLengthFailString = "PasswordLengthFail";
+
+   // 密码长度不够标签
+   public final static String PasswordLengthFailLabel = "密码长度不够";
+
    //============================================================
    // <T>是否含有指定内容</T>
    //
@@ -155,6 +164,8 @@ public class EGcAuthorityResult
             return PassportIllegalString;
          case PasswordIllegal:
             return PasswordIllegalString;
+         case PasswordLengthFail:
+            return PasswordLengthFailString;
          default:
             return "Unknown";
       }
@@ -188,6 +199,8 @@ public class EGcAuthorityResult
             return PassportIllegalLabel;
          case PasswordIllegal:
             return PasswordIllegalLabel;
+         case PasswordLengthFail:
+            return PasswordLengthFailLabel;
          default:
             return "Unknown";
       }
@@ -221,6 +234,8 @@ public class EGcAuthorityResult
             return PassportIllegal;
          case PasswordIllegalString:
             return PasswordIllegal;
+         case PasswordLengthFailString:
+            return PasswordLengthFail;
          default:
             return 0;
       }
