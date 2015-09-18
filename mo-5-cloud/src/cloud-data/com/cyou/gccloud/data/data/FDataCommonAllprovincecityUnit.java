@@ -6,7 +6,6 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -15,10 +14,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>共通国家表逻辑单元。</T>
+// <T>全国所有城市逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataCommonCountryUnit
+public class FDataCommonAllprovincecityUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -40,58 +39,40 @@ public class FDataCommonCountryUnit
    protected String _guid;
 
    // 存储字段代码的定义。
-   private String __code;
+   private int __no;
 
    // 字段代码的定义。
-   protected String _code;
+   protected int _no;
 
    // 存储字段名称的定义。
-   private String __name;
+   private String __areaname;
 
    // 字段名称的定义。
-   protected String _name;
+   protected String _areaname;
 
-   // 存储字段标签的定义。
-   private String __label;
+   // 存储字段父编号的定义。
+   private int __topno;
 
-   // 字段标签的定义。
-   protected String _label;
+   // 字段父编号的定义。
+   protected int _topno;
 
-   // 存储字段描述的定义。
-   private String __phoneCode;
+   // 存储字段区号的定义。
+   private String __areacode;
 
-   // 字段描述的定义。
-   protected String _phoneCode;
+   // 字段区号的定义。
+   protected String _areacode;
 
-   // 存储字段图标地址的定义。
-   private String __iconUrl;
+   // 存储字段级别的定义。
+   private int __level;
 
-   // 字段图标地址的定义。
-   protected String _iconUrl;
+   // 字段级别的定义。
+   protected int _level;
 
-   // 存储字段经度的定义。
-   private double __locationLongitude;
+   // 存储字段类型的定义。
+   private int __type;
 
-   // 字段经度的定义。
-   protected double _locationLongitude;
-
-   // 存储字段纬度的定义。
-   private double __locationLatitude;
-
-   // 字段纬度的定义。
-   protected double _locationLatitude;
-
-   // 存储字段排序值的定义。
-   private int __displayCode;
-
-   // 字段排序值的定义。
-   protected int _displayCode;
-
-   // 存储字段备注的定义。
-   private String __note;
-
-   // 字段备注的定义。
-   protected String _note;
+   // 字段类型的定义。
+   protected int _type;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -118,9 +99,9 @@ public class FDataCommonCountryUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造共通国家表逻辑单元。</T>
+   // <T>构造全国所有城市逻辑单元。</T>
    //============================================================
-   public FDataCommonCountryUnit(){
+   public FDataCommonAllprovincecityUnit(){
    }
 
    //============================================================
@@ -209,8 +190,8 @@ public class FDataCommonCountryUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isCodeChanged(){
-      return !RString.equals(__code, _code);
+   public boolean isNoChanged(){
+      return __no != _no;
    }
 
    //============================================================
@@ -218,8 +199,8 @@ public class FDataCommonCountryUnit
    //
    // @return 数据内容
    //============================================================
-   public String code(){
-      return _code;
+   public int no(){
+      return _no;
    }
 
    //============================================================
@@ -227,8 +208,8 @@ public class FDataCommonCountryUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setCode(String value){
-      _code = value;
+   public void setNo(int value){
+      _no = value;
    }
 
    //============================================================
@@ -236,8 +217,8 @@ public class FDataCommonCountryUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isNameChanged(){
-      return !RString.equals(__name, _name);
+   public boolean isAreanameChanged(){
+      return !RString.equals(__areaname, _areaname);
    }
 
    //============================================================
@@ -245,8 +226,8 @@ public class FDataCommonCountryUnit
    //
    // @return 数据内容
    //============================================================
-   public String name(){
-      return _name;
+   public String areaname(){
+      return _areaname;
    }
 
    //============================================================
@@ -254,197 +235,116 @@ public class FDataCommonCountryUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setName(String value){
-      _name = value;
+   public void setAreaname(String value){
+      _areaname = value;
    }
 
    //============================================================
-   // <T>判断标签的数据是否改变。</T>
+   // <T>判断父编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLabelChanged(){
-      return !RString.equals(__label, _label);
+   public boolean isTopnoChanged(){
+      return __topno != _topno;
    }
 
    //============================================================
-   // <T>获得标签的数据内容。</T>
+   // <T>获得父编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String label(){
-      return _label;
+   public int topno(){
+      return _topno;
    }
 
    //============================================================
-   // <T>设置标签的数据内容。</T>
+   // <T>设置父编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLabel(String value){
-      _label = value;
+   public void setTopno(int value){
+      _topno = value;
    }
 
    //============================================================
-   // <T>判断描述的数据是否改变。</T>
+   // <T>判断区号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isPhoneCodeChanged(){
-      return !RString.equals(__phoneCode, _phoneCode);
+   public boolean isAreacodeChanged(){
+      return !RString.equals(__areacode, _areacode);
    }
 
    //============================================================
-   // <T>获得描述的数据内容。</T>
+   // <T>获得区号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String phoneCode(){
-      return _phoneCode;
+   public String areacode(){
+      return _areacode;
    }
 
    //============================================================
-   // <T>设置描述的数据内容。</T>
+   // <T>设置区号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setPhoneCode(String value){
-      _phoneCode = value;
+   public void setAreacode(String value){
+      _areacode = value;
    }
 
    //============================================================
-   // <T>判断图标地址的数据是否改变。</T>
+   // <T>判断级别的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isIconUrlChanged(){
-      return !RString.equals(__iconUrl, _iconUrl);
+   public boolean isLevelChanged(){
+      return __level != _level;
    }
 
    //============================================================
-   // <T>获得图标地址的数据内容。</T>
+   // <T>获得级别的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String iconUrl(){
-      return _iconUrl;
+   public int level(){
+      return _level;
    }
 
    //============================================================
-   // <T>设置图标地址的数据内容。</T>
+   // <T>设置级别的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setIconUrl(String value){
-      _iconUrl = value;
+   public void setLevel(int value){
+      _level = value;
    }
 
    //============================================================
-   // <T>判断经度的数据是否改变。</T>
+   // <T>判断类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLocationLongitudeChanged(){
-      return __locationLongitude != _locationLongitude;
+   public boolean isTypeChanged(){
+      return __type != _type;
    }
 
    //============================================================
-   // <T>获得经度的数据内容。</T>
+   // <T>获得类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double locationLongitude(){
-      return _locationLongitude;
+   public int type(){
+      return _type;
    }
 
    //============================================================
-   // <T>设置经度的数据内容。</T>
+   // <T>设置类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLocationLongitude(double value){
-      _locationLongitude = value;
-   }
-
-   //============================================================
-   // <T>判断纬度的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLocationLatitudeChanged(){
-      return __locationLatitude != _locationLatitude;
-   }
-
-   //============================================================
-   // <T>获得纬度的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double locationLatitude(){
-      return _locationLatitude;
-   }
-
-   //============================================================
-   // <T>设置纬度的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLocationLatitude(double value){
-      _locationLatitude = value;
-   }
-
-   //============================================================
-   // <T>判断排序值的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isDisplayCodeChanged(){
-      return __displayCode != _displayCode;
-   }
-
-   //============================================================
-   // <T>获得排序值的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int displayCode(){
-      return _displayCode;
-   }
-
-   //============================================================
-   // <T>设置排序值的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setDisplayCode(int value){
-      _displayCode = value;
-   }
-
-   //============================================================
-   // <T>判断备注的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isNoteChanged(){
-      return !RString.equals(__note, _note);
-   }
-
-   //============================================================
-   // <T>获得备注的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String note(){
-      return _note;
-   }
-
-   //============================================================
-   // <T>设置备注的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setNote(String value){
-      _note = value;
+   public void setType(int value){
+      _type = value;
    }
 
    //============================================================
@@ -570,24 +470,18 @@ public class FDataCommonCountryUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "code":
-            return _code;
-         case "name":
-            return _name;
-         case "label":
-            return _label;
-         case "phone_code":
-            return _phoneCode;
-         case "icon_url":
-            return _iconUrl;
-         case "location_longitude":
-            return RDouble.toString(_locationLongitude);
-         case "location_latitude":
-            return RDouble.toString(_locationLatitude);
-         case "display_code":
-            return RInteger.toString(_displayCode);
-         case "note":
-            return _note;
+         case "no":
+            return RInteger.toString(_no);
+         case "areaname":
+            return _areaname;
+         case "topno":
+            return RInteger.toString(_topno);
+         case "areacode":
+            return _areacode;
+         case "level":
+            return RInteger.toString(_level);
+         case "type":
+            return RInteger.toString(_type);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -619,32 +513,23 @@ public class FDataCommonCountryUnit
          case "guid":
             _guid = value;
             break;
-         case "code":
-            _code = value;
+         case "no":
+            _no = RInteger.parse(value);
             break;
-         case "name":
-            _name = value;
+         case "areaname":
+            _areaname = value;
             break;
-         case "label":
-            _label = value;
+         case "topno":
+            _topno = RInteger.parse(value);
             break;
-         case "phone_code":
-            _phoneCode = value;
+         case "areacode":
+            _areacode = value;
             break;
-         case "icon_url":
-            _iconUrl = value;
+         case "level":
+            _level = RInteger.parse(value);
             break;
-         case "location_longitude":
-            _locationLongitude = RDouble.parse(value);
-            break;
-         case "location_latitude":
-            _locationLatitude = RDouble.parse(value);
-            break;
-         case "display_code":
-            _displayCode = RInteger.parse(value);
-            break;
-         case "note":
-            _note = value;
+         case "type":
+            _type = RInteger.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -685,41 +570,29 @@ public class FDataCommonCountryUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "code":
-               __code = value;
-               _code = __code;
+            case "no":
+               __no = RInteger.parse(value);
+               _no = __no;
                break;
-            case "name":
-               __name = value;
-               _name = __name;
+            case "areaname":
+               __areaname = value;
+               _areaname = __areaname;
                break;
-            case "label":
-               __label = value;
-               _label = __label;
+            case "topno":
+               __topno = RInteger.parse(value);
+               _topno = __topno;
                break;
-            case "phone_code":
-               __phoneCode = value;
-               _phoneCode = __phoneCode;
+            case "areacode":
+               __areacode = value;
+               _areacode = __areacode;
                break;
-            case "icon_url":
-               __iconUrl = value;
-               _iconUrl = __iconUrl;
+            case "level":
+               __level = RInteger.parse(value);
+               _level = __level;
                break;
-            case "location_longitude":
-               __locationLongitude = RDouble.parse(value);
-               _locationLongitude = __locationLongitude;
-               break;
-            case "location_latitude":
-               __locationLatitude = RDouble.parse(value);
-               _locationLatitude = __locationLatitude;
-               break;
-            case "display_code":
-               __displayCode = RInteger.parse(value);
-               _displayCode = __displayCode;
-               break;
-            case "note":
-               __note = value;
-               _note = __note;
+            case "type":
+               __type = RInteger.parse(value);
+               _type = __type;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -752,15 +625,12 @@ public class FDataCommonCountryUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("code", _code);
-      row.set("name", _name);
-      row.set("label", _label);
-      row.set("phoneCode", _phoneCode);
-      row.set("iconUrl", _iconUrl);
-      row.set("locationLongitude", _locationLongitude);
-      row.set("locationLatitude", _locationLatitude);
-      row.set("displayCode", _displayCode);
-      row.set("note", _note);
+      row.set("no", _no);
+      row.set("areaname", _areaname);
+      row.set("topno", _topno);
+      row.set("areacode", _areacode);
+      row.set("level", _level);
+      row.set("type", _type);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -778,15 +648,12 @@ public class FDataCommonCountryUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("code", _code);
-      map.put("name", _name);
-      map.put("label", _label);
-      map.put("phoneCode", _phoneCode);
-      map.put("iconUrl", _iconUrl);
-      map.put("locationLongitude", RDouble.toString(_locationLongitude));
-      map.put("locationLatitude", RDouble.toString(_locationLatitude));
-      map.put("displayCode", RInteger.toString(_displayCode));
-      map.put("note", _note);
+      map.put("no", RInteger.toString(_no));
+      map.put("areaname", _areaname);
+      map.put("topno", RInteger.toString(_topno));
+      map.put("areacode", _areacode);
+      map.put("level", RInteger.toString(_level));
+      map.put("type", RInteger.toString(_type));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -804,13 +671,12 @@ public class FDataCommonCountryUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _code = input.readString();
-      _name = input.readString();
-      _label = input.readString();
-      _phoneCode = input.readString();
-      _iconUrl = input.readString();
-      _displayCode = input.readInt32();
-      _note = input.readString();
+      _no = input.readInt32();
+      _areaname = input.readString();
+      _topno = input.readInt32();
+      _areacode = input.readString();
+      _level = input.readInt32();
+      _type = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -828,13 +694,12 @@ public class FDataCommonCountryUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeString(_code);
-      output.writeString(_name);
-      output.writeString(_label);
-      output.writeString(_phoneCode);
-      output.writeString(_iconUrl);
-      output.writeInt32(_displayCode);
-      output.writeString(_note);
+      output.writeInt32(_no);
+      output.writeString(_areaname);
+      output.writeInt32(_topno);
+      output.writeString(_areacode);
+      output.writeInt32(_level);
+      output.writeInt32(_type);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

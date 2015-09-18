@@ -10,6 +10,8 @@ public class RStatisticsMobile
       FXmlNode inputNode = new FXmlNode("Service");
       inputNode.set("action", "getMobileInfo");
       inputNode.createNode("mobile").setText("18710555908");
+      inputNode.createNode("mobile").setText("ddd");
+      inputNode.createNode("mobile").setText("18710555902");
 
       FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws");
       //      try(FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws")){
@@ -24,7 +26,6 @@ public class RStatisticsMobile
 
       String content = connection.response().content();
       System.out.println(content);
-
       //      CloseableHttpClient httpclient = HttpClients.createDefault();
       //      JSONObject jo = JSONObject.fromObject("{}");
       //      try{

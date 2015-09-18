@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="d70f92c6-20f0-481e-9d65-92ae52c670d7" name="data.common.allprovincecity" label="M#12cn16全国所有城市" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Allprovincecity" data_name="quan_prov_city_area" data_alias="quan_prov_city_area" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldInteger _uuid="4061f3ba-da17-451a-9296-4c7aec0567c3" name="no" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NO" />
+  <FieldString _uuid="29eab4be-b60d-46a3-a3e0-57c8dd25efd8" name="areaname" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREANAME" data_size="255" />
+  <FieldInteger _uuid="d7145e84-280d-448e-9a6d-8ea35095be1b" name="topno" label="M#12cn13父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TOPNO" />
+  <FieldString _uuid="3c613eae-70ce-4b5a-815f-003f17d1eee8" name="areacode" label="M#12cn12区号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREACODE" data_size="255" />
+  <FieldInteger _uuid="fec8c76d-2da2-4077-9929-ec27b7302758" name="level" label="M#12cn12级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEVEL" />
+  <FieldInteger _uuid="7a65bfae-d309-4fbc-975c-ca9cc2ecb1a6" name="type" label="M#12cn12类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TYPE" />
+  <FieldTemplate _uuid="9e7795ec-2091-43fc-9d9b-ac192f4f389b" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

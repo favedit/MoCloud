@@ -20,17 +20,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>共通国家表逻辑。</T>
+// <T>全国所有城市逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataCommonCountryLogic
+public class FDataCommonAllprovincecityLogic
       extends FLogicTable
 {
-   // 共通国家表的定义。
+   // 全国所有城市的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 共通国家表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.common.country", "DT_COM_COUNTRY");
+   // 全国所有城市的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.common.allprovincecity", "quan_prov_city_area");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -42,31 +42,22 @@ public class FDataCommonCountryLogic
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
    // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
+   public final static SLogicFieldInfo NO = new SLogicFieldInfo("NO");
 
    // 字段名称的定义。
-   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
+   public final static SLogicFieldInfo AREANAME = new SLogicFieldInfo("AREANAME");
 
-   // 字段标签的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+   // 字段父编号的定义。
+   public final static SLogicFieldInfo TOPNO = new SLogicFieldInfo("TOPNO");
 
-   // 字段描述的定义。
-   public final static SLogicFieldInfo PHONE_CODE = new SLogicFieldInfo("PHONE_CODE");
+   // 字段区号的定义。
+   public final static SLogicFieldInfo AREACODE = new SLogicFieldInfo("AREACODE");
 
-   // 字段图标地址的定义。
-   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
+   // 字段级别的定义。
+   public final static SLogicFieldInfo LEVEL = new SLogicFieldInfo("LEVEL");
 
-   // 字段经度的定义。
-   public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
-
-   // 字段纬度的定义。
-   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
-
-   // 字段排序值的定义。
-   public final static SLogicFieldInfo DISPLAY_CODE = new SLogicFieldInfo("DISPLAY_CODE");
-
-   // 字段备注的定义。
-   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
+   // 字段类型的定义。
+   public final static SLogicFieldInfo TYPE = new SLogicFieldInfo("TYPE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -81,25 +72,25 @@ public class FDataCommonCountryLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CODE`,`NAME`,`LABEL`,`PHONE_CODE`,`ICON_URL`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`DISPLAY_CODE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NO`,`AREANAME`,`TOPNO`,`AREACODE`,`LEVEL`,`TYPE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造共通国家表逻辑单元。</T>
+   // <T>构造全国所有城市逻辑单元。</T>
    //============================================================
-   public FDataCommonCountryLogic(){
+   public FDataCommonAllprovincecityLogic(){
       _name = TABLE.name();
-      _classUnit = FDataCommonCountryUnit.class;
+      _classUnit = FDataCommonAllprovincecityUnit.class;
    }
 
    //============================================================
-   // <T>构造共通国家表逻辑单元。</T>
+   // <T>构造全国所有城市逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataCommonCountryLogic(ILogicContext context){
+   public FDataCommonAllprovincecityLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataCommonCountryUnit.class;
+      _classUnit = FDataCommonAllprovincecityUnit.class;
    }
 
    //============================================================
@@ -233,7 +224,7 @@ public class FDataCommonCountryLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataCommonCountryUnit());
+            unit = (T)(new FDataCommonAllprovincecityUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -249,8 +240,8 @@ public class FDataCommonCountryLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataCommonCountryUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataCommonCountryUnit.class, guid);
+   public FDataCommonAllprovincecityUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataCommonAllprovincecityUnit.class, guid);
    }
 
    //============================================================
@@ -288,8 +279,8 @@ public class FDataCommonCountryLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataCommonCountryUnit search(CharSequence whereSql){
-      return search(null, FDataCommonCountryUnit.class, whereSql);
+   public FDataCommonAllprovincecityUnit search(CharSequence whereSql){
+      return search(null, FDataCommonAllprovincecityUnit.class, whereSql);
    }
 
    //============================================================
@@ -326,7 +317,7 @@ public class FDataCommonCountryLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -337,8 +328,8 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(int pageSize,
-                                                      int page){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(int pageSize,
+                                                              int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -350,9 +341,9 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(CharSequence whereSql,
-                                                      int pageSize,
-                                                      int page){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(CharSequence whereSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -365,8 +356,8 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(CharSequence whereSql,
-                                                      CharSequence orderSql){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(CharSequence whereSql,
+                                                              CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -379,10 +370,10 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(CharSequence whereSql,
-                                                      CharSequence orderSql,
-                                                      int pageSize,
-                                                      int page){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(CharSequence whereSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -396,11 +387,11 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(CharSequence fields,
-                                                      CharSequence whereSql,
-                                                      CharSequence orderSql,
-                                                      int pageSize,
-                                                      int page){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(CharSequence fields,
+                                                              CharSequence whereSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -414,12 +405,12 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetch(CharSequence fields,
-                                                      CharSequence whereSql,
-                                                      CharSequence groupSql,
-                                                      CharSequence orderSql,
-                                                      int pageSize,
-                                                      int page){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetch(CharSequence fields,
+                                                              CharSequence whereSql,
+                                                              CharSequence groupSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -560,10 +551,10 @@ public class FDataCommonCountryLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetchSql(CharSequence code,
-                                                         CharSequence sql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetchSql(CharSequence code,
+                                                                 CharSequence sql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -588,7 +579,7 @@ public class FDataCommonCountryLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataCommonCountryUnit>(FDataCommonCountryUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataCommonAllprovincecityUnit>(FDataCommonAllprovincecityUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -601,7 +592,7 @@ public class FDataCommonCountryLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataCommonCountryUnit> fetchAll(){
+   public FLogicDataset<FDataCommonAllprovincecityUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -614,8 +605,8 @@ public class FDataCommonCountryLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataCommonCountryUnit doPrepare(){
-      FDataCommonCountryUnit unit = new FDataCommonCountryUnit();
+   public FDataCommonAllprovincecityUnit doPrepare(){
+      FDataCommonAllprovincecityUnit unit = new FDataCommonAllprovincecityUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -642,7 +633,7 @@ public class FDataCommonCountryLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataCommonCountryUnit unit = (FDataCommonCountryUnit)logicUnit;
+      FDataCommonAllprovincecityUnit unit = (FDataCommonAllprovincecityUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -656,7 +647,7 @@ public class FDataCommonCountryLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataCommonCountryUnit unit = (FDataCommonCountryUnit)logicUnit;
+      FDataCommonAllprovincecityUnit unit = (FDataCommonAllprovincecityUnit)logicUnit;
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -673,15 +664,12 @@ public class FDataCommonCountryLogic
       cmd.append("(");
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`CODE`");
-      cmd.append(",`NAME`");
-      cmd.append(",`LABEL`");
-      cmd.append(",`PHONE_CODE`");
-      cmd.append(",`ICON_URL`");
-      cmd.append(",`LOCATION_LONGITUDE`");
-      cmd.append(",`LOCATION_LATITUDE`");
-      cmd.append(",`DISPLAY_CODE`");
-      cmd.append(",`NOTE`");
+      cmd.append(",`NO`");
+      cmd.append(",`AREANAME`");
+      cmd.append(",`TOPNO`");
+      cmd.append(",`AREACODE`");
+      cmd.append(",`LEVEL`");
+      cmd.append(",`TYPE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -697,65 +685,31 @@ public class FDataCommonCountryLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
+      cmd.append(unit.no());
+      cmd.append(',');
+      String areaname = unit.areaname();
+      if(RString.isEmpty(areaname)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
+         cmd.append(RSql.formatValue(areaname));
          cmd.append('\'');
       }
       cmd.append(',');
-      String name = unit.name();
-      if(RString.isEmpty(name)){
+      cmd.append(unit.topno());
+      cmd.append(',');
+      String areacode = unit.areacode();
+      if(RString.isEmpty(areacode)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(name));
+         cmd.append(RSql.formatValue(areacode));
          cmd.append('\'');
       }
       cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
+      cmd.append(unit.level());
       cmd.append(',');
-      String phoneCode = unit.phoneCode();
-      if(RString.isEmpty(phoneCode)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(phoneCode));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String iconUrl = unit.iconUrl();
-      if(RString.isEmpty(iconUrl)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(iconUrl));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.locationLongitude());
-      cmd.append(',');
-      cmd.append(unit.locationLatitude());
-      cmd.append(',');
-      cmd.append(unit.displayCode());
-      cmd.append(',');
-      String note = unit.note();
-      if(RString.isEmpty(note)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(note));
-         cmd.append('\'');
-      }
+      cmd.append(unit.type());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -791,7 +745,7 @@ public class FDataCommonCountryLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataCommonCountryUnit unit = (FDataCommonCountryUnit)logicUnit;
+      FDataCommonAllprovincecityUnit unit = (FDataCommonAllprovincecityUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -810,7 +764,7 @@ public class FDataCommonCountryLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataCommonCountryUnit unit = (FDataCommonCountryUnit)logicUnit;
+      FDataCommonAllprovincecityUnit unit = (FDataCommonAllprovincecityUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -830,83 +784,43 @@ public class FDataCommonCountryLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
+      if(unit.isNoChanged()){
+         cmd.append(",`NO`=");
+         cmd.append(unit.no());
+      }
+      if(unit.isAreanameChanged()){
+         cmd.append(",`AREANAME`=");
+         String areaname = unit.areaname();
+         if(RString.isEmpty(areaname)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
+            cmd.append(RSql.formatValue(areaname));
             cmd.append('\'');
          }
       }
-      if(unit.isNameChanged()){
-         cmd.append(",`NAME`=");
-         String name = unit.name();
-         if(RString.isEmpty(name)){
+      if(unit.isTopnoChanged()){
+         cmd.append(",`TOPNO`=");
+         cmd.append(unit.topno());
+      }
+      if(unit.isAreacodeChanged()){
+         cmd.append(",`AREACODE`=");
+         String areacode = unit.areacode();
+         if(RString.isEmpty(areacode)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(name));
+            cmd.append(RSql.formatValue(areacode));
             cmd.append('\'');
          }
       }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
-         }
+      if(unit.isLevelChanged()){
+         cmd.append(",`LEVEL`=");
+         cmd.append(unit.level());
       }
-      if(unit.isPhoneCodeChanged()){
-         cmd.append(",`PHONE_CODE`=");
-         String phoneCode = unit.phoneCode();
-         if(RString.isEmpty(phoneCode)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(phoneCode));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isIconUrlChanged()){
-         cmd.append(",`ICON_URL`=");
-         String iconUrl = unit.iconUrl();
-         if(RString.isEmpty(iconUrl)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(iconUrl));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isLocationLongitudeChanged()){
-         cmd.append(",`LOCATION_LONGITUDE`=");
-         cmd.append(unit.locationLongitude());
-      }
-      if(unit.isLocationLatitudeChanged()){
-         cmd.append(",`LOCATION_LATITUDE`=");
-         cmd.append(unit.locationLatitude());
-      }
-      if(unit.isDisplayCodeChanged()){
-         cmd.append(",`DISPLAY_CODE`=");
-         cmd.append(unit.displayCode());
-      }
-      if(unit.isNoteChanged()){
-         cmd.append(",`NOTE`=");
-         String note = unit.note();
-         if(RString.isEmpty(note)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(note));
-            cmd.append('\'');
-         }
+      if(unit.isTypeChanged()){
+         cmd.append(",`TYPE`=");
+         cmd.append(unit.type());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
@@ -928,7 +842,7 @@ public class FDataCommonCountryLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataCommonCountryUnit unit = (FDataCommonCountryUnit)logicUnit;
+      FDataCommonAllprovincecityUnit unit = (FDataCommonAllprovincecityUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
