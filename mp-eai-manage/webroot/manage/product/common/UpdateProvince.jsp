@@ -13,28 +13,22 @@
         if (!isValid())
             return;
         progress();
-        var url = "/product/financial/marketer/Marketer.wa?do=update&date="
+        var url = "/product/financial/customer/Customer.wa?do=update&date="
                 + new Date().valueOf();
-        var customerRedemptionDate = $('#customerRedemptionDate').datebox('getValue');
-        var customerInvestmentDate = $('#customerInvestmentDate').datebox('getValue');
         var data = {
-            "customerInvestmentTotal" : $('#customerInvestmentTotal').val(),
-            "customerInvestmentCount" : $('#customerInvestmentCount').val(),
-            "customerRedemptionTotal" : $('#customerRedemptionTotal').val(),
-            "customerRedemptionCount" : $('#customerRedemptionCount').val(),
-            "customerNetinvestmentTotal" : $('#customerNetinvestmentTotal').val(),
-            "customerInterestTotal" : $('#customerInterestTotal').val(),
-            "customerPerformanceTotal" : $('#customerPerformanceTotal').val(),
-            "name" : $('#name').val(),
-            "label" : $('#label').val(),
-            "statusCd" : $('#statusCd').val(),
-            "note" : $('#note').val(),
-            "phone" : $('#phone').val(),
-            "rankLabel" : $('#rankLabel').val(),
-            "departmentLabel" : $('#departmentLabel').val(),
+            "memberId" : $('#memberId').val(),
             "adminId" : $('#adminId').val(),
-            "customerRedemptionDate" : customerRedemptionDate,
-            "customerInvestmentDate" : customerInvestmentDate,
+            "marriageStatus" : $('#marriageStatus').val(),
+            "highestEducation" : $('#highestEducation').val(),
+            "profession" : $('#profession').val(),
+            "monthlyIncome" : $('#monthlyIncome').val(),
+            "investmentTotal" : $('#investmentTotal').val(),
+            "investmentCount" : $('#investmentCount').val(),
+            "redemptionTotal" : $('#redemptionTotal').val(),
+            "redemptionCount" : $('#redemptionCount').val(),
+            "netinvestmentTotal" : $('#netinvestmentTotal').val(),
+            "note" : $('#note').val(),
+            "interestTotal" : $('#interestTotal').val(),
             "ouid" : $('#ouid').val()
         };
         $.ajax({
@@ -44,7 +38,7 @@
             success : function(msg) {
                 closeProgress();
                 var result = toJsonObject(msg);
-                location.href = "/product/financial/marketer/Marketer.wa";
+                location.href = "/product/financial/customer/Customer.wa";
             },
             fail : function() {
                 closeProgress();
@@ -79,12 +73,12 @@
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>修改理财师信息</span>
+   <span>修改客户信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="sub_btn"></a> <a
-     href="/product/financial/marketer/Marketer.wa" class="back_btn"></a>
+     href="/product/financial/customer/Customer.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
@@ -92,148 +86,154 @@
  <div class="easyui-panel" fit='true' data-options="border:false">
 
   <form id="config"
-   action="/product/financial/department/Department.wa?do=insert"
+   action="/product/financial/customer/Customer.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="710" height="492" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="38" height="33"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
-     <td width="109"><div align="left">
-       <input id="name" name="name" class="easyui-validatebox textbox"
+     <td width="78" height="33"><div align="left">成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;员:</div></td>
+     <td width="100"><div align="left">
+       <input id="memberId" name="memberId" readonly="readonly"
+        class="easyui-validatebox textbox"
         style="width:80px;height:20px;"
         data-options="validType:'length[0,20]'"
-        value="<jh:write source='&unit.name'/>" /> <input id="adminId"
-        name="adminId" style="display:none"
-        value="<jh:write source='&basePage.userId'/>" /> <input
-        id="ouid" name="ouid" style="display:none"
-        value="<jh:write source='&unit.ouid'/>" />
+        value="<jh:write source='&unit.memberId'/>" /> <input
+        id="adminId" name="adminId" style="display:none"
+        value="<jh:write source='&basePage.userId'/>" /> <input id="ouid" name="ouid" style="display:none" value="<jh:write source='&unit.ouid'/>" />
       </div></td>
-     <td width="38"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
-     <td width="120"><div align="left">
-       <input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.label'/>" />
-      </div></td>
-     <td width="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
-     <td width="241"><div align="left">
-       <input id="statusCd" name="statusCd"
-        class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,30]'"
-        value="<jh:write source='&unit.statusCd'/>" />
-      </div></td>
+     <td width="78">&nbsp;</td>
+     <td width="142">&nbsp;</td>
+     <td width="67">&nbsp;</td>
+     <td width="245">&nbsp;</td>
     </tr>
     <tr>
-     <td height="38"><div align="left">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务:</div></td>
+     <td height="38"><div align="left">婚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;否:</div></td>
      <td><div align="left">
-       <input id="rankLabel" name="rankLabel"
+       <select id="marriageStatus" name="marriageStatus">
+        <jh:equals source="1" value="&unit.marriageStatus">
+         <option value="1" selected="selected">是</option>
+         <option value="0">否</option>
+        </jh:equals>
+        <jh:equals source="0" value="&unit.marriageStatus">
+         <option value="0" selected="selected">否</option>
+         <option value="1">是</option>
+        </jh:equals>
+       </select>
+      </div></td>
+     <td><div align="left">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历:</div></td>
+     <td><select id="highestEducation" name="highestEducation">
+       <jh:equals source="0" value="&unit.highestEducation">
+        <option value="0" selected="selected">学士</option>
+        <option value="1">硕士</option>
+        <option value="2">博士</option>
+        <option value="3">博士后</option>
+       </jh:equals>
+       <jh:equals source="1" value="&unit.highestEducation">
+        <option value="0">学士</option>
+        <option value="1" selected="selected">硕士</option>
+        <option value="2">博士</option>
+        <option value="3">博士后</option>
+       </jh:equals>
+       <jh:equals source="2" value="&unit.highestEducation">
+        <option value="0">学士</option>
+        <option value="1">硕士</option>
+        <option value="2" selected="selected">博士</option>
+        <option value="3">博士后</option>
+       </jh:equals>
+       <jh:equals source="3" value="&unit.highestEducation">
+        <option value="0">学士</option>
+        <option value="1">硕士</option>
+        <option value="2">博士</option>
+        <option value="3" selected="selected">博士后</option>
+       </jh:equals>
+     </select></td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+    </tr>
+    <tr>
+
+     <td><div align="left">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业:</div></td>
+     <td><div align="left">
+       <input id="profession" name="profession"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.rankLabel'/>" />
+        value="<jh:write source='&unit.profession'/>" />
       </div></td>
-     <td><div align="left">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</div></td>
+     <td height="38"><div align="left">月&nbsp;收&nbsp;入:</div></td>
      <td><div align="left">
-       <input id="phone" name="phone" class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.phone'/>" />
-      </div></td>
-     <td><div align="left">所属部门:</div></td>
-     <td><div align="left">
-       <input id="departmentLabel" name="departmentLabel"
+       <input id="monthlyIncome" name="monthlyIncome"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.departmentLabel'/>" />
+        value="<jh:write source='&unit.monthlyIncome'/>" />
       </div></td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
     </tr>
     <tr>
      <td height="38"><div align="left">客户投资总额:</div></td>
      <td><div align="left">
-       <input id="customerInvestmentTotal"
-        name="customerInvestmentTotal"
+       <input id="investmentTotal" name="investmentTotal"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerInvestmentTotal'/>" />
+        value="<jh:write source='&unit.investmentTotal'/>" />
       </div></td>
      <td><div align="left">客户投资次数:</div></td>
      <td><div align="left">
-       <input id="customerInvestmentCount"
-        name="customerInvestmentCount"
+       <input id="investmentCount" name="investmentCount"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerInvestmentCount'/>" />
+        value="<jh:write source='&unit.investmentCount'/>" />
       </div></td>
-     <td height="38"><div align="left">客户投资时间:</div></td>
-     <td><div align="left">
-       <input id="customerInvestmentDate" name="customerInvestmentDate"
-        class="easyui-datebox" style="width:100px;height:20px"
-        data-options="formatter:myformatter,parser:myparser"
-        value="<jh:write source='&page.customerInvestmentDate'/>" />
-      </div></td>
+     <td height="38"><div align="left"></div></td>
+     <td><div align="left"></div></td>
 
     </tr>
     <tr>
      <td height="38"><div align="left">客户赎回总额:</div></td>
      <td><div align="left">
-       <input id="customerRedemptionTotal"
-        name="customerRedemptionTotal"
+       <input id="redemptionTotal" name="redemptionTotal"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerRedemptionTotal'/>" />
+        value="<jh:write source='&unit.redemptionTotal'/>" />
       </div></td>
      <td><div align="left">客户赎回次数:</div></td>
      <td><div align="left">
-       <input id="customerRedemptionCount"
-        name="customerRedemptionCount"
+       <input id="redemptionCount" name="redemptionCount"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerRedemptionCount'/>" />
+        value="<jh:write source='&unit.redemptionCount'/>" />
       </div></td>
-     <td><div align="left">客户赎回时间:</div></td>
-     <td><div align="left">
-       <input id="customerRedemptionDate" name="customerRedemptionDate"
-        class="easyui-datebox" style="width:100px;height:20px"
-        data-options="formatter:myformatter,parser:myparser"
-        value="<jh:write source='&page.customerRedemptionDate'/>" />
-      </div></td>
+     <td><div align="left"></div></td>
+     <td><div align="left"></div></td>
     </tr>
     <tr>
 
 
      <td height="38"><div align="left">客户净投总额:</div></td>
      <td><div align="left">
-       <input id="customerNetinvestmentTotal"
-        name="customerNetinvestmentTotal"
+       <input id="netinvestmentTotal" name="netinvestmentTotal"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerNetinvestmentTotal'/>" />
+        value="<jh:write source='&unit.netinvestment'/>" />
       </div></td>
      <td><div align="left">客户利息总额:</div></td>
      <td><div align="left">
-       <input id="customerInterestTotal" name="customerInterestTotal"
+       <input id="interestTotal" name="interestTotal"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerInterestTotal'/>" />
+        value="<jh:write source='&unit.interestTotal'/>" />
       </div></td>
-     <td><div align="left">客户业绩总额:</div></td>
-     <td><div align="left">
-       <input id="customerPerformanceTotal"
-        name="customerPerformanceTotal"
-        class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.customerPerformanceTotal'/>" />
-      </div></td>
+     <td><div align="left">:</div></td>
+     <td><div align="left"></div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">备注:</div></td>

@@ -3,6 +3,7 @@ package org.mo.content.core.product.configration;
 import com.cyou.gccloud.data.data.FDataCommonConfigurationLogic;
 import com.cyou.gccloud.data.data.FDataCommonConfigurationUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -47,9 +48,11 @@ public class FConfigrationConsole
       if(pageNum < 0){
          pageNum = 0;
       }
-      StringBuffer whereSql = new StringBuffer();
+      FSql whereSql = new FSql();
       if(!RString.isEmpty(unit.code())){
-         whereSql.append(FDataCommonConfigurationLogic.CODE).append(" LIKE '%").append(unit.code() + "%'");
+         whereSql.append(FDataCommonConfigurationLogic.CODE);
+         whereSql.append(" LIKE '%");
+         whereSql.append(unit.code() + "%'");
       }
       String orderBy = String.format("%s %s", FDataCommonConfigurationLogic.CODE, "ASC");
       FDataCommonConfigurationLogic logic = logicContext.findLogic(FDataCommonConfigurationLogic.class);

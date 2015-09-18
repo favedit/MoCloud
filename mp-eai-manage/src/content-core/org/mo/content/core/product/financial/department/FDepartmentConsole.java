@@ -3,6 +3,7 @@ package org.mo.content.core.product.financial.department;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentLogic;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.com.data.FSql;
 //============================================================
 //<P>部门信息操作接口</P>
 //
@@ -47,9 +48,11 @@ public class FDepartmentConsole
       if(pageNum < 0){
          pageNum = 0;
       }
-      StringBuffer whereSql = new StringBuffer();
+      FSql whereSql = new FSql();
       if(!RString.isEmpty(unit.code())){
-         whereSql.append(FDataFinancialDepartmentLogic.CODE).append(" LIKE '%").append(unit.code() + "%'");
+         whereSql.append(FDataFinancialDepartmentLogic.CODE);
+         whereSql.append(" LIKE '%");
+         whereSql.append(unit.code() + "%'");
       }
       String orderBy = String.format("%s %s %s %s", FDataFinancialDepartmentLogic.DEPARTMENT_LABEL + ",", FDataFinancialDepartmentLogic.REGION_LABEL + ",", FDataFinancialDepartmentLogic.LABEL, "ASC");
       FDataFinancialDepartmentLogic logic = logicContext.findLogic(FDataFinancialDepartmentLogic.class);
@@ -60,9 +63,11 @@ public class FDepartmentConsole
    @Override
    public FDataFinancialDepartmentUnit findByCode(ILogicContext logicContext,
                                                   String code){
-      StringBuffer whereSql = new StringBuffer();
+      FSql whereSql = new FSql();
       if(!RString.isEmpty(code)){
-         whereSql.append(FDataFinancialDepartmentLogic.CODE).append("='").append(code + "'");
+         whereSql.append(FDataFinancialDepartmentLogic.CODE);
+         whereSql.append("='");
+         whereSql.append(code + "'");
       }
       FDataFinancialDepartmentLogic logic = logicContext.findLogic(FDataFinancialDepartmentLogic.class);
       FLogicDataset<FDataFinancialDepartmentUnit> roleList = logic.fetch(whereSql.toString());

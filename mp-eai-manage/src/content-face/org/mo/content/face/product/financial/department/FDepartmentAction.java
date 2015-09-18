@@ -235,7 +235,7 @@ public class FDepartmentAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      _logger.debug(this, "Update", "Update Begin.(id={1})", context.parameter("configInfoId"));
+      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataFinancialDepartmentUnit unit = new FDataFinancialDepartmentUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       String provinceId = context.parameter("provinceId");

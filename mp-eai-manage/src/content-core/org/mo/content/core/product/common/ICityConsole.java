@@ -2,6 +2,7 @@ package org.mo.content.core.product.common;
 
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>城市信息操作接口</P>
@@ -25,4 +26,9 @@ public interface ICityConsole
    // ============================================================
    FDataCommonCityUnit findByCitycode(ILogicContext context,
                                       String code);
+
+   FLogicDataset<FDataCityInfo> select(ILogicContext logicContext,
+                                       FDataCommonCityUnit unit,
+                                       int pageNum,
+                                       int pageSize);
 }

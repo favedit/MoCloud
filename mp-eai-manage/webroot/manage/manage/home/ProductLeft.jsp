@@ -45,6 +45,18 @@
                   <jh:equals source="product.configration" value="&basePage.menuString">
                      <li><a href="/product/configration/Configration.wa" target="right">配置信息</a></li>
                   </jh:equals>
+                  <jh:equals source="product.common.country" value="&basePage.menuString">
+                     <li><a href="/product/common/Country.wa" target="right">国家信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.common.province" value="&basePage.menuString">
+                     <li><a href="/product/common/Province.wa" target="right">省会信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.common.city" value="&basePage.menuString">
+                     <li><a href="/product/common/City.wa" target="right">城市信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.common.area" value="&basePage.menuString">
+                     <li><a href="/product/common/Area.wa" target="right">区域信息</a></li>
+                  </jh:equals>
                </ul>
             </li>
             <li id="two" class="common"> <a href="#two">设备管理</a>
@@ -68,6 +80,12 @@
                   </jh:equals>
                   <jh:equals source="product.financial.marketer" value="&basePage.menuString">
                      <li><a href="/product/financial/marketer/Marketer.wa" target="right">理财师信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.financial.customer" value="&basePage.menuString">
+                     <li><a href="/product/financial/customer/Customer.wa" target="right">客户信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.financial.product" value="&basePage.menuString">
+                     <li><a href="/product/financial/product/Product.wa" target="right">产品信息</a></li>
                   </jh:equals>
                   
                </ul>

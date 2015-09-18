@@ -3,6 +3,9 @@ package org.mo.content.core.product.common;
 import com.cyou.gccloud.data.data.FDataCommonCityLogic;
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.com.data.FSql;
+import org.mo.com.lang.RString;
+import org.mo.data.logic.FLogicDataset;
 //============================================================
 //<P>区域信息操作接口</P>
 //
@@ -36,12 +39,35 @@ public class FCityConsole
    @Override
    public FDataCommonCityUnit findByCitycode(ILogicContext context,
                                              String code){
-      StringBuffer where = new StringBuffer();
+      FSql where = new FSql();
       if(code != null){
-         where.append(FDataCommonCityLogic.CITY_CODE).append(" = '").append(code).append("'");
+         where.append(FDataCommonCityLogic.CITY_CODE);
+         where.append(" = '");
+         where.append(code);
+         where.append("'");
       }
       FDataCommonCityLogic logic = context.findLogic(FDataCommonCityLogic.class);
       FDataCommonCityUnit city = logic.search(where);
       return city;
+   }
+
+   @Override
+   public FLogicDataset<FDataCityInfo> select(ILogicContext logicContext,
+                                              FDataCommonCityUnit unit,
+                                              int pageNum,
+                                              int pageSize){
+      if(pageNum < 0){
+         pageNum = 0;
+      }
+      FSql where = new FSql();
+      if(!RString.isEmpty(unit.label())){
+         where.append(FDataCommonCityLogic.LABEL);
+         where.append(" LIKE '%");
+         where.append(unit.label() + "%'");
+      }
+      String orderBy = String.format("%s %s", FDataCommonCityLogic.LABEL, "ASC");
+      FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
+      FLogicDataset<FDataCityInfo> userInfoList = logic.fetchClass(FDataCityInfo.class, null, where.toString(), null, pageSize, pageNum);
+      return userInfoList;
    }
 }

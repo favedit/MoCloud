@@ -2,6 +2,8 @@ package org.mo.content.core.product.common;
 
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.data.logic.FLogicContext;
+import org.mo.data.logic.FLogicDataset;
 //============================================================
 //<P>省份信息操作接口</P>
 //
@@ -16,13 +18,23 @@ public interface IProvinceConsole
       extends
          IAbstractLogicUnitConsole<FDataCommonProvinceUnit>
 {
+
    // ============================================================
-   // <T>根据名称获取对象</T>
+   // <T>获得分页数据列表bySomerow</T>
    //
-   // @param logicContext 链接对象
-   // @param label 名称
-   // @return 数据对象
+   // @param sqlContext 链接对象
+   // @param moduleUnit 查询条件
+   // @param pageNum 页码
+   // @return 数据集合
    // ============================================================
-   FDataCommonProvinceUnit findByLabel(ILogicContext context,
-                                       String label);
+   FLogicDataset<FDataProvinceInfo> select(ILogicContext logicContext,
+                                           FDataCommonProvinceUnit unit,
+                                           int pageNum,
+                                           int pageSize);
+
+   FDataCommonProvinceUnit findByCode(ILogicContext logicContext,
+                                      String code);
+
+   FDataCommonProvinceUnit findByLabel(FLogicContext logicContext,
+                                       String provinceLabel);
 }

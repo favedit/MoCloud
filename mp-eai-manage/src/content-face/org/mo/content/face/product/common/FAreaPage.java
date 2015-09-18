@@ -1,6 +1,6 @@
-package org.mo.content.face.product.financial.marketer;
+package org.mo.content.face.product.common;
 
-import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
+import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
@@ -12,7 +12,7 @@ import org.mo.com.lang.FObjectId;
 //@version 1.0.0
 //============================================================
 
-public class FMarketerPage
+public class FAreaPage
       extends FObjectId
 {
    // 当前页
@@ -20,29 +20,9 @@ public class FMarketerPage
 
    protected String result;
 
-   protected String customerInvestmentDate;
-
-   protected String customerRedemptionDate;
-
-   protected FDataFinancialMarketerUnit unit;
+   protected FDataCommonAreaUnit unit;
 
    protected String dataInfo;
-
-   public String customerInvestmentDate(){
-      return customerInvestmentDate;
-   }
-
-   public void setCustomerInvestmentDate(String customerInvestmentDate){
-      this.customerInvestmentDate = customerInvestmentDate;
-   }
-
-   public String customerRedemptionDate(){
-      return customerRedemptionDate;
-   }
-
-   public void setCustomerRedemptionDate(String customerRedemptionDate){
-      this.customerRedemptionDate = customerRedemptionDate;
-   }
 
    public String dataInfo(){
       return dataInfo;
@@ -52,11 +32,11 @@ public class FMarketerPage
       this.dataInfo = dataInfo;
    }
 
-   public FDataFinancialMarketerUnit unit(){
+   public FDataCommonAreaUnit unit(){
       return unit;
    }
 
-   public void setUnit(FDataFinancialMarketerUnit unit){
+   public void setUnit(FDataCommonAreaUnit unit){
       this.unit = unit;
    }
 

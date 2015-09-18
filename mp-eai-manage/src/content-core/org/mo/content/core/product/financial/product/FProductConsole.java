@@ -1,7 +1,7 @@
-package org.mo.content.core.product.financial.marketer;
+package org.mo.content.core.product.financial.product;
 
-import com.cyou.gccloud.data.data.FDataFinancialMarketerLogic;
-import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialCustomerLogic;
+import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 //============================================================
@@ -16,10 +16,10 @@ import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
-public class FMarketerConsole
-      extends FAbstractLogicUnitConsole<FDataFinancialMarketerLogic, FDataFinancialMarketerUnit>
+public class FProductConsole
+      extends FAbstractLogicUnitConsole<FDataFinancialCustomerLogic, FDataFinancialCustomerUnit>
       implements
-         IMarketerConsole
+         IProductConsole
 {
 
    // 每页条数
@@ -29,8 +29,8 @@ public class FMarketerConsole
    // <T>构造设备控制台。</T>
    //============================================================
 
-   public FMarketerConsole(){
-      super(FDataFinancialMarketerLogic.class, FDataFinancialMarketerUnit.class);
+   public FProductConsole(){
+      super(FDataFinancialCustomerLogic.class, FDataFinancialCustomerUnit.class);
    }
 
    // ============================================================
@@ -42,36 +42,36 @@ public class FMarketerConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataFinancialMarketerUnit> select(ILogicContext logicContext,
-                                                           FDataFinancialMarketerUnit unit,
+   public FLogicDataset<FDataFinancialCustomerUnit> select(ILogicContext logicContext,
+                                                           FDataFinancialCustomerUnit unit,
                                                            int pageNum,
                                                            int pageSize){
       if(pageNum < 0){
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(unit.name())){
-         whereSql.append(FDataFinancialMarketerLogic.NAME);
+      if(unit.highestEducation() != 0){
+         whereSql.append(FDataFinancialCustomerLogic.HIGHEST_EDUCATION);
          whereSql.append(" LIKE '%");
-         whereSql.append(unit.name() + "%'");
+         whereSql.append(unit.highestEducation() + "%'");
       }
-      String orderBy = String.format("%s %s", FDataFinancialMarketerLogic.NAME, "ASC");
-      FDataFinancialMarketerLogic logic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
-      FLogicDataset<FDataFinancialMarketerUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
+      String orderBy = String.format("%s %s", FDataFinancialCustomerLogic.MONTHLY_INCOME, "ASC");
+      FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FLogicDataset<FDataFinancialCustomerUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;
    }
 
    @Override
-   public FDataFinancialMarketerUnit findByCode(ILogicContext logicContext,
+   public FDataFinancialCustomerUnit findByCode(ILogicContext logicContext,
                                                 String code){
       FSql whereSql = new FSql();
       if(!RString.isEmpty(code)){
-         whereSql.append(FDataFinancialMarketerLogic.NAME);
+         whereSql.append(FDataFinancialCustomerLogic.HIGHEST_EDUCATION);
          whereSql.append("='");
          whereSql.append(code + "'");
       }
-      FDataFinancialMarketerLogic logic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
-      FLogicDataset<FDataFinancialMarketerUnit> roleList = logic.fetch(whereSql.toString());
+      FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FLogicDataset<FDataFinancialCustomerUnit> roleList = logic.fetch(whereSql.toString());
       return roleList.first();
    }
 }
