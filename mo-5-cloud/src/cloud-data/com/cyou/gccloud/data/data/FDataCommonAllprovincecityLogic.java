@@ -709,7 +709,14 @@ public class FDataCommonAllprovincecityLogic
       cmd.append(',');
       cmd.append(unit.arealevel());
       cmd.append(',');
-      cmd.append(unit.typename());
+      String typename = unit.typename();
+      if(RString.isEmpty(typename)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(typename));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -820,7 +827,14 @@ public class FDataCommonAllprovincecityLogic
       }
       if(unit.isTypenameChanged()){
          cmd.append(",`TYPENAME`=");
-         cmd.append(unit.typename());
+         String typename = unit.typename();
+         if(RString.isEmpty(typename)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(typename));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

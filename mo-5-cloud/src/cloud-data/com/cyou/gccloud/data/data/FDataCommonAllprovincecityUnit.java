@@ -69,10 +69,10 @@ public class FDataCommonAllprovincecityUnit
    protected int _arealevel;
 
    // 存储字段类型的定义。
-   private int __typename;
+   private String __typename;
 
    // 字段类型的定义。
-   protected int _typename;
+   protected String _typename;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -326,7 +326,7 @@ public class FDataCommonAllprovincecityUnit
    // @return 数据内容
    //============================================================
    public boolean isTypenameChanged(){
-      return __typename != _typename;
+      return !RString.equals(__typename, _typename);
    }
 
    //============================================================
@@ -334,7 +334,7 @@ public class FDataCommonAllprovincecityUnit
    //
    // @return 数据内容
    //============================================================
-   public int typename(){
+   public String typename(){
       return _typename;
    }
 
@@ -343,7 +343,7 @@ public class FDataCommonAllprovincecityUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setTypename(int value){
+   public void setTypename(String value){
       _typename = value;
    }
 
@@ -481,7 +481,7 @@ public class FDataCommonAllprovincecityUnit
          case "arealevel":
             return RInteger.toString(_arealevel);
          case "typename":
-            return RInteger.toString(_typename);
+            return _typename;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -529,7 +529,7 @@ public class FDataCommonAllprovincecityUnit
             _arealevel = RInteger.parse(value);
             break;
          case "typename":
-            _typename = RInteger.parse(value);
+            _typename = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -591,7 +591,7 @@ public class FDataCommonAllprovincecityUnit
                _arealevel = __arealevel;
                break;
             case "typename":
-               __typename = RInteger.parse(value);
+               __typename = value;
                _typename = __typename;
                break;
             case "create_user_id":
@@ -653,7 +653,7 @@ public class FDataCommonAllprovincecityUnit
       map.put("topno", RInteger.toString(_topno));
       map.put("areacode", _areacode);
       map.put("arealevel", RInteger.toString(_arealevel));
-      map.put("typename", RInteger.toString(_typename));
+      map.put("typename", _typename);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -676,7 +676,7 @@ public class FDataCommonAllprovincecityUnit
       _topno = input.readInt32();
       _areacode = input.readString();
       _arealevel = input.readInt32();
-      _typename = input.readInt32();
+      _typename = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -699,7 +699,7 @@ public class FDataCommonAllprovincecityUnit
       output.writeInt32(_topno);
       output.writeString(_areacode);
       output.writeInt32(_arealevel);
-      output.writeInt32(_typename);
+      output.writeString(_typename);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
