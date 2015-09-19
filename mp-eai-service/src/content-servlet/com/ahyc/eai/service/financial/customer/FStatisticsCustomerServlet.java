@@ -4,8 +4,6 @@ import com.ahyc.eai.core.common.EDatabaseConnection;
 import com.ahyc.eai.core.financial.FFinancialTenderModel;
 import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
@@ -128,7 +126,7 @@ public class FStatisticsCustomerServlet
       }
       //............................................................
       // 输出即时数据[倒序获得，正序写入]
-      FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
+      //FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = null;
       FSql whereSql = new FSql();
@@ -146,19 +144,19 @@ public class FStatisticsCustomerServlet
       stream.writeInt32(count);
       for(int n = count - 1; n >= 0; n--){
          FStatisticsFinancialDynamicUnit dynamicUnit = dynamicDataset.at(n);
-         TDateTime investmentDate = dynamicUnit.customerActionDate();
+         //TDateTime investmentDate = dynamicUnit.customerActionDate();
          double investmentAmount = dynamicUnit.customerActionAmount();
-         // 查找用户信息
-         long customerId = dynamicUnit.customerId();
-         FStatisticsFinancialCustomerUnit customerUnit = customerLogic.find(customerId);
-         boolean investmentFirst = false;
-         int investmentNumber = 0;
-         if(customerUnit != null){
-            if(customerUnit.investmentFirstDate().equals(investmentDate)){
-               investmentFirst = true;
-               investmentNumber = customerUnit.investmentNumber();
-            }
-         }
+         //         // 查找用户信息
+         //         long customerId = dynamicUnit.customerId();
+         //         FStatisticsFinancialCustomerUnit customerUnit = customerLogic.find(customerId);
+         //         boolean investmentFirst = false;
+         //         int investmentNumber = 0;
+         //         if(customerUnit != null){
+         //            if(customerUnit.investmentFirstDate().equals(investmentDate)){
+         //               investmentFirst = true;
+         //               investmentNumber = customerUnit.investmentNumber();
+         //            }
+         //         }
          // 计算投资年化盈利
          double investmentGain = 0;
          String investmentTenderLabel = null;
@@ -174,8 +172,10 @@ public class FStatisticsCustomerServlet
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
          stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
-         stream.writeBoolean(investmentFirst);
-         stream.writeUint16(investmentNumber);
+         stream.writeBoolean(false);
+         stream.writeUint16(0);
+         //         stream.writeBoolean(investmentFirst);
+         //         stream.writeUint16(investmentNumber);
          stream.writeString(investmentTenderLabel);
          stream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
          stream.writeDouble(RDouble.roundHalf(investmentGain, 2));

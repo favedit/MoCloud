@@ -123,7 +123,7 @@
       <TABLE id='id_marketer_info' style='position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 5; display: none; ' >
          <TR>
             <TD align='center' valign="center">
-               <IMG src='/ars/eai/marketer_info.png' style="width:70%; height:70%;"/>
+               <IMG src='/ars/eai/marketer_info.png' style="width:70%; height:60%;"/>
             </TD>
          </TR>
       </TABLE>

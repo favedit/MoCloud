@@ -82,7 +82,7 @@ public class FStatisticsAchievementServlet
          FDataset dataset = connection.fetchDataset(sql);
          double investmentTotal = 0;
          double redemptionTotal = 0;
-         int customerTotal = 0;
+         //int customerTotal = 0;
          FByteStream dataStream = createStream(context);
          int count = dataset.count();
          dataStream.writeInt32(count);
@@ -94,8 +94,8 @@ public class FStatisticsAchievementServlet
             double redemptionAmount = row.getDouble("redemption_amount");
             redemptionTotal += redemptionAmount;
             double netinvestmentAmount = investmentAmount - redemptionAmount;
-            int customerCount = row.getInt("customer_count");
-            customerTotal += customerCount;
+            //int customerCount = row.getInt("customer_count");
+            //customerTotal += customerCount;
             // 输出数据
             dataStream.writeString(recordDate);
             dataStream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
