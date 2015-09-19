@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="71da3600-061a-4ec0-8a96-7b141659d9f3" name="data.common.dscountry" label="M#12cn12全球" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="InnoDB" data_group="data" data_factory="Data.Common.Dscountry" data_name="ds_country" data_alias="ds_country" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldInteger _uuid="083ac6b0-8cd8-46c6-ae10-48075032798f" name="id" label="M#12cn12编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ID" data_alias="id" />
+  <FieldString _uuid="03ac6475-ec8d-4c1d-9a18-9903c170a70d" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_alias="name" data_size="50" />
+  <FieldString _uuid="6d8b5455-7a4e-4af9-ba82-6a2cc0ae444f" name="zh_name" label="M#12cn14中文名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ZH_NAME" data_alias="zh_name" data_size="50" />
+  <FieldString _uuid="44db2318-7243-4839-987e-0e208f84cca6" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_alias="code" data_size="5" />
+  <FieldString _uuid="d9dcf3b7-b330-49dd-b540-93c4fea99be4" name="code2" label="M#12cn14国家区号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE2" data_alias="code2" data_size="5" />
+  <FieldInteger _uuid="6351414b-2264-4ffd-8716-088ab34849d7" name="is_show" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="IS_SHOW" data_alias="is_show" />
+  <FieldTemplate _uuid="d9a15762-ac56-4c88-ad32-cf1fc36d64e1" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
