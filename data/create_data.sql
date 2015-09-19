@@ -35,6 +35,8 @@ CREATE TABLE `DT_COM_COUNTRY`
    `LABEL`                         VARCHAR(40), 
    `PHONE_CODE`                    VARCHAR(8), 
    `ICON_URL`                      VARCHAR(400), 
+   `LOCATION_LONGITUDE`            double DEFAULT NULL,
+   `LOCATION_LATITUDE`             double DEFAULT NULL,
    `DISPLAY_CODE`                  INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
