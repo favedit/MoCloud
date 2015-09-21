@@ -9,9 +9,9 @@
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <link rel="stylesheet" type="text/css" href="css/login.css">
       <script type="text/javascript" src="js/viewport.js"></script>
+      <script type="text/javascript" src="js/positioning.js"></script>
       <script type="text/javascript" src="/ajs/cookie.js"></script>
    </head>
-
    <body>
       <table cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
          <tbody>
@@ -36,8 +36,8 @@
                                  </p>
                                  <span class="details"><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</span>
                                  <span class="btn-container"><input input id="btn" type="submit"  value=""></span>
-                                 <input id="location_x" name="location_x" style="display:none">
-                                 <input id="location_y" name="location_y" style="display:none">
+                                 <input id="location_x" type="hidden" value="" name="location_x" style="display:none">
+                                 <input id="location_y" type="hidden" value=""  name="location_y" style="display:none">
                               </ul>
                            </div>
                         </div>
@@ -56,7 +56,6 @@
             </tr>
          </tbody>
       </table>
-
       <script type="text/javascript">
          var passport = getCookieValue("passport");
          if (passport != "") {
@@ -87,55 +86,7 @@
                frmMain.submit();
             }
          }
-
-         var geo = window.navigator.geolocation;
-         (function(d) {
-            var tip = null,
-               do_hanlder = {},
-               link = location.href,
-               geo = window.navigator.geolocation;
-            do_hanlder.successs = function(p) {
-               tip = d.getElementById("errors");
-               var resulte = p.coords;
-               d.getElementById("location_x").value = resulte.longitude;
-               d.getElementById("location_y").value = resulte.latitude;               
-                  // url = "{{$HOST_DISEASE_WAP}}/hospitals/nearby?diseid=51&lon=" + resulte.longitude + "&lat=" + resulte.latitude;
-               tip.innerHTML = "您的地理坐标,经度：" + resulte.longitude + "，纬度：" + resulte.latitude;
-               // location.assign(url);
-            };
-
-            do_hanlder.error = function(error) {
-               tip = d.getElementById("errors");
-               switch (error.code) {
-                  case 1:
-                  // tip.innerHTML = "<span>您拒绝了共享地理位置信息</span><a href=\"" + link + "\">重试</a>";   
-                  break;
-
-                  default:
-                  // tip.innerHTML = "<span>定位失败,请</span><button type=\"button\" id=\"re_geo\">重试</button>";
-               }
-            };
-            // Permission denied - 用户不允许地理定位
-            // Position unavailable - 无法获取当前位置
-            // Timeout - 操作超时
-            do_hanlder.options = {
-               enableHighAccuracy: true,
-               timeout: 10000,
-               maximumAge: 2500
-            };
-
-            do_hanlder.init = function () {
-               var self = this;
-               geo.getCurrentPosition(function(p) {
-                  self.successs(p);
-               }, function(error) {
-                  self.error(error);
-               }, self.options);
-            };
-            do_hanlder.init();
-         })(document);
+         
       </script>
-
    </body>
-
    </html>

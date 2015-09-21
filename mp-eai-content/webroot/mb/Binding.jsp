@@ -50,7 +50,6 @@
             </tr>
          </tbody>
       </table>
-
       <script type="text/javascript">
          var alertTips = {
             emptyTel: "E租宝账号不能为空",
@@ -66,7 +65,7 @@
                o.value = "发送动态验证码";
                wait = 60;
             } else {
-               //               error.innerHTML = "";
+               //error.innerHTML = "";
                o.value = "重新发送(" + wait + ")";
                wait--;
                o.setAttribute("disabled", true);
@@ -85,7 +84,7 @@
             var cbo = new CallBackObject();
             cbo.OnComplete = function(responseText, responseXML) {
                var result = ctrl.replaceNbsp(responseText);
-               console.log(result);
+               console.log(result); 
                if (result.length > 20) {
                   $getVerifyCodeBtn.value = "发送动态验证码";
                   error.innerHTML = "发送验证码失败";

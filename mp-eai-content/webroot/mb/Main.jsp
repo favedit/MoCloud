@@ -8,9 +8,15 @@
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <link rel="stylesheet" type="text/css" href="css/wap.css">
       <script type="text/javascript" src="js/viewport.js"></script>
+      <script type="text/javascript" src="js/positioning.js"></script>
       <script type="text/javascript" src="js/TouchSlide.1.1.js"></script>
+      <script type="text/javascript" src="js/ajax.js"></script>
    </head>
    <body>
+      <FORM  id="frm" style="display:none;" method='post' action='Index.wa?do=login'>
+         <input id="location_x" type="hidden" value="" name="location_x" style="display:none">
+         <input id="location_y" type="hidden" value=""  name="location_y" style="display:none">
+      </FORM>
       <FORM name='frmMain' method='post' action='Main.wa'>
          <INPUT id='id_do' name='do' type='hidden' />
          <div class="main" style="overflow-x:hidden;">
@@ -123,6 +129,7 @@
          });
       </script>
       <script type="text/javascript">
+         var ctrl=[];
          var $btnList = document.getElementById("btn-list");
          var $mainContainer = document.getElementById("main-container");
          var $navContainer = document.getElementById("nav-container");
@@ -181,7 +188,9 @@
          function loginOut() {
             location.href = "Index.wa?do=loginOut";
          }
-
+         
+         //白名单 
+         // document.getElementById("frm").submit();
       </script>
    </body>
 
