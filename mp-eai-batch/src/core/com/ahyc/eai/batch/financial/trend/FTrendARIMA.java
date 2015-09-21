@@ -1,323 +1,277 @@
 package com.ahyc.eai.batch.financial.trend;
 
+import java.util.Vector;
 
-import java.util.*;
+public class FTrendARIMA
+{
 
+   double[] originalData = {};
 
-public class FTrendARIMA {
+   FTrendARMAMath armamath = new FTrendARMAMath();
 
-	double[] originalData={};
-	FTrendARMAMath armamath=new FTrendARMAMath();
-	
-	Vector<double[]> armaARMAcoe=new Vector<double[]>();
-	Vector<double[]> bestarmaARMAcoe=new Vector<double[]>();
-	public FTrendARIMA(double [] originalData)
-	{
-		this.originalData=originalData;
-	}
-	/**
-	 * Ô­Ê¼Êý¾Ý±ê×¼»¯´¦Àí£ºÒ»½×¼¾½ÚÐÔ²î·Ö+Z-Score¹éÒ»»¯
-	 * @return
-	 */ 
-	double stderrDara=0;
-	double avgsumData=0;
-	public double[] preDeal()
-	{
-		
-		//seasonal Difference:Peroid=7
-		double []tempData=new double[originalData.length-7];
-		for(int i=0;i<originalData.length-7;i++)
-		{
-			tempData[i]=originalData[i+7]-originalData[i];
-		}
-		
-		//Z-Score
-		avgsumData=armamath.avgData(tempData);
-		stderrDara=armamath.stderrData(tempData);
-		
-		for(int i=0;i<tempData.length;i++)
-		{
-			tempData[i]=(tempData[i]-avgsumData)/stderrDara;
-		}
-		
-		return tempData;
-	}
-	
-	public int[] getARIMAmodel()
-	{
-		double[] stdoriginalData=this.preDeal();//Ô­Ê¼Êý¾Ý±ê×¼»¯´¦Àí
-		int paraType=0;
-		double minAIC=9999999;
-		int bestModelindex=0;
-		int[][] model=new int[][]{{0,1},{1,0},{1,1},{0,2},{2,0},{2,2},{1,2},{2,1}};
-		//¶Ô8ÖÖÄ£ÐÍ½øÐÐµü´ú£¬Ñ¡³öAICÖµ×îÐ¡µÄÄ£ÐÍ×÷ÎªÎÒÃÇµÄÄ£ÐÍ
-		for(int i=0;i<model.length;i++)
-		{
-			
-			if(model[i][0]==0)
-			{
-				FTrendMA ma=new FTrendMA(stdoriginalData, model[i][1]);
-				armaARMAcoe=ma.MAmodel(); //ÄÃµ½maÄ£ÐÍµÄ²ÎÊý
-				paraType=1;
-			}
-			else if(model[i][1]==0)
-			{
-				FTrendAR ar=new FTrendAR(stdoriginalData, model[i][0]);
-				armaARMAcoe=ar.ARmodel(); //ÄÃµ½arÄ£ÐÍµÄ²ÎÊý
-				paraType=2;
-			}
-			else
-			{
-				FTrendARMA arma=new FTrendARMA(stdoriginalData, model[i][0], model[i][1]);
-				armaARMAcoe=arma.ARMAmodel();//ÄÃµ½armaÄ£ÐÍµÄ²ÎÊý
-				paraType=3;
-			}
-			
+   Vector<double[]> armaARMAcoe = new Vector<double[]>();
 
-			double temp=getmodelAIC(armaARMAcoe,stdoriginalData,paraType);
-			System.out.println(temp);
-			if (temp<minAIC)
-			{
-				bestModelindex=i;
-				minAIC=temp;
-				bestarmaARMAcoe=armaARMAcoe;
-				
-			}
-		}
-		System.out.println("bestModelindex"+bestModelindex);
-		return model[bestModelindex];
- 	}
+   Vector<double[]> bestarmaARMAcoe = new Vector<double[]>();
 
-	
-	public double getmodelAIC(Vector<double[]> para,double[] stdoriginalData,int type)
-	{
-		double temp=0;
-		double temp2=0;
-		double sumerr=0;
-		int p=0;//ar1,ar2,...,sig2
-		int q=0;//sig2,ma1,ma2...
-		int n=stdoriginalData.length;
-		
-		if(type==1)
-		{
-			double[] maPara=para.get(0);
-			q=maPara.length;
-			double[] err=new double[q];  //error(t),error(t-1),error(t-2)...
-			err[0]=Math.sqrt(maPara[0]);
-			
-			for(int k=q-1;k<n;k++)
-			{
-				temp=0;
-				
-				for(int i=1;i<q;i++)
-				{
-					temp+=maPara[i]*err[i];
-				}
-			
-				//²úÉú¸÷¸öÊ±¿ÌµÄÔëÉù
-				for(int j=q-1;j>0;j--)
-				{
-					err[j]=err[j-1];
-				}
-				err[0]=stdoriginalData[k]-(err[0]-temp);
-				//¹À¼ÆµÄ·½²îÖ®ºÍ
-				sumerr+=err[0]*err[0];
-				
-			}
-			return  n*Math.log(sumerr/(n-(q-1)))+(q)*Math.log(n);//AIC ×îÐ¡¶þ³Ë¹À¼Æ
-			
-		}
-		else if(type==2)
-		{
-			double[] arPara=para.get(0);
-			p=arPara.length;
-			for(int k=p-1;k<n;k++)
-			{
-				temp=0;
-				for(int i=0;i<p-1;i++)
-				{
-					temp+=arPara[i]*stdoriginalData[k-i-1];
-				}
-				temp+=Math.sqrt(arPara[p-1]);
-				//¹À¼ÆµÄ·½²îÖ®ºÍ
-				sumerr+=(stdoriginalData[k]-temp)*(stdoriginalData[k]-temp);
-			}
-	
-			return n*Math.log(sumerr/(n-(p-1)))+(p)*Math.log(n);//AIC ×îÐ¡¶þ³Ë¹À¼Æ
-		}
-		else
-		{
-			double[] arPara=para.get(0);
-			double[] maPara=para.get(1);
-			p=arPara.length;
-			q=maPara.length;
-			double[] err=new double[q];  //error(t),error(t-1),error(t-2)...
-			err[0]=Math.sqrt(maPara[0]);
-			
-			for(int k=p-1;k<n;k++)
-			{
-				temp=0;
-				temp2=0;
-				for(int i=0;i<p-1;i++)
-				{
-					temp+=arPara[i]*stdoriginalData[k-i-1];
-				}
-			
-				for(int i=1;i<q;i++)
-				{
-					temp2+=maPara[i]*err[i];
-				}
-			
-				//²úÉú¸÷¸öÊ±¿ÌµÄÔëÉù
-				for(int j=q-1;j>0;j--)
-				{
-					err[j]=err[j-1];
-				}
-				err[0]=stdoriginalData[k]-(err[0]-temp2+temp);
-				//¹À¼ÆµÄ·½²îÖ®ºÍ
-				sumerr+=err[0]*err[0];
-			}
-			
-			return n*Math.log(sumerr/(n-(p-1)))+(p+q-1)*Math.log(n);//AIC ×îÐ¡¶þ³Ë¹À¼Æ
-		}
-	}
-	
-	public int aftDeal(int predictValue)
-	{
-		
-		return (int)(predictValue*stderrDara+avgsumData+originalData[originalData.length-7]);
-	}
-	
-	
-	public int predictValue(int p,int q)
-	{
-		int predict=0;
-		double[] stdoriginalData=this.preDeal();
-		int n=stdoriginalData.length;
-		double temp=0,temp2=0;
-		double[] err=new double[q];
-	
-		if(p==0)
-		{
-			double[] maPara=bestarmaARMAcoe.get(0);
-			
-			for(int k=q-1;k<=n;k++)
-			{
-				temp=0;
-				
-				for(int i=1;i<q;i++)
-				{
-					temp+=maPara[i]*err[i];
-				}
-			
-				//²úÉú¸÷¸öÊ±¿ÌµÄÔëÉù
-				for(int j=q-1;j>0;j--)
-				{
-					err[j]=err[j-1];
-				}
-				if(k==n)
-					predict=(int)(err[0]-temp); //²úÉúÔ¤²â
-				else
-					err[0]=stdoriginalData[k]-(err[0]-temp);
-			}
-		}
-		else if(q==0)
-		{
-			double[] arPara=bestarmaARMAcoe.get(0);
-			
-			for(int k=p-1;k<=n;k++)
-			{
-				temp=0;
-				for(int i=0;i<p-1;i++)
-				{
-					temp+=arPara[i]*stdoriginalData[k-i-1];
-				}
-				temp+=Math.sqrt(arPara[p-1]);
-			}
-			
-			predict=(int)temp;
-			
-		}
-		else
-		{
+   public FTrendARIMA(double[] originalData){
+      this.originalData = originalData;
+   }
 
-			double[] arPara=bestarmaARMAcoe.get(0);
-			double[] maPara=bestarmaARMAcoe.get(1);
-	
-			err=new double[q];  //error(t),error(t-1),error(t-2)...
-			err[0]=Math.sqrt(maPara[0]);
-			
-			for(int k=p-1;k<=n;k++)
-			{
-				temp=0;
-				temp2=0;
-				for(int i=0;i<p-1;i++)
-				{
-					temp+=arPara[i]*stdoriginalData[k-i-1];
-				}
-			
-				for(int i=1;i<q;i++)
-				{
-					temp2+=maPara[i]*err[i];
-				}
-			
-				//²úÉú¸÷¸öÊ±¿ÌµÄÔëÉù
-				for(int j=q-1;j>0;j--)
-				{
-					err[j]=err[j-1];
-				}
-				if(k==n)
-					predict=(int)(err[0]-temp2+temp);
-				else
-					err[0]=stdoriginalData[k]-(err[0]-temp2+temp);
-				
-			}
-			
-		}
-	
-		
-		return predict;
-	}
-	
-	public double[] getMApara(double[] autocorData,int q)
-	{
-		double[] maPara=new double[q+1];//µÚÒ»¸ö´æ·ÅÔëÉù²ÎÊý£¬ºóÃæq¸ö´æ·Åma²ÎÊýsigma2,ma1,ma2...
-		double[] tempmaPara=maPara;
-		double temp=0;
-		boolean iterationFlag=true;
-		//½â·½³Ì×é
-		//µü´ú·¨½â·½³Ì×é
-		while(iterationFlag)
-		{
-			for(int i=1;i<maPara.length;i++)
-			{
-				temp+=maPara[i]*maPara[i];
-			}
-			tempmaPara[0]=autocorData[0]/(1+temp);
-		
-			for(int i=1;i<maPara.length;i++)
-			{
-				temp=0;
-				for(int j=1;j<maPara.length-i;j++)
-				{
-					temp+=maPara[j]*maPara[j+i];
-				}
-				tempmaPara[i]=-(autocorData[i]/tempmaPara[0]-temp);
-			}
-			iterationFlag=false;
-			for(int i=0;i<maPara.length;i++)
-			{
-				if(maPara[i]!=tempmaPara[i])
-				{
-					iterationFlag=true;
-					break;
-				}
-			}
-			
-			maPara=tempmaPara;
-		}
-		
-		return maPara;
-	}
-	
+   /**
+    * Ô­Ê¼ï¿½ï¿½ï¿½Ý±ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½×¼ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½+Z-Scoreï¿½ï¿½Ò»ï¿½ï¿½
+    * @return
+    */
+   double stderrDara = 0;
+
+   double avgsumData = 0;
+
+   public double[] preDeal(){
+
+      //seasonal Difference:Peroid=7
+      double[] tempData = new double[originalData.length - 7];
+      for(int i = 0; i < originalData.length - 7; i++){
+         tempData[i] = originalData[i + 7] - originalData[i];
+      }
+
+      //Z-Score
+      avgsumData = armamath.avgData(tempData);
+      stderrDara = armamath.stderrData(tempData);
+
+      for(int i = 0; i < tempData.length; i++){
+         tempData[i] = (tempData[i] - avgsumData) / stderrDara;
+      }
+
+      return tempData;
+   }
+
+   public int[] getARIMAmodel(){
+      double[] stdoriginalData = this.preDeal();//Ô­Ê¼ï¿½ï¿½ï¿½Ý±ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      int paraType = 0;
+      double minAIC = 9999999;
+      int bestModelindex = 0;
+      int[][] model = new int[][]{{0, 1}, {1, 0}, {1, 1}, {0, 2}, {2, 0}, {2, 2}, {1, 2}, {2, 1}};
+      //ï¿½ï¿½8ï¿½ï¿½Ä£ï¿½Í½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½AICÖµï¿½ï¿½Ð¡ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Çµï¿½Ä£ï¿½ï¿½
+      for(int i = 0; i < model.length; i++){
+
+         if(model[i][0] == 0){
+            FTrendMA ma = new FTrendMA(stdoriginalData, model[i][1]);
+            armaARMAcoe = ma.MAmodel(); //ï¿½Ãµï¿½maÄ£ï¿½ÍµÄ²ï¿½ï¿½ï¿½
+            paraType = 1;
+         }else if(model[i][1] == 0){
+            FTrendAR ar = new FTrendAR(stdoriginalData, model[i][0]);
+            armaARMAcoe = ar.ARmodel(); //ï¿½Ãµï¿½arÄ£ï¿½ÍµÄ²ï¿½ï¿½ï¿½
+            paraType = 2;
+         }else{
+            FTrendARMA arma = new FTrendARMA(stdoriginalData, model[i][0], model[i][1]);
+            armaARMAcoe = arma.ARMAmodel();//ï¿½Ãµï¿½armaÄ£ï¿½ÍµÄ²ï¿½ï¿½ï¿½
+            paraType = 3;
+         }
+
+         double temp = getmodelAIC(armaARMAcoe, stdoriginalData, paraType);
+         //System.out.println(temp);
+         if(temp < minAIC){
+            bestModelindex = i;
+            minAIC = temp;
+            bestarmaARMAcoe = armaARMAcoe;
+
+         }
+      }
+      //System.out.println("bestModelindex" + bestModelindex);
+      return model[bestModelindex];
+   }
+
+   public double getmodelAIC(Vector<double[]> para,
+                             double[] stdoriginalData,
+                             int type){
+      double temp = 0;
+      double temp2 = 0;
+      double sumerr = 0;
+      int p = 0;//ar1,ar2,...,sig2
+      int q = 0;//sig2,ma1,ma2...
+      int n = stdoriginalData.length;
+
+      if(type == 1){
+         double[] maPara = para.get(0);
+         q = maPara.length;
+         double[] err = new double[q]; //error(t),error(t-1),error(t-2)...
+         err[0] = Math.sqrt(maPara[0]);
+
+         for(int k = q - 1; k < n; k++){
+            temp = 0;
+
+            for(int i = 1; i < q; i++){
+               temp += maPara[i] * err[i];
+            }
+
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
+            for(int j = q - 1; j > 0; j--){
+               err[j] = err[j - 1];
+            }
+            err[0] = stdoriginalData[k] - (err[0] - temp);
+            //ï¿½ï¿½ï¿½ÆµÄ·ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
+            sumerr += err[0] * err[0];
+
+         }
+         return n * Math.log(sumerr / (n - (q - 1))) + (q) * Math.log(n);//AIC ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½
+
+      }else if(type == 2){
+         double[] arPara = para.get(0);
+         p = arPara.length;
+         for(int k = p - 1; k < n; k++){
+            temp = 0;
+            for(int i = 0; i < p - 1; i++){
+               temp += arPara[i] * stdoriginalData[k - i - 1];
+            }
+            temp += Math.sqrt(arPara[p - 1]);
+            //ï¿½ï¿½ï¿½ÆµÄ·ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
+            sumerr += (stdoriginalData[k] - temp) * (stdoriginalData[k] - temp);
+         }
+
+         return n * Math.log(sumerr / (n - (p - 1))) + (p) * Math.log(n);//AIC ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½
+      }else{
+         double[] arPara = para.get(0);
+         double[] maPara = para.get(1);
+         p = arPara.length;
+         q = maPara.length;
+         double[] err = new double[q]; //error(t),error(t-1),error(t-2)...
+         err[0] = Math.sqrt(maPara[0]);
+
+         for(int k = p - 1; k < n; k++){
+            temp = 0;
+            temp2 = 0;
+            for(int i = 0; i < p - 1; i++){
+               temp += arPara[i] * stdoriginalData[k - i - 1];
+            }
+
+            for(int i = 1; i < q; i++){
+               temp2 += maPara[i] * err[i];
+            }
+
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
+            for(int j = q - 1; j > 0; j--){
+               err[j] = err[j - 1];
+            }
+            err[0] = stdoriginalData[k] - (err[0] - temp2 + temp);
+            //ï¿½ï¿½ï¿½ÆµÄ·ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
+            sumerr += err[0] * err[0];
+         }
+
+         return n * Math.log(sumerr / (n - (p - 1))) + (p + q - 1) * Math.log(n);//AIC ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½
+      }
+   }
+
+   public double aftDeal(int predictValue){
+      return predictValue * stderrDara + avgsumData + originalData[originalData.length - 7];
+   }
+
+   public int predictValue(int p,
+                           int q){
+      int predict = 0;
+      double[] stdoriginalData = this.preDeal();
+      int n = stdoriginalData.length;
+      double temp = 0, temp2 = 0;
+      double[] err = new double[q];
+
+      if(p == 0){
+         double[] maPara = bestarmaARMAcoe.get(0);
+
+         for(int k = q - 1; k <= n; k++){
+            temp = 0;
+
+            for(int i = 1; i < q; i++){
+               temp += maPara[i] * err[i];
+            }
+
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
+            for(int j = q - 1; j > 0; j--){
+               err[j] = err[j - 1];
+            }
+            if(k == n)
+               predict = (int)(err[0] - temp); //ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½
+            else
+               err[0] = stdoriginalData[k] - (err[0] - temp);
+         }
+      }else if(q == 0){
+         double[] arPara = bestarmaARMAcoe.get(0);
+
+         for(int k = p - 1; k <= n; k++){
+            temp = 0;
+            for(int i = 0; i < p - 1; i++){
+               temp += arPara[i] * stdoriginalData[k - i - 1];
+            }
+            temp += Math.sqrt(arPara[p - 1]);
+         }
+
+         predict = (int)temp;
+
+      }else{
+
+         double[] arPara = bestarmaARMAcoe.get(0);
+         double[] maPara = bestarmaARMAcoe.get(1);
+
+         err = new double[q]; //error(t),error(t-1),error(t-2)...
+         err[0] = Math.sqrt(maPara[0]);
+
+         for(int k = p - 1; k <= n; k++){
+            temp = 0;
+            temp2 = 0;
+            for(int i = 0; i < p - 1; i++){
+               temp += arPara[i] * stdoriginalData[k - i - 1];
+            }
+
+            for(int i = 1; i < q; i++){
+               temp2 += maPara[i] * err[i];
+            }
+
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
+            for(int j = q - 1; j > 0; j--){
+               err[j] = err[j - 1];
+            }
+            if(k == n)
+               predict = (int)(err[0] - temp2 + temp);
+            else
+               err[0] = stdoriginalData[k] - (err[0] - temp2 + temp);
+
+         }
+
+      }
+
+      return predict;
+   }
+
+   public double[] getMApara(double[] autocorData,
+                             int q){
+      double[] maPara = new double[q + 1];//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½maï¿½ï¿½ï¿½ï¿½sigma2,ma1,ma2...
+      double[] tempmaPara = maPara;
+      double temp = 0;
+      boolean iterationFlag = true;
+      //ï¿½â·½ï¿½ï¿½ï¿½ï¿½
+      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â·½ï¿½ï¿½ï¿½ï¿½
+      while(iterationFlag){
+         for(int i = 1; i < maPara.length; i++){
+            temp += maPara[i] * maPara[i];
+         }
+         tempmaPara[0] = autocorData[0] / (1 + temp);
+
+         for(int i = 1; i < maPara.length; i++){
+            temp = 0;
+            for(int j = 1; j < maPara.length - i; j++){
+               temp += maPara[j] * maPara[j + i];
+            }
+            tempmaPara[i] = -(autocorData[i] / tempmaPara[0] - temp);
+         }
+         iterationFlag = false;
+         for(int i = 0; i < maPara.length; i++){
+            if(maPara[i] != tempmaPara[i]){
+               iterationFlag = true;
+               break;
+            }
+         }
+
+         maPara = tempmaPara;
+      }
+
+      return maPara;
+   }
+
 }

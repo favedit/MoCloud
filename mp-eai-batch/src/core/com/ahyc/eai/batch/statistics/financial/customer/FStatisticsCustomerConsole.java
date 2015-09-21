@@ -6,8 +6,19 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
+import org.mo.com.collections.FDataset;
+import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
+import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.FDoubles;
+import org.mo.com.lang.type.TDateTime;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
+import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 
 //============================================================
 // <T>统计投标控制台。</T>
@@ -17,6 +28,9 @@ public class FStatisticsCustomerConsole
       implements
          IStatisticsCustomerConsole
 {
+   // 资源访问接口
+   private final static IResource _resource = RResource.find(FStatisticsCustomerConsole.class);
+
    // 成员控制台
    @ALink
    protected IStatisticsMemberConsole _memberConsole;
@@ -26,6 +40,63 @@ public class FStatisticsCustomerConsole
    //============================================================
    public FStatisticsCustomerConsole(){
       super(FStatisticsFinancialCustomerUnit.class);
+   }
+
+   //============================================================
+   // <T>查询指定时间的投资信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param date 时间
+   // @return 投资
+   //============================================================
+   @Override
+   public double fetchInvestment(ILogicContext logicContext,
+                                 TDateTime date){
+      FSql sql = _resource.findString(FSql.class, "sql.investment.total");
+      sql.bindDateTime("date", date);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      double amount = connection.executeDouble(sql);
+      return amount;
+   }
+
+   //============================================================
+   // <T>以天为单位查询开始时间到结束时间的投资信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param beginDate 开始时间
+   // @param endDate 结束时间
+   // @return 投资信息
+   //============================================================
+   @Override
+   public FDoubles fetchDayInvestments(ILogicContext logicContext,
+                                       TDateTime beginDate,
+                                       TDateTime endDate){
+      // 查询内容
+      FSql sql = _resource.findString(FSql.class, "sql.investment.day");
+      sql.bindDateTime("begin_date", beginDate);
+      sql.bindDateTime("end_date", endDate);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      FDataset dataset = connection.fetchDataset(sql);
+      // 建立集合
+      FDictionary<Double> data = new FDictionary<Double>(Double.class);
+      for(FRow row : dataset){
+         String date = row.get("date");
+         double value = row.getDouble("amount");
+         data.set(date, new Double(value));
+      }
+      // 建立输出
+      FDoubles doubles = new FDoubles();
+      TDateTime currentDate = new TDateTime(beginDate);
+      while(true){
+         String date = currentDate.format("YYYYMMDD");
+         Double value = data.get(date);
+         doubles.append(value.doubleValue());
+         currentDate.addDay(1);
+         if(currentDate.get() >= endDate.get()){
+            break;
+         }
+      }
+      return doubles;
    }
 
    //============================================================

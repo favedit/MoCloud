@@ -22,8 +22,8 @@ public class RResource
       String name = clazz.getName();
       try{
          resource.construct(clazz);
-      }catch(Exception e){
-         throw new FFatalError(e, "Find resource for class failure. (class={1})", name);
+      }catch(Exception exception){
+         throw new FFatalError(exception, "Find resource for class failure. (class={1})", name);
       }
       _resources.set(name, resource);
       return resource;

@@ -546,8 +546,8 @@ public class FXmlDocument
          SAXBuilder builder = new SAXBuilder();
          Document document = builder.build(new StringReader(xml));
          _rootNode = makeNodeFromElement(document.getRootElement());
-      }catch(Exception e){
-         throw new FFatalError(e, "Load from xml. (xml={1})", xml);
+      }catch(Exception exception){
+         throw new FFatalError(exception, "Load from xml. (xml={1})", xml);
       }
    }
 
@@ -562,8 +562,8 @@ public class FXmlDocument
          SAXBuilder builder = new SAXBuilder();
          Document document = builder.build(inputStream);
          _rootNode = makeNodeFromElement(document.getRootElement());
-      }catch(Exception e){
-         throw new FFatalError(e, "Load stream failure. (input_stream={1}])", inputStream);
+      }catch(Exception exception){
+         throw new FFatalError(exception, "Load stream failure. (input_stream={1}])", inputStream);
       }
    }
 
@@ -577,8 +577,8 @@ public class FXmlDocument
       // 读取文件
       try(FileInputStream input = new FileInputStream(_fileName)){
          loadStream(input);
-      }catch(Exception e){
-         throw new FFatalError(e, "Load file failure. (file_name={1})", _fileName);
+      }catch(Exception exception){
+         throw new FFatalError(exception, "Load file failure. (file_name={1})", _fileName);
       }
    }
 

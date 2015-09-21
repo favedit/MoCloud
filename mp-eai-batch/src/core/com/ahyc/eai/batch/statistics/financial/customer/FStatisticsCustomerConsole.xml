@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.investment.total'><![CDATA[
+SELECT
+   SUM(CUSTOMER_ACTION_AMOUNT)
+FROM ST_FIN_DYNAMIC
+WHERE
+   CUSTOMER_ACTION_CD = 1 AND
+   CUSTOMER_ACTION_DATE < {date}
+]]></Resource>
+
+<Resource name='sql.investment.day'><![CDATA[
+SELECT
+   DATE_FORMAT(CUSTOMER_ACTION_DATE, '%Y%m%d') DATE,
+   SUM(CUSTOMER_ACTION_AMOUNT) AMOUNT
+FROM ST_FIN_DYNAMIC
+WHERE
+   CUSTOMER_ACTION_CD = 1 AND
+   CUSTOMER_ACTION_DATE >= {begin_date} AND
+   CUSTOMER_ACTION_DATE < {end_date}
+GROUP BY DATE_FORMAT(CUSTOMER_ACTION_DATE, '%Y%m%d')
+ORDER BY CUSTOMER_ACTION_DATE ASC
+]]></Resource>
+
+</Config>
