@@ -50,11 +50,17 @@ public class FDataFinancialMemberUnit
    // 字段关联编号的定义。
    protected long _linkId;
 
-   // 存储字段名称的定义。
-   private String __name;
+   // 存储字段统计编号的定义。
+   private long __statisticsId;
 
-   // 字段名称的定义。
-   protected String _name;
+   // 字段统计编号的定义。
+   protected long _statisticsId;
+
+   // 存储字段账号的定义。
+   private String __passport;
+
+   // 字段账号的定义。
+   protected String _passport;
 
    // 存储字段名称的定义。
    private String __label;
@@ -62,17 +68,23 @@ public class FDataFinancialMemberUnit
    // 字段名称的定义。
    protected String _label;
 
-   // 存储字段电话号码的定义。
-   private String __phone;
-
-   // 字段电话号码的定义。
-   protected String _phone;
-
    // 存储字段身份证号的定义。
    private String __card;
 
    // 字段身份证号的定义。
    protected String _card;
+
+   // 存储字段生日的定义。
+   private TDateTime __birthday = new TDateTime();
+
+   // 字段生日的定义。
+   protected TDateTime _birthday = new TDateTime();
+
+   // 存储字段电话号码的定义。
+   private String __phone;
+
+   // 字段电话号码的定义。
+   protected String _phone;
 
    // 存储字段电子邮箱的定义。
    private String __email;
@@ -86,23 +98,59 @@ public class FDataFinancialMemberUnit
    // 字段性别的定义。
    protected int _genderCd;
 
-   // 存储字段生日的定义。
-   private TDateTime __birthday = new TDateTime();
+   // 存储字段婚姻类型的定义。
+   private int __marryCd;
 
-   // 字段生日的定义。
-   protected TDateTime _birthday = new TDateTime();
+   // 字段婚姻类型的定义。
+   protected int _marryCd;
 
-   // 存储字段推荐评分的定义。
-   private int __scoreRecommend;
+   // 存储字段教育类型的定义。
+   private int __educationCd;
 
-   // 字段推荐评分的定义。
-   protected int _scoreRecommend;
+   // 字段教育类型的定义。
+   protected int _educationCd;
 
-   // 存储字段累计点数的定义。
-   private int __scorePoint;
+   // 存储字段职业类型的定义。
+   private int __businessCd;
 
-   // 字段累计点数的定义。
-   protected int _scorePoint;
+   // 字段职业类型的定义。
+   protected int _businessCd;
+
+   // 存储字段收入类型的定义。
+   private int __incomeCd;
+
+   // 字段收入类型的定义。
+   protected int _incomeCd;
+
+   // 存储字段区域编号的定义。
+   private long __provinceAreaId;
+
+   // 字段区域编号的定义。
+   protected long _provinceAreaId;
+
+   // 存储字段省份编号的定义。
+   private long __provinceId;
+
+   // 字段省份编号的定义。
+   protected long _provinceId;
+
+   // 存储字段城市编号的定义。
+   private long __cityId;
+
+   // 字段城市编号的定义。
+   protected long _cityId;
+
+   // 存储字段区域编号的定义。
+   private long __areaId;
+
+   // 字段区域编号的定义。
+   protected long _areaId;
+
+   // 存储字段地址信息的定义。
+   private String __address;
+
+   // 字段地址信息的定义。
+   protected String _address;
 
    // 存储字段注册时间的定义。
    private TDateTime __registerDate = new TDateTime();
@@ -115,6 +163,36 @@ public class FDataFinancialMemberUnit
 
    // 字段最后登录时间的定义。
    protected TDateTime _lastLoginDate = new TDateTime();
+
+   // 存储字段推荐理财师编号的定义。
+   private long __recommendMarketerId;
+
+   // 字段推荐理财师编号的定义。
+   protected long _recommendMarketerId;
+
+   // 存储字段推荐理财师用户编号的定义。
+   private long __recommendMarketerUserId;
+
+   // 字段推荐理财师用户编号的定义。
+   protected long _recommendMarketerUserId;
+
+   // 存储字段推荐开始时间的定义。
+   private TDateTime __recommendBeginDate = new TDateTime();
+
+   // 字段推荐开始时间的定义。
+   protected TDateTime _recommendBeginDate = new TDateTime();
+
+   // 存储字段推荐结束时间的定义。
+   private TDateTime __recommendEndDate = new TDateTime();
+
+   // 字段推荐结束时间的定义。
+   protected TDateTime _recommendEndDate = new TDateTime();
+
+   // 存储字段推荐评分的定义。
+   private int __recommendScore;
+
+   // 字段推荐评分的定义。
+   protected int _recommendScore;
 
    // 存储字段备注信息的定义。
    private String __note;
@@ -288,30 +366,57 @@ public class FDataFinancialMemberUnit
    }
 
    //============================================================
-   // <T>判断名称的数据是否改变。</T>
+   // <T>判断统计编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isNameChanged(){
-      return !RString.equals(__name, _name);
+   public boolean isStatisticsIdChanged(){
+      return __statisticsId != _statisticsId;
    }
 
    //============================================================
-   // <T>获得名称的数据内容。</T>
+   // <T>获得统计编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String name(){
-      return _name;
+   public long statisticsId(){
+      return _statisticsId;
    }
 
    //============================================================
-   // <T>设置名称的数据内容。</T>
+   // <T>设置统计编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setName(String value){
-      _name = value;
+   public void setStatisticsId(long value){
+      _statisticsId = value;
+   }
+
+   //============================================================
+   // <T>判断账号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPassportChanged(){
+      return !RString.equals(__passport, _passport);
+   }
+
+   //============================================================
+   // <T>获得账号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String passport(){
+      return _passport;
+   }
+
+   //============================================================
+   // <T>设置账号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPassport(String value){
+      _passport = value;
    }
 
    //============================================================
@@ -342,33 +447,6 @@ public class FDataFinancialMemberUnit
    }
 
    //============================================================
-   // <T>判断电话号码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPhoneChanged(){
-      return !RString.equals(__phone, _phone);
-   }
-
-   //============================================================
-   // <T>获得电话号码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String phone(){
-      return _phone;
-   }
-
-   //============================================================
-   // <T>设置电话号码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPhone(String value){
-      _phone = value;
-   }
-
-   //============================================================
    // <T>判断身份证号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -393,6 +471,60 @@ public class FDataFinancialMemberUnit
    //============================================================
    public void setCard(String value){
       _card = value;
+   }
+
+   //============================================================
+   // <T>判断生日的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isBirthdayChanged(){
+      return !__birthday.equals(_birthday);
+   }
+
+   //============================================================
+   // <T>获得生日的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime birthday(){
+      return _birthday;
+   }
+
+   //============================================================
+   // <T>设置生日的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setBirthday(TDateTime value){
+      _birthday = value;
+   }
+
+   //============================================================
+   // <T>判断电话号码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneChanged(){
+      return !RString.equals(__phone, _phone);
+   }
+
+   //============================================================
+   // <T>获得电话号码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phone(){
+      return _phone;
+   }
+
+   //============================================================
+   // <T>设置电话号码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhone(String value){
+      _phone = value;
    }
 
    //============================================================
@@ -450,84 +582,246 @@ public class FDataFinancialMemberUnit
    }
 
    //============================================================
-   // <T>判断生日的数据是否改变。</T>
+   // <T>判断婚姻类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isBirthdayChanged(){
-      return !__birthday.equals(_birthday);
+   public boolean isMarryCdChanged(){
+      return __marryCd != _marryCd;
    }
 
    //============================================================
-   // <T>获得生日的数据内容。</T>
+   // <T>获得婚姻类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public TDateTime birthday(){
-      return _birthday;
+   public int marryCd(){
+      return _marryCd;
    }
 
    //============================================================
-   // <T>设置生日的数据内容。</T>
+   // <T>设置婚姻类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setBirthday(TDateTime value){
-      _birthday = value;
+   public void setMarryCd(int value){
+      _marryCd = value;
    }
 
    //============================================================
-   // <T>判断推荐评分的数据是否改变。</T>
+   // <T>判断教育类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isScoreRecommendChanged(){
-      return __scoreRecommend != _scoreRecommend;
+   public boolean isEducationCdChanged(){
+      return __educationCd != _educationCd;
    }
 
    //============================================================
-   // <T>获得推荐评分的数据内容。</T>
+   // <T>获得教育类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int scoreRecommend(){
-      return _scoreRecommend;
+   public int educationCd(){
+      return _educationCd;
    }
 
    //============================================================
-   // <T>设置推荐评分的数据内容。</T>
+   // <T>设置教育类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setScoreRecommend(int value){
-      _scoreRecommend = value;
+   public void setEducationCd(int value){
+      _educationCd = value;
    }
 
    //============================================================
-   // <T>判断累计点数的数据是否改变。</T>
+   // <T>判断职业类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isScorePointChanged(){
-      return __scorePoint != _scorePoint;
+   public boolean isBusinessCdChanged(){
+      return __businessCd != _businessCd;
    }
 
    //============================================================
-   // <T>获得累计点数的数据内容。</T>
+   // <T>获得职业类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int scorePoint(){
-      return _scorePoint;
+   public int businessCd(){
+      return _businessCd;
    }
 
    //============================================================
-   // <T>设置累计点数的数据内容。</T>
+   // <T>设置职业类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setScorePoint(int value){
-      _scorePoint = value;
+   public void setBusinessCd(int value){
+      _businessCd = value;
+   }
+
+   //============================================================
+   // <T>判断收入类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIncomeCdChanged(){
+      return __incomeCd != _incomeCd;
+   }
+
+   //============================================================
+   // <T>获得收入类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int incomeCd(){
+      return _incomeCd;
+   }
+
+   //============================================================
+   // <T>设置收入类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIncomeCd(int value){
+      _incomeCd = value;
+   }
+
+   //============================================================
+   // <T>判断区域编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProvinceAreaIdChanged(){
+      return __provinceAreaId != _provinceAreaId;
+   }
+
+   //============================================================
+   // <T>获得区域编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long provinceAreaId(){
+      return _provinceAreaId;
+   }
+
+   //============================================================
+   // <T>设置区域编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProvinceAreaId(long value){
+      _provinceAreaId = value;
+   }
+
+   //============================================================
+   // <T>判断省份编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isProvinceIdChanged(){
+      return __provinceId != _provinceId;
+   }
+
+   //============================================================
+   // <T>获得省份编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long provinceId(){
+      return _provinceId;
+   }
+
+   //============================================================
+   // <T>设置省份编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setProvinceId(long value){
+      _provinceId = value;
+   }
+
+   //============================================================
+   // <T>判断城市编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCityIdChanged(){
+      return __cityId != _cityId;
+   }
+
+   //============================================================
+   // <T>获得城市编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long cityId(){
+      return _cityId;
+   }
+
+   //============================================================
+   // <T>设置城市编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCityId(long value){
+      _cityId = value;
+   }
+
+   //============================================================
+   // <T>判断区域编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isAreaIdChanged(){
+      return __areaId != _areaId;
+   }
+
+   //============================================================
+   // <T>获得区域编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long areaId(){
+      return _areaId;
+   }
+
+   //============================================================
+   // <T>设置区域编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setAreaId(long value){
+      _areaId = value;
+   }
+
+   //============================================================
+   // <T>判断地址信息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isAddressChanged(){
+      return !RString.equals(__address, _address);
+   }
+
+   //============================================================
+   // <T>获得地址信息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String address(){
+      return _address;
+   }
+
+   //============================================================
+   // <T>设置地址信息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setAddress(String value){
+      _address = value;
    }
 
    //============================================================
@@ -582,6 +876,141 @@ public class FDataFinancialMemberUnit
    //============================================================
    public void setLastLoginDate(TDateTime value){
       _lastLoginDate = value;
+   }
+
+   //============================================================
+   // <T>判断推荐理财师编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRecommendMarketerIdChanged(){
+      return __recommendMarketerId != _recommendMarketerId;
+   }
+
+   //============================================================
+   // <T>获得推荐理财师编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long recommendMarketerId(){
+      return _recommendMarketerId;
+   }
+
+   //============================================================
+   // <T>设置推荐理财师编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRecommendMarketerId(long value){
+      _recommendMarketerId = value;
+   }
+
+   //============================================================
+   // <T>判断推荐理财师用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRecommendMarketerUserIdChanged(){
+      return __recommendMarketerUserId != _recommendMarketerUserId;
+   }
+
+   //============================================================
+   // <T>获得推荐理财师用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long recommendMarketerUserId(){
+      return _recommendMarketerUserId;
+   }
+
+   //============================================================
+   // <T>设置推荐理财师用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRecommendMarketerUserId(long value){
+      _recommendMarketerUserId = value;
+   }
+
+   //============================================================
+   // <T>判断推荐开始时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRecommendBeginDateChanged(){
+      return !__recommendBeginDate.equals(_recommendBeginDate);
+   }
+
+   //============================================================
+   // <T>获得推荐开始时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime recommendBeginDate(){
+      return _recommendBeginDate;
+   }
+
+   //============================================================
+   // <T>设置推荐开始时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRecommendBeginDate(TDateTime value){
+      _recommendBeginDate = value;
+   }
+
+   //============================================================
+   // <T>判断推荐结束时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRecommendEndDateChanged(){
+      return !__recommendEndDate.equals(_recommendEndDate);
+   }
+
+   //============================================================
+   // <T>获得推荐结束时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime recommendEndDate(){
+      return _recommendEndDate;
+   }
+
+   //============================================================
+   // <T>设置推荐结束时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRecommendEndDate(TDateTime value){
+      _recommendEndDate = value;
+   }
+
+   //============================================================
+   // <T>判断推荐评分的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRecommendScoreChanged(){
+      return __recommendScore != _recommendScore;
+   }
+
+   //============================================================
+   // <T>获得推荐评分的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int recommendScore(){
+      return _recommendScore;
+   }
+
+   //============================================================
+   // <T>设置推荐评分的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRecommendScore(int value){
+      _recommendScore = value;
    }
 
    //============================================================
@@ -738,28 +1167,54 @@ public class FDataFinancialMemberUnit
             return Long.toString(_userId);
          case "link_id":
             return Long.toString(_linkId);
-         case "name":
-            return _name;
+         case "statistics_id":
+            return Long.toString(_statisticsId);
+         case "passport":
+            return _passport;
          case "label":
             return _label;
-         case "phone":
-            return _phone;
          case "card":
             return _card;
+         case "birthday":
+            return _birthday.toString();
+         case "phone":
+            return _phone;
          case "email":
             return _email;
          case "gender_cd":
             return RInteger.toString(_genderCd);
-         case "birthday":
-            return _birthday.toString();
-         case "score_recommend":
-            return RInteger.toString(_scoreRecommend);
-         case "score_point":
-            return RInteger.toString(_scorePoint);
+         case "marry_cd":
+            return RInteger.toString(_marryCd);
+         case "education_cd":
+            return RInteger.toString(_educationCd);
+         case "business_cd":
+            return RInteger.toString(_businessCd);
+         case "income_cd":
+            return RInteger.toString(_incomeCd);
+         case "province_area_id":
+            return Long.toString(_provinceAreaId);
+         case "province_id":
+            return Long.toString(_provinceId);
+         case "city_id":
+            return Long.toString(_cityId);
+         case "area_id":
+            return Long.toString(_areaId);
+         case "address":
+            return _address;
          case "register_date":
             return _registerDate.toString();
          case "last_login_date":
             return _lastLoginDate.toString();
+         case "recommend_marketer_id":
+            return Long.toString(_recommendMarketerId);
+         case "recommend_marketer_user_id":
+            return Long.toString(_recommendMarketerUserId);
+         case "recommend_begin_date":
+            return _recommendBeginDate.toString();
+         case "recommend_end_date":
+            return _recommendEndDate.toString();
+         case "recommend_score":
+            return RInteger.toString(_recommendScore);
          case "note":
             return _note;
          case "create_user_id":
@@ -799,17 +1254,23 @@ public class FDataFinancialMemberUnit
          case "link_id":
             _linkId = RLong.parse(value);
             break;
-         case "name":
-            _name = value;
+         case "statistics_id":
+            _statisticsId = RLong.parse(value);
+            break;
+         case "passport":
+            _passport = value;
             break;
          case "label":
             _label = value;
             break;
-         case "phone":
-            _phone = value;
-            break;
          case "card":
             _card = value;
+            break;
+         case "birthday":
+            _birthday.parse(value);
+            break;
+         case "phone":
+            _phone = value;
             break;
          case "email":
             _email = value;
@@ -817,20 +1278,53 @@ public class FDataFinancialMemberUnit
          case "gender_cd":
             _genderCd = RInteger.parse(value);
             break;
-         case "birthday":
-            _birthday.parse(value);
+         case "marry_cd":
+            _marryCd = RInteger.parse(value);
             break;
-         case "score_recommend":
-            _scoreRecommend = RInteger.parse(value);
+         case "education_cd":
+            _educationCd = RInteger.parse(value);
             break;
-         case "score_point":
-            _scorePoint = RInteger.parse(value);
+         case "business_cd":
+            _businessCd = RInteger.parse(value);
+            break;
+         case "income_cd":
+            _incomeCd = RInteger.parse(value);
+            break;
+         case "province_area_id":
+            _provinceAreaId = RLong.parse(value);
+            break;
+         case "province_id":
+            _provinceId = RLong.parse(value);
+            break;
+         case "city_id":
+            _cityId = RLong.parse(value);
+            break;
+         case "area_id":
+            _areaId = RLong.parse(value);
+            break;
+         case "address":
+            _address = value;
             break;
          case "register_date":
             _registerDate.parse(value);
             break;
          case "last_login_date":
             _lastLoginDate.parse(value);
+            break;
+         case "recommend_marketer_id":
+            _recommendMarketerId = RLong.parse(value);
+            break;
+         case "recommend_marketer_user_id":
+            _recommendMarketerUserId = RLong.parse(value);
+            break;
+         case "recommend_begin_date":
+            _recommendBeginDate.parse(value);
+            break;
+         case "recommend_end_date":
+            _recommendEndDate.parse(value);
+            break;
+         case "recommend_score":
+            _recommendScore = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -882,21 +1376,29 @@ public class FDataFinancialMemberUnit
                __linkId = RLong.parse(value);
                _linkId = __linkId;
                break;
-            case "name":
-               __name = value;
-               _name = __name;
+            case "statistics_id":
+               __statisticsId = RLong.parse(value);
+               _statisticsId = __statisticsId;
+               break;
+            case "passport":
+               __passport = value;
+               _passport = __passport;
                break;
             case "label":
                __label = value;
                _label = __label;
                break;
-            case "phone":
-               __phone = value;
-               _phone = __phone;
-               break;
             case "card":
                __card = value;
                _card = __card;
+               break;
+            case "birthday":
+               __birthday.parse(value);
+               _birthday.assign(__birthday);
+               break;
+            case "phone":
+               __phone = value;
+               _phone = __phone;
                break;
             case "email":
                __email = value;
@@ -906,17 +1408,41 @@ public class FDataFinancialMemberUnit
                __genderCd = RInteger.parse(value);
                _genderCd = __genderCd;
                break;
-            case "birthday":
-               __birthday.parse(value);
-               _birthday.assign(__birthday);
+            case "marry_cd":
+               __marryCd = RInteger.parse(value);
+               _marryCd = __marryCd;
                break;
-            case "score_recommend":
-               __scoreRecommend = RInteger.parse(value);
-               _scoreRecommend = __scoreRecommend;
+            case "education_cd":
+               __educationCd = RInteger.parse(value);
+               _educationCd = __educationCd;
                break;
-            case "score_point":
-               __scorePoint = RInteger.parse(value);
-               _scorePoint = __scorePoint;
+            case "business_cd":
+               __businessCd = RInteger.parse(value);
+               _businessCd = __businessCd;
+               break;
+            case "income_cd":
+               __incomeCd = RInteger.parse(value);
+               _incomeCd = __incomeCd;
+               break;
+            case "province_area_id":
+               __provinceAreaId = RLong.parse(value);
+               _provinceAreaId = __provinceAreaId;
+               break;
+            case "province_id":
+               __provinceId = RLong.parse(value);
+               _provinceId = __provinceId;
+               break;
+            case "city_id":
+               __cityId = RLong.parse(value);
+               _cityId = __cityId;
+               break;
+            case "area_id":
+               __areaId = RLong.parse(value);
+               _areaId = __areaId;
+               break;
+            case "address":
+               __address = value;
+               _address = __address;
                break;
             case "register_date":
                __registerDate.parse(value);
@@ -925,6 +1451,26 @@ public class FDataFinancialMemberUnit
             case "last_login_date":
                __lastLoginDate.parse(value);
                _lastLoginDate.assign(__lastLoginDate);
+               break;
+            case "recommend_marketer_id":
+               __recommendMarketerId = RLong.parse(value);
+               _recommendMarketerId = __recommendMarketerId;
+               break;
+            case "recommend_marketer_user_id":
+               __recommendMarketerUserId = RLong.parse(value);
+               _recommendMarketerUserId = __recommendMarketerUserId;
+               break;
+            case "recommend_begin_date":
+               __recommendBeginDate.parse(value);
+               _recommendBeginDate.assign(__recommendBeginDate);
+               break;
+            case "recommend_end_date":
+               __recommendEndDate.parse(value);
+               _recommendEndDate.assign(__recommendEndDate);
+               break;
+            case "recommend_score":
+               __recommendScore = RInteger.parse(value);
+               _recommendScore = __recommendScore;
                break;
             case "note":
                __note = value;
@@ -963,17 +1509,30 @@ public class FDataFinancialMemberUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("linkId", _linkId);
-      row.set("name", _name);
+      row.set("statisticsId", _statisticsId);
+      row.set("passport", _passport);
       row.set("label", _label);
-      row.set("phone", _phone);
       row.set("card", _card);
+      row.set("birthday", _birthday);
+      row.set("phone", _phone);
       row.set("email", _email);
       row.set("genderCd", _genderCd);
-      row.set("birthday", _birthday);
-      row.set("scoreRecommend", _scoreRecommend);
-      row.set("scorePoint", _scorePoint);
+      row.set("marryCd", _marryCd);
+      row.set("educationCd", _educationCd);
+      row.set("businessCd", _businessCd);
+      row.set("incomeCd", _incomeCd);
+      row.set("provinceAreaId", _provinceAreaId);
+      row.set("provinceId", _provinceId);
+      row.set("cityId", _cityId);
+      row.set("areaId", _areaId);
+      row.set("address", _address);
       row.set("registerDate", _registerDate);
       row.set("lastLoginDate", _lastLoginDate);
+      row.set("recommendMarketerId", _recommendMarketerId);
+      row.set("recommendMarketerUserId", _recommendMarketerUserId);
+      row.set("recommendBeginDate", _recommendBeginDate);
+      row.set("recommendEndDate", _recommendEndDate);
+      row.set("recommendScore", _recommendScore);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -994,17 +1553,30 @@ public class FDataFinancialMemberUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("linkId", RLong.toString(_linkId));
-      map.put("name", _name);
+      map.put("statisticsId", RLong.toString(_statisticsId));
+      map.put("passport", _passport);
       map.put("label", _label);
-      map.put("phone", _phone);
       map.put("card", _card);
+      map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("phone", _phone);
       map.put("email", _email);
       map.put("genderCd", RInteger.toString(_genderCd));
-      map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("scoreRecommend", RInteger.toString(_scoreRecommend));
-      map.put("scorePoint", RInteger.toString(_scorePoint));
+      map.put("marryCd", RInteger.toString(_marryCd));
+      map.put("educationCd", RInteger.toString(_educationCd));
+      map.put("businessCd", RInteger.toString(_businessCd));
+      map.put("incomeCd", RInteger.toString(_incomeCd));
+      map.put("provinceAreaId", RLong.toString(_provinceAreaId));
+      map.put("provinceId", RLong.toString(_provinceId));
+      map.put("cityId", RLong.toString(_cityId));
+      map.put("areaId", RLong.toString(_areaId));
+      map.put("address", _address);
       map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("lastLoginDate", _lastLoginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("recommendMarketerId", RLong.toString(_recommendMarketerId));
+      map.put("recommendMarketerUserId", RLong.toString(_recommendMarketerUserId));
+      map.put("recommendBeginDate", _recommendBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("recommendEndDate", _recommendEndDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("recommendScore", RInteger.toString(_recommendScore));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1025,17 +1597,30 @@ public class FDataFinancialMemberUnit
       _guid = input.readString();
       _userId = input.readInt64();
       _linkId = input.readInt64();
-      _name = input.readString();
+      _statisticsId = input.readInt64();
+      _passport = input.readString();
       _label = input.readString();
-      _phone = input.readString();
       _card = input.readString();
+      _birthday.set(input.readInt64());
+      _phone = input.readString();
       _email = input.readString();
       _genderCd = input.readInt32();
-      _birthday.set(input.readInt64());
-      _scoreRecommend = input.readInt32();
-      _scorePoint = input.readInt32();
+      _marryCd = input.readInt32();
+      _educationCd = input.readInt32();
+      _businessCd = input.readInt32();
+      _incomeCd = input.readInt32();
+      _provinceAreaId = input.readInt64();
+      _provinceId = input.readInt64();
+      _cityId = input.readInt64();
+      _areaId = input.readInt64();
+      _address = input.readString();
       _registerDate.set(input.readInt64());
       _lastLoginDate.set(input.readInt64());
+      _recommendMarketerId = input.readInt64();
+      _recommendMarketerUserId = input.readInt64();
+      _recommendBeginDate.set(input.readInt64());
+      _recommendEndDate.set(input.readInt64());
+      _recommendScore = input.readInt32();
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -1056,17 +1641,30 @@ public class FDataFinancialMemberUnit
       output.writeString(_guid);
       output.writeInt64(_userId);
       output.writeInt64(_linkId);
-      output.writeString(_name);
+      output.writeInt64(_statisticsId);
+      output.writeString(_passport);
       output.writeString(_label);
-      output.writeString(_phone);
       output.writeString(_card);
+      output.writeInt64(_birthday.get());
+      output.writeString(_phone);
       output.writeString(_email);
       output.writeInt32(_genderCd);
-      output.writeInt64(_birthday.get());
-      output.writeInt32(_scoreRecommend);
-      output.writeInt32(_scorePoint);
+      output.writeInt32(_marryCd);
+      output.writeInt32(_educationCd);
+      output.writeInt32(_businessCd);
+      output.writeInt32(_incomeCd);
+      output.writeInt64(_provinceAreaId);
+      output.writeInt64(_provinceId);
+      output.writeInt64(_cityId);
+      output.writeInt64(_areaId);
+      output.writeString(_address);
       output.writeInt64(_registerDate.get());
       output.writeInt64(_lastLoginDate.get());
+      output.writeInt64(_recommendMarketerId);
+      output.writeInt64(_recommendMarketerUserId);
+      output.writeInt64(_recommendBeginDate.get());
+      output.writeInt64(_recommendEndDate.get());
+      output.writeInt32(_recommendScore);
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

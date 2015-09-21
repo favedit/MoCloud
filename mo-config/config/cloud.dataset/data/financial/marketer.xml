@@ -2,7 +2,8 @@
 <DataStore _uuid="8ca67e12-a163-4fc0-b40f-31297af10da2" name="data.financial.marketer" label="M#12cn17金融理财师信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Marketer" data_name="DT_FIN_MARKETER" data_alias="DT_FIN_MKT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
   <FieldRecordId _uuid="089bb932-a616-46c5-89b9-b63fa520ea41" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
   <FieldRecordId _uuid="cbb2d65a-2d81-4e27-a811-9844902bc8e3" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
-  <FieldString _uuid="39bf5e43-e1cc-466a-9b8e-80286000d68d" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="40" />
+  <FieldRecordId _uuid="3e0f0cae-a3d4-46ed-8960-fb23fa1eafc0" name="statistics_id" label="M#12cn14统计编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATISTICS_ID" />
+  <FieldString _uuid="39bf5e43-e1cc-466a-9b8e-80286000d68d" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="80" />
   <FieldString _uuid="7fba70e1-27cc-4e57-b1f3-abb1b7078521" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
   <FieldString _uuid="f70108fb-dc85-4619-834a-7c1bb50c9d59" name="passsport" label="M#12cn13登录名" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
   <FieldInteger _uuid="cfa8636e-4625-416d-81d7-443dde908676" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />

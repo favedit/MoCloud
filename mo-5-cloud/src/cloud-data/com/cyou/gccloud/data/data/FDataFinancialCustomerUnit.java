@@ -40,35 +40,41 @@ public class FDataFinancialCustomerUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段成员编号的定义。
-   private long __memberId;
+   // 存储字段关联编号的定义。
+   private long __linkId;
 
-   // 字段成员编号的定义。
-   protected long _memberId;
+   // 字段关联编号的定义。
+   protected long _linkId;
+
+   // 存储字段统计编号的定义。
+   private int __statisticsId;
+
+   // 字段统计编号的定义。
+   protected int _statisticsId;
 
    // 存储字段婚姻状态的定义。
-   private int __marriageStatus;
+   private int __marryCd;
 
    // 字段婚姻状态的定义。
-   protected int _marriageStatus;
+   protected int _marryCd;
 
-   // 存储字段最高学历的定义。
-   private int __highestEducation;
+   // 存储字段教育类型的定义。
+   private int __educationCd;
 
-   // 字段最高学历的定义。
-   protected int _highestEducation;
+   // 字段教育类型的定义。
+   protected int _educationCd;
 
-   // 存储字段月收入的定义。
-   private int __monthlyIncome;
+   // 存储字段收入类型的定义。
+   private int __incomeCd;
 
-   // 字段月收入的定义。
-   protected int _monthlyIncome;
+   // 字段收入类型的定义。
+   protected int _incomeCd;
 
-   // 存储字段职业的定义。
-   private int __profession;
+   // 存储字段职业类型的定义。
+   private int __businessCd;
 
-   // 字段职业的定义。
-   protected int _profession;
+   // 字段职业类型的定义。
+   protected int _businessCd;
 
    // 存储字段投资总额的定义。
    private double __investmentTotal;
@@ -224,41 +230,57 @@ public class FDataFinancialCustomerUnit
    }
 
    //============================================================
-   // <T>判断成员编号的数据是否改变。</T>
+   // <T>判断关联编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMemberIdChanged(){
-      return __memberId != _memberId;
+   public boolean isLinkIdChanged(){
+      return __linkId != _linkId;
    }
 
    //============================================================
-   // <T>获得成员编号的数据内容。</T>
+   // <T>获得关联编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long memberId(){
-      return _memberId;
+   public long linkId(){
+      return _linkId;
    }
 
    //============================================================
-   // <T>获得成员编号的数据单元。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public FDataFinancialMemberUnit member(){
-      FDataFinancialMemberLogic logic = _logicContext.findLogic(FDataFinancialMemberLogic.class);
-      FDataFinancialMemberUnit unit = logic.find(_memberId);
-      return unit;
-   }
-
-   //============================================================
-   // <T>设置成员编号的数据内容。</T>
+   // <T>设置关联编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMemberId(long value){
-      _memberId = value;
+   public void setLinkId(long value){
+      _linkId = value;
+   }
+
+   //============================================================
+   // <T>判断统计编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isStatisticsIdChanged(){
+      return __statisticsId != _statisticsId;
+   }
+
+   //============================================================
+   // <T>获得统计编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int statisticsId(){
+      return _statisticsId;
+   }
+
+   //============================================================
+   // <T>设置统计编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setStatisticsId(int value){
+      _statisticsId = value;
    }
 
    //============================================================
@@ -266,8 +288,8 @@ public class FDataFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarriageStatusChanged(){
-      return __marriageStatus != _marriageStatus;
+   public boolean isMarryCdChanged(){
+      return __marryCd != _marryCd;
    }
 
    //============================================================
@@ -275,8 +297,8 @@ public class FDataFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public int marriageStatus(){
-      return _marriageStatus;
+   public int marryCd(){
+      return _marryCd;
    }
 
    //============================================================
@@ -284,89 +306,89 @@ public class FDataFinancialCustomerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setMarriageStatus(int value){
-      _marriageStatus = value;
+   public void setMarryCd(int value){
+      _marryCd = value;
    }
 
    //============================================================
-   // <T>判断最高学历的数据是否改变。</T>
+   // <T>判断教育类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isHighestEducationChanged(){
-      return __highestEducation != _highestEducation;
+   public boolean isEducationCdChanged(){
+      return __educationCd != _educationCd;
    }
 
    //============================================================
-   // <T>获得最高学历的数据内容。</T>
+   // <T>获得教育类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int highestEducation(){
-      return _highestEducation;
+   public int educationCd(){
+      return _educationCd;
    }
 
    //============================================================
-   // <T>设置最高学历的数据内容。</T>
+   // <T>设置教育类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setHighestEducation(int value){
-      _highestEducation = value;
+   public void setEducationCd(int value){
+      _educationCd = value;
    }
 
    //============================================================
-   // <T>判断月收入的数据是否改变。</T>
+   // <T>判断收入类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMonthlyIncomeChanged(){
-      return __monthlyIncome != _monthlyIncome;
+   public boolean isIncomeCdChanged(){
+      return __incomeCd != _incomeCd;
    }
 
    //============================================================
-   // <T>获得月收入的数据内容。</T>
+   // <T>获得收入类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int monthlyIncome(){
-      return _monthlyIncome;
+   public int incomeCd(){
+      return _incomeCd;
    }
 
    //============================================================
-   // <T>设置月收入的数据内容。</T>
+   // <T>设置收入类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMonthlyIncome(int value){
-      _monthlyIncome = value;
+   public void setIncomeCd(int value){
+      _incomeCd = value;
    }
 
    //============================================================
-   // <T>判断职业的数据是否改变。</T>
+   // <T>判断职业类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isProfessionChanged(){
-      return __profession != _profession;
+   public boolean isBusinessCdChanged(){
+      return __businessCd != _businessCd;
    }
 
    //============================================================
-   // <T>获得职业的数据内容。</T>
+   // <T>获得职业类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int profession(){
-      return _profession;
+   public int businessCd(){
+      return _businessCd;
    }
 
    //============================================================
-   // <T>设置职业的数据内容。</T>
+   // <T>设置职业类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setProfession(int value){
-      _profession = value;
+   public void setBusinessCd(int value){
+      _businessCd = value;
    }
 
    //============================================================
@@ -681,16 +703,18 @@ public class FDataFinancialCustomerUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "member_id":
-            return Long.toString(_memberId);
-         case "marriage_status":
-            return RInteger.toString(_marriageStatus);
-         case "highest_education":
-            return RInteger.toString(_highestEducation);
-         case "monthly_income":
-            return RInteger.toString(_monthlyIncome);
-         case "profession":
-            return RInteger.toString(_profession);
+         case "link_id":
+            return Long.toString(_linkId);
+         case "statistics_id":
+            return RInteger.toString(_statisticsId);
+         case "marry_cd":
+            return RInteger.toString(_marryCd);
+         case "education_cd":
+            return RInteger.toString(_educationCd);
+         case "income_cd":
+            return RInteger.toString(_incomeCd);
+         case "business_cd":
+            return RInteger.toString(_businessCd);
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "investment_count":
@@ -736,20 +760,23 @@ public class FDataFinancialCustomerUnit
          case "guid":
             _guid = value;
             break;
-         case "member_id":
-            _memberId = RLong.parse(value);
+         case "link_id":
+            _linkId = RLong.parse(value);
             break;
-         case "marriage_status":
-            _marriageStatus = RInteger.parse(value);
+         case "statistics_id":
+            _statisticsId = RInteger.parse(value);
             break;
-         case "highest_education":
-            _highestEducation = RInteger.parse(value);
+         case "marry_cd":
+            _marryCd = RInteger.parse(value);
             break;
-         case "monthly_income":
-            _monthlyIncome = RInteger.parse(value);
+         case "education_cd":
+            _educationCd = RInteger.parse(value);
             break;
-         case "profession":
-            _profession = RInteger.parse(value);
+         case "income_cd":
+            _incomeCd = RInteger.parse(value);
+            break;
+         case "business_cd":
+            _businessCd = RInteger.parse(value);
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -811,25 +838,29 @@ public class FDataFinancialCustomerUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "member_id":
-               __memberId = RLong.parse(value);
-               _memberId = __memberId;
+            case "link_id":
+               __linkId = RLong.parse(value);
+               _linkId = __linkId;
                break;
-            case "marriage_status":
-               __marriageStatus = RInteger.parse(value);
-               _marriageStatus = __marriageStatus;
+            case "statistics_id":
+               __statisticsId = RInteger.parse(value);
+               _statisticsId = __statisticsId;
                break;
-            case "highest_education":
-               __highestEducation = RInteger.parse(value);
-               _highestEducation = __highestEducation;
+            case "marry_cd":
+               __marryCd = RInteger.parse(value);
+               _marryCd = __marryCd;
                break;
-            case "monthly_income":
-               __monthlyIncome = RInteger.parse(value);
-               _monthlyIncome = __monthlyIncome;
+            case "education_cd":
+               __educationCd = RInteger.parse(value);
+               _educationCd = __educationCd;
                break;
-            case "profession":
-               __profession = RInteger.parse(value);
-               _profession = __profession;
+            case "income_cd":
+               __incomeCd = RInteger.parse(value);
+               _incomeCd = __incomeCd;
+               break;
+            case "business_cd":
+               __businessCd = RInteger.parse(value);
+               _businessCd = __businessCd;
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -890,11 +921,12 @@ public class FDataFinancialCustomerUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("memberId", _memberId);
-      row.set("marriageStatus", _marriageStatus);
-      row.set("highestEducation", _highestEducation);
-      row.set("monthlyIncome", _monthlyIncome);
-      row.set("profession", _profession);
+      row.set("linkId", _linkId);
+      row.set("statisticsId", _statisticsId);
+      row.set("marryCd", _marryCd);
+      row.set("educationCd", _educationCd);
+      row.set("incomeCd", _incomeCd);
+      row.set("businessCd", _businessCd);
       row.set("investmentTotal", _investmentTotal);
       row.set("investmentCount", _investmentCount);
       row.set("redemptionTotal", _redemptionTotal);
@@ -919,11 +951,12 @@ public class FDataFinancialCustomerUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("memberId", RLong.toString(_memberId));
-      map.put("marriageStatus", RInteger.toString(_marriageStatus));
-      map.put("highestEducation", RInteger.toString(_highestEducation));
-      map.put("monthlyIncome", RInteger.toString(_monthlyIncome));
-      map.put("profession", RInteger.toString(_profession));
+      map.put("linkId", RLong.toString(_linkId));
+      map.put("statisticsId", RInteger.toString(_statisticsId));
+      map.put("marryCd", RInteger.toString(_marryCd));
+      map.put("educationCd", RInteger.toString(_educationCd));
+      map.put("incomeCd", RInteger.toString(_incomeCd));
+      map.put("businessCd", RInteger.toString(_businessCd));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("investmentCount", RInteger.toString(_investmentCount));
       map.put("redemptionTotal", RFloat.toString(_redemptionTotal));
@@ -948,11 +981,12 @@ public class FDataFinancialCustomerUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _memberId = input.readInt64();
-      _marriageStatus = input.readInt32();
-      _highestEducation = input.readInt32();
-      _monthlyIncome = input.readInt32();
-      _profession = input.readInt32();
+      _linkId = input.readInt64();
+      _statisticsId = input.readInt32();
+      _marryCd = input.readInt32();
+      _educationCd = input.readInt32();
+      _incomeCd = input.readInt32();
+      _businessCd = input.readInt32();
       _investmentCount = input.readInt32();
       _redemptionCount = input.readInt32();
       _note = input.readString();
@@ -973,11 +1007,12 @@ public class FDataFinancialCustomerUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeInt64(_memberId);
-      output.writeInt32(_marriageStatus);
-      output.writeInt32(_highestEducation);
-      output.writeInt32(_monthlyIncome);
-      output.writeInt32(_profession);
+      output.writeInt64(_linkId);
+      output.writeInt32(_statisticsId);
+      output.writeInt32(_marryCd);
+      output.writeInt32(_educationCd);
+      output.writeInt32(_incomeCd);
+      output.writeInt32(_businessCd);
       output.writeInt32(_investmentCount);
       output.writeInt32(_redemptionCount);
       output.writeString(_note);

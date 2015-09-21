@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="b23d32eb-bb60-4f1d-9d15-1894cf7ef8f0" name="data.financial.customer" label="M#12cn16金融客户信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Customer" data_name="DT_FIN_CUSTOMER" data_alias="DT_FIN_CST" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="7a9f8534-b6fc-4ab1-ad83-56f9e034de87" name="member_id" label="M#12cn14成员编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MEMBER_ID" data_alias="MEMBER" data_refer="data.financial.member" />
-  <FieldInteger _uuid="d20c81f9-3914-45c2-b648-caddab5e1fdf" name="marriage_status" label="M#12cn14婚姻状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRIAGE_STATUS" />
-  <FieldInteger _uuid="2099014f-5918-46e6-b3c7-299c7fa4008c" name="highest_education" label="M#12cn14最高学历" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HIGHEST_EDUCATION" />
-  <FieldInteger _uuid="8a71cbe9-10d9-4cd9-b936-c0eb5dad2fa0" name="monthly_income" label="M#12cn13月收入" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MONTHLY_INCOME" />
-  <FieldInteger _uuid="0365ca10-e956-46ed-b8be-abd926e5aa66" name="profession" label="M#12cn12职业" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROFESSION" />
+  <FieldRecordId _uuid="cc51033a-c636-4584-a37e-e48b40a62979" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldInteger _uuid="f89c4e9e-6d23-4dec-bade-20ad56c0c767" name="statistics_id" label="M#12cn14统计编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATISTICS_ID" />
+  <FieldInteger _uuid="d20c81f9-3914-45c2-b648-caddab5e1fdf" name="marry_cd" label="M#12cn14婚姻状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CD" />
+  <FieldInteger _uuid="2099014f-5918-46e6-b3c7-299c7fa4008c" name="education_cd" label="M#12cn14教育类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="EDUCATION_CD" />
+  <FieldInteger _uuid="8a71cbe9-10d9-4cd9-b936-c0eb5dad2fa0" name="income_cd" label="M#12cn14收入类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INCOME_CD" />
+  <FieldInteger _uuid="0365ca10-e956-46ed-b8be-abd926e5aa66" name="business_cd" label="M#12cn14职业类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUSINESS_CD" />
   <FieldDouble _uuid="e2f954ed-c06b-4022-9b59-debf6cdda84e" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldInteger _uuid="2593c636-bd63-4069-b256-f9e71aa60d49" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
   <FieldFloat _uuid="cec17914-d75e-4af8-b46b-e121c83547bb" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />

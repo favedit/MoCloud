@@ -48,17 +48,23 @@ public class FDataFinancialMemberLogic
    // 字段关联编号的定义。
    public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
-   // 字段名称的定义。
-   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
+   // 字段统计编号的定义。
+   public final static SLogicFieldInfo STATISTICS_ID = new SLogicFieldInfo("STATISTICS_ID");
+
+   // 字段账号的定义。
+   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
 
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段电话号码的定义。
-   public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
-
    // 字段身份证号的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
+
+   // 字段生日的定义。
+   public final static SLogicFieldInfo BIRTHDAY = new SLogicFieldInfo("BIRTHDAY");
+
+   // 字段电话号码的定义。
+   public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
 
    // 字段电子邮箱的定义。
    public final static SLogicFieldInfo EMAIL = new SLogicFieldInfo("EMAIL");
@@ -66,20 +72,53 @@ public class FDataFinancialMemberLogic
    // 字段性别的定义。
    public final static SLogicFieldInfo GENDER_CD = new SLogicFieldInfo("GENDER_CD");
 
-   // 字段生日的定义。
-   public final static SLogicFieldInfo BIRTHDAY = new SLogicFieldInfo("BIRTHDAY");
+   // 字段婚姻类型的定义。
+   public final static SLogicFieldInfo MARRY_CD = new SLogicFieldInfo("MARRY_CD");
 
-   // 字段推荐评分的定义。
-   public final static SLogicFieldInfo SCORE_RECOMMEND = new SLogicFieldInfo("SCORE_RECOMMEND");
+   // 字段教育类型的定义。
+   public final static SLogicFieldInfo EDUCATION_CD = new SLogicFieldInfo("EDUCATION_CD");
 
-   // 字段累计点数的定义。
-   public final static SLogicFieldInfo SCORE_POINT = new SLogicFieldInfo("SCORE_POINT");
+   // 字段职业类型的定义。
+   public final static SLogicFieldInfo BUSINESS_CD = new SLogicFieldInfo("BUSINESS_CD");
+
+   // 字段收入类型的定义。
+   public final static SLogicFieldInfo INCOME_CD = new SLogicFieldInfo("INCOME_CD");
+
+   // 字段区域编号的定义。
+   public final static SLogicFieldInfo PROVINCE_AREA_ID = new SLogicFieldInfo("PROVINCE_AREA_ID");
+
+   // 字段省份编号的定义。
+   public final static SLogicFieldInfo PROVINCE_ID = new SLogicFieldInfo("PROVINCE_ID");
+
+   // 字段城市编号的定义。
+   public final static SLogicFieldInfo CITY_ID = new SLogicFieldInfo("CITY_ID");
+
+   // 字段区域编号的定义。
+   public final static SLogicFieldInfo AREA_ID = new SLogicFieldInfo("AREA_ID");
+
+   // 字段地址信息的定义。
+   public final static SLogicFieldInfo ADDRESS = new SLogicFieldInfo("ADDRESS");
 
    // 字段注册时间的定义。
    public final static SLogicFieldInfo REGISTER_DATE = new SLogicFieldInfo("REGISTER_DATE");
 
    // 字段最后登录时间的定义。
    public final static SLogicFieldInfo LAST_LOGIN_DATE = new SLogicFieldInfo("LAST_LOGIN_DATE");
+
+   // 字段推荐理财师编号的定义。
+   public final static SLogicFieldInfo RECOMMEND_MARKETER_ID = new SLogicFieldInfo("RECOMMEND_MARKETER_ID");
+
+   // 字段推荐理财师用户编号的定义。
+   public final static SLogicFieldInfo RECOMMEND_MARKETER_USER_ID = new SLogicFieldInfo("RECOMMEND_MARKETER_USER_ID");
+
+   // 字段推荐开始时间的定义。
+   public final static SLogicFieldInfo RECOMMEND_BEGIN_DATE = new SLogicFieldInfo("RECOMMEND_BEGIN_DATE");
+
+   // 字段推荐结束时间的定义。
+   public final static SLogicFieldInfo RECOMMEND_END_DATE = new SLogicFieldInfo("RECOMMEND_END_DATE");
+
+   // 字段推荐评分的定义。
+   public final static SLogicFieldInfo RECOMMEND_SCORE = new SLogicFieldInfo("RECOMMEND_SCORE");
 
    // 字段备注信息的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -97,7 +136,7 @@ public class FDataFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`NAME`,`LABEL`,`PHONE`,`CARD`,`EMAIL`,`GENDER_CD`,`BIRTHDAY`,`SCORE_RECOMMEND`,`SCORE_POINT`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`STATISTICS_ID`,`PASSPORT`,`LABEL`,`CARD`,`BIRTHDAY`,`PHONE`,`EMAIL`,`GENDER_CD`,`MARRY_CD`,`EDUCATION_CD`,`BUSINESS_CD`,`INCOME_CD`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`CITY_ID`,`AREA_ID`,`ADDRESS`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_MARKETER_ID`,`RECOMMEND_MARKETER_USER_ID`,`RECOMMEND_BEGIN_DATE`,`RECOMMEND_END_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融成员信息逻辑单元。</T>
@@ -695,17 +734,30 @@ public class FDataFinancialMemberLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`LINK_ID`");
-      cmd.append(",`NAME`");
+      cmd.append(",`STATISTICS_ID`");
+      cmd.append(",`PASSPORT`");
       cmd.append(",`LABEL`");
-      cmd.append(",`PHONE`");
       cmd.append(",`CARD`");
+      cmd.append(",`BIRTHDAY`");
+      cmd.append(",`PHONE`");
       cmd.append(",`EMAIL`");
       cmd.append(",`GENDER_CD`");
-      cmd.append(",`BIRTHDAY`");
-      cmd.append(",`SCORE_RECOMMEND`");
-      cmd.append(",`SCORE_POINT`");
+      cmd.append(",`MARRY_CD`");
+      cmd.append(",`EDUCATION_CD`");
+      cmd.append(",`BUSINESS_CD`");
+      cmd.append(",`INCOME_CD`");
+      cmd.append(",`PROVINCE_AREA_ID`");
+      cmd.append(",`PROVINCE_ID`");
+      cmd.append(",`CITY_ID`");
+      cmd.append(",`AREA_ID`");
+      cmd.append(",`ADDRESS`");
       cmd.append(",`REGISTER_DATE`");
       cmd.append(",`LAST_LOGIN_DATE`");
+      cmd.append(",`RECOMMEND_MARKETER_ID`");
+      cmd.append(",`RECOMMEND_MARKETER_USER_ID`");
+      cmd.append(",`RECOMMEND_BEGIN_DATE`");
+      cmd.append(",`RECOMMEND_END_DATE`");
+      cmd.append(",`RECOMMEND_SCORE`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -740,12 +792,19 @@ public class FDataFinancialMemberLogic
          cmd.append(linkId);
       }
       cmd.append(',');
-      String name = unit.name();
-      if(RString.isEmpty(name)){
+      long statisticsId = unit.statisticsId();
+      if(statisticsId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(statisticsId);
+      }
+      cmd.append(',');
+      String passport = unit.passport();
+      if(RString.isEmpty(passport)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(name));
+         cmd.append(RSql.formatValue(passport));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -758,21 +817,32 @@ public class FDataFinancialMemberLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String phone = unit.phone();
-      if(RString.isEmpty(phone)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(phone));
-         cmd.append('\'');
-      }
-      cmd.append(',');
       String card = unit.card();
       if(RString.isEmpty(card)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(card));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      TDateTime birthday = unit.birthday();
+      if(birthday == null){
+         cmd.append("NULL");
+      }else if(birthday.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(birthday.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      String phone = unit.phone();
+      if(RString.isEmpty(phone)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(phone));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -787,20 +857,50 @@ public class FDataFinancialMemberLogic
       cmd.append(',');
       cmd.append(unit.genderCd());
       cmd.append(',');
-      TDateTime birthday = unit.birthday();
-      if(birthday == null){
-         cmd.append("NULL");
-      }else if(birthday.isEmpty()){
+      cmd.append(unit.marryCd());
+      cmd.append(',');
+      cmd.append(unit.educationCd());
+      cmd.append(',');
+      cmd.append(unit.businessCd());
+      cmd.append(',');
+      cmd.append(unit.incomeCd());
+      cmd.append(',');
+      long provinceAreaId = unit.provinceAreaId();
+      if(provinceAreaId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(birthday.format());
-         cmd.append("','%Y%m%d%H%i%s')");
+         cmd.append(provinceAreaId);
       }
       cmd.append(',');
-      cmd.append(unit.scoreRecommend());
+      long provinceId = unit.provinceId();
+      if(provinceId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(provinceId);
+      }
       cmd.append(',');
-      cmd.append(unit.scorePoint());
+      long cityId = unit.cityId();
+      if(cityId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(cityId);
+      }
+      cmd.append(',');
+      long areaId = unit.areaId();
+      if(areaId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(areaId);
+      }
+      cmd.append(',');
+      String address = unit.address();
+      if(RString.isEmpty(address)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(address));
+         cmd.append('\'');
+      }
       cmd.append(',');
       TDateTime registerDate = unit.registerDate();
       if(registerDate == null){
@@ -823,6 +923,44 @@ public class FDataFinancialMemberLogic
          cmd.append(lastLoginDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
+      cmd.append(',');
+      long recommendMarketerId = unit.recommendMarketerId();
+      if(recommendMarketerId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(recommendMarketerId);
+      }
+      cmd.append(',');
+      long recommendMarketerUserId = unit.recommendMarketerUserId();
+      if(recommendMarketerUserId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(recommendMarketerUserId);
+      }
+      cmd.append(',');
+      TDateTime recommendBeginDate = unit.recommendBeginDate();
+      if(recommendBeginDate == null){
+         cmd.append("NULL");
+      }else if(recommendBeginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(recommendBeginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime recommendEndDate = unit.recommendEndDate();
+      if(recommendEndDate == null){
+         cmd.append("NULL");
+      }else if(recommendEndDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(recommendEndDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.recommendScore());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -924,14 +1062,23 @@ public class FDataFinancialMemberLogic
             cmd.append(linkId);
          }
       }
-      if(unit.isNameChanged()){
-         cmd.append(",`NAME`=");
-         String name = unit.name();
-         if(RString.isEmpty(name)){
+      if(unit.isStatisticsIdChanged()){
+         cmd.append(",`STATISTICS_ID`=");
+         long statisticsId = unit.statisticsId();
+         if(statisticsId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(statisticsId);
+         }
+      }
+      if(unit.isPassportChanged()){
+         cmd.append(",`PASSPORT`=");
+         String passport = unit.passport();
+         if(RString.isEmpty(passport)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(name));
+            cmd.append(RSql.formatValue(passport));
             cmd.append('\'');
          }
       }
@@ -946,17 +1093,6 @@ public class FDataFinancialMemberLogic
             cmd.append('\'');
          }
       }
-      if(unit.isPhoneChanged()){
-         cmd.append(",`PHONE`=");
-         String phone = unit.phone();
-         if(RString.isEmpty(phone)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(phone));
-            cmd.append('\'');
-         }
-      }
       if(unit.isCardChanged()){
          cmd.append(",`CARD`=");
          String card = unit.card();
@@ -965,6 +1101,30 @@ public class FDataFinancialMemberLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(card));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isBirthdayChanged()){
+         cmd.append(",`BIRTHDAY`=");
+         TDateTime birthday = unit.birthday();
+         if(birthday == null){
+            cmd.append("NULL");
+         }else if(birthday.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(birthday.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isPhoneChanged()){
+         cmd.append(",`PHONE`=");
+         String phone = unit.phone();
+         if(RString.isEmpty(phone)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(phone));
             cmd.append('\'');
          }
       }
@@ -983,26 +1143,68 @@ public class FDataFinancialMemberLogic
          cmd.append(",`GENDER_CD`=");
          cmd.append(unit.genderCd());
       }
-      if(unit.isBirthdayChanged()){
-         cmd.append(",`BIRTHDAY`=");
-         TDateTime birthday = unit.birthday();
-         if(birthday == null){
-            cmd.append("NULL");
-         }else if(birthday.isEmpty()){
+      if(unit.isMarryCdChanged()){
+         cmd.append(",`MARRY_CD`=");
+         cmd.append(unit.marryCd());
+      }
+      if(unit.isEducationCdChanged()){
+         cmd.append(",`EDUCATION_CD`=");
+         cmd.append(unit.educationCd());
+      }
+      if(unit.isBusinessCdChanged()){
+         cmd.append(",`BUSINESS_CD`=");
+         cmd.append(unit.businessCd());
+      }
+      if(unit.isIncomeCdChanged()){
+         cmd.append(",`INCOME_CD`=");
+         cmd.append(unit.incomeCd());
+      }
+      if(unit.isProvinceAreaIdChanged()){
+         cmd.append(",`PROVINCE_AREA_ID`=");
+         long provinceAreaId = unit.provinceAreaId();
+         if(provinceAreaId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(birthday.format());
-            cmd.append("','%Y%m%d%H%i%s')");
+            cmd.append(provinceAreaId);
          }
       }
-      if(unit.isScoreRecommendChanged()){
-         cmd.append(",`SCORE_RECOMMEND`=");
-         cmd.append(unit.scoreRecommend());
+      if(unit.isProvinceIdChanged()){
+         cmd.append(",`PROVINCE_ID`=");
+         long provinceId = unit.provinceId();
+         if(provinceId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(provinceId);
+         }
       }
-      if(unit.isScorePointChanged()){
-         cmd.append(",`SCORE_POINT`=");
-         cmd.append(unit.scorePoint());
+      if(unit.isCityIdChanged()){
+         cmd.append(",`CITY_ID`=");
+         long cityId = unit.cityId();
+         if(cityId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(cityId);
+         }
+      }
+      if(unit.isAreaIdChanged()){
+         cmd.append(",`AREA_ID`=");
+         long areaId = unit.areaId();
+         if(areaId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(areaId);
+         }
+      }
+      if(unit.isAddressChanged()){
+         cmd.append(",`ADDRESS`=");
+         String address = unit.address();
+         if(RString.isEmpty(address)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(address));
+            cmd.append('\'');
+         }
       }
       if(unit.isRegisterDateChanged()){
          cmd.append(",`REGISTER_DATE`=");
@@ -1029,6 +1231,54 @@ public class FDataFinancialMemberLogic
             cmd.append(lastLoginDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
+      }
+      if(unit.isRecommendMarketerIdChanged()){
+         cmd.append(",`RECOMMEND_MARKETER_ID`=");
+         long recommendMarketerId = unit.recommendMarketerId();
+         if(recommendMarketerId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(recommendMarketerId);
+         }
+      }
+      if(unit.isRecommendMarketerUserIdChanged()){
+         cmd.append(",`RECOMMEND_MARKETER_USER_ID`=");
+         long recommendMarketerUserId = unit.recommendMarketerUserId();
+         if(recommendMarketerUserId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(recommendMarketerUserId);
+         }
+      }
+      if(unit.isRecommendBeginDateChanged()){
+         cmd.append(",`RECOMMEND_BEGIN_DATE`=");
+         TDateTime recommendBeginDate = unit.recommendBeginDate();
+         if(recommendBeginDate == null){
+            cmd.append("NULL");
+         }else if(recommendBeginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(recommendBeginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRecommendEndDateChanged()){
+         cmd.append(",`RECOMMEND_END_DATE`=");
+         TDateTime recommendEndDate = unit.recommendEndDate();
+         if(recommendEndDate == null){
+            cmd.append("NULL");
+         }else if(recommendEndDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(recommendEndDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRecommendScoreChanged()){
+         cmd.append(",`RECOMMEND_SCORE`=");
+         cmd.append(unit.recommendScore());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

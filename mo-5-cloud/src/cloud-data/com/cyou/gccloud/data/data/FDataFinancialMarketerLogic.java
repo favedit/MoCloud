@@ -48,6 +48,9 @@ public class FDataFinancialMarketerLogic
    // 字段关联编号的定义。
    public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
+   // 字段统计编号的定义。
+   public final static SLogicFieldInfo STATISTICS_ID = new SLogicFieldInfo("STATISTICS_ID");
+
    // 字段名称的定义。
    public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
 
@@ -121,7 +124,7 @@ public class FDataFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`NAME`,`LABEL`,`PASSPORT`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABELS`,`CUSTOMER_INVESTMENT_TOTAL`,`CUSTOMER_INVESTMENT_COUNT`,`CUSTOMER_INVESTMENT_DATE`,`CUSTOMER_REDEMPTION_TOTAL`,`CUSTOMER_REDEMPTION_COUNT`,`CUSTOMER_REDEMPTION_DATE`,`CUSTOMER_NETINVESTMENT_TOTAL`,`CUSTOMER_INTEREST_TOTAL`,`CUSTOMER_PERFORMANCE_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`STATISTICS_ID`,`NAME`,`LABEL`,`PASSPORT`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`DEPARTMENT_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABELS`,`CUSTOMER_INVESTMENT_TOTAL`,`CUSTOMER_INVESTMENT_COUNT`,`CUSTOMER_INVESTMENT_DATE`,`CUSTOMER_REDEMPTION_TOTAL`,`CUSTOMER_REDEMPTION_COUNT`,`CUSTOMER_REDEMPTION_DATE`,`CUSTOMER_NETINVESTMENT_TOTAL`,`CUSTOMER_INTEREST_TOTAL`,`CUSTOMER_PERFORMANCE_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融理财师信息逻辑单元。</T>
@@ -719,6 +722,7 @@ public class FDataFinancialMarketerLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`LINK_ID`");
+      cmd.append(",`STATISTICS_ID`");
       cmd.append(",`NAME`");
       cmd.append(",`LABEL`");
       cmd.append(",`PASSPORT`");
@@ -770,6 +774,13 @@ public class FDataFinancialMarketerLogic
          cmd.append("NULL");
       }else{
          cmd.append(linkId);
+      }
+      cmd.append(',');
+      long statisticsId = unit.statisticsId();
+      if(statisticsId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(statisticsId);
       }
       cmd.append(',');
       String name = unit.name();
@@ -987,6 +998,15 @@ public class FDataFinancialMarketerLogic
             cmd.append("NULL");
          }else{
             cmd.append(linkId);
+         }
+      }
+      if(unit.isStatisticsIdChanged()){
+         cmd.append(",`STATISTICS_ID`=");
+         long statisticsId = unit.statisticsId();
+         if(statisticsId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(statisticsId);
          }
       }
       if(unit.isNameChanged()){

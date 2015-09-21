@@ -41,20 +41,23 @@ public class FDataFinancialCustomerLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段成员编号的定义。
-   public final static SLogicFieldInfo MEMBER_ID = new SLogicFieldInfo("MEMBER_ID");
+   // 字段关联编号的定义。
+   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
+
+   // 字段统计编号的定义。
+   public final static SLogicFieldInfo STATISTICS_ID = new SLogicFieldInfo("STATISTICS_ID");
 
    // 字段婚姻状态的定义。
-   public final static SLogicFieldInfo MARRIAGE_STATUS = new SLogicFieldInfo("MARRIAGE_STATUS");
+   public final static SLogicFieldInfo MARRY_CD = new SLogicFieldInfo("MARRY_CD");
 
-   // 字段最高学历的定义。
-   public final static SLogicFieldInfo HIGHEST_EDUCATION = new SLogicFieldInfo("HIGHEST_EDUCATION");
+   // 字段教育类型的定义。
+   public final static SLogicFieldInfo EDUCATION_CD = new SLogicFieldInfo("EDUCATION_CD");
 
-   // 字段月收入的定义。
-   public final static SLogicFieldInfo MONTHLY_INCOME = new SLogicFieldInfo("MONTHLY_INCOME");
+   // 字段收入类型的定义。
+   public final static SLogicFieldInfo INCOME_CD = new SLogicFieldInfo("INCOME_CD");
 
-   // 字段职业的定义。
-   public final static SLogicFieldInfo PROFESSION = new SLogicFieldInfo("PROFESSION");
+   // 字段职业类型的定义。
+   public final static SLogicFieldInfo BUSINESS_CD = new SLogicFieldInfo("BUSINESS_CD");
 
    // 字段投资总额的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
@@ -90,7 +93,7 @@ public class FDataFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MEMBER_ID`,`MARRIAGE_STATUS`,`HIGHEST_EDUCATION`,`MONTHLY_INCOME`,`PROFESSION`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`STATISTICS_ID`,`MARRY_CD`,`EDUCATION_CD`,`INCOME_CD`,`BUSINESS_CD`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融客户信息逻辑单元。</T>
@@ -686,11 +689,12 @@ public class FDataFinancialCustomerLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`MEMBER_ID`");
-      cmd.append(",`MARRIAGE_STATUS`");
-      cmd.append(",`HIGHEST_EDUCATION`");
-      cmd.append(",`MONTHLY_INCOME`");
-      cmd.append(",`PROFESSION`");
+      cmd.append(",`LINK_ID`");
+      cmd.append(",`STATISTICS_ID`");
+      cmd.append(",`MARRY_CD`");
+      cmd.append(",`EDUCATION_CD`");
+      cmd.append(",`INCOME_CD`");
+      cmd.append(",`BUSINESS_CD`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`INVESTMENT_COUNT`");
       cmd.append(",`REDEMPTION_TOTAL`");
@@ -717,20 +721,22 @@ public class FDataFinancialCustomerLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      long memberId = unit.memberId();
-      if(memberId == 0){
+      long linkId = unit.linkId();
+      if(linkId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(memberId);
+         cmd.append(linkId);
       }
       cmd.append(',');
-      cmd.append(unit.marriageStatus());
+      cmd.append(unit.statisticsId());
       cmd.append(',');
-      cmd.append(unit.highestEducation());
+      cmd.append(unit.marryCd());
       cmd.append(',');
-      cmd.append(unit.monthlyIncome());
+      cmd.append(unit.educationCd());
       cmd.append(',');
-      cmd.append(unit.profession());
+      cmd.append(unit.incomeCd());
+      cmd.append(',');
+      cmd.append(unit.businessCd());
       cmd.append(',');
       cmd.append(unit.investmentTotal());
       cmd.append(',');
@@ -826,30 +832,34 @@ public class FDataFinancialCustomerLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isMemberIdChanged()){
-         cmd.append(",`MEMBER_ID`=");
-         long memberId = unit.memberId();
-         if(memberId == 0){
+      if(unit.isLinkIdChanged()){
+         cmd.append(",`LINK_ID`=");
+         long linkId = unit.linkId();
+         if(linkId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(memberId);
+            cmd.append(linkId);
          }
       }
-      if(unit.isMarriageStatusChanged()){
-         cmd.append(",`MARRIAGE_STATUS`=");
-         cmd.append(unit.marriageStatus());
+      if(unit.isStatisticsIdChanged()){
+         cmd.append(",`STATISTICS_ID`=");
+         cmd.append(unit.statisticsId());
       }
-      if(unit.isHighestEducationChanged()){
-         cmd.append(",`HIGHEST_EDUCATION`=");
-         cmd.append(unit.highestEducation());
+      if(unit.isMarryCdChanged()){
+         cmd.append(",`MARRY_CD`=");
+         cmd.append(unit.marryCd());
       }
-      if(unit.isMonthlyIncomeChanged()){
-         cmd.append(",`MONTHLY_INCOME`=");
-         cmd.append(unit.monthlyIncome());
+      if(unit.isEducationCdChanged()){
+         cmd.append(",`EDUCATION_CD`=");
+         cmd.append(unit.educationCd());
       }
-      if(unit.isProfessionChanged()){
-         cmd.append(",`PROFESSION`=");
-         cmd.append(unit.profession());
+      if(unit.isIncomeCdChanged()){
+         cmd.append(",`INCOME_CD`=");
+         cmd.append(unit.incomeCd());
+      }
+      if(unit.isBusinessCdChanged()){
+         cmd.append(",`BUSINESS_CD`=");
+         cmd.append(unit.businessCd());
       }
       if(unit.isInvestmentTotalChanged()){
          cmd.append(",`INVESTMENT_TOTAL`=");

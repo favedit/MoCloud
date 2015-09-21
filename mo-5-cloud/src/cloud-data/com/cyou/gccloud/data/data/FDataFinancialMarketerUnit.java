@@ -51,6 +51,12 @@ public class FDataFinancialMarketerUnit
    // 字段关联编号的定义。
    protected long _linkId;
 
+   // 存储字段统计编号的定义。
+   private long __statisticsId;
+
+   // 字段统计编号的定义。
+   protected long _statisticsId;
+
    // 存储字段名称的定义。
    private String __name;
 
@@ -334,6 +340,33 @@ public class FDataFinancialMarketerUnit
    //============================================================
    public void setLinkId(long value){
       _linkId = value;
+   }
+
+   //============================================================
+   // <T>判断统计编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isStatisticsIdChanged(){
+      return __statisticsId != _statisticsId;
+   }
+
+   //============================================================
+   // <T>获得统计编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long statisticsId(){
+      return _statisticsId;
+   }
+
+   //============================================================
+   // <T>设置统计编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setStatisticsId(long value){
+      _statisticsId = value;
    }
 
    //============================================================
@@ -1003,6 +1036,8 @@ public class FDataFinancialMarketerUnit
             return Long.toString(_userId);
          case "link_id":
             return Long.toString(_linkId);
+         case "statistics_id":
+            return Long.toString(_statisticsId);
          case "name":
             return _name;
          case "label":
@@ -1079,6 +1114,9 @@ public class FDataFinancialMarketerUnit
             break;
          case "link_id":
             _linkId = RLong.parse(value);
+            break;
+         case "statistics_id":
+            _statisticsId = RLong.parse(value);
             break;
          case "name":
             _name = value;
@@ -1186,6 +1224,10 @@ public class FDataFinancialMarketerUnit
             case "link_id":
                __linkId = RLong.parse(value);
                _linkId = __linkId;
+               break;
+            case "statistics_id":
+               __statisticsId = RLong.parse(value);
+               _statisticsId = __statisticsId;
                break;
             case "name":
                __name = value;
@@ -1300,6 +1342,7 @@ public class FDataFinancialMarketerUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("linkId", _linkId);
+      row.set("statisticsId", _statisticsId);
       row.set("name", _name);
       row.set("label", _label);
       row.set("passport", _passport);
@@ -1339,6 +1382,7 @@ public class FDataFinancialMarketerUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("linkId", RLong.toString(_linkId));
+      map.put("statisticsId", RLong.toString(_statisticsId));
       map.put("name", _name);
       map.put("label", _label);
       map.put("passport", _passport);
@@ -1378,6 +1422,7 @@ public class FDataFinancialMarketerUnit
       _guid = input.readString();
       _userId = input.readInt64();
       _linkId = input.readInt64();
+      _statisticsId = input.readInt64();
       _name = input.readString();
       _label = input.readString();
       _passport = input.readString();
@@ -1412,6 +1457,7 @@ public class FDataFinancialMarketerUnit
       output.writeString(_guid);
       output.writeInt64(_userId);
       output.writeInt64(_linkId);
+      output.writeInt64(_statisticsId);
       output.writeString(_name);
       output.writeString(_label);
       output.writeString(_passport);
