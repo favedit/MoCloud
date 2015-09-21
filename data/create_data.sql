@@ -1258,23 +1258,36 @@ CREATE TABLE `DT_FIN_MEMBER`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
    `LINK_ID`                       BIGINT, 
-   `NAME`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(80), 
-   `PHONE`                         VARCHAR(20), 
+   `STATISTICS_ID`                 BIGINT, 
+   `PASSPORT`                      VARCHAR(60), 
+   `LABEL`                         VARCHAR(40), 
    `CARD`                          VARCHAR(20), 
+   `BIRTHDAY`                      DATETIME, 
+   `PHONE`                         VARCHAR(20), 
    `EMAIL`                         VARCHAR(80), 
    `GENDER_CD`                     INTEGER, 
-   `BIRTHDAY`                      DATETIME, 
-   `SCORE_RECOMMEND`               INTEGER, 
-   `SCORE_POINT`                   INTEGER, 
+   `MARRY_CD`                      INTEGER, 
+   `EDUCATION_CD`                  INTEGER, 
+   `BUSINESS_CD`                   INTEGER, 
+   `INCOME_CD`                     INTEGER, 
+   `PROVINCE_AREA_ID`              BIGINT, 
+   `PROVINCE_ID`                   BIGINT, 
+   `CITY_ID`                       BIGINT, 
+   `AREA_ID`                       BIGINT, 
+   `ADDRESS`                       VARCHAR(200), 
    `REGISTER_DATE`                 DATETIME, 
    `LAST_LOGIN_DATE`               DATETIME, 
+   `RECOMMEND_MARKETER_ID`         BIGINT, 
+   `RECOMMEND_MARKETER_USER_ID`    BIGINT, 
+   `RECOMMEND_BEGIN_DATE`          DATETIME, 
+   `RECOMMEND_END_DATE`            DATETIME, 
+   `RECOMMEND_SCORE`               INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_MEMBER 
    ADD CONSTRAINT DT_FIN_MBR_UK_GID UNIQUE ( GUID ); 
@@ -1288,11 +1301,12 @@ CREATE TABLE `DT_FIN_CUSTOMER`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
-   `MEMBER_ID`                     BIGINT, 
-   `MARRIAGE_STATUS`               INTEGER, 
-   `HIGHEST_EDUCATION`             INTEGER, 
-   `MONTHLY_INCOME`                INTEGER, 
-   `PROFESSION`                    INTEGER, 
+   `LINK_ID`                       BIGINT, 
+   `STATISTICS_ID`                 INTEGER, 
+   `MARRY_CD`                      INTEGER, 
+   `EDUCATION_CD`                  INTEGER, 
+   `INCOME_CD`                     INTEGER, 
+   `BUSINESS_CD`                   INTEGER, 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `INVESTMENT_COUNT`              INTEGER, 
    `REDEMPTION_TOTAL`              FLOAT, 
@@ -1304,13 +1318,10 @@ CREATE TABLE `DT_FIN_CUSTOMER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_CUSTOMER 
    ADD CONSTRAINT DT_FIN_CST_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_FIN_CUSTOMER ADD CONSTRAINT DT_FIN_CST_FK_MEMBER 
-      FOREIGN KEY (`MEMBER_ID`) REFERENCES DT_FIN_MEMBER(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Tender]
@@ -1343,14 +1354,15 @@ ALTER TABLE DT_FIN_TENDER
 -- Create table [Data.Financial.Marketer]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_FIN_MARKETER`;
-CREATE TABLE `DT_FIN_MARKETER` 
+ CREATE TABLE `DT_FIN_MARKETER` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `USER_ID`                       BIGINT, 
    `LINK_ID`                       BIGINT, 
-   `NAME`                          VARCHAR(40), 
+   `STATISTICS_ID`                 BIGINT, 
+   `NAME`                          VARCHAR(80), 
    `LABEL`                         VARCHAR(40), 
    `PASSPORT`                      VARCHAR(60), 
    `STATUS_CD`                     INTEGER, 
@@ -1374,7 +1386,7 @@ CREATE TABLE `DT_FIN_MARKETER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_MARKETER 
    ADD CONSTRAINT DT_FIN_MKT_UK_GID UNIQUE ( GUID ); 
@@ -1401,7 +1413,7 @@ CREATE TABLE `DT_FIN_MARKETER_MEMBER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_MARKETER_MEMBER 
    ADD CONSTRAINT DT_FIN_MKT_MEM_UK_GID UNIQUE ( GUID ); 
