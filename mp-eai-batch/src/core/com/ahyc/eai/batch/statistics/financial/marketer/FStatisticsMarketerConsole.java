@@ -7,6 +7,7 @@ import com.ahyc.eai.batch.statistics.financial.department.SDepartmentInfo;
 import com.ahyc.eai.batch.statistics.financial.member.IStatisticsMemberConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -92,6 +93,7 @@ public class FStatisticsMarketerConsole
       }
       // 新建单元
       unit = logic.doPrepare();
+      unit.setOuid(memberUnit.ouid());
       unit.setLinkId(linkId);
       unit.linkDate().parse(row.get("upd_time"));
       unit.setCode(row.get("code"));
@@ -102,6 +104,7 @@ public class FStatisticsMarketerConsole
       unit.setStatusCd(row.getInt("status"));
       unit.enterDate().parse(row.get("add_date"));
       // 获得部门标签
+      long departmentId = 0;
       long belongDepartmentId = row.getLong("belong_dept");
       unit.setDepartmentLinkId(belongDepartmentId);
       if(belongDepartmentId > 0){
@@ -115,7 +118,7 @@ public class FStatisticsMarketerConsole
       if(departmentRow != null){
          // 设置级别
          unit.setRankLabel(departmentRow.get("rank"));
-         long departmentId = departmentRow.getLong("dept_id");
+         departmentId = departmentRow.getLong("dept_id");
          // 设置相关信息
          FStatisticsDepartmentInfo info = _departmentConsole.findInfo(logicContext, departmentId);
          if(info != null){
@@ -168,6 +171,14 @@ public class FStatisticsMarketerConsole
       }
       // 新建记录
       logic.doInsert(unit);
+      //............................................................
+      // 更新用户信息
+      if(memberUnit.marketerId() == 0){
+         memberUnit.setMarketerId(unit.ouid());
+         memberUnit.setDepartmentId(departmentId);
+         FStatisticsFinancialMemberLogic memberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
+         memberLogic.doUpdate(memberUnit);
+      }
       return unit;
    }
 

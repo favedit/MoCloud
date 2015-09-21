@@ -4,6 +4,7 @@ import com.ahyc.eai.batch.common.FStatisticsPeriodCalculater;
 import com.ahyc.eai.batch.statistics.financial.customer.IStatisticsCustomerConsole;
 import com.ahyc.eai.batch.statistics.financial.department.IStatisticsDepartmentConsole;
 import com.ahyc.eai.batch.statistics.financial.marketer.IStatisticsMarketerConsole;
+import com.ahyc.eai.batch.statistics.financial.member.IStatisticsMemberConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialAmountLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialAmountUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
@@ -14,6 +15,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
@@ -33,6 +35,9 @@ public class FStatisticsDynamicCalculater
    // 合计间隔(1小时)
    protected long _recordSpan = 1000 * 60 * 10;
 
+   // 成员控制台接口
+   protected IStatisticsMemberConsole _memberConsole;
+
    // 客户控制台接口
    protected IStatisticsCustomerConsole _customerConsole;
 
@@ -49,6 +54,7 @@ public class FStatisticsDynamicCalculater
       _processCode = "financial.dynamic";
       _periodField = "CUSTOMER_ACTION_DATE";
       _periodTable = "ST_FIN_DYNAMIC";
+      _memberConsole = RAop.find(IStatisticsMemberConsole.class);
       _customerConsole = RAop.find(IStatisticsCustomerConsole.class);
       _marketerConsole = RAop.find(IStatisticsMarketerConsole.class);
       _departmentConsole = RAop.find(IStatisticsDepartmentConsole.class);
@@ -82,6 +88,18 @@ public class FStatisticsDynamicCalculater
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
          double customerActionAmount = dynamicUnit.customerActionAmount();
          double customerActionInterest = dynamicUnit.customerActionInterest();
+         //............................................................
+         // 统计成员信息
+         if(customerId > 0){
+            FStatisticsFinancialMemberUnit memberUnit = _memberConsole.syncByLinkId(logicContext, dynamicUnit.customerLinkId());
+            if(memberUnit.investmentDate().isEmpty()){
+               if(customerActionCd == EGcFinancialCustomerAction.Investment){
+                  // 设置投资时间
+                  memberUnit.investmentDate().assign(customerActionDate);
+                  customerLogic.doUpdate(memberUnit);
+               }
+            }
+         }
          //............................................................
          // 统计客户信息
          boolean customerExist = false;
@@ -246,11 +264,11 @@ public class FStatisticsDynamicCalculater
             phaseUnit.recordHour().parse(spanDate.format("YYYYMMDDHH240000"));
             phaseUnit.recordDate().assign(spanDate);
             // 获得用户注册数
-            //int memberCount = calculateMemberCount(sourceConnection, beginDate, endDate);
-            //phaseUnit.setMemberCount(memberCount);
+            // int memberCount = calculateMemberCount(sourceConnection, beginDate, endDate);
+            // phaseUnit.setMemberCount(memberCount);
             // 获得用户总数
-            //int memberTotal = calculateMemberTotal(sourceConnection, beginDate, endDate);
-            //phaseUnit.setMemberTotal(memberTotal);
+            // int memberTotal = calculateMemberTotal(sourceConnection, beginDate, endDate);
+            // phaseUnit.setMemberTotal(memberTotal);
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());

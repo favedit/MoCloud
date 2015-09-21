@@ -62,6 +62,30 @@ public class FStatisticsFinancialMemberUnit
    // 字段数据编号的定义。
    protected long _dataId;
 
+   // 存储字段客户编号的定义。
+   private long __customerId;
+
+   // 字段客户编号的定义。
+   protected long _customerId;
+
+   // 存储字段客户级别的定义。
+   private int __customerLevelCd;
+
+   // 字段客户级别的定义。
+   protected int _customerLevelCd;
+
+   // 存储字段理财师编号的定义。
+   private long __marketerId;
+
+   // 字段理财师编号的定义。
+   protected long _marketerId;
+
+   // 存储字段部门编号的定义。
+   private long __departmentId;
+
+   // 字段部门编号的定义。
+   protected long _departmentId;
+
    // 存储字段账号的定义。
    private String __passport;
 
@@ -211,6 +235,18 @@ public class FStatisticsFinancialMemberUnit
 
    // 字段注册时间的定义。
    protected TDateTime _registerDate = new TDateTime();
+
+   // 存储字段投资时间的定义。
+   private TDateTime __investmentDate = new TDateTime();
+
+   // 字段投资时间的定义。
+   protected TDateTime _investmentDate = new TDateTime();
+
+   // 存储字段登录时间的定义。
+   private TDateTime __lastLoginDate = new TDateTime();
+
+   // 字段登录时间的定义。
+   protected TDateTime _lastLoginDate = new TDateTime();
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -429,6 +465,114 @@ public class FStatisticsFinancialMemberUnit
    //============================================================
    public void setDataId(long value){
       _dataId = value;
+   }
+
+   //============================================================
+   // <T>判断客户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerIdChanged(){
+      return __customerId != _customerId;
+   }
+
+   //============================================================
+   // <T>获得客户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long customerId(){
+      return _customerId;
+   }
+
+   //============================================================
+   // <T>设置客户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerId(long value){
+      _customerId = value;
+   }
+
+   //============================================================
+   // <T>判断客户级别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerLevelCdChanged(){
+      return __customerLevelCd != _customerLevelCd;
+   }
+
+   //============================================================
+   // <T>获得客户级别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int customerLevelCd(){
+      return _customerLevelCd;
+   }
+
+   //============================================================
+   // <T>设置客户级别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerLevelCd(int value){
+      _customerLevelCd = value;
+   }
+
+   //============================================================
+   // <T>判断理财师编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerIdChanged(){
+      return __marketerId != _marketerId;
+   }
+
+   //============================================================
+   // <T>获得理财师编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerId(){
+      return _marketerId;
+   }
+
+   //============================================================
+   // <T>设置理财师编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerId(long value){
+      _marketerId = value;
+   }
+
+   //============================================================
+   // <T>判断部门编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
+   }
+
+   //============================================================
+   // <T>获得部门编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentId(){
+      return _departmentId;
+   }
+
+   //============================================================
+   // <T>设置部门编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentId(long value){
+      _departmentId = value;
    }
 
    //============================================================
@@ -1107,6 +1251,60 @@ public class FStatisticsFinancialMemberUnit
    }
 
    //============================================================
+   // <T>判断投资时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentDateChanged(){
+      return !__investmentDate.equals(_investmentDate);
+   }
+
+   //============================================================
+   // <T>获得投资时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime investmentDate(){
+      return _investmentDate;
+   }
+
+   //============================================================
+   // <T>设置投资时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentDate(TDateTime value){
+      _investmentDate = value;
+   }
+
+   //============================================================
+   // <T>判断登录时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLastLoginDateChanged(){
+      return !__lastLoginDate.equals(_lastLoginDate);
+   }
+
+   //============================================================
+   // <T>获得登录时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime lastLoginDate(){
+      return _lastLoginDate;
+   }
+
+   //============================================================
+   // <T>设置登录时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLastLoginDate(TDateTime value){
+      _lastLoginDate = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1237,6 +1435,14 @@ public class FStatisticsFinancialMemberUnit
             return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
+         case "customer_id":
+            return Long.toString(_customerId);
+         case "customer_level_cd":
+            return RInteger.toString(_customerLevelCd);
+         case "marketer_id":
+            return Long.toString(_marketerId);
+         case "department_id":
+            return Long.toString(_departmentId);
          case "passport":
             return _passport;
          case "label":
@@ -1287,6 +1493,10 @@ public class FStatisticsFinancialMemberUnit
             return _info;
          case "register_date":
             return _registerDate.toString();
+         case "investment_date":
+            return _investmentDate.toString();
+         case "last_login_date":
+            return _lastLoginDate.toString();
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -1329,6 +1539,18 @@ public class FStatisticsFinancialMemberUnit
             break;
          case "data_id":
             _dataId = RLong.parse(value);
+            break;
+         case "customer_id":
+            _customerId = RLong.parse(value);
+            break;
+         case "customer_level_cd":
+            _customerLevelCd = RInteger.parse(value);
+            break;
+         case "marketer_id":
+            _marketerId = RLong.parse(value);
+            break;
+         case "department_id":
+            _departmentId = RLong.parse(value);
             break;
          case "passport":
             _passport = value;
@@ -1405,6 +1627,12 @@ public class FStatisticsFinancialMemberUnit
          case "register_date":
             _registerDate.parse(value);
             break;
+         case "investment_date":
+            _investmentDate.parse(value);
+            break;
+         case "last_login_date":
+            _lastLoginDate.parse(value);
+            break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
             break;
@@ -1459,6 +1687,22 @@ public class FStatisticsFinancialMemberUnit
             case "data_id":
                __dataId = RLong.parse(value);
                _dataId = __dataId;
+               break;
+            case "customer_id":
+               __customerId = RLong.parse(value);
+               _customerId = __customerId;
+               break;
+            case "customer_level_cd":
+               __customerLevelCd = RInteger.parse(value);
+               _customerLevelCd = __customerLevelCd;
+               break;
+            case "marketer_id":
+               __marketerId = RLong.parse(value);
+               _marketerId = __marketerId;
+               break;
+            case "department_id":
+               __departmentId = RLong.parse(value);
+               _departmentId = __departmentId;
                break;
             case "passport":
                __passport = value;
@@ -1560,6 +1804,14 @@ public class FStatisticsFinancialMemberUnit
                __registerDate.parse(value);
                _registerDate.assign(__registerDate);
                break;
+            case "investment_date":
+               __investmentDate.parse(value);
+               _investmentDate.assign(__investmentDate);
+               break;
+            case "last_login_date":
+               __lastLoginDate.parse(value);
+               _lastLoginDate.assign(__lastLoginDate);
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -1595,6 +1847,10 @@ public class FStatisticsFinancialMemberUnit
       row.set("linkDate", _linkDate);
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
+      row.set("customerId", _customerId);
+      row.set("customerLevelCd", _customerLevelCd);
+      row.set("marketerId", _marketerId);
+      row.set("departmentId", _departmentId);
       row.set("passport", _passport);
       row.set("label", _label);
       row.set("card", _card);
@@ -1620,6 +1876,8 @@ public class FStatisticsFinancialMemberUnit
       row.set("address", _address);
       row.set("info", _info);
       row.set("registerDate", _registerDate);
+      row.set("investmentDate", _investmentDate);
+      row.set("lastLoginDate", _lastLoginDate);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1641,6 +1899,10 @@ public class FStatisticsFinancialMemberUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
+      map.put("customerId", RLong.toString(_customerId));
+      map.put("customerLevelCd", RInteger.toString(_customerLevelCd));
+      map.put("marketerId", RLong.toString(_marketerId));
+      map.put("departmentId", RLong.toString(_departmentId));
       map.put("passport", _passport);
       map.put("label", _label);
       map.put("card", _card);
@@ -1666,6 +1928,8 @@ public class FStatisticsFinancialMemberUnit
       map.put("address", _address);
       map.put("info", _info);
       map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("investmentDate", _investmentDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("lastLoginDate", _lastLoginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -1687,6 +1951,10 @@ public class FStatisticsFinancialMemberUnit
       _linkDate.set(input.readInt64());
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
+      _customerId = input.readInt64();
+      _customerLevelCd = input.readInt32();
+      _marketerId = input.readInt64();
+      _departmentId = input.readInt64();
       _passport = input.readString();
       _label = input.readString();
       _card = input.readString();
@@ -1712,6 +1980,8 @@ public class FStatisticsFinancialMemberUnit
       _address = input.readString();
       _info = input.readString();
       _registerDate.set(input.readInt64());
+      _investmentDate.set(input.readInt64());
+      _lastLoginDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -1733,6 +2003,10 @@ public class FStatisticsFinancialMemberUnit
       output.writeInt64(_linkDate.get());
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
+      output.writeInt64(_customerId);
+      output.writeInt32(_customerLevelCd);
+      output.writeInt64(_marketerId);
+      output.writeInt64(_departmentId);
       output.writeString(_passport);
       output.writeString(_label);
       output.writeString(_card);
@@ -1758,6 +2032,8 @@ public class FStatisticsFinancialMemberUnit
       output.writeString(_address);
       output.writeString(_info);
       output.writeInt64(_registerDate.get());
+      output.writeInt64(_investmentDate.get());
+      output.writeInt64(_lastLoginDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

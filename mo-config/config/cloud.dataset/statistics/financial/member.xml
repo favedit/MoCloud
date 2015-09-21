@@ -4,6 +4,10 @@
   <FieldDateTime _uuid="3863ca58-1a39-40bc-834d-d22eccf1212f" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldInteger _uuid="a1bff263-944a-4453-9e0a-18498918e33e" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
   <FieldRecordId _uuid="24fee175-b568-459b-ad29-7051959af6d1" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
+  <FieldRecordId _uuid="c5d69cd5-8670-444b-899e-62766ed4bf0a" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" />
+  <FieldInteger _uuid="d1d6f396-0b28-4532-bd94-50709d0a2428" name="customer_level_cd" label="M#12cn14客户级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LEVEL_CD" />
+  <FieldRecordId _uuid="23940f6e-a52e-4161-8bf7-99cf8fc07380" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
+  <FieldRecordId _uuid="c9a19c42-17d3-40a6-82b8-88394b9892a0" name="department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_ID" />
   <FieldString _uuid="48e530fe-ab83-4fcd-a7b3-b8267f836eb8" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
   <FieldString _uuid="f04e3302-dc48-4055-a196-7f1c99bb2bda" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="60" />
   <FieldString _uuid="c0d8d097-2813-4548-93ee-96f54ebb0690" name="card" label="M#12cn13身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
@@ -29,5 +33,7 @@
   <FieldString _uuid="8463684e-d8e3-485f-9a0c-2521953580b6" name="address" label="M#12cn12地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ADDRESS" data_size="200" />
   <FieldString _uuid="0d937a92-5c8a-4954-a763-7fcd8bf69078" name="info" label="M#12cn12信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INFO" data_size="800" />
   <FieldDateTime _uuid="0da1a445-2b95-46c9-9d8d-90d13c80a37d" name="register_date" label="M#12cn14注册时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_DATE" />
+  <FieldDateTime _uuid="0d13e4df-42a9-40a7-af7e-99b2c102b4ea" name="investment_date" label="M#12cn14投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_DATE" />
+  <FieldDateTime _uuid="c10bd1ba-48a1-4d5c-94f1-4b1883fa1942" name="last_login_date" label="M#12cn14登录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LAST_LOGIN_DATE" />
   <FieldTemplate _uuid="5682ca47-5f52-4c99-bce2-539c4ea5edf5" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

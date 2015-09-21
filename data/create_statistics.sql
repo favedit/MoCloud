@@ -130,6 +130,10 @@ CREATE TABLE `ST_FIN_MEMBER`
    `LINK_DATE`                     DATETIME, 
    `LINK_CD`                       INTEGER, 
    `DATA_ID`                       BIGINT, 
+   `CUSTOMER_ID`                   BIGINT, 
+   `CUSTOMER_LEVEL_CD`             INTEGER, 
+   `MARKETER_ID`                   BIGINT, 
+   `DEPARTMENT_ID`                 BIGINT, 
    `PASSPORT`                      VARCHAR(60), 
    `LABEL`                         VARCHAR(60), 
    `CARD`                          VARCHAR(20), 
@@ -155,6 +159,8 @@ CREATE TABLE `ST_FIN_MEMBER`
    `ADDRESS`                       VARCHAR(200), 
    `INFO`                          VARCHAR(800), 
    `REGISTER_DATE`                 DATETIME, 
+   `INVESTMENT_DATE`               DATETIME, 
+   `LAST_LOGIN_DATE`               DATETIME, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -166,9 +172,6 @@ ALTER TABLE ST_FIN_MEMBER
 
 ALTER TABLE ST_FIN_MEMBER 
    ADD CONSTRAINT ST_FIN_MEM_UK_LINK_ID UNIQUE ( LINK_ID ); 
-
-ALTER TABLE ST_FIN_MEMBER
-   ADD INDEX ST_FIN_MEM_DX_REG_DAT(REGISTER_DATE);
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Customer]

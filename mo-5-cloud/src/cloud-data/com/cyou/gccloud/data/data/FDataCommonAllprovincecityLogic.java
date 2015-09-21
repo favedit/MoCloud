@@ -648,6 +648,7 @@ public class FDataCommonAllprovincecityLogic
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
       FDataCommonAllprovincecityUnit unit = (FDataCommonAllprovincecityUnit)logicUnit;
+      long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -662,6 +663,9 @@ public class FDataCommonAllprovincecityLogic
       FSql cmd = new FSql("INSERT INTO ");
       cmd.append(_name);
       cmd.append("(");
+      if(ouid > 0){
+         cmd.append("`OUID`,");
+      }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`NO`");
@@ -675,6 +679,10 @@ public class FDataCommonAllprovincecityLogic
       cmd.append(",`UPDATE_USER_ID`");
       cmd.append(",`UPDATE_DATE`");
       cmd.append(") VALUES(");
+      if(ouid > 0){
+         cmd.appendLong(ouid);
+         cmd.append(',');
+      }
       cmd.append(unit.ovld());
       String guid = unit.guid();
       if(RString.isEmpty(guid)){

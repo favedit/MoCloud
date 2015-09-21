@@ -560,6 +560,7 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
       <jt:item source='$dataset.source_class_name'/>Unit unit = (<jt:item source='$dataset.source_class_name'/>Unit)logicUnit;
+      long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0)|| (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -574,6 +575,9 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
       FSql cmd = new FSql("INSERT INTO ");
       cmd.append(_name);
       cmd.append("(");
+      if(ouid > 0){
+         cmd.append("`OUID`,");
+      }
       cmd.append("`OVLD`");
 <jt:loop source='$fields' alias='field'>
 <jt:notEquals source='$field.data_name' value='OUID|OVLD'>
@@ -581,6 +585,10 @@ public class <jt:item source='$dataset.source_class_name'/>Logic extends FLogicT
 </jt:notEquals>
 </jt:loop>
       cmd.append(") VALUES(");
+      if(ouid > 0){
+         cmd.appendLong(ouid);
+         cmd.append(',');
+      }
       cmd.append(unit.ovld());
 <jt:loop source='$fields' alias='field'>
 <jt:equals source='$field.data_name' value='GUID'>

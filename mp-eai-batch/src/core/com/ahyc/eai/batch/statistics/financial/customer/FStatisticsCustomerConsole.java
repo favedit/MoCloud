@@ -4,6 +4,7 @@ import com.ahyc.eai.batch.common.FStatisticsPoolConsole;
 import com.ahyc.eai.batch.statistics.financial.member.IStatisticsMemberConsole;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
@@ -61,12 +62,20 @@ public class FStatisticsCustomerConsole
       //............................................................
       // 新建单元
       unit = logic.doPrepare();
+      unit.setOuid(memberUnit.ouid());
       unit.setLinkId(linkId);
       unit.linkDate().assign(memberUnit.updateDate());
       unit.setLabel(memberUnit.label());
       unit.setPhone(memberUnit.phone());
       unit.setCard(memberUnit.card());
       logic.doInsert(unit);
+      //............................................................
+      // 更新用户信息
+      if(memberUnit.customerId() == 0){
+         memberUnit.setCustomerId(unit.ouid());
+         FStatisticsFinancialMemberLogic memberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
+         memberLogic.doUpdate(memberUnit);
+      }
       return unit;
    }
 

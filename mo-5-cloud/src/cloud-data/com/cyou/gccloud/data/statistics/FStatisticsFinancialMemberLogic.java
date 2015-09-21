@@ -54,6 +54,18 @@ public class FStatisticsFinancialMemberLogic
    // 字段数据编号的定义。
    public final static SLogicFieldInfo DATA_ID = new SLogicFieldInfo("DATA_ID");
 
+   // 字段客户编号的定义。
+   public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
+
+   // 字段客户级别的定义。
+   public final static SLogicFieldInfo CUSTOMER_LEVEL_CD = new SLogicFieldInfo("CUSTOMER_LEVEL_CD");
+
+   // 字段理财师编号的定义。
+   public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
+
+   // 字段部门编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
+
    // 字段账号的定义。
    public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
 
@@ -129,6 +141,12 @@ public class FStatisticsFinancialMemberLogic
    // 字段注册时间的定义。
    public final static SLogicFieldInfo REGISTER_DATE = new SLogicFieldInfo("REGISTER_DATE");
 
+   // 字段投资时间的定义。
+   public final static SLogicFieldInfo INVESTMENT_DATE = new SLogicFieldInfo("INVESTMENT_DATE");
+
+   // 字段登录时间的定义。
+   public final static SLogicFieldInfo LAST_LOGIN_DATE = new SLogicFieldInfo("LAST_LOGIN_DATE");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -142,7 +160,7 @@ public class FStatisticsFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`PASSPORT`,`LABEL`,`CARD`,`PHONE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`DEPARTMENT_ID`,`PASSPORT`,`LABEL`,`CARD`,`PHONE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户统计表逻辑单元。</T>
@@ -718,6 +736,7 @@ public class FStatisticsFinancialMemberLogic
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
       FStatisticsFinancialMemberUnit unit = (FStatisticsFinancialMemberUnit)logicUnit;
+      long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
@@ -732,12 +751,19 @@ public class FStatisticsFinancialMemberLogic
       FSql cmd = new FSql("INSERT INTO ");
       cmd.append(_name);
       cmd.append("(");
+      if(ouid > 0){
+         cmd.append("`OUID`,");
+      }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`LINK_DATE`");
       cmd.append(",`LINK_CD`");
       cmd.append(",`DATA_ID`");
+      cmd.append(",`CUSTOMER_ID`");
+      cmd.append(",`CUSTOMER_LEVEL_CD`");
+      cmd.append(",`MARKETER_ID`");
+      cmd.append(",`DEPARTMENT_ID`");
       cmd.append(",`PASSPORT`");
       cmd.append(",`LABEL`");
       cmd.append(",`CARD`");
@@ -763,11 +789,17 @@ public class FStatisticsFinancialMemberLogic
       cmd.append(",`ADDRESS`");
       cmd.append(",`INFO`");
       cmd.append(",`REGISTER_DATE`");
+      cmd.append(",`INVESTMENT_DATE`");
+      cmd.append(",`LAST_LOGIN_DATE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
       cmd.append(",`UPDATE_DATE`");
       cmd.append(") VALUES(");
+      if(ouid > 0){
+         cmd.appendLong(ouid);
+         cmd.append(',');
+      }
       cmd.append(unit.ovld());
       String guid = unit.guid();
       if(RString.isEmpty(guid)){
@@ -803,6 +835,29 @@ public class FStatisticsFinancialMemberLogic
          cmd.append("NULL");
       }else{
          cmd.append(dataId);
+      }
+      cmd.append(',');
+      long customerId = unit.customerId();
+      if(customerId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(customerId);
+      }
+      cmd.append(',');
+      cmd.append(unit.customerLevelCd());
+      cmd.append(',');
+      long marketerId = unit.marketerId();
+      if(marketerId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(marketerId);
+      }
+      cmd.append(',');
+      long departmentId = unit.departmentId();
+      if(departmentId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentId);
       }
       cmd.append(',');
       String passport = unit.passport();
@@ -967,6 +1022,28 @@ public class FStatisticsFinancialMemberLogic
          cmd.append(registerDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
+      cmd.append(',');
+      TDateTime investmentDate = unit.investmentDate();
+      if(investmentDate == null){
+         cmd.append("NULL");
+      }else if(investmentDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(investmentDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime lastLoginDate = unit.lastLoginDate();
+      if(lastLoginDate == null){
+         cmd.append("NULL");
+      }else if(lastLoginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(lastLoginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -1074,6 +1151,37 @@ public class FStatisticsFinancialMemberLogic
             cmd.append("NULL");
          }else{
             cmd.append(dataId);
+         }
+      }
+      if(unit.isCustomerIdChanged()){
+         cmd.append(",`CUSTOMER_ID`=");
+         long customerId = unit.customerId();
+         if(customerId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(customerId);
+         }
+      }
+      if(unit.isCustomerLevelCdChanged()){
+         cmd.append(",`CUSTOMER_LEVEL_CD`=");
+         cmd.append(unit.customerLevelCd());
+      }
+      if(unit.isMarketerIdChanged()){
+         cmd.append(",`MARKETER_ID`=");
+         long marketerId = unit.marketerId();
+         if(marketerId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(marketerId);
+         }
+      }
+      if(unit.isDepartmentIdChanged()){
+         cmd.append(",`DEPARTMENT_ID`=");
+         long departmentId = unit.departmentId();
+         if(departmentId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentId);
          }
       }
       if(unit.isPassportChanged()){
@@ -1286,6 +1394,32 @@ public class FStatisticsFinancialMemberLogic
          }else{
             cmd.append("STR_TO_DATE('");
             cmd.append(registerDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isInvestmentDateChanged()){
+         cmd.append(",`INVESTMENT_DATE`=");
+         TDateTime investmentDate = unit.investmentDate();
+         if(investmentDate == null){
+            cmd.append("NULL");
+         }else if(investmentDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(investmentDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isLastLoginDateChanged()){
+         cmd.append(",`LAST_LOGIN_DATE`=");
+         TDateTime lastLoginDate = unit.lastLoginDate();
+         if(lastLoginDate == null){
+            cmd.append("NULL");
+         }else if(lastLoginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(lastLoginDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }

@@ -8,6 +8,7 @@ SELECT
    user_phone,
    user_email,
    FROM_UNIXTIME(`reg_time`, '%Y%m%d%H%i%s') AS register_date,
+   FROM_UNIXTIME(`last_log_time`, '%Y%m%d%H%i%s') AS last_login_date,
    upd_time
 FROM lzh_members
 WHERE id={id}

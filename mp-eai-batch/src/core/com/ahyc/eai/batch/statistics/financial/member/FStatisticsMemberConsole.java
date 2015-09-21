@@ -39,19 +39,19 @@ public class FStatisticsMemberConsole
    public FStatisticsFinancialMemberUnit syncByLinkId(FLogicContext logicContext,
                                                       long linkId){
       // 检查参数
-      if(linkId == 0) {
+      if(linkId == 0){
          return null;
       }
       // 查找单元
       String code = Long.toString(linkId);
       FStatisticsFinancialMemberUnit unit = _pool.find(code);
-      if(unit != null) {
+      if(unit != null){
          return unit;
       }
       // 查找单元
       FStatisticsFinancialMemberLogic logic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
       unit = logic.search("LINK_ID=" + linkId);
-      if(unit != null) {
+      if(unit != null){
          return unit;
       }
       //............................................................
@@ -60,7 +60,7 @@ public class FStatisticsMemberConsole
       FSql sql = _resource.findString(FSql.class, "sql.member");
       sql.bindLong("id", linkId);
       FRow row = connection.find(sql);
-      if(row == null) {
+      if(row == null){
          return null;
       }
       FSql infoSql = _resource.findString(FSql.class, "sql.member.info");
@@ -74,7 +74,8 @@ public class FStatisticsMemberConsole
       unit.setPhone(row.get("user_phone"));
       unit.setEmail(row.get("user_email"));
       unit.registerDate().parse(row.get("register_date"));
-      if(infoRow != null) {
+      unit.lastLoginDate().parse(row.get("last_login_date"));
+      if(infoRow != null){
          unit.setLabel(infoRow.get("real_name"));
          unit.setCard(infoRow.get("idcard"));
          unit.setGenderCode(infoRow.get("sex"));
@@ -106,14 +107,14 @@ public class FStatisticsMemberConsole
       // 查找单元
       FStatisticsFinancialMemberLogic logic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
       FStatisticsFinancialMemberUnit unit = logic.search("LINK_ID=" + linkId);
-      if(unit == null) {
+      if(unit == null){
          return null;
       }
       // 设置基本信息
       FSql sql = _resource.findString(FSql.class, "sql.member");
       sql.bindLong("id", linkId);
       FRow row = connection.find(sql);
-      if(row != null) {
+      if(row != null){
          unit.setPhone(row.get("user_phone"));
          unit.setEmail(row.get("user_email"));
          unit.registerDate().parse(row.get("register_date"));
@@ -122,7 +123,7 @@ public class FStatisticsMemberConsole
       FSql infoSql = _resource.findString(FSql.class, "sql.member.info");
       infoSql.bindLong("id", linkId);
       FRow infoRow = connection.find(infoSql);
-      if(infoRow != null) {
+      if(infoRow != null){
          unit.setLabel(infoRow.get("real_name"));
          unit.setCard(infoRow.get("idcard"));
          unit.setGenderCode(infoRow.get("sex"));
