@@ -41,8 +41,7 @@
                            </li>
                            <li>
                               <a class="pic" href="#"><img src="images/main/6.png"></a>
-                           </li>
-                         
+                           </li>                         
                         </ul>
                      </div>
                      <div class="hd">

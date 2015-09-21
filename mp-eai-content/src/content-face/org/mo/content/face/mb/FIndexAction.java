@@ -125,7 +125,7 @@ public class FIndexAction
             //插入用户，权限绑定
             page.setUserType("host");
             String changePass = "white-host:" + hostAddress;
-            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, 0, 0, EGcPersonUserFrom.EaiHost);
             basePage.setUrl("Main.wa");
             return "/apl/Redirector";
          }
@@ -152,6 +152,8 @@ public class FIndexAction
       String passport = RString.trimRight(page.passport());
       String password = page.password();
       String cookie = context.parameter("saveCookie");
+      double longitude = context.parameterAsDouble("location_x");
+      double latitude = context.parameterAsDouble("location_y");
       _logger.debug(this, "Index", "Index login.(passport={1},password={2})", passport, password);
       // 登录处理
       String message = null;
@@ -204,7 +206,7 @@ public class FIndexAction
       }
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         userId = synchronizeData(logicContext, sessionContext, page, changePass, passport, from);
+         userId = synchronizeData(logicContext, sessionContext, page, changePass, passport, longitude, latitude, from);
       }
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
@@ -213,6 +215,8 @@ public class FIndexAction
       logger.setPassport(RString.left(passport, 40));
       logger.setPassword(RString.left(password, 40));
       logger.setBrowserUri(context.requestUrl());
+      logger.setLocationLongitude(longitude);
+      logger.setLocationLatitude(latitude);
       logger.setPageInfo(context.parameters().dump());
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
       // 画面跳转
@@ -266,10 +270,14 @@ public class FIndexAction
                                 FIndexPage page,
                                 String passport,
                                 String label,
+                                double x,
+                                double y,
                                 int from){
       _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
+      session.setLocationLongitude(x);
+      session.setLocationLatitude(y);
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
       long userId = 0;
       if(user == null){

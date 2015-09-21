@@ -19,7 +19,6 @@
                <td height="120" align="center" valign="center">
                   <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
                   <img class="logo" src="images/login/6.png">
-                  <span id="errors" style="position: absolute; color:#fff; top:50px;left:0px;text-align: left"></span>
                </td>
             </tr>
             <tr>
@@ -37,6 +36,8 @@
                                  </p>
                                  <span class="details"><input id="saveCookie" name="saveCookie" type="checkbox">记住用户名</span>
                                  <span class="btn-container"><input input id="btn" type="submit"  value=""></span>
+                                 <input id="location_x" name="location_x" style="display:none">
+                                 <input id="location_y" name="location_y" style="display:none">
                               </ul>
                            </div>
                         </div>
@@ -87,7 +88,6 @@
             }
          }
 
-         var x=document.getElementById("errors");
          var geo = window.navigator.geolocation;
          (function(d) {
             var tip = null,
@@ -97,13 +97,14 @@
             do_hanlder.successs = function(p) {
                tip = d.getElementById("errors");
                var resulte = p.coords;
+               d.getElementById("location_x").value = resulte.longitude;
+               d.getElementById("location_y").value = resulte.latitude;               
                   // url = "{{$HOST_DISEASE_WAP}}/hospitals/nearby?diseid=51&lon=" + resulte.longitude + "&lat=" + resulte.latitude;
                tip.innerHTML = "您的地理坐标,经度：" + resulte.longitude + "，纬度：" + resulte.latitude;
                // location.assign(url);
             };
 
             do_hanlder.error = function(error) {
-
                tip = d.getElementById("errors");
                switch (error.code) {
                   case 1:

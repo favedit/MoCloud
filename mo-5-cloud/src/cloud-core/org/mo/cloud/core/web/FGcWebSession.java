@@ -1,8 +1,7 @@
 package org.mo.cloud.core.web;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
-
 import org.mo.cloud.logic.data.person.FGcUserInfo;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.web.core.session.FWebSession;
 
 //============================================================
@@ -28,6 +27,48 @@ public class FGcWebSession
 
    // 会话信息
    protected FGcSessionInfo _sessionInfo;
+
+   // 用户登录x坐标
+   protected double _locationLongitude;
+
+   // 用户登录y坐标
+   protected double _locationLatitude;
+
+   //============================================================
+   // <T>登录x坐标。</T>
+   //
+   // @return 登录x坐标
+   //============================================================
+   public double locationLongitude(){
+      return _locationLongitude;
+   }
+
+   //============================================================
+   // <T>登录x坐标。</T>
+   //
+   // @return 登录x坐标
+   //============================================================
+   public void setLocationLongitude(double _locationLongitude){
+      this._locationLongitude = _locationLongitude;
+   }
+
+   //============================================================
+   // <T>登录y坐标。</T>
+   //
+   // @return 登录y坐标
+   //============================================================
+   public double locationLatitude(){
+      return _locationLatitude;
+   }
+
+   //============================================================
+   // <T>登录y坐标。</T>
+   //
+   // @return 登录y坐标
+   //============================================================
+   public void setLocationLatitude(double _locationLatitude){
+      this._locationLatitude = _locationLatitude;
+   }
 
    //============================================================
    // <T>记录编号。</T>
@@ -104,6 +145,8 @@ public class FGcWebSession
       _fromCode = info.fromCode();
       _userId = info.userId();
       _userLabel = info.userLabel();
+      _locationLongitude = info.locationLongitude();
+      _locationLatitude = info.locationLatitude();
       // 设置会话
       _sessionInfo = info;
    }
