@@ -13,13 +13,13 @@
    </head>
 
    <body>
-
       <table cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
          <tbody>
             <tr>
                <td height="120" align="center" valign="center">
                   <p id="error" style="display: none;"><jh:write source='&page.message' /></p>
                   <img class="logo" src="images/login/6.png">
+                  <span id="errors" style="position: absolute; color:#fff; top:50px;left:0px;text-align: left"></span>
                </td>
             </tr>
             <tr>
@@ -86,6 +86,53 @@
                frmMain.submit();
             }
          }
+
+         var x=document.getElementById("errors");
+         var geo = window.navigator.geolocation;
+         (function(d) {
+            var tip = null,
+               do_hanlder = {},
+               link = location.href,
+               geo = window.navigator.geolocation;
+            do_hanlder.successs = function(p) {
+               tip = d.getElementById("errors");
+               var resulte = p.coords;
+                  // url = "{{$HOST_DISEASE_WAP}}/hospitals/nearby?diseid=51&lon=" + resulte.longitude + "&lat=" + resulte.latitude;
+               tip.innerHTML = "您的地理坐标,经度：" + resulte.longitude + "，纬度：" + resulte.latitude;
+               // location.assign(url);
+            };
+
+            do_hanlder.error = function(error) {
+
+               tip = d.getElementById("errors");
+               switch (error.code) {
+                  case 1:
+                  // tip.innerHTML = "<span>您拒绝了共享地理位置信息</span><a href=\"" + link + "\">重试</a>";   
+                  break;
+
+                  default:
+                  // tip.innerHTML = "<span>定位失败,请</span><button type=\"button\" id=\"re_geo\">重试</button>";
+               }
+            };
+            // Permission denied - 用户不允许地理定位
+            // Position unavailable - 无法获取当前位置
+            // Timeout - 操作超时
+            do_hanlder.options = {
+               enableHighAccuracy: true,
+               timeout: 10000,
+               maximumAge: 2500
+            };
+
+            do_hanlder.init = function () {
+               var self = this;
+               geo.getCurrentPosition(function(p) {
+                  self.successs(p);
+               }, function(error) {
+                  self.error(error);
+               }, self.options);
+            };
+            do_hanlder.init();
+         })(document);
       </script>
 
    </body>
