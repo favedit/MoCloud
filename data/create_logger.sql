@@ -37,6 +37,8 @@ CREATE TABLE `LG_PSN_USER_ACCESS`
    `PASSWORD`                      VARCHAR(40), 
    `BROWSER_URI`                   VARCHAR(800), 
    `PAGE_INFO`                     VARCHAR(2000), 
+   `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 

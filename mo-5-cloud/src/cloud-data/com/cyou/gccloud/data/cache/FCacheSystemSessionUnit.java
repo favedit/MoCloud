@@ -6,6 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -91,6 +92,18 @@ public class FCacheSystemSessionUnit
 
    // 字段角色模块集合的定义。
    protected String _roleModules;
+
+   // 存储字段位置经度的定义。
+   private double __locationLongitude;
+
+   // 字段位置经度的定义。
+   protected double _locationLongitude;
+
+   // 存储字段位置纬度的定义。
+   private double __locationLatitude;
+
+   // 字段位置纬度的定义。
+   protected double _locationLatitude;
 
    // 存储字段项目编号的定义。
    private long __projectId;
@@ -459,6 +472,60 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
+   // <T>判断位置经度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLongitudeChanged(){
+      return __locationLongitude != _locationLongitude;
+   }
+
+   //============================================================
+   // <T>获得位置经度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLongitude(){
+      return _locationLongitude;
+   }
+
+   //============================================================
+   // <T>设置位置经度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLongitude(double value){
+      _locationLongitude = value;
+   }
+
+   //============================================================
+   // <T>判断位置纬度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLatitudeChanged(){
+      return __locationLatitude != _locationLatitude;
+   }
+
+   //============================================================
+   // <T>获得位置纬度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLatitude(){
+      return _locationLatitude;
+   }
+
+   //============================================================
+   // <T>设置位置纬度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLatitude(double value){
+      _locationLatitude = value;
+   }
+
+   //============================================================
    // <T>判断项目编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -653,6 +720,10 @@ public class FCacheSystemSessionUnit
             return _roleCode;
          case "role_modules":
             return _roleModules;
+         case "location_longitude":
+            return RDouble.toString(_locationLongitude);
+         case "location_latitude":
+            return RDouble.toString(_locationLatitude);
          case "project_id":
             return Long.toString(_projectId);
          case "parameters":
@@ -714,6 +785,12 @@ public class FCacheSystemSessionUnit
             break;
          case "role_modules":
             _roleModules = value;
+            break;
+         case "location_longitude":
+            _locationLongitude = RDouble.parse(value);
+            break;
+         case "location_latitude":
+            _locationLatitude = RDouble.parse(value);
             break;
          case "project_id":
             _projectId = RLong.parse(value);
@@ -796,6 +873,14 @@ public class FCacheSystemSessionUnit
                __roleModules = value;
                _roleModules = __roleModules;
                break;
+            case "location_longitude":
+               __locationLongitude = RDouble.parse(value);
+               _locationLongitude = __locationLongitude;
+               break;
+            case "location_latitude":
+               __locationLatitude = RDouble.parse(value);
+               _locationLatitude = __locationLatitude;
+               break;
             case "project_id":
                __projectId = RLong.parse(value);
                _projectId = __projectId;
@@ -844,6 +929,8 @@ public class FCacheSystemSessionUnit
       row.set("roleId", _roleId);
       row.set("roleCode", _roleCode);
       row.set("roleModules", _roleModules);
+      row.set("locationLongitude", _locationLongitude);
+      row.set("locationLatitude", _locationLatitude);
       row.set("projectId", _projectId);
       row.set("parameters", _parameters);
       row.set("createUserId", _createUserId);
@@ -872,6 +959,8 @@ public class FCacheSystemSessionUnit
       map.put("roleId", RLong.toString(_roleId));
       map.put("roleCode", _roleCode);
       map.put("roleModules", _roleModules);
+      map.put("locationLongitude", RDouble.toString(_locationLongitude));
+      map.put("locationLatitude", RDouble.toString(_locationLatitude));
       map.put("projectId", RLong.toString(_projectId));
       map.put("parameters", _parameters);
       map.put("createUserId", RLong.toString(_createUserId));

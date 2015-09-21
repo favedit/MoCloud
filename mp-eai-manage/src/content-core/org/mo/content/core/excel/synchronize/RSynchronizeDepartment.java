@@ -9,7 +9,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
 import org.mo.content.core.product.financial.department.IDepartmentConsole;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
@@ -29,25 +28,26 @@ public class RSynchronizeDepartment
    @SuppressWarnings("resource")
    public static void main(String[] args){
       try{
-
-         String modeCd = RString.trim(args[0]);
+         //String modeCd = RString.trim(args[0]);
+         String modeCd = "online";
          if(!modeCd.equals("test") && !modeCd.equals("online")){
             throw new FFatalError("Mode type failure.");
          }
          // 设置属性
-         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-         attributes.set("application", "/data/eai/eai.manage");
+         //         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
+         //         attributes.set("application", "/data/eai/eai.manage");
          // 加载配置
-         RAop.initialize("/data/eai/eai.manage/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
+         //RAop.initialize("/data/eai/eai.manage/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
 
-         String filePath = "/data/eai/eai.manage/webroot/data/ezubo_department.xls";
-         //         String filePath = "D:\\Microbject\\MoScript\\data\\ezubo_department.xls";
+         //String filePath = "/data/eai/eai.manage/webroot/data/ezubo_department.xls";
+         //String filePath = "D:\\Microbject\\MoScript\\data\\ezubo_department.xls";
+         String filePath = "D:/Microbject/MoCloud/mp-eai-manage/webroot/data/ezubo_department.xls";
 
          InputStream fis = new FileInputStream(filePath);
          //设置属性
-         //         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-         //         attributes.set("application", "D:/Microbject/MoCloud/");
-         //         RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
+         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
+         attributes.set("application", "D:/Microbject/MoCloud/");
+         RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
 
          IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
          FLogicContext logicContext = new FLogicContext(databaseConsole);

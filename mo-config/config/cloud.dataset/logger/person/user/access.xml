@@ -10,5 +10,7 @@
   <FieldString _uuid="cd385e3a-ee10-4601-9119-389765c51954" name="password" label="M#12cn14登录密码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSWORD" data_size="40" />
   <FieldString _uuid="3ffc395a-449e-46b2-b4c7-68563ac9d2e3" name="browser_uri" label="M#12cn14浏览地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BROWSER_URI" data_size="800" />
   <FieldString _uuid="8885e26f-11b8-4d79-9e74-f3788bfae20e" name="page_info" label="M#12cn14页面信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PAGE_INFO" data_size="2000" />
+  <FieldDouble _uuid="75fb9c4e-9699-487f-bc9d-c023214b45b0" name="location_longitude" label="M#12cn14位置经度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LONGITUDE" />
+  <FieldDouble _uuid="9e953d4f-4337-4536-a8f8-30d309264224" name="location_latitude" label="M#12cn14位置纬度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LATITUDE" />
   <FieldTemplate _uuid="9fab3699-2725-4c1d-abbe-f19bae436a74" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
 </DataStore>

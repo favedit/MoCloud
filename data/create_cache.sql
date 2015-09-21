@@ -16,6 +16,8 @@ CREATE TABLE `CC_SYS_SESSION`
    `ROLE_ID`                       BIGINT, 
    `ROLE_CODE`                     VARCHAR(40), 
    `ROLE_MODULES`                  VARCHAR(2000), 
+   `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
    `PROJECT_ID`                    BIGINT, 
    `PARAMETERS`                    VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 

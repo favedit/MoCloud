@@ -9,6 +9,8 @@
   <FieldRecordId _uuid="762603cf-0960-471b-a2e3-4e06ab511454" name="role_id" label="M#12cn14角色编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_ID" />
   <FieldString _uuid="70bde791-5102-454f-adb0-be0406941c8b" name="role_code" label="M#12cn14角色代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_CODE" data_size="40" />
   <FieldString _uuid="62049749-6fb5-4c68-8a3e-bd6c5ae872a1" name="role_modules" label="M#12cn16角色模块集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ROLE_MODULES" data_size="2000" />
+  <FieldDouble _uuid="a28ad3e4-4be0-4629-a41f-0e39801b7400" name="location_longitude" label="M#12cn14位置经度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LONGITUDE" />
+  <FieldDouble _uuid="63212d32-2569-4471-b549-ae34b1bdaf4d" name="location_latitude" label="M#12cn14位置纬度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LATITUDE" />
   <FieldRecordId _uuid="288f243c-2c60-4f91-a83f-8dca95623963" name="project_id" label="M#12cn14项目编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_ID" />
   <FieldString _uuid="1c555610-c372-4925-895e-f45f3dc05ece" name="parameters" label="M#12cn14参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS" data_size="2000" />
   <FieldTemplate _uuid="cc9e30ab-7ccd-4271-b9a2-6fb26b82a71c" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />

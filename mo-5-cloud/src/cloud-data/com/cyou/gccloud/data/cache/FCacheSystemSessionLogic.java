@@ -68,6 +68,12 @@ public class FCacheSystemSessionLogic
    // 字段角色模块集合的定义。
    public final static SLogicFieldInfo ROLE_MODULES = new SLogicFieldInfo("ROLE_MODULES");
 
+   // 字段位置经度的定义。
+   public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
+
+   // 字段位置纬度的定义。
+   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
+
    // 字段项目编号的定义。
    public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
 
@@ -87,7 +93,7 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LOGIC_CODE`,`FROM_CD`,`FROM_CODE`,`SESSION_CODE`,`USER_ID`,`USER_LABEL`,`ROLE_ID`,`ROLE_CODE`,`ROLE_MODULES`,`PROJECT_ID`,`PARAMETERS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LOGIC_CODE`,`FROM_CD`,`FROM_CODE`,`SESSION_CODE`,`USER_ID`,`USER_LABEL`,`ROLE_ID`,`ROLE_CODE`,`ROLE_MODULES`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`PROJECT_ID`,`PARAMETERS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
@@ -688,6 +694,8 @@ public class FCacheSystemSessionLogic
       cmd.append(",`ROLE_ID`");
       cmd.append(",`ROLE_CODE`");
       cmd.append(",`ROLE_MODULES`");
+      cmd.append(",`LOCATION_LONGITUDE`");
+      cmd.append(",`LOCATION_LATITUDE`");
       cmd.append(",`PROJECT_ID`");
       cmd.append(",`PARAMETERS`");
       cmd.append(",`CREATE_USER_ID`");
@@ -774,6 +782,10 @@ public class FCacheSystemSessionLogic
          cmd.append(RSql.formatValue(roleModules));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.locationLongitude());
+      cmd.append(',');
+      cmd.append(unit.locationLatitude());
       cmd.append(',');
       long projectId = unit.projectId();
       if(projectId == 0){
@@ -951,6 +963,14 @@ public class FCacheSystemSessionLogic
             cmd.append(RSql.formatValue(roleModules));
             cmd.append('\'');
          }
+      }
+      if(unit.isLocationLongitudeChanged()){
+         cmd.append(",`LOCATION_LONGITUDE`=");
+         cmd.append(unit.locationLongitude());
+      }
+      if(unit.isLocationLatitudeChanged()){
+         cmd.append(",`LOCATION_LATITUDE`=");
+         cmd.append(unit.locationLatitude());
       }
       if(unit.isProjectIdChanged()){
          cmd.append(",`PROJECT_ID`=");

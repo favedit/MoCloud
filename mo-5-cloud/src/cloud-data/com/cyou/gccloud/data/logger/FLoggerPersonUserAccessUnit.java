@@ -6,6 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -97,6 +98,18 @@ public class FLoggerPersonUserAccessUnit
 
    // 字段页面信息的定义。
    protected String _pageInfo;
+
+   // 存储字段位置经度的定义。
+   private double __locationLongitude;
+
+   // 字段位置经度的定义。
+   protected double _locationLongitude;
+
+   // 存储字段位置纬度的定义。
+   private double __locationLatitude;
+
+   // 字段位置纬度的定义。
+   protected double _locationLatitude;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -480,6 +493,60 @@ public class FLoggerPersonUserAccessUnit
    }
 
    //============================================================
+   // <T>判断位置经度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLongitudeChanged(){
+      return __locationLongitude != _locationLongitude;
+   }
+
+   //============================================================
+   // <T>获得位置经度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLongitude(){
+      return _locationLongitude;
+   }
+
+   //============================================================
+   // <T>设置位置经度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLongitude(double value){
+      _locationLongitude = value;
+   }
+
+   //============================================================
+   // <T>判断位置纬度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLatitudeChanged(){
+      return __locationLatitude != _locationLatitude;
+   }
+
+   //============================================================
+   // <T>获得位置纬度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLatitude(){
+      return _locationLatitude;
+   }
+
+   //============================================================
+   // <T>设置位置纬度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLatitude(double value){
+      _locationLatitude = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -622,6 +689,10 @@ public class FLoggerPersonUserAccessUnit
             return _browserUri;
          case "page_info":
             return _pageInfo;
+         case "location_longitude":
+            return RDouble.toString(_locationLongitude);
+         case "location_latitude":
+            return RDouble.toString(_locationLatitude);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -682,6 +753,12 @@ public class FLoggerPersonUserAccessUnit
             break;
          case "page_info":
             _pageInfo = value;
+            break;
+         case "location_longitude":
+            _locationLongitude = RDouble.parse(value);
+            break;
+         case "location_latitude":
+            _locationLatitude = RDouble.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -762,6 +839,14 @@ public class FLoggerPersonUserAccessUnit
                __pageInfo = value;
                _pageInfo = __pageInfo;
                break;
+            case "location_longitude":
+               __locationLongitude = RDouble.parse(value);
+               _locationLongitude = __locationLongitude;
+               break;
+            case "location_latitude":
+               __locationLatitude = RDouble.parse(value);
+               _locationLatitude = __locationLatitude;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -803,6 +888,8 @@ public class FLoggerPersonUserAccessUnit
       row.set("password", _password);
       row.set("browserUri", _browserUri);
       row.set("pageInfo", _pageInfo);
+      row.set("locationLongitude", _locationLongitude);
+      row.set("locationLatitude", _locationLatitude);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -830,6 +917,8 @@ public class FLoggerPersonUserAccessUnit
       map.put("password", _password);
       map.put("browserUri", _browserUri);
       map.put("pageInfo", _pageInfo);
+      map.put("locationLongitude", RDouble.toString(_locationLongitude));
+      map.put("locationLatitude", RDouble.toString(_locationLatitude));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));

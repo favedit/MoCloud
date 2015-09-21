@@ -71,6 +71,12 @@ public class FLoggerPersonUserAccessLogic
    // 字段页面信息的定义。
    public final static SLogicFieldInfo PAGE_INFO = new SLogicFieldInfo("PAGE_INFO");
 
+   // 字段位置经度的定义。
+   public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
+
+   // 字段位置纬度的定义。
+   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -84,7 +90,7 @@ public class FLoggerPersonUserAccessLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LOGIC_CODE`,`LOGIC_RESULT`,`LOGIC_MESSAGE`,`HOST_ADDRESS`,`HOST_PORT`,`PASSPORT`,`PASSWORD`,`BROWSER_URI`,`PAGE_INFO`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LOGIC_CODE`,`LOGIC_RESULT`,`LOGIC_MESSAGE`,`HOST_ADDRESS`,`HOST_PORT`,`PASSPORT`,`PASSWORD`,`BROWSER_URI`,`PAGE_INFO`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造人员用户访问逻辑单元。</T>
@@ -686,6 +692,8 @@ public class FLoggerPersonUserAccessLogic
       cmd.append(",`PASSWORD`");
       cmd.append(",`BROWSER_URI`");
       cmd.append(",`PAGE_INFO`");
+      cmd.append(",`LOCATION_LONGITUDE`");
+      cmd.append(",`LOCATION_LATITUDE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -781,6 +789,10 @@ public class FLoggerPersonUserAccessLogic
          cmd.append(RSql.formatValue(pageInfo));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.locationLongitude());
+      cmd.append(',');
+      cmd.append(unit.locationLatitude());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -955,6 +967,14 @@ public class FLoggerPersonUserAccessLogic
             cmd.append(RSql.formatValue(pageInfo));
             cmd.append('\'');
          }
+      }
+      if(unit.isLocationLongitudeChanged()){
+         cmd.append(",`LOCATION_LONGITUDE`=");
+         cmd.append(unit.locationLongitude());
+      }
+      if(unit.isLocationLatitudeChanged()){
+         cmd.append(",`LOCATION_LATITUDE`=");
+         cmd.append(unit.locationLatitude());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
