@@ -1,4 +1,4 @@
-package org.mo.content.face.marketer.recommend;
+package org.mo.content.face.pc.marketer.recommend;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
