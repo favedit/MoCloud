@@ -4,11 +4,10 @@ import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>用户容器</P>
-//
-//@class FProvincePage
-//@author Sunhr
-//@Date 2012.11.05  
+//<P>理财师信息容器</P>
+//@class FMarketerPage
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -18,12 +17,16 @@ public class FMarketerPage
    // 当前页
    protected int _pageCurrent;
 
+   //页面信息处理结果
    protected String result;
 
+   //客户投资日期字符串
    protected String customerInvestmentDate;
 
+   //客户赎回日期字符串
    protected String customerRedemptionDate;
 
+   //金融市场实体类
    protected FDataFinancialMarketerUnit unit;
 
    protected String dataInfo;

@@ -129,14 +129,14 @@
   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,striped: true">
   <thead>
    <tr>
-    <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+    <!-- <th data-options="field:'ouid',halign:'center',align:'right'"
+     width="40px">编号</th> -->
      <th
-     data-options="field:'name',halign:'center',align:'center',sortable:true"
-     width="60px" >名称</th>
+     data-options="field:'name',halign:'center',align:'left',sortable:true"
+     width="100px" >名称</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="60px">标签</th>
+     width="100px">标签</th>
     <th
      data-options="field:'phoneCode',halign:'center',align:'left',sortable:true"
      width="60px">区号</th>

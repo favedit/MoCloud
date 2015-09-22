@@ -13,10 +13,11 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P>客户信息控制器</P>
+//@class FCustomerAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public class FCustomerAction
       implements
@@ -25,7 +26,7 @@ public class FCustomerAction
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FCustomerAction.class);
 
-   //用户控制台
+   //客户控制台
    @ALink
    protected ICustomerConsole _customerConsole;
 
@@ -105,7 +106,7 @@ public class FCustomerAction
    }
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -124,19 +125,20 @@ public class FCustomerAction
       FDataFinancialCustomerUnit unit = _customerConsole.doPrepare(logicContext);
 
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setMemberId(context.parameterAsInteger("memberId"));
-      unit.setMarriageStatus(context.parameterAsInteger("marriageStatus"));
-      unit.setMonthlyIncome(context.parameterAsInteger("monthlyIncome"));
-      unit.setHighestEducation(context.parameterAsInteger("highestEducation"));
-      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
+      unit.setLinkId(context.parameterAsLong("linkId"));
+      unit.setStatisticsId(context.parameterAsInteger("statisticsId"));
+      unit.setMarryCd(context.parameterAsInteger("marryCd"));
+      unit.setEducationCd(context.parameterAsInteger("educationCd"));
+      unit.setIncomeCd(context.parameterAsInteger("incomeCd"));
+      unit.setBusinessCd(context.parameterAsInteger("businessCd"));
       unit.setInvestmentTotal(context.parameterAsDouble("investmentTotal"));
       unit.setInvestmentCount(context.parameterAsInteger("investmentCount"));
       unit.setRedemptionTotal(context.parameterAsFloat("redemptionTotal"));
       unit.setRedemptionCount(context.parameterAsInteger("redemptionCount"));
-      unit.setNetinvestment(context.parameterAsFloat("netinvestmentTotal"));
+      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
+      unit.setNetinvestment(context.parameterAsFloat("netinvestment"));
+      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
       unit.setNote(context.parameter("note"));
-      unit.setProfession(context.parameterAsInteger("profession"));
-
       EResult result = _customerConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
@@ -190,19 +192,19 @@ public class FCustomerAction
       FDataFinancialCustomerUnit unit = new FDataFinancialCustomerUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setMemberId(context.parameterAsInteger("memberId"));
-      int marriageStatus = context.parameterAsInteger("marriageStatus");
-      unit.setMarriageStatus(marriageStatus);
-      unit.setMonthlyIncome(context.parameterAsInteger("monthlyIncome"));
-      unit.setHighestEducation(context.parameterAsInteger("highestEducation"));
-      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
+      unit.setLinkId(context.parameterAsLong("linkId"));
+      unit.setStatisticsId(context.parameterAsInteger("statisticsId"));
+      unit.setMarryCd(context.parameterAsInteger("marryCd"));
+      unit.setEducationCd(context.parameterAsInteger("educationCd"));
+      unit.setIncomeCd(context.parameterAsInteger("incomeCd"));
+      unit.setBusinessCd(context.parameterAsInteger("businessCd"));
       unit.setInvestmentTotal(context.parameterAsDouble("investmentTotal"));
       unit.setInvestmentCount(context.parameterAsInteger("investmentCount"));
       unit.setRedemptionTotal(context.parameterAsFloat("redemptionTotal"));
       unit.setRedemptionCount(context.parameterAsInteger("redemptionCount"));
-      unit.setNetinvestment(context.parameterAsFloat("netinvestmentTotal"));
+      unit.setNetinvestment(context.parameterAsFloat("netinvestment"));
+      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
       unit.setNote(context.parameter("note"));
-      unit.setProfession(context.parameterAsInteger("profession"));
 
       _customerConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";

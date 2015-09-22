@@ -1,14 +1,13 @@
 package org.mo.content.face.product.financial.product;
 
-import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialProductUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>用户容器</P>
-//
-//@class FProvincePage
-//@author Sunhr
-//@Date 2012.11.05  
+//<P>产品信息容器</P>
+//@class FProductPage
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -18,45 +17,17 @@ public class FProductPage
    // 当前页
    protected int _pageCurrent;
 
+   //页面处理结果信息
    protected String result;
 
-   protected String customerInvestmentDate;
+   //金融产品实体类
+   protected FDataFinancialProductUnit unit;
 
-   protected String customerRedemptionDate;
-
-   protected FDataFinancialCustomerUnit unit;
-
-   protected String dataInfo;
-
-   public String customerInvestmentDate(){
-      return customerInvestmentDate;
-   }
-
-   public void setCustomerInvestmentDate(String customerInvestmentDate){
-      this.customerInvestmentDate = customerInvestmentDate;
-   }
-
-   public String customerRedemptionDate(){
-      return customerRedemptionDate;
-   }
-
-   public void setCustomerRedemptionDate(String customerRedemptionDate){
-      this.customerRedemptionDate = customerRedemptionDate;
-   }
-
-   public String dataInfo(){
-      return dataInfo;
-   }
-
-   public void setDataInfo(String dataInfo){
-      this.dataInfo = dataInfo;
-   }
-
-   public FDataFinancialCustomerUnit unit(){
+   public FDataFinancialProductUnit unit(){
       return unit;
    }
 
-   public void setUnit(FDataFinancialCustomerUnit unit){
+   public void setUnit(FDataFinancialProductUnit unit){
       this.unit = unit;
    }
 

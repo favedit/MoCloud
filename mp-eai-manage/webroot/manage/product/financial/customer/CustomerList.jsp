@@ -131,20 +131,21 @@
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
-     <!-- <th
-     data-options="field:'memberId',halign:'center',align:'left',sortable:true"
-     width="60px">成员编号</th> -->
+    <!-- <th data-options="field:'linkId',halign:'center',align:'right'"
+     width="40px">关联编号</th>
+    <th data-options="field:'statisticsId',halign:'center',align:'right'"
+     width="40px">统计编号</th> -->
      <th
-     data-options="field:'marriageStatus',halign:'center',align:'center',sortable:true,formatter:isMarried"
+     data-options="field:'marryCd',halign:'center',align:'center',sortable:true,formatter:isMarried"
      width="60px" >婚否</th>
      <th
-     data-options="field:'highestEducation',halign:'center',align:'left',sortable:true,formatter:education"
-     width="60px">最高学历</th>
+     data-options="field:'educationCd',halign:'center',align:'left',sortable:true,formatter:education"
+     width="60px">学历</th>
      <th
-     data-options="field:'monthlyIncome',halign:'center',align:'left',sortable:true"
-     width="60px">月收入</th>
+     data-options="field:'incomeCd',halign:'center',align:'left',sortable:true"
+     width="60px">收入</th>
      <th
-     data-options="field:'profession',halign:'center',align:'left',sortable:true"
+     data-options="field:'businessCd',halign:'center',align:'left',sortable:true"
      width="60px">职业</th>
 <th
      data-options="field:'investmentTotal',halign:'center',align:'left',sortable:true"
@@ -167,9 +168,9 @@
      
      <th data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新时间</th>    
-    <!-- <th
+    <th
      data-options="field:'note',halign:'center',align:'left',sortable:true"
-     width="200px">备注信息</th> -->
+     width="200px">备注</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
      width="140px">操作</th>

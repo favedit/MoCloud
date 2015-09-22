@@ -1,11 +1,11 @@
 package org.mo.content.face.product.financial.product;
 
-import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialProductUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.product.financial.customer.ICustomerConsole;
+import org.mo.content.core.product.financial.product.IProductConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -13,10 +13,11 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P>产品信息控制器</P>
+//@class FProductAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public class FProductAction
       implements
@@ -25,9 +26,9 @@ public class FProductAction
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FProductAction.class);
 
-   //用户控制台
+   //产品控制台
    @ALink
-   protected ICustomerConsole _customerConsole;
+   protected IProductConsole _productConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -45,7 +46,7 @@ public class FProductAction
          return "/manage/common/ConnectTimeout";
       }
 
-      return "/manage/product/financial/customer/CustomerList";
+      return "/manage/product/financial/product/ProductList";
    }
 
    //============================================================
@@ -71,13 +72,13 @@ public class FProductAction
       }else{
          Page.setPageCurrent(0);
       }
-      FDataFinancialCustomerUnit unit = new FDataFinancialCustomerUnit();
+      FDataFinancialProductUnit unit = new FDataFinancialProductUnit();
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataFinancialCustomerUnit> unitList = _customerConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataFinancialProductUnit> unitList = _productConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
@@ -101,11 +102,11 @@ public class FProductAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/financial/customer/InsertCustomer";
+      return "/manage/product/financial/product/InsertProduct";
    }
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -121,23 +122,13 @@ public class FProductAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      FDataFinancialCustomerUnit unit = _customerConsole.doPrepare(logicContext);
+      FDataFinancialProductUnit unit = _productConsole.doPrepare(logicContext);
 
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setMemberId(context.parameterAsInteger("memberId"));
-      unit.setMarriageStatus(context.parameterAsInteger("marriageStatus"));
-      unit.setMonthlyIncome(context.parameterAsInteger("monthlyIncome"));
-      unit.setHighestEducation(context.parameterAsInteger("highestEducation"));
-      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
-      unit.setInvestmentTotal(context.parameterAsDouble("investmentTotal"));
-      unit.setInvestmentCount(context.parameterAsInteger("investmentCount"));
-      unit.setRedemptionTotal(context.parameterAsFloat("redemptionTotal"));
-      unit.setRedemptionCount(context.parameterAsInteger("redemptionCount"));
-      unit.setNetinvestment(context.parameterAsFloat("netinvestmentTotal"));
+      unit.setName(context.parameter("name"));
       unit.setNote(context.parameter("note"));
-      unit.setProfession(context.parameterAsInteger("profession"));
 
-      EResult result = _customerConsole.doInsert(logicContext, unit);
+      EResult result = _productConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
          return "/manage/product/financial/marketer/InsertMarketer";
@@ -164,7 +155,7 @@ public class FProductAction
       }
       long id = context.parameterAsLong("id");
 
-      FDataFinancialCustomerUnit unit = _customerConsole.find(logicContext, id);
+      FDataFinancialProductUnit unit = _productConsole.find(logicContext, id);
       page.setUnit(unit);
       return "/manage/product/financial/customer/UpdateCustomer";
    }
@@ -187,24 +178,12 @@ public class FProductAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataFinancialCustomerUnit unit = new FDataFinancialCustomerUnit();
+      FDataFinancialProductUnit unit = new FDataFinancialProductUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setMemberId(context.parameterAsInteger("memberId"));
-      int marriageStatus = context.parameterAsInteger("marriageStatus");
-      unit.setMarriageStatus(marriageStatus);
-      unit.setMonthlyIncome(context.parameterAsInteger("monthlyIncome"));
-      unit.setHighestEducation(context.parameterAsInteger("highestEducation"));
-      unit.setInterestTotal(context.parameterAsFloat("interestTotal"));
-      unit.setInvestmentTotal(context.parameterAsDouble("investmentTotal"));
-      unit.setInvestmentCount(context.parameterAsInteger("investmentCount"));
-      unit.setRedemptionTotal(context.parameterAsFloat("redemptionTotal"));
-      unit.setRedemptionCount(context.parameterAsInteger("redemptionCount"));
-      unit.setNetinvestment(context.parameterAsFloat("netinvestmentTotal"));
       unit.setNote(context.parameter("note"));
-      unit.setProfession(context.parameterAsInteger("profession"));
 
-      _customerConsole.doUpdate(logicContext, unit);
+      _productConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }
 
@@ -226,11 +205,11 @@ public class FProductAction
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-      FDataFinancialCustomerUnit unit = _customerConsole.find(logicContext, id);
+      FDataFinancialProductUnit unit = _productConsole.find(logicContext, id);
       if(unit == null){
          throw new FFatalError("id not exists.");
       }
-      EResult result = _customerConsole.doDelete(logicContext, unit);
+      EResult result = _productConsole.doDelete(logicContext, unit);
       if(!result.equals(EResult.Success)){
          throw new FFatalError("Delete failure.");
       }else{

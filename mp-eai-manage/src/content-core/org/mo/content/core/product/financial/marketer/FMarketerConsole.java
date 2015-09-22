@@ -15,6 +15,13 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P>理财师信息控制台</P>
+//@class FMarketerConsole
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 public class FMarketerConsole
       extends FAbstractLogicUnitConsole<FDataFinancialMarketerLogic, FDataFinancialMarketerUnit>
@@ -26,7 +33,7 @@ public class FMarketerConsole
    static final int _pageSize = 20;
 
    //============================================================
-   // <T>构造设备控制台。</T>
+   // <T>构造理财师控制台。</T>
    //============================================================
 
    public FMarketerConsole(){
@@ -61,6 +68,12 @@ public class FMarketerConsole
       return moduleList;
    }
 
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
    @Override
    public FDataFinancialMarketerUnit findByCode(ILogicContext logicContext,
                                                 String code){

@@ -1,14 +1,13 @@
 package org.mo.content.face.product.common;
 
-import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
+import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>用户容器</P>
-//
-//@class FProvincePage
-//@author Sunhr
-//@Date 2012.11.05  
+//<P>城市信息容器</P>
+//@class FCityPage
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -18,25 +17,17 @@ public class FCityPage
    // 当前页
    protected int _pageCurrent;
 
+   //页面处理信息结果
    protected String result;
 
-   protected FDataCommonProvinceUnit unit;
+   //城市实体类
+   protected FDataCommonCityUnit unit;
 
-   protected String dataInfo;
-
-   public String dataInfo(){
-      return dataInfo;
-   }
-
-   public void setDataInfo(String dataInfo){
-      this.dataInfo = dataInfo;
-   }
-
-   public FDataCommonProvinceUnit unit(){
+   public FDataCommonCityUnit unit(){
       return unit;
    }
 
-   public void setUnit(FDataCommonProvinceUnit unit){
+   public void setUnit(FDataCommonCityUnit unit){
       this.unit = unit;
    }
 

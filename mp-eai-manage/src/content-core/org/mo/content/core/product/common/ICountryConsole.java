@@ -5,11 +5,10 @@ import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
-//<P>国家信息操作接口</P>
-//
-//@class ICountryConsole
-//@author Sunhr
-//@Date 2015.09.13
+//<P>国家信息控制台接口</P>
+//@interface ICountryConsole
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -31,6 +30,12 @@ public interface ICountryConsole
                                                 int pageNum,
                                                 int pageSize);
 
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
    FDataCommonCountryUnit findByCode(ILogicContext logicContext,
                                      String code);
 }

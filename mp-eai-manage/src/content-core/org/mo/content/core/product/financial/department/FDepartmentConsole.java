@@ -15,6 +15,13 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P>部门信息控制台</P>
+//@class FDepartmentConsole
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 public class FDepartmentConsole
       extends FAbstractLogicUnitConsole<FDataFinancialDepartmentLogic, FDataFinancialDepartmentUnit>
@@ -26,7 +33,7 @@ public class FDepartmentConsole
    static final int _pageSize = 20;
 
    //============================================================
-   // <T>构造设备控制台。</T>
+   // <T>构造部门控制台。</T>
    //============================================================
    public FDepartmentConsole(){
       super(FDataFinancialDepartmentLogic.class, FDataFinancialDepartmentUnit.class);
@@ -34,10 +41,10 @@ public class FDepartmentConsole
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
-   //
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页面显示的行数
    // @return 数据集合
    // ============================================================
    @Override
@@ -60,6 +67,12 @@ public class FDepartmentConsole
       return moduleList;
    }
 
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
    @Override
    public FDataFinancialDepartmentUnit findByCode(ILogicContext logicContext,
                                                   String code){

@@ -13,6 +13,13 @@ import org.mo.data.logic.FLogicDataset;
 //@version 1.0.0
 //============================================================
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P省会信息控制台接口</P>
+//@interface IProvinceConsole
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
+//============================================================
 
 public interface IProvinceConsole
       extends
@@ -32,9 +39,16 @@ public interface IProvinceConsole
                                            int pageNum,
                                            int pageSize);
 
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
    FDataCommonProvinceUnit findByCode(ILogicContext logicContext,
                                       String code);
 
    FDataCommonProvinceUnit findByLabel(FLogicContext logicContext,
                                        String provinceLabel);
+
 }

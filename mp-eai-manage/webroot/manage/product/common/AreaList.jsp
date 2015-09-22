@@ -106,7 +106,7 @@
 <body>
  <div id="cy_right" style="width: 100%">
   <div class="right_title">
-   <span>省会信息</span>
+   <span>区域信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">

@@ -4,11 +4,10 @@ import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>用户容器</P>
-//
-//@class FProvincePage
-//@author Sunhr
-//@Date 2012.11.05  
+//<P>国家信息容器</P>
+//@class FCountryPage
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -18,8 +17,10 @@ public class FCountryPage
    // 当前页
    protected int _pageCurrent;
 
+   //页面处理结果信息
    protected String result;
 
+   //国家实体类
    protected FDataCommonCountryUnit unit;
 
    protected String dataInfo;

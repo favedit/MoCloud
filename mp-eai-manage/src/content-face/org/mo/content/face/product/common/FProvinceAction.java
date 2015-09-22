@@ -19,10 +19,11 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P>省会信息控制器</P>
+//@class FProvinceAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public class FProvinceAction
       implements
@@ -31,13 +32,15 @@ public class FProvinceAction
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FProvinceAction.class);
 
-   //用户控制台
+   //省会控制台
    @ALink
    protected IProvinceConsole _proviConsole;
 
+   //国家控制台
    @ALink
    protected ICountryConsole _countryConsole;
 
+   //区域控制台
    @ALink
    protected IAreaConsole _areaConsole;
 
@@ -90,9 +93,8 @@ public class FProvinceAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataProvinceInfo> unitList = _proviConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for(Iterator iterator = unitList.iterator(); iterator.hasNext();){
-         FDataProvinceInfo tempUnit = (FDataProvinceInfo)iterator.next();
-         //         String _areaLabel = "";
+      for(Iterator<FDataProvinceInfo> iterator = unitList.iterator(); iterator.hasNext();){
+         FDataProvinceInfo tempUnit = iterator.next();
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
          if(unit2 != null){
             String _countryLabel = unit2.name();
@@ -103,7 +105,6 @@ public class FProvinceAction
             String _areaLabel = unit3.label();
             tempUnit.setAreaLabel(_areaLabel);
          }
-         //         tempUnit.setAreaLabel(_areaLabel);
 
       }
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
@@ -133,7 +134,7 @@ public class FProvinceAction
    }
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境

@@ -1,21 +1,20 @@
 package org.mo.content.core.product.financial.product;
 
-import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialProductUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
-//<P>部门信息操作接口</P>
-//
-//@class IDepartmentConsole
-//@author Sunhr
-//@Date 2015.09.11 
+//<P>国家信息控制台接口</P>
+//@interface IProductConsole
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
 public interface IProductConsole
       extends
-         IAbstractLogicUnitConsole<FDataFinancialCustomerUnit>
+         IAbstractLogicUnitConsole<FDataFinancialProductUnit>
 {
 
    // ============================================================
@@ -26,11 +25,17 @@ public interface IProductConsole
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataFinancialCustomerUnit> select(ILogicContext logicContext,
-                                                    FDataFinancialCustomerUnit unit,
-                                                    int pageNum,
-                                                    int pageSize);
+   FLogicDataset<FDataFinancialProductUnit> select(ILogicContext logicContext,
+                                                   FDataFinancialProductUnit unit,
+                                                   int pageNum,
+                                                   int pageSize);
 
-   FDataFinancialCustomerUnit findByCode(ILogicContext logicContext,
-                                         String code);
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
+   FDataFinancialProductUnit findByCode(ILogicContext logicContext,
+                                        String code);
 }

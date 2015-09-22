@@ -21,10 +21,11 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P>城市信息控制器</P>
+//@class FCityAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public class FCityAction
       implements
@@ -37,12 +38,15 @@ public class FCityAction
    @ALink
    protected ICityConsole _cityConsole;
 
+   //国家控制台
    @ALink
    protected ICountryConsole _countryConsole;
 
+   //省会控制台
    @ALink
    protected IProvinceConsole _provinceConsole;
 
+   //区域控制台
    @ALink
    protected IAreaConsole _areaConsole;
 
@@ -95,8 +99,8 @@ public class FCityAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataCityInfo> unitList = _cityConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for(Iterator iterator = unitList.iterator(); iterator.hasNext();){
-         FDataCityInfo tempUnit = (FDataCityInfo)iterator.next();
+      for(Iterator<FDataCityInfo> iterator = unitList.iterator(); iterator.hasNext();){
+         FDataCityInfo tempUnit = iterator.next();
          //         String _areaLabel = "";
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
          if(unit2 != null){
@@ -143,7 +147,7 @@ public class FCityAction
    }
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -191,6 +195,7 @@ public class FCityAction
       long id = context.parameterAsLong("id");
 
       FDataCommonCityUnit unit = _cityConsole.find(logicContext, id);
+      page.setUnit(unit);
       return "/manage/product/financial/customer/UpdateCustomer";
    }
 

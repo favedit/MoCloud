@@ -3,6 +3,13 @@ package org.mo.content.core.product.common;
 import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
 import java.util.Map;
 import org.mo.core.aop.face.ASourceMachine;
+//============================================================
+//<P>区域信息</P>
+//@class FDataAreaInfo
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 @ASourceMachine
 public class FDataAreaInfo
@@ -43,7 +50,6 @@ public class FDataAreaInfo
 
    //============================================================
    // <T>保存对照表。</T>
-   //
    // @param map 对照表
    //============================================================
    @Override

@@ -92,56 +92,56 @@
    <table width="710" height="492" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;员:</div></td>
+     <td width="78" height="33"><div align="left">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联:</div></td>
      <td width="100"><div align="left">
-       <input id="memberId" name="memberId" readonly="readonly"
-        class="easyui-validatebox textbox"
+       <input id="linkId" name="linkId" style="display:none" readonly="readonly" class="easyui-validatebox textbox"
         style="width:80px;height:20px;"
-        data-options="validType:'length[0,20]'"
-        value="<jh:write source='&unit.memberId'/>" /> <input
-        id="adminId" name="adminId" style="display:none"
-        value="<jh:write source='&basePage.userId'/>" /> <input id="ouid" name="ouid" style="display:none" value="<jh:write source='&unit.ouid'/>" />
+        data-options="validType:'length[0,20]'" /> <input id="adminId"
+        name="adminId" style="display:none"
+        value="<jh:write source='&basePage.userId'/>" />
       </div></td>
-     <td width="78">&nbsp;</td>
-     <td width="142">&nbsp;</td>
+     <td width="78"><div align="left">统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计:</div></td>
+     <td width="142"><input id="statisticsId" name="statisticsId" style="display:none" readonly="readonly" class="easyui-validatebox textbox"
+        style="width:80px;height:20px;"
+        data-options="validType:'length[0,20]'" /></td>
      <td width="67">&nbsp;</td>
      <td width="245">&nbsp;</td>
     </tr>
     <tr>
      <td height="38"><div align="left">婚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;否:</div></td>
      <td><div align="left">
-       <select id="marriageStatus" name="marriageStatus">
-        <jh:equals source="1" value="&unit.marriageStatus">
+       <select id="marryCd" name="marryCd">
+        <jh:equals source="1" value="&unit.marryCd">
          <option value="1" selected="selected">是</option>
          <option value="0">否</option>
         </jh:equals>
-        <jh:equals source="0" value="&unit.marriageStatus">
+        <jh:equals source="0" value="&unit.marryCd">
          <option value="0" selected="selected">否</option>
          <option value="1">是</option>
         </jh:equals>
        </select>
       </div></td>
      <td><div align="left">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历:</div></td>
-     <td><select id="highestEducation" name="highestEducation">
-       <jh:equals source="0" value="&unit.highestEducation">
+     <td><select id="educationCd" name="educationCd">
+       <jh:equals source="0" value="&unit.educationCd">
         <option value="0" selected="selected">学士</option>
         <option value="1">硕士</option>
         <option value="2">博士</option>
         <option value="3">博士后</option>
        </jh:equals>
-       <jh:equals source="1" value="&unit.highestEducation">
+       <jh:equals source="1" value="&unit.educationCd">
         <option value="0">学士</option>
         <option value="1" selected="selected">硕士</option>
         <option value="2">博士</option>
         <option value="3">博士后</option>
        </jh:equals>
-       <jh:equals source="2" value="&unit.highestEducation">
+       <jh:equals source="2" value="&unit.educationCd">
         <option value="0">学士</option>
         <option value="1">硕士</option>
         <option value="2" selected="selected">博士</option>
         <option value="3">博士后</option>
        </jh:equals>
-       <jh:equals source="3" value="&unit.highestEducation">
+       <jh:equals source="3" value="&unit.educationCd">
         <option value="0">学士</option>
         <option value="1">硕士</option>
         <option value="2">博士</option>
@@ -155,19 +155,19 @@
 
      <td><div align="left">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业:</div></td>
      <td><div align="left">
-       <input id="profession" name="profession"
+       <input id="businessCd" name="businessCd"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.profession'/>" />
+        value="<jh:write source='&unit.businessCd'/>" />
       </div></td>
      <td height="38"><div align="left">月&nbsp;收&nbsp;入:</div></td>
      <td><div align="left">
-       <input id="monthlyIncome" name="monthlyIncome"
+       <input id="incomeCd" name="incomeCd"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"
-        value="<jh:write source='&unit.monthlyIncome'/>" />
+        value="<jh:write source='&unit.incomeCd'/>" />
       </div></td>
      <td>&nbsp;</td>
      <td>&nbsp;</td>
@@ -218,7 +218,7 @@
 
      <td height="38"><div align="left">客户净投总额:</div></td>
      <td><div align="left">
-       <input id="netinvestmentTotal" name="netinvestmentTotal"
+       <input id="netinvestment" name="netinvestment"
         class="easyui-validatebox textbox"
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'"

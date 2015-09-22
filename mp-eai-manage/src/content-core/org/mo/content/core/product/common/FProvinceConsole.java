@@ -16,6 +16,13 @@ import org.mo.data.logic.FLogicDataset;
 //@version 1.0.0
 //============================================================
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P>省会控制台</P>
+//@class FProvinceConsole
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
+//============================================================
 
 public class FProvinceConsole
       extends FAbstractLogicUnitConsole<FDataCommonProvinceLogic, FDataCommonProvinceUnit>
@@ -36,7 +43,6 @@ public class FProvinceConsole
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
-   //
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
@@ -56,12 +62,18 @@ public class FProvinceConsole
          where.append(" LIKE '%");
          where.append(unit.label() + "%'");
       }
-      String orderBy = String.format("%s %s", FDataCommonProvinceLogic.LABEL, "ASC");
+      //      String orderBy = String.format("%s %s", FDataCommonProvinceLogic.LABEL, "ASC");
       FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
       FLogicDataset<FDataProvinceInfo> userInfoList = logic.fetchClass(FDataProvinceInfo.class, null, where.toString(), null, pageSize, pageNum);
       return userInfoList;
    }
 
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
    @Override
    public FDataCommonProvinceUnit findByCode(ILogicContext logicContext,
                                              String code){
@@ -79,7 +91,6 @@ public class FProvinceConsole
    @Override
    public FDataCommonProvinceUnit findByLabel(FLogicContext logicContext,
                                               String provinceLabel){
-      // TODO Auto-generated method stub
       return null;
    }
 }

@@ -19,10 +19,11 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P>区域信息控制器</P>
+//@class FAreaAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public class FAreaAction
       implements
@@ -35,12 +36,15 @@ public class FAreaAction
    @ALink
    protected ICityConsole _cityConsole;
 
+   //国家控制台
    @ALink
    protected ICountryConsole _countryConsole;
 
+   //省会控制台
    @ALink
    protected IProvinceConsole _provinceConsole;
 
+   //区域控制台
    @ALink
    protected IAreaConsole _areaConsole;
 
@@ -93,8 +97,8 @@ public class FAreaAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataAreaInfo> unitList = _areaConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for(Iterator iterator = unitList.iterator(); iterator.hasNext();){
-         FDataAreaInfo tempUnit = (FDataAreaInfo)iterator.next();
+      for(Iterator<FDataAreaInfo> iterator = unitList.iterator(); iterator.hasNext();){
+         FDataAreaInfo tempUnit = iterator.next();
          //         String _areaLabel = "";
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
          if(unit2 != null){
@@ -130,7 +134,7 @@ public class FAreaAction
    }
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -178,6 +182,7 @@ public class FAreaAction
       long id = context.parameterAsLong("id");
 
       FDataCommonAreaUnit unit = _areaConsole.find(logicContext, id);
+      page.setUnit(unit);
       return "/manage/product/financial/customer/UpdateCustomer";
    }
 

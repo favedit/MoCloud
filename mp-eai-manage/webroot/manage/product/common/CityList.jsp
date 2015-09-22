@@ -106,7 +106,7 @@
 <body>
  <div id="cy_right" style="width: 100%">
   <div class="right_title">
-   <span>省会信息</span>
+   <span>城市信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
@@ -138,9 +138,9 @@
     <th
      data-options="field:'level',halign:'center',align:'center',sortable:true"
      width="30px">级别</th>
-    <!-- <th
+    <th
      data-options="field:'cityCode',halign:'center',align:'left',sortable:true"
-     width="60px">城市编码</th> -->
+     width="60px">城市区号</th>
 
     <th
      data-options="field:'countryLabel',halign:'center',align:'center',sortable:true"

@@ -4,11 +4,10 @@ import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>用户容器</P>
-//
-//@class FProvincePage
-//@author Sunhr
-//@Date 2012.11.05  
+//<P>部门信息容器</P>
+//@class FDepartmentPage
+//@author AnjoyTian
+//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -18,10 +17,13 @@ public class FDepartmentPage
    // 当前页
    protected int _pageCurrent;
 
+   //页面处理结果信息
    protected String result;
 
+   //投资字符串
    protected String strInvestment;
 
+   //赎回字符串
    protected String redemptionDate;
 
    public String strInvestment(){

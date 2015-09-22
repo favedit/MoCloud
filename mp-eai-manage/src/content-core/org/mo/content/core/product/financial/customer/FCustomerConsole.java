@@ -15,6 +15,13 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P>客户信息控制台</P>
+//@class FCustomerConsole
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 public class FCustomerConsole
       extends FAbstractLogicUnitConsole<FDataFinancialCustomerLogic, FDataFinancialCustomerUnit>
@@ -26,7 +33,7 @@ public class FCustomerConsole
    static final int _pageSize = 20;
 
    //============================================================
-   // <T>构造设备控制台。</T>
+   // <T>构造客户控制台。</T>
    //============================================================
 
    public FCustomerConsole(){
@@ -35,7 +42,6 @@ public class FCustomerConsole
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
-   //
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
@@ -50,23 +56,29 @@ public class FCustomerConsole
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(unit.highestEducation() != 0){
-         whereSql.append(FDataFinancialCustomerLogic.HIGHEST_EDUCATION);
+      /*if(unit.incomeCd() != 0){
+         whereSql.append(FDataFinancialCustomerLogic.INCOME_CD);
          whereSql.append(" LIKE '%");
-         whereSql.append(unit.highestEducation() + "%'");
-      }
-      String orderBy = String.format("%s %s", FDataFinancialCustomerLogic.MONTHLY_INCOME, "ASC");
+         whereSql.append(unit.incomeCd() + "%'");
+      }*/
+      String orderBy = String.format("%d %s", FDataFinancialCustomerLogic.INCOME_CD.toString(), "ASC");
       FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
       FLogicDataset<FDataFinancialCustomerUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;
    }
 
+   // ============================================================
+   // <T>根据区号获取对象</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
    @Override
    public FDataFinancialCustomerUnit findByCode(ILogicContext logicContext,
                                                 String code){
       FSql whereSql = new FSql();
       if(!RString.isEmpty(code)){
-         whereSql.append(FDataFinancialCustomerLogic.HIGHEST_EDUCATION);
+         whereSql.append(FDataFinancialCustomerLogic.INCOME_CD);
          whereSql.append("='");
          whereSql.append(code + "'");
       }

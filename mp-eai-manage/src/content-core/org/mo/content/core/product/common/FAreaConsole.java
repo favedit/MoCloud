@@ -15,6 +15,13 @@ import org.mo.com.lang.RString;
 //============================================================
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P>区域信息控制台</P>
+//@class FAreaConsole
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 public class FAreaConsole
       extends FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>
@@ -23,12 +30,20 @@ public class FAreaConsole
 {
 
    //============================================================
-   // <T>构造设备控制台。</T>
+   // <T>构造区域控制台。</T>
    //============================================================
    public FAreaConsole(){
       super(FDataCommonAreaLogic.class, FDataCommonAreaUnit.class);
    }
 
+   // ============================================================
+   // <T>获得分页数据列表bySomerow</T>
+   // @param logicContext 链接对象
+   // @param unit 查询条件
+   // @param pageNum 页码
+   // @param pageSize 每页显示的行数
+   // @return 数据集合
+   // ============================================================
    @Override
    public FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext,
                                               FDataCommonAreaUnit unit,
@@ -43,7 +58,7 @@ public class FAreaConsole
          where.append(" LIKE '%");
          where.append(unit.label() + "%'");
       }
-      String orderBy = String.format("%s %s", FDataCommonAreaLogic.LABEL, "ASC");
+      //      String orderBy = String.format("%s %s", FDataCommonAreaLogic.LABEL, "ASC");
       FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
       FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, where.toString(), null, pageSize, pageNum);
       return userInfoList;

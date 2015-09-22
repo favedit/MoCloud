@@ -18,8 +18,10 @@ public class FConfigrationPage
    // 当前页
    protected int _pageCurrent;
 
+   //页面处理结果信息
    protected String result;
 
+   //配置信息实体类
    protected FDataCommonConfigurationUnit unit;
 
    public FDataCommonConfigurationUnit unit(){

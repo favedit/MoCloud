@@ -3,6 +3,13 @@ package org.mo.content.core.product.common;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import java.util.Map;
 import org.mo.core.aop.face.ASourceMachine;
+//============================================================
+//<P>省会信息</P>
+//@class FDataProvinceInfo
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 @ASourceMachine
 public class FDataProvinceInfo
@@ -32,7 +39,6 @@ public class FDataProvinceInfo
 
    //============================================================
    // <T>保存对照表。</T>
-   //
    // @param map 对照表
    //============================================================
    @Override

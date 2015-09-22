@@ -6,10 +6,11 @@ import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P>产品信息接口。</P>
+//@interface IProductAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public interface IProductAction
 {
@@ -50,7 +51,7 @@ public interface IProductAction
                        @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境

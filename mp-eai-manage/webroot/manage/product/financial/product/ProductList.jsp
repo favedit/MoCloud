@@ -20,11 +20,11 @@
 
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/financial/customer/Customer.wa?do=select&date="
+        var url = "/product/financial/product/Product.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         if (page != null) {
-            url = "/product/financial/customer/Customer.wa?do=select&page="
+            url = "/product/financial/product/Product.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "page" : page,
@@ -66,7 +66,7 @@
                     //                        });
                     //                     }
                     //                  });
-                    location.href = "/product/financial/customer/Customer.wa?do=delete&id="
+                    location.href = "/product/financial/product/Product.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
     }
@@ -74,52 +74,29 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/financial/customer/Customer.wa?do=updateBefore&id="
+        window.location.href = "/product/financial/product/Product.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
 
     }
     
-    是否结婚
-    function isMarried(val,row){
-        if(val==1){
-            return '是';
-        }else if(val==0){
-            return '否';
-        }else{
-            return '未填';
-        }
-    }
-    
-    //教育
-    function education(val,row){
-        if(val==0){
-            return "学士";
-        }else if(val==1){
-            return "硕士";
-        }else if(val==2){
-            return "博士";
-        }else if(val==3){
-            return "博士后";
-        }
-    }
 </script>
 </HEAD>
 
 <body>
  <div id="cy_right" style="width: 100%">
   <div class="right_title">
-   <span>客户信息</span>
+   <span>产品信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/financial/customer/Customer.wa?do=insertBefore"
+    <a href="/product/financial/product/Product.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">
-    <input id="highestEducation" name="highestEducation" type="text"
+    <input id="name" name="name" type="text"
      onfocus="if(this.value=='学历'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='学历';this.style.color='#ccc';}"
-     style="color: #ccc" value="学历"> <a onClick="doSubmit(0)"
+     onblur="if(this.value=='') {this.value='名称';this.style.color='#ccc';}"
+     style="color: #ccc" value="名称"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>
    </div>
   </div>
@@ -135,35 +112,26 @@
      data-options="field:'memberId',halign:'center',align:'left',sortable:true"
      width="60px">成员编号</th> -->
      <th
-     data-options="field:'marriageStatus',halign:'center',align:'center',sortable:true,formatter:isMarried"
-     width="60px" >婚否</th>
+     data-options="field:'name',halign:'center',align:'center',sortable:true"
+     width="60px" >名称</th>
      <th
-     data-options="field:'highestEducation',halign:'center',align:'left',sortable:true,formatter:education"
-     width="60px">最高学历</th>
+     data-options="field:'label',halign:'center',align:'left',sortable:true"
+     width="60px">标签</th>
      <th
-     data-options="field:'monthlyIncome',halign:'center',align:'left',sortable:true"
-     width="60px">月收入</th>
+     data-options="field:'rentPerson',halign:'center',align:'left',sortable:true"
+     width="60px">出租人</th>
      <th
-     data-options="field:'profession',halign:'center',align:'left',sortable:true"
-     width="60px">职业</th>
+     data-options="field:'tenantPerson',halign:'center',align:'left',sortable:true"
+     width="60px">承租人</th>
 <th
-     data-options="field:'investmentTotal',halign:'center',align:'left',sortable:true"
-     width="80px">投资总额</th>
+     data-options="field:'annualRateOfReturn',halign:'center',align:'left',sortable:true"
+     width="80px">预期年收益率</th>
     <th
-     data-options="field:'investmentCount',halign:'center',align:'left',sortable:true"
-     width="60px">投资次数</th>
+     data-options="field:'timeLimit',halign:'center',align:'left',sortable:true"
+     width="60px">投资期限</th>
      <th
-     data-options="field:'redemptionTotal',halign:'center',align:'left',sortable:true"
-     width="80px">赎回总额</th>
-    <th
-     data-options="field:'redemptionCount',halign:'center',align:'left',sortable:true"
-     width="60px">赎回次数</th>
-     <th
-     data-options="field:'interestTotal',halign:'center',align:'left',sortable:true"
-     width="80px">利息总额</th>
-    <th
-     data-options="field:'netinvestment',halign:'center',align:'left',sortable:true"
-     width="80px">净投</th>
+     data-options="field:'note',halign:'center',align:'left',sortable:true"
+     width="60px">备注</th>
      
      <th data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新时间</th>    

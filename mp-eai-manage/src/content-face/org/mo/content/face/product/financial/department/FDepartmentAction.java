@@ -16,10 +16,11 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>接口。</P>
-//
-// @author sunhr
-// @version 150718
+//<P部门信息控制器</P>
+//@class FDepartmentAction
+//@author AnjoyTian
+//@Date 2015.09.21  
+//@version 1.0.0
 //============================================================
 public class FDepartmentAction
       implements
@@ -28,7 +29,7 @@ public class FDepartmentAction
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FDepartmentAction.class);
 
-   //用户控制台
+   //部门控制台
    @ALink
    protected IDepartmentConsole _departmentConsole;
 
@@ -107,7 +108,7 @@ public class FDepartmentAction
    }
 
    //============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境

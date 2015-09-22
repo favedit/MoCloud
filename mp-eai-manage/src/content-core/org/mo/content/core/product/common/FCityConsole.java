@@ -15,6 +15,13 @@ import org.mo.data.logic.FLogicDataset;
 //@version 1.0.0
 //============================================================
 import org.mo.data.logic.ILogicContext;
+//============================================================
+//<P>城市信息控制台</P>
+//@class FCityConsole
+//@author AnjoyTian
+//@Date 2015.09.21 
+//@version 1.0.0
+//============================================================
 
 public class FCityConsole
       extends FAbstractLogicUnitConsole<FDataCommonCityLogic, FDataCommonCityUnit>
@@ -23,7 +30,7 @@ public class FCityConsole
 {
 
    //============================================================
-   // <T>构造设备控制台。</T>
+   // <T>构造城市控制台。</T>
    //============================================================
    public FCityConsole(){
       super(FDataCommonCityLogic.class, FDataCommonCityUnit.class);
@@ -31,7 +38,6 @@ public class FCityConsole
 
    // ============================================================
    // <T>根据区号获取对象</T>
-   //
    // @param logicContext 链接对象
    // @param code 区号
    // @return 数据对象
@@ -51,6 +57,14 @@ public class FCityConsole
       return city;
    }
 
+   // ============================================================
+   // <T>获得分页数据列表bySomerow</T>
+   // @param logicContext 链接对象
+   // @param unit 查询条件
+   // @param pageNum 页码
+   // @param pageSize 每页显示的行数
+   // @return 数据集合
+   // ============================================================
    @Override
    public FLogicDataset<FDataCityInfo> select(ILogicContext logicContext,
                                               FDataCommonCityUnit unit,
@@ -65,7 +79,7 @@ public class FCityConsole
          where.append(" LIKE '%");
          where.append(unit.label() + "%'");
       }
-      String orderBy = String.format("%s %s", FDataCommonCityLogic.LABEL, "ASC");
+      //      String orderBy = String.format("%s %s", FDataCommonCityLogic.LABEL, "ASC");
       FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
       FLogicDataset<FDataCityInfo> userInfoList = logic.fetchClass(FDataCityInfo.class, null, where.toString(), null, pageSize, pageNum);
       return userInfoList;
