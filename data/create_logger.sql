@@ -1,4 +1,55 @@
 -- ------------------------------------------------------------
+-- Create table [Logger.System.Logger]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `LG_SYS_LOGGER`;
+CREATE TABLE `LG_SYS_LOGGER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `RECORD_DATE`                   DATETIME NOT NULL, 
+   `SERVER_CODE`                   VARCHAR(40), 
+   `SERVER_HOST`                   VARCHAR(40), 
+   `USER_ID`                       BIGINT NOT NULL, 
+   `LEVEL_CD`                      INTEGER, 
+   `CODE`                          VARCHAR(200) NOT NULL, 
+   `PARAMETERS`                    VARCHAR(800), 
+   `DESCRIPTION`                   TEXT, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE LG_SYS_LOGGER 
+   ADD CONSTRAINT LG_SYS_LOG_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Logger.System.Exception]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `LG_SYS_EXCEPTION`;
+CREATE TABLE `LG_SYS_EXCEPTION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `RECORD_DATE`                   DATETIME NOT NULL, 
+   `SERVER_CODE`                   VARCHAR(40), 
+   `SERVER_HOST`                   VARCHAR(40), 
+   `USER_ID`                       BIGINT NOT NULL, 
+   `CODE`                          VARCHAR(200) NOT NULL, 
+   `PARAMETERS`                    VARCHAR(800), 
+   `DESCRIPTION`                   TEXT, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE LG_SYS_EXCEPTION 
+   ADD CONSTRAINT LG_SYS_EXP_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
 -- Create table [Logger.Info.Browser.Access]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `LG_INF_BROWSER_ACCESS`;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="11af37a7-0331-46ad-a8ec-1f70a1795398" name="logger.system.exception" label="M#12cn211系统例外日志表    " is_valid="Y" note="M#" data_engine="InnoDB" data_group="logger" data_factory="Logger.System.Exception" data_name="LG_SYS_EXCEPTION" data_alias="LG_SYS_EXP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldDateTime _uuid="23e100ea-0fcd-4a5c-a8af-bf43efeff026" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="RECORD_DATE" />
+  <FieldString _uuid="4768386b-b536-41ad-84c1-1eff0f29a0ce" name="server_code" label="M#12cn14服务代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SERVER_CODE" data_size="40" />
+  <FieldString _uuid="ef94563b-2e1a-4d13-a598-907a27c50971" name="server_host" label="M#12cn14服务主机" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SERVER_HOST" data_size="40" />
+  <FieldRecordId _uuid="7155bf61-2d91-4c04-b0d6-e8f79c297b6b" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldString _uuid="5942b346-06fa-4c76-9588-d285cd70ba77" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="CODE" data_size="200" />
+  <FieldString _uuid="27b3eb2d-eb0a-494f-a652-806a03a2a287" name="parameters" label="M#12cn14参数集合" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS" data_size="800" />
+  <FieldContent _uuid="46fd2594-cf50-4c96-8e88-d86890336315" name="description" label="M#12cn14描述信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldTemplate _uuid="2c0bca01-3dc7-43a1-bec6-ba30acbe8ba0" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
