@@ -165,7 +165,7 @@
         style="width:80px;height:20px"
         data-options="validType:'length[0,100]'" />
       </div></td>
-     <td><div align="left">:</div></td>
+     <td><div align="left"></div></td>
      <td><div align="left"></div></td>
     </tr>
     <tr>
