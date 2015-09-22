@@ -13,7 +13,7 @@ public class RStatisticsMobile
       inputNode.createNode("mobile").setText("ddd");
       inputNode.createNode("mobile").setText("18710555902");
 
-      FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws");
+      @SuppressWarnings("resource") FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws");
       //      try(FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws")){
       //         result = connection.fetch();
       //      }

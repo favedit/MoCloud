@@ -61,7 +61,7 @@ public class FCustomerConsole
          whereSql.append(" LIKE '%");
          whereSql.append(unit.incomeCd() + "%'");
       }*/
-      String orderBy = String.format("%d %s", FDataFinancialCustomerLogic.INCOME_CD.toString(), "ASC");
+      String orderBy = String.format("%s %s", FDataFinancialCustomerLogic.INCOME_CD.toString(), "ASC");
       FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
       FLogicDataset<FDataFinancialCustomerUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;

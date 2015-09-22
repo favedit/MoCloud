@@ -16,17 +16,18 @@
         var url = "/product/financial/customer/Customer.wa?do=update&date="
                 + new Date().valueOf();
         var data = {
-            "memberId" : $('#memberId').val(),
+            "statisticsId" : $('#statisticsId').val(),
+            "linkId" : $('#linkId').val(),
             "adminId" : $('#adminId').val(),
-            "marriageStatus" : $('#marriageStatus').val(),
-            "highestEducation" : $('#highestEducation').val(),
+            "marryCd" : $('#marryCd').val(),
+            "educationCd" : $('#educationCd').val(),
             "profession" : $('#profession').val(),
-            "monthlyIncome" : $('#monthlyIncome').val(),
+            "incomeCd" : $('#incomeCd').val(),
             "investmentTotal" : $('#investmentTotal').val(),
             "investmentCount" : $('#investmentCount').val(),
             "redemptionTotal" : $('#redemptionTotal').val(),
             "redemptionCount" : $('#redemptionCount').val(),
-            "netinvestmentTotal" : $('#netinvestmentTotal').val(),
+            "netinvestment" : $('#netinvestment').val(),
             "note" : $('#note').val(),
             "interestTotal" : $('#interestTotal').val(),
             "ouid" : $('#ouid').val()
@@ -98,7 +99,9 @@
         style="width:80px;height:20px;"
         data-options="validType:'length[0,20]'" /> <input id="adminId"
         name="adminId" style="display:none"
-        value="<jh:write source='&basePage.userId'/>" />
+        value="<jh:write source='&basePage.userId'/>" /><input id="ouid"
+        name="ouid" style="display:none"
+        value="<jh:write source='&unit.ouid'/>" />
       </div></td>
      <td width="78"><div align="left">统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计:</div></td>
      <td width="142"><input id="statisticsId" name="statisticsId" style="display:none" readonly="readonly" class="easyui-validatebox textbox"

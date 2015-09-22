@@ -57,7 +57,7 @@ public class FUserConsole
       where.append(1);
       if(!RString.isEmpty(userUnit.passport())){
          where.append(" AND ");
-         where.append(userUnitLogic.PASSPORT);
+         where.append(FDataPersonUserLogic.PASSPORT);
          where.append(" LIKE '%{passport}%'");
          where.bind("passport", userUnit.passport());
       }

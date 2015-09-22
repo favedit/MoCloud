@@ -79,7 +79,7 @@
 
     }
     
-    是否结婚
+    //是否结婚
     function isMarried(val,row){
         if(val==1){
             return '是';

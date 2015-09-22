@@ -125,8 +125,8 @@ public class FCustomerAction
       FDataFinancialCustomerUnit unit = _customerConsole.doPrepare(logicContext);
 
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setLinkId(context.parameterAsLong("linkId"));
-      unit.setStatisticsId(context.parameterAsInteger("statisticsId"));
+      //      unit.setLinkId(context.parameterAsLong("linkId"));
+      //      unit.setStatisticsId(context.parameterAsInteger("statisticsId"));
       unit.setMarryCd(context.parameterAsInteger("marryCd"));
       unit.setEducationCd(context.parameterAsInteger("educationCd"));
       unit.setIncomeCd(context.parameterAsInteger("incomeCd"));
@@ -190,7 +190,7 @@ public class FCustomerAction
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataFinancialCustomerUnit unit = new FDataFinancialCustomerUnit();
-      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      unit.setOuid(context.parameterAsLong("ouid"));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setLinkId(context.parameterAsLong("linkId"));
       unit.setStatisticsId(context.parameterAsInteger("statisticsId"));
