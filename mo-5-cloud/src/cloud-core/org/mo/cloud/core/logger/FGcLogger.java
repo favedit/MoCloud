@@ -18,6 +18,9 @@ public class FGcLogger
    // 服务代码
    protected String _serverCode;
 
+   // 服务主机
+   protected String _serverHost;
+
    // 时间
    protected long _dateTime;
 
@@ -58,6 +61,24 @@ public class FGcLogger
    //============================================================
    public void setServerCode(String serverCode){
       _serverCode = serverCode;
+   }
+
+   //============================================================
+   // <T>获得服务主机。</T>
+   //
+   // @return 服务主机
+   //============================================================
+   public String serverHost(){
+      return _serverHost;
+   }
+
+   //============================================================
+   // <T>设置服务主机。</T>
+   //
+   // @param serverHost 服务主机
+   //============================================================
+   public void setServerHost(String serverHost){
+      _serverHost = serverHost;
    }
 
    //============================================================

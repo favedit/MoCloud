@@ -6,7 +6,7 @@
 //============================================================
 package com.cyou.gccloud.define.entity;
 
-import com.cyou.gccloud.common.INetObject;
+import org.mo.cloud.common.INetObject;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================

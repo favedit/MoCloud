@@ -6,11 +6,11 @@
 //============================================================
 package com.cyou.gccloud.define.message.resourceapplication;
 
-import com.cyou.gccloud.common.INetObject;
-import com.cyou.gccloud.common.message.ENetMessageGroup;
-import com.cyou.gccloud.common.message.ENetMessageType;
-import com.cyou.gccloud.common.message.FNetMessage;
 import com.cyou.gccloud.define.entity.SGcSession;
+import org.mo.cloud.common.INetObject;
+import org.mo.cloud.common.message.ENetMessageGroup;
+import org.mo.cloud.common.message.ENetMessageType;
+import org.mo.cloud.common.message.FNetMessage;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================

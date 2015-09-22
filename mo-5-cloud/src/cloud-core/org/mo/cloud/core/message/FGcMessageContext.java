@@ -1,11 +1,11 @@
 package org.mo.cloud.core.message;
 
-import com.cyou.gccloud.common.validator.RGcBooleanValidator;
-import com.cyou.gccloud.common.validator.RGcDoubleValidator;
-import com.cyou.gccloud.common.validator.RGcFloatValidator;
-import com.cyou.gccloud.common.validator.RGcIntegerValidator;
-import com.cyou.gccloud.common.validator.RGcLongValidator;
-import com.cyou.gccloud.common.validator.RGcStringValidator;
+import org.mo.cloud.common.validator.RGcBooleanValidator;
+import org.mo.cloud.common.validator.RGcDoubleValidator;
+import org.mo.cloud.common.validator.RGcFloatValidator;
+import org.mo.cloud.common.validator.RGcIntegerValidator;
+import org.mo.cloud.common.validator.RGcLongValidator;
+import org.mo.cloud.common.validator.RGcStringValidator;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RString;
 import org.mo.com.message.FMessageContext;

@@ -1,13 +1,12 @@
 package org.mo.cloud.logic.data.resource.template;
 
-import org.mo.cloud.logic.data.resource.FGcResourceInfo;
-import org.mo.cloud.logic.data.resource.IGcResourceConsole;
-
 import com.cyou.gccloud.data.data.FDataResourceTemplateLogic;
 import com.cyou.gccloud.data.data.FDataResourceTemplateMaterialLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.data.resource.FGcResourceInfo;
+import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;

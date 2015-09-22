@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+   
+   <!-- ============================================================ -->
+   <!-- SystemLoggerConsole:系统日志控制台                           -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.ahyc.eai.logger.core.system.ISystemLoggerConsole'
+         class = 'com.ahyc.eai.logger.core.system.FSystemLoggerConsole'
+         scope = 'global'>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- SystemExceptionConsole:系统例外控制台                        -->
+   <!-- ============================================================ -->
+   <Component
+         face  = 'com.ahyc.eai.logger.core.system.ISystemExceptionConsole'
+         class = 'com.ahyc.eai.logger.core.system.FSystemExceptionConsole'
+         scope = 'global'>
+   </Component>
+   
+</Config>

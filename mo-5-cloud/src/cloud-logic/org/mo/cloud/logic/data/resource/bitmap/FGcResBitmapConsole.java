@@ -1,13 +1,12 @@
 package org.mo.cloud.logic.data.resource.bitmap;
 
-import org.mo.cloud.logic.data.resource.FGcResourceInfo;
-import org.mo.cloud.logic.data.resource.IGcResourceConsole;
-
 import com.cyou.gccloud.data.data.FDataResourceBitmapLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.data.resource.FGcResourceInfo;
+import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;

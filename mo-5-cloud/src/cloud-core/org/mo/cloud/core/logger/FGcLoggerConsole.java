@@ -1,8 +1,8 @@
 package org.mo.cloud.core.logger;
 
-import com.cyou.gccloud.common.datetime.IDateTimeConsole;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import org.mo.cloud.common.datetime.IDateTimeConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;

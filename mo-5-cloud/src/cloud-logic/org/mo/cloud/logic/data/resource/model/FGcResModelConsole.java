@@ -1,14 +1,5 @@
 package org.mo.cloud.logic.data.resource.model;
 
-import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonInfo;
-import org.mo.cloud.logic.data.resource.model.skeleton.IGcResModelSkeletonConsole;
-
-import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
-import org.mo.cloud.logic.data.resource.model.mesh.IGcResModelMeshConsole;
-import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationInfo;
-import org.mo.cloud.logic.data.resource.model.animation.IGcResModelAnimationConsole;
-import org.mo.cloud.logic.data.resource.FGcResourceInfo;
-import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelMeshLogic;
@@ -17,6 +8,14 @@ import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.EGcStorageCatalog;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.data.resource.FGcResourceInfo;
+import org.mo.cloud.logic.data.resource.IGcResourceConsole;
+import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationInfo;
+import org.mo.cloud.logic.data.resource.model.animation.IGcResModelAnimationConsole;
+import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
+import org.mo.cloud.logic.data.resource.model.mesh.IGcResModelMeshConsole;
+import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonInfo;
+import org.mo.cloud.logic.data.resource.model.skeleton.IGcResModelSkeletonConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.core.aop.face.ALink;
