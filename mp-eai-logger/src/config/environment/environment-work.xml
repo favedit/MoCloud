@@ -16,9 +16,9 @@
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
                <Property name='name'>logger</Property>
-               <Property name='driver_class'>com.cyou.gccloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.127.3.12:3306/PD_LOGGER</Property>
+               <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_LOGGER</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>

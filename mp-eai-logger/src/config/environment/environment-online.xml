@@ -16,7 +16,7 @@
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
                <Property name='name'>logger</Property>
-               <Property name='driver_class'>com.cyou.gccloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://10.30.101.2:3306/PR_LOGGER</Property>
                <Property name='passport'>cloud</Property>

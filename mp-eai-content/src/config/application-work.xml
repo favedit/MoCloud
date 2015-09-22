@@ -3,6 +3,7 @@
 <Configuration>
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
+   <Define name='application.code'>eai.content</Define>
    <Define name='application.name'>mp-eai-content</Define>
    <Define name='application.mode'>test</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
@@ -16,10 +17,9 @@
 
    <!-- 服务器设定 -->
    <Define name='eai.content.login.oa'>N</Define>
-   <Define name='cloud.server.storage.local'>http://localhost:93</Define>
-   <Define name='cloud.server.storage.remote'>http://localhost:93</Define>
-   <Define name='cloud.server.logger.local'>http://localhost:94</Define>
-   
+   <Define name='cloud.server.logger.enable'>Y</Define>
+   <Define name='cloud.server.logger.publish'>http://localhost:9099/eai.logger.publish.ws</Define>
+
    <!-- 包含：系统设定 -->
    <Include>${application.config}/common/define.xml</Include>
    <Include>${application.config}/common/core.xml</Include>

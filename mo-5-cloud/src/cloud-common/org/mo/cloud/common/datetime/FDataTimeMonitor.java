@@ -8,11 +8,20 @@ import org.mo.core.monitor.common.FAbstractMonitor;
 import org.mo.eng.data.IDatabaseConsole;
 
 //============================================================
-// <T>时间监听器。</T>
+// <T>时间监视器。</T>
 //============================================================
 public class FDataTimeMonitor
       extends FAbstractMonitor
 {
+   //============================================================
+   // <T>构造时间监视器。</T>
+   //============================================================
+   public FDataTimeMonitor(){
+      _name = "time.monitorr";
+      _valid = true;
+      _interval = 300000;
+   }
+
    private static final String gettimesql = "select CURRENT_TIMESTAMP";
 
    private IDatabaseConsole _databaseConsole;
@@ -31,12 +40,6 @@ public class FDataTimeMonitor
 
    public void setDatabaseConsole(IDatabaseConsole console){
       _databaseConsole = console;
-   }
-
-   public FDataTimeMonitor(){
-      _name = "time.monitorr";
-      _valid = true;
-      _interval = 300000;
    }
 
    private void tick(){

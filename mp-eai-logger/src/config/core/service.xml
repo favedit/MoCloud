@@ -6,10 +6,10 @@
    <!-- ============================================================ -->
    <WebService
          name  = 'cloud.logger.publish'
-         face  = 'com.cyou.gccloud.logger.face.logger.IPublishService'/>
+         face  = 'com.ahyc.eai.logger.face.logger.IPublishService'/>
 
    <Component
-         face  = 'com.cyou.gccloud.logger.face.logger.IPublishService'
-         class = 'com.cyou.gccloud.logger.face.logger.FPublishService'
+         face  = 'com.ahyc.eai.logger.face.logger.IPublishService'
+         class = 'com.ahyc.eai.logger.face.logger.FPublishService'
          scope = 'global'/>
 </Config>

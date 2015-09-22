@@ -15,6 +15,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialPhaseUnit;
@@ -70,6 +71,7 @@ public class FStatisticsDynamicCalculater
       // 代码修正
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FStatisticsFinancialAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialAmountLogic.class);
+      FStatisticsFinancialMemberLogic memberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
       FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
       FStatisticsFinancialMarketerLogic marketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
       FStatisticsFinancialDepartmentLogic departmentLogic = logicContext.findLogic(FStatisticsFinancialDepartmentLogic.class);
@@ -96,7 +98,7 @@ public class FStatisticsDynamicCalculater
                if(customerActionCd == EGcFinancialCustomerAction.Investment){
                   // 设置投资时间
                   memberUnit.investmentDate().assign(customerActionDate);
-                  customerLogic.doUpdate(memberUnit);
+                  memberLogic.doUpdate(memberUnit);
                }
             }
          }
