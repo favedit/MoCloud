@@ -181,6 +181,7 @@ public class FStatisticsCustomerServlet
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeBoolean(investmentFirst);
          stream.writeUint16(investmentNumber);
+         stream.writeBoolean(dynamicUnit.tenderChanged());
          stream.writeString(investmentTenderPriorCode);
          stream.writeString(investmentTenderPriorLabel);
          stream.writeString(investmentTenderCode);
