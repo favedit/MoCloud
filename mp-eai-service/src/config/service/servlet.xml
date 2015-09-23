@@ -27,6 +27,18 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
+   <!-- 统计项目数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.tender'
+         face  = 'com.ahyc.eai.service.financial.tender.IStatisticsTenderServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.financial.tender.IStatisticsTenderServlet'
+         class = 'com.ahyc.eai.service.financial.tender.FStatisticsTenderServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
    <!-- 统计客户数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet

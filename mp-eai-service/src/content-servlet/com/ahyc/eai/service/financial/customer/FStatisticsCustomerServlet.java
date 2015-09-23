@@ -268,22 +268,6 @@ public class FStatisticsCustomerServlet
    }
 
    //============================================================
-   // <T>获得投资产品数据。</T>
-   //
-   // @param context 环境
-   // @param logicContext 逻辑环境
-   // @param request 请求
-   // @param response 应答
-   //============================================================
-   @Override
-   public EResult tenderInfo(IWebContext context,
-                             ILogicContext logicContext,
-                             IWebServletRequest request,
-                             IWebServletResponse response){
-      return null;
-   }
-
-   //============================================================
    // <T>获得投资产品动态数据。</T>
    //
    // @param context 环境

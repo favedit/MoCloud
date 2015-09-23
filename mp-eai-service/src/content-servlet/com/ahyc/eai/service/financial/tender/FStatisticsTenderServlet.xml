@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.tender.info'>
+SELECT
+   `id`, 
+   `borrow_name`, 
+   `borrow_type`, 
+   `borrow_startmoney`, 
+   `deadline`, 
+   `borrow_model`,
+   `borrow_min`,
+   `reward_type`,
+   `borrow_times`,
+   `borrow_status`,
+   `borrow_money`,
+   `borrow_use`,
+   `repayment_type`,
+   `borrow_interest_rate`,
+   `borrow_duration`,
+   `collect_time`,
+   `add_time`,
+   `province`,
+   `has_borrow`,
+   `has_vouch`,
+   `city`,
+   `area`,
+   `reward_type`,
+   `reward_num`,
+   `password`,
+   `start_time`,
+   `is_tuijian`,
+   `deadline`,
+   `danbao`,
+   `borrow_info`,
+   `borrow_number`,
+   `baoli_number`,
+   `finance_lease`,
+   `leasetime`,
+   `borrow_people`,
+   `risk_control`
+FROM lzh_borrow_info
+WHERE borrow_status in (2, 4, 6, 7)
+   AND is_tuijian in (0, 1)
+   AND id not in (530, 566, 579, 746)
+   AND borrow_model in ('newdetaildh', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang')
+ORDER BY
+   borrow_status ASC,
+   field(borrow_model, 'newdetaildh', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang'),
+   id DESC
+LIMIT 6;
+</Resource>
+
+</Config>
