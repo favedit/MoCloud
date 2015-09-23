@@ -51,6 +51,12 @@ CREATE TABLE `ST_FIN_TENDER`
    `MORTGAGE_INFO`                 TEXT, 
    `INVESTMENT_BEGIN_DATE`         DATETIME, 
    `INVESTMENT_END_DATE`           DATETIME, 
+   `INVESTMENT_COUNT`              INTEGER, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_COUNT`              INTEGER, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
@@ -61,7 +67,7 @@ ALTER TABLE ST_FIN_TENDER
    ADD CONSTRAINT ST_FIN_TDR_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE ST_FIN_TENDER 
-   ADD CONSTRAINT ST_FIN_TDR_UK_LINK_ID UNIQUE ( LINK_ID ); 
+   ADD CONSTRAINT ST_FIN_TDR_UK_LINK_ID UNIQUE ( LINK_ID );
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Dynamic]
@@ -444,6 +450,7 @@ CREATE TABLE `ST_FIN_TENDER_AMOUNT`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `TENDER_ID`                     BIGINT NOT NULL, 
    `TENDER_LABEL`                  VARCHAR(40), 
+   `TENDER_MODEL`                  VARCHAR(40), 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `REDEMPTION_TOTAL`              DOUBLE, 
    `INTEREST_TOTAL`                DOUBLE, 

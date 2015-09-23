@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="59111db0-2176-4a68-8070-8ceb67ba0ca4" name="statistics.financial.tender" label="M#12cn15动态投标表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Tender" data_name="ST_FIN_TENDER" data_alias="ST_FIN_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldRecordId _uuid="b20b3017-481c-4fa1-af9e-af4637cc90cd" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
-  <FieldDateTime _uuid="7846b062-ee68-474f-8722-220d4a3f9bf9" name="link_date" label="M#12cn14记录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
-  <FieldInteger _uuid="436130cf-c49b-4735-aa9a-5f49ac8222e3" name="group_number" label="M#12cn14分组编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GROUP_NUMBER" />
-  <FieldString _uuid="fbf02124-d675-4055-94ad-d77bcf39754b" name="label" label="M#12cn12标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="800" />
-  <FieldString _uuid="b607c8e5-9740-4082-be84-7318987f0c03" name="borrow_model" label="M#12cn14借款类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MODEL" data_size="20" />
-  <FieldInteger _uuid="a44d2ffd-fcc5-499d-851d-9e85d81cf762" name="borrow_duration" label="M#12cn14借款期限" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_DURATION" />
-  <FieldDouble _uuid="bdb3da0b-a72e-45e0-825f-4694415804da" name="borrow_money" label="M#12cn14借款金额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MONEY" />
-  <FieldDouble _uuid="9c8d7bba-81ec-45b7-86eb-5875c924c067" name="borrow_inerest" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST" />
-  <FieldFloat _uuid="1db45be6-dcf0-4126-b23a-5b6cde5ec2f2" name="borrow_inerest_rate" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST_RATE" />
-  <FieldString _uuid="1cef4242-66e3-4fc4-a3f2-a97e00be41d0" name="borrow_info" label="M#12cn14借款信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INFO" data_size="2000" />
-  <FieldContent _uuid="d0521212-4648-4266-b162-78c504895af6" name="project_info" label="M#12cn14项目信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_INFO" />
-  <FieldContent _uuid="609532a3-909a-42f2-89a0-b09fdc7aae42" name="company_info" label="M#12cn14企业信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_INFO" />
-  <FieldContent _uuid="74b1cea4-4f9a-41d4-a2b6-427fa0189751" name="safeguard_info" label="M#12cn14保障信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SAFEGUARD_INFO" />
-  <FieldContent _uuid="238d2175-f7c7-4b71-a411-04eb38e8ad20" name="mortgage_info" label="M#12cn14抵押信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MORTGAGE_INFO" />
-  <FieldDateTime _uuid="f78b3670-665a-473f-933d-effe8bf9728e" name="investment_begin_date" label="M#12cn16投标开始日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_BEGIN_DATE" />
-  <FieldDateTime _uuid="fe733f74-5fe4-43c5-bd0c-d2c942273dd8" name="investment_end_date" label="M#12cn14结束日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_END_DATE" />
-  <FieldTemplate _uuid="bfaf984a-071f-412e-b4bc-eb28b98adcd8" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+<DataStore _uuid="671d0303-492c-4c9f-a6d9-5d7159e830df" name="statistics.financial.tender" label="M#12cn15动态投标表" is_valid="Y" note="M#" data_engine="MyISAM" data_group="statistics" data_factory="Statistics.Financial.Tender" data_name="ST_FIN_TENDER" data_alias="ST_FIN_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="6c4b427c-839a-4d02-b589-109917100883" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_unique="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldDateTime _uuid="6111c9a8-07b4-4314-835b-b7707892a062" name="link_date" label="M#12cn14记录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
+  <FieldInteger _uuid="124e09dd-ad95-4c2b-960c-e9631b582a82" name="group_number" label="M#12cn14分组编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="GROUP_NUMBER" />
+  <FieldString _uuid="d616749d-98cb-40ef-81b4-fdb94faf13ba" name="label" label="M#12cn12标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="800" />
+  <FieldString _uuid="3ae5a923-2992-4a4f-97e0-d38f8dd8e65b" name="borrow_model" label="M#12cn14借款类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MODEL" data_size="20" />
+  <FieldInteger _uuid="e065eba2-adb2-46c9-aec1-aa6e58274757" name="borrow_duration" label="M#12cn14借款期限" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_DURATION" />
+  <FieldDouble _uuid="ee2b3f14-00b1-4183-b3ec-776416fcca0c" name="borrow_money" label="M#12cn14借款金额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MONEY" />
+  <FieldDouble _uuid="c6a4f124-cd9f-4de6-af75-8f0eeec05eee" name="borrow_inerest" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST" />
+  <FieldFloat _uuid="0fc0219f-dad9-48f0-bd7b-b7ab65874ac9" name="borrow_inerest_rate" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST_RATE" />
+  <FieldString _uuid="c30f82e0-0547-4706-80d9-797b1bbb100c" name="borrow_info" label="M#12cn14借款信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INFO" data_size="2000" />
+  <FieldContent _uuid="18d8630f-dce6-476e-98d7-4c6924828dc8" name="project_info" label="M#12cn14项目信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_INFO" />
+  <FieldContent _uuid="13f74f4e-f380-4d4c-a058-67e6b6808a6a" name="company_info" label="M#12cn14企业信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_INFO" />
+  <FieldContent _uuid="23b3ac46-bfc7-4413-b75f-c03dae68d33e" name="safeguard_info" label="M#12cn14保障信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SAFEGUARD_INFO" />
+  <FieldContent _uuid="f10cdc41-5021-4b42-9ebb-e77196a3812b" name="mortgage_info" label="M#12cn14抵押信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MORTGAGE_INFO" />
+  <FieldDateTime _uuid="5397ec3c-1c1c-4617-a97e-50f72b3383bf" name="investment_begin_date" label="M#12cn16投标开始日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_BEGIN_DATE" />
+  <FieldDateTime _uuid="4e9effe0-9226-44ff-960c-ab1f8fad1bb2" name="investment_end_date" label="M#12cn14结束日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_END_DATE" />
+  <FieldInteger _uuid="af6c8fbb-8fb1-4151-b62f-7c35701bf7a3" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
+  <FieldDouble _uuid="57a1d40d-5851-436d-b90e-4166d8cb332d" name="investment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="4c6f1b40-bad8-414f-a76d-84f256ab61dd" name="redemption_count" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_COUNT" />
+  <FieldDouble _uuid="af98d617-1798-448a-8d46-d0b24cb9b691" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="3bbf79f1-d17a-4dfe-9833-21ac9b59d6f3" name="interest_total" label="M#12cn12利息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldDouble _uuid="415a789c-97bd-46c9-a185-665680f59977" name="netinvestment_total" label="M#12cn14净投总数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldTemplate _uuid="571c7e40-8b84-4352-acb8-f37704697b65" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

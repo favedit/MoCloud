@@ -11,6 +11,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerGender;
@@ -56,6 +57,7 @@ public class FStatisticsInvestmentCalculater
       ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
+      FStatisticsFinancialTenderLogic tenderLogic = logicContext.findLogic(FStatisticsFinancialTenderLogic.class);
       IStatisticsTenderConsole tenderConsole = RAop.find(IStatisticsTenderConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
       String selectSql = RString.format("SELECT id,borrow_id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<={2}",
@@ -65,6 +67,7 @@ public class FStatisticsInvestmentCalculater
             long recordId = row.getLong("id");
             long borrowId = row.getLong("borrow_id");
             long customerId = row.getLong("investor_uid");
+            double investment = row.getDouble("investor_capital");
             // 查找理财师编号
             long recommentId = sourceConnection.executeLong("select recommend_id from lzh_members where id=" + customerId);
             // 查找理财师信息：理财师编号/部门编号
@@ -106,6 +109,11 @@ public class FStatisticsInvestmentCalculater
                tenderId = tenderUnit.ouid();
                tenderLinkId = tenderUnit.linkId();
                tenderModel = tenderUnit.borrowModel();
+               // 更新投资数据
+               tenderUnit.setInvestmentCount(tenderUnit.investmentCount() + 1);
+               tenderUnit.setInvestmentTotal(tenderUnit.investmentTotal() + investment);
+               tenderUnit.setNetinvestmentTotal(tenderUnit.investmentTotal() - tenderUnit.redemptionTotal());
+               tenderLogic.doUpdate(tenderUnit);
             }
             //............................................................
             // 新建记录
@@ -176,7 +184,7 @@ public class FStatisticsInvestmentCalculater
             }
             dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Investment);
             dynamicUnit.customerActionDate().parse(row.get("investor_date"));
-            dynamicUnit.setCustomerActionAmount(row.getDouble("investor_capital"));
+            dynamicUnit.setCustomerActionAmount(investment);
             // 设置投资内容
             dynamicUnit.setTenderChanged(tenderChanged);
             dynamicUnit.setTenderPriorId(tenderPriorId);

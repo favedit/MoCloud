@@ -90,6 +90,24 @@ public class FStatisticsFinancialTenderLogic
    // 字段结束日期的定义。
    public final static SLogicFieldInfo INVESTMENT_END_DATE = new SLogicFieldInfo("INVESTMENT_END_DATE");
 
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
+
+   // 字段净投总计的定义。
+   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
+
+   // 字段赎回次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
+
+   // 字段赎回总计的定义。
+   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
+
+   // 字段利息的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
+   // 字段净投总数的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -103,7 +121,7 @@ public class FStatisticsFinancialTenderLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`INVESTMENT_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态投标表逻辑单元。</T>
@@ -715,6 +733,12 @@ public class FStatisticsFinancialTenderLogic
       cmd.append(",`MORTGAGE_INFO`");
       cmd.append(",`INVESTMENT_BEGIN_DATE`");
       cmd.append(",`INVESTMENT_END_DATE`");
+      cmd.append(",`INVESTMENT_COUNT`");
+      cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`REDEMPTION_COUNT`");
+      cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -846,6 +870,18 @@ public class FStatisticsFinancialTenderLogic
          cmd.append(investmentEndDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
+      cmd.append(',');
+      cmd.append(unit.investmentCount());
+      cmd.append(',');
+      cmd.append(unit.investmentTotal());
+      cmd.append(',');
+      cmd.append(unit.redemptionCount());
+      cmd.append(',');
+      cmd.append(unit.redemptionTotal());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
+      cmd.append(',');
+      cmd.append(unit.netinvestmentTotal());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -1064,6 +1100,30 @@ public class FStatisticsFinancialTenderLogic
             cmd.append(investmentEndDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
+      }
+      if(unit.isInvestmentCountChanged()){
+         cmd.append(",`INVESTMENT_COUNT`=");
+         cmd.append(unit.investmentCount());
+      }
+      if(unit.isInvestmentTotalChanged()){
+         cmd.append(",`INVESTMENT_TOTAL`=");
+         cmd.append(unit.investmentTotal());
+      }
+      if(unit.isRedemptionCountChanged()){
+         cmd.append(",`REDEMPTION_COUNT`=");
+         cmd.append(unit.redemptionCount());
+      }
+      if(unit.isRedemptionTotalChanged()){
+         cmd.append(",`REDEMPTION_TOTAL`=");
+         cmd.append(unit.redemptionTotal());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
+      }
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

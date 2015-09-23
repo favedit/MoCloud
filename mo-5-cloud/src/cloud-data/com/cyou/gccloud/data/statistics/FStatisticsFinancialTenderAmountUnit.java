@@ -51,6 +51,12 @@ public class FStatisticsFinancialTenderAmountUnit
    // 字段竞标名称的定义。
    protected String _tenderLabel;
 
+   // 存储字段投资模式的定义。
+   private String __tenderModel;
+
+   // 字段投资模式的定义。
+   protected String _tenderModel;
+
    // 存储字段净投总计的定义。
    private double __investmentTotal;
 
@@ -244,6 +250,33 @@ public class FStatisticsFinancialTenderAmountUnit
    //============================================================
    public void setTenderLabel(String value){
       _tenderLabel = value;
+   }
+
+   //============================================================
+   // <T>判断投资模式的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderModelChanged(){
+      return !RString.equals(__tenderModel, _tenderModel);
+   }
+
+   //============================================================
+   // <T>获得投资模式的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String tenderModel(){
+      return _tenderModel;
+   }
+
+   //============================================================
+   // <T>设置投资模式的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderModel(String value){
+      _tenderModel = value;
    }
 
    //============================================================
@@ -508,6 +541,8 @@ public class FStatisticsFinancialTenderAmountUnit
             return Long.toString(_tenderId);
          case "tender_label":
             return _tenderLabel;
+         case "tender_model":
+            return _tenderModel;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -554,6 +589,9 @@ public class FStatisticsFinancialTenderAmountUnit
             break;
          case "tender_label":
             _tenderLabel = value;
+            break;
+         case "tender_model":
+            _tenderModel = value;
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -617,6 +655,10 @@ public class FStatisticsFinancialTenderAmountUnit
                __tenderLabel = value;
                _tenderLabel = __tenderLabel;
                break;
+            case "tender_model":
+               __tenderModel = value;
+               _tenderModel = __tenderModel;
+               break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
@@ -670,6 +712,7 @@ public class FStatisticsFinancialTenderAmountUnit
       row.set("guid", _guid);
       row.set("tenderId", _tenderId);
       row.set("tenderLabel", _tenderLabel);
+      row.set("tenderModel", _tenderModel);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("interestTotal", _interestTotal);
@@ -694,6 +737,7 @@ public class FStatisticsFinancialTenderAmountUnit
       map.put("guid", _guid);
       map.put("tenderId", RLong.toString(_tenderId));
       map.put("tenderLabel", _tenderLabel);
+      map.put("tenderModel", _tenderModel);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
@@ -718,6 +762,7 @@ public class FStatisticsFinancialTenderAmountUnit
       _guid = input.readString();
       _tenderId = input.readInt64();
       _tenderLabel = input.readString();
+      _tenderModel = input.readString();
       _customerTotal = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -738,6 +783,7 @@ public class FStatisticsFinancialTenderAmountUnit
       output.writeString(_guid);
       output.writeInt64(_tenderId);
       output.writeString(_tenderLabel);
+      output.writeString(_tenderModel);
       output.writeInt32(_customerTotal);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

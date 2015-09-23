@@ -47,6 +47,9 @@ public class FStatisticsFinancialTenderAmountLogic
    // 字段竞标名称的定义。
    public final static SLogicFieldInfo TENDER_LABEL = new SLogicFieldInfo("TENDER_LABEL");
 
+   // 字段投资模式的定义。
+   public final static SLogicFieldInfo TENDER_MODEL = new SLogicFieldInfo("TENDER_MODEL");
+
    // 字段净投总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
@@ -75,7 +78,7 @@ public class FStatisticsFinancialTenderAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`TENDER_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`TENDER_LABEL`,`TENDER_MODEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造投标数据统计表逻辑单元。</T>
@@ -673,6 +676,7 @@ public class FStatisticsFinancialTenderAmountLogic
       cmd.append(",`GUID`");
       cmd.append(",`TENDER_ID`");
       cmd.append(",`TENDER_LABEL`");
+      cmd.append(",`TENDER_MODEL`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
@@ -710,6 +714,15 @@ public class FStatisticsFinancialTenderAmountLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(tenderLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String tenderModel = unit.tenderModel();
+      if(RString.isEmpty(tenderModel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenderModel));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -813,6 +826,17 @@ public class FStatisticsFinancialTenderAmountLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(tenderLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isTenderModelChanged()){
+         cmd.append(",`TENDER_MODEL`=");
+         String tenderModel = unit.tenderModel();
+         if(RString.isEmpty(tenderModel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenderModel));
             cmd.append('\'');
          }
       }

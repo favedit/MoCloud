@@ -136,6 +136,42 @@ public class FStatisticsFinancialTenderUnit
    // 字段结束日期的定义。
    protected TDateTime _investmentEndDate = new TDateTime();
 
+   // 存储字段投资次数的定义。
+   private int __investmentCount;
+
+   // 字段投资次数的定义。
+   protected int _investmentCount;
+
+   // 存储字段净投总计的定义。
+   private double __investmentTotal;
+
+   // 字段净投总计的定义。
+   protected double _investmentTotal;
+
+   // 存储字段赎回次数的定义。
+   private int __redemptionCount;
+
+   // 字段赎回次数的定义。
+   protected int _redemptionCount;
+
+   // 存储字段赎回总计的定义。
+   private double __redemptionTotal;
+
+   // 字段赎回总计的定义。
+   protected double _redemptionTotal;
+
+   // 存储字段利息的定义。
+   private double __interestTotal;
+
+   // 字段利息的定义。
+   protected double _interestTotal;
+
+   // 存储字段净投总数的定义。
+   private double __netinvestmentTotal;
+
+   // 字段净投总数的定义。
+   protected double _netinvestmentTotal;
+
    // 存储字段创建用户标识的定义。
    private long __createUserId;
 
@@ -680,6 +716,168 @@ public class FStatisticsFinancialTenderUnit
    }
 
    //============================================================
+   // <T>判断投资次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentCountChanged(){
+      return __investmentCount != _investmentCount;
+   }
+
+   //============================================================
+   // <T>获得投资次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentCount(){
+      return _investmentCount;
+   }
+
+   //============================================================
+   // <T>设置投资次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentCount(int value){
+      _investmentCount = value;
+   }
+
+   //============================================================
+   // <T>判断净投总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentTotalChanged(){
+      return __investmentTotal != _investmentTotal;
+   }
+
+   //============================================================
+   // <T>获得净投总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double investmentTotal(){
+      return _investmentTotal;
+   }
+
+   //============================================================
+   // <T>设置净投总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentTotal(double value){
+      _investmentTotal = value;
+   }
+
+   //============================================================
+   // <T>判断赎回次数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionCountChanged(){
+      return __redemptionCount != _redemptionCount;
+   }
+
+   //============================================================
+   // <T>获得赎回次数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionCount(){
+      return _redemptionCount;
+   }
+
+   //============================================================
+   // <T>设置赎回次数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionCount(int value){
+      _redemptionCount = value;
+   }
+
+   //============================================================
+   // <T>判断赎回总计的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionTotalChanged(){
+      return __redemptionTotal != _redemptionTotal;
+   }
+
+   //============================================================
+   // <T>获得赎回总计的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double redemptionTotal(){
+      return _redemptionTotal;
+   }
+
+   //============================================================
+   // <T>设置赎回总计的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionTotal(double value){
+      _redemptionTotal = value;
+   }
+
+   //============================================================
+   // <T>判断利息的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInterestTotalChanged(){
+      return __interestTotal != _interestTotal;
+   }
+
+   //============================================================
+   // <T>获得利息的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double interestTotal(){
+      return _interestTotal;
+   }
+
+   //============================================================
+   // <T>设置利息的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInterestTotal(double value){
+      _interestTotal = value;
+   }
+
+   //============================================================
+   // <T>判断净投总数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNetinvestmentTotalChanged(){
+      return __netinvestmentTotal != _netinvestmentTotal;
+   }
+
+   //============================================================
+   // <T>获得净投总数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double netinvestmentTotal(){
+      return _netinvestmentTotal;
+   }
+
+   //============================================================
+   // <T>设置净投总数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNetinvestmentTotal(double value){
+      _netinvestmentTotal = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -834,6 +1032,18 @@ public class FStatisticsFinancialTenderUnit
             return _investmentBeginDate.toString();
          case "investment_end_date":
             return _investmentEndDate.toString();
+         case "investment_count":
+            return RInteger.toString(_investmentCount);
+         case "investment_total":
+            return RDouble.toString(_investmentTotal);
+         case "redemption_count":
+            return RInteger.toString(_redemptionCount);
+         case "redemption_total":
+            return RDouble.toString(_redemptionTotal);
+         case "interest_total":
+            return RDouble.toString(_interestTotal);
+         case "netinvestment_total":
+            return RDouble.toString(_netinvestmentTotal);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -912,6 +1122,24 @@ public class FStatisticsFinancialTenderUnit
             break;
          case "investment_end_date":
             _investmentEndDate.parse(value);
+            break;
+         case "investment_count":
+            _investmentCount = RInteger.parse(value);
+            break;
+         case "investment_total":
+            _investmentTotal = RDouble.parse(value);
+            break;
+         case "redemption_count":
+            _redemptionCount = RInteger.parse(value);
+            break;
+         case "redemption_total":
+            _redemptionTotal = RDouble.parse(value);
+            break;
+         case "interest_total":
+            _interestTotal = RDouble.parse(value);
+            break;
+         case "netinvestment_total":
+            _netinvestmentTotal = RDouble.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -1016,6 +1244,30 @@ public class FStatisticsFinancialTenderUnit
                __investmentEndDate.parse(value);
                _investmentEndDate.assign(__investmentEndDate);
                break;
+            case "investment_count":
+               __investmentCount = RInteger.parse(value);
+               _investmentCount = __investmentCount;
+               break;
+            case "investment_total":
+               __investmentTotal = RDouble.parse(value);
+               _investmentTotal = __investmentTotal;
+               break;
+            case "redemption_count":
+               __redemptionCount = RInteger.parse(value);
+               _redemptionCount = __redemptionCount;
+               break;
+            case "redemption_total":
+               __redemptionTotal = RDouble.parse(value);
+               _redemptionTotal = __redemptionTotal;
+               break;
+            case "interest_total":
+               __interestTotal = RDouble.parse(value);
+               _interestTotal = __interestTotal;
+               break;
+            case "netinvestment_total":
+               __netinvestmentTotal = RDouble.parse(value);
+               _netinvestmentTotal = __netinvestmentTotal;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -1063,6 +1315,12 @@ public class FStatisticsFinancialTenderUnit
       row.set("mortgageInfo", _mortgageInfo);
       row.set("investmentBeginDate", _investmentBeginDate);
       row.set("investmentEndDate", _investmentEndDate);
+      row.set("investmentCount", _investmentCount);
+      row.set("investmentTotal", _investmentTotal);
+      row.set("redemptionCount", _redemptionCount);
+      row.set("redemptionTotal", _redemptionTotal);
+      row.set("interestTotal", _interestTotal);
+      row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1096,6 +1354,12 @@ public class FStatisticsFinancialTenderUnit
       map.put("mortgageInfo", _mortgageInfo);
       map.put("investmentBeginDate", _investmentBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentEndDate", _investmentEndDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("investmentCount", RInteger.toString(_investmentCount));
+      map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("redemptionCount", RInteger.toString(_redemptionCount));
+      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("interestTotal", RDouble.toString(_interestTotal));
+      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -1126,6 +1390,8 @@ public class FStatisticsFinancialTenderUnit
       _mortgageInfo = input.readString();
       _investmentBeginDate.set(input.readInt64());
       _investmentEndDate.set(input.readInt64());
+      _investmentCount = input.readInt32();
+      _redemptionCount = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -1156,6 +1422,8 @@ public class FStatisticsFinancialTenderUnit
       output.writeString(_mortgageInfo);
       output.writeInt64(_investmentBeginDate.get());
       output.writeInt64(_investmentEndDate.get());
+      output.writeInt32(_investmentCount);
+      output.writeInt32(_redemptionCount);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
