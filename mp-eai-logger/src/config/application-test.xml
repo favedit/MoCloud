@@ -3,27 +3,15 @@
 <Configuration>
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
-   <Define name='application.name'>mp-cloud-logger</Define>
+   <Define name='application.name'>eai.logger</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application}/deploy</Define>
-   <Define name='application.web'>${application}/webroot</Define>
+   <Define name='application.web'>${application.root}/webroot</Define>
    <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
    <Define name='application.space'>${application.web}/WEB-INF/config</Define>
+   <Define name='application.content'>${application.web}/WEB-INF/content</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
-   <Define name='application.resource'>${application.web}/resource</Define>
-
-   <!-- 服务器设定 -->
-   <Define name='cloud.server.logic'>http://10.12.20.218:8019</Define>
-   <Define name='cloud.server.storage'>http://10.12.20.218:8029</Define>
-
-   <!-- 导出路径 -->
-   <Define name='game.space'>${application.space}</Define>
-   <Define name='game.export.template'>${application}/Source/Game/Configuration/template</Define>
-   <Define name='game.export.resource'>${application}/Source/Export</Define>
-   <Define name='game.export.server'>${application}/Source/Server</Define>
-   <Define name='game.export.client'>${application}/Source/Client</Define>
-   <Define name='game.export.tools'>${application}/Source/Tools</Define>
-   <Define name='game.export.platform'>${application}/Source/Platform</Define>
+   <Define name='application.storage'>${application}/mt-storage</Define>
 
    <!-- 包含：系统设定 -->
    <Include>${application.config}/common/define.xml</Include>

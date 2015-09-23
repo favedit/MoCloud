@@ -14,41 +14,24 @@ SHOW VARIABLES LIKE 'character%';
 
 创建数据库：
 ============================================================
-CREATE DATABASE `EAI_STATISTICS1` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_STATISTICS2` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_STATISTICS3` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
-
-
-CREATE DATABASE `CD_CACHE`          CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `CD_DATA`           CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `CD_LOGGER`         CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
 CREATE DATABASE `EAI_CACHE`         CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_DATA`          CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_STATISTICS`    CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_LOGGER`        CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
-CREATE DATABASE `EAI_DP_CACHE`      CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_DP_DATA`       CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_DP_STATISTICS` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_DP_LOGGER`     CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
-CREATE DATABASE `EAI_TS_CACHE`      CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_TS_DATA`       CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_TS_STATISTICS` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_TS_LOGGER`     CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
-CREATE DATABASE `EAI_OL_CACHE`      CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_OL_DATA`       CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_OL_STATISTICS` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-CREATE DATABASE `EAI_OL_LOGGER`     CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_STATISTICS1` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_STATISTICS2` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE DATABASE `EAI_STATISTICS3` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
 创建用户：
 ============================================================
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
+
+CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'cloud';
+GRANT ALL PRIVILEGES ON *.* TO 'cloud'@'localhost';
+FLUSH PRIVILEGES;
 
 CREATE USER 'eai_online'@'%' IDENTIFIED BY '123';
 GRANT ALL PRIVILEGES ON *.* TO 'eai_online'@'%';

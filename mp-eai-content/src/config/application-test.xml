@@ -16,9 +16,8 @@
 
    <!-- 服务器设定 -->
    <Define name='eai.content.login.oa'>Y</Define>
-   <Define name='cloud.server.storage.local'>http://localhost:93</Define>
-   <Define name='cloud.server.storage.remote'>http://localhost:93</Define>
-   <Define name='cloud.server.logger.local'>http://localhost:94</Define>
+   <Define name='cloud.server.logger.enable'>Y</Define>
+   <Define name='cloud.server.logger.publish'>http://localhost:9099/eai.logger.publish.ws</Define>
    
    <!-- 包含：系统设定 -->
    <Include>${application.config}/common/define.xml</Include>

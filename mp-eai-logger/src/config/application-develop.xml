@@ -27,5 +27,5 @@
    <Include>${application.config}/core/service.xml</Include>
 
    <!-- 包含：环境设定 -->
-   <Include>${application.config}/environment/environment-online.xml</Include>
+   <Include>${application.config}/environment/environment-develop.xml</Include>
 </Configuration>

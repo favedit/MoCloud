@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/content-core"/>
+	<classpathentry kind="src" path="src/content-logic"/>
 	<classpathentry kind="src" path="src/content-servlet"/>
 	<classpathentry kind="src" path="src/content-service"/>
 	<classpathentry kind="src" path="src/content-face"/>
 	<classpathentry kind="src" path="src/config"/>
-	<classpathentry kind="src" path="src/content-logic"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-3-logic"/>
