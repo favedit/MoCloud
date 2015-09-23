@@ -10,5 +10,4 @@ public interface IDataMarketerMemberConsole
       extends
          IAbstractLogicUnitConsole<FDataFinancialMarketerMemberUnit>
 {
-
 }

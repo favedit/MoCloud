@@ -1,15 +1,18 @@
 package org.mo.content.face.pc.marketer.recommend;
 
-import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
-import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
 import org.mo.content.core.financial.member.IDataMemberConsole;
+import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
+import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -24,6 +27,14 @@ public class FRecommendAction
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FRecommendAction.class);
+
+   //session控制台
+   @ALink
+   protected IWebSessionConsole _sessionConsole;
+
+   //用户控制台
+   @ALink
+   protected IUserConsole _userConsole;
 
    //成员信息控制器
    @ALink
@@ -42,8 +53,23 @@ public class FRecommendAction
                            ILogicContext logicContext,
                            FBasePage basePage,
                            FRecommendPage page){
-
-      return "";
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _sessionConsole.open(session);
+      _logger.debug(this, "Main", "Main default begin.(session={1})", session);
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      if(user != null){
+         page.setLabel(user.label());
+      }
+      if(null != context.parameter("page")){
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      }else{
+         page.setPageCurrent(0);
+      }
+      FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, page.pageCurrent() - 1);
+      page.setMemberList(memberList);
+      _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList.first().ouid());
+      return "/pc/marketer/recommend/MemberList";
    }
 
    //============================================================
@@ -67,8 +93,9 @@ public class FRecommendAction
       }else{
          page.setPageCurrent(0);
       }
-      FLogicDataset<FDataFinancialMemberUnit> memberList = _memberConsole.fetch(logicContext, null, FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC");
+      FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, page.pageCurrent() - 1);
       page.setMemberList(memberList);
-      return "/marketer/recommend/CustomerList";
+      _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList);
+      return "/pc/marketer/recommend/MemberList";
    }
 }

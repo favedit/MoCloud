@@ -11,11 +11,9 @@
 
 <script type="text/javascript" src="../../js/jquery.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-<!--<script type="text/javascript" src="js/main.js"></script> -->
 </head>
 <body>
 <FORM id="form" name='frmMain' method='post' action='Main.wa'>
-<p id="prompt" class="prompt"><span>您好，欢迎登录！</span></p>
 <TABLE id="table" style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
 <TR>
    <TD id="header"  colspan="2"  align="center" valign="center">
@@ -26,11 +24,10 @@
          </div>
          <div class="head-right">
             <ul class="user-l">
-               <li><a href="">实时数据展示系统</a></li>
-               <li><a href="">实时数据展示系统</a></li>
+               <li><a href="/pc/marketer/recommend/Recommend.wa">潜在客户挖掘</a></li>
             </ul>
              <ul class="user-r">
-               <span>用户名</span>
+               <span><jh:write source='&page.label' /><je:authority role='eai.marketer'><font size="3" color="#FF851A">(理财师)</font></je:authority></span>
                <img class="triangle" src="../../images/main/new8.png">
                <li>
                   <i class="img-details mr-20 pulse">
@@ -39,11 +36,6 @@
                   <b></b>
                </li>
             </ul>
-         <!-- <jh:equals source="host" value="&page.userType">
-               <div class="switch">
-                 <a href="Index.wa?time=today">切换帐号</a>
-               </div>
-         </jh:equals> -->
       </div>
    </TD>
 </TR>
