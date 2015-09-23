@@ -62,7 +62,7 @@ public class FStatisticsTenderServlet
    //============================================================
    @Override
    public FDictionary<Double> fetchModels(ILogicContext logicContext){
-      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.DATA);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       FSql sql = _resource.findString(FSql.class, "sql.tender.model");
       FDictionary<Double> models = new FDictionary<Double>(Double.class);
       FDataset dataset = connection.fetchDataset(sql);
@@ -101,14 +101,15 @@ public class FStatisticsTenderServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
-      ISqlConnection connection = logicContext.activeConnection("statistics");
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      ISqlConnection connectionEzubo = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       //............................................................
       // 获得模式数据
       FDictionary<Double> models = fetchModels(logicContext);
       //............................................................
       // 输出排行数据
       FSql infoSql = _resource.findString(FSql.class, "sql.tender.info");
-      FDataset infoDataset = connection.fetchDataset(infoSql);
+      FDataset infoDataset = connectionEzubo.fetchDataset(infoSql);
       int infoCount = infoDataset.count();
       stream.writeInt32(infoCount);
       for(FRow row : infoDataset){
