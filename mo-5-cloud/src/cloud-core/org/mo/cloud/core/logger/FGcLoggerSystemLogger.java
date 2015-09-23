@@ -1,6 +1,7 @@
 package org.mo.cloud.core.logger;
 
 import com.cyou.gccloud.define.enums.common.EGcLogger;
+import org.mo.com.logging.ELoggerLevel;
 import org.mo.com.xml.FXmlNode;
 
 //============================================================
@@ -13,7 +14,7 @@ public class FGcLoggerSystemLogger
    protected long _userId;
 
    // 级别类型
-   protected int _levelCd;
+   protected ELoggerLevel _levelCd;
 
    // 代码
    protected String _code;
@@ -39,7 +40,7 @@ public class FGcLoggerSystemLogger
    // @param parameters 参数集合
    //============================================================
    public FGcLoggerSystemLogger(long userId,
-                                int levelCd,
+                                ELoggerLevel levelCd,
                                 String code,
                                 String description,
                                 Object... parameters){
@@ -74,7 +75,7 @@ public class FGcLoggerSystemLogger
    //
    // @return 级别类型
    //============================================================
-   public int levelCd(){
+   public ELoggerLevel levelCd(){
       return _levelCd;
    }
 
@@ -83,7 +84,7 @@ public class FGcLoggerSystemLogger
    //
    // @param levelCd 级别类型
    //============================================================
-   public void setLevelCd(int levelCd){
+   public void setLevelCd(ELoggerLevel levelCd){
       _levelCd = levelCd;
    }
 
@@ -132,7 +133,7 @@ public class FGcLoggerSystemLogger
    public void loadConfig(FXmlNode xconfig){
       super.loadConfig(xconfig);
       _userId = xconfig.getLong("user_id");
-      _levelCd = xconfig.getInt("level_cd");
+      _levelCd = ELoggerLevel.parseCode(xconfig.get("level_cd"));
       _code = xconfig.get("code");
       _description = xconfig.get("description");
    }
@@ -146,7 +147,7 @@ public class FGcLoggerSystemLogger
    public void saveConfig(FXmlNode xconfig){
       super.saveConfig(xconfig);
       xconfig.set("user_id", _userId);
-      xconfig.set("level_cd", _levelCd);
+      xconfig.set("level_cd", ELoggerLevel.toCode(_levelCd));
       xconfig.set("code", _code);
       xconfig.set("description", _description);
    }

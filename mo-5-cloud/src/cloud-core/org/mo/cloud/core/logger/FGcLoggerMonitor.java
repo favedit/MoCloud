@@ -18,7 +18,6 @@ public class FGcLoggerMonitor
    // <T>构造日志监视器。</T>
    //============================================================
    public FGcLoggerMonitor(){
-      _valid = true;
       _interval = 10000;
    }
 

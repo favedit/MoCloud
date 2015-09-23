@@ -152,6 +152,7 @@ public class FGcLogger
    public void loadConfig(FXmlNode xconfig){
       _typeCd = xconfig.getInt("type_cd");
       _serverCode = xconfig.get("server_code");
+      _serverHost = xconfig.get("server_host");
       _dateTime = xconfig.getLong("datetime");
       if(xconfig.contains("attributes")){
          String attributePack = xconfig.get("attributes");
@@ -167,6 +168,7 @@ public class FGcLogger
    public void saveConfig(FXmlNode xconfig){
       xconfig.set("type_cd", _typeCd);
       xconfig.set("server_code", _serverCode);
+      xconfig.set("server_host", _serverHost);
       xconfig.set("datetime", _dateTime);
       if(hasAttribute()){
          String attributePack = _attributes.pack();

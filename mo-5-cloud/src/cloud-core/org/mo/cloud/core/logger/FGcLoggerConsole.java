@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.mo.cloud.common.datetime.IDateTimeConsole;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlConnection;
@@ -77,7 +76,7 @@ public class FGcLoggerConsole
    @Override
    public EResult push(FGcLogger logger){
       // 检查允许
-      if(_enable){
+      if(!_enable){
          return EResult.Failure;
       }
       // 检查参数
@@ -85,11 +84,8 @@ public class FGcLoggerConsole
          return EResult.Failure;
       }
       // 设置参数
-      if(RString.isEmpty(_address)){
-         logger.setServerCode(_serverCode);
-      }else{
-         logger.setServerCode(_serverCode + "@" + _address);
-      }
+      logger.setServerCode(_serverCode);
+      logger.setServerHost(_address);
       if(_dateTimeConsole != null){
          logger.setDateTime(_dateTimeConsole.currentTick());
       }
@@ -151,20 +147,25 @@ public class FGcLoggerConsole
    // <T>初始化处理。</T>
    //============================================================
    public void initialize(){
-      // 部署日志监听
-      _loggerListener = new FGcLoggerListener(this);
-      RLogger.listeners().push(_loggerListener);
-      // 获得本机地址
-      InetAddress address = null;
-      try{
-         address = InetAddress.getLocalHost();
-         _address = address.getHostName();
-      }catch(UnknownHostException e){
-         _logger.error(this, "initialize", e);
+      if(_enable){
+         // 部署日志监听
+         _loggerListener = new FGcLoggerListener(this);
+         RLogger.listeners().push(_loggerListener);
+         // 获得本机地址
+         InetAddress address = null;
+         try{
+            address = InetAddress.getLocalHost();
+            _address = address.getHostName();
+         }catch(UnknownHostException e){
+            _logger.error(this, "initialize", e);
+         }
+         // 部署监视器
+         _monitor = new FGcLoggerMonitor(this);
+         _monitor.setInterval(_loggerInterval);
+         _monitorConsole.start(_monitor);
+         _logger.debug(this, "initialize", "Cloud logger enable. (service={1})", _loggerServicePublish);
+      }else{
+         _logger.debug(this, "initialize", "Cloud logger disable.");
       }
-      // 部署监视器
-      _monitor = new FGcLoggerMonitor(this);
-      _monitor.setInterval(_loggerInterval);
-      _monitorConsole.register(_monitor);
    }
 }

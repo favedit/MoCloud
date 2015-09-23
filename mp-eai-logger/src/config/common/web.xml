@@ -18,6 +18,7 @@
          face  = 'org.mo.web.core.session.IWebSessionConsole'
          class = 'org.mo.web.core.session.FWebSessionConsole'
          scope = 'global' >
+      <Property name='valid'>N</Property>
       <Property name='sessionClassName'>org.mo.web.core.session.FWebSession</Property>
       <Property name='interval'>10000</Property>
       <Property name='timeout'>36000000</Property>

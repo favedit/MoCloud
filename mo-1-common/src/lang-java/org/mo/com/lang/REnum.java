@@ -23,7 +23,7 @@ public class REnum
                return (T)field.get(clazz);
             }
          }
-      }catch(Exception e){
+      }catch(Exception exception){
          throw new FFatalError("Parse enum type error. (type={1}, name={2})", clazz, name);
       }
       return null;
@@ -47,7 +47,7 @@ public class REnum
                return (T)field.get(clazz);
             }
          }
-      }catch(Exception e){
+      }catch(Exception exception){
          throw new FFatalError("Parse enum type error. (type={1}, name={2})", clazz, name);
       }
       return defaultCd;
@@ -70,7 +70,7 @@ public class REnum
                return value;
             }
          }
-      }catch(Exception e){
+      }catch(Exception exception){
          throw new FFatalError("Parse enum type error. (type={1}, name={2})", clazz, name);
       }
       return null;
@@ -92,7 +92,7 @@ public class REnum
                return (T)field.get(clazz);
             }
          }
-      }catch(Exception e){
+      }catch(Exception exception){
          throw new FFatalError("Parse enum type error. (type={1}, name={2})", clazz, name);
       }
       return null;
@@ -107,7 +107,7 @@ public class REnum
    public static String toString(Class<?> clazz){
       try{
          return clazz.getName();
-      }catch(Exception e){
+      }catch(Exception exception){
          throw new FFatalError("Change enum type error. (type={1})", clazz);
       }
    }
@@ -121,7 +121,7 @@ public class REnum
    public static String toString(Object item){
       try{
          return item.toString();
-      }catch(Exception e){
+      }catch(Exception exception){
          throw new FFatalError("Change enum type error. (item={1})", item);
       }
    }

@@ -206,6 +206,7 @@ public class FIndexAction
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          userId = synchronizeData(logicContext, sessionContext, page, changePass, passport, from);
       }
+      _logger.info(this, "login", "User login. (passport={1}, message={1})", passport, logggerMessage);
       // 增加日志
       FLoggerPersonUserAccess logger = _loggerPersonUserAccessConsole.doPrepare(logicContext);
       logger.setUserId(userId);
@@ -215,7 +216,6 @@ public class FIndexAction
       logger.setBrowserUri(context.requestUrl());
       logger.setPageInfo(context.parameters().dump());
       _loggerPersonUserAccessConsole.doInsert(logicContext, logger);
-
       // 画面跳转
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
          if(cookie != null){

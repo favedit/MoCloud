@@ -2,8 +2,10 @@ package com.ahyc.eai.logger.face.logger;
 
 import com.ahyc.eai.logger.core.system.ISystemExceptionConsole;
 import com.ahyc.eai.logger.core.system.ISystemLoggerConsole;
-
+import com.cyou.gccloud.define.enums.common.EGcLogger;
 import org.mo.cloud.core.logger.FGcLogger;
+import org.mo.cloud.core.logger.FGcLoggerSystemException;
+import org.mo.cloud.core.logger.FGcLoggerSystemLogger;
 import org.mo.cloud.core.logger.FGcLoggers;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -51,12 +53,14 @@ public class FPublishService
          for(FGcLogger logger : loggers){
             int typeCd = logger.typeCd();
             switch(typeCd){
-            //               case EGcLogger.SystemLogger:
-            //                  _systemLoggerConsole.publish(logicContext, (FGcLoggerSystemLogger)logger);
-            //                  break;
-            //               case EGcLogger.SystemException:
-            //                  _systemExceptionConsole.publish(logicContext, (FGcLoggerSystemException)logger);
-            //                  break;
+               case EGcLogger.Info:
+               case EGcLogger.Warn:
+               case EGcLogger.Error:
+                  _systemLoggerConsole.publish(logicContext, (FGcLoggerSystemLogger)logger);
+                  break;
+               case EGcLogger.Fatal:
+                  _systemExceptionConsole.publish(logicContext, (FGcLoggerSystemException)logger);
+                  break;
                default:
                   throw new FFatalError("Unknown logger type. (type_cd={1})", typeCd);
             }

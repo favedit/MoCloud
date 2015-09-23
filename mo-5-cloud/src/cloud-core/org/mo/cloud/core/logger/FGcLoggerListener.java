@@ -5,6 +5,7 @@ import org.mo.com.lang.FThrowables;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RThrowable;
 import org.mo.com.lang.reflect.RClass;
+import org.mo.com.logging.ELoggerLevel;
 import org.mo.com.logging.MLoggerListener;
 import org.mo.com.logging.SLoggerInfo;
 import org.mo.com.system.RThread;
@@ -98,33 +99,29 @@ public class FGcLoggerListener
    public boolean processLogger(Object sender,
                                 int level,
                                 SLoggerInfo info){
-      //      ELoggerLevel levelCd = info.levelCd;
-      //      // 建立信息
-      //      if(ELoggerLevel.isOutputAble(levelCd)){
-      //         // 获得信息
-      //         FString message = new FString();
-      //         buildMessage(message, info);
-      //         String referInfo = info.referInfo;
-      //         String messageInfo = message.toString();
-      //         // 发布信息
-      //         switch(levelCd){
-      //            case INFO:
-      //               _console.push(new FGcLoggerSystemLogger(0, EGcSystemLogger.Info, referInfo, messageInfo));
-      //               break;
-      //            case WARN:
-      //               _console.push(new FGcLoggerSystemLogger(0, EGcSystemLogger.Warn, referInfo, messageInfo));
-      //               break;
-      //            case ERROR:
-      //               _console.push(new FGcLoggerSystemLogger(0, EGcSystemLogger.Error, referInfo, messageInfo));
-      //               break;
-      //            case FATAL:
-      //               _console.push(new FGcLoggerSystemException(0, referInfo, message.toString()));
-      //               break;
-      //            default:
-      //               break;
-      //
-      //         }
-      //      }
+      ELoggerLevel levelCd = info.levelCd;
+      // 建立信息
+      if(ELoggerLevel.isOutputAble(levelCd)){
+         // 获得信息
+         FString message = new FString();
+         buildMessage(message, info);
+         String referInfo = info.referInfo;
+         String messageInfo = message.toString();
+         // 发布信息
+         switch(levelCd){
+            case INFO:
+            case WARN:
+            case ERROR:
+               _console.push(new FGcLoggerSystemLogger(0, levelCd, referInfo, messageInfo));
+               break;
+            case FATAL:
+               _console.push(new FGcLoggerSystemException(0, referInfo, message.toString()));
+               break;
+            default:
+               break;
+
+         }
+      }
       return true;
    }
 }

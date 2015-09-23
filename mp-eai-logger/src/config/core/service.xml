@@ -5,7 +5,7 @@
    <!-- 设计：日志发布服务                                           -->
    <!-- ============================================================ -->
    <WebService
-         name  = 'cloud.logger.publish'
+         name  = 'eai.logger.publish'
          face  = 'com.ahyc.eai.logger.face.logger.IPublishService'/>
 
    <Component
