@@ -5,6 +5,7 @@ import com.ahyc.eai.batch.statistics.financial.customer.IStatisticsCustomerConso
 import com.ahyc.eai.batch.statistics.financial.department.IStatisticsDepartmentConsole;
 import com.ahyc.eai.batch.statistics.financial.marketer.IStatisticsMarketerConsole;
 import com.ahyc.eai.batch.statistics.financial.tender.IStatisticsTenderConsole;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
@@ -54,6 +55,7 @@ public class FStatisticsInvestmentCalculater
       // 代码修正
       ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
+      FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
       IStatisticsTenderConsole tenderConsole = RAop.find(IStatisticsTenderConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
       String selectSql = RString.format("SELECT id,borrow_id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<={2}",
@@ -92,11 +94,17 @@ public class FStatisticsInvestmentCalculater
             }
             //............................................................
             // 获得投标信息
+            boolean tenderChanged = false;
+            long tenderPriorId = 0;
+            long tenderPriorLinkId = 0;
+            String tenderPriorModel = null;
             long tenderId = 0;
+            long tenderLinkId = 0;
             String tenderModel = null;
-            FStatisticsFinancialTenderUnit tenderUnit = tenderConsole.sync(logicContext, borrowId);
+            FStatisticsFinancialTenderUnit tenderUnit = tenderConsole.syncByLinkId(logicContext, borrowId);
             if(tenderUnit != null){
                tenderId = tenderUnit.ouid();
+               tenderLinkId = tenderUnit.linkId();
                tenderModel = tenderUnit.borrowModel();
             }
             //............................................................
@@ -123,6 +131,17 @@ public class FStatisticsInvestmentCalculater
                if(RString.isEmpty(customerLabel)){
                   customerInfo = _customerConsole.updateByLinkId(logicContext, customerId);
                }
+               long findTenderId = customerInfo.tenderId();
+               if((findTenderId != 0) && (findTenderId == tenderId)){
+                  tenderChanged = true;
+                  tenderPriorId = customerInfo.tenderId();
+                  tenderPriorLinkId = customerInfo.tenderLinkId();
+                  tenderPriorModel = customerInfo.tenderModel();
+               }
+               customerInfo.setTenderId(tenderId);
+               customerInfo.setTenderLinkId(tenderLinkId);
+               customerInfo.setTenderModel(tenderModel);
+               customerLogic.doUpdate(customerInfo);
                // 设置用户信息
                dynamicUnit.setCustomerId(customerInfo.ouid());
                dynamicUnit.setCustomerLinkId(customerInfo.linkId());
@@ -158,9 +177,15 @@ public class FStatisticsInvestmentCalculater
             dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Investment);
             dynamicUnit.customerActionDate().parse(row.get("investor_date"));
             dynamicUnit.setCustomerActionAmount(row.getDouble("investor_capital"));
+            // 设置投资内容
+            dynamicUnit.setTenderChanged(tenderChanged);
+            dynamicUnit.setTenderPriorId(tenderPriorId);
+            dynamicUnit.setTenderPriorLinkId(tenderPriorLinkId);
+            dynamicUnit.setTenderPriorModel(tenderPriorModel);
             dynamicUnit.setTenderId(tenderId);
-            dynamicUnit.setTenderLinkId(tenderId);
+            dynamicUnit.setTenderLinkId(tenderLinkId);
             dynamicUnit.setTenderModel(tenderModel);
+            // 新建内容
             dynamicLogic.doInsert(dynamicUnit);
             // 统计处理
             processOnce();

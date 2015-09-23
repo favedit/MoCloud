@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.tender'>
+SELECT
+   borrow_name,
+   borrow_model,
+   borrow_duration,
+   borrow_money,
+   borrow_interest,
+   borrow_interest_rate,
+   borrow_info,
+   FROM_UNIXTIME(`add_time`,'%Y%m%d%H%i%s') as borrow_date,
+   DATE_FORMAT(`start_time`,'%Y%m%d%H%i%s') as begin_date,
+   xm1,
+   xm2,
+   xm3,
+   xm4
+FROM lzh_borrow_info
+WHERE id={id}
+</Resource>
+
+</Config>

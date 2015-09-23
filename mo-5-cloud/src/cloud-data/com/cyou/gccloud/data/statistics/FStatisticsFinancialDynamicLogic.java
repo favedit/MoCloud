@@ -114,6 +114,18 @@ public class FStatisticsFinancialDynamicLogic
    // 字段客户命令利息的定义。
    public final static SLogicFieldInfo CUSTOMER_ACTION_INTEREST = new SLogicFieldInfo("CUSTOMER_ACTION_INTEREST");
 
+   // 字段投标改变的定义。
+   public final static SLogicFieldInfo TENDER_CHANGED = new SLogicFieldInfo("TENDER_CHANGED");
+
+   // 字段前投标编号的定义。
+   public final static SLogicFieldInfo TENDER_PRIOR_ID = new SLogicFieldInfo("TENDER_PRIOR_ID");
+
+   // 字段前投标关联编号的定义。
+   public final static SLogicFieldInfo TENDER_PRIOR_LINK_ID = new SLogicFieldInfo("TENDER_PRIOR_LINK_ID");
+
+   // 字段前投标模式的定义。
+   public final static SLogicFieldInfo TENDER_PRIOR_MODEL = new SLogicFieldInfo("TENDER_PRIOR_MODEL");
+
    // 字段投标编号的定义。
    public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
 
@@ -136,7 +148,7 @@ public class FStatisticsFinancialDynamicLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_BORROW_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABEL_PATH`,`MARKETER_ID`,`MARKETER_LINK_ID`,`MARKETER_LABEL`,`MARKETER_STATUS_CD`,`MARKETER_RANK_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LINK_ID`,`CUSTOMER_LABEL`,`CUSTOMER_CARD`,`CUSTOMER_AREA`,`CUSTOMER_BIRTH`,`CUSTOMER_GENDER`,`CUSTOMER_PHONE`,`CUSTOMER_ACTION_CD`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_ACTION_AMOUNT`,`CUSTOMER_ACTION_INTEREST`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_BORROW_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LABEL_PATH`,`MARKETER_ID`,`MARKETER_LINK_ID`,`MARKETER_LABEL`,`MARKETER_STATUS_CD`,`MARKETER_RANK_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LINK_ID`,`CUSTOMER_LABEL`,`CUSTOMER_CARD`,`CUSTOMER_AREA`,`CUSTOMER_BIRTH`,`CUSTOMER_GENDER`,`CUSTOMER_PHONE`,`CUSTOMER_ACTION_CD`,`CUSTOMER_ACTION_DATE`,`CUSTOMER_ACTION_AMOUNT`,`CUSTOMER_ACTION_INTEREST`,`TENDER_CHANGED`,`TENDER_PRIOR_ID`,`TENDER_PRIOR_LINK_ID`,`TENDER_PRIOR_MODEL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态统计表逻辑单元。</T>
@@ -756,6 +768,10 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(",`CUSTOMER_ACTION_DATE`");
       cmd.append(",`CUSTOMER_ACTION_AMOUNT`");
       cmd.append(",`CUSTOMER_ACTION_INTEREST`");
+      cmd.append(",`TENDER_CHANGED`");
+      cmd.append(",`TENDER_PRIOR_ID`");
+      cmd.append(",`TENDER_PRIOR_LINK_ID`");
+      cmd.append(",`TENDER_PRIOR_MODEL`");
       cmd.append(",`TENDER_ID`");
       cmd.append(",`TENDER_LINK_ID`");
       cmd.append(",`TENDER_MODEL`");
@@ -946,6 +962,31 @@ public class FStatisticsFinancialDynamicLogic
       cmd.append(unit.customerActionAmount());
       cmd.append(',');
       cmd.append(unit.customerActionInterest());
+      cmd.append(',');
+      cmd.append(unit.tenderChanged());
+      cmd.append(',');
+      long tenderPriorId = unit.tenderPriorId();
+      if(tenderPriorId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderPriorId);
+      }
+      cmd.append(',');
+      long tenderPriorLinkId = unit.tenderPriorLinkId();
+      if(tenderPriorLinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderPriorLinkId);
+      }
+      cmd.append(',');
+      String tenderPriorModel = unit.tenderPriorModel();
+      if(RString.isEmpty(tenderPriorModel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenderPriorModel));
+         cmd.append('\'');
+      }
       cmd.append(',');
       long tenderId = unit.tenderId();
       if(tenderId == 0){
@@ -1259,6 +1300,39 @@ public class FStatisticsFinancialDynamicLogic
       if(unit.isCustomerActionInterestChanged()){
          cmd.append(",`CUSTOMER_ACTION_INTEREST`=");
          cmd.append(unit.customerActionInterest());
+      }
+      if(unit.isTenderChangedChanged()){
+         cmd.append(",`TENDER_CHANGED`=");
+         cmd.append(unit.tenderChanged());
+      }
+      if(unit.isTenderPriorIdChanged()){
+         cmd.append(",`TENDER_PRIOR_ID`=");
+         long tenderPriorId = unit.tenderPriorId();
+         if(tenderPriorId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderPriorId);
+         }
+      }
+      if(unit.isTenderPriorLinkIdChanged()){
+         cmd.append(",`TENDER_PRIOR_LINK_ID`=");
+         long tenderPriorLinkId = unit.tenderPriorLinkId();
+         if(tenderPriorLinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderPriorLinkId);
+         }
+      }
+      if(unit.isTenderPriorModelChanged()){
+         cmd.append(",`TENDER_PRIOR_MODEL`=");
+         String tenderPriorModel = unit.tenderPriorModel();
+         if(RString.isEmpty(tenderPriorModel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenderPriorModel));
+            cmd.append('\'');
+         }
       }
       if(unit.isTenderIdChanged()){
          cmd.append(",`TENDER_ID`=");

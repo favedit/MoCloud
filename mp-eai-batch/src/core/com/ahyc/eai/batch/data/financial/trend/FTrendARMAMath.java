@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.financial.trend;
+package com.ahyc.eai.batch.data.financial.trend;
 
 import Jama.Matrix;
 
@@ -38,15 +38,15 @@ public class FTrendARMAMath
 	}
 	
 	/**
-	 * ¼ÆËã×ÔÏà¹ØµÄº¯Êý
-	 * @param dataArray ÊýÁÐ
-	 * @param order ½×Êý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄºï¿½ï¿½ï¿½
+	 * @param dataArray ï¿½ï¿½ï¿½ï¿½
+	 * @param order ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public double[] autocorData(double[] dataArray,int order)
 	{
 		double[] autoCor=new double[order+1];
-		double varData=this.varerrData(dataArray);//±ê×¼»¯¹ýºóµÄ·½²î
+		double varData=this.varerrData(dataArray);//ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 		
 		for(int i=0;i<=order;i++)
 		{
@@ -75,7 +75,7 @@ public class FTrendARMAMath
 	}
 	
 	public double[][] toplize(double[] dataArray,int order)
-	{//·µ»Øtoplize¶þÎ¬Êý×é
+	{//ï¿½ï¿½ï¿½ï¿½toplizeï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
 		double[][] toplizeMatrix=new double[order][order];
 		double[] atuocorr=this.autocorData(dataArray,order);
 
@@ -97,19 +97,19 @@ public class FTrendARMAMath
 	}
 
 	/**
-	 * ½âMAÄ£ÐÍµÄ²ÎÊý
+	 * ï¿½ï¿½MAÄ£ï¿½ÍµÄ²ï¿½ï¿½ï¿½
 	 * @param autocorData
 	 * @param q
 	 * @return
 	 */
 	public double[] getMApara(double[] autocorData,int q)
 	{
-		double[] maPara=new double[q+1];//µÚÒ»¸ö´æ·ÅÔëÉù²ÎÊý£¬ºóÃæq¸ö´æ·Åma²ÎÊýsigma2,ma1,ma2...
+		double[] maPara=new double[q+1];//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½maï¿½ï¿½ï¿½ï¿½sigma2,ma1,ma2...
 		double[] tempmaPara=maPara;
 		double temp=0;
 		boolean iterationFlag=true;
-		//½â·½³Ì×é
-		//µü´ú·¨½â·½³Ì×é
+		//ï¿½â·½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â·½ï¿½ï¿½ï¿½ï¿½
 		while(iterationFlag)
 		{
 			for(int i=1;i<maPara.length;i++)
@@ -145,9 +145,9 @@ public class FTrendARMAMath
 	
 	public double[] parcorrCompute(double[] dataArray,int p,int q)
 	{
-		double[][] toplizeArray=new double[p][p];//p½×toplize¾ØÕó£»
+		double[][] toplizeArray=new double[p][p];//pï¿½ï¿½toplizeï¿½ï¿½ï¿½ï¿½
 		
-		double[] atuocorr=this.autocorData(dataArray,p+q);//·µ»Øp+q½×µÄ×ÔÏà¹ØÏµÊý
+		double[] atuocorr=this.autocorData(dataArray,p+q);//ï¿½ï¿½ï¿½ï¿½p+qï¿½×µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 		
 		for(int i=1;i<=p;i++)
 		{
@@ -164,8 +164,8 @@ public class FTrendARMAMath
 			}
 		}
 		
-	    Matrix toplizeMatrix = new Matrix(toplizeArray);//ÓÉ¶þÎ»Êý×é×ª»»³É¶þÎ¬¾ØÕó
-	    Matrix toplizeMatrixinverse=toplizeMatrix.inverse();//¾ØÕóÇóÄæÔËËã
+	    Matrix toplizeMatrix = new Matrix(toplizeArray);//ï¿½É¶ï¿½Î»ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É¶ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
+	    Matrix toplizeMatrixinverse=toplizeMatrix.inverse();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 	    double[] temp=new double[p];
 	    for(int i=1;i<=p;i++)
@@ -175,9 +175,9 @@ public class FTrendARMAMath
 	    
 		Matrix autocorrMatrix=new Matrix(temp, p);
 		Matrix parautocorDataMatrix=toplizeMatrixinverse.times(autocorrMatrix); //  [Fi]=[toplize]x[autocorr]';
-		//¾ØÕó¼ÆËã½á¹ûÓ¦¸ÃÊÇ°´ÕÕ[a b c]'  ÁÐÏòÁ¿´æ´¢µÄ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½[a b c]'  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½
 		//System.out.println("row="+parautocorDataMatrix.getRowDimension()+"  Col="+parautocorDataMatrix.getColumnDimension());
-		//parautocorDataMatrix.print(p, 2);//(Êä³ö¼¸ÐÐ,Ð¡Êýµãºó±£ÁôÎ»Êý)
+		//parautocorDataMatrix.print(p, 2);//(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½)
 		//System.out.println(parautocorDataMatrix.get(p-1,0));
 		
 		double[] result=new double[parautocorDataMatrix.getRowDimension()+1];
@@ -186,17 +186,17 @@ public class FTrendARMAMath
 			result[i]=parautocorDataMatrix.get(i,0);
 		}
 		
-		//¹ÀËãsigmat2
+		//ï¿½ï¿½ï¿½ï¿½sigmat2
 		double sum2=0;
 		for(int i=0;i<p;i++)
 			for(int j=0;j<p;j++)
 			{
 				sum2+=result[i]*result[j]*atuocorr[Math.abs(i-j)];
 			}
-		result[result.length-1]=atuocorr[0]-sum2; //resultÊý×é×îºóÒ»¸ö´æ´¢¸ÉÈÅ¹À¼ÆÖµ
+		result[result.length-1]=atuocorr[0]-sum2; //resultï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½Öµ
 		
 		
-			return result;   //·µ»Ø0ÁÐµÄ×îºóÒ»¸ö¾ÍÊÇk½×µÄÆ«×ÔÏà¹ØÏµÊý pcorr[k]=·µ»ØÖµ
+			return result;   //ï¿½ï¿½ï¿½ï¿½0ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½kï¿½×µï¿½Æ«ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ pcorr[k]=ï¿½ï¿½ï¿½ï¿½Öµ
 	}
 
 	

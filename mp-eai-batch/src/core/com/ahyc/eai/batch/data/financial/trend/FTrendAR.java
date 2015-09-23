@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.financial.trend;
+package com.ahyc.eai.batch.data.financial.trend;
 import java.util.*;
 
 public class FTrendAR {
@@ -8,9 +8,9 @@ public class FTrendAR {
 	FTrendARMAMath armamath=new FTrendARMAMath();
 	
 	/**
-	 * ARÄ£ÐÍ
+	 * ARÄ£ï¿½ï¿½
 	 * @param stdoriginalData
-	 * @param p //pÎªMAÄ£ÐÍ½×Êý
+	 * @param p //pÎªMAÄ£ï¿½Í½ï¿½ï¿½ï¿½
 	 */
 	public FTrendAR(double [] stdoriginalData,int p)
 	{
@@ -22,9 +22,9 @@ public class FTrendAR {
 	{
 		Vector<double[]> v=new Vector<double[]>();
 		v.add(armamath.parcorrCompute(stdoriginalData, p, 0));
-		return v;//µÃµ½ÁË×Ô»Ø¹éÏµÊý
+		return v;//ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ô»Ø¹ï¿½Ïµï¿½ï¿½
 		
-		//»¹Òª¹À¼Æ·½²îÏîÂð£¿
+		//ï¿½ï¿½Òªï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 	
 }

@@ -96,6 +96,15 @@ public class FStatisticsFinancialCustomerLogic
    // 字段绩效总计的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
+   // 字段投标编号的定义。
+   public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
+
+   // 字段投标关联编号的定义。
+   public final static SLogicFieldInfo TENDER_LINK_ID = new SLogicFieldInfo("TENDER_LINK_ID");
+
+   // 字段投标模式的定义。
+   public final static SLogicFieldInfo TENDER_MODEL = new SLogicFieldInfo("TENDER_MODEL");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -109,7 +118,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -723,6 +732,9 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
+      cmd.append(",`TENDER_ID`");
+      cmd.append(",`TENDER_LINK_ID`");
+      cmd.append(",`TENDER_MODEL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -853,6 +865,29 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(unit.interestTotal());
       cmd.append(',');
       cmd.append(unit.performanceTotal());
+      cmd.append(',');
+      long tenderId = unit.tenderId();
+      if(tenderId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderId);
+      }
+      cmd.append(',');
+      long tenderLinkId = unit.tenderLinkId();
+      if(tenderLinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderLinkId);
+      }
+      cmd.append(',');
+      String tenderModel = unit.tenderModel();
+      if(RString.isEmpty(tenderModel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(tenderModel));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -1074,6 +1109,35 @@ public class FStatisticsFinancialCustomerLogic
       if(unit.isPerformanceTotalChanged()){
          cmd.append(",`PERFORMANCE_TOTAL`=");
          cmd.append(unit.performanceTotal());
+      }
+      if(unit.isTenderIdChanged()){
+         cmd.append(",`TENDER_ID`=");
+         long tenderId = unit.tenderId();
+         if(tenderId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderId);
+         }
+      }
+      if(unit.isTenderLinkIdChanged()){
+         cmd.append(",`TENDER_LINK_ID`=");
+         long tenderLinkId = unit.tenderLinkId();
+         if(tenderLinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderLinkId);
+         }
+      }
+      if(unit.isTenderModelChanged()){
+         cmd.append(",`TENDER_MODEL`=");
+         String tenderModel = unit.tenderModel();
+         if(RString.isEmpty(tenderModel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(tenderModel));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

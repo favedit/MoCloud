@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.financial.trend;
+package com.ahyc.eai.batch.data.financial.trend;
 
 import com.ahyc.eai.batch.statistics.financial.customer.IStatisticsCustomerConsole;
 import org.mo.com.lang.FDoubles;

@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.financial.trend;
+package com.ahyc.eai.batch.data.financial.trend;
 
 import java.util.*;
 
@@ -10,9 +10,9 @@ public class FTrendARMA {
 	FTrendARMAMath armamath=new FTrendARMAMath();
 	
 	/**
-	 * ARMAÄ£ÐÍ
+	 * ARMAÄ£ï¿½ï¿½
 	 * @param stdoriginalData
-	 * @param p,q //p,qÎªMAÄ£ÐÍ½×Êý
+	 * @param p,q //p,qÎªMAÄ£ï¿½Í½ï¿½ï¿½ï¿½
 	 */
 	public FTrendARMA(double [] stdoriginalData,int p,int q)
 	{
@@ -27,7 +27,7 @@ public class FTrendARMA {
 		
 		double[] autocorData=getautocorofMA(p, q, stdoriginalData, arcoe);
 		
-		double[] macoe=armamath.getMApara(autocorData, q);//µÃµ½MAÄ£ÐÍÀïÃæµÄ²ÎÊýÖµ
+		double[] macoe=armamath.getMApara(autocorData, q);//ï¿½Ãµï¿½MAÄ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½Öµ
 //		for(int i=0;i<macoe.length;i++)
 //			{
 //				System.out.println(macoe[i]);
@@ -40,7 +40,7 @@ public class FTrendARMA {
 	}
 	
 	/**
-	 * µÃµ½MAµÄ×ÔÏà¹Øº¯Êý
+	 * ï¿½Ãµï¿½MAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½
 	 * @param p
 	 * @param q
 	 * @param stdoriginalData
@@ -57,7 +57,7 @@ public class FTrendARMA {
 			temp=0;
 			for(int j=1;j<=p;j++)
 				temp+=stdoriginalData[i-j]*autoRegress[j-1];
-			errArray[count++]=stdoriginalData[i]-temp;//±£´æ¹À¼Æ²Ð²îÐòÁÐ
+			errArray[count++]=stdoriginalData[i]-temp;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²Ð²ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 		return armamath.autocorData(errArray, q);
 	}

@@ -147,6 +147,24 @@ public class FStatisticsFinancialCustomerUnit
    // 字段绩效总计的定义。
    protected double _performanceTotal;
 
+   // 存储字段投标编号的定义。
+   private long __tenderId;
+
+   // 字段投标编号的定义。
+   protected long _tenderId;
+
+   // 存储字段投标关联编号的定义。
+   private long __tenderLinkId;
+
+   // 字段投标关联编号的定义。
+   protected long _tenderLinkId;
+
+   // 存储字段投标模式的定义。
+   private String __tenderModel;
+
+   // 字段投标模式的定义。
+   protected String _tenderModel;
+
    // 存储字段创建用户标识的定义。
    private long __createUserId;
 
@@ -745,6 +763,87 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
+   // <T>判断投标编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderIdChanged(){
+      return __tenderId != _tenderId;
+   }
+
+   //============================================================
+   // <T>获得投标编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderId(){
+      return _tenderId;
+   }
+
+   //============================================================
+   // <T>设置投标编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderId(long value){
+      _tenderId = value;
+   }
+
+   //============================================================
+   // <T>判断投标关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderLinkIdChanged(){
+      return __tenderLinkId != _tenderLinkId;
+   }
+
+   //============================================================
+   // <T>获得投标关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderLinkId(){
+      return _tenderLinkId;
+   }
+
+   //============================================================
+   // <T>设置投标关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderLinkId(long value){
+      _tenderLinkId = value;
+   }
+
+   //============================================================
+   // <T>判断投标模式的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderModelChanged(){
+      return !RString.equals(__tenderModel, _tenderModel);
+   }
+
+   //============================================================
+   // <T>获得投标模式的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String tenderModel(){
+      return _tenderModel;
+   }
+
+   //============================================================
+   // <T>设置投标模式的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderModel(String value){
+      _tenderModel = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -903,6 +1002,12 @@ public class FStatisticsFinancialCustomerUnit
             return RDouble.toString(_interestTotal);
          case "performance_total":
             return RDouble.toString(_performanceTotal);
+         case "tender_id":
+            return Long.toString(_tenderId);
+         case "tender_link_id":
+            return Long.toString(_tenderLinkId);
+         case "tender_model":
+            return _tenderModel;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -987,6 +1092,15 @@ public class FStatisticsFinancialCustomerUnit
             break;
          case "performance_total":
             _performanceTotal = RDouble.parse(value);
+            break;
+         case "tender_id":
+            _tenderId = RLong.parse(value);
+            break;
+         case "tender_link_id":
+            _tenderLinkId = RLong.parse(value);
+            break;
+         case "tender_model":
+            _tenderModel = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -1099,6 +1213,18 @@ public class FStatisticsFinancialCustomerUnit
                __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
                break;
+            case "tender_id":
+               __tenderId = RLong.parse(value);
+               _tenderId = __tenderId;
+               break;
+            case "tender_link_id":
+               __tenderLinkId = RLong.parse(value);
+               _tenderLinkId = __tenderLinkId;
+               break;
+            case "tender_model":
+               __tenderModel = value;
+               _tenderModel = __tenderModel;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -1148,6 +1274,9 @@ public class FStatisticsFinancialCustomerUnit
       row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
+      row.set("tenderId", _tenderId);
+      row.set("tenderLinkId", _tenderLinkId);
+      row.set("tenderModel", _tenderModel);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -1183,6 +1312,9 @@ public class FStatisticsFinancialCustomerUnit
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
+      map.put("tenderId", RLong.toString(_tenderId));
+      map.put("tenderLinkId", RLong.toString(_tenderLinkId));
+      map.put("tenderModel", _tenderModel);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -1213,6 +1345,9 @@ public class FStatisticsFinancialCustomerUnit
       _redemptionFirstDate.set(input.readInt64());
       _redemptionLastDate.set(input.readInt64());
       _redemptionNumber = input.readInt32();
+      _tenderId = input.readInt64();
+      _tenderLinkId = input.readInt64();
+      _tenderModel = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -1243,6 +1378,9 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt64(_redemptionFirstDate.get());
       output.writeInt64(_redemptionLastDate.get());
       output.writeInt32(_redemptionNumber);
+      output.writeInt64(_tenderId);
+      output.writeInt64(_tenderLinkId);
+      output.writeString(_tenderModel);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

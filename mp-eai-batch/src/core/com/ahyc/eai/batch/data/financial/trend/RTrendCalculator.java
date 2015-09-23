@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.financial.trend;
+package com.ahyc.eai.batch.data.financial.trend;
 
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;

@@ -38,6 +38,32 @@ public interface IStatisticsCustomerServlet
                  IWebServletResponse response);
 
    //============================================================
+   // <T>获得投资产品数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   EResult tenderInfo(IWebContext context,
+                      ILogicContext logicContext,
+                      IWebServletRequest request,
+                      IWebServletResponse response);
+
+   //============================================================
+   // <T>获得投资产品动态数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   EResult tenderDynamic(IWebContext context,
+                         ILogicContext logicContext,
+                         IWebServletRequest request,
+                         IWebServletResponse response);
+
+   //============================================================
    // <T>获得客户省份分析数据数据。</T>
    //
    // @param context 环境

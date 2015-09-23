@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.financial.trend;
+package com.ahyc.eai.batch.data.financial.trend;
 
 import java.util.Vector;
 
@@ -9,9 +9,9 @@ public class FTrendMA {
 	int q;
 	FTrendARMAMath armamath=new FTrendARMAMath();
 	
-	/** MAÄ£ÐÍ
-	 * @param stdoriginalData //Ô¤´¦Àí¹ýºóµÄÊý¾Ý
-	 * @param q //qÎªMAÄ£ÐÍ½×Êý
+	/** MAÄ£ï¿½ï¿½
+	 * @param stdoriginalData //Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param q //qÎªMAÄ£ï¿½Í½ï¿½ï¿½ï¿½
 	 */
 	public FTrendMA(double [] stdoriginalData,int q)
 	{
@@ -23,7 +23,7 @@ public class FTrendMA {
 	{
 		Vector<double[]> v=new Vector<double[]>();
 		v.add(armamath.getMApara(armamath.autocorData(stdoriginalData,q), q));
-		return v;//ÄÃµ½MAÄ£ÐÍÀïÃæµÄ²ÎÊýÖµ
+		return v;//ï¿½Ãµï¿½MAÄ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½Öµ
 	}
 		
 	

@@ -183,6 +183,30 @@ public class FStatisticsFinancialDynamicUnit
    // 字段客户命令利息的定义。
    protected double _customerActionInterest;
 
+   // 存储字段投标改变的定义。
+   private boolean __tenderChanged;
+
+   // 字段投标改变的定义。
+   protected boolean _tenderChanged;
+
+   // 存储字段前投标编号的定义。
+   private long __tenderPriorId;
+
+   // 字段前投标编号的定义。
+   protected long _tenderPriorId;
+
+   // 存储字段前投标关联编号的定义。
+   private long __tenderPriorLinkId;
+
+   // 字段前投标关联编号的定义。
+   protected long _tenderPriorLinkId;
+
+   // 存储字段前投标模式的定义。
+   private String __tenderPriorModel;
+
+   // 字段前投标模式的定义。
+   protected String _tenderPriorModel;
+
    // 存储字段投标编号的定义。
    private long __tenderId;
 
@@ -961,6 +985,114 @@ public class FStatisticsFinancialDynamicUnit
    }
 
    //============================================================
+   // <T>判断投标改变的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderChangedChanged(){
+      return __tenderChanged != _tenderChanged;
+   }
+
+   //============================================================
+   // <T>获得投标改变的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean tenderChanged(){
+      return _tenderChanged;
+   }
+
+   //============================================================
+   // <T>设置投标改变的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderChanged(boolean value){
+      _tenderChanged = value;
+   }
+
+   //============================================================
+   // <T>判断前投标编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderPriorIdChanged(){
+      return __tenderPriorId != _tenderPriorId;
+   }
+
+   //============================================================
+   // <T>获得前投标编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderPriorId(){
+      return _tenderPriorId;
+   }
+
+   //============================================================
+   // <T>设置前投标编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderPriorId(long value){
+      _tenderPriorId = value;
+   }
+
+   //============================================================
+   // <T>判断前投标关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderPriorLinkIdChanged(){
+      return __tenderPriorLinkId != _tenderPriorLinkId;
+   }
+
+   //============================================================
+   // <T>获得前投标关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long tenderPriorLinkId(){
+      return _tenderPriorLinkId;
+   }
+
+   //============================================================
+   // <T>设置前投标关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderPriorLinkId(long value){
+      _tenderPriorLinkId = value;
+   }
+
+   //============================================================
+   // <T>判断前投标模式的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isTenderPriorModelChanged(){
+      return !RString.equals(__tenderPriorModel, _tenderPriorModel);
+   }
+
+   //============================================================
+   // <T>获得前投标模式的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String tenderPriorModel(){
+      return _tenderPriorModel;
+   }
+
+   //============================================================
+   // <T>设置前投标模式的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setTenderPriorModel(String value){
+      _tenderPriorModel = value;
+   }
+
+   //============================================================
    // <T>判断投标编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1212,6 +1344,14 @@ public class FStatisticsFinancialDynamicUnit
             return RDouble.toString(_customerActionAmount);
          case "customer_action_interest":
             return RDouble.toString(_customerActionInterest);
+         case "tender_changed":
+            return RBoolean.toString(_tenderChanged);
+         case "tender_prior_id":
+            return Long.toString(_tenderPriorId);
+         case "tender_prior_link_id":
+            return Long.toString(_tenderPriorLinkId);
+         case "tender_prior_model":
+            return _tenderPriorModel;
          case "tender_id":
             return Long.toString(_tenderId);
          case "tender_link_id":
@@ -1320,6 +1460,18 @@ public class FStatisticsFinancialDynamicUnit
             break;
          case "customer_action_interest":
             _customerActionInterest = RDouble.parse(value);
+            break;
+         case "tender_changed":
+            _tenderChanged = RBoolean.parse(value);
+            break;
+         case "tender_prior_id":
+            _tenderPriorId = RLong.parse(value);
+            break;
+         case "tender_prior_link_id":
+            _tenderPriorLinkId = RLong.parse(value);
+            break;
+         case "tender_prior_model":
+            _tenderPriorModel = value;
             break;
          case "tender_id":
             _tenderId = RLong.parse(value);
@@ -1465,6 +1617,22 @@ public class FStatisticsFinancialDynamicUnit
                __customerActionInterest = RDouble.parse(value);
                _customerActionInterest = __customerActionInterest;
                break;
+            case "tender_changed":
+               __tenderChanged = RBoolean.parse(value);
+               _tenderChanged = __tenderChanged;
+               break;
+            case "tender_prior_id":
+               __tenderPriorId = RLong.parse(value);
+               _tenderPriorId = __tenderPriorId;
+               break;
+            case "tender_prior_link_id":
+               __tenderPriorLinkId = RLong.parse(value);
+               _tenderPriorLinkId = __tenderPriorLinkId;
+               break;
+            case "tender_prior_model":
+               __tenderPriorModel = value;
+               _tenderPriorModel = __tenderPriorModel;
+               break;
             case "tender_id":
                __tenderId = RLong.parse(value);
                _tenderId = __tenderId;
@@ -1532,6 +1700,10 @@ public class FStatisticsFinancialDynamicUnit
       row.set("customerActionDate", _customerActionDate);
       row.set("customerActionAmount", _customerActionAmount);
       row.set("customerActionInterest", _customerActionInterest);
+      row.set("tenderChanged", _tenderChanged);
+      row.set("tenderPriorId", _tenderPriorId);
+      row.set("tenderPriorLinkId", _tenderPriorLinkId);
+      row.set("tenderPriorModel", _tenderPriorModel);
       row.set("tenderId", _tenderId);
       row.set("tenderLinkId", _tenderLinkId);
       row.set("tenderModel", _tenderModel);
@@ -1576,6 +1748,10 @@ public class FStatisticsFinancialDynamicUnit
       map.put("customerActionDate", _customerActionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("customerActionAmount", RDouble.toString(_customerActionAmount));
       map.put("customerActionInterest", RDouble.toString(_customerActionInterest));
+      map.put("tenderChanged", RBoolean.toString(_tenderChanged));
+      map.put("tenderPriorId", RLong.toString(_tenderPriorId));
+      map.put("tenderPriorLinkId", RLong.toString(_tenderPriorLinkId));
+      map.put("tenderPriorModel", _tenderPriorModel);
       map.put("tenderId", RLong.toString(_tenderId));
       map.put("tenderLinkId", RLong.toString(_tenderLinkId));
       map.put("tenderModel", _tenderModel);
@@ -1618,6 +1794,10 @@ public class FStatisticsFinancialDynamicUnit
       _customerPhone = input.readString();
       _customerActionCd = input.readInt32();
       _customerActionDate.set(input.readInt64());
+      _tenderChanged = input.readBoolean();
+      _tenderPriorId = input.readInt64();
+      _tenderPriorLinkId = input.readInt64();
+      _tenderPriorModel = input.readString();
       _tenderId = input.readInt64();
       _tenderLinkId = input.readInt64();
       _tenderModel = input.readString();
@@ -1660,6 +1840,10 @@ public class FStatisticsFinancialDynamicUnit
       output.writeString(_customerPhone);
       output.writeInt32(_customerActionCd);
       output.writeInt64(_customerActionDate.get());
+      output.writeBoolean(_tenderChanged);
+      output.writeInt64(_tenderPriorId);
+      output.writeInt64(_tenderPriorLinkId);
+      output.writeString(_tenderPriorModel);
       output.writeInt64(_tenderId);
       output.writeInt64(_tenderLinkId);
       output.writeString(_tenderModel);

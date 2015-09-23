@@ -97,7 +97,7 @@ public class FStatisticsRedemptionCalculater
             // 获得投标信息
             long borrowRecordId = 0;
             String borrowModel = null;
-            FStatisticsFinancialTenderUnit tenderUnit = tenderConsole.sync(logicContext, borrowId);
+            FStatisticsFinancialTenderUnit tenderUnit = tenderConsole.syncByLinkId(logicContext, borrowId);
             if(tenderUnit != null){
                borrowRecordId = tenderUnit.ouid();
                borrowModel = tenderUnit.borrowModel();
