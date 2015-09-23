@@ -8,7 +8,7 @@
      var index = 0;
      var $imagDetails = $(".imag-details");
      var $userDetails = $("#user-details");
-     var $headRight = $(".head-right");
+     var $headRight = $(".user-r");
      var $users = $("#users");
      var $container = $("#container_details");
      var $containerDetails = $("#container_details ul li");

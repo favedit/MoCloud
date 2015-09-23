@@ -1,6 +1,5 @@
 <%@ include file='head.jsp' %>
 <link rel="stylesheet" type="text/css" href="css/PotentialUsers.css">
-<link rel="stylesheet" type="text/css" href="css/ExistingUser.css">
          <TR>
             <TD  width="100%" align="center" valign="center">
                <ul class="users" id="users">
@@ -10,7 +9,7 @@
                <div class="imag-container">
                   <table  border="0" cellpadding="2" cellspacing="0">
                      <tr class="title">
-                        <td colspan="7" rowspan="0" align="center" valign="center">我要关注</td>
+                        <td colspan="7" rowspan="0" align="center" valign="center">已关注用户</td>
                      </tr>
                       <tr class="main-title">
                            <td>姓名</td>
@@ -73,7 +72,6 @@
                      </tr>
                    
                   </table>
-
                   <ul class="pages">
                      <li><a href="">上一页</a></li>
                      <li>1/7</li>
@@ -94,7 +92,7 @@
          </TR>
       </TABLE>
    </FORM>
-   <div class="management-prompt">
+   <div class="management-prompt" style="display: none;">
       <!-- 44d5d8 -->
       <p><input type="checkbox">上线提醒</p>
       <p><input type="checkbox">产品关注提醒</p>
@@ -103,5 +101,6 @@
       <textarea id="content" class="" name="" placeholder=""></textarea>
       <p class="btn-container"><input class="btn" type="submit" value="提交"></p>
    </div>
+   <script type="text/javascript" src="js/existingUser.js"></script>
 </body>
 </html>

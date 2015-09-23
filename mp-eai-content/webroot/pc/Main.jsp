@@ -31,35 +31,62 @@
                <TD id="header"  colspan="2">
                   <INPUT id='id_do' name='do' type='hidden'>
                   <div class="header floatBtn">
-                     <div class="head-left">
-                        <a href="javascript:;"><img class="logo" src="images/main/logos.png"></a>
-                     </div>
-                     <jh:notEquals source="host" value="&page.userType">
-                        <div class="head-right">
-                           <p class="user-details" id="user-details"><i></i>
-                              <jh:write source='&page.passport' /><je:authority role='eai.marketer'><font size="3" color="#FF851A">(理财师)</font></je:authority><img src="images/main/new8.png"></p>
-                           <b></b>
-                           <span class="img-details mr-20 pulse">
-                              <img src='../mb/images/re.png'>
-                        </span>
-                        </div>
-                     </jh:notEquals>
-                     <jh:equals source="host" value="&page.userType">
-                           <div class="switch">
-                             <a href="Index.wa?time=today">切换帐号</a>
-                           </div>
-                     </jh:equals>
+               <!--           <div class="head-left">
+               <a href="javascript:;"><img class="logo" src="images/main/logos.png"></a>
+               </div>
+               <jh:notEquals source="host" value="&page.userType">
+               <div class="head-right">
+               <p class="user-details" id="user-details"><i></i>
+               <jh:write source='&page.passport' /><je:authority role='eai.marketer'><font size="3" color="#FF851A">(理财师)</font></je:authority><img src="images/main/new8.png"></p>
+               <b></b>
+               <span class="img-details mr-20 pulse">
+               <img src='../mb/images/re.png'>
+               </span>
+               </div>
+               </jh:notEquals>
+               <jh:equals source="host" value="&page.userType">
+               <div class="switch">
+               <a href="Index.wa?time=today">切换帐号</a>
+               </div>
+               </jh:equals>
+               </div> -->
+         <div class="head-left">
+            <a href="javascript:;"><img class="logo" src="images/main/logos.png"></a>
+         </div>
+         <div class="head-right">
+            <ul class="user-l">
+               <li><a href="">实时数据展示系统</a></li>
+               <li><a href="">实时数据展示系统</a></li>
+            </ul> 
+             <jh:notEquals source="host" value="&page.userType">
+             <ul class="user-r">
+               <span><jh:write source='&page.passport' /><je:authority role='eai.marketer'><font size="3" color="#FF851A">(理财师)</font></je:authority></span>
+               <img class="triangle" src="images/main/new8.png">
+               <li>
+                  <i class="img-details mr-20 pulse">
+                     <img src='../../../mb/images/re.png'>
+                  </i> 
+                  <b></b>
+               </li>
+            </ul>
+            </jh:notEquals>
+            <jh:equals source="host" value="&page.userType">
+                  <div class="switch">
+                    <a href="Index.wa?time=today">切换帐号</a>
                   </div>
+            </jh:equals>
+            </div>
+            
+               </TD>
+            </TR>
+            <TR>
+               <TD class="main-left" width="80%" align="center" valign="center">
                   <ul class="users" id="users">
                      <je:authority role='eai.oa'>
                         <li class="binding"><a href="Binding.wa">账号绑定</a></li>
                      </je:authority>
                      <li onclick="loginOut();"><a class="exit" href="javascript:;">退出</a></li>
                   </ul>
-               </TD>
-            </TR>
-            <TR>
-               <TD class="main-left" width="80%" align="center" valign="center">
                   <div class="imag-container">
                      <img class="loding" src="images/main/loading.png" style="display: block">
                      <div class="imag-details" style="display: block;">

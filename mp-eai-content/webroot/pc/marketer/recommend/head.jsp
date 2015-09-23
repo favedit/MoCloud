@@ -7,8 +7,10 @@
 <link rel="stylesheet" type="text/css" href="../../css/reset.css">
 <link rel="stylesheet" type="text/css" href="../../css/animate.css">
 <link rel="stylesheet" type="text/css" href="css/common/head.css">
+<link rel="stylesheet" type="text/css" href="css/common/common.css">
 
 <script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <!--<script type="text/javascript" src="js/main.js"></script> -->
 </head>
 <body>

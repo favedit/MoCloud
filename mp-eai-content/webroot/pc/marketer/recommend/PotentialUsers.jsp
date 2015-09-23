@@ -1,4 +1,4 @@
-         <%@ include file='head.jsp' %>
+      <%@ include file='head.jsp' %>
          <link rel="stylesheet" type="text/css" href="css/PotentialUsers.css">
          <TR>
             <TD  width="100%" align="center" valign="center">
@@ -37,7 +37,7 @@
                            <td>20.0.020</td>
                            <td>20.0.020</td>
                            <td>88</td>
-                           <td><a class="btn" href="">关注</a></td>
+                           <td><a class="btn" href="">我要关注</a></td>
                      </tr>
                      <tr class="trs">
                            <td>姓名s</td>
@@ -46,7 +46,7 @@
                            <td>20.0.020</td>
                            <td>20.0.020</td>
                            <td>88</td>
-                           <td><a href="">关注</a></td>
+                          <td><a class="btn" href="">我要关注</a></td>
                      </tr>
                      <tr class="trs">
                            <td>姓名s</td>
@@ -55,7 +55,7 @@
                            <td>20.0.020</td>
                            <td>20.0.020</td>
                            <td>88</td>
-                           <td><a href="">关注</a></td>
+                           <td><a class="btn" href="">我要关注</a></td>
                      </tr>
                      <tr class="trs">
                            <td>姓名s</td>
@@ -64,7 +64,7 @@
                            <td>20.0.020</td>
                            <td>20.0.020</td>
                            <td>88</td>
-                           <td><a href="">关注</a></td>
+                           <td><a class="btn" href="">我要关注</a></td>
                      </tr>
                      <tr class="trs">
                            <td>姓名s</td>
@@ -73,7 +73,7 @@
                            <td>20.0.020</td>
                            <td>20.0.020</td>
                            <td>88</td>
-                           <td><a href="">关注</a></td>
+                          <td><a class="btn" href="">我要关注</a></td>
                      </tr>
                      <tr class="trs">
                            <td>姓名s</td>
