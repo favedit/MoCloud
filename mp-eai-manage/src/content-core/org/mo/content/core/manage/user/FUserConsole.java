@@ -61,7 +61,6 @@ public class FUserConsole
          where.append(" LIKE '%{passport}%'");
          where.bind("passport", userUnit.passport());
       }
-
       FLogicDataset<FDataPersonUserInfo> userInfoList = userUnitLogic.fetchClass(FDataPersonUserInfo.class, null, where.toString(), null, _pageSize, pageNum);
       for(FDataPersonUserInfo info : userInfoList){
          FDataControlRoleUnit role = _roleConsole.find(logicContext, info.roleId());

@@ -191,8 +191,8 @@ public class FRoleAction
       String tempModuleIds = context.parameter("moduleIds");
       if(!RString.isEmpty(tempModuleIds)){
          String[] moduleIds = tempModuleIds.split(",");
-         FDataControlRoleModuleUnit roleModuleUnit = new FDataControlRoleModuleUnit();
          for(int i = 0; i < moduleIds.length; i++){
+            FDataControlRoleModuleUnit roleModuleUnit = _roleModuleConsole.doPrepare(logicContext);
             long moduleId = Long.parseLong(moduleIds[i]);
             roleModuleUnit.setOvld(true);
             roleModuleUnit.setRoleId(roleUnit.ouid());
@@ -270,9 +270,10 @@ public class FRoleAction
       //为角色添加查看权限
       String tempModuleIds = context.parameter("moduleIds");
       if(!RString.isEmpty(tempModuleIds)){
+         _logger.debug(this, "Role", "Role update get moduleIds.(moduleIds={1})", tempModuleIds);
          String[] moduleIds = tempModuleIds.split(",");
-         FDataControlRoleModuleUnit roleModuleUnit = new FDataControlRoleModuleUnit();
          for(int i = 0; i < moduleIds.length; i++){
+            FDataControlRoleModuleUnit roleModuleUnit = _roleModuleConsole.doPrepare(logicContext);
             long moduleId = Long.parseLong(moduleIds[i]);
             roleModuleUnit.setOvld(true);
             roleModuleUnit.setRoleId(roleUnit.ouid());

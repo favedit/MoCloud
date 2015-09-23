@@ -35,7 +35,7 @@ public class FUserAction
    protected IUserConsole _userConsole;
 
    //============================================================
-   // <T>列出目录处理。</T>
+   // <T>默认action处理。</T>
    //
    // @param context 环境
    // @param page 容器

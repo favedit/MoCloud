@@ -60,14 +60,14 @@ public class FRoleModuleConsole
    @Override
    public void deleteByRoleId(ILogicContext logicContext,
                               long roleId){
-
-      StringBuffer sql = new StringBuffer();
+      FDataControlRoleModuleLogic logic = logicContext.findLogic(FDataControlRoleModuleLogic.class);
       if(roleId != 0){
-         sql.append("DELETE FROM ").append(FDataControlRoleModuleLogic.TABLE);
-         sql.append(" WHERE ").append(FDataControlRoleModuleLogic.ROLE_ID).append(" = ").append(roleId);
+         FLogicDataset<FDataControlRoleModuleUnit> roleModuleList = selectDataByRoleIdAndModuleId(logicContext, roleId, 0);
+         for(FDataControlRoleModuleUnit unit : roleModuleList){
+            logic.doDelete(unit.ouid());
+            _logger.debug(this, "Delete", "Delete by roleId. (roleModuleId={1})", unit.ouid());
+         }
       }
-      _logger.debug(this, "Delete", "Delete by roleId finish. (whereSql={1})", sql.toString());
-      logicContext.findLogic(FDataControlRoleModuleLogic.class).executeSql(sql.toString());
    }
 
    // ============================================================
