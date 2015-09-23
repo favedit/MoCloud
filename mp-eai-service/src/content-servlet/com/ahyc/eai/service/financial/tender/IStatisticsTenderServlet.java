@@ -1,6 +1,7 @@
 package com.ahyc.eai.service.financial.tender;
 
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FDictionary;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
@@ -11,6 +12,14 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 public interface IStatisticsTenderServlet
 {
+   //============================================================
+   // <T>获得投资类型集合。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @return 投资类型集合
+   //============================================================
+   FDictionary<Double> fetchModels(ILogicContext logicContext);
+
    //============================================================
    // <T>获得投资产品数据。</T>
    //

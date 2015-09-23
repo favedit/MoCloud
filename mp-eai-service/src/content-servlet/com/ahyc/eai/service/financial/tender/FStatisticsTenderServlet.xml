@@ -2,6 +2,24 @@
 
 <Config>
 
+<Resource name='sql.tender.model'>
+SELECT
+   TENDER_MODEL TENDER_MODEL,
+   SUM(CUSTOMER_ACTION_AMOUNT) INVESTMENT_TOTAL
+FROM ST_FIN_DYNAMIC
+WHERE CUSTOMER_ACTION_CD = 1
+GROUP BY TENDER_MODEL
+</Resource>
+
+<Resource name='sql.tender.model.day'>
+SELECT
+   SUM(CUSTOMER_ACTION_AMOUNT) INVESTMENT_TOTAL
+FROM ST_FIN_DYNAMIC
+WHERE CUSTOMER_ACTION_CD = 1 
+   AND TENDER_LINK_ID = {link_id}
+   AND DATE_FORMAT(CUSTOMER_ACTION_DATE, '%Y%m%d') = {date}
+</Resource>
+
 <Resource name='sql.tender.info'>
 SELECT
    `id`, 

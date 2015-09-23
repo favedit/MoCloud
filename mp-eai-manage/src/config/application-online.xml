@@ -13,29 +13,13 @@
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
 
-   <!-- 服务器设定 -->
-   <Define name='cloud.server.storage.local'>http://localhost:93</Define>
-   <Define name='cloud.server.storage.remote'>http://localhost:93</Define>
-   <Define name='cloud.server.logger.local'>http://localhost:94</Define>
-   
-   <!-- 包含：系统设定 -->
-   <Include>${application.config}/common/define.xml</Include>
-   <Include>${application.config}/common/core.xml</Include>
-   <Include>${application.config}/common/engine.xml</Include>
-   <Include>${application.config}/common/data.xml</Include>
-   <Include>${application.config}/common/web.xml</Include>
-   <Include>${application.config}/common/web-face.xml</Include>
+   <!-- 服务设定 -->
+   <Define name='cloud.server.logger.enable'>Y</Define>
+   <Define name='cloud.server.logger.publish'>http://10.169.23.66:9099/eai.logger.publish.ws</Define>
 
-   <!-- 包含：设计设定 -->
-   <Include>${application.config}/design/core.xml</Include>
-   <Include>${application.config}/design/describe.xml</Include>
+   <!-- 应用设定 -->
+   <Include>${application.config}/application.xml</Include>
 
-   <!-- 包含：内容设定 -->
-   <Include>${application.config}/content/core.xml</Include>
-   <Include>${application.config}/content/servlet.xml</Include>
-   <Include>${application.config}/content/service.xml</Include>
-   <Include>${application.config}/content/face.xml</Include>
-
-   <!-- 包含：环境设定 -->
+   <!-- 环境设定 -->
    <Include>${application.config}/environment/environment-online.xml</Include>
 </Configuration>

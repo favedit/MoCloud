@@ -14,6 +14,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RDouble;
@@ -26,6 +27,7 @@ import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -51,6 +53,28 @@ public class FStatisticsTenderServlet
    // 金融控制台
    @ALink
    protected IFinancialConsole _financialConsole;
+
+   //============================================================
+   // <T>获得投资类型集合。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @return 投资类型集合
+   //============================================================
+   @Override
+   public FDictionary<Double> fetchModels(ILogicContext logicContext){
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.DATA);
+      FSql sql = _resource.findString(FSql.class, "sql.tender.model");
+      FDictionary<Double> models = new FDictionary<Double>(Double.class);
+      FDataset dataset = connection.fetchDataset(sql);
+      for(FRow row : dataset){
+         String tenderModel = row.get("tender_model");
+         double investmentTotal = row.getDouble("investment_total");
+         if(!RString.isEmpty(tenderModel)){
+            models.set(tenderModel, new Double(investmentTotal));
+         }
+      }
+      return models;
+   }
 
    //============================================================
    // <T>获得投资产品数据。</T>
@@ -79,13 +103,18 @@ public class FStatisticsTenderServlet
       FByteStream stream = createStream(context);
       ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
+      // 获得模式数据
+      FDictionary<Double> models = fetchModels(logicContext);
+      //............................................................
       // 输出排行数据
       FSql infoSql = _resource.findString(FSql.class, "sql.tender.info");
       FDataset infoDataset = connection.fetchDataset(infoSql);
       int infoCount = infoDataset.count();
       stream.writeInt32(infoCount);
       for(FRow row : infoDataset){
+         long tenderLinkId = row.getLong("id");
          String tenderCode = row.get("borrow_model");
+         double investmentTotal = 0;
          // 获得项目信息
          String tenderLabel = null;
          float tenderRate = 0;
@@ -94,13 +123,23 @@ public class FStatisticsTenderServlet
             tenderLabel = tenderModel.label();
             tenderRate = tenderModel.rate();
          }
+         Double investmentTotalValue = models.get(tenderCode, null);
+         if(investmentTotalValue != null){
+            investmentTotal = investmentTotalValue.doubleValue();
+         }
+         // 获得项目当日投资
+         FSql daySql = _resource.findString(FSql.class, "sql.tender.model.day");
+         daySql.bindLong("link_id", tenderLinkId);
+         daySql.bindDateTime("date", currentDateTime, "YYYYMMDD");
+         double investmentDay = connection.executeDouble(daySql);
          // 写入行数据
          stream.writeString(tenderCode);
          stream.writeString(tenderLabel);
          stream.writeFloat(tenderRate);
          stream.writeDouble(RDouble.roundHalf(row.getDouble("has_borrow"), 2));
-         stream.writeDouble(0);
          stream.writeDouble(RDouble.roundHalf(row.getDouble("borrow_money"), 2));
+         stream.writeDouble(RDouble.roundHalf(investmentDay, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
       }
       //............................................................
       // 保存数据到缓冲中

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+   <!-- 应用定义 -->
+   <Define name='application.code'>eai.manage</Define>
+   
+   <!-- 包含：系统设定 -->
+   <Include>${application.config}/common/define.xml</Include>
+   <Include>${application.config}/common/core.xml</Include>
+   <Include>${application.config}/common/engine.xml</Include>
+   <Include>${application.config}/common/data.xml</Include>
+   <Include>${application.config}/common/web.xml</Include>
+   <Include>${application.config}/common/web-face.xml</Include>
+
+   <!-- 包含：设计设定 -->
+   <Include>${application.config}/design/core.xml</Include>
+   <Include>${application.config}/design/describe.xml</Include>
+
+   <!-- 包含：内容设定 -->
+   <Include>${application.config}/content/core.xml</Include>
+   <Include>${application.config}/content/servlet.xml</Include>
+   <Include>${application.config}/content/service.xml</Include>
+   <Include>${application.config}/content/face.xml</Include>
+
+</Configuration>
