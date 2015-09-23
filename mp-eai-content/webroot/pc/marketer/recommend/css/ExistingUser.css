@@ -1,0 +1,58 @@
+.note-setupthe{
+	position: absolute;
+	z-index: 9;
+	border:1px solid red;
+	background: #1e2535;
+	border:1px solid #46e1e5;
+	text-align: left;
+	padding: 10px;
+	border-radius: 10px;
+	font-size: 14px;
+}
+.note-setupthe p input{
+	margin-right: 10px;
+	position: relative;
+	top:2px;
+}
+.btn-box a{
+	width: 60px;
+	background-size: 60px 24px;
+	font-size: 15px;
+}
+.btn-box a:hover{
+	background-size: 60px 24px;
+}
+
+.management-prompt{
+	position: fixed;
+	border:3px solid #45d5d6;
+	border-radius: 20px;
+	top:50%;
+	left: 50%;
+	margin-left: -255px;
+	margin-top: -240px;
+	background: #1d2731;
+	padding: 20px;
+	display: none;
+}
+.management-prompt p{
+	color:#fff;
+	line-height: 30px;
+}
+.management-prompt p input{
+	margin-right: 10px;
+	position: relative;
+	top:2px;
+}
+.management-prompt textarea{
+	width: 450px;
+	height: 250px;
+	padding: 10px;
+}
+.btn-container{
+	text-align: center;
+}
+.btn-container input{
+	border: none;
+	margin-top: 15px;
+}
