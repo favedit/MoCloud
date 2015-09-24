@@ -66,9 +66,21 @@ public class FRecommendAction
       }else{
          page.setPageCurrent(0);
       }
+      //分页处理
+      int pageTotal = _memberConsole.getPageCount(logicContext);
+      page.setPageTotal(pageTotal);
+      // 第0页
+      if(page.pageCurrent() == 0){
+         page.setPageCurrent(1);
+      }
+      // 最后一页
+      if(pageTotal < page.pageCurrent()){
+         page.setPageCurrent(pageTotal);
+      }
       FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, page.pageCurrent() - 1);
       page.setMemberList(memberList);
       _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList.first().ouid());
+
       return "/pc/marketer/recommend/MemberList";
    }
 

@@ -5,6 +5,7 @@ import com.cyou.gccloud.data.data.FDataFinancialMarketerMemberLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerMemberUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
+import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
@@ -24,6 +25,9 @@ public class FDataMemberConsole
 {
    // 每页条数
    static final int _pageSize = 12;
+
+   //推荐天数
+   protected final int _RecommendDay = 3;
 
    @ALink
    protected ICityConsole _cityConsole;
@@ -73,12 +77,35 @@ public class FDataMemberConsole
    @Override
    public EResult follow(ILogicContext logicContext,
                          String guid){
+      TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       FDataFinancialMarketerMemberLogic MMLogic = logicContext.findLogic(FDataFinancialMarketerMemberLogic.class);
       FDataFinancialMemberUnit member = findByGuid(logicContext, guid);
+      // 关联理财师和用户的关系
       FDataFinancialMarketerMemberUnit mmUnit = new FDataFinancialMarketerMemberUnit();
-      //      mmUnit.set
-      //      MMLogic.doInsert(logicUnit)
-
+      //      mmUnit.setMarketerId(value);
+      mmUnit.setCustomerId(member.ouid());
+      mmUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
+      mmUnit.setRecommendBeginDate(nowTime);
+      TDateTime afterTime = new TDateTime(nowTime);
+      afterTime.addDay(_RecommendDay);
+      mmUnit.setRecommendEndDate(afterTime);
+      MMLogic.doInsert(mmUnit);
       return null;
+   }
+
+   // ============================================================
+   // <T>获取总页数</T>
+   //
+   // @param logicContext 链接对象
+   // @return 总页数
+   // ============================================================
+   @Override
+   public int getPageCount(ILogicContext logicContext){
+      FLogicDataset<FDataFinancialMemberUnit> list = fetch(logicContext, null);
+      int pageTotal = list.count() / _pageSize;
+      if(list.count() % _pageSize != 0){
+         pageTotal += 1;
+      }
+      return pageTotal;
    }
 }

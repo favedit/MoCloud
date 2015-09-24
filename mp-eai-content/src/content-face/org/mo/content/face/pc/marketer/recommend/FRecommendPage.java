@@ -13,11 +13,22 @@ public class FRecommendPage
    // 当前页
    protected int _pageCurrent;
 
+   // 总页数
+   protected int _pageTotal;
+
    // 会员集合
    protected FLogicDataset<FDataFinancialMemberInfo> _memberList;
 
    //名称
    protected String _label;
+
+   public int pageTotal(){
+      return _pageTotal;
+   }
+
+   public void setPageTotal(int _pageTotal){
+      this._pageTotal = _pageTotal;
+   }
 
    public String label(){
       return _label;

@@ -32,4 +32,12 @@ public interface IDataMemberConsole
    // ============================================================
    EResult follow(ILogicContext logicContext,
                   String guid);
+
+   // ============================================================
+   // <T>获取总页数</T>
+   //
+   // @param logicContext 链接对象
+   // @return 总页数
+   // ============================================================
+   int getPageCount(ILogicContext logicContext);
 }

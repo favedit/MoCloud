@@ -35,9 +35,9 @@
                </jh:loop>
             </table>
             <ul class="pages">
-               <li><a href="/pc/marketer/recommend/Recommend.wa?page=1">上一页</a></li>
-               <li>1/7</li>
-               <li><a href="/pc/marketer/recommend/Recommend.wa?page=2">下一页</a></li>
+               <li><a href="javascript:void(0);" onclick="pading(-1)">上一页</a></li>
+               <li><jh:write source="&page.pageCurrent" />/<jh:write source="&page.pageTotal" /></li>
+               <li><a href="javascript:void(0);" onclick="pading(+1)">下一页</a></li>
             </ul>
          </div>
       </TD>
@@ -54,6 +54,13 @@
    </TR>
    </TABLE>
    </FORM>
+<script>
+   function pading(nubmer){
+      var currentPage = <jh:write source="&page.pageCurrent" />;
+      var page = currentPage+nubmer;
+      location.href="/pc/marketer/recommend/Recommend.wa?page="+page;
+   }
+</script>
    <!--
    <div class="prompts">
       不好意思，您手慢了！
