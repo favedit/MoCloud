@@ -18,8 +18,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>客户统计表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialCustomerUnit
-      extends FLogicUnit
+public class FStatisticsFinancialCustomerUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

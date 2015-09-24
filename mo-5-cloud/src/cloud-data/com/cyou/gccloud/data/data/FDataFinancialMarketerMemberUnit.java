@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>金融成员信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialMarketerMemberUnit
-      extends FLogicUnit
+public class FDataFinancialMarketerMemberUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -44,11 +43,11 @@ public class FDataFinancialMarketerMemberUnit
    // 字段理财师编号的定义。
    protected long _marketerId;
 
-   // 存储字段客户编号的定义。
-   private long __customerId;
+   // 存储字段成员编号的定义。
+   private long __memberId;
 
-   // 字段客户编号的定义。
-   protected long _customerId;
+   // 字段成员编号的定义。
+   protected long _memberId;
 
    // 存储字段关系类型的定义。
    private int __relationCd;
@@ -242,41 +241,41 @@ public class FDataFinancialMarketerMemberUnit
    }
 
    //============================================================
-   // <T>判断客户编号的数据是否改变。</T>
+   // <T>判断成员编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerIdChanged(){
-      return __customerId != _customerId;
+   public boolean isMemberIdChanged(){
+      return __memberId != _memberId;
    }
 
    //============================================================
-   // <T>获得客户编号的数据内容。</T>
+   // <T>获得成员编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long customerId(){
-      return _customerId;
+   public long memberId(){
+      return _memberId;
    }
 
    //============================================================
-   // <T>获得客户编号的数据单元。</T>
+   // <T>获得成员编号的数据单元。</T>
    //
    // @return 数据内容
    //============================================================
-   public FDataFinancialCustomerUnit customer(){
-      FDataFinancialCustomerLogic logic = _logicContext.findLogic(FDataFinancialCustomerLogic.class);
-      FDataFinancialCustomerUnit unit = logic.find(_customerId);
+   public FDataFinancialMemberUnit member(){
+      FDataFinancialMemberLogic logic = _logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FDataFinancialMemberUnit unit = logic.find(_memberId);
       return unit;
    }
 
    //============================================================
-   // <T>设置客户编号的数据内容。</T>
+   // <T>设置成员编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerId(long value){
-      _customerId = value;
+   public void setMemberId(long value){
+      _memberId = value;
    }
 
    //============================================================
@@ -593,8 +592,8 @@ public class FDataFinancialMarketerMemberUnit
             return _guid;
          case "marketer_id":
             return Long.toString(_marketerId);
-         case "customer_id":
-            return Long.toString(_customerId);
+         case "member_id":
+            return Long.toString(_memberId);
          case "relation_cd":
             return RInteger.toString(_relationCd);
          case "sms_contact_cd":
@@ -643,8 +642,8 @@ public class FDataFinancialMarketerMemberUnit
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
-         case "customer_id":
-            _customerId = RLong.parse(value);
+         case "member_id":
+            _memberId = RLong.parse(value);
             break;
          case "relation_cd":
             _relationCd = RInteger.parse(value);
@@ -710,9 +709,9 @@ public class FDataFinancialMarketerMemberUnit
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
                break;
-            case "customer_id":
-               __customerId = RLong.parse(value);
-               _customerId = __customerId;
+            case "member_id":
+               __memberId = RLong.parse(value);
+               _memberId = __memberId;
                break;
             case "relation_cd":
                __relationCd = RInteger.parse(value);
@@ -774,7 +773,7 @@ public class FDataFinancialMarketerMemberUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("marketerId", _marketerId);
-      row.set("customerId", _customerId);
+      row.set("memberId", _memberId);
       row.set("relationCd", _relationCd);
       row.set("smsContactCd", _smsContactCd);
       row.set("recommendBeginDate", _recommendBeginDate);
@@ -800,7 +799,7 @@ public class FDataFinancialMarketerMemberUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("marketerId", RLong.toString(_marketerId));
-      map.put("customerId", RLong.toString(_customerId));
+      map.put("memberId", RLong.toString(_memberId));
       map.put("relationCd", RInteger.toString(_relationCd));
       map.put("smsContactCd", RInteger.toString(_smsContactCd));
       map.put("recommendBeginDate", _recommendBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -826,7 +825,7 @@ public class FDataFinancialMarketerMemberUnit
       _ovld = input.readBoolean();
       _guid = input.readString();
       _marketerId = input.readInt64();
-      _customerId = input.readInt64();
+      _memberId = input.readInt64();
       _relationCd = input.readInt32();
       _smsContactCd = input.readInt32();
       _recommendBeginDate.set(input.readInt64());
@@ -852,7 +851,7 @@ public class FDataFinancialMarketerMemberUnit
       output.writeBoolean(_ovld);
       output.writeString(_guid);
       output.writeInt64(_marketerId);
-      output.writeInt64(_customerId);
+      output.writeInt64(_memberId);
       output.writeInt32(_relationCd);
       output.writeInt32(_smsContactCd);
       output.writeInt64(_recommendBeginDate.get());

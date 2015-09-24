@@ -16,8 +16,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>资源类型表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceTypeUnit
-      extends FLogicUnit
+public class FDataResourceTypeUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
