@@ -24,6 +24,7 @@
          </div>
          <div class="head-right">
             <ul class="user-l">
+               <li><a href="/pc/Main.wa">实时数据展示系统</a></li>
                <li><a href="/pc/marketer/recommend/Recommend.wa">潜在客户挖掘</a></li>
             </ul>
              <ul class="user-r">

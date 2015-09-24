@@ -1,12 +1,9 @@
 package org.mo.content.face.pc.marketer.recommend;
 
-import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
@@ -59,8 +56,7 @@ public class FRecommendAction
                            FBasePage basePage,
                            FRecommendPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
-      _sessionConsole.open(session);
-      _logger.debug(this, "Main", "Main default begin.(session={1})", session);
+      _logger.debug(this, "construct", "construct default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
          page.setLabel(user.label());
@@ -161,14 +157,18 @@ public class FRecommendAction
                             ILogicContext logicContext,
                             FBasePage basePage,
                             FRecommendPage page){
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "memberInfo", "memberInfo default begin.(session={1})", session);
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      if(user != null){
+         page.setLabel(user.label());
+      }
       String guid = context.parameter("id");
       if(RString.isEmpty(guid)){
          return "/apl/message/LogicFatal";
       }
-      FDataFinancialMemberUnit unit = _memberConsole.findByGuid(logicContext, guid);
+      FDataFinancialMemberInfo unit = _memberConsole.findInfoByGuid(logicContext, guid);
       if(unit == null){
-         TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
-
          return "/apl/message/LogicFatal";
       }
       page.setMember(unit);

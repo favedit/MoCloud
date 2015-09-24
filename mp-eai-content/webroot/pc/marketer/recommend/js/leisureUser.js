@@ -25,6 +25,7 @@ var ctrl = {},
      // 解除
      $(".removes").on("click",function(){
         id = $(this).data("id");
+        alert(id);
         $managementPrompt.show();
      })
      // 关闭
@@ -49,12 +50,12 @@ var ctrl = {},
      // $managementPrompt 
      // $(".shut-down").
     var data ={};
-  
-
     // 提交
-    $(".submits").click(function(){
+    $(".submits").click(function(){       
      data = {
         id : id,
+        feedbackCd:feedbackCd,
+        feedbackNote:feedbackNote,
         type:$(".remind").data("id")
      };
     setAjax("",data,function(datas){

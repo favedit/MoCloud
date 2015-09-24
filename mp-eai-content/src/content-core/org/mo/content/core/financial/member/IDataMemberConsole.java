@@ -48,7 +48,6 @@ public interface IDataMemberConsole
    // @param  guid 用户唯一码
    // @return 数据对象
    // ============================================================
-   //   @Override
-   //   FDataFinancialMemberInfo ByGuid(ILogicContext logicContext,
-   //                                        String guid);
+   FDataFinancialMemberInfo findInfoByGuid(ILogicContext logicContext,
+                                           String guid);
 }

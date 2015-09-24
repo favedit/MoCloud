@@ -1,4 +1,4 @@
-package org.mo.content.face.pc.marketer.recommend;
+package org.mo.content.face.pc.marketer.member;
 
 import org.mo.com.lang.FObjectId;
 import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
@@ -7,7 +7,7 @@ import org.mo.data.logic.FLogicDataset;
 //============================================================
 // <P>页面容器</P>
 //============================================================
-public class FRecommendPage
+public class FFollowedPage
       extends FObjectId
 {
    // 当前页

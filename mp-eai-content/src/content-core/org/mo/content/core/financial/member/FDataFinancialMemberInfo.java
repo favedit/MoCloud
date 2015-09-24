@@ -13,6 +13,17 @@ public class FDataFinancialMemberInfo
    // 城市名称
    protected String _cityLabel;
 
+   // 剩余天数
+   protected int _remainingDays;
+
+   public int remainingDays(){
+      return _remainingDays;
+   }
+
+   public void setRemainingDays(int _remainingDays){
+      this._remainingDays = _remainingDays;
+   }
+
    public String cityLabel(){
       return _cityLabel;
    }
