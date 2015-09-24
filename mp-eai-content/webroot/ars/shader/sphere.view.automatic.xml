@@ -13,7 +13,7 @@
    <Option name='fog'      value='N'/>
    <!--=====================================================-->
    <Parameter name='vc_const'    format='Float4'/>
-   <Parameter name='fc_alpha'    format='Float4'/>
+   <Parameter name='fc_const'    format='Float4'/>
    <!--=====================================================-->
    <Attribute name='va_position' linker='position' format='Float4'/>
    <Attribute name='va_coord'    linker='coord'    format='Float2'/>
@@ -23,7 +23,7 @@
    <!--=====================================================-->
    <Source name='vertex'><![CDATA[
       //..........................................................
-      // 变换矩阵声明
+      // 常量定义
       uniform vec4 vc_const;
       //..........................................................
       // 属性流声明
@@ -37,13 +37,7 @@
       // 处理
       void main(){
          // 计算最终坐标
-         float angle = vc_const.a;
-         vec2 position = vec2(0.0, 0.0);
-         position = va_position;
-         //position.x += vc_const.a;
-         //position.x = va_position.x * cos(vc_const.a) + va_position.y * sin(vc_const.a);
-         //position.y = va_position.x * cos(vc_const.a) - va_position.y * sin(vc_const.a);
-         v_position = vec2(position.x * vc_const.x, position.y * vc_const.y);
+         v_position = vec2(va_position.x * vc_const.x, va_position.y * vc_const.y);
          gl_Position = vec4(va_position.xy, 0.0, 1.0);
          // 设置纹理
          v_coord = va_coord;
@@ -54,6 +48,9 @@
       #ifdef GL_ES
       precision highp float;
       #endif
+      //..........................................................
+      // 常量定义
+      uniform vec4 fc_const;
       //..........................................................
       // 声明插值器
       varying vec2 v_position;
@@ -68,9 +65,10 @@
          float cx = texture2D(fs_radian, v_coord).a;
          float cy = 1.0 - sqrt(v_position.x * v_position.x + v_position.y * v_position.y);
          cy = min(max(cy, 0.0), 1.0);
-         vec4 color = texture2D(fs_diffuse, vec2(cx, cy));
+         vec4 color = texture2D(fs_diffuse, vec2(cx + fc_const.a, cy));
          gl_FragColor = color;
          //gl_FragColor = texture2D(fs_diffuse, v_coord);
+         //gl_FragColor = vec4(cx, cx, cx, 1.0);
       }
    ]]></Source>
 </Configuration>
