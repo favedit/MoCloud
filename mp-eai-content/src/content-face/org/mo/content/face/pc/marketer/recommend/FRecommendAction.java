@@ -1,9 +1,12 @@
 package org.mo.content.face.pc.marketer.recommend;
 
+import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
@@ -141,5 +144,34 @@ public class FRecommendAction
       //成功
       page.setMessage("true");
       return "/apl/ajax";
+   }
+
+   //============================================================
+   // <T>获取成员信息。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话环境
+   // @param logicContext 逻辑环境
+   // @param basePage 公用容器
+   // @param page 页面
+   //============================================================
+   @Override
+   public String memberInfo(IWebContext context,
+                            IWebSession sessionContext,
+                            ILogicContext logicContext,
+                            FBasePage basePage,
+                            FRecommendPage page){
+      String guid = context.parameter("id");
+      if(RString.isEmpty(guid)){
+         return "/apl/message/LogicFatal";
+      }
+      FDataFinancialMemberUnit unit = _memberConsole.findByGuid(logicContext, guid);
+      if(unit == null){
+         TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
+
+         return "/apl/message/LogicFatal";
+      }
+      page.setMember(unit);
+      return "/pc/marketer/recommend/MemberInfo";
    }
 }

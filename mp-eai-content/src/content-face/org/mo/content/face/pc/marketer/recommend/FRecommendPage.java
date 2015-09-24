@@ -1,5 +1,6 @@
 package org.mo.content.face.pc.marketer.recommend;
 
+import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import org.mo.com.lang.FObjectId;
 import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
 import org.mo.data.logic.FLogicDataset;
@@ -16,14 +17,25 @@ public class FRecommendPage
    // 总页数
    protected int _pageTotal;
 
-   // 会员集合
+   // 成员集合
    protected FLogicDataset<FDataFinancialMemberInfo> _memberList;
+
+   // 成员对象
+   protected FDataFinancialMemberUnit _member;
 
    //名称
    protected String _label;
 
    // 消息
    protected String _message;
+
+   public FDataFinancialMemberUnit member(){
+      return _member;
+   }
+
+   public void setMember(FDataFinancialMemberUnit _member){
+      this._member = _member;
+   }
 
    public String message(){
       return _message;

@@ -40,4 +40,15 @@ public interface IDataMemberConsole
    // @return 总页数
    // ============================================================
    int getPageCount(ILogicContext logicContext);
+
+   // ============================================================
+   // <T>获取对象</T>
+   //
+   // @param logicContext 链接对象
+   // @param  guid 用户唯一码
+   // @return 数据对象
+   // ============================================================
+   //   @Override
+   //   FDataFinancialMemberInfo ByGuid(ILogicContext logicContext,
+   //                                        String guid);
 }
