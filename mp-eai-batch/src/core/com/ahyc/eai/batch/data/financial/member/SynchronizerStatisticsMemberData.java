@@ -1,7 +1,15 @@
 package com.ahyc.eai.batch.data.financial.member;
 
+import com.cyou.gccloud.data.data.FDataFinancialCustomerLogic;
+import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMarketerLogic;
+import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import java.util.Calendar;
@@ -13,6 +21,13 @@ import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.eng.data.IDatabaseConsole;
+//============================================================
+//<P>同步分析ST库表里面的数据到DT库下对应的表里面</P>
+//@class SynchronizerStatisticsMemberData
+//@author AnjoyTian
+//@Date 2015.09.24  
+//@version 1.0.0
+//============================================================
 
 public class SynchronizerStatisticsMemberData
 {
@@ -28,8 +43,12 @@ public class SynchronizerStatisticsMemberData
 
    //同步ST_FIN_MEMBER表数据到DT_FIN_MEMBER表
    public static void synchronizedMember(FLogicContext logicContext){
+      FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
+      FStatisticsFinancialCustomerLogic statisticsCustomerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
       FStatisticsFinancialMemberLogic statisticsMemberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
       FDataFinancialMemberLogic dataMemberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FDataFinancialCustomerLogic dataCustomerLogic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FDataFinancialMarketerLogic dataMarketerLogic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
       //获取最近一礼拜统计成员表的数据,将其同步到存储表,,score字段计算获得
       FLogicDataset<FStatisticsFinancialMemberUnit> statisticsMemberLatestWeek = getLatestWeek(statisticsMemberLogic);
       for(Iterator<FStatisticsFinancialMemberUnit> iterator = statisticsMemberLatestWeek.iterator(); iterator.hasNext();){
@@ -43,19 +62,132 @@ public class SynchronizerStatisticsMemberData
          //如果存在,则更新数据
          if(dataMembers != null && dataMembers.count() > 0){
             FDataFinancialMemberUnit dataMember = dataMembers.first();
-            loadData(dataMember, statisticsMember);
+            loadDTMemberData(dataMember, statisticsMember);
             dataMemberLogic.doUpdate(dataMember);
+            //同步更新与之关联的customer和marketer
+            long linkId = dataMember.linkId();
+            FSql wheresqlCustomer = new FSql();
+            wheresqlCustomer.append(FDataFinancialCustomerLogic.LINK_ID);
+            wheresqlCustomer.append(" = ");
+            wheresqlCustomer.append(linkId);
+            FLogicDataset<FDataFinancialCustomerUnit> FDataFinancialCustomerUnits = dataCustomerLogic.fetch(wheresqlCustomer);
+            if(FDataFinancialCustomerUnits != null && FDataFinancialCustomerUnits.count() > 0){
+               FDataFinancialCustomerUnit dataCustomerUnit = FDataFinancialCustomerUnits.first();
+               FSql wheresql = new FSql();
+               wheresql.append(FStatisticsFinancialCustomerLogic.LINK_ID);
+               wheresql.append(" = ");
+               wheresql.append(linkId);
+               FLogicDataset<FStatisticsFinancialCustomerUnit> fetchByLink_ID = statisticsCustomerLogic.fetch(wheresql);
+               loadDTCustomerData(linkId, dataMember.ouid(), statisticsCustomerLogic, dataCustomerLogic, dataCustomerUnit, fetchByLink_ID.first());
+               dataCustomerLogic.doUpdate(dataCustomerUnit);
+            }
+
+            FSql wheresqlMarketer = new FSql();
+            wheresqlMarketer.append(FDataFinancialMarketerLogic.LINK_ID);
+            wheresqlMarketer.append(" = ");
+            wheresqlMarketer.append(linkId);
+            FLogicDataset<FDataFinancialMarketerUnit> FDataFinancialMarketerUnits = dataMarketerLogic.fetch(wheresqlMarketer);
+            if(FDataFinancialMarketerUnits != null && FDataFinancialMarketerUnits.count() > 0){
+               FDataFinancialMarketerUnit dataMarketerUnit = FDataFinancialMarketerUnits.first();
+               FSql wheresql2 = new FSql();
+               wheresql2.append(FStatisticsFinancialMarketerLogic.LINK_ID);
+               wheresql2.append(" = ");
+               wheresql2.append(linkId);
+               FLogicDataset<FStatisticsFinancialMarketerUnit> fetchByLink_ID2 = statisticsMarketerLogic.fetch(wheresql2);
+               loadDTMarketerData(linkId, dataMember.ouid(), statisticsMarketerLogic, dataMarketerLogic, dataMarketerUnit, fetchByLink_ID2.first());
+               dataMarketerLogic.doUpdate(dataMarketerUnit);
+            }
+            //更新完毕member
          }else{
 
-            //如果不存在,插入数据,同步数据的俩张表guid设置为一样
+            //如果member不存在,插入数据,同步数据的俩张表guid设置为一样,ouid也设置一样  (如果member不存在,意味着与之关联的customer和marketer也要新添加
             FDataFinancialMemberUnit dataMember = new FDataFinancialMemberUnit();
-            loadData(dataMember, statisticsMember);
+            FDataFinancialCustomerUnit dataCustomerUnit = new FDataFinancialCustomerUnit();
+            FDataFinancialMarketerUnit dataMarketerUnit = new FDataFinancialMarketerUnit();
+            loadDTMemberData(dataMember, statisticsMember);
             dataMemberLogic.doInsert(dataMember);
+            //当同步添加了一个member后,要保证与member关联的customer和marketer的ouid要一致.拿member的link_id去ST关联customer和marketer的LINK_ID
+            long linkId = dataMember.linkId();
+            long ouid = dataMember.ouid();
+            //首先去ST库下找有没有相应link_id的customer
+            FSql wheresql = new FSql();
+            wheresql.append(FStatisticsFinancialCustomerLogic.LINK_ID);
+            wheresql.append(" = ");
+            wheresql.append(linkId);
+            FLogicDataset<FStatisticsFinancialCustomerUnit> fetchByLink_ID = statisticsCustomerLogic.fetch(wheresql);
+            if(fetchByLink_ID != null && fetchByLink_ID.count() > 0){
+               FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit = fetchByLink_ID.first();
+               loadDTCustomerData(linkId, ouid, statisticsCustomerLogic, dataCustomerLogic, dataCustomerUnit, firstStatisticsFinancialCustomerUnit);
+               dataCustomerLogic.doInsert(dataCustomerUnit);
+            }
+
+            //首先去ST库下找有没有相应link_id的marketer
+            FSql wheresql2 = new FSql();
+            wheresql2.append(FStatisticsFinancialMarketerLogic.LINK_ID);
+            wheresql2.append(" = ");
+            wheresql2.append(linkId);
+            FLogicDataset<FStatisticsFinancialMarketerUnit> fetchByLink_ID2 = statisticsMarketerLogic.fetch(wheresql2);
+            if(fetchByLink_ID2 != null && fetchByLink_ID2.count() > 0){
+               FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit = fetchByLink_ID2.first();
+               loadDTMarketerData(linkId, ouid, statisticsMarketerLogic, dataMarketerLogic, dataMarketerUnit, firstStatisticsFinancialMarketerUnit);
+               dataMarketerLogic.doInsert(dataMarketerUnit);
+            }
          }
          /*System.out.println("年龄:" + getAgeByCard(idCard) + "  收入:" + statisticsMember.incomeCode() + "  dataMemberpassport:" + dataMember.passport() + "  dataMemberlinkId:" + dataMember.linkId() + "  dataMemberrecommendScore:"
                + dataMember.recommendScore());*/
 
       }
+   }
+
+   //同步删除数据
+   public static void synchronizedDeleteMember(FLogicContext logicContext){
+      FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
+   }
+
+   //把ST的marketer同步到DT的marketer
+   private static void loadDTMarketerData(long linkId,
+                                          long ouid,
+                                          FStatisticsFinancialMarketerLogic statisticsMarketerLogic,
+                                          FDataFinancialMarketerLogic dataMarketerLogic,
+                                          FDataFinancialMarketerUnit dataMarketerUnit,
+                                          FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit){
+      dataMarketerUnit.setOuid(ouid);
+      dataMarketerUnit.setGuid(firstStatisticsFinancialMarketerUnit.guid());
+      dataMarketerUnit.setLinkId(linkId);
+      dataMarketerUnit.setStatisticsId(firstStatisticsFinancialMarketerUnit.ouid());
+      dataMarketerUnit.setLabel(firstStatisticsFinancialMarketerUnit.label());
+      dataMarketerUnit.setStatusCd(firstStatisticsFinancialMarketerUnit.statusCd());
+      dataMarketerUnit.setPhone(firstStatisticsFinancialMarketerUnit.phone());
+      dataMarketerUnit.setCard(firstStatisticsFinancialMarketerUnit.card());
+      dataMarketerUnit.setRankLabel(firstStatisticsFinancialMarketerUnit.rankLabel());
+      dataMarketerUnit.setDepartmentId(firstStatisticsFinancialMarketerUnit.departmentLinkId());
+      dataMarketerUnit.setDepartmentLabel(firstStatisticsFinancialMarketerUnit.departmentLabel());
+      dataMarketerUnit.setCustomerInvestmentTotal(firstStatisticsFinancialMarketerUnit.investmentTotal());
+      dataMarketerUnit.setCustomerRedemptionTotal(firstStatisticsFinancialMarketerUnit.redemptionTotal());
+      dataMarketerUnit.setCustomerNetinvestmentTotal(firstStatisticsFinancialMarketerUnit.netinvestmentTotal());
+      dataMarketerUnit.setCustomerInterestTotal(firstStatisticsFinancialMarketerUnit.interestTotal());
+      dataMarketerUnit.setCustomerPerformanceTotal(firstStatisticsFinancialMarketerUnit.performanceTotal());
+
+   }
+
+   //把ST的customer同步到DT的customer
+   private static void loadDTCustomerData(long linkId,
+                                          long ouid,
+                                          FStatisticsFinancialCustomerLogic statisticsCustomerLogic,
+                                          FDataFinancialCustomerLogic dataCustomerLogic,
+                                          FDataFinancialCustomerUnit dataCustomerUnit,
+                                          FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit){
+
+      dataCustomerUnit.setOuid(ouid);
+      dataCustomerUnit.setGuid(firstStatisticsFinancialCustomerUnit.guid());
+      //      System.out.println("firstStatisticsFinancialCustomerUnit.guid()-->" + firstStatisticsFinancialCustomerUnit.guid());
+      dataCustomerUnit.setLinkId(linkId);
+      dataCustomerUnit.setStatisticsId((int)firstStatisticsFinancialCustomerUnit.ouid());
+      dataCustomerUnit.setInvestmentTotal(firstStatisticsFinancialCustomerUnit.investmentTotal());
+      dataCustomerUnit.setRedemptionTotal((float)firstStatisticsFinancialCustomerUnit.redemptionTotal());
+      dataCustomerUnit.setNetinvestment((float)firstStatisticsFinancialCustomerUnit.netinvestmentTotal());
+      dataCustomerUnit.setInterestTotal((float)firstStatisticsFinancialCustomerUnit.interestTotal());
+
    }
 
    //计算分数  通过年龄和收入去计算
@@ -119,8 +251,9 @@ public class SynchronizerStatisticsMemberData
    }
 
    //装载数据
-   public static void loadData(FDataFinancialMemberUnit dataMember,
-                               FStatisticsFinancialMemberUnit statisticsMember){
+   public static void loadDTMemberData(FDataFinancialMemberUnit dataMember,
+                                       FStatisticsFinancialMemberUnit statisticsMember){
+      dataMember.setOuid(statisticsMember.ouid());
       dataMember.setGuid(statisticsMember.guid());
       dataMember.setLinkId(statisticsMember.linkId());//******
       dataMember.setStatisticsId(statisticsMember.ouid());
