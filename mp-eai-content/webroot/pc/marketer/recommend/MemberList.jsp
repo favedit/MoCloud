@@ -54,18 +54,16 @@
    </TR>
    </TABLE>
    </FORM>
-<script>
-   function pading(nubmer){
-      var currentPage = <jh:write source="&page.pageCurrent" />;
-      var page = currentPage+nubmer;
-      location.href="/pc/marketer/recommend/Recommend.wa?page="+page;
-   }
-</script>
-   <!--
+   <script>
+      function pading(nubmer){
+         var currentPage = <jh:write source="&page.pageCurrent" />;
+         var page = currentPage+nubmer;
+         location.href="/pc/marketer/recommend/Recommend.wa?page="+page;
+      }
+   </script>
+      
    <div class="prompts">
       不好意思，您手慢了！
    </div>
--->
    </body>
-
    </html>

@@ -739,6 +739,10 @@ Copyright (c) 2015 Daniel Eden
 .bounceInDown {
   -webkit-animation-name: bounceInDown;
   animation-name: bounceInDown;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+  animation-duration: 500ms;
 }
 
 @-webkit-keyframes bounceInLeft {
@@ -1476,8 +1480,10 @@ Copyright (c) 2015 Daniel Eden
 
   100% {
     opacity: 0;
+     display: none;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
+    
   }
 }
 
@@ -1488,14 +1494,20 @@ Copyright (c) 2015 Daniel Eden
 
   100% {
     opacity: 0;
+     display: none;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
+   
   }
 }
 
 .fadeOutDown {
   -webkit-animation-name: fadeOutDown;
   animation-name: fadeOutDown;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+  animation-duration: 500ms;
 }
 
 @-webkit-keyframes fadeOutDownBig {

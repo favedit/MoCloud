@@ -1,4 +1,3 @@
-$(function(){
 	// 用户名
 	var $userR = $(".user-r");
 	var $users = $("#users");
@@ -14,8 +13,32 @@ $(function(){
      $users.mouseenter(function(event) {
         $(this).show();
      });
-
-
-
-
-})
+     // 取key
+    function getQueryString(name){
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+    // ajax post
+    function setAjax(url,datas,callback,failure){
+         $.ajax({
+            type: "post",
+            dataType: "json",
+            url: url,
+            data: datas,
+            success:function(data){
+                callback(data);
+            }
+        })
+    }
+    //  //
+    // function remberMe(){
+    // var o = $('rember');
+    // if(o.checked){
+    //     o.checked = false;
+    // }else{
+    //     o.checked = true; 
+    // } 
+    // 
+   // 提交 单选
+   

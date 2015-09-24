@@ -38,7 +38,7 @@
                      </div>
                      <div class="head-right">
                         <ul class="user-l">
-                           <li><a href="/pc/marketer/recommend/Recommend.wa">潜在客户挖掘<</a></li>
+                           <li><a href="/pc/marketer/recommend/Recommend.wa">潜在客户挖掘</a></li>
                         </ul>
                         <jh:notEquals source="host" value="&page.userType">
                            <ul class="user-r">

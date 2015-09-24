@@ -146,7 +146,7 @@ html,body {
 	background-image:-moz-linear-gradient(45deg, #101c39,#0b466b);
 	background-image:-ms-gradient(45deg, #101c39,#0b466b);*/
 	background: url(../../images/nav.png) no-repeat center center;
-	background-size: 217px 39px;
+	background-size:95% 95%;
 /*	overflow: hidden;
 	background-image: -moz-linear-gradient(top, #8fa1ff, #3757fa);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ff4f02), color-stop(1, #8f2c00)); 
@@ -154,7 +154,7 @@ html,body {
 }
 .user-l li:hover{
 	background: url(../../images/navhover.png) no-repeat center center;
-	background-size: 217px 39px;
+	background-size: 95% 95%;
 }
 .user-l li a{
 	color:#37e5fe;
@@ -358,7 +358,10 @@ html,body {
 	  float: left;
 	  /* border: 2px solid #3489ac; */
 	  background: url(../../images/nav.png) no-repeat center center;
-	  background-size: 187px 34px;
+	  background-size: 95% 95%;
 	  font-size: 20px;
+	}
+	.user-l li:hover{
+		background-size:95% 95%;
 	}
 }

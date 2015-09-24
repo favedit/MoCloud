@@ -8,6 +8,8 @@
 	border-radius: 10px;
 	font-size: 14px;
 	color:#fff!important;
+	display: none;
+
 }
 .note-setupthe p input{
 	margin-right: 10px;
@@ -20,6 +22,7 @@
 	padding: 0px!important;
 	height: 34px!important;
 	line-height: 34px!important;
+	cursor:pointer;
 }
 .note-setupthe .btn-box a{
 	color:#fff!important;
@@ -33,15 +36,23 @@
 .management-prompt{
 	position: fixed;
 	border:3px solid #45d5d6;
-	border-radius: 20px;
+	border-radius: 10px;
 	top:50%;
 	left: 50%;
 	margin-left: -255px;
 	margin-top: -240px;
 	background: #1d2731;
 	padding: 20px;
-	display: block;
+	display: none;
+	-webkit-animation-name: bounceInDown;
+	animation-name: bounceInDown;
+	-webkit-animation-duration: 500ms;
+	-moz-animation-duration: 500ms;
+	-o-animation-duration: 500ms;
+	animation-duration: 500ms;
+
 }
+
 .management-prompt p{
 	color:#fff;
 	line-height: 30px;
@@ -56,6 +67,7 @@
 .management-prompt textarea{
 	width: 450px;
 	height: 250px;
+	margin-top: 10px;
 	padding: 10px;
 }
 .btn-container{
@@ -64,4 +76,23 @@
 .btn-container input{
 	border: none;
 	margin-top: 15px;
+}
+/*影阴*/
+.shadow-bg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top:0px;
+	left: 0px;
+	display: none;
+}
+/* 关注 */
+.focus .trs{
+	cursor:pointer;
+}
+.focus .trs:hover{
+	background:rgba(120, 179, 204, 0.2);
+}
+.focus .trs:active{
+	background:rgba(120, 179, 204, 0.4);
 }
