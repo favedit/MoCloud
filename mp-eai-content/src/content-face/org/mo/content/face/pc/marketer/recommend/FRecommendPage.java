@@ -22,6 +22,17 @@ public class FRecommendPage
    //名称
    protected String _label;
 
+   // 消息
+   protected String _message;
+
+   public String message(){
+      return _message;
+   }
+
+   public void setMessage(String _message){
+      this._message = _message;
+   }
+
    public int pageTotal(){
       return _pageTotal;
    }

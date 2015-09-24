@@ -16,6 +16,17 @@ public class FBasePage
    //路径
    protected String _url;
 
+   // 消息
+   protected String _message;
+
+   public String message(){
+      return _message;
+   }
+
+   public void setMessage(String _message){
+      this._message = _message;
+   }
+
    public String url(){
       return _url;
    }

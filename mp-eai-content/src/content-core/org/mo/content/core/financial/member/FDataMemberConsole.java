@@ -77,20 +77,28 @@ public class FDataMemberConsole
    @Override
    public EResult follow(ILogicContext logicContext,
                          String guid){
-      TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
-      FDataFinancialMarketerMemberLogic MMLogic = logicContext.findLogic(FDataFinancialMarketerMemberLogic.class);
-      FDataFinancialMemberUnit member = findByGuid(logicContext, guid);
-      // 关联理财师和用户的关系
-      FDataFinancialMarketerMemberUnit mmUnit = new FDataFinancialMarketerMemberUnit();
-      //      mmUnit.setMarketerId(value);
-      mmUnit.setCustomerId(member.ouid());
-      mmUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
-      mmUnit.setRecommendBeginDate(nowTime);
-      TDateTime afterTime = new TDateTime(nowTime);
-      afterTime.addDay(_RecommendDay);
-      mmUnit.setRecommendEndDate(afterTime);
-      MMLogic.doInsert(mmUnit);
-      return null;
+      try{
+         TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
+         FDataFinancialMarketerMemberLogic MMLogic = logicContext.findLogic(FDataFinancialMarketerMemberLogic.class);
+         FDataFinancialMemberUnit member = findByGuid(logicContext, guid);
+         // 关联理财师和用户的关系
+         FDataFinancialMarketerMemberUnit mmUnit = new FDataFinancialMarketerMemberUnit();
+         //      mmUnit.setMarketerId(value);
+         mmUnit.setMemberId(member.ouid());
+         mmUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
+         mmUnit.setRecommendBeginDate(nowTime);
+         TDateTime afterTime = new TDateTime(nowTime);
+         afterTime.addDay(_RecommendDay);
+         mmUnit.setRecommendEndDate(afterTime);
+         EResult result = MMLogic.doInsert(mmUnit);
+         if(result.equals(EResult.Failure)){
+            return EResult.Failure;
+         }
+         return EResult.Success;
+      }catch(Exception e){
+         e.printStackTrace();
+         return EResult.Failure;
+      }
    }
 
    // ============================================================

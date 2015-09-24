@@ -3,7 +3,6 @@ package org.mo.content.face.pc.marketer.recommend;
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
-import org.mo.web.core.face.AWebRole;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -36,8 +35,21 @@ public interface IRecommendAction
    // @param logicContext 逻辑环境
    // @param page 页面
    //============================================================
-   @AWebRole("eai.marketer")
    String select(IWebContext context,
+                 IWebSession sessionContext,
+                 ILogicContext logicContext,
+                 @AContainer(name = "basePage") FBasePage basePage,
+                 @AContainer(name = "page", fill = true) FRecommendPage page);
+
+   //============================================================
+   // <T>关注逻辑处理。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   String follow(IWebContext context,
                  IWebSession sessionContext,
                  ILogicContext logicContext,
                  @AContainer(name = "basePage") FBasePage basePage,

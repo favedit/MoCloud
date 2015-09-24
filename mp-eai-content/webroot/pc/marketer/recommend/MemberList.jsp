@@ -30,7 +30,7 @@
                      <td><jh:date source="&member.registerDate" format="yyyy-MM-dd HH:mm:ss" /></td>
                      <td><jh:date source="&member.lastLoginDate" format="yyyy-MM-dd HH:mm:ss"/></td>
                      <td><jh:write source="&member.recommendScore" /></td>
-                     <td><a class="btn" href="">关&nbsp;&nbsp;&nbsp;&nbsp;注</a></td>
+                     <td><a class="btn" data-id="<jh:write source='&member.guid' />" href="javascript:;">关&nbsp;&nbsp;&nbsp;&nbsp;注</a></td>
                   </tr>
                </jh:loop>
             </table>
@@ -65,5 +65,6 @@
    <div class="prompts">
       不好意思，您手慢了！
    </div>
+<script type="text/javascript" src="js/potentialUsers.js"></script>
    </body>
    </html>
