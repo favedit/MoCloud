@@ -146,7 +146,7 @@
                <Property name='name'>statistics</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_STATISTICS1</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_STATISTICS2</Property>
                <Property name='passport'>eai_test</Property>
                <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
                <Property name='initConnectionNumber'>1</Property>
