@@ -61,10 +61,9 @@
          location.href="/pc/marketer/recommend/Recommend.wa?page="+page;
       }
    </script>
-      
    <div class="prompts">
       不好意思，您手慢了！
    </div>
-<script type="text/javascript" src="js/potentialUsers.js"></script>
+   <script type="text/javascript" src="js/potentialUsers.js"></script>
    </body>
    </html>

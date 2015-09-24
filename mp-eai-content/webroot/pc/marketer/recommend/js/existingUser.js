@@ -1,19 +1,16 @@
 var $shadowBg = $(".shadow-bg"),
-$managementPrompt = $(".management-prompt");
-function shutDown(){
-  $(".note-setupthe").slideUp();
-  $shadowBg.hide();
-  // $managementPrompt.removeClass('bounceInDown').addClass('fadeOutDown');
-  $managementPrompt.hide();
-        
-// 
-
-};
-function setManagement(){
-    $(".management-prompt").show();
-
-    $shadowBg.show();
-}
+    $managementPrompt = $(".management-prompt");
+    function shutDown(){
+      $(".note-setupthe").slideUp();
+      $shadowBg.hide();
+      // $managementPrompt.removeClass('bounceInDown').addClass('fadeOutDown');
+      $managementPrompt.hide();
+    // 
+    };
+    function setManagement(){
+        $(".management-prompt").show();
+        $shadowBg.show();
+    }
 $(function(){
 	var link = location.href,
 	$managementPrompt = $(".management-prompt");
@@ -25,24 +22,32 @@ $(function(){
     var page = getQueryString("page");
     var data ={};
     var id = null;
-
-    $(".imag-container").on("click",".remove",function(){
-      $managementPrompt.show();
-    id = $(this).data("id");
-    $shadowBg.show();
-
+    // hover 跳转
+    $(".focus").on("click",".trs",function(){
+        var url = $(this).attr("href");
+         location.href= url;
+    })
+    // 解除关系
+    $(".imag-container").on("click",".remove",function(event){
+        event.stopPropagation();
+        // event.preventDefault();
+        $managementPrompt.show();
+        id = $(this).data("id");
+        $shadowBg.show();
     })
 
     // 提交
     $(".submits").click(function(){
-     data = {
-        id : id,
-        type:$(".remind").data("id")
-     };
-    setAjax("",data,function(datas){
-      console.log(datas);
-      // location.href = location.href+
-      })
+       data = {
+          id : id,
+          type:$(".remind").data("id")
+       };
+      setAjax("",data,function(datas){
+        console.log(datas);
+        // location.href = location.href+
+        })
     })
 
+
 })
+

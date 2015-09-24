@@ -19,7 +19,7 @@
                            <td>联络周期</td>
                            <td width="30%">抢单</td>
                      </tr>
-                      <tr class="trs"  onclick="location.href=''">
+                      <tr class="trs" href="ExistingUser.wa"  >
                            <td>姓名ssssss</td>
                            <td>87</td>
                            <td>地区</td>
@@ -70,5 +70,6 @@
    <div class="shadow-bg" onclick = "shutDown();"></div>
    <%@ include file='remove.jsp' %>
    <script type="text/javascript" src="js/existingUser.js"></script>
+
 </body>
 </html>
