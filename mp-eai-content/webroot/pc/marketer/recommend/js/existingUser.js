@@ -35,16 +35,22 @@ $(function(){
         id = $(this).data("id");
         $shadowBg.show();
     })
-
+    var $contentVal = $("#content");
     // 提交
     $(".submits").click(function(){
-       data = {
+      var checkedLe = $managementPrompt.find("input:checked");
+        if( checkedLe.length != 1){
+          alert("请选择");
+          return false;
+        }
+        data = {
           id : id,
-          type:$(".remind").data("id")
-       };
-      setAjax("",data,function(datas){
-        console.log(datas);
-        // location.href = location.href+
+          feedbackCd:checkedLe.data("id"),
+          feedbackNote:$contentVal.val()
+        };
+        setAjax("",data,function(datas){
+          console.log(datas);
+          // location.href = location.href+
         })
     })
 

@@ -6,7 +6,7 @@ function shutDown(){
   $managementPrompt.hide();
 };
 function setManagement (){
-    $(".management-prompt").show();
+    $managementPrompt.show();
     $shadowBg.show();
 }
 $(document).ready(function(){
@@ -43,27 +43,30 @@ var ctrl = {},
      })
      
     var inde=0;
-    $(".management-prompt").on("click",".remind",function(){
+    $managementPrompt.on("click",".remind",function(){
         inde = $(this).index();
         $(this).find("input").prop("checked",true);
     })
-     // $managementPrompt 
-     // $(".shut-down").
-    var data ={};
+   
+    var data ={},
+    $contentVal = $("#content");
+    
     // 提交
-    $(".submits").click(function(){       
-     data = {
-        id : id,
-        feedbackCd:feedbackCd,
-        feedbackNote:feedbackNote,
-        type:$(".remind").data("id")
-     };
-    setAjax("",data,function(datas){
-      console.log(datas);
-      // location.href = location.href+
-      })
+    $(".submits").click(function(){
+        var checkedLe = $managementPrompt.find("input:checked");
+        if( checkedLe.length != 1){
+            alert("请选择");
+            return false;
+        }
+        data = {
+            id : id,
+            feedbackCd:checkedLe.data("id"),
+            feedbackNote:$contentVal.val()
+        };
+        setAjax("",data,function(datas){
+            console.log(datas);
+            // location.href = location.href+
+        })
     })
-
-
 
 })

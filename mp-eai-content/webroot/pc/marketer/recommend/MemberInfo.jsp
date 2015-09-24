@@ -73,7 +73,7 @@
       </FORM>
       <div class="shadow-bg" onclick="shutDown();"></div>
       <%@ include file='remove.jsp' %>
-         <script type="text/javascript" src="js/leisureUser.js"></script>
-         </body>
+      <script type="text/javascript" src="js/leisureUser.js"></script>
+      </body>
 
-         </html>
+      </html>
