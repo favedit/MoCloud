@@ -22,7 +22,7 @@
 	padding: 0px!important;
 	height: 34px!important;
 	line-height: 34px!important;
-	cursor:pointer;
+	cursor:pointer!important;
 }
 .note-setupthe .btn-box a{
 	color:#fff!important;
@@ -57,12 +57,16 @@
 	color:#fff;
 	line-height: 30px;
 }
+.management-prompt p.remind{
+	cursor:pointer!important;
+}
 .management-prompt p input{
 	margin-right: 10px;
 	position: relative;
 	top:2px;
 	line-height: 0px;
 	color:#fff!important;
+
 }
 .management-prompt textarea{
 	width: 450px;

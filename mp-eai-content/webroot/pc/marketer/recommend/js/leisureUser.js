@@ -52,12 +52,13 @@ var ctrl = {},
     
     // 提交
     $(".submits").click(function(){
+
         var checkedLe = $managementPrompt.find("input:checked");
         if( checkedLe.length != 1){
             alert("请选择");
             return false;
         }
-       
+        // $(this).attr("disabled","disabled");
         data = {
             id : id,
             feedbackCd:checkedLe.data("id"),

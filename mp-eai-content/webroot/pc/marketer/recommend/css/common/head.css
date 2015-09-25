@@ -156,6 +156,7 @@ html,body {
 	background: url(../../images/navhover.png) no-repeat center center;
 	background-size: 95% 95%;
 }
+
 .user-l li a{
 	color:#37e5fe;
 }
@@ -254,7 +255,6 @@ html,body {
 	width: 170px;
 	text-align: center;
 }
-
 .users li a{
 	color:#ff8e0a;
 	padding: 18px 10px 18px 18px;
@@ -288,8 +288,14 @@ html,body {
 	background: url(../../images/navhover.png) no-repeat center center;
 	background-size: 100px 30px;
 }
-
-
+.btn:active{
+	background: url(../../images/navd.png) no-repeat center center;
+	background-size: 100px 30px;
+}
+.btn[disabled="disabled"]{
+	background: url(../../images/navd.png) no-repeat center center;
+	background-size: 100px 30px;
+}
 .note-setupthe{
 	position: absolute;
 	z-index: 9;
