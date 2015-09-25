@@ -2,6 +2,8 @@ package org.mo.content.face.pc;
 
 import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
 import com.jianzhou.sdk.BusinessService;
@@ -14,6 +16,8 @@ import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.cache.system.IValidationConsole;
+import org.mo.content.core.financial.marketer.IDataMarketerConsole;
+import org.mo.content.core.financial.member.IDataMemberConsole;
 import org.mo.content.core.manage.person.role.IRoleConsole;
 import org.mo.content.core.manage.person.user.IEntryConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
@@ -65,7 +69,15 @@ public class FBindingAction
 
    //理财师控制台
    @ALink
-   protected IFinancialMarketerConsole _marketerConsole;
+   protected IFinancialMarketerConsole _financialmarketerConsole;
+
+   //理财师控制台1
+   @ALink
+   protected IDataMarketerConsole _marketerConsole;
+
+   //成员控制台
+   @ALink
+   protected IDataMemberConsole _memberConsole;
 
    //OA角色
    protected final String role_oa = "eai.oa";
@@ -113,6 +125,9 @@ public class FBindingAction
       page.setMessage(null);
       TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
       String passport = context.parameter("passport");
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "Bind", "Bind default begin. (guid={1})", session);
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       _logger.debug(this, "SendValidate", "SendValidate begin. (passport={1})", passport);
 
       //根据帐号查找用户及手机号
@@ -125,16 +140,44 @@ public class FBindingAction
          return "/apl/ajax";
       }
 
-      FFinancialMarketerInfo marketer = _marketerConsole.findInfo(logicContext, passport);
+      FFinancialMarketerInfo marketer = _financialmarketerConsole.findInfo(logicContext, passport);
       if(marketer == null){
          page.setMessage("E租宝账号无理财师权限！");
          return "/apl/ajax";
       }
-
       _logger.debug(this, "SendValidate", "SendValidate get marketer. (marketerPassport={1})", marketer.passport());
       //获取手机号码 －〉 发送验证码
+      long userId = user.ouid();
+      long linkId = marketer.linkId();
       String mobile = marketer.phone();
       String card = marketer.card();
+      // 获取理财师,没有－〉增加marketer同时查member没有增加，有－修改用户编号
+      FDataFinancialMarketerUnit dataMarketer = _marketerConsole.findByPassport(logicContext, passport);
+      if(dataMarketer == null){
+         FDataFinancialMarketerUnit newMarketer = _marketerConsole.doPrepare(logicContext);
+         newMarketer.setPhone(mobile);
+         newMarketer.setCard(card);
+         newMarketer.setLinkId(linkId);
+         newMarketer.setUserId(userId);
+         _marketerConsole.doInsert(logicContext, newMarketer);
+         //查看是否有此成员
+         FDataFinancialMemberUnit memberUnit = _memberConsole.find(logicContext, newMarketer.ouid());
+         if(memberUnit == null){
+            FDataFinancialMemberUnit newMember = _memberConsole.doPrepare(logicContext);
+            newMember.setOuid(newMarketer.ouid());
+            newMember.setUserId(userId);
+            newMember.setLinkId(linkId);
+            newMember.setPhone(mobile);
+            _memberConsole.doInsert(logicContext, newMember);
+         }else{
+            memberUnit.setUserId(userId);
+            _memberConsole.doUpdate(logicContext, memberUnit);
+         }
+      }else{
+         dataMarketer.setUserId(userId);
+         _marketerConsole.doUpdate(logicContext, dataMarketer);
+      }
+      //............................................................
       String random = null;
       //验证5分钟前有没有发过验证码，发过再次发送此验证码
       FCacheSystemValidationUnit validate = _validationConsole.findByTime(logicContext, nowTime, passport);
@@ -158,8 +201,8 @@ public class FBindingAction
       unit.setValidateCd(EGcValidationValidate.EaiMarketer);
       _validationConsole.doInsert(logicContext, unit);
       // 记录用户信息
-      FGcWebSession session = (FGcWebSession)sessionContext;
-      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      //      FGcWebSession session = (FGcWebSession)sessionContext;
+      //      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       user.setIdCard(card);
       user.setContactPhone(mobile);
       _userConsole.doUpdate(logicContext, user);

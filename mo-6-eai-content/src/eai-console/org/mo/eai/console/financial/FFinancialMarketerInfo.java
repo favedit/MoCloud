@@ -8,6 +8,13 @@ import org.mo.com.lang.FObject;
 public class FFinancialMarketerInfo
       extends FObject
 {
+
+   //外链用户编号
+   private long _linkId;
+
+   //名称
+   private String _name;
+
    // 登录名
    private String _passport;
 
@@ -19,6 +26,42 @@ public class FFinancialMarketerInfo
 
    // 身份证
    private String _card;
+
+   //============================================================
+   // <T>获取外链用户编号。</T>
+   //
+   // @return 
+   //============================================================
+   public long linkId(){
+      return _linkId;
+   }
+
+   //============================================================
+   // <T>设置外链用户编号。</T>
+   //
+   // @return 
+   //============================================================
+   public void setLinkId(long _linkId){
+      this._linkId = _linkId;
+   }
+
+   //============================================================
+   // <T>获得名称。</T>
+   //
+   // @return 名称
+   //============================================================
+   public String name(){
+      return _name;
+   }
+
+   //============================================================
+   // <T>设置名称。</T>
+   //
+   // @return 名称
+   //============================================================
+   public void setName(String _name){
+      this._name = _name;
+   }
 
    //============================================================
    // <T>获得登录名。</T>

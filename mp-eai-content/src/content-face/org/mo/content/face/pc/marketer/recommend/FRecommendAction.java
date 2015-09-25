@@ -6,6 +6,7 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.financial.marketer.IDataMarketerConsole;
 import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
 import org.mo.content.core.financial.member.IDataMemberConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
@@ -37,6 +38,10 @@ public class FRecommendAction
    //用户控制台
    @ALink
    protected IUserConsole _userConsole;
+
+   //理财师控制台
+   @ALink
+   protected IDataMarketerConsole _marketerConsole;
 
    //成员信息控制器
    @ALink
@@ -127,6 +132,10 @@ public class FRecommendAction
                         ILogicContext logicContext,
                         FBasePage basePage,
                         FRecommendPage page){
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "construct", "construct default begin.(session={1})", session);
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      //      FDataFinancialMarketerUnit marketerUnit = 
       String guid = context.parameter("id");
       if(RString.isEmpty(guid)){
          page.setMessage("false");
