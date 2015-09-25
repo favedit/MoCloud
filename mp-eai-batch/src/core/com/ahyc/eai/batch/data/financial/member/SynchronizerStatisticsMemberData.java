@@ -13,6 +13,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.FAttributes;
@@ -20,7 +21,6 @@ import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
-import org.mo.eng.data.IDatabaseConsole;
 //============================================================
 //<P>同步分析ST库表里面的数据到DT库下对应的表里面</P>
 //@class SynchronizerStatisticsMemberData
@@ -28,10 +28,12 @@ import org.mo.eng.data.IDatabaseConsole;
 //@Date 2015.09.24  
 //@version 1.0.0
 //============================================================
+import org.mo.eng.data.IDatabaseConsole;
 
 public class SynchronizerStatisticsMemberData
 {
    public static void main(String[] args){
+
       FAttributes attributes = RAop.configConsole().defineCollection().attributes();
       attributes.set("application", "D:/Microbject/MoCloud/");
       RAop.initialize("D:/Microbject/MoCloud/mp-eai-batch/src/config/application-work.xml");
@@ -39,6 +41,7 @@ public class SynchronizerStatisticsMemberData
       FLogicContext logicContext = new FLogicContext(databaseConsole);
       //同步数据
       SynchronizerStatisticsMemberData.synchronizedMember(logicContext);
+
    }
 
    //同步ST_FIN_MEMBER表数据到DT_FIN_MEMBER表
@@ -145,12 +148,12 @@ public class SynchronizerStatisticsMemberData
    }
 
    //把ST的marketer同步到DT的marketer
-   private static void loadDTMarketerData(long linkId,
-                                          long ouid,
-                                          FStatisticsFinancialMarketerLogic statisticsMarketerLogic,
-                                          FDataFinancialMarketerLogic dataMarketerLogic,
-                                          FDataFinancialMarketerUnit dataMarketerUnit,
-                                          FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit){
+   public static void loadDTMarketerData(long linkId,
+                                         long ouid,
+                                         FStatisticsFinancialMarketerLogic statisticsMarketerLogic,
+                                         FDataFinancialMarketerLogic dataMarketerLogic,
+                                         FDataFinancialMarketerUnit dataMarketerUnit,
+                                         FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit){
       dataMarketerUnit.setOuid(ouid);
       dataMarketerUnit.setGuid(firstStatisticsFinancialMarketerUnit.guid());
       dataMarketerUnit.setLinkId(linkId);
@@ -171,12 +174,12 @@ public class SynchronizerStatisticsMemberData
    }
 
    //把ST的customer同步到DT的customer
-   private static void loadDTCustomerData(long linkId,
-                                          long ouid,
-                                          FStatisticsFinancialCustomerLogic statisticsCustomerLogic,
-                                          FDataFinancialCustomerLogic dataCustomerLogic,
-                                          FDataFinancialCustomerUnit dataCustomerUnit,
-                                          FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit){
+   public static void loadDTCustomerData(long linkId,
+                                         long ouid,
+                                         FStatisticsFinancialCustomerLogic statisticsCustomerLogic,
+                                         FDataFinancialCustomerLogic dataCustomerLogic,
+                                         FDataFinancialCustomerUnit dataCustomerUnit,
+                                         FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit){
 
       dataCustomerUnit.setOuid(ouid);
       dataCustomerUnit.setGuid(firstStatisticsFinancialCustomerUnit.guid());
@@ -191,8 +194,9 @@ public class SynchronizerStatisticsMemberData
    }
 
    //计算分数  通过年龄和收入去计算
-   private static int getScore(int age,
-                               String incomeCode){
+   public static int getScore(int age,
+                              String incomeCode){
+      double w = 0.0;//权重 总分数=ageScore*w+incomeScore*w
       int ageScore = 0;
       int incomeScore = 0;
       if(age == -1 || age <= 20){
@@ -223,6 +227,50 @@ public class SynchronizerStatisticsMemberData
       }
 
       return (int)(ageScore * 0.5 + incomeScore * 0.5);
+   }
+
+   //按最近登录时间计算分数
+   public static int getScoreByLastLoginDate(TDateTime lastLoginDate){
+      int lastLoginDateLastLoginDateScore = -1;
+      //距今天0天 2015 09 25 00:00:00--2015 09 25 10:02:18 代码编辑于2015 09 25 10:02:18
+      if(lastLoginDate.isBetween(getNDayAgo(0), new TDateTime(new Date()))){
+         lastLoginDateLastLoginDateScore = 100;
+      }else if(lastLoginDate.isBetween(getNDayAgo(-1), getNDayAgo(0))){
+         //距今天1天 (2015 09 24 00:00:00---2015 09 25 00:00:00   代码编辑于2015 09 25 10:02:18
+         lastLoginDateLastLoginDateScore = 90;
+      }else if(lastLoginDate.isBetween(getNDayAgo(-2), getNDayAgo(-1))){
+         //距今天2天
+         lastLoginDateLastLoginDateScore = 80;
+
+      }else if(lastLoginDate.isBetween(getNDayAgo(-3), getNDayAgo(-2))){
+         //距今天3天
+         lastLoginDateLastLoginDateScore = 70;
+      }else if(lastLoginDate.isBetween(getNDayAgo(-4), getNDayAgo(-3))){
+         //距今天4天
+         lastLoginDateLastLoginDateScore = 60;
+      }else if(lastLoginDate.isBetween(getNDayAgo(-5), getNDayAgo(-4))){
+         //距今天5天
+         lastLoginDateLastLoginDateScore = 50;
+      }else if(lastLoginDate.isBefore(getNDayAgo(-5))){
+         //距今天>=6天
+         lastLoginDateLastLoginDateScore = 40;
+      }
+      return lastLoginDateLastLoginDateScore;
+   }
+
+   //返回距今几天的方法,以00:00:00为判断点
+   public static TDateTime getNDayAgo(int dayNumber){
+      Date date = new Date();
+      Calendar calendar = Calendar.getInstance();
+      calendar.setTime(date);
+      calendar.add(Calendar.DAY_OF_MONTH, dayNumber);//当前日期+dayNumber
+      calendar.set(Calendar.HOUR, 0);
+      calendar.set(Calendar.MINUTE, 0);
+      calendar.set(Calendar.SECOND, 0);
+      calendar.set(Calendar.MILLISECOND, 0);
+      date = calendar.getTime();
+      TDateTime DateTime = new TDateTime(date);
+      return DateTime;
    }
 
    //根据身份证计算年龄
