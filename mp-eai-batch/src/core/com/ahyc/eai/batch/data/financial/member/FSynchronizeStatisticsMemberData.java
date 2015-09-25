@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.Iterator;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.type.TDateTime;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
 //============================================================
@@ -29,8 +31,13 @@ import org.mo.data.logic.FLogicDataset;
 
 public class FSynchronizeStatisticsMemberData
 {
+   // 日志输出接口
+   private static ILogger _logger = RLogger.find(FSynchronizeStatisticsMemberData.class);
+
    //同步ST_FIN_MEMBER表数据到DT_FIN_MEMBER表
    public static void synchronizedMember(FLogicContext logicContext){
+      //开始同步数据日志
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "synchronizedMember", "synchronizedMember begin. (logicContext={1})", logicContext.toString());
       FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
       FStatisticsFinancialCustomerLogic statisticsCustomerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
       FStatisticsFinancialMemberLogic statisticsMemberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
@@ -40,14 +47,15 @@ public class FSynchronizeStatisticsMemberData
 
       //获取最近一礼拜统计成员表的数据,将其同步到存储表,,score字段计算获得
       FLogicDataset<FStatisticsFinancialMemberUnit> statisticsMemberLatestWeek = getLatestWeek(statisticsMemberLogic);
+      //抓取到的数据日志
       for(Iterator<FStatisticsFinancialMemberUnit> iterator = statisticsMemberLatestWeek.iterator(); iterator.hasNext();){
          FStatisticsFinancialMemberUnit statisticsMember = iterator.next();
+         _logger.debug(FSynchronizeStatisticsMemberData.class, "fetch one statisticsMember", "fetch one statisticsMember begin. (statisticsMember_label={1})", statisticsMember.label());
          FSql whereSqlGuid = new FSql();
          whereSqlGuid.append(FDataFinancialMemberLogic.GUID);
          whereSqlGuid.append("=\"");
          whereSqlGuid.append(statisticsMember.guid() + "\"");
          FLogicDataset<FDataFinancialMemberUnit> dataMembers = dataMemberLogic.fetch(whereSqlGuid);
-
          //如果存在,则更新数据
          if(dataMembers != null && dataMembers.count() > 0){
             FDataFinancialMemberUnit dataMember = dataMembers.first();
@@ -126,6 +134,8 @@ public class FSynchronizeStatisticsMemberData
                + dataMember.recommendScore());*/
 
       }
+
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "synchronizedMember", "synchronizedMember end. (method={1})", "synchronizedMember");
    }
 
    //同步删除数据
@@ -140,6 +150,7 @@ public class FSynchronizeStatisticsMemberData
                                          FDataFinancialMarketerLogic dataMarketerLogic,
                                          FDataFinancialMarketerUnit dataMarketerUnit,
                                          FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMarketerData", "loadDTMarketerData start. (linkId={1})", linkId);
       dataMarketerUnit.setOuid(ouid);
       dataMarketerUnit.setGuid(firstStatisticsFinancialMarketerUnit.guid());
       dataMarketerUnit.setLinkId(linkId);
@@ -156,6 +167,7 @@ public class FSynchronizeStatisticsMemberData
       dataMarketerUnit.setCustomerNetinvestmentTotal(firstStatisticsFinancialMarketerUnit.netinvestmentTotal());
       dataMarketerUnit.setCustomerInterestTotal(firstStatisticsFinancialMarketerUnit.interestTotal());
       dataMarketerUnit.setCustomerPerformanceTotal(firstStatisticsFinancialMarketerUnit.performanceTotal());
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMarketerData", "loadDTMarketerData end. (linkId={1})", linkId);
 
    }
 
@@ -166,6 +178,7 @@ public class FSynchronizeStatisticsMemberData
                                          FDataFinancialCustomerLogic dataCustomerLogic,
                                          FDataFinancialCustomerUnit dataCustomerUnit,
                                          FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTCustomerData", "loadDTCustomerData start. (linkId={1})", linkId);
 
       dataCustomerUnit.setOuid(ouid);
       dataCustomerUnit.setGuid(firstStatisticsFinancialCustomerUnit.guid());
@@ -176,13 +189,13 @@ public class FSynchronizeStatisticsMemberData
       dataCustomerUnit.setRedemptionTotal((float)firstStatisticsFinancialCustomerUnit.redemptionTotal());
       dataCustomerUnit.setNetinvestment((float)firstStatisticsFinancialCustomerUnit.netinvestmentTotal());
       dataCustomerUnit.setInterestTotal((float)firstStatisticsFinancialCustomerUnit.interestTotal());
-
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTCustomerData", "loadDTCustomerData end. (linkId={1})", linkId);
    }
 
    //计算分数  通过年龄和收入去计算
    public static int getScore(int age,
                               String incomeCode){
-      //      double w = 0.0;//权重 总分数=ageScore*w+incomeScore*w
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScore", "getScore start. (age={1})", age);
       int ageScore = 0;
       int incomeScore = 0;
       if(age == -1 || age <= 20){
@@ -211,12 +224,13 @@ public class FSynchronizeStatisticsMemberData
       }else{
          return ageScore;
       }
-
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScore", "getScore end. (age={1})", age);
       return (int)(ageScore * 0.5 + incomeScore * 0.5);
    }
 
    //按最近登录时间计算分数
    public static int getScoreByLastLoginDate(TDateTime lastLoginDate){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScoreByLastLoginDate", "getScoreByLastLoginDate start. (lastLoginDate={1})", lastLoginDate);
       int lastLoginDateLastLoginDateScore = -1;
       //距今天0天 2015 09 25 00:00:00--2015 09 25 10:02:18 代码编辑于2015 09 25 10:02:18
       if(lastLoginDate.isBetween(getNDayAgo(0), new TDateTime(new Date()))){
@@ -241,11 +255,14 @@ public class FSynchronizeStatisticsMemberData
          //距今天>=6天
          lastLoginDateLastLoginDateScore = 40;
       }
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScoreByLastLoginDate", "getScoreByLastLoginDate end. (lastLoginDate={1})", lastLoginDate);
       return lastLoginDateLastLoginDateScore;
    }
 
    //返回距今几天的方法,以00:00:00为判断点
    public static TDateTime getNDayAgo(int dayNumber){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getNDayAgo", "getNDayAgo start. (dayNumber={1})", dayNumber);
+
       Date date = new Date();
       Calendar calendar = Calendar.getInstance();
       calendar.setTime(date);
@@ -256,11 +273,13 @@ public class FSynchronizeStatisticsMemberData
       calendar.set(Calendar.MILLISECOND, 0);
       date = calendar.getTime();
       TDateTime DateTime = new TDateTime(date);
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getNDayAgo", "getNDayAgo end. (dayNumber={1})", dayNumber);
       return DateTime;
    }
 
    //根据身份证计算年龄
    public static int getAgeByCard(String idCard){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard", "getAgeByCard start. (idCard={1})", idCard);
       if(idCard == null || "".equals(idCard)){
          return -1;
       }
@@ -269,24 +288,29 @@ public class FSynchronizeStatisticsMemberData
       Calendar cal = Calendar.getInstance();
       int iCurrYear = cal.get(Calendar.YEAR);
       iAge = iCurrYear - Integer.valueOf(year);
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard", "getAgeByCard end. (idCard={1})", idCard);
       return iAge;
    }
 
    //根据身份证获得生日字符串
    public static TDateTime getBirthdayByIdCard(String idCard){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getBirthdayByIdCard", "getBirthdayByIdCard start. (idCard={1})", idCard);
+
       String birthdayString = "";
       TDateTime birthdayDateTime = null;
-      if(idCard != null && idCard.length() > 0){
+      if(idCard != null && idCard.length() > 15){
          birthdayString = idCard.substring(6, 14);//生日字符串19900326
          birthdayDateTime = new TDateTime(birthdayString);
       }
-
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getBirthdayByIdCard", "getBirthdayByIdCard end. (idCard={1})", idCard);
       return birthdayDateTime;
    }
 
    //装载数据
    public static void loadDTMemberData(FDataFinancialMemberUnit dataMember,
                                        FStatisticsFinancialMemberUnit statisticsMember){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMemberData", "loadDTMemberData start. (dataMember_linkId()={1})", dataMember.linkId());
+
       dataMember.setOuid(statisticsMember.ouid());
       dataMember.setGuid(statisticsMember.guid());
       dataMember.setLinkId(statisticsMember.linkId());//******
@@ -319,13 +343,18 @@ public class FSynchronizeStatisticsMemberData
       //         dataMember.setRecommendMarketerId(value);
       //         dataMember.setRecommendMarketerUserId(value);
       dataMember.setNote(statisticsMember.info());
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMemberData", "loadDTMemberData end. (dataMember_linkId()={1})", dataMember.linkId());
+
    }
 
    //获取统计member表最近一个礼拜登录的数据
    public static FLogicDataset<FStatisticsFinancialMemberUnit> getLatestWeek(FStatisticsFinancialMemberLogic statisticsMemberLogic){
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek", "getLatestWeek start. (statisticsMemberLogic()={1})", statisticsMemberLogic);
+
       FSql whereSqlLatestWeek = new FSql();
       whereSqlLatestWeek.append(FStatisticsFinancialMemberLogic.LAST_LOGIN_DATE);
       whereSqlLatestWeek.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 WEEK)  AND NOW()");
+      _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek", "getLatestWeek end. (statisticsMemberLogic()={1})", statisticsMemberLogic);
       return statisticsMemberLogic.fetch(whereSqlLatestWeek);
    }
 }
