@@ -1,7 +1,6 @@
 package com.ahyc.eai.batch;
 
 import com.ahyc.eai.batch.data.financial.member.FSynchronizeStatisticsMemberData;
-
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.monitor.common.FAbstractMonitor;
@@ -42,10 +41,11 @@ public class FSynchronizeMonitor
       try(FLogicContext logicContext = new FLogicContext(_databaseConsole)){
          //数据同步
          FSynchronizeStatisticsMemberData.synchronizedMember(logicContext);
+         processCount += 1;
       }catch(Exception exception){
          _logger.error(null, "main", exception);
       }
-      _logger.debug(this, "onExecute", "Process statistics. (count={1})", processCount);
+      _logger.debug(this, "onExecute", "Process synchronizedMember. (count={1})", processCount);
       if(processCount == 0){
          _interval = 10;
       }else{
