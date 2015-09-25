@@ -1,11 +1,10 @@
 package org.mo.cloud.core.logger;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import org.mo.cloud.common.datetime.IDateTimeConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.net.RNet;
 import org.mo.com.xml.FXmlConnection;
 import org.mo.com.xml.FXmlNode;
 import org.mo.core.aop.face.ALink;
@@ -152,12 +151,10 @@ public class FGcLoggerConsole
          _loggerListener = new FGcLoggerListener(this);
          RLogger.listeners().push(_loggerListener);
          // 获得本机地址
-         InetAddress address = null;
          try{
-            address = InetAddress.getLocalHost();
-            _address = address.getHostName();
-         }catch(UnknownHostException e){
-            _logger.error(this, "initialize", e);
+            _address = RNet.hostName();
+         }catch(Exception exception){
+            _logger.error(this, "initialize", exception);
          }
          // 部署监视器
          _monitor = new FGcLoggerMonitor(this);

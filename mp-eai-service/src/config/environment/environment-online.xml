@@ -50,7 +50,7 @@
          scope = 'global' >
       <Property name='enable'>Y</Property>
       <Property name='code'>OL</Property>
-      <Property name='servers'>10.169.23.66:11211,10.163.173.14:11211,10.144.33.203:11211</Property>
+      <Property name='servers'>10.169.23.66:11211,10.163.173.14:11211,10.144.33.203:11211,10.144.25.111:11211</Property>
       <Initialize name='initialize'/>
    </Component>
    
@@ -146,7 +146,7 @@
                <Property name='name'>statistics</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.169.23.66:3306/EAI_STATISTICS2</Property>
+               <Property name='url'>jdbc:mysql://localhost:3306/EAI_STATISTICS2</Property>
                <Property name='passport'>eai_online</Property>
                <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
                <Property name='initConnectionNumber'>1</Property>
