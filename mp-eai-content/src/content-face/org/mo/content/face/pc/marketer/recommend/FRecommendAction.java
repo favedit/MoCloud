@@ -1,5 +1,6 @@
 package org.mo.content.face.pc.marketer.recommend;
 
+import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
@@ -135,13 +136,17 @@ public class FRecommendAction
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
-      //      FDataFinancialMarketerUnit marketerUnit = 
+      FDataFinancialMarketerUnit marketerUnit = _marketerConsole.findByUserId(logicContext, user.ouid());
+      if(marketerUnit == null){
+         page.setMessage("false");
+         return "/apl/ajax";
+      }
       String guid = context.parameter("id");
       if(RString.isEmpty(guid)){
          page.setMessage("false");
          return "/apl/ajax";
       }
-      EResult result = _memberConsole.follow(logicContext, guid);
+      EResult result = _memberConsole.follow(logicContext, marketerUnit.ouid(), guid);
       if(result.equals(EResult.Failure)){
          page.setMessage("false");
          return "/apl/ajax";

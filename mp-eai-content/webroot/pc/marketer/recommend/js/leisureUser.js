@@ -25,7 +25,6 @@ var ctrl = {},
      // 解除
      $(".removes").on("click",function(){
         id = $(this).data("id");
-        alert(id);
         $managementPrompt.show();
      })
      // 关闭
@@ -58,14 +57,19 @@ var ctrl = {},
             alert("请选择");
             return false;
         }
+       
         data = {
             id : id,
             feedbackCd:checkedLe.data("id"),
             feedbackNote:$contentVal.val()
         };
-        setAjax("",data,function(datas){
-            console.log(datas);
-            // location.href = location.href+
+         setAjax("/pc/marketer/member/Followed.wa?do=removeRelation",data,function(data){
+           if(data){
+              location.href="/pc/marketer/recommend/Recommend.wa";
+           }else{
+              setPrompts();
+           }
+          // location.href = location.href+
         })
     })
 

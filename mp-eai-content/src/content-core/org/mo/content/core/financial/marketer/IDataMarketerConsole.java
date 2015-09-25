@@ -20,4 +20,14 @@ public interface IDataMarketerConsole
    // ============================================================
    FDataFinancialMarketerUnit findByPassport(ILogicContext logicContext,
                                              String passport);
+
+   // ============================================================
+   // <T>根据用户编号获取信息</T>
+   //
+   // @param logicContext 链接对象
+   // @param  userId 用户编号
+   // @return 数据对象
+   // ============================================================
+   FDataFinancialMarketerUnit findByUserId(ILogicContext logicContext,
+                                           long userId);
 }

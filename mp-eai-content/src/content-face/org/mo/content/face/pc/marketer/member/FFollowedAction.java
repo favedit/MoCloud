@@ -1,9 +1,12 @@
 package org.mo.content.face.pc.marketer.member;
 
+import com.cyou.gccloud.data.data.FDataFinancialMarketerMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.web.FGcWebSession;
+import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.financial.marketer.member.IDataMarketerMemberConsole;
 import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
 import org.mo.content.core.financial.member.IDataMemberConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
@@ -39,6 +42,10 @@ public class FFollowedAction
    //成员信息控制器
    @ALink
    protected IDataMemberConsole _memberConsole;
+
+   //理财师成员控制器
+   @ALink
+   protected IDataMarketerMemberConsole _marketerMemberConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -97,7 +104,30 @@ public class FFollowedAction
                                 ILogicContext logicContext,
                                 FBasePage basePage,
                                 FFollowedPage page){
-
-      return null;
+      String guid = context.parameter("id");
+      int feedbackCd = context.parameterAsInteger("feedbaceCd");
+      String feedbackNote = context.parameter("feedbackNote");
+      _logger.debug(this, "RemoveRelation", "RemoveRelation begin.(guid={1},feedbackCd={2},feedbackNote={3})", guid, feedbackCd, feedbackNote);
+      if(guid.isEmpty() || feedbackCd == 0 || feedbackNote.isEmpty()){
+         page.setMessage("false");
+         return "/apl/ajax";
+      }
+      FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findByGuid(logicContext, guid);
+      if(marketerMember == null){
+         _logger.debug(this, "RemoveRelation", "RemoveRelation find marketer member is null.(guid={1})", guid);
+         page.setMessage("false");
+         return "/apl/ajax";
+      }
+      marketerMember.setFeedbackCd(feedbackCd);
+      marketerMember.setFeedbackNote(feedbackNote);
+      EResult result = _marketerMemberConsole.doUpdate(logicContext, marketerMember);
+      if(result.equals(EResult.Failure)){
+         _logger.debug(this, "RemoveRelation", "RemoveRelation update marketer member is failure.(guid={1})", guid);
+         page.setMessage("false");
+         return "/apl/ajax";
+      }
+      _logger.debug(this, "RemoveRelation", "RemoveRelation success.(guid={1})", guid);
+      page.setMessage("false");
+      return "/apl/ajax";
    }
 }

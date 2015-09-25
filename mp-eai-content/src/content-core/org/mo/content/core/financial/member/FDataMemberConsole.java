@@ -7,6 +7,7 @@ import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -93,8 +94,12 @@ public class FDataMemberConsole
    // ============================================================
    @Override
    public EResult follow(ILogicContext logicContext,
+                         long marketerId,
                          String guid){
       try{
+         if(marketerId == 0 || guid.isEmpty()){
+            throw new FFatalError("follow,marketerId and guid can not be null");
+         }
          TDateTime nowTime = new TDateTime(RDateTime.currentDateTime());
          FDataFinancialMemberLogic mLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
          // 获取成员
@@ -112,7 +117,7 @@ public class FDataMemberConsole
          }
          // 关联理财师和用户的关系
          FDataFinancialMarketerMemberUnit MMNewUnit = new FDataFinancialMarketerMemberUnit();
-         //      mmUnit.setMarketerId(value);
+         MMNewUnit.setMarketerId(marketerId);
          MMNewUnit.setMemberId(member.ouid());
          MMNewUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
          MMNewUnit.setRecommendBeginDate(nowTime);

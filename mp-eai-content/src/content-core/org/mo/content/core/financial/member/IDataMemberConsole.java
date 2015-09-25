@@ -31,6 +31,7 @@ public interface IDataMemberConsole
    // @return 数据集合
    // ============================================================
    EResult follow(ILogicContext logicContext,
+                  long marketerId,
                   String guid);
 
    // ============================================================

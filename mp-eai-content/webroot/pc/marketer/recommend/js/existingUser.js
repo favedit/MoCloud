@@ -48,8 +48,12 @@ $(function(){
           feedbackCd:checkedLe.data("id"),
           feedbackNote:$contentVal.val()
         };
-        setAjax("",data,function(datas){
-          console.log(datas);
+        setAjax("/pc/marketer/recommend/Followed.wa?do=removeRelation",data,function(data){
+           if(data){
+              location.href="/pc/marketer/recommend/Recommend.wa";
+           }else{
+              setPrompts();
+           }
           // location.href = location.href+
         })
     })

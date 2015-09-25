@@ -5,6 +5,7 @@ import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -33,11 +34,11 @@ public class FDataMarketerConsole
    @Override
    public FDataFinancialMarketerUnit findByPassport(ILogicContext logicContext,
                                                     String passport){
-      FDataFinancialMarketerLogic logic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
-      FSql whereSql = new FSql();
       if(passport.isEmpty()){
          throw new FFatalError("findByPassport,passport is null");
       }
+      FDataFinancialMarketerLogic logic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
+      FSql whereSql = new FSql();
       whereSql.append(FDataFinancialMarketerLogic.PASSPORT + " = '{passport}'");
       whereSql.bind("passport", passport);
       FLogicDataset<FDataFinancialMarketerUnit> list = logic.fetch(whereSql);
@@ -47,4 +48,27 @@ public class FDataMarketerConsole
       return list.first();
    }
 
+   // ============================================================
+   // <T>根据用户编号获取信息</T>
+   //
+   // @param logicContext 链接对象
+   // @param  userId 用户编号
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FDataFinancialMarketerUnit findByUserId(ILogicContext logicContext,
+                                                  long userId){
+      if(userId == 0){
+         throw new FFatalError("findByUserId,userId is null");
+      }
+      FDataFinancialMarketerLogic logic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataFinancialMarketerLogic.USER_ID + " = '{userId}'");
+      whereSql.bind("userId", RString.parse(userId));
+      FLogicDataset<FDataFinancialMarketerUnit> list = logic.fetch(whereSql);
+      if(list.count() <= 0){
+         return null;
+      }
+      return list.first();
+   }
 }
