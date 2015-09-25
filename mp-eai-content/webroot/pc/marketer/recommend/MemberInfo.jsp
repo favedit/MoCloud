@@ -5,7 +5,7 @@
       <TR>
          <TD width="100%" align="center" valign="center">
             <ul class="users" id="users">
-               <li class="binding"><a href="#">已关注用户列表</a></li>
+               <li class="binding"><a href="/pc/marketer/member/Followed.wa">已关注用户列表</a></li>
                <li onclick="loginOut();"><a class="exit" href="javascript:;">退出</a></li>
             </ul>
             <div class="imag-container">

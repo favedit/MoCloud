@@ -30,4 +30,5 @@ public interface IDataMarketerConsole
    // ============================================================
    FDataFinancialMarketerUnit findByUserId(ILogicContext logicContext,
                                            long userId);
+
 }

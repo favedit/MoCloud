@@ -1,13 +1,17 @@
 package org.mo.content.face.pc.marketer.member;
 
 import com.cyou.gccloud.data.data.FDataFinancialMarketerMemberUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.financial.marketer.IDataMarketerConsole;
+import org.mo.content.core.financial.marketer.member.FDataFinancialMarketerMemberInfo;
 import org.mo.content.core.financial.marketer.member.IDataMarketerMemberConsole;
-import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
 import org.mo.content.core.financial.member.IDataMemberConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
@@ -39,9 +43,13 @@ public class FFollowedAction
    @ALink
    protected IUserConsole _userConsole;
 
-   //成员信息控制器
+   // 成员控制器
    @ALink
    protected IDataMemberConsole _memberConsole;
+
+   //理财师信息控制器
+   @ALink
+   protected IDataMarketerConsole _marketerConsole;
 
    //理财师成员控制器
    @ALink
@@ -63,7 +71,10 @@ public class FFollowedAction
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      long marketerId = 0;
       if(user != null){
+         FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+         marketerId = marketer.ouid();
          page.setLabel(user.label());
       }
       if(null != context.parameter("page")){
@@ -73,7 +84,7 @@ public class FFollowedAction
          page.setPageCurrent(0);
       }
       //分页处理
-      int pageTotal = _memberConsole.getPageCount(logicContext);
+      int pageTotal = _marketerMemberConsole.getPageCount(logicContext);
       page.setPageTotal(pageTotal);
       // 第0页
       if(page.pageCurrent() == 0){
@@ -83,10 +94,10 @@ public class FFollowedAction
       if(pageTotal < page.pageCurrent()){
          page.setPageCurrent(pageTotal);
       }
-      FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, page.pageCurrent() - 1);
-      page.setMemberList(memberList);
-      _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList.first().ouid());
-      return "/pc/marketer/recommend/MemberList";
+      FLogicDataset<FDataFinancialMarketerMemberInfo> marketerMemberList = _marketerMemberConsole.selectFollowedByMarketerId(logicContext, marketerId, page.pageCurrent() - 1);
+      page.setMarketerMemberList(marketerMemberList);
+      _logger.debug(this, "construct", "construct Select finish. (marketerMemberList = {1})", marketerMemberList.count());
+      return "/pc/marketer/recommend/FollowedMembers";
    }
 
    //============================================================
@@ -105,19 +116,27 @@ public class FFollowedAction
                                 FBasePage basePage,
                                 FFollowedPage page){
       String guid = context.parameter("id");
-      int feedbackCd = context.parameterAsInteger("feedbaceCd");
+      int feedbackCd = context.parameterAsInteger("feedbackCd");
       String feedbackNote = context.parameter("feedbackNote");
       _logger.debug(this, "RemoveRelation", "RemoveRelation begin.(guid={1},feedbackCd={2},feedbackNote={3})", guid, feedbackCd, feedbackNote);
       if(guid.isEmpty() || feedbackCd == 0 || feedbackNote.isEmpty()){
          page.setMessage("false");
          return "/apl/ajax";
       }
-      FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findByGuid(logicContext, guid);
+      // 获取成员信息
+      FDataFinancialMemberUnit member = _memberConsole.findByGuid(logicContext, guid);
+      if(member == null){
+         page.setMessage("false");
+         return "/apl/ajax";
+      }
+      // 根据成员编号获取理财师信息      
+      FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findByMemberId(logicContext, member.ouid());
       if(marketerMember == null){
          _logger.debug(this, "RemoveRelation", "RemoveRelation find marketer member is null.(guid={1})", guid);
          page.setMessage("false");
          return "/apl/ajax";
       }
+      marketerMember.setRelationCd(EGcFinancialMemberRelation.Unknown);
       marketerMember.setFeedbackCd(feedbackCd);
       marketerMember.setFeedbackNote(feedbackNote);
       EResult result = _marketerMemberConsole.doUpdate(logicContext, marketerMember);
@@ -127,7 +146,7 @@ public class FFollowedAction
          return "/apl/ajax";
       }
       _logger.debug(this, "RemoveRelation", "RemoveRelation success.(guid={1})", guid);
-      page.setMessage("false");
+      page.setMessage("true");
       return "/apl/ajax";
    }
 }

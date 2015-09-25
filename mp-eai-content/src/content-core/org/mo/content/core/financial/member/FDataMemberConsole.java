@@ -57,6 +57,7 @@ public class FDataMemberConsole
    // ============================================================
    @Override
    public FLogicDataset<FDataFinancialMemberInfo> select(ILogicContext logicContext,
+                                                         long marketerId,
                                                          int pageNum){
       if(0 > pageNum){
          pageNum = 0;
@@ -76,11 +77,17 @@ public class FDataMemberConsole
          if(city != null){
             unit.setCityLabel(city.label());
          }
-         //检查是否被关注
-         FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findByMemberId(logicContext, unit.ouid());
-         if(marketerMember == null){
-            resultList.push(unit);
+         // 检查此成员是否被关注
+         FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findFollowed(logicContext, unit.ouid());
+         if(marketerMember != null){
+            continue;
          }
+         // 检查此理财师是否关注过此成员
+         marketerMember = _marketerMemberConsole.findByMarketerAndMember(logicContext, marketerId, unit.ouid());
+         if(marketerMember != null){
+            continue;
+         }
+         resultList.push(unit);
       }
       return resultList;
    }
@@ -108,26 +115,36 @@ public class FDataMemberConsole
             _logger.debug(this, "Follow", "Follow this member is null.(memberId={1})", guid);
             return EResult.Failure;
          }
+         //          检查此理财师是否关注过此成员
+         //         FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMarketerAndMember(logicContext, marketerId, member.ouid());
 
-         // 根成员检查理财师是否关注
-         FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMemberId(logicContext, member.ouid());
-         if(mmUnit != null){
-            _logger.debug(this, "Follow", "Follow this member followd.(memberId={1})", member.ouid());
-            return EResult.Failure;
-         }
-         // 关联理财师和用户的关系
-         FDataFinancialMarketerMemberUnit MMNewUnit = new FDataFinancialMarketerMemberUnit();
-         MMNewUnit.setMarketerId(marketerId);
-         MMNewUnit.setMemberId(member.ouid());
-         MMNewUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
-         MMNewUnit.setRecommendBeginDate(nowTime);
-         TDateTime afterTime = new TDateTime(nowTime);
-         afterTime.addDay(_RecommendDay);
-         MMNewUnit.setRecommendEndDate(afterTime);
-         EResult result = _marketerMemberConsole.doInsert(logicContext, MMNewUnit);
-         if(result.equals(EResult.Failure)){
-            _logger.debug(this, "follow", "follow Failure.(memberId={1})", MMNewUnit.ouid());
-            return EResult.Failure;
+         // 检查理财师是否关注
+         //         FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMemberId(logicContext, member.ouid());
+         FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMarketerAndMember(logicContext, marketerId, member.ouid());
+         if(mmUnit == null){//没有关注过此成员
+            //            _logger.debug(this, "Follow", "Follow this member followd.(memberId={1})", member.ouid());
+            //            return EResult.Failure;
+            // 关联理财师和用户的关系
+            FDataFinancialMarketerMemberUnit MMNewUnit = new FDataFinancialMarketerMemberUnit();
+            MMNewUnit.setMarketerId(marketerId);
+            MMNewUnit.setMemberId(member.ouid());
+            MMNewUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
+            MMNewUnit.setRecommendBeginDate(nowTime);
+            TDateTime afterTime = new TDateTime(nowTime);
+            afterTime.addDay(_RecommendDay);
+            MMNewUnit.setRecommendEndDate(afterTime);
+            EResult result = _marketerMemberConsole.doInsert(logicContext, MMNewUnit);
+            if(result.equals(EResult.Failure)){
+               _logger.debug(this, "follow", "follow insert Failure.(memberId={1})", MMNewUnit.ouid());
+               return EResult.Failure;
+            }
+         }else{
+            mmUnit.setRelationCd(EGcFinancialMemberRelation.Follow);
+            EResult result = _marketerMemberConsole.doUpdate(logicContext, mmUnit);
+            if(result.equals(EResult.Failure)){
+               _logger.debug(this, "follow", "follow update Failure.(memberId={1})", mmUnit.ouid());
+               return EResult.Failure;
+            }
          }
          return EResult.Success;
       }catch(Exception e){

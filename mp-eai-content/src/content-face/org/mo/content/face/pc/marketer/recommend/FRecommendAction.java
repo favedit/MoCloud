@@ -67,6 +67,7 @@ public class FRecommendAction
       if(user != null){
          page.setLabel(user.label());
       }
+      FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
@@ -84,7 +85,7 @@ public class FRecommendAction
       if(pageTotal < page.pageCurrent()){
          page.setPageCurrent(pageTotal);
       }
-      FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, page.pageCurrent() - 1);
+      FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, marketer.ouid(), page.pageCurrent() - 1);
       page.setMemberList(memberList);
       _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList.first().ouid());
 

@@ -21,6 +21,7 @@ public interface IDataMemberConsole
    // @return 数据集合
    // ============================================================
    FLogicDataset<FDataFinancialMemberInfo> select(ILogicContext logicContext,
+                                                  long marketerId,
                                                   int pageNum);
 
    // ============================================================

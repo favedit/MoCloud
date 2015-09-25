@@ -1,7 +1,7 @@
 package org.mo.content.face.pc.marketer.member;
 
 import org.mo.com.lang.FObjectId;
-import org.mo.content.core.financial.member.FDataFinancialMemberInfo;
+import org.mo.content.core.financial.marketer.member.FDataFinancialMarketerMemberInfo;
 import org.mo.data.logic.FLogicDataset;
 
 //============================================================
@@ -17,24 +17,13 @@ public class FFollowedPage
    protected int _pageTotal;
 
    // 成员集合
-   protected FLogicDataset<FDataFinancialMemberInfo> _memberList;
-
-   // 成员对象
-   protected FDataFinancialMemberInfo _member;
+   protected FLogicDataset<FDataFinancialMarketerMemberInfo> _marketerMemberList;
 
    //名称
    protected String _label;
 
    // 消息
    protected String _message;
-
-   public FDataFinancialMemberInfo member(){
-      return _member;
-   }
-
-   public void setMember(FDataFinancialMemberInfo _member){
-      this._member = _member;
-   }
 
    public String message(){
       return _message;
@@ -60,12 +49,12 @@ public class FFollowedPage
       this._label = _label;
    }
 
-   public FLogicDataset<FDataFinancialMemberInfo> memberList(){
-      return _memberList;
+   public FLogicDataset<FDataFinancialMarketerMemberInfo> marketerMemberList(){
+      return _marketerMemberList;
    }
 
-   public void setMemberList(FLogicDataset<FDataFinancialMemberInfo> memberList){
-      this._memberList = memberList;
+   public void setMarketerMemberList(FLogicDataset<FDataFinancialMarketerMemberInfo> _marketerMemberList){
+      this._marketerMemberList = _marketerMemberList;
    }
 
    public int pageCurrent(){
