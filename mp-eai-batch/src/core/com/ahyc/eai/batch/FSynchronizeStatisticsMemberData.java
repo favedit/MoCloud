@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch.data.financial.member;
+package com.ahyc.eai.batch;
 
 import com.cyou.gccloud.data.data.FDataFinancialCustomerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
@@ -16,9 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import org.mo.com.data.FSql;
-import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.type.TDateTime;
-import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
 //============================================================
@@ -28,22 +26,9 @@ import org.mo.data.logic.FLogicDataset;
 //@Date 2015.09.24  
 //@version 1.0.0
 //============================================================
-import org.mo.eng.data.IDatabaseConsole;
 
-public class SynchronizerStatisticsMemberData
+public class FSynchronizeStatisticsMemberData
 {
-   public static void main(String[] args){
-
-      FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-      attributes.set("application", "D:/Microbject/MoCloud/");
-      RAop.initialize("D:/Microbject/MoCloud/mp-eai-batch/src/config/application-work.xml");
-      IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
-      FLogicContext logicContext = new FLogicContext(databaseConsole);
-      //同步数据
-      SynchronizerStatisticsMemberData.synchronizedMember(logicContext);
-
-   }
-
    //同步ST_FIN_MEMBER表数据到DT_FIN_MEMBER表
    public static void synchronizedMember(FLogicContext logicContext){
       FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
@@ -52,6 +37,7 @@ public class SynchronizerStatisticsMemberData
       FDataFinancialMemberLogic dataMemberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
       FDataFinancialCustomerLogic dataCustomerLogic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
       FDataFinancialMarketerLogic dataMarketerLogic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
+
       //获取最近一礼拜统计成员表的数据,将其同步到存储表,,score字段计算获得
       FLogicDataset<FStatisticsFinancialMemberUnit> statisticsMemberLatestWeek = getLatestWeek(statisticsMemberLogic);
       for(Iterator<FStatisticsFinancialMemberUnit> iterator = statisticsMemberLatestWeek.iterator(); iterator.hasNext();){
