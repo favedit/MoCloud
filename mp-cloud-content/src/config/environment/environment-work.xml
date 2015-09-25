@@ -61,7 +61,7 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.21.0.250:3306/CD_CACHE</Property>
+               <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_CACHE</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -86,7 +86,32 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.21.0.250:3306/CD_DATA</Property>
+               <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_DATA</Property>
+               <Property name='passport'>cloud</Property>
+               <Property name='password'>cloud</Property>
+               <Property name='initConnectionNumber'>1</Property>
+               <Property name='maxConnectionNumber'>16</Property>
+               <Property name='activeTimeLimit'>60000</Property>
+               <Property name='connectionTimeLimit'>600000</Property>
+               <Property name='retryCount'>10</Property>
+               <Property name='retryDelay'>10</Property>
+               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
+               <Property name='testTime'>600000</Property>
+               <Property name='closeTimeLimit'>5000</Property>
+               <Initialize name='initializeMonitor'/>
+            </Component>
+         </Parameter>
+      </Initialize>
+      <!-- ============================================================ -->
+      <!-- 数据链接控制台                                               -->
+      <!-- ============================================================ -->
+      <Initialize name='add'>
+         <Parameter>
+            <Component class = 'org.mo.eng.data.FConnectionConsole'>
+               <Property name='name'>statistics</Property>
+               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
+               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
+               <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_STATISTICS</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -111,7 +136,7 @@
                <Property name='name'>logger</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.21.0.250:3306/CD_LOGGER</Property>
+               <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_LOGGER</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
                <Property name='initConnectionNumber'>1</Property>
