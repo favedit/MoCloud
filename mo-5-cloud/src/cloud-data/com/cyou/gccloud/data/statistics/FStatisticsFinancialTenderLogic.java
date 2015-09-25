@@ -24,7 +24,8 @@ import org.mo.data.logic.SLogicTableInfo;
 // <T>动态投标表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialTenderLogic extends FLogicTable
+public class FStatisticsFinancialTenderLogic
+      extends FLogicTable
 {
    // 动态投标表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("statistics");
@@ -52,6 +53,12 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
 
    // 字段标题的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
+   // 字段开始日期的定义。
+   public final static SLogicFieldInfo BEGIN_DATE = new SLogicFieldInfo("BEGIN_DATE");
+
+   // 字段结束日期的定义。
+   public final static SLogicFieldInfo END_DATE = new SLogicFieldInfo("END_DATE");
 
    // 字段借款类型的定义。
    public final static SLogicFieldInfo BORROW_MODEL = new SLogicFieldInfo("BORROW_MODEL");
@@ -92,11 +99,23 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // 字段投资次数的定义。
    public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
 
+   // 字段投资用户数的定义。
+   public final static SLogicFieldInfo INVESTMENT_USER_COUNT = new SLogicFieldInfo("INVESTMENT_USER_COUNT");
+
    // 字段净投总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
+   // 字段赎回开始日期的定义。
+   public final static SLogicFieldInfo REDEMPTION_BEGIN_DATE = new SLogicFieldInfo("REDEMPTION_BEGIN_DATE");
+
+   // 字段赎回结束日期的定义。
+   public final static SLogicFieldInfo REDEMPTION_END_DATE = new SLogicFieldInfo("REDEMPTION_END_DATE");
+
    // 字段赎回次数的定义。
    public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
+
+   // 字段赎回用户数的定义。
+   public final static SLogicFieldInfo REDEMPTION_USER_COUNT = new SLogicFieldInfo("REDEMPTION_USER_COUNT");
 
    // 字段赎回总计的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
@@ -120,7 +139,7 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`INVESTMENT_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BEGIN_DATE`,`END_DATE`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`INVESTMENT_COUNT`,`INVESTMENT_USER_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_BEGIN_DATE`,`REDEMPTION_END_DATE`,`REDEMPTION_COUNT`,`REDEMPTION_USER_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态投标表逻辑单元。</T>
@@ -168,7 +187,8 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param id 编号
    // @return 查询字符串
    //============================================================
-   public String makeFindSql(CharSequence fields, long id){
+   public String makeFindSql(CharSequence fields,
+                             long id){
       FString sql = new FString("SELECT ");
       if(RString.isEmpty(fields)){
          sql.append(FIELDS);
@@ -247,7 +267,9 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    //============================================================
    @Override
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> T find(T unit, Class<T> clazz, long recordId){
+   public <T extends FLogicUnit> T find(T unit,
+                                        Class<T> clazz,
+                                        long recordId){
       // 检查编号
       if(recordId <= 0){
          return null;
@@ -298,7 +320,9 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T findByGuid(T unit, Class<T> clazz, CharSequence guid){
+   public <T extends FLogicUnit> T findByGuid(T unit,
+                                              Class<T> clazz,
+                                              CharSequence guid){
       // 检查条件
       if(RString.isEmpty(guid)){
          return null;
@@ -335,7 +359,9 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T search(T unit, Class<T> clazz, CharSequence whereSql){
+   public <T extends FLogicUnit> T search(T unit,
+                                          Class<T> clazz,
+                                          CharSequence whereSql){
       // 检查条件
       if(RString.isEmpty(whereSql)){
          return null;
@@ -369,7 +395,8 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(int pageSize, int page){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(int pageSize,
+                                                              int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -381,7 +408,9 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence whereSql, int pageSize, int page){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence whereSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -394,7 +423,8 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence whereSql, CharSequence orderSql){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence whereSql,
+                                                              CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -407,7 +437,10 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence whereSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -421,7 +454,11 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence fields,
+                                                              CharSequence whereSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -435,7 +472,12 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetch(CharSequence fields,
+                                                              CharSequence whereSql,
+                                                              CharSequence groupSql,
+                                                              CharSequence orderSql,
+                                                              int pageSize,
+                                                              int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -446,7 +488,8 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param whereSql 条件命令
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -463,7 +506,10 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -481,7 +527,9 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -499,7 +547,11 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -518,7 +570,12 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, null, orderSql);
       String sql = makeFetchSql(fields, whereSql, null, orderSql, 0, 0);
@@ -538,7 +595,13 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence groupSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, groupSql, orderSql);
       String sql = makeFetchSql(fields, whereSql, groupSql, orderSql, 0, 0);
@@ -555,7 +618,10 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderUnit> fetchSql(CharSequence code, CharSequence sql, int pageSize, int page){
+   public FLogicDataset<FStatisticsFinancialTenderUnit> fetchSql(CharSequence code,
+                                                                 CharSequence sql,
+                                                                 int pageSize,
+                                                                 int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -570,7 +636,11 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
    // @return 数据单元集合
    //============================================================
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz, CharSequence code, CharSequence sql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz,
+                                                           CharSequence code,
+                                                           CharSequence sql,
+                                                           int pageSize,
+                                                           int page){
       // 获得数据
       FDataset dataset = innerFindDataset(code, sql, pageSize, page);
       // 返回结果
@@ -596,7 +666,6 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
       // 获得数据
       return fetchSql(null, code, sql, 0, 0);
    }
-
 
    //============================================================
    // <T>准备一个数据单元。</T>
@@ -648,7 +717,7 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
       FStatisticsFinancialTenderUnit unit = (FStatisticsFinancialTenderUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
-      if((unit.createUserId() == 0)|| (unit.updateUserId() == 0)){
+      if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
          if(unit.createUserId() == 0){
             unit.setCreateUserId(operatorId);
@@ -670,6 +739,8 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
       cmd.append(",`LINK_DATE`");
       cmd.append(",`GROUP_NUMBER`");
       cmd.append(",`LABEL`");
+      cmd.append(",`BEGIN_DATE`");
+      cmd.append(",`END_DATE`");
       cmd.append(",`BORROW_MODEL`");
       cmd.append(",`BORROW_DURATION`");
       cmd.append(",`BORROW_MONEY`");
@@ -683,8 +754,12 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
       cmd.append(",`INVESTMENT_BEGIN_DATE`");
       cmd.append(",`INVESTMENT_END_DATE`");
       cmd.append(",`INVESTMENT_COUNT`");
+      cmd.append(",`INVESTMENT_USER_COUNT`");
       cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`REDEMPTION_BEGIN_DATE`");
+      cmd.append(",`REDEMPTION_END_DATE`");
       cmd.append(",`REDEMPTION_COUNT`");
+      cmd.append(",`REDEMPTION_USER_COUNT`");
       cmd.append(",`REDEMPTION_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
@@ -734,6 +809,28 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
          cmd.append('\'');
+      }
+      cmd.append(',');
+      TDateTime beginDate = unit.beginDate();
+      if(beginDate == null){
+         cmd.append("NULL");
+      }else if(beginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(beginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime endDate = unit.endDate();
+      if(endDate == null){
+         cmd.append("NULL");
+      }else if(endDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(endDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
       String borrowModel = unit.borrowModel();
@@ -822,9 +919,35 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
       cmd.append(',');
       cmd.append(unit.investmentCount());
       cmd.append(',');
+      cmd.append(unit.investmentUserCount());
+      cmd.append(',');
       cmd.append(unit.investmentTotal());
       cmd.append(',');
+      TDateTime redemptionBeginDate = unit.redemptionBeginDate();
+      if(redemptionBeginDate == null){
+         cmd.append("NULL");
+      }else if(redemptionBeginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionBeginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime redemptionEndDate = unit.redemptionEndDate();
+      if(redemptionEndDate == null){
+         cmd.append("NULL");
+      }else if(redemptionEndDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionEndDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
       cmd.append(unit.redemptionCount());
+      cmd.append(',');
+      cmd.append(unit.redemptionUserCount());
       cmd.append(',');
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
@@ -942,6 +1065,32 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
             cmd.append('\'');
          }
       }
+      if(unit.isBeginDateChanged()){
+         cmd.append(",`BEGIN_DATE`=");
+         TDateTime beginDate = unit.beginDate();
+         if(beginDate == null){
+            cmd.append("NULL");
+         }else if(beginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(beginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isEndDateChanged()){
+         cmd.append(",`END_DATE`=");
+         TDateTime endDate = unit.endDate();
+         if(endDate == null){
+            cmd.append("NULL");
+         }else if(endDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(endDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
       if(unit.isBorrowModelChanged()){
          cmd.append(",`BORROW_MODEL`=");
          String borrowModel = unit.borrowModel();
@@ -1054,13 +1203,47 @@ public class FStatisticsFinancialTenderLogic extends FLogicTable
          cmd.append(",`INVESTMENT_COUNT`=");
          cmd.append(unit.investmentCount());
       }
+      if(unit.isInvestmentUserCountChanged()){
+         cmd.append(",`INVESTMENT_USER_COUNT`=");
+         cmd.append(unit.investmentUserCount());
+      }
       if(unit.isInvestmentTotalChanged()){
          cmd.append(",`INVESTMENT_TOTAL`=");
          cmd.append(unit.investmentTotal());
       }
+      if(unit.isRedemptionBeginDateChanged()){
+         cmd.append(",`REDEMPTION_BEGIN_DATE`=");
+         TDateTime redemptionBeginDate = unit.redemptionBeginDate();
+         if(redemptionBeginDate == null){
+            cmd.append("NULL");
+         }else if(redemptionBeginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionBeginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRedemptionEndDateChanged()){
+         cmd.append(",`REDEMPTION_END_DATE`=");
+         TDateTime redemptionEndDate = unit.redemptionEndDate();
+         if(redemptionEndDate == null){
+            cmd.append("NULL");
+         }else if(redemptionEndDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionEndDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
       if(unit.isRedemptionCountChanged()){
          cmd.append(",`REDEMPTION_COUNT`=");
          cmd.append(unit.redemptionCount());
+      }
+      if(unit.isRedemptionUserCountChanged()){
+         cmd.append(",`REDEMPTION_USER_COUNT`=");
+         cmd.append(unit.redemptionUserCount());
       }
       if(unit.isRedemptionTotalChanged()){
          cmd.append(",`REDEMPTION_TOTAL`=");

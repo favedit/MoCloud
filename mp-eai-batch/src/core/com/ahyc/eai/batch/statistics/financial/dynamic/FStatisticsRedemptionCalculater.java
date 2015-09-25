@@ -62,6 +62,7 @@ public class FStatisticsRedemptionCalculater
             long recordId = row.getLong("id");
             long customerId = row.getLong("sell_uid");
             double transferAmount = row.getDouble("transfer_price");
+            String actionDate = row.get("action_date");
             // 查找理财师编号
             long recommentId = sourceConnection.executeLong("select recommend_id from lzh_members where id=" + customerId);
             // 查找理财师信息：理财师编号/部门编号
@@ -105,10 +106,14 @@ public class FStatisticsRedemptionCalculater
                borrowRecordId = tenderUnit.ouid();
                borrowModel = tenderUnit.borrowModel();
                // 更新投资数据
-               tenderUnit.setRedemptionCount(tenderUnit.investmentCount() + 1);
-               tenderUnit.setRedemptionTotal(tenderUnit.investmentTotal() + investmentAmount);
+               tenderUnit.setRedemptionCount(tenderUnit.redemptionCount() + 1);
+               tenderUnit.setRedemptionTotal(tenderUnit.redemptionTotal() + investmentAmount);
                tenderUnit.setInterestTotal(tenderUnit.interestTotal() + interest);
                tenderUnit.setNetinvestmentTotal(tenderUnit.investmentTotal() - tenderUnit.redemptionTotal());
+               if(tenderUnit.redemptionBeginDate().isEmpty()){
+                  tenderUnit.redemptionBeginDate().parse(actionDate);
+               }
+               tenderUnit.redemptionEndDate().parse(actionDate);
                tenderLogic.doUpdate(tenderUnit);
             }
             //............................................................
@@ -136,7 +141,7 @@ public class FStatisticsRedemptionCalculater
                dynamicUnit.setCustomerCard(customerInfo.card());
             }
             dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Redemption);
-            dynamicUnit.customerActionDate().parse(row.get("action_date"));
+            dynamicUnit.customerActionDate().parse(actionDate);
             dynamicUnit.setCustomerActionAmount(investmentAmount);
             dynamicUnit.setCustomerActionInterest(interest);
             dynamicUnit.setTenderId(borrowRecordId);

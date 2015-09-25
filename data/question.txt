@@ -29,6 +29,15 @@ CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
 
+
+CREATE USER 'eai_online'@'localhost' IDENTIFIED BY 'kkU76KVc3eiUQViTI0SomA';
+GRANT ALL PRIVILEGES ON *.* TO 'eai_online'@'localhost';
+FLUSH PRIVILEGES;
+
+
+
+
+
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'cloud';
 GRANT ALL PRIVILEGES ON *.* TO 'cloud'@'localhost';
 FLUSH PRIVILEGES;

@@ -1,6 +1,8 @@
 package com.ahyc.eai.batch.common;
 
+import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
+import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
 import org.mo.eai.core.common.EEaiDataConnection;
@@ -39,15 +41,28 @@ public abstract class FStatisticsPeriodCalculater
       // 计算开始日期 
       TDateTime beginDate = _controllerUnit.linkDate();
       if(beginDate.isEmpty()){
-         String dateSource = connection.executeScalar("SELECT DATE_FORMAT(MIN(" + _periodField + "),'%Y%m%d%H%i%s') AS ACTION_DATE FROM " + _periodTable);
+         FSql beginSql = new FSql("SELECT MIN({field}) FROM {table}");
+         beginSql.bind("field", _periodField);
+         beginSql.bind("table", _periodTable);
+         String dateSource = connection.executeScalar(beginSql);
+         if(RString.isEmpty(dateSource)){
+            return;
+         }
          beginDate.parse(dateSource);
          beginDate.addSecond(_recordDelaySecond);
       }
       // 计算结束日期
+      FSql endSql = new FSql("SELECT MAX({field}) FROM {table} WHERE {field} > {begin_date}");
+      endSql.bind("field", _periodField);
+      endSql.bind("table", _periodTable);
+      endSql.bindDateTime("begin_date", beginDate);
+      String endDateSource = connection.executeScalar(endSql);
+      if(RString.isEmpty(endDateSource)){
+         return;
+      }
+      TDateTime endMaxDate = new TDateTime(endDateSource);
       TDateTime endDate = beginDate.clone();
       endDate.add(_intervalSpan);
-      String dateMaxSource = connection.executeScalar("SELECT DATE_FORMAT(MAX(" + _periodField + "),'%Y%m%d%H%i%s') AS `ACTION_DATE` FROM " + _periodTable);
-      TDateTime endMaxDate = new TDateTime(dateMaxSource);
       if(endDate.get() > endMaxDate.get()){
          endDate.assign(endMaxDate);
          endDate.addSecond(_recordDelaySecond);

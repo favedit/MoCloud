@@ -19,7 +19,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>动态投标表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialTenderUnit extends FLogicUnit
+public class FStatisticsFinancialTenderUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -62,6 +63,18 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
 
    // 字段标题的定义。
    protected String _label;
+
+   // 存储字段开始日期的定义。
+   private TDateTime __beginDate = new TDateTime();
+
+   // 字段开始日期的定义。
+   protected TDateTime _beginDate = new TDateTime();
+
+   // 存储字段结束日期的定义。
+   private TDateTime __endDate = new TDateTime();
+
+   // 字段结束日期的定义。
+   protected TDateTime _endDate = new TDateTime();
 
    // 存储字段借款类型的定义。
    private String __borrowModel;
@@ -141,17 +154,41 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
    // 字段投资次数的定义。
    protected int _investmentCount;
 
+   // 存储字段投资用户数的定义。
+   private int __investmentUserCount;
+
+   // 字段投资用户数的定义。
+   protected int _investmentUserCount;
+
    // 存储字段净投总计的定义。
    private double __investmentTotal;
 
    // 字段净投总计的定义。
    protected double _investmentTotal;
 
+   // 存储字段赎回开始日期的定义。
+   private TDateTime __redemptionBeginDate = new TDateTime();
+
+   // 字段赎回开始日期的定义。
+   protected TDateTime _redemptionBeginDate = new TDateTime();
+
+   // 存储字段赎回结束日期的定义。
+   private TDateTime __redemptionEndDate = new TDateTime();
+
+   // 字段赎回结束日期的定义。
+   protected TDateTime _redemptionEndDate = new TDateTime();
+
    // 存储字段赎回次数的定义。
    private int __redemptionCount;
 
    // 字段赎回次数的定义。
    protected int _redemptionCount;
+
+   // 存储字段赎回用户数的定义。
+   private int __redemptionUserCount;
+
+   // 字段赎回用户数的定义。
+   protected int _redemptionUserCount;
 
    // 存储字段赎回总计的定义。
    private double __redemptionTotal;
@@ -388,6 +425,60 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断开始日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isBeginDateChanged(){
+      return !__beginDate.equals(_beginDate);
+   }
+
+   //============================================================
+   // <T>获得开始日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime beginDate(){
+      return _beginDate;
+   }
+
+   //============================================================
+   // <T>设置开始日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setBeginDate(TDateTime value){
+      _beginDate = value;
+   }
+
+   //============================================================
+   // <T>判断结束日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isEndDateChanged(){
+      return !__endDate.equals(_endDate);
+   }
+
+   //============================================================
+   // <T>获得结束日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime endDate(){
+      return _endDate;
+   }
+
+   //============================================================
+   // <T>设置结束日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setEndDate(TDateTime value){
+      _endDate = value;
    }
 
    //============================================================
@@ -742,6 +833,33 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
    }
 
    //============================================================
+   // <T>判断投资用户数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentUserCountChanged(){
+      return __investmentUserCount != _investmentUserCount;
+   }
+
+   //============================================================
+   // <T>获得投资用户数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentUserCount(){
+      return _investmentUserCount;
+   }
+
+   //============================================================
+   // <T>设置投资用户数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentUserCount(int value){
+      _investmentUserCount = value;
+   }
+
+   //============================================================
    // <T>判断净投总计的数据是否改变。</T>
    //
    // @return 数据内容
@@ -769,6 +887,60 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
    }
 
    //============================================================
+   // <T>判断赎回开始日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionBeginDateChanged(){
+      return !__redemptionBeginDate.equals(_redemptionBeginDate);
+   }
+
+   //============================================================
+   // <T>获得赎回开始日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime redemptionBeginDate(){
+      return _redemptionBeginDate;
+   }
+
+   //============================================================
+   // <T>设置赎回开始日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionBeginDate(TDateTime value){
+      _redemptionBeginDate = value;
+   }
+
+   //============================================================
+   // <T>判断赎回结束日期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionEndDateChanged(){
+      return !__redemptionEndDate.equals(_redemptionEndDate);
+   }
+
+   //============================================================
+   // <T>获得赎回结束日期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime redemptionEndDate(){
+      return _redemptionEndDate;
+   }
+
+   //============================================================
+   // <T>设置赎回结束日期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionEndDate(TDateTime value){
+      _redemptionEndDate = value;
+   }
+
+   //============================================================
    // <T>判断赎回次数的数据是否改变。</T>
    //
    // @return 数据内容
@@ -793,6 +965,33 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
    //============================================================
    public void setRedemptionCount(int value){
       _redemptionCount = value;
+   }
+
+   //============================================================
+   // <T>判断赎回用户数的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionUserCountChanged(){
+      return __redemptionUserCount != _redemptionUserCount;
+   }
+
+   //============================================================
+   // <T>获得赎回用户数的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionUserCount(){
+      return _redemptionUserCount;
+   }
+
+   //============================================================
+   // <T>设置赎回用户数的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionUserCount(int value){
+      _redemptionUserCount = value;
    }
 
    //============================================================
@@ -1007,6 +1206,10 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
             return RInteger.toString(_groupNumber);
          case "label":
             return _label;
+         case "begin_date":
+            return _beginDate.toString();
+         case "end_date":
+            return _endDate.toString();
          case "borrow_model":
             return _borrowModel;
          case "borrow_duration":
@@ -1033,10 +1236,18 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
             return _investmentEndDate.toString();
          case "investment_count":
             return RInteger.toString(_investmentCount);
+         case "investment_user_count":
+            return RInteger.toString(_investmentUserCount);
          case "investment_total":
             return RDouble.toString(_investmentTotal);
+         case "redemption_begin_date":
+            return _redemptionBeginDate.toString();
+         case "redemption_end_date":
+            return _redemptionEndDate.toString();
          case "redemption_count":
             return RInteger.toString(_redemptionCount);
+         case "redemption_user_count":
+            return RInteger.toString(_redemptionUserCount);
          case "redemption_total":
             return RDouble.toString(_redemptionTotal);
          case "interest_total":
@@ -1086,6 +1297,12 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
          case "label":
             _label = value;
             break;
+         case "begin_date":
+            _beginDate.parse(value);
+            break;
+         case "end_date":
+            _endDate.parse(value);
+            break;
          case "borrow_model":
             _borrowModel = value;
             break;
@@ -1125,11 +1342,23 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
          case "investment_count":
             _investmentCount = RInteger.parse(value);
             break;
+         case "investment_user_count":
+            _investmentUserCount = RInteger.parse(value);
+            break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
             break;
+         case "redemption_begin_date":
+            _redemptionBeginDate.parse(value);
+            break;
+         case "redemption_end_date":
+            _redemptionEndDate.parse(value);
+            break;
          case "redemption_count":
             _redemptionCount = RInteger.parse(value);
+            break;
+         case "redemption_user_count":
+            _redemptionUserCount = RInteger.parse(value);
             break;
          case "redemption_total":
             _redemptionTotal = RDouble.parse(value);
@@ -1195,6 +1424,14 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
                __label = value;
                _label = __label;
                break;
+            case "begin_date":
+               __beginDate.parse(value);
+               _beginDate.assign(__beginDate);
+               break;
+            case "end_date":
+               __endDate.parse(value);
+               _endDate.assign(__endDate);
+               break;
             case "borrow_model":
                __borrowModel = value;
                _borrowModel = __borrowModel;
@@ -1247,13 +1484,29 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
                __investmentCount = RInteger.parse(value);
                _investmentCount = __investmentCount;
                break;
+            case "investment_user_count":
+               __investmentUserCount = RInteger.parse(value);
+               _investmentUserCount = __investmentUserCount;
+               break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
                break;
+            case "redemption_begin_date":
+               __redemptionBeginDate.parse(value);
+               _redemptionBeginDate.assign(__redemptionBeginDate);
+               break;
+            case "redemption_end_date":
+               __redemptionEndDate.parse(value);
+               _redemptionEndDate.assign(__redemptionEndDate);
+               break;
             case "redemption_count":
                __redemptionCount = RInteger.parse(value);
                _redemptionCount = __redemptionCount;
+               break;
+            case "redemption_user_count":
+               __redemptionUserCount = RInteger.parse(value);
+               _redemptionUserCount = __redemptionUserCount;
                break;
             case "redemption_total":
                __redemptionTotal = RDouble.parse(value);
@@ -1302,6 +1555,8 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       row.set("linkDate", _linkDate);
       row.set("groupNumber", _groupNumber);
       row.set("label", _label);
+      row.set("beginDate", _beginDate);
+      row.set("endDate", _endDate);
       row.set("borrowModel", _borrowModel);
       row.set("borrowDuration", _borrowDuration);
       row.set("borrowMoney", _borrowMoney);
@@ -1315,8 +1570,12 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       row.set("investmentBeginDate", _investmentBeginDate);
       row.set("investmentEndDate", _investmentEndDate);
       row.set("investmentCount", _investmentCount);
+      row.set("investmentUserCount", _investmentUserCount);
       row.set("investmentTotal", _investmentTotal);
+      row.set("redemptionBeginDate", _redemptionBeginDate);
+      row.set("redemptionEndDate", _redemptionEndDate);
       row.set("redemptionCount", _redemptionCount);
+      row.set("redemptionUserCount", _redemptionUserCount);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("interestTotal", _interestTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
@@ -1341,6 +1600,8 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("groupNumber", RInteger.toString(_groupNumber));
       map.put("label", _label);
+      map.put("beginDate", _beginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("endDate", _endDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("borrowModel", _borrowModel);
       map.put("borrowDuration", RInteger.toString(_borrowDuration));
       map.put("borrowMoney", RDouble.toString(_borrowMoney));
@@ -1354,8 +1615,12 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       map.put("investmentBeginDate", _investmentBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentEndDate", _investmentEndDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentCount", RInteger.toString(_investmentCount));
+      map.put("investmentUserCount", RInteger.toString(_investmentUserCount));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("redemptionBeginDate", _redemptionBeginDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("redemptionEndDate", _redemptionEndDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("redemptionCount", RInteger.toString(_redemptionCount));
+      map.put("redemptionUserCount", RInteger.toString(_redemptionUserCount));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
@@ -1380,6 +1645,8 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       _linkDate.set(input.readInt64());
       _groupNumber = input.readInt32();
       _label = input.readString();
+      _beginDate.set(input.readInt64());
+      _endDate.set(input.readInt64());
       _borrowModel = input.readString();
       _borrowDuration = input.readInt32();
       _borrowInfo = input.readString();
@@ -1390,7 +1657,11 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       _investmentBeginDate.set(input.readInt64());
       _investmentEndDate.set(input.readInt64());
       _investmentCount = input.readInt32();
+      _investmentUserCount = input.readInt32();
+      _redemptionBeginDate.set(input.readInt64());
+      _redemptionEndDate.set(input.readInt64());
       _redemptionCount = input.readInt32();
+      _redemptionUserCount = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -1412,6 +1683,8 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       output.writeInt64(_linkDate.get());
       output.writeInt32(_groupNumber);
       output.writeString(_label);
+      output.writeInt64(_beginDate.get());
+      output.writeInt64(_endDate.get());
       output.writeString(_borrowModel);
       output.writeInt32(_borrowDuration);
       output.writeString(_borrowInfo);
@@ -1422,7 +1695,11 @@ public class FStatisticsFinancialTenderUnit extends FLogicUnit
       output.writeInt64(_investmentBeginDate.get());
       output.writeInt64(_investmentEndDate.get());
       output.writeInt32(_investmentCount);
+      output.writeInt32(_investmentUserCount);
+      output.writeInt64(_redemptionBeginDate.get());
+      output.writeInt64(_redemptionEndDate.get());
       output.writeInt32(_redemptionCount);
+      output.writeInt32(_redemptionUserCount);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

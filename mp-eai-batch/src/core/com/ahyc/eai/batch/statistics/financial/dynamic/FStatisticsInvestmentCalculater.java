@@ -68,6 +68,7 @@ public class FStatisticsInvestmentCalculater
             long borrowId = row.getLong("borrow_id");
             long customerId = row.getLong("investor_uid");
             double investment = row.getDouble("investor_capital");
+            String actionDate = row.get("investor_date");
             // 查找理财师编号
             long recommentId = sourceConnection.executeLong("select recommend_id from lzh_members where id=" + customerId);
             // 查找理财师信息：理财师编号/部门编号
@@ -113,6 +114,10 @@ public class FStatisticsInvestmentCalculater
                tenderUnit.setInvestmentCount(tenderUnit.investmentCount() + 1);
                tenderUnit.setInvestmentTotal(tenderUnit.investmentTotal() + investment);
                tenderUnit.setNetinvestmentTotal(tenderUnit.investmentTotal() - tenderUnit.redemptionTotal());
+               if(tenderUnit.investmentBeginDate().isEmpty()){
+                  tenderUnit.investmentBeginDate().parse(actionDate);
+               }
+               tenderUnit.investmentEndDate().parse(actionDate);
                tenderLogic.doUpdate(tenderUnit);
             }
             //............................................................
@@ -183,7 +188,7 @@ public class FStatisticsInvestmentCalculater
                }
             }
             dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Investment);
-            dynamicUnit.customerActionDate().parse(row.get("investor_date"));
+            dynamicUnit.customerActionDate().parse(actionDate);
             dynamicUnit.setCustomerActionAmount(investment);
             // 设置投资内容
             dynamicUnit.setTenderChanged(tenderChanged);

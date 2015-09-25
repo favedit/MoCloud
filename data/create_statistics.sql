@@ -39,6 +39,8 @@ CREATE TABLE `ST_FIN_TENDER`
    `LINK_DATE`                     DATETIME, 
    `GROUP_NUMBER`                  INTEGER, 
    `LABEL`                         VARCHAR(800), 
+   `BEGIN_DATE`                    DATETIME, 
+   `END_DATE`                      DATETIME, 
    `BORROW_MODEL`                  VARCHAR(20), 
    `BORROW_DURATION`               INTEGER, 
    `BORROW_MONEY`                  DOUBLE, 
@@ -52,8 +54,12 @@ CREATE TABLE `ST_FIN_TENDER`
    `INVESTMENT_BEGIN_DATE`         DATETIME, 
    `INVESTMENT_END_DATE`           DATETIME, 
    `INVESTMENT_COUNT`              INTEGER, 
+   `INVESTMENT_USER_COUNT`         INTEGER, 
    `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_BEGIN_DATE`         DATETIME, 
+   `REDEMPTION_END_DATE`           DATETIME, 
    `REDEMPTION_COUNT`              INTEGER, 
+   `REDEMPTION_USER_COUNT`         INTEGER, 
    `REDEMPTION_TOTAL`              DOUBLE, 
    `INTEREST_TOTAL`                DOUBLE, 
    `NETINVESTMENT_TOTAL`           DOUBLE, 
@@ -67,7 +73,7 @@ ALTER TABLE ST_FIN_TENDER
    ADD CONSTRAINT ST_FIN_TDR_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE ST_FIN_TENDER 
-   ADD CONSTRAINT ST_FIN_TDR_UK_LINK_ID UNIQUE ( LINK_ID );
+   ADD CONSTRAINT ST_FIN_TDR_UK_LINK_ID UNIQUE ( LINK_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Dynamic]
