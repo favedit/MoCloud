@@ -1,4 +1,4 @@
-package com.ahyc.eai.batch;
+package com.ahyc.eai.batch.data.financial.member;
 
 import com.cyou.gccloud.data.data.FDataFinancialCustomerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;

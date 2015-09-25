@@ -1,5 +1,7 @@
 package com.ahyc.eai.batch;
 
+import com.ahyc.eai.batch.data.financial.member.FSynchronizeStatisticsMemberData;
+
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.monitor.common.FAbstractMonitor;
