@@ -143,9 +143,9 @@ public class SynchronizerStatisticsMemberData
    }
 
    //同步删除数据
-   public static void synchronizedDeleteMember(FLogicContext logicContext){
-      FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
-   }
+   //   public static void synchronizedDeleteMember(FLogicContext logicContext){
+   //      FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
+   //   }
 
    //把ST的marketer同步到DT的marketer
    public static void loadDTMarketerData(long linkId,
@@ -196,7 +196,7 @@ public class SynchronizerStatisticsMemberData
    //计算分数  通过年龄和收入去计算
    public static int getScore(int age,
                               String incomeCode){
-      double w = 0.0;//权重 总分数=ageScore*w+incomeScore*w
+      //      double w = 0.0;//权重 总分数=ageScore*w+incomeScore*w
       int ageScore = 0;
       int incomeScore = 0;
       if(age == -1 || age <= 20){
