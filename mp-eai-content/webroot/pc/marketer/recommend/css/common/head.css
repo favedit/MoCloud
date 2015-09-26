@@ -4,7 +4,7 @@ html,body
     height:100%;  
 } 
 body{ 
-	background: #edeef0;
+	background-color: #030a0f;
 	font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;
 	min-width: 1024px;
 	background: url(../../images/ba.png);
