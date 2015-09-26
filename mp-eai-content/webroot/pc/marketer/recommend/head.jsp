@@ -6,11 +6,11 @@
 <meta content="always" name="referrer">
 <link rel="stylesheet" type="text/css" href="../../css/reset.css">
 <link rel="stylesheet" type="text/css" href="../../css/animate.css">
-<link rel="stylesheet" type="text/css" href="css/common/head.css">
-<link rel="stylesheet" type="text/css" href="css/common/common.css">
+<link rel="stylesheet" type="text/css" href="/pc/marketer/recommend/css/common/head.css">
+<link rel="stylesheet" type="text/css" href="/pc/marketer/recommend/css/common/common.css">
 
 <script type="text/javascript" src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="/pc/marketer/recommend/js/common.js"></script>
 </head>
 <body>
 <FORM id="form" name='frmMain' method='post' action='Main.wa'>

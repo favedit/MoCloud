@@ -1,6 +1,6 @@
 <%@ include file='/apl/public.inc' %>
-<%@ include file='head.jsp' %>
-<link rel="stylesheet" type="text/css" href="css/PotentialUsers.css">
+<%@ include file='/pc/marketer/recommend/head.jsp' %>
+<link rel="stylesheet" type="text/css" href="/pc/marketer/recommend/css/PotentialUsers.css">
          <TR>
             <TD  width="100%" align="center" valign="center">
                <ul class="users" id="users">
@@ -54,7 +54,7 @@
    </FORM>
    <div class="shadow-bg" onclick = "shutDown();"></div>
    <%@ include file='remove.jsp' %>
-   <script type="text/javascript" src="js/existingUser.js"></script>
+   <script type="text/javascript" src="/pc/marketer/recommend/js/existingUser.js"></script>
 <script>
       function pading(nubmer){
          var currentPage = <jh:write source="&page.pageCurrent" />;
