@@ -52,7 +52,6 @@
 	animation-duration: 500ms;
 
 }
-
 .management-prompt p{
 	color:#fff;
 	line-height: 30px;
@@ -66,12 +65,21 @@
 	top:2px;
 	line-height: 0px;
 	color:#fff!important;
-
+}
+.management-prompt .er{
+	color:red;
+	display: block;
+	line-height: 16px;
+	height: 16px;
+	position: relative;
+	top:-2px;
+	font-size: 14px;
 }
 .management-prompt textarea{
 	width: 450px;
 	height: 250px;
-	margin-top: 10px;
+	position: relative;
+	top:-2px;
 	padding: 10px;
 }
 .btn-container{
