@@ -29,4 +29,6 @@ public interface IAreaConsole
                                        int pageNum,
                                        int pageSize);
 
+   public FDataCommonAreaUnit findByLable(ILogicContext logicContext,
+                                          String label);
 }

@@ -15,19 +15,19 @@
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>增加省份信息</span>
+   <span>增加区域信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="add_btn"></a> <a
-     href="/product/common/Province.wa" class="back_btn"></a>
+     href="/product/common/Area.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="config"
-   action="/product/common/Province.wa?do=insert"
+   action="/product/common/Area.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="550" border="0" align="left"
@@ -43,14 +43,6 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属区域:</div></td>
-     <td><div align="left">
-       <input id="areaLabel" name="areaLabel" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,50]'" /> 
-      </div></td>
-    </tr>
-    <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
        <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox"
@@ -62,8 +54,8 @@
      <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
      <td><div align="left">
        <input id="code" name="code" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,80]'" /> 
+        style="width:280px;height:18px;"
+        data-options="validType:'length[0,50]'" /> 
       </div></td>
     </tr>
     <tr>

@@ -41,11 +41,10 @@ public class FCountryAction
                            ILogicContext logicContext,
                            FBasePage basePage){
 
-      _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "-----------Construct-------------", "Construct begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-
       return "/manage/product/common/CountryList";
    }
 
@@ -62,7 +61,7 @@ public class FCountryAction
                         ILogicContext logicContext,
                         FCountryPage Page,
                         FBasePage basePage){
-      _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "------------------------------Select", "Select begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
@@ -73,13 +72,17 @@ public class FCountryAction
          Page.setPageCurrent(0);
       }
       FDataCommonCountryUnit unit = new FDataCommonCountryUnit();
+      String name = context.parameter("name");
+      if(null != name){
+         unit.setName(name);
+      }
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataCommonCountryUnit> unitList = _countryConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
-      _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
+      _logger.debug(this, "------------------------------Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
    }
@@ -102,7 +105,7 @@ public class FCountryAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/financial/customer/InsertCustomer";
+      return "/manage/product/common/InsertCountry";
    }
 
    //============================================================
@@ -123,15 +126,14 @@ public class FCountryAction
          return "/manage/common/ConnectTimeout";
       }
       FDataCommonCountryUnit unit = _countryConsole.doPrepare(logicContext);
-
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-
+      setCountryDate(context, unit);
       EResult result = _countryConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
-         return "/manage/product/financial/marketer/InsertMarketer";
+         return "/manage/product/common/InsertCountry";
       }
-      return "/manage/product/financial/customer/CustomerList";
+      return "/manage/product/common/CountryList";
    }
 
    //============================================================
@@ -155,7 +157,7 @@ public class FCountryAction
 
       FDataCommonCountryUnit unit = _countryConsole.find(logicContext, id);
       page.setUnit(unit);
-      return "/manage/product/financial/customer/UpdateCustomer";
+      return "/manage/product/common/UpdateCountry";
    }
 
    //============================================================
@@ -179,7 +181,7 @@ public class FCountryAction
       FDataCommonCountryUnit unit = new FDataCommonCountryUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setNote(context.parameter("note"));
+      setCountryDate(context, unit);
       _countryConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }
@@ -212,5 +214,21 @@ public class FCountryAction
       }else{
          return "/manage/product/financial/customer/CustomerList";
       }
+   }
+
+   //============================================================
+   // <T>抽取方法</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @return void
+   //============================================================
+   public void setCountryDate(IWebContext context,
+                              FDataCommonCountryUnit unit){
+      unit.setCode(context.parameter("code"));
+      unit.setLabel(context.parameter("label"));
+      unit.setName(context.parameter("name"));
+      unit.setNote(context.parameter("note"));
+      unit.setPhoneCode(context.parameter("phoneCode"));
    }
 }

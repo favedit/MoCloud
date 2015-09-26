@@ -31,11 +31,20 @@ public interface ICountryConsole
                                                 int pageSize);
 
    // ============================================================
-   // <T>根据区号获取对象</T>
+   // <T>根据代码获取对象</T>
    // @param logicContext 链接对象
-   // @param code 区号
+   // @param code 代码
    // @return 数据对象
    // ============================================================
    FDataCommonCountryUnit findByCode(ILogicContext logicContext,
                                      String code);
+
+   // ============================================================
+   // <T>根据标签获取对象</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   public FDataCommonCountryUnit findByLable(ILogicContext logicContext,
+                                             String label);
 }

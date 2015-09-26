@@ -76,13 +76,36 @@ public class FCountryConsole
    @Override
    public FDataCommonCountryUnit findByCode(ILogicContext logicContext,
                                             String code){
-      StringBuffer whereSql = new StringBuffer();
+      FSql whereSql = new FSql();
       if(!RString.isEmpty(code)){
-         whereSql.append(FDataCommonCountryLogic.CODE).append("='").append(code + "'");
+         whereSql.append(FDataCommonCountryLogic.CODE);
+         whereSql.append("='");
+         whereSql.append(code + "'");
       }
       FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
       FLogicDataset<FDataCommonCountryUnit> roleList = logic.fetch(whereSql.toString());
       return roleList.first();
    }
 
+   // ============================================================
+   // <T>根据标签获取对象</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FDataCommonCountryUnit findByLable(ILogicContext logicContext,
+                                             String label){
+      FSql whereSql = new FSql();
+      if(!RString.isEmpty(label)){
+         whereSql.append(FDataCommonCountryLogic.NAME);
+         whereSql.append(" like '%");
+         whereSql.append("{label}");
+         whereSql.bind("label", label);
+         whereSql.append("%'");
+      }
+      FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
+      FLogicDataset<FDataCommonCountryUnit> roleList = logic.fetch(whereSql.toString());
+      return roleList.first();
+   }
 }

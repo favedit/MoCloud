@@ -64,4 +64,25 @@ public class FAreaConsole
       return userInfoList;
    }
 
+   // ============================================================
+   // <T>根据标签获取对象</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FDataCommonAreaUnit findByLable(ILogicContext logicContext,
+                                          String label){
+      FSql whereSql = new FSql();
+      if(!RString.isEmpty(label)){
+         whereSql.append(FDataCommonAreaLogic.LABEL);
+         whereSql.append(" like '%");
+         whereSql.append("{label}");
+         whereSql.bind("label", label);
+         whereSql.append("%'");
+      }
+      FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
+      FLogicDataset<FDataCommonAreaUnit> roleList = logic.fetch(whereSql.toString());
+      return roleList.first();
+   }
 }

@@ -5,6 +5,7 @@ import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 import java.util.Iterator;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.product.common.FDataAreaInfo;
@@ -63,7 +64,6 @@ public class FAreaAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-
       return "/manage/product/common/AreaList";
    }
 
@@ -91,6 +91,10 @@ public class FAreaAction
          page.setPageCurrent(0);
       }
       FDataCommonAreaUnit unit = new FDataCommonAreaUnit();
+      String label = context.parameter("label");
+      if(!RString.isEmpty(label)){
+         unit.setLabel(label);
+      }
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if(null != StrPageSize){
@@ -105,7 +109,6 @@ public class FAreaAction
             String _countryLabel = unit2.name();
             tempUnit.setCountryLabel(_countryLabel);
          }
-
       }
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
@@ -130,7 +133,7 @@ public class FAreaAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/financial/customer/InsertCustomer";
+      return "/manage/product/common/InsertArea";
    }
 
    //============================================================
@@ -151,15 +154,13 @@ public class FAreaAction
          return "/manage/common/ConnectTimeout";
       }
       FDataCommonAreaUnit unit = _areaConsole.doPrepare(logicContext);
-
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
-
+      setAreaDa(unit, context, logicContext);
       EResult result = _areaConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
-         return "/manage/product/financial/marketer/InsertMarketer";
+         return "/manage/product/common/InsertArea";
       }
-      return "/manage/product/financial/customer/CustomerList";
+      return "/manage/product/common/AreaList";
    }
 
    //============================================================
@@ -180,10 +181,15 @@ public class FAreaAction
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-
       FDataCommonAreaUnit unit = _areaConsole.find(logicContext, id);
-      page.setUnit(unit);
-      return "/manage/product/financial/customer/UpdateCustomer";
+      FDataAreaInfo info = new FDataAreaInfo();
+      info.setOuid(unit.ouid());
+      info.setCode(unit.code());
+      info.setCountryLabel(unit.country().name());
+      info.setLabel(unit.label());
+      info.setNote(unit.note());
+      page.setUnit(info);
+      return "/manage/product/common/UpdateArea";
    }
 
    //============================================================
@@ -206,8 +212,7 @@ public class FAreaAction
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataCommonAreaUnit unit = new FDataCommonAreaUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setNote(context.parameter("note"));
+      setAreaDa(unit, context, logicContext);
       _areaConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }
@@ -238,7 +243,27 @@ public class FAreaAction
       if(!result.equals(EResult.Success)){
          throw new FFatalError("Delete failure.");
       }else{
-         return "/manage/product/financial/customer/CustomerList";
+         return "/manage/product/common/AreaList";
+      }
+   }
+
+   //============================================================
+   // <T>抽取方法</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @return void
+   //============================================================
+   public void setAreaDa(FDataCommonAreaUnit unit,
+                         IWebContext context,
+                         ILogicContext logicContext){
+      unit.setCreateUserId(context.parameterAsLong("adminId"));
+      unit.setCode(context.parameter("code"));
+      unit.setLabel(context.parameter("label"));
+      unit.setNote(context.parameter("note"));
+      FDataCommonCountryUnit unitc = _countryConsole.findByLable(logicContext, context.parameter("countryLabel"));
+      if(null != unitc){
+         unit.setCountryId(unitc.ouid());
       }
    }
 }

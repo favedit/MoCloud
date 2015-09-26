@@ -54,12 +54,10 @@ public class FProvinceAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FBasePage basePage){
-
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-
       return "/manage/product/common/ProvinceList";
    }
 
@@ -92,6 +90,10 @@ public class FProvinceAction
       if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
+      String label = context.parameter("label");
+      if(null != label){//添加搜索条件
+         unit.setLabel(label);
+      }
       FLogicDataset<FDataProvinceInfo> unitList = _proviConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(Iterator<FDataProvinceInfo> iterator = unitList.iterator(); iterator.hasNext();){
          FDataProvinceInfo tempUnit = iterator.next();
@@ -105,7 +107,6 @@ public class FProvinceAction
             String _areaLabel = unit3.label();
             tempUnit.setAreaLabel(_areaLabel);
          }
-
       }
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
@@ -130,7 +131,7 @@ public class FProvinceAction
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/financial/customer/InsertCustomer";
+      return "/manage/product/common/InsertProvince";
    }
 
    //============================================================
@@ -151,15 +152,13 @@ public class FProvinceAction
          return "/manage/common/ConnectTimeout";
       }
       FDataCommonProvinceUnit unit = _proviConsole.doPrepare(logicContext);
-
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
-
+      setProvinceDat(unit, context, logicContext);
       EResult result = _proviConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
-         return "/manage/product/financial/marketer/InsertMarketer";
+         return "/manage/product/common/InsertProvince";
       }
-      return "/manage/product/financial/customer/CustomerList";
+      return "/manage/product/common/ProvinceList";
    }
 
    //============================================================
@@ -180,10 +179,16 @@ public class FProvinceAction
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-
       FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, id);
-      page.setUnit(unit);
-      return "/manage/product/financial/customer/UpdateCustomer";
+      FDataProvinceInfo info = new FDataProvinceInfo();
+      info.setAreaLabel(unit.area().label());
+      info.setCountryLabel(unit.country().label());
+      info.setCode(unit.code());
+      info.setLabel(unit.label());
+      info.setNote(unit.note());
+      info.setOuid(unit.ouid());
+      page.setUnit(info);
+      return "/manage/product/common/UpdateProvince";
    }
 
    //============================================================
@@ -206,8 +211,7 @@ public class FProvinceAction
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataCommonProvinceUnit unit = new FDataCommonProvinceUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setNote(context.parameter("note"));
+      setProvinceDat(unit, context, logicContext);
       _proviConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }
@@ -239,6 +243,29 @@ public class FProvinceAction
          throw new FFatalError("Delete failure.");
       }else{
          return "/manage/product/financial/customer/CustomerList";
+      }
+   }
+
+   //============================================================
+   // <T>抽取方法</T>
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @return void
+   //============================================================
+   public void setProvinceDat(FDataCommonProvinceUnit unit,
+                              IWebContext context,
+                              ILogicContext logicContext){
+      unit.setCreateUserId(context.parameterAsLong("adminId"));
+      unit.setCode(context.parameter("code"));
+      unit.setLabel(context.parameter("label"));
+      unit.setNote(context.parameter("note"));
+      FDataCommonCountryUnit unitc = _countryConsole.findByLable(logicContext, context.parameter("countryLabel"));
+      if(null != unitc){
+         unit.setCountryId(unitc.ouid());
+      }
+      FDataCommonAreaUnit unita = _areaConsole.findByLable(logicContext, context.parameter("areaLabel"));
+      if(null != unita){
+         unit.setAreaId(unita.ouid());
       }
    }
 }

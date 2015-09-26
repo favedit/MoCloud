@@ -51,4 +51,6 @@ public interface IProvinceConsole
    FDataCommonProvinceUnit findByLabel(FLogicContext logicContext,
                                        String provinceLabel);
 
+   public FDataCommonProvinceUnit findByProvinceLabel(ILogicContext logicContext,
+                                                      String label);
 }
