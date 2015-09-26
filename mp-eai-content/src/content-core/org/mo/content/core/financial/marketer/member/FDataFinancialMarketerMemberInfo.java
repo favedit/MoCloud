@@ -24,18 +24,6 @@ public class FDataFinancialMarketerMemberInfo
    // 成员评分
    protected int _memberRecommendScore;
 
-   // 姓别
-
-   // 最高学历
-
-   // 月收入
-
-   // 职业
-
-   //城市
-   // 邮箱
-   // 
-
    // 剩余天数
    protected int _remainingDays;
 
