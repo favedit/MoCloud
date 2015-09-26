@@ -1,12 +1,6 @@
 <%@ include file='/apl/public.inc' %>
 <%@ include file='head.jsp' %>
    <link rel="stylesheet" type="text/css" href="css/PotentialUsers.css">
-   <TR>
-      <TD width="100%" align="center" valign="center">
-         <ul class="users" id="users">
-            <li class="binding"><a href="/pc/marketer/member/Followed.wa">已关用户列表</a></li>
-            <li onclick="loginOut();"><a class="exit" href="javascript:;">退出</a></li>
-         </ul>
          <div class="imag-container">
             <table border="0" cellpadding="2" cellspacing="0">
                <tr class="title">
