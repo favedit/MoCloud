@@ -87,7 +87,7 @@ public class FRecommendAction
       }
       FLogicDataset<FDataFinancialMemberInfo> memberList = _memberConsole.select(logicContext, marketer.ouid(), page.pageCurrent() - 1);
       page.setMemberList(memberList);
-      _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList.first().ouid());
+      _logger.debug(this, "Select", "Member Select finish. (memberList = {1})", memberList);
 
       return "/pc/marketer/recommend/MemberList";
    }
