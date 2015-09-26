@@ -101,7 +101,6 @@ public class FDataMarketerMemberConsole
          where.append(FDataFinancialMemberLogic.OUID);
          where.append(" in ");
          where.append(strArr);
-         System.out.println("*********************************************" + strArr);
       }
 
       String orderBy = String.format("%s %s", FDataFinancialMemberLogic.RECOMMEND_SCORE, "DESC");
