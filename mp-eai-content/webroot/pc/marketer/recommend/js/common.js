@@ -15,6 +15,15 @@ var $users = $("#users");
     $(this).show();
  });
 })
+// 错误提示
+
+function setPrompts(){
+    var prompts = $(".prompts");
+    prompts.show();
+    setTimeout(function() {
+           prompts.hide();
+        }, 1000);
+}
 // 退出
 function loginOut() {
     location.href = "/pc/Index.wa?do=loginOut";

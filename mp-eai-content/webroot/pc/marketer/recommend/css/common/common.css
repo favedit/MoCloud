@@ -1,3 +1,37 @@
+/*提示*/
+.prompts{
+	border:2px solid #d08937;
+	background:#240606;
+	color:#fedd38;
+	font-size: 30px;
+	font-weight: bold;
+	height: 200px;
+	width: 350px;
+	text-align: center;
+	border-radius: 20px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-175px;
+	margin-top:-100px;
+	-webkit-transform-origin: top center;
+	transform-origin: top center;
+	-webkit-animation-name: swing;
+	animation-name: swing;
+	-webkit-animation-duration: 500ms;
+	-moz-animation-duration: 500ms;
+	-o-animation-duration: 500ms;
+	animation-duration: 500ms;
+	display: none;
+}
+.prompts span{
+	line-height: 200px;
+}
+.prompts i{
+	font-size: 16px;
+	margin-top: 73px;
+	display: block;
+}
 .note-setupthe{
 	position: absolute;
 	z-index: 9;
