@@ -56,7 +56,7 @@
       }
    </script>
    <div class="prompts">
-      不好意思，您手慢了！
+      <span>不好意思，您手慢了！</span>
    </div>
    <script type="text/javascript" src="js/potentialUsers.js"></script>
    </body>

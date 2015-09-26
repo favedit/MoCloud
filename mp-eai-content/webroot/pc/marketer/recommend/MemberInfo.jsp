@@ -12,7 +12,7 @@
                          <i style="width:20%"><jh:write source="&member.phone" /></i>
                          <i style="width:12%"><jh:write source="&member.age" /></i>
                          <i class="setupthes" style=""><a class="btn removes" data-id="<jh:write source="&member.guid" />"  href="javascript:;" onclick="setManagement();" >解除关系</a>
-
+                           <a class="btn " onclick="setPrompts();" href="javascript:;">短信设置</a>
                          </i>
                       </h4>
                      <p>性别：
@@ -67,6 +67,9 @@
       </TABLE>
       </FORM>
       <div class="shadow-bg" onclick="shutDown();"></div>
+      <div class="prompts">
+         <i>程序猿们不分昼夜开发，此功能近期开通，请持续关注。</i>
+      </div>
       <%@ include file='remove.jsp' %>
       <script type="text/javascript" src="js/leisureUser.js"></script>
       </body>
