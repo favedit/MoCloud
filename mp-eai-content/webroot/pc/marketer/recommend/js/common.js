@@ -22,7 +22,7 @@ function setPrompts(){
     prompts.show();
     setTimeout(function() {
            prompts.hide();
-        }, 1000);
+        }, 1500);
 }
 // 退出
 function loginOut() {
