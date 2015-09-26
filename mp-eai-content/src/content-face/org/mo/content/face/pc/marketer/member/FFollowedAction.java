@@ -84,7 +84,7 @@ public class FFollowedAction
          page.setPageCurrent(0);
       }
       //分页处理
-      int pageTotal = _marketerMemberConsole.getPageCount(logicContext);
+      int pageTotal = _marketerMemberConsole.getPageCount(logicContext, marketerId);
       page.setPageTotal(pageTotal);
       // 第0页
       if(page.pageCurrent() == 0){

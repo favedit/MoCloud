@@ -17,7 +17,7 @@
                      </tr>
                      
                      <jh:loop alias="mMember" source="&page.marketerMemberList">
-                      <tr class="trs" href="ExistingUser.wa"  >
+                      <tr class="trs" href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id=<jh:write source="&mMember.memberGuid" />"  >
                            <td><jh:write source="&mMember.memberLabel" /></td>
                            <td><jh:write source="&mMember.memberPhone" /></td>
                            <td><jh:date source="&mMember.memberLastLoginDate" format="yyyy-MM-dd hh:mm:ss" /></td>

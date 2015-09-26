@@ -76,4 +76,39 @@
     <Item _uuid="0b914f3c-0bd3-46e2-b0cd-4cbf1dc2db46" name="Valid" label="有效" is_valid="Y" note="M#" />
     <Item _uuid="1317a205-326f-4a7b-b2c3-b02df19c0bac" name="Invlaid" label="非法" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="7f4d7297-5a72-4964-9478-d3ebba6ce8c9" name="GcPersonGender" label="姓别" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="b884cb23-086a-456b-96d4-9552fbff5f3b" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="24a7150f-652b-46b4-ab8d-47190e7869e1" name="Male" label="男" is_valid="Y" note="M#" />
+    <Item _uuid="42d1a3a0-3c75-4887-ae1d-82a78f379015" name="Female" label="女" is_valid="Y" note="M#" />
+  </Enum>
+  <Enum _uuid="c7ea0102-bd18-4939-9393-ff58438c1d7e" name="GcPersonMarry" label="婚姻状态" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="afacf0f4-0be8-439f-900b-4d514f5daffd" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="4130f023-7dc3-4622-ae53-d4abe4992a84" name="Married" label="已婚" is_valid="Y" note="M#" />
+    <Item _uuid="9f82a66e-10f0-4f07-afa3-ca6b9b8de6c0" name="Unmarried" label="未婚" is_valid="Y" note="M#" />
+  </Enum>
+  <Enum _uuid="7b00aa39-547e-4d3b-9672-d2a8dcc0d3fe" name="GcPersonEducation" label="教育" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="d07ea303-f082-4d50-afb0-d97f1c495153" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="cdb9c6de-b881-4e36-836a-a7a20ef12274" name="HighschoolLess" label="高中以下" is_valid="Y" note="M#" />
+    <Item _uuid="918c85e6-cf34-4f76-8967-549b0837baaa" name="CollegeOrBachelor" label="大专或本科" is_valid="Y" note="M#" />
+    <Item _uuid="c112235f-443c-4907-b330-c33a730c6820" name="MasterOrMasterUp" label="硕士或硕士以上" is_valid="Y" note="M#" />
+  </Enum>
+  <Enum _uuid="44e3da86-8fe8-4bd5-b2b7-0b780bce989d" name="GcPersonBusiness" label="职业" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="04ac1666-4f8b-4cad-9746-81682c87114b" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="dfc81303-497a-4d0c-8143-be5f11d8b310" name="Financial" label="金融" is_valid="Y" note="M#" />
+    <Item _uuid="06ab888e-503d-4a87-85fe-8ebe2cc73225" name="Science" label="科技" is_valid="Y" note="M#" />
+    <Item _uuid="b5574c64-4ed0-4749-ab25-77e8d4d5a0fa" name="Education" label="教育" is_valid="Y" note="M#" />
+    <Item _uuid="25df3d6a-2ea6-4fed-a016-5be528fcffa5" name="Transport" label="运输" is_valid="Y" note="M#" />
+    <Item _uuid="d9fd898c-874b-4fd7-9cfd-4171cff93d61" name="HouseProperty" label="房产" is_valid="Y" note="M#" />
+    <Item _uuid="1cf1cc31-7d0e-4363-8738-0577bb6c6962" name="Manufacture" label="制造" is_valid="Y" note="M#" />
+    <Item _uuid="cecba3ec-27ba-45d5-86a3-7ff2ab0f2eb2" name="Restaurant" label="餐饮" is_valid="Y" note="M#" />
+    <Item _uuid="bd8fe89e-ae2a-4224-ba22-2fc1c5a09f71" name="Advertisement" label="广告" is_valid="Y" note="M#" />
+    <Item _uuid="3d618c41-42a7-40b2-8fa6-76ec17d08249" name="Tourism" label="旅游" is_valid="Y" note="M#" />
+  </Enum>
+  <Enum _uuid="577aa600-c904-49bf-bbd6-68c532ba4e0c" name="GcPersonIncome" label="月收入" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="bb3b932a-2075-4cca-8575-c0ccc669593f" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="8a461623-0873-4ff7-9226-ea64832dc1a2" name="LessThan5000" label="5000以下" is_valid="Y" note="M#" />
+    <Item _uuid="a6571a22-b162-4ad9-92b8-28fb83c0f010" name="In5000to10000" label="5000－10000" is_valid="Y" note="M#" />
+    <Item _uuid="47161342-04f1-438d-a923-65efef4d471f" name="In10000to50000" label="10000－50000" is_valid="Y" note="M#" />
+    <Item _uuid="6eaf46d2-bb35-4338-8cef-205b7008f3b4" name="MoreThan50000" label="50000以上" is_valid="Y" note="M#" />
+  </Enum>
 </Group>

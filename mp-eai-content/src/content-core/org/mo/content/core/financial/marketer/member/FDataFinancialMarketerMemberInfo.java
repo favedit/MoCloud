@@ -6,8 +6,8 @@ import org.mo.com.lang.type.TDateTime;
 
 public class FDataFinancialMarketerMemberInfo
       extends FDataFinancialMarketerMemberUnit
-//      implements
-//         Comparable<FDataFinancialMarketerMemberInfo>
+      implements
+         Comparable<FDataFinancialMarketerMemberInfo>
 {
    // 成员唯一码
    protected String _memberGuid;
@@ -23,6 +23,18 @@ public class FDataFinancialMarketerMemberInfo
 
    // 成员评分
    protected int _memberRecommendScore;
+
+   // 姓别
+
+   // 最高学历
+
+   // 月收入
+
+   // 职业
+
+   //城市
+   // 邮箱
+   // 
 
    // 剩余天数
    protected int _remainingDays;
@@ -85,17 +97,19 @@ public class FDataFinancialMarketerMemberInfo
       super.saveMap(map);
    }
 
-   //   @Override
-   //   public int compareTo(FDataFinancialMarketerMemberInfo o){
-   //      if(o != null){
-   //         if(this._memberRecommendScore > o._memberRecommendScore){
-   //            return 1;
-   //         }else if(this._memberRecommendScore == o._memberRecommendScore){
-   //            return 0;
-   //         }else{
-   //            return -1;
-   //         }
-   //      }
-   //      return 0;
-   //   }
+   @Override
+   public int compareTo(FDataFinancialMarketerMemberInfo o){
+
+      if(o != null){
+         if(this._memberRecommendScore > o._memberRecommendScore){
+            return 1;
+         }else if(this._memberRecommendScore == o._memberRecommendScore){
+            return 0;
+         }else{
+            return -1;
+         }
+
+      }
+      return 0;
+   }
 }

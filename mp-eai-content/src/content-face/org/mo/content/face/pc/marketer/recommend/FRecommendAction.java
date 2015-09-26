@@ -172,17 +172,24 @@ public class FRecommendAction
                             ILogicContext logicContext,
                             FBasePage basePage,
                             FRecommendPage page){
+      String guid = context.parameter("id");
+      if(RString.isEmpty(guid)){
+         return "/apl/message/LogicFatal";
+      }
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "memberInfo", "memberInfo default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       if(user != null){
          page.setLabel(user.label());
       }
-      String guid = context.parameter("id");
-      if(RString.isEmpty(guid)){
+
+      FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+      if(marketer == null){
          return "/apl/message/LogicFatal";
       }
-      FDataFinancialMemberInfo unit = _memberConsole.findInfoByGuid(logicContext, guid);
+
+      FDataFinancialMemberInfo unit = _memberConsole.findInfoByGuid(logicContext, marketer.ouid(), guid);
+
       if(unit == null){
          return "/apl/message/LogicFatal";
       }

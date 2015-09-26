@@ -60,6 +60,15 @@ public class EGcFinancialMemberFeedback
    // 对产品不满意标签
    public final static String NSWithProductLabel = "对产品不满意";
 
+   // 周期结束
+   public final static int EndOfCycle = 5;
+
+   // 周期结束字符串
+   public final static String EndOfCycleString = "EndOfCycle";
+
+   // 周期结束标签
+   public final static String EndOfCycleLabel = "周期结束";
+
    //============================================================
    // <T>是否含有指定内容</T>
    //
@@ -100,6 +109,8 @@ public class EGcFinancialMemberFeedback
             return NIIntentionsString;
          case NSWithProduct:
             return NSWithProductString;
+         case EndOfCycle:
+            return EndOfCycleString;
          default:
             return "Unknown";
       }
@@ -123,6 +134,8 @@ public class EGcFinancialMemberFeedback
             return NIIntentionsLabel;
          case NSWithProduct:
             return NSWithProductLabel;
+         case EndOfCycle:
+            return EndOfCycleLabel;
          default:
             return "Unknown";
       }
@@ -146,6 +159,8 @@ public class EGcFinancialMemberFeedback
             return NIIntentions;
          case NSWithProductString:
             return NSWithProduct;
+         case EndOfCycleString:
+            return EndOfCycle;
          default:
             return 0;
       }

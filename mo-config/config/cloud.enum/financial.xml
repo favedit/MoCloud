@@ -27,5 +27,6 @@
     <Item _uuid="853798bd-ea76-4b1b-8768-111d91c4b387" name="POFProduct" label="已购买其它理财产品" is_valid="Y" note="M#" />
     <Item _uuid="659cfe28-d12b-44d1-bdb8-8ca0c93ff386" name="NIIntentions" label="没有投资意向" is_valid="Y" note="M#" />
     <Item _uuid="150d2a83-99f2-4894-8044-ee382d218b75" name="NSWithProduct" label="对产品不满意" is_valid="Y" note="M#" />
+    <Item _uuid="70bc1191-f7bf-4c42-97e7-3aac0ae179d7" name="EndOfCycle" label="周期结束" is_valid="Y" note="M#" />
   </Enum>
 </Group>

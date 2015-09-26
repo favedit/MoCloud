@@ -70,7 +70,7 @@ $(document).ready(function() {
     };
     setAjax("/pc/marketer/member/Followed.wa?do=removeRelation", data, function(data) {
       if (data) {
-        location.href = "/pc/marketer/recommend/Recommend.wa";
+        location.href = "/pc/marketer/member/Followed.wa";
       } else {
         self.attr("disabled", false);
         shutDown();

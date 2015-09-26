@@ -5,7 +5,7 @@
       
             <div class="imag-container">
                <div class="details">
-                  <p class="title"><a href="">返回关注用户列表>></a></p>
+                  <p class="title"><a href="/pc/marketer/member/Followed.wa">返回关注用户列表>></a></p>
                   <div class="details-l">
                      <h4>
                          <b style="width:22%"><jh:write source="&member.label" /></b>
@@ -16,22 +16,22 @@
                          </i>
                       </h4>
                      <p>性别：
-                        <jh:write source="&member.genderCd" />
+                        <jh:write source="&member.genderLabel" />
                      </p>
                      <p>客户评分：
                         <jh:write source="&member.recommendScore" />
                      </p>
                      <p>最高学历：
-                        <jh:write source="&member.educationCd" />
+                        <jh:write source="&member.educationLabel" />
                      </p>
                      <p>月收入：
-                        <jh:write source="&member.incomeCd" />
+                        <jh:write source="&member.incomeLabel" />
                      </p>
                      <p>职业：
-                        <jh:write source="&member.businessCd" />
+                        <jh:write source="&member.businessLabel" />
                      </p>
                      <p>城市：
-                        <jh:write source="&member.cityId" />
+                        <jh:write source="&member.cityLabel" />
                      </p>
                      <p>邮箱：
                         <jh:write source="&member.email" />

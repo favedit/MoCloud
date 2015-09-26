@@ -4,6 +4,10 @@ import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerMemberUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
+import com.cyou.gccloud.define.enums.core.EGcPersonBusiness;
+import com.cyou.gccloud.define.enums.core.EGcPersonEducation;
+import com.cyou.gccloud.define.enums.core.EGcPersonGender;
+import com.cyou.gccloud.define.enums.core.EGcPersonIncome;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.lang.EResult;
@@ -64,8 +68,8 @@ public class FDataMemberConsole
       }
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
       FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-
-      FLogicDataset<FDataFinancialMemberInfo> List = logic.fetchClass(FDataFinancialMemberInfo.class, null, _pageSize, pageNum);
+      String order = FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC ";
+      FLogicDataset<FDataFinancialMemberInfo> List = logic.fetchClass(FDataFinancialMemberInfo.class, null, order, _pageSize, pageNum);
       FLogicDataset<FDataFinancialMemberInfo> resultList = new FLogicDataset<>(FDataFinancialMemberInfo.class);
       for(FDataFinancialMemberInfo unit : List){
          //获取年龄
@@ -115,15 +119,16 @@ public class FDataMemberConsole
             _logger.debug(this, "Follow", "Follow this member is null.(memberId={1})", guid);
             return EResult.Failure;
          }
-         //          检查此理财师是否关注过此成员
-         //         FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMarketerAndMember(logicContext, marketerId, member.ouid());
+         // 检查此成员是否被其它理财师关注过
+         FDataFinancialMarketerMemberUnit followed = _marketerMemberConsole.findFollowed(logicContext, member.ouid());
+         if(followed != null){
+            _logger.debug(this, "Follow", "Follow this member is followed by other Marketer.(memberId={1})", member.ouid());
+            return EResult.Failure;
+         }
 
-         // 检查理财师是否关注
-         //         FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMemberId(logicContext, member.ouid());
+         // 检查此理财师是否关注过此成员
          FDataFinancialMarketerMemberUnit mmUnit = _marketerMemberConsole.findByMarketerAndMember(logicContext, marketerId, member.ouid());
          if(mmUnit == null){//没有关注过此成员
-            //            _logger.debug(this, "Follow", "Follow this member followd.(memberId={1})", member.ouid());
-            //            return EResult.Failure;
             // 关联理财师和用户的关系
             FDataFinancialMarketerMemberUnit MMNewUnit = new FDataFinancialMarketerMemberUnit();
             MMNewUnit.setMarketerId(marketerId);
@@ -146,6 +151,7 @@ public class FDataMemberConsole
                return EResult.Failure;
             }
          }
+         //修改成员中被推荐的时间
          return EResult.Success;
       }catch(Exception e){
          e.printStackTrace();
@@ -178,16 +184,29 @@ public class FDataMemberConsole
    // ============================================================
    @Override
    public FDataFinancialMemberInfo findInfoByGuid(ILogicContext logicContext,
+                                                  long marketerId,
                                                   String guid){
       FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
       FDataFinancialMemberInfo member = logic.findByGuid(FDataFinancialMemberInfo.class, guid);
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
+      member.setGenderLabel(EGcPersonGender.formatLabel(member.genderCd()));
+      member.setEducationLabel(EGcPersonEducation.formatLabel(member.educationCd()));
+      member.setIncomeLabel(EGcPersonIncome.formatLabel(member.incomeCd()));
+      member.setBusinessLabel(EGcPersonBusiness.formatLabel(member.businessCd()));
+      //年龄
       if(!member.birthday().isEmpty()){
          member.setAge(nowDate.year() - member.birthday().year());
       }
-      if(!member.recommendEndDate().isEmpty()){
-         int days = member.recommendEndDate().day() - nowDate.day();
+      //获取城市
+      FDataCommonCityUnit city = _cityConsole.find(logicContext, member.cityId());
+      if(city != null){
+         member.setCityLabel(city.label());
+      }
+      //联络周期
+      FDataFinancialMarketerMemberUnit marketer = _marketerMemberConsole.findFollowedByMarketerAndMember(logicContext, marketerId, member.ouid());
 
+      if(marketer != null && !marketer.recommendEndDate().isEmpty()){
+         int days = marketer.recommendEndDate().day() - nowDate.day();
          member.setRemainingDays((days <= 0) ? 0 : days);
       }
       return member;

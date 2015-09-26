@@ -47,17 +47,33 @@ public interface IDataMarketerMemberConsole
    // <T>获取总页数</T>
    //
    // @param logicContext 链接对象
+   // @param marketerId 理财师编号
    // @return 总页数
    // ============================================================
-   int getPageCount(ILogicContext logicContext);
+   int getPageCount(ILogicContext logicContext,
+                    long marketerId);
 
    // ============================================================
    // <T>获取当前理财师 是否关注过此成员</T>
    //
    // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @param  memberId   成员编号
    // @return 总页数
    // ============================================================
    FDataFinancialMarketerMemberUnit findByMarketerAndMember(ILogicContext logicContext,
                                                             long marketerId,
                                                             long memberId);
+
+   // ============================================================
+   // <T>获取当前理财师是否关注此成员</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @param  memberId   成员编号
+   // @return 总页数
+   // ============================================================
+   FDataFinancialMarketerMemberInfo findFollowedByMarketerAndMember(ILogicContext logicContext,
+                                                                    long marketerId,
+                                                                    long memberId);
 }
