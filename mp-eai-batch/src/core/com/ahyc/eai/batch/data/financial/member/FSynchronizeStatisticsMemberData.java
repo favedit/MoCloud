@@ -280,7 +280,7 @@ public class FSynchronizeStatisticsMemberData
    //根据身份证计算年龄
    public static int getAgeByCard(String idCard){
       _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard", "getAgeByCard start. (idCard={1})", idCard);
-      if(idCard == null || "".equals(idCard)){
+      if(idCard == null || "".equals(idCard) || idCard.length() < 12){
          return -1;
       }
       int iAge = -1;
