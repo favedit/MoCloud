@@ -15,6 +15,11 @@ var $users = $("#users");
     $(this).show();
  });
 })
+// 退出
+function loginOut() {
+    location.href = "Index.wa?do=loginOut";
+}
+
  // 取key
 function getQueryString(name){
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
