@@ -119,7 +119,7 @@ public class FFollowedAction
       int feedbackCd = context.parameterAsInteger("feedbackCd");
       String feedbackNote = context.parameter("feedbackNote");
       _logger.debug(this, "RemoveRelation", "RemoveRelation begin.(guid={1},feedbackCd={2},feedbackNote={3})", guid, feedbackCd, feedbackNote);
-      if(guid.isEmpty() || feedbackCd == 0 || feedbackNote.isEmpty()){
+      if(guid.isEmpty() || feedbackCd == 0){
          page.setMessage("false");
          return "/apl/ajax";
       }

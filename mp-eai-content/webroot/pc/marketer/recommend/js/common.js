@@ -17,7 +17,7 @@ var $users = $("#users");
 })
 // 退出
 function loginOut() {
-    location.href = "Index.wa?do=loginOut";
+    location.href = "/pc/Index.wa?do=loginOut";
 }
 
  // 取key
