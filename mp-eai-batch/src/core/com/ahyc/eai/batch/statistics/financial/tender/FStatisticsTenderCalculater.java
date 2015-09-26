@@ -3,8 +3,6 @@ package com.ahyc.eai.batch.statistics.financial.tender;
 import com.ahyc.eai.batch.common.FStatisticsPeriodCalculater;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderAmountLogic;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderAmountUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderCustomerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderCustomerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
@@ -12,6 +10,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderPhaseLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderPhaseUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
+import org.mo.com.data.FSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
@@ -23,7 +22,7 @@ import org.mo.data.logic.FLogicDataset;
 public class FStatisticsTenderCalculater
       extends FStatisticsPeriodCalculater
 {
-   // 合计间隔(1小时)
+   // 合计间隔(15分钟)
    protected long _recordSpan = 1000 * 60 * 15;
 
    //============================================================
@@ -46,13 +45,13 @@ public class FStatisticsTenderCalculater
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FStatisticsFinancialTenderLogic tenderLogic = logicContext.findLogic(FStatisticsFinancialTenderLogic.class);
       FStatisticsFinancialTenderCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialTenderCustomerLogic.class);
-      FStatisticsFinancialTenderAmountLogic amountLogic = logicContext.findLogic(FStatisticsFinancialTenderAmountLogic.class);
       FStatisticsFinancialTenderPhaseLogic phaseLogic = logicContext.findLogic(FStatisticsFinancialTenderPhaseLogic.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("TENDER_ID IS NOT NULL AND CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endDate
-            + "','%Y%m%d%H%i%s')", "CUSTOMER_ACTION_DATE");
+      FSql whereSql = new FSql("TENDER_ID IS NOT NULL AND CUSTOMER_ACTION_DATE > STR_TO_DATE({begin_date},'%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE({end_date},'%Y%m%d%H%i%s')");
+      whereSql.bindString("begin_date", beginDate);
+      whereSql.bindString("end_date", endDate);
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch(whereSql, "CUSTOMER_ACTION_DATE");
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
-         long recordId = dynamicUnit.ouid();
          long customerId = dynamicUnit.customerId();
          int customerActionCd = dynamicUnit.customerActionCd();
          TDateTime customerActionDate = dynamicUnit.customerActionDate();
@@ -71,15 +70,23 @@ public class FStatisticsTenderCalculater
          if(!customerExist){
             customerUnit = customerLogic.doPrepare();
             customerUnit.setTenderId(tenderId);
+            customerUnit.setTenderLinkId(tenderUnit.linkId());
             customerUnit.setCustomerId(customerId);
+            customerUnit.setCustomerLinkId(dynamicUnit.customerLinkId());
          }
+         int customerInvestmentCount = customerUnit.investmentCount();
          double customerInvestmentTotal = customerUnit.investmentTotal();
+         int customerRedemptionCount = customerUnit.redemptionCount();
          double customerRedemptionTotal = customerUnit.redemptionTotal();
          double customerInterestTotal = customerUnit.interestTotal();
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
+            customerInvestmentCount++;
+            customerUnit.setInvestmentCount(customerInvestmentCount);
             customerInvestmentTotal += customerActionAmount;
             customerUnit.setInvestmentTotal(customerInvestmentTotal);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+            customerRedemptionCount++;
+            customerUnit.setRedemptionCount(customerRedemptionCount);
             customerRedemptionTotal += customerActionAmount;
             customerUnit.setRedemptionTotal(customerRedemptionTotal);
             customerInterestTotal += customerActionInterest;
@@ -94,41 +101,53 @@ public class FStatisticsTenderCalculater
             customerLogic.doInsert(customerUnit);
          }
          //............................................................
-         // 统计合计信息
-         FStatisticsFinancialTenderAmountUnit amountUnit = amountLogic.search("TENDER_ID=" + tenderId);
-         boolean amountExist = (amountUnit != null);
-         if(!amountExist){
-            amountUnit = amountLogic.doPrepare();
-            amountUnit.setTenderId(tenderId);
-            amountUnit.setTenderLabel(tenderUnit.label());
-         }
-         // 计算资金信息
-         double tenderInvestmentTotal = amountUnit.investmentTotal();
-         double tenderRedemptionTotal = amountUnit.redemptionTotal();
-         double tenderInterestTotal = amountUnit.interestTotal();
+         // 更新投标信息
+         int investmentUserCount = tenderUnit.investmentUserCount();
+         int investmentCount = tenderUnit.investmentCount();
+         double tenderInvestmentTotal = tenderUnit.investmentTotal();
+         int redemptionUserCount = tenderUnit.redemptionUserCount();
+         int redemptionCount = tenderUnit.redemptionCount();
+         double tenderRedemptionTotal = tenderUnit.redemptionTotal();
+         double tenderInterestTotal = tenderUnit.interestTotal();
          if(customerActionCd == EGcFinancialCustomerAction.Investment){
+            // 设置时间
+            if(tenderUnit.investmentBeginDate().isEmpty()){
+               tenderUnit.investmentBeginDate().assign(customerActionDate);
+            }
+            tenderUnit.investmentEndDate().assign(customerActionDate);
+            // 设置人数
+            if(customerInvestmentCount == 1){
+               investmentUserCount++;
+               tenderUnit.setInvestmentUserCount(investmentUserCount);
+            }
+            // 设置金额
+            investmentCount++;
+            tenderUnit.setInvestmentCount(investmentCount);
             tenderInvestmentTotal += customerActionAmount;
-            amountUnit.setInvestmentTotal(tenderInvestmentTotal);
+            tenderUnit.setInvestmentTotal(tenderInvestmentTotal);
          }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+            // 设置时间
+            if(tenderUnit.redemptionBeginDate().isEmpty()){
+               tenderUnit.redemptionBeginDate().assign(customerActionDate);
+            }
+            tenderUnit.redemptionEndDate().assign(customerActionDate);
+            // 设置人数
+            if(customerRedemptionCount == 1){
+               redemptionUserCount++;
+               tenderUnit.setRedemptionUserCount(redemptionUserCount);
+            }
+            // 设置金额
+            redemptionCount++;
+            tenderUnit.setRedemptionCount(redemptionCount);
             tenderRedemptionTotal += customerActionAmount;
-            amountUnit.setRedemptionTotal(tenderRedemptionTotal);
+            tenderUnit.setRedemptionTotal(tenderRedemptionTotal);
             tenderInterestTotal += customerActionInterest;
-            amountUnit.setInterestTotal(tenderInterestTotal);
+            tenderUnit.setInterestTotal(tenderInterestTotal);
          }else{
             throw new FFatalError("Marketer action invalid.");
          }
-         amountUnit.setNetinvestmentTotal(tenderInvestmentTotal - tenderRedemptionTotal);
-         // 计算客户信息
-         int customerTotal = amountUnit.customerTotal();
-         if(!customerExist){
-            customerTotal += 1;
-            amountUnit.setCustomerTotal(customerTotal);
-         }
-         if(amountExist){
-            amountLogic.doUpdate(amountUnit);
-         }else{
-            amountLogic.doInsert(amountUnit);
-         }
+         tenderUnit.setNetinvestmentTotal(tenderInvestmentTotal - tenderRedemptionTotal);
+         tenderLogic.doUpdate(tenderUnit);
          //............................................................
          // 插入用户数据
          TDateTime spanDate = new TDateTime(customerActionDate.get());
@@ -144,31 +163,38 @@ public class FStatisticsTenderCalculater
             phaseUnit.recordHour().parse(spanDate.format("YYYYMMDDHH240000"));
             phaseUnit.recordDate().assign(spanDate);
             phaseUnit.setTenderId(tenderUnit.ouid());
-            phaseUnit.setTenderModel(tenderUnit.borrowModel());
+            phaseUnit.setTenderLinkId(tenderUnit.linkId());
             phaseUnit.setTenderLabel(tenderUnit.label());
+            phaseUnit.setTenderModel(tenderUnit.borrowModel());
          }
-         phaseUnit.setLinkId(recordId);
-         phaseUnit.linkDate().assign(dynamicUnit.updateDate());
-         // 计算资金信息
-         if(customerActionCd == EGcFinancialCustomerAction.Investment){
-            phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);
-         }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
-            phaseUnit.setRedemption(phaseUnit.redemption() + customerActionAmount);
-            phaseUnit.setInterest(phaseUnit.interest() + customerActionInterest);
-         }else{
-            throw new FFatalError("Tender action invalid.");
-         }
-         phaseUnit.setInvestmentTotal(tenderInvestmentTotal);
-         phaseUnit.setRedemptionTotal(tenderRedemptionTotal);
-         phaseUnit.setNetinvestment(phaseUnit.investment() - phaseUnit.redemption());
-         phaseUnit.setNetinvestmentTotal(tenderInvestmentTotal - tenderRedemptionTotal);
-         phaseUnit.setInterestTotal(tenderInterestTotal);
          // 计算客户信息
-         phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
          if(!customerExist){
             phaseUnit.setCustomerCount(phaseUnit.customerCount() + 1);
          }
-         phaseUnit.setCustomerTotal(customerTotal);
+         phaseUnit.setCustomerTotal(investmentUserCount);
+         // 计算资金信息
+         if(customerActionCd == EGcFinancialCustomerAction.Investment){
+            if(customerInvestmentCount == 1){
+               phaseUnit.setInvestmentUserCount(phaseUnit.investmentUserCount() + 1);
+            }
+            phaseUnit.setInvestmentCount(phaseUnit.investmentCount() + 1);
+            phaseUnit.setInvestment(phaseUnit.investment() + customerActionAmount);
+            phaseUnit.setInvestmentTotal(tenderInvestmentTotal);
+         }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+            if(customerRedemptionCount == 1){
+               phaseUnit.setRedemptionUserCount(phaseUnit.redemptionUserCount() + 1);
+            }
+            phaseUnit.setRedemptionCount(phaseUnit.redemptionCount() + 1);
+            phaseUnit.setRedemption(phaseUnit.redemption() + customerActionAmount);
+            phaseUnit.setRedemptionTotal(tenderRedemptionTotal);
+            phaseUnit.setInterest(phaseUnit.interest() + customerActionInterest);
+            phaseUnit.setInterestTotal(tenderInterestTotal);
+         }else{
+            throw new FFatalError("Tender action invalid.");
+         }
+         // 计算金额
+         phaseUnit.setNetinvestment(phaseUnit.investment() - phaseUnit.redemption());
+         phaseUnit.setNetinvestmentTotal(tenderInvestmentTotal - tenderRedemptionTotal);
          if(phaseExist){
             phaseLogic.doUpdate(phaseUnit);
          }else{

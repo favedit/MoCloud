@@ -425,6 +425,58 @@ ALTER TABLE DT_CTL_ROLE_MODULE ADD CONSTRAINT DT_CTL_ROL_MOD_FK_MOD
       FOREIGN KEY (`MODULE_ID`) REFERENCES DT_CTL_MODULE(`OUID`); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Logic.News]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_LGC_NEWS`;
+CREATE TABLE `DT_LGC_NEWS` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LABEL`                         VARCHAR(200), 
+   `ICON_URL`                      VARCHAR(200), 
+   `STATUS_CD`                     INTEGER, 
+   `DISPLAY_CD`                    INTEGER, 
+   `DISPLAY_ORDER`                 INTEGER, 
+   `RECORD_DATE`                   DATETIME, 
+   `KEYWORDS`                      VARCHAR(800), 
+   `DESCRIPTION`                   VARCHAR(2000), 
+   `CONTENT`                       TEXT, 
+   `VIEW_COUNT`                    INTEGER, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_LGC_NEWS 
+   ADD CONSTRAINT DT_LGC_NEW_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Logic.Message]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_LGC_MESSAGE`;
+CREATE TABLE `DT_LGC_MESSAGE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(200), 
+   `DISPLAY_CD`                    INTEGER, 
+   `STATUS_CD`                     INTEGER, 
+   `DESCRIPTION`                   VARCHAR(2000), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_LGC_MESSAGE 
+   ADD CONSTRAINT DT_LGC_MSG_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
 -- Create table [Data.Solution.Project]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_SOL_PROJECT`;

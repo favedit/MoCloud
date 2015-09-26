@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.select'><![CDATA[
+SELECT
+   id,
+   invest_id,
+   sell_uid,
+   FROM_UNIXTIME(addtime, '%Y%m%d%H%i%s') AS action_date,
+   transfer_price,
+   DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date
+FROM lzh_invest_detb
+WHERE id > {begin_id}
+   AND id <= {end_id}
+]]></Resource>
+
+</Config>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid2="503969e8-edbc-46d0-99dd-1e24c1cc2337" name="data.logic.news" label="M#12cn15业务资讯表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.News" data_name="DT_LGC_NEWS" data_alias="DT_LGC_NEW" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldString _uuid2="90688e1e-eaa6-4afc-b4aa-821075c7d1f6" name="label" label="M#12cn14资讯标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid2="df38b448-5f53-4bb6-b884-062d3c724ce1" name="icon_url" label="M#12cn14资讯图标" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldInteger _uuid2="06041324-dc95-4cf9-b74f-11da75e0ff65" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldInteger _uuid2="79fdf77b-d34d-4b76-8e39-fde51f13f34a" name="display_cd" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid2="dbf50e74-33df-41ad-ab11-a1dc1038e56b" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldDateTime _uuid2="dc5d1ef0-43ef-4f31-a29d-19d7c3a13e1f" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECORD_DATE" />
+  <FieldString _uuid2="a288328e-8659-47ec-8c75-3662a1e6ea74" name="keywords" label="M#12cn13关键字" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORDS" data_size="800" />
+  <FieldString _uuid2="e13f40d8-40a1-4613-8f69-fcf8d2a3632d" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldContent _uuid2="02de6938-01c4-4fde-92d3-adfff68f2d43" name="content" label="M#12cn14资讯内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldInteger _uuid2="83c936e5-0e40-40da-be6a-588bebdc53ea" name="view_count" label="M#12cn14浏览次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
+  <FieldTemplate _uuid2="b7d1b65a-73d2-4a73-9e79-e138ccf7b938" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

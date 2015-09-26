@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.statistics;
+package com.cyou.gccloud.data.data;
 
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -10,6 +10,7 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -20,17 +21,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>投标数据统计表逻辑。</T>
+// <T>业务资讯表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialTenderAmountLogic
+public class FDataLogicNewsLogic
       extends FLogicTable
 {
-   // 投标数据统计表的定义。
-   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("statistics");
+   // 业务资讯表的定义。
+   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 投标数据统计表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("statistics.financial.tender.amount", "ST_FIN_TENDER_AMOUNT");
+   // 业务资讯表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.logic.news", "DT_LGC_NEWS");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -41,29 +42,35 @@ public class FStatisticsFinancialTenderAmountLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段投标编号的定义。
-   public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
+   // 字段资讯标题的定义。
+   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段竞标名称的定义。
-   public final static SLogicFieldInfo TENDER_LABEL = new SLogicFieldInfo("TENDER_LABEL");
+   // 字段资讯图标的定义。
+   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
 
-   // 字段投资模式的定义。
-   public final static SLogicFieldInfo TENDER_MODEL = new SLogicFieldInfo("TENDER_MODEL");
+   // 字段状态的定义。
+   public final static SLogicFieldInfo STATUS_CD = new SLogicFieldInfo("STATUS_CD");
 
-   // 字段净投总计的定义。
-   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
+   // 字段是否显示的定义。
+   public final static SLogicFieldInfo DISPLAY_CD = new SLogicFieldInfo("DISPLAY_CD");
 
-   // 字段赎回总计的定义。
-   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
+   // 字段排序值的定义。
+   public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
 
-   // 字段利息的定义。
-   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+   // 字段记录日期的定义。
+   public final static SLogicFieldInfo RECORD_DATE = new SLogicFieldInfo("RECORD_DATE");
 
-   // 字段净投总数的定义。
-   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
+   // 字段关键字的定义。
+   public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
 
-   // 字段客户总数的定义。
-   public final static SLogicFieldInfo CUSTOMER_TOTAL = new SLogicFieldInfo("CUSTOMER_TOTAL");
+   // 字段描述的定义。
+   public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
+
+   // 字段资讯内容的定义。
+   public final static SLogicFieldInfo CONTENT = new SLogicFieldInfo("CONTENT");
+
+   // 字段浏览次数的定义。
+   public final static SLogicFieldInfo VIEW_COUNT = new SLogicFieldInfo("VIEW_COUNT");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -78,25 +85,25 @@ public class FStatisticsFinancialTenderAmountLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`TENDER_LABEL`,`TENDER_MODEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CUSTOMER_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LABEL`,`ICON_URL`,`STATUS_CD`,`DISPLAY_CD`,`DISPLAY_ORDER`,`RECORD_DATE`,`KEYWORDS`,`DESCRIPTION`,`CONTENT`,`VIEW_COUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造投标数据统计表逻辑单元。</T>
+   // <T>构造业务资讯表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialTenderAmountLogic(){
+   public FDataLogicNewsLogic(){
       _name = TABLE.name();
-      _classUnit = FStatisticsFinancialTenderAmountUnit.class;
+      _classUnit = FDataLogicNewsUnit.class;
    }
 
    //============================================================
-   // <T>构造投标数据统计表逻辑单元。</T>
+   // <T>构造业务资讯表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FStatisticsFinancialTenderAmountLogic(ILogicContext context){
+   public FDataLogicNewsLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FStatisticsFinancialTenderAmountUnit.class;
+      _classUnit = FDataLogicNewsUnit.class;
    }
 
    //============================================================
@@ -230,7 +237,7 @@ public class FStatisticsFinancialTenderAmountLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FStatisticsFinancialTenderAmountUnit());
+            unit = (T)(new FDataLogicNewsUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -246,8 +253,8 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FStatisticsFinancialTenderAmountUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FStatisticsFinancialTenderAmountUnit.class, guid);
+   public FDataLogicNewsUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataLogicNewsUnit.class, guid);
    }
 
    //============================================================
@@ -285,8 +292,8 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FStatisticsFinancialTenderAmountUnit search(CharSequence whereSql){
-      return search(null, FStatisticsFinancialTenderAmountUnit.class, whereSql);
+   public FDataLogicNewsUnit search(CharSequence whereSql){
+      return search(null, FDataLogicNewsUnit.class, whereSql);
    }
 
    //============================================================
@@ -323,7 +330,7 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -334,8 +341,8 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(int pageSize,
-                                                                    int page){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(int pageSize,
+                                                  int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -347,9 +354,9 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(CharSequence whereSql,
-                                                                    int pageSize,
-                                                                    int page){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(CharSequence whereSql,
+                                                  int pageSize,
+                                                  int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -362,8 +369,8 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(CharSequence whereSql,
-                                                                    CharSequence orderSql){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(CharSequence whereSql,
+                                                  CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -376,10 +383,10 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(CharSequence whereSql,
-                                                                    CharSequence orderSql,
-                                                                    int pageSize,
-                                                                    int page){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(CharSequence whereSql,
+                                                  CharSequence orderSql,
+                                                  int pageSize,
+                                                  int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -393,11 +400,11 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(CharSequence fields,
-                                                                    CharSequence whereSql,
-                                                                    CharSequence orderSql,
-                                                                    int pageSize,
-                                                                    int page){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(CharSequence fields,
+                                                  CharSequence whereSql,
+                                                  CharSequence orderSql,
+                                                  int pageSize,
+                                                  int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -411,12 +418,12 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetch(CharSequence fields,
-                                                                    CharSequence whereSql,
-                                                                    CharSequence groupSql,
-                                                                    CharSequence orderSql,
-                                                                    int pageSize,
-                                                                    int page){
+   public FLogicDataset<FDataLogicNewsUnit> fetch(CharSequence fields,
+                                                  CharSequence whereSql,
+                                                  CharSequence groupSql,
+                                                  CharSequence orderSql,
+                                                  int pageSize,
+                                                  int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -557,10 +564,10 @@ public class FStatisticsFinancialTenderAmountLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetchSql(CharSequence code,
-                                                                       CharSequence sql,
-                                                                       int pageSize,
-                                                                       int page){
+   public FLogicDataset<FDataLogicNewsUnit> fetchSql(CharSequence code,
+                                                     CharSequence sql,
+                                                     int pageSize,
+                                                     int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -585,7 +592,7 @@ public class FStatisticsFinancialTenderAmountLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FStatisticsFinancialTenderAmountUnit>(FStatisticsFinancialTenderAmountUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataLogicNewsUnit>(FDataLogicNewsUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -598,7 +605,7 @@ public class FStatisticsFinancialTenderAmountLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FStatisticsFinancialTenderAmountUnit> fetchAll(){
+   public FLogicDataset<FDataLogicNewsUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -611,8 +618,8 @@ public class FStatisticsFinancialTenderAmountLogic
    //
    // @return 数据单元
    //============================================================
-   public FStatisticsFinancialTenderAmountUnit doPrepare(){
-      FStatisticsFinancialTenderAmountUnit unit = new FStatisticsFinancialTenderAmountUnit();
+   public FDataLogicNewsUnit doPrepare(){
+      FDataLogicNewsUnit unit = new FDataLogicNewsUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -639,7 +646,7 @@ public class FStatisticsFinancialTenderAmountLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FStatisticsFinancialTenderAmountUnit unit = (FStatisticsFinancialTenderAmountUnit)logicUnit;
+      FDataLogicNewsUnit unit = (FDataLogicNewsUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -653,7 +660,7 @@ public class FStatisticsFinancialTenderAmountLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FStatisticsFinancialTenderAmountUnit unit = (FStatisticsFinancialTenderAmountUnit)logicUnit;
+      FDataLogicNewsUnit unit = (FDataLogicNewsUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
@@ -674,14 +681,16 @@ public class FStatisticsFinancialTenderAmountLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`TENDER_ID`");
-      cmd.append(",`TENDER_LABEL`");
-      cmd.append(",`TENDER_MODEL`");
-      cmd.append(",`INVESTMENT_TOTAL`");
-      cmd.append(",`REDEMPTION_TOTAL`");
-      cmd.append(",`INTEREST_TOTAL`");
-      cmd.append(",`NETINVESTMENT_TOTAL`");
-      cmd.append(",`CUSTOMER_TOTAL`");
+      cmd.append(",`LABEL`");
+      cmd.append(",`ICON_URL`");
+      cmd.append(",`STATUS_CD`");
+      cmd.append(",`DISPLAY_CD`");
+      cmd.append(",`DISPLAY_ORDER`");
+      cmd.append(",`RECORD_DATE`");
+      cmd.append(",`KEYWORDS`");
+      cmd.append(",`DESCRIPTION`");
+      cmd.append(",`CONTENT`");
+      cmd.append(",`VIEW_COUNT`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -701,40 +710,69 @@ public class FStatisticsFinancialTenderAmountLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      long tenderId = unit.tenderId();
-      if(tenderId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(tenderId);
-      }
-      cmd.append(',');
-      String tenderLabel = unit.tenderLabel();
-      if(RString.isEmpty(tenderLabel)){
+      String label = unit.label();
+      if(RString.isEmpty(label)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(tenderLabel));
+         cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
       cmd.append(',');
-      String tenderModel = unit.tenderModel();
-      if(RString.isEmpty(tenderModel)){
+      String iconUrl = unit.iconUrl();
+      if(RString.isEmpty(iconUrl)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(tenderModel));
+         cmd.append(RSql.formatValue(iconUrl));
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.investmentTotal());
+      cmd.append(unit.statusCd());
       cmd.append(',');
-      cmd.append(unit.redemptionTotal());
+      cmd.append(unit.displayCd());
       cmd.append(',');
-      cmd.append(unit.interestTotal());
+      cmd.append(unit.displayOrder());
       cmd.append(',');
-      cmd.append(unit.netinvestmentTotal());
+      TDateTime recordDate = unit.recordDate();
+      if(recordDate == null){
+         cmd.append("NULL");
+      }else if(recordDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(recordDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
       cmd.append(',');
-      cmd.append(unit.customerTotal());
+      String keywords = unit.keywords();
+      if(RString.isEmpty(keywords)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(keywords));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String description = unit.description();
+      if(RString.isEmpty(description)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(description));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String content = unit.content();
+      if(RString.isEmpty(content)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(content));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.viewCount());
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -770,7 +808,7 @@ public class FStatisticsFinancialTenderAmountLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FStatisticsFinancialTenderAmountUnit unit = (FStatisticsFinancialTenderAmountUnit)logicUnit;
+      FDataLogicNewsUnit unit = (FDataLogicNewsUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -789,7 +827,7 @@ public class FStatisticsFinancialTenderAmountLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FStatisticsFinancialTenderAmountUnit unit = (FStatisticsFinancialTenderAmountUnit)logicUnit;
+      FDataLogicNewsUnit unit = (FDataLogicNewsUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -809,56 +847,89 @@ public class FStatisticsFinancialTenderAmountLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isTenderIdChanged()){
-         cmd.append(",`TENDER_ID`=");
-         long tenderId = unit.tenderId();
-         if(tenderId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(tenderId);
-         }
-      }
-      if(unit.isTenderLabelChanged()){
-         cmd.append(",`TENDER_LABEL`=");
-         String tenderLabel = unit.tenderLabel();
-         if(RString.isEmpty(tenderLabel)){
+      if(unit.isLabelChanged()){
+         cmd.append(",`LABEL`=");
+         String label = unit.label();
+         if(RString.isEmpty(label)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(tenderLabel));
+            cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
       }
-      if(unit.isTenderModelChanged()){
-         cmd.append(",`TENDER_MODEL`=");
-         String tenderModel = unit.tenderModel();
-         if(RString.isEmpty(tenderModel)){
+      if(unit.isIconUrlChanged()){
+         cmd.append(",`ICON_URL`=");
+         String iconUrl = unit.iconUrl();
+         if(RString.isEmpty(iconUrl)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(tenderModel));
+            cmd.append(RSql.formatValue(iconUrl));
             cmd.append('\'');
          }
       }
-      if(unit.isInvestmentTotalChanged()){
-         cmd.append(",`INVESTMENT_TOTAL`=");
-         cmd.append(unit.investmentTotal());
+      if(unit.isStatusCdChanged()){
+         cmd.append(",`STATUS_CD`=");
+         cmd.append(unit.statusCd());
       }
-      if(unit.isRedemptionTotalChanged()){
-         cmd.append(",`REDEMPTION_TOTAL`=");
-         cmd.append(unit.redemptionTotal());
+      if(unit.isDisplayCdChanged()){
+         cmd.append(",`DISPLAY_CD`=");
+         cmd.append(unit.displayCd());
       }
-      if(unit.isInterestTotalChanged()){
-         cmd.append(",`INTEREST_TOTAL`=");
-         cmd.append(unit.interestTotal());
+      if(unit.isDisplayOrderChanged()){
+         cmd.append(",`DISPLAY_ORDER`=");
+         cmd.append(unit.displayOrder());
       }
-      if(unit.isNetinvestmentTotalChanged()){
-         cmd.append(",`NETINVESTMENT_TOTAL`=");
-         cmd.append(unit.netinvestmentTotal());
+      if(unit.isRecordDateChanged()){
+         cmd.append(",`RECORD_DATE`=");
+         TDateTime recordDate = unit.recordDate();
+         if(recordDate == null){
+            cmd.append("NULL");
+         }else if(recordDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(recordDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
       }
-      if(unit.isCustomerTotalChanged()){
-         cmd.append(",`CUSTOMER_TOTAL`=");
-         cmd.append(unit.customerTotal());
+      if(unit.isKeywordsChanged()){
+         cmd.append(",`KEYWORDS`=");
+         String keywords = unit.keywords();
+         if(RString.isEmpty(keywords)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(keywords));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDescriptionChanged()){
+         cmd.append(",`DESCRIPTION`=");
+         String description = unit.description();
+         if(RString.isEmpty(description)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(description));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isContentChanged()){
+         cmd.append(",`CONTENT`=");
+         String content = unit.content();
+         if(RString.isEmpty(content)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(content));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isViewCountChanged()){
+         cmd.append(",`VIEW_COUNT`=");
+         cmd.append(unit.viewCount());
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
@@ -880,7 +951,7 @@ public class FStatisticsFinancialTenderAmountLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FStatisticsFinancialTenderAmountUnit unit = (FStatisticsFinancialTenderAmountUnit)logicUnit;
+      FDataLogicNewsUnit unit = (FDataLogicNewsUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

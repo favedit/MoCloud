@@ -11,14 +11,16 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerGender;
 import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.data.ISqlDatasetReader;
 import org.mo.com.lang.RString;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
 import org.mo.eai.core.common.EEaiDataConnection;
@@ -29,6 +31,9 @@ import org.mo.eai.core.common.EEaiDataConnection;
 public class FStatisticsInvestmentCalculater
       extends FStatisticsCalculater
 {
+   // 资源访问接口
+   private static IResource _resource = RResource.find(FStatisticsInvestmentCalculater.class);
+
    // 同步总数
    protected long _intervalCount = 10000;
 
@@ -57,11 +62,11 @@ public class FStatisticsInvestmentCalculater
       ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
       FStatisticsFinancialCustomerLogic customerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
-      FStatisticsFinancialTenderLogic tenderLogic = logicContext.findLogic(FStatisticsFinancialTenderLogic.class);
       IStatisticsTenderConsole tenderConsole = RAop.find(IStatisticsTenderConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      String selectSql = RString.format("SELECT id,borrow_id,investor_uid,FROM_UNIXTIME(add_time, '%Y%m%d%H%i%s') as investor_date,investor_capital,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_borrow_investor WHERE id>{1} AND id<={2}",
-            beginId, endId);
+      FSql selectSql = _resource.findString(FSql.class, "sql.select");
+      selectSql.bindLong("begin_id", beginId);
+      selectSql.bindLong("end_id", endId);
       try(ISqlDatasetReader reader = sourceConnection.fetchReader(selectSql)){
          for(FRow row : reader){
             long recordId = row.getLong("id");
@@ -110,15 +115,6 @@ public class FStatisticsInvestmentCalculater
                tenderId = tenderUnit.ouid();
                tenderLinkId = tenderUnit.linkId();
                tenderModel = tenderUnit.borrowModel();
-               // 更新投资数据
-               tenderUnit.setInvestmentCount(tenderUnit.investmentCount() + 1);
-               tenderUnit.setInvestmentTotal(tenderUnit.investmentTotal() + investment);
-               tenderUnit.setNetinvestmentTotal(tenderUnit.investmentTotal() - tenderUnit.redemptionTotal());
-               if(tenderUnit.investmentBeginDate().isEmpty()){
-                  tenderUnit.investmentBeginDate().parse(actionDate);
-               }
-               tenderUnit.investmentEndDate().parse(actionDate);
-               tenderLogic.doUpdate(tenderUnit);
             }
             //............................................................
             // 新建记录

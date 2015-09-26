@@ -426,12 +426,15 @@ CREATE TABLE `ST_FIN_TENDER_CUSTOMER`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `TENDER_ID`                     BIGINT, 
+   `TENDER_LINK_ID`                BIGINT, 
    `CUSTOMER_ID`                   BIGINT, 
-   `LINK_DATE`                     DATETIME, 
+   `CUSTOMER_LINK_ID`              BIGINT, 
+   `INVESTMENT_COUNT`              INTEGER, 
    `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_COUNT`              INTEGER, 
    `REDEMPTION_TOTAL`              DOUBLE, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
    `INTEREST_TOTAL`                DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
    `PERFORMANCE_TOTAL`             DOUBLE, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -444,35 +447,6 @@ ALTER TABLE ST_FIN_TENDER_CUSTOMER
 
 ALTER TABLE ST_FIN_TENDER_CUSTOMER 
    ADD CONSTRAINT ST_FIN_TND_CST_UK_CST UNIQUE ( TENDER_ID, CUSTOMER_ID ); 
-
--- ------------------------------------------------------------
--- Create table [Statistics.Financial.Tender.Amount]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `ST_FIN_TENDER_AMOUNT`;
-CREATE TABLE `ST_FIN_TENDER_AMOUNT` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `TENDER_ID`                     BIGINT NOT NULL, 
-   `TENDER_LABEL`                  VARCHAR(40), 
-   `TENDER_MODEL`                  VARCHAR(40), 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `INTEREST_TOTAL`                DOUBLE, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
-   `CUSTOMER_TOTAL`                INTEGER, 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
-
-ALTER TABLE ST_FIN_TENDER_AMOUNT 
-   ADD CONSTRAINT ST_FIN_TDR_AMT_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE ST_FIN_TENDER_AMOUNT 
-   ADD CONSTRAINT ST_FIN_TDR_AMT_UK_TENDER_ID UNIQUE ( TENDER_ID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Statistics.Financial.Tender.Phase]
@@ -489,22 +463,26 @@ CREATE TABLE `ST_FIN_TENDER_PHASE`
    `RECORD_DAY`                    DATETIME NOT NULL, 
    `RECORD_HOUR`                   DATETIME NOT NULL, 
    `RECORD_DATE`                   DATETIME NOT NULL, 
-   `LINK_ID`                       BIGINT, 
-   `LINK_DATE`                     DATETIME, 
    `TENDER_ID`                     BIGINT, 
+   `TENDER_LINK_ID`                BIGINT, 
    `TENDER_LABEL`                  VARCHAR(40), 
-   `TENDER_MODEL`                  VARCHAR(20), 
-   `INVESTMENT`                    DOUBLE, 
-   `INVESTMENT_TOTAL`              DOUBLE, 
-   `REDEMPTION`                    DOUBLE, 
-   `REDEMPTION_TOTAL`              DOUBLE, 
-   `NETINVESTMENT`                 DOUBLE, 
-   `NETINVESTMENT_TOTAL`           DOUBLE, 
-   `INTEREST`                      DOUBLE, 
-   `INTEREST_TOTAL`                DOUBLE, 
+   `TENDER_MODEL`                  VARCHAR(40), 
    `CUSTOMER_COUNT`                INTEGER, 
    `CUSTOMER_TOTAL`                INTEGER, 
-   `CUSTOMER_ACTION_DATE`          DATETIME, 
+   `INVESTMENT_USER_COUNT`         INTEGER, 
+   `INVESTMENT_COUNT`              INTEGER, 
+   `INVESTMENT`                    DOUBLE, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_USER_COUNT`         INTEGER, 
+   `REDEMPTION_COUNT`              INTEGER, 
+   `REDEMPTION`                    DOUBLE, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `INTEREST`                      DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `NETINVESTMENT`                 DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `PERFORMANCE`                   DOUBLE, 
+   `PERFORMANCE_TOTAL`             DOUBLE, 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 

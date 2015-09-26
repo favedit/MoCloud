@@ -9,7 +9,6 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -44,23 +43,32 @@ public class FStatisticsFinancialTenderCustomerLogic
    // 字段投标编号的定义。
    public final static SLogicFieldInfo TENDER_ID = new SLogicFieldInfo("TENDER_ID");
 
+   // 字段投标关联编号的定义。
+   public final static SLogicFieldInfo TENDER_LINK_ID = new SLogicFieldInfo("TENDER_LINK_ID");
+
    // 字段客户编号的定义。
    public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
 
-   // 字段关联日期的定义。
-   public final static SLogicFieldInfo LINK_DATE = new SLogicFieldInfo("LINK_DATE");
+   // 字段顾客关联编号的定义。
+   public final static SLogicFieldInfo CUSTOMER_LINK_ID = new SLogicFieldInfo("CUSTOMER_LINK_ID");
+
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
 
    // 字段投资总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
+   // 字段赎回次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
+
    // 字段赎回总计的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
 
-   // 字段净投总计的定义。
-   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
-
    // 字段利息总计的定义。
    public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
+   // 字段净投总计的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
    // 字段绩效总计的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
@@ -78,7 +86,7 @@ public class FStatisticsFinancialTenderCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`CUSTOMER_ID`,`LINK_DATE`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`TENDER_ID`,`TENDER_LINK_ID`,`CUSTOMER_ID`,`CUSTOMER_LINK_ID`,`INVESTMENT_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`PERFORMANCE_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造投标客户表逻辑单元。</T>
@@ -675,12 +683,15 @@ public class FStatisticsFinancialTenderCustomerLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`TENDER_ID`");
+      cmd.append(",`TENDER_LINK_ID`");
       cmd.append(",`CUSTOMER_ID`");
-      cmd.append(",`LINK_DATE`");
+      cmd.append(",`CUSTOMER_LINK_ID`");
+      cmd.append(",`INVESTMENT_COUNT`");
       cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`REDEMPTION_COUNT`");
       cmd.append(",`REDEMPTION_TOTAL`");
-      cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -708,6 +719,13 @@ public class FStatisticsFinancialTenderCustomerLogic
          cmd.append(tenderId);
       }
       cmd.append(',');
+      long tenderLinkId = unit.tenderLinkId();
+      if(tenderLinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(tenderLinkId);
+      }
+      cmd.append(',');
       long customerId = unit.customerId();
       if(customerId == 0){
          cmd.append("NULL");
@@ -715,24 +733,24 @@ public class FStatisticsFinancialTenderCustomerLogic
          cmd.append(customerId);
       }
       cmd.append(',');
-      TDateTime linkDate = unit.linkDate();
-      if(linkDate == null){
-         cmd.append("NULL");
-      }else if(linkDate.isEmpty()){
+      long customerLinkId = unit.customerLinkId();
+      if(customerLinkId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(linkDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
+         cmd.append(customerLinkId);
       }
+      cmd.append(',');
+      cmd.append(unit.investmentCount());
       cmd.append(',');
       cmd.append(unit.investmentTotal());
       cmd.append(',');
+      cmd.append(unit.redemptionCount());
+      cmd.append(',');
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
-      cmd.append(unit.netinvestmentTotal());
-      cmd.append(',');
       cmd.append(unit.interestTotal());
+      cmd.append(',');
+      cmd.append(unit.netinvestmentTotal());
       cmd.append(',');
       cmd.append(unit.performanceTotal());
       // 设置更新信息
@@ -818,6 +836,15 @@ public class FStatisticsFinancialTenderCustomerLogic
             cmd.append(tenderId);
          }
       }
+      if(unit.isTenderLinkIdChanged()){
+         cmd.append(",`TENDER_LINK_ID`=");
+         long tenderLinkId = unit.tenderLinkId();
+         if(tenderLinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(tenderLinkId);
+         }
+      }
       if(unit.isCustomerIdChanged()){
          cmd.append(",`CUSTOMER_ID`=");
          long customerId = unit.customerId();
@@ -827,34 +854,38 @@ public class FStatisticsFinancialTenderCustomerLogic
             cmd.append(customerId);
          }
       }
-      if(unit.isLinkDateChanged()){
-         cmd.append(",`LINK_DATE`=");
-         TDateTime linkDate = unit.linkDate();
-         if(linkDate == null){
-            cmd.append("NULL");
-         }else if(linkDate.isEmpty()){
+      if(unit.isCustomerLinkIdChanged()){
+         cmd.append(",`CUSTOMER_LINK_ID`=");
+         long customerLinkId = unit.customerLinkId();
+         if(customerLinkId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(linkDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
+            cmd.append(customerLinkId);
          }
+      }
+      if(unit.isInvestmentCountChanged()){
+         cmd.append(",`INVESTMENT_COUNT`=");
+         cmd.append(unit.investmentCount());
       }
       if(unit.isInvestmentTotalChanged()){
          cmd.append(",`INVESTMENT_TOTAL`=");
          cmd.append(unit.investmentTotal());
       }
+      if(unit.isRedemptionCountChanged()){
+         cmd.append(",`REDEMPTION_COUNT`=");
+         cmd.append(unit.redemptionCount());
+      }
       if(unit.isRedemptionTotalChanged()){
          cmd.append(",`REDEMPTION_TOTAL`=");
          cmd.append(unit.redemptionTotal());
       }
-      if(unit.isNetinvestmentTotalChanged()){
-         cmd.append(",`NETINVESTMENT_TOTAL`=");
-         cmd.append(unit.netinvestmentTotal());
-      }
       if(unit.isInterestTotalChanged()){
          cmd.append(",`INTEREST_TOTAL`=");
          cmd.append(unit.interestTotal());
+      }
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
       }
       if(unit.isPerformanceTotalChanged()){
          cmd.append(",`PERFORMANCE_TOTAL`=");

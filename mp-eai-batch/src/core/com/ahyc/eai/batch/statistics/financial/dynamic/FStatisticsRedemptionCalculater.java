@@ -10,15 +10,17 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDepartmentUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
-import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.data.ISqlDatasetReader;
-import org.mo.com.lang.RString;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 
 //============================================================
 // <T>统计赎回计算器。</T>
@@ -26,13 +28,19 @@ import org.mo.data.logic.FLogicContext;
 public class FStatisticsRedemptionCalculater
       extends FStatisticsCalculater
 {
+   // 资源访问接口
+   private static IResource _resource = RResource.find(FStatisticsRedemptionCalculater.class);
+
    // 同步总数
    protected long _intervalCount = 10000;
 
+   // 客户控制台接口
    protected IStatisticsCustomerConsole _customerConsole;
 
+   // 理财师控制台接口
    protected IStatisticsMarketerConsole _marketerConsole;
 
+   // 部门控制台接口
    protected IStatisticsDepartmentConsole _departmentConsole;
 
    //============================================================
@@ -51,12 +59,13 @@ public class FStatisticsRedemptionCalculater
                             long beginId,
                             long endId){
       // 代码修正
-      ISqlConnection sourceConnection = logicContext.activeConnection("ezubao");
+      ISqlConnection sourceConnection = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
-      FStatisticsFinancialTenderLogic tenderLogic = logicContext.findLogic(FStatisticsFinancialTenderLogic.class);
       IStatisticsTenderConsole tenderConsole = RAop.find(IStatisticsTenderConsole.class);
       // 获得数据集合：编号/投资会员编号/投资金额/投资时间
-      String selectSql = RString.format("SELECT id,invest_id,sell_uid,FROM_UNIXTIME(addtime, '%Y%m%d%H%i%s') as action_date,transfer_price,DATE_FORMAT(`upd_time`,'%Y%m%d%H%i%s') update_date FROM lzh_invest_detb WHERE id>{1} AND id<={2}", beginId, endId);
+      FSql selectSql = _resource.findString(FSql.class, "sql.select");
+      selectSql.bindLong("begin_id", beginId);
+      selectSql.bindLong("end_id", endId);
       try(ISqlDatasetReader reader = sourceConnection.fetchReader(selectSql)){
          for(FRow row : reader){
             long recordId = row.getLong("id");
@@ -99,22 +108,14 @@ public class FStatisticsRedemptionCalculater
             double interest = transferAmount - investmentAmount;
             //............................................................
             // 获得投标信息
-            long borrowRecordId = 0;
-            String borrowModel = null;
+            long tenderId = 0;
+            long tenderLinkId = 0;
+            String tenderModel = null;
             FStatisticsFinancialTenderUnit tenderUnit = tenderConsole.syncByLinkId(logicContext, borrowId);
             if(tenderUnit != null){
-               borrowRecordId = tenderUnit.ouid();
-               borrowModel = tenderUnit.borrowModel();
-               // 更新投资数据
-               tenderUnit.setRedemptionCount(tenderUnit.redemptionCount() + 1);
-               tenderUnit.setRedemptionTotal(tenderUnit.redemptionTotal() + investmentAmount);
-               tenderUnit.setInterestTotal(tenderUnit.interestTotal() + interest);
-               tenderUnit.setNetinvestmentTotal(tenderUnit.investmentTotal() - tenderUnit.redemptionTotal());
-               if(tenderUnit.redemptionBeginDate().isEmpty()){
-                  tenderUnit.redemptionBeginDate().parse(actionDate);
-               }
-               tenderUnit.redemptionEndDate().parse(actionDate);
-               tenderLogic.doUpdate(tenderUnit);
+               tenderId = tenderUnit.ouid();
+               tenderLinkId = tenderUnit.linkId();
+               tenderModel = tenderUnit.borrowModel();
             }
             //............................................................
             // 查找公司信息
@@ -144,9 +145,9 @@ public class FStatisticsRedemptionCalculater
             dynamicUnit.customerActionDate().parse(actionDate);
             dynamicUnit.setCustomerActionAmount(investmentAmount);
             dynamicUnit.setCustomerActionInterest(interest);
-            dynamicUnit.setTenderId(borrowRecordId);
-            dynamicUnit.setTenderLinkId(borrowRecordId);
-            dynamicUnit.setTenderModel(borrowModel);
+            dynamicUnit.setTenderId(tenderId);
+            dynamicUnit.setTenderLinkId(tenderLinkId);
+            dynamicUnit.setTenderModel(tenderModel);
             dynamicLogic.doInsert(dynamicUnit);
             // 统计处理
             processOnce();

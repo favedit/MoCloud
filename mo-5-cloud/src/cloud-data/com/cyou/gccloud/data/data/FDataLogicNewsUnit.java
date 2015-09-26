@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.statistics;
+package com.cyou.gccloud.data.data;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
@@ -6,7 +6,6 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -15,10 +14,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>投标客户表逻辑单元。</T>
+// <T>业务资讯表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialTenderCustomerUnit
+public class FDataLogicNewsUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -39,71 +38,65 @@ public class FStatisticsFinancialTenderCustomerUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段投标编号的定义。
-   private long __tenderId;
+   // 存储字段资讯标题的定义。
+   private String __label;
 
-   // 字段投标编号的定义。
-   protected long _tenderId;
+   // 字段资讯标题的定义。
+   protected String _label;
 
-   // 存储字段投标关联编号的定义。
-   private long __tenderLinkId;
+   // 存储字段资讯图标的定义。
+   private String __iconUrl;
 
-   // 字段投标关联编号的定义。
-   protected long _tenderLinkId;
+   // 字段资讯图标的定义。
+   protected String _iconUrl;
 
-   // 存储字段客户编号的定义。
-   private long __customerId;
+   // 存储字段状态的定义。
+   private int __statusCd;
 
-   // 字段客户编号的定义。
-   protected long _customerId;
+   // 字段状态的定义。
+   protected int _statusCd;
 
-   // 存储字段顾客关联编号的定义。
-   private long __customerLinkId;
+   // 存储字段是否显示的定义。
+   private int __displayCd;
 
-   // 字段顾客关联编号的定义。
-   protected long _customerLinkId;
+   // 字段是否显示的定义。
+   protected int _displayCd;
 
-   // 存储字段投资次数的定义。
-   private int __investmentCount;
+   // 存储字段排序值的定义。
+   private int __displayOrder;
 
-   // 字段投资次数的定义。
-   protected int _investmentCount;
+   // 字段排序值的定义。
+   protected int _displayOrder;
 
-   // 存储字段投资总计的定义。
-   private double __investmentTotal;
+   // 存储字段记录日期的定义。
+   private TDateTime __recordDate = new TDateTime();
 
-   // 字段投资总计的定义。
-   protected double _investmentTotal;
+   // 字段记录日期的定义。
+   protected TDateTime _recordDate = new TDateTime();
 
-   // 存储字段赎回次数的定义。
-   private int __redemptionCount;
+   // 存储字段关键字的定义。
+   private String __keywords;
 
-   // 字段赎回次数的定义。
-   protected int _redemptionCount;
+   // 字段关键字的定义。
+   protected String _keywords;
 
-   // 存储字段赎回总计的定义。
-   private double __redemptionTotal;
+   // 存储字段描述的定义。
+   private String __description;
 
-   // 字段赎回总计的定义。
-   protected double _redemptionTotal;
+   // 字段描述的定义。
+   protected String _description;
 
-   // 存储字段利息总计的定义。
-   private double __interestTotal;
+   // 存储字段资讯内容的定义。
+   private String __content;
 
-   // 字段利息总计的定义。
-   protected double _interestTotal;
+   // 字段资讯内容的定义。
+   protected String _content;
 
-   // 存储字段净投总计的定义。
-   private double __netinvestmentTotal;
+   // 存储字段浏览次数的定义。
+   private int __viewCount;
 
-   // 字段净投总计的定义。
-   protected double _netinvestmentTotal;
-
-   // 存储字段绩效总计的定义。
-   private double __performanceTotal;
-
-   // 字段绩效总计的定义。
-   protected double _performanceTotal;
+   // 字段浏览次数的定义。
+   protected int _viewCount;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -130,9 +123,9 @@ public class FStatisticsFinancialTenderCustomerUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造投标客户表逻辑单元。</T>
+   // <T>构造业务资讯表逻辑单元。</T>
    //============================================================
-   public FStatisticsFinancialTenderCustomerUnit(){
+   public FDataLogicNewsUnit(){
    }
 
    //============================================================
@@ -217,300 +210,273 @@ public class FStatisticsFinancialTenderCustomerUnit
    }
 
    //============================================================
-   // <T>判断投标编号的数据是否改变。</T>
+   // <T>判断资讯标题的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isTenderIdChanged(){
-      return __tenderId != _tenderId;
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
    }
 
    //============================================================
-   // <T>获得投标编号的数据内容。</T>
+   // <T>获得资讯标题的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long tenderId(){
-      return _tenderId;
+   public String label(){
+      return _label;
    }
 
    //============================================================
-   // <T>设置投标编号的数据内容。</T>
+   // <T>设置资讯标题的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setTenderId(long value){
-      _tenderId = value;
+   public void setLabel(String value){
+      _label = value;
    }
 
    //============================================================
-   // <T>判断投标关联编号的数据是否改变。</T>
+   // <T>判断资讯图标的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isTenderLinkIdChanged(){
-      return __tenderLinkId != _tenderLinkId;
+   public boolean isIconUrlChanged(){
+      return !RString.equals(__iconUrl, _iconUrl);
    }
 
    //============================================================
-   // <T>获得投标关联编号的数据内容。</T>
+   // <T>获得资讯图标的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long tenderLinkId(){
-      return _tenderLinkId;
+   public String iconUrl(){
+      return _iconUrl;
    }
 
    //============================================================
-   // <T>设置投标关联编号的数据内容。</T>
+   // <T>设置资讯图标的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setTenderLinkId(long value){
-      _tenderLinkId = value;
+   public void setIconUrl(String value){
+      _iconUrl = value;
    }
 
    //============================================================
-   // <T>判断客户编号的数据是否改变。</T>
+   // <T>判断状态的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerIdChanged(){
-      return __customerId != _customerId;
+   public boolean isStatusCdChanged(){
+      return __statusCd != _statusCd;
    }
 
    //============================================================
-   // <T>获得客户编号的数据内容。</T>
+   // <T>获得状态的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long customerId(){
-      return _customerId;
+   public int statusCd(){
+      return _statusCd;
    }
 
    //============================================================
-   // <T>设置客户编号的数据内容。</T>
+   // <T>设置状态的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerId(long value){
-      _customerId = value;
+   public void setStatusCd(int value){
+      _statusCd = value;
    }
 
    //============================================================
-   // <T>判断顾客关联编号的数据是否改变。</T>
+   // <T>判断是否显示的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerLinkIdChanged(){
-      return __customerLinkId != _customerLinkId;
+   public boolean isDisplayCdChanged(){
+      return __displayCd != _displayCd;
    }
 
    //============================================================
-   // <T>获得顾客关联编号的数据内容。</T>
+   // <T>获得是否显示的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long customerLinkId(){
-      return _customerLinkId;
+   public int displayCd(){
+      return _displayCd;
    }
 
    //============================================================
-   // <T>设置顾客关联编号的数据内容。</T>
+   // <T>设置是否显示的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerLinkId(long value){
-      _customerLinkId = value;
+   public void setDisplayCd(int value){
+      _displayCd = value;
    }
 
    //============================================================
-   // <T>判断投资次数的数据是否改变。</T>
+   // <T>判断排序值的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isInvestmentCountChanged(){
-      return __investmentCount != _investmentCount;
+   public boolean isDisplayOrderChanged(){
+      return __displayOrder != _displayOrder;
    }
 
    //============================================================
-   // <T>获得投资次数的数据内容。</T>
+   // <T>获得排序值的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int investmentCount(){
-      return _investmentCount;
+   public int displayOrder(){
+      return _displayOrder;
    }
 
    //============================================================
-   // <T>设置投资次数的数据内容。</T>
+   // <T>设置排序值的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setInvestmentCount(int value){
-      _investmentCount = value;
+   public void setDisplayOrder(int value){
+      _displayOrder = value;
    }
 
    //============================================================
-   // <T>判断投资总计的数据是否改变。</T>
+   // <T>判断记录日期的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isInvestmentTotalChanged(){
-      return __investmentTotal != _investmentTotal;
+   public boolean isRecordDateChanged(){
+      return !__recordDate.equals(_recordDate);
    }
 
    //============================================================
-   // <T>获得投资总计的数据内容。</T>
+   // <T>获得记录日期的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double investmentTotal(){
-      return _investmentTotal;
+   public TDateTime recordDate(){
+      return _recordDate;
    }
 
    //============================================================
-   // <T>设置投资总计的数据内容。</T>
+   // <T>设置记录日期的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setInvestmentTotal(double value){
-      _investmentTotal = value;
+   public void setRecordDate(TDateTime value){
+      _recordDate = value;
    }
 
    //============================================================
-   // <T>判断赎回次数的数据是否改变。</T>
+   // <T>判断关键字的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRedemptionCountChanged(){
-      return __redemptionCount != _redemptionCount;
+   public boolean isKeywordsChanged(){
+      return !RString.equals(__keywords, _keywords);
    }
 
    //============================================================
-   // <T>获得赎回次数的数据内容。</T>
+   // <T>获得关键字的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int redemptionCount(){
-      return _redemptionCount;
+   public String keywords(){
+      return _keywords;
    }
 
    //============================================================
-   // <T>设置赎回次数的数据内容。</T>
+   // <T>设置关键字的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setRedemptionCount(int value){
-      _redemptionCount = value;
+   public void setKeywords(String value){
+      _keywords = value;
    }
 
    //============================================================
-   // <T>判断赎回总计的数据是否改变。</T>
+   // <T>判断描述的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRedemptionTotalChanged(){
-      return __redemptionTotal != _redemptionTotal;
+   public boolean isDescriptionChanged(){
+      return !RString.equals(__description, _description);
    }
 
    //============================================================
-   // <T>获得赎回总计的数据内容。</T>
+   // <T>获得描述的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double redemptionTotal(){
-      return _redemptionTotal;
+   public String description(){
+      return _description;
    }
 
    //============================================================
-   // <T>设置赎回总计的数据内容。</T>
+   // <T>设置描述的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setRedemptionTotal(double value){
-      _redemptionTotal = value;
+   public void setDescription(String value){
+      _description = value;
    }
 
    //============================================================
-   // <T>判断利息总计的数据是否改变。</T>
+   // <T>判断资讯内容的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isInterestTotalChanged(){
-      return __interestTotal != _interestTotal;
+   public boolean isContentChanged(){
+      return !RString.equals(__content, _content);
    }
 
    //============================================================
-   // <T>获得利息总计的数据内容。</T>
+   // <T>获得资讯内容的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double interestTotal(){
-      return _interestTotal;
+   public String content(){
+      return _content;
    }
 
    //============================================================
-   // <T>设置利息总计的数据内容。</T>
+   // <T>设置资讯内容的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setInterestTotal(double value){
-      _interestTotal = value;
+   public void setContent(String value){
+      _content = value;
    }
 
    //============================================================
-   // <T>判断净投总计的数据是否改变。</T>
+   // <T>判断浏览次数的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isNetinvestmentTotalChanged(){
-      return __netinvestmentTotal != _netinvestmentTotal;
+   public boolean isViewCountChanged(){
+      return __viewCount != _viewCount;
    }
 
    //============================================================
-   // <T>获得净投总计的数据内容。</T>
+   // <T>获得浏览次数的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public double netinvestmentTotal(){
-      return _netinvestmentTotal;
+   public int viewCount(){
+      return _viewCount;
    }
 
    //============================================================
-   // <T>设置净投总计的数据内容。</T>
+   // <T>设置浏览次数的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setNetinvestmentTotal(double value){
-      _netinvestmentTotal = value;
-   }
-
-   //============================================================
-   // <T>判断绩效总计的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPerformanceTotalChanged(){
-      return __performanceTotal != _performanceTotal;
-   }
-
-   //============================================================
-   // <T>获得绩效总计的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double performanceTotal(){
-      return _performanceTotal;
-   }
-
-   //============================================================
-   // <T>设置绩效总计的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPerformanceTotal(double value){
-      _performanceTotal = value;
+   public void setViewCount(int value){
+      _viewCount = value;
    }
 
    //============================================================
@@ -636,28 +602,26 @@ public class FStatisticsFinancialTenderCustomerUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "tender_id":
-            return Long.toString(_tenderId);
-         case "tender_link_id":
-            return Long.toString(_tenderLinkId);
-         case "customer_id":
-            return Long.toString(_customerId);
-         case "customer_link_id":
-            return Long.toString(_customerLinkId);
-         case "investment_count":
-            return RInteger.toString(_investmentCount);
-         case "investment_total":
-            return RDouble.toString(_investmentTotal);
-         case "redemption_count":
-            return RInteger.toString(_redemptionCount);
-         case "redemption_total":
-            return RDouble.toString(_redemptionTotal);
-         case "interest_total":
-            return RDouble.toString(_interestTotal);
-         case "netinvestment_total":
-            return RDouble.toString(_netinvestmentTotal);
-         case "performance_total":
-            return RDouble.toString(_performanceTotal);
+         case "label":
+            return _label;
+         case "icon_url":
+            return _iconUrl;
+         case "status_cd":
+            return RInteger.toString(_statusCd);
+         case "display_cd":
+            return RInteger.toString(_displayCd);
+         case "display_order":
+            return RInteger.toString(_displayOrder);
+         case "record_date":
+            return _recordDate.toString();
+         case "keywords":
+            return _keywords;
+         case "description":
+            return _description;
+         case "content":
+            return _content;
+         case "view_count":
+            return RInteger.toString(_viewCount);
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -689,38 +653,35 @@ public class FStatisticsFinancialTenderCustomerUnit
          case "guid":
             _guid = value;
             break;
-         case "tender_id":
-            _tenderId = RLong.parse(value);
+         case "label":
+            _label = value;
             break;
-         case "tender_link_id":
-            _tenderLinkId = RLong.parse(value);
+         case "icon_url":
+            _iconUrl = value;
             break;
-         case "customer_id":
-            _customerId = RLong.parse(value);
+         case "status_cd":
+            _statusCd = RInteger.parse(value);
             break;
-         case "customer_link_id":
-            _customerLinkId = RLong.parse(value);
+         case "display_cd":
+            _displayCd = RInteger.parse(value);
             break;
-         case "investment_count":
-            _investmentCount = RInteger.parse(value);
+         case "display_order":
+            _displayOrder = RInteger.parse(value);
             break;
-         case "investment_total":
-            _investmentTotal = RDouble.parse(value);
+         case "record_date":
+            _recordDate.parse(value);
             break;
-         case "redemption_count":
-            _redemptionCount = RInteger.parse(value);
+         case "keywords":
+            _keywords = value;
             break;
-         case "redemption_total":
-            _redemptionTotal = RDouble.parse(value);
+         case "description":
+            _description = value;
             break;
-         case "interest_total":
-            _interestTotal = RDouble.parse(value);
+         case "content":
+            _content = value;
             break;
-         case "netinvestment_total":
-            _netinvestmentTotal = RDouble.parse(value);
-            break;
-         case "performance_total":
-            _performanceTotal = RDouble.parse(value);
+         case "view_count":
+            _viewCount = RInteger.parse(value);
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -761,49 +722,45 @@ public class FStatisticsFinancialTenderCustomerUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "tender_id":
-               __tenderId = RLong.parse(value);
-               _tenderId = __tenderId;
+            case "label":
+               __label = value;
+               _label = __label;
                break;
-            case "tender_link_id":
-               __tenderLinkId = RLong.parse(value);
-               _tenderLinkId = __tenderLinkId;
+            case "icon_url":
+               __iconUrl = value;
+               _iconUrl = __iconUrl;
                break;
-            case "customer_id":
-               __customerId = RLong.parse(value);
-               _customerId = __customerId;
+            case "status_cd":
+               __statusCd = RInteger.parse(value);
+               _statusCd = __statusCd;
                break;
-            case "customer_link_id":
-               __customerLinkId = RLong.parse(value);
-               _customerLinkId = __customerLinkId;
+            case "display_cd":
+               __displayCd = RInteger.parse(value);
+               _displayCd = __displayCd;
                break;
-            case "investment_count":
-               __investmentCount = RInteger.parse(value);
-               _investmentCount = __investmentCount;
+            case "display_order":
+               __displayOrder = RInteger.parse(value);
+               _displayOrder = __displayOrder;
                break;
-            case "investment_total":
-               __investmentTotal = RDouble.parse(value);
-               _investmentTotal = __investmentTotal;
+            case "record_date":
+               __recordDate.parse(value);
+               _recordDate.assign(__recordDate);
                break;
-            case "redemption_count":
-               __redemptionCount = RInteger.parse(value);
-               _redemptionCount = __redemptionCount;
+            case "keywords":
+               __keywords = value;
+               _keywords = __keywords;
                break;
-            case "redemption_total":
-               __redemptionTotal = RDouble.parse(value);
-               _redemptionTotal = __redemptionTotal;
+            case "description":
+               __description = value;
+               _description = __description;
                break;
-            case "interest_total":
-               __interestTotal = RDouble.parse(value);
-               _interestTotal = __interestTotal;
+            case "content":
+               __content = value;
+               _content = __content;
                break;
-            case "netinvestment_total":
-               __netinvestmentTotal = RDouble.parse(value);
-               _netinvestmentTotal = __netinvestmentTotal;
-               break;
-            case "performance_total":
-               __performanceTotal = RDouble.parse(value);
-               _performanceTotal = __performanceTotal;
+            case "view_count":
+               __viewCount = RInteger.parse(value);
+               _viewCount = __viewCount;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -836,17 +793,16 @@ public class FStatisticsFinancialTenderCustomerUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("tenderId", _tenderId);
-      row.set("tenderLinkId", _tenderLinkId);
-      row.set("customerId", _customerId);
-      row.set("customerLinkId", _customerLinkId);
-      row.set("investmentCount", _investmentCount);
-      row.set("investmentTotal", _investmentTotal);
-      row.set("redemptionCount", _redemptionCount);
-      row.set("redemptionTotal", _redemptionTotal);
-      row.set("interestTotal", _interestTotal);
-      row.set("netinvestmentTotal", _netinvestmentTotal);
-      row.set("performanceTotal", _performanceTotal);
+      row.set("label", _label);
+      row.set("iconUrl", _iconUrl);
+      row.set("statusCd", _statusCd);
+      row.set("displayCd", _displayCd);
+      row.set("displayOrder", _displayOrder);
+      row.set("recordDate", _recordDate);
+      row.set("keywords", _keywords);
+      row.set("description", _description);
+      row.set("content", _content);
+      row.set("viewCount", _viewCount);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -864,17 +820,16 @@ public class FStatisticsFinancialTenderCustomerUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("tenderId", RLong.toString(_tenderId));
-      map.put("tenderLinkId", RLong.toString(_tenderLinkId));
-      map.put("customerId", RLong.toString(_customerId));
-      map.put("customerLinkId", RLong.toString(_customerLinkId));
-      map.put("investmentCount", RInteger.toString(_investmentCount));
-      map.put("investmentTotal", RDouble.toString(_investmentTotal));
-      map.put("redemptionCount", RInteger.toString(_redemptionCount));
-      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
-      map.put("interestTotal", RDouble.toString(_interestTotal));
-      map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
-      map.put("performanceTotal", RDouble.toString(_performanceTotal));
+      map.put("label", _label);
+      map.put("iconUrl", _iconUrl);
+      map.put("statusCd", RInteger.toString(_statusCd));
+      map.put("displayCd", RInteger.toString(_displayCd));
+      map.put("displayOrder", RInteger.toString(_displayOrder));
+      map.put("recordDate", _recordDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("keywords", _keywords);
+      map.put("description", _description);
+      map.put("content", _content);
+      map.put("viewCount", RInteger.toString(_viewCount));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -892,12 +847,16 @@ public class FStatisticsFinancialTenderCustomerUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _tenderId = input.readInt64();
-      _tenderLinkId = input.readInt64();
-      _customerId = input.readInt64();
-      _customerLinkId = input.readInt64();
-      _investmentCount = input.readInt32();
-      _redemptionCount = input.readInt32();
+      _label = input.readString();
+      _iconUrl = input.readString();
+      _statusCd = input.readInt32();
+      _displayCd = input.readInt32();
+      _displayOrder = input.readInt32();
+      _recordDate.set(input.readInt64());
+      _keywords = input.readString();
+      _description = input.readString();
+      _content = input.readString();
+      _viewCount = input.readInt32();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -915,12 +874,16 @@ public class FStatisticsFinancialTenderCustomerUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeInt64(_tenderId);
-      output.writeInt64(_tenderLinkId);
-      output.writeInt64(_customerId);
-      output.writeInt64(_customerLinkId);
-      output.writeInt32(_investmentCount);
-      output.writeInt32(_redemptionCount);
+      output.writeString(_label);
+      output.writeString(_iconUrl);
+      output.writeInt32(_statusCd);
+      output.writeInt32(_displayCd);
+      output.writeInt32(_displayOrder);
+      output.writeInt64(_recordDate.get());
+      output.writeString(_keywords);
+      output.writeString(_description);
+      output.writeString(_content);
+      output.writeInt32(_viewCount);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
