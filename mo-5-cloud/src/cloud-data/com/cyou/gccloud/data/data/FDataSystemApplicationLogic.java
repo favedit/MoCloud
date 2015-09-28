@@ -1,12 +1,23 @@
 package com.cyou.gccloud.data.data;
 
-import org.mo.com.lang.*;
-import org.mo.com.lang.reflect.*;
-import org.mo.com.lang.type.*;
-import org.mo.com.collections.*;
-import org.mo.com.data.*;
-import org.mo.core.aop.face.*;
-import org.mo.data.logic.*;
+import org.mo.com.collections.FDataset;
+import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
+import org.mo.com.data.RSql;
+import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FString;
+import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
+import org.mo.com.lang.reflect.RClass;
+import org.mo.core.aop.face.ASourceMachine;
+import org.mo.data.logic.FLogicDataset;
+import org.mo.data.logic.FLogicTable;
+import org.mo.data.logic.FLogicUnit;
+import org.mo.data.logic.ILogicContext;
+import org.mo.data.logic.SLogicConnectionInfo;
+import org.mo.data.logic.SLogicFieldInfo;
+import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
 // <T>系统应用表逻辑。</T>

@@ -1,12 +1,16 @@
 package com.cyou.gccloud.data.data;
 
 import java.util.Map;
-import org.mo.com.lang.*;
-import org.mo.com.lang.type.*;
-import org.mo.com.collections.*;
-import org.mo.com.io.*;
-import org.mo.core.aop.face.*;
-import org.mo.data.logic.*;
+import org.mo.com.collections.FRow;
+import org.mo.com.io.IDataInput;
+import org.mo.com.io.IDataOutput;
+import org.mo.com.lang.IStringPair;
+import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RLong;
+import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
+import org.mo.core.aop.face.ASourceMachine;
+import org.mo.data.logic.FLogicUnit;
 
 //============================================================
 // <T>系统应用表逻辑单元。</T>
