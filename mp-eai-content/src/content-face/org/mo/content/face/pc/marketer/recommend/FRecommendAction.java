@@ -68,6 +68,10 @@ public class FRecommendAction
          page.setLabel(user.label());
       }
       FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+      if(marketer == null){
+         return "/apl/message/LogicFatal";
+      }
+      _logger.debug(this, "construct", "construct findByUserid marketer.(marketer={1})", marketer.ouid());
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
@@ -76,6 +80,7 @@ public class FRecommendAction
       }
       //分页处理
       int pageTotal = _memberConsole.getPageCount(logicContext);
+      _logger.debug(this, "construct", "construct getMemeberPageTotal.(pageTotal={1})", pageTotal);
       page.setPageTotal(pageTotal);
       // 第0页
       if(page.pageCurrent() == 0){

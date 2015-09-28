@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="74aaea54-099c-46a7-b567-9e2b2da1307e" name="data.system.version.resource" label="M#12cn16方案项目信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.System.Resource" data_name="DT_SYS_VERSION_RESOURCE" data_alias="DT_SYS_VER_RES" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="e9544678-e4fa-409e-a5ef-f5baefb8cb7d" name="application_id" label="M#12cn14应用编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="APPLICATION_ID" data_alias="APP" data_refer="data.system.application" />
+  <FieldRecordId _uuid="c9bb2e5f-4ef2-40d1-8d00-c9f00dfc01ac" name="version_id" label="M#12cn14版本编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VERSION_ID" data_alias="VERSION" data_refer="data.system.version" />
+  <FieldString _uuid="4d98220d-afd5-4cbd-bc8d-962c118e6f2b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="80" />
+  <FieldString _uuid="d56de974-2a48-4684-b0d6-b7c7c652c8e3" name="storage_file" label="M#12cn14存储文件" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STORAGE_FILE" data_size="400" />
+  <FieldString _uuid="1d9dff23-bb31-4ebc-a945-bfaf6457f29a" name="download_url" label="M#12cn14下载地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_URL" data_size="800" />
+  <FieldInteger _uuid="d45a85b8-75af-4d8a-a7a4-b8850011aad5" name="download_size" label="M#12cn14下载大小" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DOWNLOAD_SIZE" />
+  <FieldString _uuid="456ad681-1e9c-4ae4-8937-ad14c693743d" name="custom_storage_file" label="M#12cn16指定存储地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOM_STORAGE_FILE" data_size="400" />
+  <FieldString _uuid="3657b57a-28e8-4f70-a07a-029c14501d55" name="custom_download_url" label="M#12cn16指定下载地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOM_DOWNLOAD_URL" data_size="800" />
+  <FieldString _uuid="659dbac8-b49d-4ef8-8894-24041f888f84" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="e4af3866-bdd5-4a2f-8e93-da7320a7730d" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -167,7 +167,10 @@ public class FDataMemberConsole
    // ============================================================
    @Override
    public int getPageCount(ILogicContext logicContext){
-      FLogicDataset<FDataFinancialMemberUnit> list = fetch(logicContext, null);
+      _logger.debug(this, "GetPageCount", "GetPageCount begin.");
+      FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FLogicDataset<FDataFinancialMemberUnit> list = logic.fetch(null);
+      _logger.debug(this, "GetPageCount", "GetPageCount result.(listCount={1})", list.count());
       int pageTotal = list.count() / _pageSize;
       if(list.count() % _pageSize != 0){
          pageTotal += 1;
