@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group _uuid="3f46354b-8096-41a8-9409-08e64fa15e36" name="core" label="逻辑核心" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="MoMgEnumCore" code="Egr" code_name="GmCore" full_code="EnumCore" display_index="25" project_name="/Common/MoMessage" project_code="Mg" is_include="Y">
+  <Enum _uuid="13ad7d17-f8e4-43ff-8d3b-8c52ea338ca5" name="GcAccountSource" label="帐号来源" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="033ac38a-0270-4f84-b554-4a67d18b8f6c" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="d8dd9468-f93d-4f90-b212-4c5bfc2e3920" name="GameCollege" label="游戏学院" is_valid="Y" note="M#" />
+    <Item _uuid="3031a829-2132-4577-899d-ca7560011bd2" name="GameMei" label="GameMei" is_valid="Y" note="M#" />
+    <Item _uuid="3150de55-ef34-4366-a5da-6ba4a08b3c8d" name="GameCollegeXmpp" label="游戏学院XMPP用户" is_valid="Y" note="M#" />
+  </Enum>
+</Group>

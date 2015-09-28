@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate _uuid="d840b48e-2fc3-4083-95ec-5950cb7d4a3b" name="define.track" label="M#12cn16记录跟踪模板" is_valid="Y" note="M#">
+  <FieldRecordId _uuid="a7d7d08e-1eb4-4863-a234-6ee90d1fc0d2" name="create_user_id" label="M#12cn16创建用户标识" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CREATE_USER_ID" />
+  <FieldDateTime _uuid="16114934-6b2f-4eb0-9ba8-54e8eb8396ea" name="create_date" label="M#12cn14创建日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CREATE_DATE" />
+  <FieldRecordId _uuid="bd0544a1-6ca7-41b1-ab84-6739a4d190ab" name="update_user_id" label="M#12cn15更新者标识" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="UPDATE_USER_ID" />
+  <FieldDateTime _uuid="85068926-e409-4efc-80d8-c9e8c568dcb4" name="update_date" label="M#12cn14更新时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="UPDATE_DATE" />
+</DataTemplate>

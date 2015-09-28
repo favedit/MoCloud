@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 命令：默认共通组件定义                                       -->
+   <!--    Action = *                                                -->
+   <!-- ============================================================ -->
+   <Actions
+         uri   = '/*/*'
+         face  = 'org.ahyc.eai.demo.face.*.I*Action'/>
+
+   <Actions
+         uri   = '*'
+         face  = 'org.ahyc.eai.demo.face.I*Action' />
+
+   <Components
+         face  = 'org.ahyc.eai.demo.face.*.I*Action'
+         class = 'org.ahyc.eai.demo.face.*.F*Action' />
+
+   <Components
+         face  = 'org.ahyc.eai.demo.face.I*Action'
+         class = 'org.ahyc.eai.demo.face.F*Action' />
+</Config>
