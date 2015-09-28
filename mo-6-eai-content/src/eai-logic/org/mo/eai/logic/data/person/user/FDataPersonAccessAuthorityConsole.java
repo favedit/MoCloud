@@ -136,6 +136,7 @@ public class FDataPersonAccessAuthorityConsole
          if(_oaLoginEnable){
             // OA用户检测
             String oaLoginResult = oaLogin(passport, password);
+
             _logger.debug(this, "doLogin", "OA login. (passport={1}, result={2})", passport, oaLoginResult);
             // 0:验证成功，1:签名不通过，3:用户名或密码错误，98:IP不在白名单中
             if(oaLoginResult.equals("0")){

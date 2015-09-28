@@ -169,6 +169,7 @@ public class FDataMemberConsole
    public int getPageCount(ILogicContext logicContext){
       _logger.debug(this, "GetPageCount", "GetPageCount begin.");
       FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+
       FLogicDataset<FDataFinancialMemberUnit> list = logic.fetch(null);
       _logger.debug(this, "GetPageCount", "GetPageCount result.(listCount={1})", list.count());
       int pageTotal = list.count() / _pageSize;
