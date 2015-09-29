@@ -12,4 +12,27 @@
          face  = 'org.mo.content.service.info.mobile.IMobileService'
          class = 'org.mo.content.service.info.mobile.FMobileService'
          scope = 'global'/>
+         
+   <!-- ============================================================ -->
+   <!-- 新闻相关处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'eai.info.news'
+         face  = 'org.mo.content.service.info.logic.news.INewsService'/>
+
+   <Component
+         face  = 'org.mo.content.service.info.logic.news.INewsService'
+         class = 'org.mo.content.service.info.logic.news.FNewsService'
+         scope = 'global'/>
+          <!-- ============================================================ -->
+   <!-- 登录处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'eai.mobile.account'
+         face  = 'org.mo.content.service.info.logic.login.ILoginService'/>
+
+   <Component
+         face  = 'org.mo.content.service.info.logic.login.ILoginService'
+         class = 'org.mo.content.service.info.logic.login.FLoginService'
+         scope = 'global'/>
 </Config>
