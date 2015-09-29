@@ -10,6 +10,8 @@ import com.cyou.gccloud.define.enums.core.EGcPersonGender;
 import com.cyou.gccloud.define.enums.core.EGcPersonIncome;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
@@ -37,7 +39,7 @@ public class FDataMemberConsole
    static final int _pageSize = 12;
 
    //推荐天数
-   protected final int _RecommendDay = 3;
+   protected final int _RecommendDay = 4;
 
    @ALink
    protected ICityConsole _cityConsole;
@@ -169,11 +171,13 @@ public class FDataMemberConsole
    public int getPageCount(ILogicContext logicContext){
       _logger.debug(this, "GetPageCount", "GetPageCount begin.");
       FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-
-      FLogicDataset<FDataFinancialMemberUnit> list = logic.fetch(null);
-      _logger.debug(this, "GetPageCount", "GetPageCount result.(listCount={1})", list.count());
-      int pageTotal = list.count() / _pageSize;
-      if(list.count() % _pageSize != 0){
+      FSql sql = new FSql();
+      sql.append("SELECT COUNT(ouid) FROM DT_FIN_MEMBER");
+      ISqlConnection conn = logic.connection();
+      int count = conn.executeInteger(sql);
+      _logger.debug(this, "GetPageCount", "GetPageCount result.(count={1})", count);
+      int pageTotal = count / _pageSize;
+      if(count % _pageSize != 0){
          pageTotal += 1;
       }
       return pageTotal;
@@ -208,9 +212,12 @@ public class FDataMemberConsole
       }
       //联络周期
       FDataFinancialMarketerMemberUnit marketer = _marketerMemberConsole.findFollowedByMarketerAndMember(logicContext, marketerId, member.ouid());
-
+      System.out.println(marketer.recommendEndDate() + "----------");
       if(marketer != null && !marketer.recommendEndDate().isEmpty()){
-         int days = marketer.recommendEndDate().day() - nowDate.day();
+         int nowDay = nowDate.day();
+         marketer.recommendEndDate().addDay(-nowDay);
+         int days = marketer.recommendEndDate().day();
+         System.out.println(days);
          member.setRemainingDays((days <= 0) ? 0 : days);
       }
       return member;

@@ -80,6 +80,7 @@ public class FRecommendAction
       }
       //分页处理
       int pageTotal = _memberConsole.getPageCount(logicContext);
+      //      int pageTotal = 14925;
       _logger.debug(this, "construct", "construct getMemeberPageTotal.(pageTotal={1})", pageTotal);
       page.setPageTotal(pageTotal);
       // 第0页

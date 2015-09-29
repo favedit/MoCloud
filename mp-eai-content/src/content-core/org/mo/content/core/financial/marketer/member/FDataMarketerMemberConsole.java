@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
@@ -120,7 +121,10 @@ public class FDataMarketerMemberConsole
                dataMemberInfo.setMemberGuid(dataMember.guid());
                int days = 0;
                if(!dataMemberInfo.recommendEndDate().isEmpty()){
-                  days = dataMemberInfo.recommendEndDate().day() - nowDate.day();
+                  int nowDay = nowDate.day();
+                  dataMemberInfo.recommendEndDate().addDay(-nowDay);
+                  days = dataMemberInfo.recommendEndDate().day();
+                  //                  days = dataMemberInfo.recommendEndDate().day() - nowDate.day();
                   dataMemberInfo.setRemainingDays((days <= 0) ? 0 : days);
                }
 
@@ -153,14 +157,17 @@ public class FDataMarketerMemberConsole
    @Override
    public int getPageCount(ILogicContext logicContext,
                            long marketerId){
-      FSql whereSql = new FSql();
-      whereSql.append(FDataFinancialMarketerMemberLogic.MARKETER_ID + " = {marketer_id}");
-      whereSql.bind("marketer_id", RString.parse(marketerId));
-      whereSql.append(" AND " + FDataFinancialMarketerMemberLogic.RELATION_CD + " = {relation_cd}");
-      whereSql.bind("relation_cd", RString.parse(EGcFinancialMemberRelation.Follow));
-      FLogicDataset<FDataFinancialMarketerMemberUnit> list = fetch(logicContext, whereSql);
-      int pageTotal = list.count() / _pageSize;
-      if(list.count() % _pageSize != 0){
+      FDataFinancialMarketerMemberLogic logic = logicContext.findLogic(FDataFinancialMarketerMemberLogic.class);
+      FSql sql = new FSql();
+      sql.append("SELECT COUNT(ouid) FROM DT_FIN_MARKETER_MEMBER WHERE ");
+      sql.append(FDataFinancialMarketerMemberLogic.MARKETER_ID + " = {marketer_id}");
+      sql.bind("marketer_id", RString.parse(marketerId));
+      sql.append(" AND " + FDataFinancialMarketerMemberLogic.RELATION_CD + " = {relation_cd}");
+      sql.bind("relation_cd", RString.parse(EGcFinancialMemberRelation.Follow));
+      ISqlConnection conn = logic.connection();
+      int count = conn.executeInteger(sql);
+      int pageTotal = count / _pageSize;
+      if(count % _pageSize != 0){
          pageTotal += 1;
       }
       return pageTotal;
