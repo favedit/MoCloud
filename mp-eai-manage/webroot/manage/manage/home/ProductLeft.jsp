@@ -27,6 +27,9 @@
             if (menu == '') {
                $("#four").hide();
             }
+            if (menu == '') {
+               $("#five").hide();
+            }
             menu = $.trim($("#six").children(".sub-menu").html());
             if (menu == '') {
                $("#six").hide();
@@ -87,7 +90,22 @@
                   <jh:equals source="product.financial.product" value="&basePage.menuString">
                      <li><a href="/product/financial/product/Product.wa" target="right">产品信息</a></li>
                   </jh:equals>
-                  
+                  <jh:equals source="product.financial.lnews" value="&basePage.menuString">
+                     <li><a href="/product/financial/news/News.wa" target="right">业务资讯信息</a></li>
+                  </jh:equals>
+               </ul>
+         </li>
+         <li id="five" class="common"> <a href="#five">系统管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="product.system.application" value="&basePage.menuString">
+                     <li><a href="/product/system/application/Application.wa" target="right">应用信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.system.version" value="&basePage.menuString">
+                     <li><a href="/product/system/version/version.wa" target="right">版本信息</a></li>
+                  </jh:equals>
+                  <jh:equals source="product.system.resources" value="&basePage.menuString">
+                     <li><a href="/product/system/resources/resources.wa" target="right">资源信息</a></li>
+                  </jh:equals>
                </ul>
          </li>
          </ul>

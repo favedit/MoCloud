@@ -149,7 +149,8 @@ public class FHeaderAction
       int roleCd = _userConsole.findByGuid(logicContext, guid).roleCd();
       if(roleCd == EGcPersonUserRole.Admin){
          menuStrings
-               .append("manage.user.module|manage.user.role|product.common.country|product.common.province|product.common.city|product.common.area|product.financial.product|manage.user|product.financial.department|product.financial.customer|product.configration|product.financial.marketer|product.device|product.user.logger|product.user.writelists");
+            .append("manage.user.module|manage.user.role|product.common.country|product.common.province|product.common.city|product.common.area|product.financial.product|manage.user|product.financial.department|product.financial.lnews|product.financial.customer|product.configration|"
+                  + "product.system.application|product.system.version|product.system.resources|product.financial.marketer|product.device|product.user.logger|product.user.writelists");
          basePage.setMenuString(menuStrings.toString());
       }else{
          long roleId = basePage.roleId();
