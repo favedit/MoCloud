@@ -132,6 +132,7 @@
 	left: 0px;
 	display: none;
 }
+
 /* 关注 */
 .focus .trs{
 	cursor:pointer;
@@ -149,5 +150,14 @@
 	top:50%;
 	margin-left: -64px;
 	margin-top: -64px;
+	display: none;
+}
+.loading{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	background: rgba(0, 0, 0, 0.59);
 	display: none;
 }

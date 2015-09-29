@@ -29,7 +29,7 @@
                   </tr>
                </jh:loop>
             </table>
-
+            <div class="loading"></div>
             <div id="loading_img_div" style="width:160px;">
                <div>
                   <img style="position:absolute;opacity:0.8;width:127px;height:127px;" src="images/loading7.png">
@@ -67,13 +67,12 @@
    </FORM>
    <script>
       function pading(nubmer){
+         $(".loading").show();
          $("#loading_img_div").show();
-         $(".shadow-bg").show();
          var currentPage = <jh:write source="&page.pageCurrent" />;
          var page = currentPage+nubmer;
          location.href="/pc/marketer/recommend/Recommend.wa?page="+page;
       }
-      doLoading();
    </script>
    <div class="prompts">
       <span>不好意思，您手慢了！</span>

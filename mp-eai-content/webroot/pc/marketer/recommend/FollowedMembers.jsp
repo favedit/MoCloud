@@ -28,6 +28,7 @@
                      </tr>
                      </jh:loop>                    
                   </table>
+                  <div class="loading"></div>
                   <div id="loading_img_div" style="width:160px;">
                      <div>
                         <img style="position:absolute;opacity:0.8;width:127px;height:127px;" src="/pc/marketer/recommend/images/loading7.png">
@@ -66,8 +67,8 @@
    <script type="text/javascript" src="/pc/marketer/recommend/js/existingUser.js"></script>
 <script>
       function pading(nubmer){
+         $(".loading").show();
          $("#loading_img_div").show();
-         $(".shadow-bg").show();
          var currentPage = <jh:write source="&page.pageCurrent" />;
          var page = currentPage+nubmer;
          location.href="/pc/marketer/member/Followed.wa?page="+page;
