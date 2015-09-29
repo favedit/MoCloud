@@ -142,3 +142,12 @@
 .focus .trs:active{
 	background:rgba(120, 179, 204, 0.4);
 }
+/*loading*/
+#loading_img_div{
+	position: absolute;
+	left: 50%;
+	top:50%;
+	margin-left: -64px;
+	margin-top: -64px;
+	display: none;
+}

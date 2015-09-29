@@ -35,6 +35,22 @@ function getQueryString(name){
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return null;
 }
+function doLoading() {
+ // var htmlBody = document.body;
+ // htmlBody.style.backgroundImage = 'url(../ars/eai/background.jpg)';
+ var hImages = document.getElementById("loading_img_div").getElementsByTagName("img");
+ var index = [7, 6, 5, 4, 3, 2, 1, 0];
+ g_loadingHandle = setInterval(function() {
+    for (var i = 0; i < index.length; i++) {
+       hImages[index[i]].style.opacity = 0.1 + (0.1 * i);
+       if (i == index.length - 1) {
+          index.push(index[0]);
+          index.splice(0, 1);
+       }
+    }
+ }, 80);
+}
+
 // ajax post
 function setAjax(url,datas,callback,failure){
      $.ajax({
