@@ -117,4 +117,10 @@
     <Item _uuid="36299a0f-ce18-44d4-bd40-05d843bc56b4" name="Publish" label="发布" is_valid="Y" note="M#" />
     <Item _uuid="e5584ac5-d175-4ed3-8230-66d58c608cf8" name="CheckFail" label="审核未通过" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="5042006b-8737-4455-a4a7-8b4462de945e" name="GcVersionForce" label="版本更新规则" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="f5c8c45a-49d2-46ed-a2c5-e15f8d3b1617" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="e903a1ac-a16a-48de-aec0-46f3cc89e08e" name="Optional" label="可选" is_valid="Y" note="M#" />
+    <Item _uuid="231a1b6b-2757-4fcb-8ee0-b5c9fda868d0" name="Force" label="强制" is_valid="Y" note="M#" />
+    <Item _uuid="cdc03e72-c052-4c61-97c4-0c88bebbad0f" name="Auto" label="自动" is_valid="Y" note="M#" />
+  </Enum>
 </Group>

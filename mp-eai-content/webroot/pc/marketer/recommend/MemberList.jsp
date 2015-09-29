@@ -73,6 +73,7 @@
          var page = currentPage+nubmer;
          location.href="/pc/marketer/recommend/Recommend.wa?page="+page;
       }
+      doLoading();
    </script>
    <div class="prompts">
       <span>不好意思，您手慢了！</span>

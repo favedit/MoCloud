@@ -73,6 +73,7 @@
          var page = currentPage+nubmer;
          location.href="/pc/marketer/member/Followed.wa?page="+page;
       }
+   doLoading();
    </script>
 </body>
 </html>

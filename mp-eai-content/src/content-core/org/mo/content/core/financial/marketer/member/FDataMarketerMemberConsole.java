@@ -103,12 +103,13 @@ public class FDataMarketerMemberConsole
          where.append(" in ");
          where.append(strArr);
       }
-
-      String orderBy = String.format("%s %s", FDataFinancialMemberLogic.RECOMMEND_SCORE, "DESC");
+      StringBuffer order = new StringBuffer();
+      order.append(FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC,");
+      order.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE + " DESC");
+      //      String orderBy = String.format("%s %s", FDataFinancialMemberLogic.RECOMMEND_SCORE, "DESC");
       FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-      FLogicDataset<FDataFinancialMemberUnit> dataMembers = memberLogic.fetch(where, orderBy);
+      FLogicDataset<FDataFinancialMemberUnit> dataMembers = memberLogic.fetch(where, order);
       FLogicDataset<FDataFinancialMarketerMemberInfo> dataMemberInfos = new FLogicDataset<FDataFinancialMarketerMemberInfo>(FDataFinancialMarketerMemberInfo.class);
-
       for(Iterator<FDataFinancialMemberUnit> iterator = dataMembers.iterator(); iterator.hasNext();){
          FDataFinancialMemberUnit dataMember = iterator.next();
          for(Iterator<FDataFinancialMarketerMemberInfo> iterator2 = list.iterator(); iterator2.hasNext();){

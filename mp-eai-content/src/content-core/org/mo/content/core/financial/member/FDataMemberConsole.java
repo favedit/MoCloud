@@ -70,7 +70,10 @@ public class FDataMemberConsole
       }
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
       FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-      String order = FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC ";
+      StringBuffer order = new StringBuffer();
+      order.append(FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC,");
+      order.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE + " DESC");
+      //      String order = FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC ";
       FLogicDataset<FDataFinancialMemberInfo> List = logic.fetchClass(FDataFinancialMemberInfo.class, null, order, _pageSize, pageNum);
       FLogicDataset<FDataFinancialMemberInfo> resultList = new FLogicDataset<>(FDataFinancialMemberInfo.class);
       for(FDataFinancialMemberInfo unit : List){
