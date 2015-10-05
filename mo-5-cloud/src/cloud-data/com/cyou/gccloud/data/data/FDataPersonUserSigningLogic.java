@@ -10,6 +10,7 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -20,16 +21,16 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>资源模型动画表逻辑。</T>
+// <T>用户签到表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceModelAnimationLogic extends FLogicTable
+public class FDataPersonUserSigningLogic extends FLogicTable
 {
-   // 资源模型动画表的定义。
+   // 用户签到表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 资源模型动画表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.resource.model.animation", "DT_RES_MODEL_ANIMATION");
+   // 用户签到表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.user.signing", "DT_PSN_USER_SIGNING");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -37,38 +38,17 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段全局唯一标识的定义。
+   // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
    // 字段用户编号的定义。
    public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
 
-   // 字段项目编号的定义。
-   public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
+   // 字段签到时间的定义。
+   public final static SLogicFieldInfo SINGN_DATE = new SLogicFieldInfo("SINGN_DATE");
 
-   // 字段模型编号的定义。
-   public final static SLogicFieldInfo MODEL_ID = new SLogicFieldInfo("MODEL_ID");
-
-   // 字段骨骼编号的定义。
-   public final static SLogicFieldInfo SKELETON_ID = new SLogicFieldInfo("SKELETON_ID");
-
-   // 字段全代码的定义。
-   public final static SLogicFieldInfo FULL_CODE = new SLogicFieldInfo("FULL_CODE");
-
-   // 字段代码的定义。
-   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
-
-   // 字段名称的定义。
-   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
-
-   // 字段帧总数的定义。
-   public final static SLogicFieldInfo FRAME_COUNT = new SLogicFieldInfo("FRAME_COUNT");
-
-   // 字段帧间隔的定义。
-   public final static SLogicFieldInfo FRAME_TICK = new SLogicFieldInfo("FRAME_TICK");
-
-   // 字段帧时长的定义。
-   public final static SLogicFieldInfo FRAME_SPAN = new SLogicFieldInfo("FRAME_SPAN");
+   // 字段签到地址的定义。
+   public final static SLogicFieldInfo SINGN_ADDRESS = new SLogicFieldInfo("SINGN_ADDRESS");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -86,25 +66,25 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`PROJECT_ID`,`MODEL_ID`,`SKELETON_ID`,`FULL_CODE`,`CODE`,`LABEL`,`FRAME_COUNT`,`FRAME_TICK`,`FRAME_SPAN`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`SINGN_DATE`,`SINGN_ADDRESS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造资源模型动画表逻辑单元。</T>
+   // <T>构造用户签到表逻辑单元。</T>
    //============================================================
-   public FDataResourceModelAnimationLogic(){
+   public FDataPersonUserSigningLogic(){
       _name = TABLE.name();
-      _classUnit = FDataResourceModelAnimationUnit.class;
+      _classUnit = FDataPersonUserSigningUnit.class;
    }
 
    //============================================================
-   // <T>构造资源模型动画表逻辑单元。</T>
+   // <T>构造用户签到表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataResourceModelAnimationLogic(ILogicContext context){
+   public FDataPersonUserSigningLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataResourceModelAnimationUnit.class;
+      _classUnit = FDataPersonUserSigningUnit.class;
    }
 
    //============================================================
@@ -235,7 +215,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataResourceModelAnimationUnit());
+            unit = (T)(new FDataPersonUserSigningUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -251,8 +231,8 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataResourceModelAnimationUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataResourceModelAnimationUnit.class, guid);
+   public FDataPersonUserSigningUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataPersonUserSigningUnit.class, guid);
    }
 
    //============================================================
@@ -288,8 +268,8 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataResourceModelAnimationUnit search(CharSequence whereSql){
-      return search(null, FDataResourceModelAnimationUnit.class, whereSql);
+   public FDataPersonUserSigningUnit search(CharSequence whereSql){
+      return search(null, FDataPersonUserSigningUnit.class, whereSql);
    }
 
    //============================================================
@@ -324,7 +304,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -335,7 +315,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(int pageSize, int page){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(int pageSize, int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -347,7 +327,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(CharSequence whereSql, int pageSize, int page){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(CharSequence whereSql, int pageSize, int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -360,7 +340,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(CharSequence whereSql, CharSequence orderSql){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(CharSequence whereSql, CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -373,7 +353,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -387,7 +367,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -401,7 +381,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -521,7 +501,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetchSql(CharSequence code, CharSequence sql, int pageSize, int page){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetchSql(CharSequence code, CharSequence sql, int pageSize, int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -542,7 +522,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataResourceModelAnimationUnit>(FDataResourceModelAnimationUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonUserSigningUnit>(FDataPersonUserSigningUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -555,7 +535,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelAnimationUnit> fetchAll(){
+   public FLogicDataset<FDataPersonUserSigningUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -569,8 +549,8 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    //
    // @return 数据单元
    //============================================================
-   public FDataResourceModelAnimationUnit doPrepare(){
-      FDataResourceModelAnimationUnit unit = new FDataResourceModelAnimationUnit();
+   public FDataPersonUserSigningUnit doPrepare(){
+      FDataPersonUserSigningUnit unit = new FDataPersonUserSigningUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -597,7 +577,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataResourceModelAnimationUnit unit = (FDataResourceModelAnimationUnit)logicUnit;
+      FDataPersonUserSigningUnit unit = (FDataPersonUserSigningUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -611,7 +591,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataResourceModelAnimationUnit unit = (FDataResourceModelAnimationUnit)logicUnit;
+      FDataPersonUserSigningUnit unit = (FDataPersonUserSigningUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0)|| (unit.updateUserId() == 0)){
@@ -633,15 +613,8 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
-      cmd.append(",`PROJECT_ID`");
-      cmd.append(",`MODEL_ID`");
-      cmd.append(",`SKELETON_ID`");
-      cmd.append(",`FULL_CODE`");
-      cmd.append(",`CODE`");
-      cmd.append(",`LABEL`");
-      cmd.append(",`FRAME_COUNT`");
-      cmd.append(",`FRAME_TICK`");
-      cmd.append(",`FRAME_SPAN`");
+      cmd.append(",`SINGN_DATE`");
+      cmd.append(",`SINGN_ADDRESS`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -669,59 +642,25 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
          cmd.append(userId);
       }
       cmd.append(',');
-      long projectId = unit.projectId();
-      if(projectId == 0){
+      TDateTime singnDate = unit.singnDate();
+      if(singnDate == null){
+         cmd.append("NULL");
+      }else if(singnDate.isEmpty()){
          cmd.append("NULL");
       }else{
-         cmd.append(projectId);
+         cmd.append("STR_TO_DATE('");
+         cmd.append(singnDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      long modelId = unit.modelId();
-      if(modelId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(modelId);
-      }
-      cmd.append(',');
-      long skeletonId = unit.skeletonId();
-      if(skeletonId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(skeletonId);
-      }
-      cmd.append(',');
-      String fullCode = unit.fullCode();
-      if(RString.isEmpty(fullCode)){
+      String singnAddress = unit.singnAddress();
+      if(RString.isEmpty(singnAddress)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(fullCode));
+         cmd.append(RSql.formatValue(singnAddress));
          cmd.append('\'');
       }
-      cmd.append(',');
-      String code = unit.code();
-      if(RString.isEmpty(code)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(code));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      String label = unit.label();
-      if(RString.isEmpty(label)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(label));
-         cmd.append('\'');
-      }
-      cmd.append(',');
-      cmd.append(unit.frameCount());
-      cmd.append(',');
-      cmd.append(unit.frameTick());
-      cmd.append(',');
-      cmd.append(unit.frameSpan());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -766,7 +705,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataResourceModelAnimationUnit unit = (FDataResourceModelAnimationUnit)logicUnit;
+      FDataPersonUserSigningUnit unit = (FDataPersonUserSigningUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -785,7 +724,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataResourceModelAnimationUnit unit = (FDataResourceModelAnimationUnit)logicUnit;
+      FDataPersonUserSigningUnit unit = (FDataPersonUserSigningUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -814,77 +753,29 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
             cmd.append(userId);
          }
       }
-      if(unit.isProjectIdChanged()){
-         cmd.append(",`PROJECT_ID`=");
-         long projectId = unit.projectId();
-         if(projectId == 0){
+      if(unit.isSingnDateChanged()){
+         cmd.append(",`SINGN_DATE`=");
+         TDateTime singnDate = unit.singnDate();
+         if(singnDate == null){
+            cmd.append("NULL");
+         }else if(singnDate.isEmpty()){
             cmd.append("NULL");
          }else{
-            cmd.append(projectId);
+            cmd.append("STR_TO_DATE('");
+            cmd.append(singnDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isModelIdChanged()){
-         cmd.append(",`MODEL_ID`=");
-         long modelId = unit.modelId();
-         if(modelId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(modelId);
-         }
-      }
-      if(unit.isSkeletonIdChanged()){
-         cmd.append(",`SKELETON_ID`=");
-         long skeletonId = unit.skeletonId();
-         if(skeletonId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(skeletonId);
-         }
-      }
-      if(unit.isFullCodeChanged()){
-         cmd.append(",`FULL_CODE`=");
-         String fullCode = unit.fullCode();
-         if(RString.isEmpty(fullCode)){
+      if(unit.isSingnAddressChanged()){
+         cmd.append(",`SINGN_ADDRESS`=");
+         String singnAddress = unit.singnAddress();
+         if(RString.isEmpty(singnAddress)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(fullCode));
+            cmd.append(RSql.formatValue(singnAddress));
             cmd.append('\'');
          }
-      }
-      if(unit.isCodeChanged()){
-         cmd.append(",`CODE`=");
-         String code = unit.code();
-         if(RString.isEmpty(code)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(code));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isLabelChanged()){
-         cmd.append(",`LABEL`=");
-         String label = unit.label();
-         if(RString.isEmpty(label)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(label));
-            cmd.append('\'');
-         }
-      }
-      if(unit.isFrameCountChanged()){
-         cmd.append(",`FRAME_COUNT`=");
-         cmd.append(unit.frameCount());
-      }
-      if(unit.isFrameTickChanged()){
-         cmd.append(",`FRAME_TICK`=");
-         cmd.append(unit.frameTick());
-      }
-      if(unit.isFrameSpanChanged()){
-         cmd.append(",`FRAME_SPAN`=");
-         cmd.append(unit.frameSpan());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
@@ -917,7 +808,7 @@ public class FDataResourceModelAnimationLogic extends FLogicTable
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataResourceModelAnimationUnit unit = (FDataResourceModelAnimationUnit)logicUnit;
+      FDataPersonUserSigningUnit unit = (FDataPersonUserSigningUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

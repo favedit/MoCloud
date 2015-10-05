@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="ff5d169c-dfe2-4be1-9aaf-d4e36e5c916b" name="data.person.user.signing" label="M#12cn15用户签到表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Person.User.Signing" data_name="DT_PSN_USER_SIGNING" data_alias="DT_PSN_USR_SIG" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="27de4d38-11a6-497e-a53e-6f4805a25604" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" />
+  <FieldDateTime _uuid="61e51011-5a31-4d1b-81e4-6433156daec6" name="singn_date" label="M#12cn14签到时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SINGN_DATE" />
+  <FieldString _uuid="d218a065-0d7a-4399-9634-c97ed16a9966" name="singn_address" label="M#12cn14签到地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SINGN_ADDRESS" data_size="400" />
+  <FieldString _uuid="83b0d914-258f-46e6-a560-dd1118edee54" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="27e839a6-8150-4d55-843c-1ec227c7bab2" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.logger;
+package com.cyou.gccloud.data.data;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
@@ -13,10 +13,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>人员模块访问逻辑单元。</T>
+// <T>用户签到表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerPersonUserModuleUnit extends FLogicUnit
+public class FDataPersonUserSigningUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -30,10 +30,10 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    // 字段有效性的定义。
    protected boolean _ovld;
 
-   // 存储字段全局唯一标识的定义。
+   // 存储字段对象唯一标识的定义。
    private String __guid;
 
-   // 字段全局唯一标识的定义。
+   // 字段对象唯一标识的定义。
    protected String _guid;
 
    // 存储字段用户编号的定义。
@@ -42,41 +42,23 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    // 字段用户编号的定义。
    protected long _userId;
 
-   // 存储字段登录名称的定义。
-   private String __passport;
+   // 存储字段签到时间的定义。
+   private TDateTime __singnDate = new TDateTime();
 
-   // 字段登录名称的定义。
-   protected String _passport;
+   // 字段签到时间的定义。
+   protected TDateTime _singnDate = new TDateTime();
 
-   // 存储字段模块代码的定义。
-   private String __moduleCode;
+   // 存储字段签到地址的定义。
+   private String __singnAddress;
 
-   // 字段模块代码的定义。
-   protected String _moduleCode;
+   // 字段签到地址的定义。
+   protected String _singnAddress;
 
-   // 存储字段模块命令的定义。
-   private String __moduleAction;
+   // 存储字段备注的定义。
+   private String __note;
 
-   // 字段模块命令的定义。
-   protected String _moduleAction;
-
-   // 存储字段模块结果的定义。
-   private String __moduleResult;
-
-   // 字段模块结果的定义。
-   protected String _moduleResult;
-
-   // 存储字段浏览地址的定义。
-   private String __browserUri;
-
-   // 字段浏览地址的定义。
-   protected String _browserUri;
-
-   // 存储字段页面信息的定义。
-   private String __pageInfo;
-
-   // 字段页面信息的定义。
-   protected String _pageInfo;
+   // 字段备注的定义。
+   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -103,9 +85,9 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造人员模块访问逻辑单元。</T>
+   // <T>构造用户签到表逻辑单元。</T>
    //============================================================
-   public FLoggerPersonUserModuleUnit(){
+   public FDataPersonUserSigningUnit(){
    }
 
    //============================================================
@@ -163,7 +145,7 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    }
 
    //============================================================
-   // <T>判断全局唯一标识的数据是否改变。</T>
+   // <T>判断对象唯一标识的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -172,7 +154,7 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    }
 
    //============================================================
-   // <T>获得全局唯一标识的数据内容。</T>
+   // <T>获得对象唯一标识的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -181,7 +163,7 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    }
 
    //============================================================
-   // <T>设置全局唯一标识的数据内容。</T>
+   // <T>设置对象唯一标识的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -208,6 +190,17 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    }
 
    //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
+   }
+
+   //============================================================
    // <T>设置用户编号的数据内容。</T>
    //
    // @param value 数据内容
@@ -217,165 +210,84 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
    }
 
    //============================================================
-   // <T>判断登录名称的数据是否改变。</T>
+   // <T>判断签到时间的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isPassportChanged(){
-      return !RString.equals(__passport, _passport);
+   public boolean isSingnDateChanged(){
+      return !__singnDate.equals(_singnDate);
    }
 
    //============================================================
-   // <T>获得登录名称的数据内容。</T>
+   // <T>获得签到时间的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String passport(){
-      return _passport;
+   public TDateTime singnDate(){
+      return _singnDate;
    }
 
    //============================================================
-   // <T>设置登录名称的数据内容。</T>
+   // <T>设置签到时间的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setPassport(String value){
-      _passport = value;
+   public void setSingnDate(TDateTime value){
+      _singnDate = value;
    }
 
    //============================================================
-   // <T>判断模块代码的数据是否改变。</T>
+   // <T>判断签到地址的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isModuleCodeChanged(){
-      return !RString.equals(__moduleCode, _moduleCode);
+   public boolean isSingnAddressChanged(){
+      return !RString.equals(__singnAddress, _singnAddress);
    }
 
    //============================================================
-   // <T>获得模块代码的数据内容。</T>
+   // <T>获得签到地址的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String moduleCode(){
-      return _moduleCode;
+   public String singnAddress(){
+      return _singnAddress;
    }
 
    //============================================================
-   // <T>设置模块代码的数据内容。</T>
+   // <T>设置签到地址的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setModuleCode(String value){
-      _moduleCode = value;
+   public void setSingnAddress(String value){
+      _singnAddress = value;
    }
 
    //============================================================
-   // <T>判断模块命令的数据是否改变。</T>
+   // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isModuleActionChanged(){
-      return !RString.equals(__moduleAction, _moduleAction);
+   public boolean isNoteChanged(){
+      return !RString.equals(__note, _note);
    }
 
    //============================================================
-   // <T>获得模块命令的数据内容。</T>
+   // <T>获得备注的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String moduleAction(){
-      return _moduleAction;
+   public String note(){
+      return _note;
    }
 
    //============================================================
-   // <T>设置模块命令的数据内容。</T>
+   // <T>设置备注的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setModuleAction(String value){
-      _moduleAction = value;
-   }
-
-   //============================================================
-   // <T>判断模块结果的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isModuleResultChanged(){
-      return !RString.equals(__moduleResult, _moduleResult);
-   }
-
-   //============================================================
-   // <T>获得模块结果的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String moduleResult(){
-      return _moduleResult;
-   }
-
-   //============================================================
-   // <T>设置模块结果的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setModuleResult(String value){
-      _moduleResult = value;
-   }
-
-   //============================================================
-   // <T>判断浏览地址的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isBrowserUriChanged(){
-      return !RString.equals(__browserUri, _browserUri);
-   }
-
-   //============================================================
-   // <T>获得浏览地址的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String browserUri(){
-      return _browserUri;
-   }
-
-   //============================================================
-   // <T>设置浏览地址的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setBrowserUri(String value){
-      _browserUri = value;
-   }
-
-   //============================================================
-   // <T>判断页面信息的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPageInfoChanged(){
-      return !RString.equals(__pageInfo, _pageInfo);
-   }
-
-   //============================================================
-   // <T>获得页面信息的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String pageInfo(){
-      return _pageInfo;
-   }
-
-   //============================================================
-   // <T>设置页面信息的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPageInfo(String value){
-      _pageInfo = value;
+   public void setNote(String value){
+      _note = value;
    }
 
    //============================================================
@@ -503,18 +415,12 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
             return _guid;
          case "user_id":
             return Long.toString(_userId);
-         case "passport":
-            return _passport;
-         case "module_code":
-            return _moduleCode;
-         case "module_action":
-            return _moduleAction;
-         case "module_result":
-            return _moduleResult;
-         case "browser_uri":
-            return _browserUri;
-         case "page_info":
-            return _pageInfo;
+         case "singn_date":
+            return _singnDate.toString();
+         case "singn_address":
+            return _singnAddress;
+         case "note":
+            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -549,23 +455,14 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
          case "user_id":
             _userId = RLong.parse(value);
             break;
-         case "passport":
-            _passport = value;
+         case "singn_date":
+            _singnDate.parse(value);
             break;
-         case "module_code":
-            _moduleCode = value;
+         case "singn_address":
+            _singnAddress = value;
             break;
-         case "module_action":
-            _moduleAction = value;
-            break;
-         case "module_result":
-            _moduleResult = value;
-            break;
-         case "browser_uri":
-            _browserUri = value;
-            break;
-         case "page_info":
-            _pageInfo = value;
+         case "note":
+            _note = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -610,29 +507,17 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
                __userId = RLong.parse(value);
                _userId = __userId;
                break;
-            case "passport":
-               __passport = value;
-               _passport = __passport;
+            case "singn_date":
+               __singnDate.parse(value);
+               _singnDate.assign(__singnDate);
                break;
-            case "module_code":
-               __moduleCode = value;
-               _moduleCode = __moduleCode;
+            case "singn_address":
+               __singnAddress = value;
+               _singnAddress = __singnAddress;
                break;
-            case "module_action":
-               __moduleAction = value;
-               _moduleAction = __moduleAction;
-               break;
-            case "module_result":
-               __moduleResult = value;
-               _moduleResult = __moduleResult;
-               break;
-            case "browser_uri":
-               __browserUri = value;
-               _browserUri = __browserUri;
-               break;
-            case "page_info":
-               __pageInfo = value;
-               _pageInfo = __pageInfo;
+            case "note":
+               __note = value;
+               _note = __note;
                break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
@@ -666,12 +551,9 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("userId", _userId);
-      row.set("passport", _passport);
-      row.set("moduleCode", _moduleCode);
-      row.set("moduleAction", _moduleAction);
-      row.set("moduleResult", _moduleResult);
-      row.set("browserUri", _browserUri);
-      row.set("pageInfo", _pageInfo);
+      row.set("singnDate", _singnDate);
+      row.set("singnAddress", _singnAddress);
+      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -690,12 +572,9 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
-      map.put("passport", _passport);
-      map.put("moduleCode", _moduleCode);
-      map.put("moduleAction", _moduleAction);
-      map.put("moduleResult", _moduleResult);
-      map.put("browserUri", _browserUri);
-      map.put("pageInfo", _pageInfo);
+      map.put("singnDate", _singnDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("singnAddress", _singnAddress);
+      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -714,12 +593,9 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
       _ovld = input.readBoolean();
       _guid = input.readString();
       _userId = input.readInt64();
-      _passport = input.readString();
-      _moduleCode = input.readString();
-      _moduleAction = input.readString();
-      _moduleResult = input.readString();
-      _browserUri = input.readString();
-      _pageInfo = input.readString();
+      _singnDate.set(input.readInt64());
+      _singnAddress = input.readString();
+      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -738,12 +614,9 @@ public class FLoggerPersonUserModuleUnit extends FLogicUnit
       output.writeBoolean(_ovld);
       output.writeString(_guid);
       output.writeInt64(_userId);
-      output.writeString(_passport);
-      output.writeString(_moduleCode);
-      output.writeString(_moduleAction);
-      output.writeString(_moduleResult);
-      output.writeString(_browserUri);
-      output.writeString(_pageInfo);
+      output.writeInt64(_singnDate.get());
+      output.writeString(_singnAddress);
+      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

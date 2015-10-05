@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>资源模型骨骼蒙皮数据流表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceModelSkeletonSkinStreamUnit
-      extends FLogicUnit
+public class FDataResourceModelSkeletonSkinStreamUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
