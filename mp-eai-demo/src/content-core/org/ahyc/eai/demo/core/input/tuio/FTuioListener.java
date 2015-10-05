@@ -66,6 +66,7 @@ public abstract class FTuioListener
          FTuioCursor cursor = createCursor(value);
          _cursors.push(cursor);
          _logger.debug(this, "addTuioCursor", "Add tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
+         update();
       }
    }
 
@@ -81,6 +82,7 @@ public abstract class FTuioListener
       if(cursor != null){
          cursor.set(value);
          _logger.debug(this, "updateTuioCursor", "Update tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
+         update();
       }
    }
 
@@ -96,6 +98,7 @@ public abstract class FTuioListener
       if(cursor != null){
          _cursors.remove(cursor);
          _logger.debug(this, "removeTuioCursor", "Remove tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
+         update();
       }
    }
 
@@ -135,6 +138,7 @@ public abstract class FTuioListener
          FTuioBlob blob = createBlob(value);
          _blobs.push(blob);
          _logger.debug(this, "addTuioBlob", "Add tuio blob. (session_id={1}, id={2}, position={3})", sessionId, blob.id(), blob.position());
+         update();
       }
    }
 
@@ -150,6 +154,7 @@ public abstract class FTuioListener
       if(blob != null){
          blob.set(value);
          _logger.debug(this, "updateTuioBlob", "Update tuio blob. (session_id={1}, id={2}, position={3})", sessionId, blob.id(), blob.position());
+         update();
       }
    }
 
@@ -165,6 +170,7 @@ public abstract class FTuioListener
       if(blob != null){
          _blobs.remove(blob);
          _logger.debug(this, "removeTuioBlob", "Remove tuio blob. (session_id={1}, id={2}, position={3})", sessionId, blob.id(), blob.position());
+         update();
       }
    }
 
@@ -204,6 +210,7 @@ public abstract class FTuioListener
          FTuioObject object = createObject(value);
          _objects.push(object);
          _logger.debug(this, "addTuioObject", "Add tuio object. (session_id={1}, id={2}, position={3})", sessionId, object.id(), object.position());
+         update();
       }
    }
 
@@ -219,6 +226,7 @@ public abstract class FTuioListener
       if(object != null){
          object.set(value);
          _logger.debug(this, "updateTuioObject", "Update tuio object. (session_id={1}, id={2}, position={3})", sessionId, object.id(), object.position());
+         update();
       }
    }
 
@@ -234,6 +242,7 @@ public abstract class FTuioListener
       if(object != null){
          _objects.remove(object);
          _logger.debug(this, "removeTuioObject", "Remove tuio object. (session_id={1}, id={2}, position={3})", sessionId, object.id(), object.position());
+         update();
       }
    }
 
@@ -245,5 +254,11 @@ public abstract class FTuioListener
    @Override
    public void refresh(TuioTime value){
       //value.getStartTime();
+   }
+
+   //============================================================
+   // <T>更新处理。</T>
+   //============================================================
+   public void update(){
    }
 }

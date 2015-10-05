@@ -18,9 +18,16 @@ public class FEaiInputListener
    // 日志输出接口
    // private static final ILogger _logger = RLogger.find(FEaiInputListener.class);
 
-   protected IEaiInputConsole _console;
+   protected FEaiInputConsole _console;
 
    protected SIntSize2 _size = new SIntSize2();
+
+   public FEaiInputListener(){
+   }
+
+   public FEaiInputListener(FEaiInputConsole console){
+      _console = console;
+   }
 
    //============================================================
    // <T>创建游标。</T>
@@ -57,5 +64,13 @@ public class FEaiInputListener
 
    public SIntSize2 size(){
       return _size;
+   }
+
+   //============================================================
+   // <T>更新处理。</T>
+   //============================================================
+   @Override
+   public void update(){
+      System.out.println(this);
    }
 }

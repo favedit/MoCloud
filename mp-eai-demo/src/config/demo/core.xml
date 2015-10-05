@@ -13,4 +13,17 @@
          scope = 'global'>
    </Component>
    
+   <!-- ==================================================== -->
+   <!-- ContentConfigurationConsole:内容配置控制台           -->
+   <!--  P:config_path - 配置文件路径                        -->
+   <!--  I:initializeConfig - 增加配置信息                   -->
+   <!-- ==================================================== -->
+   <Component
+         face   = 'org.ahyc.eai.demo.core.input.IEaiInputConsole'
+         class  = 'org.ahyc.eai.demo.core.input.FEaiInputConsole'
+         scope  = 'global'
+         deploy = 'start'>
+      <Initialize name='initialize'/>
+   </Component>
+   
 </Config>
