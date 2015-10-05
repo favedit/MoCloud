@@ -69,6 +69,7 @@ public class FFollowedAction
                            FBasePage basePage,
                            FFollowedPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
+
       _logger.debug(this, "construct", "construct default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       long marketerId = 0;

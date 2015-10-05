@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="fa861ce3-93d0-4bd9-aeb2-a24010d8c4e1" name="data.system.version" label="M#12cn15系统版本表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.System.Version" data_name="DT_SYS_VERSION" data_alias="DT_SYS_VER" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
   <FieldRecordId _uuid="e7e01c78-ce65-478c-b710-3bbb2c1f25ec" name="application_id" label="M#12cn14应用编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="APPLICATION_ID" data_alias="APP" data_refer="data.system.application" />
-  <FieldBoolean _uuid="23845e37-fa00-48cc-8512-de700cbd5b99" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
-  <FieldBoolean _uuid="8c4f54c7-981e-4c97-9dc7-8afdebf12999" name="force_cd" label="M#12cn14必须类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FORCE_CD" />
+  <FieldInteger _uuid="f5540417-35f4-4513-884d-0ee6c2ebba96" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldInteger _uuid="31b5672b-8fa1-430b-a89f-d040878c8191" name="force_cd" label="M#12cn14必须类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="FORCE_CD" />
   <FieldString _uuid="3cdc63de-b650-4a2b-8a92-1cea0f85b53d" name="code" label="M#12cn210版本 （X.X.X）" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
   <FieldString _uuid="2d32328b-49b3-42ec-b23c-e52aa8805d11" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
   <FieldDateTime _uuid="a7cf8780-b4c7-4860-98ac-11bce808acc5" name="begin_date" label="M#12cn14开始时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BEGIN_DATE" />

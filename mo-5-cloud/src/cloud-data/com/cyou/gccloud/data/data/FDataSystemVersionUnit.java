@@ -6,6 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -16,7 +17,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>系统版本表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataSystemVersionUnit extends FLogicUnit
+public class FDataSystemVersionUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -43,16 +45,16 @@ public class FDataSystemVersionUnit extends FLogicUnit
    protected long _applicationId;
 
    // 存储字段状态的定义。
-   private boolean __statusCd;
+   private int __statusCd;
 
    // 字段状态的定义。
-   protected boolean _statusCd;
+   protected int _statusCd;
 
    // 存储字段必须类型的定义。
-   private boolean __forceCd;
+   private int __forceCd;
 
    // 字段必须类型的定义。
-   protected boolean _forceCd;
+   protected int _forceCd;
 
    // 存储字段版本 （X.X.X）的定义。
    private String __code;
@@ -247,7 +249,7 @@ public class FDataSystemVersionUnit extends FLogicUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean statusCd(){
+   public int statusCd(){
       return _statusCd;
    }
 
@@ -256,7 +258,7 @@ public class FDataSystemVersionUnit extends FLogicUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setStatusCd(boolean value){
+   public void setStatusCd(int value){
       _statusCd = value;
    }
 
@@ -274,7 +276,7 @@ public class FDataSystemVersionUnit extends FLogicUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean forceCd(){
+   public int forceCd(){
       return _forceCd;
    }
 
@@ -283,7 +285,7 @@ public class FDataSystemVersionUnit extends FLogicUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setForceCd(boolean value){
+   public void setForceCd(int value){
       _forceCd = value;
    }
 
@@ -548,9 +550,9 @@ public class FDataSystemVersionUnit extends FLogicUnit
          case "application_id":
             return Long.toString(_applicationId);
          case "status_cd":
-            return RBoolean.toString(_statusCd);
+            return RInteger.toString(_statusCd);
          case "force_cd":
-            return RBoolean.toString(_forceCd);
+            return RInteger.toString(_forceCd);
          case "code":
             return _code;
          case "label":
@@ -596,10 +598,10 @@ public class FDataSystemVersionUnit extends FLogicUnit
             _applicationId = RLong.parse(value);
             break;
          case "status_cd":
-            _statusCd = RBoolean.parse(value);
+            _statusCd = RInteger.parse(value);
             break;
          case "force_cd":
-            _forceCd = RBoolean.parse(value);
+            _forceCd = RInteger.parse(value);
             break;
          case "code":
             _code = value;
@@ -660,11 +662,11 @@ public class FDataSystemVersionUnit extends FLogicUnit
                _applicationId = __applicationId;
                break;
             case "status_cd":
-               __statusCd = RBoolean.parse(value);
+               __statusCd = RInteger.parse(value);
                _statusCd = __statusCd;
                break;
             case "force_cd":
-               __forceCd = RBoolean.parse(value);
+               __forceCd = RInteger.parse(value);
                _forceCd = __forceCd;
                break;
             case "code":
@@ -744,8 +746,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("applicationId", RLong.toString(_applicationId));
-      map.put("statusCd", RBoolean.toString(_statusCd));
-      map.put("forceCd", RBoolean.toString(_forceCd));
+      map.put("statusCd", RInteger.toString(_statusCd));
+      map.put("forceCd", RInteger.toString(_forceCd));
       map.put("code", _code);
       map.put("label", _label);
       map.put("beginDate", _beginDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -769,8 +771,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       _ovld = input.readBoolean();
       _guid = input.readString();
       _applicationId = input.readInt64();
-      _statusCd = input.readBoolean();
-      _forceCd = input.readBoolean();
+      _statusCd = input.readInt32();
+      _forceCd = input.readInt32();
       _code = input.readString();
       _label = input.readString();
       _beginDate.set(input.readInt64());
@@ -794,8 +796,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       output.writeBoolean(_ovld);
       output.writeString(_guid);
       output.writeInt64(_applicationId);
-      output.writeBoolean(_statusCd);
-      output.writeBoolean(_forceCd);
+      output.writeInt32(_statusCd);
+      output.writeInt32(_forceCd);
       output.writeString(_code);
       output.writeString(_label);
       output.writeInt64(_beginDate.get());
