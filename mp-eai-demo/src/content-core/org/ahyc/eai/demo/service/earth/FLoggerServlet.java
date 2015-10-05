@@ -37,7 +37,6 @@ public class FLoggerServlet
          _console = RAop.find(IWebSocketConsole.class);
       }
       _console.open(session);
-      _logger.debug(this, "onOpen", "Open session. (id={1})", session.getId());
    }
 
    //============================================================
@@ -67,7 +66,6 @@ public class FLoggerServlet
    //============================================================
    @OnClose
    public void onClose(Session session){
-      _logger.debug(this, "onClose", "Close session. (id={1})", session.getId());
       _console.close(session);
    }
 

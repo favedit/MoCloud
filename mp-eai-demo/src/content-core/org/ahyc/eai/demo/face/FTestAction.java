@@ -1,7 +1,6 @@
 package org.ahyc.eai.demo.face;
 
-import java.io.IOException;
-import javax.websocket.Session;
+import org.ahyc.eai.demo.core.earth.FWebSocketSession;
 import org.ahyc.eai.demo.core.earth.IWebSocketConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -21,7 +20,7 @@ public class FTestAction
    //private static ILogger _logger = RLogger.find(FTestAction.class);
 
    @ALink
-   protected IWebSocketConsole _demoConsole;
+   protected IWebSocketConsole _socketConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -34,14 +33,10 @@ public class FTestAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FTestPage page){
-      Session[] sessions = _demoConsole.fetch();
+      FWebSocketSession[] sessions = _socketConsole.fetch();
       System.out.println("Session count = " + sessions.length);
-      for(Session session : sessions){
-         try{
-            session.getBasicRemote().sendText("Hello World.");
-         }catch(IOException e){
-            e.printStackTrace();
-         }
+      for(FWebSocketSession session : sessions){
+         session.sendMessage("Hello World.");
       }
       // 非法设置
       return "Test";

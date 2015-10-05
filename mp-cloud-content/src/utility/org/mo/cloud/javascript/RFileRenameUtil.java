@@ -32,20 +32,18 @@ public class RFileRenameUtil
    //============================================================
    public static void main(String[] args){
       String fileExt = ".mkv";
-      String sourcePath = "Q:/[Temp]/尽管如此世界依然美丽 (2014-12.mkv-1920x1080-27.2G)";
+      String sourcePath = "F:/Download/Finish/! 血战 (2005-50.mkv-720x480-15.0G-10bit)";
       FStrings fileNames = RFile.listFiles(sourcePath);
       for(String fileName : fileNames){
          if(fileName.endsWith(fileExt)){
-            //RFile.rename(fileName, RString.replace(fileName, ".MKV", ".mkv"));
-            String code = RString.mid(RFile.name(fileName), "第", "話");
-            //String code = RFile.name(fileName).substring(0, 2);
+            String code = RString.mid(RFile.name(fileName), "Blood+_-_", "_[DVD_10bit]");
             if(RInteger.isInteger(code)){
                String name = RFile.name(fileName);
-               String findFileName = findFile(fileNames, "[" + code + "]", "-tc.ass");
+               String findFileName = findFile(fileNames, "[" + code + "]", ".ass");
                if(!RString.isEmpty(findFileName)){
                   String findName = RFile.name(findFileName);
                   System.out.println(code + " - " + name + " : " + findName);
-                  RFile.rename(sourcePath + "/" + findName, sourcePath + "/" + RString.replace(name, fileExt, ".tc.ass"));
+                  RFile.rename(sourcePath + "/" + findName, sourcePath + "/" + RString.replace(name, fileExt, ".ass"));
                }
             }
          }

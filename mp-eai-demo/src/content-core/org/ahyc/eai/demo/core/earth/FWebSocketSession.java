@@ -1,37 +1,80 @@
 package org.ahyc.eai.demo.core.earth;
 
+import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
-import org.ahyc.eai.demo.face.FTestAction;
-import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
+//============================================================
+// <T>网络端口会话。</T>
+//============================================================
 public class FWebSocketSession
+      extends FObject
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FTestAction.class);
+   private static ILogger _logger = RLogger.find(FWebSocketSession.class);
 
-   protected FDictionary<Session> _sessions = new FDictionary<Session>(Session.class);
+   // 代码
+   private String _code;
 
-   public void open(Session session){
-      String sessionId = session.getId();
-      _sessions.set(sessionId, session);
-      _logger.debug(this, "open", "Open session. (id={1})", session.getId());
+   // 会话
+   private Session _session;
+
+   //============================================================
+   // <T>构造网络端口会话。</T>
+   //============================================================
+   public FWebSocketSession(){
    }
 
-   public Session find(String code){
-      return _sessions.get(code, null);
+   //============================================================
+   // <T>构造网络端口会话。</T>
+   //
+   // @param session 会话
+   //============================================================
+   public FWebSocketSession(Session session){
+      setSession(session);
    }
 
-   public void close(Session session){
-      String sessionId = session.getId();
-      _sessions.remove(sessionId);
-      _logger.debug(this, "close", "Close session. (id={1})", sessionId);
+   //============================================================
+   // <T>获得会话。</T>
+   //
+   // @return 会话
+   //============================================================
+   public Session session(){
+      return _session;
    }
 
-   public Session[] fetch(){
-      _logger.debug(this, "fetch", "Fetch sessions. (count={1})", _sessions.count());
-      return _sessions.toObjects();
+   //============================================================
+   // <T>设置会话。</T>
+   //
+   // @param session 会话
+   //============================================================
+   public void setSession(Session session){
+      _session = session;
+      _code = session.getId();
    }
 
+   //============================================================
+   // <T>获得代码。</T>
+   //
+   // @return 代码
+   //============================================================
+   public String code(){
+      return _code;
+   }
+
+   //============================================================
+   // <T>发送消息。</T>
+   //
+   // @param message 消息
+   //============================================================
+   public void sendMessage(String message){
+      try{
+         Basic basic = _session.getBasicRemote();
+         basic.sendText(message);
+      }catch(Exception exception){
+         _logger.error(this, "sendMessage", exception);
+      }
+   }
 }

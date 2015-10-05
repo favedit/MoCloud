@@ -3,15 +3,15 @@ package org.ahyc.eai.demo.core.earth;
 import javax.websocket.Session;
 
 //============================================================
-// <T>通讯会话控制台接口。</T>
+// <T>网络端口控制台接口。</T>
 //============================================================
 public interface IWebSocketConsole
 {
    void open(Session session);
 
-   Session find(String code);
+   FWebSocketSession find(String code);
 
-   Session[] fetch();
+   FWebSocketSession[] fetch();
 
    void close(Session session);
 }

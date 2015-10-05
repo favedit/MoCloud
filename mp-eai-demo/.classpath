@@ -11,5 +11,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/mo-6-eai-content"/>
 	<classpathentry kind="lib" path="lib/websocket-api.jar"/>
 	<classpathentry kind="lib" path="lib/catalina.jar"/>
+	<classpathentry kind="lib" path="lib/libTUIO.jar"/>
 	<classpathentry kind="output" path="webroot/WEB-INF/classes"/>
 </classpath>
