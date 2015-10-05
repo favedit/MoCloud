@@ -24,8 +24,24 @@
 	animation-duration: 500ms;
 	display: none;
 }
-.prompts span{
+.prompts .lh200{
 	line-height: 200px;
+}
+.prompts .mt50{
+	margin-top: 50px;
+}
+.prompts span{
+	display: block;
+}
+.hide{
+	display: none;
+}
+.prompts a{
+	text-decoration:underline;
+}
+.fz16{
+	font-size: 16px;
+	color:#ff8439!important;
 }
 .prompts i{
 	font-size: 16px;

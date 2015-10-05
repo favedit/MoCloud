@@ -26,7 +26,8 @@ $(function() {
   // hover 跳转
   $(".focus").on("click", ".trs", function() {
     var url = $(this).attr("href");
-    location.href = url;
+    window.open(url, "_blank")
+    // location.href = url;
   })
   // 解除关系
   $(".imag-container").on("click", ".remove", function(event) {

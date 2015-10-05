@@ -101,7 +101,7 @@
 	font-weight: bold;
 	height: 200px;
 	width: 350px;
-	line-height: 200px;
+	/*line-height: 200px;*/
 	text-align: center;
 	border-radius: 20px;
 	position:absolute;

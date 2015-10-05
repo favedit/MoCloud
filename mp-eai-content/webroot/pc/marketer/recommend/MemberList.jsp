@@ -28,6 +28,7 @@
                      <td><a class="btn" data-id="<jh:write source='&member.guid' />" href="javascript:;">关&nbsp;&nbsp;&nbsp;&nbsp;注</a></td>
                   </tr>
                </jh:loop>
+            
             </table>
             <div class="loading"></div>
             <div id="loading_img_div" style="width:160px;">
@@ -75,8 +76,10 @@
       }
       doLoading();
    </script>
-   <div class="prompts">
-      <span>不好意思，您手慢了！</span>
+   <div class="prompts" style="display: none;">
+      <span  class="lh200">不好意思，您手慢了！</span>
+      <span class="mt50 hide" style="display:none;">恭喜您！已关注成功</span>
+      <p><a class="fz16 hide" target="_blank" style="display:none;" href="javascript:;">查看客户资料</a></p>
    </div>
    <script type="text/javascript" src="js/potentialUsers.js"></script>
    </body>

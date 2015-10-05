@@ -16,13 +16,17 @@ var $users = $("#users");
  });
 })
 // 错误提示
-
-function setPrompts(){
+function setPrompts(time, callback ,state){
     var prompts = $(".prompts");
     prompts.show();
+    if(state){
+      $(".hide").show();
+      $(".lh200").hide();
+    }
     setTimeout(function() {
-           prompts.hide();
-        }, 1500);
+           prompts.fadeOut();
+           callback();
+        }, time);
 }
 // 退出
 function loginOut() {

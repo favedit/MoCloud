@@ -24,8 +24,8 @@
          </div>
          <div class="head-right">
             <ul class="user-l">
-               <li><a href="/pc/Main.wa">实时数据展示系统</a></li>
-               <li><a href="/pc/marketer/recommend/Recommend.wa">潜在客户挖掘</a></li>
+               <li><a href="/pc/Main.wa"></a></li>
+               <li class="on"><a href="/pc/marketer/recommend/Recommend.wa"></a></li>
             </ul>
              <ul class="user-r">
                <span><jh:write source='&page.label' /><je:authority role='eai.marketer'><font size="3" color="#FF851A">(理财师)</font></je:authority></span>
@@ -43,6 +43,6 @@
 <TR>
    <TD  width="100%" align="center" valign="center">
       <ul class="users" id="users">
-         <li class="binding"><a href="/pc/marketer/member/Followed.wa">已关用户列表</a></li>
+         <li class="binding"><a href="/pc/marketer/member/Followed.wa">已关注用户列表</a></li>
          <li onclick="loginOut();"><a class="exit" href="javascript:;">退出</a></li>
        </ul> 

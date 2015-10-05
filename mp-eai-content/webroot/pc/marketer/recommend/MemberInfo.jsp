@@ -5,14 +5,14 @@
       
             <div class="imag-container">
                <div class="details">
-                  <p class="title"><a href="/pc/marketer/member/Followed.wa">返回关注用户列表>></a></p>
+                  <p class="title"><a href="/pc/marketer/member/Followed.wa"><<返回已关注用户列表</a></p>
                   <div class="details-l">
                      <h4>
                          <b style="width:22%"><jh:write source="&member.label" /></b>
                          <i style="width:20%"><jh:write source="&member.phone" /></i>
                          <i style="width:12%"><jh:write source="&member.age" /></i>
                          <i class="setupthes" style=""><a class="btn removes" data-id="<jh:write source="&member.guid" />"  href="javascript:;" onclick="setManagement();" >解除关系</a>
-                           <a class="btn " onclick="setPrompts();" href="javascript:;">短信设置</a>
+                           <a class="btn " onclick="setPrompts(1500);" href="javascript:;">短信设置</a>
                          </i>
                       </h4>
                      <p>性别：
