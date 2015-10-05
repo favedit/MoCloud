@@ -66,7 +66,7 @@ public class FMemoryCacheConsole
    //============================================================
    // <T>获得构建器。</T>
    //============================================================
-   public XMemcachedClientBuilder builder(){
+   public XMemcachedClientBuilder handle(){
       return _builder;
    }
 
@@ -92,25 +92,27 @@ public class FMemoryCacheConsole
             }
             // 创建链接
             _builder = new XMemcachedClientBuilder(addresses);
-            XMemcachedClient client = (XMemcachedClient)_builder.build();
             // 打印信息
-            Map<InetSocketAddress, String> versions = client.getVersions();
-            Map<InetSocketAddress, Map<String, String>> statuses = client.getStats();
-            for(InetSocketAddress address : versions.keySet()){
-               String version = versions.get(address);
-               Map<String, String> properties = statuses.get(address);
-               _logger.debug(this, "initialize", "Memcache status. (address={1}, version={2})", address, version);
-               for(String name : properties.keySet()){
-                  String value = properties.get(name);
-                  _logger.debug(this, "initialize", " - {1} = {2}", name, value);
+            try(FMemoryChannel channel = alloc()){
+               XMemcachedClient handle = channel.handle();
+               Map<InetSocketAddress, String> versions = handle.getVersions();
+               Map<InetSocketAddress, Map<String, String>> statuses = handle.getStats();
+               for(InetSocketAddress address : versions.keySet()){
+                  String version = versions.get(address);
+                  Map<String, String> properties = statuses.get(address);
+                  _logger.debug(this, "initialize", "Memcache status. (address={1}, version={2})", address, version);
+                  for(String name : properties.keySet()){
+                     String value = properties.get(name);
+                     _logger.debug(this, "initialize", " - {1} = {2}", name, value);
+                  }
                }
-            }
-            // 获得同步代码
-            String guid = RUuid.simpleUuid();
-            String identityCode = _code + EMemoryCacheConstant.IDENTITY_CODE;
-            boolean result = client.set(identityCode, 0, guid);
-            if(!result){
-               throw new FFatalError("Write code failure.");
+               // 获得同步代码
+               String guid = RUuid.simpleUuid();
+               String identityCode = _code + EMemoryCacheConstant.IDENTITY_CODE;
+               boolean result = handle.set(identityCode, 0, guid);
+               if(!result){
+                  throw new FFatalError("Write code failure.");
+               }
             }
          }catch(Exception exception){
             throw new FFatalError(exception);
@@ -148,11 +150,21 @@ public class FMemoryCacheConsole
    //============================================================
    @Override
    public void free(FMemoryChannel channel){
-      if(_enable){
-         // 断开处理
-         channel.disconnect();
+      if(_enable && (channel != null)){
          // 释放处理
          _channels.free(channel);
       }
+   }
+
+   //============================================================
+   // <T>释放处理。</T>
+   //============================================================
+   public void release(){
+      // 断开处理
+      for(FMemoryChannel channel : _channels.items()){
+         channel.release();
+      }
+      // 释放处理
+      _channels.release();
    }
 }

@@ -47,6 +47,15 @@ public class FObjectPool<T>
    //
    // @param item 对象
    //============================================================
+   public FList<T> items(){
+      return _items;
+   }
+
+   //============================================================
+   // <T>收集一个空闲对象。</T>
+   //
+   // @param item 对象
+   //============================================================
    public synchronized T alloc(){
       T value = null;
       if(!_items.isEmpty()){
@@ -66,5 +75,12 @@ public class FObjectPool<T>
          _items.push(item);
       }
       _freeTotal++;
+   }
+
+   //============================================================
+   // <T>释放处理。</T>
+   //============================================================
+   public void release(){
+      _items.clear();
    }
 }

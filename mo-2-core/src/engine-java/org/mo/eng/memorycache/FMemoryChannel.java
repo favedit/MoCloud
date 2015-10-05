@@ -53,10 +53,19 @@ public class FMemoryChannel
    }
 
    //============================================================
+   // <T>获得句柄。</T>
+   //
+   // @return 句柄
+   //============================================================
+   public XMemcachedClient handle(){
+      return _client;
+   }
+
+   //============================================================
    // <T>配置处理。</T>
    //============================================================
    public void setup(){
-      XMemcachedClientBuilder builder = _console.builder();
+      XMemcachedClientBuilder builder = _console.handle();
       try{
          _client = (XMemcachedClient)builder.build();
       }catch(Exception exception){
@@ -252,16 +261,21 @@ public class FMemoryChannel
    }
 
    //============================================================
-   // <T>断开处理。</T>
-   //============================================================
-   public void disconnect(){
-   }
-
-   //============================================================
    // <T>关闭处理。</T>
    //============================================================
    @Override
    public void close() throws Exception{
       _console.free(this);
+   }
+
+   //============================================================
+   // <T>释放处理。</T>
+   //============================================================
+   public void release(){
+      try{
+         _client.shutdown();
+      }catch(Exception exception){
+         _logger.error(this, "disconnect", exception);
+      }
    }
 }
