@@ -1,4 +1,4 @@
-package org.ahyc.eai.demo.core.earth;
+package org.ahyc.eai.demo.core.socket;
 
 import javax.websocket.Session;
 import org.ahyc.eai.demo.face.FTestAction;

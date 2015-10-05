@@ -1,6 +1,7 @@
 package org.ahyc.eai.demo.core.input;
 
-import org.ahyc.eai.demo.core.earth.IWebSocketConsole;
+import org.ahyc.eai.demo.core.socket.IWebSocketConsole;
+
 import org.mo.com.console.FConsole;
 import org.mo.core.aop.face.ALink;
 
