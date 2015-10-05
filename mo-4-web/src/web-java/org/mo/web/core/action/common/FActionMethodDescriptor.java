@@ -90,11 +90,12 @@ public class FActionMethodDescriptor
       }
       // 获得函数的参数信息
       _types = _method.getParameterTypes();
-      _forms = new AContainer[_types.length];
-      _sqlConnects = new ASqlConnect[_types.length];
+      int typeCount = _types.length;
+      _forms = new AContainer[typeCount];
+      _sqlConnects = new ASqlConnect[typeCount];
       // 获得函数的参数描述器
       Annotation[][] annos = _method.getParameterAnnotations();
-      for(int n = 0; n < _types.length; n++){
+      for(int n = 0; n < typeCount; n++){
          for(Annotation anno : annos[n]){
             if(anno instanceof AContainer){
                _forms[n] = (AContainer)anno;

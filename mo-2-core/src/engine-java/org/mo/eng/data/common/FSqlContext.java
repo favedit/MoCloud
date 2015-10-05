@@ -133,14 +133,20 @@ public class FSqlContext
    }
 
    //============================================================
-   // <T>回滚一个指定数据链接。</T>
-   //
-   // @param connection 数据链接
+   // <T>提交处理。</T>
    //============================================================
-   public void rollback(ISqlConnection connection){
-      if(null != connection){
-         connection.rollback();
-         _databaseConsole.free(connection);
+   public void commit(){
+      if(_connection != null){
+         _connection.commit();
+      }
+      if(_connections != null){
+         int count = _connections.count();
+         for(int n = 0; n < count; n++){
+            ISqlConnection connection = _connections.value(n);
+            if(connection != null){
+               connection.commit();
+            }
+         }
       }
    }
 
@@ -149,27 +155,17 @@ public class FSqlContext
    //============================================================
    @Override
    public void rollback(){
-      rollback(_connection);
+      if(_connection != null){
+         _connection.rollback();
+      }
       if(_connections != null){
          int count = _connections.count();
          for(int n = 0; n < count; n++){
             ISqlConnection connection = _connections.value(n);
             if(connection != null){
-               rollback(connection);
+               connection.rollback();
             }
          }
-      }
-   }
-
-   //============================================================
-   // <T>释放一个指定的数据链接。</T>
-   //
-   // @param connection 数据链接
-   //============================================================
-   public void release(ISqlConnection connection){
-      if(connection != null){
-         connection.free();
-         _databaseConsole.free(connection);
       }
    }
 
@@ -180,13 +176,15 @@ public class FSqlContext
    public void release(){
       // 释放默认数据链接
       if(_connection != null){
-         release(_connection);
+         _connection.free();
+         _databaseConsole.free(_connection);
       }
       // 释放集合数据链接
       if(_connections != null){
          int count = _connections.count();
          for(int n = 0; n < count; n++){
-            release(_connections.value(n));
+            ISqlConnection connection = _connections.value(n);
+            _databaseConsole.free(connection);
          }
          _connections.clear();
       }

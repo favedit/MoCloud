@@ -1,23 +1,18 @@
 package org.mo.web.core.process;
 
 import java.lang.reflect.Method;
-import org.mo.com.data.MSqlConnect;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.IRelease;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RThrowable;
-import org.mo.com.lang.reflect.RClass;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.message.FErrorMessage;
-import org.mo.com.message.FMessages;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
 import org.mo.eng.data.IDatabaseConsole;
 import org.mo.eng.data.common.FSqlContext;
 import org.mo.eng.data.common.ISqlContext;
-import org.mo.logic.session.FSqlSessionContext;
-import org.mo.logic.session.ISqlSessionContext;
 import org.mo.web.core.action.FActionConsole;
 import org.mo.web.core.action.servlet.IActionConstant;
 import org.mo.web.core.container.AContainer;
@@ -67,7 +62,6 @@ public class FWebProcessConsole
       return executeFace(face, methodName, args);
    }
 
-   @SuppressWarnings("resource")
    @Override
    public Object executeFace(Object face,
                              String methodName,
@@ -88,7 +82,6 @@ public class FWebProcessConsole
       Exception exception = null;
       IWebContext webContext = args.getWebContext();
       ISqlContext sqlContext = null;
-      ISqlSessionContext sqlSessionContext = null;
       try{
          // 创建调用的参数列表
          for(int n = 0; n < types.length; n++){
@@ -106,28 +99,6 @@ public class FWebProcessConsole
                   sqlContext = new FSqlContext(_databaseConsole);
                }
                value = sqlContext;
-            }else if(type == ISqlSessionContext.class){
-               // 参数为网络线程数据环境对象时
-               if(null == sqlSessionContext){
-                  sqlSessionContext = new FSqlSessionContext(_databaseConsole);
-               }
-               value = sqlSessionContext;
-            }else if(type.isInterface()){
-               String name = RClass.shortName(type);
-               if(name.startsWith("I") && name.endsWith("Di")){
-                  // 如果为数据对象接口时
-                  if(null == sqlSessionContext){
-                     sqlSessionContext = new FSqlSessionContext(_databaseConsole);
-                  }
-                  name = name.substring(1, name.length() - 2);
-                  name = RClass.packageName(type) + ".impl.F" + name + "Impl";
-                  MSqlConnect impl = RClass.newInstance(name);
-                  impl.linkConnect(sqlSessionContext);
-                  value = impl;
-               }else{
-                  // 如果为配置对象的接口时
-                  value = RAop.find(type);
-               }
             }else if(aforms[n] != null){
                // 参数为表单对象时
                forms[n] = _formConsole.findContainer(webContext, aforms[n], type);
@@ -143,10 +114,6 @@ public class FWebProcessConsole
             }
             params[n] = value;
          }
-         // 如果使用线程数据库对象，则关联数据库线程
-         if(null != sqlSessionContext){
-            sqlSessionContext.link(webContext.session().connectId());
-         }
          // 动态函数调用
          result = methodDsp.invoke(face, params);
       }catch(Exception e){
@@ -154,7 +121,7 @@ public class FWebProcessConsole
       }finally{
          // 释放所有参数
          for(Object param : params){
-            if((param == sqlContext) || (param == sqlSessionContext)){
+            if(param == sqlContext){
                continue;
             }
             if(param instanceof IRelease){
@@ -163,21 +130,6 @@ public class FWebProcessConsole
                }catch(Exception e){
                   exception = e;
                }
-            }
-         }
-         // 释放数据库线程链接
-         if(null != sqlSessionContext){
-            if(null == exception){
-               // 正常关闭数据库链接
-               sqlSessionContext.unlink();
-               FMessages messages = sqlSessionContext.messages();
-               if(messages != null){
-                  webContext.messages().append(messages);
-               }
-               sqlSessionContext.release();
-            }else{
-               // 回滚数据库链接
-               sqlSessionContext.rollback();
             }
          }
          // 释放数据库链接

@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.sql.SQLException;
 import org.mo.com.data.ASqlConnect;
-import org.mo.com.data.MSqlConnect;
 import org.mo.com.data.RSql;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
@@ -30,8 +29,6 @@ import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 import org.mo.eng.data.common.ISqlContext;
-import org.mo.logic.session.FSqlSessionContext;
-import org.mo.logic.session.ISqlSessionContext;
 import org.mo.web.core.action.common.FActionDescriptor;
 import org.mo.web.core.action.common.FActionDescriptorClassMap;
 import org.mo.web.core.action.common.FActionMethodDescriptor;
@@ -348,7 +345,6 @@ public class FActionConsole
                          String method){
       Throwable throwable = null;
       ILogicContext logicContext = null;
-      ISqlSessionContext sqlSessionContext = null;
       Object[] params = null;
       Object redirect = null;
       boolean hasError = context.messages().hasError();
@@ -444,10 +440,11 @@ public class FActionConsole
          Class[] types = methodDescriptor.types();
          AContainer[] acontainers = methodDescriptor.forms();
          ASqlConnect[] aconnects = methodDescriptor.sqlConnects();
-         FWebContainerItem[] containers = new FWebContainerItem[types.length];
-         params = new Object[types.length];
+         int paramCount = types.length;
+         FWebContainerItem[] containers = new FWebContainerItem[paramCount];
+         params = new Object[paramCount];
          // 创建调用的参数列表
-         for(int n = 0; n < types.length; n++){
+         for(int n = 0; n < paramCount; n++){
             Class type = types[n];
             AContainer acontainer = acontainers[n];
             Object value = null;
@@ -461,53 +458,28 @@ public class FActionConsole
                // 参数对象为数据环境对象
                value = logicContext;
                ASqlConnect aconnect = aconnects[n];
-               if(null != aconnect){
+               if(aconnect != null){
                   logicContext.setDefaultName(aconnect.name());
                }
-            }else if(type == ISqlSessionContext.class){
-               // 参数为网络线程数据环境对象时
-               if(sqlSessionContext == null){
-                  sqlSessionContext = new FSqlSessionContext(_databaseConsole);
-               }
-               value = sqlSessionContext;
             }else if(acontainer != null){
                // 参数为表单对象时
                containers[n] = _formConsole.findContainer(context, acontainer, type);
                value = containers[n].container();
                context.define(acontainers[n].name(), value);
-            }else if(type.isInterface()){
-               String name = RClass.shortName(type);
-               if(name.startsWith("I") && name.endsWith("Di")){
-                  // 如果为数据库对象时
-                  if(null == sqlSessionContext){
-                     sqlSessionContext = new FSqlSessionContext(_databaseConsole);
-                  }
-                  name = name.substring(1, name.length() - 2);
-                  name = RClass.packageName(type) + ".impl.F" + name + "Impl";
-                  MSqlConnect impl = RClass.newInstance(name);
-                  impl.linkConnect(sqlSessionContext);
-                  value = impl;
-               }else{
-                  // 如果为配置的接口对象时
-                  value = RAop.find(type);
-               }
             }else{
                // 未知参数时
                Object bindObject = _bindConsole.find(type);
                if(bindObject != null){
                   value = bindObject;
+               }else if(type.isInterface()){
+                  value = RAop.find(type);
                }else{
                   throw new FFatalError("Unknown param type. (type={1})", type);
                }
             }
             params[n] = value;
          }
-         if(sqlSessionContext != null){
-            String connectId = context.session().connectId();
-            sqlSessionContext.link(connectId);
-         }
          // 动态函数调用
-         ((FWebContext)context).setSqlContext(sqlSessionContext);
          redirect = methodDescriptor.invoke(action, params);
       }catch(Throwable t){
          // 产生例外时，处理例外内容
@@ -524,10 +496,10 @@ public class FActionConsole
          }
          throwable = t;
       }finally{
-         // 释放参数
-         if(null != params){
-            for(Object param : params){
-               if((param != logicContext) && (param != sqlSessionContext) && (param instanceof IRelease)){
+         // 释放所有调用参数
+         for(Object param : params){
+            if(param != logicContext){
+               if(param instanceof IRelease){
                   try{
                      ((IRelease)param).release();
                   }catch(Exception e){
@@ -539,24 +511,16 @@ public class FActionConsole
          // 释放数据库链接
          if(logicContext != null){
             if(throwable == null){
-               logicContext.release();
+               logicContext.commit();
             }else{
                logicContext.rollback();
             }
-            logicContext = null;
-         }
-         if(sqlSessionContext != null){
-            if(throwable == null){
-               sqlSessionContext.unlink();
-               FMessages messages = sqlSessionContext.messages();
-               if(null != messages){
-                  context.messages().append(messages);
-               }
-               sqlSessionContext.release();
-            }else{
-               sqlSessionContext.rollback();
+            try{
+               logicContext.release();
+            }catch(Exception e){
+               throw new FFatalError(e);
             }
-            sqlSessionContext = null;
+            logicContext = null;
          }
       }
       // 如果上次处理有错误，本次处理依旧产生错误，则只输出日志，不做页面错误转向处理

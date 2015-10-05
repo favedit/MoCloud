@@ -1,5 +1,6 @@
 package org.mo.web.core.servlet;
 
+import org.mo.com.data.ASqlConnect;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FMap;
@@ -302,46 +303,39 @@ public class FWebServletConsole
             }
          }
       }
-      //      // 检查当前处理是否需要会话
-      //      if(methodDescriptor.sessionRequire()){
-      //         EResult resultCd = checkSession(context, logicContext, request, response);
-      //         if(resultCd != EResult.Success){
-      //            //buildMessages(context, response);
-      //            return null;
-      //         }
-      //      }
-      //      // 检查当前处理是否需要登录
-      //      if(methodDescriptor.loginRequire()){
-      //         EResult resultCd = checkLogin(context, logicContext, request, response);
-      //         if(resultCd != EResult.Success){
-      //            //buildMessages(context, response);
-      //            return null;
-      //         }
-      //      }
       //............................................................
       Object result = null;
       Class<?>[] types = methodDescriptor.types();
       AContainer[] aforms = methodDescriptor.forms();
-      int count = types.length;
-      FWebContainerItem[] forms = new FWebContainerItem[count];
-      Object[] params = new Object[count];
+      ASqlConnect[] aconnects = methodDescriptor.sqlConnects();
+      int paramCount = types.length;
+      FWebContainerItem[] forms = new FWebContainerItem[paramCount];
+      Object[] params = new Object[paramCount];
       try{
-         for(int n = 0; n < count; n++){
+         for(int n = 0; n < paramCount; n++){
             Class<?> type = types[n];
             Object value = null;
             if(type == IWebContext.class){
+               // 参数为网络环境对象时
                value = context;
             }else if(type == IWebSession.class){
+               // 参数为网络线程对象时
                value = context.session();
-            }else if(type == ISqlContext.class){
+            }else if((type == ISqlContext.class) || (type == ILogicContext.class)){
+               // 参数对象为数据环境对象
                value = logicContext;
-            }else if(type == ILogicContext.class){
-               value = logicContext;
+               ASqlConnect aconnect = aconnects[n];
+               if(aconnect != null){
+                  logicContext.setDefaultName(aconnect.name());
+               }
             }else if(type == IWebServletRequest.class){
+               // 参数对象为网络输入对象
                value = request;
             }else if(type == IWebServletResponse.class){
+               // 参数对象为网络输出对象
                value = response;
             }else if(aforms[n] != null){
+               // 参数为表单对象时
                forms[n] = _formConsole.findContainer(context, aforms[n], type);
                value = forms[n].container();
                context.define(aforms[n].name(), value);
@@ -363,10 +357,10 @@ public class FWebServletConsole
          throwable = exception;
          context.messages().push(new FFatalMessage(exception));
       }finally{
-         // 释放参数
-         if(params != null){
-            for(Object param : params){
-               if((param != logicContext) && (param instanceof IRelease)){
+         // 释放所有调用参数
+         for(Object param : params){
+            if(param != logicContext){
+               if(param instanceof IRelease){
                   try{
                      ((IRelease)param).release();
                   }catch(Exception e){
@@ -378,12 +372,12 @@ public class FWebServletConsole
          // 释放数据库链接
          if(logicContext != null){
             if(throwable == null){
-               logicContext.release();
+               logicContext.commit();
             }else{
                logicContext.rollback();
             }
             try{
-               logicContext.close();
+               logicContext.release();
             }catch(Exception e){
                throw new FFatalError(e);
             }

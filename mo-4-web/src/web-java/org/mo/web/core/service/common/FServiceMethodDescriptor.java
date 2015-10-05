@@ -3,6 +3,7 @@ package org.mo.web.core.service.common;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import org.mo.com.data.ASqlConnect;
 import org.mo.com.lang.FError;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
@@ -48,6 +49,9 @@ public class FServiceMethodDescriptor
    // 类描述对象
    protected Class<?>[] _types;
 
+   // 数据链接数组
+   protected ASqlConnect[] _sqlConnects;
+
    //============================================================
    // <T>构造服务函数描述器。</T>
    //============================================================
@@ -82,13 +86,19 @@ public class FServiceMethodDescriptor
       }
       // 获得函数的参数信息
       _types = _method.getParameterTypes();
-      _forms = new AContainer[_types.length];
+      int typeCount = _types.length;
+      _forms = new AContainer[typeCount];
+      _sqlConnects = new ASqlConnect[typeCount];
       // 获得函数的参数描述器
       Annotation[][] annos = _method.getParameterAnnotations();
-      for(int n = 0; n < _types.length; n++){
+      for(int n = 0; n < typeCount; n++){
          for(Annotation anno : annos[n]){
             if(anno instanceof AContainer){
                _forms[n] = (AContainer)anno;
+               break;
+            }
+            if(anno instanceof ASqlConnect){
+               _sqlConnects[n] = (ASqlConnect)anno;
                break;
             }
          }
@@ -186,6 +196,15 @@ public class FServiceMethodDescriptor
    }
 
    //============================================================
+   // <T>获得数据链接描述器集合。</T>
+   //
+   // @return 链接描述器集合
+   //============================================================
+   public ASqlConnect[] sqlConnects(){
+      return _sqlConnects;
+   }
+
+   //============================================================
    // <T>函数调用处理。</T>
    //
    // @param instance 实例
@@ -196,20 +215,20 @@ public class FServiceMethodDescriptor
                         Object[] params){
       try{
          return _method.invoke(instance, params);
-      }catch(Exception e){
+      }catch(Exception exception){
          // 获得原始例外
          Throwable throwable = null;
-         if(e instanceof InvocationTargetException){
-            throwable = ((InvocationTargetException)e).getTargetException();
+         if(exception instanceof InvocationTargetException){
+            throwable = ((InvocationTargetException)exception).getTargetException();
          }else{
-            throwable = e;
+            throwable = exception;
          }
          // 产生新例外
          FError error = null;
          if(throwable instanceof FError){
             error = (FError)throwable;
          }else{
-            error = new FFatalError(e);
+            error = new FFatalError(exception);
          }
          throw error;
       }

@@ -2,14 +2,13 @@ package org.mo.web.core.service;
 
 import java.sql.SQLException;
 import org.mo.com.console.FConsole;
-import org.mo.com.data.MSqlConnect;
+import org.mo.com.data.ASqlConnect;
 import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FError;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FMap;
 import org.mo.com.lang.IRelease;
-import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.reflect.FClass;
 import org.mo.com.lang.reflect.FMethod;
@@ -36,8 +35,6 @@ import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.ILogicContext;
 import org.mo.eng.data.IDatabaseConsole;
 import org.mo.eng.data.common.ISqlContext;
-import org.mo.logic.session.FSqlSessionContext;
-import org.mo.logic.session.ISqlSessionContext;
 import org.mo.web.core.common.IWebAccessRule;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.container.IWebContainerConsole;
@@ -424,75 +421,39 @@ public class FServiceConsole
             }
          }
       }
-      //      // 检查当前处理是否需要会话
-      //      if(methodDescriptor.sessionRequire()){
-      //         EResult resultCd = checkSession(context, logicContext, input, output);
-      //         if(resultCd != EResult.Success){
-      //            buildMessages(context, output);
-      //            return null;
-      //         }
-      //      }
-      //      // 检查当前处理是否需要登录
-      //      if(methodDescriptor.loginRequire()){
-      //         EResult resultCd = checkLogin(context, logicContext, input, output);
-      //         if(resultCd != EResult.Success){
-      //            buildMessages(context, output);
-      //            return null;
-      //         }
-      //      }
       //............................................................
       // 调用函数对象
       Object result = null;
+      Throwable throwable = null;
       Class<?>[] types = methodDescriptor.types();
       AContainer[] aforms = methodDescriptor.forms();
-      int count = types.length;
-      FWebContainerItem[] forms = new FWebContainerItem[count];
-      Object[] params = new Object[count];
-      Throwable exception = null;
-      ISqlSessionContext sqlSessionContext = null;
+      ASqlConnect[] aconnects = methodDescriptor.sqlConnects();
+      int paramCount = types.length;
+      FWebContainerItem[] forms = new FWebContainerItem[paramCount];
+      Object[] params = new Object[paramCount];
       try{
-         for(int n = 0; n < count; n++){
+         for(int n = 0; n < paramCount; n++){
             Class<?> type = types[n];
             Object value = null;
             if(type == IWebContext.class){
                // 参数对象为网络环境对象
                value = context;
-            }else if(type == ISqlContext.class){
+            }else if(type == IWebSession.class){
+               // 参数为网络线程对象时
+               value = context.session();
+            }else if((type == ISqlContext.class) || (type == ILogicContext.class)){
                // 参数对象为数据环境对象
                value = logicContext;
-            }else if(type == ILogicContext.class){
-               // 参数对象为逻辑环境对象
-               value = logicContext;
-            }else if(type == ISqlSessionContext.class){
-               // 参数对象为会话数据环境对象，只允许存在一个线程数据对象
-               if(sqlSessionContext != null){
-                  throw new FFatalError("Sel session context is invalid.");
+               ASqlConnect aconnect = aconnects[n];
+               if(aconnect != null){
+                  logicContext.setDefaultName(aconnect.name());
                }
-               sqlSessionContext = new FSqlSessionContext(_databaseConsole);
-               value = sqlSessionContext;
             }else if(type == IWebInput.class){
                // 参数对象为网络输入对象
                value = input;
             }else if(type == IWebOutput.class){
                // 参数对象为网络输出对象
                value = output;
-            }else if(type.isInterface()){
-               // 参数对象为接口对象
-               String className = RClass.shortName(type);
-               if(className.startsWith("I") && className.endsWith("Di")){
-                  // 如果为数据库对象时
-                  if(sqlSessionContext == null){
-                     sqlSessionContext = new FSqlSessionContext(_databaseConsole);
-                  }
-                  className = className.substring(1, className.length() - 2);
-                  className = RClass.packageName(type) + ".impl.F" + className + "Impl";
-                  MSqlConnect impl = RClass.newInstance(className);
-                  impl.linkConnect(sqlSessionContext);
-                  value = impl;
-               }else{
-                  // 如果为配置的接口对象时
-                  value = RAop.find(type);
-               }
             }else if(aforms[n] != null){
                // 参数对象为数据容器
                forms[n] = _formConsole.findContainer(context, aforms[n], type);
@@ -503,6 +464,8 @@ public class FServiceConsole
                Object bindObject = _bindConsole.find(type);
                if(bindObject != null){
                   value = bindObject;
+               }else if(type.isInterface()){
+                  value = RAop.find(type);
                }else{
                   throw new FFatalError("Unknown param type. (type={1})", type);
                }
@@ -510,26 +473,22 @@ public class FServiceConsole
             // 设置参数
             params[n] = value;
          }
-         // 连接数据会话
-         if(sqlSessionContext != null){
-            sqlSessionContext.link(context.session().connectId());
-         }
          // 动态调用方法
          EResult beforeResultCd = executeBefore();
          if(beforeResultCd == EResult.Success){
             result = methodDescriptor.invoke(instance, params);
             executeAfter(result);
          }
-      }catch(Throwable throwable){
-         exception = throwable;
+      }catch(Throwable t){
+         throwable = t;
          // 产生例外时，处理例外内容
          boolean isCatch = true;
          boolean isSqlException = false;
-         if(throwable instanceof FError){
-            FError error = (FError)throwable;
+         if(t instanceof FError){
+            FError error = (FError)t;
             isCatch = error.isCatch();
             if(isCatch){
-               Throwable root = ((FError)throwable).rootThrowable();
+               Throwable root = ((FError)t).rootThrowable();
                if(root instanceof SQLException){
                   isSqlException = true;
                   RSql.parseSqlException(context.messages(), root);
@@ -537,55 +496,34 @@ public class FServiceConsole
             }
          }
          if(isCatch && !isSqlException){
-            context.messages().push(new FFatalMessage(throwable));
+            context.messages().push(new FFatalMessage(t));
          }
       }finally{
          // 释放所有调用参数
          for(Object param : params){
-            if((param != logicContext) && (param != sqlSessionContext)){
+            if(param != logicContext){
                if(param instanceof IRelease){
                   try{
                      ((IRelease)param).release();
                   }catch(Exception e){
-                     exception = e;
+                     throwable = e;
                   }
                }
             }
          }
-         // 处理不含有线程数据库访问的情况
+         // 释放数据库链接
          if(logicContext != null){
-            if(exception == null){
-               logicContext.release();
+            if(throwable == null){
+               logicContext.commit();
             }else{
                logicContext.rollback();
             }
-         }
-         // 处理含有线程数据库访问的情况
-         if(sqlSessionContext != null){
-            if(exception == null){
-               // 断开线程连接
-               sqlSessionContext.unlink();
-               // 分析是否提交数据库数据
-               String checked = input.config().get(PTY_CHECKED);
-               if(RBoolean.parse(checked)){
-                  // 用户确认的情况下，只要没有错误，就提交数据。
-                  sqlSessionContext.release();
-               }else{
-                  // 将消息加入消息列表
-                  context.messages().append(sqlSessionContext.messages());
-                  // 判断消息内容
-                  if(context.messages().hasMessage(FWarnMessage.class)){
-                     // 当存在警告时，回滚数据。
-                     sqlSessionContext.rollback();
-                  }else{
-                     // 当不存在警告时，提交数据。
-                     sqlSessionContext.release();
-                  }
-               }
-            }else{
-               // 当存在例外时，回滚所有数据
-               sqlSessionContext.rollback();
+            try{
+               logicContext.release();
+            }catch(Exception e){
+               throw new FFatalError(e);
             }
+            logicContext = null;
          }
          // 建立所有例外消息
          buildMessages(context, output);

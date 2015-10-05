@@ -118,6 +118,9 @@ public class FDatabaseConsole
    //============================================================ 
    @Override
    public void free(ISqlConnection connection){
+      // 释放链接
+      connection.free();
+      // 放回缓冲池
       IConnectionConsole connectionConsoel = (IConnectionConsole)connection.attributes().get(FLAG_CONNECTION_CONSOLE);
       connectionConsoel.free(connection);
    }
@@ -129,6 +132,9 @@ public class FDatabaseConsole
    //============================================================ 
    @Override
    public void releaseConnection(ISqlConnection connection){
+      // 释放链接
+      connection.free();
+      // 放回缓冲池
       IConnectionConsole connectionConsoel = (IConnectionConsole)connection.attributes().get(FLAG_CONNECTION_CONSOLE);
       connectionConsoel.release(connection);
    }
@@ -141,7 +147,7 @@ public class FDatabaseConsole
    @Override
    public void release(String name){
       IConnectionConsole console = _connectionConsoles.find(name);
-      if(null != console){
+      if(console != null){
          console.release();
       }
    }

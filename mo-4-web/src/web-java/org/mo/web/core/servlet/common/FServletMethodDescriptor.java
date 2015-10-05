@@ -2,6 +2,7 @@ package org.mo.web.core.servlet.common;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import org.mo.com.data.ASqlConnect;
 import org.mo.com.lang.FFatalError;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.face.AWebAuthority;
@@ -38,11 +39,14 @@ public class FServletMethodDescriptor
    // 权限描述器
    protected AWebAuthority _authority;
 
+   // 类型集合
+   protected Class<?>[] _types;
+
    // 表单信息集合
    protected AContainer[] _forms;
 
-   // 类型集合
-   protected Class<?>[] _types;
+   // 数据链接数组
+   protected ASqlConnect[] _sqlConnects;
 
    //============================================================
    // <T>构造网页处理函数描述器。</T>
@@ -80,13 +84,19 @@ public class FServletMethodDescriptor
       }
       // 获得函数的参数信息
       _types = _method.getParameterTypes();
-      _forms = new AContainer[_types.length];
+      int typeCount = _types.length;
+      _forms = new AContainer[typeCount];
+      _sqlConnects = new ASqlConnect[typeCount];
       // 获得函数的参数描述器
       Annotation[][] annos = _method.getParameterAnnotations();
-      for(int n = 0; n < _types.length; n++){
+      for(int n = 0; n < typeCount; n++){
          for(Annotation anno : annos[n]){
             if(anno instanceof AContainer){
                _forms[n] = (AContainer)anno;
+               break;
+            }
+            if(anno instanceof ASqlConnect){
+               _sqlConnects[n] = (ASqlConnect)anno;
                break;
             }
          }
@@ -184,6 +194,15 @@ public class FServletMethodDescriptor
    }
 
    //============================================================
+   // <T>获得数据链接描述器集合。</T>
+   //
+   // @return 链接描述器集合
+   //============================================================
+   public ASqlConnect[] sqlConnects(){
+      return _sqlConnects;
+   }
+
+   //============================================================
    // <T>调用函数处理。</T>
    //
    // @param action 命令对象
@@ -194,8 +213,8 @@ public class FServletMethodDescriptor
                         Object[] params){
       try{
          return (String)_method.invoke(action, params);
-      }catch(Exception e){
-         throw new FFatalError(e);
+      }catch(Exception exception){
+         throw new FFatalError(exception);
       }
    }
 }
