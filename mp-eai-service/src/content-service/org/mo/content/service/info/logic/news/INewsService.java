@@ -28,10 +28,10 @@ public interface INewsService
    //
    // @param guid 
    //============================================================
-   EResult getNewsByGuid(IWebContext context,
-                         IWebInput input,
-                         IWebOutput output,
-                         ILogicContext logicContext);
+   EResult query(IWebContext context,
+                 IWebInput input,
+                 IWebOutput output,
+                 ILogicContext logicContext);
 
    //============================================================
    // <T>分页获取新闻相关信息。</T>

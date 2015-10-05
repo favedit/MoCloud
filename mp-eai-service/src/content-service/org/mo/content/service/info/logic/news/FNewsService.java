@@ -53,11 +53,11 @@ public class FNewsService
    // @param guid 
    //============================================================
    @Override
-   public EResult getNewsByGuid(IWebContext context,
-                                IWebInput input,
-                                IWebOutput output,
-                                ILogicContext logicContext){
-      _logger.debug(this, "FNewsService_getNewsByGuid", "FNewsService_getNewsByGuid begin. ");
+   public EResult query(IWebContext context,
+                        IWebInput input,
+                        IWebOutput output,
+                        ILogicContext logicContext){
+      _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
       // 获得guid参数
       FXmlNode inputNode = input.config();
       FXmlNode list = output.config().createNode("NewsInfoList");

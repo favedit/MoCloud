@@ -24,7 +24,7 @@
          face  = 'org.mo.content.service.info.logic.news.INewsService'
          class = 'org.mo.content.service.info.logic.news.FNewsService'
          scope = 'global'/>
-          <!-- ============================================================ -->
+   <!-- ============================================================ -->
    <!-- 登录处理服务                                             -->
    <!-- ============================================================ -->
    <WebService
@@ -34,5 +34,17 @@
    <Component
          face  = 'org.mo.content.service.info.logic.login.ILoginService'
          class = 'org.mo.content.service.info.logic.login.FLoginService'
+         scope = 'global'/>
+         
+   <!-- ============================================================ -->
+   <!-- 版本更新服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'eai.mobile'
+         face  = 'org.mo.content.service.info.logic.version.IVersionService'/>
+
+   <Component
+         face  = 'org.mo.content.service.info.logic.version.IVersionService'
+         class = 'org.mo.content.service.info.logic.version.FVersionService'
          scope = 'global'/>
 </Config>
