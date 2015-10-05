@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>全球逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataCommonDscountryUnit
-      extends FLogicUnit
+public class FDataCommonDscountryUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

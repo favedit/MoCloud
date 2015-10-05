@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>系统短信效验表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FCacheSystemValidationUnit
-      extends FLogicUnit
+public class FCacheSystemValidationUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

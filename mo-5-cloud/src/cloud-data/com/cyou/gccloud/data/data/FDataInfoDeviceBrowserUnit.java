@@ -16,8 +16,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>信息设备浏览器表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataInfoDeviceBrowserUnit
-      extends FLogicUnit
+public class FDataInfoDeviceBrowserUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

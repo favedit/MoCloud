@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>系统版本表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataSystemVersionUnit
-      extends FLogicUnit
+public class FDataSystemVersionUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

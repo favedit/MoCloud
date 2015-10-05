@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>资源模型动画跟踪表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceModelAnimationTrackUnit
-      extends FLogicUnit
+public class FDataResourceModelAnimationTrackUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

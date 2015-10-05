@@ -16,8 +16,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>系统例外日志表    逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerSystemExceptionUnit
-      extends FLogicUnit
+public class FLoggerSystemExceptionUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

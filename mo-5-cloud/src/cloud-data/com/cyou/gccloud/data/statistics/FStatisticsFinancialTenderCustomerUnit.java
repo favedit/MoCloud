@@ -18,8 +18,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>投标客户表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialTenderCustomerUnit
-      extends FLogicUnit
+public class FStatisticsFinancialTenderCustomerUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

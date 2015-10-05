@@ -73,7 +73,7 @@ public class FDataMemberConsole
       StringBuffer order = new StringBuffer();
       order.append(FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC,");
       order.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE + " DESC");
-      //      String order = FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC ";
+
       FLogicDataset<FDataFinancialMemberInfo> List = logic.fetchClass(FDataFinancialMemberInfo.class, null, order, _pageSize, pageNum);
       FLogicDataset<FDataFinancialMemberInfo> resultList = new FLogicDataset<>(FDataFinancialMemberInfo.class);
       for(FDataFinancialMemberInfo unit : List){
@@ -86,12 +86,12 @@ public class FDataMemberConsole
          if(city != null){
             unit.setCityLabel(city.label());
          }
-         // 检查此成员是否被关注
+         // 检查此成员是否被其它人关注 加字段
          FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findFollowed(logicContext, unit.ouid());
          if(marketerMember != null){
             continue;
          }
-         // 检查此理财师是否关注过此成员
+         // 检查此理财师是否关注过此成员 字典
          marketerMember = _marketerMemberConsole.findByMarketerAndMember(logicContext, marketerId, unit.ouid());
          if(marketerMember != null){
             continue;
