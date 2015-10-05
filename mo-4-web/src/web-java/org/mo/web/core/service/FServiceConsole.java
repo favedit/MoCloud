@@ -500,13 +500,15 @@ public class FServiceConsole
          }
       }finally{
          // 释放所有调用参数
-         for(Object param : params){
-            if(param != logicContext){
-               if(param instanceof IRelease){
-                  try{
-                     ((IRelease)param).release();
-                  }catch(Exception e){
-                     throwable = e;
+         if(params != null){
+            for(Object param : params){
+               if(param != logicContext){
+                  if(param instanceof IRelease){
+                     try{
+                        ((IRelease)param).release();
+                     }catch(Exception e){
+                        throwable = e;
+                     }
                   }
                }
             }
