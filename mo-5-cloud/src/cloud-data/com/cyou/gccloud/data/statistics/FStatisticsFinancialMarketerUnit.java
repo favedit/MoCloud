@@ -237,6 +237,12 @@ public class FStatisticsFinancialMarketerUnit
    // 字段绩效总计的定义。
    protected double _performanceTotal;
 
+   // 存储字段注册时间的定义。
+   private TDateTime __registerDate = new TDateTime();
+
+   // 字段注册时间的定义。
+   protected TDateTime _registerDate = new TDateTime();
+
    // 存储字段入职时间的定义。
    private TDateTime __enterDate = new TDateTime();
 
@@ -1252,6 +1258,33 @@ public class FStatisticsFinancialMarketerUnit
    }
 
    //============================================================
+   // <T>判断注册时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRegisterDateChanged(){
+      return !__registerDate.equals(_registerDate);
+   }
+
+   //============================================================
+   // <T>获得注册时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime registerDate(){
+      return _registerDate;
+   }
+
+   //============================================================
+   // <T>设置注册时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRegisterDate(TDateTime value){
+      _registerDate = value;
+   }
+
+   //============================================================
    // <T>判断入职时间的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1494,6 +1527,8 @@ public class FStatisticsFinancialMarketerUnit
             return RDouble.toString(_interestTotal);
          case "performance_total":
             return RDouble.toString(_performanceTotal);
+         case "register_date":
+            return _registerDate.toString();
          case "enter_date":
             return _enterDate.toString();
          case "leave_date":
@@ -1627,6 +1662,9 @@ public class FStatisticsFinancialMarketerUnit
             break;
          case "performance_total":
             _performanceTotal = RDouble.parse(value);
+            break;
+         case "register_date":
+            _registerDate.parse(value);
             break;
          case "enter_date":
             _enterDate.parse(value);
@@ -1805,6 +1843,10 @@ public class FStatisticsFinancialMarketerUnit
                __performanceTotal = RDouble.parse(value);
                _performanceTotal = __performanceTotal;
                break;
+            case "register_date":
+               __registerDate.parse(value);
+               _registerDate.assign(__registerDate);
+               break;
             case "enter_date":
                __enterDate.parse(value);
                _enterDate.assign(__enterDate);
@@ -1877,6 +1919,7 @@ public class FStatisticsFinancialMarketerUnit
       row.set("netinvestmentTotal", _netinvestmentTotal);
       row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
+      row.set("registerDate", _registerDate);
       row.set("enterDate", _enterDate);
       row.set("leaveDate", _leaveDate);
       row.set("createUserId", _createUserId);
@@ -1929,6 +1972,7 @@ public class FStatisticsFinancialMarketerUnit
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
+      map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("enterDate", _enterDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("leaveDate", _leaveDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("createUserId", RLong.toString(_createUserId));
@@ -1976,6 +2020,7 @@ public class FStatisticsFinancialMarketerUnit
       _phone = input.readString();
       _card = input.readString();
       _rankLabel = input.readString();
+      _registerDate.set(input.readInt64());
       _enterDate.set(input.readInt64());
       _leaveDate.set(input.readInt64());
       _createUserId = input.readInt64();
@@ -2023,6 +2068,7 @@ public class FStatisticsFinancialMarketerUnit
       output.writeString(_phone);
       output.writeString(_card);
       output.writeString(_rankLabel);
+      output.writeInt64(_registerDate.get());
       output.writeInt64(_enterDate.get());
       output.writeInt64(_leaveDate.get());
       output.writeInt64(_createUserId);

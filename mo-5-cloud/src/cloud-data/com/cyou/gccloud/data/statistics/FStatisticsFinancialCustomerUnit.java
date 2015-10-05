@@ -81,6 +81,12 @@ public class FStatisticsFinancialCustomerUnit
    // 字段身份证号的定义。
    protected String _card;
 
+   // 存储字段注册时间的定义。
+   private TDateTime __registerDate = new TDateTime();
+
+   // 字段注册时间的定义。
+   protected TDateTime _registerDate = new TDateTime();
+
    // 存储字段首次投资时间的定义。
    private TDateTime __investmentFirstDate = new TDateTime();
 
@@ -463,6 +469,33 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setCard(String value){
       _card = value;
+   }
+
+   //============================================================
+   // <T>判断注册时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRegisterDateChanged(){
+      return !__registerDate.equals(_registerDate);
+   }
+
+   //============================================================
+   // <T>获得注册时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime registerDate(){
+      return _registerDate;
+   }
+
+   //============================================================
+   // <T>设置注册时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRegisterDate(TDateTime value){
+      _registerDate = value;
    }
 
    //============================================================
@@ -980,6 +1013,8 @@ public class FStatisticsFinancialCustomerUnit
             return _phone;
          case "card":
             return _card;
+         case "register_date":
+            return _registerDate.toString();
          case "investment_first_date":
             return _investmentFirstDate.toString();
          case "investment_last_date":
@@ -1059,6 +1094,9 @@ public class FStatisticsFinancialCustomerUnit
             break;
          case "card":
             _card = value;
+            break;
+         case "register_date":
+            _registerDate.parse(value);
             break;
          case "investment_first_date":
             _investmentFirstDate.parse(value);
@@ -1169,6 +1207,10 @@ public class FStatisticsFinancialCustomerUnit
                __card = value;
                _card = __card;
                break;
+            case "register_date":
+               __registerDate.parse(value);
+               _registerDate.assign(__registerDate);
+               break;
             case "investment_first_date":
                __investmentFirstDate.parse(value);
                _investmentFirstDate.assign(__investmentFirstDate);
@@ -1263,6 +1305,7 @@ public class FStatisticsFinancialCustomerUnit
       row.set("label", _label);
       row.set("phone", _phone);
       row.set("card", _card);
+      row.set("registerDate", _registerDate);
       row.set("investmentFirstDate", _investmentFirstDate);
       row.set("investmentLastDate", _investmentLastDate);
       row.set("investmentNumber", _investmentNumber);
@@ -1301,6 +1344,7 @@ public class FStatisticsFinancialCustomerUnit
       map.put("label", _label);
       map.put("phone", _phone);
       map.put("card", _card);
+      map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentFirstDate", _investmentFirstDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentLastDate", _investmentLastDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentNumber", RInteger.toString(_investmentNumber));
@@ -1339,6 +1383,7 @@ public class FStatisticsFinancialCustomerUnit
       _label = input.readString();
       _phone = input.readString();
       _card = input.readString();
+      _registerDate.set(input.readInt64());
       _investmentFirstDate.set(input.readInt64());
       _investmentLastDate.set(input.readInt64());
       _investmentNumber = input.readInt32();
@@ -1372,6 +1417,7 @@ public class FStatisticsFinancialCustomerUnit
       output.writeString(_label);
       output.writeString(_phone);
       output.writeString(_card);
+      output.writeInt64(_registerDate.get());
       output.writeInt64(_investmentFirstDate.get());
       output.writeInt64(_investmentLastDate.get());
       output.writeInt32(_investmentNumber);

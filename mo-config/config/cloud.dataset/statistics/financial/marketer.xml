@@ -33,6 +33,7 @@
   <FieldDouble _uuid="df66d404-e457-4b92-9467-4331a6983da8" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
   <FieldDouble _uuid="79702986-7983-4587-97bc-03cba440f52c" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="976385d8-4f48-4507-8c62-b524111b12e6" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
+  <FieldDateTime _uuid="2651809c-b1e1-4a72-a407-797061dc3104" name="register_date" label="M#12cn14注册时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_DATE" />
   <FieldDateTime _uuid="ab6ab628-eac2-40f2-9b76-ba5a114d4008" name="enter_date" label="M#12cn14入职时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ENTER_DATE" />
   <FieldDateTime _uuid="e064804a-4b6d-4336-a335-2e1f25d0fe03" name="leave_date" label="M#12cn14离职时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEAVE_DATE" />
   <FieldTemplate _uuid="78abe8fc-68ff-4406-b68c-2c861bacd624" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />

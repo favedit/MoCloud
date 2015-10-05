@@ -141,6 +141,9 @@ public class FStatisticsFinancialMarketerLogic
    // 字段绩效总计的定义。
    public final static SLogicFieldInfo PERFORMANCE_TOTAL = new SLogicFieldInfo("PERFORMANCE_TOTAL");
 
+   // 字段注册时间的定义。
+   public final static SLogicFieldInfo REGISTER_DATE = new SLogicFieldInfo("REGISTER_DATE");
+
    // 字段入职时间的定义。
    public final static SLogicFieldInfo ENTER_DATE = new SLogicFieldInfo("ENTER_DATE");
 
@@ -160,7 +163,7 @@ public class FStatisticsFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师统计表逻辑单元。</T>
@@ -789,6 +792,7 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
+      cmd.append(",`REGISTER_DATE`");
       cmd.append(",`ENTER_DATE`");
       cmd.append(",`LEAVE_DATE`");
       cmd.append(",`CREATE_USER_ID`");
@@ -1037,6 +1041,17 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(unit.interestTotal());
       cmd.append(',');
       cmd.append(unit.performanceTotal());
+      cmd.append(',');
+      TDateTime registerDate = unit.registerDate();
+      if(registerDate == null){
+         cmd.append("NULL");
+      }else if(registerDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(registerDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
       cmd.append(',');
       TDateTime enterDate = unit.enterDate();
       if(enterDate == null){
@@ -1426,6 +1441,19 @@ public class FStatisticsFinancialMarketerLogic
       if(unit.isPerformanceTotalChanged()){
          cmd.append(",`PERFORMANCE_TOTAL`=");
          cmd.append(unit.performanceTotal());
+      }
+      if(unit.isRegisterDateChanged()){
+         cmd.append(",`REGISTER_DATE`=");
+         TDateTime registerDate = unit.registerDate();
+         if(registerDate == null){
+            cmd.append("NULL");
+         }else if(registerDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(registerDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
       }
       if(unit.isEnterDateChanged()){
          cmd.append(",`ENTER_DATE`=");

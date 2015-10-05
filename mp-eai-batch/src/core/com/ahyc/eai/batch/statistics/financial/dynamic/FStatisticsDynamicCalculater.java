@@ -93,13 +93,24 @@ public class FStatisticsDynamicCalculater
          //............................................................
          // 统计成员信息
          if(customerId > 0){
+            boolean changed = false;
             FStatisticsFinancialMemberUnit memberUnit = _memberConsole.syncByLinkId(logicContext, dynamicUnit.customerLinkId());
+            // 设置投资时间
             if(memberUnit.investmentDate().isEmpty()){
                if(customerActionCd == EGcFinancialCustomerAction.Investment){
-                  // 设置投资时间
                   memberUnit.investmentDate().assign(customerActionDate);
-                  memberLogic.doUpdate(memberUnit);
+                  changed = true;
                }
+            }
+            // 设置赎回时间
+            if(memberUnit.redemptionDate().isEmpty()){
+               if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+                  memberUnit.redemptionDate().assign(customerActionDate);
+                  changed = true;
+               }
+            }
+            if(changed){
+               memberLogic.doUpdate(memberUnit);
             }
          }
          //............................................................

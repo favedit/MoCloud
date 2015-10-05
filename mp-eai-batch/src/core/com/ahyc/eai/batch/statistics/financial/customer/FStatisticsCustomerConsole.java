@@ -139,6 +139,7 @@ public class FStatisticsCustomerConsole
       unit.setLabel(memberUnit.label());
       unit.setPhone(memberUnit.phone());
       unit.setCard(memberUnit.card());
+      unit.registerDate().assign(memberUnit.registerDate());
       logic.doInsert(unit);
       //............................................................
       // 更新用户信息

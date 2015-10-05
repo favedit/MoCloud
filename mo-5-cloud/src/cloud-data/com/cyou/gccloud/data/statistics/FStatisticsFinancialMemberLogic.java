@@ -78,6 +78,12 @@ public class FStatisticsFinancialMemberLogic
    // 字段电话的定义。
    public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
 
+   // 字段电话城市编号的定义。
+   public final static SLogicFieldInfo PHONE_CITY_ID = new SLogicFieldInfo("PHONE_CITY_ID");
+
+   // 字段电话城市代码的定义。
+   public final static SLogicFieldInfo PHONE_CITY_CODE = new SLogicFieldInfo("PHONE_CITY_CODE");
+
    // 字段电子邮箱的定义。
    public final static SLogicFieldInfo EMAIL = new SLogicFieldInfo("EMAIL");
 
@@ -144,6 +150,9 @@ public class FStatisticsFinancialMemberLogic
    // 字段投资时间的定义。
    public final static SLogicFieldInfo INVESTMENT_DATE = new SLogicFieldInfo("INVESTMENT_DATE");
 
+   // 字段赎回时间的定义。
+   public final static SLogicFieldInfo REDEMPTION_DATE = new SLogicFieldInfo("REDEMPTION_DATE");
+
    // 字段登录时间的定义。
    public final static SLogicFieldInfo LAST_LOGIN_DATE = new SLogicFieldInfo("LAST_LOGIN_DATE");
 
@@ -160,7 +169,7 @@ public class FStatisticsFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`DEPARTMENT_ID`,`PASSPORT`,`LABEL`,`CARD`,`PHONE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`DEPARTMENT_ID`,`PASSPORT`,`LABEL`,`CARD`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`REDEMPTION_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户统计表逻辑单元。</T>
@@ -768,6 +777,8 @@ public class FStatisticsFinancialMemberLogic
       cmd.append(",`LABEL`");
       cmd.append(",`CARD`");
       cmd.append(",`PHONE`");
+      cmd.append(",`PHONE_CITY_ID`");
+      cmd.append(",`PHONE_CITY_CODE`");
       cmd.append(",`EMAIL`");
       cmd.append(",`GENDER_CD`");
       cmd.append(",`GENDER_CODE`");
@@ -790,6 +801,7 @@ public class FStatisticsFinancialMemberLogic
       cmd.append(",`INFO`");
       cmd.append(",`REGISTER_DATE`");
       cmd.append(",`INVESTMENT_DATE`");
+      cmd.append(",`REDEMPTION_DATE`");
       cmd.append(",`LAST_LOGIN_DATE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -893,6 +905,22 @@ public class FStatisticsFinancialMemberLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(phone));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long phoneCityId = unit.phoneCityId();
+      if(phoneCityId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(phoneCityId);
+      }
+      cmd.append(',');
+      String phoneCityCode = unit.phoneCityCode();
+      if(RString.isEmpty(phoneCityCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(phoneCityCode));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -1031,6 +1059,17 @@ public class FStatisticsFinancialMemberLogic
       }else{
          cmd.append("STR_TO_DATE('");
          cmd.append(investmentDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime redemptionDate = unit.redemptionDate();
+      if(redemptionDate == null){
+         cmd.append("NULL");
+      }else if(redemptionDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
@@ -1228,6 +1267,26 @@ public class FStatisticsFinancialMemberLogic
             cmd.append('\'');
          }
       }
+      if(unit.isPhoneCityIdChanged()){
+         cmd.append(",`PHONE_CITY_ID`=");
+         long phoneCityId = unit.phoneCityId();
+         if(phoneCityId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(phoneCityId);
+         }
+      }
+      if(unit.isPhoneCityCodeChanged()){
+         cmd.append(",`PHONE_CITY_CODE`=");
+         String phoneCityCode = unit.phoneCityCode();
+         if(RString.isEmpty(phoneCityCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(phoneCityCode));
+            cmd.append('\'');
+         }
+      }
       if(unit.isEmailChanged()){
          cmd.append(",`EMAIL`=");
          String email = unit.email();
@@ -1407,6 +1466,19 @@ public class FStatisticsFinancialMemberLogic
          }else{
             cmd.append("STR_TO_DATE('");
             cmd.append(investmentDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRedemptionDateChanged()){
+         cmd.append(",`REDEMPTION_DATE`=");
+         TDateTime redemptionDate = unit.redemptionDate();
+         if(redemptionDate == null){
+            cmd.append("NULL");
+         }else if(redemptionDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }

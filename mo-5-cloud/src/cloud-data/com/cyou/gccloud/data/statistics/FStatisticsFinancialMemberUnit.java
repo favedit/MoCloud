@@ -110,6 +110,18 @@ public class FStatisticsFinancialMemberUnit
    // 字段电话的定义。
    protected String _phone;
 
+   // 存储字段电话城市编号的定义。
+   private long __phoneCityId;
+
+   // 字段电话城市编号的定义。
+   protected long _phoneCityId;
+
+   // 存储字段电话城市代码的定义。
+   private String __phoneCityCode;
+
+   // 字段电话城市代码的定义。
+   protected String _phoneCityCode;
+
    // 存储字段电子邮箱的定义。
    private String __email;
 
@@ -241,6 +253,12 @@ public class FStatisticsFinancialMemberUnit
 
    // 字段投资时间的定义。
    protected TDateTime _investmentDate = new TDateTime();
+
+   // 存储字段赎回时间的定义。
+   private TDateTime __redemptionDate = new TDateTime();
+
+   // 字段赎回时间的定义。
+   protected TDateTime _redemptionDate = new TDateTime();
 
    // 存储字段登录时间的定义。
    private TDateTime __lastLoginDate = new TDateTime();
@@ -681,6 +699,60 @@ public class FStatisticsFinancialMemberUnit
    //============================================================
    public void setPhone(String value){
       _phone = value;
+   }
+
+   //============================================================
+   // <T>判断电话城市编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneCityIdChanged(){
+      return __phoneCityId != _phoneCityId;
+   }
+
+   //============================================================
+   // <T>获得电话城市编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long phoneCityId(){
+      return _phoneCityId;
+   }
+
+   //============================================================
+   // <T>设置电话城市编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhoneCityId(long value){
+      _phoneCityId = value;
+   }
+
+   //============================================================
+   // <T>判断电话城市代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneCityCodeChanged(){
+      return !RString.equals(__phoneCityCode, _phoneCityCode);
+   }
+
+   //============================================================
+   // <T>获得电话城市代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phoneCityCode(){
+      return _phoneCityCode;
+   }
+
+   //============================================================
+   // <T>设置电话城市代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhoneCityCode(String value){
+      _phoneCityCode = value;
    }
 
    //============================================================
@@ -1278,6 +1350,33 @@ public class FStatisticsFinancialMemberUnit
    }
 
    //============================================================
+   // <T>判断赎回时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionDateChanged(){
+      return !__redemptionDate.equals(_redemptionDate);
+   }
+
+   //============================================================
+   // <T>获得赎回时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime redemptionDate(){
+      return _redemptionDate;
+   }
+
+   //============================================================
+   // <T>设置赎回时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionDate(TDateTime value){
+      _redemptionDate = value;
+   }
+
+   //============================================================
    // <T>判断登录时间的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1451,6 +1550,10 @@ public class FStatisticsFinancialMemberUnit
             return _card;
          case "phone":
             return _phone;
+         case "phone_city_id":
+            return Long.toString(_phoneCityId);
+         case "phone_city_code":
+            return _phoneCityCode;
          case "email":
             return _email;
          case "gender_cd":
@@ -1495,6 +1598,8 @@ public class FStatisticsFinancialMemberUnit
             return _registerDate.toString();
          case "investment_date":
             return _investmentDate.toString();
+         case "redemption_date":
+            return _redemptionDate.toString();
          case "last_login_date":
             return _lastLoginDate.toString();
          case "create_user_id":
@@ -1564,6 +1669,12 @@ public class FStatisticsFinancialMemberUnit
          case "phone":
             _phone = value;
             break;
+         case "phone_city_id":
+            _phoneCityId = RLong.parse(value);
+            break;
+         case "phone_city_code":
+            _phoneCityCode = value;
+            break;
          case "email":
             _email = value;
             break;
@@ -1629,6 +1740,9 @@ public class FStatisticsFinancialMemberUnit
             break;
          case "investment_date":
             _investmentDate.parse(value);
+            break;
+         case "redemption_date":
+            _redemptionDate.parse(value);
             break;
          case "last_login_date":
             _lastLoginDate.parse(value);
@@ -1720,6 +1834,14 @@ public class FStatisticsFinancialMemberUnit
                __phone = value;
                _phone = __phone;
                break;
+            case "phone_city_id":
+               __phoneCityId = RLong.parse(value);
+               _phoneCityId = __phoneCityId;
+               break;
+            case "phone_city_code":
+               __phoneCityCode = value;
+               _phoneCityCode = __phoneCityCode;
+               break;
             case "email":
                __email = value;
                _email = __email;
@@ -1808,6 +1930,10 @@ public class FStatisticsFinancialMemberUnit
                __investmentDate.parse(value);
                _investmentDate.assign(__investmentDate);
                break;
+            case "redemption_date":
+               __redemptionDate.parse(value);
+               _redemptionDate.assign(__redemptionDate);
+               break;
             case "last_login_date":
                __lastLoginDate.parse(value);
                _lastLoginDate.assign(__lastLoginDate);
@@ -1855,6 +1981,8 @@ public class FStatisticsFinancialMemberUnit
       row.set("label", _label);
       row.set("card", _card);
       row.set("phone", _phone);
+      row.set("phoneCityId", _phoneCityId);
+      row.set("phoneCityCode", _phoneCityCode);
       row.set("email", _email);
       row.set("genderCd", _genderCd);
       row.set("genderCode", _genderCode);
@@ -1877,6 +2005,7 @@ public class FStatisticsFinancialMemberUnit
       row.set("info", _info);
       row.set("registerDate", _registerDate);
       row.set("investmentDate", _investmentDate);
+      row.set("redemptionDate", _redemptionDate);
       row.set("lastLoginDate", _lastLoginDate);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -1907,6 +2036,8 @@ public class FStatisticsFinancialMemberUnit
       map.put("label", _label);
       map.put("card", _card);
       map.put("phone", _phone);
+      map.put("phoneCityId", RLong.toString(_phoneCityId));
+      map.put("phoneCityCode", _phoneCityCode);
       map.put("email", _email);
       map.put("genderCd", RInteger.toString(_genderCd));
       map.put("genderCode", _genderCode);
@@ -1929,6 +2060,7 @@ public class FStatisticsFinancialMemberUnit
       map.put("info", _info);
       map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentDate", _investmentDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("redemptionDate", _redemptionDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("lastLoginDate", _lastLoginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1959,6 +2091,8 @@ public class FStatisticsFinancialMemberUnit
       _label = input.readString();
       _card = input.readString();
       _phone = input.readString();
+      _phoneCityId = input.readInt64();
+      _phoneCityCode = input.readString();
       _email = input.readString();
       _genderCd = input.readInt32();
       _genderCode = input.readString();
@@ -1981,6 +2115,7 @@ public class FStatisticsFinancialMemberUnit
       _info = input.readString();
       _registerDate.set(input.readInt64());
       _investmentDate.set(input.readInt64());
+      _redemptionDate.set(input.readInt64());
       _lastLoginDate.set(input.readInt64());
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -2011,6 +2146,8 @@ public class FStatisticsFinancialMemberUnit
       output.writeString(_label);
       output.writeString(_card);
       output.writeString(_phone);
+      output.writeInt64(_phoneCityId);
+      output.writeString(_phoneCityCode);
       output.writeString(_email);
       output.writeInt32(_genderCd);
       output.writeString(_genderCode);
@@ -2033,6 +2170,7 @@ public class FStatisticsFinancialMemberUnit
       output.writeString(_info);
       output.writeInt64(_registerDate.get());
       output.writeInt64(_investmentDate.get());
+      output.writeInt64(_redemptionDate.get());
       output.writeInt64(_lastLoginDate.get());
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

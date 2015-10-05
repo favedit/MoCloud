@@ -63,6 +63,9 @@ public class FStatisticsFinancialCustomerLogic
    // 字段身份证号的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
 
+   // 字段注册时间的定义。
+   public final static SLogicFieldInfo REGISTER_DATE = new SLogicFieldInfo("REGISTER_DATE");
+
    // 字段首次投资时间的定义。
    public final static SLogicFieldInfo INVESTMENT_FIRST_DATE = new SLogicFieldInfo("INVESTMENT_FIRST_DATE");
 
@@ -118,7 +121,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`LABEL`,`PHONE`,`CARD`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -721,6 +724,7 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`LABEL`");
       cmd.append(",`PHONE`");
       cmd.append(",`CARD`");
+      cmd.append(",`REGISTER_DATE`");
       cmd.append(",`INVESTMENT_FIRST_DATE`");
       cmd.append(",`INVESTMENT_LAST_DATE`");
       cmd.append(",`INVESTMENT_NUMBER`");
@@ -806,6 +810,17 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append('\'');
          cmd.append(RSql.formatValue(card));
          cmd.append('\'');
+      }
+      cmd.append(',');
+      TDateTime registerDate = unit.registerDate();
+      if(registerDate == null){
+         cmd.append("NULL");
+      }else if(registerDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(registerDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
       TDateTime investmentFirstDate = unit.investmentFirstDate();
@@ -1028,6 +1043,19 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append('\'');
             cmd.append(RSql.formatValue(card));
             cmd.append('\'');
+         }
+      }
+      if(unit.isRegisterDateChanged()){
+         cmd.append(",`REGISTER_DATE`=");
+         TDateTime registerDate = unit.registerDate();
+         if(registerDate == null){
+            cmd.append("NULL");
+         }else if(registerDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(registerDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
          }
       }
       if(unit.isInvestmentFirstDateChanged()){

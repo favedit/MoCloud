@@ -102,6 +102,7 @@ public class FStatisticsMarketerConsole
       unit.setPhone(memberUnit.phone());
       unit.setCard(memberUnit.card());
       unit.setStatusCd(row.getInt("status"));
+      unit.registerDate().assign(memberUnit.registerDate());
       unit.enterDate().parse(row.get("add_date"));
       // 获得部门标签
       long departmentId = 0;
