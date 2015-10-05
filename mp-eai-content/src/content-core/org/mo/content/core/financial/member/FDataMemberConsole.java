@@ -215,12 +215,8 @@ public class FDataMemberConsole
       }
       //联络周期
       FDataFinancialMarketerMemberUnit marketer = _marketerMemberConsole.findFollowedByMarketerAndMember(logicContext, marketerId, member.ouid());
-      System.out.println(marketer.recommendEndDate() + "----------");
       if(marketer != null && !marketer.recommendEndDate().isEmpty()){
-         int nowDay = nowDate.day();
-         marketer.recommendEndDate().addDay(-nowDay);
-         int days = marketer.recommendEndDate().day();
-         System.out.println(days);
+         int days = marketer.recommendEndDate().sub(nowDate).days();
          member.setRemainingDays((days <= 0) ? 0 : days);
       }
       return member;

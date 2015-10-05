@@ -6,8 +6,6 @@ import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberFeedback;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
-import java.util.Arrays;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
@@ -82,6 +80,7 @@ public class FDataMarketerMemberConsole
          pageNum = 0;
       }
       FDataFinancialMarketerMemberLogic logic = logicContext.findLogic(FDataFinancialMarketerMemberLogic.class);
+      FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
       FSql whereSql = new FSql();
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
       whereSql.append(FDataFinancialMarketerMemberLogic.MARKETER_ID + " = {marketer_id}");
@@ -89,62 +88,88 @@ public class FDataMarketerMemberConsole
       whereSql.append(" AND " + FDataFinancialMarketerMemberLogic.RELATION_CD + " <> {relation_cd}");
       whereSql.bind("relation_cd", RString.parse(EGcFinancialMemberRelation.Unknown));
       FLogicDataset<FDataFinancialMarketerMemberInfo> list = logic.fetchClass(FDataFinancialMarketerMemberInfo.class, whereSql, _pageSize, pageNum);
-      //      List<FDataFinancialMarketerMemberInfo> newList = new ArrayList<FDataFinancialMarketerMemberInfo>();
-      FSql where = null;
-      if(list.count() > 0){
-         long[] longArr = new long[list.count()];
-         for(int i = 0; i < list.count(); i++){
-            FDataFinancialMarketerMemberInfo unit = list.get(i);
-            longArr[i] = unit.memberId();
+      FLogicDataset<FDataFinancialMarketerMemberInfo> resultList = new FLogicDataset<>(FDataFinancialMarketerMemberInfo.class);
+      for(FDataFinancialMarketerMemberInfo info : list){
+         FDataFinancialMemberUnit member = memberLogic.find(info.memberId());
+         if(member != null){
+            info.setMemberLabel(member.label());
+            info.setMemberPhone(member.phone());
+            info.setMemberLastLoginDate(member.lastLoginDate());
+            info.setMemberRecommendScore(member.recommendScore());
+            info.setMemberGuid(member.guid());
          }
-         String strArr = Arrays.toString(longArr).replace("[", "(").replace("]", ")");
-         where = new FSql();
-         where.append(FDataFinancialMemberLogic.OUID);
-         where.append(" in ");
-         where.append(strArr);
-      }
-      StringBuffer order = new StringBuffer();
-      order.append(FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC,");
-      order.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE + " DESC");
-      //      String orderBy = String.format("%s %s", FDataFinancialMemberLogic.RECOMMEND_SCORE, "DESC");
-      FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-      FLogicDataset<FDataFinancialMemberUnit> dataMembers = memberLogic.fetch(where, order);
-      FLogicDataset<FDataFinancialMarketerMemberInfo> dataMemberInfos = new FLogicDataset<FDataFinancialMarketerMemberInfo>(FDataFinancialMarketerMemberInfo.class);
-      for(Iterator<FDataFinancialMemberUnit> iterator = dataMembers.iterator(); iterator.hasNext();){
-         FDataFinancialMemberUnit dataMember = iterator.next();
-         for(Iterator<FDataFinancialMarketerMemberInfo> iterator2 = list.iterator(); iterator2.hasNext();){
-            FDataFinancialMarketerMemberInfo dataMemberInfo = iterator2.next();
-            if(dataMember.ouid() == dataMemberInfo.memberId()){
-               dataMemberInfo.setMemberLabel(dataMember.label());
-               dataMemberInfo.setMemberPhone(dataMember.phone());
-               dataMemberInfo.setMemberLastLoginDate(dataMember.lastLoginDate());
-               dataMemberInfo.setMemberRecommendScore(dataMember.recommendScore());
-               dataMemberInfo.setMemberGuid(dataMember.guid());
-               int days = 0;
-               if(!dataMemberInfo.recommendEndDate().isEmpty()){
-                  int nowDay = nowDate.day();
-                  dataMemberInfo.recommendEndDate().addDay(-nowDay);
-                  days = dataMemberInfo.recommendEndDate().day();
-                  //                  days = dataMemberInfo.recommendEndDate().day() - nowDate.day();
-                  dataMemberInfo.setRemainingDays((days <= 0) ? 0 : days);
-               }
-
-               if(days > 0){
-                  dataMemberInfos.push(dataMemberInfo);
-               }else{
-                  // 如果周期结束，以后将不在给此理财师推荐此成员
-                  if(dataMemberInfo.feedbackCd() != EGcFinancialMemberFeedback.EndOfCycle){
-                     dataMemberInfo.setRelationCd(EGcFinancialMemberRelation.Unknown);
-                     dataMemberInfo.setFeedbackCd(EGcFinancialMemberFeedback.EndOfCycle);
-                     dataMemberInfo.setFeedbackNote("the time is finish!");
-                     logic.doUpdate(dataMemberInfo);
-                  }
-               }
-
+         int days = 0;
+         if(!info.recommendEndDate().isEmpty()){
+            days = info.recommendEndDate().sub(nowDate).days();
+            info.setRemainingDays((days <= 0) ? 0 : days);
+         }
+         if(days > 0){
+            resultList.push(info);
+         }else{
+            // 如果周期结束，以后将不在给此理财师推荐此成员
+            if(info.feedbackCd() != EGcFinancialMemberFeedback.EndOfCycle){
+               info.setRelationCd(EGcFinancialMemberRelation.Unknown);
+               info.setFeedbackCd(EGcFinancialMemberFeedback.EndOfCycle);
+               info.setFeedbackNote("the time is finish!");
+               logic.doUpdate(info);
             }
          }
       }
-      return dataMemberInfos;
+
+      //      FSql where = null;
+      //      if(list.count() > 0){
+      //         long[] longArr = new long[list.count()];
+      //         for(int i = 0; i < list.count(); i++){
+      //            FDataFinancialMarketerMemberInfo unit = list.get(i);
+      //            longArr[i] = unit.memberId();
+      //         }
+      //         String strArr = Arrays.toString(longArr).replace("[", "(").replace("]", ")");
+      //         where = new FSql();
+      //         where.append(FDataFinancialMemberLogic.OUID);
+      //         where.append(" in ");
+      //         where.append(strArr);
+      //      }
+      //      StringBuffer order = new StringBuffer();
+      //      order.append(FDataFinancialMemberLogic.RECOMMEND_SCORE + " DESC,");
+      //      order.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE + " DESC");
+      //      FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+      //      FLogicDataset<FDataFinancialMemberUnit> dataMembers = memberLogic.fetch(where, order);
+      //      FLogicDataset<FDataFinancialMarketerMemberInfo> dataMemberInfos = new FLogicDataset<FDataFinancialMarketerMemberInfo>(FDataFinancialMarketerMemberInfo.class);
+      //      for(Iterator<FDataFinancialMemberUnit> iterator = dataMembers.iterator(); iterator.hasNext();){
+      //         FDataFinancialMemberUnit dataMember = iterator.next();
+      //         for(Iterator<FDataFinancialMarketerMemberInfo> iterator2 = list.iterator(); iterator2.hasNext();){
+      //            FDataFinancialMarketerMemberInfo dataMemberInfo = iterator2.next();
+      //            if(dataMember.ouid() == dataMemberInfo.memberId()){
+      //               dataMemberInfo.setMemberLabel(dataMember.label());
+      //               dataMemberInfo.setMemberPhone(dataMember.phone());
+      //               dataMemberInfo.setMemberLastLoginDate(dataMember.lastLoginDate());
+      //               dataMemberInfo.setMemberRecommendScore(dataMember.recommendScore());
+      //               dataMemberInfo.setMemberGuid(dataMember.guid());
+      //               int days = 0;
+      //               if(!dataMemberInfo.recommendEndDate().isEmpty()){
+      //                  int nowDay = nowDate.day();
+      //                  dataMemberInfo.recommendEndDate().addDay(-nowDay);
+      //                  days = dataMemberInfo.recommendEndDate().day();
+      //                  //                  days = dataMemberInfo.recommendEndDate().day() - nowDate.day();
+      //                  dataMemberInfo.setRemainingDays((days <= 0) ? 0 : days);
+      //               }
+      //
+      //               if(days > 0){
+      //                  dataMemberInfos.push(dataMemberInfo);
+      //               }else{
+      //                  // 如果周期结束，以后将不在给此理财师推荐此成员
+      //                  if(dataMemberInfo.feedbackCd() != EGcFinancialMemberFeedback.EndOfCycle){
+      //                     dataMemberInfo.setRelationCd(EGcFinancialMemberRelation.Unknown);
+      //                     dataMemberInfo.setFeedbackCd(EGcFinancialMemberFeedback.EndOfCycle);
+      //                     dataMemberInfo.setFeedbackNote("the time is finish!");
+      //                     logic.doUpdate(dataMemberInfo);
+      //                  }
+      //               }
+      //
+      //            }
+      //         }
+      //      }
+      return resultList;
 
    }
 
@@ -192,7 +217,7 @@ public class FDataMarketerMemberConsole
       whereSql.append(FDataFinancialMarketerMemberLogic.MEMBER_ID + " = {member_id}");
       whereSql.bind("member_id", RString.parse(memberId));
       whereSql.append(" AND " + FDataFinancialMarketerMemberLogic.RELATION_CD + " <> {relation_cd}");
-      whereSql.bind("relation_cd", RString.parse(EGcFinancialMemberRelation.Unknown));
+      whereSql.bind("relation_cd", RString.parse(EGcFinancialMemberRelation.Follow));
       FLogicDataset<FDataFinancialMarketerMemberUnit> list = logic.fetch(whereSql);
       if(list == null){
          return null;
