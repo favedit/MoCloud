@@ -344,7 +344,32 @@ ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY
 
 ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY ADD CONSTRAINT DT_PSN_USR_ACS_AUT_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+	  
+-- ------------------------------------------------------------
+-- Create table [Data.Person.User.Signing]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_PSN_USER_SIGNING`;
+CREATE TABLE `DT_PSN_USER_SIGNING` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `SINGN_DATE`                    DATETIME, 
+   `SINGN_ADDRESS`                 VARCHAR(400), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
+ALTER TABLE DT_PSN_USER_SIGNING 
+   ADD CONSTRAINT DT_PSN_USR_SIG_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER_SIGNING ADD CONSTRAINT DT_PSN_USR_SIG_FK_USR 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+	  
 -- ------------------------------------------------------------
 -- Create table [Data.Control.Module]
 -- ------------------------------------------------------------
