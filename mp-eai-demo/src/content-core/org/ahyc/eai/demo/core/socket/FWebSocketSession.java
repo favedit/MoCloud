@@ -1,6 +1,6 @@
 package org.ahyc.eai.demo.core.socket;
 
-import javax.websocket.RemoteEndpoint.Basic;
+import javax.websocket.RemoteEndpoint.Async;
 import javax.websocket.Session;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -71,8 +71,10 @@ public class FWebSocketSession
    //============================================================
    public void sendMessage(String message){
       try{
-         Basic basic = _session.getBasicRemote();
-         basic.sendText(message);
+         Async async = _session.getAsyncRemote();
+         async.sendText(message);
+         //         Basic basic = _session.getBasicRemote();
+         //         basic.sendText(message);
       }catch(Exception exception){
          _logger.error(this, "sendMessage", exception);
       }
