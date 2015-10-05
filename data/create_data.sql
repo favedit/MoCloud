@@ -244,7 +244,60 @@ CREATE TABLE `DT_SYS_ACCESS_AUTHORITY`
 
 ALTER TABLE DT_SYS_ACCESS_AUTHORITY 
    ADD CONSTRAINT DT_SYS_ACS_AUT_UK_GID UNIQUE ( GUID ); 
+   
+-- ------------------------------------------------------------
+-- Create table [Data.System.Application]
+-- ------------------------------------------------------------ 
+DROP TABLE IF EXISTS `DT_SYS_APPLICATION`;
+CREATE TABLE `DT_SYS_APPLICATION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(200), 
+   `NOTE`                          VARCHAR(800), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
+ALTER TABLE DT_SYS_APPLICATION 
+   ADD CONSTRAINT DT_SYS_APP_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.System.Version]
+-- ------------------------------------------------------------  
+DROP TABLE IF EXISTS `DT_SYS_VERSION`;
+CREATE TABLE `DT_SYS_VERSION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `APPLICATION_ID`                BIGINT NOT NULL, 
+   `STATUS_CD`                     INTEGER, 
+   `FORCE_CD`                      INTEGER, 
+   `CODE`                          VARCHAR(40), 
+   `LABEL`                         VARCHAR(80), 
+   `BEGIN_DATE`                    DATETIME, 
+   `END_DATE`                      DATETIME, 
+   `DOWNLOAD_URL`                  VARCHAR(800), 
+   `DOWNLOAD_SIZE`                 INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_SYS_VERSION 
+   ADD CONSTRAINT DT_SYS_VER_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_SYS_VERSION ADD CONSTRAINT DT_SYS_VER_FK_APP 
+      FOREIGN KEY (`APPLICATION_ID`) REFERENCES DT_SYS_APPLICATION(`OUID`); 
+	  
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User]
 -- ------------------------------------------------------------

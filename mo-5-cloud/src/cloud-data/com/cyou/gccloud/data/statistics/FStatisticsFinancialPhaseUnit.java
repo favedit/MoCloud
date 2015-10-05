@@ -18,7 +18,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>动态阶段表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialPhaseUnit extends FLogicUnit
+public class FStatisticsFinancialPhaseUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

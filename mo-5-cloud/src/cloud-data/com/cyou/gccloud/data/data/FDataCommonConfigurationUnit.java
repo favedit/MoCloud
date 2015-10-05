@@ -16,7 +16,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>共通配置表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataCommonConfigurationUnit extends FLogicUnit
+public class FDataCommonConfigurationUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
