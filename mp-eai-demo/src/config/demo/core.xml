@@ -8,8 +8,8 @@
    <!--  I:initializeConfig - 增加配置信息                   -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.ahyc.eai.demo.core.earth.IDemoConsole'
-         class = 'org.ahyc.eai.demo.core.earth.FDemoConsole'
+         face  = 'org.ahyc.eai.demo.core.socket.IWebSocketConsole'
+         class = 'org.ahyc.eai.demo.core.socket.FWebSocketConsole'
          scope = 'global'>
    </Component>
    

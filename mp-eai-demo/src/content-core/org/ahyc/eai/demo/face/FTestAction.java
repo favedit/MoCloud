@@ -1,7 +1,8 @@
 package org.ahyc.eai.demo.face;
 
-import org.ahyc.eai.demo.core.earth.FWebSocketSession;
-import org.ahyc.eai.demo.core.earth.IWebSocketConsole;
+import org.ahyc.eai.demo.core.socket.FWebSocketSession;
+import org.ahyc.eai.demo.core.socket.IWebSocketConsole;
+
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
