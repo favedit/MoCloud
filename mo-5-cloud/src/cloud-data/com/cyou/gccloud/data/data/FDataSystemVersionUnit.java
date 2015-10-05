@@ -17,7 +17,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>系统版本表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataSystemVersionUnit extends FLogicUnit
+public class FDataSystemVersionUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -78,6 +79,18 @@ public class FDataSystemVersionUnit extends FLogicUnit
 
    // 字段结束时间的定义。
    protected TDateTime _endDate = new TDateTime();
+
+   // 存储字段下载路径的定义。
+   private String __downloadUrl;
+
+   // 字段下载路径的定义。
+   protected String _downloadUrl;
+
+   // 存储字段下载大小的定义。
+   private int __downloadSize;
+
+   // 字段下载大小的定义。
+   protected int _downloadSize;
 
    // 存储字段备注的定义。
    private String __note;
@@ -397,6 +410,60 @@ public class FDataSystemVersionUnit extends FLogicUnit
    }
 
    //============================================================
+   // <T>判断下载路径的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDownloadUrlChanged(){
+      return !RString.equals(__downloadUrl, _downloadUrl);
+   }
+
+   //============================================================
+   // <T>获得下载路径的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String downloadUrl(){
+      return _downloadUrl;
+   }
+
+   //============================================================
+   // <T>设置下载路径的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDownloadUrl(String value){
+      _downloadUrl = value;
+   }
+
+   //============================================================
+   // <T>判断下载大小的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDownloadSizeChanged(){
+      return __downloadSize != _downloadSize;
+   }
+
+   //============================================================
+   // <T>获得下载大小的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int downloadSize(){
+      return _downloadSize;
+   }
+
+   //============================================================
+   // <T>设置下载大小的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDownloadSize(int value){
+      _downloadSize = value;
+   }
+
+   //============================================================
    // <T>判断备注的数据是否改变。</T>
    //
    // @return 数据内容
@@ -560,6 +627,10 @@ public class FDataSystemVersionUnit extends FLogicUnit
             return _beginDate.toString();
          case "end_date":
             return _endDate.toString();
+         case "download_url":
+            return _downloadUrl;
+         case "download_size":
+            return RInteger.toString(_downloadSize);
          case "note":
             return _note;
          case "create_user_id":
@@ -613,6 +684,12 @@ public class FDataSystemVersionUnit extends FLogicUnit
             break;
          case "end_date":
             _endDate.parse(value);
+            break;
+         case "download_url":
+            _downloadUrl = value;
+            break;
+         case "download_size":
+            _downloadSize = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -684,6 +761,14 @@ public class FDataSystemVersionUnit extends FLogicUnit
                __endDate.parse(value);
                _endDate.assign(__endDate);
                break;
+            case "download_url":
+               __downloadUrl = value;
+               _downloadUrl = __downloadUrl;
+               break;
+            case "download_size":
+               __downloadSize = RInteger.parse(value);
+               _downloadSize = __downloadSize;
+               break;
             case "note":
                __note = value;
                _note = __note;
@@ -726,6 +811,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       row.set("label", _label);
       row.set("beginDate", _beginDate);
       row.set("endDate", _endDate);
+      row.set("downloadUrl", _downloadUrl);
+      row.set("downloadSize", _downloadSize);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -751,6 +838,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       map.put("label", _label);
       map.put("beginDate", _beginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("endDate", _endDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("downloadUrl", _downloadUrl);
+      map.put("downloadSize", RInteger.toString(_downloadSize));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -776,6 +865,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       _label = input.readString();
       _beginDate.set(input.readInt64());
       _endDate.set(input.readInt64());
+      _downloadUrl = input.readString();
+      _downloadSize = input.readInt32();
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -801,6 +892,8 @@ public class FDataSystemVersionUnit extends FLogicUnit
       output.writeString(_label);
       output.writeInt64(_beginDate.get());
       output.writeInt64(_endDate.get());
+      output.writeString(_downloadUrl);
+      output.writeInt32(_downloadSize);
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

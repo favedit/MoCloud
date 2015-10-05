@@ -16,7 +16,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>后台处理信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataBatchProcessUnit extends FLogicUnit
+public class FDataBatchProcessUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

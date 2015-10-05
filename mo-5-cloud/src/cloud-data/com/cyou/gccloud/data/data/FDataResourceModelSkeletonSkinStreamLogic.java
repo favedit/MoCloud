@@ -23,7 +23,8 @@ import org.mo.data.logic.SLogicTableInfo;
 // <T>资源模型骨骼蒙皮数据流表逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
+public class FDataResourceModelSkeletonSkinStreamLogic
+      extends FLogicTable
 {
    // 资源模型骨骼蒙皮数据流表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
@@ -146,7 +147,8 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param id 编号
    // @return 查询字符串
    //============================================================
-   public String makeFindSql(CharSequence fields, long id){
+   public String makeFindSql(CharSequence fields,
+                             long id){
       FString sql = new FString("SELECT ");
       if(RString.isEmpty(fields)){
          sql.append(FIELDS);
@@ -225,7 +227,9 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    //============================================================
    @Override
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> T find(T unit, Class<T> clazz, long recordId){
+   public <T extends FLogicUnit> T find(T unit,
+                                        Class<T> clazz,
+                                        long recordId){
       // 检查编号
       if(recordId <= 0){
          return null;
@@ -276,7 +280,9 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T findByGuid(T unit, Class<T> clazz, CharSequence guid){
+   public <T extends FLogicUnit> T findByGuid(T unit,
+                                              Class<T> clazz,
+                                              CharSequence guid){
       // 检查条件
       if(RString.isEmpty(guid)){
          return null;
@@ -313,7 +319,9 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T search(T unit, Class<T> clazz, CharSequence whereSql){
+   public <T extends FLogicUnit> T search(T unit,
+                                          Class<T> clazz,
+                                          CharSequence whereSql){
       // 检查条件
       if(RString.isEmpty(whereSql)){
          return null;
@@ -347,7 +355,8 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(int pageSize, int page){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(int pageSize,
+                                                                        int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -359,7 +368,9 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence whereSql, int pageSize, int page){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence whereSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -372,7 +383,8 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence whereSql, CharSequence orderSql){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence whereSql,
+                                                                        CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -385,7 +397,10 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence whereSql,
+                                                                        CharSequence orderSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -399,7 +414,11 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence fields,
+                                                                        CharSequence whereSql,
+                                                                        CharSequence orderSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -413,7 +432,12 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetch(CharSequence fields,
+                                                                        CharSequence whereSql,
+                                                                        CharSequence groupSql,
+                                                                        CharSequence orderSql,
+                                                                        int pageSize,
+                                                                        int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -424,7 +448,8 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param whereSql 条件命令
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -441,7 +466,10 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -459,7 +487,9 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -477,7 +507,11 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -496,7 +530,12 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, null, orderSql);
       String sql = makeFetchSql(fields, whereSql, null, orderSql, 0, 0);
@@ -516,7 +555,13 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence groupSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, groupSql, orderSql);
       String sql = makeFetchSql(fields, whereSql, groupSql, orderSql, 0, 0);
@@ -533,7 +578,10 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetchSql(CharSequence code, CharSequence sql, int pageSize, int page){
+   public FLogicDataset<FDataResourceModelSkeletonSkinStreamUnit> fetchSql(CharSequence code,
+                                                                           CharSequence sql,
+                                                                           int pageSize,
+                                                                           int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -548,7 +596,11 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
    // @return 数据单元集合
    //============================================================
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz, CharSequence code, CharSequence sql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz,
+                                                           CharSequence code,
+                                                           CharSequence sql,
+                                                           int pageSize,
+                                                           int page){
       // 获得数据
       FDataset dataset = innerFindDataset(code, sql, pageSize, page);
       // 返回结果
@@ -574,7 +626,6 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
       // 获得数据
       return fetchSql(null, code, sql, 0, 0);
    }
-
 
    //============================================================
    // <T>准备一个数据单元。</T>
@@ -626,7 +677,7 @@ public class FDataResourceModelSkeletonSkinStreamLogic extends FLogicTable
       FDataResourceModelSkeletonSkinStreamUnit unit = (FDataResourceModelSkeletonSkinStreamUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
-      if((unit.createUserId() == 0)|| (unit.updateUserId() == 0)){
+      if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
          if(unit.createUserId() == 0){
             unit.setCreateUserId(operatorId);

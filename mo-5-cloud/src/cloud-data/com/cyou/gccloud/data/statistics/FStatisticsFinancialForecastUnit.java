@@ -18,7 +18,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>数据预测表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialForecastUnit extends FLogicUnit
+public class FStatisticsFinancialForecastUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
