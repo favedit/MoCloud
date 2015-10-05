@@ -62,7 +62,7 @@ public class FWebSocketConsole
          _sessions.push(webSession);
       }
       webSession.setSession(session);
-      _logger.debug(this, "open", "Open session. (id={1})", session.getId());
+      _logger.debug(this, "open", "Open session. (count={1}, id={2})", _sessions.count(), session.getId());
    }
 
    //============================================================
@@ -77,6 +77,6 @@ public class FWebSocketConsole
       if(webSession != null){
          _sessions.remove(webSession);
       }
-      _logger.debug(this, "close", "Close session. (id={1})", sessionId);
+      _logger.debug(this, "close", "Close session. (count={1}, id={2})", _sessions.count(), session.getId());
    }
 }

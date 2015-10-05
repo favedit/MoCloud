@@ -2,7 +2,6 @@ package org.ahyc.eai.demo.face;
 
 import org.ahyc.eai.demo.core.socket.FWebSocketSession;
 import org.ahyc.eai.demo.core.socket.IWebSocketConsole;
-
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -50,6 +49,6 @@ public class FTestAction
          session.sendMessage(message);
       }
       // 非法设置
-      return message;
+      return "Test";
    }
 }
