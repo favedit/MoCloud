@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="9f733c90-28b7-43e5-a171-57fa5a308387" name="data.financial.member.score" label="M#12cn17金融成员考评分" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Member.Score" data_name="DT_FIN_MEMBER_SCORE" data_alias="DT_FIN_MBR_SCR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="9d1d8d2d-5bb7-4558-abe8-776ec0db3376" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
+  <FieldRecordId _uuid="c100f7f3-60e5-4474-949c-a15b3428d0c0" name="city_id" label="M#12cn14城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY_ID" />
+  <FieldDateTime _uuid="7e502eae-e094-4053-81e0-5c29b6a30b21" name="birthday" label="M#12cn12生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BIRTHDAY" />
+  <FieldDateTime _uuid="1b802d46-70ad-4838-902b-9a3fd2fc6df5" name="register_date" label="M#12cn14注册时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_DATE" />
+  <FieldDateTime _uuid="41725ff0-f4a3-40a2-9bbc-64fc4ec068bb" name="last_login_date" label="M#12cn16最后登录时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LAST_LOGIN_DATE" />
+  <FieldInteger _uuid="53454e3a-6195-4d28-8dc4-a3724080ceef" name="recommend_score" label="M#12cn14推荐评分" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECOMMEND_SCORE" />
+  <FieldString _uuid="3dbb05d4-e9ac-4b9d-90ce-a592634425bb" name="note" label="M#12cn14备注信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="0c82fdb7-4b4f-4325-b99c-8d17291064cc" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
