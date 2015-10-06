@@ -56,4 +56,10 @@ public interface ILoginService
                          IWebOutput output,
                          ILogicContext logicContext,
                          IWebSession sessionContext);
+
+   public EResult feedback(IWebContext context,
+                           IWebInput input,
+                           IWebOutput output,
+                           ILogicContext logicContext,
+                           IWebSession sessionContext);
 }

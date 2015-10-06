@@ -1,6 +1,5 @@
 package org.mo.content.service.info.logic.version;
 
-import com.cyou.gccloud.data.data.FDataSystemVersionResourceUnit;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import java.util.HashMap;
 import org.mo.com.lang.EResult;
@@ -68,8 +67,8 @@ public class FVersionService
                           ILogicContext logicContext){
       // 获得应用程序id和与之对应的版本编号
       FXmlNode inputNode = input.config();
-      FXmlNode inputApplicationNode = inputNode.findNode("ApplicationId");
-      FXmlNode inputVersionNode = inputNode.findNode("VersionCode");
+      FXmlNode inputApplicationNode = inputNode.findNode("appos");
+      FXmlNode inputVersionNode = inputNode.findNode("versioncode");
       String applicationStr = inputApplicationNode.text();
       String versionStr = inputVersionNode.text();
       // 会话管理
@@ -78,19 +77,19 @@ public class FVersionService
       //输出信息
       HashMap<String, Object> hashMap = _versionConsole.connect(context, versionStr, applicationStr, logicContext, sessionContext);
       FDataSystemVersionUnit lastVersionUnit = (FDataSystemVersionUnit)hashMap.get("lastVersion");
-      FDataSystemVersionResourceUnit lastVersionResourceUnit = (FDataSystemVersionResourceUnit)hashMap.get("lastVersionResource");
-      FXmlNode sessionNode = output.config().createNode("Session");
-      sessionNode.set("code", "待定sessionid");
-      FXmlNode outputVersionNode = output.config().createNode("VersionCode");
+      //      FXmlNode outputApplicationNode = output.config().createNode("app_os");
+      FXmlNode VersionCode = output.config().createNode("versioncode");
+      FXmlNode upgrade_cd = output.config().createNode("upgrade_cd");
+      FXmlNode upgrade_url = output.config().createNode("upgrade_url");
+      FXmlNode upgrade_log = output.config().createNode("upgrade_log");
       if(lastVersionUnit != null){
-         outputVersionNode.set("code", lastVersionUnit.code());
-         outputVersionNode.set("upgrade_cd", lastVersionUnit.forceCd());
+         VersionCode.setText(lastVersionUnit.code());
+         upgrade_cd.setText(lastVersionUnit.forceCd());
+         upgrade_url.setText(lastVersionUnit.downloadUrl());
+         upgrade_log.setText(lastVersionUnit.note());
+         //         outputVersionNode.set("upgrade_size", lastVersionUnit.downloadSize());
       }
-      if(lastVersionResourceUnit != null){
-         outputVersionNode.set("upgrade_url", lastVersionResourceUnit.downloadUrl());
-      }
-      FXmlNode outputApplicationNode = output.config().createNode("Application");
-      outputApplicationNode.set("Application_Id", applicationStr);
+      //      outputApplicationNode.setText(applicationStr);
       return EResult.Success;
    }
 
