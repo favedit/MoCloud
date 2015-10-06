@@ -8,6 +8,7 @@ import org.ahyc.eai.demo.core.input.tuio.FTuioCursor;
 import org.ahyc.eai.demo.core.input.tuio.FTuioListener;
 import org.ahyc.eai.demo.core.input.tuio.FTuioObject;
 import org.mo.com.geom.SIntSize2;
+import org.mo.com.lang.FString;
 
 //============================================================
 // <T>输入监听器。</T>
@@ -67,10 +68,59 @@ public class FEaiInputListener
    }
 
    //============================================================
+   // <T>增加游标。</T>
+   //
+   // @param value 内容
+   //============================================================
+   public void sendCursor(String typeCode){
+      FString message = new FString();
+      message.append(typeCode);
+      for(FTuioCursor cursor : _cursors){
+         if(!message.isEmpty()){
+            message.append("|");
+         }
+         message.append(cursor.position());
+      }
+      _console.sendMessage(message.toString());
+   }
+
+   //============================================================
+   // <T>增加游标。</T>
+   //
+   // @param value 内容
+   //============================================================
+   @Override
+   public void addTuioCursor(TuioCursor value){
+      super.addTuioCursor(value);
+      sendCursor("D");
+   }
+
+   //============================================================
+   // <T>更新游标。</T>
+   //
+   // @param value 内容
+   //============================================================
+   @Override
+   public void updateTuioCursor(TuioCursor value){
+      super.updateTuioCursor(value);
+      sendCursor("M");
+   }
+
+   //============================================================
+   // <T>移除游标。</T>
+   //
+   // @param value 内容
+   //============================================================
+   @Override
+   public void removeTuioCursor(TuioCursor value){
+      super.removeTuioCursor(value);
+      sendCursor("U");
+   }
+
+   //============================================================
    // <T>更新处理。</T>
    //============================================================
    @Override
    public void update(){
-      System.out.println(this);
    }
 }
