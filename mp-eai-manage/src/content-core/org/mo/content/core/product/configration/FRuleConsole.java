@@ -1,5 +1,7 @@
 package org.mo.content.core.product.configration;
 
+import java.util.Iterator;
+
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -43,20 +45,71 @@ public class FRuleConsole
    @Override
    public FLogicDataset<FDataRuleInfo> select(ILogicContext logicContext,
                                                              FDataRuleInfo unit,
-                                                             int pageNum,
-                                                             int pageSize){
+                                                             int pageNum){
       if(pageNum < 0){
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-//      if(RString.equals(EGcRule.Unknown,unit.ruleCd())||RString.equals(EGcRule.LastLogin,unit.ruleCd())||
-//            RString.equals(EGcRule.BrowseCount,unit.ruleCd())||RString.equals(EGcRule.Income,unit.ruleCd())
-//            ||RString.equals(EGcRule.Age,unit.ruleCd())){
-//         whereSql.append(FDataControlRuleLogic.RULE_CD + " = '{rulecd}'");
-//         whereSql.bind("rulecd", RString.parse(unit.ruleCd()));
-//      }
       FDataControlRuleLogic logic = logicContext.findLogic(FDataControlRuleLogic.class);
-      FLogicDataset<FDataRuleInfo> moduleList = logic.fetchClass(FDataRuleInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataRuleInfo> moduleList = logic.fetchClass(FDataRuleInfo.class, null, whereSql.toString(), null, _pageSize, pageNum);
+      for(Iterator<FDataRuleInfo> iterator = moduleList.iterator(); iterator.hasNext();){
+         FDataRuleInfo tunit = iterator.next();
+         if(RString.equals(EGcRule.Unknown,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.UnknownLabel);
+         }
+         if(RString.equals(EGcRule.LastLogin,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.LastLoginLabel);
+         }
+         if(RString.equals(EGcRule.BrowseCount,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.BrowseCountLabel);
+         }
+         if(RString.equals(EGcRule.Income,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.IncomeLabel);
+         }
+         if(RString.equals(EGcRule.Age,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.AgeLabel);
+         }
+      }
+      return moduleList;
+   }
+   // ============================================================
+   // <T>获得分页数据列表byRuleCd</T>
+   //
+   // @param logicContext 链接对象
+   // @param moduleUnit 查询条件
+   // @param pageNum 页码
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataRuleInfo> selectByRuleCd(ILogicContext logicContext,
+                                                             FDataRuleInfo unit,
+                                                             int pageNum){
+      if(pageNum < 0){
+         pageNum = 0;
+      }
+      FSql whereSql = new FSql();
+      whereSql.append(FDataControlRuleLogic.RULE_CD + " = '{rulecd}'");
+      whereSql.bind("rulecd", RString.parse(unit.ruleCd()));
+      FDataControlRuleLogic logic = logicContext.findLogic(FDataControlRuleLogic.class);
+      FLogicDataset<FDataRuleInfo> moduleList = logic.fetchClass(FDataRuleInfo.class, null, whereSql.toString(), null, _pageSize, pageNum);
+      for(Iterator<FDataRuleInfo> iterator = moduleList.iterator(); iterator.hasNext();){
+         FDataRuleInfo tunit = iterator.next();
+         if(RString.equals(EGcRule.Unknown,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.UnknownLabel);
+         }
+         if(RString.equals(EGcRule.LastLogin,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.LastLoginLabel);
+         }
+         if(RString.equals(EGcRule.BrowseCount,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.BrowseCountLabel);
+         }
+         if(RString.equals(EGcRule.Income,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.IncomeLabel);
+         }
+         if(RString.equals(EGcRule.Age,tunit.ruleCd())){
+            tunit.setRuleCdStr(EGcRule.AgeLabel);
+         }
+      }
       return moduleList;
    }
 
