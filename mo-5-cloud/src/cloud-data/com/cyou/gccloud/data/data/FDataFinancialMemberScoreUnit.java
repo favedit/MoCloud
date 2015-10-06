@@ -44,6 +44,12 @@ public class FDataFinancialMemberScoreUnit
    // 字段账号的定义。
    protected String _passport;
 
+   // 存储字段名称的定义。
+   private String __label;
+
+   // 字段名称的定义。
+   protected String _label;
+
    // 存储字段理财师编号的定义。
    private long __marketerId;
 
@@ -222,6 +228,33 @@ public class FDataFinancialMemberScoreUnit
    //============================================================
    public void setPassport(String value){
       _passport = value;
+   }
+
+   //============================================================
+   // <T>判断名称的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLabelChanged(){
+      return !RString.equals(__label, _label);
+   }
+
+   //============================================================
+   // <T>获得名称的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String label(){
+      return _label;
+   }
+
+   //============================================================
+   // <T>设置名称的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLabel(String value){
+      _label = value;
    }
 
    //============================================================
@@ -538,6 +571,8 @@ public class FDataFinancialMemberScoreUnit
             return _guid;
          case "passport":
             return _passport;
+         case "label":
+            return _label;
          case "marketer_id":
             return Long.toString(_marketerId);
          case "city_id":
@@ -585,6 +620,9 @@ public class FDataFinancialMemberScoreUnit
             break;
          case "passport":
             _passport = value;
+            break;
+         case "label":
+            _label = value;
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
@@ -650,6 +688,10 @@ public class FDataFinancialMemberScoreUnit
                __passport = value;
                _passport = __passport;
                break;
+            case "label":
+               __label = value;
+               _label = __label;
+               break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
@@ -710,6 +752,7 @@ public class FDataFinancialMemberScoreUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("passport", _passport);
+      row.set("label", _label);
       row.set("marketerId", _marketerId);
       row.set("cityId", _cityId);
       row.set("birthday", _birthday);
@@ -735,6 +778,7 @@ public class FDataFinancialMemberScoreUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("passport", _passport);
+      map.put("label", _label);
       map.put("marketerId", RLong.toString(_marketerId));
       map.put("cityId", RLong.toString(_cityId));
       map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
@@ -760,6 +804,7 @@ public class FDataFinancialMemberScoreUnit
       _ovld = input.readBoolean();
       _guid = input.readString();
       _passport = input.readString();
+      _label = input.readString();
       _marketerId = input.readInt64();
       _cityId = input.readInt64();
       _birthday.set(input.readInt64());
@@ -785,6 +830,7 @@ public class FDataFinancialMemberScoreUnit
       output.writeBoolean(_ovld);
       output.writeString(_guid);
       output.writeString(_passport);
+      output.writeString(_label);
       output.writeInt64(_marketerId);
       output.writeInt64(_cityId);
       output.writeInt64(_birthday.get());

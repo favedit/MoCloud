@@ -1458,6 +1458,7 @@ CREATE TABLE `DT_FIN_MEMBER_SCORE`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `PASSPORT`                      VARCHAR(60), 
+   `LABEL`                         VARCHAR(40), 
    `MARKETER_ID`                   BIGINT, 
    `CITY_ID`                       BIGINT, 
    `BIRTHDAY`                      DATETIME, 

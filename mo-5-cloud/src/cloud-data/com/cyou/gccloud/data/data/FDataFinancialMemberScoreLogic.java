@@ -45,6 +45,9 @@ public class FDataFinancialMemberScoreLogic
    // 字段账号的定义。
    public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
 
+   // 字段名称的定义。
+   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
+
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
@@ -79,7 +82,7 @@ public class FDataFinancialMemberScoreLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`PASSPORT`,`MARKETER_ID`,`CITY_ID`,`BIRTHDAY`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`PASSPORT`,`LABEL`,`MARKETER_ID`,`CITY_ID`,`BIRTHDAY`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融成员考评分逻辑单元。</T>
@@ -676,6 +679,7 @@ public class FDataFinancialMemberScoreLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`PASSPORT`");
+      cmd.append(",`LABEL`");
       cmd.append(",`MARKETER_ID`");
       cmd.append(",`CITY_ID`");
       cmd.append(",`BIRTHDAY`");
@@ -708,6 +712,15 @@ public class FDataFinancialMemberScoreLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(passport));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String label = unit.label();
+      if(RString.isEmpty(label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(label));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -850,6 +863,17 @@ public class FDataFinancialMemberScoreLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(passport));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isLabelChanged()){
+         cmd.append(",`LABEL`=");
+         String label = unit.label();
+         if(RString.isEmpty(label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(label));
             cmd.append('\'');
          }
       }
