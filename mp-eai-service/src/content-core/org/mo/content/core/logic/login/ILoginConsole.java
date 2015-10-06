@@ -25,14 +25,24 @@ public interface ILoginConsole
                                     ILogicContext logicContext,
                                     IWebSession sessionContext);
 
+   //============================================================
+   // <T>请求OA登录接口</T>
+   //
+   // @param url 接口链接
+   // @param passport 用户名
+   // @param password 密码
+   // @return 登录结果（0：验证成功，1：签名不通过，2：参数不完整，3：用户名或密码错误，98：IP不在白名单中，99：系统异常）
+   //============================================================
+   public String oaLogin(String passport,
+                         String password);
+
    public FDataPersonUserUnit synchronizeData(ILogicContext logicContext,
                                               FDataPersonUserUnit backUser,
                                               int from,
                                               String changePass);
 
    public FDataPersonUserUnit logout(IWebContext context,
-                                     String passport,
-                                     String password,
+                                     String sessionId,
                                      ILogicContext logicContext,
                                      IWebSession sessionContext);
 
