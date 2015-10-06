@@ -2,7 +2,6 @@ package org.ahyc.eai.demo.service.earth;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
-import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
@@ -45,18 +44,11 @@ public class FLoggerServlet
    // @param session 会话处理
    // @param message 消息内容
    //============================================================
-   @OnMessage
-   public void onMessage(String message,
-                         Session session) throws Exception{
-      System.out.println("> " + message);
-      //Set<Session> sessions = session.getOpenSessions();
-      //FLoggerMessage m = new FLoggerMessage(message, sessions.size());
-      //for(Session s : sessions){
-      //   if(s.isOpen()){
-      //      s.getBasicRemote().sendObject(m);
-      //   }
-      //}
-   }
+   //   @OnMessage
+   //   public void onMessage(String message,
+   //                         Session session){
+   //      System.out.println("> " + message);
+   //   }
 
    //============================================================
    // <T>消息处理。</T>
