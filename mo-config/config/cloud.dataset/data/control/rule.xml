@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="9a4751b1-858c-40b9-8ff2-8a46e4b8304a" name="data.control.rule" label="M#12cn19数据挖掘规则配置表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Control.Rule" data_name="DT_CTL_RULE" data_alias="DT_CTL_RUL" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldInteger _uuid="a12d1662-ff2f-46d4-a8a3-a756ebe98e6d" name="rule_cd" label="M#12cn14规则类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RULE_CD" />
+  <FieldInteger _uuid="7c6b437f-313f-4b65-a9ed-ca3005323b59" name="percentage" label="M#12cn15权重百分比" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERCENTAGE" />
+  <FieldInteger _uuid="a937053f-cf63-4531-8ddb-3fea02e0c446" name="score_point" label="M#12cn12分数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SCORE_POINT" />
+  <FieldString _uuid="79debf6f-a192-4fcb-9808-e36082ac778a" name="parameters1" label="M#12cn13参数1" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS1" data_size="40" />
+  <FieldString _uuid="cd9b2729-0c44-4b6f-83d8-e23b9e0f8b33" name="parameters2" label="M#12cn13参数2" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS2" data_size="40" />
+  <FieldString _uuid="efcf649b-c3da-49cb-a68e-24ccb550b815" name="parameters3" label="M#12cn13参数3" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS3" data_size="40" />
+  <FieldString _uuid="c1bec000-5a66-4d9a-9c9f-c64091ff3693" name="parameters4" label="M#12cn13参数4" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARAMETERS4" data_size="40" />
+  <FieldString _uuid="4fe78123-d748-428f-b07f-c715f0b78d6f" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="26bb530f-6b18-4c27-ac6a-dfc74f22c2f4" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
