@@ -503,6 +503,32 @@ ALTER TABLE DT_CTL_ROLE_MODULE ADD CONSTRAINT DT_CTL_ROL_MOD_FK_MOD
       FOREIGN KEY (`MODULE_ID`) REFERENCES DT_CTL_MODULE(`OUID`); 
 
 -- ------------------------------------------------------------
+-- Create table [Data.Control.Rule]
+-- sunhr 151006
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_CTL_RULE`;
+CREATE TABLE `DT_CTL_RULE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `RULE_CD`                       INTEGER, 
+   `PERCENTAGE`                    INTEGER, 
+   `SCORE_POINT`                   INTEGER, 
+   `PARAMETERS1`                   VARCHAR(40), 
+   `PARAMETERS2`                   VARCHAR(40), 
+   `PARAMETERS3`                   VARCHAR(40), 
+   `PARAMETERS4`                   VARCHAR(40), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_CTL_RULE 
+   ADD CONSTRAINT DT_CTL_RUL_UK_GID UNIQUE ( GUID ); 
+-- ------------------------------------------------------------
 -- Create table [Data.Logic.News]
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_LGC_NEWS`;
