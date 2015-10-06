@@ -1,7 +1,5 @@
 package org.mo.content.face.product.configration;
 
-import java.util.Iterator;
-
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -67,33 +65,16 @@ public class FRuleAction implements IRuleAction {
          page.setPageCurrent(0);
       }
       FDataRuleInfo unit = new FDataRuleInfo();
-     // setRuleInfo(unit,context);
-      String StrPageSize = context.parameter("pageSize");
-      int pageSize = 20;
-      if(null != StrPageSize){
-         pageSize = Integer.parseInt(StrPageSize);
+      FLogicDataset<FDataRuleInfo> unitList = null;
+      String cdr = context.parameter("ruleCdStr");
+      if(RString.isEmpty(cdr)){
+         unitList = _ruleConsole.select(logicContext, unit, page.pageCurrent() - 1);
+      }else{
+         setRuleInfo(unit,context,cdr);
+         unitList = _ruleConsole.selectByRuleCd(logicContext, unit, page.pageCurrent() - 1);
       }
-      FLogicDataset<FDataRuleInfo> unitList = _ruleConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for(Iterator<FDataRuleInfo> iterator = unitList.iterator(); iterator.hasNext();){
-         FDataRuleInfo tunit = iterator.next();
-         if(RString.equals(EGcRule.Unknown,tunit.ruleCd())){
-            tunit.setRuleCdStr(EGcRule.UnknownLabel);
-         }
-         if(RString.equals(EGcRule.LastLogin,tunit.ruleCd())){
-            tunit.setRuleCdStr(EGcRule.LastLoginLabel);
-         }
-         if(RString.equals(EGcRule.BrowseCount,tunit.ruleCd())){
-            tunit.setRuleCdStr(EGcRule.BrowseCountLabel);
-         }
-         if(RString.equals(EGcRule.Income,tunit.ruleCd())){
-            tunit.setRuleCdStr(EGcRule.IncomeLabel);
-         }
-         if(RString.equals(EGcRule.Age,tunit.ruleCd())){
-            tunit.setRuleCdStr(EGcRule.AgeLabel);
-         }
-      }
-      _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
+      _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
    }
 
@@ -124,7 +105,7 @@ public class FRuleAction implements IRuleAction {
    //============================================================
    @Override
    public String insert(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
-      _logger.debug(this, "InsertBefore==================================", "InsertBefore begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
@@ -136,7 +117,7 @@ public class FRuleAction implements IRuleAction {
          page.setResult("增加失败");
          return "/manage/product/configration/InsertRule";
       }
-      _logger.debug(this, "InsertAfter==================================", "InsertBefore finish. (userId={1})", "SUCCESS");
+      _logger.debug(this, "InsertAfter", "InsertBefore finish. (userId={1})", "SUCCESS");
       return "/manage/product/configration/RuleList";
    }
 
@@ -203,7 +184,8 @@ public class FRuleAction implements IRuleAction {
       FDataControlRuleUnit unit = new FDataControlRuleUnit();
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       setRuleData(unit,context);
-      setRuleInfo(unit,context);
+      String cdr = context.parameter("ruleCdStr");
+      setRuleInfo(unit,context,cdr);
       _ruleConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }
@@ -255,21 +237,16 @@ public class FRuleAction implements IRuleAction {
    //
    // @param context 网络环境
    //============================================================
-   public void setRuleInfo(FDataControlRuleUnit unit,IWebContext context){
-      String cdr = context.parameter("ruleCdStr");
+   public void setRuleInfo(FDataControlRuleUnit unit,IWebContext context,String cdr){
       if(RString.equals(EGcRule.UnknownLabel, cdr)){
          unit.setRuleCd(EGcRule.Unknown);
-      }
-      if(RString.equals(EGcRule.LastLoginLabel, cdr)){
+      }else if(RString.equals(EGcRule.LastLoginLabel, cdr)){
          unit.setRuleCd(EGcRule.LastLogin);
-      }
-      if(RString.equals(EGcRule.BrowseCountLabel, cdr)){
+      }else if(RString.equals(EGcRule.BrowseCountLabel, cdr)){
          unit.setRuleCd(EGcRule.BrowseCount);
-      }
-      if(RString.equals(EGcRule.IncomeLabel, cdr)){
+      }else if(RString.equals(EGcRule.IncomeLabel, cdr)){
          unit.setRuleCd(EGcRule.Income);
-      }
-      if(RString.equals(EGcRule.AgeLabel, cdr)){
+      }else if(RString.equals(EGcRule.AgeLabel, cdr)){
          unit.setRuleCd(EGcRule.Age);
       }
    }
