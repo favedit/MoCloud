@@ -1457,6 +1457,7 @@ CREATE TABLE `DT_FIN_MEMBER_SCORE`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
+   `PASSPORT`                      VARCHAR(60), 
    `MARKETER_ID`                   BIGINT, 
    `CITY_ID`                       BIGINT, 
    `BIRTHDAY`                      DATETIME, 
@@ -1468,7 +1469,7 @@ CREATE TABLE `DT_FIN_MEMBER_SCORE`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_MEMBER_SCORE 
    ADD CONSTRAINT DT_FIN_MBR_SCR_UK_GID UNIQUE ( GUID ); 

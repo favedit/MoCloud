@@ -42,6 +42,9 @@ public class FDataFinancialMemberScoreLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段账号的定义。
+   public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
+
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
@@ -76,7 +79,7 @@ public class FDataFinancialMemberScoreLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`CITY_ID`,`BIRTHDAY`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`PASSPORT`,`MARKETER_ID`,`CITY_ID`,`BIRTHDAY`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融成员考评分逻辑单元。</T>
@@ -672,6 +675,7 @@ public class FDataFinancialMemberScoreLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`PASSPORT`");
       cmd.append(",`MARKETER_ID`");
       cmd.append(",`CITY_ID`");
       cmd.append(",`BIRTHDAY`");
@@ -697,6 +701,15 @@ public class FDataFinancialMemberScoreLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      String passport = unit.passport();
+      if(RString.isEmpty(passport)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(passport));
+         cmd.append('\'');
+      }
       cmd.append(',');
       long marketerId = unit.marketerId();
       if(marketerId == 0){
@@ -829,6 +842,17 @@ public class FDataFinancialMemberScoreLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isPassportChanged()){
+         cmd.append(",`PASSPORT`=");
+         String passport = unit.passport();
+         if(RString.isEmpty(passport)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(passport));
+            cmd.append('\'');
+         }
+      }
       if(unit.isMarketerIdChanged()){
          cmd.append(",`MARKETER_ID`=");
          long marketerId = unit.marketerId();

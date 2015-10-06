@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="9f733c90-28b7-43e5-a171-57fa5a308387" name="data.financial.member.score" label="M#12cn17金融成员考评分" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Member.Score" data_name="DT_FIN_MEMBER_SCORE" data_alias="DT_FIN_MBR_SCR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="b9c4ff36-7ef1-4a34-9125-ae37c8572860" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
   <FieldRecordId _uuid="9d1d8d2d-5bb7-4558-abe8-776ec0db3376" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
   <FieldRecordId _uuid="c100f7f3-60e5-4474-949c-a15b3428d0c0" name="city_id" label="M#12cn14城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY_ID" />
   <FieldDateTime _uuid="7e502eae-e094-4053-81e0-5c29b6a30b21" name="birthday" label="M#12cn12生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BIRTHDAY" />
