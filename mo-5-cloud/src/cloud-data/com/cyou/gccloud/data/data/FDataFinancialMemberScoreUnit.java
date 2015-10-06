@@ -38,6 +38,12 @@ public class FDataFinancialMemberScoreUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段账号的定义。
+   private String __passport;
+
+   // 字段账号的定义。
+   protected String _passport;
+
    // 存储字段理财师编号的定义。
    private long __marketerId;
 
@@ -189,6 +195,33 @@ public class FDataFinancialMemberScoreUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断账号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPassportChanged(){
+      return !RString.equals(__passport, _passport);
+   }
+
+   //============================================================
+   // <T>获得账号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String passport(){
+      return _passport;
+   }
+
+   //============================================================
+   // <T>设置账号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPassport(String value){
+      _passport = value;
    }
 
    //============================================================
@@ -503,6 +536,8 @@ public class FDataFinancialMemberScoreUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "passport":
+            return _passport;
          case "marketer_id":
             return Long.toString(_marketerId);
          case "city_id":
@@ -547,6 +582,9 @@ public class FDataFinancialMemberScoreUnit
             break;
          case "guid":
             _guid = value;
+            break;
+         case "passport":
+            _passport = value;
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
@@ -608,6 +646,10 @@ public class FDataFinancialMemberScoreUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "passport":
+               __passport = value;
+               _passport = __passport;
+               break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
@@ -667,6 +709,7 @@ public class FDataFinancialMemberScoreUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("passport", _passport);
       row.set("marketerId", _marketerId);
       row.set("cityId", _cityId);
       row.set("birthday", _birthday);
@@ -691,6 +734,7 @@ public class FDataFinancialMemberScoreUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("passport", _passport);
       map.put("marketerId", RLong.toString(_marketerId));
       map.put("cityId", RLong.toString(_cityId));
       map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
@@ -715,6 +759,7 @@ public class FDataFinancialMemberScoreUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
+      _passport = input.readString();
       _marketerId = input.readInt64();
       _cityId = input.readInt64();
       _birthday.set(input.readInt64());
@@ -739,6 +784,7 @@ public class FDataFinancialMemberScoreUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
+      output.writeString(_passport);
       output.writeInt64(_marketerId);
       output.writeInt64(_cityId);
       output.writeInt64(_birthday.get());
