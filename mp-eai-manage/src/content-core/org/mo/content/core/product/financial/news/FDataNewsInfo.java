@@ -10,12 +10,20 @@ public class FDataNewsInfo
    private String _statusCdStr;
    //显示字符串
    private String _displayCdStr;
+   
+   private String _imageName;
 
    public String getStatusCdStr() {
       return _statusCdStr;
    }
    public void setStatusCdStr(String _statusCdStr) {
       this._statusCdStr=_statusCdStr;
+   }
+   public String getImageName() {
+      return _imageName;
+   }
+   public void setImageName(String _imageName) {
+      this._imageName=_imageName;
    }
    public String getDisplayCdStr() {
       return _displayCdStr;
@@ -33,5 +41,6 @@ public class FDataNewsInfo
       super.saveMap(map);
       map.put("statusCdStr", _statusCdStr);
       map.put("displayCdStr", _displayCdStr);
+      map.put("imageName", _imageName);
    }
 }

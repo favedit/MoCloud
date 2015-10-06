@@ -60,6 +60,9 @@
                   <jh:equals source="product.common.area" value="&basePage.menuString">
                      <li><a href="/product/common/Area.wa" target="right">区域信息</a></li>
                   </jh:equals>
+                  <jh:equals source="product.configration.rule" value="&basePage.menuString">
+                     <li><a href="/product/configration/Rule.wa" target="right">规则配置信息</a></li>
+                  </jh:equals>
                </ul>
             </li>
             <li id="two" class="common"> <a href="#two">设备管理</a>
@@ -101,10 +104,7 @@
                      <li><a href="/product/system/application/Application.wa" target="right">应用信息</a></li>
                   </jh:equals>
                   <jh:equals source="product.system.version" value="&basePage.menuString">
-                     <li><a href="/product/system/version/version.wa" target="right">版本信息</a></li>
-                  </jh:equals>
-                  <jh:equals source="product.system.resources" value="&basePage.menuString">
-                     <li><a href="/product/system/resources/resources.wa" target="right">资源信息</a></li>
+                     <li><a href="/product/system/version/Version.wa" target="right">版本信息</a></li>
                   </jh:equals>
                </ul>
          </li>

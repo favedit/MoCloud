@@ -8,7 +8,7 @@
     //显示更新成功
     $(function() {
         doSubmit(null, null);
-        var pager = $('#logicNews').datagrid().datagrid('getPager');
+        var pager = $('#application').datagrid().datagrid('getPager');
         pager.pagination({
             pageSize : 20,
             showPageList : [ 20, 30, 40 ],
@@ -19,13 +19,13 @@
     });
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/financial/news/News.wa?do=select&date="
+        var url = "/product/system/application/Application.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var label = $.trim($('#label').val()).replaceAll("'", "");
-        if (label == "资讯标题") label = null;
+        if (label == "标签") label = null;
         if (page != null) {
-            url = "/product/financial/news/News.wa?do=select&page="
+            url = "/product/system/application/Application.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "label" : label,
@@ -39,7 +39,7 @@
             data : data,
             success : function(msg) {
                 closeProgress();
-                $('#logicNews').datagrid('loadData', toJsonObject(msg));
+                $('#application').datagrid('loadData', toJsonObject(msg));
             },
             fail : function() {
                 closeProgress();
@@ -53,7 +53,7 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/financial/news/News.wa?do=updateBefore&id="
+        window.location.href = "/product/system/application/Application.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
     }
 </script>
@@ -62,23 +62,23 @@
 <body>
  <div id="cy_right" style="width: 100%">
   <div class="right_title">
-   <span>业务资讯信息</span>
+   <span>应用信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/financial/news/News.wa?do=insertBefore"
+    <a href="/product/system/application/Application.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">
     <input id="label" name="label" type="text"
-     onfocus="if(this.value=='资讯标题'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='资讯标题';this.style.color='#ccc';}"
-     style="color: #ccc" value="资讯标题"> <a onClick="doSubmit(0)"
+     onfocus="if(this.value=='标签'){this.value='';}this.style.color='#000000';"
+     onblur="if(this.value=='') {this.value='标签';this.style.color='#ccc';}"
+     style="color: #ccc" value="标签"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>
    </div>
   </div>
  </div>
- <table id="logicNews" class="easyui-datagrid" fit='true'
+ <table id="application" class="easyui-datagrid" fit='true'
   style="align: true"
   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,striped: true">
   <thead>
@@ -87,19 +87,13 @@
      width="40px">编号</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="200px">资讯标题</th>
+     width="100px">标签</th>
      <th
-     data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="90px">状态</th>
+     data-options="field:'code',halign:'center',align:'left',sortable:true"
+     width="90px">代码</th>
      <th
-     data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
-     width="60px">是否显示</th>
-    <th
-     data-options="field:'description',halign:'center',align:'left',sortable:true"
-     width="160px">描述</th>
-     <th
-     data-options="field:'content',halign:'center',align:'left',sortable:true"
-     width="260px">资讯内容</th>
+     data-options="field:'note',halign:'center',align:'left',sortable:true"
+     width="390px">内容</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新日期</th>    

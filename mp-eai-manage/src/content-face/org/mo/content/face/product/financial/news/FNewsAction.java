@@ -4,6 +4,14 @@ import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import org.mo.com.lang.EResult;
@@ -16,6 +24,8 @@ import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.upload.IWebUploadConsole;
+import org.mo.web.protocol.common.FWebUploadFile;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -35,7 +45,8 @@ public class FNewsAction
    //业务资讯控制台
    @ALink
    protected INewsConsole _newsConsole;
-   
+   @ALink
+   protected IWebUploadConsole _webUploadConsole;
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -209,9 +220,14 @@ public class FNewsAction
       if(RString.equals(EGcDisplay.Enabled,unit.displayCd())){
          info.setDisplayCdStr(EGcDisplay.EnabledLabel);
       }
-      _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
       info.setLabel(unit.label());
+      if(!RString.isEmpty(unit.iconUrl())){
+         info.setIconUrl(unit.iconUrl());
+         int na = unit.iconUrl().indexOf("images");
+         info.setImageName("/manage/images/"+unit.iconUrl().substring(na+7, unit.iconUrl().length()));
+      }
       page.setUnit(info);
+      _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
       return "/manage/product/financial/news/UpdateNews";
    }
 
@@ -259,7 +275,7 @@ public class FNewsAction
       }
       return null;
    }
- //============================================================
+   //============================================================
    // <T>抽取数据库字段赋值的公共方法</T>
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -279,5 +295,23 @@ public class FNewsAction
          unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
       }
       unit.setLabel(context.parameter("label"));
+      String name = context.files().first().fileName();
+      try {
+         FileInputStream fi = new FileInputStream(context.files().first().uploadName());
+         FileOutputStream fo = new FileOutputStream("D:\\Microbject\\MoCloud\\mp-eai-manage\\webroot\\manage\\images\\"+name);
+         byte []buffer =new byte[1024]; 
+         int a=0;
+         while((a=fi.read(buffer))!=-1){
+            fo.write(buffer);
+         }
+         fo.close();
+         fi.close();
+      } catch (FileNotFoundException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+      unit.setIconUrl("D:\\Microbject\\MoCloud\\mp-eai-manage\\webroot\\manage\\images\\"+name);//文件上传的绝对路径
    }
+
 }
