@@ -7,7 +7,20 @@
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 </HEAD>
+<style> 
+  form {
+  margin: 0;
+  }
+  textarea {
+  display: block;
+  }
+  </style> 
+
 <script>
+    $(function(){
+       var image = $("#image").val()
+       $("#oriIcon").attr("src",image);
+    });
     function submitForm() {
         if (!isValid())
             return;
@@ -21,6 +34,7 @@
             "displayCdStr" : $("#displayCdStr").combobox("getValue"),
             "description" : $('#description').val(),
             "content" : $('#content').val(),
+            "iconUrl" : $('#iconUrl').val(),
             "ouid" : $('#ouid').val()
         };
         $.ajax({
@@ -38,6 +52,24 @@
                 alert("error");
             }
         });
+    }
+    var uploadFile = function(){
+       var path = $('#iconUrl').val();
+       var len = path.length;
+       if(len>=200){
+          alert("文件地址过长，请重新上传！");
+          return;
+       }
+       $("#oriIcon").attr("src",path);
+       alert("上传成功！");
+    }
+    var removeFile = function(){
+       $('#iconUrl').val("");
+       $('#iconUrl').show();
+       $('#oiconUr').val("");
+       $('#oiconUr').hide();
+       $("#oriIcon").attr("src","");
+       $('#uploadFile').show();
     }
 </script>
 
@@ -70,6 +102,8 @@
         value="<jh:write source='&basePage.userId'/>" />
         <input id="ouid" name="ouid" style="display:none"
         value="<jh:write source='&unit.ouid'/>" />
+        <input id="image" name="image" style="display:none"
+        value="<jh:write source='&unit.imageName'/>" />
       </td>
     </tr>
     <tr>
@@ -86,6 +120,16 @@
        <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'0','text':'未知'},{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"
        value="<jh:write source='&unit.displayCdStr'/>"/>   
+      </div></td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">图片上传:</div></td>
+     <td><div align="left">
+       <img width="40" height="40" id="oriIcon">
+       <input type="file" name="iconUrl" id="iconUrl" style="display:none;" multiple="multiple"/>
+       <input id="oiconUr" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>"/>
+       <a id="uploadFile" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="uploadFile()"  style="display:none;">上传</a>
+       <a id="removeFile" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onclick="removeFile()">删除</a>
       </div></td>
     </tr>
     <tr>
