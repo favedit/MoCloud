@@ -9,6 +9,71 @@
       <link rel="stylesheet" type="text/css" href="css/reset.css">
       <link rel="stylesheet" type="text/css" href="css/animate.css">
       <link rel="stylesheet" type="text/css" href="css/main.css">
+      <style type="text/css">
+         .titles-container{
+            position: relative;
+         }
+         /*固定 大小*/
+         .fixed{
+            height: 608px;
+            position: absolute;
+            top:50%;
+            left:50%;
+            margin-top: -304px;
+            margin-left: -116px;
+         }
+         .fixed-size{
+            height: 535px;
+            display: block;
+            overflow: hidden;
+         }
+         .titles-container ul{
+            display: block;
+         }
+         .next, .prev{
+            display: block;
+            text-align: center;
+            cursor:pointer;
+            height: 32px;
+            line-height: 32px;
+            width: 100%;
+            background-size: 28px;
+            position: relative;
+         }
+         .next{
+            background-image:url(images/main/next.png);
+            background-repeat: no-repeat;
+            background-position:top center;
+            top:30px;
+         }
+         .prev{
+            background-image:url(images/main/prev.png);
+            background-repeat: no-repeat;
+            background-position:top center;
+            bottom:30px;
+         }
+         .next.ons, .prev.ons{
+            background: none;
+            cursor:default;
+         }
+         .prev img,.next img{
+            width: 28px;
+            position: relative;
+            top:-3px;
+         }
+         /*总数*/
+         p.total-number{
+            display: none;
+            height: 50px;
+            line-height: 50px;
+            color:#36e4fc;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 18px;
+         }
+         
+      </style>
       <script type="text/javascript" src="js/jquery.min.js"></script>
       <script type="text/javascript" src="js/main.js"></script>
       <script type="text/javascript" src="/ajs/cookie.js"></script>
@@ -19,7 +84,6 @@
          id_do.value = code;
          frmMain.submit();
       }
-
       function loginOut() {
          location.href = "Index.wa?do=loginOut";
       }
@@ -29,7 +93,7 @@
       <FORM id="form" name='frmMain' method='post' action='Main.wa'>
          <p id="prompt" class="prompt"><span>您好，<jh:write source='&page.passport' />  欢迎登录！</span></p>
          <TABLE id="table" style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
-            <TR>
+            <TR style="width:100%;">
                <TD id="header" colspan="2">
                   <INPUT id='id_do' name='do' type='hidden'>
                   <div class="header floatBtn">
@@ -39,7 +103,7 @@
                      <div class="head-right">
                         <ul class="user-l">
                            <je:authority module='eai.marketer.member.recommend'>
-                           <li><a href="/pc/marketer/recommend/Recommend.wa">潜在客户挖掘</a></li>
+                           <li><a href="/pc/marketer/recommend/Recommend.wa"></a></li>
                            </je:authority>
                         </ul>
                         <jh:notEquals source="host" value="&page.userType">
@@ -48,8 +112,8 @@
                               <img class="triangle" src="images/main/new8.png">
                               <li>
                                  <i class="img-details mr-20 pulse">
-                     <img src='../../../mb/images/re.png'>
-                  </i>
+                                    <img src='../../../mb/images/re.png'>
+                                 </i>
                                  <b></b>
                               </li>
                            </ul>
@@ -60,11 +124,10 @@
                            </div>
                         </jh:equals>
                      </div>
-
                </TD>
             </TR>
             <TR>
-               <TD class="main-left" width="80%" align="center" valign="center">
+               <TD class="main-left" width="79%" align="center" valign="center">
                   <ul class="users" id="users">
                      <je:authority role='eai.oa'>
                         <li class="binding"><a href="Binding.wa">账号绑定</a></li>
@@ -126,29 +189,35 @@
                      </div>
                   </div>
                </TD>
-               <TD width="19%" class="main-right" rowspan="2" align="center" valign="top">
-                  <div class="titles-container">
-                     <ul>
-                        <je:authority module='eai.marketer.customer'>
-                           <li onclick='doChart("customer")'><img src="images/main/3-3.png"><b>用户投资实时展示中心</b></li>
-                        </je:authority>
-                        <je:authority module='eai.marketer.marketer'>
-                           <li onclick='doChart("marketer")'><img src="images/main/1-1.PNG"><b>理财师排行实时展示中心</b></li>
-                        </je:authority>
-                        <je:authority module='eai.department.marketer'>
-                           <li onclick='doChart("department")'><img src="images/main/2-2.png"><b>理财师管理实时展示中心</b></li>
-                        </je:authority>
-                        <je:authority module='eai.statistics.marketer'>
-                           <li onclick='doChart("statisticsMarketer")'><img src="images/main/4-1.jpg"><b>全国各省投资总额展示中心</b></li>
-                        </je:authority>
-                        <je:authority module='eai.marketer.manage'>
-                           <li onclick='doChart("marketerManage")'><img src="images/main/6-1.jpg"><b>全球理财师数据展示中心</b></li>
-                        </je:authority>
-                        <je:authority module='eai.performence.marketer'>
-                           <li onclick='doChart("performenceMarketer")'><img src="images/main/5-1.jpg"><b>全球实时统计数据展示中心</b></li>
-                        </je:authority>
-
-                     </ul>
+               <TD width="10%" class="main-right"  rowspan="2" align="center" valign="top">
+                  <div class="titles-container" >
+                     <div class="fixed">
+                        <span class="prev ons"></span>
+                        <div class="fixed-size">
+                           <ul>
+                              <je:authority module='eai.marketer.customer'>
+                                 <li data-url="customer" ><img src="images/main/3-3.png"><b>用户投资实时展示中心</b></li>
+                              </je:authority>
+                              <je:authority module='eai.marketer.marketer'>
+                                 <li data-url="marketer"><img src="images/main/1-1.PNG"><b>理财师排行实时展示中心</b></li>
+                              </je:authority>
+                              <je:authority module='eai.department.marketer'>
+                                 <li data-url="department" ><img src="images/main/2-2.png"><b>理财师管理实时展示中心</b></li>
+                              </je:authority>
+                              <je:authority module='eai.statistics.marketer'>
+                                 <li data-url="statisticsMarketer"><img src="images/main/4-1.jpg"><b>全国各省投资总额展示中心</b></li>
+                              </je:authority>
+                              <je:authority module='eai.marketer.manage'>
+                                 <li data-url="marketerManage" ><img src="images/main/6-1.jpg"><b>全球理财师数据展示中心</b></li>
+                              </je:authority>
+                              <je:authority module='eai.performence.marketer'>
+                                 <li data-url="performenceMarketer" ><img src="images/main/5-1.jpg"><b>全球实时统计数据展示中心</b></li>
+                              </je:authority>
+                           </ul>
+                        </div>
+                        <span class="next"></span>
+                     </div>
+                     <p class="total-number">(<span class="current">1</span>/<span class="total">8</span>)</p>
                   </div>
                </TD>
             </TR>
@@ -159,7 +228,6 @@
                         客服电话：010-65499299</p>
                   </div>
                </TD>
-               <td class="td-container"></td>
             </TR>
          </TABLE>
       </FORM>
