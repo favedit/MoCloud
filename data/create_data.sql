@@ -1447,7 +1447,31 @@ CREATE TABLE `DT_FIN_MEMBER`
 
 ALTER TABLE DT_FIN_MEMBER 
    ADD CONSTRAINT DT_FIN_MBR_UK_GID UNIQUE ( GUID ); 
+-- ------------------------------------------------------------
+-- Create table [Data.Financial.Member.Score]
+-- sunhr 151006
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_FIN_MEMBER_SCORE`;
+CREATE TABLE `DT_FIN_MEMBER_SCORE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MARKETER_ID`                   BIGINT, 
+   `CITY_ID`                       BIGINT, 
+   `BIRTHDAY`                      DATETIME, 
+   `REGISTER_DATE`                 DATETIME, 
+   `LAST_LOGIN_DATE`               DATETIME, 
+   `RECOMMEND_SCORE`               INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
+ALTER TABLE DT_FIN_MEMBER_SCORE 
+   ADD CONSTRAINT DT_FIN_MBR_SCR_UK_GID UNIQUE ( GUID ); 
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Customer]
 -- ------------------------------------------------------------
