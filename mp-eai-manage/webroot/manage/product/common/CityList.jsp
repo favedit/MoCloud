@@ -62,10 +62,9 @@
         window.location.href = "/product/common/City.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
     }
-    function rowformater(value,row,index)
-    {
-        return "<a href=javascript:void(0);  onclick=edit("+row.ouid+");>操作</a>";
-     }
+    function del(id) {
+        alert("不可删除");
+    }
 </script>
 </HEAD>
 <body>
@@ -127,7 +126,7 @@
     <th data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新时间</th>
     <th
-     data-options="field:'operation',halign:'center',align:'center',formatter:rowformater"
+     data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
      width="140px">操作</th>
    </tr>
   </thead>

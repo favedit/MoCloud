@@ -24,7 +24,7 @@
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
-  <form id="config"
+  <form id="config"  enctype=multipart/form-data
    action="/product/financial/news/News.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
@@ -38,7 +38,7 @@
         data-options="validType:'length[0,200]'" /></td>
     </tr>
     <tr>
-     <td><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
+     <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
        <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'0','text':'未知'},{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"/>  
@@ -49,6 +49,18 @@
      <td><div align="left">
        <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'0','text':'未知'},{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>  
+      </div></td>
+    </tr>
+    <tr>
+      <td  height="38" width="54"><div align="left">关键字:</div></td>
+      <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
+        style="width:280px;height:20px"
+        data-options="validType:'length[0,800]'" /></td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td style="width:380px;"><div align="left">
+       <input type="file" name="iconUrl" id="iconUrl"/>
       </div></td>
     </tr>
     <tr>

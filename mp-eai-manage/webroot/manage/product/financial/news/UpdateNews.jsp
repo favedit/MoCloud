@@ -22,36 +22,7 @@
        $("#oriIcon").attr("src",image);
     });
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
-        var url = "/product/financial/news/News.wa?do=update&date="
-                + new Date().valueOf();
-        var data = {
-            "adminId" : $('#adminId').val(),
-            "label" : $('#label').val(),
-            "statusCdStr" : $("#statusCdStr").combobox("getValue"),
-            "displayCdStr" : $("#displayCdStr").combobox("getValue"),
-            "description" : $('#description').val(),
-            "content" : $('#content').val(),
-            "iconUrl" : $('#iconUrl').val(),
-            "ouid" : $('#ouid').val()
-        };
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                console.info("-->"+msg.trim(" ",""));
-                var result = toJsonObject(msg);
-                location.href = "/product/financial/news/News.wa";
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
+        $("#logicNews").submit();
     }
     var uploadFile = function(){
        var path = $('#iconUrl').val();
@@ -68,8 +39,10 @@
        $('#iconUrl').show();
        $('#oiconUr').val("");
        $('#oiconUr').hide();
+       $('#imgdiv').hide();
        $("#oriIcon").attr("src","");
-       $('#uploadFile').show();
+       $("#removeFile").hide();
+       //$('#uploadFile').show();
     }
 </script>
 
@@ -87,16 +60,16 @@
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
-  <form id="logicNews"
-   action="/product/financial/news/News.wa?do=insert"
+  <form id="logicNews" enctype=multipart/form-data
+   action="/product/financial/news/News.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="710" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="54"><div align="left">资讯标题:</div></td>
-      <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:280px;height:20px" readonly="readonly"
+      <td width="54" height="38"><div align="left">资讯标题:</div></td>
+      <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox"
+        style="width:380px;height:20px" readonly="readonly"
         value="<jh:write source='&unit.label'/>" />
         <input id="adminId" name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
@@ -105,9 +78,11 @@
         <input id="image" name="image" style="display:none"
         value="<jh:write source='&unit.imageName'/>" />
       </td>
+      <td rowspan="4" style="width:140px;" ><div align="left" id="imgdiv">
+       <img width="140" height="140" id="oriIcon"></div></td>
     </tr>
     <tr>
-     <td><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
+     <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
        <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'0','text':'未知'},{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"
@@ -123,9 +98,15 @@
       </div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">图片上传:</div></td>
-     <td><div align="left">
-       <img width="40" height="40" id="oriIcon">
+      <td height="38"><div align="left">关键字:</div></td>
+      <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
+        style="width:280px;height:20px"
+        data-options="validType:'length[0,800]'"   value="<jh:write source='&unit.keywords'/>"/></td>
+    </tr>
+    
+    <tr>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td style="width:380px;"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" multiple="multiple"/>
        <input id="oiconUr" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>"/>
        <a id="uploadFile" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="uploadFile()"  style="display:none;">上传</a>
@@ -134,18 +115,18 @@
     </tr>
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
-     <td><div align="left">
+     <td colspan="3"><div align="left">
       <input id="description" name="description" class="easyui-textbox"
         data-options="multiline:true" value="<jh:write source='&unit.description'/>" 
-        style="height:100px;width:500px" />
+        style="height:100px;width:590px" />
       </div></td>
     </tr>
     <tr>
      <td><div align="left">资讯内容:</div></td>
-     <td><div align="left">
+     <td colspan="3"><div align="left">
        <input id="content" name="content" class="easyui-textbox"
         data-options="multiline:true" value="<jh:write source='&unit.content'/>"
-        style="height:100px;width:500px" />
+        style="height:100px;width:590px" />
      </div></td>
     </tr>
    </table>

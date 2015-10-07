@@ -101,15 +101,6 @@ public class FAreaAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataAreaInfo> unitList = _areaConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for(Iterator<FDataAreaInfo> iterator = unitList.iterator(); iterator.hasNext();){
-         FDataAreaInfo tempUnit = iterator.next();
-         //         String _areaLabel = "";
-         FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
-         if(unit2 != null){
-            String _countryLabel = unit2.name();
-            tempUnit.setCountryLabel(_countryLabel);
-         }
-      }
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
@@ -210,8 +201,7 @@ public class FAreaAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataCommonAreaUnit unit = new FDataCommonAreaUnit();
-      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      FDataCommonAreaUnit unit = _areaConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setAreaDa(unit, context, logicContext);
       _areaConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
