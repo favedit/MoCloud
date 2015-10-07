@@ -5,6 +5,8 @@ import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
+import com.cyou.gccloud.data.data.FDataFinancialMemberScoreLogic;
+import com.cyou.gccloud.data.data.FDataFinancialMemberScoreUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
@@ -357,6 +359,94 @@ public class FSynchronizeStatisticsMemberData
       whereSqlLatestWeek.append(FStatisticsFinancialMemberLogic.LAST_LOGIN_DATE);
       whereSqlLatestWeek.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 WEEK)  AND NOW()");
       _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek", "getLatestWeek end. (statisticsMemberLogic()={1})", statisticsMemberLogic);
-      return statisticsMemberLogic.fetch(whereSqlLatestWeek);
+      FLogicDataset<FStatisticsFinancialMemberUnit> lastWeek = statisticsMemberLogic.fetch(whereSqlLatestWeek);
+      return lastWeek;
+   }
+
+   //同时同步数据到DT_FIN_MEMBER_SCORE
+   public static void synchronizedMemberScore(FLogicContext logicContext){
+      FDataFinancialMemberScoreLogic dataMemberScoreLogic = logicContext.findLogic(FDataFinancialMemberScoreLogic.class);
+      //抓取出来最近三天的数据
+      FDataFinancialMemberLogic dataMemberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FSql whereSqlLatestThreeDays = new FSql();
+      whereSqlLatestThreeDays.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
+      whereSqlLatestThreeDays.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 3 DAY)  AND NOW()");
+      FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestThreeDays);
+      FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits = new FLogicDataset<FDataFinancialMemberScoreUnit>();
+      //如果最近3天大于8w抓取最近一天的
+      if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 80000){
+         FSql whereSqlLatestOneDays = new FSql();
+         whereSqlLatestOneDays.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
+         whereSqlLatestOneDays.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 DAY)  AND NOW()");
+         lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestOneDays);
+         //如果最近一天的数据大于8w抓取最近12小时的
+         if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 80000){
+            FSql whereSqlLatestHour = new FSql();
+            whereSqlLatestHour.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
+            whereSqlLatestHour.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 12 HOUR)  AND NOW()");
+            lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestHour);
+            if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 0){
+               insertOrUpdateMemberScore(lastDataMemberUnits, lastDataMemberScoreUnits, dataMemberScoreLogic);
+            }
+         }else{
+            if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 0){
+               insertOrUpdateMemberScore(lastDataMemberUnits, lastDataMemberScoreUnits, dataMemberScoreLogic);
+            }
+         }
+      }else{
+         if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 0){
+            insertOrUpdateMemberScore(lastDataMemberUnits, lastDataMemberScoreUnits, dataMemberScoreLogic);
+         }
+      }
+
+   }
+
+   public static void insertOrUpdateMemberScore(FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits,
+                                                FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits,
+                                                FDataFinancialMemberScoreLogic dataMemberScoreLogic){
+
+      loadDTMemberScoreData(lastDataMemberUnits, lastDataMemberScoreUnits);
+      FSql whereFSql = new FSql();
+      for(Iterator<FDataFinancialMemberScoreUnit> iterator = lastDataMemberScoreUnits.iterator(); iterator.hasNext();){
+         FDataFinancialMemberScoreUnit lastDataMemberScoreUnit = iterator.next();
+         whereFSql.append(FDataFinancialMemberScoreLogic.OUID);
+         whereFSql.append("=");
+         whereFSql.append(lastDataMemberScoreUnit.ouid());
+         FLogicDataset<FDataFinancialMemberScoreUnit> dataMemberScoreUnits = dataMemberScoreLogic.fetch(whereFSql);
+         if(dataMemberScoreUnits != null && dataMemberScoreUnits.count() > 0){
+            dataMemberScoreLogic.doUpdate(lastDataMemberScoreUnit);
+         }else{
+            dataMemberScoreLogic.doInsert(lastDataMemberScoreUnit);
+         }
+         whereFSql.clear();
+      }
+
+   }
+
+   //
+   public static void loadDTMemberScoreData(FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits,
+                                            FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits){
+      FDataFinancialMemberScoreUnit lastDataMemberScoreUnit = null;
+      for(Iterator<FDataFinancialMemberUnit> iterator = lastDataMemberUnits.iterator(); iterator.hasNext();){
+         FDataFinancialMemberUnit lastDataMemberUnit = iterator.next();
+         lastDataMemberScoreUnit = new FDataFinancialMemberScoreUnit();
+         lastDataMemberScoreUnit.setOuid(lastDataMemberUnit.ouid());
+         lastDataMemberScoreUnit.setOvld(lastDataMemberUnit.ovld());
+         lastDataMemberScoreUnit.setGuid(lastDataMemberUnit.guid());
+         lastDataMemberScoreUnit.setPassport(lastDataMemberUnit.passport());
+         lastDataMemberScoreUnit.setLabel(lastDataMemberUnit.label());
+         lastDataMemberScoreUnit.setCityId(lastDataMemberUnit.cityId());
+         lastDataMemberScoreUnit.setBirthday(lastDataMemberUnit.birthday());
+         lastDataMemberScoreUnit.setRegisterDate(lastDataMemberUnit.registerDate());
+         lastDataMemberScoreUnit.setLastLoginDate(lastDataMemberUnit.lastLoginDate());
+         lastDataMemberScoreUnit.setRecommendScore(lastDataMemberUnit.recommendScore());
+         lastDataMemberScoreUnit.setNote(lastDataMemberUnit.note());
+         lastDataMemberScoreUnit.setCreateUserId(lastDataMemberUnit.createUserId());
+         lastDataMemberScoreUnit.setCreateDate(lastDataMemberUnit.createDate());
+         lastDataMemberScoreUnit.setUpdateDate(lastDataMemberUnit.updateDate());
+         lastDataMemberScoreUnit.setUpdateUserId(lastDataMemberUnit.updateUserId());
+         lastDataMemberScoreUnits.push(lastDataMemberScoreUnit);
+      }
+
    }
 }
