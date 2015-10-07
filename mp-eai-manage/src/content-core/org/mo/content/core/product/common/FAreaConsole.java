@@ -2,9 +2,12 @@ package org.mo.content.core.product.common;
 
 import com.cyou.gccloud.data.data.FDataCommonAreaLogic;
 import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
+import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
+import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
+import org.mo.core.aop.face.ALink;
 //============================================================
 //<P>区域信息操作接口</P>
 //
@@ -27,7 +30,11 @@ public class FAreaConsole
       extends FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>
       implements
          IAreaConsole
+         
 {
+    //国家控制台
+    @ALink
+    protected ICountryConsole _countryConsole;
 
    //============================================================
    // <T>构造区域控制台。</T>
@@ -61,6 +68,15 @@ public class FAreaConsole
       //      String orderBy = String.format("%s %s", FDataCommonAreaLogic.LABEL, "ASC");
       FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
       FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, where.toString(), null, pageSize, pageNum);
+      for(Iterator<FDataAreaInfo> iterator = userInfoList.iterator(); iterator.hasNext();){
+          FDataAreaInfo tempUnit = iterator.next();
+          //         String _areaLabel = "";
+          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
+          if(unit2 != null){
+             String _countryLabel = unit2.name();
+             tempUnit.setCountryLabel(_countryLabel);
+          }
+       }
       return userInfoList;
    }
 

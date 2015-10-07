@@ -41,7 +41,7 @@ public class FCountryAction
                            ILogicContext logicContext,
                            FBasePage basePage){
 
-      _logger.debug(this, "-----------Construct-------------", "Construct begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
@@ -61,7 +61,7 @@ public class FCountryAction
                         ILogicContext logicContext,
                         FCountryPage Page,
                         FBasePage basePage){
-      _logger.debug(this, "------------------------------Select", "Select begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
@@ -82,7 +82,7 @@ public class FCountryAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataCommonCountryUnit> unitList = _countryConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
-      _logger.debug(this, "------------------------------Select", "Select finish. (unitListCount={1})", unitList.count());
+      _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
    }
@@ -178,7 +178,7 @@ public class FCountryAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataCommonCountryUnit unit = new FDataCommonCountryUnit();
+      FDataCommonCountryUnit unit = _countryConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       setCountryDate(context, unit);

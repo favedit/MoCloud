@@ -48,7 +48,10 @@
         });
     }
     function del(id) {
-        alert("不可删除");
+    	 return confirmx('确定删除?',
+                 function() {
+                     location.href = "/product/financial/news/News.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+                 });
     }
     //更新配置信息-AnjoyTian
     function edit(id) {
@@ -94,6 +97,12 @@
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
+     <th
+     data-options="field:'keywords',halign:'center',align:'left',sortable:true"
+     width="60px">关键字</th>
+     <th
+     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
+     width="160px">图片</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
      width="160px">描述</th>

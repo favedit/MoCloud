@@ -147,7 +147,7 @@ public class FApplicationAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataSystemApplicationUnit unit = new FDataSystemApplicationUnit();
+      FDataSystemApplicationUnit unit = _applicationConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       setLogicApplication(context,logicContext,unit);
       _applicationConsole.doUpdate(logicContext, unit);

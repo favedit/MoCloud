@@ -168,8 +168,7 @@ public class FVersionAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataSystemVersionUnit unit = new FDataSystemVersionUnit();
-      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      FDataSystemVersionUnit unit =  _versionConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setLogicVersion(context,logicContext,unit);
       _versionConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");

@@ -48,7 +48,7 @@
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
 
-  <form id="config"
+  <form id="config" enctype="multipart/form-data"
    action="/product/financial/customer/Customer.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>

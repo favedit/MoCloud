@@ -226,8 +226,7 @@ public class FCityAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataCommonCityUnit unit = new FDataCommonCityUnit();
-      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      FDataCommonCityUnit unit = _cityConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setCityDat(unit, context, logicContext);
       _cityConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";

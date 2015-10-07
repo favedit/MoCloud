@@ -209,8 +209,7 @@ public class FProvinceAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataCommonProvinceUnit unit = new FDataCommonProvinceUnit();
-      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setProvinceDat(unit, context, logicContext);
       _proviConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
