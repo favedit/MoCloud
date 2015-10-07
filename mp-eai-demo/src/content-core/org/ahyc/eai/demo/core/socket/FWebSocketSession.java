@@ -1,5 +1,6 @@
 package org.ahyc.eai.demo.core.socket;
 
+import java.nio.ByteBuffer;
 import javax.websocket.RemoteEndpoint.Async;
 import javax.websocket.Session;
 import org.mo.com.lang.FObject;
@@ -70,11 +71,29 @@ public class FWebSocketSession
    // @param message 消息
    //============================================================
    public void sendMessage(String message){
+      // 发送数据
+      Async async = _session.getAsyncRemote();
       try{
-         Async async = _session.getAsyncRemote();
          async.sendText(message);
-         //         Basic basic = _session.getBasicRemote();
-         //         basic.sendText(message);
+      }catch(Exception exception){
+         _logger.error(this, "sendMessage", exception);
+      }
+   }
+
+   //============================================================
+   // <T>发送消息。</T>
+   //
+   // @param message 消息
+   //============================================================
+   public void sendMessage(byte[] data,
+                           int offset,
+                           int length){
+      // 获得缓冲
+      ByteBuffer buffer = ByteBuffer.wrap(data, offset, length);
+      // 发送数据
+      Async async = _session.getAsyncRemote();
+      try{
+         async.sendBinary(buffer);
       }catch(Exception exception){
          _logger.error(this, "sendMessage", exception);
       }
