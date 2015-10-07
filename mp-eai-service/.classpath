@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient-4.5.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-4.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/ycjt3des-1.0.jar"/>
 	<classpathentry kind="output" path="webroot/WEB-INF/classes"/>
 </classpath>
