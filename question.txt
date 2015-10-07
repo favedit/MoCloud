@@ -18,3 +18,11 @@
 2 - 国家管理 (JS脚本实现)
 
 Home: 123.126.85.181
+
+服务器端口列表：
+eai-content: 8010
+eai-service: 8020
+eai-storage: 8030
+eai-manage:  8040
+eai-logger:  8090
+

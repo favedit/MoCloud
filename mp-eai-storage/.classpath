@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/core"/>
+	<classpathentry kind="src" path="src/face"/>
+	<classpathentry kind="src" path="src/config"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-2-core"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-3-logic"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-4-web"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-5-cloud"/>
+	<classpathentry exported="true" kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-6-content"/>
+	<classpathentry kind="output" path="webroot/WEB-INF/classes"/>
+</classpath>

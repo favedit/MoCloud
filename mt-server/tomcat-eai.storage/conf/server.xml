@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Server port="8093" shutdown="SHUTDOWN">
+<Server port="8033" shutdown="SHUTDOWN">
    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
    <Listener className="org.apache.catalina.core.JasperListener" />
    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
@@ -9,15 +9,15 @@
       <Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" pathname="conf/tomcat-users.xml" />
    </GlobalNamingResources>
    <Service name="Catalina">
-   <Connector port="8090" protocol="HTTP/1.1" connectionTimeout="600000" redirectPort="8092" URIEncoding='utf-8'/>
-   <Connector port="8091" protocol="AJP/1.3" connectionTimeout="600000" redirectPort="8092" />
+   <Connector port="8030" protocol="HTTP/1.1" connectionTimeout="600000" redirectPort="8032" URIEncoding='utf-8'/>
+   <Connector port="8031" protocol="AJP/1.3" connectionTimeout="600000" redirectPort="8032" />
    <Engine name="Catalina" defaultHost="localhost">
       <Realm className="org.apache.catalina.realm.LockOutRealm">
          <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
       </Realm>
       <Host name="localhost"  appBase="webapps" unpackWARs="true" autoDeploy="true">
          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="localhost_access_log." suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-         <Context path="" docBase="D:/Microbject/MoCloud/mp-eai-logger/webroot" workDir="D:/Microbject/MoCloud/mt-temp/mp-eai-logger" reloadable="true" crossContext="false"/>
+         <Context path="" docBase="D:/Microbject/MoCloud/mp-eai-storage/webroot" workDir="D:/Microbject/MoCloud/mt-temp/mp-eai-storage" reloadable="true" crossContext="false"/>
       </Host>
    </Engine>
    </Service>
