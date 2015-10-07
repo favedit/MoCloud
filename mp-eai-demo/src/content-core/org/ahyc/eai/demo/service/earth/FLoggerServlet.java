@@ -1,7 +1,10 @@
 package org.ahyc.eai.demo.service.earth;
 
+import javax.websocket.CloseReason;
+import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
+import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
@@ -31,7 +34,8 @@ public class FLoggerServlet
    // @param message 消息内容
    //============================================================
    @OnOpen
-   public void onOpen(Session session){
+   public void onOpen(Session session,
+                      EndpointConfig config){
       if(_console == null){
          _console = RAop.find(IWebSocketConsole.class);
       }
@@ -44,11 +48,11 @@ public class FLoggerServlet
    // @param session 会话处理
    // @param message 消息内容
    //============================================================
-   //   @OnMessage
-   //   public void onMessage(String message,
-   //                         Session session){
-   //      System.out.println("> " + message);
-   //   }
+   @OnMessage
+   public void onMessage(String message,
+                         Session session){
+      System.out.println("> " + message);
+   }
 
    //============================================================
    // <T>消息处理。</T>
@@ -57,7 +61,8 @@ public class FLoggerServlet
    // @param message 消息内容
    //============================================================
    @OnClose
-   public void onClose(Session session){
+   public void onClose(Session session,
+                       CloseReason closeReason){
       _console.close(session);
    }
 
@@ -68,7 +73,8 @@ public class FLoggerServlet
    // @param message 消息内容
    //============================================================
    @OnError
-   public void onError(Throwable throwable){
+   public void onError(Session session,
+                       Throwable throwable){
       _logger.error(this, "onError", throwable);
    }
 }

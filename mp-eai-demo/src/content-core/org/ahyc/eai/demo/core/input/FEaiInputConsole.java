@@ -41,6 +41,18 @@ public class FEaiInputConsole
       }
    }
 
+   public void sendMessage(byte[] data,
+                           int offset,
+                           int length){
+      if(length > 0){
+         FObjects<FWebSocketSession> sessions = _socketConsole.sessions();
+         for(FWebSocketSession session : sessions){
+            session.sendMessage(data, offset, length);
+         }
+         _logger.debug(this, "sendMessage", "Send message. (count={1}, data_length={2})", sessions.count(), length);
+      }
+   }
+
    public void initialize(){
       System.out.println("Start");
       _connection = new FInputConnection();

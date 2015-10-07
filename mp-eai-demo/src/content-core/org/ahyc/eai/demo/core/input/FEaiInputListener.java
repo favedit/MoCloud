@@ -8,7 +8,7 @@ import org.ahyc.eai.demo.core.input.tuio.FTuioCursor;
 import org.ahyc.eai.demo.core.input.tuio.FTuioListener;
 import org.ahyc.eai.demo.core.input.tuio.FTuioObject;
 import org.mo.com.geom.SIntSize2;
-import org.mo.com.lang.FString;
+import org.mo.com.io.FByteStream;
 
 //============================================================
 // <T>输入监听器。</T>
@@ -73,15 +73,14 @@ public class FEaiInputListener
    // @param value 内容
    //============================================================
    public void sendCursor(String typeCode){
-      FString message = new FString();
-      message.append(typeCode);
+      FByteStream stream = new FByteStream();
+      stream.writeString(typeCode);
+      //message.append(typeCode);
+      stream.writeInt32(_cursors.count());
       for(FTuioCursor cursor : _cursors){
-         if(!message.isEmpty()){
-            message.append("|");
-         }
-         message.append(cursor.position());
+         cursor.position().serialize(stream);
       }
-      _console.sendMessage(message.toString());
+      _console.sendMessage(stream.memory(), 0, stream.length());
    }
 
    //============================================================
