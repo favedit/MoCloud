@@ -6,6 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -56,10 +57,16 @@ public class FDataSystemVersionUnit
    // 字段必须类型的定义。
    protected int _forceCd;
 
-   // 存储字段版本 （X.X.X）的定义。
+   // 存储字段版本号的定义。
+   private float __number;
+
+   // 字段版本号的定义。
+   protected float _number;
+
+   // 存储字段版本名称 （X.X.X)的定义。
    private String __code;
 
-   // 字段版本 （X.X.X）的定义。
+   // 字段版本名称 （X.X.X)的定义。
    protected String _code;
 
    // 存储字段标签的定义。
@@ -302,7 +309,34 @@ public class FDataSystemVersionUnit
    }
 
    //============================================================
-   // <T>判断版本 （X.X.X）的数据是否改变。</T>
+   // <T>判断版本号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNumberChanged(){
+      return __number != _number;
+   }
+
+   //============================================================
+   // <T>获得版本号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public float number(){
+      return _number;
+   }
+
+   //============================================================
+   // <T>设置版本号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNumber(float value){
+      _number = value;
+   }
+
+   //============================================================
+   // <T>判断版本名称 （X.X.X)的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
@@ -311,7 +345,7 @@ public class FDataSystemVersionUnit
    }
 
    //============================================================
-   // <T>获得版本 （X.X.X）的数据内容。</T>
+   // <T>获得版本名称 （X.X.X)的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
@@ -320,7 +354,7 @@ public class FDataSystemVersionUnit
    }
 
    //============================================================
-   // <T>设置版本 （X.X.X）的数据内容。</T>
+   // <T>设置版本名称 （X.X.X)的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
@@ -619,6 +653,8 @@ public class FDataSystemVersionUnit
             return RInteger.toString(_statusCd);
          case "force_cd":
             return RInteger.toString(_forceCd);
+         case "number":
+            return RFloat.toString(_number);
          case "code":
             return _code;
          case "label":
@@ -672,6 +708,9 @@ public class FDataSystemVersionUnit
             break;
          case "force_cd":
             _forceCd = RInteger.parse(value);
+            break;
+         case "number":
+            _number = RFloat.parse(value);
             break;
          case "code":
             _code = value;
@@ -745,6 +784,10 @@ public class FDataSystemVersionUnit
                __forceCd = RInteger.parse(value);
                _forceCd = __forceCd;
                break;
+            case "number":
+               __number = RFloat.parse(value);
+               _number = __number;
+               break;
             case "code":
                __code = value;
                _code = __code;
@@ -807,6 +850,7 @@ public class FDataSystemVersionUnit
       row.set("applicationId", _applicationId);
       row.set("statusCd", _statusCd);
       row.set("forceCd", _forceCd);
+      row.set("number", _number);
       row.set("code", _code);
       row.set("label", _label);
       row.set("beginDate", _beginDate);
@@ -834,6 +878,7 @@ public class FDataSystemVersionUnit
       map.put("applicationId", RLong.toString(_applicationId));
       map.put("statusCd", RInteger.toString(_statusCd));
       map.put("forceCd", RInteger.toString(_forceCd));
+      map.put("number", RFloat.toString(_number));
       map.put("code", _code);
       map.put("label", _label);
       map.put("beginDate", _beginDate.format("YYYY-MM-DD HH24:MI:SS"));

@@ -51,7 +51,10 @@ public class FDataSystemVersionLogic
    // 字段必须类型的定义。
    public final static SLogicFieldInfo FORCE_CD = new SLogicFieldInfo("FORCE_CD");
 
-   // 字段版本 （X.X.X）的定义。
+   // 字段版本号的定义。
+   public final static SLogicFieldInfo NUMBER = new SLogicFieldInfo("NUMBER");
+
+   // 字段版本名称 （X.X.X)的定义。
    public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段标签的定义。
@@ -85,7 +88,7 @@ public class FDataSystemVersionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`APPLICATION_ID`,`STATUS_CD`,`FORCE_CD`,`CODE`,`LABEL`,`BEGIN_DATE`,`END_DATE`,`DOWNLOAD_URL`,`DOWNLOAD_SIZE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`APPLICATION_ID`,`STATUS_CD`,`FORCE_CD`,`NUMBER`,`CODE`,`LABEL`,`BEGIN_DATE`,`END_DATE`,`DOWNLOAD_URL`,`DOWNLOAD_SIZE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造系统版本表逻辑单元。</T>
@@ -684,6 +687,7 @@ public class FDataSystemVersionLogic
       cmd.append(",`APPLICATION_ID`");
       cmd.append(",`STATUS_CD`");
       cmd.append(",`FORCE_CD`");
+      cmd.append(",`NUMBER`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`BEGIN_DATE`");
@@ -720,6 +724,8 @@ public class FDataSystemVersionLogic
       cmd.append(unit.statusCd());
       cmd.append(',');
       cmd.append(unit.forceCd());
+      cmd.append(',');
+      cmd.append(unit.number());
       cmd.append(',');
       String code = unit.code();
       if(RString.isEmpty(code)){
@@ -870,6 +876,10 @@ public class FDataSystemVersionLogic
       if(unit.isForceCdChanged()){
          cmd.append(",`FORCE_CD`=");
          cmd.append(unit.forceCd());
+      }
+      if(unit.isNumberChanged()){
+         cmd.append(",`NUMBER`=");
+         cmd.append(unit.number());
       }
       if(unit.isCodeChanged()){
          cmd.append(",`CODE`=");
