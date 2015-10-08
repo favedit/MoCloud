@@ -21,6 +21,12 @@ public class FIndexAction
    @Override
    public String construct(ISqlContext context,
                            FIndexPage areaPage){
-      return "Index";
+      return "/service/news/News.wa?do=getNewInfo";
+   }
+
+   @Override
+   public String getNewsInfo(ISqlContext context,
+                             FIndexPage areaPage){
+      return "/service/news/News.wa?do=getNewInfo";
    }
 }

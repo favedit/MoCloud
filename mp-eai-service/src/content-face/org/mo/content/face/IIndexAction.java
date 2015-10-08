@@ -19,4 +19,7 @@ public interface IIndexAction
    //============================================================
    String construct(ISqlContext context,
                     @AContainer(name = "page") FIndexPage page);
+
+   public String getNewsInfo(ISqlContext context,
+                             FIndexPage areaPage);
 }
