@@ -40,7 +40,6 @@ public class FMobileService
                           IWebInput input,
                           IWebOutput output){
       _logger.debug(this, "process", "process begin. ");
-
       return EResult.Success;
    }
 
