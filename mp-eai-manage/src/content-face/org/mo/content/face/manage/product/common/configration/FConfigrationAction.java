@@ -1,17 +1,11 @@
-package org.mo.content.face.manage.product.common;
+package org.mo.content.face.manage.product.common.configration;
 
-import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
-import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
+import com.cyou.gccloud.data.data.FDataCommonConfigurationUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.common.FDataAreaInfo;
-import org.mo.content.core.manage.product.common.IAreaConsole;
-import org.mo.content.core.manage.product.common.ICityConsole;
-import org.mo.content.core.manage.product.common.ICountryConsole;
-import org.mo.content.core.manage.product.common.IProvinceConsole;
+import org.mo.content.core.manage.product.common.configration.IConfigrationConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -19,31 +13,18 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>区域信息控制器</P>
-//@class FAreaAction
-//@author AnjoyTian
-//@Date 2015.09.21  
-//@version 1.0.0
+// <P>配置信息接口。</P>
+//
+// @author sunhr
+// @version 150909
 //============================================================
-public class FAreaAction implements IAreaAction {
+public class FConfigrationAction implements IConfigrationAction {
     // 日志输出接口
-    private static ILogger _logger = RLogger.find(FAreaAction.class);
+    private static ILogger _logger = RLogger.find(FConfigrationAction.class);
 
-    // 用户控制台
+    // 配置控制台
     @ALink
-    protected ICityConsole _cityConsole;
-
-    // 国家控制台
-    @ALink
-    protected ICountryConsole _countryConsole;
-
-    // 省会控制台
-    @ALink
-    protected IProvinceConsole _provinceConsole;
-
-    // 区域控制台
-    @ALink
-    protected IAreaConsole _areaConsole;
+    protected IConfigrationConsole _configrationConsole;
 
     // ============================================================
     // <T>默认逻辑处理。</T>
@@ -53,12 +34,11 @@ public class FAreaAction implements IAreaAction {
     // ============================================================
     @Override
     public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
-
         _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
-        return "/manage/product/common/AreaList";
+        return "/manage/product/common/configration/ConfigList";
     }
 
     // ============================================================
@@ -70,28 +50,25 @@ public class FAreaAction implements IAreaAction {
     // @return 页面
     // ============================================================
     @Override
-    public String select(IWebContext context, ILogicContext logicContext, FAreaPage page, FBasePage basePage) {
+    public String select(IWebContext context, ILogicContext logicContext, FConfigrationPage Page, FBasePage basePage) {
         _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
         if (null != context.parameter("page")) {
             String num = context.parameter("page");
-            page.setPageCurrent(Integer.parseInt(num));
+            Page.setPageCurrent(Integer.parseInt(num));
         } else {
-            page.setPageCurrent(0);
+            Page.setPageCurrent(0);
         }
-        FDataCommonAreaUnit unit = new FDataCommonAreaUnit();
-        String label = context.parameter("label");
-        if (!RString.isEmpty(label)) {
-            unit.setLabel(label);
-        }
+        FDataCommonConfigurationUnit unit = new FDataCommonConfigurationUnit();
+        unit.setCode(context.parameter("code"));
         String StrPageSize = context.parameter("pageSize");
         int pageSize = 20;
         if (null != StrPageSize) {
             pageSize = Integer.parseInt(StrPageSize);
         }
-        FLogicDataset<FDataAreaInfo> unitList = _areaConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+        FLogicDataset<FDataCommonConfigurationUnit> unitList = _configrationConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
         _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
         basePage.setJson(unitList.toJsonListString());
         return "/manage/common/ajax";
@@ -106,17 +83,16 @@ public class FAreaAction implements IAreaAction {
     // @return 页面
     // ============================================================
     @Override
-    public String insertBefore(IWebContext context, ILogicContext logicContext, FAreaPage Page, FBasePage basePage) {
-
+    public String insertBefore(IWebContext context, ILogicContext logicContext, FConfigrationPage Page, FBasePage basePage) {
         _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
-        return "/manage/product/common/InsertArea";
+        return "/manage/product/common/configration/InsertConfig";
     }
 
     // ============================================================
-    // <T>增</T>
+    // <T>增加</T>
     //
     // @param context 网络环境
     // @param logicContext 逻辑环境
@@ -124,19 +100,24 @@ public class FAreaAction implements IAreaAction {
     // @return 页面
     // ============================================================
     @Override
-    public String insert(IWebContext context, ILogicContext logicContext, FAreaPage page, FBasePage basePage) {
-        _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
+    public String insert(IWebContext context, ILogicContext logicContext, FConfigrationPage page, FBasePage basePage) {
+        _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
-        FDataCommonAreaUnit unit = _areaConsole.doPrepare(logicContext);
-        setAreaDa(unit, context, logicContext);
-        EResult result = _areaConsole.doInsert(logicContext, unit);
+        FDataCommonConfigurationUnit unit = _configrationConsole.doPrepare(logicContext);
+        unit.setCode(context.parameter("code"));
+        unit.setLabel(context.parameter("label"));
+        unit.setDataTypeCd(context.parameter("dataType"));
+        unit.setDataValue(context.parameter("dataValue"));
+        unit.setNote(context.parameter("note"));
+        unit.setCreateUserId(context.parameterAsLong("adminId"));
+        EResult result = _configrationConsole.doInsert(logicContext, unit);
         if (!result.equals(EResult.Success)) {
             page.setResult("增加失败");
-            return "/manage/product/common/InsertArea";
+            return "/manage/product/configration/InsertConfig";
         }
-        return "/manage/product/common/AreaList";
+        return "/manage/product/common/configration/ConfigList";
     }
 
     // ============================================================
@@ -148,21 +129,16 @@ public class FAreaAction implements IAreaAction {
     // @return 页面
     // ============================================================
     @Override
-    public String updateBefore(IWebContext context, ILogicContext logicContext, FAreaPage page, FBasePage basePage) {
+    public String updateBefore(IWebContext context, ILogicContext logicContext, FConfigrationPage configrationPage, FBasePage basePage) {
         _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
         long id = context.parameterAsLong("id");
-        FDataCommonAreaUnit unit = _areaConsole.find(logicContext, id);
-        FDataAreaInfo info = new FDataAreaInfo();
-        info.setOuid(unit.ouid());
-        info.setCode(unit.code());
-        info.setCountryLabel(unit.country().name());
-        info.setLabel(unit.label());
-        info.setNote(unit.note());
-        page.setUnit(info);
-        return "/manage/product/common/UpdateArea";
+
+        FDataCommonConfigurationUnit unit = _configrationConsole.find(logicContext, id);
+        configrationPage.setUnit(unit);
+        return "/manage/product/common/configration/UpdateConfig";
     }
 
     // ============================================================
@@ -174,15 +150,20 @@ public class FAreaAction implements IAreaAction {
     // @return 页面
     // ============================================================
     @Override
-    public String update(IWebContext context, ILogicContext logicContext, FAreaPage Page, FBasePage basePage) {
+    public String update(IWebContext context, ILogicContext logicContext, FConfigrationPage Page, FBasePage basePage) {
 
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
-        _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-        FDataCommonAreaUnit unit = _areaConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
-        setAreaDa(unit, context, logicContext);
-        _areaConsole.doUpdate(logicContext, unit);
+        _logger.debug(this, "Update", "Update Begin.(id={1})", context.parameter("configInfoId"));
+        FDataCommonConfigurationUnit unit = new FDataCommonConfigurationUnit();
+        unit.setOuid(Long.parseLong(context.parameter("configInfoId")));
+        unit.setLabel(context.parameter("label"));
+        unit.setCode(context.parameter("code"));
+        unit.setDataTypeCd(context.parameter("dataType"));
+        unit.setDataValue(context.parameter("dataValue"));
+        unit.setNote(context.parameter("note"));
+        _configrationConsole.doUpdate(logicContext, unit);
         return "/manage/common/ajax";
     }
 
@@ -195,39 +176,21 @@ public class FAreaAction implements IAreaAction {
     // @return 页面
     // ============================================================
     @Override
-    public String delete(IWebContext context, ILogicContext logicContext, FAreaPage Page, FBasePage basePage) {
+    public String delete(IWebContext context, ILogicContext logicContext, FConfigrationPage Page, FBasePage basePage) {
         _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
         long id = context.parameterAsLong("id");
-        FDataCommonAreaUnit unit = _areaConsole.find(logicContext, id);
+        FDataCommonConfigurationUnit unit = _configrationConsole.find(logicContext, id);
         if (unit == null) {
             throw new FFatalError("id not exists.");
         }
-        EResult result = _areaConsole.doDelete(logicContext, unit);
+        EResult result = _configrationConsole.doDelete(logicContext, unit);
         if (!result.equals(EResult.Success)) {
             throw new FFatalError("Delete failure.");
         } else {
-            return "/manage/product/common/AreaList";
-        }
-    }
-
-    // ============================================================
-    // <T>抽取方法</T>
-    //
-    // @param context 网络环境
-    // @param logicContext 逻辑环境
-    // @return void
-    // ============================================================
-    public void setAreaDa(FDataCommonAreaUnit unit, IWebContext context, ILogicContext logicContext) {
-        unit.setCreateUserId(context.parameterAsLong("adminId"));
-        unit.setCode(context.parameter("code"));
-        unit.setLabel(context.parameter("label"));
-        unit.setNote(context.parameter("note"));
-        FDataCommonCountryUnit unitc = _countryConsole.findByLable(logicContext, context.parameter("countryLabel"));
-        if (null != unitc) {
-            unit.setCountryId(unitc.ouid());
+            return "/manage/product/common/configration/ConfigList";
         }
     }
 }

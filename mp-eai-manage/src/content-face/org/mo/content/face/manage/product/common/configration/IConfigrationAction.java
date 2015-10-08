@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.configration;
+package org.mo.content.face.manage.product.common.configration;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

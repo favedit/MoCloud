@@ -19,14 +19,14 @@
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="#" onClick="submitForm()" class="add_btn"></a>
-               <a href="/product/configration/Configration.wa" class="back_btn"></a>
+               <a href="/manage/product/common/configration/Configration.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>
       </div>
       <div class="easyui-panel" fit='true' data-options="border:false">
          
-         <form id="config" action="/product/configration/Configration.wa?do=insert" method="post" align="center">
+         <form id="config" action="/manage/product/common/configration/Configration.wa?do=insert" method="post" align="center">
             <font style="color:red;"><jh:write source='&page.result'/></font>
          <table width="718" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
             <tr>

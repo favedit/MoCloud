@@ -58,11 +58,11 @@
                   <jh:equals source="manage.product.common.city" value="&basePage.menuString">
                      <li><a href="/manage/product/common/City.wa" target="right">城市信息</a></li>
                   </jh:equals>
-                  <jh:equals source="manage.product.configration" value="&basePage.menuString">
-                     <li><a href="/manage/product/configration/Configration.wa" target="right">配置信息</a></li>
+                  <jh:equals source="manage.product.common.configration" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/configration/Configration.wa" target="right">配置信息</a></li>
                   </jh:equals>
-                  <jh:equals source="manage.product.configration.rule" value="&basePage.menuString">
-                     <li><a href="/manage/product/configration/Rule.wa" target="right">规则配置信息</a></li>
+                  <jh:equals source="manage.product.common.configration.rule" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/configration/rule/Rule.wa" target="right">规则配置信息</a></li>
                   </jh:equals>
                </ul>
             </li>

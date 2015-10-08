@@ -133,8 +133,8 @@ public class FHeaderAction implements IHeaderAction {
         int roleCd = _userConsole.findByGuid(logicContext, guid).roleCd();
         if (roleCd == EGcPersonUserRole.Admin) {
             menuStrings
-                    .append("manage.user.module|manage.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|product.financial.product|manage.user|product.financial.department|product.financial.lnews|product.financial.customer|manage.product.configration|")
-                    .append("product.configration.rule|product.system.application|product.system.version|product.financial.marketer|product.device|product.user.logger|product.user.writelists");
+                    .append("manage.user.module|manage.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|product.financial.product|manage.user|product.financial.department|product.financial.lnews|product.financial.customer|manage.product.common.configration|")
+                    .append("manage.product.common.configration.rule|product.system.application|product.system.version|product.financial.marketer|product.device|product.user.logger|product.user.writelists");
             basePage.setMenuString(menuStrings.toString());
         } else {
             long roleId = basePage.roleId();

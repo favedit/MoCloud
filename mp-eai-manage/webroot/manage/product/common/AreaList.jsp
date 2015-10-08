@@ -20,13 +20,13 @@
 
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/common/Area.wa?do=select&date="
+        var url = "/manage/product/common/Area.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var label = $.trim($('#label').val()).replaceAll("'", "");
         if (label == "标签") label = null;
         if (page != null) {
-            url = "/product/common/Area.wa?do=select&page=" + page + "&date="
+            url = "/manage/product/common/Area.wa?do=select&page=" + page + "&date="
                     + new Date().valueOf();
             data = {
                  "label" : label,
@@ -52,7 +52,7 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/common/Area.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/common/Area.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
     }
     function del(id) {
@@ -68,7 +68,7 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/common/Area.wa?do=insertBefore"
+    <a href="/manage/product/common/Area.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">

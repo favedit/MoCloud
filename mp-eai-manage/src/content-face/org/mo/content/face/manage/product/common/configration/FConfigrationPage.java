@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.configration;
+package org.mo.content.face.manage.product.common.configration;
 
 import com.cyou.gccloud.data.data.FDataCommonConfigurationUnit;
 import org.mo.com.lang.FObjectId;

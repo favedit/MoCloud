@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.product.configration.rule;
+package org.mo.content.core.manage.product.common.configration.rule;
 
 import java.util.Map;
 

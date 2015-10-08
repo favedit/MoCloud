@@ -18,14 +18,14 @@
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="add_btn"></a> <a
-     href="/product/financial/news/News.wa" class="back_btn"></a>
+     href="/product/news/News.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="config"  enctype=multipart/form-data
-   action="/product/financial/news/News.wa?do=insert"
+   action="/product/news/News.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
 <br>

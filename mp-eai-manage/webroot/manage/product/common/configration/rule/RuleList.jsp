@@ -19,13 +19,13 @@
     });
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/configration/Rule.wa?do=select&date="
+        var url = "/manage/product/common/configration/rule/Rule.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var ruleCdStr = $.trim($('#ruleCdStr').val()).replaceAll("'", "");
         if (ruleCdStr == "规则状态") ruleCdStr = null;
         if (page != null) {
-            url = "/product/configration/Rule.wa?do=select&page="
+            url = "/manage/product/common/configration/rule/Rule.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "ruleCdStr" : ruleCdStr,
@@ -50,13 +50,13 @@
     function del(id) {
        return confirmx('确定删除?',
              function() {
-                 location.href = "/product/configration/Rule.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+                 location.href = "/manage/product/common/configration/rule/Rule.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
              });
     }
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/configration/Rule.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/common/configration/rule/Rule.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
     }
 </script>
@@ -69,7 +69,7 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/configration/Rule.wa?do=insertBefore"
+    <a href="/manage/product/common/configration/rule/Rule.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">
