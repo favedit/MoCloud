@@ -58,6 +58,11 @@
       <servlet-class>org.mo.web.core.service.servlet.FServiceServlet</servlet-class>
    </servlet>
 
+   <servlet>
+      <servlet-name>mobj.servlet.service.post</servlet-name>
+      <servlet-class>org.mo.web.core.service.servlet.FServicePostServlet</servlet-class>
+   </servlet>
+
    <!-- Servlet Mapping -->
    <servlet-mapping>
       <servlet-name>mobj.servlet</servlet-name>
@@ -77,6 +82,11 @@
    <servlet-mapping>
       <servlet-name>mobj.servlet.service</servlet-name>
       <url-pattern>*.ws</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>mobj.servlet.service.post</servlet-name>
+      <url-pattern>*.wsp</url-pattern>
    </servlet-mapping>
 
 </web-app>
