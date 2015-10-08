@@ -1,6 +1,7 @@
 package org.mo.content.face;
 
 import org.mo.eng.data.common.ISqlContext;
+import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 // <P>首页。</P>
@@ -20,13 +21,16 @@ public class FIndexAction
    //============================================================
    @Override
    public String construct(ISqlContext context,
-                           FIndexPage areaPage){
+                           FIndexPage areaPage,
+                           IWebContext webContext){
+      //      System.out.println("*******************----------------->webContext.parameter" + webContext.parameter("guid"));
       return "/service/news/News.wa?do=getNewInfo";
    }
 
    @Override
    public String getNewsInfo(ISqlContext context,
                              FIndexPage areaPage){
+
       return "/service/news/News.wa?do=getNewInfo";
    }
 }

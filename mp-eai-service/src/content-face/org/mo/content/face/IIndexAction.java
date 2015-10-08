@@ -2,6 +2,7 @@ package org.mo.content.face;
 
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.core.container.AContainer;
+import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 // <P>首页接口。</P>
@@ -18,7 +19,8 @@ public interface IIndexAction
    // @param page 页面
    //============================================================
    String construct(ISqlContext context,
-                    @AContainer(name = "page") FIndexPage page);
+                    @AContainer(name = "page") FIndexPage page,
+                    IWebContext webContext);
 
    public String getNewsInfo(ISqlContext context,
                              FIndexPage areaPage);
