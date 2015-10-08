@@ -4,11 +4,29 @@
 <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css"
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
+<jsp:include page="/manage/common/kindediter.jsp"></jsp:include>
 </HEAD>
 <script>
     function submitForm() {
+       $("#getHtml").click();
         $("#config").submit();
     }
+   var editor;
+KindEditor.ready(function(K) {
+				editor=K.create('#kindeditor_view', {
+					uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
+					items : kindeditor_items,
+					resizeType : 1
+					
+				});
+				K('input[id=getHtml]').click(function(e) {
+					$("#content").val(editor.html())
+				});
+				K('input[id=showHtml]').click(function(e) {				
+					$("#phoneShow").window("open");
+					$("#phoneShow").html(editor.html());
+				});
+});
 </script>
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
@@ -72,10 +90,11 @@
     </tr>
     <tr>
      <td><div align="left">资讯内容:</div></td>
-     <td><div align="left">
-       <input id="content" name="content" class="easyui-textbox"
-        data-options="multiline:true" style="height:100px;width:500px" />
-     </div></td>
+     <td align="left">
+        <textarea id="kindeditor_view" name="kindeditor_view" style="width:670px;height:300px"></textarea>
+            <input style="display:none" id="content" name="content"/>
+            <input type="button" style="display:none" id="getHtml" value="取得HTML" />
+     </td>
     </tr>
    </table>
   </form>
