@@ -64,18 +64,23 @@ public class FNewsAction
                             FBasePage basePage){
       String guid = context.parameter("guid");
       FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
-      FSql whereFSql = new FSql();
-      whereFSql.append(FDataPersonUserLogic.OUID);
-      whereFSql.append("=");
-      whereFSql.append(newsUnit.createUserId());
-      FLogicDataset<FDataPersonUserUnit> fetch = logicContext.findLogic(FDataPersonUserLogic.class).fetch(whereFSql);
-      String userLabel = "";
-      if(fetch != null && fetch.count() > 0){
-         userLabel = fetch.first().label();
+      System.out.println("**********************************************newsUnit" + newsUnit + guid);
+
+      if(newsUnit != null){
+         FSql whereFSql = new FSql();
+         whereFSql.append(FDataPersonUserLogic.OUID);
+         whereFSql.append("=");
+         whereFSql.append(newsUnit.createUserId());
+         FLogicDataset<FDataPersonUserUnit> fetch = logicContext.findLogic(FDataPersonUserLogic.class).fetch(whereFSql);
+         String userLabel = "";
+         if(fetch != null && fetch.count() > 0){
+            userLabel = fetch.first().label();
+         }
+         page.setUserLabel(userLabel);
+         page.setUnit(newsUnit);
+         //      System.out.println("**********************************************" + guid + newsUnit.content());
       }
-      page.setUserLabel(userLabel);
-      page.setUnit(newsUnit);
-      //      System.out.println("**********************************************" + guid + newsUnit.content());
+
       return "/service/news/NewsInfo";
    }
 }
