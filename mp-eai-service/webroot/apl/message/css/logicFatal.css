@@ -1,0 +1,54 @@
+html,body{
+	margin:0;
+	padding: 0;
+	width:100%;
+	height: 100%;
+}
+body{
+	font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;
+	background-image: url(../../../ars/common/new3.png);
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.main{
+	width: 600px;
+	height: 240px;
+	background-image: url(../images/er.png);
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left: -300px;
+	margin-top: -120px;
+	text-align:center;
+}
+.main h1{
+	padding-top: 60px;
+	color:#f6d500;
+}
+.main p , a{
+	text-decoration:none;
+	color:#35a1db;
+}
+@media all and (max-width: 800px) {
+	.main{
+		width: 300px;
+		height: 120px;
+		margin-left: -150px;
+		margin-top: -60px;
+	}
+	.main h1{
+		font-size: 18px;
+		padding-top: 20px;
+	}
+
+}
+
+

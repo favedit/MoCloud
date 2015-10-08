@@ -64,7 +64,7 @@ public class FNewsService
       if(newsUnit == null){
          news_info.set("guid", guid);
       }else{
-         news_info.createNode("ouid").setText(newsUnit.ouid());
+         //         news_info.createNode("ouid").setText(newsUnit.ouid());
          news_info.createNode("guid").setText(newsUnit.guid());
          news_info.createNode("label").setText(newsUnit.label());
          news_info.createNode("content").setText(newsUnit.content());
@@ -106,12 +106,33 @@ public class FNewsService
          for(Iterator<FDataLogicNewsUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
             FDataLogicNewsUnit newsUnit = iterator.next();
             FXmlNode xruntime = list.createNode("news_info");
-            xruntime.createNode("ouid").setText(newsUnit.ouid());
-            xruntime.createNode("guid").setText(newsUnit.guid());
-            xruntime.createNode("label").setText(newsUnit.label());
-            xruntime.createNode("content").setText(newsUnit.content());
-            xruntime.createNode("icon_url").setText(newsUnit.iconUrl());
-            xruntime.createNode("update_date").setText(newsUnit.updateDate() + "");
+            //            xruntime.createNode("ouid").setText(newsUnit.ouid());
+            if(newsUnit.guid() != null && (!"".equals(newsUnit.guid()))){
+               xruntime.createNode("guid").setText(newsUnit.guid());
+            }else{
+               xruntime.createNode("guid").setText("null");
+            }
+            if(newsUnit.label() != null && (!"".equals(newsUnit.label()))){
+               xruntime.createNode("label").setText(newsUnit.label());
+            }else{
+               xruntime.createNode("label").setText("null");
+            }
+            if(newsUnit.content() != null && (!"".equals(newsUnit.content()))){
+               xruntime.createNode("content").setText(newsUnit.content());
+            }else{
+               xruntime.createNode("content").setText("null");
+            }
+            if(newsUnit.iconUrl() != null && (!"".equals(newsUnit.iconUrl()))){
+               xruntime.createNode("icon_url").setText(newsUnit.iconUrl());
+            }else{
+               xruntime.createNode("icon_url").setText("null");
+            }
+            if(newsUnit.updateDate() + "" != null && (!"".equals(newsUnit.updateDate() + ""))){
+               xruntime.createNode("update_date").setText(newsUnit.updateDate() + "");
+            }else{
+               xruntime.createNode("update_date").setText("null");
+            }
+            xruntime.createNode("info_url").setText("http://10.13.0.100:8020/news.wa?guid=" + newsUnit.guid());
          }
       }
       return EResult.Success;
