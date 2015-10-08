@@ -19,13 +19,13 @@
     });
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/common/Province.wa?do=select&date="
+        var url = "/manage/product/common/Province.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var label = $.trim($('#label').val()).replaceAll("'", "");
         if (label == "标签") label = null;
         if (page != null) {
-            url = "/product/common/Province.wa?do=select&page="
+            url = "/manage/product/common/Province.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "label" : label,
@@ -52,14 +52,14 @@
         return confirmx(
                 '确定删除?',
                 function() {
-                    location.href = "/product/common/Province.wa?do=delete&id="
+                    location.href = "/manage/product/common/Province.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
     }
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/common/Province.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/common/Province.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
 
     }
@@ -76,7 +76,7 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/common/Province.wa?do=insertBefore"
+    <a href="/manage/product/common/Province.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">

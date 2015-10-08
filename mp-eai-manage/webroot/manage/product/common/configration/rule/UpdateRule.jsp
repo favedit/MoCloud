@@ -13,7 +13,7 @@
         if (!isValid())
             return;
         progress();
-        var url = "/product/configration/Rule.wa?do=update&date="
+        var url = "/manage/product/common/configration/rule/Rule.wa?do=update&date="
                 + new Date().valueOf();
         var data = {
             "ruleCdStr" : $('#ruleCdStr').val(),
@@ -34,7 +34,7 @@
             success : function(msg) {
                 closeProgress();
                 var result = toJsonObject(msg);
-                location.href = "/product/configration/Rule.wa";
+                location.href = "/manage/product/common/configration/rule/Rule.wa";
             },
             fail : function() {
                 closeProgress();
@@ -52,7 +52,7 @@
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="sub_btn"></a> <a
-     href="/product/configration/Rule.wa" class="back_btn"></a>
+     href="/manage/product/common/configration/rule/Rule.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
@@ -60,7 +60,7 @@
  <div class="easyui-panel" fit='true' data-options="border:false">
 
   <form id="config"
-   action="/product/configuration/Rule.wa?do=update"
+   action="/manage/product/common/configuration/rule/Rule.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
     <table border="0" align="left"

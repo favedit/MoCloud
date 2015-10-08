@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.product.configration.rule;
+package org.mo.content.core.manage.product.common.configration.rule;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;

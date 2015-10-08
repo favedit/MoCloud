@@ -20,14 +20,14 @@
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="add_btn"></a> <a
-     href="/product/configration/Rule.wa" class="back_btn"></a>
+     href="/manage/product/common/configration/rule/Rule.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="rule"
-   action="/product/configration/Rule.wa?do=insert"
+   action="/manage/product/common/configration/rule/Rule.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table border="0" align="left"

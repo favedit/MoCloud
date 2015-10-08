@@ -1,7 +1,7 @@
-package org.mo.content.face.manage.product.configration.rule;
+package org.mo.content.face.manage.product.common.configration.rule;
 
 import org.mo.com.lang.FObjectId;
-import org.mo.content.core.manage.product.configration.rule.FDataRuleInfo;
+import org.mo.content.core.manage.product.common.configration.rule.FDataRuleInfo;
 
 //============================================================
 //<P>规则配置信息容器</P>

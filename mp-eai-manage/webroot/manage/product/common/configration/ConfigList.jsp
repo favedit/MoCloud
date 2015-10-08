@@ -20,12 +20,12 @@
 
          function doSubmit(page,pageSize) {
             progress();
-            var url = "/product/configration/Configration.wa?do=select&date=" + new Date().valueOf();
+            var url = "/manage/product/common/configration/Configration.wa?do=select&date=" + new Date().valueOf();
             var data = null;
             var code = $.trim($('#code').val()).replaceAll("'", "");
             if (code == "代码") code = null;
             if (page != null) {
-               url = "/product/configration/Configration.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+               url = "/manage/product/common/configration/Configration.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
                   "code": code,
                   "page": page,
@@ -66,14 +66,14 @@
 //                        });
 //                     }
 //                  });
-               location.href = "/product/configration/Configration.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+               location.href = "/manage/product/common/configration/Configration.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
                });
          }
          
          //更新配置信息-AnjoyTian
          function edit(id){
          console.info(id);
-         window.location.href="/product/configration/Configration.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
+         window.location.href="/manage/product/common/configration/Configration.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
          
          }
       </script>
@@ -86,7 +86,7 @@
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
-               <a href="/product/configration/Configration.wa?do=insertBefore" class="add_btn"></a>
+               <a href="/manage/product/common/configration/Configration.wa?do=insertBefore" class="add_btn"></a>
             </div>
             <div class="nav_search">
                <input id="code" name="" type="text" onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}" style="color:#ccc" value="代码">

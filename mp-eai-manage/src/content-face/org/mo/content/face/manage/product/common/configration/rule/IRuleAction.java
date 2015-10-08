@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.configration.rule;
+package org.mo.content.face.manage.product.common.configration.rule;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

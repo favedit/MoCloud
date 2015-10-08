@@ -11,7 +11,7 @@
        
             if (!isValid()) return;
             progress();
-            var url = "/product/configration/Configration.wa?do=update&date=" + new Date().valueOf();
+            var url = "/manage/product/common/configration/Configration.wa?do=update&date=" + new Date().valueOf();
             var data = {
                "configInfoId": $('#configInfoId').val(),
                "code": $('#code').val(),
@@ -27,7 +27,7 @@
                success: function(msg) {
                   closeProgress();
                   var result = toJsonObject(msg);
-                     location.href = "/product/configration/Configration.wa";
+                     location.href = "/manage/product/common/configration/Configration.wa";
                },
                fail: function() {
                   closeProgress();
@@ -47,14 +47,14 @@
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="#" onClick="submitForm()" class="sub_btn"></a>
-               <a href="/product/configration/Configration.wa" class="back_btn"></a>
+               <a href="/manage/product/common/configration/Configration.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>
       </div>
       <div class="easyui-panel" fit='true' data-options="border:false">
          
-         <form id="config" action="/product/configration/Configration.wa?do=insert" method="post" align="center">
+         <form id="config" action="/manage/product/common/configration/Configration.wa?do=insert" method="post" align="center">
             <font style="color:red;"><jh:write source='&page.result'/></font>
          <table width="718" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
             <tr>
