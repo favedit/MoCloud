@@ -4,7 +4,7 @@ import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.RString;
-import org.mo.content.core.product.common.IProvinceConsole;
+import org.mo.content.core.manage.product.common.IProvinceConsole;
 import org.mo.content.core.product.financial.department.IDepartmentConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;

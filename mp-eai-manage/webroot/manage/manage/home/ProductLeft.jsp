@@ -27,6 +27,7 @@
             if (menu == '') {
                $("#four").hide();
             }
+            menu = $.trim($("#five").children(".sub-menu").html());
             if (menu == '') {
                $("#five").hide();
             }
@@ -45,23 +46,23 @@
          
             <li id="one" class="common"> <a href="#one">共通管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="product.configration" value="&basePage.menuString">
-                     <li><a href="/product/configration/Configration.wa" target="right">配置信息</a></li>
+                  <jh:equals source="manage.product.common.country" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/Country.wa" target="right">国家信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.common.country" value="&basePage.menuString">
-                     <li><a href="/product/common/Country.wa" target="right">国家信息</a></li>
+                  <jh:equals source="manage.product.common.area" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/Area.wa" target="right">区域信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.common.province" value="&basePage.menuString">
-                     <li><a href="/product/common/Province.wa" target="right">省会信息</a></li>
+                  <jh:equals source="manage.product.common.province" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/Province.wa" target="right">省会信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.common.city" value="&basePage.menuString">
-                     <li><a href="/product/common/City.wa" target="right">城市信息</a></li>
+                  <jh:equals source="manage.product.common.city" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/City.wa" target="right">城市信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.common.area" value="&basePage.menuString">
-                     <li><a href="/product/common/Area.wa" target="right">区域信息</a></li>
+                  <jh:equals source="manage.product.configration" value="&basePage.menuString">
+                     <li><a href="/manage/product/configration/Configration.wa" target="right">配置信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.configration.rule" value="&basePage.menuString">
-                     <li><a href="/product/configration/Rule.wa" target="right">规则配置信息</a></li>
+                  <jh:equals source="manage.product.configration.rule" value="&basePage.menuString">
+                     <li><a href="/manage/product/configration/Rule.wa" target="right">规则配置信息</a></li>
                   </jh:equals>
                </ul>
             </li>
@@ -93,9 +94,6 @@
                   <jh:equals source="product.financial.product" value="&basePage.menuString">
                      <li><a href="/product/financial/product/Product.wa" target="right">产品信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.financial.lnews" value="&basePage.menuString">
-                     <li><a href="/product/financial/news/News.wa" target="right">业务资讯信息</a></li>
-                  </jh:equals>
                </ul>
          </li>
          <li id="five" class="common"> <a href="#five">系统管理</a>
@@ -105,6 +103,13 @@
                   </jh:equals>
                   <jh:equals source="product.system.version" value="&basePage.menuString">
                      <li><a href="/product/system/version/Version.wa" target="right">版本信息</a></li>
+                  </jh:equals>
+               </ul>
+         </li>
+         <li id="six" class="common"> <a href="#six">新闻管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="product.financial.lnews" value="&basePage.menuString">
+                     <li><a href="/product/news/News.wa" target="right">业务资讯信息</a></li>
                   </jh:equals>
                </ul>
          </li>
