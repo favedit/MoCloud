@@ -66,8 +66,7 @@ public class FVersionConsole
          applicationOuid = applications.first().ouid();
       }
       FDataSystemVersionLogic versionLogic = logicContext.findLogic(FDataSystemVersionLogic.class);
-      long appVersionCode = Long.parseLong(versionStr);
-      long lastVersionCode = versionLogic.connection().executeLong("SELECT MAX(CAST(CODE AS SIGNED)) AS LASTVERSION FROM `DT_SYS_VERSION` WHERE `APPLICATION_ID`=" + applicationOuid);
+      double lastVersionCode = versionLogic.connection().executeDouble("SELECT MAX(NUMBER) AS LASTVERSION FROM `DT_SYS_VERSION` WHERE `APPLICATION_ID`=" + applicationOuid);
       //如果是0,,意味着没有找到对应的app
       if(lastVersionCode != 0){
          //拿出来最新的version
@@ -76,7 +75,7 @@ public class FVersionConsole
          where.append("=");
          where.append(applicationOuid);
          where.append(" AND ");
-         where.append(FDataSystemVersionLogic.CODE);
+         where.append(FDataSystemVersionLogic.NUMBER);
          where.append("=");
          where.append(lastVersionCode);
          FLogicDataset<FDataSystemVersionUnit> lastVersionUnits = versionLogic.fetch(where);
@@ -84,7 +83,7 @@ public class FVersionConsole
             FDataSystemVersionUnit lastVersionUnit = lastVersionUnits.first();
             map.put("lastVersion", lastVersionUnit);
             //获取版本id
-            _logger.debug(this, "************************getLastVersion", "versionCode={1},versionLabel={2}", lastVersionUnit.code(), lastVersionUnit.label());
+            _logger.debug(this, "************************getLastVersion", "version_code={1},version_label={2}", lastVersionUnit.code(), lastVersionUnit.label());
          }
 
       }

@@ -73,7 +73,7 @@ public class FLoginService
       FXmlNode inputNode = input.config();
       FXmlNode passportNode = inputNode.findNode("passport");
       FXmlNode passwordNode = inputNode.findNode("password");
-      FXmlNode sessionId = output.config().createNode("sessionId");
+      FXmlNode sessionId = output.config().createNode("session_id");
       FXmlNode status_cd = output.config().createNode("status_cd");
       FXmlNode user_id = output.config().createNode("user_id");
       FXmlNode passportNodeOut = output.config().createNode("label");
@@ -100,10 +100,11 @@ public class FLoginService
          //         xruntime.set("gender_cd", "psn_user没有性别字段");
          passportNodeOut.setText(user.passport());
          // 会话管理
-         //         FGcWebSession session = (FGcWebSession)sessionContext;
-         //         session.setUserId(user.ouid());
-         //         _sessionConsole.open(session);
-
+         /*FGcWebSession session = (FGcWebSession)sessionContext;
+         session.setUserId(user.ouid());
+         _logger.debug(this, "session_id*****************------>", "session_id={1},user_id={2},_sessionConsole={3}", session.id(), user.ouid(), _sessionConsole);
+         EResult sessionResult = _sessionConsole.open(session);
+         _logger.debug(this, "session_id*****************------>", "sessionResult={1}", sessionResult);*/
          return EResult.Success;
       }else{
          status_cd.setText(user.statusCd());

@@ -217,7 +217,9 @@ public class FLoginConsole
       tempUserUnit.setStatusCd(backUser.statusCd());
       tempUserUnit.setPassport(backUser.passport());
       tempUserUnit.setPassword(backUser.password());
-      tempUserUnit.setGuid("There is no now!");
+      tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
+      //      tempUserUnit.setOuid(21);
+      tempUserUnit.setLabel(changePass);
       //      userUnit.setLabel(value);
       FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       FDataPersonUserUnit findUserByGuid = userLogic.findByGuid(tempUserUnit.guid());
@@ -234,6 +236,11 @@ public class FLoginConsole
          userEntryUnit.setFromCd(from);
          userEntryLogic.doInsert(userEntryUnit);
       }else{
+         findUserByGuid.setPassport(tempUserUnit.passport());
+         findUserByGuid.setPassword(tempUserUnit.password());
+         findUserByGuid.setLabel(tempUserUnit.label());
+         findUserByGuid.setStatusCd(tempUserUnit.statusCd());
+         tempUserUnit.setOuid(findUserByGuid.ouid());
          userLogic.doUpdate(findUserByGuid);
          //同步更新用户状态
          FSql whereSql = new FSql();
