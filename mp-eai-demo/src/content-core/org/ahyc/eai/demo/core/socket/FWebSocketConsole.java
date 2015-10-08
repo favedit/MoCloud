@@ -3,7 +3,8 @@ package org.ahyc.eai.demo.core.socket;
 import javax.websocket.Session;
 import org.ahyc.eai.demo.face.FTestAction;
 import org.mo.com.console.FConsole;
-import org.mo.com.lang.FObjects;
+import org.mo.com.lang.FDictionary;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -18,23 +19,25 @@ public class FWebSocketConsole
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FTestAction.class);
 
-   // 会话集合
-   protected FObjects<FWebSocketSession> _sessions = new FObjects<FWebSocketSession>(FWebSocketSession.class);
+   // 会话字典
+   protected FDictionary<FWebSockets> _sessions = new FDictionary<FWebSockets>(FWebSockets.class);
 
    //============================================================
-   // <T>查找会话。</T>
+   // <T>打开会话。</T>
    //
-   // @param code 代码
-   // @return 会话
+   // @param session 会话
    //============================================================
    @Override
-   public FWebSocketSession find(String code){
-      for(FWebSocketSession webSocket : _sessions){
-         if(code.equals(webSocket.code())){
-            return webSocket;
-         }
+   public void open(String groupCode,
+                    Session session){
+      FWebSockets sockets = _sessions.find(groupCode);
+      if(sockets == null){
+         sockets = new FWebSockets();
+         sockets.setGroupCode(groupCode);
+         _sessions.set(groupCode, sockets);
       }
-      return null;
+      sockets.open(session);
+      _logger.debug(this, "open", "Open session. (group_code={1}, count={2}, id={3})", groupCode, sockets.count(), session.getId());
    }
 
    //============================================================
@@ -43,36 +46,47 @@ public class FWebSocketConsole
    // @return 会话集合
    //============================================================
    @Override
-   public FObjects<FWebSocketSession> sessions(){
-      return _sessions;
+   public FWebSockets findSockets(String groupCode){
+      return _sessions.find(groupCode);
    }
 
    //============================================================
-   // <T>获得会话数组。</T>
+   // <T>查找会话。</T>
    //
-   // @return 会话数组
+   // @param code 代码
+   // @return 会话
    //============================================================
    @Override
-   public FWebSocketSession[] fetch(){
-      _logger.debug(this, "fetch", "Fetch sessions. (count={1})", _sessions.count());
-      return _sessions.toObjects();
+   public FWebSocket find(String groupCode,
+                          String code){
+      FWebSockets sockets = _sessions.find(groupCode);
+      return sockets.findByCode(code);
    }
 
-   //============================================================
-   // <T>打开会话。</T>
-   //
-   // @param session 会话
-   //============================================================
    @Override
-   public void open(Session session){
-      String sessionId = session.getId();
-      FWebSocketSession webSession = find(sessionId);
-      if(webSession == null){
-         webSession = new FWebSocketSession();
-         _sessions.push(webSession);
+   public void sendMessage(String groupName,
+                           String message){
+      if(!RString.isEmpty(message)){
+         FWebSockets sockets = findSockets(groupName);
+         if(sockets != null){
+            sockets.sendMessage(message);
+            _logger.debug(this, "sendMessage", "Send message. (group_name={1}, count={2}, message={3})", groupName, sockets.count(), message);
+         }
       }
-      webSession.setSession(session);
-      _logger.debug(this, "open", "Open session. (count={1}, id={2})", _sessions.count(), session.getId());
+   }
+
+   @Override
+   public void sendMessage(String groupName,
+                           byte[] data,
+                           int offset,
+                           int length){
+      if(length > 0){
+         FWebSockets sockets = findSockets(groupName);
+         if(sockets != null){
+            sockets.sendMessage(data, offset, length);
+            _logger.debug(this, "sendMessage", "Send message. (group_name={1}, count={2}, data_length={3})", groupName, sockets.count(), length);
+         }
+      }
    }
 
    //============================================================
@@ -81,12 +95,12 @@ public class FWebSocketConsole
    // @param session 会话
    //============================================================
    @Override
-   public void close(Session session){
-      String sessionId = session.getId();
-      FWebSocketSession webSession = find(sessionId);
-      if(webSession != null){
-         _sessions.remove(webSession);
+   public void close(String groupCode,
+                     Session session){
+      FWebSockets sockets = _sessions.find(groupCode);
+      if(sockets != null){
+         sockets.close(session);
+         _logger.debug(this, "close", "Close session. (group_code={1}, count={2}, id={3})", groupCode, sockets.count(), session.getId());
       }
-      _logger.debug(this, "close", "Close session. (count={1}, id={2})", _sessions.count(), session.getId());
    }
 }

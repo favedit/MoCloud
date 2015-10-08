@@ -1,8 +1,6 @@
 package org.ahyc.eai.demo.face;
 
-import org.ahyc.eai.demo.core.socket.FWebSocketSession;
 import org.ahyc.eai.demo.core.socket.IWebSocketConsole;
-import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -34,20 +32,20 @@ public class FTestAction
    public String construct(IWebContext context,
                            ILogicContext logicContext,
                            FTestPage page){
-      String selectTag = RString.nvl(context.parameter("tag"));
-      String rotate = RString.nvl(context.parameter("rotate"));
-      String message = "";
-      if(RString.isNotEmpty(selectTag)){
-         message += "tag=" + selectTag;
-      }
-      if(RString.isNotEmpty(rotate)){
-         message += "rotate=" + rotate;
-      }
-      FWebSocketSession[] sessions = _socketConsole.fetch();
-      System.out.println("Session count = " + sessions.length);
-      for(FWebSocketSession session : sessions){
-         session.sendMessage(message);
-      }
+      //      String selectTag = RString.nvl(context.parameter("tag"));
+      //      String rotate = RString.nvl(context.parameter("rotate"));
+      //      String message = "";
+      //      if(RString.isNotEmpty(selectTag)){
+      //         message += "tag=" + selectTag;
+      //      }
+      //      if(RString.isNotEmpty(rotate)){
+      //         message += "rotate=" + rotate;
+      //      }
+      //      FWebSocket[] sessions = _socketConsole.fetch();
+      //      System.out.println("Session count = " + sessions.length);
+      //      for(FWebSocket session : sessions){
+      //         session.sendMessage(message);
+      //      }
       // 非法设置
       return "Test";
    }
