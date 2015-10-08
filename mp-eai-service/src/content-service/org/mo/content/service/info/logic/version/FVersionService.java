@@ -69,13 +69,12 @@ public class FVersionService
       // 获得应用程序id和与之对应的版本编号
       FXmlNode inputNode = input.config();
       FXmlNode inputApplicationNode = inputNode.findNode("appos");
-      //      FXmlNode inputVersionNode = inputNode.findNode("versionnumber");
       String applicationStr = inputApplicationNode.text();
-      //      String versionStr = inputVersionNode.text();
+      _logger.debug(this, "****************************---------------->show parameters", "appos={1}", applicationStr);
       String versionStr = "";
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
-      System.out.println("*******************" + sessionContext.getClass().getName());
+      System.out.println("****************************---------------->" + sessionContext.getClass().getName());
       //输出信息
       HashMap<String, Object> hashMap = _versionConsole.connect(context, versionStr, applicationStr, logicContext, sessionContext);
       FDataSystemVersionUnit lastVersionUnit = (FDataSystemVersionUnit)hashMap.get("lastVersion");

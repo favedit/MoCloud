@@ -110,6 +110,7 @@ public class FNewsService
             xruntime.createNode("guid").setText(newsUnit.guid());
             xruntime.createNode("label").setText(newsUnit.label());
             xruntime.createNode("content").setText(newsUnit.content());
+            xruntime.createNode("icon_url").setText(newsUnit.iconUrl());
             xruntime.createNode("update_date").setText(newsUnit.updateDate() + "");
          }
       }
