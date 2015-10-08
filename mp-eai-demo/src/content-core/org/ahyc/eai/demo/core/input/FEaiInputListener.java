@@ -7,6 +7,7 @@ import org.ahyc.eai.demo.core.input.tuio.FTuioBlob;
 import org.ahyc.eai.demo.core.input.tuio.FTuioCursor;
 import org.ahyc.eai.demo.core.input.tuio.FTuioListener;
 import org.ahyc.eai.demo.core.input.tuio.FTuioObject;
+import org.ahyc.eai.demo.service.touch.FTouchServlet;
 import org.mo.com.geom.SIntSize2;
 import org.mo.com.io.FByteStream;
 
@@ -80,7 +81,7 @@ public class FEaiInputListener
       for(FTuioCursor cursor : _cursors){
          cursor.position().serialize(stream);
       }
-      _console.sendMessage(stream.memory(), 0, stream.length());
+      _console.sendMessage(FTouchServlet.GROUP_NAME, stream.memory(), 0, stream.length());
    }
 
    //============================================================

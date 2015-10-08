@@ -1,10 +1,7 @@
 package org.ahyc.eai.demo.core.input;
 
-import org.ahyc.eai.demo.core.socket.FWebSocketSession;
 import org.ahyc.eai.demo.core.socket.IWebSocketConsole;
 import org.mo.com.console.FConsole;
-import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.face.ALink;
@@ -25,36 +22,24 @@ public class FEaiInputConsole
 
    protected FInputConnection _connection;
 
-   //protected Matrix3D _matrix;
-
    @Override
    public void input(){
    }
 
-   public void sendMessage(String message){
-      if(!RString.isEmpty(message)){
-         FObjects<FWebSocketSession> sessions = _socketConsole.sessions();
-         for(FWebSocketSession session : sessions){
-            session.sendMessage(message);
-         }
-         _logger.debug(this, "sendMessage", "Send message. (count={1}, message={2})", sessions.count(), message);
-      }
+   public void sendMessage(String groupName,
+                           String message){
+      _socketConsole.sendMessage(groupName, message);
    }
 
-   public void sendMessage(byte[] data,
+   public void sendMessage(String groupName,
+                           byte[] data,
                            int offset,
                            int length){
-      if(length > 0){
-         FObjects<FWebSocketSession> sessions = _socketConsole.sessions();
-         for(FWebSocketSession session : sessions){
-            session.sendMessage(data, offset, length);
-         }
-         _logger.debug(this, "sendMessage", "Send message. (count={1}, data_length={2})", sessions.count(), length);
-      }
+      _socketConsole.sendMessage(groupName, data, offset, length);
    }
 
    public void initialize(){
-      System.out.println("Start");
+      _logger.info(this, "initialize", "Build input connection.");
       _connection = new FInputConnection();
       _connection.setPort(3333);
       _connection.registerListener(new FEaiInputListener(this));

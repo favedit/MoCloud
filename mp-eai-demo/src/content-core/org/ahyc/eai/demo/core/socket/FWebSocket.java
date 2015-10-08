@@ -10,11 +10,11 @@ import org.mo.com.logging.RLogger;
 //============================================================
 // <T>网络端口会话。</T>
 //============================================================
-public class FWebSocketSession
+public class FWebSocket
       extends FObject
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FWebSocketSession.class);
+   private static ILogger _logger = RLogger.find(FWebSocket.class);
 
    // 代码
    private String _code;
@@ -25,7 +25,7 @@ public class FWebSocketSession
    //============================================================
    // <T>构造网络端口会话。</T>
    //============================================================
-   public FWebSocketSession(){
+   public FWebSocket(){
    }
 
    //============================================================
@@ -33,7 +33,7 @@ public class FWebSocketSession
    //
    // @param session 会话
    //============================================================
-   public FWebSocketSession(Session session){
+   public FWebSocket(Session session){
       setSession(session);
    }
 

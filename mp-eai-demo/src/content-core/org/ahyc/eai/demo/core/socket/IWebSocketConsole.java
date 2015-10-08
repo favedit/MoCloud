@@ -1,25 +1,29 @@
 package org.ahyc.eai.demo.core.socket;
 
 import javax.websocket.Session;
-import org.mo.com.lang.FObjects;
 
 //============================================================
 // <T>网络端口控制台接口。</T>
 //============================================================
 public interface IWebSocketConsole
 {
-   void open(Session session);
+   void open(String groupCode,
+             Session session);
 
-   //============================================================
-   // <T>获得会话集合。</T>
-   //
-   // @return 会话集合
-   //============================================================
-   FObjects<FWebSocketSession> sessions();
+   FWebSockets findSockets(String groupCode);
 
-   FWebSocketSession find(String code);
+   FWebSocket find(String groupCode,
+                   String code);
 
-   FWebSocketSession[] fetch();
+   void sendMessage(String groupName,
+                    String message);
 
-   void close(Session session);
+   void sendMessage(String groupName,
+                    byte[] data,
+                    int offset,
+                    int length);
+
+   void close(String groupCode,
+              Session session);
+
 }
