@@ -2,6 +2,7 @@ package org.mo.content.service.info.logic.version;
 
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import java.util.HashMap;
+import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -68,22 +69,26 @@ public class FVersionService
       // 获得应用程序id和与之对应的版本编号
       FXmlNode inputNode = input.config();
       FXmlNode inputApplicationNode = inputNode.findNode("appos");
-      FXmlNode inputVersionNode = inputNode.findNode("versioncode");
+      //      FXmlNode inputVersionNode = inputNode.findNode("versionnumber");
       String applicationStr = inputApplicationNode.text();
-      String versionStr = inputVersionNode.text();
+      //      String versionStr = inputVersionNode.text();
+      String versionStr = "";
       // 会话管理
-      //      FWebSession session = (FWebSession)sessionContext;
-      //      System.out.println("*******************" + sessionContext.getClass().getName());
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      System.out.println("*******************" + sessionContext.getClass().getName());
       //输出信息
       HashMap<String, Object> hashMap = _versionConsole.connect(context, versionStr, applicationStr, logicContext, sessionContext);
       FDataSystemVersionUnit lastVersionUnit = (FDataSystemVersionUnit)hashMap.get("lastVersion");
       //      FXmlNode outputApplicationNode = output.config().createNode("app_os");
-      FXmlNode VersionCode = output.config().createNode("versioncode");
+      FXmlNode version_num = output.config().createNode("version_number");
+      FXmlNode versionCode = output.config().createNode("version_code");
       FXmlNode upgrade_cd = output.config().createNode("upgrade_cd");
       FXmlNode upgrade_url = output.config().createNode("upgrade_url");
       FXmlNode upgrade_log = output.config().createNode("upgrade_log");
+
       if(lastVersionUnit != null){
-         VersionCode.setText(lastVersionUnit.code());
+         versionCode.setText(lastVersionUnit.code());
+         version_num.setText(lastVersionUnit.number() + "");
          upgrade_cd.setText(lastVersionUnit.forceCd());
          upgrade_url.setText(lastVersionUnit.downloadUrl());
          upgrade_log.setText(lastVersionUnit.note());

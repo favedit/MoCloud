@@ -17,7 +17,7 @@
    <!-- 新闻相关处理服务                                             -->
    <!-- ============================================================ -->
    <WebService
-         name  = 'eai.info.news'
+         name  = 'eai.mobile.news'
          face  = 'org.mo.content.service.info.logic.news.INewsService'/>
 
    <Component
