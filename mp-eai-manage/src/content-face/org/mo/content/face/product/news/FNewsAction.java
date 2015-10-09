@@ -177,8 +177,8 @@ public class FNewsAction implements INewsAction {
       info.setLabel(unit.label());
       if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
-         int na = unit.iconUrl().indexOf("images");
-         info.setImageName("/manage/images/" + unit.iconUrl().substring(na + 7, unit.iconUrl().length()));
+         int na = unit.iconUrl().indexOf("newsImages");
+         info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
       }
       page.setUnit(info);
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
