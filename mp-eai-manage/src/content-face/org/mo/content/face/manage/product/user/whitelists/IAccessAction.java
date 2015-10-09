@@ -1,4 +1,4 @@
-package org.mo.content.face.product.person.user;
+package org.mo.content.face.manage.product.user.whitelists;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

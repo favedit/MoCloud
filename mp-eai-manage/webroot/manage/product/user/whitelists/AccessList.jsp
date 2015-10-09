@@ -6,29 +6,31 @@
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
       <script>
          $(function() {
-            doSubmit(null);
+            doSubmit(null,null);
             var pager = $('#userAccess').datagrid().datagrid('getPager');
             pager.pagination({
                pageSize: 20,
                showPageList: false,
                onSelectPage: function(pageNumber) {
-                  doSubmit(pageNumber);
+                  doSubmit(pageNumber,pageSize);
                }
             });
          });
 
-         function doSubmit(page) {
+         function doSubmit(page,pageSize) {
             progress();
             var url = null;
             var data = null;
+            var hostAddress = $.trim($('#hostAddress').val()).replaceAll("'", "");
+            if (hostAddress == "IP地址") hostAddress = null;
             if (page != null) {
-               url = "/product/person/user/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+               url = "/manage/product/user/whitelists/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
-                  "label": $('#label').val(),
+                  "hostAddress": hostAddress,
                   "page": page
                };
             } else {
-               url = "/product/person/user/Access.wa?do=select&date=" + new Date().valueOf();
+               url = "/manage/product/user/whitelists/Access.wa?do=select&date=" + new Date().valueOf();
             }
             $.ajax({
                type: "POST",
@@ -46,11 +48,11 @@
          }
 
          function del(id) {
-            location.href = "/product/person/user/Access.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+            location.href = "/manage/product/user/whitelists/Access.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
          }
 
          function edit(id) {
-            location.href = "/product/person/user/Access.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
+            location.href = "/manage/product/user/whitelists/Access.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
          }
          function formatAccess(value,row,index){
             return (row.accessCd == '1')?"允许":"禁止";           
@@ -68,9 +70,15 @@
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
-               <a href="/product/person/user/Access.wa?do=insertBefore" class="add_btn"></a>
+               <a href="/manage/product/user/whitelists/Access.wa?do=insertBefore" class="add_btn"></a>
             </div>
-            <div class="nav_search"></div>
+            <div class="nav_search">
+               <input id="hostAddress" name="hostAddress" type="text"
+                 onfocus="if(this.value=='IP地址'){this.value='';}this.style.color='#000000';"
+                 onblur="if(this.value=='') {this.value='IP地址';this.style.color='#ccc';}"
+                 style="color: #ccc" value="IP地址"> <a onClick="doSubmit(0)"
+                  href="#" class="sear_btn"></a>
+            </div>
          </div>
       </div>
       <table id="userAccess" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">

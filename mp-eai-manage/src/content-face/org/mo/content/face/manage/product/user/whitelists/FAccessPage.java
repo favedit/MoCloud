@@ -1,4 +1,4 @@
-package org.mo.content.face.product.person.user;
+package org.mo.content.face.manage.product.user.whitelists;
 
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityUnit;
 import org.mo.com.lang.FObjectId;
