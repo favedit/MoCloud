@@ -15,9 +15,9 @@
       <META name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
       <LINK rel="stylesheet" href='/acs/mobile.css' type="text/css" media="all" />
       <SCRIPT language='javascript' src='/ajs/ml.js'></SCRIPT>
+      <SCRIPT language='javascript' src='/ajs/return-common.js'></SCRIPT>
       <SCRIPT>
          var g_loadingHandle;
-
          function doLoading() {
             var htmlBody = document.body;
             htmlBody.style.backgroundImage = 'url(/ars/eai/background.jpg)';
