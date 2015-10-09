@@ -9,23 +9,23 @@
 <script>
     function submitForm() {
        $("#getHtml").click();
+       $("#statusCdStr").val("1");
         $("#config").submit();
     }
    var editor;
 KindEditor.ready(function(K) {
-				editor=K.create('#kindeditor_view', {
-					uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
-					items : kindeditor_items,
-					resizeType : 1
-					
-				});
-				K('input[id=getHtml]').click(function(e) {
-					$("#content").val(editor.html())
-				});
-				K('input[id=showHtml]').click(function(e) {				
-					$("#phoneShow").window("open");
-					$("#phoneShow").html(editor.html());
-				});
+             editor=K.create('#kindeditor_view', {
+               uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
+               items : kindeditor_items,
+               resizeType : 1
+             });
+             K('input[id=getHtml]').click(function(e) {
+                 $("#content").val(editor.html())
+             });
+             K('input[id=showHtml]').click(function(e) {	
+                $("#phoneShow").window("open");
+                $("#phoneShow").html(editor.html());
+              });
 });
 </script>
 <body bgcolor="#198bc9">
@@ -47,10 +47,10 @@ KindEditor.ready(function(K) {
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
 <br>
-   <table width="710" height="346" border="0" align="left"
+   <table width="810" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="54"><div align="left">资讯标题:</div></td>
+      <td width="74"><div align="left">资讯标题:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
         style="width:280px;height:20px"
         data-options="validType:'length[0,200]'" /></td>
@@ -58,19 +58,19 @@ KindEditor.ready(function(K) {
     <tr>
      <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
-       <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"/>  
+         <input id="statusCdStr" name="statusCdStr" class="easyui-validatebox textbox" value="申请"
+        style="width:280px;height:20px"/>
      </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否显示:</div></td>
      <td><div align="left">
        <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>  
+       data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>  
       </div></td>
     </tr>
     <tr>
-      <td  height="38" width="54"><div align="left">关键字:</div></td>
+      <td  height="38" width="74"><div align="left">关键字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:280px;height:20px"
         data-options="validType:'length[0,800]'" /></td>

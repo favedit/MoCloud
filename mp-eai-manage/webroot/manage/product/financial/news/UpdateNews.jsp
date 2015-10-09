@@ -83,7 +83,7 @@
    action="/product/news/News.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-   <table width="710" height="346" border="0" align="left"
+   <table width="810" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
       <td width="54" height="38"><div align="left">资讯标题:</div></td>

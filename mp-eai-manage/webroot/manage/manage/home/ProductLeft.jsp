@@ -35,6 +35,10 @@
             if (menu == '') {
                $("#six").hide();
             }
+            menu = $.trim($("#seven").children(".sub-menu").html());
+            if (menu == '') {
+               $("#seven").hide();
+            }
          }
       </script>
    </head>
@@ -110,6 +114,13 @@
                <ul class="sub-menu">
                   <jh:equals source="product.financial.lnews" value="&basePage.menuString">
                      <li><a href="/product/news/News.wa" target="right">业务资讯信息</a></li>
+                  </jh:equals>
+               </ul>
+         </li>
+         <li id="seven" class="common"><a href="#seven">审核管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="manage.product.examine.news" value="&basePage.menuString">
+                     <li><a href="/manage/product/examine/news/News.wa" target="right">业务资讯审核</a></li>
                   </jh:equals>
                </ul>
          </li>
