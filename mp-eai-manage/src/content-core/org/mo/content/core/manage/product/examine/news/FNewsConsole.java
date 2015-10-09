@@ -43,7 +43,10 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          pageNum = 0;
       }
       FSql whereSql = new FSql();
+      whereSql.append(FDataLogicNewsLogic.STATUS_CD + " = '{statusCd}'");
+      whereSql.bind("statusCd", EGcResourceStatus.Apply + "");// 只查询状态为申请
       if (!RString.isEmpty(unit.label())) {
+         whereSql.append(" and ");
          whereSql.append(FDataLogicNewsLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
@@ -53,12 +56,6 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          FDataNewsInfo info = ite.next();
          if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
             info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
-         }
-         if (RString.equals(EGcResourceStatus.Publish, info.statusCd())) {
-            info.setStatusCdStr(EGcResourceStatus.PublishLabel);
-         }
-         if (RString.equals(EGcResourceStatus.CheckFail, info.statusCd())) {
-            info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
          }
          if (RString.equals(EGcDisplay.Disable, info.displayCd())) {
             info.setDisplayCdStr(EGcDisplay.DisableLabel);
