@@ -1,5 +1,6 @@
 package org.mo.content.face;
 
+import org.mo.content.face.service.news.FNewsPage;
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
@@ -22,6 +23,7 @@ public interface IIndexAction
                     @AContainer(name = "page") FIndexPage page,
                     IWebContext webContext);
 
-   public String getNewsInfo(ISqlContext context,
-                             FIndexPage areaPage);
+   public String getNewsInfo(IWebContext webContext,
+                             @AContainer(name = "indexPage") FIndexPage areaPage,
+                             @AContainer(name = "page") FNewsPage page);
 }

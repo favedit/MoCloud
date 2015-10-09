@@ -1,5 +1,6 @@
 package org.mo.content.face;
 
+import org.mo.content.face.service.news.FNewsPage;
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -28,9 +29,12 @@ public class FIndexAction
    }
 
    @Override
-   public String getNewsInfo(ISqlContext context,
-                             FIndexPage areaPage){
+   public String getNewsInfo(IWebContext webContext,
+                             FIndexPage areaPage,
+                             FNewsPage page){
 
+      page.setResult(webContext.parameter("guid"));
+      System.out.println(page.result() + "--------------------------");
       return "/service/news/News.wa?do=getNewInfo";
    }
 }

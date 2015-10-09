@@ -22,6 +22,7 @@ public interface INewsAction
    //============================================================
    String construct(IWebContext context,
                     ILogicContext logicContext,
+                    @AContainer(name = "page") FNewsPage Page,
                     @AContainer(name = "basePage") FBasePage page);
 
    //============================================================
