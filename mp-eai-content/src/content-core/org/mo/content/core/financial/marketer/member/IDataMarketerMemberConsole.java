@@ -44,6 +44,16 @@ public interface IDataMarketerMemberConsole
                                                                               int pageNum);
 
    // ============================================================
+   // <T>获取理财师关注过的所有成员</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @return 数据集合
+   // ============================================================
+   FLogicDataset<FDataFinancialMarketerMemberInfo> selectByMarketerId(ILogicContext logicContext,
+                                                                      long marketerId);
+
+   // ============================================================
    // <T>获取总页数</T>
    //
    // @param logicContext 链接对象

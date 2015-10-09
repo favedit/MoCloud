@@ -298,4 +298,22 @@ public class FDataMarketerMemberConsole
       }
       return null;
    }
+
+   // ============================================================
+   // <T>获取理财师关注过的所有成员</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataFinancialMarketerMemberInfo> selectByMarketerId(ILogicContext logicContext,
+                                                                             long marketerId){
+      FDataFinancialMarketerMemberLogic logic = logicContext.findLogic(FDataFinancialMarketerMemberLogic.class);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataFinancialMarketerMemberLogic.MARKETER_ID + " = {marketer_id}");
+      whereSql.bind("marketer_id", RString.parse(marketerId));
+      FLogicDataset<FDataFinancialMarketerMemberInfo> list = logic.fetchClass(FDataFinancialMarketerMemberInfo.class, whereSql);
+      return list;
+   }
 }
