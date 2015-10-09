@@ -54,10 +54,10 @@
    <!-- ============================================================ -->
    <WebService
          name  = 'eai.mobile.logic.attendance'
-         face  = 'org.mo.content.service.info.logic.version.IVersionService'/>
+         face  = 'org.mo.content.service.mobile.logic.attendance.IClickService'/>
 
    <Component
-         face  = 'org.mo.content.service.info.logic.version.IVersionService'
-         class = 'org.mo.content.service.info.logic.version.FVersionService'
+         face  = 'org.mo.content.service.mobile.logic.attendance.IClickService'
+         class = 'org.mo.content.service.mobile.logic.attendance.FClickService'
          scope = 'global'/>
 </Config>

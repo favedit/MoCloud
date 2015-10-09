@@ -132,7 +132,7 @@ public class FNewsService
             }else{
                xruntime.createNode("update_date").setText("0");
             }
-            xruntime.createNode("info_url").setText("http://10.13.0.100:8020/Index.wa?guid=" + newsUnit.guid());
+            xruntime.createNode("info_url").setText("http://10.13.0.250:8020/Index.wa?guid=" + newsUnit.guid());
          }
       }
       return EResult.Success;
