@@ -4,12 +4,20 @@ import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
+import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.protocol.common.FWebUploadFile;
 
 //============================================================
 //<P>新闻控制台</P>
@@ -22,6 +30,12 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
 
    // 每页条数
    static final int _pageSize = 20;
+   // 应用名称
+   @AProperty
+   protected String _applicationName;
+   // 服务器地址
+   @AProperty
+   protected String _servers;
 
    // ============================================================
    // <T>构造新闻控制台。</T>
@@ -70,4 +84,29 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
       return moduleList;
    }
 
+   @Override
+   public void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit) {
+      FileInputStream fi;
+      FileOutputStream fo;
+      try {
+         String contentType = file.contentType();
+         int ind = file.fileName().indexOf(".");
+         String fileName = file.fileName().substring(0, ind) + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
+         String uploadName = file.uploadName();
+         fi = new FileInputStream(uploadName);
+         fo = new FileOutputStream(_applicationName + "\\webroot\\manage\\images\\newsImages\\" + fileName);
+         int len = 0;
+         byte[] buffer = new byte[1024];
+         while ((len = fi.read(buffer)) != -1) {
+            fo.write(buffer, 0, len);
+         }
+         fo.close();
+         fi.close();
+         unit.setIconUrl("http://" + _servers + "/manage/images/newsImages/" + fileName);//
+      } catch (FileNotFoundException e) {
+         e.printStackTrace();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
 }

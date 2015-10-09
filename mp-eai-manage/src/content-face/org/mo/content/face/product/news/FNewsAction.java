@@ -3,15 +3,9 @@ package org.mo.content.face.product.news;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Date;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.product.news.FDataNewsInfo;
@@ -253,37 +247,12 @@ public class FNewsAction implements INewsAction {
       if (!RString.isEmpty(scc)) {
          unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
       }
-      String path = System.getProperty("user.dir");
-      if (!RString.isEmpty(path)) {
-         path = path.substring(0, path.length() - 6);
-      }
       unit.setLabel(context.parameter("label"));
-      String contentType = null;
-      String fileName = null;
       FWebUploadFile file = context.files().first();
       if (null == file) {
          unit.setIconUrl(context.parameter("iconUrl"));
       } else {
-         try {// "D:\\Microbject\\MoCloud\\mp-eai-manage\\webroot\\manage\\images\\"
-            contentType = context.files().first().contentType();
-            int ind = context.files().first().fileName().indexOf(".");
-            fileName = context.files().first().fileName().substring(0, ind) + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
-            FileInputStream fi = new FileInputStream(context.files().first().uploadName());
-            FileOutputStream fo = new FileOutputStream(path + "\\mp-eai-manage\\webroot\\manage\\images\\newsImages\\" + fileName);
-            int len = 0;
-            byte[] buffer = new byte[1024];
-            while ((len = fi.read(buffer)) != -1) {
-               fo.write(buffer, 0, len);
-            }
-            fo.close();
-            fi.close();
-         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-         } catch (IOException e) {
-            e.printStackTrace();
-         }
-         unit.setIconUrl(path + "\\mp-eai-manage\\webroot\\manage\\images\\newsImages\\" + fileName);// 文件上传的绝对路径
+         _newsConsole.saveImage(file, unit);
       }
    }
-
 }
